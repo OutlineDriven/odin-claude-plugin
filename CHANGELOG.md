@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+**Consolidated Repository Structure**
+- Single repository serves as both plugin and marketplace
+- Marketplace manifest included in `.claude-plugin/marketplace.json`
+- Simplified installation: add repository once, access all features
+- No separate marketplace repository needed
+
 #### Agents (57 total)
 
 **Language Specialists (16)**

@@ -1,0 +1,49 @@
+{
+  "name": "odin-marketplace",
+  "version": "1.0.0",
+  "description": "Official marketplace for ODIN (Outline Driven INtelligence) Claude Code plugins - Advanced code agents and workflow automation",
+  "owner": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OutlineDriven/odin-claude-plugin"
+  },
+  "plugins": [
+    {
+      "name": "odin-claude-plugin",
+      "source": ".",
+      "version": "1.0.0",
+      "description": "ODIN core plugin with 57 specialized agents, 127 commands, diagram-first engineering, and atomic commit workflows",
+      "author": "OutlineDriven",
+      "tags": [
+        "code-agent",
+        "productivity",
+        "workflow",
+        "specialized-agents",
+        "multi-language",
+        "architecture",
+        "performance",
+        "security"
+      ],
+      "featured": true,
+      "requirements": {
+        "claudeCode": ">=1.0.0"
+      },
+      "categories": [
+        "Development Tools",
+        "Code Quality",
+        "Architecture",
+        "Performance",
+        "Security"
+      ]
+    }
+  ],
+  "metadata": {
+    "lastUpdated": "2025-11-17",
+    "maintainer": "OutlineDriven",
+    "website": "https://github.com/OutlineDriven/odin-claude-plugin",
+    "support": "https://github.com/OutlineDriven/odin-claude-plugin/issues"
+  }
+}
