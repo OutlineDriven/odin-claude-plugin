@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "ODIN (Outline Driven INtelligence) - Advanced code agent with 57 specialized agents, 127 commands, diagram-first engineering, and atomic commit workflows for surgical precision in software development",
   "author": {
-    "name": "cognitive-glitch"
+    "name": "OutlineDriven"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cognitive-glitch/odin-claude-plugin"
+    "url": "https://github.com/OutlineDriven/odin-claude-plugin"
   },
   "keywords": [
     "code-agent",

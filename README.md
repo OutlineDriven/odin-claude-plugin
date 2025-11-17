@@ -26,7 +26,7 @@ ODIN is a professional-grade Claude Code plugin that transforms Claude into a so
 
 ```shell
 # Add the marketplace
-/plugin marketplace add cognitive-glitch/odin-marketplace
+/plugin marketplace add OutlineDriven/odin-marketplace
 
 # Install ODIN plugin
 /plugin install odin-claude-plugin@odin-marketplace
@@ -616,8 +616,8 @@ See LICENSE file for details.
 
 ## Support
 
-- **Issues**: https://github.com/cognitive-glitch/odin-claude-plugin/issues
-- **Marketplace**: https://github.com/cognitive-glitch/odin-marketplace
+- **Issues**: https://github.com/OutlineDriven/odin-claude-plugin/issues
+- **Marketplace**: https://github.com/OutlineDriven/odin-marketplace
 - **Documentation**: This README and CLAUDE.md
 
 ## Acknowledgments

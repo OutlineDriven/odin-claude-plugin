@@ -289,4 +289,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Error recovery 100%
 - Security compliance 100%
 
-[1.0.0]: https://github.com/cognitive-glitch/odin-claude-plugin/releases/tag/v1.0.0
+[1.0.0]: https://github.com/OutlineDriven/odin-claude-plugin/releases/tag/v1.0.0
