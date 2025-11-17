@@ -22,6 +22,28 @@ ODIN is a professional-grade Claude Code plugin that transforms Claude into a so
 - Claude Code installed and running
 - Git (for marketplace installation)
 
+### Manual Copy & Paste [MANDATORY FIRST STEP]
+
+```shell
+# Clone the repository
+git clone https://github.com/OutlineDriven/odin-claude-plugin.git
+
+# Copy the contents of the repository to the .claude-plugin directory
+cp .odin-claude-plugin/CLAUDE.md ~/.claude/CLAUDE.md
+cp .odin-claude-plugin/settings.json ~/.claude/settings.json
+```
+
+### Install the MCPs [MANDATORY SECOND STEP]
+
+```shell
+claude mcp add -s user ast-grep -- uvx --from git+https://github.com/ast-grep/ast-grep-mcp ast-grep-server
+claude mcp add -s user context7 npx @upstash/context7-mcp@latest
+claude mcp add -s user time uvx mcp-server-time
+claude mcp add -s user sequentialthinking-tools npx mcp-sequentialthinking-tools
+claude mcp add -s user actor-critic-thinking -- npx -y mcp-server-actor-critic-thinking
+claude mcp add -s user shannon-thinking -- npx -y server-shannon-thinking@latest
+```
+
 ### Via GitHub (Recommended)
 
 ```shell
