@@ -1,0 +1,110 @@
+# Claude Code Settings Directory .gitignore
+
+# Credentials and sensitive files
+.credentials.json
+credentials.json
+*.credentials
+*.key
+*.pem
+*.cert
+
+# Database files
+__store.db
+*.db
+*.sqlite
+*.sqlite3
+
+# Configuration files (local settings)
+# settings.json  # SHARED - contains user settings
+config.json
+config.local.json
+local.json
+*.local.json
+history.jsonl
+
+# Log files
+logs/
+*.log
+*.log.*
+
+# Temporary and cache directories
+shell-snapshots/
+cache/
+tmp/
+temp/
+file-history/
+debug/
+.cache/
+session-env/
+plugins/
+.*_cache/
+
+# Statistics and metrics
+statsig/
+metrics/
+analytics/
+
+# Task management
+todos/
+tasks/
+
+# Project-specific data
+projects/
+workspaces/
+
+# Agent data
+# agents/  # SHARED - contains agent configurations
+agent-data/
+
+# IDE integration files
+ide/
+
+# Commands directory (contains slash commands)
+# commands/  # SHARED - contains custom slash commands
+
+# Git repository (already tracked)
+# .git/
+
+# CLAUDE.md (user instructions)
+# CLAUDE.md  # SHARED - contains global user instructions
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Node modules (if any extensions use them)
+node_modules/
+
+# Environment files
+.env
+.env.*
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# OS-specific files
+Thumbs.db
+desktop.ini
+
+# Claude-specific temporary files
+*.tmp
+*.temp
+session-*.json
+checkpoint-*.json
+
+# UUID-based files (agent artifacts)
+*-agent-*.json
+
+# Specific files found in this directory
+__store.db

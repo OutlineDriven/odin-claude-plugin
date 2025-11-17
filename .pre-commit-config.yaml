@@ -1,0 +1,29 @@
+# Pre-commit hooks for markdown and JSON text cleanup
+repos:
+  # General text cleanup for markdown and JSON files
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      # Remove trailing whitespace
+      - id: trailing-whitespace
+        types_or: [markdown, json]
+
+      # Validate JSON syntax
+      - id: check-json
+
+      # Fix mixed line endings (convert to LF)
+      - id: mixed-line-ending
+        args: ["--fix=lf"]
+        types_or: [markdown, json]
+
+      # Check for byte order markers
+      - id: check-byte-order-marker
+        types_or: [markdown, json]
+
+      # Fix UTF-8 byte order marker
+      - id: fix-byte-order-marker
+        types_or: [markdown, json]
+
+# Configuration
+default_language_version:
+  python: python3
