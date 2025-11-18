@@ -1,6 +1,6 @@
 {
   "name": "odin-claude-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "ODIN (Outline Driven INtelligence) - Advanced code agent with 57 specialized agents, 127 commands, diagram-first engineering, and atomic commit workflows for surgical precision in software development",
   "author": {
     "name": "cognitive-glitch"
