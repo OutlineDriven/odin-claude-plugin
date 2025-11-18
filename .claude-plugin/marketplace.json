@@ -13,10 +13,12 @@
   "plugins": [
     {
       "name": "odin-claude-plugin",
-      "source": ".",
+      "source": "./",
       "version": "1.0.0",
       "description": "ODIN core plugin with 57 specialized agents, 127 commands, diagram-first engineering, and atomic commit workflows",
-      "author": "OutlineDriven",
+      "author": {
+        "name": "cognitive-glitch"
+      },
       "tags": [
         "code-agent",
         "productivity",
@@ -26,17 +28,6 @@
         "architecture",
         "performance",
         "security"
-      ],
-      "featured": true,
-      "requirements": {
-        "claudeCode": ">=1.0.0"
-      },
-      "categories": [
-        "Development Tools",
-        "Code Quality",
-        "Architecture",
-        "Performance",
-        "Security"
       ]
     }
   ],
