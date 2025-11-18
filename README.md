@@ -10,9 +10,9 @@ ODIN is a professional-grade Claude Code plugin that transforms Claude into a so
 - 🤖 **57 Specialized Agents** - Language experts, architects, analyzers, and domain specialists
 - 📐 **Diagram-First Engineering** - Architecture, concurrency, memory, data flow, optimization
 - 🎯 **Surgical Code Editing** - AST-based transformations with ast-grep
-- 🔒 **Atomic Commits** - Conventional Commits protocol with type safety
 - 🧠 **Confidence-Driven Execution** - Adaptive behavior based on complexity and risk
 - 🔍 **Deep Investigation** - Mandatory file reading before code modifications
+- 🔒 **Atomic Commits** - Conventional Commits protocol with incremental approvals
 
 ## Installation
 
