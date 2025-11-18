@@ -15,7 +15,7 @@
       "name": "odin-claude-plugin",
       "source": "./",
       "version": "1.0.3",
-      "description": "ODIN core plugin with 57 specialized agents, 127 commands, diagram-first engineering, and atomic commit workflows",
+      "description": "ODIN core plugin with 57 specialized agents, diagram-first engineering, and atomic commit workflows",
       "author": {
         "name": "cognitive-glitch"
       },
