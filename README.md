@@ -8,7 +8,6 @@ ODIN is a professional-grade Claude Code plugin that transforms Claude into a so
 
 **Key Capabilities:**
 - 🤖 **57 Specialized Agents** - Language experts, architects, analyzers, and domain specialists
-- ⚡ **127 Organized Commands** - Workflow automation from scaffolding to deployment
 - 📐 **Diagram-First Engineering** - Architecture, concurrency, memory, data flow, optimization
 - 🎯 **Surgical Code Editing** - AST-based transformations with ast-grep
 - 🔒 **Atomic Commits** - Conventional Commits protocol with type safety
@@ -44,23 +43,13 @@ claude mcp add -s user actor-critic-thinking -- npx -y mcp-server-actor-critic-t
 claude mcp add -s user shannon-thinking -- npx -y server-shannon-thinking@latest
 ```
 
-### Via GitHub (Recommended)
+### Using Claude Plugin System
 
 ```shell
 # Add the ODIN repository as a marketplace
 /plugin marketplace add OutlineDriven/odin-claude-plugin
 
 # Install ODIN plugin
-/plugin install odin-claude-plugin@odin-marketplace
-```
-
-### Via Local Path
-
-```shell
-# Add local repository as marketplace
-/plugin marketplace add /path/to/odin-claude-plugin
-
-# Install plugin
 /plugin install odin-claude-plugin@odin-marketplace
 ```
 
@@ -72,9 +61,6 @@ claude mcp add -s user shannon-thinking -- npx -y server-shannon-thinking@latest
 
 # View all commands
 /help
-
-# Test with a simple command
-/analyze/code/map
 ```
 
 ## Core Philosophy
@@ -191,235 +177,6 @@ Before any non-trivial implementation:
 
 - `tech-debt-resolver` - Technical debt identification and strategic resolution
 
-## Commands
-
-### Analysis Commands
-
-**Code Analysis (`/analyze/code/`)**
-- `elaborate` - Deep code elaboration and explanation
-- `map` - Map codebase architecture and structure
-- `schema` - Extract and document data schemas
-
-**Data Analysis (`/analyze/data/`)**
-- `data-flow` - Analyze data flow patterns
-- `data-viz` - Create data visualizations
-- `visualize` - Generate visual representations
-
-**Database (`/analyze/db/`)**
-- `db-optimize` - Database optimization recommendations
-
-**Research (`/analyze/research/`)**
-- `deep-dive` - Comprehensive research with web sources
-- `deep-web-research` - Extensive web research with citations
-- `investigate` - Investigative analysis of complex topics
-- `quick-web-research` - Fast web research for quick answers
-
-**Thinking (`/analyze/think/`)**
-- `think` - Structured thinking with sequential analysis
-
-### Code Commands
-
-**Code Analysis (`/code/analyze/`)**
-- `analyze-deps` - Comprehensive dependency analysis
-- `bottleneck` - Identify performance bottlenecks
-- `dependencies` - Dependency graph analysis
-- `deps` - Quick dependency check
-- `technical-debt` - Technical debt assessment
-
-**Fixes (`/code/fix/`)**
-- `bug-fix` - Systematic bug fixing workflow
-
-**Generation (`/code/generate/`)**
-- `api` - Generate API implementations
-
-**Migration (`/code/migrate/`)**
-- `deno-ify` - Migrate code to Deno
-- `migrate` - General migration workflows
-
-**Navigation (`/code/navigate/`)**
-- `related` - Navigate to related files intelligently
-
-**Refactoring (`/code/refactor/`)**
-- `refactor` - Code refactoring workflow
-- `simplify` - Simplify complex code
-- `standardize` - Standardize code patterns
-
-### Context Commands
-
-Load framework-specific context for better assistance:
-
-**Databases (`/context/db/`)**
-- `context-load-dragonfly`, `context-load-postgres`, `context-load-redpanda`, `context-load-scylla`
-
-**Deno (`/context/deno/`)**
-- `context-load-deno-fresh`, `context-load-deno-scripting`
-
-**Go (`/context/go/`)**
-- `context-load-go-concurrency`, `context-load-go-connectrpc`, `context-load-go-web`
-
-**Java (`/context/java/`)**
-- `context-load-java-quarkus`, `context-load-java-spring`, `context-load-java-temporal`
-
-**Kubernetes (`/context/k8s/`)**
-- `context-load-cilium`, `context-load-flux`, `context-load-k8s`, `context-load-talos`
-
-**Observability (`/context/observability/`)**
-- `context-load-logging`, `context-load-observability`
-
-**Project (`/context/project/`)**
-- `auto` - Automatically detect and load project context
-
-**Rust (`/context/rust/`)**
-- `context-load-rust-async`, `context-load-rust-db`, `context-load-rust-web`
-
-**Security (`/context/security/`)**
-- `context-load-security`
-
-**Testing (`/context/testing/`)**
-- `context-load-testing-deno`, `context-load-testing-go`, `context-load-testing-java`, `context-load-testing-rust`
-
-**Web (`/context/web/`)**
-- `context-load-fresh-connect-stack`, `context-load-gh-cli`, `context-load-github-actions`
-- `context-load-offline-data-platform`, `context-load-tailwind`, `context-load-temporal`
-
-### Documentation Commands
-
-**Analysis (`/docs/analyze/`)**
-- `explain` - Explain code and documentation
-
-**Generation (`/docs/generate/`)**
-- `api-docs` - Generate API documentation
-- `changelog` - Generate changelog from commits
-- `document` - Generate comprehensive documentation
-- `onboard` - Create onboarding documentation
-
-**Management (`/docs/manage/`)**
-- `docs-add` - Add new documentation sections
-- `docs-init` - Initialize documentation structure
-- `docs-update` - Update existing documentation
-
-### Git Commands
-
-**Commits (`/git/commit/`)**
-- `commit` - Create atomic commits with Conventional Commits
-- `commit-push` - Commit and push to remote
-
-**Pull Requests (`/git/pr/`)**
-- `pr-check` - Check PR status and CI/CD state
-- `pr-create` - Create PR with intelligent analysis
-- `pr-review` - Review and manage PRs
-- `pr-update` - Update existing PRs
-
-**Review (`/git/review/`)**
-- `review-git` - Comprehensive git history review
-
-### Meta Commands
-
-**Command Management (`/meta/command/`)**
-- `generate-command` - Generate new slash commands
-- `ideate-commands` - Brainstorm command ideas
-
-**Knowledge (`/meta/extract/`)**
-- `knowledge-extract` - Extract knowledge from codebases
-
-**Ideation (`/meta/ideate/`)**
-- `ideate-new` - Ideate new features and approaches
-
-**Reflection (`/meta/reflect/`)**
-- `reflection` - Deep reflection on decisions and outcomes
-
-**Search (`/meta/search/`)**
-- `search-smart` - Intelligent codebase search
-
-**Utilities (`/meta/util/`)**
-- `scratch` - Scratch pad for quick notes
-- `translate` - Translate content between languages
-
-### Scaffolding Commands
-
-**Deno (`/scaffold/deno/`)**
-- `scaffold-deno-fresh` - Scaffold Deno Fresh app
-- `scaffold-deno-script` - Scaffold Deno script
-
-**Go (`/scaffold/go/`)**
-- `scaffold-go-connect` - Scaffold Go Connect RPC service
-- `scaffold-go-http-server` - Scaffold Go HTTP server
-
-**Java (`/scaffold/java/`)**
-- `scaffold-java-quarkus` - Scaffold Quarkus application
-
-**Rust (`/scaffold/rust/`)**
-- `scaffold-rust-axum` - Scaffold Axum web service
-- `scaffold-rust-cli` - Scaffold Rust CLI application
-
-### Security Commands
-
-**Audit (`/security/audit/`)**
-- `audit` - Comprehensive security audit
-- `secrets-audit` - Scan for exposed secrets
-
-**Modeling (`/security/model/`)**
-- `harden` - Security hardening recommendations
-- `threat-model` - Generate threat models (STRIDE methodology)
-
-### Task Commands
-
-**Management (`/task/manage/`)**
-- `add-code-reviews-to-task`, `task-archive`, `task-create`, `task-list`
-- `task-log`, `task-search`, `task-show`, `task-update`
-
-**View (`/task/view/`)**
-- `task` - View task details
-
-### Test Commands
-
-**Analysis (`/test/analyze/`)**
-- `coverage` - Test coverage analysis
-
-**Fixes (`/test/fix/`)**
-- `flaky-fix` - Fix flaky tests
-
-**Generation (`/test/generate/`)**
-- `integration-test` - Generate integration tests
-- `test-gen` - Generate test suites
-
-**Execution (`/test/run/`)**
-- `load-test` - Load testing
-- `tdd` - Test-driven development workflow
-- `validate` - Comprehensive validation with auto-detection
-
-### Tool Commands
-
-- `cpr` - Code, PR, and review workflows
-- `diagram` - Generate diagrams (nomnoml/mermaid)
-- `five` - Five-question analysis framework
-- `review` - Comprehensive code review
-- `zed-task` - Zed editor task integration
-
-### Workflow Commands
-
-**Creation (`/workflow/create/`)**
-- `epic` - Create epic with sub-tasks
-- `prototype` - Rapid prototyping workflow
-
-**Management (`/workflow/manage/`)**
-- `clean` - Clean up temporary files and artifacts
-- `integrate` - Integration workflows
-- `organize` - Organize project structure
-- `plan` - Strategic planning
-- `release` - Release management
-- `sync` - Synchronization workflows
-
-**Start (`/workflow/start/`)**
-- `start` - Start new project/feature workflow
-
-**View (`/workflow/view/`)**
-- `next-steps` - Suggest next steps
-- `options` - View available options
-- `progress` - Show progress
-- `summary` - Generate summary
-- `tldr` - Quick summary
-
 ## Configuration
 
 ### Settings.json
@@ -492,145 +249,9 @@ Confidence = (familiarity + (1-complexity) + (1-risk) + (1-scope)) / 4
 4. **fd** - File discovery (NEVER use find)
 5. **lsd** - Directory listing (NEVER use ls)
 
-**Banned**: sed for edits (analysis OK), find, ls, grep for code patterns
-
-## Quick Start Examples
-
-### Analyze Codebase
-
-```shell
-# Map architecture
-/analyze/code/map
-
-# Check dependencies
-/code/analyze/deps
-
-# Identify bottlenecks
-/code/analyze/bottleneck
-
-# Technical debt assessment
-/code/analyze/technical-debt
-```
-
-### Development Workflow
-
-```shell
-# Load project context
-/context/project/auto
-
-# Scaffold new service
-/scaffold/rust/scaffold-rust-axum
-
-# Generate tests
-/test/generate/test-gen
-
-# Run validation
-/test/run/validate
-```
-
-### Code Quality
-
-```shell
-# Code review
-/tool/review
-
-# Refactor code
-/code/refactor/refactor
-
-# Fix bugs
-/code/fix/bug-fix
-
-# Security audit
-/security/audit/audit
-```
-
-### Git Workflow
-
-```shell
-# Atomic commit
-/git/commit/commit
-
-# Create PR
-/git/pr/pr-create
-
-# Review PR
-/git/pr/pr-review
-
-# Check PR status
-/git/pr/pr-check
-```
-
-### Documentation
-
-```shell
-# Generate API docs
-/docs/generate/api-docs
-
-# Create changelog
-/docs/generate/changelog
-
-# Onboarding guide
-/docs/generate/onboard
-
-# Explain code
-/docs/analyze/explain
-```
-
-## Best Practices
-
-### Before You Start
-
-1. **Load Context** - Use `/context/project/auto` for framework awareness
-2. **Map Architecture** - Run `/analyze/code/map` to understand structure
-3. **Check Dependencies** - Use `/code/analyze/deps` before major changes
-
-### During Development
-
-1. **Think First** - Use `/analyze/think/think` for complex problems
-2. **Diagram Always** - Request diagrams before implementation
-3. **Test Incrementally** - Use `/test/run/tdd` for test-driven development
-4. **Review Often** - Use `/tool/review` before commits
-
-### Before Committing
-
-1. **Validate** - Run `/test/run/validate` for comprehensive checks
-2. **Review Changes** - Use `/git/review/review-git` to review commits
-3. **Atomic Commits** - Use `/git/commit/commit` for proper commit workflow
-4. **Security Check** - Run `/security/audit/secrets-audit` before pushing
-
-## Troubleshooting
-
-### Commands Not Appearing
-
-```shell
-# Reinstall plugin
-/plugin uninstall odin-claude-plugin@odin-marketplace
-/plugin install odin-claude-plugin@odin-marketplace
-```
-
-### Agent Not Available
-
-```shell
-# Check installed agents
-/agents
-
-# Verify plugin is enabled
-/plugin
-```
-
 ### Tool Permission Issues
 
 Check `settings.json` for tool permissions. ODIN pre-configures safe tool usage.
-
-## Contributing
-
-Contributions welcome! Areas of interest:
-
-- Additional specialized agents
-- New command workflows
-- Framework context loaders
-- Documentation improvements
-- Bug fixes and enhancements
 
 ## License
 
@@ -640,7 +261,6 @@ See LICENSE file for details.
 
 - **Issues**: https://github.com/OutlineDriven/odin-claude-plugin/issues
 - **Repository**: https://github.com/OutlineDriven/odin-claude-plugin
-- **Documentation**: This README and CLAUDE.md
 
 ## Acknowledgments
 
