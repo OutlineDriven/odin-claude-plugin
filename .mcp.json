@@ -1,0 +1,39 @@
+{
+    "mcpServers": {
+        "ast-grep": {
+            "command": "uvx",
+            "args": [
+                "--from",
+                "git+https://github.com/ast-grep/ast-grep-mcp",
+                "ast-grep-server"
+            ]
+        },
+        "context7": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@upstash/context7-mcp@latest"
+            ]
+        },
+        "sequentialthinking-tools": {
+            "command": "npx",
+            "args": [
+                "mcp-sequentialthinking-tools"
+            ]
+        },
+        "actor-critic-thinking": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "mcp-server-actor-critic-thinking"
+            ]
+        },
+        "shannon-thinking": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "server-shannon-thinking@latest"
+            ]
+        }
+    }
+}

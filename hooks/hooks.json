@@ -1,0 +1,34 @@
+{
+    "hooks": {
+        "Notification": [
+            {
+                "matcher": "",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "notify-send 'Claude Code' 'Awaiting your input'"
+                    }
+                ]
+            }
+        ],
+        "UserPromptSubmit": [
+            {
+                "matcher": "",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "echo 'Pointing directory (pwd):' && pwd && echo ''"
+                    },
+                    {
+                        "type": "command",
+                        "command": "echo 'Current directory structure (lsd):' && lsd -l -g -G --group-directories-first && echo ''"
+                    },
+                    {
+                        "type": "command",
+                        "command": "echo 'Git status:' && git status -s -uall --porcelain && echo ''"
+                    }
+                ]
+            }
+        ]
+    }
+}
