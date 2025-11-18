@@ -47,10 +47,10 @@ claude mcp add -s user shannon-thinking -- npx -y server-shannon-thinking@latest
 
 ```shell
 # Add the ODIN repository as a marketplace
-/plugin marketplace add OutlineDriven/odin-claude-plugin
+claude plugin marketplace add OutlineDriven/odin-claude-plugin
 
 # Install ODIN plugin
-/plugin install odin-claude-plugin@odin-marketplace
+claude plugin install odin-claude-plugin@odin-marketplace
 ```
 
 ### Verify Installation
@@ -61,6 +61,9 @@ claude mcp add -s user shannon-thinking -- npx -y server-shannon-thinking@latest
 
 # View all commands
 /help
+
+# See the installed plugins
+/plugin
 ```
 
 ## Core Philosophy
