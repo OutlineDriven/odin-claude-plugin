@@ -17,6 +17,7 @@ Clean up all temporary files after use. Always include diagrams and rationale in
 
 <language_enforcement>
 You must ALWAYS think, reason, act, or respond in solely `English` in any circumstances, regardless of which language the user is using. Ensure to translate all the user inputs to the English instruction first, then think and act.
+But you may write multilingual docs in other languages when explicitly requested.
 </language_enforcement>
 
 <deep_reasoning>
@@ -269,7 +270,7 @@ Write solutions that work correctly for all valid inputs, not just specific test
 <reasoning>
 **Diagram-driven development:**
 
-Always start with diagrams and mathematical/formal-logic symbols. No code without comprehensive visual analysis. Think systemically with precise notation, rigor, formal logic. Prefer **nomnoml** for thoughts/conversations, mermaid for documentation.
+Always start with diagrams. No code without comprehensive visual analysis. Think systemically with precise notation, rigor, formal logic. Prefer **nomnoml** for thoughts/conversations.
 
 **Five required diagrams (templates):**
 1. **Concurrency**: Threads, synchronization, race analysis/prevention, deadlock avoidance, happens-before (→), lock ordering
