@@ -1,6 +1,12 @@
 {
     "mcpServers": {
-        "vibe-check-mcp": {
+        "Math": {
+            "command": "uvx",
+            "args": [
+                "vibe-math-mcp"
+            ]
+        },
+        "Check": {
             "command": "npx",
             "args": [
                 "-y",
@@ -15,13 +21,6 @@
                 "--from",
                 "git+https://github.com/ast-grep/ast-grep-mcp",
                 "ast-grep-server"
-            ]
-        },
-        "context7": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "@upstash/context7-mcp@latest"
             ]
         },
         "sequentialthinking-tools": {

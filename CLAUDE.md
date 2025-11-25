@@ -67,6 +67,13 @@ Default to research over action. Do not jump into implementation unless clearly 
 **When in doubt:** Start simple. Add complexity only when requirements demand it.
 </anti_over_engineering>
 
+<keep_it_simple>
+- Prefer the smallest viable change; reuse existing patterns before adding new ones.
+- Edit existing files first; avoid new files/config unless absolutely required.
+- Remove dead code and feature flags quickly to keep the surface minimal.
+- Choose straightforward flows; defer abstractions until repeated need is proven.
+</keep_it_simple>
+
 <git_commit_strategy>
 **Atomic Commit Protocol:** One logical change = One commit. Each type-classified, independently testable, reversible.
 
@@ -246,6 +253,9 @@ Modern find replacement. Intuitive syntax, respects .gitignore, fast parallel tr
 </verification_refinement>
 
 ## UI/UX Design Guidelines
+
+You must do your best to design modern and elegant UI/UX.
+Don't hold back. Give it your all.
 
 <general_design_guidelines>
 **Design Tokens:** MUST use design system tokens, not hardcoded values.
