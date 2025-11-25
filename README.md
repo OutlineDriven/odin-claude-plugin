@@ -34,7 +34,7 @@ cp ./odin-claude-plugin/settings.json ~/.claude/settings.json
 claude plugin marketplace add OutlineDriven/odin-claude-plugin
 
 # Install ODIN plugin
-claude plugin install odin-claude-plugin@odin-marketplace
+claude plugin install odin@odin-marketplace
 ```
 
 ### Verify Installation
