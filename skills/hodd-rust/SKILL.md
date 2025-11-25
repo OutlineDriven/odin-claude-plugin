@@ -1,13 +1,31 @@
 ---
 name: hodd-rust
-description: Validation-first Rust development merging Type-driven + Spec-first + Proof-driven + Design-by-contracts. Use for Rust projects requiring formal verification, safety proofs, comprehensive validation, or when working with unsafe code, concurrency, or FFI boundaries.
+description: Validation-first Rust development. Strictly validation-first before-and-after(-and-while) planning and execution. Merges Type-driven + Spec-first + Proof-driven + Design-by-contracts. Use for Rust projects requiring formal verification, safety proofs, comprehensive validation, or when working with unsafe code, concurrency, or FFI boundaries.
 ---
 
 # HODD-RUST: Stronger Outline Driven Development For Rust
 
-## Philosophy
+## Philosophy: Strict Validation-First
 
-Validation-first Rust programming that merges four verification paradigms:
+Strictly validation-first before-and-after(-and-while) planning and execution (coding, refactoring, editing, debugging, etc.).
+
+**BEFORE** (Planning Phase):
+- Design type specifications (Idris2/Flux)
+- Design formal specifications (Quint)
+- Design proofs (Lean4)
+- Design contracts (Prusti)
+
+**WHILE** (Execution Phase):
+- CREATE verification artifacts from plan
+- VERIFY each artifact as created
+- REMEDIATE failures immediately
+
+**AFTER** (Completion):
+- Run full tiered validation pipeline
+- Ensure all tiers pass
+- Document verification coverage
+
+**Four Paradigms** (Type-driven + Spec-first + Proof-driven + Design-by-contracts):
 - **Type-driven**: Leverage Rust's type system + external Idris2/Flux for refined types
 - **Spec-first**: Quint specifications and Kani bounded model checking
 - **Proof-driven**: Lean4 formal proofs for critical algorithms

@@ -9,6 +9,8 @@ HODD-RUST merges: Type-driven + Spec-first + Proof-driven + Design-by-contracts
 
 CRITICAL: This is a DESIGN planning task. You design Rust validation artifacts that will be created during the run phase.
 
+**Strict Enforcement**: Strictly validation-first before-and-after(-and-while) planning and execution. Design ALL validations (types, specs, proofs, contracts) BEFORE any code. No code design without validation design.
+
 ## Your Process
 
 1. **Understand Requirements**
