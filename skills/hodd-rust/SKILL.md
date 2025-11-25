@@ -131,21 +131,21 @@ cargo +nightly miri test || exit 15
 ### External Tools (Optional)
 ```bash
 # Idris2 type-driven models
-fd -e idr -e lidr . proofs/ && {
-  command -v idris2 && idris2 --check proofs/*.idr || exit 16
+fd -e idr -e lidr . .outline/proofs/ && {
+  command -v idris2 && idris2 --check .outline/proofs/*.idr || exit 16
 }
 
 # Lean4 formal proofs
-fd lakefile.lean . proofs/ && {
+fd lakefile.lean . .outline/proofs/ && {
   command -v lake && (cd proofs && lake build) || exit 16
   # Verify no 'sorry' placeholders remain
-  rg 'sorry' proofs/*.lean && exit 16
+  rg 'sorry' .outline/proofs/*.lean && exit 16
 }
 
 # Quint specifications
-fd -e qnt . specs/ && {
-  command -v quint && quint typecheck specs/*.qnt || exit 16
-  quint verify specs/*.qnt || exit 16
+fd -e qnt . .outline/specs/ && {
+  command -v quint && quint typecheck .outline/specs/*.qnt || exit 16
+  quint verify .outline/specs/*.qnt || exit 16
 }
 
 # Verus verified Rust
@@ -163,7 +163,7 @@ rg 'verus!' -q -t rust && {
 | 12 | Format violations | Run `cargo fmt` |
 | 13 | Clippy/test failures | Fix warnings/tests |
 | 14 | Security/dependency issues | Review audit findings |
-| 15 | Formal verification failed | Fix proofs/contracts |
+| 15 | Formal verification failed | Fix .outline/proofs/contracts |
 | 16 | External tool validation failed | Fix Idris2/Lean4/Quint specs |
 
 ## Rust-Specific Patterns

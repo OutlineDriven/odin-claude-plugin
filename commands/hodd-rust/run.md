@@ -98,28 +98,28 @@ rg 'loom::' -q -t rust && {
 ### External Tools (Optional)
 ```bash
 # Idris2 type-driven models
-fd -e idr -e lidr . proofs/ 2>/dev/null | head -1 | grep -q . && {
+fd -e idr -e lidr . .outline/proofs/ 2>/dev/null | head -1 | grep -q . && {
   command -v idris2 || { echo "Warning: Idris2 not installed"; }
   command -v idris2 && {
-    idris2 --check proofs/*.idr || { echo "Idris2 check failed"; exit 16; }
+    idris2 --check .outline/proofs/*.idr || { echo "Idris2 check failed"; exit 16; }
   }
 }
 
 # Lean4 formal proofs
-fd lakefile.lean . proofs/ 2>/dev/null | head -1 | grep -q . && {
+fd lakefile.lean . .outline/proofs/ 2>/dev/null | head -1 | grep -q . && {
   command -v lake || { echo "Warning: Lake/Lean4 not installed"; }
   command -v lake && {
     (cd proofs && lake build) || { echo "Lean4 proofs failed"; exit 16; }
-    rg 'sorry' proofs/*.lean && { echo "Incomplete proofs (sorry found)"; exit 16; }
+    rg 'sorry' .outline/proofs/*.lean && { echo "Incomplete proofs (sorry found)"; exit 16; }
   }
 }
 
 # Quint specifications
-fd -e qnt . specs/ 2>/dev/null | head -1 | grep -q . && {
+fd -e qnt . .outline/specs/ 2>/dev/null | head -1 | grep -q . && {
   command -v quint || { echo "Warning: Quint not installed"; }
   command -v quint && {
-    quint typecheck specs/*.qnt || { echo "Quint typecheck failed"; exit 16; }
-    quint verify specs/*.qnt || { echo "Quint verification failed"; exit 16; }
+    quint typecheck .outline/specs/*.qnt || { echo "Quint typecheck failed"; exit 16; }
+    quint verify .outline/specs/*.qnt || { echo "Quint verification failed"; exit 16; }
   }
 }
 
@@ -141,7 +141,7 @@ rg 'verus!' -q -t rust && {
 | 12 | Format/structure issues | Run `cargo fmt`, check Cargo.toml |
 | 13 | Clippy/test failures | Fix warnings and failing tests |
 | 14 | Security/dependency issues | Review cargo audit/deny findings |
-| 15 | Formal verification failed | Fix proofs/contracts/Loom tests |
+| 15 | Formal verification failed | Fix .outline/proofs/contracts/Loom tests |
 | 16 | External tool validation failed | Fix Idris2/Lean4/Quint specs |
 
 ## Miri Usage Notes
