@@ -1,6 +1,5 @@
 ---
 description: Execute test-driven development workflow
-allowed-tools: Read, Grep, Glob, Bash
 ---
 
 You are executing test-driven development with comprehensive testing.

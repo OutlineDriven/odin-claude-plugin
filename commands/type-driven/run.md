@@ -1,6 +1,5 @@
 ---
 description: Execute type-driven validation with Idris 2
-allowed-tools: Read, Grep, Glob, Bash
 ---
 
 You are executing type-driven validation using Idris 2 dependent types.

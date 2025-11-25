@@ -1,6 +1,5 @@
 ---
 description: Execute HODD-RUST validation pipeline for Rust projects
-allowed-tools: Read, Grep, Glob, Bash
 ---
 
 You are executing the HODD-RUST (Stronger Outline Driven Development For Rust) validation pipeline.

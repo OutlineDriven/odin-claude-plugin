@@ -1,6 +1,5 @@
 ---
 description: Execute full validation chain orchestration
-allowed-tools: Read, Grep, Glob, Bash
 ---
 
 You are executing Outline-Strong validation orchestration across all verification layers.

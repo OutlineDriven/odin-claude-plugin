@@ -1,6 +1,5 @@
 ---
 description: Execute spec-first verification with Quint
-allowed-tools: Read, Grep, Glob, Bash
 ---
 
 You are executing specification-first verification using Quint.

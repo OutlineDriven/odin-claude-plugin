@@ -1,6 +1,5 @@
 ---
 description: Execute proof-driven validation with Lean 4
-allowed-tools: Read, Grep, Glob, Bash
 ---
 
 You are executing proof-driven validation using Lean 4 / Lake.

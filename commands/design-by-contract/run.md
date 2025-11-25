@@ -1,6 +1,5 @@
 ---
 description: Execute design-by-contract validation across languages
-allowed-tools: Read, Grep, Glob, Bash
 ---
 
 You are executing design-by-contract validation across multiple languages.
