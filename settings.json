@@ -1047,7 +1047,8 @@
       "Bash(yes:*)",
       "mcp__browser__browser_screenshot",
       "mcp__browser__browser_screenshot_full_page"
-    ]
+    ],
+    "defaultMode": "bypassPermissions"
   },
   "statusLine": {
     "type": "command",
@@ -1055,5 +1056,5 @@
   },
   "alwaysThinkingEnabled": true,
   "spinnerTipsEnabled": false,
-  "defaultMode": "bypassPermissions"
+  "outputStyle": "odin:ODIN"
 }
