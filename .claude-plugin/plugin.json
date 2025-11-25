@@ -1,6 +1,6 @@
 {
   "name": "odin",
-  "version": "1.1.2",
+  "version": "1.1.4",
   "description": "ODIN (Outline Driven INtelligence) - Advanced code agent with 57 specialized agents, diagram-first engineering, and atomic commit workflows for surgical precision in software development",
   "author": {
     "name": "cognitive-glitch"
