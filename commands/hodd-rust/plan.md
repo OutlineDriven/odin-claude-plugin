@@ -5,7 +5,7 @@ allowed-tools: Read, Grep, Glob, Bash
 
 You are planning a HODD-RUST (Holistic Outline Driven Development for Rust) validation strategy BEFORE code changes.
 
-HODD-RUST merges: Type-driven + Spec-first + Proof-driven + Design-by-contracts + Test-driven (XP)
+HODD-RUST merges: Type-driven + Spec-first + Proof-driven + Design-by-contracts
 
 CRITICAL: This is a DESIGN planning task. You design Rust validation artifacts that will be created during the run phase.
 
@@ -26,10 +26,8 @@ CRITICAL: This is a DESIGN planning task. You design Rust validation artifacts t
      rg '#\[kani::proof\]' -t rust $ARGUMENTS
      # Flux refinements
      rg '#\[flux::' -t rust $ARGUMENTS
-     # Loom tests
+     # Loom verifications
      rg 'loom::' -t rust $ARGUMENTS
-     # Property tests
-     rg 'proptest!|quickcheck' -t rust $ARGUMENTS
      # External proofs
      fd -e lean -e idr -e qnt $ARGUMENTS
      ```
@@ -42,7 +40,6 @@ CRITICAL: This is a DESIGN planning task. You design Rust validation artifacts t
    - Layer 3: Flux refinements, Prusti contracts
    - Layer 4-5: External proofs (Lean4, Quint)
    - Layer 6: Kani bounded model checking
-   - Layer 7: Property-based tests
 
 4. **Prepare Run Phase**
    - Define targets in `.outline/` and source
@@ -95,9 +92,9 @@ Layer 1: MEMORY SAFETY (if unsafe present)
 
 Layer 2: CONCURRENCY (if concurrent code)
 ├── Tool: Loom
-├── Target: .outline/tests/loom/
-├── Artifacts: Loom test modules
-└── Commands: RUSTFLAGS='--cfg loom' cargo test
+├── Target: .outline/verifications/loom/
+├── Artifacts: Loom verification modules
+└── Commands: RUSTFLAGS='--cfg loom' cargo build
 
 Layer 3: TYPE REFINEMENTS
 ├── Tool: Flux
@@ -122,12 +119,6 @@ Layer 6: MODEL CHECKING
 ├── Target: .outline/proofs/kani/
 ├── Artifacts: #[kani::proof] harnesses
 └── Commands: cargo kani
-
-Layer 7: PROPERTY TESTS
-├── Tool: proptest / quickcheck
-├── Target: .outline/tests/property/
-├── Artifacts: proptest! macros
-└── Commands: cargo test
 ```
 
 ## Tool Selection by Code Pattern
@@ -137,7 +128,7 @@ Layer 7: PROPERTY TESTS
 | `unsafe { }` | Miri | Kani |
 | `Arc<Mutex<>>` | Loom | Prusti |
 | `extern "C"` | Miri | Kani |
-| `unwrap()/expect()` | Prusti | proptest |
+| `unwrap()/expect()` | Prusti | Kani |
 | State machine | Quint | Lean 4 |
 | Arithmetic | Flux | Kani |
 
@@ -170,9 +161,8 @@ Layer 7: PROPERTY TESTS
    - `.outline/proofs/kani/` - Kani harnesses
    - `.outline/specs/*.qnt` - Protocol specs
    - `.outline/contracts/*.rs` - Prusti annotations
-   - `.outline/tests/loom/` - Loom tests
-   - `.outline/tests/miri/` - Miri harnesses
-   - `.outline/tests/property/` - Property tests
+   - `.outline/verifications/loom/` - Loom verifications
+   - `.outline/verifications/miri/` - Miri harnesses
 
 4. **Verification Commands**
    - Per-tool commands

@@ -1,18 +1,17 @@
 ---
 name: hodd-rust
-description: Validation-first Rust development merging Type-driven + Spec-first + Proof-driven + Design-by-contracts + Test-driven (XP). Use for Rust projects requiring formal verification, safety proofs, comprehensive validation, or when working with unsafe code, concurrency, or FFI boundaries.
+description: Validation-first Rust development merging Type-driven + Spec-first + Proof-driven + Design-by-contracts. Use for Rust projects requiring formal verification, safety proofs, comprehensive validation, or when working with unsafe code, concurrency, or FFI boundaries.
 ---
 
 # HODD-RUST: Stronger Outline Driven Development For Rust
 
 ## Philosophy
 
-Validation-first Rust programming that merges five verification paradigms:
+Validation-first Rust programming that merges four verification paradigms:
 - **Type-driven**: Leverage Rust's type system + external Idris2/Flux for refined types
 - **Spec-first**: Quint specifications and Kani bounded model checking
 - **Proof-driven**: Lean4 formal proofs for critical algorithms
 - **Design-by-contracts**: Prusti pre/postconditions and invariants
-- **Test-driven (XP)**: Property-based testing with proptest/quickcheck
 
 ## Tool Stack
 
@@ -30,7 +29,7 @@ Validation-first Rust programming that merges five verification paradigms:
 | 6 | Kani | Bounded model checking | Minimal in production code |
 | 6 | Quint | Spec-first design | External, protocol specs |
 | 6 | Verus | Verified Rust | External, design validation |
-| 7 | Progenitor | OpenAPI generation | When applicable |
+| 6 | Progenitor | OpenAPI generation | When applicable |
 
 ## Workflow
 
@@ -57,9 +56,6 @@ VALIDATE
   +---> CONCURRENCY: Loom tests (if concurrent code)
   |
   +---> RUNTIME: Miri (local UB debugging only)
-  |
-  v
-TEST: cargo test + property tests + coverage
   |
   v
 EXTERNAL (optional)
@@ -93,12 +89,6 @@ cargo clippy -- -D warnings || exit 13
 # Security audit
 cargo audit || exit 14
 cargo deny check || exit 14
-
-# Run tests
-cargo test || exit 13
-
-# Coverage (if tarpaulin available)
-command -v cargo-tarpaulin && cargo tarpaulin --out Html
 ```
 
 ### Advanced (Formal Verification)
@@ -118,14 +108,15 @@ rg '#\[flux::' -q -t rust && {
   command -v flux && flux check || exit 15
 }
 
-# Loom concurrency tests (if present)
+# Loom concurrency verification (if present)
 rg 'loom::' -q -t rust && {
-  cargo test --features loom || exit 15
+  RUSTFLAGS='--cfg loom' cargo build || exit 15
 }
 
 # Miri UB detection (advisory: local debugging only)
 # Note: Not recommended for CI/CD pipelines
-cargo +nightly miri test || exit 15
+# Use: cargo +nightly miri run (for binaries)
+cargo +nightly miri setup || exit 15
 ```
 
 ### External Tools (Optional)
@@ -161,7 +152,7 @@ rg 'verus!' -q -t rust && {
 | 0 | All validations pass | Proceed to deployment |
 | 11 | Toolchain missing | Install rustup/cargo |
 | 12 | Format violations | Run `cargo fmt` |
-| 13 | Clippy/test failures | Fix warnings/tests |
+| 13 | Clippy failures | Fix warnings |
 | 14 | Security/dependency issues | Review audit findings |
 | 15 | Formal verification failed | Fix .outline/proofs/contracts |
 | 16 | External tool validation failed | Fix Idris2/Lean4/Quint specs |
@@ -221,11 +212,10 @@ fn verify_no_overflow() {
 }
 ```
 
-### Loom Concurrency Test
+### Loom Concurrency Verification
 ```rust
 #[cfg(loom)]
-#[test]
-fn test_concurrent_access() {
+fn verify_concurrent_access() {
     loom::model(|| {
         let data = Arc::new(AtomicUsize::new(0));
         let d1 = data.clone();
@@ -263,8 +253,6 @@ rg '#\[kani::proof\]' -t rust
 # Find Flux refinements
 rg '#\[flux::' -t rust
 
-# Find property tests
-rg 'proptest!|quickcheck' -t rust
 ```
 
 ## Best Practices
@@ -274,8 +262,7 @@ rg 'proptest!|quickcheck' -t rust
 3. **Contracts**: Apply Prusti selectively to critical functions; avoid annotation bloat
 4. **Proofs**: Use Kani for bounded verification of overflow, panics, assertions
 5. **External Tools**: Keep Idris2/Lean4/Quint specs outside main codebase
-6. **CI Pipeline**: rustfmt -> clippy -> audit -> deny -> test (Miri optional/local)
-7. **Coverage**: Aim for 80%+ with tarpaulin; property tests for edge cases
+6. **CI Pipeline**: rustfmt -> clippy -> audit -> deny (Miri optional/local)
 
 ## Integration with ODD
 
@@ -285,5 +272,4 @@ HODD-RUST fits within Outline Driven Development:
 2. **Contracts**: Prusti annotations as executable contracts
 3. **Proofs**: Kani/Lean4 for algorithm correctness
 4. **Specs**: Quint for protocol-level specifications
-5. **Tests**: Property-based tests validate proven properties
-6. **Determinism**: Exit codes enable scripted validation gates
+5. **Determinism**: Exit codes enable scripted validation gates

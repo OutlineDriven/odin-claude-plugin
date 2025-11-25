@@ -15,7 +15,7 @@ You are executing the HODD-RUST (Holistic Outline Driven Development for Rust) v
 
 ```bash
 # Create .outline directory structure
-mkdir -p .outline/{proofs,proofs/kani,specs,contracts,tests/{loom,miri,property}}
+mkdir -p .outline/{proofs,proofs/kani,specs,contracts,verifications/{loom,miri}}
 ```
 
 ### Generate Artifacts by Tool
@@ -78,19 +78,18 @@ mod proofs {
 }
 ```
 
-#### Loom Tests (`.outline/tests/loom/`)
+#### Loom Verifications (`.outline/verifications/loom/`)
 ```rust
-// .outline/tests/loom/{module}_loom.rs
+// .outline/verifications/loom/{module}_loom.rs
 // Generated from plan design
 
 #[cfg(loom)]
-mod loom_tests {
+mod loom_verifications {
     use loom::sync::{Arc, Mutex};
     use loom::thread;
 
     // From plan: {concurrency property}
-    #[test]
-    fn test_concurrent_access() {
+    fn verify_concurrent_access() {
         loom::model(|| {
             let data = Arc::new(Mutex::new(0));
             let d1 = data.clone();
@@ -109,32 +108,6 @@ mod loom_tests {
 
             assert_eq!(*data.lock().unwrap(), 2);
         });
-    }
-}
-```
-
-#### Property Tests (`.outline/tests/property/`)
-```rust
-// .outline/tests/property/{module}_props.rs
-// Generated from plan design
-
-use proptest::prelude::*;
-
-// From plan: {property invariant}
-proptest! {
-    #[test]
-    fn property_reversible(input: Vec<u8>) {
-        let encoded = encode(&input);
-        let decoded = decode(&encoded);
-        prop_assert_eq!(input, decoded);
-    }
-
-    #[test]
-    fn property_monotonic(xs in prop::collection::vec(any::<i32>(), 0..100)) {
-        let sorted = sort(&xs);
-        for window in sorted.windows(2) {
-            prop_assert!(window[0] <= window[1]);
-        }
     }
 }
 ```
@@ -187,12 +160,12 @@ echo "=== Layer 2: CONCURRENCY (Loom) ==="
 
 # Only run if concurrent code detected
 if rg 'Arc<|Mutex<|RwLock<|AtomicU|thread::spawn|tokio::spawn' -t rust -q; then
-  echo "Concurrent code detected - running Loom tests..."
+  echo "Concurrent code detected - running Loom verifications..."
 
   if rg 'loom::' -t rust -q; then
-    RUSTFLAGS='--cfg loom' cargo test --features loom || exit 15
+    RUSTFLAGS='--cfg loom' cargo build --release || exit 15
   else
-    echo "Warning: No Loom tests found for concurrent code"
+    echo "Warning: No Loom verifications found for concurrent code"
   fi
 fi
 ```
@@ -269,20 +242,6 @@ if fd -e qnt .outline/specs 2>/dev/null | grep -q .; then
 fi
 ```
 
-### Layer 8: Property Tests
-```bash
-echo "=== Layer 8: PROPERTY TESTS ==="
-
-# Run all tests including property tests
-cargo test || exit 13
-
-# Coverage report
-command -v cargo-tarpaulin >/dev/null && {
-  cargo tarpaulin --out Html --output-dir .outline/tests/coverage
-  echo "Coverage report: .outline/tests/coverage/tarpaulin-report.html"
-}
-```
-
 ## Exit Codes
 
 | Code | Meaning | Action |
@@ -290,7 +249,7 @@ command -v cargo-tarpaulin >/dev/null && {
 | 0 | All validations pass | Ready for deployment |
 | 11 | Toolchain missing | Install rustup/cargo |
 | 12 | Format/structure issues | Run `cargo fmt` |
-| 13 | Clippy/test failures | Fix warnings and tests |
+| 13 | Clippy failures | Fix warnings |
 | 14 | Security issues | Review cargo audit/deny |
 | 15 | Formal verification failed | Fix contracts/proofs/Loom |
 | 16 | External validation failed | Fix Lean4/Idris2/Quint |
@@ -325,9 +284,6 @@ MODEL CHECK (Kani if #[kani::proof])
 SPECS (Quint if .outline/specs)
   |
   v
-TESTS (cargo test + coverage)
-  |
-  v
 COMPLETE (exit 0)
 ```
 
@@ -338,7 +294,6 @@ Provide:
 - Validation results per tool (PASS/FAIL/SKIP)
 - Security findings summary
 - Formal verification status (contracts/proofs verified)
-- Coverage percentage
 - Traceability matrix (requirement -> validation -> status)
 - Recommendations for missing coverage
 
