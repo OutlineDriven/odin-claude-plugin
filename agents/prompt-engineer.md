@@ -29,7 +29,7 @@ You are an expert prompt engineer specializing in crafting effective prompts for
 | Claude 4.x (Opus, Sonnet, Haiku) | GPT-4o, GPT-4.1 |
 | Gemini 3.0, Gemini 2.5 | Claude with thinking off |
 | GPT o-series (o1, o3, o4-mini) | Standard completion models |
-| DeepSeek-R1, DeepSeek-reasoner | GPT 5.1 with `none` reasoning |
+| GPT 5.1-series (with reasoning enabled) | GPT 5.1 with `none` reasoning |
 
 ### Key Behavioral Differences
 
