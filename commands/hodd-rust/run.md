@@ -2,133 +2,284 @@
 description: Execute HODD-RUST validation pipeline for Rust projects
 ---
 
-You are executing the HODD-RUST (Stronger Outline Driven Development For Rust) validation pipeline.
-
-HODD-RUST merges: Type-driven + Spec-first + Proof-driven + Design-by-contracts + Test-driven (XP)
+You are executing the HODD-RUST (Holistic Outline Driven Development for Rust) validation pipeline. This phase CREATES validation artifacts from the plan and VERIFIES them through the full Rust verification stack.
 
 ## Execution Steps
 
-1. **CHECK**: Verify Rust toolchain and dependencies
-2. **BASIC**: Run rustfmt, clippy, cargo-audit, cargo-deny
-3. **TYPE**: Validate type patterns (Typestate/Newtype/Phantom)
-4. **CONTRACT**: Run Prusti verification (if annotations present)
-5. **SPEC**: Run Kani bounded model checking (if proofs present)
-6. **CONCURRENCY**: Run Loom tests (if concurrent code present)
-7. **RUNTIME**: Run Miri for UB detection (advisory: local debugging only)
-8. **TEST**: Run cargo test with coverage
-9. **EXTERNAL**: Validate external specs (Idris2, Lean4, Quint) if present
+1. **CREATE**: Generate Rust validation artifacts from plan
+2. **BASELINE**: Run rustfmt, clippy, cargo-audit, cargo-deny
+3. **ADVANCED**: Run Miri, Loom, Prusti, Kani, Flux as applicable
+4. **EXTERNAL**: Verify Lean4/Idris2/Quint specs if present
 
-## Commands (Tiered)
+## Phase 1: Create Validation Artifacts
 
-### Basic (Precondition Check)
 ```bash
-# Verify Rust toolchain
-command -v rustc >/dev/null || { echo "rustc not found"; exit 11; }
-command -v cargo >/dev/null || { echo "cargo not found"; exit 11; }
-
-# Verify project structure
-test -f Cargo.toml || { echo "Cargo.toml not found"; exit 12; }
-
-# Check format
-cargo fmt --check || { echo "Format violations found"; exit 12; }
-
-# Run clippy with warnings as errors
-cargo clippy -- -D warnings || { echo "Clippy warnings found"; exit 13; }
+# Create .outline directory structure
+mkdir -p .outline/{proofs,proofs/kani,specs,contracts,tests/{loom,miri,property}}
 ```
 
-### Intermediate (Security & Tests)
-```bash
-# Security audit (if cargo-audit installed)
-command -v cargo-audit && {
-  cargo audit || { echo "Security vulnerabilities found"; exit 14; }
+### Generate Artifacts by Tool
+
+#### Prusti Contracts (`.outline/contracts/`)
+```rust
+// .outline/contracts/{module}_contracts.rs
+// Generated from plan design
+
+use prusti_contracts::*;
+
+// Source Requirement: {traceability from plan}
+
+// Precondition: {from plan design}
+// Postcondition: {from plan design}
+#[requires(input > 0)]
+#[ensures(result > input)]
+pub fn process(input: i32) -> i32 {
+    input + 1
 }
 
-# Dependency check (if cargo-deny installed)
-command -v cargo-deny && {
-  cargo deny check || { echo "Dependency policy violations"; exit 14; }
-}
-
-# Run tests
-cargo test || { echo "Tests failed"; exit 13; }
-
-# Coverage (if tarpaulin installed)
-command -v cargo-tarpaulin && {
-  cargo tarpaulin --out Html --output-dir target/coverage
-  echo "Coverage report: target/coverage/tarpaulin-report.html"
+// Invariant: {from plan design}
+#[invariant(self.balance >= 0)]
+impl Account {
+    #[ensures(self.balance == old(self.balance) + amount)]
+    pub fn deposit(&mut self, amount: u64) {
+        self.balance += amount;
+    }
 }
 ```
 
-### Advanced (Formal Verification)
-```bash
-# Prusti contract verification (if annotations present)
-rg '#\[(requires|ensures|invariant)(\(|])' -q -t rust && {
-  command -v cargo-prusti || { echo "Warning: Prusti not installed"; }
-  command -v cargo-prusti && {
-    cargo prusti || { echo "Prusti verification failed"; exit 15; }
-  }
-}
+#### Kani Proofs (`.outline/proofs/kani/`)
+```rust
+// .outline/proofs/kani/{module}_proofs.rs
+// Generated from plan design
 
-# Kani bounded model checking (if proofs present)
-rg '#\[kani::proof\]' -q -t rust && {
-  command -v cargo-kani || { echo "Warning: Kani not installed"; }
-  command -v cargo-kani && {
-    cargo kani || { echo "Kani verification failed"; exit 15; }
-  }
-}
+#[cfg(kani)]
+mod proofs {
+    use super::*;
 
-# Flux refined types (if refinements present)
-rg '#\[flux::' -q -t rust && {
-  command -v flux || { echo "Warning: Flux not installed"; }
-  command -v flux && {
-    flux check || { echo "Flux verification failed"; exit 15; }
-  }
-}
+    // From plan: {property to verify}
+    #[kani::proof]
+    fn verify_no_overflow() {
+        let x: u32 = kani::any();
+        let y: u32 = kani::any();
+        kani::assume(x < 1000 && y < 1000);
+        let result = add_safe(x, y);
+        kani::assert(result >= x && result >= y, "No overflow");
+    }
 
-# Loom concurrency tests (if present)
-rg 'loom::' -q -t rust && {
-  cargo test --features loom || { echo "Loom tests failed"; exit 15; }
+    // From plan: {invariant to check}
+    #[kani::proof]
+    #[kani::unwind(10)]
+    fn verify_loop_bounds() {
+        let n: usize = kani::any();
+        kani::assume(n <= 10);
+        let result = bounded_loop(n);
+        kani::assert(result <= n * 2, "Loop bound maintained");
+    }
 }
-
-# Miri UB detection (advisory: NOT recommended for CI/CD)
-# Uncomment for local debugging only:
-# rustup +nightly component add miri 2>/dev/null
-# cargo +nightly miri test || { echo "Miri found UB"; exit 15; }
 ```
 
-### External Tools (Optional)
+#### Loom Tests (`.outline/tests/loom/`)
+```rust
+// .outline/tests/loom/{module}_loom.rs
+// Generated from plan design
+
+#[cfg(loom)]
+mod loom_tests {
+    use loom::sync::{Arc, Mutex};
+    use loom::thread;
+
+    // From plan: {concurrency property}
+    #[test]
+    fn test_concurrent_access() {
+        loom::model(|| {
+            let data = Arc::new(Mutex::new(0));
+            let d1 = data.clone();
+            let d2 = data.clone();
+
+            let t1 = thread::spawn(move || {
+                *d1.lock().unwrap() += 1;
+            });
+
+            let t2 = thread::spawn(move || {
+                *d2.lock().unwrap() += 1;
+            });
+
+            t1.join().unwrap();
+            t2.join().unwrap();
+
+            assert_eq!(*data.lock().unwrap(), 2);
+        });
+    }
+}
+```
+
+#### Property Tests (`.outline/tests/property/`)
+```rust
+// .outline/tests/property/{module}_props.rs
+// Generated from plan design
+
+use proptest::prelude::*;
+
+// From plan: {property invariant}
+proptest! {
+    #[test]
+    fn property_reversible(input: Vec<u8>) {
+        let encoded = encode(&input);
+        let decoded = decode(&encoded);
+        prop_assert_eq!(input, decoded);
+    }
+
+    #[test]
+    fn property_monotonic(xs in prop::collection::vec(any::<i32>(), 0..100)) {
+        let sorted = sort(&xs);
+        for window in sorted.windows(2) {
+            prop_assert!(window[0] <= window[1]);
+        }
+    }
+}
+```
+
+## Phase 2: Execute Validation Pipeline
+
+### Layer 0: Baseline
 ```bash
-# Idris2 type-driven models
-fd -e idr -e lidr . .outline/proofs/ 2>/dev/null | head -1 | grep -q . && {
-  command -v idris2 || { echo "Warning: Idris2 not installed"; }
-  command -v idris2 && {
-    idris2 --check .outline/proofs/*.idr || { echo "Idris2 check failed"; exit 16; }
-  }
-}
+echo "=== Layer 0: BASELINE ==="
 
-# Lean4 formal proofs
-fd lakefile.lean . .outline/proofs/ 2>/dev/null | head -1 | grep -q . && {
-  command -v lake || { echo "Warning: Lake/Lean4 not installed"; }
-  command -v lake && {
-    (cd proofs && lake build) || { echo "Lean4 proofs failed"; exit 16; }
-    rg 'sorry' .outline/proofs/*.lean && { echo "Incomplete proofs (sorry found)"; exit 16; }
-  }
-}
+# Verify toolchain
+command -v rustc >/dev/null || exit 11
+command -v cargo >/dev/null || exit 11
+test -f Cargo.toml || exit 12
 
-# Quint specifications
-fd -e qnt . .outline/specs/ 2>/dev/null | head -1 | grep -q . && {
-  command -v quint || { echo "Warning: Quint not installed"; }
-  command -v quint && {
-    quint typecheck .outline/specs/*.qnt || { echo "Quint typecheck failed"; exit 16; }
-    quint verify .outline/specs/*.qnt || { echo "Quint verification failed"; exit 16; }
-  }
-}
+# Format check
+cargo fmt --check || exit 12
 
-# Verus verified Rust
-rg 'verus!' -q -t rust && {
-  command -v verus || { echo "Warning: Verus not installed"; }
-  command -v verus && {
-    verus src/*.rs || { echo "Verus verification failed"; exit 16; }
+# Clippy with warnings as errors
+cargo clippy -- -D warnings || exit 13
+
+# Security audit
+command -v cargo-audit >/dev/null && cargo audit || echo "Warning: cargo-audit not installed"
+
+# Dependency policy
+command -v cargo-deny >/dev/null && cargo deny check || echo "Warning: cargo-deny not installed"
+```
+
+### Layer 1: Memory Safety (Miri)
+```bash
+echo "=== Layer 1: MEMORY SAFETY (Miri) ==="
+
+# Only run if unsafe code detected
+if rg 'unsafe\s*\{' -t rust -q; then
+  echo "Unsafe code detected - running Miri..."
+
+  # Install Miri if needed
+  rustup +nightly component add miri 2>/dev/null
+
+  # Run Miri tests (advisory - local debugging only)
+  cargo +nightly miri test 2>&1 || {
+    echo "Warning: Miri found issues (advisory)"
   }
+fi
+```
+
+### Layer 2: Concurrency (Loom)
+```bash
+echo "=== Layer 2: CONCURRENCY (Loom) ==="
+
+# Only run if concurrent code detected
+if rg 'Arc<|Mutex<|RwLock<|AtomicU|thread::spawn|tokio::spawn' -t rust -q; then
+  echo "Concurrent code detected - running Loom tests..."
+
+  if rg 'loom::' -t rust -q; then
+    RUSTFLAGS='--cfg loom' cargo test --features loom || exit 15
+  else
+    echo "Warning: No Loom tests found for concurrent code"
+  fi
+fi
+```
+
+### Layer 3: Type Refinements (Flux)
+```bash
+echo "=== Layer 3: TYPE REFINEMENTS (Flux) ==="
+
+if rg '#\[flux::' -t rust -q; then
+  echo "Flux annotations detected..."
+  command -v flux >/dev/null && {
+    flux check || exit 15
+  } || echo "Warning: Flux not installed"
+fi
+```
+
+### Layer 4: Contracts (Prusti)
+```bash
+echo "=== Layer 4: CONTRACTS (Prusti) ==="
+
+if rg '#\[(requires|ensures|invariant)' -t rust -q; then
+  echo "Prusti annotations detected..."
+  command -v cargo-prusti >/dev/null && {
+    cargo prusti || exit 15
+  } || echo "Warning: Prusti not installed"
+fi
+```
+
+### Layer 5: Formal Proofs (Lean4/Idris2)
+```bash
+echo "=== Layer 5: FORMAL PROOFS ==="
+
+# Lean 4 proofs
+if fd lakefile.lean .outline/proofs 2>/dev/null | grep -q .; then
+  echo "Lean 4 proofs detected..."
+  command -v lake >/dev/null && {
+    cd .outline/proofs && lake build || exit 16
+    rg '\bsorry\b' . && exit 16
+    cd ../..
+  } || echo "Warning: Lake/Lean4 not installed"
+fi
+
+# Idris 2 proofs
+if fd -e idr .outline/proofs 2>/dev/null | grep -q .; then
+  echo "Idris 2 proofs detected..."
+  command -v idris2 >/dev/null && {
+    idris2 --check .outline/proofs/*.idr || exit 16
+  } || echo "Warning: Idris2 not installed"
+fi
+```
+
+### Layer 6: Model Checking (Kani)
+```bash
+echo "=== Layer 6: MODEL CHECKING (Kani) ==="
+
+if rg '#\[kani::proof\]' -t rust -q; then
+  echo "Kani proofs detected..."
+  command -v cargo-kani >/dev/null && {
+    cargo kani || exit 15
+  } || echo "Warning: Kani not installed"
+fi
+```
+
+### Layer 7: Specification (Quint)
+```bash
+echo "=== Layer 7: SPECIFICATION (Quint) ==="
+
+if fd -e qnt .outline/specs 2>/dev/null | grep -q .; then
+  echo "Quint specs detected..."
+  command -v quint >/dev/null && {
+    quint typecheck .outline/specs/*.qnt || exit 16
+    quint verify .outline/specs/*.qnt || exit 16
+  } || echo "Warning: Quint not installed"
+fi
+```
+
+### Layer 8: Property Tests
+```bash
+echo "=== Layer 8: PROPERTY TESTS ==="
+
+# Run all tests including property tests
+cargo test || exit 13
+
+# Coverage report
+command -v cargo-tarpaulin >/dev/null && {
+  cargo tarpaulin --out Html --output-dir .outline/tests/coverage
+  echo "Coverage report: .outline/tests/coverage/tarpaulin-report.html"
 }
 ```
 
@@ -136,81 +287,59 @@ rg 'verus!' -q -t rust && {
 
 | Code | Meaning | Action |
 |------|---------|--------|
-| 0 | All validations pass | Proceed to deployment |
+| 0 | All validations pass | Ready for deployment |
 | 11 | Toolchain missing | Install rustup/cargo |
-| 12 | Format/structure issues | Run `cargo fmt`, check Cargo.toml |
-| 13 | Clippy/test failures | Fix warnings and failing tests |
-| 14 | Security/dependency issues | Review cargo audit/deny findings |
-| 15 | Formal verification failed | Fix .outline/proofs/contracts/Loom tests |
-| 16 | External tool validation failed | Fix Idris2/Lean4/Quint specs |
+| 12 | Format/structure issues | Run `cargo fmt` |
+| 13 | Clippy/test failures | Fix warnings and tests |
+| 14 | Security issues | Review cargo audit/deny |
+| 15 | Formal verification failed | Fix contracts/proofs/Loom |
+| 16 | External validation failed | Fix Lean4/Idris2/Quint |
 
-## Miri Usage Notes
-
-Miri detects undefined behavior at runtime but is NOT suitable for CI/CD:
-- Requires nightly Rust
-- Significantly slower than normal tests
-- May have false positives with FFI
-- Best used for local debugging of unsafe code
-
-To run Miri manually:
-```bash
-rustup +nightly component add miri
-cargo +nightly miri test
-```
-
-## Workflow Diagram
+## Workflow
 
 ```
-CHECK (toolchain)
+CREATE (generate artifacts from plan)
   |
   v
-BASIC (fmt -> clippy -> audit -> deny)
+BASELINE (fmt -> clippy -> audit -> deny)
   |
   v
-TEST (cargo test)
-  |
-  +--[if #[requires/ensures]]---> PRUSTI
-  |
-  +--[if #[kani::proof]]--------> KANI
-  |
-  +--[if #[flux::]]--> FLUX
-  |
-  +--[if loom::]-----------------> LOOM
-  |
-  +--[if unsafe, local only]----> MIRI (advisory)
+MEMORY (Miri if unsafe)
   |
   v
-EXTERNAL (optional)
+CONCURRENCY (Loom if Arc/Mutex/spawn)
   |
-  +--[if *.idr]-----------------> IDRIS2
-  +--[if lakefile.lean]---------> LEAN4
-  +--[if *.qnt]-----------------> QUINT
-  +--[if verus!]----------------> VERUS
+  v
+REFINEMENTS (Flux if #[flux::])
+  |
+  v
+CONTRACTS (Prusti if #[requires/ensures])
+  |
+  v
+PROOFS (Lean4/Idris2 if .outline/proofs)
+  |
+  v
+MODEL CHECK (Kani if #[kani::proof])
+  |
+  v
+SPECS (Quint if .outline/specs)
+  |
+  v
+TESTS (cargo test + coverage)
   |
   v
 COMPLETE (exit 0)
 ```
 
-## Required Output
+## Output Report
 
-1. **Validation Results**
-   - Each tier status (pass/fail/skip)
-   - Specific failures with file:line references
-   - Coverage percentage (if available)
+Provide:
+- Artifacts created per layer
+- Validation results per tool (PASS/FAIL/SKIP)
+- Security findings summary
+- Formal verification status (contracts/proofs verified)
+- Coverage percentage
+- Traceability matrix (requirement -> validation -> status)
+- Recommendations for missing coverage
 
-2. **Security Summary**
-   - Vulnerability count (cargo audit)
-   - Policy violations (cargo deny)
-
-3. **Formal Verification Status**
-   - Prusti: contracts verified / total
-   - Kani: proofs verified / total
-   - Loom: concurrent tests passed
-   - External tools: specs validated
-
-4. **Recommendations**
-   - Unverified critical paths
-   - Suggested additional annotations
-   - Missing test coverage areas
-
-Execute the pipeline and report comprehensive results.
+Execute with thoroughness. Report comprehensive results.

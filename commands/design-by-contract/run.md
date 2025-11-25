@@ -2,82 +2,199 @@
 description: Execute design-by-contract validation across languages
 ---
 
-You are executing design-by-contract validation across multiple languages.
+You are executing design-by-contract validation. This phase CREATES contract artifacts from the plan and VERIFIES them.
 
 ## Execution Steps
 
-1. **CHECK**: Verify contract libraries are available
-2. **VALIDATE**: Run contract verification
-3. **ANALYZE**: Check contract coverage
-4. **REMEDIATE**: Fix contract violations
+1. **CREATE**: Generate contract annotations from plan design
+2. **VERIFY**: Run contract verification with checks enabled
+3. **REMEDIATE**: Fix contract violations
 
-## Verification by Language
+## Phase 1: Create Contract Artifacts
+
+```bash
+# Create .outline/contracts directory
+mkdir -p .outline/contracts
+```
+
+### Generate Contract Files by Language
+
+#### Rust (contracts crate)
+```rust
+// .outline/contracts/{module}_contracts.rs
+// Generated from plan design
+
+use contracts::*;
+
+// Source Requirement: {traceability from plan}
+
+// Precondition: {from plan design}
+// Postcondition: {from plan design}
+#[pre(input > 0, "Input must be positive")]
+#[post(ret.is_some() => ret.unwrap() > input, "Output must exceed input")]
+pub fn process(input: i32) -> Option<i32> {
+    // Implementation
+    Some(input + 1)
+}
+
+// Class invariant: {from plan design}
+#[invariant(self.balance >= 0, "Balance must be non-negative")]
+impl Account {
+    #[post(self.balance == old(self.balance) + amount)]
+    pub fn deposit(&mut self, amount: u64) {
+        self.balance += amount;
+    }
+}
+```
+
+#### TypeScript (Zod)
+```typescript
+// .outline/contracts/{module}.contracts.ts
+// Generated from plan design
+
+import { z } from 'zod';
+
+// Source Requirement: {traceability from plan}
+
+// Precondition schema: {from plan design}
+export const InputSchema = z.object({
+  value: z.number().positive("Value must be positive"),
+  name: z.string().min(1, "Name required"),
+}).refine(
+  (data) => data.value < 1000,
+  { message: "Precondition: value must be under 1000" }
+);
+
+// Postcondition schema: {from plan design}
+export const OutputSchema = z.object({
+  result: z.number(),
+  success: z.boolean(),
+}).refine(
+  (data) => data.success || data.result === 0,
+  { message: "Postcondition: failed operations must return 0" }
+);
+
+// Validation wrapper
+export function withContracts<I, O>(
+  inputSchema: z.ZodType<I>,
+  outputSchema: z.ZodType<O>,
+  fn: (input: I) => O
+): (input: I) => O {
+  return (input: I) => {
+    const validInput = inputSchema.parse(input);
+    const output = fn(validInput);
+    return outputSchema.parse(output);
+  };
+}
+```
+
+#### Python (icontract)
+```python
+# .outline/contracts/{module}_contracts.py
+# Generated from plan design
+
+import icontract
+
+# Source Requirement: {traceability from plan}
+
+# Precondition: {from plan design}
+# Postcondition: {from plan design}
+@icontract.require(lambda x: x > 0, "Input must be positive")
+@icontract.ensure(lambda result: result is not None, "Must return value")
+@icontract.ensure(lambda x, result: result > x, "Output must exceed input")
+def process(x: int) -> int:
+    return x + 1
+
+
+# Class invariant: {from plan design}
+@icontract.invariant(lambda self: self.balance >= 0)
+class Account:
+    def __init__(self):
+        self.balance = 0
+
+    @icontract.require(lambda amount: amount > 0)
+    @icontract.ensure(lambda self, amount, OLD: self.balance == OLD.balance + amount)
+    def deposit(self, amount: int) -> None:
+        self.balance += amount
+```
+
+## Phase 2: Execute Verification
 
 ### Rust
 ```bash
-# Ensure contracts are enabled
+# Ensure contracts are enabled (not disabled)
 unset CONTRACTS_DISABLE
-cargo test || exit 13
 
-# Check for contract annotations
-rg '#\[pre\(|#\[post\(' $ARGUMENTS || exit 12
+# Verify contracts exist
+rg '#\[pre\(|#\[post\(|#\[invariant\(' .outline/contracts/ || exit 12
+
+# Run tests with contracts
+cargo test || exit 13
 ```
 
 ### TypeScript
 ```bash
-# Zod validation runs at runtime
-npx vitest run || exit 13
+# Verify Zod schemas exist
+rg 'z\.object|\.refine\(' .outline/contracts/ || exit 12
 
-# Check schema definitions
-rg 'z\.object' $ARGUMENTS || exit 12
+# Run tests (Zod validates at runtime)
+npx vitest run || exit 13
 ```
 
 ### Python
 ```bash
-# Enable slow contracts for thorough checking
+# Enable thorough contract checking
 export ICONTRACT_SLOW=true
-pytest $ARGUMENTS || exit 13
 
-# Check decorators
-rg '@pre\(|@post\(' $ARGUMENTS || exit 12
+# Verify decorators exist
+rg '@icontract\.(require|ensure|invariant)' .outline/contracts/ || exit 12
+
+# Run tests
+pytest || exit 13
 ```
 
-### Java
+### Java (Guava)
 ```bash
-# Guava preconditions active by default
+# Verify Guava preconditions exist
+rg 'checkArgument|checkState|checkNotNull' .outline/contracts/ || exit 12
+
+# Run tests
 mvn test || exit 13
-
-# Check Guava usage
-rg 'checkArgument|checkState' $ARGUMENTS || exit 12
 ```
 
-### Kotlin
-```bash
-# Native require/check always active
-./gradlew test || exit 13
-
-# Check contract usage
-rg 'require\s*\{|check\s*\{' $ARGUMENTS || exit 12
-```
-
-### C++
+### C++ (GSL/Boost)
 ```bash
 # Ensure NDEBUG is NOT set for contract checking
 unset NDEBUG
-cmake --build build && ./build/tests || exit 13
 
-# Check GSL/Boost contracts
-rg 'Expects\(|Ensures\(' $ARGUMENTS || exit 12
+# Verify contracts exist
+rg 'Expects\(|Ensures\(' .outline/contracts/ || exit 12
+
+# Build and test
+cmake --build build && ./build/tests || exit 13
 ```
 
-### C
-```bash
-# Ensure NDEBUG is NOT set
-unset NDEBUG
-make test || exit 13
+## Phase 3: Remediation
 
-# Check assertions
-rg 'assert\(' $ARGUMENTS || exit 12
+### Contract Violation Types
+
+| Violation | Exit Code | Fix Strategy |
+|-----------|-----------|--------------|
+| Precondition | 1 | Fix caller to meet requirements |
+| Postcondition | 2 | Fix implementation to meet guarantee |
+| Invariant | 3 | Fix state management logic |
+
+### Debugging Contract Failures
+
+```bash
+# Find specific violation in output
+# Precondition violations show input that failed
+# Postcondition violations show output that failed
+
+# Add verbose logging for debugging
+# Rust: RUST_BACKTRACE=1 cargo test
+# Python: pytest -v --tb=long
+# TypeScript: DEBUG=* npx vitest run
 ```
 
 ## Exit Codes
@@ -86,11 +203,11 @@ rg 'assert\(' $ARGUMENTS || exit 12
 |------|---------|--------|
 | 0 | Success | All contracts pass |
 | 1 | Precondition fail | Fix caller to meet requirements |
-| 2 | Postcondition fail | Fix implementation to meet guarantee |
+| 2 | Postcondition fail | Fix implementation |
 | 3 | Invariant fail | Fix state management |
 | 11 | Library missing | Install contract library |
-| 12 | No contracts | Add contract annotations |
-| 13 | Verification failed | Fix contract violations |
+| 12 | No contracts | Run plan phase, create contracts |
+| 13 | Verification failed | Debug and fix violations |
 
 ## Contract Patterns
 
@@ -121,19 +238,28 @@ OPERATION --> STATE CHANGE --> CHECK INVARIANT
 ## Workflow
 
 ```
-CHECK (libraries installed)
+CREATE (generate contract annotations from plan)
   |
   v
-DETECT (find contract annotations)
+VERIFY (run with contracts enabled)
   |
   v
-VALIDATE (run with contracts enabled)
+ANALYZE (identify violations by type)
   |
   v
-ANALYZE (exit 1-3 on violations)
+REMEDIATE (fix violations)
   |
   v
 SUCCESS (exit 0)
 ```
 
-Execute verification. Report violations with context and suggest fixes.
+## Output Report
+
+Provide:
+- Contract files created in `.outline/contracts/`
+- Contracts verified per type (pre/post/invariant)
+- Violations found and fixed
+- Coverage of public APIs
+- Traceability update (requirement -> contract -> status)
+
+Execute with thoroughness. Report verification results clearly.

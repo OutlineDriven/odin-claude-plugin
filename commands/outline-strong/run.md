@@ -2,84 +2,222 @@
 description: Execute full validation chain orchestration
 ---
 
-You are executing Outline-Strong validation orchestration across all verification layers.
+You are executing Outline-Strong validation orchestration. This phase CREATES validation artifacts across all layers and VERIFIES them in sequence.
 
-## Execution Flow
+## Execution Steps
 
-```
-LOAD CONFIG
-  |
-  v
-PARSE ORDER (default: proof,spec,type,contract,tests)
-  |
-  v
-FOR EACH STAGE:
-  - Detect artifacts
-  - Execute validation
-  - Check exit code
-  - Gate next stage (if stop-on-fail)
-  |
-  v
-REPORT SUMMARY
-```
+1. **CREATE**: Generate artifacts for each validation layer from plan
+2. **EXECUTE**: Run validation chain in configured order
+3. **REPORT**: Comprehensive results across all layers
 
-## Stage Commands
+## Phase 1: Create Validation Artifacts
 
-### Stage 1: Proof Validation
 ```bash
-# Lean proofs
-fd -e lean $ARGUMENTS -x lean --make {} || exit 13
-
-# Coq proofs
-fd -e v $ARGUMENTS -x coqc {} || exit 13
-
-# Dafny proofs
-fd -e dfy $ARGUMENTS -x dafny verify {} || exit 13
+# Create .outline directory structure for all layers
+mkdir -p .outline/{proofs,specs,contracts,tests}
 ```
 
-### Stage 2: Specification Verification
-```bash
-# Quint specs
-fd -e qnt $ARGUMENTS && quint verify --main=Module $ARGUMENTS/*.qnt || exit 13
+### Generate Artifacts Per Layer
 
-# TLA+ specs
-fd -e tla $ARGUMENTS -x tlc {} || exit 13
+Based on the plan design, create artifacts for applicable layers:
+
+**Layer 1: Proofs** (`.outline/proofs/`)
+```bash
+# If proof layer in plan, create Lean/Idris files
+# See proof-driven/run.md for templates
 ```
 
-### Stage 3: Type Checking
+**Layer 2: Specifications** (`.outline/specs/`)
 ```bash
-# TypeScript
-test -f tsconfig.json && tsc --noEmit || exit 13
-
-# Rust
-test -f Cargo.toml && cargo check || exit 13
-
-# Python
-fd -e py $ARGUMENTS && pyright $ARGUMENTS || exit 13
-
-# Java
-fd -e java $ARGUMENTS -x javac {} || exit 13
+# If spec layer in plan, create Quint files
+# See spec-first/run.md for templates
 ```
 
-### Stage 4: Contract Verification
+**Layer 3: Types** (source code)
 ```bash
-# Delegate to design-by-contract
-dbc-verify --lang auto --path $ARGUMENTS || exit $?
+# Type annotations in source files
+# Language-specific type system
 ```
 
-### Stage 5: Test Execution
+**Layer 4: Contracts** (`.outline/contracts/`)
 ```bash
-# TypeScript
-test -f package.json && npm test || exit 13
+# If contract layer in plan, create contract files
+# See design-by-contract/run.md for templates
+```
 
-# Rust
-test -f Cargo.toml && cargo test || exit 13
+**Layer 5: Tests** (`.outline/tests/`)
+```bash
+# Create test files
+# See test-driven/run.md for templates
+```
 
-# Python
-fd -e py -g '*test*' $ARGUMENTS && pytest $ARGUMENTS || exit 13
+## Phase 2: Execute Validation Chain
 
-# Java
-test -f pom.xml && mvn test || exit 13
+### Configuration
+```bash
+# Default order
+ORDER="proof,spec,type,contract,tests"
+
+# Custom order (from plan or environment)
+ORDER="${VALIDATION_ORDER:-$ORDER}"
+
+# Execution mode
+STOP_ON_FAIL=${STOP_ON_FAIL:-true}
+```
+
+### Stage Execution
+
+#### Stage 1: Proof Validation
+```bash
+run_proof_stage() {
+  echo "=== Stage 1: PROOF ==="
+
+  # Lean proofs
+  if fd -e lean .outline/proofs 2>/dev/null | grep -q .; then
+    echo "Verifying Lean proofs..."
+    cd .outline/proofs && lake build || return 13
+    rg '\bsorry\b' . && return 13
+  fi
+
+  # Idris proofs
+  if fd -e idr .outline/proofs 2>/dev/null | grep -q .; then
+    echo "Verifying Idris proofs..."
+    fd -e idr .outline/proofs -x idris2 --check {} || return 13
+  fi
+
+  echo "Proof stage: PASS"
+  return 0
+}
+```
+
+#### Stage 2: Specification Verification
+```bash
+run_spec_stage() {
+  echo "=== Stage 2: SPECIFICATION ==="
+
+  if fd -e qnt .outline/specs 2>/dev/null | grep -q .; then
+    echo "Verifying Quint specs..."
+    quint typecheck .outline/specs/*.qnt || return 13
+    quint verify .outline/specs/*.qnt || return 13
+  fi
+
+  echo "Spec stage: PASS"
+  return 0
+}
+```
+
+#### Stage 3: Type Checking
+```bash
+run_type_stage() {
+  echo "=== Stage 3: TYPE CHECKING ==="
+
+  # TypeScript
+  if test -f tsconfig.json; then
+    tsc --noEmit || return 13
+  fi
+
+  # Rust
+  if test -f Cargo.toml; then
+    cargo check || return 13
+  fi
+
+  # Python
+  if fd -e py . | grep -q .; then
+    pyright . || return 13
+  fi
+
+  echo "Type stage: PASS"
+  return 0
+}
+```
+
+#### Stage 4: Contract Verification
+```bash
+run_contract_stage() {
+  echo "=== Stage 4: CONTRACTS ==="
+
+  if fd . .outline/contracts 2>/dev/null | grep -q .; then
+    # Run tests with contracts enabled
+    unset CONTRACTS_DISABLE
+    unset NDEBUG
+
+    # Language-specific contract verification
+    test -f Cargo.toml && cargo test
+    test -f package.json && npm test
+    test -f pyproject.toml && pytest
+
+    return $?
+  fi
+
+  echo "Contract stage: PASS"
+  return 0
+}
+```
+
+#### Stage 5: Test Execution
+```bash
+run_test_stage() {
+  echo "=== Stage 5: TESTS ==="
+
+  # TypeScript
+  test -f package.json && npm test || return 13
+
+  # Rust
+  test -f Cargo.toml && cargo test || return 13
+
+  # Python
+  test -f pyproject.toml && pytest || return 13
+
+  # Go
+  test -f go.mod && go test ./... || return 13
+
+  echo "Test stage: PASS"
+  return 0
+}
+```
+
+### Orchestration Loop
+```bash
+execute_chain() {
+  local results=""
+  local first_failure=0
+
+  for stage in ${ORDER//,/ }; do
+    echo ""
+    echo "=========================================="
+    echo "Executing: $stage"
+    echo "=========================================="
+
+    case $stage in
+      proof)    run_proof_stage ;;
+      spec)     run_spec_stage ;;
+      type)     run_type_stage ;;
+      contract) run_contract_stage ;;
+      tests)    run_test_stage ;;
+      *)        echo "Unknown stage: $stage"; return 15 ;;
+    esac
+
+    local exit_code=$?
+    results="$results\n$stage: $([ $exit_code -eq 0 ] && echo 'PASS' || echo 'FAIL')"
+
+    if [ $exit_code -ne 0 ]; then
+      [ $first_failure -eq 0 ] && first_failure=$exit_code
+
+      if [ "$STOP_ON_FAIL" = "true" ]; then
+        echo "Stage $stage FAILED - stopping chain"
+        break
+      fi
+    fi
+  done
+
+  echo ""
+  echo "=========================================="
+  echo "VALIDATION SUMMARY"
+  echo "=========================================="
+  echo -e "$results"
+
+  return $first_failure
+}
 ```
 
 ## Exit Codes
@@ -90,86 +228,47 @@ test -f pom.xml && mvn test || exit 13
 | 1 | Precondition violation | Fix contract preconditions |
 | 2 | Postcondition violation | Fix contract postconditions |
 | 3 | Invariant violation | Fix contract invariants |
-| 11 | No artifacts | Check path, add validation artifacts |
+| 11 | No artifacts | Run plan phase first |
 | 13 | Stage failed | Fix issues in failed stage |
-| 15 | Config error | Check order string, valid stages |
-
-## Execution Modes
-
-### Stop-on-Fail (default)
-```bash
-# Exit immediately on first failure
-for stage in $ORDER; do
-  run_stage $stage || exit $?
-done
-```
-
-### All-Errors
-```bash
-# Collect all failures, exit with first failure code
-ols-validate --all-errors
-```
+| 15 | Config error | Check ORDER, valid stages |
 
 ## Gating Rules
 
 | Upstream | Gates | Rationale |
 |----------|-------|-----------|
-| proof | spec | Proofs must be valid before specs |
-| spec | type | Specs must hold before type checking |
-| type | contract | Types must be valid before contracts |
-| contract | tests | Contracts must pass before tests |
-
-## Configuration
-
-```toml
-# .ols-config.toml
-[validation]
-order = ["type", "contract", "tests"]
-stop_on_fail = true
-log_level = "info"
-
-[validation.timeouts]
-proof = 300
-spec = 180
-type = 60
-contract = 120
-tests = 300
-```
-
-## Orchestration Commands
-
-```bash
-# Full validation (default order)
-ols-validate --path $ARGUMENTS
-
-# Custom order
-ols-validate --order "type,contract,tests" --path $ARGUMENTS
-
-# All-errors mode
-ols-validate --all-errors --path $ARGUMENTS
-
-# Check coverage
-ols-check --summary --path $ARGUMENTS
-```
+| proof | spec | Proofs validate core properties |
+| spec | type | Specs define valid behaviors |
+| type | contract | Types catch basic errors |
+| contract | tests | Contracts validate interfaces |
 
 ## Workflow
 
 ```
-LOAD CONFIG
+CREATE (artifacts for all applicable layers)
   |
   v
-DETECT ARTIFACTS (all stages)
+LOAD CONFIG (order, stop-on-fail mode)
   |
   v
-EXECUTE ORDER:
+EXECUTE CHAIN:
   proof -> spec -> type -> contract -> tests
   (skip if no artifacts, gate on failure)
   |
   v
-REPORT SUMMARY
+REPORT SUMMARY (per-stage results)
   |
   v
 EXIT (first failure code or 0)
 ```
 
-Execute stages in order. Report comprehensive results.
+## Output Report
+
+Provide:
+- Artifacts created per layer
+- Stage execution results (PASS/FAIL/SKIP)
+- First failure details (if any)
+- Coverage summary per layer
+- Cross-layer traceability matrix
+- Recommendations for missing coverage
+
+Execute with thoroughness. Report comprehensive results.

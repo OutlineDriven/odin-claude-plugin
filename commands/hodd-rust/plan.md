@@ -3,136 +3,184 @@ description: Plan HODD-RUST validation workflow for Rust projects
 allowed-tools: Read, Grep, Glob, Bash
 ---
 
-You are planning a HODD-RUST (Stronger Outline Driven Development For Rust) validation strategy. This is a READ-ONLY planning phase - do NOT modify any files.
+You are planning a HODD-RUST (Holistic Outline Driven Development for Rust) validation strategy BEFORE code changes.
 
 HODD-RUST merges: Type-driven + Spec-first + Proof-driven + Design-by-contracts + Test-driven (XP)
 
+CRITICAL: This is a DESIGN planning task. You design Rust validation artifacts that will be created during the run phase.
+
 ## Your Process
 
-1. **Detect Existing Validation Artifacts**
-   - Find Prusti annotations (#[requires], #[ensures], #[invariant])
-   - Find Kani proofs (#[kani::proof])
-   - Find Flux refinements (#[flux::])
-   - Find Loom tests (loom::)
-   - Find property tests (proptest!, quickcheck)
-   - Find existing test coverage
+1. **Understand Requirements**
+   - Parse user's Rust task/requirement
+   - Identify safety requirements (memory, concurrency, panic-freedom)
+   - Use sequential-thinking to plan multi-tool validation
+   - Map requirements to Rust verification tools
 
-2. **Analyze Safety Requirements**
-   - Identify unsafe blocks requiring manual review/Miri
-   - Find FFI boundaries (extern "C")
-   - Locate concurrent code (Arc, Mutex, atomics, spawn)
-   - Detect panic paths (unwrap, expect, panic!)
+2. **Artifact Detection (Conditional)**
+   - Check for existing Rust validation artifacts:
+     ```bash
+     # Prusti annotations
+     rg '#\[(requires|ensures|invariant)' -t rust $ARGUMENTS
+     # Kani proofs
+     rg '#\[kani::proof\]' -t rust $ARGUMENTS
+     # Flux refinements
+     rg '#\[flux::' -t rust $ARGUMENTS
+     # Loom tests
+     rg 'loom::' -t rust $ARGUMENTS
+     # Property tests
+     rg 'proptest!|quickcheck' -t rust $ARGUMENTS
+     # External proofs
+     fd -e lean -e idr -e qnt $ARGUMENTS
+     ```
+   - If artifacts exist: analyze coverage gaps, plan extensions
+   - If no artifacts: proceed to design validation stack
 
-3. **Design Validation Strategy**
-   - Classify code criticality (critical path vs utility)
-   - Select tools per code region
-   - Identify candidates for formal verification
-   - Plan external tool usage (Idris2, Lean4, Quint) if needed
+3. **Design Rust Validation Stack**
+   - Layer 0: rustc/clippy + cargo-audit/deny
+   - Layer 1-2: Miri (unsafe), Loom (concurrency)
+   - Layer 3: Flux refinements, Prusti contracts
+   - Layer 4-5: External proofs (Lean4, Quint)
+   - Layer 6: Kani bounded model checking
+   - Layer 7: Property-based tests
 
-4. **Identify Critical Files**
-   - List 3-5 files requiring formal verification
-   - Document which validation tools apply to each
-   - Note existing vs missing validation coverage
+4. **Prepare Run Phase**
+   - Define targets in `.outline/` and source
+   - Specify verification commands per tool
+   - Create traceability matrix
 
-## Detection Commands
+## Thinking Tool Integration
 
-```bash
-# Find unsafe blocks
-rg 'unsafe\s*\{' -t rust -l
+```
+Use sequential-thinking for:
+- Safety property decomposition
+- Tool selection per code region
+- Verification order planning
 
-# Find FFI boundaries
-rg 'extern\s+"C"' -t rust -l
+Use actor-critic-thinking for:
+- Tool coverage evaluation
+- Safety gap identification
+- Alternative verification approaches
 
-# Find concurrent code
-rg 'Arc<|Mutex<|RwLock<|AtomicU|thread::spawn|tokio::spawn' -t rust -l
-
-# Find Prusti annotations
-rg '#\[(requires|ensures|invariant)(\(|])' -t rust -l
-
-# Find Kani proofs
-rg '#\[kani::proof\]' -t rust -l
-
-# Find Flux refinements
-rg '#\[flux::' -t rust -l
-
-# Find Loom tests
-rg 'loom::' -t rust -l
-
-# Find property tests
-rg 'proptest!|quickcheck' -t rust -l
-
-# Find panic paths
-rg '\.unwrap\(\)|\.expect\(|panic!' -t rust -l
-
-# Count test files
-fd -e rs -g '*test*' | wc -l
-
-# Find Cargo.toml for dependencies
-fd Cargo.toml -x rg -l 'prusti|kani|loom|proptest|quickcheck'
+Use shannon-thinking for:
+- Unsafe code risk analysis
+- Concurrency hazard assessment
+- Panic path probability
 ```
 
-## External Tool Detection
+## HODD-RUST Validation Design Template
 
-```bash
-# Idris2 models (outside Rust codebase)
-fd -e idr -e lidr
+```
+HODD-RUST Validation Architecture
+=================================
 
-# Lean4 proofs (outside Rust codebase)
-fd lakefile.lean
+Requirement: {requirement text}
 
-# Quint specifications
-fd -e qnt
+Safety Analysis:
+├── Unsafe blocks: {locations}
+├── FFI boundaries: {locations}
+├── Concurrent code: {locations}
+└── Panic paths: {locations}
 
-# Verus annotations
-rg 'verus!' -t rust -l
+Layer 0: BASELINE
+├── Tool: rustc + clippy
+├── Artifacts: Source code
+└── Commands: cargo clippy --all-targets
+
+Layer 1: MEMORY SAFETY (if unsafe present)
+├── Tool: Miri
+├── Target: .outline/tests/miri/
+├── Artifacts: Miri test harnesses
+└── Commands: cargo +nightly miri test
+
+Layer 2: CONCURRENCY (if concurrent code)
+├── Tool: Loom
+├── Target: .outline/tests/loom/
+├── Artifacts: Loom test modules
+└── Commands: RUSTFLAGS='--cfg loom' cargo test
+
+Layer 3: TYPE REFINEMENTS
+├── Tool: Flux
+├── Target: Source annotations
+├── Artifacts: #[flux::] annotations
+└── Commands: cargo flux
+
+Layer 4: CONTRACTS
+├── Tool: Prusti
+├── Target: .outline/contracts/
+├── Artifacts: #[requires], #[ensures]
+└── Commands: cargo prusti
+
+Layer 5: FORMAL PROOFS (critical paths)
+├── Tool: Lean 4 / Idris 2
+├── Target: .outline/proofs/
+├── Artifacts: theorem files
+└── Commands: lake build
+
+Layer 6: MODEL CHECKING
+├── Tool: Kani
+├── Target: .outline/proofs/kani/
+├── Artifacts: #[kani::proof] harnesses
+└── Commands: cargo kani
+
+Layer 7: PROPERTY TESTS
+├── Tool: proptest / quickcheck
+├── Target: .outline/tests/property/
+├── Artifacts: proptest! macros
+└── Commands: cargo test
 ```
 
-## Tool Stack Reference
+## Tool Selection by Code Pattern
 
-| Layer | Tool | Detect | Usage |
-|-------|------|--------|-------|
-| 0 | rustc/clippy | Always present | Standard validation |
-| 0 | cargo-audit/deny | Cargo.toml | Security checks |
-| 1 | Miri | unsafe blocks | Local UB debugging only |
-| 2 | Loom | concurrent code | Critical concurrency tests |
-| 3 | Typestate/Newtype | type patterns | Compile-time safety |
-| 3 | Flux | #[flux::] | Refined types |
-| 4 | Prusti | #[requires/ensures] | Contract verification |
-| 5 | Lean4 | lakefile.lean | Formal proofs (external) |
-| 6 | Kani | #[kani::proof] | Bounded model checking |
-| 6 | Quint | *.qnt files | Protocol specs (external) |
-| 7 | Progenitor | OpenAPI spec | API generation |
+| Code Pattern | Primary Tool | Secondary |
+|--------------|--------------|-----------|
+| `unsafe { }` | Miri | Kani |
+| `Arc<Mutex<>>` | Loom | Prusti |
+| `extern "C"` | Miri | Kani |
+| `unwrap()/expect()` | Prusti | proptest |
+| State machine | Quint | Lean 4 |
+| Arithmetic | Flux | Kani |
 
 ## Exit Codes Reference
 
 | Code | Meaning |
 |------|---------|
-| 0 | Planning complete |
-| 11 | Toolchain not detected |
-| 12 | No Rust files found |
-| 13 | Cannot determine project structure |
+| 0 | Design complete, ready for run phase |
+| 11 | Cannot determine validation strategy |
+| 12 | Requirements too ambiguous |
+| 13 | Tool unavailable for required validation |
 
 ## Required Output
 
-1. **Validation Artifact Inventory**
-   - Existing annotations/proofs found
-   - Test coverage estimate
-   - Security tooling status
+### HODD-RUST Design Document
 
-2. **Safety Analysis**
-   - Unsafe block count and locations
-   - FFI boundary summary
-   - Concurrency code locations
-   - Panic path analysis
+1. **Safety Analysis**
+   - Unsafe blocks identified
+   - FFI boundaries mapped
+   - Concurrency patterns found
+   - Panic paths catalogued
 
-3. **Validation Strategy**
-   - Tool selection per code region
-   - Prioritized verification targets
-   - External tool recommendations
+2. **Tool Stack Architecture**
+   - Tools selected per code region
+   - Verification order
+   - Gating dependencies
 
-4. **Critical Files List** (3-5 files)
-   - File path with rationale
-   - Applicable validation tools
-   - Missing vs existing coverage
+3. **Target Artifacts**
+   - `.outline/proofs/*.lean` - Formal proofs
+   - `.outline/proofs/kani/` - Kani harnesses
+   - `.outline/specs/*.qnt` - Protocol specs
+   - `.outline/contracts/*.rs` - Prusti annotations
+   - `.outline/tests/loom/` - Loom tests
+   - `.outline/tests/miri/` - Miri harnesses
+   - `.outline/tests/property/` - Property tests
 
-Remember: This is READ-ONLY planning. Do not modify files or run validation commands.
+4. **Verification Commands**
+   - Per-tool commands
+   - Success criteria per layer
+   - CI integration notes
+
+### Critical Files for HODD-RUST Validation
+List files requiring verification:
+- `src/critical.rs` - [Unsafe blocks, needs Miri + Kani]
+- `src/concurrent.rs` - [Arc/Mutex, needs Loom]
+- `src/api.rs` - [Public API, needs Prusti contracts]
