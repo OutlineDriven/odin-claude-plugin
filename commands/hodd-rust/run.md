@@ -6,6 +6,14 @@ You are executing the HODD-RUST (Holistic Outline Driven Development for Rust) v
 
 **Strict Enforcement**: Strictly validation-first before-and-after(-and-while) execution. CREATE validations FIRST, VERIFY continuously, REMEDIATE immediately.
 
+## Constitutional Rules (Non-Negotiable)
+
+1. **VALIDATION-FIRST COMPLIANCE**: Execute validation-first at every step
+2. **CREATE Before Code**: Verification artifacts MUST exist before implementation
+3. **Tier Order**: Execute tiers in sequence (0 -> 6)
+4. **Fail-Fast**: Stop on blocking failures; no skipping
+5. **Complete Remediation**: Fix all issues; never skip verification
+
 ## Execution Steps
 
 1. **CREATE**: Generate Rust validation artifacts from plan
