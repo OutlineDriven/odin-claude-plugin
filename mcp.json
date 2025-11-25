@@ -1,11 +1,5 @@
 {
     "mcpServers": {
-        "Math": {
-            "command": "uvx",
-            "args": [
-                "vibe-math-mcp"
-            ]
-        },
         "Check": {
             "command": "npx",
             "args": [
