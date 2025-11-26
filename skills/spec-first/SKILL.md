@@ -129,7 +129,7 @@ This skill enables formal specification-driven development using Quint (formal s
 # Use const correctness for state
 ```
 
-## Tiered Commands
+## Commands
 
 ### Basic (≤40 chars)
 ```bash

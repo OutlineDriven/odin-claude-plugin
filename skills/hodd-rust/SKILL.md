@@ -21,8 +21,8 @@ Strictly validation-first before-and-after(-and-while) planning and execution (c
 - REMEDIATE failures immediately
 
 **AFTER** (Completion):
-- Run full tiered validation pipeline
-- Ensure all tiers pass
+- Run full validation pipeline
+- Ensure all stages pass
 - Document verification coverage
 
 **Four Paradigms** (Type-driven + Spec-first + Proof-driven + Design-by-contracts):
@@ -33,21 +33,21 @@ Strictly validation-first before-and-after(-and-while) planning and execution (c
 
 ## Tool Stack
 
-| Layer | Tool | Usage | Notes |
+| Tool | Usage | Notes |
 |-------|------|-------|-------|
-| 0 | rustc, rustfmt, Clippy | Standard toolchain | Always run |
-| 0 | cargo-audit, cargo-deny | Security/dependency | CI mandatory |
-| 1 | Miri | Runtime UB detection | Local debugging only, NOT for CI |
-| 2 | Loom | Concurrency testing | Critical concurrent code only |
-| 3 | Typestate/Newtype/Phantom | Rust type patterns | Compile-time guarantees |
-| 3 | Flux | Refined types | Rust-native refinements |
-| 3 | Idris2 | Type-driven prototyping | External, design validation |
-| 4 | Prusti | Pre/postconditions | Apply with caution for readability |
-| 5 | Lean4 | Formal proofs | External, algorithm verification |
-| 6 | Kani | Bounded model checking | Minimal in production code |
-| 6 | Quint | Spec-first design | External, protocol specs |
-| 6 | Verus | Verified Rust | External, design validation |
-| 6 | Progenitor | OpenAPI generation | When applicable |
+| rustc, rustfmt, Clippy | Standard toolchain | Always run |
+| cargo-audit, cargo-deny | Security/dependency | CI mandatory |
+| Miri | Runtime UB detection | Local debugging only, NOT for CI |
+| Loom | Concurrency testing | Critical concurrent code only |
+| Typestate/Newtype/Phantom | Rust type patterns | Compile-time guarantees |
+| Flux | Refined types | Rust-native refinements |
+| Idris2 | Type-driven prototyping | External, design validation |
+| Prusti | Pre/postconditions | Apply with caution for readability |
+| Lean4 | Formal proofs | External, algorithm verification |
+| Kani | Bounded model checking | Minimal in production code |
+| Quint | Spec-first design | External, protocol specs |
+| Verus | Verified Rust | External, design validation |
+| Progenitor | OpenAPI generation | When applicable |
 
 ## Workflow
 
@@ -87,7 +87,7 @@ EXTERNAL (optional)
 COMPLETE
 ```
 
-## Commands (Tiered)
+## Commands
 
 ### Basic (Precondition Check)
 ```bash
@@ -113,12 +113,12 @@ cargo deny check || exit 14
 ```bash
 # Prusti contracts (if annotations present)
 rg '#\[requires\]|#\[ensures\]|#\[invariant\]' -q -t rust && {
-  command -v cargo-prusti && cargo prusti || exit 15
+  command -v prusti && prusti || exit 15
 }
 
 # Kani bounded model checking (if proofs present)
 rg '#\[kani::proof\]' -q -t rust && {
-  command -v cargo-kani && cargo kani || exit 15
+  command -v kani && kani || exit 15
 }
 
 # Flux refined types (if refinements present)

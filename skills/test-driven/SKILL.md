@@ -95,7 +95,7 @@ This skill enables test-driven development (TDD) using the Red-Green-Refactor cy
 | C# | xUnit | `dotnet test` | `dotnet watch test` |
 | C++ | GoogleTest | `ctest` | `fd *.cpp \| entr ctest` |
 
-## Tiered Commands
+## Commands
 
 ### Basic (≤40 chars)
 

@@ -153,7 +153,7 @@ def action_name(state: State) -> State:
 
 | Code | Meaning | Action |
 |------|---------|--------|
-| 0 | Success | Spec verified, stubs generated |
+| 0 | Spec verified, stubs generated |
 | 11 | Quint missing | `npm install -g @informalsystems/quint` |
 | 12 | Syntax error | Fix .qnt syntax errors |
 | 13 | Spec violation | Fix state machine or invariants |

@@ -126,7 +126,7 @@ theorem ex5 : P ∨ ¬P := by decide
 
 | Code | Meaning | Action |
 |------|---------|--------|
-| 0 | Success | All proofs verified, zero `sorry` |
+| 0 | All proofs verified, zero `sorry` |
 | 11 | Tool missing | Install Lean 4 / Lake |
 | 12 | No artifacts | Run plan phase first, create .lean files |
 | 13 | Proof incomplete | Replace `sorry` with tactics |

@@ -179,9 +179,9 @@ cmake --build build && ./build/tests || exit 13
 
 | Violation | Exit Code | Fix Strategy |
 |-----------|-----------|--------------|
-| Precondition | 1 | Fix caller to meet requirements |
-| Postcondition | 2 | Fix implementation to meet guarantee |
-| Invariant | 3 | Fix state management logic |
+| Precondition | Fix caller to meet requirements |
+| Postcondition | Fix implementation to meet guarantee |
+| Invariant | Fix state management logic |
 
 ### Debugging Contract Failures
 
@@ -200,7 +200,7 @@ cmake --build build && ./build/tests || exit 13
 
 | Code | Meaning | Action |
 |------|---------|--------|
-| 0 | Success | All contracts pass |
+| 0 | All contracts pass |
 | 1 | Precondition fail | Fix caller to meet requirements |
 | 2 | Postcondition fail | Fix implementation |
 | 3 | Invariant fail | Fix state management |

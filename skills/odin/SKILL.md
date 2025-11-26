@@ -177,7 +177,7 @@ The outline IS the contract.
 
 ## Verification Stack
 
-| Layer | Tool | Catches | Command |
+| Tool | Catches | Command |
 |-------|------|---------|---------|
 | 1. TYPES | Idris 2 | Structural errors | `idris2 --check` |
 | 2. SPECS | Quint | Design flaws | `quint verify` |

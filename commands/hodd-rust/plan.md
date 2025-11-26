@@ -107,7 +107,7 @@ Layer 4: CONTRACTS
 ├── Tool: Prusti
 ├── Target: .outline/contracts/
 ├── Artifacts: #[requires], #[ensures]
-└── Commands: cargo prusti
+└── Commands: prusti
 
 Layer 5: FORMAL PROOFS (critical paths)
 ├── Tool: Lean 4 / Idris 2
@@ -119,7 +119,7 @@ Layer 6: MODEL CHECKING
 ├── Tool: Kani
 ├── Target: .outline/proofs/kani/
 ├── Artifacts: #[kani::proof] harnesses
-└── Commands: cargo kani
+└── Commands: kani
 ```
 
 ## Tool Selection by Code Pattern

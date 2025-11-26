@@ -177,7 +177,7 @@ go tool cover -html=coverage.out -o coverage.html
 
 | Code | Meaning | Action |
 |------|---------|--------|
-| 0 | Success | All tests pass, coverage met |
+| 0 | All tests pass, coverage met |
 | 11 | Framework missing | Install test framework |
 | 12 | No test files | Run plan phase, create tests |
 | 13 | Tests failed | Fix implementation or test |

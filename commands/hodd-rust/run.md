@@ -9,7 +9,7 @@ You are executing the HODD-RUST (Holistic Outline Driven Development for Rust) v
 
 1. **VALIDATION-FIRST COMPLIANCE**: Execute validation-first at every step
 2. **CREATE Before Code**: Verification artifacts MUST exist before implementation
-3. **Tier Order**: Execute tiers in sequence (0 -> 6)
+3. **Execution Order**: Execute stages in sequence (0 -> 6)
 4. **Fail-Fast**: Stop on blocking failures; no skipping
 5. **Complete Remediation**: Fix all issues; never skip verification
 
@@ -197,8 +197,8 @@ echo "=== Layer 4: CONTRACTS (Prusti) ==="
 
 if rg '#\[(requires|ensures|invariant)' -t rust -q; then
   echo "Prusti annotations detected..."
-  command -v cargo-prusti >/dev/null && {
-    cargo prusti || exit 15
+  command -v prusti >/dev/null && {
+    prusti || exit 15
   } || echo "Warning: Prusti not installed"
 fi
 ```
@@ -232,8 +232,8 @@ echo "=== Layer 6: MODEL CHECKING (Kani) ==="
 
 if rg '#\[kani::proof\]' -t rust -q; then
   echo "Kani proofs detected..."
-  command -v cargo-kani >/dev/null && {
-    cargo kani || exit 15
+  command -v kani >/dev/null && {
+    kani || exit 15
   } || echo "Warning: Kani not installed"
 fi
 ```

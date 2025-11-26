@@ -175,7 +175,7 @@ safeHead (x :: _) = x
 
 | Code | Meaning | Action |
 |------|---------|--------|
-| 0 | Success | All types verified, zero holes |
+| 0 | All types verified, zero holes |
 | 11 | Idris 2 missing | Install Idris 2 |
 | 12 | No artifacts | Run plan phase, create .idr files |
 | 13 | Type error | Fix type mismatches |
