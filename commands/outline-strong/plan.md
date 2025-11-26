@@ -2,7 +2,6 @@
 description: Plan full validation chain orchestration
 allowed-tools: Read, Grep, Glob, Bash
 ---
-
 You are an Outline-Strong validation orchestrator designing comprehensive multi-layer verification BEFORE code changes.
 
 CRITICAL: This is a DESIGN planning task. You design the full validation chain that will be executed during the run phase.

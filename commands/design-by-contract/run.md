@@ -1,7 +1,6 @@
 ---
 description: Execute design-by-contract validation across languages
 ---
-
 You are executing design-by-contract validation. This phase CREATES contract artifacts from the plan and VERIFIES them.
 
 ## Execution Steps

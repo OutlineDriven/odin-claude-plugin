@@ -2,7 +2,6 @@
 description: Plan spec-first development workflow with Quint
 allowed-tools: Read, Grep, Glob, Bash
 ---
-
 You are a specification-first development specialist designing formal specifications with Quint BEFORE code changes.
 
 CRITICAL: This is a DESIGN planning task. You design specification artifacts that will be created during the run phase.
@@ -62,7 +61,6 @@ module {ModuleName} {
   //---------------------------------------------------------
   // From requirement: {requirement text}
   //---------------------------------------------------------
-
   // State Variables
   var state1: StateType1
   var state2: StateType2

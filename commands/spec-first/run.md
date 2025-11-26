@@ -1,7 +1,6 @@
 ---
 description: Execute spec-first verification with Quint
 ---
-
 You are executing specification-first verification using Quint. This phase CREATES validation artifacts from the plan and VERIFIES them.
 
 ## Execution Steps
@@ -29,7 +28,6 @@ module {ModuleName} {
   //---------------------------------------------------------
   // Source Requirements: {traceability from plan}
   //---------------------------------------------------------
-
   // === State Variables ===
   // From plan: {state design}
   var state1: StateType1

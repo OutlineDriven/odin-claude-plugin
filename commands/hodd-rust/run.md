@@ -1,7 +1,6 @@
 ---
 description: Execute HODD-RUST validation pipeline for Rust projects
 ---
-
 You are executing the HODD-RUST (Holistic Outline Driven Development for Rust) validation pipeline. This phase CREATES validation artifacts from the plan and VERIFIES them through the full Rust verification stack.
 
 **Strict Enforcement**: Strictly validation-first before-and-after(-and-while) execution. CREATE validations FIRST, VERIFY continuously, REMEDIATE immediately.

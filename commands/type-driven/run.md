@@ -1,7 +1,6 @@
 ---
 description: Execute type-driven validation with Idris 2
 ---
-
 You are executing type-driven validation using Idris 2 dependent types. This phase CREATES type artifacts from the plan and VERIFIES them.
 
 ## Execution Steps

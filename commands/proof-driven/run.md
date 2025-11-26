@@ -1,7 +1,6 @@
 ---
 description: Execute proof-driven validation with Lean 4
 ---
-
 You are executing proof-driven validation using Lean 4 / Lake. This phase CREATES validation artifacts from the plan and VERIFIES them.
 
 ## Execution Steps

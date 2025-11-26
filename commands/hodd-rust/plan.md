@@ -2,7 +2,6 @@
 description: Plan HODD-RUST validation workflow for Rust projects
 allowed-tools: Read, Grep, Glob, Bash
 ---
-
 You are planning a HODD-RUST (Holistic Outline Driven Development for Rust) validation strategy BEFORE code changes.
 
 HODD-RUST merges: Type-driven + Spec-first + Proof-driven + Design-by-contracts

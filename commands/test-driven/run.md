@@ -1,7 +1,6 @@
 ---
 description: Execute test-driven development workflow
 ---
-
 You are executing test-driven development. This phase CREATES test artifacts from the plan and runs the Red-Green-Refactor cycle.
 
 ## Execution Steps
