@@ -13,7 +13,7 @@ Strictly validation-first before-and-after(-and-while) planning and execution.
 - Design type specifications (Idris2/Flux)
 - Design formal specifications (Quint)
 - Design proofs (Lean4)
-- Design contracts (Prusti)
+- Design contracts (Contracts crate)
 
 **WHILE** (Execution Phase):
 - CREATE verification artifacts from plan
@@ -29,7 +29,7 @@ Strictly validation-first before-and-after(-and-while) planning and execution.
 - **Type-driven**: Rust's type system + Idris2/Flux for refined types
 - **Spec-first**: Quint specifications and Kani bounded model checking
 - **Proof-driven**: Lean4 formal proofs for critical algorithms
-- **Design-by-contracts**: Prusti pre/postconditions and invariants
+- **Design-by-contracts**: Contracts crate for pre/postconditions and invariants
 
 ---
 
@@ -413,6 +413,6 @@ rg '#\[flux::' -t rust                                      # Flux
 - [Kani Documentation](https://model-checking.github.io/kani/)
 - [Loom GitHub](https://github.com/tokio-rs/loom)
 - [Miri Documentation](https://github.com/rust-lang/miri)
-- [Prusti User Guide](https://viperproject.github.io/prusti-dev/user-guide/)
 - [Flux Refinement Types](https://flux-rs.github.io/flux/)
 - [Verus Verified Rust](https://github.com/verus-lang/verus)
+- [Contracts crate](https://crates.io/crates/contracts)
