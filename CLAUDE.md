@@ -74,27 +74,13 @@ Default to research over action. Do not jump into implementation unless clearly 
 - Choose straightforward flows; defer abstractions until repeated need is proven.
 </keep_it_simple>
 
-<workspace_organization>
-**Temporal Directory Convention:** ALL temporal working artifacts MUST use `.outline/` directory (workspace-relative).
+<temporal_files_organization>
+**Outline-Driven Development:** ALL temporal artifacts for outline-driven development MUST use `.outline/` directory. [MANDATORY]
 
-**Required structure:**
-- `.outline/proofs/` - Idris2, Lean4 formal proofs
-- `.outline/specs/` - Quint, Verus specifications
-- `.outline/contracts/` - Design-by-contract artifacts (Prusti, SPARK, Dafny)
-- `.outline/diagrams/` - Architecture, data-flow, concurrency, memory, optimization diagrams
-- `.outline/plans/` - Design documents, implementation plans
-- `.outline/mockups/` - UI/UX mockups, prototypes
-- `.outline/scratch/` - Temporary analysis, notes, working files
+**Non-Outline Files:** Use `/tmp` for temporary files unrelated to outline-driven development.
 
-**Rules:**
-- NEVER create temporal files in project root or source directories
-- ALWAYS prefix temporal paths with `.outline/`
-- Create `.outline/` subdirectory on first use
-- Clean up `.outline/scratch/` after task completion
-- Persist verification artifacts: `.outline/proofs/`, `.outline/specs/`, `.outline/contracts/`
-
-**Rationale:** Isolates generated artifacts from source code, prevents pollution of project structure, enables easy cleanup, maintains clear separation between human-authored and agent-generated content.
-</workspace_organization>
+**Rules:** NEVER create outline-related temporal files outside `.outline/` | Clean up after task completion | Use `/tmp` for scratch work not part of the outline workflow
+</temporal_files_organization>
 
 <git_commit_strategy>
 **Atomic Commit Protocol:** One logical change = One commit. Each type-classified, independently testable, reversible.
@@ -128,15 +114,16 @@ Default to research over action. Do not jump into implementation unless clearly 
 </quickstart_workflow>
 
 <surgical_editing_workflow>
-**Find → Copy → Paste:** Locate precisely, copy minimal context, transform, paste surgically.
+**Find → Copy → Paste → Verify:** Locate precisely, copy minimal context, transform, paste surgically, verify semantically.
 
 **Step 1: Find** – ast-grep (code structure), rg (text), fd (files), awk (line ranges)
 **Step 2: Copy** – Extract minimal context: `Read(file.ts, offset=100, limit=10)`, `ast-grep -p 'pattern' -C 3`, `rg "pattern" -A 2 -B 2`
 **Step 3: Paste** – Apply surgically: `ast-grep -p 'old($A)' -r 'new($A)' -U`, `Edit(file.ts, line=105)`, `awk '{gsub(/old/,"new")}1' file > tmp && mv tmp file`
+**Step 4: Verify** – Semantic diff review: `difft --display inline original modified` (advisory, warn if chunks > threshold)
 
 **Patterns:** Multi-Location (store locations, copy/paste each) | Single Change Multiple Pastes (copy once, paste everywhere) | Parallel Ops (execute independent entries simultaneously) | Staged (sequential for dependencies)
 
-**Principles:** Precision > Speed | Preview > Hope | Surgical > Wholesale | Locate → Copy → Paste | Minimal Context
+**Principles:** Precision > Speed | Preview > Hope | Surgical > Wholesale | Locate → Copy → Paste → Verify | Minimal Context
 </surgical_editing_workflow>
 
 ## PRIMARY DIRECTIVES
@@ -260,15 +247,10 @@ Modern ls replacement. Color-coded file types/permissions, git integration, tree
 Modern find replacement. Intuitive syntax, respects .gitignore, fast parallel traversal. **NEVER use find—always fd.**
 
 ### 5) tokei [CODE METRICS]
-Code statistics tool. Lines of code, blanks, comments by language. Fast, accurate, git-aware. Use for scope analysis before refactoring or estimating complexity.
+LOC/blanks/comments by language. Use for scope classification before editing. See Quick Reference for commands.
 
-```bash
-tokei                               # Project overview
-tokei src/                          # Specific directory
-tokei --type=Rust,TypeScript        # Filter languages
-tokei --output json | jq '.Total.code'  # JSON for scripting
-tokei --exclude="*.test.ts"         # Exclude patterns
-```
+### 6) difft (DIFFTASTIC) [VERIFICATION]
+Semantic diff tool. Tree-sitter based. Use for post-transform verification. See Quick Reference for commands.
 
 ### Quick Reference
 **Code search:** `ast-grep -p 'function $NAME($ARGS) { $$$ }' -l js -C 3` (HIGHLY PREFERRED) | Fallback: `rg 'TODO' -A 5`
@@ -276,6 +258,7 @@ tokei --exclude="*.test.ts"         # Exclude patterns
 **File discovery:** `fd -e py`
 **Directory listing:** `lsd --tree --depth 3`
 **Code metrics:** `tokei src/` | JSON: `tokei --output json | jq '.Total.code'`
+**Verification:** `difft --display inline original modified` | JSON: `DFT_UNSTABLE=yes difft --display json A B`
 </code_tools>
 
 ## Verification & Refinement
@@ -299,14 +282,21 @@ tokei --exclude="*.test.ts"         # Exclude patterns
 **Context Preservation:** Track Working Set, Dependencies, State, Assumptions, Recovery Points
 </verification_refinement>
 
+<verification_protocol>
+**Post-Transform Verification (Advisory):**
+1. Transform: `ast-grep -p 'old' -r 'new' -U`
+2. Verify: `difft --display inline original modified`
+3. Warn thresholds: MICRO(5), SMALL(15), MEDIUM(50) chunks
+</verification_protocol>
+
 ## Good Coding Paradigms
 
 <good_coding_paradigms>
 **Good Coding Paradigms:**
 
 **Verification & Correctness:**
-- **Formal Verification:** Prefer formal verification design before implementation. Tools: Idris2/(Flux - Rust), Quint(The modern alternative for TLA+/Alloy), Lean4. Prove invariants, model-check state machines, verify concurrent protocols. Start with lightweight specs, escalate for critical paths.
-- **Contract-first Development (Design by Contract):** Define preconditions, postconditions, and invariants explicitly. Use runtime assertions in dev, compile-time checks where possible. Document contracts in types/signatures. Enforce at module boundaries.
+- **Formal Verification:** Prefer formal verification design before implementation. Tools: Idris2/(Flux - Rust) [Type-driven], Quint [Validation-first], Lean4[Proof-driven]. Prove invariants, model-check state machines, verify concurrent protocols. Start with lightweight specs, escalate for critical paths.
+- **Contract-first Development:** Define preconditions, postconditions, and invariants explicitly. Use runtime assertions in dev, compile-time checks where possible. Document contracts in types/signatures. Enforce at module boundaries. [Design-by-contracts]
 - **Property-Based Testing (Optional):** Complement unit tests with generative testing (QuickCheck, Hypothesis, fast-check, jqwik). Test invariants across input space, not just examples. Shrink failing cases automatically.
 
 **Design & Architecture:**
