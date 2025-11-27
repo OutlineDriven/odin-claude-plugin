@@ -74,6 +74,28 @@ Default to research over action. Do not jump into implementation unless clearly 
 - Choose straightforward flows; defer abstractions until repeated need is proven.
 </keep_it_simple>
 
+<workspace_organization>
+**Temporal Directory Convention:** ALL temporal working artifacts MUST use `.outline/` directory (workspace-relative).
+
+**Required structure:**
+- `.outline/proofs/` - Idris2, Lean4 formal proofs
+- `.outline/specs/` - Quint, Verus specifications
+- `.outline/contracts/` - Design-by-contract artifacts (Prusti, SPARK, Dafny)
+- `.outline/diagrams/` - Architecture, data-flow, concurrency, memory, optimization diagrams
+- `.outline/plans/` - Design documents, implementation plans
+- `.outline/mockups/` - UI/UX mockups, prototypes
+- `.outline/scratch/` - Temporary analysis, notes, working files
+
+**Rules:**
+- NEVER create temporal files in project root or source directories
+- ALWAYS prefix temporal paths with `.outline/`
+- Create `.outline/` subdirectory on first use
+- Clean up `.outline/scratch/` after task completion
+- Persist verification artifacts: `.outline/proofs/`, `.outline/specs/`, `.outline/contracts/`
+
+**Rationale:** Isolates generated artifacts from source code, prevents pollution of project structure, enables easy cleanup, maintains clear separation between human-authored and agent-generated content.
+</workspace_organization>
+
 <git_commit_strategy>
 **Atomic Commit Protocol:** One logical change = One commit. Each type-classified, independently testable, reversible.
 
@@ -110,7 +132,7 @@ Default to research over action. Do not jump into implementation unless clearly 
 
 **Step 1: Find** – ast-grep (code structure), rg (text), fd (files), awk (line ranges)
 **Step 2: Copy** – Extract minimal context: `Read(file.ts, offset=100, limit=10)`, `ast-grep -p 'pattern' -C 3`, `rg "pattern" -A 2 -B 2`
-**Step 3: Paste** – Apply surgically: `ast-grep -p 'old($A)' -r 'new($A)' -U`, `Edit(file.ts, line=105)`, `perl -i -pe 's/old/new/'`
+**Step 3: Paste** – Apply surgically: `ast-grep -p 'old($A)' -r 'new($A)' -U`, `Edit(file.ts, line=105)`, `awk '{gsub(/old/,"new")}1' file > tmp && mv tmp file`
 
 **Patterns:** Multi-Location (store locations, copy/paste each) | Single Change Multiple Pastes (copy once, paste everywhere) | Parallel Ops (execute independent entries simultaneously) | Staged (sequential for dependencies)
 
@@ -126,7 +148,16 @@ Default to research over action. Do not jump into implementation unless clearly 
 
 **Thinking tools:** sequential-thinking [ALWAYS USE] for decomposition/dependencies; actor-critic-thinking for alternatives; shannon-thinking for uncertainty/risk
 
-**Banned:** sed for code EDITS (analyses OK); find/ls; grep (use AG/RG/FD); text-based search for code patterns
+**Banned (HARD ENFORCEMENT - VIOLATIONS REJECTED):**
+- `grep -r` / `grep -R` / `grep --recursive` - USE `rg` or `ast-grep` INSTEAD
+- `sed -i` / `sed --in-place` - USE `ast-grep -U` or Edit tool INSTEAD
+- `sed -e` for code transforms - USE `ast-grep` INSTEAD
+- `find` / `ls` - USE `fd` / `lsd` INSTEAD
+- `cat` for file reading - USE Read tool INSTEAD
+- Text-based grep for code patterns - USE `ast-grep` INSTEAD
+- `perl` / `perl -i` / `perl -pe` - USE `ast-grep -U` or `awk` INSTEAD
+
+**Enforcement mechanism:** Any command matching these patterns MUST be rejected and rewritten using approved tools. No exceptions.
 
 **Workflow:** Preview → Validate → Apply (no blind edits)
 
@@ -200,6 +231,10 @@ Always retrieve framework/library docs using: ref-tools, context7, webfetch. Use
 **Preview requirement:** Always preview before applying—NO EXCEPTIONS. Use -C flag or equivalent.
 **Safety protocol:** Validate patterns on test data first. Use preview mode or single file verify.
 
+**SMART-SELECT:** Use AG for code search, AST patterns, structural refactoring, bulk ops, language-aware transforms (90% error reduction, 10x accurate). Use native-patch for simple file edits, straightforward replacements, multi-file coordinated changes, non-code files, atomic multi-file ops.
+
+**Pre-edit requirements:** Read target file; understand structure; preview first; small test patterns when possible; explicit preview->apply workflow
+
 ### 1) ast-grep (AG) [HIGHLY PREFERRED]
 AST-based search/transform. 90% error reduction, 10x accurate. Language-aware (JS/TS/Py/Rust/Go/Java/C++).
 
@@ -225,8 +260,8 @@ Modern ls replacement. Color-coded file types/permissions, git integration, tree
 Modern find replacement. Intuitive syntax, respects .gitignore, fast parallel traversal. **NEVER use find—always fd.**
 
 ### Quick Reference
-**Code search:** `ast-grep -p 'function $NAME($ARGS) { $$$ }' -C 3` | Fallback: `rg 'TODO' -A 5`
-**Code editing:** `ast-grep -p 'old($ARGS)' -r 'new($ARGS)' -C 2` (preview) then `-U` (apply)
+**Code search:** `ast-grep -p 'function $NAME($ARGS) { $$$ }' -l js -C 3` (HIGHLY PREFERRED) | Fallback: `rg 'TODO' -A 5`
+**Code editing:** `ast-grep -p 'old($ARGS)' -r 'new($ARGS)' -l js -C 2` (preview) then `-U` (apply) | Also first-tier: native-patch
 **File discovery:** `fd -e py`
 **Directory listing:** `lsd --tree --depth 3`
 </code_tools>
@@ -251,6 +286,43 @@ Modern find replacement. Intuitive syntax, respects .gitignore, fast parallel tr
 **Resilience Tactics:** Dry-run first, Checkpoint frequently, Maintain rollback plan, Test on subset, Verify incrementally
 **Context Preservation:** Track Working Set, Dependencies, State, Assumptions, Recovery Points
 </verification_refinement>
+
+## Good Coding Paradigms
+
+<good_coding_paradigms>
+**Good Coding Paradigms:**
+
+**Verification & Correctness:**
+- **Formal Verification:** Prefer formal verification design before implementation. Tools: Idris2, (Flux - Rust), Quint(The modern alternative for TLA+/Alloy), Lean4. Prove invariants, model-check state machines, verify concurrent protocols. Start with lightweight specs, escalate for critical paths.
+- **Contract-first Development (Design by Contract):** Define preconditions, postconditions, and invariants explicitly. Use runtime assertions in dev, compile-time checks where possible. Document contracts in types/signatures. Enforce at module boundaries.
+- **Property-Based Testing (Optional):** Complement unit tests with generative testing (QuickCheck, Hypothesis, fast-check, jqwik). Test invariants across input space, not just examples. Shrink failing cases automatically.
+
+**Design & Architecture:**
+- **Design-first:** You MUST generate hard designs before any acts with UML-variant diagrams (*tomtoml* preferred). [MANDATORY] Include: component diagrams, sequence diagrams, state machines, data flow diagrams, dependency graphs.
+- **Type-driven Development:** Design types BEFORE implementation. Types encode domain constraints, make illegal states unrepresentable. Leverage: phantom types, branded types, refinement types, GADTs, dependent types where available.
+- **Data-Oriented Design:** Organize data for cache efficiency. Struct-of-arrays over array-of-structs for hot paths. Minimize pointer chasing. Profile memory access patterns.
+- **Domain-Driven Design (Avoid overkills):** Ubiquitous language, bounded contexts, aggregates with clear consistency boundaries. Separate domain logic from infrastructure. Anti-corruption layers at boundaries.
+
+**Data & State Management:**
+- **Immutable-first Data:** Default to immutable data structures. Mutations explicit and localized. Benefits: thread-safety, predictability, easier debugging, time-travel debugging. Use persistent data structures for efficient updates.
+- **Single Source of Truth:** One canonical location for each piece of state. Derive, don't duplicate. Normalize data, denormalize only for measured performance needs. Version state changes.
+- **Event Sourcing (where appropriate):** Store state changes as immutable events. Enables audit trails, temporal queries, replay, and debugging. Combine with CQRS for read/write optimization.
+
+**Performance & Efficiency:**
+- **Zero-allocation/Zero-copy:** Prefer zero-allocation hot paths. Use arena allocators, object pools, stack allocation. Zero-copy parsing/serialization (flatbuffers, cap'n proto, zerocopy, rkyv). Measure with profilers before and after.
+- **Lazy Evaluation:** Defer computation until needed. Use iterators/generators over materialized collections. Stream processing over batch where applicable. Beware of hidden allocations in lazy chains.
+- **Cache-Conscious Design:** Align data to cache lines. Minimize false sharing in concurrent code. Prefetch predictable access patterns. Measure cache misses with perf/VTune.
+
+**Error Handling & Robustness:**
+- **Exhaustive Pattern Matching:** Handle ALL cases explicitly. Compiler-enforced exhaustiveness. No default catch-alls that hide bugs. Treat warnings as errors. Review when adding enum variants.
+- **Fail-Fast with Rich Errors:** Detect errors early, fail immediately with context. Typed error domains (Result/Either), error chains, structured error metadata. Never swallow errors silently. Include recovery hints.
+- **Defensive Programming:** Validate inputs at boundaries. Assert invariants in debug builds. Graceful degradation where appropriate. Timeouts on all external calls.
+
+**Code Quality:**
+- **Separation of Concerns:** Single responsibility. Pure functions for logic, effects at edges. Dependency injection for testability. Hexagonal/ports-and-adapters architecture.
+- **Principle of Least Surprise:** Code should behave as readers expect. Explicit over implicit. Clear naming, consistent conventions. Document non-obvious decisions.
+- **Composition over Inheritance:** Prefer small, composable units. Traits/interfaces for polymorphism. Avoid deep inheritance hierarchies. Favor delegation.
+</good_coding_paradigms>
 
 ## UI/UX Design Guidelines
 
@@ -320,7 +392,17 @@ Don't hold back. Give it your all.
 
 **Documentation policy:** No docs unless requested. Don't proactively create README or docs unless user explicitly asks.
 
-**Critical reminders:** Do exactly what's asked (no more, no less) | Avoid unnecessary files | SELECT APPROPRIATE TOOL: AG (highly preferred code), native-patch (edits), FD/RG (search) | sed reading/analysis only, NEVER edits (MANDATORY: never sed -i) | ast-grep over text-based grep/rg for code patterns
+**Critical reminders:** Do exactly what's asked (no more, no less) | Avoid unnecessary files | SELECT APPROPRIATE TOOL: AG (highly preferred code), native-patch (edits), FD/RG (search)
+
+**MANDATORY TOOL PROHIBITIONS (ZERO TOLERANCE):**
+- NEVER `grep -r` or `grep -R` - use `rg` instead
+- NEVER `sed -i` or `sed --in-place` - use `ast-grep -U` or Edit tool
+- NEVER `find` - use `fd` instead
+- NEVER `ls` - use `lsd` instead
+- NEVER `cat` for reading - use Read tool instead
+- NEVER text-based search for code patterns - use `ast-grep` instead
+
+**Violation consequences:** Commands using banned tools will be REJECTED. Rewrite using approved alternatives.
 
 **Cleanup:** ALWAYS delete temporary files/docs if no longer needed. Leave workspace clean.
 
@@ -356,7 +438,7 @@ Hard requirement. Diagrams foundational to correct implementation.
 <decision_heuristics>
 **Research vs. Act:** Research: unfamiliar code, unclear dependencies, high risk, confidence <0.5, multiple solutions | Act: familiar patterns, clear impact, low risk, confidence >0.7, single solution
 
-**Tool Selection:** ast-grep (code structure, refactoring, bulk transforms) | ripgrep (text/comments/strings, non-code) | awk (column extraction, line ranges) | perl (complex regex, multi-line, in-place edits) | Combined (multi-stage)
+**Tool Selection:** ast-grep (code structure, refactoring, bulk transforms) | ripgrep (text/comments/strings, non-code) | awk (column extraction, line ranges, text regex) | Combined (multi-stage via fd/rg/xargs pipelines)
 
 **Break Down vs. Direct:** Break: >5 steps, dependencies exist, risk >20, complexity >6, confidence <0.6 | Direct: atomic task, no dependencies, risk <10, complexity <3, confidence >0.8
 
@@ -368,3 +450,9 @@ Hard requirement. Diagrams foundational to correct implementation.
 
 **Core Principles:** Confidence-driven, Evidence-based, Risk-aware, Progressive, Adaptive, Systematic, Context-aware, Resilient, Thorough, Pragmatic
 </decision_heuristics>
+
+## Critical Implementation Guidelines
+
+**Core Principles:** Execute with surgical precision—no more, no less | Minimize file creation; delete temp files immediately | Prefer modifying existing files | MANDATORY: thoroughly analyze before editing | REQUIRED: use ast-grep (highly preferred) or native-patch for ALL code ops | DIVIDE AND CONQUER: split into smaller tasks; allocate to multiple agents when independent | ENFORCEMENT: utilize parallel agents aggressively but responsibly | THOROUGHNESS: be exhaustive in analysis/implementation
+
+**Visual Design Requirements [ULTRA CRITICAL]:** DIAGRAMS NON-NEGOTIABLE | Required for: Concurrency, Memory, Architecture, Performance | NO IMPLEMENTATION WITHOUT DIAGRAMS—ZERO EXCEPTIONS | IMPLEMENTATIONS WITHOUT DIAGRAMS REJECTED
