@@ -142,9 +142,9 @@ Default to research over action. Do not jump into implementation unless clearly 
 ## PRIMARY DIRECTIVES
 
 <must>
-**Tool Selection:** 1) ast-grep (AG) [HIGHLY PREFERRED]: AST-based, 90% error reduction, 10x accurate. 2) native-patch: File edits, multi-file changes. 3) rg: Text/comments/strings. 4) fd: File discovery. 5) lsd: Directory listing.
+**Tool Selection:** 1) ast-grep (AG) [HIGHLY PREFERRED]: AST-based, 90% error reduction, 10x accurate. 2) native-patch: File edits, multi-file changes. 3) rg: Text/comments/strings. 4) fd: File discovery. 5) lsd: Directory listing. 6) tokei: Code metrics/scope.
 
-**Selection guide:** Code pattern → ast-grep | Simple line edit → AG/native-patch | Multi-file atomic → native-patch | Non-code → native-patch | Text/comments → rg
+**Selection guide:** Code pattern → ast-grep | Simple line edit → AG/native-patch | Multi-file atomic → native-patch | Non-code → native-patch | Text/comments → rg | Scope analysis → tokei
 
 **Thinking tools:** sequential-thinking [ALWAYS USE] for decomposition/dependencies; actor-critic-thinking for alternatives; shannon-thinking for uncertainty/risk
 
@@ -259,11 +259,23 @@ Modern ls replacement. Color-coded file types/permissions, git integration, tree
 ### 4) fd (FD) [MANDATORY]
 Modern find replacement. Intuitive syntax, respects .gitignore, fast parallel traversal. **NEVER use find—always fd.**
 
+### 5) tokei [CODE METRICS]
+Code statistics tool. Lines of code, blanks, comments by language. Fast, accurate, git-aware. Use for scope analysis before refactoring or estimating complexity.
+
+```bash
+tokei                               # Project overview
+tokei src/                          # Specific directory
+tokei --type=Rust,TypeScript        # Filter languages
+tokei --output json | jq '.Total.code'  # JSON for scripting
+tokei --exclude="*.test.ts"         # Exclude patterns
+```
+
 ### Quick Reference
 **Code search:** `ast-grep -p 'function $NAME($ARGS) { $$$ }' -l js -C 3` (HIGHLY PREFERRED) | Fallback: `rg 'TODO' -A 5`
 **Code editing:** `ast-grep -p 'old($ARGS)' -r 'new($ARGS)' -l js -C 2` (preview) then `-U` (apply) | Also first-tier: native-patch
 **File discovery:** `fd -e py`
 **Directory listing:** `lsd --tree --depth 3`
+**Code metrics:** `tokei src/` | JSON: `tokei --output json | jq '.Total.code'`
 </code_tools>
 
 ## Verification & Refinement
@@ -293,7 +305,7 @@ Modern find replacement. Intuitive syntax, respects .gitignore, fast parallel tr
 **Good Coding Paradigms:**
 
 **Verification & Correctness:**
-- **Formal Verification:** Prefer formal verification design before implementation. Tools: Idris2, (Flux - Rust), Quint(The modern alternative for TLA+/Alloy), Lean4. Prove invariants, model-check state machines, verify concurrent protocols. Start with lightweight specs, escalate for critical paths.
+- **Formal Verification:** Prefer formal verification design before implementation. Tools: Idris2/(Flux - Rust), Quint(The modern alternative for TLA+/Alloy), Lean4. Prove invariants, model-check state machines, verify concurrent protocols. Start with lightweight specs, escalate for critical paths.
 - **Contract-first Development (Design by Contract):** Define preconditions, postconditions, and invariants explicitly. Use runtime assertions in dev, compile-time checks where possible. Document contracts in types/signatures. Enforce at module boundaries.
 - **Property-Based Testing (Optional):** Complement unit tests with generative testing (QuickCheck, Hypothesis, fast-check, jqwik). Test invariants across input space, not just examples. Shrink failing cases automatically.
 
@@ -438,7 +450,14 @@ Hard requirement. Diagrams foundational to correct implementation.
 <decision_heuristics>
 **Research vs. Act:** Research: unfamiliar code, unclear dependencies, high risk, confidence <0.5, multiple solutions | Act: familiar patterns, clear impact, low risk, confidence >0.7, single solution
 
-**Tool Selection:** ast-grep (code structure, refactoring, bulk transforms) | ripgrep (text/comments/strings, non-code) | awk (column extraction, line ranges, text regex) | Combined (multi-stage via fd/rg/xargs pipelines)
+**Tool Selection:** ast-grep (code structure, refactoring, bulk transforms) | ripgrep (text/comments/strings, non-code) | awk (column extraction, line ranges, text regex) | tokei (scope assessment) | Combined (multi-stage via fd/rg/xargs pipelines)
+
+**Scope Assessment (tokei-driven):** Run `tokei <target> --output json | jq '.Total.code'` before editing to select strategy:
+- **Micro** (<500 LOC): Direct edit, single-file focus, minimal verification
+- **Small** (500-2K LOC): Progressive refinement, 2-3 file scope, standard verification
+- **Medium** (2K-10K LOC): Multi-agent parallel, dependency mapping required, staged rollout
+- **Large** (10K-50K LOC): Research-first, architecture review, incremental with checkpoints
+- **Massive** (>50K LOC): Decompose to subsystems, formal planning, multi-phase execution
 
 **Break Down vs. Direct:** Break: >5 steps, dependencies exist, risk >20, complexity >6, confidence <0.6 | Direct: atomic task, no dependencies, risk <10, complexity <3, confidence >0.8
 
