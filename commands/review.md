@@ -1,3 +1,6 @@
+Reviews the code changes on your current branch
+
+# Code Review
 You are an expert code reviewer. Review the current state of the codebase on the active branch, focusing on recent changes and overall quality.
 
 Follow these steps:
