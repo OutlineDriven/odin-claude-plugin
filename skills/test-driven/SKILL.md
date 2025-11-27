@@ -1,13 +1,20 @@
 ---
 name: test-driven-development
-description: eXtreme Programming: Test-Driven Development (XP-style TDD) Skill
+description: eXtreme Programming Test-Driven Development (XP-style TDD) Skill. This skill provides both reference documentation AND execution capabilities for the full PLAN -> RED -> GREEN -> REFACTOR workflow.
 ---
 
 # eXtreme Programming: Test-Driven Development (XP-style TDD) Skill
 
-## Description
+## Capability
 
 This skill enables test-driven development (TDD) using the Red-Green-Refactor cycle. It supports comprehensive language coverage (Rust, Python, TypeScript, Go, Java, C#, C++) with language-specific test runners, conventions, and best practices.
+
+- **Test Design**: Plan test architecture before implementation
+- **Red-Green-Refactor**: Execute the complete TDD cycle
+- **Multi-language Support**: 7+ languages with appropriate frameworks
+- **Property-based Testing**: Enhance with generative testing
+
+---
 
 ## When to Use
 
@@ -18,165 +25,147 @@ This skill enables test-driven development (TDD) using the Red-Green-Refactor cy
 - Documenting behavior through tests
 - Practicing extreme programming (XP)
 
-## Capabilities
+---
 
-1. **Language Detection**
-   - Auto-detect project language
-   - Identify test framework
-   - Validate test runner availability
-
-2. **Red-Green-Refactor Guidance**
-   - RED: Guide writing failing tests
-   - GREEN: Implement minimal code to pass
-   - REFACTOR: Clean up while maintaining green tests
-
-3. **Test Execution**
-   - Run language-appropriate test commands
-   - Parse test output for failures
-   - Provide feedback on test quality
-
-4. **Best Practices Enforcement**
-   - AAA pattern (Arrange-Act-Assert)
-   - One assertion per test
-   - Test independence
-   - Fast test execution
-
-## Workflow
+## Workflow Overview
 
 ```nomnoml
-[<start>Start] -> [Detect Language]
-[Detect Language] -> [Validate Test Runner]
-[Validate Test Runner] -> [Runner Available?]
-[Runner Available?] no -> [Install Framework]
-[Runner Available?] yes -> [RED: Write Test]
-[Install Framework] -> [RED: Write Test]
-[RED: Write Test] -> [Test Compiles?]
-[Test Compiles?] no -> [Fix Syntax]
-[Fix Syntax] -> [Test Compiles?]
-[Test Compiles?] yes -> [Run Test]
-[Run Test] -> [Fails Meaningfully?]
-[Fails Meaningfully?] no -> [Refine Test]
-[Refine Test] -> [Run Test]
-[Fails Meaningfully?] yes -> [GREEN: Implement]
-[GREEN: Implement] -> [Run Test]
-[Run Test] -> [Test Passes?]
-[Test Passes?] no -> [Fix Implementation]
-[Fix Implementation] -> [Run Test]
-[Test Passes?] yes -> [REFACTOR: Clean]
-[REFACTOR: Clean] -> [Run All Tests]
-[Run All Tests] -> [All Pass?]
-[All Pass?] no -> [Fix Regression]
-[Fix Regression] -> [Run All Tests]
-[All Pass?] yes -> [More Features?]
-[More Features?] yes -> [RED: Write Test]
+[<start>Start] -> [Phase 1: PLAN]
+[Phase 1: PLAN|
+  Design test architecture
+  Identify edge cases
+  Map requirements to tests
+] -> [Phase 2: RED]
+[Phase 2: RED|
+  Write failing test
+  Verify test fails meaningfully
+] -> [Phase 3: GREEN]
+[Phase 3: GREEN|
+  Implement minimal code
+  Make test pass
+] -> [Phase 4: REFACTOR]
+[Phase 4: REFACTOR|
+  Clean up code
+  Maintain green tests
+] -> [More Features?]
+[More Features?] yes -> [Phase 2: RED]
 [More Features?] no -> [<end>Complete]
 ```
 
-## Exit Codes
+---
 
-| Code | Meaning | Remediation |
-|------|---------|-------------|
-| 0 | Success | Continue with next feature |
-| 11 | No test framework | Install appropriate test framework |
-| 12 | Test compilation failed | Fix syntax errors |
-| 13 | Test not failing meaningfully | Refine test expectations |
-| 14 | Implementation fails tests | Fix implementation logic |
-| 15 | Refactoring broke tests | Revert changes, refactor carefully |
+## Phase 1: PLAN (Test Design)
 
-## Language Support Matrix
+### Process
 
-| Language | Test Framework | Command | Watch Mode |
-|----------|---------------|---------|------------|
-| Rust | cargo test | `cargo test` | `cargo watch -x test` |
-| Python | pytest | `pytest` | `pytest-watch` |
-| TypeScript | vitest/jest | `vitest run` | `vitest --watch` |
-| Go | go test | `go test ./...` | `gotestsum --watch` |
-| Java | JUnit 5 | `mvn test` | IDE integration |
-| C# | xUnit | `dotnet test` | `dotnet watch test` |
-| C++ | GoogleTest | `ctest` | `fd *.cpp \| entr ctest` |
+1. **Understand Requirements**
+   - Parse user's task/requirement
+   - Identify testable behaviors and edge cases
+   - Use sequential-thinking to plan Red-Green-Refactor cycles
+   - Map requirements to test cases (error-first approach)
 
-## Commands
+2. **Artifact Detection (Conditional)**
+   - Check for existing test artifacts:
+     ```bash
+     fd -g '*test*' -g '*spec*' -e ts -e py -e rs -e java -e go $ARGUMENTS
+     test -f package.json && rg '"vitest"|"jest"|"mocha"' package.json
+     test -f Cargo.toml && rg 'proptest|quickcheck' Cargo.toml
+     ```
+   - If artifacts exist: analyze coverage gaps, plan extensions
+   - If no artifacts: proceed to design test suite
 
-### Basic (≤40 chars)
+3. **Design Test Architecture**
+   - Design unit tests for core logic
+   - Plan integration test boundaries
+   - Identify property-based test candidates
+   - Output: Test suite design with case signatures
 
-```bash
-# Rust
-cargo test
+4. **Prepare Run Phase**
+   - Define target: `.outline/tests/` or language-specific location
+   - Specify verification: test runner commands
+   - Create traceability: requirement -> test case -> assertion
 
-# Python
-pytest
+### Thinking Tool Integration
 
-# TypeScript
-vitest run
+```
+Use sequential-thinking for:
+- Planning Red-Green-Refactor cycles
+- Test case prioritization
+- Dependency ordering
 
-# Go
-go test ./...
+Use actor-critic-thinking for:
+- Evaluating test coverage
+- Challenging test effectiveness
+- Edge case identification
 
-# Java
-mvn test
-
-# C#
-dotnet test
-
-# C++
-ctest
+Use shannon-thinking for:
+- Coverage gap analysis
+- Flaky test risk assessment
+- Property-based test candidates
 ```
 
-### Intermediate (≤80 chars)
+### Test Design Template
 
-```bash
-# Rust
-cargo test test_name -- --show-output
+```
+// Target: .outline/tests/{module}_test.{ext}
 
-# Python
-pytest --cov=module --cov-report=term
+// ============================================
+// From requirement: {requirement text}
+// ============================================
 
-# TypeScript
-vitest --coverage --watch
+// Unit Test: {description}
+// Arrange: {setup description}
+// Act: {action description}
+// Assert: {expected outcome}
+test_case_1() {
+  // RED: This test should fail initially
+  // GREEN: Minimal implementation to pass
+  // REFACTOR: Improve without breaking
+}
 
-# Go
-go test -v -cover ./...
+// Property-Based Test: {invariant description}
+// For all valid inputs, {property} should hold
+property_test_1() {
+  // Generator: {input generation strategy}
+  // Property: {invariant to verify}
+}
 
-# Java
-mvn test -Dtest=TestClass#method
-
-# C#
-dotnet test --collect:"XPlat Code Coverage"
-
-# C++
-ctest --verbose --output-on-failure
+// Edge Case: {boundary condition}
+edge_case_1() {
+  // Boundary: {specific edge case}
+  // Expected: {behavior at boundary}
+}
 ```
 
-### Advanced (≤120 chars)
+---
+
+## Phase 2: RED (Write Failing Test)
+
+### Setup
 
 ```bash
-# Rust
-cargo watch -x 'tarpaulin --out Lcov --all-features'
-
-# Python
-pytest-watch -v -m "not slow" -n auto
-
-# TypeScript
-vitest --ui --typecheck --browser.enabled=true
-
-# Go
-gotestsum --watch -- -race -bench=. ./...
-
-# Java
-mvn verify pitest:mutationCoverage
-
-# C#
-dotnet watch test --logger "console;verbosity=detailed"
-
-# C++
-ctest --repeat until-fail:10 --parallel 4
+# Create .outline/tests directory structure
+mkdir -p .outline/tests/{unit,integration,property}
 ```
 
-## Example: Shopping Cart Feature
+### Run Tests (Expect Failure)
 
-### RED: Write Failing Test
+```bash
+# TypeScript/JavaScript
+npx vitest run || echo "RED: Tests failing as expected"
 
-#### Rust
+# Python
+pytest .outline/tests/ -v || echo "RED: Tests failing as expected"
+
+# Rust
+cargo test || echo "RED: Tests failing as expected"
+
+# Go
+go test ./... || echo "RED: Tests failing as expected"
+```
+
+### Example: Shopping Cart (Rust)
+
 ```rust
 #[cfg(test)]
 mod tests {
@@ -204,9 +193,13 @@ mod tests {
 }
 ```
 
-Run: `cargo test` → FAILS (ShoppingCart doesn't exist)
+Run: `cargo test` -> FAILS (ShoppingCart doesn't exist)
 
-### GREEN: Implement Minimum Code
+---
+
+## Phase 3: GREEN (Implement Minimum Code)
+
+### Implement Just Enough to Pass
 
 ```rust
 pub struct Item {
@@ -217,11 +210,7 @@ pub struct Item {
 
 impl Item {
     pub fn new(name: &str, price: i32) -> Self {
-        Self {
-            name: name.to_string(),
-            price,
-            quantity: 1,
-        }
+        Self { name: name.to_string(), price, quantity: 1 }
     }
 
     pub fn quantity(mut self, qty: i32) -> Self {
@@ -235,25 +224,37 @@ pub struct ShoppingCart {
 }
 
 impl ShoppingCart {
-    pub fn new() -> Self {
-        Self { items: Vec::new() }
-    }
+    pub fn new() -> Self { Self { items: Vec::new() } }
 
-    pub fn add_item(&mut self, item: Item) {
-        self.items.push(item);
-    }
+    pub fn add_item(&mut self, item: Item) { self.items.push(item); }
 
     pub fn total(&self) -> i32 {
-        self.items.iter()
-            .map(|item| item.price * item.quantity)
-            .sum()
+        self.items.iter().map(|item| item.price * item.quantity).sum()
     }
 }
 ```
 
-Run: `cargo test` → PASSES
+### Verify Tests Pass
 
-### REFACTOR: Clean Up
+```bash
+# TypeScript/JavaScript
+npx vitest run || exit 13
+
+# Python
+pytest .outline/tests/ -v || exit 13
+
+# Rust
+cargo test || exit 13
+
+# Go
+go test ./... || exit 13
+```
+
+---
+
+## Phase 4: REFACTOR (Clean Up)
+
+### Improve Code While Maintaining Green Tests
 
 ```rust
 #[derive(Debug, Clone)]
@@ -265,11 +266,7 @@ pub struct Item {
 
 impl Item {
     pub fn new(name: impl Into<String>, price: i32) -> Self {
-        Self {
-            name: name.into(),
-            price,
-            quantity: 1,
-        }
+        Self { name: name.into(), price, quantity: 1 }
     }
 
     pub fn with_quantity(mut self, qty: i32) -> Self {
@@ -277,36 +274,116 @@ impl Item {
         self
     }
 
-    pub fn subtotal(&self) -> i32 {
-        self.price * self.quantity
-    }
+    pub fn subtotal(&self) -> i32 { self.price * self.quantity }
 }
 
 #[derive(Debug, Default)]
-pub struct ShoppingCart {
-    items: Vec<Item>,
-}
+pub struct ShoppingCart { items: Vec<Item> }
 
 impl ShoppingCart {
-    pub fn new() -> Self {
-        Self::default()
-    }
-
-    pub fn add_item(&mut self, item: Item) {
-        self.items.push(item);
-    }
-
-    pub fn total(&self) -> i32 {
-        self.items.iter().map(Item::subtotal).sum()
-    }
-
-    pub fn item_count(&self) -> usize {
-        self.items.len()
-    }
+    pub fn new() -> Self { Self::default() }
+    pub fn add_item(&mut self, item: Item) { self.items.push(item); }
+    pub fn total(&self) -> i32 { self.items.iter().map(Item::subtotal).sum() }
+    pub fn item_count(&self) -> usize { self.items.len() }
 }
 ```
 
-Run: `cargo test` → PASSES (all tests still green)
+### Verify Tests Still Pass with Coverage
+
+```bash
+# TypeScript/JavaScript
+npx vitest run --coverage || exit 13
+
+# Python
+pytest --cov=$MODULE --cov-report=html || exit 14
+
+# Rust
+cargo tarpaulin --out Html || exit 14
+
+# Go
+go test -coverprofile=coverage.out ./... || exit 14
+```
+
+---
+
+## Exit Codes
+
+| Code | Meaning | Action |
+|------|---------|--------|
+| 0 | All tests pass, coverage met | Continue with next feature |
+| 11 | Framework missing | Install test framework |
+| 12 | No test files | Run plan phase, create tests |
+| 13 | Tests failed | Fix implementation or test |
+| 14 | Coverage low | Add more tests |
+| 15 | Refactoring broke tests | Revert changes, refactor carefully |
+
+---
+
+## Language Support Matrix
+
+| Language | Test Framework | Command | Watch Mode |
+|----------|---------------|---------|------------|
+| Rust | cargo test | `cargo test` | `cargo watch -x test` |
+| Python | pytest | `pytest` | `pytest-watch` |
+| TypeScript | vitest/jest | `vitest run` | `vitest --watch` |
+| Go | go test | `go test ./...` | `gotestsum --watch` |
+| Java | JUnit 5 | `mvn test` | IDE integration |
+| C# | xUnit | `dotnet test` | `dotnet watch test` |
+| C++ | GoogleTest | `ctest` | `fd *.cpp \| entr ctest` |
+
+## Test Framework Matrix
+
+| Language | Unit Test | Property Test | Mock |
+|----------|-----------|---------------|------|
+| Rust | cargo test | proptest | mockall |
+| Python | pytest | hypothesis | pytest-mock |
+| TypeScript | vitest | fast-check | vi.mock |
+| Go | go test | gopter | gomock |
+| Java | JUnit 5 | jqwik | Mockito |
+| C# | xUnit | FsCheck | Moq |
+| C++ | GoogleTest | rapidcheck | GMock |
+
+---
+
+## Commands Reference
+
+### Basic Commands
+
+```bash
+cargo test                    # Rust
+pytest                        # Python
+vitest run                    # TypeScript
+go test ./...                 # Go
+mvn test                      # Java
+dotnet test                   # C#
+ctest                         # C++
+```
+
+### Intermediate Commands
+
+```bash
+cargo test test_name -- --show-output
+pytest --cov=module --cov-report=term
+vitest --coverage --watch
+go test -v -cover ./...
+mvn test -Dtest=TestClass#method
+dotnet test --collect:"XPlat Code Coverage"
+ctest --verbose --output-on-failure
+```
+
+### Advanced Commands
+
+```bash
+cargo watch -x 'tarpaulin --out Lcov --all-features'
+pytest-watch -v -m "not slow" -n auto
+vitest --ui --typecheck --browser.enabled=true
+gotestsum --watch -- -race -bench=. ./...
+mvn verify pitest:mutationCoverage
+dotnet watch test --logger "console;verbosity=detailed"
+ctest --repeat until-fail:10 --parallel 4
+```
+
+---
 
 ## Best Practices
 
@@ -340,141 +417,57 @@ def test_discount_applies_to_total():
 
 ### 3. One Assertion Per Test
 
-**Bad:**
-```python
-def test_user_registration():
-    user = register_user("john@example.com", "pass123")
-    assert user.email == "john@example.com"
-    assert user.is_active == True
-    assert user.created_at is not None
-```
-
-**Good:**
-```python
-def test_user_registration_sets_email():
-    user = register_user("john@example.com", "pass123")
-    assert user.email == "john@example.com"
-
-def test_user_registration_activates_user():
-    user = register_user("john@example.com", "pass123")
-    assert user.is_active == True
-
-def test_user_registration_sets_timestamp():
-    user = register_user("john@example.com", "pass123")
-    assert user.created_at is not None
-```
-
 ### 4. Test Independence
 
-```go
-// Bad: Tests depend on order
-func TestCreateUser(t *testing.T) {
-    user := CreateUser("alice")
-    // ...
-}
-
-func TestUpdateUser(t *testing.T) {
-    // Assumes TestCreateUser ran first
-    UpdateUser("alice", "new_name")
-}
-
-// Good: Each test is independent
-func TestCreateUser(t *testing.T) {
-    user := CreateUser("alice")
-    // ...
-}
-
-func TestUpdateUser(t *testing.T) {
-    user := CreateUser("alice") // Own setup
-    UpdateUser("alice", "new_name")
-}
-```
-
 ### 5. Fast Tests
-
 - Avoid file I/O
 - Mock external dependencies
 - Use in-memory databases
 - Parallelize execution
 
-```rust
-// Enable parallel test execution
-#[test]
-fn test_feature_a() {
-    // Fast, independent test
-}
+---
 
-#[test]
-fn test_feature_b() {
-    // Fast, independent test
-}
+## Troubleshooting Guide
 
-// Run with: cargo test -- --test-threads=8
-```
+### Common Issues
 
-## Common Issues
+| Symptom | Cause | Resolution |
+|---------|-------|------------|
+| Exit 11 | Test framework missing | Install: `npm i -D vitest`, `pip install pytest`, `cargo add --dev proptest` |
+| Exit 12 | No test files | Run plan phase first |
+| Exit 13 | Tests failed | Debug specific test |
+| Exit 14 | Coverage too low | Add tests for uncovered paths |
+| Flaky test | Non-determinism | Fix time/random/network dependencies |
+| Slow tests | Too much I/O or sleep | Use mocks, reduce wait times |
+| Test passes alone, fails in suite | Shared state pollution | Isolate test fixtures |
 
-### Issue: Tests Pass Without Implementation
+### Flaky Test Detection
+
 ```bash
-# Make sure test actually exercises code
-# Check that assertions are meaningful
+# Run multiple times to detect flakiness
+for i in {1..10}; do npm test 2>&1 | tail -1; done
 ```
 
-### Issue: Slow Test Suite
+### Debugging Commands
+
 ```bash
-# Profile test execution
-# Mock expensive operations
-# Use parallel execution
+# Run single test
+pytest test_module.py::TestClass::test_method -v
+npx vitest run -t "specific test name"
+cargo test test_name -- --nocapture
+
+# Run with debugging output
+pytest -v --tb=long --capture=no
+npx vitest run --reporter=verbose
+cargo test -- --nocapture
+
+# Find slow tests
+pytest --durations=10
 ```
 
-### Issue: Flaky Tests
-```bash
-# Ensure test independence
-# Remove timing dependencies
-# Fix non-determinism
-```
-
-### Issue: Hard to Test Code
-```bash
-# Refactor for testability
-# Use dependency injection
-# Extract pure functions
-```
-
-## Integration Points
-
-### With Spec-First
-1. Write Quint specification
-2. Verify specification
-3. **Generate test cases from spec** ← Start TDD here
-4. Follow Red-Green-Refactor
-5. Ensure implementation satisfies spec
-
-### With CI/CD
-```yaml
-# Example GitHub Actions
-- name: Run Tests
-  run: |
-    cargo test --all-features
-    cargo tarpaulin --out Xml
-- name: Upload Coverage
-  uses: codecov/codecov-action@v3
-```
-
-### With Watch Mode
-```bash
-# Continuous testing for rapid feedback
-cargo watch -x test              # Rust
-pytest-watch                     # Python
-vitest --watch                   # TypeScript
-gotestsum --watch                # Go
-dotnet watch test                # C#
-fd *.cpp | entr -c ctest        # C++
-```
+---
 
 ## Property-Based Testing
-
-Enhance TDD with property-based tests:
 
 ### Rust (proptest)
 ```rust
@@ -514,24 +507,31 @@ it('quantity always gives positive subtotal', () => {
 });
 ```
 
+---
+
+## When NOT to Use Test-Driven Development
+
+| Scenario | Better Alternative |
+|----------|-------------------|
+| Proving mathematical invariants | Proof-driven (Lean 4) |
+| Ensuring type safety | Type-driven (Idris 2) |
+| Verifying state machine correctness | Validation-first (Quint) |
+| Exploratory prototyping | Spike first, then write tests |
+| UI visual testing | Screenshot/visual regression tools |
+| Already have formal specs | Generate tests from specs |
+
+---
+
+## Complementary Approaches
+
+- **TDD + Property-based**: Unit tests for examples, properties for invariants
+- **TDD + Contract**: Tests verify behavior, contracts enforce interfaces
+- **TDD + Proof-driven**: Tests explore, proofs guarantee critical properties
+
+---
+
 ## Resources
 
 - [Test-Driven Development by Example (Kent Beck)](https://www.amazon.com/Test-Driven-Development-Kent-Beck/dp/0321146530)
 - [Growing Object-Oriented Software, Guided by Tests](https://www.amazon.com/Growing-Object-Oriented-Software-Guided-Tests/dp/0321503627)
 - [Extreme Programming Explained](https://www.amazon.com/Extreme-Programming-Explained-Embrace-Change/dp/0321278658)
-
-## Invocation
-
-To use this skill in Claude Code:
-
-```
-Use the test-driven skill to implement a shopping cart feature
-```
-
-Or directly:
-
-```
-/test-driven shopping-cart rust
-```
-
-The agent will guide you through the complete Red-Green-Refactor cycle with language-specific best practices.

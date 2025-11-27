@@ -295,7 +295,7 @@ Semantic diff tool. Tree-sitter based. Use for post-transform verification. See 
 **Good Coding Paradigms:**
 
 **Verification & Correctness:**
-- **Formal Verification:** Prefer formal verification design before implementation. Tools: Idris2/(Flux - Rust) [Type-driven], Quint [Validation-first], Lean4[Proof-driven]. Prove invariants, model-check state machines, verify concurrent protocols. Start with lightweight specs, escalate for critical paths.
+- **Formal Verification:** Prefer formal verification design before implementation. Tools: Idris2/(Flux - Rust) [Type-driven], Quint [Validation-first], Lean4 [Proof-driven]. Prove invariants, model-check state machines, verify concurrent protocols. Start with lightweight specs, escalate for critical paths.
 - **Contract-first Development:** Define preconditions, postconditions, and invariants explicitly. Use runtime assertions in dev, compile-time checks where possible. Document contracts in types/signatures. Enforce at module boundaries. [Design-by-contracts]
 - **Property-Based Testing (Optional):** Complement unit tests with generative testing (QuickCheck, Hypothesis, fast-check, jqwik). Test invariants across input space, not just examples. Shrink failing cases automatically.
 

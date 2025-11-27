@@ -59,7 +59,7 @@ theorem transfer_conserves_total
 
 ---
 
-### spec-first/
+### validation-first/
 Specs as source-of-truth. Quint validates complex first-class specs.
 
 **Workflow:**
