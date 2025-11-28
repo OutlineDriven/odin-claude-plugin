@@ -11,14 +11,30 @@ Design all five validation layers FROM REQUIREMENTS simultaneously. Each layer c
 ## VERIFICATION STACK
 
 ```
-Layer | Tool      | Catches              | Designed From
-------|-----------|----------------------|---------------
-1     | Idris 2   | Structural errors    | Type constraints
-2     | Quint     | Design flaws         | State requirements
-3     | Lean 4    | Invariant violations | Correctness properties
-4     | deal/etc  | Runtime violations   | API contracts
-5     | pytest/etc| Behavioral bugs      | Acceptance criteria
+Layer | Tool             | Catches              | Designed From
+------|------------------|----------------------|---------------
+0     | Static Assertions| Compile-time errors  | Type/size constraints
+1     | Idris 2          | Structural errors    | Type constraints
+2     | Quint            | Design flaws         | State requirements
+3     | Lean 4           | Invariant violations | Correctness properties
+4     | deal/etc         | Runtime violations   | API contracts
+5     | pytest/etc       | Behavioral bugs      | Acceptance criteria
 ```
+
+## Layer 0: Static Verification (PREFER FIRST)
+
+**Hierarchy**: `Static Assertions > Test/Debug > Runtime Contracts`
+
+| Language | Tool | Command |
+|----------|------|---------|
+| C++ | `static_assert`, Concepts | `g++ -std=c++20` |
+| TypeScript | `satisfies`, `as const` | `tsc --strict` |
+| Python | `assert_type`, `Final` | `pyright --strict` |
+| Java | Checker Framework | `javac -processor nullness` |
+| Rust | `static_assertions` crate | `cargo check` |
+| Kotlin | contracts, sealed | `kotlinc -Werror` |
+
+**Principle**: Verify at compile-time before runtime. No runtime contracts for statically provable properties.
 
 ---
 

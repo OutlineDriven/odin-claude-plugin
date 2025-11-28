@@ -17,6 +17,7 @@ Tier | Tool        | Catches              | When to Use
 -----|-------------|----------------------|------------------
 0    | rustfmt     | Style violations     | Always
 0    | clippy      | Common mistakes      | Always
+0.5  | static_assertions | Type/size errors | Compile-time provable
 1    | Miri        | Undefined behavior   | Local debugging ONLY
 2    | Loom        | Race conditions      | Concurrent code
 3    | Flux        | Type refinement      | Numeric constraints
@@ -24,6 +25,35 @@ Tier | Tool        | Catches              | When to Use
 5    | Kani        | Logic errors         | Critical algorithms
 6    | Lean4/Quint | Design flaws         | Complex protocols
 ```
+
+## Static Assertions First (PREFER OVER CONTRACTS)
+
+**Hierarchy**: `Static Assertions > Debug/Test Contracts > Runtime Contracts`
+
+**Installation**: `static_assertions = "1.1"` in Cargo.toml
+
+**Usage**:
+```rust
+use static_assertions::{assert_eq_size, assert_impl_all, const_assert};
+assert_eq_size!(u64, usize);  // 64-bit platform
+assert_impl_all!(String: Send, Sync, Clone);
+const_assert!(MAX_BUFFER_SIZE > 0);
+
+// Const function validation
+const fn validate(size: usize) -> bool { size > 0 && size.is_power_of_two() }
+const _: () = assert!(validate(256));
+```
+
+**Decision**: Static assertions for compile-time provable properties. Debug/test contracts for development checks. Runtime contracts only for production-critical boundaries.
+
+| Property | Use |
+|----------|-----|
+| Size/alignment | `assert_eq_size!` |
+| Trait bounds | `assert_impl_all!` |
+| Const values | `const_assert!` |
+| Expensive O(n)+ | `test_ensures` |
+| Internal state | `debug_invariant` |
+| Public API | `requires`/`ensures` |
 
 ---
 

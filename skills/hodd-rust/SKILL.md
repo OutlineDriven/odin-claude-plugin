@@ -476,7 +476,198 @@ theorem binarySearch_correct (arr : Array Int) (target : Int)
 
 ## 4. Design by Contracts
 
-### The `contracts` Crate (MANDATORY)
+### Static Assertions First (PREFER OVER CONTRACTS)
+
+**Principle**: Use compile-time static assertions before runtime contracts. If a property can be verified at compile time, do NOT add a runtime contract for it.
+
+**Hierarchy**: `Static Assertions > Contracts > Runtime Checks`
+
+**Installation**:
+```toml
+# Cargo.toml
+[dependencies]
+static_assertions = "1.1"
+```
+
+**Usage**:
+```rust
+use static_assertions::{assert_eq_size, assert_impl_all, const_assert};
+
+// Size constraints - checked at compile time
+assert_eq_size!(u64, usize);  // Ensure 64-bit platform
+assert_eq_size!([u8; 16], u128);
+
+// Trait bounds - verified statically
+assert_impl_all!(String: Send, Sync, Clone);
+assert_impl_all!(Buffer: Send);
+
+// Const assertions - arbitrary boolean conditions
+const_assert!(std::mem::size_of::<usize>() >= 4);
+const_assert!(MAX_BUFFER_SIZE > 0);
+const_assert!(MAX_BUFFER_SIZE <= 1024 * 1024);  // 1MB limit
+
+// Type relationships
+use static_assertions::assert_type_eq_all;
+assert_type_eq_all!(u32, u32);  // Types must be identical
+```
+
+**Const Functions for Compile-Time Validation**:
+```rust
+const fn validate_config(size: usize, alignment: usize) -> bool {
+    size > 0 && size.is_power_of_two() && alignment > 0
+}
+
+const BUFFER_SIZE: usize = 256;
+const ALIGNMENT: usize = 8;
+
+// Fails compilation if validation fails
+const _: () = assert!(validate_config(BUFFER_SIZE, ALIGNMENT));
+```
+
+**Build-Time Assertions in Const Context**:
+```rust
+pub struct Config<const N: usize> {
+    data: [u8; N],
+}
+
+impl<const N: usize> Config<N> {
+    // Compile-time validation via const
+    const VALID: () = assert!(N > 0 && N <= 4096, "N must be 1..=4096");
+
+    pub const fn new() -> Self {
+        let _ = Self::VALID;  // Force validation
+        Self { data: [0; N] }
+    }
+}
+
+// Compile error: N=0 violates constraint
+// let bad: Config<0> = Config::new();
+```
+
+**When to Use Static vs Contracts** (Expanded Hierarchy):
+
+| Property | Static | test_* | debug_* | Always-on |
+|----------|--------|--------|---------|-----------|
+| Type size/alignment | `assert_eq_size!` | - | - | - |
+| Trait implementations | `assert_impl_all!` | - | - | - |
+| Const value bounds | `const_assert!` | - | - | - |
+| Generic const params | `const { assert!(...) }` | - | - | - |
+| Expensive O(n)+ verification | - | `test_ensures` | - | - |
+| Reference impl equivalence | - | `test_ensures` | - | - |
+| Internal state invariants | - | - | `debug_invariant` | - |
+| Development preconditions | - | - | `debug_requires` | - |
+| Public API input validation | - | - | - | `requires` |
+| Safety-critical postconditions | - | - | - | `ensures` |
+| Production state invariants | - | - | - | `invariant` |
+
+**Legend**: `-` = Do not use for this property
+
+**Commands**:
+```bash
+# Static assertions verified during compilation
+cargo check
+
+# Build fails if any static assertion fails
+cargo build 2>&1 | grep "assertion failed"
+```
+
+**Pass Criteria**:
+- [ ] All compile-time verifiable properties use static assertions
+- [ ] No contracts (debug/test/runtime) for properties provable at compile time
+- [ ] Const functions used for complex compile-time validation
+- [ ] Generic const parameters validated in const context
+- [ ] If static assertions suffice, NO additional contracts added
+
+**Fail Actions**:
+- Static assertion fails -> Fix the violated invariant or adjust constraints
+- Property not statically verifiable -> Fall through to debug/test contracts first, then runtime if necessary
+
+---
+
+### Debug and Test Contracts (PREFER OVER RUNTIME)
+
+**Principle**: Use the least-cost assertion level that catches the bug. Debug/test contracts are stripped in release builds, reducing production overhead.
+
+**Contract Modes** (from `contracts` crate):
+
+| Mode | Attributes | Internal Mechanism | When Active |
+|------|-----------|-------------------|-------------|
+| **Test** | `test_requires`, `test_ensures`, `test_invariant` | `if cfg!(test) { assert! }` | Test builds only |
+| **Debug** | `debug_requires`, `debug_ensures`, `debug_invariant` | `debug_assert!` | Debug builds only |
+| **Always** | `requires`, `ensures`, `invariant` | `assert!` | All builds |
+
+**When to Use Each Mode**:
+
+| Scenario | Use | Rationale |
+|----------|-----|-----------|
+| Expensive O(n)+ verification (e.g., `is_sorted`) | `test_*` | Too slow for debug builds |
+| Reference implementation equivalence | `test_*` | Only needed for correctness proofs |
+| Internal state invariants | `debug_*` | Development aid, not production need |
+| Development-time preconditions | `debug_*` | Catch bugs early, strip in release |
+| Public API input validation | Always-on | External users need protection |
+| Safety-critical postconditions | Always-on | Must verify in production |
+
+**Example - Progressive Contract Levels**:
+```rust
+use contracts::*;
+
+impl SortedVec {
+    // EXPENSIVE: Only verify sorting in tests (O(n) check)
+    #[test_ensures(self.is_sorted(), "must maintain sorted invariant")]
+    pub fn insert(&mut self, value: i32) {
+        let pos = self.data.binary_search(&value).unwrap_or_else(|p| p);
+        self.data.insert(pos, value);
+    }
+
+    // CHEAP: Check in debug builds (O(1) check)
+    #[debug_requires(!self.data.is_empty(), "cannot pop from empty")]
+    #[debug_ensures(self.data.len() == old(self.data.len()) - 1)]
+    pub fn pop(&mut self) -> Option<i32> {
+        self.data.pop()
+    }
+
+    // CRITICAL: Always check public API boundaries
+    #[requires(index < self.data.len(), "index out of bounds")]
+    pub fn get(&self, index: usize) -> i32 {
+        self.data[index]
+    }
+}
+```
+
+**Decision Flow**:
+```
+Can type system encode it? ──yes──> Use types (typestate, newtype)
+         │no
+         v
+Verifiable at compile-time? ──yes──> static_assertions / const_assert!
+         │no
+         v
+Expensive O(n)+ check? ──yes──> test_* (test builds only)
+         │no
+         v
+Internal development aid? ──yes──> debug_* (debug builds only)
+         │no
+         v
+Must enforce in production? ──yes──> Always-on contracts
+         │no
+         v
+Consider if check is needed at all
+```
+
+**Pass Criteria**:
+- [ ] Expensive O(n)+ checks use `test_*` variants
+- [ ] Internal invariants use `debug_*` variants
+- [ ] Always-on contracts only for properties that MUST be checked in production
+- [ ] No performance regression from contract overhead in release builds
+
+**Fail Actions**:
+- Test contract fails -> Fix algorithm or strengthen test coverage
+- Debug contract fails -> Fix internal logic, add regression test
+- Need expensive check in production -> Reconsider design or accept overhead
+
+---
+
+### The `contracts` Crate (Runtime Properties - Use Sparingly)
 
 **Installation**:
 ```toml

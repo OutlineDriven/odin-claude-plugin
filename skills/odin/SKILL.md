@@ -124,6 +124,87 @@ def test_withdraw_preserves_invariant(balance, amount):
 
 ---
 
+### static-verification/
+**Hierarchy**: `Static Assertions (compile-time) > Test/Debug Contracts > Runtime Contracts`
+
+**Principle**: Verify at compile-time before runtime. Use static assertions for properties provable at compile time.
+
+**Language Tools:**
+
+| Language | Static Assertion | Command |
+|----------|------------------|---------|
+| C++ | `static_assert`, `constexpr`, Concepts | `g++ -std=c++20 -c` |
+| TypeScript | `satisfies`, `as const`, `never` | `tsc --strict --noEmit` |
+| Python | `assert_type`, `Final`, `Literal` | `pyright --strict` |
+| Java | Checker Framework | `javac -processor nullness,index` |
+| Rust | `static_assertions` crate | `cargo check` |
+| Kotlin | contracts, sealed classes | `kotlinc -Werror` |
+
+**Examples:**
+
+**C++ (static_assert + constexpr)**:
+```cpp
+static_assert(sizeof(int) == 4, "int must be 4 bytes");
+constexpr bool validate_config(size_t size, size_t align) {
+    return size > 0 && (size & (size - 1)) == 0 && align > 0;
+}
+static_assert(validate_config(256, 8), "invalid config");
+```
+
+**TypeScript (satisfies + as const)**:
+```typescript
+const config = { port: 3000, host: "localhost" } satisfies ServerConfig;
+const DIRECTIONS = ["north", "south", "east", "west"] as const;
+function assertNever(x: never): never { throw new Error(`Unexpected: ${x}`); }
+```
+
+**Python (assert_type + Final + pyright)**:
+```python
+from typing import assert_type, Final, Literal, Never
+x: int = get_value()
+assert_type(x, int)  # pyright error if not int
+MAX_SIZE: Final = 1024  # Cannot reassign
+```
+
+**Java (Checker Framework)**:
+```java
+public @NonNull String process(@Nullable String input) {
+    if (input == null) return "";
+    return input.toUpperCase();
+}
+```
+
+**Rust (static_assertions crate)**:
+```rust
+use static_assertions::{assert_eq_size, assert_impl_all, const_assert};
+assert_eq_size!(u64, usize);
+assert_impl_all!(String: Send, Sync, Clone);
+const_assert!(MAX_BUFFER_SIZE > 0);
+```
+
+**Kotlin (contracts + sealed classes)**:
+```kotlin
+sealed class Result<out T>
+fun <T> handle(result: Result<T>) = when (result) {
+    is Success -> result.value
+    is Failure -> throw result.error
+    // No else - exhaustive
+}
+```
+
+**When to Use Static vs Runtime:**
+
+| Property | Static | Runtime |
+|----------|--------|---------|
+| Null/type constraints | Type checker | Never |
+| Size/alignment | `static_assert` / `assert_eq_size!` | Never |
+| Exhaustiveness | Pattern matching + `never` | Never |
+| External data | No | Required |
+
+**Use when:** Compile-time provable properties, type safety, exhaustiveness checks
+
+---
+
 ### design-by-contract/
 Runtime contracts (NOT Eiffel). Best-practice libraries per language.
 
