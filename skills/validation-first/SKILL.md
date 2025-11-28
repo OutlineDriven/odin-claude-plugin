@@ -11,6 +11,20 @@ This skill enables formal specification-driven development using Quint (formal s
 
 This skill handles both the DESIGN phase (planning specifications) and the EXECUTION phase (creating and verifying artifacts).
 
+## Verification Hierarchy
+
+**Static Assertions (compile-time) > Test/Debug Contracts > Runtime Contracts**
+
+Before using Quint for state machine modeling, ensure compile-time verifiable properties are encoded in the type system:
+
+| Language | Tool | Command |
+|----------|------|---------|
+| Rust | `static_assertions` crate | `cargo check` |
+| TypeScript | `satisfies`, `as const` | `tsc --strict` |
+| Python | `assert_type`, `Final` | `pyright --strict` |
+
+Quint complements static verification by modeling state machines and temporal properties that cannot be expressed in types alone.
+
 ## When to Use
 
 - Building distributed systems or protocols

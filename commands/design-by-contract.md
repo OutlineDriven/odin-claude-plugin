@@ -10,6 +10,26 @@ Plan preconditions, postconditions, and invariants FROM REQUIREMENTS before any 
 
 ---
 
+## Verification Hierarchy
+
+**Principle**: Use compile-time verification before runtime contracts. If a property can be verified statically, do NOT add a runtime contract for it.
+
+```
+Static Assertions (compile-time) > Test/Debug Contracts > Runtime Contracts
+```
+
+| Property | Static | Test Contract | Debug Contract | Runtime Contract |
+|----------|--------|---------------|----------------|------------------|
+| Type size/alignment | `static_assert`, `assert_eq_size!` | - | - | - |
+| Null/type safety | Type checker (tsc/pyright) | - | - | - |
+| Exhaustiveness | Pattern matching + `never` | - | - | - |
+| Expensive O(n)+ checks | - | `test_ensures` | - | - |
+| Internal state invariants | - | - | `debug_invariant` | - |
+| Public API input validation | - | - | - | `requires` |
+| External/untrusted data | - | - | - | Required (Zod/deal) |
+
+---
+
 # PHASE 1: PLANNING - Design Contracts from Requirements
 
 CRITICAL: Design contracts BEFORE implementation.

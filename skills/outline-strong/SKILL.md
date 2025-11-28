@@ -73,9 +73,29 @@ Outline-Strong orchestrates multi-layer validation pipelines, coordinating proof
    - Plan validation order and dependencies
    - Configure gating between stages
 
+### Layer 0: Static Verification (PREFER FIRST)
+
+**Hierarchy**: `Static Assertions > Test/Debug > Runtime Contracts`
+
+| Language | Tool | Command |
+|----------|------|---------|
+| C++ | `static_assert`, Concepts | `g++ -std=c++20` |
+| TypeScript | `satisfies`, `as const` | `tsc --strict` |
+| Python | `assert_type`, `Final` | `pyright --strict` |
+| Java | Checker Framework | `javac -processor nullness` |
+| Rust | `static_assertions` crate | `cargo check` |
+| Kotlin | contracts, sealed | `kotlinc -Werror` |
+
+**Principle**: Verify at compile-time before runtime. No runtime contracts for statically provable properties.
+
 ### Validation Chain Template
 
 ```
+Layer 0: STATIC VERIFICATION (Compile-Time)
++-- Target: Source code type annotations
++-- Tool: Type checker + static_assert
++-- Gate: Must pass before Layer 1
+
 Layer 1: PROOF (Highest Assurance)
 +-- Target: .outline/proofs/
 +-- Tool: Lean 4 / Idris 2

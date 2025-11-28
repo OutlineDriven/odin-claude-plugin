@@ -61,6 +61,56 @@ Design-by-Contract is ideal for:
 
 ---
 
+## Verification Hierarchy
+
+**Principle**: Use compile-time verification before runtime contracts. If a property can be verified statically, do NOT add a runtime contract for it.
+
+```
+Static Assertions (compile-time) > Test/Debug Contracts > Runtime Contracts
+```
+
+### When to Use Each Level
+
+| Property | Static | Test Contract | Debug Contract | Runtime Contract |
+|----------|--------|---------------|----------------|------------------|
+| Type size/alignment | `static_assert` (C++), `assert_eq_size!` (Rust) | - | - | - |
+| Trait/interface bounds | `assert_impl_all!` (Rust), Concepts (C++) | - | - | - |
+| Const value bounds | `const_assert!`, `static_assert` | - | - | - |
+| Null/type safety | Type checker (tsc/pyright/kotlinc) | - | - | - |
+| Exhaustiveness | Pattern matching + `never`/`Never` | - | - | - |
+| Expensive O(n)+ checks | - | `test_ensures` | - | - |
+| Reference impl equivalence | - | `test_ensures` | - | - |
+| Internal state invariants | - | - | `debug_invariant` | - |
+| Development preconditions | - | - | `debug_requires` | - |
+| Public API input validation | - | - | - | `requires` |
+| Safety-critical postconditions | - | - | - | `ensures` |
+| External/untrusted data | - | - | - | Required (Zod/icontract) |
+
+**Legend**: `-` = Do not use for this property
+
+### Decision Flow
+
+```
+Can type system encode it? ──yes──> Use types (typestate, newtype)
+         │no
+         v
+Verifiable at compile-time? ──yes──> static_assertions / const_assert!
+         │no
+         v
+Expensive O(n)+ check? ──yes──> test_* (test builds only)
+         │no
+         v
+Internal development aid? ──yes──> debug_* (debug builds only)
+         │no
+         v
+Must enforce in production? ──yes──> Runtime contracts
+         │no
+         v
+Consider if check is needed at all
+```
+
+---
+
 ## Phase 1: PLAN (Contract Design)
 
 ### Process

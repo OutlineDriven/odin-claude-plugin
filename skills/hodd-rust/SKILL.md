@@ -1307,11 +1307,15 @@ rg '#\[flux::' -t rust                                      # Flux
 ## Anti-Patterns (AVOID)
 
 1. **Unsafe Without Kani** - All `unsafe` blocks need formal verification
-2. **Skipping Contracts** - Public APIs must have `#[requires]`/`#[ensures]`
+2. **Skipping Contracts** - Public APIs must have `#[requires]`/`#[ensures]` (for runtime properties only)
 3. **Miri in CI** - Miri is for development/debugging, not CI (too slow)
 4. **Ignoring Counterexamples** - Kani counterexamples reveal real bugs
 5. **Typestate Bypass** - Don't use `unsafe` to skip typestate checks
 6. **Runtime Checks for Static Properties** - If types can enforce it, don't runtime check
+7. **Contracts for Compile-Time Properties** - Use `static_assertions` / `const_assert!` instead of `#[requires]` for compile-time verifiable invariants
+8. **Always-On Contracts for Development Checks** - Use `debug_*` variants for internal invariants that don't need production enforcement
+9. **Always-On Expensive Checks** - Use `test_*` for O(n)+ verification (e.g., `is_sorted`, reference implementation equivalence)
+10. **Redundant Contracts** - If static assertions already verify a property, do NOT add debug/test/runtime contracts for the same property
 
 ---
 
