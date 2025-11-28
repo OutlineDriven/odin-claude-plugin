@@ -14,7 +14,7 @@
     {
       "name": "odin",
       "source": "./",
-      "version": "1.1.9",
+      "version": "1.2.0",
       "description": "ODIN core plugin with 57 specialized agents, diagram-first engineering, and atomic commit workflows",
       "author": {
         "name": "cognitive-glitch"
@@ -32,7 +32,7 @@
     }
   ],
   "metadata": {
-    "lastUpdated": "2025-11-25",
+    "lastUpdated": "2025-11-28",
     "maintainer": "cognitive-glitch",
     "website": "https://github.com/OutlineDriven/odin-claude-plugin",
     "support": "https://github.com/OutlineDriven/odin-claude-plugin/issues"
