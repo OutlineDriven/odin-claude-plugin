@@ -467,17 +467,18 @@ Calculate confidence: `Confidence = (familiarity + (1-complexity) + (1-risk) + (
 
 ---
 
-### Five Required Diagrams
+### Six Required Diagrams
 
 **Diagram-driven:** Always start with diagrams. No code without comprehensive visual analysis. Think systemically with precise notation, rigor, formal logic. Prefer **nomnoml**.
 
 1. **Concurrency**: Threads, synchronization, race analysis/prevention, deadlock avoidance, happens-before, lock ordering
 2. **Memory**: Stack/heap, ownership, access patterns, allocation/deallocation, lifetimes l(o)=<t_alloc,t_free>, safety guarantees
-3. **Object Lifetime**: Creation -> usage -> destruction, ownership transfer, state transitions, cleanup/finalization, exception safety
+3. **Data-flow**: Information sources, transformations, sinks, data pathways, state transitions, I/O boundaries
 4. **Architecture**: Components, interfaces/contracts, data flows, error propagation, security boundaries, invariants, dependencies
 5. **Optimization**: Bottlenecks, cache utilization, complexity targets (O/Theta/Omega), resource profiles, scalability, budgets (p95/p99 latency, allocs)
+6. **Readability**: Naming conventions, abstraction layers, module coupling/cohesion, directory organization, cognitive complexity (<15), cyclomatic complexity (<10), YAGNI compliance
 
-**Enforcement:** Architecture -> Data-flow -> Concurrency -> Memory -> Optimization -> Completeness -> Consistency. NO EXCEPTIONS—DIAGRAMS FOUNDATIONAL.
+**Enforcement:** Architecture -> Data-flow -> Concurrency -> Memory -> Optimization -> Readability -> Completeness -> Consistency. NO EXCEPTIONS—DIAGRAMS FOUNDATIONAL.
 
 **Absolute prohibition:** NO IMPLEMENTATION WITHOUT DIAGRAMS—ZERO EXCEPTIONS. IMPLEMENTATIONS WITHOUT DIAGRAMS REJECTED.
 
