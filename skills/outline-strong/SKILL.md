@@ -1,9 +1,9 @@
 ---
-name: outline-strong-development
+name: hardened-outline-driven-development
 description: Automated validation orchestration across proof, spec, type, contract, and test artifacts with configurable precedence and gating. This skill provides both reference documentation AND execution capabilities for the full PLAN -> CREATE -> EXECUTE -> REPORT workflow.
 ---
 
-# Outline-Strong Development Skill
+# Hardened Outline-Driven Development Skill
 
 ## Capability
 
