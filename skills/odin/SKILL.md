@@ -309,41 +309,192 @@ def test_withdraw_preserves_invariant(balance, amount):
 ## Agent Execution Guidelines
 
 ### Orchestration
-- Split tasks into subtasks, execute one by one
-- Batch related tasks; NEVER batch dependent operations
-- Launch independent tasks simultaneously in one message
 
-### Confidence-Driven Execution
-`C = (familiarity + (1-complexity) + (1-risk) + (1-scope)) / 4`
+**Split before acting:** Split the task into smaller subtasks and act on them one by one.
 
-| C | Action |
-|---|--------|
-| 0.8+ | Act -> Verify |
-| 0.5-0.8 | Act -> Verify -> Expand |
-| <0.5 | Research -> Plan -> Test |
+**Batching:** Batch related tasks together. *Do not simultaneously execute tasks that depend on each other*; Batch them into one task or run it after the current concurrent run.
 
-### Tool Selection
-1. **ast-grep**: AST-based code ops (PREFERRED)
-2. **native-patch**: File edits
-3. **rg**: Text search (BANNED: sed edits, find/ls, grep)
+**Multi-Agent Concurrency Protocol:** MANDATORY: Launch all independent tasks simultaneously in one message. Maximize parallelization—never execute sequentially what can run concurrently.
 
-### Five Required Diagrams
-Concurrency | Memory | Object Lifetime | Architecture | Optimization
-**NO IMPLEMENTATION WITHOUT DIAGRAMS**
+**Tool execution model:** Tool calls within batch execute sequentially; "Parallel" means submit together; Never use placeholders; Order matters: respect dependencies/data flow
 
-### Keep It Simple
-- Smallest viable change; reuse existing patterns
-- Edit existing files first; avoid new files unless required
-- YAGNI: Don't build for imagined future
+**Batch patterns:**
+- Independent ops (1 batch): `[read(F1), read(F2), ..., read(Fn)]`
+- Dependent ops (2+ batches): Batch 1 -> Batch 2 -> ... -> Batch K
 
-### Git Commits
-`<type>[scope]: <description>` - Atomic, type-classified, testable.
-NEVER mix types/scopes.
-
-### Quality Minimums
-- Accuracy >=95% | Efficiency O(n log n) baseline | Security OWASP Top 10
-- Cyclomatic <10 | Error rate <0.01
+**FORBIDDEN:** Guessing parameters requiring other results; Ignoring logical order; Batching dependent operations
 
 ---
 
-**CRITICAL**: All five verification layers must pass. Each catches different bug classes. The outline is the contract. Target <2% variance.
+### Confidence-Driven Execution
+
+Calculate confidence: `Confidence = (familiarity + (1-complexity) + (1-risk) + (1-scope)) / 4`
+
+| Confidence | Action |
+|------------|--------|
+| **High (0.8-1.0)** | Act -> Verify once. Locate with ast-grep/rg, transform directly, verify once. |
+| **Medium (0.5-0.8)** | Act -> Verify -> Expand -> Verify. Research usage, locate instances, preview changes, transform incrementally. |
+| **Low (0.3-0.5)** | Research -> Understand -> Plan -> Test -> Expand. Read files, map dependencies, design with thinking tools. |
+| **Very Low (<0.3)** | Decompose -> Research -> Propose -> Validate. Break into subtasks, propose plan, ask guidance. |
+
+**Calibration:** Success -> +0.1 (cap 1.0), Failure -> -0.2 (floor 0.0), Partial -> unchanged.
+
+**Heuristics:**
+- Research when: unfamiliar codebase, complex dependencies, high risk, uncertain approach
+- Act when: familiar patterns, clear impact, low risk, straightforward task
+- Break down when: >5 steps, dependencies exist
+- Do directly when: atomic task, low complexity/risk
+
+---
+
+### Tool Selection
+
+**Priority:** 1) ast-grep (AG) [HIGHLY PREFERRED]: AST-based, 90% error reduction, 10x accurate. 2) native-patch: File edits, multi-file changes. 3) rg: Text/comments/strings. 4) fd: File discovery. 5) lsd: Directory listing. 6) tokei: Code metrics/scope.
+
+**Selection guide:**
+| Target | Tool |
+|--------|------|
+| Code pattern | ast-grep |
+| Simple line edit | AG/native-patch |
+| Multi-file atomic | native-patch |
+| Non-code | native-patch |
+| Text/comments | rg |
+| Scope analysis | tokei |
+
+**Banned Tools (HARD ENFORCEMENT - VIOLATIONS REJECTED):**
+- `grep -r` / `grep -R` / `grep --recursive` - USE `rg` or `ast-grep` INSTEAD
+- `sed -i` / `sed --in-place` - USE `ast-grep -U` or Edit tool INSTEAD
+- `sed -e` for code transforms - USE `ast-grep` INSTEAD
+- `find` / `ls` - USE `fd` / `lsd` INSTEAD
+- `cat` for file reading - USE Read tool INSTEAD
+- Text-based grep for code patterns - USE `ast-grep` INSTEAD
+- `perl` / `perl -i` / `perl -pe` - USE `ast-grep -U` or `awk` INSTEAD
+
+**Enforcement mechanism:** Any command matching these patterns MUST be rejected and rewritten using approved tools. No exceptions.
+
+**Workflow:** Preview -> Validate -> Apply (no blind edits)
+
+---
+
+### Thinking Tools
+
+- **sequential-thinking** [ALWAYS USE]: Decompose problems, map dependencies, validate assumptions.
+- **actor-critic-thinking**: Challenge assumptions, evaluate alternatives, construct decision trees.
+- **shannon-thinking**: Uncertainty modeling, information gap analysis, risk assessment.
+
+**Expected outputs:** Architecture deltas (component relationships), interaction maps (communication patterns), data flow diagrams (information movement), state models (system states/transitions), performance analysis (bottlenecks/targets).
+
+---
+
+### Five Required Diagrams
+
+**Diagram-driven:** Always start with diagrams. No code without comprehensive visual analysis. Think systemically with precise notation, rigor, formal logic. Prefer **nomnoml**.
+
+1. **Concurrency**: Threads, synchronization, race analysis/prevention, deadlock avoidance, happens-before, lock ordering
+2. **Memory**: Stack/heap, ownership, access patterns, allocation/deallocation, lifetimes l(o)=<t_alloc,t_free>, safety guarantees
+3. **Object Lifetime**: Creation -> usage -> destruction, ownership transfer, state transitions, cleanup/finalization, exception safety
+4. **Architecture**: Components, interfaces/contracts, data flows, error propagation, security boundaries, invariants, dependencies
+5. **Optimization**: Bottlenecks, cache utilization, complexity targets (O/Theta/Omega), resource profiles, scalability, budgets (p95/p99 latency, allocs)
+
+**Enforcement:** Architecture -> Data-flow -> Concurrency -> Memory -> Optimization -> Completeness -> Consistency. NO EXCEPTIONS—DIAGRAMS FOUNDATIONAL.
+
+**Absolute prohibition:** NO IMPLEMENTATION WITHOUT DIAGRAMS—ZERO EXCEPTIONS. IMPLEMENTATIONS WITHOUT DIAGRAMS REJECTED.
+
+---
+
+### Surgical Editing Workflow
+
+**Find -> Copy -> Paste -> Verify:** Locate precisely, copy minimal context, transform, paste surgically, verify semantically.
+
+**Step 1: Find** – ast-grep (code structure), rg (text), fd (files), awk (line ranges)
+**Step 2: Copy** – Extract minimal context: `Read(file.ts, offset=100, limit=10)`, `ast-grep -p 'pattern' -C 3`, `rg "pattern" -A 2 -B 2`
+**Step 3: Paste** – Apply surgically: `ast-grep -p 'old($A)' -r 'new($A)' -U`, `Edit(file.ts, line=105)`, `awk '{gsub(/old/,"new")}1' file > tmp && mv tmp file`
+**Step 4: Verify** – Semantic diff review: `difft --display inline original modified` (advisory, warn if chunks > threshold)
+
+**Patterns:**
+- Multi-Location (store locations, copy/paste each)
+- Single Change Multiple Pastes (copy once, paste everywhere)
+- Parallel Ops (execute independent entries simultaneously)
+- Staged (sequential for dependencies)
+
+**Principles:** Precision > Speed | Preview > Hope | Surgical > Wholesale | Locate -> Copy -> Paste -> Verify | Minimal Context
+
+---
+
+### Code Tools Reference
+
+#### ast-grep (AG) [HIGHLY PREFERRED]
+AST-based search/transform. 90% error reduction, 10x accurate. Language-aware (JS/TS/Py/Rust/Go/Java/C++).
+
+**Use for:** Code patterns, control structures, language constructs, refactoring, bulk transforms, structural understanding.
+
+**Critical capabilities:** `-p 'pattern'` (search), `-r 'replacement'` (rewrite), `-U` (apply after preview), `-C N` (context), `--lang` (specify language)
+
+**Workflow:** Search -> Preview (-C) -> Apply (-U) [never skip preview]
+
+**Pattern Syntax:** Valid meta-vars: `$META`, `$META_VAR`, `$_`, `$_123` (uppercase) | Invalid: `$invalid` (lowercase), `$123` (starts with number), `$KEBAB-CASE` (dash) | Single node: `$VAR`, Multiple: `$$$ARGS`, Non-capturing: `$_VAR`
+
+**Best Practices:** Always `-C 3` before `-U` | Specify `-l language` | Debug: `ast-grep -p 'pattern' -l js --debug-query=cst`
+
+#### Other Tools
+- **native-patch**: Simple line changes, add/remove sections, multi-file coordinated edits, atomic changes, non-code files.
+- **lsd** [MANDATORY]: Modern ls replacement. Color-coded file types/permissions, git integration, tree view. **NEVER use ls—always lsd.**
+- **fd** [MANDATORY]: Modern find replacement. Intuitive syntax, respects .gitignore, fast parallel traversal. **NEVER use find—always fd.**
+- **tokei**: LOC/blanks/comments by language. Use for scope classification before editing. `tokei src/` | JSON: `tokei --output json | jq '.Total.code'`
+- **difft**: Semantic diff tool. Tree-sitter based. Use for post-transform verification. `difft --display inline original modified`
+
+---
+
+### Keep It Simple
+
+- Prefer the smallest viable change; reuse existing patterns before adding new ones.
+- Edit existing files first; avoid new files/config unless absolutely required.
+- Remove dead code and feature flags quickly to keep the surface minimal.
+- Choose straightforward flows; defer abstractions until repeated need is proven.
+- YAGNI: Don't add unused features/config options. Don't build for imagined future.
+
+---
+
+### Git Commit Strategy
+
+**Atomic Commit Protocol:** One logical change = One commit. Each type-classified, independently testable, reversible.
+
+**Commit Types:** feat (MINOR), fix (PATCH), build, chore, ci, docs, perf, refactor, style, test
+
+**Separation Rules (NON-NEGOTIABLE):** NEVER mix types/scopes | NEVER commit incomplete work | ALWAYS separate features/fixes/refactors | ALWAYS commit logical units independently
+
+**Format:** `<type>[optional scope]: <description>` + optional body/footers
+
+**Structure:** type (required), scope (optional, parentheses), description (required, lowercase after colon, imperative, max 72 chars, NO emojis), body (optional, explains "why"), footers (optional, git trailer format), BREAKING CHANGE (use ! or footer)
+
+**Examples:**
+- `feat(lang): add Polish language`
+- `fix(parser): correct array parsing issue`
+- `feat(api)!: send email when product shipped`
+- BAD: `feat: add profile, fix login, refactor auth` (mixed types—FORBIDDEN)
+
+**Enforcement:** Each commit must build successfully, pass all tests, represent complete logical unit.
+
+---
+
+### Quality Minimums
+
+**Minimum standards (measured, not estimated):**
+- **Accuracy:** >=95% formal validation; uncertainty quantified
+- **Algorithmic efficiency:** Baseline O(n log n); target O(1)/O(log n); never O(n^2) without written justification/measured bounds
+- **Security:** OWASP Top 10+SANS CWE; security review user-facing; secret handling enforced
+- **Reliability:** Error rate <0.01; graceful degradation; chaos/resilience tests critical services
+- **Maintainability:** Cyclomatic <10; Cognitive <15; clear docs public APIs
+- **Performance:** Define budgets per use case (p95 latency <3s, memory ceiling X MB, throughput Y rps); regressions fail gate
+
+**Quality gates (all mandatory):**
+- Functional accuracy >=95%
+- Code quality >=90%
+- Design excellence >=95%
+- Performance within budgets
+- Error recovery 100%
+- Security compliance 100%
+
+---
+
+**CRITICAL**: All five verification layers must pass. Each catches different bug classes. The outline IS the contract. Target <2% variance between generations.
