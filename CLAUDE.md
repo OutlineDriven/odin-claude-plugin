@@ -103,7 +103,7 @@ Default to research over action. Do not jump into implementation unless clearly 
 <quickstart_workflow>
 1. **Requirements**: Brief checklist (3-10 items), note constraints/unknowns
 2. **Context**: Gather only essential context, targeted searches
-3. **Design**: Sketch delta diagrams (architecture, data-flow, concurrency, memory, optimization, readability)
+3. **Design**: Sketch delta diagrams (architecture, data-flow, concurrency, memory, optimization, tidiness)
 4. **Contract**: Define inputs/outputs, invariants, error modes, 3-5 edge cases
 5. **Implementation**: Preview → Validate → Apply (prefer AG for code, native-patch for edits)
 6. **Quality gates**: Build → Lint/Typecheck → Tests → Smoke test
@@ -148,7 +148,7 @@ Default to research over action. Do not jump into implementation unless clearly 
 
 **Workflow:** Preview → Validate → Apply (no blind edits)
 
-**Delta diagrams (MANDATORY):** Architecture, data-flow, concurrency, memory, optimization, readability. Non-negotiable for non-trivial changes.
+**Delta diagrams (MANDATORY):** Architecture, data-flow, concurrency, memory, optimization, tidiness. Non-negotiable for non-trivial changes.
 
 **Domain Priming:** Context before design: problem class, constraints, I/O, metrics, unknowns. Identify standards/specs/APIs.
 
@@ -171,7 +171,7 @@ Default to research over action. Do not jump into implementation unless clearly 
 Write solutions working correctly for all valid inputs, not just test cases. Implement general algorithms rather than special-case logic. No hard-coding. Communicate if requirements infeasible or tests incorrect.
 </good_code_practices>
 
-**Diagram enforcement:** Implementations without diagrams REJECTED. Before coding: Architecture, Concurrency, Memory, Optimization, Data-flow, Readability deltas required.
+**Diagram enforcement:** Implementations without diagrams REJECTED. Before coding: Architecture, Concurrency, Memory, Optimization, Data-flow, Tidiness deltas required.
 
 **Pre-coding checklist:** Define scope (I/O, constraints, metrics, unknowns); Tool plan (AG preferred, preview changes); Diagram suite (all 6 deltas); Enumerate risks/edges, plan failure handling/rollback
 
@@ -189,11 +189,11 @@ Write solutions working correctly for all valid inputs, not just test cases. Imp
 3. **Data-flow**: Information sources, transformations, sinks, data pathways, state transitions, I/O boundaries
 4. **Architecture**: Components, interfaces/contracts, data flows, error propagation, security boundaries, invariants, dependencies
 5. **Optimization**: Bottlenecks, cache utilization, complexity targets (O/Θ/Ω), resource profiles, scalability, budgets (p95/p99 latency, allocs)
-6. **Readability**: Naming conventions, abstraction layers, module coupling/cohesion, directory organization, cognitive complexity (<15), cyclomatic complexity (<10), YAGNI compliance
+6. **Tidiness**: Naming conventions, abstraction layers, readability, module coupling/cohesion, directory organization, cognitive complexity (<15), cyclomatic complexity (<10), YAGNI compliance
 
 **Iterative protocol:** R = T(input) → V(R) ∈ {pass, warning, fail} → A(R); iterate until V(R) = pass
 
-**Enforcement:** Architecture → Data-flow → Concurrency → Memory → Optimization → Readability → Completeness → Consistency. NO EXCEPTIONS—DIAGRAMS FOUNDATIONAL.
+**Enforcement:** Architecture → Data-flow → Concurrency → Memory → Optimization → Tidiness → Completeness → Consistency. NO EXCEPTIONS—DIAGRAMS FOUNDATIONAL.
 </reasoning>
 
 <thinking_tools>
@@ -375,7 +375,7 @@ Don't hold back. Give it your all.
 **Minimum standards (measured, not estimated):**
 - **Accuracy:** ≥95% formal validation; uncertainty quantified
 - **Elegance:** Clean codebase design with proper architecture, data flow, concurrency, memory, and directory structure.
-- **Readability:** Self-explanatory names, clean structure, avoid unnecessary complexities.
+- **Tidiness:** Self-explanatory names, clean structure, avoid unnecessary complexities.
 - **Algorithmic efficiency:** Baseline O(n log n); target O(1)/O(log n); never O(n²) without written justification/measured bounds
 - **Performance:** Define budgets per use case (p95 latency <3s, memory ceiling X MB, throughput Y rps); regressions fail gate
 - **Security:** OWASP Top 10+SANS CWE; security review user-facing; secret handling enforced; SBOM produced
@@ -383,13 +383,13 @@ Don't hold back. Give it your all.
 - **UI/UX Excellence:** Modern, elegant, accessible, performant, and user-friendly design.
 - **Reliability:** Error rate <0.01; graceful degradation; chaos/resilience tests critical services
 - **Maintainability:** Cyclomatic <10; Cognitive <15; clear docs public APIs
-- **Quality gates (all mandatory):** Functional accuracy ≥95%, Code quality ≥90%, Design excellence ≥95%, Readability ≥90%, Elegance ≥90%, Maintainability ≥90%, Algorithmic efficiency ≥90%, Security ≥90%, Reliability ≥90%, Performance within budgets, Error recovery 100%, Security compliance 100%, UI/UX Excellence ≥95%
+- **Quality gates (all mandatory):** Functional accuracy ≥95%, Code quality ≥90%, Design excellence ≥95%, Tidiness ≥90%, Elegance ≥90%, Maintainability ≥90%, Algorithmic efficiency ≥90%, Security ≥90%, Reliability ≥90%, Performance within budgets, Error recovery 100%, Security compliance 100%, UI/UX Excellence ≥95%
 </at_least>
 
 ## Implementation Protocol
 
 <always>
-**Pre-implementation:** Full design checklist (delta coverage mandatory): Architecture (components/interfaces), Data Flow (sources/transforms/sinks), Concurrency (threads/sync/ordering), Memory (ownership/lifetimes/allocation), Optimization (bottlenecks/targets/budgets), Readability (minimalism/elegance/clarity)
+**Pre-implementation:** Full design checklist (delta coverage mandatory): Architecture (components/interfaces), Data Flow (sources/transforms/sinks), Concurrency (threads/sync/ordering), Memory (ownership/lifetimes/allocation), Optimization (bottlenecks/targets/budgets), Tidiness (minimalism/elegance/readability/clarity)
 
 **Documentation policy:** No docs unless requested. Don't proactively create README or docs unless user explicitly asks.
 
@@ -409,11 +409,11 @@ Don't hold back. Give it your all.
 
 **Git Commit:** MANDATORY atomic commits following Git Commit Strategy. Each type-classified, focused, testable, reversible. NO mixed-type/scope commits. ALWAYS Conventional Commits format.
 
-**Code quality checklist:** Correctness, Performance, Security, Maintainability, Readability
+**Code quality checklist:** Correctness, Performance, Security, Maintainability, Tidiness
 </always>
 
 <mandatory_design_process>
-**Six required stages before ANY code:** 1) ARCHITECT (full system design, component relationships, interfaces/contracts) | 2) FLOW (data pathways, state transitions, transformations) | 3) CONCURRENCY (thread interaction, synchronization, happens-before, deadlock freedom proof) | 4) MEMORY (object/resource lifecycle, ownership, lifetimes, memory safety proof) | 5) OPTIMIZE (performance strategy, bottlenecks, targets/budgets) | 6) READABILITY (minimalism, elegance, clarity, naming, structure simplicity)
+**Six required stages before ANY code:** 1) ARCHITECT (full system design, component relationships, interfaces/contracts) | 2) FLOW (data pathways, state transitions, transformations) | 3) CONCURRENCY (thread interaction, synchronization, happens-before, deadlock freedom proof) | 4) MEMORY (object/resource lifecycle, ownership, lifetimes, memory safety proof) | 5) OPTIMIZE (performance strategy, bottlenecks, targets/budgets) | 6) TIDINESS (minimalism, elegance, readability, clarity, naming, structure simplicity)
 
 **Process enforcement:** Complete in order. Each builds on previous. Skipping leads to design defects.
 </mandatory_design_process>
@@ -427,7 +427,7 @@ Don't hold back. Give it your all.
 <diagram_design_mandates>
 **Non-negotiable:** DIAGRAMS NON-NEGOTIABLE. No implementation without proper diagrams.
 
-**Required for:** Concurrency (thread interaction, sync), Memory (ownership, lifetimes, allocation), Data-flow (sources, transforms, sinks), Architecture (components, interfaces, contracts), Optimization (bottlenecks, targets, budgets), Readability (naming, coupling, complexity)
+**Required for:** Concurrency (thread interaction, sync), Memory (ownership, lifetimes, allocation), Data-flow (sources, transforms, sinks), Architecture (components, interfaces, contracts), Optimization (bottlenecks, targets, budgets), Tidiness (naming, coupling, readability, complexity)
 
 **Absolute prohibition:** NO IMPLEMENTATION WITHOUT DIAGRAMS—ZERO EXCEPTIONS
 
@@ -463,4 +463,4 @@ Hard requirement. Diagrams foundational to correct implementation.
 
 **Core Principles:** Execute with surgical precision—no more, no less | Minimize file creation; delete temp files immediately | Prefer modifying existing files | MANDATORY: thoroughly analyze before editing | REQUIRED: use ast-grep (highly preferred) or native-patch for ALL code ops | DIVIDE AND CONQUER: split into smaller tasks; allocate to multiple agents when independent | ENFORCEMENT: utilize parallel agents aggressively but responsibly | THOROUGHNESS: be exhaustive in analysis/implementation
 
-**Visual Design Requirements [ULTRA CRITICAL]:** DIAGRAMS NON-NEGOTIABLE | Required for: Concurrency, Memory, Data-flow, Architecture, Optimization, Readability | NO IMPLEMENTATION WITHOUT DIAGRAMS—ZERO EXCEPTIONS | IMPLEMENTATIONS WITHOUT DIAGRAMS REJECTED
+**Visual Design Requirements [ULTRA CRITICAL]:** DIAGRAMS NON-NEGOTIABLE | Required for: Concurrency, Memory, Data-flow, Architecture, Optimization, Tidiness | NO IMPLEMENTATION WITHOUT DIAGRAMS—ZERO EXCEPTIONS | IMPLEMENTATIONS WITHOUT DIAGRAMS REJECTED
