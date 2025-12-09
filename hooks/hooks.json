@@ -17,10 +17,6 @@
                 "hooks": [
                     {
                         "type": "command",
-                        "command": "echo 'Pointing directory (pwd):' && pwd && echo ''"
-                    },
-                    {
-                        "type": "command",
                         "command": "echo 'Current directory structure (lsd):' && lsd -l -g -G --group-directories-first && echo ''"
                     },
                     {
