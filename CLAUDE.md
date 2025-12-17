@@ -71,169 +71,42 @@ Default to research over action. Do not jump into implementation unless clearly 
 </temporal_files_organization>
 
 <jujutsu_vcs_strategy>
-**Jujutsu (jj) VCS Strategy:**
-**Core Philosophy:** "Everything is a Commit". The working copy is a commit (`@`). There is no staging area.
-**Mandate:** Use `jj` for ALL local version control operations.
-**Initialization:** `jj git init --colocate` (if jj is not initialized, use this command)
+**Jujutsu (jj) VCS Strategy [MANDATORY]**
+**Philosophy:** "The Working Copy is a Commit (`@`)." No staging area. Every state is saved.
+**Mandate:** Use `jj` for ALL VCS ops. `git` commands are **FORBIDDEN** except for final push if `jj git push` fails.
 
-**Git Interoperability (Colocated Mode):**
-In colocated mode, jj and Git share the same backend. Every jj change IS a Git commit. Auto-import/export occurs on every jj command.
-- **Bookmarks = Git Branches:** `jj bookmark` creates named pointers that map directly to Git branches
-- **Every significant change MUST have a bookmark** for Git branch visibility
-- **`jj describe` updates commit message** of existing Git commit (does NOT create new branch)
-- **`jj git export`** explicitly syncs jj state to Git refs (usually automatic in colocated mode)
+**Agentic Protocol (Non-Interactive Loop):**
+1.  **Init/Sync:** `jj git init --colocate` (if needed) | `jj git fetch`
+2.  **Start:** `jj new main -m "feat: description"` (Create new isolated revision)
+3.  **Edit:** Modify files (Auto-snapshotted into `@`)
+4.  **Verify:** `jj st` (Status) → `jj diff` (Review changes)
+5.  **Publish (Git Bridge):**
+    *   `jj bookmark create <branch_name> -r @` (Expose as Git branch)
+    *   `jj git push --bookmark <branch_name>` (Push to remote)
+6.  **Refine:** `jj squash` (Amend parent) | `jj rebase -d main` (Replay on top)
 
-**Role Separation (Agent Proposes, Human Confirms):**
-- **Agents (jj):** All VCS operations via jj. Create bookmarks for all work. Prepare merge-ready branches.
-- **Human (git):** Reviews and merges via standard git commands. No jj knowledge required.
-- **Bridge:** Bookmarks = Git branches. Colocated mode ensures instant visibility.
-
-**Agent Responsibilities:**
-- Create bookmark immediately when starting work: `jj bookmark create <feature-branch> -r @`
-- Rebase onto target before proposing: `jj rebase -d <target-branch>` (ensures clean merge)
-- Describe with clear conventional commit messages
-- Push bookmark to remote if collaboration needed: `jj git push --bookmark <name>`
-
-**Human Git Workflow:** `git branch -a` | `git log --all --graph` | `git diff main..<branch>` | `git merge <branch>` | `git branch -d <branch>`
-
-**Workflow:**
-1.  **Start:** `jj new <parent>` (default `@`) to start a new logical change.
-    *   *Multi-Agent/Parallel Tasks:* When executing multiple distinct subtasks or "agents", create a unique change for EACH task (`jj new <parent> -m "Agent: <Task>"`) to isolate contexts.
-2.  **Create Bookmark (Git Branch):** `jj bookmark create <branch-name> -r @` to create a Git-visible branch.
-    *   MANDATORY for any work intended to be pushed or shared via Git.
-    *   Bookmarks auto-move when commits are rewritten (rebase, amend, etc.).
-3.  **Edit:** Modify files. `jj` automatically snapshots the working copy.
-4.  **Verify:** `jj st` (status) and `jj diff` (review changes).
-5.  **Describe:** `jj describe -m "<type>[scope]: <description>"` to set the commit message (Conventional Commits).
-    *   This updates the Git commit message. The bookmark (branch) remains pointed at this change.
-6.  **Refine:**
-    *   `jj squash`: To fold working copy changes into the parent commit.
-    *   `jj split`: To break a change into multiple changes.
-7.  **Push:** `jj git push --bookmark <branch-name>` to push the specific bookmark (branch) to remote.
-    *   Alternative: `jj git push --change @` pushes current change, auto-creating remote bookmark.
-
-**Bookmark Management:**
-- `jj bookmark list` - List all bookmarks (local and remote)
-- `jj bookmark create <name> -r <rev>` - Create bookmark at revision
-- `jj bookmark move <name> --to <rev>` - Move bookmark to different revision
-- `jj bookmark delete <name>` - Delete local bookmark
-- `jj bookmark track <name>@<remote>` - Track remote bookmark locally
-
-**Recovery:**
-*   **Undo:** `jj undo` (instant undo of ANY operation).
-*   **Log:** `jj op log` (view operation history).
-*   **Evolution:** `jj evolog` (view history of a specific change ID).
-
-**Formatting:** `<type>[optional scope]: <description>` (e.g., `feat(ui): add button`).
-**Enforcement:**
-- Each change must be atomic, buildable, and testable
-- Each feature branch MUST have a corresponding bookmark (git visibility)
-- Agent prepares merge-ready state; human confirms via git merge
-- Agent MUST rebase onto target branch before marking work complete
+**Key Commands:**
+*   **Log:** `jj log -r 'main..@'` (View task history)
+*   **Undo:** `jj undo` (Instant revert) | `jj op log` (Operation history)
+*   **Abandon:** `jj abandon` (Delete current change)
+*   **Conflict:** `jj list` (See conflicts) → Edit files → `jj squash` (Resolve)
 </jujutsu_vcs_strategy>
 
 <claude_multiple_agents>
-You should always try AGGRESSIVELY to launch multiple tailored agents to effectively handle the complexity of the tasks at hand.
+**Multi-Agent Orchestration (Workspace Isolation)**
+**Rule:** Parallel agents MUST execute in isolated workspaces to prevent lock contention.
 
-**Workspace-Based Agent Isolation:** Each Claude agent executes in its own jj workspace for true parallel context isolation.
-
-**Pre-Launch Protocol:** [MANDATORY]
-1. **Analyze DAG:** `jj log -r 'all()' --limit 20` to understand current state
-2. **Identify Base:** Determine parent revision for agent work (typically `@` or `trunk()`)
-3. **Plan Scopes:** Map workspace directories and file scopes per agent
-
-**Workspace Creation:** [One workspace per agent]
-
-```
-
-jj workspace add /tmp/agent-<task-name> --revision <base>
-
-```
-- Creates isolated working directory at `/tmp/agent-<task-name>`
-- Workspace starts from `<base>` revision (default: `@`)
-- Each workspace has independent working copy
-
-**Agent Context Assignment:**
-
-```
-
-Agent[TaskA] → workspace: /tmp/agent-task-a → scope: src/module-a/**
-Agent[TaskB] → workspace: /tmp/agent-task-b → scope: src/module-b/**
-Agent[TaskC] → workspace: /tmp/agent-task-c → scope: tests/**
-
-```
-- Workspace path = agent's execution context
-- Scope = files agent may modify (enforced by agent, not jj)
-- Scopes MUST NOT overlap between concurrent agents
-
-**Launch Pattern:**
-
-```
-
-# Create workspaces (sequential - preparation phase)
-
-jj workspace add /tmp/agent-task-a -r @
-jj workspace add /tmp/agent-task-b -r @
-jj workspace add /tmp/agent-task-c -r @
-
-# Launch agents in parallel (single message, multiple tool calls)
-
-# Each agent receives: workspace path, scope, task description
-
-```
-
-**Within-Agent Operations:**
-
-```
-
-cd /tmp/agent-<task>                          # Enter workspace context
-jj bookmark create agent/<task> -r @          # Create Git branch for visibility [MANDATORY]
-
-# ... do work ...
-
-jj st                                          # Status (auto-snapshots working copy)
-jj diff                                        # Review changes
-jj describe -m "feat: ..."                     # Set commit message (updates Git commit)
-jj rebase -d <target-branch>                   # Rebase onto target branch (merge-ready for human)
-
-```
-
-**Cross-Workspace:** `jj log -r 'working_copies()'` | `jj log -r '<ws>@'` | `jj diff -r '<ws>@'`
-
-**Merge Strategy:** `jj rebase -s <change> -d main` | `jj new <a> <b> <c> -m "merge: results"` | `jj squash --from <change> --into <target>`
-
-**Cleanup:**
-
-```
-
-jj bookmark delete agent/<task>        # Delete agent's Git branch (after merge)
-jj workspace forget <workspace-name>   # Remove workspace from tracking
-rm -rf /tmp/agent-<task>               # Delete workspace directory
-
-```
-
-**Recovery:**
-- `jj undo` - Undo last operation
-- `jj op log` - View operation history
-- `jj op restore <op-id>` - Restore to prior state
-- `jj workspace update-stale` - Recover stale workspace
-
-**Context Engineering Principles:**
-- **Workspace = Isolation Boundary:** File changes in one workspace don't affect others
-- **Change IDs are Stable:** Reference changes by Change ID (survives rebases)
-- **Operation Log is Immutable:** Every action recorded for audit/recovery
-- **No Staging Area:** Changes auto-snapshot; no manual `add` required
-
-**Anti-Patterns:**
-- NEVER share workspace between agents
-- NEVER assign overlapping file scopes
-- NEVER modify main workspace while agents active
-- NEVER use git commands for workspace management (agents use jj only)
-- NEVER forget to clean up workspaces and bookmarks after completion
-- NEVER push changes without a bookmark (Git branch) - they won't be visible to Git users
-- NEVER expect human to use jj commands - they review/merge via git
-- ALWAYS create bookmarks so human sees work as git branches
-- ALWAYS rebase agent work onto target branch before completion (merge-ready state)
+**Launch Protocol:**
+1.  **Analyze:** Identify base revision (e.g., `main` or `trunk()`).
+2.  **Isolate:** Create ephemeral workspace for EACH agent.
+    *   `jj workspace add /tmp/agent-<id> --revision <base>`
+3.  **Execute:** Agents run inside `/tmp/agent-<id>`.
+    *   *Agent A:* `cd /tmp/agent-a && jj new -m "task A"`
+    *   *Agent B:* `cd /tmp/agent-b && jj new -m "task B"`
+4.  **Converge:**
+    *   Agents push unique bookmarks: `jj bookmark create agent-a` → `jj git push`
+    *   Human/Coordinator merges via GitHub/GitLab.
+5.  **Cleanup:** `jj workspace forget /tmp/agent-<id>` → `rm -rf /tmp/agent-<id>`
 </claude_multiple_agents>
 
 <quickstart_workflow>
@@ -383,11 +256,13 @@ Always retrieve framework/library docs using: ref-tools, context7, webfetch. Use
 - **Exclude:** `fd -E node_modules pattern`
 
 ### 5) jujutsu (jj) [VCS]
-**Usage:** Version control.
+**Usage:** Agent-based version control (Atomic & Interactive).
 - **Init:** `jj git init --colocate`
-- **Stack:** `jj new -m "A" && edit && jj new -m "B" && edit`
-- **Push:** `jj bookmark create feat -r @ && jj git push --bookmark feat`
-- **Squash:** `jj squash` (current into parent)
+- **Start:** `jj new main -m "Agent: Task"` (Isolated revision)
+- **Branch:** `jj bookmark create <name> -r @` (Git bridge)
+- **Check:** `jj st` (Status) | `jj diff` (Changes)
+- **Push:** `jj git push --bookmark <name>`
+- **Refine:** `jj squash` (Amend parent) | `jj rebase -d main` (Update)
 
 ### 6) tokei [Metrics]
 **Usage:** Scope analysis.
