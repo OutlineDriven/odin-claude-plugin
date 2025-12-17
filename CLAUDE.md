@@ -27,12 +27,22 @@ Think systemically using SHORT-form KEYWORDS for efficient internal reasoning. U
 
 **Multi-Agent Concurrency Protocol:** MANDATORY: Launch all independent tasks simultaneously in one message. Maximize parallelization—never execute sequentially what can run concurrently.
 
-**Tool execution model:** Tool calls within batch execute sequentially; "Parallel" means submit together; Never use placeholders; Order matters: respect dependencies/data flow
+**Context Isolation:** Before launching multiple agents or parallel subtasks, you MUST create a unique jj change for each task using `jj new <base> -m 'Agent: <TaskName>'`. This assigns a discrete, isolated context for that agent's work, preventing collisions.
+</orchestration>
 
-**Batch patterns:** Independent ops (one batch): `[read(F₁), read(F₂), ..., read(Fₙ)]` | Dependent ops (2+ batches): Batch 1 → Batch 2 → ... → Batch K
+<parallel_tool_execution>
+**Parallel Tool Execution Protocol:**
+
+MANDATORY: Launch all independent tasks simultaneously in a single message. Maximize parallelization—never execute sequentially what can run concurrently. Coordinate dependent tasks into sequential stages while maximizing concurrent execution within each stage.
+
+**Tool execution model:** Tool calls within batch execute sequentially; "Parallel" means submit together; Never use placeholders; Order matters: respect dependencies and data flow
+
+**Batch patterns:** Independent ops (1 batch): `[read(F₁), read(F₂), ..., read(Fₙ)]` | Dependent ops (2+ batches): Batch 1 → Batch 2 → ... → Batch K
+
+**Decision rules:** Single batch for pure discovery/pre-known params/independent validations; Multiple batches when later ops need earlier results/workflow stages/validation checkpoints
 
 **FORBIDDEN:** Guessing parameters requiring other results; Ignoring logical order; Batching dependent operations
-</orchestration>
+</parallel_tool_execution>
 
 <confidence_driven_execution>
 Calculate confidence: `Confidence = (familiarity + (1-complexity) + (1-risk) + (1-scope)) / 4`
@@ -72,23 +82,120 @@ Default to research over action. Do not jump into implementation unless clearly 
 **Rules:** NEVER create outline-related temporal files outside `.outline/` | Clean up after task completion | Use `/tmp` for scratch work not part of the outline workflow
 </temporal_files_organization>
 
-<git_commit_strategy>
-**Atomic Commit Protocol:** One logical change = One commit. Each type-classified, independently testable, reversible.
+<jujutsu_vcs_strategy>
+**Jujutsu (jj) VCS Strategy:**
+**Core Philosophy:** "Everything is a Commit". The working copy is a commit (`@`). There is no staging area.
+**Mandate:** Use `jj` for ALL local version control operations.
 
-**Commit Types:** feat (MINOR), fix (PATCH), build, chore, ci, docs, perf, refactor, style, test
+**Workflow:**
+1.  **Start:** `jj new <parent>` (default `@`) to start a new logical change.
+    *   *Multi-Agent/Parallel Tasks:* When executing multiple distinct subtasks or "agents", create a unique change for EACH task (`jj new <parent> -m "Agent: <Task>"`) to isolate contexts.
+2.  **Edit:** Modify files. `jj` automatically snapshots the working copy.
+3.  **Verify:** `jj st` (status) and `jj diff` (review changes).
+4.  **Describe:** `jj describe -m "<type>[scope]: <description>"` to set the commit message (Conventional Commits).
+5.  **Refine:**
+    *   `jj squash`: To fold working copy changes into the parent commit.
+    *   `jj split`: To break a change into multiple changes.
+6.  **Push:** `jj git push`. (Use `jj git push --change @` to push the specific current change).
 
-**Separation Rules (NON-NEGOTIABLE):** NEVER mix types/scopes | NEVER commit incomplete work | ALWAYS separate features/fixes/refactors | ALWAYS commit logical units independently
+**Recovery:**
+*   **Undo:** `jj undo` (instant undo of ANY operation).
+*   **Log:** `jj op log` (view operation history).
+*   **Evolution:** `jj evolog` (view history of a specific change ID).
 
-**Workflow:** `git status && git diff` → `git add -p <file>` → `git diff --cached && git diff` → `git stash --keep-index && npm test && git stash pop` → `git commit -m "<type>[scope]: <description>"`
+**Formatting:** `<type>[optional scope]: <description>` (e.g., `feat(ui): add button`).
+**Enforcement:** Each change must be atomic, buildable, and testable.
+</jujutsu_vcs_strategy>
 
-**Format:** `<type>[optional scope]: <description>` + optional body/footers
+<claude_multiple_agents>
+You should always try AGGRESSIVELY to launch multiple tailored agents to effectively handle the complexity of the tasks at hand.
 
-**Structure:** type (required), scope (optional, parentheses), description (required, lowercase after colon, imperative, max 72 chars, NO emojis), body (optional, explains "why"), footers (optional, git trailer format), BREAKING CHANGE (use ! or footer)
+**Workspace-Based Agent Isolation:** Each Claude agent executes in its own jj workspace for true parallel context isolation.
 
-**Examples:** `feat(lang): add Polish language` | `fix(parser): correct array parsing issue` | `feat(api)!: send email when product shipped` | BAD: `feat: add profile, fix login, refactor auth` (mixed types—FORBIDDEN)
+**Pre-Launch Protocol:** [MANDATORY]
+1. **Analyze DAG:** `jj log -r 'all()' --limit 20` to understand current state
+2. **Identify Base:** Determine parent revision for agent work (typically `@` or `trunk()`)
+3. **Plan Scopes:** Map workspace directories and file scopes per agent
 
-**Enforcement:** Each commit must build successfully, pass all tests, represent a complete logical unit.
-</git_commit_strategy>
+**Workspace Creation:** [One workspace per agent]
+```
+jj workspace add /tmp/agent-<task-name> --revision <base>
+```
+- Creates isolated working directory at `/tmp/agent-<task-name>`
+- Workspace starts from `<base>` revision (default: `@`)
+- Each workspace has independent working copy
+
+**Agent Context Assignment:**
+```
+Agent[TaskA] → workspace: /tmp/agent-task-a → scope: src/module-a/**
+Agent[TaskB] → workspace: /tmp/agent-task-b → scope: src/module-b/**
+Agent[TaskC] → workspace: /tmp/agent-task-c → scope: tests/**
+```
+- Workspace path = agent's execution context
+- Scope = files agent may modify (enforced by agent, not jj)
+- Scopes MUST NOT overlap between concurrent agents
+
+**Launch Pattern:**
+```
+# Create workspaces (sequential - preparation phase)
+jj workspace add /tmp/agent-task-a -r @
+jj workspace add /tmp/agent-task-b -r @
+jj workspace add /tmp/agent-task-c -r @
+
+# Launch agents in parallel (single message, multiple tool calls)
+# Each agent receives: workspace path, scope, task description
+```
+
+**Within-Agent Operations:**
+```
+cd /tmp/agent-<task>        # Enter workspace context
+jj st                        # Status (auto-snapshots working copy)
+jj diff                      # Review changes
+jj describe -m "feat: ..."   # Set commit message
+```
+
+**Cross-Workspace Queries:**
+- `jj log -r 'working_copies()'` - See all workspace states
+- `jj log -r '<workspace>@'` - Query specific workspace's working copy
+- `jj diff -r '<workspace>@'` - Diff specific workspace
+
+**Merge Strategy:** [After agents complete]
+```
+# Option 1: Rebase onto main
+jj rebase -s <agent-change> -d main
+
+# Option 2: Create merge commit
+jj new <change-a> <change-b> <change-c> -m "merge: agent results"
+
+# Option 3: Squash into target
+jj squash --from <agent-change> --into <target>
+```
+
+**Cleanup:**
+```
+jj workspace forget <workspace-name>   # Remove workspace from tracking
+rm -rf /tmp/agent-<task>               # Delete workspace directory
+```
+
+**Recovery:**
+- `jj undo` - Undo last operation
+- `jj op log` - View operation history
+- `jj op restore <op-id>` - Restore to prior state
+- `jj workspace update-stale` - Recover stale workspace
+
+**Context Engineering Principles:**
+- **Workspace = Isolation Boundary:** File changes in one workspace don't affect others
+- **Change IDs are Stable:** Reference changes by Change ID (survives rebases)
+- **Operation Log is Immutable:** Every action recorded for audit/recovery
+- **No Staging Area:** Changes auto-snapshot; no manual `add` required
+
+**Anti-Patterns:**
+- NEVER share workspace between agents
+- NEVER assign overlapping file scopes
+- NEVER modify main workspace while agents active
+- NEVER use git commands for workspace management
+- NEVER forget to clean up workspaces after completion
+</claude_multiple_agents>
 
 <quickstart_workflow>
 1. **Requirements**: Brief checklist (3-10 items), note constraints/unknowns
@@ -100,8 +207,6 @@ Default to research over action. Do not jump into implementation unless clearly 
 7. **Completion**: Apply atomic commit strategy, summarize changes, clean up temp files
 
 **Context window:** Auto-compacts as approaches limit—complete tasks fully regardless of token budget. Save progress before compaction.
-
-**Cleanup:** Always delete temporary files/docs if no longer needed.
 </quickstart_workflow>
 
 <surgical_editing_workflow>
@@ -117,13 +222,17 @@ Default to research over action. Do not jump into implementation unless clearly 
 ## PRIMARY DIRECTIVES
 
 <must>
-**Tool Selection:** 1) ast-grep (AG) [HIGHLY PREFERRED]: AST-based, 90% error reduction, 10x accurate. 2) native-patch: File edits, multi-file changes. 3) rg: Text/comments/strings. 4) fd: File discovery. 5) lsd: Directory listing. 6) tokei: Code metrics/scope.
+**Tool Selection:** 1) ast-grep (AG) [HIGHLY PREFERRED]: AST-based, 90% error reduction, 10x accurate. 2) Edit suite: File edits, multi-file changes. 3) rg: Text/comments/strings. 4) fd: File discovery. 5) lsd: Directory listing. 6) tokei: Code metrics/scope. 7) jj: Version control.
 
-**Selection guide:** Code pattern → ast-grep | Simple line edit → AG/native-patch | Multi-file atomic → native-patch | Non-code → native-patch | Text/comments → rg | Scope analysis → tokei
+**Selection guide:** Code pattern → ast-grep | Simple line edit → AG/Edit | Multi-file atomic → Edit | Non-code → Edit | Text/comments → rg | Scope analysis → tokei | VCS → jj
 
 **Thinking tools:** sequential-thinking [ALWAYS USE] for decomposition/dependencies; actor-critic-thinking for alternatives; shannon-thinking for uncertainty/risk
 
 **Banned (HARD ENFORCEMENT - VIOLATIONS REJECTED):**
+- `git status` / `git log` / `git diff` - USE `jj st`, `jj log`, `jj diff` INSTEAD
+- `git commit` / `git add` - USE `jj describe` (snapshots are automatic) INSTEAD
+- `git checkout` / `git switch` - USE `jj new` or `jj edit` INSTEAD
+- `git rebase` / `git merge` - USE `jj rebase` or `jj new <rev1> <rev2>` INSTEAD
 - `grep -r` / `grep -R` / `grep --recursive` - USE `rg` or `ast-grep` INSTEAD
 - `sed -i` / `sed --in-place` - USE `ast-grep -U` or Edit tool INSTEAD
 - `sed -e` for code transforms - USE `ast-grep` INSTEAD
@@ -132,19 +241,29 @@ Default to research over action. Do not jump into implementation unless clearly 
 - Text-based grep for code patterns - USE `ast-grep` INSTEAD
 - `perl` / `perl -i` / `perl -pe` - USE `ast-grep -U` or `awk` INSTEAD
 
+**Exception:** `git` commands are allowed ONLY for repository initialization (`jj git init`) or deep debugging if `jj` fails.
+
 **Enforcement mechanism:** Any command matching these patterns MUST be rejected and rewritten using approved tools. No exceptions.
+
 **Workflow:** Preview → Validate → Apply (no blind edits)
 **Diagrams (INTERNAL):** Architecture, data-flow, concurrency, memory, optimization, tidiness. Reason through in thinking process for non-trivial changes.
+
 **Domain Priming:** Context before design: problem class, constraints, I/O, metrics, unknowns. Identify standards/specs/APIs.
-**CS Lexicon:** ADTs, invariants, contracts, pre/postconditions, loop variants, complexity (O/Θ/Ω), partial vs. total functions, refinement types.
+
+**CS Lexicon:** ADTs, invariants, contracts, pre/postconditions, loop variants, complexity (O/Θ/Ω), partial vs total functions, refinement types.
+
 **Algorithms & Data Structures:** Structure selection rationale, complexity analysis (worst/average/amortized), space/time trade-offs, cache locality, proven patterns (divide-conquer, DP, greedy, graph).
+
 **Safety principles:**
 - **Concurrency:** Critical sections, lock ordering/hierarchy, deadlock-freedom proof, memory ordering/atomics, backpressure/cancellation/timeout, async/await/actor/channels/IPC
 - **Memory:** Ownership model, borrowing/aliasing rules, escape analysis, RAII/GC interplay, FFI boundaries, zero-copy, bounds checks, UAF/double-free/leak prevention
 - **Performance:** Latency targets (p. 50/p. 95/p. 99), throughput requirements, complexity ceilings, allocation budgets, cache considerations, measurement strategies, regression guards
+
 **Edge cases:** Input boundaries (empty/null/max/min), error propagation, partial failure, idempotency, determinism, resilience (circuit breakers, bulkheads, rate limiting)
+
 **Verification:** Unit/property/fuzz/integration tests, assertions/contracts, runtime checks, acceptance criteria, rollback strategy
-**Documentation:** CS brief, glossary, assumptions/risks, diagram↔code mapping. Never emojis in code comments/docs/readmes/commits. Follow atomic commit guidelines.
+
+**Documentation:** CS brief, glossary, assumptions/risks, diagram↔code mapping. Follow atomic commit guidelines.
 
 <good_code_practices>
 Write solutions working correctly for all valid inputs, not just test cases. Implement general algorithms rather than special-case logic. No hard-coding. Communicate if requirements are infeasible or tests are incorrect.
@@ -242,9 +361,23 @@ LOC/blanks/comments by language. Use for scope classification before editing. Se
 
 Semantic diff tool. Tree-sitter-based. Use for post-transform verification. See Quick Reference for commands.
 
+### 7) jj (Jujutsu) [VCS]
+Git-compatible VCS. **ALWAYS use `jj` over `git`.**
+**Key capabilities:**
+- `jj st`: Status. Snapshots working copy.
+- `jj diff`: Diff working copy (or `-r <rev>`).
+- `jj log`: History graph.
+- `jj new <rev>`: Create new change on top of `<rev>`.
+- `jj describe -m "msg"`: Update commit message.
+- `jj squash`: Move changes into parent (amend).
+- `jj abandon <rev>`: Discard revision.
+- `jj git push`: Push to remote.
+
+**Workflow:** `jj new` → Edit → `jj st` → `jj describe` → `jj squash`/`jj git push`
+
 ### Quick Reference
 
-**Code search:** `ast-grep -p 'function $NAME($ARGS) { $$$ }' -l js -C 3` (HIGHLY PREFERRED) | Fallback: `rg 'TODO' -A 5`
+**Code search:** `ast-grep -p 'function $NAME($ARGS) { $$ }' -l js -C 3` (HIGHLY PREFERRED) | Fallback: `rg 'TODO' -A 5`
 
 **Code editing:** `ast-grep -p 'old($ARGS)' -r 'new($ARGS)' -l js -C 2` (preview) then `-U` (apply) | Also first-tier: native-patch
 
@@ -255,6 +388,7 @@ Semantic diff tool. Tree-sitter-based. Use for post-transform verification. See 
 **Code metrics:** `tokei src/` | JSON: `tokei --output json | jq '.Total.code'`
 
 **Verification:** `difft --display inline original modified` | JSON: `DFT_UNSTABLE=yes difft --display json A B`
+
 </code_tools>
 
 ## Verification & Refinement
@@ -357,46 +491,20 @@ Don't hold back. Give it your all.
 
 **Critical reminders:** Do exactly what's asked (no more, no less) | Avoid unnecessary files | SELECT the APPROPRIATE TOOL: AG (highly preferred code), native-patch (edits), FD/RG (search)
 
-**MANDATORY TOOL PROHIBITIONS (ZERO TOLERANCE):**
-- NEVER `grep -r` or `grep -R` - use `ast-grep` or `ripgrep` instead
-- NEVER `sed -i` or `sed --in-place` - use `ast-grep -U` or Edit tool
-- NEVER `find` - use `fd` instead
-- NEVER `ls` - use `lsd` instead
-- NEVER `cat` for reading - use Read tool instead
-- NEVER text-based search for code patterns - use `ast-grep` instead
-
-**Violation consequences:** Commands using banned tools will be REJECTED. Rewrite using approved alternatives.
-
-**Cleanup:** ALWAYS delete temporary files/docs if no longer needed. Leave the workspace clean.
+**Tool Prohibitions:** See `<must>` section for comprehensive banned command list. Violations REJECTED.
 
 **Git Commit:** MANDATORY atomic commits following Git Commit Strategy. Each type-classified, focused, testable, reversible. NO mixed-type/scope commits. ALWAYS Conventional Commits format.
 
 **Code quality checklist:** Correctness, Performance, Security, Maintainability, Tidiness
 </always>
 
-<mandatory_design_process>
-**Six required stages before ANY code:** 1) ARCHITECT (full system design, component relationships, interfaces/contracts) | 2) FLOW (data pathways, state transitions, transformations) | 3) CONCURRENCY (thread interaction, synchronization, happens-before, deadlock freedom proof) | 4) MEMORY (object/resource lifecycle, ownership, lifetimes, memory safety proof) | 5) OPTIMIZE (performance strategy, bottlenecks, targets/budgets) | 6) TIDINESS (minimalism, elegance, readability, clarity, naming, structure simplicity)
-
-**Process enforcement:** Complete in order. Each builds on previous. Skipping leads to design defects.
-</mandatory_design_process>
-
 <design_validation>
-**Mandatory checklist:** System Architecture Blueprint (components/interfaces) | Data Flow Diagram (sources to sinks) | Concurrency Pattern Map (synchronization proven) | Memory Management Schema (lifetimes/ownership) | Type Stable Design (type safety verified) | Error Handling Strategy (all failures covered) | Performance Optimization Plan (bottlenecks identified) | Reliability Assessment (failure scenarios analyzed) | Security Guards (boundaries defined when applicable)
+**Six stages before code:** ARCHITECT → FLOW → CONCURRENCY → MEMORY → OPTIMIZE → TIDINESS (complete in order; each builds on previous)
 
-**IMPLEMENTATION BLOCKED UNTIL ALL ITEMS CHECKED!** Cannot proceed until every checkbox is marked. Prevents starting with incomplete design.
+**Checklist:** System Architecture | Data Flow | Concurrency Map | Memory Schema | Type Safety | Error Strategy | Performance Plan | Reliability | Security Guards
+
+**Enforcement:** IMPLEMENTATION BLOCKED UNTIL ALL CHECKED. Diagram reasoning non-negotiable.
 </design_validation>
-
-<diagram_design_mandates>
-**Non-negotiable:** DIAGRAM REASONING NON-NEGOTIABLE. No implementation without proper diagram reasoning.
-
-**Required in reasoning for:** Concurrency (thread interaction, sync), Memory (ownership, lifetimes, allocation), Data-flow (sources, transforms, sinks), Architecture (components, interfaces, contracts), Optimization (bottlenecks, targets, budgets), Tidiness (naming, coupling, readability, complexity)
-
-**Absolute prohibition:** NO IMPLEMENTATION WITHOUT DIAGRAM REASONING—ZERO EXCEPTIONS
-
-**Consequences:** IMPLEMENTATIONS WITHOUT DIAGRAM REASONING REJECTED
-
-Hard requirement. Diagram reasoning foundational to correct implementation.
-</diagram_design_mandates>
 
 <decision_heuristics>
 **Research vs. Act:** Research: unfamiliar code, unclear dependencies, high risk, confidence <0.5, multiple solutions | Act: familiar patterns, clear impact, low risk, confidence >0.7, single solution
