@@ -97,20 +97,20 @@ In colocated mode, jj and Git share the same backend. Every jj change IS a Git c
 **Human Git Workflow:** `git branch -a` | `git log --all --graph` | `git diff main..<branch>` | `git merge <branch>` | `git branch -d <branch>`
 
 **Workflow:**
-1.  **Start:** `jj new <parent>` (default `@`) to start a new logical change.
-    *   *Multi-Agent/Parallel Tasks:* When executing multiple distinct subtasks or "agents", create a unique change for EACH task (`jj new <parent> -m "Agent: <Task>"`) to isolate contexts.
-2.  **Create Bookmark (Git Branch):** `jj bookmark create <branch-name> -r @` to create a Git-visible branch.
-    *   MANDATORY for any work intended to be pushed or shared via Git.
-    *   Bookmarks auto-move when commits are rewritten (rebase, amend, etc.).
-3.  **Edit:** Modify files. `jj` automatically snapshots the working copy.
-4.  **Verify:** `jj st` (status) and `jj diff` (review changes).
-5.  **Describe:** `jj describe -m "<type>[scope]: <description>"` to set the commit message (Conventional Commits).
-    *   This updates the Git commit message. The bookmark (branch) remains pointed at this change.
-6.  **Refine:**
-    *   `jj squash`: To fold working copy changes into the parent commit.
-    *   `jj split`: To break a change into multiple changes.
-7.  **Push:** `jj git push --bookmark <branch-name>` to push the specific bookmark (branch) to remote.
-    *   Alternative: `jj git push --change @` pushes current change, auto-creating remote bookmark.
+1.  **Start:** `jj new <parent>` (default `@`) to start a new logical change.
+    *   *Multi-Agent/Parallel Tasks:* When executing multiple distinct subtasks or "agents", create a unique change for EACH task (`jj new <parent> -m "Agent: <Task>"`) to isolate contexts.
+2.  **Create Bookmark (Git Branch):** `jj bookmark create <branch-name> -r @` to create a Git-visible branch.
+    *   MANDATORY for any work intended to be pushed or shared via Git.
+    *   Bookmarks auto-move when commits are rewritten (rebase, amend, etc.).
+3.  **Edit:** Modify files. `jj` automatically snapshots the working copy.
+4.  **Verify:** `jj st` (status) and `jj diff` (review changes).
+5.  **Describe:** `jj describe -m "<type>[scope]: <description>"` to set the commit message (Conventional Commits).
+    *   This updates the Git commit message. The bookmark (branch) remains pointed at this change.
+6.  **Refine:**
+    *   `jj squash`: To fold working copy changes into the parent commit.
+    *   `jj split`: To break a change into multiple changes.
+7.  **Push:** `jj git push --bookmark <branch-name>` to push the specific bookmark (branch) to remote.
+    *   Alternative: `jj git push --change @` pushes current change, auto-creating remote bookmark.
 
 **Bookmark Management:**
 - `jj bookmark list` - List all bookmarks (local and remote)
@@ -120,9 +120,9 @@ In colocated mode, jj and Git share the same backend. Every jj change IS a Git c
 - `jj bookmark track <name>@<remote>` - Track remote bookmark locally
 
 **Recovery:**
-*   **Undo:** `jj undo` (instant undo of ANY operation).
-*   **Log:** `jj op log` (view operation history).
-*   **Evolution:** `jj evolog` (view history of a specific change ID).
+*   **Undo:** `jj undo` (instant undo of ANY operation).
+*   **Log:** `jj op log` (view operation history).
+*   **Evolution:** `jj evolog` (view history of a specific change ID).
 
 **Formatting:** `<type>[optional scope]: <description>` (e.g., `feat(ui): add button`).
 **Enforcement:**
@@ -143,43 +143,59 @@ You should always try AGGRESSIVELY to launch multiple tailored agents to effecti
 3. **Plan Scopes:** Map workspace directories and file scopes per agent
 
 **Workspace Creation:** [One workspace per agent]
+
 ```
+
 jj workspace add /tmp/agent-<task-name> --revision <base>
+
 ```
 - Creates isolated working directory at `/tmp/agent-<task-name>`
 - Workspace starts from `<base>` revision (default: `@`)
 - Each workspace has independent working copy
 
 **Agent Context Assignment:**
+
 ```
+
 Agent[TaskA] → workspace: /tmp/agent-task-a → scope: src/module-a/**
 Agent[TaskB] → workspace: /tmp/agent-task-b → scope: src/module-b/**
 Agent[TaskC] → workspace: /tmp/agent-task-c → scope: tests/**
+
 ```
 - Workspace path = agent's execution context
 - Scope = files agent may modify (enforced by agent, not jj)
 - Scopes MUST NOT overlap between concurrent agents
 
 **Launch Pattern:**
+
 ```
+
 # Create workspaces (sequential - preparation phase)
+
 jj workspace add /tmp/agent-task-a -r @
 jj workspace add /tmp/agent-task-b -r @
 jj workspace add /tmp/agent-task-c -r @
 
 # Launch agents in parallel (single message, multiple tool calls)
+
 # Each agent receives: workspace path, scope, task description
+
 ```
 
 **Within-Agent Operations:**
+
 ```
-cd /tmp/agent-<task>                          # Enter workspace context
-jj bookmark create agent/<task> -r @          # Create Git branch for visibility [MANDATORY]
+
+cd /tmp/agent-<task>                          # Enter workspace context
+jj bookmark create agent/<task> -r @          # Create Git branch for visibility [MANDATORY]
+
 # ... do work ...
-jj st                                          # Status (auto-snapshots working copy)
-jj diff                                        # Review changes
-jj describe -m "feat: ..."                     # Set commit message (updates Git commit)
-jj rebase -d <target-branch>                   # Rebase onto target branch (merge-ready for human)
+
+jj st                                          # Status (auto-snapshots working copy)
+jj diff                                        # Review changes
+jj describe -m "feat: ..."                     # Set commit message (updates Git commit)
+jj rebase -d <target-branch>                   # Rebase onto target branch (merge-ready for human)
+
 ```
 
 **Cross-Workspace:** `jj log -r 'working_copies()'` | `jj log -r '<ws>@'` | `jj diff -r '<ws>@'`
@@ -187,10 +203,13 @@ jj rebase -d <target-branch>                   # Rebase onto target branch (merg
 **Merge Strategy:** `jj rebase -s <change> -d main` | `jj new <a> <b> <c> -m "merge: results"` | `jj squash --from <change> --into <target>`
 
 **Cleanup:**
+
 ```
-jj bookmark delete agent/<task>        # Delete agent's Git branch (after merge)
-jj workspace forget <workspace-name>   # Remove workspace from tracking
-rm -rf /tmp/agent-<task>               # Delete workspace directory
+
+jj bookmark delete agent/<task>        # Delete agent's Git branch (after merge)
+jj workspace forget <workspace-name>   # Remove workspace from tracking
+rm -rf /tmp/agent-<task>               # Delete workspace directory
+
 ```
 
 **Recovery:**
@@ -231,12 +250,29 @@ rm -rf /tmp/agent-<task>               # Delete workspace directory
 
 <surgical_editing_workflow>
 **Find → Copy → Paste → Verify:** Locate precisely, copy minimal context, transform, paste surgically, verify semantically.
-**Step 1: Find** – ast-grep (code structure), rg (text), fd (files), awk (line ranges)
-**Step 2: Copy** – Extract minimal context: `Read(file.ts, offset=100, limit=10)`, `ast-grep -p 'pattern' -C 3`, `rg "pattern" -A 2 -B 2`
-**Step 3: Paste** – Apply surgically: `ast-grep -p 'old($A)' -r 'new($A)' -U`, `Edit(file.ts, line=105)`, `awk '{gsub(/old/,"new")}1' file > tmp && mv tmp file`
-**Step 4: Verify** – Semantic diff review: `difft --display inline original modified` (advisory, warn if chunks > threshold)
-**Patterns:** Multi-Location (store locations, copy/paste each) | Single Change Multiple Pastes (copy once, paste everywhere) | Parallel Ops (execute independent entries simultaneously) | Staged (sequential for dependencies)
-**Principles:** Precision > Speed | Preview > Hope | Surgical > Wholesale | Locate → Copy → Paste → Verify | Minimal Context
+
+**1. Find (Structural & Precise)**
+- **AST Pattern:** `ast-grep run -p 'function $N($$$A) { $$$B }' -l ts`
+- **Ambiguity:** `ast-grep scan --inline-rules 'rule: { pattern: { context: "fn f() { $A }", selector: "call_expression" } }' -l rust`
+- **Scope Limit:** `ast-grep scan --inline-rules 'rule: { pattern: "return $A", inside: { kind: "function", regex: "^test" } }'`
+
+**2. Copy (Targeted Extraction)**
+- **Context:** `ast-grep run -p '$PAT' -C 3` (surrounding lines)
+- **Lines:** `sed -n '10,20p' file.ts` (when lines are known)
+
+**3. Paste (Atomic Transformation)**
+- **Rewrite:** `ast-grep run -p '$O.old($A)' -r '$O.new({ val: $A })' -U`
+- **Complex:** `ast-grep scan --inline-rules 'rule: { ... } transform: { ... } fix: "..."' -U`
+- **Manual:** `native-patch` (hunk-based) for non-pattern multi-file edits.
+
+**4. Verify (Semantic Integrity)**
+- **Diff:** `difft --display inline original modified` (AST-aware, ignores whitespace)
+- **Check:** Re-run `ast-grep` or `rg` to ensure patterns are resolved.
+
+**Tactics:**
+- **Rename:** `ast-grep run -p 'class $N { $$$ }' -r 'class ${N}V2 { $$$ }'`
+- **Delete:** `ast-grep run -p 'console.log($$$)' -r '' -U`
+- **Migrate:** `ast-grep run -p '$A.done($B)' -r 'await $A; $B()'`
 </surgical_editing_workflow>
 
 ## PRIMARY DIRECTIVES
@@ -317,85 +353,50 @@ Always retrieve framework/library docs using: ref-tools, context7, webfetch. Use
 
 <code_tools>
 **MANDATES:** ALWAYS leverage AG/native-patch/fd/lsd/rg. **Highly prefer ast-grep for code ops.**
+**Protocol:** Preview (-C) → Validate → Apply (-U) | Verify (difft)
 
-**Scope control:** Targeted directory search, explicit paths, file-type filtering, precise changes.
+### 1) ast-grep (AG) [Core]
+**Usage:** `run` (simple), `scan` (complex), `--inline-rules` (power-user).
+- **Match:** `$VAR` (node), `$$$VAR` (list), `$_` (wildcard).
+- **Debug:** `--debug-query=cst` (view structure), `--strictness relaxed`.
+- **JSON:** `--json | jq` for automation.
 
-**Preview requirement:** Always preview before applying—NO EXCEPTIONS. Use -C flag or equivalent.
+**Power Examples:**
+- **Simple:** `ast-grep run -p 'expect($A).toBe($B)' -r 'assert.equal($A, $B)' -l ts -U`
+- **Ambiguous:** `ast-grep scan --inline-rules 'rule: { pattern: { context: "fn f() { $A }", selector: "call_expression" } }' -l rust`
+- **Inside:** `ast-grep scan --inline-rules 'rule: { pattern: "return $A", inside: { kind: "function", pattern: { regex: "^test" } } }'`
+- **Strict:** `ast-grep scan --inline-rules 'rule: { pattern: "$A + $B", constraints: { A: { kind: "string" } } }'`
 
-**Safety protocol:** Validate patterns on test data first. Use preview mode or a single file to verify.
+### 2) native-patch [Edit]
+**Usage:** Simple edits, non-code files, multi-file atomic chunks.
+**Flow:** Read file → Prepare Hunk → Apply → Verify.
 
-**SMART-SELECT:** Use AG for code search, AST patterns, structural refactoring, bulk ops, language-aware transforms (90% error reduction, 10x accurate). Use native-patch for simple file edits, straightforward replacements, multi-file coordinated changes, non-code files, atomic multi-file ops.
+### 3) ripgrep (rg) [Text]
+**Usage:** Text, comments, TODOs, strings.
+- **Context:** `rg "foo" -C 3`
+- **Files Only:** `rg "foo" -l`
+- **Type Filter:** `rg "foo" -t ts -t js`
 
-**Pre-edit requirements:** Read target files; understand structure; preview first; small test patterns when possible; explicit preview→apply workflow
+### 4) fd (Discovery)
+**Usage:** File finding.
+- **Simple:** `fd -e py`
+- **Exclude:** `fd -E node_modules pattern`
 
-### 1) ast-grep (AG) [HIGHLY PREFERRED]
+### 5) jujutsu (jj) [VCS]
+**Usage:** Version control.
+- **Init:** `jj git init --colocate`
+- **Stack:** `jj new -m "A" && edit && jj new -m "B" && edit`
+- **Push:** `jj bookmark create feat -r @ && jj git push --bookmark feat`
+- **Squash:** `jj squash` (current into parent)
 
-AST-based search/transform. 90% error reduction, 10x accurate. Language-aware (JS/TS/Py/Rust/Go/Java/C++).
+### 6) tokei [Metrics]
+**Usage:** Scope analysis.
+- **Summary:** `tokei src/`
+- **JSON:** `tokei -o json | jq '.Total.code'`
 
-**Use for:** Code patterns, control structures, language constructs, refactoring, bulk transforms, structural understanding.
-
-**Critical capabilities:** `-p 'pattern'` (search), `-r 'replacement'` (rewrite), `-U` (apply after preview), `-C N` (context), `--lang` (specify language)
-
-**Workflow:** Search → Preview (-C) → Apply (-U) [never skip preview]
-
-**Pattern Syntax:** Valid meta-vars: `$META`, `$META_VAR`, `$_`, `$_123` (uppercase) | Invalid: `$invalid` (lowercase), `$123` (starts with number), `$KEBAB-CASE` (dash) | Single node: `$VAR`, Multiple: `$$$ARGS`, Non-capturing: `$_VAR` | Strictness: cst (strictest), smart (default), ast, relaxed, signature (permissive)
-
-**Best Practices:** Always `-C 3` before `-U` | Specify `-l language` | Invalid pattern? Use a pattern object with context+selector | Ambiguous C/Go? Add context+selector | Missing stopBy:end with inside/has? Add for full traversal | Performance: Combine kind+regex, prefer specific patterns, test on small files | Debug: `ast-grep -p 'pattern' -l js --debug-query=cst`
-
-### 2) native-patch [FILE EDITING]
-
-Workspace editing tools. Excellent for straightforward edits, multi-file changes, simple line mods.
-
-**When to use:** Simple line changes, add/remove sections, multi-file coordinated edits, atomic changes, non-code files.
-
-**Best practices:** Preview all edits, ensure well-scoped, verify file paths.
-
-### 3) lsd (LSD) [MANDATORY]
-
-Modern ls replacement. Color-coded file types/permissions, git integration, tree view, icons. **NEVER use ls—always lsd.**
-
-### 4) fd (FD) [MANDATORY]
-
-Modern find replacement. Intuitive syntax, respects .gitignore, fast parallel traversal. **NEVER use find—always fd.**
-
-### 5) tokei [CODE METRICS]
-
-LOC/blanks/comments by language. Use for scope classification before editing. See Quick Reference for commands.
-
-### 6) difft (DIFFTASTIC) [VERIFICATION]
-
-Semantic diff tool. Tree-sitter-based. Use for post-transform verification. See Quick Reference for commands.
-
-### 7) jj (Jujutsu) [VCS]
-Git-compatible VCS. **ALWAYS use `jj` over `git`.** In colocated mode, every jj change IS a Git commit.
-**Key capabilities:**
-- `jj st`: Status. Snapshots working copy.
-- `jj diff`: Diff working copy (or `-r <rev>`).
-- `jj log`: History graph.
-- `jj new <rev>`: Create new change on top of `<rev>`.
-- `jj describe -m "msg"`: Update commit message (updates Git commit).
-- `jj squash`: Move changes into parent (amend).
-- `jj abandon <rev>`: Discard revision.
-- `jj bookmark create <name> -r @`: Create Git branch at current change. [MANDATORY for Git visibility]
-- `jj bookmark list`: List all bookmarks (Git branches).
-- `jj git push --bookmark <name>`: Push specific branch to remote.
-
-**Workflow:** `jj new` → `jj bookmark create <branch>` → Edit → `jj st` → `jj describe` → `jj git push --bookmark <branch>`
-
-### Quick Reference
-
-**Code search:** `ast-grep -p 'function $NAME($ARGS) { $$ }' -l js -C 3` (HIGHLY PREFERRED) | Fallback: `rg 'TODO' -A 5`
-
-**Code editing:** `ast-grep -p 'old($ARGS)' -r 'new($ARGS)' -l js -C 2` (preview) then `-U` (apply) | Also first-tier: native-patch
-
-**File discovery:** `fd -e py`
-
-**Directory listing:** `lsd --tree --depth 3`
-
-**Code metrics:** `tokei src/` | JSON: `tokei --output json | jq '.Total.code'`
-
-**Verification:** `difft --display inline original modified` | JSON: `DFT_UNSTABLE=yes difft --display json A B`
-
+### 7) difftastic (difft) [Verify]
+**Usage:** Semantic diffs.
+- **Check:** `difft --display inline file.old file.new`
 </code_tools>
 
 ## Verification & Refinement
@@ -448,21 +449,21 @@ Libs: {fmt}, spdlog, minimal abseil/boost.
 tsconfig: noUncheckedIndexedAccess, NodeNext resolution.
 Testing: Vitest+Testing Library. Lint: biome / Format: biome (always biome over eslint/prettier).
 
-  * **React:** RSC default; Client Components only when needed. Suspense+Error boundaries; useTransition/useDeferredValue.
-    Hooks: custom for reuse; useMemo/useCallback only measured (prefer React compiler). Avoid unnecessary useEffect; clean up effects.
-    State: Redux(default)/Zustand/Jotai app; TanStack Query server; avoid prop drilling. SSR: Next.js.
-    Forms: React Hook Form+Zod. Styling: Tailwind or CSS Modules; avoid runtime CSS-in-JS.
-    Testing: Vitest+Testing Library. Design: shadcn/ui (preferred), React Spectrum, Chakra, Mantine.
-    Performance: code splitting, lazy loading, Next/Image. Animation: Motion. A11y: semantic HTML, ARIA, keyboard nav, focus mgmt.
+  * **React:** RSC default; Client Components only when needed. Suspense+Error boundaries; useTransition/useDeferredValue.
+    Hooks: custom for reuse; useMemo/useCallback only measured (prefer React compiler). Avoid unnecessary useEffect; clean up effects.
+    State: Redux(default)/Zustand/Jotai app; TanStack Query server; avoid prop drilling. SSR: Next.js.
+    Forms: React Hook Form+Zod. Styling: Tailwind or CSS Modules; avoid runtime CSS-in-JS.
+    Testing: Vitest+Testing Library. Design: shadcn/ui (preferred), React Spectrum, Chakra, Mantine.
+    Performance: code splitting, lazy loading, Next/Image. Animation: Motion. A11y: semantic HTML, ARIA, keyboard nav, focus mgmt.
 
-  * **Nest:** Modular arch; DTOs class-validator+class-transformer; Guards/Interceptors/Pipes/Filters.
-    Data: Prisma (preferred) or TypeORM migrations/repos/transactions.
-    API: REST (DTOs) or GraphQL (code-first @nestjs/graphql).
-    Auth: Passport (JWT/OAuth2), argon2 (not bcrypt), rate limiting (@nestjs/throttler).
-    Testing: Vitest (preferred) or Jest (unit), Supertest (e2e), Testcontainers.
-    Config: @nestjs/config+Zod. Logging: Pino (structured), correlation IDs, OpenTelemetry.
-    Performance: caching (@nestjs/cache-manager), compression, query optimization, connection pooling.
-    Security: Helmet, CORS, CSRF, input sanitization, parameterized queries, dependency scanning.
+  * **Nest:** Modular arch; DTOs class-validator+class-transformer; Guards/Interceptors/Pipes/Filters.
+    Data: Prisma (preferred) or TypeORM migrations/repos/transactions.
+    API: REST (DTOs) or GraphQL (code-first @nestjs/graphql).
+    Auth: Passport (JWT/OAuth2), argon2 (not bcrypt), rate limiting (@nestjs/throttler).
+    Testing: Vitest (preferred) or Jest (unit), Supertest (e2e), Testcontainers.
+    Config: @nestjs/config+Zod. Logging: Pino (structured), correlation IDs, OpenTelemetry.
+    Performance: caching (@nestjs/cache-manager), compression, query optimization, connection pooling.
+    Security: Helmet, CORS, CSRF, input sanitization, parameterized queries, dependency scanning.
 
 **Python:** Strict type hints ALWAYS; f-strings; pathlib; dataclasses (or attrs) PODs; immutability (frozen=True).
 Concurrency: asyncio/trio structured cancellation; avoid blocking event loops.
@@ -476,13 +477,13 @@ Performance: JFR profiling; GC tuning measured. Testing: JUnit 5, Mockito, Asser
 Lint: Error Prone+NullAway (mandatory), SpotBugs, PMD / Format: Spotless+palantir-java-format.
 Security: OWASP+Snyk (CVSS≥7), parameterized queries, SBOM.
 
-  * **Spring Boot 3:** Virtual threads: spring.threads.virtual.enabled=true or TaskExecutorAdapter.
-    HTTP: RestClient (not RestTemplate). JDBC: JdbcClient (named params).
-    Problem Details: spring.mvc.problemdetails.enabled=true, RFC 9457.
-    Data: JPA query methods, @Query, Specifications, @EntityGraph.
-    Security: lambda DSL, Argon2 (not BCrypt), OAuth2, JWT, CSRF.
-    Config: @ConfigurationProperties+records (not @Value). Docker: layered JARs, Buildpacks, non-root, Alpine JRE.
-    Testing: JUnit 5+AssertJ+Testcontainers. Anti-patterns: RestTemplate, JdbcTemplate verbosity, pooling virtual threads, secrets in repo.
+  * **Spring Boot 3:** Virtual threads: spring.threads.virtual.enabled=true or TaskExecutorAdapter.
+    HTTP: RestClient (not RestTemplate). JDBC: JdbcClient (named params).
+    Problem Details: spring.mvc.problemdetails.enabled=true, RFC 9457.
+    Data: JPA query methods, @Query, Specifications, @EntityGraph.
+    Security: lambda DSL, Argon2 (not BCrypt), OAuth2, JWT, CSRF.
+    Config: @ConfigurationProperties+records (not @Value). Docker: layered JARs, Buildpacks, non-root, Alpine JRE.
+    Testing: JUnit 5+AssertJ+Testcontainers. Anti-patterns: RestTemplate, JdbcTemplate verbosity, pooling virtual threads, secrets in repo.
 
 **Kotlin:** K2+JVM 21+. Immutability (val, persistent collections); explicit public types; sealed/enum class+exhaustive when; data classes; @JvmInline value classes; inline/reified zero-cost; top-level functions+small objects; controlled extensions.
 Errors: Result/Either (Arrow); never !!/unscoped lateinit.
