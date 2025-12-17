@@ -86,6 +86,7 @@ Default to research over action. Do not jump into implementation unless clearly 
 **Jujutsu (jj) VCS Strategy:**
 **Core Philosophy:** "Everything is a Commit". The working copy is a commit (`@`). There is no staging area.
 **Mandate:** Use `jj` for ALL local version control operations.
+**Initialization:** `jj git init --colocate` (if jj is not initialized, use this command)
 
 **Workflow:**
 1.  **Start:** `jj new <parent>` (default `@`) to start a new logical change.
@@ -240,8 +241,6 @@ rm -rf /tmp/agent-<task>               # Delete workspace directory
 - `cat` for file reading - USE Read tool INSTEAD
 - Text-based grep for code patterns - USE `ast-grep` INSTEAD
 - `perl` / `perl -i` / `perl -pe` - USE `ast-grep -U` or `awk` INSTEAD
-
-**Exception:** `git` commands are allowed ONLY for repository initialization (`jj git init`) or deep debugging if `jj` fails.
 
 **Enforcement mechanism:** Any command matching these patterns MUST be rejected and rewritten using approved tools. No exceptions.
 
