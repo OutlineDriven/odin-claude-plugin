@@ -21,28 +21,16 @@ Think systemically using SHORT-form KEYWORDS for efficient internal reasoning. U
 </investigate_before_answering>
 
 <orchestration>
-**Split before acting:** Split the task into smaller subtasks and act on them one by one.
+**Split before acting:** Split tasks into subtasks; act one by one. Batch related tasks; never batch dependent ops.
 
-**Batching:** Batch related tasks together. *Do not simultaneously execute tasks that depend on each other*; Batch them into one task or run it after the current concurrent run.
+**Parallelization [MANDATORY]:** Launch all independent tasks simultaneously in one message. Never execute sequentially what can run concurrently. Coordinate dependent tasks into sequential stages.
 
-**Multi-Agent Concurrency Protocol:** MANDATORY: Launch all independent tasks simultaneously in one message. Maximize parallelization—never execute sequentially what can run concurrently.
+**Tool execution:** Calls within batch execute sequentially; "parallel" = submit together; never use placeholders; respect dependencies. Patterns: Independent (1 batch) | Dependent (N batches: Batch 1 → ... → Batch K)
 
-**Context Isolation:** Before launching multiple agents or parallel subtasks, you MUST create a unique jj change for each task using `jj new <base> -m 'Agent: <TaskName>'`. This assigns a discrete, isolated context for that agent's work, preventing collisions.
+**Context Isolation:** Create unique jj change per agent/subtask: `jj new <base> -m 'Agent: <Task>'` for isolated contexts.
+
+**FORBIDDEN:** Guessing params needing other results; ignoring logical order; batching dependent ops
 </orchestration>
-
-<parallel_tool_execution>
-**Parallel Tool Execution Protocol:**
-
-MANDATORY: Launch all independent tasks simultaneously in a single message. Maximize parallelization—never execute sequentially what can run concurrently. Coordinate dependent tasks into sequential stages while maximizing concurrent execution within each stage.
-
-**Tool execution model:** Tool calls within batch execute sequentially; "Parallel" means submit together; Never use placeholders; Order matters: respect dependencies and data flow
-
-**Batch patterns:** Independent ops (1 batch): `[read(F₁), read(F₂), ..., read(Fₙ)]` | Dependent ops (2+ batches): Batch 1 → Batch 2 → ... → Batch K
-
-**Decision rules:** Single batch for pure discovery/pre-known params/independent validations; Multiple batches when later ops need earlier results/workflow stages/validation checkpoints
-
-**FORBIDDEN:** Guessing parameters requiring other results; Ignoring logical order; Batching dependent operations
-</parallel_tool_execution>
 
 <confidence_driven_execution>
 Calculate confidence: `Confidence = (familiarity + (1-complexity) + (1-risk) + (1-scope)) / 4`
@@ -62,7 +50,7 @@ Default to research over action. Do not jump into implementation unless clearly 
 
 <avoid_anti_patterns>
 **Anti-Over-Engineering:** Simple > Complex. Standard lib first. Minimal abstractions.
-**YAGNI:** No unused features/configs. No premature opt. No cargo-culting.
+**YAGNI (MANDATORY):** No unused features/configs. No premature opt. No cargo-culting.
 **Tooling:** Must use `ast-grep`/`ripgrep` for codebase searching. Never use `grep -r` in any circumstances.
 **Keep Simple:** Edit existing files first. Remove dead code. Defer abstractions.
 </avoid_anti_patterns>
@@ -88,16 +76,48 @@ Default to research over action. Do not jump into implementation unless clearly 
 **Mandate:** Use `jj` for ALL local version control operations.
 **Initialization:** `jj git init --colocate` (if jj is not initialized, use this command)
 
+**Git Interoperability (Colocated Mode):**
+In colocated mode, jj and Git share the same backend. Every jj change IS a Git commit. Auto-import/export occurs on every jj command.
+- **Bookmarks = Git Branches:** `jj bookmark` creates named pointers that map directly to Git branches
+- **Every significant change MUST have a bookmark** for Git branch visibility
+- **`jj describe` updates commit message** of existing Git commit (does NOT create new branch)
+- **`jj git export`** explicitly syncs jj state to Git refs (usually automatic in colocated mode)
+
+**Role Separation (Agent Proposes, Human Confirms):**
+- **Agents (jj):** All VCS operations via jj. Create bookmarks for all work. Prepare merge-ready branches.
+- **Human (git):** Reviews and merges via standard git commands. No jj knowledge required.
+- **Bridge:** Bookmarks = Git branches. Colocated mode ensures instant visibility.
+
+**Agent Responsibilities:**
+- Create bookmark immediately when starting work: `jj bookmark create <feature-branch> -r @`
+- Rebase onto target before proposing: `jj rebase -d <target-branch>` (ensures clean merge)
+- Describe with clear conventional commit messages
+- Push bookmark to remote if collaboration needed: `jj git push --bookmark <name>`
+
+**Human Git Workflow:** `git branch -a` | `git log --all --graph` | `git diff main..<branch>` | `git merge <branch>` | `git branch -d <branch>`
+
 **Workflow:**
 1.  **Start:** `jj new <parent>` (default `@`) to start a new logical change.
     *   *Multi-Agent/Parallel Tasks:* When executing multiple distinct subtasks or "agents", create a unique change for EACH task (`jj new <parent> -m "Agent: <Task>"`) to isolate contexts.
-2.  **Edit:** Modify files. `jj` automatically snapshots the working copy.
-3.  **Verify:** `jj st` (status) and `jj diff` (review changes).
-4.  **Describe:** `jj describe -m "<type>[scope]: <description>"` to set the commit message (Conventional Commits).
-5.  **Refine:**
+2.  **Create Bookmark (Git Branch):** `jj bookmark create <branch-name> -r @` to create a Git-visible branch.
+    *   MANDATORY for any work intended to be pushed or shared via Git.
+    *   Bookmarks auto-move when commits are rewritten (rebase, amend, etc.).
+3.  **Edit:** Modify files. `jj` automatically snapshots the working copy.
+4.  **Verify:** `jj st` (status) and `jj diff` (review changes).
+5.  **Describe:** `jj describe -m "<type>[scope]: <description>"` to set the commit message (Conventional Commits).
+    *   This updates the Git commit message. The bookmark (branch) remains pointed at this change.
+6.  **Refine:**
     *   `jj squash`: To fold working copy changes into the parent commit.
     *   `jj split`: To break a change into multiple changes.
-6.  **Push:** `jj git push`. (Use `jj git push --change @` to push the specific current change).
+7.  **Push:** `jj git push --bookmark <branch-name>` to push the specific bookmark (branch) to remote.
+    *   Alternative: `jj git push --change @` pushes current change, auto-creating remote bookmark.
+
+**Bookmark Management:**
+- `jj bookmark list` - List all bookmarks (local and remote)
+- `jj bookmark create <name> -r <rev>` - Create bookmark at revision
+- `jj bookmark move <name> --to <rev>` - Move bookmark to different revision
+- `jj bookmark delete <name>` - Delete local bookmark
+- `jj bookmark track <name>@<remote>` - Track remote bookmark locally
 
 **Recovery:**
 *   **Undo:** `jj undo` (instant undo of ANY operation).
@@ -105,7 +125,11 @@ Default to research over action. Do not jump into implementation unless clearly 
 *   **Evolution:** `jj evolog` (view history of a specific change ID).
 
 **Formatting:** `<type>[optional scope]: <description>` (e.g., `feat(ui): add button`).
-**Enforcement:** Each change must be atomic, buildable, and testable.
+**Enforcement:**
+- Each change must be atomic, buildable, and testable
+- Each feature branch MUST have a corresponding bookmark (git visibility)
+- Agent prepares merge-ready state; human confirms via git merge
+- Agent MUST rebase onto target branch before marking work complete
 </jujutsu_vcs_strategy>
 
 <claude_multiple_agents>
@@ -149,31 +173,22 @@ jj workspace add /tmp/agent-task-c -r @
 
 **Within-Agent Operations:**
 ```
-cd /tmp/agent-<task>        # Enter workspace context
-jj st                        # Status (auto-snapshots working copy)
-jj diff                      # Review changes
-jj describe -m "feat: ..."   # Set commit message
+cd /tmp/agent-<task>                          # Enter workspace context
+jj bookmark create agent/<task> -r @          # Create Git branch for visibility [MANDATORY]
+# ... do work ...
+jj st                                          # Status (auto-snapshots working copy)
+jj diff                                        # Review changes
+jj describe -m "feat: ..."                     # Set commit message (updates Git commit)
+jj rebase -d <target-branch>                   # Rebase onto target branch (merge-ready for human)
 ```
 
-**Cross-Workspace Queries:**
-- `jj log -r 'working_copies()'` - See all workspace states
-- `jj log -r '<workspace>@'` - Query specific workspace's working copy
-- `jj diff -r '<workspace>@'` - Diff specific workspace
+**Cross-Workspace:** `jj log -r 'working_copies()'` | `jj log -r '<ws>@'` | `jj diff -r '<ws>@'`
 
-**Merge Strategy:** [After agents complete]
-```
-# Option 1: Rebase onto main
-jj rebase -s <agent-change> -d main
-
-# Option 2: Create merge commit
-jj new <change-a> <change-b> <change-c> -m "merge: agent results"
-
-# Option 3: Squash into target
-jj squash --from <agent-change> --into <target>
-```
+**Merge Strategy:** `jj rebase -s <change> -d main` | `jj new <a> <b> <c> -m "merge: results"` | `jj squash --from <change> --into <target>`
 
 **Cleanup:**
 ```
+jj bookmark delete agent/<task>        # Delete agent's Git branch (after merge)
 jj workspace forget <workspace-name>   # Remove workspace from tracking
 rm -rf /tmp/agent-<task>               # Delete workspace directory
 ```
@@ -194,8 +209,12 @@ rm -rf /tmp/agent-<task>               # Delete workspace directory
 - NEVER share workspace between agents
 - NEVER assign overlapping file scopes
 - NEVER modify main workspace while agents active
-- NEVER use git commands for workspace management
-- NEVER forget to clean up workspaces after completion
+- NEVER use git commands for workspace management (agents use jj only)
+- NEVER forget to clean up workspaces and bookmarks after completion
+- NEVER push changes without a bookmark (Git branch) - they won't be visible to Git users
+- NEVER expect human to use jj commands - they review/merge via git
+- ALWAYS create bookmarks so human sees work as git branches
+- ALWAYS rebase agent work onto target branch before completion (merge-ready state)
 </claude_multiple_agents>
 
 <quickstart_workflow>
@@ -229,21 +248,7 @@ rm -rf /tmp/agent-<task>               # Delete workspace directory
 
 **Thinking tools:** sequential-thinking [ALWAYS USE] for decomposition/dependencies; actor-critic-thinking for alternatives; shannon-thinking for uncertainty/risk
 
-**Banned (HARD ENFORCEMENT - VIOLATIONS REJECTED):**
-- `git status` / `git log` / `git diff` - USE `jj st`, `jj log`, `jj diff` INSTEAD
-- `git commit` / `git add` - USE `jj describe` (snapshots are automatic) INSTEAD
-- `git checkout` / `git switch` - USE `jj new` or `jj edit` INSTEAD
-- `git rebase` / `git merge` - USE `jj rebase` or `jj new <rev1> <rev2>` INSTEAD
-- `git stash` - USE `jj new @-` (changes remain as sibling, restore with `jj edit`) INSTEAD
-- `grep -r` / `grep -R` / `grep --recursive` - USE `rg` or `ast-grep` INSTEAD
-- `sed -i` / `sed --in-place` - USE `ast-grep -U` or Edit tool INSTEAD
-- `sed -e` for code transforms - USE `ast-grep` INSTEAD
-- `find` / `ls` - USE `fd` / `lsd` INSTEAD
-- `cat` for file reading - USE Read tool INSTEAD
-- Text-based grep for code patterns - USE `ast-grep` INSTEAD
-- `perl` / `perl -i` / `perl -pe` - USE `ast-grep -U` or `awk` INSTEAD
-
-**Enforcement mechanism:** Any command matching these patterns MUST be rejected and rewritten using approved tools. No exceptions.
+**Banned [HARD ENFORCEMENT]:** `git *` → `jj` equivalent | `grep -r/-R` → `rg`/`ast-grep` | `sed -i/-e`, `perl -i/-pe` → `ast-grep -U`/Edit/`awk` | `find`/`ls` → `fd`/`lsd` | `cat` → Read tool | text grep for code → `ast-grep`. Violations REJECTED—no exceptions.
 
 **Workflow:** Preview → Validate → Apply (no blind edits)
 **Diagrams (INTERNAL):** Architecture, data-flow, concurrency, memory, optimization, tidiness. Reason through in thinking process for non-trivial changes.
@@ -362,18 +367,20 @@ LOC/blanks/comments by language. Use for scope classification before editing. Se
 Semantic diff tool. Tree-sitter-based. Use for post-transform verification. See Quick Reference for commands.
 
 ### 7) jj (Jujutsu) [VCS]
-Git-compatible VCS. **ALWAYS use `jj` over `git`.**
+Git-compatible VCS. **ALWAYS use `jj` over `git`.** In colocated mode, every jj change IS a Git commit.
 **Key capabilities:**
 - `jj st`: Status. Snapshots working copy.
 - `jj diff`: Diff working copy (or `-r <rev>`).
 - `jj log`: History graph.
 - `jj new <rev>`: Create new change on top of `<rev>`.
-- `jj describe -m "msg"`: Update commit message.
+- `jj describe -m "msg"`: Update commit message (updates Git commit).
 - `jj squash`: Move changes into parent (amend).
 - `jj abandon <rev>`: Discard revision.
-- `jj git push`: Push to remote.
+- `jj bookmark create <name> -r @`: Create Git branch at current change. [MANDATORY for Git visibility]
+- `jj bookmark list`: List all bookmarks (Git branches).
+- `jj git push --bookmark <name>`: Push specific branch to remote.
 
-**Workflow:** `jj new` → Edit → `jj st` → `jj describe` → `jj squash`/`jj git push`
+**Workflow:** `jj new` → `jj bookmark create <branch>` → Edit → `jj st` → `jj describe` → `jj git push --bookmark <branch>`
 
 ### Quick Reference
 
@@ -393,31 +400,15 @@ Git-compatible VCS. **ALWAYS use `jj` over `git`.**
 
 ## Verification & Refinement
 
-<verification_refinement>
-**Three-Stage:**
-- **Pre-Action:** Verify: Correct file/location, Pattern matches intended, No false positives, Scope expected, Dependencies understood
-- **Mid-Action:** Verify: Each step produces an expected result, State is consistent, No unexpected side effects, Can roll back, Progress tracked
-- **Post-Action:** Verify: Change applied correctly everywhere, No unintended mods, Syntax/type checks pass, Tests pass, No regressions
+<verification>
+**Three-Stage:** Pre (file/pattern/scope correct) → Mid (state consistent, rollback ready) → Post (applied everywhere, tests pass)
 
-**Progressive Refinement (MVC → 10% → 100%):** Identify MVC → Apply to a single instance → Verify thoroughly → Expand to 10% → Verify Batch → Expand to 100% → Final Verification
+**Progressive:** MVC → 1 instance → 10% → 100%. **Risk:** `(files × complexity × blast) / (coverage + 1)` — Low(<10): standard | Med(10-50): progressive | High(>50): plan first
 
-**Risk Scoring:** `Risk = (files_affected × complexity × blast_radius) / (test_coverage + 1)`
-- Low (<10): Medium confidence pattern, standard verification
-- Medium (10-50): Progressive refinement, extra verification, test subset first
-- High (>50): Low-confidence pattern, extensive testing, propose plan first
+**Recovery:** Checkpoint → Analyze → Rollback/Partial/Complete → Retry. **Tactics:** Dry-run, checkpoint, rollback plan, subset test, incremental verify
 
-**Error Recovery:** Checkpoint state → Analyze failure → Determine the recovery path (Rollback/Partial/Complete) → Update confidence → Retry with adjustment
-**Resilience Tactics:** Dry-run first, Checkpoint frequently, Maintain rollback plan, Test on subset, Verify incrementally
-**Context Preservation:** Track Working Set, Dependencies, State, Assumptions, Recovery Points
-</verification_refinement>
-
-<verification_protocol>
-**Post-Transform Verification (Advisory):**
-
-1. Transform: `ast-grep -p 'old' -r 'new' -U`
-2. Verify: `difft --display inline original modified`
-3. Warn thresholds: MICRO(5), SMALL(15), MEDIUM(50) chunks
-</verification_protocol>
+**Post-Transform:** `ast-grep -U` → `difft --display inline` → Warn: MICRO(5), SMALL(15), MEDIUM(50) chunks
+</verification>
 
 ## UI/UX Design Guidelines
 
@@ -442,25 +433,70 @@ Don't hold back. Give it your all.
 ## Language-Specific Quick Reference
 
 <language_specifics>
-**Rust:** Edition 2024 [LATEST—MUST use 2024], zero-allocation/zero-copy, `#[inline]` hot paths (`#[inline(always)]` only measured), const generics, clean error domains (thiserror/anyhow), encapsulate unsafe, `#[must_use]` effectful results. Perf: criterion, LTO/PGO. Concurrency: crossbeam, atomics, lock-free only with proof/benchmarks. Diagnostics: Miri, ASan/TSan/UBSan, cargo-udeps. Lint: clippy / Format: fmt. Libs: crossbeam, smallvec, quanta, compact_str, bytemuck, zerocopy.
+**Rust:** Edition 2024 [LATEST—MUST use 2024], zero-allocation/zero-copy, `#[inline]` hot paths (`#[inline(always)]` only measured), const generics, clean error domains (thiserror/anyhow), encapsulate unsafe, `#[must_use]` effectful results.
+Perf: criterion, LTO/PGO. Concurrency: crossbeam, atomics, lock-free only with proof/benchmarks.
+Diagnostics: Miri, ASan/TSan/UBSan, cargo-udeps. Lint: clippy / Format: fmt.
+Libs: crossbeam, smallvec, quanta, compact_str, bytemuck, zerocopy.
 
-**C++:** C++20+, RAII, smart pointers default, std::span/string_view, consteval/constexpr, zero-copy first, move semantics/perfect forwarding, correct noexcept. Concurrency: std::jthread+stop_token, atomics, lock-free only proved. Ranges/Views. Build: CMake presets/toolchains. Diagnostics: Sanitizers/UBSan/TSan, Valgrind. Testing: GoogleTest/Mock, property tests (rapidcheck). Lint: clang-tidy / Format: clang-format. Libs: {fmt}, spdlog, minimal abseil/boost.
+**C++:** C++20+, RAII, smart pointers default, std::span/string_view, consteval/constexpr, zero-copy first, move semantics/perfect forwarding, correct noexcept.
+Concurrency: std::jthread+stop_token, atomics, lock-free only proved. Ranges/Views.
+Build: CMake presets/toolchains. Diagnostics: Sanitizers/UBSan/TSan, Valgrind.
+Testing: GoogleTest/Mock, property tests (rapidcheck). Lint: clang-tidy / Format: clang-format.
+Libs: {fmt}, spdlog, minimal abseil/boost.
 
-**TypeScript:** Strict mode; discriminated unions; readonly; exhaustive pattern matching; Result/Either errors; NEVER any/unknown; ESM-first; tree-shaking; satisfies/as const; runtime validation (Zod). tsconfig: noUncheckedIndexedAccess, NodeNext resolution. Testing: Vitest+Testing Library. Lint: biome / Format: biome (always biome over eslint/prettier).
+**TypeScript:** Strict mode; discriminated unions; readonly; exhaustive pattern matching; Result/Either errors; NEVER any/unknown; ESM-first; tree-shaking; satisfies/as const; runtime validation (Zod).
+tsconfig: noUncheckedIndexedAccess, NodeNext resolution.
+Testing: Vitest+Testing Library. Lint: biome / Format: biome (always biome over eslint/prettier).
 
-  * **React:** RSC default; Client Components only when needed. Suspense+Error boundaries; useTransition/useDeferredValue. Hooks: custom for reuse; useMemo/useCallback only measured (prefer React compiler). Avoid unnecessary useEffect; clean up effects. State: Redux(default)/Zustand/Jotai app; TanStack Query server; avoid prop drilling. SSR: Next.js. Forms: React Hook Form+Zod. Styling: Tailwind or CSS Modules; avoid runtime CSS-in-JS. Testing: Vitest+Testing Library. Design: shadcn/ui (preferred), React Spectrum, Chakra, Mantine. Performance: code splitting, lazy loading, Next/Image. Animation: Motion. A11y: semantic HTML, ARIA, keyboard nav, focus mgmt.
+  * **React:** RSC default; Client Components only when needed. Suspense+Error boundaries; useTransition/useDeferredValue.
+    Hooks: custom for reuse; useMemo/useCallback only measured (prefer React compiler). Avoid unnecessary useEffect; clean up effects.
+    State: Redux(default)/Zustand/Jotai app; TanStack Query server; avoid prop drilling. SSR: Next.js.
+    Forms: React Hook Form+Zod. Styling: Tailwind or CSS Modules; avoid runtime CSS-in-JS.
+    Testing: Vitest+Testing Library. Design: shadcn/ui (preferred), React Spectrum, Chakra, Mantine.
+    Performance: code splitting, lazy loading, Next/Image. Animation: Motion. A11y: semantic HTML, ARIA, keyboard nav, focus mgmt.
 
-  * **Nest:** Modular arch; DTOs class-validator+class-transformer; Guards/Interceptors/Pipes/Filters. Data: Prisma (preferred) or TypeORM migrations/repos/transactions. API: REST (DTOs) or GraphQL (code-first @nestjs/graphql). Auth: Passport (JWT/OAuth2), argon2 (not bcrypt), rate limiting (@nestjs/throttler). Testing: Vitest (preferred) or Jest (unit), Supertest (e2e), Testcontainers. Config: @nestjs/config+Zod. Logging: Pino (structured), correlation IDs, OpenTelemetry. Performance: caching (@nestjs/cache-manager), compression, query optimization, connection pooling. Security: Helmet, CORS, CSRF, input sanitization, parameterized queries, dependency scanning.
+  * **Nest:** Modular arch; DTOs class-validator+class-transformer; Guards/Interceptors/Pipes/Filters.
+    Data: Prisma (preferred) or TypeORM migrations/repos/transactions.
+    API: REST (DTOs) or GraphQL (code-first @nestjs/graphql).
+    Auth: Passport (JWT/OAuth2), argon2 (not bcrypt), rate limiting (@nestjs/throttler).
+    Testing: Vitest (preferred) or Jest (unit), Supertest (e2e), Testcontainers.
+    Config: @nestjs/config+Zod. Logging: Pino (structured), correlation IDs, OpenTelemetry.
+    Performance: caching (@nestjs/cache-manager), compression, query optimization, connection pooling.
+    Security: Helmet, CORS, CSRF, input sanitization, parameterized queries, dependency scanning.
 
-**Python:** Strict type hints ALWAYS; f-strings; pathlib; dataclasses (or attrs) PODs; immutability (frozen=True). Concurrency: asyncio/trio structured cancellation; avoid blocking event loops. Testing: pytest+hypothesis; fixtures; coverage gates. Typecheck: pyright/ty / Lint: ruff / Format: ruff. Packaging: uv/pdm; pinned lockfiles. Libs: numba (numeric kernels), polars over pandas, pydantic (strict validation).
+**Python:** Strict type hints ALWAYS; f-strings; pathlib; dataclasses (or attrs) PODs; immutability (frozen=True).
+Concurrency: asyncio/trio structured cancellation; avoid blocking event loops.
+Testing: pytest+hypothesis; fixtures; coverage gates. Typecheck: pyright/ty / Lint: ruff / Format: ruff.
+Packaging: uv/pdm; pinned lockfiles. Libs: numba (numeric kernels), polars over pandas, pydantic (strict validation).
 
-**Modern Java:** Java 21+. Modern: records, sealed classes, pattern matching, virtual threads. Immutability-first; fluent Streams (prefer primitive); Optional returns only. Collections: List.of/Map.of. Concurrency: virtual threads+structured concurrency; data-race checks (VMLens). Performance: JFR profiling; GC tuning measured. Testing: JUnit 5, Mockito, AssertJ. Lint: Error Prone+NullAway (mandatory), SpotBugs, PMD / Format: Spotless+palantir-java-format. Security: OWASP+Snyk (CVSS≥7), parameterized queries, SBOM.
+**Modern Java:** Java 21+. Modern: records, sealed classes, pattern matching, virtual threads.
+Immutability-first; fluent Streams (prefer primitive); Optional returns only. Collections: List.of/Map.of.
+Concurrency: virtual threads+structured concurrency; data-race checks (VMLens).
+Performance: JFR profiling; GC tuning measured. Testing: JUnit 5, Mockito, AssertJ.
+Lint: Error Prone+NullAway (mandatory), SpotBugs, PMD / Format: Spotless+palantir-java-format.
+Security: OWASP+Snyk (CVSS≥7), parameterized queries, SBOM.
 
-  * **Spring Boot 3:** Virtual threads: spring.threads.virtual.enabled=true or TaskExecutorAdapter. HTTP: RestClient (not RestTemplate). JDBC: JdbcClient (named params). Problem Details: spring.mvc.problemdetails.enabled=true, RFC 9457. Data: JPA query methods, @Query, Specifications, @EntityGraph. Security: lambda DSL, Argon2 (not BCrypt), OAuth2, JWT, CSRF. Config: @ConfigurationProperties+records (not @Value). Docker: layered JARs, Buildpacks, non-root, Alpine JRE. Testing: JUnit 5+AssertJ+Testcontainers. Anti-patterns: RestTemplate, JdbcTemplate verbosity, pooling virtual threads, secrets in repo.
+  * **Spring Boot 3:** Virtual threads: spring.threads.virtual.enabled=true or TaskExecutorAdapter.
+    HTTP: RestClient (not RestTemplate). JDBC: JdbcClient (named params).
+    Problem Details: spring.mvc.problemdetails.enabled=true, RFC 9457.
+    Data: JPA query methods, @Query, Specifications, @EntityGraph.
+    Security: lambda DSL, Argon2 (not BCrypt), OAuth2, JWT, CSRF.
+    Config: @ConfigurationProperties+records (not @Value). Docker: layered JARs, Buildpacks, non-root, Alpine JRE.
+    Testing: JUnit 5+AssertJ+Testcontainers. Anti-patterns: RestTemplate, JdbcTemplate verbosity, pooling virtual threads, secrets in repo.
 
-**Kotlin:** K2+JVM 21+. Immutability (val, persistent collections); explicit public types; sealed/enum class+exhaustive when; data classes; @JvmInline value classes; inline/reified zero-cost; top-level functions+small objects; controlled extensions. Errors: Result/Either (Arrow); never !!/unscoped lateinit. Concurrency: structured coroutines (no GlobalScope), lifecycle CoroutineScope, SupervisorJob isolation; withContext(Dispatchers.IO) blocking; Flow (buffer/conflate/flatMapLatest/debounce); StateFlow/SharedFlow hot. Interop: @Jvm* annotations; clear nullability. Performance: avoid hot-path allocations; kotlinx.atomicfu; measure kotlinx-benchmark/JMH; kotlinx.serialization over reflection; kotlinx.datetime over Date. Build: Gradle Kotlin DSL+Version Catalogs; KSP over KAPT; binary-compatibility validator. Testing: JUnit 5+Kotest+MockK+Testcontainers. Logging: SLF4J+kotlin-logging. Lint: detekt+ktlint / Format: ktlint. Libs: kotlinx.{coroutines, serialization, datetime, collections-immutable, atomicfu}, Arrow, Koin/Hilt. Security: OWASP/Snyk, input validation, safe deserialization, no PII logs.
+**Kotlin:** K2+JVM 21+. Immutability (val, persistent collections); explicit public types; sealed/enum class+exhaustive when; data classes; @JvmInline value classes; inline/reified zero-cost; top-level functions+small objects; controlled extensions.
+Errors: Result/Either (Arrow); never !!/unscoped lateinit.
+Concurrency: structured coroutines (no GlobalScope), lifecycle CoroutineScope, SupervisorJob isolation; withContext(Dispatchers.IO) blocking; Flow (buffer/conflate/flatMapLatest/debounce); StateFlow/SharedFlow hot.
+Interop: @Jvm* annotations; clear nullability. Performance: avoid hot-path allocations; kotlinx.atomicfu; measure kotlinx-benchmark/JMH; kotlinx.serialization over reflection; kotlinx.datetime over Date.
+Build: Gradle Kotlin DSL+Version Catalogs; KSP over KAPT; binary-compatibility validator.
+Testing: JUnit 5+Kotest+MockK+Testcontainers. Logging: SLF4J+kotlin-logging.
+Lint: detekt+ktlint / Format: ktlint. Libs: kotlinx.{coroutines, serialization, datetime, collections-immutable, atomicfu}, Arrow, Koin/Hilt.
+Security: OWASP/Snyk, input validation, safe deserialization, no PII logs.
 
-**Go:** Context-first APIs (context.Context); goroutines/channels clear ownership; worker pools backpressure; careful escape analysis; errors wrapped %w typed/sentinel; avoid global state; interfaces behavior not data. Concurrency: sync primitives, atomic low level, errgroup structured. Testing: testify+race detector+benchmarks. Lint: golangci-lint (staticcheck) / Format: gofmt+goimports. Tooling: go vet; go mod tidy -compat; reproducible builds.
+**Go:** Context-first APIs (context.Context); goroutines/channels clear ownership; worker pools backpressure; careful escape analysis; errors wrapped %w typed/sentinel; avoid global state; interfaces behavior not data.
+Concurrency: sync primitives, atomic low level, errgroup structured.
+Testing: testify+race detector+benchmarks. Lint: golangci-lint (staticcheck) / Format: gofmt+goimports.
+Tooling: go vet; go mod tidy -compat; reproducible builds.
 </language_specifics>
 
 **General:** Immutability-first; explicit public API types; zero-copy/zero-allocation hot paths; fail-fast typed contextual errors; strict null-safety; exhaustive pattern matching; structured concurrency.
@@ -499,11 +535,7 @@ Don't hold back. Give it your all.
 </always>
 
 <design_validation>
-**Six stages before code:** ARCHITECT → FLOW → CONCURRENCY → MEMORY → OPTIMIZE → TIDINESS (complete in order; each builds on previous)
-
-**Checklist:** System Architecture | Data Flow | Concurrency Map | Memory Schema | Type Safety | Error Strategy | Performance Plan | Reliability | Security Guards
-
-**Enforcement:** IMPLEMENTATION BLOCKED UNTIL ALL CHECKED. Diagram reasoning non-negotiable.
+**Six stages before code:** ARCHITECT → FLOW → CONCURRENCY → MEMORY → OPTIMIZE → TIDINESS. **Checklist:** Architecture | Data Flow | Concurrency | Memory | Types | Errors | Performance | Reliability | Security. BLOCKED until all checked.
 </design_validation>
 
 <decision_heuristics>
