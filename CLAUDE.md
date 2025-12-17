@@ -234,6 +234,7 @@ rm -rf /tmp/agent-<task>               # Delete workspace directory
 - `git commit` / `git add` - USE `jj describe` (snapshots are automatic) INSTEAD
 - `git checkout` / `git switch` - USE `jj new` or `jj edit` INSTEAD
 - `git rebase` / `git merge` - USE `jj rebase` or `jj new <rev1> <rev2>` INSTEAD
+- `git stash` - USE `jj new @-` (changes remain as sibling, restore with `jj edit`) INSTEAD
 - `grep -r` / `grep -R` / `grep --recursive` - USE `rg` or `ast-grep` INSTEAD
 - `sed -i` / `sed --in-place` - USE `ast-grep -U` or Edit tool INSTEAD
 - `sed -e` for code transforms - USE `ast-grep` INSTEAD
