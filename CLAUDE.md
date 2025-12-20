@@ -86,9 +86,9 @@ Default to research over action. Do not jump into implementation unless clearly 
     *   *Setup:* Ask user for target branch (e.g., `main`, `develop`).
     *   *Sync:* `jj git fetch` (Refresh remote state).
     *   *Rebase:* `jj rebase -d <target>@origin` (Merge to target).
-    *   *Bridge:* `jj bookmark create <type>/<scope> -r @` (e.g., `feat/user-auth`, `fix/login-bug`).
-    *   *Track:* `jj bookmark track <type>/<scope>@origin` (If remote bookmark exists).
-    *   *Push:* `jj git push --bookmark <type>/<scope>` (Transport to Remote).
+    *   *Bridge:* `jj bookmark create <branch-name> -r @`. Use Conventional Branch Conventions for branch names.
+    *   *Track:* `jj bookmark track <branch-name>@origin` (If remote bookmark exists).
+    *   *Push:* `jj git push --bookmark <branch-name>` (Transport to Remote).
 
 **Recovery:** `jj undo` (Instant revert) | `jj abandon` (Discard atom) | `jj rebase -d <main>` (Update base).
 </jujutsu_vcs_strategy>
@@ -248,8 +248,8 @@ Always retrieve framework/library docs using: ref-tools, context7, webfetch. Use
 *   **Init:** `jj git init --colocate` | `jj git fetch`
 *   **Start:** `jj new <remote/branch>` (New Temporal Atom)
 *   **Work:** (Auto-saved) → `jj squash` (Combine) | `jj split` (Decompose)
-*   **Bridge:** `jj bookmark create <name> -r @` (Expose to Git)
-*   **Push:** `jj git push --bookmark <name>` (Sync)
+*   **Bridge:** `jj bookmark create <branch-name> -r @`. Use Conventional Branch Conventions for branch names.
+*   **Push:** `jj git push --bookmark <branch-name>` (Sync)
 
 ### 6) tokei [Scope]
 **Usage:** `tokei src/ --exclude *.spec.ts` (Assess impact).
