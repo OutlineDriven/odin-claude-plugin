@@ -27,7 +27,7 @@ Think systemically using SHORT-form KEYWORDS for efficient internal reasoning. U
 
 **Tool execution:** Calls within batch execute sequentially; "parallel" = submit together; never use placeholders; respect dependencies. Patterns: Independent (1 batch) | Dependent (N batches: Batch 1 → ... → Batch K)
 
-**Context Isolation:** Create unique jj change per agent/subtask: `jj new <base> -m 'Agent: <Task>'` for isolated contexts.
+**Context Isolation:** Create unique jj change per agent/subtask: `jj new <git_base> -m 'Agent: <Task>'` for isolated contexts.
 
 **FORBIDDEN:** Guessing params needing other results; ignoring logical order; batching dependent ops
 </orchestration>
@@ -71,21 +71,22 @@ Default to research over action. Do not jump into implementation unless clearly 
 </temporal_files_organization>
 
 <jujutsu_vcs_strategy>
-**Jujutsu (jj) Atomic State Management**
-**Philosophy:** The Working Copy (`@`) is *always* a mutable commit. No staging area.
-**Golden Rule:** One Revision = One Logical Atomic Task (Code + Test + Docs).
+**Jujutsu (jj) ↔ Git Interop Strategy**
+**Philosophy:** Git = **Remote Source of Truth**. JJ = **Local Temporal Workshop**.
+**Rule:** All stable branches live in Git. All local/WIP states live in JJ (anonymous revisions).
 
-**Atomic Commit Protocol:**
-1.  **Isolate:** `jj new <base> -m "feat: <atomic_scope>"` (Fresh context).
-2.  **Iterate:** Modify files. State auto-snapshots into `@`.
-3.  **Refine (The Loop):**
-    *   *Grow Atom:* `jj squash` (Merge recent edits into current revision).
-    *   *Split Atom:* `jj split` (If concerns mix, separate into distinct revisions).
-    *   *Stack:* `jj new` (Create dependent revision on top).
-4.  **Verify:** `jj diff` (Review atom integrity) | `jj st` (Check path status).
-5.  **Publish:** `jj bookmark create <name> -r @` → `jj git push` (Git Bridge).
+**Atomic Interop Protocol:**
+1.  **Sync:** `jj git fetch` → `jj new <branch>@origin` (Start *anonymous* atom on Git tip).
+2.  **Develop (Temporal):**
+    *   *Iterate:* Edit files. State auto-snapshots into `@`.
+    *   *Refine:* `jj squash` (Combine edits), `jj split` (Isolate concerns), `jj new` (Stack atoms).
+    *   *Constraint:* No bookmarks (branches) until stable.
+3.  **Atomize:** Collapse temporal states into ONE logical unit (Code + Test + Docs).
+4.  **Publish:**
+    *   *Bridge:* `jj bookmark create <name> -r @` (Expose atom to Git).
+    *   *Push:* `jj git push --bookmark <name>` (Transport to Remote).
 
-**Recovery:** `jj undo` (Instant revert) | `jj abandon` (Discard atom) | `jj list` (Resolve conflicts).
+**Recovery:** `jj undo` (Instant revert) | `jj abandon` (Discard atom) | `jj rebase -d <main>` (Update base).
 </jujutsu_vcs_strategy>
 
 <claude_multiple_agents>
@@ -93,7 +94,7 @@ Default to research over action. Do not jump into implementation unless clearly 
 **Rule:** Parallel agents MUST execute in isolated workspaces to prevent lock contention.
 
 **Launch Protocol:**
-1.  **Analyze:** Identify base revision (e.g., `main` or `trunk()`).
+1.  **Analyze:** Identify base revision (e.g., `main@origin`).
 2.  **Isolate:** Create ephemeral workspace for EACH agent.
     *   `jj workspace add ./.outline/agent-<id> --revision <base>`
 3.  **Execute:** Agents run inside `./.outline/agent-<id>`.
@@ -239,11 +240,12 @@ Always retrieve framework/library docs using: ref-tools, context7, webfetch. Use
 **Usage:** Fast file finding. `fd -e py -E venv`
 
 ### 5) jujutsu (jj) [State Management]
-**Usage:** Atomic VCS. `@` = Current Commit.
+**Usage:** Temporal = JJ (Anonymous), Published = Git (Bookmark).
 *   **Init:** `jj git init --colocate` | `jj git fetch`
-*   **Start:** `jj new main -m "feat: <Task>"` (New Atom)
-*   **Save:** (Auto-saved) → `jj squash` (Amend Atom)
-*   **Push:** `jj bookmark create <branch> -r @` → `jj git push`
+*   **Start:** `jj new <remote/branch>` (New Temporal Atom)
+*   **Work:** (Auto-saved) → `jj squash` (Combine) | `jj split` (Decompose)
+*   **Bridge:** `jj bookmark create <name> -r @` (Expose to Git)
+*   **Push:** `jj git push --bookmark <name>` (Sync)
 
 ### 6) tokei [Scope]
 **Usage:** `tokei src/ --exclude *.spec.ts` (Assess impact).
