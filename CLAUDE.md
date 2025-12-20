@@ -83,8 +83,12 @@ Default to research over action. Do not jump into implementation unless clearly 
     *   *Constraint:* No bookmarks (branches) until stable.
 3.  **Atomize:** Collapse temporal states into ONE logical unit (Code + Test + Docs).
 4.  **Publish:**
-    *   *Bridge:* `jj bookmark create <name> -r @` (Expose atom to Git).
-    *   *Push:* `jj git push --bookmark <name>` (Transport to Remote).
+    *   *Setup:* Ask user for target branch (e.g., `main`, `develop`).
+    *   *Sync:* `jj git fetch` (Refresh remote state).
+    *   *Rebase:* `jj rebase -d <target>@origin` (Merge to target).
+    *   *Bridge:* `jj bookmark create <type>/<scope> -r @` (e.g., `feat/user-auth`, `fix/login-bug`).
+    *   *Track:* `jj bookmark track <type>/<scope>@origin` (If remote bookmark exists).
+    *   *Push:* `jj git push --bookmark <type>/<scope>` (Transport to Remote).
 
 **Recovery:** `jj undo` (Instant revert) | `jj abandon` (Discard atom) | `jj rebase -d <main>` (Update base).
 </jujutsu_vcs_strategy>
