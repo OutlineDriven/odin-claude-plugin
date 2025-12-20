@@ -56,7 +56,7 @@ Use `sequential-thinking` tool to decompose complex requirements into validation
 Check if validation artifacts already exist in `.outline/`:
 ```bash
 # Check for existing validation structure
-fd -t d .outline 2>/dev/null && lsd --tree .outline --depth 2
+fd -t d .outline 2>/dev/null && eza --tree .outline --depth 2
 
 # Check for existing proofs
 fd -e lean -e idr .outline/proofs 2>/dev/null

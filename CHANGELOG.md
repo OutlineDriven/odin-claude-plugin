@@ -250,7 +250,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - native-patch for file edits
 - ripgrep for text/comments/strings
 - fd for file discovery (NEVER find)
-- lsd for directory listing (NEVER ls)
+- eza for directory listing (NEVER ls)
 - Banned: sed for edits, find, ls, grep for code patterns
 
 #### Configuration

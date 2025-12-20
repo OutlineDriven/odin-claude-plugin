@@ -430,7 +430,7 @@ Calculate confidence: `Confidence = (familiarity + (1-complexity) + (1-risk) + (
 
 ### Tool Selection
 
-**Priority:** 1) ast-grep (AG) [HIGHLY PREFERRED]: AST-based, 90% error reduction, 10x accurate. 2) native-patch: File edits, multi-file changes. 3) rg: Text/comments/strings. 4) fd: File discovery. 5) lsd: Directory listing. 6) tokei: Code metrics/scope.
+**Priority:** 1) ast-grep (AG) [HIGHLY PREFERRED]: AST-based, 90% error reduction, 10x accurate. 2) native-patch: File edits, multi-file changes. 3) rg: Text/comments/strings. 4) fd: File discovery. 5) eza: Directory listing. 6) tokei: Code metrics/scope.
 
 **Selection guide:**
 | Target | Tool |
@@ -446,7 +446,7 @@ Calculate confidence: `Confidence = (familiarity + (1-complexity) + (1-risk) + (
 - `grep -r` / `grep -R` / `grep --recursive` - USE `rg` or `ast-grep` INSTEAD
 - `sed -i` / `sed --in-place` - USE `ast-grep -U` or Edit tool INSTEAD
 - `sed -e` for code transforms - USE `ast-grep` INSTEAD
-- `find` / `ls` - USE `fd` / `lsd` INSTEAD
+- `find` / `ls` - USE `fd` / `eza` INSTEAD
 - `cat` for file reading - USE Read tool INSTEAD
 - Text-based grep for code patterns - USE `ast-grep` INSTEAD
 - `perl` / `perl -i` / `perl -pe` - USE `ast-grep -U` or `awk` INSTEAD
@@ -520,7 +520,7 @@ AST-based search/transform. 90% error reduction, 10x accurate. Language-aware (J
 
 #### Other Tools
 - **native-patch**: Simple line changes, add/remove sections, multi-file coordinated edits, atomic changes, non-code files.
-- **lsd** [MANDATORY]: Modern ls replacement. Color-coded file types/permissions, git integration, tree view. **NEVER use ls—always lsd.**
+- **eza** [MANDATORY]: Modern ls replacement. Color-coded file types/permissions, git integration, tree view. **NEVER use ls—always eza.**
 - **fd** [MANDATORY]: Modern find replacement. Intuitive syntax, respects .gitignore, fast parallel traversal. **NEVER use find—always fd.**
 - **tokei**: LOC/blanks/comments by language. Use for scope classification before editing. `tokei src/` | JSON: `tokei --output json | jq '.Total.code'`
 - **difft**: Semantic diff tool. Tree-sitter based. Use for post-transform verification. `difft --display inline original modified`

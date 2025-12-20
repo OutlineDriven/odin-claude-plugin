@@ -23,7 +23,7 @@
       "WebFetch",
       "WebSearch",
       "SlashCommand",
-      "Bash(lsd:*)",
+      "Bash(eza:*)",
       "Bash(awk:*)",
       "Bash(perl:*)",
       "Bash(sed -n:*)",
