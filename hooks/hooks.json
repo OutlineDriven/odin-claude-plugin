@@ -17,7 +17,7 @@
                 "hooks": [
                     {
                         "type": "command",
-                        "command": "echo 'Current directory structure (lsd):' && lsd -l -g -G --group-directories-first && echo ''"
+                        "command": "echo 'Current directory structure (eza):' && eza -l --group-directories-first --git-ignore && echo ''"
                     },
                     {
                         "type": "command",

@@ -234,7 +234,7 @@ Confidence = (familiarity + (1-complexity) + (1-risk) + (1-scope)) / 4
 2. **native-patch** - File edits, multi-file changes
 3. **ripgrep** - Text, comments, strings
 4. **fd** - File discovery (NEVER use find)
-5. **lsd** - Directory listing (NEVER use ls)
+5. **eza** - Directory listing (NEVER use ls)
 
 ### Tool Permission Issues
 
