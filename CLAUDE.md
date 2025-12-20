@@ -147,13 +147,13 @@ Default to research over action. Do not jump into implementation unless clearly 
 ## PRIMARY DIRECTIVES
 
 <must>
-**Tool Selection:** 1) ast-grep (AG) [HIGHLY PREFERRED]: AST-based, 90% error reduction, 10x accurate. 2) Edit suite: File edits, multi-file changes. 3) rg: Text/comments/strings. 4) fd: File discovery. 5) lsd: Directory listing. 6) tokei: Code metrics/scope. 7) jj: Version control.
+**Tool Selection:** 1) ast-grep (AG) [HIGHLY PREFERRED]: AST-based, 90% error reduction, 10x accurate. 2) Edit suite: File edits, multi-file changes. 3) rg: Text/comments/strings. 4) fd: File discovery. 5) eza: Directory listing (--git-ignore default). 6) tokei: Code metrics/scope. 7) jj: Version control.
 
 **Selection guide:** Code pattern → ast-grep | Simple line edit → AG/Edit | Multi-file atomic → Edit | Non-code → Edit | Text/comments → rg | Scope analysis → tokei | VCS → jj
 
 **Thinking tools:** sequential-thinking [ALWAYS USE] for decomposition/dependencies; actor-critic-thinking for alternatives; shannon-thinking for uncertainty/risk
 
-**Banned [HARD ENFORCEMENT]:** `git *` → `jj` equivalent | `grep -r/-R` → `rg`/`ast-grep` | `sed -i/-e`, `perl -i/-pe` → `ast-grep -U`/Edit/`awk` | `find`/`ls` → `fd`/`lsd` | `cat` → Read tool | text grep for code → `ast-grep`. Violations REJECTED—no exceptions.
+**Banned [HARD ENFORCEMENT]:** `git *` → `jj` equivalent | `grep -r/-R` → `rg`/`ast-grep` | `sed -i/-e`, `perl -i/-pe` → `ast-grep -U`/Edit/`awk` | `find`/`ls` → `fd`/`eza` | `cat` → Read tool | text grep for code → `ast-grep`. Violations REJECTED—no exceptions.
 
 **Workflow:** Preview → Validate → Apply (no blind edits)
 **Diagrams (INTERNAL):** Architecture, data-flow, concurrency, memory, optimization, tidiness. Reason through in thinking process for non-trivial changes.
