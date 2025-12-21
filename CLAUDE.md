@@ -27,8 +27,6 @@ Think systemically using SHORT-form KEYWORDS for efficient internal reasoning. U
 
 **Tool execution:** Calls within batch execute sequentially; "parallel" = submit together; never use placeholders; respect dependencies. Patterns: Independent (1 batch) | Dependent (N batches: Batch 1 → ... → Batch K)
 
-**Context Isolation:** Create isolated worktree per agent/subtask: `git worktree add ./.outline/agent-<id> <git_base>` for isolated contexts.
-
 **FORBIDDEN:** Guessing params needing other results; ignoring logical order; batching dependent ops
 </orchestration>
 
@@ -100,23 +98,6 @@ Default to research over action. Do not jump into implementation unless clearly 
 
 **Recovery:** `git undo` (Time-travel to any state) | `git hide` (Remove from smartlog) | `git sync` (Rebase onto main) | `git restack` (Fix abandoned commits).
 </git_branchless_strategy>
-
-<claude_multiple_agents_orchestration>
-**Multi-Agent Orchestration (Workspace Isolation)**
-**Rule:** Parallel agents MUST execute in isolated workspaces to prevent lock contention.
-
-**Launch Protocol:**
-1.  **Analyze:** Identify base revision (e.g., `origin/main`).
-2.  **Isolate:** Create ephemeral worktree for EACH agent.
-    * `git worktree add ./.outline/agent-<id> origin/main --detach`
-3.  **Execute:** Agents run inside `./.outline/agent-<id>`.
-    * *Agent A:* `cd ./.outline/agent-a && git commit --allow-empty -m "task A"`
-    * *Agent B:* `cd ./.outline/agent-b && git commit --allow-empty -m "task B"`
-4.  **Converge:**
-    * Agents create branches and push: `git branch agent-a && git push -u origin agent-a`
-    * Human/Coordinator merges via GitHub/GitLab.
-5.  **Cleanup:** `git worktree remove ./.outline/agent-<id>` (or `rm -rf` + `git worktree prune`)
-</claude_multiple_agents_orchestration>
 
 <quickstart_workflow>
 1. **Requirements**: Checklist (3-10 items), constraints, unknowns.
