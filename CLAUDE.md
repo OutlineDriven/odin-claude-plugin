@@ -70,15 +70,6 @@ Default to research over action. Do not jump into implementation unless clearly 
 **Enforcement:** Verify all constants/timeouts/buffer sizes with tools. Never hallucinate values.
 </calculation_always_explicit>
 
-<sandboxed_scripts>
-**Execution Protocol:** NEVER run raw `python -c` or `sh -c` for generated logic.
-**Mandatory Tool:** Use `landrun` for ALL ad-hoc script execution (Python, Node, Bash).
-- **Isolation:** `landrun` ensures filesystem scoping (repo-only) and resource limits.
-- **Syntax:** `landrun --lang python -- "print('hello')"`
-- **Prohibited:** `exec()`, `eval()`, un-sandboxed `subprocess`.
-- **Usage:** Configuration generation, complex logic verification, data processing, rapid prototyping.
-</sandboxed_scripts>
-
 <temporal_files_organization>
 **Outline-Driven Development:** ALL temporal artifacts for outline-driven development MUST use `.outline/` directory. [MANDATORY]
 **Non-Outline Files:** Use `/tmp` for temporary files unrelated to outline-driven development.
@@ -167,9 +158,10 @@ Default to research over action. Do not jump into implementation unless clearly 
 2) **Logic/Data Root:** `nu` (Nushell). Handles ALL pipelines, lists, filters, math, and data conversion.
 3) **Code Edit Root:** `ast-grep` (Structure), `srgn` (Grammar-Regex).
 4) **Pipeline Glue:** `fd` (Pipe/Scope-Only). Use in front of pipelines.
+5) **Context Root:** `repomix` (MCP). Pack/Analyze codebases.
 
 **Tool Selection [Second-Class Tools - SUPPORT]:**
-1) **Utilities:** `fcp` (Copy), `zoxide` (Nav), `eza` (List), `bat` (Read), `huniq` (Dedupe).
+1) **Utilities:** `zoxide` (Nav), `eza` (List), `bat` (Read), `huniq` (Dedupe).
 2) **Analysis:** `tokei` (Stats), `ripgrep` (Text Search), `fselect` (SQL Query).
 3) **Ops:** `hck` (Column Cut), `rargs` (Regex Args), `nomino` (Rename).
 4) **VCS:** `jj` (Main), `mergiraf` (Merge), `difftastic` (Diff).
@@ -186,7 +178,6 @@ Default to research over action. Do not jump into implementation unless clearly 
 - `find` → USE `bfs` or `nu -c 'ls **/*'`
 - `grep` → USE `rg` or `ast-grep`
 - `cat` → USE `bat` or `nu -c 'open'`
-- `cp` → USE `fcp`
 - `ps` → USE `procs` or `nu -c 'ps'`
 - `diff` → USE `difft`
 - `time` → USE `hyperfine`
@@ -194,7 +185,7 @@ Default to research over action. Do not jump into implementation unless clearly 
 - `sed` (complex) → USE `srgn`
 - `xargs` → USE `nu` (`each`) or `fd -x`
 - `jq` → USE `jql` or `nu`
-- `python -c`/`sh -c` (raw) → USE `landrun` or `nu -c`
+- **For ad-hoc scripting, use `nu` shell commands instead of raw `python -c` or `sh -c` one-liners.**
 
 <headless_enforcement>
 **Headless & Non-Interactive Protocol [MANDATORY]:**
@@ -286,7 +277,6 @@ Always retrieve framework/library docs using: ref-tools, context7, webfetch. Use
 ### 1) Core System & File Ops
 * **`eza`**: `ls` replacement. `eza --tree --level=2 --git-ignore`.
 * **`bat`**: `cat` replacement. `bat -p --line-range 10:20 file.rs`.
-* **`fcp`**: `cp` replacement (fast/async). `fcp -r src/ dest/`.
 * **`zoxide`**: Smart navigation. `zoxide query <partial>`.
 * **`rargs`**: Regex xargs. `rargs -p 'pattern' command`.
 
@@ -335,8 +325,10 @@ Always retrieve framework/library docs using: ref-tools, context7, webfetch. Use
 * **`fend`**: Logic/Dates/Units.
 * **`nu`**: Lists/Stats.
 
-### 8) Sandbox
-* **`landrun`**: Isolated execution environment. `landrun --lang python -- "print('hello')"`.
+### 8) Context Packing (Repomix) [MCP]
+* **`pack_codebase`**: Consolidate local code. `pack_codebase(directory="src")`.
+* **`pack_remote_repository`**: Analyze remote repos. `pack_remote_repository(remote="url")`.
+* **`grep_repomix_output`**: Search packed content.
 </code_tools>
 
 ## Verification & Refinement
