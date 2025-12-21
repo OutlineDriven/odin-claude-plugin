@@ -63,7 +63,6 @@ Default to research over action. Do not jump into implementation unless clearly 
 <calculation_always_explicit>
 **NO MENTAL MATH:** LLMs cannot calculate. You must use tools for ANY arithmetic, conversion, or logic.
 - **Date/Logic/Units:** `fend "date + 3 weeks"`, `fend "true and false or true"`, `fend "100mb / 2s"`.
-- **List/Stats:** Use `python3 -c` or `awk` for list math.
 **Enforcement:** Verify all constants/timeouts/buffer sizes with tools. Never hallucinate values.
 </calculation_always_explicit>
 
@@ -163,7 +162,6 @@ Default to research over action. Do not jump into implementation unless clearly 
 - `diff` → USE `difft`
 - `time` → USE `hyperfine`
 - `sed` → ALWAYS USE `srgn` or `ast-grep -U` or `native-patch`
-- **For ad-hoc scripting, use standard `python3` or `awk` instead of raw `sh` where appropriate.**
 
 <headless_enforcement>
 **Headless & Non-Interactive Protocol [MANDATORY]:**
