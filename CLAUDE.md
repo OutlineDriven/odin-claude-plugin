@@ -272,59 +272,21 @@ Always retrieve framework/library docs using: context7, (exa, tavily, ref-tool),
 **Protocol:** Search (`fd`/`rg`) → Metrics (`tokei`) → Plan → Edit (`srgn`/`ast-grep`) → Verify (`difft`).
 
 ### 1) Core System & File Ops
-* **`eza`**: `ls` replacement. Modern directory listing.
-    * **Tree:** `eza --tree --level=2 --git-ignore`
-    * **Long + Git:** `eza -l --git --header`
-    * **Icons:** `eza --icons`
-    * **Dirs only:** `eza -D`
-    * **Recursive:** `eza -R --level=2`
-    * **Sort:** `eza -l --sort=size` | `eza -l --sort=modified`
-* **`bat`**: `cat` replacement with syntax highlighting.
-    * **Basic:** `bat file.rs` | `bat -p file.rs` (plain, no line numbers)
-    * **Line range:** `bat --line-range 10:20 file.rs` | `bat -r :50 file.rs` (first 50)
-    * **Language:** `bat -l json config` | `bat -l diff changes.patch`
-    * **Show all:** `bat -A file.txt` (show non-printable chars)
-    * **Multiple:** `bat src/*.rs` | `bat file1.rs file2.rs`
-* **`zoxide`**: Smart directory navigation (learns from usage).
-    * **Jump:** `z foo` | `z foo bar` (match multiple terms) | `z ~/projects`
-    * **Interactive:** `zi foo` (fzf selection) | `z foo<TAB>` (completions)
-    * **Query:** `zoxide query foo` (show path without cd)
-    * **Manage:** `zoxide add /path` | `zoxide remove /path` | `zoxide edit`
-* **`rargs`**: Regex xargs with capture groups.
-    * **Basic:** `echo 'file.txt' | rargs -p '(.*)\.txt' mv {0} {1}.bak`
-    * **Delimiter:** `echo 'a:b:c' | rargs -d ':' echo {1} {2} {3}`
-    * **Pattern:** `ls | rargs -p '(.*)_(\d+)' echo 'name={1} num={2}'`
-    * **Read mode:** `rargs -p 'pattern' < input.txt command {0}`
+* **`eza`**: `ls` replacement. `eza --tree --level=2` | `eza -l --git` | `eza --icons` | `eza -D` | `eza -l --sort=size`
+* **`bat`**: `cat` replacement. `bat -p --line-range 10:20 file.rs`. Flags: `-p` (plain), `-l` (lang), `-A` (show-all), `-r` (range)
+* **`zoxide`**: Smart nav. `z foo` | `zi foo` (fzf) | `zoxide query <partial>`. Manage: `zoxide add|remove|edit`
+* **`rargs`**: Regex xargs. `rargs -p '(.*)\.txt' mv {0} {1}.bak`. Flags: `-p` (pattern), `-d` (delimiter)
 
 ### 2) Search & Discovery
 * **`fd`**: Fast file discovery. **PRIMARY discovery tool.**
     * **Basic:** `fd -e py -E venv` | `fd . src/ -e ts` | `fd -g '*.test.ts'`
-    * **Exclude:** `fd -e rs -E target -E .git`
-    * **Depth:** `fd -e go --max-depth 3`
-    * **Hidden:** `fd -H pattern` (include hidden files)
-    * **Execute per file:** `fd -e rs -x rustfmt {}`
-    * **Batch execute:** `fd -e py -X black`
-    * **Recent files:** `fd -e ts --changed-within 1d`
-    * **Size filter:** `fd -e json -S +1k` (files >1KB)
-    * **Parallel:** `fd -j 4 -e rs -x cargo fmt`
+    * **Exclude:** `fd -e rs -E target -E .git` | **Depth:** `fd -e go --max-depth 3` | **Hidden:** `fd -H pattern`
+    * **Execute:** `fd -e rs -x rustfmt {}` (per-file) | `fd -e py -X black` (batch) | `fd -j 4 -e rs -x cargo fmt` (parallel)
+    * **Filter:** `fd -e ts --changed-within 1d` | `fd -e json -S +1k` (size >1KB)
     * **Placeholders:** `{}` (full), `{/}` (basename), `{//}` (parent), `{.}` (no ext), `{/.}` (basename no ext)
-* **`ripgrep` (rg)**: Text/Regex search.
-    * **Basic:** `rg "pattern" -t rs` | `rg -F 'literal'`
-    * **Context:** `rg pattern -A 3 -B 2`
-    * **Glob:** `rg clap -g '*.toml'`
-    * **Type:** `rg 'fn run' --type rust`
-    * **JSON:** `rg pattern --json`
-* **`fselect`**: SQL-like filesystem query.
-    * **Basic:** `fselect name, size from . where size > 1mb`
-    * **Filter:** `fselect path from . where name = '*.rs' and modified > 2024-01-01`
-    * **Sort:** `fselect name, size from . order by size desc limit 10`
-    * **Attributes:** `fselect name, mime, is_dir from . where depth = 1`
-    * **Aggregate:** `fselect count(*), sum(size) from . where name = '*.log'`
-* **`tealdeer`**: Fast tldr cheat sheets.
-    * **Lookup:** `tldr tar` | `tldr git-rebase`
-    * **Update:** `tldr --update` (refresh cache)
-    * **List:** `tldr --list` (all available pages)
-    * **Platform:** `tldr -p linux tar` | `tldr -p osx brew`
+* **`ripgrep` (rg)**: Text search. `rg "pattern" -t rs` | `rg -F 'literal'` | `rg pattern -A 3 -B 2` | `rg clap -g '*.toml'` | `rg pattern --json`
+* **`fselect`**: SQL filesystem. `fselect path, size from . where size > 1mb`. Columns: name, path, size, modified, mime, is_dir. Ops: order by, limit, count, sum
+* **`tealdeer`**: Fast cheat sheets. `tldr <command>` | `tldr --update` | `tldr --list`
 
 ### 3) Code Manipulation
 * **`ast-grep` (AG)**: Structural search/replace. 90% error reduction, 10x accurate.
@@ -333,120 +295,42 @@ Always retrieve framework/library docs using: context7, (exa, tavily, ref-tool),
     * Debug: `ast-grep run -p 'pattern' -l js --debug-query=cst`
     * Pattern syntax: `$VAR` (single), `$$$ARGS` (multiple), `$_` (non-capturing)
 * **`srgn`**: Surgical regex/grammar replacement. Understands source code syntax.
-    * **Key flags:** `--python`, `--typescript`, `--rust`, `--go`, `--glob`, `--dry-run`, `-d` (delete), `-u` (upper), `-l` (lower)
-    * **Basic:** `echo 'Hello World' | srgn 'World' -- 'Universe'`
-    * **Delete:** `echo 'Hello!' | srgn -d '!'`
-    * **Python comments:** `cat file.py | srgn --python 'comments' 'TODO' -- 'DONE'`
-    * **TypeScript scoped:** `cat file.ts | srgn --typescript 'comments' 'TODO(?=:)' -- 'TODO(@assignee)'`
-    * **Glob files:** `srgn --glob '*.py' 'old_fn' -- 'new_fn'`
-    * **Dry-run:** `srgn --dry-run --glob '*.rs' 'pattern' -- 'replacement'`
-* **`nomino`**: Batch rename with regex/sort.
-    * **Regex:** `nomino -r '(.*)\.bak' '{1}.txt'` (rename .bak to .txt)
-    * **Sort:** `nomino -s date '{:03}.{ext}'` (rename by date order)
-    * **Test:** `nomino -t -r 'pattern' 'replacement'` (dry-run)
-    * **Recursive:** `nomino -R -r 'old' 'new'`
-* **`hck`**: Column cutter (better `cut`) with regex delimiters.
-    * **Basic:** `hck -f 1,3 -d ':'` | `hck -f 2- file.csv` (field 2 onwards)
-    * **Regex:** `hck -f 1,2 -D '\s+'` (whitespace delimiter)
-    * **Reorder:** `hck -f 3,1,2 -d ','` (reorder columns)
-    * **Exclude:** `hck -f -2 -d '\t'` (exclude field 2)
-* **`shellharden`**: Bash syntax hardener (quotes, safe expansions).
-    * **Check:** `shellharden script.sh` (show suggestions)
-    * **Transform:** `shellharden --transform script.sh` (print fixed)
-    * **Replace:** `shellharden --replace script.sh` (in-place fix)
-    * **Syntax:** `shellharden --syntax-suggest script.sh`
-* **`lemmeknow`**: Identify text, hashes, encodings.
-    * **Basic:** `lemmeknow 'aGVsbG8gd29ybGQ='` (identify base64)
-    * **JSON:** `lemmeknow --json 'text'` (structured output)
-    * **File:** `lemmeknow -f file.txt` (scan file content)
-    * **Boundary:** `lemmeknow -b 'hash123abc'` (word boundaries)
+    * **Flags:** `--python`, `--typescript`, `--rust`, `--go`, `--glob`, `--dry-run`, `-d` (delete), `-u` (upper), `-l` (lower)
+    * **Usage:** `srgn 'old' -- 'new'` | `srgn -d 'pattern'` | `srgn --python 'comments' 'TODO' -- 'DONE'` | `srgn --glob '*.py' 'old' -- 'new'`
+* **`nomino`**: Batch rename. `nomino -r '(.*)\.bak' '{1}.txt'`. Flags: `-r` (regex), `-s` (sort), `-t` (test), `-R` (recursive)
+* **`hck`**: Column cutter. `hck -f 1,3 -d ':'`. Flags: `-f` (fields), `-d` (delim), `-D` (regex delim), `-f -2` (exclude)
+* **`shellharden`**: Bash hardener. `shellharden script.sh` | `shellharden --replace script.sh` (in-place)
+* **`lemmeknow`**: Identify encodings/hashes. `lemmeknow 'text'` | `lemmeknow --json 'text'` | `lemmeknow -f file.txt`
 
 ### 4) Version Control
 * **`jj`**: Main VCS. Git-compatible. Every jj change IS a Git commit.
     * **Status/Log:** `jj st` | `jj log` | `jj diff`
-    * **Create change:** `jj new <rev>` | `jj new @-` (sibling)
-    * **Describe:** `jj describe -m "message"`
-    * **Squash:** `jj squash` (into parent) | `jj squash --from <rev>`
+    * **Create:** `jj new <rev>` | `jj new @-` (sibling) | **Describe:** `jj describe -m "message"`
+    * **Squash:** `jj squash` | `jj squash --from <rev>` | **Abandon:** `jj abandon <rev>` | `jj undo`
     * **Bookmark:** `jj bookmark create <name> -r @` | `jj bookmark list`
-    * **Push:** `jj git push --bookmark <name>`
-    * **Fetch:** `jj git fetch --remote origin`
-    * **Abandon:** `jj abandon <rev>` | `jj undo`
-* **`mergiraf`**: Syntax-aware merge driver for git.
-    * **Register:** `mergiraf register` (add to gitconfig)
-    * **Languages:** `mergiraf languages` (list supported)
-    * **Manual:** `mergiraf merge base.rs left.rs right.rs -o merged.rs`
-    * **Git setup:** Add `*.rs merge=mergiraf` to `.gitattributes`
-* **`difftastic`**: Syntax-aware structural diff.
-    * **Basic:** `difft old.rs new.rs` | `difft dir1/ dir2/`
-    * **Inline:** `difft --display inline file1 file2`
-    * **Side-by-side:** `difft --display side-by-side file1 file2`
-    * **Git:** `GIT_EXTERNAL_DIFF=difft git diff` | `git difftool -t difftastic`
-    * **Context:** `difft --context 5 old.rs new.rs`
-    * **Language:** `difft --override='*.custom:rust' file1 file2`
+    * **Git:** `jj git push --bookmark <name>` | `jj git fetch --remote origin`
+* **`mergiraf`**: Syntax-aware merge. `mergiraf register` (gitconfig) | `mergiraf merge base.rs left.rs right.rs -o out.rs`. Setup: `*.rs merge=mergiraf` in .gitattributes
+* **`difftastic`**: Syntax-aware diff. `difft old.rs new.rs` | `difft --display inline f1 f2`. Git: `GIT_EXTERNAL_DIFF=difft git diff`
 
 ### 5) Structured Data & Logic (Nushell)
 * **`nu` (Nushell)**: **MANDATORY** for logic pipelines, list operations, math, and data conversion.
-    * **Key commands:** `open` (read), `get` (extract), `where` (filter), `select` (columns), `sort-by`, `math`, `reduce`, `to json/yaml/text`
-    * **List/Filter:** `nu -c 'ls | where size > 10kb'`
-    * **Read Config:** `nu -c 'open cargo.toml | get package.version'`
-    * **Math/Stats:** `nu -c '[1 2 3 4] | math avg'` | `nu -c '[1 2 3] | math sum'`
-    * **Data Conversion:** `nu -c 'open data.yaml | to json'`
-    * **Pipelines:** `nu -c 'ls | sort-by modified | last 5'`
-    * **Reduce:** `nu -c '[1 2 3 4] | reduce {|elt, acc| $elt + $acc}'`
-    * **Table ops:** `nu -c 'ls | select name size | where size > 1kb'`
-    * **Filter conditions:** `nu -c 'ls | where type == "file" | where name =~ "test"'`
-    * **External cmd:** `nu -c 'ls /usr | get name | to text | ^grep pattern'`
-* **`jql`**: JSON query (Rust). Fast JSON field extraction.
-    * **Basic:** `cat data.json | jql '"key"'` | `jql '"users"[0]' file.json`
-    * **Nested:** `jql '"data"."nested"."field"' file.json`
-    * **Array:** `jql '"items"[*]."name"' file.json` (all names)
-    * **Filter:** `jql '"users"|[?age>30]' file.json`
-    * **Multiple:** `jql '"name","age"' file.json`
-* **`huniq`**: Hash-based deduplication (faster than `sort|uniq`).
-    * **Basic:** `huniq < file.txt` (unique lines)
-    * **Count:** `huniq -c < file.txt` (with occurrence count)
-    * **Delimiter:** `huniq -d $'\0'` (null-separated)
-    * **Large files:** Handles massive files via hash tables, no sorting
+    * **Commands:** `open` (read), `get` (extract), `where` (filter), `select` (columns), `sort-by`, `math`, `reduce`, `to json/yaml/text`
+    * **List/Filter:** `nu -c 'ls | where size > 10kb'` | `nu -c 'ls | where type == "file" | where name =~ "test"'`
+    * **Config/Data:** `nu -c 'open cargo.toml | get package.version'` | `nu -c 'open data.yaml | to json'`
+    * **Math/Stats:** `nu -c '[1 2 3 4] | math avg'` | `nu -c '[1 2 3] | math sum'` | `nu -c '[1 2 3 4] | reduce {|e,a| $e + $a}'`
+    * **Table ops:** `nu -c 'ls | select name size | where size > 1kb'` | `nu -c 'ls | sort-by modified | last 5'`
+* **`jql`**: JSON query. `jql '"key"' file.json` | `jql '"data"."nested"."field"'` | `jql '"items"[*]."name"'` | `jql '"users"|[?age>30]'`
+* **`huniq`**: Hash-based dedupe. `huniq < file.txt` | `huniq -c < file.txt` (count). Handles massive files via hash tables
 
 ### 6) Task & Perf
-* **`just`**: Command runner (Makefile alternative).
-    * **Run:** `just build` | `just test` | `just` (default recipe)
-    * **List:** `just --list` | `just --summary`
-    * **Args:** `just build release` (pass args to recipe)
-    * **Choose:** `just --choose` (fzf recipe selection)
-    * **Dry-run:** `just --dry-run build` (show commands)
-    * **Evaluate:** `just --evaluate` (show variables)
-* **`procs`**: Process viewer (`ps` replacement) with color/search.
-    * **Basic:** `procs` | `procs zsh` (search by keyword)
-    * **Tree:** `procs --tree` | `procs --tree zsh`
-    * **Watch:** `procs --watch` | `procs --watch-interval 5`
-    * **Sort:** `procs --sorta cpu` | `procs --sortd mem`
-    * **Logical:** `procs --and chrome gpu` | `procs --or vim nvim`
-    * **JSON:** `procs --json`
-* **`hyperfine`**: Benchmarking (`time` replacement) with statistics.
-    * **Basic:** `hyperfine 'command'` | `hyperfine 'cmd1' 'cmd2'`
-    * **Warmup:** `hyperfine --warmup 3 'command'`
-    * **Runs:** `hyperfine --min-runs 10 'command'`
-    * **Setup:** `hyperfine --prepare 'make clean' 'make build'`
-    * **Export:** `hyperfine --export-json results.json 'cmd'`
-    * **Shell:** `hyperfine --shell=none './binary'` (no shell overhead)
-    * **Compare:** `hyperfine 'fd .' 'find .'` (side-by-side comparison)
-* **`tokei`**: Code statistics. Use for scope assessment before editing.
-    * **Basic:** `tokei ./src`
-    * **JSON:** `tokei --output json`
-    * **Files:** `tokei --files`
-    * **Exclude:** `tokei . -e *.d`
-    * **Sort:** `tokei -s code`
+* **`just`**: Task runner. `just <task>` | `just --list` | `just --choose` (fzf). Flags: `--dry-run`, `--evaluate`
+* **`procs`**: Process viewer. `procs` | `procs zsh` | `procs --tree`. Flags: `--sorta cpu`, `--sortd mem`, `--json`, `--watch`
+* **`hyperfine`**: Benchmarking. `hyperfine 'cmd1' 'cmd2'`. Flags: `--warmup 3`, `--min-runs 10`, `--prepare`, `--export-json`, `--shell=none`
+* **`tokei`**: Code stats. `tokei ./src` | `tokei --output json` | `tokei --files` | `tokei -s code`. Use for scope assessment
 
 ### 7) Calculation
-* **`fend`**: Arbitrary-precision unit-aware calculator.
-    * **Math:** `fend '2^64'` | `fend 'sqrt(2)'` | `fend 'sin(45 deg)'`
-    * **Units:** `fend '5km to miles'` | `fend '100mb / 2s'` | `fend '72 fahrenheit to celsius'`
-    * **Time:** `fend 'now'` | `fend 'today + 3 weeks'` | `fend '2h30m in seconds'`
-    * **Base:** `fend '0xff to decimal'` | `fend '255 to hex'` | `fend '42 to binary'`
-    * **Boolean:** `fend 'true and false'` | `fend 'not true or false'`
-    * **Constants:** `fend 'pi * 2'` | `fend 'e^2'` | `fend 'c in km/s'`
-* **`nu`**: Lists/Stats (see Nushell section above).
+* **`fend`**: Unit-aware calc. Math: `fend '2^64'` | Units: `fend '5km to miles'` | Time: `fend 'today + 3 weeks'` | Base: `fend '0xff to decimal'` | Bool: `fend 'true and false'`
+* **`nu`**: Lists/Stats (see Nushell above).
 
 ### 8) Context Packing (Repomix) [MCP]
 AI-optimized codebase analysis via MCP. Pack repositories into consolidated files for analysis.
