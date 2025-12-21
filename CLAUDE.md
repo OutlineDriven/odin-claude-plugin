@@ -51,7 +51,7 @@ Default to research over action. Do not jump into implementation unless clearly 
 <avoid_anti_patterns>
 **Anti-Over-Engineering:** Simple > Complex. Standard lib first. Minimal abstractions.
 **YAGNI (MANDATORY):** No unused features/configs. No premature opt. No cargo-culting.
-**Tooling:** Must use `ast-grep`/`ripgrep`/`bfs` for searching. Never use `grep -r` or `find`.
+**Tooling:** Must use `ast-grep`/`ripgrep`/`fd` for searching. Never use `grep -r` or `find`.
 **Keep Simple:** Edit existing files first. Remove dead code. Defer abstractions.
 </avoid_anti_patterns>
 
@@ -117,11 +117,11 @@ Default to research over action. Do not jump into implementation unless clearly 
 
 <quickstart_workflow>
 1. **Requirements**: Checklist (3-10 items), constraints, unknowns.
-2. **Context**: `bfs` discovery. `nu` logic. Read critical files.
+2. **Context**: `fd` discovery. `nu` logic. Read critical files.
 3. **Design**: Delta diagrams (Architecture, Data-flow, Concurrency).
 4. **Contract**: I/O, invariants, edge cases, error modes.
 5. **Implementation**:
-    *   **Search**: `ast-grep` (Structure) or `bfs` (Discovery).
+    *   **Search**: `ast-grep` (Structure) or `fd` (Discovery).
     *   **Edit**: `srgn`/`ast-grep` (Structure) or `native-patch`.
     *   **State**: `jj squash` iteratively to build atomic commit.
 6. **Quality**: Build → Lint → Test → Smoke.
@@ -153,11 +153,10 @@ Default to research over action. Do not jump into implementation unless clearly 
 
 <must>
 **Tool Selection [First-Class Tools - MANDATORY ROOT]:**
-1) **Search Root:** `bfs` (Deep Discovery).
+1) **Search/Discovery Root:** `fd` (Fast Discovery + Pipelining). Primary file finder.
 2) **Logic/Data Root:** `nu` (Nushell). Handles ALL pipelines, lists, filters, math, and data conversion.
 3) **Code Edit Root:** `ast-grep` (Structure), `srgn` (Grammar-Regex).
-4) **Pipeline Glue:** `fd` (Pipe/Scope-Only). Use in front of pipelines.
-5) **Context Root:** `repomix` (MCP). Pack/Analyze codebases.
+4) **Context Root:** `repomix` (MCP). Pack/Analyze codebases.
 
 **Tool Selection [Second-Class Tools - SUPPORT]:**
 1) **Utilities:** `zoxide` (Nav), `eza` (List), `bat` (Read), `huniq` (Dedupe).
@@ -166,22 +165,22 @@ Default to research over action. Do not jump into implementation unless clearly 
 4) **VCS:** `jj` (Main), `mergiraf` (Merge), `difftastic` (Diff).
 5) **Data:** `jql` (JSON).
 
-**Selection guide:** Discovery → bfs | Pipelines/Logic → nu | Code pattern → ast-grep | Simple edit → srgn | Text → rg | Scope → tokei | VCS → jj
+**Selection guide:** Discovery → fd | Pipelines/Logic → nu | Code pattern → ast-grep | Simple edit → srgn | Text → rg | Scope → tokei | VCS → jj
 
-**Workflow:** bfs (discover) → ast-grep/rg (search) → Edit (transform) → jj (commit)
+**Workflow:** fd (discover) → ast-grep/rg (search) → Edit (transform) → jj (commit)
 
 **Thinking tools:** sequential-thinking [ALWAYS USE] for decomposition/dependencies; actor-critic-thinking for alternatives; shannon-thinking for uncertainty/risk
 
 **Banned [HARD ENFORCEMENT - REJECT IMMEDIATELY]:**
 - `ls` → USE `eza` or `nu -c 'ls'`
-- `find` → USE `bfs` or `nu -c 'ls **/*'`
+- `find` → USE `fd` or `nu -c 'ls **/*'`
 - `grep` → USE `rg` or `ast-grep`
 - `cat` → USE `bat` or `nu -c 'open'`
 - `ps` → USE `procs` or `nu -c 'ps'`
 - `diff` → USE `difft`
 - `time` → USE `hyperfine`
 - `awk/cut` → USE `nu` pipelines or `hck`
-- `sed` (complex) → USE `srgn`
+- `sed` → ALWAYS USE `srgn` or `ast-grep -U` or `native-patch`
 - `xargs` → USE `nu` (`each`) or `fd -x`
 - `jq` → USE `jql` or `nu`
 - **For ad-hoc scripting, use `nu` shell commands instead of raw `python -c` or `sh -c` one-liners.**
@@ -195,15 +194,14 @@ All tools must be executed in **strict headless mode**.
 - **Constraint:** Any command waiting for stdin input without a pipe is a **CRITICAL FAILURE**.
 </headless_enforcement>
 
-<bfs_first_enforcement>
-**bfs-First Scoping [MANDATORY before large operations]:**
+<fd_first_enforcement>
+**fd-First Scoping [MANDATORY before large operations]:**
 Before executing ast-grep scans, rg searches, or multi-file edits:
-1. **Discovery:** Use `bfs . -name "<pattern>"` to discover relevant files deeply.
-    * *Rationale:* `bfs` finds breadth-first, locating top-level configs/roots before diving into noise.
-2. **Scoping:** Use `fd` **only** if piping to other tools is required (e.g., `fd -e rs -x ...`).
+1. **Discovery:** Use `fd -e <ext> [pattern]` to discover relevant files.
+2. **Scoping:** Use `fd -E <exclude>` to filter noise (venv, node_modules, target).
 3. **Validate:** Review file count—if >50 files, narrow with patterns.
-4. **Execute:** Run ast-grep/rg on the identified scope.
-</bfs_first_enforcement>
+4. **Execute:** Run ast-grep/rg on the identified scope, or pipe via `fd -x`/`fd -X`.
+</fd_first_enforcement>
 
 **Workflow:** Preview → Validate → Apply (no blind edits)
 **Diagrams (INTERNAL):** Architecture, data-flow, concurrency, memory, optimization, tidiness. Reason through in thinking process for non-trivial changes.
@@ -262,7 +260,7 @@ Write solutions working correctly for all valid inputs, not just test cases. Imp
 </thinking_tools>
 
 <documentation_retrieval>
-Always retrieve framework/library docs using: ref-tools, context7, webfetch. Use webfetch recursively for user URLs, follow key internal links (bounded depth 2-3 levels), prioritize official docs.
+Always retrieve framework/library docs using: context7, (exa, tavily, ref-tool), webfetch. Use webfetch recursively for user URLs, follow key internal links (bounded depth 2-3 levels), prioritize official docs.
 
 **Source priority:** 1) Latest official docs, 2) API refs/specs, 3) Authoritative books/papers, 4) High-quality tutorials, 5) Community discussions (supporting evidence only)
 </documentation_retrieval>
@@ -271,60 +269,192 @@ Always retrieve framework/library docs using: ref-tools, context7, webfetch. Use
 
 <code_tools>
 **MANDATES:** HIGH PREFERENCE for `ast-grep` (Structure) and `jj` (State).
-**Protocol:** Search (`bfs`/`rg`) → Metrics (`tokei`) → Plan → Edit (`srgn`/`ast-grep`) → Verify (`difft`).
+**Protocol:** Search (`fd`/`rg`) → Metrics (`tokei`) → Plan → Edit (`srgn`/`ast-grep`) → Verify (`difft`).
 
 ### 1) Core System & File Ops
-* **`eza`**: `ls` replacement. `eza --tree --level=2 --git-ignore`.
-* **`bat`**: `cat` replacement. `bat -p --line-range 10:20 file.rs`.
-* **`zoxide`**: Smart navigation. `zoxide query <partial>`.
-* **`rargs`**: Regex xargs. `rargs -p 'pattern' command`.
+* **`eza`**: `ls` replacement. Modern directory listing.
+    * **Tree:** `eza --tree --level=2 --git-ignore`
+    * **Long + Git:** `eza -l --git --header`
+    * **Icons:** `eza --icons`
+    * **Dirs only:** `eza -D`
+    * **Recursive:** `eza -R --level=2`
+    * **Sort:** `eza -l --sort=size` | `eza -l --sort=modified`
+* **`bat`**: `cat` replacement with syntax highlighting.
+    * **Basic:** `bat file.rs` | `bat -p file.rs` (plain, no line numbers)
+    * **Line range:** `bat --line-range 10:20 file.rs` | `bat -r :50 file.rs` (first 50)
+    * **Language:** `bat -l json config` | `bat -l diff changes.patch`
+    * **Show all:** `bat -A file.txt` (show non-printable chars)
+    * **Multiple:** `bat src/*.rs` | `bat file1.rs file2.rs`
+* **`zoxide`**: Smart directory navigation (learns from usage).
+    * **Jump:** `z foo` | `z foo bar` (match multiple terms) | `z ~/projects`
+    * **Interactive:** `zi foo` (fzf selection) | `z foo<TAB>` (completions)
+    * **Query:** `zoxide query foo` (show path without cd)
+    * **Manage:** `zoxide add /path` | `zoxide remove /path` | `zoxide edit`
+* **`rargs`**: Regex xargs with capture groups.
+    * **Basic:** `echo 'file.txt' | rargs -p '(.*)\.txt' mv {0} {1}.bak`
+    * **Delimiter:** `echo 'a:b:c' | rargs -d ':' echo {1} {2} {3}`
+    * **Pattern:** `ls | rargs -p '(.*)_(\d+)' echo 'name={1} num={2}'`
+    * **Read mode:** `rargs -p 'pattern' < input.txt command {0}`
 
 ### 2) Search & Discovery
-* **`bfs`**: Codebase search / Discovery. `bfs . -name "*.rs"`. Use for deep scans.
-* **`fd`**: Scope limiting / Pipelining. `fd -e py -x ...`. Use when feeding other tools.
-* **`ripgrep` (rg)**: Text/Regex search. `rg "pattern" -t rs --json`.
-* **`fselect`**: SQL-like filesystem query. `fselect path, size from . where size > 1mb`.
-* **`tealdeer`**: Fast cheat sheets. `tldr <command>`.
+* **`fd`**: Fast file discovery. **PRIMARY discovery tool.**
+    * **Basic:** `fd -e py -E venv` | `fd . src/ -e ts` | `fd -g '*.test.ts'`
+    * **Exclude:** `fd -e rs -E target -E .git`
+    * **Depth:** `fd -e go --max-depth 3`
+    * **Hidden:** `fd -H pattern` (include hidden files)
+    * **Execute per file:** `fd -e rs -x rustfmt {}`
+    * **Batch execute:** `fd -e py -X black`
+    * **Recent files:** `fd -e ts --changed-within 1d`
+    * **Size filter:** `fd -e json -S +1k` (files >1KB)
+    * **Parallel:** `fd -j 4 -e rs -x cargo fmt`
+    * **Placeholders:** `{}` (full), `{/}` (basename), `{//}` (parent), `{.}` (no ext), `{/.}` (basename no ext)
+* **`ripgrep` (rg)**: Text/Regex search.
+    * **Basic:** `rg "pattern" -t rs` | `rg -F 'literal'`
+    * **Context:** `rg pattern -A 3 -B 2`
+    * **Glob:** `rg clap -g '*.toml'`
+    * **Type:** `rg 'fn run' --type rust`
+    * **JSON:** `rg pattern --json`
+* **`fselect`**: SQL-like filesystem query.
+    * **Basic:** `fselect name, size from . where size > 1mb`
+    * **Filter:** `fselect path from . where name = '*.rs' and modified > 2024-01-01`
+    * **Sort:** `fselect name, size from . order by size desc limit 10`
+    * **Attributes:** `fselect name, mime, is_dir from . where depth = 1`
+    * **Aggregate:** `fselect count(*), sum(size) from . where name = '*.log'`
+* **`tealdeer`**: Fast tldr cheat sheets.
+    * **Lookup:** `tldr tar` | `tldr git-rebase`
+    * **Update:** `tldr --update` (refresh cache)
+    * **List:** `tldr --list` (all available pages)
+    * **Platform:** `tldr -p linux tar` | `tldr -p osx brew`
 
 ### 3) Code Manipulation
-* **`ast-grep` (AG)**: Structural search/replace.
-    * Search: `ast-grep run -p 'import { $A } from "lib"' -l ts`
+* **`ast-grep` (AG)**: Structural search/replace. 90% error reduction, 10x accurate.
+    * Search: `ast-grep run -p 'import { $A } from "lib"' -l ts -C 3`
     * Rewrite: `ast-grep run -p 'logger.info($A)' -r 'logger.debug({ ctx: ctx, msg: $A })' -U`
-* **`srgn`**: Surgical regex/grammar replacement. `srgn --python 'pattern' 'replacement'`.
-* **`nomino`**: Batch rename. `nomino 's/foo/bar/'`.
-* **`hck`**: Column cutter (better `cut`). `hck -f 2 -d ","`.
-* **`shellharden`**: Bash syntax hardener.
-* **`lemmeknow`**: File type identification.
+    * Debug: `ast-grep run -p 'pattern' -l js --debug-query=cst`
+    * Pattern syntax: `$VAR` (single), `$$$ARGS` (multiple), `$_` (non-capturing)
+* **`srgn`**: Surgical regex/grammar replacement. Understands source code syntax.
+    * **Key flags:** `--python`, `--typescript`, `--rust`, `--go`, `--glob`, `--dry-run`, `-d` (delete), `-u` (upper), `-l` (lower)
+    * **Basic:** `echo 'Hello World' | srgn 'World' -- 'Universe'`
+    * **Delete:** `echo 'Hello!' | srgn -d '!'`
+    * **Python comments:** `cat file.py | srgn --python 'comments' 'TODO' -- 'DONE'`
+    * **TypeScript scoped:** `cat file.ts | srgn --typescript 'comments' 'TODO(?=:)' -- 'TODO(@assignee)'`
+    * **Glob files:** `srgn --glob '*.py' 'old_fn' -- 'new_fn'`
+    * **Dry-run:** `srgn --dry-run --glob '*.rs' 'pattern' -- 'replacement'`
+* **`nomino`**: Batch rename with regex/sort.
+    * **Regex:** `nomino -r '(.*)\.bak' '{1}.txt'` (rename .bak to .txt)
+    * **Sort:** `nomino -s date '{:03}.{ext}'` (rename by date order)
+    * **Test:** `nomino -t -r 'pattern' 'replacement'` (dry-run)
+    * **Recursive:** `nomino -R -r 'old' 'new'`
+* **`hck`**: Column cutter (better `cut`) with regex delimiters.
+    * **Basic:** `hck -f 1,3 -d ':'` | `hck -f 2- file.csv` (field 2 onwards)
+    * **Regex:** `hck -f 1,2 -D '\s+'` (whitespace delimiter)
+    * **Reorder:** `hck -f 3,1,2 -d ','` (reorder columns)
+    * **Exclude:** `hck -f -2 -d '\t'` (exclude field 2)
+* **`shellharden`**: Bash syntax hardener (quotes, safe expansions).
+    * **Check:** `shellharden script.sh` (show suggestions)
+    * **Transform:** `shellharden --transform script.sh` (print fixed)
+    * **Replace:** `shellharden --replace script.sh` (in-place fix)
+    * **Syntax:** `shellharden --syntax-suggest script.sh`
+* **`lemmeknow`**: Identify text, hashes, encodings.
+    * **Basic:** `lemmeknow 'aGVsbG8gd29ybGQ='` (identify base64)
+    * **JSON:** `lemmeknow --json 'text'` (structured output)
+    * **File:** `lemmeknow -f file.txt` (scan file content)
+    * **Boundary:** `lemmeknow -b 'hash123abc'` (word boundaries)
 
 ### 4) Version Control
-* **`jj`**: Main VCS. See VCS Strategy.
-* **`mergiraf`**: Syntax-aware merge.
-* **`difftastic`**: Syntax-aware diff. `difft --display inline old.rs new.rs`.
+* **`jj`**: Main VCS. Git-compatible. Every jj change IS a Git commit.
+    * **Status/Log:** `jj st` | `jj log` | `jj diff`
+    * **Create change:** `jj new <rev>` | `jj new @-` (sibling)
+    * **Describe:** `jj describe -m "message"`
+    * **Squash:** `jj squash` (into parent) | `jj squash --from <rev>`
+    * **Bookmark:** `jj bookmark create <name> -r @` | `jj bookmark list`
+    * **Push:** `jj git push --bookmark <name>`
+    * **Fetch:** `jj git fetch --remote origin`
+    * **Abandon:** `jj abandon <rev>` | `jj undo`
+* **`mergiraf`**: Syntax-aware merge driver for git.
+    * **Register:** `mergiraf register` (add to gitconfig)
+    * **Languages:** `mergiraf languages` (list supported)
+    * **Manual:** `mergiraf merge base.rs left.rs right.rs -o merged.rs`
+    * **Git setup:** Add `*.rs merge=mergiraf` to `.gitattributes`
+* **`difftastic`**: Syntax-aware structural diff.
+    * **Basic:** `difft old.rs new.rs` | `difft dir1/ dir2/`
+    * **Inline:** `difft --display inline file1 file2`
+    * **Side-by-side:** `difft --display side-by-side file1 file2`
+    * **Git:** `GIT_EXTERNAL_DIFF=difft git diff` | `git difftool -t difftastic`
+    * **Context:** `difft --context 5 old.rs new.rs`
+    * **Language:** `difft --override='*.custom:rust' file1 file2`
 
 ### 5) Structured Data & Logic (Nushell)
-* **`nu` (Nushell)**: **MANDATORY** for logic pipelines.
+* **`nu` (Nushell)**: **MANDATORY** for logic pipelines, list operations, math, and data conversion.
+    * **Key commands:** `open` (read), `get` (extract), `where` (filter), `select` (columns), `sort-by`, `math`, `reduce`, `to json/yaml/text`
     * **List/Filter:** `nu -c 'ls | where size > 10kb'`
     * **Read Config:** `nu -c 'open cargo.toml | get package.version'`
-    * **Math/Stats:** `nu -c '[1 2 3 4] | math avg'`
+    * **Math/Stats:** `nu -c '[1 2 3 4] | math avg'` | `nu -c '[1 2 3] | math sum'`
     * **Data Conversion:** `nu -c 'open data.yaml | to json'`
     * **Pipelines:** `nu -c 'ls | sort-by modified | last 5'`
-* **`jql`**: JSON query (Rust). `cat data.json | jql '"key"'`.
-* **`huniq`**: Hash-based deduplication.
+    * **Reduce:** `nu -c '[1 2 3 4] | reduce {|elt, acc| $elt + $acc}'`
+    * **Table ops:** `nu -c 'ls | select name size | where size > 1kb'`
+    * **Filter conditions:** `nu -c 'ls | where type == "file" | where name =~ "test"'`
+    * **External cmd:** `nu -c 'ls /usr | get name | to text | ^grep pattern'`
+* **`jql`**: JSON query (Rust). Fast JSON field extraction.
+    * **Basic:** `cat data.json | jql '"key"'` | `jql '"users"[0]' file.json`
+    * **Nested:** `jql '"data"."nested"."field"' file.json`
+    * **Array:** `jql '"items"[*]."name"' file.json` (all names)
+    * **Filter:** `jql '"users"|[?age>30]' file.json`
+    * **Multiple:** `jql '"name","age"' file.json`
+* **`huniq`**: Hash-based deduplication (faster than `sort|uniq`).
+    * **Basic:** `huniq < file.txt` (unique lines)
+    * **Count:** `huniq -c < file.txt` (with occurrence count)
+    * **Delimiter:** `huniq -d $'\0'` (null-separated)
+    * **Large files:** Handles massive files via hash tables, no sorting
 
 ### 6) Task & Perf
-* **`just`**: Patternize tasks. `just <task>`.
-* **`procs`**: Process viewer (`ps` replacement). `procs --json`.
-* **`hyperfine`**: Benchmarking (`time` replacement).
-* **`tokei`**: Code statistics.
+* **`just`**: Command runner (Makefile alternative).
+    * **Run:** `just build` | `just test` | `just` (default recipe)
+    * **List:** `just --list` | `just --summary`
+    * **Args:** `just build release` (pass args to recipe)
+    * **Choose:** `just --choose` (fzf recipe selection)
+    * **Dry-run:** `just --dry-run build` (show commands)
+    * **Evaluate:** `just --evaluate` (show variables)
+* **`procs`**: Process viewer (`ps` replacement) with color/search.
+    * **Basic:** `procs` | `procs zsh` (search by keyword)
+    * **Tree:** `procs --tree` | `procs --tree zsh`
+    * **Watch:** `procs --watch` | `procs --watch-interval 5`
+    * **Sort:** `procs --sorta cpu` | `procs --sortd mem`
+    * **Logical:** `procs --and chrome gpu` | `procs --or vim nvim`
+    * **JSON:** `procs --json`
+* **`hyperfine`**: Benchmarking (`time` replacement) with statistics.
+    * **Basic:** `hyperfine 'command'` | `hyperfine 'cmd1' 'cmd2'`
+    * **Warmup:** `hyperfine --warmup 3 'command'`
+    * **Runs:** `hyperfine --min-runs 10 'command'`
+    * **Setup:** `hyperfine --prepare 'make clean' 'make build'`
+    * **Export:** `hyperfine --export-json results.json 'cmd'`
+    * **Shell:** `hyperfine --shell=none './binary'` (no shell overhead)
+    * **Compare:** `hyperfine 'fd .' 'find .'` (side-by-side comparison)
+* **`tokei`**: Code statistics. Use for scope assessment before editing.
+    * **Basic:** `tokei ./src`
+    * **JSON:** `tokei --output json`
+    * **Files:** `tokei --files`
+    * **Exclude:** `tokei . -e *.d`
+    * **Sort:** `tokei -s code`
 
 ### 7) Calculation
-* **`fend`**: Logic/Dates/Units.
-* **`nu`**: Lists/Stats.
+* **`fend`**: Arbitrary-precision unit-aware calculator.
+    * **Math:** `fend '2^64'` | `fend 'sqrt(2)'` | `fend 'sin(45 deg)'`
+    * **Units:** `fend '5km to miles'` | `fend '100mb / 2s'` | `fend '72 fahrenheit to celsius'`
+    * **Time:** `fend 'now'` | `fend 'today + 3 weeks'` | `fend '2h30m in seconds'`
+    * **Base:** `fend '0xff to decimal'` | `fend '255 to hex'` | `fend '42 to binary'`
+    * **Boolean:** `fend 'true and false'` | `fend 'not true or false'`
+    * **Constants:** `fend 'pi * 2'` | `fend 'e^2'` | `fend 'c in km/s'`
+* **`nu`**: Lists/Stats (see Nushell section above).
 
 ### 8) Context Packing (Repomix) [MCP]
-* **`pack_codebase`**: Consolidate local code. `pack_codebase(directory="src")`.
-* **`pack_remote_repository`**: Analyze remote repos. `pack_remote_repository(remote="url")`.
-* **`grep_repomix_output`**: Search packed content.
+AI-optimized codebase analysis via MCP. Pack repositories into consolidated files for analysis.
+* **`pack_codebase`**: Consolidate local code. `pack_codebase(directory="src", compress=true)`.
+* **`pack_remote_repository`**: Analyze remote repos. `pack_remote_repository(remote="https://github.com/user/repo")`.
+* **`grep_repomix_output`**: Search packed content. `grep_repomix_output(outputId="id", pattern="pattern")`.
+* **`read_repomix_output`**: Read packed content. `read_repomix_output(outputId="id", startLine=1, endLine=100)`.
+* **Options:** `compress` (Tree-sitter compression, ~70% token reduction), `includePatterns`, `ignorePatterns`, `style` (xml/markdown/json/plain)
 </code_tools>
 
 ## Verification & Refinement
@@ -454,7 +584,7 @@ Tooling: go vet; go mod tidy -compat; reproducible builds.
 
 **Documentation policy:** No docs unless requested. Don't proactively create README or docs unless the user explicitly asks.
 
-**Critical reminders:** Do exactly what's asked (no more, no less) | Avoid unnecessary files | SELECT the APPROPRIATE TOOL: AG/srgn (highly preferred code), native-patch (edits), bfs/rg (search)
+**Critical reminders:** Do exactly what's asked (no more, no less) | Avoid unnecessary files | SELECT the APPROPRIATE TOOL: AG/srgn (highly preferred code), native-patch (edits), fd/rg (search)
 
 **Tool Prohibitions:** See `<must>` section for comprehensive banned command list. Violations REJECTED.
 
@@ -470,7 +600,7 @@ Tooling: go vet; go mod tidy -compat; reproducible builds.
 <decision_heuristics>
 **Research vs. Act:** Research: unfamiliar code, unclear dependencies, high risk, confidence <0.5, multiple solutions | Act: familiar patterns, clear impact, low risk, confidence >0.7, single solution
 
-**Tool Selection:** ast-grep/srgn (code structure, refactoring, bulk transforms) | ripgrep (text/comments/strings, non-code) | nu (data handling) | tokei (scope assessment) | Combined (multi-stage via bfs/rg/xargs pipelines)
+**Tool Selection:** ast-grep/srgn (code structure, refactoring, bulk transforms) | ripgrep (text/comments/strings, non-code) | nu (data handling) | tokei (scope assessment) | Combined (fd -x/rg/nu pipelines)
 
 **Scope Assessment (tokei-driven):** Run `tokei <target> --output json | nu -c 'from json | get Total.code'` before editing to select strategy:
 - **Micro** (<500 LOC): Direct edit, single-file focus, minimal verification
