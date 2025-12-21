@@ -64,8 +64,7 @@ Default to research over action. Do not jump into implementation unless clearly 
 
 <calculation_always_explicit>
 **NO MENTAL MATH:** LLMs cannot calculate. You must use tools for ANY arithmetic, conversion, or logic.
-- **Physical Units:** `numbat "100mb / 2s -> mbps"` (bandwidth), `numbat "500ms * 1000"` (timeouts).
-- **Date/Logic:** `fend "date + 3 weeks"`, `fend "true and false or true"`.
+- **Date/Logic/Units:** `fend "date + 3 weeks"`, `fend "true and false or true"`, `fend "100mb / 2s"`.
 - **List/Stats:** `nu -c '[1 2 3] | math avg'` (Nushell is MANDATORY for list math).
 **Enforcement:** Verify all constants/timeouts/buffer sizes with tools. Never hallucinate values.
 </calculation_always_explicit>
@@ -165,7 +164,7 @@ Default to research over action. Do not jump into implementation unless clearly 
 2) **Analysis:** `tokei` (Stats), `ripgrep` (Text Search), `fselect` (SQL Query).
 3) **Ops:** `hck` (Column Cut), `rargs` (Regex Args), `nomino` (Rename).
 4) **VCS:** `jj` (Main), `mergiraf` (Merge), `difftastic` (Diff).
-5) **Data:** `rq` (XML/YAML/TOML), `jql` (JSON).
+5) **Data:** `jql` (JSON).
 
 **Selection guide:** Discovery → bfs | Pipelines/Logic → nu | Code pattern → ast-grep | Simple edit → srgn | Text → rg | Scope → tokei | VCS → jj
 
@@ -295,7 +294,6 @@ Always retrieve framework/library docs using: ref-tools, context7, webfetch. Use
 * **`nomino`**: Batch rename. `nomino 's/foo/bar/'`.
 * **`hck`**: Column cutter (better `cut`). `hck -f 2 -d ","`.
 * **`shellharden`**: Bash syntax hardener.
-* **`treereduce`**: Bug minimization.
 * **`lemmeknow`**: File type identification.
 
 ### 4) Version Control
@@ -311,7 +309,6 @@ Always retrieve framework/library docs using: ref-tools, context7, webfetch. Use
     * **Data Conversion:** `nu -c 'open data.yaml | to json'`
     * **Pipelines:** `nu -c 'ls | sort-by modified | last 5'`
 * **`jql`**: JSON query (Rust). `cat data.json | jql '"key"'`.
-* **`rq`**: Record Query (Transcode XML/YAML/TOML/JSON).
 * **`huniq`**: Hash-based deduplication.
 
 ### 6) Task & Perf
@@ -321,7 +318,6 @@ Always retrieve framework/library docs using: ref-tools, context7, webfetch. Use
 * **`tokei`**: Code statistics.
 
 ### 7) Calculation
-* **`numbat`**: Physical units/dimensions.
 * **`fend`**: Logic/Dates/Units.
 * **`nu`**: Lists/Stats.
 
