@@ -98,7 +98,7 @@ Default to research over action. Do not jump into implementation unless clearly 
 **Recovery:** `jj undo` (Instant revert) | `jj abandon` (Discard atom) | `jj rebase -d <main>` (Update base).
 </jujutsu_vcs_strategy>
 
-<claude_multiple_agents>
+<multiple_agents_orchestration>
 **Multi-Agent Orchestration (Workspace Isolation)**
 **Rule:** Parallel agents MUST execute in isolated workspaces to prevent lock contention.
 
@@ -113,7 +113,7 @@ Default to research over action. Do not jump into implementation unless clearly 
     *   Agents push unique bookmarks: `jj bookmark create agent-a` → `jj git push`
     *   Human/Coordinator merges via GitHub/GitLab.
 5.  **Cleanup:** `jj workspace forget ./.outline/agent-<id>` → `rm -rf ./.outline/agent-<id>`
-</claude_multiple_agents>
+</multiple_agents_orchestration>
 
 <quickstart_workflow>
 1. **Requirements**: Checklist (3-10 items), constraints, unknowns.
