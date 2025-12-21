@@ -17,7 +17,7 @@
                 "hooks": [
                     {
                         "type": "command",
-                        "command": "echo 'Current directory structure (lsd):' && lsd -l --group-dirs first && echo ''"
+                        "command": "echo 'Current directory structure (lsd):' && lsd -l -g -G --group-directories-first && echo ''"
                     },
                     {
                         "type": "command",
