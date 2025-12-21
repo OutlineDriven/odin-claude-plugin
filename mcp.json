@@ -1,14 +1,5 @@
 {
     "mcpServers": {
-        "Check": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "@pv-bhat/vibe-check-mcp",
-                "start",
-                "--stdio"
-            ]
-        },
         "ast-grep": {
             "command": "uvx",
             "args": [
@@ -37,10 +28,12 @@
                 "server-shannon-thinking@latest"
             ]
         },
-        "code-index": {
-            "command": "uvx",
+        "repomix": {
+            "command": "npx",
             "args": [
-                "code-index-mcp"
+                "-y",
+                "repomix",
+                "--mcp"
             ]
         }
     }
