@@ -51,7 +51,7 @@ Default to research over action. Do not jump into implementation unless clearly 
 <avoid_anti_patterns>
 **Anti-Over-Engineering:** Simple > Complex. Standard lib first. Minimal abstractions.
 **YAGNI (MANDATORY):** No unused features/configs. No premature opt. No cargo-culting.
-**Tooling:** Must use `ast-grep`/`ripgrep` for codebase searching. Never use `grep -r` in any circumstances.
+**Tooling:** Must use `ast-grep`/`ripgrep`/`bfs` for searching. Never use `grep -r` or `find`.
 **Keep Simple:** Edit existing files first. Remove dead code. Defer abstractions.
 </avoid_anti_patterns>
 
@@ -62,11 +62,26 @@ Default to research over action. Do not jump into implementation unless clearly 
 - Choose straightforward flows; defer abstractions until the repeated need is proven.
 </keep_it_simple>
 
+<calculation_always_explicit>
+**NO MENTAL MATH:** LLMs cannot calculate. You must use tools for ANY arithmetic, conversion, or logic.
+- **Physical Units:** `numbat "100mb / 2s -> mbps"` (bandwidth), `numbat "500ms * 1000"` (timeouts).
+- **Date/Logic:** `fend "date + 3 weeks"`, `fend "true and false or true"`.
+- **List/Stats:** `nu -c '[1 2 3] | math avg'` (Nushell is MANDATORY for list math).
+**Enforcement:** Verify all constants/timeouts/buffer sizes with tools. Never hallucinate values.
+</calculation_always_explicit>
+
+<sandboxed_scripts>
+**Execution Protocol:** NEVER run raw `python -c` or `sh -c` for generated logic.
+**Mandatory Tool:** Use `landrun` for ALL ad-hoc script execution (Python, Node, Bash).
+- **Isolation:** `landrun` ensures filesystem scoping (repo-only) and resource limits.
+- **Syntax:** `landrun --lang python -- "print('hello')"`
+- **Prohibited:** `exec()`, `eval()`, un-sandboxed `subprocess`.
+- **Usage:** Configuration generation, complex logic verification, data processing, rapid prototyping.
+</sandboxed_scripts>
+
 <temporal_files_organization>
 **Outline-Driven Development:** ALL temporal artifacts for outline-driven development MUST use `.outline/` directory. [MANDATORY]
-
 **Non-Outline Files:** Use `/tmp` for temporary files unrelated to outline-driven development.
-
 **Rules:** NEVER create outline-related temporal files outside `.outline/` | Clean up after task completion | Use `/tmp` for scratch work not part of the outline workflow
 </temporal_files_organization>
 
@@ -76,19 +91,19 @@ Default to research over action. Do not jump into implementation unless clearly 
 **Rule:** All stable branches live in Git. All local/WIP states live in JJ (anonymous revisions).
 
 **Atomic Interop Protocol:**
-1.  **Sync:** `jj git fetch` → `jj new <branch>@origin` (Start *anonymous* atom on Git tip).
-2.  **Develop (Temporal):**
-    *   *Iterate:* Edit files. State auto-snapshots into `@`.
-    *   *Refine:* `jj squash` (Combine edits), `jj split` (Isolate concerns), `jj new` (Stack atoms).
-    *   *Constraint:* No bookmarks (branches) until stable.
-3.  **Atomize:** Collapse temporal states into ONE logical unit (Code + Test + Docs).
-4.  **Publish:**
-    *   *Setup:* Ask user for target branch (e.g., `main`, `develop`).
-    *   *Sync:* `jj git fetch` (Refresh remote state).
-    *   *Rebase:* `jj rebase -d <target>@origin` (Merge to target).
-    *   *Bridge:* `jj bookmark create <branch-name> -r @`. Use Conventional Branch Conventions for branch names.
-    *   *Track:* `jj bookmark track <branch-name>@origin` (If remote bookmark exists).
-    *   *Push:* `jj git push --bookmark <branch-name>` (Transport to Remote).
+1.  **Sync:** `jj git fetch` → `jj new <branch>@origin` (Start *anonymous* atom on Git tip).
+2.  **Develop (Temporal):**
+    *   *Iterate:* Edit files. State auto-snapshots into `@`.
+    *   *Refine:* `jj squash` (Combine edits), `jj split` (Isolate concerns), `jj new` (Stack atoms).
+    *   *Constraint:* No bookmarks (branches) until stable.
+3.  **Atomize:** Collapse temporal states into ONE logical unit (Code + Test + Docs).
+4.  **Publish:**
+    *   *Setup:* Ask user for target branch (e.g., `main`, `develop`).
+    *   *Sync:* `jj git fetch` (Refresh remote state).
+    *   *Rebase:* `jj rebase -d <target>@origin` (Merge to target).
+    *   *Bridge:* `jj bookmark create <branch-name> -r @`. Use Conventional Branch Conventions for branch names.
+    *   *Track:* `jj bookmark track <branch-name>@origin` (If remote bookmark exists).
+    *   *Push:* `jj git push --bookmark <branch-name>` (Transport to Remote).
 
 **Recovery:** `jj undo` (Instant revert) | `jj abandon` (Discard atom) | `jj rebase -d <main>` (Update base).
 </jujutsu_vcs_strategy>
@@ -112,13 +127,13 @@ Default to research over action. Do not jump into implementation unless clearly 
 
 <quickstart_workflow>
 1. **Requirements**: Checklist (3-10 items), constraints, unknowns.
-2. **Context**: `fd`/`rg` surface area. Read critical files.
+2. **Context**: `bfs` discovery. `nu` logic. Read critical files.
 3. **Design**: Delta diagrams (Architecture, Data-flow, Concurrency).
 4. **Contract**: I/O, invariants, edge cases, error modes.
 5. **Implementation**:
-    *   **Search**: `ast-grep` to map injection points.
-    *   **Edit**: `ast-grep` (Structure) or `native-patch` (Hunk).
-    *   **State**: `jj squash` iteratively to build atomic commit.
+    *   **Search**: `ast-grep` (Structure) or `bfs` (Discovery).
+    *   **Edit**: `srgn`/`ast-grep` (Structure) or `native-patch`.
+    *   **State**: `jj squash` iteratively to build atomic commit.
 6. **Quality**: Build → Lint → Test → Smoke.
 7. **Completion**: Final `jj squash`, verify atomic message, cleanup.
 </quickstart_workflow>
@@ -132,11 +147,11 @@ Default to research over action. Do not jump into implementation unless clearly 
 - **Scope**: `ast-grep scan --inline-rules 'rule: { pattern: "return $A", inside: { kind: "function", regex: "^handler" } }'`
 
 **2. Copy (Extraction)**
-- **Context**: `ast-grep run -p '$PAT' -C 3` or `sed -n '10,20p'`
+- **Context**: `ast-grep run -p '$PAT' -C 3` or `bat --line-range 10:20`
 
 **3. Paste (Atomic Transformation)**
 - **Rewrite**: `ast-grep run -p '$O.old($A)' -r '$O.new({ val: $A })' -U`
-- **Complex**: `ast-grep scan --inline-rules 'rule: { pattern: "$A + $B" } transform: { A: { replace: "calc($A)" } } fix: "$A + $B"' -U`
+- **Regex**: `srgn --python 'pattern' 'replacement'`
 - **Manual**: `native-patch` (hunk-based) for non-pattern multi-file edits.
 
 **4. Verify (Semantic)**
@@ -147,13 +162,58 @@ Default to research over action. Do not jump into implementation unless clearly 
 ## PRIMARY DIRECTIVES
 
 <must>
-**Tool Selection:** 1) ast-grep (AG) [HIGHLY PREFERRED]: AST-based, 90% error reduction, 10x accurate. 2) Edit suite: File edits, multi-file changes. 3) rg: Text/comments/strings. 4) fd: File discovery. 5) eza: Directory listing (--git-ignore default). 6) tokei: Code metrics/scope. 7) jj: Version control.
+**Tool Selection [First-Class Tools - MANDATORY ROOT]:**
+1) **Search Root:** `bfs` (Deep Discovery).
+2) **Logic/Data Root:** `nu` (Nushell). Handles ALL pipelines, lists, filters, math, and data conversion.
+3) **Code Edit Root:** `ast-grep` (Structure), `srgn` (Grammar-Regex).
+4) **Pipeline Glue:** `fd` (Pipe/Scope-Only). Use in front of pipelines.
 
-**Selection guide:** Code pattern → ast-grep | Simple line edit → AG/Edit | Multi-file atomic → Edit | Non-code → Edit | Text/comments → rg | Scope analysis → tokei | VCS → jj
+**Tool Selection [Second-Class Tools - SUPPORT]:**
+1) **Utilities:** `fcp` (Copy), `zoxide` (Nav), `eza` (List), `bat` (Read), `huniq` (Dedupe).
+2) **Analysis:** `tokei` (Stats), `ripgrep` (Text Search), `fselect` (SQL Query).
+3) **Ops:** `hck` (Column Cut), `rargs` (Regex Args), `nomino` (Rename).
+4) **VCS:** `jj` (Main), `mergiraf` (Merge), `difftastic` (Diff).
+5) **Data:** `rq` (XML/YAML/TOML), `jql` (JSON).
+
+**Selection guide:** Discovery → bfs | Pipelines/Logic → nu | Code pattern → ast-grep | Simple edit → srgn | Text → rg | Scope → tokei | VCS → jj
+
+**Workflow:** bfs (discover) → ast-grep/rg (search) → Edit (transform) → jj (commit)
 
 **Thinking tools:** sequential-thinking [ALWAYS USE] for decomposition/dependencies; actor-critic-thinking for alternatives; shannon-thinking for uncertainty/risk
 
-**Banned [HARD ENFORCEMENT]:** `git *` → `jj` equivalent | `grep -r/-R` → `rg`/`ast-grep` | `sed -i/-e`, `perl -i/-pe` → `ast-grep -U`/Edit/`awk` | `find`/`ls` → `fd`/`eza` | `cat` → Read tool | text grep for code → `ast-grep`. Violations REJECTED—no exceptions.
+**Banned [HARD ENFORCEMENT - REJECT IMMEDIATELY]:**
+- `ls` → USE `eza` or `nu -c 'ls'`
+- `find` → USE `bfs` or `nu -c 'ls **/*'`
+- `grep` → USE `rg` or `ast-grep`
+- `cat` → USE `bat` or `nu -c 'open'`
+- `cp` → USE `fcp`
+- `ps` → USE `procs` or `nu -c 'ps'`
+- `diff` → USE `difft`
+- `time` → USE `hyperfine`
+- `awk/cut` → USE `nu` pipelines or `hck`
+- `sed` (complex) → USE `srgn`
+- `xargs` → USE `nu` (`each`) or `fd -x`
+- `jq` → USE `jql` or `nu`
+- `python -c`/`sh -c` (raw) → USE `landrun` or `nu -c`
+
+<headless_enforcement>
+**Headless & Non-Interactive Protocol [MANDATORY]:**
+All tools must be executed in **strict headless mode**.
+- **No TUIs:** Never run `top`, `htop`, `vim`, `nano`. Use `procs`, `bat` (plain), `ed`/`sed`.
+- **No Pagers:** Always pipe to `cat` or use `--no-pager` (e.g., `git --no-pager`).
+- **Output:** Prefer `--json` or `nu` structured tables for parsing.
+- **Constraint:** Any command waiting for stdin input without a pipe is a **CRITICAL FAILURE**.
+</headless_enforcement>
+
+<bfs_first_enforcement>
+**bfs-First Scoping [MANDATORY before large operations]:**
+Before executing ast-grep scans, rg searches, or multi-file edits:
+1. **Discovery:** Use `bfs . -name "<pattern>"` to discover relevant files deeply.
+    * *Rationale:* `bfs` finds breadth-first, locating top-level configs/roots before diving into noise.
+2. **Scoping:** Use `fd` **only** if piping to other tools is required (e.g., `fd -e rs -x ...`).
+3. **Validate:** Review file count—if >50 files, narrow with patterns.
+4. **Execute:** Run ast-grep/rg on the identified scope.
+</bfs_first_enforcement>
 
 **Workflow:** Preview → Validate → Apply (no blind edits)
 **Diagrams (INTERNAL):** Architecture, data-flow, concurrency, memory, optimization, tidiness. Reason through in thinking process for non-trivial changes.
@@ -192,7 +252,6 @@ Write solutions working correctly for all valid inputs, not just test cases. Imp
 **Diagram-driven:** Always start with diagrams in reasoning. No code without comprehensive visual analysis in thinking process. Think systemically with precise notation, rigor, formal logic. Prefer **nomnoml**.
 
 **Six required diagrams:**
-
 1. **Concurrency**: Threads, synchronization, race analysis/prevention, deadlock avoidance, happens-before (→), lock ordering
 2. **Memory**: Stack/heap, ownership, access patterns, allocation/deallocation, lifetimes l(o)=⟨t_alloc, t_free⟩, safety guarantees
 3. **Data-flow**: Information sources, transformations, sinks, data pathways, state transitions, I/O boundaries
@@ -222,40 +281,62 @@ Always retrieve framework/library docs using: ref-tools, context7, webfetch. Use
 
 <code_tools>
 **MANDATES:** HIGH PREFERENCE for `ast-grep` (Structure) and `jj` (State).
-**Protocol:** Search (AG/RG) → Metrics (Tokei) → Plan → Edit (AG/Patch) → Verify (Diff/Test).
+**Protocol:** Search (`bfs`/`rg`) → Metrics (`tokei`) → Plan → Edit (`srgn`/`ast-grep`) → Verify (`difft`).
 
-### 1) ast-grep (AG) [Structural Ops]
-**Usage:** `run` (Replace), `scan` (Query), `--inline-rules` (Refine).
-*   **Search:** `ast-grep run -p 'import { $A } from "lib"' -l ts`
-*   **Rewrite:** `ast-grep run -p 'logger.info($A)' -r 'logger.debug({ ctx: ctx, msg: $A })' -U`
-*   **Complex:** `ast-grep scan --inline-rules 'rule: { pattern: "try { $$$ } catch ($E) { $$$ }", inside: { pattern: "async fn $F" } }'`
-*   **Debug:** `--debug-query=cst` (See tree) | `--json` (Pipeline).
+### 1) Core System & File Ops
+* **`eza`**: `ls` replacement. `eza --tree --level=2 --git-ignore`.
+* **`bat`**: `cat` replacement. `bat -p --line-range 10:20 file.rs`.
+* **`fcp`**: `cp` replacement (fast/async). `fcp -r src/ dest/`.
+* **`zoxide`**: Smart navigation. `zoxide query <partial>`.
+* **`rargs`**: Regex xargs. `rargs -p 'pattern' command`.
 
-### 2) native-patch [Atomic Edits]
-**Usage:** Multi-file changes, non-structural edits (YAML/Config).
-*   **Flow:** `cat file` → Generate Hunk → Apply → `jj diff` to verify.
+### 2) Search & Discovery
+* **`bfs`**: Codebase search / Discovery. `bfs . -name "*.rs"`. Use for deep scans.
+* **`fd`**: Scope limiting / Pipelining. `fd -e py -x ...`. Use when feeding other tools.
+* **`ripgrep` (rg)**: Text/Regex search. `rg "pattern" -t rs --json`.
+* **`fselect`**: SQL-like filesystem query. `fselect path, size from . where size > 1mb`.
+* **`tealdeer`**: Fast cheat sheets. `tldr <command>`.
 
-### 3) ripgrep (rg) [Text Ops]
-**Usage:** Comments, TODOs, strings, regex.
-*   **Code:** `rg "FIXME:" -t rs -C 2` (Context)
-*   **Files:** `rg -l "pattern" | xargs ...`
+### 3) Code Manipulation
+* **`ast-grep` (AG)**: Structural search/replace.
+    * Search: `ast-grep run -p 'import { $A } from "lib"' -l ts`
+    * Rewrite: `ast-grep run -p 'logger.info($A)' -r 'logger.debug({ ctx: ctx, msg: $A })' -U`
+* **`srgn`**: Surgical regex/grammar replacement. `srgn --python 'pattern' 'replacement'`.
+* **`nomino`**: Batch rename. `nomino 's/foo/bar/'`.
+* **`hck`**: Column cutter (better `cut`). `hck -f 2 -d ","`.
+* **`shellharden`**: Bash syntax hardener.
+* **`treereduce`**: Bug minimization.
+* **`lemmeknow`**: File type identification.
 
-### 4) fd (Discovery)
-**Usage:** Fast file finding. `fd -e py -E venv`
+### 4) Version Control
+* **`jj`**: Main VCS. See VCS Strategy.
+* **`mergiraf`**: Syntax-aware merge.
+* **`difftastic`**: Syntax-aware diff. `difft --display inline old.rs new.rs`.
 
-### 5) jujutsu (jj) [State Management]
-**Usage:** Temporal = JJ (Anonymous), Published = Git (Bookmark).
-*   **Init:** `jj git init --colocate` | `jj git fetch`
-*   **Start:** `jj new <remote/branch>` (New Temporal Atom)
-*   **Work:** (Auto-saved) → `jj squash` (Combine) | `jj split` (Decompose)
-*   **Bridge:** `jj bookmark create <branch-name> -r @`. Use Conventional Branch Conventions for branch names.
-*   **Push:** `jj git push --bookmark <branch-name>` (Sync)
+### 5) Structured Data & Logic (Nushell)
+* **`nu` (Nushell)**: **MANDATORY** for logic pipelines.
+    * **List/Filter:** `nu -c 'ls | where size > 10kb'`
+    * **Read Config:** `nu -c 'open cargo.toml | get package.version'`
+    * **Math/Stats:** `nu -c '[1 2 3 4] | math avg'`
+    * **Data Conversion:** `nu -c 'open data.yaml | to json'`
+    * **Pipelines:** `nu -c 'ls | sort-by modified | last 5'`
+* **`jql`**: JSON query (Rust). `cat data.json | jql '"key"'`.
+* **`rq`**: Record Query (Transcode XML/YAML/TOML/JSON).
+* **`huniq`**: Hash-based deduplication.
 
-### 6) tokei [Scope]
-**Usage:** `tokei src/ --exclude *.spec.ts` (Assess impact).
+### 6) Task & Perf
+* **`just`**: Patternize tasks. `just <task>`.
+* **`procs`**: Process viewer (`ps` replacement). `procs --json`.
+* **`hyperfine`**: Benchmarking (`time` replacement).
+* **`tokei`**: Code statistics.
 
-### 7) difftastic (difft) [Verification]
-**Usage:** `difft --display inline old.js new.js` (Syntax-aware).
+### 7) Calculation
+* **`numbat`**: Physical units/dimensions.
+* **`fend`**: Logic/Dates/Units.
+* **`nu`**: Lists/Stats.
+
+### 8) Sandbox
+* **`landrun`**: Isolated execution environment. `landrun --lang python -- "print('hello')"`.
 </code_tools>
 
 ## Verification & Refinement
@@ -385,7 +466,7 @@ Tooling: go vet; go mod tidy -compat; reproducible builds.
 
 **Documentation policy:** No docs unless requested. Don't proactively create README or docs unless the user explicitly asks.
 
-**Critical reminders:** Do exactly what's asked (no more, no less) | Avoid unnecessary files | SELECT the APPROPRIATE TOOL: AG (highly preferred code), native-patch (edits), FD/RG (search)
+**Critical reminders:** Do exactly what's asked (no more, no less) | Avoid unnecessary files | SELECT the APPROPRIATE TOOL: AG/srgn (highly preferred code), native-patch (edits), bfs/rg (search)
 
 **Tool Prohibitions:** See `<must>` section for comprehensive banned command list. Violations REJECTED.
 
@@ -401,9 +482,9 @@ Tooling: go vet; go mod tidy -compat; reproducible builds.
 <decision_heuristics>
 **Research vs. Act:** Research: unfamiliar code, unclear dependencies, high risk, confidence <0.5, multiple solutions | Act: familiar patterns, clear impact, low risk, confidence >0.7, single solution
 
-**Tool Selection:** ast-grep (code structure, refactoring, bulk transforms) | ripgrep (text/comments/strings, non-code) | awk (column extraction, line ranges, text regex) | tokei (scope assessment) | Combined (multi-stage via fd/rg/xargs pipelines)
+**Tool Selection:** ast-grep/srgn (code structure, refactoring, bulk transforms) | ripgrep (text/comments/strings, non-code) | nu (data handling) | tokei (scope assessment) | Combined (multi-stage via bfs/rg/xargs pipelines)
 
-**Scope Assessment (tokei-driven):** Run `tokei <target> --output json | jq '.Total.code'` before editing to select strategy:
+**Scope Assessment (tokei-driven):** Run `tokei <target> --output json | nu -c 'from json | get Total.code'` before editing to select strategy:
 - **Micro** (<500 LOC): Direct edit, single-file focus, minimal verification
 - **Small** (500-2K LOC): Progressive refinement, 2-3 file scope, standard verification
 - **Medium** (2K-10K LOC): Multi-agents parallel, dependency mapping required, staged rollout
@@ -416,13 +497,11 @@ Tooling: go vet; go mod tidy -compat; reproducible builds.
 
 **Accuracy Patterns:** 1) Critical Path Double-Check: Pre-verify → Execute → Mid-verify → Test → Post-verify → Spot-check | 2) Non-Critical First: Test files → Examples → Non-critical → Critical paths | 3) Incremental Expansion: one instance → 10% → 50% → 100% | 4) Assumption Validation: List → Validate critical → Challenge questionable → Act on validated
 
-**Quick Reference:** String change (0.9, Direct, Single) | Function rename 5 files (0.6, Progressive 1→10%→100%, Three-stage) | Architecture refactor (0.3, Research→Plan→Test, Extensive) | Unknown codebase (0.2, Research→Propose, Seek guidance) | Bug understood (0.8, Direct+test, Before/after) | Bug unclear (0.4, Investigate→Test, Extensive) | Bulk transform (0.7, Progressive, Batch verify) | Critical path (0.6, Extra cautious, Double-check)
-
 **Core Principles:** Confidence-driven, Evidence-based, Risk-aware, Progressive, Adaptive, Systematic, Context-aware, Resilient, Thorough, Pragmatic
 </decision_heuristics>
 
 ## Critical Implementation Guidelines
 
-**Core Principles:** Execute with surgical precision—no more, no less | Minimize file creation; delete temp files immediately | Prefer modifying existing files | MANDATORY: thoroughly analyze before editing | REQUIRED: use ast-grep (highly preferred) or native-patch for ALL code ops | DIVIDE AND CONQUER: split into smaller tasks; allocate to multiple agents when independent | ENFORCEMENT: utilize parallel agents aggressively but responsibly | THOROUGHNESS: be exhaustive in analysis/implementation
+**Core Principles:** Execute with surgical precision | Minimize file creation | Prefer modifying existing files | MANDATORY: thoroughly analyze before editing | REQUIRED: use ast-grep or native-patch for ALL code ops | DIVIDE AND CONQUER | ENFORCEMENT: utilize parallel agents | THOROUGHNESS: be exhaustive.
 
-**Internal Design Reasoning [ULTRA CRITICAL]:** DIAGRAM REASONING NON-NEGOTIABLE | Required in reasoning for: Concurrency, Memory, Data-flow, Architecture, Optimization, Tidiness | NO IMPLEMENTATION WITHOUT DIAGRAM REASONING—ZERO EXCEPTIONS
+**Internal Design Reasoning [ULTRA CRITICAL]:** DIAGRAM REASONING NON-NEGOTIABLE | NO IMPLEMENTATION WITHOUT DIAGRAM REASONING—ZERO EXCEPTIONS
