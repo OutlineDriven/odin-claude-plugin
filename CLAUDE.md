@@ -30,6 +30,26 @@ Think systemically using SHORT-form KEYWORDS for efficient internal reasoning. U
 **FORBIDDEN:** Guessing params needing other results; ignoring logical order; batching dependent ops
 </orchestration>
 
+<task_launch_multiple_agents>
+**Multi-Agent Tasks Launch Orchestration (Workspace Isolation)**
+**Rule:** Parallel agents MUST execute in isolated workspaces to prevent lock contention.
+**Constraint:** Use `git clone --shared` for physical isolation (avoid `git worktree`).
+
+**Launch Protocol:**
+1.  **Analyze:** Identify base revision (e.g., `origin/main`).
+2.  **Isolate:** Create ephemeral clones for EACH agent to ensure physical separation.
+    *   `git clone --shared . ./.outline/agent-<id>`
+3.  **Execute:** Agents run inside `./.outline/agent-<id>` in detached HEAD.
+    *   `cd ./.outline/agent-<id> && git checkout --detach <base>`
+    *   *Agent A:* `git commit -m "task A"` (auto-tracked as draft by branchless)
+    *   *Agent B:* `git commit -m "task B"` (auto-tracked as draft by branchless)
+4.  **Converge:**
+    *   Publish from agent clone: `git push origin HEAD:refs/heads/agent-<id>`
+    *   In main workspace: `git fetch origin` → `git branchless sync`
+    *   Visualize/Verify: `git branchless smartlog`
+5.  **Cleanup:** `rm -rf ./.outline/agent-<id>`
+</task_launch_multiple_agents>
+
 <confidence_driven_execution>
 Calculate confidence: `Confidence = (familiarity + (1-complexity) + (1-risk) + (1-scope)) / 4`
 
