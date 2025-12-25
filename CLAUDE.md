@@ -99,23 +99,48 @@ Default to research over action. Do not jump into implementation unless clearly 
 
 **Workflow Protocol:**
 1.  **Init (once per repo):**
-    * `git branchless init` (Install hooks, configure main branch).
+    * `git branchless init` (Install hooks, configure main branch, initialize event log).
 2.  **Sync:**
     * `git fetch` (Update remote tracking branches).
     * `git checkout --detach origin/main` (Start *anonymous* work on remote tip).
-    * `git branchless smartlog` (Visualize commit graph with draft commits).
+    * `git branchless smartlog` or `git sl` (Visualize commit graph with draft commits).
 3.  **Develop (Anonymous Commits):**
     * *Iterate:* Edit files, commit normally. Commits auto-tracked by branchless.
-    * *Refine:* `git branchless move` (Reorder commits), `git branchless split` (Isolate concerns), `git branchless amend` (Fixup).
-    * *Navigate:* `git branchless next`/`git branchless prev` (Move through stack), `git branchless switch -i` (Interactive switch).
-    * *Visualize:* `git branchless smartlog` or `git branchless sl` (Show commit graph).
-4.  **Atomize:** Use `git branchless move --fixup` to collapse related commits into logical units.
+    * *Refine:* `git branchless move -s <src> -d <dest>` (Reorder commits), `git branchless split` (Isolate concerns), `git branchless amend` (Amend any commit).
+    * *Navigate:* `git branchless next [N]`/`git branchless prev [N]` (Move through stack), `git branchless switch -i` (Interactive switch).
+    * *Visualize:* `git branchless smartlog` (Icons: ◆=HEAD, ◇=public, ◯=draft, ✕=hidden).
+4.  **Atomize:** `git branchless move --fixup` (Collapse related commits) | `git branchless reword` (Edit messages).
 5.  **Publish:**
-    * *Sync:* `git branchless sync` (Rebase all stacks onto main).
+    * *Sync:* `git branchless sync` (Rebase all stacks onto main) | `git branchless sync --pull` (Fetch + sync).
     * *Branch:* `git branch <branch-name>` (Create branch at HEAD).
-    * *Push:* `git push -u origin <branch-name>` or `git branchless submit` (Push to remote/forge).
+    * *Push:* `git push -u origin <branch-name>` or `git branchless submit` (Push to forge).
 
-**Recovery:** `git branchless undo` (Time-travel to any state) | `git branchless hide` (Remove from smartlog) | `git branchless sync` (Rebase onto main) | `git branchless restack` (Fix abandoned commits).
+**Move Operations:**
+* `git move -s <commit> -d <dest>` (Move commit + descendants)
+* `git move -x <commit> -d <dest>` (Move exact commit, no descendants)
+* `git move -b <branch> -d <dest>` (Move entire branch stack)
+* `git move --fixup` (Combine commits) | `git move --insert` (Insert between commits)
+
+**Query Language (Revsets):**
+* **Draft/Stack:** `draft()` | `stack()` | `branches()`
+* **Author/Message:** `author.name("Alice")` | `message("fix bug")`
+* **Paths:** `paths.changed("src/*.rs")`
+* **Relations:** `ancestors(<rev>)` | `descendants(<rev>)` | `children(<rev>)` | `parents(<rev>)`
+* **Operations:** `<set1> | <set2>` (union) | `<set1> & <set2>` (intersection) | `<set1> - <set2>` (difference) | `<set1> % <set2>` (only)
+* **Tests:** `tests.passed()` | `tests.failed("<cmd>")`
+* **Shortcuts:** `:<rev>` (ancestors) | `<rev>:` (descendants)
+* **Usage:** `git query '<revset>'` | `git smartlog '<revset>'` | `git sync '<revset>'`
+
+**Recovery & Cleanup:**
+* **Undo:** `git branchless undo` (Undo last operation) | `git branchless undo -i` (Interactive time-travel)
+* **Restack:** `git branchless restack` (Fix abandoned commits after amends/rewrites)
+* **Hide/Unhide:** `git hide <commit>` | `git hide '<revset>'` | `git unhide <commit>`
+* **Test:** `git test run '<revset>' --exec '<cmd>'` | `git test show` | `git test run 'tests.failed()' --exec '<cmd>'`
+
+**Advanced:**
+* **Record:** `git record` (Interactive commit creation) | `git record --amend` (Interactive amend)
+* **Reword:** `git reword <commit>` | `git reword '<revset>'` (Edit commit messages)
+* **Split:** `git split <commit>` (Split commit into multiple, auto-restacks descendants)
 </git_branchless_strategy>
 
 <quickstart_workflow>
