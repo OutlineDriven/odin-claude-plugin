@@ -35,6 +35,12 @@ claude plugin marketplace add OutlineDriven/odin-claude-plugin
 
 # Install ODIN plugin
 claude plugin install odin@odin-marketplace
+
+# Add ast-grep plugin
+claude plugin marketplace add ast-grep/claude-skill
+
+# Install ast-grep skill
+claude plugin install ast-grep
 ```
 
 ### Verify Installation
