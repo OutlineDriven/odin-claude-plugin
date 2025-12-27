@@ -40,11 +40,11 @@
                 "hooks": [
                     {
                         "type": "command",
-                        "command": "if git rev-parse --git-dir >/dev/null 2>&1; then echo 'Updating Global tags:' && global -u -v; fi"
+                        "command": "echo 'Running auto formats with `just fmt`'; if command -v just >/dev/null 2>&1 && just --list | grep -q '^fmt'; then echo 'Formatting with just fmt:'; just fmt || { echo 'just fmt failed' >&2; exit 1; }; else echo 'just fmt not found, skipping.'; fi"
                     },
                     {
                         "type": "command",
-                        "command": "echo 'Running auto formats with `just fmt`'; if command -v just >/dev/null 2>&1 && just --list | grep -q '^fmt'; then echo 'Formatting with just fmt:'; just fmt || { echo 'just fmt failed' >&2; exit 1; }; else echo 'just fmt not found, skipping.'; fi"
+                        "command": "if git rev-parse --git-dir >/dev/null 2>&1; then echo 'Updating Global tags:' && global -u -v; fi"
                     }
                 ]
             }
