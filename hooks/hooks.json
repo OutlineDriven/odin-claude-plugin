@@ -17,6 +17,10 @@
                 "hooks": [
                     {
                         "type": "command",
+                        "command": "if command -v just >/dev/null 2>&1 && just --list | grep -q '^fmt'; then just fmt --quiet >/dev/null 2>&1 || { echo 'just fmt failed' >&2; exit 1; }; fi"
+                    },
+                    {
+                        "type": "command",
                         "command": "echo 'Current directory structure (lsd):' && lsd -l -g -G --group-directories-first && echo ''"
                     },
                     {
