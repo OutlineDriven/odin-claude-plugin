@@ -17,7 +17,7 @@
                 "hooks": [
                     {
                         "type": "command",
-                        "command": "if command -v just >/dev/null 2>&1; then just --quiet fmt >/dev/null 2>&1 || { echo 'just fmt failed' >&2; exit 1; }; fi"
+                        "command": "if command -v just >/dev/null 2>&1; then just --quiet --allow-missing fmt >/dev/null 2>&1 || { echo 'just fmt failed' >&2; exit 1; }; fi"
                     },
                     {
                         "type": "command",
@@ -40,7 +40,7 @@
                 "hooks": [
                     {
                         "type": "command",
-                        "command": "echo 'Running auto formats with `just fmt`'; if command -v just >/dev/null 2>&1; then echo 'Formatting with just fmt:'; just --quiet fmt || { echo 'just fmt failed' >&2; exit 1; }; else echo 'just not found, skipping.'; fi"
+                        "command": "echo 'Running auto formats with `just fmt`'; if command -v just >/dev/null 2>&1; then echo 'Formatting with just fmt:'; just --quiet --allow-missing fmt || { echo 'just fmt failed' >&2; exit 1; }; else echo 'just not found, skipping.'; fi"
                     },
                     {
                         "type": "command",
