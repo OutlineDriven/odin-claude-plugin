@@ -33,12 +33,12 @@ CRITICAL: Design tests BEFORE implementation.
 
 ## Test Framework Matrix
 
-| Language | Unit Framework | Property Framework |
-|----------|---------------|-------------------|
-| Rust | `cargo test` | proptest |
-| Python | pytest | hypothesis |
-| TypeScript | vitest | fast-check |
-| Go | `go test` | rapid |
+| Language   | Unit Framework | Property Framework |
+| ---------- | -------------- | ------------------ |
+| Rust       | `cargo test`   | proptest           |
+| Python     | pytest         | hypothesis         |
+| TypeScript | vitest         | fast-check         |
+| Go         | `go test`      | rapid              |
 
 ---
 
@@ -87,20 +87,20 @@ echo "REFACTOR complete"
 
 ## Validation Gates
 
-| Gate | Command | Pass Criteria | Blocking |
-|------|---------|---------------|----------|
-| Tests Created | `fd -g '*test*'` | Test files exist | Yes |
-| RED State | All tests fail | 100% failure | Yes |
-| GREEN State | All tests pass | 100% pass | Yes |
-| Coverage | `--cov-fail-under=80` | >= 80% | No |
+| Gate          | Command               | Pass Criteria    | Blocking |
+| ------------- | --------------------- | ---------------- | -------- |
+| Tests Created | `fd -g '*test*'`      | Test files exist | Yes      |
+| RED State     | All tests fail        | 100% failure     | Yes      |
+| GREEN State   | All tests pass        | 100% pass        | Yes      |
+| Coverage      | `--cov-fail-under=80` | >= 80%           | No       |
 
 ## Exit Codes
 
-| Code | Meaning |
-|------|---------|
-| 0 | TDD cycle complete, all tests pass |
-| 11 | No test framework detected |
-| 12 | Test compilation failed |
-| 13 | Tests not failing (RED state invalid) |
-| 14 | Tests fail after implementation (GREEN not achieved) |
-| 15 | Tests fail after refactor (regression) |
+| Code | Meaning                                              |
+| ---- | ---------------------------------------------------- |
+| 0    | TDD cycle complete, all tests pass                   |
+| 11   | No test framework detected                           |
+| 12   | Test compilation failed                              |
+| 13   | Tests not failing (RED state invalid)                |
+| 14   | Tests fail after implementation (GREEN not achieved) |
+| 15   | Tests fail after refactor (regression)               |

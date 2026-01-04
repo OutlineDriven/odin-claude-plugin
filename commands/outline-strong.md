@@ -25,14 +25,14 @@ Layer | Tool             | Catches              | Designed From
 
 **Hierarchy**: `Static Assertions > Test/Debug > Runtime Contracts`
 
-| Language | Tool | Command |
-|----------|------|---------|
-| C++ | `static_assert`, Concepts | `g++ -std=c++20` |
-| TypeScript | `satisfies`, `as const` | `tsc --strict` |
-| Python | `assert_type`, `Final` | `pyright --strict` |
-| Java | Checker Framework | `javac -processor nullness` |
-| Rust | `static_assertions` crate | `cargo check` |
-| Kotlin | contracts, sealed | `kotlinc -Werror` |
+| Language   | Tool                      | Command                     |
+| ---------- | ------------------------- | --------------------------- |
+| C++        | `static_assert`, Concepts | `g++ -std=c++20`            |
+| TypeScript | `satisfies`, `as const`   | `tsc --strict`              |
+| Python     | `assert_type`, `Final`    | `pyright --strict`          |
+| Java       | Checker Framework         | `javac -processor nullness` |
+| Rust       | `static_assertions` crate | `cargo check`               |
+| Kotlin     | contracts, sealed         | `kotlinc -Werror`           |
 
 **Principle**: Verify at compile-time before runtime. No runtime contracts for statically provable properties.
 
@@ -55,11 +55,11 @@ CRITICAL: Design all validation layers BEFORE implementation.
 ```markdown
 Property: "Balance never negative"
 
-Layer 1 (Type):    balance : Nat
-Layer 2 (Spec):    val inv_balance = balance >= 0
-Layer 3 (Proof):   theorem balance_preserved : balance >= 0
+Layer 1 (Type): balance : Nat
+Layer 2 (Spec): val inv_balance = balance >= 0
+Layer 3 (Proof): theorem balance_preserved : balance >= 0
 Layer 4 (Contract): @deal.inv(lambda self: self.balance >= 0)
-Layer 5 (Test):    def test_balance_invariant(): assert acc.balance >= 0
+Layer 5 (Test): def test_balance_invariant(): assert acc.balance >= 0
 ```
 
 ---
@@ -105,23 +105,23 @@ echo "=== ALL LAYERS VERIFIED ==="
 
 ## Validation Gates
 
-| Gate | Layer | Command | Pass Criteria | Blocking |
-|------|-------|---------|---------------|----------|
-| Types | 1 | `idris2 --check` | No errors | Yes |
-| Specs | 2 | `quint verify` | No violations | Yes |
-| Proofs | 3 | `lake build` | Zero sorry | Yes |
-| Contracts | 4 | `deal lint` | No warnings | Yes |
-| Tests | 5 | `pytest --cov-fail-under=80` | All pass | Yes |
+| Gate      | Layer | Command                      | Pass Criteria | Blocking |
+| --------- | ----- | ---------------------------- | ------------- | -------- |
+| Types     | 1     | `idris2 --check`             | No errors     | Yes      |
+| Specs     | 2     | `quint verify`               | No violations | Yes      |
+| Proofs    | 3     | `lake build`                 | Zero sorry    | Yes      |
+| Contracts | 4     | `deal lint`                  | No warnings   | Yes      |
+| Tests     | 5     | `pytest --cov-fail-under=80` | All pass      | Yes      |
 
 ## Exit Codes
 
-| Code | Meaning |
-|------|---------|
-| 0 | All layers verified |
-| 11 | Layer 1 (Types) failed |
-| 12 | Layer 2 (Specs) failed |
-| 13 | Layer 3 (Proofs) failed |
-| 14 | Layer 4 (Contracts) failed |
-| 15 | Layer 5 (Tests) failed |
-| 16 | Correspondence incomplete |
-'''
+| Code | Meaning                    |
+| ---- | -------------------------- |
+| 0    | All layers verified        |
+| 11   | Layer 1 (Types) failed     |
+| 12   | Layer 2 (Specs) failed     |
+| 13   | Layer 3 (Proofs) failed    |
+| 14   | Layer 4 (Contracts) failed |
+| 15   | Layer 5 (Tests) failed     |
+| 16   | Correspondence incomplete  |
+| '''  |                            |

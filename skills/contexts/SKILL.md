@@ -8,6 +8,7 @@ description: Codebase analysis using code-index-mcp for indexing and ast-grep fo
 ## Capability
 
 This skill provides comprehensive codebase analysis using a dual-tool approach:
+
 - **Primary:** `code-index-mcp` for project indexing, file discovery, and symbol extraction
 - **Secondary:** `ast-grep` for detailed AST pattern matching
 
@@ -55,12 +56,13 @@ Generates LLM-optimized context summaries that fit within agent context windows.
 
 ## Tool Selection
 
-| Depth | Primary Tool | Secondary Tool |
-|-------|--------------|----------------|
-| `overview` | code-index only | - |
+| Depth      | Primary Tool          | Secondary Tool                 |
+| ---------- | --------------------- | ------------------------------ |
+| `overview` | code-index only       | -                              |
 | `detailed` | code-index + ast-grep | ast-grep for specific patterns |
 
 **Decision Tree:**
+
 1. Always start with `set_project_path` + `find_files`
 2. For overview: use `get_file_summary` on key files
 3. For detailed: `build_deep_index` + ast-grep patterns
@@ -73,11 +75,13 @@ Generates LLM-optimized context summaries that fit within agent context windows.
 ### Primary Tools (code-index-mcp)
 
 **Initialize Project:**
+
 ```
 mcp__plugin_odin_code-index__set_project_path(path=$PATH)
 ```
 
 **Find Files:**
+
 ```
 mcp__plugin_odin_code-index__find_files(pattern="*.ts")
 mcp__plugin_odin_code-index__find_files(pattern="*.py")
@@ -86,9 +90,11 @@ mcp__plugin_odin_code-index__find_files(pattern="*.go")
 ```
 
 **Build Deep Index (for detailed analysis):**
+
 ```
 mcp__plugin_odin_code-index__build_deep_index()
 ```
+
 Extracts full symbol information across project.
 
 ### Process
@@ -114,14 +120,14 @@ Extracts full symbol information across project.
 
 ### Language Family Matrix
 
-| Family | Languages | Extensions |
-|--------|-----------|------------|
-| Script | TypeScript, JavaScript, TSX, JSX | `.ts`, `.tsx`, `.js`, `.jsx` |
-| Python | Python | `.py` |
-| Rust | Rust | `.rs` |
-| Go | Go | `.go` |
-| JVM | Java, Kotlin | `.java`, `.kt` |
-| C-Family | C, C++, C# | `.c`, `.cpp`, `.h`, `.cs` |
+| Family   | Languages                        | Extensions                   |
+| -------- | -------------------------------- | ---------------------------- |
+| Script   | TypeScript, JavaScript, TSX, JSX | `.ts`, `.tsx`, `.js`, `.jsx` |
+| Python   | Python                           | `.py`                        |
+| Rust     | Rust                             | `.rs`                        |
+| Go       | Go                               | `.go`                        |
+| JVM      | Java, Kotlin                     | `.java`, `.kt`               |
+| C-Family | C, C++, C#                       | `.c`, `.cpp`, `.h`, `.cs`    |
 
 ---
 
@@ -130,16 +136,20 @@ Extracts full symbol information across project.
 ### Overview Depth (code-index-mcp only)
 
 **File Summary:**
+
 ```
 mcp__plugin_odin_code-index__get_file_summary(file_path=$FILE)
 ```
+
 Returns:
+
 - Line count
 - Function/class definitions
 - Import statements
 - Complexity metrics
 
 **Advanced Search:**
+
 ```
 mcp__plugin_odin_code-index__search_code_advanced(
   pattern="function",
@@ -174,6 +184,7 @@ For detailed analysis, combine both tools:
 Use for detailed pattern extraction:
 
 **Find by Pattern:**
+
 ```
 mcp__plugin_odin_ast-grep__find_code(
   pattern="export function $NAME($$$) { $$$ }",
@@ -183,6 +194,7 @@ mcp__plugin_odin_ast-grep__find_code(
 ```
 
 **Find by YAML Rule:**
+
 ```
 mcp__plugin_odin_ast-grep__find_code_by_rule(
   yaml="id: x\nlanguage: typescript\nrule:\n  kind: function_declaration",
@@ -191,6 +203,7 @@ mcp__plugin_odin_ast-grep__find_code_by_rule(
 ```
 
 **Debug AST Structure:**
+
 ```
 mcp__plugin_odin_ast-grep__dump_syntax_tree(
   code=$CODE,
@@ -204,6 +217,7 @@ mcp__plugin_odin_ast-grep__dump_syntax_tree(
 #### Functions
 
 **TypeScript/JavaScript:**
+
 ```yaml
 id: ts-functions
 language: typescript
@@ -215,6 +229,7 @@ rule:
 ```
 
 **Python:**
+
 ```yaml
 id: py-functions
 language: python
@@ -225,6 +240,7 @@ rule:
 ```
 
 **Rust:**
+
 ```yaml
 id: rust-functions
 language: rust
@@ -235,6 +251,7 @@ rule:
 ```
 
 **Go:**
+
 ```yaml
 id: go-functions
 language: go
@@ -247,6 +264,7 @@ rule:
 #### Exports/Public API
 
 **TypeScript:**
+
 ```yaml
 id: ts-exports
 language: typescript
@@ -259,6 +277,7 @@ rule:
 ```
 
 **Rust:**
+
 ```yaml
 id: rust-exports
 language: rust
@@ -272,6 +291,7 @@ rule:
 #### Entry Points
 
 **TypeScript:**
+
 ```yaml
 id: ts-entry
 language: typescript
@@ -282,6 +302,7 @@ rule:
 ```
 
 **Python:**
+
 ```yaml
 id: py-entry
 language: python
@@ -290,6 +311,7 @@ rule:
 ```
 
 **Rust:**
+
 ```yaml
 id: rust-entry
 language: rust
@@ -298,6 +320,7 @@ rule:
 ```
 
 **Go:**
+
 ```yaml
 id: go-entry
 language: go
@@ -385,9 +408,9 @@ IMPORTS_GRAPH:
 
 ## Depth Levels
 
-| Level | Description | Tools Used |
-|-------|-------------|------------|
-| `overview` | Languages, LOC, entry points, module structure | code-index only |
+| Level      | Description                                     | Tools Used            |
+| ---------- | ----------------------------------------------- | --------------------- |
+| `overview` | Languages, LOC, entry points, module structure  | code-index only       |
 | `detailed` | + All functions/classes/types, full API surface | code-index + ast-grep |
 
 ---
@@ -452,6 +475,7 @@ Review outputs: Contextual code review
 ### Integration Protocol
 
 Skills can request context programmatically:
+
 ```
 INVOKE: /contexts {path} --depth={overview|detailed}
 RECEIVE: <codebase_context>...</codebase_context>
@@ -461,33 +485,36 @@ RECEIVE: <codebase_context>...</codebase_context>
 
 ## Exit Codes
 
-| Code | Meaning | Action |
-|------|---------|--------|
-| 0 | Analysis complete | Context ready for use |
-| 11 | No code files found | Check path argument |
-| 12 | All files failed parsing | Check language support |
-| 13 | code-index/ast-grep not available | Check MCP servers |
-| 14 | Path not found | Verify path exists |
+| Code | Meaning                           | Action                 |
+| ---- | --------------------------------- | ---------------------- |
+| 0    | Analysis complete                 | Context ready for use  |
+| 11   | No code files found               | Check path argument    |
+| 12   | All files failed parsing          | Check language support |
+| 13   | code-index/ast-grep not available | Check MCP servers      |
+| 14   | Path not found                    | Verify path exists     |
 
 ---
 
 ## Language Support
 
 ### code-index-mcp Deep Parsing (7 Languages)
-| Language | Support |
-|----------|---------|
-| Python | Full (tree-sitter) |
-| JavaScript | Full (tree-sitter) |
-| TypeScript | Full (tree-sitter) |
-| Java | Full (tree-sitter) |
-| Go | Full (tree-sitter) |
+
+| Language    | Support            |
+| ----------- | ------------------ |
+| Python      | Full (tree-sitter) |
+| JavaScript  | Full (tree-sitter) |
+| TypeScript  | Full (tree-sitter) |
+| Java        | Full (tree-sitter) |
+| Go          | Full (tree-sitter) |
 | Objective-C | Full (tree-sitter) |
-| Zig | Full (tree-sitter) |
+| Zig         | Full (tree-sitter) |
 
 ### code-index-mcp File Support (50+ Types)
+
 Web (Vue, React, Svelte, HTML, CSS, SCSS), Config (JSON, YAML, XML, Markdown), and more.
 
 ### ast-grep AST Support (24 Languages)
+
 TypeScript, JavaScript, Python, Rust, Go, Java, Kotlin, C, C++, C#, Ruby, PHP, Swift, Scala, Haskell, Elixir, Bash, HTML, CSS, JSON, YAML, Lua, Solidity, Nix
 
 ---
@@ -510,6 +537,7 @@ Always start with `--depth=overview` using code-index for fast results.
 ### 4. Incremental Analysis
 
 For large codebases, analyze directories incrementally:
+
 ```bash
 /contexts src/api/              # API layer
 /contexts src/services/         # Service layer
@@ -520,13 +548,13 @@ For large codebases, analyze directories incrementally:
 
 ## Troubleshooting Guide
 
-| Symptom | Cause | Resolution |
-|---------|-------|------------|
-| Exit 11 | No files found | Check path, verify extensions |
-| Exit 12 | Parse errors | Check for syntax errors in source |
-| Exit 13 | MCP unavailable | Verify code-index and ast-grep MCP servers |
-| Incomplete results | Large codebase | Use `--focus` to limit scope |
-| Slow indexing | First run | Subsequent runs use cached index |
+| Symptom            | Cause           | Resolution                                 |
+| ------------------ | --------------- | ------------------------------------------ |
+| Exit 11            | No files found  | Check path, verify extensions              |
+| Exit 12            | Parse errors    | Check for syntax errors in source          |
+| Exit 13            | MCP unavailable | Verify code-index and ast-grep MCP servers |
+| Incomplete results | Large codebase  | Use `--focus` to limit scope               |
+| Slow indexing      | First run       | Subsequent runs use cached index           |
 
 ---
 
@@ -534,22 +562,22 @@ For large codebases, analyze directories incrementally:
 
 ### code-index-mcp (Primary)
 
-| Tool | Purpose |
-|------|---------|
-| `set_project_path` | Initialize indexing for directory |
-| `find_files` | Glob-based file discovery |
-| `get_file_summary` | File structure and complexity |
-| `build_deep_index` | Full symbol extraction |
-| `search_code_advanced` | Regex/fuzzy code search |
-| `refresh_index` | Rebuild file index |
+| Tool                   | Purpose                           |
+| ---------------------- | --------------------------------- |
+| `set_project_path`     | Initialize indexing for directory |
+| `find_files`           | Glob-based file discovery         |
+| `get_file_summary`     | File structure and complexity     |
+| `build_deep_index`     | Full symbol extraction            |
+| `search_code_advanced` | Regex/fuzzy code search           |
+| `refresh_index`        | Rebuild file index                |
 
 ### ast-grep (Secondary)
 
-| Tool | Purpose |
-|------|---------|
-| `find_code` | Pattern-based search |
-| `find_code_by_rule` | YAML rule search |
-| `dump_syntax_tree` | Debug AST structure |
+| Tool                | Purpose              |
+| ------------------- | -------------------- |
+| `find_code`         | Pattern-based search |
+| `find_code_by_rule` | YAML rule search     |
+| `dump_syntax_tree`  | Debug AST structure  |
 
 ---
 

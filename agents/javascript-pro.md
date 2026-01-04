@@ -49,6 +49,7 @@ Support both Node.js and browser environments. Include JSDoc comments.
 ## Real Example
 
 **Task**: Fetch data with proper error handling
+
 ```javascript
 // Modern async pattern with timeout and retry
 async function fetchWithRetry(url, options = {}) {
@@ -64,7 +65,6 @@ async function fetchWithRetry(url, options = {}) {
 
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       return await response.json();
-
     } catch (error) {
       if (i === retries - 1) throw error;
       await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1)));

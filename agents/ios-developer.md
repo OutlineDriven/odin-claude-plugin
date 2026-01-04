@@ -49,6 +49,7 @@ Follow Apple's design guidelines. Include accessibility support and performance 
 ## Real Example
 
 **Task**: Build a weather app view
+
 ```swift
 // SwiftUI with proper state management
 @StateObject var weatherVM = WeatherViewModel()

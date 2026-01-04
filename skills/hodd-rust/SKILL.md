@@ -10,22 +10,26 @@ description: HODD-RUST: Validation-first Rust development. Strictly validation-f
 Strictly validation-first before-and-after(-and-while) planning and execution.
 
 **BEFORE** (Planning Phase):
+
 - Design type specifications (Rust types/Flux)
 - Design formal specifications (Quint)
 - Design proofs (Lean4/Kani)
 - Design contracts (`contracts` crate)
 
 **WHILE** (Execution Phase):
+
 - CREATE verification artifacts from plan
 - VERIFY each artifact as created
 - REMEDIATE failures immediately
 
 **AFTER** (Completion):
+
 - Run full validation pipeline
 - Ensure all stages pass
 - Document verification coverage
 
 **Four Paradigms**:
+
 - **Type-driven**: Rust's type system + Flux for refined types
 - **Spec-first**: Quint specifications and Kani bounded model checking
 - **Proof-driven**: Lean4 formal proofs for critical algorithms
@@ -72,34 +76,34 @@ Strictly validation-first before-and-after(-and-while) planning and execution.
 
 ## Tool Selection Decision Matrix
 
-| Scenario | Primary Tool | Secondary | Avoid |
-|----------|--------------|-----------|-------|
-| Unsafe code, raw pointers | **Miri** | Kani | - |
-| Undefined behavior detection | **Miri** | - | CI (too slow) |
-| Concurrent code, atomics | **Loom** | Miri | Kani |
-| Lock-free algorithms | **Loom** | - | - |
-| Array bounds verification | **Flux** | Kani | - |
-| Integer overflow proofs | **Kani** | Flux | - |
-| Public API contracts | **contracts** | Flux | - |
-| Algorithm correctness | **Kani** | Lean4 | - |
-| Protocol state machines | **Quint** | Typestate | - |
-| FFI boundaries | **Miri** | Manual review | - |
+| Scenario                     | Primary Tool  | Secondary     | Avoid         |
+| ---------------------------- | ------------- | ------------- | ------------- |
+| Unsafe code, raw pointers    | **Miri**      | Kani          | -             |
+| Undefined behavior detection | **Miri**      | -             | CI (too slow) |
+| Concurrent code, atomics     | **Loom**      | Miri          | Kani          |
+| Lock-free algorithms         | **Loom**      | -             | -             |
+| Array bounds verification    | **Flux**      | Kani          | -             |
+| Integer overflow proofs      | **Kani**      | Flux          | -             |
+| Public API contracts         | **contracts** | Flux          | -             |
+| Algorithm correctness        | **Kani**      | Lean4         | -             |
+| Protocol state machines      | **Quint**     | Typestate     | -             |
+| FFI boundaries               | **Miri**      | Manual review | -             |
 
 ---
 
 ## Tool Stack
 
-| Tool | Usage | When to Use |
-|------|-------|-------------|
-| rustc, rustfmt, Clippy | Standard toolchain | Always |
-| cargo-audit, cargo-deny | Security/dependency | CI mandatory |
-| Miri | Runtime UB detection | Unsafe code, FFI (local only) |
-| Loom | Concurrency testing | Atomics, lock-free |
-| Flux | Refined types | Array bounds, overflow |
-| contracts | Pre/postconditions | Public APIs |
-| Kani | Bounded model checking | Overflow, assertions |
-| Lean4 | Formal proofs | Algorithms |
-| Quint | Spec-first design | Protocol specs |
+| Tool                    | Usage                  | When to Use                   |
+| ----------------------- | ---------------------- | ----------------------------- |
+| rustc, rustfmt, Clippy  | Standard toolchain     | Always                        |
+| cargo-audit, cargo-deny | Security/dependency    | CI mandatory                  |
+| Miri                    | Runtime UB detection   | Unsafe code, FFI (local only) |
+| Loom                    | Concurrency testing    | Atomics, lock-free            |
+| Flux                    | Refined types          | Array bounds, overflow        |
+| contracts               | Pre/postconditions     | Public APIs                   |
+| Kani                    | Bounded model checking | Overflow, assertions          |
+| Lean4                   | Formal proofs          | Algorithms                    |
+| Quint                   | Spec-first design      | Protocol specs                |
 
 ---
 
@@ -142,6 +146,7 @@ impl Article<Published> {
 ```
 
 **Commands**:
+
 ```bash
 # Verify typestate transitions compile correctly
 cargo check
@@ -166,6 +171,7 @@ fn get_user(id: UserId) -> User { /* ... */ }
 ```
 
 **Commands**:
+
 ```bash
 # Generate newtype boilerplate
 cargo add derive_more
@@ -199,6 +205,7 @@ impl Distance<Meters> {
 ### Flux: Refined Types (Advanced)
 
 **Installation**:
+
 ```bash
 # Install Flux (requires nightly)
 rustup install nightly-2024-04-15
@@ -211,6 +218,7 @@ flux-rs = "0.1"
 ```
 
 **Usage**:
+
 ```rust
 #[flux::sig(fn(x: i32{x > 0}) -> i32{v: v > x})]
 fn increment_positive(x: i32) -> i32 {
@@ -224,6 +232,7 @@ fn first_element(v: &[i32]) -> i32 {
 ```
 
 **Commands**:
+
 ```bash
 # Run Flux refinement type checker
 cargo flux
@@ -236,12 +245,14 @@ FLUX_LOG=debug cargo flux
 ```
 
 **Pass Criteria**:
+
 - [ ] All type patterns encode domain invariants
 - [ ] No `unwrap()` on domain-critical paths
 - [ ] Phantom types prevent unit confusion
 - [ ] Flux refinements verify bounds/preconditions
 
 **Fail Actions**:
+
 - Type pattern insufficient -> Add more states or constraints
 - Flux verification fails -> Strengthen preconditions or fix logic
 - Compile error on valid code -> Relax phantom constraints
@@ -255,6 +266,7 @@ FLUX_LOG=debug cargo flux
 Model Rust state machines in Quint before implementation.
 
 **Workflow**:
+
 ```
 1. Write Quint spec modeling Rust types/transitions
 2. Verify invariants and temporal properties
@@ -264,6 +276,7 @@ Model Rust state machines in Quint before implementation.
 ```
 
 **Commands**:
+
 ```bash
 # Typecheck Quint spec
 quint typecheck specs/state_machine.qnt
@@ -283,6 +296,7 @@ quint run specs/state_machine.qnt --out-itf=traces/scenario1.itf.json
 ```
 
 **Example Quint Spec for Rust**:
+
 ```quint
 module RustChannel {
     type Message = { id: int, payload: str }
@@ -315,6 +329,7 @@ module RustChannel {
 Use for critical paths, unsafe code, and algorithmic correctness.
 
 **Installation**:
+
 ```bash
 # Install Kani
 cargo install --locked kani-verifier
@@ -326,6 +341,7 @@ kani setup
 ```
 
 **Usage**:
+
 ```rust
 #[cfg(kani)]
 mod verification {
@@ -360,6 +376,7 @@ mod verification {
 ```
 
 **Commands**:
+
 ```bash
 # Run all Kani proofs
 cargo kani
@@ -384,6 +401,7 @@ cargo kani --solver cadical
 ```
 
 **Kani Attributes Reference**:
+
 ```rust
 #[kani::proof]              // Mark as verification harness
 #[kani::unwind(N)]          // Bound loop unwinding
@@ -398,12 +416,14 @@ kani::cover(cond, msg)      // Coverage goal
 ```
 
 **Pass Criteria**:
+
 - [ ] All Kani proofs pass (VERIFICATION SUCCESSFUL)
 - [ ] No overflow/bounds/null pointer issues
 - [ ] Coverage goals met
 - [ ] Critical paths verified
 
 **Fail Actions**:
+
 - Verification failure -> Analyze counterexample, fix code
 - Timeout -> Add `#[kani::unwind]` bounds or simplify
 - Unsupported feature -> Use `#[kani::stub]` or refactor
@@ -417,6 +437,7 @@ kani::cover(cond, msg)      // Coverage goal
 Prove algorithm correctness in Lean 4, then implement in Rust.
 
 **Workflow**:
+
 ```
 1. Formalize algorithm in Lean 4
 2. Prove correctness properties
@@ -425,6 +446,7 @@ Prove algorithm correctness in Lean 4, then implement in Rust.
 ```
 
 **Commands**:
+
 ```bash
 # Initialize Lean 4 project
 lake init rust_proofs
@@ -440,6 +462,7 @@ lake env lean --run src/Algorithm.lean
 ```
 
 **Example Lean 4 Proof**:
+
 ```lean
 -- Lean 4 specification for binary search
 def binarySearch (arr : Array Int) (target : Int) : Option Nat :=
@@ -464,11 +487,13 @@ theorem binarySearch_correct (arr : Array Int) (target : Int)
 ```
 
 **Pass Criteria**:
+
 - [ ] All theorems proven (no `sorry`)
 - [ ] Termination verified
 - [ ] Rust implementation matches Lean spec
 
 **Fail Actions**:
+
 - Proof stuck -> Use `sorry`, analyze, refine approach
 - Termination failure -> Add decreasing measure
 
@@ -483,6 +508,7 @@ theorem binarySearch_correct (arr : Array Int) (target : Int)
 **Hierarchy**: `Static Assertions > Contracts > Runtime Checks`
 
 **Installation**:
+
 ```toml
 # Cargo.toml
 [dependencies]
@@ -490,6 +516,7 @@ static_assertions = "1.1"
 ```
 
 **Usage**:
+
 ```rust
 use static_assertions::{assert_eq_size, assert_impl_all, const_assert};
 
@@ -512,6 +539,7 @@ assert_type_eq_all!(u32, u32);  // Types must be identical
 ```
 
 **Const Functions for Compile-Time Validation**:
+
 ```rust
 const fn validate_config(size: usize, alignment: usize) -> bool {
     size > 0 && size.is_power_of_two() && alignment > 0
@@ -525,6 +553,7 @@ const _: () = assert!(validate_config(BUFFER_SIZE, ALIGNMENT));
 ```
 
 **Build-Time Assertions in Const Context**:
+
 ```rust
 pub struct Config<const N: usize> {
     data: [u8; N],
@@ -546,23 +575,24 @@ impl<const N: usize> Config<N> {
 
 **When to Use Static vs Contracts** (Expanded Hierarchy):
 
-| Property | Static | test_* | debug_* | Always-on |
-|----------|--------|--------|---------|-----------|
-| Type size/alignment | `assert_eq_size!` | - | - | - |
-| Trait implementations | `assert_impl_all!` | - | - | - |
-| Const value bounds | `const_assert!` | - | - | - |
-| Generic const params | `const { assert!(...) }` | - | - | - |
-| Expensive O(n)+ verification | - | `test_ensures` | - | - |
-| Reference impl equivalence | - | `test_ensures` | - | - |
-| Internal state invariants | - | - | `debug_invariant` | - |
-| Development preconditions | - | - | `debug_requires` | - |
-| Public API input validation | - | - | - | `requires` |
-| Safety-critical postconditions | - | - | - | `ensures` |
-| Production state invariants | - | - | - | `invariant` |
+| Property                       | Static                   | test_*         | debug_*           | Always-on   |
+| ------------------------------ | ------------------------ | -------------- | ----------------- | ----------- |
+| Type size/alignment            | `assert_eq_size!`        | -              | -                 | -           |
+| Trait implementations          | `assert_impl_all!`       | -              | -                 | -           |
+| Const value bounds             | `const_assert!`          | -              | -                 | -           |
+| Generic const params           | `const { assert!(...) }` | -              | -                 | -           |
+| Expensive O(n)+ verification   | -                        | `test_ensures` | -                 | -           |
+| Reference impl equivalence     | -                        | `test_ensures` | -                 | -           |
+| Internal state invariants      | -                        | -              | `debug_invariant` | -           |
+| Development preconditions      | -                        | -              | `debug_requires`  | -           |
+| Public API input validation    | -                        | -              | -                 | `requires`  |
+| Safety-critical postconditions | -                        | -              | -                 | `ensures`   |
+| Production state invariants    | -                        | -              | -                 | `invariant` |
 
 **Legend**: `-` = Do not use for this property
 
 **Commands**:
+
 ```bash
 # Static assertions verified during compilation
 cargo check
@@ -572,6 +602,7 @@ cargo build 2>&1 | grep "assertion failed"
 ```
 
 **Pass Criteria**:
+
 - [ ] All compile-time verifiable properties use static assertions
 - [ ] No contracts (debug/test/runtime) for properties provable at compile time
 - [ ] Const functions used for complex compile-time validation
@@ -579,6 +610,7 @@ cargo build 2>&1 | grep "assertion failed"
 - [ ] If static assertions suffice, NO additional contracts added
 
 **Fail Actions**:
+
 - Static assertion fails -> Fix the violated invariant or adjust constraints
 - Property not statically verifiable -> Fall through to debug/test contracts first, then runtime if necessary
 
@@ -590,24 +622,25 @@ cargo build 2>&1 | grep "assertion failed"
 
 **Contract Modes** (from `contracts` crate):
 
-| Mode | Attributes | Internal Mechanism | When Active |
-|------|-----------|-------------------|-------------|
-| **Test** | `test_requires`, `test_ensures`, `test_invariant` | `if cfg!(test) { assert! }` | Test builds only |
-| **Debug** | `debug_requires`, `debug_ensures`, `debug_invariant` | `debug_assert!` | Debug builds only |
-| **Always** | `requires`, `ensures`, `invariant` | `assert!` | All builds |
+| Mode       | Attributes                                           | Internal Mechanism          | When Active       |
+| ---------- | ---------------------------------------------------- | --------------------------- | ----------------- |
+| **Test**   | `test_requires`, `test_ensures`, `test_invariant`    | `if cfg!(test) { assert! }` | Test builds only  |
+| **Debug**  | `debug_requires`, `debug_ensures`, `debug_invariant` | `debug_assert!`             | Debug builds only |
+| **Always** | `requires`, `ensures`, `invariant`                   | `assert!`                   | All builds        |
 
 **When to Use Each Mode**:
 
-| Scenario | Use | Rationale |
-|----------|-----|-----------|
-| Expensive O(n)+ verification (e.g., `is_sorted`) | `test_*` | Too slow for debug builds |
-| Reference implementation equivalence | `test_*` | Only needed for correctness proofs |
-| Internal state invariants | `debug_*` | Development aid, not production need |
-| Development-time preconditions | `debug_*` | Catch bugs early, strip in release |
-| Public API input validation | Always-on | External users need protection |
-| Safety-critical postconditions | Always-on | Must verify in production |
+| Scenario                                         | Use       | Rationale                            |
+| ------------------------------------------------ | --------- | ------------------------------------ |
+| Expensive O(n)+ verification (e.g., `is_sorted`) | `test_*`  | Too slow for debug builds            |
+| Reference implementation equivalence             | `test_*`  | Only needed for correctness proofs   |
+| Internal state invariants                        | `debug_*` | Development aid, not production need |
+| Development-time preconditions                   | `debug_*` | Catch bugs early, strip in release   |
+| Public API input validation                      | Always-on | External users need protection       |
+| Safety-critical postconditions                   | Always-on | Must verify in production            |
 
 **Example - Progressive Contract Levels**:
+
 ```rust
 use contracts::*;
 
@@ -635,6 +668,7 @@ impl SortedVec {
 ```
 
 **Decision Flow**:
+
 ```
 Can type system encode it? ──yes──> Use types (typestate, newtype)
          │no
@@ -655,12 +689,14 @@ Consider if check is needed at all
 ```
 
 **Pass Criteria**:
+
 - [ ] Expensive O(n)+ checks use `test_*` variants
 - [ ] Internal invariants use `debug_*` variants
 - [ ] Always-on contracts only for properties that MUST be checked in production
 - [ ] No performance regression from contract overhead in release builds
 
 **Fail Actions**:
+
 - Test contract fails -> Fix algorithm or strengthen test coverage
 - Debug contract fails -> Fix internal logic, add regression test
 - Need expensive check in production -> Reconsider design or accept overhead
@@ -670,6 +706,7 @@ Consider if check is needed at all
 ### The `contracts` Crate (Runtime Properties - Use Sparingly)
 
 **Installation**:
+
 ```toml
 # Cargo.toml
 [dependencies]
@@ -681,6 +718,7 @@ default = ["contracts/mirai_assertions"]
 ```
 
 **Usage**:
+
 ```rust
 use contracts::*;
 
@@ -726,6 +764,7 @@ impl Buffer {
 ```
 
 **Contract Attributes**:
+
 ```rust
 #[requires(precondition)]       // Must hold before function call
 #[ensures(postcondition)]       // Must hold after function returns
@@ -739,6 +778,7 @@ ret         // Return value (in ensures)
 ```
 
 **Commands**:
+
 ```bash
 # Build with contract checking (debug mode)
 cargo build
@@ -754,12 +794,14 @@ cargo test 2>&1 | grep -E "(requires|ensures|invariant)"
 ```
 
 **Pass Criteria**:
+
 - [ ] All public functions have `#[requires]` and `#[ensures]`
 - [ ] All structs with invariants have `#[invariant]`
 - [ ] No contract violations in test suite
 - [ ] Contracts document the API completely
 
 **Fail Actions**:
+
 - Precondition violation -> Fix caller or document requirement
 - Postcondition violation -> Fix implementation
 - Invariant broken -> Identify corruption, add internal checks
@@ -773,6 +815,7 @@ cargo test 2>&1 | grep -E "(requires|ensures|invariant)"
 Exhaustively test concurrent code by exploring all possible thread interleavings.
 
 **Installation**:
+
 ```toml
 # Cargo.toml
 [dev-dependencies]
@@ -783,6 +826,7 @@ unexpected_cfgs = { level = "warn", check-cfg = ['cfg(loom)'] }
 ```
 
 **Usage Pattern**:
+
 ```rust
 // Production code with loom compatibility
 #[cfg(not(loom))]
@@ -838,6 +882,7 @@ fn test_concurrent_increment() {
 ```
 
 **Advanced Usage - Mutex and Condvar**:
+
 ```rust
 #[cfg(loom)]
 use loom::sync::{Arc, Mutex, Condvar};
@@ -873,6 +918,7 @@ fn test_producer_consumer() {
 ```
 
 **Loom-Compatible Types**:
+
 ```rust
 // Replace std types with loom equivalents in tests
 loom::sync::Arc                    // Arc<T>
@@ -887,6 +933,7 @@ loom::lazy_static!                 // lazy_static replacement
 ```
 
 **Commands**:
+
 ```bash
 # Run loom tests (requires --release for reasonable performance)
 RUSTFLAGS="--cfg loom" cargo test --release --lib
@@ -905,6 +952,7 @@ LOOM_CHECKPOINT_FILE=loom.json RUSTFLAGS="--cfg loom" cargo test --release
 ```
 
 **Environment Variables**:
+
 ```bash
 LOOM_MAX_PREEMPTIONS=N      # Limit preemption points (default: varies)
 LOOM_MAX_BRANCHES=N         # Limit branch exploration
@@ -914,12 +962,14 @@ LOOM_LOG=level              # trace, debug, info, warn, error
 ```
 
 **Pass Criteria**:
+
 - [ ] All loom tests pass without deadlock
 - [ ] No assertion failures across all interleavings
 - [ ] State space fully explored (or bounded appropriately)
 - [ ] Critical concurrent data structures validated
 
 **Fail Actions**:
+
 - Deadlock detected -> Analyze lock ordering, add timeout or restructure
 - Assertion failure -> Fix race condition, strengthen synchronization
 - State explosion -> Reduce threads/operations or bound with `LOOM_MAX_PREEMPTIONS`
@@ -969,6 +1019,7 @@ mod unsafe_verification {
 ```
 
 **Commands**:
+
 ```bash
 # Verify unsafe code with Kani
 cargo kani --harness verify_unsafe_buffer_access
@@ -980,11 +1031,13 @@ cargo kani --checks=pointer,bounds
 ### Miri for Dynamic UB Detection
 
 **Installation**:
+
 ```bash
 rustup +nightly component add miri
 ```
 
 **Commands**:
+
 ```bash
 # Run program under Miri
 cargo +nightly miri run
@@ -1010,6 +1063,7 @@ cargo +nightly miri clean
 ```
 
 **Miri Flags Reference**:
+
 ```bash
 -Zmiri-symbolic-alignment-check   # Stricter alignment checks
 -Zmiri-strict-provenance          # Check pointer provenance
@@ -1021,12 +1075,14 @@ cargo +nightly miri clean
 ```
 
 **Pass Criteria**:
+
 - [ ] Miri runs without UB detection
 - [ ] All unsafe blocks verified by Kani
 - [ ] No memory leaks (or documented intentional)
 - [ ] Provenance rules respected
 
 **Fail Actions**:
+
 - UB detected -> Analyze Miri output, fix unsafe code
 - Leak detected -> Add proper cleanup or document
 - Alignment issue -> Use aligned types or manual alignment
@@ -1195,17 +1251,17 @@ rg 'loom::' -q -t rust && RUSTFLAGS='--cfg loom' cargo test --release || exit 15
 
 ### Error Scenarios
 
-| Tool | Error Message | Fix |
-|------|---------------|-----|
-| Miri | `pointer out of bounds` | Check slice/array bounds |
-| Miri | `memory leaked` | Ensure Drop impl |
-| Miri | `data race detected` | Use atomic or sync |
-| Loom | `deadlock detected` | Review lock ordering |
-| Kani | `VERIFICATION FAILED` | Check counterexample |
-| Kani | `unwinding assertion failed` | Increase `#[kani::unwind(N)]` |
-| contracts | `precondition violated` | Strengthen caller |
-| contracts | `postcondition violated` | Fix implementation |
-| Flux | `refinement type error` | Ensure input constraints |
+| Tool      | Error Message                | Fix                           |
+| --------- | ---------------------------- | ----------------------------- |
+| Miri      | `pointer out of bounds`      | Check slice/array bounds      |
+| Miri      | `memory leaked`              | Ensure Drop impl              |
+| Miri      | `data race detected`         | Use atomic or sync            |
+| Loom      | `deadlock detected`          | Review lock ordering          |
+| Kani      | `VERIFICATION FAILED`        | Check counterexample          |
+| Kani      | `unwinding assertion failed` | Increase `#[kani::unwind(N)]` |
+| contracts | `precondition violated`      | Strengthen caller             |
+| contracts | `postcondition violated`     | Fix implementation            |
+| Flux      | `refinement type error`      | Ensure input constraints      |
 
 ---
 
@@ -1263,31 +1319,31 @@ echo "=== All Validations Passed ==="
 
 ## Quick Reference Card
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `cargo check` | Type verification | `cargo check` |
-| `cargo clippy` | Lint analysis | `cargo clippy -- -D warnings` |
-| contracts | Runtime contracts | `cargo build && cargo test` |
-| Flux | Refinement types | `cargo flux` |
-| Quint | Spec modeling | `quint verify spec.qnt` |
-| Lean 4 | Formal proofs | `lake build` |
-| Kani | Model checking | `cargo kani` |
-| Loom | Concurrency validation | `RUSTFLAGS="--cfg loom" cargo test --release` |
-| Miri | UB detection | `cargo +nightly miri test` |
+| Tool           | Purpose                | Command                                       |
+| -------------- | ---------------------- | --------------------------------------------- |
+| `cargo check`  | Type verification      | `cargo check`                                 |
+| `cargo clippy` | Lint analysis          | `cargo clippy -- -D warnings`                 |
+| contracts      | Runtime contracts      | `cargo build && cargo test`                   |
+| Flux           | Refinement types       | `cargo flux`                                  |
+| Quint          | Spec modeling          | `quint verify spec.qnt`                       |
+| Lean 4         | Formal proofs          | `lake build`                                  |
+| Kani           | Model checking         | `cargo kani`                                  |
+| Loom           | Concurrency validation | `RUSTFLAGS="--cfg loom" cargo test --release` |
+| Miri           | UB detection           | `cargo +nightly miri test`                    |
 
 ---
 
 ## Exit Codes
 
-| Code | Meaning | Action |
-|------|---------|--------|
-| 0 | All validations pass | Proceed to deployment |
-| 11 | Toolchain missing | Install rustup/cargo |
-| 12 | Format violations | Run `cargo fmt` |
-| 13 | Clippy failures | Fix warnings |
-| 14 | Security/dependency issues | Review audit findings |
-| 15 | Formal verification failed | Fix proofs/contracts |
-| 16 | External tool validation failed | Fix Lean4/Quint specs |
+| Code | Meaning                         | Action                |
+| ---- | ------------------------------- | --------------------- |
+| 0    | All validations pass            | Proceed to deployment |
+| 11   | Toolchain missing               | Install rustup/cargo  |
+| 12   | Format violations               | Run `cargo fmt`       |
+| 13   | Clippy failures                 | Fix warnings          |
+| 14   | Security/dependency issues      | Review audit findings |
+| 15   | Formal verification failed      | Fix proofs/contracts  |
+| 16   | External tool validation failed | Fix Lean4/Quint specs |
 
 ---
 
@@ -1322,22 +1378,27 @@ rg '#\[flux::' -t rust                                      # Flux
 ## Common Pitfalls
 
 ### Pitfall 1: Miri in CI
+
 **Problem:** Too slow for CI.
 **Solution:** Use Miri locally, Kani for CI.
 
 ### Pitfall 2: Kani Loop Unrolling
+
 **Problem:** Timeout on unbounded loops.
 **Solution:** Add `#[kani::unwind(N)]` + assume bounds.
 
 ### Pitfall 3: Loom State Explosion
+
 **Problem:** Too many thread interleavings.
 **Solution:** Start with 2-3 threads, tune `LOOM_MAX_PREEMPTIONS`.
 
 ### Pitfall 4: Contract Annotation Bloat
+
 **Problem:** Over-annotated code.
 **Solution:** Annotate public API boundaries only.
 
 ### Pitfall 5: Ignoring Counterexamples
+
 **Problem:** Silencing Kani with assumes.
 **Solution:** Analyze and fix root cause.
 
@@ -1345,17 +1406,17 @@ rg '#\[flux::' -t rust                                      # Flux
 
 ## Pass/Fail Decision Matrix
 
-| Check | Pass | Fail Action |
-|-------|------|-------------|
-| `cargo check` | No errors | Fix type errors |
-| `cargo clippy` | No warnings | Address all warnings |
-| `cargo test` | All pass | Fix failing tests |
-| `cargo flux` | Verified | Strengthen refinements |
-| `quint verify` | No violations | Fix spec or impl |
-| `lake build` | No sorry | Complete proofs |
-| `cargo kani` | SUCCESSFUL | Fix counterexample |
-| `loom test` | No deadlock/race | Fix synchronization |
-| `miri test` | No UB | Fix unsafe code |
+| Check          | Pass             | Fail Action            |
+| -------------- | ---------------- | ---------------------- |
+| `cargo check`  | No errors        | Fix type errors        |
+| `cargo clippy` | No warnings      | Address all warnings   |
+| `cargo test`   | All pass         | Fix failing tests      |
+| `cargo flux`   | Verified         | Strengthen refinements |
+| `quint verify` | No violations    | Fix spec or impl       |
+| `lake build`   | No sorry         | Complete proofs        |
+| `cargo kani`   | SUCCESSFUL       | Fix counterexample     |
+| `loom test`    | No deadlock/race | Fix synchronization    |
+| `miri test`    | No UB            | Fix unsafe code        |
 
 **Rule**: Do not ship if any check fails.
 

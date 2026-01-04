@@ -308,40 +308,40 @@ go test -coverprofile=coverage.out ./... || exit 14
 
 ## Exit Codes
 
-| Code | Meaning | Action |
-|------|---------|--------|
-| 0 | All tests pass, coverage met | Continue with next feature |
-| 11 | Framework missing | Install test framework |
-| 12 | No test files | Run plan phase, create tests |
-| 13 | Tests failed | Fix implementation or test |
-| 14 | Coverage low | Add more tests |
-| 15 | Refactoring broke tests | Revert changes, refactor carefully |
+| Code | Meaning                      | Action                             |
+| ---- | ---------------------------- | ---------------------------------- |
+| 0    | All tests pass, coverage met | Continue with next feature         |
+| 11   | Framework missing            | Install test framework             |
+| 12   | No test files                | Run plan phase, create tests       |
+| 13   | Tests failed                 | Fix implementation or test         |
+| 14   | Coverage low                 | Add more tests                     |
+| 15   | Refactoring broke tests      | Revert changes, refactor carefully |
 
 ---
 
 ## Language Support Matrix
 
-| Language | Test Framework | Command | Watch Mode |
-|----------|---------------|---------|------------|
-| Rust | cargo test | `cargo test` | `cargo watch -x test` |
-| Python | pytest | `pytest` | `pytest-watch` |
-| TypeScript | vitest/jest | `vitest run` | `vitest --watch` |
-| Go | go test | `go test ./...` | `gotestsum --watch` |
-| Java | JUnit 5 | `mvn test` | IDE integration |
-| C# | xUnit | `dotnet test` | `dotnet watch test` |
-| C++ | GoogleTest | `ctest` | `fd *.cpp \| entr ctest` |
+| Language   | Test Framework | Command         | Watch Mode               |
+| ---------- | -------------- | --------------- | ------------------------ |
+| Rust       | cargo test     | `cargo test`    | `cargo watch -x test`    |
+| Python     | pytest         | `pytest`        | `pytest-watch`           |
+| TypeScript | vitest/jest    | `vitest run`    | `vitest --watch`         |
+| Go         | go test        | `go test ./...` | `gotestsum --watch`      |
+| Java       | JUnit 5        | `mvn test`      | IDE integration          |
+| C#         | xUnit          | `dotnet test`   | `dotnet watch test`      |
+| C++        | GoogleTest     | `ctest`         | `fd *.cpp \| entr ctest` |
 
 ## Test Framework Matrix
 
-| Language | Unit Test | Property Test | Mock |
-|----------|-----------|---------------|------|
-| Rust | cargo test | proptest | mockall |
-| Python | pytest | hypothesis | pytest-mock |
-| TypeScript | vitest | fast-check | vi.mock |
-| Go | go test | gopter | gomock |
-| Java | JUnit 5 | jqwik | Mockito |
-| C# | xUnit | FsCheck | Moq |
-| C++ | GoogleTest | rapidcheck | GMock |
+| Language   | Unit Test  | Property Test | Mock        |
+| ---------- | ---------- | ------------- | ----------- |
+| Rust       | cargo test | proptest      | mockall     |
+| Python     | pytest     | hypothesis    | pytest-mock |
+| TypeScript | vitest     | fast-check    | vi.mock     |
+| Go         | go test    | gopter        | gomock      |
+| Java       | JUnit 5    | jqwik         | Mockito     |
+| C#         | xUnit      | FsCheck       | Moq         |
+| C++        | GoogleTest | rapidcheck    | GMock       |
 
 ---
 
@@ -420,6 +420,7 @@ def test_discount_applies_to_total():
 ### 4. Test Independence
 
 ### 5. Fast Tests
+
 - Avoid file I/O
 - Mock external dependencies
 - Use in-memory databases
@@ -431,15 +432,15 @@ def test_discount_applies_to_total():
 
 ### Common Issues
 
-| Symptom | Cause | Resolution |
-|---------|-------|------------|
-| Exit 11 | Test framework missing | Install: `npm i -D vitest`, `pip install pytest`, `cargo add --dev proptest` |
-| Exit 12 | No test files | Run plan phase first |
-| Exit 13 | Tests failed | Debug specific test |
-| Exit 14 | Coverage too low | Add tests for uncovered paths |
-| Flaky test | Non-determinism | Fix time/random/network dependencies |
-| Slow tests | Too much I/O or sleep | Use mocks, reduce wait times |
-| Test passes alone, fails in suite | Shared state pollution | Isolate test fixtures |
+| Symptom                           | Cause                  | Resolution                                                                   |
+| --------------------------------- | ---------------------- | ---------------------------------------------------------------------------- |
+| Exit 11                           | Test framework missing | Install: `npm i -D vitest`, `pip install pytest`, `cargo add --dev proptest` |
+| Exit 12                           | No test files          | Run plan phase first                                                         |
+| Exit 13                           | Tests failed           | Debug specific test                                                          |
+| Exit 14                           | Coverage too low       | Add tests for uncovered paths                                                |
+| Flaky test                        | Non-determinism        | Fix time/random/network dependencies                                         |
+| Slow tests                        | Too much I/O or sleep  | Use mocks, reduce wait times                                                 |
+| Test passes alone, fails in suite | Shared state pollution | Isolate test fixtures                                                        |
 
 ### Flaky Test Detection
 
@@ -470,6 +471,7 @@ pytest --durations=10
 ## Property-Based Testing
 
 ### Rust (proptest)
+
 ```rust
 use proptest::prelude::*;
 
@@ -483,9 +485,11 @@ proptest! {
 ```
 
 ### Python (hypothesis)
+
 ```python
 from hypothesis import given
 import hypothesis.strategies as st
+
 
 @given(st.integers(min_value=1, max_value=1000))
 def test_quantity_always_positive(qty):
@@ -494,15 +498,16 @@ def test_quantity_always_positive(qty):
 ```
 
 ### TypeScript (fast-check)
-```typescript
-import * as fc from 'fast-check';
 
-it('quantity always gives positive subtotal', () => {
+```typescript
+import * as fc from "fast-check";
+
+it("quantity always gives positive subtotal", () => {
   fc.assert(
-    fc.property(fc.integer({min: 1, max: 1000}), (qty) => {
-      const item = new Item('Widget', 10, qty);
+    fc.property(fc.integer({ min: 1, max: 1000 }), (qty) => {
+      const item = new Item("Widget", 10, qty);
       expect(item.subtotal()).toBeGreaterThan(0);
-    })
+    }),
   );
 });
 ```
@@ -511,14 +516,14 @@ it('quantity always gives positive subtotal', () => {
 
 ## When NOT to Use Test-Driven Development
 
-| Scenario | Better Alternative |
-|----------|-------------------|
-| Proving mathematical invariants | Proof-driven (Lean 4) |
-| Ensuring type safety | Type-driven (Idris 2) |
-| Verifying state machine correctness | Validation-first (Quint) |
-| Exploratory prototyping | Spike first, then write tests |
-| UI visual testing | Screenshot/visual regression tools |
-| Already have formal specs | Generate tests from specs |
+| Scenario                            | Better Alternative                 |
+| ----------------------------------- | ---------------------------------- |
+| Proving mathematical invariants     | Proof-driven (Lean 4)              |
+| Ensuring type safety                | Type-driven (Idris 2)              |
+| Verifying state machine correctness | Validation-first (Quint)           |
+| Exploratory prototyping             | Spike first, then write tests      |
+| UI visual testing                   | Screenshot/visual regression tools |
+| Already have formal specs           | Generate tests from specs          |
 
 ---
 

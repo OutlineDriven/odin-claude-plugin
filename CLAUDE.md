@@ -41,8 +41,8 @@ Think systemically using SHORT-form KEYWORDS for efficient internal reasoning. U
     *   `git clone --shared . ./.outline/agent-<id>`
 3.  **Execute:** Agents run inside `./.outline/agent-<id>` in detached HEAD.
     *   `cd ./.outline/agent-<id> && git checkout --detach <base>`
-    *   *Agent A:* `git commit -m "task A"` (auto-tracked as draft by branchless)
-    *   *Agent B:* `git commit -m "task B"` (auto-tracked as draft by branchless)
+    *   _Agent A:_ `git commit -m "task A"` (auto-tracked as draft by branchless)
+    *   _Agent B:_ `git commit -m "task B"` (auto-tracked as draft by branchless)
 4.  **Converge:**
     *   Publish from agent clone: `git push origin HEAD:refs/heads/agent-<id>`
     *   In main workspace: `git fetch origin` → `git branchless sync`
@@ -74,17 +74,19 @@ Default to research over action. Do not jump into implementation unless clearly 
 </avoid_anti_patterns>
 
 <keep_it_simple>
+
 - Prefer the smallest viable change; reuse existing patterns before adding new ones.
 - Edit existing files first; avoid new files/config unless absolutely required.
 - Remove dead code and feature flags quickly to keep the surface minimal.
 - Choose straightforward flows; defer abstractions until the repeated need is proven.
-</keep_it_simple>
+  </keep_it_simple>
 
 <calculation_always_explicit>
 **NO MENTAL MATH:** LLMs cannot calculate. You must use tools for ANY arithmetic, conversion, or logic.
+
 - **Date/Logic/Units:** `fend "date + 3 weeks"`, `fend "true and false or true"`, `fend "100mb / 2s"`.
-**Enforcement:** Verify all constants/timeouts/buffer sizes with tools. Never hallucinate values.
-</calculation_always_explicit>
+  **Enforcement:** Verify all constants/timeouts/buffer sizes with tools. Never hallucinate values.
+  </calculation_always_explicit>
 
 <temporal_files_organization>
 **Outline-Driven Development:** ALL temporal artifacts for outline-driven development MUST use `.outline/` directory. [MANDATORY]
@@ -98,84 +100,94 @@ Default to research over action. Do not jump into implementation unless clearly 
 **Rule:** Work in detached HEAD for anonymous commits. Branches only for publishing.
 
 **Workflow Protocol:**
-1.  **Init (once per repo):**
-    * `git branchless init` (Install hooks, configure main branch, initialize event log).
-2.  **Sync:**
-    * `git fetch` (Update remote tracking branches).
-    * `git checkout --detach origin/main` (Start *anonymous* work on remote tip).
-    * `git branchless smartlog` or `git sl` (Visualize commit graph with draft commits).
-3.  **Develop (Anonymous Commits):**
-    * *Iterate:* Edit files, commit normally. Commits auto-tracked by branchless.
-    * *Refine:* `git branchless move -s <src> -d <dest>` (Reorder commits), `git branchless split` (Isolate concerns), `git branchless amend` (Amend any commit).
-    * *Navigate:* `git branchless next [N]`/`git branchless prev [N]` (Move through stack), `git branchless switch -i` (Interactive switch).
-    * *Visualize:* `git branchless smartlog` (Icons: ◆=HEAD, ◇=public, ◯=draft, ✕=hidden).
-4.  **Atomize:** `git branchless move --fixup` (Collapse related commits) | `git branchless reword` (Edit messages).
-5.  **Publish:**
-    * *Sync:* `git branchless sync` (Rebase all stacks onto main) | `git branchless sync --pull` (Fetch + sync).
-    * *Branch:* `git branch <branch-name>` (Create branch at HEAD).
-    * *Push:* `git push -u origin <branch-name>` or `git branchless submit` (Push to forge).
+
+1. **Init (once per repo):**
+   - `git branchless init` (Install hooks, configure main branch, initialize event log).
+2. **Sync:**
+   - `git fetch` (Update remote tracking branches).
+   - `git checkout --detach origin/main` (Start _anonymous_ work on remote tip).
+   - `git branchless smartlog` or `git sl` (Visualize commit graph with draft commits).
+3. **Develop (Anonymous Commits):**
+   - _Iterate:_ Edit files, commit normally. Commits auto-tracked by branchless.
+   - _Refine:_ `git branchless move -s <src> -d <dest>` (Reorder commits), `git branchless split` (Isolate concerns), `git branchless amend` (Amend any commit).
+   - _Navigate:_ `git branchless next [N]`/`git branchless prev [N]` (Move through stack), `git branchless switch -i` (Interactive switch).
+   - _Visualize:_ `git branchless smartlog` (Icons: ◆=HEAD, ◇=public, ◯=draft, ✕=hidden).
+4. **Atomize:** `git branchless move --fixup` (Collapse related commits) | `git branchless reword` (Edit messages).
+5. **Publish:**
+   - _Sync:_ `git branchless sync` (Rebase all stacks onto main) | `git branchless sync --pull` (Fetch + sync).
+   - _Branch:_ `git branch <branch-name>` (Create branch at HEAD).
+   - _Push:_ `git push -u origin <branch-name>` or `git branchless submit` (Push to forge).
 
 **Move Operations:**
-* `git move -s <commit> -d <dest>` (Move commit + descendants)
-* `git move -x <commit> -d <dest>` (Move exact commit, no descendants)
-* `git move -b <branch> -d <dest>` (Move entire branch stack)
-* `git move --fixup` (Combine commits) | `git move --insert` (Insert between commits)
+
+- `git move -s <commit> -d <dest>` (Move commit + descendants)
+- `git move -x <commit> -d <dest>` (Move exact commit, no descendants)
+- `git move -b <branch> -d <dest>` (Move entire branch stack)
+- `git move --fixup` (Combine commits) | `git move --insert` (Insert between commits)
 
 **Query Language (Revsets):**
-* **Draft/Stack:** `draft()` | `stack()` | `branches()`
-* **Author/Message:** `author.name("Alice")` | `message("fix bug")`
-* **Paths:** `paths.changed("src/*.rs")`
-* **Relations:** `ancestors(<rev>)` | `descendants(<rev>)` | `children(<rev>)` | `parents(<rev>)`
-* **Operations:** `<set1> | <set2>` (union) | `<set1> & <set2>` (intersection) | `<set1> - <set2>` (difference) | `<set1> % <set2>` (only)
-* **Tests:** `tests.passed()` | `tests.failed("<cmd>")`
-* **Shortcuts:** `:<rev>` (ancestors) | `<rev>:` (descendants)
-* **Usage:** `git query '<revset>'` | `git smartlog '<revset>'` | `git sync '<revset>'`
+
+- **Draft/Stack:** `draft()` | `stack()` | `branches()`
+- **Author/Message:** `author.name("Alice")` | `message("fix bug")`
+- **Paths:** `paths.changed("src/*.rs")`
+- **Relations:** `ancestors(<rev>)` | `descendants(<rev>)` | `children(<rev>)` | `parents(<rev>)`
+- **Operations:** `<set1> | <set2>` (union) | `<set1> & <set2>` (intersection) | `<set1> - <set2>` (difference) | `<set1> % <set2>` (only)
+- **Tests:** `tests.passed()` | `tests.failed("<cmd>")`
+- **Shortcuts:** `:<rev>` (ancestors) | `<rev>:` (descendants)
+- **Usage:** `git query '<revset>'` | `git smartlog '<revset>'` | `git sync '<revset>'`
 
 **Recovery & Cleanup:**
-* **Undo:** `git branchless undo` (Undo last operation) | `git branchless undo -i` (Interactive time-travel)
-* **Restack:** `git branchless restack` (Fix abandoned commits after amends/rewrites)
-* **Hide/Unhide:** `git hide <commit>` | `git hide '<revset>'` | `git unhide <commit>`
-* **Test:** `git test run '<revset>' --exec '<cmd>'` | `git test show` | `git test run 'tests.failed()' --exec '<cmd>'`
+
+- **Undo:** `git branchless undo` (Undo last operation) | `git branchless undo -i` (Interactive time-travel)
+- **Restack:** `git branchless restack` (Fix abandoned commits after amends/rewrites)
+- **Hide/Unhide:** `git hide <commit>` | `git hide '<revset>'` | `git unhide <commit>`
+- **Test:** `git test run '<revset>' --exec '<cmd>'` | `git test show` | `git test run 'tests.failed()' --exec '<cmd>'`
 
 **Advanced:**
-* **Record:** `git record` (Interactive commit creation) | `git record --amend` (Interactive amend)
-* **Reword:** `git reword <commit>` | `git reword '<revset>'` (Edit commit messages)
-* **Split:** `git split <commit>` (Split commit into multiple, auto-restacks descendants)
-</git_branchless_strategy>
+
+- **Record:** `git record` (Interactive commit creation) | `git record --amend` (Interactive amend)
+- **Reword:** `git reword <commit>` | `git reword '<revset>'` (Edit commit messages)
+- **Split:** `git split <commit>` (Split commit into multiple, auto-restacks descendants)
+  </git_branchless_strategy>
 
 <quickstart_workflow>
+
 1. **Requirements**: Checklist (3-10 items), constraints, unknowns.
 2. **Context**: `fd` discovery. Read critical files.
 3. **Design**: Delta diagrams (Architecture, Data-flow, Concurrency).
 4. **Contract**: I/O, invariants, edge cases, error modes.
 5. **Implementation**:
-    * **Search**: `ast-grep` (Structure) or `fd` (Discovery).
-    * **Edit**: `srgn`/`ast-grep` (Structure) or `native-patch`.
-    * **State**: `git branchless move --fixup` or `git branchless amend` iteratively to build atomic commit.
+   - **Search**: `ast-grep` (Structure) or `fd` (Discovery).
+   - **Edit**: `srgn`/`ast-grep` (Structure) or `native-patch`.
+   - **State**: `git branchless move --fixup` or `git branchless amend` iteratively to build atomic commit.
 6. **Quality**: Build → Lint → Test → Smoke.
 7. **Completion**: Final `git branchless move --fixup`, verify atomic message, cleanup.
-</quickstart_workflow>
+   </quickstart_workflow>
 
 <surgical_editing_workflow>
 **Find → Copy → Paste → Verify:** Precise transformation.
 
 **1. Find (Structural)**
+
 - **Pattern**: `ast-grep run -p 'function $N($$$A) { $$$B }' -l ts`
 - **Ambiguity**: `ast-grep scan --inline-rules 'rule: { pattern: { context: "class $C { $F($$$) }", selector: "method_definition" } }' -l`
 - **Scope**: `ast-grep scan --inline-rules 'rule: { pattern: "return $A", inside: { kind: "function", regex: "^handler" } }'`
 
 **2. Copy (Extraction)**
+
 - **Context**: `ast-grep run -p '$PAT' -C 3` or `bat --line-range 10:20`
 
 **3. Paste (Atomic Transformation)**
+
 - **Rewrite**: `ast-grep run -p '$O.old($A)' -r '$O.new({ val: $A })' -U`
 - **Regex**: `srgn --python 'pattern' 'replacement'`
 - **Manual**: `native-patch` (hunk-based) for non-pattern multi-file edits.
 
 **4. Verify (Semantic)**
+
 - **Diff**: `difft --display inline original modified`
 - **Sanity**: Re-run `ast-grep` to confirm pattern absence/presence.
-</surgical_editing_workflow>
+  </surgical_editing_workflow>
 
 ## PRIMARY DIRECTIVES
 
@@ -186,11 +198,12 @@ Default to research over action. Do not jump into implementation unless clearly 
 3) **Context Root:** `repomix` (MCP). Pack/Analyze codebases.
 
 **Tool Selection [Second-Class Tools - SUPPORT]:**
-1) **Utilities:** `zoxide` (Nav), `eza` (List), `bat` (Read), `huniq` (Dedupe).
-2) **Analysis:** `tokei` (Stats), `ripgrep` (Text Search), `fselect` (SQL Query), `global` (Symbol Nav).
-3) **Ops:** `hck` (Column Cut), `rargs` (Regex Args), `nomino` (Rename).
-4) **VCS:** `git-branchless` (Main), `mergiraf` (Merge), `difftastic` (Diff).
-5) **Data:** `jql` (JSON - Primary), `jaq` (jq-compatible).
+
+1. **Utilities:** `zoxide` (Nav), `eza` (List), `bat` (Read), `huniq` (Dedupe).
+2. **Analysis:** `tokei` (Stats), `ripgrep` (Text Search), `fselect` (SQL Query), `global` (Symbol Nav).
+3. **Ops:** `hck` (Column Cut), `rargs` (Regex Args), `nomino` (Rename).
+4. **VCS:** `git-branchless` (Main), `mergiraf` (Merge), `difftastic` (Diff).
+5. **Data:** `jql` (JSON - Primary), `jaq` (jq-compatible).
 
 **Selection guide:** Discovery → fd | Code pattern → ast-grep | Simple edit → srgn | Text → rg | Symbol nav → global | Scope → tokei | VCS → git-branchless | JSON → jql (default), jaq (jq-compatible/complex)
 
@@ -199,6 +212,7 @@ Default to research over action. Do not jump into implementation unless clearly 
 **Thinking tools:** sequential-thinking [ALWAYS USE] for decomposition/dependencies; actor-critic-thinking for alternatives; shannon-thinking for uncertainty/risk
 
 **Banned [HARD ENFORCEMENT - REJECT IMMEDIATELY]:**
+
 - `ls` → USE `eza`
 - `find` → USE `fd`
 - `grep` → USE `rg` or `ast-grep`
@@ -211,20 +225,22 @@ Default to research over action. Do not jump into implementation unless clearly 
 <headless_enforcement>
 **Headless & Non-Interactive Protocol [MANDATORY]:**
 All tools must be executed in **strict headless mode**.
+
 - **No TUIs:** Never run `top`, `htop`, `vim`, `nano`. Use `procs`, `bat` (plain), `ed`/`sed`.
 - **No Pagers:** Always pipe to `cat` or use `--no-pager` (e.g., `git --no-pager`).
 - **Output:** Prefer `--json` or plain text.
 - **Constraint:** Any command waiting for stdin input without a pipe is a **CRITICAL FAILURE**.
-</headless_enforcement>
+  </headless_enforcement>
 
 <fd_first_enforcement>
 **fd-First Scoping [MANDATORY before large operations]:**
 Before executing ast-grep scans, rg searches, or multi-file edits:
+
 1. **Discovery:** Use `fd -e <ext> [pattern]` to discover relevant files.
 2. **Scoping:** Use `fd -E <exclude>` to filter noise (venv, node_modules, target).
 3. **Validate:** Review file count—if >50 files, narrow with patterns.
 4. **Execute:** Run ast-grep/rg on the identified scope, or pipe via `fd -x`/`fd -X`.
-</fd_first_enforcement>
+   </fd_first_enforcement>
 
 **Workflow:** Preview → Validate → Apply (no blind edits)
 **Diagrams (INTERNAL):** Architecture, data-flow, concurrency, memory, optimization, tidiness. Reason through in thinking process for non-trivial changes.
@@ -236,6 +252,7 @@ Before executing ast-grep scans, rg searches, or multi-file edits:
 **Algorithms & Data Structures:** Structure selection rationale, complexity analysis (worst/average/amortized), space/time trade-offs, cache locality, proven patterns (divide-conquer, DP, greedy, graph).
 
 **Safety principles:**
+
 - **Concurrency:** Critical sections, lock ordering/hierarchy, deadlock-freedom proof, memory ordering/atomics, backpressure/cancellation/timeout, async/await/actor/channels/IPC
 - **Memory:** Ownership model, borrowing/aliasing rules, escape analysis, RAII/GC interplay, FFI boundaries, zero-copy, bounds checks, UAF/double-free/leak prevention
 - **Performance:** Latency targets (p. 50/p. 95/p. 99), throughput requirements, complexity ceilings, allocation budgets, cache considerations, measurement strategies, regression guards
@@ -263,6 +280,7 @@ Write solutions working correctly for all valid inputs, not just test cases. Imp
 **Diagram-driven:** Always start with diagrams in reasoning. No code without comprehensive visual analysis in thinking process. Think systemically with precise notation, rigor, formal logic. Prefer **nomnoml**.
 
 **Six required diagrams:**
+
 1. **Concurrency**: Threads, synchronization, race analysis/prevention, deadlock avoidance, happens-before (→), lock ordering
 2. **Memory**: Stack/heap, ownership, access patterns, allocation/deallocation, lifetimes l(o)=⟨t_alloc, t_free⟩, safety guarantees
 3. **Data-flow**: Information sources, transformations, sinks, data pathways, state transitions, I/O boundaries
@@ -295,83 +313,92 @@ Always retrieve framework/library docs using: context7, (exa, tavily, ref-tool),
 **Protocol:** Search (`fd`/`rg`) → Metrics (`tokei`) → Plan → Edit (`srgn`/`ast-grep`) → Verify (`difft`).
 
 ### 1) Core System & File Ops
-* **`eza`**: `ls` replacement. `eza --tree --level=2` | `eza -l --git` | `eza --icons` | `eza -D` | `eza -l --sort=size`
-* **`bat`**: `cat` replacement. `bat -p --line-range 10:20 file.rs`. Flags: `-p` (plain), `-l` (lang), `-A` (show-all), `-r` (range)
-* **`zoxide`**: Smart nav. `z foo` | `zi foo` (fzf) | `zoxide query <partial>`. Manage: `zoxide add|remove|edit`
-* **`rargs`**: Regex xargs. `rargs -p '(.*)\.txt' mv {0} {1}.bak`. Flags: `-p` (pattern), `-d` (delimiter)
+
+- **`eza`**: `ls` replacement. `eza --tree --level=2` | `eza -l --git` | `eza --icons` | `eza -D` | `eza -l --sort=size`
+- **`bat`**: `cat` replacement. `bat -p --line-range 10:20 file.rs`. Flags: `-p` (plain), `-l` (lang), `-A` (show-all), `-r` (range)
+- **`zoxide`**: Smart nav. `z foo` | `zi foo` (fzf) | `zoxide query <partial>`. Manage: `zoxide add|remove|edit`
+- **`rargs`**: Regex xargs. `rargs -p '(.*)\.txt' mv {0} {1}.bak`. Flags: `-p` (pattern), `-d` (delimiter)
 
 ### 2) Search & Discovery
-* **`fd`**: Fast file discovery. **PRIMARY discovery tool.**
-    * **Basic:** `fd -e py -E venv` | `fd . src/ -e ts` | `fd -g '*.test.ts'`
-    * **Exclude:** `fd -e rs -E target -E .git` | **Depth:** `fd -e go --max-depth 3` | **Hidden:** `fd -H pattern`
-    * **Execute:** `fd -e rs -x rustfmt {}` (per-file) | `fd -e py -X black` (batch) | `fd -j 4 -e rs -x cargo fmt` (parallel)
-    * **Filter:** `fd -e ts --changed-within 1d` | `fd -e json -S +1k` (size >1KB)
-    * **Placeholders:** `{}` (full), `{/}` (basename), `{//}` (parent), `{.}` (no ext), `{/.}` (basename no ext)
-* **`ripgrep` (rg)**: Text search. `rg "pattern" -t rs` | `rg -F 'literal'` | `rg pattern -A 3 -B 2` | `rg clap -g '*.toml'` | `rg pattern --json`
-* **`fselect`**: SQL filesystem. `fselect path, size from . where size > 1mb`. Columns: name, path, size, modified, mime, is_dir. Ops: order by, limit, count, sum
-* **`tealdeer`**: Fast cheat sheets. `tldr <command>` | `tldr --update` | `tldr --list`
+
+- **`fd`**: Fast file discovery. **PRIMARY discovery tool.**
+  - **Basic:** `fd -e py -E venv` | `fd . src/ -e ts` | `fd -g '*.test.ts'`
+  - **Exclude:** `fd -e rs -E target -E .git` | **Depth:** `fd -e go --max-depth 3` | **Hidden:** `fd -H pattern`
+  - **Execute:** `fd -e rs -x rustfmt {}` (per-file) | `fd -e py -X black` (batch) | `fd -j 4 -e rs -x cargo fmt` (parallel)
+  - **Filter:** `fd -e ts --changed-within 1d` | `fd -e json -S +1k` (size >1KB)
+  - **Placeholders:** `{}` (full), `{/}` (basename), `{//}` (parent), `{.}` (no ext), `{/.}` (basename no ext)
+- **`ripgrep` (rg)**: Text search. `rg "pattern" -t rs` | `rg -F 'literal'` | `rg pattern -A 3 -B 2` | `rg clap -g '*.toml'` | `rg pattern --json`
+- **`fselect`**: SQL filesystem. `fselect path, size from . where size > 1mb`. Columns: name, path, size, modified, mime, is_dir. Ops: order by, limit, count, sum
+- **`tealdeer`**: Fast cheat sheets. `tldr <command>` | `tldr --update` | `tldr --list`
 
 ### 3) Code Manipulation
-* **`ast-grep` (AG)**: Structural search/replace. 90% error reduction, 10x accurate.
-    * Search: `ast-grep run -p 'import { $A } from "lib"' -l ts -C 3`
-    * Rewrite: `ast-grep run -p 'logger.info($A)' -r 'logger.debug({ ctx: ctx, msg: $A })' -U`
-    * Debug: `ast-grep run -p 'pattern' -l js --debug-query=cst`
-    * Pattern syntax: `$VAR` (single), `$$$ARGS` (multiple), `$_` (non-capturing)
-* **`srgn`**: Surgical regex/grammar replacement. Understands source code syntax.
-    * **Flags:** `--python`, `--typescript`, `--rust`, `--go`, `--glob`, `--dry-run`, `-d` (delete), `-u` (upper), `-l` (lower)
-    * **Usage:** `srgn 'old' -- 'new'` | `srgn -d 'pattern'` | `srgn --python 'comments' 'TODO' -- 'DONE'` | `srgn --glob '*.py' 'old' -- 'new'`
-* **`nomino`**: Batch rename. `nomino -r '(.*)\.bak' '{1}.txt'`. Flags: `-r` (regex), `-s` (sort), `-t` (test), `-R` (recursive)
-* **`hck`**: Column cutter. `hck -f 1,3 -d ':'`. Flags: `-f` (fields), `-d` (delim), `-D` (regex delim), `-f -2` (exclude)
-* **`shellharden`**: Bash hardener. `shellharden script.sh` | `shellharden --replace script.sh` (in-place)
-* **`lemmeknow`**: Identify encodings/hashes. `lemmeknow 'text'` | `lemmeknow --json 'text'` | `lemmeknow -f file.txt`
+
+- **`ast-grep` (AG)**: Structural search/replace. 90% error reduction, 10x accurate.
+  - Search: `ast-grep run -p 'import { $A } from "lib"' -l ts -C 3`
+  - Rewrite: `ast-grep run -p 'logger.info($A)' -r 'logger.debug({ ctx: ctx, msg: $A })' -U`
+  - Debug: `ast-grep run -p 'pattern' -l js --debug-query=cst`
+  - Pattern syntax: `$VAR` (single), `$$$ARGS` (multiple), `$_` (non-capturing)
+- **`srgn`**: Surgical regex/grammar replacement. Understands source code syntax.
+  - **Flags:** `--python`, `--typescript`, `--rust`, `--go`, `--glob`, `--dry-run`, `-d` (delete), `-u` (upper), `-l` (lower)
+  - **Usage:** `srgn 'old' -- 'new'` | `srgn -d 'pattern'` | `srgn --python 'comments' 'TODO' -- 'DONE'` | `srgn --glob '*.py' 'old' -- 'new'`
+- **`nomino`**: Batch rename. `nomino -r '(.*)\.bak' '{1}.txt'`. Flags: `-r` (regex), `-s` (sort), `-t` (test), `-R` (recursive)
+- **`hck`**: Column cutter. `hck -f 1,3 -d ':'`. Flags: `-f` (fields), `-d` (delim), `-D` (regex delim), `-f -2` (exclude)
+- **`shellharden`**: Bash hardener. `shellharden script.sh` | `shellharden --replace script.sh` (in-place)
+- **`lemmeknow`**: Identify encodings/hashes. `lemmeknow 'text'` | `lemmeknow --json 'text'` | `lemmeknow -f file.txt`
 
 ### 4) Version Control
-* **`git-branchless`**: Git enhancement suite. Commit graph manipulation, undo, visualization.
-    * **Init:** `git branchless init` (one-time setup per repo)
-    * **Visualize:** `git branchless smartlog` or `git branchless sl` (show draft commit graph)
-    * **Navigate:** `git branchless next`/`git branchless prev` (move through stack) | `git branchless switch -i` (interactive switch)
-    * **Move:** `git branchless move -s <src> -d <dest>` (reorder commits) | `git branchless move --fixup` (combine with parent)
-    * **Edit:** `git branchless split` (split commit) | `git branchless amend` (amend any commit) | `git branchless reword` (edit message)
-    * **Sync:** `git branchless sync` (rebase all stacks onto main) | `git branchless restack` (fix abandoned commits)
-    * **Undo:** `git branchless undo` (time-travel) | `git branchless hide`/`git branchless unhide` (visibility)
-    * **Query:** `git branchless query 'draft()'` | `git branchless query 'stack()'` | `git branchless query 'author.name("X")'`
-    * **Publish:** `git branchless submit` (push to forge) | standard `git push`
-* **`mergiraf`**: Syntax-aware merge. `mergiraf register` (gitconfig) | `mergiraf merge base.rs left.rs right.rs -o out.rs`. Setup: `*.rs merge=mergiraf` in .gitattributes
-* **`difftastic`**: Syntax-aware diff. `difft old.rs new.rs` | `difft --display inline f1 f2`. Git: `GIT_EXTERNAL_DIFF=difft git diff`
+
+- **`git-branchless`**: Git enhancement suite. Commit graph manipulation, undo, visualization.
+  - **Init:** `git branchless init` (one-time setup per repo)
+  - **Visualize:** `git branchless smartlog` or `git branchless sl` (show draft commit graph)
+  - **Navigate:** `git branchless next`/`git branchless prev` (move through stack) | `git branchless switch -i` (interactive switch)
+  - **Move:** `git branchless move -s <src> -d <dest>` (reorder commits) | `git branchless move --fixup` (combine with parent)
+  - **Edit:** `git branchless split` (split commit) | `git branchless amend` (amend any commit) | `git branchless reword` (edit message)
+  - **Sync:** `git branchless sync` (rebase all stacks onto main) | `git branchless restack` (fix abandoned commits)
+  - **Undo:** `git branchless undo` (time-travel) | `git branchless hide`/`git branchless unhide` (visibility)
+  - **Query:** `git branchless query 'draft()'` | `git branchless query 'stack()'` | `git branchless query 'author.name("X")'`
+  - **Publish:** `git branchless submit` (push to forge) | standard `git push`
+- **`mergiraf`**: Syntax-aware merge. `mergiraf register` (gitconfig) | `mergiraf merge base.rs left.rs right.rs -o out.rs`. Setup: `*.rs merge=mergiraf` in .gitattributes
+- **`difftastic`**: Syntax-aware diff. `difft old.rs new.rs` | `difft --display inline f1 f2`. Git: `GIT_EXTERNAL_DIFF=difft git diff`
 
 ### 5) Task & Perf
-* **`just`**: Task runner. `just <task>` | `just --list` | `just --choose` (fzf). Flags: `--dry-run`, `--evaluate`
-* **`procs`**: Process viewer. `procs` | `procs zsh` | `procs --tree`. Flags: `--sorta cpu`, `--sortd mem`, `--json`, `--watch`
-* **`hyperfine`**: Benchmarking. `hyperfine 'cmd1' 'cmd2'`. Flags: `--warmup 3`, `--min-runs 10`, `--prepare`, `--export-json`, `--shell=none`
-* **`tokei`**: Code stats. `tokei ./src` | `tokei --output json` | `tokei --files` | `tokei -s code`. Use for scope assessment
+
+- **`just`**: Task runner. `just <task>` | `just --list` | `just --choose` (fzf). Flags: `--dry-run`, `--evaluate`
+- **`procs`**: Process viewer. `procs` | `procs zsh` | `procs --tree`. Flags: `--sorta cpu`, `--sortd mem`, `--json`, `--watch`
+- **`hyperfine`**: Benchmarking. `hyperfine 'cmd1' 'cmd2'`. Flags: `--warmup 3`, `--min-runs 10`, `--prepare`, `--export-json`, `--shell=none`
+- **`tokei`**: Code stats. `tokei ./src` | `tokei --output json` | `tokei --files` | `tokei -s code`. Use for scope assessment
 
 ### 6) Data & Calculation
-* **`jql`** (PRIMARY): JSON query - simpler syntax. `jql '"key"' file.json` | `jql '"data"."nested"."field"'` | `jql '"items"[*]."name"'` | `jql '"users"|[?age>30]'`
+
+- **`jql`** (PRIMARY): JSON query - simpler syntax. `jql '"key"' file.json` | `jql '"data"."nested"."field"'` | `jql '"items"[*]."name"'` | `jql '"users"|[?age>30]'`
   Use for: path navigation, basic filtering, simple transforms (95% of cases)
-* **`jaq`**: jq-compatible JSON processor (Rust). `jaq '.key' file.json` | `jaq '.users[] | select(.age > 30) | .name'` | `jaq 'group_by(.category)'`
+- **`jaq`**: jq-compatible JSON processor (Rust). `jaq '.key' file.json` | `jaq '.users[] | select(.age > 30) | .name'` | `jaq 'group_by(.category)'`
   Use for: complex transforms, jq compatibility, advanced filtering, reusing jq scripts
-* **`huniq`**: Hash-based dedupe. `huniq < file.txt` | `huniq -c < file.txt` (count). Handles massive files via hash tables
-* **`fend`**: Unit-aware calc. Math: `fend '2^64'` | Units: `fend '5km to miles'` | Time: `fend 'today + 3 weeks'` | Base: `fend '0xff to decimal'` | Bool: `fend 'true and false'`
+- **`huniq`**: Hash-based dedupe. `huniq < file.txt` | `huniq -c < file.txt` (count). Handles massive files via hash tables
+- **`fend`**: Unit-aware calc. Math: `fend '2^64'` | Units: `fend '5km to miles'` | Time: `fend 'today + 3 weeks'` | Base: `fend '0xff to decimal'` | Bool: `fend 'true and false'`
 
 ### 7) Code Indexing
-* **`gtags` (GNU Global)**: Cross-reference database. Creates GTAGS (defs), GRTAGS (refs), GPATH (paths). **LOCAL mode enforced (current repo only).**
-    * **Index:** `gtags --local` (full, current dir only) | `gtags -i --local` (incremental) | `gtags -c --local` (compact)
-    * **Query:** `global --local <sym>` (defs) | `global --local -r <sym>` (refs) | `global --local -x <sym>` (xref format)
-    * **Navigate:** `global --local -f <file>` (tags in file) | `global --local -P <pattern>` (path) | `global --local -g <pattern>` (grep)
-    * **Update:** `global -u` (incremental, from anywhere in project)
-* **`ctags` (Universal Ctags)**: Tag file generator. 200+ languages, IDE-compatible. Grep or read the generated `tags` file for navigation.
-    * **Index:** `ctags -R .` (recursive) | `ctags -R --exclude=node_modules --exclude=.git .`
-    * **Output:** `ctags --output-format=json -R .` | `ctags -x -R .` (xref) | `ctags -e -R .` (etags)
-    * **Scope:** `ctags --languages=TypeScript,JavaScript -R src/` | `ctags --kinds-<LANG>=+<kinds> -R .`
+
+- **`gtags` (GNU Global)**: Cross-reference database. Creates GTAGS (defs), GRTAGS (refs), GPATH (paths). **LOCAL mode enforced (current repo only).**
+  - **Index:** `gtags --local` (full, current dir only) | `gtags -i --local` (incremental) | `gtags -c --local` (compact)
+  - **Query:** `global --local <sym>` (defs) | `global --local -r <sym>` (refs) | `global --local -x <sym>` (xref format)
+  - **Navigate:** `global --local -f <file>` (tags in file) | `global --local -P <pattern>` (path) | `global --local -g <pattern>` (grep)
+  - **Update:** `global -u` (incremental, from anywhere in project)
+- **`ctags` (Universal Ctags)**: Tag file generator. 200+ languages, IDE-compatible. Grep or read the generated `tags` file for navigation.
+  - **Index:** `ctags -R .` (recursive) | `ctags -R --exclude=node_modules --exclude=.git .`
+  - **Output:** `ctags --output-format=json -R .` | `ctags -x -R .` (xref) | `ctags -e -R .` (etags)
+  - **Scope:** `ctags --languages=TypeScript,JavaScript -R src/` | `ctags --kinds-<LANG>=+<kinds> -R .`
 
 ### 8) Context Packing (Repomix) [MCP]
+
 AI-optimized codebase analysis via MCP. Pack repositories into consolidated files for analysis.
-* **`pack_codebase`**: Consolidate local code. `pack_codebase(directory="src", compress=true)`.
-* **`pack_remote_repository`**: Analyze remote repos. `pack_remote_repository(remote="https://github.com/user/repo")`.
-* **`grep_repomix_output`**: Search packed content. `grep_repomix_output(outputId="id", pattern="pattern")`.
-* **`read_repomix_output`**: Read packed content. `read_repomix_output(outputId="id", startLine=1, endLine=100)`.
-* **Options:** `compress` (Tree-sitter compression, ~70% token reduction, **recommended**), `includePatterns`, `ignorePatterns`, `style` (xml/markdown/json/plain)
-</code_tools>
+
+- **`pack_codebase`**: Consolidate local code. `pack_codebase(directory="src", compress=true)`.
+- **`pack_remote_repository`**: Analyze remote repos. `pack_remote_repository(remote="https://github.com/user/repo")`.
+- **`grep_repomix_output`**: Search packed content. `grep_repomix_output(outputId="id", pattern="pattern")`.
+- **`read_repomix_output`**: Read packed content. `read_repomix_output(outputId="id", startLine=1, endLine=100)`.
+- **Options:** `compress` (Tree-sitter compression, ~70% token reduction, **recommended**), `includePatterns`, `ignorePatterns`, `style` (xml/markdown/json/plain)
+  </code_tools>
 
 ## Verification & Refinement
 
@@ -423,21 +450,21 @@ Libs: {fmt}, spdlog, minimal abseil/boost.
 tsconfig: noUncheckedIndexedAccess, NodeNext resolution.
 Testing: Vitest+Testing Library. Lint: biome / Format: biome (always biome over eslint/prettier).
 
-  * **React:** RSC default; Client Components only when needed. Suspense+Error boundaries; useTransition/useDeferredValue.
-    Hooks: custom for reuse; useMemo/useCallback only measured (prefer React compiler). Avoid unnecessary useEffect; clean up effects.
-    State: Redux(default)/Zustand/Jotai app; TanStack Query server; avoid prop drilling. SSR: Next.js.
-    Forms: React Hook Form+Zod. Styling: Tailwind or CSS Modules; avoid runtime CSS-in-JS.
-    Testing: Vitest+Testing Library. Design: shadcn/ui (preferred), React Spectrum, Chakra, Mantine.
-    Performance: code splitting, lazy loading, Next/Image. Animation: Motion. A11y: semantic HTML, ARIA, keyboard nav, focus mgmt.
+- **React:** RSC default; Client Components only when needed. Suspense+Error boundaries; useTransition/useDeferredValue.
+  Hooks: custom for reuse; useMemo/useCallback only measured (prefer React compiler). Avoid unnecessary useEffect; clean up effects.
+  State: Redux(default)/Zustand/Jotai app; TanStack Query server; avoid prop drilling. SSR: Next.js.
+  Forms: React Hook Form+Zod. Styling: Tailwind or CSS Modules; avoid runtime CSS-in-JS.
+  Testing: Vitest+Testing Library. Design: shadcn/ui (preferred), React Spectrum, Chakra, Mantine.
+  Performance: code splitting, lazy loading, Next/Image. Animation: Motion. A11y: semantic HTML, ARIA, keyboard nav, focus mgmt.
 
-  * **Nest:** Modular arch; DTOs class-validator+class-transformer; Guards/Interceptors/Pipes/Filters.
-    Data: Prisma (preferred) or TypeORM migrations/repos/transactions.
-    API: REST (DTOs) or GraphQL (code-first @nestjs/graphql).
-    Auth: Passport (JWT/OAuth2), argon2 (not bcrypt), rate limiting (@nestjs/throttler).
-    Testing: Vitest (preferred) or Jest (unit), Supertest (e2e), Testcontainers.
-    Config: @nestjs/config+Zod. Logging: Pino (structured), correlation IDs, OpenTelemetry.
-    Performance: caching (@nestjs/cache-manager), compression, query optimization, connection pooling.
-    Security: Helmet, CORS, CSRF, input sanitization, parameterized queries, dependency scanning.
+- **Nest:** Modular arch; DTOs class-validator+class-transformer; Guards/Interceptors/Pipes/Filters.
+  Data: Prisma (preferred) or TypeORM migrations/repos/transactions.
+  API: REST (DTOs) or GraphQL (code-first @nestjs/graphql).
+  Auth: Passport (JWT/OAuth2), argon2 (not bcrypt), rate limiting (@nestjs/throttler).
+  Testing: Vitest (preferred) or Jest (unit), Supertest (e2e), Testcontainers.
+  Config: @nestjs/config+Zod. Logging: Pino (structured), correlation IDs, OpenTelemetry.
+  Performance: caching (@nestjs/cache-manager), compression, query optimization, connection pooling.
+  Security: Helmet, CORS, CSRF, input sanitization, parameterized queries, dependency scanning.
 
 **Python:** Strict type hints ALWAYS; f-strings; pathlib; dataclasses (or attrs) PODs; immutability (frozen=True).
 Concurrency: asyncio/trio structured cancellation; avoid blocking event loops.
@@ -451,13 +478,13 @@ Performance: JFR profiling; GC tuning measured. Testing: JUnit 5, Mockito, Asser
 Lint: Error Prone+NullAway (mandatory), SpotBugs, PMD / Format: Spotless+palantir-java-format.
 Security: OWASP+Snyk (CVSS≥7), parameterized queries, SBOM.
 
-  * **Spring Boot 3:** Virtual threads: spring.threads.virtual.enabled=true or TaskExecutorAdapter.
-    HTTP: RestClient (not RestTemplate). JDBC: JdbcClient (named params).
-    Problem Details: spring.mvc.problemdetails.enabled=true, RFC 9457.
-    Data: JPA query methods, @Query, Specifications, @EntityGraph.
-    Security: lambda DSL, Argon2 (not BCrypt), OAuth2, JWT, CSRF.
-    Config: @ConfigurationProperties+records (not @Value). Docker: layered JARs, Buildpacks, non-root, Alpine JRE.
-    Testing: JUnit 5+AssertJ+Testcontainers. Anti-patterns: RestTemplate, JdbcTemplate verbosity, pooling virtual threads, secrets in repo.
+- **Spring Boot 3:** Virtual threads: spring.threads.virtual.enabled=true or TaskExecutorAdapter.
+  HTTP: RestClient (not RestTemplate). JDBC: JdbcClient (named params).
+  Problem Details: spring.mvc.problemdetails.enabled=true, RFC 9457.
+  Data: JPA query methods, @Query, Specifications, @EntityGraph.
+  Security: lambda DSL, Argon2 (not BCrypt), OAuth2, JWT, CSRF.
+  Config: @ConfigurationProperties+records (not @Value). Docker: layered JARs, Buildpacks, non-root, Alpine JRE.
+  Testing: JUnit 5+AssertJ+Testcontainers. Anti-patterns: RestTemplate, JdbcTemplate verbosity, pooling virtual threads, secrets in repo.
 
 **Kotlin:** K2+JVM 21+. Immutability (val, persistent collections); explicit public types; sealed/enum class+exhaustive when; data classes; @JvmInline value classes; inline/reified zero-cost; top-level functions+small objects; controlled extensions.
 Errors: Result/Either (Arrow); never !!/unscoped lateinit.
@@ -480,6 +507,7 @@ Tooling: go vet; go mod tidy -compat; reproducible builds.
 
 <at_least>
 **Minimum standards (measured, not estimated):**
+
 - **Accuracy:** ≥95% formal validation; uncertainty quantified
 - **Elegance:** Clean codebase design with proper architecture, data flow, concurrency, memory, and directory structure.
 - **Tidiness:** Self-explanatory names, clean structure, avoid unnecessary complexities.
@@ -491,7 +519,7 @@ Tooling: go vet; go mod tidy -compat; reproducible builds.
 - **Reliability:** Error rate <0.01; graceful degradation; chaos/resilience tests critical services
 - **Maintainability:** Cyclomatic <10; Cognitive <15; clear docs public APIs
 - **Quality gates (all mandatory):** Functional accuracy ≥95%, Code quality ≥90%, Design excellence ≥95%, Tidiness ≥90%, Elegance ≥90%, Maintainability ≥90%, Algorithmic efficiency ≥90%, Security ≥90%, Reliability ≥90%, Performance within budgets, Error recovery 100%, Security compliance 100%, UI/UX Excellence ≥95%
-</at_least>
+  </at_least>
 
 ## Implementation Protocol
 
@@ -519,6 +547,7 @@ Tooling: go vet; go mod tidy -compat; reproducible builds.
 **Tool Selection:** ast-grep/srgn (code structure, refactoring, bulk transforms) | ripgrep (text/comments/strings, non-code) | tokei (scope assessment) | Combined (fd -x/rg pipelines)
 
 **Scope Assessment (tokei-driven):** Run `tokei <target> --output json` before editing to select strategy:
+
 - **Micro** (<500 LOC): Direct edit, single-file focus, minimal verification
 - **Small** (500-2K LOC): Progressive refinement, 2-3 file scope, standard verification
 - **Medium** (2K-10K LOC): Multi-agents parallel, dependency mapping required, staged rollout

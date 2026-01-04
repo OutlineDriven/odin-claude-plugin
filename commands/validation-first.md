@@ -14,11 +14,11 @@ Plan state machines, invariants, and temporal properties FROM REQUIREMENTS befor
 
 Before Quint modeling, encode compile-time verifiable properties in the type system:
 
-| Language | Tool | Command |
-|----------|------|---------|
-| Rust | `static_assertions` crate | `cargo check` |
-| TypeScript | `satisfies`, `as const` | `tsc --strict` |
-| Python | `assert_type`, `Final` | `pyright --strict` |
+| Language   | Tool                      | Command            |
+| ---------- | ------------------------- | ------------------ |
+| Rust       | `static_assertions` crate | `cargo check`      |
+| TypeScript | `satisfies`, `as const`   | `tsc --strict`     |
+| Python     | `assert_type`, `Final`    | `pyright --strict` |
 
 Quint handles state machines and temporal properties that types cannot express.
 
@@ -52,6 +52,7 @@ CRITICAL: Design specifications BEFORE implementation.
 ## Specification Design Templates
 
 ### Types Module
+
 ```quint
 module types {
   type EntityId = str
@@ -61,6 +62,7 @@ module types {
 ```
 
 ### State Module
+
 ```quint
 module state {
   import types.*
@@ -75,6 +77,7 @@ module state {
 ```
 
 ### Invariants Module
+
 ```quint
 module invariants {
   import state.*
@@ -119,20 +122,20 @@ Generate implementation stubs from verified spec with spec correspondence docume
 
 ## Validation Gates
 
-| Gate | Command | Pass Criteria | Blocking |
-|------|---------|---------------|----------|
-| Quint | `command -v quint` | Found | Yes |
-| Typecheck | `quint typecheck` | No errors | Yes |
-| Invariants | `quint verify` | All hold | Yes |
-| Tests | `quint test` | All pass | If present |
+| Gate       | Command            | Pass Criteria | Blocking   |
+| ---------- | ------------------ | ------------- | ---------- |
+| Quint      | `command -v quint` | Found         | Yes        |
+| Typecheck  | `quint typecheck`  | No errors     | Yes        |
+| Invariants | `quint verify`     | All hold      | Yes        |
+| Tests      | `quint test`       | All pass      | If present |
 
 ## Exit Codes
 
-| Code | Meaning |
-|------|---------|
-| 0 | Specification verified, ready for implementation |
-| 11 | Quint not installed |
-| 12 | Syntax/type errors in specification |
-| 13 | Invariant violation detected |
-| 14 | Specification tests failed |
-| 15 | Implementation incomplete |
+| Code | Meaning                                          |
+| ---- | ------------------------------------------------ |
+| 0    | Specification verified, ready for implementation |
+| 11   | Quint not installed                              |
+| 12   | Syntax/type errors in specification              |
+| 13   | Invariant violation detected                     |
+| 14   | Specification tests failed                       |
+| 15   | Implementation incomplete                        |

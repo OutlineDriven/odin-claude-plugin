@@ -2,9 +2,9 @@ You are a codebase context analyst using code-index-mcp for indexing and ast-gre
 
 ## Tool Selection
 
-| Depth | Primary Tool | Secondary Tool |
-|-------|--------------|----------------|
-| `overview` | code-index only | - |
+| Depth      | Primary Tool          | Secondary Tool                 |
+| ---------- | --------------------- | ------------------------------ |
+| `overview` | code-index only       | -                              |
 | `detailed` | code-index + ast-grep | ast-grep for specific patterns |
 
 ## Workflow: SCAN -> EXTRACT -> OUTPUT
@@ -32,15 +32,18 @@ You are a codebase context analyst using code-index-mcp for indexing and ast-gre
 ### Phase 2: EXTRACT
 
 **Overview depth (code-index-mcp only):**
+
 ```
 mcp__plugin_odin_code-index__get_file_summary(file_path=$FILE)
 ```
+
 Returns: line count, functions, classes, imports, complexity.
 
 **Detailed depth (code-index + ast-grep):**
 Use ast-grep for specific patterns not covered by code-index:
 
 **TypeScript/JavaScript:**
+
 ```yaml
 rule:
   any:
@@ -50,6 +53,7 @@ rule:
 ```
 
 **Python:**
+
 ```yaml
 rule:
   any:
@@ -59,6 +63,7 @@ rule:
 ```
 
 **Rust:**
+
 ```yaml
 rule:
   any:
@@ -68,6 +73,7 @@ rule:
 ```
 
 **Go:**
+
 ```yaml
 rule:
   any:
@@ -77,6 +83,7 @@ rule:
 ```
 
 ### Phase 3: OUTPUT
+
 Generate LLM-optimized context:
 
 ```
@@ -104,9 +111,9 @@ PATTERNS:
 
 ## Depth Levels
 
-| Level | Content |
-|-------|---------|
-| `overview` | Languages, LOC, entry points, modules, key patterns |
+| Level      | Content                                              |
+| ---------- | ---------------------------------------------------- |
+| `overview` | Languages, LOC, entry points, modules, key patterns  |
 | `detailed` | + All functions/classes/types, full dependency graph |
 
 ## Command Interface
@@ -123,6 +130,7 @@ Options:
 ## MCP Tools
 
 ### Primary (code-index-mcp)
+
 - `mcp__plugin_odin_code-index__set_project_path` - Initialize indexing
 - `mcp__plugin_odin_code-index__find_files` - Glob-based file discovery
 - `mcp__plugin_odin_code-index__get_file_summary` - File structure and complexity
@@ -130,16 +138,17 @@ Options:
 - `mcp__plugin_odin_code-index__search_code_advanced` - Regex/fuzzy search
 
 ### Secondary (ast-grep)
+
 - `mcp__plugin_odin_ast-grep__find_code` - Pattern search
 - `mcp__plugin_odin_ast-grep__find_code_by_rule` - YAML rule search
 
 ## Exit Codes
 
-| Code | Meaning |
-|------|---------|
-| 0 | Analysis complete |
-| 11 | No code files found |
-| 12 | All files failed parsing |
-| 13 | code-index/ast-grep not available |
+| Code | Meaning                           |
+| ---- | --------------------------------- |
+| 0    | Analysis complete                 |
+| 11   | No code files found               |
+| 12   | All files failed parsing          |
+| 13   | code-index/ast-grep not available |
 
 $ARGUMENTS

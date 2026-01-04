@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 **Consolidated Repository Structure**
+
 - Single repository serves as both plugin and marketplace
 - Marketplace manifest included in `.claude-plugin/marketplace.json`
 - Simplified installation: add repository once, access all features
@@ -18,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 #### Agents (57 total)
 
 **Language Specialists (16)**
+
 - rust-pro - Rust Edition 2024 with ownership, lifetimes, zero-cost abstractions
 - rust-pro-ultimate - Grandmaster-level Rust for complex scenarios
 - typescript-pro - Strict TypeScript with discriminated unions, no any/unknown
@@ -36,6 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - sql-query-engineer - BigQuery, data analysis, and insights
 
 **Architecture & Design (7)**
+
 - architect - System architecture, scalability, technical decisions
 - backend-architect - Backend systems, APIs, database design
 - graphql-architect - GraphQL schemas, resolvers, federation
@@ -45,6 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - branding-specialist - Brand identity, visual language, corporate identity
 
 **Code Quality (10)**
+
 - code-reviewer - Expert code review, quality, security, maintainability
 - debugger - Root cause analysis, error resolution, debugging workflows
 - refactorer - Code restructuring, design improvements
@@ -57,12 +61,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - reflector - Deep reflection, retrospectives, continuous improvement
 
 **Performance (4)**
+
 - performance - Holistic performance optimization, profiling, benchmarking
 - concurrency-expert - Thread safety, synchronization, parallel patterns
 - memory-expert - Memory optimization, leak detection, allocation analysis
 - database-optimizer - Query optimization, indexing, schema efficiency
 
 **Specialized (13)**
+
 - ml-engineer - ML pipelines, model serving, feature engineering
 - mlops-engineer - ML infrastructure, experiment tracking, model registries
 - data-engineer - ETL pipelines, data warehouses, streaming architectures
@@ -78,21 +84,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - sales-automator - Sales outreach, proposal templates, pricing pages
 
 **Frontend & Mobile (4)**
+
 - react-specialist - React components, hooks, state management
 - flutter-specialist - Flutter widgets, state management, platform channels
 - ios-developer - Swift/SwiftUI, UIKit, Core Data, App Store optimization
 - mobile-developer - React Native/Flutter, offline sync, push notifications
 
 **Infrastructure (2)**
+
 - terraform-specialist - IaC best practices, modules, state management
 - analyzer - Deep analysis, pattern recognition, codebase insights
 
 **Maintenance (1)**
+
 - tech-debt-resolver - Technical debt identification and strategic resolution
 
 #### Commands (127 total)
 
 **Analysis (12 commands)**
+
 - analyze/code/elaborate - Deep code elaboration and explanation
 - analyze/code/map - Map codebase architecture and structure
 - analyze/code/schema - Extract and document data schemas
@@ -107,6 +117,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - analyze/think/think - Structured thinking with sequential analysis
 
 **Code (14 commands)**
+
 - code/analyze/analyze-deps - Comprehensive dependency analysis
 - code/analyze/bottleneck - Identify performance bottlenecks
 - code/analyze/dependencies - Dependency graph analysis
@@ -122,6 +133,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - code/refactor/standardize - Standardize code patterns
 
 **Context (25 commands)**
+
 - Context loaders for Dragonfly, PostgreSQL, RedPanda, ScyllaDB
 - Deno Fresh and Deno scripting contexts
 - Go concurrency, ConnectRPC, and web contexts
@@ -135,6 +147,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Web contexts (Fresh, GitHub CLI, GitHub Actions, Tailwind, Temporal, etc.)
 
 **Documentation (8 commands)**
+
 - docs/analyze/explain - Explain code and documentation
 - docs/generate/api-docs - Generate API documentation
 - docs/generate/changelog - Generate changelog from commits
@@ -145,6 +158,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - docs/manage/docs-update - Update existing documentation
 
 **Git (6 commands)**
+
 - git/commit/commit - Create atomic commits with Conventional Commits
 - git/commit/commit-push - Commit and push to remote
 - git/pr/pr-check - Check PR status and CI/CD state
@@ -154,6 +168,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - git/review/review-git - Comprehensive git history review
 
 **Meta (10 commands)**
+
 - meta/command/generate-command - Generate new slash commands
 - meta/command/ideate-commands - Brainstorm command ideas
 - meta/extract/knowledge-extract - Extract knowledge from codebases
@@ -164,6 +179,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - meta/util/translate - Translate content between languages
 
 **Scaffolding (8 commands)**
+
 - scaffold/deno/scaffold-deno-fresh - Scaffold Deno Fresh app
 - scaffold/deno/scaffold-deno-script - Scaffold Deno script
 - scaffold/go/scaffold-go-connect - Scaffold Go Connect RPC service
@@ -173,12 +189,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - scaffold/rust/scaffold-rust-cli - Scaffold Rust CLI application
 
 **Security (4 commands)**
+
 - security/audit/audit - Comprehensive security audit
 - security/audit/secrets-audit - Scan for exposed secrets
 - security/model/harden - Security hardening recommendations
 - security/model/threat-model - Generate threat models (STRIDE methodology)
 
 **Task Management (9 commands)**
+
 - task/manage/add-code-reviews-to-task - Add code reviews to tasks
 - task/manage/task-archive - Archive completed tasks
 - task/manage/task-create - Create new tasks
@@ -190,6 +208,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - task/view/task - View task information
 
 **Testing (10 commands)**
+
 - test/analyze/coverage - Test coverage analysis
 - test/fix/flaky-fix - Fix flaky tests
 - test/generate/integration-test - Generate integration tests
@@ -199,6 +218,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - test/run/validate - Comprehensive validation with auto-detection
 
 **Tools (5 commands)**
+
 - tool/cpr - Code, PR, and review workflows
 - tool/diagram - Generate diagrams (nomnoml/mermaid)
 - tool/five - Five-question analysis framework
@@ -206,6 +226,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - tool/zed-task - Zed editor task integration
 
 **Workflow (17 commands)**
+
 - workflow/create/epic - Create epic with sub-tasks
 - workflow/create/prototype - Rapid prototyping workflow
 - workflow/manage/clean - Clean up temporary files and artifacts
@@ -224,28 +245,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 #### Core Features
 
 **Diagram-First Engineering**
+
 - Five mandatory diagrams: Architecture, Data Flow, Concurrency, Memory, Optimization
 - Nomnoml for conversations, Mermaid for documentation
 - Non-negotiable requirement for non-trivial implementations
 
 **Surgical Editing Workflow**
+
 - Find → Copy → Paste pattern
 - AST-based transformations with ast-grep (highly preferred)
 - Minimal context extraction with precise targeting
 - Preview → Validate → Apply workflow
 
 **Atomic Commit Protocol**
+
 - Conventional Commits v1.0.0 compliance
 - Type-classified commits (feat, fix, build, chore, ci, docs, perf, refactor, style, test)
 - One logical change per commit
 - Independent testability and reversibility
 
 **Confidence-Driven Execution**
+
 - Adaptive behavior based on familiarity, complexity, risk, and scope
 - Four confidence levels with distinct patterns
 - Automatic confidence calibration based on outcomes
 
 **Tool Selection Mandate**
+
 - ast-grep (HIGHLY PREFERRED) for code operations
 - native-patch for file edits
 - ripgrep for text/comments/strings
@@ -256,6 +282,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 #### Configuration
 
 **settings.json**
+
 - Comprehensive tool permissions (ast-grep, fd, rg, cargo, npm, git, etc.)
 - MCP integration (time, browser, git, context7, tavily, etc.)
 - Security denials (sed -i, force push, destructive commands)
@@ -264,6 +291,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Always thinking enabled
 
 **CLAUDE.md**
+
 - ODIN methodology and principles
 - Language-specific guidelines (Rust 2024, TypeScript, Python, Go, Java, Kotlin, C++, C, JavaScript, PHP, C#, SQL)
 - UI/UX design guidelines
@@ -280,6 +308,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Philosophy
 
 **Core Principles**
+
 1. Investigate Before Acting - Never speculate about unread code
 2. Diagram-First Design - Five diagrams mandatory before implementation
 3. Surgical Precision - Minimal, targeted changes using AST-based tools
@@ -288,6 +317,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 6. Tool Selection - ast-grep > native-patch > ripgrep
 
 **Quality Standards**
+
 - Functional accuracy ≥ 95%
 - Code quality ≥ 90%
 - Design excellence ≥ 95%

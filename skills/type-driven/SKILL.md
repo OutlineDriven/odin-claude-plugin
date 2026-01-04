@@ -255,6 +255,7 @@ depends = base, contrib
 ## Phase 3: VERIFY (Validation)
 
 ### Basic (Precondition Check)
+
 ```bash
 # Verify Idris 2 availability
 command -v idris2 >/dev/null || exit 11
@@ -264,6 +265,7 @@ fd -e idr -e ipkg .outline/proofs >/dev/null || exit 12
 ```
 
 ### Intermediate (Type Checking)
+
 ```bash
 # Package build
 fd -e ipkg .outline/proofs -x idris2 --build {} || exit 13
@@ -273,6 +275,7 @@ fd -e idr .outline/proofs -x idris2 --check {} || exit 13
 ```
 
 ### Advanced (Full Verification)
+
 ```bash
 # Check totality (all functions terminate)
 fd -e idr .outline/proofs -x idris2 --total {} || exit 14
@@ -295,13 +298,13 @@ rg -n 'partial\s+\w+|covering\s+\w+' .outline/proofs/ && {
 
 For each hole, provide the proof term:
 
-| Hole Pattern | Approach |
-|--------------|----------|
-| `?proof_eq` | `Refl` for definitional equality |
+| Hole Pattern        | Approach                           |
+| ------------------- | ---------------------------------- |
+| `?proof_eq`         | `Refl` for definitional equality   |
 | `?proof_arithmetic` | Use `lte_trans`, `plus_comm`, etc. |
-| `?case_left` | Pattern match and provide term |
-| `?case_right` | Pattern match and provide term |
-| `?induction_step` | Use recursion with smaller arg |
+| `?case_left`        | Pattern match and provide term     |
+| `?case_right`       | Pattern match and provide term     |
+| `?induction_step`   | Use recursion with smaller arg     |
 
 ### Example Hole Completion
 
@@ -335,12 +338,12 @@ safeHead (x :: _) = x
 
 ### Basic Commands
 
-| Command | Purpose | Usage |
-|---------|---------|-------|
-| CHECK | Verify toolchain and artifacts | `command -v idris2 >/dev/null \|\| exit 11` |
-| VALIDATE | Type-check all packages/files | `fd -e ipkg -x idris2 --build {} \|\| fd -e idr -x idris2 --check {}` |
-| GENERATE | Build with timing diagnostics | `fd -e ipkg -x idris2 --build {} --timing \|\| fd -e idr -x idris2 --check {}` |
-| REMEDIATE | Find totality/coverage gaps | `rg -n 'maybe not total\|covering' . && exit 14 \|\| exit 0` |
+| Command   | Purpose                        | Usage                                                                          |
+| --------- | ------------------------------ | ------------------------------------------------------------------------------ |
+| CHECK     | Verify toolchain and artifacts | `command -v idris2 >/dev/null \|\| exit 11`                                    |
+| VALIDATE  | Type-check all packages/files  | `fd -e ipkg -x idris2 --build {} \|\| fd -e idr -x idris2 --check {}`          |
+| GENERATE  | Build with timing diagnostics  | `fd -e ipkg -x idris2 --build {} --timing \|\| fd -e idr -x idris2 --check {}` |
+| REMEDIATE | Find totality/coverage gaps    | `rg -n 'maybe not total\|covering' . && exit 14 \|\| exit 0`                   |
 
 ### Idris 2 Commands Reference
 
@@ -386,16 +389,16 @@ idris2 --build project.ipkg && rg 'maybe not total\|covering' . && exit 14 || ec
 
 Use this guide to select the appropriate dependent type for your use case:
 
-| Construct | When to Use | Example |
-|-----------|-------------|---------|
-| `Vect n a` | Length known at compile-time | `Vect 3 Int` - exactly 3 integers |
-| `Fin n` | Type-safe indexing (0 to n-1) | `index : Fin n -> Vect n a -> a` |
-| `Dec p` | Decidable propositions with proof | `isElem : (x : a) -> (xs : List a) -> Dec (Elem x xs)` |
-| `DPair a p` | Unknown-length results (filtering) | `filter : (a -> Bool) -> Vect n a -> (m ** Vect m a)` |
-| `Subset a p` | Refined types with proof | `Subset Nat IsPositive` |
-| `So b` | Convert Bool to Type | `So (x > 0)` - proof that x > 0 |
-| `Elem x xs` | Membership proof | Prove element in list |
-| `List1 a` | Non-empty guarantee | `(xs : List a ** NonEmpty xs)` |
+| Construct    | When to Use                        | Example                                                |
+| ------------ | ---------------------------------- | ------------------------------------------------------ |
+| `Vect n a`   | Length known at compile-time       | `Vect 3 Int` - exactly 3 integers                      |
+| `Fin n`      | Type-safe indexing (0 to n-1)      | `index : Fin n -> Vect n a -> a`                       |
+| `Dec p`      | Decidable propositions with proof  | `isElem : (x : a) -> (xs : List a) -> Dec (Elem x xs)` |
+| `DPair a p`  | Unknown-length results (filtering) | `filter : (a -> Bool) -> Vect n a -> (m ** Vect m a)`  |
+| `Subset a p` | Refined types with proof           | `Subset Nat IsPositive`                                |
+| `So b`       | Convert Bool to Type               | `So (x > 0)` - proof that x > 0                        |
+| `Elem x xs`  | Membership proof                   | Prove element in list                                  |
+| `List1 a`    | Non-empty guarantee                | `(xs : List a ** NonEmpty xs)`                         |
 
 ### Complete Type Patterns Reference
 
@@ -470,17 +473,17 @@ data So : Bool -> Type where
 
 ### REPL Commands Reference
 
-| Command | Purpose | Example |
-|---------|---------|---------|
-| `:t expr` | Show type of expression | `:t map` |
-| `:doc name` | Show documentation | `:doc Vect` |
-| `:search type` | Find functions by type | `:search a -> Maybe a -> a` |
-| `:prove hole` | Start interactive prover | `:prove append_hole` |
-| `:let x = e` | Define local binding | `:let xs = [1,2,3]` |
-| `:printdef f` | Show function definition | `:printdef map` |
-| `:total f` | Check totality of f | `:total append` |
-| `:browse ns` | List names in namespace | `:browse Data.Vect` |
-| `:set eval` | Set evaluation strategy | `:set eval nf` |
+| Command        | Purpose                  | Example                     |
+| -------------- | ------------------------ | --------------------------- |
+| `:t expr`      | Show type of expression  | `:t map`                    |
+| `:doc name`    | Show documentation       | `:doc Vect`                 |
+| `:search type` | Find functions by type   | `:search a -> Maybe a -> a` |
+| `:prove hole`  | Start interactive prover | `:prove append_hole`        |
+| `:let x = e`   | Define local binding     | `:let xs = [1,2,3]`         |
+| `:printdef f`  | Show function definition | `:printdef map`             |
+| `:total f`     | Check totality of f      | `:total append`             |
+| `:browse ns`   | List names in namespace  | `:browse Data.Vect`         |
+| `:set eval`    | Set evaluation strategy  | `:set eval nf`              |
 
 ### Interactive Proof Commands
 
@@ -520,12 +523,12 @@ process : Stream a -> IO ()
 
 ### Totality Strategies
 
-| Strategy | When to Use | Example |
-|----------|-------------|---------|
-| Structural recursion | Argument gets smaller | `length (x :: xs) = 1 + length xs` |
-| Well-founded recursion | Custom measure decreases | `%default total` with measure |
-| Coinduction | Infinite structures | `Stream`, `Codata` |
-| Assert total | Escape hatch (use sparingly) | `assert_total $ unsafeOp x` |
+| Strategy               | When to Use                  | Example                            |
+| ---------------------- | ---------------------------- | ---------------------------------- |
+| Structural recursion   | Argument gets smaller        | `length (x :: xs) = 1 + length xs` |
+| Well-founded recursion | Custom measure decreases     | `%default total` with measure      |
+| Coinduction            | Infinite structures          | `Stream`, `Codata`                 |
+| Assert total           | Escape hatch (use sparingly) | `assert_total $ unsafeOp x`        |
 
 ### Proving Termination
 
@@ -627,13 +630,13 @@ closeDoor d = ?closeDoor_rhs
 
 ## Exit Codes
 
-| Code | Meaning | Resolution |
-|------|---------|------------|
-| 0 | All types verified | Success |
-| 11 | Idris 2 not installed | Install via `pack` or directly |
-| 12 | No Idris artifacts found | Create `.idr` or `.ipkg` files |
-| 13 | Type errors/unsolved goals | Fix type mismatches |
-| 14 | Totality/coverage gaps | Add missing cases or termination proofs |
+| Code | Meaning                    | Resolution                              |
+| ---- | -------------------------- | --------------------------------------- |
+| 0    | All types verified         | Success                                 |
+| 11   | Idris 2 not installed      | Install via `pack` or directly          |
+| 12   | No Idris artifacts found   | Create `.idr` or `.ipkg` files          |
+| 13   | Type errors/unsolved goals | Fix type mismatches                     |
+| 14   | Totality/coverage gaps     | Add missing cases or termination proofs |
 
 ---
 
@@ -641,17 +644,17 @@ closeDoor d = ?closeDoor_rhs
 
 ### Common Issues
 
-| Symptom | Cause | Resolution |
-|---------|-------|------------|
-| Exit 11 | Idris 2 not found | Install via `pack install idris2` or build from source |
-| Exit 12 | No .idr files in `.outline/proofs/` | Run plan phase first |
-| Exit 13 | Type error | Add explicit type annotations or fix type mismatch |
-| Exit 14 | Holes remaining or partial function | Fill holes with proof terms, ensure totality |
-| `Can't find import` | Missing package | Add to `.ipkg` depends or install with `pack` |
-| `Possibly not total` | Function may not terminate | Add termination hint or use `partial` (temporary) |
-| `not covering` | Missing pattern cases | Add exhaustive pattern match |
-| `Can't unify` | Type inference failure | Add explicit type annotation |
-| `Undefined name` | Name not exported | Add `public export` to definition |
+| Symptom              | Cause                               | Resolution                                             |
+| -------------------- | ----------------------------------- | ------------------------------------------------------ |
+| Exit 11              | Idris 2 not found                   | Install via `pack install idris2` or build from source |
+| Exit 12              | No .idr files in `.outline/proofs/` | Run plan phase first                                   |
+| Exit 13              | Type error                          | Add explicit type annotations or fix type mismatch     |
+| Exit 14              | Holes remaining or partial function | Fill holes with proof terms, ensure totality           |
+| `Can't find import`  | Missing package                     | Add to `.ipkg` depends or install with `pack`          |
+| `Possibly not total` | Function may not terminate          | Add termination hint or use `partial` (temporary)      |
+| `not covering`       | Missing pattern cases               | Add exhaustive pattern match                           |
+| `Can't unify`        | Type inference failure              | Add explicit type annotation                           |
+| `Undefined name`     | Name not exported                   | Add `public export` to definition                      |
 
 ### Type Construct Selection Guide
 
@@ -672,18 +675,21 @@ Bounded numeric range              -> data InRange : (lo : Nat) -> (hi : Nat) ->
 ### Hole-Driven Development Workflow
 
 **Step 1: Write signature with holes**
+
 ```idris
 processData : (input : ValidInput) -> {auto prf : IsPositive (value input)} -> Result
 processData input = ?processData_impl
 ```
 
 **Step 2: Check hole types**
+
 ```bash
 idris2 --check Module.idr
 # Output shows: processData_impl : Result
 ```
 
 **Step 3: Use REPL for interactive development**
+
 ```idris
 :t processData_impl     -- Show type of hole
 :doc Result             -- Documentation for type
@@ -692,6 +698,7 @@ idris2 --check Module.idr
 ```
 
 **Step 4: Refine using case analysis**
+
 ```idris
 -- Before
 processData input = ?processData_impl
@@ -735,6 +742,7 @@ idris2 --check --verbose Module.idr
 ### Totality Strategies
 
 **Problem: Function marked as possibly not total**
+
 ```idris
 -- Problematic: structural recursion not obvious
 loop : List Nat -> Nat
@@ -752,6 +760,7 @@ loopN (S k) (x :: xs) = x + loopN k (filter (< x) xs)
 ```
 
 **Problem: Coverage checker fails**
+
 ```idris
 -- Incomplete
 process : Either a b -> c
@@ -806,6 +815,7 @@ duplicate x = (x, x)
 **Problem:** Function rejected as potentially non-total despite being correct.
 
 **Solution:**
+
 ```idris
 -- Bad: Idris can't see termination
 ackermann : Nat -> Nat -> Nat
@@ -827,6 +837,7 @@ ackermann (S m) (S n) = assert_total $ ackermann m (ackermann (S m) n)
 **Problem:** Proof terms affecting runtime performance.
 
 **Solution:**
+
 ```idris
 -- Bad: Proof carried at runtime
 data Positive : Nat -> Type where
@@ -843,6 +854,7 @@ data Positive : Nat -> Type where
 **Problem:** Function returns list of unknown length, breaking type invariants.
 
 **Solution:**
+
 ```idris
 -- Bad: Loses length information
 filterBad : (a -> Bool) -> Vect n a -> List a
@@ -861,6 +873,7 @@ filterDec : (p : a -> Bool) ->
 **Problem:** Idris cannot infer implicit arguments.
 
 **Solution:**
+
 ```idris
 -- Bad: Ambiguous implicit
 append xs ys = ?hole
@@ -949,14 +962,14 @@ fastAdd = (+)
 
 ## When NOT to Use Type-Driven Development
 
-| Scenario | Better Alternative |
-|----------|-------------------|
-| Simple input validation | Design-by-contract (runtime checks) |
-| Rapid prototyping | Test-driven (faster iteration) |
-| Performance-critical numeric code | Rust/C with property tests |
-| Team unfamiliar with dependent types | Contract + property tests |
-| Frequently changing data schemas | Runtime validation (Zod, pydantic) |
-| UI rendering logic | React/Vue with TypeScript |
+| Scenario                             | Better Alternative                  |
+| ------------------------------------ | ----------------------------------- |
+| Simple input validation              | Design-by-contract (runtime checks) |
+| Rapid prototyping                    | Test-driven (faster iteration)      |
+| Performance-critical numeric code    | Rust/C with property tests          |
+| Team unfamiliar with dependent types | Contract + property tests           |
+| Frequently changing data schemas     | Runtime validation (Zod, pydantic)  |
+| UI rendering logic                   | React/Vue with TypeScript           |
 
 ---
 

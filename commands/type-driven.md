@@ -35,6 +35,7 @@ CRITICAL: Design types BEFORE implementation.
 ## Type Design Templates
 
 ### Refined Types
+
 ```idris
 public export
 data Positive : Nat -> Type where
@@ -46,6 +47,7 @@ data NonEmpty : List a -> Type where
 ```
 
 ### State-Indexed Types
+
 ```idris
 public export
 data State = Initial | Processing | Complete | Failed
@@ -96,30 +98,31 @@ echo "Remaining holes: $HOLE_COUNT"
 ### Step 3: IMPLEMENT Target Code
 
 Map Idris types to target language:
-| Idris 2 | TypeScript | Rust | Python |
-|---------|------------|------|--------|
-| `Maybe a` | `T \| null` | `Option<T>` | `Optional[T]` |
-| `Vect n a` | `T[]` + assert | `[T; N]` | `list` + assert |
-| `Fin n` | `number` + check | bounded int | `int` + check |
-| `Positive n` | `number` + check | NonZeroU32 | `int` + assert |
+
+| Idris 2      | TypeScript       | Rust        | Python          |
+| ------------ | ---------------- | ----------- | --------------- |
+| `Maybe a`    | `T \| null`      | `Option<T>` | `Optional[T]`   |
+| `Vect n a`   | `T[]` + assert   | `[T; N]`    | `list` + assert |
+| `Fin n`      | `number` + check | bounded int | `int` + check   |
+| `Positive n` | `number` + check | NonZeroU32  | `int` + assert  |
 
 ## Validation Gates
 
-| Gate | Command | Pass Criteria | Blocking |
-|------|---------|---------------|----------|
-| Types Compile | `idris2 --check` | No errors | Yes |
-| Totality | `idris2 --total --check` | All total | Yes |
-| Coverage | Check "not covering" | None | Yes |
-| Holes | `rg "\\?"` | Zero | Yes |
-| Target Build | `tsc` / `cargo build` | Success | Yes |
+| Gate          | Command                  | Pass Criteria | Blocking |
+| ------------- | ------------------------ | ------------- | -------- |
+| Types Compile | `idris2 --check`         | No errors     | Yes      |
+| Totality      | `idris2 --total --check` | All total     | Yes      |
+| Coverage      | Check "not covering"     | None          | Yes      |
+| Holes         | `rg "\\?"`               | Zero          | Yes      |
+| Target Build  | `tsc` / `cargo build`    | Success       | Yes      |
 
 ## Exit Codes
 
-| Code | Meaning |
-|------|---------|
-| 0 | Types verified, implementation complete |
-| 11 | Idris 2 not installed |
-| 12 | Type check failed |
-| 13 | Totality check failed |
-| 14 | Holes remaining |
-| 15 | Target implementation failed |
+| Code | Meaning                                 |
+| ---- | --------------------------------------- |
+| 0    | Types verified, implementation complete |
+| 11   | Idris 2 not installed                   |
+| 12   | Type check failed                       |
+| 13   | Totality check failed                   |
+| 14   | Holes remaining                         |
+| 15   | Target implementation failed            |

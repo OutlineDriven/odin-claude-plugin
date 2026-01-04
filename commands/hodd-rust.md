@@ -33,6 +33,7 @@ Tier | Tool        | Catches              | When to Use
 **Installation**: `static_assertions = "1.1"` in Cargo.toml
 
 **Usage**:
+
 ```rust
 use static_assertions::{assert_eq_size, assert_impl_all, const_assert};
 assert_eq_size!(u64, usize);  // 64-bit platform
@@ -46,14 +47,14 @@ const _: () = assert!(validate(256));
 
 **Decision**: Static assertions for compile-time provable properties. Debug/test contracts for development checks. Runtime contracts only for production-critical boundaries.
 
-| Property | Use |
-|----------|-----|
-| Size/alignment | `assert_eq_size!` |
-| Trait bounds | `assert_impl_all!` |
-| Const values | `const_assert!` |
-| Expensive O(n)+ | `test_ensures` |
-| Internal state | `debug_invariant` |
-| Public API | `requires`/`ensures` |
+| Property        | Use                  |
+| --------------- | -------------------- |
+| Size/alignment  | `assert_eq_size!`    |
+| Trait bounds    | `assert_impl_all!`   |
+| Const values    | `const_assert!`      |
+| Expensive O(n)+ | `test_ensures`       |
+| Internal state  | `debug_invariant`    |
+| Public API      | `requires`/`ensures` |
 
 ---
 
@@ -69,6 +70,7 @@ CRITICAL: Design Rust-specific validations BEFORE implementation.
 ## Design Verification Artifacts
 
 **contracts crate:**
+
 ```rust
 use contracts::*;
 
@@ -79,6 +81,7 @@ fn withdraw(&mut self, amount: u64) -> u64
 ```
 
 **Kani Proofs:**
+
 ```rust
 #[cfg(kani)]
 #[kani::proof]
@@ -87,6 +90,7 @@ fn verify_withdraw_safe() { ... }
 ```
 
 **Loom Concurrency:**
+
 ```rust
 #[cfg(loom)]
 fn verify_concurrent_access() {
@@ -139,27 +143,27 @@ echo "=== HODD-RUST VALIDATION COMPLETE ==="
 
 ## Validation Gates
 
-| Gate | Command | Pass Criteria | Blocking |
-|------|---------|---------------|----------|
-| Format | `cargo fmt --check` | Clean | Yes |
-| Clippy | `cargo clippy` | No warnings | Yes |
-| contracts | `cargo build && cargo test` | Verified | Yes* |
-| Kani | `cargo kani` | No violations | Yes* |
-| Loom | `cargo test --cfg loom` | No races | Yes* |
+| Gate      | Command                     | Pass Criteria | Blocking |
+| --------- | --------------------------- | ------------- | -------- |
+| Format    | `cargo fmt --check`         | Clean         | Yes      |
+| Clippy    | `cargo clippy`              | No warnings   | Yes      |
+| contracts | `cargo build && cargo test` | Verified      | Yes*     |
+| Kani      | `cargo kani`                | No violations | Yes*     |
+| Loom      | `cargo test --cfg loom`     | No races      | Yes*     |
 
 *If annotations/proofs present
 
 ## Exit Codes
 
-| Code | Meaning |
-|------|---------|
-| 0 | All validations pass |
-| 11 | Toolchain not found |
-| 12 | Format violations |
-| 13 | Clippy failures |
-| 14 | Security/dependency issues |
-| 15 | Formal verification failed |
-| 16 | External proofs failed |
+| Code | Meaning                    |
+| ---- | -------------------------- |
+| 0    | All validations pass       |
+| 11   | Toolchain not found        |
+| 12   | Format violations          |
+| 13   | Clippy failures            |
+| 14   | Security/dependency issues |
+| 15   | Formal verification failed |
+| 16   | External proofs failed     |
 
 ---
 

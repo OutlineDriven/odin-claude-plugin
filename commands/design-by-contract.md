@@ -18,15 +18,15 @@ Plan preconditions, postconditions, and invariants FROM REQUIREMENTS before any 
 Static Assertions (compile-time) > Test/Debug Contracts > Runtime Contracts
 ```
 
-| Property | Static | Test Contract | Debug Contract | Runtime Contract |
-|----------|--------|---------------|----------------|------------------|
-| Type size/alignment | `static_assert`, `assert_eq_size!` | - | - | - |
-| Null/type safety | Type checker (tsc/pyright) | - | - | - |
-| Exhaustiveness | Pattern matching + `never` | - | - | - |
-| Expensive O(n)+ checks | - | `test_ensures` | - | - |
-| Internal state invariants | - | - | `debug_invariant` | - |
-| Public API input validation | - | - | - | `requires` |
-| External/untrusted data | - | - | - | Required (Zod/deal) |
+| Property                    | Static                             | Test Contract  | Debug Contract    | Runtime Contract    |
+| --------------------------- | ---------------------------------- | -------------- | ----------------- | ------------------- |
+| Type size/alignment         | `static_assert`, `assert_eq_size!` | -              | -                 | -                   |
+| Null/type safety            | Type checker (tsc/pyright)         | -              | -                 | -                   |
+| Exhaustiveness              | Pattern matching + `never`         | -              | -                 | -                   |
+| Expensive O(n)+ checks      | -                                  | `test_ensures` | -                 | -                   |
+| Internal state invariants   | -                                  | -              | `debug_invariant` | -                   |
+| Public API input validation | -                                  | -              | -                 | `requires`          |
+| External/untrusted data     | -                                  | -              | -                 | Required (Zod/deal) |
 
 ---
 
@@ -61,12 +61,12 @@ CRITICAL: Design contracts BEFORE implementation.
 
 ## Contract Library Selection
 
-| Language | Library | Annotation Style |
-|----------|---------|------------------|
-| Python | deal | `@deal.pre`, `@deal.post`, `@deal.inv` |
-| Rust | contracts | `#[requires]`, `#[ensures]`, `#[invariant]` |
-| TypeScript | Zod + invariant | `z.object().refine()`, `invariant()` |
-| Kotlin | Native | `require()`, `check()`, `contract {}` |
+| Language   | Library         | Annotation Style                            |
+| ---------- | --------------- | ------------------------------------------- |
+| Python     | deal            | `@deal.pre`, `@deal.post`, `@deal.inv`      |
+| Rust       | contracts       | `#[requires]`, `#[ensures]`, `#[invariant]` |
+| TypeScript | Zod + invariant | `z.object().refine()`, `invariant()`        |
+| Kotlin     | Native          | `require()`, `check()`, `contract {}`       |
 
 ---
 
@@ -84,8 +84,10 @@ CRITICAL: Design contracts BEFORE implementation.
 ### Step 1: CREATE Contract Annotations
 
 **Python (deal):**
+
 ```python
 import deal
+
 
 @deal.inv(lambda self: self.balance >= 0)
 class Account:
@@ -116,21 +118,21 @@ Write tests that verify contracts catch violations for PRE, POST, and INV.
 
 ## Validation Gates
 
-| Gate | Command | Pass Criteria | Blocking |
-|------|---------|---------------|----------|
-| Contracts Created | Grep for annotations | Found | Yes |
-| Enforcement Mode | Check debug/assertions | Enabled | Yes |
-| Lint | `deal lint` or equivalent | No warnings | Yes |
-| Violation Tests | Run contract tests | All pass | Yes |
+| Gate              | Command                   | Pass Criteria | Blocking |
+| ----------------- | ------------------------- | ------------- | -------- |
+| Contracts Created | Grep for annotations      | Found         | Yes      |
+| Enforcement Mode  | Check debug/assertions    | Enabled       | Yes      |
+| Lint              | `deal lint` or equivalent | No warnings   | Yes      |
+| Violation Tests   | Run contract tests        | All pass      | Yes      |
 
 ## Exit Codes
 
-| Code | Meaning |
-|------|---------|
-| 0 | All contracts enforced and tested |
-| 1 | Precondition violation in production code |
-| 2 | Postcondition violation in production code |
-| 3 | Invariant violation in production code |
-| 11 | Contract library not installed |
-| 13 | Runtime assertions disabled |
-| 14 | Contract lint failed |
+| Code | Meaning                                    |
+| ---- | ------------------------------------------ |
+| 0    | All contracts enforced and tested          |
+| 1    | Precondition violation in production code  |
+| 2    | Postcondition violation in production code |
+| 3    | Invariant violation in production code     |
+| 11   | Contract library not installed             |
+| 13   | Runtime assertions disabled                |
+| 14   | Contract lint failed                       |

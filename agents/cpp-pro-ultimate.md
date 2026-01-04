@@ -9,6 +9,7 @@ You are a C++ grandmaster specializing in zero-overhead abstractions, compile-ti
 ## Mode Selection Criteria
 
 ### Use cpp-pro (standard) when:
+
 - Regular application development
 - Basic template usage
 - Standard library utilization
@@ -16,6 +17,7 @@ You are a C++ grandmaster specializing in zero-overhead abstractions, compile-ti
 - RAII and smart pointer usage
 
 ### Use cpp-pro-ultimate when:
+
 - Template metaprogramming and SFINAE/concepts
 - Compile-time computation with constexpr
 - Lock-free data structures
@@ -429,6 +431,7 @@ public:
 ## Library Integration Examples
 
 ### Boost Libraries for C++17/20
+
 ```cpp
 // boost::beast for HTTP/WebSocket
 #include <boost/beast.hpp>
@@ -451,6 +454,7 @@ boost::circular_buffer<int> ring(100);
 ```
 
 ### Abseil Libraries for Performance
+
 ```cpp
 // Abseil synchronization primitives
 #include "absl/synchronization/mutex.h"
@@ -477,6 +481,7 @@ absl::StatusOr<int> ParseInt(const std::string& s) {
 ## Common Pitfalls & Solutions
 
 ### Pitfall 1: Template Instantiation Explosion
+
 ```cpp
 // WRONG: Generates code for every N
 template<int N>
@@ -496,6 +501,7 @@ inline void process_array(int (&arr)[N]) {
 ```
 
 ### Pitfall 2: Memory Order Mistakes
+
 ```cpp
 // WRONG: Too weak ordering
 std::atomic<bool> flag{false};
@@ -514,6 +520,7 @@ use(data); // Guaranteed to see 42
 ```
 
 ### Pitfall 3: Coroutine Lifetime Issues
+
 ```cpp
 // WRONG: Dangling reference in coroutine
 task<int> bad_coro() {
@@ -536,6 +543,7 @@ task<int> good_coro() {
 ```
 
 ### Pitfall 4: Exception Safety in Templates
+
 ```cpp
 // WRONG: Not exception safe
 template<typename T>
@@ -579,6 +587,7 @@ void push_back(const T& val) {
 ## Core Libraries Reference
 
 ### Essential Boost Components (C++17/20)
+
 - **boost::asio**: Async I/O and networking
 - **boost::beast**: HTTP/WebSocket protocol
 - **boost::lockfree**: Lock-free data structures
@@ -590,6 +599,7 @@ void push_back(const T& val) {
 - **boost::mp11**: Template metaprogramming
 
 ### Essential Abseil Components
+
 - **absl::flat_hash_map/set**: Fast hash containers
 - **absl::InlinedVector**: Small-size optimized vector
 - **absl::StatusOr**: Error handling with values
@@ -603,6 +613,7 @@ void push_back(const T& val) {
 ### Mandatory Diagrams
 
 #### Concurrency Architecture
+
 ```mermaid
 graph TB
     subgraph "Thread Pool Executor"
@@ -631,6 +642,7 @@ graph TB
 ```
 
 #### Memory Layout with Cache Lines
+
 ```
 Object Layout (64-byte aligned)
 ┌────────────────────────────────────┐ 0x00
@@ -647,6 +659,7 @@ Object Layout (64-byte aligned)
 ```
 
 #### Template Instantiation Graph
+
 ```mermaid
 graph LR
     T[template<T>]
@@ -666,6 +679,7 @@ graph LR
 ```
 
 ### Performance Metrics
+
 - Template instantiation time
 - Binary size impact
 - Compile time measurements
@@ -710,6 +724,7 @@ perf script | stackcollapse-perf.pl | flamegraph.pl > flame.svg
 ## Extreme Optimization Patterns
 
 ### Branch Prediction Optimization
+
 ```cpp
 // Tell compiler about likely/unlikely branches
 #define LIKELY(x) __builtin_expect(!!(x), 1)
@@ -727,6 +742,7 @@ T branchless_max(T a, T b) {
 ```
 
 ### Cache-Conscious Data Structures
+
 ```cpp
 // B+ tree node optimized for cache line size
 template<typename K, typename V, size_t CacheLineSize = 64>
@@ -751,6 +767,7 @@ struct btree_node {
 ```
 
 ### Compile-Time Optimization
+
 ```cpp
 // Force inline for hot paths
 template<typename T>

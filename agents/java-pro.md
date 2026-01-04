@@ -49,6 +49,7 @@ Follow Java coding standards and include comprehensive Javadoc comments.
 ## Real Example
 
 **Task**: Process a list of orders efficiently
+
 ```java
 // Modern Java with streams and proper error handling
 public List<Invoice> processOrders(List<Order> orders) {

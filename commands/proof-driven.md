@@ -95,6 +95,7 @@ echo "Sorry count: $SORRY_COUNT"
 ### Step 3: REMEDIATE Until Complete
 
 Replace each `sorry` with actual proof using tactics:
+
 - `simp` - Simplify with known lemmas
 - `omega` - Linear arithmetic
 - `aesop` - Automated proof search
@@ -106,19 +107,19 @@ Replace each `sorry` with actual proof using tactics:
 
 ## Validation Gates
 
-| Gate | Command | Pass Criteria | Blocking |
-|------|---------|---------------|----------|
-| Toolchain | `command -v lake` | Found | Yes |
-| Build | `lake build` | Success | Yes |
-| Sorry Count | `rg '\bsorry\b'` | Zero | Yes |
-| Tests | `lake test` | All pass | If present |
+| Gate        | Command           | Pass Criteria | Blocking   |
+| ----------- | ----------------- | ------------- | ---------- |
+| Toolchain   | `command -v lake` | Found         | Yes        |
+| Build       | `lake build`      | Success       | Yes        |
+| Sorry Count | `rg '\bsorry\b'`  | Zero          | Yes        |
+| Tests       | `lake test`       | All pass      | If present |
 
 ## Exit Codes
 
-| Code | Meaning |
-|------|---------|
-| 0 | All proofs verified, zero sorry |
-| 11 | lean/lake not found |
-| 12 | No .lean files created |
-| 13 | Build failed or proofs incomplete |
-| 14 | Coverage gaps (theorems missing) |
+| Code | Meaning                           |
+| ---- | --------------------------------- |
+| 0    | All proofs verified, zero sorry   |
+| 11   | lean/lake not found               |
+| 12   | No .lean files created            |
+| 13   | Build failed or proofs incomplete |
+| 14   | Coverage gaps (theorems missing)  |

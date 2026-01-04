@@ -58,6 +58,7 @@ Design proof artifacts BEFORE implementation. Proofs guide implementation, not t
 ### 1.1 Understand Requirements
 
 Parse user's task/requirement to identify proof candidates:
+
 - **Safety properties**: "Bad things never happen" (no crashes, no corruption)
 - **Liveness properties**: "Good things eventually happen" (termination, progress)
 - **Functional correctness**: Algorithms produce correct results for ALL inputs
@@ -66,10 +67,12 @@ Parse user's task/requirement to identify proof candidates:
 ### 1.2 Artifact Detection
 
 Check for existing Lean 4 artifacts:
+
 ```bash
 fd -e lean $ARGUMENTS
 fd -g 'lakefile.lean' $ARGUMENTS
 ```
+
 - If artifacts exist: analyze coverage gaps, plan extensions
 - If no artifacts: proceed to design new proof architecture
 
@@ -78,6 +81,7 @@ fd -g 'lakefile.lean' $ARGUMENTS
 Use thinking tools to plan the proof structure:
 
 **Property Classification:**
+
 ```
 Critical Path Properties (MUST prove):
 - [Property 1]: {description} -> theorem {name}
@@ -91,6 +95,7 @@ Test-Only Properties (Too complex to prove):
 ```
 
 **Lean 4 Project Structure:**
+
 ```
 .outline/proofs/
 ├── lakefile.lean           # Build configuration
@@ -131,10 +136,10 @@ end ProjectProofs
 
 ### 1.5 Plan Proof Strategies
 
-| Theorem | Tactic Strategy | Dependencies |
-|---------|-----------------|--------------|
-| `balance_non_negative` | induction on ops, omega for arithmetic | `valid_operations` |
-| `sort_correct` | induction on list, simp for permutation | `sorted`, `permutation` |
+| Theorem                | Tactic Strategy                         | Dependencies            |
+| ---------------------- | --------------------------------------- | ----------------------- |
+| `balance_non_negative` | induction on ops, omega for arithmetic  | `valid_operations`      |
+| `sort_correct`         | induction on list, simp for permutation | `sorted`, `permutation` |
 
 ### Thinking Tool Integration
 
@@ -206,6 +211,7 @@ lemma helper_lemma : {statement} := by
 ## Phase 3: VERIFY (Validation)
 
 ### Basic (Precondition Check)
+
 ```bash
 # Verify toolchain
 (command -v lake || command -v lean) >/dev/null || exit 11
@@ -215,6 +221,7 @@ fd -g 'lakefile.lean' -e lean .outline/proofs >/dev/null || exit 12
 ```
 
 ### Intermediate (Build Validation)
+
 ```bash
 # Lake project build
 cd .outline/proofs && lake build || exit 13
@@ -224,6 +231,7 @@ fd -e lean .outline/proofs -x lean --make {} || exit 13
 ```
 
 ### Advanced (Full Verification)
+
 ```bash
 # Lake project with tests
 cd .outline/proofs && lake test || exit 13
@@ -235,6 +243,7 @@ rg -n '\bsorry\b' .outline/proofs/ && {
 ```
 
 ### Full Verification Sequence
+
 ```bash
 cd .outline/proofs
 lake build 2>&1 | tee build.log
@@ -251,24 +260,26 @@ test "$SORRY_COUNT" = "0" || exit 13
 
 For each `sorry` found, apply appropriate tactics:
 
-| Goal Type | Recommended Tactics |
-|-----------|---------------------|
-| Equality | `rfl`, `simp`, `rw [h]` |
-| Arithmetic | `linarith`, `omega`, `ring` |
-| Inductive | `induction`, `cases`, `constructor` |
-| Existential | `use x`, `exists x` |
-| Universal | `intro h`, `intros` |
-| Complex | `aesop`, `decide`, `native_decide` |
+| Goal Type   | Recommended Tactics                 |
+| ----------- | ----------------------------------- |
+| Equality    | `rfl`, `simp`, `rw [h]`             |
+| Arithmetic  | `linarith`, `omega`, `ring`         |
+| Inductive   | `induction`, `cases`, `constructor` |
+| Existential | `use x`, `exists x`                 |
+| Universal   | `intro h`, `intros`                 |
+| Complex     | `aesop`, `decide`, `native_decide`  |
 
 ### Resolving `sorry` Step by Step
 
 **Step 1: Understand the goal**
+
 ```lean
 theorem example_theorem : P := by
   sorry  -- Hover or check goal in editor
 ```
 
 **Step 2: Try simple tactics first**
+
 ```lean
 -- For equalities
 theorem eq_example : 1 + 1 = 2 := by rfl
@@ -282,6 +293,7 @@ theorem logic_example : P or not P := by decide  -- if decidable
 ```
 
 **Step 3: Use case analysis or induction**
+
 ```lean
 theorem induct_example : forall n : Nat, n + 0 = n := by
   intro n
@@ -291,6 +303,7 @@ theorem induct_example : forall n : Nat, n + 0 = n := by
 ```
 
 **Step 4: Add intermediate lemmas**
+
 ```lean
 theorem complex_theorem : P := by
   have h1 : Q := by exact proof_of_Q
@@ -330,12 +343,12 @@ termination_by xs ys => xs.length + ys.length
 
 ### Basic Commands
 
-| Command | Purpose | Usage |
-|---------|---------|-------|
-| CHECK | Verify toolchain and artifacts | `(command -v lake \|\| command -v lean) >/dev/null \|\| exit 11` |
-| VALIDATE | Run proofs or build | `test -f lakefile.lean && lake test \|\| fd -e lean -x lean --make {}` |
-| GENERATE | Build without tests | `test -f lakefile.lean && lake build \|\| fd -e lean -x lean --make {}` |
-| REMEDIATE | Find incomplete proofs | `rg -n '\\bsorry\\b' . && exit 13 \|\| exit 0` |
+| Command   | Purpose                        | Usage                                                                   |
+| --------- | ------------------------------ | ----------------------------------------------------------------------- |
+| CHECK     | Verify toolchain and artifacts | `(command -v lake \|\| command -v lean) >/dev/null \|\| exit 11`        |
+| VALIDATE  | Run proofs or build            | `test -f lakefile.lean && lake test \|\| fd -e lean -x lean --make {}`  |
+| GENERATE  | Build without tests            | `test -f lakefile.lean && lake build \|\| fd -e lean -x lean --make {}` |
+| REMEDIATE | Find incomplete proofs         | `rg -n '\\bsorry\\b' . && exit 13 \|\| exit 0`                          |
 
 ### Lake Commands Reference
 
@@ -381,20 +394,20 @@ lake build && rg -c '\bsorry\b' . && exit 13 || echo "All proofs verified"
 
 Use this guide to select the appropriate tactic for your proof goal:
 
-| Goal Type | Tactic | When to Use |
-|-----------|--------|-------------|
-| `a = a` | `rfl` | Definitional/reflexive equality - **try this first** |
-| Rewrite with `a = b` | `rw [h]` | Apply equality to rewrite goal; most common |
-| Simplification | `simp only [...]` | Apply lemmas; **avoid bare `simp`** |
-| Linear arithmetic | `linarith` | Linear inequalities, bounds proofs |
-| Nonlinear integer | `omega` | Integer constraints; Lean 4's strongest |
-| Ring equations | `ring` | Polynomial ring identities |
-| Decidable propositions | `decide` | Computational goals; **only for small** |
-| Case analysis | `cases x` | Split on constructors |
-| Induction | `induction x` | Prove base + inductive step |
-| Exists goal | `exact <witness, proof>` | Provide witness and proof |
-| Automation | `aesop` | Last resort; **watch for timeouts** |
-| Intermediate lemma | `have h : T := proof` | Add hypothesis to context |
+| Goal Type              | Tactic                   | When to Use                                          |
+| ---------------------- | ------------------------ | ---------------------------------------------------- |
+| `a = a`                | `rfl`                    | Definitional/reflexive equality - **try this first** |
+| Rewrite with `a = b`   | `rw [h]`                 | Apply equality to rewrite goal; most common          |
+| Simplification         | `simp only [...]`        | Apply lemmas; **avoid bare `simp`**                  |
+| Linear arithmetic      | `linarith`               | Linear inequalities, bounds proofs                   |
+| Nonlinear integer      | `omega`                  | Integer constraints; Lean 4's strongest              |
+| Ring equations         | `ring`                   | Polynomial ring identities                           |
+| Decidable propositions | `decide`                 | Computational goals; **only for small**              |
+| Case analysis          | `cases x`                | Split on constructors                                |
+| Induction              | `induction x`            | Prove base + inductive step                          |
+| Exists goal            | `exact <witness, proof>` | Provide witness and proof                            |
+| Automation             | `aesop`                  | Last resort; **watch for timeouts**                  |
+| Intermediate lemma     | `have h : T := proof`    | Add hypothesis to context                            |
 
 ### Complete Tactics Reference
 
@@ -513,13 +526,13 @@ theorem prop (h : x = a or x = b) : Q x := by
 
 ## Exit Codes
 
-| Code | Meaning | Resolution |
-|------|---------|------------|
-| 0 | All proofs verified | Success |
-| 11 | Lean/Lake not installed | Install via `elan` |
-| 12 | No Lean artifacts found | Create `.lean` files or run PLAN phase |
-| 13 | Incomplete proofs (`sorry`) | Complete proofs using tactics |
-| 14 | Coverage/totality gaps | Add missing cases or lemmas |
+| Code | Meaning                     | Resolution                             |
+| ---- | --------------------------- | -------------------------------------- |
+| 0    | All proofs verified         | Success                                |
+| 11   | Lean/Lake not installed     | Install via `elan`                     |
+| 12   | No Lean artifacts found     | Create `.lean` files or run PLAN phase |
+| 13   | Incomplete proofs (`sorry`) | Complete proofs using tactics          |
+| 14   | Coverage/totality gaps      | Add missing cases or lemmas            |
 
 ---
 
@@ -527,17 +540,17 @@ theorem prop (h : x = a or x = b) : Q x := by
 
 ### Common Issues
 
-| Symptom | Cause | Resolution |
-|---------|-------|------------|
-| Exit 11 | Lean 4 / Lake not found | `elan install` or `brew install lean4` |
-| Exit 12 | No .lean files in `.outline/proofs/` | Run PLAN phase first to generate artifacts |
-| Exit 13 | `sorry` in proofs | Replace `sorry` with appropriate tactics |
-| Exit 14 | Missing lemmas | Add helper lemmas from plan design |
-| `unknown identifier` | Missing import | Add `import Mathlib.Tactic` or specific module |
-| `type mismatch` | Proof term doesn't match goal | Add type ascription or derive required form |
-| `failed to prove termination` | Recursion not structurally decreasing | Add `termination_by` clause |
-| `maximum recursion depth exceeded` | Infinite loop in tactic | Use `simp only [...]` instead of `simp` |
-| `tactic 'aesop' failed` | Search space too large | Break down goal or add intermediate `have` |
+| Symptom                            | Cause                                 | Resolution                                     |
+| ---------------------------------- | ------------------------------------- | ---------------------------------------------- |
+| Exit 11                            | Lean 4 / Lake not found               | `elan install` or `brew install lean4`         |
+| Exit 12                            | No .lean files in `.outline/proofs/`  | Run PLAN phase first to generate artifacts     |
+| Exit 13                            | `sorry` in proofs                     | Replace `sorry` with appropriate tactics       |
+| Exit 14                            | Missing lemmas                        | Add helper lemmas from plan design             |
+| `unknown identifier`               | Missing import                        | Add `import Mathlib.Tactic` or specific module |
+| `type mismatch`                    | Proof term doesn't match goal         | Add type ascription or derive required form    |
+| `failed to prove termination`      | Recursion not structurally decreasing | Add `termination_by` clause                    |
+| `maximum recursion depth exceeded` | Infinite loop in tactic               | Use `simp only [...]` instead of `simp`        |
+| `tactic 'aesop' failed`            | Search space too large                | Break down goal or add intermediate `have`     |
 
 ### Tactic Selection Decision Tree (Troubleshooting)
 
@@ -597,6 +610,7 @@ lake clean && lake build
 **Problem:** Goal won't close; using `sorry` as placeholder.
 
 **Solution:**
+
 ```lean
 -- Add debugging
 theorem stuck : P := by
@@ -616,6 +630,7 @@ theorem stuck : P := by
 **Problem:** `rw [h]` fails; types don't align.
 
 **Solution:**
+
 ```lean
 -- Bad: assumes h : a = b but need different form
 theorem foo (h : f a = f b) : P := by
@@ -632,6 +647,7 @@ theorem foo (h : f a = f b) : P := by
 **Problem:** Recursion doesn't terminate; build hangs.
 
 **Solution:**
+
 ```lean
 -- Add explicit termination measure
 def foo (n : Nat) : P := by
@@ -646,6 +662,7 @@ def foo (n : Nat) : P := by
 **Problem:** `simp` oversimplifies or creates unprovable goals.
 
 **Solution:**
+
 ```lean
 -- Bad: simp alone is unpredictable
 theorem foo : P := by simp  -- Might fail later
@@ -724,14 +741,14 @@ set_option maxHeartbeats 100000  -- Increase solver timeout
 
 ## When NOT to Use Proof-Driven Development
 
-| Scenario | Better Alternative |
-|----------|-------------------|
-| Simple CRUD operations | Design-by-contract (runtime checks) |
-| Rapidly changing requirements | Test-driven (easier to update) |
-| Performance-critical hot paths | Type-driven (compile-time only) |
-| UI/UX code | Property-based testing |
-| Prototyping / exploration | Test-driven development |
-| Team unfamiliar with Lean | Design-by-contract + property tests |
+| Scenario                       | Better Alternative                  |
+| ------------------------------ | ----------------------------------- |
+| Simple CRUD operations         | Design-by-contract (runtime checks) |
+| Rapidly changing requirements  | Test-driven (easier to update)      |
+| Performance-critical hot paths | Type-driven (compile-time only)     |
+| UI/UX code                     | Property-based testing              |
+| Prototyping / exploration      | Test-driven development             |
+| Team unfamiliar with Lean      | Design-by-contract + property tests |
 
 ## Complementary Approaches
 
@@ -760,6 +777,7 @@ set_option maxHeartbeats 100000  -- Increase solver timeout
 ## Output Report
 
 Provide:
+
 - Files created in `.outline/proofs/`
 - Build status (pass/fail)
 - `sorry` count before/after remediation

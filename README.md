@@ -7,6 +7,7 @@
 ODIN is a professional-grade Claude Code plugin that transforms Claude into a sophisticated code agent with specialized capabilities across 15+ programming languages, comprehensive workflow automation, and rigorous engineering methodology.
 
 **Key Capabilities:**
+
 - 🤖 **57 Specialized Agents** - Language experts, architects, analyzers, and domain specialists
 - 📐 **Diagram-First Engineering** - Architecture, concurrency, memory, data flow, optimization
 - 🎯 **Surgical Code Editing** - AST-based transformations with ast-grep
@@ -22,6 +23,7 @@ ODIN is a professional-grade Claude Code plugin that transforms Claude into a so
 - Git (for marketplace installation)
 
 ### Full Install Script (Recommended)
+
 ```shell
 # Clone the repository
 git clone https://github.com/OutlineDriven/odin-claude-plugin.git
@@ -82,6 +84,7 @@ Before any non-trivial implementation:
 ### Language Specialists (16 agents)
 
 **Modern Languages:**
+
 - `rust-pro` / `rust-pro-ultimate` - Rust Edition 2024, zero-cost abstractions, ownership
 - `typescript-pro` - Strict mode, discriminated unions, no any/unknown
 - `python-pro` - Type hints, asyncio, pathlib, dataclasses
@@ -90,15 +93,18 @@ Before any non-trivial implementation:
 - `kotlin-pro` - K2, coroutines, null safety, immutability
 
 **Systems Programming:**
+
 - `cpp-pro` / `cpp-pro-ultimate` - C++20+, RAII, smart pointers, ranges
 - `c-pro` / `c-pro-ultimate` - Modern C, memory safety, systems programming
 
 **Web & Enterprise:**
+
 - `javascript-pro` - ES6+, async patterns, Node.js
 - `php-pro` - Modern PHP, generators, SPL structures
 - `csharp-pro` - C# latest, async/await, LINQ
 
 **Database:**
+
 - `sql-pro` / `sql-query-engineer` - Complex queries, optimization, schema design
 
 ### Architecture & Design (7 agents)
@@ -134,6 +140,7 @@ Before any non-trivial implementation:
 ### Specialized Domains (13+ agents)
 
 **Machine Learning & Data:**
+
 - `ml-engineer` - ML pipelines, model serving, feature engineering
 - `mlops-engineer` - ML infrastructure, experiment tracking, model registries
 - `data-engineer` - ETL pipelines, data warehouses, streaming architectures
@@ -141,13 +148,16 @@ Before any non-trivial implementation:
 - `trading-system-architect` - HFT systems, market making, order execution
 
 **Security & Compliance:**
+
 - `security-auditor` - Vulnerability review, OWASP compliance, secure authentication
 
 **Migration & Modernization:**
+
 - `migrator` - System migrations, schema changes, version upgrades
 - `porter` - Cross-platform code porting, language transitions
 
 **Development Tools:**
+
 - `docs` - Comprehensive technical documentation from codebases
 - `reference-builder` - Exhaustive technical references, API documentation
 - `meta-programming-pro` - Code generation, DSLs, abstractions
@@ -228,6 +238,7 @@ Confidence = (familiarity + (1-complexity) + (1-risk) + (1-scope)) / 4
 **Types**: feat, fix, build, chore, ci, docs, perf, refactor, style, test
 
 **Rules**:
+
 - One logical change per commit
 - Never mix types or scopes
 - Each commit must build and pass tests
@@ -236,6 +247,7 @@ Confidence = (familiarity + (1-complexity) + (1-risk) + (1-scope)) / 4
 ### Tool Selection Mandate
 
 **Priority**:
+
 1. **ast-grep** - Code structure, refactoring (HIGHLY PREFERRED)
 2. **native-patch** - File edits, multi-file changes
 3. **ripgrep** - Text, comments, strings

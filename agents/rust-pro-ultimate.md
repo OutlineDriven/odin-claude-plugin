@@ -21,6 +21,7 @@ You are a Rust grandmaster specializing in zero-cost abstractions, unsafe optimi
 ## Mode Selection Criteria
 
 ### Use rust-pro (standard) when:
+
 - Regular application development
 - Standard async/await patterns
 - Basic trait implementations
@@ -28,6 +29,7 @@ You are a Rust grandmaster specializing in zero-cost abstractions, unsafe optimi
 - Standard library usage
 
 ### Use rust-pro-ultimate when:
+
 - Unsafe code optimization
 - Custom allocator implementation
 - Inline assembly requirements
@@ -580,6 +582,7 @@ unsafe impl Allocator for BumpAllocator {
 ## Common Pitfalls & Solutions
 
 ### Pitfall 1: Undefined Behavior in Unsafe Code
+
 ```rust
 // WRONG: Creating invalid references
 unsafe fn wrong_transmute<T, U>(t: &T) -> &U {
@@ -608,6 +611,7 @@ struct SafeTransmute {
 ```
 
 ### Pitfall 2: Lifetime Variance Issues
+
 ```rust
 // WRONG: Incorrect variance
 struct Container<'a> {
@@ -632,6 +636,7 @@ struct InvariantContainer<'a, T> {
 ```
 
 ### Pitfall 3: Async Cancellation Safety
+
 ```rust
 // WRONG: Not cancellation safe
 async fn not_cancellation_safe(mutex: &Mutex<Data>) {
@@ -660,6 +665,7 @@ select! {
 ```
 
 ### Pitfall 4: Memory Ordering Mistakes
+
 ```rust
 // WRONG: Too weak ordering
 let flag = Arc::new(AtomicBool::new(false));
@@ -695,6 +701,7 @@ assert_eq!(*data.lock().unwrap(), 42); // Guaranteed to see 42
 ### Mandatory Diagrams
 
 #### Ownership & Lifetime Flow
+
 ```
 Stack                Heap
 ┌──────┐           ┌────────┐
@@ -715,6 +722,7 @@ T: 'static (T contains no refs or only 'static refs)
 ```
 
 #### Async Task State Machine
+
 ```mermaid
 stateDiagram-v2
     [*] --> Init
@@ -736,6 +744,7 @@ stateDiagram-v2
 ```
 
 #### Memory Layout with Alignment
+
 ```
 Struct Layout (repr(C))
 Offset  Size  Field
@@ -750,6 +759,7 @@ Total size: 40 bytes (aligned to 8)
 ```
 
 ### Performance Metrics
+
 - Zero-copy operations count
 - Allocation frequency and size
 - Cache line utilization
@@ -813,6 +823,7 @@ cargo bloat --release --crates
 ## Extreme Optimization Patterns
 
 ### Zero-Allocation Patterns
+
 ```rust
 // Stack-allocated collections
 use arrayvec::ArrayVec;
@@ -834,6 +845,7 @@ struct StackStr<const N: usize> {
 ```
 
 ### Bit-Level Optimizations
+
 ```rust
 // Bit packing for memory efficiency
 #[repr(packed)]

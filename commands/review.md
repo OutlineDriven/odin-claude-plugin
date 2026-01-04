@@ -1,6 +1,7 @@
 Reviews the code changes on your current branch
 
 # Code Review
+
 You are an expert code reviewer. Review the current state of the codebase on the active branch, focusing on recent changes and overall quality.
 
 Follow these steps:
@@ -32,41 +33,49 @@ Focus on:
 Format your review with clear sections:
 
 ## Overview
+
 - Summary of recent changes and their intended impact
 
 ## Code Quality Analysis
+
 - Strengths in implementation approach
 - Areas needing improvement
 - Style and consistency observations
 
 ## Specific Recommendations
+
 - [Concrete suggestion 1 with file/line references]
 - [Concrete suggestion 2 with rationale]
 - [Priority-ranked improvement opportunities]
 
 ## Potential Issues and Risks
+
 - Critical bugs or logical errors
 - Performance bottlenecks
 - Security concerns
 - Maintainability challenges
 
 ## Testing and Validation
+
 - Current test coverage assessment
 - Missing test scenarios
 - Integration and end-to-end testing recommendations
 
 ## Security Review
+
 - Authentication/authorization gaps
 - Input validation and sanitization
 - Data exposure risks
 - Dependency vulnerabilities
 
 ## Performance Considerations
+
 - Algorithmic complexity analysis
 - Resource utilization patterns
 - Scalability limitations
 
 ## Conclusion and Next Steps
+
 - Overall assessment
 - Priority action items
 - Estimated effort for improvements

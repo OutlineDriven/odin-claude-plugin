@@ -17,11 +17,11 @@ This skill handles both the DESIGN phase (planning specifications) and the EXECU
 
 Before using Quint for state machine modeling, ensure compile-time verifiable properties are encoded in the type system:
 
-| Language | Tool | Command |
-|----------|------|---------|
-| Rust | `static_assertions` crate | `cargo check` |
-| TypeScript | `satisfies`, `as const` | `tsc --strict` |
-| Python | `assert_type`, `Final` | `pyright --strict` |
+| Language   | Tool                      | Command            |
+| ---------- | ------------------------- | ------------------ |
+| Rust       | `static_assertions` crate | `cargo check`      |
+| TypeScript | `satisfies`, `as const`   | `tsc --strict`     |
+| Python     | `assert_type`, `Final`    | `pyright --strict` |
 
 Quint complements static verification by modeling state machines and temporal properties that cannot be expressed in types alone.
 
@@ -234,6 +234,7 @@ module {ModuleName} {
 ## Phase 3: VERIFY (Validation)
 
 ### Basic (Precondition Check)
+
 ```bash
 # Check Quint availability
 command -v quint >/dev/null || exit 11
@@ -243,6 +244,7 @@ fd -e qnt .outline/specs >/dev/null || exit 12
 ```
 
 ### Intermediate (Typecheck and Verify)
+
 ```bash
 # Typecheck all specs
 quint typecheck .outline/specs/*.qnt || exit 12
@@ -255,6 +257,7 @@ quint test .outline/specs/*.qnt || exit 14
 ```
 
 ### Advanced (Comprehensive Verification)
+
 ```bash
 # Multi-seed verification for thoroughness
 for seed in 12345 67890 11111 22222 33333; do
@@ -275,6 +278,7 @@ quint test --verbose --seed=$RANDOM --coverage \
 After verification, generate language-specific implementation stubs:
 
 ### Rust
+
 ```rust
 // Generated from Quint invariant: {invariant_name}
 fn assert_invariant(state: &State) {
@@ -293,12 +297,13 @@ fn action_name(state: &mut State) {
 ```
 
 ### TypeScript
+
 ```typescript
 // Generated from Quint invariant: {invariant_name}
 function assertInvariant(state: State): void {
   invariant(
     state.property1 && state.property2,
-    "Invariant: {invariant_description}"
+    "Invariant: {invariant_description}",
   );
 }
 
@@ -311,11 +316,12 @@ function actionName(state: State): State {
 ```
 
 ### Python
+
 ```python
 # Generated from Quint invariant: {invariant_name}
 def assert_invariant(state: State) -> None:
-    assert state.property1 and state.property2, \
-        "Invariant: {invariant_description}"
+    assert state.property1 and state.property2, "Invariant: {invariant_description}"
+
 
 # Generated from Quint action: {action_name}
 def action_name(state: State) -> State:
@@ -329,6 +335,7 @@ def action_name(state: State) -> State:
 ## Commands Reference
 
 ### Basic (40 chars)
+
 ```bash
 quint verify --main=Module spec.qnt
 quint test spec.qnt
@@ -336,12 +343,14 @@ quint typecheck spec.qnt
 ```
 
 ### Intermediate (80 chars)
+
 ```bash
 quint verify --main=Module --seed=$RANDOM --verbose spec.qnt
 quint test --verbose --coverage spec.qnt
 ```
 
 ### Advanced (120 chars)
+
 ```bash
 quint verify --main=Module --seed=$RANDOM --verbose --max-steps=100 --invariant=prop spec.qnt
 quint test --verbose --seed=$RANDOM --coverage --timeout=60 spec.qnt
@@ -351,20 +360,21 @@ quint test --verbose --seed=$RANDOM --coverage --timeout=60 spec.qnt
 
 ## Exit Codes
 
-| Code | Meaning | Remediation |
-|------|---------|-------------|
-| 0 | Success | Continue to implementation |
-| 11 | Quint not installed | `npm install -g @informalsystems/quint` |
-| 12 | Invalid specification | Check syntax, run `quint typecheck` |
-| 13 | Specification violation | Review invariants, fix state transitions |
-| 14 | Property verification failed | Strengthen properties or fix spec |
-| 15 | Mapping incomplete | Complete stub generation |
+| Code | Meaning                      | Remediation                              |
+| ---- | ---------------------------- | ---------------------------------------- |
+| 0    | Success                      | Continue to implementation               |
+| 11   | Quint not installed          | `npm install -g @informalsystems/quint`  |
+| 12   | Invalid specification        | Check syntax, run `quint typecheck`      |
+| 13   | Specification violation      | Review invariants, fix state transitions |
+| 14   | Property verification failed | Strengthen properties or fix spec        |
+| 15   | Mapping incomplete           | Complete stub generation                 |
 
 ---
 
 ## Language Support
 
 ### Rust
+
 ```bash
 # Generate property tests with proptest
 # Map Quint invariants to runtime assertions
@@ -372,6 +382,7 @@ quint test --verbose --seed=$RANDOM --coverage --timeout=60 spec.qnt
 ```
 
 ### Python
+
 ```bash
 # Generate property tests with hypothesis
 # Map invariants to assert statements
@@ -379,6 +390,7 @@ quint test --verbose --seed=$RANDOM --coverage --timeout=60 spec.qnt
 ```
 
 ### TypeScript
+
 ```bash
 # Generate property tests with fast-check
 # Map invariants to type guards
@@ -386,6 +398,7 @@ quint test --verbose --seed=$RANDOM --coverage --timeout=60 spec.qnt
 ```
 
 ### Go
+
 ```bash
 # Generate property tests with gopter
 # Map invariants to panic checks
@@ -393,6 +406,7 @@ quint test --verbose --seed=$RANDOM --coverage --timeout=60 spec.qnt
 ```
 
 ### Java
+
 ```bash
 # Generate property tests with jqwik
 # Map invariants to assert statements
@@ -400,6 +414,7 @@ quint test --verbose --seed=$RANDOM --coverage --timeout=60 spec.qnt
 ```
 
 ### C#
+
 ```bash
 # Generate property tests with FsCheck
 # Map invariants to Code Contracts
@@ -407,19 +422,20 @@ quint test --verbose --seed=$RANDOM --coverage --timeout=60 spec.qnt
 ```
 
 ### C++
+
 ```bash
 # Generate property tests with rapidcheck
 # Map invariants to assert macros
 # Use const correctness for state
 ```
 
-| Language | Property Test Library |
-|----------|----------------------|
-| Rust | proptest |
-| Python | hypothesis |
-| TypeScript | fast-check |
-| Go | gopter |
-| Java | jqwik |
+| Language   | Property Test Library |
+| ---------- | --------------------- |
+| Rust       | proptest              |
+| Python     | hypothesis            |
+| TypeScript | fast-check            |
+| Go         | gopter                |
+| Java       | jqwik                 |
 
 ---
 
@@ -427,35 +443,39 @@ quint test --verbose --seed=$RANDOM --coverage --timeout=60 spec.qnt
 
 ### Common Issues
 
-| Symptom | Cause | Resolution |
-|---------|-------|------------|
-| Exit 11 | Quint not installed | `npm install -g @informalsystems/quint` |
-| Exit 12 | Syntax error in .qnt | Run `quint typecheck`, fix errors |
-| Exit 13 | Invariant violated | Check state transitions, fix logic |
-| Exit 14 | Property test failed | Review property, strengthen or fix |
-| Exit 15 | Stub generation failed | Check module exports |
-| Verification timeout | State space too large | Reduce max-steps or simplify spec |
-| Non-determinism issues | Missing seed | Use explicit `--seed` |
+| Symptom                | Cause                  | Resolution                              |
+| ---------------------- | ---------------------- | --------------------------------------- |
+| Exit 11                | Quint not installed    | `npm install -g @informalsystems/quint` |
+| Exit 12                | Syntax error in .qnt   | Run `quint typecheck`, fix errors       |
+| Exit 13                | Invariant violated     | Check state transitions, fix logic      |
+| Exit 14                | Property test failed   | Review property, strengthen or fix      |
+| Exit 15                | Stub generation failed | Check module exports                    |
+| Verification timeout   | State space too large  | Reduce max-steps or simplify spec       |
+| Non-determinism issues | Missing seed           | Use explicit `--seed`                   |
 
 ### Issue: Verification Timeout
+
 ```bash
 # Increase max steps
 quint verify --main=Module --max-steps=200 spec.qnt
 ```
 
 ### Issue: Non-Determinism
+
 ```bash
 # Use explicit nondet with seed
 quint verify --seed=12345 spec.qnt
 ```
 
 ### Issue: Complex Invariants
+
 ```bash
 # Break into smaller invariants
 # Verify each separately
 ```
 
 ### Issue: Implementation Divergence
+
 ```bash
 # Regenerate stubs from updated spec
 # Run property tests to catch mismatches
@@ -690,14 +710,14 @@ mod tests {
 
 ## When NOT to Use Validation-First
 
-| Scenario | Better Alternative |
-|----------|-------------------|
-| Simple CRUD operations | Test-driven development |
-| Non-concurrent systems | Design-by-contract |
-| Mathematical proofs | Proof-driven (Lean 4) |
-| Type-level constraints | Type-driven (Idris 2) |
-| Performance-critical code | Benchmark-driven |
-| Rapid prototyping | Test-driven development |
+| Scenario                  | Better Alternative      |
+| ------------------------- | ----------------------- |
+| Simple CRUD operations    | Test-driven development |
+| Non-concurrent systems    | Design-by-contract      |
+| Mathematical proofs       | Proof-driven (Lean 4)   |
+| Type-level constraints    | Type-driven (Idris 2)   |
+| Performance-critical code | Benchmark-driven        |
+| Rapid prototyping         | Test-driven development |
 
 ---
 
@@ -712,6 +732,7 @@ mod tests {
 ## Integration Points
 
 ### With TDD
+
 1. Write Quint specification
 2. Verify specification
 3. Generate test cases from spec
@@ -719,6 +740,7 @@ mod tests {
 5. Ensure implementation satisfies spec
 
 ### With CI/CD
+
 ```yaml
 # Example GitHub Actions
 - name: Verify Specification
@@ -728,6 +750,7 @@ mod tests {
 ```
 
 ### With Documentation
+
 - Specifications serve as executable documentation
 - Invariants document system properties
 - Actions document valid state transitions

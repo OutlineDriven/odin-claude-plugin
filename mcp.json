@@ -1,32 +1,32 @@
 {
-    "mcpServers": {
-        "sequentialthinking-tools": {
-            "command": "npx",
-            "args": [
-                "mcp-sequentialthinking-tools"
-            ]
-        },
-        "actor-critic-thinking": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "mcp-server-actor-critic-thinking"
-            ]
-        },
-        "shannon-thinking": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "server-shannon-thinking@latest"
-            ]
-        },
-        "repomix": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "repomix",
-                "--mcp"
-            ]
-        }
+  "mcpServers": {
+    "sequentialthinking-tools": {
+      "command": "npx",
+      "args": [
+        "mcp-sequentialthinking-tools"
+      ]
+    },
+    "actor-critic-thinking": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-server-actor-critic-thinking"
+      ]
+    },
+    "shannon-thinking": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "server-shannon-thinking@latest"
+      ]
+    },
+    "repomix": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "repomix",
+        "--mcp"
+      ]
     }
+  }
 }

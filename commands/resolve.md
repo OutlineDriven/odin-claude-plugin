@@ -29,6 +29,7 @@ You will be provided with code review comments to analyze and resolve.
 For each review comment, provide:
 
 ### Comment: [Brief description]
+
 **Status**: VALID ISSUE / NOT AN ISSUE / NEEDS CLARIFICATION
 
 If VALID ISSUE:

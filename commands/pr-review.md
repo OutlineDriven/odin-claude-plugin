@@ -28,6 +28,7 @@ Provide a concise but thorough code review covering:
 - Identification of potential issues, bugs, or risks
 
 Focus on:
+
 - Code correctness and logical soundness
 - Following project conventions, coding standards, and architecture patterns
 - Performance implications and efficiency
@@ -37,37 +38,44 @@ Focus on:
 Format your review with clear sections using markdown headers and bullet points:
 
 ## Overview
+
 - Summary of the PR changes and their purpose
 - Key files modified and overall impact
 - Context from PR description and commits
 
 ## Code Quality Analysis
+
 - Strengths in the implementation
 - Areas for improvement in style and maintainability
 - Adherence to project conventions
 
 ## Specific Recommendations
+
 - [Suggestion 1: Describe issue and suggested fix with file/line references]
 - [Suggestion 2: Explain rationale for improvement]
 - [Priority: High/Medium/Low for each recommendation]
 
 ## Potential Issues and Risks
+
 - [Critical bugs or logical errors identified]
 - [Performance concerns or bottlenecks]
 - [Security vulnerabilities or risks]
 - [Maintainability or scalability issues]
 
 ## Testing and Validation
+
 - Assessment of current test coverage for the changes
 - Missing test scenarios or edge cases
 - Recommendations for additional testing
 
 ## Security Considerations
+
 - Authentication/authorization concerns
 - Input validation and sanitization
 - Data exposure or dependency vulnerabilities
 
 ## Conclusion
+
 - Overall assessment of the PR
 - Priority action items for approval
 - Estimated effort for implementing recommendations

@@ -77,14 +77,14 @@ Outline-Strong orchestrates multi-layer validation pipelines, coordinating proof
 
 **Hierarchy**: `Static Assertions > Test/Debug > Runtime Contracts`
 
-| Language | Tool | Command |
-|----------|------|---------|
-| C++ | `static_assert`, Concepts | `g++ -std=c++20` |
-| TypeScript | `satisfies`, `as const` | `tsc --strict` |
-| Python | `assert_type`, `Final` | `pyright --strict` |
-| Java | Checker Framework | `javac -processor nullness` |
-| Rust | `static_assertions` crate | `cargo check` |
-| Kotlin | contracts, sealed | `kotlinc -Werror` |
+| Language   | Tool                      | Command                     |
+| ---------- | ------------------------- | --------------------------- |
+| C++        | `static_assert`, Concepts | `g++ -std=c++20`            |
+| TypeScript | `satisfies`, `as const`   | `tsc --strict`              |
+| Python     | `assert_type`, `Final`    | `pyright --strict`          |
+| Java       | Checker Framework         | `javac -processor nullness` |
+| Rust       | `static_assertions` crate | `cargo check`               |
+| Kotlin     | contracts, sealed         | `kotlinc -Werror`           |
 
 **Principle**: Verify at compile-time before runtime. No runtime contracts for statically provable properties.
 
@@ -133,6 +133,7 @@ mkdir -p .outline/{proofs,specs,contracts,tests}
 ```
 
 Generate artifacts per layer using respective skills:
+
 - **Proofs**: See proof-driven skill
 - **Specifications**: See validation-first skill
 - **Contracts**: See design-by-contract skill
@@ -153,6 +154,7 @@ STOP_ON_FAIL=${STOP_ON_FAIL:-true}           # Execution mode
 ### Stage Execution
 
 #### Stage 1: Proof Validation
+
 ```bash
 run_proof_stage() {
   echo "=== Stage 1: PROOF ==="
@@ -165,6 +167,7 @@ run_proof_stage() {
 ```
 
 #### Stage 2: Specification Verification
+
 ```bash
 run_spec_stage() {
   echo "=== Stage 2: SPECIFICATION ==="
@@ -177,6 +180,7 @@ run_spec_stage() {
 ```
 
 #### Stage 3: Type Checking
+
 ```bash
 run_type_stage() {
   echo "=== Stage 3: TYPE CHECKING ==="
@@ -188,6 +192,7 @@ run_type_stage() {
 ```
 
 #### Stage 4: Contract Verification
+
 ```bash
 run_contract_stage() {
   echo "=== Stage 4: CONTRACTS ==="
@@ -202,6 +207,7 @@ run_contract_stage() {
 ```
 
 #### Stage 5: Test Execution
+
 ```bash
 run_test_stage() {
   echo "=== Stage 5: TESTS ==="
@@ -241,16 +247,19 @@ execute_chain() {
 ## Commands Reference
 
 ### ols-validate
+
 Execute full validation chain in precedence order.
 
 **Usage**: `ols-validate [--order ORDER] [--stop-on-fail] [--all-errors]`
 
 ### ols-check
+
 Detect validation artifacts and report coverage.
 
 **Usage**: `ols-check [--stage STAGE] [--missing] [--summary]`
 
 ### ols-override
+
 Configure validation order and behavior.
 
 **Usage**: `ols-override --order "type,contract,tests" [--continue-on-error]`
@@ -259,26 +268,26 @@ Configure validation order and behavior.
 
 ## Exit Codes
 
-| Code | Meaning | Action |
-|------|---------|--------|
-| 0 | All stages pass | Validation complete |
-| 1 | Precondition violation | Fix contract preconditions |
-| 2 | Postcondition violation | Fix contract postconditions |
-| 3 | Invariant violation | Fix contract invariants |
-| 11 | No artifacts | Run plan phase first |
-| 13 | Stage failed | Fix issues in failed stage |
-| 15 | Config error | Check ORDER, valid stages |
+| Code | Meaning                 | Action                      |
+| ---- | ----------------------- | --------------------------- |
+| 0    | All stages pass         | Validation complete         |
+| 1    | Precondition violation  | Fix contract preconditions  |
+| 2    | Postcondition violation | Fix contract postconditions |
+| 3    | Invariant violation     | Fix contract invariants     |
+| 11   | No artifacts            | Run plan phase first        |
+| 13   | Stage failed            | Fix issues in failed stage  |
+| 15   | Config error            | Check ORDER, valid stages   |
 
 ---
 
 ## Gating Mechanism
 
-| Upstream | Gates | Rationale |
-|----------|-------|-----------|
-| proof | spec | Proofs validate core properties |
-| spec | type | Specs define valid behaviors |
-| type | contract | Types catch basic errors |
-| contract | tests | Contracts validate interfaces |
+| Upstream | Gates    | Rationale                       |
+| -------- | -------- | ------------------------------- |
+| proof    | spec     | Proofs validate core properties |
+| spec     | type     | Specs define valid behaviors    |
+| type     | contract | Types catch basic errors        |
+| contract | tests    | Contracts validate interfaces   |
 
 **Type -> Contract**: Type errors prevent contract checking
 **Contract -> Tests**: Contract violations prevent test execution
@@ -288,17 +297,20 @@ Configure validation order and behavior.
 ## Precedence Override
 
 ### Environment Variable (Highest Priority)
+
 ```bash
 export VALIDATION_ORDER="type,contract,tests"
 ols-validate
 ```
 
 ### Command-Line Flag
+
 ```bash
 ols-validate --order "spec,type,tests"
 ```
 
 ### Configuration File (Lowest Priority)
+
 ```toml
 # .ols-config.toml
 [validation]
@@ -324,6 +336,7 @@ Custom orders:
 ## Stop-on-First-Fail Logic
 
 ### Default Mode (Stop on Fail)
+
 ```bash
 for stage in $STAGES; do
     run_stage "$stage"
@@ -332,6 +345,7 @@ done
 ```
 
 ### All-Errors Mode
+
 ```bash
 FIRST_FAILURE=0
 for stage in $STAGES; do
@@ -346,12 +360,14 @@ exit $FIRST_FAILURE
 ## Integration Patterns
 
 ### Pre-Commit Hook
+
 ```bash
 #!/bin/bash
 ols-validate --order "type,contract" --stop-on-fail
 ```
 
 ### CI/CD Pipeline
+
 ```yaml
 - name: Full Validation
   run: ols-validate --all-errors
@@ -361,6 +377,7 @@ ols-validate --order "type,contract" --stop-on-fail
 ```
 
 ### Watch Mode
+
 ```bash
 while inotifywait -r -e modify,create,delete .; do
     ols-validate --order "type,contract" --stop-on-fail

@@ -36,6 +36,7 @@ You are a SQL expert specializing in query optimization and database design.
 5. Handle NULL values explicitly - they're not empty strings or zeros
 
 **Example CTE vs Nested Query**:
+
 ```sql
 -- ❌ Hard to read nested subquery
 SELECT name, total
@@ -72,6 +73,7 @@ JOIN customers ON ...
 - Performance metrics showing actual improvements
 
 **Example Index Recommendation**:
+
 ```sql
 -- Problem: Slow query filtering by status and date
 SELECT * FROM orders
@@ -87,6 +89,7 @@ ON orders(status, created_at);
 ```
 
 **Real-World Performance Example**:
+
 ```sql
 -- Tracking query performance improvements
 Query: Find top customers by recent order value

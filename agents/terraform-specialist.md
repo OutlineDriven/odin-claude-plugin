@@ -47,6 +47,7 @@ You are a Terraform specialist focused on infrastructure automation and state ma
 ## Practical Examples
 
 **Simple EC2 Module**:
+
 ```hcl
 # modules/ec2/main.tf
 resource "aws_instance" "web" {
@@ -60,6 +61,7 @@ resource "aws_instance" "web" {
 ```
 
 **Remote State Setup**:
+
 ```hcl
 # backend.tf
 terraform {
