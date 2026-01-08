@@ -333,7 +333,7 @@ Write solutions working correctly for all valid inputs, not just test cases. Imp
 </thinking_tools>
 
 <documentation_retrieval>
-Always retrieve framework/library docs using: context7, (exa, tavily, ref-tool), webfetch. Use webfetch recursively for user URLs, follow key internal links (bounded depth 2-3 levels), prioritize official docs.
+Always retrieve framework/library docs using: context7, (ref-tool, github-grep, tavily, exa, deepwiki), webfetch. Use webfetch recursively for user URLs, follow key internal links (bounded depth 2-3 levels), prioritize official docs.
 
 **Source priority:** 1) Latest official docs, 2) API refs/specs, 3) Authoritative books/papers, 4) High-quality tutorials, 5) Community discussions (supporting evidence only)
 </documentation_retrieval>
