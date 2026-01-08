@@ -243,7 +243,7 @@ Default to research over action. Do not jump into implementation unless clearly 
 - `ls` → USE `eza`
 - `find` → USE `fd`
 - `grep` → USE `rg` or `ast-grep`
-- `cat` for reading files → USE `bat -P -p -n`
+- `cat` for reading files → USE `bat -P -p -n --color=always`
 - `ps` → USE `procs`
 - `diff` → USE `difft`
 - `time` → USE `hyperfine`
@@ -347,7 +347,7 @@ Always retrieve framework/library docs using: context7, (ref-tool, github-grep, 
 ### 1) Core System & File Ops
 
 - **`eza`**: `ls` replacement. `eza --tree --level=2` | `eza -l --git` | `eza --icons` | `eza -D` | `eza -l --sort=size`
-- **`bat`**: `cat` replacement. `bat -P -p --line-range 10:20 file.rs`. Flags: `P`(no pager), `-p` (plain), `-l` (lang), `-A` (show-all), `-r` (range), `-d` (diff), `-n` (show line numbers; can be combined with `-p` for using line numbers with plain text); default baseline args as `bat -P -p -n`.
+- **`bat`**: `cat` replacement. `bat -P -p --line-range 10:20 file.rs`. Flags: `P`(no pager), `-p` (plain), `-l` (lang), `-A` (show-all), `-r` (range), `-d` (diff), `-n` (show line numbers; can be combined with `-p` for using line numbers with plain text); default baseline args as `bat -P -p -n --color=always`.
 - **`zoxide`**: Smart nav. `z foo` | `zi foo` (fzf) | `zoxide query <partial>`. Manage: `zoxide add|remove|edit`
 - **`rargs`**: Regex xargs. `rargs -p '(.*)\.txt' mv {0} {1}.bak`. Flags: `-p` (pattern), `-d` (delimiter)
 
