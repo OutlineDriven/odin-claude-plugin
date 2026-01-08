@@ -22,14 +22,6 @@
           {
             "type": "command",
             "command": "echo 'Current directory structure (lsd):' && lsd -l -g -G --group-directories-first && echo ''"
-          },
-          {
-            "type": "command",
-            "command": "if git rev-parse --git-dir >/dev/null 2>&1; then echo 'Git status:' && git status -s -uall --porcelain && echo ''; else echo 'Git status: Not a git repo'; fi"
-          },
-          {
-            "type": "command",
-            "command": "if git rev-parse --git-dir >/dev/null 2>&1; then echo 'Updating Global tags:' && gtags -i -v; fi"
           }
         ]
       }
@@ -41,10 +33,6 @@
           {
             "type": "command",
             "command": "echo 'Running auto formats with `dprint fmt .`'; dprint fmt ."
-          },
-          {
-            "type": "command",
-            "command": "if git rev-parse --git-dir >/dev/null 2>&1; then echo 'Updating Global tags:' && gtags -i -v; fi"
           }
         ]
       }
