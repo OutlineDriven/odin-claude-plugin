@@ -104,7 +104,9 @@ def _run_json(cmd: list[str], stdin: str | None = None) -> dict[str, Any]:
     try:
         return json.loads(out)
     except json.JSONDecodeError as e:
-        raise RuntimeError(f"Failed to parse JSON from command output: {e}\nRaw:\n{out}") from e
+        raise RuntimeError(
+            f"Failed to parse JSON from command output: {e}\nRaw:\n{out}"
+        ) from e
 
 
 def _ensure_gh_authenticated() -> None:
@@ -112,7 +114,9 @@ def _ensure_gh_authenticated() -> None:
         _run(["gh", "auth", "status"])
     except RuntimeError:
         print("run `gh auth login` to authenticate the GitHub CLI", file=sys.stderr)
-        raise RuntimeError("gh auth status failed; run `gh auth login` to authenticate the GitHub CLI") from None
+        raise RuntimeError(
+            "gh auth status failed; run `gh auth login` to authenticate the GitHub CLI"
+        ) from None
 
 
 def gh_pr_view_json(fields: str) -> dict[str, Any]:
@@ -189,7 +193,9 @@ def fetch_all(owner: str, repo: str, number: int) -> dict[str, Any]:
         )
 
         if "errors" in payload and payload["errors"]:
-            raise RuntimeError(f"GitHub GraphQL errors:\n{json.dumps(payload['errors'], indent=2)}")
+            raise RuntimeError(
+                f"GitHub GraphQL errors:\n{json.dumps(payload['errors'], indent=2)}"
+            )
 
         pr = payload["data"]["repository"]["pullRequest"]
         if pr_meta is None:
@@ -210,9 +216,15 @@ def fetch_all(owner: str, repo: str, number: int) -> dict[str, Any]:
         reviews.extend(r.get("nodes") or [])
         review_threads.extend(t.get("nodes") or [])
 
-        comments_cursor = c["pageInfo"]["endCursor"] if c["pageInfo"]["hasNextPage"] else None
-        reviews_cursor = r["pageInfo"]["endCursor"] if r["pageInfo"]["hasNextPage"] else None
-        threads_cursor = t["pageInfo"]["endCursor"] if t["pageInfo"]["hasNextPage"] else None
+        comments_cursor = (
+            c["pageInfo"]["endCursor"] if c["pageInfo"]["hasNextPage"] else None
+        )
+        reviews_cursor = (
+            r["pageInfo"]["endCursor"] if r["pageInfo"]["hasNextPage"] else None
+        )
+        threads_cursor = (
+            t["pageInfo"]["endCursor"] if t["pageInfo"]["hasNextPage"] else None
+        )
 
         if not (comments_cursor or reviews_cursor or threads_cursor):
             break

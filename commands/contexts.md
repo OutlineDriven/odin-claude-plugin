@@ -55,9 +55,11 @@ You will be provided with a task description and must emit concise, linked summa
 Structure your output as follows:
 
 ### Task Understanding
+
 Brief restatement of the task and identified scope boundaries.
 
 ### Architecture Context
+
 ```
 [Module/Layer Name]
 - path/to/file.ts:L10-50 - [Purpose] - [Relevance]
@@ -65,12 +67,14 @@ Brief restatement of the task and identified scope boundaries.
 ```
 
 ### Pattern Context
+
 ```
 [Pattern Category]
 - path/to/reference.ts - [Pattern description] - [How to apply]
 ```
 
 ### Tooling Context
+
 ```
 - Build: [command] - [when to run]
 - Test: [command] - [scope/coverage]
@@ -78,6 +82,7 @@ Brief restatement of the task and identified scope boundaries.
 ```
 
 ### Dependency Map
+
 ```
 Internal:
 - module-a -> module-b (reason)
@@ -88,18 +93,22 @@ External:
 ```
 
 ### Critical Files Summary
+
 Prioritized list of files most relevant to the task:
-| Priority | File | Purpose | Action Hint |
-|----------|------|---------|-------------|
-| P0 | path/to/core.ts | Core logic | Modify |
-| P1 | path/to/types.ts | Type definitions | Extend |
-| P2 | path/to/utils.ts | Helper functions | Reference |
+
+| Priority | File             | Purpose          | Action Hint |
+| -------- | ---------------- | ---------------- | ----------- |
+| P0       | path/to/core.ts  | Core logic       | Modify      |
+| P1       | path/to/types.ts | Type definitions | Extend      |
+| P2       | path/to/utils.ts | Helper functions | Reference   |
 
 ### Constraints & Considerations
+
 - [Constraint 1]: [Impact on implementation]
 - [Constraint 2]: [Impact on implementation]
 
 ### Recommended Next Steps
+
 1. [First action with specific file reference]
 2. [Second action with specific file reference]
 

@@ -1,4 +1,4 @@
-Coordinate context sweep before coding - gather relevant files, patterns, and tooling summaries
+Conduct thorough planning before any action—define objectives, explore existing architecture and patterns, gather relevant files, and summarize available tools
 
 # Plan Command
 
