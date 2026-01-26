@@ -2,7 +2,7 @@
 
 Before proceeding to ask planning questions, you must *proactively and critically* execute both Verbalized Sampling (VS) and exploration:
 
-- For Verbalized Sampling, generate and *sample* multiple (at least 5) distinct, diverse candidates that represent different possible user intents or directions, ranked by likelihood. Critically assess each VS sample: point out potential weaknesses, contradictions, or oversights.
+- For Verbalized Sampling, generate and *sample* multiple (at least 5) distinct, diverse candidates that represent different possible user intents or directions, ranked by likelihood. Critically assess each VS sample: point out potential weaknesses, contradictions, or oversights. VS prevents over-engineering by surfacing simpler alternatives.
 
 **Required VS Output Format:**
 ```
