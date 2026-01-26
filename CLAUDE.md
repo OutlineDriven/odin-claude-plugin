@@ -402,9 +402,25 @@ Always retrieve framework/library docs using: context7, (ref-tool, github-grep, 
   - Rewrite: `ast-grep run -p 'logger.info($A)' -r 'logger.debug({ ctx: ctx, msg: $A })' -U`
   - Debug: `ast-grep run -p 'pattern' -l js --debug-query=cst`
   - Pattern syntax: `$VAR` (single), `$$$ARGS` (multiple), `$_` (non-capturing)
-- **`srgn`**: Surgical regex/grammar replacement. Understands source code syntax.
-  - **Flags:** `--python`, `--typescript`, `--rust`, `--go`, `--glob`, `--dry-run`, `-d` (delete), `-u` (upper), `-l` (lower)
-  - **Usage:** `srgn 'old' -- 'new'` | `srgn -d 'pattern'` | `srgn --python 'comments' 'TODO' -- 'DONE'` | `srgn --glob '*.py' 'old' -- 'new'`
+- **`srgn`** [GRAMMAR-AWARE - 1ST TIER]: Tree-sitter search/replace. "Mix of tr, sed, ripgrep and tree-sitter."
+  - **Modes:** Action (transform) | Search (no action + `--<lang>` → ripgrep-like code search)
+  - **Languages:** `--python`/`--py`, `--rust`/`--rs`, `--typescript`/`--ts`, `--go`, `--c`, `--csharp`/`--cs`, `--hcl`
+  - **Prepared Scopes:**
+    - Python: comments, strings, imports, doc-strings, function-names, function-calls, class, def, async-def, methods, identifiers
+    - Rust: comments, doc-comments, uses, strings, struct, enum, fn, impl-fn, pub-fn, const-fn, async-fn, test-fn, trait, impl, mod (supports `fn~PATTERN`, `struct~PATTERN`, `mod~PATTERN`)
+    - TypeScript: comments, strings, imports, function, async-function, method, constructor, class, enum, interface, type-alias
+    - Go: comments, strings, imports, struct, interface, func, method, free-func, type-params, defer (supports `func~PATTERN`, `struct~PATTERN`)
+  - **Scope Logic:** Multiple `--<lang>` scopes AND together by default; use `-j` to OR them
+  - **Dynamic Filter:** `fn~PATTERN`, `struct~[tT]est`, `func~Handle` (regex on element name)
+  - **Actions:** `-d` (delete), `-u/-l/-t` (case), `-s` (squeeze), `-S` (symbols)
+  - **Options:** `--glob`, `--dry-run`, `-j` (OR scopes), `--invert`, `-L` (literal), `--fail-none`
+  - **Examples:**
+    - `srgn --python comments 'TODO' -- 'DONE'` (replace in comments)
+    - `srgn --rust fn 'old_name' -- 'new_name'` (rename in all functions)
+    - `srgn --rust 'fn~handle' 'error' -- 'err'` (only fns matching "handle")
+    - `srgn --go 'struct~[tT]est'` (search: find test-related structs)
+    - `srgn --rust pub-enum --rust type-identifier 'Type'` (intersect: Type in pub enums only)
+  - **vs ast-grep:** srgn = scoped regex within AST (simpler) | ast-grep = structural patterns with metavariables
 - **`nomino`**: Batch rename. `nomino -r '(.*)\.bak' '{1}.txt'`. Flags: `-r` (regex), `-s` (sort), `-t` (test), `-R` (recursive)
 - **`hck`**: Column cutter. `hck -f 1,3 -d ':'`. Flags: `-f` (fields), `-d` (delim), `-D` (regex delim), `-f -2` (exclude)
 - **`shellharden`**: Bash hardener. `shellharden script.sh` | `shellharden --replace script.sh` (in-place)
