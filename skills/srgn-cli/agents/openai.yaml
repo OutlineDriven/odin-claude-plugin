@@ -1,0 +1,4 @@
+interface:
+  display_name: "srgn CLI"
+  short_description: "Syntax-aware srgn CLI recipes and refactors"
+  default_prompt: "Use $srgn-cli to build a safe, language-scoped srgn command for this task."
