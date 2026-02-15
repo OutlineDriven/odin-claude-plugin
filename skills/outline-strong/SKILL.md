@@ -1,4 +1,7 @@
-Outline-Strong unified 5-layer validation - Design all validation layers from requirements, then execute CREATE -> VERIFY -> INTEGRATE cycle
+---
+name: outline-strong
+description: Outline-Strong unified 5-layer validation - design all validation layers from requirements, then execute CREATE -> VERIFY -> INTEGRATE cycle. Use when implementing with comprehensive formal verification across types (Idris 2), specs (Quint), proofs (Lean 4), contracts, and tests simultaneously.
+---
 
 # Outline-Strong
 
@@ -124,4 +127,3 @@ echo "=== ALL LAYERS VERIFIED ==="
 | 14   | Layer 4 (Contracts) failed |
 | 15   | Layer 5 (Tests) failed     |
 | 16   | Correspondence incomplete  |
-| '''  |                            |

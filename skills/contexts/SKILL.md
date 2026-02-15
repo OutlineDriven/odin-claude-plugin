@@ -1,4 +1,7 @@
-Coordinate context sweep before coding - gather relevant files, patterns, and tooling summaries
+---
+name: contexts
+description: Coordinate context sweep before coding - gather relevant files, patterns, and tooling summaries. Use when preparing to implement a feature, fix, or refactor and need comprehensive architecture, pattern, tooling, and dependency context gathered first.
+---
 
 # Context Command
 

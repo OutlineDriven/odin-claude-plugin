@@ -1,4 +1,7 @@
-HODD-RUST validation-first Rust development - Design Rust-specific verifications from requirements, then execute through validation pipeline
+---
+name: hodd-rust
+description: HODD-RUST validation-first Rust development - design Rust-specific verifications from requirements, then execute through validation pipeline. Use when developing Rust code with formal verification using rustfmt, clippy, static_assertions, Miri, Loom, Flux, contracts, Kani, or Lean4.
+---
 
 # HODD-RUST validation-first Rust development
 

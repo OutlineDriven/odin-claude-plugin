@@ -1,4 +1,7 @@
-Test-Driven Development (TDD) - Design tests from requirements, then execute RED -> GREEN -> REFACTOR cycle
+---
+name: test-driven
+description: Test-Driven Development (TDD) - design tests from requirements, then execute RED -> GREEN -> REFACTOR cycle. Use when implementing features or fixes with TDD methodology, writing tests before code, or following XP-style development with pytest, vitest, cargo test, or go test.
+---
 
 # Test-driven development (XP-style)
 

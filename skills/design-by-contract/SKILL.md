@@ -1,4 +1,7 @@
-Design-by-Contract development - Design contracts from requirements, then execute CREATE -> VERIFY -> TEST cycle
+---
+name: design-by-contract
+description: Design-by-Contract (DbC) development - design contracts from requirements, then execute CREATE -> VERIFY -> TEST cycle. Use when implementing with formal preconditions, postconditions, and invariants using deal (Python), contracts (Rust), Zod (TypeScript), or Kotlin contracts.
+---
 
 # Design-by-Contract development
 

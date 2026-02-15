@@ -1,4 +1,7 @@
-Conduct thorough planning before any action—define objectives, explore existing architecture and patterns, gather relevant files, and summarize available tools
+---
+name: plan
+description: Software architect and planning specialist - conduct thorough read-only planning before any action. Use when exploring a codebase to design implementation plans, defining objectives, gathering relevant files, and summarizing available tools before coding begins.
+---
 
 # Plan Command
 

@@ -1,3 +1,10 @@
+---
+name: init
+description: Analyze a codebase and create an AGENTS.md file for future agent instances. Use when onboarding to a new repository, when the user asks to create or improve an AGENTS.md, or when documenting build/lint/test commands and high-level architecture.
+---
+
+# Init - AGENTS.md Generator
+
 Please analyze this codebase and create a AGENTS.md file, which will be given to future instances of ODIN Code Agent to operate in this repository.
 
 What to add:

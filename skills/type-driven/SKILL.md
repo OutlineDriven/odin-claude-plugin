@@ -1,4 +1,7 @@
-Type-driven development with Idris 2 - Design type specifications from requirements, then execute CREATE -> VERIFY -> IMPLEMENT cycle
+---
+name: type-driven
+description: Type-driven development with Idris 2 - design type specifications from requirements, then execute CREATE -> VERIFY -> IMPLEMENT cycle. Use when developing with dependent types, refined types, or proof-carrying types in Idris 2; totality and exhaustive pattern matching enforced.
+---
 
 # Type-driven development
 

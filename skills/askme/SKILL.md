@@ -1,3 +1,8 @@
+---
+name: askme
+description: Verbalized Sampling (VS) protocol for deep intent exploration before planning. Use when starting ambiguous or complex tasks, when multiple interpretations exist, or when you need to explore diverse intent hypotheses and ask maximum clarifying questions before committing to an approach.
+---
+
 # Ask Me Command
 
 Before proceeding to ask planning questions, you must *proactively and critically* execute both Verbalized Sampling (VS) and exploration:

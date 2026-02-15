@@ -1,4 +1,7 @@
-Reviews the code changes on your current branch
+---
+name: review
+description: Review the code changes on the current branch. Use when the user asks to review their current work, analyze recent commits, or get a code quality assessment of the active branch against the main branch.
+---
 
 # Code Review
 

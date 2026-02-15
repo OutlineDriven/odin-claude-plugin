@@ -1,4 +1,7 @@
-Proof-driven development with Lean 4 - Design proofs from requirements, then execute CREATE -> VERIFY -> REMEDIATE cycle
+---
+name: proof-driven
+description: Proof-driven development with Lean 4 - design proofs from requirements, then execute CREATE -> VERIFY -> REMEDIATE cycle. Use when implementing with formal verification using Lean 4 theorems, lemmas, and proof tactics; zero-sorry policy enforced.
+---
 
 # Proof-driven development
 

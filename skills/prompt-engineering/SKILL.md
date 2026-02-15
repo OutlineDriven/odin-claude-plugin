@@ -1,3 +1,8 @@
+---
+name: prompt-engineering
+description: Interactive prompt optimization workflow for LLMs. Use when optimizing, improving, or engineering prompts for Claude, GPT, Gemini, or other language models; covers analysis, model-specific techniques, few-shot examples, XML structuring, and validation.
+---
+
 # Interactive Prompt Optimization Workflow
 
 Execute this workflow to systematically improve any prompt for optimal LLM performance.

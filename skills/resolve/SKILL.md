@@ -1,4 +1,7 @@
-Resolves the code review comments by verifying their validity and proposing multiple solutions for confirmed issues.
+---
+name: resolve
+description: Resolve code review comments by verifying their validity and proposing multiple solutions for confirmed issues. Use when addressing review feedback, analyzing whether review comments are valid, and generating architectural solutions (not naive fixes) for confirmed issues.
+---
 
 # Resolve Command
 

@@ -1,4 +1,7 @@
-Validation-first development with Quint - Design specifications from requirements, then execute CREATE -> VERIFY -> IMPLEMENT cycle
+---
+name: validation-first
+description: Validation-first development with Quint - design specifications from requirements, then execute CREATE -> VERIFY -> IMPLEMENT cycle. Use when developing with formal state machine specifications, invariants, and temporal properties using Quint before writing implementation code.
+---
 
 # Validation-first development
 
