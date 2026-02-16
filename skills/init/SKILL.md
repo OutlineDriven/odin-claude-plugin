@@ -1,5 +1,5 @@
 ---
-name: init
+name: inits
 description: Analyze a codebase and create an AGENTS.md file for future agent instances. Use when onboarding to a new repository, when the user asks to create or improve an AGENTS.md, or when documenting build/lint/test commands and high-level architecture.
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: plan
+name: plans
 description: Software architect and planning specialist - conduct thorough read-only planning before any action. Use when exploring a codebase to design implementation plans, defining objectives, gathering relevant files, and summarizing available tools before coding begins.
 ---
 
