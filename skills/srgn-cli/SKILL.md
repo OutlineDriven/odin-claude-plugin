@@ -48,9 +48,13 @@ Focus on CLI workflows for search, transformation, scoped migrations, and lint-l
    - Quote regex.
    - Quote globs: `--glob '**/*.py'`.
    - Use `--` before replacement values.
-4. Use the narrowest scope that solves the task.
+4. `--glob` accepts exactly one pattern (cannot repeat).
+   - Glob syntax: `*`, `?`, `[...]`, `**` only. No `{a,b}` brace expansion.
+   - For multiple files: broader glob + `--dry-run`, or per-file via `fd`:
+     `fd -e <ext> --strip-cwd-prefix -x srgn --glob '{}' --stdin-detection force-unreadable [OPTIONS] [PATTERN]`
+5. Use the narrowest scope that solves the task.
    - Prefer language scope + anchored regex over broad regex-only replacement.
-5. Treat `-d` and `-s` as high-risk operations.
+6. Treat `-d` and `-s` as high-risk operations.
    - Always provide explicit scope for them.
 
 ## Command Construction Template
@@ -131,10 +135,13 @@ For broader, categorized examples, load `references/cli-cookbook.md`.
 3. Wrong files targeted.
    - Confirm `--glob` pattern and shell quoting.
    - Add `--fail-no-files` in CI to catch empty globs.
-4. Unclear behavior across multiple language scopes.
+4. `--glob` used multiple times.
+   - `--glob` is a single-value argument; cannot repeat.
+   - Broader glob + `--dry-run`, or per-file: `fd -e <ext> --strip-cwd-prefix -x srgn --glob '{}' --stdin-detection force-unreadable [OPTIONS] [PATTERN]`
+5. Unclear behavior across multiple language scopes.
    - Default is intersection (left-to-right narrowing).
    - Use `-j` for OR behavior.
-5. Special characters misinterpreted as regex.
+6. Special characters misinterpreted as regex.
    - Use `--literal-string` when literal matching is intended.
 
 ## Reference Loading Guide
