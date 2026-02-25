@@ -5,18 +5,28 @@ description: Analyze a codebase and create an AGENTS.md file for future agent in
 
 # Init - AGENTS.md Generator
 
-Please analyze this codebase and create a AGENTS.md file, which will be given to future instances of ODIN Code Agent to operate in this repository.
+Analyze this codebase and create an AGENTS.md file for future ODIN Code Agent instances.
 
-What to add:
+## Core principle
 
-1. Commands that will be commonly used, such as how to build, lint, and run tests. Include the necessary commands to develop in this codebase, such as how to run a single test.
-2. High-level code architecture and structure so that future instances can be productive more quickly. Focus on the "big picture" architecture that requires reading multiple files to understand.
+**Only encode knowledge that is expensive to rediscover.** An agent can `fd`, `rg`, `ast-grep`, and read any file in seconds. If the information is one search away, omit it.
 
-Usage notes:
+## What to include
 
-- If there's already a AGENTS.md, suggest improvements to it.
-- When you make the initial AGENTS.md, do not repeat yourself and do not include obvious instructions like "Provide helpful error messages to users", "Write unit tests for all new utilities", "Never include sensitive information (API keys, tokens) in code or commits".
-- Avoid listing every component or file structure that can be easily discovered.
-- Don't include generic development practices.
-- If there is a README.md, make sure to include the important parts.
-- Do not make up information such as "Common Development Tasks", "Tips for Development", "Support and Documentation" unless this is expressly included in other files that you read.
+1. **Non-obvious build/test incantations** — commands with flags, env vars, or ordering that aren't apparent from `package.json`/`Makefile`/`Justfile` alone (e.g., required setup steps, how to run a single test in a monorepo).
+2. **Cross-cutting architecture** — relationships, conventions, and invariants that span multiple files and cannot be inferred from any single file (e.g., "handlers in `api/` must never import from `internal/repo` directly — always go through `service/`").
+3. **Implicit contracts** — naming conventions, error-handling policies, module boundaries, or deployment constraints that live in tribal knowledge rather than code.
+
+## What to omit (the agent can discover these)
+
+- File/directory listings and per-file descriptions.
+- Dependency lists or version tables (read `package.json`, `Cargo.toml`, etc.).
+- Generic best practices (error messages, test coverage, secrets handling).
+- Information already in README.md — reference it, don't duplicate.
+- Fabricated sections ("Common Development Tasks", "Tips", "Support") with no basis in actual project files.
+
+## Workflow
+
+- If an AGENTS.md already exists, suggest targeted improvements rather than rewriting.
+- Do not repeat yourself. Each fact appears once.
+- Every statement must be grounded in files you actually read — never invent.

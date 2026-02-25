@@ -5,6 +5,48 @@ All notable changes to the ODIN Claude Plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2026-02-25
+
+### Changed
+
+**Agent Consolidation (57 → 46 agents)**
+
+Removed redundancy by merging overlapping agents and eliminating agents outside the code agent scope.
+
+**Created:**
+
+- `devil-advocate` - Adversarial technical challenger for pre-decision challenge (pre-mortem, assumption dismantling, red-teaming)
+- `database` - Unified database agent (merged sql-pro + sql-query-engineer + database-optimizer)
+- `refactoring` - Full refactoring lifecycle (merged refactorer + refactor-planner + tech-debt-resolver + modernizer)
+
+**Merged/Absorbed:**
+
+- `docs-architect` now absorbs docs and reference-builder capabilities (API references, configuration guides, exhaustive coverage)
+- `debugger` now absorbs investigator capabilities (hypothesis-driven debugging, incident investigation, report templates)
+- `migrator` now absorbs porter capabilities (cross-platform porting, language transitions, library equivalents)
+- `criticizer` rewritten with sharpened identity (severity-driven, post-implementation systemic critique)
+
+**Removed:**
+
+- `docs` (exact duplicate of docs-architect)
+- `reference-builder` (absorbed into docs-architect)
+- `sql-pro`, `sql-query-engineer`, `database-optimizer` (merged into database)
+- `refactorer`, `refactor-planner`, `tech-debt-resolver`, `modernizer` (merged into refactoring)
+- `investigator` (absorbed into debugger)
+- `porter` (absorbed into migrator)
+- `sales-automator` (outside code agent scope)
+- `reflector` (overlaps general reasoning)
+- `meta-programming-pro` (niche, absorbed into language-specific agents)
+
+**Enhanced:**
+
+- All surviving agent descriptions updated with cross-references and PROACTIVELY trigger conditions
+- Fixed analyzer.md registration gap (file existed but was not registered in plugin.json)
+
+### Fixed
+
+- `analyzer` agent now registered in plugin.json (was missing since v1.0.0)
+
 ## [1.0.0] - 2025-11-17
 
 ### Added

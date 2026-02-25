@@ -4,11 +4,11 @@
 
 ## Overview
 
-ODIN is a professional-grade Claude Code plugin that transforms Claude into a sophisticated code agent with specialized capabilities across 15+ programming languages, comprehensive workflow automation, and rigorous engineering methodology.
+ODIN is a professional-grade Claude Code plugin that transforms Claude into a sophisticated code agent with 46 specialized agents across 11+ programming languages, comprehensive workflow automation, and rigorous engineering methodology.
 
 **Key Capabilities:**
 
-- 🤖 **57 Specialized Agents** - Language experts, architects, analyzers, and domain specialists
+- 🤖 **46 Specialized Agents** - Language experts, architects, analyzers, and domain specialists
 - 📐 **Diagram-First Engineering** - Architecture, concurrency, memory, data flow, optimization
 - 🎯 **Surgical Code Editing** - AST-based transformations with ast-grep
 - 🧠 **Confidence-Driven Execution** - Adaptive behavior based on complexity and risk
@@ -75,7 +75,7 @@ Before any non-trivial implementation:
 
 ## Agents
 
-### Language Specialists (16 agents)
+### Language Specialists (15 agents)
 
 **Modern Languages:**
 
@@ -97,41 +97,34 @@ Before any non-trivial implementation:
 - `php-pro` - Modern PHP, generators, SPL structures
 - `csharp-pro` - C# latest, async/await, LINQ
 
-**Database:**
-
-- `sql-pro` / `sql-query-engineer` - Complex queries, optimization, schema design
-
 ### Architecture & Design (7 agents)
 
 - `architect` - System architecture, technical decisions, scalability
 - `backend-architect` - Backend systems, APIs, service architecture
 - `graphql-architect` - GraphQL schemas, resolvers, federation
-- `docs-architect` - Technical documentation, architecture guides
+- `docs-architect` - Technical documentation, API references, architecture guides
 - `ui-ux-designer` - Interface design, user experience, design systems
 - `artistic-designer` - Visual design, aesthetics, branding elements
 - `branding-specialist` - Brand identity, visual language, corporate identity
 
-### Code Quality (10 agents)
+### Code Quality (8 agents)
 
 - `code-reviewer` - Expert code review, quality, security, maintainability
-- `debugger` - Root cause analysis, error resolution, stack trace interpretation
-- `refactorer` - Code restructuring, design improvements
-- `refactor-planner` - Strategic refactoring plans, technical debt reduction
+- `criticizer` - Systemic post-implementation critique, severity-driven analysis
+- `devil-advocate` - Pre-decision adversarial challenge, assumption dismantling
+- `debugger` - Root cause analysis, error resolution, incident investigation
+- `refactoring` - Full refactoring lifecycle: assess debt, plan, execute, modernize
 - `test-writer` - Comprehensive test suites, unit/integration testing
 - `test-designer-advanced` - Edge cases, chaos engineering, property-based testing
-- `modernizer` - Legacy code updates, modern practices adoption
-- `investigator` - Deep debugging, root cause analysis
-- `criticizer` - Critical analysis, constructive feedback
-- `reflector` - Deep reflection, retrospectives, continuous improvement
+- `analyzer` - Codebase health metrics, dependency graphs, pattern detection
 
-### Performance (4 agents)
+### Performance (3 agents)
 
 - `performance` - Holistic performance optimization, profiling, benchmarking
 - `concurrency-expert` - Thread safety, synchronization, parallel patterns
 - `memory-expert` - Memory optimization, leak detection, allocation analysis
-- `database-optimizer` - Query optimization, indexing, schema efficiency
 
-### Specialized Domains (13+ agents)
+### Specialized Domains (9 agents)
 
 **Machine Learning & Data:**
 
@@ -141,22 +134,18 @@ Before any non-trivial implementation:
 - `quant-researcher` - Financial models, trading strategies, market analysis
 - `trading-system-architect` - HFT systems, market making, order execution
 
-**Security & Compliance:**
+**Security:**
 
 - `security-auditor` - Vulnerability review, OWASP compliance, secure authentication
 
-**Migration & Modernization:**
+**Database & Migration:**
 
-- `migrator` - System migrations, schema changes, version upgrades
-- `porter` - Cross-platform code porting, language transitions
+- `database` - SQL queries, schema design, optimization, analytics
+- `migrator` - System migrations, cross-platform porting, version upgrades
 
 **Development Tools:**
 
-- `docs` - Comprehensive technical documentation from codebases
-- `reference-builder` - Exhaustive technical references, API documentation
-- `meta-programming-pro` - Code generation, DSLs, abstractions
 - `prompt-engineer` - LLM prompts optimization, AI features
-- `sales-automator` - Sales outreach, proposal templates, pricing pages
 
 ### Frontend & Mobile (4 agents)
 
@@ -165,14 +154,9 @@ Before any non-trivial implementation:
 - `ios-developer` - Swift/SwiftUI, UIKit, Core Data, App Store optimization
 - `mobile-developer` - React Native/Flutter, offline sync, push notifications
 
-### Infrastructure (2 agents)
+### Infrastructure (1 agent)
 
 - `terraform-specialist` - IaC best practices, modules, state management
-- `analyzer` - Deep analysis, pattern recognition, codebase insights
-
-### Maintenance (1 agent)
-
-- `tech-debt-resolver` - Technical debt identification and strategic resolution
 
 ## Configuration
 
