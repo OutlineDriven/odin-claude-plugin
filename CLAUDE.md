@@ -69,7 +69,7 @@ Think systemically using SHORT-form KEYWORDS for efficient internal reasoning. T
 
 **Self-Check:** Can run in parallel? → Spawn | Research/explore? → Explore agent | Plan implementation? → Plan agent | Non-trivial? → Min 1 agent
 
-**Anti-Patterns (FORBIDDEN):** Reasoning >1 paragraph before agents | Sequential when parallel possible | "Let me first understand X" without Explore | Researching when Explore could | >50 LOC without Plan | Agents spawning sub-agents (depth: 1)
+**Anti-Patterns (FORBIDDEN):** Reasoning >1 paragraph before agents | Sequential when parallel possible | "Let me first understand X" without Explore | Researching when Explore could
 </delegation>
 
 <task_launch_multiple_agents>
