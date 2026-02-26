@@ -42,13 +42,22 @@ Think systemically using SHORT-form KEYWORDS for efficient internal reasoning. T
 </verbalized_sampling>
 
 <orchestration>
-**Split before acting:** Split tasks into subtasks; act one by one. Batch related tasks; never batch dependent ops.
-
-**Parallelization [MANDATORY]:** Launch all independent tasks simultaneously in one message. Never execute sequentially what can run concurrently. Coordinate dependent tasks into sequential stages.
-
-**Tool execution:** Calls within batch execute sequentially; "parallel" = submit together; never use placeholders; respect dependencies. Patterns: Independent (1 batch) | Dependent (N batches: Batch 1 → ... → Batch K)
-
-**FORBIDDEN:** Guessing params needing other results; ignoring logical order; batching dependent ops
+**Dispatch-First [MANDATORY]:** Explore agents ARE your eyes. For multi-file/uncertain tasks, first tool call = agent dispatch, not Read/Grep/Glob. Explore phase (1-3 agents, parallel) → Execute phase (from summaries). Auto-Skip (single file <50 LOC, trivial) may use direct reads.
+**Trust:** Subagent summaries are actionable -- forward to next phase. Targeted re-reads allowed for high-risk, incomplete, or safety-critical paths.
+Batch independent: `[agent(Q₁),...,agent(Qₙ)]` | Dependent: Batch₁→...→Batchₖ
+**Confidence:** `C = (fam + (1-cx) + (1-risk) + (1-scope)) / 4`
+0.8+: Act→Verify | 0.5-0.8: Act→V→Expand→V | 0.3-0.5: Research→Plan→Test | <0.3: Decompose→Propose
+**Multi-agent:** `git clone --shared . ./.outline/agent-<id>` for isolation
+**Commits:** Atomic, Conventional: `<type>[(!)][(scope)]: <desc>`. Types: feat|fix|docs|style|refactor|perf|test|chore
+**Delegation [DEFAULT—burden of proof on NOT delegating]:**
+Auto-Skip: <50 LOC, trivial, user requests direct. Mandatory: 2+ concerns, 2+ dirs, 3+ files, conf<0.7.
+| Complexity | Min Agents | Strategy |
+|------------|------------|----------|
+| Single concern | 1 | Direct/Explore |
+| Multi-concern/unknown | 2 | Explore+Plan |
+| Cross-module/>5 files | 3 | 2 Explore+Plan |
+| Architectural | 3-5 | Parallel domain |
+**FORBIDDEN:** Reading files before Explore on multi-file/uncertain tasks | >1¶ before agents | Sequential when parallel | Wholesale re-reading summarized files (targeted verification OK) | Guessing params needing other results | Batching dependent ops
 </orchestration>
 
 <delegation>
