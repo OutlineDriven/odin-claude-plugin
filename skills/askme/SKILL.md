@@ -7,7 +7,7 @@ description: Verbalized Sampling (VS) protocol for deep intent exploration befor
 
 Before proceeding to ask planning questions, you must *proactively and critically* execute both Verbalized Sampling (VS) and exploration:
 
-- For Verbalized Sampling, generate and *sample* multiple (at least 5) distinct, diverse candidates that represent different possible user intents or directions, ranked by likelihood. Critically assess each VS sample: point out potential weaknesses, contradictions, or oversights. VS prevents over-engineering by surfacing simpler alternatives.
+- For Verbalized Sampling, generate and *sample* at least N distinct, diverse candidates that represent different possible user intents or directions, ranked by likelihood, where N is dynamic by ambiguity/risk/scope (baseline N>=5; trivial N>=3; high ambiguity/risk N>=7; architectural N>=10; no hard cap). Run actor-critic on each VS sample: explicitly record one weakness, contradiction, and oversight before selecting a direction. VS prevents over-engineering by surfacing simpler alternatives; expand only while new samples materially change planning decisions, and prefer the smallest sufficient N.
 
 **Required VS Output Format:**
 ```
@@ -20,6 +20,6 @@ Before proceeding to ask planning questions, you must *proactively and criticall
    ...
 ```
 
-- For exploration, deliberately seek out unconventional, underexplored, and edge-case possibilities relating to the user's objective, drawing on both the provided context and plausible but non-obvious requirements.
+- For exploration, deliberately seek out unconventional, underexplored, and edge-case possibilities relating to the user's objective, drawing on both the provided context and plausible but non-obvious requirements. Include at least 3 edge cases (at least 5 if architectural), and stop expanding once additional cases no longer change decisions.
 
 Only after completing *both* critical VS and exploration steps, proceed to use the question tool to ask the *maximum possible number* of precise, clarifying, and challenging planning questions that holistically address the problem space, taking into account uncertainty, gaps, and ambiguous requirements.
