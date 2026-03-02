@@ -83,10 +83,10 @@ Calibration: Success +0.1 (cap 1.0), Failure -0.2 (floor 0.0). Default: research
 
 **Doc retrieval:** context7, ref-tool, github-grep, parallel, fetch. Follow internal links (depth 2-3). Priority: 1) Official docs 2) API refs 3) Books/papers 4) Tutorials 5) Community
 
-**Banned [HARD—REJECT]:** `ls`→`eza` | `find`→`fd` | `grep`→`rg`/`ast-grep` | `cat`→`bat -P -p -n --color=always` | `ps`→`procs` | `diff`→`difft` | `time`→`hyperfine` | `sed`→`srgn`/`ast-grep -U` | `rm`→`rip`
-**Preferences:** Context args: `ast-grep -C`, `rg -C`, `bat -r`, `Read -offset/-limit`
+**Banned [HARD—REJECT]:** `ls`→`eza` | `find`→`fd` | `grep`→`git grep`/`rg`/`ast-grep` | `cat`→`bat -P -p -n --color=always` | `ps`→`procs` | `diff`→`difft` | `time`→`hyperfine` | `sed`→`srgn`/`ast-grep -U` | `rm`→`rip`
+**Preferences:** Context args: `ast-grep -C`, `git grep -n -C`, `rg -C`, `bat -r`, `Read -offset/-limit`
 **Headless [MANDATORY]:** No TUIs (top/htop/vim/nano). No pagers (pipe to cat or `--no-pager`). Prefer `--json`/plain text. Stdin-waiting = CRITICAL FAILURE.
-**fd-First [MANDATORY]:** Before ast-grep/rg/multi-file edits: `fd -e <ext>` discover → `fd -E` exclude noise → validate count (<50) → execute scoped.
+**fd-First [MANDATORY]:** Before ast-grep/git grep/rg/multi-file edits: `fd -e <ext>` discover → `fd -E` exclude noise → validate count (<50) → execute scoped.
 
 **BEFORE coding:** Prime problem class, constraints, I/O spec, metrics, unknowns, standards/APIs.
 **CS anchors:** ADTs, invariants, contracts, O(?) complexity, partial vs total functions | Structure selection, worst/avg/amortized analysis, space/time trade-offs, cache locality | Unit/property/fuzz/integration, assertions/contracts, rollback strategy
@@ -113,7 +113,8 @@ Calibration: Success +0.1 (cap 1.0), Failure -0.2 (floor 0.0). Default: research
 
 ### Search & Discovery
 - **`fd`** [PRIMARY]: `fd -e py` | `fd -E venv` | `fd -g '*.test.ts'` | `fd -x cmd {}` | `fd -X cmd`
-- **`rg`**: `rg "pattern" -t rs` | `rg -F 'literal'` | `rg pattern -A 3 -B 2` | `rg pattern --json`
+- **`git grep`** [PRIMARY text search]: `git grep -n "pattern"` | `git grep -n --heading --break "pattern"` | `git grep -n -F 'literal'` | `git grep -n -C 3 'pattern'`
+- **`rg`** [FALLBACK text search]: `rg "pattern" -t rs` | `rg -F 'literal'` | `rg pattern -A 3 -B 2` | `rg pattern --json`
 
 ### Code Manipulation
 - **`ast-grep`**: Search: `ast-grep run -p 'import { $A } from "lib"' -l ts -C 3` | Rewrite: `-r 'replacement' -U` | Debug: `--debug-query=cst` | Patterns: `$VAR` (single), `$$$ARGS` (multi), `$_` (non-capturing)
@@ -148,7 +149,7 @@ Calibration: Success +0.1 (cap 1.0), Failure -0.2 (floor 0.0). Default: research
 - Options: `compress` (~70% token reduction), `includePatterns`, `ignorePatterns`, `style` (xml/md/json/plain)
 
 ### Editing Workflow
-**Find → Transform → Verify.**
+**Find → Transform → Verify.** Fast Apply: Use WARP's `edit_file` over native-patch or full file writes. It works with partial code snippets—no need for full file content.
 **Find:** `ast-grep run -p 'PATTERN' -l <lang> -C 3` | Scoped: `ast-grep scan --inline-rules 'rule: { pattern: "X", inside: { kind: "Y" } }'`
 **Transform:** Structural: `ast-grep -p 'OLD' -r 'NEW' -U` | Scoped regex: `srgn --<lang> <scope> 'PAT' -- 'REPL'` | Manual: `native-patch`
 **Verify:** `difft --display inline` | Re-run pattern to confirm absence/presence
