@@ -50,7 +50,7 @@ Focus on CLI workflows for search, transformation, scoped migrations, and lint-l
    - Use `--` before replacement values.
 4. `--glob` accepts exactly one pattern (cannot repeat).
    - Glob syntax: `*`, `?`, `[...]`, `**` only. No `{a,b}` brace expansion.
-   - For multiple files: broader glob + `--dry-run`, or per-file via `fd`:
+   - For multiple files: broader glob + `--dry-run`, or per-file via `fd` (CWD only—no [path] arg):
      `fd -e <ext> --strip-cwd-prefix -x srgn --glob '{}' --stdin-detection force-unreadable [OPTIONS] [PATTERN]`
 5. Use the narrowest scope that solves the task.
    - Prefer language scope + anchored regex over broad regex-only replacement.
@@ -137,7 +137,7 @@ For broader, categorized examples, load `references/cli-cookbook.md`.
    - Add `--fail-no-files` in CI to catch empty globs.
 4. `--glob` used multiple times.
    - `--glob` is a single-value argument; cannot repeat.
-   - Broader glob + `--dry-run`, or per-file: `fd -e <ext> --strip-cwd-prefix -x srgn --glob '{}' --stdin-detection force-unreadable [OPTIONS] [PATTERN]`
+   - Broader glob + `--dry-run`, or per-file (CWD only—no [path] arg): `fd -e <ext> --strip-cwd-prefix -x srgn --glob '{}' --stdin-detection force-unreadable [OPTIONS] [PATTERN]`
 5. Unclear behavior across multiple language scopes.
    - Default is intersection (left-to-right narrowing).
    - Use `-j` for OR behavior.
