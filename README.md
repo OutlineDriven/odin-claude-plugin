@@ -25,18 +25,7 @@ ODIN is a professional-grade Claude Code plugin that transforms Claude into a so
 ### Full Install Script (Recommended)
 
 ```shell
-# Clone the repository
-git clone https://github.com/OutlineDriven/odin-claude-plugin.git
-
-# Copy the contents of the repository to the .claude-plugin directory
-cp ./odin-claude-plugin/CLAUDE.md ~/.claude/CLAUDE.md
-cp ./odin-claude-plugin/settings.json ~/.claude/settings.json
-
-# Add the ODIN repository as a marketplace
-claude plugin marketplace add OutlineDriven/odin-claude-plugin
-
-# Install ODIN plugin
-claude plugin install odin@odin-marketplace
+wget -O ~/.claude/CLAUDE.md https://raw.githubusercontent.com/OutlineDriven/odin-claude-plugin/refs/heads/main/CLAUDE.md && claude plugin marketplace add OutlineDriven/odin-claude-plugin && claude plugin install odin@odin-marketplace
 ```
 
 ### Verify Installation
