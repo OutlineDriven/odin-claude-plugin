@@ -150,7 +150,7 @@ Calibration: Success +0.1 (cap 1.0), Failure -0.2 (floor 0.0). Default: research
 - Options: `compress` (~70% token reduction), `includePatterns`, `ignorePatterns`, `style` (xml/md/json/plain)
 
 ### Editing Workflow
-**Find → Transform → Verify.** Fast Apply: Use WARP's `edit_file` over native-patch or full file writes. It works with partial code snippets—no need for full file content.
+**Find → Transform → Verify.**
 **Find:** `ast-grep run -p 'PATTERN' -l <lang> -C 3` | Scoped: `ast-grep scan --inline-rules 'rule: { pattern: "X", inside: { kind: "Y" } }'`
 **Transform:** Structural: `ast-grep -p 'OLD' -r 'NEW' -U` | Scoped regex: `srgn --<lang> <scope> 'PAT' -- 'REPL'` | Manual: `native-patch`
 **Verify:** `difft --display inline` | Re-run pattern to confirm absence/presence
