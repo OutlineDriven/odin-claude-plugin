@@ -1,42 +1,35 @@
 ---
 name: proceed
-description: Execute implementation plans designed by the planning specialist
+description: Execute an implementation plan with surgical precision. Use after a planning phase (plan-now or similar) has produced a step-by-step strategy and identified critical files. Focuses on precise code changes with verification at each step.
 ---
 # Proceed Command
 
-You are an implementation specialist and surgical code agent for Codex Coding Agent. Your role is to execute the implementation plans designed by the planning specialist.
+Execute the provided implementation plan with surgical precision.
 
-CRITICAL: This is an EXECUTION task. Your role is to implement the changes with surgical precision.
-You will be provided with a set of requirements, an implementation plan, and a list of critical files.
+CRITICAL: This is an EXECUTION task. Implement changes exactly as specified in the plan.
 
-## Your Process
+## Process
 
-1. **Review the Plan**: Carefully analyze the provided implementation plan and the critical files identified. Ensure you understand the architectural decisions and the sequence of operations.
+1. **Review the Plan**: Analyze the provided implementation plan and critical files. Understand the architectural decisions and sequence of operations before writing any code.
 
 2. **Execute Surgically**:
-   - Implement the changes step-by-step as outlined in the plan.
-   - **MANDATORY**: Use `ast-grep` (preferred) or `Edit suite` for all code operations.
-   - Follow the **Find -> Copy -> Paste -> Verify** surgical editing workflow.
-   - Use `git-branchless` to maintain a clean, atomic commit graph. Use `git amend` or `git move --fixup` to collapse related changes.
+   - Implement changes step-by-step as outlined in the plan.
+   - Use `ast-grep` (preferred) or the Edit tool for code transformations.
+   - Follow the **Find -> Transform -> Verify** workflow.
+   - Complete each task in the plan sequentially. Batch independent operations where possible, but never batch dependent ones.
 
-3. **Verify and Refine**:
-   - After each file modification or major step:
-     - Run `build` or `lint` to verify syntax and type safety.
-     - Run relevant unit/integration tests to ensure functional correctness.
-     - Use `difft` to inspect semantic changes and ensure no unintended modifications.
-   - If validations fail, debug using `rg` and `ast-grep` and fix before proceeding.
+3. **Verify After Each Step**:
+   - After each file modification, use `difft` to inspect changes and ensure no unintended modifications.
+   - If the project has build/lint/test commands available, run them to catch regressions early.
+   - If verification fails, debug and fix before proceeding to the next step.
 
-4. **Iterative Progress**:
-   - Complete each task in the plan sequentially.
-   - Batch independent operations where possible to improve efficiency, but never batch dependent ones.
-
-5. **Finalize**:
-   - Perform a final comprehensive verification (Build -> Lint -> Test).
-   - Generate a concise, atomic commit message following Conventional Commits.
+4. **Finalize**:
+   - Run available build/lint/test commands for final verification.
+   - VCS operations (commits, branch management) only if the user explicitly requests them or the plan specifies them.
 
 ## Required Output
 
-End your response with a summary of the implementation:
+End your response with:
 
 ### Implementation Summary
 
@@ -45,8 +38,8 @@ End your response with a summary of the implementation:
 
 ### Verification Results
 
-- [ ] Build successful
-- [ ] Linter checks passed
-- [ ] Tests passed: [Brief summary]
+- Build: [pass/fail/not available]
+- Lint: [pass/fail/not available]
+- Tests: [pass/fail/not available]
 
-Remember: You execute the plan. Be precise, follow existing patterns, and ensure every change is verified.
+Remember: Execute the plan precisely. Follow existing patterns. Verify every change.
