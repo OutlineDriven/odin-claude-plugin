@@ -83,7 +83,7 @@ Calibration: Success +0.1 (cap 1.0), Failure -0.2 (floor 0.0). Default: research
 
 **Doc retrieval:** context7, ref-tool, github-grep, parallel, fetch. Follow internal links (depth 2-3). Priority: 1) Official docs 2) API refs 3) Books/papers 4) Tutorials 5) Community
 
-**Banned [HARD—REJECT]:** `ls`→`eza` | `find`→`fd` | `grep`→`git grep`/`rg`/`ast-grep` | `cat`→`bat -P -p -n --color=always` | `ps`→`procs` | `diff`→`difft` | `time`→`hyperfine` | `sed`→`srgn`/`ast-grep -U` | `rm`→`rip`
+**Banned [HARD—REJECT]:** `ls`→`eza` | `find`→`fd` | `grep`→`git grep`/`rg`/`ast-grep` | `cat`→`bat -P -p -n` | `ps`→`procs` | `diff`→`difft` | `time`→`hyperfine` | `sed`→`srgn`/`ast-grep -U` | `rm`→`rip`
 **Preferences:** Context args: `ast-grep -C`, `git grep -n -C`, `rg -C`, `bat -r`, `Read -offset/-limit`
 **Headless [MANDATORY]:** No TUIs (top/htop/vim/nano). No pagers (pipe to cat or `--no-pager`). Prefer `--json`/plain text. Stdin-waiting = CRITICAL FAILURE.
 **fd-First [MANDATORY]:** Before ast-grep/git grep/rg/multi-file edits: `fd -e <ext>` discover → `fd -E` exclude noise → validate count (<50) → execute scoped.
@@ -108,13 +108,13 @@ Calibration: Success +0.1 (cap 1.0), Failure -0.2 (floor 0.0). Default: research
 <code_tools>
 ### Core System & File Ops
 - **`eza`**: `eza --tree --level=2` | `eza -l --git` | `eza -l --sort=size`
-- **`bat`**: `bat -P -p -n --color=always` (default). Flags: `-l` (lang), `-A` (show-all), `-r` (range), `-d` (diff)
+- **`bat`**: `bat -P -p -n` (default). Flags: `-l` (lang), `-A` (show-all), `-r` (range), `-d` (diff)
 - **`zoxide`**: `z foo` | `zi foo` (fzf) | `zoxide query|add|remove`
 - **`rargs`**: `rargs -p '(.*)\.txt' mv {0} {1}.bak`
 
 ### Search & Discovery
 - **`fd`** [PRIMARY]: `fd -e py` | `fd -E venv` | `fd -g '*.test.ts'` | `fd -x cmd {}` | `fd -X cmd`
-- **`git grep`** [PRIMARY text search]: `git grep -n "pattern"` | `git grep -n --heading --break "pattern"` | `git grep -n -F 'literal'` | `git grep -n -C 3 'pattern'`
+- **`git grep`** [PRIMARY text search]: `git --no-pager grep -n "pattern"` | `git --no-pager grep -n --heading --break "pattern"` | `git --no-pager grep -n -F 'literal'` | `git --no-pager grep -n -C 3 'pattern'`
 - **`rg`** [FALLBACK text search]: `rg "pattern" -t rs` | `rg -F 'literal'` | `rg pattern -A 3 -B 2` | `rg pattern --json`
 
 ### Code Manipulation
@@ -155,6 +155,33 @@ Calibration: Success +0.1 (cap 1.0), Failure -0.2 (floor 0.0). Default: research
 **Transform:** Structural: `ast-grep -p 'OLD' -r 'NEW' -U` | Scoped regex: `srgn --<lang> <scope> 'PAT' -- 'REPL'` | Manual: `native-patch`
 **Verify:** `difft --display inline` | Re-run pattern to confirm absence/presence
 **Tidy-First:** Coupling = change propagation. Types: Structural (imports) | Temporal (co-changing) | Semantic (shared patterns). High coupling → Tidy first → Verify → Apply → Final verify.
+
+### Token-Efficient Output [MANDATORY]
+ANSI colors, decorations, and verbose defaults waste 15-25% of output tokens. Minimize output at the command layer.
+
+**Global rules:**
+- Prefer `--json` or `--plain` over decorated text when parsing output
+- Use `| head -n N` to cap unbounded output; default cap: 50 lines
+- Prefer `--files-with-matches`/`-l` before `--content` for discovery-then-read pattern
+- Use `--count`/`-c` when only totals needed
+- Use `--quiet`/`-q` for existence checks (exit code only)
+
+**Per-tool flags:**
+| Tool | Token-efficient flags |
+|------|----------------------|
+| `bat` | `-P -p -n` (no pager, plain, line numbers). Use `-r START:END` to limit range |
+| `rg` | `-l` (files only), `-c` (count), `--no-heading`, `--max-count N` |
+| `git grep` | `-l` (files only), `-c` (count), `--max-count N` |
+| `fd` | `--max-results N`, `-1` (first match only) |
+| `eza` | `-1` (one-per-line, names only). Avoid `-l` unless metadata needed |
+| `tokei` | `--output json \| jql` for specific metrics only |
+| `procs` | `--json \| jql` for specific fields only |
+| `ast-grep` | `-C 1` (minimal context) for scanning; `-C 3` only for understanding |
+
+**Pattern: Discovery → Targeted Read:**
+1. `rg -l 'pattern'` or `fd -e ext` → file list
+2. `bat -P -p -n -r START:END file` or `Read -offset -limit` → targeted content
+3. Never dump full files when a range suffices
 
 ### Verification
 **Three-Stage:** Pre (scope correct) → Mid (consistent, rollback ready) → Post (applied everywhere, tests pass)
