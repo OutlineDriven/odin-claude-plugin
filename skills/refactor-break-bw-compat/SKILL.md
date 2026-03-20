@@ -43,7 +43,7 @@ Before breaking anything, find and catalog:
 
 ## Execution Strategy
 
-1. **Map blast radius.** List every file, module, and external consumer that references the old API. Use `ast-grep`, `git grep`, or equivalent — not guesswork.
+1. **Map blast radius.** List every file, module, and external consumer that references the old API. Use `ast-grep`, `rg`, or equivalent — not guesswork.
 2. **Snapshot current behavior.** Ensure tests cover the old path. If coverage is missing, add characterization tests before removal.
 3. **Remove the old path.** Delete the compat layer, adapter, or legacy code. Do not comment it out.
 4. **Update all call sites.** Migrate every reference found in step 1 to the new API. Compile/typecheck after each batch.
@@ -66,7 +66,7 @@ Before breaking anything, find and catalog:
 |------|-----------|
 | Blast radius mapped | Every consumer of old API identified and listed |
 | Tests green pre-removal | Existing tests pass before any deletion begins |
-| Zero references post-removal | `ast-grep` / `git grep` for old API names returns zero hits |
+| Zero references post-removal | `ast-grep` / `rg` for old API names returns zero hits |
 | No dead imports/deps | No unused imports, packages, or type declarations remain |
 
 ## Exit Codes
