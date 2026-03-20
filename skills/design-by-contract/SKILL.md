@@ -1,6 +1,6 @@
 ---
 name: design-by-contract
-description: Design-by-Contract (DbC) development - design contracts from requirements, then execute CREATE -> VERIFY -> TEST cycle. Use when implementing with formal preconditions, postconditions, and invariants using deal (Python), contracts (Rust), Zod (TypeScript), or Kotlin contracts.
+description: Design-by-Contract (DbC) development - design contracts from requirements, then execute CREATE -> VERIFY -> TEST cycle. Use when implementing with formal preconditions, postconditions, and invariants across any language.
 ---
 
 # Design-by-Contract development
@@ -64,12 +64,18 @@ CRITICAL: Design contracts BEFORE implementation.
 
 ## Contract Library Selection
 
-| Language   | Library         | Annotation Style                            |
-| ---------- | --------------- | ------------------------------------------- |
-| Python     | deal            | `@deal.pre`, `@deal.post`, `@deal.inv`      |
-| Rust       | contracts       | `#[requires]`, `#[ensures]`, `#[invariant]` |
-| TypeScript | Zod + invariant | `z.object().refine()`, `invariant()`        |
-| Kotlin     | Native          | `require()`, `check()`, `contract {}`       |
+| Language   | Library/Approach                              | Style                                  |
+| ---------- | --------------------------------------------- | -------------------------------------- |
+| Python     | deal / icontract / beartype                   | `@deal.pre`, `@deal.post`              |
+| Rust       | assert! + debug_assert! + newtypes            | type-driven contracts                  |
+| TypeScript | Zod + invariant                               | `z.object().refine()`, `invariant()`   |
+| Kotlin     | Native                                        | `require()`, `check()`, `contract {}`  |
+| Java       | Guava Preconditions / Bean Validation         | `checkArgument()`, `@Valid`            |
+| C#         | FluentValidation / Guard clauses              | `Guard.Against.*()`                    |
+| Go         | Explicit checks + fmt.Errorf                  | convention-based                       |
+| C++        | GSL Expects/Ensures (C++26 contracts upcoming)| `Expects(x > 0)`                      |
+| Swift      | precondition() / guard                        | `precondition(x > 0)`                 |
+| Scala      | require() / ensuring()                        | `require(x > 0)`                      |
 
 ---
 
@@ -105,14 +111,21 @@ class Account:
 ### Step 2: VERIFY Contract Enforcement
 
 ```bash
-# Python
-deal lint src/
-
-# Rust (contracts checked at compile time in debug)
-cargo build
-
-# TypeScript
-npx tsc --noEmit
+# Language-conditional verification
+case "$LANG" in
+  python)     VERIFY_CMD="deal lint src/" ;;
+  rust)       VERIFY_CMD="cargo build" ;;
+  typescript) VERIFY_CMD="npx tsc --noEmit" ;;
+  kotlin)     VERIFY_CMD="./gradlew compileKotlin" ;;
+  java)       VERIFY_CMD="./gradlew compileJava" ;;
+  csharp)     VERIFY_CMD="dotnet build" ;;
+  go)         VERIFY_CMD="go vet ./..." ;;
+  cpp)        VERIFY_CMD="cmake --build ." ;;
+  swift)      VERIFY_CMD="swift build" ;;
+  scala)      VERIFY_CMD="sbt compile" ;;
+  *)          echo "Error: unsupported or unset LANG='$LANG'" >&2; exit 1 ;;
+esac
+$VERIFY_CMD
 ```
 
 ### Step 3: TEST Contract Violations
