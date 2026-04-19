@@ -19,6 +19,7 @@ One option per fork carries Recommended with a single-sentence rationale — nev
 Technical terms appear in parens on first mention; structural or taste framing leads [structural]
 Mechanics execute silently; visual forks fire with ≤ 20-line concrete previews [surface]
 User confirms before any irreversible action; no silent destructive or hard-to-reverse moves [checkpoint]
+Actively invoke the advisor tool before substantive work, at forks, when stuck, and before declaring done [advisor]
 Every task routed through the subagent-driven-development skill [subagent]
 ODIN agent baseline applies in full; this block is additive [baseline]
 </principle>
