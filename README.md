@@ -147,6 +147,65 @@ Before any non-trivial implementation:
 
 - `terraform-specialist` - IaC best practices, modules, state management
 
+## Skills (23 total)
+
+Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
+
+### Planning & Exploration (4 skills)
+
+- `askme` - Verbalized Sampling protocol for deep intent exploration before planning
+- `plan` - Thorough read-only planning before any action
+- `contexts` - Coordinate context sweep before coding
+- `init` - Analyze a codebase and create or improve AGENTS.md
+
+### Working Posture (1 skill)
+
+- `duet` - Two-party posture: user as director, agent as executor. Surfaces every fork via AskUserQuestion with structural framing and a recommended default. Eliminates the review-bottleneck and prevents codebase-understanding debt. Pair with the `Duet` output style.
+
+### Engineering Methodologies (5 skills)
+
+- `test-driven` - TDD with 10-language support
+- `type-driven` - Type-driven development (Idris 2, with 10-language support)
+- `proof-driven` - Proof-driven development (Lean 4, with property-based testing fallback and 10-language support)
+- `design-by-contract` - DbC with 10-language support and verification dispatch
+- `validation-first` - Validation-first (Quint spec) with 10-language support
+
+### Tooling (2 skills)
+
+- `ast-grep` - Structural code search, analysis, and refactoring
+- `srgn-cli` - Grammar-aware scoped regex transforms
+
+### Execution (3 skills)
+
+- `proceed` - Execute an implementation plan with surgical precision
+- `parallel-launch` - Decompose a task into independent concerns and execute via agents
+- `tests-adversarial` - Adversarial tests that stress failure paths
+
+### Review & Resolution (2 skills)
+
+- `review` - Review code changes on the current branch
+- `resolve` - Resolve code review comments with validity checks
+
+### Refactoring (1 skill)
+
+- `refactor-break-bw-compat` - Refactor by removing backward-compatibility and legacy layers
+
+### GitHub Integration (5 skills)
+
+- `pr-review` - Review code on a GitHub PR using `gh`
+- `pr-merge-base` - Merge PRs into the base branch with queue-like sequencing
+- `pr-merge-temporal` - Merge multiple PRs into a temporal integration branch first
+- `gh-address-comments` - Help address review/issue comments on the current PR
+- `gh-fix-ci` - Inspect failing CI checks, pull logs, propose fixes
+
+## Output Styles (3 total)
+
+Output styles shape *how* the agent communicates. Switch via Claude Code's `/config` or by setting `outputStyle` in `settings.json`.
+
+- `ODIN` - Default. Professional objectivity, scope discipline, systematic skepticism, no reflexive validation.
+- `Builder` - For non-technical builders (PMs, founders, designers, no-code users). Outcome-first, plain-language, progressive disclosure.
+- `Duet` - Companion to the `duet` skill. Decisions before prose, structural/taste framing first, jargon on demand, silent mechanics / loud forks. Enforces `duet` skill invocation.
+
 ## Configuration
 
 ### Settings.json
@@ -213,13 +272,16 @@ Confidence = (familiarity + (1-complexity) + (1-risk) + (1-scope)) / 4
 
 ### Tool Selection Mandate
 
-**Priority**:
+**Discovery → Text search → Structural search → Transform**:
 
-1. **ast-grep** - Code structure, refactoring (HIGHLY PREFERRED)
-2. **native-patch** - File edits, multi-file changes
-3. **ripgrep** - Text, comments, strings
-4. **fd** - File discovery (NEVER use find)
-5. **eza** - Directory listing (NEVER use ls)
+1. **fd** - File discovery (NEVER use `find`)
+2. **git grep** - Primary text search within the repo (respects .gitignore, fast)
+3. **rg (ripgrep)** - Text-search fallback when outside git or for richer flags
+4. **ast-grep** - Structural/AST search and rewrite (metavariable patterns)
+5. **srgn** - Grammar-aware scoped regex transforms (AST-scoped, multi-language)
+6. **native-patch / Edit** - Final precise edits when Find → Transform → Verify converges
+7. **eza** - Directory listing (NEVER use `ls`)
+8. **bat -P -p -n** - File display (NEVER use `cat`)
 
 ### Tool Permission Issues
 

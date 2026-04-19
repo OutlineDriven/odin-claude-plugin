@@ -5,6 +5,71 @@ All notable changes to the ODIN Claude Plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0] - 2026-04-19
+
+### Added
+
+**New skills**
+
+- `duet` — two-party working posture where the user is director and the agent is executor. Surfaces every fork, tradeoff, and taste choice via batched `AskUserQuestion` with structural framing, a recommended default, and concrete previews when comparison is visual. Eliminates the review-bottleneck (review distributed across picks, not piled at the end) and prevents codebase-understanding debt (user remembers the architecture because they picked it). Three-phase loop: adaptive intent elicitation → execution with fork-surfacing → irreversible checkpoints.
+
+**New output styles**
+
+- `Duet` — presentation half of the duet posture. Decisions before prose, structural/taste framing first with jargon on demand, concrete previews when comparison is visual, silent mechanics / loud forks, no validation language or recap. Enforces `duet` skill invocation whenever active.
+
+**Skill multi-language expansion (10-language support)**
+
+- `test-driven` — conditionalized test commands across 10 languages (previously single-language lock-in).
+- `proof-driven` — replaced Lean 4 default with property-based testing; 10-language support.
+- `design-by-contract` — expanded to 10 languages; added verification dispatch; integrated LLM context.
+- `type-driven` — removed tool lock-in; 10-language support.
+- `validation-first` — removed tool lock-in; 10-language support.
+
+**Skill enhancements**
+
+- `parallel-launch` — refined strategy; added explicit review step between worker phases.
+- `refactor-break-bw-compat` — enhanced guide with strategy section.
+
+### Changed
+
+**CLAUDE.md methodology**
+
+- Clarified scope targeting; added post-agent verification step (read back modified files, confirm line-count expectations).
+- Refined Verbalized Sampling section — dynamic hypothesis sampling (baseline N≥5, trivial N≥3, high-ambiguity N≥7, architectural N≥10, no hard cap).
+- Simplified editing workflow (removed `edit_file` partial-snippet specifics in favor of the general Find → Transform → Verify discipline).
+- Updated banned tools list; enhanced token-efficiency guidelines (per-tool flags, discovery-then-targeted-read pattern).
+- Revised orchestration and delegation sections — task splitting, parallel vs sequence criteria, delegation mandatory thresholds.
+- Revised role/tidy-first/VS sections for clarity.
+
+**Tooling**
+
+- Adopted repository-aware search defaults: `git grep` as primary text-search, `rg` as fallback, `ast-grep` for structural queries, `srgn` for grammar-aware scoped regex.
+- Revised `srgn` and `nomino` command documentation (usage, options, glob syntax).
+
+**Output styles**
+
+- `builder` — enhanced communication guidelines for non-technical builders (outcome-first, plain-language, progressive-disclosure).
+
+**Infrastructure**
+
+- Installation script simplified (single-line install).
+- `mcp.json` streamlined — cleaner server configuration keys.
+
+### Fixed
+
+- `refactor-break-bw-compat` — replaced stale `git grep` invocations with `rg` where appropriate.
+
+### Removed
+
+**Skills**
+
+- `hodd-rust`, `outline-strong`, `plan-now` — deprecated; replaced by the broader `plan` / `proceed` / language-agnostic skill set.
+- `code-simplifier` — merged behavior into `refactoring` agent.
+
+**Hooks**
+
+- `UserPromptSubmit` hook removed (replaced by explicit skill invocation patterns).
+
 ## [1.4.0] - 2026-02-25
 
 ### Changed
