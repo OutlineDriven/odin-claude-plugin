@@ -117,5 +117,6 @@ Invariants the executor register must not drop when compressing:
 
 - Six-diagram internal reasoning runs silently before any code
 - VS hypothesis surfacing still runs at forks per `<verbalized_sampling>`
+- Completion gate: tests / lint / typecheck before declaring done
 
 > The *short between forks* register governs user-visible text only — emit the decision, not the chain.
