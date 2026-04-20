@@ -25,6 +25,21 @@ This is the load-bearing principle. Everything below is mechanics.
 
 The agent's value-add is **compression**: turning a technical surface the user doesn't want to carry into a decision the user *does* want to carry.
 
+## VS-gated question protocol [MANDATORY]
+
+Run `odin:askme`'s VS + actor-critic protocol before every `AskUserQuestion` fire (Phase 1, Phase 2, Phase 3). Duet-specific deltas only — askme owns the canonical spec:
+
+- **Format (compressed visible):** Render numbered survivors only; no weakness/contradiction/oversight block:
+  ```
+  VS (N→M):
+  1. [Most likely] <hypothesis>
+  2. [Alt] <hypothesis>
+  ```
+- **Phase 2 short-circuit:** Exactly 1 survivor → skip the `AskUserQuestion`, execute silently.
+- **Phase 1 & Phase 3 exception:** Always fire `AskUserQuestion` regardless of survivor count — no short-circuit. Phase 1 needs scope/intent confirmation; Phase 3 needs explicit user consent.
+- **Cap:** >4 survivors → keep top-ranked (Recommended) + 3 most structurally distinct.
+- **Position:** VS block immediately precedes the `AskUserQuestion` call.
+
 ## When it applies
 
 Active from invocation or a trigger phrase until the user disengages ("go ahead on your own now", "full autonomy", "/duet off").
@@ -39,6 +54,8 @@ Does **not** apply to:
 ## The three-phase loop
 
 ### Phase 1 — Intent elicitation (adaptive)
+
+Before firing the elicitation batch, run the VS-gated question protocol (above) at askme's baseline tier — escalate to high-risk or architectural per askme's tier rules if the prompt warrants.
 
 At task start, fire one `AskUserQuestion` batch with a single `multiSelect` question:
 
@@ -59,7 +76,7 @@ Use previews when the choice is visual — file-tree shapes, architecture sketch
 
 For every fork encountered during work:
 
-1. Identify 2–4 defensible paths.
+1. Run the VS-gated question protocol (above) to generate candidates. Survivors become the defensible paths (2–4, capped per the protocol). If exactly 1 survives, skip the fork.
 2. Frame each in **structural or taste terms first** — what it means for the outcome (shape, boundary, surface, density). Put the technical term in parens on first mention; drop it thereafter.
 3. Mark one option `(Recommended)` with a one-sentence rationale. Users can override; the recommendation is a default, not a verdict. If no defensible one-sentence rationale comes to mind, the choice isn't a real fork — execute the default silently and skip the question entirely.
 4. Attach a **concrete preview** if comparison is visual (ASCII layout, code diff ≤ 20 lines, directory tree, config snippet).
@@ -78,6 +95,8 @@ Before any of these: **ask.**
 - Multi-file rewrites (> 5 files) or any refactor that would produce a review-bottleneck diff
 
 The checkpoint question is not a fork — it's a confirmation. Still uses `AskUserQuestion` so the user can say "hold, let me look first."
+
+Checkpoint confirmations also run the VS-gated protocol at askme's high-risk tier. A binary yes/hold question may still surface "hold and verify X first" as a candidate — that is exactly what the higher tier is for.
 
 ## Fork taxonomy
 

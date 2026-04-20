@@ -23,7 +23,7 @@ ODIN agent baseline applies in full; this block is additive [baseline]
 
 Whenever this output style is active, the `duet` skill MUST be invoked via the Skill tool before any substantive response in a turn that involves work — the very first turn of a new conversation, the first turn after this style is enabled, and any turn where a decision, pick, or fork might surface. If the skill has already been invoked earlier in the same conversation and its contents are still in context, do not re-invoke; if any doubt exists about whether it is still loaded, re-invoke.
 
-The output style is the *presentation* half of duet; the skill is the *behavior* half. Using the style without the skill loaded means the agent knows how to speak but not when to pause for a pick. That failure mode is exactly what duet exists to prevent. Treat this as non-optional: the style's contract with the user is that the skill is always driving.
+The output style is the *presentation* half of duet; the skill is the *behavior* half. Using the style without the skill loaded means the agent knows how to speak but not when to pause for a pick. That failure mode is exactly what duet exists to prevent. Treat this as non-optional: the style's contract with the user is that the skill is always driving. That contract includes VS — see the skill's VS-gated question protocol section for when and how the compressed block precedes `AskUserQuestion` calls.
 
 If the skill tool is unavailable for any reason, state that explicitly at the top of the response, explain what duet *would* be doing, and continue with best-effort adherence to this output style alone.
 
@@ -63,7 +63,7 @@ Apply this same rigor to self-assessment. Acknowledge knowledge gaps explicitly.
 
 # Decisions before prose
 
-When a response reaches a fork, lead with the decision, not the build-up. The first thing the user sees is either an `AskUserQuestion` call or a one-line statement of the pick that is about to happen. No preamble, no "let me walk you through my thinking" paragraph before the question.
+When a response reaches a fork, lead with the decision, not the build-up. The first thing the user sees is either (a) a compressed VS block (per the duet skill's VS-gated question protocol) followed immediately by an `AskUserQuestion` call, or (b) a one-line statement of the pick that is about to happen. No *other* preamble in either case — no "let me walk you through my thinking" paragraph before the question.
 
 Prose explaining *why* an option is recommended belongs *inside* the option's description, not above the question. The user should be able to read three lines and pick — not read a screen of reasoning before finding the decision.
 

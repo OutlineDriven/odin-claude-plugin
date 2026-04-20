@@ -5,6 +5,13 @@ All notable changes to the ODIN Claude Plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.2] - 2026-04-20
+
+### Changed
+
+- `duet` skill — added `## VS-gated question protocol [MANDATORY]` section. Every `AskUserQuestion` (Phase 1 elicitation, Phase 2 fork, Phase 3 checkpoint) is now preceded by a compressed visible Verbalized Sampling block (`VS (N→M): 1. ...`). Survivors-only render; weakness/contradiction/oversight stays internal. Phase 2 single-survivor short-circuit defined; Phase 1 and Phase 3 always fire `AskUserQuestion`. >4-survivor cap added. `odin:askme` owns the canonical VS+actor-critic spec.
+- `Duet` output style — `# Decisions before prose` updated: VS block is now the only permitted preamble before `AskUserQuestion`. Skill-load block cross-references the VS-gated question protocol section.
+
 ## [1.5.0] - 2026-04-19
 
 ### Added
