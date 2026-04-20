@@ -40,12 +40,16 @@ Does **not** apply to:
 
 ### Phase 1 — Intent elicitation (adaptive)
 
-At task start, fire one `AskUserQuestion` batch that builds a shared mental model:
+At task start, fire one `AskUserQuestion` batch with a single `multiSelect` question:
 
-- **Scope** — what's in, what's out.
-- **Goal** — the outcome that would make this succeed.
-- **Constraint** — the thing that must not break.
-- **Existing-pattern preference** — follow the repo's conventions, break from them, or start fresh.
+- **Question:** "Which of these defaults should I override before starting?"
+- **Options** (agent commits to concrete values before firing):
+  - **Scope:** [concrete default, e.g. "touch only the files named in the prompt"]
+  - **Goal:** [concrete default, e.g. "minimal diff that satisfies the request"]
+  - **Constraint:** [concrete default, e.g. "no new dependencies"]
+  - **Pattern:** [concrete default, e.g. "follow nearest existing convention"]
+
+Unticked options mean "agent's default stands." For each ticked axis, immediately follow with a targeted question scoped to that axis so the user can supply the replacement value. `Other` remains the free-text escape for anything outside the list.
 
 Keep it to one batch. Deepen with a second batch *only if* the answers reveal real ambiguity or surface a new axis. If the task is already clearly scoped in the user's prompt, skip straight to Phase 2.
 
@@ -57,9 +61,10 @@ For every fork encountered during work:
 
 1. Identify 2–4 defensible paths.
 2. Frame each in **structural or taste terms first** — what it means for the outcome (shape, boundary, surface, density). Put the technical term in parens on first mention; drop it thereafter.
-3. Mark one option `(Recommended)` with a one-sentence rationale. Users can override; the recommendation is a default, not a verdict.
+3. Mark one option `(Recommended)` with a one-sentence rationale. Users can override; the recommendation is a default, not a verdict. If no defensible one-sentence rationale comes to mind, the choice isn't a real fork — execute the default silently and skip the question entirely.
 4. Attach a **concrete preview** if comparison is visual (ASCII layout, code diff ≤ 20 lines, directory tree, config snippet).
 5. Batch related decisions into one `AskUserQuestion` fire, so the user can see them together.
+6. Option lists must cover the defensible space. If you expect `Other` to be a realistic pick for more than ~10% of users on this prompt, the list is incomplete — add the missing option before firing.
 
 Between forks, execute quietly. The user does not need narration of mechanics.
 
@@ -113,9 +118,8 @@ One option carries `(Recommended)` in its label with a < 1-sentence why.
 
 ## Batching rules
 
-- Group related decisions into one `AskUserQuestion` fire so the user sees the full shape at once.
-- Use `multiSelect: true` on a question when its options are genuinely independent (e.g. which feature-flags to enable).
-- Keep a question **single-select** when it carries `preview` on its options — previews render side-by-side only when one option can be chosen at a time.
+- When multiple forks are **orthogonal** (one pick does not constrain another), default to a **single `multiSelect` question** grouping all of them. This lets the user tick multiple answers in one pass.
+- Reserve single-select for forks that are genuinely mutually exclusive OR when a `preview` is attached (tool constraint: previews require `multiSelect: false` — previews render side-by-side only when one option can be chosen at a time).
 - **Never batch across a dependency**: if Q2's viable options depend on Q1's answer, split them into separate fires.
 - If you detect mid-batch that Q2's answer invalidates Q1, re-ask only the affected decision — don't re-ask the whole batch.
 
