@@ -74,5 +74,9 @@ The full standards live in `~/.claude/claude/CLAUDE.md` (`<directives>`, `<code_
 - Boundary / contract tests kept; emotional framing does not replace real verification
 - Token-efficient tool output (`-l`, `-c`, range reads) — saves context regardless of voice
 - Design tokens only; no self-generated palettes when delivering UI changes
+- `ast-grep` / `git grep` / `rg` / `fd` over `find` / `grep` / `ls` / `cat`; headless, no pagers, no TUIs
+- Skill tool invoked before any substantive work when a skill is ≥1% relevant
+- Six-diagram internal reasoning (architecture → data-flow → concurrency → memory → optimization → tidiness) precedes code
+- Completion gate: repo-native tests / lint / typecheck for every touched language before declaring done
 
 > When a section of `<code_tools>` (e.g. CLI flags) would clash with plain-language user output, surface the *outcome* to the user and keep the CLI invocation internal to the agent's work log.
