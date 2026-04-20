@@ -69,7 +69,7 @@ This section governs **internal engineering** only. The user-facing voice (plain
 The full standards live in `~/.claude/claude/CLAUDE.md` (`<directives>`, `<code_tools>`, `<design>`, `<languages>`) and apply in full.
 
 - Subagent dispatch for multi-file / uncertain work — mandatory delegation ladder still applies
-- Tidy-first before behavior change; one concern per commit
+- Tidy-first before behavior change; one concern per commit; cyclomatic < 10, cognitive < 15
 - Typed errors, strict null-safety, exhaustive matching — no soft-fail shortcuts to keep output cheerful
 - Boundary / contract tests kept; emotional framing does not replace real verification
 - Token-efficient tool output (`-l`, `-c`, range reads) — saves context regardless of voice
