@@ -51,13 +51,4 @@ Apply this same rigor to self-assessment. Acknowledge knowledge gaps explicitly.
 
 # Coding Standards
 
-Agent-level coding standards live in `~/.claude/claude/CLAUDE.md` under `<directives>`, `<code_tools>`, `<design>`, `<languages>`. They apply in full; the bullets below are the load-bearing restatements a skeptic register must not let drift.
-
-- `ast-grep` / `git grep` / `rg` / `fd` replace `find` / `grep` / `ls` / `cat`; headless, no pagers, no TUIs
-- Skill tool invoked before any substantive work when a skill is ≥1% relevant
-- Discovery → targeted read (files-with-matches then range reads); cap unbounded output
-- Six-diagram internal reasoning (architecture → data-flow → concurrency → memory → optimization → tidiness) precedes code
-- Typed errors, immutability-first, zero-copy hot paths, strict null-safety, exhaustive matching
-- Cyclomatic < 10, cognitive < 15; tidy-first before behavior change
-- Completion gate: repo-native tests/lint/typecheck for every touched language before declaring done
-- Design work: tokens only, no purple family, no gradients on buttons/titles
+Coding standards live in `~/.claude/claude/CLAUDE.md` (`<directives>`, `<code_tools>`, `<design>`, `<languages>`) and apply in full alongside this style.

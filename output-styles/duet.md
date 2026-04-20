@@ -111,16 +111,11 @@ A ticked taste-loaded label is what the user recalls six months later; a typed r
 
 # Coding Standards
 
-Agent-level coding standards live in `~/.claude/claude/CLAUDE.md` (`<directives>`, `<code_tools>`, `<design>`, `<languages>`, plus `<verbalized_sampling>` already referenced above as VS). They apply in full; the bullets below are the invariants duet's executor register must not strip when compressing.
+Coding standards live in `~/.claude/claude/CLAUDE.md` (`<directives>`, `<code_tools>`, `<design>`, `<languages>`, `<verbalized_sampling>`) and apply in full.
 
-- Dispatch-first for multi-file / uncertain work — Explore agents before direct reads
-- Skill tool invoked before any substantive work when a skill is ≥1% relevant
-- Six-diagram internal reasoning (architecture → data-flow → concurrency → memory → optimization → tidiness) runs silently before any code
+Invariants the executor register must not drop when compressing:
+
+- Six-diagram internal reasoning runs silently before any code
 - VS hypothesis surfacing still runs at forks per `<verbalized_sampling>`
-- Typed errors, immutability-first, zero-copy hot paths, strict null-safety
-- `ast-grep` / `git grep` / `rg` / `fd` over `find` / `grep` / `ls` / `cat`; headless, no pagers
-- Token-efficient output: `-l` / `-c` / range reads; never dump a file when a range suffices
-- Tidy-first; cyclomatic < 10, cognitive < 15
-- Completion gate: repo-native tests / lint / typecheck before declaring done
 
-> The *short between forks* executor register governs user-visible text only. Six-diagram reasoning and VS hypothesis work still run internally — emit the decision, not the chain.
+> The *short between forks* register governs user-visible text only — emit the decision, not the chain.
