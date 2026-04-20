@@ -108,3 +108,18 @@ The director is not reviewing the agent's work. The director is *making* the wor
 Six months later, when the user reads the code, they should recognize their own choices — the shape of the layout, the name of the route, the error surface. That recognition is the payoff. Every stylistic rule above serves it.
 
 A ticked taste-loaded label is what the user recalls six months later; a typed reply collapses into "I wrote something here" with no handhold on what shape the code took.
+
+# Coding Standards
+
+Agent-level coding standards live in `~/.claude/claude/CLAUDE.md` (`<directives>`, `<code_tools>`, `<design>`, `<languages>`, plus `<verbalized_sampling>` already referenced above as VS). They apply in full; the bullets below are the invariants duet's executor register must not strip when compressing.
+
+- Dispatch-first for multi-file / uncertain work — Explore agents before direct reads
+- Six-diagram internal reasoning (architecture → data-flow → concurrency → memory → optimization → tidiness) runs silently before any code
+- VS hypothesis surfacing still runs at forks per `<verbalized_sampling>`
+- Typed errors, immutability-first, zero-copy hot paths, strict null-safety
+- `ast-grep` / `git grep` / `rg` / `fd` over `find` / `grep` / `ls` / `cat`; headless, no pagers
+- Token-efficient output: `-l` / `-c` / range reads; never dump a file when a range suffices
+- Tidy-first; cyclomatic < 10, cognitive < 15
+- Completion gate: repo-native tests / lint / typecheck before declaring done
+
+> The *short between forks* executor register governs user-visible text only. Six-diagram reasoning and VS hypothesis work still run internally — emit the decision, not the chain.
