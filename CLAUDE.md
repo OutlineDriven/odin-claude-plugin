@@ -19,9 +19,9 @@ Sample multiple intent hypotheses, rank them by likelihood, and challenge each w
 
 **Dispatch Principle:** Separate discovery from execution. Start with focused exploration, audit exploration quality, then execute against reviewed scope. If additional exploration is needed, repeat the same explore-then-review loop before implementation.
 
-**Review-Gated Sequencing [DEFAULT]:** Run one worker at a time and insert a dedicated reviewer between worker phases. Every worker output must be audited for scope drift, truncation, correctness, coverage, and contract alignment before the next worker proceeds.
+**Review-Gated Sequencing [DEFAULT for dependent tasks]:** Run one worker at a time and insert a dedicated reviewer between worker phases. Every worker output must be audited for scope drift, truncation, correctness, coverage, and contract alignment before the next worker proceeds.
 
-**Parallel [OPT-IN only]:** Only when (a) tasks are read-only AND provably independent (no shared files, no ordered dependencies), OR (b) user explicitly authorizes parallel execution. Document the independence argument in the spawn message. A Reviewer MUST still audit the merged parallel outputs before the next phase.
+**Parallel [DEFAULT when independent]:** Spawn agents in one call when tasks are provably independent (no shared files, no ordered dependencies). Document the independence argument in the spawn message. A Reviewer MUST still audit the merged parallel outputs before the next phase. When independence is unclear, fall back to sequential.
 
 **Trust Agent Output:** Subagent summaries are actionable — forward to next phase. Targeted re-reads allowed for: verification of high-risk changes, incomplete/contradictory summaries, or safety-critical paths. Do NOT wholesale re-analyze what agents already covered.
 **Post-Agent Verify:** After sub-agent file edits, read back modified files and confirm line count matches expectations. Truncation = critical failure requiring immediate rollback.
@@ -42,7 +42,7 @@ Mandatory: 2+ concerns | 2+ dirs | Research+impl | 3+ files | Confidence <0.7
 **FORBIDDEN:**
 - Reading/grepping/globbing files before dispatching Explore agents on multi-file/uncertain tasks
 - Reasoning >1 paragraph before spawning agents
-- Parallel spawning without explicit independence proof or user authorization
+- Parallel spawning when independence is unclear or unproven (when in doubt, sequential)
 - Skipping the Reviewer subagent between worker phases
 - Launching the next worker before the Reviewer audits the previous output
 - Wholesale re-reading files that subagents already summarized (targeted verification allowed)
@@ -150,7 +150,7 @@ Mandatory: 2+ concerns | 2+ dirs | Research+impl | 3+ files | Confidence <0.7
 - Options: `compress` (~70% token reduction), `includePatterns`, `ignorePatterns`, `style` (xml/md/json/plain)
 
 ### Editing Workflow
-**Find → Transform → Verify.** Fast Apply: Highly PRIORITIZE WARP's `edit_file` over native-patch or full file writes. It works with partial code snippets—no need for full file content.
+**Find → Transform → Verify.** Fast Apply: Highly PRIORITIZE `edit_file` over native-patch or full file writes. It works with partial code snippets—no need for full file content.
 **Find:** `ast-grep run -p 'PATTERN' -l <lang> -C 3` | Scoped: `ast-grep scan --inline-rules 'rule: { pattern: "X", inside: { kind: "Y" } }'`
 **Transform:** Structural: `ast-grep -p 'OLD' -r 'NEW' -U` | Scoped regex: `srgn --<lang> <scope> 'PAT' -- 'REPL'` | Manual: `native-patch`
 **Verify:** `difft --display inline` | Re-run pattern to confirm absence/presence
@@ -215,6 +215,7 @@ Modern, elegant UI/UX. Don't hold back.
 → **Spring Boot 3:** Virtual threads. RestClient, JdbcClient, RFC 9457. JPA+Specifications. Lambda DSL security, Argon2, OAuth2/JWT. Testcontainers.
 **Kotlin:** K2+JVM 21+. val, persistent collections; sealed/enum+when; data classes; @JvmInline; inline/reified. Errors: Result/Either (Arrow); never !!/unscoped lateinit. Concurrency: structured coroutines, SupervisorJob, Flow, StateFlow/SharedFlow. Build: Gradle KTS+Version Catalogs; KSP>KAPT. Test: JUnit 5+Kotest+MockK+Testcontainers. Lint: detekt+ktlint. Libs: kotlinx.{coroutines,serialization,datetime,collections-immutable}, Arrow, Koin/Hilt.
 **Go:** Context-first; goroutines/channels clear ownership; worker pools backpressure; errors %w typed/sentinel; interfaces=behavior. Concurrency: sync, atomic, errgroup. Test: testify+race detector. Lint: golangci-lint/gofmt+goimports. Tooling: go vet; go mod tidy.
+**OCaml 5.2+:** Interface-first (`.mli` required); type `t` abstract, smart constructors, `find_*` option / `get_*` value; never `Obj.magic`. Errors: `result` + `let*`/`let+` operators; exceptions for programming errors only; never bare `try _ with _`. Effects (OCaml 5) for control flow. Concurrency: Eio direct-style, capability-passing, `Switch.run` structured lifetimes. Build: dune 3.x + opam 2.2+; `.ocamlformat` + `dune fmt`. Test: Alcotest + QCheck. Diag: memtrace, odoc v3.
 
 **Standards (measured):** Accuracy >=95% | Algorithmic: baseline O(n log n), target O(1)/O(log n), never O(n^2) unjustified | Performance: p95 <3s | Security: OWASP+SANS CWE | Error handling: typed, graceful, recovery paths | Reliability: error rate <0.01, graceful degradation | Maintainability: cyclomatic <10, cognitive <15
 **Gates:** Functional/Code/Tidiness/Elegance/Maint/Algo/Security/Reliability >=90% | Design/UX >=95% | Perf in-budget | ErrorRecovery+SecurityCompliance 100%
