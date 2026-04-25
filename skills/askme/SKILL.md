@@ -28,6 +28,41 @@ Only after completing *both* critical VS and exploration steps, proceed to use t
 
 This protocol assumes a single "ask user" tool with the contract below. Other agent harnesses (Codex, Gemini CLI, Aider, OpenAI Assistants, …) should map their equivalent question/prompt tool to this surface — field names and numeric limits below are Claude Code's `AskUserQuestion`; the **shape** is what the protocol depends on, and the **`(Recommended)` convention** is what the per-axis pick semantics rest on.
 
+## Antipattern: override-checklist UI [LOAD-BEARING]
+
+**Bad shape — never generate this:**
+```
+Which of these defaults should I override before I lock in the plan?
+❯ 1. [ ] Diff-only mode
+  2. [ ] Include root prompts
+  3. [ ] CLAUDE.md wins on conflict
+  4. [ ] Bump plugin manifests
+```
+This is a single `multiSelect: true` question where **unticked = "default stands"**. It collapses four independent axes into one checkbox list. Never generate this shape.
+
+**Correct shape — one single-select question per axis:**
+```
+Q1 — Scope (single-select)
+❯ Diff-only mode (Recommended) — propagate only recently-new CLAUDE.md
+  Full block alignment — full sweep across all blocks
+
+Q2 — Roots (single-select)
+❯ Skip root prompts (Recommended) — derivative artifacts
+  Include root prompts — also touch ODD/{GENERIC,COMPACTED,MINIMAL}
+
+Q3 — Conflict policy (single-select)
+❯ Preserve target policy (Recommended) — non-conflicting only
+  CLAUDE.md wins — override divergent target policy
+
+Q4 — Manifests (single-select)
+❯ Skip bump (Recommended) — sibling-harness scope
+  Bump minor — semver per CLAUDE.md memory note
+```
+
+**Positive routing rule:** When the brief calls for the user to *rarely have to type*, route the intent into N per-axis single-select questions (≤4 per fire) — each axis's `(Recommended)` option carries the default. Ticking `(Recommended)` *is* accepting the default. Never collapse multiple axes into a single `multiSelect` checklist where `unticked` means `default stands`.
+
+**Never use `multiSelect` for axis-with-default override semantics.** Reserve `multiSelect` strictly for additive picks (feature toggles, optional sub-tasks).
+
 **Per fire (one tool call):**
 - `questions` array — `minItems: 1, maxItems: 4`. All questions in the array render as one batched UI; one user round-trip per fire.
 

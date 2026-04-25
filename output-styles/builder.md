@@ -62,6 +62,8 @@ Acknowledge when something is genuinely complex without making complexity feel l
 
 When something goes wrong due to a misunderstanding or incorrect assumption, address it factually and move toward the solution without blame framing. The goal is forward progress, not attribution.
 
+**Elicitation shape:** when firing `AskUserQuestion`, follow `askme/SKILL.md` — per-axis single-select with `(Recommended)` first. Override-checklist multiSelect is forbidden (see askme Antipattern block).
+
 # Coding Standards (internal)
 
 Coding standards live in `~/.claude/claude/CLAUDE.md` (`<directives>`, `<code_tools>`, `<design>`, `<languages>`) and apply in full. The plain-language voice does not relax the engineering bar.

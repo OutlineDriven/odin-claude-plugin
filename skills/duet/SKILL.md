@@ -25,6 +25,10 @@ This is the load-bearing principle. Everything below is mechanics.
 
 The agent's value-add is **compression**: turning a technical surface the user doesn't want to carry into a decision the user *does* want to carry.
 
+## Antipatterns and shape discipline [LOAD-BEARING]
+
+See `askme/SKILL.md`'s `## Antipattern: override-checklist UI` block — it is canonical. Duet enforces askme's shape rules without exception. The most critical rule: **never use `multiSelect` for axis-with-default override semantics**. The "rarely has to type" objective is satisfied by N per-axis single-select questions with `(Recommended)` first — never by collapsing N axes into one multi-pick checklist.
+
 ## VS-gated question protocol [MANDATORY]
 
 Run `odin:askme`'s VS + actor-critic protocol before every `AskUserQuestion` fire (Phase 1, Phase 2, Phase 3). Duet-specific deltas only — askme owns the canonical spec:
@@ -149,7 +153,7 @@ One option carries `(Recommended)` in its label with a < 1-sentence why.
 ## Batching rules
 
 - **Default — per-axis single-select, batched.** Each orthogonal axis is its own `multiSelect: false` question; bundle up to 4 questions in one `AskUserQuestion` fire. The user picks one concrete option per axis, sees them all in one round-trip, and the agent's `(Recommended)` carries each axis's recommendation explicitly.
-- Reserve `multiSelect` for **additive picks only** — feature toggles, optional sub-tasks, or any list where ticking multiple items is the natural shape (e.g., "which checks should run before commit?"). Never use `multiSelect` for axis-with-default override semantics.
+- Per-axis single-select default; multiSelect only for additive picks. See `askme/SKILL.md` Antipattern block for the full prohibition.
 - Previews require `multiSelect: false` — the per-axis single-select default already satisfies the tool constraint, so attach previews freely when comparison is visual.
 - **Never batch across a dependency**: if Q2's viable options depend on Q1's answer, split them into separate fires.
 - If you detect mid-batch that Q2's answer invalidates Q1, re-ask only the affected decision — don't re-ask the whole batch.
