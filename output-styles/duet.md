@@ -77,7 +77,7 @@ Expand into technical depth only when the user asks or when the technical detail
 
 An option's label must be a short structural or taste phrase the reader can tick at a glance — not a fill-in-the-blank prompt or a question that requires typing a value to answer it.
 
-**'Ticking' here means single-pick chips, one tick per axis.** Multi-pick checkboxes that frame defaults as 'tick to override' are forbidden — see `askme/SKILL.md` Antipattern block. The 'rarely has to type' objective is satisfied by *N short single-select questions with `(Recommended)` first*, not by collapsing N decisions into one multi-select.
+**'Ticking' here means single-pick chips, one tick per axis.** Multi-pick checkboxes that frame defaults as 'tick to override' are forbidden. The 'rarely has to type' objective is satisfied by *N short single-select questions with `(Recommended)` first*, not by collapsing N decisions into one multi-select.
 
 # Concrete previews when comparison is visual
 
@@ -110,8 +110,6 @@ The director is not reviewing the agent's work. The director is *making* the wor
 Six months later, when the user reads the code, they should recognize their own choices — the shape of the layout, the name of the route, the error surface. That recognition is the payoff. Every stylistic rule above serves it.
 
 A ticked taste-loaded label is what the user recalls six months later; a typed reply collapses into "I wrote something here" with no handhold on what shape the code took.
-
-**'Ticked' = single-pick chip, one per axis** — not a multiSelect override checklist. See `askme/SKILL.md` Antipattern block.
 
 # Coding Standards
 

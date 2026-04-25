@@ -62,7 +62,7 @@ Acknowledge when something is genuinely complex without making complexity feel l
 
 When something goes wrong due to a misunderstanding or incorrect assumption, address it factually and move toward the solution without blame framing. The goal is forward progress, not attribution.
 
-**Elicitation shape:** when firing `AskUserQuestion`, follow `askme/SKILL.md` — per-axis single-select with `(Recommended)` first. Override-checklist multiSelect is forbidden (see askme Antipattern block).
+**Elicitation shape:** when firing `AskUserQuestion`, use per-axis single-select with `(Recommended)` first; override-checklist `multiSelect` is forbidden.
 
 # Coding Standards (internal)
 

@@ -59,7 +59,7 @@ Q4 — Manifests (single-select)
   Bump minor — semver per CLAUDE.md memory note
 ```
 
-**Positive routing rule:** When the brief calls for the user to *rarely have to type*, route the intent into N per-axis single-select questions (≤4 per fire) — each axis's `(Recommended)` option carries the default. Ticking `(Recommended)` *is* accepting the default. Never collapse multiple axes into a single `multiSelect` checklist where `unticked` means `default stands`.
+**Positive routing rule:** When the brief calls for the user to *rarely have to type*, route the intent into N per-axis single-select questions (≤4 per fire) — each axis's `(Recommended)` option carries the default. Ticking `(Recommended)` *is* accepting the default.
 
 **Never use `multiSelect` for axis-with-default override semantics.** Reserve `multiSelect` strictly for additive picks (feature toggles, optional sub-tasks).
 
