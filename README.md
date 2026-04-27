@@ -147,7 +147,7 @@ Before any non-trivial implementation:
 
 - `terraform-specialist` - IaC best practices, modules, state management
 
-## Skills (23 total)
+## Skills (25 total)
 
 Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
 
@@ -162,13 +162,14 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 
 - `duet` - Two-party posture: user as director, agent as executor. Surfaces every fork via AskUserQuestion with structural framing and a recommended default. Eliminates the review-bottleneck and prevents codebase-understanding debt. Pair with the `Duet` output style.
 
-### Engineering Methodologies (5 skills)
+### Engineering Methodologies (6 skills)
 
 - `test-driven` - TDD with 10-language support
 - `type-driven` - Type-driven development (Idris 2, with 10-language support)
 - `proof-driven` - Proof-driven development (Lean 4, with property-based testing fallback and 10-language support)
 - `design-by-contract` - DbC with 10-language support and verification dispatch
 - `validation-first` - Validation-first (Quint spec) with 10-language support
+- `purge-unneeded-tests` - Delete tests that don't catch real bugs (the inverse of TDD); load-bearing principles, static-vs-dynamic carve-out, language-specific examples
 
 ### Tooling (2 skills)
 
@@ -186,9 +187,10 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `review` - Review code changes on the current branch
 - `resolve` - Resolve code review comments with validity checks
 
-### Refactoring (1 skill)
+### Cleanup & Refactoring (2 skills)
 
-- `refactor-break-bw-compat` - Refactor by removing backward-compatibility and legacy layers
+- `refactor-break-bw-compat` - Refactor by removing backward-compatibility and legacy layers (public API surface)
+- `cleanup-codebase` - Internal micro-hygiene: dead fields, redundant wrappers, stale config flags, identity passthrough — applied while touching nearby code, not as standalone PRs
 
 ### GitHub Integration (5 skills)
 
