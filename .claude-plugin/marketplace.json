@@ -1,6 +1,6 @@
 {
   "name": "odin-marketplace",
-  "version": "1.3.1",
+  "version": "1.7.0",
   "description": "Official marketplace for ODIN (Outline Driven INtelligence) Claude Code plugins - Advanced code agents and workflow automation",
   "owner": {
     "name": "cognitive-glitch",
@@ -14,7 +14,7 @@
     {
       "name": "odin",
       "source": "./",
-      "version": "1.6.1",
+      "version": "1.7.0",
       "description": "ODIN core plugin with 46 specialized agents, diagram-first engineering, and atomic commit workflows",
       "author": {
         "name": "cognitive-glitch"
@@ -32,7 +32,7 @@
     }
   ],
   "metadata": {
-    "lastUpdated": "2026-04-26",
+    "lastUpdated": "2026-04-27",
     "maintainer": "cognitive-glitch",
     "website": "https://github.com/OutlineDriven/odin-claude-plugin",
     "support": "https://github.com/OutlineDriven/odin-claude-plugin/issues"
