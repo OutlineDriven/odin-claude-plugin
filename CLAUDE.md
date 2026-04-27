@@ -68,12 +68,13 @@ Mandatory: 2+ concerns | 2+ dirs | Research+impl | 3+ files | Confidence <0.7
 **Move:** `-s` (+ descendants) | `-x` (exact) | `-b` (stack) | `--fixup` (combine) | `--insert`
 **Recovery:** `undo` | `undo -i` | `restack` | `hide/unhide` | `test run '<revset>' --exec '<cmd>'`
 
-**ENFORCE:** One concern per commit, tests pass before commit. No mixed concerns, no WIP. Never bundle unrelated changes. One concern touching N files = 1 commit, not N commits.
+**ENFORCE:** One concern per commit, tests pass before commit. No mixed concerns, no WIP. Never bundle unrelated changes. One concern touching N files = 1 commit, not N commits. Multi-mechanism change (e.g., schema + handler + lint sweep) → N commits via `git move --fixup` / `git split`. Lint-only sweeps are their own commit.
 **Format:** `<type>[(!)][scope]: <description>` — Types: feat|fix|docs|style|refactor|perf|test|chore|revert|build|ci
 </git>
 
 <directives>
 **Canonical Workflow:** discover → scope → search → transform → commit → manage. Preview → Validate → Apply.
+**Style-only edit fence [MANDATORY]:** When the request is style, wording, tone, or formatting, treat every existing header, named field, list item, and structural section as load-bearing and preserve verbatim. Modify ONLY the prose inside existing structures. Do not drop, rename, merge, or reorder fields — even if they look redundant, decorative, or unused. If removing a structural element seems necessary to satisfy the style request, STOP and ask first; never infer deletion from a style instruction.
 **Strategic Reading:** 15-25% deep / 75-85% structural peek.
 
 **Thinking tools:** sequential-thinking [ALWAYS USE] decomposition/dependencies | actor-critic-thinking alternatives | shannon-thinking uncertainty/risk
@@ -189,7 +190,7 @@ ANSI colors, decorations, and verbose defaults waste 15-25% of output tokens. Mi
 **Recovery:** Checkpoint → Analyze → Rollback → Retry. Tactics: dry-run, checkpoint, subset test, incremental verify
 **Post-Transform:** `ast-grep -U` → `difft` → Chunk warnings: MICRO(5), SMALL(15), MEDIUM(50)
 
-**Completion Gate [MANDATORY]:** Before declaring task complete, run repo-native verification for touched file types (e.g. `pytest`+`pyright` for Python, `cargo test`+`clippy` for Rust). When tooling absent, fallback to syntax/structure validation. Fix all failures before presenting work.
+**Completion Gate [MANDATORY]:** Before declaring task complete, run repo-native verification and syntax/structure validation for every touched language: type-checker (warnings-as-errors where supported), linter, and test suite (with race/concurrency detection where supported). Prefer the project's own scripts (Justfile / Makefile / package scripts / dune) when present; otherwise use the language's standard verifier.
 </code_tools>
 
 <design>
