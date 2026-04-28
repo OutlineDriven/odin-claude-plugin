@@ -12,6 +12,19 @@ The page above is not unaesthetic. It is, more precisely, *unmediated* — the t
 
 The reverse failure exists too: a surface so afraid of decoration that it ships a sterile grid of grey type and calls it minimalism. That is not restraint; it is abdication. Restraint without conviction reads as "I did not have a point of view". The posture this file argues for is *conviction with restraint* — one intentional moment, defended.
 
+## 1.5 Balance — conviction without maximalism
+
+The skill's posture is "don't hold back" with conviction, not "don't hold back" with volume. These are different things, and the model's RLHF training conflates them.
+
+Two failure modes recur in AI-generated UI:
+
+- **Side A — timid AI-generic.** Default Tailwind palette, Inter alone, centered hero plus 3-col grid, system-ui as the type system. The model picks the path of least friction; the surface reads as preset.
+- **Side B — decorative overkill.** Sprites on every empty pixel, gradient backgrounds on every section, animation on every entrance, multi-paradigm mash. The model overcompensates for slop fear; the surface reads as panic.
+
+Both come from the same root: fear of commitment. Side A doesn't pick a direction; Side B picks all directions. The cure for both is the same — pick one direction, commit to it, and let restraint amplify the lift.
+
+Balance is the practice; conviction is the posture. The "ONE intentional moment per surface" rule from §4 is what conviction-with-balance looks like in practice — every other element earns its weight by NOT being the moment.
+
 ## 2. First principles
 
 Seven principles. Each is a positive claim with a concrete failure that violates it. Read the principle, then read the anti-example; the anti-example is the test that names the failure mode in the wild.

@@ -9,6 +9,8 @@ Direction first, tokens second, code last. Restraint is the default posture; ONE
 
 Direction precedes tokens; tokens precede code. The picked direction is the contract — palette, type, spacing, motion all derive from it, not the other way around. Restraint is the default; reach for decoration only when a named surface goal demands it. Posture rests on `references/soul.md` (design philosophy) — load when the user asks "why this look" or when the model is tempted to add decoration to compensate for a thin idea.
 
+**Balance, not maximalism.** ODIN's "don't hold back" (borrowed from the `<design>` block above) means conviction, not volume. The two failure modes catalogued in the anti-slop charter below are reciprocals — AI-generic timidity (Side A) and decorative overkill (Side B) both come from the same fear of commitment. Balance simplicity and verbosity per surface; restraint as the default, the one intentional moment as the lift, neither timid nor loud.
+
 ## ODIN `<design>` block — LOAD-BEARING
 
 Quoted verbatim from `output-styles/odin.md` lines 254–262.
