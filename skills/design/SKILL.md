@@ -25,6 +25,10 @@ Modern, elegant UI/UX. Don't hold back.
 </design>
 ```
 
+## Register × paradigm matrix — pointer
+
+Brand register opens neo-brutalism / glassmorphism / M3 Expressive with Committed / Full palette / Drenched color strategies; product register defaults to Restrained + post-minimalism / Fluent 2. Full matrix in `references/paradigms.md §0`.
+
 ## Anti-slop charter — LOAD-BEARING
 
 Two-sided ban-list. Each row: ban — WHY in one line. Depth in `references/anti-slop.md`.

@@ -4,6 +4,31 @@ Five paradigms cover the production-distinct surface space. Each is named, ancho
 
 Order matters below — post-minimalism is the ODIN default; the rest are alternatives chosen against a register, not picked from a buffet. Each subsection follows a fixed shape (when-to-use, failure mode, OKLCH palette starter, type pair, motion signature, density signature, taste anchors) so the paradigms can be scanned uniformly and compared without re-reading the prose.
 
+## §0 Register × paradigm matrix
+
+Two axes precede the paradigm pick: **register** (does design IS the product, or design SERVES the product?) and **color strategy** (commitment level on the saturation axis). Land both, then pick the paradigm.
+
+| Register | Surface examples | Color strategy default | Paradigm fit |
+|---|---|---|---|
+| **Brand** — design IS the product | Marketing / landing / campaign / portfolio / press kit | Committed / Full palette / Drenched | neo-brutalism / glassmorphism / M3 Expressive |
+| **Product** — design SERVES the product | App UI / admin / dashboard / settings / one-screen tool | Restrained (one accent ≤10%) | post-minimalism / Fluent 2 |
+
+Detection rule:
+
+- Cue in the task itself ("landing page" vs "dashboard").
+- Surface in focus (the page, file, or route being worked on).
+- Prior-direction artifact or `odin:contexts` project context if loaded.
+
+First match wins.
+
+Per-paradigm "Register fit":
+
+- **post-minimalism** — product (operator/tool default)
+- **neo-brutalism** — brand (indie/creator)
+- **glassmorphism** — brand (visual depth, native OS shells)
+- **M3 Expressive** — product or brand (ambipolar)
+- **Fluent 2** — product (Microsoft ecosystem default)
+
 Quick-pick matrix:
 
 | Paradigm | Surface fit | Audience register | Motion budget | Density |
