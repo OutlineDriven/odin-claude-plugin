@@ -27,27 +27,6 @@ logs/
 *.log
 *.log.*
 
-# Temporary and cache directories
-shell-snapshots/
-cache/
-tmp/
-temp/
-file-history/
-debug/
-.cache/
-session-env/
-plugins/
-.*_cache/
-
-# Statistics and metrics
-statsig/
-metrics/
-analytics/
-
-# Task management
-todos/
-tasks/
-
 # Project-specific data
 projects/
 workspaces/
