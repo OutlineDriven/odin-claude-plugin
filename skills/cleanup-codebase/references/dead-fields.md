@@ -83,5 +83,5 @@ Setter exists, no getter, no internal use. Often a leftover from a Jackson-deser
 
 - **Reflection / serialization** — fields read by `serde`, `Jackson`, `Gson`, `pydantic`, `attrs`, etc. via attributes/decorators may have no direct read site in code. Check derive/decorator/annotation lists before deleting.
 - **DI frameworks** — Spring, Dagger, Hilt may read fields via `@Autowired`/`@Inject`. Look for framework-level wiring.
-- **Tests** — a field read only by tests may indicate the field exists *for* the tests; `purge-unneeded-tests` handles that direction.
+- **Tests** — a field read only by tests may indicate the field exists *for* the tests; `tests-purge-unneeded` handles that direction.
 - **External consumers** — if the type crosses a process boundary (DTO, event payload), removing a field is a `refactor-break-bw-compat` concern, not a cleanup-codebase concern.

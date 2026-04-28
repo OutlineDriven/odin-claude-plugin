@@ -169,7 +169,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `proof-driven` - Proof-driven development (Lean 4, with property-based testing fallback and 10-language support)
 - `design-by-contract` - DbC with 10-language support and verification dispatch
 - `validation-first` - Validation-first (Quint spec) with 10-language support
-- `purge-unneeded-tests` - Delete tests that don't catch real bugs (the inverse of TDD); load-bearing principles, static-vs-dynamic carve-out, language-specific examples
+- `tests-purge-unneeded` - Delete tests that don't catch real bugs (the inverse of TDD); load-bearing principles, static-vs-dynamic carve-out, language-specific examples
 
 ### Tooling (2 skills)
 
