@@ -86,7 +86,7 @@ Not boundaries: internal modules in the same crate/package, helpers in the same 
 1. **Identify candidate** — while in the file for another reason, spot dead/redundant code.
 2. **Confirm dead** — `git --no-pager grep -n` (or `ast-grep`) to verify no consumers; check tests, docs, configs, error messages.
 3. **Check coupling effects** — does removal break the build? Force a refactor of the only consumer? That is a separate decision; record it.
-4. **Verify against `~/.claude/CLAUDE.md` `<git>` charter** — cleanup is its own atomic commit. If it is mixed in with behavior change, split via `git move --fixup` / `git split`.
+4. **Verify against `~/.claude/claude/system-prompt-baseline.md` `<git>` charter** — cleanup is its own atomic commit. If it is mixed in with behavior change, split via `git move --fixup` / `git split`.
 5. **Apply the deletion** — `git rip` the file or precise `Edit` for partial removal; never comment-out.
 6. **Verify** — build, tests, type-check still pass. If a test was the only consumer of the dead code, that test was probably testing the dead code; see `tests-purge-unneeded`.
 7. **Search for ghosts** — string references in docs, error messages, config keys, env vars, log lines that mention the removed concept.
@@ -98,7 +98,7 @@ Not boundaries: internal modules in the same crate/package, helpers in the same 
 1. **Never bundle cleanup with behavior change in one commit** — split via `git move --fixup` so each commit has exactly one concern. Cleanup commits ride alongside behavior commits in the same PR; that is fine and encouraged.
 2. **Never add an abstraction during cleanup** — cleanup removes; if a new abstraction is genuinely warranted, that is a *separate* commit with its own justification.
 3. **Never extend cleanup beyond files already touched by the active change** — opportunistic sweeps across the codebase are out of scope; they belong in scheduled refactor work that has its own plan.
-4. **If conflict with `~/.claude/CLAUDE.md`, CLAUDE.md wins** — this skill complies with the user's git charter and tidy-first principles; if drift is detected, CLAUDE.md is the source of truth.
+4. **If conflict with `~/.claude/claude/system-prompt-baseline.md`, system-prompt-baseline.md wins** — this skill complies with the user's git charter and tidy-first principles; if drift is detected, CLAUDE.md is the source of truth.
 
 ## Validation Gates
 
@@ -127,4 +127,4 @@ Not boundaries: internal modules in the same crate/package, helpers in the same 
 
 - `tests-purge-unneeded` — sibling deletion discipline for test code; the same thesis (delete what does not earn its keep), applied to the test suite
 - `refactor-break-bw-compat` — when the deletion crosses a public-API boundary; that skill handles migration plans, blast-radius mapping, and consumer coordination
-- `~/.claude/CLAUDE.md` `<git>` charter — atomic-commit and one-concern-per-commit rules this skill enforces
+- `~/.claude/claude/system-prompt-baseline.md` `<git>` charter — atomic-commit and one-concern-per-commit rules this skill enforces

@@ -55,9 +55,9 @@ Identity-passthrough tests (`assert echo(x) == x`, `expect(passthrough(value)).t
 
 ---
 
-## Static-guarantee carve-out (mirror of `~/.claude/CLAUDE.md` `<directives>`)
+## Static-guarantee carve-out (mirror of `~/.claude/claude/system-prompt-baseline.md` `<directives>`)
 
-The carve-out for mandate 3 is **language-dependent** and must mirror the user's CLAUDE.md testing charter exactly:
+The carve-out for mandate 3 is **language-dependent** and must mirror the user's system-prompt-baseline.md testing charter exactly:
 
 - **Static-guarantee languages — Rust / TypeScript-strict / Kotlin / Java / C++ / OCaml**: structural assertions are redundant. A test that asserts a struct has the fields the compiler proved it has catches no bug. Delete.
 - **Dynamic languages — Python / JavaScript / Ruby**: there is no compile-time guarantee that a function returns the shape the docstring claims. A boundary shape/type test IS a real-bug test — a refactor that silently changes the return shape would slip past type hints (which are advisory, not enforced at runtime). Keep.
@@ -96,7 +96,7 @@ The split is not aesthetic — it is about what guarantee the language provides.
 1. **Never delete a test as part of an unrelated change** — deletions are atomic commits with their own rationale, even if they ride in the same PR as the work that makes them safe.
 2. **Never delete a test whose failure mode you have not understood** — confusion is not a license; if you cannot articulate the bug, you cannot prove its absence.
 3. **Never reduce coverage of a security invariant** — auth, authz, input validation, secrets handling — these stay even when redundant.
-4. **If conflict with `~/.claude/CLAUDE.md`, CLAUDE.md wins** — this skill mirrors the user's testing charter; if drift is detected, CLAUDE.md is the source of truth.
+4. **If conflict with `~/.claude/claude/system-prompt-baseline.md`, system-prompt-baseline.md wins** — this skill mirrors the user's testing charter; if drift is detected, CLAUDE.md is the source of truth.
 
 ## Validation Gates
 
@@ -126,4 +126,4 @@ The split is not aesthetic — it is about what guarantee the language provides.
 - `cleanup-codebase` — sibling deletion discipline for non-test code (dead fields, redundant wrappers, stale config)
 - `tests-adversarial` — the complement: writing tests that *do* catch bugs, especially in failure paths and silent-failure regions
 - `test-driven` — the design-side discipline (RED → GREEN → REFACTOR); purge runs in the REFACTOR phase
-- `~/.claude/CLAUDE.md` `<directives>` testing charter — the source-of-truth principle this skill mirrors
+- `~/.claude/claude/system-prompt-baseline.md` `<directives>` testing charter — the source-of-truth principle this skill mirrors
