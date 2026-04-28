@@ -10,7 +10,7 @@ Algorithm:
 
 1. Prompt the model to generate N candidates *and* their probabilities ("rank these from most to least likely"). Use N = 4-6; below 4 the centroid swallows the set, above 6 the tail collapses into restatements.
 2. The model verbalizes its own distribution; this de-anchors from the centroid because the model now sees its own bias as text. The act of naming the bias is what breaks it.
-3. Drop the highest-ranked candidate (the centroid / slop direction). Retain the remaining K = N − 1 lower-probability candidates as the working set.
+3. **Sampling rule (load-bearing):** treat probability inversely. The highest-probability candidate IS the centroid / slop direction; drop it. Keep the remaining K = N − 1 lower-probability candidates as the working set. The lowest-probability survivor is often the most useful direction *because* it sits farthest from the RLHF-favored centroid. There is no contradiction with "rank descending": rank descending puts the slop at the top so it is easy to identify and discard; the *useful* set is what remains.
 4. Use the surviving K as parallel directions; if two converge, re-sample with sharpened constraints (e.g., add a forbidden-token list or pin a different persona per slot).
 5. Empirical: 1.6-2.1× diversity gain vs naive temperature-up on creative-writing benchmarks (arXiv 2510.01171). Inference-only for design-direction prompts: the failure mode (RLHF anchoring) is the same, but the gain has not been measured on design surfaces.
 
@@ -19,10 +19,10 @@ Concrete VS prompt template for design context:
 ```
 Generate 4 distinct visual directions for <surface>.
 For each, name 1-2 taste anchors and rate the probability you would have generated this direction WITHOUT this prompt (0.0 to 1.0).
-Rank by probability descending. The lowest-probability direction is often the most useful.
+Rank by probability descending. The highest-probability direction is the centroid — drop it. The lowest-probability survivor is often the most useful.
 ```
 
-The lowest-probability direction is often the most useful because the RLHF-favored (highest-probability) direction is the slop direction. Treat probability inversely: high probability == high suspicion, drop first. The verbalized probability is not calibrated, but the *ordering* is informative — that is what the technique exploits.
+The sampling rule above resolves a question reviewers raise: "rank descending" plus "lowest is most useful" sounds contradictory if read as "drop the bottom of the ranked list." It is not — drop the **top** (the centroid), keep everything below it, and within the survivors the bottom often holds the strongest direction. High probability == high suspicion. The verbalized probability is not calibrated, but the *ordering* is informative — that is what the technique exploits.
 
 Operating notes:
 

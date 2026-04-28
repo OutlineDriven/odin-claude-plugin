@@ -2,7 +2,7 @@
 
 Surface reference for HTML and vanilla CSS. Companion to `references/anti-slop.md` for slop tells specific to web (uniform `rounded-lg`, `transition: all`, default Tailwind ramp, etc.).
 
-**Snapshot date:** April 2026. Baseline statuses below were verified at that point; verify current status on web.dev/baseline and MDN before relying on a feature in production. Treat any forward-dated "Widely Available" entry as a projection, not a guarantee.
+> **Snapshot date: April 2026.** Every Baseline status below is a snapshot, not a guarantee. Re-verify on https://web.dev/baseline and https://developer.mozilla.org **before** relying on any feature in production code. Forward-dated "Widely Available" entries (e.g., "Widely Available Sep 2026") are projections — treat them as Newly Available until that date passes and you have confirmed status independently. Browser-conservative environments (enterprise IT, government, embedded) need an extra confirmation pass even on Widely Available features.
 
 ## 1. Posture
 
