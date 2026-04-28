@@ -1,6 +1,6 @@
 ---
 name: memory-sanitize
-description: Produce share-safe copies of memory files under /tmp, with PII redacted (absolute paths, emails, session IDs, old dates) and credentials scanned (API tokens, keys). Never mutates originals. Use this skill when the user says "sanitize memory for sharing", "redact memory PII", "scan memory for credentials", "share my memory", "export safe memory", or "make memory shareable".
+description: Produce share-safe copies of memory files under /tmp with PII redacted (paths, emails, session IDs, dates) and credentials scanned (tokens, keys); never mutates originals. Use when the user says "sanitize memory for sharing", "redact memory PII", or "share my memory".
 ---
 
 Redact PII and scan for credentials in memory files — write copies to `/tmp`, never touch originals.

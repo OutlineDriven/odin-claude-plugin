@@ -1,6 +1,6 @@
 ---
 name: memory-clean
-description: Audit the memory directory for structural issues (orphans, dangling refs, near-duplicates, missing required sections, oversized index entries) and cross-reference each memory against session-history transcripts to detect staleness (rules contradicted by later sessions, expired project contexts, dead references). Report-first, fix-on-confirmation. Use this skill when the user says "audit memory", "clean up memory", "find duplicate memories", "memory hygiene", "is my memory drifting", "merge similar memories", "memory is getting cluttered", "find stale memories", or "are any of my memories outdated".
+description: Audit memory directory for structural issues (orphans, dangling refs, duplicates, missing sections, oversized entries) and staleness against session-history transcripts; report-first, fix-on-confirmation. Use when the user says "audit memory", "memory hygiene", or "find stale/duplicate memories".
 ---
 
 Audit memory for structural rot and staleness, report with evidence, fix only on user confirmation.

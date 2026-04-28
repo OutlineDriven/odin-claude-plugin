@@ -1,6 +1,6 @@
 ---
 name: setup-gitignore
-description: Initialize or idempotently revise the current repo's .gitignore by composing gitignore.io API templates, bundled AI-tooling patterns, bundled IDE/editor patterns, and confirmed empirical noise from git status. Use this skill when the user says "init gitignore", "set up .gitignore", "generate gitignore", "fix gitignore", "what should I add to .gitignore", "this repo has no gitignore", or when unexpected untracked files keep appearing in git status.
+description: Initialize or idempotently revise the repo's .gitignore by composing gitignore.io templates, AI-tooling/IDE patterns, and confirmed noise from git status. Use when the user says "set up gitignore", "fix gitignore", or untracked files keep appearing in git status.
 ---
 
 Initialize or idempotently revise the current repo's `.gitignore` — never the global excludesfile.

@@ -1,6 +1,6 @@
 ---
 name: memory-update
-description: Scan the active agent's session-history transcripts to surface save-worthy signals (corrections, revealed preferences, project decisions, external references), then propose and write auto-memory files with valid frontmatter and a synchronized MEMORY.md index entry. Use this skill when the user says "save this to memory", "add a memory", "remember that", "update memory file", "scan this session for memories", "what should we remember from this session", or "promote this correction to memory".
+description: Scan agent's session-history transcripts for save-worthy signals (corrections, preferences, decisions, references), propose and write auto-memory files with valid frontmatter and MEMORY.md entry. Use when the user says "save this to memory", "remember that", or "scan this session for memories".
 ---
 
 Scan session history, surface save-worthy moments, propose → confirm → write. Never fabricate — every proposal must cite a transcript turn.

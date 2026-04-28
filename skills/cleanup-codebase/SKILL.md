@@ -1,6 +1,6 @@
 ---
 name: cleanup-codebase
-description: Reduce concepts, duplication, and ceremony in internal code while touching nearby code. Use when working an existing path and you spot dead fields, redundant wrappers, identity-passthrough functions, stale config flags, or speculative abstractions that don't protect a real boundary. Distinct from refactor-break-bw-compat — this is internal micro-hygiene, not public API removal.
+description: Reduce concepts, duplication, and ceremony in internal code while touching nearby code. Use when working an existing path and you spot dead fields, redundant wrappers, or speculative abstractions; distinct from refactor-break-bw-compat (internal hygiene, not public API removal).
 ---
 
 # Cleanup codebase — local simplicity, ruthlessly applied
