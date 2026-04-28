@@ -98,7 +98,7 @@ Not boundaries: internal modules in the same crate/package, helpers in the same 
 1. **Never bundle cleanup with behavior change in one commit** — split via `git move --fixup` so each commit has exactly one concern. Cleanup commits ride alongside behavior commits in the same PR; that is fine and encouraged.
 2. **Never add an abstraction during cleanup** — cleanup removes; if a new abstraction is genuinely warranted, that is a *separate* commit with its own justification.
 3. **Never extend cleanup beyond files already touched by the active change** — opportunistic sweeps across the codebase are out of scope; they belong in scheduled refactor work that has its own plan.
-4. **If conflict with `~/.claude/claude/system-prompt-baseline.md`, system-prompt-baseline.md wins** — this skill complies with the user's git charter and tidy-first principles; if drift is detected, CLAUDE.md is the source of truth.
+4. **If conflict with `~/.claude/claude/system-prompt-baseline.md`, system-prompt-baseline.md wins** — this skill complies with the user's git charter and tidy-first principles; if drift is detected, system-prompt-baseline.md is the source of truth.
 
 ## Validation Gates
 

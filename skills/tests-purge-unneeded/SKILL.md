@@ -96,7 +96,7 @@ The split is not aesthetic — it is about what guarantee the language provides.
 1. **Never delete a test as part of an unrelated change** — deletions are atomic commits with their own rationale, even if they ride in the same PR as the work that makes them safe.
 2. **Never delete a test whose failure mode you have not understood** — confusion is not a license; if you cannot articulate the bug, you cannot prove its absence.
 3. **Never reduce coverage of a security invariant** — auth, authz, input validation, secrets handling — these stay even when redundant.
-4. **If conflict with `~/.claude/claude/system-prompt-baseline.md`, system-prompt-baseline.md wins** — this skill mirrors the user's testing charter; if drift is detected, CLAUDE.md is the source of truth.
+4. **If conflict with `~/.claude/claude/system-prompt-baseline.md`, system-prompt-baseline.md wins** — this skill mirrors the user's testing charter; if drift is detected, system-prompt-baseline.md is the source of truth.
 
 ## Validation Gates
 
