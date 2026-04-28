@@ -57,6 +57,15 @@ Two-sided ban-list. Each row: ban — WHY in one line. Depth in `references/anti
 - Multi-paradigm mash (neo-brutalism shadow on a glass card on a Material 3 button) — paradigm conflict reads as confusion, not eclecticism.
 - Decorative noise compensating for a thin idea — when the surface earns its weight, restraint amplifies it.
 
+**Color strategy axis (commitment level).** Pick the strategy before picking colors. Each tier is deliberate, not a fallback.
+
+- **Restrained** — tinted neutrals plus one accent at ≤10% surface coverage. Product default.
+- **Committed** — one saturated color carries 30–60% of the surface. Brand default for identity-driven pages.
+- **Full palette** — 3-4 named roles, each used deliberately. Brand campaigns; product data viz.
+- **Drenched** — the surface IS the color. Brand heroes, campaign pages.
+
+The "one accent ≤10%" cap applies only to **Restrained**. Committed / Full palette / Drenched exceed it on purpose; treat the cap as direction-conditional, not universal.
+
 ## Direction-first workflow
 
 Six steps. Do not skip the divergence step.
