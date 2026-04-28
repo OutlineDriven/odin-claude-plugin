@@ -1,6 +1,6 @@
 ---
 name: cpp-pro-ultimate
-description: Grandmaster-level Modern C++ with template metaprogramming, coroutines, lock-free algorithms, and extreme optimizations. Expert in C++17/20 features, compile-time programming, SIMD, memory models, and zero-overhead abstractions. Strategic use of boost and abseil for advanced functionality. Use for COMPLEX C++ challenges requiring deep template wizardry, advanced concurrency, or extreme optimization.
+description: Grandmaster-level Modern C++ — template metaprogramming, coroutines, lock-free algorithms, SIMD, and zero-overhead abstractions. Use PROACTIVELY for COMPLEX C++ challenges requiring deep template wizardry, advanced concurrency, or extreme optimization.
 model: opus
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: rust-pro-ultimate
-description: Grandmaster-level Rust programming with unsafe wizardry, async runtime internals, zero-copy optimizations, and extreme performance patterns. Expert in unsafe Rust, custom allocators, inline assembly, const generics, and bleeding-edge features. Use for COMPLEX Rust challenges requiring unsafe code, custom runtime implementation, or extreme zero-cost abstractions.
+description: Grandmaster-level Rust — unsafe wizardry, async runtime internals, zero-copy optimizations, custom allocators, and inline assembly. Use PROACTIVELY for COMPLEX Rust challenges requiring unsafe code, custom runtime, or extreme zero-cost abstractions.
 model: opus
 ---
 

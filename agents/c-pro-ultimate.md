@@ -1,6 +1,6 @@
 ---
 name: c-pro-ultimate
-description: Master-level C programmer who pushes hardware to its limits. Expert in kernel programming, lock-free algorithms, and extreme optimizations. Use when you need to squeeze every drop of performance or work at the hardware level.
+description: Master-level C programmer specializing in kernel programming, lock-free algorithms, and extreme optimizations. Use PROACTIVELY for COMPLEX C challenges requiring hardware-level code, embedded systems, or extreme performance.
 model: opus
 ---
 
