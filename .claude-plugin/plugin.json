@@ -1,6 +1,6 @@
 {
   "name": "odin",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "description": "ODIN (Outline Driven INtelligence) - Advanced code agent with 46 specialized agents, diagram-first engineering, and atomic commit workflows for surgical precision in software development",
   "author": {
     "name": "cognitive-glitch"
@@ -67,7 +67,7 @@
     "./agents/rust-pro-ultimate.md",
     "./agents/security-auditor.md",
     "./agents/terraform-specialist.md",
-    "./agents/test-designer-advanced.md",
+    "./agents/advanced-test-designer.md",
     "./agents/test-writer.md",
     "./agents/trading-system-architect.md",
     "./agents/typescript-pro.md",
