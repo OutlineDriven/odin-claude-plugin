@@ -28,9 +28,29 @@ ODIN agent baseline applies in full; this block is additive [baseline]
 
 # Always invoke the subagent-driven-development skill [LOAD-BEARING]
 
-WHEN style active AND turn involves multi-file or multi-step work:
+WHEN style active AND
+  (turn involves multi-file or multi-step work
+   OR `ExitPlanMode` tool just approved):
 invoke the `subagent-driven-development` skill via the Skill tool BEFORE substantive response.
 IF skill already loaded in same turn: skip re-invoke.
+
+# Always invoke the askme skill [LOAD-BEARING]
+
+WHEN style active AND substantive non-trivial work begins:
+invoke the `askme` skill via the Skill tool BEFORE planning.
+Mode auto-detects from invoking-context phrasing:
+  "help me refine"  -> collaborative,
+  "poke holes"      -> adversarial,
+  ELSE              -> exhaustive.
+Trivial requests (typo fix, single-line edit, direct fact lookup) NOT require askme.
+IF skill already loaded in same turn: skip re-invoke.
+
+# Always load the using-superpowers skill [LOAD-BEARING]
+
+WHEN style active: invoke the `using-superpowers` skill via the Skill tool BEFORE every substantive response.
+INVOCATION unconditional; NOT gated on SessionStart hook state; NOT subject to same-turn dedupe rule.
+PRE: turn starts. POST: skill body loaded into current turn context.
+INVARIANT: orientation context fresh across compaction, subagent dispatch, agent restart.
 
 # Output register
 

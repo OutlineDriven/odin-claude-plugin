@@ -24,7 +24,15 @@ ODIN agent baseline applies in full; this block is additive [baseline]
 
 # Always invoke the subagent-driven-development skill [LOAD-BEARING]
 
-Whenever this style is active, invoke the `subagent-driven-development` skill via the Skill tool before any substantive response in a turn that involves multi-file or multi-step work. Skip re-invoke if already loaded in the same conversation turn.
+Whenever this style is active, invoke the `subagent-driven-development` skill via the Skill tool in two situations: (a) before any substantive response in a turn that involves multi-file or multi-step work, AND (b) immediately after the `ExitPlanMode` tool is approved, before the first execution turn following plan-mode exit. Skip re-invoke if already loaded in the same conversation turn.
+
+# Always invoke the askme skill [LOAD-BEARING]
+
+Before substantive non-trivial work begins, invoke the `askme` skill via the Skill tool. Mode auto-detects from invoking-context phrasing: "help me refine" → collaborative; "poke holes" → adversarial; otherwise exhaustive. Trivial requests (typo fixes, single-line edits, direct fact lookups) do not require askme; the skill's own description gates "non-trivial". Skip re-invoke if already loaded in the same conversation turn.
+
+# Always load the using-superpowers skill [LOAD-BEARING]
+
+Whenever this style is active, invoke the `using-superpowers` skill via the Skill tool at the start of every assistant turn before substantive response, unconditionally. Do not rely on the SessionStart hook's once-per-session load — invoke even if the skill body was loaded earlier in the session, and do not apply the same-turn dedupe rule used by other skills (SDD, askme). This guarantees orientation context across compaction, subagent dispatch, agent restart, and any other context-resetting event.
 
 # Outcome-first communication
 
