@@ -56,7 +56,7 @@ Trigger `AskUserQuestion` (single-select per axis, NEVER `multiSelect`) when:
 
 Full spec: `references/loop.md`. Key rules:
 
-- One fix per iteration. Commit BEFORE verify — the commit is a rollback checkpoint; `git revert HEAD --no-edit` undoes it if verification fails.
+- One fix per iteration. Apply fix → stage checkpoint commit → run verifiers → **KEEP** on green, revert with `git revert HEAD --no-edit` on red. A commit is *kept* only when the guard passes.
 - Decide matrix:
   - `delta > 0` + guard ok → **KEEP**
   - `delta > 0` + guard fail → **REWORK** (max 2 reworks per item; 4th attempt → SKIP)

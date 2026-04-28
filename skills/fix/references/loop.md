@@ -2,14 +2,14 @@
 
 ## Overview
 
-The fix loop is an atomic-commit-per-iteration cycle. One fix attempt per iteration. Committed before verification. Reverted if it fails.
+The fix loop is an atomic-commit-per-iteration cycle. One fix attempt per iteration. Each attempt stages a checkpoint commit then immediately verifies — kept on green, reverted on red. A commit is never kept without passing verification.
 
 Each iteration:
 1. Picks the highest-priority unfixed item
 2. Applies a minimal fix
-3. Commits immediately (`git commit`)
+3. Stages a checkpoint commit (`git commit`) — provisional until step 5
 4. Runs verifiers and the guard
-5. Keeps the commit on improvement, reverts it on regression or no effect
+5. KEEP if improvement + guard green; REWORK/DISCARD + `git revert HEAD --no-edit` otherwise
 
 ---
 
