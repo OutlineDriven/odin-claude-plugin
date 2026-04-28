@@ -4,21 +4,24 @@
       "command": "npx",
       "args": [
         "mcp-sequentialthinking-tools"
-      ]
+      ],
+      "alwaysLoad": true
     },
     "critic": {
       "command": "npx",
       "args": [
         "-y",
         "mcp-server-actor-critic-thinking"
-      ]
+      ],
+      "alwaysLoad": true
     },
     "shannon": {
       "command": "npx",
       "args": [
         "-y",
         "server-shannon-thinking@latest"
-      ]
+      ],
+      "alwaysLoad": true
     },
     "repomix": {
       "command": "npx",
@@ -26,7 +29,8 @@
         "-y",
         "repomix",
         "--mcp"
-      ]
+      ],
+      "alwaysLoad": true
     }
   }
 }
