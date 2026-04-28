@@ -19,7 +19,7 @@ from pathlib import Path
 # --- Module-level compiled regexes (fail at import if broken) ---
 
 RE_INDEX_LINK     = re.compile(r'\[([^\]]+)\]\(([^)]+)\)')
-RE_CREDENTIAL     = re.compile(
+RE_SECRETS        = re.compile(
     r'sk-[A-Za-z0-9]{20,}'
     r'|ghp_[A-Za-z0-9]{36,}'
     r'|AKIA[A-Z0-9]{16}'
@@ -160,7 +160,7 @@ def scan_credentials(mem_files):
     entries = []
     for mf in mem_files:
         text = mf.read_text(encoding="utf-8", errors="replace")
-        if RE_CREDENTIAL.search(text):
+        if RE_SECRETS.search(text):
             entries.append({"file": mf.name, "issue": "suspected credential — run memory-sanitize", "severity": "critical"})
     return entries
 
