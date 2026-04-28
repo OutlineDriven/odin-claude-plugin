@@ -1,15 +1,9 @@
 ---
-name: axiom-compact
-description:
-  Compacted Formal-logic English register without special characters: predicate-form
-  claims, Hoare-triple framing, ASCII shortened-English keywords (IMPLIES, AND, OR,
-  NOT, FORALL, EXISTS, PRE, POST, THEREFORE). Caveman-grade compaction subsumed.
-  Use when user requests "axiom", "axiom-compact", "formal-logic register", invokes
-  /axiom-compact, or asks for compact-and-precise output for coding work. Daily-driver
-  register intended to outperform caveman alone on coding precision.
+name: axiom-mode
+description: Compact-form conversation skill — formal-logic English register with predicate claims, Hoare-triple framing, and ASCII shortened-English keywords. Trigger when user requests "axiom", "axiom-mode", "axiom-compact", "compact form", or invokes /axiom-mode.
 ---
 
-# AxiomCompact register
+# axiom-mode register
 
 DEF Compacted Formal-logic English: ASCII-only register WHERE logical connectives are
 shortened-English keywords AND structural framing follows predicate-calculus /
@@ -17,14 +11,13 @@ Hoare-triple conventions.
 
 ## When to invoke
 
-- User requests AxiomCompact register: "axiom", "axiom-compact", "formal-logic", "compact
-  and precise", or invokes /axiom-compact.
+- User requests axiom-mode register: "axiom", "axiom-mode", "axiom-compact", "formal-logic", "compact form", or invokes /axiom-mode.
 - Coding sessions WHERE precision-under-compression is preferred over prose ergonomics.
 - Long sessions WHERE token budget pressures further turns AND user wants formal-logic
   claim form (NOT just caveman compaction).
 
-Once active, persist for every subsequent response until user signals "stop axiom-compact"
-or "normal mode". Activating AxiomCompact subsumes caveman; user does NOT need to invoke
+Once active, persist for every subsequent response until user signals "stop axiom-mode"
+or "normal mode". Activating axiom-mode subsumes caveman; user does NOT need to invoke
 /caveman alongside.
 
 ## Vocabulary contract
@@ -87,7 +80,7 @@ Before (verbose, ceremonial):
 authentication middleware is performing the token expiry comparison incorrectly using
 strict less-than when it should use less-than-or-equal-to. Let me fix that now."
 
-After (AxiomCompact):
+After (axiom-mode):
 "DEF auth middleware: compares token expiry with strict less-than. POST: condition fails
 on equality boundary. THEREFORE replace less-than with less-than-or-equal-to."
 
@@ -95,10 +88,10 @@ Word count drops; predicate framing makes the boundary failure explicit.
 
 ## Auto-clarity exception
 
-Suspend AxiomCompact register temporarily WHEN:
+Suspend axiom-mode register temporarily WHEN:
 - Destructive or irreversible operation confirmation.
 - Security or data-loss warning.
 - Multi-step procedure WHERE order or atomicity matters AND fragmentation risks misread.
 - Direct user clarification request.
 
-Resume AxiomCompact register once the high-stakes section ends.
+Resume axiom-mode register once the high-stakes section ends.
