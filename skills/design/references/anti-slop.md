@@ -207,21 +207,21 @@ Counter: cut decoration; sharpen the headline; ship the surface or kill it.
 
 ## 4. Taste anchors with extracted tokens
 
-Twelve exemplars. OKLCH values use `oklch(L C H)` triples where authoritatively observable; unverified positions marked `?` rather than fabricated.
+Twelve exemplars. OKLCH values use `oklch(L C H)` triples where authoritatively observable; hex companion noted in the signature column for designer cross-reference. Unverified positions marked `?` rather than fabricated. ANSI / TUI palettes (lazygit, gh CLI, terminal monospace) resolve at the user's terminal config and do not produce canonical OKLCH.
 
 | Exemplar | Primary OKLCH | Accent OKLCH | Heading Type | Body Type | Mono Type | Spacing Base | Signature Trait | Source URL |
 |---|---|---|---|---|---|---|---|---|
-| Linear | `?` | `?` | Inter Display | Inter Text | `?` | 4px | Velocity-driven density | https://linear.app |
-| Stripe | `?` | `?` | Tiempos | Sohne | `?` | 8px | Editorial type accent on transactional UI | https://stripe.com |
-| Vercel | `oklch(0 0 0)` | `oklch(1 0 0)` | Geist Sans | Geist Sans | Geist Mono | 4px | Monochrome with razor-edge mono accents | https://vercel.com |
-| Read.cv | `?` | `?` | `?` mono | `?` mono | `?` | `?` | Anti-LinkedIn neo-brutalism (rebranded Posts, shut down 2024) | https://read.cv |
-| Anthropic | `?` (#141413) | `?` (#faf9f5) | Tiempos Headline | DM Sans | DM Mono | `?` | "Stewardship" register, warm not cold | https://www.anthropic.com |
-| Things 3 | `?` (system yellow) | `?` | SF Pro Display | SF Pro Text | SF Mono | 8px | Inherited macOS palette, no custom branding | https://culturedcode.com/things |
-| Rosé Pine | `?` | `?` | `?` | `?` | `?` | n/a | TUI-friendly semantic palette (rose / love / gold / pine / foam / iris) | https://rosepinetheme.com |
-| Helix editor | `?` | `?` | n/a (TUI) | n/a (TUI) | terminal mono | n/a | Modal editing aesthetic, sparse | https://helix-editor.com |
-| lazygit | `?` | `?` | n/a (TUI) | n/a (TUI) | terminal mono | n/a | Dense panel grid for git ops; high-contrast status | https://github.com/jesseduffield/lazygit |
-| gh CLI | `?` | `?` | n/a (TUI) | n/a (TUI) | terminal mono | n/a | ANSI-degradation-aware status (green/red/yellow) | https://cli.github.com |
-| Radix Colors | `?` | `?` | n/a (system) | n/a (system) | n/a | n/a | 12-step P3-aware ramps (1=app bg, 9=solid, 12=high-contrast text) | https://www.radix-ui.com/colors |
-| Fluent 2 | `?` | `?` | Segoe UI Variable | Segoe UI Variable | Cascadia Code | 4px | Luminosity-aware shadows honest with backplate | https://fluent2.microsoft.design |
+| Linear | `oklch(0.139 0.003 246)` | `oklch(0.567 0.159 275)` | Inter Display | Inter Text | `?` | 4px | Velocity-driven density; indigo `#5E6AD2` carries interactive states | https://linear.app |
+| Stripe | `oklch(1 0 0)` | `oklch(0.578 0.235 278)` | Tiempos Headline | Söhne | `?` | 8px | Editorial type on transactional UI; Stripe Purple `#533AFD` | https://stripe.com |
+| Vercel | `oklch(0 0 0)` | `oklch(0.569 0.235 254)` | Geist Sans | Geist Sans Text | Geist Mono | 4px | Monochrome black surface; Geist Blue `#0070F3` as restrained accent | https://vercel.com |
+| Read.cv | `?` | `?` | `?` | `?` | `?` | `?` | Anti-LinkedIn neo-brutalism; acquired by Perplexity in 2025 and shut down on 2025-05-16 — values no longer maintained | https://web.archive.org/web/2025/https://read.cv |
+| Anthropic | `oklch(0.982 0.005 95)` | `oklch(0.66 0.13 38)` | Tiempos Headline | DM Sans | DM Mono | `?` | "Stewardship" register; cream `#FAF9F5` + clay `#D97757` + near-black `#141413` | https://www.anthropic.com |
+| Things 3 | `?` (macOS materials) | `oklch(0.865 0.177 90)` | SF Pro Display | SF Pro Text | SF Mono | 8px | Inherits macOS materials and `systemYellow` `#FFCC00`; zero custom branding | https://culturedcode.com/things |
+| Rosé Pine | `oklch(0.213 0.025 291)` | `oklch(0.776 0.095 305)` | n/a (TUI / editor theme) | n/a | terminal mono | n/a | Three variants (Main / Moon / Dawn); semantic palette (rose / love / gold / pine / foam / iris); base `#191724`, iris `#C4A7E7` | https://rosepinetheme.com |
+| Helix editor | `oklch(0.305 0.078 310)` | `oklch(0.713 0.155 29)` | n/a (TUI) | n/a (TUI) | terminal mono | n/a | Modal editing aesthetic; default theme midnight `#3B224C` + apricot `#F47868` diagnostic | https://github.com/helix-editor/helix |
+| lazygit | `?` (ANSI) | `?` (ANSI) | n/a (TUI) | n/a (TUI) | terminal mono | n/a | Dense panel grid for git ops; ANSI-name palette (green / red / blue) resolves at terminal — no canonical OKLCH | https://github.com/jesseduffield/lazygit |
+| gh CLI | `?` (ANSI) | `?` (ANSI) | n/a (TUI) | n/a (TUI) | terminal mono | n/a | ANSI-degradation-aware status (green=success, red=error, yellow=warn); resolves at user's terminal | https://cli.github.com |
+| Radix Colors | `oklch(0.991 0 90)` (gray-1) | `oklch(0.544 0.191 267)` (indigo-9) | n/a (component library) | n/a | n/a | n/a | 46 scales × 12-step P3-aware ramps (1 = app bg, 9 = solid, 12 = high-contrast text); per-step alpha variants | https://www.radix-ui.com/colors |
+| Fluent 2 | `oklch(1 0 0)` | `oklch(0.568 0.167 251)` | Segoe UI Variable | Segoe UI Variable | Cascadia Code | 4px | Luminosity-aware shadows; Communication Blue `#0078D4`; Office 2026 canonical | https://fluent2.microsoft.design |
 
 These are not templates. They are evidence. Read each as "why does this surface feel this way?" and the answer becomes the direction the next design must commit to.
