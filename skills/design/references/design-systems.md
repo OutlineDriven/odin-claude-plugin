@@ -44,6 +44,30 @@ Shape: JSON with `$type` discriminator (`color`, `dimension`, `typography`, `sha
 
 Aliases compose; a token whose `$value` is `{group.name}` resolves transitively. Avoid alias cycles — most resolvers detect them but error messages vary.
 
+## §2.5. DTCG transition tokens
+
+DTCG 2025.10 introduces `$type: "transition"` for motion tokens, composed from `cubicBezier`, `duration`, and `delay` sub-types. A transition token references its parts via DTCG aliases — the result is a single named transition that token transforms can target without reverse-engineering the constituent properties.
+
+```json
+{
+  "motion": {
+    "ease-out-quart":  { "$type": "cubicBezier", "$value": [0.25, 1, 0.5, 1] },
+    "fast":            { "$type": "duration",    "$value": "120ms" },
+    "no-delay":        { "$type": "duration",    "$value": "0ms" },
+    "transition-fast": {
+      "$type": "transition",
+      "$value": {
+        "duration":       "{motion.fast}",
+        "delay":          "{motion.no-delay}",
+        "timingFunction": "{motion.ease-out-quart}"
+      }
+    }
+  }
+}
+```
+
+Style Dictionary 4.x recognizes the `transition` discriminator out of the box; older 3.x configs need a custom transform that flattens the composite type into platform-native syntax (CSS `transition`, iOS `UIView.animate`, Android `AnimatorSet`).
+
 ## §3. Style Dictionary 4.x + Tokens Studio
 
 **Style Dictionary 4.x** is stable; transforms DTCG-shaped JSON into platform-specific outputs (CSS custom properties, iOS Swift, Android XML, Flutter, JS objects). **Tokens Studio** (formerly Figma Tokens) is the design-tool integration layer; sync DTCG tokens between Figma and code so the source-of-truth lives in JSON, not in a Figma library.
@@ -69,6 +93,33 @@ export default {
 ```
 
 `outputReferences: true` preserves DTCG aliases as CSS `var()` references in the build, so theme switches at runtime work. Posture: keep DTCG source as the source of truth; never edit derived outputs — they regenerate.
+
+## §3.5. Style Dictionary v4 worked example
+
+Two flags carry most of the v4-specific weight in production token pipelines:
+
+- **`outputReferences: true`** — preserves DTCG aliases as CSS `var()` references rather than flattening them. Critical for runtime theme switches (light / dark / high-contrast); without it, every theme ships its own concrete values and the cascade cannot pivot on a single root variable.
+- **Custom transforms** — when the built-in `transformGroup` misses a project-specific naming convention (e.g., kebab-case-but-not-the-tailwind-flavor, or per-platform prefixes), register a one-off transform. v4's transform API is async-aware; previous versions required workarounds for asynchronous color-space conversion or remote-asset resolution.
+
+```js
+// style-dictionary.config.js (v4)
+export default {
+  source: ['tokens/**/*.json'],
+  platforms: {
+    css: {
+      transformGroup: 'css',
+      buildPath: 'dist/',
+      files: [{
+        destination: 'tokens.css',
+        format: 'css/variables',
+        options: { outputReferences: true },
+      }],
+    },
+  },
+};
+```
+
+The output preserves `var(--motion-fast)` references through the `transition-fast` token from §2.5, so swapping the root duration token swaps every dependent transition simultaneously.
 
 ## §4. Radix Colors
 
@@ -164,6 +215,28 @@ The non-negotiable bit: name tokens by what they MEAN, not by what they look lik
 ```
 
 When the brand shifts cooler or the section breathes wider, semantic names absorb the change at the token layer. Output names force a find-and-replace through every consumer.
+
+## §8.5. Component state matrix
+
+Every interactive component ships the full state matrix — token-driven, never hardcoded. Missing states surface as bugs the first time a user hits the unhandled path; the matrix is the contract a component design must satisfy before shipping.
+
+| State | Trigger | Token shape |
+|---|---|---|
+| default | resting | `--color-bg-default`, `--color-text-default` |
+| hover | pointer over | `color-mix()` of accent + bg |
+| focus-visible | keyboard navigation | distinct ring color, ≥3:1 contrast vs adjacent |
+| active | mid-press | darker tint, brief duration |
+| disabled | non-interactive | reduced opacity, no hover/active response |
+| loading | request in flight | spinner or skeleton; submit stays enabled until error |
+| error | validation failed | `--color-error-*` tokens, inline message |
+| success | post-action confirmation | `--color-success-*` tokens, dismissible |
+| empty | no data yet | empty-state copy + CTA |
+| overflow | content exceeds container | scroll, truncate, or expand |
+| long-text | content longer than design baseline | wrap gracefully without breaking layout |
+| short-text | content shorter than baseline | maintain min-width or align meaningfully |
+| first-run | onboarding | ship the "this is what this is" affordance |
+
+The 13 states are not optional. A button with default + hover only is ~15% complete; the other 85% surfaces as the components-that-broke-on-Tuesday list.
 
 ## §9. Cite-and-defer
 
