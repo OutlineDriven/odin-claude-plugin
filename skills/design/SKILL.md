@@ -93,6 +93,7 @@ Six steps. Do not skip the divergence step.
 | Tauri / Slint / egui / Iced | `references/desktop.md` |
 | Qt / QML | `references/qt.md` |
 | Cross-platform tokens | `references/design-systems.md` |
+| Motion across runtimes (timing / easing / reduced motion) | `references/motion.md` |
 
 ## Cross-surface invariants
 
