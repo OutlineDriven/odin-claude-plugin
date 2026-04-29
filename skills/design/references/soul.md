@@ -33,6 +33,26 @@ Before choosing, write one sentence of physical scene: who uses this, where, und
 
 "Observability dashboard" does not force an answer. "SRE glancing at incident severity on a 27-inch monitor at 2am in a dim room" does. Run the sentence, not the category.
 
+## 1.7 Hierarchy diagnostics
+
+Hierarchy is what tells the reader where to look first, second, and third. When everything carries the same visual weight, nothing is primary — and the surface fails its first job.
+
+**The squint test.** Blur your eyes (or screenshot and apply a Gaussian blur of ~6px). With detail erased, can you still identify (a) the most important element on the surface, (b) the second-most-important, (c) clear groupings of related items? If everything reads as the same weight under blur, the hierarchy is broken regardless of how clean the typography looks at full resolution.
+
+**Hierarchy through multiple dimensions.** Do not rely on size alone. The strongest hierarchies layer 2–3 dimensions on the same element so the signal compounds.
+
+| Dimension | Strong signal | Weak signal |
+|-----------|---------------|-------------|
+| Size | ≥3:1 ratio between primary and secondary | <2:1 ratio |
+| Weight | Bold vs. regular | Medium vs. regular |
+| Color | High contrast (e.g. text-12 on bg-1 in Radix terms) | Similar tones |
+| Position | Top / left (primary) | Bottom / right |
+| Space | Surrounded by white space | Crowded |
+
+A heading that is *larger AND bolder AND has more space above it* establishes itself far harder than a heading that is just larger. Stack 2–3 of the dimensions; reserve all five for the singular most-important element on the surface.
+
+**Failure mode.** A surface where every element is "slightly bigger" or "slightly bolder" produces a flat hierarchy that the user has to parse. Hierarchy is binary at the perception level — an element is either *clearly* primary or it is not. Marginal differences read as noise.
+
 ## 2. First principles
 
 Seven principles. Each is a positive claim with a concrete failure that violates it. Read the principle, then read the anti-example; the anti-example is the test that names the failure mode in the wild.
