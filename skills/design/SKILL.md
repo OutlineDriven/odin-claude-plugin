@@ -29,6 +29,13 @@ Modern, elegant UI/UX. Don't hold back.
 
 ## Register × paradigm matrix — pointer
 
+Every design surface is **brand** (marketing, landing, campaign, long-form content, portfolio — design IS the product) or **product** (app UI, admin, dashboard, tool — design SERVES the product). Identify before designing.
+
+**Detection rule.** First match wins:
+1. Cue in the task itself — "landing page" / "campaign hero" → brand; "dashboard" / "settings panel" → product.
+2. Surface in focus — the page, file, or route being worked on; the route segment usually disambiguates (`/marketing/*` vs. `/app/*`).
+3. Register field in PRD or project context (`AGENTS.md`, `CLAUDE.md`, brand brief).
+
 Brand register opens neo-brutalism / glassmorphism / M3 Expressive with Committed / Full palette / Drenched color strategies; product register defaults to Restrained + post-minimalism / Fluent 2. Full matrix in `references/paradigms.md §0`.
 
 ## Anti-slop charter — LOAD-BEARING
