@@ -128,7 +128,115 @@ Once a component is added, treat it as project source. Edit it. Replace its hard
 
 Anti-pattern: leaving the default shadcn `bg-primary` and `rounded-md` on every primitive. The result is the shadcn-landing-page silhouette listed in `references/anti-slop.md` — readable as preset before the eye finishes scanning.
 
-## 5. State management
+## 5. Composition patterns
+
+Avoid boolean-prop proliferation. A `<Composer>` that grows `isThread`, `isChannel`, `isReply`, `withAttachments`, `withMentions` is a single component pretending to be a family. Decompose into a compound component with a shared context — `<ComposerProvider>` wraps the surface, and `<Composer.Frame>`, `<Composer.Input>`, `<Composer.Submit>`, `<Composer.AttachmentList>` slot in independently. Each consumer surface picks the slots it needs; new variants compose without touching the base contract.
+
+```tsx
+// Compound component with shared context (React 19).
+const ComposerContext = createContext<ComposerCtx | null>(null);
+
+export function ComposerProvider({ children, ...config }: ComposerProps) {
+  const ctx = useComposerCtx(config);
+  return <ComposerContext value={ctx}>{children}</ComposerContext>;
+}
+
+Composer.Frame = function Frame({ children }) { /* ... */ };
+Composer.Input = function Input(props) {
+  const ctx = use(ComposerContext); // React 19: use() over useContext()
+  /* ... */
+};
+Composer.Submit = function Submit() { /* ... */ };
+```
+
+Children-over-render-props for slot composition. `<Modal><Modal.Body>...</Modal.Body></Modal>` reads as HTML; `<Modal renderBody={() => ...} renderFooter={() => ...} />` reads as a config object. JSX trees communicate structure better than flat props.
+
+React 19: `ref` is a regular prop — drop `forwardRef` from new components. `useContext()` still works but `use(Context)` is the ergonomic default; it composes with conditional reads where `useContext()` cannot.
+
+Generic context shape: `{ state, actions, meta }` is the boring-correct triple. State is the reactive value, actions are imperative escapes (`open()`, `close()`, `submit()`), meta is static metadata (config, ids, computed selectors). Drop a slot only when it is genuinely empty.
+
+## 6. View Transitions
+
+`<ViewTransition>` and `addTransitionType()` are React-side wrappers around the browser View Transitions API. As of April 2026 they ship in React's Experimental / Canary channel — they have NOT been promoted to stable in 19.2. Treat them as preview APIs subject to surface changes; the browser primitive is the stable substrate.
+
+`<ViewTransition>` wraps the content that should animate, NOT a sibling of it. The element directly inside the wrapper participates; siblings do not. Common error: putting `<ViewTransition>` next to the changing element instead of around it.
+
+```tsx
+// Non-shared enter/exit — omit name; React picks a per-render id.
+<ViewTransition>
+  <Card data={data} />
+</ViewTransition>
+
+// Wrong: sibling — the transition has no DOM to track.
+<ViewTransition />
+<Card data={data} />
+
+// Shared element across routes — same name on both source and target
+// surfaces so the browser morphs the matched pair.
+<ViewTransition name="card-hero">
+  <Card data={data} />
+</ViewTransition>
+```
+
+Reserve `name` for shared element transitions (the same element appearing on both sides of the transition under the same name). For non-shared enter / exit, omit `name`.
+
+`addTransitionType()` stacks types onto a transition so CSS can branch via the spec-defined `:active-view-transition-type()` pseudo-class — a list reorder gets type `reorder`, a route change gets `navigate`, a Suspense reveal gets `reveal`. CSS rules target the active type, not arbitrary `html` data attributes:
+
+```css
+/* Default fade — applies to every transition. */
+::view-transition-old(root), ::view-transition-new(root) {
+  animation: 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Directional slide for navigation type only. */
+:active-view-transition-type(navigate)::view-transition-old(root) {
+  animation: 200ms slide-out-left;
+}
+:active-view-transition-type(navigate)::view-transition-new(root) {
+  animation: 200ms slide-in-right;
+}
+```
+
+Per-axis animation map keyed by transition type:
+```ts
+const animations = {
+  default: { enter: 'fade-in', exit: 'fade-out', share: 'morph' },
+  navigate: { enter: 'slide-from-right', exit: 'slide-to-left', share: 'morph' },
+  reorder:  { enter: 'fade-in', exit: 'fade-out', share: 'flip' },
+};
+```
+The `default` key is required — an unmapped transition falls through to default rather than rendering no animation.
+
+Motion-budget priority (highest first; spend attention on the top):
+
+1. Shared element (cross-route persistence)
+2. Suspense reveal (data arrival)
+3. List identity (reorder, insertion, removal)
+4. State change (toggle, expand, collapse)
+5. Route change (entrance / exit)
+
+Browser support of the underlying View Transitions API (April 2026 — distinct from React's wrapper):
+- Same-document transitions: Chromium 111+, Safari 18.2+, Firefox 144+ (stable).
+- `:active-view-transition-type()` selector: Chromium 125+, Safari 18.2+, Firefox 147+.
+- Cross-document transitions: Chromium 126+, Safari 18.2+, Firefox pending.
+
+## 7. Hydration safety
+
+Theme-wrapper script-tag pattern — read theme from `localStorage` and apply `data-theme` to `<html>` BEFORE React hydrates. The script runs synchronously inline in `<head>`; without it, the page flashes the default theme for the duration of hydration.
+
+```html
+<!-- In document <head>, before any React. -->
+<script>
+  const theme = localStorage.getItem('theme') || 'system';
+  document.documentElement.dataset.theme = theme;
+</script>
+```
+
+Minimize serialization at RSC boundaries — the more state crosses Server-to-Client, the more JSON ships in the initial payload and the more hydration cost the client pays. Push the boundary deeper rather than serializing larger objects.
+
+No shared module state for request-scoped data. A Node module's top-level `let` is shared across requests; user A's session leaks into user B's response. Use AsyncLocalStorage, framework request context, or per-request factories — never `let cachedUser`.
+
+## 8. State management
 
 - **Zustand** (module-first) — preferred for cross-component shared state. Selectors are scoped, re-renders are surgical. The default for non-trivial client state.
 - **Jotai** (atom-first) — preferred when state is granular and read-mostly. One atom per cell of state; consumers subscribe atom-by-atom.
@@ -146,7 +254,7 @@ const useStore = create<{ count: number; inc: () => void }>((set) => ({
 const count = useStore((s) => s.count); // re-renders only when count changes
 ```
 
-## 6. Forbidden patterns
+## 9. Forbidden patterns
 
 - **Redux for simple state.** Over-engineering by default; the action-reducer-thunk surface costs more than it earns under a single store. Reach for Zustand or Jotai first.
 - **Manual `useMemo` / `useCallback` with React Compiler enabled.** The compiler does this. Manual memoization is dead code that obscures the actual call graph and adds noise to diffs.
@@ -155,7 +263,9 @@ const count = useStore((s) => s.count); // re-renders only when count changes
 - **Hardcoded hex / RGB values in component code.** Tokens only. A `git grep '#[0-9a-f]\{3,8\}' src/components/` should return zero matches.
 - **Default Tailwind palette utilities (`bg-blue-500`, `text-gray-700`).** The default ramp is the slop tell. Reference the `@theme` tokens by name (`bg-accent`, `text-default`) so a direction change rolls through the whole surface.
 - **Mixing Tailwind v3 JS config with v4 CSS-first config.** Pick one; the bridge is more confusing than either pure path.
+- **`transition: all` in component CSS.** Animates layout, color, and transform together; jank guaranteed. Name the properties — `transition: opacity 120ms ease, transform 120ms ease`.
+- **Layout reads in render** (`getBoundingClientRect`, `offsetHeight`, `offsetWidth`, `scrollTop` called during a render or commit phase). Forces synchronous layout and breaks concurrent rendering. Read inside `useLayoutEffect` or after `requestAnimationFrame`.
 
-## 7. Cite-and-defer
+## 10. Cite-and-defer
 
 Citations: react.dev (19.2), tailwindcss.com (v4), ui.shadcn.com (v4). This is starter density — defer to react.dev/learn for the current API surface, tailwindcss.com/docs for v4 directives, and ui.shadcn.com/docs/changelog for component versions before relying on any hook, directive, or component in production.
