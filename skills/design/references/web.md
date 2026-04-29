@@ -164,6 +164,40 @@ Vanilla custom properties under `:root`. One concrete example:
 }
 ```
 
+## 3.5 Motion timing bands
+
+Time scales are perceptual, not arbitrary. Five bands cover production motion needs:
+
+- **~80ms** — perceptual "instant" threshold. Below this, the user does not register a transition; above, motion becomes communication.
+- **100-150ms** — instant feedback (button press, hover state, focus ring).
+- **200-300ms** — state changes (panel open, input focus expansion, tab switch).
+- **300-500ms** — layout changes (modal entrance, card flip, drawer slide).
+- **500-800ms** — page entrance, first paint, hero reveal.
+
+Exit durations run ~75% of entrance — quick to leave, deliberate to arrive. Named easing curves only; no bounce, no elastic (these read as 2015-trendy on production surfaces in 2026):
+
+```css
+:root {
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);   /* default */
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);   /* heaviest */
+}
+```
+
+## 3.6 OKLCH thresholds
+
+Tinted neutrals carry chroma 0.005-0.015 toward the brand hue — pure greys (`oklch(L 0 H)`) read as institutional, not designed. Reduce chroma as lightness approaches 0 or 100; saturated extremes look garish at the boundaries of the lightness range and clip outside common gamuts.
+
+Dark-mode surface scale uses three steps at lightness 15% / 20% / 25%, sharing the same hue and chroma so the steps read as elevation, not as separate colors. Light-on-dark text needs optical compensation: bump line-height by +0.05-0.1, and step weight up one notch (regular → medium, medium → semibold). The same string of body copy that reads at 16px/regular on light backgrounds needs 16px/medium with looser leading on dark to match perceived density.
+
+## 3.7 Typography vertical rhythm
+
+Within text blocks, line-height is the base unit for vertical spacing between consecutive lines, paragraphs, and adjacent headings. Body line-height 1.5 on 16px = 24px, so paragraph spacing inside prose composes from 24px increments and adjacent-element gaps inside long-form content snap to that grid. Vertical alignment between adjacent text blocks emerges for free.
+
+For component layout, padding, and inter-section spacing, defer to the `--space-*` tokens declared in §3 (4 / 8 / 12 / 16 / 24 / 32 / 48 / 64). The line-height rhythm and the spacing scale serve different roles — text rhythm is dense and prose-local; layout spacing is coarse and structural. Conflating them produces either airless prose or chunky layouts.
+
+Type size scale: five steps (xs / sm / base / lg / xl) with a single ratio — 1.25 (gentle), 1.333 (default), or 1.5 (loud). Pick one ratio at the start and commit; mid-build ratio swaps cascade through every component and re-break alignment.
+
 ## 4. Layout patterns
 
 **Container queries over breakpoints.** Component CSS sizes itself by container, not viewport. A card placed in a 280px sidebar collapses to single-column without the parent caring; placed in a 960px main column it expands. Reusability follows.
