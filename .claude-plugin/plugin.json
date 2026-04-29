@@ -1,7 +1,7 @@
 {
   "name": "odin",
-  "version": "1.13.0",
-  "description": "ODIN (Outline Driven INtelligence) - Advanced code agent with 8 task-typed agents routed by complexity, diagram-first engineering, and atomic commit workflows for surgical precision in software development",
+  "version": "1.13.1",
+  "description": "ODIN (Outline Driven INtelligence) - Advanced code agent with 8 task-typed agents in role-noun form (researcher / planner / implementer / reviewer / debugger / tester / refactorer / critic) routed by complexity, diagram-first engineering, and atomic commit workflows for surgical precision in software development",
   "author": {
     "name": "cognitive-glitch"
   },
@@ -19,14 +19,14 @@
     "uml"
   ],
   "agents": [
-    "./agents/research.md",
-    "./agents/plan.md",
-    "./agents/implement.md",
-    "./agents/review.md",
-    "./agents/debug.md",
-    "./agents/test.md",
-    "./agents/refactor.md",
-    "./agents/critique.md"
+    "./agents/researcher.md",
+    "./agents/planner.md",
+    "./agents/implementer.md",
+    "./agents/reviewer.md",
+    "./agents/debugger.md",
+    "./agents/tester.md",
+    "./agents/refactorer.md",
+    "./agents/critic.md"
   ],
   "mcpServers": "./mcp.json"
 }
