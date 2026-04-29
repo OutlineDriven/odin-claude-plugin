@@ -1,7 +1,7 @@
 ---
-name: debug
-description: Defect isolation and root-cause fix — analyzes errors, stack traces, and failing tests; applies the minimal fix and a regression test. Use proactively for compiler errors, runtime failures, test failures, unexpected behavior, or production incidents.
-tools: Read, Edit, Bash, Grep, Glob
+name: debugger
+description: Hypothesis-driven debugging agent. Isolates defects to root cause, applies the minimal fix, and adds a regression test. Use proactively for compiler errors, runtime failures, test failures, unexpected behavior, or production incidents. Distinct from the verb-form skill `odin:debug`.
+tools: Read, Edit, Bash, Grep, Glob, LSP, Monitor
 model: sonnet
 effort: high
 memory: project

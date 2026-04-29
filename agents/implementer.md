@@ -1,7 +1,7 @@
 ---
-name: implement
-description: Multi-step code modification — write new code or edit existing files. Use proactively when a clear plan or specification exists and code changes are required across one or more files.
-tools: Read, Edit, Write, Bash, Grep, Glob
+name: implementer
+description: Multi-step code-modification agent. Writes new code or edits existing files. Use proactively when a clear plan or specification exists and code changes are required across one or more files. Distinct from the executing-skill `odin:proceed` which orchestrates plan execution at session level.
+tools: Read, Edit, Write, Bash, Grep, Glob, LSP
 model: sonnet
 effort: high
 ---

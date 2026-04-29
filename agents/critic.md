@@ -1,7 +1,7 @@
 ---
-name: critique
-description: Adversarial review — security, performance, design risk, OWASP/CWE risks, hidden coupling, time-bombs. Use proactively for a second opinion on non-trivial designs, before merging architecture-level changes, or when a red-team perspective is needed.
-tools: Read, Grep, Glob, Bash
+name: critic
+description: Adversarial review agent. Red-teams security, performance, design risk, OWASP/CWE risks, hidden coupling, and time-bombs. Use proactively for a second opinion on non-trivial designs, before merging architecture-level changes, or when a red-team perspective is needed.
+tools: Read, Grep, Glob, Bash, LSP, WebFetch
 model: opus
 effort: high
 memory: project
