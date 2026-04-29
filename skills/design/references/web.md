@@ -224,7 +224,7 @@ Placeholders end with `…` when they show a pattern (`Search by name…`, `123-
 
 ## 4.7 Safe areas + viewport
 
-`env(safe-area-inset-*)` for notch / dynamic-island / home-indicator padding on iOS and Android. `overflow-x: hidden` on full-bleed containers prevents accidental horizontal scrollbars from long unbreakable strings or transformed elements. `font-variant-numeric: tabular-nums` on numeric columns aligns digit widths so totals, timestamps, and prices stack cleanly.
+`env(safe-area-inset-*)` for notch / dynamic-island / home-indicator padding on iOS and Android. The `env()` values resolve to non-zero only when the viewport meta opts into edge-to-edge layout — pair with `<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">`. Without `viewport-fit=cover`, the browser keeps content inside the safe area itself and `env()` returns `0`. `overflow-x: hidden` on full-bleed containers prevents accidental horizontal scrollbars from long unbreakable strings or transformed elements. `font-variant-numeric: tabular-nums` on numeric columns aligns digit widths so totals, timestamps, and prices stack cleanly.
 
 ## 4.8 Dark mode native fixes
 
@@ -235,6 +235,59 @@ Placeholders end with `…` when they show a pattern (`Search by name…`, `123-
 Use `Intl.DateTimeFormat` and `Intl.NumberFormat` for all dates, times, and numbers — never hardcode `MM/DD/YYYY`, `1,000.00`, or currency symbols. Detect locale via `Accept-Language` (server) or `navigator.languages` (client); never IP-based geolocation, which conflates location with language preference (a French speaker in Tokyo wants French, not Japanese). `translate="no"` on brand names, code identifiers, monospace tokens, and proper nouns — Google Translate will otherwise render `Stripe` as `Bande` in French; apply per-element, not site-wide.
 
 Text-expansion budget per locale: German +30%, French +20%, Finnish +30-40%, Chinese -30%. Buttons, labels, and table headers must accommodate the swing without wrapping or truncating; design at the longest expected length and let other locales breathe.
+
+## 4.10 Input method, breakpoints, responsive images
+
+**Detect input method, not just screen size.** A laptop with a touchscreen and a tablet with a keyboard expose the gap between viewport width and pointer fidelity. Pointer + hover queries gate per-input affordances. Two axes matter: `pointer` / `hover` describe the *primary* input; `any-pointer` / `any-hover` describe whether *any* attached input has that capability — the hybrid-device case. Treat hover as strictly additive (a decoration *added* when supported), never a replacement for functionality.
+
+```css
+/* Size touch targets up when any input is coarse — covers a laptop
+   with a touchscreen, not just touch-only devices. Tokens are the
+   ones defined in §3 (--space-4/8/16/24/32). */
+.button { padding: var(--space-8) var(--space-16); }                /* default */
+@media (any-pointer: coarse) {
+  .button { padding: var(--space-16) var(--space-24); }             /* hybrid + touch */
+}
+
+/* Hover-driven affordance — additive only; the click target works
+   without it. `any-hover` covers a touch device with a paired mouse.
+   Sub-token lift derived from --space-4 since the scale starts at 4px. */
+@media (any-hover: hover) {
+  .card:hover { transform: translateY(calc(var(--space-4) * -0.5)); }
+}
+
+/* Touch-only baseline — no hover affordance, promote to :active or
+   make the affordance always visible. Never gate functionality on hover. */
+@media (hover: none) and (any-hover: none) {
+  /* no hover affordance; ensure the action is reachable via tap */
+}
+```
+
+`pointer: coarse` alone misses the touchscreen laptop (primary input is the trackpad, secondary is touch). `any-pointer: coarse` catches it. The same applies to hover — a tablet with a paired Bluetooth mouse has `hover: none` (primary is touch) but `any-hover: hover` (the mouse can hover). Always treat hover as additive: the surface must work without it.
+
+**Mobile-first, content-driven breakpoints.** Start with base styles for the smallest target, layer with `min-width`. Desktop-first (`max-width`) sends mobile devices the desktop styles first and overrides them — wrong direction. Three breakpoints typically suffice: 640 / 768 / 1024 px. Add a fourth only when content forces it. Do not chase device sizes; let the design tell you where it breaks. Use `clamp()` for fluid values that do not need a hard breakpoint.
+
+**Responsive images.** Use `srcset` with width descriptors when the image only changes in resolution; use `<picture>` with `<source media>` when crops or compositions differ.
+
+```html
+<!-- Same image at different resolutions -->
+<img
+  src="hero-800.jpg"
+  srcset="hero-400.jpg 400w, hero-800.jpg 800w, hero-1200.jpg 1200w"
+  sizes="(max-width: 768px) 100vw, 50vw"
+  alt="Hero image">
+
+<!-- Different crops per viewport (art direction) -->
+<picture>
+  <source media="(min-width: 768px)" srcset="wide.jpg">
+  <source media="(max-width: 767px)" srcset="tall.jpg">
+  <img src="fallback.jpg" alt="…">
+</picture>
+```
+
+The browser combines `srcset` widths with the device-pixel-ratio to pick the right file; `sizes` tells the browser how wide the image *will* render so the calculation lines up with layout reality.
+
+**Real-device testing.** DevTools device emulation reproduces viewport and pointer-type but misses real touch interactions, real CPU / memory constraints, network latency patterns, font rendering differences, and browser-chrome / soft-keyboard appearance changes. Test on at least one real iOS phone, one real Android phone, and a tablet if relevant. Cheap Android phones reveal performance issues invisible on simulators.
 
 ## 5. Forbidden in tokens
 
