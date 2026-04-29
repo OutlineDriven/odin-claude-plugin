@@ -74,4 +74,4 @@ Note: sequential dispatch roughly doubles wall-clock time versus a single mode. 
 - Checking `code-ref` or `doc-ref` before `both` in the classifier — `both` becomes unreachable under first-match-wins
 - Firing `AskUserQuestion` with `multiSelect: true` — always single-select per axis
 - Writing or editing files during context gathering — this skill is read-only
-- Slash-arg override: `/contexts explore`, `/contexts research`, or `/contexts both` bypasses the classifier entirely and dispatches directly to that mode
+- Slash-arg override: `/contexts code-ref`, `/contexts doc-ref`, or `/contexts both` bypasses the classifier entirely and dispatches directly to that mode
