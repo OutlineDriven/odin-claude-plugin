@@ -95,6 +95,18 @@ Accessibility hostile; locale-fragile; reads as draft.
 ```
 Counter: ship a real icon font or SVG sprite (Lucide, Phosphor, Radix Icons).
 
+## 1.5 Slop tests (meta-checks)
+
+Two register-specific tests applied after the slop tell catalogue. Each is a yes/no question the surface must pass before shipping.
+
+### Brand register slop test
+
+If someone could look at this and say "AI made that" without hesitation, it's failed. The bar is distinctiveness — a visitor should ask "how was this made?", not "which AI made this?"
+
+### Product register slop test
+
+Would a user fluent in category's best tools (Linear, Figma, Notion, Raycast, Stripe) sit down and trust this interface, or pause at every subtly-off component?
+
 ## 2. Overkill compensation catalogue
 
 Slop in a different flavor — overkill is what happens when the model thinks "less" looks AI and overcorrects to "more".
@@ -152,6 +164,8 @@ Counter: cut decoration; sharpen the headline; ship the surface or kill it.
    | `slate-500` | `zinc-500`, `gray-500`, `neutral-500` |
    | `rounded-lg` uniform | `rounded-xl` uniform, `rounded-2xl` uniform |
    | Glassmorphism global | Neumorphism global, mesh-gradient global |
+
+   **Font reflex-reject list** (snapshot 2026-04-28 from impeccable/brand.md; review yearly when font fashion clearly shifts; treat as second-order reflex-reject — banned by default; pick anyway when the surface has a defensible historical / homage rationale): Fraunces, Newsreader, Lora, Crimson, Crimson Pro, Crimson Text, Playfair Display, Cormorant, Cormorant Garamond, Syne, IBM Plex Mono, IBM Plex Sans, IBM Plex Serif, Space Mono, Space Grotesk, Inter, DM Sans, DM Serif Display, DM Serif Text, Outfit, Plus Jakarta Sans, Instrument Sans, Instrument Serif.
 
 2. **Style anchoring on production exemplars.** Every direction names 1-2 taste anchors from §4 below; vague references ("clean", "modern") underspecify and the model defaults to slop.
 3. **Density commitment (2-3x default LLM output).** Vertical rhythm, line-height, and information density tighten 2-3x relative to the model's default. Default LLM output is sparse and air-padded; the sparseness itself reads as slop.
