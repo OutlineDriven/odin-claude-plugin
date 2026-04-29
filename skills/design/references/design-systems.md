@@ -143,6 +143,44 @@ Radix's internal color tooling uses **APCA** for design-input perceptual checks.
 
 P3 + alpha-blend variants are drop-in replacements for the same semantic steps; consumers do not change.
 
+## §4.5. Color quality controls
+
+Three quality controls that catch the most common color-system bugs.
+
+### Dangerous color combinations
+
+These commonly fail contrast, vibrate visually, or fail color-vision testing.
+
+| Combination | Why it fails |
+|-------------|--------------|
+| Light gray text on white | The #1 accessibility fail; nearly always sub-AA |
+| Gray text on any colored background | Gray reads washed-out and dead next to color — use a darker shade of the background hue, or a tinted-neutral aligned to the same hue |
+| Red text on green (or vice versa) | ~8% of men cannot distinguish |
+| Blue text on red background | Visual vibration; chromatic aberration |
+| Yellow text on white | Almost always fails AA |
+| Thin light text over photographic images | Unpredictable per-pixel contrast |
+
+Placeholder text is bound by the same WCAG rule as body text — 4.5:1 against the input background. The default light-gray placeholder rendered by most form libraries usually fails.
+
+### Dark mode is not inverted light mode
+
+Color swap alone does not produce a working dark theme. Dark mode requires different design decisions on each axis.
+
+| Axis | Light mode posture | Dark mode posture |
+|------|-------------------|-------------------|
+| Depth | Shadows | Surface-lightness layering — no shadows |
+| Text | Dark on light, normal weight | Light on dark, *reduced* weight (e.g. 350 instead of 400) — light-on-dark reads heavier |
+| Accents | Vibrant chroma | Slightly desaturated; high chroma on dark backgrounds glares |
+| Background | Pure or near-pure white | Never pure black — use dark gray (oklch L 0.12–0.18) with the brand hue tint |
+
+Build a 3-step elevation scale where higher elevations are *lighter* (e.g. L 0.15 / 0.20 / 0.25). Hold the brand hue and chroma constant; only vary L. Dark-mode contrast against a true black surface (`oklch(0 0 0)`) creates harsh edges that read as broken.
+
+### Alpha is a design smell
+
+Heavy use of `rgba()` / `hsla()` / OKLCH alpha usually means an incomplete palette. Alpha creates unpredictable contrast against whatever surface ends up underneath, performance overhead from per-pixel compositing, and inconsistency when the underlying surface changes.
+
+Define explicit overlay tokens for each context (`--surface-overlay-light`, `--surface-overlay-dark`) instead of leaning on `bg-black/10`. Exceptions where alpha is correct: focus rings (must show through to the underlying focused element), backdrop dims under modals, and translucent paradigm surfaces (glassmorphism — see `paradigms.md §3`, where translucence is the design choice not a workaround).
+
 ## §5. Material 3 Expressive
 
 **Material 3 Expressive** went stable **Dec 2025**. Compose support landed without experimental flags in the same release. Adds emphasized motion curves, an expanded expressive type scale, and color-role tonal palettes generated from a seed via **HCT** (Hue / Chroma / Tone) — perceptually uniform unlike HSL.
@@ -215,6 +253,8 @@ The non-negotiable bit: name tokens by what they MEAN, not by what they look lik
 ```
 
 When the brand shifts cooler or the section breathes wider, semantic names absorb the change at the token layer. Output names force a find-and-replace through every consumer.
+
+**Two-layer pattern.** Pair primitive tokens (`--blue-500`, `--gray-50`) with semantic tokens that reference them (`--color-primary: var(--blue-500)`, `--color-bg: var(--gray-50)`). Theming swaps redefine *only* the semantic layer — primitives stay constant. This is the same lesson Radix encodes through its 12-step semantic ramps; the two-layer pattern generalizes it to design-token files.
 
 ## §8.5. Component state matrix
 
