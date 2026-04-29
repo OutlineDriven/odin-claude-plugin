@@ -113,6 +113,7 @@ These references are runtime-agnostic — load them when the task fits the trigg
 | `references/personas.md` | Running a persona-based design audit (Alex / Jordan / Sam / Riley / Casey, plus project-specific personas derived from PRD / brand brief). |
 | `references/ux-writing.md` | Drafting UI labels, error messages, empty states, confirmation dialogs, and any user-facing copy — copy is design. |
 | `references/diversity.md` | Generating diverse direction candidates in step 2 (Diverge) of the workflow — six techniques to defeat centroid convergence. |
+| `references/cjk.md` | Designing for Chinese / Japanese / Korean content — locale tagging, Pan-CJK fonts, vertical writing / ruby, locale-specific glyphs. Routes into `korean.md` / `japanese.md` / `chinese.md` for per-locale production trends and DS landscape. |
 
 ## Cross-surface invariants
 
