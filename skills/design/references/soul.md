@@ -25,6 +25,14 @@ Both come from the same root: fear of commitment. Side A doesn't pick a directio
 
 Balance is the practice; conviction is the posture. The "ONE intentional moment per surface" rule from §4 is what conviction-with-balance looks like in practice — every other element earns its weight by NOT being the moment.
 
+## 1.6 Theme is a decision, not a default
+
+Dark vs. light is never a default. Not dark "because tools look cool dark." Not light "to be safe."
+
+Before choosing, write one sentence of physical scene: who uses this, where, under what ambient light, in what mood. If the sentence doesn't force the answer, it's not concrete enough — add detail until it does.
+
+"Observability dashboard" does not force an answer. "SRE glancing at incident severity on a 27-inch monitor at 2am in a dim room" does. Run the sentence, not the category.
+
 ## 2. First principles
 
 Seven principles. Each is a positive claim with a concrete failure that violates it. Read the principle, then read the anti-example; the anti-example is the test that names the failure mode in the wild.

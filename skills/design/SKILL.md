@@ -70,7 +70,7 @@ The "one accent ≤10%" cap applies only to **Restrained**. Committed / Full pal
 
 Six steps. Do not skip the divergence step.
 
-1. **Frame the surface.** Capture: surface (landing / dashboard / settings / docs / one-screen tool), primary user, density target, motion budget in ms. Consult `references/soul.md` for the philosophical anchor — *why* this design must feel a certain way before deciding *how*. Surface answers before generating directions; designing on assumed callers wastes the parallel budget.
+1. **Frame the surface.** Capture: surface (landing / dashboard / settings / docs / one-screen tool), primary user, density target, motion budget in ms. **Then write one sentence of physical scene** (who, where, ambient light, mood) that FORCES the dark/light decision. Category names alone do not force the answer — "observability dashboard" fails; "SRE glancing at incident severity on a 27-inch monitor at 2am in a dim room" succeeds. Consult `references/soul.md` for the philosophical anchor — *why* this design must feel a certain way before deciding *how*. Surface answers before generating directions; designing on assumed callers wastes the parallel budget.
 
 2. **Diverge: 3-4 directions in parallel via Verbalized Sampling.** Delegate the parallel-generation pattern from `odin:design-an-interface` — dispatch one Explore agent per direction with a constraint that *forces* contrast (post-minimalism vs neo-brutalism vs Material 3 vs Fluent, or named taste anchors that pull in opposite directions). Reject converged outputs; re-dispatch with sharpened constraints if two directions read alike.
 
