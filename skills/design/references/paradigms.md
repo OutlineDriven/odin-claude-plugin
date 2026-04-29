@@ -51,11 +51,11 @@ The diagnostic: if every removed element makes the surface lighter without makin
 
 **OKLCH palette starter.**
 ```css
---bg:     oklch(? ? ?);
---fg:     oklch(? ? ?);
---muted:  oklch(? ? ?);
---accent: oklch(? ? ?);
---border: oklch(? ? ?);
+--bg:     oklch(0.99 0 0);            /* near-white, no tint */
+--fg:     oklch(0.15 0.003 246);      /* near-black, cool undertone */
+--muted:  oklch(0.68 0.004 250);      /* muted gray, kept cool to match fg */
+--accent: oklch(0.66 0.13 38);        /* warm clay — non-purple/blue per anti-slop */
+--border: oklch(0.88 0.002 0);        /* very light neutral border */
 ```
 
 **Type pair.** Display: Inter Display or Geist Sans (committed weight, tight tracking). Body: Inter Text or Geist Sans Text. Mono: Geist Mono or JetBrains Mono. The pairing collapses display and body into one family at different optical sizes — appropriate because post-minimalism stakes restraint, not editorial contrast.
@@ -76,11 +76,11 @@ Lift the look without inheriting the audience and the brutalism becomes costume 
 
 **OKLCH palette starter.**
 ```css
---bg:     oklch(? ? ?);
---fg:     oklch(? ? ?);
---block-1: oklch(? ? ?);
---block-2: oklch(? ? ?);
---border: oklch(? ? ?);
+--bg:     oklch(1 0 0);               /* raw white */
+--fg:     oklch(0 0 0);               /* raw black */
+--block-1: oklch(0.65 0.12 165);      /* deep teal — non-purple/blue */
+--block-2: oklch(0.71 0.15 29);       /* saturated apricot/coral */
+--border: oklch(0 0 0);               /* raw black, 2-4px */
 ```
 
 **Type pair.** Display: a coarse grotesque or geometric mono (e.g. Space Mono, Departure Mono, IBM Plex Mono Bold) at heavy weight, oversized. Body: a plain neutral sans (Inter, Helvetica). The pairing earns its tension from contrast in *register*, not just size — display reads handmade, body reads industrial.
@@ -89,7 +89,7 @@ Lift the look without inheriting the audience and the brutalism becomes costume 
 
 **Density signature.** Spacing subset 16 / 24 / 48; 2–4px borders; line-height 1.3–1.5. Content-to-chrome ratio is medium-tight — generous block padding inside harsh borders, not cramped.
 
-**Taste anchors.** Read.cv (anti-LinkedIn, shut down 2024 but historically anchor). Gumroad (creator-economy register). Vercel's old blog era (pre-2023 grotesque-display moment).
+**Taste anchors.** Read.cv (anti-LinkedIn; acquired by Perplexity 2025 and shut down 2025-05-16 — historical anchor). Gumroad (creator-economy register). Vercel's old blog era (pre-2023 grotesque-display moment).
 
 ## Glassmorphism
 
@@ -101,10 +101,10 @@ The decoration only signals when used once; the second instance dilutes the firs
 
 **OKLCH palette starter.**
 ```css
---surface-base: oklch(? ? ?);   /* opaque host */
---glass-tint:   oklch(? ? ? / 0.10);
---glass-border: oklch(? ? ? / 0.20);
---accent:       oklch(? ? ?);
+--surface-base: oklch(0.15 0.003 246);          /* opaque dark host (cool near-black) */
+--glass-tint:   oklch(0.9 0.01 250 / 0.10);     /* translucent light tint on dark */
+--glass-border: oklch(0.9 0.008 250 / 0.20);    /* slightly more opaque edge */
+--accent:       oklch(0.66 0.13 38);            /* warm clay — non-purple/blue accent */
 ```
 
 **Type pair.** Inherit from the host paradigm; glass does not impose its own type system. Pairing typically defers to the platform — SF Pro on Apple surfaces, Segoe UI Variable on Microsoft. Imposing a custom display family on top of glass overloads the surface.
@@ -125,11 +125,11 @@ The dynamic-color system is permissive; without an opinionated seed color and a 
 
 **OKLCH palette starter.**
 ```css
---md-sys-primary:   oklch(? ? ?);
---md-sys-secondary: oklch(? ? ?);
---md-sys-tertiary:  oklch(? ? ?);
---md-sys-surface:   oklch(? ? ?);
---md-sys-on-surface: oklch(? ? ?);
+--md-sys-primary:    oklch(0.65 0.20 38);       /* warm clay primary */
+--md-sys-secondary:  oklch(0.70 0.15 90);       /* warm gold — non-purple/blue */
+--md-sys-tertiary:   oklch(0.68 0.18 135);      /* teal-green */
+--md-sys-surface:    oklch(0.98 0.002 100);     /* near-white surface, warm undertone */
+--md-sys-on-surface: oklch(0.10 0.004 280);     /* dark text, slight cool undertone */
 ```
 
 **Type pair.** Display: Roboto Flex or a custom variable Google Font keyed to a committed Display Large size. Body: Roboto Flex Body or Google Sans Text. The pairing leans on variable-axis commitment — Material 3 Expressive rewards optical-size discipline over family contrast.
@@ -148,11 +148,11 @@ The dynamic-color system is permissive; without an opinionated seed color and a 
 
 **OKLCH palette starter.**
 ```css
---fluent-bg:       oklch(? ? ?);
---fluent-fg:       oklch(? ? ?);
---fluent-accent:   oklch(? ? ?);
---fluent-backplate: oklch(? ? ?);
---fluent-stroke:   oklch(? ? ?);
+--fluent-bg:        oklch(1 0 0);               /* white background, light theme */
+--fluent-fg:        oklch(0.10 0.002 280);      /* near-black text */
+--fluent-accent:    oklch(0.568 0.167 251);     /* Microsoft Communication Blue #0078D4 — platform-mandated exception to the anti-purple/blue rule, since Fluent 2 IS the Microsoft platform palette */
+--fluent-backplate: oklch(0.95 0.003 100);      /* subtle backplate tint */
+--fluent-stroke:    oklch(0.88 0.002 0);        /* hairline stroke / border */
 ```
 
 **Type pair.** Display: Segoe UI Variable Display. Body: Segoe UI Variable Text. Mono: Cascadia Code. The pairing is platform-inherited — the Variable axes (size, weight, optical) carry the typographic load, and substituting a non-Segoe family breaks the Microsoft-native register the rest of the system depends on.
