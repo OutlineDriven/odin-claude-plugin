@@ -1,6 +1,6 @@
 ---
 name: refactorer
-description: Behavior-preserving structural-change agent. Renames, extracts, inlines, restructures. Use proactively for cleanups, decoupling, and readability improvements that do not alter externally-observable behavior. Distinct from skills `odin:refactor-break-bw-compat` and `odin:request-refactor-plan`.
+description: "Behavior-preserving structural-change agent. Renames, extracts, inlines, restructures. Use proactively for cleanups, decoupling, and readability improvements that do not alter externally-observable behavior. Distinct from skills `odin:refactor-break-bw-compat` and `odin:request-refactor-plan`."
 tools: Read, Edit, Write, Bash, Grep, Glob, LSP
 model: sonnet
 effort: high

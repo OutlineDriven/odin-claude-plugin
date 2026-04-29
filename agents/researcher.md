@@ -1,6 +1,6 @@
 ---
 name: researcher
-description: External-knowledge research agent. Fetches documentation, RFCs, papers, and vendor sources via the Tier 1-5 source ladder. Use proactively when the task names a library, framework, SDK, API, CLI tool, or cloud service requiring current information beyond training data. Distinct from the verb-form skill `odin:research` and the `contexts` classifier mode `doc-ref`.
+description: "External-knowledge research agent. Fetches documentation, RFCs, papers, and vendor sources via the Tier 1-5 source ladder. Use proactively when the task names a library, framework, SDK, API, CLI tool, or cloud service requiring current information beyond training data. Distinct from the verb-form skill `odin:research` and the `contexts` classifier mode `doc-ref`."
 tools: Read, Grep, Glob, WebFetch, WebSearch, ListMcpResourcesTool, ReadMcpResourceTool
 model: sonnet
 effort: medium

@@ -1,6 +1,6 @@
 ---
 name: reviewer
-description: Post-implementation code-quality review agent (read-only). Checks conventions, error handling, test coverage, naming, and clarity. Use proactively after writing or modifying code, before committing or merging. Distinct from the verb-form skill `odin:review`.
+description: "Post-implementation code-quality review agent (read-only). Checks conventions, error handling, test coverage, naming, and clarity. Use proactively after writing or modifying code, before committing or merging. Distinct from the verb-form skill `odin:review`."
 tools: Read, Grep, Glob, Bash, LSP
 model: sonnet
 effort: medium

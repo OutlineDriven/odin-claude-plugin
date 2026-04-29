@@ -1,6 +1,6 @@
 ---
 name: debugger
-description: Hypothesis-driven debugging agent. Isolates defects to root cause, applies the minimal fix, and adds a regression test. Use proactively for compiler errors, runtime failures, test failures, unexpected behavior, or production incidents. Distinct from the verb-form skill `odin:debug`.
+description: "Hypothesis-driven debugging agent. Isolates defects to root cause, applies the minimal fix, and adds a regression test. Use proactively for compiler errors, runtime failures, test failures, unexpected behavior, or production incidents. Distinct from the verb-form skill `odin:debug`."
 tools: Read, Edit, Bash, Grep, Glob, LSP, Monitor
 model: sonnet
 effort: high
