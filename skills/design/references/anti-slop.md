@@ -97,7 +97,7 @@ Counter: ship a real icon font or SVG sprite (Lucide, Phosphor, Radix Icons).
 
 ## 1.5 Slop tests (meta-checks)
 
-Two register-specific tests applied after the slop tell catalogue. Each is a yes/no question the surface must pass before shipping.
+Three meta-checks applied after the slop tell catalogue: two register-specific tests plus the category-reflex check that catches training-data defaults. Each is a yes/no question the surface must pass before shipping.
 
 ### Brand register slop test
 
@@ -106,6 +106,38 @@ If someone could look at this and say "AI made that" without hesitation, it's fa
 ### Product register slop test
 
 Would a user fluent in category's best tools (Linear, Figma, Notion, Raycast, Stripe) sit down and trust this interface, or pause at every subtly-off component?
+
+### Category-reflex check
+
+If someone could guess the theme and palette from the category name alone — "observability → dark blue", "healthcare → white + teal", "finance → navy + gold", "crypto → neon on black" — it's the training-data reflex. Rework the scene sentence (see `references/soul.md` §1.6) and color strategy until the answer is no longer obvious from the domain.
+
+## 1.6 Absolute bans (rewrite-or-die)
+
+Match-and-refuse. If you're about to write any of these, rewrite the element with different structure rather than negotiating the ban down. Six bans, each with the rewrite prescription that closes the loop.
+
+### Side-stripe borders
+
+`border-left` or `border-right` greater than 1px as a colored accent on cards, list items, callouts, or alerts. Never intentional. Rewrite with full borders, background tints, leading numbers/icons, or nothing.
+
+### Gradient text
+
+`background-clip: text` combined with a gradient background. Decorative, never meaningful. Use a single solid color. Emphasis via weight or size.
+
+### Glassmorphism as default
+
+Blurs and glass cards used decoratively. Rare and purposeful, or nothing.
+
+### The hero-metric template
+
+Big number, small label, supporting stats, gradient accent. SaaS cliché.
+
+### Identical card grids
+
+Same-sized cards with icon + heading + text, repeated endlessly.
+
+### Modal as first thought
+
+Modals are usually laziness. Exhaust inline / progressive alternatives first.
 
 ## 2. Overkill compensation catalogue
 
