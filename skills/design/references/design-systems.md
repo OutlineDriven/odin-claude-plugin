@@ -278,6 +278,87 @@ Every interactive component ships the full state matrix — token-driven, never 
 
 The 13 states are not optional. A button with default + hover only is ~15% complete; the other 85% surfaces as the components-that-broke-on-Tuesday list.
 
+## §8.6. Typography rhythm and font loading
+
+### Modular scale
+
+Too many sizes that are too close together produce muddy hierarchy. Commit to a 5-size system. Apply the ≥1.25 ratio rule to the *hierarchy* end of the scale (body → subheading → heading → display); the micro end (xs / sm / base) intentionally uses tighter ratios because those steps are functional differentiators (caption vs. metadata vs. body — different *roles*, not different hierarchy levels), not visual hierarchy steps.
+
+| Role | Typical size | Use | Adjacent ratio |
+|------|--------------|-----|----------------|
+| `xs` | 0.75rem | Captions, legal, footnotes | — |
+| `sm` | 0.875rem | Secondary UI, metadata | 1.167 (functional) |
+| `base` | 1rem | Body text | 1.143 (functional) |
+| `lg` | 1.25–1.5rem | Subheadings, lead text | ≥1.25 (hierarchy) |
+| `xl+` | 2–4rem | Headlines, hero text | ≥1.6 (hierarchy) |
+
+Common ratios for the hierarchy end: 1.25 (major third), 1.333 (perfect fourth), 1.5 (perfect fifth). Pick one ratio for the body→heading→display sequence and commit; mixed ratios across hierarchy steps read as inconsistent. The functional micro-steps stay tight because their job is "different *role*" not "louder *voice*".
+
+### Vertical rhythm
+
+Line-height is the base unit for *all* vertical spacing. If body text runs `font-size: 1rem` with `line-height: 1.5` (= 1.5rem effective), then spacing tokens should fall on multiples of 1.5rem (or its half: 0.75rem). Text and space share a mathematical foundation; anchor your `--space-*` scale to the body line-height unit, not to arbitrary pixel values.
+
+### Paragraph rhythm
+
+Pick *one* of: space between paragraphs, OR first-line indentation. Never both. Digital UI typically wants space (the indent reads as a typo on screen); editorial / long-form print can earn indent-only (the space reads as a section break). Mixing the two double-encodes a single signal.
+
+### ALL-CAPS tracking
+
+Capitals at default spacing sit too close — letterforms designed for mixed-case rhythm pile up when the descenders disappear. Add 5–12% letter-spacing on short all-caps labels, eyebrows, and small headings.
+
+```css
+.eyebrow { text-transform: uppercase; letter-spacing: 0.08em; }
+```
+
+Real small-caps (`font-variant-caps: all-small-caps`) need the same treatment, slightly gentler (~0.05em).
+
+### Fluid type, with bounds
+
+`clamp(min, preferred, max)` scales smoothly with the viewport — fine for headings and display on marketing surfaces where text dominates the layout. Keep `max ≤ ~2.5 × min`. Wider ratios break the browser's zoom and reflow behavior and make large viewports feel like the page is shouting.
+
+```css
+h1 { font-size: clamp(2rem, 5vw + 1rem, 5rem); } /* max/min = 2.5; OK */
+```
+
+App UIs, dashboards, and data-dense interfaces use *fixed* `rem` scales — Material, Polaris, Primer, and Carbon all do. Spatial predictability matters more than fluid scaling for container-based layouts. Body text stays fixed even on marketing pages; the per-viewport size difference is too small to be worth the layout-shift cost.
+
+### Web font loading
+
+Custom web fonts arrive late, so without compensation the browser swaps fallback → web font and the layout shifts.
+
+```css
+/* The web font itself */
+@font-face {
+  font-family: 'CustomFont';
+  src: url('font.woff2') format('woff2');
+  font-display: swap;
+}
+
+/* A fallback with overridden metrics so the swap is invisible */
+@font-face {
+  font-family: 'CustomFont-Fallback';
+  src: local('Arial');
+  size-adjust:        105%;     /* match x-height */
+  ascent-override:    90%;      /* match ascender height */
+  descent-override:   20%;      /* match descender depth */
+  line-gap-override:  10%;      /* match line spacing */
+}
+
+body { font-family: 'CustomFont', 'CustomFont-Fallback', sans-serif; }
+```
+
+`size-adjust` + `ascent/descent/line-gap-override` align the fallback's metrics to the web font, so when the swap happens the layout boxes are already the right size. Tools like [Fontaine](https://github.com/unjs/fontaine) calculate the overrides automatically per-font; do not eyeball them.
+
+**`font-display`: swap vs. optional.** `swap` shows fallback text immediately and switches to the web font when it arrives (FOUT). `optional` uses the fallback if the web font misses a tight ~100ms budget and *avoids* the swap entirely. Pick `optional` when zero layout shift matters more than seeing the branded font on slow networks.
+
+**Preload only the critical weight.** Typically the regular-weight body font used above the fold. Preloading every weight pre-loads bandwidth you do not save anywhere else.
+
+**Variable fonts when the surface needs ≥3 weights or styles.** One variable file is usually smaller than three static weight files, gives fractional weight control, and pairs with `font-optical-sizing: auto` so the optical-size axis follows your size scale automatically. For 1–2 weights, static is fine and the wire-format diff is minor.
+
+### Token shape
+
+Name typography tokens semantically — `--text-body`, `--text-heading-lg`, `--text-eyebrow` — not by value. Include the font stack, size scale, weights, line-heights, and letter-spacing in the token system; light-text-on-dark compensation (see §4.5 "Dark mode is not inverted light mode") becomes a per-theme override on the line-height and letter-spacing tokens.
+
 ## §9. Cite-and-defer
 
 Citations: w3c.github.io/design-tokens, amzn.github.io/style-dictionary, www.radix-ui.com/colors, m3.material.io, fluent2.microsoft.design, developer.apple.com/design.
