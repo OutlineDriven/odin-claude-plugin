@@ -289,6 +289,48 @@ The browser combines `srcset` widths with the device-pixel-ratio to pick the rig
 
 **Real-device testing.** DevTools device emulation reproduces viewport and pointer-type but misses real touch interactions, real CPU / memory constraints, network latency patterns, font rendering differences, and browser-chrome / soft-keyboard appearance changes. Test on at least one real iOS phone, one real Android phone, and a tablet if relevant. Cheap Android phones reveal performance issues invisible on simulators.
 
+## 4.11 Optical adjustments + touch targets
+
+(For breakpoint-free grids see §4 "Breakpoint-free responsive grid" — `repeat(auto-fit, minmax())` is already the canonical pattern; this section adds optical-tuning and touch-target patterns that depend on it.)
+
+**Optical adjustments.** Geometric alignment and optical alignment diverge on certain glyphs and shapes — `margin: 0` produces visually-indented text, and a centered play icon looks shifted off-center. Define dedicated optical-nudge tokens in your token file so the values are named, not magic.
+
+```css
+:root {
+  /* Optical-adjustment tokens — sub-spacing-scale by nature. */
+  --optical-nudge-text: -0.05em;     /* compensate letterform indent on flush-left text */
+  --optical-nudge-icon: 1px;          /* compensate visual mass shift on directional icons */
+}
+
+/* Letterform whitespace creates a perceived indent at margin: 0;
+   nudge text left by ~5% of its em to optically align. */
+.heading-flush-left { margin-left: var(--optical-nudge-text); }
+
+/* A geometrically centered play triangle reads off-center because
+   its visual mass is right-shifted; nudge right by the icon token. */
+.play-icon { transform: translateX(var(--optical-nudge-icon)); }
+```
+
+The values are illustrative defaults; tune per-typeface and per-icon-set. The point of the named tokens is to make optical adjustments *intentional* — a magic `1px` in component CSS reads as a leftover hack; `var(--optical-nudge-icon)` reads as a deliberate optical correction with a system home.
+
+**Touch-target pseudo-element.** Icon buttons can stay visually small while still meeting the 44×44px minimum tap target, via an invisible `::before` that expands the hit area without affecting layout.
+
+```css
+.icon-button {
+  width:  var(--space-24);     /* visual: 24px */
+  height: var(--space-24);
+  position: relative;
+}
+
+.icon-button::before {
+  content: '';
+  position: absolute;
+  inset: calc(var(--space-8) * -1.25);   /* expands hit area to 44×44 */
+}
+```
+
+The pseudo-element is invisible but receives pointer / touch events because the element box extends through it. Use this rather than padding the icon up to 44px when the visual design needs the icon to read small.
+
 ## 5. Forbidden in tokens
 
 - **HSL or RGB for design-token color.** OKLCH-only. HSL lightness is not perceptual and produces uneven ramps across hues.
