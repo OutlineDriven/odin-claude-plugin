@@ -41,9 +41,44 @@ Three curves cover production motion needs. Bounce and elastic curves are banned
 
 Pick one curve per surface and commit; switching curves between adjacent components reads as inconsistency.
 
+## 3.5. Premium motion materials
+
+Transform and opacity are reliable defaults, not the whole palette. Premium interfaces often reach for atmospheric properties: blur reveals, backdrop-filter panels, saturation or brightness shifts, shadow bloom, SVG filters, masks, clip paths, gradient-position movement, and variable-font or shader-driven effects.
+
+Pick the material to fit the effect.
+
+| Material | Use for |
+|----------|---------|
+| `transform` / `opacity` | Movement, press feedback, simple reveals, list choreography. |
+| `filter` / `backdrop-filter` (blur, saturation, brightness) | Focus pulls, depth, glass-and-lens effects, softened entrances, atmospheric transitions. |
+| `clip-path` / mask | Wipes, reveals, editorial cropping, product-style transitions. |
+| `box-shadow` / `filter: drop-shadow` / hue rotation | Energy, affordance, focus, warmth, active-state signals. |
+| `grid-template-rows` change with FLIP transforms | Expanding and reflowing layout without animating `height` directly. |
+
+**Hard rules.** Avoid animating layout-driving properties casually (`width`, `height`, `top`, `left`, margins) — they trigger layout, which is the costliest pipeline stage. Keep expensive effects bounded to small or isolated areas. Verify in-browser on the target viewport before shipping; subjective premium falls apart if the result janks at 30fps.
+
+## 3.6. Staggered animations
+
+Use CSS custom properties for clean stagger.
+
+```css
+.list-item {
+  animation: slide-up 400ms var(--ease-out-quart) both;
+  animation-delay: calc(var(--i, 0) * 50ms);
+}
+```
+
+```html
+<li class="list-item" style="--i: 0">…</li>
+<li class="list-item" style="--i: 1">…</li>
+<li class="list-item" style="--i: 2">…</li>
+```
+
+**Cap the total stagger.** 10 items × 50ms = 500ms total. For lists longer than ~12 items, reduce per-item delay (e.g. 30ms) or cap the staggered count (first 8 stagger; the rest fade in together). Unbounded stagger lengthens perceived load time without adding meaning.
+
 ## 4. Web (vanilla CSS)
 
-Animate `transform` and `opacity` only. Animating layout properties (`width`, `height`, `top`, `left`, `padding`, `margin`, `font-size`) forces synchronous layout on every frame; the result is jank, not motion.
+Animate `transform` and `opacity` by default — they composite on the GPU without forcing layout. Layout-driving properties (`width`, `height`, `top`, `left`, `padding`, `margin`, `font-size`) force synchronous reflow every frame; the result is jank, not motion. Reach for the broader premium-material palette in §3.5 (blur, backdrop-filter, clip-path, mask) only when the effect earns its cost — bound the affected area, verify on the target viewport, and accept the risk that the same effect may need to drop to a fade fallback on weaker hardware or when `prefers-reduced-data` / `prefers-reduced-motion` is set.
 
 ```css
 /* Good — composited transform + opacity. */
@@ -72,7 +107,7 @@ Reserve `name` for shared-element transitions only; non-shared enter / exit omit
 
 For the per-type animation map, motion-budget priority table, and CSS recipes targeting the spec-defined `:active-view-transition-type()` pseudo-class, see `references/react.md` §6 — that section is the canonical specification for React-specific View Transition usage.
 
-Outside View Transitions, the same web rules apply: animate `transform` / `opacity`, defer to `useLayoutEffect` for measurement-driven motion (never read layout in render), and budget the motion within a single React commit.
+Outside View Transitions, the same web rules apply: animate `transform` / `opacity` by default (premium materials per §3.5 only when measured), defer to `useLayoutEffect` for measurement-driven motion (never read layout in render), and budget the motion within a single React commit.
 
 ## 6. TUI (terminal UI)
 
@@ -143,3 +178,21 @@ Web: `@media (prefers-reduced-motion: reduce)` scopes suppression to vestibular-
 ```
 
 The pattern is "honor the preference for motions that risk a vestibular trigger; do not blanket-suppress every transition." A focus ring fading in 120ms is safe; a full-screen parallax scrolling at 60% of viewport height is not. Crossfade is the universal safe fallback for the suppressed surfaces.
+
+## 9. Perceived performance
+
+Nobody cares how fast a surface is — only how fast it *feels*. Perception is often as effective as raw performance.
+
+**The 80ms threshold.** Human sensory perception buffers input for ~80ms to synchronize across modalities. Anything under 80ms feels instant. This is the target for micro-interactions (button press feedback, hover affordances, toggle states).
+
+**Active vs. passive time.** Passive waiting (staring at a spinner) feels longer than active engagement. Three strategies shift the balance:
+
+- **Preemptive start** — begin the transition immediately while loading (iOS app-zoom, skeleton UI). The user perceives work happening *during* the wait.
+- **Early completion** — show content progressively (video buffering, progressive images, streaming HTML); never wait for everything before showing anything.
+- **Optimistic UI** — update the interface immediately, handle failures gracefully (Instagram likes work offline; the UI updates instantly, syncs later). Use for low-stakes actions; avoid for payments and destructive operations (see `interaction-design.md` "Loading states").
+
+**Easing affects perceived duration.** `ease-in` (accelerating toward completion) makes tasks feel shorter because the peak-end effect weights the final moments heavily. `ease-out` feels satisfying for entrances; `ease-in` toward task completion compresses perceived time.
+
+**Caveat.** Too-fast responses can *reduce* perceived value. Users distrust instant results for complex operations (search analysis, AI generation) — a brief intentional delay signals real work is happening. The same engineering that makes a payment confirmation feel instantaneous can make an analysis feel suspect.
+
+**Implementation hygiene.** Do not set `will-change` preemptively — apply only when animation is imminent (`:hover`, `.is-animating` class), then remove. For scroll-triggered animations use IntersectionObserver, not scroll listeners; unobserve after firing once.
