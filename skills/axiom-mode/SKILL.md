@@ -39,20 +39,26 @@ USE keywords: IMPLIES, AND, OR, NOT, IFF, XOR, FORALL, EXISTS, THEREFORE, GIVEN,
 IF, THEN, ELSE, WHEN, UNLESS, PRE, POST, INVARIANT, DEF, LET, WHERE, LEMMA, THEOREM,
 QED, CASE, MUST, SHALL, MAY, CANNOT.
 
-## What gets compressed (subsumes caveman)
+## CompactAxiomEnglish register (subsumes caveman)
+
+DEF CompactAxiomEnglish: controlled-subset English WHERE ceremonial filler
+IS removed AND predicate-form structure IS preserved AND technical terms
+ARE kept verbatim.
+
+### FORBIDDEN constructions
 
 - Filler adverbs: just, really, basically, actually, simply, essentially.
 - Pleasantry openers: Sure, Of course, Happy to, Let me.
 - Hedging phrases: I think, it might be, it would seem, perhaps we could.
 - Restated context the user already supplied.
 - Narrative meta-commentary: Now I will read the file, Next, let me check.
-- Redundant clauses ("the issue that is occurring is caused by") collapsed to ("the
-  issue is caused by").
+- Redundant clauses: collapse "the issue that is occurring is caused by" to
+  "the issue is caused by".
 
-## What is preserved
+### ALLOWED constructions
 
-- Articles (a, an, the); subject-verb agreement; prepositions and conjunctions where they
-  carry meaning. Sentences remain grammatical.
+- Articles (a, an, the); subject-verb agreement; prepositions and conjunctions
+  WHERE they carry meaning. Sentences remain grammatical.
 - Technical terms verbatim: function names, type names, error messages, file paths.
 - Code blocks unchanged; never compress code.
 - Decision-oriented register: imperatives, recommendations, trade-offs.
