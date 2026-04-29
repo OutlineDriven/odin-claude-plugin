@@ -139,6 +139,27 @@ Same-sized cards with icon + heading + text, repeated endlessly.
 
 Modals are usually laziness. Exhaust inline / progressive alternatives first.
 
+## 1.7 Cross-CJK anti-slop tells
+
+Surface-level summary for Chinese / Japanese / Korean content. Full treatment in `references/cjk.md` and per-locale `korean.md` / `japanese.md` / `chinese.md`. Two-sided pattern matches §1.5 / §1.6.
+
+**Technical tells (defaults that betray no thought):**
+
+- Synthetic italic on CJK — CJK has no traditional italic style; emphasize via `text-emphasis` (傍点) or weight.
+- Latin letter-spacing applied to CJK — degrades em-grid composition; reach for OpenType `palt` / `halt` instead.
+- Wrong-locale font — JP build on SC content (and the inverse) surfaces immediately to native readers via 边 / 邊 / 辺 and 直 / 骨 / 黄 glyph differences; tag `lang` and let `locl` pick the regional form.
+- Default Tailwind / `system-ui` font stack with no CJK fallback — Tailwind v4 ships zero CJK fonts; add Pretendard / PingFang / Hiragino / Yu Gothic / Noto Sans CJK explicitly.
+- Auto-hyphenation enabled — does nothing for CJK; "didn't think about it" tell.
+- Pretendard before `-apple-system` in fallback chain — defeats Pretendard's own system-matching rationale on Apple OSes.
+
+**Cliché tells (pattern-matching "Asian" without shipping anything):**
+
+- JP — sakura petals as decoration; washi paper textures as background; hinomaru-red as primary brand colour (absent from every major JP product DS).
+- CN — red+gold "Lunar New Year palette" as PRIMARY brand colour; calligraphy fonts as body text; ink-wash backgrounds as decoration; dragon / phoenix iconography as branding.
+- KR — K-pop pastel + serif Hangul as "K-design" (Pinterest cliché — does NOT match shipping Korean tech production); 단청 (dancheong) festival palette as primary brand.
+
+→ See `cjk.md §8` for cross-CJK summary; `korean.md §8` / `japanese.md §9` / `chinese.md §10` for language-specific deep treatment.
+
 ## 2. Overkill compensation catalogue
 
 Slop in a different flavor — overkill is what happens when the model thinks "less" looks AI and overcorrects to "more".
