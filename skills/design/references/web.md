@@ -210,6 +210,32 @@ Type size scale: five steps (xs / sm / base / lg / xl) with a single ratio — 1
 
 **`color-mix()` for state variants.** Hover, pressed, disabled, focus-ring tints all compose from the base accent via `color-mix(in oklch, ...)`. The token surface stays small; the variants stay perceptually consistent.
 
+**Breakpoint-free responsive grid.** `grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))` produces card layouts that reflow without media queries. The card decides its own minimum width; the grid decides how many fit. Pair with `gap` for spacing instead of margins.
+
+## 4.5 Forms patterns
+
+Inputs need `autocomplete` and `name` for autofill engines; semantic `type` and `inputmode` drive the right mobile keyboard. Labels are clickable via `<label for>` association. Submit buttons stay enabled until the request fires (disabling pre-submit blocks debugging); swap the label for a spinner during loading. Inline errors render under the offending field; focus moves to the first invalid input on submit failure.
+
+Placeholders end with `…` when they show a pattern (`Search by name…`, `123-45-6789…`); never substitute placeholders for labels. `autocomplete="off"` belongs on non-auth fields only (one-time codes, captchas); never on passwords or addresses. Warn before navigation with unsaved changes (`beforeunload` or framework equivalent). Never prevent paste — paste-blocking on password fields pushes users toward weaker passwords. Disable spellcheck (`spellcheck="false"`) on usernames, URLs, and code identifiers. Checkboxes and radios are a single hit target — whole label clickable, not just the box.
+
+## 4.6 Touch interaction
+
+`touch-action: manipulation` on tappable elements eliminates the 300ms double-tap-zoom delay on iOS. Set `-webkit-tap-highlight-color` intentionally (token color or `transparent`); default-blue is a Safari default, not a design choice. `overscroll-behavior: contain` on modals and drawers stops scroll-chaining into the page beneath. During drag, disable text selection (`user-select: none`) and apply `inert` to background content so screen readers don't pick up irrelevant nodes. `autoFocus` is desktop-only — on mobile it summons the keyboard and shifts the viewport before the user has read the form.
+
+## 4.7 Safe areas + viewport
+
+`env(safe-area-inset-*)` for notch / dynamic-island / home-indicator padding on iOS and Android. `overflow-x: hidden` on full-bleed containers prevents accidental horizontal scrollbars from long unbreakable strings or transformed elements. `font-variant-numeric: tabular-nums` on numeric columns aligns digit widths so totals, timestamps, and prices stack cleanly.
+
+## 4.8 Dark mode native fixes
+
+`color-scheme: dark` on `<html>` fixes default scrollbar color and native form-input rendering on Windows in one property. Match `<meta name="theme-color">` to the page background per theme — the browser chrome adopts this color on iOS Safari and Android Chrome, and a mismatch reads as a flicker between page and frame. Native `<select>` needs explicit `background-color` and `color` in dark mode on Windows; the OS otherwise picks white-on-white.
+
+## 4.9 i18n + locale
+
+Use `Intl.DateTimeFormat` and `Intl.NumberFormat` for all dates, times, and numbers — never hardcode `MM/DD/YYYY`, `1,000.00`, or currency symbols. Detect locale via `Accept-Language` (server) or `navigator.languages` (client); never IP-based geolocation, which conflates location with language preference (a French speaker in Tokyo wants French, not Japanese). `translate="no"` on brand names, code identifiers, monospace tokens, and proper nouns — Google Translate will otherwise render `Stripe` as `Bande` in French; apply per-element, not site-wide.
+
+Text-expansion budget per locale: German +30%, French +20%, Finnish +30-40%, Chinese -30%. Buttons, labels, and table headers must accommodate the swing without wrapping or truncating; design at the longest expected length and let other locales breathe.
+
 ## 5. Forbidden in tokens
 
 - **HSL or RGB for design-token color.** OKLCH-only. HSL lightness is not perceptual and produces uneven ramps across hues.
