@@ -3,7 +3,7 @@ name: planner
 description: "Read-only architecture and implementation planning agent. Use proactively before non-trivial code changes when the approach is unclear, multiple alternatives need weighing, or cross-file impact is uncertain. Do not invoke for typo fixes or single-line edits. Distinct from the verb-form skill `odin:plan` and from the built-in `Plan` subagent (which fires only inside plan-mode)."
 tools: Read, Grep, Glob, LSP, AskUserQuestion
 model: opus
-effort: high
+effort: max
 memory: project
 ---
 
