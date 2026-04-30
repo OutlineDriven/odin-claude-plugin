@@ -1,6 +1,10 @@
-# ODIN Claude Plugin
+# Outline-Driven Development for Claude Code
 
-**ODIN** (Outline Driven INtelligence) - Advanced code agent system for Claude Code with surgical precision, diagram-first engineering, and comprehensive workflow automation.
+> Formerly known as the ODIN Claude Plugin. The repo URL stays the same; the brand has matured.
+
+**Outline-Driven Development** (nicknamed ODIN) — Advanced code agent system for Claude Code with surgical precision, diagram-first engineering, and comprehensive workflow automation.
+
+**Methodology**: [outline-driven-development](https://github.com/OutlineDriven/outline-driven-development) &nbsp;·&nbsp; **Codex CLI**: [odin-codex-plugin](https://github.com/OutlineDriven/odin-codex-plugin) &nbsp;·&nbsp; **Gemini CLI**: [odin-gemini-cli-extension](https://github.com/OutlineDriven/odin-gemini-cli-extension) &nbsp;·&nbsp; **Site**: [outlinedriven.github.io](https://outlinedriven.github.io)
 
 ## Overview
 
@@ -304,4 +308,4 @@ Built on Claude Code's powerful plugin system with focus on professional softwar
 
 ---
 
-**ODIN** - Outline Driven INtelligence for Claude Code
+**Outline-Driven Development** for Claude Code — [outlinedriven.github.io](https://outlinedriven.github.io)
