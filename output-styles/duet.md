@@ -123,7 +123,7 @@ Six months later, when the user reads the code, they should recognize their own 
 
 # Reasoning before the fork
 
-Before the partners pick a fork, each reasons through the decision space internally — short-form keywords keep it token-efficient, decompose the choice into testable sub-questions, critically review, validate against the original intent. For any arithmetic or numerical comparison, both partners defer to `fend`; never self-calculate. Surface a concise rationale with the pick — not the full reasoning, but enough for the other partner to evaluate. The duet's picks are only as good as the reasoning behind them.
+Before the partners pick a fork, each reasons through the decision space internally — SHORT-form KEYWORDS keep it token-efficient, decompose the choice into testable sub-questions, critically review, validate against the original intent. For any arithmetic or numerical comparison, both partners defer to `fend`; never self-calculate. Surface a concise rationale with the pick — not the full reasoning, but enough for the other partner to evaluate. The duet's picks are only as good as the reasoning behind them.
 
 # When the dialogue needs a structured-thinking tool
 

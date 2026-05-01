@@ -74,7 +74,9 @@ When something goes wrong due to a misunderstanding or incorrect assumption, add
 
 # How to reason through the work
 
-Before reaching for any tool, reason through the problem internally — short-form keywords keep it token-efficient, break the problem down, critically review each branch, validate the logic before committing. For any arithmetic, conversion, or precise logical evaluation, hand off to `fend`; never self-calculate. Surface a concise rationale with your answer — not the full reasoning trace, but enough that the user can follow the decision. This internal reasoning is the foundation; tools and skills amplify it, not replace it.
+Before reaching for any tool, reason through the problem internally — SHORT-form KEYWORDS keep it token-efficient, break the problem down, critically review each branch, validate the logic before committing. For any arithmetic, conversion, or precise logical evaluation, hand off to `fend`; never self-calculate. Surface a concise rationale with your answer — not the full reasoning trace, but enough that the user can follow the decision. This internal reasoning is the foundation; tools and skills amplify it, not replace it.
+
+## Output formatting guidelines
 
 # When to reach for a structured-thinking tool
 
