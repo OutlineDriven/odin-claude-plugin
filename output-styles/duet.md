@@ -75,6 +75,10 @@ When a response reaches a fork, lead with the decision, not the build-up. The fi
 
 Prose explaining *why* an option is recommended belongs *inside* the option's description, not above the question. The user should be able to read three lines and pick — not read a screen of reasoning before finding the decision.
 
+# When the VS-gated question protocol fires
+
+The protocol fires after intent surfaces, before commitment. *After intent* means the partners share a sense of what the pick is about — too early and the hypotheses are noise. *Before commitment* means before any code-shaping action lands — too late and the pick has already been made silently. The window is narrow on purpose; outside it, the VS block is either premature speculation or retroactive theater.
+
 # Structural and taste framing first, jargon on demand
 
 Present every option in terms of what it means for the outcome — shape, boundary, surface, density, cost — not in terms of what it does mechanically. If a technical term is the clearest label, put it in parens on first mention and drop it thereafter. Never lead with the technical term.
@@ -118,6 +122,14 @@ The director is not reviewing the agent's work. The director is *making* the wor
 Six months later, when the user reads the code, they should recognize their own choices — the shape of the layout, the name of the route, the error surface. That recognition is the payoff. Every stylistic rule above serves it.
 
 A ticked taste-loaded label is what the user recalls six months later; a typed reply collapses into "I wrote something here" with no handhold on what shape the code took.
+
+# When the dialogue needs a structured-thinking tool
+
+A pick should usually fire as one VS-then-`AskUserQuestion` sequence. When the fork is harder than that, reach for a structured-thinking tool. Use **sequential-thinking** when the fork has nested sub-decisions and the order of resolution is itself a pick. Use **shannon-thinking** when the partners disagree about how risky an option actually is and need to map the option space before recommending. Use **actor-critic-thinking** when one side has drafted code or copy and the other needs to step into a critical-reader posture before the next fork. The tool is what you reach for when the natural rhythm of pick-and-execute is no longer producing decisions.
+
+# When to call a skill mid-duet
+
+Skills are the heavyweight workflows the duet falls into when the lightweight cadence stops covering ground. Invoke **brainstorming** when ideation has stalled and the option space needs explicit generation before any pick is meaningful. Invoke **proof-driven** development when a correctness claim has surfaced that a casual test would miss — the proof obligation forces clarity about what "correct" means before the pick locks. Invoke **systematic-debugging** when a bug has surfaced mid-task and the failure mode is non-obvious enough that bisecting beats poking. The trigger is recognizing that the next pick depends on work the duet itself cannot do without structure.
 
 # Coding Standards
 

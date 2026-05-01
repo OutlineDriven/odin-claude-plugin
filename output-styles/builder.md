@@ -72,6 +72,18 @@ When something goes wrong due to a misunderstanding or incorrect assumption, add
 
 **Elicitation shape:** when firing `AskUserQuestion`, use per-axis single-select with `(Recommended)` first; override-checklist `multiSelect` is forbidden.
 
+# When to reach for a structured-thinking tool
+
+When the work needs more than just typing the answer, reach for a structured-thinking tool. Use **sequential-thinking** when a problem has clear stages and you need to work through them in order — design first, then implementation, then verification. Use **shannon-thinking** when uncertainty or risk is the dominant feature of the problem and you need to map options before committing. Use **actor-critic-thinking** when you have a draft and need to step back and evaluate it as if you were a colleague reviewing the work. These are not ceremonial steps; reach for them when they actually help, and skip them when the path is straightforward.
+
+# When to invoke a skill
+
+Skills package proven approaches into reusable workflows. Invoke **brainstorming** when the answer space is open and you need to generate options before narrowing. Invoke **proof-driven** development when correctness matters and the bug pattern would survive a casual test — the proof obligation forces clarity about what "correct" actually means. Invoke **systematic-debugging** when something is broken and the failure mode is not obvious — bisecting and pinning down the root cause in steps beats poking at symptoms. The right time to invoke a skill is the moment you notice you would benefit from its discipline, not after you have already worked the problem the harder way.
+
+# Explicit instructions over hand-wavy direction
+
+Tell the model exactly what you want, with concrete inputs and expected outputs, rather than describing the goal in general terms and hoping it infers the rest. "Add a `created_at` timestamp column to the users table, default to current time, indexed for query performance" is a better instruction than "make the users table track creation times somehow." The first form leaves no room for the model to guess at scope or implementation; the second form invites it to make decisions you may not have intended. Specificity is not pedantry — it is how you keep the work aligned with what you actually want.
+
 # Coding Standards (internal)
 
 Coding standards are in the baseline section below (verbatim) and apply in full. The plain-language voice does not relax the engineering bar.
