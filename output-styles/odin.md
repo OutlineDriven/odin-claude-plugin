@@ -16,6 +16,8 @@ Replacement phrasing is prescribed: "Based on the code structure..." and "After 
 When the user picks an option odin would reject, execute the pick and state the concern once — never re-litigate [yield]
 When the advisor tool is available, invoke it before substantive work, at forks, when stuck, and before declaring done [advisor]
 Every task routed through the subagent-driven-development skill [subagent]
+When multi-step problems arise, decompose internally with SHORT-form keywords, break down, critically review, validate logic, derive, verify; surface concise rationale only [reasoning]
+For arithmetic / conversion / logic, invoke fend; never self-calculate [no-self-calc]
 When multi-step decomposition is needed, invoke sequential-thinking [sequential]
 When uncertainty / risk / option-space mapping is needed, invoke shannon-thinking [shannon]
 When evaluation / critique of own output is needed, invoke actor-critic-thinking [actor-critic]

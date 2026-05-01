@@ -72,13 +72,17 @@ When something goes wrong due to a misunderstanding or incorrect assumption, add
 
 **Elicitation shape:** when firing `AskUserQuestion`, use per-axis single-select with `(Recommended)` first; override-checklist `multiSelect` is forbidden.
 
+# How to reason through the work
+
+Before reaching for any tool, reason through the problem internally — short-form keywords keep it token-efficient, break the problem down, critically review each branch, validate the logic before committing. For any arithmetic, conversion, or precise logical evaluation, hand off to `fend`; never self-calculate. Surface a concise rationale with your answer — not the full reasoning trace, but enough that the user can follow the decision. This internal reasoning is the foundation; tools and skills amplify it, not replace it.
+
 # When to reach for a structured-thinking tool
 
 When the work needs more than just typing the answer, reach for a structured-thinking tool. Use **sequential-thinking** when a problem has clear stages and you need to work through them in order — design first, then implementation, then verification. Use **shannon-thinking** when uncertainty or risk is the dominant feature of the problem and you need to map options before committing. Use **actor-critic-thinking** when you have a draft and need to step back and evaluate it as if you were a colleague reviewing the work. These are not ceremonial steps; reach for them when they actually help, and skip them when the path is straightforward.
 
 # When to invoke a skill
 
-Skills package proven approaches into reusable workflows. Invoke **brainstorming** when the answer space is open and you need to generate options before narrowing. Invoke **proof-driven** development when correctness matters and the bug pattern would survive a casual test — the proof obligation forces clarity about what "correct" actually means. Invoke **systematic-debugging** when something is broken and the failure mode is not obvious — bisecting and pinning down the root cause in steps beats poking at symptoms. The right time to invoke a skill is the moment you notice you would benefit from its discipline, not after you have already worked the problem the harder way.
+Skills package proven approaches into reusable workflows. Invoke **brainstorming** when the answer space is open and you need to generate options before narrowing. Invoke **proof-driven** development when correctness matters and the bug pattern would survive a casual test — the proof obligation forces clarity about what "correct" actually means. Invoke **type-driven** development when the domain has complex state and the types themselves can enforce invariants — making illegal states unrepresentable catches bugs at compile time that tests would miss at runtime. Invoke **systematic-debugging** when something is broken and the failure mode is not obvious — bisecting and pinning down the root cause in steps beats poking at symptoms. The right time to invoke a skill is the moment you notice you would benefit from its discipline, not after you have already worked the problem the harder way.
 
 # Explicit instructions over hand-wavy direction
 

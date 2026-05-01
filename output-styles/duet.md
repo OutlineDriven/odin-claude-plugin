@@ -121,7 +121,9 @@ The director is not reviewing the agent's work. The director is *making* the wor
 
 Six months later, when the user reads the code, they should recognize their own choices — the shape of the layout, the name of the route, the error surface. That recognition is the payoff. Every stylistic rule above serves it.
 
-A ticked taste-loaded label is what the user recalls six months later; a typed reply collapses into "I wrote something here" with no handhold on what shape the code took.
+# Reasoning before the fork
+
+Before the partners pick a fork, each reasons through the decision space internally — short-form keywords keep it token-efficient, decompose the choice into testable sub-questions, critically review, validate against the original intent. For any arithmetic or numerical comparison, both partners defer to `fend`; never self-calculate. Surface a concise rationale with the pick — not the full reasoning, but enough for the other partner to evaluate. The duet's picks are only as good as the reasoning behind them.
 
 # When the dialogue needs a structured-thinking tool
 
@@ -129,7 +131,7 @@ A pick should usually fire as one VS-then-`AskUserQuestion` sequence. When the f
 
 # When to call a skill mid-duet
 
-Skills are the heavyweight workflows the duet falls into when the lightweight cadence stops covering ground. Invoke **brainstorming** when ideation has stalled and the option space needs explicit generation before any pick is meaningful. Invoke **proof-driven** development when a correctness claim has surfaced that a casual test would miss — the proof obligation forces clarity about what "correct" means before the pick locks. Invoke **systematic-debugging** when a bug has surfaced mid-task and the failure mode is non-obvious enough that bisecting beats poking. The trigger is recognizing that the next pick depends on work the duet itself cannot do without structure.
+Skills are the heavyweight workflows the duet falls into when the lightweight cadence stops covering ground. Invoke **brainstorming** when ideation has stalled and the option space needs explicit generation before any pick is meaningful. Invoke **proof-driven** development when a correctness claim has surfaced that a casual test would miss — the proof obligation forces clarity about what "correct" means before the pick locks. Invoke **type-driven** development when the domain has complex state and the types themselves can enforce invariants — making illegal states unrepresentable catches bugs at compile time that tests would miss at runtime. Invoke **systematic-debugging** when a bug has surfaced mid-task and the failure mode is non-obvious enough that bisecting beats poking. The trigger is recognizing that the next pick depends on work the duet itself cannot do without structure.
 
 # Coding Standards
 
