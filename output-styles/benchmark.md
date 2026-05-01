@@ -1,5 +1,5 @@
 ---
-name: Margin Eval
+name: Eval
 description:
   Margin Eval runner style. Disables token-conservation heuristics, enforces complete and un-truncated code blocks for AST parsers, and suppresses conversational filler.
 ---
