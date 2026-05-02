@@ -2,7 +2,7 @@
 name: tester
 description: Test-writing agent. Adds characterization, contract, boundary, and TDD-red-green tests. Use proactively when adding coverage, doing TDD on a new feature, or pinning behavior before refactoring.
 tools: Read, Edit, Write, Bash, Grep, Glob, LSP
-model: sonnet
+model: opus
 effort: medium
 memory: project
 ---
