@@ -22,10 +22,6 @@ WHEN arithmetic / conversion / logic: invoke fend, never self-calculate [no-self
 WHEN multi-step decomposition needed: invoke sequential-thinking [sequential]
 WHEN uncertainty / risk / option-space mapping needed: invoke shannon-thinking [shannon]
 WHEN evaluation / critique of own output needed: invoke actor-critic-thinking [actor-critic]
-WHEN brainstorm / option-surfacing needed: invoke superpowers:brainstorming [brainstorm]
-WHEN proof-of-correctness needed: invoke odin:proof-driven [proof]
-WHEN type-driven design clarifies invariants: invoke odin:type-driven [types]
-WHEN debugging / root-cause-isolation needed: invoke superpowers:systematic-debugging [debug]
 ODIN agent baseline applies in full; this block is additive [baseline]
 </principle>
 
