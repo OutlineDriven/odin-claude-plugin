@@ -1,6 +1,6 @@
 # Worked audits
 
-Three terse examples — prose, code, decision. Each: artifact → per-anchor verdict → top-3 fixes → revised. Visual domain deferred to `/odin:design`.
+Three terse examples — prose, code, decision. Each: artifact → per-anchor verdict → top-3 fixes → revised.
 
 ## Example 1 — Prose (corporate-blog opener)
 
