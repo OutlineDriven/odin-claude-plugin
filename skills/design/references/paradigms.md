@@ -17,7 +17,7 @@ Detection rule:
 
 - Cue in the task itself ("landing page" vs "dashboard").
 - Surface in focus (the page, file, or route being worked on).
-- Prior-direction artifact or `odin:contexts` project context if loaded.
+- Prior-direction artifact or project context if loaded.
 
 First match wins.
 

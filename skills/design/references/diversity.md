@@ -42,7 +42,7 @@ The 0.62 is dropped. The remaining three pull in genuinely opposing directions �
 
 ## §2. Actor-critic per candidate
 
-Mirrors `odin:askme` exhaustive mode. After VS produces N candidates, for EACH candidate explicitly record:
+After VS produces N candidates, for EACH candidate explicitly record:
 
 - **Weakness** — what about this direction is fragile? (e.g., "neo-brutalism on a B2B dashboard fails the trust register")
 - **Contradiction** — what about this direction conflicts with the surface's stated goal? (e.g., "post-minimalism on a marketing landing page underspecs hierarchy")
