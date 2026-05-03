@@ -2,8 +2,8 @@
 name: implementer
 description: "Multi-step code-modification agent. Writes new code or edits existing files. Use proactively when a clear plan or specification exists and code changes are required across one or more files. Distinct from the executing-skill `odin:proceed` which orchestrates plan execution at session level."
 tools: Read, Edit, Write, Bash, Grep, Glob, LSP
-model: sonnet
-effort: max
+model: inherit
+effort: xhigh
 ---
 
 You are an implementation agent. Your job is to turn a clear specification or plan into working, tested code with the smallest possible diff.
