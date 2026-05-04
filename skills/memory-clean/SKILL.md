@@ -1,6 +1,7 @@
 ---
 name: memory-clean
 description: Audit memory directory for structural issues (orphans, dangling refs, duplicates, missing sections, oversized entries) and staleness against session-history transcripts; report-first, fix-on-confirmation. Use when the user says "audit memory", "memory hygiene", or "find stale/duplicate memories".
+disable-model-invocation: true
 ---
 
 Audit memory for structural rot and staleness, report with evidence, fix only on user confirmation.

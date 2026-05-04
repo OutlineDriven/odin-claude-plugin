@@ -1,6 +1,7 @@
 ---
 name: github-triage
 description: Triage GitHub issues through a configurable label-based state machine. Use when user wants to triage incoming issues, prepare issues for an autonomous agent, or move an issue between workflow states. Repo inferred from `git remote`; all GitHub calls go through `gh`.
+disable-model-invocation: true
 ---
 
 State-machine triage over GitHub issues. Every comment posted carries an AI disclaimer. Label names are configurable; state semantics are not.

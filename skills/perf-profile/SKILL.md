@@ -1,6 +1,7 @@
 ---
 name: perf-profile
 description: Hotspot detection and performance root-cause analysis — flamegraph interpretation, allocation tracking, latency profiling, regression measurement. Use when a workload misses its latency, throughput, or memory budget; when a benchmark regresses; or before optimizing any hot path (no optimization without a profile).
+disable-model-invocation: true
 ---
 
 Performance is a contract with reality. Intuition about hot paths is wrong more often than right. Capture, locate, hypothesize, optimize, re-measure, prove the regression with a benchmark — then defend the win with an invariant.

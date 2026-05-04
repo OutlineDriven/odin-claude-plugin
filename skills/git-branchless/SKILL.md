@@ -1,6 +1,7 @@
 ---
 name: git-branchless
 description: Enforce idiomatic git-branchless during planning and executing tasks — detached-HEAD-first work, in-memory rebase via `git move`, event-log recovery via `git undo`, deferred branch creation, speculative-merge `git sync` for base updates. Use when planning or executing multi-commit work, history rewrites, stack edits, rebase/reorder, fixup insertion mid-stack, stacked-PR publishing, or recovery from bad git ops; or when the user mentions branchless, smartlog, `git move`, or `git undo`. Silently inert if branchless is not initialized for the current repo.
+disable-model-invocation: true
 ---
 
 # Git-branchless

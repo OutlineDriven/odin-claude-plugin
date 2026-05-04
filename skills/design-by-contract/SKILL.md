@@ -1,6 +1,7 @@
 ---
 name: design-by-contract
 description: Design-by-Contract (DbC) development. Use when implementing with formal preconditions, postconditions, and invariants across any language.
+disable-model-invocation: true
 ---
 
 # Design-by-Contract development

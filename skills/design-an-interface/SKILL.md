@@ -1,6 +1,7 @@
 ---
 name: design-an-interface
 description: Generate radically-different module or API contract designs in parallel, then compare on depth, simplicity, and ease-of-correct-use. Trigger when the user is shaping a new module surface, exploring contract options, comparing module shapes, or applying "design it twice" to a first-pass sketch.
+disable-model-invocation: true
 ---
 
 Apply "Design It Twice" (Ousterhout, *A Philosophy of Software Design*): the first interface is rarely the best. Generate at least three radically different shapes for the same module, then compare on depth and ease of correct use. Implementation is out of scope — this skill stops at the contract.

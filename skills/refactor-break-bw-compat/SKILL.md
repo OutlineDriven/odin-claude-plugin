@@ -1,6 +1,7 @@
 ---
 name: refactor-break-bw-compat
 description: "Refactor by removing backward compatibility and legacy layers. Use when modernizing APIs, cleaning up migration debt, removing compat shims, or eliminating stale feature flags."
+disable-model-invocation: true
 ---
 
 # Breaking Refactors — Freedom Through Structure

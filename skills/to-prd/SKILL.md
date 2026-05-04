@@ -1,6 +1,7 @@
 ---
 name: to-prd
 description: Synthesize current conversation context and codebase understanding into a PRD artifact (markdown file by default, GitHub issue via flag). Trigger when the user asks for a PRD, requirements doc, feature spec, or wants to crystallize an in-flight discussion into a durable artifact before planning. PRD precedes implementation planning.
+disable-model-invocation: true
 ---
 
 Synthesize a PRD from what you already know. Do NOT interview — extract from context, codebase exploration, and prior decisions. Iterate the artifact in place; commit when the user signs off.

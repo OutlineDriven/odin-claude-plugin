@@ -1,6 +1,7 @@
 ---
 name: validation-first
 description: Validation-first development. Use when developing with formal state machine specifications, invariants, and temporal properties before writing implementation code.
+disable-model-invocation: true
 ---
 
 # Validation-first development

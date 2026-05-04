@@ -1,6 +1,7 @@
 ---
 name: setup-gitignore
 description: Initialize or idempotently revise the repo's .gitignore by composing gitignore.io templates, AI-tooling/IDE patterns, and confirmed noise from git status. Use when the user says "set up gitignore", "fix gitignore", or untracked files keep appearing in git status.
+disable-model-invocation: true
 ---
 
 Initialize or idempotently revise the current repo's `.gitignore` — never the global excludesfile.

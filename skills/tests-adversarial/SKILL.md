@@ -1,6 +1,7 @@
 ---
 name: tests-adversarial
 description: "Write adversarial tests that intentionally stress failure paths. Use when hardening error handling, stress-testing assumptions, validating boundary behavior, or hunting silent failures."
+disable-model-invocation: true
 ---
 
 # Adversarial Testing — Think Like the Attacker

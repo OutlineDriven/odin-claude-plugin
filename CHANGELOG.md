@@ -5,6 +5,12 @@ All notable changes to the ODIN Claude Plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.15.8] - 2026-05-04
+
+### Changed
+
+- 39 skills — added `disable-model-invocation: true` to frontmatter: `ai-collab-protocols`, `ast-grep`, `axiom-mode`, `caveman`, `cleanup-codebase`, `deps-upgrade`, `design-an-interface`, `design-by-contract`, `duet`, `edit-article`, `gh-address-comments`, `gh-fix-ci`, `git-branchless`, `git-guardrails-claude-code`, `github-triage`, `improve-codebase-architecture`, `llm-self-loop`, `memory-clean`, `memory-sanitize`, `memory-update`, `perf-profile`, `pr-merge-base`, `pr-merge-temporal`, `pr-review`, `proof-driven`, `refactor-break-bw-compat`, `request-refactor-plan`, `setup-gitignore`, `setup-pre-commit`, `srgn-cli`, `taste`, `tests-adversarial`, `tests-purge-unneeded`, `to-issues`, `to-prd`, `triage-issue`, `type-driven`, `validation-first`, `write-a-skill`. These skills require explicit `/skill-name` invocation; auto-discovery disabled. 18 cross-cutting verb skills remain auto-discoverable: `askme`, `atomic-commit`, `atomic-commit-and-push`, `contexts`, `debug`, `design`, `explore`, `fix`, `init`, `parallel-launch`, `plan`, `proceed`, `qa`, `research`, `resolve`, `review`, `security-review`, `test-driven`.
+
 ## [1.5.2] - 2026-04-20
 
 ### Changed

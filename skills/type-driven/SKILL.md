@@ -1,6 +1,7 @@
 ---
 name: type-driven
 description: Type-driven development. Use when developing with refined types, state machines encoded in types, or proof-carrying types; enforces totality and exhaustive pattern matching.
+disable-model-invocation: true
 ---
 
 # Type-driven development
