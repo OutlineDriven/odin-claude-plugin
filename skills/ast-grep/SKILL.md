@@ -1,7 +1,6 @@
 ---
 name: ast-grep
 description: Effective code search, analysis, and refactoring using ast-grep (sg). Use this skill for precise AST-based code modifications, structural search, and linting.
-disable-model-invocation: true
 ---
 
 # ast-grep (sg)

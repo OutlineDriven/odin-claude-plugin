@@ -1,7 +1,6 @@
 ---
 name: tests-purge-unneeded
 description: Delete tests that don't catch real bugs — the inverse of TDD. Use when reviewing legacy test suites, slow CI investigations, refactor-driven test sweeps, or evaluating whether a test the type system already covers should stay. Thesis — a test exists only if removing it would let a real bug reach production.
-disable-model-invocation: true
 ---
 
 # Purge unneeded tests — deletion as discipline

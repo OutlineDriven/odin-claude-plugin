@@ -1,7 +1,6 @@
 ---
 name: proof-driven
 description: Proof-driven development. Use when implementing with formal verification using property-based testing, theorem proving, or proof tactics; zero unproven property policy enforced.
-disable-model-invocation: true
 ---
 
 # Proof-driven development

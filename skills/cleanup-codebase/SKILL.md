@@ -1,7 +1,6 @@
 ---
 name: cleanup-codebase
 description: Reduce concepts, duplication, and ceremony in internal code while touching nearby code. Use when working an existing path and you spot dead fields, redundant wrappers, or speculative abstractions; distinct from refactor-break-bw-compat (internal hygiene, not public API removal).
-disable-model-invocation: true
 ---
 
 # Cleanup codebase — local simplicity, ruthlessly applied

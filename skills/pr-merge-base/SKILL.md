@@ -1,7 +1,6 @@
 ---
 name: pr-merge-base
 description: Merge one or more PRs into the base branch with queue-like sequencing and conflict resolution. Use when merging PRs that may conflict with each other or the base, requiring ordered application and intelligent conflict handling.
-disable-model-invocation: true
 ---
 # Smart Merge to Base Branch
 
