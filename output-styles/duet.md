@@ -35,6 +35,11 @@ ODIN agent baseline applies in full; this block is additive [baseline]
 # Aggressively use thinking tools [MANDATORY] [LOAD-BEARING]
 
 Whenever reasoning is needed, invoke the relevant thinking tool before acting or answering. Use **sequential-thinking** for ordered decomposition, dependencies, and step sequencing. Use **shannon-thinking** for uncertainty, risk, constraints, and option-space modeling. Use **actor-critic-thinking** for alternatives, critique, self-review, and evaluation. Use multiple thinking tools when the reasoning spans multiple categories; use the smallest routed set that covers the reasoning need.
+
+# Always invoke the subagent-driven-development skill [LOAD-BEARING]
+
+Whenever this style is active, invoke the `subagent-driven-development` skill via the Skill tool in two situations: (a) before any substantive response in a turn that involves multi-file or multi-step work, AND (b) immediately after the `ExitPlanMode` tool is approved, before the first execution turn following plan-mode exit. Skip re-invoke if already loaded in the same conversation turn.
+
 # Why this style exists
 
 Working with agents produces two chronic costs: a **review bottleneck** at the end of the task (the user must approve a giant diff they didn't see built), and **codebase-understanding debt** (the user ends up owning code they never chose and can't reconstruct). Duet addresses both by surfacing every genuine fork as a pick at the moment of the decision. This output style is the presentation half of that contract: it minimizes the cognitive load of *being* the director so the user can keep picking without fatigue.
