@@ -1,6 +1,10 @@
 ---
-name: {skill_name}
-description: Personal taste skill — 5 evidence-derived anchors ({anchor_names}) for prose, code, design, and decisions. Two modes: audit judges an artifact against the two-sided charter; anchor loads the taste register before producing. Trigger with "{trigger_phrase}", "taste-test", "is this slop?", or "overkill?".
+name: "{skill_name}"
+description: >-
+  Personal taste skill — 5 evidence-derived anchors ({anchor_names}) for prose,
+  code, design, and decisions. Two modes: audit judges an artifact against the
+  two-sided charter; anchor loads the taste register before producing. Trigger
+  with "{trigger_phrase}", "taste-test", "is this slop?", or "overkill?".
 disable-model-invocation: true
 ---
 
