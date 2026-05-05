@@ -5,6 +5,12 @@ All notable changes to the ODIN Claude Plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.15.9] - 2026-05-05
+
+### Changed
+
+- 13 skills — removed `disable-model-invocation: true` per cluster-level auto-invocation decisions: `axiom-mode`, `caveman`, `gh-address-comments`, `gh-fix-ci`, `memory-clean`, `memory-sanitize`, `memory-update`, `request-refactor-plan`, `to-issues`, `to-prd`, `triage-issue`, `ubiquitous-language`, `generate-my-taste/assets/template`. 7 skills retain explicit-only invocation: `ai-collab-protocols`, `edit-article`, `generate-my-taste`, `improve-codebase-architecture`, `strict-validation-setup`, `write-a-skill`, `zoom-out`.
+
 ## [1.15.8] - 2026-05-04
 
 ### Changed

@@ -1,7 +1,6 @@
 ---
 name: memory-update
 description: Scan agent's session-history transcripts for save-worthy signals (corrections, preferences, decisions, references), propose and write auto-memory files with valid frontmatter and MEMORY.md entry. Use when the user says "save this to memory", "remember that", or "scan this session for memories".
-disable-model-invocation: true
 ---
 
 Scan session history, surface save-worthy moments, propose → confirm → write. Never fabricate — every proposal must cite a transcript turn.

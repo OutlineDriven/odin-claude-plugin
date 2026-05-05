@@ -5,7 +5,7 @@ description: >-
   code, design, and decisions. Two modes: audit judges an artifact against the
   two-sided charter; anchor loads the taste register before producing. Trigger
   with "{trigger_phrase}", "taste-test", "is this slop?", or "overkill?".
-disable-model-invocation: true
+# auto-invoke: explicitly permitted — generated taste skills auto-invoke like the generic taste skill
 ---
 
 # {skill_name}

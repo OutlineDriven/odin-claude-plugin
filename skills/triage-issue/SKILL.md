@@ -1,7 +1,6 @@
 ---
 name: triage-issue
 description: Investigate a reported bug to root cause, then emit a TDD-shaped fix plan as an issue artifact. Trigger when the user reports a bug, says "triage", asks for issue investigation, or wants a fix plan before code changes.
-disable-model-invocation: true
 ---
 
 Investigate, find root cause, emit a fix plan shaped as RED-GREEN cycles. Mostly hands-off — minimize user prompts.

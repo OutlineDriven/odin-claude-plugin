@@ -1,7 +1,6 @@
 ---
 name: axiom-mode
 description: ODIN's compact-form conversation skill -- formal-logic English register with predicate claims, Hoare-triple framing, and ASCII shortened-English keywords. Trigger when user requests "axiom", "axiom-mode", "axiom-compact", or "compact form".
-disable-model-invocation: true
 ---
 
 # axiom-mode register
