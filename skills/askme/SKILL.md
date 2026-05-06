@@ -7,17 +7,15 @@ description: Verbalized Sampling (VS) protocol for deep intent exploration befor
 
 Before proceeding to ask planning questions, you must *proactively and critically* execute both Verbalized Sampling (VS) and exploration:
 
-- For Verbalized Sampling, generate and *sample* at least N distinct, diverse candidates that represent different possible user intents or directions, ranked by likelihood, where N is dynamic by ambiguity/risk/scope (baseline N>=5; trivial N>=3; high ambiguity/risk N>=7; architectural N>=10; no hard cap). Run actor-critic on each VS sample: explicitly record one weakness, contradiction, and oversight before selecting a direction. VS prevents over-engineering by surfacing simpler alternatives; expand only while new samples materially change planning decisions, and prefer the smallest sufficient N.
+- For Verbalized Sampling, generate and *sample* multiple distinct intent hypotheses, assign each an explicit probability weight (0–1 scale), and identify the specific observation or scenario that would falsify each before selecting a direction. Expand hypothesis depth as ambiguity, risk, or architectural surface grows; keep concise when scope is truly narrow. Continue sampling while new hypotheses materially change planning decisions; broaden sampling if no clear leader emerges. Synthesize surviving hypotheses into one consolidated direction before responding. VS prevents over-engineering by surfacing simpler alternatives.
 
 **Required VS Output Format:**
 ```
-1. [Most likely] hypothesis here
-   - Weakness: [potential flaw]
-   - Contradiction: [logical conflict if any]
-   - Oversight: [what this misses]
+1. [Weight: 0.42] hypothesis here
+   - Falsifier: [observation or scenario that would invalidate this]
 
-2. [Alternative] hypothesis here
-   ...
+2. [Weight: 0.28] hypothesis here
+   - Falsifier: [observation or scenario that would invalidate this]
 ```
 
 - For exploration, deliberately seek out unconventional, underexplored, and edge-case possibilities relating to the user's objective, drawing on both the provided context and plausible but non-obvious requirements. Include at least 3 edge cases (at least 5 if architectural), and stop expanding once additional cases no longer change decisions.
@@ -39,7 +37,7 @@ Auto-detect from invoking-context phrasing, with slash-arg override:
 
 ### `exhaustive` mode
 
-The VS-shaped protocol described above. Sample N intent hypotheses, rank, run actor-critic on each, then fire the maximum-cardinality clarifying question batch. This is the default when no other signal fires.
+The VS-shaped protocol described above. Sample multiple intent hypotheses, assign weights, identify the falsifier per hypothesis, then fire the maximum-cardinality clarifying question batch. This is the default when no other signal fires.
 
 ### `collaborative` mode
 
@@ -61,7 +59,7 @@ Sources: signal patterns documented in Cursor Plan Mode best practices and the N
 
 ### Mode interactions with the VS preamble
 
-The VS preamble (sample N, rank, actor-critic) is required only in `exhaustive` mode. `collaborative` does not run VS — it foregrounds dialogue. `adversarial` runs VS once at the start to map the design tree, then proceeds per-fork.
+The VS preamble (sample, weight, falsifier-per-hypothesis) is required only in `exhaustive` mode. `collaborative` does not run VS — it foregrounds dialogue. `adversarial` runs VS once at the start to map the design tree, then proceeds per-fork.
 
 ## `AskUserQuestion` tool contract (Claude Code reference)
 
