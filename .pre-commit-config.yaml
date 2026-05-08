@@ -19,3 +19,11 @@ repos:
       # Fix UTF-8 byte order marker
       - id: fix-byte-order-marker
         types_or: [markdown, json]
+
+  # TOML lint + format
+  - repo: https://github.com/tombi-toml/tombi-pre-commit
+    rev: v0.11.0
+    hooks:
+      - id: tombi-lint
+        args: ["--offline"]
+      - id: tombi-format
