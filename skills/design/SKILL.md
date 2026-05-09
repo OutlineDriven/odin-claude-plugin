@@ -1,6 +1,6 @@
 ---
 name: design
-description: 'Set visual and interaction direction for any UI surface (web, React, TUI, CLI, desktop, Qt, design-system tokens) before any UI code. Direction-first: generates 3-4 distinct directions via verbalized sampling, picks one via per-axis single-select, then derives palette, typography, spacing, motion budget. Loads when the user asks for UI work, palette/theme/tokens, mentions a design system, or when output looks AI-generic or default Tailwind/shadcn. Enforces two-sided anti-slop charter: forbids purple gradients, `transition: all`, system-ui, default Tailwind palette AND overkill compensation (gradients everywhere, animation on every element).'
+description: 'Set visual and interaction direction for any UI surface (web, React, TUI, CLI, desktop, Qt, design-system tokens) before any UI code. Direction-first: generates 3-4 distinct directions via verbalized sampling, picks one via per-axis single-select, then derives palette, typography, spacing, motion budget. Loads when the user asks for UI work, palette/theme/tokens, mentions a design system, or when output looks AI-generic, vibe-coded, sloppy, or default Tailwind/shadcn/Bootstrap. Enforces two-sided anti-slop charter: forbids purple gradients, `transition: all`, system-ui, default Tailwind palette AND overkill compensation (sprites, gradients everywhere, animation on every element).'
 ---
 
 Direction first, tokens second, code last. Restraint is the default posture; ONE intentional moment per surface earns the lift.
