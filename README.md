@@ -8,11 +8,11 @@
 
 ## Overview
 
-ODIN is a professional-grade Claude Code plugin that transforms Claude into a sophisticated code agent with 46 specialized agents across 11+ programming languages, comprehensive workflow automation, and rigorous engineering methodology.
+ODIN is a professional-grade Claude Code plugin that transforms Claude into a sophisticated code agent with 8 task-typed agents routed by complexity, comprehensive workflow automation, and rigorous engineering methodology.
 
 **Key Capabilities:**
 
-- 🤖 **46 Specialized Agents** - Language experts, architects, analyzers, and domain specialists
+- 🤖 **8 Task-Typed Agents** - Researcher, planner, implementer, reviewer, debugger, tester, refactorer, critic — routed by job complexity, not language identity
 - 📐 **Diagram-First Engineering** - Architecture, concurrency, memory, data flow, optimization
 - 🎯 **Surgical Code Editing** - AST-based transformations with ast-grep
 - 🧠 **Confidence-Driven Execution** - Adaptive behavior based on complexity and risk
@@ -66,92 +66,20 @@ Before any non-trivial implementation:
 4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
 5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
 
-## Agents
+## Agents (8 task-typed)
 
-### Language Specialists (15 agents)
+ODIN ships 8 task-typed agents (consolidated from 46 language-personas in commit `bdb62df`). Each agent carries explicit `model` + `effort` per file so routing happens by job complexity rather than language identity.
 
-**Modern Languages:**
+- `researcher` - External-knowledge research agent. Fetches documentation, RFCs, papers, and vendor sources via the Tier 1-5 source ladder. Use when the task names a library, framework, SDK, API, CLI tool, or cloud service requiring current information beyond training data.
+- `planner` - Read-only architecture and implementation planning agent. Use before non-trivial code changes when the approach is unclear, multiple alternatives need weighing, or cross-file impact is uncertain.
+- `implementer` - Multi-step code-modification agent. Writes new code or edits existing files. Use when a clear plan or specification exists and code changes are required across one or more files.
+- `reviewer` - Post-implementation code-quality review agent (read-only). Checks conventions, error handling, test coverage, naming, and clarity. Use after writing or modifying code, before committing or merging.
+- `debugger` - Hypothesis-driven debugging agent. Isolates defects to root cause, applies the minimal fix, and adds a regression test. Use for compiler errors, runtime failures, test failures, unexpected behavior, or production incidents.
+- `tester` - Test-writing agent. Adds characterization, contract, boundary, and TDD-red-green tests. Use when adding coverage, doing TDD on a new feature, or pinning behavior before refactoring.
+- `refactorer` - Behavior-preserving structural-change agent. Renames, extracts, inlines, restructures. Use for cleanups, decoupling, and readability improvements that do not alter externally-observable behavior.
+- `critic` - Adversarial review agent. Red-teams security, performance, design risk, OWASP/CWE risks, hidden coupling, and time-bombs. Use for a second opinion on non-trivial designs or before merging architecture-level changes.
 
-- `rust-pro` / `rust-pro-ultimate` - Rust Edition 2024, zero-cost abstractions, ownership
-- `typescript-pro` - Strict mode, discriminated unions, no any/unknown
-- `python-pro` - Type hints, asyncio, pathlib, dataclasses
-- `golang-pro` - Context-first, goroutines, structured concurrency
-- `java-pro` - Java 21+, records, virtual threads, sealed classes
-- `kotlin-pro` - K2, coroutines, null safety, immutability
-
-**Systems Programming:**
-
-- `cpp-pro` / `cpp-pro-ultimate` - C++20+, RAII, smart pointers, ranges
-- `c-pro` / `c-pro-ultimate` - Modern C, memory safety, systems programming
-
-**Web & Enterprise:**
-
-- `javascript-pro` - ES6+, async patterns, Node.js
-- `php-pro` - Modern PHP, generators, SPL structures
-- `csharp-pro` - C# latest, async/await, LINQ
-
-### Architecture & Design (7 agents)
-
-- `architect` - System architecture, technical decisions, scalability
-- `backend-architect` - Backend systems, APIs, service architecture
-- `graphql-architect` - GraphQL schemas, resolvers, federation
-- `docs-architect` - Technical documentation, API references, architecture guides
-- `ui-ux-designer` - Interface design, user experience, design systems
-- `artistic-designer` - Visual design, aesthetics, branding elements
-- `branding-specialist` - Brand identity, visual language, corporate identity
-
-### Code Quality (8 agents)
-
-- `code-reviewer` - Expert code review, quality, security, maintainability
-- `criticizer` - Systemic post-implementation critique, severity-driven analysis
-- `devil-advocate` - Pre-decision adversarial challenge, assumption dismantling
-- `debugger` - Root cause analysis, error resolution, incident investigation
-- `refactoring` - Full refactoring lifecycle: assess debt, plan, execute, modernize
-- `test-writer` - Comprehensive test suites, unit/integration testing
-- `test-designer-advanced` - Edge cases, chaos engineering, property-based testing
-- `analyzer` - Codebase health metrics, dependency graphs, pattern detection
-
-### Performance (3 agents)
-
-- `performance` - Holistic performance optimization, profiling, benchmarking
-- `concurrency-expert` - Thread safety, synchronization, parallel patterns
-- `memory-expert` - Memory optimization, leak detection, allocation analysis
-
-### Specialized Domains (9 agents)
-
-**Machine Learning & Data:**
-
-- `ml-engineer` - ML pipelines, model serving, feature engineering
-- `mlops-engineer` - ML infrastructure, experiment tracking, model registries
-- `data-engineer` - ETL pipelines, data warehouses, streaming architectures
-- `quant-researcher` - Financial models, trading strategies, market analysis
-- `trading-system-architect` - HFT systems, market making, order execution
-
-**Security:**
-
-- `security-auditor` - Vulnerability review, OWASP compliance, secure authentication
-
-**Database & Migration:**
-
-- `database` - SQL queries, schema design, optimization, analytics
-- `migrator` - System migrations, cross-platform porting, version upgrades
-
-**Development Tools:**
-
-- `prompt-engineer` - LLM prompts optimization, AI features
-
-### Frontend & Mobile (4 agents)
-
-- `react-specialist` - React components, hooks, state management
-- `flutter-specialist` - Flutter widgets, state management, platform channels
-- `ios-developer` - Swift/SwiftUI, UIKit, Core Data, App Store optimization
-- `mobile-developer` - React Native/Flutter, offline sync, push notifications
-
-### Infrastructure (1 agent)
-
-- `terraform-specialist` - IaC best practices, modules, state management
-
-## Skills (25 total)
+## Skills (62 total — selected highlights below)
 
 Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
 
@@ -204,11 +132,12 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `gh-address-comments` - Help address review/issue comments on the current PR
 - `gh-fix-ci` - Inspect failing CI checks, pull logs, propose fixes
 
-## Output Styles (3 total)
+## Output Styles (4 total)
 
 Output styles shape *how* the agent communicates. Switch via Claude Code's `/config` or by setting `outputStyle` in `settings.json`.
 
-- `ODIN` - Default. Professional objectivity, scope discipline, systematic skepticism, no reflexive validation.
+- `ODIN` - Default. Skeptic register, scope discipline, systematic skepticism, no reflexive validation.
+- `AxiomMode` - Formal-logic English with predicate-form claims, Hoare-triple framing, ASCII shortened-English keywords. Daily-driver register for coding work.
 - `Builder` - For non-technical builders (PMs, founders, designers, no-code users). Outcome-first, plain-language, progressive disclosure.
 - `Duet` - Companion to the `duet` skill. Decisions before prose, structural/taste framing first, jargon on demand, silent mechanics / loud forks. Enforces `duet` skill invocation.
 
