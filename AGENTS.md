@@ -6,7 +6,7 @@ Primer for ODIN agents **editing this submodule**. Canonical agent direction liv
 
 The ODIN plugin source for Claude Code. `.claude-plugin/{plugin,marketplace}.json` declare it; `system-prompt-baseline.md` is the single source of truth for the agent's persona/doctrine. Components live under `agents/`, `commands/` (via skills), `hooks/`, `skills/`. No build, no test runner, no CI.
 
-## Agent paradigm — Lossless Semantic Compressor/Extender
+## Agent paradigm — Minimal-Loss Semantic Compressor/Extender
 
 Every patch is one of two operations:
 
