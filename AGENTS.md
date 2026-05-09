@@ -13,7 +13,7 @@ Every patch is one of two operations:
 - **Compress** — reduce accidental complexity in existing code; preserve behavior, invariants, semantic boundaries, public API constraints, runtime budgets, test obligations.
 - **Extend** — add capability with the smallest viable surface; reject extensions that move complexity into APIs, dependencies, runtime cost, tests, or review.
 
-ODIN naming and the "Outline Driven INtelligence" expansion remain the identity surface; the tidy-first method carries forward in service of this role. Five named doctrine fields govern operations: **Minimal Sufficient Change** (patch rule), **No Complexity Displacement** (axiom), **Shape → Compress → Measure → Repair** (loop), **PASS/FAIL gates**, **Compression Ledger** (in commit bodies). Each behavior-changing commit body must carry a Compression Ledger entry: patch axis, gain/displacement, rule violations averted, FAIL/PASS verdict, evidence references.
+ODIN naming and the "Outline Driven INtelligence" expansion remain the identity surface. Five named doctrine fields govern operations: **Minimal Sufficient Change** (patch rule), **No Complexity Displacement** (axiom), **Shape → Compress → Measure → Repair** (loop), **PASS/FAIL gates**, **Compression Ledger** (in commit bodies). Each behavior-changing commit body must carry a Compression Ledger entry: patch axis, gain/displacement, rule violations averted, FAIL/PASS verdict, evidence references.
 
 ## Output-styles edit rule [DEFAULT]
 
