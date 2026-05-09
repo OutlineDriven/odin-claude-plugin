@@ -7,7 +7,7 @@ description: Verbalized Sampling (VS) protocol for deep intent exploration befor
 
 Before proceeding to ask planning questions, you must *proactively and critically* execute both Verbalized Sampling (VS) and exploration:
 
-- For Verbalized Sampling, generate and *sample* multiple distinct intent hypotheses, assign each an explicit probability weight (0–1 scale), and identify the specific observation or scenario that would falsify each before selecting a direction. Expand hypothesis depth as ambiguity, risk, or architectural surface grows; keep concise when scope is truly narrow. Continue sampling while new hypotheses materially change planning decisions; broaden sampling if no clear leader emerges. Synthesize surviving hypotheses into one consolidated direction before responding. VS prevents over-engineering by surfacing simpler alternatives.
+- For Verbalized Sampling, sample multiple intent hypotheses, assign each an explicit probability weight (0–1 scale), and identify the specific observation or scenario that would falsify each before selecting a direction. Each hypothesis names which operation (compress / extend) and the displacement risk it carries. Expand hypothesis depth as ambiguity, risk, or architectural surface grows; keep it concise when scope is truly narrow. Explore meaningful edge cases until additional cases stop changing the decision; broaden sampling if no clear leader emerges. Surface decision points early with concrete options and trade-offs. Synthesize surviving hypotheses into one consolidated direction before responding. Output should stay compact and decision-oriented: intent summary, assumptions, and focused questions. Do not proceed on non-trivial changes without visible VS.
 
 **Required VS Output Format:**
 ```
