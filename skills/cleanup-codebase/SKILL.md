@@ -120,11 +120,3 @@ Not boundaries: internal modules in the same crate/package, helpers in the same 
 | 13 | Mixed-concern commit — must split via `git move --fixup` before merging |
 | 14 | New abstraction introduced — separate the commit, justify the abstraction independently |
 | 15 | Ghost references found — cleanup incomplete |
-
----
-
-## See also
-
-- `tests-purge-unneeded` — sibling deletion discipline for test code; the same thesis (delete what does not earn its keep), applied to the test suite
-- `refactor-break-bw-compat` — when the deletion crosses a public-API boundary; that skill handles migration plans, blast-radius mapping, and consumer coordination
-- `~/.claude/claude/system-prompt-baseline.md` `<git>` charter — atomic-commit and one-concern-per-commit rules this skill enforces
