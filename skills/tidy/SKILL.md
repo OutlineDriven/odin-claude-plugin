@@ -1,12 +1,6 @@
 ---
 name: tidy
-description: >
-  ODIN's tidy-first method dispatcher (compress operations under the Compressor/Extender role). Invoke when the user says "tidy", "clean up",
-  "tidy this file / memory / workspace / git / docs", or when the active context
-  (current file, diff, stack, or memory directory) has clear structural rot that
-  should be resolved before touching behavior. Detects the target domain from
-  context and routes to the appropriate sibling skill. Requires an explicit target
-  or a clear active-context signal — do not invoke speculatively with no target in view.
+description: ODIN's tidy-first method dispatcher (compress operations under the Compressor/Extender role). Invoke on "tidy", "clean up", "tidy this file/memory/workspace/git/docs", or when active context (current file, diff, stack, memory directory) has structural rot to resolve before touching behavior. Detects target domain from context and routes to the sibling skill. Requires explicit target or clear active-context signal — do not invoke speculatively.
 ---
 
 # Tidy — ODIN's tidy-first dispatcher (compress operations)
