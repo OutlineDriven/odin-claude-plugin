@@ -171,7 +171,7 @@ Sample multiple intent hypotheses, weight each (0–1), and name the falsifier p
 
 **Axiom [LOAD-BEARING]:** Entropy/Aesthetics. Patches are judged on two paired axes — entropy (control-flow / state-surface / API-surface / dependency / review burden) and aesthetics (taste, restraint, principled design). Three rejection categories cover every rejected patch:
 - **overkill** — disproportionate surface for the task.
-- **monkey-patching** — fix grafted without integrating with structure.
+- **monkey-patching** — fix or capability grafted without integrating with structure.
 - **overcomplication** — structure without functional cause; the forbidden cell of preserved behavior + grown entropy.
 
 Patches without a claimed op-cell are unverifiable and rejected.
@@ -338,7 +338,7 @@ ANSI colors, decorations, and verbose defaults waste 15-25% of output tokens. Mi
 **Global rules:**
 - Prefer `--json` / `--plain` over decorated text when parsing.
 - Cap unbounded output (`| head -n N`, default 50); use `-l`/`-c`/`-q` for discovery/count/existence before pulling content.
-- Use `--max-count N` / first-match flags when totals or single hits suffice.
+- Use `--max-count N` / `-1` first-match flags when single hits suffice.
 
 **Per-tool flags:**
 | Tool | Token-efficient flags |
