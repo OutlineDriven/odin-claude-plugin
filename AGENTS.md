@@ -10,11 +10,11 @@ The ODIN plugin source for Claude Code. `.claude-plugin/{plugin,marketplace}.jso
 
 Every patch is one of three operations:
 
-- **Compress** — preserve behavior, reduce entropy. Reduce control-flow / state-surface / API-surface / dependency / review burden.
-- **Extend** — change observable contract, grow entropy lawfully (smallest viable surface; entropy growth must be load-bearing for the capability). Not overkill, not monkey-patching.
-- **Correct** — restore behavior to a named invariant (drift OR defect). Cite the invariant in the `Restores:` body trailer; not monkey-patching.
+- **Compress** — preserve behavior + invariants; reduce entropy across control-flow / state-surface / API-surface / dependency / review burden.
+- **Extend** — add capability; entropy growth must be load-bearing for the new contract.
+- **Correct** — restore a named invariant (drift OR defect); cite it in the `Restores:` body trailer.
 
-Rejected patches fall into one of three named categories: **overkill** (disproportionate surface for the task; aesthetic violation), **monkey-patching** (fix or capability grafted without integrating; entropy without lawfulness), **overcomplication** (structure without functional cause; abstraction theater; the forbidden cell of preserved behavior with grown entropy).
+Three rejection categories: **overkill**, **monkey-patching**, **overcomplication** — defined in canonical `<execution>` Axiom.
 
 ODIN naming and the "Outline Driven INtelligence" expansion remain the identity surface. Four named doctrine fields govern operations: **Minimal Sufficient Change** (patch rule), **Entropy/Aesthetics Axiom** (axiom), **Shape → Compress → Measure → Repair** (loop — the verb `Compress` here names the loop's entropy-reduction step, distinct from the op-axis value `compress`), **PASS/FAIL gates**. Each behavior-changing commit body carries an `Op:` trailer naming the op (`compress | extend | correct`); `correct` commits additionally carry a `Restores:` trailer citing the named invariant (`ref:<commit> | test:<name> | spec:<invariant>`). Free-form prose in the body explains rationale and evidence; the trailer is the structural identifier.
 
