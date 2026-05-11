@@ -8,11 +8,10 @@
 
 ## Overview
 
-ODIN is a professional-grade Claude Code plugin that transforms Claude into a sophisticated code agent with 8 task-typed agents routed by complexity, comprehensive workflow automation, and rigorous engineering methodology.
+ODIN is a professional-grade Claude Code plugin that transforms Claude into a sophisticated code agent with comprehensive workflow automation and rigorous engineering methodology.
 
 **Key Capabilities:**
 
-- 🤖 **8 Task-Typed Agents** - Researcher, planner, implementer, reviewer, debugger, tester, refactorer, critic — routed by job complexity, not language identity
 - 📐 **Diagram-First Engineering** - Architecture, concurrency, memory, data flow, optimization
 - 🎯 **Surgical Code Editing** - AST-based transformations with ast-grep
 - 🧠 **Confidence-Driven Execution** - Adaptive behavior based on complexity and risk
@@ -65,19 +64,6 @@ Before any non-trivial implementation:
 3. **Concurrency** - Threads, synchronization, happens-before relationships
 4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
 5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
-
-## Agents (8 task-typed)
-
-ODIN ships 8 task-typed agents (consolidated from 46 language-personas in commit `bdb62df`). Each agent carries explicit `model` + `effort` per file so routing happens by job complexity rather than language identity.
-
-- `researcher` - External-knowledge research agent. Fetches documentation, RFCs, papers, and vendor sources via the Tier 1-5 source ladder. Use when the task names a library, framework, SDK, API, CLI tool, or cloud service requiring current information beyond training data.
-- `planner` - Read-only architecture and implementation planning agent. Use before non-trivial code changes when the approach is unclear, multiple alternatives need weighing, or cross-file impact is uncertain.
-- `implementer` - Multi-step code-modification agent. Writes new code or edits existing files. Use when a clear plan or specification exists and code changes are required across one or more files.
-- `reviewer` - Post-implementation code-quality review agent (read-only). Checks conventions, error handling, test coverage, naming, and clarity. Use after writing or modifying code, before committing or merging.
-- `debugger` - Hypothesis-driven debugging agent. Isolates defects to root cause, applies the minimal fix, and adds a regression test. Use for compiler errors, runtime failures, test failures, unexpected behavior, or production incidents.
-- `tester` - Test-writing agent. Adds characterization, contract, boundary, and TDD-red-green tests. Use when adding coverage, doing TDD on a new feature, or pinning behavior before refactoring.
-- `refactorer` - Behavior-preserving structural-change agent. Renames, extracts, inlines, restructures. Use for cleanups, decoupling, and readability improvements that do not alter externally-observable behavior.
-- `critic` - Adversarial review agent. Red-teams security, performance, design risk, OWASP/CWE risks, hidden coupling, and time-bombs. Use for a second opinion on non-trivial designs or before merging architecture-level changes.
 
 ## Skills (62 total — selected highlights below)
 

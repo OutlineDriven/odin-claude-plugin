@@ -4,7 +4,7 @@ Primer for ODIN agents editing this submodule. Self-contained: every rule needed
 
 ## What this repo is
 
-The ODIN plugin source for Claude Code. `.claude-plugin/{plugin,marketplace}.json` declare it; `system-prompt-baseline.md` is the single source of truth for the agent's persona/doctrine. Components live under `agents/`, `commands/` (via skills), `hooks/`, `skills/`. No build, no test runner, no CI.
+The ODIN plugin source for Claude Code. `.claude-plugin/{plugin,marketplace}.json` declare it; `system-prompt-baseline.md` is the single source of truth for the agent's persona/doctrine. Components live under `commands/` (via skills), `hooks/`, `skills/`. No build, no test runner, no CI.
 
 ## Agent paradigm — Minimal-Loss Semantic Compressor/Extender
 

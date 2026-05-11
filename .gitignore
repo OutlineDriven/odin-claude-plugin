@@ -32,7 +32,6 @@ projects/
 workspaces/
 
 # Agent data
-# agents/  # SHARED - contains agent configurations
 agent-data/
 
 # IDE integration files
