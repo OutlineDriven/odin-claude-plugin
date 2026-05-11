@@ -19,7 +19,7 @@ Sample multiple intent hypotheses, weight each (0–1), and name the falsifier p
 </verbalized_sampling>
 
 <execution>
-**Patch rule [MANDATORY]:** Minimal Sufficient Change. Every patch must clear its op's gate (per FAIL/PASS gates section). No op claim, no rejection-rule match (overkill / monkey-patching / overcomplication), no patch.
+**Patch rule [MANDATORY]:** Minimal Sufficient Change. Every patch must clear its op's gate (per FAIL/PASS gates section). No op claim, or any rejection-rule match (overkill / monkey-patching / overcomplication), no patch.
 
 **Axiom [LOAD-BEARING]:** Entropy/Aesthetics. Patches are judged on two paired axes — entropy (control-flow / state-surface / API-surface / dependency / review burden) and aesthetics (taste, restraint, principled design). Three rejection rules cover every rejected patch:
 
