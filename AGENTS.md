@@ -14,7 +14,7 @@ Every patch is one of three operations:
 - **Extend** — add capability; entropy growth must be load-bearing for the new contract.
 - **Correct** — restore a named invariant (drift OR defect); cite it in the `Restores:` body trailer.
 
-Three rejection categories: **overkill**, **monkey-patching**, **overcomplication** — defined in canonical `<execution>` Axiom.
+Three rejection rules: **overkill**, **monkey-patching**, **overcomplication** — defined in canonical `<execution>` Axiom `<reject_patches>` block.
 
 ODIN naming and the "Outline Driven INtelligence" expansion remain the identity surface. Four named doctrine fields govern operations: **Minimal Sufficient Change** (patch rule), **Entropy/Aesthetics Axiom** (axiom), **Shape → Compress → Measure → Repair** (loop — the verb `Compress` here names the loop's entropy-reduction step, distinct from the op-axis value `compress`), **PASS/FAIL gates**. Each behavior-changing commit body carries an `Op:` trailer naming the op (`compress | extend | correct`); `correct` commits additionally carry a `Restores:` trailer citing the named invariant (`ref:<commit> | test:<name> | spec:<invariant>`). Free-form prose in the body explains rationale and evidence; the trailer is the structural identifier.
 
