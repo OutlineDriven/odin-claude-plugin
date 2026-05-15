@@ -20,17 +20,17 @@ ODIN naming and the "Outline Driven INtelligence" expansion remain the identity 
 
 ## Output-styles edit rule [DEFAULT]
 
-`output-styles/{axiom-mode,builder,duet,odin}.md` are persona files Claude Code loads as system instructions. Each is a style-specific `<role>` block followed by the canonical baseline embedded at the tail. Files are self-contained — the loader does not resolve refs.
+`output-styles/{axiom-mode,builder,duet,linus,odin}.md` are persona files Claude Code loads as system instructions. Each is a style-specific `<role>` block followed by the canonical baseline embedded at the tail. Files are self-contained — the loader does not resolve refs.
 
-**Always propagate `system-prompt-baseline.md` changes to `output-styles/*.md` files.** Every edit to the canonical (`system-prompt-baseline.md`) MUST land as a single atomic commit that ALSO updates the embedded canonical-baseline cascade in EVERY output-style file (`{axiom-mode,builder,duet,odin}.md` AND `benchmark.md`'s cascade region beneath the `# [baseline]` H1 anchor). Edit at-once, never separately. Per-file commits and per-style sequential agents are the anti-pattern; one commit, one operation, one diff scope. The embedded baseline span MUST be byte-identical to `system-prompt-baseline.md` from `<role>` onward; drift is a CI-less invariant enforced by review.
+**Always propagate `system-prompt-baseline.md` changes to `output-styles/*.md` files.** Every edit to the canonical (`system-prompt-baseline.md`) MUST land as a single atomic commit that ALSO updates the embedded canonical-baseline cascade in EVERY output-style file (`{axiom-mode,builder,duet,linus,odin}.md` AND `benchmark.md`'s cascade region beneath the `# [baseline]` H1 anchor). Edit at-once, never separately. Per-file commits and per-style sequential agents are the anti-pattern; one commit, one operation, one diff scope. The embedded baseline span MUST be byte-identical to `system-prompt-baseline.md` from `<role>` onward; drift is a CI-less invariant enforced by review.
 
 Procedural recipe (apply on every canonical edit):
 1. Edit `system-prompt-baseline.md`.
 2. Re-extract canonical from `<role>` onward (e.g., `awk '/^<role>$/{flag=1} flag' system-prompt-baseline.md > /tmp/canon.md`).
 3. Locate each output-style's cascade `<role>` line (the SECOND `<role>` for files with a style-specific lead `<role>`; in `benchmark.md`, the `<role>` immediately beneath the `# [baseline]` H1 anchor).
 4. Replace each output-style's cascade region (from its cascade `<role>` line through EOF) with `/tmp/canon.md` content.
-5. Verify byte-equivalence per file: `diff -q /tmp/canon.md <(awk '/^<role>$/{c++; if(c==2){flag=1}} flag' output-styles/X.md)` should return identical for all 4 non-benchmark styles AND `benchmark.md` (whose runner-specific lead `<role>` makes its cascade `<role>` also the second match).
-6. Stage and commit canonical + all 5 output-styles in ONE commit.
+5. Verify byte-equivalence per file: `diff -q /tmp/canon.md <(awk '/^<role>$/{c++; if(c==2){flag=1}} flag' output-styles/X.md)` should return identical for all 5 non-benchmark styles AND `benchmark.md` (whose runner-specific lead `<role>` makes its cascade `<role>` also the second match).
+6. Stage and commit canonical + all 6 output-styles in ONE commit.
 
 `output-styles/benchmark.md` carries a do-not-modify auto-gen header (margin-runner v0.5.5). Default: never hand-edit. Override only on explicit user authorization, and only the embedded canonical-baseline cascade region beneath the runner-specific preamble.
 

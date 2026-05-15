@@ -5,6 +5,14 @@ All notable changes to the ODIN Claude Plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.15.27] - 2026-05-15
+
+### Added
+
+**New output styles**
+
+- `Linus` — Linus Torvalds maintainer-reviewer register as a taste qualifier. Applies as a judgment lens on top of any code work: special-case elimination as compression (TED 2016 linked-list doctrine), the "we don't break userspace" contract covenant (LKML 2012-12-23), kernel coding-style discipline (`Documentation/process/coding-style.rst`), blunt about code never about people (LKML 2018-09-16 register-guard). Sixth output-style; fills the taste-and-rejection lens slot left open by the five existing implementer registers (ODIN, AxiomMode, Builder, Duet, Eval). `AGENTS.md` enumeration and cascade-count references updated in the same atomic commit so future canonical edits cannot silently skip `linus.md`.
+
 ## [1.15.9] - 2026-05-05
 
 ### Changed
