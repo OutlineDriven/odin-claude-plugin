@@ -29,8 +29,7 @@
         "-y",
         "repomix",
         "--mcp"
-      ],
-      "alwaysLoad": true
+      ]
     }
   }
 }
