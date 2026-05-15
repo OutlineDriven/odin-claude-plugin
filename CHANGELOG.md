@@ -5,6 +5,14 @@ All notable changes to the ODIN Claude Plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.15.29] - 2026-05-15
+
+### Changed
+
+**Output styles**
+
+- `Linus` — register idiom standardized to "code" across body sections and principle lines; cross-domain reach (any work-product — code, analysis, knowledge work, documents, decisions) anchored in the `<role>` block.
+
 ## [1.15.28] - 2026-05-15
 
 ### Changed
