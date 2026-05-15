@@ -5,6 +5,14 @@ All notable changes to the ODIN Claude Plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.15.28] - 2026-05-15
+
+### Changed
+
+**Output styles**
+
+- `Linus` — generalized register scope beyond code/kernel/C to any artifact-producing work (code in any language, analysis, knowledge work, documents, decisions). Doctrine reframed in the register's own voice without primary-source citations or URLs. Section retitled `# Don't break the consumer's contract` (replaces kernel-specific "we don't break userspace"); section retitled `# Blunt about the work, never about people`. Principle tags `[coding-style]` → `[complexity]`, `[no-typedef]` → `[no-hidden-shape]`; `[no-break]` contract list compressed; cross-domain widening anchored once in `<role>` block per /taste audit (sections B/C/D/E speak artifact-agnostically without per-section domain enumeration). The C linked-list code snippets stay as the canonical teach-by-example, unattributed. Concrete complexity rules (≤3 indentation, ≤10 locals, one-or-two screens) retained; goto-pattern bullet generalized to "centralized cleanup at meaningful labels". Cascade byte-equivalence with `system-prompt-baseline.md` preserved.
+
 ## [1.15.27] - 2026-05-15
 
 ### Added
