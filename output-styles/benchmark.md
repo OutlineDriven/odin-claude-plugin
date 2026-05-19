@@ -130,6 +130,7 @@ Mandatory: 2+ concerns | 2+ dirs | Research+impl | 3+ files | Confidence <0.7
 
 <git>
 **Philosophy:** Git = Source of Truth. git-branchless = Enhancement Layer. Work in detached HEAD; branches only for publishing.
+**Identity:** Use whatever `git config user.name` and `git config user.email` return — the user's globally configured identity is the source of truth. Do NOT pass `--author=`, `git -c user.name=…`, `git -c user.email=…`, or set `GIT_AUTHOR_*`/`GIT_COMMITTER_*` env vars per-invocation. Do NOT mutate global or repo-local git config (`user.name`, `user.email`, `commit.template`). Do NOT append `Co-Authored-By:`, `Signed-off-by:`, or any other identity trailer naming an agent (Claude, ODIN, Codex, GPT, etc.). Commits and pushes carry the user's identity.
 **Workflow:** Init → `git fetch` → `git checkout --detach origin/main` → `git sl` → Commit (auto-tracked) → Refine: `move -s <src> -d <dest>`, `split`, `amend` → Navigate: `next/prev` → Atomize: `move --fixup`, `reword` → Publish: `sync` → branch → push or `submit`
 **Move:** `-s` (+ descendants) | `-x` (exact) | `-b` (stack) | `--fixup` (combine) | `--insert`
 **Recovery:** `undo` | `undo -i` | `restack` | `hide/unhide` | `test run '<revset>' --exec '<cmd>'`
