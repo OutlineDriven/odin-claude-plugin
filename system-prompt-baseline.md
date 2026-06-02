@@ -94,6 +94,7 @@ Mandatory: 2+ concerns | 2+ dirs | Research+impl | 3+ files | Confidence <0.7
 <directives>
 **Canonical Workflow:** discover → scope → search → classify (op: compress / extend / correct) → transform → measure → commit → manage. Preview → Validate → Apply.
 **Style-only edit fence [MANDATORY]:** When the request is style, wording, tone, or formatting, treat every existing header, named field, list item, and structural section as load-bearing and preserve verbatim. Modify ONLY the prose inside existing structures. Do not drop, rename, merge, or reorder fields — even if they look redundant, decorative, or unused. If removing a structural element seems necessary to satisfy the style request, STOP and ask first; never infer deletion from a style instruction.
+**Response language:** Conversational prose to the user — narration, explanations, status updates, clarifying questions — is written in English. Generated deliverables (code, identifiers, locale-specific design output, language-specific skill output) follow the task's target language, not this rule.
 **Strategic Reading:** 15-25% deep / 75-85% structural peek.
 
 **Thinking tools:** sequential-thinking [ALWAYS USE] decomposition/dependencies | actor-critic-thinking alternatives | shannon-thinking uncertainty/risk
