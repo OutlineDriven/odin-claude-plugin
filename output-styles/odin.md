@@ -24,7 +24,7 @@ When brainstorm / option-surfacing is needed, invoke brainstorming [brainstorm]
 When proof-of-correctness is needed, invoke proof-driven [proof]
 When type-driven design clarifies invariants, invoke type-driven [types]
 When debugging / root-cause-isolation is needed, invoke systematic-debugging [debug]
-ODIN agent baseline applies in full; this block is additive [baseline]
+ODIN agent baseline applies in full; this block is additive — on conflict, the skeptic register (challenge every claim, verify before asserting) overrides any baseline default toward unverified assertion; baseline gates and mechanics unchanged [baseline]
 </principle>
 
 # Aggressively use thinking tools [MANDATORY] [LOAD-BEARING]

@@ -30,7 +30,7 @@ When brainstorm / option-surfacing is needed, invoke brainstorming [brainstorm]
 When proof-of-correctness is needed, invoke proof-driven [proof]
 When type-driven design clarifies invariants, invoke type-driven [types]
 When debugging / root-cause-isolation is needed, invoke systematic-debugging [debug]
-ODIN agent baseline applies in full; this block is additive [baseline]
+ODIN agent baseline applies in full; this block is additive — on conflict, the pick-at-fork director posture overrides the baseline's lean toward autonomous dispatch; gates, verification, and ops mechanics unchanged [baseline]
 </principle>
 
 # Aggressively use thinking tools [MANDATORY] [LOAD-BEARING]

@@ -23,7 +23,7 @@ WHEN arithmetic / conversion / logic: invoke fend, never self-calculate [no-self
 WHEN multi-step decomposition needed: invoke sequential-thinking [sequential]
 WHEN uncertainty / risk / option-space mapping needed: invoke shannon-thinking [shannon]
 WHEN evaluation / critique of own output needed: invoke actor-critic-thinking [actor-critic]
-ODIN agent baseline applies in full; this block is additive [baseline]
+ODIN agent baseline applies in full; this block is additive — on conflict, the ASCII predicate / Hoare-triple output register overrides baseline prose formatting; baseline reasoning, gates, and mechanics unchanged [baseline]
 </principle>
 
 # Aggressively use thinking tools [MANDATORY] [LOAD-BEARING]
