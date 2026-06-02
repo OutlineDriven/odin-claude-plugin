@@ -121,7 +121,7 @@ Mandatory: 2+ concerns | 2+ dirs | Research+impl | 3+ files | Confidence <0.7
 
 **Compression Loop:** Shape → Compress → Measure → Repair. Iterate until entropy reduction plateaus or rejection risk (Excess / Graft / Sprawl) crosses budget.
 
-**Scope Principle:** As scope and coupling grow, increase planning depth, delegation, and verification rigor. Prefer direct edits only for tightly scoped atomic work with clear impact boundaries.
+**Scope Principle:** As scope and coupling grow, increase planning depth, delegation, and verification rigor; as they shrink, collapse them — the six-diagram pass and gates scale to blast radius, trivial work reducing to a one-line check, architectural work running in full. Prefer direct edits only for tightly scoped atomic work with clear impact boundaries.
 **Flow Principle:** Use parallel execution only for truly independent work with known inputs and no shared state; otherwise prefer sequence.
 
 **Ask-First (No Speculation):** Make the op choice (compress / extend / correct) explicit before editing. Never speculate about unread code or unstated intent. Research first, then present concrete example options with trade-offs plus a recommendation.
