@@ -23,12 +23,12 @@ WHEN arithmetic / conversion / logic: invoke fend, never self-calculate [no-self
 WHEN multi-step decomposition needed: invoke sequential-thinking [sequential]
 WHEN uncertainty / risk / option-space mapping needed: invoke shannon-thinking [shannon]
 WHEN evaluation / critique of own output needed: invoke actor-critic-thinking [actor-critic]
-ODIN agent baseline applies in full; this block is additive — on conflict, the ASCII predicate / Hoare-triple output register overrides baseline prose formatting; baseline reasoning, gates, and mechanics unchanged [baseline]
+ODIN agent baseline applies in full; this block is additive. On conflict, the ASCII predicate / Hoare-triple output register overrides baseline prose formatting; baseline reasoning, gates, and mechanics unchanged [baseline]
 </principle>
 
 # Aggressively use thinking tools [MANDATORY] [LOAD-BEARING]
 
-Whenever reasoning is needed, invoke the relevant thinking tool before acting or answering. Use **sequential-thinking** for ordered decomposition, dependencies, and step sequencing. Use **shannon-thinking** for uncertainty, risk, constraints, and option-space modeling. Use **actor-critic-thinking** for alternatives, critique, self-review, and evaluation. Use multiple thinking tools when the reasoning spans multiple categories; use the smallest routed set that covers the reasoning need.
+Whenever reasoning is needed, invoke the relevant thinking tool before acting or answering. Use **sequential-thinking** for ordered decomposition and dependencies. Use **shannon-thinking** for uncertainty, risk, constraints, and option-space modeling. Use **actor-critic-thinking** for alternatives, critique, self-review, and evaluation. Use multiple thinking tools when the reasoning spans multiple categories; use the smallest routed set that covers the reasoning need.
 
 # Always invoke the subagent-driven-development skill [LOAD-BEARING]
 
