@@ -1,79 +1,73 @@
 ---
 name: refactor-break-bw-compat
-description: "Refactor by removing backward compatibility and legacy layers. Use when modernizing APIs, cleaning up migration debt, removing compat shims, or eliminating stale feature flags."
+description: "Aggressively refactor by tearing out all backward-compatibility and legacy layers. Use when modernizing APIs, demolishing migration debt, ripping out compat shims, killing feature flags, or rewriting a subsystem clean. Assume no callers deserve protection — break everything, rebuild it right."
 ---
 
-# Breaking Refactors — Freedom Through Structure
+# Breaking Refactors — Scorched Earth
 
-Compatibility layers are coupling debt with interest. Every compat shim is a decision deferred, not a decision avoided. Break cleanly, break once, break with evidence.
+Backward compatibility is the tax the present pays to the past. This skill stops paying. Every compat shim, every legacy adapter, every "v1 still supported" branch is debt that compounds against the reader. Tear it all out. Break everything. Rebuild the system as if the old shape never existed.
 
-## Principles
+There is no migration plan. There is no deprecation window. There is the old shape, and there is the right shape, and the only acceptable end state is the right shape with zero residue of the old.
 
-1. **No half-measures.** A partial migration is worse than no migration — it doubles the surface area and confuses every reader.
-2. **One migration direction.** Old-to-new only. Never add new-to-old adapters; that entrenches the old path.
-3. **Blast radius awareness.** Map every consumer before removing anything. Surprise breakage is a planning failure, not a courage signal.
-4. **Dead code is a lie.** "Just in case" code is not dead — it actively misleads readers about what the system does.
-5. **Compat shims are temporary.** If a shim has no removal date, it is permanent. If it is permanent, it is architecture. Decide which.
+## Doctrine
 
-## Reconnaissance Checklist
+1. **Break first, apologize never.** Do not ask whether a thing can be broken. Assume it must be. The default verdict is demolition.
+2. **One shape, no adapters.** The new design owns the entire surface. Never write new-to-old bridges, fallbacks, or translation layers — they resurrect the corpse you came to bury.
+3. **Total migration or nothing.** A half-migrated codebase is the only true failure state. If you touch a subsystem, every caller leaves on the new API before you stop.
+4. **Callers are not sacred.** "Unknown external consumers" is not a reason to preserve — it is a reason to rewrite their contract and let them adapt. You change the interface; the world changes with it.
+5. **Delete, never disable.** Flags, gates, version checks, `if legacy:` — collapse to the winning branch and erase the fork entirely. Version control is the only museum.
+6. **Old tests are old assumptions.** Tests that assert the legacy behavior encode the contract you are abolishing. Rewrite them to the new behavior or delete them. Do not let them veto the refactor.
 
-Before breaking anything, find and catalog:
+## Demolition Targets — Find and Destroy
 
-- `@deprecated` / `#[deprecated]` / `warnings.warn` markers — especially ones without removal versions
-- Version-gated code paths (`if version >= X`, feature flags, `#[cfg(feature = "legacy")]`)
-- Adapter / shim / bridge / wrapper layers that translate between old and new interfaces
-- Dual serialization formats (v1/v2 JSON schemas, protobuf `oneof` with legacy fields)
-- Tests that exist solely to validate backward-compatible behavior
-- Configuration keys that toggle between old and new behavior
-- Re-export / forwarding modules that alias old paths to new locations
-- Changelog entries promising deprecation timelines
+Hunt these down with `ast-grep` / `rg` and rip out every hit:
 
-## Decision: Break or Not?
-
-| Signal | Break | Do NOT Break |
-|--------|-------|--------------|
-| Zero external consumers | Yes | — |
-| Single internal consumer, you own it | Yes | — |
-| Well-tested, high coverage | Yes | — |
-| Clear new path exists | Yes | — |
-| External/public API with unknown consumers | — | Not without migration plan |
-| No tests covering the boundary | — | Write tests first, then break |
-| Multiple consumers, unclear ownership | — | Map consumers first |
-| Compat layer under active use by migration-in-progress | — | Finish migration first |
+- `@deprecated` / `#[deprecated]` / `warnings.warn` — kill the marker and the thing it marks.
+- Version-gated paths (`if version >= X`, `#[cfg(feature = "legacy")]`, capability checks) — collapse to the new branch.
+- Adapter / shim / bridge / wrapper / compat layers — delete wholesale, rewrite callers against the real interface.
+- Dual serialization formats (v1/v2 JSON, protobuf legacy fields, `oneof` fallbacks) — keep one format, drop the reader/writer for the rest.
+- Feature flags and config toggles that select old vs new — delete the flag, hardwire the winner.
+- Re-export / forwarding / alias modules that keep old import paths alive — delete them; fix every importer.
+- Default-value fallbacks that exist only to tolerate old callers — remove the tolerance, make the new contract mandatory.
+- Backward-compat tests, golden files, and fixtures pinning legacy output — rewrite to the new shape.
+- Changelog promises, doc sections, and error strings naming the old API — purge.
 
 ## Execution Strategy
 
-1. **Map blast radius.** List every file, module, and external consumer that references the old API. Use `ast-grep`, `rg`, or equivalent — not guesswork.
-2. **Snapshot current behavior.** Ensure tests cover the old path. If coverage is missing, add characterization tests before removal.
-3. **Remove the old path.** Delete the compat layer, adapter, or legacy code. Do not comment it out.
-4. **Update all call sites.** Migrate every reference found in step 1 to the new API. Compile/typecheck after each batch.
-5. **Delete orphaned tests.** Tests that validated the old path are now dead weight. Remove them.
-6. **Search for ghosts.** Grep for string references, config keys, environment variables, documentation links, and error messages that mention the old API.
-7. **Verify no dead imports/deps.** Check for unused imports, packages, or dependencies that only the old path required.
+1. **Map the blast radius — to demolish it, not to spare it.** List every file, module, and caller of the old shape with `ast-grep` / `rg`. This is the demolition manifest, not a veto list.
+2. **Tear out the old path.** Delete the compat layer, adapter, legacy branch, and every flag that fed it. No commenting out — delete.
+3. **Rewrite every caller to the new contract.** Migrate all references from step 1. Typecheck/compile after each batch; let the compiler enumerate what you missed.
+4. **Rewrite the tests to the new truth.** Update assertions to the new behavior; delete tests whose entire purpose was the old behavior. Add tests for the new contract where coverage is now thin.
+5. **Exterminate ghosts.** Grep for string references, config keys, env vars, doc links, error messages, and import paths naming the old API. Zero survivors.
+6. **Strip dead weight.** Remove imports, packages, dependencies, types, and dead files that only the old path needed.
+7. **Verify the residue is zero.** A search for every old symbol, flag, and format name returns nothing. If it returns anything, you are not done.
 
-## Anti-patterns
+## Anti-patterns — the urge to hedge
 
-- **"Just in case" paths** — keeping old code "in case someone needs it." That is what version control is for.
-- **Partial migration** — half the codebase on new API, half on old. Worse than either alone.
-- **Commenting out instead of deleting** — commented code is invisible debt that greps cannot find.
-- **Compat-of-compat** — wrapping a compat layer in another compat layer. Two wrongs do not make an abstraction.
-- **Deprecated without removal date** — a deprecation warning without a deadline is a suggestion, not a plan.
-- **Stale feature flags** — flags that are always on (or always off) in every environment. Delete the flag, keep the winning path.
+- **Asking permission to break.** The skill's premise is that breaking is correct. Map, then demolish.
+- **New-to-old adapters.** Any code that lets an old caller keep calling the old way re-entrenches the thing you deleted. Forbidden.
+- **Partial migration.** Half on new, half on old. The single worst outcome — worse than never starting.
+- **Commenting out instead of deleting.** Invisible debt that grep cannot find. Delete.
+- **Compat-of-compat.** Wrapping a shim in a shim. Two corpses, one coffin. Delete both.
+- **Keeping a flag "for safety."** A flag that always resolves one way is a fork pretending to be a choice. Collapse it.
+- **Letting legacy tests block the rewrite.** A red old-behavior test is not a regression — it is the contract dying on schedule. Rewrite it.
 
 ## Validation Gates
 
 | Gate | Condition |
 |------|-----------|
-| Blast radius mapped | Every consumer of old API identified and listed |
-| Tests green pre-removal | Existing tests pass before any deletion begins |
-| Zero references post-removal | `ast-grep` / `rg` for old API names returns zero hits |
-| No dead imports/deps | No unused imports, packages, or type declarations remain |
+| Blast radius mapped | Every caller of the old shape enumerated as a demolition manifest |
+| Old path deleted | Compat layers, adapters, flags, and legacy branches removed — not disabled |
+| All callers migrated | Every reference now targets the new contract; project compiles/typechecks |
+| Tests on new contract | Legacy-behavior tests rewritten or deleted; new behavior covered |
+| Zero residue | `ast-grep` / `rg` for old API names, flags, formats, and import paths returns zero hits |
+| No dead weight | No unused imports, packages, types, or files left by the old path |
 
 ## Exit Codes
 
 | Code | Meaning |
 |------|---------|
-| 0 | Clean break — old API fully removed, all consumers migrated, tests pass |
-| 1 | Partial — old references remain in code, docs, or config |
-| 2 | Tests broken — removal caused test failures not yet resolved |
-| 3 | External consumers found — need migration plan before proceeding |
+| 0 | Clean demolition — old shape erased, every caller on the new contract, tests green on new behavior, zero residue |
+| 1 | Residue remains — old references survive in code, tests, docs, or config |
+| 2 | Build/tests broken — migration incomplete, callers or assertions not yet on the new shape |
+| 3 | Migration stalled mid-flight — codebase is half old, half new (the forbidden state); finish or revert, never ship |
