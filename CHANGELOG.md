@@ -5,6 +5,28 @@ All notable changes to the ODIN Claude Plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.15.43] - 2026-06-05
+
+### Added
+
+**15 skills ported from the `agent-sh` plugin marketplace** — re-homed as native, self-contained ODIN skills. All external dependencies (the `agent-analyzer` binary, `repo-intel.json` cache, editor shims, bespoke JS `lib/`, and opus/sonnet/haiku model routing) are replaced by native tooling: codegraph MCP, `git`/`ast-grep`/`git grep` recipes, repomix, generic ODIN agents, and the `ask` tool. Attribution in `skills/LICENSES.md`.
+
+- `repo-intel` — native repository intelligence (hotspots, coupling, bus factor, bugspots, ownership, entry points) from git history + codegraph; no cache, every signal recomputed on demand.
+- `agnix` — native agent-config lint pass (skill frontmatter, CLAUDE.md/AGENTS.md, hooks, MCP, plugin manifests, agent files) graded HIGH/MEDIUM/LOW.
+- `deslop` — three-phase certainty-graded AI-slop detection; HIGH-only guarded autofix with test-verify and rollback.
+- `sync-docs` — diff-driven doc-vs-code drift detection; safe-fix limited to version bumps + CHANGELOG, everything else flagged.
+- `banthis` — persist hard user prohibitions into a managed AGENTS.md/CLAUDE.md section (dep-free node script).
+- `drift-detect` — plan-vs-reality reality check across GitHub + docs + code with a prioritized reconstruction plan.
+- `audit-project` — iterative multi-agent code audit with a false-positive contract; loops until critical/high findings clear.
+- `onboard` — new-codebase orientation tour: bounded context collection, 7-section synthesis, interactive guidance.
+- `can-i-help` — route contributors to data-backed contribution opportunities matched to stated interest.
+- `learn` — online research → scored sources → summaries-only → RAG-optimized learning guide + retrieval index.
+- `system-prompt-curator` — create or improve autonomous-agent system prompts from research-backed principles.
+- `skillers` — mine local agent transcripts (sanitized first) into automation recommendations; never auto-creates files.
+- `enhance` — certainty-graded enhancement of agent/plugin surfaces via parallel analyzers; HIGH-only `--apply`.
+- `perf-investigate` — self-contained multi-phase performance investigation (baseline → hypotheses → profile → one-change optimization).
+- `next-task` (explicit-only) — self-contained backlog orchestrator: selects the next task and drives it through isolated git-branchless implementation, review, docs, and verification gates.
+
 ## [1.15.29] - 2026-05-15
 
 ### Changed

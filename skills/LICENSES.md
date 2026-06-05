@@ -46,6 +46,49 @@ Reference documents cross-linked across multiple skills per the canonical-homes 
 | `test-driven/references/deep-modules.md` | https://github.com/mattpocock/skills/blob/main/tdd/deep-modules.md | MIT | © 2026 Matt Pocock | Fold-in; npm-flavored examples regeneralized; ODIN voice. |
 | `test-driven/references/tests.md` | https://github.com/mattpocock/skills/blob/main/tdd/tests.md | MIT | © 2026 Matt Pocock | Fold-in; ODIN voice. |
 
+## agentsys ports
+
+Skills and reference/script files ported from the `agent-sh` plugin marketplace (https://github.com/agent-sh), which the maintainer is decommissioning. Upstream is MIT. ODIN adaptations — removal of the external `agent-analyzer` binary, `repo-intel.json` cache, editor shims, bespoke JS `lib/`, and model routing; substitution of native tooling (codegraph MCP, `git`/`ast-grep`/`git grep`, repomix, generic ODIN agents, the `ask` tool); ODIN voice; structural reorganization — are made under the same MIT terms. License text is the standard MIT reproduced below; only the copyright holder differs (© 2026 Avi Fenesh).
+
+| Path under `/home/alpha/.claude/claude/skills/` | Upstream origin | License | Copyright | Provenance |
+| ----------------------------------------------- | --------------- | ------- | --------- | ---------- |
+| `repo-intel/SKILL.md` | https://github.com/agent-sh/repo-intel (v0.2.0) | MIT | © 2026 Avi Fenesh | ODIN voice; binary + `repo-intel.json` cache replaced by on-demand git/codegraph/repomix recipes. |
+| `repo-intel/references/signals.md` | https://github.com/agent-sh/repo-intel (v0.2.0) | MIT | © 2026 Avi Fenesh | Native signal-recipe catalog; scoring formulas distilled from upstream. |
+| `agnix/SKILL.md` | https://github.com/agent-sh/agnix (v0.22.1) | MIT | © 2026 Avi Fenesh | ODIN voice; Rust lint engine replaced by native read/search checks. |
+| `agnix/references/agent-config-rules.md` | https://github.com/agent-sh/agnix (v0.22.1) | MIT | © 2026 Avi Fenesh | Agent-config rule catalog distilled to the natively-checkable subset. |
+| `deslop/SKILL.md` | https://github.com/agent-sh/deslop (main) | MIT | © 2026 Avi Fenesh | ODIN voice; three-phase certainty scan via native search/ast-grep; HIGH-only guarded autofix. |
+| `deslop/references/slop-catalog.md` | https://github.com/agent-sh/deslop (main) | MIT | © 2026 Avi Fenesh | Per-language slop pattern + certainty + autofix-strategy table. |
+| `sync-docs/SKILL.md` | https://github.com/agent-sh/sync-docs (main) | MIT | © 2026 Avi Fenesh | ODIN voice; git-diff drift detection; safe-fix limited to version bump + CHANGELOG. |
+| `sync-docs/references/doc-issues.md` | https://github.com/agent-sh/sync-docs (main) | MIT | © 2026 Avi Fenesh | Doc-issue taxonomy + per-issue detection recipes + ignore list. |
+| `banthis/SKILL.md` | https://github.com/agent-sh/banthis (v0.3.1) | MIT | © 2026 Avi Fenesh | ODIN voice; managed-section prohibition-memory skill. |
+| `banthis/references/markers.md` | https://github.com/agent-sh/banthis (v0.3.1) | MIT | © 2026 Avi Fenesh | Managed-marker contract, preamble, init-meta, and target-resolution rules. |
+| `banthis/scripts/banthis.mjs` | https://github.com/agent-sh/banthis (v0.3.1) | MIT | © 2026 Avi Fenesh | Dep-free ESM port of upstream `bin/banthis.mjs`; markers + add/list/remove/init preserved; install/show/path subcommands dropped. |
+| `drift-detect/SKILL.md` | https://github.com/agent-sh/drift-detect (main) | MIT | © 2026 Avi Fenesh | ODIN voice; gh/docs/code collection; generic-agent synthesis (model routing removed). |
+| `drift-detect/references/drift-taxonomy.md` | https://github.com/agent-sh/drift-detect (main) | MIT | © 2026 Avi Fenesh | Drift/gap taxonomy, prioritization weights, cross-ref matching, report template. |
+| `audit-project/SKILL.md` | https://github.com/agent-sh/audit-project (v1.0.2) | MIT | © 2026 Avi Fenesh | ODIN voice; iterative multi-agent audit via generic ODIN reviewers. |
+| `audit-project/references/review-roster.md` | https://github.com/agent-sh/audit-project (v1.0.2) | MIT | © 2026 Avi Fenesh | The 10 reviewer role prompts + false-positive-contract clause. |
+| `audit-project/references/false-positive-contract.md` | https://github.com/agent-sh/audit-project (v1.0.2) | MIT | © 2026 Avi Fenesh | Consolidation algorithm, blocked-ratio gate, decision-gate options, signal routing. |
+| `onboard/SKILL.md` | https://github.com/agent-sh/onboard (v0.1.1) | MIT | © 2026 Avi Fenesh | ODIN voice; codebase orientation via native signals + repomix; `ask`-driven guidance. |
+| `onboard/references/orientation.md` | https://github.com/agent-sh/onboard (v0.1.1) | MIT | © 2026 Avi Fenesh | Collection checklist, 7-section orientation template, depth matrix, degradation table. |
+| `can-i-help/SKILL.md` | https://github.com/agent-sh/can-i-help (v0.1.1) | MIT | © 2026 Avi Fenesh | ODIN voice; contribution routing via native signals + mandatory `ask`. |
+| `can-i-help/references/interest-routing.md` | https://github.com/agent-sh/can-i-help (v0.1.1) | MIT | © 2026 Avi Fenesh | Interest→signal map, four-field recommendation template, slop-verification rules. |
+| `learn/SKILL.md` | https://github.com/agent-sh/learn (main) | MIT | © 2026 Avi Fenesh | ODIN voice; web research → RAG guide; opus pin + post-pass enhancement dropped. |
+| `learn/references/methodology.md` | https://github.com/agent-sh/learn (main) | MIT | © 2026 Avi Fenesh | Query funnel, 100-point scoring rubric, summaries-only extraction, guide/index templates. |
+| `system-prompt-curator/SKILL.md` | https://github.com/agent-sh/system-prompt-curator (v2.0.1) | MIT | © 2026 Avi Fenesh | ODIN voice; create + `--improve` modes with self-eval gate. |
+| `system-prompt-curator/references/principles.md` | https://github.com/agent-sh/system-prompt-curator (v2.0.1) | MIT | © 2026 Avi Fenesh | The 10 research-backed prompt principles. |
+| `system-prompt-curator/references/anti-patterns.md` | https://github.com/agent-sh/system-prompt-curator (v2.0.1) | MIT | © 2026 Avi Fenesh | Prompt anti-pattern table (failure → why → fix). |
+| `system-prompt-curator/references/templates.md` | https://github.com/agent-sh/system-prompt-curator (v2.0.1) | MIT | © 2026 Avi Fenesh | Mandatory + specialized prompt templates and harness recommendations. |
+| `skillers/SKILL.md` | https://github.com/agent-sh/skillers (v0.2.1) | MIT | © 2026 Avi Fenesh | ODIN voice; transcript mining with mandatory sanitize-before-parse gate. |
+| `skillers/references/mining.md` | https://github.com/agent-sh/skillers (v0.2.1) | MIT | © 2026 Avi Fenesh | Observation schema, weighting formula, classification rules, evidence thresholds. |
+| `skillers/scripts/sanitize.mjs` | https://github.com/agent-sh/skillers (v0.2.1) | MIT | © 2026 Avi Fenesh | Dep-free ESM port of upstream `lib/sanitize.js`; redaction patterns + high-entropy fallback + allowlist preserved. |
+| `enhance/SKILL.md` | https://github.com/agent-sh/enhance (main) | MIT | © 2026 Avi Fenesh | ODIN voice; parallel certainty-graded analyzers; auto-suppression learning dropped. |
+| `enhance/references/analyzer-checks.md` | https://github.com/agent-sh/enhance (main) | MIT | © 2026 Avi Fenesh | The 8 analyzer check tables (check / certainty / autoFix). |
+| `perf-investigate/SKILL.md` | https://github.com/agent-sh/perf (v1.0.1) | MIT | © 2026 Avi Fenesh | ODIN voice; renamed from `perf`; multi-phase investigation; breaking-point machinery + model routing dropped. |
+| `perf-investigate/references/investigation.md` | https://github.com/agent-sh/perf (v1.0.1) | MIT | © 2026 Avi Fenesh | Per-phase contract, hypothesis-evidence rules, ledger format, baseline JSON schema. |
+| `next-task/SKILL.md` | https://github.com/agent-sh/next-task (v1.1.2) | MIT | © 2026 Avi Fenesh | ODIN voice; self-contained backlog orchestrator; git-branchless isolation; gates inlined. |
+| `next-task/references/gates.md` | https://github.com/agent-sh/next-task (v1.1.2) | MIT | © 2026 Avi Fenesh | Four inlined gates (slop / docs-sync / review / verifier) with rollback + false-positive contract. |
+| `next-task/references/isolation.md` | https://github.com/agent-sh/next-task (v1.1.2) | MIT | © 2026 Avi Fenesh | git-branchless detached-HEAD isolation recipe, no-force-push rule, `git undo` recovery. |
+
 ## ODIN-only-gap skills (not Matt-derived)
 
 The following skills are authored by ODIN and do not carry upstream attribution: `debug`, `perf-profile`, `security-review`, `deps-upgrade`. They are governed by the ODIN project license, not MIT.
