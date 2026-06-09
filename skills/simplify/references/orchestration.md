@@ -121,7 +121,7 @@ Surface the failure mode (exit 13) and stop the simplify run for the affected co
 
 ## Post-fix audit (no new rejection ground)
 
-After the final commit, audit the simplify patch itself against `~/.claude/claude/system-prompt-baseline.md` `<reject_patches>` — Excess / Graft / Sprawl. Any hit → revert the entire simplify chain via `git revert <first-simplify-commit>..HEAD --no-edit` and exit 14. The orchestrator may re-plan and re-invoke.
+After the final commit, audit the simplify patch itself against `~/.claude/claude/system-prompt-baseline.md` `<reject_patches>` — Excess / Graft / Sprawl / Sever. Any hit → revert the entire simplify chain via `git revert <first-simplify-commit>..HEAD --no-edit` and exit 14. The orchestrator may re-plan and re-invoke.
 
 ## Exit code summary (matches SKILL.md)
 

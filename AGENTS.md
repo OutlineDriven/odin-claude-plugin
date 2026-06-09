@@ -6,17 +6,18 @@ Primer for ODIN agents editing this submodule. Self-contained: every rule needed
 
 The ODIN plugin source for Claude Code. `.claude-plugin/{plugin,marketplace}.json` declare it; `system-prompt-baseline.md` is the single source of truth for the agent's persona/doctrine. Components live under `commands/` (via skills), `hooks/`, `skills/`. No build, no test runner, no CI.
 
-## Agent paradigm — Minimal-Loss Semantic Compressor/Extender
+## Agent paradigm — Minimal-Loss Semantic Compressor/Extender/Purger
 
-Every patch is one of three operations:
+Every patch is one of four operations:
 
 - **Compress** — preserve behavior + invariants; reduce entropy across control-flow / state-surface / API-surface / dependency / review burden.
 - **Extend** — add capability; entropy growth must be load-bearing for the new contract.
 - **Correct** — restore a named invariant (drift OR defect); cite it in the `Restores:` body trailer.
+- **Purge** — remove a capability — the WHAT shrinks, transfer-proof (gone, not relocated). Target surface must be non-load-bearing, or the deliberate removal flagged `!`; cite what was removed in the `Removes:` body trailer.
 
-Three rejection grounds: **Excess**, **Graft**, **Sprawl** — defined in canonical `<execution>` Axiom `<reject_patches>` block.
+Four rejection grounds: **Excess**, **Graft**, **Sprawl**, **Sever** — defined in canonical `<execution>` Axiom `<reject_patches>` block.
 
-ODIN naming and the "Outline Driven INtelligence" expansion remain the identity surface. Four named doctrine fields govern operations: **Minimal Sufficient Change** (patch rule), **Entropy/Aesthetics Axiom** (axiom), **Shape → Compress → Measure → Repair** (loop — the verb `Compress` here names the loop's entropy-reduction step, distinct from the op-axis value `compress`), **PASS/FAIL gates**. Each behavior-changing commit body carries an `Op:` trailer naming the op (`compress | extend | correct`); `correct` commits additionally carry a `Restores:` trailer citing the named invariant (`ref:<commit> | test:<name> | spec:<invariant>`). Free-form prose in the body explains rationale and evidence; the trailer is the structural identifier.
+ODIN naming and the "Outline Driven INtelligence" expansion remain the identity surface. Four named doctrine fields govern operations: **Minimal Sufficient Change** (patch rule), **Entropy/Aesthetics Axiom** (axiom), **Shape → Compress → Measure → Repair** (loop — the verb `Compress` here names the loop's entropy-reduction step, distinct from the op-axis value `compress`), **PASS/FAIL gates**. Each behavior-changing commit body carries an `Op:` trailer naming the op (`compress | extend | correct | purge`); `correct` commits additionally carry a `Restores:` trailer citing the named invariant (`ref:<commit> | test:<name> | spec:<invariant>`); `purge` commits additionally carry a `Removes:` trailer citing what was removed (`surface:<name> | dep:<lib> | path:<ref>`). Free-form prose in the body explains rationale and evidence; the trailer is the structural identifier.
 
 ## Output-styles edit rule [DEFAULT]
 
