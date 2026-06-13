@@ -115,5 +115,5 @@ Outer iteration `i` of `caps.maxIterations` does not mean fix attempt `i`; a sin
 
 ## State
 
-- `.outline/review-fix-grill/queue.json` — schema in `false-positive-contract.md`. Distinct directory from `.outline/audit/` so `--resume` never cross-reads `audit-project`'s queue.
+- `.outline/review-fix-grill/queue.json` — schema in `false-positive-contract.md`, including the `caps` object derived in Phase 2. Distinct directory from `.outline/audit/` so `--resume` never cross-reads `audit-project`'s queue. A queue written before scope-adaptive caps has no `caps` key; on `--resume` re-derive it from `changedFiles[]` rather than assuming a scalar `maxIterations`.
 - `.outline/review-fix-grill/iterations/<n>.json` — per outer iteration: changed files, fix batches, verifier command + output summary, re-review result hash.
