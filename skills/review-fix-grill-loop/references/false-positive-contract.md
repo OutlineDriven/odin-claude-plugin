@@ -202,7 +202,7 @@ Minimal state under `.outline/review-fix-grill/queue.json`:
   },
   "selectedReviewers": ["code-quality", "security", "performance", "test-quality"],
   "iteration": 0,
-  "maxIterations": 5,
+  "caps": { "scopeTier": "small|medium|large|xl", "maxIterations": 5, "fixAttemptCap": 20, "attemptsPerItem": 3 },
   "rawResults": [],
   "items": [],
   "resolveDecisions": [],
@@ -256,7 +256,7 @@ TARGETED_REVIEW
 CONSOLIDATED at iteration boundary
   ├─ open at/above floor == 0        -> CLEAN
   ├─ hash repeated twice             -> ASK_ITERATION_STALL
-  ├─ iteration >= max                -> ASK_ITERATION
+  ├─ iteration >= caps.maxIterations -> ASK_ITERATION
   └─ at/above floor remain           -> ASK_ITERATION
 ```
 
@@ -266,7 +266,7 @@ At every iteration boundary with open at-or-above-floor findings, show current q
 
 | Option | Recommended When | Effect |
 |---|---|---|
-| `continue-fixing` | Verifier is green, hash did not stall, iteration < max, remaining findings are actionable. | Run next batch. |
+| `continue-fixing` | Verifier is green, hash did not stall, iteration < caps.maxIterations, remaining findings are actionable. | Run next batch. |
 | `create-issues-for-rest` | Remaining work is valid but larger than this session, or needs owner scheduling. | Stop loop; create internal/private issues where safe; do not publicize exploitable security details. |
 | `move-remainder-to-debt` | Remaining findings are accepted risk; not recommended for critical/high unless user accepts. | Append remaining findings to a debt file, mark queue deferred. |
 | `leave-in-queue` | User wants resume later or manual inspection. | Stop with `.outline/review-fix-grill/queue.json` intact. |

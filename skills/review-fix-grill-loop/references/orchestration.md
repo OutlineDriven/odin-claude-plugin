@@ -37,7 +37,7 @@ git rev-parse @{upstream}        # tracking branch fallback
 
 ## Phase 2–4, 7 — delegated
 
-- **Phase 2 (shape + signals):** compute `prioritySignals` and `HAS_DB/HAS_API/FRONTEND/BACKEND/CICD` flags over `changedFiles[]` only.
+- **Phase 2 (shape + signals):** compute `prioritySignals` and `HAS_DB/HAS_API/FRONTEND/BACKEND/CICD` flags over `changedFiles[]` only, then derive the scope-adaptive caps (below) and persist `caps` to the queue.
 - **Phase 3 (review):** select ≤10 reviewers (4 core + conditional by diff surface), dispatch in one parallel batch with role prompts from `review-roster.md` and the mandatory JSON schema.
 - **Phase 4 (consolidate):** apply `false-positive-contract.md` — normalize, blocked-ratio gate, below-floor extraction.
 - **Phase 7 (targeted re-review):** re-review changed files only, per the contract's routing table.
@@ -79,14 +79,39 @@ Rules:
 - **Persist.** Write each decision to `resolveDecisions[]` in the queue (`id`, `status`, `recommended`, `scope`).
 - **Weak-location rows** (`locationWeak: true`) always route through the resolve gate, never directly to the fix queue.
 
+## Scope-adaptive caps
+
+The three caps scale with the change-set's complexity instead of being flat. A 1-file typo and a 40-file cross-surface branch do not deserve the same budget. Derive them in Phase 2 from two signals already computed over `changedFiles[]`:
+
+- `F` = number of changed files (`len(changedFiles[])`).
+- `S` = number of true surface flags among `{HAS_DB, HAS_API, FRONTEND, BACKEND, CICD}` — the breadth of the change.
+
+`scopeTier = max(fileTier(F), surfaceTier(S))` — the higher of the two wins, so a wide-but-small or narrow-but-large diff both escalate. Surfaces alone never force `xl`.
+
+| | `small` | `medium` | `large` | `xl` |
+|---|---|---|---|---|
+| fileTier (`F`) | ≤3 | 4–15 | 16–40 | >40 |
+| surfaceTier (`S`) | ≤1 | 2 | ≥3 | — |
+
+The tier maps to the three caps. `small` reproduces the prior fixed defaults, so the tier is a **floor**: caps only ever grow with scope, never drop below earlier behavior.
+
+| `scopeTier` | `maxIterations` | `fixAttemptCap` | `attemptsPerItem` |
+|---|---|---|---|
+| `small` | 5 | 20 | 3 |
+| `medium` | 8 | 30 | 3 |
+| `large` | 12 | 50 | 4 |
+| `xl` | 15 | 80 | 5 |
+
+Persist `{scopeTier, maxIterations, fixAttemptCap, attemptsPerItem}` to `queue.caps`. An explicit `--max-iterations N` overrides the derived outer cap; `fixAttemptCap` and `attemptsPerItem` are adaptive-only (no flags).
+
 ## Double-loop semantics
 
 Two nested loops with separate caps — spell this out in any progress output so the two counters are not conflated:
 
-- **Outer loop** (this skill, `--max-iterations`, default `5`): counts review → resolve → fix-batch → targeted-re-review cycles. Bounded by the terminating predicate, the decision gate, the iteration cap, or a stall.
-- **Inner loop** (the reused `fix` loop, default cap `20`): counts individual fix *attempts* within one fix batch — one minimal patch per attempt, checkpoint commit, verifier + guard, KEEP on green / `git revert HEAD --no-edit` on red, up to 3 attempts per item (initial + 2 reworks) before SKIP.
+- **Outer loop** (this skill, `caps.maxIterations`, adaptive `5–15`; `--max-iterations` overrides): counts review → resolve → fix-batch → targeted-re-review cycles. Bounded by the terminating predicate, the decision gate, the iteration cap, or a stall.
+- **Inner loop** (the reused `fix` loop, adaptive `caps.fixAttemptCap`, `20–80`): counts individual fix *attempts* within one fix batch — one minimal patch per attempt, checkpoint commit, verifier + guard, KEEP on green / `git revert HEAD --no-edit` on red, up to `caps.attemptsPerItem` attempts per item (adaptive `3–5`, = initial + reworks) before SKIP.
 
-Outer iteration `i` of `5` does not mean fix attempt `i`; a single outer iteration may spend several inner attempts landing one batch.
+Outer iteration `i` of `caps.maxIterations` does not mean fix attempt `i`; a single outer iteration may spend several inner attempts landing one batch.
 
 ## State
 

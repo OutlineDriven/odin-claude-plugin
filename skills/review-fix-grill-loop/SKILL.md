@@ -27,10 +27,10 @@ NOT:
 - `scope` (optional path/glob/ref) — overrides the change-set default; grills that path instead of the resolved diff.
 - `against <ref>` — explicit base-ref override for diff resolution (mirrors `simplify against <ref>`).
 - `--severity-floor <critical|high|medium>` — terminating floor; default `medium`.
-- `--max-iterations N` — outer-loop cap; default `5`.
+- `--max-iterations N` — outer-loop cap; scope-adaptive (default tier `5`, grows to `15` with change-set complexity per `references/orchestration.md`); an explicit value overrides the derived cap.
 - `--quick` — single review pass; no resolve, no fix, no loop. Reports findings and exits.
 - `--domain <reviewer>` — run one reviewer domain only; same consolidation contract applies.
-- `--resume` — load `.outline/review-fix-grill/queue.json` if present and continue.
+- `--resume` — load `.outline/review-fix-grill/queue.json` if present and continue. A queue written before scope-adaptive caps lacks `caps`; re-derive it from `changedFiles[]` (Phase 2) on resume rather than assuming a scalar `maxIterations`.
 
 ## State and Artifacts
 
@@ -48,12 +48,12 @@ Full recipes live in the references; the phase order is:
 3. **Review (parallel)** — select ≤10 reviewers (4 core: `code-quality`, `security`, `performance`, `test-quality`; conditional by diff surface). Dispatch in one parallel batch with role prompts from `references/review-roster.md` and the mandatory JSON schema. Reviewers are read-only and return JSON only.
 4. **Consolidate** — apply `references/false-positive-contract.md` exactly: normalize, honor dismissals only with non-empty reason, dedupe, blocked-ratio gate **before** any zero-check, extract below-floor findings to `belowFloor[]`.
 5. **Resolve gate** — for each confirmed open at-or-above-floor finding, emit `VALID/NOT-AN-ISSUE/NEEDS-CLARIFICATION` + three distinct solutions + a recommendation + in-scope/out-of-scope. `NEEDS CLARIFICATION` and `out-of-scope` escalate to `AskUserQuestion`; the rest feed the fix queue with the recommended approach. Spec in `references/orchestration.md`.
-6. **Fix (verified batches)** — reuse the `fix` loop in findings mode: one minimal patch per attempt, checkpoint commit, repo-native verifier + guard, KEEP on green / `git revert HEAD --no-edit` on red, up to 3 attempts per item (initial + 2 reworks) before SKIP. Refuse on protected branches (`main`/`master`/`release/*`) before entering the loop. Verifier discovery per `fix/references/verifiers.md`.
+6. **Fix (verified batches)** — reuse the `fix` loop in findings mode: one minimal patch per attempt, checkpoint commit, repo-native verifier + guard, KEEP on green / `git revert HEAD --no-edit` on red, up to `caps.attemptsPerItem` attempts per item (scope-adaptive `3–5`, = initial + reworks) before SKIP. Refuse on protected branches (`main`/`master`/`release/*`) before entering the loop. Verifier discovery per `fix/references/verifiers.md`.
 7. **Targeted re-review + loop** — re-review changed files only (contract routing), re-consolidate, re-run the blocked-ratio gate, then test the loop condition.
 
-**Loop condition:** `openAtOrAboveFloor > 0 && iteration < maxIterations`, counting only `severity ≥ floor && confidence ≥ medium`. At each iteration boundary with findings remaining, fire the decision gate (`continue-fixing` / `create-issues-for-rest` / `move-remainder-to-debt` / `leave-in-queue`); a repeated stall hash drops the `continue-fixing` recommendation.
+**Loop condition:** `openAtOrAboveFloor > 0 && iteration < caps.maxIterations`, counting only `severity ≥ floor && confidence ≥ medium`. At each iteration boundary with findings remaining, fire the decision gate (`continue-fixing` / `create-issues-for-rest` / `move-remainder-to-debt` / `leave-in-queue`); a repeated stall hash drops the `continue-fixing` recommendation.
 
-**Double loop:** the outer cap (`--max-iterations`, default 5) counts review→resolve→fix→re-review cycles; the inner `fix` cap (default 20) counts fix attempts within a batch. Keep the two counters distinct in any progress output.
+**Double loop:** both caps are scope-adaptive (derived in Phase 2, see `references/orchestration.md` "Scope-adaptive caps"). The outer cap (`caps.maxIterations`, `5–15`; `--max-iterations` overrides) counts review→resolve→fix→re-review cycles; the inner `fix` cap (`caps.fixAttemptCap`, `20–80`) counts fix attempts within a batch. Keep the two counters distinct in any progress output.
 
 ## Completion
 
@@ -81,6 +81,7 @@ Report: change-scope + base ref, selected reviewers, outer iterations, critical/
 |---|---|---|
 | Change-scope resolved | Non-empty three-source union (tracked diff + staged + untracked); empty → clean exit, no agents | Yes |
 | Context detected | Framework flags + priority signals over changed files collected or marked unavailable | Yes |
+| Caps derived | `scopeTier` + `caps.{maxIterations,fixAttemptCap,attemptsPerItem}` computed in Phase 2 and persisted to the queue (re-derived on `--resume` if absent) | Yes |
 | Reviewer roster selected | 4 core + justified conditional reviewers (≤10 total), OR exactly the single reviewer named by `--domain` | Yes |
 | Parallel dispatch | Selected reviewers launched in one batch with role prompts + schema | Yes |
 | Findings schema valid | Every finding has file, line, severity, category, description, suggestion, confidence, false-positive fields | Yes for queue ingestion |
