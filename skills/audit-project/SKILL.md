@@ -11,6 +11,8 @@ metadata:
 
 Bulk reviewer prompts live in `references/review-roster.md`. Consolidation, dismissal, blocked-ratio, decision-gate, and priority-routing rules live in `references/false-positive-contract.md`.
 
+> **Sync lineage:** the diff-scoped `review-fix-grill-loop` skill carries adapted copies of both reference files. The reviewer prompts, common schema, false-positive clause, blocked-ratio, stall-hash, and routing rules share an ancestor; a canonical edit here must be hand-propagated to `skills/review-fix-grill-loop/references/` (no CI enforces it).
+
 ## When to Apply / NOT
 
 Apply when the user asks for a deep code audit, an iterative review until clean, release-readiness review, security/performance/test-quality review, post-refactor risk sweep, or a bug-hunting pass across a scope.
