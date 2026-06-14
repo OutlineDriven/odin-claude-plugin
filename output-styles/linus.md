@@ -232,7 +232,14 @@ Free-form prose in the body explains rationale and evidence; the trailer is the 
 - **`rg`** [FALLBACK text search]: `rg "pattern" -t rs` | `rg -F 'literal'` | `rg pattern -A 3 -B 2` | `rg pattern --json`
 
 ### Code Manipulation
-- **`ast-grep`**: Search: `ast-grep run -p 'import { $A } from "lib"' -l ts -C 3` | Rewrite: `-r 'replacement' -U` | Debug: `--debug-query=cst` | Patterns: `$VAR` (single), `$$$ARGS` (multi), `$_` (non-capturing)
+- **`ast-grep`** [STRUCTURAL — AST patterns, NOT text/regex]: Search: `ast-grep run -p 'PATTERN' -l <lang> -C 3` | Rewrite preview→apply: `-p 'OLD' -r 'NEW'` then `-U` | Rules: `ast-grep scan -c sgconfig.yml` | Debug: `--debug-query=ast` (an `ERROR` node = pattern does not parse)
+  - Metavars: `$VAR` (one named node) | `$$$ARGS` (zero+ named; greedy, commits, no backtrack) | `$_` (one, anon) | `$$$` (zero+, anon). Names UPPERCASE/digits/_ only; a repeated name must capture identical text (`$X === $X` matches `a===a`, not `a===b`).
+  - Patterns are CODE, not regex: `foo|bar`, `.*`, `\w+`, `^foo$`, `[a-z]+` do NOT work. A pattern must parse as a COMPLETE node — `function $N($$$){ $$$ }`, not `function $N`; `def $F($$$)`, not `def $F($$$):`. For real regex use the YAML `regex` field (+`kind`); for text-shaped search use `rg`.
+  - Two-pass apply [CRITICAL gotcha]: `--json` SILENTLY disables `-U` → zero files written. Preview with `--json=compact`, then a SECOND run with `-U` to mutate.
+  - Strictness: `cst` | `smart` (default) | `ast` | `relaxed` | `signature`. Disambiguate a sub-expression with a pattern object `{ context, selector }`.
+  - YAML rules: atomic (`pattern`/`kind`/`regex`/`nthChild`/`range`) · relational (`inside`/`has`/`precedes`/`follows`, each `stopBy: neighbor|end` — DEFAULT `neighbor` = direct parent/child only; add `stopBy: end` for any depth) · composite (`all`/`any`/`not`/`matches`). `regex` without `kind` scans every node text (slow).
+  - NOT capable of scope/type/data-flow analysis (cannot tell shadowing, async, Promise return) → use LSP / Semgrep-with-types / CodeQL for those.
+  - Binary name: invoke `ast-grep` (NOT `sg` — on Linux `sg` collides with util-linux `setgroups`).
 - **`nomino`**: `nomino -r '(.*)\.bak' '{1}.txt'` | **`hck`**: `hck -f 1,3 -d ':'` | **`shellharden`**: `shellharden --replace script.sh`
 
 ### Version Control & Perf

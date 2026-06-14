@@ -5,6 +5,20 @@ All notable changes to the ODIN Claude Plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.15.49] - 2026-06-14
+
+### Removed
+
+- **`srgn` purged from tool doctrine** — removed the `srgn` tool from the agent persona/doctrine (`system-prompt-baseline.md` + the cascaded `output-styles/*.md`) and deleted the `skills/srgn-cli` skill. Structural search/rewrite is now served solely by `ast-grep`.
+
+### Changed
+
+- **Enriched `ast-grep` guidance** — replaced the single-line `ast-grep` code-manipulation bullet with a structural reference block (cascaded byte-identically across `system-prompt-baseline.md` and all six output-styles): patterns-are-code (not regex), the metavar table, the two-pass `--json`-disables-`-U` apply gotcha, `stopBy: neighbor` defaults for relational YAML rules, strictness levels, and the `ast-grep`-not-`sg` binary note (Linux `sg`/`setgroups` collision).
+
+### Added
+
+- **`AST-GREP-AGENT-REFERENCE.md`** — self-contained ast-grep field reference distilled from `code-yeongyu/ast-grep-skill`: patterns-as-code rules, metavariable semantics, valid-code fixes, strictness levels, context/selector objects, CLI two-pass apply + debug recipes, YAML rule anatomy with a verbatim `no-console` skeleton, per-language rewrite recipes, and a 14-item pitfalls guide.
+
 ## [1.15.43] - 2026-06-05
 
 ### Added
