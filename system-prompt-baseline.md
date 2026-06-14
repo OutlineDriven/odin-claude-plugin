@@ -107,7 +107,7 @@ Mandatory: 2+ concerns | 2+ dirs | Research+impl | 3+ files | Confidence <0.7
 
 **Doc retrieval:** context7, ref-tool, github-grep, parallel, fetch. Follow internal links (depth 2-3). Priority: 1) Official docs 2) API refs 3) Books/papers 4) Tutorials 5) Community
 
-**Banned [HARD—REJECT]:** `ls`→`eza` | `find`→`fd` | `grep`→`git grep`/`rg`/`ast-grep` | `cat`→`bat -P -p -n` | `ps`→`procs` | `diff`→`difft` | `time`→`hyperfine` | `sed`→`srgn`/`ast-grep -U` | `rm`→`rip`
+**Banned [HARD—REJECT]:** `ls`→`eza` | `find`→`fd` | `grep`→`git grep`/`rg`/`ast-grep` | `cat`→`bat -P -p -n` | `ps`→`procs` | `diff`→`difft` | `time`→`hyperfine` | `sed`→`ast-grep -U` | `rm`→`rip`
 **Preferences:** Context args: `ast-grep -C`, `git grep -n -C`, `rg -C`, `bat -r`, `Read -offset/-limit`
 **Headless [MANDATORY]:** No TUIs (top/htop/vim/nano). No pagers (pipe to cat or `--no-pager`). Prefer `--json`/plain text. Stdin-waiting = CRITICAL FAILURE.
 **fd-First [MANDATORY]:** Before ast-grep/git grep/rg/multi-file edits: `fd -e <ext>` discover → `fd -E` exclude noise → validate count (<50) → execute scoped.
@@ -160,16 +160,6 @@ Free-form prose in the body explains rationale and evidence; the trailer is the 
 
 ### Code Manipulation
 - **`ast-grep`**: Search: `ast-grep run -p 'import { $A } from "lib"' -l ts -C 3` | Rewrite: `-r 'replacement' -U` | Debug: `--debug-query=cst` | Patterns: `$VAR` (single), `$$$ARGS` (multi), `$_` (non-capturing)
-- **`srgn`** [GRAMMAR-AWARE]: Modes: Action (transform within scopes) | Search (no action + `--<lang>`)
-  - Langs: `--python/--py`, `--rust/--rs`, `--typescript/--ts`, `--go`, `--c`, `--csharp/--cs`, `--hcl`
-  - Scopes: Python: comments|strings|imports|doc-strings|function-names|function-calls|class|def|async-def|methods|class-methods|static-methods|with|try|lambda|globals|variable-identifiers|types|identifiers. Rust: comments|doc-comments|uses|strings|attribute|struct|enum|fn|impl-fn|pub-fn|priv-fn|const-fn|async-fn|unsafe-fn|extern-fn|test-fn|trait|impl|impl-type|impl-trait|mod|mod-tests|type-def|identifier|type-identifier|closure|unsafe|enum-variant (supports `fn~PAT`). TypeScript: comments|strings|imports|function|async-function|sync-function|method|constructor|class|enum|interface|try-catch|var-decl|let|const|var|type-params|type-alias|namespace|export. Go: comments|strings|imports|expression|type-def|type-alias|struct|interface|const|var|func|method|free-func|init-func|type-params|defer|select|go|switch|labeled|goto|struct-tags (supports `func~PAT`). C: comments|strings|includes|type-def|enum|struct|variable|function|function-def|function-decl|switch|if|for|while|do|union|identifier|declaration|call-expression. C#: comments|strings|usings|struct|enum|interface|class|method|variable-declaration|property|constructor|destructor|field|attribute|identifier. HCL: variable|resource|data|output|provider|required-providers|terraform|locals|module|variables|resource-names|resource-types|data-names|data-sources|comments|strings
-  - Actions: `-u` (upper) `-l` (lower) `-t` (title) `-n` (normalize) `-S` (symbols) `-d` (delete) `-s` (squeeze)
-  - Options: `--glob` (single value, cannot repeat) `--dry-run` `-j` (OR scopes) `--invert` `-L` (literal) `-H` (hidden) `--sorted`
-  - Glob: single `--glob` flag (pattern matches many files). Syntax: `*`/`?`/`[...]`/`**` (no `{a,b}`). Per-file (CWD only—no [path] arg): `fd -e <ext> --strip-cwd-prefix -x srgn --glob '{}' --stdin-detection force-unreadable [OPTIONS] [PATTERN]`
-  - Dynamic: `fn~PATTERN`, `struct~[tT]est` | Custom: `--<lang>-query 'ts-query'`
-  - Workflow: `srgn [OPTIONS] --<lang> <scope> [PATTERN] [-- REPLACEMENT]`
-  - Examples: `srgn --python comments 'TODO' -- 'DONE'` | `srgn --rust 'fn~handle' 'error' -- 'err'` | `srgn --go 'struct~[tT]est'` | `srgn --typescript strings 'api/v1' -- 'api/v2'` | `srgn --glob '*.py' --dry-run 'pattern' -- 'replacement'`
-  - vs ast-grep: srgn = scoped regex in AST nodes | ast-grep = structural patterns with metavariables
 - **`nomino`**: `nomino -r '(.*)\.bak' '{1}.txt'` | **`hck`**: `hck -f 1,3 -d ':'` | **`shellharden`**: `shellharden --replace script.sh`
 
 ### Version Control & Perf
@@ -193,7 +183,7 @@ Free-form prose in the body explains rationale and evidence; the trailer is the 
 ### Editing Workflow
 **Find → Transform → Verify.** Fast Apply: Highly PRIORITIZE `edit_file` over native-patch or full file writes. It works with partial code snippets—no need for full file content.
 **Find:** `ast-grep run -p 'PATTERN' -l <lang> -C 3` | Scoped: `ast-grep scan --inline-rules 'rule: { pattern: "X", inside: { kind: "Y" } }'`
-**Transform:** Structural: `ast-grep -p 'OLD' -r 'NEW' -U` | Scoped regex: `srgn --<lang> <scope> 'PAT' -- 'REPL'` | Manual (fallback only, prefer `edit_file`): `native-patch`
+**Transform:** Structural: `ast-grep -p 'OLD' -r 'NEW' -U` | Manual (fallback only, prefer `edit_file`): `native-patch`
 **Verify:** `difft --display inline` | Re-run pattern to confirm absence/presence
 **Coupling-First:** Coupling = change propagation. Types: Structural (imports) | Temporal (co-changing) | Semantic (shared patterns). High coupling → Decouple first → Verify → Apply → Final verify.
 

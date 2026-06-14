@@ -89,10 +89,9 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `validation-first` - Validation-first (Quint spec) with 10-language support
 - `tests-purge-unneeded` - Delete tests that don't catch real bugs (the inverse of TDD); load-bearing principles, static-vs-dynamic carve-out, language-specific examples
 
-### Tooling (2 skills)
+### Tooling (1 skill)
 
 - `ast-grep` - Structural code search, analysis, and refactoring
-- `srgn-cli` - Grammar-aware scoped regex transforms
 
 ### Execution (3 skills)
 
@@ -217,10 +216,9 @@ Confidence = (familiarity + (1-complexity) + (1-risk) + (1-scope)) / 4
 2. **git grep** - Primary text search within the repo (respects .gitignore, fast)
 3. **rg (ripgrep)** - Text-search fallback when outside git or for richer flags
 4. **ast-grep** - Structural/AST search and rewrite (metavariable patterns)
-5. **srgn** - Grammar-aware scoped regex transforms (AST-scoped, multi-language)
-6. **native-patch / Edit** - Final precise edits when Find → Transform → Verify converges
-7. **eza** - Directory listing (NEVER use `ls`)
-8. **bat -P -p -n** - File display (NEVER use `cat`)
+5. **native-patch / Edit** - Final precise edits when Find → Transform → Verify converges
+6. **eza** - Directory listing (NEVER use `ls`)
+7. **bat -P -p -n** - File display (NEVER use `cat`)
 
 ### Tool Permission Issues
 
