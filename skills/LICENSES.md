@@ -89,6 +89,16 @@ Skills and reference/script files ported from the `agent-sh` plugin marketplace 
 | `next-task/references/gates.md` | https://github.com/agent-sh/next-task (v1.1.2) | MIT | © 2026 Avi Fenesh | Four inlined gates (slop / docs-sync / review / verifier) with rollback + false-positive contract. |
 | `next-task/references/isolation.md` | https://github.com/agent-sh/next-task (v1.1.2) | MIT | © 2026 Avi Fenesh | git-branchless detached-HEAD isolation recipe, no-force-push rule, `git undo` recovery. |
 
+## Jia-Ethan skill port
+
+`github-solution-research` adapted from the upstream Codex skill at https://github.com/Jia-Ethan/github-solution-research (created 2026-06-12). Upstream is MIT; ODIN adaptations — porting from a Codex skill to the ODIN/Claude Code skill surface, ODIN voice, and retention of the GitHub-CLI-first (`gh`) search/inspection doctrine with the conditional-subagent research guidance — are made under the same MIT terms. The bundled `LICENSE` (MIT, © 2026 Jia-Ethan) is retained verbatim in the skill directory to honor the MIT obligation; upstream's bilingual `README.md` and Codex `agents/openai.yaml` are also retained verbatim as upstream artifacts. License text is the standard MIT reproduced below; only the copyright holder differs (© 2026 Jia-Ethan).
+
+| Path under `/home/alpha/.claude/claude/skills/` | Upstream origin | License | Copyright | Provenance |
+| ----------------------------------------------- | --------------- | ------- | --------- | ---------- |
+| `github-solution-research/SKILL.md` | https://github.com/Jia-Ethan/github-solution-research | MIT | © 2026 Jia-Ethan | Codex skill ported to ODIN/Claude Code; `gh`-CLI-first search/inspection surface and conditional-subagent research guidance retained; ODIN voice. |
+| `github-solution-research/references/extraction-playbook.md` | https://github.com/Jia-Ethan/github-solution-research | MIT | © 2026 Jia-Ethan | Retained; deep-read extraction playbook turning GitHub evidence into a local solution. |
+| `github-solution-research/references/research-rubric.md` | https://github.com/Jia-Ethan/github-solution-research | MIT | © 2026 Jia-Ethan | Retained; problem-fit and project-maturity ranking rubric. |
+
 ## ODIN-only-gap skills (not Matt-derived)
 
 The following skills are authored by ODIN and do not carry upstream attribution: `debug`, `perf-profile`, `security-review`, `deps-upgrade`. They are governed by the ODIN project license, not MIT.
