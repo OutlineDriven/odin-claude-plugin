@@ -103,6 +103,38 @@ Skills and reference/script files ported from the `agent-sh` plugin marketplace 
 
 The following skills are authored by ODIN and do not carry upstream attribution: `debug`, `perf-profile`, `security-review`, `deps-upgrade`. They are governed by the ODIN project license, not MIT.
 
+## addyosmani agent-skills ports
+
+Skills cherry-picked from the `agent-skills` plugin (https://github.com/addyosmani/agent-skills). Upstream is MIT (© 2026 Addy Osmani). ODIN adaptations — frontmatter normalized; cross-skill references removed for standalone use; referenced checklists relocated into each skill's own `references/`; ODIN voice and ≥2-language-family example generalization applied to the distinct-angle skills; broken `/mnt/skills/...` paths made relative — are made under the same MIT terms. License text is the standard MIT reproduced below; only the copyright holder differs (© 2026 Addy Osmani).
+
+| Path under `/home/alpha/.claude/claude/skills/` | Upstream origin | License | Copyright | Provenance |
+| ----------------------------------------------- | --------------- | ------- | --------- | ---------- |
+| `api-and-interface-design/SKILL.md` | https://github.com/addyosmani/agent-skills/tree/main/skills/api-and-interface-design | MIT | © 2026 Addy Osmani | Structural port; frontmatter normalized; cross-skill references removed. |
+| `browser-testing-with-devtools/SKILL.md` | https://github.com/addyosmani/agent-skills/tree/main/skills/browser-testing-with-devtools | MIT | © 2026 Addy Osmani | Structural port; frontmatter normalized; cross-skill references removed. |
+| `ci-cd-and-automation/SKILL.md` | https://github.com/addyosmani/agent-skills/tree/main/skills/ci-cd-and-automation | MIT | © 2026 Addy Osmani | Structural port; frontmatter normalized; cross-skill references removed. |
+| `documentation-and-adrs/SKILL.md` | https://github.com/addyosmani/agent-skills/tree/main/skills/documentation-and-adrs | MIT | © 2026 Addy Osmani | Structural port; frontmatter normalized; cross-skill references removed. |
+| `observability-and-instrumentation/SKILL.md` | https://github.com/addyosmani/agent-skills/tree/main/skills/observability-and-instrumentation | MIT | © 2026 Addy Osmani | Structural port; frontmatter normalized; cross-skill references removed. |
+| `observability-and-instrumentation/references/observability-checklist.md` | https://github.com/addyosmani/agent-skills/tree/main/references/observability-checklist.md | MIT | © 2026 Addy Osmani | Relocated into skill's `references/` (self-contained); cross-skill references removed. |
+| `shipping-and-launch/SKILL.md` | https://github.com/addyosmani/agent-skills/tree/main/skills/shipping-and-launch | MIT | © 2026 Addy Osmani | Structural port; frontmatter normalized; cross-skill references removed. |
+| `shipping-and-launch/references/accessibility-checklist.md` | https://github.com/addyosmani/agent-skills/tree/main/references/accessibility-checklist.md | MIT | © 2026 Addy Osmani | Relocated into skill's `references/` (self-contained); cross-skill references removed. |
+| `shipping-and-launch/references/performance-checklist.md` | https://github.com/addyosmani/agent-skills/tree/main/references/performance-checklist.md | MIT | © 2026 Addy Osmani | Relocated into skill's `references/` (self-contained); cross-skill references removed. |
+| `shipping-and-launch/references/security-checklist.md` | https://github.com/addyosmani/agent-skills/tree/main/references/security-checklist.md | MIT | © 2026 Addy Osmani | Relocated into skill's `references/` (self-contained); cross-skill references removed. |
+| `deprecation-and-migration/SKILL.md` | https://github.com/addyosmani/agent-skills/tree/main/skills/deprecation-and-migration | MIT | © 2026 Addy Osmani | ODIN voice; cross-skill references removed; examples generalized to ≥2 language families. |
+| `doubt-driven-development/SKILL.md` | https://github.com/addyosmani/agent-skills/tree/main/skills/doubt-driven-development | MIT | © 2026 Addy Osmani | ODIN voice; cross-skill references removed; examples generalized to ≥2 language families. |
+| `doubt-driven-development/references/orchestration-patterns.md` | https://github.com/addyosmani/agent-skills/tree/main/references/orchestration-patterns.md | MIT | © 2026 Addy Osmani | Relocated into skill's `references/` (self-contained); cross-skill references removed. |
+| `frontend-ui-engineering/SKILL.md` | https://github.com/addyosmani/agent-skills/tree/main/skills/frontend-ui-engineering | MIT | © 2026 Addy Osmani | ODIN voice; cross-skill references removed; examples generalized to ≥2 language families. |
+| `frontend-ui-engineering/references/accessibility-checklist.md` | https://github.com/addyosmani/agent-skills/tree/main/references/accessibility-checklist.md | MIT | © 2026 Addy Osmani | Relocated into skill's `references/` (self-contained); cross-skill references removed. |
+| `idea-refine/SKILL.md` | https://github.com/addyosmani/agent-skills/tree/main/skills/idea-refine | MIT | © 2026 Addy Osmani | ODIN voice; cross-skill references removed; examples generalized to ≥2 language families. |
+| `idea-refine/examples.md` | https://github.com/addyosmani/agent-skills/tree/main/skills/idea-refine/examples.md | MIT | © 2026 Addy Osmani | Retained as skill-internal aux; cross-skill references removed. |
+| `idea-refine/frameworks.md` | https://github.com/addyosmani/agent-skills/tree/main/skills/idea-refine/frameworks.md | MIT | © 2026 Addy Osmani | Retained as skill-internal aux; cross-skill references removed. |
+| `idea-refine/refinement-criteria.md` | https://github.com/addyosmani/agent-skills/tree/main/skills/idea-refine/refinement-criteria.md | MIT | © 2026 Addy Osmani | Retained as skill-internal aux; cross-skill references removed. |
+| `idea-refine/scripts/idea-refine.sh` | https://github.com/addyosmani/agent-skills/tree/main/skills/idea-refine/scripts/idea-refine.sh | MIT | © 2026 Addy Osmani | Ported verbatim; absolute install path made relative. |
+| `incremental-implementation/SKILL.md` | https://github.com/addyosmani/agent-skills/tree/main/skills/incremental-implementation | MIT | © 2026 Addy Osmani | ODIN voice; cross-skill references removed; examples generalized to ≥2 language families. |
+| `security-and-hardening/SKILL.md` | https://github.com/addyosmani/agent-skills/tree/main/skills/security-and-hardening | MIT | © 2026 Addy Osmani | ODIN voice; cross-skill references removed; examples generalized to ≥2 language families. |
+| `security-and-hardening/references/security-checklist.md` | https://github.com/addyosmani/agent-skills/tree/main/references/security-checklist.md | MIT | © 2026 Addy Osmani | Relocated into skill's `references/` (self-contained); cross-skill references removed. |
+| `source-driven-development/SKILL.md` | https://github.com/addyosmani/agent-skills/tree/main/skills/source-driven-development | MIT | © 2026 Addy Osmani | ODIN voice; cross-skill references removed; examples generalized to ≥2 language families. |
+| `spec-driven-development/SKILL.md` | https://github.com/addyosmani/agent-skills/tree/main/skills/spec-driven-development | MIT | © 2026 Addy Osmani | ODIN voice; cross-skill references removed; examples generalized to ≥2 language families. |
+
 ## Full upstream license text (MIT)
 
 ```
