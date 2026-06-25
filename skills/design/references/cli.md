@@ -1,6 +1,6 @@
 # cli.md — non-interactive CLI surfaces
 
-Surface reference for command-line tools — the non-interactive sibling of `references/tui.md`. Covers argument-parsing libraries (clap, cobra, cmdliner, typer/click), the env-var contracts every CLI must respect, and the conventions for exit codes, progress, and help text.
+Surface reference for command-line tools — the counterpart to `references/tui.md` for non-interactive CLIs. Covers argument-parsing libraries (clap, cobra, cmdliner, typer/click), the env-var contracts every CLI must respect, and the conventions for exit codes, progress, and help text.
 
 **Snapshot date: April 2026.** Re-verify versions and capability tables before relying on them in production.
 

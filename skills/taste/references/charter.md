@@ -34,7 +34,7 @@ Overkill is what an author emits to perform depth they have not delivered. The d
 
 ## Reciprocity
 
-Slop and overkill are not opposites. They are siblings:
+Slop and overkill are not opposites. They are often paired:
 
 - Both refuse to commit. Slop refuses by averaging into the default; overkill refuses by piling decoration on top of nothing.
 - The fix in both cases is identical: pick one direction and let it carry the work.

@@ -159,7 +159,7 @@ Pick the narrowest scope that holds the state. Categories, narrowest to widest:
 
 ```
 Local state    → component-specific UI state           React: useState · Vue: ref/reactive
-Lifted state   → shared between 2-3 sibling components  props + change handlers
+Lifted state   → shared between 2-3 components in the same hierarchy  props + change handlers
 Context        → theme, auth, locale (read-heavy,       React: Context · Vue: provide/inject
                  write-rare)
 URL state      → filters, pagination, shareable UI      router/searchParams (any stack)

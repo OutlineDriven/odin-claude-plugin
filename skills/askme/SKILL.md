@@ -92,7 +92,7 @@ Q3 — Conflict policy (single-select)
   system-prompt-baseline.md wins — override divergent target policy
 
 Q4 — Manifests (single-select)
-❯ Skip bump (Recommended) — sibling-harness scope
+❯ Skip bump (Recommended) — this harness's scope
   Bump minor — semver per system-prompt-baseline.md memory note
 ```
 

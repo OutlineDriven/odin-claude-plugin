@@ -1,6 +1,6 @@
 ---
 name: optimize
-description: Applied optimization op — locate a hot path, fan out five transformation lenses as worktree-isolated agents, benchmark each candidate, gate on behavior preservation, commit the winner with a proven speedup. Use when the user says "optimize this", "make X faster", "speed up the hot path", "reduce allocations", "fix the perf regression on <target>", or "profile and optimize <symbol>"; distinct from perf-profile (diagnosis only, no transform), perf-investigate (auditable ledger + verdict, no commit), and simplify (behavior-preserving entropy reduction, no measurement).
+description: Applied optimization op — locate a hot path, fan out five transformation lenses as worktree-isolated agents, benchmark each candidate, gate on behavior preservation, commit the winner with a proven speedup. Use when the user says "optimize this", "make X faster", "speed up the hot path", "reduce allocations", "fix the perf regression on <target>", or "profile and optimize <symbol>". Applies transformations and benchmarks the winner; quality-only entropy reduction (no measurement) lives in `simplify`.
 metadata:
   short-description: Applied optimization op — transform a hot path and prove the win
 ---
@@ -216,6 +216,6 @@ or a `Justfile` / `Makefile` target named `bench-guard`. The before-benchmark JS
 ## See also
 
 - **perf-profile** — diagnosis upstream: locate the hotspot, establish whether optimization is warranted, and understand *where* to optimize. Run perf-profile before `/optimize` if the hotspot is unknown. `/optimize` accepts perf-profile output as a Phase 2 bypass.
-- **perf-investigate** — the heavyweight sibling: persisted `.outline/perf/` ledger, baseline series, multiple keep/stop experiments, and an auditable verdict. Use when a case file and multi-experiment record are required. `/optimize` delivers a committed change in one pass; `perf-investigate` delivers a verdict across many.
+- The heavyweight full-suite variant — persisted `.outline/perf/` ledger, baseline series, multiple keep/stop experiments, and an auditable verdict — is for when a case file and multi-experiment record are required. `/optimize` delivers a committed change in one pass.
 - **simplify** — behavior-preserving entropy reduction on a diff; runs no benchmarks; explicitly forbids timing/memory-affecting speedups. Use simplify to compress code structure; use `/optimize` when runtime performance is the target.
 - **refactor-break-bw-compat** — contract-breaking modernization. `/optimize` never breaks public API contracts (except the disclosed approximation path, which requires explicit user confirmation).

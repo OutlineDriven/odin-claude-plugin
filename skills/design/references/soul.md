@@ -1,6 +1,6 @@
 # soul.md — design philosophy
 
-Why good design is good. Anti-slop catalogues what to avoid; this file prescribes what to chase. Distinct from paradigms (structural shape) and diversity (variation recipe).
+Why good design is good. Anti-slop catalogues what to avoid; this file prescribes what to chase. Prescribes aesthetic direction; paradigms cover structure and diversity covers variation recipes.
 
 ## 1. Why design matters
 

@@ -1,6 +1,6 @@
 # Interest Routing Contract
 
-Use this reference as the deterministic routing layer after base context and contribution signals have been collected. It is intentionally self-contained: no external cache, no plugin state, no sibling skill dependency.
+Use this reference as the deterministic routing layer after base context and contribution signals have been collected. It is intentionally self-contained: no external cache, no plugin state, no dependency on other skills.
 
 ## Signal Shapes
 
@@ -25,7 +25,7 @@ Missing optional fields are acceptable; missing `kind`, `file` for file-backed w
 
 | Developer interest | Primary signals | Secondary signals | Ranking rule | Degradation |
 |---|---|---|---|---|
-| New to the stack | `good-first` areas: low dependents, clear sibling patterns, nearby tests/docs | verified commented-out-code cleanup; verified orphan exports; `good first issue` / `help wanted` labels | prefer one-file tasks with examples nearby and low blast radius | if no good-first signal, offer docs or quick cleanup with verification-first wording |
+| New to the stack | `good-first` areas: low dependents, clear related patterns, nearby tests/docs | verified commented-out-code cleanup; verified orphan exports; `good first issue` / `help wanted` labels | prefer one-file tasks with examples nearby and low blast radius | if no good-first signal, offer docs or quick cleanup with verification-first wording |
 | Experienced | bugspots; high-impact open issues; needs-help areas with repeated churn | suspicious always-true/false conditions; architectural issue labels | prefer repeated bug-fix rate + open issue overlap; avoid easy chores unless asked | if only LOW issue labels exist, say hard-problem evidence is weak and offer bugspot exploration |
 | Want to write tests | test gaps; test-gap ∩ bugspot | open issues labelled `test`, `testing`, `coverage`; nearby test templates | sort by `(hotness + bug_fix_rate)` and availability of a test pattern | if test gaps empty, say hot files appear covered and pivot to bug or docs |
 | Want to fix bugs | open issues labelled `bug`, `regression`, `crash`; bugspots | always-true/false conditions; flaky-test labels; recent revert commits | issue + bugspot overlap first; otherwise bugspot with clear local entry point | if `gh` unavailable, use bugspots only and state issue tracker unavailable |

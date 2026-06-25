@@ -85,7 +85,7 @@ A fresh-context reviewer needs the **artifact** and the **contract**, not the jo
 
 - Code: the diff or the function — not the whole file
 - Decision: the proposal in 3–5 sentences plus the constraints it has to satisfy
-- Assertion: the claim plus the evidence that supposedly supports it (kept distinct from the Step 1 CLAIM block, which is the orchestrator's hypothesis under scrutiny)
+- Assertion: the claim plus the evidence that supposedly supports it (separate from the Step 1 CLAIM block, which is the orchestrator's hypothesis under scrutiny)
 
 Strip your reasoning. Hand over conclusions and you get back validation of those conclusions. The unit must be small enough that a reviewer holds it in mind in one read — a 500-line PR decomposes first.
 

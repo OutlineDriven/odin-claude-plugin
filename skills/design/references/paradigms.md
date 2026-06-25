@@ -113,7 +113,7 @@ The decoration only signals when used once; the second instance dilutes the firs
 
 **Density signature.** As host paradigm — glass is decoration on top of structure, not a structural choice. Padding inside the glass surface is generous (1.5–2× host) so the translucence has room to read.
 
-**Taste anchors.** Apple visionOS (native depth-as-affordance). macOS Big Sur+ Notification Center (sidebar floats over wallpaper). Windows 11 Mica (the restrained sibling — tinted, not blurred).
+**Taste anchors.** Apple visionOS (native depth-as-affordance). macOS Big Sur+ Notification Center (sidebar floats over wallpaper). Windows 11 Mica (the restrained variant — tinted, not blurred).
 
 ## Material 3 Expressive
 

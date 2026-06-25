@@ -123,7 +123,7 @@ The split is not aesthetic — it is about what guarantee the language provides.
 
 ## See also
 
-- `cleanup-codebase` — sibling deletion discipline for non-test code (dead fields, redundant wrappers, stale config)
+- `cleanup-codebase` — parallel deletion discipline for non-test code (dead fields, redundant wrappers, stale config)
 - `tests-adversarial` — the complement: writing tests that *do* catch bugs, especially in failure paths and silent-failure regions
 - `test-driven` — the design-side discipline (RED → GREEN → REFACTOR); purge runs in the REFACTOR phase
 - `~/.claude/claude/system-prompt-baseline.md` `<directives>` testing charter — the source-of-truth principle this skill mirrors

@@ -1,6 +1,6 @@
 ---
 name: simplify
-description: Review changed code along three axes — reuse, quality, efficiency — via parallel agents, then apply compress-op fixes. Use when the user says "simplify this diff/PR/branch", "tighten up", "compress these changes", or wants axis-decomposed simplification of a specific change-set; distinct from cleanup-codebase (opportunistic while-touching-nearby) and review (read-only, no fixes).
+description: Review changed code along three axes — reuse, quality, efficiency — via parallel agents, then apply compress-op fixes. Use when the user says "simplify this diff/PR/branch", "tighten up", "compress these changes", or wants axis-decomposed simplification of a specific change-set. Deliberate diff compression; cleanup-codebase works opportunistically while editing nearby code, and review is read-only.
 metadata:
   short-description: Three-axis compress pass on a diff
 ---

@@ -19,7 +19,7 @@ What sits inside a module — its body of code. Distinct from **Adapter**: a sin
 Leverage at the interface — the amount of behaviour a caller (or test) can exercise per unit of interface they have to learn. A module is **deep** when a large amount of behaviour sits behind a small interface. A module is **shallow** when the interface is nearly as complex as the implementation.
 
 **Seam** _(from Michael Feathers)_
-A place where behaviour can be altered without editing in that place. The *location* at which a module's interface lives. Choosing where to put the seam is its own design decision, distinct from what goes behind it.
+A place where behaviour can be altered without editing in that place. The *location* at which a module's interface lives. Choosing where to put the seam is its own design decision, separate from its implementation.
 _Avoid_: boundary (overloaded with DDD's bounded context).
 
 **Adapter**
