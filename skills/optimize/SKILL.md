@@ -25,7 +25,7 @@ before the hotspot is confirmed), **Sprawl** (added complexity that outweighs th
 
 ## Constitutional Rules (Non-Negotiable)
 
-1. **No optimization without a measured hotspot.** Accept a supplied profile, symbol, or `perf-profile` output — or run Phase 2's light locate. Never fan out candidates against unmeasured code.
+1. **No optimization without a measured hotspot.** Accept a supplied profile or named symbol — or run Phase 2's light locate. Never fan out candidates against unmeasured code.
 2. **Benchmark before landing.** Every accepted change carries a before/after `hyperfine --warmup 3 --min-runs 10` measurement (variance-aware). If no harness exists, author a minimal throwaway under `.outline/optimize/`. Fall back to a rigorous complexity/allocation argument only when benchmarking is genuinely impractical — label it `[UNMEASURED]` in the commit body.
 3. **Behavior preservation is a gate, not a guideline.** Observable output must be identical by default. Approximation (lossy fast-path, float reassociation, bounded staleness, bounded cache eviction) is permitted only when the user explicitly requests it in prose AND the skill presents the exact contract change for confirmation before applying anything.
 4. **One optimization concern per atomic commit.** Algorithmic change + data-structure swap in one commit trips exit 15; split first.
@@ -34,18 +34,17 @@ before the hotspot is confirmed), **Sprawl** (added complexity that outweighs th
 ## When to Apply
 
 - The user says "optimize this", "make X faster", "speed up the hot path in Y", "reduce allocations in Z", "fix the perf regression", "profile and optimize `<symbol>`".
-- A hotspot has already been identified (perf-profile output, flamegraph, or named symbol) and the next step is transformation.
+- A hotspot has already been identified (profiler output, flamegraph, or named symbol) and the next step is transformation.
 - A performance budget is stated (`--budget`) and the current code does not meet it.
 - Active context (current diff/file/stack) is measurably slow and the user wants the fix landed, not analyzed.
 
 ## When NOT to Apply
 
-- **Diagnosis with no transform authorized** — that is `perf-profile`. Use it first if the hotspot is unknown; then come back here.
-- **Full investigation with a persisted ledger + keep/stop verdict** — that is `perf-investigate`. Use it when you need an auditable case file across multiple experiments.
+- **Diagnosis with no transform authorized** — locate and measure the hotspot first, then come back here.
 - **Behavior-preserving entropy reduction on a diff** — that is `simplify`. It runs no benchmarks and explicitly forbids behavior-affecting speedups.
 - **Unmeasured code with speculative "this might be slow"** — Graft rejection; locate the hotspot first.
 - **No measurable improvement expected** — if the candidate analysis shows noise-level gains, exit 12.
-- **Architecture-level redesign** — `perf-investigate` or a plain planning session. Optimization surgery within a hot path is in scope; full module rewrites are not.
+- **Architecture-level redesign** — a plain planning session. Optimization surgery within a hot path is in scope; full module rewrites are not.
 
 ## Workflow
 
@@ -215,7 +214,5 @@ or a `Justfile` / `Makefile` target named `bench-guard`. The before-benchmark JS
 
 ## See also
 
-- **perf-profile** — diagnosis upstream: locate the hotspot, establish whether optimization is warranted, and understand *where* to optimize. Run perf-profile before `/optimize` if the hotspot is unknown. `/optimize` accepts perf-profile output as a Phase 2 bypass.
-- The heavyweight full-suite variant — persisted `.outline/perf/` ledger, baseline series, multiple keep/stop experiments, and an auditable verdict — is for when a case file and multi-experiment record are required. `/optimize` delivers a committed change in one pass.
 - **simplify** — behavior-preserving entropy reduction on a diff; runs no benchmarks; explicitly forbids timing/memory-affecting speedups. Use simplify to compress code structure; use `/optimize` when runtime performance is the target.
 - **refactor-break-bw-compat** — contract-breaking modernization. `/optimize` never breaks public API contracts (except the disclosed approximation path, which requires explicit user confirmation).

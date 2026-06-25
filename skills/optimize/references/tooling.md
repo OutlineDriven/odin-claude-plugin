@@ -1,7 +1,7 @@
 # Optimize — Tooling Matrix & Harness Templates
 
 Used in Phase 2 (light locate) and Phase 3 (baseline benchmark) of the `/optimize` workflow.
-Mirrors the perf-profile tooling matrix for trio composability — the same primitives, extended
+A profiling/locate tooling matrix, extended
 with benchmark harness templates for Phase 3's author-a-harness path.
 
 ---

@@ -51,13 +51,12 @@ When both sets of language appear simultaneously, fire `AMBIGUOUS_GH_ROUTE` and 
   - `*/findings.md`
   - `*/review/*.md`
   - `*/debug/*.md`
-  - `*/triage-issue/*.md`
 - Text block whose first non-blank line starts with:
   - `## Findings`
   - `## Issues`
   - `### Comment:`
   - `**Status**: VALID ISSUE`
-- Inline prefix: `From review:`, `From resolve:`, `triage-issue output:`
+- Inline prefix: `From review:`, `From resolve:`
 - Content structured as a numbered or bulleted list of issues annotated with severity or priority labels (e.g. `**severity**: high`, `P0`, `[CRITICAL]`)
 
 ---

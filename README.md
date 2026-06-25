@@ -65,7 +65,7 @@ Before any non-trivial implementation:
 4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
 5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
 
-## Skills (77 total — selected highlights below)
+## Skills (75 total — selected highlights below)
 
 Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
 
@@ -117,23 +117,15 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `gh-address-comments` - Help address review/issue comments on the current PR
 - `gh-fix-ci` - Inspect failing CI checks, pull logs, propose fixes
 
-### Codebase Intelligence & Workflow (15 skills, ported from agent-sh)
+### Codebase Intelligence & Workflow (7 skills, ported from agent-sh)
 
-- `repo-intel` - Native repo intelligence: hotspots, coupling, bus factor, bugspots, ownership, entry points from git history + codegraph
-- `agnix` - Native agent-config lint (frontmatter, CLAUDE.md/AGENTS.md, hooks, MCP, manifests) with certainty grading
 - `deslop` - Three-phase certainty-graded AI-slop detection with HIGH-only guarded autofix
 - `sync-docs` - Diff-driven doc-vs-code drift detection; safe version/CHANGELOG fixes, rest flagged
-- `banthis` - Persist hard user prohibitions into a managed AGENTS.md/CLAUDE.md section
 - `drift-detect` - Plan-vs-reality reality check across GitHub, docs, and code
 - `audit-project` - Iterative multi-agent code audit with a false-positive contract
 - `onboard` - New-codebase orientation tour with interactive guidance
 - `can-i-help` - Route contributors to data-backed contribution opportunities
-- `learn` - Online research into a RAG-optimized learning guide + retrieval index
-- `system-prompt-curator` - Create or improve autonomous-agent system prompts
-- `skillers` - Mine sanitized transcripts into automation recommendations
 - `enhance` - Certainty-graded enhancement of agent/plugin surfaces via parallel analyzers
-- `perf-investigate` - Self-contained multi-phase performance investigation
-- `next-task` - Explicit-only backlog orchestrator with isolated git-branchless gates
 
 ## Output Styles (4 total)
 

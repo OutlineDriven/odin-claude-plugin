@@ -1,6 +1,6 @@
 ---
 name: fix
-description: Polymorphic iterative repair loop — accept a verifier failure, structured findings (review/resolve/triage-issue), or a bug description; modify→verify→keep on green, auto-revert on guard regression, until clean or iteration cap. Use when the user says "fix", "make it pass", or "apply the findings", or hands an artifact + repo and expects patches; auto-routes to gh-fix-ci or gh-address-comments when an open PR + gh auth + GH-flavored input is detected.
+description: Polymorphic iterative repair loop — accept a verifier failure, structured findings (review/resolve), or a bug description; modify→verify→keep on green, auto-revert on guard regression, until clean or iteration cap. Use when the user says "fix", "make it pass", or "apply the findings", or hands an artifact + repo and expects patches; auto-routes to gh-fix-ci or gh-address-comments when an open PR + gh auth + GH-flavored input is detected.
 metadata:
   short-description: Iterative fix loop with auto-revert
 ---
@@ -100,10 +100,9 @@ Partial match → `GH_PARTIAL` ambiguity flag.
 ## Hand-off & Integration
 
 - `debug` upstream: unclear root cause — debug findings become the fix target.
-- `triage-issue` upstream: bug-spec mode — triage produces repro + TDD plan first.
 - `test-driven` partner: failing test ↔ green flip; delegate RED→GREEN cycle.
 - `proceed` complement: planned change without failure → `proceed`; failure-driven → `fix`.
-- `resolve` / `review` / `triage-issue` as findings sources: their output paths feed findings mode.
+- `resolve` / `review` as findings sources: their output paths feed findings mode.
 
 ## Failure Modes
 
