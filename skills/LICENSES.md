@@ -107,6 +107,31 @@ Skills cherry-picked from the `agent-skills` plugin (https://github.com/addyosma
 | `source-driven-development/SKILL.md` | https://github.com/addyosmani/agent-skills/tree/main/skills/source-driven-development | MIT | © 2026 Addy Osmani | ODIN voice; cross-skill references removed; examples generalized to ≥2 language families. |
 | `spec-driven-development/SKILL.md` | https://github.com/addyosmani/agent-skills/tree/main/skills/spec-driven-development | MIT | © 2026 Addy Osmani | ODIN voice; cross-skill references removed; examples generalized to ≥2 language families. |
 
+## obra/superpowers port (subagent-driven)
+
+`subagent-driven` fuses obra's `subagent-driven-development` skill (https://github.com/obra/superpowers) with structural ideas from the `compound-engineering` plugin's `ce-subagent-driven` skill, rewritten in ODIN/Linus voice. obra/superpowers is MIT (© 2025 Jesse Vincent). ODIN adaptations — workspace `.superpowers/sdd` → `.outline/sdd`; `sdd-workspace` → `sd-workspace`; reviewer dispatched as a generic `general-purpose` subagent with a local `task-reviewer-prompt.md` (no external named-agent dependency; `ce-adversarial-reviewer` noted only as an optional drop-in); op-classification + four rejection grounds (Excess/Graft/Sprawl/Sever) + `Op:` trailers injected; obra's branch-finishing / code-review-request refs replaced with the ODIN atomic-commit ship path — are made under the same MIT terms. The three bash scripts keep upstream's logic verbatim except the workspace retarget. License text is the standard MIT reproduced below; only the copyright holder differs (© 2025 Jesse Vincent).
+
+| Path under `/home/alpha/.claude/claude/skills/` | Upstream origin | License | Copyright | Provenance |
+| ----------------------------------------------- | --------------- | ------- | --------- | ---------- |
+| `subagent-driven/SKILL.md` | https://github.com/obra/superpowers/tree/main/skills/subagent-driven-development | MIT | © 2025 Jesse Vincent | Per-task implementer→reviewer loop fused with `ce-subagent-driven` dispatch-brief/parallel/tree-clean/validation-gate; ODIN voice + `Op:` trailers + rejection grounds. |
+| `subagent-driven/implementer-prompt.md` | https://github.com/obra/superpowers/tree/main/skills/subagent-driven-development | MIT | © 2025 Jesse Vincent | Implementer contract ported; four statuses preserved; ODIN voice + self-review against rejection grounds + `Op:` trailer. |
+| `subagent-driven/task-reviewer-prompt.md` | https://github.com/obra/superpowers/tree/main/skills/subagent-driven-development | MIT | © 2025 Jesse Vincent | Reviewer contract ported; the audit gate. Dispatched to `general-purpose`; rejection-ground checks added. |
+| `subagent-driven/scripts/review-package` | https://github.com/obra/superpowers/tree/main/skills/subagent-driven-development | MIT | © 2025 Jesse Vincent | Logic verbatim; default OUTFILE repointed to `.outline/sdd` via `sd-workspace`. |
+| `subagent-driven/scripts/task-brief` | https://github.com/obra/superpowers/tree/main/skills/subagent-driven-development | MIT | © 2025 Jesse Vincent | Logic verbatim; default OUTFILE repointed to `.outline/sdd` via `sd-workspace`. |
+| `subagent-driven/scripts/sd-workspace` | https://github.com/obra/superpowers/tree/main/skills/subagent-driven-development | MIT | © 2025 Jesse Vincent | `sdd-workspace` renamed; `.superpowers/sdd` → `.outline/sdd`; self-ignoring `.gitignore` mechanism preserved. |
+
+## EveryInc compound-engineering port (autolearn)
+
+`autolearn` is a trimmed port of the `compound-engineering-plugin` `ce-compound` skill (https://github.com/EveryInc/compound-engineering-plugin), fused with the reject-by-default lesson filter from the `agent-skills` learn skill (https://github.com/WhatIfWeDigDeeper/agent-skills). compound-engineering-plugin is MIT (© 2025 Every); agent-skills is MIT (© 2026 What If We Dig Deeper). ODIN adaptations — Rails-specific `component` enum + `rails_version` generalized to language-agnostic fields; the CONCEPTS.md concept-map feature, multi-assistant config routing, Lightweight mode, session-history integration, and specialized ce reviewers all dropped; auto-memory writes delegated to the `memory-update` skill (single writer — `autolearn` never writes `memory/` or `MEMORY.md`); ODIN voice and `Op:` trailers — are made under the same MIT terms. License text is the standard MIT reproduced below; only the copyright holders differ (© 2025 Every; © 2026 What If We Dig Deeper).
+
+| Path under `/home/alpha/.claude/claude/skills/` | Upstream origin | License | Copyright | Provenance |
+| ----------------------------------------------- | --------------- | ------- | --------- | ---------- |
+| `autolearn/SKILL.md` | https://github.com/EveryInc/compound-engineering-plugin | MIT | © 2025 Every | `ce-compound` create+refresh modes trimmed; hermes reject-by-default gate folded in (© 2026 What If We Dig Deeper); memory-handoff routing to `memory-update`; ODIN voice + `Op:` trailers. |
+| `autolearn/references/schema.md` | https://github.com/EveryInc/compound-engineering-plugin | MIT | © 2025 Every | Folds ce `schema.yaml` + `yaml-schema.md`; bug/knowledge tracks; Rails-specific fields generalized. |
+| `autolearn/references/refresh.md` | https://github.com/EveryInc/compound-engineering-plugin | MIT | © 2025 Every | Folds ce `refresh-workflow.md` + `per-action-flows.md`; five-outcome model; headless `status: stale` variant. |
+| `autolearn/assets/solution-template.md` | https://github.com/EveryInc/compound-engineering-plugin | MIT | © 2025 Every | Section structure for a new learning doc; both tracks. |
+| `autolearn/scripts/validate-frontmatter.py` | https://github.com/EveryInc/compound-engineering-plugin | MIT | © 2025 Every | Frontmatter parser-safety check; logic ported verbatim, docstring ODIN-genericized; stdlib only. |
+
 ## Full upstream license text (MIT)
 
 ```
