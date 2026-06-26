@@ -18,6 +18,10 @@ the winning change adds an approximation or cache contract that changes observab
 Rejection grounds: **Excess** (micro-opt with no measured hotspot), **Graft** (optimization applied
 before the hotspot is confirmed), **Sprawl** (added complexity that outweighs the earned speedup).
 
+Op: extend — the append-only run log, per-run crash-recovery markers, and stopping rules wrap the
+locate→fan-out→benchmark→gate→commit loop with durability and bounded iteration; they do not change
+what the loop does.
+
 **Reference files (verbatim prompts, agent dispatch shapes, harness templates):**
 - `references/lenses.md` — five lens prompts sent to candidate agents, one per lens
 - `references/tooling.md` — per-language benchmark/profile tooling matrix + minimal harness
@@ -30,6 +34,7 @@ before the hotspot is confirmed), **Sprawl** (added complexity that outweighs th
 3. **Behavior preservation is a gate, not a guideline.** Observable output must be identical by default. Approximation (lossy fast-path, float reassociation, bounded staleness, bounded cache eviction) is permitted only when the user explicitly requests it in prose AND the skill presents the exact contract change for confirmation before applying anything.
 4. **One optimization concern per atomic commit.** Algorithmic change + data-structure swap in one commit trips exit 15; split first.
 5. **Auto-skip for trivial targets.** A single function <50 LOC with an obvious single-concern win runs a single-pass optimize-and-measure, not a five-agent fleet. Name the auto-skip in the output so the user knows.
+6. **Disk is the run's source of truth.** Append each fact to `.outline/optimize/<target>/log.jsonl` the moment it is known — baseline, each candidate as it returns, each gate verdict — and never rewrite a line. An interrupted run resumes from the log and skips re-benchmarking recorded candidates, but only when the run fingerprint and re-measured baseline still match; otherwise the numbers are stale — discard them and start fresh.
 
 ## When to Apply
 
@@ -46,12 +51,53 @@ before the hotspot is confirmed), **Sprawl** (added complexity that outweighs th
 - **No measurable improvement expected** — if the candidate analysis shows noise-level gains, exit 12.
 - **Architecture-level redesign** — a plain planning session. Optimization surgery within a hot path is in scope; full module rewrites are not.
 
+## State and artifacts — append-only log + crash recovery
+
+Run state lives on disk, not in context. The one run-state file is
+`.outline/optimize/<target>/log.jsonl` — one JSON object per line, **append-only**: a record is
+written the moment its fact is known and never rewritten. It sits beside the `agent-*` worktree
+dirs but is not matched by the Phase 7 cleanup glob (`…/agent-*`), so it survives the run.
+
+A five-agent fan-out can crash mid-benchmark. Every benchmarked candidate is already a durable
+line, so resume re-dispatches only the lenses with no `candidate` record — benchmarked work is
+never repeated.
+
+Records (last `run` record wins for overall status):
+
+| record | written | key fields |
+|---|---|---|
+| `run` | Phase 4 start (`in-progress`), Phase 7 end (`done`) | `status`, `run_id`, `target`, `started_at`, `fingerprint`, `stop` config, `exit_code` |
+| `baseline` | Phase 3 | `median_ms`, `stddev_ms`, `bench_cmd` |
+| `candidate` | Phase 4, as each agent returns | `lens`, `after_median_ms`, `speedup_ratio`, `behavior_self_assessment`, `test_result`, `readability_cost` |
+| `rank` | Phase 5 | `winner`, `runner_up`, `composite` |
+| `gate` | Phase 6, each pass | `candidate`, `passed`, `failure_scenario`, `iteration` |
+| `integrated` | Phase 7 | `median_ms`, `integrated_speedup` |
+
+Once the Phase 4 `in-progress` marker is written, **every** terminal exit (0, 12, 13, 14, 16)
+appends a `done` marker carrying its `exit_code`. An `in-progress` marker as the last record
+therefore means a genuine crash — only that offers resume; a clean non-zero exit does not.
+
+**`fingerprint`** = `{source_rev, bench_cmd, target}`, where `source_rev` is HEAD plus a hash of
+the uncommitted diff over the target files. It pins the base the recorded numbers were measured
+against. Candidate diffs are regenerated fresh each run and never cached, so a per-candidate hash
+buys nothing — the run-level fingerprint plus the resume baseline re-check are the only staleness
+guard needed.
+
+**Resume.** Phase 1 reads the target's log if present. A terminal `done` marker → start fresh
+(new `run_id`). An `in-progress` marker → recompute the fingerprint and re-measure the baseline.
+Honor the skip-re-benchmark path **only if** the fingerprint matches the logged `run` marker AND
+the re-measured baseline median falls inside the logged baseline's stddev band; then replay the
+`baseline` and `candidate` records, skip lenses already recorded, and continue at Phase 5 once the
+remaining lenses report. If either check fails (source edited, bench command changed, different
+machine, environment drift), the recorded numbers are stale — discard the candidate records, write
+a fresh `run` marker, and start over.
+
 ## Workflow
 
 ### Phase 1 — Resolve target
 
 If `/optimize <path|symbol|diff>` was given, use that as the target. If no arg, detect active
-context (current diff, current file in editor, top of git stack) as `tidy` does — if the context is
+context (current diff, current file in editor, top of git stack) — if the context is
 empty or unresolvable, error explicitly rather than guessing.
 
 **Auto-skip check:** if the resolved target is a single function <50 LOC and only one obvious
@@ -60,6 +106,13 @@ concern is visible, declare auto-skip, note it aloud, and proceed with a single-
 
 Parse `--budget <metric>` (e.g. `--budget p95<3ms`, `--budget throughput>10k/s`,
 `--budget alloc<1MB`) — sets the op-cell to `correct` and the stop condition.
+
+**Resume / log init.** Once the target is resolved above — and only then, since the path is keyed
+by `<target>` — read `.outline/optimize/<target>/log.jsonl` if it exists. If the last `run` record
+is `in-progress`, run the resume check from the State section (recompute fingerprint, re-measure
+baseline) and offer resume on a clean match — otherwise start fresh. With no log or a `done`
+marker, `mkdir -p .outline/optimize/<target>/` and treat this as a fresh run; the first `run`
+marker is written at Phase 4 fan-out.
 
 ### Phase 2 — Locate / accept the hotspot
 
@@ -86,7 +139,15 @@ Record: median, stddev, min/max. This is the before measurement. **Do not procee
 20 % of median** — fix measurement noise first (pin CPU frequency, isolate the process, widen
 `--min-runs`).
 
+Append a `baseline` record (`median_ms`, `stddev_ms`, `bench_cmd`) to the log. This is the base
+every candidate `speedup_ratio` is measured against and the value the resume baseline re-check
+compares to.
+
 ### Phase 4 — Fan out candidate agents
+
+Write a `run` marker with `status: in-progress` (carrying `run_id`, `target`, `started_at`, the
+`fingerprint`, and the active `stop` config) to the log before dispatch — a crash mid-fan-out is
+then detectable on the next invocation.
 
 Launch five worktree-isolated agents in **one tool-call message** (independent by construction —
 disjoint lenses, no shared files). For each lens `L` in {`algo`, `data`, `cache`, `concur`,
@@ -109,6 +170,14 @@ Each agent must:
 Document the independence argument in the spawn message: "disjoint lenses, isolated worktrees,
 read-only phase after reporting".
 
+**Append-on-return (orchestrator).** Worktree-isolated agents only return text; the orchestrator
+owns the log. As each result object arrives, append a `candidate` record immediately — before
+scoring it, before the next result lands. This is the crash-recovery win: an interrupted fan-out
+loses nothing, because resume reads the log and re-dispatches only lenses with no `candidate`
+record. A failed agent (`null`) is **not** recorded — its absent record is exactly what makes
+resume retry it (a transient worktree crash should re-run, not be skipped). In-run, Phase 5 drops
+the nulls with `.filter(Boolean)` before ranking.
+
 ### Phase 5 — Score and rank candidates
 
 Collect the five result objects (null = agent failed; `.filter(Boolean)` before ranking). Compute:
@@ -119,6 +188,7 @@ composite = speedup_ratio × behavior_safety × (1 - readability_cost × 0.3)
 
 Where `behavior_safety` = 1.0 (exact behavior claimed), 0.7 (approximation with disclosed
 contract), or 0.0 (unsafe / undisclosed). Sort descending. Name the winner and the runner-up.
+Append a `rank` record (`winner`, `runner_up`, `composite`) to the log.
 
 If `speedup_ratio < 1.05` for all candidates, exit 12 — no candidate clears noise.
 
@@ -141,8 +211,25 @@ Agent(
 )
 ```
 
-If `passed = false`, log the failure scenario, revert the candidate worktree, promote the
-runner-up, and repeat Phase 6. If all candidates fail the gate, exit 13.
+Append a `gate` record (`candidate`, `passed`, `failure_scenario`, `iteration`) each pass.
+
+If `passed = false`, log the failure scenario, revert the candidate worktree, and — before
+promoting the runner-up — evaluate the Phase 6.5 stopping rules. If none trips, promote the
+runner-up and repeat Phase 6. If all candidates fail the gate, exit 13.
+
+### Phase 6.5 — Stopping rules
+
+The Phase 6 promote-runner-up loop is otherwise bounded only by candidate exhaustion (exit 13).
+Three rules cap it. Evaluate all three before each promotion; stop on the first that trips. Flags
+set the thresholds, and the active config is recorded in the `run` marker's `stop` field:
+
+- **Max iterations** (`--max-iters N`, default = number of viable candidates) — gate passes attempted.
+- **Max wall-hours** (`--max-wall-hours H`, default unset) — wall-clock since the Phase 4 `run` marker's `started_at`.
+- **Marginal-speedup floor** (`--min-marginal 1.0X`, default `1.02`) — this skill's reading of the spec's third stopping rule (confidence that further search will not pay off): if the next runner-up's claimed `speedup_ratio` over the current best is below the floor, the remaining candidates cannot earn their gate cost. Governs the runner-up floor only — measurement noise is gated separately at Phase 3 (stddev <20 % of median).
+
+On a trip:
+- A gate-cleared winner already exists → take it: proceed to Phase 7 (exit 0).
+- No winner yet → record best-so-far in the log, append the `done` `run` marker with `exit_code: 16`, commit nothing.
 
 ### Phase 7 — Apply winner + commit
 
@@ -158,6 +245,8 @@ runner-up, and repeat Phase 6. If all candidates fail the gate, exit 13.
    faster; values < 1.0 mean a regression. If `integrated_speedup < 1.05` the win fell into noise
    — discard the patch with `git restore .` and exit 12. Do not commit a change whose speedup
    cannot survive integration; the deliverable is a proven win, not a worktree artifact.
+
+   Append an `integrated` record (`median_ms`, `integrated_speedup`) to the log.
 
 3. Run repo-native tests. On red, discard the patch with `git restore .` (nothing is committed yet) and exit 13. Do **not** use `git revert HEAD` — that would revert the previous commit, not the uncommitted patch.
 4. Commit with:
@@ -175,7 +264,8 @@ Op: correct | compress | extend
 Restores: spec:<budget>           ← only when --budget was given or regression restored
 ```
 
-5. Clean up worktrees: `rm -rf .outline/optimize/<target>/agent-*`.
+5. Clean up worktrees: `rm -rf .outline/optimize/<target>/agent-*`. The glob matches only the `agent-*` worktree dirs; `log.jsonl` sits beside them and is spared, staying the durable run record.
+6. Append the terminal `run` marker (`status: done`, `exit_code`) — the last `run` record is authoritative for the resume decision on a later `/optimize` of this target.
 
 ### Phase 8 — Guard
 
@@ -200,6 +290,8 @@ or a `Justfile` / `Makefile` target named `bench-guard`. The before-benchmark JS
 | Tests green | Repo-native tests pass after apply, before commit | Yes — discard patch with `git restore .` on red, exit 13 |
 | Op trailer present | Commit body carries Op: correct\|compress\|extend | Yes |
 | Worktrees cleaned | `.outline/optimize/<target>/agent-*` dirs removed | Yes |
+| Run state persisted | Baseline, each candidate (on return), gate verdicts, and a terminal `run` marker appended to `log.jsonl`; never rewritten | Yes |
+| Stopping rule evaluated | Promote-runner-up loop bounded by max-iters / max-wall-hours / marginal-speedup floor | Yes — exit 16 if tripped before a gated winner |
 
 ## Exit Codes
 
@@ -211,8 +303,18 @@ or a `Justfile` / `Makefile` target named `bench-guard`. The before-benchmark JS
 | 13 | Behavior regression — adversarial gate rejected all candidates, or repo tests went red after apply; reverted |
 | 14 | Approximation declined — user did not confirm the contract change; optimization aborted |
 | 15 | Mixed-concern commit — more than one optimization concern bundled; split before committing |
+| 16 | Stopping rule tripped before a gated winner — max-iters, max-wall-hours, or marginal-speedup floor reached during the promote-runner-up loop; best-so-far recorded in `log.jsonl`, nothing committed |
 
-## See also
+## Anti-patterns
+
+- **Rewriting the log instead of appending.** A truncate-and-rewrite can be interrupted half-written and lose every benchmarked candidate. One `candidate` line per result, appended, never edited.
+- **Resuming on a stale fingerprint.** Skipping re-benchmark after the source or bench command changed commits a "winner" measured against a base that no longer exists. The fingerprint + baseline re-check exist to forbid this; do not bypass them to save a run.
+- **Recording a failed agent so resume skips it.** A transient worktree crash must re-run. Absence of a `candidate` record is the retry signal; do not paper over a failure with a `speedup_ratio: 1.0` placeholder.
+- **Letting the promote-runner-up loop run unbounded.** Without the Phase 6.5 stopping rules the loop burns wall-clock chasing sub-noise runners-up. Cap it; exit 16 with best-so-far is a valid result.
+
+## Disambiguation
 
 - **simplify** — behavior-preserving entropy reduction on a diff; runs no benchmarks; explicitly forbids timing/memory-affecting speedups. Use simplify to compress code structure; use `/optimize` when runtime performance is the target.
 - **refactor-break-bw-compat** — contract-breaking modernization. `/optimize` never breaks public API contracts (except the disclosed approximation path, which requires explicit user confirmation).
+
+Adapted from EveryInc/compound-engineering-plugin (MIT) — the append-only log, per-run crash-recovery markers, and stopping rules.

@@ -175,8 +175,8 @@ let () =
   (`taskset 0x1`), disable turbo boost (`echo 1 > /sys/devices/.../no_turbo`).
 - **Always measure what ships.** Optimize + benchmark the release build; debug builds have
   different inlining, bounds-check overhead, and optimization levels.
-- **Re-measure end-to-end (Phase 8).** A worktree win sometimes vanishes after integration due
-  to changed inlining decisions, link order, or PGO profile invalidation. The end-to-end measure
-  is the ground truth.
+- **Re-measure end-to-end (Phase 7, integrated benchmark gate).** A worktree win sometimes
+  vanishes after integration due to changed inlining decisions, link order, or PGO profile
+  invalidation. The integrated re-measure on the main tree before commit is the ground truth.
 - **Report variance, not just median.** Commit body format: `After: <median> ± <stddev>`.
   A 10 % speedup with 15 % stddev is noise; a 10 % speedup with 1 % stddev is a win.
