@@ -7,7 +7,7 @@ metadata:
 
 # Autolearn — compound a solved problem, keep the learnings honest
 
-`autolearn` turns a verified fix into one in-repo learning doc, maintains those docs as the code moves, and hands user/preference facts to the memory writer. It writes exactly **one** surface itself: the operating repo's `docs/solutions/`. Every auto-memory write is delegated to `memory-update` — there is one writer of the memory surface, and it is not this skill.
+`autolearn` turns a verified fix into one in-repo learning doc, maintains those docs as the code moves, captures durable project vocabulary, and hands user/preference facts to the memory writer. It writes exactly **two** in-repo surfaces itself: the operating repo's `docs/solutions/` (one learning per file) and the repo-root `CONCEPTS.md` (the shared-vocabulary glossary, one definition per concept). One writer per surface still holds — autolearn owns both, and no other skill edits them. Every auto-memory write is delegated to `memory-update` — there is one writer of the memory surface, and it is not this skill.
 
 `Op:` of a compound run is `extend` (a new learning) or, in refresh, `correct`/`purge` (see Commits).
 
@@ -40,6 +40,8 @@ A doc is earned, not assumed. First the ce preconditions, then the hermes filter
 
 **If nothing clears the gate, say so in one line and exit. Never fabricate a doc to look productive.** A clean "nothing worth compounding here" is a valid, correct result.
 
+The gate governs `CONCEPTS.md` entries too: a term earns a slot only when you'd otherwise forget its precise *local* meaning (filter 1), it isn't already defined there (filter 2 — one definition per concept, no duplicates), and it is scope-qualified to this project rather than general programming or domain English (filter 3). A term that clears the gate is a Vocabulary-capture candidate; one that doesn't is noise.
+
 ## Mode routing
 
 Strip `mode:` tokens from `$ARGUMENTS` before treating the remainder as context/scope.
@@ -47,11 +49,12 @@ Strip `mode:` tokens from `$ARGUMENTS` before treating the remainder as context/
 | Mode | Trigger | What it does |
 |------|---------|--------------|
 | **Compound** (default) | none | Document one solved problem → `docs/solutions/` |
+| **Vocabulary capture** | a durable, reusable *project* term/concept surfaces | Reconcile the repo-root `CONCEPTS.md` (one definition per concept) — read `references/concepts.md` |
 | **Memory handoff** | a fact about the *user / preferences / cross-project context* surfaces | Invoke `memory-update`; that skill writes auto-memory |
 | **Refresh** | `mode:refresh [scope]` | Maintain existing `docs/solutions/` docs — read `references/refresh.md` |
 | **Headless** | `mode:headless` | Non-interactive overlay on whichever mode is active |
 
-The repo-vs-user fork is the routing decision: a repo-scoped engineering lesson → Compound (this skill writes the doc); a user/preference/cross-project fact → Memory handoff (`memory-update` writes it). A run can do both: write a learning doc *and* hand a preference fact to `memory-update`.
+The repo-vs-user fork is the routing decision: a repo-scoped engineering lesson → Compound (this skill writes the doc); a user/preference/cross-project fact → Memory handoff (`memory-update` writes it). Within the repo-scoped side there's a second fork: a solved problem → Compound (a learning doc); a durable project term whose meaning isn't obvious → Vocabulary capture (a `CONCEPTS.md` entry). One run can do all three — write a learning doc, reconcile a concept, and hand a preference fact to `memory-update`.
 
 ## Support files — read on demand
 
@@ -59,6 +62,7 @@ Don't bulk-load these at start. Read each at the step that needs it; pass the re
 
 - `references/schema.md` — frontmatter contract: bug/knowledge tracks, enums, category map, YAML safety. Read when classifying and validating.
 - `references/refresh.md` — the whole refresh model and phases. Read only in `mode:refresh`.
+- `references/concepts.md` — `CONCEPTS.md` entry schema and the one-definition-per-concept reconciliation/refresh rules. Read in Vocabulary capture and when refreshing `CONCEPTS.md`.
 - `assets/solution-template.md` — section structure for a new doc. Read when assembling.
 - `scripts/validate-frontmatter.py` — the one runnable check. Run on every written/edited doc.
 
@@ -107,10 +111,27 @@ Wait for all three before assembling.
 4. `mkdir -p docs/solutions/<category>/`, write `docs/solutions/<category>/<slug>.md`.
 5. **Validate:** `python3 scripts/validate-frontmatter.py <path>`. Exit 0 = parser-safe; exit 1 names the offending field. Quote, re-write, re-run until 0. Don't declare success while it fails.
 6. **Read the file back** to confirm it landed as intended.
+7. **Concept reconciliation (optional, when warranted).** If the run surfaced a durable project term that clears the reject-by-default gate, reconcile `CONCEPTS.md` in the same run per Mode 4 — one definition per concept, refresh on drift, no duplicate. The solution doc is still the deliverable; a concept entry is an additional write, not a substitute. Read `references/concepts.md` before writing it.
 
 ### Phase 2.5 — Refresh check (selective, not automatic)
 
 Refresh is not a default follow-up. Suggest or invoke `mode:refresh` with a narrow scope only when the new fix contradicts or supersedes an older doc, the work was a refactor/migration/rename/dependency-bump that likely invalidated references, or the Related-Docs Finder surfaced strong refresh candidates or moderate overlap (consolidation opportunity). Otherwise don't. Capture the new learning first; refresh is targeted maintenance after.
+
+---
+
+# Mode 4 — Concepts capture
+
+`CONCEPTS.md` at the operating repo root is the shared-vocabulary glossary: the words that mean something precise in *this* codebase, one definition per concept. autolearn owns this surface — one writer, no second skill edits it. **Read `references/concepts.md`** for the entry schema and reconciliation rules before writing.
+
+**When it fires.** A durable project term surfaces — in a learning capture (accretion), or because the user named a concept worth pinning. It must clear the reject-by-default gate above (would-forget / not-already-defined / scope-qualified to this project). General programming and domain English never qualify.
+
+**Reconcile, don't append blindly:**
+1. Locate `CONCEPTS.md` at the repo root: `fd -g 'CONCEPTS.md' --max-depth 2`. Absent + a term clears the gate → create it. Absent + nothing clears → write nothing; never scaffold an empty file.
+2. Search it for the term and its synonyms: `git grep -ni '<term>' CONCEPTS.md`. **One definition per concept:** a hit means the concept already exists — refresh it on drift, never add a second entry.
+3. New term → add one entry: a one-sentence definition of what it means here and what distinguishes it from neighbors; a second paragraph only for non-obvious behavioral rules. Retire synonyms as an `*Avoid:*` aliases line. No file paths, dates, owners, or version-specific claims — the file stands on its own.
+4. **Read the file back** to confirm the merge landed and created no duplicate heading.
+
+**Refresh loop.** `autolearn mode:refresh [scope]` maintains `CONCEPTS.md` alongside `docs/solutions/`: re-derive each in-scope definition against current code, refresh drifted ones, de-duplicate, delete a concept whose domain is gone. Per-concept rules in `references/concepts.md`.
 
 ---
 
@@ -126,6 +147,8 @@ Hand off when the lesson is: a stable user preference or working style, who the 
 
 `autolearn mode:refresh [scope]` maintains existing `docs/solutions/` docs as code evolves. **Read `references/refresh.md`** and follow it — the five-outcome model (Keep / Update / Consolidate / Replace / Delete), scope routing, investigation phases, per-action flows, the headless `status: stale` variant, and the report format all live there. Prefer no-write Keep; match docs to reality; delete, don't archive.
 
+Refresh also maintains the repo-root `CONCEPTS.md` when it falls in scope: re-derive definitions against current code, refresh drifted ones, de-duplicate entries that name the same concept, delete a concept whose domain is gone. The per-concept refresh rules are in `references/concepts.md`.
+
 ---
 
 ## Commits
@@ -136,14 +159,18 @@ One learning per commit. ODIN `Op:` trailer in the body:
 - **Refresh a drifted doc** → `Op: correct` + `Restores:` citing what fell out of sync (`ref:<commit> | spec:<invariant>`).
 - **Delete / Consolidate-away a doc** → `Op: purge` + `Removes:` citing what went (`path:<ref> | surface:<name>`).
 
-Stage only the docs autolearn wrote or edited, never other dirty files; commit and publish by the operating repo's normal flow.
+`CONCEPTS.md` writes follow the same trailers: a new entry → `extend`; a refreshed definition → `correct`; a deleted or de-duplicated concept → `purge`.
+
+Stage only the surfaces autolearn wrote or edited — a solution doc, `CONCEPTS.md`, or both — never other dirty files; commit and publish by the operating repo's normal flow.
 
 ## Disambiguation
 
 - **vs `memory-update`** — `memory-update` scans *past session transcripts* and writes *auto-memory only*. `autolearn` compounds the *current* solved problem into *in-repo* `docs/solutions/` and refreshes those docs; it delegates user/preference facts back to `memory-update`.
-- **vs `init`** — `init` builds `AGENTS.md` from codebase analysis (conventions to prime future agents). `autolearn` captures one solved problem as a retrievable learning.
+- **vs `init`** — `init` builds `AGENTS.md` from codebase analysis (conventions to prime future agents). `autolearn` captures one solved problem as a retrievable learning, and defines durable project terms in `CONCEPTS.md` (the shared-vocabulary glossary, not the agent-priming doc).
 - **vs `sync-docs`** — `sync-docs` corrects public docs/examples/versions against a code diff (docs↔code drift). `autolearn` writes net-new knowledge docs and maintains the knowledge set.
 
 ## Operating surface
 
-`autolearn` writes exactly one surface: the operating repo's `docs/solutions/`. All auto-memory writes are delegated to `memory-update`. No writes to undefined or doubly-owned locations.
+`autolearn` writes exactly two in-repo surfaces: the operating repo's `docs/solutions/` and the repo-root `CONCEPTS.md`. It owns both — one writer per surface, no second skill edits them. All auto-memory writes are delegated to `memory-update`. No writes to undefined or doubly-owned locations.
+
+Adapted from EveryInc/compound-engineering-plugin (MIT).
