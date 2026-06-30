@@ -27,6 +27,10 @@ what the loop does.
 - `references/tooling.md` — per-language benchmark/profile tooling matrix + minimal harness
   templates for the author-a-harness phase
 
+### Optional: Experiment Mode
+
+When the optimization target has a broad search space (parameter tuning, threshold finding, prompt optimization, configuration search) rather than a single hot-path transform, the metric-driven experiment loop in `references/experiment-mode.md` applies. It covers benchmark loop discipline, stopping rules, an experiment-log schema, and judge-rubric heuristics for qualitative targets. This is a reference-only extension -- the primary workflow above remains the default.
+
 ## Constitutional Rules (Non-Negotiable)
 
 1. **No optimization without a measured hotspot.** Accept a supplied profile or named symbol — or run Phase 2's light locate. Never fan out candidates against unmeasured code.
@@ -317,4 +321,4 @@ or a `Justfile` / `Makefile` target named `bench-guard`. The before-benchmark JS
 - **simplify** — behavior-preserving entropy reduction on a diff; runs no benchmarks; explicitly forbids timing/memory-affecting speedups. Use simplify to compress code structure; use `/optimize` when runtime performance is the target.
 - **refactor-break-compat** — contract-breaking modernization. `/optimize` never breaks public API contracts (except the disclosed approximation path, which requires explicit user confirmation).
 
-Adapted from EveryInc/compound-engineering-plugin (MIT) — the append-only log, per-run crash-recovery markers, and stopping rules.
+Adapted from EveryInc/compound-engineering-plugin (MIT).
