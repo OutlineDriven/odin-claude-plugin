@@ -44,9 +44,9 @@ The orchestrator runs a short Verbalized Sampling preamble (the `askme` skill) f
 
 **Anti-patterns → pushback:**
 
-- Fluff / values ("customer-obsessed, move fast") → "Those apply to any company. What are you doing *differently* from the products users could pick instead?"
-- Feature list ("AI-powered X, Y, Z") → "What's the bet that makes you pick those over others? What principle guides what you ship?"
-- Product description ("we use AI to draft replies") → "Every competitor says that. What's the *choice* inside it the obvious alternative isn't making?"
+- Fluff / values ("customer-obsessed, move fast") → "Those apply to any company. What are you doing *differently* from the products users could pick instead of yours? If the answer applies to any company, it's not your approach."
+- Feature list ("AI-powered X, Y, Z") → "That's a feature list. What's the bet that makes you pick those over others? What principle is guiding what you ship?"
+- Product description ("we use AI to draft replies") → "That's what the product does, but what's the *choice* inside it? Every competitor says the same thing. Name what you're doing that the obvious alternative isn't — is it a grounding choice, a trust-building commitment, a workflow bet?"
 - Goal restated ("be the market leader") → "Still the goal. How does the product win? What choice are competitors not making?"
 - Many approaches at once ("enterprise, self-serve, and consumer") → "Pick the one that organizes the rest. Which is it?"
 - Disconnected from the problem → "Draw the line from this approach to the problem you named. If there's none, one of the two is wrong."
@@ -63,9 +63,9 @@ The orchestrator runs a short Verbalized Sampling preamble (the `askme` skill) f
 
 **Anti-patterns → pushback:**
 
-- Too many primaries ("founders, PMs, engineers, designers") → "If it's for everyone, it's for no one. Who drives the product decisions?"
-- Demographic ("25–45 professionals") → "That's a demographic. What are they trying to do that makes them reach for this?"
-- Role without situation ("PMs") → "PMs doing what — a roadmap review, a midnight spec, convincing a skeptical eng lead? The situation is where it matters."
+- Too many primaries ("founders, PMs, engineers, designers") → "If it's for everyone, it's for no one. Who matters most? The others can still benefit, but one of them drives the product decisions."
+- Demographic ("25–45 professionals") → "That's a demographic, not a user. What are they trying to do that makes them pick up this product?"
+- Role without situation ("PMs") → "PMs doing what — a roadmap review, a midnight spec, convincing a skeptical eng lead? The situation is where the product matters."
 - Generic job ("be more productive") → "Productive at what? They're hiring this to do *what*, specifically?"
 
 **Capture:** persona name + JTBD sentence. E.g. "Solo founders running their own roadmap, hiring the product to keep strategy and execution aligned without a PM on staff."
@@ -82,7 +82,7 @@ The orchestrator runs a short Verbalized Sampling preamble (the `askme` skill) f
 
 - Vanity ("total signups, pageviews, cumulative users") → "Those rise while the product gets worse. What moves when users actually get value?"
 - Too many ("12 metrics") → "A dashboard isn't a strategy. Which 3–5 would you stake the quarter on?"
-- Outputs not outcomes ("deploys per week") → "That measures the team. If velocity doubled but users didn't care, is it a win?"
+- Outputs not outcomes ("deploys per week") → "Those measure the team, not the product. If velocity doubled but users didn't care, would you call it a win?"
 - Can only go up ("cumulative hours saved") → "What's the rate or ratio — the thing that can regress?"
 - Unmeasurable ("user delight") → "How would you check it on a Tuesday? If you can't, it's aspirational."
 
@@ -98,11 +98,11 @@ The orchestrator runs a short Verbalized Sampling preamble (the `askme` skill) f
 
 **Anti-patterns → pushback:**
 
-- Feature list in disguise ("Slack integration; mobile app; dark mode") → "Those are features. What investment area does each live inside? 'Integrations' might be one track."
-- Too many ("7 tracks") → "Seven means every track is starved. Which 3 are load-bearing?"
-- Disconnected from approach → "How does this track serve the approach? If it's a separate bet, name it as one."
-- Too vague ("improve the product") → "Every track is that. What's the specific area that's different from the others?"
-- One track only → "With one track there's no choice being made. What 2–3 things must the product be good at, and how do they differ?"
+- Feature list in disguise ("Slack integration; mobile app; dark mode") → "Those are features. What's the *investment area* each one lives inside? 'Integrations' might be one track, with Slack, Teams, and Discord as candidates inside it."
+- Too many ("7 tracks") → "With 7 tracks, every track is starved for attention. Which 3 are load-bearing? The others either fold in or drop."
+- Disconnected from approach (approach: "win by being the easiest to onboard"; track: "enterprise SSO") → "How does that track serve the approach? If it's a separate bet, name it as one. If it's load-bearing for onboarding, explain the link."
+- Too vague ("improve the product") → "Every track is 'improve the product.' What's the specific investment area that's different from the others?"
+- One track only → "With one track, there's no real choice being made. What are the 2–3 things the product needs to be good at, and how are they different?"
 
 **Capture:** 2–4 tracks, each with a name, one-line purpose, and why it serves the approach.
 

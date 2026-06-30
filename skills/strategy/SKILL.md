@@ -126,3 +126,7 @@ One anchor per commit. Stage only the resolved anchor: `git -C "$root" add STRAT
 ## Operating surface
 
 `strategy` writes exactly one surface: the operating repo's `STRATEGY.md`. No other files, no `git add -A`, no writes to undefined locations.
+
+## Intellectual grounding
+
+The "Target problem / Our approach / Tracks" structure follows Richard Rumelt's *Good Strategy Bad Strategy* -- his kernel of diagnosis, guiding policy, and coherent action. The interview questions are designed to push past the patterns Rumelt calls "bad strategy": fluff, goals dressed up as strategy, and feature lists in place of a guiding choice. The book is the recommended follow-up reading when the distinction between a slogan and a strategy is not yet sharp.
