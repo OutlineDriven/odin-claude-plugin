@@ -55,6 +55,8 @@ Write the file every run — do not wait for the user to ask.
 4. **Write the document** per the section contract. If `format:html` is active, also read `references/html-rendering.md` and render `docs/ideation/<slug>.html` as a self-contained view derived from the markdown; read it back and verify content parity.
    - **On write failure** (no writable path, permissions): announce the failure and offer a custom path (validate writable; create parent dirs). Never lose the survivors silently.
 
+**Resume:** update the existing file in place, in its existing format; carry the prior ideas and rejection summary forward, adding to them rather than overwriting.
+
 ### 4.2 Present a Concise Summary (not the full deliverable)
 
 The full cards, rationale, downsides, and the rejection table live in the file. Do **not** reproduce them in the session — reprinting the whole deliverable as chat text defeats the rich format. Show a tight orientation instead:
@@ -89,16 +91,16 @@ If the user already named what they want to work on inline (e.g., "brainstorm th
 
 ### 5.1 Discuss or Refine the Ideas First
 
-This stays in ideate — no skill handoff. It is the "think across the set before committing" step. The orchestrator still holds the full grounding and generation context, so it can reason across every survivor.
+This stays in ideate — no skill handoff. It is the "think across the set before committing" step, and it is a normal, expected outcome of ideation: seeing several strong candidates and wanting to deliberate is more common than instantly committing one. The orchestrator still holds the full grounding and generation context, so it can reason across every survivor — this is where that context pays off. The work here is either **single-idea** (sharpen or interrogate one) or **cross-idea** (compare, combine, or merge several); do not force the user to name a single idea before they can engage.
 
-1. **Establish what the user wants to work on and how.** Infer from their phrasing when given; otherwise ask one open question. The scope may be one idea, a subset, or the whole set.
+1. **Establish what the user wants to work on and how.** Infer from their phrasing when given; otherwise ask one open question ("What do you want to work on?") rather than assuming a single idea. The scope may be one idea, a subset, or the whole set.
 2. **Route by intent:**
-   - **Ask / compare** — answer in conversation, grounded in the ideas' bases and the Phase 1 grounding. **No file rewrite** unless the discussion yields a change the user wants captured.
-   - **Adjust** — revise that idea's framing, scope, or basis as discussed, then **rewrite the saved file** so the deliverable stays current.
-   - **Deepen** — extend an idea's analysis; capture into the file only if the user wants it kept.
-   - **Combine / merge** — synthesize the named ideas into one: write a unified title, description, and basis that draws from each source idea. On a file rewrite, **replace the merged source entries with the single combined entry** — do not leave the originals alongside the merge — and renumber the ranked list.
-3. **Rewrite only on change.** The file is rewritten only when idea content actually changes — Q&A and comparison alone do not churn it.
-4. **Return to the Phase 5 menu.**
+   - **Ask / compare** ("why High confidence?", "how does this compare to X?", "which of these overlap?") — answer in conversation, grounded in the ideas' bases and the Phase 1 grounding. Spans one idea or many. **No file rewrite** unless the discussion yields a change the user wants captured.
+   - **Adjust** ("smaller scope", "drop the paste-import part", "reframe around X") — revise that idea's framing, scope, or basis as discussed, then **rewrite the saved file** so the deliverable stays current.
+   - **Deepen** ("expand the second-order effects") — extend an idea's analysis; capture into the file only if the user wants it kept.
+   - **Combine / merge** ("merge the table and highlighter ideas", "fold 2 into 5") — synthesize the named ideas into one: write a unified title, description, and basis that draws from each source idea (carry the strongest basis forward; union their evidence). On a file rewrite, **replace the merged source entries with the single combined entry** — do not leave the originals alongside the merge — and renumber the ranked list. Re-evaluate the combined idea's axis and confidence rather than copying one source's. Note the merge in the rejection summary if a source idea effectively drops out.
+3. **Rewrite only on change.** The file is rewritten only when idea content actually changes (adjust, deepen-and-keep, or merge) — Q&A and comparison alone do not churn it.
+4. **Return to the Phase 5 menu.** Typically the user next discusses more, opens it, or finishes. When the user is ready to commit a direction, route to `askme` for intent-clarification before planning.
 
 ### 5.2 Done
 

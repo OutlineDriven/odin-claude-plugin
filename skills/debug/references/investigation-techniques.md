@@ -341,7 +341,7 @@ Many bugs live at the boundary between an application and the system it runs on 
 - File watching / inotify limits: EMFILE or "too many open files" often means an inotify/FD limit, not a leak in code
 - Path separators and encoding: Windows-style paths in Unix code, or UTF-8 paths in a non-UTF-8 locale
 
-**Processes and signals.** Check whether the process is actually the version thought to be running (`procs | grep`, cross-reference pid to build time). Zombies, orphaned workers, and crashed-then-restarted-with-old-code processes all masquerade as code bugs.
+**Processes and signals.** Check whether the process is actually the version thought to be running (`procs <process-name>`, cross-reference pid to build time). Zombies, orphaned workers, and crashed-then-restarted-with-old-code processes all masquerade as code bugs.
 
 ---
 

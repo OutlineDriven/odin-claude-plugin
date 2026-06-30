@@ -2,8 +2,6 @@
 
 This is the section contract for the ideation artifact — it describes *what* a persisted ideation document contains. It defines the markdown structure that `docs/ideation/<slug>.md` follows.
 
-Load this file at Phase 5 save time.
-
 ## What the artifact contains
 
 An ideation artifact is a ranked, critiqued candidate set, the grounding the candidates were qualified against, and a record of what was cut. It is a human-facing discovery document, not a requirements doc or plan — keep it about the ideas and their basis, not implementation.
@@ -47,7 +45,7 @@ A table of considered-and-cut ideas with a one-line reason each. When an axis en
 
 ## Markdown skeleton
 
-The section shape both formats carry. In markdown it is written literally (omit clearly irrelevant fields only when necessary); in HTML the same sections render per `html-rendering.md`.
+The section shape for `docs/ideation/<slug>.md`. Omit clearly irrelevant fields only when necessary.
 
 ```markdown
 ---

@@ -45,6 +45,10 @@ Fire automatically on a trigger phrase or on `/ideate`. The reject-by-default cr
 Don't bulk-load at start. Read at the step that needs it; pass the relevant content into any subagent you spawn.
 
 - `references/ideation-method.md` — the generate → critique → survivor-rationale method: the axis × frame divergence matrix, the verbatim generator and critic agent prompts, the survivor/rejection output schema, and the `docs/ideation/<slug>.md` section structure. Read at Phase 2 and Phase 5.
+- `references/divergent-ideation.md` — the fleet dispatch, six frames, per-idea output contract, and post-merge synthesis for Phase 2. Read at Phase 2 before building dispatch prompts.
+- `references/ideation-sections.md` — the section contract for the ideation artifact: metadata, Grounding Context, Topic Axes, Ranked Ideas, Rejection Summary. Read at Phase 5.
+- `references/post-ideation-workflow.md` — adversarial filtering, auto-write, concise summary, and the askme handoff. Read after Phase 2 completes.
+- `references/web-research-cache.md` — session-scoped web research cache for reuse across runs. Read at Phase 1.
 - `references/html-rendering.md` — how to render the canonical markdown to a self-contained HTML view. Read only when a run carries `format:html`.
 
 ## Workflow

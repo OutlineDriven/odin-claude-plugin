@@ -22,9 +22,7 @@ Files live under `/tmp/odin-ideate/<run-id>/web-research-cache.json`, resolved o
 
 ## Reuse check
 
-Before dispatching web research, check for existing cache files across sibling run-id directories under `/tmp/odin-ideate/`. Refinement loops within a session may legitimately reuse another run's cache by topic, not run-id. List all `web-research-cache.json` files under the scratch root.
-
-`find` exits 0 with empty output when no cache files exist, so the first-run case does not abort the reuse-check step.
+Before dispatching web research, check for existing cache files across sibling run-id directories under `/tmp/odin-ideate/`. Refinement loops within a session may legitimately reuse another run's cache by topic, not run-id. List all `web-research-cache.json` files under the scratch root. An empty listing is a valid first-run cache miss and must not abort the reuse-check step.
 
 Read each matching file. If any entry's `key` matches the current dispatch (same mode, same case-insensitive normalized focus hint, same topic surface hash), skip the dispatch and pass the cached `result` to the consolidated grounding summary. Note in the summary: "Reusing prior web research from this session — say 're-research' to refresh."
 
@@ -32,7 +30,7 @@ On `re-research` override, delete the matching entry and dispatch fresh.
 
 ## Append after fresh dispatch
 
-After a fresh dispatch, append the new result to the current run's cache file at `/tmp/odin-ideate/<run-id>/web-research-cache.json` using the absolute path from Phase 1 (create directory and file if needed). The next invocation in the session can reuse it via the `find` listing above.
+After a fresh dispatch, append the new result to the current run's cache file at `/tmp/odin-ideate/<run-id>/web-research-cache.json` using the absolute path from Phase 1 (create directory and file if needed). The next invocation in the session can reuse it.
 
 ## Topic surface hash
 
