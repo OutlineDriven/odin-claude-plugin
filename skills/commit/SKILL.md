@@ -88,7 +88,7 @@ Write the commit message:
 - **Subject line**: Concise, imperative mood, focused on *why* not *what*. Follow the convention determined in Step 2.
 - **Body** (when needed): Add a body separated by a blank line for non-trivial changes. Explain motivation, trade-offs, or anything a future reader would need. Omit the body for obvious single-purpose changes.
 
-Run the repo's native verification gate before each commit — type-checker and/or linter, whichever the repo defines — one pass per commit group, before staging that group. A group that fails the check is not ready to commit. Skip silently if the repo has neither configured.
+Run repo-native type-checker and linter before each commit. Apply this per commit group: for each logical group, run the checks against that group before staging and committing it, not once globally up front.
 
 For each commit group, stage and commit in a single call. Prefer staging specific files by name over `git add -A` or `git add .` to avoid accidentally including sensitive files (.env, credentials) or unrelated changes. Use a heredoc to preserve formatting:
 
