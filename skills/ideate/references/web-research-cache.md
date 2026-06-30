@@ -22,7 +22,7 @@ Files live under `/tmp/odin-ideate/<run-id>/web-research-cache.json`, resolved o
 
 ## Reuse check
 
-Before dispatching web research, check for existing cache files across sibling run-id directories under `/tmp/odin-ideate/`. Refinement loops within a session may legitimately reuse another run's cache by topic, not run-id. List all `web-research-cache.json` files under the scratch root. An empty listing is a valid first-run cache miss and must not abort the reuse-check step.
+Before dispatching web research, check for existing cache files across sibling run-id directories under `/tmp/odin-ideate/`. Refinement loops within a session may legitimately reuse another run's cache by topic, not run-id. If the scratch root directory does not exist yet, treat it as a cache miss and proceed to dispatch — no files to find is a normal first-run condition, not an error. Otherwise list all `web-research-cache.json` files under the scratch root; an empty listing is a valid cache miss and must not abort the reuse-check step.
 
 Read each matching file. If any entry's `key` matches the current dispatch (same mode, same case-insensitive normalized focus hint, same topic surface hash), skip the dispatch and pass the cached `result` to the consolidated grounding summary. Note in the summary: "Reusing prior web research from this session — say 're-research' to refresh."
 

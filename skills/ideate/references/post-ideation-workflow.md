@@ -79,11 +79,12 @@ Hand the survivors to `askme` to clarify intent on the chosen direction(s) befor
 
 **Stem:** "Your ideation is saved to `<path>`. What next?"
 
-Offer three options:
+Offer four options:
 
 1. **Open in browser** (if HTML) / **View markdown** (if markdown) — open or print the deliverable.
-2. **Discuss or refine the ideas first** — stay here to think across the set before committing: adjust or interrogate one idea, compare several, or combine/merge them. Asks what you want to work on. When the user is ready to commit, route to `askme` for intent-clarification before planning.
-3. **Done — keep the file and stop.**
+2. **Choose a direction** — pick a survivor and hand off to `askme` for intent-clarification before planning. Asks which idea first.
+3. **Discuss or refine the ideas first** — stay here to think across the set before committing: adjust or interrogate one idea, compare several, or combine/merge them. Asks what you want to work on.
+4. **Done — keep the file and stop.**
 
 **Adjacent nudge:** "Don't want it kept? Say 'discard' and the agent deletes the file." Handled via free text; it is create-only and never deletes a resumed or pre-existing doc.
 
@@ -102,7 +103,7 @@ This stays in ideate — no skill handoff. It is the "think across the set befor
 3. **Rewrite only on change.** The file is rewritten only when idea content actually changes (adjust, deepen-and-keep, or merge) — Q&A and comparison alone do not churn it.
 4. **Return to the Phase 5 menu.** Typically the user next discusses more, opens it, or finishes. When the user is ready to commit a direction, route to `askme` for intent-clarification before planning.
 
-### 5.2 Done
+### 5.2 Choose a direction
 
 The file is already written, so there is no save step.
 
@@ -131,6 +132,6 @@ Before finishing, check:
 - the original many-ideas -> critique -> survivors mechanism was preserved
 - every rejected idea has a reason
 - survivors are materially better than a naive "give me ideas" list
-- the deliverable was written automatically (Phase 4)
+- the deliverable was written automatically (Phase 4) — to `docs/ideation/` when present, else the temp area, never the user's CWD
 - the session showed a concise summary, not a reproduction of the full deliverable
-- `ideate` ends at survivors plus the `askme` handoff, not at an implementation plan
+- acting on an idea routes to `askme`, not directly to implementation

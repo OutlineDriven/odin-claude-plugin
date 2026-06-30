@@ -57,11 +57,13 @@ Don't bulk-load at start. Read at the step that needs it; pass the relevant cont
 
 Ungrounded ideation is fabrication. Before generating, ground the subject in the real codebase. Defer to ODIN's Dispatch-First protocol — escalate Explore agents by scope: **1** for a single known concern, **3** for multiple concerns or unknown scope, **5** for a cross-module or architectural survey. Auto-skip to direct reads only for a single file under 50 LOC. **Seed the grounding scope with `STRATEGY.md`:** the grounding Explore agent(s) read it (when present at the repo root) as optional upstream grounding so candidates stay on-anchor, and fold its diagnosis/guiding-policy into the returned summary; if absent, note that in one line and proceed — strategy grounding never blocks. (In an auto-skip run, the orchestrator reads it directly.)
 
+Read `references/web-research-cache.md` to check for cached web research from prior runs in this session before dispatching any web research.
+
 Explore agents are read-only and return architecture / pattern / constraint summaries with `file:line` cites. Use token-efficient discovery only: `fd -e <ext> --max-results 50`, `ast-grep run -p 'PATTERN' -l <lang> -C 1` or `git --no-pager grep -n -C 2 'pattern'`, preview with `bat -P -p -n -r START:END file`, structure with `eza --tree --level=2`. The output is a grounding summary every later candidate must cite against. If the scan cannot identify the subject, route to `askme` and stop.
 
 ### Phase 2 — Generate candidates (parallel, read-only)
 
-Read `references/ideation-method.md`. Dispatch the generator subagents **in one tool-call message**, each seeded with the grounding summary and a **distinct axis × frame assignment** so they diverge instead of converging on the one salient reading. Each generator returns ~6–8 raw candidates, every candidate carrying a basis (`file:line` or `external:<source>`). Generators **write nothing**. Sequential dispatch invalidates the divergence contract.
+Read `references/ideation-method.md` and `references/divergent-ideation.md`. Dispatch the generator subagents **in one tool-call message**, each seeded with the grounding summary and a **distinct axis × frame assignment** so they diverge instead of converging on the one salient reading. Each generator returns ~6–8 raw candidates, every candidate carrying a basis (`file:line` or `external:<source>`). Generators **write nothing**. Sequential dispatch invalidates the divergence contract.
 
 ### Phase 3 — Critique all (reject by default)
 
@@ -73,7 +75,7 @@ Dispatch a Reviewer subagent to audit the critic's verdicts against completeness
 
 ### Phase 5 — Assemble and write
 
-1. Build `docs/ideation/<slug>.md` per the section structure in `references/ideation-method.md`: subject + grounding summary, **Survivors** (each: idea, rationale, evidence cite), **Rejected** (each: idea + one-line rejection rationale — losers are explained, never silently dropped), and the next step. **Markdown is the canonical surface, always written.** Slug is the sanitized subject.
+1. Build `docs/ideation/<slug>.md` per the section structure in `references/ideation-method.md` and `references/ideation-sections.md`: subject + grounding summary, **Survivors** (each: idea, rationale, evidence cite), **Rejected** (each: idea + one-line rejection rationale — losers are explained, never silently dropped), and the next step. **Markdown is the canonical surface, always written.** Slug is the sanitized subject.
 2. `mkdir -p docs/ideation/`, then write `docs/ideation/<slug>.md`.
 3. **Read the file back** to confirm it landed as intended.
 4. **Opt-in HTML view — only if the run carries `format:html`.** Read `references/html-rendering.md` and render `docs/ideation/<slug>.html` as a self-contained view derived from the markdown read back in step 3; read it back and verify content parity with the markdown. Default (no flag) runs skip this step — the output is markdown only.

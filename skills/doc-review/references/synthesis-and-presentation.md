@@ -27,8 +27,8 @@ Gate findings by their `confidence` anchor value. Anchors are discrete integers 
 | `100`  | Evidence directly confirms; will happen frequently | Enter actionable tier (classify by `autofix_class`) |
 
 - **Dropped silently** (anchors `0` and `25`): these do not surface in any output bucket -- not as findings, not as FYI observations, not as residual concerns. Record the total drop count as a Coverage footnote line when non-zero: `Dropped: N (anchors 0/25 suppressed)`. The footnote appears below the Coverage table, alongside the `Chains:` footnote when both apply. Omit the footnote when N is zero.
-- **FYI-subsection** (anchor `50`): surface in the presentation layer's FYI subsection regardless of `autofix_class`. These do not enter the walk-through or any bulk action -- observational value without forcing a decision. Advisory observations ("nothing breaks, but...") naturally land here.
-- **Actionable** (anchors `75` and `100`): enter the classification pipeline. Route by `autofix_class` (see 3.7).
+- **FYI-subsection** (anchor `50`): stays in the working set through 3.3 dedup and 3.4 cross-persona promotion. If promoted to `75` by corroboration, enters the actionable tier; if not promoted, routes to the FYI subsection regardless of `autofix_class`. These do not enter the walk-through or any bulk action -- observational value without forcing a decision. Advisory observations ("nothing breaks, but...") naturally land here.
+- **Actionable** (anchors `75` and `100`): enter the classification pipeline. Route by `autofix_class` (see 3.10).
 
 **Why this threshold, not a higher one:** Document review has opposite economics from code review. There is no linter backstop -- the review IS the backstop. Premise-level concerns (product, adversarial) naturally cap at anchors 50-75 because "is the motivation valid?" cannot be verified against ground truth. The routing menu already makes dismissal cheap (Skip, Append to Open Questions), so surfaced-and-skipped is a low-cost outcome while missed-and-shipped derails downstream implementation. Filter low (`>= 50`) and let the routing menu handle volume.
 
@@ -108,7 +108,7 @@ If the contributing personas are all silent on action (e.g., a merged `manual` f
 - `suggested_fix` present -> `recommended_action: Apply` as the pragmatic default.
 - `suggested_fix` absent -> `recommended_action: Defer` (the walk-through and best-judgment path cannot execute Apply without a fix; routing an actionless finding to Defer surfaces it in Open Questions where the user can decide what to do with it).
 
-This gate holds for every branch of the tie-break: if the winning action is `Apply` but the merged finding has no `suggested_fix` after 3.6 (Promote) and 3.7 (Route) have run, downgrade to `Defer`. The walk-through still lets the user pick any of the four options; this rule only governs the agent's default recommendation so the best-judgment path and bulk-preview never schedule a non-executable Apply.
+This gate holds for every branch of the tie-break: if the winning action is `Apply` but the merged finding has no `suggested_fix` after 3.9 (Promote) and 3.10 (Route) have run, downgrade to `Defer`. The walk-through still lets the user pick any of the four options; this rule only governs the agent's default recommendation so the best-judgment path and bulk-preview never schedule a non-executable Apply.
 
 **Conflict-context surface.** When the tie-break fires (contributing personas implied different actions), record a one-line conflict-context string on the merged finding. The walk-through renders this on the conflict-context line. Example: `Coherence recommends Apply; scope-guardian recommends Skip. Agent's recommendation: Skip.`
 
@@ -118,7 +118,7 @@ This gate holds for every branch of the tie-break: if the winning action is `App
 
 Document reviews often produce fanout: a single premise challenge ("is this work justified?") generates downstream findings that all evaporate if the premise is rejected. Surfacing each as an independent decision forces the user to re-litigate the same root question N times. This step links dependent findings to their root so presentation can group them and the walk-through can cascade a single root decision across the chain.
 
-Run this step after 3.5b (recommended_action normalized) and before 3.6 (auto-promotion), operating on the merged finding set.
+Run this step after 3.5b (recommended_action normalized) and before 3.9 (auto-promotion), operating on the merged finding set.
 
 **Step 1: Identify roots.** A finding is a candidate root when ALL of the following hold:
 
@@ -161,7 +161,46 @@ Do NOT reclassify, re-route, or change the confidence anchor of any finding in t
 
 **Count invariant.** `M` in the coverage line is the number of findings with `depends_on` set after Step 4 completes. If a finding appears in a root's `dependents` array, it MUST appear nested under that root in the presentation and MUST NOT appear at its own severity position.
 
-### 3.6 Promote Auto-Eligible Findings
+### 3.6 R29 Rejected-Finding Suppression (Round 2+)
+
+When running round 2+ on the same document in the same session, the decision primer carries forward every prior-round Skipped, Deferred, and Acknowledged finding. Synthesis suppresses re-raised rejected findings rather than re-surfacing them. This step runs before promotion (3.9) and routing (3.10) so suppressed findings cannot influence downstream decisions.
+
+For each current-round finding, compare against the primer's rejected list:
+
+- **Matching predicate:** `normalize(section) + normalize(title)` fingerprint augmented with evidence-substring overlap check (>50%). If a current-round finding matches a prior-round rejected finding on fingerprint AND evidence overlap, drop the current-round finding.
+- **Materially-different exception:** if the current document state has changed around the finding's section since the prior round (the section was edited and the evidence quote no longer appears in the current text), treat the finding as new.
+- **On suppression:** record the drop in Coverage with a "previously rejected, re-raised this round" note.
+
+### 3.7 R30 Fix-Landed Matching Predicate
+
+When running round 2+, synthesis verifies that prior-round Applied findings actually landed. This step runs before promotion and routing so regressions are flagged before downstream decisions.
+
+For each current-round finding whose fingerprint matches a prior-round Applied finding:
+
+- **Strong match -- evidence overlap >50%: fix-landed regression.** Flag as "fix did not land" in the report rather than surfacing as a new finding.
+- **Weak match -- evidence overlap <=50%: not a fix-landed regression.** If the current-round item is explicitly a non-actionable verification observation, suppress it and record `Verified: round-N '{title}' landed correctly` in Coverage. Otherwise, treat the finding as new.
+- **Section renames count as different locations.** If the section name has changed between rounds, treat the new section as a different location.
+- **No fingerprint match:** not a verification candidate; the finding flows through normally.
+
+### 3.8 Protected Artifacts
+
+Discard any finding that recommends deleting or removing files in:
+
+- `docs/brainstorms/`
+- `docs/plans/`
+- `docs/solutions/`
+
+These are pipeline artifacts and must not be flagged for removal.
+
+### 3.8b Chain Pruning
+
+After 3.6-3.8 drop findings, chain annotations may reference suppressed entries. Prune before promotion and routing:
+
+- **Dropped dependents:** for each root's `dependents` array, remove any id whose finding was dropped by 3.6 (R29), 3.7 (R30), or 3.8 (Protected). If a root's `dependents` array becomes empty, clear the root's `dependents` field but leave the root finding intact.
+- **Dropped roots:** if a root finding itself was dropped, clear `depends_on` on every surviving dependent that pointed to it. Those dependents become standalone findings.
+- **Recompute Chains coverage:** count surviving roots (findings with non-empty `dependents` arrays) and surviving dependents (findings with `depends_on` set). Update the `Chains:` coverage line from the post-pruning state. The count invariant (`M` = number of findings with `depends_on` set) now reflects only surviving findings.
+
+### 3.9 Promote Auto-Eligible Findings
 
 Scan `manual` findings for promotion to `safe_auto` or `gated_auto`. Promote when the finding meets one of the consolidated auto-promotion patterns:
 
@@ -175,13 +214,13 @@ Do not promote if the finding involves scope or priority changes where the autho
 
 **Strawman-downgrade safeguard.** If a `safe_auto` finding names dismissed alternatives in `why_it_matters`, verify the alternatives are genuinely strawmen. If any alternative is a plausible design choice that the persona dismissed too aggressively, downgrade to `gated_auto`.
 
-### 3.7 Route by Autofix Class
+### 3.10 Route by Autofix Class
 
 **Severity and autofix_class are independent.** A P1 finding can be `safe_auto` if the correct fix is obvious. The test is not "how important?" but "is there one clear correct fix, or does this require judgment?"
 
 **Anchor and autofix_class are also independent.** Anchor gates the finding into a surface (FYI vs actionable); `autofix_class` decides what the actionable surface does with it.
 
-Findings reaching 3.7 have already been gated to anchors `50`, `75`, or `100` by 3.2.
+Findings reaching 3.10 have already been gated to anchors `50`, `75`, or `100` by 3.2.
 
 | Anchor | Autofix Class | Route |
 |--------|---------------|-------|
@@ -193,13 +232,13 @@ Findings reaching 3.7 have already been gated to anchors `50`, `75`, or `100` by
 | `75`   | `manual`      | Enter the per-finding walk-through with user-judgment framing. `suggested_fix` is optional. |
 | `50`   | any           | Surface in the FYI subsection regardless of `autofix_class`. Do not enter the walk-through or any bulk action. |
 
-### 3.8 Sort
+### 3.11 Sort
 
 Sort findings for presentation: P0 -> P1 -> P2 -> P3, then by finding type (errors before omissions), then by confidence anchor (descending: `100` first, then `75`, then `50`), then by document order (section position) as the deterministic final tiebreak.
 
-### 3.9 Suppress Restatements in Residual Concerns and Deferred Questions
+### 3.12 Suppress Restatements in Residual Concerns and Deferred Questions
 
-Persona outputs carry `residual_risks` and `deferred_questions` arrays alongside `findings`. After the actionable-tier set is finalized (post-3.7 routing), personas often re-surface the same substance in their residual/deferred arrays. Rendering both sections verbatim inflates the output with restatements that carry no new signal.
+Persona outputs carry `residual_risks` and `deferred_questions` arrays alongside `findings`. After the actionable-tier set is finalized (post-3.10 routing), personas often re-surface the same substance in their residual/deferred arrays. Rendering both sections verbatim inflates the output with restatements that carry no new signal.
 
 For every `residual_risk` and `deferred_question` across all persona outputs, check against the finalized actionable-finding set. Drop the residual/deferred item if either of these holds:
 
@@ -216,7 +255,7 @@ Record the count dropped as a Coverage footnote line when non-zero: `Restated: N
 
 ### Apply safe_auto fixes
 
-Apply only `safe_auto` findings **at confidence anchor `100`** to the document in a single pass. This matches the 3.7 routing table: anchor `100` + `safe_auto` silent-applies; anchor `75` + `safe_auto` was demoted to `gated_auto` in 3.7; anchor `50` + any `autofix_class` routes to FYI.
+Apply only `safe_auto` findings **at confidence anchor `100`** to the document in a single pass. This matches the 3.10 routing table: anchor `100` + `safe_auto` silent-applies; anchor `75` + `safe_auto` was demoted to `gated_auto` in 3.10; anchor `50` + any `autofix_class` routes to FYI.
 
 - Edit the document inline using the platform's edit tool
 - Track what was changed for the "Applied fixes" section in the rendered output
@@ -291,35 +330,6 @@ Brief summary at the top: "Applied N fixes. K items need attention (X errors, Y 
 Include the Coverage table, applied fixes, FYI observations (as a distinct subsection), residual concerns, and deferred questions.
 
 **All tables MUST be pipe-delimited markdown (`| col | col |`). Do NOT use ASCII box-drawing characters under any circumstances.**
-
-### R29 Rejected-Finding Suppression (Round 2+)
-
-When running round 2+ on the same document in the same session, the decision primer carries forward every prior-round Skipped, Deferred, and Acknowledged finding. Synthesis suppresses re-raised rejected findings rather than re-surfacing them.
-
-For each current-round finding, compare against the primer's rejected list:
-
-- **Matching predicate:** `normalize(section) + normalize(title)` fingerprint augmented with evidence-substring overlap check (>50%). If a current-round finding matches a prior-round rejected finding on fingerprint AND evidence overlap, drop the current-round finding.
-- **Materially-different exception:** if the current document state has changed around the finding's section since the prior round (the section was edited and the evidence quote no longer appears in the current text), treat the finding as new.
-- **On suppression:** record the drop in Coverage with a "previously rejected, re-raised this round" note.
-
-### R30 Fix-Landed Matching Predicate
-
-When running round 2+, synthesis verifies that prior-round Applied findings actually landed. For each current-round finding whose fingerprint matches a prior-round Applied finding:
-
-- **Strong match -- evidence overlap >50%: fix-landed regression.** Flag as "fix did not land" in the report rather than surfacing as a new finding.
-- **Weak match -- evidence overlap <=50%: not a fix-landed regression.** If the current-round item is explicitly a non-actionable verification observation, suppress it and record `Verified: round-N '{title}' landed correctly` in Coverage. Otherwise, treat the finding as new.
-- **Section renames count as different locations.** If the section name has changed between rounds, treat the new section as a different location.
-- **No fingerprint match:** not a verification candidate; the finding flows through normally.
-
-### Protected Artifacts
-
-During synthesis, discard any finding that recommends deleting or removing files in:
-
-- `docs/brainstorms/`
-- `docs/plans/`
-- `docs/solutions/`
-
-These are pipeline artifacts and must not be flagged for removal.
 
 ## Phase 5: Next Action -- Terminal Question
 
