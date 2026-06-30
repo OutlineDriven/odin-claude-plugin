@@ -71,3 +71,9 @@ Before hypothesizing a fix, reason through the failure — SHORT-form KEYWORDS f
 
 - Before writing a plan for a bug fix that touches multiple files
 - Whenever you notice that the previous attempt to fix a bug failed
+
+## Reference materials
+
+- `references/anti-patterns.md` — common debugging traps and how to avoid them.
+- `references/defense-in-depth.md` — layered defense strategies for preventing bug recurrence.
+- `references/investigation-techniques.md` — structured investigation methods for complex defects.
