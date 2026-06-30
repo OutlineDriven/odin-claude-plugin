@@ -17,7 +17,7 @@ These hold regardless of which skill produced the artifact.
 - **Stable IDs as anchor IDs AND visible text.** every ID-bearing item (R-IDs, U-IDs, A-IDs, F-IDs, AE-IDs, KTDs) gets `id="r1"` on its element AND appears as visible text inside the element.
 - **Source / composition signal.** A visible footer at the bottom names the composition timestamp and the source identifier (the user prompt context, the upstream brainstorm doc when one exists, or just the composing skill name when there is no external source). Example: `<footer class="composition-signal">Composed 2026-05-17T14:23Z by /plan from <code>docs/plans/...-requirements.md</code></footer>`.
 - **ASCII identifiers.** Class names, element IDs, data attribute names are ASCII-only.
-- **ODIN plan navigation.** ODIN plan artifacts include a visible navigation region near the top linking to stable section anchors for `goal-capsule`, `odin-spec-outline`, `planning-contract`, `implementation-units`, `verification-contract`, `definition-of-done`, and `appendix` when those sections exist. Requirements-only artifacts omit links to absent implementation sections.
+- **ODIN plan navigation.** ODIN plan artifacts include a visible navigation region near the top linking to stable section anchors for `goal-capsule`, `odin-spec-outline`, `planning-outline`, `implementation-units`, `verification-contract`, `definition-of-done`, and `appendix` when those sections exist. Requirements-only artifacts omit links to absent implementation sections.
 - **Visible readiness metadata.** If the artifact has `artifact_contract`, `artifact_readiness`, `source`, or `execution`, render those values in the visible header metadata.
 
 ## Precedence stack for style preferences
@@ -108,7 +108,7 @@ When rendering an ODIN plan, every major logical section gets a stable anchor ID
 | Goal Capsule | `goal-capsule` |
 | ODIN spec outline | `odin-spec-outline` |
 | Product Requirements | `odin-spec-requirements` |
-| Planning Contract | `planning-contract` |
+| Planning Outline | `planning-outline` |
 | Implementation Units | `implementation-units` |
 | Verification Contract | `verification-contract` |
 | Definition of Done | `definition-of-done` |

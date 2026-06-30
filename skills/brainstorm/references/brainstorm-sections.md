@@ -28,7 +28,7 @@ A requirements-only plan is kept **light and standalone-readable**. It includes:
 - `## Goal Capsule` with objective, product authority, and open blockers.
 - `## ODIN spec outline` containing the brainstorm sections below (rendered as `###` subsections).
 
-Do **not** emit a `## Goal Launch Block` or `## Reader Index`. It also omits empty `Planning Contract`, `Implementation Units`, `Verification Contract`, and `Definition of Done` sections — empty placeholders make requirements-only docs look executable and waste downstream tokens. `/plan` adds those sections when it enriches the same file in place. The next step is conveyed by the Phase 4 handoff menu, not by a section in the doc.
+Do **not** emit a `## Goal Launch Block` or `## Reader Index`. It also omits empty `Planning Outline`, `Implementation Units`, `Verification Contract`, and `Definition of Done` sections — empty placeholders make requirements-only docs look executable and waste downstream tokens. `/plan` adds those sections when it enriches the same file in place. The next step is conveyed by the Phase 4 handoff menu, not by a section in the doc.
 
 ## Decide whether a doc is warranted at all
 

@@ -13,7 +13,7 @@ These hold regardless of which skill produced the artifact.
 - **Repo-relative paths for file references.** Always. Never absolute paths — they break portability across machines, worktrees, teammates.
 - **No HTML mixed in.** Keep the markdown pure. No `<div>`, no `<details>`, no inline `<style>`. If a layout idea only works as HTML, defer it to the HTML rendering. Markdown stays markdown.
 - **No fixed-width line wrapping.** Do not hard-wrap prose to a column (e.g. 80 chars). Write one sentence per line, or let each paragraph flow as a single line. The artifact is read rendered and shared, where fixed wraps add nothing and only produce noisy mid-sentence diffs; markdown joins soft line breaks within a paragraph, so wrapping never changes the rendered output.
-- **ODIN plan sections use stable headings.** For plan artifacts, render the required sections with exact ASCII headings so agents can find them by heading scan: `## Goal Capsule`, `## ODIN spec outline`, `## Planning Contract`, `## Implementation Units`, `## Verification Contract`, `## Definition of Done`, and optional `## Appendix`. Requirements-only artifacts omit the plan-only sections rather than emitting empty placeholders. These stable headings are the wayfinding contract.
+- **ODIN plan sections use stable headings.** For plan artifacts, render the required sections with exact ASCII headings so agents can find them by heading scan: `## Goal Capsule`, `## ODIN spec outline`, `## Planning Outline`, `## Implementation Units`, `## Verification Contract`, `## Definition of Done`, and optional `## Appendix`. Requirements-only artifacts omit the plan-only sections rather than emitting empty placeholders. These stable headings are the wayfinding contract.
 - **Goal Capsule is top-loaded.** It appears before ODIN spec outline and long appendices for fast orientation — not a hidden machine copy.
 
 ## Format principles
@@ -69,7 +69,7 @@ How section types commonly render in markdown. These are patterns, not contracts
 
 - **Goal Capsule** — bullets or a small table for objective, authority, execution profile, stop conditions, and tail ownership.
 - **ODIN spec outline** — H2 section containing Summary, Problem Frame, Requirements, and product-scope subsections. Put Requirements under `### Requirements` so review tools can distinguish Product Requirements from implementation detail.
-- **Planning Contract** — H2 section for KTDs, high-level technical design, assumptions, and sequencing.
+- **Planning Outline** — H2 section for KTDs, high-level technical design, assumptions, and sequencing.
 - **Summary / Problem Frame** — prose paragraphs.
 - **Requirements** — bullets with `R<N>.` prefix. When requirements span more than one concern, grouping under bold inline headers is the default shape, not optional polish (group by capability, not by discussion order); render a flat list only when every requirement is about the same thing. When requirements have status, traceability, or severity that warrant additional columns, escalate to a table.
 - **Implementation Units** — H3 heading per unit with `U<N>.` prefix. Fields (Goal, Files, Patterns, Test Scenarios, Verification) render as bullets with bold leader labels, or as sub-headings if the field has multi-paragraph content.
