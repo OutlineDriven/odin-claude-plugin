@@ -38,7 +38,7 @@ Validity (HIT) requires ALL of:
     untracked `??` files).
 
 Cardinal rule: this cache is an optimization, never a correctness dependency.
-Every failure mode (not a git repo, unreadable/malformed cache, no writable
+every failure mode (not a git repo, unreadable/malformed cache, no writable
 /tmp, git errors) degrades to NO-CACHE/MISS and exits 0 — it never raises and
 never serves a profile it cannot prove fresh.
 

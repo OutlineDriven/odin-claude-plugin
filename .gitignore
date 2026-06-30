@@ -86,6 +86,3 @@ checkpoint-*.json
 
 # Specific files found in this directory
 __store.db
-
-# Local source plugin clone used for porting; not part of ODIN repo
-compound-engineering-plugin/

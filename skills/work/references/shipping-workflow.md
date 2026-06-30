@@ -27,7 +27,7 @@ This file contains the shipping workflow (Phase 3-4). Load it when all Phase 2 t
 
    Review the diff with **`/review`** — the portable review skill — as the single path. It self-right-sizes (a lite roster for small, low-risk, code-only diffs; the full roster otherwise), so there is no "escalate to a heavier reviewer" decision and **no harness-specific review detection**.
 
-   **Skip dedicated review only for a purely mechanical diff** — formatting, dependency-version bumps, lint-only fixes, generated artifacts. Note in the shipping summary: `Code review: skipped (mechanical diff)`. Everything else gets reviewed.
+   **Skip dedicated review only for a purely mechanical diff** — formatting, dependency-version bumps, lint-only fixes, generated artifacts. Note in the shipping summary: `Code review: skipped (mechanical diff)`. All other diffs are reviewed.
 
    **Review is not fix — two steps:**
 
@@ -90,7 +90,7 @@ This file contains the shipping workflow (Phase 3-4). Load it when all Phase 2 t
    - Testing notes (tests added/modified, manual testing performed)
    - Evidence context from step 1, so `/atomic-commit-and-push` can decide whether to ask about capturing evidence
    - Figma design link (if applicable)
-   - The Post-Deploy Monitoring & Validation section (see Phase 3 Step 6)
+   - The Post-Deploy Monitoring & Validation section
    - Any "Known Residuals" accepted in the Phase 3 Residual Work Gate, rendered as a dedicated section in the PR body with severity, file:line, and title per finding
 
    If the user prefers to commit without creating a PR, load the `/atomic-commit` skill instead and pass the same Post-Deploy Monitoring & Validation content as commit context so it is not lost.
@@ -122,7 +122,7 @@ Before creating PR, verify:
 
 Single portable path: **`/review`** self-sizes (lite roster for small low-risk code-only diffs, full roster otherwise). No harness-native review detection, no escalation tiers.
 
-**Skip** only for a purely mechanical diff (formatting, dep-bumps, lint-only, generated). Everything else is reviewed.
+**Skip** only for a purely mechanical diff (formatting, dep-bumps, lint-only, generated). All other diffs are reviewed.
 
 **Two steps — review is not fix.** (3a) Review-only via `mode:agent`; add `depth:full` when the plan/task/user explicitly asked for a deep review. (3b) Batched fix subagents per `references/review-findings-followup.md`; residuals → Residual Work Gate.
 

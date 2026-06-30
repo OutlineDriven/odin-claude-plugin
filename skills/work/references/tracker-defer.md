@@ -80,17 +80,17 @@ Non-interactive mode skips label decisions entirely — it acts silently on the 
 
 When the named tracker is unavailable or no tracker is named, fall back in this order. Prefer the project's detected tracker; use `gh` only when no named tracker was found or the named one is unreachable.
 
-1. **Named tracker** (MCP tool, CLI, or API the agent can invoke directly, identified via Detection above)
+1. **Named tracker** (MCP tool, CLI, or API the agent can invoke directly, identified by the tracker-detection step)
 2. **GitHub Issues via `gh`** — when `gh auth status` succeeds and the current repo has issues enabled (`gh repo view --json hasIssuesEnabled` returns `true`)
 3. **No sink** — findings remain in the review report's residual-work section (Interactive mode) or are returned in the `no_sink` bucket for the caller to route (Non-interactive mode). The agent does not re-display them through a transient surface.
 
-Previously this chain included a third in-session fallback tier. That tier was removed because in-session tasks do not survive past the session and therefore do not meet the "durable filing" intent of a Defer action. When no durable tracker exists, the correct behavior is to leave findings in the report (Interactive) or return them to the caller (Non-interactive).
+Do not add an in-session fallback tier. In-session tasks do not survive past the session and therefore do not meet the "durable filing" intent of a Defer action. When no durable tracker exists, leave findings in the report (Interactive) or return them to the caller (Non-interactive).
 
 ---
 
 ## Ticket composition
 
-Every Defer action creates a ticket with the following content, adapted to the tracker's capabilities:
+Each Defer action creates a ticket with the following content, adapted to the tracker's capabilities:
 
 - **Title:** the merged finding's `title` (schema-capped at 10 words).
 - **Body:**

@@ -17,7 +17,7 @@ Frame around the caller's specific question (adopt / migrate / does-this-apply),
 
 ## Verify before you report
 
-Every claim that would drive the verdict must be **supported by the source you cite** — the source's text must actually entail the claim, not merely mention the topic. Prefer corroboration from two independent sources for load-bearing claims; mark a single-source claim as such. Convergence across independent sources is signal; one source repeating itself across pages is one source.
+every claim that would drive the verdict must be **supported by the source you cite** — the source's text must actually entail the claim, not merely mention the topic. Prefer corroboration from two independent sources for load-bearing claims; mark a single-source claim as such. Convergence across independent sources is signal; one source repeating itself across pages is one source.
 
 ## Output contract
 

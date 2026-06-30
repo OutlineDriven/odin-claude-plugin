@@ -25,7 +25,7 @@ A conversation claim (warm mode) never satisfies a floor until a scout corrobora
 
 ## The verdict contract
 
-Every verdict carries a fixed vocabulary and a fixed shape so it is comparable and the next run's precedent search can find it.
+every verdict carries a fixed vocabulary and a fixed shape so it is comparable and the next run's precedent search can find it.
 
 **Grade** — exactly one of:
 

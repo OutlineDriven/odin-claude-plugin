@@ -1,6 +1,7 @@
 ---
 name: worktree
 description: Set up isolated git worktrees — create a new branch for fresh work, or attach a worktree to an existing branch/PR/commit. Use when starting isolated work or isolating an existing ref; detects existing isolation first.
+argument-hint: "[optional: ref to isolate, or new-branch-name]"
 ---
 
 # Worktree Isolation
@@ -40,7 +41,7 @@ git rev-parse --show-superproject-working-tree
 
 ## Step 1: Prefer the harness's native worktree tool
 
-If the harness provides a native worktree primitive — for example `EnterWorktree` / `WorktreeCreate`, a `/worktree` command, or a `--worktree` flag — use it and stop. Native tools place, track, and clean up the worktree so the harness can manage it. A behind-the-back `git worktree add` creates phantom state the harness cannot see, navigate to, or clean up.
+If the harness provides a native worktree primitive — for example Claude Code's `EnterWorktree`, a `/worktree` command, or a `--worktree` flag — use it and stop. Native tools place, track, and clean up the worktree so the harness can manage it. A behind-the-back `git worktree add` creates phantom state the harness cannot see, navigate to, or clean up.
 
 ## Step 2: Git fallback
 
