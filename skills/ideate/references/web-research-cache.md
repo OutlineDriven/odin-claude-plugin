@@ -34,13 +34,23 @@ After a fresh dispatch, append the new result to the current run's cache file at
 
 ## Topic surface hash
 
-The topic surface is the user-supplied content the web research is grounded on: the focus hint plus a stable repo discriminator. This keeps the cache key meaningful when focus is empty — two bare-prompt invocations in the same repo legitimately share research, but the key still differentiates repos. Resolve the discriminator with this fallback chain and hash the result (first 8 hex chars of sha256 is sufficient):
+The topic surface is the user-supplied content the web research is grounded on: the focus hint plus a stable repo discriminator. This keeps the cache key meaningful when focus is empty — two bare-prompt invocations in the same repo legitimately share research, but the key still differentiates repos.
+
+**Step 1: Resolve the repo discriminator.** Use this fallback chain (first match wins):
 
 1. `git remote get-url origin` — stable across machines, correct for collaborators on the same remote.
 2. `git rev-parse --show-toplevel` — absolute repo path; machine-local but always available in a git checkout.
 3. The current working directory's absolute path — last resort when not in a git repo.
 
-Normalize before hashing: lowercase, collapse whitespace. (The repo discriminator hash is computed from the raw command output; only the focus hint and topic text are normalized.)
+**Step 2: Compute `topic_surface_hash`.** Build a single sha256 over the concatenation of three labeled fields, then take the first 8 hex chars:
+
+```
+topic_surface_hash = sha256("focus\0" + normalized_focus + "\0topic\0" + normalized_topic + "\0repo\0" + raw_repo_discriminator)[:8]
+```
+
+- `normalized_focus` = focus hint lowercased with whitespace collapsed (empty string when no focus).
+- `normalized_topic` = topic text lowercased with whitespace collapsed.
+- `raw_repo_discriminator` = raw command output from Step 1 (do not normalize).
 
 ## Degradation
 
