@@ -92,50 +92,50 @@ Strengthening [section names] -- [brief reason for each, e.g., "decision rationa
 
 For each selected section, choose the smallest useful agent set. Do **not** run every agent. Use at most **1-3 agents per section** and usually no more than **8 agents total**.
 
-The names below are skill-local prompt asset file stems under `references/agents/`, not standalone agent types. For each selected name, read `references/agents/<name>.md` and seed a generic subagent with that prompt content plus the section context described below.
+Dispatch a generic subagent for each selected focus area. Pass the planning context summary, the section text, why the section was selected, and the plan depth and risk profile. The focus areas below describe what each subagent should investigate -- seed them with these prompts plus the task-specific context.
 
-**Deterministic Section-to-Agent Mapping:**
+**Section-to-Focus Mapping:**
 
 **Requirements / Open Questions classification**
-- `spec-flow-analyzer` for missing user flows, edge cases, and handoff gaps
-- `repo-research-analyst` (Scope: `architecture, patterns`) for repo-grounded patterns, conventions, and implementation reality checks
+- *Flow analysis* for missing user flows, edge cases, and handoff gaps
+- *Architecture review* for repo-grounded patterns, conventions, and implementation reality checks
 
 **Context & Research / Sources & References gaps**
-- `learnings-researcher` for institutional knowledge and past solved problems
-- `framework-docs-researcher` for official framework or library behavior
-- `best-practices-researcher` for current external patterns and industry guidance
-- `web-researcher` for landscape/prior-art gaps -- competitor patterns, market signals, or an unsettled external option set that recommendations depend on
-- Add `git-history-analyzer` only when historical rationale or prior art is materially missing
+- *Institutional knowledge* for past solved problems and documented learnings
+- *Framework documentation* for official framework or library behavior
+- *Best practices* for current external patterns and industry guidance
+- *Landscape research* for competitor patterns, market signals, or unsettled external option sets
+- *Git history* -- only when historical rationale or prior art is materially missing
 
 **Key Technical Decisions**
-- `architecture-strategist` for design integrity, boundaries, and architectural tradeoffs
-- Add `framework-docs-researcher` or `best-practices-researcher` when the decision needs external grounding beyond repo evidence
+- *Architecture strategy* for design integrity, boundaries, and architectural tradeoffs
+- Add framework docs or best practices research when the decision needs external grounding beyond repo evidence
 
 **High-Level Technical Design**
-- `architecture-strategist` for validating that the technical design accurately represents the intended approach and identifying gaps
-- `repo-research-analyst` (Scope: `architecture, patterns`) for grounding the technical design in existing repo patterns and conventions
-- Add `best-practices-researcher` when the technical design involves a DSL, API surface, or pattern that benefits from external validation
+- *Architecture strategy* for validating that the technical design accurately represents the intended approach and identifying gaps
+- *Architecture review* for grounding the technical design in existing repo patterns and conventions
+- Add best practices research when the technical design involves a DSL, API surface, or pattern that benefits from external validation
 
 **Implementation Units / Verification**
-- `repo-research-analyst` (Scope: `patterns`) for concrete file targets, patterns to follow, and repo-specific sequencing clues
-- `pattern-recognition-specialist` for consistency, duplication risks, and alignment with existing patterns
-- Add `spec-flow-analyzer` when sequencing depends on user flow or handoff completeness
+- *Pattern analysis* for concrete file targets, patterns to follow, and repo-specific sequencing clues
+- *Consistency review* for duplication risks and alignment with existing patterns
+- Add flow analysis when sequencing depends on user flow or handoff completeness
 
 **System-Wide Impact**
-- `architecture-strategist` for cross-boundary effects, interface surfaces, and architectural knock-on impact
-- Add the specific specialist that matches the risk:
-  - `performance-oracle` for scalability, latency, throughput, and resource-risk analysis
-  - `security-sentinel` for auth, validation, exploit surfaces, and security boundary review
-  - `data-integrity-guardian` for migrations, persistent state safety, consistency, and data lifecycle risks
+- *Architecture strategy* for cross-boundary effects, interface surfaces, and architectural knock-on impact
+- Add the specific focus that matches the risk:
+  - *Performance analysis* for scalability, latency, throughput, and resource-risk analysis
+  - *Security review* for auth, validation, exploit surfaces, and security boundary review
+  - *Data integrity review* for migrations, persistent state safety, consistency, and data lifecycle risks
 
 **Risks & Dependencies / Operational Notes**
-- Use the specialist that matches the actual risk:
-  - `security-sentinel` for security, auth, privacy, and exploit risk
-  - `data-integrity-guardian` for migrations, backfills, persistent data safety, constraints, transaction boundaries, and production data transformation risk
-  - `deployment-verification-agent` for rollout checklists, rollback planning, and launch verification
-  - `performance-oracle` for capacity, latency, and scaling concerns
+- Use the focus that matches the actual risk:
+  - *Security review* for security, auth, privacy, and exploit risk
+  - *Data integrity review* for migrations, backfills, persistent data safety, constraints, transaction boundaries, and production data transformation risk
+  - *Deployment verification* for rollout checklists, rollback planning, and launch verification
+  - *Performance analysis* for capacity, latency, and scaling concerns
 
-**Agent Prompt Shape:**
+**Subagent Prompt Shape:**
 
 For each selected section, pass:
 - A short plan summary

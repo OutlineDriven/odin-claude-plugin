@@ -287,4 +287,4 @@ When opted in:
 - **vs `review` / `audit-project`** — those judge existing code; `plan` designs the change ahead of it.
 - **vs harness Plan mode** — the durable artifact is opt-in precisely so it does not collide with the harness's own ephemeral Plan workflow.
 
-Adapted from EveryInc/compound-engineering-plugin (MIT).
+

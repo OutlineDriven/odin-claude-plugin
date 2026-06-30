@@ -211,6 +211,66 @@ Three existing ODIN skills gained opt-in capabilities grafted from `compound-eng
 | `plan/SKILL.md` (artifact + grounding addition only) | https://github.com/EveryInc/compound-engineering-plugin `ce-plan` | MIT | © 2025 Every | Opt-in `docs/plans/<slug>.md` implementation-unit artifact + opt-in STRATEGY.md grounding grafted onto the ODIN read-only planner; base is ODIN-original. |
 | `optimize/SKILL.md` (persistence + stopping-rules addition only) | https://github.com/EveryInc/compound-engineering-plugin `ce-optimize` | MIT | © 2025 Every | Disk-first append-only experiment log + crash-recovery markers + stopping rules grafted onto the ODIN benchmark loop; base is ODIN-original. |
 
+## EveryInc compound-engineering port (CE-to-ODIN adaptation)
+
+Skills adapted from the `compound-engineering-plugin` (https://github.com/EveryInc/compound-engineering-plugin). compound-engineering-plugin is MIT (© 2025 Every). ODIN adaptations — ODIN voice, CE branding removed, cross-skill references rewritten, temp paths and artifact identifiers ODIN-branded — are made under the same MIT terms.
+
+| Path under `/home/alpha/.claude/claude/skills/` | Upstream origin | License | Copyright | Provenance |
+| ----------------------------------------------- | --------------- | ------- | --------- | ---------- |
+| `brainstorm/SKILL.md` | `ce-brainstorm` | MIT | © 2025 Every | ODIN voice; CE branding removed; repo-profiling and visual-probe agents adapted. |
+| `brainstorm/references/` | `ce-brainstorm/references/` | MIT | © 2025 Every | Reference docs adapted to ODIN voice. |
+| `brainstorm/scripts/` | `ce-brainstorm/scripts/` | MIT | © 2025 Every | Helper scripts adapted; temp paths ODIN-branded. |
+| `pov/SKILL.md` | `ce-pov` | MIT | © 2025 Every | ODIN voice; CE branding removed; technology-decision verdict workflow adapted. |
+| `pov/references/` | `ce-pov/references/` | MIT | © 2025 Every | Reference docs adapted to ODIN voice. |
+| `work/SKILL.md` | `ce-work` | MIT | © 2025 Every | ODIN voice; CE branding removed; plan-execution engine adapted. |
+| `work/references/` | `ce-work/references/` | MIT | © 2025 Every | Reference docs adapted to ODIN voice. |
+| `worktree/SKILL.md` | `ce-worktree` | MIT | © 2025 Every | ODIN voice; harness-native EnterWorktree semantics. |
+| `commit/SKILL.md` | `ce-commit` | MIT | © 2025 Every | ODIN voice; commit-message generation only. |
+| `commit-push-pr/SKILL.md` | `ce-commit-push-pr` | MIT | © 2025 Every | ODIN voice; branch/PR description flow adapted. |
+| `commit-push-pr/references/` | `ce-commit-push-pr/references/` | MIT | © 2025 Every | Reference docs adapted to ODIN voice. |
+| `resolve-pr-feedback/SKILL.md` | `ce-resolve-pr-feedback` | MIT | © 2025 Every | ODIN voice; judge/fix/reply/resolve loop adapted. |
+| `resolve-pr-feedback/references/` | `ce-resolve-pr-feedback/references/` | MIT | © 2025 Every | Reference docs adapted to ODIN voice. |
+| `resolve-pr-feedback/scripts/` | `ce-resolve-pr-feedback/scripts/` | MIT | © 2025 Every | GraphQL scripts adapted; executable modes set. |
+| `compound/SKILL.md` | `ce-compound` | MIT | © 2025 Every | Minimal schema-only port; session-history agents dropped; refresh workflow in autolearn. |
+| `compound/references/` | `ce-compound/references/` | MIT | © 2025 Every | Schema and concept-entry docs adapted. |
+| `compound/assets/` | `ce-compound/assets/` | MIT | © 2025 Every | Solution template adapted. |
+| `compound/scripts/` | `ce-compound/scripts/` | MIT | © 2025 Every | Frontmatter validator adapted. |
+| `reviews/references/personas/learnings-researcher.md` | `ce-code-review/references/personas/learnings-researcher.md` | MIT | © 2025 Every | Persona adapted to ODIN review contract. |
+| `reviews/references/personas/previous-comments-reviewer.md` | `ce-code-review/references/personas/previous-comments-reviewer.md` | MIT | © 2025 Every | Persona adapted to ODIN review contract. |
+| `reviews/references/personas/data-migration-reviewer.md` | `ce-code-review/references/personas/data-migration-reviewer.md` | MIT | © 2025 Every | Persona adapted to ODIN review contract. |
+| `reviews/references/personas/reliability-reviewer.md` | `ce-code-review/references/personas/reliability-reviewer.md` | MIT | © 2025 Every | Persona adapted to ODIN review contract. |
+| `reviews/references/personas/deployment-verification.md` | `ce-code-review/references/personas/deployment-verification-agent.md` | MIT | © 2025 Every | Persona adapted to ODIN review contract. |
+| `reviews/references/personas/project-standards.md` | `ce-code-review/references/personas/project-standards-reviewer.md` | MIT | © 2025 Every | Persona adapted to ODIN review contract. |
+| `reviews/references/action-class-rubric.md` | `ce-code-review/references/action-class-rubric.md` | MIT | © 2025 Every | Routing criteria adapted. |
+| `reviews/references/diff-scope.md` | `ce-code-review/references/diff-scope.md` | MIT | © 2025 Every | Scope rules adapted. |
+| `reviews/references/findings-schema.json` | `ce-code-review/references/findings-schema.json` | MIT | © 2025 Every | JSON schema adapted. |
+| `reviews/references/review-output-template.md` | `ce-code-review/references/review-output-template.md` | MIT | © 2025 Every | Output template adapted. |
+| `reviews/references/subagent-template.md` | `ce-code-review/references/subagent-template.md` | MIT | © 2025 Every | Subagent template adapted. |
+| `reviews/references/validator-template.md` | `ce-code-review/references/validator-template.md` | MIT | © 2025 Every | Validator template adapted. |
+| `debug/references/anti-patterns.md` | `ce-debug/references/` | MIT | © 2025 Every | Anti-patterns adapted to ODIN voice. |
+| `debug/references/defense-in-depth.md` | `ce-debug/references/` | MIT | © 2025 Every | Defense-in-depth adapted to ODIN voice. |
+| `debug/references/investigation-techniques.md` | `ce-debug/references/` | MIT | © 2025 Every | Investigation techniques adapted to ODIN voice. |
+| `doc-review/references/bulk-preview.md` | `ce-doc-review/references/` | MIT | © 2025 Every | Bulk-preview adapted to ODIN voice. |
+| `doc-review/references/open-questions-defer.md` | `ce-doc-review/references/` | MIT | © 2025 Every | Open-questions deferral adapted. |
+| `doc-review/references/walkthrough.md` | `ce-doc-review/references/` | MIT | © 2025 Every | Walkthrough adapted to ODIN voice. |
+| `doc-review/references/synthesis-and-presentation.md` | `ce-doc-review/references/` | MIT | © 2025 Every | Synthesis adapted to ODIN voice. |
+| `doc-review/references/findings-schema.json` | `ce-doc-review/references/` | MIT | © 2025 Every | JSON schema adapted. |
+| `doc-review/references/review-output-template.md` | `ce-doc-review/references/` | MIT | © 2025 Every | Output template adapted. |
+| `doc-review/references/subagent-template.md` | `ce-doc-review/references/` | MIT | © 2025 Every | Subagent template adapted. |
+| `ideate/references/divergent-ideation.md` | `ce-ideate/references/` | MIT | © 2025 Every | Divergent-ideation matrix adapted. |
+| `ideate/references/ideation-sections.md` | `ce-ideate/references/` | MIT | © 2025 Every | Ideation sections adapted. |
+| `ideate/references/post-ideation-workflow.md` | `ce-ideate/references/` | MIT | © 2025 Every | Post-ideation workflow adapted. |
+| `ideate/references/web-research-cache.md` | `ce-ideate/references/` | MIT | © 2025 Every | Web-research cache adapted. |
+| `optimize/references/experiment-mode.md` | `ce-optimize/references/` | MIT | © 2025 Every | Metric-driven experiment heuristics adapted. |
+| `plans/references/approach-altitude.md` | `ce-plan/references/` | MIT | © 2025 Every | Approach-altitude adapted. |
+| `plans/references/deepening-workflow.md` | `ce-plan/references/` | MIT | © 2025 Every | Deepening workflow adapted. |
+| `plans/references/plan-handoff.md` | `ce-plan/references/` | MIT | © 2025 Every | Plan handoff adapted. |
+| `plans/references/plan-sections.md` | `ce-plan/references/` | MIT | © 2025 Every | Plan sections adapted. |
+| `plans/references/synthesis-summary.md` | `ce-plan/references/` | MIT | © 2025 Every | Synthesis summary adapted. |
+| `plans/references/universal-planning.md` | `ce-plan/references/` | MIT | © 2025 Every | Universal planning adapted. |
+| `simplify/references/quality.md` | `ce-simplify-code/references/` | MIT | © 2025 Every | Quality checks adapted. |
+| `simplify/references/reuse.md` | `ce-simplify-code/references/` | MIT | © 2025 Every | Reuse checks adapted. |
+
 ## Full upstream license text (MIT)
 
 ```
