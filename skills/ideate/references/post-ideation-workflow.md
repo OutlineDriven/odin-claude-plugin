@@ -80,9 +80,8 @@ Hand the survivors to `askme` to clarify intent on the chosen direction(s) befor
 Offer three options:
 
 1. **Open in browser** (if HTML) / **View markdown** (if markdown) — open or print the deliverable.
-2. **Choose a direction** — pick a survivor and hand off to `askme` for intent-clarification before planning. Asks which idea first.
-3. **Discuss or refine the ideas first** — stay here to think across the set before committing: adjust or interrogate one idea, compare several, or combine/merge them. Asks what you want to work on.
-4. **Done — keep the file and stop.**
+2. **Discuss or refine the ideas first** — stay here to think across the set before committing: adjust or interrogate one idea, compare several, or combine/merge them. Asks what you want to work on. When the user is ready to commit, route to `askme` for intent-clarification before planning.
+3. **Done — keep the file and stop.**
 
 **Adjacent nudge:** "Don't want it kept? Say 'discard' and the agent deletes the file." Handled via free text; it is create-only and never deletes a resumed or pre-existing doc.
 

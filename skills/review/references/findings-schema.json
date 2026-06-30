@@ -68,6 +68,11 @@
           "evidence": {
             "type": "string",
             "description": "path:line citation or a one-line repro"
+          },
+          "pre_existing": {
+            "type": "boolean",
+            "description": "true if the issue exists in unchanged code unrelated to this diff. Reported separately; does not count toward the review verdict.",
+            "default": false
           }
         }
       }

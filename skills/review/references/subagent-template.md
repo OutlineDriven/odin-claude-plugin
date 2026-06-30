@@ -52,7 +52,7 @@ A finding with no nameable reachable impact is P3. "Looks wrong" is not P0.
 
 **Propose a `suggested-route` whenever any defensible code change is reachable from the diff and surrounding code.** Imperfect information is not grounds for omission — propose the most defensible default and name the assumption. Omit only when there is genuinely no code-level change to propose.
 
-If you find no issues, return an empty findings array. Still report residual risks and testing gaps if applicable.
+If you find no issues, return an empty findings array. Still report residual risks and testing gaps as prose lines after the JSON block -- the orchestrator compiles them into the final Coverage section.
 </output-contract>
 
 <review-context>

@@ -42,48 +42,55 @@ The fix belongs at the origin (UserRepo.create should throw on duplicate key), n
 **When manual tracing stalls**, add instrumentation:
 
 ```
-// Before the problematic operation
+// Before the problematic operation -- log shape, not raw values
 const stack = new Error().stack;
-console.error('DEBUG [operation]:', { value, cwd: process.cwd(), stack });
+console.error('DEBUG [operation]:', {
+  valueType: typeof value,
+  valueLen: typeof value === 'string' ? value.length : undefined,
+  isNull: value == null,
+  cwd: process.cwd(),
+  stack,
+});
 ```
 
-Use `console.error()` in tests -- logger output may be suppressed. Log before the dangerous operation, not after it fails.
+Use `console.error()` in tests -- logger output may be suppressed. Log before the dangerous operation, not after it fails. Redact secrets and PII; log shape, type, and length rather than raw content.
 
 ---
 
 ## Multi-Component Boundary Instrumentation
 
-Root-cause tracing walks one call chain. When a bug crosses subsystems -- CI to build to signing, API to service to database, frontend to API to background worker -- the failure localizes poorly to a single chain. Instead, instrument every component boundary in one run, capture what enters and what exits each, and let the evidence point to the failing layer.
+Root-cause tracing walks one call chain. When a bug crosses subsystems -- CI to build to signing, API to service to database, frontend to API to background worker -- the failure localizes poorly to a single chain. Instead, capture a tagged state snapshot at each component boundary in one run, and let the evidence point to the failing layer.
 
 **Shape:**
 
 1. List the component boundaries data crosses from trigger to observed symptom.
-2. At each boundary, log what enters and what exits -- include the values, relevant environment, and a short tag identifying the boundary.
+2. At each boundary, capture presence, type, length, and a short tag identifying the boundary. Redact secrets and PII; log structural shape, not raw content.
 3. Run the scenario once.
-4. Read the log linearly, comparing each "exits" value to the next "enters" value.
-5. The boundary where data first stops matching expectation is the failing layer.
+4. Read the log linearly, comparing each boundary's captured state to the next.
+5. The boundary where state first stops matching expectation is the failing layer.
 
 **Worked example (app signing on CI):**
 
 ```bash
-# Layer 1: workflow env
-echo "=== workflow env ==="
-echo "IDENTITY: ${IDENTITY:+SET}${IDENTITY:-UNSET}"
+# Layer 1: workflow env -- entry
+echo "=== [L1:workflow] entry ==="
+echo "IDENTITY: $( [ -n "${IDENTITY+x}" ] && echo SET || echo UNSET )"
 
-# Layer 2: build script env
-echo "=== build script env ==="
-echo "IDENTITY: ${IDENTITY:+SET}${IDENTITY:-UNSET}"
+# Layer 2: build script env -- entry
+echo "=== [L2:build-script] entry ==="
+echo "IDENTITY: $( [ -n "${IDENTITY+x}" ] && echo SET || echo UNSET )"
 
-# Layer 3: signing stage keychain state
-echo "=== keychain ==="
+# Layer 3: signing stage keychain state -- entry
+echo "=== [L3:keychain] entry ==="
 security list-keychains
 security find-identity -v
 
-# Layer 4: the actual signing call
+# Layer 4: the actual signing call -- entry
+echo "=== [L4:codesign] entry ==="
 codesign --sign "$IDENTITY" --verbose=4 "$APP"
 ```
 
-One run, and the log shows precisely which layer drops the value -- secrets to workflow pass, workflow to build fails, so focus investigation on the workflow-to-build-script inheritance, not on signing.
+One run, and the log shows precisely which layer drops the value -- L1 shows SET, L2 shows UNSET, so focus investigation on the workflow-to-build-script inheritance, not on signing. Never log the raw value of a secret; log only its presence.
 
 **When this beats backward tracing:** When the symptom is far from the trigger (many components apart), when components are owned by different systems (CI vs app code), when the "call stack" is conceptual rather than literal (message bus, HTTP, process boundaries). Backward tracing still applies within each layer once the failing layer is identified.
 
@@ -327,14 +334,14 @@ Many bugs live at the boundary between an application and the system it runs on 
 
 **Filesystem.**
 
-- Existence and permissions: `ls -la <path>` -- does the file exist, is it readable/writable by the running user?
+- Existence and permissions: `eza -la <path>` -- does the file exist, is it readable/writable by the running user?
 - Case sensitivity: bugs that only appear on Linux (not macOS) are often case mismatches
 - Open handles: `lsof <path>` or `lsof -p <pid>` -- is something still holding the file, preventing write/unlink?
 - Disk space: `df -h` -- out-of-space errors sometimes surface as cryptic write failures elsewhere
 - File watching / inotify limits: EMFILE or "too many open files" often means an inotify/FD limit, not a leak in code
 - Path separators and encoding: Windows-style paths in Unix code, or UTF-8 paths in a non-UTF-8 locale
 
-**Processes and signals.** Check whether the process is actually the version thought to be running (`ps aux | grep`, cross-reference pid to build time). Zombies, orphaned workers, and crashed-then-restarted-with-old-code processes all masquerade as code bugs.
+**Processes and signals.** Check whether the process is actually the version thought to be running (`procs | grep`, cross-reference pid to build time). Zombies, orphaned workers, and crashed-then-restarted-with-old-code processes all masquerade as code bugs.
 
 ---
 

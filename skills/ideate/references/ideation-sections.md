@@ -1,8 +1,8 @@
 # Ideation Sections
 
-This is the section contract for the ideation artifact — it describes *what* a persisted ideation document contains. For the HTML rendering contract, see `references/html-rendering.md`. The same content renders in either format; only presentation differs.
+This is the section contract for the ideation artifact — it describes *what* a persisted ideation document contains. It defines the markdown structure that `docs/ideation/<slug>.md` follows.
 
-Load this file at Phase 5 save time. When `format:html` is active, also load `references/html-rendering.md`.
+Load this file at Phase 5 save time.
 
 ## What the artifact contains
 

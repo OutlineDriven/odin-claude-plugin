@@ -1,6 +1,6 @@
 ---
 name: simplify
-description: Simplify a diff with a compress-op review pass along reuse, quality, and efficiency axes. Use when the user says "simplify this diff", "tighten up", or "compress these changes".
+description: Simplify a diff with a compress-op review pass along reuse, quality, and efficiency axes. Includes stdlib-reimplementation detection, dead-code/unused-import analysis, and safety-check preservation guards. Use when the user says "simplify this diff", "tighten up", or "compress these changes".
 metadata:
   short-description: Three-axis compress pass on a diff
 ---
@@ -12,8 +12,8 @@ A deliberate `compress` op invoked on a specific change-set. Decompose simplific
 The three axes map directly onto ODIN's rejection grounds. **Reuse axis** primarily detects **Graft** (new code grafted where a utility already exists). **Quality axis** primarily detects **Excess** (unnecessary surface — params, state, comments-of-what) and **Sprawl** (structure without functional cause — wrappers, ladders, copy-paste variants). **Efficiency axis** primarily detects **Excess** (work that need not happen) and **Sprawl** (structure that bloats hot paths). The op-cell is `compress` and the patch rule is Minimal Sufficient Change: behavior is preserved, entropy is reduced.
 
 **Axis prompts (verbatim, copy-pasteable):**
-- `references/reuse.md` — Agent 1 prompt, three rules, Graft focus
-- `references/quality.md` — Agent 2 prompt, eight patterns, Excess + Sprawl
+- `references/reuse.md` — Agent 1 prompt, four rules, Graft focus
+- `references/quality.md` — Agent 2 prompt, nine patterns, Excess + Sprawl
 - `references/efficiency.md` — Agent 3 prompt, seven patterns, Excess + Sprawl
 - `references/orchestration.md` — single-message dispatch recipe, composition, Reviewer audit, fix-sequencing
 

@@ -1,8 +1,8 @@
 # Review Output Template
 
-This is the **canonical skeleton** for deep-mode review output — copy the section structure; the example shows one good rendering, not the only permitted layout. Shape each finding for the reader's next action. Findings are grouped by severity, not by persona.
+This is the **canonical skeleton** for deep-mode review output -- copy the section structure; the example shows one good rendering, not the only permitted layout. Shape each finding for the reader's next action. Findings are grouped by severity, not by persona.
 
-**Hard constraints (non-negotiable):** ASCII-safe only — no box-drawing or per-item horizontal-rule separators, no Unicode arrows or middot; use `->`. Don't paste file contents or re-print the diff — cite `file:line`. Stable `#` numbering, reused wherever a finding reappears. The Verdict and Actionable list are present, last, and self-sufficient.
+**Hard constraints (non-negotiable):** ASCII-safe only -- no box-drawing or per-item horizontal-rule separators, no Unicode arrows, middot, or em dashes; use `->` for arrows, `--` for dashes. Don't paste file contents or re-print the diff -- cite `file:line`. Stable `#` numbering, reused wherever a finding reappears. The Verdict blockquote is always last and self-sufficient. The Actionable Findings section is conditional (include when the queue is non-empty) and always precedes Pre-existing and Coverage.
 
 **If you use a markdown table, escape literal pipe characters in cells.** Any `|` inside a finding title, issue description, code snippet, or example must be written as `\|` so column boundaries are determined only by unescaped pipes.
 
@@ -25,7 +25,7 @@ This is the **canonical skeleton** for deep-mode review output — copy the sect
 |---|------|-------|---------|------------|
 | 1 | `orders_controller.rb:42` | User-supplied ID in lookup, no ownership check | security | high |
 
-- **#1** — `find(params[:id])` on the export path has no `where(account: current_account)` scope, so any authenticated user can export another account's orders. Scope the lookup to the current account.
+- **#1** -- `find(params[:id])` on the export path has no `where(account: current_account)` scope, so any authenticated user can export another account's orders. Scope the lookup to the current account.
 
 ### P1 -- High
 
@@ -33,7 +33,7 @@ This is the **canonical skeleton** for deep-mode review output — copy the sect
 |---|------|-------|---------|------------|
 | 2 | `export_service.rb:87` | Loads all orders into memory -- unbounded | performance | high |
 
-- **#2** — `Order.where(...).to_a` materializes the full result set; a large account OOMs the worker. Stream with `find_each` or paginate.
+- **#2** -- `Order.where(...).to_a` materializes the full result set; a large account OOMs the worker. Stream with `find_each` or paginate.
 
 ### P2 -- Moderate
 
@@ -51,7 +51,7 @@ This is the **canonical skeleton** for deep-mode review output — copy the sect
 
 | # | File | Issue | Route | Notes |
 |---|------|-------|-------|-------|
-| 1 | `orders_controller.rb:42` | Ownership check missing on export lookup | `gated -> review-fix-grill-loop` | `suggested-route` present — caller decides whether to apply |
+| 1 | `orders_controller.rb:42` | Ownership check missing on export lookup | `gated -> review-fix-grill-loop` | `suggested-route` present -- caller decides whether to apply |
 | 2 | `export_service.rb:87` | Unbounded memory on export | `safe -> fix` | Mechanical: add `find_each` |
 
 ### Pre-existing Issues
@@ -85,7 +85,7 @@ This is the **canonical skeleton** for deep-mode review output — copy the sect
 - **Persona column** shows which persona(s) flagged the issue. Multiple personas = cross-persona agreement.
 - **Confidence column** shows `high`, `med`, or `low`.
 - **No Route column in per-severity tables** -- the route appears only in the Actionable Findings table.
-- **Detail line (per finding, as needed)** -- keep the scannable line short; put the why-it-matters + fix in a per-finding detail line keyed by stable `#`: `- **#N** — <why it matters + what response it needs>`.
+- **Detail line (per finding, as needed)** -- keep the scannable line short; put the why-it-matters + fix in a per-finding detail line keyed by stable `#`: `- **#N** -- <why it matters + what response it needs>`.
 - **Actionable Findings section** -- include when the actionable queue is non-empty.
 - **Pre-existing section** -- separate table, no confidence column.
 - **Coverage section** -- suppressed count, residual risks, testing gaps.

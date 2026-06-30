@@ -13,7 +13,7 @@ You receive a diff at the end of this message. Read it. Then search the rest
 of the repository for existing utilities, helpers, or shared modules that the
 new code in the diff could have used instead.
 
-THREE RULES — apply each, report what you find:
+FOUR RULES — apply each, report what you find:
 
 1. REPLACE: For each new function in the diff, search the codebase for an
    existing function with substantively equivalent behavior. If one exists,
@@ -29,11 +29,23 @@ THREE RULES — apply each, report what you find:
    existing utility (in-repo or stdlib) that already does it. If one exists,
    the inline logic is Graft.
 
+4. STDLIB-REIMPLEMENT: For each piece of inline logic or new function in
+   the diff that reimplements a language standard-library or runtime
+   primitive — a hand-written routine the built-in stdlib/runtime API
+   already provides (e.g., a manual array-dedup loop where the language
+   ships a set-based idiom, a hand-rolled deep-clone/deep-merge where
+   the runtime has one) — flag it. Suggest the built-in only when it is
+   behavior-equivalent for the inputs actually in play. Do not propose
+   swaps that change behavior or UX: native UI controls, locale-dependent
+   formatting, sort-stability assumptions, and serialization edge cases
+   differ from their hand-rolled versions and are out of scope for a
+   behavior-preserving pass.
+
 SEARCH SCOPE — actually search, do not speculate:
 - `utils/`, `helpers/`, `lib/`, `shared/`, `common/`, `internal/` directories
 - Adjacent files in the same module as each diff hunk
 - Top-level barrel exports (`index.ts`, `mod.rs`, `__init__.py`)
-- Language stdlib for the common operations in rule 3
+- Language stdlib for the common operations in rule 3 and stdlib/runtime primitives in rule 4
 
 TOOL ORDER (ODIN `fd-First [MANDATORY]`):
 1. `fd -e <ext> -E <noise>` to discover candidate files. Validate count
@@ -50,7 +62,7 @@ OUTPUT — JSON-style, one finding per object, nothing else:
 findings:
   - file: <path>
     line: <number>
-    kind: replace | duplicate | inline-could-use-utility
+    kind: replace | duplicate | inline-could-use-utility | stdlib-reimplement
     existing-utility: <path>:<symbol>     # the thing the new code should use
     suggested-replacement: <one-line description of the fix>
     confidence: high | med | low
@@ -59,7 +71,7 @@ HARD LIMITS:
 - You do not edit files. You produce findings only.
 - Do not pad with low-confidence findings. Empty findings list is a valid
   output; the orchestrator handles it.
-- Do not flag style or naming. Only the three rules above.
+- Do not flag style or naming. Only the four rules above.
 - Do not claim an existing utility without an exact `path:line` citation.
 
 ---
