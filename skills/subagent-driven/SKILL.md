@@ -112,9 +112,7 @@ the global constraints. Nothing else.
 
 The loop's gate is the local `task-reviewer-prompt.md` dispatched to a fresh
 `general-purpose` subagent. No hard dependency on any external named agent — the
-skill works standalone. If the compound-engineering plugin happens to be
-installed, `ce-adversarial-reviewer` is an optional drop-in for the audit role;
-the loop does not require it and never assumes it.
+skill works standalone.
 
 ## Implementer Statuses
 

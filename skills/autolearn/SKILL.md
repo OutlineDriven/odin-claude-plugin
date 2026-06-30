@@ -31,7 +31,7 @@ Fire automatically on a trigger phrase or after a verified non-trivial fix. The 
 
 ## Preconditions — then the reject-by-default gate
 
-A doc is earned, not assumed. First the ce preconditions, then the hermes filter.
+A doc is earned, not assumed. First the preconditions, then the reject-by-default gate.
 
 **Preconditions** (all three):
 1. The problem is solved — not in progress.

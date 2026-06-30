@@ -13,7 +13,7 @@ metadata:
 
 ## When to Apply
 
-- The user hands an execution-ready task and wants it taken from plan to shipped without step-by-step approval: "autopilot", "lfg", "ship it end to end", "take it from plan to PR".
+- The user hands an execution-ready task and wants it taken from plan to shipped without step-by-step approval: "autopilot", "ship it end to end", "take it from plan to PR".
 - A concrete change is specified — enough for `plan` to produce implementation units. The pipeline executes; it does not discover what to build.
 
 ## When NOT to Apply
