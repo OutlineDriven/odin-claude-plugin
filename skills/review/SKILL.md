@@ -11,8 +11,6 @@ You are an expert code reviewer. Review the current state of the codebase on the
 
 `Op: extend` — this skill adds an opt-in deep multi-persona mode on top of the single-pass review below. The single pass is the default and the floor; deep mode is a strict superset of it.
 
-Adapted from EveryInc/compound-engineering-plugin (MIT).
-
 ## Modes and routing
 
 Strip `mode:` tokens from the invocation before treating the remainder as scope.
@@ -136,7 +134,7 @@ NOT:
 
 ## Personas (the lenses)
 
-Seven read-only persona agents, each a lens with a primary failure class. Dispatch the ones the diff warrants — `correctness` and `adversarial` are always-on; the rest are gated by the diff surface (skip `performance` on a docs-only diff, skip `api-contract` when no exported surface changed).
+Thirteen read-only persona agents, each a lens with a primary failure class. Dispatch the ones the diff warrants — `correctness` and `adversarial` are always-on; the rest are gated by the diff surface (skip `performance` on a docs-only diff, skip `api-contract` when no exported surface changed).
 
 | Persona | Lens | Prompt |
 |---------|------|--------|
@@ -147,8 +145,22 @@ Seven read-only persona agents, each a lens with a primary failure class. Dispat
 | performance | complexity, allocation, hot-path cost on expected load | `references/personas/performance.md` |
 | api-contract | exported surface, signatures, back-compat | `references/personas/api-contract.md` |
 | adversarial | break-it: edge cases, races, hostile input, assumptions | `references/personas/adversarial.md` |
+| learnings-researcher | prior solutions and knowledge gaps | `references/personas/learnings-researcher.md` |
+| previous-comments-reviewer | unresolved review threads and past feedback | `references/personas/previous-comments-reviewer.md` |
+| data-migration-reviewer | schema changes, data integrity, migration safety | `references/personas/data-migration-reviewer.md` |
+| reliability-reviewer | error handling, resilience, failure modes | `references/personas/reliability-reviewer.md` |
+| deployment-verification | deploy readiness, rollback safety, env config | `references/personas/deployment-verification.md` |
+| project-standards | adherence to repo conventions, lint rules, style guides | `references/personas/project-standards.md` |
 
 The shared output schema, severity rubric, action-class rubric, tool order, and hard limits live in `references/personas/_contract.md`. Read it once; prepend it to every persona dispatch. The security persona's forcing path globs (the authoritative set the escalation threshold defers to) are listed in `references/personas/security.md`.
+
+Additional reference docs:
+- `references/action-class-rubric.md` — routing decision criteria for each finding class.
+- `references/diff-scope.md` — rules for what is in-scope vs out-of-scope in a review.
+- `references/findings-schema.json` — JSON schema for structured finding output.
+- `references/review-output-template.md` — template for the final review report.
+- `references/subagent-template.md` — template for dispatching subagent reviewers.
+- `references/validator-template.md` — template for validation subagents.
 
 ## Workflow
 

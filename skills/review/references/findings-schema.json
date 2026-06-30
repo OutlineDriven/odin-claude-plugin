@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Code Review Findings",
+  "description": "Structured output schema for review deep-mode personas",
+  "type": "object",
+  "required": ["findings"],
+  "properties": {
+    "findings": {
+      "type": "array",
+      "description": "List of code review findings. Empty array if no issues found.",
+      "items": {
+        "type": "object",
+        "required": [
+          "file",
+          "line",
+          "persona",
+          "title",
+          "severity",
+          "behavioral-impact",
+          "confidence",
+          "action-class",
+          "suggested-route",
+          "evidence"
+        ],
+        "properties": {
+          "file": {
+            "type": "string",
+            "description": "Relative file path from repository root"
+          },
+          "line": {
+            "type": "integer",
+            "description": "Primary line number of the issue",
+            "minimum": 1
+          },
+          "persona": {
+            "type": "string",
+            "description": "Persona name that produced this finding"
+          },
+          "title": {
+            "type": "string",
+            "description": "Short, specific issue title. 10 words or fewer.",
+            "maxLength": 100
+          },
+          "severity": {
+            "type": "string",
+            "enum": ["P0", "P1", "P2", "P3"],
+            "description": "Issue severity by observable behavioral impact"
+          },
+          "behavioral-impact": {
+            "type": "string",
+            "description": "The observable failure this causes, or 'none -- advisory'"
+          },
+          "confidence": {
+            "type": "string",
+            "enum": ["high", "med", "low"],
+            "description": "Confidence level. high = can cite the failing input or path. med = strong structural evidence, no repro. low = suspicion only."
+          },
+          "action-class": {
+            "type": "string",
+            "enum": ["safe", "gated", "manual", "advisory"],
+            "description": "Routing hint: safe = fix unattended; gated = needs verified batches; manual = needs design decision; advisory = report-only."
+          },
+          "suggested-route": {
+            "type": "string",
+            "enum": ["fix", "review-fix-grill-loop", "none"],
+            "description": "Where the fix belongs"
+          },
+          "evidence": {
+            "type": "string",
+            "description": "path:line citation or a one-line repro"
+          }
+        }
+      }
+    }
+  },
+
+  "_meta": {
+    "confidence_levels": {
+      "high": "Can cite the failing input or path. Report.",
+      "med": "Strong structural evidence, no repro. Report unless below the confidence gate threshold.",
+      "low": "Suspicion only. Drop unless corroborated by another persona."
+    },
+    "severity_definitions": {
+      "P0": "Reachable now by ordinary or untrusted input: data loss, security breach, crash on a normal path, regression in a shipped contract. Ship-blocker.",
+      "P1": "Wrong output or failure on a plausible input; resource exhaustion under expected load; a contract break behind a flag or edge. Fix before merge.",
+      "P2": "Degraded behavior on an uncommon path; a changed branch with no test that can break silently; maintainability debt with a named future-defect path. Fix or file.",
+      "P3": "No behavioral impact: style, naming, micro-optimization with no measured win. Advisory."
+    },
+    "action_classes": {
+      "safe": "Mechanical, behavior-preserving, single-site, unambiguous fix. Route to fix.",
+      "gated": "Clear fix but touches a contract or multiple sites. Route to review-fix-grill-loop.",
+      "manual": "Needs a human design decision. Surface as a question.",
+      "advisory": "Opinion or nit. Recording it is the action."
+    }
+  }
+}
