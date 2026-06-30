@@ -13,8 +13,6 @@ Rigor lives in the questions, not the headings. Section names are plain English;
 
 `Op:` of every run is `extend`: the anchor is a load-bearing capability added or sharpened, never a refactor of existing prose.
 
-Adapted from EveryInc/compound-engineering-plugin (MIT).
-
 ## Auto-invoke
 
 <auto_invoke>

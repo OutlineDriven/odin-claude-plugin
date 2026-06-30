@@ -102,7 +102,7 @@ See [examples](references/examples.md) for brief TDD cycle patterns per language
 
 ---
 
-## Reference materials (mattpocock/skills tdd fold-in)
+## Reference materials
 
 - `references/mocking.md` — when to mock vs use real implementations; trade-offs.
 - `references/interface-design.md` — interface shape and depth in TDD context.

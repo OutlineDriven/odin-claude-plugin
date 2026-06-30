@@ -11,8 +11,6 @@ metadata:
 
 `Op:` of every run is `extend` — it adds an evaluation artifact (findings, optionally one record file), never a change to the reviewed doc. There is no `correct` path here: the skill is read-only on its subject, so it cannot restore an invariant *in* it — restoring the document is a separate writer's job.
 
-Adapted from EveryInc/compound-engineering-plugin (MIT).
-
 ## Auto-invoke
 
 <auto_invoke>

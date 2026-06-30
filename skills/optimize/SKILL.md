@@ -320,5 +320,3 @@ or a `Justfile` / `Makefile` target named `bench-guard`. The before-benchmark JS
 
 - **simplify** — behavior-preserving entropy reduction on a diff; runs no benchmarks; explicitly forbids timing/memory-affecting speedups. Use simplify to compress code structure; use `/optimize` when runtime performance is the target.
 - **refactor-break-compat** — contract-breaking modernization. `/optimize` never breaks public API contracts (except the disclosed approximation path, which requires explicit user confirmation).
-
-Adapted from EveryInc/compound-engineering-plugin (MIT).

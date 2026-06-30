@@ -9,8 +9,6 @@ metadata:
 
 `autopilot` runs a build request from plan to shipped without re-prompting at every step. It is a **chain**: each phase invokes an existing ODIN skill via the Skill tool and gates on the result before the next phase begins. It owns sequencing, the phase gates, and the terminal report — nothing else. It writes no code surface of its own; the chained skills do.
 
-Adapted from EveryInc/compound-engineering-plugin (MIT).
-
 `Op: extend` — a new orchestration capability over skills that already exist. The entropy it adds (sequencing + gates) is load-bearing for the hands-off contract; the work itself is the chained skills', not autopilot's.
 
 ## When to Apply

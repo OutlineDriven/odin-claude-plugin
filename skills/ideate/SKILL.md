@@ -11,8 +11,6 @@ metadata:
 
 `Op:` of an ideate run is `extend` — a new ideation doc is a load-bearing capability added to the repo's decision record.
 
-Adapted from EveryInc/compound-engineering-plugin (MIT).
-
 ## Auto-invoke
 
 <auto_invoke>

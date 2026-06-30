@@ -177,5 +177,3 @@ Stage only the surfaces autolearn wrote or edited — a solution doc, `CONCEPTS.
 ## Operating surface
 
 `autolearn` writes exactly two in-repo surfaces: the operating repo's `docs/solutions/` and the repo-root `CONCEPTS.md`. It owns both — one writer per surface, no second skill edits them. All auto-memory writes are delegated to `memory-update`. No writes to undefined or doubly-owned locations.
-
-Adapted from EveryInc/compound-engineering-plugin (MIT).
