@@ -21,7 +21,7 @@ metadata:
 - **No concrete task yet** (vague goal, greenfield discovery) → `askme` / `strategy` / `ideate` upstream first, manually. autopilot never chains those; arriving with an execution-ready task is the entry contract.
 - **A single execution step against an existing plan** → `proceed`. autopilot wraps `proceed` with the rest of the arc; if that arc is unwanted, call `proceed` directly.
 - **The review→fix loop on a diff until clean** → `review-fix-grill-loop` (multi-iteration, medium floor). autopilot's review→fix is a single bounded pass, not a loop.
-- **Ship existing commits only** → `atomic-commit-and-push`. **Fix failing CI only** → `gh-fix-ci`. **Read-only review** → `review`.
+- **Ship existing commits only** → `commit-push`. **Fix failing CI only** → `gh-fix-ci`. **Read-only review** → `review`.
 
 ## Inputs and Flags
 
@@ -41,7 +41,7 @@ Each row is one phase: the named skill is invoked, not reimplemented. This is th
 | 3 | Simplify | `simplify` | compress the new diff |
 | 4 | Review | `review` | read-only assessment |
 | 5 | Apply fixes | `fix` | **conditional** — runs only when G4 fails; it is the review gate's autofix arm, not an unconditional step |
-| 6 | Commit + push | `atomic-commit-and-push` | push half skipped local-only |
+| 6 | Commit + push | `commit-push` | push half skipped local-only |
 | 7 | CI | `gh-fix-ci` | skipped local-only |
 | 8 | Report | — | always, on success or HALT |
 
@@ -59,7 +59,7 @@ The sequence and its halt mechanics; exact pass-criteria per gate are in the Val
 2. **Phase 2 — Execute.** Invoke `proceed` against the plan. G2 red → autofix arm `fix` runs **once**, re-check; still red → HALT.
 3. **Phase 3 — Simplify.** Invoke `simplify` on the new diff. `simplify` self-reverts a behavior regression; an unrecoverable exit (new rejection ground / mixed commit) is G3 fail → HALT.
 4. **Phase 4 (+5) — Review-gate.** Invoke `review` (read-only). Only if a critical/high finding exists, invoke `fix` **once** on those findings (Phase 5), then re-review the changed files. Residual critical/high after the one pass is G4 fail → HALT.
-5. **Phase 6 — Commit + push.** Detect remote via `git remote`. Invoke `atomic-commit-and-push`; local-only → commits only, push half skipped. A push refusal (force/protected) is G6 fail and not autofixable → HALT.
+5. **Phase 6 — Commit + push.** Detect remote via `git remote`. Invoke `commit-push`; local-only → commits only, push half skipped. A push refusal (force/protected) is G6 fail and not autofixable → HALT.
 6. **Phase 7 — CI.** Skipped local-only. Otherwise invoke `gh-fix-ci`, which watches PR checks and runs its own fix arm **once**; still red is G7 fail → HALT, hand off failing-check logs/URLs.
 7. **Phase 8 — Report.** Always — on success or at the halt point. Phases run, gates passed/failed, residual handoff, commits/PR, the next operator's action.
 
@@ -99,9 +99,9 @@ Gate id equals phase number; Phase 5 (`fix`, G4's autofix arm) and Phase 8 (Repo
 
 - **vs `proceed`** — `proceed` is the single execution step (plan→code, verify each step). It IS Phase 2 of this chain. autopilot wraps it with plan before and simplify/review/ship/CI after.
 - **vs `review-fix-grill-loop`** — that skill is a diff-scoped review→resolve→fix **loop** that iterates to a clean floor. autopilot's Phase 4+5 is a **single bounded pass** (review → fix once → re-review → halt), sitting inside the larger plan→ship arc. Want the loop-to-clean on a diff and nothing else → use `review-fix-grill-loop`.
-- **vs `simplify` / `fix` / `atomic-commit-and-push` / `gh-fix-ci`** — each is one phase. Call it directly when you want only that phase.
+- **vs `simplify` / `fix` / `commit-push` / `gh-fix-ci`** — each is one phase. Call it directly when you want only that phase.
 - **vs `strategy` / `ideate`** — upstream, manual, deliberately not chained. autopilot starts where they end.
 
 ## Operating surface
 
-autopilot writes no code surface itself. `proceed` and `fix` write the working tree; `atomic-commit-and-push` writes commits and the remote; `plan`/`review` are read-only; `simplify` self-reverts on regression. autopilot owns the phase sequence, the gate decisions, and the terminal report. No writes to undefined or doubly-owned locations.
+autopilot writes no code surface itself. `proceed` and `fix` write the working tree; `commit-push` writes commits and the remote; `plan`/`review` are read-only; `simplify` self-reverts on regression. autopilot owns the phase sequence, the gate decisions, and the terminal report. No writes to undefined or doubly-owned locations.

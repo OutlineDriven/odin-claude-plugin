@@ -28,7 +28,7 @@ Inspect context in priority order and dispatch to the first matching domain:
 | File path(s), active diff, or `cargo`/`dune` target named | **Code** | `cleanup-codebase` skill |
 | `memory/` directory, `MEMORY.md`, or memory file(s) named | **Memory** | `memory-clean` then `memory-update` skills |
 | `.outline/`, `/tmp` scratch, `*.tmp`, `*.bak`, repomix packs | **Workspace** | Inline (see below) |
-| `git sl`, commit stack, commit message(s) named | **Git** | `git-branchless` skill + `atomic-commit` skill |
+| `git sl`, commit stack, commit message(s) named | **Git** | `git-branchless` skill + `commit` skill |
 | Docs, comments, ADRs, READMEs, plan files named | **Docs** | Inline (see below) |
 | User explicitly says "tidy ICM" or names an ICM topic | **ICM state** | Inline (see below) |
 | "remove/drop/kill a live capability", compat-shim or feature-flag teardown named | **Purge** | `refactor-break-compat` skill |

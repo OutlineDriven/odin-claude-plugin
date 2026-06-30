@@ -36,7 +36,7 @@ Gate id equals phase number — there is one numbering system, not two. Phase 5 
 | G2 | Phase 2 Execute / `proceed` | The plan's steps are implemented and the repo-native verifier (build / type-check / test, as the repo defines) exits clean. | `fix` once, in findings/verifier-failure mode, on the failing verifier output | HALT → hand off the verifier failure and the diff so far |
 | G3 | Phase 3 Simplify / `simplify` | `simplify` exits `0`, `11` (empty diff), or `12` (false-positive-only); behavior preserved. | none distinct — `simplify` self-reverts a behavior regression (its exit `13`) internally | HALT on exit `14` (new rejection ground) or `15` (mixed-concern commit) — these need a human re-plan |
 | G4 | Phase 4 Review / `review` (autofix = Phase 5 `fix`) | After at most one `fix` pass and a re-review of the changed files, no critical or high finding remains. | `fix` once on the review's critical/high findings, then re-review changed files only | HALT → hand off residual critical/high findings |
-| G6 | Phase 6 Commit + push / `atomic-commit-and-push` | Atomic commits created (one concern each). Remote present → push succeeded. Local-only → commits only, push not attempted. | none — a force/protected-branch refusal is a deliberate safety stop, not a defect to patch | HALT → hand off the push refusal and the unpushed commits |
+| G6 | Phase 6 Commit + push / `commit-push` | Atomic commits created (one concern each). Remote present → push succeeded. Local-only → commits only, push not attempted. | none — a force/protected-branch refusal is a deliberate safety stop, not a defect to patch | HALT → hand off the push refusal and the unpushed commits |
 | G7 | Phase 7 CI / `gh-fix-ci` | PR checks green. | `gh-fix-ci` runs its own watch + fix arm once | HALT → hand off failing-check logs (GitHub Actions) and external-check URLs |
 
 Phase 5 (`fix`) and Phase 8 (Report) have no gate; Report always runs.
@@ -46,7 +46,7 @@ Phase 5 (`fix`) and Phase 8 (Report) have no gate; Report always runs.
 Run `git remote`. Empty output → local-only; also forced by `mode:local`.
 
 Local-only effect:
-- **Phase 6 (G6)** — `atomic-commit-and-push` makes the atomic commits and skips the push half. No remote is invented.
+- **Phase 6 (G6)** — `commit-push` makes the atomic commits and skips the push half. No remote is invented.
 - **Phase 7 (G7)** — skipped entirely. `ADVANCE` jumps Phase 6 → Phase 8 (Report).
 - Phase 8 still runs and the report states `mode: local-only` with the unpushed commit list.
 

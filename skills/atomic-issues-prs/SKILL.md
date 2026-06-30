@@ -8,7 +8,7 @@ metadata:
 # Atomic Issues and PRs
 
 Publish a change-set as atomic GitHub objects: one issue/PR per logical change, never bundled.
-The layer above atomic-commit-and-push — it opens the PRs (and optionally issues) that skill never touches.
+The layer above `commit-push` — it opens the PRs (and optionally issues) that skill never touches.
 
 ## Phase 0 — Preflight & canonical-repo resolution
 

@@ -101,9 +101,9 @@ Full recipes with rationale: `references/recipes.md`.
 
 ## Hand-off
 
-- **`atomic-commit`** is the per-commit-grouping concern. Pair this skill
-  with `atomic-commit` when the task is "commit my changes" — branchless
-  handles workflow, atomic-commit handles per-change boundaries.
+- **`commit`** is the per-commit-grouping concern. Pair this skill
+  with `commit` when the task is "commit my changes" — branchless
+  handles workflow, commit handles per-change boundaries.
 - **`git-guardrails-claude-code`** is the complementary block-list hook.
   This skill teaches the branchless idioms; that skill enforces a hard
   block on `git push --force`, `git reset --hard`, and similar. They

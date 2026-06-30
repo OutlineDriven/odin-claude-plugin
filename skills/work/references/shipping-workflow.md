@@ -50,7 +50,7 @@ This file contains the shipping workflow (Phase 3-4). Load it when all Phase 2 t
    Options (four or fewer, self-contained labels):
    - `Apply/fix now` — load `references/review-findings-followup.md`, dispatch batched fix subagents for remaining eligible findings, run tests, commit if needed; optionally re-run `/review` only after the diff changed materially.
    - `File tickets via project tracker` — load `references/tracker-defer.md` in interactive mode; the agent files tickets in the project's detected tracker (or `gh` fallback, or leaves them in the report if no sink exists) and proceeds to Final Validation.
-   - `Accept and proceed` — record the residual findings verbatim in a durable "Known Residuals" sink before shipping. If a PR will be created or updated in Phase 4, include them in the PR description's "Known Residuals" section. If the user later chooses the no-PR `/atomic-commit` path, create `docs/residual-review-findings/<branch-or-head-sha>.md`, include the accepted findings and source review-run context, stage it with the implementation commit, and mention the file path in the final summary. The user has acknowledged the risk, but the findings must not live only in the transient session.
+   - `Accept and proceed` — record the residual findings verbatim in a durable "Known Residuals" sink before shipping. If a PR will be created or updated in Phase 4, include them in the PR description's "Known Residuals" section. If the user later chooses the no-PR `/commit-push` path, create `docs/residual-review-findings/<branch-or-head-sha>.md`, include the accepted findings and source review-run context, stage it with the implementation commit, and mention the file path in the final summary. The user has acknowledged the risk, but the findings must not live only in the transient session.
    - `Stop — do not ship` — abort the shipping workflow. The user will handle findings manually before re-invoking.
 
    Skip this gate entirely when the review reported `Actionable findings: none.` (and followup applied everything mechanical), or when dedicated review was skipped (mechanical diff or `/review` unavailable). Do not proceed past this gate on an `Accept and proceed` decision (including the autonomous auto-accept) until the agent has recorded whether the durable sink is `PR Known Residuals` or `docs/residual-review-findings/<branch-or-head-sha>.md`.
@@ -79,21 +79,21 @@ This file contains the shipping workflow (Phase 3-4). Load it when all Phase 2 t
 
 1. **Prepare Validation Context**
 
-   Note whether the completed work has observable behavior (UI rendering, CLI output, API/library behavior with a runnable example, generated artifacts, or workflow output), and summarize any manual validation performed. If the user supplied evidence (URL, markdown embed, local artifact path), pass it to `/atomic-commit-and-push` as PR-description context.
+   Note whether the completed work has observable behavior (UI rendering, CLI output, API/library behavior with a runnable example, generated artifacts, or workflow output), and summarize any manual validation performed. If the user supplied evidence (URL, markdown embed, local artifact path), pass it to `/commit-push-pr` as PR-description context.
 
 2. **Commit and Create Pull Request**
 
-   Load the `/atomic-commit-and-push` skill to handle committing, pushing, and PR creation. The skill handles convention detection, branch safety, logical commit splitting, adaptive PR descriptions, and attribution.
+   Load the `/commit-push-pr` skill to handle committing, pushing, and PR creation. The skill handles convention detection, branch safety, logical commit splitting, adaptive PR descriptions, and attribution.
 
    When providing context for the PR description, include:
    - The plan's summary and key decisions
    - Testing notes (tests added/modified, manual testing performed)
-   - Evidence context from step 1, so `/atomic-commit-and-push` can decide whether to ask about capturing evidence
+   - Evidence context from step 1, so `/commit-push-pr` can decide whether to ask about capturing evidence
    - Figma design link (if applicable)
    - The Post-Deploy Monitoring & Validation section
    - Any "Known Residuals" accepted in the Phase 3 Residual Work Gate, rendered as a dedicated section in the PR body with severity, file:line, and title per finding
 
-   If the user prefers to commit without creating a PR, load the `/atomic-commit` skill instead and pass the same Post-Deploy Monitoring & Validation content as commit context so it is not lost.
+   If the user prefers to commit without creating a PR, load the `/commit-push` skill instead and pass the same Post-Deploy Monitoring & Validation content as commit context so it is not lost.
 
 3. **Notify User**
    - Summarize what was completed.
@@ -111,7 +111,7 @@ Before creating PR, verify:
 - [ ] Linting passes
 - [ ] Code follows existing patterns
 - [ ] Figma designs match implementation (if applicable)
-- [ ] Validation/evidence context passed to `/atomic-commit-and-push` when the change has observable behavior
+- [ ] Validation/evidence context passed to `/commit-push-pr` when the change has observable behavior
 - [ ] Commit messages follow conventional format
 - [ ] PR description includes Post-Deploy Monitoring & Validation section (or explicit no-impact rationale)
 - [ ] Simplify: `/simplify` when diff >=30 lines (or skipped with reason)
