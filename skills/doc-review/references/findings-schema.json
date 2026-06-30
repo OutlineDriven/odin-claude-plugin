@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Document Review Findings",
+  "description": "Structured output schema for document review persona agents",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["reviewer", "findings", "residual_risks", "deferred_questions"],
+  "properties": {
+    "reviewer": {
+      "type": "string",
+      "description": "Persona name that produced this output (e.g., 'coherence', 'feasibility', 'product')"
+    },
+    "findings": {
+      "type": "array",
+      "description": "List of document review findings. Empty array if no issues found.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "title",
+          "severity",
+          "section",
+          "why_it_matters",
+          "finding_type",
+          "autofix_class",
+          "confidence",
+          "evidence"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Short, specific issue title. 10 words or fewer.",
+            "maxLength": 100
+          },
+          "severity": {
+            "type": "string",
+            "enum": ["P0", "P1", "P2", "P3"],
+            "description": "Issue severity level"
+          },
+          "section": {
+            "type": "string",
+            "description": "Document section where the issue appears (e.g., 'Requirements Trace', 'Implementation Unit 3', 'Overview')"
+          },
+          "why_it_matters": {
+            "type": "string",
+            "description": "Impact statement -- not 'what is wrong' but 'what goes wrong if not addressed'"
+          },
+          "autofix_class": {
+            "type": "string",
+            "enum": ["safe_auto", "gated_auto", "manual"],
+            "description": "How this issue should be handled. safe_auto = one clear correct fix applied silently (typo, wrong count, stale cross-reference, mechanically-implied addition, terminology drift). gated_auto = concrete fix exists but touches document meaning or scope and warrants user confirmation (substantive additions from codebase-pattern-resolved fixes, framework-native-API substitutions, missing standard controls). manual = requires user judgment; multiple valid approaches. Low-confidence manual findings surface in an FYI subsection at the presentation layer."
+          },
+          "finding_type": {
+            "type": "string",
+            "enum": ["error", "omission"],
+            "description": "Whether the finding is a mistake in what the document says (error) or something the document forgot to say (omission). Errors are design tensions, contradictions, or incorrect statements. Omissions are missing mechanical steps, forgotten list entries, or absent details."
+          },
+          "suggested_fix": {
+            "type": ["string", "null"],
+            "description": "Concrete fix text. Omit or null if no good fix is obvious -- a bad suggestion is worse than none."
+          },
+          "confidence": {
+            "type": "integer",
+            "enum": [0, 25, 50, 75, 100],
+            "description": "Anchored confidence score. Use exactly one of 0, 25, 50, 75, 100. Each anchor has a behavioral criterion the reviewer must honestly self-apply. 0: False positive or pre-existing issue; suppress silently. 25: Might be real but could not verify; suppress silently. 50: Verified real but nitpick / advisory / not very important; surfaces in FYI. 75: Double-checked, will hit in practice, directly impacts correctness. 100: Evidence directly confirms; will happen frequently."
+          },
+          "evidence": {
+            "type": "array",
+            "description": "Quoted text from the document that supports this finding. At least 1 item.",
+            "items": { "type": "string" },
+            "minItems": 1
+          }
+        }
+      }
+    },
+    "residual_risks": {
+      "type": "array",
+      "description": "Risks the reviewer noticed but could not confirm as findings (below confidence threshold)",
+      "items": { "type": "string" }
+    },
+    "deferred_questions": {
+      "type": "array",
+      "description": "Questions that should be resolved in a later workflow stage (planning, implementation)",
+      "items": { "type": "string" }
+    }
+  }
+}
