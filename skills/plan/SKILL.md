@@ -1,6 +1,6 @@
 ---
 name: plans
-description: Software architect and planning specialist - conduct thorough read-only planning before any action. Use when exploring a codebase to design implementation plans, defining objectives, gathering relevant files, and summarizing available tools before coding begins. Read-only by default; opt in to a durable plan artifact when the user says "persist this plan", "save the plan to docs/plans", or "write the plan to disk". Grounds in STRATEGY.md at the repo root when present.
+description: Conducts read-only planning before coding. Use when designing an implementation plan, defining objectives, gathering files and tools, or persisting a plan to disk.
 metadata:
   short-description: Read-only planning; opt-in durable plan at docs/plans/<slug>.md
 ---
@@ -67,8 +67,8 @@ When opted in:
 
 ## Reference materials
 
-- `../improve-codebase-architecture/references/LANGUAGE.md` — architecture vocabulary (module, seam, adapter, depth, leverage, locality). Canonical home: `improve-codebase-architecture`.
-- `../improve-codebase-architecture/references/DEEPENING.md` — dependency taxonomy and seam discipline. Canonical home: `improve-codebase-architecture`.
+- `../improve-architecture/references/LANGUAGE.md` — architecture vocabulary (module, seam, adapter, depth, leverage, locality). Canonical home: `improve-architecture`.
+- `../improve-architecture/references/DEEPENING.md` — dependency taxonomy and seam discipline. Canonical home: `improve-architecture`.
 - `STRATEGY.md` (repo root, if present) — upstream strategy grounding (diagnosis / guiding policy / coherent action). Read in step 1; never a hard prerequisite.
 
 ## When to Apply

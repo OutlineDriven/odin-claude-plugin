@@ -1,6 +1,6 @@
 ---
 name: zoom-out
-description: Step up one layer of abstraction and surface a map of relevant modules and callers when the local view is too narrow. Trigger when the agent (or user) is unfamiliar with a code region and needs the surrounding architecture before committing to a change.
+description: Step up one layer of abstraction and map surrounding modules, callers, and invariants. Use when the local view is too narrow, the region is unfamiliar, or before committing to a change in unknown code.
 disable-model-invocation: true
 ---
 

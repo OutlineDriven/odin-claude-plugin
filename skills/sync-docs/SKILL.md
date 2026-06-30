@@ -1,6 +1,6 @@
 ---
 name: sync-docs
-description: Detect documentation-vs-code drift from a git diff, apply only safe documentation corrections, and report all unsafe stale-reference issues with file:line evidence. Use when "sync docs", "update changelog", "find outdated docs", "stale code examples", "doc drift", or "docs out of date".
+description: Detect docs-vs-code drift from a diff, apply safe corrections, and flag stale references with evidence. Use when the user says "sync docs", "update changelog", or "find outdated docs".
 metadata:
   short-description: Diff-driven docs drift correction
 ---

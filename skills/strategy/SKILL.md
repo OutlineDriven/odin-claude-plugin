@@ -1,6 +1,6 @@
 ---
 name: strategy
-description: Interview-driven product anchor — pin intent with a VS preamble, push back on weak answers, and write or maintain STRATEGY.md (target problem, approach, persona, metrics, tracks, milestones, non-goals, marketing) at the operating repo root. Use when the user says "/strategy", "define the strategy", "what's our north star", "set our product strategy", or starts or redirects a product. Fires automatically on strategy-framing phrases; the reject-by-default gate, not the trigger, decides whether a doc is written. `plan` designs implementation and `ideate` generates directions — `strategy` anchors what the product is and reads as optional grounding for both.
+description: Run a sharp interview and write or maintain STRATEGY.md as the product anchor. Use when defining product strategy, setting a north star, or starting or redirecting a product.
 metadata:
   short-description: Interview-driven STRATEGY.md product anchor at the operating repo root
 ---

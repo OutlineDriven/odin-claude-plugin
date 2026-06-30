@@ -1,6 +1,6 @@
 ---
 name: atomic-issues-prs
-description: "Publish a change-set as atomic GitHub issues/PRs — one issue/PR per logical change, never bundled. Use when the user says \"open a PR per change\", \"atomic PRs\", \"push issues and prs atomically\", \"individual PR for each change\", or wants a change-set delivered as separate PRs/issues. Asks per run which objects to create (PR-only vs issue+linked-PR). Detects whether the canonical repo is directly pushable via `gh`; if not, pushes branches to the fork and opens PRs targeting upstream with `--head <fork-owner>:<branch>`. Requires `gh` auth; refuses force-push and direct push to protected branches without explicit authorization."
+description: Publish a change-set as atomic GitHub issues or PRs. Use when the user says "open a PR per change", "atomic PRs", "individual PR for each change", or wants separate PRs/issues.
 metadata:
   short-description: Atomic one-PR-per-change publisher with fork fallback
 ---

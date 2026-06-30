@@ -1,6 +1,6 @@
 ---
 name: autolearn
-description: Compound a just-solved problem into a durable in-repo learning doc under docs/solutions/, refresh stale learnings as code drifts, and route user/preference facts to memory-update. Use after a verified non-trivial fix, or when the user says "/autolearn", "compound this", "document this fix", "remember this". Fires automatically on success signals like "that worked", "it's fixed", "working now", "problem solved".
+description: Compound a solved problem into a durable in-repo learning doc. Use when a verified non-trivial fix lands, the user says "compound this", "document this fix", or "remember this".
 metadata:
   short-description: Compound a solved problem into docs/solutions/ + refresh learnings
 ---

@@ -1,6 +1,6 @@
 ---
 name: audit-project
-description: Native iterative multi-agent code audit: detect project shape and priority risk signals, launch role-scoped reviewers, consolidate findings with a strict false-positive contract, fix critical/high findings in verified batches, and loop until the release queue is clean. Use when the user says "audit my code", "iterative review", "review until clean", "find all the bugs", "multi-agent review", or "deep code audit".
+description: Run an iterative multi-agent code audit until critical and high findings are resolved. Use when the user says "audit my code", "find all the bugs", "deep code audit", "iterative review", or "review until clean".
 metadata:
   short-description: Iterative multi-agent code audit
 ---

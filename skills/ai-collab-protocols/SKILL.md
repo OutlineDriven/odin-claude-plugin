@@ -1,6 +1,6 @@
 ---
 name: ai-collab-protocols
-description: Surface in-task-collaboration protocols when the user describes an AI workflow informally — URL-as-entity-reference, PR-comment threads as session memory. Trigger when the user names entities by colloquial label instead of stable URL, asks "how should I structure this for Claude", or describes a multi-step Claude workflow without a durable handle. Apply reactively, not as a checklist.
+description: Surface in-task AI collaboration protocols one tactic at a time. Use when the user refers to entities by colloquial labels, asks how to structure a Claude workflow, or describes a multi-step workflow without durable URLs.
 disable-model-invocation: true
 ---
 

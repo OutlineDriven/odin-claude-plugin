@@ -1,6 +1,6 @@
 ---
 name: duet
-description: Two-party posture — user as director, agent as executor; every fork, tradeoff, or choice surfaced via batched AskUserQuestion with a recommended default. Use when the user invokes /duet, says "ask before" / "pair with me" / "human-in-the-loop", or for aesthetic/architectural/irreversible decisions.
+description: 'Work in a two-party posture where the user directs and the agent executes. Use when the user invokes /duet, says "ask before", "pair with me", "human-in-the-loop", or faces aesthetic, architectural, or irreversible decisions.'
 ---
 
 # Duet

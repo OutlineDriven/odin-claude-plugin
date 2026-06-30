@@ -1,6 +1,6 @@
 ---
 name: fix
-description: Polymorphic iterative repair loop — accept a verifier failure, structured findings (review/resolve), or a bug description; modify→verify→keep on green, auto-revert on guard regression, until clean or iteration cap. Use when the user says "fix", "make it pass", or "apply the findings", or hands an artifact + repo and expects patches; auto-routes to gh-fix-ci or gh-address-comments when an open PR + gh auth + GH-flavored input is detected.
+description: 'Run an iterative repair loop that fixes one thing at a time and keeps changes on green. Use when the user says "fix", "make it pass", or "apply the findings", or hands a verifier failure or bug description.'
 metadata:
   short-description: Iterative fix loop with auto-revert
 ---

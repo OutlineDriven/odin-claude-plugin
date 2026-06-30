@@ -1,6 +1,6 @@
 ---
 name: type-driven
-description: Type-driven development. Use when developing with refined types, state machines encoded in types, or proof-carrying types; enforces totality and exhaustive pattern matching.
+description: Develop with refined types that make illegal states unrepresentable. Use when modeling domains, encoding state machines in types, or replacing validation with parsing.
 ---
 
 # Type-driven development

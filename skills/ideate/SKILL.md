@@ -1,6 +1,6 @@
 ---
 name: ideate
-description: Grounded divergent idea generation — scan the codebase, generate many candidate directions across parallel generators, critique all behind a reject-by-default gate, and write the survivors plus the rejection rationale for the losers to docs/ideation/<slug>.md (markdown by default; an HTML view is opt-in via `format:html`). Use when the user says "let's brainstorm", "what should we build", "what should we build next", "any ideas for", or "/ideate". Generates candidate directions and routes the survivors onward to askme for intent-clarification; it does not clarify intent itself and does not plan.
+description: 'Generate grounded, divergent ideas from the codebase and write survivors to docs/ideation. Use when the user says "let''s brainstorm", "what should we build", "what should we build next", or "any ideas for".'
 metadata:
   short-description: Grounded divergent generation → survivors + rejection rationale → docs/ideation/
 ---

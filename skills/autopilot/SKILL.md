@@ -1,6 +1,6 @@
 ---
 name: autopilot
-description: Hands-off end-to-end delivery pipeline that CHAINS existing ODIN skills — plan → proceed → simplify → review → fix → atomic-commit-and-push → gh-fix-ci → report — with review-gated sequencing and an autofix-then-halt posture; it sequences and gates, it never reimplements the skills it calls. Use when the user says "autopilot", "lfg", "take this from plan to shipped", "run the whole pipeline", "hands-off ship it", or "do the end-to-end build". Entry is execution-only (plan onward); strategy and ideation stay upstream and manual. `proceed` is the single execution step inside this chain; `review-fix-grill-loop` is the review/fix loop only — autopilot spans plan through CI.
+description: Run a hands-off plan-to-ship pipeline by chaining existing skills. Use when the user says "autopilot", "take this from plan to shipped", "run the whole pipeline", "hands-off ship it", or "do the end-to-end build".
 metadata:
   short-description: Hands-off plan→ship pipeline chaining existing skills
 ---

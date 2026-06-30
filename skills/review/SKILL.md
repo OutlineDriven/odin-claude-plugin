@@ -1,6 +1,6 @@
 ---
 name: reviews
-description: Review the code changes on the current branch — single-pass by default, or a parallel multi-persona deep review (correctness, testing, maintainability, security, performance, API-contract, adversarial) with confidence-anchored P0-P3 severity. Use when the user asks to review their current work, analyze recent commits, or get a code quality assessment of the active branch against the main branch, or says "review mode:deep", "personas", or "deep review". Read-only — surfaces findings and routes fixes to fix / review-fix-grill-loop, never edits.
+description: Reviews changes on the current branch; shallow by default, deep on risk escalation or explicit request. Use when reviewing current work, analyzing recent commits, or running a deep review.
 metadata:
   short-description: Read-only branch review — single-pass, or deep multi-persona with P0-P3 severity
 ---

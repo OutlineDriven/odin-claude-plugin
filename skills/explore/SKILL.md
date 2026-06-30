@@ -1,6 +1,6 @@
 ---
 name: explore
-description: "Read-only codebase exploration: discovery, structural reading, and emission of architecture/pattern/tooling/dependency summaries. Use to understand existing code, map files, trace function flow, locate symbols, or build pre-implementation context. Defers to ODIN's Dispatch-First protocol (1/3/5 Explore-agent escalation). Trigger on \"explore\", \"find where X is\", \"how does X work in the code\", \"map the codebase\", \"what files handle Y\", or any architecture/pattern/tooling/dependency context request on a local repo — even without naming /explore."
+description: 'Explore the codebase read-only to map structure, symbols, and dependencies. Use when the user says "explore", "find where X is", "how does X work in the code", "map the codebase", or "what files handle Y".'
 ---
 
 # Explore Command

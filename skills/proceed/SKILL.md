@@ -1,6 +1,6 @@
 ---
 name: proceed
-description: Execute an implementation plan with surgical precision. Use after a planning phase (plan-now or similar) has produced a step-by-step strategy and identified critical files. Focuses on precise code changes with verification at each step.
+description: Execute a step-by-step implementation plan with surgical precision and verification at each step. Use when planning has produced a strategy and identified critical files.
 ---
 # Proceed Command
 

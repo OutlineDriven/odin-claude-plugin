@@ -1,6 +1,6 @@
 ---
 name: atomic-commit-and-push
-description: "Run the atomic-commit workflow on the current changes, then publish the resulting commits to the remote. Use whenever the user says \"commit and push\", \"ship these changes\", \"atomic commit and push\", \"publish my work\", or wants atomic commits delivered to origin in one step. Prefers `git submit` (git-branchless); falls back to a named branch + `git push origin HEAD:refs/heads/<branch>`. Refuses force-push and direct push to protected branches without explicit authorization."
+description: Atomically commit current changes and publish them to the remote. Use when the user says "commit and push", "ship these changes", "atomic commit and push", or "publish my work".
 ---
 # Atomic Commit and Push
 

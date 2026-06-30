@@ -1,6 +1,6 @@
 ---
 name: contexts
-description: Auto-router for context gathering. Detects whether the task needs codebase exploration or external knowledge research and dispatches accordingly. Trigger on "get context", "background on X", "context on X", "how does X work", architectural orientation, or any setup-before-coding request.
+description: Auto-route context gathering between codebase exploration and external research. Use when the user says "get context", "how does X work", "context on X", or wants architectural orientation before coding.
 ---
 
 # Context Command

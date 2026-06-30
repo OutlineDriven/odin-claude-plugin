@@ -1,6 +1,6 @@
 ---
 name: validation-first
-description: Validation-first development. Use when developing with formal state machine specifications, invariants, and temporal properties before writing implementation code.
+description: Define state machines, invariants, and temporal properties before writing implementation. Use when building protocols, workflows, concurrent systems, or lifecycle-heavy state.
 ---
 
 # Validation-first development

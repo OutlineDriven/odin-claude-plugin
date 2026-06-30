@@ -1,6 +1,6 @@
 ---
 name: pr-reviews
-description: Review code changes on a given GitHub PR using gh CLI. Use when the user asks to review a pull request, analyze PR diffs, or provide feedback on open PRs with structured quality, security, and testing assessments.
+description: Reviews code changes on a GitHub PR using the gh CLI. Use when the user asks to review a pull request, analyze a PR diff, or provide structured quality, security, and testing feedback.
 ---
 
 # Code Review for a given PR

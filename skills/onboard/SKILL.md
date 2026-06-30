@@ -1,6 +1,6 @@
 ---
 name: onboard
-description: Codebase orientation op: collect bounded project context, synthesize a newcomer tour, deep-read real files, then guide the next step interactively. Use when the user says "onboard me", "orient me", "new to this codebase", "give me a tour", "help me understand this repo", or "where do I start".
+description: Collects bounded project context and synthesizes a newcomer orientation tour. Use when the user asks to be onboarded, oriented, given a tour, or shown where to start in a repo.
 metadata:
   short-description: New-codebase orientation tour
 ---

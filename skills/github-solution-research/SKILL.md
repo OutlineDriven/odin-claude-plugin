@@ -1,6 +1,6 @@
 ---
 name: github-solution-research
-description: Use when a concrete engineering problem, bug, integration failure, dependency issue, unclear API usage, implementation blocker, or tool/capability need may already have a proven solution in GitHub open-source projects, issues, pull requests, discussions, code, examples, or release notes. Use it to find suitable repositories, report project basics including Stars when a repo-level solution applies, and adapt the existing solution with minimal local changes.
+description: 'Find proven open-source solutions on GitHub for concrete engineering problems. Use when facing a bug, integration failure, dependency issue, unclear API usage, implementation blocker, or tool capability need.'
 ---
 
 # GitHub Solution Research

@@ -1,6 +1,6 @@
 ---
 name: atomic-commit
-description: Review staged + unstaged changes and split them into one commit per logical change. Use whenever the user says "atomic commit", "commit my changes", "split this into commits", or has multiple unrelated edits sitting in the working tree — even if they don't say "atomic". Runs repo-native type-checker and linter before each commit and refuses to bundle unrelated changes.
+description: Split working-tree changes into one commit per logical change. Use when the user says "atomic commit", "commit my changes", "split this into commits", or has unrelated edits in the tree.
 ---
 # Atomic Commit
 Review staged + unstaged changes. Group by mechanism/file boundary.

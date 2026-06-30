@@ -1,6 +1,6 @@
 ---
 name: askme
-description: Verbalized Sampling (VS) protocol for intent exploration before planning, mode-aware. Default `exhaustive` runs full VS; `collaborative` runs tip-sharing dialogue; `adversarial` walks the design tree one fork at a time. Auto-detects from phrasing ("help me refine" → collaborative, "poke holes" → adversarial); override via `/askme adversarial|collaborative|exhaustive`. Use for ambiguous tasks or maximum clarifying questions before committing.
+description: Explore intent with Verbalized Sampling before planning. Use when the task is ambiguous, you need maximum clarifying questions, or you want collaborative or adversarial mode via `/askme`.
 ---
 
 # Ask Me Command

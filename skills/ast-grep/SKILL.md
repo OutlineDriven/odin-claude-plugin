@@ -1,6 +1,6 @@
 ---
 name: ast-grep
-description: Code search, analysis, and refactoring using ast-grep (sg). Use for AST-based code modifications, structural search, and linting — with validate-first pattern linting, dry-run-before-apply rewriting, per-language recipes, and a 0-matches troubleshooting ladder.
+description: Run structural code search, analysis, and refactoring with ast-grep. Use when doing AST-based modifications, structural search, linting across code shape, or replacing regex-fragile transformations.
 ---
 
 # ast-grep (sg)

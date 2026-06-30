@@ -1,6 +1,6 @@
 ---
 name: review-fix-grill-loop
-description: Grill the current changes — fan out parallel review subagents over the working-tree + branch-vs-base diff, resolve each confirmed finding with multiple architectural solutions, fix in verified batches with auto-revert, re-review only changed files, and loop until no critical/high/medium finding remains. Use when the user says "grill my changes", "review-fix loop", "review and fix my diff until clean", "keep reviewing and fixing until no issues", or "grill loop". Diff-scoped; whole-project audits run via audit-project. Has a resolve stage and a medium severity floor.
+description: Review and fix the current diff in verified batches until no medium-or-higher finding remains. Use when "grill my changes", "review and fix my diff until clean", or "review-fix loop".
 metadata:
   short-description: Diff-scoped review→resolve→fix loop until clean
 ---

@@ -1,6 +1,6 @@
 ---
 name: parallel-launch
-description: Decompose a task into independent concerns and execute them through broadly parallel, specialized agent groups. Use when a request involves multiple independent sub-tasks, research across separate domains, or work that can be parallelized across files or modules.
+description: Decomposes a task into independent concerns and runs them in parallel agent groups. Use when a request has multiple independent sub-tasks, cross-domain research, or parallelizable file or module work.
 ---
 # Parallel Launch
 

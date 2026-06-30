@@ -1,6 +1,6 @@
 ---
 name: tidy
-description: ODIN's compress-operations dispatcher under the Compressor/Extender/Purger role. Invoke on "tidy", "clean up", "tidy this file/memory/workspace/git/docs", or when active context (current file, diff, stack, memory directory) has structural rot to resolve before touching behavior. Detects target domain from context and routes to the target domain skill. Requires explicit target or clear active-context signal — do not invoke speculatively.
+description: Dispatch compress operations to the right domain based on context. Use when the user says "tidy", "clean up", or names a file, diff, memory, workspace, git stack, or doc to tidy.
 ---
 
 # Tidy — ODIN's compress-operations dispatcher
@@ -10,7 +10,7 @@ improve structure. This skill detects *what* needs tidying from context and rout
 to the right domain skill. Domain procedures live in those domain skills — this skill
 owns only scope detection, dispatch, and the output contract. Tidy's deletions are
 compress-class (behavior-preserving: dead/redundant/structural); a request to remove
-a live capability is purge — route it out to `refactor-break-bw-compat`, never tidy inline.
+a live capability is purge — route it out to `refactor-break-compat`, never tidy inline.
 
 **Invariants:**
 - Every tidy action is atomic and scoped to what is already in view.
@@ -31,7 +31,7 @@ Inspect context in priority order and dispatch to the first matching domain:
 | `git sl`, commit stack, commit message(s) named | **Git** | `git-branchless` skill + `atomic-commit` skill |
 | Docs, comments, ADRs, READMEs, plan files named | **Docs** | Inline (see below) |
 | User explicitly says "tidy ICM" or names an ICM topic | **ICM state** | Inline (see below) |
-| "remove/drop/kill a live capability", compat-shim or feature-flag teardown named | **Purge** | `refactor-break-bw-compat` skill |
+| "remove/drop/kill a live capability", compat-shim or feature-flag teardown named | **Purge** | `refactor-break-compat` skill |
 | No clear signal | — | Ask: "What are we tidying — code, memory, workspace, git, docs, or ICM?" |
 
 Purge is a behavior change, not a tidy — detect purge-intent and dispatch out; never perform capability removal inline (violates the behavior-commit-separation invariant).

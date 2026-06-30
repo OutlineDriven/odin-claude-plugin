@@ -1,6 +1,6 @@
 ---
 name: subagent-driven
-description: Execute a multi-task plan by dispatching one fresh subagent per task, auditing each result against an adversarial review gate before the next starts, and closing with a broad whole-branch review. Use when a plan, checklist, or multi-step change has tasks that can be delegated, or when the user says "subagent-driven", "delegated execution", "execute the plan with subagents", or hands you an ordered plan to run.
+description: Execute a multi-task plan by delegating each task to a fresh subagent, auditing results before proceeding. Use when the user says "execute with subagents", "delegated execution", or hands you an ordered plan to run.
 metadata:
   short-description: Per-task implementer→reviewer loop with an audit gate between tasks
 ---
@@ -36,7 +36,7 @@ plan, a checklist, "execute this with subagents."
 NOT:
 - Independent fan-out with a single compose-and-review at the end → `parallel-launch`. That skill runs concurrent agents on separate concerns and reviews once; this one runs an *ordered* chain with a gate *between* tasks.
 - Review and fix an *existing* diff until clean → `review-fix-grill-loop`. That grills a change-set you already have; this one *produces* the change-set task by task.
-- You implement the slices yourself, no delegation → `incremental-implementation`.
+- You implement the slices yourself, no delegation → `incremental`.
 - A single atomic change → edit it directly. Don't dispatch a worker for a one-liner.
 
 ## Core Loop

@@ -65,7 +65,7 @@ Before any non-trivial implementation:
 4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
 5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
 
-## Skills (75 total — selected highlights below)
+## Skills (81 total — selected highlights below)
 
 Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
 
@@ -106,7 +106,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 
 ### Cleanup & Refactoring (2 skills)
 
-- `refactor-break-bw-compat` - Refactor by removing backward-compatibility and legacy layers (public API surface)
+- `refactor-break-compat` - Refactor by removing backward-compatibility and legacy layers (public API surface)
 - `cleanup-codebase` - Internal micro-hygiene: dead fields, redundant wrappers, stale config flags, identity passthrough — applied while touching nearby code, not as standalone PRs
 
 ### GitHub Integration (5 skills)

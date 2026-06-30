@@ -1,6 +1,6 @@
 ---
 name: research
-description: "Read-only external knowledge gathering via ODIN's 5-tier doc ladder (Official docs → API refs → Books/papers → Tutorials → Community). For library APIs, framework behavior, SDK migrations, version-specific docs, vendor announcements, RFCs. Verifies claims against primary sources. Invoke on \"how does X library work\", \"migration guide\", \"docs for\", or any named library/framework/SDK/API/CLI/service."
+description: "Gathers external knowledge from authoritative sources and verifies claims against primary documentation. Use when asking how a library works, finding a migration guide, or researching a named framework, SDK, API, or service."
 ---
 
 # Research Command

@@ -1,6 +1,6 @@
 ---
 name: strict-validation-setup
-description: One-shot bootstrap of strict-mode tooling per ecosystem plus per-task GOALS.md scaffolding so an agentic loop can self-verify. Writes typechecker/linter/schema-validator config for TS (strict + noUncheckedIndexedAccess + exactOptionalPropertyTypes), Python (Pyright strict, Ruff strict), Rust (Clippy deny-correctness), Go (golangci-lint with staticcheck), OCaml (dune --release); establishes `.agent-tasks/<id>/GOALS.md` per-task convention distinct from project-stable AGENTS.md. C++/Java/Kotlin and framework specifics (Spring Boot, Nest, React-strict) are out of scope. Trigger on new project bootstrap, agentic-task setup, "make this self-verifying", "set the loop's goal", "scaffold goals for this issue". Pairs with `llm-self-loop` runtime.
+description: Bootstrap strict-mode tooling and per-task GOALS.md scaffolding so an agentic loop can self-verify. Use when setting up a new project, making a task self-verifying, or scaffolding goals for an agentic loop.
 disable-model-invocation: true
 ---
 

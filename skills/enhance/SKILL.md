@@ -1,6 +1,6 @@
 ---
 name: enhance
-description: Certainty-graded correct-op for agent/plugin surfaces: discover plugin manifests, agents, skills, CLAUDE.md/AGENTS.md, docs, prompts, commands, and hooks; run relevant analyzers in parallel; report HIGH findings first; optionally apply only HIGH-certainty safe fixes behind an explicit flag. Use when the user says "enhance my plugin", "improve my agents", "improve my skills", "audit plugin config", "enhance CLAUDE.md", or "improve agent definitions".
+description: 'Audit and tighten agent/plugin surfaces with certainty-graded findings. Use when the user says "enhance my plugin", "improve my agents or skills", "audit plugin config", "enhance CLAUDE.md", or "improve agent definitions".'
 metadata:
   short-description: Certainty-graded surface enhancer
 ---

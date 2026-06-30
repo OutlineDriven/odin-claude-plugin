@@ -79,4 +79,4 @@ These are config too — and the same audit applies: if no consumer reads it, it
 - **Implicit consumers** — dashboards, alerts, support runbooks, third-party integrations may read a config key without it appearing in the source tree. The audit must extend beyond the repo.
 - **Migration in progress** — a flag that *will be* dead next quarter is still live now. Coordinate with whoever owns the migration before deleting.
 - **Time-bounded enable/disable** — flags that flip on at a specific date (e.g., GDPR rollout, holiday rate limits) are not dead even when currently off. Look for date-based logic.
-- **External-facing config** — anything customers, partners, or downstream services configure is a public API. That belongs in `refactor-break-bw-compat`, not cleanup-codebase.
+- **External-facing config** — anything customers, partners, or downstream services configure is a public API. That belongs in `refactor-break-compat`, not cleanup-codebase.

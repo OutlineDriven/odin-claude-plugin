@@ -1,6 +1,6 @@
 ---
 name: optimize
-description: Applied optimization op — locate a hot path, fan out five transformation lenses as worktree-isolated agents, benchmark each candidate, gate on behavior preservation, commit the winner with a proven speedup. Use when the user says "optimize this", "make X faster", "speed up the hot path", "reduce allocations", "fix the perf regression on <target>", or "profile and optimize <symbol>". Applies transformations and benchmarks the winner; quality-only entropy reduction (no measurement) lives in `simplify`.
+description: Locates a hot path, benchmarks candidate transformations, and commits the proven winner. Use when the user asks to optimize something, make code faster, reduce allocations, or fix a performance regression.
 metadata:
   short-description: Applied optimization op — transform a hot path and prove the win
 ---
@@ -315,6 +315,6 @@ or a `Justfile` / `Makefile` target named `bench-guard`. The before-benchmark JS
 ## Disambiguation
 
 - **simplify** — behavior-preserving entropy reduction on a diff; runs no benchmarks; explicitly forbids timing/memory-affecting speedups. Use simplify to compress code structure; use `/optimize` when runtime performance is the target.
-- **refactor-break-bw-compat** — contract-breaking modernization. `/optimize` never breaks public API contracts (except the disclosed approximation path, which requires explicit user confirmation).
+- **refactor-break-compat** — contract-breaking modernization. `/optimize` never breaks public API contracts (except the disclosed approximation path, which requires explicit user confirmation).
 
 Adapted from EveryInc/compound-engineering-plugin (MIT) — the append-only log, per-run crash-recovery markers, and stopping rules.

@@ -1,6 +1,6 @@
 ---
 name: doc-review
-description: Persona-based review of a requirements doc, plan, spec, or PRD by content shape — classify the document, dispatch conditional reviewer lenses in parallel, merge confidence-anchored findings, and route each as safe-auto / gated-auto / manual / FYI. Read-only on the reviewed document. Use when the user says "review this plan", "review this spec", "review this PRD", "review these requirements", "critique this design doc", or "/doc-review". Reviews prose documents, not code — docs↔code drift is `sync-docs`; code review is `review`.
+description: 'Review requirements docs, plans, specs, and PRDs through persona-based lenses. Use when the user says "review this plan", "review this spec", "review this PRD", "review these requirements", or "critique this design doc".'
 metadata:
   short-description: Multi-persona content-shape review of plans/specs/PRDs — read-only, findings routed by tier
 ---

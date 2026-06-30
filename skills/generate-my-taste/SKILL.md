@@ -1,6 +1,6 @@
 ---
 name: generate-my-taste
-description: Evidence-first generator for a personal <name>-taste Claude Code skill. Mines local memories and agent histories for influences, slop bans, and overkill bans; asks compact confirmation forks; previews the synthesis; then writes a right-sized taste skill with exactly 5 anchors by default. Trigger with "generate my taste skill", "make my taste skill", or "derive my taste spine".
+description: 'Generate a personal taste skill from local evidence and confirmation forks. Use when the user says "generate my taste skill", "make my taste skill", or "derive my taste spine".'
 disable-model-invocation: true
 ---
 

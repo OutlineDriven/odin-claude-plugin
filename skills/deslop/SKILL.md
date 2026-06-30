@@ -1,6 +1,6 @@
 ---
 name: deslop
-description: Correct code hygiene by detecting AI slop with a three-phase HIGH/MEDIUM/LOW certainty scan, safely auto-fixing only deterministic HIGH findings, verifying with the repo's own test command, and rolling back on regression. Use when the user says "deslop", "clean AI slop", "remove debug code", "find placeholders", "find stub code", or "remove dead code".
+description: 'Detect and safely remove AI slop using a certainty-graded scan. Use when the user says "deslop", "clean AI slop", "remove debug code", "find placeholders or stub code", or "remove dead code".'
 metadata:
   short-description: Certainty-graded slop cleanup
 ---

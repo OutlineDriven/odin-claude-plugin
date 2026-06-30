@@ -1,6 +1,6 @@
 ---
 name: test-driven
-description: Test-Driven Development (TDD) across any supported language. Use when implementing features or fixes with TDD methodology, writing tests before code, or following XP-style development.
+description: Run test-driven development with RED-GREEN-REFACTOR cycles across supported languages. Use when implementing features or fixes with TDD, writing tests before code, or refactoring with coverage.
 ---
 
 # Test-driven development (XP-style)

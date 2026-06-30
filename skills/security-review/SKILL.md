@@ -1,6 +1,6 @@
 ---
 name: security-review
-description: Adversarial security audit — STRIDE, OWASP Top 10, supply-chain (CVE/SBOM), secrets scan, auth/authz analysis. Use on changes touching auth, input parsing, deserialization, network I/O, dependencies, or secrets; before any production release or external-surface PR.
+description: Run an adversarial security audit using STRIDE, OWASP, supply-chain checks, secrets scans, and auth analysis. Use when changes touch auth, input parsing, dependencies, or network I/O, or before a production release.
 ---
 
 Threat modeling is hypothesis generation for an adversary. Walk the change set as the attacker would: where does untrusted input enter, what trust boundary does it cross, what does it gain on the other side. Every unaudited path is a free move for the attacker.

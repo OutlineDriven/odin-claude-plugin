@@ -1,6 +1,6 @@
 ---
 name: drift-detect
-description: Compare documented plan and intent against implementation reality across GitHub issues, pull requests, milestones, docs, and code, then emit an evidence-backed Reality Check Report with a prioritized reconstruction plan. Use when the user says "plan drift", "reality check", "compare docs to code", "roadmap alignment", "implementation gaps", or "is the plan up to date".
+description: 'Compare documented plans against implementation reality and emit a prioritized reconstruction plan. Use when the user says "plan drift", "reality check", "compare docs to code", or asks about roadmap alignment and implementation gaps.'
 metadata:
   short-description: Plan-versus-reality drift scanner
 ---

@@ -1,6 +1,6 @@
 ---
 name: can-i-help
-description: Route a contributor to concrete, data-backed contribution opportunities by collecting repository signals, asking for the contributor's stated interest, and returning file-level recommendations with rationale and first action. Use when the user asks "where can I help", "what can I contribute", "find a good first issue", "find contribution opportunities", or "what should I work on".
+description: Route contributors to data-backed contribution opportunities. Use when the user asks "where can I help", "what can I contribute", "find a good first issue", or "what should I work on".
 metadata:
   short-description: Contribution opportunity router
 ---

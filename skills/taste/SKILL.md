@@ -1,6 +1,6 @@
 ---
 name: taste
-description: Cross-domain taste skill — apply distinctive judgment to any artifact (prose, code, design, decisions) instead of converging to AI defaults. Two modes — `audit` (judge work against the two-sided charter and portable anchors) and `anchor` (load register before producing). Auto-detects by phrasing; override via `/taste audit | anchor`. Trigger on "is this slop?", "overkill?", "elegant?", "taste-test this".
+description: Apply distinctive judgment to prose, code, design, or decisions instead of defaulting to AI mediocrity. Use when auditing an artifact, setting a taste register, or asking "is this slop?", "overkill?", or "taste-test this".
 ---
 
 # Taste

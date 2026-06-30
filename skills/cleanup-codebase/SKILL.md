@@ -1,6 +1,6 @@
 ---
 name: cleanup-codebase
-description: Reduce concepts, duplication, and ceremony in internal code while touching nearby code. Use when working an existing path and you spot dead fields, redundant wrappers, or speculative abstractions; Internal-only hygiene; does not remove public APIs.
+description: Reduce internal duplication, dead code, and ceremony while touching nearby files. Use when you spot dead fields, redundant wrappers, or speculative abstractions in code you are already editing.
 ---
 
 # Cleanup codebase — local simplicity, ruthlessly applied
@@ -61,7 +61,7 @@ Not boundaries: internal modules in the same crate/package, helpers in the same 
 - **Standalone "cleanup sweep" PRs** — these mix unrelated changes, become unreviewable, and conflict with the `<git>` charter's "one concern per commit" rule. Solution: `git move --fixup` to embed the cleanup as an atomic commit alongside the active change.
 - **Files you are not otherwise touching** — opportunistic edits become unreviewable noise; the cleanup must ride alongside work that justifies you being in that file.
 - **Speculative removals you cannot prove are safe** — if you cannot grep-confirm that nothing reads a field, do not delete it; investigate first.
-- **Public API surfaces** — that is `refactor-break-bw-compat`'s territory and needs a migration plan.
+- **Public API surfaces** — that is `refactor-break-compat`'s territory and needs a migration plan.
 
 ---
 

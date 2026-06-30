@@ -1,6 +1,6 @@
 ---
 name: simplify
-description: Review changed code along three axes — reuse, quality, efficiency — via parallel agents, then apply compress-op fixes. Use when the user says "simplify this diff/PR/branch", "tighten up", "compress these changes", or wants axis-decomposed simplification of a specific change-set. Deliberate diff compression; cleanup-codebase works opportunistically while editing nearby code, and review is read-only.
+description: Simplify a diff with a compress-op review pass along reuse, quality, and efficiency axes. Use when the user says "simplify this diff", "tighten up", or "compress these changes".
 metadata:
   short-description: Three-axis compress pass on a diff
 ---
@@ -36,7 +36,7 @@ The three axes map directly onto ODIN's rejection grounds. **Reuse axis** primar
 - **Empty diff** after all fallbacks — exit 11, pass-through.
 - **Single file <50 LOC** with an obvious shape problem — just edit directly.
 - **Opportunistic cleanup while touching nearby code** — that is `cleanup-codebase`'s territory.
-- **Public API removal with migration** — that is `refactor-break-bw-compat`'s territory.
+- **Public API removal with migration** — that is `refactor-break-compat`'s territory.
 - **Read-only assessment, no fix authorization** — use `review`.
 - **Fix driven by an external verifier failure or findings file** — use `fix`. `simplify` is self-sourcing.
 
@@ -96,4 +96,4 @@ The three axes map directly onto ODIN's rejection grounds. **Reuse axis** primar
 - **parallel-launch** — general-purpose decomposer for independent concerns. `simplify` is a specialized invocation of this pattern with a fixed three-axis decomposition (reuse / quality / efficiency). See `parallel-launch/references/delegation-scenarios.md` for the underlying parallelism rules.
 - **review** — read-only assessment of the active branch; does not edit. `simplify` also applies the fixes its review agents found.
 - **fix** — polymorphic iterative repair loop driven by an external failure (verifier output, findings file, bug spec). `simplify` is self-sourcing: it generates its own findings via parallel review agents and consumes them in the same skill invocation.
-- **refactor-break-bw-compat** — public API removal with consumer migration. `simplify` never breaks public contracts; it is compress-only.
+- **refactor-break-compat** — public API removal with consumer migration. `simplify` never breaks public contracts; it is compress-only.

@@ -1,6 +1,6 @@
 ---
 name: debug
-description: Hypothesis-driven defect isolation — stack-trace forensics, breakpoint strategy, state inspection, and root-cause confirmation via minimal repro. Use when a defect surfaces (test failure, crash, exception, wrong output, intermittent flake) and the cause is not immediately obvious from the change set.
+description: Isolate defects with hypothesis-driven debugging and minimal reproduction. Use when a test fails, a crash or exception occurs, output is wrong, or an intermittent flake has no obvious cause.
 ---
 
 A bug is a falsified assumption. Find the assumption, falsify it deliberately, observe the divergence, narrow until one line owns the lie. No speculation, no shotgun edits, no "fix and rerun" guessing.
