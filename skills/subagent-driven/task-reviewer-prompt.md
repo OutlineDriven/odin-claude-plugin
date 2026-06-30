@@ -6,24 +6,22 @@ loop's gate — a fresh `general-purpose` subagent, self-contained, no external
 named agent required.
 
 **Purpose:** verify one task's implementation matches its requirements (nothing
-more, nothing less), stays inside its op, and is well-built.
+more, nothing less) and is well-built.
 
 ```
 Subagent (general-purpose):
-  description: "Review Task N (spec + quality + op)"
+  description: "Review Task N (spec + quality)"
   model: [MODEL — REQUIRED: pick per SKILL.md Model Selection. An omitted
          model inherits the session's model — usually the most expensive.]
   prompt: |
     You are reviewing one task's implementation: whether it matches its
-    requirements, whether it stayed inside its declared op, and whether it is
-    well-built. This is a task-scoped gate, not a merge review — a broad
-    whole-branch review happens separately after all tasks are complete.
+    requirements and whether it is well-built. This is a task-scoped gate,
+    not a merge review — a broad whole-branch review happens separately
+    after all tasks are complete.
 
     ## What Was Requested
 
     Read the task brief: [BRIEF_FILE]
-
-    Declared op for this task: [OP — one of: compress | extend | correct | purge]
 
     Global constraints from the spec/design that bind this task:
     [GLOBAL_CONSTRAINTS]
@@ -77,30 +75,20 @@ Subagent (general-purpose):
 
     Compare the diff against What Was Requested:
     - **Missing:** requirements skipped, missed, or claimed without implementing.
-    - **Extra:** features not requested, over-engineering, unneeded "nice to haves."
+    - **Extra:** features not requested, over-engineering, unneeded "nice to haves,"
+      speculative generality or config the task didn't ask for, capability beyond
+      what the brief specifies.
     - **Misunderstood:** right feature built the wrong way, wrong problem solved.
+    - **Out of scope:** drive-by edits to code the brief didn't authorize touching.
+    - **Incomplete removal:** if the task removed something, check it's actually
+      gone — no dead import, orphaned caller, half-removed surface, or reference
+      with no target left behind. Relocating rather than removing isn't done.
 
     If a requirement cannot be verified from this diff alone (it lives in
     unchanged code or spans tasks), report it as a ⚠️ item instead of broadening
     your search.
 
-    ## Part 2: Op Discipline — Rejection Grounds
-
-    Judge the diff against its declared op. A patch is rejected on any of four
-    grounds — each is a finding, severity per Calibration:
-    - **Excess** — capability or generality beyond the op: speculative params,
-      config for a constant, abstraction with one caller, code no requirement needs.
-    - **Graft** — changes that do not belong to this task: drive-by edits to
-      unrelated code, scope the brief did not authorize.
-    - **Sprawl** — the change scattered where one focused edit would do; a file
-      grown or a concept added the task did not require.
-    - **Sever** — a `purge`/`correct` left something dangling: dead import,
-      orphaned caller, half-removed surface, a reference with no target.
-    An `extend` whose new lines are not load-bearing for the new contract is
-    Excess. A `purge` that relocated rather than removed the surface is not a
-    purge — flag it.
-
-    ## Part 3: Code Quality
+    ## Part 2: Code Quality
 
     - Clean separation of concerns? Proper error handling? DRY without premature
       abstraction? Edge cases handled?
@@ -110,6 +98,8 @@ Subagent (general-purpose):
       plan's file structure? Did this change create already-large new files or
       significantly grow existing ones? (Don't flag pre-existing file sizes —
       focus on what this change contributed.)
+    - Tidiness: is the change scattered where one focused edit would do? Did this
+      task grow a file or add a concept it didn't actually require?
 
     Point at evidence: file:line for every finding and for any check you would
     otherwise answer with a bare "yes." A tight report that cites lines gives the
@@ -123,10 +113,10 @@ Subagent (general-purpose):
 
     Categorize by actual severity. Not everything is Critical. Important means
     this task cannot be trusted until fixed: incorrect or fragile behavior, a
-    missed requirement, an op-rejection ground (Excess/Graft/Sprawl/Sever) that
-    changes what ships, or maintainability damage you would block a merge over —
-    verbatim duplication of a logic block, swallowed errors, tests that assert
-    nothing. "Coverage could be broader" and polish are Minor.
+    missed requirement, out-of-scope changes that affect what ships, or
+    maintainability damage you would block a merge over — verbatim duplication
+    of a logic block, swallowed errors, tests that assert nothing. "Coverage
+    could be broader" and polish are Minor.
 
     If the plan or brief explicitly mandates something this rubric calls a defect
     (a test that asserts nothing, verbatim duplication of a logic block), that IS
@@ -140,12 +130,12 @@ Subagent (general-purpose):
     ## Output Format
 
     ### Spec Compliance
-    - ✅ Spec compliant | ❌ Issues found: [missing/extra/misunderstood, with file:line]
+    - ✅ Spec compliant | ❌ Issues found: [missing/extra/misunderstood/out-of-scope, with file:line]
     - ⚠️ Cannot verify from diff: [requirements unverifiable from the diff alone,
       and what the controller should check — report alongside the ✅/❌ verdict]
 
-    ### Op Discipline
-    - ✅ Within op | ❌ Rejection ground: [Excess/Graft/Sprawl/Sever, with file:line]
+    ### Code Quality
+    - ✅ Well-built | ❌ Issues found: [structure/tests/tidiness problem, with file:line]
 
     ### Strengths
     [What's well done? Be specific. One line if that's all it earns.]
@@ -165,7 +155,6 @@ Subagent (general-purpose):
 - `[MODEL]` — REQUIRED: reviewer model per SKILL.md Model Selection.
 - `[BRIEF_FILE]` — REQUIRED: the task brief (`scripts/task-brief PLAN N` prints
   the path; same file the implementer worked from).
-- `[OP]` — REQUIRED: the task's declared op (compress/extend/correct/purge).
 - `[GLOBAL_CONSTRAINTS]` — binding requirements copied verbatim from the plan's
   Global Constraints or the spec: exact values, formats, and stated
   relationships between components (not process rules — those are in this template).
@@ -175,8 +164,8 @@ Subagent (general-purpose):
 - `[DIFF_FILE]` — REQUIRED: the path `scripts/review-package BASE HEAD` printed;
   the package never enters the controller's context.
 
-**Reviewer returns:** Spec Compliance verdict (✅/❌/⚠️), Op Discipline verdict
+**Reviewer returns:** Spec Compliance verdict (✅/❌/⚠️), Code Quality verdict
 (✅/❌), Strengths, Issues (Critical/Important/Minor), Task quality verdict.
 
-A fix dispatch can address spec gaps, op-rejection grounds, and quality findings
-together; re-review after fixes covers all verdicts.
+A fix dispatch can address spec gaps and quality findings together; re-review
+after fixes covers both verdicts.

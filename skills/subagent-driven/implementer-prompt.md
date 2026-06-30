@@ -13,16 +13,6 @@ Subagent (general-purpose):
   prompt: |
     You are implementing Task N: [task name].
 
-    ## Op classification
-
-    This task's op is [compress | extend | correct | purge]. It means:
-    - compress — preserve behavior and invariants, reduce entropy. No new contract.
-    - extend — add capability; every new line must be load-bearing for it.
-    - correct — restore a named invariant. State which one.
-    - purge — remove a capability; the surface shrinks and does not reappear elsewhere.
-
-    Stay inside that op. Building beyond it is the defect the reviewer hunts for.
-
     ## Task Description
 
     Read your task brief first: [BRIEF_FILE]
@@ -89,20 +79,13 @@ Subagent (general-purpose):
 
     ## Before Reporting Back: Self-Review
 
-    Review with fresh eyes against the four rejection grounds — a reviewer will:
-
-    - **Excess** — did I build past the op? Speculative generality, unused
-      params, config for a value that never changes, abstraction with one
-      caller. Cut it.
-    - **Graft** — does every change belong to THIS task, or did I touch
-      unrelated code? Drop the drive-by edits.
-    - **Sprawl** — did I scatter the change where one focused edit would do?
-      Did I grow a file or add a concept the task did not require?
-    - **Sever** — did I leave a dangling reference, dead import, orphaned
-      caller, or half-removed surface? A `purge` must be complete.
-
-    Then the usual pass:
+    Review with fresh eyes:
     - Completeness: every requirement implemented, edge cases handled.
+    - Scope: every change belongs to THIS task — no drive-by edits to
+      unrelated code, no speculative generality the task didn't ask for, no
+      dangling reference or orphaned caller left behind.
+    - Tidiness: is the change scattered where one focused edit would do?
+      Did this task grow a file or add a concept it didn't actually require?
     - Quality: clear names (what things do, not how), clean, maintainable.
     - Discipline: YAGNI, only what was requested, existing patterns followed.
     - Testing: tests verify real behavior not mocks; TDD evidence if required;
