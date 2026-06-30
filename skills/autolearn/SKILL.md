@@ -19,8 +19,13 @@ metadata:
 - "it's fixed"
 - "working now"
 - "problem solved"
+- "verified the fix"
+- "tests pass now"
+- "build succeeds"
 </trigger_phrases>
 Fire automatically on a trigger phrase or after a verified non-trivial fix. The reject-by-default gate below still decides whether a doc is actually warranted — auto-firing is permission to evaluate, not permission to fabricate.
+
+**Skill integration:** after any non-trivial verified outcome, the orchestrating skill should invoke `/autolearn` to evaluate whether a `docs/solutions/` or `CONCEPTS.md` entry is warranted. The reject-by-default gate still applies — auto-invoke is permission to evaluate, not permission to fabricate.
 <manual_override>`/autolearn [context]` documents immediately without waiting for a trigger phrase. `autolearn mode:refresh [scope]` runs maintenance. `mode:headless` makes any mode non-interactive.</manual_override>
 </auto_invoke>
 
