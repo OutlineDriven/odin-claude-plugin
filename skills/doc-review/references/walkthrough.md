@@ -1,6 +1,6 @@
 # Per-finding Walk-through
 
-This reference defines Interactive mode's per-finding walk-through -- the path the user enters by picking option A (`Review each finding one by one -- accept the recommendation or choose another action`) from the routing question, plus the unified completion report that every terminal path emits.
+This reference defines Interactive mode's per-finding walk-through -- the path the user enters by picking option A from the routing question, plus the unified completion report that every terminal path emits. The walk-through is fully read-only: decisions are recorded in the completion report, never applied to the reviewed document.
 
 Interactive mode only.
 
@@ -8,7 +8,7 @@ Interactive mode only.
 
 ## Routing question (the entry point)
 
-After `safe_auto` fixes apply and synthesis produces the remaining finding set, the orchestrator asks a four-option routing question before any walk-through or bulk action runs.
+After synthesis produces the remaining finding set, the orchestrator asks a four-option routing question before any walk-through or bulk action runs.
 
 **Stem:** `What should the agent do with the remaining N findings?`
 
@@ -16,20 +16,18 @@ After `safe_auto` fixes apply and synthesis produces the remaining finding set, 
 
 ```
 A. Review each finding one by one -- accept the recommendation or choose another action
-B. Auto-resolve with best judgment -- apply per-finding edits the agent can defend, surface the rest
-C. Append findings to the doc's Open Questions section and proceed
+B. Auto-resolve with best judgment -- record per-finding decisions the agent can defend, surface the rest
+C. Record all findings as deferred in the report and proceed
 D. Report only -- take no further action
 ```
 
 If all remaining findings are FYI-subsection-only (no `gated_auto` or `manual` findings at confidence anchor `75` or `100`), skip the routing question entirely and flow to the Phase 5 terminal question.
 
-**Append-availability adaptation.** When `references/open-questions-defer.md` has cached `append_available: false` at Phase 4 start (e.g., read-only document, unwritable filesystem), option C is suppressed from the routing question. The menu shows three options (A / B / D) and the stem appends one line explaining why.
-
 **Dispatch by selection:**
 
-- **A** -- load this walk-through (per-finding loop). Apply decisions accumulate in memory; Open-Questions defers execute inline via `references/open-questions-defer.md`; Skip decisions are recorded as no-action; `Auto-resolve with best judgment on the rest` routes through `references/bulk-preview.md`.
-- **B** -- load `references/bulk-preview.md` scoped to every pending `gated_auto` / `manual` finding. On Proceed, execute the plan. On Cancel, return to the routing question.
-- **C** -- load `references/bulk-preview.md` with every pending finding in the Open-Questions bucket. On Proceed, route every finding through `references/open-questions-defer.md`; no document edits apply. On Cancel, return to the routing question.
+- **A** -- load this walk-through (per-finding loop). Accepted decisions accumulate in memory; Defer decisions are recorded via `references/open-questions-defer.md`; Skip decisions are recorded as no-action; `Auto-resolve with best judgment on the rest` routes through `references/bulk-preview.md`.
+- **B** -- load `references/bulk-preview.md` scoped to every pending `gated_auto` / `manual` finding. On Proceed, record the decisions. On Cancel, return to the routing question.
+- **C** -- load `references/bulk-preview.md` with every pending finding in the defer bucket. On Proceed, record all as deferred. On Cancel, return to the routing question.
 - **D** -- do not enter any dispatch phase. Emit the completion report and flow to Phase 5 terminal question.
 
 ---
@@ -49,10 +47,10 @@ Each finding's recommended action has already been normalized by synthesis step 
 
 1. Announce the cascade: "Skipping/Deferring this root will auto-resolve N dependent finding(s): {titles}. Continue?"
 2. Offer two options: `Cascade -- apply same action to all dependents` (recommended) and `Decide each dependent individually`.
-3. On Cascade: apply the root's action to every dependent and skip those findings' walk-through entries. Persistence follows the per-action routing rules below.
+3. On Cascade: record the root's action for every dependent and skip those findings' walk-through entries.
 4. On Individual: proceed normally -- dependents each get their own walk-through entry.
 
-When the user picks Apply on a root, do NOT cascade -- the premise held, so dependents each need their own decision.
+When the user picks Accept on a root, do NOT cascade -- the premise held, so dependents each need their own decision.
 
 **Orphaned dependents.** If a dependent's root was rejected in a prior round and the root is suppressed this round (per R29), treat the dependent as a standalone finding.
 
@@ -91,7 +89,7 @@ Substitutions:
 - **`why_it_matters`** -- rendered as-is.
 - **`suggested_fix`** -- render as prose describing intent. At most 2 inline backtick spans per sentence. No diff blocks.
 - **`Why it works`** -- grounded reasoning. One to three sentences.
-- **Conflict-context line** -- when contributing personas implied different actions and synthesis broke the tie.
+- **`{Conflict-context line}`** -- when contributing personas implied different actions and synthesis broke the tie.
 
 ### Question stem (short, decision-focused)
 
@@ -104,14 +102,14 @@ Never enumerate alternatives in the stem. One recommendation as a yes/no.
 
 ### Confirmation between findings
 
-After the user answers and before printing the next finding, emit a one-line confirmation: `-> Applied.`, `-> Deferred. Entry appended to "## Deferred / Open Questions".`, or `-> Skipped.`
+After the user answers and before printing the next finding, emit a one-line confirmation: `-> Accepted.`, `-> Deferred.`, or `-> Skipped.`
 
 ### Options (four; adapted as noted)
 
 ```
-A. Apply the proposed fix
-B. Defer -- append to the doc's Open Questions section
-C. Skip -- don't apply, don't append
+A. Accept the recommendation  (recommended)
+B. Defer -- record for later resolution
+C. Skip -- don't record, don't accept
 D. Auto-resolve with best judgment on the rest
 ```
 
@@ -119,9 +117,7 @@ D. Auto-resolve with best judgment on the rest
 
 ### Adaptations
 
-- **N=1:** the heading omits `Finding N of M`. Option D is suppressed -- the menu shows three options: Apply / Defer / Skip.
-- **Open-Questions append unavailable:** option B is omitted. Remap any per-finding `Defer` recommendation to `Skip`. The stem appends one line explaining why.
-- **Combined N=1 + no-append:** the menu shows two options: Apply / Skip.
+- **N=1:** the heading omits `Finding N of M`. Option D is suppressed -- the menu shows three options: Accept / Defer / Skip.
 
 ---
 
@@ -129,38 +125,36 @@ D. Auto-resolve with best judgment on the rest
 
 For each finding's answer:
 
-- **Apply the proposed fix** -- add the finding's id to an in-memory Apply set. **No-fix guard:** if the merged finding has no `suggested_fix`, Apply is not executable. Surface the no-fix sub-question below.
-- **Defer -- append to Open Questions** -- invoke the append flow from `references/open-questions-defer.md`. On success, advance. On conversion-to-Skip, advance with the failure noted.
+- **Accept the recommendation** -- add the finding's id to an in-memory Accepted set. **No-fix guard:** if the merged finding has no `suggested_fix`, Accept is not executable for a concrete fix. Surface the no-fix sub-question below.
+- **Defer** -- record the finding as deferred via `references/open-questions-defer.md`. Advance.
 - **Skip** -- record in decision list. Advance. No side effects.
 - **Auto-resolve with best judgment on the rest** -- exit the walk-through loop. Dispatch `references/bulk-preview.md`, scoped to the current finding and everything not yet decided.
 
-### No-fix sub-question (Apply picked on a finding with no `suggested_fix`)
+### No-fix sub-question (Accept picked on a finding with no `suggested_fix`)
 
-This fires only after the user picks Apply on a finding whose merged record has no `suggested_fix`.
+This fires only after the user picks Accept on a finding whose merged record has no `suggested_fix`.
 
-**Stem:** `Apply isn't executable for this finding -- the review surfaced the issue without a concrete fix. How should the agent proceed?`
+**Stem:** `Accept isn't executable for this finding -- the review surfaced the issue without a concrete fix. How should the agent proceed?`
 
 **Options (fixed order):**
 
 ```
-A. Defer to Open Questions  (recommended)
-B. Skip -- don't apply, don't append
-C. Acknowledge without applying -- record the decision, no document edit
+A. Defer for later resolution  (recommended)
+B. Skip -- don't record
+C. Acknowledge -- record the decision, no concrete fix applied
 ```
 
 **Routing:**
 
-- **A. Defer to Open Questions** -- invoke the append flow from `references/open-questions-defer.md`.
+- **A. Defer** -- record as deferred via `references/open-questions-defer.md`.
 - **B. Skip** -- record Skip. Advance. No side effects.
-- **C. Acknowledge without applying** -- record as `acknowledged`. Do not add to the Apply set. Advance. The completion report surfaces Acknowledged as its own dedicated bucket.
-
-**Availability adaptation.** When append is unavailable, omit option A. The menu becomes Skip / Acknowledge without applying, with Skip labeled `(recommended)`.
+- **C. Acknowledge** -- record as `acknowledged`. Advance. The completion report surfaces Acknowledged as its own dedicated bucket.
 
 ---
 
 ## Override rule
 
-"Override" means the user picks a different preset action. No inline freeform custom-fix authoring -- the walk-through is a decision loop, not a pair-editing surface. A user who wants a variant picks Skip and hand-edits outside the flow.
+"Override" means the user picks a different preset action. No inline freeform custom-fix authoring -- the walk-through is a decision loop, not a pair-editing surface. A user who wants a variant picks Skip and edits outside the flow.
 
 ---
 
@@ -168,23 +162,23 @@ C. Acknowledge without applying -- record the decision, no document edit
 
 Walk-through state is **in-memory only**. The orchestrator maintains:
 
-- An Apply set (finding ids the user picked Apply on)
+- An Accepted set (finding ids the user accepted the recommendation on)
 - A decision list (every answered finding with its action and metadata)
 - The current position in the findings list
 
-Nothing is written to disk per-decision except the in-doc Open Questions appends. An interrupted walk-through discards all in-memory state. Apply decisions have not been dispatched yet (they batch at end-of-walk-through), so they are cleanly lost with no document changes.
+Nothing is written to disk per-decision. An interrupted walk-through discards all in-memory state. No document changes occur at any point during the walk-through.
 
 ---
 
-## End-of-walk-through execution
+## End-of-walk-through recording
 
-After the loop terminates:
+After the loop terminates, emit the unified completion report containing all recorded decisions. No document edits are dispatched -- the walk-through is a decision-recording loop, not a mutation surface.
 
-1. **Apply set:** in a single pass, apply every accumulated Apply-set finding's `suggested_fix` to the document. **Defensive no-fix check:** before dispatching each edit, verify the merged finding carries a `suggested_fix`. If not, skip the edit and record the failure.
-2. **Defer set:** already executed inline during the walk-through. Nothing to dispatch.
-3. **Skip:** no-op.
+1. **Accepted set:** findings where the user accepted the recommendation. Recorded in the report as accepted.
+2. **Defer set:** findings deferred by the user. Recorded in the report's deferred section via `references/open-questions-defer.md`.
+3. **Skip:** no-action findings. Recorded in the report as skipped.
 
-After execution completes, emit the unified completion report.
+After recording completes, emit the unified completion report.
 
 ---
 
@@ -194,14 +188,13 @@ Every terminal path of Interactive mode emits the same completion report structu
 
 ### Minimum required fields
 
-- **Per-finding entries:** title, severity, action taken (Applied / Deferred / Skipped / Acknowledged), append location for Deferred, one-line reason for Skipped, acknowledgement reason for Acknowledged.
+- **Per-finding entries:** title, severity, action taken (Accepted / Deferred / Skipped / Acknowledged). Reason is optional -- when available, drawn from the finding's `why_it_matters` or the user's provided rationale; when not, omitted.
 - **Summary counts by action:** totals per bucket. Include an `acknowledged` count when any entries land in that bucket; omit when zero.
-- **Failures called out explicitly:** any Apply that failed, any Open-Questions append that failed. Failures surface above the per-finding list.
 - **End-of-review verdict.**
 
 ### Report ordering
 
-Failures first, then per-finding entries grouped by action bucket in order `Applied / Deferred / Skipped / Acknowledged`, then summary counts, then Coverage, then the verdict. Omit any bucket whose count is zero.
+Per-finding entries grouped by action bucket in order `Accepted / Deferred / Skipped / Acknowledged`, then summary counts, then Coverage, then the verdict. Omit any bucket whose count is zero.
 
 ### Zero-findings degenerate case
 
@@ -209,14 +202,14 @@ When the routing question was skipped because no actionable findings remained:
 
 No FYI or residual concerns:
 ```
-All findings resolved -- 3 fixes applied.
+All findings resolved -- 3 decisions recorded.
 
 Verdict: Ready.
 ```
 
 FYI or residual concerns remain:
 ```
-All actionable findings resolved -- 3 fixes applied. (2 FYI observations, 1 residual concern remain in the report.)
+All actionable findings resolved -- 3 decisions recorded. (2 FYI observations, 1 residual concern remain in the report.)
 
 Verdict: Ready.
 ```
@@ -225,4 +218,4 @@ Verdict: Ready.
 
 ## Execution posture
 
-The walk-through is operationally read-only with respect to the project except for three permitted writes: the in-memory Apply set / decision list, the in-doc Open Questions appends (managed by `references/open-questions-defer.md`), and the end-of-walk-through batch document edits. Persona agents remain strictly read-only. The orchestrator owns the document edit directly.
+The walk-through is fully read-only with respect to the project. The orchestrator maintains in-memory state (Accepted set, decision list) and emits a completion report. Persona agents remain strictly read-only. No document edits occur at any point.

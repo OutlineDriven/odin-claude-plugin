@@ -173,9 +173,7 @@ For each current-round finding, compare against the primer's rejected list:
 
 ### 3.7 R30 Fix-Landed Matching Predicate
 
-When running round 2+, synthesis verifies that prior-round Applied findings actually landed. This step runs before promotion and routing so regressions are flagged before downstream decisions.
-
-For each current-round finding whose fingerprint matches a prior-round Applied finding:
+When running round 2+, synthesis verifies that prior-round Accepted findings actually landed. For each current-round finding whose fingerprint matches a prior-round Accepted finding:
 
 - **Strong match -- evidence overlap >50%: fix-landed regression.** Flag as "fix did not land" in the report rather than surfacing as a new finding.
 - **Weak match -- evidence overlap <=50%: not a fix-landed regression.** If the current-round item is explicitly a non-actionable verification observation, suppress it and record `Verified: round-N '{title}' landed correctly` in Coverage. Otherwise, treat the finding as new.
@@ -224,11 +222,11 @@ Findings reaching 3.10 have already been gated to anchors `50`, `75`, or `100` b
 
 | Anchor | Autofix Class | Route |
 |--------|---------------|-------|
-| `100`  | `safe_auto`   | Apply silently in Phase 4. Requires `suggested_fix`. Demote to `gated_auto` if missing. |
-| `100`  | `gated_auto`  | Enter the per-finding walk-through with Apply marked (recommended). Requires `suggested_fix`. Demote to `manual` if missing. |
+| `100`  | `safe_auto`   | Record as accepted recommendation in report. Requires `suggested_fix`. Demote to `gated_auto` if missing. |
+| `100`  | `gated_auto`  | Enter the per-finding walk-through with Accept marked (recommended). Requires `suggested_fix`. Demote to `manual` if missing. |
 | `100`  | `manual`      | Enter the per-finding walk-through with user-judgment framing. `suggested_fix` is optional. |
-| `75`   | `safe_auto`   | Demote to `gated_auto` before routing -- silent apply is reserved for anchor `100` findings. Enter the walk-through with Apply marked (recommended). |
-| `75`   | `gated_auto`  | Enter the per-finding walk-through with Apply marked (recommended). Requires `suggested_fix`. Demote to `manual` if missing. |
+| `75`   | `safe_auto`   | Demote to `gated_auto` before routing -- accepted recommendations are reserved for anchor `100` findings. Enter the walk-through with Accept marked (recommended). |
+| `75`   | `gated_auto`  | Enter the per-finding walk-through with Accept marked (recommended). Requires `suggested_fix`. Demote to `manual` if missing. |
 | `75`   | `manual`      | Enter the per-finding walk-through with user-judgment framing. `suggested_fix` is optional. |
 | `50`   | any           | Surface in the FYI subsection regardless of `autofix_class`. Do not enter the walk-through or any bulk action. |
 
@@ -249,24 +247,22 @@ Do NOT drop residual/deferred items that introduce genuinely new signal. When in
 
 Record the count dropped as a Coverage footnote line when non-zero: `Restated: N (residual/deferred items suppressed as duplicates of actionable findings)`. Ordering: footnotes appear in the sequence `Dropped:`, `Chains:`, `Restated:` below the Coverage table. Omit any footnote whose count is zero.
 
-## Phase 4: Apply and Present
+## Phase 4: Present Findings
 
-**User-facing vocabulary rule (applies to ALL user-visible output in Phase 4).** Internal enum values -- `safe_auto`, `gated_auto`, `manual`, `FYI` -- stay inside the schema and synthesis prose. Every word the user sees in Phase 4 output MUST use user-facing vocabulary: "fixes" (for `safe_auto`), "proposed fixes" (for `gated_auto`), "decisions" (for `manual` findings at anchor `75` or `100`), "FYI observations" (for any finding at anchor `50`). The only exception is the `Tier` column in rendered tables, which names the internal enum for transparency.
+**User-facing vocabulary rule (applies to ALL user-visible output in Phase 4).** Internal enum values -- `safe_auto`, `gated_auto`, `manual`, `FYI` -- stay inside the schema and synthesis prose. Every word the user sees in Phase 4 output MUST use user-facing vocabulary: "accepted recommendations" (for `safe_auto`), "proposed fixes" (for `gated_auto`), "decisions" (for `manual` findings at anchor `75` or `100`), "FYI observations" (for any finding at anchor `50`). The only exception is the `Tier` column in rendered tables, which names the internal enum for transparency.
 
-### Apply safe_auto fixes
+### Record safe_auto findings as accepted recommendations
 
-Apply only `safe_auto` findings **at confidence anchor `100`** to the document in a single pass. This matches the 3.10 routing table: anchor `100` + `safe_auto` silent-applies; anchor `75` + `safe_auto` was demoted to `gated_auto` in 3.10; anchor `50` + any `autofix_class` routes to FYI.
+Record `safe_auto` findings **at confidence anchor `100`** as accepted recommendations in the completion report. These findings have one clear correct fix AND evidence directly confirms (anchor `100`).
 
-- Edit the document inline using the platform's edit tool
-- Track what was changed for the "Applied fixes" section in the rendered output
-- Do not ask for approval -- these have one clear correct fix AND evidence directly confirms (anchor `100`)
-- Do NOT silent-apply any `safe_auto` finding at anchor `75` or `50`
+- Track what was recorded for the "Accepted recommendations" section in the rendered output
+- Do NOT record any `safe_auto` finding at anchor `75` or `50` as accepted -- those enter the walk-through or FYI per the routing table
 
-List every applied fix in the output summary so the user can see what changed.
+List every accepted recommendation in the output summary so the user can see what was recommended.
 
 ### Route Remaining Findings
 
-After safe_auto fixes apply, remaining findings split into buckets:
+After safe_auto findings are recorded, remaining findings split into buckets:
 
 - `gated_auto` and `manual` findings at confidence anchor `75` or `100` -> enter the routing question (see `references/walkthrough.md`)
 - FYI-subsection findings -> surface in the presentation only, no routing
@@ -277,8 +273,8 @@ After safe_auto fixes apply, remaining findings split into buckets:
 ```
 Document review complete (headless mode).
 
-Applied N fixes:
-- <section>: <what was changed> (<reviewer>)
+Accepted N recommendations:
+- <section>: <what was recommended> (<reviewer>)
 
 Proposed fixes (concrete fix, requires user confirmation):
 
@@ -325,9 +321,9 @@ Present findings using the review output template (read `references/review-outpu
 - Errors first -- these need resolution
 - Omissions second -- these need additions
 
-Brief summary at the top: "Applied N fixes. K items need attention (X errors, Y omissions). Z FYI observations."
+Brief summary at the top: "Accepted N recommendations. K items need attention (X errors, Y omissions). Z FYI observations."
 
-Include the Coverage table, applied fixes, FYI observations (as a distinct subsection), residual concerns, and deferred questions.
+Include the Coverage table, accepted recommendations, FYI observations (as a distinct subsection), residual concerns, and deferred questions.
 
 **All tables MUST be pipe-delimited markdown (`| col | col |`). Do NOT use ASCII box-drawing characters under any circumstances.**
 
@@ -337,26 +333,24 @@ Include the Coverage table, applied fixes, FYI observations (as a distinct subse
 
 **Interactive mode:** fire the terminal question using the platform's blocking question tool.
 
-**Stem:** `Apply decisions and what next?`
+**Stem:** `Record decisions and what next?`
 
-**Options (three by default; two in the zero-actionable case):**
-
-When `fixes_applied_count > 0`:
+When `decisions_recorded_count > 0`:
 
 ```
-A. Apply decisions and proceed to implementation
-B. Apply decisions and re-review
-C. Exit without further action
+A. Persist review record and exit
+B. Re-review with updated context
+C. Exit without persisting
 ```
 
-When `fixes_applied_count == 0`:
+When `decisions_recorded_count == 0`:
 
 ```
-A. Proceed to implementation
-B. Exit without further action
+A. Persist review record and exit
+B. Exit without persisting
 ```
 
-**Label adaptation:** when no decisions are queued to apply, the primary option drops the `Apply decisions and` prefix.
+**Label adaptation:** when no decisions are queued, the primary option drops the `Record decisions and` prefix.
 
 ### Iteration limit
 
@@ -373,4 +367,4 @@ Return "Review complete" as the terminal signal for callers, regardless of which
 
 ## Iteration Guidance
 
-On subsequent passes, re-dispatch personas with the multi-round decision primer and re-synthesize. Fixed findings self-suppress because their evidence is gone from the current doc; rejected findings are handled by the R29 pattern-match suppression rule; applied-fix verification uses the R30 matching predicate. If findings are repetitive across passes after these mechanisms run, recommend completion.
+On subsequent passes, re-dispatch personas with the multi-round decision primer and re-synthesize. Fixed findings self-suppress because their evidence is gone from the current doc; rejected findings are handled by the R29 pattern-match suppression rule; accepted-recommendation verification uses the R30 matching predicate. If findings are repetitive across passes after these mechanisms run, recommend completion.

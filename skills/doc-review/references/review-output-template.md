@@ -23,9 +23,9 @@ This template describes the Phase 4 interactive presentation -- what the user se
 - security -- plan adds public API endpoint with auth flow
 - scope-guardian -- plan has 15 requirements across 3 priority levels
 
-Applied 5 fixes. 4 items need attention (2 errors, 2 omissions). 2 FYI observations.
+Accepted 5 recommendations. 4 items need attention (2 errors, 2 omissions). 2 FYI observations.
 
-### Applied fixes
+### Accepted recommendations
 
 - Standardized "pipeline"/"workflow" terminology to "pipeline" throughout (coherence)
 - Fixed cross-reference: Section 4 referenced "Section 3.2" which is actually "Section 3.1" (coherence)
@@ -104,8 +104,8 @@ Restated: 2 (residual/deferred items suppressed as duplicates of actionable find
 
 ## Section Rules
 
-- **Summary line**: Always present after the reviewer list. Format: "Applied N fixes. K items need attention (X errors, Y omissions). Z FYI observations." Omit any zero clause except the FYI clause when zero (it's informative that none surfaced).
-- **Applied fixes**: List all fixes that were applied automatically (`safe_auto` tier). Include enough detail per fix to convey the substance. Omit section if none.
+- **Summary line**: Always present after the reviewer list. Format: "Accepted N recommendations. K items need attention (X errors, Y omissions). Z FYI observations." Omit any zero clause except the FYI clause when zero (it's informative that none surfaced).
+- **Accepted recommendations**: List all findings that were accepted as recommendations (`safe_auto` tier). Include enough detail per recommendation to convey the substance. Omit section if none.
 - **P0-P3 sections**: Only include sections that have actionable findings (`gated_auto` or `manual`). Omit empty severity levels. Within each severity, separate into **Errors** and **Omissions** sub-headers. Omit a sub-header if that severity has none of that type. The `Tier` column surfaces whether a finding is `gated_auto` or `manual`.
 - **FYI Observations**: Findings at confidence anchor `50` regardless of `autofix_class`. Surface here for transparency; these are not actionable and do not enter the walk-through. Omit section if none.
 - **Residual Concerns**: Residual concerns noted by personas that did not make it above the confidence gate. Listed for transparency; not promoted into the review surface. Omit section if none.
