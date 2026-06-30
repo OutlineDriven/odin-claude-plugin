@@ -1,5 +1,5 @@
 ---
-name: plans
+name: plan
 description: Conducts read-only planning before coding. Use when designing an implementation plan, defining objectives, gathering files and tools, or persisting a plan to disk.
 metadata:
   short-description: Read-only planning; opt-in durable plan at docs/plans/<slug>.md
