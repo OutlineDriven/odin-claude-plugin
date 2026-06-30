@@ -34,9 +34,9 @@ After a fresh dispatch, append the new result to the current run's cache file at
 
 ## Topic surface hash
 
-The topic surface is the user-supplied content the web research is grounded on: the focus hint plus a stable repo discriminator. This keeps the cache key meaningful when focus is empty — two bare-prompt invocations in the same repo legitimately share research, but the key still differentiates repos.
+The topic surface is the user-supplied content the web research is grounded on: the focus hint, topic text, and a stable repo discriminator. This keeps the cache key meaningful when focus is empty — two bare-prompt invocations in the same repo legitimately share research, but the key still differentiates repos.
 
-**Step 1: Resolve the repo discriminator.** Use this fallback chain (first match wins):
+**Step 1: Resolve the repo discriminator.** Use this fallback chain (first match wins). Capture stdout only; ignore stderr; require exit code 0; strip trailing newline:
 
 1. `git remote get-url origin` — stable across machines, correct for collaborators on the same remote.
 2. `git rev-parse --show-toplevel` — absolute repo path; machine-local but always available in a git checkout.
@@ -50,7 +50,7 @@ topic_surface_hash = sha256("focus\0" + normalized_focus + "\0topic\0" + normali
 
 - `normalized_focus` = focus hint lowercased with whitespace collapsed (empty string when no focus).
 - `normalized_topic` = topic text lowercased with whitespace collapsed.
-- `raw_repo_discriminator` = raw command output from Step 1 (do not normalize).
+- `raw_repo_discriminator` = raw stdout from Step 1, trailing newline stripped.
 
 ## Degradation
 
