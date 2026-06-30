@@ -8,7 +8,7 @@ Classify incoming input before dispatching to a fix sub-skill. Evaluate the tabl
 
 | Priority | Mode | Minimum conditions | Dispatch target |
 |----------|------|--------------------|-----------------|
-| 1 | `gh-route` | GH-flavored input AND open PR exists AND `gh auth status` exits 0 | `gh-fix-ci` or `gh-address-comments` (sub-routed) |
+| 1 | `gh-route` | GH-flavored input AND open PR exists AND `gh auth status` exits 0 | `gh-fix-ci` or `resolve-pr-feedback` (sub-routed) |
 | 2 | `findings` | Input is a structured findings artifact or findings-formatted text | findings handler |
 | 3 | `verifier-failure` | Input is raw verifier stdout/stderr | verifier handler |
 | 4 | `bug-spec` | Free-text bug description — catch-all fallback | bug-spec handler |
@@ -37,9 +37,9 @@ If any signal is absent the mode degrades to `GH_PARTIAL` ambiguity (see Ambigui
 | Sub-target | Trigger language |
 |------------|-----------------|
 | `gh-fix-ci` | "CI", "Actions", "workflow", "checks", `github.com/.*/actions/runs/.*` |
-| `gh-address-comments` | "reviewer said", "address comment", "PR feedback", "requested changes" |
+| `resolve-pr-feedback` | "reviewer said", "address comment", "PR feedback", "requested changes" |
 
-When both sets of language appear simultaneously, fire `AMBIGUOUS_GH_ROUTE` and ask which to address first (single-select AskUserQuestion: `gh-fix-ci`, `gh-address-comments`).
+When both sets of language appear simultaneously, fire `AMBIGUOUS_GH_ROUTE` and ask which to address first (single-select AskUserQuestion: `gh-fix-ci`, `resolve-pr-feedback`).
 
 ---
 

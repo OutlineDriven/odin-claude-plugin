@@ -15,7 +15,7 @@ Failure-driven iterative repair. Detect → Prioritize → Fix ONE thing → Com
 
 **NOT apply:**
 - CI/PR workflows with no local context → use `gh-fix-ci`
-- PR review comments → use `gh-address-comments`
+- PR review comments → use `resolve-pr-feedback`
 - Merge conflicts
 - Analysis-only tasks → use `resolve` or `debug`
 - Planned change without a failure driver → use `proceed`
@@ -92,9 +92,9 @@ When open PR + `gh auth status` clean + GH-flavored input:
 | Sub-target | Trigger language |
 |------------|-----------------|
 | `gh-fix-ci` | "CI", "Actions", "workflow", "checks", Actions run URL |
-| `gh-address-comments` | "reviewer said", "address comment", "PR feedback", "requested changes" |
+| `resolve-pr-feedback` | "reviewer said", "address comment", "PR feedback", "requested changes" |
 
-Both sets of language → fire `AMBIGUOUS_GH_ROUTE` (single-select: `gh-fix-ci` vs `gh-address-comments`).
+Both sets of language → fire `AMBIGUOUS_GH_ROUTE` (single-select: `gh-fix-ci` vs `resolve-pr-feedback`).
 Partial match → `GH_PARTIAL` ambiguity flag.
 
 ## Hand-off & Integration

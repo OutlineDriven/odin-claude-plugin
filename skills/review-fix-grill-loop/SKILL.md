@@ -20,7 +20,7 @@ NOT:
 - Read-only opinion, no fixes → `review`.
 - Behavior-preserving compression only → `simplify`.
 - A single known verifier failure or bug → `fix`.
-- GitHub PR review comments → `gh-address-comments`.
+- GitHub PR review comments → `resolve-pr-feedback`.
 
 ## Inputs and Flags
 
