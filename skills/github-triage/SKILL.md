@@ -68,7 +68,8 @@ Group open issues into three buckets and display oldest-first:
 1. Dispatch Explore agent to read full issue + all comments + related code paths.
 2. Present category and state recommendations with reasoning.
 3. For bugs: attempt reproduction. Run repo tests, trace logic.
-4. If underspecified, run a `/domain-model` session.
+4. If underspecified, do a focused domain-model pass: map entities and
+   constraints before re-categorizing.
 5. Apply outcome per state.
 
 ## `awaiting_info` comment template

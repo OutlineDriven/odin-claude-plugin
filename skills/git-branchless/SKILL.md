@@ -104,9 +104,9 @@ Full recipes with rationale: `references/recipes.md`.
 - **`commit`** is the per-commit-grouping concern. Pair this skill
   with `commit` when the task is "commit my changes" — branchless
   handles workflow, commit handles per-change boundaries.
-- **`git-guardrails-claude-code`** is the complementary block-list hook.
-  This skill teaches the branchless idioms; that skill enforces a hard
-  block on `git push --force`, `git reset --hard`, and similar. They
+- A complementary block-list hook enforces a hard block on
+  `git push --force`, `git reset --hard`, and similar. This skill
+  teaches the branchless idioms; that hook enforces the boundary. They
   coexist — the hook surfaces a refusal, this skill surfaces the right
   alternative.
 - **`fix`** drives iterative repair via per-iteration commits + revert
