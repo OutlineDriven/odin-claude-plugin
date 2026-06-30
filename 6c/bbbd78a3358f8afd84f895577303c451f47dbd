@@ -1,0 +1,26 @@
+skills/github-triage/SKILL.md
+  s_3812306635e3e0::t_e85dc02d06a17d 71-72
+.claude-plugin/plugin.json
+  s_3812306635e3e0::t_2d5de3d6ce1829 3
+skills/git-branchless/SKILL.md
+  s_3812306635e3e0::t_370492360e7483 107-109
+.claude-plugin/marketplace.json
+  s_3812306635e3e0::t_f95d1e4f695033 17
+  s_3812306635e3e0::t_390c187febe79a 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.6",
+  "base_commit_sha": "6cbbbd78a3358f8afd84f895577303c451f47dbd",
+  "prompts": {},
+  "sessions": {
+    "s_3812306635e3e0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "09449591-14a9-4764-8d54-7035327404b8",
+        "model": "unknown"
+      },
+      "human_author": "metaphorics <152830360+metaphorics@users.noreply.github.com>"
+    }
+  }
+}
