@@ -105,12 +105,15 @@ This stays in ideate — no skill handoff. It is the "think across the set befor
 
 ### 5.2 Choose a direction
 
-The file is already written, so there is no save step.
+1. **Identify the idea** by number or name (skip if the user already named it). Match against the ranked list from Phase 4.2.
+2. **Build a focused seed** from the idea's substance already in the orchestrator's context. Do **not** pass the whole file — wasteful and noisy. The seed is feature-description-shaped:
 
-- **Inside a git repo:** offer to commit only the ideation doc (do not create a branch, do not push; if the user declines, leave it uncommitted).
-- **Non-repo file:** skip the commit offer.
+   > `<title> — <description>. Basis: <basis/evidence>. Why it matters: <rationale>. Known tradeoffs: <downsides>.`
 
-Then narrate the path and end the session — do not return to the menu.
+   Append a one-line provenance pointer: `(Seeded from ideate: <path>, idea "<title>")` — it records origin and lets the downstream skill pull adjacent detail if it wants, without being forced to read anything.
+3. **Load the `askme` skill** with that seed. The saved file is already the record — no extra write step.
+
+Do **not** skip intent-clarification and go straight to `plan` — `plan` wants a clarified direction. Ideation is a legitimate terminal state; intent-clarification via `askme` is the bridge to planning, not a required next step.
 
 ### 5.3 Discard (free text)
 
@@ -132,6 +135,6 @@ Before finishing, check:
 - the original many-ideas -> critique -> survivors mechanism was preserved
 - every rejected idea has a reason
 - survivors are materially better than a naive "give me ideas" list
-- the deliverable was written automatically (Phase 4) — to `docs/ideation/` when present, else the temp area, never the user's CWD
+- the deliverable was written automatically (Phase 4) — to `docs/ideation/`
 - the session showed a concise summary, not a reproduction of the full deliverable
 - acting on an idea routes to `askme`, not directly to implementation

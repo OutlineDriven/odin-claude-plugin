@@ -58,8 +58,8 @@ Don't bulk-load these at start. Read each file only when the workflow phase that
 - `references/subagent-template.md` — prompt template for reviewer subagents. Read at dispatch time; fill `{persona_file}`, `{schema}`, `{document_type}`, `{document_path}`, `{origin_path}`, `{decision_primer}`, `{document_content}` slots.
 - `references/synthesis-and-presentation.md` — synthesis pipeline (validate, confidence gate, dedup, promotion, routing, sort, R29/R30 suppression). Read after all agents return.
 - `references/walkthrough.md` — per-finding walk-through and routing question. Read in interactive mode when actionable findings remain after synthesis.
-- `references/bulk-preview.md` — bulk action preview for best-judgment and Append-to-Open-Questions paths. Read when the user picks routing option B or C, or walk-through option D.
-- `references/open-questions-defer.md` — Defer action's in-doc append mechanic. Read when a finding is deferred to Open Questions.
+- `references/bulk-preview.md` — bulk action preview for best-judgment and defer-in-report paths. Read when the user picks routing option B or C, or walk-through option D.
+- `references/open-questions-defer.md` — Defer action's report-recording mechanic. Read when a finding is deferred; records the finding and rationale in the completion report's deferred section without mutating the reviewed document.
 - `references/review-output-template.md` — exact output format for interactive-mode presentation. Read at Phase 4 presentation time.
 
 ## Workflow
@@ -187,14 +187,14 @@ The four output tiers (user-facing labels in parentheses):
 What should the agent do with the remaining N findings?
 
 A. Review each finding one by one — accept the recommendation or choose another action
-B. Auto-resolve with best judgment — apply per-finding edits the agent can defend, surface the rest
-C. Append findings to the doc's Open Questions section and proceed
+B. Auto-resolve with best judgment — record per-finding decisions the agent can defend, surface the rest
+C. Record all findings as deferred in the report and proceed
 D. Report only — take no further action
 ```
 
-Option C is suppressed when the document is read-only (append unavailable).
+Option C is suppressed when all findings are already FYI-only.
 
-The walk-through (`references/walkthrough.md`) handles per-finding decisions with four options per finding (Apply / Defer / Skip / Auto-resolve-the-rest), no-fix guard, and premise-dependency cascading. The bulk preview (`references/bulk-preview.md`) shows a compact plan before any bulk action. Defer actions invoke the Open Questions append flow (`references/open-questions-defer.md`).
+The walk-through (`references/walkthrough.md`) handles per-finding decisions with four options per finding (Accept recommendation / Defer / Skip / Auto-resolve-the-rest), no-fix guard, and premise-dependency cascading. All decisions are recorded in the completion report — the walk-through never edits the reviewed document. The bulk preview (`references/bulk-preview.md`) shows a compact plan of intended decisions before any bulk action executes. Defer decisions are recorded in the report's deferred section with rationale; they do not append to the reviewed document.
 
 ### Phase 6 — Terminal question (interactive mode only)
 
@@ -202,17 +202,17 @@ After all findings are resolved, ask:
 
 **Stem:** `Apply decisions and what next?`
 
-When `fixes_applied_count > 0`:
+When `decisions_recorded_count > 0`:
 ```
-A. Apply decisions and proceed to implementation
-B. Apply decisions and re-review
-C. Exit without further action
+A. Persist review record and exit
+B. Re-review with updated context
+C. Exit without persisting
 ```
 
-When `fixes_applied_count == 0`:
+When `decisions_recorded_count == 0`:
 ```
-A. Proceed to implementation
-B. Exit without further action
+A. Persist review record and exit
+B. Exit without persisting
 ```
 
 After 2 refinement passes, recommend completion. Return "Review complete" as the terminal signal.
