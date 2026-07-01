@@ -1,0 +1,21 @@
+.claude-plugin/marketplace.json
+  s_dd585f3c182711::t_27f9b4e6d7fee3 3,17
+.claude-plugin/plugin.json
+  s_dd585f3c182711::t_6380210adc84c9 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.6",
+  "base_commit_sha": "05fadb477429496a6a547ecda8143d4569d8be9d",
+  "prompts": {},
+  "sessions": {
+    "s_dd585f3c182711": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0a6f70e8-6494-4cdb-959f-22af7b17fe66",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "metaphorics <152830360+metaphorics@users.noreply.github.com>"
+    }
+  }
+}
