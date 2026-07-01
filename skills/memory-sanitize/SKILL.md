@@ -1,7 +1,6 @@
 ---
 name: memory-sanitize
 description: Produces share-safe copies of memory files with PII and credentials redacted, leaving originals untouched. Use when sanitizing memory for sharing, redacting PII, or scanning for credentials.
-# auto-invoke: explicitly permitted — safety preserved: skill never mutates originals; copies to /tmp only
 ---
 
 Redact PII and scan for credentials in memory files — write copies to `/tmp`, never touch originals.

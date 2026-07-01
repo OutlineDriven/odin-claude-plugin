@@ -1,6 +1,6 @@
 ---
 name: generate-my-taste
-description: 'Generate a personal taste skill from local evidence and confirmation forks. Use when the user says "generate my taste skill", "make my taste skill", or "derive my taste spine".'
+description: Generate a personal taste skill from local evidence and confirmation forks. Use when the user says "generate my taste skill", "make my taste skill", or "derive my taste spine".
 disable-model-invocation: true
 ---
 

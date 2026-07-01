@@ -1,6 +1,6 @@
 ---
 name: gh-fix-ci
-description: 'Inspect failing GitHub Actions checks on a PR, summarize failures, and fix after approval. Use when the user asks to debug or fix failing PR CI, or when CI checks fail on a GitHub pull request.'
+description: Inspect failing GitHub Actions checks on a PR, summarize failures, and fix after approval. Use when the user asks to debug or fix failing PR CI, or when CI checks fail on a GitHub pull request.
 metadata:
   short-description: Fix failing Github CI actions
 ---

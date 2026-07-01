@@ -1,6 +1,6 @@
 ---
 name: drift-detect
-description: 'Compare documented plans against implementation reality and emit a prioritized reconstruction plan. Use when the user says "plan drift", "reality check", "compare docs to code", or asks about roadmap alignment and implementation gaps.'
+description: Compare documented plans against implementation reality and emit a prioritized reconstruction plan. Use when the user says "plan drift", "reality check", "compare docs to code", or asks about roadmap alignment and implementation gaps.
 metadata:
   short-description: Plan-versus-reality drift scanner
 ---

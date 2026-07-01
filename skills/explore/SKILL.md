@@ -1,6 +1,6 @@
 ---
 name: explore
-description: 'Explore the codebase read-only to map structure, symbols, and dependencies. Use when the user says "explore", "find where X is", "how does X work in the code", "map the codebase", or "what files handle Y".'
+description: Explore the codebase read-only to map structure, symbols, and dependencies. Use when the user says "explore", "find where X is", "how does X work in the code", "map the codebase", or "what files handle Y".
 ---
 
 # Explore Command

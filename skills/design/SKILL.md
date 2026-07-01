@@ -1,6 +1,6 @@
 ---
 name: design
-description: 'Set visual and interaction direction for UI surfaces before writing code. Use when starting UI work, defining palettes or design tokens, or when output looks AI-generic, vibe-coded, or default-framework sloppy.'
+description: Set visual and interaction direction for UI surfaces before writing code. Use when starting UI work, defining palettes or design tokens, or when output looks AI-generic, vibe-coded, or default-framework sloppy.
 ---
 
 Direction first, tokens second, code last. Restraint is the default posture; ONE intentional moment per surface earns the lift.

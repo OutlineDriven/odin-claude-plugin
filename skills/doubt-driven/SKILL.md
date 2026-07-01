@@ -1,6 +1,6 @@
 ---
 name: doubt-driven
-description: 'Subject non-trivial decisions to adversarial review before they stand. Use when correctness matters more than speed, the code is unfamiliar, stakes are high, or verifying now is cheaper than debugging later.'
+description: Subject non-trivial decisions to adversarial review before they stand. Use when correctness matters more than speed, the code is unfamiliar, stakes are high, or verifying now is cheaper than debugging later.
 ---
 
 # Doubt-Driven Development

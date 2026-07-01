@@ -1,6 +1,6 @@
 ---
 name: design-by-contract
-description: 'Implement Design-by-Contract with formal preconditions, postconditions, and invariants. Use when crossing public API boundaries, guarding complex state invariants, or hardening untrusted inputs and integration seams.'
+description: Implement Design-by-Contract with formal preconditions, postconditions, and invariants. Use when crossing public API boundaries, guarding complex state invariants, or hardening untrusted inputs and integration seams.
 ---
 
 # Design-by-Contract development

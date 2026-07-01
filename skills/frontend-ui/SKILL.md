@@ -1,6 +1,6 @@
 ---
 name: frontend-ui
-description: 'Build production-quality user-facing interfaces. Use when creating or modifying components, implementing layouts, managing state, or when the output must look hand-crafted rather than AI-generated.'
+description: Build production-quality user-facing interfaces. Use when creating or modifying components, implementing layouts, managing state, or when the output must look hand-crafted rather than AI-generated.
 ---
 
 # Frontend UI Engineering

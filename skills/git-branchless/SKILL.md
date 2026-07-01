@@ -1,6 +1,6 @@
 ---
 name: git-branchless
-description: 'Apply idiomatic git-branchless workflows to planning and execution. Use when doing multi-commit work, stack edits, rebases, fixups, stacked-PR publishing, or when the user mentions branchless, smartlog, git move, or git undo.'
+description: Apply idiomatic git-branchless workflows to planning and execution. Use when doing multi-commit work, stack edits, rebases, fixups, stacked-PR publishing, or when the user mentions branchless, smartlog, git move, or git undo.
 ---
 
 # Git-branchless

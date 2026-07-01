@@ -1,6 +1,6 @@
 ---
 name: docs-and-adrs
-description: 'Record decisions and documentation that explain why the codebase is shaped as it is. Use when making architectural decisions, changing public APIs, shipping features, or capturing context for future engineers and agents.'
+description: Record decisions and documentation that explain why the codebase is shaped as it is. Use when making architectural decisions, changing public APIs, shipping features, or capturing context for future engineers and agents.
 ---
 
 # Documentation and ADRs

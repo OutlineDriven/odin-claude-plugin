@@ -1,7 +1,6 @@
 ---
 name: caveman
 description: Switch to a verbosity-reduction response register. Use when the user says "caveman", "compact mode", "less tokens", "be brief", or context-window pressure calls for shorter replies.
-# auto-invoke: explicitly permitted — fires on description-match phrasings ("caveman", "be brief")
 ---
 
 Concise grammatical English — not telegraphic fragmentation. Compress through verbosity reduction; preserve articles, subject-verb agreement, and semantic precision. Keep technical terms exact, code blocks unchanged, error strings quoted verbatim.

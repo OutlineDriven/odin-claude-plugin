@@ -1,6 +1,6 @@
 ---
 name: improve-architecture
-description: 'Surface deepening refactors that turn shallow modules into deep ones. Use when the user asks to improve architecture, find refactor candidates, raise testability, or make a codebase more agent-navigable.'
+description: Surface deepening refactors that turn shallow modules into deep ones. Use when the user asks to improve architecture, find refactor candidates, raise testability, or make a codebase more agent-navigable.
 disable-model-invocation: true
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: llm-self-loop
-description: 'Restructures human-gated workflows into autonomous LLM loops with file-based outputs. Use when a task needs a button click, dashboard check, or human verdict inside its iteration loop.'
+description: Restructures human-gated workflows into autonomous LLM loops with file-based outputs. Use when a task needs a button click, dashboard check, or human verdict inside its iteration loop.
 ---
 
 The job: turn workflows that need a human in the inner loop into workflows the LLM closes itself. The two halves are *removing the trigger gate* and *opening observability*.
