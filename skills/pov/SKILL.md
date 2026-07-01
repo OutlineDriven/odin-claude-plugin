@@ -1,6 +1,6 @@
 ---
 name: pov
-description: Give a decisive, project-grounded verdict on an external input — judged against the current project, not in the abstract. Use to decide whether to adopt, switch to, or revisit a technology, library, pattern, platform, or architecture, or for a mid-session second opinion. Always returns a project-specific verdict, so it is not for neutral explainers or generating options.
+description: Decisive, project-grounded verdict on whether to adopt, switch to, or revisit a technology, library, pattern, platform, or architecture; also a mid-session second opinion. Use for a verdict against the current project — not for neutral explainers or option-generation.
 argument-hint: "[the external thing to judge, plus any links] — or invoke bare mid-session for a second opinion"
 metadata:
   short-description: Project-grounded verdict on an external technology, library, pattern, or platform

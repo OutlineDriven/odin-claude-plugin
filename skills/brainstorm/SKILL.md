@@ -1,6 +1,6 @@
 ---
 name: brainstorm
-description: Explore vague or ambitious ideas into a right-sized requirements-only plan. Use when the user wants to brainstorm, think through scope, decide what to build, or needs collaborative product framing before planning. Not for a decisive verdict on whether to adopt or switch to a specific external technology, library, or platform.
+description: Explore vague or ambitious ideas into a right-sized requirements-only plan. Use when the user wants to brainstorm, think through scope, decide what to build, or needs collaborative product framing before planning — not for a decisive verdict on whether to adopt or switch to a specific external technology, library, or platform.
 metadata:
   short-description: Collaborative requirements framing → requirements-only odin-plan/v1 artifact
 ---
