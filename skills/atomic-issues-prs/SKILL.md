@@ -32,16 +32,19 @@ Never bundle unrelated changes.
 Commit the **whole** set into N atomic commits first, running the repo-native type-checker and linter
 before each commit. This is the patch-isolation mechanism: each unit becomes one self-contained commit,
 so per-unit branches come from **cherry-pick** — never from re-staging a dirty tree, which would let
-later units swallow earlier diffs. Present the unit→commit list to the user.
+later units swallow earlier diffs. Present the unit→commit list to the user for visibility, then proceed
+immediately — do not wait for a go-ahead.
 
-## Phase 2 — Choose objects (ask the user)
+## Phase 2 — Route objects per unit
 
-Ask what to create per unit:
+Auto-route each unit by its commit type prefix (`<type>: ...`) — no interactive ask:
 
-- **PR-only** — one branch + one PR per unit.
-- **Issue + linked PR** — a tracking issue per unit, plus a PR whose body says `Closes #N`.
+- **`feat` / `fix` / `perf` / `revert`** → **Issue + linked PR** — behavior-affecting; a tracking issue
+  gives it a changelog/discussion anchor, PR body says `Closes #N`.
+- **`docs` / `style` / `refactor` / `test` / `chore` / `build` / `ci`** → **PR-only** — mechanical,
+  self-explanatory, no separate tracking needed.
 
-One answer applies to the run; honor a per-unit override if the user volunteers one.
+Honor an explicit per-unit override if the user states one; otherwise route silently.
 
 ## Phase 3 — Resolve push URL (once)
 
@@ -66,10 +69,11 @@ For each unit, in dependency order:
      branch; PR bases on that branch (a stacked PR). Cherry-pick only this unit's commit — the
      prerequisite is already present via the parent branch, so no prerequisite is lost.
    - **Dependent unit in fork mode**: cross-fork stacking can't be expressed (a fork PR's base must be a
-     branch in the canonical repo, not the fork). Stop and ask the user to land the prerequisite PR
-     first, then re-run for the dependent unit — do not silently flatten it onto `<default>`.
+     branch in the canonical repo, not the fork). Flatten it onto `<canonical-default-base>` instead of
+     the prerequisite branch, and prefix the PR body with a warning line naming the prerequisite unit and
+     noting the dependency was flattened — no blocking ask, but the compromise is never silent.
 2. `git push <push-url> <branch>:refs/heads/<branch>` (same form both modes — only the URL differs).
-3. If issues were chosen: `gh issue create --repo <canonical-slug> --title "<summary>" --body-file <tmp>` → capture `#N`.
+3. If this unit routed to Issue + linked PR (Phase 2): `gh issue create --repo <canonical-slug> --title "<summary>" --body-file <tmp>` → capture `#N`.
 4. `gh pr create --repo <canonical-slug>` — direct mode: `--base <parent-ref> --head <branch>`;
    fork mode: `--base <default> --head <fork-owner>:<branch>`. Include `Closes #N` in the body when an issue was filed.
 5. Emit the issue/PR URLs; move to the next unit.
