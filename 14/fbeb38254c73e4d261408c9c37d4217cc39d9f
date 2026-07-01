@@ -1,0 +1,19 @@
+skills/atomic-issues-prs/SKILL.md
+  s_dd585f3c182711::t_20b849a20b3bad 57-61
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.6",
+  "base_commit_sha": "14fbeb38254c73e4d261408c9c37d4217cc39d9f",
+  "prompts": {},
+  "sessions": {
+    "s_dd585f3c182711": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0a6f70e8-6494-4cdb-959f-22af7b17fe66",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "metaphorics <152830360+metaphorics@users.noreply.github.com>"
+    }
+  }
+}
