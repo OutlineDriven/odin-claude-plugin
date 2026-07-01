@@ -599,6 +599,8 @@ run_allowlisted_action(intent.action, intent.params)
 
 Detailed security checklists and pre-commit verification steps: `references/security-checklist.md`.
 
+- **vs `security-review`** — `security-review` is the audit/assessment pass — STRIDE threat modeling, OWASP walkthrough, dependency audit — run against code that already exists. `security-hardening` applies OWASP prevention patterns at build time, while code is being written.
+
 ## Common Rationalizations
 
 | Rationalization | Reality |
