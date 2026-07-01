@@ -31,7 +31,7 @@ The agent's value-add is **compression**: turning a technical surface the user d
 
 ## VS-gated question protocol [MANDATORY]
 
-Run VS + falsifier protocol before every `AskUserQuestion` fire (Phase 1, Phase 2, Phase 3). Duet-specific deltas only — askme owns the canonical spec:
+Run VS + falsifier protocol before every `AskUserQuestion` fire (Phase 1, Phase 2, Phase 3). `askme` defines the base VS + falsifier format; what follows is duet's deltas from it only:
 
 - **Format (compressed visible):** Render numbered survivors with weights only; no falsifier block:
   ```
