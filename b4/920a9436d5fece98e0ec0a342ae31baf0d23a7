@@ -1,0 +1,27 @@
+skills/brainstorm/SKILL.md
+  s_3812306635e3e0::t_9100441ba6b68b 3
+skills/simplify/SKILL.md
+  s_3812306635e3e0::t_90c7854aca16b9 3
+.claude-plugin/plugin.json
+  s_3812306635e3e0::t_2f40057e163f9c 3
+skills/pov/SKILL.md
+  s_3812306635e3e0::t_14eeb59d2ea6c2 3
+.claude-plugin/marketplace.json
+  s_3812306635e3e0::t_9177249b2ddd40 3,17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.6",
+  "base_commit_sha": "b4920a9436d5fece98e0ec0a342ae31baf0d23a7",
+  "prompts": {},
+  "sessions": {
+    "s_3812306635e3e0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "09449591-14a9-4764-8d54-7035327404b8",
+        "model": "unknown"
+      },
+      "human_author": "metaphorics <152830360+metaphorics@users.noreply.github.com>"
+    }
+  }
+}
