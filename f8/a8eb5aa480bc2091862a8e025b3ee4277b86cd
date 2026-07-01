@@ -1,0 +1,21 @@
+skills/commit/SKILL.md
+  s_3812306635e3e0::t_15a41878e5901f 29
+  s_3812306635e3e0::t_f47f1b4fbbe46b 38
+  s_3812306635e3e0::t_508d67361d8a1b 49
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.6",
+  "base_commit_sha": "f8a8eb5aa480bc2091862a8e025b3ee4277b86cd",
+  "prompts": {},
+  "sessions": {
+    "s_3812306635e3e0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "09449591-14a9-4764-8d54-7035327404b8",
+        "model": "unknown"
+      },
+      "human_author": "metaphorics <152830360+metaphorics@users.noreply.github.com>"
+    }
+  }
+}
