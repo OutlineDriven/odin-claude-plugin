@@ -65,22 +65,34 @@ Before any non-trivial implementation:
 4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
 5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
 
-## Skills (81 total — selected highlights below)
+## Skills (87 total)
 
 Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
 
-### Planning & Exploration (4 skills)
+### Planning & Exploration (12 skills)
 
 - `askme` - Verbalized Sampling protocol for deep intent exploration before planning
 - `plan` - Thorough read-only planning before any action
 - `contexts` - Coordinate context sweep before coding
 - `init` - Analyze a codebase and create or improve AGENTS.md
+- `brainstorm` - Explore vague or ambitious ideas into a right-sized requirements-only plan
+- `explore` - Read-only codebase exploration to map structure, symbols, and dependencies
+- `zoom-out` - Step up one layer of abstraction to map surrounding modules and invariants
+- `strategy` - Sharp interview to write or maintain STRATEGY.md as the product anchor
+- `ideate` - Generate grounded, divergent ideas from the codebase into docs/ideation
+- `design` - Set visual and interaction direction for UI surfaces before writing code
+- `pov` - Decisive, project-grounded verdict on adopting or switching technology
+- `research` - Gather external knowledge from authoritative sources with verified citations
 
-### Working Posture (1 skill)
+### Working Posture (5 skills)
 
 - `duet` - Two-party posture: user as director, agent as executor. Surfaces every fork via AskUserQuestion with structural framing and a recommended default. Eliminates the review-bottleneck and prevents codebase-understanding debt. Pair with the `Duet` output style.
+- `axiom-mode` - Compact formal-logic English register using predicate claims and ASCII keywords
+- `caveman` - Verbosity-reduction response register for brevity under context pressure
+- `ai-collab-protocols` - Surface in-task AI collaboration protocols one tactic at a time
+- `taste` - Apply distinctive judgment to prose, code, design, or decisions instead of AI mediocrity
 
-### Engineering Methodologies (6 skills)
+### Engineering Methodologies (12 skills)
 
 - `test-driven` - TDD with 10-language support
 - `type-driven` - Type-driven development (Idris 2, with 10-language support)
@@ -88,36 +100,71 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `design-by-contract` - DbC with 10-language support and verification dispatch
 - `validation-first` - Validation-first (Quint spec) with 10-language support
 - `tests-purge-unneeded` - Delete tests that don't catch real bugs (the inverse of TDD); load-bearing principles, static-vs-dynamic carve-out, language-specific examples
+- `spec-driven` - Write a structured spec before writing code
+- `source-driven` - Ground implementation decisions in official documentation with version-aware citations
+- `doubt-driven` - Subject non-trivial decisions to adversarial review before they stand
+- `api-design` - Guide stable API and interface design across module boundaries
+- `security-hardening` - Harden code against vulnerabilities as you build it
+- `observability` - Instrument code with logging, metrics, traces, and alerts
 
-### Tooling (1 skill)
+### Tooling (6 skills)
 
 - `ast-grep` - Structural code search, analysis, and refactoring
+- `browser-testing` - Test and debug browser code with Chrome DevTools MCP
+- `git-branchless` - Idiomatic git-branchless workflows for stack edits, rebases, and stacked-PR publishing
+- `setup-gitignore` - Compose or revise .gitignore from templates, editor patterns, and confirmed untracked noise
+- `setup-pre-commit` - Install ecosystem-appropriate pre-commit hooks for formatting, linting, and test gates
+- `strict-validation-setup` - Bootstrap strict-mode tooling and per-task GOALS.md scaffolding for self-verifying agent loops
 
-### Execution (3 skills)
+### Execution (13 skills)
 
 - `proceed` - Execute an implementation plan with surgical precision
 - `parallel-launch` - Decompose a task into independent concerns and execute via agents
 - `tests-adversarial` - Adversarial tests that stress failure paths
+- `work` - Execute a plan or concrete work prompt end-to-end
+- `subagent-driven` - Delegate a multi-task plan to fresh subagents, auditing results before proceeding
+- `fix` - Iterative repair loop that fixes one thing at a time and keeps changes on green
+- `autopilot` - Hands-off plan-to-ship pipeline chaining existing skills
+- `llm-self-loop` - Restructure human-gated workflows into autonomous LLM loops with file-based outputs
+- `incremental` - Deliver changes in small, testable slices
+- `debug` - Hypothesis-driven debugging with minimal reproduction
+- `frontend-ui` - Build production-quality user-facing interfaces
+- `optimize` - Locate a hot path, benchmark transformations, and commit the proven winner
+- `shipping` - Prepare a production launch with checklists, monitoring, and rollback planning
 
-### Review & Resolution (2 skills)
+### Review & Resolution (6 skills)
 
 - `review` - Review code changes on the current branch
 - `resolve` - Resolve code review comments with validity checks
+- `doc-review` - Review requirements docs, plans, specs, and PRDs through persona-based lenses
+- `security-review` - Adversarial security audit using STRIDE, OWASP, supply-chain checks, and secrets scans
+- `review-fix-grill-loop` - Review and fix a diff in verified batches until no medium-or-higher finding remains
+- `simplify` - Compress-op review pass on reuse, quality, and efficiency axes
 
-### Cleanup & Refactoring (2 skills)
+### Cleanup & Refactoring (5 skills)
 
 - `refactor-break-compat` - Refactor by removing backward-compatibility and legacy layers (public API surface)
 - `cleanup-codebase` - Internal micro-hygiene: dead fields, redundant wrappers, stale config flags, identity passthrough — applied while touching nearby code, not as standalone PRs
+- `tidy` - Dispatch compress operations to the right domain: file, diff, memory, workspace, git stack, or doc
+- `improve-architecture` - Surface deepening refactors that turn shallow modules into deep ones
+- `deprecate-and-migrate` - Plan and execute deprecation and migration of old systems, APIs, or features
 
-### GitHub Integration (5 skills)
+### GitHub Integration (12 skills)
 
 - `pr-review` - Review code on a GitHub PR using `gh`
 - `pr-merge-base` - Merge PRs into the base branch with queue-like sequencing
 - `pr-merge-temporal` - Merge multiple PRs into a temporal integration branch first
-- `gh-address-comments` - Help address review/issue comments on the current PR
 - `gh-fix-ci` - Inspect failing CI checks, pull logs, propose fixes
+- `commit` - Create a git commit with a clear, value-communication message
+- `commit-push` - Commit working-tree changes and push to the remote — no PR
+- `commit-push-pr` - Commit, push, and open a PR
+- `atomic-issues-prs` - Publish a change-set as atomic GitHub issues or PRs
+- `github-triage` - Triage GitHub issues through a configurable label-based state machine
+- `github-solution-research` - Find proven open-source solutions on GitHub for concrete engineering problems
+- `resolve-pr-feedback` - Resolve PR review feedback and fix code-review comments
+- `worktree` - Set up isolated git worktrees for new or existing branches/PRs
 
-### Codebase Intelligence & Workflow (7 skills, ported from agent-sh)
+### Codebase Intelligence & Workflow (16 skills)
 
 - `deslop` - Three-phase certainty-graded AI-slop detection with HIGH-only guarded autofix
 - `sync-docs` - Diff-driven doc-vs-code drift detection; safe version/CHANGELOG fixes, rest flagged
@@ -126,6 +173,15 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `onboard` - New-codebase orientation tour with interactive guidance
 - `can-i-help` - Route contributors to data-backed contribution opportunities
 - `enhance` - Certainty-graded enhancement of agent/plugin surfaces via parallel analyzers
+- `docs-and-adrs` - Record decisions and documentation that explain why the codebase is shaped as it is
+- `ci-cd` - Set up or modify CI/CD pipelines and deployment automation
+- `deps-upgrade` - Run a dependency-upgrade campaign from outdated scan through lockfile audit
+- `memory-clean` - Audit memory files for structural rot and staleness, reporting before fixing
+- `memory-sanitize` - Produce share-safe copies of memory files with PII and credentials redacted
+- `memory-update` - Scan session history for save-worthy signals and propose memory files
+- `autolearn` - Compound a solved problem into a durable in-repo learning doc
+- `compound` - Document a durable solution or project concept in the repo
+- `generate-my-taste` - Generate a personal taste skill from local evidence and confirmation forks
 
 ## Output Styles (4 total)
 
