@@ -1,0 +1,19 @@
+skills/duet/SKILL.md
+  s_3812306635e3e0::t_4faada37bc746b 34
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.6",
+  "base_commit_sha": "8e72b2998305e5762cb404ed108be83518a4dcf5",
+  "prompts": {},
+  "sessions": {
+    "s_3812306635e3e0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "09449591-14a9-4764-8d54-7035327404b8",
+        "model": "unknown"
+      },
+      "human_author": "metaphorics <152830360+metaphorics@users.noreply.github.com>"
+    }
+  }
+}
