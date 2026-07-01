@@ -1,0 +1,63 @@
+skills/design/SKILL.md
+  s_3812306635e3e0::t_eac1dabbbc832d 3
+skills/docs-and-adrs/SKILL.md
+  s_3812306635e3e0::t_eac1dabbbc832d 3
+skills/frontend-ui/SKILL.md
+  s_3812306635e3e0::t_eac1dabbbc832d 3
+skills/drift-detect/SKILL.md
+  s_3812306635e3e0::t_eac1dabbbc832d 3
+skills/explore/SKILL.md
+  s_3812306635e3e0::t_eac1dabbbc832d 3
+skills/design-by-contract/SKILL.md
+  s_3812306635e3e0::t_eac1dabbbc832d 3
+skills/duet/SKILL.md
+  s_3812306635e3e0::t_eac1dabbbc832d 3
+skills/github-triage/SKILL.md
+  s_3812306635e3e0::t_eac1dabbbc832d 3
+skills/enhance/SKILL.md
+  s_3812306635e3e0::t_eac1dabbbc832d 3
+skills/improve-architecture/SKILL.md
+  s_3812306635e3e0::t_eac1dabbbc832d 3
+skills/pov/SKILL.md
+  s_3812306635e3e0::t_eac1dabbbc832d 3
+skills/doc-review/SKILL.md
+  s_3812306635e3e0::t_eac1dabbbc832d 3
+skills/refactor-break-compat/SKILL.md
+  s_3812306635e3e0::t_eac1dabbbc832d 3
+skills/research/SKILL.md
+  s_3812306635e3e0::t_eac1dabbbc832d 3
+skills/git-branchless/SKILL.md
+  s_3812306635e3e0::t_eac1dabbbc832d 3
+skills/generate-my-taste/SKILL.md
+  s_3812306635e3e0::t_eac1dabbbc832d 3
+skills/github-solution-research/SKILL.md
+  s_3812306635e3e0::t_eac1dabbbc832d 3
+skills/llm-self-loop/SKILL.md
+  s_3812306635e3e0::t_eac1dabbbc832d 3
+skills/gh-fix-ci/SKILL.md
+  s_3812306635e3e0::t_eac1dabbbc832d 3
+skills/ideate/SKILL.md
+  s_3812306635e3e0::t_eac1dabbbc832d 3
+skills/deslop/SKILL.md
+  s_3812306635e3e0::t_eac1dabbbc832d 3
+skills/doubt-driven/SKILL.md
+  s_3812306635e3e0::t_eac1dabbbc832d 3
+skills/fix/SKILL.md
+  s_3812306635e3e0::t_eac1dabbbc832d 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.6",
+  "base_commit_sha": "68da7f90b2a5ee726420d6418a874958082e27a0",
+  "prompts": {},
+  "sessions": {
+    "s_3812306635e3e0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "09449591-14a9-4764-8d54-7035327404b8",
+        "model": "unknown"
+      },
+      "human_author": "metaphorics <152830360+metaphorics@users.noreply.github.com>"
+    }
+  }
+}
