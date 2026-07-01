@@ -54,8 +54,11 @@ git credential helper authorizes HTTPS pushes.
 
 - **Direct mode**: push URL = `https://github.com/<canonical-slug>`.
 - **Fork mode**: fork owner = authenticated login (`gh api user --jq .login`); fork slug = `<login>/<repo>`.
-  If the fork does not exist, create it (`gh repo fork <canonical-slug> --clone=false`) — ask the user
-  first, it is a write action. Push URL = `https://github.com/<fork-slug>`.
+  If `origin` already points to a prior personal fork of the canonical repo (its owner ≠ canonical owner)
+  and that owner ≠ the authenticated login, print a non-blocking warning noting the account mismatch —
+  don't stop the run over it, legitimate cases exist (team forks, renamed accounts, shared machines).
+  If the fork does not exist, create it (`gh repo fork <canonical-slug> --clone=false`) automatically,
+  noting the fork slug in the run's output. Push URL = `https://github.com/<fork-slug>`.
 
 ## Phase 4 — Per-unit publish loop
 
@@ -83,4 +86,3 @@ For each unit, in dependency order:
 - Never `--force` or `--force-with-lease` without explicit user authorization.
 - Never push directly to protected branches (`main`, `master`, `release/*`) — branches only.
 - One GitHub object per logical change; bundling is refused.
-- Creating a fork is a write action — ask the user before `gh repo fork`.
