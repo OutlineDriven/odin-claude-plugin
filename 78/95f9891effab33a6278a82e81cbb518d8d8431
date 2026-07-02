@@ -1,0 +1,25 @@
+.claude-plugin/marketplace.json
+  s_47769bf45c2e48::t_d6820bff89eece 3
+  s_47769bf45c2e48::t_ca109394d21854 17
+.claude-plugin/plugin.json
+  s_47769bf45c2e48::t_54a8d203489a76 3
+skills/commit-push-pr/references/pr-description-writing.md
+  s_47769bf45c2e48::t_c5c972a086b195 90
+  s_47769bf45c2e48::t_1ce5df235c3dbb 86
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.8",
+  "base_commit_sha": "7895f9891effab33a6278a82e81cbb518d8d8431",
+  "prompts": {},
+  "sessions": {
+    "s_47769bf45c2e48": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7d6a108a-84d1-467a-8bb2-14665f9771e4",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "metaphorics <152830360+metaphorics@users.noreply.github.com>"
+    }
+  }
+}
