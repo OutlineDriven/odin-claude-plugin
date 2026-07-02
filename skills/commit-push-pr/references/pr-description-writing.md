@@ -83,32 +83,12 @@ For small + non-trivial bugfixes, the 3-5 sentence target still needs a user-vis
 
 ## Step C: Assemble the body
 
-In order: opening → body sections that earn their keep → test plan if non-obvious → evidence block if one exists → ODIN badge after a `---` rule.
+In order: opening → body sections that earn their keep → test plan if non-obvious → evidence block if one exists.
 
 The opening goes under `## Summary` if the body uses any `##` headings; bare paragraph otherwise. No orphaned opening paragraphs above the first heading.
 
-**Evidence handling:** preserve any existing `## Demo` or `## Screenshots` block verbatim unless the user's focus asks to refresh it. If the caller passed a freshly captured URL or path, splice as `## Demo`. Otherwise omit. Place before the badge. Never label test output as "Demo" or "Screenshots."
+**Evidence handling:** preserve any existing `## Demo` or `## Screenshots` block verbatim unless the user's focus asks to refresh it. If the caller passed a freshly captured URL or path, splice as `## Demo`. Otherwise omit. Never label test output as "Demo" or "Screenshots."
 
 **Visual aids:** reach for a diagram or table when it conveys the change faster than prose — relationships, flows, state transitions, sequences, trade-offs, before/after data, or any structure prose would have to enumerate. Mermaid and markdown tables cover most shapes; don't be limited to a particular type if a different one fits the change better. Place inline at the point of relevance. Skip for simple, prose-clear, or rename/dep-bump changes. Prose is authoritative when it conflicts with a visual.
 
 **GitHub gotchas:** never prefix list items with `#` (GitHub auto-links `#1` as an issue ref). Use `org/repo#123` or full URL for actual references.
-
----
-
-## Step D: Badge
-
-```markdown
----
-
-![HARNESS](https://img.shields.io/badge/MODEL_SLUG-COLOR?logo=LOGO&logoColor=white)
-```
-
-| Harness | `LOGO` | `COLOR` |
-|---|---|---|
-| Claude Code | `claude` | `D97757` |
-| Codex | (omit `?logo=` param) | `000000` |
-| Antigravity CLI (`agy`) | `googlegemini` | `4285F4` |
-
-**Model slug:** spaces become underscores; append context window and thinking level in parens if known. **URL-encode literal parens as `%28` / `%29`** — unencoded parens inside markdown image URLs break release-please's commit parser, which silently drops the commit from the changelog. Examples: `Opus_4.6_%281M,_Extended_Thinking%29`, `Sonnet_4.6_%28200K%29`, `Gemini_3.1_Pro`.
-
-Skip the badge if regenerating a body that already contains it.
