@@ -65,7 +65,7 @@ Before any non-trivial implementation:
 4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
 5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
 
-## Skills (87 total)
+## Skills (88 total)
 
 Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
 
@@ -92,7 +92,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `ai-collab-protocols` - Surface in-task AI collaboration protocols one tactic at a time
 - `taste` - Apply distinctive judgment to prose, code, design, or decisions instead of AI mediocrity
 
-### Engineering Methodologies (12 skills)
+### Engineering Methodologies (13 skills)
 
 - `test-driven` - TDD with 10-language support
 - `type-driven` - Type-driven development (Idris 2, with 10-language support)
@@ -103,6 +103,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `spec-driven` - Write a structured spec before writing code
 - `source-driven` - Ground implementation decisions in official documentation with version-aware citations
 - `doubt-driven` - Subject non-trivial decisions to adversarial review before they stand
+- `verification-before-completion` - Require fresh, fully-read run evidence before any completion claim
 - `api-design` - Guide stable API and interface design across module boundaries
 - `security-hardening` - Harden code against vulnerabilities as you build it
 - `observability` - Instrument code with logging, metrics, traces, and alerts
