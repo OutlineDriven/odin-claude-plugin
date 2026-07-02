@@ -30,7 +30,10 @@ If `state` is not `OPEN`, report and stop — do not invent a description. Use `
 
 For current-branch mode, resolve `<base>` in priority order: caller-supplied (`base:<ref>`) → `git rev-parse --abbrev-ref origin/HEAD` (strip `origin/`) → `gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name'` → try `main`/`master`/`develop` via `git rev-parse --verify origin/<candidate>`. If none resolve, ask the user. `<head>` is `HEAD`.
 
-**Base remote:** `origin` for current-branch mode and same-repo PRs. For fork PRs, match the PR's base owner/repo against `git remote -v`. If no local remote matches, skip to the `gh` fallback — do not diff against `origin` (wrong base).
+**Base remote:** `upstream` when the caller resolved `upstream` as the canonical PR target
+(commit-push-pr's Step 0); otherwise `origin` for current-branch mode and same-repo PRs. For fork
+PRs, match the PR's base owner/repo against `git remote -v`. If no local remote matches, skip to
+the `gh` fallback — do not diff against `origin` (wrong base).
 
 ```bash
 git fetch --no-tags <base-remote> <base>

@@ -20,6 +20,12 @@ default inspects the *current* repo, which is the fork in a fork clone.
 - Read remotes: `git remote -v`. Pick the contribution target: `upstream` if present, else `origin`.
 - Detect a fork relationship: `gh repo view <slug> --json nameWithOwner,parent,defaultBranchRef`.
   A non-null `parent` means `<slug>` is itself a fork, so the canonical slug is `parent.nameWithOwner`.
+- **Ambiguity → ask.** Prompt the user for the target repo only when there is no clear single
+  upstream (no `upstream` remote and ≥2 plausible non-origin candidates, or `gh`'s detected
+  `parent` disagrees with the `upstream` remote) **or** `origin` has genuinely diverged from
+  upstream (no common merge-base, or `origin` was re-created/renamed/renewed). Plain fork-behind —
+  `origin` merely behind `upstream` with a shared merge-base — is not ambiguity and must never
+  prompt.
 - Query permission on the canonical slug: `gh repo view <canonical-slug> --json viewerPermission`.
   `viewerPermission` ∈ {ADMIN, MAINTAIN, WRITE} ⇒ **direct mode**; otherwise ⇒ **fork mode**.
 - Record the canonical default base branch from `defaultBranchRef`.
@@ -40,7 +46,8 @@ immediately — do not wait for a go-ahead.
 Auto-route each unit by its commit type prefix (`<type>: ...`) — no interactive ask:
 
 - **`feat` / `fix` / `perf` / `revert`** → **Issue + linked PR** — behavior-affecting; a tracking issue
-  gives it a changelog/discussion anchor, PR body says `Closes #N`.
+  gives it a changelog/discussion anchor. The PR files first; the issue body then references the PR
+  `#number`; once the issue exists, the PR body is amended with `Closes #N` (see Phase 4).
 - **`docs` / `style` / `refactor` / `test` / `chore` / `build` / `ci`** → **PR-only** — mechanical,
   self-explanatory, no separate tracking needed.
 
@@ -76,10 +83,18 @@ For each unit, in dependency order:
      the prerequisite branch, and prefix the PR body with a warning line naming the prerequisite unit and
      noting the dependency was flattened — no blocking ask, but the compromise is never silent.
 2. `git push <push-url> <branch>:refs/heads/<branch>` (same form both modes — only the URL differs).
-3. If this unit routed to Issue + linked PR (Phase 2): `gh issue create --repo <canonical-slug> --title "<summary>" --body-file <tmp>` → capture `#N`.
-4. `gh pr create --repo <canonical-slug>` — direct mode: `--base <parent-ref> --head <branch>`;
-   fork mode: `--base <default> --head <fork-owner>:<branch>`. Include `Closes #N` in the body when an issue was filed.
-5. Emit the issue/PR URLs; move to the next unit.
+3. `gh pr create --repo <canonical-slug> --body-file <tmp>` — direct mode: `--base <parent-ref> --head
+   <branch>`; fork mode: `--base <default> --head <fork-owner>:<branch>` → capture PR `#M`.
+4. If this unit routed to Issue + linked PR (Phase 2): `gh issue create --repo <canonical-slug> --title
+   "<summary>" --body-file <tmp>` with a body that references PR `#M` → capture `#N`.
+5. Amend the PR body: append `Closes #N` to the PR's **existing** body — reuse the body-file already
+   written for step 3 (append the line, re-write) or fetch the current body first (`gh pr view <M>
+   --json body`) — then write it with `gh pr edit <M> --repo <canonical-slug> --body-file <amended-tmp>`.
+   `gh pr edit --body-file` replaces the whole body, so never write a bare `Closes #N` as the entirety
+   of it.
+6. Emit the issue/PR URLs; move to the next unit.
+
+For PR-only routed units (no issue filed in step 4), skip steps 4-5 entirely — no dangling `Closes`.
 
 ## Constraints (hard)
 
