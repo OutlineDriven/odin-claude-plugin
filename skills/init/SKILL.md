@@ -1,5 +1,5 @@
 ---
-name: init
+name: inits
 description: Analyzes a codebase and creates or improves an AGENTS.md file. Use when onboarding to a repo, capturing hidden conventions, or preserving hard-to-rediscover constraints and rationale.
 ---
 
