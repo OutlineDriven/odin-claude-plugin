@@ -47,7 +47,7 @@ Force-push is denied at the Claude permissions layer — `git push -f`, `--force
 
 ## Patch-bump convention
 
-Behavior changes (paradigm shifts, agent rule changes, skill behavior changes) bump patch (+0.0.1) on both `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json` in the same commit. Tooling-only changes (pre-commit hooks, formatter config), pure sync changes (e.g., normalizing an embedded baseline back to canonical), and editing-primer doc updates (this file, CLAUDE.md) do not bump.
+Behavior changes (paradigm shifts, agent rule changes, skill behavior changes) bump patch (+0.0.1) on both `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json` in the same commit. Tooling-only changes (pre-commit hooks, formatter config), pure sync changes (e.g., normalizing an embedded baseline back to canonical), and editing-primer doc updates (this file) do not bump.
 
 ## Verification: format-only
 
