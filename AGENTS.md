@@ -2,9 +2,7 @@
 
 Primer for ODIN agents editing this submodule. Self-contained: every rule needed to commit safely lives below; no chase-the-link required.
 
-## What this repo is
-
-The ODIN plugin source for Claude Code. `.claude-plugin/{plugin,marketplace}.json` declare it; `system-prompt-baseline.md` is the single source of truth for the agent's persona/doctrine. Components live under `commands/` (via skills), `hooks/`, `skills/`. No build, no test runner, no CI.
+Edit `AGENTS.md` only; `CLAUDE.md` is a symlink to it. Never `write` CLAUDE.md directly — a write-replace severs the link and silently forks the two files.
 
 ## Agent paradigm — Minimal-Loss Semantic Compressor/Extender/Purger
 
@@ -20,6 +18,8 @@ Four rejection grounds: **Excess**, **Graft**, **Sprawl**, **Sever** — defined
 ODIN naming and the "Outline Driven INtelligence" expansion remain the identity surface. Four named doctrine fields govern operations: **Minimal Sufficient Change** (patch rule), **Entropy/Aesthetics Axiom** (axiom), **Shape → Compress → Measure → Repair** (loop — the verb `Compress` here names the loop's entropy-reduction step, distinct from the op-axis value `compress`), **PASS/FAIL gates**. Each behavior-changing commit body carries an `Op:` trailer naming the op (`compress | extend | correct | purge`); `correct` commits additionally carry a `Restores:` trailer citing the named invariant (`ref:<commit> | test:<name> | spec:<invariant>`); `purge` commits additionally carry a `Removes:` trailer citing what was removed (`surface:<name> | dep:<lib> | path:<ref>`). Free-form prose in the body explains rationale and evidence; the trailer is the structural identifier.
 
 ## Output-styles edit rule [DEFAULT]
+
+Treat `system-prompt-baseline.md` as the single source of truth for the agent's persona/doctrine: make every doctrine change there first, never in an output-style file alone.
 
 `output-styles/{axiom-mode,builder,duet,linus,odin}.md` are persona files Claude Code loads as system instructions. Each is a style-specific `<role>` block followed by the canonical baseline embedded at the tail. Files are self-contained — the loader does not resolve refs.
 
@@ -51,7 +51,7 @@ Behavior changes (paradigm shifts, agent rule changes, skill behavior changes) b
 
 ## Verification: format-only
 
-The sole gate is `prek run --all-files` (`prek` is the Rust drop-in for `pre-commit`; brew-installed at `/home/linuxbrew/.linuxbrew/bin/prek`). Hooks: `pre-commit-hooks` v6.0.0 (trailing whitespace, JSON validity, line endings, BOM — markdown/json only) plus `tombi-pre-commit` v0.11.0 (TOML lint + format). No build, no unit tests, no `.github/` CI. Don't invent `pytest` / `cargo test` / language test commands; don't add CI without an explicit ask.
+The sole gate is `prek run --all-files` (`prek` is the Rust drop-in for `pre-commit`; brew-installed at `/home/linuxbrew/.linuxbrew/bin/prek`; hooks defined in `.pre-commit-config.yaml`). There is no build, no unit-test suite, and no `.github/` CI. Don't invent `pytest` / `cargo test` / language test commands; don't add CI without an explicit ask.
 
 ## Active-style reload semantics
 
