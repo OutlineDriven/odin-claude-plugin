@@ -7,35 +7,35 @@ description: Analyzes a codebase and creates or improves an AGENTS.md file. Use 
 
 Analyze this codebase and create or improve an `AGENTS.md` file for future ODIN Code Agent instances.
 
-## Core principle
+## Governing maxim
 
-**Only encode knowledge that is expensive to rediscover.** An agent can `fd`, `rg`, `ast-grep`, and read files in seconds. If the information is one search away, omit it.
+**`AGENTS.md` records what needs to be, not what it is.** Every entry is a rule, constraint, or obligation a future agent must uphold — never a description of the repository's current state. Prescriptive vs. descriptive is the admission gate; everything below refines it.
 
-## Objective guard
+## Admission gates (in order)
 
-`AGENTS.md` is for **priming and guiding** future agents with conventions, constraints, and rationale. It is **not** a repository summary.
+1. **Normative first.** The candidate must prescribe: an imperative, a prohibition, or an invariant to preserve. Descriptions of structure, tooling, or state fail here regardless of accuracy or usefulness.
+2. **Expensive to rediscover.** Among prescriptive candidates, keep only those a future agent cannot cheaply re-derive with a search or one file read. Rules enforced loudly by tooling (a linter that fails the build) are self-announcing; omit them.
 
-## What to include
+## Phrasing rule
 
-1. Cross-cutting conventions and boundaries that span multiple files.
-2. Implicit contracts and operational constraints that are easy to miss in quick code exploration.
-3. Non-obvious command guidance only when hidden constraints matter (required ordering, flags, env vars, caveats).
-4. For each included item, state:
-   - the rule or constraint
-   - why it exists (rationale)
+Write each entry as an imperative or prohibition, paired with why the rule needs to be:
 
-## What to omit (the agent can discover these)
+- Admissible: "Use pnpm; npm lockfiles break CI."
+- Inadmissible: "The repo uses pnpm."
 
-- File trees, per-directory descriptions, or component inventories.
-- Dependency/version tables.
-- Generic development best practices.
-- Information that is easily discoverable via search/read.
+Same fact — only the normative form carries an obligation.
+
+## What to omit
+
+Everything failing a gate:
+
+- Repository summaries: file trees, per-directory descriptions, component or dependency inventories (fail gate 1).
+- Generic development best practices not specific to this repo (fail gate 2).
 - Fabricated filler sections such as "Common Development Tasks", "Tips", or "Support".
-- Any summary-style prose that restates code organization without conventions or rationale.
+- Facts one search away, even when phrased as rules (fail gate 2).
 
 ## Workflow
 
-- If `AGENTS.md` already exists, suggest targeted improvements instead of rewriting.
-- Do not repeat yourself. Each fact appears once.
-- Every statement must be grounded in files you actually read. Never invent.
-- If uncertain, omit the claim rather than speculate.
+- New file: admit only entries passing both gates; each states the rule and its rationale.
+- Existing file: audit every line against the maxim. Descriptive lines — "what it is" — are deletion candidates; propose their removal, don't merely avoid adding more. Prefer targeted edits over wholesale rewrites.
+- Each fact appears once. Ground every statement in files actually read. If uncertain, omit the claim rather than speculate.
