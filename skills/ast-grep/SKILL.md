@@ -37,7 +37,7 @@ ast-grep -p 'var $A = $B' --rewrite 'const $A = $B' --interactive
 
 See [Pattern Syntax](references/pattern-syntax.md) for details.
 
-## The helper — validate first, dry-run first
+## The helper: validate first, dry-run first
 
 `scripts/ast_grep_helper.py` wraps two safety gates:
 
@@ -70,30 +70,30 @@ ast-grep matches syntax, not bytes. The moment you reach for `|`, `.*`, `\w`, or
 Rewrite flow (never skip the dry-run):
 
 1. `search` the pattern to confirm it matches what you think.
-2. `replace` dry-run — read the diff.
+2. `replace` dry-run: read the diff.
 3. Inspect the `N matches across M files` count; if the blast radius is wrong, stop.
 4. Refine the pattern (tighten meta-vars, add `--lang`, add context).
 5. Re-run with `--apply`.
 
 0-matches ladder (in order):
 
-1. `python3 scripts/ast_grep_helper.py validate '<pat>' --lang L` — is the pattern even well-formed?
-2. Check `--lang` — `tsx` ≠ `ts`; the wrong dialect silently matches nothing.
-3. `ast-grep run -p '<pat>' -l L --debug-query=pattern` — look for `ERROR` in the dumped query tree.
-4. Inspect the target's actual tree (`--debug-query=ast` on a known-matching snippet) — your node kinds may differ from your guess.
+1. `python3 scripts/ast_grep_helper.py validate '<pat>' --lang L`: is the pattern well-formed?
+2. Check `--lang`: `tsx` ≠ `ts`; the wrong dialect silently matches nothing.
+3. `ast-grep run -p '<pat>' -l L --debug-query=pattern`: look for `ERROR` in the dumped query tree.
+4. Inspect the target's actual tree (`--debug-query=ast` on a known-matching snippet). Your node kinds may differ from your guess.
 5. Reproduce in the online playground.
 
-`references/pitfalls.md` is the deep field guide — read it when 0 matches surprises you.
+`references/pitfalls.md` is the deep field guide. Read it when 0 matches surprises you.
 
 ## Invariants (do not break)
 
-- **Validate before you search** — lint the pattern via the helper first.
-- **Dry-run before you apply** — never `--apply` (or `--update-all`) without reading the diff.
-- **Writes are two-pass** — `--json` and `--update-all` conflict: combine them and `--json` silently wins, so the write is dropped with no error. Preview with `--json`, then apply with `--update-all` separately.
-- **Single-quote patterns** in the shell — `$VAR` must reach ast-grep unexpanded.
-- **`--lang` is required for stdin** — piped input has no filename to infer the dialect from.
-- **A pattern is code, not regex** — switch to rg the moment you'd need `|`, `.*`, `\w`, or `[...]`.
-- **Invoke `ast-grep`, never `sg`** — `sg` collides with the `setgroups` binary on many systems.
+- **Validate before you search**: lint the pattern via the helper first.
+- **Dry-run before you apply**: never `--apply` (or `--update-all`) without reading the diff.
+- **Writes are two-pass**: `--json` and `--update-all` conflict: combine them and `--json` silently wins, so the write is dropped with no error. Preview with `--json`, then apply with `--update-all` separately.
+- **Single-quote patterns** in the shell: `$VAR` must reach ast-grep unexpanded.
+- **`--lang` is required for stdin**`: piped input has no filename to infer the dialect from.
+- **A pattern is code, not regex**: switch to rg the moment you'd need `|`, `.*`, `\w`, or `[...]`.
+- **Invoke `ast-grep`, never `sg`**: `sg` collides with the `setgroups` binary on many systems.
 
 ## Core Concepts
 
@@ -166,7 +166,7 @@ See [CLI Reference](references/cli.md) for details.
 
 ## Required reading
 
-- [Recipes](references/recipes.md) — per-language copy-paste patterns (TS/JS, Python, Rust, Go, Java, Kotlin, C, C++). Read this **first** when starting a task in a given language.
-- [Pitfalls](references/pitfalls.md) — failure-mode field guide (regex-vs-AST, incomplete patterns, the two-pass write, named/unnamed nodes, meta-var naming, stdin/tsx, `sg`↔setgroups, and the 0-matches debug ladder). Read this when **0 matches surprises you**.
+- [Recipes](references/recipes.md): per-language copy-paste patterns (TS/JS, Python, Rust, Go, Java, Kotlin, C, C++). Read this **first** when starting a task in a given language.
+- [Pitfalls](references/pitfalls.md): failure-mode field guide (regex-vs-AST, incomplete patterns, the two-pass write, named/unnamed nodes, meta-var naming, stdin/tsx, `sg`↔setgroups, and the 0-matches debug ladder). Read this when **0 matches surprises you**.
 
 Use the per-topic references linked above only when that topic is relevant.

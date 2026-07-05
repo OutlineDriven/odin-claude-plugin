@@ -3,13 +3,13 @@ name: api-design
 description: Guide stable API and interface design across module boundaries. Use when creating REST or GraphQL endpoints, defining type contracts, or establishing frontend/backend boundaries.
 ---
 
-# API and Interface Design
+# API and interface design
 
 ## Overview
 
 Design stable, well-documented interfaces that are hard to misuse. Good interfaces make the right thing easy and the wrong thing hard. This applies to REST APIs, GraphQL schemas, module boundaries, component props, and any surface where one piece of code talks to another.
 
-## When to Use
+## When to use
 
 - Designing new API endpoints
 - Defining module boundaries or contracts between teams
@@ -17,13 +17,13 @@ Design stable, well-documented interfaces that are hard to misuse. Good interfac
 - Establishing database schema that informs API shape
 - Changing existing public interfaces
 
-## Core Principles
+## Core principles
 
 ### Hyrum's Law
 
 > With a sufficient number of users of an API, all observable behaviors of your system will be depended on by somebody, regardless of what you promise in the contract.
 
-This means: every public behavior — including undocumented quirks, error message text, timing, and ordering — becomes a de facto contract once users depend on it. Design implications:
+This means: every public behavior, including undocumented quirks, error message text, timing, and ordering, becomes a de facto contract once users depend on it. Design implications:
 
 - **Be intentional about what you expose.** Every observable behavior is a potential commitment.
 - **Don't leak implementation details.** If users can observe it, they will depend on it.
@@ -32,11 +32,11 @@ This means: every public behavior — including undocumented quirks, error messa
 
 ### The One-Version Rule
 
-Avoid forcing consumers to choose between multiple versions of the same dependency or API. Diamond dependency problems arise when different consumers need different versions of the same thing. Design for a world where only one version exists at a time — extend rather than fork.
+Avoid forcing consumers to choose between multiple versions of the same dependency or API. Diamond dependency problems arise when different consumers need different versions of the same thing. Design for a world where only one version exists at a time; extend rather than fork.
 
-### 1. Contract First
+### 1. Contract first
 
-Define the interface before implementing it. The contract is the spec — implementation follows.
+Define the interface before implementing it. The contract is the spec, so implementation follows.
 
 ```typescript
 // Define the contract first
@@ -58,7 +58,7 @@ interface TaskAPI {
 }
 ```
 
-### 2. Consistent Error Semantics
+### 2. Consistent error semantics
 
 Pick one error strategy and use it everywhere:
 
@@ -83,9 +83,9 @@ interface APIError {
 // 500 → Server error (never expose internal details)
 ```
 
-**Don't mix patterns.** If some endpoints throw, others return null, and others return `{ error }` — the consumer can't predict behavior.
+**Don't mix patterns.** If some endpoints throw, others return null, and others return `{ error }`, the consumer can't predict behavior.
 
-### 3. Validate at Boundaries
+### 3. Validate at boundaries
 
 Trust internal code. Validate at system edges where external input enters:
 
@@ -122,7 +122,7 @@ Where validation does NOT belong:
 - In utility functions called by already-validated code
 - On data that just came from your own database
 
-### 4. Prefer Addition Over Modification
+### 4. Prefer addition over modification
 
 Extend interfaces without breaking existing consumers:
 
@@ -143,7 +143,7 @@ interface CreateTaskInput {
 }
 ```
 
-### 5. Predictable Naming
+### 5. Predictable naming
 
 | Pattern | Convention | Example |
 |---------|-----------|---------|
@@ -153,9 +153,9 @@ interface CreateTaskInput {
 | Boolean fields | is/has/can prefix | `isComplete`, `hasAttachments` |
 | Enum values | UPPER_SNAKE | `"IN_PROGRESS"`, `"COMPLETED"` |
 
-## REST API Patterns
+## REST API patterns
 
-### Resource Design
+### Resource design
 
 ```
 GET    /api/tasks              → List tasks (with query params for filtering)
@@ -196,9 +196,9 @@ Use query parameters for filters:
 GET /api/tasks?status=in_progress&assignee=user123&createdAfter=2025-01-01
 ```
 
-### Partial Updates (PATCH)
+### Partial updates (PATCH)
 
-Accept partial objects — only update what's provided:
+Accept partial objects; only update what is provided:
 
 ```typescript
 // Only title changes, everything else preserved
@@ -206,9 +206,9 @@ PATCH /api/tasks/123
 { "title": "Updated title" }
 ```
 
-## TypeScript Interface Patterns
+## TypeScript interface patterns
 
-### Use Discriminated Unions for Variants
+### Use discriminated unions for variants
 
 ```typescript
 // Good: Each variant is explicit
@@ -229,7 +229,7 @@ function getStatusLabel(status: TaskStatus): string {
 }
 ```
 
-### Input/Output Separation
+### Input/output separation
 
 ```typescript
 // Input: what the caller provides
@@ -249,7 +249,7 @@ interface Task {
 }
 ```
 
-### Use Branded Types for IDs
+### Use branded types for IDs
 
 ```typescript
 type TaskId = string & { readonly __brand: 'TaskId' };
@@ -259,7 +259,7 @@ type UserId = string & { readonly __brand: 'UserId' };
 function getTask(id: TaskId): Promise<Task> { ... }
 ```
 
-## Common Rationalizations
+## Common rationalizations
 
 | Rationalization | Reality |
 |---|---|
@@ -271,7 +271,7 @@ function getTask(id: TaskId): Promise<Task> { ... }
 | "We can just maintain two versions" | Multiple versions multiply maintenance cost and create diamond dependency problems. Prefer the One-Version Rule. |
 | "Internal APIs don't need contracts" | Internal consumers are still consumers. Contracts prevent coupling and enable parallel work. |
 
-## Red Flags
+## Red flags
 
 - Endpoints that return different shapes depending on conditions
 - Inconsistent error formats across endpoints

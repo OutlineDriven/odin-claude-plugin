@@ -9,7 +9,7 @@ description: Build production-quality user-facing interfaces. Use when creating 
 
 Build UIs that read as hand-crafted production work, not machine output. The failure mode is the generic "AI aesthetic": default palettes, oversized cards, template layouts with no tie to the content. Conform to the project's real design system, meet WCAG 2.1 AA, and handle every interaction state.
 
-Examples below pair a JavaScript component framework (React) with a server-rendered template stack (Django/Python); CSS and HTML examples are framework-neutral. The patterns hold across frameworks — apply the equivalent in whatever stack the project uses.
+Examples below pair a JavaScript component framework (React) with a server-rendered template stack (Django/Python); CSS and HTML examples are framework-neutral. The patterns hold across frameworks. Apply the equivalent in whatever stack the project uses.
 
 ## When to Use
 
@@ -168,7 +168,7 @@ Server state   → remote data with caching              React Query, SWR; Vue: 
 Global store   → complex client state shared app-wide   Zustand, Redux; Vue: Pinia
 ```
 
-Server-rendered stacks map the same categories onto request/session/query-param/database state — the categories hold; only the storage moves to the server.
+Server-rendered stacks map the same categories onto request/session/query-param/database state. The categories hold; only the storage moves to the server.
 
 **Avoid prop drilling deeper than 3 levels.** If you pass props through components that don't use them, introduce context or restructure the component tree.
 
@@ -217,7 +217,7 @@ Do not skip heading levels. Do not borrow heading styles for non-heading content
 
 ### Color
 
-- Use semantic color tokens: `text-primary`, `bg-surface`, `border-default` — not raw hex values
+- Use semantic color tokens: `text-primary`, `bg-surface`, `border-default` (not raw hex values)
 - Ensure sufficient contrast (4.5:1 for normal text, 3:1 for large text)
 - Do not rely solely on color to convey information (use icons, text, or patterns too)
 
@@ -352,7 +352,7 @@ function TaskList({ tasks }: { tasks: Task[] }) {
 
 ## Responsive Design
 
-Build mobile-first, then widen. Express breakpoints with utility classes or plain CSS — both are framework-neutral:
+Build mobile-first, then widen. Express breakpoints with utility classes or plain CSS. Both are framework-neutral:
 
 ```html
 <!-- Utility CSS (Tailwind) -->
@@ -385,7 +385,7 @@ Use skeletons for content, not spinners. The skeleton markup is stack-neutral:
 </div>
 ```
 
-Apply optimistic updates so the UI responds before the server confirms. Cache mutation is a client-side pattern; the shape is identical in React Query and Vue's TanStack Query — snapshot, apply, roll back on error:
+Apply optimistic updates so the UI responds before the server confirms. Cache mutation is a client-side pattern; the shape is identical in React Query and Vue's TanStack Query. The sequence is snapshot, apply, roll back on error:
 
 ```tsx
 // React (TanStack Query)

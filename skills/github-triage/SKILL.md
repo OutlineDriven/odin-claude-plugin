@@ -59,8 +59,8 @@ Body uses the abstract tokens (`triage_pending`, `ready_for_agent`, etc.). Repla
 
 Group open issues into three buckets and display oldest-first:
 
-1. Unlabeled — never triaged.
-2. `triage_pending` — needs evaluation or continuation.
+1. Unlabeled: never triaged.
+2. `triage_pending`: needs evaluation or continuation.
 3. `awaiting_info` with new activity since the last triage-notes comment.
 
 ### Triage a specific issue

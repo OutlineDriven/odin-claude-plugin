@@ -5,11 +5,11 @@ metadata:
   short-description: Contribution opportunity router
 ---
 
-# Can I Help — interest-routed contribution matching
+# Can I Help: interest-routed contribution matching
 
 `extend` op-cell: turn repository state into contributor action. Collect project context, ask the developer what kind of contribution they want, map that interest to the strongest native signals, then return exact file/line recommendations with data-backed rationale and an executable first step.
 
-The invariant: no vague “look around `src/`”. Every recommendation names a file and preferably a line, states why the target matters, explains the local code in 2–3 sentences, and gives the first command or edit.
+The invariant: no vague "look around `src/`". Every recommendation names a file and preferably a line, states why the target matters, explains the local code in 2 to 3 sentences, and gives the first command or edit.
 
 ## When to Apply / NOT
 
@@ -42,27 +42,27 @@ NOT:
    - **Open issues**: `gh issue list --state open --limit 15 --json number,title,labels`. Treat labels `bug`, `good first issue`, `help wanted`, `documentation`, `test`, `testing`, `cleanup`, `refactor` as routing hints. If `gh` fails, mark issue signal unavailable and continue.
    - **Slop-deletion candidates**: commented-out code, orphan exports, passthrough wrappers, and always-true/always-false conditions. Use AST where possible; never promise zero-behavior cleanup until the slop verification gate passes.
 
-3. **Ask the developer's interest — mandatory and first before recommendations.** Use the ODIN `ask` tool, single-select, exactly one Recommended option. Do this even if signals already look obvious.
+3. **Ask the developer's interest: mandatory and first before recommendations.** Use the ODIN `ask` tool, single-select, exactly one Recommended option. Do this even if signals already look obvious.
 
    Prompt: `What kind of contribution do you want to make?`
 
    Options:
-   - `New to the stack` — Recommended when good-first areas or cleanup candidates exist.
-   - `Experienced` — hard problems, bugspots, architecture-adjacent issues.
-   - `Want to write tests` — test gaps and bugspot overlap.
-   - `Want to fix bugs` — bug-labelled issues, bugspots, suspicious conditions.
-   - `Want to improve docs` — stale references, doc drift, documentation issues.
-   - `Want quick cleanup` — verified deletion-only or tightly-contained cleanup.
+   - `New to the stack`: Recommended when good-first areas or cleanup candidates exist.
+   - `Experienced`: hard problems, bugspots, architecture-adjacent issues.
+   - `Want to write tests`: test gaps and bugspot overlap.
+   - `Want to fix bugs`: bug-labelled issues, bugspots, suspicious conditions.
+   - `Want to improve docs`: stale references, doc drift, documentation issues.
+   - `Want quick cleanup`: verified deletion-only or tightly-contained cleanup.
 
 4. **Route interest to signals.** Use `references/interest-routing.md` as the contract. Lead with the strongest non-empty primary signal for the chosen interest; skip empty subsections with one sentence, not a filler apology. If the chosen interest has no supporting signal, say which signal was empty and pivot to the nearest adjacent interest with data.
 
 5. **Read before explaining.** For every candidate that survives ranking, read the target file range plus enough surrounding code to understand the local pattern. For docs, read the stale doc and the current code target. For tests, read one nearby existing test pattern. Structural claims without a read are **Graft**.
 
-6. **Emit 2–5 recommendations.** Each recommendation MUST use the four-field shape:
-   - **What** — exact file and line/range, function, issue number, or doc section.
-   - **Why** — data-backed metric: bug-fix rate, test-gap touch count, zero doc coupling, broken symbol lookup, issue label, confidence score.
-   - **How** — 2–3 sentences explaining the local code and the contribution shape.
-   - **First step** — exact command/action, e.g. `bat -P -p -n src/parser/expr.ts`, `rg -n 'parseExpr' tests src`, `gh issue view 42`, or `edit src/foo.ts:88-93 after reading context`.
+6. **Emit 2 to 5 recommendations.** Each recommendation MUST use the four-field shape:
+   - **What**: exact file and line/range, function, issue number, or doc section.
+   - **Why**: data-backed metric: bug-fix rate, test-gap touch count, zero doc coupling, broken symbol lookup, issue label, confidence score.
+   - **How**: 2 to 3 sentences explaining the local code and the contribution shape.
+   - **First step**: exact command/action, e.g. `bat -P -p -n src/parser/expr.ts`, `rg -n 'parseExpr' tests src`, `gh issue view 42`, or `edit src/foo.ts:88-93 after reading context`.
 
 7. **Offer the next depth step.** Close with: `Want me to walk you through one of these? I can read the target code, outline the exact diff, or draft the PR description.` Do not stop at the recommendation list.
 
@@ -77,9 +77,9 @@ NOT:
 
 ## Slop Cleanup Gate
 
-Cleanup candidates are attractive but dangerous because “deletion-only” is easy to overclaim.
+Cleanup candidates are attractive but dangerous because "deletion-only" is easy to overclaim.
 
-Before any cleanup recommendation says “zero behavior change”:
+Before any cleanup recommendation says "zero behavior change":
 1. Read the file and surrounding block.
 2. Check references with codegraph callers/search when indexed; fallback `rg -n '<symbol>' <repo>` and language-specific `ast-grep` for import/export sites.
 3. Check framework entry reachability: route files, plugin registries, CLI command tables, dynamic imports, reflection decorators, config exports, and generated public APIs.
@@ -87,7 +87,7 @@ Before any cleanup recommendation says “zero behavior change”:
    - **Pure deletion HIGH**: commented-out code that re-parses as old code and has no live marker; orphan export with no references and no entry reachability.
    - **Contained refactor MEDIUM**: passthrough wrapper with all call sites visible; first step is call-site inventory, not deletion.
    - **Bug investigation MEDIUM**: always-true/false condition; likely wrong predicate, not cleanup.
-5. If any entry-reachability doubt remains, phrase as “cleanup candidate” and make the first step verification, not removal.
+5. If any entry-reachability doubt remains, phrase as "cleanup candidate" and make the first step verification, not removal.
 
 ## Anti-patterns
 

@@ -3,11 +3,11 @@ name: memory-sanitize
 description: Produces share-safe copies of memory files with PII and credentials redacted, leaving originals untouched. Use when sanitizing memory for sharing, redacting PII, or scanning for credentials.
 ---
 
-Redact PII and scan for credentials in memory files — write copies to `/tmp`, never touch originals.
+Redact PII and scan for credentials in memory files: write copies to `/tmp`, never touch originals.
 
 ## Scope
 
-Memory-dir-only. Does not read session histories. Structural audit (orphans, duplicates) belongs in `memory-clean`; run that first if the directory is messy. This skill is a best-effort redactor, not a formal DLP tool — the user is the final reviewer.
+Memory-dir-only. Does not read session histories. Structural audit (orphans, duplicates) belongs in `memory-clean`; run that first if the directory is messy. This skill is a best-effort redactor, not a formal DLP tool: the user is the final reviewer.
 
 ## Path resolution
 
@@ -69,6 +69,6 @@ Wait for user acknowledgement before exiting.
 ## Boundary fences
 
 - Read-only on originals. Writes only to `/tmp/memory-sanitized-<ts>/`.
-- Does not update `MEMORY.md` in the originals — sanitized copies are not a replacement.
+- Does not update `MEMORY.md` in the originals: sanitized copies are not a replacement.
 - Does not read session histories.
-- Security limitation: pattern-based scanning misses novel or obfuscated formats — the user is the final reviewer before sharing.
+- Security limitation: pattern-based scanning misses novel or obfuscated formats. The user is the final reviewer before sharing.

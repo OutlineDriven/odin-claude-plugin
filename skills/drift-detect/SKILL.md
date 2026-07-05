@@ -9,7 +9,7 @@ metadata:
 
 Run an `extend` op-cell: add a temporary evidence layer over the repo, compare stated intent with actual implementation, then synthesize the next repair plan. This is read-only unless the caller explicitly asks to apply follow-up fixes.
 
-The invariant: every drift claim cites a concrete source - issue number, PR, milestone, doc line, file path, symbol, test/CI signal, or git-history signal. No evidence line, no finding.
+The invariant: every drift claim cites a concrete source - issue number, PR, milestone, doc line, file path, symbol, test/CI signal, or git-history signal. Without an evidence line, there is no finding.
 
 ## When to Apply / NOT
 
@@ -51,7 +51,7 @@ drift-detect --sources=github,docs,code --depth=thorough
    - overdue milestones: due date older than today with `open_issues > 0`; critical if due >30 days ago and release-labeled.
    - already-done candidates: issue title terms that semantically match implemented files/symbols found in Phase 4.
 
-   If `gh` is unavailable or unauthenticated, mark GitHub as `unavailable` and continue with docs/code. Do not invent issue state.
+   If `gh` is unavailable or unauthenticated, mark GitHub as `unavailable` and continue with docs/code. Never invent issue state.
 
 3. **Collect documentation intent (`--sources=docs`).** Use `find` for doc file names, then `read` only candidate files/sections.
 
@@ -143,7 +143,7 @@ drift-detect --sources=github,docs,code --depth=thorough
 
    Every array item carries `{source, evidence, confidence}`. Evidence must be citeable: `README.md:42`, `issue #17`, `src/auth/session.ts`, `.github/workflows/test.yml`, or a command result.
 
-6. **Synthesize with a generic ODIN agent role.** Delegate exactly one synthesis pass to an ODIN `oracle` or `plan` subagent role. The role is semantic analyst, not collector: it receives the evidence bundle and `references/drift-taxonomy.md`, then emits the report. Do not hardcode model names. Do not name or invoke any skill as a dependency.
+6. **Synthesize with a generic ODIN agent role.** Delegate exactly one synthesis pass to an ODIN `oracle` or `plan` subagent role. The role is semantic analyst, not collector: it receives the evidence bundle and `references/drift-taxonomy.md`, then emits the report. Never hardcode model names. Never name or invoke a skill as a dependency.
 
    Prompt shape:
 
@@ -188,7 +188,7 @@ Certainty:
 - **Transcript dump**: pasting raw `gh`/search output instead of synthesizing.
 - **Generic plan**: "add tests" without naming the feature/file/evidence.
 - **Exact-string matching only**: misses `user authentication` ↔ `auth/login/session`.
-- **No-source findings**: severity without an Evidence line.
+- **Sourceless findings**: severity without an Evidence line.
 - **Issue closure by vibe**: never say close an issue unless code evidence proves it implemented or obsolete.
 - **Graph absolutism**: missing codegraph index is not failure; degrade to `ast-grep` + `git grep`.
 - **Mutation during scan**: do not update PLAN/README/issues in the drift pass.

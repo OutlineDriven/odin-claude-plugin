@@ -3,7 +3,7 @@ name: setup-gitignore
 description: Compose or revise the repo's .gitignore from gitignore.io templates, editor patterns, and confirmed untracked noise. Use when the user says "set up gitignore", "fix gitignore", or untracked files keep appearing in git status.
 ---
 
-Initialize or idempotently revise the current repo's `.gitignore` — never the global excludesfile.
+Initialize or idempotently revise the current repo's `.gitignore`, never the global excludesfile.
 
 ## Scope
 
@@ -11,10 +11,10 @@ Per-repo only. Never read or write `~/.gitignore`, `~/.config/git/ignore`, or ru
 
 ## Sources composed (in order)
 
-1. **gitignore.io** — templates keyed by detected language/framework (requires network)
-2. **AI tooling** — bundled patterns from `references/AI-TOOLING.md`
-3. **IDE / editor** — bundled patterns from `references/IDE-EDITOR.md`
-4. **Empirical** — untracked paths from `git status`, confirmed interactively
+1. **gitignore.io**: templates keyed by detected language/framework (requires network)
+2. **AI tooling**: bundled patterns from `references/AI-TOOLING.md`
+3. **IDE / editor**: bundled patterns from `references/IDE-EDITOR.md`
+4. **Empirical**: untracked paths from `git status`, confirmed interactively
 
 ## Workflow
 
@@ -72,7 +72,7 @@ Append the bundled blocks after the API output in order:
 ### 6. Merge or init
 
 - **No existing `.gitignore`**: write the composed output directly.
-- **Existing `.gitignore`**: merge each `# === SECTION ===` block idempotently — patterns already present in the file are deduplicated (first occurrence wins). Preserve all user content outside section headers. Show the full diff via `difft`; write only after user confirms.
+- **Existing `.gitignore`**: merge each `# === SECTION ===` block idempotently. Patterns already present in the file are deduplicated (first occurrence wins). Preserve all user content outside section headers. Show the full diff via `difft`; write only after user confirms.
 
 ### 7. Verify
 

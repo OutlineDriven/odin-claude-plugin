@@ -5,7 +5,7 @@ metadata:
   short-description: Iterative multi-agent code audit
 ---
 
-# Audit Project — correct-op multi-agent audit loop
+# Audit Project: correct-op multi-agent audit loop
 
 `audit-project` is a `correct` op-cell. It restores the invariant: **no open critical/high findings remain in the selected scope**. This is not a one-pass critique; it selects reviewers from evidence, applies fixes in verified batches, re-reviews only changed files, and stops only at zero critical/high, a user decision gate, or the iteration cap.
 
@@ -54,21 +54,21 @@ State:
 
 Use these signals to route attention, not to auto-dismiss anything.
 
-1. **Test gaps** — high-churn files with no co-changing test file.
+1. **Test gaps**: high-churn files with no co-changing test file.
    - Git recipe: parse `git log --name-only --format='%H%x09%ad%x09%s' --date=short -- <scope>`; group files per commit; mark source files whose commit groups rarely include `test`, `spec`, `__tests__`, `tests/`, or language-native test suffixes.
    - Score: `test_gap_score = hotspot_score + 2 * bugfix_touches` when test co-change count is `0`; otherwise dampen by `1 / (1 + test_cochanges)`.
-2. **Pain / hotspots** — files likely to hide bugs.
+2. **Pain / hotspots**: files likely to hide bugs.
    - Git recipe: `total_touches`, `recent_touches` over the last 90 days, and bug-fix touches from subjects matching `fix|bug|regress|crash|fault|hotfix|panic|leak`.
    - Complexity proxy: use `codegraph_explore`/`codegraph_files` for symbol count and dependency fan-in/fan-out when indexed; fallback to `ast-grep` counts for functions, conditionals, loops, catches, and nested classes.
    - Score: `hotspot_score = total_touches + (2 * recent_touches)`; `bug_rate = bugfix_touches / max(total_touches, 1)`; `pain_score = hotspot_score * (1 + bug_rate) * (1 + complexity_band)`.
-3. **Bugspots** — files repeatedly touched by fixes.
+3. **Bugspots**: files repeatedly touched by fixes.
    - Git recipe: filter fix-like commits above, count affected files, rank by `bugfix_touches` then `bug_rate`.
-   - Route to security, test-quality, and code-quality reviewers with explicit “fragile file” context.
-4. **Slop concentration** — files with mechanical cleanliness hazards.
+   - Route to security, test-quality, and code-quality reviewers with explicit "fragile file" context.
+4. **Slop concentration**: files with mechanical cleanliness hazards.
    - HIGH-certainty scans: `ast-grep`/search for empty catches, blanket `catch {}`, `TODO: implement`, `throw new Error('not implemented')`, `console.log`/debug prints in production paths, `unwrap()`/`expect()` in non-test Rust, hardcoded secrets, commented-out code blocks, dead branches after `return`, obvious pass-through wrappers.
    - Rank files with `>=3` hits; top 5 feed code-quality first. Cross-file clusters feed architecture if they imply wrapper towers, duplicate implementations, or boundary sprawl.
 5. **Entry-points / exposed surfaces**.
-   - Primary: `codegraph_explore` with “entry points, handlers, routes, CLIs, jobs, exported API surface” and then `codegraph_callers` / `codegraph_impact` for risky fan-in.
+   - Primary: `codegraph_explore` with "entry points, handlers, routes, CLIs, jobs, exported API surface" and then `codegraph_callers` / `codegraph_impact` for risky fan-in.
    - Fallback: `ast-grep` for `main`, route registration, exported handlers, controllers, Lambda/Cloudflare handlers, CLI command registration, package scripts, framework config, Docker/CI entry commands.
    - Route to security and devops always; route to API/backend/frontend according to file kind.
 
@@ -121,7 +121,7 @@ Each selected reviewer receives:
 }
 ```
 
-Reviewer findings must be evidence-based: exact `file`, exact `line`, concrete failure mode, and fix. Missing location or vague “consider improving” text is not a finding; downgrade to note or drop.
+Reviewer findings must be evidence-based: exact `file`, exact `line`, concrete failure mode, and fix. Missing location or vague "consider improving" text is not a finding; downgrade to note or drop.
 
 ### 5. Consolidate findings and apply the false-positive contract
 
@@ -145,7 +145,7 @@ Loop condition: `openCriticalHigh > 0 && iteration < maxIterations`.
 
 1. Build a fix queue from open `critical` then `high`; within each severity, sort by effort small→large, then group by file.
 2. Apply one file batch at a time. Keep the patch minimal; fix the named invariant, not adjacent style.
-3. After each batch, run the repo’s own verification command. Discover from manifests and CI (`test`, `check`, `build`, `lint`, `cargo test`, `go test ./...`, `pytest`, etc.). If no verifier exists, ask before mutating more than one batch; otherwise mark remaining fixes as blocked-by-no-verifier.
+3. After each batch, run the repo's own verification command. Discover from manifests and CI (`test`, `check`, `build`, `lint`, `cargo test`, `go test ./...`, `pytest`, etc.). If no verifier exists, ask before mutating more than one batch; otherwise mark remaining fixes as blocked-by-no-verifier.
 4. On regression, run `git restore -- <changed files in that batch>`, record `regressed: true`, and keep the finding open with the regression note.
 5. Re-review only changed files, using only reviewers whose domain touches those files plus the original reviewers that emitted the fixed findings.
 6. Re-consolidate. Run the blocked-ratio gate before checking for zero remaining issues.
@@ -177,7 +177,7 @@ Report: scope, selected reviewers, iterations, critical/high fixed, remaining cr
 - **Suppress tests or guards**: never disable a verifier to land an audit fix.
 - **Create public issues for security-sensitive findings**: keep exploitable details internal; fix immediately or leave private queue notes.
 - **Move critical/high to debt by default**: only a user decision gate can defer them.
-- **Ship placeholders**: “TODO: fix later” is a failed audit fix.
+- **Ship placeholders**: "TODO: fix later" is a failed audit fix.
 
 ## Validation Gates
 

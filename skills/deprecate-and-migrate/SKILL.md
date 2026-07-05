@@ -28,7 +28,7 @@ Every line costs maintenance: tests, docs, security patches, dependency updates,
 
 ### Hyrum's Law Makes Removal Hard
 
-Past a certain consumer count, every observable behavior gets depended on, including bugs, timing quirks, and undocumented side effects. Deprecation therefore needs active migration, not an announcement. A consumer cannot "just switch" while it relies on behavior the replacement does not reproduce.
+Past a certain consumer count, every observable behavior gets depended on, including bugs, timing quirks, and undocumented side effects. Deprecation therefore needs active migration rather than just an announcement. A consumer cannot "just switch" while it relies on behavior the replacement does not reproduce.
 
 ### Deprecation Planning Starts at Design Time
 
@@ -72,7 +72,7 @@ No deprecation without a working alternative. The replacement must:
 
 - Cover all critical use cases of the old system
 - Have documentation and a migration guide
-- Be proven in production, not argued to be theoretically better
+- Be proven in production, not merely argued to be theoretically better
 
 ### Step 2: Announce and Document
 
@@ -105,7 +105,7 @@ Migrate consumers one at a time, not all at once. For each consumer:
 5. Confirm no regressions
 ```
 
-**The Churn Rule:** If you own the infrastructure being deprecated, you own migrating its users — or you ship backward-compatible updates that require no migration. Announcing a deprecation and leaving users to figure it out is not allowed.
+**The Churn Rule:** If you own the infrastructure being deprecated, you own migrating its users, or you ship backward-compatible updates that require no migration. Announcing a deprecation and leaving users to figure it out is not allowed.
 
 ### Step 4: Remove the Old System
 

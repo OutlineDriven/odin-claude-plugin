@@ -5,14 +5,14 @@ metadata:
   short-description: Write durable solution docs and concept definitions
 ---
 
-# Compound — durable project knowledge
+# Compound: durable project knowledge
 
-`Op: extend` — adds structured, in-repo documentation of solved problems and project-specific vocabulary.
+`Op: extend` adds structured, in-repo documentation of solved problems and project-specific vocabulary.
 
 `compound` writes exactly two surfaces:
 
-- `docs/solutions/<category>/<slug>.md` — one learning per solved problem.
-- `CONCEPTS.md` at the repo root — one definition per project-specific term.
+- `docs/solutions/<category>/<slug>.md`: one learning per solved problem.
+- `CONCEPTS.md` at the repo root: one definition per project-specific term.
 
 It does not write memory files. User/preference facts are handed to `memory-update`.
 
@@ -47,7 +47,7 @@ Strip `mode:` tokens from `$ARGUMENTS`.
 | Mode | Trigger | What it does |
 |---|---|---|
 | **Solution** (default) | none | Document one solved problem → `docs/solutions/` |
-| **Vocabulary** | when a durable, reusable project term surfaces | Reconcile `CONCEPTS.md` — read `references/concepts.md` |
+| **Vocabulary** | when a durable, reusable project term surfaces | Reconcile `CONCEPTS.md`: read `references/concepts.md` |
 | **Headless** | `mode:headless` | Non-interactive overlay on whichever mode is active |
 
 ## Writing a solution doc
@@ -64,7 +64,7 @@ Strip `mode:` tokens from `$ARGUMENTS`.
 1. Read `references/concepts.md`.
 2. Check `CONCEPTS.md` for an existing definition of the term.
 3. If absent and the term clears the gate, add one entry: a one-sentence local definition and a second paragraph only for non-obvious behavioral rules.
-4. One definition per concept — refresh on drift, never duplicate.
+4. One definition per concept. Refresh on drift, never duplicate.
 
 ## Commits
 
@@ -78,5 +78,5 @@ Stage only the surfaces `compound` wrote or edited.
 
 ## Disambiguation
 
-- **vs `autolearn`** — `autolearn` extracts session learnings into memory; `compound` documents durable project knowledge into repo docs.
-- **vs `memory-update`** — `memory-update` writes auto-memory about users and cross-project context. `compound` never writes memory.
+- **vs `autolearn`**: `autolearn` extracts session learnings into memory; `compound` documents durable project knowledge into repo docs.
+- **vs `memory-update`**: `memory-update` writes auto-memory about users and cross-project context. `compound` never writes memory.

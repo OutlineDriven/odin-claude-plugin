@@ -5,7 +5,7 @@ metadata:
   short-description: New-codebase orientation tour
 ---
 
-# Onboard — codebase orientation tour
+# Onboard: codebase orientation tour
 
 Run an `extend` op for a developer entering an unfamiliar repository. Extend their working context with a compact, evidence-backed map: what the project is, where execution starts, what areas are active, which commands are real, and which 2-3 files to read first.
 
@@ -19,7 +19,7 @@ Apply:
 - A local checkout exists, even if it is not a git repo.
 
 NOT:
-- User already named a concrete bug or failing test — orient only if the fix path is unclear.
+- User already named a concrete bug or failing test. Orient only if the fix path is unclear.
 - User wants a full architectural critique, security audit, or performance investigation.
 - User asks for exhaustive symbol indexing. Onboard is bounded by depth and optimized for first useful map.
 
@@ -83,13 +83,13 @@ Collect facts before explaining. Never fabricate a section from filenames alone.
 
 Use the template in `references/orientation.md`. Keep the first pass concise; the target is a 2-3 minute read. Sections are ordered and named exactly:
 
-1. **What it does** — one or two plain-language sentences from README + manifest.
-2. **Tech stack + CI** — languages, framework, package manager, build/test tools, CI jobs.
-3. **Where execution starts** — entry points grouped by kind: binaries/CLIs, server/app boot, framework-loaded config, libraries/exports, tests/benches.
-4. **Project structure, annotated** — top directories with purpose and unusual layout notes.
-5. **Active development — hotspots + owners** — top churn files, recent maintainers, areas under change.
-6. **Code health** — slop/drift/test gaps only when evidence exists. Certainty grades: HIGH from tools, MEDIUM from repeated patterns, LOW from inference.
-7. **Getting started — exact runnable commands** — clone/install/build/test/run commands copied from manifests, CI, or observed scripts.
+1. **What it does**: one or two plain-language sentences from README + manifest.
+2. **Tech stack + CI**: languages, framework, package manager, build/test tools, CI jobs.
+3. **Where execution starts**: entry points grouped by kind: binaries/CLIs, server/app boot, framework-loaded config, libraries/exports, tests/benches.
+4. **Project structure, annotated**: top directories with purpose and unusual layout notes.
+5. **Active development: hotspots + owners**: top churn files, recent maintainers, areas under change.
+6. **Code health**: slop/drift/test gaps only when evidence exists. Certainty grades: HIGH from tools, MEDIUM from repeated patterns, LOW from inference.
+7. **Getting started: exact runnable commands**: clone/install/build/test/run commands copied from manifests, CI, or observed scripts.
 
 ### 4. Deep-read 2-3 real files
 
@@ -106,10 +106,10 @@ If fewer exist, read what exists and state the degradation. Tie the files togeth
 
 Close the first turn with the `ask` tool. Use one axis, single-select, one Recommended option:
 
-- `explore_area` — **Explore an area** (Recommended for first-time onboarding): pick a directory/package and read its central exports plus most-imported file.
-- `trace_feature` — **Trace a feature**: ask for the feature name, locate its entry point, trace call/import flow, deep-read 2-3 key files.
-- `first_change` — **Make a first change**: ask for desired change, map risk using hotspots/owners/tests, identify exact files to inspect before editing.
-- `where_help` — **Where can I help?**: combine hotspots, test gaps, stale docs, low-owner areas, and small cleanup candidates into file-level recommendations.
+- `explore_area`: **Explore an area** (Recommended for first-time onboarding): pick a directory/package and read its central exports plus most-imported file.
+- `trace_feature`: **Trace a feature**: ask for the feature name, locate its entry point, trace call/import flow, deep-read 2-3 key files.
+- `first_change`: **Make a first change**: ask for desired change, map risk using hotspots/owners/tests, identify exact files to inspect before editing.
+- `where_help`: **Where can I help?**: combine hotspots, test gaps, stale docs, low-owner areas, and small cleanup candidates into file-level recommendations.
 
 If the `ask` tool is unavailable in the current harness, present the same four options as a numbered prompt and stop after the question.
 

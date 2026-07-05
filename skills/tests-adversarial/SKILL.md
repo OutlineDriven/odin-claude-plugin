@@ -3,14 +3,14 @@ name: tests-adversarial
 description: Write adversarial tests that intentionally violate assumptions and stress failure paths. Use when hardening error handling, validating boundary behavior, or hunting silent failures.
 ---
 
-# Adversarial Testing — Think Like the Attacker
+# Adversarial Testing: Think Like the Attacker
 
-Every line of code makes assumptions. Your job is to find them and violate them — systematically, not randomly. The goal is distrust, not coverage. A passing test suite proves nothing if it only tests the happy path.
+Every line of code makes assumptions. Your job is to find them and violate them systematically, not randomly. The goal is distrust, not coverage. A passing test suite proves nothing if it only tests the happy path.
 
 ## The Adversarial Mindset
 
 1. **Every input is a lie.** Callers will send garbage, nulls, negative numbers, empty strings, and types that satisfy the compiler but violate intent.
-2. **Implicit contracts are targets.** If the code assumes ordering, uniqueness, non-emptiness, or positive values without enforcing it — that is your entry point.
+2. **Implicit contracts are targets.** If the code assumes ordering, uniqueness, non-emptiness, or positive values without enforcing it, that is your entry point.
 3. **The system is your adversary.** Files disappear, connections drop, clocks jump, memory runs out, permissions change between check and use.
 4. **Passing tests prove nothing.** They prove the happy path works. Adversarial tests prove the sad paths do not silently corrupt.
 
@@ -53,14 +53,14 @@ For every function or module under test, ask these six questions:
 
 ## The No-Cheating Rule
 
-- Test through the **public API only**. If you need private access to break it, the abstraction is leaking — file that as a finding.
-- If a scenario is "impossible," prove it with types or contracts. If you cannot prove it, it is not impossible — test it.
+- Test through the **public API only**. If you need private access to break it, the abstraction is leaking. File that as a finding.
+- If a scenario is "impossible," prove it with types or contracts. If you cannot prove it, it is not impossible. Test it.
 - Every test scenario must be **production-plausible**. Cosmic rays flipping bits are not plausible; a user pasting 10MB into a text field is.
 
 ## Writing Strategy
 
 1. **Read the code.** Understand what it does, not what the docs say it does.
-2. **List assumptions.** Write them down explicitly — one per line, no hedging.
+2. **List assumptions.** Write them down explicitly, one per line, with no hedging.
 3. **Write violation tests.** One test per assumption. Name it after what it violates: `test_rejects_negative_quantity`, `test_handles_empty_result_set`, `test_recovers_from_mid_write_crash`.
 4. **Verify error quality.** When the code fails, does it produce a meaningful error? Silent corruption is worse than a crash.
 5. **Test boundaries from both sides.** If the limit is 100, test 99, 100, and 101. If the limit is 0, test -1, 0, and 1.
@@ -79,7 +79,7 @@ For every function or module under test, ask these six questions:
 
 | Code | Meaning |
 |------|---------|
-| 0 | All assumptions identified, violated, and handled — error paths produce meaningful output |
-| 1 | Untested assumptions remain — some assumptions lack violation tests |
-| 2 | Silent failures found — code swallows errors or produces wrong output without signaling |
-| 3 | Crashes or panics discovered — unhandled exceptions, segfaults, or undefined behavior found |
+| 0 | All assumptions identified, violated, and handled: error paths produce meaningful output |
+| 1 | Untested assumptions remain: some assumptions lack violation tests |
+| 2 | Silent failures found: code swallows errors or produces wrong output without signaling |
+| 3 | Crashes or panics discovered: unhandled exceptions, segfaults, or undefined behavior found |

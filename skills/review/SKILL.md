@@ -2,14 +2,14 @@
 name: review
 description: Reviews changes on the current branch; shallow by default, deep on risk escalation or explicit request. Use when reviewing current work, analyzing recent commits, or running a deep review.
 metadata:
-  short-description: Read-only branch review — single-pass, or deep multi-persona with P0-P3 severity
+  short-description: Read-only branch review, single-pass, or deep multi-persona with P0-P3 severity
 ---
 
 # Code Review
 
 You are an expert code reviewer. Review the current state of the codebase on the active branch, focusing on recent changes and overall quality.
 
-`Op: extend` — this skill adds an opt-in deep multi-persona mode on top of the single-pass review below. The single pass is the default and the floor; deep mode is a strict superset of it.
+`Op: extend`: this skill adds an opt-in deep multi-persona mode on top of the single-pass review below. The single pass is the default and the floor; deep mode is a strict superset of it.
 
 ## Modes and routing
 
@@ -21,7 +21,7 @@ Strip `mode:` tokens from the invocation before treating the remainder as scope.
 | **Deep** (multi-persona) | `mode:deep` / `personas`, OR auto-escalated from plain `/review` when a risk signal fires | The full single pass, then the persona phases appended below it. |
 | **Auto** (default) | plain `/review` | Runs shallow; escalates to deep only when a risk signal fires (thresholds below). |
 
-**Auto-escalation thresholds** — any one fires the promotion; name the trigger that fired in the report:
+**Auto-escalation thresholds**: any one fires the promotion; name the trigger that fired in the report:
 
 - diff size > 150 changed lines against the base, OR
 - > 5 files changed, OR
@@ -29,9 +29,9 @@ Strip `mode:` tokens from the invocation before treating the remainder as scope.
 
 Escalation is **gated, not always-on**: a small diff with no security-touching path stays single-pass. Pin shallow explicitly with `mode:shallow` to suppress escalation; force deep with `mode:deep`.
 
-**Sever-mitigation (non-negotiable):** deep mode is a *strict superset*. Every heading of the single pass — `## Overview`, `## Code Quality Analysis`, `## Specific Recommendations`, `## Potential Issues and Risks`, `## Testing and Validation`, `## Security Review`, `## Performance Considerations`, `## Conclusion and Next Steps` — still appears, in order, produced by the same single pass. Personas and severity are *added below* it, never substituted, never reordered. Plain `/review` on a small clean diff produces exactly the single-pass output it always did.
+**Sever-mitigation (non-negotiable):** deep mode is a *strict superset*. Every heading of the single pass: `## Overview`, `## Code Quality Analysis`, `## Specific Recommendations`, `## Potential Issues and Risks`, `## Testing and Validation`, `## Security Review`, `## Performance Considerations`, `## Conclusion and Next Steps`, still appears, in order, produced by the same single pass. Personas and severity are *added below* it, never substituted, never reordered. Plain `/review` on a small clean diff produces exactly the single-pass output it always did.
 
-Shallow: run the single pass below and stop at the closing directive. Deep: run the single pass below, then continue at **Deep mode — parallel persona review**.
+Shallow: run the single pass below and stop at the closing directive. Deep: run the single pass below, then continue at **Deep mode: parallel persona review**.
 
 Follow these steps:
 
@@ -113,9 +113,9 @@ Be specific about file locations, line numbers, and provide concrete examples. R
 
 ---
 
-# Deep mode — parallel persona review
+# Deep mode: parallel persona review
 
-Reached only in `mode:deep` or on auto-escalation. The single pass above has already run and its eight sections are present. Everything here is **additive output appended below them**. This phase stays **READ-ONLY**: personas emit findings, the orchestrator merges and assigns severity plus an action class, and the action class is *routing advice only* — no file is edited here. Fixes are executed by `fix` or `review-fix-grill-loop`, never by this skill.
+Reached only in `mode:deep` or on auto-escalation. The single pass above has already run and its eight sections are present. Everything here is **additive output appended below them**. This phase stays **READ-ONLY**: personas emit findings, the orchestrator merges and assigns severity plus an action class, and the action class is *routing advice only*. No file is edited here. Fixes are executed by `fix` or `review-fix-grill-loop`, never by this skill.
 
 ## When to Apply / When NOT
 
@@ -134,7 +134,7 @@ NOT:
 
 ## Personas (the lenses)
 
-Thirteen read-only persona agents, each a lens with a primary failure class. Dispatch the ones the diff warrants — `correctness` and `adversarial` are always-on; the rest are gated by the diff surface (skip `performance` on a docs-only diff, skip `api-contract` when no exported surface changed).
+Thirteen read-only persona agents, each a lens with a primary failure class. Dispatch the ones the diff warrants. `correctness` and `adversarial` are always-on; the rest are gated by the diff surface (skip `performance` on a docs-only diff, skip `api-contract` when no exported surface changed).
 
 | Persona | Lens | Prompt |
 |---------|------|--------|
@@ -155,34 +155,34 @@ Thirteen read-only persona agents, each a lens with a primary failure class. Dis
 The shared output schema, severity rubric, action-class rubric, tool order, and hard limits live in `references/personas/_contract.md`. Read it once; prepend it to every persona dispatch. The security persona's forcing path globs (the authoritative set the escalation threshold defers to) are listed in `references/personas/security.md`.
 
 Additional reference docs:
-- `references/action-class-rubric.md` — routing decision criteria for each finding class.
-- `references/diff-scope.md` — rules for what is in-scope vs out-of-scope in a review.
-- `references/findings-schema.json` — JSON schema for structured finding output.
-- `references/review-output-template.md` — template for the final review report.
-- `references/subagent-template.md` — template for dispatching subagent reviewers.
-- `references/validator-template.md` — template for validation subagents.
+- `references/action-class-rubric.md`: routing decision criteria for each finding class.
+- `references/diff-scope.md`: rules for what is in-scope vs out-of-scope in a review.
+- `references/findings-schema.json`: JSON schema for structured finding output.
+- `references/review-output-template.md`: template for the final review report.
+- `references/subagent-template.md`: template for dispatching subagent reviewers.
+- `references/validator-template.md`: template for validation subagents.
 
 ## Workflow
 
-### Phase D1 — Select and dispatch (parallel, one message)
+### Phase D1: Select and dispatch (parallel, one message)
 
-Compute the diff surface: changed files, languages, exported-symbol changes, security-touching paths. Select the warranted personas (always-on + gated). Dispatch all selected personas **in one tool-call message** — sequential dispatch invalidates the parallel-launch contract. Each agent receives `<_contract.md> + "\n\n---\n\n" + <persona prompt> + "\n\n---\n\nDIFF:\n" + <captured diff>`. Agents are read-only and return findings only.
+Compute the diff surface: changed files, languages, exported-symbol changes, security-touching paths. Select the warranted personas (always-on + gated). Dispatch all selected personas **in one tool-call message**. Sequential dispatch invalidates the parallel-launch contract. Each agent receives `<_contract.md> + "\n\n---\n\n" + <persona prompt> + "\n\n---\n\nDIFF:\n" + <captured diff>`. Agents are read-only and return findings only.
 
-### Phase D2 — Merge and rank
+### Phase D2: Merge and rank
 
 Wait for all personas. Then:
 
-1. **Dedup** by fingerprint — `normalize(file) + line-bucket(±3) + normalize(title)`. Identical cross-persona findings collapse to one.
-2. **Cross-persona agreement promotes confidence one anchor step** — a finding two personas raise independently is corroborated; bump its confidence one step (low→med→high).
+1. **Dedup** by fingerprint. `normalize(file) + line-bucket(±3) + normalize(title)`. Identical cross-persona findings collapse to one.
+2. **Cross-persona agreement promotes confidence one anchor step**. A finding two personas raise independently is corroborated; bump its confidence one step (low→med→high).
 3. **Assign severity P0-P3** by the behavioral rubric below, not by persona vote.
-4. **Confidence gate** — drop findings below `med` confidence, *except* a credible P0 (a P0 is never silently dropped on low confidence; surface it flagged).
-5. **Assign one action class** (below) — the routing decision, not a fix.
+4. **Confidence gate**: drop findings below `med` confidence, *except* a credible P0 (a P0 is never silently dropped on low confidence; surface it flagged).
+5. **Assign one action class** (below): the routing decision, not a fix.
 
-### Phase D3 — Append the deep report
+### Phase D3: Append the deep report
 
 Append the persona findings below `## Conclusion and Next Steps`, grouped by severity then persona, each citing `file:line`, behavioral impact, confidence, and action class with its route. Do not edit the single-pass sections above.
 
-## Severity — P0-P3 by observable behavioral impact
+## Severity: P0-P3 by observable behavioral impact
 
 Severity is the *observed or reachable* impact, not how subtle the bug is.
 
@@ -193,16 +193,16 @@ Severity is the *observed or reachable* impact, not how subtle the bug is.
 | **P2** | Degraded behavior on an uncommon path; a changed branch with no test that can break silently later; maintainability debt with a named future-defect path. | Fix or file. |
 | **P3** | No behavioral impact: style, naming, micro-optimization with no measured win. | Advisory. |
 
-A finding with no nameable reachable impact is P3 by definition — "looks wrong" without a reachable failure is not P0/P1.
+A finding with no nameable reachable impact is P3 by definition. "Looks wrong" without a reachable failure is not P0/P1.
 
-## Action classes — routing, not fixing
+## Action classes: routing, not fixing
 
 Each finding gets exactly one class. The class is **advice on where the fix belongs**; this skill applies nothing.
 
 | Class | Meaning | Route |
 |-------|---------|-------|
 | **safe** | Mechanical, behavior-preserving, single-site; the fix is unambiguous. | `fix` (unattended). |
-| **gated** | The fix is clear but touches a contract or multiple sites — needs verified batches and a resolve gate. | `review-fix-grill-loop`. |
+| **gated** | The fix is clear but touches a contract or multiple sites; needs verified batches and a resolve gate. | `review-fix-grill-loop`. |
 | **manual** | Needs a human design decision; no single correct fix. | Surface as a question; no auto-route. |
 | **advisory** | Opinion or nit; recording it is the whole action. | None. |
 
@@ -238,8 +238,8 @@ Each finding gets exactly one class. The class is **advice on where the fix belo
 
 ## See also / Disambiguation
 
-- **vs `review-fix-grill-loop`** — that skill *resolves and fixes* findings in verified batches and loops until clean. `review`, even deep, is **read-only**: it surfaces and routes, never edits. Deep review feeds the grill loop; it does not replace it.
-- **vs `pr-review`** — `pr-review` reviews an open GitHub PR (its comments, CI, and diff via `gh`). `review` works the local active branch against its base, no GitHub dependency.
-- **vs `audit-project`** — `audit-project` is a whole-project, release-readiness audit. `review` is scoped to the current branch's changes; deep mode adds lenses, not project-wide breadth.
-- **vs `simplify`** — `simplify` applies behavior-preserving compression fixes. `review` only assesses.
-- **vs `doc-review`** — `doc-review` reads a prose planning document (plan/spec/PRD) read-only; `review` reads the code diff on the active branch. Both fire on "review …", so route by artifact: prose → `doc-review`, code → `review`.
+- **vs `review-fix-grill-loop`**: that skill *resolves and fixes* findings in verified batches and loops until clean. `review`, even deep, is **read-only**: it surfaces and routes, never edits. Deep review feeds the grill loop; it does not replace it.
+- **vs `pr-review`**: `pr-review` reviews an open GitHub PR (its comments, CI, and diff via `gh`). `review` works the local active branch against its base, no GitHub dependency.
+- **vs `audit-project`**: `audit-project` is a whole-project, release-readiness audit. `review` is scoped to the current branch's changes; deep mode adds lenses, not project-wide breadth.
+- **vs `simplify`**: `simplify` applies behavior-preserving compression fixes. `review` only assesses.
+- **vs `doc-review`**: `doc-review` reads a prose planning document (plan/spec/PRD) read-only; `review` reads the code diff on the active branch. Both fire on "review …", so route by artifact: prose → `doc-review`, code → `review`.

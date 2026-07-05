@@ -7,7 +7,7 @@ description: Prepare a production launch with checklists, monitoring, staged rol
 
 ## Overview
 
-Ship with confidence. The goal is not just to deploy — it's to deploy safely, with monitoring in place, a rollback plan ready, and a clear understanding of what success looks like. Every launch should be reversible, observable, and incremental.
+Ship with confidence. The goal is not merely to deploy. It is to deploy safely, with monitoring in place, a rollback plan ready, and a clear understanding of what success looks like. Every launch should be reversible, observable, and incremental.
 
 ## When to Use
 

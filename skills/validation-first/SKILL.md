@@ -7,7 +7,7 @@ description: Define state machines, invariants, and temporal properties before w
 
 Define state machines from requirements before implementation. Specifications say what the system MUST do. Encode compile-time properties in types first, then layer state machine modeling for properties types cannot express.
 
-**Modern insight (2025)**: State machines exist on a spectrum from runtime enums to compile-time typestates. Use the strongest mechanism available. XState v5 introduces actor model semantics -- state machines are now first-class concurrent entities, not just enum switches.
+State machines exist on a spectrum from runtime enums to compile-time typestates. Use the strongest mechanism available. XState v5 introduces actor model semantics: state machines are first-class concurrent entities, not just enum switches.
 
 See [approaches](references/approaches.md) for language-specific state machine mechanisms.
 See [examples](references/examples.md) for brief state machine patterns per language.

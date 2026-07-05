@@ -9,7 +9,7 @@ Analyze this codebase and create or improve an `AGENTS.md` file for future ODIN 
 
 ## Governing maxim
 
-**`AGENTS.md` records what needs to be, not what it is.** Every entry is a rule, constraint, or obligation a future agent must uphold — never a description of the repository's current state. Prescriptive vs. descriptive is the admission gate; everything below refines it.
+**`AGENTS.md` records what needs to be, not what it is.** Every entry is a rule, constraint, or obligation a future agent must uphold; it is never a description of the repository's current state. Prescriptive vs. descriptive is the admission gate; everything below refines it.
 
 ## Admission gates (in order)
 
@@ -23,7 +23,7 @@ Write each entry as an imperative or prohibition, paired with why the rule needs
 - Admissible: "Use pnpm; npm lockfiles break CI."
 - Inadmissible: "The repo uses pnpm."
 
-Same fact — only the normative form carries an obligation.
+Same fact, but only the normative form carries an obligation.
 
 ## What to omit
 
@@ -37,5 +37,5 @@ Everything failing a gate:
 ## Workflow
 
 - New file: admit only entries passing both gates; each states the rule and its rationale.
-- Existing file: audit every line against the maxim. Descriptive lines — "what it is" — are deletion candidates; propose their removal, don't merely avoid adding more. Prefer targeted edits over wholesale rewrites.
+- Existing file: audit every line against the maxim. Descriptive lines ("what it is") are deletion candidates; propose their removal, don't merely avoid adding more. Prefer targeted edits over wholesale rewrites.
 - Each fact appears once. Ground every statement in files actually read. If uncertain, omit the claim rather than speculate.

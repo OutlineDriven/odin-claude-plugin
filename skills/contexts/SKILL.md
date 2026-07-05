@@ -14,8 +14,8 @@ Auto-router for pre-implementation context gathering. Classify the input as code
 - "How does X work", "get me context on Y", "what's the architecture of Z"
 
 **NOT apply:**
-- Bug reproduction or root-cause investigation — use a debugging workflow
-- Already-in-progress implementation — gather context first, then proceed
+- Bug reproduction or root-cause investigation: use a debugging workflow
+- Already-in-progress implementation: gather context first, then proceed
 - Analysis-only output with no pre-implementation intent
 
 ## Detected Mode Acknowledgement [LOAD-BEARING]
@@ -53,7 +53,7 @@ Fire `AskUserQuestion` (single-select, NEVER `multiSelect`) when classifier retu
 
 - Options: `code-ref`, `doc-ref`, `both`
 - Mark `(Recommended)` on the closest classifier match
-- One question, one axis — no batching of unrelated axes
+- One question, one axis. No batching of unrelated axes.
 
 ## Hand-off & Integration
 
@@ -70,8 +70,8 @@ Note: sequential dispatch roughly doubles wall-clock time versus a single mode. 
 
 ## Anti-Patterns
 
-- Skipping the `detected:` acknowledgement line — it is LOAD-BEARING; downstream parsers and users depend on it
-- Checking `code-ref` or `doc-ref` before `both` in the classifier — `both` becomes unreachable under first-match-wins
-- Firing `AskUserQuestion` with `multiSelect: true` — always single-select per axis
-- Writing or editing files during context gathering — this skill is read-only
-- Slash-arg override: `/contexts code-ref`, `/contexts doc-ref`, or `/contexts both` bypasses the classifier entirely and dispatches directly to that mode
+- Skipping the `detected:` acknowledgement line: it is LOAD-BEARING; downstream parsers and users depend on it.
+- Checking `code-ref` or `doc-ref` before `both` in the classifier makes `both` unreachable under first-match-wins.
+- Firing `AskUserQuestion` with `multiSelect: true` violates the rule: always single-select per axis.
+- Writing or editing files during context gathering: this skill is read-only.
+- Slash-arg override: `/contexts code-ref`, `/contexts doc-ref`, or `/contexts both` bypasses the classifier entirely and dispatches directly to that mode.

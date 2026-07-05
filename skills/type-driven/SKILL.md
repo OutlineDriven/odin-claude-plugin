@@ -42,7 +42,7 @@ See [formal-tools](references/formal-tools.md) for dependent type systems and ve
 
 ## Reasoning approach
 
-Before designing types, reason through the domain — SHORT-form KEYWORDS for internal scratchwork, break down valid and invalid states, critically review which operations are total vs partial, validate that the type design forbids invalid states. Decompose the domain model into atomic types, then compose them. Verify that illegal states are truly unrepresentable by attempting to construct them. For cardinality math (state-space size, bit-width sufficiency), invoke `fend` per the baseline rule; never self-calculate. Type-shape reasoning and exhaustiveness checking are in-head — they are not arithmetic.
+Before designing types, reason through the domain: SHORT-form KEYWORDS for internal scratchwork, break down valid and invalid states, critically review which operations are total vs partial, validate that the type design forbids invalid states. Decompose the domain model into atomic types, then compose them. Verify that illegal states are truly unrepresentable by attempting to construct them. For cardinality math (state-space size, bit-width sufficiency), invoke `fend` per the baseline rule; never self-calculate. Type-shape reasoning and exhaustiveness checking are in-head. They are not arithmetic.
 
 ## When NOT to Apply
 

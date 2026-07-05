@@ -1,6 +1,6 @@
 ---
 name: deps-upgrade
-description: Run a dependency-upgrade campaign from outdated scan through lockfile audit. Use when CVEs require remediation, a major upstream version lands, stack compatibility forces a sweep, or on a scheduled hygiene cadence.
+description: Run a dependency-upgrade campaign, from outdated scan through lockfile audit. Use when CVEs require remediation, a major upstream version lands, stack compatibility forces a sweep, or on a scheduled hygiene cadence.
 ---
 
 Dependencies are inherited code. Upgrades are inherited risk. Patch in batch, minor in batch with a smoke test, major one-at-a-time with a CHANGELOG read.
@@ -20,25 +20,25 @@ NOT apply: active feature branch with high churn; pre-release freeze window; mid
 - **Bypassing audit signals**: `npm audit fix --force` without reading.
 - **No smoke test on minor**: minor versions can introduce behavior shifts.
 - **Forgetting transitives**: surface deps look fine; transitive CVE remains.
-- **Mixing concerns in one commit**: upgrade + refactor + feature — atomize per `<git>` policy.
+- **Mixing concerns in one commit**: upgrade + refactor + feature. Atomize per `<git>` policy.
 
 ## Workflow (language-neutral)
 
-1. **Inventory** — enumerate manifests + lockfiles across ecosystems. Many canonical names are extensionless (`go.mod`, `Gemfile`, `pom.xml`); filtering by extension alone misses them. `fd` only takes one glob per call, so anchor on canonical filenames via a single regex:
+1. **Inventory**: enumerate manifests + lockfiles across ecosystems. Many canonical names are extensionless (`go.mod`, `Gemfile`, `pom.xml`); filtering by extension alone misses them. `fd` only takes one glob per call, so anchor on canonical filenames via a single regex:
 
    ```sh
    fd -t f '^(package(-lock)?\.json|pnpm-lock\.yaml|yarn\.lock|Cargo\.(toml|lock)|pyproject\.toml|poetry\.lock|requirements.*\.txt|Pipfile\.lock|go\.(mod|sum)|pom\.xml|build\.gradle(\.kts)?|settings\.gradle(\.kts)?|libs\.versions\.toml|gradle\.lockfile|Gemfile(\.lock)?|.*\.gemspec|.*\.opam|dune-project|opam\.locked|mix\.(exs|lock)|composer\.(json|lock))$'
    ```
 
    Add ecosystem-specific names if the project uses something rarer (`Pipfile`, `Brewfile`, `flake.nix`, `shard.yml`, `pubspec.yaml`). Capture a lockfile snapshot for later diff (`difft`).
-2. **Scan outdated** — run ecosystem outdated/upgradable command. Capture report.
-3. **Categorize** — bin every candidate as **patch** / **minor** / **major**.
-4. **Patch batch** — bump all patches at once; lockfile-only diff. Run full test suite. Commit `chore(deps): patch sweep`.
-5. **Minor batch** — bump minors together; smoke-test. Read each minor CHANGELOG. Commit `chore(deps): minor sweep`.
-6. **Major individually** — one major version per commit. Read CHANGELOG / migration guide first; apply codemod or manual edits; run full suite + adversarial tests. Commit `chore(deps)!: bump <pkg> <old>→<new>`.
-7. **Lockfile audit** — compare pre/post with `difft` (not `diff`). Check transitive churn.
-8. **Re-scan** — run CVE scanner again post-upgrade.
-9. **Hand off** — major upgrade requires API-break propagation → cross to a refactor / break-compat workflow. New CVEs → hand to security-audit workflow.
+2. **Scan outdated**: run ecosystem outdated/upgradable command. Capture report.
+3. **Categorize**: bin every candidate as **patch** / **minor** / **major**.
+4. **Patch batch**: bump all patches at once; lockfile-only diff. Run full test suite. Commit `chore(deps): patch sweep`.
+5. **Minor batch**: bump minors together; smoke-test. Read each minor CHANGELOG. Commit `chore(deps): minor sweep`.
+6. **Major individually**: one major version per commit. Read CHANGELOG / migration guide first; apply codemod or manual edits; run full suite + adversarial tests. Commit `chore(deps)!: bump <pkg> <old>→<new>`.
+7. **Lockfile audit**: compare pre/post with `difft` (not `diff`). Check transitive churn.
+8. **Re-scan**: run CVE scanner again post-upgrade.
+9. **Hand off**: major upgrade requires API-break propagation → cross to a refactor / break-compat workflow. New CVEs → hand to security-audit workflow.
 
 ## Breaking-Change Review Checklist
 
@@ -71,12 +71,12 @@ Use `fd -e <ext>` (not `find`). Use `difft` (not `diff`). Use `bat -P -p -n` (no
 
 ## Constitutional Rules
 
-1. **Lockfile is law** — always commit lockfile diffs.
-2. **Atomic commits** — one bin per commit; one major per commit.
-3. **Read the CHANGELOG** — major bump without primary-source review forbidden.
+1. **Lockfile is law**: always commit lockfile diffs.
+2. **Atomic commits**: one bin per commit; one major per commit.
+3. **Read the CHANGELOG**: major bump without primary-source review forbidden.
 4. **Test after every bin**.
 5. **Re-scan post-upgrade**.
-6. **Deprecations are debt** — file follow-ups.
+6. **Deprecations are debt**: file follow-ups.
 7. **Do not bypass audit signals**.
 
 ## Tooling notes

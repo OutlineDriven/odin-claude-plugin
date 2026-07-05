@@ -50,9 +50,9 @@ Do not silently fill in ambiguous requirements. The spec exists to surface misun
 
 **Write a spec covering six core areas:**
 
-1. **Objective** — what is being built and why, who the user is, what success looks like.
+1. **Objective**: what is being built and why, who the user is, what success looks like.
 
-2. **Commands** — full executable commands with flags, not bare tool names. Record them for the stack the project actually uses:
+2. **Commands**: full executable commands with flags, not bare tool names. Record them for the stack the project actually uses:
    ```
    # Node / npm
    Build: npm run build
@@ -67,7 +67,7 @@ Do not silently fill in ambiguous requirements. The spec exists to surface misun
    Run:   cargo run
    ```
 
-3. **Project structure** — where source lives, where tests go, where docs belong. The layout is stack-specific; capture the one that applies:
+3. **Project structure**: where source lives, where tests go, where docs belong. The layout is stack-specific; capture the one that applies:
    ```
    # TypeScript service
    src/      application source
@@ -83,11 +83,11 @@ Do not silently fill in ambiguous requirements. The spec exists to surface misun
    pyproject.toml build + dependency config
    ```
 
-4. **Code style** — one real snippet of the project's style beats paragraphs describing it. Include naming conventions, formatting rules, and an example of accepted output in the project's language.
+4. **Code style**: one real snippet of the project's style beats paragraphs describing it. Include naming conventions, formatting rules, and an example of accepted output in the project's language.
 
-5. **Testing strategy** — which framework, where tests live, coverage expectations, and which test level covers which concern.
+5. **Testing strategy**: which framework, where tests live, coverage expectations, and which test level covers which concern.
 
-6. **Boundaries** — three tiers:
+6. **Boundaries**: three tiers:
    - **Always:** run tests before commits, follow naming conventions, validate inputs
    - **Ask first:** schema changes, adding dependencies, changing CI config
    - **Never:** commit secrets, edit vendored directories, delete failing tests without approval
@@ -184,10 +184,10 @@ Execute tasks one at a time, test-first: turn each task's acceptance criteria in
 
 The spec is a living document, not a one-time artifact:
 
-- **Update when decisions change** — if the data model has to change, update the spec first, then implement.
-- **Update when scope changes** — features added or cut are reflected in the spec.
-- **Commit the spec** — it belongs in version control alongside the code.
-- **Reference the spec in PRs** — link each PR back to the spec section it implements.
+- **Update when decisions change**: if the data model has to change, update the spec first, then implement.
+- **Update when scope changes**: features added or cut are reflected in the spec.
+- **Commit the spec**: it belongs in version control alongside the code.
+- **Reference the spec in PRs**: link each PR back to the spec section it implements.
 
 ## Common rationalizations
 

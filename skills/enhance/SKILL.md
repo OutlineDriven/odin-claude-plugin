@@ -5,7 +5,7 @@ metadata:
   short-description: Certainty-graded surface enhancer
 ---
 
-# Enhance — certainty-graded surface correction
+# Enhance: certainty-graded surface correction
 
 Run a `correct` op over AI-facing project surfaces. The invariant: plugin manifests, agents, skills, prompts, docs, command definitions, hooks, and project memory must be explicit, bounded, and internally consistent.
 
@@ -114,7 +114,7 @@ Analyzers run: plugin, agent, skill, docs, prompt, claudemd, hooks, cross-file
 
 ## HIGH Certainty Findings
 
-- `<file>:<line>` — `<check>` — Evidence: `<observed>` — Fix: `<minimal correction>`
+- `<file>:<line>`: `<check>`. Evidence: `<observed>`. Fix: `<minimal correction>`
 
 ## Deferred Findings
 

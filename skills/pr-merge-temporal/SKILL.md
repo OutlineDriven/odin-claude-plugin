@@ -23,7 +23,7 @@ Merge multiple PRs into a temporal integration branch for validation before merg
    - Otherwise, compute dependency/topological order (if PR B depends on PR A, merge A first).
    - If PRs are independent with no clear ordering, present the list and ask the user to confirm or reorder before proceeding.
 
-5. **Sequential merge with conflict handling** — for each PR in order:
+5. **Sequential merge with conflict handling**: for each PR in order:
    a. Attempt `git merge --no-ff <pr-branch>` into the temporal branch.
    b. If merge succeeds cleanly, continue to next PR.
    c. If conflicts occur:
@@ -34,13 +34,13 @@ Merge multiple PRs into a temporal integration branch for validation before merg
 
 6. **Validate temporal branch**: Once all PRs are merged, run full build/test suite if available.
 
-7. **Report results**: Present the validated temporal branch to the user. Do NOT merge into base automatically — only advance base if the user explicitly requests it.
+7. **Report results**: Present the validated temporal branch to the user. Do NOT merge into base automatically. Only advance base if the user explicitly requests it.
 
-8. **Abort conditions** — stop the queue and report if:
+8. **Abort conditions**: stop the queue and report if:
    - A conflict cannot be safely auto-resolved.
    - A post-merge build/test fails.
    - A PR has been superseded or closed.
-   The temporal branch is abandoned: `git checkout <base>` — base remains untouched.
+   The temporal branch is abandoned: `git checkout <base>`. Base remains untouched.
 
 ## Output
 

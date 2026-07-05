@@ -36,10 +36,10 @@ Build in thin vertical slices. Implement one piece, test it, verify it, then exp
 For each slice:
 
 1. **Implement** the smallest complete piece of functionality.
-2. **Test** — run the test suite, or write a test if none exists.
-3. **Verify** — confirm the slice works: tests pass, build succeeds, manual check holds.
-4. **Commit** — save progress with a descriptive message; keep the commit atomic (one logical change).
-5. **Move to the next slice** — carry forward, never restart.
+2. **Test**: run the test suite, or write a test if none exists.
+3. **Verify**: confirm the slice works: tests pass, build succeeds, manual check holds.
+4. **Commit**: save progress with a descriptive message; keep the commit atomic (one logical change).
+5. **Move to the next slice**: carry forward, never restart.
 
 ## Slicing Strategies
 
@@ -122,7 +122,7 @@ Touch only what the task requires. Do NOT:
 - Add features absent from the spec because they "seem useful"
 - Modernize syntax in files you're only reading
 
-When you notice something worth improving outside scope, record it — do not fix it:
+When you notice something worth improving outside scope, record it. Do not fix it:
 
 ```
 NOTICED BUT NOT TOUCHING:
@@ -137,7 +137,7 @@ Each increment changes one logical thing. NEVER mix concerns.
 
 **Bad:** one commit that adds a new component, refactors an existing one, and updates the build config.
 
-**Good:** three separate commits — one per change.
+**Good:** three separate commits, one per change.
 
 ### Rule 2: Keep It Compilable
 
@@ -170,7 +170,7 @@ This merges small increments to the main branch without exposing incomplete work
 
 ### Rule 4: Safe Defaults
 
-New code MUST default to conservative behavior — opt in to side effects, never opt out:
+New code MUST default to conservative behavior. Opt in to side effects, never opt out:
 
 ```typescript
 // TypeScript — disabled by default, caller opts in
@@ -194,7 +194,7 @@ Each increment MUST be independently revertable:
 - Additive changes (new files, new functions) revert cleanly.
 - Modifications to existing code stay minimal and focused.
 - Database migrations carry a corresponding rollback migration.
-- NEVER delete something and replace it in the same commit — separate the two.
+- NEVER delete something and replace it in the same commit. Separate the two.
 
 ## Working with Agents
 
@@ -214,7 +214,7 @@ State what is in scope and what is NOT in scope for each increment.
 
 ## Increment Checklist
 
-After each increment, verify. Command examples span ecosystems — run whichever your stack uses:
+After each increment, verify. Command examples span ecosystems. Run whichever your stack uses:
 
 - [ ] The change does one thing and does it completely.
 - [ ] All existing tests still pass (`npm test` / `pytest` / `go test ./...` / `cargo test`).
@@ -224,7 +224,7 @@ After each increment, verify. Command examples span ecosystems — run whichever
 - [ ] The new functionality works as expected.
 - [ ] The change is committed with a descriptive message.
 
-**Note:** Run each verification command after a change that could affect it. After a successful run, do not repeat the same command unless the code has changed since — re-running on unchanged code adds no information.
+**Note:** Run each verification command after a change that could affect it. After a successful run, do not repeat the same command unless the code has changed since. Re-running on unchanged code adds no information.
 
 ## Common Rationalizations
 

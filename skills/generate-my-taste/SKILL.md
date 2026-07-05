@@ -64,7 +64,7 @@ Use `references/influence-catalogue.md` as the candidate pool and gate. An influ
 - Recognizable Side A and Side B failure modes.
 - Concrete exemplar.
 - Contrast value against neighboring candidates.
-- Non-fandom operational framing.
+- Non-random operational framing.
 
 If local evidence suggests an influence not in the catalogue, include it only when the same five criteria are satisfied; otherwise map the signal to the nearest catalogue influence and cite the mapping.
 
@@ -72,27 +72,27 @@ If local evidence suggests an influence not in the catalogue, include it only wh
 
 Ask at most three questions per fire. Axis-with-default questions are single-select via `AskUserQuestion`. Put the recommended option first and append `(Recommended)` to its label. Ask only unresolved forks; evidence-backed defaults can pass straight to preview.
 
-### Q1 — Target name, single-select
+### Q1 - Target name, single-select
 
 Ask only if the name is ambiguous.
 
-- `<user-or-handle>-taste (Recommended)` — personal skill name derived from local context.
-- `spine` update — only when existing `spine` is detected and update-in-place is intended.
-- Custom name — free-text via annotations; do not add an explicit Other option.
+- `<user-or-handle>-taste (Recommended)`: personal skill name derived from local context.
+- `spine` update: only when existing `spine` is detected and update-in-place is intended.
+- Custom name: free-text via annotations; do not add an explicit Other option.
 
-### Q2 — Evidence scope, single-select
+### Q2 - Evidence scope, single-select
 
-- `ICM + local files (Recommended)` — indexed recall first, direct memory/transcript inspection as fallback.
-- `Local files only` — memory indexes and transcript files without indexed tools.
-- `Current project only` — restrict to current checkout and its memories.
+- `ICM + local files (Recommended)`: indexed recall first, direct memory/transcript inspection as fallback.
+- `Local files only`: memory indexes and transcript files without indexed tools.
+- `Current project only`: restrict to current checkout and its memories.
 
-### Q3 — Domain set, single-select
+### Q3 - Domain set, single-select
 
-- `Prose + Code + Design + Decision (Recommended)` — mirrors `taste`, `spine`, the user's two-sided table, and the fixed template fields.
-- `Four-domain with one emphasis` — keep all four domains but weight examples toward the evidence-dominant domain.
-- `Stop for custom template` — pause generation when a narrower domain set is required; conditional templates are out of scope for this right-sized generator.
+- `Prose + Code + Design + Decision (Recommended)`: mirrors `taste`, `spine`, the user's two-sided table, and the fixed template fields.
+- `Four-domain with one emphasis`: keep all four domains but weight examples toward the evidence-dominant domain.
+- `Stop for custom template`: pause generation when a narrower domain set is required; conditional templates are out of scope for this right-sized generator.
 
-### Q4 — Anchor picks, additive multiSelect
+### Q4 - Anchor picks, additive multiSelect
 
 Q4 is the only multiSelect exception. Use it only after presenting evidence-ranked candidates. It is additive selection, not default override semantics.
 
@@ -129,9 +129,9 @@ Before any discoverable write, show a preview containing:
 
 Then ask a single-select gate:
 
-- `Write draft (Recommended)` — proceed with safe write.
-- `Revise preview` — ask for specific corrections.
-- `Abort` — write nothing.
+- `Write draft (Recommended)`: proceed with safe write.
+- `Revise preview`: ask for specific corrections.
+- `Abort`: write nothing.
 
 Do not write generated files before this gate.
 

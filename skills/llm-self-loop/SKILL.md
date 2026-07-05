@@ -19,7 +19,7 @@ Most loops have one or two gates that, removed, collapse the cycle to seconds. P
 
 ### Web-UI trigger → CLI trigger
 
-If the workflow is gated by clicking in a web app, find or build the equivalent CLI command. Webhooks, REST endpoints, `gh` / `aws` / `gcloud` CLI subcommands, internal `just` targets — anything programmatically invokable. The LLM can then loop without leaving its session.
+If the workflow is gated by clicking in a web app, find or build the equivalent CLI command. Webhooks, REST endpoints, `gh` / `aws` / `gcloud` CLI subcommands, internal `just` targets, or anything programmatically invokable. The LLM can then loop without leaving its session.
 
 ### Stdout-only output → file-based output
 
@@ -35,19 +35,19 @@ If the human's role is "looks right to me", encode the criterion as a test, sche
 
 ## Trap-or-abandon decision
 
-After the structural fixes above, some steps still cannot be made autonomous — they involve genuine human judgment, external compliance, or capability the LLM lacks. For each remaining gate, apply this rule:
+After the structural fixes above, some steps still cannot be made autonomous. They involve genuine human judgment, external compliance, or capability the LLM lacks. For each remaining gate, apply this rule:
 
-- **Trap** — if the step can be wrapped in a verification-and-iteration loop where the LLM proposes, the human approves once, and the LLM iterates until the contract passes, keep it. The human is at the *outer* loop, not the inner.
-- **Abandon** — if a step requires the human in the *inner* loop and resists wrapping (e.g., new SOC2 review per iteration, real-time customer chat, hardware-mediated test), do not babysit. Either remove the step from the LLM's loop entirely (escalate to the human as a discrete handoff) or improve the harness so the step disappears (e.g., automate the SOC2 documentation pipeline).
+- **Trap**: if the step can be wrapped in a verification-and-iteration loop where the LLM proposes, the human approves once, and the LLM iterates until the contract passes, keep it. The human is at the *outer* loop, not the inner.
+- **Abandon**: if a step requires the human in the *inner* loop and resists wrapping (e.g., new SOC2 review per iteration, real-time customer chat, hardware-mediated test), do not babysit. Either remove the step from the LLM's loop entirely (escalate to the human as a discrete handoff) or improve the harness so the step disappears (e.g., automate the SOC2 documentation pipeline).
 
-Naming the rule: babysitting an unloopable step is the failure mode this skill exists to prevent. Pre-existing chat consensus: "what can't be looped — abandon firmly and improve the harness."
+Naming the rule: babysitting an unloopable step is the failure mode this skill exists to prevent. Pre-existing chat consensus: "what can't be looped, abandon firmly and improve the harness."
 
 ## What this skill does not do
 
-- It does not author project rules — defer to `init` for AGENTS.md.
-- It does not bootstrap strict-mode validation gates — defer to `strict-validation-setup`.
-- It does not pick the test framework — defer to `test-driven` or the language's idiomatic tester.
+- It does not author project rules. Defer to `init` for AGENTS.md.
+- It does not bootstrap strict-mode validation gates. Defer to `strict-validation-setup`.
+- It does not pick the test framework. Defer to `test-driven` or the language's idiomatic tester.
 
 ## Posture
 
-Surgical, not architectural. Remove one gate at a time. After each fix, re-evaluate whether the loop now closes — sometimes one trigger removal is enough. Resist the temptation to redesign the whole system.
+Surgical, not architectural. Remove one gate at a time. After each fix, re-evaluate whether the loop now closes. Sometimes one trigger removal is enough. Resist the temptation to redesign the whole system.

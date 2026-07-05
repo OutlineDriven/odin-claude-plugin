@@ -24,7 +24,7 @@ A control added without a threat model is a guess. Before hardening, spend five 
 
 1. **Map the trust boundaries.** Where does untrusted data cross into the system? HTTP requests, form fields, file uploads, webhooks, third-party APIs, message queues, and **LLM output**. Every boundary is attack surface.
 2. **Name the assets.** What is worth stealing or breaking? Credentials, PII, payment data, admin actions, money movement.
-3. **Run STRIDE over each boundary** — a lens, not a ceremony:
+3. **Run STRIDE over each boundary**: a lens, not a ceremony:
 
 | Threat | Ask | Typical mitigation |
 |---|---|---|
@@ -35,7 +35,7 @@ A control added without a threat model is a guess. Before hardening, spend five 
 | **D**enial of service | Can it be overwhelmed? | Rate limiting, input size caps, timeouts |
 | **E**levation of privilege | Can a user gain rights they shouldn't? | Authorization checks, least privilege |
 
-4. **Write abuse cases next to use cases.** For each feature, ask "how would I misuse this?" — then make that the first test.
+4. **Write abuse cases next to use cases.** For each feature, ask "how would I misuse this?" Then make that the first test.
 
 If you cannot name a feature's trust boundaries, you cannot secure it. This is OWASP **A04: Insecure Design**; design flaws, not code typos, drive most breaches.
 
@@ -44,7 +44,7 @@ If you cannot name a feature's trust boundaries, you cannot secure it. This is O
 ### Always Do (No Exceptions)
 
 - **Validate all external input** at the system boundary (API routes, form handlers)
-- **Parameterize all database queries** — never concatenate user input into SQL
+- **Parameterize all database queries**: never concatenate user input into SQL
 - **Encode output** to prevent XSS (use framework auto-escaping; do not bypass it)
 - **Use HTTPS** for all external communication
 - **Hash passwords** with bcrypt/scrypt/argon2 (never store plaintext)
@@ -286,7 +286,7 @@ Default to an explicit allowlist of returned fields rather than denylisting secr
 
 ### Server-Side Request Forgery (SSRF)
 
-Any time the server fetches a URL the user influenced — webhooks, "import from URL", image proxies, link previews — an attacker can aim it at internal services (cloud metadata, `localhost`, private IPs).
+Any time the server fetches a URL the user influenced (webhooks, "import from URL", image proxies, link previews), an attacker can aim it at internal services (cloud metadata, `localhost`, private IPs).
 
 ```typescript
 // BAD: fetch whatever the user gives you
@@ -333,7 +333,7 @@ def assert_safe_url(raw: str) -> str:
 
 The non-unicast / non-global check covers loopback, link-local `169.254.169.254` (cloud metadata, the #1 SSRF target), private, and unique-local ranges across IPv4 and IPv6.
 
-**Caveat — this still has a TOCTOU gap.** The HTTP client resolves DNS again after the check, so an attacker using a short-TTL record can rebind to an internal IP between validation and connection. For high-risk surfaces, resolve once and connect to the pinned IP, or put a request-filtering proxy in front of all outbound fetches.
+**Caveat: this still has a TOCTOU gap.** The HTTP client resolves DNS again after the check, so an attacker using a short-TTL record can rebind to an internal IP between validation and connection. For high-risk surfaces, resolve once and connect to the pinned IP, or put a request-filtering proxy in front of all outbound fetches.
 
 ## Input Validation Patterns
 
@@ -443,10 +443,10 @@ When you defer a fix, document the reason and set a review date.
 
 A vulnerability audit catches known CVEs; it will not catch a malicious or typosquatted package. Also:
 
-- **Commit the lockfile and install reproducibly in CI** — `npm ci`, `pip install --require-hashes`, `cargo build --locked`, or the equivalent for your toolchain. No silent version drift.
-- **Review new dependencies before adding them** — maintenance, download counts, and whether they earn their place. Every dependency is attack surface (OWASP **A06: Vulnerable Components**, **LLM03: Supply Chain**).
-- **Be wary of install-time scripts** in unfamiliar packages (`postinstall`, `setup.py`, `build.rs`) — they run arbitrary code at install time.
-- **Watch for typosquats** — `cross-env` vs `crossenv`, `requests` vs `request`, `python-dateutil` vs `dateutil`.
+- **Commit the lockfile and install reproducibly in CI**: `npm ci`, `pip install --require-hashes`, `cargo build --locked`, or the equivalent for your toolchain. No silent version drift.
+- **Review new dependencies before adding them**: maintenance, download counts, and whether they earn their place. Every dependency is attack surface (OWASP **A06: Vulnerable Components**, **LLM03: Supply Chain**).
+- **Be wary of install-time scripts** in unfamiliar packages (`postinstall`, `setup.py`, `build.rs`): they run arbitrary code at install time.
+- **Watch for typosquats**: `cross-env` vs `crossenv`, `requests` vs `request`, `python-dateutil` vs `dateutil`.
 
 ## Rate Limiting
 
@@ -511,14 +511,14 @@ Always apply a tighter limit to authentication endpoints than to general traffic
 git diff --cached | grep -i "password\|secret\|api_key\|token"
 ```
 
-**If a secret is ever committed, rotate it.** Deleting the line or rewriting history is not enough — assume it is compromised the moment it reaches a remote. Revoke and reissue the key first, then purge it from history.
+**If a secret is ever committed, rotate it.** Deleting the line or rewriting history is not enough. Assume it is compromised the moment it reaches a remote. Revoke and reissue the key first, then purge it from history.
 
 ## Securing AI / LLM Features
 
-If the app calls an LLM — chatbots, summarizers, agents, RAG — it inherits a new attack surface. Map it to the [OWASP Top 10 for LLM Applications (2025)](https://genai.owasp.org/llm-top-10/):
+If the app calls an LLM (chatbots, summarizers, agents, RAG), it inherits a new attack surface. Map it to the [OWASP Top 10 for LLM Applications (2025)](https://genai.owasp.org/llm-top-10/):
 
 - **Treat all model output as untrusted input (LLM05: Improper Output Handling).** Never pass LLM output straight into `eval`, SQL, a shell, raw markup, or a file path. Validate and encode it exactly as you would raw user input.
-- **Assume prompts can be hijacked (LLM01: Prompt Injection).** Untrusted text in the context window — a user message, a fetched web page, a PDF — can carry instructions. The system prompt is not a security boundary; enforce permissions in code, not in the prompt.
+- **Assume prompts can be hijacked (LLM01: Prompt Injection).** Untrusted text in the context window (a user message, a fetched web page, a PDF) can carry instructions. The system prompt is not a security boundary; enforce permissions in code, not in the prompt.
 - **Keep secrets and other users' data out of prompts (LLM02 / LLM07).** Anything in the context can be echoed back. Do not place API keys, cross-tenant data, or the full system prompt where the model can repeat it.
 - **Constrain tool and agent permissions (LLM06: Excessive Agency).** Scope tools to the minimum, require confirmation for destructive or irreversible actions, and validate every tool argument.
 - **Bound consumption (LLM10: Unbounded Consumption).** Cap tokens, request rate, and loop/recursion depth so a crafted input cannot run up cost or hang the system.
@@ -599,7 +599,7 @@ run_allowlisted_action(intent.action, intent.params)
 
 Detailed security checklists and pre-commit verification steps: `references/security-checklist.md`.
 
-- **vs `security-review`** — `security-review` is the audit/assessment pass — STRIDE threat modeling, OWASP walkthrough, dependency audit — run against code that already exists. `security-hardening` applies OWASP prevention patterns at build time, while code is being written.
+- **vs `security-review`**: `security-review` is the audit/assessment pass (STRIDE threat modeling, OWASP walkthrough, dependency audit) run against code that already exists. `security-hardening` applies OWASP prevention patterns at build time, while code is being written.
 
 ## Common Rationalizations
 

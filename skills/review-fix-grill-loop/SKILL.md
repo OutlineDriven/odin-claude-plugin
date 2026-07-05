@@ -5,11 +5,11 @@ metadata:
   short-description: Diff-scoped review→resolve→fix loop until clean
 ---
 
-# Review-fix-grill-loop — diff-scoped review→resolve→fix loop
+# Review-fix-grill-loop: diff-scoped review→resolve→fix loop
 
-`review-fix-grill-loop` is a `correct` op-cell. It restores the invariant: **no open finding at or above the severity floor (confidence ≥ medium) remains in the current change-set.** It is not a one-pass critique — it selects reviewers from the diff, resolves each confirmed finding with three architectural solutions, fixes in verified batches with auto-revert, re-reviews only changed files, and stops only at a clean diff, a user decision gate, the iteration cap, or a stall.
+`review-fix-grill-loop` is a `correct` op-cell. It restores the invariant: **no open finding at or above the severity floor (confidence ≥ medium) remains in the current change-set.** It is not a one-pass critique. It selects reviewers from the diff, resolves each confirmed finding with three architectural solutions, fixes in verified batches with auto-revert, re-reviews only changed files, and stops only at a clean diff, a user decision gate, the iteration cap, or a stall.
 
-**Self-contained by design.** This skill bundles its own `references/review-roster.md` and `references/false-positive-contract.md`, copied and adapted from `audit-project`. They share an ancestor with that skill; a canonical edit to one must be hand-propagated to the other (no CI enforces it). Orchestration specifics — change-scope resolution, severity floor, resolve gate, double-loop — live in `references/orchestration.md`.
+**Self-contained by design.** This skill bundles its own `references/review-roster.md` and `references/false-positive-contract.md`, copied and adapted from `audit-project`. They share an ancestor with that skill; a canonical edit to one must be hand-propagated to the other (no CI enforces it). Orchestration specifics (change-scope resolution, severity floor, resolve gate, double-loop) live in `references/orchestration.md`.
 
 ## When to Apply / NOT
 
@@ -24,18 +24,18 @@ NOT:
 
 ## Inputs and Flags
 
-- `scope` (optional path/glob/ref) — overrides the change-set default; grills that path instead of the resolved diff.
-- `against <ref>` — explicit base-ref override for diff resolution (mirrors `simplify against <ref>`).
-- `--severity-floor <critical|high|medium>` — terminating floor; default `medium`.
-- `--max-iterations N` — outer-loop cap; scope-adaptive (default tier `5`, grows to `15` with change-set complexity per `references/orchestration.md`); an explicit value overrides the derived cap.
-- `--quick` — single review pass; no resolve, no fix, no loop. Reports findings and exits.
-- `--domain <reviewer>` — run one reviewer domain only; same consolidation contract applies.
-- `--resume` — load `.outline/review-fix-grill/queue.json` if present and continue. A queue written before scope-adaptive caps lacks `caps`; re-derive it from `changedFiles[]` (Phase 2) on resume rather than assuming a scalar `maxIterations`.
+- `scope` (optional path/glob/ref): overrides the change-set default; grills that path instead of the resolved diff.
+- `against <ref>`: explicit base-ref override for diff resolution (mirrors `simplify against <ref>`).
+- `--severity-floor <critical|high|medium>`: terminating floor; default `medium`.
+- `--max-iterations N`: outer-loop cap; scope-adaptive (default tier `5`, grows to `15` with change-set complexity per `references/orchestration.md`); an explicit value overrides the derived cap.
+- `--quick`: single review pass; no resolve, no fix, no loop. Reports findings and exits.
+- `--domain <reviewer>`: run one reviewer domain only; same consolidation contract applies.
+- `--resume`: load `.outline/review-fix-grill/queue.json` if present and continue. A queue written before scope-adaptive caps lacks `caps`; re-derive it from `changedFiles[]` (Phase 2) on resume rather than assuming a scalar `maxIterations`.
 
 ## State and Artifacts
 
-- `.outline/review-fix-grill/queue.json` — scope, floor, selected reviewers, raw + consolidated findings, `resolveDecisions[]`, `belowFloor[]`, verification results, decisions, hash history. Schema in `references/false-positive-contract.md`.
-- `.outline/review-fix-grill/iterations/<n>.json` — per outer iteration: changed files, fix batches, verifier command/output summary, re-review hash.
+- `.outline/review-fix-grill/queue.json`: scope, floor, selected reviewers, raw + consolidated findings, `resolveDecisions[]`, `belowFloor[]`, verification results, decisions, hash history. Schema in `references/false-positive-contract.md`.
+- `.outline/review-fix-grill/iterations/<n>.json`: per outer iteration: changed files, fix batches, verifier command/output summary, re-review hash.
 
 Distinct directory from `.outline/audit/` so a `--resume` never cross-reads `audit-project`'s queue.
 
@@ -43,13 +43,13 @@ Distinct directory from `.outline/audit/` so a `--resume` never cross-reads `aud
 
 Full recipes live in the references; the phase order is:
 
-1. **Resolve change-scope** — three-source union (tracked diff vs base, staged, untracked-not-ignored) per `references/orchestration.md` Phase 1. Empty union → exit, launch no agents. The resolved `changedFiles[]` is the only universe for every later phase.
-2. **Detect shape + signals** — compute framework flags and priority signals over `changedFiles[]` only.
-3. **Review (parallel)** — select ≤10 reviewers (4 core: `code-quality`, `security`, `performance`, `test-quality`; conditional by diff surface). Dispatch in one parallel batch with role prompts from `references/review-roster.md` and the mandatory JSON schema. Reviewers are read-only and return JSON only.
-4. **Consolidate** — apply `references/false-positive-contract.md` exactly: normalize, honor dismissals only with non-empty reason, dedupe, blocked-ratio gate **before** any zero-check, extract below-floor findings to `belowFloor[]`.
-5. **Resolve gate** — for each confirmed open at-or-above-floor finding, emit `VALID/NOT-AN-ISSUE/NEEDS-CLARIFICATION` + three distinct solutions + a recommendation + in-scope/out-of-scope. `NEEDS CLARIFICATION` and `out-of-scope` escalate to `AskUserQuestion`; the rest feed the fix queue with the recommended approach. Spec in `references/orchestration.md`.
-6. **Fix (verified batches)** — reuse the `fix` loop in findings mode: one minimal patch per attempt, checkpoint commit, repo-native verifier + guard, KEEP on green / `git revert HEAD --no-edit` on red, up to `caps.attemptsPerItem` attempts per item (scope-adaptive `3–5`, = initial + reworks) before SKIP. Refuse on protected branches (`main`/`master`/`release/*`) before entering the loop. Verifier discovery per `fix/references/verifiers.md`.
-7. **Targeted re-review + loop** — re-review changed files only (contract routing), re-consolidate, re-run the blocked-ratio gate, then test the loop condition.
+1. **Resolve change-scope**: three-source union (tracked diff vs base, staged, untracked-not-ignored) per `references/orchestration.md` Phase 1. Empty union → exit, launch no agents. The resolved `changedFiles[]` is the only universe for every later phase.
+2. **Detect shape + signals**: compute framework flags and priority signals over `changedFiles[]` only.
+3. **Review (parallel)**: select ≤10 reviewers (4 core: `code-quality`, `security`, `performance`, `test-quality`; conditional by diff surface). Dispatch in one parallel batch with role prompts from `references/review-roster.md` and the mandatory JSON schema. Reviewers are read-only and return JSON only.
+4. **Consolidate**: apply `references/false-positive-contract.md` exactly: normalize, honor dismissals only with non-empty reason, dedupe, blocked-ratio gate **before** any zero-check, extract below-floor findings to `belowFloor[]`.
+5. **Resolve gate**: for each confirmed open at-or-above-floor finding, emit `VALID/NOT-AN-ISSUE/NEEDS-CLARIFICATION` + three distinct solutions + a recommendation + in-scope/out-of-scope. `NEEDS CLARIFICATION` and `out-of-scope` escalate to `AskUserQuestion`; the rest feed the fix queue with the recommended approach. Spec in `references/orchestration.md`.
+6. **Fix (verified batches)**: reuse the `fix` loop in findings mode: one minimal patch per attempt, checkpoint commit, repo-native verifier + guard, KEEP on green / `git revert HEAD --no-edit` on red, up to `caps.attemptsPerItem` attempts per item (scope-adaptive `3–5`, = initial + reworks) before SKIP. Refuse on protected branches (`main`/`master`/`release/*`) before entering the loop. Verifier discovery per `fix/references/verifiers.md`.
+7. **Targeted re-review + loop**: re-review changed files only (contract routing), re-consolidate, re-run the blocked-ratio gate, then test the loop condition.
 
 **Loop condition:** `openAtOrAboveFloor > 0 && iteration < caps.maxIterations`, counting only `severity ≥ floor && confidence ≥ medium`. At each iteration boundary with findings remaining, fire the decision gate (`continue-fixing` / `create-issues-for-rest` / `move-remainder-to-debt` / `leave-in-queue`); a repeated stall hash drops the `continue-fixing` recommendation.
 
@@ -98,8 +98,8 @@ Under `--quick` the loop terminates after consolidation + below-floor extraction
 
 ## See also
 
-- `audit-project` — whole-project variant; shares the roster + contract ancestry.
-- `review` — read-only branch review, no fixes.
-- `simplify` — behavior-preserving compression of a change-set.
-- `fix` — the verified-batch fix loop this skill reuses.
-- `resolve` — the validity + multi-solution analysis this skill's resolve gate is modeled on.
+- `audit-project`: whole-project variant; shares the roster + contract ancestry.
+- `review`: read-only branch review, no fixes.
+- `simplify`: behavior-preserving compression of a change-set.
+- `fix`: the verified-batch fix loop this skill reuses.
+- `resolve`: the validity + multi-solution analysis this skill's resolve gate is modeled on.

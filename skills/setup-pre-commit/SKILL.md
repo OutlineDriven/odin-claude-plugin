@@ -7,7 +7,7 @@ Detect the ecosystem, pick the right hook tool, install with formatter + type-ch
 
 ## Detection (run first)
 
-Dispatch Explore agent — or for a single-language repo, probe directly via `fd` for lockfile / manifest signature. Map the first manifest hit to an ecosystem. Multi-language repos: ask the maintainer which surface to gate, or apply both.
+Dispatch Explore agent, or for a single-language repo, probe directly via `fd` for lockfile / manifest signature. Map the first manifest hit to an ecosystem. Multi-language repos: ask the maintainer which surface to gate, or apply both.
 
 ## Ecosystem → hook tool
 
@@ -21,7 +21,7 @@ Dispatch Explore agent — or for a single-language repo, probe directly via `fd
 
 ## Per-ecosystem hook contents
 
-**Node ecosystems** — write `.husky/pre-commit`:
+**Node ecosystems**: write `.husky/pre-commit`:
 
 ```
 npx lint-staged
@@ -37,7 +37,7 @@ Drop missing scripts and tell the user. Write `.lintstagedrc`:
 
 Formatter policy is **out of scope** for this skill. Do NOT auto-create `.prettierrc`. If no Prettier config exists, surface that fact and ask the user.
 
-**Python** — write `.pre-commit-config.yaml`:
+**Python**: write `.pre-commit-config.yaml`:
 
 ```yaml
 repos:
@@ -61,7 +61,7 @@ repos:
         stages: [pre-commit]
 ```
 
-**Go** — write `lefthook.yml`:
+**Go**: write `lefthook.yml`:
 
 ```yaml
 pre-commit:
@@ -72,14 +72,14 @@ pre-commit:
     test:   { run: go test -race ./... }
 ```
 
-**Rust** — `Cargo.toml`:
+**Rust**: `Cargo.toml`:
 
 ```toml
 [dev-dependencies]
 cargo-husky = { version = "1", default-features = false, features = ["precommit-hook", "run-cargo-test", "run-cargo-clippy", "run-cargo-fmt"] }
 ```
 
-**OCaml** — `.pre-commit-config.yaml`:
+**OCaml**: `.pre-commit-config.yaml`:
 
 ```yaml
 repos:
@@ -106,8 +106,8 @@ repos:
 
 - `fd -d 2 -t f '\.husky|\.pre-commit-config\.yaml|lefthook\.yml'` shows the expected file.
 - The hook is executable.
-- Run a no-op commit (`git commit --allow-empty -m "chore: verify hooks"`) — every gate must run and pass.
+- Run a no-op commit (`git commit --allow-empty -m "chore: verify hooks"`). Every gate must run and pass.
 
 ## Commit
 
-`chore: install pre-commit hooks (<tool>)`. The commit itself trips the new hook — first-class smoke test.
+`chore: install pre-commit hooks (<tool>)`. The commit itself trips the new hook, a first-class smoke test.

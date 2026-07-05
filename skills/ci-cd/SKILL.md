@@ -7,9 +7,9 @@ description: Set up or modify CI/CD pipelines and deployment automation. Use whe
 
 ## Overview
 
-Automate quality gates so that no change reaches production without passing tests, lint, type checking, and build. CI/CD is the enforcement mechanism for every other skill — it catches what humans and agents miss, and it does so consistently on every single change.
+Automate quality gates so that no change reaches production without passing tests, lint, type checking, and build. CI/CD is the enforcement mechanism for every other skill. It catches what humans and agents miss, and it does so consistently on every single change.
 
-**Shift Left:** Catch problems as early in the pipeline as possible. A bug caught in linting costs minutes; the same bug caught in production costs hours. Move checks upstream — static analysis before tests, tests before staging, staging before production.
+**Shift Left:** Catch problems as early in the pipeline as possible. A bug caught in linting costs minutes; the same bug caught in production costs hours. Move checks upstream: static analysis before tests, tests before staging, staging before production.
 
 **Faster is Safer:** Smaller batches and more frequent releases reduce risk, not increase it. A deployment with 3 changes is easier to debug than one with 30. Frequent releases build confidence in the release process itself.
 
@@ -51,7 +51,7 @@ Pull Request Opened
   Ready for review
 ```
 
-**No gate can be skipped.** If lint fails, fix lint — don't disable the rule. If a test fails, fix the code — don't skip the test.
+**No gate can be skipped.** If lint fails, fix lint. Do not disable the rule. If a test fails, fix the code. Do not skip the test.
 
 ## GitHub Actions Configuration
 
@@ -97,7 +97,7 @@ jobs:
         run: npm audit --audit-level=high
 ```
 
-> **Note:** The gates are language-general; only the commands change per ecosystem. The Node steps above map directly to other stacks — for example Python (`pip install`, `ruff check`, `mypy`, `pytest`, `pip-audit`) or Rust (`cargo build`, `cargo clippy`, `cargo test`, `cargo audit`). Keep the same gate order regardless of language.
+> **Note:** The gates are language-general; only the commands change per ecosystem. The Node steps above map directly to other stacks. For example, Python (`pip install`, `ruff check`, `mypy`, `pytest`, `pip-audit`) or Rust (`cargo build`, `cargo clippy`, `cargo test`, `cargo audit`). Keep the same gate order regardless of language.
 
 ### With Database Integration Tests
 
@@ -226,7 +226,7 @@ if (featureFlags.isEnabled('new-checkout-flow', { userId })) {
 return renderLegacyCheckout();
 ```
 
-**Flag lifecycle:** Create → Enable for testing → Canary → Full rollout → Remove the flag and dead code. Flags that live forever become technical debt — set a cleanup date when you create them.
+**Flag lifecycle:** Create → Enable for testing → Canary → Full rollout → Remove the flag and dead code. Flags that live forever become technical debt. Set a cleanup date when you create them.
 
 ### Staged Rollouts
 
@@ -299,7 +299,7 @@ updates:
 
 ### Build Cop Role
 
-Designate someone responsible for keeping CI green. When the build breaks, the Build Cop's job is to fix or revert — not the person whose change caused the break. This prevents broken builds from accumulating while everyone assumes someone else will fix it.
+Designate someone responsible for keeping CI green. When the build breaks, the Build Cop's job is to fix or revert, not the person whose change caused the break. This prevents broken builds from accumulating while everyone assumes someone else will fix it.
 
 ### PR Checks
 

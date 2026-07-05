@@ -80,7 +80,7 @@ Present each fix group with a diff preview. Wait for explicit user confirmation 
 - Dangling: remove line from MEMORY.md.
 - Near-duplicate: present merged draft; write merged file + remove the superseded one; update MEMORY.md.
 - Structural: targeted in-place edit via `Edit` tool.
-- Stale: present options — update the rule, archive the file, or delete it.
+- Stale: present options: update the rule, archive the file, or delete it.
 
 ### 7. Re-run audit; confirm zero critical issues
 

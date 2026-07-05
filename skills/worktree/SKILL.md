@@ -1,21 +1,21 @@
 ---
 name: worktree
-description: Set up isolated git worktrees — create a new branch for fresh work, or attach a worktree to an existing branch/PR/commit. Use when starting isolated work or isolating an existing ref; detects existing isolation first.
+description: Set up isolated git worktrees: create a new branch for fresh work, or attach a worktree to an existing branch/PR/commit. Use when starting isolated work or isolating an existing ref; detects existing isolation first.
 argument-hint: "[optional: ref to isolate, or new-branch-name]"
 ---
 
 # Worktree Isolation
 
-`Op: extend` — adds harness-aware git worktree setup for isolated branches and refs.
+`Op: extend`: adds harness-aware git worktree setup for isolated branches and refs.
 
-Ensure the current work happens in an isolated workspace without disturbing the main checkout. Most harnesses create a worktree by default at session start, so the common case is that isolation already exists — detect that first and do not create a redundant one.
+Ensure the current work happens in an isolated workspace without disturbing the main checkout. Most harnesses create a worktree by default at session start, so the common case is that isolation already exists. Detect that first and do not create a redundant one.
 
 Order: detect existing isolation → prefer a native worktree tool → fall back to plain git. Never create a worktree the harness cannot see.
 
 ## Modes
 
-- **New work (default).** No specific ref named — create a fresh branch from the base branch.
-- **Isolate an existing ref.** Caller names a ref to work on in isolation — a PR head, branch, or commit. Attach the worktree to that ref instead of creating a new branch.
+- **New work (default).** No specific ref named; create a fresh branch from the base branch.
+- **Isolate an existing ref.** Caller names a ref to work on in isolation: a PR head, branch, or commit. Attach the worktree to that ref instead of creating a new branch.
 
 Hard rule for isolate-an-existing-ref: a branch can be checked out in only one worktree at a time. If the named ref is already checked out elsewhere, report the path and let the caller act (work there in place; or, only if a clean separate tree is essential, create a detached worktree at the same commit). Never put one branch in two worktrees.
 
@@ -28,7 +28,7 @@ git rev-parse --absolute-git-dir
 (cd "$(git rev-parse --git-common-dir)" && pwd -P)
 ```
 
-If equal, this is a normal checkout — continue to Step 1.
+If equal, this is a normal checkout; continue to Step 1.
 
 If they differ, you are in a linked worktree or a submodule. Distinguish:
 
@@ -41,7 +41,7 @@ git rev-parse --show-superproject-working-tree
 
 ## Step 1: Prefer the harness's native worktree tool
 
-If the harness provides a native worktree primitive — for example Claude Code's `EnterWorktree`, a `/worktree` command, or a `--worktree` flag — use it and stop. Native tools place, track, and clean up the worktree so the harness can manage it. A behind-the-back `git worktree add` creates phantom state the harness cannot see, navigate to, or clean up.
+If the harness provides a native worktree primitive (for example Claude Code's `EnterWorktree`, a `/worktree` command, or a `--worktree` flag), use it and stop. Native tools place, track, and clean up the worktree so the harness can manage it. A behind-the-back `git worktree add` creates phantom state the harness cannot see, navigate to, or clean up.
 
 ## Step 2: Git fallback
 

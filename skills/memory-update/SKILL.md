@@ -3,7 +3,7 @@ name: memory-update
 description: Scans session history for save-worthy signals and proposes memory files. Use when the user says save this to memory, remember that, or scan this session for memories.
 ---
 
-Scan session history, surface save-worthy moments, propose → confirm → write. Never fabricate — every proposal must cite a transcript turn.
+Scan session history, surface save-worthy moments, propose → confirm → write. Never fabricate. Every proposal must cite a transcript turn.
 
 ## Scope
 

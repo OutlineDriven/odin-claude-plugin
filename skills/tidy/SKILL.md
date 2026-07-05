@@ -3,14 +3,14 @@ name: tidy
 description: Dispatch compress operations to the right domain based on context. Use when the user says "tidy", "clean up", or names a file, diff, memory, workspace, git stack, or doc to tidy.
 ---
 
-# Tidy — ODIN's compress-operations dispatcher
+# Tidy: ODIN's compress-operations dispatcher
 
 Compress first. Before adding complexity, reduce coupling. Before changing behavior,
 improve structure. This skill detects *what* needs tidying from context and routes
-to the right domain skill. Domain procedures live in those domain skills — this skill
+to the right domain skill. Domain procedures live in those domain skills; this skill
 owns only scope detection, dispatch, and the output contract. Tidy's deletions are
 compress-class (behavior-preserving: dead/redundant/structural); a request to remove
-a live capability is purge — route it out to `refactor-break-compat`, never tidy inline.
+a live capability is purge. Route it out to `refactor-break-compat`; never tidy inline.
 
 **Invariants:**
 - Every tidy action is atomic and scoped to what is already in view.
@@ -32,9 +32,9 @@ Inspect context in priority order and dispatch to the first matching domain:
 | Docs, comments, ADRs, READMEs, plan files named | **Docs** | Inline (see below) |
 | User explicitly says "tidy ICM" or names an ICM topic | **ICM state** | Inline (see below) |
 | "remove/drop/kill a live capability", compat-shim or feature-flag teardown named | **Purge** | `refactor-break-compat` skill |
-| No clear signal | — | Ask: "What are we tidying — code, memory, workspace, git, docs, or ICM?" |
+| No clear signal | none | Ask: "What are we tidying: code, memory, workspace, git, docs, or ICM?" |
 
-Purge is a behavior change, not a tidy — detect purge-intent and dispatch out; never perform capability removal inline (violates the behavior-commit-separation invariant).
+Purge is a behavior change, not a tidy. Detect purge-intent and dispatch out; never perform capability removal inline (violates the behavior-commit-separation invariant).
 
 ---
 
@@ -84,9 +84,9 @@ If nothing needed tidying: `Tidy — <domain>: nothing to do.`
 
 ## Constitutional rules
 
-1. **Atomic commits** — tidy commits are always separate from behavior commits. No exceptions. Use `git move --fixup` when embedding alongside active work.
-2. **Scope discipline** — never tidy beyond the explicit target or the currently active file/system. No opportunistic sweeps.
-3. **Confirm before delete** — show evidence; never silently remove memories, commits, or files.
-4. **Compress-class only** — tidying is behavior-preserving net-deletion (dead/redundant) or net-simplification; introducing a new pattern, or removing a live capability (that is purge — dispatch out), is a separate task.
-5. **Verify after** — after code or git tidy, run repo-native verification (build + tests + linter).
-6. **ODIN baseline wins** — if any rule here conflicts with `~/.claude/claude/system-prompt-baseline.md`, the baseline wins.
+1. **Atomic commits**: tidy commits are always separate from behavior commits. No exceptions. Use `git move --fixup` when embedding alongside active work.
+2. **Scope discipline**: never tidy beyond the explicit target or the currently active file/system. No opportunistic sweeps.
+3. **Confirm before delete**: show evidence; never silently remove memories, commits, or files.
+4. **Compress-class only**: tidying is behavior-preserving net-deletion (dead/redundant) or net-simplification; introducing a new pattern, or removing a live capability (that is purge; dispatch out), is a separate task.
+5. **Verify after**: after code or git tidy, run repo-native verification (build + tests + linter).
+6. **ODIN baseline wins**: if any rule here conflicts with `~/.claude/claude/system-prompt-baseline.md`, the baseline wins.

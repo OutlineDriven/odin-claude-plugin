@@ -68,7 +68,7 @@ If versions are missing or ambiguous, **ask the user**. Do not guess: the versio
 
 ### Step 2: Fetch Official Documentation
 
-Fetch the documentation page for the exact feature you are implementing. Not the homepage, not the full docs tree — the page that covers the pattern.
+Fetch the documentation page for the exact feature you are implementing (the page that covers the pattern, not the homepage or the full docs tree).
 
 **Source hierarchy (in order of authority):**
 
@@ -79,7 +79,7 @@ Fetch the documentation page for the exact feature you are implementing. Not the
 | 3 | Web standards references | MDN, web.dev, html.spec.whatwg.org |
 | 4 | Browser/runtime compatibility | caniuse.com, node.green |
 
-**Not authoritative — never cite as a primary source:**
+**Not authoritative (never cite as a primary source):**
 
 - Stack Overflow answers
 - Blog posts or tutorials (even popular ones)

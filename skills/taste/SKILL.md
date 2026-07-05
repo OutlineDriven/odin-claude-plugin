@@ -5,9 +5,9 @@ description: Apply distinctive judgment to prose, code, design, or decisions ins
 
 # Taste
 
-Distinctive judgment over centroid-AI default convergence. Restraint as default. One strong intentional moment per artifact. The two failure modes — slop and overkill — are reciprocal: both come from refusing to commit. Slop hedges by averaging into AI defaults; overkill hedges by piling on decoration that covers thin ideas.
+Distinctive judgment over centroid-AI default convergence. Restraint as default. One strong intentional moment per artifact. The two failure modes, slop and overkill, are reciprocal: both come from refusing to commit. Slop hedges by averaging into AI defaults; overkill hedges by piling on decoration that covers thin ideas.
 
-`/taste` operates across prose, code, design, and decisions with the same charter and the same eight anchors. It is a judgment register; it does not transform the artifact, it decides what about the artifact is committed and what is hedge.
+`/taste` operates across prose, code, design, and decisions with the same charter and the same eight anchors. It is a judgment register; it does not transform the artifact, it decides what about the artifact is committed and what remains a hedge.
 
 ## Modes [LOAD-BEARING]
 
@@ -22,7 +22,7 @@ Auto-detect from the user's phrasing, with slash-arg override:
 
 ### `audit` mode procedure
 
-Walk the eight anchors one at a time against the artifact. For each: state the anchor, judge the artifact (pass / warn / fail), cite the Side A or Side B charter row when violated, and write a concrete fix. Close with the top-3 ranked fixes. **Conflict-handling**: when two anchors fail with conflicting fixes (e.g., Restraint says compress, Generosity says expand), surface the tension explicitly — no auto-pick, no fixed precedence list. Tie-break is user-led.
+Walk the eight anchors one at a time against the artifact. For each: state the anchor, judge the artifact (pass / warn / fail), cite the Side A or Side B charter row when violated, and write a concrete fix. Close with the top-3 ranked fixes. **Conflict-handling**: when two anchors fail with conflicting fixes (e.g., Restraint says compress, Generosity says expand), surface the tension explicitly. Do not auto-pick, and do not use a fixed precedence list. Tie-break is user-led.
 
 ### `anchor` mode procedure
 
@@ -30,9 +30,9 @@ Load the charter and anchors as imperatives the model will honor across subseque
 
 ## The two-sided charter
 
-**Side A — slop** (centroid-AI default convergence): generic openers ("Sure!", "Of course"), hedge-stacks ("perhaps it might be"), validation phrases ("you're absolutely right"), AI-flat prose with no rhythm, default palettes, defensive nil-checks where impossible, 50/50 decision hedges that pick nothing.
+**Side A: slop** (centroid-AI default convergence): generic openers ("Sure!", "Of course"), hedge-stacks ("perhaps it might be"), validation phrases ("you're absolutely right"), AI-flat prose with no rhythm, default palettes, defensive nil-checks where impossible, 50/50 decision hedges that pick nothing.
 
-**Side B — overkill** (decoration covering thin ideas): gradient stacks on every section, thesaurus-soup prose ("orchestrate the holistic synthesis of"), abstraction towers (4 layers where 1 suffices), complexity-flex masking absent conviction, ceremony that performs depth without delivering it.
+**Side B: overkill** (decoration covering thin ideas): gradient stacks on every section, thesaurus-soup prose ("orchestrate the holistic synthesis of"), abstraction towers (4 layers where 1 suffices), complexity-flex masking absent conviction, ceremony that performs depth without delivering it.
 
 | Domain   | Side A (slop)                            | Side B (overkill)                        |
 |----------|------------------------------------------|------------------------------------------|
@@ -47,14 +47,14 @@ See `references/charter.md` for the full charter.
 
 Eight anchors apply to every domain:
 
-- **Clarity** — the artifact says what it means; reader does not have to decode.
-- **Hierarchy** — important looks important; secondary supports.
-- **Intent** — every choice is committed; nothing reads as "I let the default decide."
-- **Coherence** — parts agree; tension only where deliberately staged.
-- **Restraint** — default posture; compress before adding.
-- **Generosity** — gives more than required at the right moment.
-- **Honesty** — no decoration covering missing depth; no slop covering missing POV.
-- **One strong moment** — exactly one commitment carries the lift; the rest supports.
+- **Clarity**: the artifact says what it means; reader does not have to decode.
+- **Hierarchy**: important looks important; secondary supports.
+- **Intent**: every choice is committed; nothing reads as "I let the default decide."
+- **Coherence**: parts agree; tension only where deliberately staged.
+- **Restraint**: default posture; compress before adding.
+- **Generosity**: gives more than required at the right moment.
+- **Honesty**: no decoration covering missing depth; no slop covering missing POV.
+- **One strong moment**: exactly one commitment carries the lift; the rest supports.
 
 See `references/anchors.md` for cross-domain manifestations of each anchor.
 

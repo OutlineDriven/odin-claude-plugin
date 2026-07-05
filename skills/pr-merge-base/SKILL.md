@@ -27,7 +27,7 @@ Merge one or more PRs into the base branch (main/master) using queue-like sequen
    - Otherwise, compute dependency/topological order (if PR B depends on PR A, merge A first).
    - If PRs are independent with no clear ordering, present the list and ask the user to confirm or reorder before proceeding.
 
-6. **Sequential merge with conflict handling** — for each PR in order:
+6. **Sequential merge with conflict handling**: for each PR in order:
    a. Attempt `git merge --no-ff <pr-branch>` into the integration branch.
    b. If merge succeeds cleanly, continue to next PR.
    c. If conflicts occur:
@@ -38,13 +38,13 @@ Merge one or more PRs into the base branch (main/master) using queue-like sequen
 
 7. **Validate integration branch**: Once all PRs are merged on the integration branch, run full build/test suite if available.
 
-8. **Report results**: Present the validated integration branch to the user. Do NOT advance the base branch automatically — only update base if the user explicitly requests it.
+8. **Report results**: Present the validated integration branch to the user. Do NOT advance the base branch automatically. Only update base if the user explicitly requests it.
 
-9. **Abort conditions** — stop the queue and report if:
+9. **Abort conditions**: stop the queue and report if:
    - A conflict cannot be safely auto-resolved.
    - A post-merge build/test fails.
    - A PR has been superseded or closed.
-   Roll back: `git checkout <base> && git branch -D merge-queue/<timestamp>` — base remains untouched at checkpoint.
+   Roll back: `git checkout <base> && git branch -D merge-queue/<timestamp>`. Base remains untouched at checkpoint.
 
 ## Output
 

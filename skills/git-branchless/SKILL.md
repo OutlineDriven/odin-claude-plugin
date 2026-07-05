@@ -10,9 +10,9 @@ work mode, and branches as publishing artifacts. This skill enforces that
 mental model and routes every common git workflow to its branchless
 equivalent. Reference docs:
 
-- `references/commands.md` — every command, flag, revset, config key.
-- `references/recipes.md` — concrete sequences + decision rubric.
-- `references/recovery.md` — undo, restack, hide, snapshot, GC semantics.
+- `references/commands.md`: every command, flag, revset, config key.
+- `references/recipes.md`: concrete sequences + decision rubric.
+- `references/recovery.md`: undo, restack, hide, snapshot, GC semantics.
 
 ---
 
@@ -102,12 +102,12 @@ Full recipes with rationale: `references/recipes.md`.
 ## Hand-off
 
 - **`commit`** is the per-commit-grouping concern. Pair this skill
-  with `commit` when the task is "commit my changes" — branchless
-  handles workflow, commit handles per-change boundaries.
+  with `commit` when the task is "commit my changes". Branchless
+  handles workflow; commit handles per-change boundaries.
 - A complementary block-list hook enforces a hard block on
   `git push --force`, `git reset --hard`, and similar. This skill
   teaches the branchless idioms; that hook enforces the boundary. They
-  coexist — the hook surfaces a refusal, this skill surfaces the right
+  They coexist. The hook surfaces a refusal; this skill surfaces the right
   alternative.
 - **`fix`** drives iterative repair via per-iteration commits + revert
   protocol. `fix` already uses `git revert HEAD --no-edit` (event-log-friendly)
@@ -115,7 +115,7 @@ Full recipes with rationale: `references/recipes.md`.
 
 ODIN-baseline agents already have an abridged branchless cheat-sheet in
 their style block. This skill is the canonical, deeper reference for both
-ODIN and non-ODIN agents — it does not depend on the baseline being loaded.
+ODIN and non-ODIN agents. It does not depend on the baseline being loaded.
 
 ---
 

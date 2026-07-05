@@ -5,7 +5,7 @@ metadata:
   short-description: Certainty-graded slop cleanup
 ---
 
-# deslop — correct slop invariant, preserve behavior
+# deslop: correct slop invariant, preserve behavior
 
 Run a `correct` op-cell: restore the invariant that production code has no debug leftovers, placeholder bodies, swallowed errors, hardcoded credentials, or formatter noise. Classify every finding by certainty; apply only HIGH-certainty mechanical fixes; MEDIUM and LOW are report-only unless the user explicitly asks for a separate manual refactor.
 
@@ -35,7 +35,7 @@ Certainty is not severity. A hardcoded token is HIGH certainty and high severity
    - `dist/**`, `build/**`, `target/**`, `coverage/**`, `vendor/**`, `node_modules/**`, `*.min.*`, generated/protobuf/openapi outputs
    - keep Markdown out of whitespace cleanup because trailing spaces can be semantic line breaks.
 
-2. **Phase 1 — HIGH deterministic scan.** Use `search` for line patterns and `ast-grep` where syntax shape matters. Record `{file, line, pattern, certainty: HIGH, strategy}`. Recipes:
+2. **Phase 1: HIGH deterministic scan.** Use `search` for line patterns and `ast-grep` where syntax shape matters. Record `{file, line, pattern, certainty: HIGH, strategy}`. Recipes:
    - Debug output: `console.log/debug`, Python `print(`/`breakpoint(`/`import pdb`, Rust `println!`/`dbg!`/`eprintln!`, Go `fmt.Print*` with debug labels, Java/Kotlin `System.out/println` when not CLI output.
    - Placeholder bodies: `throw new Error("TODO/not implemented")`, `todo!()`, `unimplemented!()`, `panic!("TODO")`, `raise NotImplementedError`, `def x(): pass`, `def x(): ...`, Go `panic("TODO")`, Java `UnsupportedOperationException`, Kotlin `TODO()`.
    - Empty handlers: JS/TS `catch (...) {}`, Python `except ...: pass`, Java/Kotlin/C++ empty catch blocks, Go `if err != nil {}`.
@@ -43,7 +43,7 @@ Certainty is not severity. A hardcoded token is HIGH certainty and high severity
    - Hardcoded credentials: `sk-`, `ghp_`/`github_pat_`, `AKIA`, `Bearer <token>`, JWT-looking strings, private-key blocks, Slack/Stripe/NPM/Twilio/SendGrid/Discord token forms. Flag only.
    - Mechanical whitespace: mixed tabs+spaces on one indentation prefix, trailing whitespace outside Markdown.
 
-3. **Phase 1b — MEDIUM contextual scan.** Use codegraph first when indexed; otherwise combine `ast-grep`, `search`, and direct reads of the narrow files. Report only:
+3. **Phase 1b: MEDIUM contextual scan.** Use codegraph first when indexed; otherwise combine `ast-grep`, `search`, and direct reads of the narrow files. Report only:
    - Doc-to-code ratio >3 for a real function with at least 3 code lines.
    - Verbosity ratio >2 comments per code line inside a function; filler/hedging/buzzword comments.
    - Dead code after `return`, `throw`, `break`, or `continue` that is not a language-required fallthrough case.
@@ -52,7 +52,7 @@ Certainty is not severity. A hardcoded token is HIGH certainty and high severity
    - Infrastructure without implementation: `Client`, `Connection`, `Pool`, `Service`, `Provider`, `Manager`, `Factory`, `Repository`, `Gateway`, `Queue`, `Cache`, or `Store` values created but never used beyond setup/export.
    - Stub return values: a function whose only significant body line returns `0`, `null`, `undefined`, `None`, `nil`, `false`, `true`, `[]`, `{}`, `""`, empty collections, `Default::default()`, or `Optional.empty()`. Escalate attention when adjacent TODO/FIXME/STUB text exists, but keep auto-fix disabled.
 
-4. **Phase 2 — LOW optional CLI scan.** Run only tools already available in the repo or PATH; never install. Record findings as LOW and `flag-only`:
+4. **Phase 2: LOW optional CLI scan.** Run only tools already available in the repo or PATH; never install. Record findings as LOW and `flag-only`:
    - `jscpd` for duplication.
    - `madge` for cycles.
    - Existing `eslint`, `clippy`, `golangci-lint`, or language-native lint commands from package manifests / project config.

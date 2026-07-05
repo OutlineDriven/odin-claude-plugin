@@ -3,7 +3,7 @@ name: caveman
 description: Switch to a verbosity-reduction response register. Use when the user says "caveman", "compact mode", "less tokens", "be brief", or context-window pressure calls for shorter replies.
 ---
 
-Concise grammatical English — not telegraphic fragmentation. Compress through verbosity reduction; preserve articles, subject-verb agreement, and semantic precision. Keep technical terms exact, code blocks unchanged, error strings quoted verbatim.
+Concise grammatical English, not telegraphic fragmentation. Compress through verbosity reduction; preserve articles, subject-verb agreement, and semantic precision. Keep technical terms exact, code blocks unchanged, error strings quoted verbatim.
 
 ## When to invoke
 
@@ -34,7 +34,7 @@ Once active, persist for every subsequent response until the user signals "stop 
 ## Before / after
 
 **Before** (verbose, ceremonial):
-> Sure! I'd be happy to help you with that. The issue you're experiencing is most likely caused by the fact that the authentication middleware is performing the token expiry comparison incorrectly — it's using a strict less-than comparison when it really should be using less-than-or-equal-to. Let me go ahead and fix that for you now.
+> Sure! I'd be happy to help you with that. The issue you're experiencing is most likely caused by the fact that the authentication middleware is performing the token expiry comparison incorrectly. It is using a strict less-than comparison when it really should be using less-than-or-equal-to. Let me go ahead and fix that for you now.
 
 **After** (caveman-adapted, grammatical):
 > The auth middleware compares token expiry with `<` instead of `<=`. Fix the operator.

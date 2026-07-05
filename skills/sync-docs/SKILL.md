@@ -5,7 +5,7 @@ metadata:
   short-description: Diff-driven docs drift correction
 ---
 
-# Sync Docs — correct documentation against code reality
+# Sync Docs: correct documentation against code reality
 
 `sync-docs` is a `correct` op-cell: restore the invariant that public docs, examples, versions, and changelog entries describe the current code. It starts from a diff, maps the changed code to coupled Markdown, applies only the safe subset, and flags every semantic drift item with evidence.
 

@@ -30,7 +30,7 @@ Create a single, well-crafted git commit from the current working tree changes.
 
 ### Context fallback
 
-**In Claude Code, skip this section — the data above is already available.**
+**In Claude Code, skip this section. The data above is already available.**
 
 Run this single command to gather all context:
 
@@ -56,7 +56,7 @@ If both fail, fall back to `main`.
 
 If the git status from the context above shows a clean working tree (no staged, modified, or untracked files), report that there is nothing to commit and stop.
 
-If the current branch from the context above is empty, the repository is in detached HEAD state. Explain that a branch is required before committing if the user wants this work attached to a branch. Ask whether to create a feature branch now. Use the platform's blocking question tool: `AskUserQuestion` in Claude Code (call `ToolSearch` with `select:AskUserQuestion` first if its schema isn't loaded), `request_user_input` in Codex, `ask_question` in Antigravity CLI (`agy`), `ask_user` in Pi (requires the `pi-ask-user` extension). Fall back to presenting options in chat only when no blocking tool exists in the harness or the call errors (e.g., Codex edit modes) — not because a schema load is required. Never silently skip the question.
+If the current branch from the context above is empty, the repository is in detached HEAD state. Explain that a branch is required before committing if the user wants this work attached to a branch. Ask whether to create a feature branch now. Use the platform's blocking question tool: `AskUserQuestion` in Claude Code (call `ToolSearch` with `select:AskUserQuestion` first if its schema isn't loaded), `request_user_input` in Codex, `ask_question` in Antigravity CLI (`agy`), `ask_user` in Pi (requires the `pi-ask-user` extension). Fall back to presenting options in chat only when no blocking tool exists in the harness or the call errors (e.g., Codex edit modes), not because a schema load is required. Never silently skip the question.
 
 - If the user chooses to create a branch, derive the name from the change content, create it with `git checkout -b <branch-name>`, then run `git branch --show-current` again and use that result as the current branch name for the rest of the workflow.
 - If the user declines, continue with the detached HEAD commit.
@@ -82,13 +82,13 @@ Keep this lightweight:
 
 ### Step 4: Stage and commit
 
-If the current branch from the context above is `main`, `master`, or the resolved default branch from Step 1, automatically create a feature branch before committing. Derive the branch name from the change content, create it with `git checkout -b <branch-name>`, run `git branch --show-current` to confirm, and use the new branch as the current branch for the rest of the workflow. Do not ask whether to branch — committing on the default branch is not an option here.
+If the current branch from the context above is `main`, `master`, or the resolved default branch from Step 1, automatically create a feature branch before committing. Derive the branch name from the change content, create it with `git checkout -b <branch-name>`, run `git branch --show-current` to confirm, and use the new branch as the current branch for the rest of the workflow. Do not ask whether to branch. Committing on the default branch is not an option here.
 
 Write the commit message:
 - **Subject line**: Concise, imperative mood, focused on *why* not *what*. Follow the convention determined in Step 2.
 - **Body** (when needed): Add a body separated by a blank line for non-trivial changes. Explain motivation, trade-offs, or anything a future reader would need. Omit the body for obvious single-purpose changes.
 
-Run the repo's native verification gate before each commit — type-checker and/or linter, whichever the repo defines — one pass per commit group, before staging that group. A group that fails the check is not ready to commit. Skip silently if the repo has neither configured.
+Run the repo's native verification gate before each commit: type-checker and/or linter, whichever the repo defines, one pass per commit group, before staging that group. A group that fails the check is not ready to commit. Skip silently if the repo has neither configured.
 
 For each commit group, stage and commit in a single call. Prefer staging specific files by name over `git add -A` or `git add .` to avoid accidentally including sensitive files (.env, credentials) or unrelated changes. Use a heredoc to preserve formatting:
 

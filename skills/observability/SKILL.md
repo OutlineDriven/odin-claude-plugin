@@ -3,13 +3,13 @@ name: observability
 description: Instruments code with logging, metrics, traces, and alerts so production behavior is visible. Use when adding telemetry, shipping a production feature, or diagnosing opaque production issues.
 ---
 
-# Observability and Instrumentation
+# Observability and instrumentation
 
 ## Overview
 
-Code you can't observe is code you can't operate. Observability is the ability to answer "what is the system doing and why?" from the outside, using the telemetry the code emits. Instrumentation is not a post-launch add-on — it's written alongside the feature, the same way tests are. If a feature ships without telemetry, the first user-reported bug becomes archaeology instead of a query.
+Code you can't observe is code you can't operate. Observability is the ability to answer "what is the system doing and why?" from the outside, using the telemetry the code emits. Instrumentation is not a post-launch add-on. It's written alongside the feature, the same way tests are. If a feature ships without telemetry, the first user-reported bug becomes archaeology instead of a query.
 
-## When to Use
+## When to use
 
 - Building any feature that will run in production
 - Adding a new service, endpoint, background job, or external integration
@@ -20,13 +20,13 @@ Code you can't observe is code you can't operate. Observability is the ability t
 **NOT for:**
 - Diagnosing a failure happening right now
 - Profiling and optimizing measured slowness
-- Launch-day monitoring checklists and rollback triggers — this skill covers the instrumentation that feeds them
+- Launch-day monitoring checklists and rollback triggers. This skill covers the instrumentation that feeds them.
 
 ## Process
 
 ### 1. Define "working" before instrumenting
 
-Telemetry without a question is noise. Before adding any instrumentation, write down 2–4 questions an on-call engineer will ask about this feature:
+Telemetry without a question is noise. Before adding any instrumentation, write down 2 to 4 questions an on-call engineer will ask about this feature:
 
 ```
 FEATURE: checkout payment retry
@@ -37,7 +37,7 @@ QUESTIONS ON-CALL WILL ASK:
 → Every signal below must help answer one of these.
 ```
 
-If you can't name the questions, you're not ready to instrument — you'll log everything and learn nothing.
+If you can't name the questions, you're not ready to instrument. You'll log everything and learn nothing.
 
 ### 2. Pick the right signal for each question
 
@@ -74,7 +74,7 @@ log.warning("payment_failed", payment_id=id, provider="stripe",        # GOOD
             error_code=err.code, attempt=n)
 ```
 
-**Log levels — use them consistently:**
+**Log levels: use them consistently:**
 
 | Level | Meaning | On-call action |
 |---|---|---|
@@ -115,7 +115,7 @@ def echo_request_id(resp):
 
 For request-driven services, instrument **RED** on every endpoint and every external dependency: **R**ate (requests/sec), **E**rrors (failure rate), **D**uration (latency histogram, not average). For resources (queues, pools, hosts), use **USE**: **U**tilization, **S**aturation, **E**rrors.
 
-As with tracing, the vendor-neutral path is the OpenTelemetry metrics API (same SDK and context as step 5). The example below uses Prometheus' `prom-client` — one common backend choice, not the only one; the RED/USE and cardinality rules are identical either way.
+As with tracing, the vendor-neutral path is the OpenTelemetry metrics API (same SDK and context as step 5). The example below uses Prometheus' `prom-client`. One common backend choice, not the only one; the RED/USE and cardinality rules are identical either way.
 
 ```typescript
 import { Histogram } from 'prom-client';
@@ -139,7 +139,7 @@ http_duration = Histogram(
 )
 ```
 
-**Cardinality is the failure mode.** Every unique label combination is a separate time series. Labels must come from small, fixed sets (route template, status class, provider name). Never use user IDs, raw URLs, error messages, or other unbounded values as labels — that belongs in logs and traces.
+**Cardinality is the failure mode.** Every unique label combination is a separate time series. Labels must come from small, fixed sets (route template, status class, provider name). Never use user IDs, raw URLs, error messages, or other unbounded values as labels. That belongs in logs and traces.
 
 ```
 OK as label:    route="/api/tasks/:id"   status_class="5xx"   provider="stripe"
@@ -150,7 +150,7 @@ Track averages never, percentiles always: an average hides the 1% of users havin
 
 ### 5. Distributed tracing
 
-Use OpenTelemetry — it's the vendor-neutral standard, and auto-instrumentation covers HTTP, gRPC, and common DB clients with near-zero code:
+Use OpenTelemetry. It's the vendor-neutral standard, and auto-instrumentation covers HTTP, gRPC, and common DB clients with near-zero code:
 
 ```typescript
 // tracing.ts — must be imported before anything else
@@ -173,7 +173,7 @@ trace.set_tracer_provider(TracerProvider())
 # run with: OTEL_SERVICE_NAME=checkout-service opentelemetry-instrument python app.py
 ```
 
-Add manual spans only around meaningful internal units of work (e.g., `applyDiscounts`, `chargeProvider`) and attach the attributes on-call will filter by. Propagate context across every async boundary — HTTP headers, queue message metadata — or the trace dies at the gap. Sample head-based at a low rate by default; keep 100% of errors if your backend supports tail sampling.
+Add manual spans only around meaningful internal units of work (e.g., `applyDiscounts`, `chargeProvider`) and attach the attributes on-call will filter by. Propagate context across every async boundary (HTTP headers, queue message metadata), or the trace dies at the gap. Sample head-based at a low rate by default; keep 100% of errors if your backend supports tail sampling.
 
 ### 6. Alerting
 
@@ -191,7 +191,7 @@ Cause-based alerts fire when nothing is wrong and miss failures you didn't predi
 Rules for every alert you create:
 
 1. **It must be actionable.** If the response is "ignore it, it self-heals", delete the alert.
-2. **It links to a runbook** — even three lines: what it means, first query to run, escalation path.
+2. **It links to a runbook**, even three lines: what it means, first query to run, escalation path.
 3. **It has a threshold and duration** justified by the SLO or by historical data, not by a guess.
 4. Use two severities only: **page** (user-facing, act now) and **ticket** (degradation, act this week). A third tier becomes noise that trains people to ignore everything.
 
@@ -204,7 +204,7 @@ Instrumentation is code; it can be wrong. Before calling the work done, trigger 
 - Follow one request across services in the tracing UI → no broken spans
 - Fire each new alert once (lower the threshold temporarily) → confirm it reaches the right channel and the runbook link works
 
-## Common Rationalizations
+## Common rationalizations
 
 | Rationalization | Reality |
 |---|---|
@@ -216,11 +216,11 @@ Instrumentation is code; it can be wrong. Before calling the work done, trigger 
 | "User ID as a metric label makes debugging easier" | It also makes your metrics backend fall over. High-cardinality lookups belong in logs and traces. |
 | "Tracing is overkill for our two services" | Two services already means cross-service latency questions logs can't answer. Auto-instrumentation makes the cost trivial. |
 
-## Red Flags
+## Red flags
 
 - A feature PR with retries, queues, or external calls and zero new telemetry
 - Log lines built by string interpolation instead of structured fields
-- No correlation/request ID — each log line is an orphan
+- No correlation/request ID; each log line is an orphan
 - Metrics labeled with user IDs, raw URLs, or error message text (cardinality bomb)
 - Latency tracked as an average with no percentiles
 - Alerts that fire daily and get acknowledged without action

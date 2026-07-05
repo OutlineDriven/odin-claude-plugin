@@ -3,7 +3,7 @@ name: debug
 description: Isolate defects with hypothesis-driven debugging and minimal reproduction. Use when a test fails, a crash or exception occurs, output is wrong, or an intermittent flake has no obvious cause.
 ---
 
-A bug is a falsified assumption. Find the assumption, falsify it deliberately, observe the divergence, narrow until one line owns the lie. No speculation, no shotgun edits, no "fix and rerun" guessing.
+A bug is a falsified assumption. Find the assumption, falsify it deliberately, observe the divergence, narrow until one line owns the lie. Avoid speculation, shotgun edits, and "fix and rerun" guessing.
 
 ## When to Apply / NOT
 
@@ -27,15 +27,15 @@ Read `references/anti-patterns.md` before forming hypotheses. Stop and re-examin
 
 ## Hypothesis Loop (language-neutral)
 
-1. **Observe** — Reproduce the failure deterministically. Verify environment sanity (correct branch, dependencies installed, expected runtime version, no stale build artifacts).
-2. **Trace** — Read the failure artifact (stack, log, core dump). Trace backward from symptom to where valid state first became invalid. Check recent changes in relevant files.
-3. **Hypothesize** — One falsifiable claim. Rank hypotheses by likelihood. For each: state what is wrong and where (file:line), cite one concrete observation that supports it, and trace the causal chain from trigger to symptom. For uncertain links in the chain, form a prediction -- something in a different code path that must also be true. Before forming hypotheses, audit assumptions: list "this must be true" beliefs and mark each as verified or assumed.
-4. **Instrument** — Insert minimum probe (breakpoint, structured log, assertion). Log shape and presence, not raw values. Redact secrets and PII.
-5. **Run** — Execute the minimal repro.
-6. **Confirm or refute** — If refuted, demote and pick next hypothesis. If 2-3 hypotheses are exhausted without confirmation, diagnose why (see smart escalation in `references/anti-patterns.md`).
-7. **Narrow** — Binary-search the suspect range. Use `git bisect` for regressions.
-8. **Confirm root cause** — Inverse test: removing/altering the cause must restore correctness. The causal chain from trigger to symptom must have no gaps. If a prediction was wrong but the fix appears to work, a symptom was found, not the cause.
-9. **Hand off** — Forward to TDD: minimal repro becomes permanent failing test.
+1. **Observe**: Reproduce the failure deterministically. Verify environment sanity (correct branch, dependencies installed, expected runtime version, no stale build artifacts).
+2. **Trace**: Read the failure artifact (stack, log, core dump). Trace backward from symptom to where valid state first became invalid. Check recent changes in relevant files.
+3. **Hypothesize**: One falsifiable claim. Rank hypotheses by likelihood. For each: state what is wrong and where (file:line), cite one concrete observation that supports it, and trace the causal chain from trigger to symptom. For uncertain links in the chain, form a prediction -- something in a different code path that must also be true. Before forming hypotheses, audit assumptions: list "this must be true" beliefs and mark each as verified or assumed.
+4. **Instrument**: Insert minimum probe (breakpoint, structured log, assertion). Log shape and presence, not raw values. Redact secrets and PII.
+5. **Run**: Execute the minimal repro.
+6. **Confirm or refute**: If refuted, demote and pick next hypothesis. If 2-3 hypotheses are exhausted without confirmation, diagnose why (see smart escalation in `references/anti-patterns.md`).
+7. **Narrow**: Binary-search the suspect range. Use `git bisect` for regressions.
+8. **Confirm root cause**: Inverse test: removing/altering the cause must restore correctness. The causal chain from trigger to symptom must have no gaps. If a prediction was wrong but the fix appears to work, a symptom was found, not the cause.
+9. **Hand off**: Forward to TDD: minimal repro becomes permanent failing test.
 
 When deeper investigation is needed (intermittent bugs, race conditions, cross-system tracing), load `references/investigation-techniques.md`.
 
@@ -43,7 +43,7 @@ When deeper investigation is needed (intermittent bugs, race conditions, cross-s
 
 - **Top frame is innermost**: the failure point.
 - **Cause vs context**: An exception's `caused by` chain encodes *why*; the stack encodes *where*.
-- **Async traces**: virtual stacks drop frames between awaits — capture causal context.
+- **Async traces**: virtual stacks drop frames between awaits. Capture causal context.
 - **Symbol fidelity**: Strip-mode binaries lose frame names. Build with debug info.
 - **Inlined / optimized frames**: `<inlined>` markers signal source-line-to-instruction map is approximate.
 
@@ -68,7 +68,7 @@ Use `procs` (not `ps`) for PID. Use `bat -P -p -n` (not `cat`) for trace files. 
 4. **Capture the bug as a test** (hand to TDD).
 5. **Confirm with inverse**.
 6. **Bisect for regressions**.
-7. **No silent edits**.
+7. **Do not make silent edits**.
 
 ## Defense-in-Depth (conditional)
 
@@ -76,7 +76,7 @@ When the root-cause pattern exists in 3+ other files, or the bug would have been
 
 ## Reasoning approach
 
-Before hypothesizing a fix, reason through the failure — SHORT-form KEYWORDS for trace notes, observe the symptoms, trace the execution path, break down where actual behavior diverges from expected, critically review each candidate cause, validate each hypothesis against the evidence. The root cause is the smallest explanation that accounts for all observed symptoms. For numeric calculation (timing math, bound arithmetic, off-by-N analysis), invoke `fend` per the baseline rule; never self-calculate. Causal reasoning and trace interpretation are in-head — they are not arithmetic.
+Before hypothesizing a fix, reason through the failure. SHORT-form KEYWORDS for trace notes, observe the symptoms, trace the execution path, break down where actual behavior diverges from expected, critically review each candidate cause, validate each hypothesis against the evidence. The root cause is the smallest explanation that accounts for all observed symptoms. For numeric calculation (timing math, bound arithmetic, off-by-N analysis), invoke `fend` per the baseline rule; never self-calculate. Causal reasoning and trace interpretation are in-head; they are not arithmetic.
 
 ## Pre-flight Check
 
@@ -85,6 +85,6 @@ Before hypothesizing a fix, reason through the failure — SHORT-form KEYWORDS f
 
 ## Reference materials
 
-- `references/anti-patterns.md` — common debugging traps and how to avoid them.
-- `references/defense-in-depth.md` — layered defense strategies for preventing bug recurrence.
-- `references/investigation-techniques.md` — structured investigation methods for complex defects.
+- `references/anti-patterns.md`: common debugging traps and how to avoid them.
+- `references/defense-in-depth.md`: layered defense strategies for preventing bug recurrence.
+- `references/investigation-techniques.md`: structured investigation methods for complex defects.

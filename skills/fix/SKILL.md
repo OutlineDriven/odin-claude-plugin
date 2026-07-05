@@ -39,7 +39,7 @@ First-match wins. Full detail: `references/classifier.md`.
 | 1 | `gh-route` | GH-flavored input + open PR + `gh auth status` clean |
 | 2 | `findings` | Path to `*/findings.md`, `*/review/*.md`, or structured findings text |
 | 3 | `verifier-failure` | Raw verifier stdout (`FAILED`, `error TS`, `--- FAIL`, etc.) |
-| 4 | `bug-spec` | Natural-language description — catch-all fallback |
+| 4 | `bug-spec` | Natural-language description, catch-all fallback |
 
 ## Auto-Detect Gate
 
@@ -60,7 +60,7 @@ Full spec: `references/loop.md`. Key rules:
 - Decide matrix:
   - `delta > 0` + guard ok → **KEEP**
   - `delta > 0` + guard fail → **REWORK** (max 2 reworks per item; 4th attempt → SKIP)
-  - `delta ≤ 0` → **DISCARD** — revert immediately
+  - `delta ≤ 0` → **DISCARD**. Revert immediately
   - 3 total skips → **HALT** with summary
 - Revert: always `git revert HEAD --no-edit`. Never `reset --hard`.
 - Cap: 20 iterations default. Print progress every 5 iterations.
@@ -99,7 +99,7 @@ Partial match → `GH_PARTIAL` ambiguity flag.
 
 ## Hand-off & Integration
 
-- `debug` upstream: unclear root cause — debug findings become the fix target.
+- `debug` upstream: unclear root cause. Debug findings become the fix target.
 - `test-driven` partner: failing test ↔ green flip; delegate RED→GREEN cycle.
 - `proceed` complement: planned change without failure → `proceed`; failure-driven → `fix`.
 - `resolve` / `review` as findings sources: their output paths feed findings mode.
@@ -117,7 +117,7 @@ Partial match → `GH_PARTIAL` ambiguity flag.
 
 - Never `@ts-ignore` / `# type: ignore` / `// eslint-disable` to silence errors.
 - Never delete tests to make them pass.
-- ONE fix per iteration — no "while I'm here" changes.
+- ONE fix per iteration. No "while I'm here" changes.
 - No `git reset --hard`.
 - Recursion guard: `--mode <X>` bypasses classifier entirely; `gh-fix-ci` re-entering as `fix --mode verifier-failure` cannot loop back into `gh-fix-ci`.
 

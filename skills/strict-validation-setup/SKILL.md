@@ -6,8 +6,8 @@ disable-model-invocation: true
 
 The skill ships two distinct concerns split by *temporal phase*:
 
-- **Project-stable** — strict-mode tooling config + AGENTS.md authoring (defer the AGENTS.md content to `init`; this skill only ensures it exists and references the per-task pattern).
-- **Task-ephemeral** — `.agent-tasks/<task-id>/GOALS.md` per task plus failing-test scaffolding co-located with it.
+- **Project-stable**: strict-mode tooling config + AGENTS.md authoring (defer the AGENTS.md content to `init`; this skill only ensures it exists and references the per-task pattern).
+- **Task-ephemeral**: `.agent-tasks/<task-id>/GOALS.md` per task plus failing-test scaffolding co-located with it.
 
 These never mix. Task goals never go into AGENTS.md (would leak as project policy). Project invariants never go into per-task GOALS.md (would duplicate per task and drift).
 
@@ -16,14 +16,14 @@ These never mix. Task goals never go into AGENTS.md (would leak as project polic
 | Skill                       | Owns                                                                             |
 | --------------------------- | -------------------------------------------------------------------------------- |
 | **`strict-validation-setup`** | Strict-mode tooling configs + per-task `GOALS.md` convention (this file)        |
-| `init`                      | AGENTS.md authoring (project-stable) — defer to it for content                  |
-| `test-driven`               | TDD discipline (RED → GREEN → REFACTOR) — defer for test-writing methodology   |
-| `type-driven`               | Refined-type / typestate specs — defer for type-system invariants               |
-| `design-by-contract`        | Pre/post conditions, runtime contracts — defer for assertion patterns           |
-| `validation-first`          | State-machine specs (typestate / FSM / actor) — defer for FSM modeling         |
-| `tests-adversarial`         | Assumption-violation tests — defer for the adversarial test pattern             |
-| `setup-pre-commit`          | Commit-hook installation — defer for hook tooling                               |
-| `setup-gitignore`           | Gitignore patterns — defer for ignore-file composition                          |
+| `init`                      | AGENTS.md authoring (project-stable): defer to it for content                  |
+| `test-driven`               | TDD discipline (RED → GREEN → REFACTOR): defer for test-writing methodology   |
+| `type-driven`               | Refined-type / typestate specs: defer for type-system invariants               |
+| `design-by-contract`        | Pre/post conditions, runtime contracts: defer for assertion patterns           |
+| `validation-first`          | State-machine specs (typestate / FSM / actor): defer for FSM modeling         |
+| `tests-adversarial`         | Assumption-violation tests: defer for the adversarial test pattern             |
+| `setup-pre-commit`          | Commit-hook installation: defer for hook tooling                               |
+| `setup-gitignore`           | Gitignore patterns: defer for ignore-file composition                          |
 
 Duplication with the existing skills was audited and accepted; bodies cite each rather than re-doing the work. When the surface narrows to a single concern above, defer.
 
@@ -41,12 +41,12 @@ Languages with bundled references (Q5-approved set; framework specifics deferred
 - `references/go.md`
 - `references/ocaml.md`
 
-Languages noted but not yet bundled — write deferred per Q8 rollback path: C++, Java, Kotlin, plus framework specifics (Spring Boot, Nest, React-strict). When the user invokes the skill on one of these, surface the gap explicitly and propose authoring the reference now or escalating to a follow-up commit.
+Languages noted but not yet bundled are deferred per Q8 rollback path: C++, Java, Kotlin, plus framework specifics (Spring Boot, Nest, React-strict). When the user invokes the skill on one of these, surface the gap explicitly and propose authoring the reference now or escalating to a follow-up commit.
 
 ### 2. AGENTS.md and per-task GOALS.md split (load-bearing)
 
-- **AGENTS.md** — project-wide, stable across sessions and tasks. Contains: build/test commands, banned tooling, conventions, contract patterns, and the *location pattern* of per-task goal files (`.agent-tasks/<task-id>/GOALS.md` or whatever path the project chooses). **Defer authoring the AGENTS.md content to `init`** — this skill only ensures the file exists and contains the goal-location pointer.
-- **`.agent-tasks/<task-id>/GOALS.md`** — task-ephemeral. Contains: the user's goal in prose, the success criteria the loop checks against, links to the failing tests in `.agent-tasks/<task-id>/tests/`. Cleaned up after the task merges.
+- **AGENTS.md**: project-wide, stable across sessions and tasks. Contains: build/test commands, banned tooling, conventions, contract patterns, and the *location pattern* of per-task goal files (`.agent-tasks/<task-id>/GOALS.md` or whatever path the project chooses). **Defer authoring the AGENTS.md content to `init`**. This skill only ensures the file exists and contains the goal-location pointer.
+- **`.agent-tasks/<task-id>/GOALS.md`**: task-ephemeral. Contains: the user's goal in prose, the success criteria the loop checks against, links to the failing tests in `.agent-tasks/<task-id>/tests/`. Cleaned up after the task merges.
 
 The architectural rule: task A's goals never appear in AGENTS.md. AGENTS.md never contains task-specific success criteria. If the line blurs, surface and refuse.
 
@@ -56,9 +56,9 @@ For the current task, translate the user's stated goal into failing tests / cont
 
 Three sub-shapes, decide while drafting per task:
 
-- **Interactive** — ask the user what success means, stub failing tests, hand back for review before agent loop begins.
-- **Template-driven** — language-specific test stubs in `references/` (per-ecosystem). Pick the matching language template; let the user fill specifics.
-- **Hybrid** — start template-driven; promote to interactive when the user's goal does not fit the template.
+- **Interactive**: ask the user what success means, stub failing tests, hand back for review before agent loop begins.
+- **Template-driven**: language-specific test stubs in `references/` (per-ecosystem). Pick the matching language template; let the user fill specifics.
+- **Hybrid**: start template-driven; promote to interactive when the user's goal does not fit the template.
 
 The term *verifiable goals* (Devin Agents101, Jun 2025) is preferred over *TDD-for-agents* (non-idiomatic in 2026 production stacks).
 

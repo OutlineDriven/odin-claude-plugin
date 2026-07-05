@@ -39,16 +39,16 @@ For each "yes" / "unclear" answer, file a finding with severity and remediation 
 
 ## OWASP Top 10 (2021) Walkthrough
 
-1. **Broken Access Control** — `git grep -n -C 3 'authorize\|@PreAuthorize\|require_role'` then trace policy.
-2. **Cryptographic Failures** — `git grep -n -E 'MD5|SHA1|DES|Random\(\)'` for weak primitives. Use `-E` (extended regex) for alternation; `-F` (fixed-string) breaks the pipe-as-OR. Add ecosystem patterns as needed: `Math.random`, `secrets.choice`, `Mersenne` constants.
-3. **Injection** — `ast-grep` patterns for unparameterized queries / shell concat / template eval.
-4. **Insecure Design** — threat model walk; cross-check STRIDE.
-5. **Security Misconfiguration** — TLS / CORS / CSP / cookie flags / debug toggles.
-6. **Vulnerable & Outdated Components** — language-family CVE scanner.
-7. **Identification & Authentication Failures** — token TTL, refresh, session fixation, MFA.
-8. **Software & Data Integrity Failures** — lockfile pinned; signature-verified artifacts; CI provenance.
-9. **Security Logging & Monitoring Failures** — audit log coverage; alert on auth-fail / privilege-escalation.
-10. **Server-Side Request Forgery** — egress allowlist; SSRF guard on URL inputs.
+1. **Broken Access Control**: `git grep -n -C 3 'authorize\|@PreAuthorize\|require_role'` then trace policy.
+2. **Cryptographic Failures**: `git grep -n -E 'MD5|SHA1|DES|Random\(\)'` for weak primitives. Use `-E` (extended regex) for alternation; `-F` (fixed-string) breaks the pipe-as-OR. Add ecosystem patterns as needed: `Math.random`, `secrets.choice`, `Mersenne` constants.
+3. **Injection**: `ast-grep` patterns for unparameterized queries / shell concat / template eval.
+4. **Insecure Design**: threat model walk; cross-check STRIDE.
+5. **Security Misconfiguration**: TLS / CORS / CSP / cookie flags / debug toggles.
+6. **Vulnerable & Outdated Components**: language-family CVE scanner.
+7. **Identification & Authentication Failures**: token TTL, refresh, session fixation, MFA.
+8. **Software & Data Integrity Failures**: lockfile pinned; signature-verified artifacts; CI provenance.
+9. **Security Logging & Monitoring Failures**: audit log coverage; alert on auth-fail / privilege-escalation.
+10. **Server-Side Request Forgery**: egress allowlist; SSRF guard on URL inputs.
 
 ## Parallel Dep-Audit Tooling
 
@@ -66,13 +66,13 @@ Use `fd -e <ext>` (not `find`). Use `git grep -n -F 'literal'` (not `grep`). Use
 ## Constitutional Rules
 
 1. **Default deny**.
-2. **Validate at the trust boundary** — schema-validate every input.
+2. **Validate at the trust boundary**: schema-validate every input.
 3. **Never roll your own crypto**.
-4. **No secrets in source** — vault-only; enforce via `gitleaks`.
-5. **Pin and verify** — lockfiles checked in, integrity hashes enforced.
-6. **Log security events** — every AuthN/AuthZ outcome.
-7. **Severity is a contract** — Critical/high block merge.
+4. **No secrets in source**: vault-only; enforce via `gitleaks`.
+5. **Pin and verify**: lockfiles checked in, integrity hashes enforced.
+6. **Log security events**: every AuthN/AuthZ outcome.
+7. **Severity is a contract**: Critical/high block merge.
 
 ## Disambiguation
 
-- **vs `security-hardening`** — `security-hardening` applies OWASP prevention patterns at build time, while code is being written. `security-review` is the audit/assessment pass — STRIDE threat modeling, OWASP walkthrough, dependency audit — run against code that already exists.
+- **vs `security-hardening`**: `security-hardening` applies OWASP prevention patterns at build time, while code is being written. `security-review` is the audit/assessment pass (STRIDE threat modeling, OWASP walkthrough, dependency audit) run against code that already exists.
