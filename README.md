@@ -65,7 +65,7 @@ Before any non-trivial implementation:
 4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
 5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
 
-## Skills (88 total)
+## Skills (89 total)
 
 Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
 
@@ -150,7 +150,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `improve-architecture` - Surface deepening refactors that turn shallow modules into deep ones
 - `deprecate-and-migrate` - Plan and execute deprecation and migration of old systems, APIs, or features
 
-### GitHub Integration (12 skills)
+### GitHub Integration (13 skills)
 
 - `pr-review` - Review code on a GitHub PR using `gh`
 - `pr-merge-base` - Merge PRs into the base branch with queue-like sequencing
@@ -158,6 +158,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `gh-fix-ci` - Inspect failing CI checks, pull logs, propose fixes
 - `commit` - Create a git commit with a clear, value-communication message
 - `commit-push` - Commit working-tree changes and push to the remote — no PR
+- `commit-push-current` - Commit and push to the current branch — no branch creation, no branch switch, no PR
 - `commit-push-pr` - Commit, push, and open a PR
 - `atomic-issues-prs` - Publish a change-set as atomic GitHub issues or PRs
 - `github-triage` - Triage GitHub issues through a configurable label-based state machine
