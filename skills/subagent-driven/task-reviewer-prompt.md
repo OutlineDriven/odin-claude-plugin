@@ -1,15 +1,16 @@
 # Task Reviewer Prompt Template
 
-Fill this when dispatching a task reviewer. The reviewer reads the task's diff
-once and returns two verdicts: spec compliance and code quality. This is the
-loop's gate — a fresh `general-purpose` subagent, self-contained, no external
-named agent required.
+Fill this template when dispatching a task reviewer. One task per dispatch — a
+fresh tailored variant of subagent, self-contained. The reviewer sees only what
+you put here; it does not inherit your session, the plan file, or prior
+workers' context. The reviewer reads the task's diff once and returns two
+verdicts: spec compliance and code quality. This is the loop's gate.
 
 **Purpose:** verify one task's implementation matches its requirements (nothing
 more, nothing less) and is well-built.
 
 ```
-Subagent (general-purpose):
+Subagent:
   description: "Review Task N (spec + quality)"
   model: [MODEL — REQUIRED: pick per SKILL.md Model Selection. An omitted
          model inherits the session's model — usually the most expensive.]

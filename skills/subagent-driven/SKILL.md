@@ -33,12 +33,6 @@ Work decomposes into ordered tasks with clean boundaries and you want each
 delegated, audited, and committed before the next starts: a written plan, a
 checklist, "execute this with subagents."
 
-Not this skill:
-- Independent fan-out with a single compose-and-review at the end → `parallel-launch`. That skill runs concurrent agents on separate concerns and reviews once; this one runs a chain with a gate *between* tasks (parallel or not; see Parallel Dispatch).
-- Review and fix an *existing* diff until clean → `review-fix-grill-loop`. That grills a change-set you already have; this one *produces* the change-set task by task.
-- You implement the slices yourself, no delegation → `incremental`.
-- A single atomic change → edit it directly. Don't dispatch a worker for a one-liner.
-
 ## Pre-Flight Plan Review
 
 Before Task 1, scan the plan once for self-conflicts: tasks that contradict
@@ -59,9 +53,10 @@ For each task, in order:
 2. **Brief.** Run `scripts/task-brief PLAN_FILE N`. It extracts the task's
    full text to a uniquely named file and prints the path. The brief is the
    single source of requirements; the dispatch only frames it.
-3. **Dispatch one fresh implementer.** Spawn a new `general-purpose` subagent
-   with `implementer-prompt.md` filled in. Fresh per task: no carried context,
-   no resumed worker. Record the BASE commit (current HEAD) before dispatching.
+3. **Dispatch one fresh implementer.** Spawn a fresh subagent with
+   `implementer-prompt.md` filled in. Fresh per task: no carried context,
+   no resumed worker. Let the agent select the appropriate specialized
+   subagent for the task. Record the BASE commit (current HEAD) before dispatching.
    You need it for the review package.
 4. **Worker implements, tests, commits, self-reviews.** The worker makes the
    change, runs the verification command from its brief, commits one concern,
@@ -72,9 +67,10 @@ For each task, in order:
    never enters your context, and reports that file's path. Use the BASE you
    recorded. Never `HEAD~1`, which silently drops all but the last commit of a
    multi-commit task.
-6. **Audit before proceeding.** Dispatch a fresh `general-purpose` reviewer with
+6. **Audit before proceeding.** Dispatch a fresh reviewer with
    `task-reviewer-prompt.md`, handing it the brief path, the report path, the
-   diff-package path, and the verbatim Global Constraints. The audit checks
+   diff-package path, and the verbatim Global Constraints. Let the agent select
+   the appropriate specialized subagent for the review. The audit checks
    spec compliance (does what the brief asked, nothing more, nothing less) and
    code quality (clean separation, no dangling references, follows existing
    patterns). Worker output is trusted after this audit, not before.
@@ -83,12 +79,6 @@ For each task, in order:
    a fix worker with the complete findings list, then re-review. Do not start
    the next task on an unaudited or suspect result. If the audit cannot be
    cleared, abort the chain rather than build on it.
-
-Commits carry a conventional prefix and, in repos that use ODIN's `Op:`
-trailer convention, an `Op: compress|extend|correct|purge` line (`correct`
-adds `Restores:`, `purge` adds `Removes:`). That trailer is commit metadata.
-State it in the Commit field of the brief, don't turn it into a separate
-gating ceremony on top of spec compliance and code quality.
 
 ## Dispatch Brief
 
@@ -101,8 +91,7 @@ point to everything larger.
 - **Constraints**: patterns to follow, interfaces to preserve, what is out of scope.
 - **Verification**: the exact command that proves the task works (test,
   typecheck, build, lint). The worker runs it before reporting done.
-- **Commit**: one concern, one commit, conventional prefix (+ `Op:` trailer
-  where the repo convention calls for one).
+- **Commit**: one concern, one commit, conventional prefix
 
 A dispatch describes one task, not the session's history. Never paste
 accumulated prior-task summaries ("state after Tasks 1-3") into later
@@ -177,7 +166,8 @@ review; return to the implementer, then re-review.
 ## Constructing Reviewer Prompts
 
 The loop's gate is the local `task-reviewer-prompt.md` dispatched to a fresh
-`general-purpose` subagent. There is no hard dependency on any external named agent.
+subagent. Let the agent select the appropriate specialized subagent for the review.
+There is no hard dependency on any external named agent.
 The gate stays honest only if you don't pre-cook it:
 
 - **Don't pre-judge findings.** Never tell a reviewer to ignore or not flag an
@@ -260,8 +250,7 @@ After all tasks land:
    accumulated so it can triage what must be fixed before merge.
 2. Final-review findings → ONE fix worker with the complete list, then re-review.
 3. **Ship via ODIN's atomic path, not a single squash.** Sort the work into
-   atomic commits in detached HEAD, each carrying its `Op:` trailer where the
-   repo convention calls for one. Publish with git-branchless `submit`, or run
+   atomic commits in detached HEAD. Publish with git-branchless `submit`, or run
    `commit-push`. Do not invent a branch-finishing or code-review-request flow
    outside this path.
 
@@ -328,8 +317,7 @@ Reviewer: Spec Compliance ✅. Code Quality ✅. Task quality: Approved.
  most capable model]
 Final reviewer: all requirements met, Minor findings triaged, ready to ship.
 
-[Ship via the ODIN atomic path — atomic commits with Op: trailers, not a
- squash]
+[Ship via the ODIN atomic path — atomic commits, not a squash]
 ```
 
 ## Red Flags
