@@ -22,8 +22,6 @@ This is an in-flight posture for producing new code. It is not a post-hoc pass: 
 
 **When NOT to use:**
 
-- Compressing or reviewing an existing diff: that is `simplify`
-- Cleaning up dead code while passing through: that is `cleanup-codebase`
 - Exploratory spikes explicitly framed as throwaway; doctrine gates slow discovery, so apply them when the keeper is written
 - The ask itself demands breadth (a full lifecycle feature, a migration): the doctrine still applies per-addition, but the null solution is scoped to the ask, not to zero
 
@@ -52,12 +50,6 @@ Every departure from the null solution names the demonstrated need it serves: a 
 ### Step 3: GATE: Enforce precedence and rejection grounds before writing
 
 For each named need, satisfy it in precedence order. **Delete** code that causes the gap, then **edit** existing code, and only then **add** new code. Adding is the last resort, not the default motion.
-
-Before writing an addition, check it against the three rejection grounds as a pre-write gate:
-
-- **Excess**: surface beyond what the need requires. Extra parameters, config for values that never vary, generality with one caller.
-- **Graft**: bolting new code where structural fit was never established. A helper written before grepping for the existing one, a special case instead of fixing the general path.
-- **Sprawl**: structure without functional cause. Wrappers that forward without removing coupling, layers that exist to look organized.
 
 A planned addition that trips a ground is not written. Rework the shape until it passes or the need dissolves.
 
