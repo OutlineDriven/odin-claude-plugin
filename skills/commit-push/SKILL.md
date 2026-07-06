@@ -68,8 +68,8 @@ EOF
 
 Run `git remote` to list configured remotes.
 
-- **`origin` not in the list:** this covers both a true local-only repo (empty output) and the rarer case where other remotes exist but none is named `origin`. Either way, do NOT attempt to push, and do NOT add, invent, or guess a remote to target. Report "local-only, no remote, commits only" (or, if non-`origin` remotes exist, that no `origin` remote is configured) and stop. Skip the push attempt entirely rather than attempting and failing. This is what keeps the step safe to run unattended.
-- **`origin` is in the list:** push:
+- **`origin` not in the list** — covers both a true local-only repo (empty output) and the rarer case where other remotes exist but none is named `origin`. Either way, do NOT attempt to push, and do NOT add, invent, or guess a remote to target. Report "local-only, no remote — commits only" (or, if non-`origin` remotes exist, that no `origin` remote is configured) and stop. Skip the push attempt entirely rather than attempting and failing — this is what keeps the step safe to run unattended.
+- **`origin` is in the list** — push:
 
 ```bash
 git push -u origin HEAD
