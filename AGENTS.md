@@ -8,9 +8,9 @@ Edit `AGENTS.md` only; `CLAUDE.md` is a symlink to it. Never `write` CLAUDE.md d
 
 Treat `system-prompt-baseline.md` as the single source of truth for the agent's persona/doctrine: make every doctrine change there first, never in an output-style file alone.
 
-`output-styles/{axiom-mode,builder,duet,linus,benchmark}.md` are persona files Claude Code loads as system instructions. Each is a style-specific lead `<role>` block plus voice sections, followed by the canonical baseline embedded at the tail. `odin.md` has no separate persona voice — its identity IS the charter — so its only `<role>` is the charter. Files are self-contained — the loader does not resolve refs.
+`output-styles/{axiom-mode,builder,duet,linus,odin,benchmark}.md` are persona files Claude Code loads as system instructions. Each is a style-specific lead `<role>` block plus voice sections, followed by the canonical baseline embedded at the tail. Files are self-contained — the loader does not resolve refs.
 
-The embedded baseline begins at the **charter `<role>`** — the `<role>` block whose body is `You are a minimal-output entropy manipulator …`. That block is the cascade anchor (the SECOND `<role>` in files with a lead persona voice; the FIRST/only `<role>` in `system-prompt-baseline.md` and `odin.md`).
+The embedded baseline begins at the **charter `<role>`** — the `<role>` block whose body is `You are a minimal-output entropy manipulator …`. That block is the cascade anchor (the SECOND `<role>` in every output-style file, which each carry a lead persona voice `<role>` first; the FIRST/only `<role>` in `system-prompt-baseline.md`).
 
 **Always propagate `system-prompt-baseline.md` changes to `output-styles/*.md` files.** Every edit to the canonical (`system-prompt-baseline.md`) MUST land as a single atomic commit that ALSO updates the embedded cascade in EVERY output-style file (`{axiom-mode,builder,duet,linus,odin}.md` AND `benchmark.md`). Edit at-once, never separately. Per-file commits and per-style sequential agents are the anti-pattern; one commit, one operation, one diff scope. The embedded baseline span MUST be byte-identical to `system-prompt-baseline.md` from the charter `<role>` onward; drift is a CI-less invariant enforced by review.
 

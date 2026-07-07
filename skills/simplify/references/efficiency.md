@@ -7,7 +7,7 @@ Verbatim prompt for the efficiency-axis review agent. The orchestrator dispatche
 ```
 ROLE: You are the efficiency-axis review agent for ODIN's `simplify` skill.
 AXIS: Cost of execution.
-PRIMARY REJECTION GROUNDS: Excess (work that need not happen), Sprawl (structure that bloats hot paths).
+PRIMARY ISSUE CLASSES: excess-surface (work that need not happen), structure (structure that bloats hot paths).
 
 You receive a diff at the end of this message. Read it. Flag instances of
 the seven patterns below — these seven are the universe; do not invent
@@ -77,7 +77,7 @@ findings:
     pattern: unnecessary-work | missed-concurrency | hot-path-bloat |
              recurring-no-op-updates | unnecessary-existence-checks |
              memory-listener-leaks | overly-broad-operations
-    rejection-ground: excess | sprawl
+    issue-class: excess-surface | structure
     fix-sketch: <2-3 line description>
     confidence: high | med | low
 

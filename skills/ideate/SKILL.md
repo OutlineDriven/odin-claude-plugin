@@ -7,7 +7,7 @@ metadata:
 
 # Ideate: grounded divergent generation behind a reject-by-default gate
 
-`ideate` turns a vague subject into a bounded set of candidate directions that survived critique, with the rejected candidates kept and explained rather than dropped. Flow: ground the subject in the real codebase (dispatch-first), generate many candidates across parallel generators, critique all, then write the survivors plus the rejection rationale for the losers. It writes one surface by default: the operating repo's `docs/ideation/<slug>.md`, markdown; always the canonical surface. The opt-in `format:html` flag additionally renders a human-reading HTML view derived from that markdown (`references/html-rendering.md`); it never replaces the markdown and never changes the default output. Idea selection is reject-by-default. A candidate earns a place by surviving the critique, never by default.
+`ideate` turns a vague subject into a bounded set of candidate directions that survived critique, with the rejected candidates kept and explained rather than dropped. Flow: ground the subject in the real codebase, generate many candidates across parallel generators, critique all, then write the survivors plus the rejection rationale for the losers. It writes one surface by default: the operating repo's `docs/ideation/<slug>.md`, markdown; always the canonical surface. The opt-in `format:html` flag additionally renders a human-reading HTML view derived from that markdown (`references/html-rendering.md`); it never replaces the markdown and never changes the default output. Idea selection is reject-by-default. A candidate earns a place by surviving the critique, never by default.
 
 `Op:` of an ideate run is `extend`. A new ideation doc is a load-bearing capability added to the repo's decision record.
 
@@ -51,7 +51,7 @@ Don't bulk-load at start. Read at the step that needs it; pass the relevant cont
 
 ## Workflow
 
-### Phase 1: Ground the scan (dispatch-first)
+### Phase 1: Ground the scan
 
 Ungrounded ideation is fabrication. Before generating, ground the subject in the real codebase. Escalate Explore agents by scope: **1** for a single known concern, **3** for multiple concerns or unknown scope, **5** for a cross-module or architectural survey. Auto-skip to direct reads only for a single file under 50 LOC. **Seed the grounding scope with `STRATEGY.md`:** the grounding Explore agent(s) read it (when present at the repo root) as optional upstream grounding so candidates stay on-anchor, and fold its diagnosis/guiding-policy into the returned summary; if absent, note that in one line and proceed. Strategy grounding never blocks. (In an auto-skip run, the orchestrator reads it directly.)
 
@@ -77,7 +77,7 @@ Dispatch a Reviewer subagent to audit the critic's verdicts against completeness
 2. `mkdir -p docs/ideation/`, then write `docs/ideation/<slug>.md`.
 3. **Read the file back** to confirm it landed as intended.
 4. **Opt-in HTML view (only if the run carries `format:html`).** Read `references/html-rendering.md` and render `docs/ideation/<slug>.html` as a self-contained view derived from the markdown read back in step 3; read it back and verify content parity with the markdown. Default (no flag) runs skip this step; the output is markdown only.
-5. **Gated auto-commit**: stage ONLY what this run wrote: `git add docs/ideation/<slug>.md` (and `docs/ideation/<slug>.html` when `format:html`). **Never `git add -A`.** Commit with an `Op: extend` trailer. Read-back precedes staging.
+5. **Gated auto-commit**: stage ONLY what this run wrote: `git add docs/ideation/<slug>.md` (and `docs/ideation/<slug>.html` when `format:html`). **Never `git add -A`.** Read-back precedes staging.
 
 ### Phase 6: Route onward to askme
 
@@ -85,7 +85,6 @@ Hand the survivors to `askme` to clarify intent on the chosen direction(s) befor
 
 ## Constitutional Rules (Non-Negotiable)
 
-1. **Op-cell is `extend`.** Every commit body carries `Op: extend`.
 2. **No ungrounded ideation.** Phase 1 is a precondition, not optional. Every candidate cites a basis (`file:line` or `external:<source>`); a candidate with no basis is dropped before critique.
 3. **Reject by default.** The critique rejects every candidate unless it earns survival, and every loser carries a recorded rejection rationale. Silent drops and optimistic ranking are both rejected. Ranking buries weak ideas; the gate cuts them and says why.
 4. **The Reviewer audit is the single adjudication authority.** The orchestrator applies the Reviewer's survivor set and rejection rationale; it neither rescues rejected candidates nor re-litigates accepted ones.
@@ -112,7 +111,7 @@ Hand the survivors to `askme` to clarify intent on the chosen direction(s) befor
 
 ## Commits
 
-One ideation doc per commit, `Op: extend` trailer in the body (a load-bearing addition to the repo's decision record). Stage only what `ideate` wrote: `git add docs/ideation/<slug>.md` (and `docs/ideation/<slug>.html` when `format:html`), never other dirty files, never `git add -A`. Read each file back before staging. Publish by the operating repo's normal flow.
+One ideation doc per commit (a load-bearing addition to the repo's decision record). Stage only what `ideate` wrote: `git add docs/ideation/<slug>.md` (and `docs/ideation/<slug>.html` when `format:html`), never other dirty files, never `git add -A`. Read each file back before staging. Publish by the operating repo's normal flow.
 
 ## Anti-patterns
 

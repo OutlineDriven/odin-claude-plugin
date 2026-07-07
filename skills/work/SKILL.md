@@ -10,7 +10,7 @@ metadata:
 
 Execute a plan or prompt systematically. Ship complete features by understanding requirements quickly, following existing patterns, and maintaining quality.
 
-`Op: extend`: this skill adds structured plan handling, execution-engine selection, and a shipping tail to plain implementation.
+This skill adds structured plan handling, execution-engine selection, and a shipping tail to plain implementation.
 
 ## Input document
 

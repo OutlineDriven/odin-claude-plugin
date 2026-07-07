@@ -6,7 +6,7 @@ argument-hint: "[optional: ref to isolate, or new-branch-name]"
 
 # Worktree Isolation
 
-`Op: extend`: adds harness-aware git worktree setup for isolated branches and refs.
+Adds harness-aware git worktree setup for isolated branches and refs.
 
 Ensure the current work happens in an isolated workspace without disturbing the main checkout. Most harnesses create a worktree by default at session start, so the common case is that isolation already exists. Detect that first and do not create a redundant one.
 

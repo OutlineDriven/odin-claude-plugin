@@ -64,7 +64,7 @@ Skip analyzers with no files. For `--focus`, skip all non-focused analyzers even
    ```
 5. **Deduplicate.** Stable key: `analyzer|file|line|check|normalized evidence`. If two analyzers report the same underlying defect, keep the higher certainty; if equal, keep the one with narrower file/line evidence.
 6. **Aggregate.** Sort by `certainty`: HIGH → MEDIUM → LOW, then analyzer, file, line. Count totals by analyzer and certainty.
-7. **Report.** Default output includes executive summary, all HIGH findings, MEDIUM/LOW counts, and HIGH auto-fixable list. With `--verbose`, include MEDIUM and LOW sections with rejection-ground labels: **Excess**, **Graft**, **Sprawl**, or **Correctness**.
+7. **Report.** Default output includes executive summary, all HIGH findings, MEDIUM/LOW counts, and HIGH auto-fixable list. With `--verbose`, include MEDIUM and LOW sections with issue labels: **excess surface**, **duplication**, **structure**, or **correctness**.
 8. **Apply guarded fixes.** Only when `--apply` is present:
    - filter to `certainty === HIGH && autoFix === true`;
    - group by analyzer;

@@ -42,8 +42,8 @@ Subagent:
     1. Implement exactly what the task specifies. Nothing extra.
     2. Write tests (TDD if the task says so).
     3. Run the verification command and confirm it passes.
-    4. Commit your work. One concern, one commit. Conventional prefix, and an
-       `Op: [compress|extend|correct|purge]` trailer in the body. A `correct`
+    4. Commit your work. One concern, one commit. Conventional prefix.
+       Nothing else in the body is required.
 
     5. Self-review (below).
     6. Report back.
@@ -112,7 +112,7 @@ Subagent:
     - TDD evidence (if TDD was required): RED (command, failing output, why
       the failure was expected) and GREEN (command, passing output)
     - Files changed
-    - Self-review findings (including any rejection-ground risk you weighed)
+    - Self-review findings
     - Concerns
 
     Then return ONLY (under 15 lines — detail lives in the report file):

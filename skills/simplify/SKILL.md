@@ -7,7 +7,7 @@ metadata:
 
 # Simplify: axis-decomposed compression pass on a diff
 
-A deliberate `compress` op invoked on a specific change-set. Decompose simplification into three axes that fail independently and so can be reviewed independently: **reuse** (what already exists), **quality** (shape of the new code), **efficiency** (cost of the new code). Three parallel read-only review agents, one per axis, emit findings against the same diff; the orchestrator composes, audits, and applies fixes one rejection-ground class per atomic commit.
+A deliberate simplification pass invoked on a specific change-set. Decompose simplification into three axes that fail independently and so can be reviewed independently: **reuse** (what already exists), **quality** (shape of the new code), **efficiency** (cost of the new code). Three parallel read-only review agents, one per axis, emit findings against the same diff; the orchestrator composes, audits, and applies fixes one issue-class per atomic commit.
 
 **Reuse axis** detects new code written where a utility already exists. **Quality axis** detects unnecessary surface (params, state, comments-of-what) and structure without functional cause (wrappers, ladders, copy-paste variants). **Efficiency axis** detects work that need not happen and structure that bloats hot paths. Behavior is preserved, entropy is reduced.
 
@@ -56,14 +56,14 @@ A deliberate `compress` op invoked on a specific change-set. Decompose simplific
 
    If there is no git context at all (no `.git/`), or HEAD is unborn per Check A, fall back to user-named files supplied in the invocation. Empty after all valid resolutions → exit 11. See `references/orchestration.md` for the exact resolution shell snippet and the explicit-base override syntax.
 2. **Phase 2: Dispatch three review agents in one message.** Single tool-call message containing three Agent invocations. Each agent receives `<axis-prompt from references/> + "\n\n---\n\nDIFF:\n" + <captured diff>`. Agents are read-only; no edits, disjoint axes, independence asserted in the spawn message. See `references/orchestration.md` for the concrete dispatch shape.
-3. **Phase 3: Audit, then apply.** Wait for all three. Aggregate findings by `{axis, file, line, rejection-ground}`; dedupe identical cross-axis findings. Dispatch a Reviewer agent to audit the composed list against completeness / consistency / accuracy / scope; the Reviewer's output is the **validated survivor set**. The orchestrator applies the survivors directly, one rejection-ground class per atomic commit (`Op: compress` trailer), and drops non-survivors without comment. No re-adjudication in either direction. Re-run repo-native tests after each commit; on red, auto-revert via `git revert HEAD --no-edit`.
+3. **Phase 3: Audit, then apply.** Wait for all three. Aggregate findings by `{axis, file, line, issue-class}`; dedupe identical cross-axis findings. Dispatch a Reviewer agent to audit the composed list against completeness / consistency / accuracy / scope; the Reviewer's output is the **validated survivor set**. The orchestrator applies the survivors directly, one issue-class per atomic commit, and drops non-survivors without comment. No re-adjudication in either direction. Re-run repo-native tests after each commit; on red, auto-revert via `git revert HEAD --no-edit`.
 
 ## Constitutional Rules (Non-Negotiable)
 
-1. **Op-cell is `compress`. Behavior preservation is a gate, not a guideline.** A test regression between pre- and post-simplify is an automatic `git revert HEAD --no-edit`. No `# type: ignore`, no disabling of guards to make tests pass.
+1. **Behavior preservation is a gate, not a guideline.** A test regression between pre- and post-simplify is an automatic `git revert HEAD --no-edit`. No `# type: ignore`, no disabling of guards to make tests pass.
 2. **The Reviewer audit is the single adjudication authority.** Review agents emit findings; the Reviewer validates them and returns the survivor set; the orchestrator applies the survivors and drops non-survivors without re-litigation in either direction. Arguing with the Reviewer's survivor set in prose is Excess.
-3. **Three agents in one tool-call message.** The reuse / quality / efficiency agents are independent by construction: same diff, disjoint rejection-ground subsets, read-only. Sequential dispatch is rejected at the validation gate.
-4. **One rejection-ground class per atomic commit.** Excess fixes, Graft fixes, and Sprawl fixes ride in separate commits per `~/.claude/claude/system-prompt-baseline.md` `<git>` charter "one concern per commit" rule. Mixed-class commits trip exit 15.
+3. **Three agents in one tool-call message.** The reuse / quality / efficiency agents are independent by construction: same diff, disjoint issue-class subsets, read-only. Sequential dispatch is rejected at the validation gate.
+4. **One issue-class per atomic commit.** Excess-surface fixes, duplication fixes, and structure fixes ride in separate commits per `~/.claude/claude/system-prompt-baseline.md` `<git>` charter "one concern per commit" rule. Mixed-class commits trip exit 15.
 5. **A simplify patch that introduces new bloat is a regression.** Post-commit, audit the patch itself for unneeded surface, duplicated logic, structure without cause, or a broken consumer contract. Any hit → revert and re-plan. If any rule here conflicts with `~/.claude/claude/system-prompt-baseline.md`, the baseline wins.
 
 ## Validation Gates
@@ -76,8 +76,7 @@ A deliberate `compress` op invoked on a specific change-set. Decompose simplific
 | Reviewer audit | Composed findings passed completeness / consistency / accuracy / scope check before fixes begin | Yes |
 | Behavior preserved | Repo-native tests green after every fix commit | Yes; auto-revert on red, exit 13 |
 | No new bloat | Post-fix audit shows no unneeded surface, duplicated logic, structure-without-cause, or broken contract introduced by the simplify patch | Yes; exit 14 |
-| Atomic per class | Each commit contains exactly one rejection-ground class (Excess OR Graft OR Sprawl) | Yes; exit 15 if mixed |
-| Op trailer present | Every commit body carries `Op: compress` | Yes |
+| Atomic per class | Each commit contains exactly one issue-class (excess-surface OR duplicate OR structure) | Yes; exit 15 if mixed |
 
 ## Exit Codes
 
@@ -88,7 +87,7 @@ A deliberate `compress` op invoked on a specific change-set. Decompose simplific
 | 12 | False-positive-only findings: agents emitted findings but none survived the Reviewer audit; report attached, no patch needed |
 | 13 | Behavior regression on a fix: tests went red; offending commit auto-reverted via `git revert HEAD --no-edit` |
 | 14 | New bloat introduced: post-fix audit caught unneeded surface / duplicated logic / structure-without-cause / broken contract in the simplify patch; reverted, re-plan required |
-| 15 | Mixed-concern commit: a fix commit bundled more than one rejection-ground class; must split before merging |
+| 15 | Mixed-concern commit: a fix commit bundled more than one issue-class; must split before merging |
 
 ## See also
 

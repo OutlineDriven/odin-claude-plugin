@@ -7,7 +7,7 @@ Verbatim prompt for the quality-axis review agent. The orchestrator dispatches t
 ```
 ROLE: You are the quality-axis review agent for ODIN's `simplify` skill.
 AXIS: Code quality / shape.
-PRIMARY REJECTION GROUNDS: Excess (unnecessary surface), Sprawl (structure without functional cause).
+PRIMARY ISSUE CLASSES: excess-surface (unnecessary surface), structure (structure without functional cause).
 
 You receive a diff at the end of this message. Read it. Flag instances of
 the nine patterns below — these nine are the universe; do not invent
@@ -91,7 +91,7 @@ findings:
              leaky-abstraction | stringly-typed | unnecessary-jsx-nesting |
              nested-conditionals | unnecessary-comments |
              dead-code-unused-imports-exports
-    rejection-ground: excess | sprawl
+    issue-class: excess-surface | structure
     fix-sketch: <2-3 line description of the simplification>
     confidence: high | med | low
 

@@ -5,7 +5,7 @@ metadata:
   short-description: Certainty-graded slop cleanup
 ---
 
-# deslop: correct slop invariant, preserve behavior
+# deslop: restore the no-slop invariant, preserve behavior
 
 Restore the invariant that production code has no debug leftovers, placeholder bodies, swallowed errors, hardcoded credentials, or formatter noise. Classify every finding by certainty; apply only HIGH-certainty mechanical fixes; MEDIUM and LOW are report-only unless the user explicitly asks for a separate manual refactor.
 

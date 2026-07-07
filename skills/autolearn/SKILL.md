@@ -160,7 +160,7 @@ Refresh also maintains the repo-root `CONCEPTS.md` when it falls in scope: re-de
 
 One learning per commit. ODIN `Op:` trailer in the body:
 
-- **New doc** → `Op: extend` (a load-bearing capability added to the doc set).
+- **New doc** — a load-bearing capability added to the doc set.
 
 `CONCEPTS.md` writes follow the same trailers: a new entry → `extend`; a refreshed definition → `correct`; a deleted or de-duplicated concept → `purge`.
 

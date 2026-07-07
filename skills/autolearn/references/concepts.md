@@ -51,8 +51,8 @@ In `mode:refresh [scope]`, maintain `CONCEPTS.md` alongside `docs/solutions/`. P
 | Outcome | When | Action |
 |---------|------|--------|
 | **Keep** | Definition still matches the code | No edit. Prefer no-write. |
-| **Refresh** | Meaning drifted; the term still exists | Rewrite the definition to current reality — `Op: correct`. |
-| **Consolidate** | Two entries name the same concept | Merge into the better name, retire the other as an alias — `Op: purge`. |
-| **Delete** | The concept's domain is gone from the code | Remove the entry — `Op: purge`. Age alone is never a reason. |
+| **Refresh** | Meaning drifted; the term still exists | Rewrite the definition to current reality. |
+| **Consolidate** | Two entries name the same concept | Merge into the better name, retire the other as an alias. |
+| **Delete** | The concept's domain is gone from the code | Remove the entry. Age alone is never a reason. |
 
 Match the glossary to the code, not the reverse. No cosmetic churn — typo and prose-polish edits are not refreshes. Headless: skip questions, apply safe refreshes/deletes, leave genuinely ambiguous concepts untouched and report them.

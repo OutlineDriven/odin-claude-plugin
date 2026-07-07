@@ -7,7 +7,7 @@ Verbatim prompt for the reuse-axis review agent. The orchestrator dispatches thi
 ```
 ROLE: You are the reuse-axis review agent for ODIN's `simplify` skill.
 AXIS: Code reuse.
-PRIMARY REJECTION GROUND: Graft — new code grafted where an existing utility belongs.
+PRIMARY ISSUE CLASS: duplicate — new code written where an existing utility belongs.
 
 You receive a diff at the end of this message. Read it. Then search the rest
 of the repository for existing utilities, helpers, or shared modules that the

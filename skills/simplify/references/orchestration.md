@@ -90,13 +90,13 @@ If the survivor set is empty after a non-empty raw findings list, exit 12.
 
 ### Fix sequencing
 
-Group survivors by `rejection-ground`. Apply in this order — one atomic commit per class:
+Group survivors by `issue-class`. Apply in this order — one atomic commit per class:
 
-1. **Graft commit** — apply all reuse-axis survivors (and any other axis survivors flagged `rejection-ground: graft`).
-2. **Excess commit** — apply all quality-axis + efficiency-axis survivors flagged `rejection-ground: excess`.
-3. **Sprawl commit** — apply all quality-axis + efficiency-axis survivors flagged `rejection-ground: sprawl`.
+1. **Duplicate commit** — apply all reuse-axis survivors (and any other axis survivors flagged `issue-class: duplicate`).
+2. **Excess-surface commit** — apply all quality-axis + efficiency-axis survivors flagged `issue-class: excess-surface`.
+3. **Structure commit** — apply all quality-axis + efficiency-axis survivors flagged `issue-class: structure`.
 
-Each commit body carries `Op: compress` per the SKILL.md "Op trailer present" gate. Commit message format follows the ODIN baseline `<git>` charter (`<type>(scope): <description>`); recommended:
+Commit message format follows the baseline `<git>` charter (`<type>(scope): <description>`); recommended:
 
 ```
 refactor(simplify): remove <class> from <scope>
@@ -104,7 +104,6 @@ refactor(simplify): remove <class> from <scope>
 <2-4 lines describing the survivors applied in this commit, citing
 file:line pairs>
 
-Op: compress
 ```
 
 A commit that would bundle survivors from more than one class is split before merge (exit 15).

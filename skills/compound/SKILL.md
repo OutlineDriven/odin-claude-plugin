@@ -7,7 +7,7 @@ metadata:
 
 # Compound: durable project knowledge
 
-`Op: extend` adds structured, in-repo documentation of solved problems and project-specific vocabulary.
+Adds structured, in-repo documentation of solved problems and project-specific vocabulary.
 
 `compound` writes exactly two surfaces:
 
@@ -70,7 +70,6 @@ Strip `mode:` tokens from `$ARGUMENTS`.
 
 One learning per commit. Body carries an ODIN `Op:` trailer:
 
-- New doc → `Op: extend`
 
 Stage only the surfaces `compound` wrote or edited.
 

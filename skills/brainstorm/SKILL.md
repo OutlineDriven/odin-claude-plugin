@@ -7,7 +7,7 @@ metadata:
 
 # Brainstorm a Feature or Improvement
 
-`Op: extend`. Every brainstorm artifact is a load-bearing addition to the repo's decision record.
+Every brainstorm artifact is a load-bearing addition to the repo's decision record.
 
 Brainstorming answers **WHAT** to build through collaborative dialogue. It precedes `/plan`, which enriches the same artifact with **HOW**.
 
@@ -285,7 +285,7 @@ Read `references/handoff.md` now, before presenting options. The option set, vis
 
 ## Constitutional Rules
 
-1. **Op-cell is `extend`.** Every durable brainstorm artifact is an addition to the repo's decision record.
+1. **Every durable brainstorm artifact is an addition to the repo's decision record.**
 2. **Markdown is canonical; HTML is opt-in.** The plan is written as `md` OR `html`, never both.
 3. **No implementation detail by default.** Libraries, schemas, endpoints, file layouts stay out unless the brainstorm is inherently technical.
 4. **One question at a time.** No stacked questions.

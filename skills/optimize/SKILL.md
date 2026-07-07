@@ -15,10 +15,10 @@ change**. It is not a verdict, report, or list of suggestions.
 Stop condition is context-dependent: budget-driven when a `--budget` or a named
 regression is the target; `compress` when removing wasted work with no stated budget; `extend` when
 the winning change adds an approximation or cache contract that changes observable semantics.
-Rejection grounds: **Excess** (micro-opt with no measured hotspot), **Graft** (optimization applied
+Avoid: **unmeasured micro-optimization** (no measured hotspot), **misplaced optimization** (applied
 before the hotspot is confirmed), **Sprawl** (added complexity that outweighs the earned speedup).
 
-`Op: extend` wraps the append-only run log, per-run crash-recovery markers, and stopping rules around the
+The skill wraps the append-only run log, per-run crash-recovery markers, and stopping rules around the
 locate→fan-out→benchmark→gate→commit loop with durability and bounded iteration; they do not change
 what the loop does.
 
@@ -264,7 +264,6 @@ Before:      <before_median> ± <stddev>
 After:       <after_integrated_median> ± <stddev>  (integrated, main tree)
 Win:         <integrated_speedup>× (<pct>%)
 
-Op: correct | compress | extend
 ```
 
 5. Clean up worktrees: `rm -rf .outline/optimize/<target>/agent-*`. The glob matches only the `agent-*` worktree dirs; `log.jsonl` sits beside them and is spared, staying the durable run record.
@@ -291,7 +290,6 @@ or a `Justfile` / `Makefile` target named `bench-guard`. The before-benchmark JS
 | Approximation confirmed | If any winner claims approximation, user confirmed contract change | Yes. Exit 14 if declined |
 | Adversarial gate cleared | Adversarial reviewer returned passed=true for the winner | Yes. Promote runner-up or exit 13 |
 | Tests green | Repo-native tests pass after apply, before commit | Yes. Discard patch with `git restore .` on red, exit 13 |
-| Op trailer present | Commit body carries Op: correct\|compress\|extend | Yes |
 | Worktrees cleaned | `.outline/optimize/<target>/agent-*` dirs removed | Yes |
 | Run state persisted | Baseline, each candidate (on return), gate verdicts, and a terminal `run` marker appended to `log.jsonl`; never rewritten | Yes |
 | Stopping rule evaluated | Promote-runner-up loop bounded by max-iters / max-wall-hours / marginal-speedup floor | Yes. Exit 16 if tripped before a gated winner |

@@ -81,7 +81,7 @@ Read the existing `STRATEGY.md` in full. Summarize current state in 3 to 5 lines
 3. Present the full draft in chat; offer one edit round.
 4. Write `$root/STRATEGY.md` (the path resolved in Phase 0).
 5. **Read the file back** to confirm it landed as intended.
-6. **Commit.** Stage only the resolved anchor: `git -C "$root" add STRATEGY.md`. Never `git add -A`. Commit with an `Op: extend` trailer. Publish by the operating repo's normal flow.
+6. **Commit.** Stage only the resolved anchor: `git -C "$root" add STRATEGY.md`. Never `git add -A`. Publish by the operating repo's normal flow.
 7. Note in one line that `plan` and `ideate` read it as optional grounding on their next run.
 
 ## Constitutional Rules (Non-Negotiable)

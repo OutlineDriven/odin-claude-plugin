@@ -40,7 +40,7 @@ Copy this checklist when applying the skill:
 ```
 NULL    — [ ] state the null solution before writing any code
 NEED    — [ ] name the demonstrated need for each departure from null
-GATE    — [ ] pass delete > edit > add and Excess/Graft/Sprawl before writing
+GATE    — [ ] pass delete > edit > add and the no-bloat checks before writing
 PROVE   — [ ] after writing, confirm removal of each element breaks a named need
 STOP    — [ ] stop at the literal ask
 ```
