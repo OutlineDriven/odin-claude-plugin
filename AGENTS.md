@@ -4,33 +4,22 @@ Primer for ODIN agents editing this submodule. Self-contained: every rule needed
 
 Edit `AGENTS.md` only; `CLAUDE.md` is a symlink to it. Never `write` CLAUDE.md directly — a write-replace severs the link and silently forks the two files.
 
-## Agent paradigm — Minimal-Loss Semantic Compressor/Extender/Purger
-
-Every patch is one of four operations:
-
-- **Compress** — preserve behavior + invariants; reduce entropy across control-flow / state-surface / API-surface / dependency / review burden.
-- **Extend** — add capability; entropy growth must be load-bearing for the new contract.
-- **Correct** — restore a named invariant (drift OR defect); cite it in the `Restores:` body trailer.
-- **Purge** — remove a capability — the WHAT shrinks, transfer-proof (gone, not relocated). Target surface must be non-load-bearing, or the deliberate removal flagged `!`; cite what was removed in the `Removes:` body trailer.
-
-Four rejection grounds: **Excess**, **Graft**, **Sprawl**, **Sever** — defined in canonical `<execution>` Axiom `<reject_patches>` block.
-
-ODIN naming and the "Outline Driven INtelligence" expansion remain the identity surface. Four named doctrine fields govern operations: **Minimal Sufficient Change** (patch rule), **Entropy/Aesthetics Axiom** (axiom), **Shape → Compress → Measure → Repair** (loop — the verb `Compress` here names the loop's entropy-reduction step, distinct from the op-axis value `compress`), **PASS/FAIL gates**. `correct` commits carry a `Restores:` trailer citing the named invariant (`ref:<commit> | test:<name> | spec:<invariant>`); `purge` commits carry a `Removes:` trailer citing what was removed (`surface:<name> | dep:<lib> | path:<ref>`). Free-form prose in the body explains rationale and evidence.
-
 ## Output-styles edit rule [DEFAULT]
 
 Treat `system-prompt-baseline.md` as the single source of truth for the agent's persona/doctrine: make every doctrine change there first, never in an output-style file alone.
 
-`output-styles/{axiom-mode,builder,duet,linus,odin}.md` are persona files Claude Code loads as system instructions. Each is a style-specific `<role>` block followed by the canonical baseline embedded at the tail. Files are self-contained — the loader does not resolve refs.
+`output-styles/{axiom-mode,builder,duet,linus,benchmark}.md` are persona files Claude Code loads as system instructions. Each is a style-specific lead `<role>` block plus voice sections, followed by the canonical baseline embedded at the tail. `odin.md` has no separate persona voice — its identity IS the charter — so its only `<role>` is the charter. Files are self-contained — the loader does not resolve refs.
 
-**Always propagate `system-prompt-baseline.md` changes to `output-styles/*.md` files.** Every edit to the canonical (`system-prompt-baseline.md`) MUST land as a single atomic commit that ALSO updates the embedded canonical-baseline cascade in EVERY output-style file (`{axiom-mode,builder,duet,linus,odin}.md` AND `benchmark.md`'s cascade region beneath the `# [baseline]` H1 anchor). Edit at-once, never separately. Per-file commits and per-style sequential agents are the anti-pattern; one commit, one operation, one diff scope. The embedded baseline span MUST be byte-identical to `system-prompt-baseline.md` from `<role>` onward; drift is a CI-less invariant enforced by review.
+The embedded baseline begins at the **charter `<role>`** — the `<role>` block whose body is `You are a minimal-output entropy manipulator …`. That block is the cascade anchor (the SECOND `<role>` in files with a lead persona voice; the FIRST/only `<role>` in `system-prompt-baseline.md` and `odin.md`).
+
+**Always propagate `system-prompt-baseline.md` changes to `output-styles/*.md` files.** Every edit to the canonical (`system-prompt-baseline.md`) MUST land as a single atomic commit that ALSO updates the embedded cascade in EVERY output-style file (`{axiom-mode,builder,duet,linus,odin}.md` AND `benchmark.md`). Edit at-once, never separately. Per-file commits and per-style sequential agents are the anti-pattern; one commit, one operation, one diff scope. The embedded baseline span MUST be byte-identical to `system-prompt-baseline.md` from the charter `<role>` onward; drift is a CI-less invariant enforced by review.
 
 Procedural recipe (apply on every canonical edit):
 1. Edit `system-prompt-baseline.md`.
-2. Re-extract canonical from `<role>` onward (e.g., `awk '/^<role>$/{flag=1} flag' system-prompt-baseline.md > /tmp/canon.md`).
-3. Locate each output-style's cascade `<role>` line (the SECOND `<role>` for files with a style-specific lead `<role>`; in `benchmark.md`, the `<role>` immediately beneath the `# [baseline]` H1 anchor).
-4. Replace each output-style's cascade region (from its cascade `<role>` line through EOF) with `/tmp/canon.md` content.
-5. Verify byte-equivalence per file: `diff -q /tmp/canon.md <(awk '/^<role>$/{c++; if(c==2){flag=1}} flag' output-styles/X.md)` should return identical for all 5 non-benchmark styles AND `benchmark.md` (whose runner-specific lead `<role>` makes its cascade `<role>` also the second match).
+2. Re-extract canonical from the charter `<role>` onward (the whole file — `system-prompt-baseline.md` begins at the charter `<role>`; e.g. `cp system-prompt-baseline.md /tmp/canon.md`).
+3. For each output-style, locate the charter `<role>` line (the line before `You are a minimal-output entropy manipulator`).
+4. Replace each output-style's cascade region (from its charter `<role>` line through EOF) with `/tmp/canon.md` content, keeping the persona voice prefix intact.
+5. Verify byte-equivalence per file — the tail must equal canonical: `diff -q /tmp/canon.md <(tail -c "$(wc -c < /tmp/canon.md)" output-styles/X.md)` returns identical for all 6.
 6. Stage and commit canonical + all 6 output-styles in ONE commit.
 
 `output-styles/benchmark.md` carries a do-not-modify auto-gen header (margin-runner v0.5.5). Default: never hand-edit. Override only on explicit user authorization, and only the embedded canonical-baseline cascade region beneath the runner-specific preamble.
