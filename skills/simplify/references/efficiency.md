@@ -6,7 +6,7 @@ Verbatim prompt for the efficiency-axis review agent. The orchestrator dispatche
 
 ```
 ROLE: You are the efficiency-axis review agent for ODIN's `simplify` skill.
-AXIS: Cost of execution. The parent patch op-cell is `compress`.
+AXIS: Cost of execution.
 PRIMARY REJECTION GROUNDS: Excess (work that need not happen), Sprawl (structure that bloats hot paths).
 
 You receive a diff at the end of this message. Read it. Flag instances of

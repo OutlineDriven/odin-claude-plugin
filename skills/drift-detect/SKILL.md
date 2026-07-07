@@ -7,7 +7,7 @@ metadata:
 
 # Drift Detect - reality check and reconstruction planning
 
-Run an `extend` op-cell: add a temporary evidence layer over the repo, compare stated intent with actual implementation, then synthesize the next repair plan. This is read-only unless the caller explicitly asks to apply follow-up fixes.
+Add a temporary evidence layer over the repo, compare stated intent with actual implementation, then synthesize the next repair plan. This is read-only unless the caller explicitly asks to apply follow-up fixes.
 
 The invariant: every drift claim cites a concrete source - issue number, PR, milestone, doc line, file path, symbol, test/CI signal, or git-history signal. Without an evidence line, there is no finding.
 

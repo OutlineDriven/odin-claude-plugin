@@ -15,7 +15,7 @@ These are not aspirations to balance against delivery speed. They are the gate e
 
 ## Overview
 
-The baseline method normally fires at review time, after the code exists: principle-first minimalism (delete > edit > add), Minimal Sufficient Change, the Excess / Graft / Sprawl rejection grounds. This skill moves those gates to authoring time. Every addition clears them **before** it is written, not after.
+The baseline method normally fires at review time, after the code exists: principle-first minimalism (delete > edit > add) and the smallest change that satisfies the need. This skill moves those gates to authoring time. Every addition clears them **before** it is written, not after.
 
 The operating hypothesis is the null solution: the smallest artifact that could possibly satisfy the literal ask — often no new code at all. An existing utility. A config change. A deletion. The burden of proof sits on every departure from null; code that cannot name the need it serves does not get written.
 
@@ -55,11 +55,11 @@ If you cannot state the null solution compactly, you do not yet understand the a
 
 Every departure from the null solution names the demonstrated need it serves: a failing test, a named requirement from the ask, an observed defect, a real second caller. "We might need it" is not a need. An addition whose need you cannot write in one line is banned until you can.
 
-### Step 3: GATE — Enforce precedence and rejection grounds before writing
+### Step 3: GATE — Enforce precedence before writing
 
 For each named need, satisfy it in precedence order: **delete** the code that causes the gap, then **edit** existing code, and only then **add** new code. Adding is the last resort, not the default motion.
 
-A planned addition that trips a rejection ground is not written. Rework the shape until it passes or the need dissolves.
+A planned addition that fails a gate is not written. Rework the shape until it passes or the need dissolves.
 
 ### Step 4: PROVE — Removal test after writing
 
@@ -74,7 +74,7 @@ Stop at sufficiency. Adjacent improvements, hardening, and generalization beyond
 1. **The null solution is the starting hypothesis.** The burden of proof is on every addition, never on the absence of code.
 2. **Delete > edit > add is a precedence order.** Skipping straight to "add" without attempting delete and edit is a doctrine violation, not a style choice.
 3. **Every addition names its need before it is written.** Post-hoc justification is rationalization.
-4. **The rejection grounds fire pre-write.** Excess, Graft, and Sprawl are authoring gates here, not review findings.
+4. **The gates fire pre-write.** Unneeded surface, duplicate-of-existing, and structure-without-cause are authoring gates here, not review findings.
 5. **Scope equals the literal ask.** Unrequested features, refactors, and flexibility are Excess regardless of quality.
 
 ## Common Rationalizations

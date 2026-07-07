@@ -9,7 +9,7 @@ metadata:
 
 A deliberate `compress` op invoked on a specific change-set. Decompose simplification into three axes that fail independently and so can be reviewed independently: **reuse** (what already exists), **quality** (shape of the new code), **efficiency** (cost of the new code). Three parallel read-only review agents, one per axis, emit findings against the same diff; the orchestrator composes, audits, and applies fixes one rejection-ground class per atomic commit.
 
-The three axes map directly onto ODIN's rejection grounds. **Reuse axis** primarily detects **Graft** (new code grafted where a utility already exists). **Quality axis** primarily detects **Excess** (unnecessary surface: params, state, comments-of-what) and **Sprawl** (structure without functional cause: wrappers, ladders, copy-paste variants). **Efficiency axis** primarily detects **Excess** (work that need not happen) and **Sprawl** (structure that bloats hot paths). The op-cell is `compress` and the patch rule is Minimal Sufficient Change: behavior is preserved, entropy is reduced.
+**Reuse axis** detects new code written where a utility already exists. **Quality axis** detects unnecessary surface (params, state, comments-of-what) and structure without functional cause (wrappers, ladders, copy-paste variants). **Efficiency axis** detects work that need not happen and structure that bloats hot paths. Behavior is preserved, entropy is reduced.
 
 **Axis prompts (verbatim, copy-pasteable):**
 - `references/reuse.md`: Agent 1 prompt, four rules, Graft focus
@@ -19,11 +19,11 @@ The three axes map directly onto ODIN's rejection grounds. **Reuse axis** primar
 
 ## Mandates, not suggestions
 
-1. **The op-cell is `compress`.** Every commit body carries `Op: compress`. Behavior preservation is a gate, not a guideline.
+1. **Behavior preservation is a gate, not a guideline.**
 2. **Decompose by axis, never by file.** All three agents see the same diff and bring different lenses. Splitting the diff by file across agents defeats the design.
 3. **The Reviewer audit is the single adjudication authority.** Review agents emit findings; the Reviewer validates them; the orchestrator applies the survivors. The orchestrator does not re-litigate findings the Reviewer accepted, and does not rescue findings the Reviewer rejected.
 4. **Three agents in one tool-call message.** Sequential dispatch invalidates the parallel-launch contract.
-5. **A simplify patch that introduces a new rejection ground is a regression.** Post-fix, audit against Excess / Graft / Sprawl / Sever per `~/.claude/claude/system-prompt-baseline.md` `<reject_patches>`. Any hit → revert and re-plan.
+5. **A simplify patch that introduces new bloat is a regression.** Post-fix, audit for unneeded surface, duplicated logic, structure without cause, or a broken consumer contract. Any hit → revert and re-plan.
 
 ## When to Apply
 
@@ -64,7 +64,7 @@ The three axes map directly onto ODIN's rejection grounds. **Reuse axis** primar
 2. **The Reviewer audit is the single adjudication authority.** Review agents emit findings; the Reviewer validates them and returns the survivor set; the orchestrator applies the survivors and drops non-survivors without re-litigation in either direction. Arguing with the Reviewer's survivor set in prose is Excess.
 3. **Three agents in one tool-call message.** The reuse / quality / efficiency agents are independent by construction: same diff, disjoint rejection-ground subsets, read-only. Sequential dispatch is rejected at the validation gate.
 4. **One rejection-ground class per atomic commit.** Excess fixes, Graft fixes, and Sprawl fixes ride in separate commits per `~/.claude/claude/system-prompt-baseline.md` `<git>` charter "one concern per commit" rule. Mixed-class commits trip exit 15.
-5. **A simplify patch that introduces a new rejection ground is a regression.** Post-commit, audit the patch itself against `<reject_patches>`. Any hit → revert and re-plan. If any rule here conflicts with `~/.claude/claude/system-prompt-baseline.md`, the baseline wins.
+5. **A simplify patch that introduces new bloat is a regression.** Post-commit, audit the patch itself for unneeded surface, duplicated logic, structure without cause, or a broken consumer contract. Any hit → revert and re-plan. If any rule here conflicts with `~/.claude/claude/system-prompt-baseline.md`, the baseline wins.
 
 ## Validation Gates
 
@@ -75,7 +75,7 @@ The three axes map directly onto ODIN's rejection grounds. **Reuse axis** primar
 | Independence asserted | Spawn message documents the independence argument (disjoint axes, read-only) | Yes |
 | Reviewer audit | Composed findings passed completeness / consistency / accuracy / scope check before fixes begin | Yes |
 | Behavior preserved | Repo-native tests green after every fix commit | Yes; auto-revert on red, exit 13 |
-| No new rejection ground | Post-fix audit shows no Excess / Graft / Sprawl / Sever introduced by the simplify patch | Yes; exit 14 |
+| No new bloat | Post-fix audit shows no unneeded surface, duplicated logic, structure-without-cause, or broken contract introduced by the simplify patch | Yes; exit 14 |
 | Atomic per class | Each commit contains exactly one rejection-ground class (Excess OR Graft OR Sprawl) | Yes; exit 15 if mixed |
 | Op trailer present | Every commit body carries `Op: compress` | Yes |
 
@@ -83,11 +83,11 @@ The three axes map directly onto ODIN's rejection grounds. **Reuse axis** primar
 
 | Code | Meaning |
 |---|---|
-| 0 | Clean: simplification landed, all fix commits green, no rejection ground introduced |
+| 0 | Clean: simplification landed, all fix commits green, no new bloat introduced |
 | 11 | No changes detected: diff empty after all fallbacks; pass-through, no work to do |
 | 12 | False-positive-only findings: agents emitted findings but none survived the Reviewer audit; report attached, no patch needed |
 | 13 | Behavior regression on a fix: tests went red; offending commit auto-reverted via `git revert HEAD --no-edit` |
-| 14 | New rejection ground introduced: post-fix audit caught Excess / Graft / Sprawl / Sever in the simplify patch; reverted, re-plan required |
+| 14 | New bloat introduced: post-fix audit caught unneeded surface / duplicated logic / structure-without-cause / broken contract in the simplify patch; reverted, re-plan required |
 | 15 | Mixed-concern commit: a fix commit bundled more than one rejection-ground class; must split before merging |
 
 ## See also

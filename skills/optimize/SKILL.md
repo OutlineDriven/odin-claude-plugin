@@ -12,7 +12,7 @@ investigation ledger), fan out five candidate transformations as worktree-isolat
 benchmark each, gate on behavior, commit the winner. The deliverable is a **committed, measured
 change**. It is not a verdict, report, or list of suggestions.
 
-Op-cell is context-dependent: `correct` + `Restores: spec:<budget>` when a `--budget` or a named
+Stop condition is context-dependent: budget-driven when a `--budget` or a named
 regression is the target; `compress` when removing wasted work with no stated budget; `extend` when
 the winning change adds an approximation or cache contract that changes observable semantics.
 Rejection grounds: **Excess** (micro-opt with no measured hotspot), **Graft** (optimization applied
@@ -109,7 +109,7 @@ concern is visible, declare auto-skip, note it aloud, and proceed with a single-
 3 → 5 single-agent → 6 → 7 → 8). Otherwise proceed with the full five-agent fan-out.
 
 Parse `--budget <metric>` (e.g. `--budget p95<3ms`, `--budget throughput>10k/s`,
-`--budget alloc<1MB`). This sets the op-cell to `correct` and the stop condition.
+`--budget alloc<1MB`). This sets the stop condition.
 
 **Resume / log init.** Once the target is resolved above (and only then, since the path is keyed
 by `<target>`), read `.outline/optimize/<target>/log.jsonl` if it exists. If the last `run` record
@@ -198,7 +198,7 @@ If `speedup_ratio < 1.05` for all candidates, exit 12. No candidate clears noise
 
 If the winner relies on approximation (behavior_safety < 1.0) and the user has not already
 confirmed in prose: present the exact contract change and wait for confirmation. If declined, exit
-14. If confirmed, set op-cell to `extend` and document the contract change in the commit body.
+14. If confirmed, document the contract change in the commit body.
 
 ### Phase 6: Adversarial behavior gate
 
@@ -265,7 +265,6 @@ After:       <after_integrated_median> ± <stddev>  (integrated, main tree)
 Win:         <integrated_speedup>× (<pct>%)
 
 Op: correct | compress | extend
-Restores: spec:<budget>           ← only when --budget was given or regression restored
 ```
 
 5. Clean up worktrees: `rm -rf .outline/optimize/<target>/agent-*`. The glob matches only the `agent-*` worktree dirs; `log.jsonl` sits beside them and is spared, staying the durable run record.

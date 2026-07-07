@@ -57,7 +57,7 @@ The sequence and its halt mechanics; exact pass-criteria per gate are in the Val
 
 1. **Phase 1: Plan.** Invoke `plan` with the task (read-only). G1 fails on an ambiguous request; no autofix exists for "scope unknown"; HALT and hand off to upstream `askme`/`strategy`.
 2. **Phase 2: Execute.** Invoke `proceed` against the plan. G2 red → autofix arm `fix` runs **once**, re-check; still red → HALT.
-3. **Phase 3: Simplify.** Invoke `simplify` on the new diff. `simplify` self-reverts a behavior regression; an unrecoverable exit (new rejection ground / mixed commit) is G3 fail → HALT.
+3. **Phase 3: Simplify.** Invoke `simplify` on the new diff. `simplify` self-reverts a behavior regression; an unrecoverable exit (new bloat / mixed commit) is G3 fail → HALT.
 4. **Phase 4 (+5): Review-gate.** Invoke `review` (read-only). Only if a critical/high finding exists, invoke `fix` **once** on those findings (Phase 5), then re-review the changed files. Residual critical/high after the one pass is G4 fail → HALT.
 5. **Phase 6: Commit + push.** Detect remote via `git remote`. Invoke `commit-push`; local-only → commits only, push half skipped. A push refusal (force/protected) is G6 fail and not autofixable → HALT.
 6. **Phase 7: CI.** Skipped local-only. Otherwise invoke `gh-fix-ci`, which watches PR checks and runs its own fix arm **once**; still red is G7 fail → HALT, hand off failing-check logs/URLs.
@@ -80,7 +80,7 @@ Gate id equals phase number; Phase 5 (`fix`, G4's autofix arm) and Phase 8 (Repo
 |------|---------------|--------------------|----------|
 | G1 Plan | concrete plan + critical files; task not ambiguous | none | Yes; HALT to upstream `askme`/`strategy` |
 | G2 Execute | repo-native verifier green after `proceed` | `fix` | Yes; HALT on still-red |
-| G3 Simplify | clean exit, behavior preserved | `simplify` self-revert | Yes; HALT on new rejection ground / mixed commit |
+| G3 Simplify | clean exit, behavior preserved | `simplify` self-revert | Yes; HALT on new bloat / mixed commit |
 | G4 Review | no critical/high finding after one fix pass + re-review | `fix` then re-review | Yes; HALT on residual critical/high |
 | G6 Commit/push | atomic commits made; push ok (local-only: commits only) | none | Yes; HALT on push refusal |
 | G7 CI | PR checks green | `gh-fix-ci` watch+fix | Yes; HALT on still-red; skipped local-only |

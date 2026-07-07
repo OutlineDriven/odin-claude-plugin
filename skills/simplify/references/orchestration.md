@@ -119,17 +119,17 @@ git revert HEAD --no-edit
 
 Surface the failure mode (exit 13) and stop the simplify run for the affected commit. Other class commits already landed remain.
 
-## Post-fix audit (no new rejection ground)
+## Post-fix audit (no new bloat)
 
-After the final commit, audit the simplify patch itself against `~/.claude/claude/system-prompt-baseline.md` `<reject_patches>` — Excess / Graft / Sprawl / Sever. Any hit → revert the entire simplify chain via `git revert <first-simplify-commit>..HEAD --no-edit` and exit 14. The orchestrator may re-plan and re-invoke.
+After the final commit, audit the simplify patch itself for unneeded surface, duplicated logic, structure without cause, or a broken consumer contract. Any hit → revert the entire simplify chain via `git revert <first-simplify-commit>..HEAD --no-edit` and exit 14. The orchestrator may re-plan and re-invoke.
 
 ## Exit code summary (matches SKILL.md)
 
 | Code | Trigger |
 |---|---|
-| 0 | Survivors applied, behavior gate green, no new rejection ground |
+| 0 | Survivors applied, behavior gate green, no new bloat |
 | 11 | Empty diff after all Phase 1 resolutions |
 | 12 | Survivor set empty after Reviewer audit |
 | 13 | Behavior gate red on a fix commit — that commit reverted |
-| 14 | Post-fix audit caught a new rejection ground — chain reverted |
+| 14 | Post-fix audit caught new bloat — chain reverted |
 | 15 | Mixed-class commit detected — split required before merge |

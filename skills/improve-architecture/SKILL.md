@@ -26,7 +26,7 @@ Use these terms exactly. Do not substitute "component," "service," "API," or "bo
 
 ## Process
 
-### 1. Explore [Dispatch-First]
+### 1. Explore
 
 First tool call MUST be Explore-agent dispatch, not direct reads. The agent's brief:
 

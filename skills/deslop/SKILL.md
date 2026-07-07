@@ -7,7 +7,7 @@ metadata:
 
 # deslop: correct slop invariant, preserve behavior
 
-Run a `correct` op-cell: restore the invariant that production code has no debug leftovers, placeholder bodies, swallowed errors, hardcoded credentials, or formatter noise. Classify every finding by certainty; apply only HIGH-certainty mechanical fixes; MEDIUM and LOW are report-only unless the user explicitly asks for a separate manual refactor.
+Restore the invariant that production code has no debug leftovers, placeholder bodies, swallowed errors, hardcoded credentials, or formatter noise. Classify every finding by certainty; apply only HIGH-certainty mechanical fixes; MEDIUM and LOW are report-only unless the user explicitly asks for a separate manual refactor.
 
 The detailed pattern catalog lives in `references/slop-catalog.md`. Load it when choosing exact pattern recipes or deciding whether a finding is fixable.
 

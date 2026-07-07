@@ -7,7 +7,7 @@ metadata:
 
 # Can I Help: interest-routed contribution matching
 
-`extend` op-cell: turn repository state into contributor action. Collect project context, ask the developer what kind of contribution they want, map that interest to the strongest native signals, then return exact file/line recommendations with data-backed rationale and an executable first step.
+Turn repository state into contributor action. Collect project context, ask the developer what kind of contribution they want, map that interest to the strongest native signals, then return exact file/line recommendations with data-backed rationale and an executable first step.
 
 The invariant: no vague "look around `src/`". Every recommendation names a file and preferably a line, states why the target matters, explains the local code in 2 to 3 sentences, and gives the first command or edit.
 

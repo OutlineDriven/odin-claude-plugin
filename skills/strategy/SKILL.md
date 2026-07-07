@@ -105,7 +105,7 @@ Read the existing `STRATEGY.md` in full. Summarize current state in 3 to 5 lines
 
 ## Commits
 
-One anchor per commit. Stage only the resolved anchor: `git -C "$root" add STRATEGY.md`. Never `git add -A`. Both first-run and resume-in-place carry `Op: extend`: a new or sharpened anchor is load-bearing capability. A resume that repairs a stale section is still additive. The strategy evolved with the product, so there is no prior invariant to cite in a `Restores:` trailer, which is what would make it `correct`. Publish by the operating repo's normal flow.
+One anchor per commit. Stage only the resolved anchor: `git -C "$root" add STRATEGY.md`. Never `git add -A`. A new or sharpened anchor is load-bearing capability; a resume that repairs a stale section is still additive. Publish by the operating repo's normal flow.
 
 ## Anti-patterns
 

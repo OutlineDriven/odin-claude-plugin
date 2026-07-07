@@ -53,7 +53,7 @@ Don't bulk-load at start. Read at the step that needs it; pass the relevant cont
 
 ### Phase 1: Ground the scan (dispatch-first)
 
-Ungrounded ideation is fabrication. Before generating, ground the subject in the real codebase. Defer to ODIN's Dispatch-First protocol. Escalate Explore agents by scope: **1** for a single known concern, **3** for multiple concerns or unknown scope, **5** for a cross-module or architectural survey. Auto-skip to direct reads only for a single file under 50 LOC. **Seed the grounding scope with `STRATEGY.md`:** the grounding Explore agent(s) read it (when present at the repo root) as optional upstream grounding so candidates stay on-anchor, and fold its diagnosis/guiding-policy into the returned summary; if absent, note that in one line and proceed. Strategy grounding never blocks. (In an auto-skip run, the orchestrator reads it directly.)
+Ungrounded ideation is fabrication. Before generating, ground the subject in the real codebase. Escalate Explore agents by scope: **1** for a single known concern, **3** for multiple concerns or unknown scope, **5** for a cross-module or architectural survey. Auto-skip to direct reads only for a single file under 50 LOC. **Seed the grounding scope with `STRATEGY.md`:** the grounding Explore agent(s) read it (when present at the repo root) as optional upstream grounding so candidates stay on-anchor, and fold its diagnosis/guiding-policy into the returned summary; if absent, note that in one line and proceed. Strategy grounding never blocks. (In an auto-skip run, the orchestrator reads it directly.)
 
 Read `references/web-research-cache.md` to check for cached web research from prior runs in this session before dispatching any web research.
 

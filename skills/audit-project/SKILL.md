@@ -7,7 +7,7 @@ metadata:
 
 # Audit Project: correct-op multi-agent audit loop
 
-`audit-project` is a `correct` op-cell. It restores the invariant: **no open critical/high findings remain in the selected scope**. This is not a one-pass critique; it selects reviewers from evidence, applies fixes in verified batches, re-reviews only changed files, and stops only at zero critical/high, a user decision gate, or the iteration cap.
+`audit-project` restores the invariant: **no open critical/high findings remain in the selected scope**. This is not a one-pass critique; it selects reviewers from evidence, applies fixes in verified batches, re-reviews only changed files, and stops only at zero critical/high, a user decision gate, or the iteration cap.
 
 Bulk reviewer prompts live in `references/review-roster.md`. Consolidation, dismissal, blocked-ratio, decision-gate, and priority-routing rules live in `references/false-positive-contract.md`.
 

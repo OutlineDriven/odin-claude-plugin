@@ -116,7 +116,5 @@ A learning store nobody searches is dead weight. After refreshing, check whether
 
 One concern per commit, ODIN `Op:` trailer in the body:
 
-- **Update a drifted doc** → `Op: correct` + `Restores:` citing what fell out of sync (`ref:<commit> | spec:<invariant>`).
-- **Consolidate / Replace / Delete** (a capability of the doc set is removed) → `Op: purge` + `Removes:` citing what was removed (`path:<ref> | surface:<name>`). A Replace that nets a successor is judgment: trailer it `correct` (restoring accuracy) if the successor covers the same surface, `purge` if a doc genuinely went away.
 
 Stage only refresh-modified files, never other dirty files. Commit message summarizes what was refreshed, matches the repo's existing style. Skip the commit if nothing was modified.

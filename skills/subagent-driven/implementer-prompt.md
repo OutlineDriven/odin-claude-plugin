@@ -44,8 +44,7 @@ Subagent:
     3. Run the verification command and confirm it passes.
     4. Commit your work. One concern, one commit. Conventional prefix, and an
        `Op: [compress|extend|correct|purge]` trailer in the body. A `correct`
-       commit also carries `Restores: <ref|test|spec>`; a `purge` commit also
-       carries `Removes: <surface|dep|path>`.
+
     5. Self-review (below).
     6. Report back.
 

@@ -71,8 +71,6 @@ Strip `mode:` tokens from `$ARGUMENTS`.
 One learning per commit. Body carries an ODIN `Op:` trailer:
 
 - New doc → `Op: extend`
-- Refresh a drifted doc → `Op: correct` + `Restores: spec:<invariant>`
-- Delete/consolidate-away → `Op: purge` + `Removes: path:<ref>`
 
 Stage only the surfaces `compound` wrote or edited.
 

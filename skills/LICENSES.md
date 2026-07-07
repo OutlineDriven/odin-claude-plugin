@@ -137,8 +137,8 @@ Skills cherry-picked from the `agent-skills` plugin (https://github.com/addyosma
 
 | Path under `/home/alpha/.claude/claude/skills/` | Upstream origin | License | Copyright | Provenance |
 | ----------------------------------------------- | --------------- | ------- | --------- | ---------- |
-| `subagent-driven/SKILL.md` | https://github.com/obra/superpowers/tree/main/skills/subagent-driven-development | MIT | © 2025 Jesse Vincent | Per-task implementer→reviewer loop fused with `ce-subagent-driven` dispatch-brief/parallel/tree-clean/validation-gate; ODIN voice + `Op:` trailers + rejection grounds. |
-| `subagent-driven/implementer-prompt.md` | https://github.com/obra/superpowers/tree/main/skills/subagent-driven-development | MIT | © 2025 Jesse Vincent | Implementer contract ported; four statuses preserved; ODIN voice + self-review against rejection grounds + `Op:` trailer. |
+| `subagent-driven/SKILL.md` | https://github.com/obra/superpowers/tree/main/skills/subagent-driven-development | MIT | © 2025 Jesse Vincent | Per-task implementer→reviewer loop fused with `ce-subagent-driven` dispatch-brief/parallel/tree-clean/validation-gate; ODIN voice adaptations. |
+| `subagent-driven/implementer-prompt.md` | https://github.com/obra/superpowers/tree/main/skills/subagent-driven-development | MIT | © 2025 Jesse Vincent | Implementer contract ported; four statuses preserved; ODIN voice + self-review adaptations. |
 | `subagent-driven/task-reviewer-prompt.md` | https://github.com/obra/superpowers/tree/main/skills/subagent-driven-development | MIT | © 2025 Jesse Vincent | Reviewer contract ported; the audit gate. Dispatched to `general-purpose`; rejection-ground checks added. |
 | `subagent-driven/scripts/review-package` | https://github.com/obra/superpowers/tree/main/skills/subagent-driven-development | MIT | © 2025 Jesse Vincent | Logic verbatim; default OUTFILE repointed to `.outline/sdd` via `sd-workspace`. |
 | `subagent-driven/scripts/task-brief` | https://github.com/obra/superpowers/tree/main/skills/subagent-driven-development | MIT | © 2025 Jesse Vincent | Logic verbatim; default OUTFILE repointed to `.outline/sdd` via `sd-workspace`. |

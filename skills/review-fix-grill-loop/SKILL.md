@@ -7,7 +7,7 @@ metadata:
 
 # Review-fix-grill-loop: diff-scoped review→resolve→fix loop
 
-`review-fix-grill-loop` is a `correct` op-cell. It restores the invariant: **no open finding at or above the severity floor (confidence ≥ medium) remains in the current change-set.** It is not a one-pass critique. It selects reviewers from the diff, resolves each confirmed finding with three architectural solutions, fixes in verified batches with auto-revert, re-reviews only changed files, and stops only at a clean diff, a user decision gate, the iteration cap, or a stall.
+`review-fix-grill-loop` restores the invariant: **no open finding at or above the severity floor (confidence ≥ medium) remains in the current change-set.** It is not a one-pass critique. It selects reviewers from the diff, resolves each confirmed finding with three architectural solutions, fixes in verified batches with auto-revert, re-reviews only changed files, and stops only at a clean diff, a user decision gate, the iteration cap, or a stall.
 
 **Self-contained by design.** This skill bundles its own `references/review-roster.md` and `references/false-positive-contract.md`, copied and adapted from `audit-project`. They share an ancestor with that skill; a canonical edit to one must be hand-propagated to the other (no CI enforces it). Orchestration specifics (change-scope resolution, severity floor, resolve gate, double-loop) live in `references/orchestration.md`.
 

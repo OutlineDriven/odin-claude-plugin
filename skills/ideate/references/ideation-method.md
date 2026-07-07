@@ -20,7 +20,7 @@ One generator = one `axis × frame` cell. ~6–8 candidates per generator; with 
 The orchestrator dispatches this prompt with the grounding summary and the assigned cell appended after the markers. All generators launch in one tool-call message.
 
 ```
-ROLE: You are a generator agent for ODIN's `ideate` skill. The parent op-cell is `extend`.
+ROLE: You are a generator agent for the `ideate` skill.
 ASSIGNMENT: axis = <one axis>, frame = <one frame>. Generate only from this cell.
 
 You receive a GROUNDING SUMMARY at the end of this message (architecture, patterns,
