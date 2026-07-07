@@ -1,108 +1,21 @@
 ---
 name: minimalism-driven
-description: 'Enforce minimalism as doctrine while authoring code: start from the null solution, name the demonstrated need for every departure, and gate each one on delete > edit > add before it is written. Use when starting an implementation where scope creep, speculative abstraction, or unneeded surface is a risk; before adding a helper, wrapper, config key, or dependency; or when the user says "minimal", "bare minimum", "DRY this up", or "no gold-plating".'
+description: 'Build the smallest version that fully does the job and makes its intent obvious — the right amount, not the fewest lines. Reuse before adding, prefer delete and edit over add, and give every addition a reason you can state in one line. Use when scope creep, speculative abstraction, or unneeded surface is a risk; before adding a helper, wrapper, config key, or dependency; or when the user says "minimal", "bare minimum", "DRY this up", or "no gold-plating".'
 ---
 
 # Minimalism-Driven Development
 
-## Three principles
+## Do this
 
-1. **No code written is the best code.** Every line is a liability before it is an asset — a surface to read, maintain, and eventually delete. The smallest artifact that satisfies the ask beats the cleverest one that overshoots it.
-2. **Don't reinvent the wheel.** Grep for the existing utility before writing a new one. A duplicate is Graft, not cleanliness.
-3. **DRY. YAGNI. KISS.** One source of truth, built for the need in front of you, in the plainest shape that does the job.
+1. Search for what already exists and reuse it before adding anything.
+2. Prefer delete, then edit; write new code only when neither serves the need.
+3. Give every addition a reason you can state in one line. If you can't, don't add it.
+4. Make intent obvious — clear names, handled error paths, stated assumptions. No silent gaps.
+5. Stop at the ask. Note an adjacent improvement in one line; don't build it uninvited.
 
-These are not aspirations to balance against delivery speed. They are the gate every addition passes through before it is written.
+## Verify
 
-## Overview
-
-The baseline method normally fires at review time, after the code exists: principle-first minimalism (delete > edit > add) and the smallest change that satisfies the need. This skill moves those gates to authoring time. Every addition clears them **before** it is written, not after.
-
-The operating hypothesis is the null solution: the smallest artifact that could possibly satisfy the literal ask — often no new code at all. An existing utility. A config change. A deletion. The burden of proof sits on every departure from null; code that cannot name the need it serves does not get written.
-
-This is an in-flight posture for producing new code, not a post-hoc pass: compressing an existing diff is `simplify`, opportunistic cleanup while touching nearby code is `cleanup-codebase`, routing compression across domains is `tidy`.
-
-## When to Use
-
-- Starting any implementation whose scope could plausibly grow past the literal ask
-- The request is small but the surrounding codebase invites "while I'm here" additions
-- Prior work in the area shipped speculative abstractions, dead config, or unused parameters
-- The user says "minimal", "bare minimum", "keep it small", or "no gold-plating"
-
-**When NOT to use:**
-
-- Exploratory spikes explicitly framed as throwaway; doctrine gates slow discovery, so apply them when the keeper is written
-- The ask itself demands breadth (a full lifecycle feature, a migration): the doctrine still applies per-addition, but the null solution is scoped to the ask, not to zero
-
-## The Process
-
-Copy this checklist when applying the skill:
-
-```
-NULL    — [ ] state the null solution before writing any code
-NEED    — [ ] name the demonstrated need for each departure from null
-GATE    — [ ] pass delete > edit > add and the no-bloat checks before writing
-PROVE   — [ ] after writing, confirm removal of each element breaks a named need
-STOP    — [ ] stop at the literal ask
-```
-
-### Step 1: NULL — State the null solution
-
-Before any code, write one or two lines naming the smallest artifact that could satisfy the literal ask. Candidates in order: nothing (the behavior already exists), a deletion, a config or data change, a call to an existing utility, an edit to existing code, new code. Grep for the existing utility before concluding it does not exist — this is principle 2, applied at the first line of work, not the last.
-
-If you cannot state the null solution compactly, you do not yet understand the ask. Resolve that first.
-
-### Step 2: NEED — Name the need per addition
-
-Every departure from the null solution names the demonstrated need it serves: a failing test, a named requirement from the ask, an observed defect, a real second caller. "We might need it" is not a need. An addition whose need you cannot write in one line is banned until you can.
-
-### Step 3: GATE — Enforce precedence before writing
-
-For each named need, satisfy it in precedence order: **delete** the code that causes the gap, then **edit** existing code, and only then **add** new code. Adding is the last resort, not the default motion.
-
-A planned addition that fails a gate is not written. Rework the shape until it passes or the need dissolves.
-
-### Step 4: PROVE — Removal test after writing
-
-After the code exists, walk the diff element by element — function, parameter, branch, config key, import — and ask: does removing this break a need named in Step 2? If removal breaks nothing named, remove it now. The diff at the end contains only elements whose absence would fail a named need.
-
-### Step 5: STOP — The literal ask is the finish line
-
-Stop at sufficiency. Adjacent improvements, hardening, and generalization beyond the ask are surfaced as a one-line note, never implemented uninvited. Completeness of imagination is not the target; the ask is.
-
-## Mandates, not suggestions
-
-1. **The null solution is the starting hypothesis.** The burden of proof is on every addition, never on the absence of code.
-2. **Delete > edit > add is a precedence order.** Skipping straight to "add" without attempting delete and edit is a doctrine violation, not a style choice.
-3. **Every addition names its need before it is written.** Post-hoc justification is rationalization.
-4. **The gates fire pre-write.** Unneeded surface, duplicate-of-existing, and structure-without-cause are authoring gates here, not review findings.
-5. **Scope equals the literal ask.** Unrequested features, refactors, and flexibility are Excess regardless of quality.
-
-## Common Rationalizations
-
-| Rationalization | Reality |
-|---|---|
-| "We'll need it later" | You will need *something* later; almost never this. Add it when the need is demonstrated. |
-| "It's only a few lines" | Lines are not the unit of cost; concepts are. A small speculative surface still taxes every future reader. |
-| "This makes it more flexible" | Flexibility with one caller is speculation. The second caller defines the right abstraction; guessing it now gets it wrong. |
-| "Writing a new helper is faster than finding the existing one" | That is Graft. The grep costs a minute; the duplicate costs every future change made twice. |
-| "The wrapper makes it cleaner" | A wrapper that renames or forwards without removing coupling is Sprawl: ceremony, not cleanliness. |
-| "While I'm here…" | The ask is the scope. Note the adjacent improvement in one line and move on. |
-
-## Red Flags
-
-- An abstraction, interface, or factory with exactly one implementation or caller
-- A parameter or config key whose value never varies in the codebase
-- A new utility written before searching for an existing equivalent
-- A diff meaningfully larger than the explanation of the need it serves
-- Additions that appeared during implementation with no need named in Step 2
-- "Foundation for later" code that no current need exercises
-
-## Verification
-
-After applying minimalism-driven development:
-
-- [ ] The null solution was stated before any code was written
-- [ ] Every addition in the diff maps to a need named before it was written
-- [ ] Delete and edit were attempted before each add
-- [ ] The removal test passed: no element survives whose absence breaks nothing named
-- [ ] The diff's scope equals the literal ask; adjacent improvements are notes, not code
+- [ ] Searched for and reused existing code before writing new.
+- [ ] Every addition has a one-line reason; delete and edit were tried first.
+- [ ] Names, error paths, and assumptions make intent obvious without asking.
+- [ ] Scope equals the ask; adjacent ideas are notes, not code.
