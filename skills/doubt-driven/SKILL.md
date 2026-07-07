@@ -1,13 +1,19 @@
 ---
 name: doubt-driven
-description: Subject non-trivial decisions to adversarial review before they stand. Use when correctness matters more than speed, the code is unfamiliar, stakes are high, or verifying now is cheaper than debugging later.
+description: Subject non-trivial decisions to adversarial review before they stand. Use when correctness matters more than speed, the code is unfamiliar, stakes are high, a claim can't be checked by the type system or compiler, or verifying now is cheaper than debugging later.
 ---
 
 # Doubt-Driven Development
 
+## Three principles
+
+1. **A confident answer is not a correct one.** Long sessions turn assumptions into "facts" without anyone noticing.
+2. **The reviewer gets the artifact and the contract, never your reasoning or your conclusion.** A prompt biased to disprove, not approve, catches what a summary-and-agree pass would wave through.
+3. **The loop is bounded, not recursive.** It stops at trivial findings, three cycles, or user override — and three unresolved cycles is information about the artifact, not a reason to grind a fourth.
+
 ## Overview
 
-A confident answer is not a correct one. Long sessions accumulate context that turns assumptions into "facts" without anyone noticing. Doubt-driven development materializes a fresh-context reviewer, biased to **disprove**, not approve, before any non-trivial output stands.
+Doubt-driven development materializes a fresh-context reviewer, biased to **disprove**, not approve, before any non-trivial output stands.
 
 This is an in-flight posture, not a post-hoc gate. A verdict on a finished artifact arrives too late to change direction cheaply. Doubt-driven cross-examines non-trivial decisions while course-correction still costs little.
 

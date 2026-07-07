@@ -1,23 +1,21 @@
 ---
 name: subagent-driven
-description: Execute a multi-task plan by delegating each task to a fresh subagent, auditing results before proceeding. Use when the user says "execute with subagents", "delegated execution", or hands you an ordered plan to run.
+description: Execute a multi-task plan by delegating each task to a fresh subagent, auditing results before proceeding. Use when the user says "execute with subagents", "delegated execution", or hands you an ordered multi-task plan to run.
 metadata:
   short-description: Per-task implementer→reviewer loop with an audit gate between tasks
 ---
 
 # Subagent-Driven Development
 
+## Three principles
+
+1. **One task, one fresh implementer, isolated context.** You construct exactly what each worker needs; it never inherits your session, the plan file, or prior workers' history — that keeps it focused and keeps your context free for coordination.
+2. **The audit is the completion gate, not the verifier.** A green verifier proves the worker's own check ran; a fresh reviewer auditing the diff against the brief proves the change is correct and in scope. A task is done only when both hold.
+3. **Files carry state, not your context.** Briefs, reports, and diffs pass as files a fresh subagent reads; progress lives in a durable ledger that survives compaction; the ship is atomic commits, never a squash.
+
 Execute a plan as a chain of delegated subagents. Each task gets a fresh
 implementer with a self-contained brief; a fresh reviewer audits the result
-before the next task starts; a broad whole-branch review closes the run. The
-audit is the completion gate. A task is done only when its verifier passes
-**and** the audit clears. A green verifier proves the worker's own check ran;
-it is not an audit.
-
-**Why fresh subagents.** You delegate to workers with isolated context. You
-construct exactly what each needs. They never inherit your session, the plan
-file, or prior workers' history. That keeps them focused and keeps your own
-context free for coordination.
+before the next task starts; a broad whole-branch review closes the run.
 
 **Continuous execution.** Do not check in between tasks. Run every task in the
 plan without stopping. Stop only for: a BLOCKED status you cannot resolve, an

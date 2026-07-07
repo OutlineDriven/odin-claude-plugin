@@ -1,13 +1,17 @@
 ---
 name: type-driven
-description: Develop with refined types that make illegal states unrepresentable. Use when modeling domains, encoding state machines in types, or replacing validation with parsing.
+description: Develop with refined types that make illegal states unrepresentable. Use when modeling a domain, encoding a state machine in types, replacing runtime validation with parsing, hardening an API boundary against malformed input, or the user says "make invalid states unrepresentable" or "parse don't validate".
 ---
 
 # Type-driven development
 
-Types encode the specification -- design from requirements before implementation. Make illegal states unrepresentable (Yaron Minsky). Parse, don't validate (Alexis King). For parsed opaque domain types within trusted boundaries, if the type compiles, the value is valid.
+## Three principles
 
-**Modern insight (2025)**: "Encode invariants in types, not runtime checks" is the evolved formulation. Type richness should match risk -- start simple, add complexity where bugs actually occur. Types serve AI-assisted development: they communicate intent better than comments and reduce LLM hallucinations.
+1. **Make illegal states unrepresentable** (Yaron Minsky). If the compiler can construct a value, that value must be valid. A state the domain forbids should have no type that names it.
+2. **Parse, don't validate** (Alexis King). For a parsed opaque domain type inside a trusted boundary, if the type compiles, the value is valid — the proof travels with the value, not with a bool the caller must remember to check.
+3. **Types never lie.** Design from requirements before implementation. A type that admits invalid values to satisfy a broken caller is lying about what it guarantees.
+
+Type richness matches risk — start simple, add complexity where bugs actually occur. Types serve AI-assisted development too: they communicate intent better than comments and reduce hallucinated APIs.
 
 See [patterns](references/patterns.md) for language-specific refined types, state machine techniques, and language-specific validation gates.
 See [examples](references/examples.md) for brief "parse, don't validate" patterns per language.

@@ -1,17 +1,25 @@
 ---
 name: minimalism-driven
-description: 'Enforce minimalism as doctrine while authoring code: start from the null solution and gate every addition on a named, demonstrated need before it is written. Use when starting an implementation where scope creep, speculative abstraction, or unneeded surface is a risk, or when the user says "minimal", "bare minimum", or "no gold-plating".'
+description: 'Enforce minimalism as doctrine while authoring code: start from the null solution, name the demonstrated need for every departure, and gate each one on delete > edit > add before it is written. Use when starting an implementation where scope creep, speculative abstraction, or unneeded surface is a risk; before adding a helper, wrapper, config key, or dependency; or when the user says "minimal", "bare minimum", "DRY this up", or "no gold-plating".'
 ---
 
 # Minimalism-Driven Development
 
+## Three principles
+
+1. **No code written is the best code.** Every line is a liability before it is an asset — a surface to read, maintain, and eventually delete. The smallest artifact that satisfies the ask beats the cleverest one that overshoots it.
+2. **Don't reinvent the wheel.** Grep for the existing utility before writing a new one. A duplicate is Graft, not cleanliness.
+3. **DRY. YAGNI. KISS.** One source of truth, built for the need in front of you, in the plainest shape that does the job.
+
+These are not aspirations to balance against delivery speed. They are the gate every addition passes through before it is written.
+
 ## Overview
 
-Minimalism here is not a preference; it is enforced doctrine. The baseline method normally fires at review time, after the code exists: principle-first minimalism (delete > edit > add), Minimal Sufficient Change, and the Excess / Graft / Sprawl rejection grounds. This skill moves those gates to authoring time: every addition must clear them **before** it is written, not after.
+The baseline method normally fires at review time, after the code exists: principle-first minimalism (delete > edit > add), Minimal Sufficient Change, the Excess / Graft / Sprawl rejection grounds. This skill moves those gates to authoring time. Every addition clears them **before** it is written, not after.
 
-The operating hypothesis is the null solution: the smallest artifact that could possibly satisfy the literal ask, which is often no new code at all (an existing utility, a config change, or a deletion). The burden of proof sits on every departure from null. Code that cannot name the need it serves does not get written.
+The operating hypothesis is the null solution: the smallest artifact that could possibly satisfy the literal ask — often no new code at all. An existing utility. A config change. A deletion. The burden of proof sits on every departure from null; code that cannot name the need it serves does not get written.
 
-This is an in-flight posture for producing new code. It is not a post-hoc pass: compressing an existing diff is `simplify`, opportunistic cleanup while touching nearby code is `cleanup-codebase`, and routing compression across domains is `tidy`.
+This is an in-flight posture for producing new code, not a post-hoc pass: compressing an existing diff is `simplify`, opportunistic cleanup while touching nearby code is `cleanup-codebase`, routing compression across domains is `tidy`.
 
 ## When to Use
 
@@ -37,27 +45,27 @@ PROVE   — [ ] after writing, confirm removal of each element breaks a named ne
 STOP    — [ ] stop at the literal ask
 ```
 
-### Step 1: NULL: State the null solution
+### Step 1: NULL — State the null solution
 
-Before any code, write one or two lines naming the smallest artifact that could satisfy the literal ask. Candidates in order: nothing (the behavior already exists), a deletion, a config or data change, a call to an existing utility, an edit to existing code, new code. Grep for the existing utility before concluding it does not exist.
+Before any code, write one or two lines naming the smallest artifact that could satisfy the literal ask. Candidates in order: nothing (the behavior already exists), a deletion, a config or data change, a call to an existing utility, an edit to existing code, new code. Grep for the existing utility before concluding it does not exist — this is principle 2, applied at the first line of work, not the last.
 
 If you cannot state the null solution compactly, you do not yet understand the ask. Resolve that first.
 
-### Step 2: NEED: Name the need per addition
+### Step 2: NEED — Name the need per addition
 
 Every departure from the null solution names the demonstrated need it serves: a failing test, a named requirement from the ask, an observed defect, a real second caller. "We might need it" is not a need. An addition whose need you cannot write in one line is banned until you can.
 
-### Step 3: GATE: Enforce precedence and rejection grounds before writing
+### Step 3: GATE — Enforce precedence and rejection grounds before writing
 
-For each named need, satisfy it in precedence order. **Delete** code that causes the gap, then **edit** existing code, and only then **add** new code. Adding is the last resort, not the default motion.
+For each named need, satisfy it in precedence order: **delete** the code that causes the gap, then **edit** existing code, and only then **add** new code. Adding is the last resort, not the default motion.
 
-A planned addition that trips a ground is not written. Rework the shape until it passes or the need dissolves.
+A planned addition that trips a rejection ground is not written. Rework the shape until it passes or the need dissolves.
 
-### Step 4: PROVE: Removal test after writing
+### Step 4: PROVE — Removal test after writing
 
-After the code exists, walk the diff element by element (function, parameter, branch, config key, import) and ask: does removing this break a need named in Step 2? If removal breaks nothing named, remove it now. The diff at the end contains only elements whose absence would fail a named need.
+After the code exists, walk the diff element by element — function, parameter, branch, config key, import — and ask: does removing this break a need named in Step 2? If removal breaks nothing named, remove it now. The diff at the end contains only elements whose absence would fail a named need.
 
-### Step 5: STOP: The literal ask is the finish line
+### Step 5: STOP — The literal ask is the finish line
 
 Stop at sufficiency. Adjacent improvements, hardening, and generalization beyond the ask are surfaced as a one-line note, never implemented uninvited. Completeness of imagination is not the target; the ask is.
 

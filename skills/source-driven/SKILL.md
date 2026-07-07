@@ -1,13 +1,19 @@
 ---
 name: source-driven
-description: Ground implementation decisions in official documentation with version-aware citations. Use when building with a framework or library, writing boilerplate, or verifying framework-specific patterns.
+description: Ground implementation decisions in official documentation with version-aware citations. Use when writing code against a specific framework or library version, building boilerplate, implementing a framework's recommended pattern (auth, routing, forms, data fetching, state), or verifying an API signature before writing framework-specific code from memory.
 ---
 
 # Source-Driven Development
 
+## Three principles
+
+1. **Memory is not evidence.** Training data ages — APIs deprecate and recommended patterns shift between versions. Code written from recall can look correct and break against the installed version.
+2. **Detect the version, fetch the primary source, implement what it documents, cite it.** Every framework-specific pattern traces to an authoritative source the user can open and check for themselves.
+3. **Flag what you couldn't verify.** Honesty about the gap beats a confident guess dressed as a fact.
+
 ## Overview
 
-Back every framework-specific decision with official documentation. Memory is not evidence. Training data ages: APIs deprecate and recommended patterns shift between versions, so code written from recall can look correct and break against the installed version. Verify the pattern, cite the source, and leave the user a link they can open. Every framework-specific pattern traces to an authoritative source the user can check.
+Back every framework-specific decision with official documentation. Verify the pattern, cite the source, and leave the user a link they can open.
 
 ## When to Use
 
