@@ -15,7 +15,7 @@ Decompose the given task into independent agent groups and execute them in broad
 
 2. **Design agent groups** for each independent concern:
    - Assign a clear, scoped objective (one concern per agent).
-   - Select the appropriate agent type (Explore, Plan, general-purpose, or domain specialist).
+   - Select the appropriate tailored agent type (Explore, Plan, or a domain specialist) — prefer a task-specific agent over a general one.
    - Define expected output format so results can be composed.
 
 3. **Launch all independent agents in a single tool call**. Do not run them sequentially when parallel is possible.

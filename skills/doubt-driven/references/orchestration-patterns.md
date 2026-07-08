@@ -149,7 +149,7 @@ Before defining a custom subagent, check whether a built-in covers the role:
 |----------|---------|
 | Exploration/research subagent | Read-only codebase search and analysis. Use this for Pattern 5 (research isolation). |
 | Planning subagent | Read-only research during planning. |
-| General-purpose subagent | Multi-step tasks needing both exploration and modification. |
+| Task/domain-specialist subagent | Multi-step tasks needing both exploration and modification — pick a tailored agent scoped to the task rather than a generic one. |
 
 Do not redefine these. Layer specialist roles (review, security-audit, test/coverage) on top of them.
 
