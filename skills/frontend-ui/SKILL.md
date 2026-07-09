@@ -61,7 +61,7 @@ Every component meets these standards. Use the native element first; reach for A
 
 ## Reference materials
 
-Examples below pair a JavaScript component framework (React) with a server-rendered template stack (Django/Python); CSS and HTML examples are framework-neutral. The patterns hold across frameworks. Apply the equivalent in whatever stack the project uses.
+Where these references show component code, they pair a JavaScript component framework (React) with a server-rendered template stack (Django/Python); CSS and HTML examples are framework-neutral. The patterns hold across frameworks. Apply the equivalent in whatever stack the project uses.
 
 - `references/component-architecture.md`: file colocation, composition over configuration, and separating data from presentation.
 - `references/design-system.md`: the spacing scale, type hierarchy, and semantic color tokens.

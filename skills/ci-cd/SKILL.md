@@ -53,7 +53,7 @@ Pull Request Opened
 
 **No gate can be skipped.** If lint fails, fix lint. Do not disable the rule. If a test fails, fix the code. Do not skip the test.
 
-> **Note:** The gates are language-general; only the commands change per ecosystem. The Node steps above map directly to other stacks. For example, Python (`pip install`, `ruff check`, `mypy`, `pytest`, `pip-audit`) or Rust (`cargo build`, `cargo clippy`, `cargo test`, `cargo audit`). Keep the same gate order regardless of language.
+> **Note:** The gates are language-general; only the commands change per ecosystem. The Node commands in the gates above map directly to other stacks. For example, Python (`ruff check`, `mypy`, `pytest`, `pip-audit`) or Rust (`cargo build`, `cargo clippy`, `cargo test`, `cargo audit`). Keep the same gate order regardless of language.
 
 ## Feeding CI Failures Back to Agents
 
