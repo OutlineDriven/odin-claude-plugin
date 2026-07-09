@@ -49,7 +49,7 @@ The script emits JSON with these arrays:
 | `structural` | Missing frontmatter, missing **Why:**/**How to apply:**, index line > 150 chars, MEMORY.md > 200 lines, type-mismatch, fix-recipe content |
 | `staleness` | Memories whose stated rule conflicts with recent session evidence |
 
-Read `references/AUDIT-CHECKLIST.md` for full detection rules per category.
+Read `references/AUDIT-CHECKLIST.md` for full detection rules per category. Staleness is the one category whose detection is an algorithm rather than a check: read `references/STALENESS-RULES.md` for the session cross-referencing procedure, the negative signals that look like staleness but are not, and the historical-anchor phrases that suppress a past-date flag.
 
 ### 4. Render report grouped by severity
 

@@ -46,7 +46,7 @@ Languages noted but not yet bundled are deferred per Q8 rollback path: C++, Java
 ### 2. AGENTS.md and per-task GOALS.md split (load-bearing)
 
 - **AGENTS.md**: project-wide, stable across sessions and tasks. Contains: build/test commands, banned tooling, conventions, contract patterns, and the *location pattern* of per-task goal files (`.agent-tasks/<task-id>/GOALS.md` or whatever path the project chooses). **Defer authoring the AGENTS.md content to `init`**. This skill only ensures the file exists and contains the goal-location pointer.
-- **`.agent-tasks/<task-id>/GOALS.md`**: task-ephemeral. Contains: the user's goal in prose, the success criteria the loop checks against, links to the failing tests in `.agent-tasks/<task-id>/tests/`. Cleaned up after the task merges.
+- **`.agent-tasks/<task-id>/GOALS.md`**: task-ephemeral. Contains: the user's goal in prose, the success criteria the loop checks against, links to the failing tests in `.agent-tasks/<task-id>/tests/`. Cleaned up after the task merges. Write it from `references/agent-goals.md`, which carries the section layout and the rules for what belongs here rather than in AGENTS.md.
 
 The architectural rule: task A's goals never appear in AGENTS.md. AGENTS.md never contains task-specific success criteria. If the line blurs, surface and refuse.
 

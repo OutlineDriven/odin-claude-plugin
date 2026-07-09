@@ -81,6 +81,8 @@ Top-3 fixes: 1. Pick one direction (Intent + One-strong-moment).
 
 **Conflict-handling**: when two anchors fail with conflicting fixes, surface the tension in the table; do not auto-pick. Defer resolution to user.
 
+See `references/examples.md` for three worked audits — prose, code, decision — each carried from artifact through per-anchor verdict to revised form. Calibrate verdict severity against them before emitting a table.
+
 ## Anchor mode output shape
 
 When `/taste anchor` activates, emit a short register-load message:
