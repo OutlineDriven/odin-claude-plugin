@@ -223,7 +223,7 @@ Do not skip heading levels. Do not borrow heading styles for non-heading content
 
 ## Accessibility (WCAG 2.1 AA)
 
-Every component meets these standards. Use the native element first; reach for ARIA only when no native element fits.
+Every component meets these standards. Use the native element first; reach for ARIA only when no native element fits. Detailed WCAG checks and testing tools are in `references/accessibility-checklist.md`.
 
 ### Keyboard Navigation
 
@@ -432,10 +432,6 @@ function useToggleTask() {
   });
 }
 ```
-
-## See Also
-
-Detailed WCAG checks and testing tools are in `references/accessibility-checklist.md`.
 
 ## Common Rationalizations
 

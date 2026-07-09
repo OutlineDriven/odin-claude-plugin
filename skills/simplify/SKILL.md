@@ -88,11 +88,3 @@ A deliberate simplification pass invoked on a specific change-set. Decompose sim
 | 13 | Behavior regression on a fix: tests went red; offending commit auto-reverted via `git revert HEAD --no-edit` |
 | 14 | New bloat introduced: post-fix audit caught unneeded surface / duplicated logic / structure-without-cause / broken contract in the simplify patch; reverted, re-plan required |
 | 15 | Mixed-concern commit: a fix commit bundled more than one issue-class; must split before merging |
-
-## See also
-
-- **cleanup-codebase**: opportunistic deletion of dead fields / wrappers / configs while touching nearby code. `simplify` is the deliberate axis-decomposed pass on a specific diff. Cleanup runs inside a file you already had to open; simplify runs over a change-set you intend to compress.
-- **parallel-launch**: the parallel decomposer for independent concerns. `simplify` is a specialized invocation of this pattern with a fixed three-axis decomposition (reuse / quality / efficiency). See `parallel-launch/references/delegation-scenarios.md` for the underlying parallelism rules.
-- **review**: read-only assessment of the active branch; does not edit. `simplify` also applies the fixes its review agents found.
-- **fix**: polymorphic iterative repair loop driven by an external failure (verifier output, findings file, bug spec). `simplify` is self-sourcing: it generates its own findings via parallel review agents and consumes them in the same skill invocation.
-- **refactor-break-compat**: public API removal with consumer migration. `simplify` never breaks public contracts; it is compress-only.

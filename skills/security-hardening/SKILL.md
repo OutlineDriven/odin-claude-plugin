@@ -74,7 +74,7 @@ If you cannot name a feature's trust boundaries, you cannot secure it. This is O
 
 ## OWASP Top 10 Prevention Patterns
 
-These are prevention patterns, not a ranking. For the 2021 ordering, see the quick-reference table in `references/security-checklist.md`. Examples appear in two language families; the mitigation is the same across stacks.
+These are prevention patterns, not a ranking. `references/security-checklist.md` holds the 2021 ordering as a quick-reference table, along with the detailed security checklists and pre-commit verification steps. Examples appear in two language families; the mitigation is the same across stacks.
 
 ### Injection (SQL, NoSQL, OS Command)
 
@@ -594,12 +594,6 @@ run_allowlisted_action(intent.action, intent.params)
 - [ ] Secrets and other users' data kept out of prompts
 - [ ] Tool/agent permissions scoped; destructive actions require confirmation
 ```
-
-## See Also
-
-Detailed security checklists and pre-commit verification steps: `references/security-checklist.md`.
-
-- **vs `security-review`**: `security-review` is the audit/assessment pass (STRIDE threat modeling, OWASP walkthrough, dependency audit) run against code that already exists. `security-hardening` applies OWASP prevention patterns at build time, while code is being written.
 
 ## Common Rationalizations
 

@@ -95,11 +95,3 @@ Report: change-scope + base ref, selected reviewers, outer iterations, critical/
 | Completion invariant | Zero open at/above-floor or explicit user deferral path | Yes |
 
 Under `--quick` the loop terminates after consolidation + below-floor extraction; the resolve, fix-verification, regression-rollback, targeted-re-review, and completion-invariant gates apply only to the full loop and are bypassed.
-
-## See also
-
-- `audit-project`: whole-project variant; shares the roster + contract ancestry.
-- `review`: read-only branch review, no fixes.
-- `simplify`: behavior-preserving compression of a change-set.
-- `fix`: the verified-batch fix loop this skill reuses.
-- `resolve`: the validity + multi-solution analysis this skill's resolve gate is modeled on.

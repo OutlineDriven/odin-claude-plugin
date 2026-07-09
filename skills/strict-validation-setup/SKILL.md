@@ -62,10 +62,6 @@ Three sub-shapes, decide while drafting per task:
 
 The term *verifiable goals* (Devin Agents101, Jun 2025) is preferred over *TDD-for-agents* (non-idiomatic in 2026 production stacks).
 
-## Cross-references
-
-Pairs with `llm-self-loop` runtime: this skill runs once at bootstrap, then `llm-self-loop` runs many times against the gates and goal files this skill installed. The pair is: *bootstrap → run-many*.
-
 ## Posture
 
 Bootstrap is a one-shot mode. After running, do not stay resident. The loop that follows is `llm-self-loop`'s territory.

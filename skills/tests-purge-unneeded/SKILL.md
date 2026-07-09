@@ -118,12 +118,3 @@ The split is not aesthetic. It is about what guarantee the language provides. Se
 | 13 | Static guarantee unclear: language carve-out not resolvable; kept pending |
 | 14 | Test caught the injected bug: load-bearing; kept |
 | 15 | Suite regressed after deletion: rollback required |
-
----
-
-## See also
-
-- `cleanup-codebase`: parallel deletion discipline for non-test code (dead fields, redundant wrappers, stale config)
-- `tests-adversarial`: the complement: writing tests that *do* catch bugs, especially in failure paths and silent-failure regions
-- `test-driven`: the design-side discipline (RED → GREEN → REFACTOR); purge runs in the REFACTOR phase
-- `~/.claude/claude/system-prompt-baseline.md` `<directives>` testing charter: the source-of-truth principle this skill mirrors

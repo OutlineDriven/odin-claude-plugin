@@ -279,12 +279,3 @@ When opted in:
 | Repo-relative paths | Every file path in the artifact is repo-relative | Yes |
 | Unit completeness | Each implementation unit has Goal / Files / Approach / Test scenarios / Verification | Yes (persist only) |
 | Strategy grounding | `STRATEGY.md` read if present; absence noted in one line; never blocked | No |
-
-## See also / Disambiguation
-
-- **vs `explore`**: `explore` maps the codebase read-only and emits architecture summaries; `plan` turns that understanding into a sequenced implementation design.
-- **vs `fix` / implementation skills**: those write code; `plan` writes no code and, by default, no files.
-- **vs `review` / `audit-project`**: those judge existing code; `plan` designs the change ahead of it.
-- **vs harness Plan mode**: the durable artifact is opt-in precisely so it does not collide with the harness's own ephemeral Plan workflow.
-
-
