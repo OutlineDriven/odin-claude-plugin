@@ -173,33 +173,121 @@ Environment available to the command: `BRANCHLESS_TEST_COMMIT`,
 
 ---
 
-## Recipe 9: Publish a stack
+## Recipe 9: Publish / land
 
-### Path A — manual branch + push (works on GitHub, no force-push)
+Plain-git analogue: stay current → publish → drop merged locals → optional reclaim.
+Branchless: `git sync --pull` → `git submit` (feature) or stock push (gated main) → `git hide` → optional `git gc`.
+
+Wiki: <https://github.com/arxanas/git-branchless/wiki/Command:-git-submit>,
+<https://github.com/arxanas/git-branchless/wiki/Command:-git-sync>,
+<https://github.com/arxanas/git-branchless/wiki/Advanced-topic:-garbage-collection>
+
+### Gate
+
+| Condition | Path |
+|-----------|------|
+| User requested push/ship to **main**, **or** HEAD is on local `main`/`master` | **Path M — Land main** |
+| Otherwise (detached / feature / no main ask) | **Path F — Feature stack** |
+
+**Never**
+
+- Write `--force` / `--force-with-lease` in any publish step.
+- `git submit` targeting `main` / `master` / `release/*`.
+- Blind `git switch -C main` / `git branch -f main` without an ancestry proof.
+
+### Shared preflight
 
 ```
-git switch --detach <hash-of-tip>
-git switch -c feature/my-stack
-git push -u origin feature/my-stack
-# Open PR via gh or web UI.
+git sync --pull
+git sl
+# Working tree clean. Read the skip summary; resolve with:
+#   git sync --pull --merge
+#   or git move -b 'stack()' -d origin/main --merge
 ```
 
-### Path B — `git submit` (Phabricator, or non-protected GitHub)
+### Path F — Feature stack (default; prefer `git submit`)
 
-Pre-create the branch locally, then submit:
+Name the tip first (branch = publishing artifact), then submit the revset `@`
+(branches pointing at the current commit). Official forms: `git submit @`,
+`git submit -c` / `--create` for first remote create.
 
 ```
-git branch feature/my-stack <hash-of-tip>
-git config remote.pushDefault origin
-git submit -c --forge phabricator
+git branch feature/<name> @
+git config remote.pushDefault origin   # once per clone if unset
+# First publish (remote branch missing):
+git submit -c @
+# Later updates (remote branch already exists):
+git submit @
+# Open PR via gh / web UI when the forge is GitHub.
 ```
 
 Notes:
 
-- `git submit` **force-pushes** existing branches. On protected branches
-  the push is denied; fall back to Path A.
-- GitHub forge integration is experimental in v0.9.0; reordering a stack
-  loses PR ancestry. Path A is safer for GitHub today.
+- Default forge is `branch` (push branches only). Phabricator: add
+  `--forge phabricator` when `.arcconfig` is present (or pass it explicitly).
+- GitHub forge integration remains experimental; do not rely on it for PR
+  ancestry. Path F still uses submit as the branch push tool.
+- `git submit` **force-updates** existing remote feature branches by design.
+  That is expected for stacks under review; it is **not** allowed for main.
+- If submit is denied (protection on the feature branch), fall back to stock
+  `git push -u origin feature/<name>` — still no force flags.
+
+### Path M — Land main (gated only; stock push, never submit)
+
+**Main-path proof** (after shared preflight):
+
+```
+git merge-base --is-ancestor origin/main @
+# If that fails: print `git rev-list --left-right --count origin/main...HEAD`
+# and stop. Do not force.
+```
+
+**M1 — Already on `main` / `master`**
+
+```
+git push -u origin main    # or master; never --force*
+```
+
+**M2 — Detached, main authorized**
+
+Attach local main only via FF; never `-C` / `-f`:
+
+```
+git switch main
+git merge --ff-only @      # fails → stop; use Path F + PR instead
+git push -u origin main
+```
+
+If local `main` is missing: `git switch -c main @` then `git push -u origin main`
+(create only). If local `main` is not an ancestor of `@`, stop — do not rewrite.
+
+Divergent remote push reject: report left-right counts, re-sync / `git move`,
+plain push again. Never force.
+
+### Post-land / post-merge hygiene (“gc alike”)
+
+Always after a successful land **or** after a PR merge reaches remote main:
+
+```
+git sync --pull
+git hide -r <merged-draft-tips>   # tips now in main()/public(); leave smartlog
+# optional rare disk reclaim (not default):
+# git gc
+```
+
+Branchless retains unhidden orphans; hide first, then stock GC may reclaim.
+
+### Scenario index
+
+| # | Situation | Commands |
+|---|-----------|----------|
+| 1 | Feature first publish | `git branch <name> @` + `git submit -c @` |
+| 2 | Feature stack update | `git submit @` |
+| 3 | Submit denied on feature | stock `git push -u origin <feature>` |
+| 4 | On main, authorized | sync + ancestor check + `git push -u origin main` |
+| 5 | Detached, main authorized | FF-only attach + stock push |
+| 6 | Non-FF / diverge | stop + counts; no force |
+| 7 | After merge | `git sync --pull` + `git hide` + optional `git gc` |
 
 ---
 
@@ -260,7 +348,9 @@ stack stable.
 | Recover lost or wrong work | Recipe 6 (`git undo -i`) | Replaces reflog spelunking. |
 | Discard a local-only experiment | Recipe 7 (`git hide -r`) | Soft delete; reversible. |
 | Find which commit broke tests | `git test run --search binary --exec '<cmd>' 'stack()'` | Bisect via revset. |
-| Publish stack as PRs | Recipe 9 Path A or B | Path A for protected branches. |
+| Publish feature stack | Recipe 9 Path F (`git submit -c @` / `git submit @`) | Prefer submit; stock push only if denied. |
+| Land on main (gated) | Recipe 9 Path M | User asked main **or** already on main; never submit main. |
+| Post-merge hygiene | Recipe 9 post-land (`sync` + `hide`; optional `gc`) | Hide before stock GC can reclaim. |
 | Edit an old commit's contents | Recipe 10 (A, B, or C by trade-off) | A is default; C preserves intermediate trees. |
 | Reflexive `git reset --hard <SHA>` urge against committed history | `git undo -i` instead | Event log preserves recoverability. |
 | Reflexive `git rebase -i main` urge for stack edits | `git move`, `git move --fixup`, `git reword`, `git split` | Decompose by intent. |
@@ -273,4 +363,6 @@ stack stable.
 - Editing old commits: <https://github.com/arxanas/git-branchless/wiki/Workflow:-Editing-an-old-commit's-contents>
 - `git split` modes: <https://github.com/arxanas/git-branchless/wiki/Command:-git-split>
 - `git submit` flags + caveats: <https://github.com/arxanas/git-branchless/wiki/Command:-git-submit>
+- `git sync`: <https://github.com/arxanas/git-branchless/wiki/Command:-git-sync>
+- Garbage collection / hide: <https://github.com/arxanas/git-branchless/wiki/Advanced-topic:-garbage-collection>
 - `git test` runner: <https://github.com/arxanas/git-branchless/wiki/Command:-git-test>

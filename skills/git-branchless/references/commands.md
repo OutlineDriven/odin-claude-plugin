@@ -173,18 +173,20 @@ Rebase all local stacks onto the main branch via speculative in-memory merges. T
 - `--merge` — resolve conflicts interactively for stacks that would otherwise be skipped.
 - Behavior: stacks with conflicts are silently skipped unless `--merge` is passed; check the summary for skip lines.
 - Without a revset, syncs all draft commits.
+- Publish/land preflight and post-merge cleanup both start here — see Recipe 9 in `references/recipes.md`.
 
 ### `git submit [<revset>] [OPTIONS]`
 
 Push a stack of branches to a remote forge.
 
 - Default behavior: **force-pushes** all branches in the current stack that already exist on the remote. This rewrites remote history.
-- `-c, --create` — push branches that do not yet exist on the remote. The branch must already exist locally (`git branch <name> <commit>`).
+- Default revset: `stack()`. Common forms: `git submit @` (branches at HEAD), `git submit 'draft()'`.
+- `-c, --create` — push branches that do not yet exist on the remote. The branch must already exist locally (`git branch <name> <commit>`). First feature publish: `git submit -c @`.
 - `--forge phabricator` — Phabricator integration (well tested).
-- `--forge github` — GitHub integration. **Marked experimental in v0.9.0**; landing/reordering a stack may lose PR ancestry. Prefer manual branch + push for GitHub today.
+- `--forge github` — GitHub integration. **Marked experimental in v0.9.0**; landing/reordering a stack may lose PR ancestry. Prefer the default `branch` forge (or stock push fallback) for GitHub today.
 - `--dry-run`, `--jobs N` — preview / parallelism.
 
-**Safety caveat — force-push:** `git submit` rewrites the remote history of every existing branch in the stack. Use only on branches no other collaborator is actively building on. On repos with branch protection that denies force-push, `git submit` will fail; in that case create the branch locally and use plain `git push` for non-shared work, or open a PR with normal commits and skip `git submit` entirely. Never combine `git submit` with `--no-verify` or with branches that are someone else's review checkout.
+**Safety caveat — force-push:** `git submit` rewrites the remote history of every existing branch in the stack. Use only on feature branches no other collaborator is actively building on. **Never** `git submit` targeting `main` / `master` / `release/*` — gated main land uses stock `git push` (Recipe 9 Path M). On repos with branch protection that denies force-push, `git submit` will fail; fall back to plain `git push -u origin <feature>` for that branch. Never combine `git submit` with `--no-verify` or with branches that are someone else's review checkout. Full scenarios: Recipe 9.
 
 ---
 

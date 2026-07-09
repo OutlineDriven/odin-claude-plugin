@@ -51,7 +51,8 @@ are fine when they fall outside the class.
 | **Undoing committed history** | `git undo -i`. | `git reset --hard <SHA>` against any commit you have already made. |
 | **Discarding local work in progress** | `git hide -r <tip>` (recoverable). | `git branch -D` or `git reset --hard` purely to wipe. |
 | **Branch creation for ephemeral work** | Detached HEAD until publish; commit immediately, branch later. | `git checkout -b feature/X` before the first commit exists. |
-| **Publishing** | Branch the tip then `git push -u`, or `git submit -c` on supported forges. | Force-push as a way to "fix" your local history. |
+| **Publishing (feature stacks)** | Name the tip, then `git submit -c @` (first publish) or `git submit @` (update). Stock `git push -u origin <feature>` only if submit is denied. | `git submit` targeting `main`/`master`/`release/*`. Writing `--force` / `--force-with-lease` in recipes. |
+| **Publishing (gated main)** | Only when the user requested main **or** HEAD is already on local `main`/`master`: `git sync --pull`, prove `@` descends from `origin/main`, then stock `git push -u origin main`. Detached: FF-only attach to local main first. | `git submit` for main. Blind `git switch -C main` / `git branch -f main`. Any force flag. |
 
 Edge cases that are still legitimate (do not block these):
 
@@ -69,8 +70,10 @@ Work   → git switch --detach origin/main → edit → git commit (or git recor
 Refine → git move | git move --fixup | git amend | git reword | git split [v0.11.0+]
 Sync   → git sync --pull       (re-base onto fresh main; read skip summary)
 Verify → git test run --exec '<cmd>' 'stack()'  (revset is positional)
-Publish→ git branch <name> <tip> && git push -u origin <name>
-        (or git submit -c on Phabricator; treat GitHub forge as experimental)
+Publish→ Gate: on main or user asked main → Path M (Recipe 9): ancestry check +
+        stock `git push -u origin main` (never submit/force). Else Path F:
+        `git branch <name> @` then `git submit -c @` (later `git submit @`).
+        After land/merge → `git hide` merged drafts; optional `git gc`.
 Recover→ git undo -i           (event-log walk replaces reflog spelunking)
 ```
 
@@ -93,7 +96,9 @@ subtrees (`✕` ancestors).
 | Find first failing commit | `git test run --search binary --exec '<cmd>' 'stack()'` |
 | Recover lost work | `git undo -i` |
 | Discard a local experiment | `git hide -r <tip>` |
-| Publish | `git branch <name> <tip>` then `git push -u`, or `git submit -c` |
+| Publish feature stack | `git branch <name> @` then `git submit -c @` (update: `git submit @`); Recipe 9 Path F |
+| Land on main (gated) | `git sync --pull` + ancestor of `origin/main` + stock `git push -u origin main`; Recipe 9 Path M |
+| Post-merge hygiene | `git sync --pull` then `git hide -r <merged-tips>`; optional `git gc` |
 
 Full recipes with rationale: `references/recipes.md`.
 
@@ -127,8 +132,10 @@ Things this skill is **uncertain** about and treats accordingly:
   documented for `[v0.11.0+]`. The locally installed version may be older.
   Recipes include a pre-`v0.11.0` workaround.
 - `git submit --forge github` is **experimental** in v0.9.0. Stack
-  reordering can lose PR ancestry. Default to manual branch + `git push`
-  for GitHub work; reserve `git submit` for Phabricator.
+  reordering can lose PR ancestry. Prefer default forge `branch` with
+  `git submit -c @` / `git submit @` for feature stacks; never submit
+  main. Stock `git push -u` is the gated-main path and the submit-denied
+  fallback.
 - The event log is per-repository and per-clone. `git undo` cannot reach
   state from a different clone or a different machine.
 - Speculative-merge skips during `git sync` and `git move` are silent
