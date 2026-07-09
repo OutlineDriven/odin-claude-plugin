@@ -106,6 +106,8 @@ app.add_middleware(
 # NEVER in production: allow_origins=["*"] paired with credentials
 ```
 
+- [ ] CORS restricted to known origins (never `*` paired with credentials)
+
 ## Data Protection
 
 - [ ] Sensitive fields excluded from API responses (`passwordHash`, `resetToken`, etc.)
