@@ -2,7 +2,7 @@
 name: optimize
 description: Locates a hot path, benchmarks candidate transformations, and commits the proven winner. Use when the user asks to optimize something, make code faster, reduce allocations, or fix a performance regression.
 metadata:
-  short-description: Applied optimization op: transform a hot path and prove the win
+  short-description: 'Applied optimization op: transform a hot path and prove the win'
 ---
 
 # Optimize: applied hot-path transform with a proven win

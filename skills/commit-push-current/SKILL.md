@@ -1,6 +1,6 @@
 ---
 name: commit-push-current
-description: Commit working-tree changes and push to the current branch: no branch creation, no branch switch, no PR. Use when asked to push to the branch you are already on, including the default branch.
+description: 'Commit working-tree changes and push to the current branch: no branch creation, no branch switch, no PR. Use when asked to push to the branch you are already on, including the default branch.'
 ---
 
 # Git Commit and Push (Current Branch)
