@@ -27,6 +27,8 @@ Each row covers the SKILL.md (and any skill-internal references the upstream ski
 | `request-refactor-plan/SKILL.md` | https://github.com/mattpocock/skills/tree/main/request-refactor-plan | MIT | © 2026 Matt Pocock | ODIN voice; scope fence vs `odin:plan` and `odin:refactor-break-compat`; emission modes added. |
 | `github-triage/SKILL.md` | https://github.com/mattpocock/skills/tree/main/github-triage | MIT | © 2026 Matt Pocock | ODIN voice; flipped-row reconciliation: hard-coded label names abstracted to a configurable label-map at the top of SKILL.md. |
 | `setup-pre-commit/SKILL.md` | https://github.com/mattpocock/skills/tree/main/setup-pre-commit | MIT | © 2026 Matt Pocock | ODIN voice; generalized from Husky+lint-staged to project's hook tool of choice (Husky, pre-commit, lefthook, cargo-husky, dune hooks). |
+| `writing-skills/SKILL.md` | https://github.com/mattpocock/skills/tree/main/skills/productivity/writing-great-skills | MIT | © 2026 Matt Pocock | ODIN voice; renamed from upstream `writing-great-skills` (successor to the phantom flat-layout `write-a-skill` row above); `disable-model-invocation: true` preserved verbatim; disclosed reference link repointed to `references/`. |
+| `writing-skills/references/GLOSSARY.md` | https://github.com/mattpocock/skills/blob/main/skills/productivity/writing-great-skills/GLOSSARY.md | MIT | © 2026 Matt Pocock | Disclosed glossary moved from sibling to `references/`; ODIN voice; self-references repointed to `writing-skills`/`../SKILL.md`. |
 
 ## Reference documents
 
