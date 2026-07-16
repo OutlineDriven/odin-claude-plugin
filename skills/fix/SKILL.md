@@ -118,7 +118,6 @@ Partial match → `GH_PARTIAL` ambiguity flag.
 - Never `@ts-ignore` / `# type: ignore` / `// eslint-disable` to silence errors.
 - Never delete tests to make them pass.
 - ONE fix per iteration. No "while I'm here" changes.
-- No `git reset --hard`.
 - Recursion guard: `--mode <X>` bypasses classifier entirely; `gh-fix-ci` re-entering as `fix --mode verifier-failure` cannot loop back into `gh-fix-ci`.
 
 ## Constitutional Rules

@@ -14,7 +14,6 @@ a live capability is purge. Route it out to `refactor-break-compat`; never tidy 
 
 **Invariants:**
 - Every tidy action is atomic and scoped to what is already in view.
-- Tidy commits are always separate from behavior commits.
 - No opportunistic sweeps beyond the declared or clearly active scope.
 
 ---

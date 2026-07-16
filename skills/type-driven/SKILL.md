@@ -99,7 +99,6 @@ Type-Driven Design (static proofs) -> reduces test scope needed
 2. **Types Never Lie**: If it doesn't type-check, fix implementation (not types)
 3. **Holes Before Bodies**: Leave function bodies unimplemented and let the type checker report what is required before filling them in
 4. **Exhaustiveness Enforced**: All match/switch cases covered by the compiler
-5. **Pattern Match Exhaustive**: All cases covered
 
 ## Validation Gates
 

@@ -30,8 +30,6 @@ Read-only external knowledge gathering. Walk the 5-tier source ladder; cite ever
 
 ## Source Ladder
 
-Priority order (canonical): 1) Official docs 2) API refs 3) Books/papers 4) Tutorials 5) Community
-
 If a source category is unavailable or returns no authoritative results, skip it and move to the next tier. Do not halt.
 
 | Tier | Priority | Source type | Use when |

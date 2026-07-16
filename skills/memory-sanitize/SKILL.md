@@ -70,5 +70,4 @@ Wait for user acknowledgement before exiting.
 
 - Read-only on originals. Writes only to `/tmp/memory-sanitized-<ts>/`.
 - Does not update `MEMORY.md` in the originals: sanitized copies are not a replacement.
-- Does not read session histories.
 - Security limitation: pattern-based scanning misses novel or obfuscated formats. The user is the final reviewer before sharing.
