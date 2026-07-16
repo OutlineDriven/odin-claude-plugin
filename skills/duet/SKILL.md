@@ -176,28 +176,9 @@ One option carries `(Recommended)` in its label with a < 1-sentence why.
 
 ## `AskUserQuestion` tool contract (Claude Code reference)
 
-This protocol assumes a single "ask user" tool with the contract below. Other agent harnesses (Codex, Gemini CLI, Aider, OpenAI Assistants, ...) should map their equivalent question/prompt tool to this surface. Field names and numeric limits below are Claude Code's `AskUserQuestion`; the **shape** is what the protocol depends on, and the **`(Recommended)` convention** is what the per-axis pick semantics rest on.
+This protocol assumes a single "ask user" tool with the contract in `references/askuserquestion-contract.md`. Other agent harnesses (Codex, Gemini CLI, Aider, OpenAI Assistants, ...) should map their equivalent question/prompt tool to this surface. Field names and numeric limits there are Claude Code's `AskUserQuestion`; the **shape** is what the protocol depends on, and the **`(Recommended)` convention** is what the per-axis pick semantics rest on.
 
-**Per fire (one tool call):**
-- `questions` array: `minItems: 1, maxItems: 4`. All questions in the array render as one batched UI; one user round-trip per fire.
-
-**Per question:**
-- `question`: full sentence ending in `?`
-- `header`: short chip label, ≤ 12 characters
-- `multiSelect`: boolean (default `false`). `false` = single-pick (mutually exclusive options); `true` = subset of additive items (feature toggles, optional sub-tasks)
-- `options`: array, `minItems: 2, maxItems: 4`
-
-**Per option:**
-- `label`: 1-5 words; the chip text the user sees and ticks. Mark the recommended choice by appending `(Recommended)` to its label and placing it **first** in the array.
-- `description`: explanation of the trade-off / consequence; the one-sentence rationale lives here.
-- `preview`: optional rendered content (markdown, monospace box). Single-select only (tool constraint). Use for visual comparisons (layout mockups, code diffs, file trees); skip when the difference is purely conceptual.
-
-**Built-in escapes (do not duplicate):**
-- The free-text "Other" input is **auto-provided** on every question; never add an explicit "Other" option.
-- Users may attach free-text notes via the `annotations` response field.
-
-**Plan-mode caveat:**
-- Use this tool only to *clarify requirements* or *choose between approaches* during planning. Do **not** ask "Is the plan ready?" / "Should I proceed?"; that's what `ExitPlanMode` is for.
+Read `references/askuserquestion-contract.md` when running in Claude Code — it has the exact field-by-field contract (per-fire limits, per-question fields, per-option fields, built-in escapes, the plan-mode caveat). Other harnesses need only the mapping below, not the field-level schema.
 
 **Mapping for other harnesses:**
 - If the harness exposes only single-question prompts, fire them sequentially in the dependency order this protocol prescribes. The *shape* (per-axis single-select with one Recommended) is what matters; batching is an optimization.

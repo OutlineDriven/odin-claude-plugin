@@ -57,23 +57,7 @@ Pull Request Opened
 
 ## Feeding CI Failures Back to Agents
 
-The power of CI with AI agents is the feedback loop. When CI fails:
-
-```
-CI fails
-    │
-    ▼
-Copy the failure output
-    │
-    ▼
-Feed it to the agent:
-"The CI pipeline failed with this error:
-[paste specific error]
-Fix the issue and verify locally before pushing again."
-    │
-    ▼
-Agent fixes → pushes → CI runs again
-```
+Read `references/ci-failure-feedback-loop.md` when a CI run has already failed and the failure needs to be routed back to an agent for a fix. Skip it when setting up a new pipeline or adding a gate for the first time — that branch has no failure yet to feed back.
 
 ## Reference materials
 
@@ -83,6 +67,7 @@ The gate order above is fixed. These supply the commands and config that realize
 - `references/deployment-strategies.md`: preview deploys, feature-flag lifecycle, staged rollouts, and the rollback workflow.
 - `references/automation-and-environments.md`: where env vars and secrets live across `.env*` and CI, plus Dependabot and branch protection.
 - `references/ci-optimization.md`: the slow-pipeline decision tree, caching, and job parallelism.
+- `references/ci-failure-feedback-loop.md`: the copy-error-to-agent feedback loop; read only once a CI run has failed.
 
 ## Common Rationalizations
 

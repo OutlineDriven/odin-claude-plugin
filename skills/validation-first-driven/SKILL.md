@@ -79,11 +79,11 @@ STATE MACHINE: <Name>
 
 ## Event Sourcing Integration
 
-When state machines guard event-sourced aggregates:
-1. Command arrives -> validate against current aggregate state machine
-2. If transition valid -> emit immutable event
-3. State rebuilt from event replay
-4. Invalid transitions rejected before events created -- impossible to corrupt event log
+The command-validate-emit-replay cycle for state machines guarding
+event-sourced aggregates lives in `references/event-sourcing.md`. Read it
+when the system under design is event-sourced (commands validated against
+current aggregate state before events are emitted); skip it for protocol,
+workflow, or connection-lifecycle state machines that are not event-sourced.
 
 ---
 

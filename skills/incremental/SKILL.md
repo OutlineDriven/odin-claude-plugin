@@ -65,26 +65,11 @@ Each slice delivers working end-to-end functionality.
 
 ### Contract-First Slicing
 
-When backend and frontend develop in parallel:
-
-```
-Slice 0:  Define the API contract (types, interfaces, OpenAPI spec)
-Slice 1a: Implement backend against the contract + API tests
-Slice 1b: Implement frontend against mock data matching the contract
-Slice 2:  Integrate and test end-to-end
-```
+The worked slice sequence (Slice 0 contract, 1a backend, 1b frontend, 2 integration) lives in `references/slicing-strategies.md` — read it when backend and frontend develop in parallel against a shared API contract.
 
 ### Risk-First Slicing
 
-Tackle the riskiest or most uncertain piece first:
-
-```
-Slice 1: Prove the WebSocket connection works (highest risk)
-Slice 2: Build real-time updates on the proven connection
-Slice 3: Add offline support and reconnection
-```
-
-If Slice 1 fails, you find out before investing in Slices 2 and 3.
+The worked slice sequence for de-risking the most uncertain piece first lives in `references/slicing-strategies.md` — read it when one piece of the task carries outsized uncertainty or risk that the rest depends on.
 
 ## Implementation Rules
 
@@ -147,26 +132,7 @@ After each increment the project MUST build and existing tests MUST pass. NEVER 
 
 When a feature isn't ready for users but you need to merge increments, gate it behind a flag so partial work stays dark:
 
-```typescript
-// TypeScript
-const ENABLE_TASK_SHARING = process.env.FEATURE_TASK_SHARING === 'true';
-
-if (ENABLE_TASK_SHARING) {
-  // work-in-progress sharing UI
-}
-```
-
-```python
-# Python
-import os
-
-ENABLE_TASK_SHARING = os.environ.get("FEATURE_TASK_SHARING") == "true"
-
-if ENABLE_TASK_SHARING:
-    ...  # work-in-progress sharing path
-```
-
-This merges small increments to the main branch without exposing incomplete work.
+The worked TypeScript and Python examples live in `references/feature-flags.md` — read it when a feature must merge to main before it is user-ready; skip it when nothing partial is being merged.
 
 ### Rule 4: Safe Defaults
 

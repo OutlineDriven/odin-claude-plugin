@@ -53,35 +53,12 @@ Do not silently fill in ambiguous requirements. The spec exists to surface misun
 1. **Objective**: what is being built and why, who the user is, what success looks like.
 
 2. **Commands**: full executable commands with flags, not bare tool names. Record them for the stack the project actually uses:
-   ```
-   # Node / npm
-   Build: npm run build
-   Test:  npm test -- --coverage
-   Lint:  npm run lint --fix
-   Dev:   npm run dev
 
-   # Rust / cargo
-   Build: cargo build --release
-   Test:  cargo test
-   Lint:  cargo clippy -- -D warnings
-   Run:   cargo run
-   ```
+   Worked examples (Node/npm, Rust/cargo) live in `references/domain-examples.md` — read the one matching the project's stack.
 
 3. **Project structure**: where source lives, where tests go, where docs belong. The layout is stack-specific; capture the one that applies:
-   ```
-   # TypeScript service
-   src/      application source
-   src/lib/  shared utilities
-   tests/    unit + integration tests
-   e2e/      end-to-end tests
-   docs/     documentation
 
-   # Python package
-   src/pkg/       package source
-   tests/         unit + integration tests
-   docs/          documentation
-   pyproject.toml build + dependency config
-   ```
+   Worked examples (TypeScript service, Python package) live in `references/domain-examples.md` — read the one matching the project's stack.
 
 4. **Code style**: one real snippet of the project's style beats paragraphs describing it. Include naming conventions, formatting rules, and an example of accepted output in the project's language.
 
@@ -129,20 +106,7 @@ Do not silently fill in ambiguous requirements. The spec exists to surface misun
 
 **Reframe instructions as success criteria.** Translate vague requirements into measurable conditions, whatever the domain:
 
-```
-REQUIREMENT: "Make the dashboard faster"
-REFRAMED:
-- LCP < 2.5s on a 4G connection
-- Initial data load completes in < 500ms
-- No layout shift during load (CLS < 0.1)
-
-REQUIREMENT: "The batch job is too slow"
-REFRAMED:
-- Processes 1M records in < 90s on the reference host
-- Peak resident memory < 512 MB
-- Exits non-zero on any partial failure
-→ Are these the right targets?
-```
+Worked examples (a dashboard-performance reframe, a batch-job reframe) live in `references/domain-examples.md` — read the one closest to the domain at hand.
 
 Concrete targets let you loop, retry, and solve toward a defined goal instead of guessing what "faster" means.
 

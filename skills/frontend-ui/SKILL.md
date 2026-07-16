@@ -19,22 +19,7 @@ Build UIs that read as hand-crafted production work, not machine output. The fai
 
 ## State Management
 
-Pick the narrowest scope that holds the state. Categories, narrowest to widest:
-
-```
-Local state    → component-specific UI state           React: useState · Vue: ref/reactive
-Lifted state   → shared between 2-3 components in the same hierarchy  props + change handlers
-Context        → theme, auth, locale (read-heavy,       React: Context · Vue: provide/inject
-                 write-rare)
-URL state      → filters, pagination, shareable UI      router/searchParams (any stack)
-                 state
-Server state   → remote data with caching              React Query, SWR; Vue: TanStack Query
-Global store   → complex client state shared app-wide   Zustand, Redux; Vue: Pinia
-```
-
-Server-rendered stacks map the same categories onto request/session/query-param/database state. The categories hold; only the storage moves to the server.
-
-**Avoid prop drilling deeper than 3 levels.** If you pass props through components that don't use them, introduce context or restructure the component tree.
+The narrowest-to-widest state category table (local, lifted, context, URL, server, global store) and the prop-drilling guard live in `references/state-management.md` — read it when the task adds or changes component state; skip it for pure styling, accessibility, or layout-only changes.
 
 ## Design System Adherence
 
@@ -65,6 +50,7 @@ Where these references show component code, they pair a JavaScript component fra
 
 - `references/component-architecture.md`: file colocation, composition over configuration, and separating data from presentation.
 - `references/design-system.md`: the spacing scale, type hierarchy, and semantic color tokens.
+- `references/state-management.md`: the narrowest-to-widest state category table and the prop-drilling guard.
 - `references/accessibility-patterns.md`: keyboard navigation, ARIA labels, focus management, and empty/error states.
 - `references/accessibility-checklist.md`: WCAG 2.1 AA checks and the tools that verify them.
 - `references/responsive-and-loading.md`: mobile-first breakpoints, skeletons, and optimistic updates with rollback.

@@ -74,19 +74,7 @@ Group open issues into three buckets and display oldest-first:
 
 ## `awaiting_info` comment template
 
-```markdown
-## Triage Notes
-
-**Established so far:**
-- point 1
-- point 2
-
-**Need from you (@reporter):**
-- specific question 1
-- specific question 2
-```
-
-Reporter questions must be specific and actionable.
+The Triage Notes template (established-so-far / need-from-reporter) lives in `references/awaiting-info-template.md` — read it when transitioning an issue to `awaiting_info`; other transitions (`ready_for_agent`, `ready_for_human`, `wont_fix`) don't need it.
 
 ## Parallel examples
 

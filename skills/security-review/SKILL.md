@@ -51,14 +51,7 @@ For each "yes" / "unclear" answer, file a finding with severity and remediation 
 
 ## Parallel Dep-Audit Tooling
 
-| Family | CVE scanner | Secrets / history | SBOM |
-|---|---|---|---|
-| Rust | `cargo audit`, `cargo deny check advisories` | `gitleaks`, `trufflehog` | `cargo cyclonedx`, `syft` |
-| Python | `pip-audit`, `safety check` | `gitleaks`, `detect-secrets` | `cyclonedx-py`, `syft` |
-| JavaScript/TypeScript | `npm audit`, `pnpm audit`, `bun audit` | `gitleaks`, `trufflehog` | `cyclonedx-bom`, `syft` |
-| Go | `govulncheck`, `nancy` | `gitleaks`, `trufflehog` | `cyclonedx-gomod`, `syft` |
-| Java/Kotlin | OWASP Dependency-Check, `gradle dependencyCheckAnalyze` | `gitleaks`, `trufflehog` | CycloneDX Gradle/Maven, `syft` |
-| OCaml | `opam audit`, opam-repository advisory feed | `gitleaks`, `detect-secrets` | `syft` (filesystem) |
+Per-language-family CVE scanner, secrets/history scanner, and SBOM commands live in `references/dep-audit-tooling.md` — read the row for the ecosystem under audit; the other five families' rows are not needed for a single-stack codebase.
 
 Use `fd -e <ext>` (not `find`). Use `git grep -n -F 'literal'` (not `grep`). Use `bat -P -p -n` (not `cat`).
 

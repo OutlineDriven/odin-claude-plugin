@@ -22,10 +22,10 @@ Inspect context in priority order and dispatch to the first matching domain:
 |---|---|---|
 | File path(s), active diff, or `cargo`/`dune` target named | **Code** | `cleanup-codebase` skill |
 | `memory/` directory, `MEMORY.md`, or memory file(s) named | **Memory** | `memory-clean` then `memory-update` skills |
-| `.outline/`, `/tmp` scratch, `*.tmp`, `*.bak`, repomix packs | **Workspace** | Inline (see below) |
+| `.outline/`, `/tmp` scratch, `*.tmp`, `*.bak`, repomix packs | **Workspace** | `references/inline-procedures.md` |
 | `git sl`, commit stack, commit message(s) named | **Git** | `git-branchless` skill + `commit` skill |
-| Docs, comments, ADRs, READMEs, plan files named | **Docs** | Inline (see below) |
-| User explicitly says "tidy ICM" or names an ICM topic | **ICM state** | Inline (see below) |
+| Docs, comments, ADRs, READMEs, plan files named | **Docs** | `references/inline-procedures.md` |
+| User explicitly says "tidy ICM" or names an ICM topic | **ICM state** | `references/inline-procedures.md` |
 | "remove/drop/kill a live capability", compat-shim or feature-flag teardown named | **Purge** | `refactor-break-compat` skill |
 | No clear signal | none | Ask: "What are we tidying: code, memory, workspace, git, docs, or ICM?" |
 
@@ -33,28 +33,10 @@ Inspect context in priority order and dispatch to the first matching domain:
 
 ## Inline procedures (workspace, docs, and ICM state)
 
-These three domains are handled inline without a dedicated domain skill.
-
-### Workspace
-
-1. Discover scratch artifacts in scope:
-   ```sh
-   fd -t f -E '.git' -E 'target' -E '_build' \
-     '(\.(tmp|bak|outline)|repomix-output)' .
-   fd -t f /tmp -g '<session-prefix>-*' 2>/dev/null
-   ```
-2. Confirm each is truly scratch (not referenced by any open plan, task, or active diff).
-3. Remove with `rip` (not `rm`). Report count and paths.
-
-### Docs
-
-1. Scan in-scope file(s) for: stale `TODO`/`FIXME` (git-blame date > 6 months), comments contradicting current code, commented-out code blocks, multi-paragraph docstrings on non-API-surface functions, overclaims about external contracts.
-2. Show the current text + proposed change for each candidate. Edit only on confirmation or for purely cosmetic fixes (whitespace, spelling).
-3. Overclaims: annotate with `<!-- VERIFY -->` and surface to the user rather than deleting.
-
-### ICM state
-
-Run `icm list --sort recent | head -30`; for each stale entry show the current content plus the proposed replacement before calling `icm update`. For decisions made in this session not yet captured, show the proposed `icm store` call before executing. Write only on explicit user confirmation per entry.
+These three domains have no dedicated domain skill; their step-by-step
+procedures live in `references/inline-procedures.md`. Read the Workspace
+section when the scope-detection table matched Workspace, the Docs section
+when it matched Docs, and the ICM state section when it matched ICM state.
 
 ---
 

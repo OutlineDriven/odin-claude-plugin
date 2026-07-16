@@ -98,25 +98,11 @@ the global constraints. Nothing else.
 
 ## Parallel Dispatch
 
-Tasks with no shared files and no ordering dependency can run as concurrent
-workers. Document the independence argument before you do. Two tasks touching
-one file are not independent. Respect the platform's active-subagent limit, queue
-overflow, and treat spawn errors as backpressure (slow down, don't drop the task).
-
-The per-task gate does not relax under parallelism; this is what separates the
-skill from `parallel-launch`'s single end-of-run review. Every result is audited
-on its own before it reaches the shared branch; concurrency only overlaps the
-*implement* step, never the gate.
-
-Git state is not parallel-safe in a single checkout, and this skill's audit runs
-against committed ranges (`review-package BASE HEAD`), so the commit must exist
-before the audit. Keep that ordering consistent under parallelism: give each
-worker its own worktree (`git clone --shared` / the worktree skill) where it
-commits in isolation, audit each worktree's `BASE..HEAD` independently, and
-integrate into the main checkout only after that worker's audit clears.
-Serialize the integration so one result lands at a time. Never let two workers
-commit into one shared index or HEAD. No parallel primitive → run the same tasks
-sequentially.
+Parallel-dispatch mechanics — the independence proof, per-worker worktree
+isolation, and integration ordering — live in
+`references/parallel-dispatch.md`. Read it when a batch of tasks has no
+shared files and no ordering dependency and you are about to dispatch more
+than one worker concurrently.
 
 ## Model Selection
 
@@ -230,13 +216,9 @@ review packages, and the ledger. It self-ignores, so it never shows in
 
 ## Tree-Clean Recovery
 
-A worker that dies mid-task leaves a dirty tree. Inspect first (`git status`,
-`git diff`) and revert **only** that worker's changes: discard its edits, remove
-the stray files it created, leave any pre-existing uncommitted work untouched.
-Never blanket-reset or `git clean` the whole tree; that destroys work outside
-the task. Once the tree is back to the last good commit for the task's files,
-re-dispatch fresh. Never resume a dead worker onto a dirty tree, and never build
-the next task on uncommitted partial work.
+Recovery from a worker that died mid-task and left a dirty tree lives in
+`references/recovery.md`. Read it when a dispatched worker crashes or is
+killed before completing its task.
 
 ## Final Whole-Branch Review and Ship
 
@@ -320,4 +302,6 @@ Final reviewer: all requirements met, Minor findings triaged, ready to ship.
 
 ## Red Flags
 
-- **Two workers editing one file concurrently.** Concurrent edits corrupt each other's diffs. Sequence shared-file tasks or give each a worktree.
+Parallel-dispatch pitfalls (two workers editing one file, corrupting each
+other's diffs) live in `references/parallel-dispatch.md`. Read it before
+dispatching more than one worker concurrently.

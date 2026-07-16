@@ -56,19 +56,7 @@ Gemfile         → Ruby/Rails
 
 State the result before writing anything. The procedure is language-agnostic; the report shape is the same across families:
 
-```
-STACK DETECTED:
-- React 19.1.0 (package.json)
-- Vite 6.2.0
-→ Fetch official docs for the patterns in scope.
-```
-
-```
-STACK DETECTED:
-- Django 5.1 (pyproject.toml)
-- Python 3.13
-→ Fetch official docs for the patterns in scope.
-```
+Worked STACK DETECTED examples (React/Vite, Django/Python) live in `references/stack-examples.md` — two illustrations of the one report shape; read either and follow that shape for whatever stack you detected.
 
 If versions are missing or ambiguous, **ask the user**. Do not guess: the version selects which patterns are correct.
 
@@ -94,13 +82,7 @@ Fetch the documentation page for the exact feature you are implementing (the pag
 
 **Fetch precisely:**
 
-```
-BAD:  Fetch the React homepage
-GOOD: Fetch react.dev/reference/react/useActionState
-
-BAD:  Search "django authentication best practices"
-GOOD: Fetch docs.djangoproject.com/en/6.0/topics/auth/
-```
+Worked BAD/GOOD fetch examples (React, Django) live in `references/stack-examples.md` — two illustrations of the one fetch-precisely shape; read either and apply it to your stack's docs.
 
 After fetching, extract the patterns that apply and record any deprecation warnings or migration guidance on the page.
 
@@ -117,31 +99,7 @@ Write code that matches what the documentation shows:
 
 **When the docs conflict with existing project code:**
 
-```
-CONFLICT DETECTED:
-The existing codebase uses useState for form loading state,
-but React 19 docs recommend useActionState for this pattern.
-(Source: react.dev/reference/react/useActionState)
-
-Options:
-A) Use the modern pattern (useActionState) — matches current docs
-B) Match existing code (useState) — matches the codebase
-→ Which do you prefer?
-```
-
-The same conflict shape applies in any stack:
-
-```
-CONFLICT DETECTED:
-The codebase wraps ORM calls in sync_to_async, but Django 5.1
-documents native async ORM methods (aget, acreate) for this path.
-(Source: docs.djangoproject.com/en/5.1/topics/db/queries/#async-queries)
-
-Options:
-A) Use the documented pattern (native async ORM) — matches current docs
-B) Match existing code (sync_to_async wrappers) — matches the codebase
-→ Which do you prefer?
-```
+Worked CONFLICT DETECTED dialogues (React useState/useActionState, Django sync_to_async/async ORM) live in `references/stack-examples.md` — read either; both illustrate the same conflict shape, which applies in any stack.
 
 Surface the conflict. Do not silently pick one.
 
@@ -149,29 +107,7 @@ Surface the conflict. Do not silently pick one.
 
 Every framework-specific pattern gets a citation. The user must be able to verify each decision. Citations carry across languages:
 
-```typescript
-// React 19 form state via useActionState (replaces manual isPending/setIsPending)
-// Source: https://react.dev/reference/react/useActionState#usage
-const [state, formAction, isPending] = useActionState(submitOrder, initialState);
-```
-
-```go
-// Go 1.22+ method-aware routing patterns in net/http ServeMux
-// Source: https://pkg.go.dev/net/http#hdr-Patterns
-mux.HandleFunc("GET /orders/{id}", getOrder)
-```
-
-**In conversation:**
-
-```
-I'm using useActionState instead of manual useState for the form
-submission state. React 19 replaced the manual isPending/setIsPending
-pattern with this hook.
-
-Source: https://react.dev/blog/2024/12/05/react-19#actions
-"useTransition now supports async functions [...] to handle
-pending states automatically"
-```
+Worked citation examples (TypeScript code-comment, Go code-comment, and an in-conversation citation) live in `references/stack-examples.md` — read whichever matches your citation context; the two code-comment examples illustrate one format, not a per-language partition.
 
 **Citation rules:**
 
