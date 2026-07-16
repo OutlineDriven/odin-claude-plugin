@@ -28,7 +28,8 @@
       "args": [
         "-y",
         "repomix",
-        "--mcp"
+        "--mcp",
+        "--compress"
       ]
     }
   }
