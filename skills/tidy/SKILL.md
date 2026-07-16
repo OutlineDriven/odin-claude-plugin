@@ -78,7 +78,7 @@ If nothing needed tidying: `Tidy — <domain>: nothing to do.`
 ## Constitutional rules
 
 1. **Atomic commits**: tidy commits are always separate from behavior commits. No exceptions. Use `git move --fixup` when embedding alongside active work.
-2. **Scope discipline**: never tidy beyond the explicit target or the currently active file/system. No opportunistic sweeps.
+2. **Scope discipline**: tidy only the explicit target or the currently active file/system. No opportunistic sweeps.
 3. **Confirm before delete**: show evidence; never silently remove memories, commits, or files.
 4. **Compress-class only**: tidying is behavior-preserving net-deletion (dead/redundant) or net-simplification; introducing a new pattern, or removing a live capability (that is purge; dispatch out), is a separate task.
 5. **Verify after**: after code or git tidy, run repo-native verification (build + tests + linter).

@@ -34,7 +34,7 @@ Format your review with clear sections using markdown headers and bullet points:
 
 - Strengths in the implementation
 - Areas for improvement in style and maintainability
-- Adherence to project conventions
+- Adherence to project conventions and architecture patterns
 
 ## Specific Recommendations
 

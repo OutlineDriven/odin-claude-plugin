@@ -14,7 +14,7 @@ Evidence leads. Questions confirm. Generation writes only after a preview gate.
 
 Derive taste from observed patterns, not self-report alone. Mine memories and local agent histories for repeated positive influences, Side A slop bans, and Side B overkill bans. Convert those signals into exactly 5 portable anchors unless the user explicitly selects update-in-place for an existing owned skill with a different anchor count.
 
-Keep the generator right-sized: one generated `SKILL.md`, `references/anchors.md`, and `references/charter.md`. No scripts, no evals, no SOUL file, no elegance file, no examples skeleton.
+Keep the generator right-sized: exactly three generated files — `SKILL.md`, `references/anchors.md`, `references/charter.md`.
 
 ## Modes [LOAD-BEARING]
 

@@ -68,7 +68,7 @@ Use `procs` (not `ps`) for PID. Use `bat -P -p -n` (not `cat`) for trace files. 
 4. **Capture the bug as a test** (hand to TDD).
 5. **Confirm with inverse**.
 6. **Bisect for regressions**.
-7. **Do not make silent edits**.
+7. **Announce every edit**.
 
 ## Defense-in-Depth (conditional)
 

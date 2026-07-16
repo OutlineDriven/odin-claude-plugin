@@ -55,7 +55,7 @@ See [examples](references/examples.md) for brief TDD cycle patterns per language
 - **Mocks**: Verify interactions/calls were made (behavior-based)
 - **Fakes**: Working implementations (e.g., in-memory database)
 - **Spies**: Record calls while using real behavior
-- **Rule**: Mock external dependencies. Never mock core domain logic.
+- **Rule**: Mock only external dependencies.
 
 ---
 

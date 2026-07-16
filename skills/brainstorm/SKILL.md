@@ -285,8 +285,8 @@ Read `references/handoff.md` now, before presenting options. The option set, vis
 
 1. **Every durable brainstorm artifact is an addition to the repo's decision record.**
 2. **Markdown is canonical; HTML is opt-in.** The plan is written as `md` OR `html`, never both.
-5. **Repo-relative paths only.** Absolute paths break portability.
-6. **If any rule here conflicts with `~/.claude/claude/system-prompt-baseline.md`, the baseline wins.**
+3. **Repo-relative paths only.** Absolute paths break portability.
+4. **If any rule here conflicts with `~/.claude/claude/system-prompt-baseline.md`, the baseline wins.**
 
 ## Validation Gates
 

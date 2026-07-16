@@ -86,7 +86,7 @@ Use PostgreSQL with Prisma ORM.
 PROPOSED → ACCEPTED → (SUPERSEDED or DEPRECATED)
 ```
 
-- **Don't delete old ADRs.** They capture historical context.
+- **Keep old ADRs.** They capture historical context.
 - When a decision changes, write a new ADR that references and supersedes the old one.
 
 ## Inline Documentation

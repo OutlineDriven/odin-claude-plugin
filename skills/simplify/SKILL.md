@@ -19,7 +19,7 @@ A deliberate simplification pass invoked on a specific change-set. Decompose sim
 
 ## Mandates, not suggestions
 
-2. **Decompose by axis, never by file.** All three agents see the same diff and bring different lenses. Splitting the diff by file across agents defeats the design.
+1. **Decompose by axis, never by file.** All three agents see the same diff and bring different lenses. Splitting the diff by file across agents defeats the design.
 
 ## When to Apply
 
