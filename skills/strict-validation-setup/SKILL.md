@@ -25,7 +25,7 @@ These never mix. Task goals never go into AGENTS.md (would leak as project polic
 | `setup-pre-commit`          | Commit-hook installation: defer for hook tooling                               |
 | `setup-gitignore`           | Gitignore patterns: defer for ignore-file composition                          |
 
-Duplication with the existing skills was audited and accepted; bodies cite each rather than re-doing the work. When the surface narrows to a single concern above, defer.
+When the surface narrows to a single concern above, defer.
 
 ## Three parts
 

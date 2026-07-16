@@ -9,8 +9,6 @@ description: Requires fresh, actually-run evidence before any claim that a task 
 
 A completion claim is a claim about reality, not a description of effort spent. Saying "this works," "tests pass," "the fix is done," or "it's ready" asserts something true about the current state of the code. It is not a report that time was spent trying to make it true. That assertion carries the same evidentiary bar as any other factual claim: something was actually run, its result was actually read, and the result actually supports the sentence being said out loud.
 
-Writing careful code, reasoning through it, and believing it correct are all real activities, but none of them is the thing being claimed. Only running the check that exercises the claim, and reading what it reports, closes the gap between effort and fact.
-
 ## When to Use
 
 Apply this before any sentence to the user that asserts a present-tense state of the work rather than describing an action taken:
@@ -77,14 +75,8 @@ The working rule: re-run a check when the code it covers has changed since it la
 
 ## Red Flags
 
-- Saying "done," "fixed," "working," or "passing" without naming what was actually run to check it
-- Reporting a summary line ("no errors," "all green") in place of having read the full output
-- Claiming success on the strength of a run that happened before the most recent edit
-- Hedged phrasing ("should work," "looks right," "probably fine") standing in for a check that was never run
-- Rounding a partial result up to full success ("3 of 4 passed" reported as "it passes")
 - Treating "nothing looked obviously wrong" as equivalent to "confirmed working"
 - Skipping the check because the deadline or the user's tone implies urgency
-- Reusing an earlier result without first confirming nothing relevant changed since it ran
 
 ## Verification
 

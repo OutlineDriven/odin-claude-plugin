@@ -50,6 +50,4 @@ If a source category is unavailable or returns no authoritative results, skip it
 ## Anti-Patterns
 
 - Inventing versions, API signatures, or config keys from training data without Tier 1 verification
-- Skipping Tier 1 for a named library that has published docs: always attempt official docs first
-- Opaque source attribution: every claim needs a citable source URL or an explicit `[Speculative]` label
 - Re-entering a router or orchestrator skill from within this leaf skill: forbidden (recursion guard)

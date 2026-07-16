@@ -98,12 +98,9 @@ Read on demand; the threat model and the boundary tiers above decide which.
 ## Red Flags
 
 - User input passed directly to database queries, shell commands, or HTML rendering
-- Secrets in source code or commit history
 - API endpoints without authentication or authorization checks
 - Missing CORS configuration or wildcard (`*`) origins
 - No rate limiting on authentication endpoints
-- Stack traces or internal errors exposed to users
-- Dependencies with known critical vulnerabilities
 - Server fetches user-supplied URLs without an allowlist (SSRF)
 - LLM/model output passed into a query, the DOM, a shell, or `eval`
 - Secrets, PII, or the full system prompt placed inside an LLM context window

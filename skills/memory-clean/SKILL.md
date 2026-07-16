@@ -92,7 +92,5 @@ Report residual warn/info items; leave them for the user to act on separately if
 
 ## Anti-patterns (never do)
 
-- Auto-fix without user confirmation.
-- Mutate originals without the `/tmp/` snapshot.
 - Delete a file without showing the user its content first.
 - Attempt credential redaction (surface critical flag, recommend `memory-sanitize`).

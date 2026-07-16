@@ -320,12 +320,4 @@ Final reviewer: all requirements met, Minor findings triaged, ready to ship.
 
 ## Red Flags
 
-- **Trusting a green verifier as the audit.** It proves the worker's check ran, not that the change is correct or in scope.
-- **Building the next task on an unaudited or suspect result.** The gate is mandatory, not advisory.
-- **`HEAD~1` as the review base.** It silently truncates multi-commit tasks. Use the recorded BASE.
-- **Pre-judging the reviewer**: "do not flag," "at most Minor," pre-rated severity. The gate is worthless if you cook it.
 - **Two workers editing one file concurrently.** Concurrent edits corrupt each other's diffs. Sequence shared-file tasks or give each a worktree.
-- **Pasting session history into a dispatch.** A fresh worker needs its task, its interfaces, and the constraints. Nothing else.
-- **Blanket-reset on worker death.** Revert only that worker's changes; `git clean -fdx` destroys user work and the ledger.
-- **Re-dispatching a task the ledger marks complete.** Check the ledger and `git log` after any compaction or resume.
-- **Squash-shipping.** The final ship is atomic commits via the ODIN path, not one opaque merge commit.

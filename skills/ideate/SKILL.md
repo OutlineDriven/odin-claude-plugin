@@ -113,16 +113,6 @@ Hand the survivors to `askme` to clarify intent on the chosen direction(s) befor
 
 One ideation doc per commit (a load-bearing addition to the repo's decision record). Stage only what `ideate` wrote: `git add docs/ideation/<slug>.md` (and `docs/ideation/<slug>.html` when `format:html`), never other dirty files, never `git add -A`. Read each file back before staging. Publish by the operating repo's normal flow.
 
-## Anti-patterns
-
-- **Generating before grounding.** Ideas with no cited basis are fabrication. Scan first.
-- **Dropping losers silently.** The rejection rationale is part of the deliverable; an unexplained reject is lost signal.
-- **Optimistic ranking instead of reject-by-default.** Ranking keeps weak ideas at the bottom of the list; the gate cuts them and records why.
-- **Parallel generators converging on the obvious reading.** Without distinct axis × frame assignments, every generator returns the same idea. The parallelism buys nothing.
-- **Jumping to `plan`.** `ideate` ends at a survivor set handed to `askme`, not an implementation plan.
-- **`git add -A`.** Stages unrelated dirty files. Stage what this run wrote by path.
-- **HTML by default, or content only in the HTML.** HTML is opt-in (`format:html`) and always a view derived from the markdown; anything in the view but not the markdown is drift.
-
 ## Disambiguation
 
 - **vs `askme`**: `askme` clarifies intent on a direction already in hand (Verbalized Sampling questions); it does not generate directions. `ideate` generates the candidate directions and routes its survivors to `askme` for intent-clarification before planning.

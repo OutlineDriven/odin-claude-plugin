@@ -35,12 +35,9 @@ See [examples](references/examples.md) for brief TDD cycle patterns per language
 
 ## Anti-patterns
 
-- **Test-last**: Writing tests after implementation defeats the design benefit
 - **Testing implementation details**: Tests should verify behavior, not internal structure -- breaks refactoring confidence
 - **Over-mocking**: Testing the mocks instead of the code; mock external I/O, not core logic
-- **Skipping RED**: Tests that never fail aren't tests -- they verify nothing
 - **100% coverage obsession**: Coverage does not equal quality. Mutation testing exposes gaps coverage cannot
-- **Refactoring on RED**: Never restructure with failing tests
 - **Test-induced architectural damage**: Letting mock boundaries dictate design
 - **Snapshot bloat**: Approval-style tests without curation become maintenance burden
 

@@ -67,11 +67,6 @@ Report: change-scope + base ref, selected reviewers, outer iterations, critical/
 
 ## Anti-patterns
 
-- **Widening to the whole repo.** This skill grills the diff; `.` is `audit-project`'s job.
-- **Looping on low / style nits.** The floor + confidence guard exist to prevent that; do not chase low-confidence subjective findings.
-- **Silently widening the diff to fix a finding.** Out-of-scope fixes escalate to the user, never auto-apply to unchanged files.
-- **Fix before resolve/consolidation.** Raw reviewer output is untrusted until deduped, false-positive-checked, and resolved.
-- **Honoring empty false-positive flags.** Dismissal without a reason is forced open.
 - **Suppressing tests or guards** to land a fix. Never disable a verifier.
 - **Shipping placeholders.** "TODO: fix later" is a failed grill fix.
 

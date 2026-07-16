@@ -13,9 +13,7 @@ NOT apply: active feature branch with high churn; pre-release freeze window; mid
 
 ## Anti-patterns
 
-- **Big-bang upgrade**: bumping every dep at once.
 - **Skipping the lockfile**: floating ranges create non-reproducible builds.
-- **Ignoring the CHANGELOG**: major bumps without reading upstream notes.
 - **Suppressing deprecations**: `--warning-as-error=off` defers cost.
 - **Bypassing audit signals**: `npm audit fix --force` without reading.
 - **No smoke test on minor**: minor versions can introduce behavior shifts.

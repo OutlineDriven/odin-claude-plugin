@@ -12,10 +12,6 @@ owns only scope detection, dispatch, and the output contract. Tidy's deletions a
 compress-class (behavior-preserving: dead/redundant/structural); a request to remove
 a live capability is purge. Route it out to `refactor-break-compat`; never tidy inline.
 
-**Invariants:**
-- Every tidy action is atomic and scoped to what is already in view.
-- No opportunistic sweeps beyond the declared or clearly active scope.
-
 ---
 
 ## Scope detection
@@ -32,8 +28,6 @@ Inspect context in priority order and dispatch to the first matching domain:
 | User explicitly says "tidy ICM" or names an ICM topic | **ICM state** | Inline (see below) |
 | "remove/drop/kill a live capability", compat-shim or feature-flag teardown named | **Purge** | `refactor-break-compat` skill |
 | No clear signal | none | Ask: "What are we tidying: code, memory, workspace, git, docs, or ICM?" |
-
-Purge is a behavior change, not a tidy. Detect purge-intent and dispatch out; never perform capability removal inline (violates the behavior-commit-separation invariant).
 
 ---
 

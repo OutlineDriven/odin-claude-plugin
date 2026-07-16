@@ -52,8 +52,6 @@ python3 scripts/ast_grep_helper.py replace '$A != null' '$A' --lang ts src/ --ap
 
 `validate` compiles the pattern through ast-grep's own parser, so it catches malformed queries in every language (including Go/Python where `$` is not an identifier char). `replace` is two-pass: dry-run prints the blast radius, `--apply` writes.
 
-Rule: emit a pattern → `validate` it; emit a rewrite → `replace` dry-run, inspect the diff + match count, only then re-run with `--apply`.
-
 ## What to use, when
 
 ```text
@@ -63,7 +61,7 @@ semantic (types, references, "who calls this symbol")     → LSP / compiler
 across many repos                                         → search engine, then ast-grep per-repo
 ```
 
-ast-grep matches syntax, not bytes. The moment you reach for `|`, `.*`, `\w`, or `[...]`, you want rg, not a pattern.
+ast-grep matches syntax, not bytes.
 
 ## When a rewrite or search surprises you
 
@@ -168,5 +166,3 @@ See [CLI Reference](references/cli.md) for details.
 
 - [Recipes](references/recipes.md): per-language copy-paste patterns (TS/JS, Python, Rust, Go, Java, Kotlin, C, C++). Read this **first** when starting a task in a given language.
 - [Pitfalls](references/pitfalls.md): failure-mode field guide (regex-vs-AST, incomplete patterns, the two-pass write, named/unnamed nodes, meta-var naming, stdin/tsx, `sg`↔setgroups, and the 0-matches debug ladder). Read this when **0 matches surprises you**.
-
-Use the per-topic references linked above only when that topic is relevant.

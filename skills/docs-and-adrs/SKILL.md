@@ -258,13 +258,7 @@ Special consideration for AI agent context:
 
 ## Red Flags
 
-- Architectural decisions with no written rationale
-- Public APIs with no documentation or types
-- README that doesn't explain how to run the project
-- Commented-out code instead of deletion
 - TODO comments that have been there for weeks
-- No ADRs in a project with significant architectural choices
-- Documentation that restates the code instead of explaining intent
 
 ## Verification
 

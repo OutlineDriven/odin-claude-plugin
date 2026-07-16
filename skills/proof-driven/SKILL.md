@@ -5,9 +5,9 @@ description: Guides implementation by proving properties before writing code. Us
 
 # Proof-driven development
 
-Prove properties from requirements before writing code. Proofs guide implementation, not the reverse. Zero unproven properties in final code.
+Prove properties from requirements before writing code. Proofs guide implementation, not the reverse.
 
-**Modern insight (2025)**: PBT + example tests pairing is the standard -- properties discover edge cases, example tests prevent regressions and serve as documentation. Counterexamples from shrinking should always become permanent regression tests. AI-assisted PBT (Anthropic 2025) can generate properties from docstrings, but human judgment for property selection remains essential.
+**Modern insight (2025)**: PBT + example tests pairing is the standard -- properties discover edge cases, example tests prevent regressions and serve as documentation. AI-assisted PBT (Anthropic 2025) can generate properties from docstrings, but human judgment for property selection remains essential.
 
 See [frameworks](references/frameworks.md) for language-specific PBT and stateful testing tools.
 See [examples](references/examples.md) for brief property test patterns per language.
@@ -28,8 +28,6 @@ See [formal-tools](references/formal-tools.md) for theorem provers and bounded m
 | **Metamorphic** | Relationship between outputs | `sin(-x) == -sin(x)` |
 
 **Most effective** (OOPSLA 2025): Model-based properties (~80% bug detection), postconditions (~65%). Least effective: properties that reimplement the logic under test.
-
-**Anti-pattern**: Don't reimplement the function in the property. Properties should be *simpler* than the code they test.
 
 ---
 
@@ -61,9 +59,7 @@ Before attempting a proof, reason through the property: SHORT-form KEYWORDS for 
 
 - **Happy-path-only properties**: Properties must cover edge cases -- that's their primary value
 - **Skipping stateful testing for stateful systems**: Use model-based stateful PBT (Hypothesis RuleBasedStateMachine, jqwik stateful)
-- **Ignoring counterexamples**: Shrunk counterexamples are gold -- always convert to permanent regression tests
 - **Properties that test the framework**: `assert fast_check works` is not `assert my_code works`
-- **Permanently skipped/pending properties**: Zero-skip policy -- skip = unfinished work
 - **Conflating PBT with unit testing**: PBT explores input space; unit tests verify known examples. Use both.
 - **Not using shrinking**: If counterexample is 500-line input, it's useless. Shrinking finds minimal failing case.
 - **Reimplementing logic in properties**: Property should be simpler than the code. If property is as complex as implementation, it adds no confidence.

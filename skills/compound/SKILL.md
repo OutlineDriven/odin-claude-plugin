@@ -7,8 +7,6 @@ metadata:
 
 # Compound: durable project knowledge
 
-Adds structured, in-repo documentation of solved problems and project-specific vocabulary.
-
 `compound` writes exactly two surfaces:
 
 - `docs/solutions/<category>/<slug>.md`: one learning per solved problem.

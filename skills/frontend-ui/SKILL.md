@@ -82,11 +82,7 @@ Where these references show component code, they pair a JavaScript component fra
 ## Red Flags
 
 - Components with more than 200 lines (split them)
-- Inline styles or arbitrary pixel values
-- Missing error states, loading states, or empty states
-- No keyboard navigation testing
 - Color as the sole indicator of state (red/green without text or icons)
-- Generic "AI look" (purple gradients, oversized cards, stock layouts)
 
 ## Verification
 

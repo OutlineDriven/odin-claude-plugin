@@ -88,6 +88,4 @@ Read back each written file; confirm frontmatter parses as YAML (key: value line
 ## Anti-patterns (never do)
 
 - Fabricate a memory without citing a transcript turn or explicit user statement.
-- Write without per-proposal user confirmation.
 - Store code patterns, fix recipes, git history, or ephemeral task state.
-- Create MEMORY.md entries exceeding 150 chars.

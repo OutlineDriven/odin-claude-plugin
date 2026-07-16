@@ -23,7 +23,6 @@ When a project has an `AGENTS.md`, `CLAUDE.md`, or `.clinerules`, read it before
 ## Anti-patterns to flag
 
 - **Screenshot-only context**: loses URL grounding, copy-paste, and search. Pair every screenshot with the URL or text export.
-- **Unanchored pronouns**: "the PR" / "that function" / "the bug" hallucinate badly in long contexts. Demand a URL or symbol path before continuing.
 - **Token-usage / LOC framing as a quality proxy**: quantity is not capability. The chat that prompted this skill explicitly rejects this framing; surface the rejection if the user reaches for it.
 
 ## Optional 2026 research extensions (verification status)
@@ -43,8 +42,6 @@ Earlier candidate extensions, second-pass verified. Usage details belong in a de
 | `qa`                     | Bug capture: user reports something broken in plain language                       |
 | `init`                   | AGENTS.md authoring: onboarding a repository, capturing hard-to-rediscover conventions |
 
-Do not invoke this skill for context sweeps (use `contexts`), bug filing (use `qa`), or AGENTS.md authoring (defer to `init`).
-
 ## Posture
 
-Surface one tactic at a time. Name the protocol. Show the better handle in concrete form (the actual URL, the actual file path, the actual symbol name). Do not dump the catalog on the user. Pick the one tactic that matches the gap and surface that.
+Surface one tactic at a time. Name the protocol. Show the better handle in concrete form (the actual URL, the actual file path, the actual symbol name). Do not dump the catalog on the user.

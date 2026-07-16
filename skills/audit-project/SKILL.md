@@ -171,12 +171,10 @@ Report: scope, selected reviewers, iterations, critical/high fixed, remaining cr
 
 - **Single-agent audit**: defeats domain separation; only valid with explicit `--domain`.
 - **Fix before consolidation**: raw reviewer output is untrusted until deduped and false-positive-checked.
-- **Honor empty false-positive flags**: dismissal without reason is ignored.
 - **Let a high false-positive ratio auto-pass**: >50% dismissal on >=10 findings is a prompt-injection smell, not success.
 - **Re-review the whole repo after every batch**: wasteful and noisy; re-review changed files plus impacted entry-points.
 - **Suppress tests or guards**: never disable a verifier to land an audit fix.
 - **Create public issues for security-sensitive findings**: keep exploitable details internal; fix immediately or leave private queue notes.
-- **Move critical/high to debt by default**: only a user decision gate can defer them.
 - **Ship placeholders**: "TODO: fix later" is a failed audit fix.
 
 ## Validation Gates

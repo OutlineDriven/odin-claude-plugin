@@ -91,11 +91,7 @@ Before any cleanup recommendation says "zero behavior change":
 
 ## Anti-patterns
 
-- Recommending a directory instead of a file.
-- Proposing before the mandatory interest ask.
-- Inferring architecture from filenames without reading code.
 - Treating GitHub labels as enough evidence when repo signals disagree.
-- Promising cleanup safety for exported symbols without caller/reachability checks.
 - Dumping raw signal tables instead of translating them into contribution moves.
 - Suggesting generated, vendored, lockfile, snapshot, or build-output files.
 - Ranking by personal preference instead of stated contributor interest.

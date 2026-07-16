@@ -39,25 +39,10 @@ Follow these steps:
 2. Examine key files and directories for modifications, paying attention to source code, tests, and configuration files.
 3. Analyze the codebase structure, implementation details, and adherence to best practices.
 
-Provide a thorough code review that includes:
-
-- Overview of recent changes and their purpose
-- Analysis of code quality, style, and maintainability
-- Specific suggestions for improvements in structure, logic, and implementation
-- Identification of potential issues, bugs, or risks
-- Assessment of test coverage and validation strategies
-- Performance considerations and optimization opportunities
-- Security review and vulnerability assessment
-
 Focus on:
 
-- Code correctness and logical soundness
 - Adherence to project conventions, coding standards, and architecture patterns
-- Performance implications and efficiency
-- Comprehensive test coverage and edge case handling
-- Security best practices and potential vulnerabilities
 - Documentation quality and developer experience
-- Scalability and maintainability concerns
 
 Format your review with clear sections:
 
@@ -229,9 +214,4 @@ Each finding gets exactly one class. The class is **advice on where the fix belo
 
 ## Anti-patterns
 
-- **Replacing the single pass with personas.** Deep mode adds; it never substitutes. The eight sections are the floor.
-- **Always escalating.** Auto-promotion is gated; running seven agents on a two-line docs change is wasted parallelism.
-- **Fixing in review.** This skill is read-only. Routing a finding to `fix` is the action; editing the file is not.
-- **Severity inflation.** "Could theoretically break" with no reachable input is P3, not P0. Reserve P0 for reachable-now impact.
-- **Sequential persona dispatch.** One message, all selected personas.
 - **Padding with nits.** A persona that finds nothing returns an empty list. Do not manufacture P3s to look thorough.

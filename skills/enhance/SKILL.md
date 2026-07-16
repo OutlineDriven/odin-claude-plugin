@@ -129,7 +129,6 @@ MEDIUM and LOW hidden unless `--verbose`. They require human inspection; never a
 ## Anti-patterns
 
 - **Learning suppressions.** False positives are reported, gated, or fixed in the check table. Do not hide future findings behind state.
-- **Medium auto-fix.** MEDIUM means context-dependent; applying it automatically is Sprawl.
 - **Parallel by file.** Parallelize by analyzer family, not file shards. Cross-surface consistency depends on seeing all relevant files.
 - **Generic advice.** Every finding needs path, line or section, observed evidence, and a concrete fix.
 - **Cross-skill delegation.** This skill is self-contained; use its own reference table and native tools.

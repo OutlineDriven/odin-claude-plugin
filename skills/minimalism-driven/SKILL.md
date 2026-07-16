@@ -15,7 +15,6 @@ description: 'Build the smallest version that fully does the job and makes its i
 
 ## Verify
 
-- [ ] Searched for and reused existing code before writing new.
 - [ ] Every addition has a one-line reason; delete and edit were tried first.
 - [ ] Names, error paths, and assumptions make intent obvious without asking.
 - [ ] Scope equals the ask; adjacent ideas are notes, not code.

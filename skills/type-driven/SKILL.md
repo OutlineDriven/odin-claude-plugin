@@ -11,7 +11,7 @@ description: Develop with refined types that make illegal states unrepresentable
 2. **Parse, don't validate** (Alexis King). For a parsed opaque domain type inside a trusted boundary, if the type compiles, the value is valid — the proof travels with the value, not with a bool the caller must remember to check.
 3. **Types never lie.** Design from requirements before implementation. A type that admits invalid values to satisfy a broken caller is lying about what it guarantees.
 
-Type richness matches risk — start simple, add complexity where bugs actually occur. Types serve AI-assisted development too: they communicate intent better than comments and reduce hallucinated APIs.
+Type richness matches risk — start simple, add complexity where bugs actually occur.
 
 See [patterns](references/patterns.md) for language-specific refined types, state machine techniques, and language-specific validation gates.
 See [examples](references/examples.md) for brief "parse, don't validate" patterns per language.
@@ -64,10 +64,7 @@ Before designing types, reason through the domain: SHORT-form KEYWORDS for inter
 - **Primitive obsession**: Raw strings for emails, ints for money, unbranded IDs
 - **Validating after construction**: If the constructor allows invalid values, the type is lying
 - **Trusting external data**: JSON/API/user input must be parsed, never `as`-cast
-- **Type holes**: Placeholder markers left in final code (language-specific: see [patterns](references/patterns.md))
-- **Fixing types to match broken implementation**: Types never lie -- fix the code, not the types
 - **Stringly-typed APIs**: `fn process(action: string)` instead of `fn process(action: Action)`
-- **`as` casts bypassing type checker**: Escape hatches that negate type safety
 - **Over-engineering with types**: Phantom types for every invariant -> complexity explosion; unreadable signatures defeat documentation purpose
 - **Type gymnastics without clarity**: Complex generics/HKT that obscure intent -- worse than runtime validation
 

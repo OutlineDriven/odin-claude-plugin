@@ -3,7 +3,7 @@ name: debug
 description: Isolate defects with hypothesis-driven debugging and minimal reproduction. Use when a test fails, a crash or exception occurs, output is wrong, or an intermittent flake has no obvious cause.
 ---
 
-A bug is a falsified assumption. Find the assumption, falsify it deliberately, observe the divergence, narrow until one line owns the lie. Avoid speculation, shotgun edits, and "fix and rerun" guessing.
+A bug is a falsified assumption. Find the assumption, falsify it deliberately, observe the divergence, narrow until one line owns the lie.
 
 ## When to Apply / NOT
 

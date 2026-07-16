@@ -7,7 +7,7 @@ description: Delete tests that do not catch real bugs. Use when reviewing legacy
 
 Tests are not assets. Tests are liabilities that pay rent by catching real bugs. Volume is not a quality signal. Coverage percentage is not a quality signal. Only the counterfactual matters: **if I delete this test, can a real bug now reach prod?** If the answer is no, the test is dead weight, and dead weight slows CI, breeds noise, and trains reviewers to ignore failures.
 
-**Modern insight (2025)**: TDD pairs with purge discipline. The same rigor that earns RED before GREEN earns deletion before keep. A test that cannot describe the bug it would catch should not exist. Mutation testing exposes which tests are actually load-bearing; the rest are cargo cult.
+**Modern insight (2025)**: TDD pairs with purge discipline. The same rigor that earns RED before GREEN earns deletion before keep. Mutation testing exposes which tests are actually load-bearing; the rest are cargo cult.
 
 See [python](references/python.md) for pytest examples (dynamic-language carve-out).
 See [typescript](references/typescript.md) for jest/vitest examples (static-language redundancy).
@@ -62,7 +62,7 @@ The carve-out for mandate 3 is **language-dependent** and must mirror the user's
 - **Static-guarantee languages: Rust / TypeScript-strict / Kotlin / Java / C++ / OCaml**: structural assertions are redundant. A test that asserts a struct has the fields the compiler proved it has catches no bug. Delete.
 - **Dynamic languages: Python / JavaScript / Ruby**: there is no compile-time guarantee that a function returns the shape the docstring claims. A boundary shape/type test IS a real-bug test. A refactor that silently changes the return shape would slip past type hints (which are advisory, not enforced at runtime). Keep.
 
-The split is not aesthetic. It is about what guarantee the language provides. See `references/python.md` vs `references/typescript.md` for the contrasting examples.
+See `references/python.md` vs `references/typescript.md` for the contrasting examples.
 
 ---
 

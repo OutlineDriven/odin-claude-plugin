@@ -7,8 +7,6 @@ description: Reduce internal duplication, dead code, and ceremony while touching
 
 Code rots in two directions: outward (drift from the original design) and downward (accretion of dead state, redundant indirection, speculative ceremony). This skill addresses the second. The thesis is local: you are already in nearby code for some other reason; while you are there, remove what does not earn its keep.
 
-**Modern insight (2025)**: Kent Beck's *Tidy First?* thesis and Casey Muratori's dataflow-first design heuristic both converge on the same conclusion that this skill's compress-side operations operationalize: small, frequent, atomic cleanups embedded in the active commit stream beat scheduled "cleanup PRs" by a wide margin. Scheduled cleanups bundle unrelated concerns and become unreviewable; embedded cleanups stay reviewable because their scope is the file already in your hands.
-
 See [dead-fields](references/dead-fields.md) for examples of dead struct fields, props, and class members.
 See [redundant-wrappers](references/redundant-wrappers.md) for examples of single-line passthrough functions that should be inlined.
 See [dead-config](references/dead-config.md) for stale feature flags, environment variables, and dead config branches.
@@ -37,7 +35,7 @@ A "local change" that has to ripple through three wrapper layers is not local. I
 
 ### 5. Remove dead code, fields, config, and stale state while touching nearby code.
 
-Dead code is not free. It misleads readers about what the system does, it survives grep searches and pulls attention, it tricks reviewers into preserving it "just in case." While you are in nearby code for some other reason, remove what is dead. Make the deletion its own atomic commit so reviewers see exactly what disappeared.
+Dead code is not free. It misleads readers about what the system does, it survives grep searches and pulls attention, it tricks reviewers into preserving it "just in case." While you are in nearby code for some other reason, remove what is dead.
 
 ---
 

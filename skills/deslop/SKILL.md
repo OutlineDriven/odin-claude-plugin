@@ -121,14 +121,10 @@ git grep -n -E "(Client|Connection|Pool|Service|Provider|Manager|Factory|Reposit
 
 ## Anti-patterns
 
-- **Auto-fixing MEDIUM/LOW.** Contextual signals are evidence for a human edit, not permission to delete.
-- **Installing scanners.** Phase 2 uses existing tools only.
 - **Formatting the repo.** Do not turn slop cleanup into style normalization.
 - **Secret deletion as remediation.** Removing a token from source is not enough; require rotation and replacement with environment/config access.
 - **Deleting placeholder APIs.** A stub that is part of public surface is a product gap, not dead code.
-- **Inventing catch behavior.** Empty handler fixes require known intended behavior; otherwise flag.
 - **Counting tests/fixtures/generated files.** They intentionally contain fake tokens, placeholders, console output, and fixture weirdness.
-- **Keeping fixes after red verification.** Regression means restore changed files immediately.
 
 ## Validation Gates
 

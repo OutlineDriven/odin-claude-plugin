@@ -7,9 +7,7 @@ metadata:
 
 # Strategy: interview-driven product anchor, honest by construction
 
-`strategy` runs a sharp interview and writes one durable anchor: the operating repo's `STRATEGY.md` (peer of `README.md`). It pins intent with a VS preamble, pushes back on weak answers instead of transcribing them, and resumes in place when the file already exists. It writes exactly **one** surface: `STRATEGY.md` at the operating repo root. It writes nothing else.
-
-Rigor lives in the questions, not the headings. Section names are plain English; the interview enforces the discipline. Short is a feature. The template is constrained on purpose.
+`strategy` runs a sharp interview and writes one durable anchor: the operating repo's `STRATEGY.md` (peer of `README.md`). It pins intent with a VS preamble, pushes back on weak answers instead of transcribing them, and resumes in place when the file already exists. It writes exactly **one** surface: `STRATEGY.md` at the operating repo root.
 
 `Op:` of every run is `extend`: the anchor is a load-bearing capability added or sharpened, never a refactor of existing prose.
 
@@ -91,7 +89,6 @@ Read the existing `STRATEGY.md` in full. Summarize current state in 3 to 5 lines
 3. **Pushback is the skill.** Transcribing a weak answer is the failure mode. Reject vague answers, quote the user back, cap at two rounds.
 4. **Short is a feature.** The template is locked. Adding a section costs more than it looks. Don't.
 5. **No interviewee, no doc.** The gate fails closed: a trigger grants evaluation, never fabrication. Gate fails → no write, no commit.
-6. **One surface.** Writes only `STRATEGY.md` at the operating repo root, and stages only that file.
 
 ## Validation Gates
 
@@ -105,7 +102,7 @@ Read the existing `STRATEGY.md` in full. Summarize current state in 3 to 5 lines
 
 ## Commits
 
-One anchor per commit. Stage only the resolved anchor: `git -C "$root" add STRATEGY.md`. Never `git add -A`. A new or sharpened anchor is load-bearing capability; a resume that repairs a stale section is still additive. Publish by the operating repo's normal flow.
+One anchor per commit.
 
 ## Anti-patterns
 

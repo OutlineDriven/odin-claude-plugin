@@ -5,7 +5,7 @@ description: Explore the codebase read-only to map structure, symbols, and depen
 
 # Explore command
 
-Read-only codebase orientation. Emit architecture, pattern, tooling, and dependency summaries for a repo-local task. Do NOT write, edit, or commit files.
+Read-only codebase orientation. Emit architecture, pattern, tooling, and dependency summaries for a repo-local task.
 
 ## When to apply / NOT
 
@@ -29,7 +29,7 @@ Read-only codebase orientation. Emit architecture, pattern, tooling, and depende
    - Symbol search: `ast-grep run -p 'PATTERN' -l <lang> -C 1` or `git --no-pager grep -n -C 2 'pattern'`
    - Content preview: `bat -P -p -n -r START:END file` or `Read -offset -limit`
    - Directory structure: `eza --tree --level=2`
-4. **Synthesis**: emit all Required Output sections. No file writes.
+4. **Synthesis**: emit all Required Output sections.
 5. **Heavy-codebase escape hatch**: scope > 50 files: use a codebase-packing tool if available as an internal analysis aid (not handed to the user as output); search the packed output for targeted extraction.
 
 ## Required output
@@ -101,7 +101,6 @@ Prioritized list of files most relevant to the task:
 
 ## Anti-patterns
 
-- Reading whole files when line ranges suffice; use `bat -r` or `Read -offset -limit`
 - Grepping/globbing before dispatching Explore agents on multi-file tasks; dispatch first
 - Bypassing token-efficient flags; use `bat -P -p -n`, `rg -l`, `fd --max-results 50`
 - Re-entering a router or orchestrator skill from within this leaf skill; forbidden (recursion guard)

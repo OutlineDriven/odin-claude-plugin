@@ -40,8 +40,6 @@ After the structural fixes above, some steps still cannot be made autonomous. Th
 - **Trap**: if the step can be wrapped in a verification-and-iteration loop where the LLM proposes, the human approves once, and the LLM iterates until the contract passes, keep it. The human is at the *outer* loop, not the inner.
 - **Abandon**: if a step requires the human in the *inner* loop and resists wrapping (e.g., new SOC2 review per iteration, real-time customer chat, hardware-mediated test), do not babysit. Either remove the step from the LLM's loop entirely (escalate to the human as a discrete handoff) or improve the harness so the step disappears (e.g., automate the SOC2 documentation pipeline).
 
-Naming the rule: babysitting an unloopable step is the failure mode this skill exists to prevent. Pre-existing chat consensus: "what can't be looped, abandon firmly and improve the harness."
-
 ## What this skill does not do
 
 - It does not author project rules. Defer to `init` for AGENTS.md.

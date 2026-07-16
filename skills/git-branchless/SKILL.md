@@ -111,8 +111,8 @@ Full recipes with rationale: `references/recipes.md`.
   handles workflow; commit handles per-change boundaries.
 - A complementary block-list hook enforces a hard block on
   `git push --force`, `git reset --hard`, and similar. This skill
-  teaches the branchless idioms; that hook enforces the boundary. They
-  They coexist. The hook surfaces a refusal; this skill surfaces the right
+  teaches the branchless idioms; that hook enforces the boundary.
+  The hook surfaces a refusal; this skill surfaces the right
   alternative.
 - **`fix`** drives iterative repair via per-iteration commits + revert
   protocol. `fix` already uses `git revert HEAD --no-edit` (event-log-friendly)

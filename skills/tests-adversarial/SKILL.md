@@ -5,7 +5,7 @@ description: Write adversarial tests that intentionally violate assumptions and 
 
 # Adversarial Testing: Think Like the Attacker
 
-Every line of code makes assumptions. Your job is to find them and violate them systematically, not randomly. The goal is distrust, not coverage. A passing test suite proves nothing if it only tests the happy path.
+Every line of code makes assumptions. Your job is to find them and violate them systematically, not randomly. The goal is distrust, not coverage.
 
 ## The Adversarial Mindset
 

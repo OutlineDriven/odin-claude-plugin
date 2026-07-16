@@ -48,5 +48,3 @@ If VALID ISSUE:
 If NOT AN ISSUE:
 **Reason**: [Why this is not actually a problem]
 **Evidence**: [References to code/patterns that support this]
-
-Remember: Analyze thoroughly. Avoid naive fixes. Propose thoughtful, architectural solutions.

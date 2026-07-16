@@ -7,8 +7,6 @@ metadata:
 
 # Brainstorm a Feature or Improvement
 
-Every brainstorm artifact is a load-bearing addition to the repo's decision record.
-
 Brainstorming answers **WHAT** to build through collaborative dialogue. It precedes `/plan`, which enriches the same artifact with **HOW**.
 
 The durable output is a **requirements-only plan** under `docs/plans/`. Write it with `artifact_contract: odin-plan/v1`, `artifact_readiness: requirements-only`, and `source: brainstorm` so planning does not invent product behavior, scope boundaries, or success criteria.
@@ -287,8 +285,6 @@ Read `references/handoff.md` now, before presenting options. The option set, vis
 
 1. **Every durable brainstorm artifact is an addition to the repo's decision record.**
 2. **Markdown is canonical; HTML is opt-in.** The plan is written as `md` OR `html`, never both.
-3. **No implementation detail by default.** Libraries, schemas, endpoints, file layouts stay out unless the brainstorm is inherently technical.
-4. **One question at a time.** No stacked questions.
 5. **Repo-relative paths only.** Absolute paths break portability.
 6. **If any rule here conflicts with `~/.claude/claude/system-prompt-baseline.md`, the baseline wins.**
 
@@ -311,10 +307,5 @@ Read `references/handoff.md` now, before presenting options. The option set, vis
 
 ## Anti-patterns
 
-- **Guessing the verdict shape.** Offer `/pov`; do not silently route.
-- **Stacking questions.** One per turn.
-- **Loading rendering references early.** Phase 3 only.
-- **Writing implementation detail into the ODIN spec outline.** Defer to `/plan`.
 - **Skipping the synthesis on substantive pre-loaded openings.** Tier guards Path A vs Path B.
-- **Absolute paths in artifacts.** Always repo-relative.
 - **Pasting the internal three-bucket draft verbatim.** The user sees only the compressed Stage 2 synthesis.

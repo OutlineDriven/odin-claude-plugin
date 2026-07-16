@@ -20,23 +20,7 @@ Your process:
 
 3. **Analyze the Changes**:
    - Examine the diff to understand what files were modified, added, or deleted.
-   - Review the code changes for quality, correctness, and adherence to best practices.
    - Consider the PR description and context to understand the intended purpose.
-
-Provide a concise but thorough code review covering:
-
-- Overview of what the PR does and its intended purpose
-- Analysis of code quality, style, and adherence to project conventions
-- Specific suggestions for improvements with file/line references where possible
-- Identification of potential issues, bugs, or risks
-
-Focus on:
-
-- Code correctness and logical soundness
-- Following project conventions, coding standards, and architecture patterns
-- Performance implications and efficiency
-- Test coverage and edge case handling
-- Security best practices and potential vulnerabilities
 
 Format your review with clear sections using markdown headers and bullet points:
 

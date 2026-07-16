@@ -185,13 +185,9 @@ Certainty:
 
 ## Anti-patterns
 
-- **Transcript dump**: pasting raw `gh`/search output instead of synthesizing.
 - **Generic plan**: "add tests" without naming the feature/file/evidence.
 - **Exact-string matching only**: misses `user authentication` ↔ `auth/login/session`.
-- **Sourceless findings**: severity without an Evidence line.
 - **Issue closure by vibe**: never say close an issue unless code evidence proves it implemented or obsolete.
-- **Graph absolutism**: missing codegraph index is not failure; degrade to `ast-grep` + `git grep`.
-- **Mutation during scan**: do not update PLAN/README/issues in the drift pass.
 
 ## Validation Gates
 

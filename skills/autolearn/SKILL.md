@@ -7,7 +7,7 @@ metadata:
 
 # Autolearn: compound a solved problem, keep the learnings honest
 
-`autolearn` turns a verified fix into one in-repo learning doc, maintains those docs as the code moves, captures durable project vocabulary, and hands user/preference facts to the memory writer. It writes exactly **two** in-repo surfaces itself: the operating repo's `docs/solutions/` (one learning per file) and the repo-root `CONCEPTS.md` (the shared-vocabulary glossary, one definition per concept). One writer per surface still holds. Autolearn owns both, and no other skill edits them. Every auto-memory write is delegated to `memory-update`. There is one writer of the memory surface, and it is not this skill.
+`autolearn` turns a verified fix into one in-repo learning doc, maintains those docs as the code moves, captures durable project vocabulary, and hands user/preference facts to the memory writer. It writes exactly **two** in-repo surfaces itself: the operating repo's `docs/solutions/` (one learning per file) and the repo-root `CONCEPTS.md` (the shared-vocabulary glossary, one definition per concept). Autolearn owns both, and no other skill edits them. Every auto-memory write is delegated to `memory-update`.
 
 `Op:` of a compound run is `extend` (a new learning) or, in refresh, `correct`/`purge` (see Commits).
 
@@ -25,7 +25,7 @@ metadata:
 </trigger_phrases>
 Fire automatically on a trigger phrase or after a verified non-trivial fix. The reject-by-default gate below still decides whether a doc is actually warranted. Auto-firing is permission to evaluate, not permission to fabricate.
 
-**Skill integration:** after any non-trivial verified outcome, the orchestrating skill should invoke `/autolearn` to evaluate whether a `docs/solutions/` or `CONCEPTS.md` entry is warranted. The reject-by-default gate still applies. Auto-invoke is permission to evaluate, not permission to fabricate.
+**Skill integration:** after any non-trivial verified outcome, the orchestrating skill should invoke `/autolearn` to evaluate whether a `docs/solutions/` or `CONCEPTS.md` entry is warranted.
 <manual_override>`/autolearn [context]` documents immediately without waiting for a trigger phrase. `autolearn mode:refresh [scope]` runs maintenance. `mode:headless` makes any mode non-interactive.</manual_override>
 </auto_invoke>
 
@@ -110,7 +110,7 @@ Wait for all three before assembling.
    | **Moderate** (2 to 3) | Create normally; note it as a refresh/consolidation candidate. |
    | **Low / none** | Create normally. |
 
-   This is the gate's filter 2 made concrete. A duplicate is drift.
+   This is the gate's filter 2 made concrete.
 2. Read `assets/solution-template.md`; assemble the doc with the track's section structure.
 3. Frontmatter per `references/schema.md`; apply the YAML-safety quoting rule to array items.
 4. `mkdir -p docs/solutions/<category>/`, write `docs/solutions/<category>/<slug>.md`.

@@ -8,7 +8,7 @@ metadata:
 
 # Work Execution
 
-Execute a plan or prompt systematically. Ship complete features by understanding requirements quickly, following existing patterns, and maintaining quality.
+Execute a plan or prompt systematically.
 
 This skill adds structured plan handling, execution-engine selection, and a shipping tail to plain implementation.
 

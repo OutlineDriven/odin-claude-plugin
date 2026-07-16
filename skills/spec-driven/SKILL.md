@@ -201,11 +201,9 @@ The spec is a living document, not a one-time artifact:
 
 ## Red flags
 
-- Writing code with no written requirements
 - Asking "should I just start building?" before defining what "done" means
 - Implementing features absent from any spec or task list
 - Making architectural decisions without documenting them
-- Skipping the spec because "it's obvious what to build"
 
 ## Verification
 

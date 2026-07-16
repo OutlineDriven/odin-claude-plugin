@@ -41,5 +41,3 @@ End your response with:
 - Build: [pass/fail/not available]
 - Lint: [pass/fail/not available]
 - Tests: [pass/fail/not available]
-
-Remember: Execute the plan precisely. Follow existing patterns. Verify every change.

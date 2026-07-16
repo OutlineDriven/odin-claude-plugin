@@ -18,10 +18,6 @@ the winning change adds an approximation or cache contract that changes observab
 Avoid: **unmeasured micro-optimization** (no measured hotspot), **misplaced optimization** (applied
 before the hotspot is confirmed), **Sprawl** (added complexity that outweighs the earned speedup).
 
-The skill wraps the append-only run log, per-run crash-recovery markers, and stopping rules around the
-locate→fan-out→benchmark→gate→commit loop with durability and bounded iteration; they do not change
-what the loop does.
-
 **Reference files (verbatim prompts, agent dispatch shapes, harness templates):**
 - `references/lenses.md`: five lens prompts sent to candidate agents, one per lens
 - `references/tooling.md`: per-language benchmark/profile tooling matrix + minimal harness
@@ -310,8 +306,6 @@ or a `Justfile` / `Makefile` target named `bench-guard`. The before-benchmark JS
 
 - **Rewriting the log instead of appending.** A truncate-and-rewrite can be interrupted half-written and lose every benchmarked candidate. One `candidate` line per result, appended, never edited.
 - **Resuming on a stale fingerprint.** Skipping re-benchmark after the source or bench command changed commits a "winner" measured against a base that no longer exists. The fingerprint + baseline re-check exist to forbid this; do not bypass them to save a run.
-- **Recording a failed agent so resume skips it.** A transient worktree crash must re-run. Absence of a `candidate` record is the retry signal; do not paper over a failure with a `speedup_ratio: 1.0` placeholder.
-- **Letting the promote-runner-up loop run unbounded.** Without the Phase 6.5 stopping rules the loop burns wall-clock chasing sub-noise runners-up. Cap it; exit 16 with best-so-far is a valid result.
 
 ## Disambiguation
 

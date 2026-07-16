@@ -3,8 +3,6 @@ name: design
 description: Set visual and interaction direction for UI surfaces before writing code. Use when starting UI work, defining palettes or design tokens, or when output looks AI-generic, vibe-coded, or default-framework sloppy.
 ---
 
-Direction first, tokens second, code last. Restraint is the default posture; ONE intentional moment per surface earns the lift.
-
 ## Posture
 
 Direction precedes tokens; tokens precede code. The picked direction is the contract. Palette, type, spacing, and motion all derive from it, not the other way around. Restraint is the default; reach for decoration only when a named surface goal demands it. Posture rests on `references/soul.md` (design philosophy). Load it when the user asks "why this look" or when the model is tempted to add decoration to compensate for a thin idea.
@@ -138,6 +136,4 @@ These references are runtime-agnostic. Load them when the task fits the trigger,
 
 - "Be creative" / temperature-up: generates more slop, not better direction. VS structure or nothing.
 - Single-shot palette generation: RLHF over-aligns to purple; the model's first guess is the slop.
-- Skipping the direction commit and jumping to component code: components without a direction are coupling without contract.
-- Mixing two paradigms on one surface: neo-brutalism shadow on a glass card reads as confusion.
 - Ranking directions by implementation effort: short-term cost is the wrong axis; taste fit and depth are the right ones.

@@ -14,7 +14,6 @@ NOT apply: internal refactor with no trust-boundary delta; pure performance work
 ## Anti-patterns
 
 - **Allowlist-by-omission**: treating "no obvious issue" as "secure".
-- **Crypto improvisation**: hand-rolling primitives.
 - **Trust the client**: validating only client-side.
 - **Logging secrets**: tokens, PII, session cookies in logs.
 - **Default-permit ACL**: authorization checks on opt-in basis.

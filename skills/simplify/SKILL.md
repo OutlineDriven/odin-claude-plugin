@@ -19,11 +19,7 @@ A deliberate simplification pass invoked on a specific change-set. Decompose sim
 
 ## Mandates, not suggestions
 
-1. **Behavior preservation is a gate, not a guideline.**
 2. **Decompose by axis, never by file.** All three agents see the same diff and bring different lenses. Splitting the diff by file across agents defeats the design.
-3. **The Reviewer audit is the single adjudication authority.** Review agents emit findings; the Reviewer validates them; the orchestrator applies the survivors. The orchestrator does not re-litigate findings the Reviewer accepted, and does not rescue findings the Reviewer rejected.
-4. **Three agents in one tool-call message.** Sequential dispatch invalidates the parallel-launch contract.
-5. **A simplify patch that introduces new bloat is a regression.** Post-fix, audit for unneeded surface, duplicated logic, structure without cause, or a broken consumer contract. Any hit → revert and re-plan.
 
 ## When to Apply
 

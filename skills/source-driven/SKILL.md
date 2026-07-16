@@ -204,21 +204,16 @@ Honesty about what you could not verify beats false confidence.
 - Writing framework-specific code without checking the docs for that version
 - Saying "I believe" or "I think" about an API instead of citing the source
 - Implementing a pattern without knowing which version it applies to
-- Citing Stack Overflow or blog posts instead of official documentation
 - Using deprecated APIs because they appear in training data
 - Not reading `package.json` / the dependency file before implementing
-- Delivering code with no source citations for framework-specific decisions
 - Fetching an entire docs site when one page is relevant
 
 ## Verification
 
 After implementing with source-driven development:
 
-- [ ] Framework and library versions were identified from the dependency file
-- [ ] Official documentation was fetched for framework-specific patterns
 - [ ] All sources are official documentation, not blog posts or training data
 - [ ] Code follows the patterns shown in the current version's documentation
 - [ ] Non-trivial decisions include source citations with full URLs
 - [ ] No deprecated APIs are used (checked against migration guides)
-- [ ] Conflicts between docs and existing code were surfaced to the user
 - [ ] Anything that could not be verified is explicitly flagged as unverified

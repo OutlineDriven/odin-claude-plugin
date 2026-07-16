@@ -55,13 +55,9 @@ Static Assertions (compile-time) > Test/Debug Contracts > Runtime Contracts
 
 ## Anti-patterns
 
-- **Contracts duplicating type system**: If types enforce it, don't add a runtime check
-- **Runtime checks for compile-time properties**: Wrong verification level
-- **Contracts without violation tests**: Untested contracts are untrusted
 - **Contract fatigue**: Decorating everything -- focus on boundaries and invariants
 - **Postconditions restating implementation**: `ensures(result == x - y)` for `subtract(x, y)` adds nothing
 - **Forgetting old() semantics**: Postconditions often need the pre-state value
-- **Ignoring contract inheritance**: Preconditions weaken in subtypes (contravariance), postconditions strengthen (covariance) -- Liskov Substitution Principle
 
 ---
 

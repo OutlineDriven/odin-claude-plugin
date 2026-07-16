@@ -240,15 +240,12 @@ After each increment, verify. Command examples span ecosystems. Run whichever yo
 ## Red Flags
 
 - More than 100 lines written without running tests
-- Multiple unrelated changes in a single increment
 - "Let me just quickly add this too" scope expansion
 - Skipping the test/verify step to move faster
-- Build or tests broken between increments
 - Large uncommitted changes accumulating
 - Building abstractions before the third use case demands it
 - Touching files outside the task scope "while I'm here"
 - Creating new utility files for one-time operations
-- Running the same build/test command twice in a row without an intervening code change
 
 ## Verification
 

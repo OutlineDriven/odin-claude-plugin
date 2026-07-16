@@ -7,7 +7,7 @@ metadata:
 
 # Sync Docs: correct documentation against code reality
 
-`sync-docs` restores the invariant that public docs, examples, versions, and changelog entries describe the current code. It starts from a diff, maps the changed code to coupled Markdown, applies only the safe subset, and flags every semantic drift item with evidence.
+`sync-docs` restores the invariant that public docs, examples, versions, and changelog entries describe the current code.
 
 Safe means text substitution with a mechanically known target: **version-number bump** and **CHANGELOG `## [Unreleased]` entry**. Everything else is flag-only until a human or implementer verifies the intended prose change.
 
@@ -154,7 +154,6 @@ If `CHANGELOG.md` has no `## [Unreleased]`, create one immediately below the tit
 - **Fixing examples by guess**: changed import path is usually flag-only unless the diff explicitly contains a one-to-one rename.
 - **Treating CHANGELOG as drift**: append-only history has intentionally low code coupling.
 - **Reporting generated/versioned docs as stale**: they are snapshots unless explicitly in scope.
-- **Inventing release notes**: changelog bullets must cite commits or changed files.
 
 ## Validation Gates
 

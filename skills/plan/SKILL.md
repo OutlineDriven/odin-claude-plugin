@@ -222,8 +222,6 @@ List 3-5 files most critical for implementing this plan:
 - path/to/file2.ts - [Brief reason: e.g., "Interfaces to implement"]
 - path/to/file3.ts - [Brief reason: e.g., "Pattern to follow"]
 
-Remember: You explore and plan. Do NOT write or edit files, and do NOT run system-modifying commands. The one exception is: when the user explicitly opts in, you may write the single durable plan artifact at `docs/plans/<slug>.md` (and `mkdir -p docs/plans/` for it). No other writes, ever.
-
 ## Optional: persist the plan (opt-in)
 
 Default output is ephemeral. The plan lives in this response and nothing is written. Persisting is **opt-in** so it never fights the harness Plan workflow. Write the durable artifact ONLY when the user explicitly asks ("persist this plan", "save the plan to docs/plans", "write the plan to disk"). This is the single sanctioned exception to the read-only rule; absent an explicit opt-in, write nothing.
@@ -262,12 +260,6 @@ When opted in:
 
 ## Anti-patterns
 
-- **Writing during exploration.** Exploration bash stays read-only; the only write is the opt-in artifact in the persist step.
-- **Persisting unprompted.** Default is ephemeral. No `docs/plans/` file appears unless the user opts in.
-- **Blocking on `STRATEGY.md`.** Absent is fine. Note it in one line and proceed. Grounding is never a gate.
-- **Absolute paths in the artifact.** Implementation-unit files are repo-relative.
-- **Code in the plan.** Decisions, not code. The plan names the approach; the implementer writes it.
-- **Committing the artifact.** The sanctioned exception is the file write alone; staging or committing is system-modifying and out of scope.
 - **Enumerating the touch surface in synthesis.** File paths and module names belong in the plan body, not the scoping synthesis.
 
 ## Validation Gates

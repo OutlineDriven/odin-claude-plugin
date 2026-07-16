@@ -38,11 +38,4 @@ Decompose the given task into independent agent groups and execute them in broad
 
 - Agents per batch: match the number of truly independent concerns (avoid artificial splitting).
 - Each agent prompt must include full context; agents do not share memory.
-- Do not launch agents for trivially sequential work (single file, single concern).
 - If the task has fewer than 2 independent concerns, execute directly instead of launching agents.
-
-## Red Flags
-
-- **Never skip review.** Composed output must always pass through a review agent before reporting.
-- **Never accept unverified composed output.** If agents return conflicting results, the review agent must flag them, not silently pick one.
-- **Never report to user before review passes.** The review step is mandatory, not advisory.

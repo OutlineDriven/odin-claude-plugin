@@ -108,9 +108,7 @@ Partial match → `GH_PARTIAL` ambiguity flag.
 
 - No verifier output: emit warning, raise `LANG_UNKNOWN`.
 - 3 strikes on one item: SKIP, add to `blocked.md`, recommend `debug`.
-- 3 total skips: HALT with session summary.
 - Guard ambiguous: `AskUserQuestion` for guard command.
-- Mixed-mode input: raise `MIXED_MODE`.
 - Protected branch: REFUSE with message before entering loop.
 
 ## Anti-Patterns

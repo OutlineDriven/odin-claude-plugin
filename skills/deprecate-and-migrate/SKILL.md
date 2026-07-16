@@ -7,7 +7,7 @@ description: Plan and execute deprecation and migration of old systems, APIs, or
 
 ## Overview
 
-Code is a liability. Every line carries ongoing cost: tests, documentation, security patches, dependency bumps, and the attention of anyone who edits nearby. The asset is the functionality; the code is the bill. Deprecation removes code that no longer earns its cost. Migration moves consumers from the old path to the new one without breaking them.
+Deprecation removes code that no longer earns its cost. Migration moves consumers from the old path to the new one without breaking them.
 
 Building is the easy half. Removal is the half most teams skip. This skill covers removal.
 
@@ -204,13 +204,9 @@ Zombie code is code that nobody owns but everybody depends on. It is unmaintaine
 
 ## Red Flags
 
-- Deprecated systems with no replacement available
-- Deprecation announcements with no migration tooling or documentation
 - "Soft" deprecation that's been advisory for years with no progress
-- Zombie code with no owner and active consumers
 - New features added to a deprecated system (invest in the replacement instead)
 - Deprecation without measuring current usage
-- Removing code without verifying zero active consumers
 
 ## Verification
 

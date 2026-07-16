@@ -34,7 +34,7 @@ This skill has one mode: generate. If invoked for audit of an artifact, route to
 
 ## Evidence scan order
 
-Prefer indexed sources when available; fall back to files. Missing sources are not failures.
+Prefer indexed sources when available; fall back to files.
 
 1. Indexed ICM tools or memory search tools exposed by the current harness.
 2. Indexed session-history tools exposed by the current harness.

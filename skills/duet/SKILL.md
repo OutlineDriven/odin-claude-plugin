@@ -172,10 +172,6 @@ One option carries `(Recommended)` in its label with a < 1-sentence why.
 
 ## Anti-patterns (do not do)
 
-- **Do not** narrate mechanics between forks ("I'm now adding the import", "I'll run the linter"). The user doesn't want that.
-- **Do not** present technical options with no structural framing. "Use JWT vs session cookies" is jargon-first; "Log in once per device vs log in once per browser tab" is structural-first.
-- **Do not** batch decisions where later ones hinge on earlier answers. Fire, receive, then plan the next batch.
-- **Do not** recommend nothing. Always mark one `(Recommended)`; the user benefits from the agent's taste even when overriding it.
 - **Do not** generate a giant diff and then ask the user to approve. That *is* the review-bottleneck. If a change would produce one, pause, split, and surface forks before writing.
 
 ## `AskUserQuestion` tool contract (Claude Code reference)

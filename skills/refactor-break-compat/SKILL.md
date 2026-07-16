@@ -45,7 +45,6 @@ Hunt these down with `ast-grep` / `rg` and rip out every hit:
 ## Anti-patterns: the urge to hedge
 
 - **Asking permission to break.** The skill's premise is that breaking is correct. Map, then demolish.
-- **New-to-old adapters.** Any code that lets an old caller keep calling the old way re-entrenches the thing you deleted. Forbidden.
 - **Partial migration.** Half on new, half on old. The single worst outcome, worse than never starting.
 - **Commenting out instead of deleting.** Invisible debt that grep cannot find. Delete.
 - **Compat-of-compat.** Wrapping a shim in a shim. Two corpses, one coffin. Delete both.

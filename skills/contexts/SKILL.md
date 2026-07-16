@@ -71,7 +71,5 @@ Note: sequential dispatch roughly doubles wall-clock time versus a single mode. 
 ## Anti-Patterns
 
 - Skipping the `detected:` acknowledgement line: it is LOAD-BEARING; downstream parsers and users depend on it.
-- Checking `code-ref` or `doc-ref` before `both` in the classifier makes `both` unreachable under first-match-wins.
-- Firing `AskUserQuestion` with `multiSelect: true` violates the rule: always single-select per axis.
 - Writing or editing files during context gathering: this skill is read-only.
 - Slash-arg override: `/contexts code-ref`, `/contexts doc-ref`, or `/contexts both` bypasses the classifier entirely and dispatches directly to that mode.

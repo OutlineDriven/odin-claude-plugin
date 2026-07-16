@@ -9,8 +9,6 @@ metadata:
 
 `doc-review` evaluates a requirements doc, plan, spec, or PRD through specialist reviewer lenses. It classifies the document by content shape, selects the lenses the document actually warrants, dispatches them in parallel as read-only subagents, synthesizes their confidence-anchored findings through a multi-stage pipeline, and routes each survivor into one of four handling tiers. The structural invariant: **it never edits the document under review.** The only surface it may write is a single review-record file, and only when persistence is requested.
 
-Every run adds an evaluation artifact (findings, optionally one record file), never a change to the reviewed doc. There is no correction path here: the skill is read-only on its subject, so it cannot restore an invariant *in* it. Restoring the document is a separate writer's job.
-
 ## Auto-invoke
 
 <auto_invoke>
@@ -253,17 +251,6 @@ Baseline wins on any conflict.
 | Tier routed | Every survivor labeled safe-auto / gated-auto / manual / FYI | Yes |
 | Read-only honored | Zero writes/edits to the reviewed document | Yes |
 | Record discipline | If a record is written: only that path written, read back, staged alone; never `git add -A` | Yes when `--record` |
-
-## Anti-patterns
-
-- **Editing the reviewed doc.** Even a safe-auto fix is a recommendation here, not an edit. Applying it breaks the read-only invariant.
-- **`git add -A` after writing the record.** Stage the one record path; nothing else.
-- **Classifying by path.** A brainstorm-shaped doc under `docs/plans/` is requirements. Shape decides.
-- **Spawning every persona.** Conditional lenses fire on signal. A lens the doc doesn't warrant manufactures noise.
-- **Findings without a quote.** Unquotable means unverifiable means suppressed.
-- **Downgrading a sub-50 to FYI to keep it.** Below the floor is suppressed, not parked.
-- **Fabricating findings to look thorough.** A clean review is a valid result; say so in one line.
-- **Reviewing code.** A diff is `review`'s job; doc↔code drift is `sync-docs`.
 
 ## Disambiguation / See also
 

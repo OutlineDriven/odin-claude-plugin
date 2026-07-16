@@ -7,7 +7,7 @@ description: Set up or modify CI/CD pipelines and deployment automation. Use whe
 
 ## Overview
 
-Automate quality gates so that no change reaches production without passing tests, lint, type checking, and build. CI/CD is the enforcement mechanism for every other skill. It catches what humans and agents miss, and it does so consistently on every single change.
+Automate quality gates so that no change reaches production without passing tests, lint, type checking, and build. CI/CD is the enforcement mechanism for every other skill.
 
 **Shift Left:** Catch problems as early in the pipeline as possible. A bug caught in linting costs minutes; the same bug caught in production costs hours. Move checks upstream: static analysis before tests, tests before staging, staging before production.
 
@@ -96,13 +96,9 @@ The gate order above is fixed. These supply the commands and config that realize
 
 ## Red Flags
 
-- No CI pipeline in the project
-- CI failures ignored or silenced
-- Tests disabled in CI to make the pipeline pass
 - Production deploys without staging verification
 - No rollback mechanism
 - Secrets stored in code or CI config files (not secrets manager)
-- Long CI times with no optimization effort
 
 ## Verification
 

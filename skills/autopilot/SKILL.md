@@ -9,8 +9,6 @@ metadata:
 
 `autopilot` runs a build request from plan to shipped without re-prompting at every step. It is a **chain**: each phase invokes an existing ODIN skill via the Skill tool and gates on the result before the next phase begins. It owns sequencing, the phase gates, and the terminal report; nothing else. It writes no code surface of its own; the chained skills do.
 
-A new orchestration capability over skills that already exist. The entropy it adds (sequencing + gates) is load-bearing for the hands-off contract; the work itself is the chained skills', not autopilot's.
-
 ## When to Apply
 
 - The user hands an execution-ready task and wants it taken from plan to shipped without step-by-step approval: "autopilot", "ship it end to end", "take it from plan to PR".
@@ -88,12 +86,9 @@ Gate id equals phase number; Phase 5 (`fix`, G4's autofix arm) and Phase 8 (Repo
 
 ## Anti-patterns
 
-- **Reimplementing a chained skill inline** instead of invoking it. The whole value is composition; inlining is Graft and drift.
-- **Chaining strategy/ideate** to rescue a vague request. Greenfield is manual; autopilot refuses to discover scope.
 - **Looping an autofix arm until green.** The posture is once-then-halt. A second autofix attempt hides a bad plan and compounds risk; HALT and hand off instead.
 - **Carrying a red gate forward** "to fix later". The next phase amplifies the defect over a larger surface.
 - **Inventing a remote** to push a local-only repo. No remote → commit and report.
-- **Skipping the report on HALT.** When the pipeline stops early, the residual-findings handoff IS the deliverable.
 
 ## Disambiguation
 
@@ -104,4 +99,4 @@ Gate id equals phase number; Phase 5 (`fix`, G4's autofix arm) and Phase 8 (Repo
 
 ## Operating surface
 
-autopilot writes no code surface itself. `proceed` and `fix` write the working tree; `commit-push` writes commits and the remote; `plan`/`review` are read-only; `simplify` self-reverts on regression. autopilot owns the phase sequence, the gate decisions, and the terminal report. No writes to undefined or doubly-owned locations.
+`proceed` and `fix` write the working tree; `commit-push` writes commits and the remote; `plan`/`review` are read-only; `simplify` self-reverts on regression. No writes to undefined or doubly-owned locations.
