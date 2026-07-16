@@ -1,6 +1,6 @@
 ---
 name: deslop
-description: Detect and safely remove AI slop using a certainty-graded scan. Use when the user says "deslop", "clean AI slop", "remove debug code", "find placeholders or stub code", or "remove dead code".
+description: Use when the user says "deslop", "remove debug code", "find placeholders or stub code", or "remove dead code".
 metadata:
   short-description: Certainty-graded slop cleanup
 ---

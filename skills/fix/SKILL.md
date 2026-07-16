@@ -1,6 +1,6 @@
 ---
 name: fix
-description: Run an iterative repair loop that fixes one thing at a time and keeps changes on green. Use when the user says "fix", "make it pass", or "apply the findings", or hands a verifier failure or bug description.
+description: Use when the user says "fix", "make it pass", or "apply the findings", or hands a verifier failure or bug description.
 metadata:
   short-description: Iterative fix loop with auto-revert
 ---

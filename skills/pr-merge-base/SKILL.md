@@ -1,6 +1,6 @@
 ---
 name: pr-merge-base
-description: Merges one or more PRs into the base branch with ordered sequencing and conflict resolution. Use when PRs may conflict with each other or the base, or require ordered application.
+description: Use when PRs may conflict with each other or the base, or require ordered application.
 ---
 # Smart Merge to Base Branch
 

@@ -1,6 +1,6 @@
 ---
 name: memory-clean
-description: Audits memory files for structural rot and staleness, reporting before fixing. Use when the user asks to audit memory, check memory hygiene, or find stale or duplicate memories.
+description: Use when the user asks to audit memory or find stale or duplicate memories.
 ---
 
 Audit memory for structural rot and staleness, report with evidence, fix only on user confirmation.

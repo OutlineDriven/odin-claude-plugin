@@ -1,6 +1,6 @@
 ---
 name: shipping
-description: Prepare a production launch with checklists, monitoring, staged rollout, and rollback planning. Use when deploying to production, planning a feature release, or setting up launch safeguards.
+description: Use when deploying to production, planning a feature release, or setting up launch safeguards.
 ---
 
 # Shipping and Launch

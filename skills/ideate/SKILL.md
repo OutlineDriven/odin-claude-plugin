@@ -1,6 +1,6 @@
 ---
 name: ideate
-description: Generate grounded, divergent ideas from the codebase and write survivors to docs/ideation. Use when the user says "let's brainstorm", "what should we build", "what should we build next", or "any ideas for".
+description: Generate grounded, divergent ideas from the codebase. Use when the user says "let's brainstorm", "what should we build", or "any ideas for".
 metadata:
   short-description: Grounded divergent generation → survivors + rejection rationale → docs/ideation/
 ---

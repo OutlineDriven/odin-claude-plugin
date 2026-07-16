@@ -1,6 +1,6 @@
 ---
 name: refactor-break-compat
-description: Refactors by removing backward-compatibility layers, legacy code, and migration debt. Use when modernizing APIs, removing compat shims, killing feature flags, or rewriting a subsystem cleanly.
+description: Use when modernizing APIs, removing compat shims, killing feature flags, or rewriting a subsystem cleanly.
 ---
 
 # Breaking Refactors: Scorched Earth

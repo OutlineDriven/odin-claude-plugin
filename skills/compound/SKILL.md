@@ -1,6 +1,6 @@
 ---
 name: compound
-description: Document a durable solution or project concept in the repo. Use when the user says "compound this", "document this fix", or after a verified non-trivial outcome that should live in docs/solutions/ or CONCEPTS.md.
+description: Use when the user says "compound this", after a verified non-trivial outcome that should live in docs/solutions/ or CONCEPTS.md, or when a durable project term needs defining.
 metadata:
   short-description: Write durable solution docs and concept definitions
 ---

@@ -1,6 +1,6 @@
 ---
 name: simplify
-description: Compress-op review pass on a diff along reuse, quality, and efficiency axes, including stdlib-reimplementation detection, dead-code/unused-import analysis, and safety-check preservation guards. Use when the user says "simplify this diff", "tighten up", or "compress these changes".
+description: Use when the user says "simplify this diff", or asks for a compression pass over a change-set.
 metadata:
   short-description: Three-axis compress pass on a diff
 ---

@@ -1,6 +1,6 @@
 ---
 name: observability
-description: Instruments code with logging, metrics, traces, and alerts so production behavior is visible. Use when adding telemetry, shipping a production feature, or diagnosing opaque production issues.
+description: Instrument code with structured logs, metrics, and traces. Use when adding telemetry, setting up or reviewing alerting rules, shipping a production feature, or diagnosing opaque production issues.
 ---
 
 # Observability and instrumentation

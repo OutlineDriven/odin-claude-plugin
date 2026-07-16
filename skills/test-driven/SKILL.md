@@ -1,6 +1,6 @@
 ---
 name: test-driven
-description: Run test-driven development with RED-GREEN-REFACTOR cycles across supported languages. Use when implementing features or fixes with TDD, writing tests before code, or refactoring with coverage.
+description: Run test-driven development. Use when implementing features or fixes with TDD, or refactoring with coverage.
 ---
 
 # Test-driven development (XP-style)

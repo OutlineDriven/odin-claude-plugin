@@ -1,6 +1,6 @@
 ---
 name: proof-driven
-description: Guides implementation by proving properties before writing code. Use when using property-based testing, theorem proving, or formal proof tactics with a zero-unproven-property policy.
+description: Use when using property-based testing, theorem proving, or formal proof tactics with a zero-unproven-property policy.
 ---
 
 # Proof-driven development

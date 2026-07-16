@@ -1,6 +1,6 @@
 ---
 name: duet
-description: Work in a two-party posture where the user directs and the agent executes. Use when the user invokes /duet, says "ask before", "pair with me", "human-in-the-loop", or faces aesthetic, architectural, or irreversible decisions.
+description: Use when the user invokes /duet, says "pair with me", or faces aesthetic, architectural, or irreversible decisions.
 ---
 
 # Duet

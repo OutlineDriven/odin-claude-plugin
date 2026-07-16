@@ -1,6 +1,6 @@
 ---
 name: review
-description: Reviews changes on the current branch; shallow by default, deep on risk escalation or explicit request. Use when reviewing current work, analyzing recent commits, or running a deep review.
+description: Use when reviewing current work or recent commits, or running a deep review.
 metadata:
   short-description: Read-only branch review, single-pass, or deep multi-persona with P0-P3 severity
 ---

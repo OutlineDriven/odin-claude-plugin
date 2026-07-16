@@ -1,6 +1,6 @@
 ---
 name: sync-docs
-description: Detect docs-vs-code drift from a diff, apply safe corrections, and flag stale references with evidence. Use when the user says "sync docs", "update changelog", or "find outdated docs".
+description: Detect docs-vs-code drift from a diff. Use when the user says "sync docs" or "update changelog".
 metadata:
   short-description: Diff-driven docs drift correction
 ---

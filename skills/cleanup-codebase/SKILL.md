@@ -1,6 +1,6 @@
 ---
 name: cleanup-codebase
-description: Reduce internal duplication, dead code, and ceremony while touching nearby files. Use when you spot dead fields, redundant wrappers, or speculative abstractions in code you are already editing.
+description: Reduce internal duplication, dead code, and ceremony. Use when you spot dead fields, redundant wrappers, or speculative abstractions in code you are already editing.
 ---
 
 # Cleanup codebase: local simplicity, ruthlessly applied

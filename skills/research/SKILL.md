@@ -1,6 +1,6 @@
 ---
 name: research
-description: Gathers external knowledge from authoritative sources and verifies claims against primary documentation. Use when asking how a library works, finding a migration guide, or researching a named framework, SDK, API, or service.
+description: Use when researching a named library, framework, SDK, API, or service, or finding a migration guide.
 ---
 
 # Research Command

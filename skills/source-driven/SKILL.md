@@ -1,6 +1,6 @@
 ---
 name: source-driven
-description: Ground implementation decisions in official documentation with version-aware citations. Use when writing code against a specific framework or library version, building boilerplate, implementing a framework's recommended pattern (auth, routing, forms, data fetching, state), or verifying an API signature before writing framework-specific code from memory.
+description: Use when writing code against a specific framework or library version, building boilerplate, implementing a framework's recommended pattern (auth, routing, forms, data fetching, state), verifying an API signature before writing framework-specific code from memory, or the user asks for a documented, verified, or "correct" implementation.
 ---
 
 # Source-Driven Development

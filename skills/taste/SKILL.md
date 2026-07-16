@@ -1,6 +1,6 @@
 ---
 name: taste
-description: Apply distinctive judgment to prose, code, design, or decisions instead of defaulting to AI mediocrity. Use when auditing an artifact, setting a taste register, or asking "is this slop?", "overkill?", or "taste-test this".
+description: Apply taste judgment to an artifact or decision. Use when asking "is this slop?", "overkill?", "audit", or "taste-test this", or setting a taste register.
 ---
 
 # Taste

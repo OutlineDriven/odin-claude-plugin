@@ -1,6 +1,6 @@
 ---
 name: review-fix-grill-loop
-description: Review and fix the current diff in verified batches until no medium-or-higher finding remains. Use when "grill my changes", "review and fix my diff until clean", or "review-fix loop".
+description: Use when the user says "grill my changes" or wants their diff reviewed and fixed iteratively until clean.
 metadata:
   short-description: Diff-scoped review→resolve→fix loop until clean
 ---

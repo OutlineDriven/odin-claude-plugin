@@ -1,6 +1,6 @@
 ---
 name: contexts
-description: Auto-route context gathering between codebase exploration and external research. Use when the user says "get context", "how does X work", "context on X", or wants architectural orientation before coding.
+description: Use when the user says "get context on X", "how does X work", or wants architectural orientation before coding.
 ---
 
 # Context Command

@@ -1,6 +1,6 @@
 ---
 name: setup-pre-commit
-description: Install ecosystem-appropriate git pre-commit hooks for formatting, linting, type-checking, and test gates. Use when the user wants commit-time checks, a pre-commit setup, or "install husky/pre-commit/lefthook".
+description: Use when the user wants commit-time checks, or says "install husky/pre-commit/lefthook".
 ---
 
 Detect the ecosystem, pick the right hook tool, install with formatter + type-check + test gates.

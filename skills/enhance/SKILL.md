@@ -1,6 +1,6 @@
 ---
 name: enhance
-description: Audit and tighten agent/plugin surfaces with certainty-graded findings. Use when the user says "enhance my plugin", "improve my agents or skills", "audit plugin config", "enhance CLAUDE.md", or "improve agent definitions".
+description: Audit and tighten agent/plugin surfaces. Use when the user asks to enhance a plugin config, agent definition, skill, or CLAUDE.md.
 metadata:
   short-description: Certainty-graded surface enhancer
 ---

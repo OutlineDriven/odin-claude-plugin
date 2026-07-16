@@ -1,6 +1,6 @@
 ---
 name: deps-upgrade
-description: Run a dependency-upgrade campaign, from outdated scan through lockfile audit. Use when CVEs require remediation, a major upstream version lands, stack compatibility forces a sweep, or on a scheduled hygiene cadence.
+description: Dependency-upgrade campaign. Use when CVEs require remediation, a major upstream version lands, stack compatibility forces a sweep, on a scheduled hygiene cadence, or for a lockfile audit before a release.
 ---
 
 Dependencies are inherited code. Upgrades are inherited risk. Patch in batch, minor in batch with a smoke test, major one-at-a-time with a CHANGELOG read.

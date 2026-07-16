@@ -1,6 +1,6 @@
 ---
 name: validation-first-driven
-description: Define state machines, invariants, and temporal properties before writing implementation. Use when building protocols, workflows, concurrent systems, or lifecycle-heavy state.
+description: Define state machines, invariants, and temporal properties. Use when building protocols, workflows, concurrent systems, or lifecycle-heavy state.
 ---
 
 # Validation-first development

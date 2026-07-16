@@ -1,6 +1,6 @@
 ---
 name: atomic-issues-prs
-description: Publish a change-set as atomic GitHub issues or PRs. Use when the user says "open a PR per change", "atomic PRs", "individual PR for each change", or wants separate PRs/issues.
+description: Publish a change-set as atomic GitHub issues or PRs. Use when the user says "atomic PRs" or wants one issue/PR per logical change.
 metadata:
   short-description: Atomic one-PR-per-change publisher with fork fallback
 ---

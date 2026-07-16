@@ -1,6 +1,6 @@
 ---
 name: strategy
-description: Run a sharp interview and write or maintain STRATEGY.md as the product anchor. Use when defining product strategy, setting a north star, or starting or redirecting a product.
+description: Use when defining product strategy, setting a north star, starting or redirecting a product, or an existing STRATEGY.md has gone stale.
 metadata:
   short-description: Interview-driven STRATEGY.md product anchor at the operating repo root
 ---

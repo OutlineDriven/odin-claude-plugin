@@ -1,6 +1,6 @@
 ---
 name: spec-driven
-description: Write a structured spec before writing code. Use when starting a new project or feature, requirements are unclear, or the change touches multiple modules and needs a shared reference.
+description: Use when starting a new project or feature, requirements are unclear, or the change touches multiple modules and needs a shared spec.
 ---
 
 # Spec-driven development

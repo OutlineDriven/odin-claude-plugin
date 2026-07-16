@@ -1,6 +1,6 @@
 ---
 name: tidy
-description: Dispatch compress operations to the right domain based on context. Use when the user says "tidy", "clean up", or names a file, diff, memory, workspace, git stack, or doc to tidy.
+description: Dispatch compress operations. Use when the user says "tidy" or names a file, diff, memory, workspace, git stack, or doc to tidy.
 ---
 
 # Tidy: ODIN's compress-operations dispatcher

@@ -1,6 +1,6 @@
 ---
 name: incremental
-description: Delivers changes in small, testable slices. Use when a change spans multiple files, a task feels too large for one step, or you're about to write a lot of code at once.
+description: Use when a change spans multiple files, or you're about to write a lot of code at once.
 ---
 
 # Incremental Implementation

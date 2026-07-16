@@ -1,6 +1,6 @@
 ---
 name: ast-grep
-description: Run structural code search, analysis, and refactoring with ast-grep. Use when doing AST-based modifications, structural search, linting across code shape, or replacing regex-fragile transformations.
+description: Run code analysis and refactoring with ast-grep. Use when doing AST-based modifications, structural search, linting across code shape, or replacing regex-fragile transformations.
 ---
 
 # ast-grep (sg)

@@ -1,6 +1,6 @@
 ---
 name: tests-adversarial
-description: Write adversarial tests that intentionally violate assumptions and stress failure paths. Use when hardening error handling, validating boundary behavior, or hunting silent failures.
+description: Write adversarial tests. Use when hardening error handling, validating boundary behavior, or hunting silent failures.
 ---
 
 # Adversarial Testing: Think Like the Attacker

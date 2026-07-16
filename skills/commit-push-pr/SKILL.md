@@ -1,6 +1,6 @@
 ---
 name: commit-push-pr
-description: Commit, push, and open a PR. Use when asked to ship/open a PR, or for PR-description-only flows like writing, rewriting, or describing a PR body.
+description: Use when asked to ship/open a PR, or for PR-description-only flows like writing, rewriting, or describing a PR body.
 ---
 
 # Git Commit, Push, and PR

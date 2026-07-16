@@ -1,6 +1,6 @@
 ---
 name: doc-review
-description: Review requirements docs, plans, specs, and PRDs through persona-based lenses. Use when the user says "review this plan", "review this spec", "review this PRD", "review these requirements", or "critique this design doc".
+description: Use when the user asks to review or critique a prose planning document — a plan, spec, PRD, requirements doc, or design doc.
 metadata:
   short-description: Multi-persona content-shape review of plans/specs/PRDs, read-only, findings routed by tier
 ---

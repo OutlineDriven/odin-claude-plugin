@@ -1,6 +1,6 @@
 ---
 name: type-driven
-description: Develop with refined types that make illegal states unrepresentable. Use when modeling a domain, encoding a state machine in types, replacing runtime validation with parsing, hardening an API boundary against malformed input, or the user says "make invalid states unrepresentable" or "parse don't validate".
+description: Develop with refined types. Use when modeling a domain, encoding a state machine in types, hardening an API boundary against malformed input, or the user says "make invalid states unrepresentable" or "parse don't validate".
 ---
 
 # Type-driven development

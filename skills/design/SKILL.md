@@ -1,6 +1,6 @@
 ---
 name: design
-description: Set visual and interaction direction for UI surfaces before writing code. Use when starting UI work, defining palettes or design tokens, or when output looks AI-generic, vibe-coded, or default-framework sloppy.
+description: Use when starting UI work, defining palettes or design tokens, or when output looks AI-generic.
 ---
 
 ## Posture

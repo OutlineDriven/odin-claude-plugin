@@ -1,6 +1,6 @@
 ---
 name: work
-description: Execute a plan or concrete work prompt end-to-end. Use when implementing from docs/plans, a spec path, or a clear build request; use /debug for open-ended bugs.
+description: Execute a plan or concrete work prompt end-to-end. Use when implementing from a plan or spec path, or a clear build request; use /debug for open-ended bugs.
 argument-hint: "[Plan doc path or description of work. Blank to auto use latest plan doc]"
 metadata:
   short-description: End-to-end implementation from plan or prompt

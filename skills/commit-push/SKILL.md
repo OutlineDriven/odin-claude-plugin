@@ -1,6 +1,6 @@
 ---
 name: commit-push
-description: Commit working-tree changes and push to the remote, no PR. Use when asked to ship/publish commits without opening a PR, or when explicitly told not to create a PR.
+description: Use when asked to ship/publish commits without opening a PR.
 ---
 
 # Git commit and push

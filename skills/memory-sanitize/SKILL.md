@@ -1,6 +1,6 @@
 ---
 name: memory-sanitize
-description: Produces share-safe copies of memory files with PII and credentials redacted, leaving originals untouched. Use when sanitizing memory for sharing, redacting PII, or scanning for credentials.
+description: Use when sanitizing memory for sharing, redacting PII, or scanning for credentials.
 ---
 
 Redact PII and scan for credentials in memory files: write copies to `/tmp`, never touch originals.

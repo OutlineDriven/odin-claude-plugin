@@ -1,6 +1,6 @@
 ---
 name: subagent-driven
-description: Execute a multi-task plan by delegating each task to a fresh subagent, auditing results before proceeding. Use when the user says "execute with subagents", "delegated execution", or hands you an ordered multi-task plan to run.
+description: Execute a multi-task plan. Use when the user says "execute with subagents", or hands you an ordered multi-task plan to run.
 metadata:
   short-description: Per-task implementer→reviewer loop with an audit gate between tasks
 ---

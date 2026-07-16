@@ -1,6 +1,6 @@
 ---
 name: pr-merge-temporal
-description: Merges multiple PRs into a temporal integration branch for validation before base. Use when validating a set of PRs together on a staging branch before advancing the base branch.
+description: Use when validating a set of PRs together on a staging branch before advancing the base branch.
 ---
 # Smart Merge to Temporal Branch
 
