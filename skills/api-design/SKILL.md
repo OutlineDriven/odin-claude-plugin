@@ -83,7 +83,7 @@ interface APIError {
 // 500 → Server error (never expose internal details)
 ```
 
-**Don't mix patterns.** If some endpoints throw, others return null, and others return `{ error }`, the consumer can't predict behavior.
+If some endpoints throw, others return null, and others return `{ error }`, the consumer can't predict behavior.
 
 ### 3. Validate at boundaries
 

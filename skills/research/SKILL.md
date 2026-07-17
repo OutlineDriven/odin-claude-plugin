@@ -5,7 +5,7 @@ description: Use when researching a named library, framework, SDK, API, or servi
 
 # Research Command
 
-Read-only external knowledge gathering. Walk the 5-tier source ladder; cite every claim to a primary source; flag training-data-only assertions explicitly. Do NOT write, edit, or commit files.
+Read-only external knowledge gathering. Walk the 5-tier source ladder; cite every claim to a primary source; flag training-data-only assertions explicitly.
 
 ## When to Apply / NOT
 

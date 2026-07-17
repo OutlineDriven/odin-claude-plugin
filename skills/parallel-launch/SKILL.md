@@ -18,7 +18,7 @@ Decompose the given task into independent agent groups and execute them in broad
    - Select the appropriate tailored agent type (Explore, Plan, or a domain specialist) — prefer a task-specific agent over a general one.
    - Define expected output format so results can be composed.
 
-3. **Launch all independent agents in a single tool call**. Do not run them sequentially when parallel is possible.
+3. **Launch all independent agents in a single tool call**.
 
 4. **Compose results** once all agents complete:
    - Merge non-conflicting outputs directly.

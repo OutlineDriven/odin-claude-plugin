@@ -17,7 +17,7 @@ Execute a plan as a chain of delegated subagents. Each task gets a fresh
 implementer with a self-contained brief; a fresh reviewer audits the result
 before the next task starts; a broad whole-branch review closes the run.
 
-**Continuous execution.** Do not check in between tasks. Run every task in the
+**Continuous execution.** Run every task in the
 plan without stopping. Stop only for: a BLOCKED status you cannot resolve, an
 ambiguity that genuinely blocks progress, or all tasks complete. "Should I
 continue?" prompts waste the user's time. They asked you to execute the plan.

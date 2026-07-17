@@ -46,7 +46,7 @@ Answer these before deprecating anything:
    → Quantify the migration scope.
 
 3. Does a replacement exist?
-   → If no, build the replacement first. Don't deprecate without an alternative.
+   → If no, build the replacement first.
 
 4. What's the migration cost for each consumer?
    → If trivially automated, do it. If manual and high-effort, weigh against maintenance cost.
@@ -105,7 +105,7 @@ Migrate consumers one at a time, not all at once. For each consumer:
 5. Confirm no regressions
 ```
 
-**The Churn Rule:** If you own the infrastructure being deprecated, you own migrating its users, or you ship backward-compatible updates that require no migration. Announcing a deprecation and leaving users to figure it out is not allowed.
+**The Churn Rule:** If you own the infrastructure being deprecated, you own migrating its users, or you ship backward-compatible updates that require no migration.
 
 ### Step 4: Remove the Old System
 

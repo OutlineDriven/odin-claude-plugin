@@ -31,8 +31,6 @@ Set `MEMORY_CLEAN_SKILL_SCRIPTS` to override when the skill is installed outside
 cp -r "$MEMORY_DIR" /tmp/memory-snapshot-$(date +%s)
 ```
 
-Never mutate originals without a snapshot.
-
 ### 3. Run structural audit
 
 ```sh
@@ -72,7 +70,7 @@ For staleness items, always show the specific turn IDs and a snippet of the cont
 
 ### 5. Wait for confirmation per group
 
-Present each fix group with a diff preview. Wait for explicit user confirmation before applying. Never auto-fix.
+Present each fix group with a diff preview. Wait for explicit user confirmation before applying.
 
 ### 6. Apply confirmed fixes
 

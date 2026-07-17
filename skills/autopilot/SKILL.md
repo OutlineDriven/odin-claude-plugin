@@ -65,8 +65,8 @@ The sequence and its halt mechanics; exact pass-criteria per gate are in the Val
 
 1. **Chain, never reimplement.** Each phase delegates to its named skill via the Skill tool. autopilot owns sequencing, gates, and the report; nothing else. Inlining a phase's logic is Graft.
 2. **Execution-only entry.** The chain starts at `plan` and never invokes `strategy` or `ideate`. Greenfield discovery is upstream and manual; auto-chaining it to "be helpful" on a vague request is Excess.
-3. **Gated sequencing.** A phase begins only after the prior gate passes. No phase starts on a red gate.
-4. **Autofix-then-halt.** On a failing gate, run the bounded autofix arm **once** (`fix` for the verifier and review gates, `gh-fix-ci` for the CI gate), then re-check. Still failing → HALT, hand off residual findings, run the report. Never run an autofix arm twice. Never carry a red gate into the next phase; compounding a bad change across phases is the exact failure this rule prevents.
+3. **Gated sequencing.** A phase begins only after the prior gate passes.
+4. **Autofix-then-halt.** On a failing gate, run the bounded autofix arm **once** (`fix` for the verifier and review gates, `gh-fix-ci` for the CI gate), then re-check. Still failing → HALT, hand off residual findings, run the report. Never carry a red gate into the next phase; compounding a bad change across phases is the exact failure this rule prevents.
 5. **Local-only when no remote.** Detect via `git remote`; empty (or `mode:local`) → skip the push half and the whole CI phase; still commit and still report.
 6. **Baseline wins.** On any conflict with `~/.claude/claude/system-prompt-baseline.md`, the baseline governs.
 

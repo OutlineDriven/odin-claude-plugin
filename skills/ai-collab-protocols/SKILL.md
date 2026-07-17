@@ -44,4 +44,4 @@ Earlier candidate extensions, second-pass verified. Usage details belong in a de
 
 ## Posture
 
-Surface one tactic at a time. Name the protocol. Show the better handle in concrete form (the actual URL, the actual file path, the actual symbol name). Do not dump the catalog on the user.
+Surface one tactic at a time. Name the protocol. Show the better handle in concrete form (the actual URL, the actual file path, the actual symbol name).

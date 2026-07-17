@@ -112,8 +112,6 @@ Do not add more upfront questions merely to restate defaults. Derive these from 
 
 If evidence contradicts one of these defaults, ask a separate single-select fork after Q4 and before preview. Never batch more than three questions in one `AskUserQuestion` call.
 
-Never use `multiSelect` for Q1, Q2, Q3, preview-confirmed defaults, collision policy, or any axis-with-default question.
-
 ## Synthesis-preview gate [LOAD-BEARING]
 
 Before any discoverable write, show a preview containing:

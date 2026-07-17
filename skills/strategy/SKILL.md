@@ -49,7 +49,7 @@ Push back at most twice per section; then capture what the user gave and mark th
 
 ## Support files: read on demand
 
-Don't bulk-load. Read each at the step that needs it.
+Read each at the step that needs it.
 
 - `references/interview.md`: the question bank, per-section quality bar, and pushback rules for all eight sections. Load before any interview turn; improvising the pushback from memory degrades into transcription.
 - `assets/strategy-template.md`: the locked section skeleton and post-write checklist. Read when assembling the draft.

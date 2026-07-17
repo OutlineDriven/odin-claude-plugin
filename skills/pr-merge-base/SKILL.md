@@ -38,7 +38,7 @@ Merge one or more PRs into the base branch (main/master) using queue-like sequen
 
 7. **Validate integration branch**: Once all PRs are merged on the integration branch, run full build/test suite if available.
 
-8. **Report results**: Present the validated integration branch to the user. Do NOT advance the base branch automatically. Only update base if the user explicitly requests it.
+8. **Report results**: Present the validated integration branch to the user. Only update base if the user explicitly requests it.
 
 9. **Abort conditions**: stop the queue and report if:
    - A conflict cannot be safely auto-resolved.

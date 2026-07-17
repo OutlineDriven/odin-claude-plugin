@@ -7,7 +7,7 @@ description: Use when a change spans multiple files, or you're about to write a 
 
 ## Overview
 
-Build in thin vertical slices. Implement one piece, test it, verify it, then expand. NEVER implement an entire feature in one pass. Each increment MUST leave the system in a working, testable state. Slicing this way keeps large features tractable.
+Build in thin vertical slices. Implement one piece, test it, verify it, then expand. Each increment MUST leave the system in a working, testable state. Slicing this way keeps large features tractable.
 
 ## When to Use
 

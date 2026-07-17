@@ -34,7 +34,7 @@ Merge multiple PRs into a temporal integration branch for validation before merg
 
 6. **Validate temporal branch**: Once all PRs are merged, run full build/test suite if available.
 
-7. **Report results**: Present the validated temporal branch to the user. Do NOT merge into base automatically. Only advance base if the user explicitly requests it.
+7. **Report results**: Present the validated temporal branch to the user. Only advance base if the user explicitly requests it.
 
 8. **Abort conditions**: stop the queue and report if:
    - A conflict cannot be safely auto-resolved.

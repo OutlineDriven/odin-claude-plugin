@@ -64,7 +64,7 @@ NOT:
    - **How**: 2 to 3 sentences explaining the local code and the contribution shape.
    - **First step**: exact command/action, e.g. `bat -P -p -n src/parser/expr.ts`, `rg -n 'parseExpr' tests src`, `gh issue view 42`, or `edit src/foo.ts:88-93 after reading context`.
 
-7. **Offer the next depth step.** Close with: `Want me to walk you through one of these? I can read the target code, outline the exact diff, or draft the PR description.` Do not stop at the recommendation list.
+7. **Offer the next depth step.** Close with: `Want me to walk you through one of these? I can read the target code, outline the exact diff, or draft the PR description.`
 
 ## Ranking Rules
 

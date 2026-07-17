@@ -31,7 +31,7 @@ When the surface narrows to a single concern above, defer.
 
 ### 1. Strict-mode tooling bootstrap (project-stable)
 
-Detect the ecosystem from manifests, then write strict-mode config per the relevant `references/<ecosystem>.md`. Idempotency: merge with existing config; raise if a destructive overwrite would be required and `--overwrite` is not explicit. Never silently replace.
+Detect the ecosystem from manifests, then write strict-mode config per the relevant `references/<ecosystem>.md`. Idempotency: merge with existing config; raise if a destructive overwrite would be required and `--overwrite` is not explicit.
 
 Languages with bundled references (Q5-approved set; framework specifics deferred to a follow-up):
 

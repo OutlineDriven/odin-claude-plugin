@@ -39,11 +39,11 @@ Commit the **whole** set into N atomic commits first, running the repo-native ty
 before each commit. This is the patch-isolation mechanism: each unit becomes one self-contained commit,
 so per-unit branches come from **cherry-pick**. Never re-stage a dirty tree, which would let
 later units swallow earlier diffs. Present the unit→commit list to the user for visibility, then proceed
-immediately. Do not wait for a go-ahead.
+immediately.
 
 ## Phase 2 - Route objects per unit
 
-Auto-route each unit by its commit type prefix (`<type>: ...`). Do not ask interactively:
+Auto-route each unit by its commit type prefix (`<type>: ...`):
 
 - **`feat` / `fix` / `perf` / `revert`** → **Issue + linked PR** for behavior-affecting changes; a tracking issue
   gives it a changelog/discussion anchor. The PR files first; the issue body then references the PR

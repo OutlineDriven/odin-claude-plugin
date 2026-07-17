@@ -63,7 +63,7 @@ The repo-vs-user fork is the routing decision: a repo-scoped engineering lesson 
 
 ## Support files: read on demand
 
-Don't bulk-load these at start. Read each at the step that needs it; pass the relevant content into any subagent you spawn.
+Read each at the step that needs it; pass the relevant content into any subagent you spawn.
 
 - `references/schema.md`. Frontmatter contract: bug/knowledge tracks, enums, category map, YAML safety. Read when classifying and validating.
 - `references/refresh.md`. The whole refresh model and phases. Read only in `mode:refresh`.
