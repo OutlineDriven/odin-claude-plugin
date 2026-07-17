@@ -1,6 +1,6 @@
 ---
 name: onboard
-description: Use when the user asks to be onboarded in a repo.
+description: Use when the user asks to be onboarded, oriented, given a tour, or shown where to start in a repo.
 metadata:
   short-description: New-codebase orientation tour
 ---

@@ -1,6 +1,6 @@
 ---
 name: design
-description: Use when starting UI work, defining palettes or design tokens, or when output looks AI-generic.
+description: Use when starting UI work, defining palettes or design tokens, or when output looks AI-generic, vibe-coded, or default-framework sloppy.
 ---
 
 ## Posture
