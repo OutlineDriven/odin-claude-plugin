@@ -1,6 +1,7 @@
 ---
 name: handoff
 description: Snapshot the current session into a resumable handoff artifact so a cold session, agent, or person continues without replaying context. Use when the user says "write a handoff", "hand off", "snapshot this session", "I'm running low on context", "pause and pack this up for the next session", or "resume this later".
+argument-hint: "[what the next session will focus on]"
 metadata:
   short-description: Snapshot the current session into a resumable handoff artifact
 ---
@@ -42,6 +43,9 @@ Do NOT:
 
 3. Fill the format below. Omit any section that is empty — an empty heading is noise. Echo the
    **absolute** path of the written file to chat (relative paths are not clickable in most terminals).
+   If arguments were passed, tailor `## Goal` and `## Next` to that focus. Redact secrets, API
+   keys, and PII because the handoff may be copied off-machine. Reference specs, plans, ADRs,
+   commits, and diffs by path or URL; never paste their content.
 
 ## To resume
 
@@ -76,6 +80,9 @@ branch: <name @ short-sha> (<clean | dirty: N files>)
 
 ## Blockers / open questions
 - <what is stuck; what needs a human or an answer>
+
+## Suggested skills
+- `<skill-name>`: <why it should run next>
 
 ## Verify
 <exact command(s) to confirm state; last known result>
