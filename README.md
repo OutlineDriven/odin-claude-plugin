@@ -65,13 +65,16 @@ Before any non-trivial implementation:
 4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
 5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
 
-## Skills (90 total)
+## Skills (98 total)
 
 Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
 
-### Planning & Exploration (12 skills)
+### Planning & Exploration (15 skills)
 
 - `askme` - Verbalized Sampling protocol for deep intent exploration before planning
+- `batch-ask-me` - Walk a dependency-aware design tree in batched question rounds until shared understanding
+- `loop-me` - Design recurring workflows through a stateful `askme` session and cwd specs
+- `to-questionnaire` - Turn a knowledge gap into an async questionnaire for the person who can answer it
 - `plan` - Thorough read-only planning before any action
 - `contexts` - Coordinate context sweep before coding
 - `init` - Analyze a codebase and create or improve AGENTS.md
@@ -83,6 +86,13 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `design` - Set visual and interaction direction for UI surfaces before writing code
 - `pov` - Decisive, project-grounded verdict on adopting or switching technology
 - `research` - Gather external knowledge from authoritative sources with verified citations
+
+### Writing & Learning (4 skills)
+
+- `teach` - Run a persistent cwd teaching workspace across missions, lessons, resources, and learning records
+- `writing-fragments` - Mine heterogeneous raw material into an append-only pile before shaping
+- `writing-shape` - Shape a raw pile into an article paragraph by paragraph with argued formats
+- `writing-beats` - Build a grounded article journey one candidate beat at a time
 
 ### Working Posture (5 skills)
 
@@ -109,13 +119,14 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `security-hardening` - Harden code against vulnerabilities as you build it
 - `observability` - Instrument code with logging, metrics, traces, and alerts
 
-### Tooling (6 skills)
+### Tooling (7 skills)
 
 - `ast-grep` - Structural code search, analysis, and refactoring
 - `browser-testing` - Test and debug browser code with Chrome DevTools MCP
 - `git-branchless` - Idiomatic git-branchless workflows for stack edits, rebases, and stacked-PR publishing
 - `setup-gitignore` - Compose or revise .gitignore from templates, editor patterns, and confirmed untracked noise
 - `setup-pre-commit` - Install ecosystem-appropriate pre-commit hooks for formatting, linting, and test gates
+- `setup-ts-deep-modules` - Enforce TypeScript package boundaries through entry points with dependency-cruiser
 - `strict-validation-setup` - Bootstrap strict-mode tooling and per-task GOALS.md scaffolding for self-verifying agent loops
 
 ### Execution (13 skills)
