@@ -6,7 +6,7 @@ argument-hint: "A workflow to design, or nothing to go find one"
 
 # Loop Me
 
-Run a stateful `askme` (adversarial) session whose only output is **workflow** specs. Use the askme discipline — relentless, one question at a time, a recommended answer attached to each — aimed at the vocabulary and goal below. Create, edit, and delete specs as the session resolves things.
+Run a stateful `askme` (adversarial) session whose only output is **workflow** specs. Use the askme discipline (relentless, one question at a time, a recommended answer attached to each) aimed at the vocabulary and goal below. Create, edit, and delete specs as the session resolves things.
 
 ## Verbalized Sampling
 
@@ -27,13 +27,13 @@ Synthesize the survivors (highest-weighted hypotheses) into the initial loop can
 
 ## The loop lens
 
-A **loop** is a recurring pattern in the user's life: their career, their week, their morning, a single repeated activity. Picturing a life as loops within loops reveals how predictable its activities really are — which is what makes them worth **delegating**. Use the lens to find loops worth specifying, and propose ones the user hasn't noticed.
+A **loop** is a recurring pattern in the user's life: their career, their week, their morning, a single repeated activity. Picturing a life as loops within loops reveals how predictable its activities really are, which is what makes them worth **delegating**. Use the lens to find loops worth specifying, and propose ones the user hasn't noticed.
 
-A **workflow** is the spec of one loop, made real. You run a workflow on a loop — the loop is its running instantiation. Workflows live in `workflows/*.md` and are the source of truth.
+A **workflow** is the spec of one loop, made real. You run a workflow on a loop: the loop is its running instantiation. Workflows live in `workflows/*.md` and are the source of truth.
 
 ## Vocabulary
 
-A shared language, reached for only when a workflow calls for it — never a checklist. **Mandate nothing structural**: a workflow needs no AI, no checkpoint, and no schedule unless the askme session shows it does.
+A shared language, reached for only when a workflow calls for it, never a checklist. **Mandate nothing structural**: a workflow needs no AI, no checkpoint, and no schedule unless the askme session shows it does.
 
 - **Trigger**: what fires each run: an **event** (a new email, a new issue) or a **schedule** (every morning). Event-triggering is usually the more efficient.
 - **Checkpoint**: a human-in-the-loop point where the user is asked to verify or decide. Some workflows have none and run autonomously; some use no AI at all.
@@ -46,5 +46,5 @@ A workflow spec is done when an implementer agent could build it without asking 
 
 ## The workspace
 
-- `workflows/*.md` — one spec per workflow.
-- `NOTES.md` — raw notes on the user's world: the tools they use, the channels they process, and their own terminology for both. When it is empty or thin, interview them about their world before specifying anything. Sharpen fuzzy terms into canonical ones as they surface, and record them here.
+- `workflows/*.md`, one spec per workflow.
+- `NOTES.md`, raw notes on the user's world: the tools they use, the channels they process, and their own terminology for both. When it is empty or thin, interview them about their world before specifying anything. Sharpen fuzzy terms into canonical ones as they surface, and record them here.

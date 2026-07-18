@@ -5,11 +5,11 @@ description: 'Use when the user wants to walk a complex design space round by ro
 
 # Batch Ask Me
 
-Walk a complex decision space with the user in **rounds**, using a **design tree** to keep every question dependency-respecting. The **frontier** is every decision whose prerequisites are already settled — the questions you can ask *now* without guessing at answers you haven't heard yet.
+Walk a complex decision space with the user in **rounds**, using a **design tree** to keep every question dependency-respecting. The **frontier** is every decision whose prerequisites are already settled: the questions you can ask *now* without guessing at answers you haven't heard yet.
 
 Each round, ask the whole frontier as a batch of single-select questions, each with a recommended answer. Wait for the user's answers, then recompute the frontier and ask the next round. A question whose answer depends on another open question belongs to a later round, not this one.
 
-Finding *facts* is your job, not the user's. When a frontier question needs an environmental fact (filesystem, tools, codebase, etc.), dispatch a sub-agent to find it — never ask the user for something you could look up yourself. A running exploration is an unsettled prerequisite; only its downstream questions wait — ask the rest of the frontier now.
+Finding *facts* is your job, not the user's. When a frontier question needs an environmental fact (filesystem, tools, codebase, etc.), dispatch a sub-agent to find it; never ask the user for something you could look up yourself. A running exploration is an unsettled prerequisite; only its downstream questions wait, so ask the rest of the frontier now.
 
 The session is done when the frontier is empty: every branch of the design tree visited, nothing left silently assumed. Do not act on the result until the user confirms you have reached a shared understanding.
 
