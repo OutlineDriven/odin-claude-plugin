@@ -156,6 +156,7 @@ After structuring the plan, ask the user how they want to receive it using the p
    - Current working directory
    - `/tmp`
    - A custom path
+   - A session-local artifact (`local://<name>-plan.md`): when the harness restricts working-tree writes, or on request.
    - Use filename convention: `YYYY-MM-DD-<descriptive-name>-plan.md`
    - Start the document with a `# Title` heading, followed by `Created: YYYY-MM-DD` on the next line. No YAML frontmatter.
 

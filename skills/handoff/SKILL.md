@@ -41,6 +41,8 @@ Do NOT:
    two runs in the same minute can't collide). Write `$root/.outline/handoffs/<slug>-<ts>.md`. Runs
    leave a **trail** of timestamped files rather than overwriting one. Stale snapshots are yours to prune.
 
+> **Restricted-write harness fallback:** when the harness blocks working-tree writes but exposes session-local artifacts (for example omp plan mode's `local://`), write this artifact to `local://handoff-<slug>-<ts>.md` instead, carrying `intended_path: .outline/handoffs/<slug>-<ts>.md` as metadata (a frontmatter key when the artifact has YAML frontmatter, otherwise a first-line `<!-- intended_path: ... -->` comment). Read it back to confirm it landed, and defer the mkdir, staging, and commit steps and their gates. The `local://` copy is a working draft, not persistence: a same-session skill may consume it by URI, but never report the artifact as saved to `.outline/handoffs/`; it reaches that path only when a writes-allowed session materializes it there. `intended_path` is metadata for that later persist step, never a trigger to auto-write. A handoff exists for cold resume, so this caveat is critical here: tell the user to materialize it to `.outline/handoffs/` (or copy it out) before the session ends, or the snapshot is lost. An explicit user-given `local://` destination is honored in any mode.
+
 3. Fill the format below. Omit any section that is empty — an empty heading is noise. Echo the
    **absolute** path of the written file to chat (relative paths are not clickable in most terminals).
    If arguments were passed, tailor `## Goal` and `## Next` to that focus. Redact secrets, API

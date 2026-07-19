@@ -37,5 +37,8 @@ Everything failing a gate:
 ## Workflow
 
 - New file: admit only entries passing both gates; each states the rule and its rationale.
+
+> **Restricted-write harness fallback:** when the harness blocks working-tree writes but exposes session-local artifacts (for example omp plan mode's `local://`), write this artifact to `local://agents-md-draft.md` instead, carrying `intended_path: AGENTS.md` as metadata (a frontmatter key when the artifact has YAML frontmatter, otherwise a first-line `<!-- intended_path: ... -->` comment). Read it back to confirm it landed, and defer the mkdir, staging, and commit steps and their gates. The `local://` copy is a working draft, not persistence: a same-session skill may consume it by URI, but never report the artifact as saved to `AGENTS.md`; it reaches that path only when a writes-allowed session materializes it there. `intended_path` is metadata for that later persist step, never a trigger to auto-write. An explicit user-given `local://` destination is honored in any mode.
+
 - Existing file: audit every line against the maxim. Descriptive lines ("what it is") are deletion candidates; propose their removal, don't merely avoid adding more. Prefer targeted edits over wholesale rewrites.
 - Each fact appears once. Ground every statement in files actually read. If uncertain, omit the claim rather than speculate.

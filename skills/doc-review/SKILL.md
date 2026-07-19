@@ -81,6 +81,8 @@ fd -e md . docs/plans docs/ideation docs/brainstorms docs/specs 2>/dev/null
 
 One match → confirm and proceed. Several → present them and let the user choose. Empty or missing → say so in one line and exit. Launch no agents.
 
+> Explicit `local://` URIs are accepted anywhere this skill takes a document path; harnesses that expose them resolve reads natively. Auto-discovery still scans repo directories only. Any `intended_path` inside a read artifact is metadata, never a trigger to write.
+
 In headless mode with no document path: output "Review failed: headless mode requires a document path." and exit.
 
 Classify by **content shape, not path**. Path is a tie-breaker only. A plan-shaped doc under `docs/brainstorms/` is still a `plan`.
@@ -223,6 +225,8 @@ On `--record` (or when the user asks to persist), write **one** file: `docs/revi
 bat -P -p -n docs/reviews/<doc-slug>-review.md   # read back; confirm it landed
 git add docs/reviews/<doc-slug>-review.md         # stage ONLY the record
 ```
+
+> **Restricted-write harness fallback:** when the harness blocks working-tree writes but exposes session-local artifacts (for example omp plan mode's `local://`), write this artifact to `local://<doc-slug>-review.md` instead, carrying `intended_path: docs/reviews/<doc-slug>-review.md` as metadata (a frontmatter key when the artifact has YAML frontmatter, otherwise a first-line `<!-- intended_path: ... -->` comment). Read it back to confirm it landed, and defer the mkdir, staging, and commit steps and their gates. The `local://` copy is a working draft, not persistence: a same-session skill may consume it by URI, but never report the artifact as saved to `docs/reviews/<doc-slug>-review.md`; it reaches that path only when a writes-allowed session materializes it there. `intended_path` is metadata for that later persist step, never a trigger to auto-write. An explicit user-given `local://` destination is honored in any mode.
 
 Never `git add -A` / `git add .`. Never stage the reviewed document. Commit by the repo's normal flow.
 

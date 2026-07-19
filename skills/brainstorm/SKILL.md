@@ -9,7 +9,7 @@ metadata:
 
 Brainstorming answers **WHAT** to build through collaborative dialogue. It precedes `/plan`, which enriches the same artifact with **HOW**.
 
-The durable output is a **requirements-only plan** under `docs/plans/`. Write it with `artifact_contract: odin-plan/v1`, `artifact_readiness: requirements-only`, and `source: brainstorm` so planning does not invent product behavior, scope boundaries, or success criteria.
+The durable output is a **requirements-only plan** under `docs/plans/` (restricted-write harnesses: see the fallback at the Write step). Write it with `artifact_contract: odin-plan/v1`, `artifact_readiness: requirements-only`, and `source: brainstorm` so planning does not invent product behavior, scope boundaries, or success criteria.
 
 This skill does not implement code. It explores, clarifies, and documents decisions for later planning or execution.
 
@@ -79,6 +79,8 @@ If the user references an existing brainstorm topic or document, or there is an 
 - Confirm: "Found an existing requirements-only plan for [topic]. Continue from this, or start fresh?"
 - If resuming, summarize state briefly, continue from existing decisions and outstanding questions, and update the existing document instead of creating a duplicate.
 - Resume preserves the existing artifact's format, except pipeline mode, which forces `md`.
+
+> Explicit `local://` URIs are accepted anywhere this skill takes a document path; harnesses that expose them resolve reads natively. Auto-discovery still scans repo directories only. Any `intended_path` inside a read artifact is metadata, never a trigger to write.
 
 #### 0.1b Classify Task Domain
 
@@ -270,6 +272,8 @@ When a doc is warranted, compose it using:
 **Write tight.** Hold every section to the prose-economy discipline in `references/brainstorm-sections.md`.
 
 Write to `docs/plans/YYYY-MM-DD-NNN-<type>-<topic>-plan.<md|html>`. Include `artifact_contract: odin-plan/v1`, `artifact_readiness: requirements-only`, and `source: brainstorm`. Title is `<Name> - Plan`. Keep the doc light and standalone-readable: a Goal Capsule and an ODIN spec outline. Do not emit a Goal Launch Block or Reader Index.
+
+> **Restricted-write harness fallback:** when the harness blocks working-tree writes but exposes session-local artifacts (for example omp plan mode's `local://`), write this artifact to `local://<topic-slug>-requirements.md` instead, carrying `intended_path: docs/plans/YYYY-MM-DD-NNN-<type>-<topic>-plan.md` as metadata (a frontmatter key when the artifact has YAML frontmatter, otherwise a first-line `<!-- intended_path: ... -->` comment). Read it back to confirm it landed, and defer the mkdir, staging, and commit steps and their gates. The `local://` copy is a working draft, not persistence: a same-session skill may consume it by URI, but never report the artifact as saved to its `docs/plans/` path; it reaches that path only when a writes-allowed session materializes it there. `intended_path` is metadata for that later persist step, never a trigger to auto-write. In fallback the format is always markdown (`format:html` is skipped), and the name is never `local://<slug>-plan.md`, which restricted harnesses reserve for the execution-spec plan artifact. An explicit user-given `local://` destination is honored in any mode.
 
 #### Vocabulary Capture
 

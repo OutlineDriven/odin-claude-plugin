@@ -29,6 +29,8 @@ drift-detect --sources=github,docs,code --depth=thorough
 - `--depth=quick|thorough` - `quick` samples active surfaces; `thorough` follows related docs, symbols, and history.
 - Optional output artifact: `.outline/drift-detect/reality-check-YYYYMMDD-HHMM.md` when the report is too long for chat.
 
+> **Restricted-write harness fallback:** when the harness blocks working-tree writes but exposes session-local artifacts (for example omp plan mode's `local://`), write this artifact to `local://reality-check-YYYYMMDD-HHMM.md` instead, carrying `intended_path: .outline/drift-detect/reality-check-YYYYMMDD-HHMM.md` as metadata (a frontmatter key when the artifact has YAML frontmatter, otherwise a first-line `<!-- intended_path: ... -->` comment). Read it back to confirm it landed, and defer the mkdir, staging, and commit steps and their gates. The `local://` copy is a working draft, not persistence: a same-session skill may consume it by URI, but never report the artifact as saved to `.outline/drift-detect/`; it reaches that path only when a writes-allowed session materializes it there. `intended_path` is metadata for that later persist step, never a trigger to auto-write. An explicit user-given `local://` destination is honored in any mode.
+
 ## Workflow
 
 1. **Scope the scan.**

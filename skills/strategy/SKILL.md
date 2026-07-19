@@ -78,6 +78,9 @@ Read the existing `STRATEGY.md` in full. Summarize current state in 3 to 5 lines
 2. Read `assets/strategy-template.md`; fill it with captured answers in the user's language. Delete unused optional sections. No empty headers. Set `last_updated` to today's ISO date.
 3. Present the full draft in chat; offer one edit round.
 4. Write `$root/STRATEGY.md` (the path resolved in Phase 0).
+
+> **Restricted-write harness fallback:** when the harness blocks working-tree writes but exposes session-local artifacts (for example omp plan mode's `local://`), write this artifact to `local://strategy.md` instead, carrying `intended_path: $root/STRATEGY.md` as metadata (a frontmatter key when the artifact has YAML frontmatter, otherwise a first-line `<!-- intended_path: ... -->` comment). Read it back to confirm it landed, and defer the mkdir, staging, and commit steps and their gates. The `local://` copy is a working draft, not persistence: a same-session skill may consume it by URI, but never report the artifact as saved to `STRATEGY.md`; it reaches that path only when a writes-allowed session materializes it there. `intended_path` is metadata for that later persist step, never a trigger to auto-write. An explicit user-given `local://` destination is honored in any mode.
+
 5. **Read the file back** to confirm it landed as intended.
 6. **Commit.** Stage only the resolved anchor: `git -C "$root" add STRATEGY.md`. Never `git add -A`. Publish by the operating repo's normal flow.
 7. Note in one line that `plan` and `ideate` read it as optional grounding on their next run.

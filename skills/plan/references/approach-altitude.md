@@ -36,4 +36,6 @@ Hold at the approach. Use the platform's blocking question tool. Fall back to nu
 
 **Save for later.** Persist the approach-plan to `docs/plans/` so it survives. Keep the plan **agent-agnostic** so any agent can execute it later. Offer to deepen it.
 
+> **Restricted-write harness fallback:** when the harness blocks working-tree writes but exposes session-local artifacts (for example omp plan mode's `local://`), write this artifact to `local://<slug>-approach-plan.md` instead, carrying `intended_path: docs/plans/<slug>.md` as metadata (a frontmatter key when the artifact has YAML frontmatter, otherwise a first-line `<!-- intended_path: ... -->` comment). Read it back to confirm it landed, and defer the mkdir, staging, and commit steps and their gates. The `local://` copy is a working draft, not persistence: a same-session skill may consume it by URI, but never report the artifact as saved to `docs/plans/<slug>.md`; it reaches that path only when a writes-allowed session materializes it there. `intended_path` is metadata for that later persist step, never a trigger to auto-write. An explicit user-given `local://` destination is honored in any mode.
+
 **Execute now.** The approach-plan's job is done; continue into the normal plan flow to produce the implementation plan, then hand off for execution.

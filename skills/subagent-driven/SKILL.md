@@ -17,6 +17,8 @@ Execute a plan as a chain of delegated subagents. Each task gets a fresh
 implementer with a self-contained brief; a fresh reviewer audits the result
 before the next task starts; a broad whole-branch review closes the run.
 
+> Explicit `local://` URIs are accepted anywhere this skill takes a document path; harnesses that expose them resolve reads natively. Auto-discovery still scans repo directories only. Any `intended_path` inside a read artifact is metadata, never a trigger to write.
+
 **Continuous execution.** Run every task in the
 plan without stopping. Stop only for: a BLOCKED status you cannot resolve, an
 ambiguity that genuinely blocks progress, or all tasks complete. "Should I

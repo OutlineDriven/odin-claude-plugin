@@ -48,3 +48,7 @@ A workflow spec is done when an implementer agent could build it without asking 
 
 - `workflows/*.md`, one spec per workflow.
 - `NOTES.md`, raw notes on the user's world: the tools they use, the channels they process, and their own terminology for both. When it is empty or thin, interview them about their world before specifying anything. Sharpen fuzzy terms into canonical ones as they surface, and record them here.
+
+> **Restricted-write harness fallback:** when the harness blocks working-tree writes but exposes session-local artifacts (for example omp plan mode's `local://`), write this artifact to `local://workflow-<slug>.md` instead, carrying `intended_path: workflows/<slug>.md` as metadata (a frontmatter key when the artifact has YAML frontmatter, otherwise a first-line `<!-- intended_path: ... -->` comment). Read it back to confirm it landed, and defer the mkdir, staging, and commit steps and their gates. The `local://` copy is a working draft, not persistence: a same-session skill may consume it by URI, but never report the artifact as saved to `workflows/<slug>.md`; it reaches that path only when a writes-allowed session materializes it there. `intended_path` is metadata for that later persist step, never a trigger to auto-write. An explicit user-given `local://` destination is honored in any mode.
+
+> Restricted-write harness: state in one line that this update is deferred until writes are allowed, then continue; never relocate a merge into an existing repo file to `local://`.

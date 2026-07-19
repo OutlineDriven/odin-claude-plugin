@@ -33,6 +33,8 @@ Determine how to proceed based on `<input_document>`.
 
 **Blank invocation:** glob `docs/plans/*.md` and `docs/plans/*.html`. Inspect metadata for the newest candidates and auto-select only when the newest matching artifact is `implementation-ready` plus `execution: code` or a legacy code plan. Stop instead of silently executing a requirements-only, knowledge-work, approach-plan, or unclassified artifact. Ask for an explicit path or `/plan` enrichment.
 
+> Explicit `local://` URIs are accepted anywhere this skill takes a document path; harnesses that expose them resolve reads natively. Auto-discovery still scans repo directories only. Any `intended_path` inside a read artifact is metadata, never a trigger to write.
+
 **Superseded sibling:** if a requirements-only candidate has a same-basename file in the other format (`<basename>.md` / `<basename>.html`) that is `implementation-ready`, the requirements-only copy is stale, so select the implementation-ready sibling instead of stopping.
 
 **Bare prompt** (input is a description, not a file path):

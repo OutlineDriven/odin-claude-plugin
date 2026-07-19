@@ -47,5 +47,8 @@ After all mutations in this run have settled (initial write, deepening synthesis
 Based on selection:
 - **Start implementation** -> Invoke the implementation skill, passing the plan path. The implementation skill then owns execution. If no skill-invocation primitive exists, print a fallback prompt for the user to run; in that prompt, tell the executor to read the plan's Goal Capsule, Verification Contract, Definition of Done, and active implementation units first rather than the whole document.
 - **Persist the plan** -> Write the plan to `docs/plans/<slug>.md` (creating the directory if needed). Read the file back to confirm it landed. Return to the post-generation menu.
+
+> **Restricted-write harness fallback:** when the harness blocks working-tree writes but exposes session-local artifacts (for example omp plan mode's `local://`), write this artifact to `local://<slug>-plan.md` instead, carrying `intended_path: docs/plans/<slug>.md` as metadata (a frontmatter key when the artifact has YAML frontmatter, otherwise a first-line `<!-- intended_path: ... -->` comment). Read it back to confirm it landed, and defer the mkdir, staging, and commit steps and their gates. The `local://` copy is a working draft, not persistence: a same-session skill may consume it by URI, but never report the artifact as saved to `docs/plans/<slug>.md`; it reaches that path only when a writes-allowed session materializes it there. `intended_path` is metadata for that later persist step, never a trigger to auto-write. An explicit user-given `local://` destination is honored in any mode.
+
 - **Done** -> End the interaction. The plan is ready.
 - **Free-form input** -> Accept revisions to the plan and loop back to options.

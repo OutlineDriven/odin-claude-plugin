@@ -18,6 +18,7 @@ Sections earn their place by serving one of these audiences. Omit padding.
 New `brainstorm` outputs live under `docs/plans/` and use the plan artifact contract:
 
 - **Path:** `docs/plans/YYYY-MM-DD-NNN-<type>-<topic>-plan.<md|html>`.
+- **Restricted-write harness fallback:** `local://<topic-slug>-requirements.md`, carrying `intended_path` (a frontmatter key) that names the `docs/plans/` path above; markdown only, and never `local://<slug>-plan.md` (restricted harnesses reserve that for the execution-spec plan). It is a working draft, not persistence, until a writes-allowed session materializes it at that path.
 - **`artifact_contract: odin-plan/v1`**.
 - **`artifact_readiness: requirements-only`**.
 - **`source: brainstorm`**.

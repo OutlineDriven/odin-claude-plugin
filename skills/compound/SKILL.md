@@ -57,7 +57,11 @@ Strip `mode:` tokens from `$ARGUMENTS`.
 5. Run `python3 scripts/validate-frontmatter.py <path>` until it exits 0.
 6. Read the file back to confirm.
 
+> **Restricted-write harness fallback:** when the harness blocks working-tree writes but exposes session-local artifacts (for example omp plan mode's `local://`), write this artifact to `local://<slug>-solution.md` instead, carrying `intended_path: docs/solutions/<category>/<slug>.md` as metadata (a frontmatter key when the artifact has YAML frontmatter, otherwise a first-line `<!-- intended_path: ... -->` comment). Read it back to confirm it landed, and defer the mkdir, staging, and commit steps and their gates. The `local://` copy is a working draft, not persistence: a same-session skill may consume it by URI, but never report the artifact as saved to `docs/solutions/<category>/<slug>.md`; it reaches that path only when a writes-allowed session materializes it there. `intended_path` is metadata for that later persist step, never a trigger to auto-write. In fallback, defer the `scripts/validate-frontmatter.py` check (it reads a filesystem path, not a `local://` URI); validation runs when the record is materialized. Say so in one line. An explicit user-given `local://` destination is honored in any mode.
+
 ## Writing a concept entry
+
+> Restricted-write harness: state in one line that this update is deferred until writes are allowed, then continue; never relocate a merge into an existing repo file to `local://`.
 
 1. Read `references/concepts.md`.
 2. Check `CONCEPTS.md` for an existing definition of the term.

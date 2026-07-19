@@ -15,6 +15,8 @@ Turn something the user can't answer alone into a **questionnaire** (a Markdown 
 
 3. **Write the questionnaire.** Draft questions aimed at the gap from steps 1 and 2, following the Document structure below. Write it to `to-questionnaire-<slug>.md` in the current directory (slug from the topic) and report the path. Done when the file exists and every item the user named in step 2 is covered by a question.
 
+> **Restricted-write harness fallback:** when the harness blocks working-tree writes but exposes session-local artifacts (for example omp plan mode's `local://`), write this artifact to `local://to-questionnaire-<slug>.md` instead, carrying `intended_path: ./to-questionnaire-<slug>.md` as metadata (a frontmatter key when the artifact has YAML frontmatter, otherwise a first-line `<!-- intended_path: ... -->` comment). Read it back to confirm it landed, and defer the mkdir, staging, and commit steps and their gates. The `local://` copy is a working draft, not persistence: a same-session skill may consume it by URI, but never report the artifact as saved to `./to-questionnaire-<slug>.md`; it reaches that path only when a writes-allowed session materializes it there. `intended_path` is metadata for that later persist step, never a trigger to auto-write. An explicit user-given `local://` destination is honored in any mode.
+
 ## Document structure
 
 Frame the document as a **discovery questionnaire**: the user lacks context, the recipient holds it. Order questions most-important-first (async means you may only get one pass) and group them under `##` headings by theme once there are more than a handful. Write it using the template below.

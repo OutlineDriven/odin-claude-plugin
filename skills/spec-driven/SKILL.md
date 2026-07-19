@@ -50,6 +50,8 @@ Do not silently fill in ambiguous requirements. The spec exists to surface misun
 
 **Write a spec covering six core areas:**
 
+> **Restricted-write harness fallback:** when the harness blocks working-tree writes but exposes session-local artifacts (for example omp plan mode's `local://`), write this artifact to `local://<slug>-spec.md` instead, carrying `intended_path: <the chosen repo path>` as metadata (a frontmatter key when the artifact has YAML frontmatter, otherwise a first-line `<!-- intended_path: ... -->` comment). Read it back to confirm it landed, and defer the mkdir, staging, and commit steps and their gates. The `local://` copy is a working draft, not persistence: a same-session skill may consume it by URI, but never report the artifact as saved to the chosen repo path; it reaches that path only when a writes-allowed session materializes it there. `intended_path` is metadata for that later persist step, never a trigger to auto-write. An explicit user-given `local://` destination is honored in any mode.
+
 1. **Objective**: what is being built and why, who the user is, what success looks like.
 
 2. **Commands**: full executable commands with flags, not bare tool names. Record them for the stack the project actually uses:
@@ -177,4 +179,4 @@ Before proceeding to implementation, confirm:
 - [ ] The human has reviewed and approved the spec
 - [ ] Success criteria are specific and testable
 - [ ] Boundaries (Always/Ask First/Never) are defined
-- [ ] The spec is saved to a file in the repository
+- [ ] The spec is saved to a file in the repository (or the `local://` fallback artifact when writes are restricted)
