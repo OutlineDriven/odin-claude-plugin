@@ -65,14 +65,15 @@ Before any non-trivial implementation:
 4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
 5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
 
-## Skills (98 total)
+## Skills (99 total)
 
 Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
 
-### Planning & Exploration (15 skills)
+### Planning & Exploration (16 skills)
 
 - `askme` - Verbalized Sampling protocol for deep intent exploration before planning
 - `batch-ask-me` - Walk a dependency-aware design tree in batched question rounds until shared understanding
+- `mutual-sync` - Three-way grounding: verify user, agent, and codebase share one picture of current state before proceeding
 - `loop-me` - Design recurring workflows through a stateful `askme` session and cwd specs
 - `to-questionnaire` - Turn a knowledge gap into an async questionnaire for the person who can answer it
 - `plan` - Thorough read-only planning before any action
