@@ -7,7 +7,11 @@ description: 'Use when the user wants to build an article as a choose-your-own-a
 
 The user has passed (or will pass) a markdown file of raw material. This is **exploit**: the exploring is done, the **pile** is fixed. Commit to a path through it and mine the pile to fill each **beat**.
 
+> Explicit `local://` URIs are accepted anywhere this skill takes a document path; harnesses that expose them resolve reads natively. Auto-discovery still scans repo directories only. Any `intended_path` inside a read artifact is metadata, never a trigger to write.
+
 If the user did not say where to save the article, ask once and remember the path.
+
+> **Restricted-write harness fallback:** the article file is written to the path the user chose, and an explicit `local://` output path is honored in any mode. When the harness blocks working-tree writes but exposes session-local artifacts (for example omp plan mode's `local://`), redirect the output to a named session-local draft such as `local://<title-slug>-article.md`, then re-read and append to that URI exactly as you would the file, and report the user's intended repo path separately in chat. Do not write any path metadata into the document itself; this skill's format forbids added metadata. The `local://` draft is a working draft, not persistence: never report it as saved to the user's path; it reaches that path only when a writes-allowed session materializes it there.
 
 Then run a beat-by-beat journey, choose-your-own-adventure style:
 

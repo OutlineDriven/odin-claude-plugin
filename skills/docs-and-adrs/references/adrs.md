@@ -58,6 +58,8 @@ Use PostgreSQL with Prisma ORM.
 - Hosting on managed service (Supabase, Neon, or RDS)
 ```
 
+> **Restricted-write harness fallback:** when the harness blocks working-tree writes but exposes session-local artifacts (for example omp plan mode's `local://`), write this ADR to `local://adr-<slug>.md` (no sequence number in the draft name) and record only the intended directory as a first-line `<!-- intended_dir: docs/decisions/ -->` comment; do not pin `ADR-<NNN>` yet, because the next number can change before materialization. Read it back to confirm it landed. The `local://` copy is a working draft, not persistence: never report the ADR as saved to `docs/decisions/`. When a writes-allowed session materializes it, recompute the next sequential number then, write `docs/decisions/<NNN>-<slug>.md` only if that path does not already exist (never overwrite), read it back, and only then report the final path. An explicit user-given `local://` destination is honored in any mode.
+
 ## ADR Lifecycle
 
 ```

@@ -13,6 +13,8 @@ As fragments emerge from either side of the conversation, append them to a singl
 
 If the user did not pass a path, ask once where to save the document, then remember it for the rest of the session.
 
+> **Restricted-write harness fallback:** the fragments file is written to the path the user chose, and an explicit `local://` output path is honored in any mode. When the harness blocks working-tree writes but exposes session-local artifacts (for example omp plan mode's `local://`), redirect the output to a named session-local draft such as `local://<title-slug>-fragments.md`, then re-read and append to that URI exactly as you would the file, and report the user's intended repo path separately in chat. Do not write any path metadata into the document itself; this skill's format forbids added metadata. The `local://` draft is a working draft, not persistence: never report it as saved to the user's path; it reaches that path only when a writes-allowed session materializes it there.
+
 Capture fragments from the very first thing the user says, including the initial prompt.
 
 On first write, put a single H1 at the top with a working title (it can change later) and nothing else: no metadata, no TOC, no date.

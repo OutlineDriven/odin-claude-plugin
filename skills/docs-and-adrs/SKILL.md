@@ -24,6 +24,8 @@ Document decisions, not just code. The most valuable documentation captures the 
 
 Read `references/adrs.md` when making a significant architectural decision (framework/library choice, data model, auth strategy, API architecture, or any expensive-to-reverse choice) — it has the "When to Write an ADR" checklist, the ADR template, and the lifecycle states.
 
+> Restricted-write harness: the ADR is the only standalone artifact this skill redirects (see `references/adrs.md`). Do not edit its other surfaces (README, CHANGELOG, inline code comments, API docs) under restricted writes: report each deferred file and its intended change in one line, then continue read-only; never relocate a merge into an existing repo file to `local://`.
+
 ## Inline Documentation
 
 Read `references/inline-comments.md` when writing or reviewing inline code comments — it has the why-not-what rule with before/after examples and the gotcha-documentation pattern.
