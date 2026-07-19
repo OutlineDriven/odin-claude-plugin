@@ -65,7 +65,7 @@ Before any non-trivial implementation:
 4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
 5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
 
-## Skills (99 total)
+## Skills (100 total)
 
 Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
 
@@ -130,13 +130,14 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `setup-ts-deep-modules` - Enforce TypeScript package boundaries through entry points with dependency-cruiser
 - `strict-validation-setup` - Bootstrap strict-mode tooling and per-task GOALS.md scaffolding for self-verifying agent loops
 
-### Execution (13 skills)
+### Execution (14 skills)
 
 - `proceed` - Execute an implementation plan with surgical precision
 - `parallel-launch` - Decompose a task into independent concerns and execute via agents
 - `tests-adversarial` - Adversarial tests that stress failure paths
 - `work` - Execute a plan or concrete work prompt end-to-end
 - `subagent-driven` - Delegate a multi-task plan to fresh subagents, auditing results before proceeding
+- `workflows-driven` - Deterministic phased fan-out with per-task contracts and adversarial verification; materializes on Claude Code Dynamic Workflows or omp task batches
 - `fix` - Iterative repair loop that fixes one thing at a time and keeps changes on green
 - `autopilot` - Hands-off plan-to-ship pipeline chaining existing skills
 - `llm-self-loop` - Restructure human-gated workflows into autonomous LLM loops with file-based outputs
