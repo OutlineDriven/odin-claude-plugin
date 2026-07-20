@@ -9,7 +9,7 @@ These three domains are handled inline without a dedicated domain skill.
    ```sh
    fd -t f -E '.git' -E 'target' -E '_build' -E 'build' -E 'dist' -E 'bin' -E 'obj' \
      '(\.(tmp|bak|outline)|repomix-output)' .
-   fd -t f /tmp -g '<session-prefix>-*' 2>/dev/null
+   fd -t f -g '<session-prefix>-*' /tmp 2>/dev/null
    ```
 2. Confirm each is truly scratch (not referenced by any open plan, task, or active diff).
 3. Remove with `rip` (not `rm`). Report count and paths.
