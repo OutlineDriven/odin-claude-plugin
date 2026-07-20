@@ -7,7 +7,7 @@ description: Reduce internal duplication, dead code, and ceremony. Use when you 
 
 Code rots in two directions: outward (drift from the original design) and downward (accretion of dead state, redundant indirection, speculative ceremony). This skill addresses the second. The thesis is local: you are already in nearby code for some other reason; while you are there, remove what does not earn its keep.
 
-See [dead-fields](references/dead-fields.md) for examples of dead struct fields, props, and class members.
+See [dead-fields](references/dead-fields.md) for examples of dead fields, properties, and members.
 See [redundant-wrappers](references/redundant-wrappers.md) for examples of single-line passthrough functions that should be inlined.
 See [dead-config](references/dead-config.md) for stale feature flags, environment variables, and dead config branches.
 
@@ -41,15 +41,15 @@ Dead code is not free. It misleads readers about what the system does, it surviv
 
 ## What "real boundary" means
 
-Indirection earns its keep at: **public API surfaces**, **process/network seams** (RPC, HTTP, queues), **untrusted-input boundaries**, **async/sync seams**, **runtime seams** (FFI, WASM, JNI), and **test/production seams** where mocks legitimately substitute. A swappable-implementation contract counts only when >1 real impl ships today, not when the second impl is only hypothetical.
+Indirection earns its keep at: **public API surfaces**, **process/network seams** (RPC, HTTP, queues), **untrusted-input boundaries**, **async/sync seams**, **runtime seams** (FFI such as JNI, WASM), and **test/production seams** where mocks legitimately substitute. A swappable-implementation contract counts only when >1 real impl ships today, not when the second impl is only hypothetical.
 
-Not boundaries: internal modules in the same crate/package, helpers in the same file, cross-module calls without a constraint that prevents co-change.
+Not boundaries: internal modules in the same module/package, helpers in the same file, cross-module calls without a constraint that prevents co-change.
 
 ---
 
 ## When to Apply
 
-- You are editing `foo.py` for an unrelated feature; while reading the file, you notice a dead field
+- You are editing a file for an unrelated feature; while reading it, you notice a dead field
 - A refactor commit just ripped out a code path; the leftover wrapper, dead branch, or stale flag should leave with it
 - Reviewing a PR diff that adds an unnecessary wrapper or duplicates state; flag and request inline simplification
 - Onboarding to a codebase: surface candidates for the original author to confirm dead

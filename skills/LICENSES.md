@@ -71,8 +71,8 @@ Skills and reference/script files ported from the `agent-sh` plugin marketplace 
 
 | Path under `/home/alpha/.claude/claude/skills/` | Upstream origin | License | Copyright | Provenance |
 | ----------------------------------------------- | --------------- | ------- | --------- | ---------- |
-| `deslop/SKILL.md` | https://github.com/agent-sh/deslop (main) | MIT | © 2026 Avi Fenesh | ODIN voice; three-phase certainty scan via native search/ast-grep; HIGH-only guarded autofix. |
-| `deslop/references/slop-catalog.md` | https://github.com/agent-sh/deslop (main) | MIT | © 2026 Avi Fenesh | Per-language slop pattern + certainty + autofix-strategy table. |
+| `deslop/SKILL.md` | https://github.com/agent-sh/deslop (main) | MIT | © 2026 Avi Fenesh | ODIN voice; three-phase certainty scan via native search/ast-grep; HIGH-only guarded autofix. Language-agnostic generalization: detection bullets restated as behavioral categories with parenthetical family enumeration; the per-language Native Recipes block removed as duplication of the catalog's detection column. |
+| `deslop/references/slop-catalog.md` | https://github.com/agent-sh/deslop (main) | MIT | © 2026 Avi Fenesh | Slop pattern + certainty + autofix-strategy table. Language-agnostic generalization: re-indexed from per-language sections to behavioral categories, with language demoted to a row key (`Any` where the signal is language-independent); the category that named a language ("Unsafe Error Handling (Rust)") split into crash-on-failure and swallow-on-failure; coverage broadened to C#, Ruby, PHP, and Swift; category index added. Every original detection recipe preserved. |
 | `sync-docs/SKILL.md` | https://github.com/agent-sh/sync-docs (main) | MIT | © 2026 Avi Fenesh | ODIN voice; git-diff drift detection; safe-fix limited to version bump + CHANGELOG. |
 | `sync-docs/references/doc-issues.md` | https://github.com/agent-sh/sync-docs (main) | MIT | © 2026 Avi Fenesh | Doc-issue taxonomy + per-issue detection recipes + ignore list. |
 | `sync-docs/references/detection-recipes.md` | https://github.com/agent-sh/sync-docs (main) | MIT | © 2026 Avi Fenesh | Extracted verbatim from `sync-docs/SKILL.md`'s Native Detection Recipes section (Manifest versions, CHANGELOG evidence; Code graph first stayed inline) in the router/reference split; headings dedented one level (## → #, ### → ##). |
@@ -323,8 +323,8 @@ Skills adapted from the `compound-engineering-plugin` (https://github.com/EveryI
 | `plans/references/plan-sections.md` | `ce-plan/references/` | MIT | © 2025 Every | Plan sections adapted. |
 | `plans/references/synthesis-summary.md` | `ce-plan/references/` | MIT | © 2025 Every | Synthesis summary adapted. |
 | `plans/references/universal-planning.md` | `ce-plan/references/` | MIT | © 2025 Every | Universal planning adapted. |
-| `simplify/references/quality.md` | `ce-simplify-code/references/` | MIT | © 2025 Every | Quality checks adapted. |
-| `simplify/references/reuse.md` | `ce-simplify-code/references/` | MIT | © 2025 Every | Reuse checks adapted. |
+| `simplify/references/quality.md` | `ce-simplify-code/references/` | MIT | © 2025 Every | Quality checks adapted. Language-agnostic generalization: the JSX-only nesting pattern regeneralized to redundant structural nesting (finding-enum value renamed accordingly), the C-family ternary detector restated as conditional nesting depth, and the five-ecosystem linter list replaced by a manifest-detection ladder. |
+| `simplify/references/reuse.md` | `ce-simplify-code/references/` | MIT | © 2025 Every | Reuse checks adapted. Language-agnostic generalization: TypeScript-specific "type guards" restated as the language's narrowing construct with instances across families. |
 
 ## Full upstream license text (MIT)
 

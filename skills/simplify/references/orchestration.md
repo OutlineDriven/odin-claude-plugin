@@ -110,7 +110,7 @@ A commit that would bundle survivors from more than one class is split before me
 
 ## Behavior gate (after every commit)
 
-After each fix commit, run the repo-native verifier per the matrix in `fix/references/verifiers.md` — typically `just test`, `cargo test`, `pytest`, `npm test`, `dune runtest`, or the equivalent for the current language. On red:
+After each fix commit, run the repo-native verifier per the matrix in `fix/references/verifiers.md`, derived from the project's manifest in this order: a task-runner target (`just test`, `make test`), then the ecosystem's own test command (`cargo test`, `pytest`, `npm test`, `dune runtest`, `go test ./...`), or the equivalent for the current language. On red:
 
 ```bash
 git revert HEAD --no-edit

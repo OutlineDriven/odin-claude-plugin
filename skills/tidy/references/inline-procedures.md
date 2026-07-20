@@ -4,9 +4,10 @@ These three domains are handled inline without a dedicated domain skill.
 
 ## Workspace
 
-1. Discover scratch artifacts in scope:
+1. Discover scratch artifacts in scope, excluding common build-output directories
+   (`target`: Cargo/Maven/sbt; `_build`: dune/Elixir; `build`: CMake/Gradle; `dist`: npm/Python; `bin`/`obj`: .NET):
    ```sh
-   fd -t f -E '.git' -E 'target' -E '_build' \
+   fd -t f -E '.git' -E 'target' -E '_build' -E 'build' -E 'dist' -E 'bin' -E 'obj' \
      '(\.(tmp|bak|outline)|repomix-output)' .
    fd -t f /tmp -g '<session-prefix>-*' 2>/dev/null
    ```
@@ -15,7 +16,7 @@ These three domains are handled inline without a dedicated domain skill.
 
 ## Docs
 
-1. Scan in-scope file(s) for: stale `TODO`/`FIXME` (git-blame date > 6 months), comments contradicting current code, commented-out code blocks, multi-paragraph docstrings on non-API-surface functions, overclaims about external contracts.
+1. Scan in-scope file(s) for: stale `TODO`/`FIXME` (git-blame date > 6 months), comments contradicting current code, commented-out code blocks, multi-paragraph documentation comments on non-API-surface functions, overclaims about external contracts.
 2. Show the current text + proposed change for each candidate. Edit only on confirmation or for purely cosmetic fixes (whitespace, spelling).
 3. Overclaims: annotate with `<!-- VERIFY -->` and surface to the user rather than deleting.
 

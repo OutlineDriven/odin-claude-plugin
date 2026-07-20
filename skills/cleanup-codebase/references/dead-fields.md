@@ -6,82 +6,31 @@ A dead field is one that is *written* but never *read*, or *read* but only to fo
 
 For any field `Foo.x`:
 
-1. `git --no-pager grep -nF '.x'` (or appropriate selector for the language) — look for read sites
-2. `ast-grep run -p 'self.x' -l <lang>` — find self-references inside the type
-3. If the only references are *writes* (assignments, constructors), the field is dead
-4. Special-case: serialization libraries may *read* via reflection — check for `#[derive(Serialize)]`, `@JsonProperty`, etc., before deleting
+1. `git --no-pager grep -nF '.x'` (or the appropriate selector for the language) — look for read sites.
+2. `ast-grep run -p '<self-ref>.x' -l <lang>` — find self-references inside the type. The self-reference token is not universal; parameterize per language:
 
-## Examples by language
+   | Language | Self-reference form |
+   |---|---|
+   | Python, Rust | `self.x` |
+   | TypeScript, Java, Kotlin | `this.x` |
+   | Go | named receiver (e.g. `s.x`) — the name is chosen per type, so grep the field name across the package instead of relying on one fixed pattern |
 
-### Python — dataclass field never read
+3. If the only references are *writes* (assignments, constructors), the field is dead.
+4. Standing limit: frameworks that read fields reflectively (see Caveats) are invisible to both checks above — check the framework's marker before deleting.
 
-```python
-@dataclass
-class UserSession:
-    user_id: int
-    created_at: datetime
-    last_seen: datetime
-    legacy_session_token: str  # set in __post_init__, never read
+## Per-language instances
 
-    def __post_init__(self):
-        self.legacy_session_token = generate_token()  # only write
-```
-
-`legacy_session_token` is written and then ignored. Delete the field, the assignment, and the `generate_token()` call if it is otherwise unused.
-
-### TypeScript — interface prop with no consumer
-
-```ts
-interface UserContext {
-  user: User;
-  permissions: Permission[];
-  legacyTenantId?: string;  // optional, set by old middleware, never read by new code
-}
-```
-
-The optional prop signals migration debt. Grep `legacyTenantId` — if no read sites remain, delete the prop and the middleware that sets it.
-
-### Rust — struct field only set by `Default::default()`
-
-```rust
-#[derive(Default)]
-struct Config {
-    timeout_ms: u64,
-    max_retries: u32,
-    legacy_compat_mode: bool,  // never read; introduced for a flag that's gone
-}
-```
-
-If `legacy_compat_mode` is never read, delete the field. `#[derive(Default)]` regenerates without it; existing `Config::default()` calls keep working.
-
-### Kotlin — data class component with no read site
-
-```kotlin
-data class OrderEvent(
-    val orderId: String,
-    val timestamp: Instant,
-    val correlationId: String,
-    val deprecatedTraceId: String? = null,  // never read in new code paths
-)
-```
-
-`deprecatedTraceId` lingered after a tracing library swap. Delete the parameter and the call sites that supplied it.
-
-### Java — class field with private setter, no getter, no internal read
-
-```java
-public class UserPreferences {
-    private boolean useLegacyTheme;  // written by deserialization, never read
-
-    public void setUseLegacyTheme(boolean v) { this.useLegacyTheme = v; }
-}
-```
-
-Setter exists, no getter, no internal use. Often a leftover from a Jackson-deserialized config. Delete field + setter; if Jackson complains about unknown property, ignore via `@JsonIgnoreProperties(ignoreUnknown = true)` or remove the corresponding JSON key.
+| Language | Dead-field shape | Fix |
+|---|---|---|
+| Python | `@dataclass` field set only in `__post_init__` (e.g. a generated token), never read elsewhere | Delete the field, its assignment, and the generator call if otherwise unused |
+| TypeScript | Optional interface prop set by legacy middleware, no read site (`legacyTenantId?: string`) | Delete the prop and the middleware that set it |
+| Rust | Struct field only ever produced by `Default::default()`, no method reads it | Delete the field; `#[derive(Default)]` regenerates without it |
+| Go | Struct field set at construction, no method on the receiver reads it | Delete the field and the construction-site assignment |
+| Java | Field with a generated setter, no getter, no internal read — common after a deserialized-config change | Delete field + setter; add `@JsonIgnoreProperties(ignoreUnknown = true)` or drop the JSON key if deserialization complains |
+| Kotlin | `data class` component never read outside the constructor, left behind by a library swap | Delete the parameter and every call site that supplied it |
 
 ## Caveats
 
-- **Reflection / serialization** — fields read by `serde`, `Jackson`, `Gson`, `pydantic`, `attrs`, etc. via attributes/decorators may have no direct read site in code. Check derive/decorator/annotation lists before deleting.
-- **DI frameworks** — Spring, Dagger, Hilt may read fields via `@Autowired`/`@Inject`. Look for framework-level wiring.
+- **Frameworks that read fields reflectively** — `serde`, Jackson, Gson, pydantic, attrs, Spring, Dagger, and Hilt (among others) read fields via derive macros, decorators, annotations, or DI wiring (`#[derive(Serialize)]`, `@JsonProperty`, `@Autowired`, `@Inject`) with no direct read site anywhere in source. This is a standing limit, not a checklist to exhaust: reflective, DI, and serialization reads are not resolvable by static analysis. Treat a field under such a marker as unprovable-dead by grep alone — require an explicit allowlist or scope exclusion before deleting it.
 - **Tests** — a field read only by tests may indicate the field exists *for* the tests; `tests-purge-unneeded` handles that direction.
 - **External consumers** — if the type crosses a process boundary (DTO, event payload), removing a field is a `refactor-break-compat` concern, not a cleanup-codebase concern.

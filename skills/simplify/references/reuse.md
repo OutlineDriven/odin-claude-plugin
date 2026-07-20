@@ -25,9 +25,10 @@ FOUR RULES — apply each, report what you find:
 
 3. INLINE-COULD-USE-UTILITY: For each piece of inline logic in the diff
    that hand-rolls a common operation — string manipulation, path joining,
-   environment lookup, type guards, date math, URL parsing — search for an
-   existing utility (in-repo or stdlib) that already does it. If one exists,
-   the inline logic is Graft.
+   environment lookup, a narrowing construct (Rust `matches!`, Python
+   `TypeGuard`, Go comma-ok, TS type guard), date math, URL parsing —
+   search for an existing utility (in-repo or stdlib) that already does
+   it. If one exists, the inline logic is Graft.
 
 4. STDLIB-REIMPLEMENT: For each piece of inline logic or new function in
    the diff that reimplements a language standard-library or runtime
@@ -43,6 +44,10 @@ FOUR RULES — apply each, report what you find:
 
 SEARCH SCOPE — actually search, do not speculate:
 - `utils/`, `helpers/`, `lib/`, `shared/`, `common/`, `internal/` directories
+  (Go's `internal/` is compiler-enforced import visibility, not a naming
+  habit — only code within the directory tree rooted at `internal/`'s
+  parent can import it; anything outside that tree cannot, regardless of
+  package name)
 - Adjacent files in the same module as each diff hunk
 - Top-level barrel exports (`index.ts`, `mod.rs`, `__init__.py`)
 - Language stdlib for the common operations in rule 3 and stdlib/runtime primitives in rule 4

@@ -20,7 +20,7 @@ Inspect context in priority order and dispatch to the first matching domain:
 
 | Signal | Domain | Dispatch to |
 |---|---|---|
-| File path(s), active diff, or `cargo`/`dune` target named | **Code** | `cleanup-codebase` skill |
+| File path(s), active diff, or a build or package target named | **Code** | `cleanup-codebase` skill |
 | `memory/` directory, `MEMORY.md`, or memory file(s) named | **Memory** | `memory-clean` then `memory-update` skills |
 | `.outline/`, `/tmp` scratch, `*.tmp`, `*.bak`, repomix packs | **Workspace** | `references/inline-procedures.md` |
 | `git sl`, commit stack, commit message(s) named | **Git** | `git-branchless` skill + `commit` skill |

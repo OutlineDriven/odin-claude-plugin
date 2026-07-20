@@ -56,7 +56,7 @@ A deliberate simplification pass invoked on a specific change-set. Decompose sim
 
 ## Constitutional Rules (Non-Negotiable)
 
-1. **Behavior preservation is a gate, not a guideline.** A test regression between pre- and post-simplify is an automatic `git revert HEAD --no-edit`. No `# type: ignore`, no disabling of guards to make tests pass.
+1. **Behavior preservation is a gate, not a guideline.** A test regression between pre- and post-simplify is an automatic `git revert HEAD --no-edit`. No suppressing the type checker or disabling guards to make tests pass.
 2. **The Reviewer audit is the single adjudication authority.** Review agents emit findings; the Reviewer validates them and returns the survivor set; the orchestrator applies the survivors and drops non-survivors without re-litigation in either direction. Arguing with the Reviewer's survivor set in prose is Excess.
 3. **Three agents in one tool-call message.** The reuse / quality / efficiency agents are independent by construction: same diff, disjoint issue-class subsets, read-only. Sequential dispatch is rejected at the validation gate.
 4. **One issue-class per atomic commit.** Excess-surface fixes, duplication fixes, and structure fixes ride in separate commits per `~/.claude/claude/system-prompt-baseline.md` `<git>` charter "one concern per commit" rule. Mixed-class commits trip exit 15.

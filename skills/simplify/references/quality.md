@@ -2,6 +2,18 @@
 
 Verbatim prompt for the quality-axis review agent. The orchestrator dispatches this prompt with the captured diff appended after the `DIFF:` marker.
 
+## Table of Contents
+
+- Nine patterns: redundant state · parameter sprawl · copy-paste variation ·
+  leaky abstractions · stringly-typed code · redundant structural nesting ·
+  nested conditionals · unnecessary comments · dead code / unused imports /
+  unused exports
+- Tool order (fd → ast-grep → grep/rg)
+- Output schema (finding fields, pattern enum)
+- Hard limits
+- Balance — avoid over-simplification
+- Never simplify away a safety check
+
 ---
 
 ```
@@ -37,21 +49,27 @@ NINE PATTERNS:
    reaches through to a private collaborator.
 
 5. STRINGLY-TYPED CODE [Excess]
-   Raw strings used where a constant, enum, or branded type already exists
-   nearby. Detector: a literal string appears ≥ 2 times in the diff or
-   matches an existing enum value verbatim.
+   Raw strings used where a constant, enum, or a closed/nominal type
+   already exists nearby. Detector: a literal string appears ≥ 2 times
+   in the diff or matches an existing enum value verbatim.
 
-6. UNNECESSARY JSX NESTING [Sprawl]
-   Wrapper components or layout elements with no layout / semantic value.
-   Detector: `<Box>` / `<div>` / `<Fragment>` with one child and no style /
-   role / event handler — check whether the inner component's props
-   (`flexShrink`, `alignItems`, ...) already provide the needed behavior.
+6. REDUNDANT STRUCTURAL NESTING [Sprawl]
+   A container node (wrapper component, layout element, grouping
+   construct) that adds no layout, semantic, or behavioral value over
+   its single child. Detector: a container with exactly one child and no
+   style/role/handler of its own — check whether the child's own props
+   already cover it before flattening. Instances: JSX `<Box>`/`<div>`/
+   `<Fragment>` with one child and no layout prop (`flexShrink`,
+   `alignItems`) the child doesn't already carry; SwiftUI `Group`/
+   `VStack` wrapping one child with no `.frame()`/`.padding()` applied.
 
 7. NESTED CONDITIONALS [Sprawl]
-   Ternary chains (`a ? x : b ? y : ...`), if-else trees, or switch blocks
-   3+ levels deep. Fix shape: early returns, guard clauses, a lookup table,
-   or an if/else-if cascade. Detector: `if` / `?:` nesting depth ≥ 3 in
-   any diff hunk.
+   Conditional branches nested 3+ levels deep, regardless of surface
+   syntax — ternary chains (`a ? x : b ? y : ...`), if/else trees, match/
+   switch blocks. Fix shape: early returns, guard clauses, a lookup
+   table, or a flat if/else-if (or match/when) cascade. Detector:
+   conditional nesting depth ≥ 3 in any diff hunk (C-family `?:` chains,
+   Python `if`/`else` expressions, and Rust `match` arms all count).
 
 8. UNNECESSARY COMMENTS [Excess]
    Comments explaining WHAT the code does (well-named identifiers already
@@ -62,23 +80,29 @@ NINE PATTERNS:
 9. DEAD CODE / UNUSED IMPORTS / UNUSED EXPORTS [Excess]
    Code paths no longer reachable, imports not referenced by the changed
    file, exports no longer consumed by any caller in the codebase. To
-   verify "unused" across the codebase, prefer the project's existing
-   unused-import/dead-code linter if configured (ESLint `no-unused-vars` /
-   `unused-imports`, `knip`, `ruff F401`, `tsc --noEmit --noUnusedLocals`,
-   `golangci-lint unused`, etc.). Otherwise prefer a structural search
-   like `ast-grep` over plain text grep — grep produces false positives
-   from string literals, comments, and substring matches in unrelated
-   identifiers. Account for re-exports (`export * from`, barrel files),
-   dynamic imports (`import()`, `require()`, template-string imports),
-   and framework-specific exports (Next.js page exports, React Server
-   Components, decorators). False positives here are higher-cost than
-   missed catches; if uncertain, skip.
+   verify "unused" across the codebase, derive the check from the
+   project's configuration, in this order: a manifest-declared lint
+   script (`package.json` "lint", `pyproject.toml` tool config), then
+   the ecosystem's own unused-code checker (JS/TS ESLint
+   `no-unused-vars`/`unused-imports`, `knip`, `tsc --noEmit
+   --noUnusedLocals`, Python `ruff` F401, Go `golangci-lint
+   unused`), or the project's documented command. Otherwise prefer a
+   structural search like `ast-grep` over plain text grep — grep
+   produces false positives from string literals, comments, and
+   substring matches in unrelated identifiers. Account for indirect
+   re-exports (barrel files/`export * from`, Rust `pub use`),
+   dynamically resolved imports (`import()`/`require()`,
+   template-string imports, Python `importlib.import_module`), and
+   framework- or runtime-reserved exports a linter can't see a caller
+   for (Next.js/RSC exports, decorators, Rust FFI exports). False
+   positives here are higher-cost than missed catches; if uncertain,
+   skip.
 
 TOOL ORDER (ODIN `fd-First [MANDATORY]`):
 1. `fd -e <ext> -E <noise>` to scope candidate files when cross-checking
    that a "similar block" or "existing enum" actually exists elsewhere.
 2. `ast-grep run -p '<pattern>' -l <lang>` for structural detection of
-   patterns 3 (copy-paste), 6 (JSX nesting), 7 (nested conditionals).
+   patterns 3 (copy-paste), 6 (redundant nesting), 7 (nested conditionals).
 3. `git --no-pager grep -n -F 'literal'` or `rg -nF 'literal'` for
    pattern 5 (stringly-typed) cross-references and pattern 8 (comment
    pattern matching).
@@ -88,7 +112,7 @@ findings:
   - file: <path>
     line: <number>
     pattern: redundant-state | parameter-sprawl | copy-paste-variation |
-             leaky-abstraction | stringly-typed | unnecessary-jsx-nesting |
+             leaky-abstraction | stringly-typed | redundant-structural-nesting |
              nested-conditionals | unnecessary-comments |
              dead-code-unused-imports-exports
     issue-class: excess-surface | structure

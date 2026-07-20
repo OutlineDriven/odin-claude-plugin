@@ -4,6 +4,14 @@ Configuration ages worse than code. A feature flag introduced for a migration be
 
 The fix: while you are in nearby config code, audit. Delete what is dead. The hardest part is *proving* dead — config consumers can be implicit (read by tools, dashboards, infra-as-code, deployment scripts) and grepping the source tree alone is not enough.
 
+## Table of Contents
+
+- Categories of dead config: always-on / always-off feature flags · stale
+  environment variables · dead config branches · dead defaults that never
+  trigger · stale infrastructure config
+- Detection workflow
+- Caveats
+
 ## Categories of dead config
 
 ### Always-on / always-off feature flags
@@ -16,6 +24,14 @@ FEATURES = {
 }
 ```
 
+```go
+var Features = map[string]bool{
+	"new_pricing_engine":   true,  // set in 2023, every env enables it
+	"legacy_payment_path":  false, // disabled in every env for > 1 year
+	"experimental_caching": true,  // experiment ended; this is now the default
+}
+```
+
 If a flag is unconditional in every environment, the *flag* is dead. Pick the winning branch, inline it, delete the flag. The losing branch becomes deletable dead code (which is also a cleanup-codebase concern).
 
 ### Stale environment variables
@@ -23,6 +39,11 @@ If a flag is unconditional in every environment, the *flag* is dead. Pick the wi
 ```bash
 export OLD_DB_HOST=...   # replaced by DATABASE_URL three migrations ago
 export DEBUG_VERBOSE=1   # disabled, no consumer reads this
+```
+
+```go
+var oldDBHost = os.Getenv("OLD_DB_HOST")      // replaced by DATABASE_URL three migrations ago
+var debugVerbose = os.Getenv("DEBUG_VERBOSE") // disabled, no consumer reads this
 ```
 
 Search the source tree, the deployment scripts, the IaC (terraform, pulumi, helm), the runbooks, and the dashboards. Only when all are clean is the env var truly dead. **This is the audit point most people skip.**
@@ -36,7 +57,16 @@ def get_database_url() -> str:
     return config.database_url
 ```
 
-If `use_legacy_db` is dead (always `False`), the entire legacy branch is dead — including `legacy_host`, `legacy_db`, and any code reachable only through that path. Delete the branch, the flag, and the dependent fields together.
+```go
+func DatabaseURL(cfg Config) string {
+	if cfg.UseLegacyDB {
+		return fmt.Sprintf("postgres://%s/%s", cfg.LegacyHost, cfg.LegacyDB)
+	}
+	return cfg.DatabaseURL
+}
+```
+
+If `use_legacy_db` is dead (always false), the entire legacy branch is dead — including `legacy_host`, `legacy_db`, and any code reachable only through that path. Delete the branch, the flag, and the dependent fields together.
 
 ### Dead defaults that never trigger
 
@@ -52,7 +82,14 @@ struct Config {
 fn default_max_legacy_retries() -> u32 { 3 }
 ```
 
-The default function and field exist for a setting nothing reads. Delete both.
+```go
+type Config struct {
+	TimeoutMs        uint64 // read on every connection attempt; default 5000
+	MaxLegacyRetries uint32 // legacy flag, no longer consulted; default was 3
+}
+```
+
+The default value and the field both exist for a setting nothing reads. Delete both.
 
 ### Stale infrastructure config
 
@@ -69,8 +106,8 @@ These are config too — and the same audit applies: if no consumer reads it, it
 2. **For each key, find consumers** — search source code, but also: deployment scripts, dashboards (links and queries), runbooks (search the wiki), IaC, monitoring/alerting rules, CI configs.
 3. **Classify**:
    - **Live**: read in production code; conditional value drives real behavior
-   - **Dead-on**: hardcoded `True` everywhere, branch always taken — flag is dead
-   - **Dead-off**: hardcoded `False` everywhere, branch never taken — flag and the gated branch are dead
+   - **Dead-on**: value is always-true across every environment, branch always taken — flag is dead
+   - **Dead-off**: value is always-false across every environment, branch never taken — flag and the gated branch are dead
    - **Unknown**: ambiguous; investigate further or leave alone
 4. **Delete dead** — atomic commit per concern (one flag = one commit), grep for ghost references afterward.
 

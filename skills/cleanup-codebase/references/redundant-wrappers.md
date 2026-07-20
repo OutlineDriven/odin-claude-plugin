@@ -11,91 +11,42 @@ The fix is always the same: inline the wrapper at all call sites, then delete th
 
 ## Detection pattern
 
-```
-fd -e <ext> | xargs ast-grep run -p '
-fn $NAME($$$ARGS) -> $RET {
-    $INNER($$$ARGS)
-}
-' -l <lang>
-```
+The shape to search for: a function or method whose entire body is one call, forwarding the arguments it received, with no added logic. `ast-grep` pattern syntax is not portable across languages — a pattern written for one language's grammar will not parse, let alone match, in another. Each pattern below omits the visibility modifier, so it catches exported and private wrappers alike; prepend `pub` / `export` / `public` to narrow the sweep to exported ones.
 
-Adjust the metavariables — looking for functions whose body is a single call forwarding the same arguments.
+| Language | `ast-grep` seed pattern | Also run |
+|---|---|---|
+| Python | `def $NAME($$$PARAMS) $$$RT: return $INNER($$$ARGS)` | — |
+| TypeScript | `function $NAME($$$PARAMS) $$$RT { return $INNER($$$ARGS); }` | — |
+| Rust | `fn $NAME($$$PARAMS) $$$RT { $INNER($$$ARGS) }` | — |
+| Kotlin | `fun $NAME($$$PARAMS) $$$RT = $INNER($$$ARGS)` | block body: `fun $NAME($$$PARAMS): $RET { return $INNER($$$ARGS) }`, and again without `: $RET` |
+| Go | `func ($$$RECV) $NAME($$$PARAMS) $$$RET { return $INNER($$$ARGS) }` | plain function: drop `($$$RECV)` · void: drop `return` |
+| Java | `$RET $NAME($$$PARAMS) { return $RECV.$INNER($$$ARGS); }` | bare call: `return $INNER($$$ARGS);` · void: drop `return` |
 
-## Examples by language
+These are seeds, not exhaustive detectors. Three things bound what a single run proves:
 
-### Python — passthrough rename
+- **`$$$RT` in the return-type position absorbs the annotation.** In Python, TypeScript, Rust, and Kotlin expression bodies, one run matches the annotated and unannotated forms — `def f(id):` and `def f(id) -> User:`, `fn f(x) {` and `fn f(x) -> T {`. Hardcoding `-> $RET` silently skips every wrapper that omits the return type, including the usual Rust unit form written without `-> ()`. The shortcut does not extend to a Kotlin *block* body, where the annotated and unannotated forms need separate runs.
+- **Go and Java need the extra runs, on different axes.** Go splits on the *declaration*: a method carries a receiver (`func (s *Store) Get(...)`), a different grammar node from a plain function, so neither form finds the other's shape. Java splits on the *call*: `return repo.findById(id)` is a qualified invocation that a bare `$INNER($$$ARGS)` will not match. In both, a void wrapper forwards without `return` and needs its own run. The Python, TypeScript, Rust, and Kotlin seeds match bare and receiver-forwarded bodies alike as written.
+- **Proof that the arguments are unchanged** — a typed parameter list (`id: int`) and its untyped call site (`id`) are different text, so one reused metavariable can't assert identity the way it can within a single side. Treat a structural match (single-call body) as a candidate, and confirm by eye that the call forwards what it received.
 
-```python
-def get_user(id: int) -> User:
-    return repo.get(id)
-```
+## Per-language instances
 
-If `repo.get` already takes an `int` and returns a `User`, this wrapper renames `repo.get` to `get_user` and adds nothing. Inline `repo.get(id)` at every call site, delete `get_user`.
+| Language | Wrapper shape | Keep when |
+|---|---|---|
+| Python | `def get_user(id): return repo.get(id)` | Validates, maps errors, logs/traces, or `repo` is what tests would otherwise have to mock directly |
+| TypeScript | `function fetchData(url) { return api.get(url); }` | `api` is the test seam; production code depends on the swappable `fetchData` name instead of the global `api` |
+| Rust | `fn validate(x: &Input) -> Result<(), E> { x.validate() }` | Exists for trait-object dispatch, `&dyn` ergonomics, or to keep `Input` out of a public API |
+| Go | `func (s *Store) Get(id int64) (*User, error) { return queryUser(s.db, id) }` | `queryUser` is unexported; `Store.Get` is the only sanctioned entry point |
+| Java | `class UserService { User findById(long id) { return repo.findById(id); } }` | `UserService` is a DI boundary (`@Service`, a Dagger module), or its other methods add real behavior |
+| Kotlin | `class UserService(val repo: Repo) { fun findById(id: Long) = repo.findById(id) }` | Same as Java — DI boundary, or the rest of the class earns its keep |
 
-**Keep** if the wrapper does any of:
-- Validation (`if id < 0: raise ...`)
-- Error mapping (`except RepoError as e: raise UserNotFound(...) from e`)
-- Logging / tracing
-- Mock seam for tests where the test mocks `get_user`, not `repo`
-
-### TypeScript — argument-rearrange wrapper
-
-```ts
-function fetchData(url: string): Promise<Response> {
-    return api.get(url);
-}
-```
-
-Identical to `api.get` modulo name. Inline calls to `api.get(url)`, delete `fetchData`.
-
-**Keep** if `api` is the test seam — the wrapper exists so production code depends on `fetchData` (replaceable) instead of the global `api`. That is a real boundary; the wrapper earns its keep.
-
-### Rust — passthrough function with same signature
-
-```rust
-pub fn validate(input: &Input) -> Result<(), ValidationError> {
-    input.validate()
-}
-```
-
-`Input::validate` is already a method with the same signature. The free function is ceremony. Inline `input.validate()` at call sites; delete the free function.
-
-**Keep** if the free function exists for trait-object dispatch, `&dyn` ergonomics, or to avoid leaking the `Input` type into a public API — those are real boundaries.
-
-### Kotlin — single-line forwarding
-
-```kotlin
-class UserService(private val repo: UserRepository) {
-    fun findById(id: Long): User? = repo.findById(id)
-}
-```
-
-If `UserService` adds no other behavior beyond forwarding to `repo`, the service is the wrapper — inline at consumer sites and delete `UserService`.
-
-**Keep** if `UserService` is a DI boundary (Spring `@Service`, Dagger module), or if it has other methods that *do* add behavior — partial-wrapper-ness is fine if the rest of the class earns its keep.
-
-### Go — passthrough method on struct
-
-```go
-type UserStore struct {
-    db *sql.DB
-}
-
-func (s *UserStore) Get(ctx context.Context, id int64) (*User, error) {
-    return queryUser(ctx, s.db, id)
-}
-```
-
-If `queryUser` is exported and used directly elsewhere, `UserStore.Get` is wrapping for cosmetic reasons. Either commit to the wrapper (make `queryUser` package-private) or delete the wrapper and call `queryUser` directly.
-
-## When to *keep* a wrapper
+## When to keep a wrapper
 
 A wrapper earns its keep when it does any of:
 
 - **Removes coupling** — callers depend on the wrapper's signature, not the underlying library; switching the library is a one-place change.
-- **Adds validation, error mapping, instrumentation, or retry logic** — even a tiny `try { ... } catch (Foo) { throw Bar }` is real work the wrapper does.
+- **Adds validation, error mapping, instrumentation, or retry logic** — even a small error-remapping step is real work the wrapper does: `except RepoError as e: raise UserNotFound(...) from e` (Python), `if err != nil { return nil, fmt.Errorf("...: %w", err) }` (Go), `.map_err(UserError::from)` (Rust), `try { ... } catch (RepoError e) { throw new UserNotFound(e); }` (C-family).
 - **Bridges a real boundary** — process, network, async/sync seam, FFI, untrusted input.
 - **Provides a stable seam for testing** — the wrapper is the mock point for tests that need to stub the underlying call.
-- **Names a non-obvious operation** — `findUserByEmail` over `db.query("SELECT ... WHERE email = ?", email)` adds semantic value; the name *is* the abstraction.
+- **Names a non-obvious operation** — `findUserByEmail` over `db.query("SELECT ... WHERE email = ?", email)` adds semantic value; `isRateLimited` over a bare `redis.incr(key) > threshold` does the same. The name *is* the abstraction.
 
 If the wrapper does none of these, it is dead weight. Inline and delete.
