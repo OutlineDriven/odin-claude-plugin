@@ -60,7 +60,7 @@ Certainty is not severity. A hardcoded token is HIGH certainty and high severity
 4. **Phase 2: LOW optional CLI scan.** Findings in the catalog's `Residual: external tool signals` category. Run only tools already available in the repo or PATH; never install. Record findings as LOW and `flag-only`:
    - `jscpd` for duplication.
    - `madge` for cycles.
-   - The linter the project already declares, derived from its manifest or project config rather than assumed (`eslint`, `clippy`, `golangci-lint`, `ruff`, `ktlint`, `rubocop`, `phpstan`, and their equivalents).
+   - The linter the project already declares, derived from its manifest or project config rather than assumed (`eslint`, `clippy`, `golangci-lint`, `ruff`, `ktlint`, `rubocop`, `phpstan`, `swiftlint`, the .NET analyzers, and their equivalents).
    - If absent, write `missing: <tool>` in the report and continue.
 
 5. **Prioritize.** Sort HIGH before MEDIUM before LOW; then severity; then scope proximity to changed files; then fix strategy. Keep a separate `fixes` list containing only HIGH findings with `remove-line`, `remove-block`, `replace-whitespace`, or `add-comment` strategies. Exclude every `flag-only` finding from automatic edits.
@@ -72,7 +72,7 @@ Certainty is not severity. A hardcoded token is HIGH certainty and high severity
    - `remove-block`: placeholder block only when it is unreachable/dead and removal cannot change API behavior. Stubs on live API surfaces are report-only.
    - `flag-only`: hardcoded secrets, crash-on-failure shortcuts, placeholder implementations, dead code requiring control-flow judgment, architectural smells.
 
-7. **Verify.** Run the repo's own test command after fixes. Derive it from manifests in this order: package script (`test`, then `check`, then `typecheck`), `cargo test`, `go test ./...`, `pytest`, `mvn test`, `gradle test`, or the project's documented command. If no command exists, run the narrowest parser/type check available and state the limitation.
+7. **Verify.** Run the repo's own test command after fixes. Derive it from manifests in this order: package script (`test`, then `check`, then `typecheck`), `cargo test`, `go test ./...`, `pytest`, `mvn test`, `gradle test`, `dotnet test`, `bundle exec rspec` or `rake test`, `composer test` or `phpunit`, `swift test`, or the project's documented command. If no command exists, run the narrowest parser/type check available and state the limitation — and treat every fix as unverified, because the rollback gate has nothing to trip on.
 
 8. **Rollback on regression.** If verification fails after applying fixes, immediately restore every changed file from the cleanup attempt with `git restore -- <file...>` and rerun the same verifier to confirm the baseline is back. Report the failed fix group as blocked, with file/line and failing command. Never suppress tests, rewrite expectations, or keep a partial cleanup after regression.
 
