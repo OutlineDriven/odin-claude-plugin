@@ -65,7 +65,7 @@ Before any non-trivial implementation:
 4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
 5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
 
-## Skills (100 total)
+## Skills (101 total)
 
 Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
 
@@ -156,9 +156,10 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `review-fix-grill-loop` - Review and fix a diff in verified batches until no medium-or-higher finding remains
 - `simplify` - Compress-op review pass on reuse, quality, and efficiency axes
 
-### Cleanup & Refactoring (5 skills)
+### Cleanup & Refactoring (6 skills)
 
 - `refactor-break-compat` - Refactor by removing backward-compatibility and legacy layers (public API surface)
+- `breaking-driven` - Bloat-triggered demolition: state the contract, derive the replacement blind, cut the residue; interior surfaces go without asking, boundary surfaces stop for a yes
 - `cleanup-codebase` - Internal micro-hygiene: dead fields, redundant wrappers, stale config flags, identity passthrough — applied while touching nearby code, not as standalone PRs
 - `tidy` - Dispatch compress operations to the right domain: file, diff, memory, workspace, git stack, or doc
 - `improve-architecture` - Surface deepening refactors that turn shallow modules into deep ones
