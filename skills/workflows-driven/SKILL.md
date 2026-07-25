@@ -84,9 +84,10 @@ then read the matching reference:
   `workflows/*.js`): read `references/claude-code.md`. Default ephemeral;
   build and run the workflow for the task at hand, and save to
   `.claude/workflows/` only when it will recur.
-- **oh-my-pi** (a `task` tool that batches `tasks[]`): read
-  `references/omp.md`. The `task` batch is the only fan-out primitive; never
-  emulate batching with shell loops or eval helpers.
+- **oh-my-pi** (an `eval` tool carrying `agent()`, `parallel()`, and
+  `pipeline()` helpers): read `references/omp.md`. Author the orchestration
+  as eval code; a wave runs inline and synchronously inside the call, so
+  chain one eval call per phase.
 - **Neither**: run the same contract inline as sequential waves of subagent
   calls, same batch context and assignments, parent owns closure.
 

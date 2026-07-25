@@ -137,7 +137,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `tests-adversarial` - Adversarial tests that stress failure paths
 - `work` - Execute a plan or concrete work prompt end-to-end
 - `subagent-driven` - Delegate a multi-task plan to fresh subagents, auditing results before proceeding
-- `workflows-driven` - Deterministic phased fan-out with per-task contracts and adversarial verification; materializes on Claude Code Dynamic Workflows or omp task batches
+- `workflows-driven` - Deterministic phased fan-out with per-task contracts and adversarial verification; materializes on Claude Code Dynamic Workflows or omp eval orchestration
 - `fix` - Iterative repair loop that fixes one thing at a time and keeps changes on green
 - `autopilot` - Hands-off plan-to-ship pipeline chaining existing skills
 - `llm-self-loop` - Restructure human-gated workflows into autonomous LLM loops with file-based outputs
