@@ -179,14 +179,14 @@ A finding with no nameable reachable impact is P3 by definition. "Looks wrong" w
 
 ## Action classes: routing, not fixing
 
-Each finding gets exactly one class. The class is **advice on where the fix belongs**; this skill applies nothing.
+Each finding gets exactly one class. The class is **advice on where the fix belongs**; this skill applies nothing. Full class definitions live in `references/action-class-rubric.md`; this is the routing summary:
 
-| Class | Meaning | Route |
-|-------|---------|-------|
-| **safe** | Mechanical, behavior-preserving, single-site; the fix is unambiguous. | `fix` (unattended). |
-| **gated** | The fix is clear but touches a contract or multiple sites; needs verified batches and a resolve gate. | `review-fix-grill-loop`. |
-| **manual** | Needs a human design decision; no single correct fix. | Surface as a question; no auto-route. |
-| **advisory** | Opinion or nit; recording it is the whole action. | None. |
+| Class | Route |
+|-------|-------|
+| **safe** | `fix` (unattended). |
+| **gated** | `review-fix-grill-loop`. |
+| **manual** | Surface as a question; no auto-route. |
+| **advisory** | None. |
 
 ## Constitutional Rules (Non-Negotiable)
 
