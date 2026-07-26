@@ -46,7 +46,7 @@ The surviving candidates, ranked. Each idea carries:
 
 Decoration — a visual with no shape to show, or one that just restates the title — is the failure mode. A visual that genuinely shows the idea's shape is never decoration, however many ideas warrant one. Keep the prose standing alone: a reader who ignores the visual still gets the complete idea and its basis.
 
-Rendering mechanics: a fenced mermaid block in markdown when the shape suits it; inline SVG in HTML. Keep visuals at the idea's altitude — illustrative overviews, not authoritative specs. Detailed architecture, sequence diagrams, and wireframes belong downstream in `plan` once a direction is chosen, not here.
+Rendering mechanics: a fenced mermaid block in markdown when the shape suits it; inline SVG in HTML. Keep visuals at the idea's altitude — illustrative overviews, not authoritative specs. Detailed architecture, sequence diagrams, and wireframes belong downstream, once a direction is chosen and technical planning begins, not here.
 
 ### Rejection Summary
 

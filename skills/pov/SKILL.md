@@ -97,7 +97,7 @@ The chat verdict (the TL;DR) is the deliverable. What you offer next is **reason
 
 **Compute the next step.** From the grade and the verdict's Handoff field, reason about the single best next move and a one-clause why. It is not always obvious between plan and brainstorm, so decide in context:
 
-- **Adopt**, scope clear → take it into `plan`.
+- **Adopt**, scope clear → take it into implementation planning.
 - **Adopt**, scope still fuzzy → `brainstorm` to pin down what "adopt" means before planning.
 - **Trial** → scope a timeboxed spike (`work`).
 - **Hold / Reject / Not-our-problem** → no handoff; there is nothing to take forward.
@@ -106,7 +106,7 @@ The chat verdict (the TL;DR) is the deliverable. What you offer next is **reason
 
 - **Tier 1, or a Reject / Not-our-problem grade** → end with a single prose line, e.g. "Want the full write-up, or `<computed next step>`? Otherwise we're done." No blocking menu; silence means done.
 - **Tier 2/3 with an actionable grade** → ask via the platform's blocking question tool, with the *computed* next step as the first, dynamically-labeled option:
-  1. **`<computed next step>`** (e.g. "Plan the adoption with `plan`"). Seeded with the verdict substance, not a file pointer.
+  1. **`<computed next step>`** (e.g. "Plan the adoption"). Seeded with the verdict substance, not a file pointer.
   2. **Full write-up**. The expanded, shareable artifact.
   3. **Done.**
 

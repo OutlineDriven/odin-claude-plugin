@@ -5,7 +5,7 @@ It does NOT prescribe how the doc looks on the page — rendering is handled by 
 
 ## The outcome
 
-A great brainstorm produces the first version of the same plan artifact that `/plan` later enriches. It enables three audiences to act:
+A great brainstorm produces the first version of the same plan artifact that later technical planning enriches. It enables three audiences to act:
 
 - **The planning agent** produces an implementation plan without inventing user behavior, scope boundaries, or success criteria.
 - **The reviewer** sees the framing choices, distinguishes pinned from open, and catches scope gaps before planning.
@@ -28,7 +28,7 @@ A requirements-only plan is kept **light and standalone-readable**. It includes:
 - `## Goal Capsule` with objective, product authority, and open blockers.
 - `## ODIN spec outline` containing the brainstorm sections below (rendered as `###` subsections).
 
-Do **not** emit a `## Goal Launch Block` or `## Reader Index`. It also omits empty `Planning Outline`, `Implementation Units`, `Verification Contract`, and `Definition of Done` sections — empty placeholders make requirements-only docs look executable and waste downstream tokens. `/plan` adds those sections when it enriches the same file in place. The next step is conveyed by the Phase 4 handoff menu, not by a section in the doc.
+Do **not** emit a `## Goal Launch Block` or `## Reader Index`. It also omits empty `Planning Outline`, `Implementation Units`, `Verification Contract`, and `Definition of Done` sections — empty placeholders make requirements-only docs look executable and waste downstream tokens. Downstream technical planning adds those sections when it enriches the same file in place. The next step is conveyed by the Phase 4 handoff menu, not by a section in the doc.
 
 ## Decide whether a doc is warranted at all
 
@@ -36,11 +36,11 @@ Brainstorm dialogue does not always need a durable document.
 Skip document creation when **both** hold:
 
 - The user only needs brief alignment — no exploration produced novel scope, framing, or decisions worth preserving in IDed shape.
-- Any durable decisions can flow naturally to later artifacts (`/plan`, the commit message, `docs/solutions/`) without a brainstorm doc as an intermediary.
+- Any durable decisions can flow naturally to later artifacts (the commit message, `docs/solutions/`) without a brainstorm doc as an intermediary.
 
 The trigger for creating a doc is when the dialogue surfaced enough structural decisions, scope boundaries, or acceptance criteria that later work needs them in durable, IDed form.
 
-**Stress test:** a brainstorm about a tiny bug fix where the user asks "fix this with a null check or with upstream validation?" and the agent confirms "upstream validation" does not need a brainstorm doc. The decision flows to `/plan` or directly to the commit message.
+**Stress test:** a brainstorm about a tiny bug fix where the user asks "fix this with a null check or with upstream validation?" and the agent confirms "upstream validation" does not need a brainstorm doc. The decision flows directly to the commit message.
 
 Conversely, a brainstorm about a multi-actor feature with contested scope and several behavioral conditions probably does need a doc.
 
@@ -124,7 +124,7 @@ Field names are stable across brainstorm revisions — never rename or repurpose
 - **Plain prefix.** `R1.`, `A1.`, `F1.`, `AE1.` as bullet prefixes. Do not bold.
 - **Bold leader labels** inside Flows and Acceptance Examples (`**Trigger:**`, `**Covers R4, R8.**`).
 - **Repo-relative paths.** Always. Never absolute paths.
-- **No process exhaust.** No "captured at Phase X" notes, no `## Next Steps` pointing to `/plan`, no italic provenance lines.
+- **No process exhaust.** No "captured at Phase X" notes, no `## Next Steps` pointing to downstream planning, no italic provenance lines.
 - **No implementation details by default.** Libraries, schemas, endpoints, file layouts, code structure stay out unless the brainstorm is itself inherently technical or architectural.
 
 ## Discipline: Summary vs Problem Frame

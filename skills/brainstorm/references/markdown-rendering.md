@@ -2,7 +2,7 @@
 
 This is a format-rendering reference — it describes how to render any artifact in markdown, independent of which skill is producing it.
 
-It is paired with a section contract (`plan-sections.md`, `brainstorm-sections.md`, etc.) that describes *what* the artifact contains. This reference describes *how* markdown specifically presents it. The same content rendered by different skills shares the same markdown principles.
+It is paired with a section contract (`brainstorm-sections.md`, etc.) that describes *what* the artifact contains. This reference describes *how* markdown specifically presents it. The same content rendered by different skills shares the same markdown principles.
 
 ## Hard invariants
 
@@ -125,7 +125,7 @@ This information belongs in commit messages, tool output, and agent transcripts 
 
 ## Frontmatter shape
 
-Per-skill frontmatter fields are defined in each skill's section contract (`plan-sections.md` lists plan frontmatter; `brainstorm-sections.md` lists brainstorm frontmatter). Common rules:
+Per-skill frontmatter fields are defined in each skill's section contract (`brainstorm-sections.md` lists brainstorm frontmatter). Common rules:
 
 - YAML at the top of the file, delimited by `---` on its own line above and below.
 - Field names in lowercase snake_case (`created_at`, `topic`, not `CreatedAt`, `Topic`).

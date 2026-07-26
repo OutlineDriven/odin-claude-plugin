@@ -28,11 +28,10 @@ Fire automatically on a trigger phrase or when the user starts or redirects a pr
 
 - Starting or redirecting a product: no `STRATEGY.md` exists and the same framing keeps getting relitigated.
 - An existing `STRATEGY.md` has gone stale, or a section reads as a slogan.
-- `plan` or `ideate` need upstream grounding and find no anchor.
+- A planning or ideation effort needs upstream grounding and finds no anchor.
 
 ## When NOT to Apply
 
-- The user wants an implementation design → `plan`. Strategy says what the product is; plan says how to build a slice.
 - The ask is a feature spec, backlog priority, or schedule. Those live in the tracker, not the anchor.
 - No human is available to answer and be pushed back on. An interview with no interviewee produces fabrication. Exit.
 
@@ -79,11 +78,11 @@ Read the existing `STRATEGY.md` in full. Summarize current state in 3 to 5 lines
 4. Write `$root/STRATEGY.md` (the path resolved in Phase 0).
 5. **Read the file back** to confirm it landed as intended.
 6. **Commit.** Stage only the resolved anchor: `git -C "$root" add STRATEGY.md`. Never `git add -A`. Publish by the operating repo's normal flow.
-7. Note in one line that `plan` and `ideate` read it as optional grounding on their next run.
+7. Note in one line that downstream planning and `ideate` read it as optional grounding on their next run.
 
 ## Constitutional Rules (Non-Negotiable)
 
-1. **Anchor, not plan.** Strategy is what the product is and why. Features → `ideate`/`plan`; schedules → the tracker. Reject creep.
+1. **Anchor, not plan.** Strategy is what the product is and why. Features → `ideate`; schedules → the tracker. Reject creep.
 2. **Rigor in the questions, not the headings.** Headers stay plain English; the interview carries the discipline.
 3. **Pushback is the skill.** Transcribing a weak answer is the failure mode. Reject vague answers, quote the user back, cap at two rounds.
 4. **Short is a feature.** The template is locked. Adding a section costs more than it looks. Don't.
@@ -110,10 +109,6 @@ One anchor per commit.
 - **`git add -A`.** Sweeping unrelated dirty files into the strategy commit. Stage `STRATEGY.md` alone.
 - **Clobbering on resume.** Regenerating the whole doc when one section was stale. Update in place.
 - **Section creep.** Adding headings the template lacks because a section "felt thin." Push the rigor into the question instead.
-
-## Disambiguation
-
-- **vs `plan`**: `plan` designs implementation: decisions and units for building a slice, read-only over the codebase. `strategy` anchors what the product is and why. `plan` reads `STRATEGY.md` as optional grounding.
 
 ## Intellectual grounding
 

@@ -13,7 +13,7 @@ Load this when the input's fit for `pov` is in doubt, or to route a Hold (SKILL.
 | A neutral explainer ("tell me about X") | general research / answer it directly | `pov` only returns a project-grounded verdict; with no project angle, answer it as a normal research question — or a dedicated deep-research-style tool *if the environment has one* — rather than forcing a verdict |
 | Options invented from an open field | `ideate` | Invented vs. discovered: ideate invents; `pov` judges/selects from a discoverable field |
 | To scope an idea already chosen | `brainstorm` | `pov` decides *whether*; brainstorm scopes *what* once it's a yes |
-| To know how to build something decided | `plan` | Verdict accepted → continue with `plan`; `pov` does no task breakdown |
+| To know how to build something decided | further implementation planning | Verdict accepted → continue into further implementation planning; `pov` does no task breakdown |
 | To fix observed broken behavior | `debug` | `pov` assesses *exposure and priority* of a CVE; debug investigates an *actual failure* |
 | Product thesis / company direction | `strategy` | `pov` is bounded to a specific external input |
 

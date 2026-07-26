@@ -107,7 +107,7 @@ The Reviewer is dispatched over the critic's verdict list and audits against fou
 - **Completeness** — every candidate in the pool has a verdict.
 - **Consistency** — equivalent candidates got equivalent verdicts.
 - **Accuracy** — each survival/rejection reason actually holds against the cited basis.
-- **Scope** — survivors are directions, not implementation plans (planning is `plan`'s job).
+- **Scope** — survivors are directions, not implementation plans (implementation planning is downstream, after `askme`).
 
 The Reviewer's output is final: orchestrator applies the survivors and the rejection rationale, rescues nothing, re-litigates nothing.
 
@@ -143,5 +143,5 @@ Losers are recorded and explained — a considered-and-cut idea is signal for th
 
 ## Next step
 
-Hand the survivors to `askme` to clarify intent on the chosen direction(s) before planning. Do not jump to `plan`.
+Hand the survivors to `askme` to clarify intent on the chosen direction(s) before planning. Do not skip straight to implementation planning.
 ```

@@ -1,6 +1,6 @@
 # Synthesis Summary
 
-**Synthesis ≠ plan artifact.** The synthesis is NOT a preview, draft, or substitute for the requirements-only plan — it is the scope checkpoint that doc-write consumes as input. The ODIN spec outline itself is written in Phase 3 from the confirmed synthesis. Both stay scope-only — implementation detail is downstream (`/plan`'s job).
+**Synthesis ≠ plan artifact.** The synthesis is NOT a preview, draft, or substitute for the requirements-only plan — it is the scope checkpoint that doc-write consumes as input. The ODIN spec outline itself is written in Phase 3 from the confirmed synthesis. Both stay scope-only — implementation detail is downstream, in later technical planning.
 
 **Two-stage shape: internal draft, then chat-time scoping synthesis.** Stage 1 is an internal three-bucket draft (Stated / Inferred / Out of scope) the agent uses to think comprehensively about scope. Stage 2 is the scoping synthesis presented to the user — shaped like what two product collaborators would confirm before writing a PRD. The user only sees Stage 2.
 

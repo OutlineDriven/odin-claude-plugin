@@ -33,7 +33,6 @@ Fire automatically on a trigger phrase or on `/ideate`. The reject-by-default cr
 
 ## When NOT to Apply
 
-- **A direction is already chosen and needs implementation units**: that is `plan`. `ideate` stops at survivors plus an `askme` handoff; it never plans.
 - **Subject unidentifiable after one clarifying question**: stop; do not generate against nothing.
 
 ## Support files: read on demand
@@ -79,7 +78,7 @@ Dispatch a Reviewer subagent to audit the critic's verdicts against completeness
 
 ### Phase 6: Route onward to askme
 
-Hand the survivors to `askme` to clarify intent on the chosen direction(s) before any planning. `ideate` ends here. Do not jump to `plan`. The chosen direction needs intent-clarification first.
+Hand the survivors to `askme` to clarify intent on the chosen direction(s) before any planning. `ideate` ends here. Do not skip straight to implementation planning. The chosen direction needs intent-clarification first.
 
 ## Constitutional Rules (Non-Negotiable)
 
@@ -89,7 +88,7 @@ Hand the survivors to `askme` to clarify intent on the chosen direction(s) befor
 5. **Markdown is the canonical surface, always written.** `docs/ideation/<slug>.md` is written every run and is the source of truth the `askme` handoff reads. HTML is opt-in via `format:html` and only ever a view derived from that markdown. It never replaces it and never changes the default output.
 6. **Stage only what this run wrote.** `git add docs/ideation/<slug>.md` (plus `docs/ideation/<slug>.html` when `format:html`), never `git add -A`, and only after reading each file back.
 7. **Generators in one tool-call message.** Parallel dispatch with distinct axis × frame assignments; sequential dispatch is rejected at the validation gate.
-8. **Routes to `askme`, never straight to `plan`.** If any rule here conflicts with `~/.claude/claude/system-prompt-baseline.md`, the baseline wins.
+8. **Routes to `askme` for intent-clarification, never auto-implements.** If any rule here conflicts with `~/.claude/claude/system-prompt-baseline.md`, the baseline wins.
 
 ## Validation Gates
 
@@ -110,10 +109,6 @@ Hand the survivors to `askme` to clarify intent on the chosen direction(s) befor
 ## Commits
 
 One ideation doc per commit (a load-bearing addition to the repo's decision record). Stage only what `ideate` wrote: `git add docs/ideation/<slug>.md` (and `docs/ideation/<slug>.html` when `format:html`), never other dirty files, never `git add -A`. Read each file back before staging. Publish by the operating repo's normal flow.
-
-## Disambiguation
-
-- **vs `plan`**: `plan` turns a chosen, clarified direction into implementation units. `ideate` never plans; it stops at survivors plus the `askme` handoff.
 
 ## Operating surface
 

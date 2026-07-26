@@ -3,7 +3,7 @@
 This file is loaded when `/brainstorm` detects a non-software task. It replaces the software-specific phases (Phases 0.2 through 4) with facilitation principles for any domain. The Core Principles and Interaction Rules in the parent `brainstorm/SKILL.md` still apply unchanged — including one-question-per-turn and the default to the platform's blocking question tool. This file extends those rules; it does not relax them.
 
 This route is intentionally outside the software plan artifact contract.
-Do not write `artifact_contract: odin-plan/v1`, `artifact_readiness: requirements-only`, or a requirements-only plan under `docs/plans/` from this route. If the user wants a durable next artifact, hand the synthesis to `/plan`, which can create an appropriate universal or knowledge-work plan without pretending it is an implementation-ready code artifact.
+Do not write `artifact_contract: odin-plan/v1`, `artifact_readiness: requirements-only`, or a requirements-only plan under `docs/plans/` from this route. If the user wants a durable next artifact, continue in this conversation and draft it directly from the synthesis — an appropriate universal or knowledge-work plan — without pretending it is an implementation-ready code artifact.
 
 ---
 
@@ -60,7 +60,7 @@ When the conversation has enough material to narrow — reflect back what you ha
 
 **Question:** "Brainstorm wrapped. What would you like to do next?"
 
-- **Create a plan** → continue with `/plan` using the decided goal and constraints; let `/plan` choose the universal/knowledge-work artifact shape.
+- **Create a plan** → draft the plan directly in this conversation from the decided goal and constraints, choosing the universal or knowledge-work artifact shape that fits.
 - **Save summary to disk** → write the summary as a markdown file in the current working directory.
 - **Done** → the conversation was the value, no artifact needed.
 

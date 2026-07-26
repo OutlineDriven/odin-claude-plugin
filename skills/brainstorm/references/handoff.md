@@ -41,7 +41,7 @@ What would you like to do next? (Pick a number or describe what you want.)
 
 Present only the options that apply. Renumber so visible options stay contiguous starting at 1.
 
-1. **Create the implementation plan** *(recommended)* — continue with `/plan` and sharpen the requirements into a complete, testable plan. Shown only when `Resolve Before Planning` is empty.
+1. **Create the implementation plan** *(recommended)* — enter Claude Code's plan mode (or, on a host without one, draft a written implementation plan for the user to approve) and sharpen the requirements into a complete, testable plan. Shown only when `Resolve Before Planning` is empty.
 2. **Ship it autonomously** — hand the requirements to `/work` for implementation. Shown only for software brainstorms (`execution: code`) with `Resolve Before Planning` empty **and a plan artifact was created**. For a plan-then-decide flow, pick option 1 instead.
 3. **Pressure-test the requirements** — dispatch `/doc-review` to find gaps, conflicts, weak premises, and scope issues in the requirements; auto-apply safe fixes; route the rest interactively. Shown only when a markdown plan exists **and `OUTPUT_FORMAT=md`** — `/doc-review` applies markdown-only mutations and would corrupt an HTML artifact. Under HTML mode, surface a one-line note above the menu: `Requirements review unavailable in output:html mode — /doc-review is markdown-only today. Switch to output:md if you want a review pass.`
 4. **Open in browser** — open the HTML plan locally for review and sharing. Shown only when an HTML plan exists.
@@ -56,7 +56,7 @@ Selections may be the literal option label or the option number. Match numbers a
 
 **If user selects "Create the implementation plan":**
 
-Immediately load `/plan` in the current session. Pass the plan artifact path when one exists; otherwise pass a concise summary of the finalized brainstorm decisions. When the Phase 1.1 grounding scout produced a dossier and the file still exists, also pass its path (`/tmp/odin/brainstorm/<run-id>/grounding.md`). Do not print the closing summary first.
+Immediately enter Claude Code's plan mode (or, where the host has none, draft a written implementation plan and ask the user to approve it) in the current session, using the plan artifact path when one exists, otherwise a concise summary of the finalized brainstorm decisions. When the Phase 1.1 grounding scout produced a dossier and the file still exists, also pass its path (`/tmp/odin/brainstorm/<run-id>/grounding.md`). Do not print the closing summary first.
 
 **If user selects "Ship it autonomously":**
 
@@ -97,7 +97,7 @@ Key decisions:
 - [Decision 1]
 - [Decision 2]
 
-Recommended next step: `/plan <plan artifact path>`
+Recommended next step: enter plan mode on `<plan artifact path>` to work out implementation details before building.
 ```
 
 If the user pauses with `Resolve Before Planning` still populated, display:

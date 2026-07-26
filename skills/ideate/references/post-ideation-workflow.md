@@ -113,7 +113,7 @@ This stays in ideate — no skill handoff. It is the "think across the set befor
    Append a one-line provenance pointer: `(Seeded from ideate: <path>, idea "<title>")` — it records origin and lets the downstream skill pull adjacent detail if it wants, without being forced to read anything.
 3. **Load the `askme` skill** with that seed. The saved file is already the record — no extra write step.
 
-Do **not** skip intent-clarification and go straight to `plan` — `plan` wants a clarified direction. Ideation is a legitimate terminal state; intent-clarification via `askme` is the bridge to planning, not a required next step.
+Do **not** skip intent-clarification and go straight to further technical planning — further technical planning wants a clarified direction. Ideation is a legitimate terminal state; intent-clarification via `askme` is the bridge to planning, not a required next step.
 
 ### 5.3 Discard (free text)
 

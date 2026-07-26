@@ -7,7 +7,7 @@ metadata:
 
 # Brainstorm a Feature or Improvement
 
-Brainstorming answers **WHAT** to build through collaborative dialogue. It precedes `/plan`, which enriches the same artifact with **HOW**.
+Brainstorming answers **WHAT** to build through collaborative dialogue. It precedes the deeper technical planning that determines **HOW**.
 
 The durable output is a **requirements-only plan** under `docs/plans/`. Write it with `artifact_contract: odin-plan/v1`, `artifact_readiness: requirements-only`, and `source: brainstorm` so planning does not invent product behavior, scope boundaries, or success criteria.
 
@@ -233,7 +233,7 @@ For each approach:
 - Key risks or unknowns
 - When it is best suited
 
-**Approach granularity: mechanism / product shape, not architecture.** Name mechanism-level distinctions and product-relevant trade-offs. Do NOT name implementation specifics: column names, table names, file paths, service classes, JSON shapes, exact method names. Those are `/plan`'s job.
+**Approach granularity: mechanism / product shape, not architecture.** Name mechanism-level distinctions and product-relevant trade-offs. Do NOT name implementation specifics: column names, table names, file paths, service classes, JSON shapes, exact method names. Those belong to downstream technical planning.
 
 After presenting all approaches, state the recommendation and explain why. Prefer simpler solutions when added complexity creates real carrying cost.
 
