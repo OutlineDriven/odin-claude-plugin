@@ -10,21 +10,21 @@ Each row covers the SKILL.md (and any skill-internal references the upstream ski
 
 | Path under `/home/alpha/.claude/claude/skills/` | Upstream origin | License | Copyright | Provenance |
 | ----------------------------------------------- | --------------- | ------- | --------- | ---------- |
-| `domain-model/SKILL.md` | https://github.com/mattpocock/skills/tree/main/domain-model | MIT | © 2026 Matt Pocock | Adapted in ODIN voice; English-mandate; ODIN integration appendix added; reference paths rewritten to `references/`. |
-| `ubiquitous-language/SKILL.md` | https://github.com/mattpocock/skills/tree/main/ubiquitous-language | MIT | © 2026 Matt Pocock | ODIN voice; modality disambiguation against `domain-model` and `askme`; `disable-model-invocation: true` preserved verbatim. |
-| `grill-me/SKILL.md` | https://github.com/mattpocock/skills/tree/main/grill-me | MIT | © 2026 Matt Pocock | ODIN voice; explicit modality table vs `askme` and `domain-model`; banned-tooling references replaced with mandated alternatives; language-neutral examples. |
-| `design-an-interface/SKILL.md` | https://github.com/mattpocock/skills/tree/main/design-an-interface | MIT | © 2026 Matt Pocock | ODIN voice; TypeScript interface examples regeneralized to ≥2 language families; "Design It Twice" framing preserved. |
+| `~~domain-model/SKILL.md~~` | https://github.com/mattpocock/skills/tree/main/domain-model | MIT | © 2026 Matt Pocock | Adapted in ODIN voice; English-mandate; ODIN integration appendix added; reference paths rewritten to `references/`. |
+| `~~ubiquitous-language/SKILL.md~~` | https://github.com/mattpocock/skills/tree/main/ubiquitous-language | MIT | © 2026 Matt Pocock | ODIN voice; modality disambiguation against `domain-model` and `askme`; `disable-model-invocation: true` preserved verbatim. |
+| `~~grill-me/SKILL.md~~` | https://github.com/mattpocock/skills/tree/main/grill-me | MIT | © 2026 Matt Pocock | ODIN voice; explicit modality table vs `askme` and `domain-model`; banned-tooling references replaced with mandated alternatives; language-neutral examples. |
+| `~~design-an-interface/SKILL.md~~` | https://github.com/mattpocock/skills/tree/main/design-an-interface | MIT | © 2026 Matt Pocock | ODIN voice; TypeScript interface examples regeneralized to ≥2 language families; "Design It Twice" framing preserved. |
 | `~~improve-codebase-architecture/SKILL.md~~` | https://github.com/mattpocock/skills/tree/main/improve-codebase-architecture | MIT | © 2026 Matt Pocock | ODIN voice; cross-linked from ~~`plan/SKILL.md`~~ and `contexts/SKILL.md` per canonical-homes map. |
 | `improve-architecture/SKILL.md` | https://github.com/mattpocock/skills/tree/main/improve-codebase-architecture | MIT | © 2026 Matt Pocock | ODIN voice; cross-linked from ~~`plan/SKILL.md`~~ and `contexts/SKILL.md` per canonical-homes map. |
 | `zoom-out/SKILL.md` | https://github.com/mattpocock/skills/tree/main/zoom-out | MIT | © 2026 Matt Pocock | ODIN voice; `disable-model-invocation: true` preserved verbatim; aligned with `odin:duet` director pattern. |
 | `caveman/SKILL.md` | https://github.com/mattpocock/skills/tree/main/caveman | MIT | © 2026 Matt Pocock | Caveman-adapted: grammar-fragmentation dropped; verbosity reduction preserved; English-mandate honored. |
-| `write-a-skill/SKILL.md` | https://github.com/mattpocock/skills/tree/main/write-a-skill | MIT | © 2026 Matt Pocock | ODIN voice; scope disambiguation against `odin:init` and `skill-creator:skill-creator`; language-neutral framing. |
-| `git-guardrails-claude-code/SKILL.md` | https://github.com/mattpocock/skills/tree/main/git-guardrails-claude-code | MIT | © 2026 Matt Pocock | ODIN voice; cross-harness installation note added; safety-critical hook script (see `hook.sh` row below). |
-| `git-guardrails-claude-code/hook.sh` | https://github.com/mattpocock/skills/tree/main/git-guardrails-claude-code | MIT | © 2026 Matt Pocock | Bash hook script ported verbatim. Pattern list and exit-2 contract are upstream's; install path adapted for ODIN harness. |
-| `to-prd/SKILL.md` | https://github.com/mattpocock/skills/tree/main/to-prd | MIT | © 2026 Matt Pocock | ODIN voice; flipped-row reconciliation: GitHub-issue emission abstracted to optional `--emit-issue` flag; default emits markdown PRD file. |
-| `to-issues/SKILL.md` | https://github.com/mattpocock/skills/tree/main/to-issues | MIT | © 2026 Matt Pocock | ODIN voice; tracer-bullet vertical-slice framing preserved; emission modes (file vs `--emit-issue`) added. |
-| `qa/SKILL.md` | https://github.com/mattpocock/skills/tree/main/qa | MIT | © 2026 Matt Pocock | ODIN voice; modality differentiation table vs `odin:review` and `odin:pr-review`. |
-| `request-refactor-plan/SKILL.md` | https://github.com/mattpocock/skills/tree/main/request-refactor-plan | MIT | © 2026 Matt Pocock | ODIN voice; scope fence vs ~~`odin:plan`~~ and `odin:refactor-break-compat`; emission modes added. |
+| `~~write-a-skill/SKILL.md~~` | https://github.com/mattpocock/skills/tree/main/write-a-skill | MIT | © 2026 Matt Pocock | ODIN voice; scope disambiguation against `odin:init` and `skill-creator:skill-creator`; language-neutral framing. |
+| `~~git-guardrails-claude-code/SKILL.md~~` | https://github.com/mattpocock/skills/tree/main/git-guardrails-claude-code | MIT | © 2026 Matt Pocock | ODIN voice; cross-harness installation note added; safety-critical hook script (see `hook.sh` row below). |
+| `~~git-guardrails-claude-code/hook.sh~~` | https://github.com/mattpocock/skills/tree/main/git-guardrails-claude-code | MIT | © 2026 Matt Pocock | Bash hook script ported verbatim. Pattern list and exit-2 contract are upstream's; install path adapted for ODIN harness. |
+| `~~to-prd/SKILL.md~~` | https://github.com/mattpocock/skills/tree/main/to-prd | MIT | © 2026 Matt Pocock | ODIN voice; flipped-row reconciliation: GitHub-issue emission abstracted to optional `--emit-issue` flag; default emits markdown PRD file. |
+| `~~to-issues/SKILL.md~~` | https://github.com/mattpocock/skills/tree/main/to-issues | MIT | © 2026 Matt Pocock | ODIN voice; tracer-bullet vertical-slice framing preserved; emission modes (file vs `--emit-issue`) added. |
+| `~~qa/SKILL.md~~` | https://github.com/mattpocock/skills/tree/main/qa | MIT | © 2026 Matt Pocock | ODIN voice; modality differentiation table vs `odin:review` and `odin:pr-review`. |
+| `~~request-refactor-plan/SKILL.md~~` | https://github.com/mattpocock/skills/tree/main/request-refactor-plan | MIT | © 2026 Matt Pocock | ODIN voice; scope fence vs ~~`odin:plan`~~ and `odin:refactor-break-compat`; emission modes added. |
 | `github-triage/SKILL.md` | https://github.com/mattpocock/skills/tree/main/github-triage | MIT | © 2026 Matt Pocock | ODIN voice; flipped-row reconciliation: hard-coded label names abstracted to a configurable label-map at the top of SKILL.md. |
 | `github-triage/references/awaiting-info-template.md` | https://github.com/mattpocock/skills/tree/main/github-triage | MIT | © 2026 Matt Pocock | Extracted verbatim from `github-triage/SKILL.md` in the router/reference split; heading dedented one level. |
 | `setup-pre-commit/SKILL.md` | https://github.com/mattpocock/skills/tree/main/setup-pre-commit | MIT | © 2026 Matt Pocock | ODIN voice; generalized from Husky+lint-staged to project's hook tool of choice (Husky, pre-commit, lefthook, cargo-husky, dune hooks). |
@@ -51,8 +51,8 @@ Reference documents cross-linked across multiple skills per the canonical-homes 
 
 | Path under `/home/alpha/.claude/claude/skills/` | Upstream origin | License | Copyright | Provenance |
 | ----------------------------------------------- | --------------- | ------- | --------- | ---------- |
-| `domain-model/references/ADR-FORMAT.md` | https://github.com/mattpocock/skills/blob/main/domain-model/ADR-FORMAT.md | MIT | © 2026 Matt Pocock | Language-agnostic ADR template; ODIN voice. |
-| `domain-model/references/CONTEXT-FORMAT.md` | https://github.com/mattpocock/skills/blob/main/domain-model/CONTEXT-FORMAT.md | MIT | © 2026 Matt Pocock | Glossary entry format; ODIN voice; cross-linked from `contexts/SKILL.md`. |
+| `~~domain-model/references/ADR-FORMAT.md~~` | https://github.com/mattpocock/skills/blob/main/domain-model/ADR-FORMAT.md | MIT | © 2026 Matt Pocock | Language-agnostic ADR template; ODIN voice. |
+| `~~domain-model/references/CONTEXT-FORMAT.md~~` | https://github.com/mattpocock/skills/blob/main/domain-model/CONTEXT-FORMAT.md | MIT | © 2026 Matt Pocock | Glossary entry format; ODIN voice; cross-linked from `contexts/SKILL.md`. |
 | `~~improve-codebase-architecture/references/LANGUAGE.md~~` | https://github.com/mattpocock/skills/blob/main/improve-codebase-architecture/LANGUAGE.md | MIT | © 2026 Matt Pocock | Architecture vocabulary (module, seam, adapter, depth, leverage, locality); TS examples regeneralized to ≥2 language families; cross-linked from ~~`plan/SKILL.md`~~. |
 | `improve-architecture/references/LANGUAGE.md` | https://github.com/mattpocock/skills/blob/main/improve-codebase-architecture/LANGUAGE.md | MIT | © 2026 Matt Pocock | Architecture vocabulary (module, seam, adapter, depth, leverage, locality); TS examples regeneralized to ≥2 language families; cross-linked from ~~`plan/SKILL.md`~~. |
 | `~~improve-codebase-architecture/references/DEEPENING.md~~` | https://github.com/mattpocock/skills/blob/main/improve-codebase-architecture/DEEPENING.md | MIT | © 2026 Matt Pocock | Dependency taxonomy and seam discipline; TS examples regeneralized to ≥2 language families; cross-linked from ~~`plan/SKILL.md`~~. |
@@ -290,18 +290,18 @@ Skills adapted from the `compound-engineering-plugin` (https://github.com/EveryI
 | `compound/references/` | `ce-compound/references/` | MIT | © 2025 Every | Schema and concept-entry docs adapted. |
 | `compound/assets/` | `ce-compound/assets/` | MIT | © 2025 Every | Solution template adapted. |
 | `compound/scripts/` | `ce-compound/scripts/` | MIT | © 2025 Every | Frontmatter validator adapted. |
-| `reviews/references/personas/learnings-researcher.md` | `ce-code-review/references/personas/learnings-researcher.md` | MIT | © 2025 Every | Persona adapted to ODIN review contract. |
-| `reviews/references/personas/previous-comments-reviewer.md` | `ce-code-review/references/personas/previous-comments-reviewer.md` | MIT | © 2025 Every | Persona adapted to ODIN review contract. |
-| `reviews/references/personas/data-migration-reviewer.md` | `ce-code-review/references/personas/data-migration-reviewer.md` | MIT | © 2025 Every | Persona adapted to ODIN review contract. |
-| `reviews/references/personas/reliability-reviewer.md` | `ce-code-review/references/personas/reliability-reviewer.md` | MIT | © 2025 Every | Persona adapted to ODIN review contract. |
-| `reviews/references/personas/deployment-verification.md` | `ce-code-review/references/personas/deployment-verification-agent.md` | MIT | © 2025 Every | Persona adapted to ODIN review contract. |
-| `reviews/references/personas/project-standards.md` | `ce-code-review/references/personas/project-standards-reviewer.md` | MIT | © 2025 Every | Persona adapted to ODIN review contract. |
-| `reviews/references/action-class-rubric.md` | `ce-code-review/references/action-class-rubric.md` | MIT | © 2025 Every | Routing criteria adapted. |
-| `reviews/references/diff-scope.md` | `ce-code-review/references/diff-scope.md` | MIT | © 2025 Every | Scope rules adapted. |
-| `reviews/references/findings-schema.json` | `ce-code-review/references/findings-schema.json` | MIT | © 2025 Every | JSON schema adapted. |
-| `reviews/references/review-output-template.md` | `ce-code-review/references/review-output-template.md` | MIT | © 2025 Every | Output template adapted. |
-| `reviews/references/subagent-template.md` | `ce-code-review/references/subagent-template.md` | MIT | © 2025 Every | Subagent template adapted. |
-| `reviews/references/validator-template.md` | `ce-code-review/references/validator-template.md` | MIT | © 2025 Every | Validator template adapted. |
+| `review/references/personas/learnings-researcher.md` | `ce-code-review/references/personas/learnings-researcher.md` | MIT | © 2025 Every | Persona adapted to ODIN review contract. |
+| `review/references/personas/previous-comments-reviewer.md` | `ce-code-review/references/personas/previous-comments-reviewer.md` | MIT | © 2025 Every | Persona adapted to ODIN review contract. |
+| `review/references/personas/data-migration-reviewer.md` | `ce-code-review/references/personas/data-migration-reviewer.md` | MIT | © 2025 Every | Persona adapted to ODIN review contract. |
+| `review/references/personas/reliability-reviewer.md` | `ce-code-review/references/personas/reliability-reviewer.md` | MIT | © 2025 Every | Persona adapted to ODIN review contract. |
+| `review/references/personas/deployment-verification.md` | `ce-code-review/references/personas/deployment-verification-agent.md` | MIT | © 2025 Every | Persona adapted to ODIN review contract. |
+| `review/references/personas/project-standards.md` | `ce-code-review/references/personas/project-standards-reviewer.md` | MIT | © 2025 Every | Persona adapted to ODIN review contract. |
+| `review/references/action-class-rubric.md` | `ce-code-review/references/action-class-rubric.md` | MIT | © 2025 Every | Routing criteria adapted. |
+| `review/references/diff-scope.md` | `ce-code-review/references/diff-scope.md` | MIT | © 2025 Every | Scope rules adapted. |
+| `review/references/findings-schema.json` | `ce-code-review/references/findings-schema.json` | MIT | © 2025 Every | JSON schema adapted. |
+| `review/references/review-output-template.md` | `ce-code-review/references/review-output-template.md` | MIT | © 2025 Every | Output template adapted. |
+| `review/references/subagent-template.md` | `ce-code-review/references/subagent-template.md` | MIT | © 2025 Every | Subagent template adapted. |
+| `review/references/validator-template.md` | `ce-code-review/references/validator-template.md` | MIT | © 2025 Every | Validator template adapted. |
 | `debug/references/anti-patterns.md` | `ce-debug/references/` | MIT | © 2025 Every | Anti-patterns adapted to ODIN voice. |
 | `debug/references/defense-in-depth.md` | `ce-debug/references/` | MIT | © 2025 Every | Defense-in-depth adapted to ODIN voice. |
 | `debug/references/investigation-techniques.md` | `ce-debug/references/` | MIT | © 2025 Every | Investigation techniques adapted to ODIN voice. |

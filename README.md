@@ -65,18 +65,20 @@ Before any non-trivial implementation:
 4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
 5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
 
-## Skills (101 total)
+## Skills (108 total)
 
 Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
 
-### Planning & Exploration (16 skills)
+### Planning & Exploration (18 skills)
 
 - `askme` - Verbalized Sampling protocol for deep intent exploration before planning
 - `batch-ask-me` - Walk a dependency-aware design tree in batched question rounds until shared understanding
 - `mutual-sync` - Three-way grounding: verify user, agent, and codebase share one picture of current state before proceeding
 - `loop-me` - Design recurring workflows through a stateful `askme` session and cwd specs
 - `to-questionnaire` - Turn a knowledge gap into an async questionnaire for the person who can answer it
-- `plan` - Thorough read-only planning before any action
+- `clarify` - Scan a request, document, or conversation for ambiguities and unstated assumptions; certainty-tiered findings with defaults
+- `exhaustive` - Prove a decision, state, or requirement space is fully covered by enumerating every cell as covered, gap, or deferred
+- `shape` - Shape Up shaping: appetite, breadboard, rabbit holes, no-gos for a bet on work
 - `contexts` - Coordinate context sweep before coding
 - `init` - Analyze a codebase and create or improve AGENTS.md
 - `brainstorm` - Explore vague or ambitious ideas into a right-sized requirements-only plan
@@ -88,12 +90,13 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `pov` - Decisive, project-grounded verdict on adopting or switching technology
 - `research` - Gather external knowledge from authoritative sources with verified citations
 
-### Writing & Learning (4 skills)
+### Writing & Learning (5 skills)
 
 - `teach` - Run a persistent cwd teaching workspace across missions, lessons, resources, and learning records
 - `writing-fragments` - Mine heterogeneous raw material into an append-only pile before shaping
 - `writing-shape` - Shape a raw pile into an article paragraph by paragraph with argued formats
 - `writing-beats` - Build a grounded article journey one candidate beat at a time
+- `writing-skills` - Reference for writing and editing skills so they run predictably: invocation, hierarchy, pruning, failure modes
 
 ### Working Posture (5 skills)
 
@@ -108,8 +111,8 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `test-driven` - TDD with 10-language support
 - `type-driven` - Type-driven development (Idris 2, with 10-language support)
 - `proof-driven` - Proof-driven development (Lean 4, with property-based testing fallback and 10-language support)
-- `design-by-contract` - DbC with 10-language support and verification dispatch
-- `validation-first` - Validation-first (Quint spec) with 10-language support
+- `contract-driven` - Design-by-Contract (DbC): pre/post/invariants at API boundaries, state invariants, and trust boundaries
+- `validation-first-driven` - State machines, invariants, and temporal properties (Quint spec) before implementation
 - `tests-purge-unneeded` - Delete tests that don't catch real bugs (the inverse of TDD); load-bearing principles, static-vs-dynamic carve-out, language-specific examples
 - `spec-driven` - Write a structured spec before writing code
 - `source-driven` - Ground implementation decisions in official documentation with version-aware citations
@@ -130,9 +133,8 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `setup-ts-deep-modules` - Enforce TypeScript package boundaries through entry points with dependency-cruiser
 - `strict-validation-setup` - Bootstrap strict-mode tooling and per-task GOALS.md scaffolding for self-verifying agent loops
 
-### Execution (14 skills)
+### Execution (13 skills)
 
-- `proceed` - Execute an implementation plan with surgical precision
 - `parallel-launch` - Decompose a task into independent concerns and execute via agents
 - `tests-adversarial` - Adversarial tests that stress failure paths
 - `work` - Execute a plan or concrete work prompt end-to-end
@@ -156,7 +158,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `review-fix-grill-loop` - Review and fix a diff in verified batches until no medium-or-higher finding remains
 - `simplify` - Compress-op review pass on reuse, quality, and efficiency axes
 
-### Cleanup & Refactoring (6 skills)
+### Cleanup & Refactoring (8 skills)
 
 - `refactor-break-compat` - Refactor by removing backward-compatibility and legacy layers (public API surface)
 - `breaking-driven` - Bloat-triggered demolition: state the contract, derive the replacement blind, cut the residue; interior surfaces go without asking, boundary surfaces stop for a yes
@@ -164,6 +166,8 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `tidy` - Dispatch compress operations to the right domain: file, diff, memory, workspace, git stack, or doc
 - `improve-architecture` - Surface deepening refactors that turn shallow modules into deep ones
 - `deprecate-and-migrate` - Plan and execute deprecation and migration of old systems, APIs, or features
+- `to-greenfield` - Diagnose a degraded codebase's field state (darkfield/redfield/bluefield/brownfield) and route the recovery
+- `slop` - Slop front door: verdict or purge for code, prose, decisions, or UI, routed to the right domain authority
 
 ### GitHub Integration (13 skills)
 
@@ -181,7 +185,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `resolve-pr-feedback` - Resolve PR review feedback and fix code-review comments
 - `worktree` - Set up isolated git worktrees for new or existing branches/PRs
 
-### Codebase Intelligence & Workflow (16 skills)
+### Codebase Intelligence & Workflow (19 skills)
 
 - `deslop` - Three-phase certainty-graded AI-slop detection with HIGH-only guarded autofix
 - `sync-docs` - Diff-driven doc-vs-code drift detection; safe version/CHANGELOG fixes, rest flagged
@@ -199,6 +203,9 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `autolearn` - Compound a solved problem into a durable in-repo learning doc
 - `compound` - Document a durable solution or project concept in the repo
 - `generate-my-taste` - Generate a personal taste skill from local evidence and confirmation forks
+- `cascade-dedup` - Strip duplicate and conflicting directives across the system-prompt cascade family
+- `dedup-skills` - Ledger-first dedup of a skills/ tree: find repeated or self-conflicting rules across skill files
+- `handoff` - Snapshot the current session into a resumable handoff artifact for a cold session, agent, or person
 
 ## Output Styles (4 total)
 
