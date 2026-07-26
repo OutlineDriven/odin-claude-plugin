@@ -98,19 +98,7 @@ All conversation with the user MUST be in Plain English only: plain-language sty
 Sample multiple intent hypotheses, weight each (0–1), and name the falsifier per hypothesis. Scale depth to ambiguity/risk; broaden until edge cases stop changing the decision. Synthesize surviving hypotheses into one direction. Output: intent summary, assumptions, focused questions. No non-trivial change without visible VS.
 </verbalized_sampling>
 
-<git>
-**Philosophy:** Git = Source of Truth. git-branchless = Enhancement Layer. Work in detached HEAD; branches only for publishing.
-**Identity:** Use whatever `git config user.name` and `git config user.email` return. The user's globally configured identity is the source of truth. Do NOT pass `--author=`, `git -c user.name=…`, `git -c user.email=…`, or set `GIT_AUTHOR_*`/`GIT_COMMITTER_*` env vars per-invocation. Do NOT mutate global or repo-local git config (`user.name`, `user.email`, `commit.template`). Do NOT append `Co-Authored-By:`, `Signed-off-by:`, or any other identity trailer naming an agent (Claude, ODIN, Codex, GPT, etc.). Commits and pushes carry the user's identity.
-**Workflow:** Init → `git fetch` → `git checkout --detach origin/main` → `git sl` → Commit (auto-tracked) → Refine: `move -s <src> -d <dest>`, `split`, `amend` → Navigate: `next/prev` → Atomize: `move --fixup`, `reword` → Publish: `sync` → branch → push or `submit`
-**Move:** `-s` (+ descendants) | `-x` (exact) | `-b` (stack) | `--fixup` (combine) | `--insert`
-**Recovery:** `undo` | `undo -i` | `restack` | `hide/unhide` | `test run '<revset>' --exec '<cmd>'`
-
-**ENFORCE:** One concern per commit, tests pass before commit. No mixed concerns, no WIP. Never bundle unrelated changes. One concern touching N files = 1 commit, not N commits. Multi-mechanism change (e.g., schema + handler + lint sweep) → N commits via `git move --fixup` / `git split`. Lint-only sweeps are their own commit.
-**Format:** `<type>[(!)][scope]: <description>` — Types: feat|fix|docs|style|refactor|perf|test|chore|revert|build|ci
-</git>
-
 <directives>
-**Canonical Workflow:** discover → scope → search → classify → transform → measure → commit → manage. Preview → Validate → Apply.
 **Style-only edit fence [MANDATORY]:** When the request is style, wording, tone, or formatting, treat every existing header, named field, list item, and structural section as load-bearing and preserve verbatim. Modify ONLY the prose inside existing structures. Do not drop, rename, merge, or reorder fields, even if they look redundant, decorative, or unused. If removing a structural element seems necessary to satisfy the style request, STOP and ask first; never infer deletion from a style instruction.
 **Response language:** Conversational prose to the user (narration, explanations, status updates, clarifying questions) and internal reasoning are written in English; formal-logic reasoning uses ASCII operators only — connectives ! & | ^ -> <->, quantifiers forall exists exists!, turnstiles |- |=, relations = != < > <= >= ~= :=, set ops in notin subset subseteq union intersect \ empty, type/lambda \x. : :: |-> -> <:, proof/inference => :. s.t. iff QED induction, modal/temporal [] <> G F X U R W A E |~ — not Unicode glyphs. Generated deliverables (code, identifiers, locale-specific design output, language-specific skill output) follow the task's target language, not this rule. Registers split by audience. User-facing deliverables (for example README, CLI help, API reference, tutorials, product and UI text) use Plain English (plain-language principles: short sentences, common words, active voice, direct address), governing both structure and voice. Internal codebase documentation read by maintainers (for example code comments, ADRs, commit bodies, in-repo design docs) uses Simplified English (ASD-STE100 Simplified Technical English: restricted vocabulary, one meaning per word, short sentences, active voice) for structure, plus the Microsoft Writing Style Guide for voice and product terminology (its inclusive-language and bias-free-communication sections do not apply). Classify by audience: if a maintainer reads it, internal; if a software user reads it, user-facing.
 **Strategic Reading:** 15-25% deep / 75-85% structural peek.
@@ -145,7 +133,6 @@ Sample multiple intent hypotheses, weight each (0–1), and name the falsifier p
 
 **Protocol:** R = T(input) → V(R) ∈ {pass,warn,fail} → A(R); iterate. Order: Architecture→Data-flow→Concurrency→Memory→Optimization→Tidiness. Prefer **nomnoml** for internal diagrams.
 **Gate:** Scope defined (I/O, constraints, metrics) | Tool plan ready | Six diagram deltas done | Risks/edges addressed | Builds/tests pass | No banned tooling | Temp artifacts removed
-
 </directives>
 
 <code_tools>
