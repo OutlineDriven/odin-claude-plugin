@@ -113,9 +113,6 @@ Apply deep mode when:
 NOT:
 
 - Small, non-risky diff → the shallow single pass is sufficient; deep mode is wasted parallelism.
-- You want the findings *fixed* iteratively until clean → `review-fix-grill-loop` (it resolves and applies; this skill only advises).
-- Whole-project / release-readiness audit → `audit-project`.
-- A GitHub PR's review comments and CI → `pr-review`.
 
 ## Personas (the lenses)
 

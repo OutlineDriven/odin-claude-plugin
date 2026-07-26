@@ -66,5 +66,3 @@ Use `fd -e <ext>` (not `find`). Use `git grep -n -F 'literal'` (not `grep`). Use
 7. **Severity is a contract**: Critical/high block merge.
 
 ## Disambiguation
-
-- **vs `security-hardening`**: `security-hardening` applies OWASP prevention patterns at build time, while code is being written. `security-review` is the audit/assessment pass (STRIDE threat modeling, OWASP walkthrough, dependency audit) run against code that already exists.

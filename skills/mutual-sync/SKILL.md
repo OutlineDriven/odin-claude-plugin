@@ -29,11 +29,6 @@ Detect which situation applies from context; never ask. Same loop either way.
 
 ## Distinction from neighbors
 
-- **vs `askme` / `batch-ask-me`**: those align user and agent on decisions to make; mutual-sync aligns all three parties on facts about current state.
-- **vs `drift-detect` / `sync-docs`**: those diff artifacts against code; no user leg, no dialogue.
-- **vs `contexts` / `onboard`**: one-way orientation where the agent or user learns the codebase; no mutual verification, no ledger.
-- **vs `handoff`**: handoff persists state for the next session; mutual-sync verifies state in this one, and routes persistence to handoff.
-
 ## Anti-patterns
 
 - Asking the user for anything a grep can answer.

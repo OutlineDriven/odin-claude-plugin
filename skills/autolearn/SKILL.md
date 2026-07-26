@@ -168,10 +168,6 @@ Stage only the surfaces autolearn wrote or edited (a solution doc, `CONCEPTS.md`
 
 ## Disambiguation
 
-- **vs `memory-update`**. `memory-update` scans *past session transcripts* and writes *auto-memory only*. `autolearn` compounds the *current* solved problem into *in-repo* `docs/solutions/` and refreshes those docs; it delegates user/preference facts back to `memory-update`.
-- **vs `init`**. `init` builds `AGENTS.md` from codebase analysis (conventions to prime future agents). `autolearn` captures one solved problem as a retrievable learning, and defines durable project terms in `CONCEPTS.md` (the shared-vocabulary glossary, not the agent-priming doc).
-- **vs `sync-docs`**. `sync-docs` corrects public docs/examples/versions against a code diff (docs↔code drift). `autolearn` writes net-new knowledge docs and maintains the knowledge set.
-
 ## Operating surface
 
 `autolearn` writes exactly two in-repo surfaces: the operating repo's `docs/solutions/` and the repo-root `CONCEPTS.md`. It owns both. One writer per surface, no second skill edits them. All auto-memory writes are delegated to `memory-update`. Do not write to undefined or doubly-owned locations.

@@ -59,7 +59,6 @@ Not boundaries: internal modules in the same module/package, helpers in the same
 - **Standalone "cleanup sweep" PRs**. These mix unrelated changes, become unreviewable, and conflict with the `<git>` charter's "one concern per commit" rule. Solution: `git move --fixup` to embed the cleanup as an atomic commit alongside the active change.
 - **Files you are not otherwise touching**. Opportunistic edits become unreviewable noise; the cleanup must ride alongside work that justifies you being in that file.
 - **Speculative removals you cannot prove are safe**. If you cannot grep-confirm that nothing reads a field, do not delete it; investigate first.
-- **Public API surfaces**. That is `refactor-break-compat`'s territory and needs a migration plan.
 
 ---
 

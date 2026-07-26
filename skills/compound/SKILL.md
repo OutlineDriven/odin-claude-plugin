@@ -72,6 +72,3 @@ One learning per commit. Body carries an ODIN `Op:` trailer:
 Stage only the surfaces `compound` wrote or edited.
 
 ## Disambiguation
-
-- **vs `autolearn`**: `autolearn` extracts session learnings into memory; `compound` documents durable project knowledge into repo docs.
-- **vs `memory-update`**: `memory-update` writes auto-memory about users and cross-project context. `compound` never writes memory.

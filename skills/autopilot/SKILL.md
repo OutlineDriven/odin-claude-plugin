@@ -16,10 +16,7 @@ metadata:
 
 ## When NOT to Apply
 
-- **No concrete task yet** (vague goal, greenfield discovery) → `askme` / `strategy` / `ideate` upstream first, manually. autopilot never chains those; arriving with an execution-ready task is the entry contract.
 - **A single execution step against an existing plan** → `proceed`. autopilot wraps `proceed` with the rest of the arc; if that arc is unwanted, call `proceed` directly.
-- **The review→fix loop on a diff until clean** → `review-fix-grill-loop` (multi-iteration, medium floor). autopilot's review→fix is a single bounded pass, not a loop.
-- **Ship existing commits only** → `commit-push`. **Fix failing CI only** → `gh-fix-ci`. **Read-only review** → `review`.
 
 ## Inputs and Flags
 
@@ -91,11 +88,6 @@ Gate id equals phase number; Phase 5 (`fix`, G4's autofix arm) and Phase 8 (Repo
 - **Inventing a remote** to push a local-only repo. No remote → commit and report.
 
 ## Disambiguation
-
-- **vs `proceed`**: `proceed` is the single execution step (plan→code, verify each step). It IS Phase 2 of this chain. autopilot wraps it with plan before and simplify/review/ship/CI after.
-- **vs `review-fix-grill-loop`**: that skill is a diff-scoped review→resolve→fix **loop** that iterates to a clean floor. autopilot's Phase 4+5 is a **single bounded pass** (review → fix once → re-review → halt), sitting inside the larger plan→ship arc. Want the loop-to-clean on a diff and nothing else → use `review-fix-grill-loop`.
-- **vs `simplify` / `fix` / `commit-push` / `gh-fix-ci`**: each is one phase. Call it directly when you want only that phase.
-- **vs `strategy` / `ideate`**: upstream, manual, deliberately not chained. autopilot starts where they end.
 
 ## Operating surface
 

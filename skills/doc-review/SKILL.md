@@ -28,10 +28,6 @@ Fire automatically on a trigger phrase against a prose document, or on `/doc-rev
 Apply when the user wants a **prose planning document** evaluated: a requirements doc, a plan, a spec, a PRD, a design doc, a brainstorm. The deliverable is findings (and, on request, one review-record file).
 
 NOT:
-- **Code review** → `review` (or `review-fix-grill-loop` for review→fix). `doc-review` reads prose, never a diff.
-- **Docs↔code drift** (public docs/examples/versions stale against a code change) → `sync-docs`. That corrects docs to match code; `doc-review` evaluates the document's own quality, makes no edits.
-- **Behavior-preserving code compression** → `simplify`.
-- **Capturing a solved problem as a learning** → `autolearn`.
 
 If the target is source code, stop and route to `review`. This skill does not open a diff.
 
@@ -251,10 +247,3 @@ Baseline wins on any conflict.
 | Tier routed | Every survivor labeled safe-auto / gated-auto / manual / FYI | Yes |
 | Read-only honored | Zero writes/edits to the reviewed document | Yes |
 | Record discipline | If a record is written: only that path written, read back, staged alone; never `git add -A` | Yes when `--record` |
-
-## Disambiguation / See also
-
-- **vs `review`**: `review` reads a code diff and critiques source. `doc-review` reads a prose planning document and never opens a diff.
-- **vs `sync-docs`**: `sync-docs` corrects public docs/examples/versions to match a code change (docs↔code drift) and edits docs. `doc-review` evaluates a planning document's own quality and edits nothing.
-- **vs `review-fix-grill-loop`**: that loops review→resolve→fix over a code change-set with auto-revert. `doc-review` is read-only, single-pass over one prose document, and applies no fixes.
-- **vs `autolearn`**: `autolearn` writes a net-new learning doc from a solved problem. `doc-review` critiques an existing planning doc.

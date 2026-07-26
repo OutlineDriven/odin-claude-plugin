@@ -33,7 +33,6 @@ Fire automatically on a trigger phrase or when the user starts or redirects a pr
 ## When NOT to Apply
 
 - The user wants an implementation design → `plan`. Strategy says what the product is; plan says how to build a slice.
-- The user wants directions or options generated → `ideate`. Strategy pins one intent; ideate diverges.
 - The ask is a feature spec, backlog priority, or schedule. Those live in the tracker, not the anchor.
 - No human is available to answer and be pushed back on. An interview with no interviewee produces fabrication. Exit.
 
@@ -115,8 +114,6 @@ One anchor per commit.
 ## Disambiguation
 
 - **vs `plan`**: `plan` designs implementation: decisions and units for building a slice, read-only over the codebase. `strategy` anchors what the product is and why. `plan` reads `STRATEGY.md` as optional grounding.
-- **vs `ideate`**: `ideate` generates many directions and filters them. `strategy` pins one intent. Diverge with `ideate`; converge and anchor with `strategy`. `ideate` reads `STRATEGY.md` as optional grounding.
-- **vs `askme`**: `askme` runs the Verbalized Sampling protocol to explore intent. `strategy` invokes it as the Phase 0 preamble, then writes the durable doc. `askme` asks; `strategy` records.
 
 ## Intellectual grounding
 

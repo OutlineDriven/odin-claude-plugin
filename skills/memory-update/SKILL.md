@@ -7,7 +7,7 @@ Scan session history, surface save-worthy moments, propose → confirm → write
 
 ## Scope
 
-Creates or revises memory files in the agent's memory directory. Does not delete, merge-stale, or audit existing files (that is `memory-clean`). Does not redact or sanitize (that is `memory-sanitize`).
+Creates or revises memory files in the agent's memory directory. Does not delete, merge-stale, or audit existing files. Does not redact or sanitize.
 
 ## Path resolution
 

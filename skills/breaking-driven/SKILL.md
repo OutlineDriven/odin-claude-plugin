@@ -51,7 +51,6 @@ A repo-wide run is a campaign, not an edit: one target at a time, each landing a
 
 ## When NOT to Apply
 
-- Compat shims, feature flags, version gates, deprecation markers — the contract is deliberately changing. That is `refactor-break-compat`.
 - A single function, or local dead fields and wrappers in code you are already editing — `cleanup-codebase`.
 - Debug leftovers, placeholder bodies, swallowed errors — `deslop`.
 - Restraint on code not yet written — `minimalism-driven`.

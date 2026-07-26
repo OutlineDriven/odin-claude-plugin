@@ -31,8 +31,6 @@ A deliberate simplification pass invoked on a specific change-set. Decompose sim
 
 - **Empty diff** after all fallbacks: exit 11, pass-through.
 - **Single file <50 LOC** with an obvious shape problem: just edit directly.
-- **Opportunistic cleanup while touching nearby code**: that is `cleanup-codebase`'s territory.
-- **Public API removal with migration**: that is `refactor-break-compat`'s territory.
 - **Read-only assessment, no fix authorization**: use `review`.
 - **Fix driven by an external verifier failure or findings file**: use `fix`. `simplify` is self-sourcing.
 

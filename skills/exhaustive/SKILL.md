@@ -5,7 +5,7 @@ description: 'Prove a decision space, state space, requirement set, or behavior 
 
 # Exhaustive
 
-Prove nothing was missed. `exhaustive` enumerates a target space and classifies every cell, so completion is a checked fact rather than a feeling. It enumerates algorithmically; it is not a round-based question walker (that is `batch-ask-me`) and not a hypothesis-sampling Q&A (that is `askme` exhaustive mode).
+Prove nothing was missed. `exhaustive` enumerates a target space and classifies every cell, so completion is a checked fact rather than a feeling. It enumerates algorithmically; it is not a round-based question walker and not a hypothesis-sampling Q&A.
 
 ## Target space
 

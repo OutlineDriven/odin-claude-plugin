@@ -107,7 +107,6 @@ Rules:
 
   What's not allowed is an alternative menu that punts the choice to Apply time: `(a)/(b)/(c)` lists, "either X or Y", "consider A, B, or C", "add A or, alternatively, B." The test: at Apply time, would the agent still need to pick which sub-option to implement? If yes, rewrite as the committed choice (single, multi-facet, or composite). If the alternatives are genuinely independent and each worth taking on its own, emit N findings instead. Negative example to avoid: `Add a Validation section that (a) confirms the mechanism works, (b) flags ritualization, and (c) gates Phase B` — leaves the user guessing whether Apply will write all three, pick one, or paraphrase. If the persona's actual recommendation is "do (a) and (c) together," the fix should say so directly: `Add a Validation section that names correction-vs-confirm rate as the working signal and gates Phase B on Phase A's observed value.`
 - If you find no issues, return an empty findings array. Still populate residual_risks and deferred_questions if applicable.
-- Use your suppress conditions. Do not flag issues that belong to other personas.
 
 Writing `why_it_matters` (required field, every finding):
 

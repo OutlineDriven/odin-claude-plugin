@@ -46,7 +46,6 @@ When the optimization target has a broad search space (parameter tuning, thresho
 ## When NOT to Apply
 
 - **Diagnosis with no transform authorized**: locate and measure the hotspot first, then come back here.
-- **Behavior-preserving entropy reduction on a diff**: that is `simplify`. It runs no benchmarks and explicitly forbids behavior-affecting speedups.
 - **Unmeasured code with speculative "this might be slow"**: Graft rejection; locate the hotspot first.
 - **No measurable improvement expected**: if the candidate analysis shows noise-level gains, exit 12.
 - **Architecture-level redesign**: a plain planning session. Optimization surgery within a hot path is in scope; full module rewrites are not.
@@ -309,5 +308,4 @@ or a `Justfile` / `Makefile` target named `bench-guard`. The before-benchmark JS
 
 ## Disambiguation
 
-- **simplify**: behavior-preserving entropy reduction on a diff; runs no benchmarks; explicitly forbids timing/memory-affecting speedups. Use simplify to compress code structure; use `/optimize` when runtime performance is the target.
 - **refactor-break-compat**: contract-breaking modernization. `/optimize` never breaks public API contracts (except the disclosed approximation path, which requires explicit user confirmation).

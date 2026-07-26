@@ -7,7 +7,7 @@ Audit memory for structural rot and staleness, report with evidence, fix only on
 
 ## Scope
 
-Audits and fixes existing memory files. Does not create new memories from session signals (that is `memory-update`). Does not redact PII or credentials (that is `memory-sanitize`, which `memory-clean` will recommend when it detects suspected credentials at critical severity).
+Audits and fixes existing memory files. Does not create new memories from session signals. Does not redact PII or credentials (that is `memory-sanitize`, which `memory-clean` will recommend when it detects suspected credentials at critical severity).
 
 ## Path resolution
 

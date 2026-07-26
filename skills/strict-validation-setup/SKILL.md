@@ -64,4 +64,4 @@ The term *verifiable goals* (Devin Agents101, Jun 2025) is preferred over *TDD-f
 
 ## Posture
 
-Bootstrap is a one-shot mode. After running, do not stay resident. The loop that follows is `llm-self-loop`'s territory.
+Bootstrap is a one-shot mode. After running, do not stay resident.

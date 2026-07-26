@@ -33,8 +33,6 @@ Fire automatically on a trigger phrase or on `/ideate`. The reject-by-default cr
 
 ## When NOT to Apply
 
-- **Intent on a single direction already in hand**: that is `askme`'s territory: it clarifies intent via Verbalized Sampling, it does not generate directions.
-- **The anchor itself is in question** (what diagnosis / guiding policy the repo steers by): that is `strategy`'s territory; `ideate` diverges *within* an anchor, it does not set one.
 - **A direction is already chosen and needs implementation units**: that is `plan`. `ideate` stops at survivors plus an `askme` handoff; it never plans.
 - **Subject unidentifiable after one clarifying question**: stop; do not generate against nothing.
 
@@ -115,8 +113,6 @@ One ideation doc per commit (a load-bearing addition to the repo's decision reco
 
 ## Disambiguation
 
-- **vs `askme`**: `askme` clarifies intent on a direction already in hand (Verbalized Sampling questions); it does not generate directions. `ideate` generates the candidate directions and routes its survivors to `askme` for intent-clarification before planning.
-- **vs `strategy`**: `strategy` sets the anchor (the diagnosis and guiding policy the repo steers by); it is upstream grounding `ideate` reads, not a generator. `ideate` diverges within that anchor; `strategy` decides the anchor.
 - **vs `plan`**: `plan` turns a chosen, clarified direction into implementation units. `ideate` never plans; it stops at survivors plus the `askme` handoff.
 
 ## Operating surface

@@ -16,11 +16,6 @@ metadata:
 Apply when the user wants their **current changes** reviewed and fixed iteratively until clean: a dirty working tree, a feature branch, "grill my diff", "review and fix until no issues".
 
 NOT:
-- Whole-project / release-readiness audit → `audit-project` (this skill is diff-scoped by contract; widening to `.` means you wanted `audit-project`).
-- Read-only opinion, no fixes → `review`.
-- Behavior-preserving compression only → `simplify`.
-- A single known verifier failure or bug → `fix`.
-- GitHub PR review comments → `resolve-pr-feedback`.
 
 ## Inputs and Flags
 

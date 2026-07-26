@@ -1,6 +1,6 @@
 # qt.md — Qt-specific desktop surface
 
-Surface reference for Qt — the most mature cross-platform native UI toolkit. Companion to `references/desktop.md` for non-Qt native frameworks (Tauri, Slint, egui, Iced) and `references/paradigms.md` for paradigm fit.
+Surface reference for Qt — the most mature cross-platform native UI toolkit.
 
 **Snapshot date: April 2026.** Re-verify versions and capability tables before relying on them in production.
 

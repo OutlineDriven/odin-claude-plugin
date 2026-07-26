@@ -5,7 +5,7 @@ description: 'Scan a request, document, or conversation for ambiguities, undefin
 
 # Clarify
 
-Detect ambiguity before anyone acts on it. `clarify` scans a target — the user's request, a pasted document, or the conversation so far — and returns a structured findings report of every ambiguity, undefined term, implicit assumption, and unstated boundary it finds, each tagged with a certainty tier and a recommended default. It detects first and asks second; it is not a question-batcher (that is `askme`).
+Detect ambiguity before anyone acts on it. `clarify` scans a target — the user's request, a pasted document, or the conversation so far — and returns a structured findings report of every ambiguity, undefined term, implicit assumption, and unstated boundary it finds, each tagged with a certainty tier and a recommended default. It detects first and asks second; it is not a question-batcher.
 
 ## Target
 
