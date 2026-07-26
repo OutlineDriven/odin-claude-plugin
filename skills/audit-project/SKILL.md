@@ -100,7 +100,8 @@ Each selected reviewer receives:
 1. The resolved scope and framework flags.
 2. The priority signals relevant to that reviewer.
 3. Its role prompt from `references/review-roster.md`.
-4. The mandatory output schema:
+4. The roster's "Mandatory false-positive clause" (stated once in `references/review-roster.md`, not per-prompt).
+5. The mandatory output schema:
 
 ```json
 {
