@@ -23,7 +23,7 @@ Determine how to proceed based on `<input_document>`.
 **Plan document** (input is a path to an existing plan or spec):
 
 - Read the plan's metadata first: YAML frontmatter for markdown, visible header for HTML.
-- If it carries `artifact_contract: odin-unified-plan/v1`, classify `artifact_readiness` before reading the body.
+- Classify `artifact_readiness` before reading the body.
   - `requirements-only` → stop. Tell the user this plan states requirements only and needs an implementation-ready plan before execution: work it up in Claude Code's built-in plan mode (approved via `ExitPlanMode`), or enrich the artifact in place, then re-invoke.
   - `implementation-ready` plus `execution: code` → continue to Phase 1 using the unified-plan reader strategy.
   - Any other readiness value or non-code/unclassified execution mode → do not auto-execute as code. Route `execution: knowledge-work` to the carve-out; otherwise stop and ask the user for an implementation-ready code plan.

@@ -18,8 +18,6 @@ Sections earn their place by serving one of these audiences. Omit padding.
 New `brainstorm` outputs live under `docs/plans/` and use the plan artifact contract:
 
 - **Path:** `docs/plans/YYYY-MM-DD-NNN-<type>-<topic>-plan.<md|html>`.
-- **`artifact_contract: odin-plan/v1`**.
-- **`artifact_readiness: requirements-only`**.
 - **`source: brainstorm`**.
 - **`execution`** only when the brainstorm has enough signal to classify the eventual execution domain. For software features, use `execution: code`. For non-code deliverables, follow the universal-brainstorming route instead of pretending the artifact is executable code.
 
@@ -106,13 +104,11 @@ every requirements-only plan carries stable metadata fields. In markdown these f
 - **`type`** — conventional-commit-prefix-aligned classification (`feat`, `fix`, `refactor`, `docs`, etc.).
 - **`date`** — creation date in ISO 8601 (`YYYY-MM-DD`). Used in the filename.
 - **`topic`** — kebab-case slug identifying the brainstorm subject. Used in the filename and as the resume-detection key.
-- **`artifact_contract`** — always `odin-plan/v1` for new outputs.
-- **`artifact_readiness`** — always `requirements-only` for new `brainstorm` outputs.
 - **`source`** — always `brainstorm`.
 
 ### No status field
 
-Plan artifacts have no `status` field and no `active → completed` lifecycle. `artifact_readiness` is document completeness, not execution progress. Whether work shipped is derived from git, not stored in the doc.
+Plan artifacts have no `status` field and no `active → completed` lifecycle. Whether work shipped is derived from git, not stored in the doc.
 
 ### Field-name stability
 

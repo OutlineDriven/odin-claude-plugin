@@ -2,14 +2,14 @@
 name: brainstorm
 description: Explore vague or ambitious ideas into a right-sized requirements-only plan. Use when the user wants to brainstorm, think through scope, decide what to build, or needs collaborative product framing before planning, not for a decisive verdict on whether to adopt or switch to a specific external technology, library, or platform.
 metadata:
-  short-description: Collaborative requirements framing → requirements-only odin-plan/v1 artifact
+  short-description: Collaborative requirements framing → requirements-only plan artifact
 ---
 
 # Brainstorm a Feature or Improvement
 
 Brainstorming answers **WHAT** to build through collaborative dialogue. It precedes the deeper technical planning that determines **HOW**.
 
-The durable output is a **requirements-only plan** under `docs/plans/`. Write it with `artifact_contract: odin-plan/v1`, `artifact_readiness: requirements-only`, and `source: brainstorm` so planning does not invent product behavior, scope boundaries, or success criteria.
+The durable output is a **requirements-only plan** under `docs/plans/`. Write it with `source: brainstorm` so planning does not invent product behavior, scope boundaries, or success criteria.
 
 This skill does not implement code. It explores, clarifies, and documents decisions for later planning or execution.
 
@@ -73,7 +73,7 @@ Determine `OUTPUT_FORMAT` before any other phase fires. Output mode is **exclusi
 
 #### 0.1 Resume Existing Work When Appropriate
 
-If the user references an existing brainstorm topic or document, or there is an obvious recent matching plan in `docs/plans/` with `artifact_contract: odin-plan/v1`, `artifact_readiness: requirements-only`, and `source: brainstorm`:
+If the user references an existing brainstorm topic or document, or there is an obvious recent matching plan in `docs/plans/` with `source: brainstorm`:
 
 - Read the document.
 - Confirm: "Found an existing requirements-only plan for [topic]. Continue from this, or start fresh?"
@@ -269,7 +269,7 @@ When a doc is warranted, compose it using:
 
 **Write tight.** Hold every section to the prose-economy discipline in `references/brainstorm-sections.md`.
 
-Write to `docs/plans/YYYY-MM-DD-NNN-<type>-<topic>-plan.<md|html>`. Include `artifact_contract: odin-plan/v1`, `artifact_readiness: requirements-only`, and `source: brainstorm`. Title is `<Name> - Plan`. Keep the doc light and standalone-readable: a Goal Capsule and an ODIN spec outline. Do not emit a Goal Launch Block or Reader Index.
+Write to `docs/plans/YYYY-MM-DD-NNN-<type>-<topic>-plan.<md|html>`. Include `source: brainstorm`. Title is `<Name> - Plan`. Keep the doc light and standalone-readable: a Goal Capsule and an ODIN spec outline. Do not emit a Goal Launch Block or Reader Index.
 
 #### Vocabulary Capture
 

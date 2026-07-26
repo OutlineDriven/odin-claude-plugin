@@ -3,7 +3,7 @@
 This file is loaded when `/brainstorm` detects a non-software task. It replaces the software-specific phases (Phases 0.2 through 4) with facilitation principles for any domain. The Core Principles and Interaction Rules in the parent `brainstorm/SKILL.md` still apply unchanged — including one-question-per-turn and the default to the platform's blocking question tool. This file extends those rules; it does not relax them.
 
 This route is intentionally outside the software plan artifact contract.
-Do not write `artifact_contract: odin-plan/v1`, `artifact_readiness: requirements-only`, or a requirements-only plan under `docs/plans/` from this route. If the user wants a durable next artifact, continue in this conversation and draft it directly from the synthesis — an appropriate universal or knowledge-work plan — without pretending it is an implementation-ready code artifact.
+Do not write a requirements-only plan under `docs/plans/` from this route. If the user wants a durable next artifact, continue in this conversation and draft it directly from the synthesis — an appropriate universal or knowledge-work plan — without pretending it is an implementation-ready code artifact.
 
 ---
 
