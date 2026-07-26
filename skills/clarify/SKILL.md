@@ -25,7 +25,7 @@ The target is, in order of precedence: an explicit argument (`/clarify <text-or-
 
 4. **Ask only the manual tier.** Fire the `manual` findings as questions using the `ask` tool, one single-select question per finding with its non-locking recommendation marked, at most four per fire. Follow the current `AskUserQuestion` contract in `skills/askme/SKILL.md`. If there are zero `manual` findings, ask nothing — the report alone is the result.
 
-5. **Route resolved terms.** Any `gated`/`manual` finding the user settles that introduces a project-specific term is recorded as a CONCEPTS.md *candidate* and handed to autolearn's concept-capture mode; `clarify` routes the candidate, it does not write CONCEPTS.md (autolearn owns that surface, one writer).
+5. **Route resolved terms.** Any `gated`/`manual` finding the user settles that introduces a project-specific term is recorded as a CONCEPTS.md *candidate* and handed to autolearn's concept-capture mode; `clarify` routes the candidate, it does not write CONCEPTS.md itself (autolearn writes that surface, shared with `compound` as a second legitimate writer).
 
 ## Completion
 
