@@ -1,7 +1,6 @@
 ---
 name: writing-skills
 description: Reference for writing and editing skills so they run predictably — invocation choice, information hierarchy, leading words, pruning, and the failure modes that make a skill misfire. Use when authoring or refactoring a SKILL.md, or the user says "write a skill", "improve this skill", or "why does my skill fire unreliably".
-disable-model-invocation: true
 ---
 
 # Writing skills
