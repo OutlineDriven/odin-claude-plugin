@@ -1,6 +1,6 @@
 ---
 name: strict-validation-setup
-description: Bootstrap strict-mode tooling and per-task GOALS.md scaffolding so an agentic loop can self-verify. Use when setting up a new project, making a task self-verifying, or scaffolding goals for an agentic loop.
+description: Bootstrap strict-mode tooling and per-task GOALS.md scaffolding so an agentic loop can self-verify.
 disable-model-invocation: true
 ---
 

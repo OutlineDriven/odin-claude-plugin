@@ -1,6 +1,6 @@
 ---
 name: ai-collab-protocols
-description: Surface in-task AI collaboration protocols one tactic at a time. Use when the user refers to entities by colloquial labels, asks how to structure a Claude workflow, or describes a multi-step workflow without durable URLs.
+description: Surface in-task AI collaboration protocols one tactic at a time, replacing ambiguous references with durable, recoverable handles.
 disable-model-invocation: true
 ---
 

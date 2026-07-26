@@ -1,6 +1,6 @@
 ---
 name: zoom-out
-description: Step up one layer of abstraction and map surrounding modules, callers, and invariants. Use when the local view is too narrow, the region is unfamiliar, or before committing to a change in unknown code.
+description: Step up one layer of abstraction and map surrounding modules, callers, and invariants.
 disable-model-invocation: true
 ---
 
