@@ -10,7 +10,7 @@ Merge one or more PRs into the base branch (main/master) using queue-like sequen
 
 1. **Detect base branch**: Identify the default branch (`main`, `master`, or repo-specific) via `git remote show origin` or repo conventions.
 
-2. **Enumerate PRs**: List all PRs to merge. For each, fetch the latest HEAD.
+2. **Enumerate PRs**: List all PRs to merge; fetch each one's latest HEAD.
 
 3. **Create checkpoint**: Record the current base branch tip as a rollback point.
    ```
@@ -22,10 +22,7 @@ Merge one or more PRs into the base branch (main/master) using queue-like sequen
    git checkout -b merge-queue/<timestamp> <base>
    ```
 
-5. **Determine merge order**:
-   - If the user specifies an order, use that.
-   - Otherwise, compute dependency/topological order (if PR B depends on PR A, merge A first).
-   - If PRs are independent with no clear ordering, present the list and ask the user to confirm or reorder before proceeding.
+5. **Determine merge order**: use the user's order if given; otherwise compute dependency/topological order (if PR B depends on PR A, merge A first); if PRs are independent with no clear ordering, present the list and ask the user to confirm or reorder before proceeding.
 
 6. **Sequential merge with conflict handling**: for each PR in order:
    a. Attempt `git merge --no-ff <pr-branch>` into the integration branch.

@@ -10,7 +10,7 @@ Merge multiple PRs into a temporal integration branch for validation before merg
 
 1. **Detect base branch**: Identify the default branch via `git remote show origin` or repo conventions.
 
-2. **Enumerate PRs**: List all PRs to merge. For each, fetch the latest HEAD.
+2. **Enumerate PRs**: List all PRs to merge; fetch each one's latest HEAD.
 
 3. **Create temporal branch**: Fetch latest and branch from the remote base tip.
    ```
@@ -18,10 +18,7 @@ Merge multiple PRs into a temporal integration branch for validation before merg
    git checkout -b temporal/<timestamp> origin/<base>
    ```
 
-4. **Determine merge order**:
-   - If the user specifies an order, use that.
-   - Otherwise, compute dependency/topological order (if PR B depends on PR A, merge A first).
-   - If PRs are independent with no clear ordering, present the list and ask the user to confirm or reorder before proceeding.
+4. **Determine merge order**: use the user's order if given; otherwise compute dependency/topological order (if PR B depends on PR A, merge A first); if PRs are independent with no clear ordering, present the list and ask the user to confirm or reorder before proceeding.
 
 5. **Sequential merge with conflict handling**: for each PR in order:
    a. Attempt `git merge --no-ff <pr-branch>` into the temporal branch.
