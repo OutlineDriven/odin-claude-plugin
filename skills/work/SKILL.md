@@ -39,7 +39,7 @@ Determine how to proceed based on `<input_document>`.
 
 1. **Scan the work area.**
    - Identify files likely to change.
-   - Find existing test files for those areas (search for test/spec files that import, reference, or share names with the implementation files).
+   - Find existing test files for those areas (search for test/spec files that import, reference, or share names with the implementation files). This is Test Discovery, reapplied per file in Phase 2.
    - Note local patterns and conventions.
 
 2. **Assess complexity and route.**
@@ -192,7 +192,7 @@ Determine how to proceed based on `<input_document>`.
    - Do not over-implement beyond the current behavior slice when working test-first.
    - Skip test-first discipline for trivial renames, pure configuration, and pure styling work.
 
-   **Test Discovery**: before implementing changes to a file, find its existing test files (search for test/spec files that import, reference, or share naming patterns with the implementation file). Changes to implementation files should be accompanied by corresponding test updates: new tests for new behavior, modified tests for changed behavior, removed or updated tests for deleted behavior.
+   **Test Discovery**: see Phase 0 step 1 — reapply per file being changed.
 
    **Test Scenario Completeness**: before writing tests for a feature-bearing unit, check whether the plan's `Test scenarios` cover all applicable categories. If a category is missing or vague, supplement from the unit's context:
 
