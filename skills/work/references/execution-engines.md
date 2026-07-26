@@ -75,7 +75,7 @@ After any engine finishes implementation, inspect the diff and continue at the t
 
 | Caller | After implementation, `/work` ... |
 |---|---|
-| **Standalone** (user invoked `/work` directly, or `/plan` handed off interactively) | Resumes its normal post-implementation tail — Phase 3-4 quality gates, simplification, review, commit, and handoff in `references/shipping-workflow.md`. A goal-mode run does not skip these; verify they ran or were explicitly skipped with reason. |
+| **Standalone** (user invoked `/work` directly, or an approved plan-mode session handed off interactively) | Resumes its normal post-implementation tail — Phase 3-4 quality gates, simplification, review, commit, and handoff in `references/shipping-workflow.md`. A goal-mode run does not skip these; verify they ran or were explicitly skipped with reason. |
 | **Orchestrated** (called by another skill/agent that owns simplification, review, PR, and CI) | Performs implementation and local verification only, then returns a structured summary to the caller. Does not run simplify/review/PR/CI — the caller owns those. |
 
 Using goal-mode or a dynamic workflow is a way to get better sustained implementation focus, not a way to skip the owning workflow's finish discipline.

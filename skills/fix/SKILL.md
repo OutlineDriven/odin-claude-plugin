@@ -18,7 +18,7 @@ Failure-driven iterative repair. Detect → Prioritize → Fix ONE thing → Com
 - PR review comments → use `resolve-pr-feedback`
 - Merge conflicts
 - Analysis-only tasks → use `resolve` or `debug`
-- Planned change without a failure driver → use `proceed`
+- Planned change with no failure driver — nothing is broken; this skill needs a failure to repair
 
 ## Detected Mode Acknowledgement [LOAD-BEARING]
 
@@ -101,7 +101,6 @@ Partial match → `GH_PARTIAL` ambiguity flag.
 
 - `debug` upstream: unclear root cause. Debug findings become the fix target.
 - `test-driven` partner: failing test ↔ green flip; delegate RED→GREEN cycle.
-- `proceed` complement: planned change without failure → `proceed`; failure-driven → `fix`.
 - `resolve` / `review` as findings sources: their output paths feed findings mode.
 
 ## Failure Modes

@@ -24,14 +24,14 @@ Determine how to proceed based on `<input_document>`.
 
 - Read the plan's metadata first: YAML frontmatter for markdown, visible header for HTML.
 - If it carries `artifact_contract: odin-unified-plan/v1`, classify `artifact_readiness` before reading the body.
-  - `requirements-only` → stop. Tell the user this plan needs `/plan` enrichment before implementation. Offer `/plan <plan-path>`.
+  - `requirements-only` → stop. Tell the user this plan states requirements only and needs an implementation-ready plan before execution: work it up in Claude Code's built-in plan mode (approved via `ExitPlanMode`), or enrich the artifact in place, then re-invoke.
   - `implementation-ready` plus `execution: code` → continue to Phase 1 using the unified-plan reader strategy.
-  - Any other readiness value or non-code/unclassified execution mode → do not auto-execute as code. Route `execution: knowledge-work` to the carve-out; otherwise ask the user to return to `/plan` for an implementation-ready code plan.
+  - Any other readiness value or non-code/unclassified execution mode → do not auto-execute as code. Route `execution: knowledge-work` to the carve-out; otherwise stop and ask the user for an implementation-ready code plan.
   - Progress-like values (`active`, `in_progress`, `completed`, `done`) are invalid readiness values. Stop and ask for plan repair.
 - If it carries `execution: knowledge-work`, load `references/non-code-execution.md` and follow that carve-out.
 - Otherwise (legacy plan, field absent, or `execution: code`) → continue to Phase 1.
 
-**Blank invocation:** glob `docs/plans/*.md` and `docs/plans/*.html`. Inspect metadata for the newest candidates and auto-select only when the newest matching artifact is `implementation-ready` plus `execution: code` or a legacy code plan. Stop instead of silently executing a requirements-only, knowledge-work, approach-plan, or unclassified artifact. Ask for an explicit path or `/plan` enrichment.
+**Blank invocation:** glob `docs/plans/*.md` and `docs/plans/*.html`. Inspect metadata for the newest candidates and auto-select only when the newest matching artifact is `implementation-ready` plus `execution: code` or a legacy code plan. Stop instead of silently executing a requirements-only, knowledge-work, approach-plan, or unclassified artifact. Ask for an explicit path or an implementation-ready plan.
 
 **Superseded sibling:** if a requirements-only candidate has a same-basename file in the other format (`<basename>.md` / `<basename>.html`) that is `implementation-ready`, the requirements-only copy is stale, so select the implementation-ready sibling instead of stopping.
 
@@ -48,7 +48,7 @@ Determine how to proceed based on `<input_document>`.
    |---|---|---|
    | **Trivial** | 1-2 files, no behavioral change (typo, config, rename) | Proceed to Phase 1 step 2 (environment setup), then implement directly, with no task list and no execution loop. Apply Test Discovery if behavior-bearing code is touched. |
    | **Small / Medium** | Clear scope, under ~10 files | Build a task list from discovery. Proceed to Phase 1 step 2. |
-   | **Large** | Cross-cutting, architectural decisions, 10+ files, touches auth/payments/migrations | Inform the user this would benefit from `/plan` to surface edge cases and scope boundaries. Honor their choice. If proceeding, build a task list and continue. |
+   | **Large** | Cross-cutting, architectural decisions, 10+ files, touches auth/payments/migrations | Inform the user this would benefit from a planning pass in Claude Code's built-in plan mode to surface edge cases and scope boundaries. Honor their choice. If proceeding, build a task list and continue. |
 
 ## Phase 1: Quick start
 

@@ -1,6 +1,6 @@
 # Non-Code Execution (Knowledge-Work Carve-Out)
 
-Loaded from Phase 0 Input Triage when the plan carries `execution: knowledge-work`. The plan is a **production plan** for a non-code deliverable (a synthesized document, a study artifact, a research write-up) — typically produced by `/plan`'s approach-altitude flow. Execute it to produce the deliverable. This branch skips the code-shipping machinery.
+Loaded from Phase 0 Input Triage when the plan carries `execution: knowledge-work`. The plan is a **production plan** for a non-code deliverable (a synthesized document, a study artifact, a research write-up) — typically an approach-altitude plan the user approved in Claude Code's built-in plan mode (`ExitPlanMode`), or an equivalent written plan. Execute it to produce the deliverable. This branch skips the code-shipping machinery.
 
 ## What this skips
 

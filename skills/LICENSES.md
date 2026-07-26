@@ -246,7 +246,7 @@ Skills cherry-picked from the `agent-skills` plugin (https://github.com/addyosma
 
 ## EveryInc compound-engineering port (autopilot)
 
-`autopilot` is an ODIN-renamed port of the `compound-engineering-plugin` `lfg` skill (https://github.com/EveryInc/compound-engineering-plugin) — a hands-off end-to-end delivery pipeline. compound-engineering-plugin is MIT (© 2025 Every). ODIN adaptations — entry is execution-only (plan onward); it chains existing ODIN skills (plan → proceed → simplify → review → fix → commit-push → gh-fix-ci → report) and never reimplements them; greenfield strategy/ideation chaining is excluded; gated phase sequencing with an autofix-then-halt posture; local-only mode when no remote; ODIN voice — are made under the same MIT terms.
+`autopilot` is an ODIN-renamed port of the `compound-engineering-plugin` `lfg` skill (https://github.com/EveryInc/compound-engineering-plugin) — a hands-off end-to-end delivery pipeline. compound-engineering-plugin is MIT (© 2025 Every). ODIN adaptations — entry is execution-only, gated on a precondition that an approved plan already exists; it chains existing ODIN skills (work → simplify → review → fix → commit-push → gh-fix-ci → report) and never reimplements them; greenfield strategy/ideation chaining is excluded; gated phase sequencing with an autofix-then-halt posture; local-only mode when no remote; ODIN voice — are made under the same MIT terms.
 
 | Path under `/home/alpha/.claude/claude/skills/` | Upstream origin | License | Copyright | Provenance |
 | ----------------------------------------------- | --------------- | ------- | --------- | ---------- |

@@ -45,7 +45,7 @@ Use gh to locate failing PR checks, fetch GitHub Actions logs for actionable fai
    - Provide the failing check name, run URL (if any), and a concise log snippet.
    - Call out missing logs explicitly.
 6. Create a plan.
-   - Use the `plan` skill to draft a concise plan and request approval.
+   - Draft a concise fix plan and request approval before editing — present it through Claude Code's built-in plan mode (`ExitPlanMode`).
 7. Implement after approval.
    - Apply the approved plan, summarize diffs/tests, and ask about opening a PR.
 8. Recheck status.
