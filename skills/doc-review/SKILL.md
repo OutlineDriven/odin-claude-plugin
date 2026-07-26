@@ -247,3 +247,5 @@ Baseline wins on any conflict.
 | Tier routed | Every survivor labeled safe-auto / gated-auto / manual / FYI | Yes |
 | Read-only honored | Zero writes/edits to the reviewed document | Yes |
 | Record discipline | If a record is written: only that path written, read back, staged alone; never `git add -A` | Yes when `--record` |
+
+## Disambiguation / See also
