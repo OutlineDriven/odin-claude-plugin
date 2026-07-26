@@ -1,6 +1,8 @@
 # `CONCEPTS.md` — entry schema and reconciliation rules
 
-Read this in Mode 4 (Concepts capture) and when refreshing `CONCEPTS.md`. It defines the entry shape and the one-definition-per-concept reconciliation/refresh loop. The file lives at the **operating repo root** — one glossary, one writer (autolearn). Create it only when a term actually clears the gate; never scaffold an empty file.
+Sync-lineage note: `skills/compound/references/concepts.md` is the sibling file — compound's own, independent accretion/seeding model for the same `CONCEPTS.md` surface, not a copy of this one. Don't merge them.
+
+Read this in Mode 4 (Concepts capture) and when refreshing `CONCEPTS.md`. It defines the entry shape and the one-definition-per-concept reconciliation/refresh loop. The file lives at the **operating repo root** — one glossary, shared between autolearn and `compound` as its second legitimate writer; this doc covers autolearn's own entry schema and reconciliation loop for it. Create it only when a term actually clears the gate; never scaffold an empty file.
 
 ## What earns a slot — the reject-by-default gate, applied to vocabulary
 

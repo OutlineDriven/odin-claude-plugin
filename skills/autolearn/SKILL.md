@@ -7,7 +7,7 @@ metadata:
 
 # Autolearn: compound a solved problem, keep the learnings honest
 
-`autolearn` turns a verified fix into one in-repo learning doc, maintains those docs as the code moves, captures durable project vocabulary, and hands user/preference facts to the memory writer. It writes exactly **two** in-repo surfaces itself: the operating repo's `docs/solutions/` (one learning per file) and the repo-root `CONCEPTS.md` (the shared-vocabulary glossary, one definition per concept). Autolearn owns both, and no other skill edits them. Every auto-memory write is delegated to `memory-update`.
+`autolearn` turns a verified fix into one in-repo learning doc, maintains those docs as the code moves, captures durable project vocabulary, and hands user/preference facts to the memory writer. It writes exactly **two** in-repo surfaces itself: the operating repo's `docs/solutions/` (one learning per file, sole to autolearn — no other skill edits it) and the repo-root `CONCEPTS.md` (the shared-vocabulary glossary, one definition per concept). `CONCEPTS.md` is a shared surface: `compound` also writes it directly, as a second legitimate writer following the same one-definition-per-concept discipline. Every auto-memory write is delegated to `memory-update`.
 
 `Op:` of a compound run is `extend` (a new learning) or, in refresh, `correct`/`purge` (see Commits).
 
@@ -126,7 +126,7 @@ Refresh is not a default follow-up. Suggest or invoke `mode:refresh` with a narr
 
 # Mode 4: Concepts capture
 
-`CONCEPTS.md` at the operating repo root is the shared-vocabulary glossary: the words that mean something precise in *this* codebase, one definition per concept. Autolearn owns this surface. One writer, no second skill edits it. **Read `references/concepts.md`** for the entry schema and reconciliation rules before writing.
+`CONCEPTS.md` at the operating repo root is the shared-vocabulary glossary: the words that mean something precise in *this* codebase, one definition per concept. Autolearn writes this surface; `compound` also writes it directly as a second legitimate writer, following the same one-definition-per-concept discipline from its own accretion model. **Read `references/concepts.md`** for autolearn's entry schema and reconciliation rules before writing.
 
 **When it fires.** A durable project term surfaces in a learning capture (accretion), or because the user named a concept worth pinning. It must clear the reject-by-default gate above (would-forget / not-already-defined / scope-qualified to this project). General programming and domain English never qualify.
 
@@ -168,4 +168,4 @@ Stage only the surfaces autolearn wrote or edited (a solution doc, `CONCEPTS.md`
 
 ## Operating surface
 
-`autolearn` writes exactly two in-repo surfaces: the operating repo's `docs/solutions/` and the repo-root `CONCEPTS.md`. It owns both. One writer per surface, no second skill edits them. All auto-memory writes are delegated to `memory-update`. Do not write to undefined or doubly-owned locations.
+`autolearn` writes exactly two in-repo surfaces: the operating repo's `docs/solutions/` (sole to autolearn) and the repo-root `CONCEPTS.md` (shared with `compound`, a second legitimate writer). All auto-memory writes are delegated to `memory-update`. Do not write to undefined locations, and don't treat `CONCEPTS.md`'s dual writership as license to write anywhere else.
