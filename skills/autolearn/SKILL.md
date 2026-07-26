@@ -166,8 +166,6 @@ One learning per commit. ODIN `Op:` trailer in the body:
 
 Stage only the surfaces autolearn wrote or edited (a solution doc, `CONCEPTS.md`, or both). Never stage other dirty files; commit and publish by the operating repo's normal flow.
 
-## Disambiguation
-
 ## Operating surface
 
 `autolearn` writes exactly two in-repo surfaces: the operating repo's `docs/solutions/` and the repo-root `CONCEPTS.md`. It owns both. One writer per surface, no second skill edits them. All auto-memory writes are delegated to `memory-update`. Do not write to undefined or doubly-owned locations.

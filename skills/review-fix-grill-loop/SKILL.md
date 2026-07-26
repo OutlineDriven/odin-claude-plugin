@@ -15,8 +15,6 @@ metadata:
 
 Apply when the user wants their **current changes** reviewed and fixed iteratively until clean: a dirty working tree, a feature branch, "grill my diff", "review and fix until no issues".
 
-NOT:
-
 ## Inputs and Flags
 
 - `scope` (optional path/glob/ref): overrides the change-set default; grills that path instead of the resolved diff.

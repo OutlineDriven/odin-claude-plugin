@@ -27,9 +27,7 @@ Fire automatically on a trigger phrase against a prose document, or on `/doc-rev
 
 Apply when the user wants a **prose planning document** evaluated: a requirements doc, a plan, a spec, a PRD, a design doc, a brainstorm. The deliverable is findings (and, on request, one review-record file).
 
-NOT:
-
-If the target is source code, stop and route to `review`. This skill does not open a diff.
+NOT source code: if the target is a diff or code file, stop and route to `review`. This skill does not open a diff.
 
 ## Support files: read on demand
 
@@ -247,5 +245,3 @@ Baseline wins on any conflict.
 | Tier routed | Every survivor labeled safe-auto / gated-auto / manual / FYI | Yes |
 | Read-only honored | Zero writes/edits to the reviewed document | Yes |
 | Record discipline | If a record is written: only that path written, read back, staged alone; never `git add -A` | Yes when `--record` |
-
-## Disambiguation / See also

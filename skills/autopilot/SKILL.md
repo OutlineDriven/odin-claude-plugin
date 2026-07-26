@@ -87,8 +87,6 @@ Gate id equals phase number; Phase 5 (`fix`, G4's autofix arm) and Phase 8 (Repo
 - **Carrying a red gate forward** "to fix later". The next phase amplifies the defect over a larger surface.
 - **Inventing a remote** to push a local-only repo. No remote → commit and report.
 
-## Disambiguation
-
 ## Operating surface
 
 `proceed` and `fix` write the working tree; `commit-push` writes commits and the remote; `plan`/`review` are read-only; `simplify` self-reverts on regression. No writes to undefined or doubly-owned locations.

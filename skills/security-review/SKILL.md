@@ -64,5 +64,3 @@ Use `fd -e <ext>` (not `find`). Use `git grep -n -F 'literal'` (not `grep`). Use
 5. **Pin and verify**: lockfiles checked in, integrity hashes enforced.
 6. **Log security events**: every AuthN/AuthZ outcome.
 7. **Severity is a contract**: Critical/high block merge.
-
-## Disambiguation

@@ -27,8 +27,6 @@ Detect which situation applies from context; never ask. Same loop either way.
 6. **Confirm.** One blocking single-select: "Shared context confirmed (Recommended)" / "Corrections needed". On corrections, fold them into the claim set and rerun from step 2 for the affected claims only. Do not proceed to substantive work on an unconfirmed ledger.
 7. **Offer persistence once.** After confirmation, offer to persist the shared context. If accepted, invoke the `handoff` skill; mutual-sync writes no files of its own.
 
-## Distinction from neighbors
-
 ## Anti-patterns
 
 - Asking the user for anything a grep can answer.

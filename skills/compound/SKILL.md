@@ -70,5 +70,3 @@ One learning per commit. Body carries an ODIN `Op:` trailer:
 
 
 Stage only the surfaces `compound` wrote or edited.
-
-## Disambiguation
