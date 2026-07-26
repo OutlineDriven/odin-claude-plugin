@@ -32,8 +32,6 @@ Ship the working tree on the branch that is checked out. This skill never create
 printf '=== STATUS ===\n'; git status; printf '\n=== DIFF ===\n'; git diff HEAD; printf '\n=== BRANCH ===\n'; git branch --show-current; printf '\n=== LOG ===\n'; git log --oneline -10; printf '\n=== PUSH_TARGET ===\n'; git rev-list --left-right --count origin/$(git branch --show-current)...HEAD 2>/dev/null || echo 'NO_REMOTE_BRANCH'
 ```
 
----
-
 ## Step 1: Resolve branch state
 
 - **Detached HEAD** (current branch empty): there is no branch ref to push. Report that this skill pushes only the checked-out branch and stop; suggest `commit-push` if the user wants a feature branch created.
@@ -43,13 +41,13 @@ printf '=== STATUS ===\n'; git status; printf '\n=== DIFF ===\n'; git diff HEAD;
 
 ## Step 2: Determine conventions
 
-Match repo style for commit messages (project instructions in context > recent commits > conventional commits as default). With conventional commits, default to `fix:` over `feat:` when ambiguous. Adding code to remedy broken or missing behavior is `fix:`. Reserve `feat:` for capabilities the user could not previously accomplish. The user may override.
+Match repo style for commit messages (project instructions in context > recent commits > conventional commits default). With conventional commits, default to `fix:` over `feat:` when ambiguous -- code added to remedy broken/missing behavior is `fix:`; `feat:` is for capabilities the user couldn't previously do. User may override.
 
 ## Step 3: Commit
 
-Scan changed files for naturally distinct concerns. If they clearly group into separate logical changes, create separate commits (2-3 max). Group at file level only. No `git add -p`. When ambiguous, one commit is fine.
+Scan changed files for naturally distinct concerns; if they clearly group into separate logical changes, commit each group separately (2-3 max). Group at file level only -- no `git add -p`. When ambiguous, one commit is fine.
 
-Stage and commit each group. **Avoid `git add -A` and `git add .`**: they sweep in `.env`, build artifacts, and generated files:
+Stage and commit each group. **Avoid `git add -A` and `git add .`** -- they sweep in `.env`, build artifacts, and generated files:
 
 ```bash
 git add file1 file2 file3 && git commit -m "$(cat <<'EOF'
@@ -62,11 +60,11 @@ EOF
 
 Run `git remote` to list configured remotes.
 
-- **`origin` not in the list** — covers both a true local-only repo (empty output) and the rarer case where other remotes exist but none is named `origin`. Either way, do NOT attempt to push, and do NOT add, invent, or guess a remote to target. Report "local-only, no remote — commits only" (or, if non-`origin` remotes exist, that no `origin` remote is configured) and stop. Skip the push attempt entirely rather than attempting and failing — this is what keeps the step safe to run unattended.
-- **`origin` is in the list** — push, one unconditional form. It always targets `origin` (even when the branch's configured upstream points at another remote) and sets the upstream if missing:
+- **No `origin` remote** (empty output, or other remotes present but none named `origin`): do not push, and do not add/invent/guess a remote. Report "local-only, no remote -- commits only" (or "no `origin` remote configured" if other remotes exist) and stop -- skip the push attempt entirely rather than attempting and failing.
+- **`origin` present** -- push, one unconditional form. Always targets `origin` (even if the branch's configured upstream points elsewhere) and sets the upstream if missing:
 
 ```bash
 git push -u origin HEAD
 ```
 
-Never `--force`, `--force-with-lease`, or any force variant without explicit user authorization. A rejected push (diverged remote branch) is reported as-is: include the divergence counts from `git rev-list --left-right --count origin/$(git branch --show-current)...HEAD` and left for the user to resolve.
+Never `--force`, `--force-with-lease`, or any force variant without explicit user authorization. A rejected push (diverged remote branch) is reported as-is: include the divergence counts from `git rev-list --left-right --count origin/$(git branch --show-current)...HEAD` and leave it for the user to resolve.

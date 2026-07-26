@@ -9,9 +9,7 @@ Create a single, well-crafted git commit from the current working tree changes.
 
 ## Context
 
-**On platforms other than Claude Code**, skip to the "Context fallback" section below and run the command there to gather context.
-
-**In Claude Code**, the five labeled sections below (Git status, Working tree diff, Current branch, Recent commits, Remote default branch) contain pre-populated data. Use them directly throughout this skill -- do not re-run these commands.
+**On platforms other than Claude Code**, run the Context fallback below. **In Claude Code**, the five labeled sections below contain pre-populated data -- use them directly, do not re-run these commands.
 
 **Git status:**
 !`git status`
@@ -30,10 +28,6 @@ Create a single, well-crafted git commit from the current working tree changes.
 
 ### Context fallback
 
-**In Claude Code, skip this section. The data above is already available.**
-
-Run this single command to gather all context:
-
 ```bash
 printf '=== STATUS ===\n'; git status; printf '\n=== DIFF ===\n'; git diff HEAD; printf '\n=== BRANCH ===\n'; git branch --show-current; printf '\n=== LOG ===\n'; git log --oneline -10; printf '\n=== DEFAULT_BRANCH ===\n'; git rev-parse --abbrev-ref origin/HEAD 2>/dev/null || echo 'DEFAULT_BRANCH_UNRESOLVED'
 ```
@@ -44,53 +38,38 @@ printf '=== STATUS ===\n'; git status; printf '\n=== DIFF ===\n'; git diff HEAD;
 
 ### Step 1: Gather context
 
-Use the context above (git status, working tree diff, current branch, recent commits, remote default branch).
+Use the context above. The remote default branch returns something like `origin/main`; strip the `origin/` prefix. If it returned `DEFAULT_BRANCH_UNRESOLVED` or bare `HEAD`, try `gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name'`. If both fail, fall back to `main`.
 
-The remote default branch value returns something like `origin/main`. Strip the `origin/` prefix to get the branch name. If it returned `DEFAULT_BRANCH_UNRESOLVED` or a bare `HEAD`, try:
+If git status shows a clean working tree (no staged, modified, or untracked files), report nothing to commit and stop.
 
-```bash
-gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name'
-```
+If the current branch is empty, the repo is in detached HEAD state. A branch is required to attach this work; ask whether to create a feature branch. Use the platform's blocking question tool: `AskUserQuestion` in Claude Code (`ToolSearch` with `select:AskUserQuestion` first if unloaded), `request_user_input` in Codex, `ask_question` in Antigravity (`agy`), `ask_user` in Pi (`pi-ask-user` extension). Fall back to chat only when no blocking tool exists or the call errors, not for an unloaded schema. Never skip the question silently.
 
-If both fail, fall back to `main`.
-
-If the git status from the context above shows a clean working tree (no staged, modified, or untracked files), report that there is nothing to commit and stop.
-
-If the current branch from the context above is empty, the repository is in detached HEAD state. Explain that a branch is required before committing if the user wants this work attached to a branch. Ask whether to create a feature branch now. Use the platform's blocking question tool: `AskUserQuestion` in Claude Code (call `ToolSearch` with `select:AskUserQuestion` first if its schema isn't loaded), `request_user_input` in Codex, `ask_question` in Antigravity CLI (`agy`), `ask_user` in Pi (requires the `pi-ask-user` extension). Fall back to presenting options in chat only when no blocking tool exists in the harness or the call errors (e.g., Codex edit modes), not because a schema load is required. Never silently skip the question.
-
-- If the user chooses to create a branch, derive the name from the change content, create it with `git checkout -b <branch-name>`, then run `git branch --show-current` again and use that result as the current branch name for the rest of the workflow.
-- If the user declines, continue with the detached HEAD commit.
+- If yes, derive the name from the change content, create it with `git checkout -b <branch-name>`, then re-run `git branch --show-current` and use that as the current branch for the rest of the workflow.
+- If no, continue with the detached HEAD commit.
 
 ### Step 2: Determine commit message convention
 
-Follow this priority order:
+Priority order: (1) repo conventions in already-loaded project instructions (AGENTS.md, CLAUDE.md, etc. -- do not re-read them, they loaded at session start); (2) else, a clear pattern in the 10 recent commits from Step 1 (conventional commits, ticket prefixes, emoji); (3) else, conventional commits: `type(scope): description`, type one of `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `perf`, `ci`, `style`, `build`.
 
-1. **Repo conventions already in context** -- If project instructions (AGENTS.md, CLAUDE.md, or similar) are already loaded and specify commit message conventions, follow those. Do not re-read these files; they are loaded at session start.
-2. **Recent commit history** -- If no explicit convention is documented, examine the 10 most recent commits from Step 1. If a clear pattern emerges (e.g., conventional commits, ticket prefixes, emoji prefixes), match that pattern.
-3. **Default: conventional commits** -- If neither source provides a pattern, use conventional commit format: `type(scope): description` where type is one of `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `perf`, `ci`, `style`, `build`.
-
-When using conventional commits, choose the type that most precisely describes the change (the type list above). Where `fix:` and `feat:` both seem to fit, default to `fix:`: a change that remedies broken or missing behavior is `fix:` even when implemented by adding code. Reserve `feat:` for capabilities the user could not previously accomplish. Other types remain primary when they fit better. The user may override for a specific change.
+When using conventional commits, pick the most precise type. Where `fix:` and `feat:` both fit, default to `fix:` -- remedying broken or missing behavior is `fix:` even via added code; reserve `feat:` for capabilities the user couldn't previously do. The user may override.
 
 ### Step 3: Consider logical commits
 
-Before staging everything together, scan the changed files for naturally distinct concerns. If modified files clearly group into separate logical changes (e.g., a refactor in one directory and a new feature in another, or test files for a different change than source files), create separate commits for each group.
+Scan changed files for naturally distinct concerns (e.g., a refactor in one directory vs. a new feature in another, or unrelated test/source files). If they clearly group into separate logical changes, commit each group separately.
 
-Keep this lightweight:
-- Group at the **file level only** -- do not use `git add -p` or try to split hunks within a file.
-- If the separation is obvious (different features, unrelated fixes), split. If it's ambiguous, one commit is fine.
-- Two or three logical commits is the sweet spot. Do not over-slice into many tiny commits.
+Group at the **file level only** -- no `git add -p`, no hunk-splitting. Split only when the separation is obvious; when ambiguous, one commit is fine. Two or three logical commits is the sweet spot -- don't over-slice.
 
 ### Step 4: Stage and commit
 
-If the current branch from the context above is `main`, `master`, or the resolved default branch from Step 1, automatically create a feature branch before committing. Derive the branch name from the change content, create it with `git checkout -b <branch-name>`, run `git branch --show-current` to confirm, and use the new branch as the current branch for the rest of the workflow. Do not ask whether to branch. Committing on the default branch is not an option here.
+If the current branch is `main`, `master`, or the resolved default branch, automatically create a feature branch first: derive the name from the change content, `git checkout -b <branch-name>`, confirm with `git branch --show-current`, and use it for the rest of the workflow. Do not ask -- committing on the default branch is not an option here.
 
 Write the commit message:
-- **Subject line**: Concise, imperative mood, focused on *why* not *what*. Follow the convention determined in Step 2.
-- **Body** (when needed): Add a body separated by a blank line for non-trivial changes. Explain motivation, trade-offs, or anything a future reader would need. Omit the body for obvious single-purpose changes.
+- **Subject**: concise, imperative, *why* not *what*, per Step 2's convention.
+- **Body** (when needed): blank line, then motivation/trade-offs a future reader would need; omit for obvious single-purpose changes.
 
-Run the repo's native verification gate before each commit: type-checker and/or linter, whichever the repo defines, one pass per commit group, before staging that group. A group that fails the check is not ready to commit. Skip silently if the repo has neither configured.
+Run the repo's native verification gate (type-checker and/or linter, whichever it defines) once per commit group before staging that group. A failing group isn't ready to commit. Skip silently if neither is configured.
 
-For each commit group, stage and commit in a single call. Prefer staging specific files by name over `git add -A` or `git add .` to avoid accidentally including sensitive files (.env, credentials) or unrelated changes. Use a heredoc to preserve formatting:
+Stage and commit each group in a single call. Prefer naming files over `git add -A`/`git add .`, which can sweep in sensitive files (.env, credentials) or unrelated changes. Use a heredoc to preserve formatting:
 
 ```bash
 git add file1 file2 file3 && git commit -m "$(cat <<'EOF'

@@ -5,7 +5,7 @@ description: Use when asked to ship/open a PR, or for PR-description-only flows 
 
 # Git Commit, Push, and PR
 
-**Asking the user:** When this skill says "ask the user", use the platform's blocking question tool: `AskUserQuestion` in Claude Code (call `ToolSearch` with `select:AskUserQuestion` first if its schema isn't loaded), `request_user_input` in Codex, `ask_question` in Antigravity CLI (`agy`), `ask_user` in Pi (requires the `pi-ask-user` extension). Fall back to presenting the question in chat only when no blocking tool exists in the harness or the call errors (e.g., Codex edit modes), not because a schema load is required. Never silently skip the question.
+**Asking the user:** use the platform's blocking question tool -- `AskUserQuestion` in Claude Code (`ToolSearch` with `select:AskUserQuestion` first if unloaded), `request_user_input` in Codex, `ask_question` in Antigravity (`agy`), `ask_user` in Pi (`pi-ask-user` extension). Fall back to chat only when no blocking tool exists or the call errors, not for an unloaded schema. Never skip the question silently.
 
 ## Mode
 
@@ -75,26 +75,24 @@ pushes to `origin` regardless (Step 3). This step only decides where the PR itse
 
 The remote default branch returns something like `origin/main`; strip the `origin/` prefix. If it returned `DEFAULT_BRANCH_UNRESOLVED` or bare `HEAD`, try `gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name'`. If both fail, fall back to `main`.
 
-Branch routing:
-
-- **Detached HEAD**: explain a branch is required and ask whether to create a feature branch. If yes, derive a name from the change content. If no, stop.
-- **On default branch with work to do** (uncommitted, unpushed, or no upstream): automatically create a feature branch (pushing the default directly is not supported). Derive a name from the change content and continue at Step 3, which handles branch creation safely. Do not ask whether to branch. Committing on the default is not an option here.
-- **On default branch with no work**: report no feature branch work and stop.
+- **Detached HEAD**: ask whether to create a feature branch (derive name from change content if yes). If no, stop.
+- **On default branch with work** (uncommitted, unpushed, or no upstream): auto-create a feature branch (pushing default directly isn't supported), derive name from change content, continue at Step 3 (which handles the branch creation safely). Don't ask -- committing on default isn't an option here.
+- **On default branch, no work**: report nothing to do and stop.
 - **Feature branch**: continue.
 
 Note the existing PR URL from the PR check if `state: OPEN`. Step 5 uses it to route between new-PR and existing-PR application.
 
 ## Step 2: Determine conventions
 
-Match repo style for commit messages and PR titles (project instructions in context > recent commits > conventional commits as default). With conventional commits, default to `fix:` over `feat:` when ambiguous: adding code to remedy broken or missing behavior is `fix:`. Reserve `feat:` for capabilities the user could not previously accomplish. The user may override.
+Match repo style for commit messages and PR titles (project instructions in context > recent commits > conventional commits default). With conventional commits, default to `fix:` over `feat:` when ambiguous: code added to remedy broken/missing behavior is `fix:`; `feat:` is for capabilities the user couldn't previously do. User may override.
 
 ## Step 3: Commit and push
 
-If on the default branch, branch creation needs to handle stale local `<base>`, unpushed commits on local `<base>`, and uncommitted changes that collide with the fresh remote base. Read `references/branch-creation.md` and follow its decision flow before continuing.
+If on the default branch, branch creation needs to handle stale local `<base>`, unpushed commits on local `<base>`, and uncommitted changes colliding with the fresh remote base. Read `references/branch-creation.md` and follow its decision flow before continuing.
 
-Scan changed files for naturally distinct concerns. If they clearly group into separate logical changes, create separate commits (2-3 max). Group at file level only. No `git add -p`. When ambiguous, one commit is fine.
+Scan changed files for naturally distinct concerns; if they clearly group into separate logical changes, commit each group separately (2-3 max). Group at file level only -- no `git add -p`. When ambiguous, one commit is fine.
 
-Stage and commit each group. **Avoid `git add -A` and `git add .`**. They sweep in `.env`, build artifacts, and generated files:
+Stage and commit each group. **Avoid `git add -A` and `git add .`** -- they sweep in `.env`, build artifacts, and generated files:
 
 ```bash
 git add file1 file2 file3 && git commit -m "$(cat <<'EOF'
