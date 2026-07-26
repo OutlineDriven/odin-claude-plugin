@@ -1,6 +1,6 @@
 ---
 name: taste
-description: Apply taste judgment to an artifact or decision. Use when asking "is this slop?", "overkill?", "audit", or "taste-test this", or setting a taste register.
+description: Apply taste judgment to an artifact or decision. Use when asking "overkill?", "elegant?", "audit", or "taste-test this", or setting a taste register.
 ---
 
 # Taste

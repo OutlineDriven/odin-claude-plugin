@@ -1,6 +1,6 @@
 ---
 name: deslop
-description: Use when the user says "deslop", "remove debug code", "find placeholders or stub code", or "remove dead code".
+description: Certainty-graded cleanup of code debris. Use when the user says "deslop", "remove debug code", "find placeholders or stub code", or "remove dead code", or when the slop skill routes code findings here.
 metadata:
   short-description: Certainty-graded slop cleanup
 ---
