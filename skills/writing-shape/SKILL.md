@@ -1,6 +1,6 @@
 ---
 name: writing-shape
-description: 'Use when the user wants to turn a pile of fragments into a polished article, shape raw material paragraph by paragraph, or says "write this up", "turn this into a post", or "structure these fragments".'
+description: 'Use when the user wants to turn a pile of fragments into a polished article, shape raw material paragraph by paragraph, or says "write this up", "turn this into a post", or "structure these fragments". Shapes prose, not work — pitching or scoping a bet belongs to the separate shape skill.'
 ---
 
 # Shape an article
