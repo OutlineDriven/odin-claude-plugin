@@ -100,26 +100,22 @@ Q4 — Manifests (single-select)
 
 **Never use `multiSelect` for axis-with-default override semantics.** Reserve `multiSelect` strictly for additive picks (feature toggles, optional sub-tasks).
 
-**Per fire (one tool call):**
-- `questions` array: `minItems: 1, maxItems: 4`. All questions in the array render as one batched UI; one user round-trip per fire.
+**Per fire:** `questions` array, `minItems: 1, maxItems: 4`; renders as one batched UI, one user round-trip per fire.
 
 **Per question:**
 - `question`: full sentence ending in `?`
-- `header`: short chip label, ≤ 12 characters
-- `multiSelect`: boolean (default `false`). `false` = single-pick (mutually exclusive options); `true` = subset of additive items (feature toggles, optional sub-tasks)
+- `header`: chip label, ≤ 12 characters
+- `multiSelect` (bool, default `false`): `false` = single-pick, mutually exclusive; `true` = additive subset (feature toggles, optional sub-tasks)
 - `options`: array, `minItems: 2, maxItems: 4`
 
 **Per option:**
-- `label`: 1-5 words; the chip text the user sees and ticks. Mark the recommended choice by appending `(Recommended)` to its label and placing it **first** in the array.
-- `description`: explanation of the trade-off / consequence; the one-sentence rationale lives here.
-- `preview`: optional rendered content (markdown, monospace box). Single-select only (tool constraint). Use for visual comparisons (layout mockups, code diffs, file trees); skip when the difference is purely conceptual.
+- `label`: 1-5 words; append `(Recommended)` to the recommended choice and place it **first** in the array
+- `description`: one-sentence trade-off/consequence rationale
+- `preview`: optional rendered content (markdown, monospace box), single-select only (tool constraint); use for visual comparisons (layout mockups, code diffs, file trees), skip when the difference is purely conceptual
 
-**Built-in escapes (do not duplicate):**
-- The free-text "Other" input is **auto-provided** on every question; never add an explicit "Other" option.
-- Users may attach free-text notes via the `annotations` response field.
+**Built-in escapes (do not duplicate):** Free-text "Other" is **auto-provided** on every question — never add an explicit "Other" option; free-text notes go in the `annotations` response field.
 
-**Plan-mode caveat:**
-- Use this tool only to *clarify requirements* or *choose between approaches* during planning. Do **not** ask "Is the plan ready?" / "Should I proceed?". That is what `ExitPlanMode` is for.
+**Plan-mode caveat:** Use this tool only to *clarify requirements* or *choose between approaches* during planning — not "Is the plan ready?" / "Should I proceed?"; that's what `ExitPlanMode` is for.
 
 **askme-specific notes:**
 - The "maximum possible number" of questions above is bounded by the tool's per-fire cap (4); for larger question sets, fire multiple sequential batches, ordered by dependency.
