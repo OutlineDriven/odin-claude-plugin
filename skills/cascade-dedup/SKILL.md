@@ -12,10 +12,10 @@ The cascade family replicates one canonical prompt across three harnesses. Dedup
 
 | File | Role | Zones |
 |---|---|---|
-| `/home/alpha/.claude/claude/system-prompt-baseline.md` | Canonical; wins every conflict | Whole file is the source of truth |
+| `system-prompt-baseline.md` | Canonical; wins every conflict | Whole file is the source of truth |
 | `output-styles/{axiom-mode,builder,duet,linus,odin,benchmark}.md` | Style embeds | Persona prefix **above** the charter `<role>` (the second `<role>` per file) = strip zone. Tail **from** the charter `<role>` = byte-identity invariant zone, never a dedup target |
 | `output-styles/benchmark.md` auto-gen preamble (margin-runner header) | Generated | Never touch. Repairs to benchmark.md's cascade tail require explicit user authorization first |
-| `/home/alpha/.omp/agent/AGENTS.md`, `/home/alpha/.codex/AGENTS.md` | Harness embeds | Harness-adapted tool sections are legitimate divergence; targets are internal duplication and accidental drift. Outside the repo: editable, never committable |
+| `~/.omp/agent/AGENTS.md`, `~/.codex/AGENTS.md` | Harness embeds | Harness-adapted tool sections are legitimate divergence; targets are internal duplication and accidental drift. Outside the repo: editable, never committable |
 
 ## Step 1 — Verify the invariant before dedup
 
