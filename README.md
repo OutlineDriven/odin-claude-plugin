@@ -65,7 +65,7 @@ Before any non-trivial implementation:
 4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
 5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
 
-## Skills (108 total)
+## Skills (111 total)
 
 Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
 
@@ -133,7 +133,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `setup-ts-deep-modules` - Enforce TypeScript package boundaries through entry points with dependency-cruiser
 - `strict-validation-setup` - Bootstrap strict-mode tooling and per-task GOALS.md scaffolding for self-verifying agent loops
 
-### Execution (13 skills)
+### Execution (15 skills)
 
 - `parallel-launch` - Decompose a task into independent concerns and execute via agents
 - `tests-adversarial` - Adversarial tests that stress failure paths
@@ -144,6 +144,8 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `autopilot` - Hands-off plan-to-ship pipeline chaining existing skills
 - `llm-self-loop` - Restructure human-gated workflows into autonomous LLM loops with file-based outputs
 - `incremental` - Deliver changes in small, testable slices
+- `update-todos` - Re-sync a stale task list against what actually landed, with proof required per completion
+- `sophisticate-todos` - Split compound tasks into atomic ones, order by dependency, pin an acceptance criterion to each
 - `debug` - Hypothesis-driven debugging with minimal reproduction
 - `frontend-ui` - Build production-quality user-facing interfaces
 - `optimize` - Locate a hot path, benchmark transformations, and commit the proven winner
@@ -169,7 +171,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `to-greenfield` - Diagnose a degraded codebase's field state (darkfield/redfield/bluefield/brownfield) and route the recovery
 - `slop` - Slop front door: verdict or purge for code, prose, decisions, or UI, routed to the right domain authority
 
-### GitHub Integration (13 skills)
+### GitHub Integration (14 skills)
 
 - `pr-review` - Review code on a GitHub PR using `gh`
 - `pr-merge-base` - Merge PRs into the base branch with queue-like sequencing
@@ -182,6 +184,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `atomic-issues-prs` - Publish a change-set as atomic GitHub issues or PRs
 - `github-triage` - Triage GitHub issues through a configurable label-based state machine
 - `github-solution-research` - Find proven open-source solutions on GitHub for concrete engineering problems
+- `propose-issue` - Turn a symptom into a source-grounded GitHub issue: evidence, analysis, self-review gate, then file
 - `resolve-pr-feedback` - Resolve PR review feedback and fix code-review comments
 - `worktree` - Set up isolated git worktrees for new or existing branches/PRs
 
