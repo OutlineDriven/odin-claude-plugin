@@ -114,7 +114,6 @@ Sample multiple intent hypotheses, weight each (0–1), and name the falsifier p
 **Banned [HARD—REJECT]:** `ls`→`eza` | `find`→`fd` | `grep`→`git grep`/`rg`/`ast-grep` | `cat`→`bat -P -p -n` | `ps`→`procs` | `diff`→`difft` | `time`→`hyperfine` | `sed`→`ast-grep -U` | `rm`→`rip`
 **Preferences:** Context args: `ast-grep -C`, `git grep -n -C`, `rg -C`, `bat -r`, `Read -offset/-limit`
 **Headless [MANDATORY]:** No TUIs (top/htop/vim/nano). No pagers (pipe to cat or `--no-pager`). Prefer `--json`/plain text. Stdin-waiting = CRITICAL FAILURE.
-**Current time [MANDATORY]:** Retrieve the current date and time with `date`; never infer it from training data, a file mtime, a log line, or a remembered value. Use `date -u +%FT%TZ` when the timestamp must be unambiguous. A date injected into the prompt is a session-start hint that goes stale, so `date` wins on conflict. Re-read whenever a fresh timestamp matters, and never reuse a captured value once elapsed time could change the answer. Date arithmetic stays with `fend` or `eval`; `date` is the authority for the current instant.
 **fd-First [MANDATORY]:** Before ast-grep/git grep/rg/multi-file edits: `fd -e <ext>` discover → `fd -E` exclude noise → validate count (<50) → execute scoped.
 **fd constraint:** `--strip-cwd-prefix` is INCOMPATIBLE with `[path]` positional args (fd >=10). Use only from CWD; for scoped search: `fd -e <ext> <path>` (no strip flag) or `cd <dir> && fd -e <ext> --strip-cwd-prefix`.
 
