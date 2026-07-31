@@ -72,7 +72,31 @@ Red flags:
 - Test name describes **how**, not **what**
 - Verifying outcomes through a side channel instead of through the interface
 
-## Verify Through the Interface, Not the Side Channel
+## Tautological Tests
+
+A tautological assertion computes its expected value with the same rule as the implementation, so it cannot reveal a disagreement. Use a known-good literal, worked example, or specification instead.
+
+**TypeScript**
+
+```typescript
+// BAD — expected value repeats the implementation's addition rule
+expect(add(a, b)).toBe(a + b);
+
+// GOOD — expected value comes from a worked example
+expect(add(2, 3)).toBe(5);
+```
+
+**Python**
+
+```python
+# BAD — expected value repeats the implementation's addition rule
+assert add(a, b) == a + b
+
+# GOOD — expected value comes from a worked example
+assert add(2, 3) == 5
+```
+
+## Verify through the interface, not the side channel
 
 **Python**
 

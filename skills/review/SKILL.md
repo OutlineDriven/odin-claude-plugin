@@ -41,7 +41,7 @@ Follow these steps:
 
 Focus on:
 
-- Adherence to project conventions, coding standards, and architecture patterns
+- Adherence to project conventions, coding standards, and architecture patterns (plus the baseline Fowler code smells in `references/smell-baseline.md`)
 - Documentation quality and developer experience
 
 Format your review with clear sections:
@@ -132,13 +132,14 @@ Thirteen read-only persona agents, each a lens with a primary failure class. Dis
 | data-migration-reviewer | schema changes, data integrity, migration safety | `references/personas/data-migration-reviewer.md` |
 | reliability-reviewer | error handling, resilience, failure modes | `references/personas/reliability-reviewer.md` |
 | deployment-verification | deploy readiness, rollback safety, env config | `references/personas/deployment-verification.md` |
-| project-standards | adherence to repo conventions, lint rules, style guides | `references/personas/project-standards.md` |
+| project-standards | adherence to repo conventions, lint rules, style guides, and baseline Fowler code smells | `references/personas/project-standards.md` |
 
-The shared output schema, severity rubric, action-class rubric, tool order, and hard limits live in `references/personas/_contract.md`. Read it once; prepend it to every persona dispatch. The security persona's forcing path globs (the authoritative set the escalation threshold defers to) are listed in `references/personas/security.md`.
+The shared output schema, severity rubric, action-class rubric, tool order, and hard limits live in `references/personas/_contract.md`. Read it once; prepend it to every persona dispatch. The security persona's forcing path globs (the authoritative set the escalation threshold defers to) are listed in `references/personas/security.md`. The smell baseline (baseline Fowler code smells for project-standards reviews) lives in `references/smell-baseline.md`; paste its full content beside `_contract.md` into any `project-standards` persona dispatch.
 
 Additional reference docs:
 - `references/action-class-rubric.md`: routing decision criteria for each finding class.
 - `references/diff-scope.md`: rules for what is in-scope vs out-of-scope in a review.
+- `references/smell-baseline.md`: baseline Fowler code smells for project-standards reviews.
 - `references/findings-schema.json`: JSON schema for structured finding output.
 - `references/review-output-template.md`: template for the final review report.
 - `references/subagent-template.md`: template for dispatching subagent reviewers.
@@ -148,7 +149,7 @@ Additional reference docs:
 
 ### Phase D1: Select and dispatch (parallel, one message)
 
-Compute the diff surface: changed files, languages, exported-symbol changes, security-touching paths. Select the warranted personas (always-on + gated). Dispatch all selected personas **in one tool-call message**. Sequential dispatch invalidates the parallel-launch contract. Each agent receives `<_contract.md> + "\n\n---\n\n" + <persona prompt> + "\n\n---\n\nDIFF:\n" + <captured diff>`. Agents are read-only and return findings only.
+Compute the diff surface: changed files, languages, exported-symbol changes, security-touching paths. Select the warranted personas (always-on + gated). Dispatch all selected personas **in one tool-call message**. Sequential dispatch invalidates the parallel-launch contract. Each agent receives `<_contract.md> + "\n\n---\n\n" + <persona prompt> + "\n\n---\n\nDIFF:\n" + <captured diff>` (for `project-standards`, paste `<references/smell-baseline.md>` in full beside `<_contract.md>`, i.e., `<_contract.md> + "\n\n---\n\n" + <references/smell-baseline.md> + "\n\n---\n\n" + <persona prompt> + "\n\n---\n\nDIFF:\n" + <captured diff>`). Agents are read-only and return findings only.
 
 ### Phase D2: Merge and rank
 
@@ -202,7 +203,7 @@ Each finding gets exactly one class. The class is **advice on where the fix belo
 |---|---|---|
 | Single-pass present | All eight single-pass sections produced, in order, before any persona output | Yes |
 | Mode resolved | shallow / deep / auto-escalation decided and the firing trigger named in the report | Yes |
-| Parallel dispatch | Selected personas launched in one tool-call message with `_contract.md` prepended | Yes (deep) |
+| Parallel dispatch | Selected personas launched in one tool-call message with `_contract.md` prepended (and `references/smell-baseline.md` prepended for `project-standards`) | Yes (deep) |
 | Dedup + anchor | Findings deduped by fingerprint; cross-persona agreement applied before the confidence gate | Yes (deep) |
 | Confidence gate | Sub-`med` findings dropped except flagged P0 | Yes (deep) |
 | Severity behavioral | Every finding's Pn cites an observable impact | Yes (deep) |

@@ -1,110 +1,36 @@
 ---
 name: test-driven
-description: Run test-driven development. Use when implementing features or fixes with TDD, or refactoring with coverage.
+description: Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions "red-green-refactor", or wants integration tests.
 ---
 
-# Test-driven development (XP-style)
+# Test-Driven Development
 
-Tests define the specification. Design them from requirements before any implementation. The RED-GREEN-REFACTOR cycle is the heartbeat: write a failing test, make it pass with minimal code, then clean up while green.
+TDD is the red → green loop. This skill is the reference that makes that loop produce tests worth keeping: what a good test is, where tests go, the anti-patterns, and the rules of the loop. Every section applies on every cycle — consult them before and during the loop, not after.
 
-**Modern insight (2025)**: TDD + property-based testing pairing is the standard -- example tests prevent regressions, property tests discover edge cases. TDD also serves AI-assisted development: structural integrity keeps code understandable for both human and AI collaborators (Kent Beck, "Augmented Coding"). Mutation testing validates test quality beyond coverage metrics (TDD+Mutation: 63.3% vs TDD-alone: 39.4% mutation coverage).
+When exploring the codebase, read `CONTEXT.md` if it exists so test names and interface vocabulary match the project's domain language, and respect ADRs in the area you are changing.
 
-See [frameworks](references/frameworks.md) for language-specific test runners, property testing, coverage, and mutation tools.
-See [examples](references/examples.md) for brief TDD cycle patterns per language.
+## What a good test is
 
----
+Tests verify behavior through public interfaces, not implementation details. Code can change entirely; tests should not. A good test reads like a specification — “a user can check out with a valid cart” tells you exactly what capability exists — and survives refactors because it does not care about internal structure.
 
-## When to Apply
+See [tests.md](references/tests.md) for good and bad examples, [mocking.md](references/mocking.md) for mocking guidance, [examples.md](references/examples.md) for cycle patterns in each language family, and [frameworks.md](references/frameworks.md) for test-runner and property-testing tools.
 
-- New features with clear requirements (both inside-out and outside-in approaches valid)
-- Bug fixes -- write a failing test that proves the bug before fixing
-- Refactoring -- ensure coverage exists before restructuring
-- API contract enforcement -- test the interface, not internals
-- Property-based invariants -- complement example tests with PBT
-- Legacy code -- add characterization tests before modifying (Michael Feathers pattern)
+## Seams — where tests go
 
-## When NOT to Apply
+A **seam** is the public boundary you test at: the interface where you observe behavior without reaching inside. Tests live at seams, never against internals.
 
-- Exploratory prototyping or spike research
-- One-off scripts, data migrations, generated code
-- Purely visual UI layout work (prefer visual regression testing)
-- Highly experimental algorithmic research (but PBT still helps)
-- Throwaway code with <1 week lifespan
+**Test only at pre-agreed seams.** Before writing any test, write down the seams under test and confirm them with the user. No test is written at an unconfirmed seam. You cannot test everything — agreeing seams up front puts testing effort on critical paths and complex logic instead of every edge case.
 
----
+Ask: “What is the public interface, and which seams should we test?”
 
 ## Anti-patterns
 
-- **Testing implementation details**: Tests should verify behavior, not internal structure -- breaks refactoring confidence
-- **Over-mocking**: Testing the mocks instead of the code; mock external I/O, not core logic
-- **100% coverage obsession**: Coverage does not equal quality. Mutation testing exposes gaps coverage cannot
-- **Test-induced architectural damage**: Letting mock boundaries dictate design
-- **Snapshot bloat**: Approval-style tests without curation become maintenance burden
+- **Implementation-coupled** — mocks internal collaborators, tests private methods, or verifies through a side channel such as querying the database instead of using the interface. The tell: the test breaks when you refactor but behavior has not changed.
+- **Tautological** — the assertion recomputes the expected value the way the code does (`expect(add(a, b)).toBe(a + b)`, a snapshot derived by hand the same way, or a constant asserted equal to itself), so it passes by construction and can never disagree with the code. Expected values must come from an independent source of truth: a known-good literal, a worked example, or the specification. See [tests.md](references/tests.md).
+- **Horizontal slicing** — writing all tests first, then all implementation. Bulk tests verify imagined behavior: you test the shape of things rather than user-facing behavior, the tests become insensitive to real changes, and you commit to test structure before understanding the implementation. Work in **vertical slices** instead — one test → one implementation → repeat, each test a **tracer bullet** that responds to what the last cycle taught you.
 
----
+## Rules of the loop
 
-## Two Schools (decision guidance, not prescription)
-
-- **Inside-Out (Classic/Detroit)**: Start with unit tests for smallest pieces, build upward. Minimizes mocks. Best for well-understood domains, algorithms, utility functions.
-- **Outside-In (London/Mockist)**: Start with acceptance test for user-facing behavior, use mocks to discover interfaces. Best for layered systems, APIs, microservices.
-- **Pragmatic teams use both depending on context.** Neither is superior.
-
-## Test Doubles Hierarchy
-
-- **Stubs**: Return predefined data; verify outcomes (state-based)
-- **Mocks**: Verify interactions/calls were made (behavior-based)
-- **Fakes**: Working implementations (e.g., in-memory database)
-- **Spies**: Record calls while using real behavior
-- **Rule**: Mock only external dependencies.
-
----
-
-## Workflow (language-neutral)
-
-1. **CREATE** -- Write failing tests: error cases -> edge cases -> happy paths -> property tests
-2. **RED** -- Run tests, verify all fail. If any pass, the test is wrong or behavior already exists.
-3. **GREEN** -- Minimal code to pass. No extras, no optimization, no cleanup.
-4. **REFACTOR** -- Clean up while green. Separate structural changes from behavioral (compress first, then extend). Re-run tests after every change.
-
----
-
-## Constitutional Rules (Non-Negotiable)
-
-1. **Design Tests First**: Plan all test cases from requirements before implementation; write each test iteratively in the RED-GREEN-REFACTOR loop
-2. **RED Before GREEN**: Each new test MUST fail before you write implementation for it
-3. **Error Cases First**: Implement error handling before success paths
-4. **One Test at a Time**: Write one failing test, make it pass, refactor, then add the next test
-5. **Refactor Only on GREEN**: Never refactor with failing tests
-
-## Validation Gates
-
-| Gate | Pass Criteria | Blocking |
-|------|---------------|----------|
-| Tests Created | Test files exist for target module | Yes |
-| RED State | All new tests fail before implementation | Yes |
-| GREEN State | All tests pass after implementation | Yes |
-| Coverage | >= 80% line coverage | No |
-| Mutation | Mutation score reviewed (no threshold enforced) | No |
-
-## Exit Codes
-
-| Code | Meaning |
-|------|---------|
-| 0 | TDD cycle complete, all tests pass |
-| 11 | No test framework detected |
-| 12 | Test compilation failed |
-| 13 | Tests not failing (RED state invalid) |
-| 14 | Tests fail after implementation (GREEN not achieved) |
-| 15 | Tests fail after refactor (regression) |
-
----
-
-## Reference materials
-
-- `references/mocking.md`: when to mock vs use real implementations; trade-offs.
-- `references/interface-design.md`: interface shape and depth in TDD context.
-- `references/refactoring.md`: refactor step discipline post-green.
-- `references/deep-modules.md`: Ousterhout's deep-module heuristic applied to TDD.
-- `references/tests.md`: what counts as a real-bug test vs ceremony.
-
-These reference docs are MIT-licensed (see `/home/alpha/.claude/claude/skills/LICENSES.md` for full attribution).
+- **Red before green.** Write the failing test first, then only enough code to pass it. Do not anticipate future tests or add speculative features.
+- **One slice at a time.** One seam, one test, one minimal implementation per cycle.
+- **Refactoring is not part of the loop.** It belongs to the review stage (see the `review` skill), not the red → green implementation cycle.

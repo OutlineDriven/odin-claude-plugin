@@ -1,9 +1,9 @@
 ---
 name: github-triage
-description: Triage GitHub issues. Use when the user wants to triage incoming issues, prepare issues for an autonomous agent, or move an issue between workflow states.
+description: 'Triage GitHub issues and pull requests. Use when the user wants to triage incoming issues or external PRs, prepare items for an autonomous agent, or move an item between workflow states.'
 ---
 
-State-machine triage over GitHub issues. Every comment posted carries an AI disclaimer. Label names are configurable; state semantics are not.
+State-machine triage over GitHub issues and pull requests. Every comment posted carries an AI disclaimer. Label names are configurable; state semantics are not.
 
 ## AI disclaimer (mandatory)
 
@@ -29,13 +29,15 @@ state:
   ready_for_agent:  "ready-for-agent"  # fully specified, autonomous-agent-suitable
   ready_for_human:  "ready-for-human"  # requires human judgment
   wont_fix:         "wontfix"          # closed, not actioned
+include_pull_requests: false           # default off; set true to triage external pull requests alongside issues
 ```
 
 Body uses the abstract tokens (`triage_pending`, `ready_for_agent`, etc.). Replace with your repo's labels at apply time.
 
 ## Invariants
 
-- Every issue carries exactly one `category` label and one `state` label.
+- Every issue or pull request carries exactly one `category` label and one `state` label.
+- External pull requests are treated as issues with attached code and share the exact same roles, labels, and state machine. Discovery surfaces only external PRs (from forks or non-members); internal PRs are ignored.
 - Conflicting state labels = halt and ask the maintainer which is correct.
 - Maintainer can override any state directly; flag unusual transitions.
 
@@ -50,31 +52,31 @@ Body uses the abstract tokens (`triage_pending`, `ready_for_agent`, etc.). Repla
 | triage_pending  | awaiting_info     | maintainer          | post triage notes capturing progress + reporter questions                |
 | triage_pending  | ready_for_agent   | maintainer          | grilling complete; agent brief; apply label                              |
 | triage_pending  | ready_for_human   | maintainer          | grilling complete; task summary; apply label                             |
-| triage_pending  | wont_fix          | maintainer          | comment + close                                                          |
+| triage_pending  | wont_fix          | maintainer          | comment + close (or mark redundant/already-implemented)                  |
 | awaiting_info   | triage_pending    | skill (reply seen)  | reporter replied; surface for re-evaluation                              |
 
 ## Workflows
 
 ### Overview ("what needs my attention")
 
-Group open issues into three buckets and display oldest-first:
+Group open issues (and external pull requests, if `include_pull_requests: true`) into three buckets and display oldest-first:
 
-1. Unlabeled: never triaged.
+1. Unlabeled: never triaged. When `include_pull_requests` is enabled, discover only external PRs (from forks or external contributors) alongside issues.
 2. `triage_pending`: needs evaluation or continuation.
 3. `awaiting_info` with new activity since the last triage-notes comment.
 
-### Triage a specific issue
+### Triage a specific item
 
-1. Dispatch Explore agent to read full issue + all comments + related code paths.
-2. Present category and state recommendations with reasoning.
-3. For bugs: attempt reproduction. Run repo tests, trace logic.
-4. If underspecified, do a focused domain-model pass: map entities and
-   constraints before re-categorizing.
-5. Apply outcome per state.
+1. Dispatch Explore agent to read full issue/PR + all comments + related code paths (including attached code/diff for PRs).
+2. Check for redundancy: verify whether the requested behavior or PR logic is already implemented in the codebase. If redundant or already satisfied, resolve to `wont_fix` (closed, not actioned) without polluting the out-of-scope knowledge base.
+3. Present category and state recommendations with reasoning.
+4. Verify the claim: for bugs, attempt reproduction (run repo tests, trace logic); for feature requests or PRs, verify the underlying claims against existing codebase behavior, tests, and diffs.
+5. If underspecified, do a focused domain-model pass: map entities and constraints before re-categorizing.
+6. Apply outcome per state.
 
 ## `awaiting_info` comment template
 
-The Triage Notes template (established-so-far / need-from-reporter) lives in `references/awaiting-info-template.md` — read it when transitioning an issue to `awaiting_info`; other transitions (`ready_for_agent`, `ready_for_human`, `wont_fix`) don't need it.
+The Triage Notes template (established-so-far / need-from-reporter) lives in `references/awaiting-info-template.md` — read it when transitioning an issue or pull request to `awaiting_info`; other transitions (`ready_for_agent`, `ready_for_human`, `wont_fix`) don't need it.
 
 ## Parallel examples
 

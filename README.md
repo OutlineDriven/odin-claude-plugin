@@ -73,6 +73,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 
 - `askme` - Verbalized Sampling protocol for deep intent exploration before planning
 - `batch-ask-me` - Walk a dependency-aware design tree in batched question rounds until shared understanding
+- `wayfinder` - Chart a multi-session effort into a destination, mapped fog, and decision tickets on the frontier
 - `mutual-sync` - Three-way grounding: verify user, agent, and codebase share one picture of current state before proceeding
 - `loop-me` - Design recurring workflows through a stateful `askme` session and cwd specs
 - `to-questionnaire` - Turn a knowledge gap into an async questionnaire for the person who can answer it
@@ -83,7 +84,6 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `init` - Analyze a codebase and create or improve AGENTS.md
 - `brainstorm` - Explore vague or ambitious ideas into a right-sized requirements-only plan
 - `explore` - Read-only codebase exploration to map structure, symbols, and dependencies
-- `zoom-out` - Step up one layer of abstraction to map surrounding modules and invariants
 - `strategy` - Sharp interview to write or maintain STRATEGY.md as the product anchor
 - `ideate` - Generate grounded, divergent ideas from the codebase into docs/ideation
 - `design` - Set visual and interaction direction for UI surfaces before writing code
@@ -96,13 +96,12 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `writing-fragments` - Mine heterogeneous raw material into an append-only pile before shaping
 - `writing-shape` - Shape a raw pile into an article paragraph by paragraph with argued formats
 - `writing-beats` - Build a grounded article journey one candidate beat at a time
-- `writing-skills` - Reference for writing and editing skills so they run predictably: invocation, hierarchy, pruning, failure modes
+- `writing-skills` - Reference for writing agent-consumed documents so they run predictably: context load, hierarchy, leading words, and pruning
 
-### Working Posture (5 skills)
+### Working Posture (4 skills)
 
 - `duet` - Two-party posture: user as director, agent as executor. Surfaces every fork via AskUserQuestion with structural framing and a recommended default. Eliminates the review-bottleneck and prevents codebase-understanding debt. Pair with the `Duet` output style.
 - `axiom-mode` - Compact formal-logic English register using predicate claims and ASCII keywords
-- `caveman` - Verbosity-reduction response register for brevity under context pressure
 - `ai-collab-protocols` - Surface in-task AI collaboration protocols one tactic at a time
 - `taste` - Apply distinctive judgment to prose, code, design, or decisions instead of AI mediocrity
 
@@ -133,7 +132,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `setup-ts-deep-modules` - Enforce TypeScript package boundaries through entry points with dependency-cruiser
 - `strict-validation-setup` - Bootstrap strict-mode tooling and per-task GOALS.md scaffolding for self-verifying agent loops
 
-### Execution (15 skills)
+### Execution (16 skills)
 
 - `parallel-launch` - Decompose a task into independent concerns and execute via agents
 - `tests-adversarial` - Adversarial tests that stress failure paths
@@ -141,6 +140,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `subagent-driven` - Delegate a multi-task plan to fresh subagents, auditing results before proceeding
 - `workflows-driven` - Deterministic phased fan-out with per-task contracts and adversarial verification; materializes on Claude Code Dynamic Workflows or omp eval orchestration
 - `fix` - Iterative repair loop that fixes one thing at a time and keeps changes on green
+- `resolving-merge-conflicts` - Resolve an in-progress merge or rebase conflict from both sides' primary sources, then finish the integration
 - `autopilot` - Hands-off plan-to-ship pipeline chaining existing skills
 - `llm-self-loop` - Restructure human-gated workflows into autonomous LLM loops with file-based outputs
 - `incremental` - Deliver changes in small, testable slices

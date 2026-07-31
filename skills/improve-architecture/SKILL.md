@@ -28,15 +28,17 @@ Use these terms exactly. Do not substitute "component," "service," "API," or "bo
 
 ### 1. Explore
 
-First tool call MUST be Explore-agent dispatch, not direct reads. The agent's brief:
+First tool call MUST be Explore-agent dispatch, not direct reads.
+
+Put scope selection in the Explore-agent brief so dispatch remains the first tool call. Scope exploration to where change is actively landing instead of scanning the repo evenly: a deepening opportunity in code nobody touches is a refactor that never gets cashed in.
+
+- If the user names a direction, tell the agent to take it.
+- Otherwise, tell the agent to run `git --no-pager log --oneline -20` via `bash` before its direct reads and bias exploration toward actively developed paths.
+
+The agent's brief:
 
 - Read `CONTEXT.md` (or `CONTEXT-MAP.md` + per-context `CONTEXT.md`) and any `docs/adr/`. If absent, proceed silently.
-- Walk the codebase organically; classify friction:
-  - Concept understanding requires bouncing across many small modules → shallow cluster.
-  - Interface complexity matches implementation complexity → shallow module.
-  - Pure functions extracted only for testability while real bugs hide in callers → no locality.
-  - Tightly coupled modules leaking across their seams.
-- For each suspect, run the deletion test before reporting.
+- Walk the scoped paths organically; classify friction:
 
 ### 2. Present candidates
 

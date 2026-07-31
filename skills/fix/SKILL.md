@@ -16,7 +16,7 @@ Failure-driven iterative repair. Detect → Prioritize → Fix ONE thing → Com
 **NOT apply:**
 - CI/PR workflows with no local context → use `gh-fix-ci`
 - PR review comments → use `resolve-pr-feedback`
-- Merge conflicts
+- Merge conflicts → use `resolving-merge-conflicts`
 - Analysis-only tasks → use `resolve` or `debug`
 - Planned change with no failure driver — nothing is broken; this skill needs a failure to repair
 
