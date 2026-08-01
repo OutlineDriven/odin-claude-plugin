@@ -1,4 +1,11 @@
-# Language
+---
+name: codebase-design
+description: 'Shared vocabulary for designing deep modules: module, interface, implementation, depth, seam, adapter, leverage, locality. Use when designing or improving a module interface, deciding where a seam goes, making code more testable, or when another skill needs the deep-module terms.'
+---
+
+# Codebase Design
+
+Design **deep modules**: a lot of behaviour behind a small interface, placed at a clean seam, testable through that interface. Use this language and these principles wherever code is being designed or restructured. The aim is leverage for callers, locality for maintainers, and testability for everyone.
 
 Shared vocabulary for every suggestion this skill makes. Use these terms exactly — do not substitute "component," "service," "API," or "boundary." Consistent language is the whole point.
 
@@ -31,12 +38,86 @@ What callers get from depth. More capability per unit of interface they have to 
 **Locality**
 What maintainers get from depth. Change, bugs, knowledge, and verification concentrate at one place rather than spreading across callers. Fix once, fixed everywhere.
 
+## Deep vs shallow
+
+**Deep module** = a small interface with lots of implementation behind it.
+
+**Shallow module** = a large interface with little implementation. Avoid.
+
+The deep form hides complex behaviour behind a narrow surface. The shallow form exposes nearly as much interface as implementation, so callers carry the complexity. Prefer depth when it gives callers more leverage and maintainers more locality.
+
+When designing an interface, ask:
+
+- Can the number of methods be reduced?
+- Can the parameters be simplified?
+- Can more complexity be hidden inside?
+
+Depth matters more than line count: a single method that handles a hard problem well is deeper than ten methods that each forward to another layer.
+
 ## Principles
 
 - **Depth is a property of the interface, not the implementation.** A deep module can be internally composed of small, mockable, swappable parts — they just are not part of the interface. A module can have **internal seams** (private to its implementation, used by its own tests) as well as the **external seam** at its interface.
 - **The deletion test.** Imagine deleting the module. If complexity vanishes, the module was not hiding anything (it was a pass-through). If complexity reappears across N callers, the module was earning its keep.
 - **The interface is the test surface.** Callers and tests cross the same seam. If a contributor wants to test *past* the interface, the module is probably the wrong shape.
 - **One adapter means a hypothetical seam. Two adapters means a real one.** Do not introduce a seam unless something actually varies across it.
+
+## Designing for testability
+
+Good interfaces make testing natural:
+
+1. **Accept dependencies instead of constructing them.**
+
+   **Python**
+
+   ```python
+   # Testable — gateway is injected
+   def process_order(order: Order, gateway: PaymentGateway) -> Receipt: ...
+
+   # Hard to test — gateway is constructed internally
+   def process_order(order: Order) -> Receipt:
+       gateway = StripeGateway()
+       ...
+   ```
+
+   **Rust**
+
+   ```rust
+   // Testable
+   fn process_order(order: &Order, gateway: &dyn PaymentGateway) -> Receipt { ... }
+
+   // Hard to test
+   fn process_order(order: &Order) -> Receipt {
+       let gateway = StripeGateway::new();
+       ...
+   }
+   ```
+
+2. **Return results instead of mutating.**
+
+   **Python**
+
+   ```python
+   # Testable — pure return value
+   def calculate_discount(cart: Cart) -> Discount: ...
+
+   # Hard to test — hidden side effect
+   def apply_discount(cart: Cart) -> None:
+       cart.total -= discount
+   ```
+
+   **Rust**
+
+   ```rust
+   // Testable
+   fn calculate_discount(cart: &Cart) -> Discount { ... }
+
+   // Hard to test
+   fn apply_discount(cart: &mut Cart) {
+       cart.total -= discount;
+   }
+   ```
+
+3. **Keep the surface small.** Fewer methods → fewer tests needed. Fewer parameters → simpler test setup. A narrow surface is easier to keep stable across refactors.
 
 ## Relationships
 

@@ -121,7 +121,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `doubt-driven` - Subject non-trivial decisions to adversarial review before they stand
 - `minimalism-driven` - Minimalism as enforced doctrine: null-solution start, need-gated additions, delete > edit > add as authoring-time gates
 - `verification-before-completion` - Require fresh, fully-read run evidence before any completion claim
-- `api-design` - Guide stable API and interface design across module boundaries
+- `codebase-design` - Shared vocabulary for deep modules: module, interface, depth, seam, adapter, leverage, locality
 - `security-hardening` - Harden code against vulnerabilities as you build it
 - `observability` - Instrument code with logging, metrics, traces, and alerts
 

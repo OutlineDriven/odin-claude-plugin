@@ -4,11 +4,11 @@ description: Surface deepening refactors that turn shallow modules into deep one
 disable-model-invocation: true
 ---
 
-Iteration loop: explore for friction, present deepening candidates, grill the chosen one, update domain artifacts inline. Vocabulary is load-bearing. See `references/LANGUAGE.md`.
+Iteration loop: explore for friction, present deepening candidates, grill the chosen one, update domain artifacts inline. Vocabulary is load-bearing. See `codebase-design`.
 
 ## Vocabulary [LOAD-BEARING]
 
-Use these terms exactly. Do not substitute "component," "service," "API," or "boundary." Full definitions in `references/LANGUAGE.md`.
+Use these terms exactly. Do not substitute "component," "service," "API," or "boundary." Full definitions in `codebase-design`.
 
 - **Module**: anything with an interface and an implementation (function, class, package, slice). Scale-agnostic.
 - **Interface**: every fact a caller must know: types, invariants, ordering, error modes, config, performance shape. Not just signature.
@@ -77,7 +77,7 @@ Replace, don't layer: delete shallow-module tests once interface tests exist.
 
 ## Reference docs
 
-- `references/LANGUAGE.md`: full vocabulary, principles, rejected framings.
+- `codebase-design`: full vocabulary, principles, rejected framings.
 - `references/DEEPENING.md`: dependency taxonomy, seam discipline, replace-don't-layer testing.
 - `references/INTERFACE-DESIGN.md`: parallel sub-agent "Design It Twice" workflow when the chosen candidate's interface needs alternatives.
 
