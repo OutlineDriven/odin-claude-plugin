@@ -54,6 +54,7 @@ ODIN_ORIGINAL = frozenset(
         "dedup-skills",
         "deps-upgrade",
         "design",
+        "do-it-now",
         "duet",
         "exhaustive",
         "explore",
