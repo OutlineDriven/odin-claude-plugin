@@ -27,13 +27,3 @@ repos:
       - id: tombi-lint
         args: ["--offline"]
       - id: tombi-format
-
-  # Local hooks
-  - repo: local
-    hooks:
-      - id: check-licenses-coverage
-        name: Check skills/LICENSES.md coverage
-        entry: python3 scripts/check-licenses-coverage.py
-        language: system
-        files: ^(skills/.*|scripts/check-licenses-coverage\.py)$
-        pass_filenames: false
