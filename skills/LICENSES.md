@@ -48,6 +48,7 @@ Each row covers the SKILL.md (and any skill-internal references the upstream ski
 | `wayfinder/SKILL.md` | https://github.com/mattpocock/skills/tree/release/v1.2/skills/engineering/wayfinder | MIT | © 2026 Matt Pocock | ODIN voice; tracker resolution adapted to GitHub child issues or local `.outline/wayfinder/`; grilling and research routes rewired to `batch-ask-me` and `research`. |
 | `debug/SKILL.md` (diagnosing loop addition only) | https://github.com/mattpocock/skills/tree/release/v1.2/skills/engineering/diagnosing-bugs | MIT | © 2026 Matt Pocock | Feedback-loop-first diagnosis, minimisation, ranked falsifiable hypotheses, tagged-log cleanup, and correct-seam gating grafted onto the ODIN debugger reference. |
 | `research/SKILL.md` (background artifact addition only) | https://github.com/mattpocock/skills/tree/release/v1.2/skills/engineering/research | MIT | © 2026 Matt Pocock | Background subagent dispatch and a persistent cited Markdown artifact grafted onto ODIN's five-tier source ladder. |
+| `domain-modeling/SKILL.md` | https://github.com/mattpocock/skills/tree/release/v1.2/skills/engineering/domain-modeling | MIT | © 2026 Matt Pocock | ODIN voice; ADR format removed in favor of the single `docs-and-adrs` contract; name-collision fence against `contexts` added; supersedes the struck `domain-model` and `ubiquitous-language` rows. |
 
 ## Reference documents
 
@@ -75,6 +76,7 @@ Reference documents cross-linked across multiple skills per the canonical-homes 
 | `improve-architecture/references/deep-modules.md` | https://github.com/mattpocock/skills/blob/main/tdd/deep-modules.md | MIT | © 2026 Matt Pocock | Moved from `test-driven` to the architecture reference home; npm examples remain language-generalized. |
 | `improve-architecture/references/tdd-interface-design.md` | https://github.com/mattpocock/skills/blob/main/tdd/interface-design.md | MIT | © 2026 Matt Pocock | Moved from `test-driven` to the architecture reference home; kept distinct from the Design It Twice reference. |
 | `docs-and-adrs/references/adrs.md` (three-criteria gate addition only) | https://github.com/mattpocock/skills/blob/release/v1.2/skills/engineering/domain-modeling/ADR-FORMAT.md | MIT | © 2026 Matt Pocock | The three-criteria gate and single-paragraph floor were grafted onto the existing Addy Osmani-derived reference; its `docs/decisions/` path and full template were retained. |
+| `domain-modeling/references/CONTEXT-FORMAT.md` | https://github.com/mattpocock/skills/tree/release/v1.2/skills/engineering/domain-modeling | MIT | © 2026 Matt Pocock | ODIN voice; glossary and multi-context map formats retained; ADR material omitted in favor of the single `docs-and-adrs` contract; supersedes the struck `domain-model` reference row. |
 
 ## agentsys ports
 
