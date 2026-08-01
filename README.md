@@ -65,11 +65,11 @@ Before any non-trivial implementation:
 4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
 5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
 
-## Skills (112 total)
+## Skills (113 total)
 
 Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
 
-### Planning & Exploration (19 skills)
+### Planning & Exploration (20 skills)
 
 - `askme` - Verbalized Sampling protocol for deep intent exploration before planning
 - `batch-ask-me` - Walk a dependency-aware design tree in batched question rounds until shared understanding
@@ -80,6 +80,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `clarify` - Scan a request, document, or conversation for ambiguities and unstated assumptions; certainty-tiered findings with defaults
 - `exhaustive` - Prove a decision, state, or requirement space is fully covered by enumerating every cell as covered, gap, or deferred
 - `shape` - Shape Up shaping: appetite, breadboard, rabbit holes, no-gos for a bet on work
+- `to-tickets` - Break a plan into tracer-bullet tickets with blocking edges, on GitHub or in `.outline/`
 - `contexts` - Coordinate context sweep before coding
 - `domain-modeling` - Build and sharpen a project's ubiquitous language, glossary, and domain decisions as you design
 - `init` - Analyze a codebase and create or improve AGENTS.md
