@@ -1,6 +1,6 @@
 ---
 name: resolve
-description: Use when addressing review feedback or analyzing whether a comment is valid.
+description: Use when addressing review feedback or analyzing whether a comment is valid. For review threads on a GitHub PR specifically, use resolve-pr-feedback.
 ---
 
 # Resolve Command

@@ -1,6 +1,6 @@
 ---
 name: resolve-pr-feedback
-description: Use on a GitHub PR when addressing review comments or resolving review threads.
+description: Use on a GitHub PR when addressing review comments or resolving review threads. For review feedback outside a GitHub PR, use resolve.
 argument-hint: "[PR number, comment URL, or blank for current branch's PR]"
 allowed-tools: Bash(gh *), Bash(git *), Read
 ---

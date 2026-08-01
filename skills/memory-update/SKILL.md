@@ -1,6 +1,6 @@
 ---
 name: memory-update
-description: Use when the user says save this to memory, or scan this session for memories.
+description: Use when the user says save this to memory, or scan this session for memories. For auditing existing memories, use memory-clean.
 ---
 
 Scan session history, surface save-worthy moments, propose → confirm → write. Never fabricate. Every proposal must cite a transcript turn.

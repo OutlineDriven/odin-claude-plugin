@@ -1,6 +1,6 @@
 ---
 name: compound
-description: Use when the user says "compound this", after a verified non-trivial outcome that should live in docs/solutions/ or CONCEPTS.md, or when a durable project term needs defining.
+description: Use when a verified non-trivial outcome should be written up as a docs/solutions/ entry or a CONCEPTS.md term, and the user asks for it explicitly. Fires only on request; for automatic capture after a verified fix, use autolearn.
 metadata:
   short-description: Write durable solution docs and concept definitions
 ---
@@ -13,20 +13,6 @@ metadata:
 - `CONCEPTS.md` at the repo root: one definition per project-specific term.
 
 It does not write memory files. User/preference facts are handed to `memory-update`.
-
-## Auto-invoke
-
-Fire automatically after a verified non-trivial outcome:
-
-- "that worked"
-- "it's fixed"
-- "ship it"
-- "merged"
-- "resolved"
-- "verified"
-- "done"
-
-Auto-fire is permission to evaluate, not permission to fabricate. The reject-by-default gate below still decides whether a doc is warranted.
 
 ## Reject-by-default gate
 

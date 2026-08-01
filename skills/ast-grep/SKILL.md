@@ -3,7 +3,7 @@ name: ast-grep
 description: Run code analysis and refactoring with ast-grep. Use when doing AST-based modifications, structural search, linting across code shape, or replacing regex-fragile transformations.
 ---
 
-# ast-grep (sg)
+# ast-grep
 
 ast-grep is a fast and polyglot tool for code searching, linting, and rewriting based on Abstract Syntax Trees (AST). It excels at structural search and replace where regex fails.
 

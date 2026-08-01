@@ -1,6 +1,6 @@
 ---
 name: memory-clean
-description: Use when the user asks to audit memory or find stale or duplicate memories.
+description: Use when the user asks to audit memory or find stale or duplicate memories. For writing new memories, use memory-update.
 ---
 
 Audit memory for structural rot and staleness, report with evidence, fix only on user confirmation.

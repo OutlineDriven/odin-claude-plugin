@@ -1,6 +1,6 @@
 ---
 name: autolearn
-description: Compound a solved problem into a durable in-repo learning doc. Use when a verified non-trivial fix lands, the user says "compound this", "document this fix", or "remember this".
+description: Compound a solved problem into a durable in-repo learning doc. Use when a verified non-trivial fix lands, the user says "compound this", "document this fix", or "remember this". This is the automatic-capture entry point; for an explicitly requested one-off write-up, use compound.
 metadata:
   short-description: Compound a solved problem into docs/solutions/ + refresh learnings
 ---
