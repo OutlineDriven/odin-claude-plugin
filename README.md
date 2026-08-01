@@ -65,7 +65,7 @@ Before any non-trivial implementation:
 4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
 5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
 
-## Skills (115 total)
+## Skills (116 total)
 
 Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
 
@@ -125,13 +125,14 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `security-hardening` - Harden code against vulnerabilities as you build it
 - `observability` - Instrument code with logging, metrics, traces, and alerts
 
-### Tooling (8 skills)
+### Tooling (9 skills)
 
 - `ast-grep` - Structural code search, analysis, and refactoring
 - `browser-testing` - Test and debug browser code with Chrome DevTools MCP
 - `git-branchless` - Idiomatic git-branchless workflows for stack edits, rebases, and stacked-PR publishing
 - `setup-gitignore` - Compose or revise .gitignore from templates, editor patterns, and confirmed untracked noise
 - `setup-pre-commit` - Install ecosystem-appropriate pre-commit hooks for formatting, linting, and test gates
+- `setup-git-guardrails` - Install a PreToolUse hook that blocks irreversible git operations before they run
 - `setup-ts-deep-modules` - Enforce TypeScript package boundaries through entry points with dependency-cruiser
 - `strict-validation-setup` - Bootstrap strict-mode tooling and per-task GOALS.md scaffolding for self-verifying agent loops
 - `wizard` - Generate an interactive bash wizard that walks a human through a manual setup or migration
