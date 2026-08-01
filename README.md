@@ -65,7 +65,7 @@ Before any non-trivial implementation:
 4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
 5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
 
-## Skills (118 total)
+## Skills (119 total)
 
 Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
 
@@ -109,7 +109,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `taste` - Apply distinctive judgment to prose, code, design, or decisions instead of AI mediocrity
 - `do-it-now` - Single-pass posture: ship the whole ask now, with no phases, stubs, or follow-up remainders
 
-### Engineering Methodologies (15 skills)
+### Engineering Methodologies (16 skills)
 
 - `test-driven` - TDD with 10-language support
 - `type-driven` - Type-driven development (Idris 2, with 10-language support)
@@ -123,6 +123,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `doubt-driven` - Subject non-trivial decisions to adversarial review before they stand
 - `minimalism-driven` - Minimalism as enforced doctrine: null-solution start, need-gated additions, delete > edit > add as authoring-time gates
 - `verification-before-completion` - Require fresh, fully-read run evidence before any completion claim
+- `lighter-checks` - Size verification to the change: one proving action, scoped, no repeat runs, gate intact
 - `codebase-design` - Shared vocabulary for deep modules: module, interface, depth, seam, adapter, leverage, locality
 - `security-hardening` - Harden code against vulnerabilities as you build it
 - `observability` - Instrument code with logging, metrics, traces, and alerts

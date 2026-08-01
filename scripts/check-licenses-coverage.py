@@ -65,6 +65,7 @@ ODIN_ORIGINAL = frozenset(
         "ground-latest",
         "handoff",
         "init",
+        "lighter-checks",
         "llm-self-loop",
         "memory-clean",
         "memory-sanitize",
