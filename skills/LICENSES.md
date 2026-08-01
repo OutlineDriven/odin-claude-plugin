@@ -74,6 +74,7 @@ Reference documents cross-linked across multiple skills per the canonical-homes 
 | `review/references/refactoring.md` | https://github.com/mattpocock/skills/blob/main/tdd/refactoring.md | MIT | © 2026 Matt Pocock | Moved from `test-driven` to the review stage when refactoring left the red → green loop; deep-module link repointed. |
 | `improve-architecture/references/deep-modules.md` | https://github.com/mattpocock/skills/blob/main/tdd/deep-modules.md | MIT | © 2026 Matt Pocock | Moved from `test-driven` to the architecture reference home; npm examples remain language-generalized. |
 | `improve-architecture/references/tdd-interface-design.md` | https://github.com/mattpocock/skills/blob/main/tdd/interface-design.md | MIT | © 2026 Matt Pocock | Moved from `test-driven` to the architecture reference home; kept distinct from the Design It Twice reference. |
+| `docs-and-adrs/references/adrs.md` (three-criteria gate addition only) | https://github.com/mattpocock/skills/blob/release/v1.2/skills/engineering/domain-modeling/ADR-FORMAT.md | MIT | © 2026 Matt Pocock | The three-criteria gate and single-paragraph floor were grafted onto the existing Addy Osmani-derived reference; its `docs/decisions/` path and full template were retained. |
 
 ## agentsys ports
 

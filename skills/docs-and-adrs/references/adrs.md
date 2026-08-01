@@ -4,6 +4,16 @@ ADRs capture the reasoning behind significant technical decisions. They're the h
 
 ## When to Write an ADR
 
+Write an ADR only when all three conditions hold:
+
+1. **Hard to reverse.** The cost of changing your mind later is meaningful.
+2. **Surprising without context.** A future reader will wonder why it was done this way.
+3. **The result of a real trade-off.** Genuine alternatives existed, and one was picked for specific reasons.
+
+If any condition is missing, skip the ADR.
+
+Decisions that often pass this gate include:
+
 - Choosing a framework, library, or major dependency
 - Designing a data model or database schema
 - Selecting an authentication strategy
@@ -11,9 +21,23 @@ ADRs capture the reasoning behind significant technical decisions. They're the h
 - Choosing between build tools, hosting platforms, or infrastructure
 - Any decision that would be expensive to reverse
 
-## ADR Template
+Qualifying categories include:
+
+- Architectural shape
+- Integration patterns between contexts
+- Technology choices that carry lock-in
+- Boundary and scope decisions
+- Deliberate deviations from the obvious path
+- Constraints not visible in the code
+- Rejected alternatives whose rejection is not obvious
+
+An ADR may be a single paragraph stating the context, decision, and reason. The value is recording that a decision was made and why, not filling out sections.
+
+## ADR template, full form
 
 Store ADRs in `docs/decisions/` with sequential numbering:
+
+Status, Date, Alternatives Considered, and Consequences are optional. Include them only when they add value.
 
 ```markdown
 # ADR-001: Use PostgreSQL for primary database
