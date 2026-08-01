@@ -62,6 +62,7 @@ ODIN_ORIGINAL = frozenset(
         "generate-my-taste",
         "gh-fix-ci",
         "git-branchless",
+        "ground-latest",
         "handoff",
         "init",
         "llm-self-loop",
