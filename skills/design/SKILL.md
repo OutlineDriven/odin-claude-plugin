@@ -7,23 +7,7 @@ description: Use when starting UI work, defining palettes or design tokens, or w
 
 Direction precedes tokens; tokens precede code. The picked direction is the contract. Palette, type, spacing, and motion all derive from it, not the other way around. Restraint is the default; reach for decoration only when a named surface goal demands it. Posture rests on `references/soul.md` (design philosophy). Load it when the user asks "why this look" or when the model is tempted to add decoration to compensate for a thin idea.
 
-**Balance, not maximalism.** ODIN's "don't hold back" (borrowed from the `<design>` block above) means conviction, not volume. The two failure modes catalogued in the anti-slop charter below are reciprocals. AI-generic timidity (Side A) and decorative overkill (Side B) both come from the same fear of commitment. Balance simplicity and verbosity per surface. Restraint is the default; the one intentional moment is the lift. Neither timid nor loud.
-
-## ODIN `<design>` block, LOAD-BEARING
-
-Quoted verbatim from `output-styles/odin.md` lines 254-262.
-
-```
-<design>
-Modern, elegant UI/UX. Don't hold back.
-
-**Tokens:** MUST use design system tokens, not hardcoded values.
-**Density:** 2-3x denser. Spacing: 4/8/12/16/24/32/48/64px. Medium-high density default. Ask preference when ambiguous.
-**Paradigms:** Post-minimalism [default] | Neo-brutalism | Glassmorphism | Material 3 | Fluent. Avoid naive minimalism.
-**Forbidden:** Purple-blue/purple-pink | `transition: all` | `font-family: system-ui` | Pure purple/red/blue/green | Self-generated palettes | Gradients (unless explicitly requested, NEVER on buttons/titles)
-**Gate:** Design excellence >= 95%
-</design>
-```
+**Balance, not overly maximalism, not overly minimalism.** 
 
 ## Register × paradigm matrix, pointer
 
@@ -120,20 +104,3 @@ These references are runtime-agnostic. Load them when the task fits the trigger,
 - **At most two type families.** Display plus text. A third family is a smell unless the direction explicitly demands it (e.g., a mono accent for code).
 - **Motion is budgeted in milliseconds.** One easing curve per surface. `transition: all` is forbidden. Name the properties (`transition: opacity 120ms ease, transform 120ms ease`) so layout and paint do not animate together.
 - **Semantic structure precedes class names.** `<nav>` / `<main>` / `<article>` first; utility classes second. Class soup over weak structure is slop.
-- **Contrast: WCAG 2.1 AA is the legal floor.** APCA is a *design-input* tool only. It was REMOVED from WCAG 3 in July 2023 and never reinstated. Do not claim "WCAG 3 compliant via APCA"; that compliance does not exist. Verify AA with axe-core or the browser DevTools accessibility panel.
-
-## Verification gate
-
-1. ODIN design gate ≥95% per the `<design>` block above (tokens / density / paradigm / forbidden list).
-2. Anti-slop checklist (§4 Side A AND Side B) returns zero violations.
-3. Direction artifact recorded in commit body or PR description: name plus taste anchors plus one-line rationale.
-4. Tokens referenced not hardcoded. `git grep` for raw hex, raw px values in component code; should be empty.
-5. Cross-surface invariants honored. Spacing subset committed, ≤2 type families, motion named-properties only.
-6. Contrast verified via axe-core CLI or DevTools accessibility panel; WCAG 2.1 AA pass on every text surface.
-7. Audit tools: data-dense surfaces pass the `references/cognitive-load.md` checklist (≤1 failure); shipped surfaces have been read against ≥2 of the `references/personas.md` archetypes.
-
-## Anti-patterns
-
-- "Be creative" / temperature-up: generates more slop, not better direction. VS structure or nothing.
-- Single-shot palette generation: RLHF over-aligns to purple; the model's first guess is the slop.
-- Ranking directions by implementation effort: short-term cost is the wrong axis; taste fit and depth are the right ones.
