@@ -53,6 +53,7 @@ Each row covers the SKILL.md (and any skill-internal references the upstream ski
 | `prototype-logic/SKILL.md` | https://github.com/mattpocock/skills/tree/release/v1.2/skills/engineering/prototype | MIT | © 2026 Matt Pocock | ODIN voice; the logic branch of upstream's two-branch `prototype` was ported under a branch-specific name; the UI branch and `UI.md` were not ported; the six shared parent rules were folded in so the skill stands alone. |
 | `wizard/SKILL.md` | https://github.com/mattpocock/skills/tree/release/v1.2/skills/in-progress/wizard | MIT | © 2026 Matt Pocock | ODIN voice; the never-run-it headless fence was added for ODIN's stdin prohibition; the procedure-scoping and stage-authoring contract was retained. |
 | `spec-driven/SKILL.md` (seam-sketch addition only) | https://github.com/mattpocock/skills/tree/release/v1.2/skills/engineering/to-spec | MIT | © 2026 Matt Pocock | The highest-seam and fewest-seams rule was grafted onto the existing Addy Osmani-derived spec workflow; the rest of `to-spec` was not ported because `spec-driven` already owns spec authoring; supersedes the struck `to-prd` row. |
+| `batch-ask-me/SKILL.md` (frontier-overflow addition only) | https://github.com/mattpocock/skills/tree/release/v1.2/skills/productivity/grilling | MIT | © 2026 Matt Pocock | The Markdown overflow format was grafted onto the existing `batch-ask-me` port so a wide frontier is asked in one round instead of being truncated to the question-tool cap. |
 
 ## Reference documents
 

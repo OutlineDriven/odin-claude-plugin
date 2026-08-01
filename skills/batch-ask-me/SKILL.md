@@ -26,6 +26,20 @@ Do not resample VS on subsequent rounds unless user answers materially change th
 
 Follow the `AskUserQuestion` contract and override-checklist antipattern from `skills/askme/SKILL.md`: one single-select question per axis, mark the recommended option first with `(Recommended)`, at most four questions per fire, and never use `multiSelect` for override semantics.
 
+When the frontier contains more than four questions, keep the whole frontier in one round. Route the four highest-leverage questions through the question tool. Put every remaining question in the same message as numbered Markdown:
+
+```markdown
+**Q<n>: <question title>**
+
+<Question body and choices.>
+
+-> Recommended: <answer>
+```
+
+Answers from the tool and the Markdown questions settle together in one round-trip. Recompute the frontier once after that full answer set, rather than advancing four questions at a time.
+
+Choose the four tool questions by how many downstream decisions each answer unblocks. Break ties toward the question whose default is least safe to assume.
+
 ## Distinction from `askme`
 
 Both start with Verbalized Sampling. `askme` uses the survivor set for one bounded clarifying batch; `batch-ask-me` uses it to seed a design tree, then walks every frontier until the user confirms shared understanding.
