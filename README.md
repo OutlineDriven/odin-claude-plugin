@@ -65,7 +65,7 @@ Before any non-trivial implementation:
 4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
 5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
 
-## Skills (114 total)
+## Skills (115 total)
 
 Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
 
@@ -125,7 +125,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `security-hardening` - Harden code against vulnerabilities as you build it
 - `observability` - Instrument code with logging, metrics, traces, and alerts
 
-### Tooling (7 skills)
+### Tooling (8 skills)
 
 - `ast-grep` - Structural code search, analysis, and refactoring
 - `browser-testing` - Test and debug browser code with Chrome DevTools MCP
@@ -134,6 +134,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `setup-pre-commit` - Install ecosystem-appropriate pre-commit hooks for formatting, linting, and test gates
 - `setup-ts-deep-modules` - Enforce TypeScript package boundaries through entry points with dependency-cruiser
 - `strict-validation-setup` - Bootstrap strict-mode tooling and per-task GOALS.md scaffolding for self-verifying agent loops
+- `wizard` - Generate an interactive bash wizard that walks a human through a manual setup or migration
 
 ### Execution (16 skills)
 
