@@ -7,7 +7,7 @@ description: Use when starting UI work, defining palettes or design tokens, or w
 
 Direction precedes tokens; tokens precede code. The picked direction is the contract. Palette, type, spacing, and motion all derive from it, not the other way around. Restraint is the default; reach for decoration only when a named surface goal demands it. Posture rests on `references/soul.md` (design philosophy). Load it when the user asks "why this look" or when the model is tempted to add decoration to compensate for a thin idea.
 
-**Balance, not overly maximalism, not overly minimalism.** 
+**Balance, not overly maximalism, not overly minimalism.**
 
 ## Register × paradigm matrix, pointer
 
