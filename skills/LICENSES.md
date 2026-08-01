@@ -50,6 +50,7 @@ Each row covers the SKILL.md (and any skill-internal references the upstream ski
 | `research/SKILL.md` (background artifact addition only) | https://github.com/mattpocock/skills/tree/release/v1.2/skills/engineering/research | MIT | © 2026 Matt Pocock | Background subagent dispatch and a persistent cited Markdown artifact grafted onto ODIN's five-tier source ladder. |
 | `domain-modeling/SKILL.md` | https://github.com/mattpocock/skills/tree/release/v1.2/skills/engineering/domain-modeling | MIT | © 2026 Matt Pocock | ODIN voice; ADR format removed in favor of the single `docs-and-adrs` contract; name-collision fence against `contexts` added; supersedes the struck `domain-model` and `ubiquitous-language` rows. |
 | `to-tickets/SKILL.md` | https://github.com/mattpocock/skills/tree/release/v1.2/skills/engineering/to-tickets | MIT | © 2026 Matt Pocock | ODIN voice; tracker resolution adapted to the `wayfinder` GitHub-or-`.outline/` rule; the `setup-matt-pocock-skills` dependency removed; label application made conditional; supersedes the struck `to-issues` row. |
+| `prototype-logic/SKILL.md` | https://github.com/mattpocock/skills/tree/release/v1.2/skills/engineering/prototype | MIT | © 2026 Matt Pocock | ODIN voice; the logic branch of upstream's two-branch `prototype` was ported under a branch-specific name; the UI branch and `UI.md` were not ported; the six shared parent rules were folded in so the skill stands alone. |
 
 ## Reference documents
 

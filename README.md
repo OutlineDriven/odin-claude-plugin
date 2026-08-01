@@ -65,11 +65,11 @@ Before any non-trivial implementation:
 4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
 5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
 
-## Skills (113 total)
+## Skills (114 total)
 
 Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
 
-### Planning & Exploration (20 skills)
+### Planning & Exploration (21 skills)
 
 - `askme` - Verbalized Sampling protocol for deep intent exploration before planning
 - `batch-ask-me` - Walk a dependency-aware design tree in batched question rounds until shared understanding
@@ -89,6 +89,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `strategy` - Sharp interview to write or maintain STRATEGY.md as the product anchor
 - `ideate` - Generate grounded, divergent ideas from the codebase into docs/ideation
 - `design` - Set visual and interaction direction for UI surfaces before writing code
+- `prototype-logic` - Throwaway single-file HTML demo that answers one question about a state model
 - `pov` - Decisive, project-grounded verdict on adopting or switching technology
 - `research` - Gather external knowledge from authoritative sources with verified citations
 
