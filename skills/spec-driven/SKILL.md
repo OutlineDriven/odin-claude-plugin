@@ -62,7 +62,7 @@ Do not silently fill in ambiguous requirements. The spec exists to surface misun
 
 4. **Code style**: one real snippet of the project's style beats paragraphs describing it. Include naming conventions, formatting rules, and an example of accepted output in the project's language.
 
-5. **Testing strategy**: which framework, where tests live, coverage expectations, and which test level covers which concern.
+5. **Testing strategy**: sketch the seams where the feature will be tested before listing frameworks and locations. Prefer an existing seam to a new one and use the highest seam available. Propose any new seam at the highest point where it can sit. Fewer seams across the codebase are better; the ideal count is one. Confirm the seams with the user before writing the rest of the spec, because a seam disagreement invalidates the testing strategy beneath it. Then record the framework, test locations, coverage expectations, and which test level covers each concern.
 
 6. **Boundaries**: three tiers:
    - **Always:** run tests before commits, follow naming conventions, validate inputs
@@ -90,7 +90,7 @@ Do not silently fill in ambiguous requirements. The spec exists to surface misun
 [Example snippet + key conventions]
 
 ## Testing Strategy
-[Framework, test locations, coverage requirements, test levels]
+[Chosen test seams and why they are the highest available; framework, test locations, coverage requirements, and test levels]
 
 ## Boundaries
 - Always: [...]
