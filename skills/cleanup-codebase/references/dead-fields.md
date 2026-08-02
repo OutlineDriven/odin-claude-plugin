@@ -32,5 +32,5 @@ For any field `Foo.x`:
 ## Caveats
 
 - **Frameworks that read fields reflectively** — `serde`, Jackson, Gson, pydantic, attrs, Spring, Dagger, and Hilt (among others) read fields via derive macros, decorators, annotations, or DI wiring (`#[derive(Serialize)]`, `@JsonProperty`, `@Autowired`, `@Inject`) with no direct read site anywhere in source. This is a standing limit, not a checklist to exhaust: reflective, DI, and serialization reads are not resolvable by static analysis. Treat a field under such a marker as unprovable-dead by grep alone — require an explicit allowlist or scope exclusion before deleting it.
-- **Tests** — a field read only by tests may indicate the field exists *for* the tests; `tests-purge-unneeded` handles that direction.
-- **External consumers** — if the type crosses a process boundary (DTO, event payload), removing a field is a `refactor-break-compat` concern, not a cleanup-codebase concern.
+- **Tests** — a field read only by tests may indicate the field exists *for* the tests; purging the test is the other direction, not this one.
+- **External consumers** — if the type crosses a process boundary (DTO, event payload), removing a field breaks a published contract; that is a compat-breaking change, not cleanup.

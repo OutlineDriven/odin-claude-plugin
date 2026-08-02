@@ -31,7 +31,7 @@ If verification requires eyeballing a Grafana / Datadog dashboard, surface the s
 
 ### Eyeball verdicts → contract assertions
 
-If the human's role is "looks right to me", encode the criterion as a test, schema, or assertion. The contract becomes the loop's done-criterion (pair with `strict-validation-setup` for the bootstrap of those gates).
+If the human's role is "looks right to me", encode the criterion as a test, schema, or assertion. The contract becomes the loop's done-criterion.
 
 ## Trap-or-abandon decision
 

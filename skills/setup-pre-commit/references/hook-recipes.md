@@ -21,7 +21,7 @@ Formatter policy is **out of scope** for this skill. Do NOT auto-create `.pretti
 ```yaml
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.6.0
+    rev: v0.16.1
     hooks:
       - id: ruff
       - id: ruff-format

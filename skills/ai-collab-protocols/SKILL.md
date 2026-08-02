@@ -39,7 +39,6 @@ Earlier candidate extensions, second-pass verified. Usage details belong in a de
 | ------------------------ | ----------------------------------------------------------------------------------- |
 | **`ai-collab-protocols`** | In-task tactic surfacing: user describes an AI workflow informally                |
 | `contexts`               | Pre-implementation context sweep: gather files / patterns / tooling for a feature  |
-| `qa`                     | Bug capture: user reports something broken in plain language                       |
 | `init`                   | AGENTS.md authoring: onboarding a repository, capturing hard-to-rediscover conventions |
 
 ## Posture

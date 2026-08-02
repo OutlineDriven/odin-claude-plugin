@@ -85,8 +85,6 @@ If no correct seam exists, record that finding: the architecture prevents the bu
 4. Run it and observe green.
 5. Re-run the Phase 1 loop against the original, un-minimised scenario.
 
-Hand the resulting test work to `test-driven` where that skill applies.
-
 ### Phase 6 — Cleanup and post-mortem
 
 Before declaring the bug fixed:
@@ -97,7 +95,7 @@ Before declaring the bug fixed:
 - Delete throwaway prototypes, or move a retained one to a clearly marked debug location.
 - State the confirmed hypothesis in the commit or PR message so the next debugger can use the causal chain.
 
-Ask what would have prevented the bug. If the answer is architectural — no useful seam, tangled callers, or hidden coupling — recommend `improve-architecture` after the fix, with the observed evidence.
+Ask what would have prevented the bug. If the answer is architectural — no useful seam, tangled callers, or hidden coupling — recommend an architectural follow-up after the fix, with the observed evidence.
 
 ## Anti-patterns
 

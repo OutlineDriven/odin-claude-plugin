@@ -5,8 +5,7 @@ workers. Document the independence argument before you do. Two tasks touching
 one file are not independent. Respect the platform's active-subagent limit, queue
 overflow, and treat spawn errors as backpressure (slow down, don't drop the task).
 
-The per-task gate does not relax under parallelism; this is what separates the
-skill from `parallel-launch`'s single end-of-run review. Every result is audited
+The per-task gate does not relax under parallelism; every result is audited
 on its own before it reaches the shared branch; concurrency only overlaps the
 *implement* step, never the gate.
 

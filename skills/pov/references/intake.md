@@ -32,7 +32,7 @@ The subject is usually recoverable; the **intent** is the ambiguous part. Classi
 
 ## Discipline
 
-`pov` is not `brainstorm`. **One** orientation read, **at most one** clarifying question, then go. If the user already stated the intent, skip straight to the one-line frame — do not interrogate. The cost of one cheap question is trivial; the cost of grounding the wrong frame is the whole run.
+This is not a scoping interview. **One** orientation read, **at most one** clarifying question, then go. If the user already stated the intent, skip straight to the one-line frame — do not interrogate. The cost of one cheap question is trivial; the cost of grounding the wrong frame is the whole run.
 
 ## Warm invocations
 

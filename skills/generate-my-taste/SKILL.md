@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # generate-my-taste
 
-Generate a personal Claude Code taste skill from local evidence. The output is a `<name>-taste` skill shaped like `spine` / `taste`: frontmatter, posture, modes, two-sided charter, anchors, audit output shape, anchor mode output shape, auto-clarity exception.
+Generate a personal Claude Code taste skill from local evidence. The output is a `<name>-taste` skill shaped like `taste`: frontmatter, posture, modes, two-sided charter, anchors, audit output shape, anchor mode output shape, auto-clarity exception.
 
 Evidence leads. Questions confirm. Generation writes only after a preview gate.
 
@@ -88,7 +88,7 @@ Ask only if the name is ambiguous.
 
 ### Q3 - Domain set, single-select
 
-- `Prose + Code + Design + Decision (Recommended)`: mirrors `taste`, `spine`, the user's two-sided table, and the fixed template fields.
+- `Prose + Code + Design + Decision (Recommended)`: mirrors `taste`, the user's two-sided table, and the fixed template fields.
 - `Four-domain with one emphasis`: keep all four domains but weight examples toward the evidence-dominant domain.
 - `Stop for custom template`: pause generation when a narrower domain set is required; conditional templates are out of scope for this right-sized generator.
 

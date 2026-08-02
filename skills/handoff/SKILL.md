@@ -28,7 +28,7 @@ Do NOT:
 
 ## Write procedure
 
-1. Resolve the workspace and self-ignore it (mirrors `subagent-driven`'s `sd-workspace`):
+1. Resolve the workspace and self-ignore it:
    ```bash
    root=$(git rev-parse --show-toplevel 2>/dev/null || pwd)   # cwd fallback outside a repo
    mkdir -p "$root/.outline/handoffs"

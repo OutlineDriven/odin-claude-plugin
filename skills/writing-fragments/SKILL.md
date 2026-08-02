@@ -5,7 +5,7 @@ description: 'Use when the user wants to generate raw writing material before st
 
 # Mine fragments
 
-Treat this as **explore**: widen the space of what could be written without committing to structure. Committing is **exploit**, handled by `writing-shape` or `writing-beats`.
+Treat this as **explore**: widen the space of what could be written without committing to structure. Committing is **exploit**, and out of scope here.
 
 Run an `askme` **adversarial** session to relentlessly interview the user about whatever they want to write about. Imposing phases, outlines, or article structure is out of scope here.
 
