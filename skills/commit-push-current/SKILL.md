@@ -5,6 +5,8 @@ description: 'Commit working-tree changes and push to the current branch: no bra
 
 # Git Commit and Push (Current Branch)
 
+> **Sync lineage:** the shared commit blocks below (Context fallback, commit-message style, concern grouping, staging discipline) are a self-contained copy of `skills/commit-push/SKILL.md`, adapted for the current-branch flow with no branch creation or switch. Check it for drift before treating this copy as authoritative.
+
 Ship the working tree on the branch that is checked out. This skill never creates or switches branches: invoking it on a branch (including `main`/`master`) is explicit authorization to push to that branch. For the guarded flow that auto-creates a feature branch off the default, use `commit-push` instead.
 
 ## Context

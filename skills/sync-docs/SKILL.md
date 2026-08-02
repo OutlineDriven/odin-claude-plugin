@@ -1,6 +1,6 @@
 ---
 name: sync-docs
-description: Detect docs-vs-code drift from a diff. Use when the user says "sync docs" or "update changelog".
+description: Detect docs-vs-code drift from a diff. Use when the user says "sync docs" or "update changelog". For whether plans and roadmaps still match the code, use drift-detect.
 metadata:
   short-description: Diff-driven docs drift correction
 ---

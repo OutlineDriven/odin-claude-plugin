@@ -4,6 +4,8 @@ description: Use when validating a set of PRs together on a staging branch befor
 ---
 # Smart Merge to Temporal Branch
 
+> **Sync lineage:** the shared merge steps (Enumerate PRs, Determine merge order) are a self-contained copy of `skills/pr-merge-base/SKILL.md`, adapted for the temporal staging-branch flow. Check it for drift before treating this copy as authoritative.
+
 Merge multiple PRs into a temporal integration branch for validation before merging to base.
 
 ## Process

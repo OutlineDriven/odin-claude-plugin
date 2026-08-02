@@ -5,6 +5,8 @@ description: Use when asked to ship/open a PR, or for PR-description-only flows 
 
 # Git Commit, Push, and PR
 
+> **Sync lineage:** the shared commit blocks below (platform blocking-question tool, Context fallback, concern grouping, staging discipline, remote default-branch resolution, clean-tree no-op) are a self-contained copy of `skills/commit-push/SKILL.md`, adapted for the PR flow. Check it for drift before treating this copy as authoritative.
+
 **Asking the user:** use the platform's blocking question tool -- `AskUserQuestion` in Claude Code (`ToolSearch` with `select:AskUserQuestion` first if unloaded), `request_user_input` in Codex, `ask_question` in Antigravity (`agy`), `ask_user` in Pi (`pi-ask-user` extension). Fall back to chat only when no blocking tool exists or the call errors, not for an unloaded schema. Never skip the question silently.
 
 ## Mode

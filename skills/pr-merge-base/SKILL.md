@@ -4,6 +4,8 @@ description: Use when PRs may conflict with each other or the base, or require o
 ---
 # Smart Merge to Base Branch
 
+> **Sync lineage:** canonical source for the shared merge steps (Enumerate PRs, Determine merge order). `skills/pr-merge-temporal/SKILL.md` carries an adapted self-contained copy for the staging-branch flow; hand-propagate edits, this repo has no CI to enforce it.
+
 Merge one or more PRs into the base branch (main/master) using queue-like sequencing.
 
 ## Process

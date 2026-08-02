@@ -1,6 +1,6 @@
 ---
 name: drift-detect
-description: Use when the user says "plan drift", asks whether the roadmap, plans, or docs still match the code, or is deciding what to rebuild when restarting a stalled project.
+description: Use when the user says "plan drift", asks whether the roadmap, plans, or docs still match the code, or is deciding what to rebuild when restarting a stalled project. For doc-vs-code drift inside a specific diff, use sync-docs.
 metadata:
   short-description: Plan-versus-reality drift scanner
 ---

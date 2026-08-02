@@ -5,6 +5,8 @@ description: Use when asked to ship/publish commits without opening a PR.
 
 # Git commit and push
 
+> **Sync lineage:** canonical source for the shared commit blocks (platform blocking-question tool, Context fallback, concern grouping, staging discipline, commit-message style, remote default-branch resolution, clean-tree no-op). `skills/commit-push-pr/SKILL.md` and `skills/commit-push-current/SKILL.md` carry adapted self-contained copies; hand-propagate edits, this repo has no CI to enforce it.
+
 **Asking the user:** use the platform's blocking question tool -- `AskUserQuestion` in Claude Code (`ToolSearch` with `select:AskUserQuestion` first if unloaded), `request_user_input` in Codex, `ask_question` in Antigravity (`agy`), `ask_user` in Pi (`pi-ask-user` extension). Fall back to chat only when no blocking tool exists or the call errors, not for an unloaded schema. Never skip the question silently.
 
 ## Context

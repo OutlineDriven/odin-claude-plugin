@@ -136,6 +136,8 @@ For larger projects, organize rules and tests using `sgconfig.yml`.
 
 See [Project Setup & Testing](references/project-setup.md) for details.
 
+`tests/smoke.sh` is a hand-run check of the helper and the recipe patterns. This repo has no test runner, so invoke it directly: `bash skills/ast-grep/tests/smoke.sh`.
+
 ## Utility Rules
 
 Reuse logic with local or global utility rules. Enables recursive matching.
