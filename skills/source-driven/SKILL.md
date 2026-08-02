@@ -95,7 +95,7 @@ When official sources contradict each other (a migration guide against the API r
 Write code that matches what the documentation shows:
 
 - Use the API signatures from the docs, not from memory
-- If the docs show a newer approach, use the newer approach
+- If the docs show a newer approach, use the newest one the pinned version supports — the latest release you reported is upgrade data, not a licence to write against a version the project does not have installed
 - If the docs deprecate a pattern, do not use the deprecated form
 - If the docs do not cover something, flag it as unverified
 
