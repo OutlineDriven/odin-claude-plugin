@@ -74,8 +74,8 @@ For each task, in order:
    patterns). Worker output is trusted after this audit, not before.
 7. **Gate.** Audit clean and verifier green → mark the task complete in the
    ledger, move to the next. Audit finds a Critical/Important issue → dispatch
-   a fix worker with the complete findings list, then re-review. Do not start
-   the next task on an unaudited or suspect result. If the audit cannot be
+   a fix worker with the complete findings list, then re-review. Start the
+   next task only on a clean audit and green verifier. If the audit cannot be
    cleared, abort the chain rather than build on it.
 
 ## Dispatch Brief
@@ -85,7 +85,7 @@ Pass file *paths*, not contents; keep static material under ~50 lines inline,
 point to everything larger.
 
 - **Goal**: one sentence: what this task changes and why.
-- **Files**: the paths to edit, as paths. Name files the worker must NOT touch.
+- **Files**: the paths to edit, as paths. Name files the worker must leave untouched.
 - **Constraints**: patterns to follow, interfaces to preserve, what is out of scope.
 - **Verification**: the exact command that proves the task works (test,
   typecheck, build, lint). The worker runs it before reporting done.
@@ -136,7 +136,7 @@ Workers report one of four. Handle each:
   re-dispatch same model; needs more reasoning → re-dispatch a more capable
   model; too large → split it; plan is wrong → escalate to the user.
 
-Never ignore an escalation, and never force the same model to retry unchanged.
+Act on every escalation, and change something before retrying the same model.
 If the worker said it is stuck, something must change before the retry.
 
 ## Handling Reviewer Items
@@ -152,7 +152,7 @@ review; return to the implementer, then re-review.
 The loop's gate is the local `task-reviewer-prompt.md` dispatched to a fresh
 subagent. Let the agent select the appropriate specialized subagent for the review.
 There is no hard dependency on any external named agent.
-The gate stays honest only if you don't pre-cook it:
+The gate stays honest only if you leave the reviewer free to form its own findings:
 
 - **Don't pre-judge findings.** Never tell a reviewer to ignore or not flag an
   issue, and never pre-rate severity ("treat it as Minor at most"). If your
@@ -168,8 +168,8 @@ The gate stays honest only if you don't pre-cook it:
   the test evidence; the reviewer runs a focused test only on a named doubt.
 - **Plan-mandated findings are the user's call.** A finding that conflicts with
   what the plan's text requires: present the finding and the plan text, ask
-  which governs. Do not dismiss it because the plan mandates it, and do not
-  dispatch a fix that contradicts the plan without asking.
+  which governs. A finding stands on its own merit even when the plan mandates the
+  behavior it flags; dispatch a fix that contradicts the plan only after the user confirms.
 - **Fix dispatches carry the implementer contract**: the fixer re-runs the
   tests covering its change and reports the command and output. Name the
   covering test files; a one-line fix does not need the whole suite. Confirm the
@@ -191,7 +191,7 @@ holds a full diff or a full plan section in its own context:
   introduce it as "read this first. It is your requirements, with the exact
   values to use verbatim."
 - **Hand the reviewer the report as a file**: the implementer's own account of
-  what it built and tested, read alongside the diff, never trusted on its own.
+  what it built and tested, read alongside the diff, trusted only as a companion to it.
 
 ## Durable Progress
 
@@ -201,7 +201,7 @@ expensive failure. Track progress in a ledger file, not only in todos.
 
 - At skill start, check for a ledger:
   `cat "$(git rev-parse --show-toplevel)/.outline/sdd/progress.md"`. Tasks marked
-  complete there are DONE. Do not re-dispatch; resume at the first incomplete task.
+  complete there are DONE: leave them alone and resume at the first incomplete task.
 - When a review comes back clean, append one line:
   `Task N: complete (commits <base7>..<head7>, review clean)`.
 - The ledger is your recovery map: the commits it names exist in git even when
@@ -231,8 +231,8 @@ After all tasks land:
 2. Final-review findings → ONE fix worker with the complete list, then re-review.
 3. **Ship via ODIN's atomic path, not a single squash.** Sort the work into
    atomic commits in detached HEAD. Publish with git-branchless `submit`, or run
-   `commit-push`. Do not invent a branch-finishing or code-review-request flow
-   outside this path.
+   `commit-push`. Use only this path for branch finishing and code review
+   requests.
 
 ## Example Workflow
 

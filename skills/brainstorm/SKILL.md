@@ -1,6 +1,6 @@
 ---
 name: brainstorm
-description: Explore vague or ambitious ideas into a right-sized requirements-only plan. Use when the user wants to brainstorm, think through scope, decide what to build, or needs collaborative product framing before planning, not for a decisive verdict on whether to adopt or switch to a specific external technology, library, or platform. For that verdict, use pov.
+description: Explore vague or ambitious ideas into a right-sized requirements-only plan. Use when the user wants to brainstorm, think through scope, decide what to build, or needs collaborative product framing before planning, not for a decisive verdict on whether to adopt or switch to a specific external technology, library, or platform. For that verdict, use pov. For divergent option generation rather than scoping one idea, use ideate.
 metadata:
   short-description: Collaborative requirements framing → requirements-only plan artifact
 ---
