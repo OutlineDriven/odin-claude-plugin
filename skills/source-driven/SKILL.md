@@ -7,7 +7,7 @@ description: Use when writing code against a specific framework or library versi
 
 ## Three principles
 
-1. **Memory is not evidence.** Training data ages — APIs deprecate and recommended patterns shift between versions. Code written from recall can look correct and break against the installed version.
+1. **Memory is not evidence.** Training data ages — APIs deprecate and recommended patterns shift between versions. Code written from recall can look correct and break against the installed version. Assume your pre-existing internal understanding of every dependency, library, framework, tool, and underlying implementation is outdated — universally, not just for external API integrations.
 2. **Detect the version, fetch the primary source, implement what it documents, cite it.** Every framework-specific pattern traces to an authoritative source the user can open and check for themselves.
 3. **Flag what you couldn't verify.** Honesty about the gap beats a confident guess dressed as a fact.
 
@@ -59,6 +59,8 @@ State the result before writing anything. The procedure is language-agnostic; th
 Worked STACK DETECTED examples (React/Vite, Django/Python) live in `references/stack-examples.md` — two illustrations of the one report shape; read either and follow that shape for whatever stack you detected.
 
 If versions are missing or ambiguous, **ask the user**. Do not guess: the version selects which patterns are correct.
+
+Then resolve what is current, every run, without being asked: for each dependency you are about to write code against, read the latest stable release straight from the release channel (registry, releases page, official download page) and compare it to the pinned version. Recall is not a release channel, and "it is probably still current" is the guess this step exists to remove. One lookup per touched dependency, not the whole tree. Report both — pinned and latest — and name the gap when they differ, so the user sees whether the documented pattern for the pinned version is still the recommended one.
 
 ### Step 2: Fetch Official Documentation
 
@@ -149,6 +151,7 @@ Honesty about what you could not verify beats false confidence.
 After implementing with source-driven development:
 
 - [ ] All sources are official documentation, not blog posts or training data
+- [ ] Latest stable release read from the release channel for every touched dependency, and reported beside the pinned version
 - [ ] Code follows the patterns shown in the current version's documentation
 - [ ] Non-trivial decisions include source citations with full URLs
 - [ ] No deprecated APIs are used (checked against migration guides)

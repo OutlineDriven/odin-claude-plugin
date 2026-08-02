@@ -7,6 +7,8 @@ description: Use when researching a named library, framework, SDK, API, or servi
 
 External knowledge gathering with one persistent Markdown artifact; source files stay read-only. Walk the 5-tier source ladder, dispatch research to a background subagent so user work can continue, cite every claim to a primary source, and record the findings.
 
+Standing assumption: your pre-existing internal understanding of every library, framework, SDK, API, CLI, tool, and underlying implementation is outdated. This applies universally across all forms of dependency, not just external API integrations — resolve the current version and behavior from a primary source rather than recall, and label anything left unresolved `[Speculative — training data only]`.
+
 ## When to Apply / NOT
 
 **Apply:**
