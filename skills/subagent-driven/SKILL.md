@@ -201,7 +201,7 @@ expensive failure. Track progress in a ledger file, not only in todos.
 
 - At skill start, check for a ledger:
   `cat "$(git rev-parse --show-toplevel)/.outline/sdd/progress.md"`. Tasks marked
-  complete there are DONE: leave them alone and resume at the first incomplete task.
+  complete there are DONE: skip re-dispatching them and resume at the first incomplete task.
 - When a review comes back clean, append one line:
   `Task N: complete (commits <base7>..<head7>, review clean)`.
 - The ledger is your recovery map: the commits it names exist in git even when
