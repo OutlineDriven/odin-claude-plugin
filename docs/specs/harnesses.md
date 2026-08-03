@@ -1,8 +1,15 @@
 # Harness manifests — what each one rests on
 
-Last verified 2026-08-03. Every row was checked against a vendor doc or vendor source that
-day, and most were checked against the installed CLI. Re-verify before trusting an entry
-older than a release cycle.
+Last verified 2026-08-03 against repo version `1.17.82`. Every row was checked against a
+vendor doc or vendor source that day, and most were checked against an installed CLI whose
+version was read with `--version`: `codex-cli 0.146.0`, `devin 3000.2.17`, `agy 1.1.9`,
+`grok 0.2.118`, `claude 2.1.220`. Re-verify before trusting an entry older than a release
+cycle.
+
+Two version gaps worth carrying: the installed `devin 3000.2.17` trails the current
+3000.3.x line, which is why the `.claude-plugin/` fallback its docs describe is not
+available here; and opencode was not installed at all, so its plugin module was exercised
+directly rather than through the host.
 
 The rule this file exists to enforce: **ship a manifest only where it adds a capability
 the repo does not already have.** Most harnesses read `.claude-plugin/` natively, so most

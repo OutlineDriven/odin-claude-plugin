@@ -70,20 +70,25 @@ The plugin registers `skills/` on `config.skills.paths` and adds one command per
 skipping the five marked `disable-model-invocation` because opencode has no manual-only
 gate.
 
-Verified by real installs on a Linux workstation, not by schema reading alone:
+Verified by real installs from a clean clone of this repository at `1.17.82`, on Linux.
+Every version below was read from the installed binary with `--version`, not assumed:
 
-| Check | Result |
-|---|---|
-| `codex plugin marketplace add` + `codex plugin add` (0.146.0) | installed, 120 skills present |
-| `devin plugins install` (3000.2.17) | installed, skills exposed as `/odin:<skill>` |
-| `agy plugin validate .` (1.1.9) | ok, 120 skills processed |
-| `grok plugin validate .` (0.2.118) | manifest valid, 1 skill dir + hooks |
-| `claude plugin validate` | passed |
-| opencode module | exercised directly: 114 commands, manual-only skills excluded |
+| Harness | Installed version | Check | Result |
+|---|---|---|---|
+| Codex CLI | `codex-cli 0.146.0` | `plugin marketplace add` + `plugin add` | installed, 120 skills in plugin root |
+| Devin CLI | `devin 3000.2.17` | `devin plugins install` | installed, skills exposed as `/odin:<skill>` |
+| Antigravity | `agy 1.1.9` | `agy plugin validate .` | ok, 120 skills processed |
+| Grok Build | `grok 0.2.118 [stable]` | `grok plugin validate .` | manifest valid, 1 skill dir + hooks |
+| Claude Code | `2.1.220` | `claude plugin validate` | passed |
+| opencode | not installed | module exercised directly | 114 commands, 5 manual-only excluded |
 
-**Cursor and Kimi are not locally smoke-tested** — both install through an in-editor slash
-command rather than a shell, so their manifests match the published schemas but first
-install is unproven.
+**Cursor and Kimi are not tested.** Both install through an in-editor slash command rather
+than a shell, so there is no headless path to exercise them. Their manifests match the
+vendors' published schemas; treat first install as unproven.
+
+`claude plugin validate --strict` fails on this repo, and did so before any harness work:
+`metadata.maintainer`, `.website` and `.support` in `.claude-plugin/marketplace.json` are
+unknown to Claude Code, which ignores them at load time. Non-strict validation passes.
 
 ### Verify Installation
 
