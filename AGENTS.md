@@ -31,18 +31,19 @@ Plain `git push` only — force-push is denied at the Claude permissions layer (
 
 ## Patch-bump convention
 
-Behavior changes (paradigm shifts, agent rule changes, skill behavior changes) bump patch (+0.0.1) in the same commit as the change, on all SIX manifest version fields in lockstep — bumping some but not all ships a stale plugin entry to whichever harness reads the one you missed:
+Behavior changes (paradigm shifts, agent rule changes, skill behavior changes) bump patch (+0.0.1) in the same commit as the change, on all SEVEN manifest version fields in lockstep — bumping some but not all ships a stale plugin entry to whichever harness reads the one you missed:
 
 | Field | Read by |
 |---|---|
-| `.claude-plugin/plugin.json` `.version` | Claude Code — **canonical source**; Codex, Grok and Devin resolve this too |
+| `.claude-plugin/plugin.json` `.version` | Claude Code — **canonical source**; Codex and Grok resolve this too |
 | `.claude-plugin/marketplace.json` `.version` | Claude Code marketplace |
 | `.claude-plugin/marketplace.json` `.plugins[0].version` | Claude Code marketplace entry |
 | `plugin.json` `.version` | Antigravity (`agy`) |
 | `.cursor-plugin/plugin.json` `.version` | Cursor |
 | `.kimi-plugin/plugin.json` `.version` | Kimi Code |
+| `.devin-plugin/plugin.json` `.version` | Devin CLI — required before 3000.3.22, which hard-fails without it |
 
-Do not hand-edit the five non-canonical fields: bump `.claude-plugin/plugin.json`, then run `python3 scripts/sync-manifests.py`, which mirrors `version` and `description` outward and shape-checks the static catalogs. `--check` reports drift (exit 1) or a structural fault (exit 2). The `sync-manifests` prek hook runs it on any manifest change.
+Do not hand-edit the six non-canonical fields: bump `.claude-plugin/plugin.json`, then run `python3 scripts/sync-manifests.py`, which mirrors `version` and `description` outward and shape-checks the static catalogs. `--check` reports drift (exit 1) or a structural fault (exit 2). The `sync-manifests` prek hook runs it on any manifest change.
 
 The static catalogs carry no plugin version and are validated only: `.cursor-plugin/marketplace.json`, `.kimi-plugin/marketplace.json` (its top-level `version` is the catalog **schema** version, the literal `"2"`), and `.agents/plugins/marketplace.json`. Their `source` rules are mutually contradictory and enforced by the script, not by memory: Codex requires a local `"./"` source, Kimi rejects one and requires a URL.
 

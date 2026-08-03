@@ -26,6 +26,7 @@ VERSIONED = {
     ".claude-plugin/plugin.json": ("version", "description"),
     ".cursor-plugin/plugin.json": ("version", "description"),
     ".kimi-plugin/plugin.json": ("version", "description"),
+    ".devin-plugin/plugin.json": ("version", "description"),
 }
 MARKETPLACE = ".claude-plugin/marketplace.json"
 

@@ -46,5 +46,5 @@ repos:
         name: sync harness plugin manifests
         entry: python3 scripts/sync-manifests.py
         language: system
-        files: ^(plugin\.json|\.(claude|cursor|kimi)-plugin/.*\.json|\.agents/plugins/.*\.json)$
+        files: ^(plugin\.json|\.(claude|cursor|kimi|devin)-plugin/.*\.json|\.agents/plugins/.*\.json)$
         pass_filenames: false
