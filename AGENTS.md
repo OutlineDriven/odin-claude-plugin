@@ -31,9 +31,22 @@ Plain `git push` only — force-push is denied at the Claude permissions layer (
 
 ## Patch-bump convention
 
-Behavior changes (paradigm shifts, agent rule changes, skill behavior changes) bump patch (+0.0.1) in the same commit as the change, on all THREE manifest version fields in lockstep: `.claude-plugin/plugin.json` `.version`, `.claude-plugin/marketplace.json` `.version`, and `.claude-plugin/marketplace.json` `.plugins[0].version` — bumping the two files but missing the second marketplace field ships a stale plugin entry.
+Behavior changes (paradigm shifts, agent rule changes, skill behavior changes) bump patch (+0.0.1) in the same commit as the change, on all SIX manifest version fields in lockstep — bumping some but not all ships a stale plugin entry to whichever harness reads the one you missed:
 
-Choose the bump base deterministically, immediately before editing: `git fetch origin`, read all three version values from `origin/main`'s manifests, require them to agree, and bump that base by one patch. If local and origin differ, rebase onto `origin/main` and take its manifests as the base — never reuse a version literal planned earlier in the session.
+| Field | Read by |
+|---|---|
+| `.claude-plugin/plugin.json` `.version` | Claude Code — **canonical source**; Codex, Grok and Devin resolve this too |
+| `.claude-plugin/marketplace.json` `.version` | Claude Code marketplace |
+| `.claude-plugin/marketplace.json` `.plugins[0].version` | Claude Code marketplace entry |
+| `plugin.json` `.version` | Antigravity (`agy`) |
+| `.cursor-plugin/plugin.json` `.version` | Cursor |
+| `.kimi-plugin/plugin.json` `.version` | Kimi Code |
+
+Do not hand-edit the five non-canonical fields: bump `.claude-plugin/plugin.json`, then run `python3 scripts/sync-manifests.py`, which mirrors `version` and `description` outward and shape-checks the static catalogs. `--check` reports drift (exit 1) or a structural fault (exit 2). The `sync-manifests` prek hook runs it on any manifest change.
+
+The static catalogs carry no plugin version and are validated only: `.cursor-plugin/marketplace.json`, `.kimi-plugin/marketplace.json` (its top-level `version` is the catalog **schema** version, the literal `"2"`), and `.agents/plugins/marketplace.json`. Their `source` rules are mutually contradictory and enforced by the script, not by memory: Codex requires a local `"./"` source, Kimi rejects one and requires a URL.
+
+Choose the bump base deterministically, immediately before editing: `git fetch origin`, read the version values from `origin/main`'s manifests, require them to agree, and bump that base by one patch. If local and origin differ, rebase onto `origin/main` and take its manifests as the base — never reuse a version literal planned earlier in the session. Push each behavior commit before starting the next, so the next fetch sees a base that already includes it.
 
 Tooling-only changes (pre-commit hooks, formatter config), pure sync changes (e.g., normalizing an embedded baseline back to canonical), and editing-primer doc updates (this file) do not bump.
 

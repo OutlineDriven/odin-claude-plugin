@@ -39,3 +39,12 @@ repos:
         language: system
         files: ^(system-prompt-baseline\.md|output-styles/.*\.md)$
         pass_filenames: false
+
+      # Mirror version/description from .claude-plugin/plugin.json to every harness
+      # manifest, and shape-check the static catalogs.
+      - id: sync-manifests
+        name: sync harness plugin manifests
+        entry: python3 scripts/sync-manifests.py
+        language: system
+        files: ^(plugin\.json|\.(claude|cursor|kimi)-plugin/.*\.json|\.agents/plugins/.*\.json)$
+        pass_filenames: false
