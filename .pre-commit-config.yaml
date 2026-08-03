@@ -27,3 +27,15 @@ repos:
       - id: tombi-lint
         args: ["--offline"]
       - id: tombi-format
+
+  # Regenerate the doctrine cascade embedded in every output-style.
+  # pass_filenames is off on purpose: editing the canonical alone must still
+  # resync all six styles, and pre-commit would only hand us the canonical.
+  - repo: local
+    hooks:
+      - id: sync-baseline
+        name: sync output-style doctrine cascade
+        entry: python3 scripts/sync-baseline.py
+        language: system
+        files: ^(system-prompt-baseline\.md|output-styles/.*\.md)$
+        pass_filenames: false

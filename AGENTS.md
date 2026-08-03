@@ -6,17 +6,18 @@ Edit `AGENTS.md` only; `CLAUDE.md` is a symlink to it. Never `write` CLAUDE.md d
 
 Treat `system-prompt-baseline.md` as the single source of truth for the agent's persona/doctrine: make every doctrine change there first, never in an output-style file alone.
 
-**Always propagate `system-prompt-baseline.md` changes to `output-styles/*.md` files.** Every edit to the canonical (`system-prompt-baseline.md`) MUST land as a single atomic commit that ALSO updates the embedded cascade in EVERY output-style file (`{axiom-mode,builder,duet,linus,odin}.md` AND `benchmark.md`); the Claude Code loader does not resolve refs, so each output-style must embed the full baseline at its tail. Edit at-once, never separately. Per-file commits and per-style sequential agents are the anti-pattern; one commit, one operation, one diff scope. The embedded baseline span MUST be byte-identical to `system-prompt-baseline.md` from the charter `<role>` onward; drift is a CI-less invariant enforced by review.
+**Always propagate `system-prompt-baseline.md` changes to `output-styles/*.md` files.** Every edit to the canonical MUST land as a single atomic commit that ALSO updates the embedded cascade in EVERY output-style file (`{axiom-mode,builder,duet,linus,odin}.md` AND `benchmark.md`); the Claude Code loader does not resolve refs, so each output-style must embed the full baseline at its tail. Edit at-once, never separately. Per-file commits and per-style sequential agents are the anti-pattern; one commit, one operation, one diff scope. The embedded baseline span MUST be byte-identical to `system-prompt-baseline.md` from the charter `<role>` onward.
 
-Procedural recipe (apply on every canonical edit):
-1. Edit `system-prompt-baseline.md`.
-2. Re-extract canonical from the charter `<role>` onward — the `<role>` block whose body is `You are a minimal-output entropy manipulator …`; it is the FIRST/only `<role>` in `system-prompt-baseline.md`, so the canonical is the whole file (e.g. `cp system-prompt-baseline.md /tmp/canon.md`).
-3. For each output-style, locate its charter `<role>` line — the SECOND `<role>` in the file (each output-style leads with a persona voice `<role>`); it is the line before `You are a minimal-output entropy manipulator`.
-4. Replace each output-style's cascade region (from its charter `<role>` line through EOF) with `/tmp/canon.md` content, keeping the persona voice prefix intact.
-5. Verify byte-equivalence per file — the tail must equal canonical: `diff -q /tmp/canon.md <(tail -c "$(wc -c < /tmp/canon.md)" output-styles/X.md)` returns identical for all 6.
-6. Stage and commit canonical + all 6 output-styles in ONE commit.
+`scripts/sync-baseline.py` enforces that invariant — it is no longer review-enforced. Do not hand-propagate the cascade:
 
-Never hand-edit `output-styles/benchmark.md`; its auto-gen header (margin-runner v0.5.5) marks it do-not-modify. Override only on explicit user authorization, and then touch only the embedded canonical-baseline cascade region beneath the runner-specific preamble.
+1. Edit `system-prompt-baseline.md`. Touch nothing below the charter `<role>` in any output-style.
+2. Run `python3 scripts/sync-baseline.py`. It rewrites each style from its SECOND `<role>` line (the canonical charter; the first opens the persona voice) to EOF, preserving the persona preamble above it.
+3. Run `python3 scripts/sync-baseline.py --check`. Exit 0 means every style matches canonical. Exit 1 lists the drifted files; exit 2 means a style lacks the two `<role>` lines the layout requires, or the canonical is missing.
+4. Stage and commit canonical + all 6 output-styles in ONE commit.
+
+The `sync-baseline` prek hook runs the same script on any change to the canonical or a style, so `prek run --all-files` catches drift even if the steps above are skipped.
+
+Never hand-edit `output-styles/benchmark.md`; its auto-gen header (margin-runner v0.5.5) marks it do-not-modify. The generator is the one sanctioned writer: it touches only the embedded canonical-baseline cascade region beneath the runner-specific preamble, which is exactly what the do-not-modify marker permits. Hand-edits above that region still require explicit user authorization.
 
 ## Submodule handling
 
