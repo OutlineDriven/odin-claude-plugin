@@ -22,7 +22,7 @@ repos:
 
   # TOML lint + format
   - repo: https://github.com/tombi-toml/tombi-pre-commit
-    rev: v0.11.0
+    rev: v1.1.3
     hooks:
       - id: tombi-lint
         args: ["--offline"]
