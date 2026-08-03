@@ -1,0 +1,10 @@
+{
+  "version": "2",
+  "plugins": [
+    {
+      "id": "odin",
+      "displayName": "ODIN",
+      "source": "https://github.com/OutlineDriven/odin-claude-plugin"
+    }
+  ]
+}

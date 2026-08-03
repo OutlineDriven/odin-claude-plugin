@@ -1,0 +1,14 @@
+{
+  "name": "odin-marketplace",
+  "owner": {
+    "name": "cognitive-glitch",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "plugins": [
+    {
+      "name": "odin",
+      "source": "./",
+      "description": "ODIN core plugin with diagram-first engineering and atomic commit workflows"
+    }
+  ]
+}
