@@ -1,6 +1,6 @@
 {
   "name": "odin",
-  "version": "1.17.83",
+  "version": "1.17.84",
   "description": "ODIN - advanced code agent with diagram-first engineering and atomic commit workflows for surgical precision in software development",
   "keywords": [
     "outline-driven",
