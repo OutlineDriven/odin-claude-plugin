@@ -124,7 +124,7 @@ Before any non-trivial implementation:
 4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
 5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
 
-## Skills (121 total)
+## Skills (125 total)
 
 Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
 
@@ -152,9 +152,13 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `pov` - Decisive, project-grounded verdict on adopting or switching technology
 - `research` - Gather external knowledge from authoritative sources with verified citations
 
-### Writing & Learning (5 skills)
+### Writing & Learning (9 skills)
 
 - `teach` - Run a persistent cwd teaching workspace across missions, lessons, resources, and learning records
+- `map-corpus` - Inventory a folder of your own study material into one CORPUS.md with prerequisite-ordered concepts
+- `explain-concept` - Make one concept clear from a chosen angle: intuition, motivation, origin, picture, or contrast
+- `drill` - Practise a concept and get graded: scaffolded exercises, quizzes, spaced recall, and gap probes
+- `capstone` - Scope and judge a real project sized to what the learner has actually cleared
 - `writing-fragments` - Mine heterogeneous raw material into an append-only pile before shaping
 - `writing-shape` - Shape a raw pile into an article paragraph by paragraph with argued formats
 - `writing-beats` - Build a grounded article journey one candidate beat at a time
