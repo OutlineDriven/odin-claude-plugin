@@ -23,7 +23,7 @@ Reach up the table only when the default cannot carry the domain. The default is
 Five steps, each with a checkable done condition.
 
 1. **Choose the shape.** A comparison, trade-off, or decision matrix is a Markdown table. For a quantitative comparison whose real numbers cannot be sourced, a table is the required form, not a chart. Done when the choice between table and diagram is made and stated.
-2. **Write the source** into `assets/<kebab-slug>.<ext>` beside the document that will embed it, opening with the house header below. Done when the file exists on disk and the header is the first block in it.
+2. **Write the source** into `assets/<kebab-slug>.<ext>` beside the document that will embed it, opening with the house header below when the tool is nomnoml. Done when the file exists on disk and, for nomnoml, the header is the first block in it.
 3. **Render** with the matching command under [Render commands](#render-commands). Done when the command exits zero and the SVG exists beside its source.
 4. **Embed** as `![<what it shows>](assets/<slug>.svg)` followed directly by a one-line `>` caption carrying the key message. Done when both lines are present, the alt text is a label rather than the word "diagram", and the caption states what the image means rather than restating its title.
 5. **Commit source and SVG together.** Done when both paths are staged. Never commit one without the other; the pair is the contract.

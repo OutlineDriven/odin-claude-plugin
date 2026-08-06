@@ -16,16 +16,13 @@
 
 ## Concepts exercised
 
-- {concept} — {what the work must show}
-- {concept} — {what the work must show}
+| Concept | Shows as |
+|---|---|
+| {concept} | {behaviour in the artifact that counts as exercised} |
 
 ## Out
 
 - {artifact path or URL}
-
-| Concept | Shows as |
-|---|---|
-| {concept} | {behaviour in the artifact that counts as exercised} |
 ```
 
 ## Rules

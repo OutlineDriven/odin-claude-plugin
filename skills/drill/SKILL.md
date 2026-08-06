@@ -21,11 +21,11 @@ An explicit argument overrides the table; no match means **practice**.
 
 Three rungs per concept, in this order, one rung per run:
 
-1. **worked** — you solve it and narrate why each step is taken.
-2. **faded** — you solve everything but the last step and the learner finishes it. Each further faded run removes one more step, always from the end backward, so the learner performs the final step every time.
-3. **independent** — the learner solves it whole.
+1. **worked** — you solve it and narrate why each step is taken. Done when the full solution is narrated and the learner has answered one self-explanation prompt ("why this step here?").
+2. **faded** — you solve everything but the last step and the learner finishes it. Each further faded run removes one more step, always from the end backward, so the learner performs the final step every time. Done when the learner has produced the step the rung asks of them and the attempt is recorded.
+3. **independent** — the learner solves it whole. Done when the learner has produced the step the rung asks of them and the attempt is recorded.
 
-Advance a rung only when the current one was cleared without hints. Done when the learner has produced the step the rung asks of them and the attempt is recorded.
+Advance a rung only when the current one was cleared without hints.
 
 ## quiz
 
