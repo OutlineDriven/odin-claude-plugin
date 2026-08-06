@@ -22,19 +22,15 @@
 ## Out
 
 - {artifact path or URL}
-```
-
-## Rules
-
-- The done test is observable by someone else. "Understand X" is not one.
-- Each milestone leaves something that works; no milestone is scaffolding for a later one.
-- List only cleared concepts plus at most one unfamiliar one, per the skill's scoping rule.
-- The Out is a runnable, readable, or usable artifact, not notes.
-
-## Review rubric
 
 | Concept | Shows as |
 |---|---|
 | {concept} | {behaviour in the artifact that counts as exercised} |
+```
+
+## Rules
+
+- "Understand X" is not a done test; an exercise sends it back to `drill`.
+- Fill the table's `Shows as` column with behaviour observable in the artifact, not intent.
 
 Review the finished work against the Done when and the Concepts exercised, item by item. Name what is not cleared and hand it to `drill`.
