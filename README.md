@@ -124,7 +124,7 @@ Before any non-trivial implementation:
 4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
 5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
 
-## Skills (120 total)
+## Skills (121 total)
 
 Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
 
@@ -188,10 +188,11 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `security-hardening` - Harden code against vulnerabilities as you build it
 - `observability` - Instrument code with logging, metrics, traces, and alerts
 
-### Tooling (9 skills)
+### Tooling (10 skills)
 
 - `ast-grep` - Structural code search, analysis, and refactoring
 - `browser-testing` - Test and debug browser code with Chrome DevTools MCP
+- `diagram-contract` - Author a diagram to the house contract: nomnoml or D2 source, house palette, rendered SVG committed beside it
 - `git-branchless` - Idiomatic git-branchless workflows for stack edits, rebases, and stacked-PR publishing
 - `setup-gitignore` - Compose or revise .gitignore from templates, editor patterns, and confirmed untracked noise
 - `setup-pre-commit` - Install ecosystem-appropriate pre-commit hooks for formatting, linting, and test gates
