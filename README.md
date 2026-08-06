@@ -154,7 +154,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 
 ### Writing & Learning (9 skills)
 
-- `teach` - Run a persistent cwd teaching workspace across missions, lessons, resources, and learning records
+- `teach` - Run a persistent cwd teaching workspace, and route to the corpus skills when the material already exists
 - `map-corpus` - Inventory a folder of your own study material into one CORPUS.md with prerequisite-ordered concepts
 - `explain-concept` - Make one concept clear from a chosen angle: intuition, motivation, origin, picture, or contrast
 - `drill` - Practise a concept and get graded: scaffolded exercises, quizzes, spaced recall, and gap probes

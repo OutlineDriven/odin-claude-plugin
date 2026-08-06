@@ -1,8 +1,21 @@
 ---
 name: teach
-description: 'Use when the user wants to learn a skill or concept across multiple sessions in a persistent teaching workspace at the cwd: they ask you to set up a course, design lessons, build a learning workspace, or explicitly request ongoing teaching. Not for one-off explanations or quick answers.'
+description: 'Use when the user wants to learn a skill or concept across multiple sessions in a persistent teaching workspace at the cwd: they ask you to set up a course, design lessons, build a learning workspace, or explicitly request ongoing teaching. Not for one-off explanations or quick answers. When the material to learn from is already gathered in a folder of your own, use map-corpus.'
 argument-hint: "What would you like to learn about?"
 ---
+
+## Which skill
+
+This skill runs the workspace when the learner is starting from nothing. When the material already exists as a folder of their own, four sibling skills do the work:
+
+| Reach for | When |
+|---|---|
+| `map-corpus` | A folder of their own books, papers, or work documents needs inventorying and ordering |
+| `explain-concept` | One concept needs making clear: intuition, motivation, origin, a picture, or a contrast |
+| `drill` | A concept needs practising and grading: exercises, quizzes, spaced recall, gap probes |
+| `capstone` | What they learned is ready to be applied to something real |
+
+Stay here when there is no corpus: this skill finds the resources, sets the mission, and builds the lessons from scratch.
 
 Treat the current directory as a teaching workspace. Capture all learning state in files at the workspace root. Never scatter it across subagents or ephemeral context.
 
