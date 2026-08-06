@@ -26,6 +26,8 @@ Do NOT:
 - Delegate a task to another AI — `antigravity`, `codex`, and `grok` own that.
 - Package a branch for review — `commit-push-pr` and `pr-review` own that.
 
+Choosing between a handoff and the four other moves at a phase boundary — continuing, discarding the context, delegating, or compressing in place — is its own decision. The ordered tree is in [references/phase-boundaries.md](references/phase-boundaries.md); read it when the choice is live, not when you already know you are handing off.
+
 ## Write procedure
 
 1. Resolve the workspace and self-ignore it:

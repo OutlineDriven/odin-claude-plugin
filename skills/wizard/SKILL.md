@@ -1,6 +1,6 @@
 ---
 name: wizard
-description: 'Generate an interactive bash wizard that walks a human through a manual procedure: third-party setup, a one-off migration, or an A to B state transition. It opens URLs, captures values, confirms each step, and writes .env entries and GitHub Actions secrets. Author it, never run it.'
+description: 'Generate an interactive bash wizard that walks a human through steps only they can perform: provisioning infrastructure, setting up credentials or CI secrets, walking an unfamiliar third-party dashboard, or running a one-off migration or cutover. Author it, never run it — for steps the agent can perform itself, do them directly.'
 ---
 
 # Wizard

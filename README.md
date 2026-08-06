@@ -124,7 +124,7 @@ Before any non-trivial implementation:
 4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
 5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
 
-## Skills (119 total)
+## Skills (120 total)
 
 Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
 
@@ -160,13 +160,14 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `writing-beats` - Build a grounded article journey one candidate beat at a time
 - `writing-skills` - Reference for writing agent-consumed documents so they run predictably: context load, hierarchy, leading words, and pruning
 
-### Working Posture (5 skills)
+### Working Posture (6 skills)
 
 - `duet` - Two-party posture: user as director, agent as executor. Surfaces every fork via AskUserQuestion with structural framing and a recommended default. Eliminates the review-bottleneck and prevents codebase-understanding debt. Pair with the `Duet` output style.
 - `axiom-mode` - Compact formal-logic English register using predicate claims and ASCII keywords
 - `ai-collab-protocols` - Surface in-task AI collaboration protocols one tactic at a time
 - `taste` - Apply distinctive judgment to prose, code, design, or decisions instead of AI mediocrity
 - `do-it-now` - Single-pass posture: ship the whole ask now, with no phases, stubs, or follow-up remainders
+- `wait-what` - Re-pitch a message that did not land, with context, plain-language phrasing, and the project's own vocabulary
 
 ### Engineering Methodologies (16 skills)
 
