@@ -82,22 +82,19 @@ The agent picks more elaborate or simpler shapes based on what each specific art
 
 ## Diagrams
 
-When the section contract calls for a diagram (architecture, sequence, flowchart, state machine, swim lane, data-flow), markdown renders it as a fenced mermaid block:
+When the section contract calls for a diagram (architecture, sequence, flowchart, state machine, swim lane, data-flow), author it per the `diagram-contract` skill: a nomnoml or D2 source in `assets/` beside the document, rendered to a committed SVG and embedded with a caption.
 
 ````markdown
-```mermaid
-flowchart TB
-  A[Start] --> B{Decision}
-  B -->|yes| C[Action]
-  B -->|no| D[Other action]
-```
+![Approval path from draft to publish](assets/approval-path.svg)
+
+> A draft needs one reviewer; anything touching billing needs two.
 ````
 
-(`TB` direction default — keeps diagrams narrow in source view and in narrow rendered viewports.)
+The source that produced it lives at `assets/approval-path.noml` and is committed with the SVG.
 
 Markdown's diagram affordances are limited compared to HTML. For quantitative comparisons (bar charts, scatter plots) markdown has no native equivalent — use a table with the data and let prose or caption carry the interpretation. The richer visualization happens in the HTML rendering.
 
-For a **UI/layout shape** that would be a wireframe in HTML, markdown has no inline-SVG wireframe affordance. Render the region composition as a mermaid layout `flowchart` (or describe it in prose) — never hand-draw a box-drawing/ASCII wireframe; it violates the no-box-drawing-characters rule and reads poorly. The wireframe proper is an HTML-only affordance.
+For a **UI/layout shape** that would be a wireframe in HTML, markdown has no inline-SVG wireframe affordance. Render the region composition as a nomnoml layout diagram (or describe it in prose) — never hand-draw a box-drawing/ASCII wireframe; it violates the no-box-drawing-characters rule and reads poorly. The wireframe proper is an HTML-only affordance.
 
 ## Inline code and code blocks
 
