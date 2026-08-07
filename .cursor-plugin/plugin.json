@@ -1,7 +1,7 @@
 {
   "name": "odin",
   "displayName": "ODIN",
-  "version": "1.17.93",
+  "version": "1.17.94",
   "description": "ODIN - advanced code agent with diagram-first engineering and atomic commit workflows for surgical precision in software development",
   "author": {
     "name": "cognitive-glitch"

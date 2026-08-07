@@ -1,6 +1,6 @@
 ---
 name: minimalism-driven
-description: 'Build the smallest version that fully does the job and makes its intent obvious — the right amount, not the fewest lines. Use when scope creep, speculative abstraction, or unneeded surface is a risk; before adding a helper, wrapper, config key, or dependency; or when the user says "minimal", "DRY this up", or "no gold-plating".'
+description: 'Shape code to the right amount: the smallest form that fully does the job with intent obvious, not the fewest lines. Use while writing or restructuring code, before adding a helper, wrapper, config key, or dependency, or when the user says "minimal", "DRY this up", or "no gold-plating".'
 ---
 
 # Minimalism-Driven Development
