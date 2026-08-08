@@ -65,6 +65,20 @@ Run `prek run --all-files` as the sole gate (`prek` is the Rust drop-in for `pre
 
 Run functional smoke tests of persona/doctrine edits in a fresh Claude Code session; `system-prompt-baseline.md` and `output-styles/*.md` load only at session start, so in-session verification of those files proves nothing.
 
+## Harness carriers
+
+Two files outside this repo embed the same doctrine for other harnesses: `~/.codex/AGENTS.md`
+(Codex CLI) and `~/.omp/agent/AGENTS.md` (omp). A doctrine change to
+`system-prompt-baseline.md` is not finished until both carry it.
+
+They are not cascade tails and `scripts/sync-baseline.py` does not touch them. Each keeps a
+harness-adapted `<code_tools>` layer and its own tool names, because the harnesses differ: Codex
+shells out for everything and prefixes commands with `rtk`, omp and Claude Code ship native file
+tools. Divergence in the tool layer is correct; divergence in a shared rule is drift, and the
+canonical wins.
+
+Edit them in place. Never commit them from this repo, and never stage `~/.codex/config.toml`.
+
 ## Writing-style defaults [LOAD-BEARING]
 
 When editing or generating content under this tree (skills, agents, commands, READMEs, AGENTS docs, commit bodies):
