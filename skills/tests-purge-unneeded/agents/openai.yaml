@@ -1,3 +1,3 @@
 interface:
   display_name: "Purge Unneeded Tests"
-  short_description: "Delete low-value tests that slow CI down"
+  short_description: "Delete tests that cannot catch real bugs"
