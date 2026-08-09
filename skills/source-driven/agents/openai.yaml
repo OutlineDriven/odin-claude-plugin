@@ -1,0 +1,3 @@
+interface:
+  display_name: "Source-Driven Development"
+  short_description: "Write framework code verified against real docs"

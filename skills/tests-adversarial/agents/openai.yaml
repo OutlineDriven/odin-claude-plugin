@@ -1,0 +1,3 @@
+interface:
+  display_name: "Adversarial Testing"
+  short_description: "Write adversarial tests that hunt silent failures"

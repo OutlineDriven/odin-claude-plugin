@@ -1,0 +1,3 @@
+interface:
+  display_name: "Incremental Implementation"
+  short_description: "Ship large changes in small safe steps"

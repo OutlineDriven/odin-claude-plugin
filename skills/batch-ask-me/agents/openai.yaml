@@ -1,0 +1,3 @@
+interface:
+  display_name: "Batch Ask Me"
+  short_description: "Run batched questions to map a design space"

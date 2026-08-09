@@ -1,0 +1,3 @@
+interface:
+  display_name: "Git Commit, Push, and PR"
+  short_description: "Ship commits and open a PR with a clear body"

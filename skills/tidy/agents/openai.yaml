@@ -1,0 +1,3 @@
+interface:
+  display_name: "Tidy"
+  short_description: "Compress files, diffs, memory and git stacks"

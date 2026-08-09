@@ -1,0 +1,3 @@
+interface:
+  display_name: "Design-by-Contract Development"
+  short_description: "Guard API boundaries with explicit contracts"

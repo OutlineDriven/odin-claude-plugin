@@ -1,0 +1,3 @@
+interface:
+  display_name: "Ask Me Command"
+  short_description: "Ask clarifying questions before planning"

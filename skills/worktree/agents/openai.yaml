@@ -1,0 +1,3 @@
+interface:
+  display_name: "Worktree Isolation"
+  short_description: "Set up isolated git worktrees per branch"

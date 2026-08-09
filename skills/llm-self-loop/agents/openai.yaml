@@ -1,0 +1,3 @@
+interface:
+  display_name: "LLM Self Loop"
+  short_description: "Turn human-gated steps into autonomous loops"

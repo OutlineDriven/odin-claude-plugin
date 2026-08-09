@@ -1,0 +1,3 @@
+interface:
+  display_name: "Type-Driven Development"
+  short_description: "Model domains so invalid states cannot exist"

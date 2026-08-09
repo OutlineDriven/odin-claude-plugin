@@ -1,0 +1,3 @@
+interface:
+  display_name: "Cascade Dedup"
+  short_description: "Strip duplicate directives across prompt cascades"

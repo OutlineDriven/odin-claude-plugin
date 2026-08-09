@@ -1,0 +1,3 @@
+interface:
+  display_name: "Strict Validation Setup"
+  short_description: "Set up strict tooling and GOALS.md scaffolding"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "GitHub Triage"
+  short_description: "Triage GitHub issues and PRs into workflow states"

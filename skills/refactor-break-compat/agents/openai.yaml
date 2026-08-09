@@ -1,0 +1,3 @@
+interface:
+  display_name: "Breaking Refactors"
+  short_description: "Rewrite subsystems and drop compat shims"

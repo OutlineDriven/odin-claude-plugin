@@ -1,0 +1,3 @@
+interface:
+  display_name: "Prototype Logic"
+  short_description: "Build a throwaway HTML demo of state logic"

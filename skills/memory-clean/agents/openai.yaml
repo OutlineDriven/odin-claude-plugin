@@ -1,0 +1,3 @@
+interface:
+  display_name: "Memory Clean"
+  short_description: "Audit memory for stale or duplicate entries"

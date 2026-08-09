@@ -1,0 +1,3 @@
+interface:
+  display_name: "Compound"
+  short_description: "Write verified outcomes into project docs"

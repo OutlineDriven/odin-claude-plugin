@@ -1,0 +1,3 @@
+interface:
+  display_name: "Onboard"
+  short_description: "Tour a codebase and show where to start"

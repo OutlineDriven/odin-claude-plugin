@@ -1,0 +1,3 @@
+interface:
+  display_name: "Explore Command"
+  short_description: "Map codebase structure, symbols, and deps"

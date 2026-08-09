@@ -1,0 +1,3 @@
+interface:
+  display_name: "Documentation and ADRs"
+  short_description: "Capture architectural decisions in clear docs"

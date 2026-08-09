@@ -1,0 +1,3 @@
+interface:
+  display_name: "Sync Docs"
+  short_description: "Fix docs that drifted from the code"

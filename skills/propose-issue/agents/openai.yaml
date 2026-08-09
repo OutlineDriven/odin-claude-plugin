@@ -1,0 +1,3 @@
+interface:
+  display_name: "Propose Issue"
+  short_description: "Turn a symptom into a filed GitHub issue"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Validation-First Development"
+  short_description: "Define state machines and invariants first"

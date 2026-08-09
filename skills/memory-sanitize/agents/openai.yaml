@@ -1,0 +1,3 @@
+interface:
+  display_name: "Memory Sanitize"
+  short_description: "Redact PII and secrets before sharing memory"

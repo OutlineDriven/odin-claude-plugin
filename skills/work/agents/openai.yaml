@@ -1,0 +1,3 @@
+interface:
+  display_name: "Work Execution"
+  short_description: "Execute a plan or work prompt end to end"

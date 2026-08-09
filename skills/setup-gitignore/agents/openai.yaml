@@ -1,0 +1,3 @@
+interface:
+  display_name: "Setup Gitignore"
+  short_description: "Build a clean gitignore for your repo"

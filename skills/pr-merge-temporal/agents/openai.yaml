@@ -1,0 +1,3 @@
+interface:
+  display_name: "Smart Merge to Temporal Branch"
+  short_description: "Validate PRs together on a staging branch"

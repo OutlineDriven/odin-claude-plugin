@@ -1,0 +1,3 @@
+interface:
+  display_name: "Doubt-Driven Development"
+  short_description: "Review code adversarially to verify claims"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Context Command"
+  short_description: "Map how a codebase area works before coding"

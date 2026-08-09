@@ -1,0 +1,3 @@
+interface:
+  display_name: "Autolearn"
+  short_description: "Turn a verified fix into a repo learning doc"

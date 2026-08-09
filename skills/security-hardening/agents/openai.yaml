@@ -1,0 +1,3 @@
+interface:
+  display_name: "Security and Hardening"
+  short_description: "Harden code against common vulnerabilities"

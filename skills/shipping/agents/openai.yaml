@@ -1,0 +1,3 @@
+interface:
+  display_name: "Shipping and Launch"
+  short_description: "Ship releases with safe launch safeguards"

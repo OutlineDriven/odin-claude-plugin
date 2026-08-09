@@ -1,0 +1,3 @@
+interface:
+  display_name: "Simplify"
+  short_description: "Compress a diff along clear axes"

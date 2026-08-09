@@ -1,0 +1,3 @@
+interface:
+  display_name: "Resolve PR Review Feedback"
+  short_description: "Address and resolve GitHub PR review comments"

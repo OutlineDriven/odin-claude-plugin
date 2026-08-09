@@ -1,0 +1,3 @@
+interface:
+  display_name: "Slop"
+  short_description: "Judge and purge AI slop in any artifact"

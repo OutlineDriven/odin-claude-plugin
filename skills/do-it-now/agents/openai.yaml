@@ -1,0 +1,3 @@
+interface:
+  display_name: "Do It Now"
+  short_description: "Ship the entire request in one pass"

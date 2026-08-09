@@ -1,0 +1,3 @@
+interface:
+  display_name: "ast-grep"
+  short_description: "Search and refactor code with AST patterns"

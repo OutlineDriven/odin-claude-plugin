@@ -1,0 +1,3 @@
+interface:
+  display_name: "Dependency Upgrade"
+  short_description: "Run dependency upgrades and patch CVEs safely"

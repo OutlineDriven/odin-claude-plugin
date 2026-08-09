@@ -1,0 +1,3 @@
+interface:
+  display_name: "Git-branchless"
+  short_description: "Manage stacked commits, rebases, and undo"

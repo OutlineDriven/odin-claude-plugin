@@ -1,0 +1,3 @@
+interface:
+  display_name: "Init AGENTS.md Generator"
+  short_description: "Generate an AGENTS.md capturing repo conventions"

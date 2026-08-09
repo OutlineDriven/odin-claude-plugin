@@ -1,0 +1,3 @@
+interface:
+  display_name: "Deprecation and Migration"
+  short_description: "Retire old code and migrate users safely"

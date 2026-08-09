@@ -1,0 +1,3 @@
+interface:
+  display_name: "Proof-Driven Development"
+  short_description: "Prove every property with formal tests"

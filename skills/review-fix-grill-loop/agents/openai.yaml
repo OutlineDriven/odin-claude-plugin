@@ -1,0 +1,3 @@
+interface:
+  display_name: "Review Fix Grill Loop"
+  short_description: "Review and fix your diff until it is clean"

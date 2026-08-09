@@ -1,0 +1,3 @@
+interface:
+  display_name: "Deslop"
+  short_description: "Remove debug code, stubs, and dead code safely"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Ideate"
+  short_description: "Generate grounded ideas from your codebase"

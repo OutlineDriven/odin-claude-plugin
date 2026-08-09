@@ -1,0 +1,3 @@
+interface:
+  display_name: "Drift Detect"
+  short_description: "Check if plans still match the code"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Subagent-Driven Development"
+  short_description: "Run ordered multi-task plans with subagents"

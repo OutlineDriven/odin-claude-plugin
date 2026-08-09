@@ -1,0 +1,3 @@
+interface:
+  display_name: "Git Commit and Push"
+  short_description: "Commit changes and push them without a PR"

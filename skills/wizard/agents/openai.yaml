@@ -1,0 +1,3 @@
+interface:
+  display_name: "Wizard"
+  short_description: "Build interactive bash wizards for manual setup steps"

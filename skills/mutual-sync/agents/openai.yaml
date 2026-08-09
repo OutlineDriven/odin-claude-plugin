@@ -1,0 +1,3 @@
+interface:
+  display_name: "Mutual Sync"
+  short_description: "Align user, agent, and codebase state"

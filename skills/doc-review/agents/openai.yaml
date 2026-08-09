@@ -1,0 +1,3 @@
+interface:
+  display_name: "Doc Review"
+  short_description: "Review plans and specs from multiple personas"

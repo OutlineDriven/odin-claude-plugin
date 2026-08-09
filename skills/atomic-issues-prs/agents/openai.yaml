@@ -1,0 +1,3 @@
+interface:
+  display_name: "Atomic Issues and PRs"
+  short_description: "Split changes into atomic GitHub issues and PRs"

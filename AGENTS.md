@@ -57,6 +57,18 @@ Do not add or backfill `CHANGELOG.md` entries for routine patch bumps.
 
 Single-quote any SKILL.md frontmatter value containing `: ` (colon-space) — `description` and `metadata.short-description` alike. Unquoted colon-space in a plain scalar is invalid YAML (PyYAML: `mapping values are not allowed here`); Claude Code's lenient loader masks the defect, so it ships silently broken for strict parsers.
 
+## Skill harness manifest
+
+Give every directory under `skills/` an `agents/openai.yaml`. The Codex and ChatGPT harnesses read it for the skill's UI title and blurb; a skill without one falls back to its raw slug in the harness skill list.
+
+```yaml
+interface:
+  display_name: "Writing Skills"
+  short_description: "Write documents agents consume"
+```
+
+Hold `short_description` to 25-64 characters so the harness does not truncate it, and keep every `display_name` unique across `skills/` so two entries stay distinguishable. Nothing here validates the file — no script reads it, no hook checks it, and `prek` is silent on it — so a missing or malformed manifest ships without warning. Adding a skill means adding its manifest in the same commit.
+
 ## Verification: format-only
 
 Run `prek run --all-files` as the sole gate (`prek` is the Rust drop-in for `pre-commit`, brew-installed at `/home/linuxbrew/.linuxbrew/bin/prek`; hooks defined in `.pre-commit-config.yaml`). Never invent `pytest` / `cargo test` / language test commands — there is no build, unit-test suite, or `.github/` CI here; don't add CI without an explicit ask.

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Resolve Command"
+  short_description: "Address review feedback and judge comments"

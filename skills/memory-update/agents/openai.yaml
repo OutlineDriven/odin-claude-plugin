@@ -1,0 +1,3 @@
+interface:
+  display_name: "Memory Update"
+  short_description: "Save session details to lasting memory"

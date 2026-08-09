@@ -1,0 +1,3 @@
+interface:
+  display_name: "Code Review"
+  short_description: "Review recent commits and current work"

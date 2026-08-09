@@ -1,0 +1,3 @@
+interface:
+  display_name: "Ground Latest"
+  short_description: "Check current versions before choosing a stack"
