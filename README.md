@@ -124,11 +124,11 @@ Before any non-trivial implementation:
 4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
 5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
 
-## Skills (127 total)
+## Skills (128 total)
 
 Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
 
-### Planning & Exploration (21 skills)
+### Planning & Exploration (22 skills)
 
 - `askme` - Verbalized Sampling protocol for deep intent exploration before planning
 - `batch-ask-me` - Walk a dependency-aware design tree in batched question rounds until shared understanding
@@ -137,6 +137,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `loop-me` - Design recurring workflows through a stateful `askme` session and cwd specs
 - `to-questionnaire` - Turn a knowledge gap into an async questionnaire for the person who can answer it
 - `clarify` - Scan a request, document, or conversation for ambiguities and unstated assumptions; certainty-tiered findings with defaults
+- `generalize-from-cases` - Derive the rule the user means from the examples they gave, with rival readings and a stated boundary
 - `exhaustive` - Prove a decision, state, or requirement space is fully covered by enumerating every cell as covered, gap, or deferred
 - `shape` - Shape Up shaping: appetite, breadboard, rabbit holes, no-gos for a bet on work
 - `to-tickets` - Break a plan into tracer-bullet tickets with blocking edges, on GitHub or in `.outline/`

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Generalize From Cases"
+  short_description: "Derive the intended rule from examples"
