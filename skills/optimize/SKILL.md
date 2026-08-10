@@ -275,3 +275,4 @@ or a `Justfile` / `Makefile` target named `bench-guard`. The before-benchmark JS
 ## Disambiguation
 
 - **refactor-break-compat**: contract-breaking modernization. `/optimize` never breaks public API contracts (except the disclosed approximation path, which requires explicit user confirmation).
+- **extremely-optimize**: a floor-driven campaign that demolishes and re-derives hot paths, then grills the cold ones. `/optimize` transforms one already-located hot path in place and leaves cold paths alone.

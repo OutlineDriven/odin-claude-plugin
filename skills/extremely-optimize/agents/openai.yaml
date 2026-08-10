@@ -1,0 +1,3 @@
+interface:
+  display_name: "Extremely Optimize"
+  short_description: "Rebuild hot paths from their performance floor"

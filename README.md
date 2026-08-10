@@ -208,7 +208,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `strict-validation-setup` - Bootstrap strict-mode tooling and per-task GOALS.md scaffolding for self-verifying agent loops
 - `wizard` - Generate an interactive bash wizard that walks a human through a manual setup or migration
 
-### Execution (16 skills)
+### Execution (17 skills)
 
 - `parallel-launch` - Decompose a task into independent concerns and execute via agents
 - `tests-adversarial` - Adversarial tests that stress failure paths
@@ -225,6 +225,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `debug` - Hypothesis-driven debugging with minimal reproduction
 - `frontend-ui` - Build production-quality user-facing interfaces
 - `optimize` - Locate a hot path, benchmark transformations, and commit the proven winner
+- `extremely-optimize` - Rebuild code from its performance floor: hot paths demolished and re-derived first, cold paths grilled after
 - `shipping` - Prepare a production launch with checklists, monitoring, and rollback planning
 
 ### Review & Resolution (6 skills)
