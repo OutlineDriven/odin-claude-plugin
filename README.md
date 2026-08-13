@@ -70,25 +70,30 @@ The plugin registers `skills/` on `config.skills.paths` and adds one command per
 skipping the six marked `disable-model-invocation` because opencode has no manual-only
 gate.
 
-Verified by real installs from a clean clone of this repository at `1.17.82`, on Linux.
+Verified at `1.17.101` on Linux: Devin from a clean local clone of this repository, Codex
+from the published marketplace at the same revision, the rest against the working tree.
 Every version below was read from the installed binary with `--version`, not assumed:
 
 | Harness | Installed version | Check | Result |
 |---|---|---|---|
-| Codex CLI | `codex-cli 0.146.0` | `plugin marketplace add` + `plugin add` | installed, 120 skills in plugin root |
-| Devin CLI | `devin 3000.2.17` | `devin plugins install` | installed, skills exposed as `/odin:<skill>` |
-| Antigravity | `agy 1.1.9` | `agy plugin validate .` | ok, 120 skills processed |
-| Grok Build | `grok 0.2.118 [stable]` | `grok plugin validate .` | manifest valid, 1 skill dir + hooks |
-| Claude Code | `2.1.220` | `claude plugin validate` | passed |
-| opencode | not installed | module exercised directly | 114 commands, 5 manual-only excluded |
+| Codex CLI | `codex-cli 0.147.0` | `plugin marketplace upgrade` + `plugin add` | installed at `1.17.101`, 127 skills in plugin root |
+| Devin CLI | `devin 3000.2.17` | `devin plugins install` | installed, 127 skills exposed as `/odin:<skill>` |
+| Antigravity | `agy 1.1.12` | `agy plugin validate .` | ok, 128 processed: the 127 skills plus `skills/LICENSES.md`, which agy counts as a skill |
+| Grok Build | `grok 0.2.118 [stable]` | `grok plugin validate .` | manifest valid, 1 skill dir, 0 command dirs, 0 agent dirs |
+| Claude Code | `2.1.228` | `claude plugin validate .` | passed with warnings |
+| opencode | not installed | module exercised directly | 121 commands, 6 manual-only excluded |
 
-**Cursor and Kimi are not tested.** Both install through an in-editor slash command rather
-than a shell, so there is no headless path to exercise them. Their manifests match the
-vendors' published schemas; treat first install as unproven.
+**Cursor and Kimi installs are unproven.** `kimi 0.28.1` has no `plugin` subcommand, so its
+plugin install is untested, but its skills do load headlessly: `kimi -p '<prompt>'
+--skills-dir <repo>/skills` resolved `show-me` from its description at `1.17.101`.
+`cursor-agent 2026.07.23` does expose `plugin marketplace add <gitUrl>`, but marketplaces
+there are account-scoped, so installing would mutate account state and was not exercised.
+Both manifests match the vendors' published schemas; treat first install as unproven.
 
 `claude plugin validate --strict` fails on this repo, and did so before any harness work:
-`metadata.maintainer`, `.website` and `.support` in `.claude-plugin/marketplace.json` are
-unknown to Claude Code, which ignores them at load time. Non-strict validation passes.
+`repository` in `.claude-plugin/plugin.json`, and `metadata.lastUpdated`, `.maintainer`,
+`.website` and `.support` in `.claude-plugin/marketplace.json`, are unknown to Claude Code,
+which ignores them at load time. Non-strict validation passes with those five warnings.
 
 ### Verify Installation
 
