@@ -67,7 +67,7 @@ plugin file:
 ```
 
 The plugin registers `skills/` on `config.skills.paths` and adds one command per skill,
-skipping the five marked `disable-model-invocation` because opencode has no manual-only
+skipping the six marked `disable-model-invocation` because opencode has no manual-only
 gate.
 
 Verified by real installs from a clean clone of this repository at `1.17.82`, on Linux.
@@ -124,7 +124,7 @@ Before any non-trivial implementation:
 4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
 5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
 
-## Skills (128 total)
+## Skills (127 total)
 
 Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
 
@@ -153,16 +153,13 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `pov` - Decisive, project-grounded verdict on adopting or switching technology
 - `research` - Gather external knowledge from authoritative sources with verified citations
 
-### Writing & Learning (10 skills)
+### Writing & Learning (7 skills)
 
 - `teach` - Run a persistent cwd teaching workspace, and route to the corpus skills when the material already exists
 - `map-corpus` - Inventory a folder of your own study material into one CORPUS.md with prerequisite-ordered concepts
 - `explain-concept` - Make one concept clear from a chosen angle: intuition, motivation, origin, picture, or contrast
 - `drill` - Practise a concept and get graded: scaffolded exercises, quizzes, spaced recall, and gap probes
 - `capstone` - Scope and judge a real project sized to what the learner has actually cleared
-- `writing-fragments` - Mine heterogeneous raw material into an append-only pile before shaping
-- `writing-shape` - Shape a raw pile into an article paragraph by paragraph with argued formats
-- `writing-beats` - Build a grounded article journey one candidate beat at a time
 - `writing-skills` - Reference for writing agent-consumed documents so they run predictably: context load, hierarchy, leading words, and pruning
 - `book-to-skill` - Distil a book or comparable source into a validated, trigger-probed agent skill
 
@@ -265,7 +262,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `resolve-pr-feedback` - Resolve PR review feedback and fix code-review comments
 - `worktree` - Set up isolated git worktrees for new or existing branches/PRs
 
-### Codebase Intelligence & Workflow (19 skills)
+### Codebase Intelligence & Workflow (20 skills)
 
 - `deslop` - Three-phase certainty-graded AI-slop detection with HIGH-only guarded autofix
 - `sync-docs` - Diff-driven doc-vs-code drift detection; safe version/CHANGELOG fixes, rest flagged
@@ -286,6 +283,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `cascade-dedup` - Strip duplicate and conflicting directives across the system-prompt cascade family
 - `dedup-skills` - Ledger-first dedup of a skills/ tree: find repeated or self-conflicting rules across skill files
 - `handoff` - Snapshot the current session into a resumable handoff artifact for a cold session, agent, or person
+- `show-me` - Answer the current topic with the smallest visual: pseudocode, tree, diagram, or diff
 
 ## Output Styles (6 total)
 

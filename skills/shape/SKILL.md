@@ -1,6 +1,6 @@
 ---
 name: shape
-description: 'Shape work in the Basecamp Shape Up sense — appetite, breadboard, rabbit holes, no-gos. Use when the user says "shape this work", "what is the appetite", "pitch this", "gut check the shape", "fix this pitch", or "does the result match the bet". Shapes bets on work, not prose — turning fragments into an article is writing-shape.'
+description: 'Shape work in the Basecamp Shape Up sense — appetite, breadboard, rabbit holes, no-gos. Use when the user says "shape this work", "what is the appetite", "pitch this", "gut check the shape", "fix this pitch", or "does the result match the bet". Shapes bets on work, not prose.'
 metadata:
   short-description: 'Shape Up shaping: build, check, repair, verify'
 ---

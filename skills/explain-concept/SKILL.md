@@ -15,7 +15,7 @@ An explicit argument overrides the table; no match means **intuition**.
 | "what is really going on", "I don't get it", "explain it simply" | intuition |
 | "why does this exist", "what problem does it solve", "why not just X" | motivation |
 | "where did this come from", "who came up with it", "what did it replace" | origin |
-| "draw it", "show me", "what does it look like" | picture |
+| "draw it", "what does it look like" | picture |
 | "what is the difference", "when do I use X instead of Y" | contrast |
 
 ## intuition
