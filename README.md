@@ -28,10 +28,10 @@ each tool reads `skills/` directly.
 - Claude Code installed and running
 - Git (for marketplace installation)
 
-### Full Install Script (Recommended)
+### Full Install Script (Claude Code)
 
 ```shell
-wget -O ~/.claude/CLAUDE.md https://raw.githubusercontent.com/OutlineDriven/odin-claude-plugin/refs/heads/main/CLAUDE.md && claude plugin marketplace add OutlineDriven/odin-claude-plugin && claude plugin install odin@odin-marketplace
+claude plugin marketplace add OutlineDriven/odin-claude-plugin && claude plugin install odin@odin-marketplace
 ```
 
 ### Other coding agents
