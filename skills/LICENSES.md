@@ -339,6 +339,27 @@ Skills adapted from the `compound-engineering-plugin` (https://github.com/EveryI
 | ----------------------------------------------- | --------------- | ------- | --------- | ---------- |
 | `show-me/SKILL.md` | https://github.com/humanlayer/skills/tree/main/plugins/show-me/skills/show-me | MIT | © 2026 HumanLayer | ODIN voice; view catalogue restated as a routing table; examples de-branded across two language families; the HTML `open` branch removed for the headless mandate and rerouted; scope fenced against `explain-concept`, `diagram-contract`, and `prototype-logic`; `"show me"` trigger taken over from `explain-concept`. |
 
+## cursor/plugins pstack port (why, unslop)
+
+`why` and `unslop` are ports of the `pstack/skills/why` and `pstack/skills/unslop` skills from https://github.com/cursor/plugins (subtree `pstack/`, ref `main`, pinned commit `63d938c2e4a165a0fec1bd0f61a8e325f0cb751e`). Upstream is MIT at `pstack/LICENSE` — note the repository ROOT has no LICENSE file; the license lives in the `pstack/` subtree, so a reader checking the repository root will find nothing. Copyright: `Copyright (c) 2026 Lauren Tan`. ODIN adaptations — `why/SKILL.md`: Cursor subagent spawning (`subagent_type: generalPurpose`) rewritten for this harness's `task` tool with `scout` investigators; Cursor `mcps/` directory discovery rewritten for `xd://mcp__*` device routes; references to a companion `how` skill retargeted to the local `contexts` skill, which has no upstream counterpart here. `unslop/SKILL.md`: the em-dash pattern narrowed from a blanket ban to overuse, and five entries (`surface`, `harness`, `scaffolding`, `primitive`, `gold-plating`) removed from the abstract-noun ban list because all five are load-bearing vocabulary in this repo's own doctrine; the upstream `Must always apply` always-on description replaced with a trigger-shaped one. The 12 `why/references/**` files port verbatim. License text is the standard MIT reproduced below; only the copyright holder differs (© 2026 Lauren Tan).
+
+| Path under `/home/alpha/.claude/claude/skills/` | Upstream origin | License | Copyright | Provenance |
+| ----------------------------------------------- | --------------- | ------- | --------- | ---------- |
+| `why/SKILL.md` | `pstack/skills/why/SKILL.md` | MIT | © 2026 Lauren Tan | ODIN adaptations listed above; Cursor subagent/mcp routing and `how`-skill retarget. |
+| `why/references/epistemics.md` | `pstack/skills/why/references/epistemics.md` | MIT | © 2026 Lauren Tan | Ported verbatim. |
+| `why/references/investigator-prompt.md` | `pstack/skills/why/references/investigator-prompt.md` | MIT | © 2026 Lauren Tan | Ported verbatim. |
+| `why/references/source-playbook.md` | `pstack/skills/why/references/source-playbook.md` | MIT | © 2026 Lauren Tan | Ported verbatim. |
+| `why/references/synthesizer-prompt.md` | `pstack/skills/why/references/synthesizer-prompt.md` | MIT | © 2026 Lauren Tan | Ported verbatim. |
+| `why/references/sources/code-archaeology.md` | `pstack/skills/why/references/sources/code-archaeology.md` | MIT | © 2026 Lauren Tan | Ported verbatim. |
+| `why/references/sources/databricks.md` | `pstack/skills/why/references/sources/databricks.md` | MIT | © 2026 Lauren Tan | Ported verbatim. |
+| `why/references/sources/datadog.md` | `pstack/skills/why/references/sources/datadog.md` | MIT | © 2026 Lauren Tan | Ported verbatim. |
+| `why/references/sources/incident-postmortem.md` | `pstack/skills/why/references/sources/incident-postmortem.md` | MIT | © 2026 Lauren Tan | Ported verbatim. |
+| `why/references/sources/linear.md` | `pstack/skills/why/references/sources/linear.md` | MIT | © 2026 Lauren Tan | Ported verbatim. |
+| `why/references/sources/notion.md` | `pstack/skills/why/references/sources/notion.md` | MIT | © 2026 Lauren Tan | Ported verbatim. |
+| `why/references/sources/sentry.md` | `pstack/skills/why/references/sources/sentry.md` | MIT | © 2026 Lauren Tan | Ported verbatim. |
+| `why/references/sources/slack.md` | `pstack/skills/why/references/sources/slack.md` | MIT | © 2026 Lauren Tan | Ported verbatim. |
+| `unslop/SKILL.md` | `pstack/skills/unslop/SKILL.md` | MIT | © 2026 Lauren Tan | ODIN adaptations listed above; em-dash and ban-list narrowing, trigger description. |
+
 ## Full upstream license text (MIT)
 
 ```

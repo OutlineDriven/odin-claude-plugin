@@ -27,7 +27,8 @@ Both modes route every finding through the owning authority:
 | Domain signals | Authority (invoke) | Citation source |
 |---|---|---|
 | Code debris: debug output, placeholder or stub bodies, swallowed errors, dead code, hardcoded credentials | `odin:deslop` | Its catalog categories; its certainty contract governs any edit |
-| Judgment slop: hedge-stacks, generic openers, 50/50 recommendations, AI-flat prose | `odin:taste` | Side A rows (ceremony and decoration are Side B overkill, not slop) |
+| Judgment slop: hedge-stacks, generic openers, 50/50 recommendations, committed-to-nothing register | `odin:taste` | Side A rows (ceremony and decoration are Side B overkill, not slop) |
+| Concrete prose AI tells: puffery, AI vocabulary, "not just X but Y", rule of three, filler, passive voice, chatbot phrases | `odin:unslop` | Its pattern catalog (patterns to detect and fix) |
 | Visual/UI slop: default gradients, framework-default look, vibe-coded UI | `odin:design` | Its anti-slop reference |
 
 A mixed artifact splits into per-domain findings and returns one combined report.
@@ -44,7 +45,8 @@ A mixed artifact splits into per-domain findings and returns one combined report
 
 1. Route per the table, then act under each authority's own gates:
    - Code → run the `odin:deslop` workflow end to end: HIGH-certainty fixes applied, MEDIUM/LOW report-only, verification and rollback intact.
-   - Prose/decisions → run the `odin:taste` audit, then apply its top-ranked fixes; taste is a judgment register, so where two fixes conflict or a fix would reverse a committed choice, ask the user to pick before applying.
+   - Prose (concrete writing tells) → run the `odin:unslop` pattern pass and apply its fixes.
+   - Decisions/judgment → run the `odin:taste` audit, then apply its top-ranked fixes; taste is a judgment register, so where two fixes conflict or a fix would reverse a committed choice, ask the user to pick before applying.
    - UI → apply corrections from `odin:design` anti-slop doctrine.
 2. Report edits applied vs flagged-only, per authority.
 

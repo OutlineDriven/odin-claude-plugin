@@ -129,7 +129,7 @@ Before any non-trivial implementation:
 4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
 5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
 
-## Skills (127 total)
+## Skills (129 total)
 
 Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
 
@@ -158,7 +158,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `pov` - Decisive, project-grounded verdict on adopting or switching technology
 - `research` - Gather external knowledge from authoritative sources with verified citations
 
-### Writing & Learning (7 skills)
+### Writing & Learning (8 skills)
 
 - `teach` - Run a persistent cwd teaching workspace, and route to the corpus skills when the material already exists
 - `map-corpus` - Inventory a folder of your own study material into one CORPUS.md with prerequisite-ordered concepts
@@ -167,6 +167,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `capstone` - Scope and judge a real project sized to what the learner has actually cleared
 - `writing-skills` - Reference for writing agent-consumed documents so they run predictably: context load, hierarchy, leading words, and pruning
 - `book-to-skill` - Distil a book or comparable source into a validated, trigger-probed agent skill
+- `unslop` - Cut AI tells from writing and restore human voice
 
 ### Working Posture (7 skills)
 
@@ -267,12 +268,13 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `resolve-pr-feedback` - Resolve PR review feedback and fix code-review comments
 - `worktree` - Set up isolated git worktrees for new or existing branches/PRs
 
-### Codebase Intelligence & Workflow (20 skills)
+### Codebase Intelligence & Workflow (21 skills)
 
 - `deslop` - Three-phase certainty-graded AI-slop detection with HIGH-only guarded autofix
 - `sync-docs` - Diff-driven doc-vs-code drift detection; safe version/CHANGELOG fixes, rest flagged
 - `drift-detect` - Plan-vs-reality reality check across GitHub, docs, and code
 - `audit-project` - Iterative multi-agent code audit with a false-positive contract
+- `why` - Investigate design rationale from git, tickets, docs, and chat with cited confidence
 - `onboard` - New-codebase orientation tour with interactive guidance
 - `can-i-help` - Route contributors to data-backed contribution opportunities
 - `enhance` - Certainty-graded enhancement of agent/plugin surfaces via parallel analyzers
