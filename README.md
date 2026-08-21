@@ -129,7 +129,7 @@ Before any non-trivial implementation:
 4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
 5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
 
-## Skills (129 total)
+## Skills (130 total)
 
 Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
 
@@ -231,9 +231,10 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `extremely-optimize` - Rebuild code from its performance floor: hot paths demolished and re-derived first, cold paths grilled after
 - `shipping` - Prepare a production launch with checklists, monitoring, and rollback planning
 
-### Review & Resolution (6 skills)
+### Review & Resolution (7 skills)
 
 - `review` - Review code changes on the current branch
+- `show-review` - Walk a diff as one-finding visuals, Keep/Skip/Discuss per turn
 - `resolve` - Resolve code review comments with validity checks
 - `doc-review` - Review requirements docs, plans, specs, and PRDs through persona-based lenses
 - `security-review` - Adversarial security audit using STRIDE, OWASP, supply-chain checks, and secrets scans

@@ -1,6 +1,6 @@
 ---
 name: show-me
-description: 'Use when the answer is a picture rather than prose: the user says "show me" or "diagram this" about the current topic. Emits one ephemeral chat visual and nothing on disk: pseudocode, call tree, component tree, shallow file tree, diagram, diff, or whole code block. A diagram that must live in a document goes to diagram-contract; a sketch the user clicks goes to prototype-logic.'
+description: 'Use when the answer is a picture rather than prose: the user says "show me" or "diagram this" about the current topic. Emits one ephemeral chat visual and nothing on disk: pseudocode, call tree, component tree, shallow file tree, diagram, diff, or whole code block. A diagram that must live in a document goes to diagram-contract; a sketch the user clicks goes to prototype-logic; a visual walk of review findings goes to show-review.'
 argument-hint: "What should the visual show?"
 ---
 
@@ -141,3 +141,4 @@ Put each visual next to the short text it supports, not in a block of its own at
 - A diagram that must live in a document goes to `diagram-contract`, which owns the tool choice, the house palette, and the committed SVG beside its source.
 - A layout or state comparison the user needs to click goes to `prototype-logic`.
 - A concept being taught, rather than a current topic being shown, goes to `explain-concept`.
+- A visual walk of review findings, one at a time, goes to `show-review`.

@@ -1,6 +1,6 @@
 ---
 name: review-fix-grill-loop
-description: Use when the user says "grill my changes" or wants their diff reviewed and fixed iteratively until clean.
+description: Use when the user says "grill my changes" or wants their diff reviewed and fixed iteratively until clean. An interactive visual walk of findings goes to show-review.
 metadata:
   short-description: Diff-scoped review→resolve→fix loop until clean
 ---

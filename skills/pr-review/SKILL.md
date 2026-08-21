@@ -1,6 +1,6 @@
 ---
 name: pr-review
-description: Use when the user asks to review a pull request, or wants structured quality, security, and testing feedback on a PR diff.
+description: Use when the user asks to review a pull request, or wants structured quality, security, and testing feedback on a PR diff. An interactive visual walk of findings goes to show-review.
 ---
 
 # Code Review for a given PR

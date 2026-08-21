@@ -1,6 +1,6 @@
 ---
 name: review
-description: Use when reviewing current work or recent commits, or running a deep review.
+description: Use when reviewing current work or recent commits, or running a deep review. An interactive visual walk of findings goes to show-review.
 metadata:
   short-description: Read-only branch review, single-pass, or deep multi-persona with P0-P3 severity
 ---

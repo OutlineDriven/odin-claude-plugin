@@ -1,0 +1,3 @@
+interface:
+  display_name: "Show Review"
+  short_description: "Walk findings one visual at a time"
