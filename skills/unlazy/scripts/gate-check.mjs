@@ -2,7 +2,7 @@
 // gate-check.mjs : run the CHECK commands in gate files, flip boxes, record evidence.
 // Zero dependencies. Node 16+.
 // Ported from https://github.com/Leonxlnx/unlazy (MIT, (c) 2026 Leonxlnx),
-// pinned commit ed9e8d2b5919698cf2c54bda270d507e10b69617; logic unmodified.
+// pinned commit ed9e8d2b5919698cf2c54bda270d507e10b69617.
 //
 // Usage:
 //   node gate-check.mjs [file ...]          run unmet gates' checks, update files
