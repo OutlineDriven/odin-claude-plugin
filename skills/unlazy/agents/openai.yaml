@@ -1,0 +1,3 @@
+interface:
+  display_name: "Unlazy"
+  short_description: "Prove done against gate files, not claims"

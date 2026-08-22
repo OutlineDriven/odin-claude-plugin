@@ -360,6 +360,18 @@ Skills adapted from the `compound-engineering-plugin` (https://github.com/EveryI
 | `why/references/sources/slack.md` | `pstack/skills/why/references/sources/slack.md` | MIT | © 2026 Lauren Tan | Ported verbatim. |
 | `unslop/SKILL.md` | `pstack/skills/unslop/SKILL.md` | MIT | © 2026 Lauren Tan | ODIN adaptations listed above; em-dash and ban-list narrowing, trigger description. |
 
+## Leonxlnx unlazy port
+
+`unlazy` is a port of https://github.com/Leonxlnx/unlazy (ref `main`, pinned commit `ed9e8d2b5919698cf2c54bda270d507e10b69617`). Upstream is MIT, `Copyright (c) 2026 Leonxlnx`. ODIN adaptations, made under the same MIT terms — full structural re-derive in ODIN voice: upstream's four references collapsed to two (`method.md` merges upstream `method.md` + `orchestration.md`; `gates.md` merges the format spec and writing guide); upstream's three templates (`PLAN.md`, `gates-leaf.md`, `gates-node.md`) consolidated into one `templates/gates.md`; `token-economy.md` dropped as a file with its operative advice distilled into the method reference; the Claude Code Stop-hook machinery (`stop-hook.mjs`, `install-hooks.mjs`) not carried because it mutates user settings, with SKILL.md noting upstream offers it; all research citations dropped; the trigger description reworded to compose with the local `work`/`incremental`/`subagent-driven` skills. `scripts/gate-check.mjs` ports with logic unmodified (header attribution only). License text is the standard MIT reproduced below; only the copyright holder differs (© 2026 Leonxlnx).
+
+| Path under `/home/alpha/.claude/claude/skills/` | Upstream origin | License | Copyright | Provenance |
+| ----------------------------------------------- | --------------- | ------- | --------- | ---------- |
+| `unlazy/SKILL.md` | `SKILL.md` | MIT | © 2026 Leonxlnx | ODIN-voice re-derive; adaptations listed above. |
+| `unlazy/references/method.md` | `references/method.md` + `references/orchestration.md` | MIT | © 2026 Leonxlnx | Two upstream references merged; token-economy advice distilled in. |
+| `unlazy/references/gates.md` | `references/gates.md` | MIT | © 2026 Leonxlnx | Format spec and writing guide merged; ODIN voice. |
+| `unlazy/templates/gates.md` | `templates/PLAN.md` + `templates/gates-leaf.md` + `templates/gates-node.md` | MIT | © 2026 Leonxlnx | Three templates consolidated into one file; upstream path references adjusted. |
+| `unlazy/scripts/gate-check.mjs` | `scripts/gate-check.mjs` | MIT | © 2026 Leonxlnx | Logic unmodified; header attribution added. |
+
 ## Full upstream license text (MIT)
 
 ```

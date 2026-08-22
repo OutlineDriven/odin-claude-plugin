@@ -129,7 +129,7 @@ Before any non-trivial implementation:
 4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
 5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
 
-## Skills (130 total)
+## Skills (131 total)
 
 Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
 
@@ -211,7 +211,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `strict-validation-setup` - Bootstrap strict-mode tooling and per-task GOALS.md scaffolding for self-verifying agent loops
 - `wizard` - Generate an interactive bash wizard that walks a human through a manual setup or migration
 
-### Execution (17 skills)
+### Execution (18 skills)
 
 - `parallel-launch` - Decompose a task into independent concerns and execute via agents
 - `tests-adversarial` - Adversarial tests that stress failure paths
@@ -230,6 +230,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `optimize` - Locate a hot path, benchmark transformations, and commit the proven winner
 - `extremely-optimize` - Rebuild code from its performance floor: hot paths demolished and re-derived first, cold paths grilled after
 - `shipping` - Prepare a production launch with checklists, monitoring, and rollback planning
+- `unlazy` - Gate-file discipline over a task decomposition: prove done against a checked ledger, not a claim
 
 ### Review & Resolution (7 skills)
 
