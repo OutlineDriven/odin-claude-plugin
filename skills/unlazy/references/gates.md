@@ -1,6 +1,6 @@
 # Gate files: format and writing guide
 
-The gate file is the machine-readable contract between "I say it is done" and "it is done". The bundled `gate-check.mjs` parses exactly this format, so any deviation weakens enforcement.
+The gate file is the machine-readable contract between "I say it is done" and "it is done". The bundled `gate_check.py` parses exactly this format, so any deviation weakens enforcement.
 
 ## Format
 
@@ -24,7 +24,7 @@ ABANDON: G2 <reason, only if a gate had to be surrendered>
 
 - A gate starts at a line matching `- [ ]` or `- [x]` (case-insensitive x).
 - Indented `CHECK:`, `EXPECT:`, `EVIDENCE:` lines up to the next gate belong to the gate above them.
-- `EXPECT:` is a plain substring match against the command's combined stdout+stderr, unless wrapped in slashes, then it is a JavaScript regex (e.g. `/8\/8 passed/`).
+- `EXPECT:` is a plain substring match against the command's combined stdout+stderr, unless wrapped in slashes, then it is a Python regex (e.g. `/8\/8 passed/`).
 - `ABANDON: G<n> <reason>` anywhere in the file marks that gate as honestly surrendered. Tools treat it as resolved, but reports must list it.
 
 ## What counts as unmet
@@ -34,7 +34,7 @@ A gate is unmet if either holds:
 1. Its box is unchecked and no ABANDON line names it.
 2. Its box is checked but `EVIDENCE:` still reads `pending`. A checkbox is a claim; evidence is the proof. Checked-without-evidence is the exact failure mode this system exists to catch, so it counts as worse than unchecked, not better.
 
-Box flips are earned, not written: `gate-check.mjs` flips a box only when the CHECK output matches EXPECT, recording the deciding tail of output as evidence in place. Manual gates flip by hand, but only with the `EVIDENCE:` line replaced by actual proof: a measurement, a quote of the deciding output, a `file:line`.
+Box flips are earned, not written: `gate_check.py` flips a box only when the CHECK output matches EXPECT, recording the deciding tail of output as evidence in place. Manual gates flip by hand, but only with the `EVIDENCE:` line replaced by actual proof: a measurement, a quote of the deciding output, a `file:line`.
 
 ## Writing good gates
 

@@ -11,7 +11,7 @@ This skill governs gate discipline on a decomposition; it composes with `work`, 
 
 ## Rule zero: gates before work
 
-Before real work starts, write the acceptance gates to a file: `GATES.md` in the working directory, using [templates/gates.md](templates/gates.md). One checkbox per outcome the task requires. Wherever an outcome is command-checkable, give it a `CHECK:` line (the runnable command) and an `EXPECT:` line (the output that decides it), so the check is a subprocess rather than an opinion.
+Before real work starts, write the acceptance gates to a file: `.outline/GATES.md` in the working directory, using [templates/gates.md](templates/gates.md). One checkbox per outcome the task requires. Wherever an outcome is command-checkable, give it a `CHECK:` line (the runnable command) and an `EXPECT:` line (the output that decides it), so the check is a subprocess rather than an opinion.
 
 Why a file: intentions do not survive a long context, files do. A checklist written at minute 2 is exactly as sharp at minute 90, when the pull toward wrapping up is strongest.
 
@@ -24,7 +24,7 @@ If a gate becomes genuinely impossible, do not quietly drop it. Add `ABANDON: <g
 Run the bundled checker to execute CHECK commands, flip boxes, and record evidence:
 
 ```
-node <this-skill-dir>/scripts/gate-check.mjs GATES.md
+python3 <this-skill-dir>/scripts/gate_check.py .outline/GATES.md
 ```
 
 It flips a box only when the command's output matches EXPECT (substring, or `/regex/`). `--status` reports without changing anything; exit 0 means every gate is met or honestly abandoned. Manual gates (no CHECK possible) are checked by hand, but only with the `EVIDENCE:` line replaced by actual proof: a measurement, a quote of output, a `file:line`. Upstream unlazy also ships a Claude Code Stop hook that blocks ending the turn on unmet gates; this port does not carry it.

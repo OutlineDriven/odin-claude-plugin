@@ -22,7 +22,7 @@ When the user gives no depth, pick the smallest N whose leaves match the task's 
 
 The stall-at-80-percent failure is an end-of-long-context disease. Attention, not time, is the scarce resource, and a fresh subagent per leaf resets it. That is the honest version of "every leaf gets the full budget".
 
-Orchestrate at tree depth 4+, or any build clearly beyond one sitting — roughly half an hour of real work and above. Below that, stay solo: subagent overhead (context re-establishment per leaf) costs more than it buys, and one `GATES.md` in one session gives you most of the discipline at a fraction of the cost. Checks-as-commands do the economizing everywhere: every CHECK line converts model re-reading into a free subprocess, and evidence stays capped at the deciding lines, never a log.
+Orchestrate at tree depth 4+, or any build clearly beyond one sitting — roughly half an hour of real work and above. Below that, stay solo: subagent overhead (context re-establishment per leaf) costs more than it buys, and one `.outline/GATES.md` in one session gives you most of the discipline at a fraction of the cost. Checks-as-commands do the economizing everywhere: every CHECK line converts model re-reading into a free subprocess, and evidence stays capped at the deciding lines, never a log.
 
 ## The driver loop
 
@@ -30,7 +30,7 @@ In orchestrated mode you (the main session) are the driver. You do not implement
 
 1. **Plan.** Write the plan (contract, tree, one gates file per leaf and branch) from the template. This is the only step where the whole task must fit in one head.
 2. **Dispatch one leaf.** Spawn a subagent whose entire brief is: the contract section of the plan (not the whole file, not your history), its own gates file verbatim, and the instruction to work the four passes until every gate is met with evidence, then stop; if a gate is impossible, ABANDON it with a reason. Lean briefs are the point: a leaf never receives the driver's transcript or the other leaves' outputs.
-3. **Verify, never trust.** When the leaf returns, re-run its checks yourself: `node <skill-dir>/scripts/gate-check.mjs --status gates/leaf-x.md`, plus a spot re-run of the CHECK commands. A leaf that checked its own boxes without evidence gets sent back with the specific unmet gates named. This layer makes self-certification worthless.
+3. **Verify, never trust.** When the leaf returns, re-run its checks yourself: `python3 <skill-dir>/scripts/gate_check.py --status .outline/gates/leaf-x.md`, plus a spot re-run of the CHECK commands. A leaf that checked its own boxes without evidence gets sent back with the specific unmet gates named. This layer makes self-certification worthless.
 4. **Log and advance.** Append one line to the plan's status log (append-only; never rewrite lines above). Dispatch the next leaf. When all children of a branch are verified, work the branch's integration gates yourself or dispatch an integration leaf.
 5. **Report.** Only when the root's gates are met. Paste the ledger, N of N, with every ABANDON line surfaced, and re-measure every number you state.
 

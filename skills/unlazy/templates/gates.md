@@ -21,12 +21,12 @@ Decided BEFORE fan-out. Everything a leaf could get wrong about its neighbors:
 ## Tree
 
 - 1 <task>
-  - 1.1 <branch> .......... gates/node-1.1.md
-    - 1.1.1 <leaf> ........ gates/leaf-1.1.1.md
-    - 1.1.2 <leaf> ........ gates/leaf-1.1.2.md
-  - 1.2 <branch> .......... gates/node-1.2.md
-    - 1.2.1 <leaf> ........ gates/leaf-1.2.1.md
-    - 1.2.2 <leaf> ........ gates/leaf-1.2.2.md
+  - 1.1 <branch> .......... .outline/gates/node-1.1.md
+    - 1.1.1 <leaf> ........ .outline/gates/leaf-1.1.1.md
+    - 1.1.2 <leaf> ........ .outline/gates/leaf-1.1.2.md
+  - 1.2 <branch> .......... .outline/gates/node-1.2.md
+    - 1.2.1 <leaf> ........ .outline/gates/leaf-1.2.1.md
+    - 1.2.2 <leaf> ........ .outline/gates/leaf-1.2.2.md
 
 ## Status log
 
@@ -38,7 +38,7 @@ Never rewrite lines above; appending keeps the file cheap to re-read and diff.
 
 ## Leaf gates
 
-One file per leaf (`GATES.md` solo, `gates/leaf-<id>.md` orchestrated). One box per outcome. Boxes are flipped by `gate-check.mjs` when CHECK output matches EXPECT, or by hand for manual gates. A checked box with EVIDENCE still reading `pending` counts as UNMET. If a gate becomes impossible, do not delete it; add `ABANDON: G<n> <reason>` and report it.
+One file per leaf (`.outline/GATES.md` solo, `.outline/gates/leaf-<id>.md` orchestrated). One box per outcome. Boxes are flipped by `gate_check.py` when CHECK output matches EXPECT, or by hand for manual gates. A checked box with EVIDENCE still reading `pending` counts as UNMET. If a gate becomes impossible, do not delete it; add `ABANDON: G<n> <reason>` and report it.
 
 ```markdown
 # Gates: <leaf or task name>
@@ -69,7 +69,7 @@ Branch gates exist because finished parts do not imply a finished whole. Do not 
 Scope: children <list child leaves/branches> merged into one working whole
 
 - [ ] N1: every child leaf's gates file is fully checked (no unchecked boxes, no pending evidence)
-  CHECK: node <skill-dir>/scripts/gate-check.mjs --status gates/leaf-<a>.md gates/leaf-<b>.md
+  CHECK: python3 <skill-dir>/scripts/gate_check.py --status .outline/gates/leaf-<a>.md .outline/gates/leaf-<b>.md
   EXPECT: ALL MET
   EVIDENCE: pending
 
