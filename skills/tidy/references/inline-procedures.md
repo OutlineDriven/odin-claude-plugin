@@ -12,7 +12,7 @@ These three domains are handled inline without a dedicated domain skill.
    fd -t f -g '<session-prefix>-*' /tmp 2>/dev/null
    ```
 2. Confirm each is truly scratch (not referenced by any open plan, task, or active diff).
-3. Remove with `rip` (not `rm`). Report count and paths.
+3. Remove with `rip -f`: scratch files are not recoverable from git. Report count and paths.
 
 ## Docs
 

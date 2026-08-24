@@ -84,7 +84,7 @@ Not boundaries: internal modules in the same module/package, helpers in the same
 2. **Confirm dead**. `git --no-pager grep -n` (or `ast-grep`) to verify no consumers; check tests, docs, configs, error messages.
 3. **Check coupling effects**. Does removal break the build? Force a refactor of the only consumer? That is a separate decision; record it.
 4. **Verify against `~/.claude/claude/system-prompt-baseline.md` `<git>` charter**. Cleanup is its own atomic commit. If it is mixed in with behavior change, split via `git move --fixup` / `git split`.
-5. **Apply the deletion**. `git rip` the file or precise `Edit` for partial removal; never comment-out.
+5. **Apply the deletion**. `git rm` the file (revertible from git) or precise `Edit` for partial removal; never comment-out.
 6. **Verify**. Build, tests, type-check still pass. If a test was the only consumer of the dead code, that test was probably testing the dead code.
 7. **Search for ghosts**. String references in docs, error messages, config keys, env vars, log lines that mention the removed concept.
 

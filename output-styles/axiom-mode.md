@@ -94,7 +94,8 @@ Sample multiple intent hypotheses, weight each (0–1), and name the falsifier p
 
 **Doc retrieval:** `WebSearch` | `WebFetch` on URLs | `tavily` (search/extract/crawl) | `valyu` (academic/financial) | deepwiki `ask_question` | `searchGitHub` (real-world usage). Follow internal links (depth 2-3). Priority: 1) Official docs 2) API refs 3) Books/papers 4) Tutorials 5) Community
 
-**Banned CLIs [HARD—REJECT]:** `ps` → `procs` | `diff` → `difft` | `time` → `hyperfine` | `rm` → `rip`
+**Banned CLIs [HARD—REJECT]:** `ps` → `procs` | `diff` → `difft` | `time` → `hyperfine`
+**Removal safety [MANDATORY]:** Plain `rm`/`rm -rf` is allowed for a removal that is cheap to undo: a git-tracked path you can restore with `git restore` or `git checkout`, a tracked file you delete with `git rm`, or a regenerable artifact with a known rebuild command (`target/`, `node_modules`, `dist/`, `__pycache__`, caches). Every other removal uses `rip -f <paths>`, which buries the target in a graveyard you restore from with `rip -u` and list with `rip -s`: untracked or ignored files, anything outside a git working tree, scratch files under `/tmp`. Critical targets use `rip -f` even when they look recoverable: `.git/`, credentials and key material, `.env*`, databases and other data at rest, and any path the user named as important. The graveyard defaults under `/tmp`, so a burial outlives the session but not a reboot; when a removal must stay recoverable longer, copy the target first. `git rip` is not a command. When a removal cannot be reverted from git, ask first, then remove with `rip -f`.
 **Headless [MANDATORY]:** No TUIs (top/htop/vim/nano); disable pagers where supported (e.g. `git --no-pager`). Prefer `--json`/plain text. Stdin-waiting = CRITICAL FAILURE. Servers/watchers/REPLs run as background `Bash`, never a blocking foreground call.
 **Discovery-first [MANDATORY]:** `Glob` enumerate → validate count (<50) → scoped `Grep` / `ast-grep` → ranged `Read` (`offset`/`limit`). No repo-root scans; no full-file reads when a range suffices.
 
@@ -142,7 +143,7 @@ Sample multiple intent hypotheses, weight each (0–1), and name the falsifier p
 - **`mergiraf`**: `mergiraf merge base.rs left.rs right.rs -o out.rs` | **`difft`**: `difft --display inline f1 f2`
 - **`just`**: `just --list`, `just <task>` | **`procs`**: `procs --tree`, `procs --json` | **`hyperfine`**: `hyperfine 'c1' 'c2' --warmup 3` | **`tokei`**: `tokei ./src --output json`
 - **`jql`**: `jql '"key"."nested"' f.json` | **`jaq`**: `jaq '.users[] | select(.age > 30) | .name' f.json` | **`huniq`**: `huniq -c < f` | **`fend`**: `fend '5km to miles'`
-- **`zoxide`**: `z foo` | **`rargs`**: `rargs -p '(.*)\.txt' mv {0} {1}.bak` | **`nomino`**: `nomino -r '(.*)\.bak' '{1}.txt'` | **`hck`**: `hck -f 1,3 -d ':'` | **`shellharden`**: `shellharden --replace s.sh` | **`rip`**: trash-aware `rm`
+- **`zoxide`**: `z foo` | **`rargs`**: `rargs -p '(.*)\.txt' mv {0} {1}.bak` | **`nomino`**: `nomino -r '(.*)\.bak' '{1}.txt'` | **`hck`**: `hck -f 1,3 -d ':'` | **`shellharden`**: `shellharden --replace s.sh` | **`rip`**: `rip -f <paths>` buries to a graveyard; `rip -u` restores, `rip -s` lists this directory's buried files
 - Output discipline: `--json`/plain over decorated text; disable pagers where supported (`git --no-pager`); count/existence flags (`-c`, `-q`, `--max-results`) before content; cap unbounded output (`| head -n 50`).
 
 ### Context packing (Repomix)
