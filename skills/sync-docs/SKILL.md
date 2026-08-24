@@ -17,6 +17,8 @@ Apply when a branch changes public APIs, imports, CLI flags, config names, packa
 
 NOT apply for generated documentation refreshes, mass prose rewrites, API design review, release-note authorship from scratch, or docs whose source of truth is intentionally external. For those, report drift signals but do not edit.
 
+When the diff added a document or a whole section, the tree order may have gone stale — run the hierarchy reorder from `purge-slop-docs`; `sync-docs` does not carry the reorder itself.
+
 ## Inputs
 
 - **Mode**: `report` (default) or `apply`. `apply` still edits only safe-fix issues.

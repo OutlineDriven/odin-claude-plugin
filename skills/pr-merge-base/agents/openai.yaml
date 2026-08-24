@@ -1,3 +1,0 @@
-interface:
-  display_name: "Smart Merge to Base Branch"
-  short_description: "Merge PRs into base in safe order"

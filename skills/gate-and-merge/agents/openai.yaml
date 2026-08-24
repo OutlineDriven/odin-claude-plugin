@@ -1,0 +1,3 @@
+interface:
+  display_name: "Gate and Merge PR Queue"
+  short_description: "Gate, fix, and land a PR stack"

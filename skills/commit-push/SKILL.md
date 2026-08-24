@@ -5,7 +5,6 @@ description: Use when asked to ship/publish commits without opening a PR.
 
 # Git commit and push
 
-> **Sync lineage:** canonical source for the shared commit blocks (platform blocking-question tool, Context fallback, concern grouping, staging discipline, commit-message style, remote default-branch resolution, clean-tree no-op). `skills/commit-push-pr/SKILL.md` and `skills/commit-push-current/SKILL.md` carry adapted self-contained copies; hand-propagate edits, this repo has no CI to enforce it.
 
 **Asking the user:** use the platform's blocking question tool -- `AskUserQuestion` in Claude Code (`ToolSearch` with `select:AskUserQuestion` first if unloaded), `request_user_input` in Codex, `ask_question` in Antigravity (`agy`), `ask_user` in Pi (`pi-ask-user` extension). Fall back to chat only when no blocking tool exists or the call errors, not for an unloaded schema. Never skip the question silently.
 
@@ -53,16 +52,7 @@ Match repo style for commit messages (project instructions in context > recent c
 
 When branching off the default, base the new branch on an up-to-date default tip -- a stale or diverged local default silently forks the feature branch from old history.
 
-Scan changed files for naturally distinct concerns; if they clearly group into separate logical changes, commit each group separately (2-3 max). Group at file level only -- no `git add -p`. When ambiguous, one commit is fine.
-
-Stage and commit each group. **Avoid `git add -A` and `git add .`** -- they sweep in `.env`, build artifacts, and generated files:
-
-```bash
-git add file1 file2 file3 && git commit -m "$(cat <<'EOF'
-commit message here
-EOF
-)"
-```
+The atomicity gate is `commit`, and this skill adds only the push. Read the concern grouping, revert test, mechanism split, sweep rule, and build-order rule there.
 
 ## Step 4: Detect remote and push
 

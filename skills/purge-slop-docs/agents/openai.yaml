@@ -1,0 +1,3 @@
+interface:
+  display_name: "Purge Slop Docs"
+  short_description: "Prune stale, puffed, duplicated docs"

@@ -69,3 +69,4 @@ The queue is empty, or the rest is skipped. One-line tally: kept, skipped, how m
 - A GitHub PR sectioned report goes to `pr-review`.
 - A topic shown without reviewing it goes to `show-me`.
 - A grill-until-clean pass without a visual walk goes to `review-fix-grill-loop`.
+- A walk through unfamiliar code with no diff goes to `walk-with-me`.

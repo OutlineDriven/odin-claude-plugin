@@ -55,9 +55,12 @@ When using conventional commits, pick the most precise type. Where `fix:` and `f
 
 ### Step 3: Consider logical commits
 
-Scan changed files for naturally distinct concerns (e.g., a refactor in one directory vs. a new feature in another, or unrelated test/source files). If they clearly group into separate logical changes, commit each group separately.
+One concern per commit, where a concern is one reason the tree changed. Two changes belong in the same commit only when reverting one without the other leaves the tree broken. That revert test replaces "when the separation is obvious" and "two or three is the sweet spot", both of which decide nothing.
 
-Group at the **file level only** -- no `git add -p`, no hunk-splitting. Split only when the separation is obvious; when ambiguous, one commit is fine. Two or three logical commits is the sweet spot -- don't over-slice.
+- Split by mechanism, not by file. Where one file carries two mechanisms, the file is not the unit. Lift the outright ban on hunk-splitting: write the filtered patch out of `git diff -- <file>`, keep only the hunks for one mechanism, and stage it with `git apply --cached <patch>` — `unverified - confirm first` on the first real split, since this headless form was not executed this session and `git add -p` needs a TTY the agent lacks.
+- A lint, format, or whitespace sweep is its own commit, never folded into a behavior change.
+- Order commits so each one leaves the tree building. A commit that only builds together with its successor is not atomic, so merge the two or re-cut the split.
+- Run the repo-native verification gate per commit group before staging that group (Step 4 keeps that gate and the `git add -A` prohibition).
 
 ### Step 4: Stage and commit
 

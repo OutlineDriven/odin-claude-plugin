@@ -142,3 +142,4 @@ Put each visual next to the short text it supports, not in a block of its own at
 - A layout or state comparison the user needs to click goes to `prototype-logic`.
 - A concept being taught, rather than a current topic being shown, goes to `explain-concept`.
 - A visual walk of review findings, one at a time, goes to `show-review`.
+- A multi-turn walk with the user steering each step goes to `walk-with-me`.

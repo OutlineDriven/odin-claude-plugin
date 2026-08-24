@@ -5,7 +5,6 @@ description: Use when asked to ship/open a PR, or for PR-description-only flows 
 
 # Git Commit, Push, and PR
 
-> **Sync lineage:** the shared commit blocks below (platform blocking-question tool, Context fallback, concern grouping, staging discipline, remote default-branch resolution, clean-tree no-op) are a self-contained copy of `skills/commit-push/SKILL.md`, adapted for the PR flow. Check it for drift before treating this copy as authoritative.
 
 **Asking the user:** use the platform's blocking question tool -- `AskUserQuestion` in Claude Code (`ToolSearch` with `select:AskUserQuestion` first if unloaded), `request_user_input` in Codex, `ask_question` in Antigravity (`agy`), `ask_user` in Pi (`pi-ask-user` extension). Fall back to chat only when no blocking tool exists or the call errors, not for an unloaded schema. Never skip the question silently.
 
@@ -92,17 +91,7 @@ Match repo style for commit messages and PR titles (project instructions in cont
 
 If on the default branch, branch creation needs to handle stale local `<base>`, unpushed commits on local `<base>`, and uncommitted changes colliding with the fresh remote base. Read `references/branch-creation.md` and follow its decision flow before continuing.
 
-Scan changed files for naturally distinct concerns; if they clearly group into separate logical changes, commit each group separately (2-3 max). Group at file level only -- no `git add -p`. When ambiguous, one commit is fine.
-
-Stage and commit each group. **Avoid `git add -A` and `git add .`** -- they sweep in `.env`, build artifacts, and generated files:
-
-```bash
-git add file1 file2 file3 && git commit -m "$(cat <<'EOF'
-commit message here
-EOF
-)"
-```
-
+The atomicity gate is `commit`, and this skill adds only the push. Read the concern grouping, revert test, mechanism split, sweep rule, and build-order rule there.
 Then push:
 
 ```bash

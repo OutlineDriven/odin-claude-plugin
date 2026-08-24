@@ -5,7 +5,6 @@ description: 'Commit working-tree changes and push to the current branch: no bra
 
 # Git Commit and Push (Current Branch)
 
-> **Sync lineage:** the shared commit blocks below (Context fallback, commit-message style, concern grouping, staging discipline) are a self-contained copy of `skills/commit-push/SKILL.md`, adapted for the current-branch flow with no branch creation or switch. Check it for drift before treating this copy as authoritative.
 
 Ship the working tree on the branch that is checked out. This skill never creates or switches branches: invoking it on a branch (including `main`/`master`) is explicit authorization to push to that branch. For the guarded flow that auto-creates a feature branch off the default, use `commit-push` instead.
 
@@ -47,16 +46,7 @@ Match repo style for commit messages (project instructions in context > recent c
 
 ## Step 3: Commit
 
-Scan changed files for naturally distinct concerns; if they clearly group into separate logical changes, commit each group separately (2-3 max). Group at file level only -- no `git add -p`. When ambiguous, one commit is fine.
-
-Stage and commit each group. **Avoid `git add -A` and `git add .`** -- they sweep in `.env`, build artifacts, and generated files:
-
-```bash
-git add file1 file2 file3 && git commit -m "$(cat <<'EOF'
-commit message here
-EOF
-)"
-```
+The atomicity gate is `commit`, and this skill adds only the push. Read the concern grouping, revert test, mechanism split, sweep rule, and build-order rule there.
 
 ## Step 4: Detect remote and push
 

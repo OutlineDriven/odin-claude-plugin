@@ -30,6 +30,7 @@ Both modes route every finding through the owning authority:
 | Judgment slop: hedge-stacks, generic openers, 50/50 recommendations, committed-to-nothing register | `odin:taste` | Side A rows (ceremony and decoration are Side B overkill, not slop) |
 | Concrete prose AI tells: puffery, AI vocabulary, "not just X but Y", rule of three, filler, passive voice, chatbot phrases | `odin:unslop` | Its pattern catalog (patterns to detect and fix) |
 | Visual/UI slop: default gradients, framework-default look, vibe-coded UI | `odin:design` | Its anti-slop reference |
+| Doc-tree slop: stale references, duplicated sections, docs nothing points at, tree order no longer matching what a reader needs first | `odin:purge-slop-docs` | Its four class tests (overstatement, jargon, outdated, redundant) |
 
 A mixed artifact splits into per-domain findings and returns one combined report.
 

@@ -22,6 +22,7 @@ NOT:
 - User already named a concrete bug or failing test. Orient only if the fix path is unclear.
 - User wants a full architectural critique, security audit, or performance investigation.
 - User asks for exhaustive symbol indexing. Onboard is bounded by depth and optimized for first useful map.
+- A turn-by-turn walk where the user picks each next step goes to `walk-with-me`, not this tour.
 
 ## Inputs
 

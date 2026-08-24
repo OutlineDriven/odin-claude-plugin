@@ -129,13 +129,14 @@ Before any non-trivial implementation:
 4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
 5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
 
-## Skills (131 total)
+## Skills (133 total)
 
 Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
 
-### Planning & Exploration (22 skills)
+### Planning & Exploration (23 skills)
 
 - `askme` - Verbalized Sampling protocol for deep intent exploration before planning
+- `decide` - Frame a fork as one recommended single-select, take the pick, and apply it
 - `batch-ask-me` - Walk a dependency-aware design tree in batched question rounds until shared understanding
 - `wayfinder` - Chart a multi-session effort into a destination, mapped fog, and decision tickets on the frontier
 - `mutual-sync` - Three-way grounding: verify user, agent, and codebase share one picture of current state before proceeding
@@ -242,7 +243,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `review-fix-grill-loop` - Review and fix a diff in verified batches until no medium-or-higher finding remains
 - `simplify` - Compress-op review pass on reuse, quality, and efficiency axes
 
-### Cleanup & Refactoring (8 skills)
+### Cleanup & Refactoring (9 skills)
 
 - `refactor-break-compat` - Refactor by removing backward-compatibility and legacy layers (public API surface)
 - `breaking-driven` - Bloat-triggered demolition: state the contract, derive the replacement blind, cut the residue; interior surfaces go without asking, boundary surfaces stop for a yes
@@ -252,12 +253,12 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `deprecate-and-migrate` - Plan and execute deprecation and migration of old systems, APIs, or features
 - `to-greenfield` - Diagnose a degraded codebase's field state (darkfield/redfield/bluefield/brownfield) and route the recovery
 - `slop` - Slop front door: verdict or purge for code, prose, decisions, or UI, routed to the right domain authority
+- `purge-slop-docs` - Sweep the markdown tree for overstatement, jargon, stale references, and duplication, then reorder what survives
 
-### GitHub Integration (14 skills)
+### GitHub Integration (13 skills)
 
 - `pr-review` - Review code on a GitHub PR using `gh`
-- `pr-merge-base` - Merge PRs into the base branch with queue-like sequencing
-- `pr-merge-temporal` - Merge multiple PRs into a temporal integration branch first
+- `gate-and-merge` - Gate open PRs on a QA ladder, fix minor findings on the branch, land the stack parent-first
 - `gh-fix-ci` - Inspect failing CI checks, pull logs, propose fixes
 - `commit` - Create a git commit with a clear, value-communication message
 - `commit-push` - Commit working-tree changes and push to the remote — no PR
@@ -270,7 +271,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `resolve-pr-feedback` - Resolve PR review feedback and fix code-review comments
 - `worktree` - Set up isolated git worktrees for new or existing branches/PRs
 
-### Codebase Intelligence & Workflow (21 skills)
+### Codebase Intelligence & Workflow (22 skills)
 
 - `deslop` - Three-phase certainty-graded AI-slop detection with HIGH-only guarded autofix
 - `sync-docs` - Diff-driven doc-vs-code drift detection; safe version/CHANGELOG fixes, rest flagged
@@ -293,6 +294,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `dedup-skills` - Ledger-first dedup of a skills/ tree: find repeated or self-conflicting rules across skill files
 - `handoff` - Snapshot the current session into a resumable handoff artifact for a cold session, agent, or person
 - `show-me` - Answer the current topic with the smallest visual: pseudocode, tree, diagram, or diff
+- `walk-with-me` - Walk code together turn by turn, visual first, the user picking each next step
 
 ## Output Styles (6 total)
 
