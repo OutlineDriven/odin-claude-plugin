@@ -2,13 +2,13 @@
 
 > Formerly known as the ODIN Claude Plugin. The repo URL stays the same; the brand has matured.
 
-**Outline-Driven Development** (nicknamed ODIN) — Advanced code agent system for Claude Code with surgical precision, diagram-first engineering, and comprehensive workflow automation.
+**Outline-Driven Development** (nicknamed ODIN) is an advanced code agent system for Claude Code with surgical precision, diagram-first engineering, and workflow automation.
 
 **Methodology**: [outline-driven-development](https://github.com/OutlineDriven/outline-driven-development) &nbsp;·&nbsp; **Codex CLI**: [odin-codex-plugin](https://github.com/OutlineDriven/odin-codex-plugin) &nbsp;·&nbsp; **Gemini CLI**: [odin-gemini-cli-extension](https://github.com/OutlineDriven/odin-gemini-cli-extension) &nbsp;·&nbsp; **Site**: [outlinedriven.github.io](https://outlinedriven.github.io)
 
 ## Overview
 
-ODIN is a professional-grade Claude Code plugin that transforms Claude into a sophisticated code agent with comprehensive workflow automation and rigorous engineering methodology.
+ODIN is a professional-grade Claude Code plugin that transforms Claude into a code agent with workflow automation and rigorous engineering methodology.
 
 **Key Capabilities:**
 
@@ -20,7 +20,7 @@ ODIN is a professional-grade Claude Code plugin that transforms Claude into a so
 
 ## Installation
 
-One repository serves every harness below. There is no build step and no converter —
+One repository serves every harness below. There is no build step and no converter.
 each tool reads `skills/` directly.
 
 ### Prerequisites
@@ -38,22 +38,22 @@ claude plugin marketplace add OutlineDriven/odin-claude-plugin && claude plugin 
 
 | Harness | Install | Extra files needed |
 |---|---|---|
-| Codex CLI | `codex plugin marketplace add OutlineDriven/odin-claude-plugin` then `codex plugin add odin@odin-marketplace` | none — Codex reads `.claude-plugin/` |
-| Grok Build CLI | `grok plugin install OutlineDriven/odin-claude-plugin` | none — Grok reads Claude Code plugins with zero configuration |
+| Codex CLI | `codex plugin marketplace add OutlineDriven/odin-claude-plugin` then `codex plugin add odin@odin-marketplace` | none; Codex reads `.claude-plugin/` |
+| Grok Build CLI | `grok plugin install OutlineDriven/odin-claude-plugin` | none; Grok reads Claude Code plugins with zero configuration |
 | Devin CLI | `devin plugins install OutlineDriven/odin-claude-plugin` | `.devin-plugin/` |
 | Antigravity (`agy`) | `agy plugin install https://github.com/OutlineDriven/odin-claude-plugin` | root `plugin.json` |
 | Cursor | `/add-plugin odin` in Cursor Agent chat | `.cursor-plugin/` |
 | Kimi Code CLI | `/plugins install https://github.com/OutlineDriven/odin-claude-plugin` then `/reload` | `.kimi-plugin/` |
-| opencode | local checkout only — see below | `.opencode/plugins/odin.js` |
+| opencode | local checkout only; see below | `.opencode/plugins/odin.js` |
 
 Codex and Grok need no ODIN-specific manifest: both resolve `.claude-plugin/plugin.json`,
-and Codex additionally reads `.claude-plugin/marketplace.json`.
+and Codex also reads `.claude-plugin/marketplace.json`.
 `.agents/plugins/marketplace.json` is shipped as Codex's current (non-legacy) marketplace
 path.
 
 **Devin** documents a `.claude-plugin/` fallback from 3000.3.22, but builds before that
 hard-fail without `.devin-plugin/plugin.json`, so ODIN ships one. Devin also gates plugins
-behind a closed beta — request access from Cognition first. Skills surface as
+behind a closed beta, so request access from Cognition first. Skills surface as
 `/odin:<skill>`.
 
 **opencode** documents `plugin[]` entries for npm packages only, so there is no
@@ -258,7 +258,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 
 - `refactor-break-compat` - Refactor by removing backward-compatibility and legacy layers (public API surface)
 - `breaking-driven` - Bloat-triggered demolition: state the contract, derive the replacement blind, cut the residue; interior surfaces go without asking, boundary surfaces stop for a yes
-- `cleanup-codebase` - Internal micro-hygiene: dead fields, redundant wrappers, stale config flags, identity passthrough — applied while touching nearby code, not as standalone PRs
+- `cleanup-codebase` - Internal micro-hygiene: dead fields, redundant wrappers, stale config flags, identity passthrough. Applied while touching nearby code, not as standalone PRs
 - `tidy` - Dispatch compress operations to the right domain: file, diff, memory, workspace, git stack, or doc
 - `improve-architecture` - Surface deepening refactors that turn shallow modules into deep ones
 - `deprecate-and-migrate` - Plan and execute deprecation and migration of old systems, APIs, or features
@@ -276,8 +276,8 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `gate-and-merge` - Gate open PRs on a QA ladder, fix minor findings on the branch, land the stack parent-first
 - `gh-fix-ci` - Inspect failing CI checks, pull logs, propose fixes
 - `commit` - Create a git commit with a clear, value-communication message
-- `commit-push` - Commit working-tree changes and push to the remote — no PR
-- `commit-push-current` - Commit and push to the current branch — no branch creation, no branch switch, no PR
+- `commit-push` - Commit working-tree changes and push to the remote; no PR
+- `commit-push-current` - Commit and push to the current branch: no branch creation, no branch switch, no PR
 - `commit-push-pr` - Commit, push, and open a PR
 - `atomic-issues-prs` - Publish a change-set as atomic GitHub issues or PRs
 - `github-triage` - Triage GitHub issues through a configurable label-based state machine
@@ -326,7 +326,7 @@ Output styles shape *how* the agent communicates. Switch via Claude Code's `/con
 
 ### Settings.json
 
-ODIN includes comprehensive `settings.json` with:
+ODIN includes full `settings.json` with:
 
 - **Tool Permissions** - Pre-approved tools (ast-grep, fd, rg, cargo, npm, git, etc.)
 - **MCP Integration** - Time, browser, git, context7, tavily, and more
@@ -413,8 +413,8 @@ See LICENSE file for details.
 
 ## Acknowledgments
 
-Built on Claude Code's powerful plugin system with focus on professional software engineering practices, surgical precision, and comprehensive workflow automation.
+Built on Claude Code's powerful plugin system with focus on professional software engineering practices, surgical precision, and workflow automation.
 
 ---
 
-**Outline-Driven Development** for Claude Code — [outlinedriven.github.io](https://outlinedriven.github.io)
+**Outline-Driven Development** for Claude Code: [outlinedriven.github.io](https://outlinedriven.github.io)

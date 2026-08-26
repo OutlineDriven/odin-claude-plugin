@@ -9,37 +9,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
-- **`srgn` purged from tool doctrine** — removed the `srgn` tool from the agent persona/doctrine (`system-prompt-baseline.md` + the cascaded `output-styles/*.md`) and deleted the `skills/srgn-cli` skill. Structural search/rewrite is now served solely by `ast-grep`.
+- **`srgn` purged from tool doctrine**: removed the `srgn` tool from the agent persona/doctrine (`system-prompt-baseline.md` + the cascaded `output-styles/*.md`) and deleted the `skills/srgn-cli` skill. Structural search/rewrite is now served solely by `ast-grep`.
 
 ### Changed
 
-- **Enriched `ast-grep` guidance** — replaced the single-line `ast-grep` code-manipulation bullet with a structural reference block (cascaded byte-identically across `system-prompt-baseline.md` and all six output-styles): patterns-are-code (not regex), the metavar table, the two-pass `--json`-disables-`-U` apply gotcha, `stopBy: neighbor` defaults for relational YAML rules, strictness levels, and the `ast-grep`-not-`sg` binary note (Linux `sg`/`setgroups` collision).
+- **Enriched `ast-grep` guidance**: replaced the single-line `ast-grep` code-manipulation bullet with a structural reference block (cascaded byte-identically across `system-prompt-baseline.md` and all six output-styles): patterns-are-code (not regex), the metavar table, the two-pass `--json`-disables-`-U` apply gotcha, `stopBy: neighbor` defaults for relational YAML rules, strictness levels, and the `ast-grep`-not-`sg` binary note (Linux `sg`/`setgroups` collision).
 
 ### Added
 
-- **`AST-GREP-AGENT-REFERENCE.md`** — self-contained ast-grep field reference distilled from `code-yeongyu/ast-grep-skill`: patterns-as-code rules, metavariable semantics, valid-code fixes, strictness levels, context/selector objects, CLI two-pass apply + debug recipes, YAML rule anatomy with a verbatim `no-console` skeleton, per-language rewrite recipes, and a 14-item pitfalls guide.
+- **`AST-GREP-AGENT-REFERENCE.md`**: self-contained ast-grep field reference distilled from `code-yeongyu/ast-grep-skill`: patterns-as-code rules, metavariable semantics, valid-code fixes, strictness levels, context/selector objects, CLI two-pass apply + debug recipes, YAML rule anatomy with a verbatim `no-console` skeleton, per-language rewrite recipes, and a 14-item pitfalls guide.
 
 ## [1.15.43] - 2026-06-05
 
 ### Added
 
-**15 skills ported from the `agent-sh` plugin marketplace** — re-homed as native, self-contained ODIN skills. All external dependencies (the `agent-analyzer` binary, `repo-intel.json` cache, editor shims, bespoke JS `lib/`, and opus/sonnet/haiku model routing) are replaced by native tooling: codegraph MCP, `git`/`ast-grep`/`git grep` recipes, repomix, generic ODIN agents, and the `ask` tool. Attribution in `skills/LICENSES.md`.
+**15 skills ported from the `agent-sh` plugin marketplace**: re-homed as native, self-contained ODIN skills. All external dependencies (the `agent-analyzer` binary, `repo-intel.json` cache, editor shims, bespoke JS `lib/`, and opus/sonnet/haiku model routing) are replaced by native tooling: codegraph MCP, `git`/`ast-grep`/`git grep` recipes, repomix, generic ODIN agents, and the `ask` tool. Attribution in `skills/LICENSES.md`.
 
-- `repo-intel` — native repository intelligence (hotspots, coupling, bus factor, bugspots, ownership, entry points) from git history + codegraph; no cache, every signal recomputed on demand.
-- `agnix` — native agent-config lint pass (skill frontmatter, CLAUDE.md/AGENTS.md, hooks, MCP, plugin manifests, agent files) graded HIGH/MEDIUM/LOW.
-- `deslop` — three-phase certainty-graded AI-slop detection; HIGH-only guarded autofix with test-verify and rollback.
-- `sync-docs` — diff-driven doc-vs-code drift detection; safe-fix limited to version bumps + CHANGELOG, everything else flagged.
-- `banthis` — persist hard user prohibitions into a managed AGENTS.md/CLAUDE.md section (dep-free node script).
-- `drift-detect` — plan-vs-reality reality check across GitHub + docs + code with a prioritized reconstruction plan.
-- `audit-project` — iterative multi-agent code audit with a false-positive contract; loops until critical/high findings clear.
-- `onboard` — new-codebase orientation tour: bounded context collection, 7-section synthesis, interactive guidance.
-- `can-i-help` — route contributors to data-backed contribution opportunities matched to stated interest.
-- `learn` — online research → scored sources → summaries-only → RAG-optimized learning guide + retrieval index.
-- `system-prompt-curator` — create or improve autonomous-agent system prompts from research-backed principles.
-- `skillers` — mine local agent transcripts (sanitized first) into automation recommendations; never auto-creates files.
-- `enhance` — certainty-graded enhancement of agent/plugin surfaces via parallel analyzers; HIGH-only `--apply`.
-- `perf-investigate` — self-contained multi-phase performance investigation (baseline → hypotheses → profile → one-change optimization).
-- `next-task` (explicit-only) — self-contained backlog orchestrator: selects the next task and drives it through isolated git-branchless implementation, review, docs, and verification gates.
+- `repo-intel`: native repository intelligence (hotspots, coupling, bus factor, bugspots, ownership, entry points) from git history + codegraph; no cache, every signal recomputed on demand.
+- `agnix`: native agent-config lint pass (skill frontmatter, CLAUDE.md/AGENTS.md, hooks, MCP, plugin manifests, agent files) graded HIGH/MEDIUM/LOW.
+- `deslop`: three-phase certainty-graded AI-slop detection; HIGH-only guarded autofix with test-verify and rollback.
+- `sync-docs`: diff-driven doc-vs-code drift detection; safe-fix limited to version bumps + CHANGELOG, everything else flagged.
+- `banthis`: persist hard user prohibitions into a managed AGENTS.md/CLAUDE.md section (dep-free node script).
+- `drift-detect`: plan-vs-reality reality check across GitHub + docs + code with a prioritized reconstruction plan.
+- `audit-project`: iterative multi-agent code audit with a false-positive contract; loops until critical/high findings clear.
+- `onboard`: new-codebase orientation tour: bounded context collection, 7-section synthesis, interactive guidance.
+- `can-i-help`: route contributors to data-backed contribution opportunities matched to stated interest.
+- `learn`: online research → scored sources → summaries-only → RAG-optimized learning guide + retrieval index.
+- `system-prompt-curator`: create or improve autonomous-agent system prompts from research-backed principles.
+- `skillers`: mine local agent transcripts (sanitized first) into automation recommendations; never auto-creates files.
+- `enhance`: certainty-graded enhancement of agent/plugin surfaces via parallel analyzers; HIGH-only `--apply`.
+- `perf-investigate`: self-contained multi-phase performance investigation (baseline → hypotheses → profile → one-change optimization).
+- `next-task` (explicit-only): self-contained backlog orchestrator: selects the next task and drives it through isolated git-branchless implementation, review, docs, and verification gates.
 
 ## [1.15.29] - 2026-05-15
 
@@ -47,7 +47,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 **Output styles**
 
-- `Linus` — register idiom standardized to "code" across body sections and principle lines; cross-domain reach (any work-product — code, analysis, knowledge work, documents, decisions) anchored in the `<role>` block.
+- `Linus`: register idiom standardized to "code" across body sections and principle lines; cross-domain reach (any work-product: code, analysis, knowledge work, documents, decisions) anchored in the `<role>` block.
 
 ## [1.15.28] - 2026-05-15
 
@@ -55,7 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 **Output styles**
 
-- `Linus` — generalized register scope beyond code/kernel/C to any artifact-producing work (code in any language, analysis, knowledge work, documents, decisions). Doctrine reframed in the register's own voice without primary-source citations or URLs. Section retitled `# Don't break the consumer's contract` (replaces kernel-specific "we don't break userspace"); section retitled `# Blunt about the work, never about people`. Principle tags `[coding-style]` → `[complexity]`, `[no-typedef]` → `[no-hidden-shape]`; `[no-break]` contract list compressed; cross-domain widening anchored once in `<role>` block per /taste audit (sections B/C/D/E speak artifact-agnostically without per-section domain enumeration). The C linked-list code snippets stay as the canonical teach-by-example, unattributed. Concrete complexity rules (≤3 indentation, ≤10 locals, one-or-two screens) retained; goto-pattern bullet generalized to "centralized cleanup at meaningful labels". Cascade byte-equivalence with `system-prompt-baseline.md` preserved.
+- `Linus`: generalized register scope beyond code/kernel/C to any artifact-producing work (code in any language, analysis, knowledge work, documents, decisions). Doctrine reframed in the register's own voice without primary-source citations or URLs. Section retitled `# Don't break the consumer's contract` (replaces kernel-specific "we don't break userspace"); section retitled `# Blunt about the work, never about people`. Principle tags `[coding-style]` → `[complexity]`, `[no-typedef]` → `[no-hidden-shape]`; `[no-break]` contract list compressed; cross-domain widening anchored once in `<role>` block per /taste audit (sections B/C/D/E speak artifact-agnostically without per-section domain enumeration). The C linked-list code snippets stay as the canonical teach-by-example, unattributed. Concrete complexity rules (≤3 indentation, ≤10 locals, one-or-two screens) retained; goto-pattern bullet generalized to "centralized cleanup at meaningful labels". Cascade byte-equivalence with `system-prompt-baseline.md` preserved.
 
 ## [1.15.27] - 2026-05-15
 
@@ -63,26 +63,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 **New output styles**
 
-- `Linus` — Linus Torvalds maintainer-reviewer register as a taste qualifier. Applies as a judgment lens on top of any code work: special-case elimination as compression (TED 2016 linked-list doctrine), the "we don't break userspace" contract covenant (LKML 2012-12-23), kernel coding-style discipline (`Documentation/process/coding-style.rst`), blunt about code never about people (LKML 2018-09-16 register-guard). Sixth output-style; fills the taste-and-rejection lens slot left open by the five existing implementer registers (ODIN, AxiomMode, Builder, Duet, Eval). `AGENTS.md` enumeration and cascade-count references updated in the same atomic commit so future canonical edits cannot silently skip `linus.md`.
+- `Linus`: Linus Torvalds maintainer-reviewer register as a taste qualifier. Applies as a judgment lens on top of any code work: special-case elimination as compression (TED 2016 linked-list doctrine), the "we don't break userspace" contract covenant (LKML 2012-12-23), kernel coding-style discipline (`Documentation/process/coding-style.rst`), blunt about code never about people (LKML 2018-09-16 register-guard). Sixth output-style; fills the taste-and-rejection lens slot left open by the five existing implementer registers (ODIN, AxiomMode, Builder, Duet, Eval). `AGENTS.md` enumeration and cascade-count references updated in the same atomic commit so future canonical edits cannot silently skip `linus.md`.
 
 ## [1.15.9] - 2026-05-05
 
 ### Changed
 
-- 13 skills — removed `disable-model-invocation: true` per cluster-level auto-invocation decisions: `axiom-mode`, `caveman`, `gh-address-comments`, `gh-fix-ci`, `memory-clean`, `memory-sanitize`, `memory-update`, `request-refactor-plan`, `to-issues`, `to-prd`, `triage-issue`, `ubiquitous-language`, `generate-my-taste/assets/template`. 7 skills retain explicit-only invocation: `ai-collab-protocols`, `edit-article`, `generate-my-taste`, `improve-codebase-architecture`, `strict-validation-setup`, `write-a-skill`, `zoom-out`.
+- 13 skills: removed `disable-model-invocation: true` per cluster-level auto-invocation decisions: `axiom-mode`, `caveman`, `gh-address-comments`, `gh-fix-ci`, `memory-clean`, `memory-sanitize`, `memory-update`, `request-refactor-plan`, `to-issues`, `to-prd`, `triage-issue`, `ubiquitous-language`, `generate-my-taste/assets/template`. 7 skills retain explicit-only invocation: `ai-collab-protocols`, `edit-article`, `generate-my-taste`, `improve-codebase-architecture`, `strict-validation-setup`, `write-a-skill`, `zoom-out`.
 
 ## [1.15.8] - 2026-05-04
 
 ### Changed
 
-- 39 skills — added `disable-model-invocation: true` to frontmatter: `ai-collab-protocols`, `ast-grep`, `axiom-mode`, `caveman`, `cleanup-codebase`, `deps-upgrade`, `design-an-interface`, `design-by-contract`, `duet`, `edit-article`, `gh-address-comments`, `gh-fix-ci`, `git-branchless`, `git-guardrails-claude-code`, `github-triage`, `improve-codebase-architecture`, `llm-self-loop`, `memory-clean`, `memory-sanitize`, `memory-update`, `perf-profile`, `pr-merge-base`, `pr-merge-temporal`, `pr-review`, `proof-driven`, `refactor-break-bw-compat`, `request-refactor-plan`, `setup-gitignore`, `setup-pre-commit`, `srgn-cli`, `taste`, `tests-adversarial`, `tests-purge-unneeded`, `to-issues`, `to-prd`, `triage-issue`, `type-driven`, `validation-first`, `write-a-skill`. These skills require explicit `/skill-name` invocation; auto-discovery disabled. 18 cross-cutting verb skills remain auto-discoverable: `askme`, `atomic-commit`, `atomic-commit-and-push`, `contexts`, `debug`, `design`, `explore`, `fix`, `init`, `parallel-launch`, `plan`, `proceed`, `qa`, `research`, `resolve`, `review`, `security-review`, `test-driven`.
+- 39 skills: added `disable-model-invocation: true` to frontmatter: `ai-collab-protocols`, `ast-grep`, `axiom-mode`, `caveman`, `cleanup-codebase`, `deps-upgrade`, `design-an-interface`, `design-by-contract`, `duet`, `edit-article`, `gh-address-comments`, `gh-fix-ci`, `git-branchless`, `git-guardrails-claude-code`, `github-triage`, `improve-codebase-architecture`, `llm-self-loop`, `memory-clean`, `memory-sanitize`, `memory-update`, `perf-profile`, `pr-merge-base`, `pr-merge-temporal`, `pr-review`, `proof-driven`, `refactor-break-bw-compat`, `request-refactor-plan`, `setup-gitignore`, `setup-pre-commit`, `srgn-cli`, `taste`, `tests-adversarial`, `tests-purge-unneeded`, `to-issues`, `to-prd`, `triage-issue`, `type-driven`, `validation-first`, `write-a-skill`. These skills require explicit `/skill-name` invocation; auto-discovery disabled. 18 cross-cutting verb skills remain auto-discoverable: `askme`, `atomic-commit`, `atomic-commit-and-push`, `contexts`, `debug`, `design`, `explore`, `fix`, `init`, `parallel-launch`, `plan`, `proceed`, `qa`, `research`, `resolve`, `review`, `security-review`, `test-driven`.
 
 ## [1.5.2] - 2026-04-20
 
 ### Changed
 
-- `duet` skill — added `## VS-gated question protocol [MANDATORY]` section. Every `AskUserQuestion` (Phase 1 elicitation, Phase 2 fork, Phase 3 checkpoint) is now preceded by a compressed visible Verbalized Sampling block (`VS (N→M): 1. ...`). Survivors-only render; weakness/contradiction/oversight stays internal. Phase 2 single-survivor short-circuit defined; Phase 1 and Phase 3 always fire `AskUserQuestion`. >4-survivor cap added. `odin:askme` owns the canonical VS+actor-critic spec.
-- `Duet` output style — `# Decisions before prose` updated: VS block is now the only permitted preamble before `AskUserQuestion`. Skill-load block cross-references the VS-gated question protocol section.
+- `duet` skill: added `## VS-gated question protocol [MANDATORY]` section. Every `AskUserQuestion` (Phase 1 elicitation, Phase 2 fork, Phase 3 checkpoint) is now preceded by a compressed visible Verbalized Sampling block (`VS (N→M): 1. ...`). Survivors-only render; weakness/contradiction/oversight stays internal. Phase 2 single-survivor short-circuit defined; Phase 1 and Phase 3 always fire `AskUserQuestion`. >4-survivor cap added. `odin:askme` owns the canonical VS+actor-critic spec.
+- `Duet` output style: `# Decisions before prose` updated: VS block is now the only permitted preamble before `AskUserQuestion`. Skill-load block cross-references the VS-gated question protocol section.
 
 ## [1.5.0] - 2026-04-19
 
@@ -90,34 +90,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 **New skills**
 
-- `duet` — two-party working posture where the user is director and the agent is executor. Surfaces every fork, tradeoff, and taste choice via batched `AskUserQuestion` with structural framing, a recommended default, and concrete previews when comparison is visual. Eliminates the review-bottleneck (review distributed across picks, not piled at the end) and prevents codebase-understanding debt (user remembers the architecture because they picked it). Three-phase loop: adaptive intent elicitation → execution with fork-surfacing → irreversible checkpoints.
+- `duet`: two-party working posture where the user is director and the agent is executor. Surfaces every fork, tradeoff, and taste choice via batched `AskUserQuestion` with structural framing, a recommended default, and concrete previews when comparison is visual. Eliminates the review-bottleneck (review distributed across picks, not piled at the end) and prevents codebase-understanding debt (user remembers the architecture because they picked it). Three-phase loop: adaptive intent elicitation → execution with fork-surfacing → irreversible checkpoints.
 
 **New output styles**
 
-- `Duet` — presentation half of the duet posture. Decisions before prose, structural/taste framing first with jargon on demand, concrete previews when comparison is visual, silent mechanics / loud forks, no validation language or recap. Enforces `duet` skill invocation whenever active.
+- `Duet`: presentation half of the duet posture. Decisions before prose, structural/taste framing first with jargon on demand, concrete previews when comparison is visual, silent mechanics / loud forks, no validation language or recap. Enforces `duet` skill invocation whenever active.
 
 **Skill multi-language expansion (10-language support)**
 
-- `test-driven` — conditionalized test commands across 10 languages (previously single-language lock-in).
-- `proof-driven` — replaced Lean 4 default with property-based testing; 10-language support.
-- `design-by-contract` — expanded to 10 languages; added verification dispatch; integrated LLM context.
-- `type-driven` — removed tool lock-in; 10-language support.
-- `validation-first` — removed tool lock-in; 10-language support.
+- `test-driven`: conditionalized test commands across 10 languages (previously single-language lock-in).
+- `proof-driven`: replaced Lean 4 default with property-based testing; 10-language support.
+- `design-by-contract`: expanded to 10 languages; added verification dispatch; integrated LLM context.
+- `type-driven`: removed tool lock-in; 10-language support.
+- `validation-first`: removed tool lock-in; 10-language support.
 
 **Skill enhancements**
 
-- `parallel-launch` — refined strategy; added explicit review step between worker phases.
-- `refactor-break-bw-compat` — enhanced guide with strategy section.
+- `parallel-launch`: refined strategy; added explicit review step between worker phases.
+- `refactor-break-bw-compat`: enhanced guide with strategy section.
 
 ### Changed
 
 **CLAUDE.md methodology**
 
 - Clarified scope targeting; added post-agent verification step (read back modified files, confirm line-count expectations).
-- Refined Verbalized Sampling section — dynamic hypothesis sampling (baseline N≥5, trivial N≥3, high-ambiguity N≥7, architectural N≥10, no hard cap).
+- Refined Verbalized Sampling section: dynamic hypothesis sampling (baseline N≥5, trivial N≥3, high-ambiguity N≥7, architectural N≥10, no hard cap).
 - Simplified editing workflow (removed `edit_file` partial-snippet specifics in favor of the general Find → Transform → Verify discipline).
 - Updated banned tools list; enhanced token-efficiency guidelines (per-tool flags, discovery-then-targeted-read pattern).
-- Revised orchestration and delegation sections — task splitting, parallel vs sequence criteria, delegation mandatory thresholds.
+- Revised orchestration and delegation sections: task splitting, parallel vs sequence criteria, delegation mandatory thresholds.
 - Revised role/tidy-first/VS sections for clarity.
 
 **Tooling**
@@ -127,23 +127,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 **Output styles**
 
-- `builder` — enhanced communication guidelines for non-technical builders (outcome-first, plain-language, progressive-disclosure).
+- `builder`: enhanced communication guidelines for non-technical builders (outcome-first, plain-language, progressive-disclosure).
 
 **Infrastructure**
 
 - Installation script simplified (single-line install).
-- `mcp.json` streamlined — cleaner server configuration keys.
+- `mcp.json` streamlined: cleaner server configuration keys.
 
 ### Fixed
 
-- `refactor-break-bw-compat` — replaced stale `git grep` invocations with `rg` where appropriate.
+- `refactor-break-bw-compat`: replaced stale `git grep` invocations with `rg` where appropriate.
 
 ### Removed
 
 **Skills**
 
-- `hodd-rust`, `outline-strong`, `plan-now` — deprecated; replaced by the broader `plan` / `proceed` / language-agnostic skill set.
-- `code-simplifier` — merged behavior into `refactoring` agent.
+- `hodd-rust`, `outline-strong`, `plan-now`, deprecated and replaced by the broader `plan` / `proceed` / language-agnostic skill set.
+- `code-simplifier`: merged behavior into `refactoring` agent.
 
 **Hooks**
 
@@ -239,7 +239,7 @@ Removed redundancy by merging overlapping agents and eliminating agents outside 
 - debugger - Root cause analysis, error resolution, debugging workflows
 - refactorer - Code restructuring, design improvements
 - refactor-planner - Strategic refactoring plans, technical debt reduction
-- test-writer - Comprehensive test suites, TDD workflows
+- test-writer - Test suites, TDD workflows
 - test-designer-advanced - Edge cases, chaos engineering, property-based testing
 - modernizer - Legacy code updates, modern practices adoption
 - investigator - Deep debugging, root cause analysis
@@ -248,7 +248,7 @@ Removed redundancy by merging overlapping agents and eliminating agents outside 
 
 **Performance (4)**
 
-- performance - Holistic performance optimization, profiling, benchmarking
+- performance - Whole-system performance optimization, profiling, benchmarking
 - concurrency-expert - Thread safety, synchronization, parallel patterns
 - memory-expert - Memory optimization, leak detection, allocation analysis
 - database-optimizer - Query optimization, indexing, schema efficiency
@@ -263,7 +263,7 @@ Removed redundancy by merging overlapping agents and eliminating agents outside 
 - security-auditor - Vulnerability review, OWASP compliance, secure auth
 - migrator - System migrations, schema changes, version upgrades
 - porter - Cross-platform code porting, language transitions
-- docs - Comprehensive technical documentation from codebases
+- docs - Technical documentation from codebases
 - reference-builder - Exhaustive technical references, API docs
 - meta-programming-pro - Code generation, DSLs, abstractions
 - prompt-engineer - LLM prompts optimization, AI features
@@ -296,7 +296,7 @@ Removed redundancy by merging overlapping agents and eliminating agents outside 
 - analyze/data/data-viz - Create data visualizations
 - analyze/data/visualize - Generate visual representations
 - analyze/db/db-optimize - Database optimization recommendations
-- analyze/research/deep-dive - Comprehensive research with web sources
+- analyze/research/deep-dive - Research with web sources
 - analyze/research/deep-web-research - Extensive web research with citations
 - analyze/research/investigate - Investigative analysis of complex topics
 - analyze/research/quick-web-research - Fast web research
@@ -304,7 +304,7 @@ Removed redundancy by merging overlapping agents and eliminating agents outside 
 
 **Code (14 commands)**
 
-- code/analyze/analyze-deps - Comprehensive dependency analysis
+- code/analyze/analyze-deps - Dependency analysis
 - code/analyze/bottleneck - Identify performance bottlenecks
 - code/analyze/dependencies - Dependency graph analysis
 - code/analyze/deps - Quick dependency check
@@ -337,7 +337,7 @@ Removed redundancy by merging overlapping agents and eliminating agents outside 
 - docs/analyze/explain - Explain code and documentation
 - docs/generate/api-docs - Generate API documentation
 - docs/generate/changelog - Generate changelog from commits
-- docs/generate/document - Generate comprehensive documentation
+- docs/generate/document - Generate full documentation
 - docs/generate/onboard - Create onboarding documentation
 - docs/manage/docs-add - Add new documentation sections
 - docs/manage/docs-init - Initialize documentation structure
@@ -351,7 +351,7 @@ Removed redundancy by merging overlapping agents and eliminating agents outside 
 - git/pr/pr-create - Create PR with intelligent analysis
 - git/pr/pr-review - Review and manage PRs
 - git/pr/pr-update - Update existing PRs
-- git/review/review-git - Comprehensive git history review
+- git/review/review-git - Git history review
 
 **Meta (10 commands)**
 
@@ -376,7 +376,7 @@ Removed redundancy by merging overlapping agents and eliminating agents outside 
 
 **Security (4 commands)**
 
-- security/audit/audit - Comprehensive security audit
+- security/audit/audit - Security audit
 - security/audit/secrets-audit - Scan for exposed secrets
 - security/model/harden - Security hardening recommendations
 - security/model/threat-model - Generate threat models (STRIDE methodology)
@@ -401,14 +401,14 @@ Removed redundancy by merging overlapping agents and eliminating agents outside 
 - test/generate/test-gen - Generate test suites
 - test/run/load-test - Load testing
 - test/run/tdd - Test-driven development workflow
-- test/run/validate - Comprehensive validation with auto-detection
+- test/run/validate - Validation with auto-detection
 
 **Tools (5 commands)**
 
 - tool/cpr - Code, PR, and review workflows
 - tool/diagram - Generate diagrams (nomnoml/mermaid)
 - tool/five - Five-question analysis framework
-- tool/review - Comprehensive code review
+- tool/review - Code review
 - tool/zed-task - Zed editor task integration
 
 **Workflow (17 commands)**
@@ -469,7 +469,7 @@ Removed redundancy by merging overlapping agents and eliminating agents outside 
 
 **settings.json**
 
-- Comprehensive tool permissions (ast-grep, fd, rg, cargo, npm, git, etc.)
+- Full tool permissions (ast-grep, fd, rg, cargo, npm, git, etc.)
 - MCP integration (time, browser, git, context7, tavily, etc.)
 - Security denials (sed -i, force push, destructive commands)
 - Hooks for event-driven automation
@@ -486,7 +486,7 @@ Removed redundancy by merging overlapping agents and eliminating agents outside 
 
 #### Documentation
 
-- Comprehensive README with installation, usage, and methodology
+- Full README with installation, usage, and methodology
 - CHANGELOG for version tracking
 - Plugin manifest with full registry
 - Marketplace structure for distribution
