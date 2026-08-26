@@ -2,7 +2,7 @@
 
 Surface reference for HTML and vanilla CSS. Companion to `references/anti-slop.md` for slop tells specific to web (uniform `rounded-lg`, `transition: all`, default Tailwind ramp, etc.).
 
-> **Snapshot date: April 2026.** Every Baseline status below is a snapshot, not a guarantee. Re-verify on https://web.dev/baseline and https://developer.mozilla.org **before** relying on any feature in production code. Forward-dated "Widely Available" entries (e.g., "Widely Available Sep 2026") are projections — treat them as Newly Available until that date passes and you have confirmed status independently. Browser-conservative environments (enterprise IT, government, embedded) need an extra confirmation pass even on Widely Available features.
+> **Grounded: 2026-08-26.** Every Baseline status below is a snapshot, not a guarantee. Re-verify on https://web.dev/baseline and https://developer.mozilla.org **before** relying on any feature in production code. Baseline promotes a feature from Newly to Widely Available 30 months after the Newly date. Browser-conservative environments (enterprise IT, government, embedded) need an extra confirmation pass even on Widely Available features.
 
 ## 1. Posture
 
@@ -16,11 +16,11 @@ Each feature lists Baseline status, one concrete example, and the anti-pattern r
 
 ## 2A. Use by default
 
-Widely Available as of the April 2026 snapshot — no feature query needed in evergreen-browser projects. Re-verify on web.dev/baseline before adopting in browser-conservative environments.
+Widely Available as of this grounding — no feature query needed in evergreen-browser projects. Re-verify on web.dev/baseline before adopting in browser-conservative environments.
 
 ### Container queries (`@container`)
 
-Baseline Newly Available Feb 2023, Widely Available Feb 2025.
+Baseline Newly Available 2023-02-14, Widely Available 2025-08-14.
 ```css
 .card { container-type: inline-size; }
 @container (inline-size > 32rem) {
@@ -31,7 +31,7 @@ Anti-pattern: viewport media queries on component-scoped layout — the componen
 
 ### `:has()` selector
 
-Baseline Newly Available Dec 2023, Widely Available Dec 2025.
+Baseline Newly Available 2023-12-19, Widely Available 2026-06-19.
 ```css
 .card:has(:focus-visible) { outline: 2px solid var(--color-accent); }
 .form:has(input:invalid) .submit { opacity: 0.5; }
@@ -40,7 +40,7 @@ Anti-pattern: a JS handler that toggles a `.is-invalid` class on the parent. `:h
 
 ### CSS nesting
 
-Baseline Newly Available Aug 2023, Widely Available Aug 2025.
+Baseline Newly Available 2023-12-11, Widely Available 2026-06-11.
 ```css
 .card {
   padding: var(--space-16);
@@ -52,7 +52,7 @@ Anti-pattern: SCSS or Less for nesting alone. The build step earns nothing once 
 
 ### `color-mix()`
 
-Baseline Newly Available May 2023, Widely Available May 2025.
+Baseline Newly Available 2023-05-09, Widely Available 2025-11-09.
 ```css
 --color-hover: color-mix(in oklch, var(--color-accent) 88%, var(--color-bg));
 --color-disabled: color-mix(in oklch, var(--color-fg) 40%, transparent);
@@ -61,7 +61,7 @@ Anti-pattern: hand-rolled hex variants for hover, disabled, pressed. Mix in OKLC
 
 ### OKLCH / Lab / LCh color
 
-Baseline Newly Available May 2023, Widely Available May 2025.
+Baseline Newly Available 2023-05-09, Widely Available 2025-11-09.
 ```css
 --color-accent: oklch(0.62 0.18 256);
 --color-accent-strong: oklch(0.52 0.18 256);
@@ -97,7 +97,7 @@ Newly Available with a forward-dated Widely Available milestone, or Chromium-onl
 
 ### `popover` attribute and `<dialog>`
 
-Baseline Newly Available Apr 2024, Widely Available Apr 2026 — verify against current Baseline before dropping the fallback.
+`<dialog>` is Widely Available (2024-09-14). `popover` is Baseline Newly Available (2025-01-27) and is Newly, not Widely — keep the fallback.
 ```html
 <button popovertarget="menu">Open</button>
 <div id="menu" popover>...</div>
@@ -106,7 +106,7 @@ Anti-pattern: a `position: fixed` div with `z-index: 9999` and a JS click-outsid
 
 ### `text-wrap: balance`
 
-Baseline Newly Available Sep 2024, Widely Available Sep 2026 — Newly Available at snapshot time; Safari and older Firefox still need verification.
+Baseline Newly Available 2024-05-13, still Newly Available: Chrome 114, Firefox 121, Safari 17.5.
 ```css
 h1, h2, .lede { text-wrap: balance; }
 ```
@@ -114,7 +114,7 @@ Anti-pattern: manual `<br>` tags in headlines for visual balance. Browsers balan
 
 ### Anchor positioning
 
-Baseline Newly Available post-Jan 2026 — Firefox 147 default-enabled it. Gate behind `@supports (anchor-name: --x)`; the dependency footprint of fallback libraries is what this feature is meant to eliminate, so swapping the gate for Floating UI on missing support defeats the purpose.
+Not Baseline: webstatus.dev reports limited availability. Gate behind `@supports (anchor-name: --x)`; the dependency footprint of fallback libraries is what this feature is meant to eliminate, so swapping the gate for Floating UI on missing support defeats the purpose.
 ```css
 .tooltip { position: absolute; position-anchor: --button; top: anchor(bottom); }
 ```
@@ -122,7 +122,7 @@ Anti-pattern: Floating UI or Popper for simple tooltips when the platform suppor
 
 ### Scroll-driven animations
 
-Chromium-stable; Safari Tech Preview / Firefox flag-only as of Apr 2026 — NOT Baseline. Use behind a feature query and supply a fallback.
+Chrome and Edge 115+, Safari 26+; no Firefox support. Not Baseline, so keep the feature query.
 ```css
 @supports (animation-timeline: scroll()) {
   .progress { animation: grow linear; animation-timeline: scroll(root); }

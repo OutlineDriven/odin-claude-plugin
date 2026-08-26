@@ -4,6 +4,8 @@ The recovery story is what makes branchless safe to use aggressively. Most
 "history mistakes" reachable via plain Git are reversible here — provided
 you reach for the right command.
 
+**Grounded: 2026-08-26**
+
 Wiki source of truth: <https://github.com/arxanas/git-branchless/wiki>
 
 ---
@@ -123,7 +125,7 @@ Soft-delete commits without losing the event log. The opposite of
 ```
 git hide <commit>                       # single
 git hide -r <root>                      # subtree
-git hide -r --no-delete-branches <root> # keep branch refs (v0.9.0 default deletes them)
+git hide -r --no-delete-branches <root> # keep branch refs (default deletes them)
 ```
 
 Reverse:

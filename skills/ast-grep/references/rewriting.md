@@ -2,6 +2,8 @@
 
 ast-grep provides powerful tools for modifying code, from simple replacements to complex AST manipulations.
 
+**Grounded: 2026-08-26**
+
 ## Basic Rewrite (`fix`)
 
 The `fix` field in YAML or `--rewrite` CLI flag specifies the replacement string.
@@ -33,7 +35,7 @@ Modify meta-variables before using them in `fix`.
 ```yaml
 transform:
   NEW_VAR:
-    # String-style syntax (v0.28.3+)
+    # String-style syntax (ast-grep 0.45.x)
     substring($OLD_VAR, startChar=1, endChar=-1)
 ```
 

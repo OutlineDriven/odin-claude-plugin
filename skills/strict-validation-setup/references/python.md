@@ -1,11 +1,13 @@
 # Python strict-mode bootstrap (2026)
 
+**Grounded: 2026-08-26**
+
 ## pyrightconfig.json
 
 ```json
 {
   "typeCheckingMode": "strict",
-  "pythonVersion": "3.12",
+  "pythonVersion": "3.14",
   "useLibraryCodeForTypes": true,
   "reportMissingTypeStubs": true,
   "reportImplicitOverride": "error",
@@ -19,7 +21,7 @@ Pyright `typeCheckingMode = "strict"` is the canonical 2026 strict surface (~30 
 ## ruff.toml
 
 ```toml
-target-version = "py312"
+target-version = "py314"
 line-length = 100
 
 [lint]

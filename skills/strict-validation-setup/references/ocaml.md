@@ -1,11 +1,13 @@
 # OCaml strict-mode bootstrap (2026)
 
+**Grounded: 2026-08-26**
+
 OCaml's strict surface lives in dune flags, ocamlformat config, and the `.mli`-first interface discipline. There is no single strict-mode preset.
 
 ## dune-project
 
 ```dune
-(lang dune 3.16)
+(lang dune 3.24)
 (generate_opam_files true)
 
 (implicit_transitive_deps false)
@@ -44,7 +46,7 @@ Convert warnings to errors in CI via `(flags (:standard -warn-error +a))`.
 
 ```
 profile = janestreet
-version = 0.27.0
+version = 0.29.0
 margin = 100
 break-cases = fit-or-vertical
 ```

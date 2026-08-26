@@ -2,6 +2,8 @@
 
 Depth for the SKILL.md §4 charter. Restraint anchored on production exemplars is the antidote to both flavors of slop.
 
+**Grounded: 2026-08-26**
+
 ## 1. Slop tells catalogue
 
 Catalogue informed by Adrian Krebs (500 Show HN sites surveyed Mar 2025), Sailop's Top-10k AI-built sites scan, and ongoing SiteCritic anti-pattern threads.
@@ -239,7 +241,7 @@ Nine exemplars. OKLCH values use `oklch(L C H)` triples; hex companion noted in 
 | Things 3 | `oklch(0.95 0 0)` | `oklch(0.865 0.177 90)` | SF Pro Display | SF Pro Text | SF Mono | 8px | Inherits macOS AppKit materials; primary is light-mode `windowBackgroundColor` (~`oklch(0.95 0 0)`); dark mode applies Desktop Tinting (~`oklch(0.18 0 0)`); accent is `systemYellow` `#FFCC00` | https://culturedcode.com/things |
 | Rosé Pine | `oklch(0.213 0.025 291)` | `oklch(0.776 0.095 305)` | n/a (TUI / editor theme) | n/a | terminal mono | n/a | Three variants (Main / Moon / Dawn); semantic palette (rose / love / gold / pine / foam / iris); base `#191724`, iris `#C4A7E7` | https://rosepinetheme.com |
 | Helix editor | `oklch(0.305 0.078 310)` | `oklch(0.713 0.155 29)` | n/a (TUI) | n/a (TUI) | terminal mono | n/a | Modal editing aesthetic; default theme midnight `#3B224C` + apricot `#F47868` diagnostic | https://github.com/helix-editor/helix |
-| Radix Colors | `oklch(0.991 0 90)` (gray-1) | `oklch(0.544 0.191 267)` (indigo-9) | n/a (component library) | n/a | n/a | n/a | 46 scales × 12-step P3-aware ramps (1 = app bg, 9 = solid, 12 = high-contrast text); per-step alpha variants | https://www.radix-ui.com/colors |
+| Radix Colors | `oklch(0.991 0 90)` (gray-1) | `oklch(0.544 0.191 267)` (indigo-9) | n/a (component library) | n/a | n/a | n/a | 31 base hue scales (6 gray, 25 chromatic) × 12-step P3-aware ramps (1 = app bg, 9 = solid, 12 = high-contrast text); per-step alpha variants | https://www.radix-ui.com/colors |
 | Fluent 2 | `oklch(1 0 0)` | `oklch(0.568 0.167 251)` | Segoe UI Variable | Segoe UI Variable | Cascadia Code | 4px | Luminosity-aware shadows; Communication Blue `#0078D4`; Office 2026 canonical | https://fluent2.microsoft.design |
 
 These are not templates. They are evidence. Read each as "why does this surface feel this way?" and the answer becomes the direction the next design must commit to.

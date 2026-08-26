@@ -1,5 +1,7 @@
 # Property-Based Testing Frameworks by Language
 
+**Grounded: 2026-08-26**
+
 | Language | Framework | Stateful Testing |
 |----------|-----------|------------------|
 | Rust | proptest | proptest stateful |

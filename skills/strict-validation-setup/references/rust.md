@@ -1,5 +1,7 @@
 # Rust strict-mode bootstrap (2026)
 
+**Grounded: 2026-08-26**
+
 ## Cargo.toml
 
 ```toml

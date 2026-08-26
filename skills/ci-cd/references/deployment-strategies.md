@@ -1,5 +1,7 @@
 # Deployment Strategies
 
+**Grounded: 2026-08-26**
+
 ## Preview Deployments
 
 Every PR gets a preview deployment for manual testing:
@@ -10,7 +12,7 @@ deploy-preview:
   runs-on: ubuntu-latest
   if: github.event_name == 'pull_request'
   steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: Deploy preview
       run: npx vercel --token=${{ secrets.VERCEL_TOKEN }}
 ```

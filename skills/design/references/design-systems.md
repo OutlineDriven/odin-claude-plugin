@@ -1,10 +1,10 @@
 # Design Systems Reference
 
-**Snapshot date: April 2026.** Re-verify versions and capability tables before relying on them in production. Specs evolve; the citations below are correct as of the snapshot date.
+**Grounded: 2026-08-26.** Re-verify versions and capability tables before relying on them in production. Specs evolve; the citations below are correct as of the snapshot date.
 
 ## §1. Posture
 
-Design systems are tokens + behavior, expressed as code. The token spec (DTCG) is now W3C-stable; the export tooling (Style Dictionary 4) is mature; the production exemplars (Radix Colors, Material 3 Expressive, Fluent 2, Apple HIG 2025-2026) each commit to a different *register* — pick by what the picked direction needs, not by familiarity. Direction comes first, framework second; see `references/paradigms.md` for paradigm-to-system fit before reaching for a library. A system imported without a direction yields the default-Material-palette tell — recognizable to anyone who has seen Compose's defaults more than twice.
+Design systems are tokens + behavior, expressed as code. The token spec (DTCG) is now W3C-stable; the export tooling (Style Dictionary 5) is mature; the production exemplars (Radix Colors, Material 3 Expressive, Fluent 2, Apple HIG 2025-2026) each commit to a different *register* — pick by what the picked direction needs, not by familiarity. Direction comes first, framework second; see `references/paradigms.md` for paradigm-to-system fit before reaching for a library. A system imported without a direction yields the default-Material-palette tell — recognizable to anyone who has seen Compose's defaults more than twice.
 
 ## §2. DTCG W3C Tokens 2025.10
 
@@ -66,11 +66,11 @@ DTCG 2025.10 introduces `$type: "transition"` for motion tokens, composed from `
 }
 ```
 
-Style Dictionary 4.x recognizes the `transition` discriminator out of the box; older 3.x configs need a custom transform that flattens the composite type into platform-native syntax (CSS `transition`, iOS `UIView.animate`, Android `AnimatorSet`).
+Style Dictionary 5.x recognizes the `transition` discriminator out of the box; older 3.x configs need a custom transform that flattens the composite type into platform-native syntax (CSS `transition`, iOS `UIView.animate`, Android `AnimatorSet`).
 
-## §3. Style Dictionary 4.x + Tokens Studio
+## §3. Style Dictionary 5.x + Tokens Studio
 
-**Style Dictionary 4.x** is stable; transforms DTCG-shaped JSON into platform-specific outputs (CSS custom properties, iOS Swift, Android XML, Flutter, JS objects). **Tokens Studio** (formerly Figma Tokens) is the design-tool integration layer; sync DTCG tokens between Figma and code so the source-of-truth lives in JSON, not in a Figma library.
+**Style Dictionary 5.5.x** is stable; transforms DTCG-shaped JSON into platform-specific outputs (CSS custom properties, iOS Swift, Android XML, Flutter, JS objects). **Tokens Studio** (formerly Figma Tokens) is the design-tool integration layer; sync DTCG tokens between Figma and code so the source-of-truth lives in JSON, not in a Figma library.
 
 Pipeline: DTCG source → SD config → platform outputs. Pick a `transformGroup` per target (`css`, `ios-swift`, `android`, `compose`); drop to custom transforms when the built-in group misses a project-specific naming rule.
 
@@ -94,15 +94,15 @@ export default {
 
 `outputReferences: true` preserves DTCG aliases as CSS `var()` references in the build, so theme switches at runtime work. Posture: keep DTCG source as the source of truth; never edit derived outputs — they regenerate.
 
-## §3.5. Style Dictionary v4 worked example
+## §3.5. Style Dictionary worked example
 
-Two flags carry most of the v4-specific weight in production token pipelines:
+Two flags carry most of the weight in production token pipelines:
 
 - **`outputReferences: true`** — preserves DTCG aliases as CSS `var()` references rather than flattening them. Critical for runtime theme switches (light / dark / high-contrast); without it, every theme ships its own concrete values and the cascade cannot pivot on a single root variable.
-- **Custom transforms** — when the built-in `transformGroup` misses a project-specific naming convention (e.g., kebab-case-but-not-the-tailwind-flavor, or per-platform prefixes), register a one-off transform. v4's transform API is async-aware; previous versions required workarounds for asynchronous color-space conversion or remote-asset resolution.
+- **Custom transforms** — when the built-in `transformGroup` misses a project-specific naming convention (e.g., kebab-case-but-not-the-tailwind-flavor, or per-platform prefixes), register a one-off transform. The transform API has been async-aware since v4; earlier versions required workarounds for asynchronous color-space conversion or remote-asset resolution.
 
 ```js
-// style-dictionary.config.js (v4)
+// style-dictionary.config.js
 export default {
   source: ['tokens/**/*.json'],
   platforms: {
@@ -123,7 +123,7 @@ The output preserves `var(--motion-fast)` references through the `transition-fas
 
 ## §4. Radix Colors
 
-**Radix Colors** ships **46 scales × 12-step semantic ramps**, P3 wide-gamut variants, and alpha-blend variants per step. Maintenance moved under **WorkOS** as of 2026; the unified **`radix-ui`** package shipped **Feb 2026**, consolidating `@radix-ui/colors` with the rest of the Radix surface.
+**Radix Colors** ships **31 base hue scales (6 gray, 25 chromatic) on 12-step ramps**, P3 wide-gamut variants, and alpha-blend variants per step. Maintenance moved under **WorkOS** as of 2026; the unified **`radix-ui`** package (1.6.x) consolidates Primitives, while **`@radix-ui/colors`** remains standalone at 3.0.x.
 
 12-step ramp meaning: 1 = app background, 2 = subtle background, 3 = UI element background, 4 = hovered UI element, 5 = active UI element, 6 = subtle borders/separators, 7 = UI element border, 8 = hovered UI element border / focus rings, 9 = solid backgrounds (the brand step), 10 = hovered solid, 11 = low-contrast text, 12 = high-contrast text. Step 9 vs step 10 distinguishes filled vs hovered solid surfaces. Light and dark variants pair by name (`blue` / `blueDark`); semantic step preserves meaning across the swap.
 
@@ -183,7 +183,7 @@ Define explicit overlay tokens for each context (`--surface-overlay-light`, `--s
 
 ## §5. Material 3 Expressive
 
-**Material 3 Expressive** went stable **Dec 2025**. Compose support landed without experimental flags in the same release. Adds emphasized motion curves, an expanded expressive type scale, and color-role tonal palettes generated from a seed via **HCT** (Hue / Chroma / Tone) — perceptually uniform unlike HSL.
+**Material 3 Expressive** is the current Material direction, but Compose support is not yet stable: the latest stable `androidx.compose.material3` is 1.4.x, and the Expressive APIs ship only in a 1.5.0 alpha behind `@ExperimentalMaterial3ExpressiveApi`. Adds emphasized motion curves, an expanded expressive type scale, and color-role tonal palettes generated from a seed via **HCT** (Hue / Chroma / Tone) — perceptually uniform unlike HSL.
 
 Color roles: `primary`, `onPrimary`, `primaryContainer`, `onPrimaryContainer`, `secondary`, `tertiary`, `surface`, `surfaceVariant`, `surfaceContainer`, `error`, `outline`. Pair every fill with its `on*` for foreground; pair surfaces with their `surfaceVariant` for adjacency.
 
@@ -200,7 +200,7 @@ Failure mode: shipping with the default Material 3 palette and `MaterialTheme()`
 
 ## §6. Fluent 2
 
-**Fluent 2** is the current Microsoft design system. **Liquid Glass** is on the **iOS 26** roadmap; the term is Apple's, but the underlying *luminosity-aware shadow* concept cross-pollinates Microsoft Design and Apple HIG. Fluent 2 ships per-platform token files (`.json`) for web, Windows, and macOS targets.
+**Fluent 2** is the current Microsoft design system. **Liquid Glass** shipped on September 15 2025 across iOS 26, iPadOS 26, macOS 26 (Tahoe), watchOS 26, and visionOS 26; the term is Apple's, but the underlying *luminosity-aware shadow* concept cross-pollinates Microsoft Design and Apple HIG. Fluent 2 ships per-platform token files (`.json`) for web, Windows, and macOS targets; the component library is `@fluentui/react-components` 9.74.x.
 
 Defining trait: backplate-driven elevation. Shadow intensity matches the backplate luminosity instead of the uniform `shadow-md` flat tell. Connected Animations carry the same element across surface boundaries; the shared element retains identity through the transition rather than fading and re-instantiating.
 
@@ -224,7 +224,7 @@ The two values are not two themes of the same shadow; they are two shadows for t
 
 ## §7. Apple HIG 2025-2026
 
-**Apple HIG 2025** introduced visionOS spatial design — depth, materials, gaze + pinch input. **Apple HIG 2026** rolls **Liquid Glass** across iOS 26, iPadOS, macOS, and watchOS: luminosity-aware translucent layers that respond to the underlying content rather than apply uniform blur. **Adaptivity** is the through-line — design must scale across all Apple platforms, and tokens drive the adaptation.
+**Apple HIG 2025** introduced visionOS spatial design — depth, materials, gaze + pinch input. **Apple HIG 2026** documents **Liquid Glass**, shipped September 15 2025 across iOS 26, iPadOS 26, macOS 26, watchOS 26, and visionOS 26: luminosity-aware translucent layers that respond to the underlying content rather than apply uniform blur. **Adaptivity** is the through-line — design must scale across all Apple platforms, and tokens drive the adaptation.
 
 Liquid Glass posture: translucent layers respond to underlying content; never blur for blur's sake. Glass overdose is the slop tell — see `references/anti-slop.md` §1 row 4. visionOS spatial considerations: depth ≠ z-index; physical layers occupy 3D space, with parallax and gaze-driven affordances tied to actual distance. Platform-adaptive typography uses the SF Pro family; size and weight scale per platform (compact on watchOS, generous on visionOS).
 

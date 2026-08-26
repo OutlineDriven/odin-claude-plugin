@@ -1,7 +1,9 @@
 # Dynamic Workflows (Claude Code)
 
 Claude Code compiles workflow logic into a background JavaScript orchestration
-script and runs it with context-isolated subagents (v2.1.154+).
+script and runs it with context-isolated subagents (v2.1.246+).
+
+**Grounded: 2026-08-26**
 
 ## Script shape
 

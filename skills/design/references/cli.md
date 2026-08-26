@@ -2,7 +2,7 @@
 
 Surface reference for command-line tools — the counterpart to `references/tui.md` for non-interactive CLIs. Covers argument-parsing libraries (clap, cobra, cmdliner, typer/click), the env-var contracts every CLI must respect, and the conventions for exit codes, progress, and help text.
 
-**Snapshot date: April 2026.** Re-verify versions and capability tables before relying on them in production.
+**Grounded: 2026-08-26.** Re-verify versions and capability tables before relying on them in production.
 
 ## 1. Posture
 
@@ -12,7 +12,7 @@ The shared theme-token shape lives in `references/tui.md` §6 — capability tie
 
 ## 2. clap (Rust)
 
-`clap` 4.x is the current stable line as of April 2026. Derive macros are the recommended surface for new code; the builder API remains supported.
+`clap` 4.6.x is the current stable line; there is no 5.0 stable. Derive macros are the recommended surface for new code; the builder API remains supported.
 
 - `ColorChoice::Auto` — auto-respects `NO_COLOR`, `CLICOLOR`, and TTY detection. Default for color-aware clap apps.
 - `ColorChoice::Always` / `Never` — flag-driven overrides; wire them to `--color=always|never|auto`.
@@ -33,7 +33,7 @@ Pair with `clap_complete` for shell completions and `is-terminal` (or `std::io::
 
 ## 3. cobra (Go)
 
-`cobra` 1.x is the current stable line; flag-tree composition is its core selling point. Cobra does not ship a color decision — bring your own (typically `lipgloss` writer-layer downsampling, or `fatih/color` with its `NO_COLOR` honour).
+`cobra` v1.10.x is the current stable line; flag-tree composition is its core selling point. Cobra does not ship a color decision — bring your own (typically `lipgloss` writer-layer downsampling, or `fatih/color` with its `NO_COLOR` honour).
 
 ```go
 var rootCmd = &cobra.Command{
@@ -54,7 +54,7 @@ The reference cobra application for status-color register is the GitHub CLI (`gh
 
 ## 4. cmdliner (OCaml)
 
-`cmdliner` 1.3+ is the current stable line. Declarative term-based CLI definition; arguments and options are values combined into a `Term` that the runtime evaluates against argv.
+`cmdliner` 2.1.x is the current stable line; 2.0 replaced the old `Term.eval` entry point with the `Cmd` API. Declarative term-based CLI definition; arguments and options are values combined into a `Term` that the runtime evaluates against argv.
 
 ```ocaml
 let pattern =

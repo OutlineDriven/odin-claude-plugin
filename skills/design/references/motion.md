@@ -2,6 +2,8 @@
 
 How motion behaves across web, React, TUI, and desktop runtimes. Each runtime has a different cost model for motion (frame budget, GPU offload, retained vs immediate mode); the timing bands and easing curves are constants because they map to perception, not implementation.
 
+**Grounded: 2026-08-26**
+
 This file is loaded only via the SKILL.md surface-routing table — surface references (web.md, react.md, tui.md, desktop.md) do not backlink here. A reader needing cross-runtime motion guidance re-enters via SKILL.md.
 
 ## 1. Motion-budget doctrine

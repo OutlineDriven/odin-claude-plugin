@@ -1,8 +1,8 @@
 # desktop.md — native cross-platform desktop surfaces
 
-Surface reference for native desktop apps that are not built on Electron. Covers Tauri 2.x (web frontend + Rust backend), Slint 1.16 (declarative `.slint` markup), egui (immediate-mode), and Iced (Elm-inspired reactive). Companion to `references/paradigms.md` for paradigm fit and `references/anti-slop.md` for cross-platform color slop tells.
+Surface reference for native desktop apps that are not built on Electron. Covers Tauri 2.x (web frontend + Rust backend), Slint 1.17 (declarative `.slint` markup), egui (immediate-mode), and Iced (Elm-inspired reactive). Companion to `references/paradigms.md` for paradigm fit and `references/anti-slop.md` for cross-platform color slop tells.
 
-**Snapshot date: April 2026.** Re-verify versions and capability tables before relying on them in production.
+**Grounded: 2026-08-26.** Re-verify versions and capability tables before relying on them in production.
 
 ## 1. Posture
 
@@ -12,7 +12,7 @@ The paradigms in `references/paradigms.md` map cleanly onto desktop: post-minima
 
 ## 2. Tauri 2.x
 
-Tauri 2.0 stable shipped on **October 2 2024**. The 2.x mobile track — iOS and Android targets — reached production-ready status by **April 2026**, making Tauri the only desktop framework in this set that also produces phone binaries from the same codebase.
+Tauri 2.0 stable shipped on **October 2 2024**. The 2.x mobile track — iOS and Android targets — reached production-ready status by **April 2026**, making Tauri the only desktop framework in this set that also produces phone binaries from the same codebase. The current release is the 2.11.x line.
 
 - **Frontend** — any web stack (React, Svelte, vanilla HTML/CSS, Solid). The webview is the OS-native one (WebKit on macOS, WebView2 on Windows, WebKitGTK on Linux), not a bundled Chromium.
 - **Backend** — Rust. The Tauri runtime mediates between the webview and Rust commands.
@@ -92,9 +92,9 @@ Cross-platform color discipline — never hardcode platform colors; always deriv
 
 Sandboxing — Tauri's allowlist must be tight. The default capability surface in 2.x is permission-scoped per command; widening it for convenience is the most common security regression in shipping Tauri apps.
 
-## 3. Slint 1.16
+## 3. Slint 1.17
 
-Slint 1.16 stable released **April 16 2026**. Runtime is under 300 KiB — among the smallest cross-platform UI runtimes in production. Compile-time validation: declarative `.slint` markup with property bindings checked at build, so theme-token mismatches surface before runtime.
+Slint 1.17.x is the current release line. Runtime is under 300 KiB — among the smallest cross-platform UI runtimes in production. Compile-time validation: declarative `.slint` markup with property bindings checked at build, so theme-token mismatches surface before runtime.
 
 Bindings ship for Rust, C++, and JavaScript (Node). The `.slint` files are language-agnostic; pick the host language by integration constraint, not by Slint affinity.
 
@@ -126,7 +126,7 @@ Design-token integration via global properties — declare a `global Theme` bloc
 
 ## 4. egui
 
-egui 0.27+ is the stable line as of April 2026. Render model is immediate-mode — re-render the whole frame each tick — which inverts the assumption every retained-mode framework makes. Cross-platform via web (WASM through `eframe`), desktop (`eframe`), and game-engine integrations (Bevy, Macroquad).
+egui 0.36.x is the current release line. Render model is immediate-mode — re-render the whole frame each tick — which inverts the assumption every retained-mode framework makes. Cross-platform via web (WASM through `eframe`), desktop (`eframe`), and game-engine integrations (Bevy, Macroquad).
 
 Immediate-mode contract — there is no scene graph; the `update()` callback is called every frame, and widgets are painted directly. State lives outside the UI tree. Use `egui::Context::request_repaint` to force a repaint when external state changes between input frames.
 
@@ -150,7 +150,7 @@ Theming via `egui::Style` mutation — clone the current style, mutate, install 
 
 ## 5. Iced
 
-Iced 0.13+ as of April 2026. Reactive Elm-inspired architecture (model / update / view / subscription) in idiomatic Rust. Renderer is wgpu — hardware-accelerated, cross-platform GPU surface; falls back to software where wgpu cannot bind.
+Iced 0.14.x is the current release line. Reactive Elm-inspired architecture (model / update / view / subscription) in idiomatic Rust. Renderer is wgpu — hardware-accelerated, cross-platform GPU surface; falls back to software where wgpu cannot bind.
 
 Elm architecture in Rust — the `Application` trait splits state, message handling, and view construction. Token-driven styling routes through `iced::theme`; custom themes implement the `theme::Custom` shape and feed palette colors from tokens.
 

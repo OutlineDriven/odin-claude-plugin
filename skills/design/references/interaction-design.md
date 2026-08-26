@@ -2,6 +2,8 @@
 
 Cross-runtime interactive-element grammar — states, focus, dropdowns, modals, keyboard navigation. Surface-specific references (`web.md`, `react.md`, `tui.md`, `qt.md`, `desktop.md`) build on this; load this file first when an interaction pattern needs to land correctly across runtimes.
 
+**Grounded: 2026-08-26**
+
 ---
 
 ## The eight interactive states
@@ -133,7 +135,7 @@ Modern solution — tether an overlay to its trigger without JavaScript.
 }
 ```
 
-`position: fixed` escapes any `overflow` clipping on ancestors. `@position-try` handles viewport edges. **Browser support:** Chrome 125+, Edge 125+. Firefox and Safari need a fallback.
+`position: fixed` escapes any `overflow` clipping on ancestors. `@position-try` handles viewport edges. **Browser support:** not Baseline — webstatus.dev reports limited availability. Keep the fallback path below.
 
 ### Popover + anchor combo
 

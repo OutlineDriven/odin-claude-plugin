@@ -2,6 +2,8 @@
 
 Five paradigms cover the production-distinct surface space. Each is named, anchored on real exemplars, and has a known failure mode. Pick one per direction; mixing two on a single surface reads as confusion (see `references/anti-slop.md` §2 row 4).
 
+**Grounded: 2026-08-26**
+
 Order matters below — post-minimalism is the ODIN default; the rest are alternatives chosen against a register, not picked from a buffet. Each subsection follows a fixed shape (when-to-use, failure mode, OKLCH palette starter, type pair, motion signature, density signature, taste anchors) so the paradigms can be scanned uniformly and compared without re-reading the prose.
 
 ## §0 Register × paradigm matrix
@@ -117,7 +119,7 @@ The decoration only signals when used once; the second instance dilutes the firs
 
 ## Material 3 Expressive
 
-**When to use.** Android / Compose surfaces and Google-ecosystem apps, stable since December 2025 (Compose support without experimental flags). The register is consumer, expressive, motion-rich — gestures matter, theming matters, accessibility is enforced by the system. Appropriate when the user expects platform-native feel, not bespoke branding, and when dynamic color from system wallpaper is a feature rather than a leak.
+**When to use.** Android / Compose surfaces and Google-ecosystem apps, Compose support is not yet stable: stable `androidx.compose.material3` is 1.4.x, with the Expressive APIs in a 1.5.0 alpha behind `@ExperimentalMaterial3ExpressiveApi`. The register is consumer, expressive, motion-rich — gestures matter, theming matters, accessibility is enforced by the system. Appropriate when the user expects platform-native feel, not bespoke branding, and when dynamic color from system wallpaper is a feature rather than a leak.
 
 **Failure mode.** M3-default — using the stock palette and component shapes reads as "I used the framework defaults" (the framework-default slop tell, see `references/anti-slop.md` §1 row 9, generalized from Tailwind to Material).
 
@@ -142,7 +144,7 @@ The dynamic-color system is permissive; without an opinionated seed color and a 
 
 ## Fluent 2
 
-**When to use.** Microsoft-ecosystem surfaces — Office 2026, Teams, Windows 11 first-party apps. Luminosity-aware shadows and backplate-driven elevation read as native to the platform. Cross-pollination note: the Liquid Glass roadmap for iOS 26 borrows the luminosity-aware-shadow concept, so the technique is migrating beyond Microsoft, but the *register* (Segoe UI, Fluent acrylics, Office iconography) remains Microsoft-coded.
+**When to use.** Microsoft-ecosystem surfaces — Office 2026, Teams, Windows 11 first-party apps. Luminosity-aware shadows and backplate-driven elevation read as native to the platform. Cross-pollination note: Liquid Glass, shipped in iOS 26 in September 2025, borrows the luminosity-aware-shadow concept, so the technique is migrating beyond Microsoft, but the *register* (Segoe UI, Fluent acrylics, Office iconography) remains Microsoft-coded.
 
 **Failure mode.** Pasting Fluent shadows onto non-Microsoft contexts reads as "Office in the browser". The luminosity-aware shadow only earns its complexity when the surrounding chrome is Fluent — backplates, acrylics, Segoe glyphs. Stripped of context, the technique looks like Bootstrap with extra steps, and the implementation cost (per-elevation luminosity sampling) buys nothing the surface needed.
 

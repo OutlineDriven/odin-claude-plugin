@@ -1,5 +1,7 @@
 # TypeScript strict-mode bootstrap (2026)
 
+**Grounded: 2026-08-26**
+
 ## tsconfig.json
 
 ```jsonc
@@ -13,8 +15,8 @@
     "noPropertyAccessFromIndexSignature": true,
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "target": "ES2024",
-    "lib": ["ES2024", "DOM"],
+    "target": "ES2025",
+    "lib": ["ES2025", "DOM"],
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": false
@@ -22,13 +24,13 @@
 }
 ```
 
-TypeScript 6.0+ defaults to `strict: true`; the additional flags above harden array/index access, optional-property semantics, and override-keyword discipline. `skipLibCheck: false` is intentional — type-check upstream `.d.ts` files to catch upstream regressions.
+TypeScript 7.0.x is the current stable release, a Go-native port of the compiler; `strict: true` has been the default since 6.0. The additional flags above harden array/index access, optional-property semantics, and override-keyword discipline. `skipLibCheck: false` is intentional — type-check upstream `.d.ts` files to catch upstream regressions.
 
 ## biome.json
 
 ```jsonc
 {
-  "$schema": "https://biomejs.dev/schemas/2.0.0/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.5.10/schema.json",
   "linter": {
     "enabled": true,
     "rules": {

@@ -2,7 +2,7 @@
 
 Surface reference for React applications. Companion to `references/web.md` for the vanilla CSS baseline; reach for vanilla first, React only when state crosses surface boundaries.
 
-**Snapshot date:** April 2026. Library versions and APIs below were verified at that point; verify against react.dev, tailwindcss.com, and ui.shadcn.com before relying on any specific hook or directive in production.
+**Grounded: 2026-08-26.** Library versions and APIs below were verified on that date; verify against react.dev, tailwindcss.com, and ui.shadcn.com before relying on any specific hook or directive in production.
 
 ## 1. Posture
 
@@ -12,7 +12,7 @@ The 2020-era assumption that "React + Tailwind + a UI kit" is the default web su
 
 ## 2. React 19-era surface (as of 19.2)
 
-React 19.2 was released October 1 2025; React Compiler 1.0 stable shipped October 7 2025; the current line is 19.2.5 as of April 2026. The six APIs below are the modern surface a designer needs to know — most landed with React 19 GA and are stable through the 19.2.x line.
+React 19.2 was released October 1 2025; React Compiler 1.0 stable shipped October 7 2025; the current line is 19.2.x. The six APIs below are the modern surface a designer needs to know — most landed with React 19 GA and are stable through the 19.2.x line.
 
 ### RSC default
 
@@ -82,7 +82,7 @@ Anti-pattern: still calling it `useFormState`. The rename is real and the migrat
 
 ### React Compiler stable
 
-React Compiler 1.0 stable (October 7 2025) auto-memoizes — manual `useMemo` and `useCallback` are now anti-patterns unless the React DevTools profiler shows the compiler missed a hot path. Per react.dev April 2026 guidance, the default project enables the compiler and removes existing memoization rather than adding more.
+React Compiler 1.0 stable (October 7 2025) auto-memoizes — manual `useMemo` and `useCallback` are now anti-patterns unless the React DevTools profiler shows the compiler missed a hot path. Per current react.dev guidance, the default project enables the compiler and removes existing memoization rather than adding more.
 ```tsx
 // Before — manual memoization, now redundant under the compiler.
 const sorted = useMemo(() => items.sort(byName), [items]);
@@ -96,7 +96,7 @@ Anti-pattern: adding `useMemo` defensively. The compiler does the work; manual m
 
 ## 3. Tailwind v4
 
-Tailwind v4 stable shipped January 22 2025; v4.2 introduced the CSS-first `@theme` directive with ~5× faster builds versus v3. CSS-first config replaces `tailwind.config.js`; tokens are defined as CSS custom properties under an `@theme` block, which means the same OKLCH custom palette feeds both Tailwind utilities and any vanilla CSS in the same file.
+Tailwind v4 stable shipped January 22 2025; the current line is 4.3.x. CSS-first `@theme` is the v4 configuration surface. CSS-first config replaces `tailwind.config.js`; tokens are defined as CSS custom properties under an `@theme` block, which means the same OKLCH custom palette feeds both Tailwind utilities and any vanilla CSS in the same file.
 ```css
 /* app.css */
 @import 'tailwindcss';
@@ -119,7 +119,7 @@ Anti-pattern: keeping `tailwind.config.js` on a v4 install. The JS config is a v
 
 ## 4. shadcn/ui v4
 
-shadcn/ui v4 with full Tailwind v4 + React 19 support reached stable February 2026. shadcn is a starting point, not a finish line — every component is yours to mold to the picked direction. Use the CLI to install, then derive token-driven variants per the picked paradigm (`references/paradigms.md`).
+shadcn/ui v4 with full Tailwind v4 + React 19 support reached stable February 2026. The CLI is on the 4.19.x line. shadcn is a starting point, not a finish line — every component is yours to mold to the picked direction. Use the CLI to install, then derive token-driven variants per the picked paradigm (`references/paradigms.md`).
 ```bash
 pnpm dlx shadcn@latest init
 pnpm dlx shadcn@latest add button dialog
@@ -157,7 +157,7 @@ Generic context shape: `{ state, actions, meta }` is the boring-correct triple. 
 
 ## 6. View Transitions
 
-`<ViewTransition>` and `addTransitionType()` are React-side wrappers around the browser View Transitions API. As of April 2026 they ship in React's Experimental / Canary channel — they have NOT been promoted to stable in 19.2. Treat them as preview APIs subject to surface changes; the browser primitive is the stable substrate.
+`<ViewTransition>` and `addTransitionType()` are React-side wrappers around the browser View Transitions API. As of this grounding they ship in React's Experimental / Canary channel — they have NOT been promoted to stable in 19.2. Treat them as preview APIs subject to surface changes; the browser primitive is the stable substrate.
 
 `<ViewTransition>` wraps the content that should animate, NOT a sibling of it. The element directly inside the wrapper participates; siblings do not. Common error: putting `<ViewTransition>` next to the changing element instead of around it.
 
@@ -215,10 +215,10 @@ Motion-budget priority (highest first; spend attention on the top):
 4. State change (toggle, expand, collapse)
 5. Route change (entrance / exit)
 
-Browser support of the underlying View Transitions API (April 2026 — distinct from React's wrapper):
-- Same-document transitions: Chromium 111+, Safari 18.2+, Firefox 144+ (stable).
+Browser support of the underlying View Transitions API (distinct from React's wrapper):
+- Same-document transitions: Baseline Newly Available (2025-10-14). Chromium 111+, Safari 18.2+, Firefox 144+ (stable).
 - `:active-view-transition-type()` selector: Chromium 125+, Safari 18.2+, Firefox 147+.
-- Cross-document transitions: Chromium 126+, Safari 18.2+, Firefox pending.
+- Cross-document transitions: not Baseline, limited availability. Chromium 126+, Safari 18.2+, Firefox pending.
 
 ## 7. Hydration safety
 
@@ -268,4 +268,4 @@ const count = useStore((s) => s.count); // re-renders only when count changes
 
 ## 10. Cite-and-defer
 
-Citations: react.dev (19.2), tailwindcss.com (v4), ui.shadcn.com (v4). This is starter density — defer to react.dev/learn for the current API surface, tailwindcss.com/docs for v4 directives, and ui.shadcn.com/docs/changelog for component versions before relying on any hook, directive, or component in production.
+Citations: react.dev (19.2.x), tailwindcss.com (4.3.x), ui.shadcn.com (shadcn 4.19.x). This is starter density — defer to react.dev/learn for the current API surface, tailwindcss.com/docs for v4 directives, and ui.shadcn.com/docs/changelog for component versions before relying on any hook, directive, or component in production.

@@ -2,7 +2,9 @@
 
 Concrete command sequences for the workflows enforced by this skill. Each
 recipe is verbatim — copy-paste, then adapt the placeholders. All examples
-target `git-branchless 0.9.0` unless tagged `[v0.11.0+]`.
+target `git-branchless 0.11.x`.
+
+**Grounded: 2026-08-26**
 
 Wiki source of truth: <https://github.com/arxanas/git-branchless/wiki>
 
@@ -57,26 +59,11 @@ interactively, or `--on-disk` if you also need a working-copy checkout.
 
 ## Recipe 4: Split a too-large commit
 
-`[v0.11.0+]`:
-
 ```
 git split <hash-of-large-commit>
 # Interactively select hunks; result becomes a child commit by default.
 # Use --before to make extracted hunks the parent, --detach for siblings.
 ```
-
-Pre-`v0.11.0` workaround:
-
-```
-git switch --detach <hash-of-large-commit>
-git reset --soft HEAD~        # ← legitimate use: pre-commit, no committed history at risk
-# Re-stage hunks selectively with `git add -p`, then record two commits.
-git move -b <hash-of-large-commit> -d HEAD --in-memory
-```
-
-Note: `git reset --soft` is fine here because nothing has been committed yet
-at this stage. The skill bans `git reset --hard` against committed history,
-not `--soft` against staging.
 
 ---
 
@@ -127,7 +114,7 @@ git hide <hash>             # single commit
 git hide -r <root>          # subtree
 ```
 
-In v0.9.0, branches pointing at the hidden commit are deleted by default.
+Branches pointing at the hidden commit are deleted by default.
 Override:
 
 ```
@@ -343,7 +330,7 @@ stack stable.
 | Rename a function across N commits | `git reword <revset> -m '...'` for messages; `git amend` per-commit for content | Auto-restacks each time. |
 | Reorder two commits | `git move -s <src> -d <dest>` | In-memory; add `--merge` if conflicts. |
 | Squash two commits | `git move -s <child> -d <parent> --fixup` | No interactive editor needed. |
-| Split one commit into two | Recipe 4 (`git split` `[v0.11.0+]` or workaround) | |
+| Split one commit into two | Recipe 4 (`git split`) | |
 | Sync stack onto updated main | Recipe 5 (`git sync --pull`) | Read the skip summary. |
 | Recover lost or wrong work | Recipe 6 (`git undo -i`) | Replaces reflog spelunking. |
 | Discard a local-only experiment | Recipe 7 (`git hide -r`) | Soft delete; reversible. |

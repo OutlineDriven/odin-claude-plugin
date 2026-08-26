@@ -2,6 +2,8 @@
 
 How Korean ships in production. Hangul has spaces (unlike CJ), so `word-break: keep-all` is the default; the writing system needs Latin metric matching, not vertical layout. Brand register splits cleanly: Toss (restraint, dual-API system) and Daangn (warmth, illustration). Loaded via `cjk.md` routing — `cjk.md` carries cross-CJK rules; this file carries the Korean direction.
 
+**Grounded: 2026-08-26**
+
 ## 1. Hangul on screen
 
 Korean has interword spaces. Korean line-break behavior is closer to Latin than to Chinese or Japanese — but the syllable block (음절) is the atomic unit, not the character.

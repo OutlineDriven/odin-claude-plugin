@@ -2,19 +2,21 @@
 
 Worked illustrations pulled out of `source-driven/SKILL.md`'s per-step instructions, one set per step. The blocks are illustrations of one shape, not a partition of the stacks. Read whichever is closest to what you detected and generalize; a stack with no block of its own is expected.
 
+**Grounded: 2026-08-26**
+
 ## Step 1 — stack-detection report shape
 
 ```
 STACK DETECTED:
-- React 19.1.0 (package.json)
-- Vite 6.2.0
+- React 19.2.8 (package.json)
+- Vite 8.2.2
 → Fetch official docs for the patterns in scope.
 ```
 
 ```
 STACK DETECTED:
-- Django 5.1 (pyproject.toml)
-- Python 3.13
+- Django 5.2 (pyproject.toml)
+- Python 3.14
 → Fetch official docs for the patterns in scope.
 ```
 
@@ -25,7 +27,7 @@ BAD:  Fetch the React homepage
 GOOD: Fetch react.dev/reference/react/useActionState
 
 BAD:  Search "django authentication best practices"
-GOOD: Fetch docs.djangoproject.com/en/6.0/topics/auth/
+GOOD: Fetch docs.djangoproject.com/en/5.2/topics/auth/
 ```
 
 ## Step 3 — conflict-detected dialogue
@@ -48,9 +50,9 @@ The same conflict shape applies in any stack:
 
 ```
 CONFLICT DETECTED:
-The codebase wraps ORM calls in sync_to_async, but Django 5.1
+The codebase wraps ORM calls in sync_to_async, but Django 5.2
 documents native async ORM methods (aget, acreate) for this path.
-(Source: docs.djangoproject.com/en/5.1/topics/db/queries/#async-queries)
+(Source: docs.djangoproject.com/en/5.2/topics/db/queries/#async-queries)
 
 Options:
 A) Use the documented pattern (native async ORM) — matches current docs

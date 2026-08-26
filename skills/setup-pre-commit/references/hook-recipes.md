@@ -1,5 +1,7 @@
 # Per-ecosystem hook contents
 
+**Grounded: 2026-08-26**
+
 **Node ecosystems**: write `.husky/pre-commit`:
 
 ```
@@ -21,9 +23,9 @@ Formatter policy is **out of scope** for this skill. Do NOT auto-create `.pretti
 ```yaml
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.16.1
+    rev: v0.16.4
     hooks:
-      - id: ruff
+      - id: ruff-check
       - id: ruff-format
   - repo: local
     hooks:

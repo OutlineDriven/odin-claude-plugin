@@ -1,9 +1,9 @@
 # Git-branchless Command + Revset Reference
 
 Inventory of every command, key flag, and revset selector used by this skill.
-Baseline version: `git-branchless 0.9.0`. Features marked `[v0.11.0+]` are on
-`main` but not yet in a tagged release as of this writing — confirm with
-`git branchless --version` before relying on them.
+Baseline version: `git-branchless 0.11.x`.
+
+**Grounded: 2026-08-26**
 
 Wiki source of truth: <https://github.com/arxanas/git-branchless/wiki>
 
@@ -141,7 +141,7 @@ Repair abandoned commits — descendants of rewritten parents that were never re
 - `--merge` — prompt for conflict resolution.
 - Config: `branchless.restack.warnAbandoned` (default `true`); `branchless.restack.preserveTimestamps` (default `false`).
 
-### `git split <commit> [--detach | --discard | --before]`  `[v0.11.0+]`
+### `git split <commit> [--detach | --discard | --before]`
 
 Extract changes from a commit interactively; auto-rebase descendants.
 
@@ -152,14 +152,12 @@ Extract changes from a commit interactively; auto-rebase descendants.
 | `--discard` | Extracted hunks are dropped. |
 | `--before` | Extracted hunks become a parent: `A → b → B' → C`. |
 
-Pre-`v0.11.0` workaround: `git move --in-memory` + `git reset --soft` + re-record.
-
 ### `git hide <revset>` / `git unhide <revset>`
 
 Soft-delete commits from smartlog. Event log is preserved; `git undo` and `git unhide` recover them.
 
 - `-r` / `--recursive` — apply to subtree.
-- v0.9.0 default: `git hide` also deletes branches pointing at the hidden commit. Use `--no-delete-branches` to keep the branches.
+- Default: `git hide` also deletes branches pointing at the hidden commit. Use `--no-delete-branches` to keep the branches.
 
 ---
 
@@ -183,7 +181,7 @@ Push a stack of branches to a remote forge.
 - Default revset: `stack()`. Common forms: `git submit @` (branches at HEAD), `git submit 'draft()'`.
 - `-c, --create` — push branches that do not yet exist on the remote. The branch must already exist locally (`git branch <name> <commit>`). First feature publish: `git submit -c @`.
 - `--forge phabricator` — Phabricator integration (well tested).
-- `--forge github` — GitHub integration. **Marked experimental in v0.9.0**; landing/reordering a stack may lose PR ancestry. Prefer the default `branch` forge (or stock push fallback) for GitHub today.
+- `--forge github` — GitHub integration. **Still flagged unsuitable for general use upstream**; landing/reordering a stack may lose PR ancestry. Prefer the default `branch` forge (or stock push fallback) for GitHub today.
 - `--dry-run`, `--jobs N` — preview / parallelism.
 
 **Safety caveat — force-push:** `git submit` rewrites the remote history of every existing branch in the stack. Use only on feature branches no other collaborator is actively building on. **Never** `git submit` targeting `main` / `master` / `release/*` — gated main land uses stock `git push` (Recipe 9 Path M). On repos with branch protection that denies force-push, `git submit` will fail; fall back to plain `git push -u origin <feature>` for that branch. Never combine `git submit` with `--no-verify` or with branches that are someone else's review checkout. Full scenarios: Recipe 9.

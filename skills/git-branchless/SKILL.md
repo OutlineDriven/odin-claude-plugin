@@ -10,6 +10,8 @@ work mode, and branches as publishing artifacts. This skill enforces that
 mental model and routes every common git workflow to its branchless
 equivalent. Reference docs:
 
+**Grounded: 2026-08-26**
+
 - `references/commands.md`: every command, flag, revset, config key.
 - `references/recipes.md`: concrete sequences + decision rubric.
 - `references/recovery.md`: undo, restack, hide, snapshot, GC semantics.
@@ -46,7 +48,7 @@ are fine when they fall outside the class.
 
 | Class | Always | Never |
 |-------|--------|-------|
-| **Stack edits** (reorder, fixup, squash, split) | `git move`, `git move -F`, `git reword`, and `git split` where available `[v0.11.0+]` (use the Recipe 4 workaround on older versions). | `git rebase -i` to drive stack edits. |
+| **Stack edits** (reorder, fixup, squash, split) | `git move`, `git move -F`, `git reword`, and `git split`. | `git rebase -i` to drive stack edits. |
 | **Base updates** (rebase a stack onto fresh main) | `git sync --pull` (or `git move -b 'stack()' -d origin/main`). Read the skip summary. | `git pull --rebase` against a stack. |
 | **Undoing committed history** | `git undo -i`. | `git reset --hard <SHA>` against any commit you have already made. |
 | **Discarding local work in progress** | `git hide -r <tip>` (recoverable). | `git branch -D` or `git reset --hard` purely to wipe. |
@@ -67,7 +69,7 @@ Edge cases that are still legitimate (do not block these):
 ```
 Init   → git branchless init  (one-time per repo)
 Work   → git switch --detach origin/main → edit → git commit (or git record)
-Refine → git move | git move --fixup | git amend | git reword | git split [v0.11.0+]
+Refine → git move | git move --fixup | git amend | git reword | git split
 Sync   → git sync --pull       (re-base onto fresh main; read skip summary)
 Verify → git test run --exec '<cmd>' 'stack()'  (revset is positional)
 Publish→ Gate: on main or user asked main → Path M (Recipe 9): ancestry check +
@@ -91,7 +93,7 @@ subtrees (`✕` ancestors).
 | Insert a fixup mid-stack | `git commit --fixup <target>` then `git move -s HEAD -d <target> --fixup` |
 | Reorder commits | `git move -s <src> -d <dest>` |
 | Squash two commits | `git move -s <child> -d <parent> --fixup` |
-| Split a commit | `git split <commit>` `[v0.11.0+]` (or workaround in `recipes.md` Recipe 4) |
+| Split a commit | `git split <commit>` |
 | Rebase stack onto main | `git sync --pull` |
 | Find first failing commit | `git test run --search binary --exec '<cmd>' 'stack()'` |
 | Recover lost work | `git undo -i` |
@@ -128,14 +130,7 @@ ODIN and non-ODIN agents. It does not depend on the baseline being loaded.
 
 Things this skill is **uncertain** about and treats accordingly:
 
-- `git split` and its modes (`--detach`, `--discard`, `--before`) are
-  documented for `[v0.11.0+]`. The locally installed version may be older.
-  Recipes include a pre-`v0.11.0` workaround.
-- `git submit --forge github` is **experimental** in v0.9.0. Stack
-  reordering can lose PR ancestry. Prefer default forge `branch` with
-  `git submit -c @` / `git submit @` for feature stacks; never submit
-  main. Stock `git push -u` is the gated-main path and the submit-denied
-  fallback.
+- `git submit --forge github` is still flagged unsuitable for general use upstream (arxanas/git-branchless#1184). Stack reordering can lose PR ancestry. Prefer default forge `branch` with `git submit -c @` / `git submit @` for feature stacks; never submit main. Stock `git push -u` is the gated-main path and the submit-denied fallback.
 - The event log is per-repository and per-clone. `git undo` cannot reach
   state from a different clone or a different machine.
 - Speculative-merge skips during `git sync` and `git move` are silent
