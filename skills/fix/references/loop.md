@@ -40,7 +40,7 @@ FUNCTION fix_loop(target, guard, scope, cap=20):
       CONTINUE
 
     apply_minimal_fix(item, scope)
-    git_commit("fix: " + item.description)
+    git_commit(item.description)  # capitalized imperative subject, under 50 chars
     item_attempts[item.id]++
 
     current_errors = run_verifiers(target, scope)

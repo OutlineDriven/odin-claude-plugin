@@ -43,12 +43,12 @@ immediately.
 
 ## Phase 2 - Route objects per unit
 
-Auto-route each unit by its commit type prefix (`<type>: ...`):
+Auto-route each unit by whether it changes observable behavior:
 
-- **`feat` / `fix` / `perf` / `revert`** → **Issue + linked PR** for behavior-affecting changes; a tracking issue
+- **Behavior-affecting** → **Issue + linked PR** for behavior-affecting changes; a tracking issue
   gives it a changelog/discussion anchor. The PR files first; the issue body then references the PR
   `#number`; once the issue exists, the PR body is amended with `Closes #N` (see Phase 4).
-- **`docs` / `style` / `refactor` / `test` / `chore` / `build` / `ci`** → **PR-only** for mechanical,
+- **Mechanical** → **PR-only** for mechanical,
   self-explanatory changes; no separate tracking needed.
 
 Honor an explicit per-unit override if the user states one; otherwise route silently.

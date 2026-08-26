@@ -20,5 +20,5 @@
 - **Python**: HypoFuzz (v25.11.1) provides adaptive coverage-guided fuzzing as a complement to Hypothesis. Runs existing Hypothesis tests with coverage feedback.
 - **Rust**: Bolero combines PBT + fuzzing with libFuzzer/AFL backends. proptest integrates with cargo-fuzz for hybrid testing.
 - **Haskell**: Hedgehog provides integrated shrinking (superior to QuickCheck's type-based approach). Prefer Hedgehog for new projects.
-- **Java**: jqwik integrates with JUnit 5 platform. Stateful testing via `@Property` + `ActionSequence`.
+- **Java**: jqwik integrates with the JUnit platform. Stateful testing via `@Property` + `ActionSequence`.
 - **TypeScript**: fast-check supports model-based testing and async properties. Shrinking is integrated.

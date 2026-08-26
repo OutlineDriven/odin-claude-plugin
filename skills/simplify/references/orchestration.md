@@ -96,10 +96,10 @@ Group survivors by `issue-class`. Apply in this order — one atomic commit per 
 2. **Excess-surface commit** — apply all quality-axis + efficiency-axis survivors flagged `issue-class: excess-surface`.
 3. **Structure commit** — apply all quality-axis + efficiency-axis survivors flagged `issue-class: structure`.
 
-Commit message format follows the baseline `<git>` charter (`<type>(scope): <description>`); recommended:
+Commit message format follows the baseline `<git>` charter (capitalized imperative subject, 50 chars target and 72 hard, no trailing period); recommended:
 
 ```
-refactor(simplify): remove <class> from <scope>
+Remove <class> from <scope>
 
 <2-4 lines describing the survivors applied in this commit, citing
 file:line pairs>

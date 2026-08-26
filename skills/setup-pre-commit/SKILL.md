@@ -27,8 +27,8 @@ The exact file to write (Node/Python/Go/Rust/OCaml) lives in `references/hook-re
 
 - `fd -d 2 -t f '\.husky|\.pre-commit-config\.yaml|lefthook\.yml'` shows the expected file.
 - The hook is executable.
-- Run a no-op commit (`git commit --allow-empty -m "chore: verify hooks"`). Every gate must run and pass.
+- Run a no-op commit (`git commit --allow-empty -m "Verify hooks"`). Every gate must run and pass.
 
 ## Commit
 
-`chore: install pre-commit hooks (<tool>)`. The commit itself trips the new hook, a first-class smoke test.
+`Install pre-commit hooks (<tool>)`. The commit itself trips the new hook, a first-class smoke test.

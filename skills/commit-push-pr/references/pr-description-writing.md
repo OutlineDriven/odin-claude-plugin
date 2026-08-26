@@ -74,12 +74,10 @@ For small + non-trivial bugfixes, the 3-5 sentence target still needs a user-vis
 
 ## Step B: Compose the title
 
-`type: description` or `type(scope): description`.
+A capitalized imperative sentence. A squash merge turns the PR title into a commit subject, so the title obeys the commit subject rule.
 
-- Type by intent, not file extension. When `fix` and `feat` both seem to fit, default to `fix` — adding code to remedy missing behavior is `fix`. Reserve `feat` for capabilities the user could not previously accomplish. Use `refactor`/`docs`/`chore`/`perf`/`test` when more precise.
-- Scope (optional): narrowest useful label. Omit when no single label adds clarity.
-- Description: imperative, lowercase, under 72 chars, no trailing period.
-- Match repo conventions visible in recent commits.
+- Subject: capitalized imperative, 50 chars target and 72 hard, no trailing period. Say what the change does, not which files moved.
+- Match repo conventions visible in recent commits; a repo's own stated convention wins over this default.
 - **Never use `!` or `BREAKING CHANGE:` without explicit user confirmation** — they trigger automated major-version bumps.
 
 ---

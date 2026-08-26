@@ -101,7 +101,20 @@ Sample multiple intent hypotheses, weight each (0–1), and name the falsifier p
 **Identity:** The global git config (`git config --global user.name` / `user.email`) is the source of truth. If a stale repo-local `user.name`/`user.email` override already exists, unset it with `git config --local --unset user.name` and `git config --local --unset user.email` before committing so the global identity is used. Do NOT create repo-local overrides, do NOT pass `--author=`, `git -c user.name=…`, `git -c user.email=…`, or set `GIT_AUTHOR_*`/`GIT_COMMITTER_*` env vars per-invocation, and do NOT otherwise mutate global or repo-local git config (`user.name`, `user.email`, `commit.template`) or append `Co-Authored-By:`, `Signed-off-by:`, or any other identity trailer naming an agent (Claude, ODIN, Codex, GPT, etc.). Commits and pushes carry the user's identity.
 
 **Commit discipline:** Commit Atomically; One concern per commit, tests pass before commit. No mixed concerns, no WIP. Never bundle unrelated changes. One concern touching N files = 1 commit, not N commits. Multi-mechanism change (e.g., schema + handler + lint sweep) → N commits via `git move --fixup` / `git split`. Lint-only sweeps are their own commit.
-**Format:** `<type>[(!)][scope]: <description>` — Types: feat|fix|docs|style|refactor|perf|test|chore|revert|build|ci
+**Format:** Capitalized imperative subject, 50 chars target and 72 hard, no trailing period; blank line; body wrapped at 72 explaining what and why, never how. Same rules for PR titles and bodies. Footers: `Closes #N` to close, `See also: #N` to reference, `BREAKING CHANGE: <what broke>` when an observable surface changes. A host repo's own stated convention wins; this is the default.
+
+```
+Ground every version pin against release channels
+
+The pins were last verified in April 2026 and had drifted.
+Several were not merely old but wrong: the Baseline dates
+used a 24-month promotion interval when the rule is 30.
+
+- Bullets are fine, with a hanging indent on wrapped
+  continuation lines
+
+Closes #123
+```
 </git>
 
 <directives>

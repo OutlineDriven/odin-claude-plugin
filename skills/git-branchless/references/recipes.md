@@ -16,7 +16,7 @@ Wiki source of truth: <https://github.com/arxanas/git-branchless/wiki>
 git fetch origin
 git switch --detach origin/main
 # Edit files, then commit immediately. No branch yet.
-git commit -m "feat: first checkpoint"
+git commit -m "Add first checkpoint"
 ```
 
 Why detached: branchless tracks the commit in the smartlog with no branch

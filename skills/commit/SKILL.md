@@ -49,9 +49,9 @@ If the current branch is empty, the repo is in detached HEAD state. A branch is 
 
 ### Step 2: Determine commit message convention
 
-Priority order: (1) repo conventions in already-loaded project instructions (AGENTS.md, CLAUDE.md, etc. -- do not re-read them, they loaded at session start); (2) else, a clear pattern in the 10 recent commits from Step 1 (conventional commits, ticket prefixes, emoji); (3) else, conventional commits: `type(scope): description`, type one of `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `perf`, `ci`, `style`, `build`.
+Priority order: (1) repo conventions in already-loaded project instructions (AGENTS.md, CLAUDE.md, etc. -- do not re-read them, they loaded at session start); (2) else, a clear pattern in the 10 recent commits from Step 1 (conventional commits, ticket prefixes, emoji); (3) else, the seven-rule style: capitalized imperative subject, 50 chars target and 72 hard, no trailing period; blank line; body wrapped at 72 explaining what and why, never how. Footers: `Closes #N` to close, `See also: #N` to reference, `BREAKING CHANGE: <what broke>` when an observable surface changes.
 
-When using conventional commits, pick the most precise type. Where `fix:` and `feat:` both fit, default to `fix:` -- remedying broken or missing behavior is `fix:` even via added code; reserve `feat:` for capabilities the user couldn't previously do. The user may override.
+Where slot (1) or (2) selected conventional commits, pick the most precise type. Where `fix:` and `feat:` both fit, default to `fix:` -- remedying broken or missing behavior is `fix:` even via added code; reserve `feat:` for capabilities the user couldn't previously do. The user may override.
 
 ### Step 3: Consider logical commits
 
@@ -76,7 +76,7 @@ Stage and commit each group in a single call. Prefer naming files over `git add 
 
 ```bash
 git add file1 file2 file3 && git commit -m "$(cat <<'EOF'
-type(scope): subject line here
+Add first-class subject line here
 
 Optional body explaining why this change was made,
 not just what changed.

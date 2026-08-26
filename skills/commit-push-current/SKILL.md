@@ -42,7 +42,7 @@ printf '=== STATUS ===\n'; git status; printf '\n=== DIFF ===\n'; git diff HEAD;
 
 ## Step 2: Determine conventions
 
-Match repo style for commit messages (project instructions in context > recent commits > conventional commits default). With conventional commits, default to `fix:` over `feat:` when ambiguous -- code added to remedy broken/missing behavior is `fix:`; `feat:` is for capabilities the user couldn't previously do. User may override.
+Match repo style for commit messages (project instructions in context > recent commits > the seven-rule style: capitalized imperative subject, 50 chars target and 72 hard, no trailing period; blank line; body wrapped at 72 explaining what and why, never how; footers `Closes #N`, `See also: #N`, `BREAKING CHANGE: <what broke>`). In a repo that uses conventional commits, default to `fix:` over `feat:` when ambiguous -- code added to remedy broken/missing behavior is `fix:`; `feat:` is for capabilities the user couldn't previously do. User may override.
 
 ## Step 3: Commit
 
