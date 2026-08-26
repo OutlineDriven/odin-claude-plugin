@@ -1,0 +1,3 @@
+interface:
+  display_name: "Verify Both Ways"
+  short_description: "Check plausible and absurd claims"

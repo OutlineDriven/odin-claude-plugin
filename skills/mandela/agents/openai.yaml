@@ -1,0 +1,3 @@
+interface:
+  display_name: "Mandela"
+  short_description: "Audit an eval for leakage"

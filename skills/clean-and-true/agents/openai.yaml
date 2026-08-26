@@ -1,0 +1,3 @@
+interface:
+  display_name: "Clean and True"
+  short_description: "Run hygiene skills on output"

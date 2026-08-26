@@ -1,0 +1,3 @@
+interface:
+  display_name: "Debloat"
+  short_description: "Compress prose, keep every rule"

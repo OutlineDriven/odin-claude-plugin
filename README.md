@@ -129,11 +129,11 @@ Before any non-trivial implementation:
 4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
 5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
 
-## Skills (133 total)
+## Skills (148 total)
 
 Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
 
-### Planning & Exploration (23 skills)
+### Planning & Exploration (26 skills)
 
 - `askme` - Verbalized Sampling protocol for deep intent exploration before planning
 - `decide` - Frame a fork as one recommended single-select, take the pick, and apply it
@@ -158,6 +158,9 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `prototype-logic` - Throwaway single-file HTML demo that answers one question about a state model
 - `pov` - Decisive, project-grounded verdict on adopting or switching technology
 - `research` - Gather external knowledge from authoritative sources with verified citations
+- `hate` - One load-bearing objection plus the cheapest shot that would prove it matters
+- `fan-out-fresh-reads` - Fan a question to several fresh zero-context reads and report divergence first
+- `feynman` - Press a decision you just made until you can explain it or name the gap
 
 ### Writing & Learning (8 skills)
 
@@ -170,9 +173,10 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `book-to-skill` - Distil a book or comparable source into a validated, trigger-probed agent skill
 - `unslop` - Cut AI tells from writing and restore human voice
 
-### Working Posture (7 skills)
+### Working Posture (8 skills)
 
 - `duet` - Two-party posture: user as director, agent as executor. Surfaces every fork via AskUserQuestion with structural framing and a recommended default. Eliminates the review-bottleneck and prevents codebase-understanding debt. Pair with the `Duet` output style.
+- `size-the-run` - Size the cheapest sufficient tier and effort for a task on a neutral two-dial scale
 - `axiom-mode` - Compact formal-logic English register using predicate claims and ASCII keywords
 - `ai-collab-protocols` - Surface in-task AI collaboration protocols one tactic at a time
 - `taste` - Apply distinctive judgment to prose, code, design, or decisions instead of AI mediocrity
@@ -212,12 +216,14 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `strict-validation-setup` - Bootstrap strict-mode tooling and per-task GOALS.md scaffolding for self-verifying agent loops
 - `wizard` - Generate an interactive bash wizard that walks a human through a manual setup or migration
 
-### Execution (18 skills)
+### Execution (20 skills)
 
 - `parallel-launch` - Decompose a task into independent concerns and execute via agents
 - `tests-adversarial` - Adversarial tests that stress failure paths
 - `work` - Execute a plan or concrete work prompt end-to-end
 - `subagent-driven` - Delegate a multi-task plan to fresh subagents, auditing results before proceeding
+- `autobahn` - Carve guardrail-adjacent scope out of a task, then run the safe remainder at full strength
+- `restart-keeping-lessons` - Restart from v0 keeping only proven lessons, archiving the rest as evidence
 - `workflows-driven` - Deterministic phased fan-out with per-task contracts and adversarial verification; materializes on Claude Code Dynamic Workflows or omp eval orchestration
 - `fix` - Iterative repair loop that fixes one thing at a time and keeps changes on green
 - `resolving-merge-conflicts` - Resolve an in-progress merge or rebase conflict from both sides' primary sources, then finish the integration
@@ -233,7 +239,7 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `shipping` - Prepare a production launch with checklists, monitoring, and rollback planning
 - `unlazy` - Gate-file discipline over a task decomposition: prove done against a checked ledger, not a claim
 
-### Review & Resolution (7 skills)
+### Review & Resolution (12 skills)
 
 - `review` - Review code changes on the current branch
 - `show-review` - Walk a diff as one-finding visuals, Keep/Skip/Discuss per turn
@@ -242,8 +248,13 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `security-review` - Adversarial security audit using STRIDE, OWASP, supply-chain checks, and secrets scans
 - `review-fix-grill-loop` - Review and fix a diff in verified batches until no medium-or-higher finding remains
 - `simplify` - Compress-op review pass on reuse, quality, and efficiency axes
+- `shower` - Cold-read an artifact with fresh eyes to answer whether it stands alone
+- `verify-both-ways` - Verify reality-grounded claims against sources in both directions
+- `mandela` - Audit an eval for leakage across 8 independence patterns
+- `clean-and-true` - Taste your own output by routing to the hygiene skills the change earned
+- `prism` - Split one artifact across independent lenses and return the one question that resolves the split
 
-### Cleanup & Refactoring (9 skills)
+### Cleanup & Refactoring (13 skills)
 
 - `refactor-break-compat` - Refactor by removing backward-compatibility and legacy layers (public API surface)
 - `breaking-driven` - Bloat-triggered demolition: state the contract, derive the replacement blind, cut the residue; interior surfaces go without asking, boundary surfaces stop for a yes
@@ -254,6 +265,10 @@ Skills are invokable workflows that extend ODIN with process- and domain-specifi
 - `to-greenfield` - Diagnose a degraded codebase's field state (darkfield/redfield/bluefield/brownfield) and route the recovery
 - `slop` - Slop front door: verdict or purge for code, prose, decisions, or UI, routed to the right domain authority
 - `purge-slop-docs` - Sweep the markdown tree for overstatement, jargon, stale references, and duplication, then reorder what survives
+- `rewrite-clean-v0` - Rewrite a drifted artifact as a clean v0, cutting sediment
+- `reorder` - Realign a listing into a logical order under one stated principle
+- `debloat` - Compress a bloated artifact to its load-bearing density
+- `consolidate-to-one-home` - Audit a scattered fact and fold it into one canonical home
 
 ### GitHub Integration (13 skills)
 

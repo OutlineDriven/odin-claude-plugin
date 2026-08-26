@@ -1,0 +1,3 @@
+interface:
+  display_name: "Fan Out Fresh Reads"
+  short_description: "Repeat a read for divergence"

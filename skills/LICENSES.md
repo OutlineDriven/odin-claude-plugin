@@ -208,12 +208,6 @@ Skills cherry-picked from the `agent-skills` plugin (https://github.com/addyosma
 
 | Path under `/home/alpha/.claude/claude/skills/` | Upstream origin | License | Copyright | Provenance |
 | ----------------------------------------------- | --------------- | ------- | --------- | ---------- |
-| `autolearn/SKILL.md` | https://github.com/EveryInc/compound-engineering-plugin | MIT | © 2025 Every | `ce-compound` create+refresh modes trimmed; hermes reject-by-default gate folded in (© 2026 What If We Dig Deeper); memory-handoff routing to `memory-update`; ODIN voice + `Op:` trailers. |
-| `autolearn/references/schema.md` | https://github.com/EveryInc/compound-engineering-plugin | MIT | © 2025 Every | Folds ce `schema.yaml` + `yaml-schema.md`; bug/knowledge tracks; Rails-specific fields generalized. |
-| `autolearn/references/refresh.md` | https://github.com/EveryInc/compound-engineering-plugin | MIT | © 2025 Every | Folds ce `refresh-workflow.md` + `per-action-flows.md`; five-outcome model; headless `status: stale` variant. |
-| `autolearn/assets/solution-template.md` | https://github.com/EveryInc/compound-engineering-plugin | MIT | © 2025 Every | Section structure for a new learning doc; both tracks. |
-| `autolearn/scripts/validate-frontmatter.py` | https://github.com/EveryInc/compound-engineering-plugin | MIT | © 2025 Every | Frontmatter parser-safety check; logic ported verbatim, docstring ODIN-genericized; stdlib only. |
-| `autolearn/references/concepts.md` | https://github.com/EveryInc/compound-engineering-plugin | MIT | © 2025 Every | CONCEPTS.md entry schema + one-definition-per-concept reconciliation/refresh rules; grafted from `ce-compound`'s concept-map feature; wired into the existing reject-by-default gate; ODIN voice. |
 
 ## EveryInc compound-engineering port (doc-review)
 
@@ -358,7 +352,6 @@ Skills adapted from the `compound-engineering-plugin` (https://github.com/EveryI
 | `why/references/sources/notion.md` | `pstack/skills/why/references/sources/notion.md` | MIT | © 2026 Lauren Tan | Ported verbatim. |
 | `why/references/sources/sentry.md` | `pstack/skills/why/references/sources/sentry.md` | MIT | © 2026 Lauren Tan | Ported verbatim. |
 | `why/references/sources/slack.md` | `pstack/skills/why/references/sources/slack.md` | MIT | © 2026 Lauren Tan | Ported verbatim. |
-| `unslop/SKILL.md` | `pstack/skills/unslop/SKILL.md` | MIT | © 2026 Lauren Tan | ODIN adaptations listed above; em-dash and ban-list narrowing, trigger description. |
 
 ## Leonxlnx unlazy port
 
@@ -371,6 +364,29 @@ Skills adapted from the `compound-engineering-plugin` (https://github.com/EveryI
 | `unlazy/references/gates.md` | `references/gates.md` | MIT | © 2026 Leonxlnx | Format spec and writing guide merged; ODIN voice. |
 | `unlazy/templates/gates.md` | `templates/PLAN.md` + `templates/gates-leaf.md` + `templates/gates-node.md` | MIT | © 2026 Leonxlnx | Three templates consolidated into one file; upstream path references adjusted. |
 | `unlazy/scripts/gate_check.py` | `scripts/gate-check.mjs` | MIT | © 2026 Leonxlnx | Python re-implementation; CLI and gate semantics preserved; defaults moved to `.outline/`. |
+
+## LilMGenius/paperthin port
+
+15 skills and one shared reference ported from https://github.com/LilMGenius/paperthin (ref `main`, pinned commit `3bca079a51bcfff5dafb53d1d7f9f523d66ee317`). Upstream is MIT, `Copyright (c) 2026 LilMGenius`. 7 upstream mechanisms grafted into 6 existing ODIN skills rather than shipped standalone; 6 upstream skills not carried because ODIN already covers them or they are specific to upstream's install path. ODIN adaptations, made under the same MIT terms — region taxonomy (`depth`/`breadth`/`coil`/`mesh`) flattened into ODIN's single flat `skills/` namespace; body skeleton (`## Goal`/`## Workflow`/`## Rules`/`## Verification`) re-derived into `## Method`/`## Completion`; 13 opaque upstream names renamed under the hybrid naming rule (real words kept, compressions described); four inline idioms reduced to one shared reference (`clean-and-true/references/idioms.md`) plus one inline criterion; `nba`'s package-specific phase vocabulary generalized to the reconciled task list; `sip`'s chain rewired to ODIN skill names; per-skill emoji and em-dash emphasis removed. No ported body carries verbatim substrate vendored from `mattpocock/skills` that upstream credits in its NOTICE. License text is the standard MIT reproduced below; only the copyright holder differs (© 2026 LilMGenius).
+
+| Path under `/home/alpha/.claude/claude/skills/` | Upstream origin | License | Copyright | Provenance |
+|---|---|---|---|---|
+| `rewrite-clean-v0/SKILL.md` | https://github.com/LilMGenius/paperthin/tree/main/skills/depth/re0 | MIT | © 2026 LilMGenius | Renamed from `re0`; re-derived into `## Method`/`## Completion`; idiom via `clean-and-true/references/idioms.md`. |
+| `size-the-run/SKILL.md` | https://github.com/LilMGenius/paperthin/tree/main/skills/depth/modelchk | MIT | © 2026 LilMGenius | Renamed from `modelchk`; tier and effort re-derived; machine-readable output kept. |
+| `hate/SKILL.md` | https://github.com/LilMGenius/paperthin/tree/main/skills/depth/hate | MIT | © 2026 LilMGenius | Name kept; re-derived. |
+| `fan-out-fresh-reads/SKILL.md` | https://github.com/LilMGenius/paperthin/tree/main/skills/depth/macrothink | MIT | © 2026 LilMGenius | Renamed from `macrothink`; divergence-first reporting preserved. |
+| `feynman/SKILL.md` | https://github.com/LilMGenius/paperthin/tree/main/skills/depth/feynman | MIT | © 2026 LilMGenius | Name kept; clean-room critic preserved. |
+| `autobahn/SKILL.md` | https://github.com/LilMGenius/paperthin/tree/main/skills/depth/autobahn | MIT | © 2026 LilMGenius | Name kept; carve-guard-run-ledger re-derived. |
+| `reorder/SKILL.md` | https://github.com/LilMGenius/paperthin/tree/main/skills/depth/reorder | MIT | © 2026 LilMGenius | Name kept; move-only re-derived. |
+| `debloat/SKILL.md` | https://github.com/LilMGenius/paperthin/tree/main/skills/depth/debloat | MIT | © 2026 LilMGenius | Name kept; density pass re-derived. |
+| `shower/SKILL.md` | https://github.com/LilMGenius/paperthin/tree/main/skills/depth/shower | MIT | © 2026 LilMGenius | Name kept; clean-room read preserved. |
+| `verify-both-ways/SKILL.md` | https://github.com/LilMGenius/paperthin/tree/main/skills/depth/factchk | MIT | © 2026 LilMGenius | Renamed from `factchk`; both-directions verification preserved. |
+| `mandela/SKILL.md` | https://github.com/LilMGenius/paperthin/tree/main/skills/depth/mandela | MIT | © 2026 LilMGenius | Name kept; 8-pattern taxonomy preserved. |
+| `clean-and-true/SKILL.md` | https://github.com/LilMGenius/paperthin/tree/main/skills/depth/sip | MIT | © 2026 LilMGenius | Renamed from `sip` (avoids collision with `taste`); routing table re-derived to ODIN names. |
+| `consolidate-to-one-home/SKILL.md` | https://github.com/LilMGenius/paperthin/tree/main/skills/breadth/ssotize | MIT | © 2026 LilMGenius | Renamed from `ssotize`; audit-then-approve preserved. |
+| `restart-keeping-lessons/SKILL.md` | https://github.com/LilMGenius/paperthin/tree/main/skills/coil/re0-work | MIT | © 2026 LilMGenius | Renamed from `re0-work`; keep-discard re-derived. |
+| `prism/SKILL.md` | https://github.com/LilMGenius/paperthin/tree/main/skills/mesh/prism | MIT | © 2026 LilMGenius | Name kept; lens convergence preserved. |
+| `clean-and-true/references/idioms.md` | https://github.com/LilMGenius/paperthin/tree/main/skills (shared idioms across re0/reorder/debloat/ssotize etc.) | MIT | © 2026 LilMGenius | Extracted from four idioms duplicated inline upstream; three sections shared, restraint stays inline. |
 
 ## Full upstream license text (MIT)
 

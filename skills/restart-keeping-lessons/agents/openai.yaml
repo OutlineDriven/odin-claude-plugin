@@ -1,0 +1,3 @@
+interface:
+  display_name: "Restart Keeping Lessons"
+  short_description: "Restart from v0, keep lessons"

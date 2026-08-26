@@ -1,0 +1,3 @@
+interface:
+  display_name: "Reorder"
+  short_description: "Reorder a listing by one principle"

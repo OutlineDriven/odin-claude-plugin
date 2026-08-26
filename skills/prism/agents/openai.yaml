@@ -1,0 +1,3 @@
+interface:
+  display_name: "Prism"
+  short_description: "Split an artifact across lenses"
