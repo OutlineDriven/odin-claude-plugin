@@ -45,11 +45,10 @@ immediately.
 
 Auto-route each unit by whether it changes observable behavior:
 
-- **Behavior-affecting** → **Issue + linked PR** for behavior-affecting changes; a tracking issue
-  gives it a changelog/discussion anchor. The PR files first; the issue body then references the PR
+- **Behavior-affecting** → **Issue + linked PR**; a tracking issue gives the change a
+  changelog/discussion anchor. The PR files first; the issue body then references the PR
   `#number`; once the issue exists, the PR body is amended with `Closes #N` (see Phase 4).
-- **Mechanical** → **PR-only** for mechanical,
-  self-explanatory changes; no separate tracking needed.
+- **Mechanical** → **PR-only**; a self-explanatory change needs no separate tracking.
 
 Honor an explicit per-unit override if the user states one; otherwise route silently.
 
