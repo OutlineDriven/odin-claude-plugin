@@ -1,16 +1,17 @@
 ---
 name: mutual-sync
-description: 'Use when user, agent, and codebase may hold different pictures of the current state: before substantive work after a gap, or mid-session when parties talk past each other. Triggers: "mutual sync", "sync up", "are we on the same page", stale user claims about the code, refuted agent assumptions.'
+description: 'Use when user, agent, and codebase may hold different pictures of the current state: before substantive work after a gap, or mid-session when parties talk past each other. Triggers: "mutual sync", "sync up", "are we on the same page", "catch me up", "what did I miss", stale user claims about the code, refuted agent assumptions.'
 ---
 
 # Mutual Sync
 
 Ground the three parties in one shared picture of the current state before proceeding: the user's mental model, the agent's working model, and the actual codebase. A desync is any load-bearing claim about current state that one party holds and another would dispute. Facts are the agent's job; the user is consulted only where the user is the authority.
 
-## Two entry situations, one workflow
+## Three entry situations, one workflow
 
 - **Pre-work ritual**: invoked before substantive work (a new task, a return after a gap). The claim set seeds from the task: what must be true about the code for the planned work to make sense.
 - **Mid-session repair**: invoked when the conversation shows desync: the user references state that no longer holds, or an agent assumption got refuted. The claim set seeds from the contested claims in the conversation.
+- **Cold re-entry**: invoked when the agent has no working model at all, on a new session over in-flight work or a return after a long gap. There is nothing to exchange yet, so step 3 inverts. Build the claim set from live state first, reading open diffs, the task list, the recent commits, and in-flight branches, and include any project vocabulary that entered while you were away, defined from the code that introduced it. Present claims only after that.
 
 Detect which situation applies from context; never ask. Same loop either way.
 

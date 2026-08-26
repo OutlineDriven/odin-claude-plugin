@@ -1,6 +1,6 @@
 ---
 name: generalize-from-cases
-description: 'Derive the general rule a request actually carries when it arrives as examples instead of a stated rule, then bound that rule before anyone acts on it. Use when the ask is carried by instances ("do it like this one", "fix these three the same way", "here is a sample of what I mean"), or when one instance is clearly standing in for a class. For ambiguity inside a stated request, use clarify; for intent exploration with no examples on the table, use askme.'
+description: 'Derive the general rule a request actually carries when it arrives as examples instead of a stated rule, then bound that rule before anyone acts on it. Use when the ask is carried by instances ("do it like this one", "fix these three the same way", "here is a sample of what I mean"), when material lands as a data drop with no stated ask ("here is the data, you figure it out"), or when one instance is clearly standing in for a class. For ambiguity inside a stated request, use clarify; for intent exploration with no examples on the table, use askme.'
 ---
 
 # Generalize from cases
@@ -16,6 +16,7 @@ Collect every example before reading any of them as a rule.
 - **Positives** — instances the user pointed at approvingly or asked to have repeated.
 - **Negatives** — anything named as "not that", including an earlier attempt the user rejected. A rejected attempt is the most informative case in the set, because it kills hypotheses no positive can.
 - **Size** — one positive and no negatives is the common case and the weakest. The hypothesis space is wide and step 4 carries the whole result. State the set size in the output so the reader knows how much evidence stands behind the rule.
+- **Data drop** — the material arrived with no stated ask: a pasted log, a dump, a folder, a link. Treat every item as a positive and read the shape of what was handed over as the case set. The deliverable changes with it: state the intent you infer and hand it back for confirmation instead of asking what the user wants done. A wrong proposal is corrected in one line, where a question restarts the exchange.
 
 ## Method
 
@@ -29,7 +30,7 @@ Collect every example before reading any of them as a rule.
 
 5. **Bound the rule.** A rule is not stated until its edge is. Name three things: what it covers, what it deliberately excludes, and the nearest excluded neighbour, meaning the closest thing a reader might expect to be swept in that will not be. "Everything similar" is not a boundary.
 
-6. **Emit the generalization contract and stop.** Output the case set with each case marked positive or negative, the surviving rule, the invariant attributes it rests on, the incidental attributes it discards, the boundary with its nearest excluded neighbour, and the probe with its basis. Then hand off.
+6. **Emit the generalization contract and stop.** Output the case set with each case marked positive or negative, the surviving rule, the invariant attributes it rests on, the incidental attributes it discards, the boundary with its nearest excluded neighbour, and the probe with its basis. For a data drop, also state the inferred intent as a proposal to confirm. Then hand off.
 
 ## Completion
 

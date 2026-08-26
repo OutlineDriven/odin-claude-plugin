@@ -1,6 +1,6 @@
 ---
 name: update-todos
-description: 'Re-sync a stale task list against what actually landed: mark real completions with proof, drop overtaken items, add discovered blockers, re-order what moved. Use when the user says "update the todos", "re-sync the task list", or the plan and the tree have drifted apart. To deepen a list that is too coarse rather than stale, use sophisticate-todos.'
+description: 'Re-sync a stale task list against what actually landed: mark real completions with proof, drop overtaken items, add discovered blockers, re-order what moved. Use when the user says "update the todos", "re-sync the task list", "what should I do next", or the plan and the tree have drifted apart. To deepen a list that is too coarse rather than stale, use sophisticate-todos.'
 metadata:
   short-description: 'Re-derive the task list from current reality'
 ---
@@ -36,6 +36,14 @@ Write the reconciled list back through the `todo` tool.
 An `overtaken` item is dropped with a one-line reason recorded in the report, never deleted silently. A dropped item with no recorded reason is indistinguishable from an item you forgot.
 
 **Completion criterion:** the written list contains no item whose classification contradicts its recorded state.
+
+## Next action
+
+The reconciled list does not answer "what now". Name exactly one next action: the first `still-open` item whose blockers are all clear, stated as a concrete action rather than a heading. When two items tie, the tiebreak is which one unblocks more of the remaining list.
+
+A menu is the failure here. When every remaining item is `blocked`, say so and name the blocker that has to clear first, which is still one answer rather than a list.
+
+**Completion criterion:** exactly one next action is named, or one blocker is named as the reason none is.
 
 ## Report
 

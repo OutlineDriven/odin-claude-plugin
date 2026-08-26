@@ -387,6 +387,12 @@ Skills adapted from the `compound-engineering-plugin` (https://github.com/EveryI
 | `restart-keeping-lessons/SKILL.md` | https://github.com/LilMGenius/paperthin/tree/main/skills/coil/re0-work | MIT | © 2026 LilMGenius | Renamed from `re0-work`; keep-discard re-derived. |
 | `prism/SKILL.md` | https://github.com/LilMGenius/paperthin/tree/main/skills/mesh/prism | MIT | © 2026 LilMGenius | Name kept; lens convergence preserved. |
 | `clean-and-true/references/idioms.md` | https://github.com/LilMGenius/paperthin/tree/main/skills (shared idioms across re0/reorder/debloat/ssotize etc.) | MIT | © 2026 LilMGenius | Extracted from four idioms duplicated inline upstream; three sections shared, restraint stays inline. |
+| `clarify/SKILL.md` (restate addition only) | https://github.com/LilMGenius/paperthin/tree/main/skills/depth/readchk | MIT | © 2026 LilMGenius | Restate-the-read gate (step 1) and completion criterion (c) grafted onto the existing ODIN clarity scan; rest grafted into `## Method` head. |
+| `generalize-from-cases/SKILL.md` (data-drop addition only) | https://github.com/LilMGenius/paperthin/tree/main/skills/depth/aim | MIT | © 2026 LilMGenius | Data-drop case type and emit-variant grafted onto the existing case-set/method; plan-mandated trigger phrase generalized from upstream `aim`. |
+| `mutual-sync/SKILL.md` (cold-re-entry addition only) | https://github.com/LilMGenius/paperthin/tree/main/skills/coil/catchup | MIT | © 2026 LilMGenius | Cold re-entry entry situation grafted onto the existing two-situation workflow; vocabulary-inclusion carried. |
+| `autolearn/SKILL.md` (failed-branch addition only) | https://github.com/LilMGenius/paperthin/tree/main/skills/coil/re0-memo | MIT | © 2026 LilMGenius | Finished-failure qualification of precondition 1 and trigger phrase grafted onto the existing compound gate. |
+| `unslop/SKILL.md` (dedash + detool additions only) | https://github.com/LilMGenius/paperthin/tree/main/skills/depth/dedash + https://github.com/LilMGenius/paperthin/tree/main/skills/depth/detool | MIT | © 2026 LilMGenius | Per-occurrence dash replacement procedure and incidental-stack-noun portability section grafted onto the existing tell catalog. |
+| `update-todos/SKILL.md` (next-action addition only) | https://github.com/LilMGenius/paperthin/tree/main/skills/coil/nba | MIT | © 2026 LilMGenius | Next-action single-answer section grafted onto the existing reconcile workflow; package-specific phase vocabulary generalized. |
 
 ## Full upstream license text (MIT)
 

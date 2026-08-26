@@ -22,6 +22,7 @@ metadata:
 - "verified the fix"
 - "tests pass now"
 - "build succeeds"
+- "that approach failed"
 </trigger_phrases>
 Fire automatically on a trigger phrase or after a verified non-trivial fix. The reject-by-default gate below still decides whether a doc is actually warranted. Auto-firing is permission to evaluate, not permission to fabricate.
 
@@ -34,7 +35,7 @@ Fire automatically on a trigger phrase or after a verified non-trivial fix. The 
 A doc is earned, not assumed. First the preconditions, then the reject-by-default gate.
 
 **Preconditions** (all three):
-1. The problem is solved, not in progress.
+1. The problem is solved, not in progress. An abandoned attempt counts as solved for this purpose once it is finished, meaning the branch is dead and the decision to stop is made. Its learning is the anti-pattern: what was tried, the specific reason it failed, and the condition under which it would be worth trying again. It lands on the knowledge track with `What Didn't Work` carrying the substance rather than `Solution`. An attempt still in progress does not qualify either way.
 2. The solution is verified: observed working, not hoped working.
 3. It was non-trivial, not a typo or an obvious one-liner.
 
