@@ -1,6 +1,6 @@
 ---
 name: skill-progressive-disclosure-design
-description: 'Use when the model is creating or refactoring a skill, faces a SKILL.md over 300-400 lines, or confuses triggering with disclosure. Produces a justified split-or-monolith decision with pointer hygiene and an architecture-eval plan. Not for skill authoring — use skill-writer.'
+description: 'Use when the model is creating or refactoring a skill, faces a SKILL.md over 300-400 lines, or confuses triggering with disclosure. Produces a justified split-or-monolith decision with pointer hygiene and an architecture-eval plan. Not for skill authoring, use writing-skills.'
 ---
 
 # Skill progressive disclosure design

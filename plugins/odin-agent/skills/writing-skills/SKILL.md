@@ -1,45 +1,79 @@
 ---
 name: writing-skills
-description: 'Use when a SKILL.md or AGENTS.md/CLAUDE.md is being authored or refactored, or the user asks to write a skill, improve one, or fix unreliable skill firing. Not for general agent-consumed documents — use writing-for-agents.'
+description: 'Use when a SKILL.md or AGENTS.md/CLAUDE.md is being authored, refactored, ported, or upgraded, or the user asks to write a skill, improve one, or fix unreliable skill firing. Not for general agent-consumed documents, use writing-for-agents.'
 ---
 
 # Writing skills
+
+One property decides whether a document works: the agent takes the same process every run. The
+levers below produce it. The packaging differs across a skill, an AGENTS.md, and a pointer-reached
+doc; the writing does not.
 
 ## Contract
 
 | Field | Bound contract |
 |---|---|
-| Trigger | A SKILL.md or AGENTS.md/CLAUDE.md is being authored or refactored, or the user asks to write a skill, improve one, or fix unreliable skill firing. |
-| Authority | Read-only: emits guidance only and writes nothing. |
-| Side effect | None: consult-on-demand reference. |
-| Done | The authored document is predictable: a predictable process per run. |
+| Trigger | A SKILL.md or AGENTS.md/CLAUDE.md is being authored, refactored, ported, or upgraded, or the user asks to write a skill, improve one, or fix unreliable skill firing |
+| Authority | Reversible local writes to the target document and the skill directory it belongs to, plus the repository-owned registration or attribution surfaces those artifacts require. Never publishes, installs, commits, or mutates remote state |
+| Side effect | The target document changes on disk when the request is to author or refactor one. Guidance alone when the request is a review |
+| Done | The document is predictable, and the repository's own gate passes on every changed file |
 
 ## Inputs
 
-The document being authored or refactored: a skill, an AGENTS.md/CLAUDE.md, or a pointer-reached doc. Optional: the surrounding skill tree or document set for co-location and routing decisions.
+The document being authored or refactored: a skill, an AGENTS.md/CLAUDE.md, or a pointer-reached
+doc. Optionally the surrounding skill tree, which co-location and routing decisions need.
 
 ## Procedure
 
-1. **Identify the document type.** A skill, an AGENTS.md/CLAUDE.md, or a pointer-reached doc. The packaging differs; the writing does not. The same levers make each predictable: the agent taking the same process every run. Done when: the document type is identified.
-2. **Shape every context pointer.** A context pointer is a reference held in the agent's context that names out-of-context material and encodes the condition for reaching it. A skill's description is one; a line in AGENTS.md naming a doc is the same object. The pointer's wording, not its target, decides when the agent reaches the material, and how reliably. A must-have target behind a weakly worded pointer is a variance bug: sharpen the wording first, and inline the material only if sharpening fails. A pointer does two jobs: state what the material is, and list the branches that should trigger reaching it. Every word of an always-loaded pointer costs on every turn, so it earns harder pruning than the body: front-load the leading word; one trigger per branch; collapse synonyms that rename a single branch; cut identity the body already carries. Done when: every context pointer has a front-loaded leading word, one trigger per branch, no synonym duplication, and no redundant identity.
-3. **Account for the two loads.** Every document and pointer spends one of two budgets. Context load: the cost of always-loaded material on the agent's window, an AGENTS.md line, a skill description, anything sitting in context every turn, spending tokens and attention whether or not it fires. Cognitive load: the cost on the human, which documents exist and when to reach for each; the human is the index; spend it where human judgement matters, remove it where it does not. Material reached only through a pointer escapes context load at the price of the pointer's own line; material with no pointer at all rides entirely on cognitive load. Done when: every document and pointer is assigned to its load budget and the trade-off is explicit.
-4. **Place each piece on the information hierarchy.** A document is built from two content types, steps (the ordered actions the agent performs) and reference (definitions, rules, facts consulted on demand), that mix freely. The core decision is where each piece sits on the ladder: in-file step (the primary tier: what the agent does, in order); in-file reference (consulted on demand); disclosed reference (pushed out into a separate file, reached by a context pointer, loaded only when the pointer fires). Push too little down and the top bloats; push too much and material the agent actually needs gets hidden. Done when: every piece is placed on the ladder at the right level.
-5. **Apply progressive disclosure and co-location.** Progressive disclosure is the move down the ladder, out of the main file and behind a pointer, so the top stays legible. Branching is the cleanest disclosure test: inline what every branch needs, and push behind a pointer what only some branches reach. When a document has steps, in-file reference that should be disclosed buries them and turns attending to them into a coin-flip. Co-location: keep a concept's definition, rules, and caveats under one heading rather than scattered. Sprawl is the failure mode: a document simply too long, even when every line is live and unique. The cure is the ladder. Done when: branch-specific material is behind pointers, co-located concepts share one heading, and the top stays legible.
-6. **Set a completion criterion for every step.** Every step ends on a completion criterion: the condition that tells the agent the work is done. Clarity: can the agent tell done from not-done? A vague bound invites premature completion. The visible post-completion steps supply the pull; the criterion's clarity is the resistance. Defend in order: sharpen the bound first; only if irreducibly fuzzy and the rush is observed, split the sequence across a real context boundary (a hand-off or a subagent dispatch; an inline call leaves the later steps in context). Demand: how much it requires. "Every modified model accounted for" forces thorough work where "produce a change list" does not. Demand drives legwork, the digging the agent does within the work, and it is the lever most worth pulling. Done when: every step has a checkable, exhaustive, high-demand completion criterion.
-7. **Decide when to split.** Splitting one document into two spends one of the two loads, so split only when the cut earns it. By sequence: split a run of steps where the post-completion steps tempt the agent to rush the one in front of it. Beware the reverse: merging sequences exposes each step's later steps to what follows, inviting premature completion. By invocation: split off a model-invoked skill when a distinct leading word should trigger it on its own, a trigger word actually used in prompts, or another skill must reach it. The context load for the new always-loaded description is paid regardless, so that independent reach has to be worth it. Done when: every split decision is justified by sequence-rush or invocation-reach, and unjustified splits are rejected.
-8. **For skill documents, follow `references/SKILL-MECHANICS.md`** for the skill-specific branch: invocation choice (model-invoked vs user-invoked), splitting by invocation, and router skills. These mechanics apply only when the document is a skill. Done when: the skill-specific mechanics are applied from the reference, or the document is not a skill and this step is skipped.
-9. **Hunt for leading words.** A leading word is a compact concept already living in the model's pretraining that the agent thinks with while running the document. Repeated as a token, never as a sentence, it accumulates a distributed definition and anchors a whole region of behaviour in the fewest tokens. Reach for an existing word first; coining a new one works if it is defined clearly, but a made-up word recruits no priors. It anchors twice: in the body, execution: the agent reaches for the same behaviour every time the word appears; in a pointer, invocation: when the same word lives in the prompts, the docs, and the codebase, the agent links that shared language to the material and reaches it more reliably. Hunt for opportunities to collapse multiple sentences into one word. Done when: leading words are identified and restatements are collapsed into them.
-10. **Prune.** Keep each meaning in a single source of truth: one authoritative place, so changing the behaviour is a one-place edit. Duplication, the same meaning in more than one place, costs maintenance and tokens. The environment is a source of truth too, package.json scripts, config files, the directory layout, --help output, and a document that restates it is a cache: a copy of a lookup, earning its load only when the lookup is expensive. Cache what the agent cannot find by looking: the unwritten convention, the reason behind a choice, the gotcha no config confesses. Check every line for relevance: does it still bear on what the document does? Shorter documents are easier to keep relevant. Without a pruning discipline the default fate is sediment: stale layers accumulated because adding felt safe and removing felt risky. Core down through them to find what is still live; delete sentences that fail the no-op test. Done when: each meaning has one source of truth, no no-op sentences remain, and every line bears on the task.
+Each step names its lever and its completion criterion. The levers themselves live in
+`references/authoring-levers.md`; load it when a step's name is not enough to act on.
+
+1. Identify the document type: a skill, an AGENTS.md/CLAUDE.md, or a pointer-reached doc. Done
+   when: the type is named, because step 8 fires only for a skill.
+2. Shape every context pointer against the four pointer rules. Done when: every pointer meets all
+   four.
+3. Assign every document and pointer to a load budget. Done when: each assignment is explicit and
+   its trade-off is stated.
+4. Place each piece on the information hierarchy. Done when: every piece sits at one level, and
+   neither the top bloats nor needed material hides.
+5. Apply progressive disclosure and co-location. Done when: branch-specific material is behind
+   pointers and the top stays legible.
+6. Set a completion criterion for every step, clear and high-demand. Done when: every step has one.
+7. Justify every split by sequence-rush or invocation-reach. Done when: each split carries its
+   justification and the rest are rejected.
+8. For a skill document, apply `references/skill-mechanics.md`. Done when: those mechanics are
+   applied, or the document is not a skill and this step is skipped.
+9. Hunt for leading words and collapse restatements into them. Done when: restatements are
+   collapsed.
+10. Prune to one source of truth per meaning. Done when: no duplication and no no-op remain.
+11. When the request writes a skill directory, follow `references/authoring-procedure.md`. Done
+    when: the write path reached its validation step, or the request was a review.
+
+## References
+
+| File | Load when |
+|---|---|
+| `references/authoring-levers.md` | A step's one-line claim is not enough to act on; carries the theory behind steps 2 through 10 |
+| `references/skill-mechanics.md` | Step 8 fires, meaning the document is a skill |
+| `references/authoring-procedure.md` | Step 11 fires, meaning the request writes a skill directory |
 
 ## Failure and recovery
-- **Unreliable firing**: the pointer's wording, not its target, decides when the agent reaches the material. Sharpen the wording first; inline the material only if sharpening fails.
-- **Premature completion**: a vague completion criterion invites the agent to rush. Sharpen the bound first; only if irreducibly fuzzy and the rush is observed, split the sequence across a real context boundary.
-- **Top bloat**: too little progressive disclosure. Push reference behind pointers; inline only what every branch needs.
-- **Hidden material**: too much progressive disclosure. Pull back what the agent actually needs in-file.
-- **Sediment**: stale layers accumulated because adding felt safe and removing felt risky. Core down through them to find what is still live; delete sentences that fail the no-op test.
-- **Negation backfire**: steering by prohibition makes the forbidden behaviour more available. Restate as the positive target behaviour.
 
-This skill is read-only: it emits guidance only and writes nothing. No rollback is needed. If the document cannot be made predictable, return the specific lever that failed and the evidence.
+Unreliable firing is a pointer problem: sharpen the wording, and inline the material only if
+sharpening fails. Premature completion is a criterion problem: sharpen the bound first, and split
+across a context boundary only if the bound is irreducibly fuzzy and the rush is observed. Top
+bloat means too little disclosure, so push reference behind pointers; hidden material means too
+much, so pull back what the agent needs in-file. Sediment is stale layers kept because adding felt
+safe and removing felt risky, so core down to what is live. Negation backfire is steering by
+prohibition, which makes the forbidden behaviour more available, so restate as the positive target.
+
+Reviews write nothing and need no rollback. Authoring writes are local and reversible, and a failed
+validation is repaired at its source rather than by weakening the gate. When the document cannot be
+made predictable, return the lever that failed and the evidence.
 
 ## Output
-Guidance applied to the authored or refactored document — sharpened pointers, a defended information hierarchy, checkable and exhaustive completion criteria, leading words that recruit pretrained priors, and no sediment or no-ops.
+
+The authored or refactored document, with sharpened pointers, a defended information hierarchy,
+checkable completion criteria, leading words that recruit pretrained priors, and no sediment. When
+a skill directory was written, also the changed paths, the job each skill now owns, merge or
+deletion decisions, attribution changes, and the validation evidence.

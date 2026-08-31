@@ -2,7 +2,7 @@
 
 ODIN workflows for designing and improving AI agents.
 
-48 skills, category Productivity.
+47 skills, category Productivity.
 
 ## Install
 
@@ -57,7 +57,6 @@ codex plugin add odin-agent@odin-marketplace
 - skill-doctor
 - skill-progressive-disclosure-design
 - skill-scanner
-- skill-writer
 - skills-visibility
 - testing-handbook-generator
 - toolchain-health
