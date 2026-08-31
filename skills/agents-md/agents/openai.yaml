@@ -1,3 +1,3 @@
 interface:
-  display_name: "Agents MD"
-  short_description: "Wire, audit, score, and refactor AGENTS.md and CLAUDE.md files."
+  display_name: "AGENTS.md"
+  short_description: "Use when setting up a repo for agents, adding AGENTS.md,"

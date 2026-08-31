@@ -1,3 +1,0 @@
-interface:
-  display_name: "Lean Agents MD"
-  short_description: "Create or update a lean AGENTS.md with external references."
