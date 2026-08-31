@@ -1,6 +1,6 @@
 ---
 name: typography-audit
-description: 'Use when asked to audit typography across a codebase. Produces a file:line report with concrete CSS and HTML fixes ordered by impact across 10 categories. Not for building a type system or token scale — use better-typography.'
+description: 'Use when asked to audit typography across a codebase. Produces a file:line report with concrete CSS and HTML fixes ordered by impact across 10 categories. Not for building a type system or token scale.'
 ---
 
 # Typography audit

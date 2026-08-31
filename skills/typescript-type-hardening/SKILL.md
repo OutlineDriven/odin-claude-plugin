@@ -1,6 +1,6 @@
 ---
 name: typescript-type-hardening
-description: 'Use when TypeScript code has type errors, any, difficult generics, branded types, or inference failures. Also handles utility-type derivation when primitives must compose. Not for strict-flag setup or runtime pitfalls — use ts-practice or ts-pitfalls.'
+description: 'Use when TypeScript code has type errors, any, difficult generics, branded types, or inference failures. Also handles utility-type derivation when primitives must compose. Not for strict-flag setup or runtime pitfalls — use typescript-best-practices.'
 ---
 
 # TypeScript type hardening

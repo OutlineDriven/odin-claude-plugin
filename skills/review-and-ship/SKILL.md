@@ -1,6 +1,6 @@
 ---
 name: review-and-ship
-description: 'Use when the user explicitly asks to review changes, verify behavior, and open or update a PR. Not when the task includes merging PRs, force pushes, history rewrites, or deployments — use commit-push-pr for ship-only and review for review-only.'
+description: 'Use when the user explicitly asks to review changes, verify behavior, and open or update a PR. Not when the task includes merging PRs, force pushes, history rewrites, or deployments — use publish-pr for ship-only and review for review-only.'
 disable-model-invocation: true
 ---
 

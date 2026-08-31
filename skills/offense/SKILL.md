@@ -1,6 +1,6 @@
 ---
 name: offense
-description: 'Use when a change spans multiple files, exceeds roughly 100 lines, adds a feature, or refactors. Produces atomic compilable commits with explicit invariants, fail-fast violations, and no special-case branches. Not for thin-slice feature delivery — use incremental.'
+description: 'Use when a change spans multiple files, exceeds roughly 100 lines, adds a feature, or refactors. Produces atomic compilable commits with explicit invariants, fail-fast violations, and no special-case branches. Not for thin-slice feature delivery — use incremental-implementation.'
 ---
 
 # Offense
@@ -37,4 +37,4 @@ Return the ordered atomic commit identifiers, exact changed paths, named invaria
 
 ## Provenance
 
-Project-owned adaptation of `current:current-b:current:incremental` from `skills/incremental/SKILL.md`. Source revision is unpinned and the source license is project-owned. The adaptation replaces thin-slice and feature-flag guidance with the mandated invariant-first, fail-fast, special-case-eliminating baseline while retaining atomic compilable commits, continuous verification, scoped changes, and version-control recovery.
+Project-owned adaptation of `current:current-b:current:incremental-implementation` from `skills/incremental-implementation/SKILL.md`. Source revision is unpinned and the source license is project-owned. The adaptation replaces thin-slice and feature-flag guidance with the mandated invariant-first, fail-fast, special-case-eliminating baseline while retaining atomic compilable commits, continuous verification, scoped changes, and version-control recovery.

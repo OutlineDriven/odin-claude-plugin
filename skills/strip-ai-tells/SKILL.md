@@ -1,6 +1,6 @@
 ---
 name: strip-ai-tells
-description: 'Use when prose needs AI tells removed without changing meaning or tone. Produces natural, precise text with preserved intent. Not for adding a new voice or broader style restoration — use humanizer-en. Don''t use for remote or irreversible changes.'
+description: 'Use when prose needs AI tells removed without changing meaning or tone. Produces natural, precise text with preserved intent. Not for adding a new voice or broader style restoration — use humanizer-en-asd-ste100. Don''t use for remote or irreversible changes.'
 ---
 
 # Strip AI tells

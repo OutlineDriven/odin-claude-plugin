@@ -1,6 +1,6 @@
 ---
 name: shower-contents-handoff
-description: 'Use when fresh eyes are gone or a clean-room comprehension smoke test is needed before handoff, publish, or merge. Spawns a context-free sub-session that blind-reads the artifact and returns a verdict with defects ordered by severity. Not for self-cold-read — use shower.'
+description: 'Use when fresh eyes are gone or a clean-room comprehension smoke test is needed before handoff, publish, or merge. Spawns a context-free sub-session that blind-reads the artifact and returns a verdict with defects ordered by severity. Not for self-cold-read — use fresh-reader-review.'
 ---
 
 # Shower contents handoff

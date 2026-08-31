@@ -1,6 +1,6 @@
 ---
 name: validation-self-audit
-description: 'Use when asked to audit validation that looks too clean or self-confirming. Identify each independence failure that applies, prescribe its fix, and audit the auditor''s own evidence. Not for checking eval leakage — use mandela.'
+description: 'Use when asked to audit validation that looks too clean or self-confirming. Identify each independence failure that applies, prescribe its fix, and audit the auditor''s own evidence. Not for checking eval leakage — use evaluation-leakage-audit.'
 ---
 
 # Validation self audit
@@ -42,4 +42,4 @@ A read-only report with the bounded claim, each firing pattern by name with evid
 
 ## Provenance
 
-Adapted from LilMGenius/paperthin at revision `3bca079a51bcfff5dafb53d1d7f9f523d66ee317`, `skills/depth/mandela/SKILL.md`, under MIT. This is a clean-room restatement of the validation self-audit mechanism; no vendored expression was copied. See root `PROVENANCE.md` for the retained third-party notice and reuse obligations.
+Adapted from LilMGenius/paperthin at revision `3bca079a51bcfff5dafb53d1d7f9f523d66ee317`, leakage-audit skill under `skills/depth/`, under MIT. This is a clean-room restatement of the validation self-audit mechanism; no vendored expression was copied. See root `PROVENANCE.md` for the retained third-party notice and reuse obligations.

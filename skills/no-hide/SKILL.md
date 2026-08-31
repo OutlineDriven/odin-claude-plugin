@@ -1,6 +1,6 @@
 ---
 name: no-hide
-description: 'Use when the user asks to detect clever-concealment patterns that obscure real code structure. Flags each instance with location and severity. Not for refactoring the concealment away — use unleash-abstraction.'
+description: 'Use when the user asks to detect clever-concealment patterns that obscure real code structure. Flags each instance with location and severity. Not for refactoring the concealment away — use unleak-abstraction.'
 ---
 
 # No hide
@@ -58,4 +58,4 @@ One structured report: status, findings, summary, done flag, in that order.
 
 ## Provenance
 
-Origin: ODIN portal conversation, clean-room adaptation per `curated:curated-ideas:curated-043`. Adapted from "복잡성을 지나치게 똑똑하게 가리지마라, 헛똑똑이 밴" (avoid overly clever complexity concealment — half-smart bans). Distinct from `unleash-abstraction`, which performs a refactor; `no-hide` only reports.
+Origin: ODIN portal conversation, clean-room adaptation per `curated:curated-ideas:curated-043`. Adapted from "복잡성을 지나치게 똑똑하게 가리지마라, 헛똑똑이 밴" (avoid overly clever complexity concealment — half-smart bans). Distinct from `unleak-abstraction`, which performs a refactor; `no-hide` only reports.
