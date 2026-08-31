@@ -1,6 +1,6 @@
 ---
 name: git-branchless
-description: 'Use when asked for multi-commit stack edits, rebases, fixups, or stacked-PR publishing with branchless git idioms and a publish gate. Not for plain-git workflows in repos without branchless — the skill stays inert there. Human-only.'
+description: 'Use when asked for multi-commit stack edits, rebases, fixups, or stacked-PR publishing with branchless git idioms and a publish gate. Not for plain-git workflows in repos without branchless; the skill stays inert there. Human-only.'
 disable-model-invocation: true
 ---
 
@@ -17,8 +17,8 @@ disable-model-invocation: true
 
 ## Not for
 
-- Plain-git workflows in repos without branchless — the skill stays inert and yields to plain git.
-- Interactive rebase (`rebase -i`), `reset --hard`, or force flags — never use these.
+- Plain-git workflows in repos without branchless; the skill stays inert and yields to plain git.
+- Interactive rebase (`rebase -i`), `reset --hard`, or force flags; never use these.
 - Suggesting `git branchless init` unless the user explicitly asks how to enable.
 
 ## Inputs
@@ -36,7 +36,7 @@ disable-model-invocation: true
    test -d "$(git rev-parse --git-common-dir)/branchless" && git config --get branchless.core.mainBranch
    ```
 
-   - Both checks succeed: skill is active. Acknowledge with one line: `git-branchless active — main=<value>`.
+   - Both checks succeed: skill is active. Acknowledge with one line: `git-branchless active: main=<value>`.
    - Either check fails: skill is silently inert. Emit one line: `git-branchless not initialized; skill inactive`. Yield to plain git. Do not suggest `git branchless init` unless the user explicitly asks how to enable. Stop.
 
    Done when: branchless initialization is confirmed or the inert line is emitted.

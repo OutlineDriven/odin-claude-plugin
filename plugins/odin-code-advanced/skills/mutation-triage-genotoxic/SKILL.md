@@ -1,6 +1,6 @@
 ---
 name: mutation-triage-genotoxic
-description: 'Use when a passing test suite has survived production mutants or removable test statements and needs triage. Classifies each finding as corroborated, false positive, missing test, or fuzzing target. Not for running campaigns — use mutation-campaign-configuration.'
+description: 'Use when a mutation campaign has produced surviving mutants that need triage. Classifies each mutant as false-positive, missing-test, genotoxic, or removable using a coverage map, and proposes which tests to write or dead code to remove. Not for configuring or running campaigns: use mutation-campaign-configuration.'
 ---
 
 # Mutation triage genotoxic
@@ -9,33 +9,36 @@ description: 'Use when a passing test suite has survived production mutants or r
 
 | Field | Bound contract |
 |---|---|
-| Trigger | A passing test suite has survived production-code mutants, removable test statements, or both, and the user needs triage. |
-| Authority | Reversible-local: write only GENOTOXIC_REPORT.md; mutation tools execute read-only against the target test suite; rollback by deleting GENOTOXIC_REPORT.md. |
-| Side effect | GENOTOXIC_REPORT.md; mutation tools execute against the target test suite. |
-| Done | Every survived mutant and applicable test-removal finding is classified as corroborated, false positive, missing test, or fuzzing target with no unreported remainder. |
+| Trigger | A mutation campaign has produced surviving mutants and the user needs triage. |
+| Authority | Reversible-local: write only the classification ledger and test-change proposals. Does not mutate tests or source directly. Rollback by deleting the ledger. |
+| Side effect | A classification ledger with one label per mutant and proposed test changes. |
+| Done | Every surviving mutant has exactly one classification (false-positive, missing-test, genotoxic, or removable) with coverage-map evidence, and the ledger has no unprocessed remainder. |
 
 ## Inputs
 
-- Target test suite path (required).
-- Mutation tool output (required): survived mutants list, test-removal findings, or both.
-- Source code paths under mutation (required).
+- Mutation report (required): the output of a completed mutation campaign listing surviving mutants with source locations and mutations applied.
+- Source tree (required): the codebase under mutation, accessible for reading.
+- Coverage map (required): a line or branch coverage map showing which tests exercise which source regions. Without this, classification cannot proceed.
 
 ## Procedure
 
-1. Collect all survived mutants from mutation tool output. Done when: every survived mutant is recorded with its source location and mutation applied.
-2. Collect all test-removal findings: removable test statements whose removal did not cause suite failure. Done when: every test-removal finding is recorded with its statement and guarded behavior.
-3. For each survived mutant: identify the mutated source location and the mutation applied; determine whether existing tests exercise the mutated path by examining test coverage of the affected code region; classify as corroborated (semantically equivalent or intentionally unguarded), false positive (caught by a test not executed in the run), missing test (no existing test covers the path), or fuzzing target (complex input parsing, boundary conditions, or state transitions where property-based testing would be more effective). Done when: the mutant has exactly one classification with evidence.
-4. For each test-removal finding: identify the removable test statement and the behavior it guards; classify using the same four categories from step 3. Done when: the finding has exactly one classification with evidence.
-5. Build the mutation-triage ledger: a structured table with columns for finding ID, source location, mutation or removal description, classification, evidence, and recommended action. Done when: every finding has a ledger row.
-6. Write GENOTOXIC_REPORT.md containing the ledger, a summary of counts per classification, and recommended next actions. Done when: the report file exists and contains every ledger row, the summary counts, and the recommendations.
+1. Ingest the mutation report. Collect every surviving mutant with its source location, mutation applied, and mutant identifier. Group mutants by changed source region (function, method, or block). Done when: every surviving mutant is recorded and grouped by region.
+2. For each group, consult the coverage map to determine whether tests exercise the mutated region. Record which tests cover the region and which lines or branches within it are covered. Done when: every group has a coverage determination: covered, partially covered, or uncovered.
+3. Classify each mutant as exactly one of:
+   - false-positive: the mutant is semantically equivalent to the original, or a test that catches it exists but was not executed in the campaign run. Coverage map shows the region is covered; the mutant's effect is null or already guarded.
+   - missing-test: the coverage map shows no test exercises the mutated region. The fix is to write a test that covers the region.
+   - genotoxic: the coverage map shows tests exercise the region but the mutant survived. The existing tests touch the code but do not assert the behavior the mutation changed. The fix is to strengthen the existing test or add an assertion.
+   - removable: the mutated code is dead, unreachable, or behind a permanently disabled feature flag. The fix is to remove the dead code, not to test it.
+   Done when: each mutant has exactly one classification with coverage-map evidence cited.
+4. Write proposals to the ledger. For each mutant, record the classification, the coverage evidence, and the proposed action (no action, write test, strengthen test, remove dead code). Done when: every mutant has a ledger entry with classification, evidence, and proposed action.
+5. Verify every mutation is accounted for. Count the mutants in the report and the entries in the ledger. If any mutant lacks a classification, return to step 3 for that mutant. Done when: the ledger count equals the report count and no mutant is unprocessed.
 
 ## Failure and recovery
 
-- **Incomplete mutation tool output**: report which mutants or findings lack sufficient data; classify as `insufficient-evidence` in the ledger; do not guess classification.
-- **Ambiguous classification**: when evidence supports multiple classifications, record all candidates with rationale; do not collapse to a single label without justification.
-- **Partial result**: if the run is interrupted, write whatever ledger entries are complete and note the remainder as unprocessed.
-- **Rollback**: delete GENOTOXIC_REPORT.md to undo all changes.
+- Missing coverage map: the coverage map was not supplied or cannot be read. Stop. Report that classification cannot proceed without coverage evidence. Do not guess coverage from test names or source inspection.
+- Unsupported classification: a mutant does not fit any of the four labels. Stop. Report the mutant and the evidence that prevented classification. Do not invent a fifth label or force an unsupported fit.
+- Partial write rollback: if the ledger write fails partway, delete the incomplete ledger and report which entries were written and which were not. Do not leave a partial ledger as the result.
 
 ## Output
 
-GENOTOXIC_REPORT.md: mutation-triage ledger, per-classification summary counts, and recommended next actions — ordered by the procedure steps that produced them.
+A complete classification ledger with exactly one label per mutant (false-positive, missing-test, genotoxic, or removable), coverage-map evidence for each classification, proposed test changes or code removals, and a summary count per label. No unprocessed remainder.

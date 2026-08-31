@@ -12,12 +12,12 @@ description: 'Use when a user wants to enumerate hostile worlds and actively mak
 | Trigger | User wants to enumerate hostile worlds and actively make the product break. |
 | Authority | Reversible-local: write only named local test cases and proof-of-break artifacts; state the rollback path before any write. |
 | Side effect | Hostile-world test cases and proof-of-break artifacts written to local files. |
-| Done | Hostile worlds are enumerated and the product is made to break in at least one; report returned. |
+| Done | Hostile worlds are enumerated, test cases are executed, and survived worlds are escalated to exhaustion or break; report returned. |
 
 ## Inputs
 
-- **Product surface** (required): the code, API, binary, or feature under test. Must be accessible from the local environment.
-- **Scope constraint** (optional): a boundary the human sets to focus the attack surface (e.g. one endpoint, one module, one configuration).
+- Product surface (required): the code, API, binary, or feature under test. Must be accessible from the local environment.
+- Scope constraint (optional): a boundary the human sets to focus the attack surface (e.g. one endpoint, one module, one configuration).
 
 ## Procedure
 
@@ -37,10 +37,10 @@ description: 'Use when a user wants to enumerate hostile worlds and actively mak
 
 ## Failure and recovery
 
-- **Product surface inaccessible**: report the blocker, list the hostile worlds that could not be attempted, and stop. Do not fabricate test results.
-- **Test execution fails due to environment, not product**: mark the test case as inconclusive, record the environment error, and continue with remaining worlds.
-- **No hostile world produces a break**: report all worlds as survived. Escalate the most promising worlds with a note on what was tried. Do not claim the product is unbreakable.
-- **Partial results**: always return the report with whatever worlds were completed. Mark incomplete worlds as not attempted with the reason.
+- Product surface inaccessible: report the blocker, list the hostile worlds that could not be attempted, and stop. Do not fabricate test results.
+- Test execution fails due to environment, not product: mark the test case as inconclusive, record the environment error, and continue with remaining worlds.
+- No hostile world produces a break: report all worlds as survived. Escalate the most promising worlds with a note on what was tried. Do not claim the product is unbreakable.
+- Partial results: always return the report with whatever worlds were completed. Mark incomplete worlds as not attempted with the reason.
 
 ## Output
 

@@ -1,6 +1,6 @@
 ---
 name: make-bot-ui
-description: 'Use when a human invokes this skill to build a webhook UI that wakes a bot with server-side secret isolation and an end-to-end probe. Don''t use for unpreviewed or unapproved credential, host, Tailscale, deployment, remote, paid, or irreversible changes.'
+description: 'Use when a human invokes this skill to build a webhook UI that wakes a bot with server-side secret isolation and an end-to-end probe. Not for unpreviewed or unapproved credential, host, Tailscale, deployment, remote, paid, or irreversible changes.'
 disable-model-invocation: true
 ---
 

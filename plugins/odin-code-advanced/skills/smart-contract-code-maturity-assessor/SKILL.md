@@ -1,6 +1,6 @@
 ---
 name: smart-contract-code-maturity-assessor
-description: 'Use when a smart-contract codebase needs an evidence-based maturity scorecard and prioritized improvement roadmap. Rates nine areas from code and explicit off-chain evidence. Not for vulnerability auditing, source fixes, or claims about inaccessible processes.'
+description: 'Use when a smart-contract codebase needs an evidence-based maturity scorecard and prioritized improvement roadmap. Rates nine categories from code and explicit off-chain evidence, computes an aggregate score, and produces a CRITICAL-to-MEDIUM roadmap. Not for vulnerability auditing, source fixes, or claims about inaccessible processes.'
 ---
 
 # Smart contract code maturity assessor
@@ -11,8 +11,8 @@ description: 'Use when a smart-contract codebase needs an evidence-based maturit
 |---|---|
 | Trigger | A smart-contract codebase needs an evidence-based maturity scorecard and prioritized improvement roadmap. |
 | Authority | Read-only: no file write, VCS mutation, credential write, paid service mutation, published content mutation, deployed state change, or remote resource mutation. |
-| Side effect | One structured chat output containing a nine-area maturity scorecard, per-category evidence, identified risks, and an ordered remediation roadmap. |
-| Done | Every rubric area has an evidence-backed rating and the highest-leverage improvements are prioritized. |
+| Side effect | One structured chat output containing a nine-category maturity scorecard, per-category evidence, identified risks, and an ordered remediation roadmap. |
+| Done | Every rubric category has an evidence-backed rating or an explicit evidence-unavailable marker, the aggregate score is computed from rated categories, and every consequential rating traces to evidence or an explicit gap. |
 
 ## Inputs
 
@@ -31,13 +31,11 @@ Optional and asked at runtime:
 
 ## Procedure
 
-1. **Discover the codebase.** Locate contract and module files, test files, and documentation. Identify the platform and language.
+1. Discover the codebase. Locate contract and module files, test files, and documentation. Identify the platform and language. Done when: the assessed source, tests, documentation, platform, language, and known scope gaps are explicitly bounded.
 
-   **Done when:** the assessed source, tests, documentation, platform, language, and known scope gaps are explicitly bounded.
+2. Assess each of nine categories. For each category, search code for relevant patterns, read key implementations, collect file:line evidence, and ask the human about off-chain processes that the code cannot show. Apply the WEAK/MODERATE/SATISFACTORY/STRONG rating thresholds using the criteria below.
 
-2. **Assess each of nine categories.** For each category, search code for relevant patterns, read key implementations, collect file:line evidence, and ask the human about off-chain processes that the code cannot show. Apply the WEAK/MODERATE/SATISFACTORY/STRONG rating thresholds using the criteria below.
-
-   Rating logic: Any Weak criterion makes the rating Weak. If no Weak criterion applies but some Moderate requirements are unmet, rate Moderate. If all Moderate requirements and some Satisfactory requirements are met, rate Satisfactory. If all Satisfactory requirements are met and exceptional practices are present, rate Strong.
+   Rating logic: Any Weak criterion makes the rating Weak. If no Weak criterion applies but some Moderate requirements are unmet, rate Moderate. If all Moderate requirements and some Satisfactory requirements are met, rate Satisfactory. If all Satisfactory requirements are met and exceptional practices are present, rate Strong. If code inspection cannot establish a rating, mark the category `evidence-unavailable` rather than assigning WEAK or inventing evidence.
 
    **1. ARITHMETIC**
    - Analyze: overflow protection (Solidity 0.8+, SafeMath, checked_*, saturating_*), unchecked blocks and documentation, division/rounding, critical-function arithmetic, arithmetic edge-case testing, arithmetic specifications.
@@ -63,7 +61,7 @@ Optional and asked at runtime:
    - Analyze: function length and nesting depth, cyclomatic complexity, code duplication, inheritance hierarchies, naming conventions, function clarity.
    - Ask: complex parts documented; naming convention documented; complexity measurements.
    - WEAK if: unnecessary complexity hinders review; functions overuse nested operations; functions have unclear scope; unnecessary code duplication; complex inheritance tree.
-   - MODERATE requires: all weak resolved; complex parts identified, minimized; high complexity (≥11) justified; critical functions well-scoped; minimal, justified redundancy; clear inputs with validation; documented naming convention; types not misused.
+   - MODERATE requires: all weak resolved; complex parts identified, minimized; high complexity (>=11) justified; critical functions well-scoped; minimal, justified redundancy; clear inputs with validation; documented naming convention; types not misused.
    - SATISFACTORY requires: all moderate met; minimal unnecessary complexity; necessary complexity documented; clear function purposes; straightforward to test; no redundant behavior.
 
    **5. DECENTRALIZATION**
@@ -101,27 +99,20 @@ Optional and asked at runtime:
    - MODERATE requires: all weak resolved; most functions and use cases tested; all tests pass; coverage reports available; automated testing for critical components; tests in CI/CD; integration tests where applicable; test code follows best practices.
    - SATISFACTORY requires: all moderate met; 100% reachable branch and statement coverage; end-to-end testing covers all entry points; isolated test cases; mutation testing used.
 
-   **Done when:** all nine categories have a threshold-derived rating, file-and-line evidence, explicit evidence gaps, and only human-supplied off-chain claims.
+   Done when: all nine categories have a threshold-derived rating or an evidence-unavailable marker, file-and-line evidence, explicit evidence gaps, and only human-supplied off-chain claims.
 
-3. **Compute overall maturity.** Average the nine category scores. Present findings with file:line evidence. Ask clarifying questions about off-chain processes.
+3. Compute overall maturity. Map each rated category to a numeric value: WEAK=1, MODERATE=2, SATISFACTORY=3, STRONG=4. Compute the arithmetic mean of the rated categories and round to one decimal. Exclude any evidence-unavailable category from the mean and list it separately in the scorecard. Do not silently assign a numeric value to an evidence-unavailable category. Done when: the aggregate score is computed from rated categories only, rounded to one decimal, and evidence-unavailable categories are listed separately.
 
-   **Done when:** the arithmetic average traces to all nine recorded category scores and every consequential finding cites evidence or an unanswered off-chain question.
+4. Generate the report. Produce the structured output: executive summary with overall score, top strengths, top gaps, and priority recommendations; maturity scorecard table with all nine categories (rated or evidence-unavailable); per-category detailed analysis with evidence; improvement roadmap ordered by CRITICAL, HIGH, MEDIUM with effort estimates and impact per item. Done when: the report contains every output section, preserves category-to-evidence traceability, and orders remediation by severity, effort, and impact.
 
-4. **Generate the report.** Produce the structured output: executive summary with overall score, top 3 strengths, top 3 gaps, and priority recommendations; maturity scorecard table with all nine categories; per-category detailed analysis with evidence; improvement roadmap ordered by CRITICAL, HIGH, MEDIUM with effort estimates and impact per item.
-
-   **Done when:** the report contains every output section, preserves category-to-evidence traceability, and orders remediation by severity, effort, and impact as specified.
+5. Traceability check. Verify that every rating cites file:line evidence or an unanswered question. Verify that no evidence-unavailable category was silently scored. Verify that the aggregate score matches the arithmetic mean of the rated categories. Done when: every consequential rating traces to evidence or an explicit gap.
 
 ## Failure and recovery
 
-### Evidence gaps
-
-- **Insufficient evidence:** If code inspection cannot establish a rating for a category, state the gap explicitly and assign WEAK rather than inventing evidence. Mark the category as `evidence unavailable` in the scorecard.
-
-### Scope and access failures
-
-- **Partial assessment:** If the codebase scope exceeds what can be covered in one session, produce the scorecard for the covered portions and explicitly list the uncovered areas as `not assessed`. Do not extrapolate ratings to unexamined areas.
-- **Assessment abandoned:** If the human withdraws or the codebase is inaccessible, return the partial scorecard with the last-known ratings and the questions that remained unanswered.
+- Evidence-gap: a category cannot be rated from code inspection. Mark it `evidence-unavailable`, exclude it from the aggregate mean, and list it separately in the scorecard. Never invent evidence or assign WEAK to fill the gap.
+- Partial-assessment: the codebase scope exceeds what can be covered in one session. Produce the scorecard for the covered portions and explicitly list the uncovered areas as `not assessed`. Do not extrapolate ratings to unexamined areas.
+- Abandoned: the human withdraws or the codebase becomes inaccessible. Return the partial scorecard with the last-known ratings and the questions that remained unanswered.
 
 ## Output
 
-**Output contract:** Return the executive summary first, then the nine-category scorecard, per-category evidence and next-level gaps, and a CRITICAL-to-HIGH-to-MEDIUM improvement roadmap with effort and impact.
+Return the executive summary first, then the nine-category scorecard (with evidence-unavailable categories listed separately), per-category evidence and gaps, the aggregate score computed from rated categories, and a CRITICAL-to-HIGH-to-MEDIUM improvement roadmap with effort and impact. Every consequential rating traces to evidence or an explicit gap.
