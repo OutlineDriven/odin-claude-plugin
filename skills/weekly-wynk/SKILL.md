@@ -106,6 +106,7 @@ disable-model-invocation: true
 - HTTP 429 from Notion: honor `Retry-After` and retry the same request with exponential backoff.
 - A Notion write fails mid-publish: keep every page already created; enumerate the created page IDs and the sections not yet populated; recover forward by re-issuing only the failed block-append requests. Never claim done while any section is unpopulated. Never archive or delete pages without the operator's explicit instruction (archiving is `PATCH /v1/pages/{page_id}` with `{"archived": true}`).
 - The Slack post fails after Notion and the local copy succeeded: fix the cause and re-send only the Slack message; done does not hold until a 2xx response with a zero `curl` exit (`--fail-with-body` exits non-zero on 4xx/5xx).
+- A `git push` or `gh pr create` fails (auth, network, non-fast-forward, PR-creation error): stop and report the branch name, the local file path (`$REPO_ROOT/reports/weekly_wynk/wynk_YYYY-MM-DD.md`), and the failing command so the operator can finish by hand. The PR is a required side effect, so done does not hold without it.
 - Never swallow an error, never substitute placeholder content for missing evidence, and never report done while any of the four publish targets is unconfirmed.
 
 ## Output
