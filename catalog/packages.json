@@ -1,0 +1,976 @@
+{
+  "schema": "odin-package-catalog/v1",
+  "releaseVersion": "2.0.0",
+  "marketplace_name": "odin-marketplace",
+  "publication_order": [
+    "@outlinedriven/odin-core@2.0.0",
+    "@outlinedriven/odin-code@2.0.0",
+    "@outlinedriven/odin-code-advanced@2.0.0",
+    "@outlinedriven/odin-create@2.0.0",
+    "@outlinedriven/odin-create-advanced@2.0.0",
+    "@outlinedriven/odin-research@2.0.0",
+    "@outlinedriven/odin-research-advanced@2.0.0",
+    "@outlinedriven/odin-run@2.0.0",
+    "@outlinedriven/odin-run-advanced@2.0.0",
+    "@outlinedriven/odin-agent@2.0.0",
+    "@outlinedriven/odin-security@2.0.0",
+    "@outlinedriven/odin-security-advanced@2.0.0",
+    "@outlinedriven/odin-design@2.0.0",
+    "@outlinedriven/odin-design-advanced@2.0.0",
+    "@outlinedriven/odin-writing@2.0.0",
+    "@outlinedriven/odin-writing-advanced@2.0.0",
+    "@outlinedriven/odin-product@2.0.0",
+    "@outlinedriven/odin-loop@2.0.0",
+    "@outlinedriven/odin-planning@2.0.0",
+    "@outlinedriven/odin-python@2.0.0",
+    "@outlinedriven/odin-typescript@2.0.0",
+    "@outlinedriven/odin-web@2.0.0",
+    "@outlinedriven/odin-native@2.0.0",
+    "@outlinedriven/odin-apple@2.0.0",
+    "@outlinedriven/odin-lean@2.0.0",
+    "@outlinedriven/odin-terraform@2.0.0",
+    "@outlinedriven/odin-bigquery@2.0.0",
+    "@outlinedriven/odin-prometheus@2.0.0",
+    "@outlinedriven/odin@2.0.0"
+  ],
+  "entries": [
+    {
+      "index": 1,
+      "id": "odin",
+      "kind": "installer-catalog",
+      "package": "@outlinedriven/odin",
+      "display_name": "ODIN Installer",
+      "description": "Choose ODIN modules with the OutlineDriven universal installer.",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "claude-code",
+        "installer",
+        "catalog"
+      ],
+      "homepage": "https://github.com/OutlineDriven/outline-driven",
+      "source": {
+        "source": "npm",
+        "package": "@outlinedriven/odin",
+        "version": "2.0.0",
+        "registry": "https://registry.npmjs.org"
+      },
+      "directory": "packages/odin",
+      "files_variant": "installer",
+      "paths": {
+        "package_json": "packages/odin/package.json",
+        "plugin_manifest": "packages/odin/.claude-plugin/plugin.json",
+        "readme": "packages/odin/README.md",
+        "license": "packages/odin/LICENSE",
+        "provenance": "packages/odin/PROVENANCE.md"
+      }
+    },
+    {
+      "index": 2,
+      "id": "odin-core",
+      "kind": "runtime",
+      "package": "@outlinedriven/odin-core",
+      "display_name": "ODIN Core",
+      "description": "ODIN foundational workflows for bounded, inspectable, verified change.",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "claude-code",
+        "agent-skills",
+        "core"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": {
+        "source": "npm",
+        "package": "@outlinedriven/odin-core",
+        "version": "2.0.0",
+        "registry": "https://registry.npmjs.org"
+      },
+      "directory": "packages/odin-core",
+      "files_variant": "core",
+      "paths": {
+        "package_json": "packages/odin-core/package.json",
+        "plugin_manifest": "packages/odin-core/.claude-plugin/plugin.json",
+        "readme": "packages/odin-core/README.md",
+        "license": "packages/odin-core/LICENSE",
+        "provenance": "packages/odin-core/PROVENANCE.md",
+        "skills_root": "packages/odin-core/skills",
+        "mcp_config": "packages/odin-core/mcp.json",
+        "mcp_vendor_manifest": "packages/odin-core/vendor/mcp/manifest.json",
+        "mcp_vendor_root": "packages/odin-core/vendor/mcp",
+        "output_styles_root": "packages/odin-core/output-styles"
+      }
+    },
+    {
+      "index": 3,
+      "id": "odin-code",
+      "kind": "runtime",
+      "package": "@outlinedriven/odin-code",
+      "display_name": "ODIN Code",
+      "description": "ODIN coding workflows for bounded, inspectable, verified change.",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "claude-code",
+        "agent-skills",
+        "code"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": {
+        "source": "npm",
+        "package": "@outlinedriven/odin-code",
+        "version": "2.0.0",
+        "registry": "https://registry.npmjs.org"
+      },
+      "directory": "packages/odin-code",
+      "files_variant": "runtime",
+      "paths": {
+        "package_json": "packages/odin-code/package.json",
+        "plugin_manifest": "packages/odin-code/.claude-plugin/plugin.json",
+        "readme": "packages/odin-code/README.md",
+        "license": "packages/odin-code/LICENSE",
+        "provenance": "packages/odin-code/PROVENANCE.md",
+        "skills_root": "packages/odin-code/skills"
+      }
+    },
+    {
+      "index": 4,
+      "id": "odin-code-advanced",
+      "kind": "runtime",
+      "package": "@outlinedriven/odin-code-advanced",
+      "display_name": "ODIN Code Advanced",
+      "description": "ODIN advanced coding workflows for bounded, inspectable, verified change.",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "claude-code",
+        "agent-skills",
+        "code",
+        "advanced"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": {
+        "source": "npm",
+        "package": "@outlinedriven/odin-code-advanced",
+        "version": "2.0.0",
+        "registry": "https://registry.npmjs.org"
+      },
+      "directory": "packages/odin-code-advanced",
+      "files_variant": "runtime",
+      "paths": {
+        "package_json": "packages/odin-code-advanced/package.json",
+        "plugin_manifest": "packages/odin-code-advanced/.claude-plugin/plugin.json",
+        "readme": "packages/odin-code-advanced/README.md",
+        "license": "packages/odin-code-advanced/LICENSE",
+        "provenance": "packages/odin-code-advanced/PROVENANCE.md",
+        "skills_root": "packages/odin-code-advanced/skills"
+      }
+    },
+    {
+      "index": 5,
+      "id": "odin-create",
+      "kind": "runtime",
+      "package": "@outlinedriven/odin-create",
+      "display_name": "ODIN Create",
+      "description": "ODIN creation workflows for bounded, inspectable, verified change.",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "claude-code",
+        "agent-skills",
+        "create"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": {
+        "source": "npm",
+        "package": "@outlinedriven/odin-create",
+        "version": "2.0.0",
+        "registry": "https://registry.npmjs.org"
+      },
+      "directory": "packages/odin-create",
+      "files_variant": "runtime",
+      "paths": {
+        "package_json": "packages/odin-create/package.json",
+        "plugin_manifest": "packages/odin-create/.claude-plugin/plugin.json",
+        "readme": "packages/odin-create/README.md",
+        "license": "packages/odin-create/LICENSE",
+        "provenance": "packages/odin-create/PROVENANCE.md",
+        "skills_root": "packages/odin-create/skills"
+      }
+    },
+    {
+      "index": 6,
+      "id": "odin-create-advanced",
+      "kind": "runtime",
+      "package": "@outlinedriven/odin-create-advanced",
+      "display_name": "ODIN Create Advanced",
+      "description": "ODIN advanced creation workflows for bounded, inspectable, verified change.",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "claude-code",
+        "agent-skills",
+        "create",
+        "advanced"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": {
+        "source": "npm",
+        "package": "@outlinedriven/odin-create-advanced",
+        "version": "2.0.0",
+        "registry": "https://registry.npmjs.org"
+      },
+      "directory": "packages/odin-create-advanced",
+      "files_variant": "runtime",
+      "paths": {
+        "package_json": "packages/odin-create-advanced/package.json",
+        "plugin_manifest": "packages/odin-create-advanced/.claude-plugin/plugin.json",
+        "readme": "packages/odin-create-advanced/README.md",
+        "license": "packages/odin-create-advanced/LICENSE",
+        "provenance": "packages/odin-create-advanced/PROVENANCE.md",
+        "skills_root": "packages/odin-create-advanced/skills"
+      }
+    },
+    {
+      "index": 7,
+      "id": "odin-research",
+      "kind": "runtime",
+      "package": "@outlinedriven/odin-research",
+      "display_name": "ODIN Research",
+      "description": "ODIN research workflows for bounded, inspectable, verified change.",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "claude-code",
+        "agent-skills",
+        "research"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": {
+        "source": "npm",
+        "package": "@outlinedriven/odin-research",
+        "version": "2.0.0",
+        "registry": "https://registry.npmjs.org"
+      },
+      "directory": "packages/odin-research",
+      "files_variant": "runtime",
+      "paths": {
+        "package_json": "packages/odin-research/package.json",
+        "plugin_manifest": "packages/odin-research/.claude-plugin/plugin.json",
+        "readme": "packages/odin-research/README.md",
+        "license": "packages/odin-research/LICENSE",
+        "provenance": "packages/odin-research/PROVENANCE.md",
+        "skills_root": "packages/odin-research/skills"
+      }
+    },
+    {
+      "index": 8,
+      "id": "odin-research-advanced",
+      "kind": "runtime",
+      "package": "@outlinedriven/odin-research-advanced",
+      "display_name": "ODIN Research Advanced",
+      "description": "ODIN advanced research workflows for bounded, inspectable, verified change.",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "claude-code",
+        "agent-skills",
+        "research",
+        "advanced"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": {
+        "source": "npm",
+        "package": "@outlinedriven/odin-research-advanced",
+        "version": "2.0.0",
+        "registry": "https://registry.npmjs.org"
+      },
+      "directory": "packages/odin-research-advanced",
+      "files_variant": "runtime",
+      "paths": {
+        "package_json": "packages/odin-research-advanced/package.json",
+        "plugin_manifest": "packages/odin-research-advanced/.claude-plugin/plugin.json",
+        "readme": "packages/odin-research-advanced/README.md",
+        "license": "packages/odin-research-advanced/LICENSE",
+        "provenance": "packages/odin-research-advanced/PROVENANCE.md",
+        "skills_root": "packages/odin-research-advanced/skills"
+      }
+    },
+    {
+      "index": 9,
+      "id": "odin-run",
+      "kind": "runtime",
+      "package": "@outlinedriven/odin-run",
+      "display_name": "ODIN Run",
+      "description": "ODIN execution and delivery workflows for bounded, inspectable, verified change.",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "claude-code",
+        "agent-skills",
+        "run"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": {
+        "source": "npm",
+        "package": "@outlinedriven/odin-run",
+        "version": "2.0.0",
+        "registry": "https://registry.npmjs.org"
+      },
+      "directory": "packages/odin-run",
+      "files_variant": "runtime",
+      "paths": {
+        "package_json": "packages/odin-run/package.json",
+        "plugin_manifest": "packages/odin-run/.claude-plugin/plugin.json",
+        "readme": "packages/odin-run/README.md",
+        "license": "packages/odin-run/LICENSE",
+        "provenance": "packages/odin-run/PROVENANCE.md",
+        "skills_root": "packages/odin-run/skills"
+      }
+    },
+    {
+      "index": 10,
+      "id": "odin-run-advanced",
+      "kind": "runtime",
+      "package": "@outlinedriven/odin-run-advanced",
+      "display_name": "ODIN Run Advanced",
+      "description": "ODIN advanced execution and delivery workflows for bounded, inspectable, verified change.",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "claude-code",
+        "agent-skills",
+        "run",
+        "advanced"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": {
+        "source": "npm",
+        "package": "@outlinedriven/odin-run-advanced",
+        "version": "2.0.0",
+        "registry": "https://registry.npmjs.org"
+      },
+      "directory": "packages/odin-run-advanced",
+      "files_variant": "runtime",
+      "paths": {
+        "package_json": "packages/odin-run-advanced/package.json",
+        "plugin_manifest": "packages/odin-run-advanced/.claude-plugin/plugin.json",
+        "readme": "packages/odin-run-advanced/README.md",
+        "license": "packages/odin-run-advanced/LICENSE",
+        "provenance": "packages/odin-run-advanced/PROVENANCE.md",
+        "skills_root": "packages/odin-run-advanced/skills"
+      }
+    },
+    {
+      "index": 11,
+      "id": "odin-agent",
+      "kind": "runtime",
+      "package": "@outlinedriven/odin-agent",
+      "display_name": "ODIN Agent",
+      "description": "ODIN agent-engineering workflows for bounded, inspectable, verified change.",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "claude-code",
+        "agent-skills",
+        "agent"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": {
+        "source": "npm",
+        "package": "@outlinedriven/odin-agent",
+        "version": "2.0.0",
+        "registry": "https://registry.npmjs.org"
+      },
+      "directory": "packages/odin-agent",
+      "files_variant": "runtime",
+      "paths": {
+        "package_json": "packages/odin-agent/package.json",
+        "plugin_manifest": "packages/odin-agent/.claude-plugin/plugin.json",
+        "readme": "packages/odin-agent/README.md",
+        "license": "packages/odin-agent/LICENSE",
+        "provenance": "packages/odin-agent/PROVENANCE.md",
+        "skills_root": "packages/odin-agent/skills"
+      }
+    },
+    {
+      "index": 12,
+      "id": "odin-security",
+      "kind": "runtime",
+      "package": "@outlinedriven/odin-security",
+      "display_name": "ODIN Security",
+      "description": "ODIN security workflows for bounded, inspectable, verified change.",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "claude-code",
+        "agent-skills",
+        "security"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": {
+        "source": "npm",
+        "package": "@outlinedriven/odin-security",
+        "version": "2.0.0",
+        "registry": "https://registry.npmjs.org"
+      },
+      "directory": "packages/odin-security",
+      "files_variant": "runtime",
+      "paths": {
+        "package_json": "packages/odin-security/package.json",
+        "plugin_manifest": "packages/odin-security/.claude-plugin/plugin.json",
+        "readme": "packages/odin-security/README.md",
+        "license": "packages/odin-security/LICENSE",
+        "provenance": "packages/odin-security/PROVENANCE.md",
+        "skills_root": "packages/odin-security/skills"
+      }
+    },
+    {
+      "index": 13,
+      "id": "odin-security-advanced",
+      "kind": "runtime",
+      "package": "@outlinedriven/odin-security-advanced",
+      "display_name": "ODIN Security Advanced",
+      "description": "ODIN advanced security workflows for bounded, inspectable, verified change.",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "claude-code",
+        "agent-skills",
+        "security",
+        "advanced"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": {
+        "source": "npm",
+        "package": "@outlinedriven/odin-security-advanced",
+        "version": "2.0.0",
+        "registry": "https://registry.npmjs.org"
+      },
+      "directory": "packages/odin-security-advanced",
+      "files_variant": "runtime",
+      "paths": {
+        "package_json": "packages/odin-security-advanced/package.json",
+        "plugin_manifest": "packages/odin-security-advanced/.claude-plugin/plugin.json",
+        "readme": "packages/odin-security-advanced/README.md",
+        "license": "packages/odin-security-advanced/LICENSE",
+        "provenance": "packages/odin-security-advanced/PROVENANCE.md",
+        "skills_root": "packages/odin-security-advanced/skills"
+      }
+    },
+    {
+      "index": 14,
+      "id": "odin-design",
+      "kind": "runtime",
+      "package": "@outlinedriven/odin-design",
+      "display_name": "ODIN Design",
+      "description": "ODIN design workflows for bounded, inspectable, verified change.",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "claude-code",
+        "agent-skills",
+        "design"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": {
+        "source": "npm",
+        "package": "@outlinedriven/odin-design",
+        "version": "2.0.0",
+        "registry": "https://registry.npmjs.org"
+      },
+      "directory": "packages/odin-design",
+      "files_variant": "runtime",
+      "paths": {
+        "package_json": "packages/odin-design/package.json",
+        "plugin_manifest": "packages/odin-design/.claude-plugin/plugin.json",
+        "readme": "packages/odin-design/README.md",
+        "license": "packages/odin-design/LICENSE",
+        "provenance": "packages/odin-design/PROVENANCE.md",
+        "skills_root": "packages/odin-design/skills"
+      }
+    },
+    {
+      "index": 15,
+      "id": "odin-design-advanced",
+      "kind": "runtime",
+      "package": "@outlinedriven/odin-design-advanced",
+      "display_name": "ODIN Design Advanced",
+      "description": "ODIN advanced design workflows for bounded, inspectable, verified change.",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "claude-code",
+        "agent-skills",
+        "design",
+        "advanced"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": {
+        "source": "npm",
+        "package": "@outlinedriven/odin-design-advanced",
+        "version": "2.0.0",
+        "registry": "https://registry.npmjs.org"
+      },
+      "directory": "packages/odin-design-advanced",
+      "files_variant": "runtime",
+      "paths": {
+        "package_json": "packages/odin-design-advanced/package.json",
+        "plugin_manifest": "packages/odin-design-advanced/.claude-plugin/plugin.json",
+        "readme": "packages/odin-design-advanced/README.md",
+        "license": "packages/odin-design-advanced/LICENSE",
+        "provenance": "packages/odin-design-advanced/PROVENANCE.md",
+        "skills_root": "packages/odin-design-advanced/skills"
+      }
+    },
+    {
+      "index": 16,
+      "id": "odin-writing",
+      "kind": "runtime",
+      "package": "@outlinedriven/odin-writing",
+      "display_name": "ODIN Writing",
+      "description": "ODIN writing workflows for bounded, inspectable, verified change.",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "claude-code",
+        "agent-skills",
+        "writing"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": {
+        "source": "npm",
+        "package": "@outlinedriven/odin-writing",
+        "version": "2.0.0",
+        "registry": "https://registry.npmjs.org"
+      },
+      "directory": "packages/odin-writing",
+      "files_variant": "runtime",
+      "paths": {
+        "package_json": "packages/odin-writing/package.json",
+        "plugin_manifest": "packages/odin-writing/.claude-plugin/plugin.json",
+        "readme": "packages/odin-writing/README.md",
+        "license": "packages/odin-writing/LICENSE",
+        "provenance": "packages/odin-writing/PROVENANCE.md",
+        "skills_root": "packages/odin-writing/skills"
+      }
+    },
+    {
+      "index": 17,
+      "id": "odin-writing-advanced",
+      "kind": "runtime",
+      "package": "@outlinedriven/odin-writing-advanced",
+      "display_name": "ODIN Writing Advanced",
+      "description": "ODIN advanced writing workflows for bounded, inspectable, verified change.",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "claude-code",
+        "agent-skills",
+        "writing",
+        "advanced"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": {
+        "source": "npm",
+        "package": "@outlinedriven/odin-writing-advanced",
+        "version": "2.0.0",
+        "registry": "https://registry.npmjs.org"
+      },
+      "directory": "packages/odin-writing-advanced",
+      "files_variant": "runtime",
+      "paths": {
+        "package_json": "packages/odin-writing-advanced/package.json",
+        "plugin_manifest": "packages/odin-writing-advanced/.claude-plugin/plugin.json",
+        "readme": "packages/odin-writing-advanced/README.md",
+        "license": "packages/odin-writing-advanced/LICENSE",
+        "provenance": "packages/odin-writing-advanced/PROVENANCE.md",
+        "skills_root": "packages/odin-writing-advanced/skills"
+      }
+    },
+    {
+      "index": 18,
+      "id": "odin-product",
+      "kind": "runtime",
+      "package": "@outlinedriven/odin-product",
+      "display_name": "ODIN Product",
+      "description": "ODIN product workflows for bounded, inspectable, verified change.",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "claude-code",
+        "agent-skills",
+        "product"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": {
+        "source": "npm",
+        "package": "@outlinedriven/odin-product",
+        "version": "2.0.0",
+        "registry": "https://registry.npmjs.org"
+      },
+      "directory": "packages/odin-product",
+      "files_variant": "runtime",
+      "paths": {
+        "package_json": "packages/odin-product/package.json",
+        "plugin_manifest": "packages/odin-product/.claude-plugin/plugin.json",
+        "readme": "packages/odin-product/README.md",
+        "license": "packages/odin-product/LICENSE",
+        "provenance": "packages/odin-product/PROVENANCE.md",
+        "skills_root": "packages/odin-product/skills"
+      }
+    },
+    {
+      "index": 19,
+      "id": "odin-loop",
+      "kind": "runtime",
+      "package": "@outlinedriven/odin-loop",
+      "display_name": "ODIN Loop",
+      "description": "ODIN bounded-loop workflows for inspectable, verified change.",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "claude-code",
+        "agent-skills",
+        "loop"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": {
+        "source": "npm",
+        "package": "@outlinedriven/odin-loop",
+        "version": "2.0.0",
+        "registry": "https://registry.npmjs.org"
+      },
+      "directory": "packages/odin-loop",
+      "files_variant": "runtime",
+      "paths": {
+        "package_json": "packages/odin-loop/package.json",
+        "plugin_manifest": "packages/odin-loop/.claude-plugin/plugin.json",
+        "readme": "packages/odin-loop/README.md",
+        "license": "packages/odin-loop/LICENSE",
+        "provenance": "packages/odin-loop/PROVENANCE.md",
+        "skills_root": "packages/odin-loop/skills"
+      }
+    },
+    {
+      "index": 20,
+      "id": "odin-planning",
+      "kind": "runtime",
+      "package": "@outlinedriven/odin-planning",
+      "display_name": "ODIN Planning",
+      "description": "ODIN planning workflows for bounded, inspectable, verified change.",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "claude-code",
+        "agent-skills",
+        "planning"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": {
+        "source": "npm",
+        "package": "@outlinedriven/odin-planning",
+        "version": "2.0.0",
+        "registry": "https://registry.npmjs.org"
+      },
+      "directory": "packages/odin-planning",
+      "files_variant": "runtime",
+      "paths": {
+        "package_json": "packages/odin-planning/package.json",
+        "plugin_manifest": "packages/odin-planning/.claude-plugin/plugin.json",
+        "readme": "packages/odin-planning/README.md",
+        "license": "packages/odin-planning/LICENSE",
+        "provenance": "packages/odin-planning/PROVENANCE.md",
+        "skills_root": "packages/odin-planning/skills"
+      }
+    },
+    {
+      "index": 21,
+      "id": "odin-python",
+      "kind": "runtime",
+      "package": "@outlinedriven/odin-python",
+      "display_name": "ODIN Python",
+      "description": "ODIN Python-specific workflows for bounded, inspectable, verified change.",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "claude-code",
+        "agent-skills",
+        "python"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": {
+        "source": "npm",
+        "package": "@outlinedriven/odin-python",
+        "version": "2.0.0",
+        "registry": "https://registry.npmjs.org"
+      },
+      "directory": "packages/odin-python",
+      "files_variant": "runtime",
+      "paths": {
+        "package_json": "packages/odin-python/package.json",
+        "plugin_manifest": "packages/odin-python/.claude-plugin/plugin.json",
+        "readme": "packages/odin-python/README.md",
+        "license": "packages/odin-python/LICENSE",
+        "provenance": "packages/odin-python/PROVENANCE.md",
+        "skills_root": "packages/odin-python/skills"
+      }
+    },
+    {
+      "index": 22,
+      "id": "odin-typescript",
+      "kind": "runtime",
+      "package": "@outlinedriven/odin-typescript",
+      "display_name": "ODIN TypeScript",
+      "description": "ODIN TypeScript-specific workflows for bounded, inspectable, verified change.",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "claude-code",
+        "agent-skills",
+        "typescript"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": {
+        "source": "npm",
+        "package": "@outlinedriven/odin-typescript",
+        "version": "2.0.0",
+        "registry": "https://registry.npmjs.org"
+      },
+      "directory": "packages/odin-typescript",
+      "files_variant": "runtime",
+      "paths": {
+        "package_json": "packages/odin-typescript/package.json",
+        "plugin_manifest": "packages/odin-typescript/.claude-plugin/plugin.json",
+        "readme": "packages/odin-typescript/README.md",
+        "license": "packages/odin-typescript/LICENSE",
+        "provenance": "packages/odin-typescript/PROVENANCE.md",
+        "skills_root": "packages/odin-typescript/skills"
+      }
+    },
+    {
+      "index": 23,
+      "id": "odin-web",
+      "kind": "runtime",
+      "package": "@outlinedriven/odin-web",
+      "display_name": "ODIN Web",
+      "description": "ODIN web-platform workflows for bounded, inspectable, verified change.",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "claude-code",
+        "agent-skills",
+        "web"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": {
+        "source": "npm",
+        "package": "@outlinedriven/odin-web",
+        "version": "2.0.0",
+        "registry": "https://registry.npmjs.org"
+      },
+      "directory": "packages/odin-web",
+      "files_variant": "runtime",
+      "paths": {
+        "package_json": "packages/odin-web/package.json",
+        "plugin_manifest": "packages/odin-web/.claude-plugin/plugin.json",
+        "readme": "packages/odin-web/README.md",
+        "license": "packages/odin-web/LICENSE",
+        "provenance": "packages/odin-web/PROVENANCE.md",
+        "skills_root": "packages/odin-web/skills"
+      }
+    },
+    {
+      "index": 24,
+      "id": "odin-native",
+      "kind": "runtime",
+      "package": "@outlinedriven/odin-native",
+      "display_name": "ODIN Native",
+      "description": "ODIN native-toolchain workflows for bounded, inspectable, verified change.",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "claude-code",
+        "agent-skills",
+        "native"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": {
+        "source": "npm",
+        "package": "@outlinedriven/odin-native",
+        "version": "2.0.0",
+        "registry": "https://registry.npmjs.org"
+      },
+      "directory": "packages/odin-native",
+      "files_variant": "runtime",
+      "paths": {
+        "package_json": "packages/odin-native/package.json",
+        "plugin_manifest": "packages/odin-native/.claude-plugin/plugin.json",
+        "readme": "packages/odin-native/README.md",
+        "license": "packages/odin-native/LICENSE",
+        "provenance": "packages/odin-native/PROVENANCE.md",
+        "skills_root": "packages/odin-native/skills"
+      }
+    },
+    {
+      "index": 25,
+      "id": "odin-apple",
+      "kind": "runtime",
+      "package": "@outlinedriven/odin-apple",
+      "display_name": "ODIN Apple",
+      "description": "ODIN Apple-platform workflows for bounded, inspectable, verified change.",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "claude-code",
+        "agent-skills",
+        "apple"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": {
+        "source": "npm",
+        "package": "@outlinedriven/odin-apple",
+        "version": "2.0.0",
+        "registry": "https://registry.npmjs.org"
+      },
+      "directory": "packages/odin-apple",
+      "files_variant": "runtime",
+      "paths": {
+        "package_json": "packages/odin-apple/package.json",
+        "plugin_manifest": "packages/odin-apple/.claude-plugin/plugin.json",
+        "readme": "packages/odin-apple/README.md",
+        "license": "packages/odin-apple/LICENSE",
+        "provenance": "packages/odin-apple/PROVENANCE.md",
+        "skills_root": "packages/odin-apple/skills"
+      }
+    },
+    {
+      "index": 26,
+      "id": "odin-lean",
+      "kind": "runtime",
+      "package": "@outlinedriven/odin-lean",
+      "display_name": "ODIN Lean",
+      "description": "ODIN Lean-specific workflows for bounded, inspectable, verified change.",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "claude-code",
+        "agent-skills",
+        "lean"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": {
+        "source": "npm",
+        "package": "@outlinedriven/odin-lean",
+        "version": "2.0.0",
+        "registry": "https://registry.npmjs.org"
+      },
+      "directory": "packages/odin-lean",
+      "files_variant": "runtime",
+      "paths": {
+        "package_json": "packages/odin-lean/package.json",
+        "plugin_manifest": "packages/odin-lean/.claude-plugin/plugin.json",
+        "readme": "packages/odin-lean/README.md",
+        "license": "packages/odin-lean/LICENSE",
+        "provenance": "packages/odin-lean/PROVENANCE.md",
+        "skills_root": "packages/odin-lean/skills"
+      }
+    },
+    {
+      "index": 27,
+      "id": "odin-terraform",
+      "kind": "runtime",
+      "package": "@outlinedriven/odin-terraform",
+      "display_name": "ODIN Terraform",
+      "description": "ODIN Terraform-specific workflows for bounded, inspectable, verified change.",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "claude-code",
+        "agent-skills",
+        "terraform"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": {
+        "source": "npm",
+        "package": "@outlinedriven/odin-terraform",
+        "version": "2.0.0",
+        "registry": "https://registry.npmjs.org"
+      },
+      "directory": "packages/odin-terraform",
+      "files_variant": "runtime",
+      "paths": {
+        "package_json": "packages/odin-terraform/package.json",
+        "plugin_manifest": "packages/odin-terraform/.claude-plugin/plugin.json",
+        "readme": "packages/odin-terraform/README.md",
+        "license": "packages/odin-terraform/LICENSE",
+        "provenance": "packages/odin-terraform/PROVENANCE.md",
+        "skills_root": "packages/odin-terraform/skills"
+      }
+    },
+    {
+      "index": 28,
+      "id": "odin-bigquery",
+      "kind": "runtime",
+      "package": "@outlinedriven/odin-bigquery",
+      "display_name": "ODIN BigQuery",
+      "description": "ODIN BigQuery-specific workflows for bounded, inspectable, verified change.",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "claude-code",
+        "agent-skills",
+        "bigquery"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": {
+        "source": "npm",
+        "package": "@outlinedriven/odin-bigquery",
+        "version": "2.0.0",
+        "registry": "https://registry.npmjs.org"
+      },
+      "directory": "packages/odin-bigquery",
+      "files_variant": "runtime",
+      "paths": {
+        "package_json": "packages/odin-bigquery/package.json",
+        "plugin_manifest": "packages/odin-bigquery/.claude-plugin/plugin.json",
+        "readme": "packages/odin-bigquery/README.md",
+        "license": "packages/odin-bigquery/LICENSE",
+        "provenance": "packages/odin-bigquery/PROVENANCE.md",
+        "skills_root": "packages/odin-bigquery/skills"
+      }
+    },
+    {
+      "index": 29,
+      "id": "odin-prometheus",
+      "kind": "runtime",
+      "package": "@outlinedriven/odin-prometheus",
+      "display_name": "ODIN Prometheus",
+      "description": "ODIN Prometheus-specific workflows for bounded, inspectable, verified change.",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "claude-code",
+        "agent-skills",
+        "prometheus"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": {
+        "source": "npm",
+        "package": "@outlinedriven/odin-prometheus",
+        "version": "2.0.0",
+        "registry": "https://registry.npmjs.org"
+      },
+      "directory": "packages/odin-prometheus",
+      "files_variant": "runtime",
+      "paths": {
+        "package_json": "packages/odin-prometheus/package.json",
+        "plugin_manifest": "packages/odin-prometheus/.claude-plugin/plugin.json",
+        "readme": "packages/odin-prometheus/README.md",
+        "license": "packages/odin-prometheus/LICENSE",
+        "provenance": "packages/odin-prometheus/PROVENANCE.md",
+        "skills_root": "packages/odin-prometheus/skills"
+      }
+    }
+  ]
+}

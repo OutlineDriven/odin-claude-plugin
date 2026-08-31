@@ -1,0 +1,39 @@
+{
+  "name": "@outlinedriven/odin",
+  "version": "2.0.0",
+  "description": "Choose ODIN modules with the OutlineDriven universal installer.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "claude-code",
+    "installer",
+    "catalog"
+  ],
+  "homepage": "https://github.com/OutlineDriven/outline-driven",
+  "bugs": {
+    "url": "https://github.com/OutlineDriven/odin-claude-plugin/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OutlineDriven/odin-claude-plugin.git",
+    "directory": "packages/odin"
+  },
+  "license": "SEE LICENSE IN PROVENANCE.md",
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "files": [
+    ".claude-plugin",
+    "PROVENANCE.md"
+  ],
+  "exports": {
+    "./plugin.json": "./.claude-plugin/plugin.json",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org",
+    "provenance": true
+  }
+}

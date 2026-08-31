@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "odin-design-advanced",
+  "displayName": "ODIN Design Advanced",
+  "version": "2.0.0",
+  "description": "ODIN advanced design workflows for bounded, inspectable, verified change.",
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "repository": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "license": "SEE LICENSE IN PROVENANCE.md",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "claude-code",
+    "agent-skills",
+    "design",
+    "advanced"
+  ],
+  "skills": "./skills/"
+}

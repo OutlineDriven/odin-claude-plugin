@@ -1,0 +1,19 @@
+{
+  "name": "@outlinedriven/odin-workspace",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "generate:package-surfaces": "node scripts/render-package-surfaces.mjs",
+    "generate:package-provenance": "node scripts/render-package-provenance.mjs",
+    "check:package-surfaces": "node scripts/check-package-surfaces.mjs",
+    "check:package-provenance": "node scripts/check-package-provenance.mjs",
+    "check:claude": "node scripts/validate-claude-surfaces.mjs",
+    "check:marketplace-sources:workspace": "node scripts/resolve-marketplace-sources.mjs --mode=workspace",
+    "check:package-tarballs": "node scripts/pack-packages.mjs --check",
+    "check": "npm run check:package-surfaces && npm run check:package-provenance && npm run check:claude && npm run check:marketplace-sources:workspace && npm run check:package-tarballs",
+    "release:publish": "node scripts/publish-packages.mjs",
+    "release:verify": "node scripts/resolve-marketplace-sources.mjs --mode=registry"
+  }
+}
