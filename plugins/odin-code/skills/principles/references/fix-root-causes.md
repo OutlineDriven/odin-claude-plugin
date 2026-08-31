@@ -1,6 +1,6 @@
 # Fix root causes — procedure
 
-The diagnosis procedure behind the anchor. For the guarded repair loop with retry budgets, use `fix`; this file governs finding and removing the cause.
+The diagnosis procedure behind the anchor. For the guarded repair loop with retry budgets, use `strike-the-root`; this file governs finding and removing the cause.
 
 1. Restate the defect as expected vs actual in one sentence. A request for new behavior is a feature change, not a defect — stop.
 2. Reproduce before any edit: build the smallest failing command, test, or scripted step. A fix for a failure you never observed cannot be verified. Done when: the reproduction fails now.

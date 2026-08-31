@@ -46,9 +46,9 @@ fi
 
 **Explicit-base override**: when the user invokes `simplify against <ref>`, the orchestrator bypasses `resolve_base` and runs `git --no-pager diff "<ref>"` directly. The `<ref>` is any revision spec git accepts (`HEAD~5`, a SHA, a branch name, a tag).
 
-## Phase 2: single-message dispatch shape
+## Phase 2: single `task` call dispatch shape
 
-The orchestrator issues **one** tool-call message containing three Agent invocations, never three sequential messages. Each invocation receives a prompt built as:
+The orchestrator issues a single `task` tool call with a `tasks` array of three items, never three sequential messages. Each item receives a prompt built as:
 
 ```
 <axis prompt from references/<axis>.md, verbatim>
@@ -120,7 +120,7 @@ Surface the failure mode (exit 13) and stop the simplify run for the affected co
 
 ## Post-fix audit (no new bloat)
 
-After the final commit, audit the simplify patch itself for unneeded surface, duplicated logic, structure without cause, or a broken consumer contract. Any hit → revert the entire simplify chain via `git revert <first-simplify-commit>..HEAD --no-edit` and exit 14. The orchestrator may re-plan and re-invoke.
+After the final commit, audit the simplify patch itself for unneeded surface, duplicated logic, structure without cause, or a broken consumer contract. Any hit → revert the entire simplify chain via `git revert <first-simplify-commit>^..HEAD --no-edit` and exit 14. The orchestrator may re-plan and re-invoke.
 
 ## Exit code summary (matches SKILL.md)
 

@@ -1,6 +1,6 @@
 ---
 name: trailmark-summary
-description: 'Run a read-only Trailmark summary on a target directory and return detected languages, Entrypoints, and Dependencies. Not for detailed structural analysis — use trailmark-structural; not for full graph queries — use trailmark-code-graph; not for source or remote-system changes.'
+description: 'Use when a quick structural overview of a target directory is needed before deeper codebase analysis. Runs a read-only Trailmark summary returning detected languages, Entrypoints, and Dependencies. Not for detailed structural analysis — use trailmark-structural; not for full graph queries — use build-program-graph; not for source or remote-system changes.'
 ---
 
 # Trailmark summary
@@ -49,4 +49,4 @@ Non-mutation rule: the skill writes nothing anywhere, so there is nothing to rol
 
 ## Output
 
-A report containing the detected language list, the full `trailmark analyze --language auto --summary` output including its `Entrypoints:` and `Dependencies:` lines, and the trailmark version in the metadata when captured — or a terminal gap classification (`trailmark is not installed`, `Trailmark found no supported languages under target`, or the named missing-field gap).
+A report containing the detected language list, the full `trailmark analyze --language auto --summary` output including its `Entrypoints:` and `Dependencies:` lines, and the trailmark version in the metadata when captured. Or a terminal gap classification: `trailmark is not installed`, `Trailmark found no supported languages under target`, or the named missing-field gap.

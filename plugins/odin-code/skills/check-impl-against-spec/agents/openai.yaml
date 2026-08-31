@@ -1,3 +1,0 @@
-interface:
-  display_name: "Check Impl Against Spec"
-  short_description: "Use during PR review when checked-in spec context exists in the"

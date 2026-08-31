@@ -4,8 +4,8 @@ Action class describes the **intrinsic shape** of follow-up work; it is routing 
 
 | Action class | Meaning | Route |
 |--------------|---------|-------|
-| **safe** | Mechanical, behavior-preserving, single-site; the fix is unambiguous. | `fix` (unattended). |
-| **gated** | The fix is clear but touches a contract or multiple sites; needs verified batches and a resolve gate. | `review-fix-grill-loop`. |
+| **safe** | Mechanical, behavior-preserving, single-site; the fix is unambiguous. | Apply directly (unattended). |
+| **gated** | The fix is clear but touches a contract or multiple sites; needs verified batches and a resolve gate. | `audit-project`. |
 | **manual** | Needs a human design decision; no single correct fix. | Surface as a question; no auto-route. |
 | **advisory** | Opinion or nit; recording it is the whole action. | None. |
 

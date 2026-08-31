@@ -30,7 +30,7 @@ Required:
    - Hardcoded branch paths that duplicate a general case.
    - Numeric or string domain constants used as inline guards.
    For each found artifact, either refactor the boolean branch into a data-driven lookup, merge the special case into the general path, or convert the magic constant into a named constant with a documented invariant. **Done when:** no boolean flags, hardcoded duplicate branches, or inline magic constants remain.
-5. **Re-validate.** Run all named invariant checks against the refined artifact. If any check fails, halt with `INVARIANT-FAIL: <identifier>` listing the specific failure. Record the complete set of removed special-case artifacts as the resolution log. **Done when:** all invariant checks pass and the resolution log is complete.
+5. **Re-validate.** Run checks by compiling the target in its language-native build and running the existing test suite scoped to the target. If the project has no compile step, run the test suite alone. If any check fails, halt with `INVARIANT-FAIL: <identifier>` listing the specific failure. Record the complete set of removed special-case artifacts as the resolution log. **Done when:** all invariant checks pass and the resolution log is complete.
 
 ## Failure and recovery
 | Failure class | Condition | Result |
@@ -39,7 +39,7 @@ Required:
 | INVARIANT-FAIL | A named invariant check fails | Stop. Artifact unchanged. Report `<identifier>`. |
 | SPECIAL-CASE-INCOMPLETE | Not all special-case artifacts resolved | Stop. Report the unresolved set. |
 
-Partial-result rule: no file is written until all steps complete without failure. Rollback path: `git restore TARGET` or delete the written artifact.
+Partial-result rule: in-place edits to the target are rolled back via VCS on failure. Run `git restore TARGET` to revert the working copy to its pre-edit state. If the target was a new file, delete it instead. No partial result is emitted.
 
 ## Output
 The target local artifact replaced with its invariant-first refinement, plus a resolution log listing every removed special case and the invariant identifier that now governs its behavior.

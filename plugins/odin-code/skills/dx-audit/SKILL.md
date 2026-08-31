@@ -1,6 +1,6 @@
 ---
 name: dx-audit
-description: 'Use when auditing the developer-facing surface of a CLI, SDK, library, or package across API contracts, errors, CLI behavior, public types, onboarding, and config. Returns bounded, severity-tiered findings with root-cause analysis and committable fixes.'
+description: 'Use when auditing the developer-facing surface of a CLI, SDK, library, or package: API contracts, errors, CLI behavior, public types, onboarding, and config. Returns bounded, severity-tiered findings with root-cause analysis and committable fixes.'
 ---
 
 # DX audit
@@ -16,7 +16,7 @@ description: 'Use when auditing the developer-facing surface of a CLI, SDK, libr
 
 ## Inputs
 
-Required: the developer-facing surface to audit — a named CLI command, exported API, package, error path, config loader, or the changed public surface from a diff.
+Required: the developer-facing surface to audit, a named CLI command, exported API, package, error path, config loader, or the changed public surface from a diff.
 
 Optional: a comparison baseline or prior release contract when the diff changes a public export, signature, or return shape.
 
@@ -39,7 +39,7 @@ Optional: a comparison baseline or prior release contract when the diff changes 
    For a public API entry point, audit the API, types, and reached error paths. For a CLI, audit the CLI and reached error paths. For exported declarations, audit types and include API only when behavior changes. For install and first run, audit onboarding. For config loaders, audit config and reached error paths. Done when: categories are selected candidate-first with applicability outranking global priority.
 
 5. **Capability-gate within selected categories.** Structured JSON input and schema introspection apply when automation or agent use is promised, requested, or already supported. Dry-run and confirmation apply to destructive, expensive, or difficult-to-reverse mutations. Progress, delta polling, and resume apply to operations that can block, outlive one command, or be retried after ambiguous output. `stdin` applies when the command semantically accepts file or stream data. Stable-contract comparison applies only when a public contract changed. Done when: capability gates are applied within each selected category.
-6. **Rank root causes, not instances.** CRITICAL findings first, then HIGH, then MEDIUM. Merge repeated instances of one root cause into one finding with up to three representative locations. Do not flag a hypothetical missing feature with no current consumer path — YAGNI is not a defect. Do not turn absence of JSDoc, error codes, or a flag into one finding per symbol or command. In targeted mode, report all CRITICAL findings, then the highest-value remaining findings up to five total; summarize any remainder by category rather than expanding the audit. Done when: findings are ranked by root cause with CRITICAL first and repeated instances merged.
+6. **Rank root causes, not instances.** CRITICAL findings first, then HIGH, then MEDIUM. Merge repeated instances of one root cause into one finding with up to three representative locations. Do not flag a hypothetical missing feature with no current consumer path; YAGNI is not a defect. Do not turn absence of JSDoc, error codes, or a flag into one finding per symbol or command. In targeted mode, report all CRITICAL findings, then the highest-value remaining findings up to five total; summarize any remainder by category rather than expanding the audit. Done when: findings are ranked by root cause with CRITICAL first and repeated instances merged.
 7. **Verify on the same scope.** Re-open every cited location, rerun the same safe probes and focused project checks, and reapply the same category checks. A clean build alone does not prove CLI behavior; a runtime probe alone does not prove exported types. Verification evidence must match the finding. Done when: every cited location is re-verified with matching evidence.
 
 ## Failure and recovery

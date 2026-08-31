@@ -51,8 +51,8 @@ Use this **canonical skeleton** for deep-mode review output. Copy the section st
 
 | # | File | Issue | Route | Notes |
 |---|------|-------|-------|-------|
-| 1 | `orders_controller.rb:42` | Ownership check missing on export lookup | `gated -> review-fix-grill-loop` | `suggested-route` present -- caller decides whether to apply |
-| 2 | `export_service.rb:87` | Unbounded memory on export | `safe -> fix` | Mechanical: add `find_each` |
+| 1 | `orders_controller.rb:42` | Ownership check missing on export lookup | `gated -> audit-project` | `suggested-route` present -- caller decides whether to apply |
+| 2 | `export_service.rb:87` | Unbounded memory on export | `safe -> apply` | Mechanical: add `find_each` |
 
 ### Pre-existing Issues
 

@@ -1,11 +1,11 @@
 ---
 name: principles
-description: 'Anchor register of 21 working principles. Use when a request names a law (subtract before you add, idempotent operations, never block on the human) or asks which principle governs a decision. Law and bite point only; not for running a repair — use fix.'
+description: 'Anchor register of 21 working principles. Use when a request names a law (subtract before you add, idempotent operations, never block on the human) or asks which principle governs a decision. Law and bite point only; not for running a repair, use fix.'
 ---
 
 # Principles
 
-Indexed anchor register: 21 named principles, each a law plus the moment it bites. Read the index, jump to the anchor, apply the law. Anchors govern judgment; the owning skills (`fix`, `debug`, `architect`, `deslop`) own mechanics — come here to decide, not to run a repair.
+Indexed anchor register: 21 named principles, each a law plus the moment it bites. Read the index, jump to the anchor, apply the law. Principles governs judgment only and never executes or mutates. When an anchor requires mutation or execution, route the user to the owning skill (`fix`, `debug`, `architect`, `deslop`, `commit`, `ci-cd`) instead of instructing execution. Come here to decide, not to run a repair.
 
 Five anchors carry procedure-dense references (linked inline); the rest are complete at anchor length.
 
@@ -43,7 +43,7 @@ Land obsolete-code deletions as their own green commit before the addition or re
 
 **Bites when** an addition or rewrite lands on code the new design obsoletes.
 
-The deletion commit is the recovery anchor: if the gate fails after deletion, revert it and abort the addition; if it fails after the addition, fix forward — never revert the subtraction to mask an addition bug. Announce the deletion set and get confirmation before staging; a narrowed-to-empty set skips straight to the addition.
+The deletion commit is the recovery anchor: if the gate fails after deletion, revert it and abort the addition; if it fails after the addition, fix forward, never revert the subtraction to mask an addition bug. Announce the deletion set and get confirmation before staging; a narrowed-to-empty set skips straight to the addition. When this anchor requires landing commits, route to `commit`.
 
 ### Sequence verifiable units
 
@@ -59,7 +59,7 @@ Execute a planned migration stepwise against a rollback anchor, verifying each s
 
 **Bites when** a plan names a target architecture and the intermediate breakage is reversible.
 
-Establish the anchor before the first mutation; release it only after the end state verifies. Procedure and failure codes: `references/outcome-oriented-execution.md`.
+Establish the anchor before the first mutation; release it only after the end state verifies. Procedure and failure codes: `references/outcome-oriented-execution.md`. When this anchor requires executing the migration, route to `fix`.
 
 ### Migrate callers, then delete
 
@@ -67,7 +67,7 @@ Replace an internal API by migrating every caller in one wave, proving zero refe
 
 **Bites when** an API replacement is scoped and every caller is enumerable.
 
-A missed caller after deletion → restore from VCS, migrate it, redo the verify-and-delete. An ambiguous caller halts the wave before any mutation.
+A missed caller after deletion → restore from VCS, migrate it, redo the verify-and-delete. An ambiguous caller halts the wave before any mutation. When this anchor requires executing the migration, route to `architect`.
 
 ### Redesign from first principles
 
@@ -75,7 +75,7 @@ Integrate a new requirement by resolving it against named invariants and propaga
 
 **Bites when** a requirement lands that the current structure only half-fits.
 
-Name the invariants first; a conflict is resolved by revising the principle or reshaping the requirement — never suppressed. Partial propagation is a stop, not a done.
+Name the invariants first; a conflict is resolved by revising the principle or reshaping the requirement, never suppressed. Partial propagation is a stop, not a done. When this anchor requires propagating structural edits, route to `architect`.
 
 ## Levers and enforcement
 
@@ -85,7 +85,7 @@ For non-trivial repetitive work: do the first unit by hand, codify the recipe in
 
 **Bites when** work repeats and is more than a couple of obvious edits.
 
-Pick the artifact by intent: edits → codemod; repeated files → generator; analysis → structured query; verification → rerunnable check with an explicit pass/fail contract. Commit the lever when the work outlives the session; a reviewer must be able to rerun it without session context.
+Pick the artifact by intent: edits → codemod; repeated files → generator; analysis → structured query; verification → rerunnable check with an explicit pass/fail contract. Commit the lever when the work outlives the session; a reviewer must be able to rerun it without session context. When this anchor requires building and committing the lever, route to `commit`.
 
 ### Idempotent operations
 
@@ -101,7 +101,7 @@ Turn a repeated instruction into an enforcement artifact (lint rule, check, CI g
 
 **Bites when** the same correction has been given more than once and a mechanism can catch it.
 
-One violation per artifact; prove it fails before the fix and passes after; name the rollback. No preemptive rules without a named violation.
+One violation per artifact; prove it fails before the fix and passes after; name the rollback. No preemptive rules without a named violation. When this anchor requires creating CI gates or lint rules, route to `ci-cd`.
 
 ## Truth and proof
 
@@ -119,7 +119,7 @@ Completion claims require captured output from a real artifact, not a mock: stat
 
 **Bites when** about to claim done.
 
-Verification contradicting the claim stops the run — no re-running hoping for a different result, no substituting a test double, no claiming done while the reproduction fails.
+Verification contradicting the claim stops the run: no re-running hoping for a different result, no substituting a test double, no claiming done while the reproduction fails.
 
 ## Types and boundaries
 
@@ -129,7 +129,7 @@ Encode stateful, branch-heavy logic as a typed state machine so illegal states a
 
 **Bites when** flags and booleans track domain progress.
 
-Enumerate states and transitions before writing types; one constructor per live state; validate reachability and migrate every caller — unmigrated call sites mean not done.
+Enumerate states and transitions before writing types; one constructor per live state; validate reachability and migrate every caller, unmigrated call sites mean not done. When this anchor requires encoding the state machine in code, route to `architect`.
 
 ### Type system discipline
 
@@ -161,7 +161,7 @@ Fix shared-write races by splitting per-actor state out of shared scope before c
 
 **Bites when** two or more actors write one mutable location.
 
-Shared residue gets the narrowest primitive that covers the write path; a merge that cannot be expressed without a papering-over lock is a stop, not a lock. Procedure and failure classes: `references/separate-before-serializing.md`.
+Shared residue gets the narrowest primitive that covers the write path; a merge that cannot be expressed without a papering-over lock is a stop, not a lock. Procedure and failure classes: `references/separate-before-serializing.md`. When this anchor requires executing the split, route to `fix`.
 
 ## Economy
 
@@ -179,7 +179,7 @@ Collapse pass-through layers and narrow scopes until a fresh reader traces each 
 
 **Bites when** reading cost, not behavior, is the problem.
 
-A forwarder survives only if it adds behavior, guards a boundary, or carries a needed name. An edit that changes behavior is restored immediately.
+A forwarder survives only if it adds behavior, guards a boundary, or carries a needed name. An edit that changes behavior is restored immediately. When this anchor requires executing the collapse, route to `deslop`.
 
 ### Experience first
 
@@ -213,4 +213,4 @@ Keep raw payload (full files, bulk search results) out of main context; delegate
 
 **Bites when** context fills and reasoning room shrinks.
 
-If the payload cannot be distilled into a decision, say so — do not pretend the context is clean.
+If the payload cannot be distilled into a decision, say so; do not pretend the context is clean.

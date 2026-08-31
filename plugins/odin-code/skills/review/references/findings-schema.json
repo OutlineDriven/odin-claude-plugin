@@ -58,11 +58,11 @@
           "action-class": {
             "type": "string",
             "enum": ["safe", "gated", "manual", "advisory"],
-            "description": "Routing hint: safe = fix unattended; gated = needs verified batches; manual = needs design decision; advisory = report-only."
+            "description": "Routing hint: safe = apply directly unattended; gated = route to audit-project; manual = needs design decision; advisory = report-only."
           },
           "suggested-route": {
             "type": "string",
-            "enum": ["fix", "review-fix-grill-loop", "none"],
+            "enum": ["apply", "audit-project", "none"],
             "description": "Where the fix belongs"
           },
           "evidence": {
@@ -92,8 +92,8 @@
       "P3": "No behavioral impact: style, naming, micro-optimization with no measured win. Advisory."
     },
     "action_classes": {
-      "safe": "Mechanical, behavior-preserving, single-site, unambiguous fix. Route to fix.",
-      "gated": "Clear fix but touches a contract or multiple sites. Route to review-fix-grill-loop.",
+      "safe": "Mechanical, behavior-preserving, single-site, unambiguous fix. Apply directly (unattended).",
+      "gated": "Clear fix but touches a contract or multiple sites. Route to audit-project.",
       "manual": "Needs a human design decision. Surface as a question.",
       "advisory": "Opinion or nit. Recording it is the action."
     }

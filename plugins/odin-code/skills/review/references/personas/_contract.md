@@ -15,8 +15,8 @@ A finding with no nameable reachable impact is P3. "Looks wrong" is not P0.
 
 ## Action class: routing advice (no fix is applied here)
 
-- **safe**: mechanical, behavior-preserving, single-site, unambiguous fix → route `fix`.
-- **gated**: clear fix but touches a contract or multiple sites → route `review-fix-grill-loop`.
+- **safe**: mechanical, behavior-preserving, single-site, unambiguous fix → apply directly (unattended).
+- **gated**: clear fix but touches a contract or multiple sites → route `audit-project`.
 - **manual**: needs a human design decision; no single correct fix → surface as a question, route `none`.
 - **advisory**: opinion/nit; recording it is the action → route `none`.
 
@@ -45,7 +45,7 @@ findings:
     behavioral-impact: <the observable failure this causes, or "none — advisory">
     confidence: high | med | low
     action-class: safe | gated | manual | advisory
-    suggested-route: fix | review-fix-grill-loop | none
+    suggested-route: apply | audit-project | none
     evidence: <path:line citation or a one-line repro>
 ```
 

@@ -45,7 +45,7 @@ Derived from the diff:
 
    Done when: the diff is captured or an exit code is returned.
 
-2. **Phase 2: Dispatch three review agents in one message.** Issue one tool-call message containing three Agent invocations, never three sequential messages. Each agent receives `<axis-prompt from references/> + "\n\n---\n\nDIFF:\n" + <captured diff>`. All three agents are read-only; disjoint axes; independence asserted in the spawn message:
+2. **Phase 2: Dispatch three review agents in one `task` call.** Issue a single `task` tool call with a `tasks` array of three items, never three sequential messages. Each agent receives `<axis-prompt from references/> + "\n\n---\n\nDIFF:\n" + <captured diff>`. All three agents are read-only; disjoint axes; independence asserted in the spawn message:
    > "Three agents dispatched in parallel. Axes are disjoint by construction: reuse-axis owns Graft (existing-utility detection), quality-axis owns Excess + Sprawl on code shape, efficiency-axis owns Excess + Sprawl on execution cost. All three agents are read-only; none edits files; none reads or writes shared mutable state."
 
    Agent type: `Explore` (read-only).
@@ -68,7 +68,7 @@ Derived from the diff:
 
    Commit message format: capitalized imperative subject, ≤50 chars target, ≤72 hard, no trailing period.
 
-   After the final commit, audit the simplify patch itself for unneeded surface, duplicated logic, structure without cause, or a broken consumer contract. If the audit finds any, revert the entire simplify chain via `git revert <first-simplify-commit>..HEAD --no-edit` and exit 14.
+   After the final commit, audit the simplify patch itself for unneeded surface, duplicated logic, structure without cause, or a broken consumer contract. If the audit finds any, revert the entire simplify chain via `git revert <first-simplify-commit>^..HEAD --no-edit` and exit 14.
 
    Done when: all survivor commits are applied and green, or an exit code is returned.
 
@@ -84,7 +84,7 @@ Derived from the diff:
 
 Partial-result rule: commits already landed before a failure remain. A rollback does not revert previously successful class commits.
 
-Non-mutation rule: sequential dispatch (not one tool-call message with three agents) is rejected at the validation gate before any agent runs.
+Non-mutation rule: sequential dispatch (not a single `task` call with a `tasks` array of three items) is rejected at the validation gate before any agent runs.
 
 ## Output
 Terminal classification with an exit code. On exit 0: the change-set is compressed along reuse / quality / efficiency axes with one atomic commit per issue class, every fix commit green, and no new bloat introduced.

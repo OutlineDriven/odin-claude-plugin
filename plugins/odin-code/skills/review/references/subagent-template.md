@@ -27,7 +27,7 @@ You produce a compact return to the parent with findings matching the schema:
 - `severity`: one of `P0`, `P1`, `P2`, `P3`.
 - `confidence`: one of `high`, `med`, `low`.
 - `action-class`: one of `safe`, `gated`, `manual`, `advisory`.
-- `suggested-route`: one of `fix`, `review-fix-grill-loop`, `none`.
+- `suggested-route`: one of `apply`, `audit-project`, `none`.
 - `evidence`: a `path:line` citation or a one-line repro.
 
 **Confidence rubric — use these behavioral anchors:**

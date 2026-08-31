@@ -1,6 +1,6 @@
 ---
 name: resolve-merge-conflicts
-description: 'Use when a merge, rebase, cherry-pick, or stash pop stops on conflicts. Read both intents from primary sources, resolve every hunk, verify with scoped checks, and finish the integration. Don''t use for people-mediation conflicts — use culture-conflict-mediation.'
+description: 'Use when a merge, rebase, cherry-pick, or stash pop stops on conflicts. Read both intents from primary sources, resolve every hunk, verify with scoped checks, and finish the integration. Not for people-mediation conflicts — use culture-conflict-mediation.'
 ---
 
 # Resolve merge conflicts
@@ -10,8 +10,8 @@ description: 'Use when a merge, rebase, cherry-pick, or stash pop stops on confl
 | Field | Bound contract |
 |---|---|
 | Trigger | A merge, rebase, cherry-pick, or stash pop stops on conflicts: `git` exits with unmerged paths. |
-| Authority | Reversible local writes: edits to conflicted files, `git add` of resolved hunks, committing the integration to completion, scoped validation. No push, no tag, no force-push, no history rewrite. Rollback: `git merge --abort`, `git rebase --abort`, `git cherry-pick --abort`, or `git checkout -- <file>` before staging. |
-| Side effect | Edits conflicted files, stages resolutions, regenerates lockfiles with package manager tooling, runs scoped checks, commits the merge/rebase/cherry-pick to completion. |
+| Authority | Reversible local writes: edits to conflicted files, `git add` of resolved hunks, package lock regeneration, scoped check execution, and integration continuation (committing a merge, `git rebase --continue`, `git cherry-pick --continue`, `git stash drop`). No push, no tag, no force-push. Rollback: `git merge --abort`, `git rebase --abort`, `git cherry-pick --abort`, or `git checkout -- <file>` before staging. |
+| Side effect | Edits conflicted files, stages resolutions, regenerates lockfiles with package manager tooling, runs scoped checks, completes the in-progress integration. |
 | Done | No unmerged paths, no conflict markers in any tracked file, scoped checks pass, integration is committed and complete. |
 
 ## Refusal
@@ -28,10 +28,10 @@ Optional context:
 
 ## Procedure
 
-1. **Detect the conflict state.** Run `git status`. Identify which integration is in progress — merge, rebase, cherry-pick, or stash pop — and enumerate the unmerged paths. If zero unmerged paths, the trigger condition is not met; stop.
+1. **Detect the conflict state.** Run `git status`. Identify which integration is in progress (merge, rebase, cherry-pick, or stash pop) and enumerate the unmerged paths. If zero unmerged paths, the trigger condition is not met; stop.
    *Done when: the conflict-stop type is named and every unmerged path is listed.*
 
-2. **Gather context for each conflicted file.** Read the three versions — ancestor (`:1:`), theirs (`:2:`), yours (`:3:`) — via `git show`. Use `read` with the `:conflicts` selector to enumerate marker blocks; fall back to ranged `read` calls for files the selector returns empty. Use `difft` for side-by-side comparison when either intent is unclear.
+2. **Gather context for each conflicted file.** Read the three versions, ancestor (`:1:`), theirs (`:2:`), yours (`:3:`), via `git show`. Use `read` with the `:conflicts` selector to enumerate marker blocks; fall back to ranged `read` calls for files the selector returns empty. Use `difft` for side-by-side comparison when either intent is unclear.
    *Done when: every conflicted file's three versions and conflict-marker blocks have been examined.*
 
 3. **Read the primary sources for both sides.** Read the commit messages, pull requests, and original issues or tickets for both changes. State why each side exists in one sentence before editing any hunk. If neither side's commit, PR, or linked issue expresses a clear intent, stop and report the ambiguous files, asking the human to supply the missing intent before continuing; do not guess an intent to drive the resolution.

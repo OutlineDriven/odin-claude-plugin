@@ -1,3 +1,3 @@
 interface:
   display_name: "CI Cd"
-  short_description: "Use when asked to set up or modify CI/CD pipelines, quality"
+  short_description: "Use when setting up or modifying CI/CD pipelines, quality"

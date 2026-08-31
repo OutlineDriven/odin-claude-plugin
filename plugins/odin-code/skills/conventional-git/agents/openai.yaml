@@ -1,3 +1,0 @@
-interface:
-  display_name: "Conventional Git"
-  short_description: "Use when a user asks to create branches/worktrees, make"

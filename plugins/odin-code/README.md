@@ -2,7 +2,7 @@
 
 ODIN workflows for writing, reviewing, and maintaining code.
 
-55 skills, category Coding.
+52 skills, category Coding.
 
 ## Install
 
@@ -20,7 +20,6 @@ codex plugin add odin-code@odin-marketplace
 
 - api-and-interface-design
 - ast-grep
-- check-impl-against-spec
 - ci-cd
 - ci-fix
 - classify-ci-failure
@@ -30,7 +29,6 @@ codex plugin add odin-code@odin-marketplace
 - commit-economy
 - constraint-driven-development
 - contract-driven
-- conventional-git
 - create-branch
 - deps-upgrade
 - deslop
@@ -47,7 +45,6 @@ codex plugin add odin-code@odin-marketplace
 - no-comments
 - observability
 - offense
-- package-native-pre-commit
 - planning-and-task-breakdown
 - principles
 - reproduce-and-fix-issues

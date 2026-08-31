@@ -1,11 +1,11 @@
 ---
 name: review
-description: 'Use when asked to review changes, find bugs, or audit a branch. Standard mode produces a severity-graded validated-findings report; depth mode fans out parallel bug/security and quality reviewers and synthesizes a unified verdict. Not for an iterative review-and-fix loop — use review-fix-grill-loop.'
+description: 'Use when asked to review a pull request, examine code changes, find bugs, or audit a branch. Standard mode produces a severity-graded validated-findings report with concrete fixes; depth mode fans out parallel bug/security and quality reviewers and synthesizes a unified verdict. Not for an iterative review-and-fix loop — use audit-project.'
 ---
 
 # Severity-graded review
 
-Two modes share one authority (read-only) and one evidence bar: every finding cites concrete code evidence, no invented issues, no style-only findings. Standard mode is a single-pass severity-graded review of a supplied diff, snippet, or branch. Depth mode fans out two parallel reviewers — bug/security and code quality — and synthesizes a deduplicated unified verdict.
+Two modes share one authority (read-only) and one evidence bar: every finding cites concrete code evidence, no invented issues, no style-only findings. Standard mode is a single-pass severity-graded review of a supplied diff, snippet, or branch. Depth mode fans out two parallel reviewers, bug/security and code quality, and synthesizes a deduplicated unified verdict.
 
 ## Contract
 
@@ -59,8 +59,8 @@ Every finding, in either mode, must cite specific code locations, line ranges, o
 
 1. **Confirm scope.** Confirm the diff range, PR number, or commit range to audit. Stop if scope cannot be determined. Done when: the audit scope is confirmed or the run stops with scope-unresolvable.
 2. **Fan out two simultaneous reviewers.**
-   - Reviewer A — bug and security audit: reads the scope, identifies defect, security, and regression findings, produces a severity-ordered list.
-   - Reviewer B — code quality audit: reads the scope, identifies maintainability, style, and structural quality findings, produces a severity-ordered list.
+   - Reviewer A, bug and security audit: reads the scope, identifies defect, security, and regression findings, produces a severity-ordered list.
+   - Reviewer B, code quality audit: reads the scope, identifies maintainability, style, and structural quality findings, produces a severity-ordered list.
    Both reviewers operate under the same read-only authority and the shared evidence bar. Neither reviewer makes changes. Done when: both reviewers are spawned with their audit assignments and read-only authority.
 3. **Wait for both reviewers.** Done when: both reviewers have returned their findings lists.
 4. **Handle partial failure.** If either reviewer fails or returns empty after retry, report the partial result from the surviving reviewer with the failure identified. Done when: both reviewers returned, or the surviving reviewer's partial result is reported with the failure identified.

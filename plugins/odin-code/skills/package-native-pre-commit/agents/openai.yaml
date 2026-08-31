@@ -1,3 +1,0 @@
-interface:
-  display_name: "Package Native Pre Commit"
-  short_description: "Use when a repo needs package-manager-native commit-time checks."
