@@ -10,6 +10,9 @@
 //       == dir name, and rows.length == skill_count == dir count.
 //   (b) frontmatter values containing ': ' MUST be single-quoted; unquoted is an error.
 //   (c) display_name uniqueness across every agents/openai.yaml (Set collision check).
+//
+// Frontmatter is parsed with a tiny built-in structural YAML parser (no dependency)
+// so nested and hyphenated keys like metadata.short-description validate correctly.
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -28,6 +31,53 @@ const slugs = readdirSync(skillsDir, { withFileTypes: true })
   .map((d) => d.name)
   .sort();
 
+// --- tiny structural YAML frontmatter parser (no dependency) ---
+// Returns { entries: [{ path, key, value, quoted, raw }], error } or null when
+// there is no frontmatter block.  `path` is a dotted path (e.g. "metadata.short-description").
+// `quoted` is true when the scalar was single- or double-quoted.  Only handles the
+// flat + one-level-nested mapping shape used by SKILL.md frontmatter; flow styles,
+// multi-line scalars, and sequences are out of scope (frontmatter does not use them).
+function parseFrontmatterYaml(text) {
+  if (!text.startsWith("---\n")) return null;
+  const end = text.indexOf("\n---", 4);
+  if (end === -1) return { error: "unterminated frontmatter", entries: [] };
+  const block = text.slice(4, end);
+  const entries = [];
+  const stack = []; // [{ indent, pathPrefix }]
+  for (const line of block.split("\n")) {
+    if (line.trim() === "" || /^\s*#/.test(line)) continue;
+    const indent = line.length - line.trimStart().length;
+    // Pop stack entries whose indent is >= current (siblings or dedent).
+    while (stack.length && stack[stack.length - 1].indent >= indent) stack.pop();
+    const trimmed = line.trimStart();
+    const m = /^([A-Za-z0-9][A-Za-z0-9_-]*):\s?(.*)$/.exec(trimmed);
+    if (!m) continue; // non-key lines (sequence items, etc.) are ignored
+    const key = m[1];
+    const rawVal = m[2];
+    const prefix = stack.length ? stack[stack.length - 1].pathPrefix + "." : "";
+    const path = prefix + key;
+    if (rawVal.trim() === "") {
+      // Nested mapping parent — push onto stack for subsequent indented keys.
+      stack.push({ indent, pathPrefix: path });
+      continue;
+    }
+    let value, quoted = false;
+    const v = rawVal.trim();
+    if (v.startsWith("'") && v.endsWith("'") && v.length >= 2) {
+      value = v.slice(1, -1).replace(/''/g, "'");
+      quoted = true;
+    } else if (v.startsWith('"') && v.endsWith('"') && v.length >= 2) {
+      value = v.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, "\\");
+      quoted = true;
+    } else {
+      value = v;
+      quoted = false;
+    }
+    entries.push({ path, key, value, quoted, raw: rawVal });
+  }
+  return { entries, error: null };
+}
+
 // --- existing route checks: frontmatter presence + name == directory ---
 const badName = [];
 const badFrontmatter = [];
@@ -38,23 +88,21 @@ for (const slug of slugs) {
     continue;
   }
   const text = readFileSync(skillPath, "utf8");
-  if (!text.startsWith("---\n")) {
+  const fm = parseFrontmatterYaml(text);
+  if (fm === null) {
     badFrontmatter.push(`${slug}: no frontmatter block`);
     continue;
   }
-  const end = text.indexOf("\n---", 4);
-  if (end === -1) {
-    badFrontmatter.push(`${slug}: unterminated frontmatter`);
+  if (fm.error) {
+    badFrontmatter.push(`${slug}: ${fm.error}`);
     continue;
   }
-  const fm = text.slice(4, end);
-  const nameLine = fm.split("\n").find((l) => l.startsWith("name:"));
-  if (!nameLine) {
+  const nameEntry = fm.entries.find((e) => e.path === "name");
+  if (!nameEntry) {
     badFrontmatter.push(`${slug}: frontmatter has no name`);
     continue;
   }
-  const name = nameLine.slice(5).trim().replace(/^['"]|['"]$/g, "");
-  if (name !== slug) badName.push(`${slug}: name is ${name}`);
+  if (nameEntry.value !== slug) badName.push(`${slug}: name is ${nameEntry.value}`);
 }
 if (badFrontmatter.length)
   errors.push(
@@ -71,17 +119,13 @@ for (const slug of slugs) {
   const skillPath = join(skillsDir, slug, "SKILL.md");
   if (!existsSync(skillPath)) continue;
   const text = readFileSync(skillPath, "utf8");
-  if (!text.startsWith("---\n")) continue;
-  const end = text.indexOf("\n---", 4);
-  if (end === -1) continue;
-  for (const line of text.slice(4, end).split("\n")) {
-    const m = /^([a-zA-Z_]+):\s?(.*)$/.exec(line);
-    if (!m) continue;
-    const raw = m[2];
-    if (!raw.includes(": ")) continue;
+  const fm = parseFrontmatterYaml(text);
+  if (!fm || fm.error) continue;
+  for (const entry of fm.entries) {
+    if (!entry.raw.includes(": ")) continue;
     // Quoted (single or double) scalars are safe; only plain scalars misparse on ': '.
-    if (!raw.startsWith("'") && !raw.startsWith('"'))
-      badQuote.push(`${slug}: unquoted frontmatter value contains ': ' (${m[1]})`);
+    if (!entry.quoted)
+      badQuote.push(`${slug}: unquoted frontmatter value contains ': ' (${entry.path})`);
   }
 }
 if (badQuote.length)

@@ -12,6 +12,10 @@ import { loadRows } from "./render-package-provenance.mjs";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = join(ROOT, ".release/distribution");
 const RELEASE_VERSION = "2.0.0";
+// The distribution projection (plugins/modules/<id>) lives on this branch, not on
+// main where only packages/<id> exists. Kimi catalog source URLs must point at the
+// ref that actually contains the plugins/modules/ path they reference.
+const DISTRIBUTION_REF = `distribution-candidate/${RELEASE_VERSION}`;
 
 function jsonBytes(value) {
   return `${JSON.stringify(value, null, 2)}\n`;
@@ -104,7 +108,7 @@ function renderKimiCatalog(entries) {
     plugins: entries.map((entry) => ({
       id: entry.id,
       displayName: entry.display_name,
-      source: `${REPOSITORY_URL}/tree/main/plugins/modules/${entry.id}`,
+      source: `${REPOSITORY_URL}/tree/${DISTRIBUTION_REF}/plugins/modules/${entry.id}`,
     })),
   });
 }

@@ -1,4 +1,10 @@
 #!/usr/bin/env node
+// Validates the generated distribution (.release/distribution) and staging
+// (.release/npm/staging) projections against the catalog and provenance ledger.
+// On a clean checkout these generated artifacts are absent (.release/ is
+// gitignored), so the script skips gracefully with a note instead of failing.
+// Run `npm run generate:distribution` (and the pack staging step) first to
+// populate the artifacts and exercise the full assertion set.
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -8,6 +14,12 @@ import { loadRows } from "./render-package-provenance.mjs";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DIST = join(ROOT, ".release/distribution");
 const STAGING = join(ROOT, ".release/npm/staging");
+
+// Clean checkout: .release/ is gitignored and absent until generated.
+if (!existsSync(DIST) && !existsSync(STAGING)) {
+  process.stdout.write("check-distribution: skipped (no generated artifacts; run generate:distribution first)\n");
+  process.exit(0);
+}
 
 function fail(msg) {
   console.error(msg);

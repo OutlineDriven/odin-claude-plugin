@@ -21,6 +21,7 @@ const skillsDir = join(ROOT, "skills");
 // Whole-name literals: the display_name is not token title-casing.
 const NAME_LITERALS = {
   "agents-md": "AGENTS.md",
+  "atomic-issues-prs": "Atomic Issues and PRs",
 };
 
 // Per-token acronym overrides (matched case-insensitively on the lowercased token).
