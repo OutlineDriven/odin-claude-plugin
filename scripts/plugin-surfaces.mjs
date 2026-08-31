@@ -208,6 +208,35 @@ export function renderPluginReadme(catalog, entry, skills) {
   return lines.join("\n");
 }
 
+// The root README states each plugin's category, and a hand-kept copy of the ledger drifts:
+// flipping a category in catalog/plugins.json used to leave the table stale with every gate
+// green. Only the table is generated. The prose around it is authored, so this returns the
+// current file with one region replaced rather than a whole rendered README.
+const ROOT_README_TABLE = /(^## Plugins\n\n)(?:\|[^\n]*\n)+/m;
+
+export function renderRootReadme(catalog, current) {
+  const entries = catalog.entries;
+  const half = Math.ceil(entries.length / 2);
+  const rows = [];
+  for (let i = 0; i < half; i += 1) {
+    const left = entries[i];
+    const right = entries[i + half];
+    const cells = [left.id, left.category];
+    if (right) cells.push(right.id, right.category);
+    else cells.push("", "");
+    rows.push(`| ${cells.join(" | ")} |`);
+  }
+  const table = [
+    "| Plugin | Category | Plugin | Category |",
+    "|---|---|---|---|",
+    ...rows,
+    "",
+  ].join("\n");
+  if (!ROOT_README_TABLE.test(current))
+    throw new Error("README.md: no plugin table found under a '## Plugins' heading");
+  return current.replace(ROOT_README_TABLE, `$1${table}`);
+}
+
 export function surfacePlan(catalog) {
   const files = new Map();
   files.set(

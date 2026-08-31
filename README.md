@@ -74,20 +74,20 @@ Agent Skills specification.
 
 | Plugin | Category | Plugin | Category |
 |---|---|---|---|
-| odin-core | Coding | odin-security | Security |
-| odin-code | Coding | odin-security-advanced | Security |
-| odin-code-advanced | Coding | odin-design | Design |
-| odin-create | Productivity | odin-design-advanced | Design |
-| odin-create-advanced | Productivity | odin-writing | Writing |
-| odin-research | Research | odin-writing-advanced | Writing |
-| odin-research-advanced | Research | odin-product | Productivity |
-| odin-run | Coding | odin-loop | Coding |
-| odin-run-advanced | Coding | odin-planning | Productivity |
-| odin-agent | Productivity | odin-python | Coding |
-| odin-typescript | Coding | odin-web | Coding |
-| odin-native | Coding | odin-apple | Coding |
-| odin-lean | Coding | odin-terraform | Infrastructure |
-| odin-bigquery | Data | odin-prometheus | Infrastructure |
+| odin-core | Coding | odin-writing | Writing |
+| odin-code | Coding | odin-writing-advanced | Writing |
+| odin-code-advanced | Coding | odin-product | Productivity |
+| odin-create | Productivity | odin-loop | Coding |
+| odin-create-advanced | Productivity | odin-planning | Productivity |
+| odin-research | Research | odin-python | Coding |
+| odin-research-advanced | Research | odin-typescript | Coding |
+| odin-run | Coding | odin-web | Coding |
+| odin-run-advanced | Coding | odin-native | Coding |
+| odin-agent | Productivity | odin-apple | Coding |
+| odin-security | Security | odin-lean | Coding |
+| odin-security-advanced | Security | odin-terraform | Infrastructure |
+| odin-design | Design | odin-bigquery | Data |
+| odin-design-advanced | Design | odin-prometheus | Infrastructure |
 
 `catalog/plugins.json` is the identity ledger: it holds each plugin's name, description, category,
 and tags, and every manifest and registry is generated from it.

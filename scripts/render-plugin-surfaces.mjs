@@ -7,6 +7,7 @@ import {
   ROOT,
   loadCatalog,
   renderPluginReadme,
+  renderRootReadme,
   skillRows,
   surfacePlan,
 } from "./plugin-surfaces.mjs";
@@ -28,6 +29,12 @@ for (const entry of catalog.entries) {
     renderPluginReadme(catalog, entry, skillRows(entry)),
   );
 }
+
+// Only the plugin table is owned here; the surrounding prose is authored.
+wanted.set(
+  "README.md",
+  renderRootReadme(catalog, readFileSync(join(ROOT, "README.md"), "utf8")),
+);
 
 const drifted = [];
 let written = 0;
