@@ -62,6 +62,13 @@ repos:
         files: ^(plugins/.*/skills/.*/SKILL\.md|plugins/.*/skills/.*/agents/openai\.yaml|catalog/plugins\.json|scripts/(check-skill-routes|render-skill-manifests)\.mjs)$
         pass_filenames: false
 
+      - id: check-voice
+        name: check authored prose against the voice contract
+        entry: python3 scripts/check-voice.py
+        language: system
+        files: ^(plugins/.*/skills/.*\.md|docs/.*\.md|AGENTS\.md|scripts/check-voice\.py)$
+        pass_filenames: false
+
       - id: render-skill-manifests
         name: check skill manifests match SKILL.md frontmatter
         entry: node scripts/render-skill-manifests.mjs --check

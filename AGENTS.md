@@ -99,3 +99,24 @@ Edit both carriers in place. Never commit them from this repository, and never s
 Write content under this tree so each section is independently actionable. State a needed rule where the reader needs it instead of pointing backward with phrases such as "as discussed earlier", "see above", or "previously noted".
 
 Prefer a short repeated rule to a decorative inter-file pointer. Use a cross-reference only when the target itself is required for correct behavior, such as the byte-identical canonical baseline span.
+
+## Voice
+
+Every skill in this tree is authored in one register, set by the ODIN doctrine in
+`system-prompt-baseline.md` and the spine taste anchors. `docs/specs/voice.md` is the contract:
+the ten anchors, the two-sided ban list covering slop and overkill, and the thresholds a script
+can measure.
+
+The spine itself is user-private, at `~/.claude/skills/spine/`. Read it when authoring; never
+edit it from this repository, and never vendor a copy into this tree. `docs/specs/voice.md`
+carries what an editor needs without loading it.
+
+`scripts/check-voice.py` enforces the measurable half over every `SKILL.md`, skill reference,
+`docs/` page, and this file. It fails on two or more consecutive `**Label**:` lines where a list
+or table belongs, five or more em or en dashes inside 600 characters, a heading capitalizing a
+minor word past the first position, AI-marker vocabulary, and curly quotes. It strips fenced
+blocks and inline spans first, so a shell flag or code sample never trips it.
+
+Passing the gate is not passing the register. The script sees formatting tells, not absent
+conviction; whether a section earns its place is the spine audit's judgment, not a regular
+expression's.
