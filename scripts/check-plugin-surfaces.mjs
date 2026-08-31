@@ -66,6 +66,18 @@ for (const entry of catalog.entries) {
   for (const field of ["skills", "mcpServers", "commands", "agents", "hooks", "paths"])
     if (field in manifest)
       errors.push(`${entry.id}: plugin.json must not declare ${field} (Agent Plugins fixes it)`);
+  // Codex takes the manifest from the root plugin.json but the plugin namespace
+  // from the dotdir list only, so a name mismatch splits one plugin in two.
+  const claudePath = join(ROOT, entry.directory, ".claude-plugin/plugin.json");
+  if (!existsSync(claudePath)) {
+    errors.push(`${entry.id}: missing .claude-plugin/plugin.json (Codex namespace source)`);
+  } else {
+    const claude = JSON.parse(readFileSync(claudePath, "utf8"));
+    if (claude.name !== manifest.name)
+      errors.push(
+        `${entry.id}: name differs between plugin.json (${manifest.name}) and .claude-plugin/plugin.json (${claude.name})`,
+      );
+  }
   for (const slug of skills) {
     const skillDir = join(ROOT, entry.directory, "skills", slug);
     if (!existsSync(join(skillDir, "SKILL.md")))

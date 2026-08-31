@@ -1,196 +1,152 @@
-# Outline-Driven Development for Claude Code
+# Outline-Driven Development
 
-> Formerly known as the ODIN Claude Plugin. The repository URL stays the same.
+> Formerly the ODIN Claude Plugin. The repository URL is unchanged.
 
-**Outline-Driven Development** (nicknamed ODIN) is a code agent system for Claude Code with surgical precision, diagram-first engineering, and workflow automation.
+Outline-Driven Development, nicknamed ODIN, is a code-agent skill library: diagram-first
+engineering, surgical editing, and workflow automation, published as installable plugins.
 
-**Methodology**: [outline-driven-development](https://github.com/OutlineDriven/outline-driven-development) &nbsp;·&nbsp; **Codex CLI**: [odin-codex-plugin](https://github.com/OutlineDriven/odin-codex-plugin) &nbsp;·&nbsp; **Gemini CLI**: [odin-gemini-cli-extension](https://github.com/OutlineDriven/odin-gemini-cli-extension) &nbsp;·&nbsp; **Site**: [outlinedriven.github.io](https://outlinedriven.github.io)
+Methodology: [outline-driven-development](https://github.com/OutlineDriven/outline-driven-development)
+· Site: [outlinedriven.github.io](https://outlinedriven.github.io)
 
-## Overview
+## What is here
 
-**Key capabilities:**
+616 skills in 28 plugins. A skill is authored once, at
+`plugins/<plugin>/skills/<slug>/SKILL.md`, and that path is its only home. The directory states
+which plugin owns the skill, so no registry has to answer that question.
 
-- **Diagram-First Engineering**: Architecture, concurrency, memory, data flow, optimization
-- **Surgical Code Editing**: AST-based transformations with ast-grep
-- **Confidence-Driven Execution**: Adaptive behavior based on complexity and risk
-- **Deep Investigation**: Mandatory file reading before code modifications
-- **Atomic Commits**: Conventional Commits protocol with incremental approvals
+The Agent Plugins specification fixes components at the plugin root, so this layout is also the one
+every supported client already discovers. Nothing is copied at publish time, and nothing is
+published to a package registry.
 
-## Installation
-
-Claude Code is the proved install target on this source branch. The repository
-is a private npm workspace of 29 packages: 28 runtime packages and 1 informational
-package, `@outlinedriven/odin`. Skills live once at `skills/<slug>/SKILL.md`.
-Package trees copy those skills only at pack time.
-
-### Claude Code marketplace
-
-The shared catalog is `.claude-plugin/marketplace.json`. Every entry is an
-exact npm source at `2.0.0`. Install the 28 runtime modules; do not install
-informational `odin`.
-
-```shell
-claude plugin marketplace add OutlineDriven/odin-claude-plugin
-claude plugin install odin-core@odin-marketplace
+```
+plugins/odin-core/
+  plugin.json                  Agent Plugins 1.0.0 manifest
+  .claude-plugin/plugin.json   Claude Code manifest
+  skills/askme/SKILL.md        authored skill
+  skills/askme/agents/openai.yaml   generated from the frontmatter
+  mcp.json                     MCP servers, odin-core only
+  output-styles/               Claude output styles, odin-core only
 ```
 
-Per-skill installs work over two routes; both read the same canonical
-`skills/<slug>/SKILL.md` tree at an immutable tag:
+## Install
+
+Four surfaces are supported, and no others. Each installs from this repository.
+
+### Claude Code
 
 ```shell
-# npx route (skills CLI, pinned)
-npx --yes skills@1.5.23 add https://github.com/OutlineDriven/odin-claude-plugin/tree/v2.0.0/skills/<skill-name> -a claude-code -g -y
-
-# gh route (GitHub CLI 2.90.0+)
-gh skill install OutlineDriven/odin-claude-plugin skills/<skill-name> --pin v2.0.0 --agent claude-code --scope user
+/plugin marketplace add OutlineDriven/odin-claude-plugin
+/plugin install odin-core@odin-marketplace
 ```
 
-Install every skill with `--skill '*'` (npx) or `--all` (gh).
-`node scripts/check-skill-routes.mjs` proves the tree shape both routes require.
-The universal current-user installer remains Claude-specific and lives in
-[OutlineDriven/outline-driven](https://github.com/OutlineDriven/outline-driven).
-It is not this repository.
+### Codex
 
-### Other harnesses
+```shell
+codex plugin marketplace add OutlineDriven/odin-claude-plugin
+codex plugin add odin-core@odin-marketplace
+```
 
-Codex, Cursor, Grok, Kimi, Devin, and Antigravity consume a generated
-`distribution` projection (`npm run generate:distribution`), staged on the
-`distribution-candidate/2.0.0` branch, not this source branch. Devin and
-Antigravity consume `plugins/odin-complete/` from that projection. Those
-catalogs are not published from this commit.
+### Cursor
 
-### Skills
+Add the marketplace, then `/plugin install odin-core`. Cursor reads the Agent Plugins manifest at
+each plugin root.
 
-There are 657 public skills in 28 runtime packages. Identity and ownership
-are in `catalog/packages.json`; `catalog/skill-membership.json` owns skill
-membership and pins the count. Do not scan `packages/*/skills`; that path is not
-authored.
+### Agent Plugins standard
 
-## Core Philosophy
+Any client implementing [Agent Plugins 1.0.0](https://github.com/agentplugins/agent-plugins-spec)
+can consume a plugin directory as it stands: the manifest is `plugins/<plugin>/plugin.json`, skills are
+at `skills/<slug>/SKILL.md`, and MCP servers are at `mcp.json`.
 
-ODIN follows engineering principles:
+### One skill at a time
 
-1. **Investigate Before Acting**: Never speculate about code you haven't read
-2. **Diagram-First Design**: Five mandatory diagrams before any implementation
-3. **Surgical Precision**: Minimal, targeted changes using AST-based tools
-4. **Atomic Commits**: One logical change per commit, properly typed
-5. **Confidence-Driven**: Adapt behavior based on familiarity and risk
-6. **Tool Selection**: ast-grep > native-patch > ripgrep (never sed for edits)
+`gh skill` installs a single skill for any of its supported agents. Passing the exact path skips a
+full tree traversal, which matters at this repository's size.
 
-### Five Required Diagrams
+```shell
+gh skill install OutlineDriven/odin-claude-plugin plugins/odin-core/skills/askme \
+  --agent claude-code --scope user
+```
 
-Before any non-trivial implementation:
+`just validate-skills` runs `gh skill publish --dry-run`, which validates every skill against the
+Agent Skills specification.
 
-1. **Architecture**: Components, interfaces, contracts, dependencies
-2. **Data Flow**: Sources, transformations, sinks, state transitions
-3. **Concurrency**: Threads, synchronization, happens-before relationships
-4. **Memory**: Ownership, lifetimes, allocation patterns, safety guarantees
-5. **Optimization**: Bottlenecks, targets, complexity bounds, resource budgets
+## Plugins
+
+| Plugin | Category | Plugin | Category |
+|---|---|---|---|
+| odin-core | Coding | odin-security | Security |
+| odin-code | Coding | odin-security-advanced | Security |
+| odin-code-advanced | Coding | odin-design | Design |
+| odin-create | Productivity | odin-design-advanced | Design |
+| odin-create-advanced | Productivity | odin-writing | Writing |
+| odin-research | Research | odin-writing-advanced | Writing |
+| odin-research-advanced | Research | odin-product | Productivity |
+| odin-run | Coding | odin-loop | Coding |
+| odin-run-advanced | Coding | odin-planning | Productivity |
+| odin-agent | Productivity | odin-python | Coding |
+| odin-typescript | Coding | odin-web | Coding |
+| odin-native | Coding | odin-apple | Coding |
+| odin-lean | Coding | odin-terraform | Infrastructure |
+| odin-bigquery | Data | odin-prometheus | Infrastructure |
+
+`catalog/plugins.json` is the identity ledger: it holds each plugin's name, description, category,
+and tags, and every manifest and registry is generated from it.
+
+## Core philosophy
+
+1. Investigate before acting. Never speculate about code you have not read.
+2. Draw the structure before building it.
+3. Match rigor to risk.
+4. One logical change per commit.
+5. Show the code, not a description of the code.
+
+Before any non-trivial implementation, five diagrams: architecture, data flow, concurrency,
+memory, and optimization.
 
 ## Output styles
 
-Output styles shape how the agent communicates. Switch via Claude Code's `/config` or by setting `outputStyle` in `settings.json`.
+Output styles shape how the agent communicates. Switch through Claude Code's `/config` or by
+setting `outputStyle` in `settings.json`. They ship in `odin-core`.
 
-- `ODIN`: Default. Skeptic register, scope discipline, no reflexive validation.
-- `AxiomMode`: Formal-logic English with predicate-form claims, Hoare-triple framing, ASCII shortened-English keywords. Daily-driver register for coding work.
-- `Builder`: For non-technical builders (PMs, founders, designers, no-code users). Outcome-first, plain-language, progressive disclosure.
-- `Duet`: Companion to the `duet` skill. Decisions before prose, structural/taste framing first, jargon on demand, silent mechanics / loud forks. Enforces `duet` skill invocation.
-- `Linus`: Torvalds review discipline. Good taste as special-case elimination, blunt about the work, show the corrected code rather than describe it.
-- `Eval`: Benchmark harness register (`output-styles/benchmark.md`). Auto-generated by margin-runner; do not hand-edit above the doctrine cascade.
+- `ODIN`: default. Skeptic register, scope discipline, no reflexive validation.
+- `AxiomMode`: formal-logic English with predicate-form claims and ASCII keywords.
+- `Builder`: for non-technical builders. Outcome-first, plain language, progressive disclosure.
+- `Duet`: companion to the `duet` skill. Decisions before prose, forks stated loudly.
+- `Linus`: Torvalds review discipline. Good taste as special-case elimination.
+- `Eval`: benchmark harness register, generated by margin-runner. Do not hand-edit.
 
-## Configuration
+Every style embeds a byte-identical copy of `system-prompt-baseline.md`, because the Claude Code
+loader does not resolve references. `scripts/sync-baseline.py` owns that copy.
 
-### Settings.json
+## Development
 
-`settings.json` includes:
+There is no package manager here. Every script is dependency-free Node ESM or standard-library
+Python.
 
-- **Tool Permissions**: Pre-approved tools (ast-grep, fd, rg, cargo, npm, git, etc.)
-- **MCP Integration**: Time, browser, git, context7, tavily, and more
-- **Security**: Denied operations (sed -i, force push, destructive commands)
-- **Hooks**: Event-driven automation
-- **Defaults**: Bypass permissions mode, always thinking enabled
-
-### CLAUDE.md
-
-Global instructions defining:
-
-- ODIN methodology and principles
-- Tool selection mandates (ast-grep preferred)
-- Git commit strategy (Conventional Commits)
-- Diagram-first engineering requirements
-- Language-specific guidelines
-- UI/UX design principles
-- Verification and refinement patterns
-
-## Methodology
-
-### Surgical Editing Workflow
-
-1. **Find**: Use ast-grep (code), ripgrep (text), fd (files)
-2. **Copy**: Extract minimal context with precise offsets
-3. **Paste**: Apply surgically with AST-based transformations
-
-### Confidence-Driven Execution
-
-```
-Confidence = (familiarity + (1-complexity) + (1-risk) + (1-scope)) / 4
+```shell
+just              # list tasks
+just render       # regenerate skill manifests, plugin manifests, and registries
+just check        # every gate
+just verify       # gates, hooks, and Agent Skills validation
 ```
 
-- **High (0.8-1.0)**: Direct action → Verify
-- **Medium (0.5-0.8)**: Iterative action → Expand → Verify
-- **Low (0.3-0.5)**: Research → Plan → Test → Expand
-- **Very Low (<0.3)**: Decompose → Propose → Seek guidance
+Gates, in the order `just check` runs them:
 
-### Atomic Commit Protocol
+| Gate | What it proves |
+|---|---|
+| `render-skill-manifests --check` | every `agents/openai.yaml` matches its SKILL.md frontmatter |
+| `render-plugin-surfaces --check` | every manifest and registry matches `catalog/plugins.json` |
+| `check-plugin-surfaces` | retired surfaces stay dead, no plugin ships without skills, no manifest relocates a fixed component |
+| `check-skill-routes` | frontmatter name equals the directory, descriptions state a trigger, display names are unique |
+| `sync-baseline --check` | every output style carries the canonical doctrine |
 
-**Conventional Commits v1.0.0:**
-
-```
-<type>[optional scope]: <description>
-
-[optional body]
-
-[optional footer(s)]
-```
-
-**Types**: feat, fix, build, chore, ci, docs, perf, refactor, style, test
-
-**Rules**:
-
-- One logical change per commit
-- Never mix types or scopes
-- Each commit must build and pass tests
-- Independently testable and reversible
-
-### Tool Selection Mandate
-
-**Discovery → Text search → Structural search → Transform**:
-
-1. **fd** - File discovery (NEVER use `find`)
-2. **git grep** - Primary text search within the repo (respects .gitignore, fast)
-3. **rg (ripgrep)** - Text-search fallback when outside git or for richer flags
-4. **ast-grep** - Structural/AST search and rewrite (metavariable patterns)
-5. **native-patch / Edit** - Final precise edits when Find → Transform → Verify converges
-6. **eza** - Directory listing (NEVER use `ls`)
-7. **bat -P -p -n** - File display (NEVER use `cat`)
-
-### Tool Permission Issues
-
-Check `settings.json` for tool permissions. ODIN pre-configures safe tool usage.
+`docs/specs/distribution-surfaces.md` records the specification for each surface, with citations
+and the date each version was read.
 
 ## License
 
-See LICENSE file for details.
+See LICENSE. Third-party attribution is in `licenses/NOTICE`.
 
 ## Support
 
-- **Issues**: https://github.com/OutlineDriven/odin-claude-plugin/issues
-- **Repository**: https://github.com/OutlineDriven/odin-claude-plugin
-
-## Acknowledgments
-
-Built on Claude Code's plugin system.
-
----
-
-**Outline-Driven Development** for Claude Code: [outlinedriven.github.io](https://outlinedriven.github.io)
+Issues: https://github.com/OutlineDriven/odin-claude-plugin/issues

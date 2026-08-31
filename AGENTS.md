@@ -8,7 +8,7 @@ Edit `AGENTS.md`, never `CLAUDE.md`. `CLAUDE.md` is a symlink, so replacing it f
 
 Make every persona or doctrine change in `system-prompt-baseline.md` first. It is the source of truth.
 
-Propagate each canonical change to all six output styles: `axiom-mode.md`, `builder.md`, `duet.md`, `linus.md`, `odin.md`, and `benchmark.md` under `packages/odin-core/output-styles/`. The Claude Code loader does not resolve references, so each style must embed the full baseline at its tail. Keep the span from the charter `<role>` through EOF byte-identical to `system-prompt-baseline.md` from `<role>` onward.
+Propagate each canonical change to all six output styles: `axiom-mode.md`, `builder.md`, `duet.md`, `linus.md`, `odin.md`, and `benchmark.md` under `plugins/odin-core/output-styles/`. The Claude Code loader does not resolve references, so each style must embed the full baseline at its tail. Keep the span from the charter `<role>` through EOF byte-identical to `system-prompt-baseline.md` from `<role>` onward.
 
 Perform propagation as one operation with one agent and one diff scope; never divide it by style.
 
@@ -19,35 +19,60 @@ Use the baseline generator; never hand-propagate the cascade:
 3. Run `python3 scripts/sync-baseline.py --check`. Exit 0 means all styles match; exit 1 names drifted files; exit 2 means the canonical file or a required two-`<role>` layout is missing.
 4. Stage and commit the canonical file and all six styles together.
 
-Never hand-edit `packages/odin-core/output-styles/benchmark.md`. Its margin-runner v0.5.5 header marks it as generated. The baseline generator may change only the embedded cascade below the runner preamble; a hand edit above that region requires explicit user authorization.
+Never hand-edit `plugins/odin-core/output-styles/benchmark.md`. Its margin-runner v0.5.5 header marks it as generated. The baseline generator may change only the embedded cascade below the runner preamble; a hand edit above that region requires explicit user authorization.
 
 ## Submodule publishing
 
 Commit and push from this repository, not its parent `~/.claude`, because this tree is a Git submodule. From this repository's root, use plain `git push origin main`.
 
-## Package surfaces
+## The skill tree
 
-Keep every public package, plugin, and marketplace version at the single `releaseVersion` literal `2.0.0`; never bump only some manifests. `catalog/packages.json` owns package identity.
+A skill is authored once, at `plugins/<plugin>/skills/<slug>/SKILL.md`. That path is its only home, and the directory states which plugin owns the skill. Do not add a membership registry, a second skill tree, or a per-plugin copy: the earlier model kept all three in sync and each one drifted.
 
-Treat the following generated files as generator-owned:
+Adding a skill means creating `plugins/<plugin>/skills/<slug>/SKILL.md` and running `just render`.
 
-- `scripts/render-package-surfaces.mjs` and `scripts/check-package-surfaces.mjs` own the 29 committed package roots, the root `package.json` script block, and the shared Claude/OMP catalog. `scripts/skill-membership.mjs` owns skill-membership loading and validation.
-- `scripts/package-surfaces.mjs` projects the canonical `licenses/NOTICE` byte-identically to every `packages/<id>/NOTICE`.
-Never hand-edit a generator-owned surface. Change its generator or catalog input, rerun the renderer, and commit the input and rendered output together. Do not create another authored skill tree under `packages/*/skills`.
+Moving a skill between plugins means moving its directory. Nothing else records membership.
+
+Agent Plugins fixes components at the plugin root, so a skill nested deeper than `skills/<slug>/` never loads. `check-plugin-surfaces` fails on a nested `SKILL.md` for that reason.
+
+## Distribution surfaces
+
+Four surfaces are supported, and no others: the Agent Plugins standard, the Claude Code marketplace, the Codex marketplace, and the Cursor marketplace. Nothing is published to a package registry, and no npm artifact belongs in this tree. `check-plugin-surfaces` fails if one returns.
+
+`catalog/plugins.json` owns plugin identity: name, description, category, tags, and directory. Every manifest and registry is generated from it. Keep every plugin and marketplace version at the single `releaseVersion` literal `2.0.0`; never bump only some manifests.
+
+Treat these as generator-owned and never hand-edit them:
+
+- `plugins/*/plugin.json`, `plugins/*/.claude-plugin/plugin.json`, `plugins/*/README.md`, `plugins/*/LICENSE`, `plugins/*/NOTICE`
+- `.claude-plugin/marketplace.json`, `.agents/plugins/marketplace.json`, `.cursor-plugin/marketplace.json`
+- `plugins/*/skills/*/agents/openai.yaml`
+
+To change one, change its generator or `catalog/plugins.json`, run `just render`, and commit input and output together.
+
+The Agent Plugins manifest schema is closed and forbids declaring component locations. Do not add `skills`, `mcpServers`, `commands`, `agents`, `hooks`, or `paths` to a root `plugin.json`; the specification fixes those locations and the gate rejects them.
 
 Do not change `releaseVersion` for tooling-only changes such as pre-commit hooks or formatter configuration, or for edits to this file. Do not add or backfill `CHANGELOG.md` entries for routine version work.
 
 ## Skill metadata
 
-Single-quote every `SKILL.md` frontmatter value that contains `: `, including `description` and `metadata.short-description`. Strict YAML parsers reject an unquoted colon-space even though Claude Code's loader accepts it. `scripts/check-skill-routes.mjs` enforces this at commit time: an unquoted colon-space is an error, not a silent normalization.
+Frontmatter carries `name` and `description` and little else. `name` must equal the directory name, or `gh skill install` drops the skill. `description` must state a trigger a model can route on, and `check-skill-routes` fails a description that states none.
 
-`agents/openai.yaml` is generated, not hand-authored. `scripts/render-skill-manifests.mjs` derives every manifest from SKILL.md frontmatter: `interface.display_name` is the title-cased name with an in-script acronym table (api→API, ci→CI, gh→GH, …); `interface.short_description` is the first sentence of `description`, hard-truncated at 64 chars on overflow and failed, not padded, under 25. Adding a skill means adding `SKILL.md` and running the generator (`node scripts/render-skill-manifests.mjs`); the prek hook `render-skill-manifests --check` fails on any drift between frontmatter and the on-disk manifest. Do not hand-edit a manifest; change the frontmatter and rerun the generator.
+Single-quote every frontmatter value containing `: `. Strict YAML parsers reject an unquoted colon-space even though Claude Code's loader accepts it, so it ships silently broken. `check-skill-routes` treats it as an error, not a normalization.
 
-`scripts/check-skill-routes.mjs` is the commit-time identity gate. It checks that each directory name equals its frontmatter `name`, equals a membership row slug, and equals the manifest identity; that `catalog/skill-membership.json` count is consistent (`rows.length` == `skill_count` == directory count); and that every `display_name` is unique across all manifests (Set collision check). Edit the membership rows and `skill_count` in the same commit that touches `skills/`.
+Do not add a `license` field to a skill. This tree has mixed provenance and attribution lives in `licenses/NOTICE`; a uniform value would misstate the provenance of adapted skills.
+
+`scripts/render-skill-manifests.mjs` derives each `agents/openai.yaml` from frontmatter: `interface.display_name` is the title-cased name with an in-script acronym table, and `interface.short_description` is the first sentence of the description, truncated at 64 characters and failed, never padded, under 25.
 
 ## Verification
 
-Run `prek run --all-files` as the sole repository gate. Do not invent language test commands or add CI without an explicit request; this repository has no build, unit-test suite, or GitHub Actions workflow.
+```shell
+just check     # all five gates
+just verify    # gates, prek hooks, and Agent Skills validation
+```
+
+`just validate-skills` runs `gh skill publish --dry-run`, which validates every skill against the Agent Skills specification: strict naming, name matching its directory, required frontmatter, `allowed-tools` as a string, and no leftover install metadata.
+
+Do not invent language test commands or add CI without an explicit request; this repository has no build, no unit-test suite, and no GitHub Actions workflow.
 
 Test persona or doctrine changes in a fresh Claude Code session. The canonical baseline and output styles load only at session start, so the current session cannot verify them.
 

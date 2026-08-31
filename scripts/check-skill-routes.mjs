@@ -129,6 +129,34 @@ if (badQuote.length)
     `': ' frontmatter values not single-quoted: ${badQuote.slice(0, 5).join("; ")} (${badQuote.length} total)`,
   );
 
+// --- (d) the description must let a harness route to the skill ---
+// A description with no trigger phrase leaves the model guessing when the skill
+// applies, which is the failure that makes a skill fire unreliably. Human-only
+// skills are exempt: nothing routes to them automatically.
+const TRIGGERS = ["use when", "use this", "use for", "runs /", "invoke", "asks to", "says "];
+const badDescription = [];
+for (const [, dir] of skills) {
+  const fm = parsed.get(dir);
+  if (!fm) continue;
+  const description = fm.entries.find((e) => e.path === "description")?.value;
+  if (!description) {
+    badDescription.push(`${dir}: frontmatter has no description`);
+    continue;
+  }
+  // Agent Skills spec: description is 1-1024 characters.
+  if (description.length > 1024)
+    badDescription.push(`${dir}: description ${description.length} chars, limit 1024`);
+  const humanOnly =
+    fm.entries.find((e) => e.path === "disable-model-invocation")?.value === "true";
+  const lowered = description.toLowerCase();
+  if (!humanOnly && !TRIGGERS.some((t) => lowered.includes(t)))
+    badDescription.push(`${dir}: description states no trigger`);
+}
+if (badDescription.length)
+  errors.push(
+    `unroutable descriptions: ${badDescription.slice(0, 5).join("; ")} (${badDescription.length} total)`,
+  );
+
 // --- (c) display_name uniqueness across generated manifests ---
 const byName = new Map();
 const missingManifest = [];

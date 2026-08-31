@@ -87,6 +87,14 @@ export function renderAgentPluginManifest(catalog, entry) {
 
 // Claude Code plugin manifest. `skills` defaults to skills/, so it stays unset;
 // mcpServers and outputStyles point at the shared root files where they exist.
+//
+// This manifest must exist for every plugin and must carry the SAME `name` as the
+// Agent Plugins manifest beside it. Codex resolves the manifest from the root
+// plugin.json but resolves the plugin NAMESPACE from the dotdir list only
+// (plugin_namespace_for_root_uri in codex-rs/utils/plugins/src/plugin_namespace.rs
+// iterates .codex-plugin, .claude-plugin, .cursor-plugin and never the root file).
+// Diverge the two names and Codex namespaces the plugin under one name while
+// loading its components under another. check-plugin-surfaces asserts the parity.
 export function renderClaudePluginManifest(catalog, entry) {
   const manifest = {
     $schema: CLAUDE_PLUGIN_SCHEMA,
