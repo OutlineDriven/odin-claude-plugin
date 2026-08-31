@@ -1,6 +1,6 @@
 # Strategy template: STRATEGY.md skeleton
 
-Read after the interview clears the reject-by-default gate. Fill with captured answers and write to `$root/STRATEGY.md` (the operating repo root resolved in the SKILL's Phase 0).
+Read after the interview clears the reject-by-default gate. Fill with captured answers and write to `$root/STRATEGY.md` (the operating repo root resolved in the SKILL's step 1).
 
 ## Rules for filling in
 

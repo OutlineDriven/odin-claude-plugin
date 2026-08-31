@@ -9,7 +9,7 @@ description: 'Use when a user asks for a product spec with numbered behavioral i
 
 | Field | Bound contract |
 |---|---|
-| Trigger | User asks for a product spec or PRD. |
+| Trigger | User asks for a product spec with numbered behavioral invariants (a PRODUCT.md); route evidence-backed PRD requests to write-prd and implementation plans to write-tech-spec. |
 | Authority | Reversible local: write only to the named PRODUCT.md artifact; delete the file to roll back. |
 | Side effect | Writes one PRODUCT.md file under specs/<id>/. |
 | Done | PRODUCT.md exists and its Behavior section makes desired behavior unambiguous enough that an implementer can build from it without guessing product intent. |
