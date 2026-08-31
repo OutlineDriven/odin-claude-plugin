@@ -38,7 +38,7 @@ Templates must be sourced from cobusgreyling/loop-engineering at revision d03dcb
    a. Compute the file hash.
    b. If the hash matches none of the four template hashes, record the file path and hash in the drift report.
    Done when: every non-auto-fixable drifted file is in the drift report.
-6. Verify every written auto-fixable file matches its template byte-for-byte by re-reading and comparing hashes. If any verification fails, roll back the target file to its pre-write content and fail with `auto_fix_verify_failed`. Done when: every written file matches its template byte-for-byte.
+6. Verify every written auto-fixable file matches its template byte-for-byte by re-reading and comparing hashes. If any verification fails, roll back every file written in step 4 to its pre-write content and fail with `auto_fix_verify_failed`. Done when: every written file matches its template byte-for-byte.
 7. Assert: every auto-fixable file matches its template; every other drifted file is in the drift report. If the assertion fails, fail with `non_converged`. Done when: the assertion holds.
 8. Return the complete drift report. Done when: the drift report is returned.
 

@@ -10,7 +10,7 @@ description: 'Use when a free content or tool site is approaching advertising-ne
 | Field | Bound contract |
 |---|---|
 | Trigger | A free content or tool site is approaching advertising-network review or a material ad-layout change. |
-| Authority | READ_ONLY_OR_REVERSIBLE_LOCAL; approval: A1 only if submission or publication is separately included One harness ask/question call before the run starts; prose consent, invocation consent, prior-run consent, and post-start discovery do not approve an effect. |
+| Authority | READ_ONLY_OR_REVERSIBLE_LOCAL; approval: A1 only if submission or publication is separately included. One harness ask/question call before the run starts; prose consent, invocation consent, prior-run consent, and post-start discovery do not approve an effect. |
 | Side effect | Content-site advertising-network readiness report |
 | Done | All declared content, policy, navigation, mobile, and ad-placement criteria pass. |
 | Stop | evidenced no-go; policy uncertainty; blocked. Bound: Declared site, representative page sample, readiness criteria, and pass cap. Receipt terminal classes: success, capped, stalled, blocked, exhausted, pending. Budget exhaustion is never success unless it is the predeclared success predicate. |

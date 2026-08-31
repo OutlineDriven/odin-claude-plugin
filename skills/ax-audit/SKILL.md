@@ -37,7 +37,7 @@ description: 'Use when asked to audit an agent or AI feature for agentic-experie
    - Control: no approval gate where one is needed for irreversible actions; no escape hatch to interrupt or redirect; control buried under conversational friction.
    - Trust: no confidence cues where the agent asserts without signaling certainty; no escalation path when the agent is stuck or uncertain; no uncertainty markers on outputs.
 
-   Done when: every rule family across both axes is evaluated and findings are recorded or marked unscannable.
+   Done when: every rule family across both axes is evaluated and findings are recorded or marked INCOMPLETE.
 3. Assign each finding a severity: Critical (blocks ship), Major (degrades trust or correctness), Minor (polish). Done when: every finding has its severity assigned.
 4. Write the AX Relationship Summary. In one paragraph, state how the agent and user relate across control, trust, context, and communication. Classify the relationship as human-led, agent-led, or collaborative, and explain where it breaks down. Done when: the relationship summary paragraph is written with its classification.
 5. Issue the ship-readiness verdict:

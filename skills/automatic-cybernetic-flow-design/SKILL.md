@@ -1,6 +1,6 @@
 ---
 name: automatic-cybernetic-flow-design
-description: 'Use when the user wants to design sensors, actuators, feedback, delay, and oscillation for an interactive system. Produces a cybernetic flow design document specifying each component. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user wants a closed-loop control flow designed. Covers sensors, actuators, feedback loops, delay, and oscillation for an interactive system. Produces a cybernetic flow design document specifying each component. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Automatic cybernetic flow design
@@ -41,4 +41,4 @@ A cybernetic flow design document ordered: sensors, actuators, feedback, delay, 
 
 ## Provenance
 
-Origin: user-curated skill idea `automatic-cybernetic-flow-design` from `project-owned:user-curated-skill-ideas`, supplemented by raw source at `project-owned:user-supplied-source-brief`. Revision: none pinned. License: project-owned; clean-room adaptation of the user's brief. The one-line brief "generate sensors, actuators, feedback, delay, and oscillation for interactive systems" was expanded into a bounded, self-contained procedure with explicit failure and rollback rules. No third-party expression was copied.
+Origin: user-curated skill idea `automatic-cybernetic-flow-design` from `project-owned:user-curated-skill-ideas`, candidate `curated:curated-ideas:curated-022`. Revision: none pinned. License: project-owned; clean-room adaptation. The one-line brief "generate sensors, actuators, feedback, delay, and oscillation for interactive systems" was expanded into a bounded, self-contained procedure with explicit failure and rollback rules. No third-party expression was copied.
