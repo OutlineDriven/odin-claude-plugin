@@ -1,6 +1,6 @@
 ---
 name: to-questionnaire
-description: 'Turn a knowledge gap into an async questionnaire for someone else, written to to-questionnaire-<slug>.md. Not for direct conversation elicitation — use askme; not for agent-driven research — use research; not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user wants an async questionnaire for someone else, a discovery questionnaire, or a knowledge gap needs answers from outside the repository. Produces prioritised one-idea questions with answer stubs and ambiguity rationale. Not for direct conversation elicitation; use askme. Not for agent-driven research; use research. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # To questionnaire
@@ -27,10 +27,10 @@ Required: the topic or context of the knowledge gap. Optional: the recipient's r
 
 ## Procedure
 
-1. Identify the recipient. Ask the user in one exchange: who the recipient is, their role and expertise, and what they know that the user does not. **Done when:** the recipient is named or scoped.
+1. Identify the recipient. Ask the user in one exchange: who the recipient is, their role and expertise, and what they know that the user does not. Focus the interview on the send, not the subject: ask the user only about the send, never about the gap itself. **Done when:** the recipient is named or scoped.
 2. Identify needed answers. Ask the user in one exchange: the specific decisions or facts they cannot resolve alone. **Done when:** a concrete list of user-needed outcomes exists.
 3. Derive the slug. Convert the topic into kebab-case for the filename. If no meaningful slug can be derived, use "questionnaire". **Done when:** the slug is derived.
-4. Draft the questions. Target the gap between what the recipient knows (step 1) and what the user needs back (step 2). Order questions by importance because only one async pass is guaranteed. Group them under `##` headings by theme once there are more than a handful. **Done when:** every needed answer from step 2 has a corresponding question.
+4. Draft the questions. Target the gap between what the recipient knows (step 1) and what the user needs back (step 2). Order questions by importance because only one async pass is guaranteed. Group them under `##` headings by theme once there are more than a handful. Make every question one idea, never compound. Place an answer stub (a blank `>` blockquote line) directly beneath each question. Add a one-line _why this matters_ only where a question could be misread or invite a throwaway answer; that is the ambiguity rationale. **Done when:** every needed answer from step 2 has a corresponding question with an answer stub.
 5. Write the questionnaire to `to-questionnaire-<slug>.md` in the current working directory using the template below. Do not write any other file. **Done when:** the file exists on disk.
 
 <questionnaire-template>
@@ -76,6 +76,7 @@ A closing catch-all: anything we did not ask that we should know?
 |---|---|
 | No recipient identified | Stop before writing. Ask the user to name or describe the recipient. |
 | No needed answers identified | Stop before writing. Ask the user to list what they need back. |
+| Partial needed-answers list | Write the questionnaire covering only the named items and list any items the user raised that no question covers. |
 | File already exists | Confirm whether to overwrite before writing. |
 | Slug undeterminable | Use "questionnaire" as the filename stub. |
 

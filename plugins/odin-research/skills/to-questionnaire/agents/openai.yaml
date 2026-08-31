@@ -1,3 +1,3 @@
 interface:
   display_name: "To Questionnaire"
-  short_description: "Turn a knowledge gap into an async questionnaire for someone"
+  short_description: "Use when the user wants an async questionnaire for someone"

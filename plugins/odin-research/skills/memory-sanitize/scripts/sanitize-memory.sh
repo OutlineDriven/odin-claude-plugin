@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
 """
-sanitize-memory.sh <memory_dir> <dst_dir>
-Produces redacted copies of memory files under <dst_dir>.
+sanitize-memory.sh [--scan-only] <memory_dir> [<dst_dir>]
+
+--scan-only: scan for Tier-1 credentials only; do not generate copies.
+             Exit 2 if any Tier-1 credential is found, 0 otherwise.
+             Emits JSON report of credential sources to stdout.
+
+Without --scan-only: produces redacted copies of memory files under <dst_dir>.
 Originals are never modified. Emits JSON report to stdout.
 
 Report shape:
@@ -10,16 +15,16 @@ Report shape:
     {
       "source": "feedback_foo.md",
       "dest":   "/tmp/memory-sanitized-123/feedback_foo.md",
-      "redactions": [{"tier": 1, "name": "...", "count": 1}],
-      "credential_hits": ["OPENAI-KEY"]
+      "redactions": [{"tier": 2, "name": "...", "count": 1}],
+      "credential_hits": []
     }
   ],
-  "credential_sources": ["feedback_foo.md"],
+  "credential_sources": [],
   "total_redactions": 4
 }
 
-Exit 2 when any Tier-1 credential is present in a source file (copy is still
-written so the caller can show the diff, but the skill MUST warn the user).
+Exit 2 when --scan-only finds any Tier-1 credential in a source file.
+Exit 1 on usage or path errors.
 """
 import sys, json, re, os
 from pathlib import Path
@@ -66,22 +71,22 @@ def _redact_date(text: str):
     return result, count
 
 
+def scan_tier1(text: str):
+    """Return list of Tier-1 credential names found in text."""
+    hits = []
+    for name, pat in TIER1:
+        if pat.findall(text):
+            hits.append(name)
+    return hits
+
+
 def sanitize_text(text: str):
     redactions = []
-    credential_hits = []
-
-    # Tier 1 — detect only (caller decides on abort)
-    for name, pat in TIER1:
-        hits = len(pat.findall(text))
-        if hits:
-            credential_hits.append(name)
-            redactions.append({"tier": 1, "name": name, "count": hits})
 
     # Tier 2 — redact
     for entry in TIER2:
         name, pat, repl = entry
         if pat is None:
-            # Date handled separately
             continue
         new_text, n = pat.subn(repl, text)
         if n:
@@ -93,29 +98,75 @@ def sanitize_text(text: str):
     if n:
         redactions.append({"tier": 2, "name": "DATE", "count": n})
 
-    return text, redactions, credential_hits
+    return text, redactions
 
 
 def main():
-    if len(sys.argv) < 3:
-        print("Usage: sanitize-memory.sh <memory_dir> <dst_dir>", file=sys.stderr)
-        sys.exit(1)
+    args = sys.argv[1:]
+    scan_only = False
+    if args and args[0] == "--scan-only":
+        scan_only = True
+        args = args[1:]
 
-    src_dir = Path(sys.argv[1])
-    dst_dir = Path(sys.argv[2])
+    if scan_only:
+        if len(args) < 1:
+            print("Usage: sanitize-memory.sh --scan-only <memory_dir>", file=sys.stderr)
+            sys.exit(1)
+    else:
+        if len(args) < 2:
+            print("Usage: sanitize-memory.sh <memory_dir> <dst_dir>", file=sys.stderr)
+            sys.exit(1)
+
+    src_dir = Path(args[0])
 
     if not src_dir.is_dir():
         print(f"ERROR: memory dir not found: {src_dir}", file=sys.stderr)
         sys.exit(1)
 
+    # --- Scan-only mode: check for Tier-1 credentials, no copies ---
+    if scan_only:
+        report = {"credential_sources": [], "files": []}
+        for src_file in sorted(src_dir.glob("*.md")):
+            text = src_file.read_text(encoding="utf-8", errors="replace")
+            cred_hits = scan_tier1(text)
+            if cred_hits:
+                report["credential_sources"].append(src_file.name)
+                report["files"].append({
+                    "source": src_file.name,
+                    "credential_hits": cred_hits,
+                })
+        print(json.dumps(report, indent=2))
+        sys.exit(2 if report["credential_sources"] else 0)
+
+    # --- Full mode: generate redacted copies ---
+    dst_dir = Path(args[1])
+
     if dst_dir.exists():
         print(f"ERROR: dst dir already exists: {dst_dir} (timestamp collision — retry)", file=sys.stderr)
         sys.exit(1)
 
+    # Pre-scan for Tier-1 credentials before generating any copies
+    tier1_sources = []
+    for src_file in sorted(src_dir.glob("*.md")):
+        text = src_file.read_text(encoding="utf-8", errors="replace")
+        if scan_tier1(text):
+            tier1_sources.append(src_file.name)
+
+    if tier1_sources:
+        report = {
+            "credential_sources": tier1_sources,
+            "files": [
+                {"source": name, "credential_hits": scan_tier1(
+                    (src_dir / name).read_text(encoding="utf-8", errors="replace"))}
+                for name in tier1_sources
+            ],
+        }
+        print(json.dumps(report, indent=2))
+        sys.exit(2)
+
     dst_dir.mkdir(parents=True)
 
     report = {"files": [], "credential_sources": [], "total_redactions": 0}
-    exit_code = 0
 
     # Memory directories are flat by contract: only *.md at the top level.
     # Nested .md files are out of scope — warn if any are found.
@@ -126,7 +177,7 @@ def main():
 
     for src_file in sorted(src_dir.glob("*.md")):
         text = src_file.read_text(encoding="utf-8", errors="replace")
-        sanitized, redactions, cred_hits = sanitize_text(text)
+        sanitized, redactions = sanitize_text(text)
 
         dst_file = dst_dir / src_file.name
         dst_file.write_text(sanitized, encoding="utf-8")
@@ -135,17 +186,13 @@ def main():
             "source":          src_file.name,
             "dest":            str(dst_file),
             "redactions":      redactions,
-            "credential_hits": cred_hits,
+            "credential_hits": [],
         }
         report["files"].append(entry)
         report["total_redactions"] += sum(r["count"] for r in redactions)
 
-        if cred_hits:
-            report["credential_sources"].append(src_file.name)
-            exit_code = 2  # signal: credential found in source
-
     print(json.dumps(report, indent=2))
-    sys.exit(exit_code)
+    sys.exit(0)
 
 
 if __name__ == "__main__":

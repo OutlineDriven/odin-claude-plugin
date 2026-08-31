@@ -1,6 +1,6 @@
 ---
 name: session-viewer
-description: 'Use when the user asks to view, export, inspect, or share a session transcript in a browser. Produces one local single-file searchable HTML viewer from the session JSONL with credential scrubbing and optional browser launch. Not for sharing a session — use session-share.'
+description: 'Use when the user asks to view, export, or inspect a session transcript in a browser. Produces one local single-file searchable HTML viewer from the session JSONL with credential scrubbing and optional browser launch. Not for sharing a session — use session-share.'
 ---
 
 # Session viewer
@@ -12,7 +12,7 @@ description: 'Use when the user asks to view, export, inspect, or share a sessio
 | Trigger | User asks to view, export, inspect, or share a Codex, Claude Code, OpenClaw, or Pi session transcript in a browser. |
 | Authority | Reversible local write. Create only the single HTML viewer file and one disposable generator script in the system temp directory; never modify the session file, never touch the network, never publish or upload. Rollback is deleting the generated HTML; the scratch script is deleted after the run. |
 | Side effect | A single-file searchable HTML viewer embedding the (optionally raw) session JSONL is produced; it is opened in a browser only when the user asked to view it or passed `--open`. |
-| Done | HTML file is generated and opens; session is correctly detected and normalized; tool output is searchable; private/credential content is not exposed. |
+| Done | HTML file is generated; session is correctly detected and normalized; tool output is searchable; private/credential content is not exposed. The file opens in a browser only when the user passed `--open` or explicitly asked to view it. |
 
 ## Not for
 
@@ -315,7 +315,7 @@ function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.cl
 function metaLine(m) {
   var bits = ["format: " + m.format, "records: " + m.records, "skipped lines: " + m.skipped, "masked: " + m.masked, "raw: " + (m.raw ? "on" : "off"), "generated: " + m.generated, "source: " + m.source];
   var s = m.session ? Object.keys(m.session).map(function (k) { return k + ": " + m.session[k]; }).join("  ") : "";
-  return bits.join("  ") + (s ? chr(10) + s : "");
+  return bits.join("  ") + (s ? "\\n" + s : "");
 }
 function match(r) {
   if (state.kind !== "all" && r.kind !== state.kind) return false;
@@ -475,4 +475,4 @@ if __name__ == "__main__":
 - The script never uploads, publishes, or opens a network connection. Never swallow errors or claim the done predicate holds while detection was forced-and-failed, the file did not open, or the report shows zero records.
 
 ## Output
-The HTML viewer at the resolved path plus the stdout report (format, counts, masked hits, raw mode, path, size); the viewer is local-only, sharing happens only when the user copies the file; terminal states: done (file opens and searches) or blocked (exit 2 or 3 after the single explicit-format retry).
+The HTML viewer at the resolved path plus the stdout report (format, counts, masked hits, raw mode, path, size); the viewer is local-only, sharing happens only when the user copies the file; terminal states: done (file generated, opens and searches when `--open` was passed) or blocked (exit 2 or 3 after the single explicit-format retry).

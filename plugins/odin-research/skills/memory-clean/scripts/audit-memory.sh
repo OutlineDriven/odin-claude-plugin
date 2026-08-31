@@ -242,10 +242,12 @@ def _feedback_session_check(mf: Path, body: str, session_glob: str):
 
     kw_pattern = re.compile("|".join(re.escape(k) for k in keywords), re.IGNORECASE)
     contradictions = []
+    unavailable_sessions = []
 
     for sf in session_files[:50]:
         try:
-            texts = []
+            assistant_texts = []
+            user_texts = []
             with open(sf, encoding="utf-8", errors="replace") as fh:
                 for raw in fh:
                     raw = raw.strip()
@@ -264,18 +266,41 @@ def _feedback_session_check(mf: Path, body: str, session_glob: str):
                                 if isinstance(c, dict) and c.get("type") == "text"
                             )
                         )
-                        texts.append(text)
-            session_text = " ".join(texts)
-            if kw_pattern.search(session_text) and not RE_CORRECTION.search(session_text):
+                        if obj.get("type") == "assistant":
+                            assistant_texts.append(text)
+                        else:
+                            user_texts.append(text)
+            # STALENESS-RULES.md Step 2: count a contradiction only when
+            # the assistant produced output that contains the rule's keywords
+            # (addressing the topic the rule governs) AND the user accepted it
+            # without correction. Count distinct sessions, not turns.
+            assistant_text = " ".join(assistant_texts)
+            user_text = " ".join(user_texts)
+            if kw_pattern.search(assistant_text) and not RE_CORRECTION.search(user_text):
                 contradictions.append({"session": os.path.basename(sf)})
-        except Exception:
-            continue
+        except Exception as e:
+            # Record unavailable-session-evidence so the run reaches the
+            # SKILL.md 'Missing staleness evidence' blocked path instead of
+            # silently treating unreadable sessions as absent.
+            unavailable_sessions.append({
+                "session": os.path.basename(sf),
+                "error": str(e),
+            })
+
+    if unavailable_sessions:
+        return [{
+            "file": mf.name,
+            "issue": f"staleness evidence unavailable — {len(unavailable_sessions)} session(s) could not be read",
+            "sessions": [s["session"] for s in unavailable_sessions[:5]],
+            "severity": "warning",
+            "unavailable_sessions": unavailable_sessions,
+        }]
 
     if len(contradictions) >= 3:
         severity = "critical" if len(contradictions) >= 5 else "warn"
         return [{
             "file": mf.name,
-            "issue": f"rule may be stale — keywords absent from correction turns in {len(contradictions)} sessions",
+            "issue": f"rule may be stale — assistant violated rule without user correction in {len(contradictions)} sessions",
             "sessions": [c["session"] for c in contradictions[:5]],
             "severity": severity,
         }]

@@ -2,7 +2,7 @@
 
 ODIN workflows for focused research and source-backed findings.
 
-110 skills, category Research.
+102 skills, category Research.
 
 ## Install
 
@@ -19,9 +19,7 @@ codex plugin add odin-research@odin-marketplace
 ## Skills
 
 - agent-transcript
-- answer-stub-questionnaire
 - autolearn
-- browse
 - buzzword-analysis
 - can-i-help
 - capstone
@@ -29,7 +27,6 @@ codex plugin add odin-research@odin-marketplace
 - competitor-changelog
 - competitor-feature-research
 - compound
-- consolidate-to-one-home
 - consult-deployment
 - context-engineering
 - continual-learning
@@ -49,7 +46,6 @@ codex plugin add odin-research@odin-marketplace
 - domain-modeling
 - drift-detect
 - drill
-- eli5
 - engineering-retrospective
 - evaluation-leakage-audit
 - explain-concept
@@ -72,6 +68,7 @@ codex plugin add odin-research@odin-marketplace
 - ground-latest
 - gut-sync
 - handoff
+- headed-browser-takeover
 - history-forget
 - history-health
 - history-notes
@@ -80,7 +77,6 @@ codex plugin add odin-research@odin-marketplace
 - history-sync
 - how
 - idea-sparkbox
-- idea-to-design
 - influence-and-negotiation
 - infrastructure-mentor
 - interview-me
@@ -90,7 +86,6 @@ codex plugin add odin-research@odin-marketplace
 - keep-why-repo-structure
 - keep-why-retrospective
 - keep-why-schema-migration
-- keep-why-setup-wizard
 - knowledge-refresh
 - learning-retrospective
 - map-corpus
@@ -102,7 +97,6 @@ codex plugin add odin-research@odin-marketplace
 - open-source-readiness-audit
 - paced-explanation
 - punishing-practices
-- read-google-doc
 - readiness-assessment
 - readout
 - recall
@@ -112,16 +106,14 @@ codex plugin add odin-research@odin-marketplace
 - show-review
 - slack-qa-investigate
 - social-sentiment
-- sourced-learning-workspace
 - ssotize-audit-fold
-- summarize-google-docs
+- summarize-document-set
 - teach
 - to-questionnaire
 - verify-both-ways
 - verify-this
 - viral-opportunity-scout
 - visual-project-recap
-- voice-of-customer
 - wait-what
 - walk-with-me
 - weekly-review

@@ -1,3 +1,0 @@
-interface:
-  display_name: "Summarize Google Docs"
-  short_description: "Authenticates with Google Drive, fetches recently modified"

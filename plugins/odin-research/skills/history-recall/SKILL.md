@@ -19,6 +19,9 @@ description: 'Use when a user requests the reasoning behind one matched session 
 - `query` (required unless `handle` is supplied): an exact token — error string, function name, flag, or file path — matches strongest; otherwise the question in the user's own words, ranked as a fallback when nothing matches exactly.
 - `handle` (optional): an opaque session handle returned by a prior brief; when supplied, open that session directly instead of searching.
 - `harness` (optional): filter the search to one harness.
+- `byte_budget` (required): the maximum output size in bytes. Defaults to 4096 when the caller does not supply one. The record is trimmed to fit; the cap is paid out of the budget, not added to it.
+- `trust_policy` (required): path to the trust policy file that governs which imported sessions are withheld or demoted. Defaults to `$HISTORY_DIR/trust-policy.json` when present.
+- `handle_registry` (required): path to the handle registry that maps opaque handles to session files. Defaults to `$HISTORY_DIR/handle-registry.jsonl` when present.
 
 ## Procedure
 
@@ -30,7 +33,7 @@ description: 'Use when a user requests the reasoning behind one matched session 
 6. Return one typed record plus the opaque handle.
 
 ## Failure and recovery
-- No match: return an empty record with the handle absent and a `tier` of `relevance` or `none`; do not fabricate a session.
+- No match: return an empty record with the handle absent and a `tier` of `none` when no query matched any session, or `relevance` when matches existed but were filtered by the trust policy; do not fabricate a session.
 - Index unreadable or rebuild required: return a blocked result naming the index state; do not mutate the index.
 - Policy withheld every match: return an empty record with a `policy_withheld` count; do not bypass the policy.
 - Partial result: the record is atomic; a field that cannot be extracted is omitted, never guessed.

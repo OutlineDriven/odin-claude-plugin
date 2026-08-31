@@ -1,6 +1,6 @@
 ---
 name: docs-and-adrs
-description: 'Use when making an architectural decision, changing a public API, or shipping a feature needing rationale. Produces ADRs, inline gotchas, README/API docs, and changelog entries. Not for Diataxis doc writing — use docs-writing; not for PR-based doc sync — use docs-update.'
+description: 'Use when making an architectural decision, changing a public API, or shipping a feature needing rationale. Produces ADRs, inline gotchas, README/API docs, and changelog entries. Not for structured doc authoring — use docs-writing; not for PR-based doc sync — use docs-update.'
 ---
 
 # Docs and ADRs
@@ -25,37 +25,7 @@ description: 'Use when making an architectural decision, changing a public API, 
 
 1. Bound scope before any write: enumerate only the decisions, APIs, and features named by the trigger. Do not document code whose meaning is obvious from reading it, write comments restating what code already says, or document throwaway prototypes. Done when: the scope list names only items from the trigger and nothing invented.
 2. Inspect the repository for an established documentation convention: existing ADRs, project instructions, ADR tooling config. Match the existing location, extension, markup, numbering, and heading set; when evidence conflicts, surface the conflict instead of introducing a second scheme. Apply the defaults below only when no convention exists. Done when: the convention is matched, or the default layout is selected with any conflict surfaced.
-3. For each significant decision — a framework or library choice, data model, auth strategy, API architecture, or any expensive-to-reverse choice, including a choice between competing approaches — write one ADR. Read the existing ADR directory to confirm the next number, then write `docs/adr/NNNN-<kebab-title>.md` (create `docs/adr/` when absent; `NNNN` continues existing numbering or starts at `0001`):
-
-   ```markdown
-   # NNNN. <Title>
-
-   ## Status
-
-   proposed
-
-   ## Date
-
-   YYYY-MM-DD
-
-   ## Context
-
-   Requirements, constraints, and forces.
-
-   ## Alternatives considered
-
-   Each alternative with pros, cons, and its rejection reason.
-
-   ## Decision
-
-   We will <one active-voice statement>, because <the why>.
-
-   ## Consequences
-
-   What becomes easier, what becomes harder, and what this enables or blocks later.
-   ```
-
-   Done when: an ADR file exists at `docs/adr/NNNN-<kebab-title>.md` (or the detected convention's path) for each significant decision, with sequential numbering continuing the existing sequence.
+3. For each significant decision, write one ADR. Follow `references/adrs.md` for the qualifying conditions that gate whether a decision warrants an ADR, the `docs/decisions/` storage location with sequential numbering, and the template with its optional fields. Read the existing ADR directory to confirm the next number before writing. Done when: an ADR file exists at the location and format the reference specifies (or the detected convention's path) for each qualifying decision, with sequential numbering continuing the existing sequence.
 4. Manage the ADR lifecycle in place. Mark an ADR recording a decision taken in this session as `accepted`. When a later ADR reverses an earlier one, set the old ADR's status to `superseded by NNNN`. Never delete an ADR file. Done when: each ADR's status field reflects its lifecycle position.
 5. Inline comments: write only why-comments that explain the constraint, trade-off, or trap the code cannot show. Replace what-comments (`i++; // increment i`) with why-comments (`i++; // retry budget: the upstream limiter drops the first burst per connection`). Done when: every comment in the changed surface is a why-comment; no what-comments remain.
 6. Document each known trap as a gotcha comment at the exact place a future engineer or agent would hit it. State the trigger and the reason, and cross-reference the governing ADR by number where one exists (`// NOTE: call flush() before close(); close() silently drops buffered records otherwise. See ADR 0007.`). Delete commented-out code on this pass. Report a TODO comment that has sat for weeks as stale instead of leaving it as documentation. Done when: each known trap has a gotcha comment at its code site and no commented-out code remains in the changed surface.

@@ -1,3 +1,0 @@
-interface:
-  display_name: "Browse"
-  short_description: "Use when the user asks to open or take over the gstack browser."

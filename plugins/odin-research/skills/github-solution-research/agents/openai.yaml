@@ -1,3 +1,3 @@
 interface:
   display_name: "Github Solution Research"
-  short_description: "Use when asked to find open-source solutions on GitHub for a"
+  short_description: "Use when facing a bug, integration failure, dependency issue"

@@ -1,6 +1,6 @@
 ---
 name: visual-project-recap
-description: 'Use when a developer returns to a project or loses context. Produces an 8-section HTML recap page so they can rebuild the mental model and derive next steps only from evidence. Not for session handoff snapshots — use handoff.'
+description: 'Use when a developer returns to a project or loses context. Produces an 8-section HTML recap page so they can rebuild the mental model and derive next steps only from evidence. Not for session handoff snapshots; use handoff.'
 ---
 
 # Visual project recap

@@ -10,8 +10,8 @@ description: 'Use when a knowledge artifact needs review before sharing or execu
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to review or validate a knowledge artifact before sharing or executing it. |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. |
-| Side effect | Reads the target and references and emits merged findings; writes only if the user chooses a fix. |
+| Authority | Read-only review: no file, VCS, credential, paid, published, deployed, or remote mutation during the review. Any fix is a separate, explicitly user-authorized edit performed after the review completes. |
+| Side effect | Reads the target and references and emits merged findings. No write occurs during the review. A fix, if the user explicitly authorizes one after the review, is a separate edit outside the review's authority. |
 | Done | Strategic and data reviewers run in parallel; findings merge into P1/P2/P3 plus Clean; external content gets an editorial check; every P1 blocks ordinary shipping and receives explicit next choices. |
 
 ## Inputs
@@ -74,16 +74,16 @@ If the input is ambiguous, ask the user to supply a file path or paste the conte
 
 6. **Offer next steps.** Ask: "Review complete. [N] findings ([P1 count] critical, [P2 count] important). What next?" Options: (1) Fix P1/P2 issues now — address findings inline, then re-review; (2) Ship as-is — acknowledge findings and proceed without fixing. Done when: the user is offered the two next-step options.
 
-7. **Execute the chosen action.**
-   - If the user chooses to fix: make targeted edits and re-run the review.
+7. **Execute the chosen action only after the review completes.**
+   - If the user chooses to fix: the review is complete. The fix is a separate, explicitly user-authorized edit. Make targeted edits, then re-run the review as a new invocation.
    - If the user chooses to ship as-is: acknowledge the outstanding findings and stop.
-   Done when: the chosen action is executed (fixes applied and re-reviewed, or findings acknowledged and stopped).
+   Done when: the chosen action is executed (fixes applied and re-reviewed as a separate step, or findings acknowledged and stopped).
 
 ## Failure and recovery
 | Failure class | Recovery |
 |---|---|
 | Ambiguous artifact | Ask the user to provide a file path or paste the content. Do not guess. |
-| One reviewer returns empty | Treat the missing review as having no findings; do not block on a silent reviewer. |
+| One reviewer returns empty | A missing reviewer makes that review's checks unverifiable. Flag them as unverifiable at P2 minimum (matching the data-source-inaccessible rule) and block Done until both reviewers return. |
 | Data source inaccessible | Flag the data claim as unverifiable (P2 at minimum) rather than assuming it is correct. |
 | User declines to choose a next step | Stop. The review is complete; do not proceed unilaterally. |
 | External content check finds AI patterns | Present the finding as a P2; do not rewrite the content. |

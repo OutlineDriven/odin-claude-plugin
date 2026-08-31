@@ -1,6 +1,6 @@
 ---
 name: scrape
-description: 'Use when the user runs /scrape with a URL to extract page data and media through a browser workflow and save assets with a manifest to a local directory. Not for mutating page state — /scrape is read-only.'
+description: 'Use when the user runs /scrape with a URL to extract page data and media through a browser workflow and save assets with a manifest to a local directory. Read-only; not for any mutating page action.'
 ---
 
 # Scrape
@@ -16,7 +16,7 @@ description: 'Use when the user runs /scrape with a URL to extract page data and
 
 ## Not for
 
-- Submitting, posting, sending, logging in, clicking, filling, deleting, creating, ordering, or booking — /scrape is read-only. If the scope implies any write, stop and tell the user.
+- Submitting, posting, sending, logging in, clicking, filling, deleting, creating, ordering, or booking. /scrape is read-only. If the scope implies any write, stop and tell the user.
 
 ## Inputs
 
@@ -28,7 +28,7 @@ description: 'Use when the user runs /scrape with a URL to extract page data and
 ## Procedure
 
 1. If the user gave a URL but no extraction scope, ask once for a one-line description. **Done when:** scope is stated or the user declines.
-2. Refuse mutating intents. If the scope implies writes — submit, post, send, log in, click, fill, delete, create, order, book — stop and tell the user /scrape is read-only. **Done when:** the scope is confirmed read-only or the workflow is refused.
+2. Refuse mutating intents. If the scope implies writes (submit, post, send, log in, click, fill, delete, create, order, book), stop and tell the user /scrape is read-only. **Done when:** the scope is confirmed read-only or the workflow is refused.
 3. Navigate to the URL via the browser. **Done when:** the page loads or a load failure is reported.
 4. Take a text snapshot to find selectors; pull raw HTML for structured data (lists, tables, repeated rows); gather links when URLs are the target. **Done when:** at least one extraction approach yields a candidate data shape.
 5. Iterate selectors, up to four attempts, until extraction yields a sensible shape. **Done when:** a sensible shape is extracted or four attempts are exhausted.
