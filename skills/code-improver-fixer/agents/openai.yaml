@@ -1,3 +1,0 @@
-interface:
-  display_name: "Code Improver Fixer"
-  short_description: "Fixes dispatched findings in scope with verdicts and pins"

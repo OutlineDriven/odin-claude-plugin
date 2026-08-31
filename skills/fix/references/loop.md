@@ -1,4 +1,4 @@
-# Fix Loop — Full Specification
+# Fix loop — full specification
 
 ## Overview
 
@@ -11,6 +11,41 @@ Each iteration:
 4. Runs verifiers and the guard
 5. KEEP if improvement + guard green; REWORK/DISCARD + `git revert HEAD --no-edit` otherwise
 
+
+---
+
+## Mode parameterization
+
+The spine (attempt → verify → classify → retry-or-stop) is shared across all
+modes. Each mode parameterizes four axes:
+
+| Mode | Verifier | Commit policy | Ledger | Termination |
+|------|----------|---------------|--------|-------------|
+| `verifier-failure` / `findings` / `bug-spec` (default) | Repo-native test + lint guard | Checkpoint commit per iteration; revert on red | `fix-results.tsv` | Guard passes (KEEP), 3 skips HALT, or cap exhausted |
+| `finder-fixer` | Next independent review | Never commit — working tree only | Verdict set (fixed/rejected/deferred per finding) | Every dispatched finding has a verdict |
+| `iterative-improve` | Named external reviewer agent | Never commit — working tree only | `ledger.json` (cross-round, reloadable from disk) | Converged (zero critical/major), capped, escalated, or halted |
+| `review-loop` | 8 specialist subagents | Committed fixes on reviewed branch | Append-only review log | Every finding has a disposition (fixed/unresolved/declined/out-of-scope/unverified) |
+
+### Protected branch guard applicability
+
+The protected branch guard applies only to modes that commit: the default
+modes and `review-loop`. The non-committing modes (`finder-fixer`,
+`iterative-improve`) do not mutate VCS state and skip this check.
+
+### Verifier source by mode
+
+- **Default modes**: repo-native test/lint detection per
+  `references/verifiers.md`.
+- **`iterative-improve`**: the named reviewer agent is the verifier. If it
+  does not resolve, halt with `reviewer-unavailable` — do not substitute an
+  inline imitation.
+- **`review-loop`**: eight specialist subagents (api-contract,
+  data-migration, maintainability, performance, red-team, security,
+  simplification, testing) are the verifiers. See
+  `references/review-loop.md`.
+- **`finder-fixer`**: the next independent review verifies the work. Each
+  behavioral fix carries a regression pin (a test that fails pre-fix) so the
+  next review can confirm. See `references/finder-fixer.md`.
 ---
 
 ## Pseudocode
@@ -70,7 +105,7 @@ FUNCTION fix_loop(target, guard, scope, cap=20):
 
 ---
 
-## Decide Matrix
+## Decide matrix
 
 | Condition | delta | Guard | Action | TSV status |
 |-----------|-------|-------|--------|------------|
@@ -86,7 +121,7 @@ FUNCTION fix_loop(target, guard, scope, cap=20):
 
 ---
 
-## Revert Protocol
+## Revert protocol
 
 Always use:
 
@@ -102,7 +137,7 @@ After revert, verify: re-run the verifier and confirm error count matches the pr
 
 ---
 
-## Progress Print (every 5 iterations)
+## Progress print (every 5 iterations)
 
 ```
 === Fix Progress (iteration N / cap) ===
@@ -112,7 +147,7 @@ Kept: K | Reverted: R | Skipped: S | Remaining cap: M
 
 ---
 
-## Recursion Guard
+## Recursion guard
 
 When `fix` is invoked with explicit `--mode <X>` (e.g., `fix --mode verifier-failure`), the input classifier in SKILL.md is bypassed entirely. No GH auto-route fires. This prevents `gh-fix-ci` from re-entering `fix` which would call `gh-fix-ci` again.
 
@@ -120,7 +155,7 @@ The `--mode` flag is the ONLY bypass. Absence of `--mode` always runs the classi
 
 ---
 
-## Protected Branch Guard
+## Protected branch guard
 
 Before entering the loop, check:
 
@@ -136,7 +171,7 @@ detected: ... — REFUSED: fix loop cannot run on protected branch <branch>; cre
 
 ---
 
-## Iteration Cap Override
+## Iteration cap override
 
 Default cap: `20`. Override syntax in invocation:
 

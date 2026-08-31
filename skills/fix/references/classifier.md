@@ -1,17 +1,20 @@
 # fix — Input Mode Classifier
 
-Classify incoming input before dispatching to a fix sub-skill. Evaluate the table top-to-bottom; first match wins.
+Classify incoming input before dispatching to a fix mode. Evaluate the table top-to-bottom; first match wins.
 
 ---
 
-## Mode Table (first-match priority)
+## Mode table (first-match priority)
 
 | Priority | Mode | Minimum conditions | Dispatch target |
 |----------|------|--------------------|-----------------|
 | 1 | `gh-route` | GH-flavored input AND open PR exists AND `gh auth status` exits 0 | `gh-fix-ci` or `resolve-pr-feedback` (sub-routed) |
-| 2 | `findings` | Input is a structured findings artifact or findings-formatted text | findings handler |
-| 3 | `verifier-failure` | Input is raw verifier stdout/stderr | verifier handler |
-| 4 | `bug-spec` | Free-text bug description — catch-all fallback | bug-spec handler |
+| 2 | `review-loop` | User runs `/review` on a branch (or asks for a pre-landing multi-specialist review with a scored report) | review-loop handler (`references/review-loop.md`) |
+| 3 | `iterative-improve` | User asks to iteratively review and fix a target AND names a specific installed reviewer AND gives explicit scope | iterative-improve handler (`references/iterative-improve.md`) |
+| 4 | `finder-fixer` | A review supplies a bounded set of blocking findings AND explicit file scope globs | finder-fixer handler (`references/finder-fixer.md`) |
+| 5 | `findings` | Input is a structured findings artifact or findings-formatted text (without explicit scope globs) | findings handler |
+| 6 | `verifier-failure` | Input is raw verifier stdout/stderr | verifier handler |
+| 7 | `bug-spec` | Free-text bug description — catch-all fallback | bug-spec handler |
 
 ---
 
@@ -30,7 +33,7 @@ Classify incoming input before dispatching to a fix sub-skill. Evaluate the tabl
 
 3. `gh auth status` exits 0.
 
-If any signal is absent the mode degrades to `GH_PARTIAL` ambiguity (see Ambiguity Flags).
+If any signal is absent the mode degrades to `GH_PARTIAL` ambiguity (see Ambiguity flags).
 
 ### Sub-routing within `gh-route`
 
@@ -43,7 +46,53 @@ When both sets of language appear simultaneously, fire `AMBIGUOUS_GH_ROUTE` and 
 
 ---
 
-## Mode 2 — `findings`
+## Mode 2 — `review-loop`
+
+### Signals
+
+- User runs `/review` on a branch, or asks for a "pre-landing review", "multi-specialist review", or a "scored review report"
+- A branch ref and merge base are resolvable in the local working repository
+- No verifier failure or findings artifact is the primary input — the diff itself is the subject
+
+### Dispatch
+
+Routes to `references/review-loop.md`: resolve branch and base, read the full diff, run checklists, dispatch eight specialist subagents, apply fix-clear-defects-first ordering, account for every finding, return a scored report.
+
+---
+
+## Mode 3 — `iterative-improve`
+
+### Signals (all three required)
+
+1. User asks to "iteratively review and fix" a target (or "review-and-fix loop", "improve iteratively")
+2. A specific installed reviewer is named (agent or skill) — no default reviewer is assumed
+3. Explicit scope globs are given or proposed and confirmed
+
+If a reviewer is named but no scope is given, propose `<repo-relative-target>/**` and confirm before launching. If no reviewer is named, this mode does not fire — fall through to `findings` or `bug-spec`.
+
+### Dispatch
+
+Routes to `references/iterative-improve.md`: baseline snapshot, ledger initialization, reviewer probe, round loop with scope guard and oscillation detection, finalize pass, terminal result classification.
+
+---
+
+## Mode 4 — `finder-fixer`
+
+### Signals
+
+- A review supplies a bounded set of blocking findings, each with evidence and a cited location
+- Explicit file scope globs naming the only files this mode may edit
+- Distinguished from `findings` (priority 5) by the presence of scope globs and the expectation of verdict-per-finding output
+
+If findings are supplied without scope globs, fall through to `findings` (priority 5).
+
+### Dispatch
+
+Routes to `references/finder-fixer.md`: verdict taxonomy (fixed/rejected/deferred), regression pins, scope guard, git-safety, minimal diff, no narration, no goalpost moving.
+
+---
+
+## Mode 5 — `findings`
 
 ### Signals
 
@@ -61,7 +110,7 @@ When both sets of language appear simultaneously, fire `AMBIGUOUS_GH_ROUTE` and 
 
 ---
 
-## Mode 3 — `verifier-failure`
+## Mode 6 — `verifier-failure`
 
 ### Signals
 
@@ -85,7 +134,7 @@ Input must arrive without surrounding natural-language framing. If the verifier 
 
 ---
 
-## Mode 4 — `bug-spec`
+## Mode 7 — `bug-spec`
 
 Catch-all. No artifact path, no structured findings format, no GH context, no raw verifier output.
 
@@ -97,7 +146,7 @@ Catch-all. No artifact path, no structured findings format, no GH context, no ra
 
 ---
 
-## Ambiguity Flags
+## Ambiguity flags
 
 Ambiguity fires `AskUserQuestion` in single-select mode (`never multiSelect`). One question per axis.
 
@@ -110,7 +159,7 @@ Ambiguity fires `AskUserQuestion` in single-select mode (`never multiSelect`). O
 
 ---
 
-## Worked Examples
+## Worked examples
 
 ### Example 1 — `gh-route` → `gh-fix-ci`
 
@@ -184,7 +233,7 @@ detected: bug-spec — target=none guard=none scope=* cap=20
 
 ---
 
-## Detection Line Format
+## Detection line format
 
 Every classification emits a single detection line before dispatching:
 
@@ -194,7 +243,7 @@ detected: <mode> — target=TARGET guard=GUARD scope=SCOPE cap=20
 
 Where `TARGET`, `GUARD`, `SCOPE` are literal values — use bare `none` (not `<none>`) when the field has no value:
 
-- `target`: verifier binary, artifact file path, or `none`
+- `target`: verifier binary, artifact file path, reviewer name, or `none`
 - `guard`: shell command used to confirm readiness (e.g. `gh auth status`), or `none`
 - `scope`: glob passed to `fd` to constrain file search, or `*` for repo-wide
 - `cap`: iteration ceiling for the fix loop (default 20; see `references/loop.md`)

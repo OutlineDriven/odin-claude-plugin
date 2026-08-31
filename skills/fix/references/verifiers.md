@@ -1,6 +1,6 @@
-# Verifier Detection and Guard Matrix
+# Verifier detection and guard matrix
 
-## Section 1: Verifier Detection Precedence
+## Section 1: Verifier detection precedence
 
 Repo-native first. Check in this order:
 
@@ -19,7 +19,7 @@ fd --max-depth 2 '^package\.json$'
 fd --max-depth 2 '^dune-project$'
 ```
 
-## Section 2: Per-Language Verifier Matrix
+## Section 2: Per-language verifier matrix
 
 | Language | Primary verifier | Guard command | Detection signal |
 |---|---|---|---|
@@ -33,7 +33,7 @@ fd --max-depth 2 '^dune-project$'
 
 When a repo-native verifier (Section 1) is present, it takes precedence over the language fallback in this matrix.
 
-## Section 3: Guard Definition and Guard-Red Detection
+## Section 3: Guard definition and guard-red detection
 
 A **guard** is a command that must pass after every kept commit. Its job is to detect regressions introduced by a fix.
 
@@ -52,7 +52,7 @@ Exit code alone is not sufficient. Check both conditions:
 
 Capture both stdout and stderr when evaluating guard output. A process that exits 0 while emitting errors to stderr is still guard red.
 
-## Section 4: Verifier Output Delta Computation
+## Section 4: Verifier output delta computation
 
 ```
 delta = previous_error_count - current_error_count
@@ -74,7 +74,7 @@ Error count extraction per verifier:
 
 Extract counts with `git grep` or per-line scanning of captured output. If the count is unparseable for any reason, treat delta as 0 and trigger DISCARD — do not keep a commit whose improvement cannot be verified.
 
-## Section 5: Multi-Verifier Mode
+## Section 5: Multi-verifier mode
 
 When multiple verifiers are detected (e.g., tests present alongside type checking):
 
@@ -85,7 +85,7 @@ When multiple verifiers are detected (e.g., tests present alongside type checkin
 
 Order: run faster verifiers first (type checks, lints) before slower test suites. Report failures from all verifiers, not just the first.
 
-## Section 6: Output Directory
+## Section 6: Output directory
 
 Each fix session creates a directory at:
 
@@ -109,3 +109,28 @@ Inspect with:
 bat -P -p -n fix/{YYMMDD}-{HHMM}-{slug}/fix-results.tsv
 bat -P -p -n fix/{YYMMDD}-{HHMM}-{slug}/summary.md
 ```
+
+---
+
+## Section 7: Reviewer-as-verifier modes
+
+The default modes (verifier-failure, findings, bug-spec) use repo-native test
+and lint commands as verifiers. Three modes use a reviewer or specialist
+panel as the verifier instead:
+
+| Mode | Verifier source | Detection |
+|------|----------------|-----------|
+| `iterative-improve` | Named external reviewer agent (user-specified) | User names the reviewer at invocation; no auto-detection |
+| `review-loop` | Eight specialist subagents dispatched per diff | Fixed roster: api-contract, data-migration, maintainability, performance, red-team, security, simplification, testing |
+| `finder-fixer` | Next independent review | No verifier is run in-loop; each behavioral fix carries a regression pin so the next review can confirm |
+
+When the verifier is a reviewer agent, the guard is the reviewer's verdict:
+zero critical or major findings = green; any critical or major finding = red.
+The delta computation (Section 4) does not apply — the reviewer returns
+findings, not error counts. Instead, the decide matrix in `loop.md` uses
+finding counts: blocking findings decreasing = progress (KEEP); blocking
+findings unchanged or increasing = DISCARD or REWORK.
+
+For `finder-fixer`, there is no in-loop verifier run. The verdict-per-finding
+taxonomy (`fixed` / `rejected` / `deferred`) replaces the KEEP/REWORK/DISCARD
+cycle. See `references/finder-fixer.md`.

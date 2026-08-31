@@ -1,3 +1,0 @@
-interface:
-  display_name: "Code Improver"
-  short_description: "Iterative review-and-fix loop until review passes."
