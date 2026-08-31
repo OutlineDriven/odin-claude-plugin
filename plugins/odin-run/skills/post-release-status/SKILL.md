@@ -1,6 +1,6 @@
 ---
 name: post-release-status
-description: 'Use when a user explicitly asks to post, update, or check cherry-pick status for a release as a Slack Block Kit status board. Not for mutating pull requests or posting to multiple Slack messages.'
+description: 'Use when a user explicitly asks to post, update, or check cherry-pick status for a release as a single Slack Block Kit status board. Lists PRs belonging to the release, maps observed evidence to defined cherry-pick statuses, merges manual overrides, and posts or updates exactly one message. Not for mutating pull requests or posting to multiple messages.'
 disable-model-invocation: true
 ---
 
@@ -11,32 +11,37 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | A user explicitly asks to post, update, or check cherry-pick status for a release. |
-| Authority | Human-only remote mutation. Preview the Slack destination, release, message action, and consequence before accessing credentials or writing to Slack; proceed only under the explicit request. |
-| Side effect | List pull requests for the named release and create or update exactly one Slack Block Kit status board. Do not mutate pull requests or any other Slack message. |
-| Done | The resulting Slack message has a permalink, accurately reflects the current pull-request state, and retains every manually verified status. |
+| Authority | Read-only against the PR source. Reversible write-only for exactly one Slack message: one post or one update, never both in the same run. |
+| Side effect | Lists pull requests for the named release and creates or updates exactly one Slack Block Kit status board. Does not mutate pull requests or any other Slack message. |
+| Done | The resulting Slack message has a permalink, accurately reflects the current pull-request state with manually verified statuses preserved, and the permalink resolves to the intended message. |
 
 ## Inputs
 
-Required inputs are the release identifier, the repository or pull-request source to inspect, and the Slack destination. The Slack integration must provide read access to pull-request state and permission to post or update a message in that destination. An existing status-board message permalink or timestamp is required for an update and omitted for a new post. A supplied set of manually verified statuses is optional; when present, each entry must identify its pull request and verified status unambiguously.
+- **Release identifier** (required): the release name, tag, or version that groups the tracked PRs.
+- **PR-source read credentials** (required): independent credentials granting read access to the pull-request source. These are separate from Slack credentials.
+- **Slack write credentials** (required): integration credentials with permission to post or update a message in the target destination.
+- **Slack destination** (required): the workspace and channel where the status board lives.
+- **Manual status overrides** (optional): a set of manually verified statuses. Each entry must identify its pull request and verified status unambiguously.
+- **Existing message permalink or timestamp** (required for update, omitted for new post): identifies the message to update.
 
 ## Procedure
 
-1. Confirm that the request explicitly authorizes this release-status operation. Resolve the release, repository, Slack workspace and channel, and whether the single intended write is a new message or an update to the identified message. Done when: the release, repository, destination, and create-or-update action are resolved.
-2. Validate identifiers at their boundaries. Reject an ambiguous release, repository, destination, message identifier, or manually verified entry rather than guessing. Do not print, persist, or transmit credentials outside the integrations needed for the requested reads and Slack write. Done when: all identifiers are validated or rejected at their boundaries.
-3. Before accessing credentials or writing remotely, present a preview naming the release, repository, Slack destination, create-or-update action, existing message when applicable, and the fact that one Slack message will change. Stop if the requested target or consequence cannot be determined from the supplied inputs. Done when: the preview is presented and the target and consequence are confirmed.
-4. List the pull requests associated with the release and obtain their current state from the pull-request source. For each pull request, derive its current cherry-pick status only from observed state; mark unavailable or indeterminate evidence as such instead of inferring success. Done when: all pull requests for the release are listed with state derived from observed evidence.
-5. Merge observed state with manually verified statuses by pull-request identity. A manually verified status is authoritative for its entry and must survive refreshes unchanged; automated observations may update only fields that are not manually verified. Done when: observed state and manually verified statuses are merged with verified entries preserved.
-6. Build one Slack Block Kit status board that identifies the release and represents every listed pull request, its current status, and which statuses are manually verified. Ensure the rendered content is based on the merged data from the same run. Done when: the status board is built from merged data identifying the release and every pull request.
-7. Recheck that the previewed destination and action still match the intended write, then either post one new status-board message or update only the identified existing status-board message. Never create a second message while performing an update. Done when: one new message is posted or the identified message is updated, with no second message created.
-8. Obtain the resulting message permalink and compare the posted or updated board with the merged status data. Report success only when the permalink resolves to the intended message, all current pull-request states are represented accurately, and all manually verified statuses remain intact. Done when: the permalink resolves to the intended message with all states accurate and verified statuses intact.
+1. Resolve identifiers and request a preview. Resolve the release, repository or PR source, Slack workspace and channel, and whether the single intended write is a new message or an update to the identified message. Validate each identifier at its boundary: reject an ambiguous release, repository, destination, message identifier, or manually verified entry rather than guessing. Confirm that PR-source read credentials and Slack write credentials are both present and independent. Present a preview naming the release, repository, Slack destination, create-or-update action, and the fact that one Slack message will change. Stop if the requested target or consequence cannot be determined. Done when: all identifiers are resolved and the preview is confirmed.
+2. List PRs matching the release using defined mapping logic. A pull request belongs to the release when its labels, milestone, base branch, or cherry-pick source-PR reference matches the release identifier. Query the PR source with the read credentials. For each matching PR, collect its number, title, merge state, and any cherry-pick evidence (target branch, cherry-pick PR status, or backport label). Done when: all PRs belonging to the release are listed with their observed state.
+3. Map PR states to defined cherry-pick statuses based on observed evidence. The cherry-pick statuses are: `cherry-picked` (evidence shows the change landed on the release branch), `pending` (cherry-pick PR is open or queued), `not-needed` (the PR does not require a cherry-pick for this release), `blocked` (evidence is missing or contradictory), and `unknown` (no evidence available). Derive each status only from observed state. Mark unavailable or indeterminate evidence as `blocked` or `unknown` rather than inferring success. Done when: every listed PR has a cherry-pick status derived from observed evidence.
+4. Merge observed states with manual overrides. A manually verified status is authoritative for its entry and survives refreshes unchanged. Automated observations may update only fields that are not manually verified. Done when: observed state and manual overrides are merged with verified entries preserved.
+5. Post or update exactly one Slack message and verify the permalink. Recheck that the previewed destination and action still match. Build one Slack Block Kit status board identifying the release and representing every PR with its current status and verification flag. Either post one new message or update only the identified existing message. Never create a second message during an update. Obtain the resulting message permalink and compare the posted board with the merged data. Done when: one message is posted or updated, the permalink resolves to the intended message, all current PR states are represented accurately, and manually verified statuses remain intact.
 
 ## Failure and recovery
-- **Invalid or ambiguous input:** perform no Slack write and return `blocked` with the unresolved release, repository, destination, message, or verified-status identity.
-- **Pull-request read failure or incomplete evidence:** perform no Slack write and return `blocked` with the pull requests or fields that could not be established.
-- **Preview mismatch:** perform no Slack write and return `blocked` with the expected and resolved targets.
+
+- **Invalid or ambiguous identifiers:** abort before any read. Perform no Slack write. Return `blocked` with the unresolved release, repository, destination, message, or verified-status identity.
+- **Missing PR-source read credentials or permissions:** abort before any read. Perform no Slack write. Return `blocked` naming the missing credential. Do not conflate Slack write permission with PR-source read permission.
+- **Missing Slack write credentials or permissions:** abort before any Slack write. Return `blocked` naming the missing credential.
+- **Missing PR read evidence:** return `blocked` without updating Slack. Name the pull requests or fields that could not be established.
 - **Slack create or update failure:** do not attempt a different channel, message, or additional post. Return `blocked` with whether no write was observed or the remote result is unknown.
-- **Post-write verification failure:** do not claim completion or overwrite manually verified data in a repair attempt. Return `blocked` with the message identifier if available, the observed partial result, and the fields that failed verification so a human can inspect or reverse the single Slack message.
-- **Permalink retrieval failure:** treat the operation as incomplete even if a write may have occurred; return `blocked` with the message identifier and remote state known from the integration.
+- **Post-write verification failure:** do not claim completion or overwrite manually verified data. Return `blocked` with the message identifier, observed partial result, and fields that failed verification.
+- **Permalink retrieval failure:** treat the operation as incomplete even if a write may have occurred. Return `blocked` with the message identifier and known remote state.
 
 ## Output
-The release and repository, create-or-update action, Slack destination, resulting message permalink on success, and a concise count of listed pull requests and preserved manually verified statuses — terminal classification `complete` only when the done predicate is verified, otherwise `blocked` with the failure class, partial-result state, and exact unresolved evidence.
+
+The release and repository, create-or-update action, Slack destination, resulting message permalink on success, and a concise count of listed PRs and preserved manually verified statuses. Terminal classification `complete` only when the done predicate is verified. Otherwise `blocked` with the failure class, partial-result state, and exact unresolved evidence.

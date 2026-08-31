@@ -1,3 +1,0 @@
-interface:
-  display_name: "Setup Release Tooling"
-  short_description: "Use when the user asks to set up, install, configure, or deploy"

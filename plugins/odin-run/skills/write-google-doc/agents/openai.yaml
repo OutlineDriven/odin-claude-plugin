@@ -1,3 +1,0 @@
-interface:
-  display_name: "Write Google Doc"
-  short_description: "Use when the user asks to create a Google Doc, write Markdown"

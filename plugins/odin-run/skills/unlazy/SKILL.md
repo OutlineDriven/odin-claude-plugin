@@ -1,6 +1,6 @@
 ---
 name: unlazy
-description: 'Use when task decomposition needs gate-file proof before a done claim. Also handles explicit "unlazy", "depth tree", or "gates" requests when work is half-done or splits three layers deep. In orchestrated mode (tree 4+), enforces dispatch-state, human approval binding, and parent reverification before a done claim.'
+description: 'Use when task decomposition needs gate-file proof before a done claim, or when the user says "unlazy", "depth tree", "gates", or "do not stop until it is done". Detects half-done work, premature done claims, stubs, and silently narrowed scope. In orchestrated mode (tree 4+), enforces dispatch-state, human approval binding, and parent reverification before a done claim.'
 ---
 
 # Unlazy
@@ -12,7 +12,7 @@ description: 'Use when task decomposition needs gate-file proof before a done cl
 | Trigger | User invokes 'unlazy', 'depth tree', 'gates', or 'do not stop until it is done'; laziness symptoms appear (half-done work, premature done claims, stubs, silently narrowed scope); or a build decomposes three or more layers deep. |
 | Authority | Reversible-local: writes only named local gate files and evidence; rollback is file deletion of the created .outline/ tree. |
 | Side effect | Creates .outline/GATES.md and per-leaf gate files; executes gate_check.py; flips checkboxes; records EVIDENCE. In orchestrated mode, writes .outline/dispatch.json and approval logs. No remote mutation. |
-| Done | gate_check.py exits 0; every leaf box is checked and EVIDENCE is non-pending; no stubs, placeholders, or follow-up remain; final report emitted only after proof. In orchestrated mode, every returned leaf is parent-reverified and dispatch state is valid. |
+| Done | Solo mode: gate_check.py exits 0; every leaf box is checked and EVIDENCE is non-pending; no stubs, placeholders, or follow-up remain. Honestly surfaced abandonment (ABANDON lines with reasons) is accounted in the report but blocks a clean done: the report carries the abandoned count and ids. Orchestrated mode: same gate requirements plus every returned leaf is parent-reverified, dispatch state is valid, and abandoned count is zero: any abandonment produces HANDOFF REQUIRED and blocks done per `references/dispatch-gates.md`. |
 
 ## Inputs
 
@@ -25,7 +25,7 @@ Each item in the gates file is a checkbox with a unique ID, an observable outcom
 - Box format: `- [ ] <id>: <observable outcome>`
 - Automated gate: `  CHECK: <command>` / `  EXPECT: <substring or /regex/>` / `  EVIDENCE: pending`
 - Manual gate: `  EVIDENCE: pending`
-- Abandoned gate: `ABANDON: <id> <reason>` — reported, not deleted
+- Abandoned gate: `ABANDON: <id> <reason>`, reported, not deleted
 - Leaf IDs: G1, G2, … inside a leaf gates file
 - Branch/root IDs: N1, N2, … inside a branch gates file
 
@@ -42,9 +42,9 @@ Templates: plan contract, leaf gates, and branch gates in assets/gates.md.
    python3 <skill-dir>/scripts/gate_check.py [.outline/GATES.md ...]
    ```
    It runs each CHECK command, compares output against EXPECT (substring by default, or /regex/ with flags), flips a box from `[ ]` to `[x]` when the gate is met, and records EVIDENCE with the actual command output. --status reports without changing anything. **Done when:** gate_check.py has been run and boxes are flipped or unmet gates are identified.
-6. Before reporting done, run gate_check.py again. If any gate is still unchecked or has pending evidence, stop and do that work instead. The done state is the gates file, not the feeling of done. **Done when:** all gates are checked with non-pending EVIDENCE, or remaining work is identified.
-7. If a gate becomes genuinely impossible, add ABANDON: <id> <reason> to the gates file and surface it in the report. Visible surrender is honest; silent scope-narrowing is not. **Done when:** the ABANDON line is added and surfaced.
-8. Report the gates ledger: paste the file with its count, N of N checked, all EVIDENCE lines with actual output, and every ABANDON line surfaced. **Done when:** the report contains the full ledger with counts, evidence, and abandons.
+6. Before reporting done, run gate_check.py again. If any gate is still unchecked or has pending evidence, stop and do that work instead. The done state is the gates file, not the feeling of done. In orchestrated mode, unmet gates block done unconditionally: there is no abandonment path; see `references/dispatch-gates.md`. **Done when:** all gates are checked with non-pending EVIDENCE, or remaining work is identified.
+7. Solo mode only: if a gate becomes genuinely impossible, add ABANDON: <id> <reason> to the gates file and surface it in the report. Visible surrender is honest; silent scope-narrowing is not. Abandonment is accounted but blocks a clean done: the report carries the abandoned count and ids. In orchestrated mode, abandonment is not permitted; an impossible gate produces HANDOFF REQUIRED per `references/dispatch-gates.md`. **Done when:** the ABANDON line is added and surfaced (solo), or the handoff is declared (orchestrated).
+8. Report the gates ledger: paste the file with its count, N of N checked, all EVIDENCE lines with actual output, and every ABANDON line surfaced. In orchestrated mode, report zero abandoned or declare HANDOFF REQUIRED. **Done when:** the report contains the full ledger with counts, evidence, and abandons.
 9. In orchestrated mode (tree 4+), apply the dispatch enforcement layers in `references/dispatch-gates.md`: strict parsing without executing, human approval bound to the exact CHECK before execution, the dispatch state machine in `.outline/dispatch.json`, and parent reverification of every returned leaf. A CHECK cannot approve itself; child-produced evidence alone cannot mark a leaf VERIFIED. The parent reruns every runnable leaf CHECK on return. **Done when:** every returned leaf is parent-reverified, dispatch state is valid, and branch integration gates pass.
 
 ## Failure and recovery
@@ -54,9 +54,9 @@ Templates: plan contract, leaf gates, and branch gates in assets/gates.md.
 - Box is checked but evidence still pending: counts as UNMET; do not report done.
 - Gate becomes impossible: add ABANDON: <id> <reason>; report it; do not silently drop.
 - Stop when gates are unmet rather than narrowing scope or claiming done.
-- Orchestrated mode: missing or stale approval for a CHECK — display the complete binding and leave CHECK unexecuted; never reuse a near match.
-- Orchestrated mode: invalid dispatch transition — leave dispatch.json unchanged; report current state, rejected event, and allowed next events.
-- Orchestrated mode: child return without parent proof — keep leaf unverified; rerun its approved oracles and parent integration gates.
+- Orchestrated mode: missing or stale approval for a CHECK: display the complete binding and leave CHECK unexecuted; never reuse a near match.
+- Orchestrated mode: invalid dispatch transition: leave dispatch.json unchanged; report current state, rejected event, and allowed next events.
+- Orchestrated mode: child return without parent proof: keep leaf unverified; rerun its approved oracles and parent integration gates.
 
 ## Output
-The gates ledger with every box and its EVIDENCE line showing actual command output, a summary line (N of N checked, M abandoned with reasons), and the final report emitted only after all gates are checked and evidence is recorded.
+The gates ledger with every box and its EVIDENCE line showing actual command output, a summary line (N of N checked, M abandoned with reasons), and the final report. Solo mode: abandonment is surfaced honestly with ids and reasons but blocks a clean done. Orchestrated mode: zero abandonment required; any abandonment produces HANDOFF REQUIRED and blocks done per `references/dispatch-gates.md`.

@@ -2,7 +2,7 @@
 
 ODIN workflows for executing plans and shipping finished changes.
 
-80 skills, category Coding.
+74 skills, category Coding.
 
 ## Install
 
@@ -20,18 +20,14 @@ codex plugin add odin-run@odin-marketplace
 
 - append-run-log
 - atomic-issues-prs
-- autobahn
 - autoship
 - browser-cookie-store
 - browser-qa
-- canary-deploy
 - cherrypick-to-release
-- chrome-mcp-troubleshooting
 - close-done
 - create-pull-request
 - cut-new-release-candidate
 - cycle-memo
-- deployment-setup
 - duet
 - fail-recover
 - finish-branch-menu
@@ -43,7 +39,6 @@ codex plugin add odin-run@odin-marketplace
 - git-workflow-and-versioning
 - github-backlog-triage
 - github-bug-report-triage
-- github-gh-cli-operations
 - github-issue-dedupe
 - goal-init
 - guardrail-carve-run
@@ -55,6 +50,7 @@ codex plugin add odin-run@odin-marketplace
 - land-contribution
 - loop-me
 - make-pr-easy-to-review
+- native-messaging-host-conflicts
 - new-branch-and-pr
 - new-space
 - next-best-action
@@ -69,7 +65,6 @@ codex plugin add odin-run@odin-marketplace
 - prepare-repository-for-public-release
 - propose-issue
 - publish-branch
-- publish-pr
 - release-gate
 - release-landing-report
 - repo-health-triage
@@ -81,8 +76,8 @@ codex plugin add odin-run@odin-marketplace
 - scheduler
 - secure-npm-package
 - seed-casebook
-- setup-release-tooling
 - setup-repo-skills
+- setup-tool-credentials
 - shipping
 - show-me-your-work
 - size-the-run
@@ -92,9 +87,8 @@ codex plugin add odin-run@odin-marketplace
 - watch-for
 - watch-for-structured
 - watch-until
-- weekly-wynk
+- weekly-synthesis
 - wizard
 - wontfix
 - work
-- write-google-doc
 - write-pr-description

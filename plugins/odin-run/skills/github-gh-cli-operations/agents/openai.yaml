@@ -1,3 +1,0 @@
-interface:
-  display_name: "Github GH CLI Operations"
-  short_description: "Use when a prompt contains a github.com URL or any git/GitHub"

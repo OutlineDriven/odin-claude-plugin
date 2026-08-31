@@ -1,6 +1,6 @@
 # Execution detail
 
-Branch-specific reference for `work`. Contains the Phase 0 input triage rules, execution engine selection, test coverage checklist, and commit strategy.
+Branch-specific reference for `work`. Contains the Phase 0 input triage rules, execution engine selection, test coverage checklist, and merge conflict handling.
 
 ## Phase 0: input triage
 
@@ -48,9 +48,9 @@ Dispatch each worker with: the plan path, a bounded unit packet (Goal Capsule, D
 Dispatch constraints:
 - Omit `mode` parameter so user permission settings apply. Do not pass `mode: "auto"`.
 - In shared workspace: workers must not `git add`, commit, or run the full test suite concurrently.
-- In worktree-isolated branches: workers may stage and commit inside their own branch; orchestrator owns merging in dependency order and runs authoritative tests.
+- In worktree-isolated branches: workers may stage inside their own branch; orchestrator owns merging in dependency order and runs authoritative tests. Workers never commit; the orchestrator never commits. Staging is for isolation only.
 
-After each serial unit: review the diff against unit scope and `Files:`, run relevant tests, fix before dispatching next, update task list, commit.
+After each serial unit: review the diff against unit scope and `Files:`, run relevant tests, fix before dispatching next, update task list. Do not commit.
 
 ## Test Scenario Completeness
 
@@ -63,21 +63,9 @@ Before writing tests for a feature-bearing unit, verify coverage:
 | Error/failure paths | Unit has failure modes | Invalid inputs, permission/auth denials, downstream failures |
 | Integration | Unit crosses layers | Cross-layer chain exercised without mocks |
 
-## Incremental commits
+## Merge conflicts
 
-| Commit when | Do not commit when |
-|---|---|
-| Logical unit complete | Small part of a larger unit |
-| Tests pass + meaningful progress | Tests failing |
-| About to switch contexts | Purely scaffolding with no behavior |
-| About to attempt risky/uncertain changes | Would need a "WIP" message |
-
-```bash
-git add <files related to this logical unit>
-git commit -m "feat(scope): description of this unit"
-```
-
-Handle merge conflicts immediately.
+Handle merge conflicts immediately. Do not commit to resolve them; fix the conflict in the working tree and leave the result for the finalizer.
 
 ## System-Wide Test Check
 

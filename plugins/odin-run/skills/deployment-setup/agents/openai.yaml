@@ -1,3 +1,0 @@
-interface:
-  display_name: "Deployment Setup"
-  short_description: "Use when the user runs /deployment-setup to configure and"

@@ -1,3 +1,0 @@
-interface:
-  display_name: "Publish PR"
-  short_description: "Use when the user explicitly asks to open, update, or refresh a"

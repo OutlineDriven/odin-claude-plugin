@@ -1,3 +1,3 @@
 interface:
   display_name: "Watch For Structured"
-  short_description: "Use when the user wants a watcher that adds severity, routing"
+  short_description: "Use when the user wants to classify a surface state and page an"

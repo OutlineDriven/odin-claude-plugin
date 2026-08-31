@@ -1,6 +1,6 @@
 ---
 name: open-source-license-selection
-description: 'Use when the user asks to choose, reconcile, or apply an open-source license and package metadata. Recommends a license with tradeoffs and, when requested, updates license files, SPDX metadata, and README consistently. Not for readiness auditing — use open-source-readiness-audit.'
+description: 'Use when the user asks to choose, reconcile, or apply an open-source license and package metadata. Classifies candidates using standard OSI families, checks dependency license compatibility against the reciprocity goal, and when requested applies the chosen license atomically across LICENSE, package metadata, and README. Not for readiness auditing.'
 ---
 
 # Open source license selection
@@ -10,49 +10,41 @@ description: 'Use when the user asks to choose, reconcile, or apply an open-sour
 | Field | Bound contract |
 |---|---|
 | Trigger | The user asks to choose, reconcile, or apply an open-source license and associated package metadata for a repository or non-code artifact. |
-| Authority | Reversible local: write only named local artifacts; rollback is a VCS revert or user file restoration. |
-| Side effect | Recommend a license with tradeoffs and, when requested, update LICENSE, package manager metadata, and README statements consistently. |
-| Done | The selected license fits the stated distribution and reciprocity goals, rights and third-party constraints are surfaced, and LICENSE, package metadata, and README agree. |
+| Authority | Reversible local: write only LICENSE, package manager metadata, and README. Rollback is a VCS revert or user file restoration. |
+| Side effect | Recommend a license with tradeoffs and, when requested, update LICENSE, package metadata, and README consistently in a single atomic pass. |
+| Done | The selected license fits the stated distribution and reciprocity goals, rights and third-party constraints are surfaced, and LICENSE, package metadata, and README agree under the chosen SPDX ID. |
 
 ## Inputs
 
-Must be supplied: the artifact (repository, package, or non-code project) and its distribution intent.
-
-Must be supplied: reciprocity goal (permissive, weak-copyleft, strong-copyleft, or proprietary-trade-secret).
-
-Optional: existing license declaration, third-party dependency licenses, trademark policy, patent grant requirement, security disclosure policy, jurisdiction or export restriction.
+- **Distribution intent** (required): how the artifact will be distributed.
+- **Reciprocity goal** (required): permissive, weak-copyleft, or strong-copyleft.
+- **Existing license** (optional): current LICENSE file or declared license in package metadata.
+- **Dependency licenses** (optional): third-party dependency licenses from lockfiles or the dependency graph.
 
 ## Procedure
 
-1. Gather the user's stated distribution intent and reciprocity goal. Done when: distribution intent and reciprocity goal are recorded.
-2. If present, read the existing LICENSE file and any declared license in package manager files (package.json, Cargo.toml, pyproject.toml, setup.cfg) to identify any existing license constraint. Done when: existing license declarations are read or confirmed absent.
-3. Collect third-party dependency licenses from the dependency graph or lock file. Done when: third-party dependency licenses are collected or confirmed absent.
-4. Surface any conflicts between the existing license declarations and the stated goal. Done when: conflicts are surfaced or confirmed absent.
-5. Classify license families relevant to the distribution intent and reciprocity goal:
+1. Gather the artifact's distribution intent, reciprocity goal, and any existing license declarations. Read the existing LICENSE file and any declared license in package manager files (`package.json`, `Cargo.toml`, `pyproject.toml`, `setup.cfg`). Done when: intent, reciprocity goal, and existing declarations are recorded or confirmed absent.
+2. Read dependency lockfiles to evaluate license compatibility against the stated reciprocity goal. Bound the transitive scope explicitly: check direct dependencies and their transitive closure as reported by the lockfile. Record which dependencies were checked and which were unavailable. Done when: dependency licenses are collected within the stated scope or confirmed absent.
+3. Classify candidate licenses using standard OSI families:
    - Permissive: MIT, BSD-2-Clause, BSD-3-Clause, Apache-2.0.
-   - Strong-copyleft: GPL-3.0, AGPL-3.0.
    - Weak-copyleft: LGPL-3.0, MPL-2.0, EPL-2.0.
-   - Proprietary-compatible: CDDL-1.0, OSL-3.0, EUPL-1.2.
+   - Strong-copyleft: GPL-3.0, AGPL-3.0.
    Done when: relevant license families are classified.
-6. Compare each viable license against the stated goal on: attribution burden, share-alike propagation, patent grant, trademark policy, security disclosure, and compatibility with third-party dependencies. Done when: each viable license is compared on all six dimensions.
-7. Recommend the best-fit license with: the decision, reasoning, tradeoffs, key obligations, compatibility notes, attribution guidance, and the exact SPDX License Identifier. Done when: the recommendation includes decision, reasoning, tradeoffs, obligations, compatibility, attribution, and SPDX ID.
-8. If the user requests an update:
+4. Recommend the best-fit license with: the decision, reasoning, tradeoffs, key obligations, compatibility notes, attribution guidance, and the exact SPDX License Identifier. Compare each viable license against the stated goal on attribution burden, share-alike propagation, patent grant, trademark policy, and compatibility with the checked dependencies. Done when: the recommendation includes decision, reasoning, tradeoffs, obligations, compatibility, attribution, and SPDX ID.
+5. If the user requests application, apply the chosen license atomically. Write all files before confirming success:
    a. Write the LICENSE file with the license text for the chosen SPDX Identifier.
-   b. Write the SPDX License Identifier into package.json ("license" field), Cargo.toml (license field), pyproject.toml (license field with SPDX expression), and setup.cfg (license = field with SPDX expression).
+   b. Write the SPDX License Identifier into package metadata (`package.json` license field, `Cargo.toml` license field, `pyproject.toml` license field with SPDX expression, `setup.cfg` license field).
    c. Update the README license statement to reflect the chosen license, or add one if absent.
-   Done when: LICENSE, package metadata, and README are all written and consistent under the chosen SPDX ID.
-9. Before writing any file, validate: license text is present and matches the chosen SPDX Identifier, package manager format is correct, SPDX expression is valid, and no conflict exists with an already-declared incompatible license. Done when: all validation checks pass or the conflicting declaration is surfaced.
-10. Return the written file paths for user verification. Done when: written file paths are returned.
+   Validate before writing: license text is present and matches the chosen SPDX ID, package manager format is correct, SPDX expression is valid, and no conflict exists with an already-declared incompatible license. If any file fails to write, revert all written files and report the failure. Done when: LICENSE, package metadata, and README are all written, consistent under the chosen SPDX ID, and file paths are returned for verification.
 
 ## Failure and recovery
 
-- **Unretrievable license text**: return the full recommendation with manual application steps. Do not write files.
-- **Incompatible existing declaration**: surface the contradiction. Do not write files that would conflict.
-- **Invalid SPDX expression or unrecognized license identifier**: return partial result: write valid files, flag invalid ones, provide manual fix steps.
-- **Partial result**: if some files write and others fail, return the written paths and explicitly list the unwritten files.
-- **Rollback**: authority is reversible-local; written files are recoverable via VCS revert or user action.
-- **Non-converged**: stop and return the recommendation without writes if any failure class applies.
+- **Unresolvable dependency license conflict:** return the recommendation with the conflict named. Do not write files.
+- **Unretrievable license text:** return the full recommendation with manual application steps. Do not write files.
+- **Invalid SPDX expression or unrecognized license identifier:** stop. Name the invalid expression. Do not write files.
+- **Partial write:** if any file fails to write during application, revert all files written so far and report the failure. Never leave LICENSE, package metadata, and README in an inconsistent state.
+- **Incompatible existing declaration:** surface the contradiction. Do not write files that would conflict.
 
 ## Output
 
-Either a recommendation only (chosen license, reasoning, tradeoffs, obligations, compatibility, attribution, SPDX ID, manual application steps) or a full update (written file paths, chosen license, SPDX ID, consistency statement), plus the provenance section.
+Either a recommendation only (chosen license, reasoning, tradeoffs, obligations, compatibility, attribution, SPDX ID, manual application steps) or a full application (written file paths, chosen license, SPDX ID, consistency statement). No partial or inconsistent write is ever returned as success.

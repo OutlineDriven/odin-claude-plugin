@@ -11,8 +11,8 @@
    **After a parallel batch**: the orchestrator integrates; never trust the handoff summary alone:
    1. Wait for every worker to finish.
    2. **Inspect the actual tree, not reported paths.** Determine what each worker really changed (`git status`/diff).
-   3. **Detect real collisions**: 2+ workers that actually modified the same file. In a shared workspace only the last writer survived: commit the non-colliding work first, then re-run the colliding units serially. With harness-native isolation the collision surfaces as a merge conflict at integration.
-   4. **Review, test, and commit each unit in dependency order.** Stage only that unit's files, commit with a message derived from its Goal, run relevant tests, and fix before the next.
+   3. **Detect real collisions**: 2+ workers that actually modified the same file. In a shared workspace only the last writer survived: re-run the colliding units serially. With harness-native isolation the collision surfaces as a merge conflict at integration.
+   4. **Review and test each unit in dependency order.** Run relevant tests and fix before the next. Do not commit; the finalizer owns commit packaging.
    5. Update the task list.
    6. **Release the workers**: close/clean up each worker handle so it stops holding a concurrency slot or leaving orphans.
    7. Dispatch the next dependency layer.

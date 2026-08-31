@@ -33,17 +33,17 @@ Invoke the skill explicitly — do not treat a casual "review my changes" prompt
 
 - `actionable_findings` from JSON, or the Actionable Findings section from markdown.
 - Full finding detail when needed: `review.json` / artifact `findings`, or `{reviewer}.json` for `why_it_matters` and `evidence`.
-- Stable finding `#` — reuse in commits, residual sinks, and subagent prompts.
+- Stable finding `#` — reuse in residual sinks and subagent prompts.
 
 ## What to apply
 
-Default to applying every actionable finding. Applying is a reversible edit to a tracked tree; diffs are reviewed before commit (below) and tests run after — so leaving a clear, reversible fix unapplied "to be safe" is the failure mode, not the safe choice. Bias to act:
+Default to applying every actionable finding. Applying is a reversible edit to a tracked tree; diffs are reviewed before handoff and tests run after — so leaving a clear, reversible fix unapplied "to be safe" is the failure mode, not the safe choice. Bias to act:
 
 - **Apply** any finding with a concrete `suggested_fix` that is a clear improvement. `confidence` and `autofix_class` tell you what to prioritize and what to flag, not whether you may apply: `autofix_class` is signal, **never permission**.
 - **Push back** — keep the finding, don't apply — when the reviewer is wrong; note why.
 - **High-risk surfaces require a verification plan before apply.** Auth/authz, public or cross-service contracts/schema, and concurrency findings need a written plan that names: (1) the specific trust-boundary cases or compatibility checks that will exercise the change, (2) the rollback step if a check fails, and (3) any residual risk that remains unverified. If the review output does not supply this, do not apply the finding; record it as residual and surface it to the user. Lower-risk findings keep the bias-to-apply rule.
 
-There is no precondition safety checklist for lower-risk fixes — a code-review fix is a reversible edit, so downside is controlled after the fact (diff review + tests + the commit checkpoint), not by gating the apply.
+There is no precondition safety checklist for lower-risk fixes — a code-review fix is a reversible edit, so downside is controlled after the fact (diff review + tests), not by gating the apply.
 
 **Evidence still matches the code** — the fix subagent confirms at `file:line` before editing. The orchestrator does **not** open files just to decide eligibility or dispatch.
 
@@ -59,7 +59,7 @@ Surface what was deferred and why; never silently drop.
 
 The orchestrator **does not investigate findings** (no pre-read of cited files to judge complexity or inline vs subagent). That would spend the context window you are trying to protect.
 
-**Orchestrator owns:** parse review output → **eligibility filter on JSON fields only** → build batches → dispatch fix subagents → review diffs → tests → commit → Residual Work Gate.
+**Orchestrator owns:** parse review output → **eligibility filter on JSON fields only** → build batches → dispatch fix subagents → review diffs → tests → Residual Work Gate. Do not commit; the finalizer owns commit packaging.
 
 **Fix subagents own:** read `file:line`, confirm evidence still matches, apply or skip with reason, return summary.
 
@@ -81,7 +81,7 @@ After eligibility filtering, **dispatch subagents for all remaining applicable f
 - Do not re-run `/review`.
 - Shared-directory fallback: do not stage or commit — return which `#` were applied or skipped and which files changed.
 
-**After each wave:** orchestrator reviews diffs (scope = assigned `#` only), runs tests (`requires_verification: true` on any applied finding → at least targeted tests; multi-file → broader suite), commits (`fix(review): apply findings #…`) unless worktree-isolated subagents merge per Phase 1. Repeat until all batches complete.
+**After each wave:** orchestrator reviews diffs (scope = assigned `#` only), runs tests (`requires_verification: true` on any applied finding → at least targeted tests; multi-file → broader suite). Do not commit; the finalizer owns commit packaging. Repeat until all batches complete.
 
 ### Optional inline shortcut (skip subagent spawn)
 
