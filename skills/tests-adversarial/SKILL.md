@@ -1,6 +1,6 @@
 ---
 name: tests-adversarial
-description: 'Write adversarial tests for error handling, boundaries, and silent failures, with sanitizer gates. Not for feature development — use test-driven; not for test deletion — use tests-purge-unneeded; not for remote or irreversible changes.'
+description: 'Write adversarial tests for error handling, boundaries, and silent failures, with sanitizer gates. Not for feature development — use tdd (offensive-first); not for test deletion — use tests-purge-unneeded; not for remote or irreversible changes.'
 ---
 
 # Adversarial test authoring

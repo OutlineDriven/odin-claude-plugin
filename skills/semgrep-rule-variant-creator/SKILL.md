@@ -1,6 +1,6 @@
 ---
 name: semgrep-rule-variant-creator
-description: 'Use when asked to port an existing Semgrep rule to specified target languages. Produces independent rule+test directories per language through a four-phase test-first cycle. Not for creating new rules — use semgrep-rule-authoring. Not for scans — use semgrep-security-scan.'
+description: 'Use when asked to port an existing Semgrep rule to specified target languages. Produces independent rule+test directories per language through a four-phase attack-first cycle: vulnerable-code cases that the rule must catch precede the rule port. Not for creating new rules — use semgrep-rule-authoring. Not for scans — use semgrep-security-scan.'
 ---
 
 # Semgrep rule variant creator
@@ -112,4 +112,4 @@ Pinned revision: d1f1575cff97816e5cc08af66cd2506099c681d3
 License: CC-BY-SA-4.0
 Reference: [Applicability Analysis](https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3/plugins/semgrep-rule-variant-creator/skills/semgrep-rule-variant-creator/references/applicability-analysis.md); [Language Syntax Guide](https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3/plugins/semgrep-rule-variant-creator/skills/semgrep-rule-variant-creator/references/language-syntax-guide.md); [Workflow Mechanics](https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3/plugins/semgrep-rule-variant-creator/skills/semgrep-rule-variant-creator/references/workflow.md)
 
-Adaptation rationale: Porting existing rules through per-language applicability analysis and independent test-first cycles is a distinct workflow from creating a rule from a bug-pattern description. The original's workflow script is replaced with direct agent procedure; the reference guides are embedded in the Procedure section and not called as external files.
+Adaptation rationale: Porting existing rules through per-language applicability analysis and independent attack-first cycles (vulnerable-code test cases written to catch the sloppy port before the rule lands) is a distinct workflow from creating a rule from a bug-pattern description. The original's workflow script is replaced with direct agent procedure; the reference guides are embedded in the Procedure section and not called as external files.
