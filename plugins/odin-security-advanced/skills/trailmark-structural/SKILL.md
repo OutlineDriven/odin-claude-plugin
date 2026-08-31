@@ -1,6 +1,6 @@
 ---
 name: trailmark-structural
-description: 'Run detailed single-snapshot Trailmark analysis for hotspots, entrypoints, coarse taint, blast radius, boundaries, proxies, subgraphs, and type references. Not for a quick overview — use trailmark-summary; not for branch diffs — use trailmark-review-gate.'
+description: 'Use when a target needs a detailed single-snapshot structural analysis for hotspots, entrypoints, coarse taint, blast radius, privilege boundaries, proxies, subgraphs, and type references. Not for a quick overview — use trailmark-summary. Does not diff between branches or snapshots.'
 ---
 
 # Trailmark structural analysis

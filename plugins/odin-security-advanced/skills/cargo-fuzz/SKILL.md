@@ -1,6 +1,6 @@
 ---
 name: cargo-fuzz
-description: 'Use when initializing, running, measuring, or triaging a cargo-fuzz target in a Rust crate. The named target runs under the intended sanitizer and reproduces any selected artifact. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when initializing, running, measuring coverage, or triaging a cargo-fuzz target in a Rust crate. Installs the nightly toolchain, writes the fuzz_target! harness, runs under the chosen sanitizer, and reproduces crash artifacts. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # cargo-fuzz
@@ -10,8 +10,8 @@ description: 'Use when initializing, running, measuring, or triaging a cargo-fuz
 | Field | Bound contract |
 |---|---|
 | Trigger | User needs to initialize, run, measure, or triage a cargo-fuzz target in a Rust crate. |
-| Authority | Reversible local writes limited to the `fuzz/` workspace, corpus, artifact, and coverage output directories under the target crate. Rollback by removing `fuzz/` or the specific generated directory. |
-| Side effect | Creates and mutates Rust fuzz targets, corpus files, crash artifacts, and coverage reports on the local filesystem. No remote, credential, or VCS mutation. |
+| Authority | Reversible local writes to the `fuzz/` workspace, corpus, artifact, and coverage output directories under the target crate, plus `src/` edits needed to expose a library target (e.g., moving code from `src/main.rs` to `src/lib.rs`) and nightly toolchain and cargo-fuzz installation via `rustup` and `cargo install`. Rollback by removing `fuzz/`, reverting `src/` edits, and uninstalling the added toolchain or tool. |
+| Side effect | Creates and mutates Rust fuzz targets, corpus files, crash artifacts, coverage reports, and `src/` layout on the local filesystem. Installs nightly Rust and cargo-fuzz if absent. No remote, credential, or VCS mutation. |
 | Done | The named cargo-fuzz target runs under the intended sanitizer and reproduces any selected artifact. |
 
 ## Inputs
@@ -56,8 +56,8 @@ description: 'Use when initializing, running, measuring, or triaging a cargo-fuz
 - **"cannot find binary":** the crate has no library target. Move code from `main.rs` into `lib.rs` and re-run `cargo fuzz init`.
 - **Low coverage:** the seed corpus is empty or sparse. Add representative sample inputs to `fuzz/corpus/<target>/`.
 - **Magic value not reached:** supply a dictionary file with `-dict=<file>`.
-- **Partial-result rule:** a crash artifact is a terminal finding, not a partial result; report it and stop.
-- **Rollback:** all mutations are confined to `fuzz/`, `target/`, and `fuzz_html/`. Remove `fuzz/` to revert initialization; delete `fuzz/corpus/<target>/`, `fuzz/artifacts/<target>/`, or `fuzz/coverage/` to revert a single phase. Never mutate files outside these directories.
+- **Partial-result rule:** a crash artifact must be reproduced by re-running the target against it before reporting it as a terminal finding. If reproduction fails, classify the artifact as nondeterministic rather than confirmed. Do not stop on an unreproduced artifact.
+- **Rollback:** mutations cover `fuzz/`, `target/`, `fuzz_html/`, `src/` edits to expose a library target, and toolchain installation. Remove `fuzz/` to revert initialization; delete `fuzz/corpus/<target>/`, `fuzz/artifacts/<target>/`, or `fuzz/coverage/` to revert a single phase. Revert `src/` edits by restoring the original file layout. Uninstall the nightly toolchain or cargo-fuzz with `rustup toolchain uninstall nightly` or `cargo uninstall cargo-fuzz` if they were installed by this skill.
 
 ## Output
 A running or completed fuzz campaign under the chosen sanitizer, a corpus under `fuzz/corpus/<target>/`, any crash artifacts under `fuzz/artifacts/<target>/` (each reproducible by re-running the target against the artifact path), and optionally an HTML coverage report under `fuzz_html/`.

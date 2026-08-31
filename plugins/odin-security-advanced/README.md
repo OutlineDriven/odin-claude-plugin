@@ -2,7 +2,7 @@
 
 Advanced ODIN workflows for threat analysis and security hardening.
 
-40 skills, category Security.
+39 skills, category Security.
 
 ## Install
 
@@ -21,6 +21,7 @@ codex plugin add odin-security-advanced@odin-marketplace
 - address-sanitizer
 - aflpp
 - atheris
+- build-program-graph
 - burp-search-command
 - burpsuite-project-parser
 - cargo-fuzz
@@ -39,18 +40,16 @@ codex plugin add odin-security-advanced@odin-marketplace
 - mermaid-to-proverif
 - oauth2-flow-implementation
 - oss-fuzz
+- port-static-analysis-rule
+- project-findings-onto-graph
 - ruzzy
 - security-finding-verification
 - semgrep-rule-authoring
-- semgrep-rule-variant-creator
 - smart-contract-audit-prep
 - smart-contract-secure-workflow
 - token-integration-analyzer
-- trailmark-audit-augmentation
-- trailmark-code-graph
-- trailmark-finding-triage
-- trailmark-review-gate
 - trailmark-structural
+- triage-security-finding
 - variant-hunt
 - variant-neighborhood-seeding
 - vector-forge

@@ -1,6 +1,6 @@
 ---
 name: atheris
-description: 'Use when a user needs coverage-guided fuzzing for Python code or a Python native extension using Atheris. Sets up an instrumented Atheris harness that executes the target and reproduces saved failures. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a user needs coverage-guided fuzzing for Python code or a Python native extension using Atheris. Sets up an instrumented harness, configures sanitizer flags for native extensions, and reproduces saved crash artifacts. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Atheris
@@ -10,7 +10,7 @@ description: 'Use when a user needs coverage-guided fuzzing for Python code or a
 | Field | Bound contract |
 |---|---|
 | Trigger | User needs coverage-guided fuzzing for Python code or a Python native extension using Atheris. |
-| Authority | Write only the Atheris harness file, a corpus directory, and the local fuzzing process. Roll back by deleting the harness file and corpus directory; no source under test is mutated. |
+| Authority | Write the Atheris harness file, a corpus directory, the local fuzzing process, and when required for dependency management, create or modify `pyproject.toml` and `uv.lock` in the harness directory. Roll back by deleting the harness file and corpus directory and restoring `pyproject.toml` and `uv.lock` to their pre-run state; no source under test is mutated. |
 | Side effect | Local writes: a `fuzz.py` (or named) harness, a `corpus/` directory of seed and crash artifacts, and a transient fuzzing process. |
 | Done | Atheris executes an instrumented target through a deterministic `TestOneInput` harness, reports coverage, and any saved crash artifact reproduces the same failure when replayed. |
 
@@ -27,7 +27,7 @@ description: 'Use when a user needs coverage-guided fuzzing for Python code or a
 
 1. **Determine target kind.** If the target is pure Python, follow the pure-Python path. If it is a C extension compiled from source, follow the native-extension path. Do not guess; ask the user when the kind is ambiguous.
 
-2. **Install Atheris.** In the harness directory run `uv init --bare` once if it is not already a uv project, then `uv add atheris`. Verify with `python -c "import atheris; print(atheris.__version__)"`.
+2. **Install Atheris.** If the harness directory is not already a uv project (no `pyproject.toml` present), run `uv init --bare` once. Then `uv add atheris`. Verify with `python -c "import atheris; print(atheris.__version__)"`.
 
 3. **Write the harness** (`fuzz.py` or a named file). The harness must be deterministic: no `random`, `time`, or other nondeterministic input inside `TestOneInput`.
    - Decorate the entry point with `@atheris.instrument_func`.
@@ -68,7 +68,7 @@ description: 'Use when a user needs coverage-guided fuzzing for Python code or a
 - **Memory-allocation or leak noise.** Recovery: set `ASAN_OPTIONS=allocator_may_return_null=1,detect_leaks=0`.
 - **Crash artifact does not reproduce.** Cause: nondeterminism in the harness (randomness, time, unordered iteration over mutable state). Recovery: remove the nondeterminism so `TestOneInput` is a pure function of `data`, then rerun. A non-reproducing crash is not a confirmed defect.
 - **Partial-result rule.** A campaign that finds no crash is a partial result (coverage gained, no defect proven), not proof of absence. Report coverage and corpus growth; do not claim the target is bug-free.
-- **Rollback.** Delete the harness file and the `corpus/` directory to revert local writes. The source under test is never modified by this skill.
+- **Rollback.** Delete the harness file and the `corpus/` directory. Restore `pyproject.toml` and `uv.lock` to their pre-run state, or if they were created by this skill, remove the added atheris entry and `no-binary-package` configuration. The source under test is never modified by this skill.
 
 ## Output
 - A deterministic, instrumented Atheris harness file.

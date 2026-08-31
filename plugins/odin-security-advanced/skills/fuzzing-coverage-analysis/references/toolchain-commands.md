@@ -1,9 +1,6 @@
 # Toolchain commands
 
-Branch-specific build, run, and report commands for steps 2, 5, and 6 of the
-SKILL.md procedure. The shared spine (pick one toolchain, build at -O2, run
-over corpus, merge and report excluding harness noise) stays in SKILL.md;
-this file carries the per-toolchain flags and commands.
+Branch-specific build, run, report, and differential commands for the SKILL.md procedure. The shared spine (pick one toolchain, build at -O2, run over corpus, merge and report excluding harness noise) stays in SKILL.md; this file carries the per-toolchain flags and commands.
 
 ## LLVM / Clang (C/C++)
 
@@ -42,6 +39,12 @@ Run:
 ```
 `.gcda` files accumulate across runs; use `gcovr --delete` to start fresh.
 
+Differential (when a baseline profile was supplied):
+```
+gcovr --gcov-executable "llvm-cov gcov" --exclude harness --exclude execute-rt --root . --html-details -o <target>/coverage_diff.html <baseline-gcda-dir> <target-gcda-dir>
+```
+Compare line coverage between the two `gcovr` HTML reports to identify regions gained or lost.
+
 Merge and report:
 ```
 gcovr --gcov-executable "llvm-cov gcov" --exclude harness --exclude execute-rt --root . --html-details -o <target>/coverage.html
@@ -63,4 +66,13 @@ cargo +nightly cov -- show -Xdemangler=rustfilt <target-binary> \
   -instr-profile=<profdata> \
   -show-line-counts-or-regions -show-instantiations \
   -format=html -o <target>/html/ <src-filter>
+```
+
+Differential (when a baseline profile was supplied):
+```
+cargo +nightly cov -- show -Xdemangler=rustfilt <target-binary> \
+  -instr-profile=<baseline>.profdata \
+  -instr-profile=<target>.profdata \
+  -show-line-counts-or-regions -show-instantiations \
+  -format=html -o <target>/diff_html/ <src-filter>
 ```

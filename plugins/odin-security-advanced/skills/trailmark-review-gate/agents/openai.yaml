@@ -1,3 +1,0 @@
-interface:
-  display_name: "Trailmark Review Gate"
-  short_description: "Run a Trailmark graph-regression gate over a branch, PR, or ref"

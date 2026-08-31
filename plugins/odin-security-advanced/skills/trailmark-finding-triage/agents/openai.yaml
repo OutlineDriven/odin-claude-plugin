@@ -1,3 +1,0 @@
-interface:
-  display_name: "Trailmark Finding Triage"
-  short_description: "Triage one anchored finding into Promote, Needs manual review"

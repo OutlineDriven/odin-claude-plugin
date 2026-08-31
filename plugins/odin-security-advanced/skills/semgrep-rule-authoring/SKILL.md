@@ -1,6 +1,6 @@
 ---
 name: semgrep-rule-authoring
-description: 'Use when a vulnerability or code pattern and target language need a new custom Semgrep detection. Produces one validated, tested rule. Not for porting an existing rule — use semgrep-rule-variant-creator. Not for scans — use semgrep-security-scan.'
+description: 'Use when a vulnerability or code pattern and a target language need a new custom static-analysis detection rule. Produces one validated, tested rule with a graded vulnerable/safe/edge/nested test matrix. Not for porting an existing rule to another language — use port-static-analysis-rule. Not for running scans with existing rules — use semgrep-security-scan.'
 ---
 
 # Semgrep rule authoring
@@ -16,7 +16,7 @@ description: 'Use when a vulnerability or code pattern and target language need 
 
 ## Not for
 
-- Porting an existing rule to new languages — use semgrep-rule-variant-creator.
+- Porting an existing rule to another language or analyzer — use port-static-analysis-rule.
 - Running a security scan with existing rules — use semgrep-security-scan.
 
 ## Inputs
