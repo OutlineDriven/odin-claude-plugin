@@ -56,10 +56,7 @@ Evaluating coarser units yields even lower similarity: at paragraph-block granul
 
 Manual review identified a genuine contradiction undetected by scoring. Prior to the run documenting this behavior, `builder.md` and `duet.md` each contained a `[MANDATORY]` block requiring thinking tools for reasoning, followed by subsequent text permitting omission: "reach for them when they actually help, and skip them when the path is straightforward" (builder), and "what you reach for when the natural rhythm of pick-and-execute is no longer producing decisions" (duet). Both statements contradicted the canonical `sequential-thinking [ALWAYS USE]`. A rewrite removed these trailing clauses, so the quoted text no longer appears in the working tree.
 
-This contradiction fails the documented conflict predicate on both criteria:
-
-- **Similarity score**: The conflicting sentences share minimal tokens with the concise baseline rule, scoring well below 0.45.
-- **Modal opposition**: Neither sentence contains recognized modal opposites. Structural headings (`[MANDATORY]`) and the baseline's `[ALWAYS USE]` tag carry the obligation, while the verb "skip" conveys permission. No standard `must`/`never` pair appears in the conflicting text.
+This contradiction fails the documented conflict predicate on both criteria. On the similarity score, the conflicting sentences share minimal tokens with the concise baseline rule, scoring well below 0.45. On modal opposition, neither sentence contains recognized modal opposites. Structural headings (`[MANDATORY]`) and the baseline's `[ALWAYS USE]` tag carry the obligation, while the verb "skip" conveys permission. No standard `must`/`never` pair appears in the conflicting text.
 
 The rule would fail to detect this contradiction even with a threshold of zero. **Lexical predicates over modal keywords cannot detect contradictions expressed through ordinary verbs or markup hierarchy**. The conflict rule functions only for explicit modal reversals; structural review remains necessary for semantic contradictions.
 
