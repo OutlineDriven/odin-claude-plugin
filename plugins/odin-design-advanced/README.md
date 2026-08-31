@@ -2,7 +2,7 @@
 
 Advanced ODIN workflows for polished interfaces and design systems.
 
-5 skills, category Design.
+4 skills, category Design.
 
 ## Install
 
@@ -18,7 +18,6 @@ codex plugin add odin-design-advanced@odin-marketplace
 
 ## Skills
 
-- design-dispute-recommend
 - final-grain
 - ui-animation
 - visual-brainstorm-companion
