@@ -1,0 +1,3 @@
+interface:
+  display_name: "Project Findings Onto Graph"
+  short_description: "Use when SARIF results, reviewer annotations, or a third-party"

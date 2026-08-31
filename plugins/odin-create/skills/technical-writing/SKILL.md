@@ -1,6 +1,6 @@
 ---
 name: technical-writing
-description: 'Write or review technical prose using real symbols and controlled English. Also handles draft editing when generation is unnecessary. Not for general prose deliverables — use writer; not for remote or irreversible changes.'
+description: 'Use when technical prose needs writing or reviewing with real symbols and controlled English, including draft editing when generation is unnecessary. Also handles draft editing when generation is unnecessary. Not for general prose deliverables — use writer; not for remote or irreversible changes.'
 ---
 
 # Technical writing

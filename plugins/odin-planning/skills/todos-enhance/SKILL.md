@@ -1,6 +1,6 @@
 ---
 name: todos-enhance
-description: 'Deepen a coarse task list: split compound work, order real dependencies, and pin one observable criterion per task. Not for stale-list reconciliation — use todos-update; not for adding requirements — use todo-add.'
+description: 'Use when the user says the tasks are too vague or asks to sophisticate the todos, or the list reads as headings rather than executable work. Not for stale-list reconciliation — use todos-update; not for adding requirements — use todo-add.'
 ---
 
 # Sophisticate todos

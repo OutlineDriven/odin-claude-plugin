@@ -133,7 +133,28 @@ if (badQuote.length)
 // A description with no trigger phrase leaves the model guessing when the skill
 // applies, which is the failure that makes a skill fire unreliably. Human-only
 // skills are exempt: nothing routes to them automatically.
-const TRIGGERS = ["use when", "use this", "use for", "runs /", "invoke", "asks to", "says "];
+// "Use after a build" and "Use on direct request" state a condition just as well
+// as "Use when", so they route. A bare imperative ("Design non-trivial code")
+// does not: it says what the skill does, never when to reach for it.
+//
+// The trailing space is load-bearing. Without it, the "not for X, use to-spec"
+// pointer every description carries would match "use to" and pass a skill whose
+// own description never states a trigger.
+const TRIGGERS = [
+  "use when ",
+  "use this ",
+  "use for ",
+  "use to ",
+  "use after ",
+  "use on ",
+  "use during ",
+  "runs /",
+  "invoked ",
+  "invoke ",
+  "asks to ",
+  "asks for ",
+  "says ",
+];
 const badDescription = [];
 for (const [, dir] of skills) {
   const fm = parsed.get(dir);

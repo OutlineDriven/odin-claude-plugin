@@ -1,6 +1,6 @@
 ---
 name: test-migration-coverage-gate
-description: 'Delete a superseded test only after every assertion maps to its replacement, with a coverage receipt in the commit. Not for tests that catch no real bug — use tests-purge-unneeded; not for untracked data or changes without VCS rollback.'
+description: 'Use when about to delete a test on the claim that a new harness, suite, or scenario already covers it. Not for tests that catch no real bug — use tests-purge-unneeded; not for untracked data or changes without VCS rollback.'
 ---
 
 # Test migration coverage gate

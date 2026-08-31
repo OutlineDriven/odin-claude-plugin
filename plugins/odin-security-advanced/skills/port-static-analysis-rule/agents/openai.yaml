@@ -1,0 +1,3 @@
+interface:
+  display_name: "Port Static Analysis Rule"
+  short_description: "Use when an existing static-analysis rule must be ported to"

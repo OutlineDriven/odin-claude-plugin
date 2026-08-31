@@ -1,6 +1,6 @@
 ---
 name: tests-purge-unneeded
-description: 'Delete tests proved unable to catch real bugs through mutation, type guarantees, or boundary analysis. Not for tests superseded by a new harness — use test-migration-coverage-gate; not for untracked data or changes without VCS rollback.'
+description: 'Use when a legacy, slow, or duplicate test suite is being cleaned up, a post-refactor sweep is due, or the type system already covers an asserted contract. Not for tests superseded by a new harness — use test-migration-coverage-gate; not for untracked data or changes without VCS rollback.'
 ---
 
 # Purge unneeded tests

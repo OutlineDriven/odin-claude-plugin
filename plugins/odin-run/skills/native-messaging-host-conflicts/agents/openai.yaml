@@ -1,0 +1,3 @@
+interface:
+  display_name: "Native Messaging Host Conflicts"
+  short_description: "Use when a browser extension that talks to a native messaging"

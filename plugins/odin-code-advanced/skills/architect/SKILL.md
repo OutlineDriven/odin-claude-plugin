@@ -1,6 +1,6 @@
 ---
 name: architect
-description: 'Design non-trivial code or improve codebase architecture. Also handles surveying for shallow modules, locating seams, deepening structures, hardening with guardrails, and making code testable. Not for architecture diagrams, deploy, remote, credential, or irreversible changes.'
+description: 'Use when non-trivial code needs designing before implementation, or an existing codebase needs its architecture improved: surveying for shallow modules, locating a seam, deepening a structure, hardening with guardrails, or making code testable. Also handles surveying for shallow modules, locating seams, deepening structures, hardening with guardrails, and making code testable. Not for architecture diagrams, deploy, remote, credential, or irreversible changes.'
 ---
 
 # Architect

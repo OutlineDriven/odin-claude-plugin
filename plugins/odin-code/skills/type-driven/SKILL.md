@@ -1,6 +1,6 @@
 ---
 name: type-driven
-description: 'Develop with refined types: model domains, encode state machines, harden API boundaries, make invalid states unrepresentable. Not for TypeScript-specific doctrine — use typescript-best-practices; not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the work is modeling a domain, encoding a state machine, hardening an API boundary, making invalid states unrepresentable, or parsing instead of validating. Not for TypeScript-specific doctrine — use typescript-best-practices; not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Type-driven development

@@ -1,6 +1,6 @@
 ---
 name: to-greenfield
-description: 'Name a codebase field (dark, red, blue, or brown) with one-fact evidence and execute its first corrective action. Also handles per-subsystem diagnosis. Not for writing specs — use to-spec; not for remote or irreversible changes.'
+description: 'Use when the user says greenfield this or rescue this codebase, or names a field: dark, red, blue, or brown. Also handles per-subsystem diagnosis. Not for writing specs — use to-spec; not for remote or irreversible changes.'
 ---
 
 # To greenfield

@@ -1,6 +1,6 @@
 ---
 name: todos-update
-description: 'Re-sync a stale task list against landed work: prove completions, drop overtaken items, add blockers, and re-order dependencies. Not for deepening coarse lists — use todos-enhance; not for adding requirements — use todo-add.'
+description: 'Use when the user asks to update the todos, resync the task list, or say what to do next, or the plan and the tree have drifted apart. Not for deepening coarse lists — use todos-enhance; not for adding requirements — use todo-add.'
 ---
 
 # Update todos

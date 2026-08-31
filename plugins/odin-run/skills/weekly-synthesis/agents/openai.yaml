@@ -1,0 +1,3 @@
+interface:
+  display_name: "Weekly Synthesis"
+  short_description: "Use when the user asks to compile a weekly synthesis, a weekly"
