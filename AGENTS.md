@@ -1,84 +1,67 @@
-# AGENTS.md: `~/.claude/claude` (ODIN plugin source for Claude Code)
+# Repository contract
 
-Edit `AGENTS.md` only; `CLAUDE.md` is a symlink to it. Never `write` CLAUDE.md directly: a write-replace severs the link and silently forks the two files.
+## Repository file
 
-## Output-styles edit rule [DEFAULT]
+Edit `AGENTS.md`, never `CLAUDE.md`. `CLAUDE.md` is a symlink, so replacing it forks the two files.
 
-Treat `system-prompt-baseline.md` as the single source of truth for the agent's persona/doctrine: make every doctrine change there first, never in an output-style file alone.
+## Canonical baseline
 
-**Always propagate `system-prompt-baseline.md` changes to `output-styles/*.md` files.** Every edit to the canonical MUST land as a single atomic commit that ALSO updates the embedded cascade in EVERY output-style file (`{axiom-mode,builder,duet,linus,odin}.md` AND `benchmark.md`); the Claude Code loader does not resolve refs, so each output-style must embed the full baseline at its tail. Edit at-once, never separately. Per-file commits and per-style sequential agents are the anti-pattern; one commit, one operation, one diff scope. The embedded baseline span MUST be byte-identical to `system-prompt-baseline.md` from the charter `<role>` onward.
+Make every persona or doctrine change in `system-prompt-baseline.md` first. It is the source of truth.
 
-`scripts/sync-baseline.py` enforces that invariant; it is no longer review-enforced. Do not hand-propagate the cascade:
+Propagate each canonical change to all six output styles: `axiom-mode.md`, `builder.md`, `duet.md`, `linus.md`, `odin.md`, and `benchmark.md` under `packages/odin-core/output-styles/`. The Claude Code loader does not resolve references, so each style must embed the full baseline at its tail. Keep the span from the charter `<role>` through EOF byte-identical to `system-prompt-baseline.md` from `<role>` onward.
 
-1. Edit `system-prompt-baseline.md`. Touch nothing below the charter `<role>` in any output-style.
-2. Run `python3 scripts/sync-baseline.py`. It rewrites each style from its SECOND `<role>` line (the canonical charter; the first opens the persona voice) to EOF, preserving the persona preamble above it.
-3. Run `python3 scripts/sync-baseline.py --check`. Exit 0 means every style matches canonical. Exit 1 lists the drifted files; exit 2 means a style lacks the two `<role>` lines the layout requires, or the canonical is missing.
-4. Stage and commit canonical + all 6 output-styles in ONE commit.
+Perform propagation as one operation with one agent and one diff scope; never divide it by style.
 
-The `sync-baseline` prek hook runs the same script on any change to the canonical or a style, so `prek run --all-files` catches drift even if the steps above are skipped.
+Use the baseline generator; never hand-propagate the cascade:
 
-Never hand-edit `output-styles/benchmark.md`; its auto-gen header (margin-runner v0.5.5) marks it do-not-modify. The generator is the one sanctioned writer: it touches only the embedded canonical-baseline cascade region beneath the runner-specific preamble, which is exactly what the do-not-modify marker permits. Hand-edits above that region still require explicit user authorization.
+1. Edit `system-prompt-baseline.md` without changing an output style below its charter `<role>`.
+2. Run `python3 scripts/sync-baseline.py`. It replaces each style from its second `<role>` through EOF and preserves the persona preamble above it.
+3. Run `python3 scripts/sync-baseline.py --check`. Exit 0 means all styles match; exit 1 names drifted files; exit 2 means the canonical file or a required two-`<role>` layout is missing.
+4. Stage and commit the canonical file and all six styles together.
 
-## Submodule handling
+Never hand-edit `packages/odin-core/output-styles/benchmark.md`. Its margin-runner v0.5.5 header marks it as generated. The baseline generator may change only the embedded cascade below the runner preamble; a hand edit above that region requires explicit user authorization.
 
-Commit inside this tree and push from inside (it is a git submodule of `~/.claude`):
+## Submodule publishing
 
-```bash
-cd /home/alpha/.claude/claude && git push origin main
-```
+Commit and push from this repository, not its parent `~/.claude`, because this tree is a Git submodule. From this repository's root, use plain `git push origin main`.
 
-Plain `git push` only; force-push is denied at the Claude permissions layer (`git push -f`, `--force`, and every `--force-with-lease*` variant are blocked).
+## Package surfaces
 
-## Coordinated package version
+Keep every public package, plugin, and marketplace version at the single `releaseVersion` literal `2.0.0`; never bump only some manifests. `catalog/packages.json` owns package identity.
 
-Public package, plugin, and marketplace versions are the single literal `2.0.0` (`releaseVersion`). `catalog/packages.json` is the identity ledger. `scripts/render-package-surfaces.mjs` and `scripts/check-package-surfaces.mjs` own the 29 committed package roots and the shared Claude/OMP catalog. `scripts/render-package-provenance.mjs` owns the 29 `PROVENANCE.md` files. Do not bump a subset of manifests. Do not invent a second authored skill tree under `packages/*/skills`.
+Treat the following generated files as generator-owned:
 
-Tooling-only changes (pre-commit hooks, formatter config) and editing-primer doc updates (this file) do not change `releaseVersion`.
+- `scripts/render-package-surfaces.mjs` and `scripts/check-package-surfaces.mjs` own the 29 committed package roots, the root `package.json` script block, and the shared Claude/OMP catalog.
+- `scripts/render-package-provenance.mjs` owns the 29 `PROVENANCE.md` files.
 
-Do not add or backfill `CHANGELOG.md` entries for routine version work.
+Never hand-edit a generator-owned surface. Change its generator or catalog input, rerun the renderer, and commit the input and rendered output together. Do not create another authored skill tree under `packages/*/skills`.
 
-## Skill frontmatter
+Do not change `releaseVersion` for tooling-only changes such as pre-commit hooks or formatter configuration, or for edits to this file. Do not add or backfill `CHANGELOG.md` entries for routine version work.
 
-Single-quote any SKILL.md frontmatter value containing `: ` (colon-space), in `description` and `metadata.short-description` alike. Unquoted colon-space in a plain scalar is invalid YAML (PyYAML: `mapping values are not allowed here`); Claude Code's lenient loader masks the defect, so it ships silently broken for strict parsers.
+## Skill metadata
 
-## Skill harness manifest
+Single-quote every `SKILL.md` frontmatter value that contains `: `, including `description` and `metadata.short-description`. Strict YAML parsers reject an unquoted colon-space even though Claude Code's loader accepts it. `scripts/check-skill-routes.mjs` enforces this at commit time: an unquoted colon-space is an error, not a silent normalization.
 
-Give every directory under `skills/` an `agents/openai.yaml`. The Codex and ChatGPT harnesses read it for the skill's UI title and blurb; a skill without one falls back to its raw slug in the harness skill list.
+`agents/openai.yaml` is generated, not hand-authored. `scripts/render-skill-manifests.mjs` derives every manifest from SKILL.md frontmatter: `interface.display_name` is the title-cased name with an in-script acronym table (api→API, ci→CI, gh→GH, …); `interface.short_description` is the first sentence of `description`, hard-truncated at 64 chars on overflow and failed, not padded, under 25. Adding a skill means adding `SKILL.md` and running the generator (`node scripts/render-skill-manifests.mjs`); the prek hook `render-skill-manifests --check` fails on any drift between frontmatter and the on-disk manifest. Do not hand-edit a manifest; change the frontmatter and rerun the generator.
 
-```yaml
-interface:
-  display_name: "Writing Skills"
-  short_description: "Write documents agents consume"
-```
+`scripts/check-skill-routes.mjs` is the commit-time identity gate. It checks that each directory name equals its frontmatter `name`, equals a registry row slug, and equals the manifest identity; that `catalog/provenance-rows.json` count is consistent (`rows.length` == `skill_count` == directory count); and that every `display_name` is unique across all manifests (Set collision check). Edit the registry rows and `skill_count` in the same commit that touches `skills/`.
 
-Hold `short_description` to 25-64 characters so the harness does not truncate it, and keep every `display_name` unique across `skills/` so two entries stay distinguishable. Nothing here validates the file: no script reads it, no hook checks it, and `prek` is silent on it, so a missing or malformed manifest ships without warning. Adding a skill means adding its manifest in the same commit.
+## Verification
 
-## Verification: format-only
+Run `prek run --all-files` as the sole repository gate. Do not invent language test commands or add CI without an explicit request; this repository has no build, unit-test suite, or GitHub Actions workflow.
 
-Run `prek run --all-files` as the sole gate (`prek` is the Rust drop-in for `pre-commit`, brew-installed at `/home/linuxbrew/.linuxbrew/bin/prek`; hooks defined in `.pre-commit-config.yaml`). Never invent `pytest` / `cargo test` / language test commands: there is no build, unit-test suite, or `.github/` CI here; don't add CI without an explicit ask.
+Test persona or doctrine changes in a fresh Claude Code session. The canonical baseline and output styles load only at session start, so the current session cannot verify them.
 
-## Active-style reload semantics
+## External harness carriers
 
-Run functional smoke tests of persona/doctrine edits in a fresh Claude Code session; `system-prompt-baseline.md` and `output-styles/*.md` load only at session start, so in-session verification of those files proves nothing.
+Propagate every shared doctrine change to `~/.codex/AGENTS.md` and `~/.omp/agent/AGENTS.md`. The baseline generator does not update these external harness carriers.
 
-## Harness carriers
+Preserve each carrier's harness-specific `<code_tools>` layer and tool names. Codex shells out through `rtk`; omp and Claude Code provide native file tools. Tool-layer differences are intentional, but shared rules must match `system-prompt-baseline.md`.
 
-Two files outside this repo embed the same doctrine for other harnesses: `~/.codex/AGENTS.md`
-(Codex CLI) and `~/.omp/agent/AGENTS.md` (omp). A doctrine change to
-`system-prompt-baseline.md` is not finished until both carry it.
+Edit both carriers in place. Never commit them from this repository, and never stage `~/.codex/config.toml`; their owning repositories live outside this submodule.
 
-They are not cascade tails and `scripts/sync-baseline.py` does not touch them. Each keeps a
-harness-adapted `<code_tools>` layer and its own tool names, because the harnesses differ: Codex
-shells out for everything and prefixes commands with `rtk`, omp and Claude Code ship native file
-tools. Divergence in the tool layer is correct; divergence in a shared rule is drift, and the
-canonical wins.
+## Writing style
 
-Edit them in place. Never commit them from this repo, and never stage `~/.codex/config.toml`.
+Write content under this tree so each section is independently actionable. State a needed rule where the reader needs it instead of pointing backward with phrases such as "as discussed earlier", "see above", or "previously noted".
 
-## Writing-style defaults [LOAD-BEARING]
-
-When editing or generating content under this tree (skills, agents, commands, READMEs, AGENTS docs, commit bodies):
-
-- **Avoid previous-pointing jargon by default.** Phrases like "as discussed earlier", "the prior workstream", "see X above", "previously noted", "per the earlier section", and "do not duplicate that content here; refer to it" force readers to chase context. State the rule directly each time it's needed; a reader landing in the middle of the doc must be able to act without scrolling backward or opening another file.
-- **Avoid cross-referencing jargon by default.** Phrases like "sibling codex/AGENTS.md", "consult the X document", "the canonical Y file", and inter-file pointers that exist only to compare-and-contrast belong out of editing primers and rule docs. If two files share a concept, name the concept directly in each. Duplicating one short rule beats one round-trip through a pointer of one short rule beats one round-trip through a pointer chain. Cross-references are allowed when the target is the literal source-of-truth that the reader must read (e.g., "the canonical baseline at `system-prompt-baseline.md` from `<role>` onward"), but not as decorative coupling.
-- These two avoidances are the default. Override only when the cross-reference is genuinely load-bearing for behavior (e.g., "embedded baseline span MUST be byte-identical to `system-prompt-baseline.md` from `<role>` onward". That pointer IS the rule).
+Prefer a short repeated rule to a decorative inter-file pointer. Use a cross-reference only when the target itself is required for correct behavior, such as the byte-identical canonical baseline span.

@@ -25,80 +25,43 @@ tags:
 
 ## Context
 
-A request to "clean up unused/conflicting skills" landed against this plugin's 87-skill
-`skills/` tree. The intuitive approach — hunt for duplicates and dead files — produced almost
-nothing. Investigation disproved the premise: **zero true duplicates, zero orphans, zero stubs.**
-Every apparent overlap was deliberate layering (each skill states its own niche). The "6 skills
-missing from the available list" turned out to be a display cap, not a registration gap — source
-`skills/` was byte-identical to the cached release the session loads.
+Counts below reflect the 1.x skills tree during the 2026-06-25 incident. The 2.0 workspace has since materialized an 816-skill tree, so these figures are historical.
 
-The real signal for "unused" was not structural at all. It was **usage**: of 87 skills, only 21
-had ever been invoked across 2483 session transcripts. "Unused" had to be defined behaviorally,
-then hand-picked (never-invoked ≠ useless), not derived from static inspection.
+A request to clean up unused or conflicting skills targeted the 87-skill `skills/` tree. Searching for duplicates and dead files revealed that the initial premise was incorrect: there were **zero true duplicates, zero orphans, zero stubs**. Apparent overlaps represented intentional layering with distinct niches. The report of 6 skills missing from the available list stemmed from a display cap rather than a registration issue; source `skills/` was byte-identical to the cached release loaded by the session (unverified).
+
+The actual indicator of unused skills was **usage**: across 2483 session transcripts, only 21 of 87 skills had ever been invoked (unverified; 1.x transcripts predate the 2.0 restructure and cannot be re-grounded against the current tree). Identifying unused skills required behavioral invocation data and manual triage (never-invoked ≠ useless) rather than static inspection.
 
 ## Guidance
 
-1. **Verify the cleanup premise before acting.** "Remove duplicates/orphans" assumes they exist.
-   Check first: cluster skills by function and confirm whether overlaps are accidental
-   (removable) or deliberate (each states a distinct niche). Confirm the loaded set matches the
-   source set (`diff` source dir vs the cache the runtime actually loads) before calling anything
-   "missing."
-2. **Define "unused" by invocation, mined from transcripts.** Count both slash invocations
-   (`<command-name>/ns:skill</command-name>`) and model-auto invocations
-   (`"skill":"ns:name"` in tool-use records). Merge per skill. Reconcile the totals: a name that
-   appears in the usage count but not on disk is a *phantom* (invoked under an old/renamed id),
-   not a current skill — it makes `used + never` overshoot the on-disk count by one per phantom.
-3. **Never-invoked is a candidate pool, not a delete list.** Core capabilities (plan, review,
-   debug, security-review) sit cold simply because they were not reached for. Output-style dual
-   skills look cold because they are invoked through the style system, which the scan cannot see.
-   Skills reached via a routing dispatcher get used without their own invocation record. Walk the
-   cold set with the human, protect-core by default, and let them hand-pick — the data informs,
-   it does not decide.
-4. **Strip cross-references cleanly, don't just delete them.** When removing inter-component
-   "distinct from X" / "sibling of Y" pointers, rewrite each into a self-contained positive niche
-   statement so the disambiguating *information* survives even though the pointer *form* is gone.
-5. **Order commits so each is self-consistent.** A "correct the count" commit must not land
-   before the change that makes the count true, or it asserts a value the tree contradicts and
-   fails its own gate. Fold a derived value (a count) into the commit that changes its source, or
-   sequence it after.
+1. **Verify the cleanup premise before acting.** Cluster skills by function to distinguish accidental duplication from deliberate specialization. Compare the source directory with the runtime cache (`diff` source against runtime cache) to confirm missing files before deleting or renaming.
+2. **Define "unused" by mining transcript invocations.** Aggregate both explicit slash invocations (`<command-name>/ns:skill</command-name>`) and model tool calls (`"skill":"ns:name"` in tool-use records). Reconcile totals per skill: names present in transcript logs but absent on disk are *phantoms* (invocations under obsolete or renamed IDs). Each phantom causes `used + never` to overshoot the on-disk count by one.
+3. **Treat never-invoked skills as candidates, not a deletion list.** Core capabilities (such as plan, review, debug, security-review) may remain uninvoked simply because specific sessions did not require them. Output-style dual skills appear unused because invocations route through the style system outside direct tool calls. Routing dispatchers also invoke skills without generating discrete invocation logs. Review candidate sets manually and protect core capabilities by default; usage data informs selection rather than dictating removal.
+4. **Rewrite cross-references into positive scope statements.** When removing inter-skill pointers (such as "distinct from X" or "sibling of Y"), convert each statement into a self-contained description of its specific domain so disambiguation survives the pointer removal.
+5. **Sequence commits to maintain repository consistency.** Never land a commit updating reported counts before landing the change that establishes those counts; otherwise, the intermediate state fails validation gates. Place derived count updates in the commit modifying the assets, or sequence them immediately afterward.
 
-## Why This Matters
+## Why this matters
 
-The wrong frame ("find duplicates") wastes the audit and finds nothing, then tempts a mechanical
-purge of the never-invoked set — which silently deletes load-bearing core skills (Sever). The
-usage frame plus human hand-pick gets a defensible, reversible cut. The tooling gotcha below can
-also corrupt the usage data itself, producing a confidently wrong delete list.
+Focusing solely on duplicate detection yields false negatives and risks indiscriminate deletion of uninvoked core skills. Combining transcript usage metrics with manual review produces a verified, safe reduction. Undetected binary-mode filtering in search tools can also corrupt transcript counts, leading to incorrect deletion candidates.
 
-## When to Apply
+## When to apply
 
-- Pruning any large catalog of model-discoverable components (skills, commands, agents, tools)
-  where "unused" is the real question and there is no manifest that marks a component inactive.
-- Any audit where the stated premise (duplicates, orphans, drift) should be falsified before work
-  starts.
+- Pruning catalogs of model-discoverable components (skills, commands, agents, tools) where activity is untracked by manifests.
+- Audits requiring empirical verification of premises (duplicates, orphans, drift) before modifying code.
 
 ## Examples
 
-**Tooling gotcha — `grep`/`rg` silently skip long-line JSONL as binary.** Session transcripts are
-`.jsonl` with very long lines; both `rg` and plain `grep` heuristically classify them as binary
-and skip them, returning near-zero counts that *look* like real answers. Force text mode or use a
-real parser:
+**Search tool binary detection on long transcript lines.** Session transcripts are stored in `.jsonl` files containing long lines. Plain `grep` or `rg` may classify files with long lines or NUL bytes as binary and skip matches (unverified; did not reproduce on test transcripts up to 37 KB lines with NUL bytes, where `rg`, `rg -a`, and `grep` gave identical output). Force text scanning (`-a`) or parse records with Python:
 
 ```bash
-# WRONG — silently skips long-line .jsonl, counts come back ~0 and look plausible
+# WRONG — risks a silent undercount if grep skips a file as binary; counts look plausible
 grep -rho '"skill":"odin:[a-z-]*"' ~/.claude/projects | sort | uniq -c
 
-# RIGHT — force text (-a), or scan with Python for robust counts
+# RIGHT — force text (-a), or scan with Python for accurate counts
 grep -rhao '"skill":"odin:[a-z-]*"' ~/.claude/projects | sort | uniq -c
 ```
 
-**Count reconciliation.** `21 used + 66 never = 87` failed against an 87-dir tree until one
-"used" name (`subagent-driven-development`) was found to be a phantom — invoked once under an id
-that is not a current skill dir. 21 *current* used + 66 never = 87; the phantom is the 22nd name.
+**Count reconciliation.** The initial equation `21 used + 66 never = 87` conflicted with the 87-directory tree until tracing showed that one recorded skill (`subagent-driven-development`) was a phantom ID from an earlier release. The reconciled set contained 21 current used skills, 66 uninvoked skills, and 1 phantom invocation (22 total names).
 
-**Commit ordering.** README said "77 total"; disk had 87; the purge removed 12 → 75. A standalone
-"README → 75" commit landing before the purge would claim 75 while the tree still held 87. Fix:
-the count change rides inside the purge commit (the commit that makes 75 true), keeping every
-commit self-consistent and gate-passing.
+**Commit ordering.** The README listed 77 total skills while disk contained 87; the cleanup removed 12 skills to reach 75. Committing "README → 75" before the removal creates an invalid intermediate state. Including the README update in the deletion commit keeps each commit self-consistent and compliant with verification gates.
 
-> The human co-designed the delete-list through iterative ask-tool questions and leaned
-> keep-heavy, cutting only 12 of 66 cold skills. (auto memory [claude])
+> Interactive triage finalized the deletion list, removing 12 of the 66 uninvoked skills while preserving core capabilities. (auto memory [claude])

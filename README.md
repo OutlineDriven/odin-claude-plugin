@@ -1,29 +1,27 @@
 # Outline-Driven Development for Claude Code
 
-> Formerly known as the ODIN Claude Plugin. The repo URL stays the same; the brand has matured.
+> Formerly known as the ODIN Claude Plugin. The repository URL stays the same.
 
-**Outline-Driven Development** (nicknamed ODIN) is an advanced code agent system for Claude Code with surgical precision, diagram-first engineering, and workflow automation.
+**Outline-Driven Development** (nicknamed ODIN) is a code agent system for Claude Code with surgical precision, diagram-first engineering, and workflow automation.
 
 **Methodology**: [outline-driven-development](https://github.com/OutlineDriven/outline-driven-development) &nbsp;·&nbsp; **Codex CLI**: [odin-codex-plugin](https://github.com/OutlineDriven/odin-codex-plugin) &nbsp;·&nbsp; **Gemini CLI**: [odin-gemini-cli-extension](https://github.com/OutlineDriven/odin-gemini-cli-extension) &nbsp;·&nbsp; **Site**: [outlinedriven.github.io](https://outlinedriven.github.io)
 
 ## Overview
 
-ODIN is a professional-grade Claude Code plugin that transforms Claude into a code agent with workflow automation and rigorous engineering methodology.
+**Key capabilities:**
 
-**Key Capabilities:**
-
-- 📐 **Diagram-First Engineering** - Architecture, concurrency, memory, data flow, optimization
-- 🎯 **Surgical Code Editing** - AST-based transformations with ast-grep
-- 🧠 **Confidence-Driven Execution** - Adaptive behavior based on complexity and risk
-- 🔍 **Deep Investigation** - Mandatory file reading before code modifications
-- 🔒 **Atomic Commits** - Conventional Commits protocol with incremental approvals
+- **Diagram-First Engineering**: Architecture, concurrency, memory, data flow, optimization
+- **Surgical Code Editing**: AST-based transformations with ast-grep
+- **Confidence-Driven Execution**: Adaptive behavior based on complexity and risk
+- **Deep Investigation**: Mandatory file reading before code modifications
+- **Atomic Commits**: Conventional Commits protocol with incremental approvals
 
 ## Installation
 
 Claude Code is the proved install target on this source branch. The repository
-is a private npm workspace of 28 runtime packages plus informational
-`@outlinedriven/odin`. Skills live once at `skills/<slug>/SKILL.md`. Package
-trees copy those skills only at pack time.
+is a private npm workspace of 29 packages: 28 runtime packages and 1 informational
+package, `@outlinedriven/odin`. Skills live once at `skills/<slug>/SKILL.md`.
+Package trees copy those skills only at pack time.
 
 ### Claude Code marketplace
 
@@ -36,66 +34,81 @@ claude plugin marketplace add OutlineDriven/odin-claude-plugin
 claude plugin install odin-core@odin-marketplace
 ```
 
+Per-skill installs work over two routes; both read the same canonical
+`skills/<slug>/SKILL.md` tree at an immutable tag:
+
+```shell
+# npx route (skills CLI, pinned)
+npx --yes skills@1.5.23 add https://github.com/OutlineDriven/odin-claude-plugin/tree/v2.0.0/skills/<skill-name> -a claude-code -g -y
+
+# gh route (GitHub CLI 2.90.0+)
+gh skill install OutlineDriven/odin-claude-plugin skills/<skill-name> --pin v2.0.0 --agent claude-code --scope user
+```
+
+Install every skill with `--skill '*'` (npx) or `--all` (gh).
+`node scripts/check-skill-routes.mjs` proves the tree shape both routes require.
 The universal current-user installer remains Claude-specific and lives in
 [OutlineDriven/outline-driven](https://github.com/OutlineDriven/outline-driven).
 It is not this repository.
 
 ### Other harnesses
 
-Codex, Cursor, Grok, and Kimi consume a generated `distribution` projection,
-not this source branch. Devin and Antigravity consume `plugins/odin-complete/`
-from that same projection. Those catalogs are not published from this commit.
+Codex, Cursor, Grok, Kimi, Devin, and Antigravity consume a generated
+`distribution` projection (`npm run generate:distribution`), staged on the
+`distribution-candidate/2.0.0` branch, not this source branch. Devin and
+Antigravity consume `plugins/odin-complete/` from that projection. Those
+catalogs are not published from this commit.
 
 ### Skills
 
-There are 816 public skills in 28 runtime packages. Identity and ownership
-are in `catalog/packages.json`. Do not scan `packages/*/skills`; that path is
-not authored.
-
+There are 779 public skills in 28 runtime packages. Identity and ownership
+are in `catalog/packages.json`; the skill registry `catalog/provenance-rows.json`
+pins the count (`skill_count` == directory count == `rows.length`). Do not scan
+`packages/*/skills`; that path is not authored.
 
 ## Core Philosophy
 
-ODIN follows strict engineering principles:
+ODIN follows engineering principles:
 
-1. **Investigate Before Acting** - Never speculate about code you haven't read
-2. **Diagram-First Design** - Five mandatory diagrams before any implementation
-3. **Surgical Precision** - Minimal, targeted changes using AST-based tools
-4. **Atomic Commits** - One logical change per commit, properly typed
-5. **Confidence-Driven** - Adapt behavior based on familiarity and risk
-6. **Tool Selection** - ast-grep > native-patch > ripgrep (never sed for edits)
+1. **Investigate Before Acting**: Never speculate about code you haven't read
+2. **Diagram-First Design**: Five mandatory diagrams before any implementation
+3. **Surgical Precision**: Minimal, targeted changes using AST-based tools
+4. **Atomic Commits**: One logical change per commit, properly typed
+5. **Confidence-Driven**: Adapt behavior based on familiarity and risk
+6. **Tool Selection**: ast-grep > native-patch > ripgrep (never sed for edits)
 
 ### Five Required Diagrams
 
 Before any non-trivial implementation:
 
-1. **Architecture** - Components, interfaces, contracts, dependencies
-2. **Data Flow** - Sources, transformations, sinks, state transitions
-3. **Concurrency** - Threads, synchronization, happens-before relationships
-4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
-5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
+1. **Architecture**: Components, interfaces, contracts, dependencies
+2. **Data Flow**: Sources, transformations, sinks, state transitions
+3. **Concurrency**: Threads, synchronization, happens-before relationships
+4. **Memory**: Ownership, lifetimes, allocation patterns, safety guarantees
+5. **Optimization**: Bottlenecks, targets, complexity bounds, resource budgets
 
 ## Output styles
 
-Output styles shape *how* the agent communicates. Switch via Claude Code's `/config` or by setting `outputStyle` in `settings.json`.
+Output styles shape how the agent communicates. Switch via Claude Code's `/config` or by setting `outputStyle` in `settings.json`.
 
-- `ODIN` - Default. Skeptic register, scope discipline, systematic skepticism, no reflexive validation.
-- `AxiomMode` - Formal-logic English with predicate-form claims, Hoare-triple framing, ASCII shortened-English keywords. Daily-driver register for coding work.
-- `Builder` - For non-technical builders (PMs, founders, designers, no-code users). Outcome-first, plain-language, progressive disclosure.
-- `Duet` - Companion to the `duet` skill. Decisions before prose, structural/taste framing first, jargon on demand, silent mechanics / loud forks. Enforces `duet` skill invocation.
-- `Linus` - Torvalds review discipline. Good taste as special-case elimination, blunt about the work, show the corrected code rather than describe it.
-- `Eval` - Benchmark harness register (`output-styles/benchmark.md`). Auto-generated by margin-runner; do not hand-edit above the doctrine cascade.
+- `ODIN`: Default. Skeptic register, scope discipline, no reflexive validation.
+- `AxiomMode`: Formal-logic English with predicate-form claims, Hoare-triple framing, ASCII shortened-English keywords. Daily-driver register for coding work.
+- `Builder`: For non-technical builders (PMs, founders, designers, no-code users). Outcome-first, plain-language, progressive disclosure.
+- `Duet`: Companion to the `duet` skill. Decisions before prose, structural/taste framing first, jargon on demand, silent mechanics / loud forks. Enforces `duet` skill invocation.
+- `Linus`: Torvalds review discipline. Good taste as special-case elimination, blunt about the work, show the corrected code rather than describe it.
+- `Eval`: Benchmark harness register (`output-styles/benchmark.md`). Auto-generated by margin-runner; do not hand-edit above the doctrine cascade.
 
 ## Configuration
 
 ### Settings.json
 
-ODIN includes full `settings.json` with:
+`settings.json` includes:
 
-- **Tool Permissions** - Pre-approved tools (ast-grep, fd, rg, cargo, npm, git, etc.)
-- **MCP Integration** - Time, browser, git, context7, tavily, and more
-- **Security** - Denied operations (sed -i, force push, destructive commands)
-- **Hooks** - Event-driven automation
-- **Defaults** - Bypass permissions mode, always thinking enabled
+- **Tool Permissions**: Pre-approved tools (ast-grep, fd, rg, cargo, npm, git, etc.)
+- **MCP Integration**: Time, browser, git, context7, tavily, and more
+- **Security**: Denied operations (sed -i, force push, destructive commands)
+- **Hooks**: Event-driven automation
+- **Defaults**: Bypass permissions mode, always thinking enabled
 
 ### CLAUDE.md
 
@@ -113,9 +126,9 @@ Global instructions defining:
 
 ### Surgical Editing Workflow
 
-1. **Find** - Use ast-grep (code), ripgrep (text), fd (files)
-2. **Copy** - Extract minimal context with precise offsets
-3. **Paste** - Apply surgically with AST-based transformations
+1. **Find**: Use ast-grep (code), ripgrep (text), fd (files)
+2. **Copy**: Extract minimal context with precise offsets
+3. **Paste**: Apply surgically with AST-based transformations
 
 ### Confidence-Driven Execution
 
@@ -176,7 +189,7 @@ See LICENSE file for details.
 
 ## Acknowledgments
 
-Built on Claude Code's powerful plugin system with focus on professional software engineering practices, surgical precision, and workflow automation.
+Built on Claude Code's plugin system.
 
 ---
 

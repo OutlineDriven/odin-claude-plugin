@@ -7,7 +7,7 @@ problem_type: tooling_decision
 component: tooling
 severity: medium
 applies_when:
-  - "Running cascade-dedup against output-styles/ and system-prompt-baseline.md"
+  - "Running cascade-dedup against packages/odin-core/output-styles/ and system-prompt-baseline.md"
   - "A dedup pass reports zero duplicates and the result looks suspiciously clean"
   - "Choosing a similarity metric for prompt or doc trees where restatements vary in length"
 related_components:
@@ -25,18 +25,13 @@ tags:
 
 ## Context
 
-`cascade-dedup` Step 2 classifies persona-prefix text against the canonical baseline using
-token-Jaccard similarity: a prefix span scoring `>= 0.65` against a baseline rule is a **duplicate**
-and gets stripped; `>= 0.45` plus opposing modal verbs is a **conflict**.
+`cascade-dedup` Step 2 classifies persona-prefix text against the canonical baseline using token-Jaccard similarity: it flags prefix spans scoring `>= 0.65` against a baseline rule as **duplicates** and strips them; scores `>= 0.45` combined with opposing modal verbs indicate a **conflict**.
 
-Run against this repo's actual cascade, neither bar is reachable.
+Across this repository's prompt cascade, neither threshold is reachable.
 
-## What was measured
+## What the audit measured
 
-Step 2 classifies **sentences**, so sentences are the unit that matters. Normalizing tokens
-(lowercase, stopwords removed, code spans stripped) and scoring every prefix sentence against every
-baseline line, across all five hand-authored styles (`benchmark.md` is excluded — its whole prefix
-sits inside the margin-runner auto-generated block, so it has no eligible strip zone):
+Step 2 evaluates text at sentence granularity. Normalizing tokens (converting to lowercase, removing stopwords, and stripping code spans) and scoring each prefix sentence against every baseline line across all five hand-authored styles (excluding `benchmark.md`, whose prefix resides entirely within an auto-generated margin-runner block):
 
 | Style | Sentences | Max Jaccard vs baseline |
 |---|---|---|
@@ -46,74 +41,46 @@ sits inside the margin-runner auto-generated block, so it has no eligible strip 
 | odin | 65 | 0.385 |
 | linus | 31 | 0.125 |
 
-The two bars must be scored separately, because the conflict rule is not a threshold alone: it is
-`Jaccard >= 0.45` **and** opposing modal verbs. Restricting to pairs that actually satisfy the modal
-condition collapses the ceiling:
+The duplicate and conflict rules require separate scoring because the conflict metric requires both `Jaccard >= 0.45` and opposing modal verbs. Restricting evaluation to pairs meeting the modal condition further reduces the observed maximum:
 
 | Rule | Bar | Max observed | Shortfall |
 |---|---|---|---|
 | Duplicate — any pair | 0.65 | **0.444** | 0.206 |
 | Conflict — modal-opposed pairs only | 0.45 | **0.136** | 0.314 |
 
-Neither bar is approached. The conflict detector is the weaker of the two by a wide margin: its best
-candidate anywhere in the corpus scores under a third of its threshold.
+No pair approaches either threshold in practice. The conflict detector is especially ineffective: its highest candidate scores under one-third of the required threshold.
 
-Scoring coarser units understates the effect further — at paragraph-block granularity the corpus max
-drops to 0.33, and intra-prefix block-vs-block comparison finds nothing at all above 0.30.
+Evaluating coarser units yields even lower similarity: at paragraph-block granularity the corpus maximum drops to 0.33, while intra-prefix block comparisons remain below 0.30.
 
-## The corpus's one real contradiction fails the conflict predicate outright
+## Real contradictions the conflict predicate misses
 
-This run found a genuine contradiction by reading, not by scoring. Before the cascade-dedup run that
-produced this doc, `builder.md` and `duet.md` each carried a `[MANDATORY]`
-block — "invoke the relevant thinking tool ... whenever reasoning is needed" — followed by a later
-section licensing the opposite: "reach for them when they actually help, and skip them when the path
-is straightforward" (builder), "what you reach for when the natural rhythm of pick-and-execute is no
-longer producing decisions" (duet). Both contradict the canonical `sequential-thinking [ALWAYS USE]`.
-This run rewrote those trailing clauses, so the quoted wording no longer appears in the working tree.
+Manual review identified a genuine contradiction undetected by scoring. Prior to the run documenting this behavior, `builder.md` and `duet.md` each contained a `[MANDATORY]` block requiring thinking tools for reasoning, followed by subsequent text permitting omission: "reach for them when they actually help, and skip them when the path is straightforward" (builder), and "what you reach for when the natural rhythm of pick-and-execute is no longer producing decisions" (duet). Both statements contradicted the canonical `sequential-thinking [ALWAYS USE]`. A rewrite removed these trailing clauses, so the quoted text no longer appears in the working tree.
 
-The important part is that this contradiction fails the documented conflict predicate on **both**
-conjuncts, not just the threshold:
+This contradiction fails the documented conflict predicate on both criteria:
 
-- **Score**: the contradicting sentences share almost no tokens with the terse baseline line they
-  contradict, landing far below 0.45.
-- **Modal opposition**: neither sentence carries a modal form the predicate recognizes. The
-  obligation lives in a section *heading* (`[MANDATORY]`) and in the baseline's bracketed
-  `[ALWAYS USE]` tag; the permission is carried by the ordinary verb "skip". No `must`/`never`
-  pair appears anywhere in the contradicting text.
+- **Similarity score**: The conflicting sentences share minimal tokens with the concise baseline rule, scoring well below 0.45.
+- **Modal opposition**: Neither sentence contains recognized modal opposites. Structural headings (`[MANDATORY]`) and the baseline's `[ALWAYS USE]` tag carry the obligation, while the verb "skip" conveys permission. No standard `must`/`never` pair appears in the conflicting text.
 
-So the rule would not have flagged this even at a threshold of zero. **A lexical predicate over
-modal keywords cannot find a contradiction expressed through ordinary verbs and structural markup**,
-which is how contradictions in prose usually arrive. Treat the conflict rule as a detector for
-explicitly-worded modal reversals only, and keep reading for the rest.
+The rule would fail to detect this contradiction even with a threshold of zero. **Lexical predicates over modal keywords cannot detect contradictions expressed through ordinary verbs or markup hierarchy**. The conflict rule functions only for explicit modal reversals; structural review remains necessary for semantic contradictions.
 
 ## Why the metric fails here
 
-Length asymmetry. The canonical baseline states each rule once, tersely — `**Thinking tools:**
-sequential-thinking [ALWAYS USE] decomposition/dependencies | actor-critic-thinking alternatives |
-shannon-thinking uncertainty/risk`. The persona prefixes restate the same rule across several
-sentences, in the persona's own register.
+The core issue is length asymmetry. The canonical baseline states rules concisely: `**Thinking tools:** sequential-thinking [ALWAYS USE] decomposition/dependencies | actor-critic-thinking alternatives | shannon-thinking uncertainty/risk` (as configured during the test run; subsequently integrated into the ordered-decomposition rule). Persona prefixes restate these principles across multiple sentences in their specific register.
 
-Jaccard is `|A ∩ B| / |A ∪ B|`. The intersection is capped by the short side while the union grows
-with the long side, so a faithful but verbose restatement scores *low* precisely because it is
-verbose. The metric measures compression ratio as much as semantic overlap. Splitting to sentences
-narrows the gap — 0.33 becomes 0.444 — but does not close it, because the restatement spreads one
-baseline rule across several sentences and each individual sentence then shares only a fraction of
-the rule's tokens.
+Jaccard similarity (`|A ∩ B| / |A ∪ B|`) caps the intersection by the shorter text while the union expands with the longer text. As a result, detailed restatements produce low similarity scores, measuring compression differences rather than semantic divergence. Evaluating by sentence increases the ceiling from 0.33 to 0.444 but cannot resolve the underlying mismatch, as individual sentences contain only a fraction of the baseline rule's tokens.
 
-The duplication in this cascade is real, but it is **semantic**, not lexical. A lexical metric
-cannot see it at any threshold that would not also produce false positives everywhere else.
+The prompt cascade exhibits semantic duplication rather than lexical repetition. Lexical metrics cannot detect this overlap without lowering thresholds to levels that produce widespread false positives.
 
-## The instrument that does work
+## Effective keyword frequency alternative
 
-Count how many times a rule is asserted per file, by matching on the rule's distinctive terms rather
-than on span overlap:
+Counting specific rule terms per file reveals repetition where span-matching fails:
 
 ```bash
 rg -ci "absolutely right|validation phrase|great question" <prefix>   # validation-phrase ban
 rg -ci "sequential-thinking|shannon-thinking|actor-critic-thinking" <prefix>   # tool routing
 ```
 
-Measured that way, the same corpus is obviously repetitive:
+Term-frequency counts expose substantial repetition across styles:
 
 | Style | Tool routing | Self-skepticism | Validation ban |
 |---|---|---|---|
@@ -121,29 +88,17 @@ Measured that way, the same corpus is obviously repetitive:
 | odin | 4x | 4x | 3x |
 | axiom-mode | 4x | 4x | 3x |
 
-## The trap this prevents
+## Failure modes this prevents
 
-A future run reads "Step 1 clean 6/6, Step 2 found zero duplicates" as a clean bill of health. It is
-not: the metric never fired. **Zero findings from a threshold that cannot be reached is not
-evidence of absence.** Before trusting a null result from any similarity gate, check the maximum
-score actually observed against the bar — if the max sits at half the threshold, the instrument is
-wrong for the corpus, not the corpus clean.
+Interpreting zero findings from unreachable thresholds as validation creates a false sense of correctness. **A null result from an unreachable threshold does not indicate the absence of duplication.** Always compare the highest observed score against the target threshold; if the maximum is far below the requirement, the metric is ill-suited for the corpus.
 
-## Contrast with `dedup-skills`
+## Comparison with dedup-skills
 
-The sibling `dedup-skills` skill uses a *higher* shingle-Jaccard guidance value (~0.85) but scopes
-itself explicitly to "verbatim/near-verbatim only" and calls the number guidance rather than a rule.
-That combination is coherent: a lexical metric with a high bar, honestly advertised as catching only
-lexical copies. The mismatch is specific to `cascade-dedup`, whose 0.65 bar is presented as a
-general duplicate detector.
+The `dedup-skills` tool applies a higher shingle-Jaccard threshold (~0.85) explicitly limited to verbatim or near-verbatim matches and treats the value as guidance. This provides a consistent model for lexical matching. In contrast, `cascade-dedup` defines a 0.65 threshold as a general duplicate detector for semantic restatements where it cannot succeed.
 
-## Also worth knowing
+## Additional structural findings
 
-Two structural facts about the cascade that the audit surfaced and that survive this run:
+Two structural properties observed during the audit remain relevant:
 
-- A **declared** override is not drift. `axiom-mode`'s ASCII keyword register contradicts the
-  baseline's ASCII-operator mandate, but its `[baseline]` principle line states the override
-  explicitly. "Baseline wins" was written for accidental divergence, not self-documented divergence.
-- Stripping repetition from an output style is **unverifiable in-session**: styles load only at
-  session start, so adherence effects cannot be tested from the session making the edit. Fold each
-  cut rule into a surviving line and name the survivor, rather than trusting that a deletion is safe.
+- **Declared overrides do not constitute drift.** `axiom-mode`'s ASCII keyword register contradicts the baseline's ASCII-operator mandate, but its `[baseline]` principle line states the override explicitly. Baseline precedence applies to accidental divergence rather than documented customizations.
+- **An active session cannot verify output-style deduplication.** Output styles load exclusively at session start, preventing live validation of adherence changes. Fold each cut rule into a surviving line and name the survivor, rather than trusting that a deletion is safe.
