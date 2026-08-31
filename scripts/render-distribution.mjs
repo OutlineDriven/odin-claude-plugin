@@ -6,7 +6,7 @@
 import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { loadCatalog } from "./package-surfaces.mjs";
+import { loadCatalog, renderPluginJson } from "./package-surfaces.mjs";
 import { loadRows } from "./render-package-provenance.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -41,7 +41,9 @@ function copySkill(root, destSkills, slug) {
   cpSync(src, join(destSkills, slug), { recursive: true });
 }
 
-function writeModulePlugin(entry) {
+function writeModulePlugin(mod, entry) {
+  // Host-specific carriers, one shape per harness (docs/specs/harnesses.md):
+  // deliberately no $schema, and Kimi needs the explicit skills path.
   const body = {
     name: entry.id,
     displayName: entry.display_name,
@@ -54,7 +56,16 @@ function writeModulePlugin(entry) {
     keywords: entry.tags,
   };
   if (entry.id !== "odin") body.skills = "./skills/";
-  return jsonBytes(body);
+  for (const dir of [".codex-plugin", ".cursor-plugin", ".kimi-plugin"]) {
+    mkdirSync(join(mod, dir), { recursive: true });
+    writeFileSync(join(mod, `${dir}/plugin.json`), jsonBytes(body));
+  }
+  writeFileSync(join(mod, "plugin.json"), jsonBytes(body));
+  // Claude-compatible manifest: byte-identical to the npm package surface
+  // (packages/<id>/.claude-plugin/plugin.json) via the same generator, so the
+  // distribution projection cannot drift from it. Grok reads this shape.
+  mkdirSync(join(mod, ".claude-plugin"), { recursive: true });
+  writeFileSync(join(mod, ".claude-plugin/plugin.json"), renderPluginJson(entry));
 }
 
 function runtimeThenOdin(catalog) {
@@ -152,14 +163,13 @@ export function renderDistribution(root = ROOT, out = OUT) {
     for (const name of ["package.json", "README.md", "LICENSE", "PROVENANCE.md"]) {
       cpSync(join(root, "packages", entry.id, name), join(mod, name));
     }
-    const plugin = writeModulePlugin(entry);
-    mkdirSync(join(mod, ".codex-plugin"), { recursive: true });
-    mkdirSync(join(mod, ".cursor-plugin"), { recursive: true });
-    mkdirSync(join(mod, ".kimi-plugin"), { recursive: true });
-    writeFileSync(join(mod, ".codex-plugin/plugin.json"), plugin);
-    writeFileSync(join(mod, ".cursor-plugin/plugin.json"), plugin);
-    writeFileSync(join(mod, ".kimi-plugin/plugin.json"), plugin);
-    writeFileSync(join(mod, "plugin.json"), plugin);
+    if (entry.id === "odin-core") {
+      cpSync(join(root, "packages/odin-core/mcp.json"), join(mod, "mcp.json"));
+      cpSync(join(root, "packages/odin-core/output-styles"), join(mod, "output-styles"), {
+        recursive: true,
+      });
+    }
+    writeModulePlugin(mod, entry);
     if (entry.id === "odin") continue;
     const destSkills = join(mod, "skills");
     mkdirSync(destSkills, { recursive: true });

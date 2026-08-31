@@ -23,7 +23,7 @@ for (const file of expected) {
   }
 }
 const ids = catalog.entries.map((e) => e.id);
-if (new Set(ids).size !== 29) {
+if (new Set(ids).size !== ids.length) {
   console.error("duplicate catalog ids");
   drift += 1;
 }

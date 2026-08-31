@@ -27,7 +27,7 @@ function loadMembership(root = ROOT) {
 
 export function assemblePackages(root = ROOT, out = OUT) {
   const catalog = loadCatalog(root);
-  const byModule = loadMembership();
+  const byModule = loadMembership(root);
   rmSync(out, { recursive: true, force: true });
   mkdirSync(out, { recursive: true });
   let copied = 0;
