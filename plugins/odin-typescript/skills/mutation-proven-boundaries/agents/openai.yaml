@@ -1,3 +1,0 @@
-interface:
-  display_name: "Mutation Proven Boundaries"
-  short_description: "Use when a TypeScript repo needs enforced package entry-point"

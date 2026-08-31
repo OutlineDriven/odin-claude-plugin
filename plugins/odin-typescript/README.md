@@ -2,7 +2,7 @@
 
 ODIN workflows for modern TypeScript development.
 
-19 skills, category Coding.
+17 skills, category Coding.
 
 ## Install
 
@@ -23,8 +23,6 @@ codex plugin add odin-typescript@odin-marketplace
 - fastify-production-hardening
 - fastify-schema-first-service
 - multi-tenant-architecture
-- mutation-proven-boundaries
-- node-core-contribution-cycle
 - node-internals-diagnosis
 - nodejs-graceful-shutdown
 - nodejs-hanging-test-diagnosis
