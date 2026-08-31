@@ -83,16 +83,36 @@ $ claude plugin list
 
 ## Cursor marketplace
 
-Not proven live. `cursor-agent plugin marketplace add` accepts a git repository URL only:
+Partly proven. The CLI takes a git repository URL and rejects a local path, so the directory that
+proved Codex and Claude Code cannot be used here:
 
 ```shell
 $ cursor-agent plugin marketplace add /tmp/odin-ship-v2
 Invalid URL format. Expected: github.com/owner/repo or https://github.example.com/owner/repo
 ```
 
-The registry at `.cursor-plugin/marketplace.json` is generated to the documented schema and its
-sources are repository paths, verified by `check-plugin-surfaces`. The load itself can only be
-exercised after this branch reaches the remote. That proof is outstanding.
+Against the remote, Cursor accepts the repository. `cursor-agent plugin marketplace list` shows the
+entry:
+
+```
+odin-marketplace    user    https://github.com/OutlineDriven/odin-claude-plugin
+```
+
+The fetch does not complete on this host. It stops at a filesystem permission, not at anything in
+the tree:
+
+```shell
+$ cursor-agent plugin marketplace add github.com/OutlineDriven/odin-claude-plugin
+Fetching plugins from github.com/OutlineDriven/odin-claude-plugin...
+EACCES: permission denied, mkdir '/home/alpha/.cursor/plugins'
+```
+
+Two things are therefore still unproven, and neither is a property of this branch. Cursor's plugin
+cache is unwritable under the sandbox this session runs in. Cursor also indexes a repository rather
+than a ref, so the `.cursor-plugin/marketplace.json` it would read is the one on the default branch,
+not the one on this feature branch. The registry itself is generated to the documented schema with
+repository-relative sources and is asserted by `check-plugin-surfaces`; what remains untested is
+Cursor's parse of it, and that test needs a merge plus a writable cache.
 
 ## Manifest name parity
 

@@ -23,7 +23,17 @@ Never hand-edit `plugins/odin-core/output-styles/benchmark.md`. Its margin-runne
 
 ## Submodule publishing
 
-Commit and push from this repository, not its parent `~/.claude`, because this tree is a Git submodule. From this repository's root, use plain `git push origin main`.
+Commit and push from this repository, not its parent `~/.claude`, because this tree is a Git
+submodule. From this repository's root, use plain `git push origin main`.
+
+Plain `git push` only. Force-push is denied: `git push -f`, `--force`, and every
+`--force-with-lease*` variant are blocked at the Claude permissions layer. The denial covers the
+lease variants too, because a lease protects the remote from a stale overwrite and protects nothing
+from a rewrite you intended. On a branch with an open pull request, rewriting history strands every
+inline review comment on commits that no longer exist.
+
+A push that only adds commits needs no flag. If a push is rejected as non-fast-forward, the answer
+is to fetch and rebase or to ask, never to reach for a force variant.
 
 ## The skill tree
 
