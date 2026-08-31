@@ -1,6 +1,6 @@
 ---
 name: buzzword-hijack
-description: 'Use when a user wants to choose and execute a bounded positioning move that rides a jargon wave without confusing trend with truth. Produces a written positioning artifact. Not for describing the jargon landscape — use buzzword-analysis.'
+description: 'Use when a user wants to choose and execute a bounded positioning move that rides a jargon wave without confusing trend with truth. Produces a written positioning artifact at a named output path. Not for describing the jargon landscape.'
 ---
 
 # Buzzword hijack
@@ -19,7 +19,7 @@ description: 'Use when a user wants to choose and execute a bounded positioning 
 - The product, project, or message to position. Required.
 - The target surface for the positioning move: copy, landing page, or messaging. Required; state it before writing.
 - The jargon wave to ride: the trending term or terms the user wants to use. Required; name the specific term(s).
-- Any factual claims that must survive the positioning. Optional, but when supplied every claim must be separable from the jargon.
+- The output file path. Required.
 
 ## Procedure
 

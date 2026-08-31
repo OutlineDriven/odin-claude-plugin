@@ -1,6 +1,6 @@
 ---
 name: presentation-creator
-description: 'Use when asked to create a deck, presentation, pitch deck, speaker notes, or web deck. Creates a deck artifact in markdown or web format with story spine, speaker notes, visual design, and a QA pass. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to create a presentation, pitch deck, or web deck from a topic and audience. Originates the narrative spine, slide content, and speaker notes, then applies design and runs an editorial QA pass. Not for formatting existing content into slides.'
 ---
 
 # Presentation creator
@@ -9,45 +9,39 @@ description: 'Use when asked to create a deck, presentation, pitch deck, speaker
 
 | Field | Bound contract |
 |---|---|
-| Trigger | Explicit human invocation: create a deck, presentation, pitch deck, speaker notes, story spine, or web deck |
-| Authority | Reversible-local: write only named local artifacts; rollback by deleting generated files or reverting to prior version |
-| Side effect | Local write: produces a deck as markdown or web app; may generate supporting files in the working directory |
-| Done | Deck artifact exists with a story spine connecting all sections, speaker notes for each slide, visual design applied, and a QA pass completed with no blocking issues |
+| Trigger | Create a complete presentation including narrative, slides, and speaker notes from a topic and audience. |
+| Authority | Reversible local write for the generated deck and supporting files. |
+| Side effect | Local write: produces a deck as markdown or web-deck HTML, plus supporting files in the working directory. |
+| Done | A completed presentation file at a deterministic path in the requested format, passing editorial QA with no blocking issues. |
 
 ## Inputs
 
-- **Topic or subject** (required): the presentation's central theme or argument.
-- **Audience** (required): who will view the deck; drives tone, depth, and vocabulary.
-- **Format** (optional): output format preference — `markdown` (default) or `web-deck`. If omitted, produce markdown.
-- **Deck type** (optional): one of `presentation`, `pitch-deck`, `speaker-notes`, or `general`. Defaults to `general`.
-- **Source material** (optional): existing notes, outlines, documents, or data to incorporate.
+- Topic or subject (required): the presentation's central theme or argument.
+- Audience (required): who will view the deck; drives tone, depth, and vocabulary.
+- Format (optional): `markdown` (default) or `web-deck`. If omitted, produce markdown.
+- Source material (optional): existing notes, outlines, documents, or data to incorporate.
 
 ## Procedure
 
-1. **Gather inputs.** Confirm topic, audience, and format. If topic or audience is missing, stop and request them before proceeding. Done when: the stated outcome holds.
+1. Derive the narrative spine. Establish the situation, introduce the complication, raise the turning question, deliver the resolution, and land the takeaway. Each subsequent slide group must serve this spine. If a section cannot connect to the spine, remove it rather than force a weak link. Done when: the narrative spine states situation, complication, resolution, and takeaway.
 
-2. **Build the outline structure.** Define the deck's sections in a logical order: opening hook, problem or context, core content sections, key takeaways, and closing call-to-action. Each section maps to a slide group. For pitch decks, follow the pitch-deck arc: problem, solution, market, traction, team, ask. Done when: the stated outcome holds.
+2. Outline the slide groups. Map the spine to ordered sections: opening hook, problem or context, core content, key takeaways, closing call-to-action. For pitch decks, follow the arc: problem, solution, market, traction, team, ask. Done when: every slide group is outlined in order and each serves the spine.
 
-3. **Develop the story spine.** Write a narrative throughline that connects every section: establish the situation, introduce the complication, raise the turning question, deliver the resolution, and land the moral or takeaway. Each section of the outline must serve the spine. If a section cannot be connected, remove it rather than force a weak link. Done when: the stated outcome holds.
+3. Write slide headlines and concise visual content. For each slide, write a headline that states the slide's single point. Keep body text to no more than four bullet points or one short paragraph. Specify any visual element (chart, diagram, image placeholder, icon). Done when: every slide has a headline, body content, and visual specification.
 
-4. **Write slide content.** For each slide, write a clear headline that states the slide's single point, keep the supporting body text concise (no more than three to four bullet points or one short paragraph), and specify any visual element (chart, diagram, image placeholder, icon). Apply visual hierarchy: headline dominates, body supports, visuals reinforce. Done when: the stated outcome holds.
+4. Generate standalone speaker notes for every slide. Expand on the slide text: provide the full talking point, anticipate audience questions, include data citations or examples not shown on the slide, and mark transitions to the next slide. Notes must be usable as a standalone script. Done when: every slide has speaker notes that work as a script.
 
-5. **Generate speaker notes.** For each slide, write speaker notes that expand on the slide text: provide the full talking point, anticipate audience questions, include data citations or examples not shown on the slide, and mark transitions to the next slide. Notes must be usable as a standalone script. Done when: the stated outcome holds.
+5. Apply design template and write to the specified output path. Set a consistent color palette and typography pairing for the audience and topic. Define layout templates: title slide, content slide, visual-heavy slide, closing slide. For web-deck format, add transitions and responsive layout. Write the deck to `presentation-<topic-slug>.md` (markdown) or `presentation-<topic-slug>.html` (web-deck) in the working directory. Done when: the file exists at the deterministic path with design applied.
 
-6. **Apply visual design.** Set a consistent color palette appropriate to the audience and topic. Choose typography pairing (heading and body fonts). Define slide layout templates: title slide, content slide, visual-heavy slide, and closing slide. Apply consistent spacing, alignment, and margins. For web-deck format, add transitions and responsive layout. Done when: the stated outcome holds.
-
-7. **Run the QA pass.** Check every slide against these criteria: headline accurately represents content, speaker notes exist and are complete, visual design is consistent across all slides, story spine is traceable from opening to close, no orphaned or redundant slides, no broken references to visuals or data, and text is free of typos and grammatical errors. Record any issues found. Done when: the stated outcome holds.
-
-8. **Resolve QA issues.** Fix each issue found in step 7. If a slide's content cannot be fixed without new information from the user, flag it as a blocker and deliver the deck with the blocker noted rather than shipping broken content. Done when: the stated outcome holds.
-
-9. **Generate output.** Produce the deck in the requested format: markdown as a single `.md` file with frontmatter and slide separators, or web deck as a self-contained HTML file with embedded styles and scripts. Include the story spine summary, complete speaker notes, and the QA pass results in the output. Done when: the stated outcome holds.
+6. Run editorial QA. Check every slide: headline accurately represents content, speaker notes exist and are complete, visual design is consistent across all slides, story spine is traceable from opening to close, no orphaned or redundant slides, no broken references, and text is free of typos and grammatical errors. Fix each issue found. If a slide's content cannot be fixed without new information from the user, flag it as a blocker. Done when: every QA check passes with no blockers, or blockers are explicitly listed.
 
 ## Failure and recovery
-- **Missing required inputs.** Stop immediately. Report which inputs are missing. Do not proceed with defaults or invented content.
-- **Story spine does not connect.** If sections cannot form a coherent narrative, report the broken links and ask the user to confirm whether to remove disconnected sections or supply additional material.
-- **Visual design fails.** If the requested format cannot be produced (e.g., web-deck tooling unavailable), fall back to markdown format and note the fallback in the output.
-- **QA finds blocking issues.** Report each issue. Do not deliver the deck as done. Deliver it as partial with blockers listed, or wait for user resolution.
-- **Partial result rule.** A deck with a valid story spine, complete speaker notes, and unresolved QA blockers is a partial result, not a successful delivery. Label it explicitly.
+
+- Missing required inputs: stop immediately. Report which inputs are missing. Do not proceed with defaults or invented content.
+- Story spine does not connect: report the broken links and ask the user whether to remove disconnected sections or supply additional material.
+- Design QA fails: return a partial blocked result naming the blockers. Do not silently degrade the format. If web-deck tooling is unavailable, report the failure and ask the user whether to accept markdown instead; do not fall back without confirmation.
+- Partial result rule: a deck with unresolved QA blockers is a partial result, not a successful delivery. Label it explicitly.
 
 ## Output
-A complete deck artifact containing: - The full slide deck in the requested format (markdown or web-deck HTML). - A story spine summary showing the narrative throughline. - Speaker notes for every slide. - Visual design specifications (palette, typography, layout templates). - QA pass results listing any issues found and their resolution status.
+
+A completed presentation file at `presentation-<topic-slug>.md` or `presentation-<topic-slug>.html` in the working directory, containing the full slide deck, a story spine summary, speaker notes for every slide, visual design specifications, and QA pass results.

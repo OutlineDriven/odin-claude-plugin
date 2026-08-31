@@ -1,6 +1,6 @@
 ---
 name: fail-design
-description: 'Use when a user wants a design document that defines failure states, recovery, bypasses, and degraded modes at design time. Not for runtime recovery — use fail-recover.'
+description: 'Use when a user wants to define failure states, recovery actions, bypasses, and degraded modes for a component during design. Produces a failure-state design document mapping every bounded failure state to its recovery, bypass, or degraded mode. Not for runtime recovery.'
 ---
 
 # Fail design
@@ -9,30 +9,34 @@ description: 'Use when a user wants a design document that defines failure state
 
 | Field | Bound contract |
 |---|---|
-| Trigger | User wants to define failure states, recovery, bypasses, and degraded modes during design. |
+| Trigger | User wants to define failure states, recovery, bypasses, and degraded modes at design time for a component. |
 | Authority | Reversible local writes only: produce a failure-state design document and degraded-mode specifications. No code, VCS, credential, paid, published, deployed, or remote mutation. |
-| Side effect | Local write of a failure-state design document and degraded-mode specifications. |
-| Done | Failure states, recovery, bypasses, and degraded modes are defined at design time. |
+| Side effect | Local write of a failure-state design document. |
+| Done | A local failure-state design document exists, mapping every bounded failure state to a recovery action, bypass, or degraded mode. |
 
 ## Inputs
 
-- The design artifact or component under design (spec, plan, architecture sketch, or named subsystem). Required.
-- Known constraints, SLAs, dependencies, and prior failure history, if available. Optional.
+Required: the design artifact or component under design (spec, plan, architecture sketch, or named subsystem).
+
+Optional: known constraints, SLAs, dependencies, and prior failure history.
 
 ## Procedure
 
-1. Enumerate the failure states the component can reach: input violations, dependency outages, resource exhaustion, partial data loss, and timeout. Done when: every reachable failure state is named.
-2. For each failure state, define the recovery action: retry, fallback, circuit break, shed load, or fail closed. Done when: every enumerated failure state has a named recovery action.
-3. Define each bypass: which path is taken when a dependency is unavailable and what correctness or consistency it sacrifices. Done when: every bypass is defined with its trade-off.
-4. Define each degraded mode: which features are reduced, disabled, or served from stale data, and the user-visible signal that degradation is active. Done when: every degraded mode is defined with its user-visible signal.
-5. Record these decisions in the design document so they are made at design time rather than discovered at runtime. Done when: the design document carries every failure state, recovery, bypass, and degraded mode.
-6. Stop when every enumerated failure state has a named recovery, bypass, or degraded mode; do not implement the design or write production code. Done when: every failure state is covered and no implementation code is written.
+1. Establish the system boundary and identify all reachable failure states. The boundary names what is inside the component, what is outside (dependencies, callers, infrastructure), and what crosses the boundary. Enumerate failure states by walking every boundary crossing: input violations, dependency outages, resource exhaustion, partial data loss, and timeout. The enumeration is closed when every boundary crossing has been examined for its failure mode. Done when: the boundary is stated and every reachable failure state is named.
+
+2. Define a specific recovery action or an explicit bypass for each failure state. A recovery action names what the component does (retry, fallback, circuit break, shed load, fail closed). A bypass names which path is taken when a dependency is unavailable and what correctness or consistency it sacrifices. Every failure state gets exactly one: a recovery action or a bypass. Done when: every enumerated failure state has a named recovery action or bypass with its trade-off.
+
+3. Specify the degraded mode and its user-visible signal for each failure state. Name which features are reduced, disabled, or served from stale data, and the signal that tells the user degradation is active. A failure state that has a bypass or recovery action still needs a degraded-mode specification for the case where the recovery or bypass itself fails. Done when: every failure state has a degraded mode with its user-visible signal.
+
+4. Consolidate these definitions into a single local design document. The document maps each failure state to its recovery action or bypass, its degraded mode, and its user-visible signal. Done when: the design document carries every failure state with its recovery, bypass, and degraded mode, and no implementation code is written.
 
 ## Failure and recovery
-- Unenumerated failure state: stop and report the gap; do not invent a recovery for a state not yet identified.
-- Contradictory recovery: if two failure states demand mutually exclusive actions, record the conflict and ask the human to resolve it; do not silently pick one.
-- Scope creep: if the request shifts to runtime recovery, breakage surfacing, or implementation, stop; this skill defines failure at design time, it does not execute recovery or surface breakage.
-- Partial result: emit the design document with the failure states covered so far and an explicit list of uncovered states; the done predicate does not hold until the uncovered list is empty.
+
+- Unenumerated failure state: stop and report the gap. Do not invent a recovery for a state not yet identified.
+- Contradictory recovery actions: if two failure states demand mutually exclusive actions, record the conflict and prompt the user to resolve it. Do not silently pick one.
+- Scope creep: if the request shifts to runtime recovery or implementation, stop. This skill defines failure at design time; it does not execute recovery or write production code.
+- Partial result: emit the design document with the failure states covered so far and an explicit list of uncovered states. The done predicate does not hold until the uncovered list is empty.
 
 ## Output
-A failure-state design document containing the enumerated failure states, the recovery action for each, the defined bypasses with their trade-offs, and the degraded-mode specifications with their user-visible signals.
+
+A failure-state design document containing the system boundary, every enumerated failure state, the recovery action or bypass for each with its trade-off, and the degraded-mode specification with its user-visible signal for each.

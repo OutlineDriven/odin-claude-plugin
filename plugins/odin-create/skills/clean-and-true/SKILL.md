@@ -16,8 +16,8 @@ description: 'Use when the automatic trigger applies: after editing a durable ar
 
 ## Inputs
 
-- The just-changed durable artifact (path or content) — must be supplied.
-- The set of hygiene passes available in the session — optional; a pass absent from the session is skipped with a stated reason.
+- The just-changed durable artifact (path or content). Must be supplied.
+- The set of hygiene passes available in the session. Optional; a pass absent from the session is skipped with a stated reason.
 
 ## Procedure
 
@@ -30,7 +30,7 @@ description: 'Use when the automatic trigger applies: after editing a durable ar
    | Padded prose whose every rule still binds | Debloat: cut what no rule depends on | Nothing padded to cut |
    | Anything a stranger must understand alone | Cold-read for standalone clarity | Short-lived or author-only |
    | A reality-grounded claim | Verify the claim both ways | No such claim present |
-   | A truth duplicated across places | Consolidate to one home, point the rest at it | A single home already holds it |
+   | A truth duplicated across places | SSOTize: fold into one home, point the rest at it | A single home already holds it |
    | Voice, tells, or stack residue in prose | Strip tells and restore voice | Not prose, or not stale |
 
    **Done when:** each change is classified and routed to its hygiene pass or marked with a skip reason.

@@ -1,6 +1,6 @@
 ---
 name: automatic-cybernetic-flow-design
-description: 'Use when the user wants a closed-loop control flow designed. Covers sensors, actuators, feedback loops, delay, and oscillation for an interactive system. Produces a cybernetic flow design document specifying each component. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user wants a cybernetic flow design document for an interactive system. Specifies sensors, actuators, feedback paths, delays, and oscillation risk, and writes the design to a named local file. Not for implementing or deploying the system.'
 ---
 
 # Automatic cybernetic flow design
@@ -9,32 +9,45 @@ description: 'Use when the user wants a closed-loop control flow designed. Cover
 
 | Field | Bound contract |
 |---|---|
-| Trigger | User wants to design sensors, actuators, feedback, delay, and oscillation for an interactive system. |
-| Authority | Write only the named local cybernetic flow design document; delete or overwrite that single file to roll back. |
-| Side effect | A cybernetic flow design document specifying sensors, actuators, feedback, delay, and oscillation; no source code, runtime, or remote mutation. |
-| Done | A cybernetic flow design for an interactive system is produced. |
+| Trigger | User wants a cybernetic flow design document specifying sensors, actuators, feedback paths, delays, and oscillation risk for an interactive system. |
+| Authority | Write only the single named local design document; delete or overwrite that file to roll back. Do not implement, deploy, or mutate source code. |
+| Side effect | A cybernetic flow design document at the named local path. No source code, runtime, or remote mutation. |
+| Done | A design document with sections for sensors, actuators, feedback, delay, oscillation, a wiring diagram, and a dynamic-routing note, written to the named local file. |
 
 ## Inputs
 
-The user must describe the interactive system: what state it controls, what it observes, and what actions it can take. Optional inputs include known latency budgets, stability requirements, existing feedback paths, or constraints on sensors and actuators.
+Required:
+- The interactive system description: what state it controls, what it observes, and what actions it can take.
+- The primary control objective: the state the system tries to hold or steer.
+- Observable signals (sensors) and available actions (actuators).
+- Per-path delay classifications: fixed, variable, or bounded with the bound.
+- The named local output file path.
+
+Optional:
+- Known latency budgets, stability requirements, existing feedback paths, or constraints on sensors and actuators.
+- Gain and timing data for oscillation analysis. If absent, the path is marked under-specified.
 
 ## Procedure
 
-1. Require the user to name the interactive system and its primary control objective: the state it tries to hold or steer. Done when: the system and its control objective are named.
-2. Enumerate sensors: list every observable signal the system can read to assess its current state relative to the objective. For each sensor, name the quantity measured and its source. Done when: every sensor is listed with its quantity and source.
-3. Enumerate actuators: list every action or output the system can produce to change state. For each actuator, name the effect and its range. Done when: every actuator is listed with its effect and range.
-4. Design feedback paths: for each sensor, specify which actuator it drives, the comparison that generates the error signal, and the direction of correction. Done when: every sensor is paired with its actuator, error comparison, and correction direction.
-5. Specify delay: for each feedback path, name the propagation delay between sensing and acting, and mark it as fixed, variable, or bounded with the bound. Done when: every feedback path has its delay specified and classified.
-6. Analyze oscillation: for each feedback path, state whether the loop gain and delay can produce oscillation, and specify the damping or limiting mechanism if so. If the risk cannot be determined, mark the path under-specified. Done when: every feedback path has its oscillation risk stated with a damping mechanism or an under-specified marker.
-7. Compile these five components into a single design document with one section per component and a wiring diagram showing sensor → error → actuator → delay → oscillation for each loop. This skeleton is fixed. Done when: the document has one section per component and a wiring diagram per loop.
-8. Record where the system may switch loops, adjust gains, or reconfigure sensors at runtime without rebuilding the skeleton. This is the dynamic routing allowed inside the compiled structure. Done when: the dynamic routing note is recorded.
-9. Write the document to the named local file. Stop. Do not implement, deploy, or mutate source code. Done when: the document is written to the named local file and no source code is mutated.
+1. Intake and validate the system description and control objective. Confirm the system is named, the control objective is stated, and the output file path is supplied. Done when: the system, control objective, and output file path are confirmed.
+
+2. Enumerate sensors and actuators. For each sensor, name the quantity measured and its source. For each actuator, name the effect and its range. State the count of each. Done when: every sensor and actuator is listed with its quantity, source or effect, and range.
+
+3. Map feedback paths. For each path, specify which sensor(s) drive which actuator(s), the comparison that generates the error signal, and the direction of correction. Allow many-to-one and coordinated relationships; a single sensor may drive multiple actuators and multiple sensors may converge on one actuator. Done when: every feedback path names its sensors, actuators, error comparison, and correction direction.
+
+4. Analyze oscillation risk. For each feedback path, state whether the loop gain and delay can produce oscillation, using supplied or derived gain and timing data. Specify the damping or limiting mechanism if oscillation is possible. If gain or timing data is absent, mark the path under-specified and request the missing data from the user. Done when: every feedback path has its oscillation risk stated with a damping mechanism or an under-specified marker.
+
+5. Compile the design document and write it to the named local file. The document has one section per component (sensors, actuators, feedback, delay, oscillation), a wiring diagram showing sensor to error to actuator to delay to oscillation for each loop, and a dynamic-routing note recording where the system may switch loops, adjust gains, or reconfigure sensors at runtime. Done when: the document is written to the named local file with all sections, the wiring diagram, and the dynamic-routing note.
 
 ## Failure and recovery
+
 - Missing system description: stop and request it; write nothing.
-- Unbounded delay or unspecified oscillation risk: mark the path under-specified in the document rather than inventing a value; request the missing bound from the user.
+- Unbounded delay: mark the path under-specified in the document rather than inventing a bound; request the missing classification from the user.
+- Under-specified oscillation risk: mark the path under-specified; request the gain or timing data. Do not invent a stability claim.
+- Output file not named: stop and request the output path; write nothing.
 - Partial result: if some components cannot be specified, emit the document with completed sections and an explicit gap list; do not claim the done predicate holds for gaps.
 - Rollback: delete or overwrite the single design document. No other artifact is touched.
 
 ## Output
-A cybernetic flow design document ordered: sensors, actuators, feedback, delay, oscillation, wiring diagram, dynamic-routing note — the document is the terminal artifact.
+
+A cybernetic flow design document at the named local path, ordered: sensors, actuators, feedback, delay, oscillation, wiring diagram, dynamic-routing note. The document is the terminal artifact.

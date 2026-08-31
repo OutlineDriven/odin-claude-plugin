@@ -1,6 +1,6 @@
 ---
 name: changelog-updates
-description: 'Use when a release or a since-tag window needs user-facing release communication drafted. Composes a draft release note covering exactly that window and advances the since-tag marker once without publishing.'
+description: 'Use when a release or a since-tag window needs user-facing release communication drafted. Composes a draft release note covering exactly that window and advances the file-based since-tag marker once without publishing.'
 ---
 
 # Changelog updates
@@ -10,13 +10,13 @@ description: 'Use when a release or a since-tag window needs user-facing release
 | Field | Bound contract |
 |---|---|
 | Trigger | A release or a since-tag window needs user-facing release communication drafted |
-| Authority | Reversible local writes only: create or update a draft release note and advance the since-tag state marker; no git tag, no publish, no release, no remote mutation |
+| Authority | Reversible local writes only: create or update a draft release note and advance the file-based since-tag marker; no git tag, no publish, no release, no remote mutation |
 | Side effect | Writes or updates one draft release note file and advances the since-tag state marker exactly once |
 | Done | The draft covers exactly the since-tag window and the marker advanced once; publishing remains a separate human action |
 
 ## Inputs
 
-- A repository with a since-tag state marker (a file or recorded tag identifying the last covered release boundary). Required.
+- A repository with a file-based since-tag state marker (a local file identifying the last covered release boundary). Required.
 - The current head reference or commit range to cover. Required.
 - The set of user-facing changes since the marker (commits, merged PRs, or issues). Required; gathered from local history only.
 - An optional audience or tone preference (e.g., developer-facing, end-user-facing). Optional; defaults to developer-facing.
@@ -28,7 +28,7 @@ description: 'Use when a release or a since-tag window needs user-facing release
 3. Gather user-facing changes inside the window from local history only: commit messages, merged PR titles, and linked issues. Classify each as Added, Changed, Fixed, Deprecated, Removed, or Security. **Done when:** every change in the window is gathered and classified.
 4. Compose a draft release note covering exactly the window: one section per non-empty category, one bullet per change, no entries outside the window, no forward-looking or invented items. **Done when:** the draft covers exactly the window with one section per non-empty category.
 5. Write or update the draft release note file at the project's changelog location. If the location is unspecified, write to a draft file adjacent to the marker and report the chosen path. **Done when:** the draft is written to the changelog location and the path is reported.
-6. Advance the since-tag state marker exactly once to the current head so the next run starts from this boundary. Do not create a git tag, push, publish, or open a release. **Done when:** the marker is advanced once to the current head.
+6. Advance the file-based since-tag state marker exactly once to the current head so the next run starts from this boundary. Update the marker file contents to record the current head commit. Do not create a git tag, push, publish, or open a release. Done when: the marker file is advanced once to the current head.
 7. Report the draft path, the window covered, the change count per category, and that publishing is a separate human action. **Done when:** the report is delivered with draft path, window, counts, and publishing notice.
 
 ## Failure and recovery

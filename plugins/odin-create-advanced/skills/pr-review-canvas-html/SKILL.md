@@ -1,6 +1,6 @@
 ---
 name: pr-review-canvas-html
-description: 'Use when asked to render a GitHub PR as standalone review HTML. Fetches PR data via gh API, renders diffs with move detection, and serves locally. Not for Cursor Canvas output — use pr-review-canvas.'
+description: 'Use when asked to render a GitHub PR as a standalone review HTML page. Fetches PR data via gh API, renders diffs with move detection, and serves the artifact on a local port. Not for Cursor Canvas output — use pr-review-canvas.'
 ---
 
 # PR review canvas HTML
@@ -10,20 +10,20 @@ description: 'Use when asked to render a GitHub PR as standalone review HTML. Fe
 | Field | Bound contract |
 |---|---|
 | Trigger | Render a GitHub PR as standalone review HTML. |
-| Authority | reversible-local: no file, VCS, credential, paid, published, deployed, or remote mutation; writes confined to /tmp |
-| Side effect | Writes one self-contained HTML file to /tmp and serves it on a fixed localhost port |
-| Done | A self-contained HTML artifact at /tmp/pr-review-<number>.html, served on localhost |
+| Authority | Reversible-local: writes confined to /tmp. No VCS, credential, paid, published, deployed, or remote mutation. |
+| Side effect | Writes one self-contained HTML file to /tmp and serves it on a fixed localhost port. |
+| Done | A self-contained HTML artifact at /tmp/pr-review-<number>.html, served on localhost. |
 
 ## Inputs
 
-- **PR URL or identifier** (required): a GitHub PR web URL or `owner/repo#<number>`. The model extracts `{owner}`, `{repo}`, `{number}`.
-- **PR data** (fetched): `gh api repos/{owner}/{repo}/pulls/{number}`, file list, diff, and comments fetched by the model during step 3.
+- PR URL or identifier (required): a GitHub PR web URL or `owner/repo#<number>`. The model extracts `{owner}`, `{repo}`, `{number}`.
+- PR data (fetched): `gh api repos/{owner}/{repo}/pulls/{number}`, file list, diff, and comments fetched during step 2.
 
 ## Procedure
 
-1. **Parse the PR identifier.** Extract `{owner}`, `{repo}`, `{number}` from the provided URL or `owner/repo#number` string. Stop if extraction fails. Done when: owner, repo, and number are extracted.
+1. Parse the PR identifier. Extract `{owner}`, `{repo}`, `{number}` from the provided URL or `owner/repo#number` string. Stop if extraction fails. Done when: owner, repo, and number are extracted.
 
-2. **Fetch PR data in parallel.** Run these `gh api` calls concurrently:
+2. Fetch PR data in parallel. Run these `gh api` calls concurrently:
    ```bash
    gh api repos/{owner}/{repo}/pulls/{number} --jq '{title, body, user: .user.login, state, additions, deletions, changed_files, base: .base.ref, head: .head.ref}'
    gh api repos/{owner}/{repo}/pulls/{number}/files --paginate --jq '.[] | {filename, status, additions, deletions, patch}'
@@ -31,18 +31,11 @@ description: 'Use when asked to render a GitHub PR as standalone review HTML. Fe
    ```
    Stop if any call fails or returns no data. Done when: all three API calls return data.
 
-3. **Analyze the PR and write body HTML.** Read the diffs, understand the PR, and write the `<body>` content directly as HTML. Use any structure that best fits the PR:
-   - Header with title, PR number, author, stats
-   - Summary box explaining the PR in plain English
-   - Core file sections with annotations and diffs
-   - Mechanic/boilerplate files collapsed by default
-   - Review checklist at the bottom
+3. Analyze the PR and write body HTML. Read the diffs, understand the PR, and write the `<body>` content directly as HTML. Use any structure that fits the PR: a header with title, PR number, author, and stats; a summary box explaining the PR in plain English; core file sections with annotations and diffs; boilerplate files collapsed by default; a review checklist at the bottom. Include `<div data-diff="<target>">` placeholders where diffs should render. Add collapsible boilerplate sections, inline code references, and callout boxes for warnings. Done when: the body HTML is written with data-diff placeholders for every diff target.
 
-   Include `<div data-diff="<target>">` placeholders where diffs should render. Add collapsible boilerplate sections, inline code references, callout boxes for warnings, and any other content that makes the review clear. Done when: the body HTML is written with data-diff placeholders for every diff target.
+4. Assemble from inline resources. Do not read renderer, style, or template files from the skill directory. Generate the complete document in the assembly script: an HTML5 shell, embedded CSS for risk callouts, diffs, and collapsed boilerplate, plus embedded JavaScript that maps each `data-diff` key to its patch text. Done when: the assembly script produces a complete HTML5 document with embedded CSS and JS.
 
-4. **Assemble from inline resources.** Do not read renderer, style, or template files from the skill directory. Generate the complete document in the assembly script: an HTML5 shell, embedded CSS for risk callouts, diffs, and collapsed boilerplate, plus embedded JavaScript that maps each `data-diff` key to its patch text. Done when: the assembly script produces a complete HTML5 document with embedded CSS and JS.
-
-5. **Assemble the final HTML.** Write the body fragment from step 3 to `/tmp/pr-review-<number>-body.html`. Save patches to `/tmp/pr-patches-<number>.json` using `jq`:
+5. Assemble the final HTML. Write the body fragment from step 3 to `/tmp/pr-review-<number>-body.html`. Save patches to `/tmp/pr-patches-<number>.json` using `jq`:
    ```bash
    gh api repos/{owner}/{repo}/pulls/{number}/files --paginate \
      --jq '[.[] | {key: (.filename | gsub("[^a-zA-Z0-9]"; "_")), value: (.patch // "")}] | from_entries' \
@@ -86,9 +79,10 @@ description: 'Use when asked to render a GitHub PR as standalone review HTML. Fe
    ```
    Escaping `<`, `>`, and `&` prevents patch text from terminating the JSON script element. Done when: `/tmp/pr-review-<number>.html` is written with safe JSON patch data.
 
-6. **Serve locally on a fixed port.** Start `python3 -m http.server 8432 --bind 127.0.0.1` with the harness background-process manager and `/tmp` as the working directory. If port 8432 is taken, try 8433, then 8434. Stop after 8434 fails and report the attempted ports. Report the ready URL to the user. Done when: the server is running and the ready URL is reported.
+6. Serve locally on a fixed port. Start `python3 -m http.server 8432 --bind 127.0.0.1` with the harness background-process manager and `/tmp` as the working directory. If port 8432 is taken, try 8433, then 8434. Stop after 8434 fails and report the attempted ports. Report the ready URL to the user. Done when: the server is running and the ready URL is reported.
 
 ## Failure and recovery
+
 | Failure class | Result |
 |---|---|
 | `gh` not available or not authenticated | Stop; report that `gh` must be installed and authenticated. |
@@ -100,4 +94,5 @@ description: 'Use when asked to render a GitHub PR as standalone review HTML. Fe
 Partial-result rule: if the artifact cannot be fully assembled, do not write or serve it.
 
 ## Output
-File `/tmp/pr-review-<number>.html` (self-contained HTML with embedded CSS, JS, and safe JSON patch data) served at `http://127.0.0.1:8432/pr-review-<number>.html` (or next available port) — the interactive risk-first review canvas renders in the browser.
+
+File `/tmp/pr-review-<number>.html` (self-contained HTML with embedded CSS, JS, and safe JSON patch data) served at `http://127.0.0.1:8432/pr-review-<number>.html` (or next available port). The interactive risk-first review canvas renders in the browser.
