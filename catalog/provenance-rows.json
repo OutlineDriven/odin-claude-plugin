@@ -1,25 +1,16 @@
 {
   "schema": "odin-package-provenance-rows/v1",
   "releaseVersion": "2.0.0",
-  "skill_count": 816,
+  "skill_count": 779,
   "rows": [
     {
       "slug": "agents-md",
       "module": "odin-agent",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
+      "strategy": "G",
+      "adaptation": "structured-merge-rewrite",
       "target": "skills/agents-md/",
-      "origin": "mblode/agent-skills @ `e97a3b383f5944f90d41eb92b24b4fb3b917a7f9` (MIT)",
-      "input_candidates": "`source:source-mblode:mblode-agents-md`"
-    },
-    {
-      "slug": "agents-md-curation",
-      "module": "odin-agent",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/agents-md-curation/",
-      "origin": "mcollina/skills @ `856efd268ae85482d882f3d0bed869fd020b5c06` (MIT)",
-      "input_candidates": "`source:sources-d:d-mcs-02`"
+      "origin": "mblode/agent-skills @ `e97a3b383f5944f90d41eb92b24b4fb3b917a7f9` (MIT)<br>mcollina/skills @ `856efd268ae85482d882f3d0bed869fd020b5c06` (MIT)<br>getsentry/skills @ `c2f99a5b04b4cd992ec3022d7c2c3e23e938d241` (Apache-2.0)",
+      "input_candidates": "`source:source-mblode:mblode-agents-md`<br>`source:sources-d:d-mcs-02`<br>`source:source-sentry:sentry-agents-md`"
     },
     {
       "slug": "audit-loop-scaffold",
@@ -238,15 +229,6 @@
       "input_candidates": "`source:source-keep-the-why:ktw-08`"
     },
     {
-      "slug": "lean-agents-md",
-      "module": "odin-agent",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/lean-agents-md/",
-      "origin": "getsentry/skills @ `c2f99a5b04b4cd992ec3022d7c2c3e23e938d241` (Apache-2.0)",
-      "input_candidates": "`source:source-sentry:sentry-agents-md`"
-    },
-    {
       "slug": "llm-self-loop",
       "module": "odin-agent",
       "strategy": "B",
@@ -290,15 +272,6 @@
       "target": "skills/plan-review-tune/",
       "origin": "Origin: https://github.com/garrytan/gstack at revision 07b59e396c6be5a86619a43151cb9ed62a15ae69, path plan-tune/SKILL.md. License: MIT, Copyright (c) 2026 Garry Tan. Clean-room adaptation: the per-question preference vocabulary, dual-track developer profile, and question-tuning enable/disable mechanism are re-derived; no source expression is copied.",
       "input_candidates": ""
-    },
-    {
-      "slug": "principle-encode-lessons-in-structure",
-      "module": "odin-agent",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/principle-encode-lessons-in-structure/",
-      "origin": "cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)",
-      "input_candidates": "`source:source-cursor:cursor-principle-encode-lessons-in-structure`"
     },
     {
       "slug": "prohibit-bad-habits",
@@ -486,7 +459,7 @@
       "strategy": "R",
       "adaptation": "rename-only",
       "target": "skills/toolchain-health/",
-      "origin": "Origin: https://github.com/garrytan/gstack, revision 07b59e396c6be5a86619a43151cb9ed62a15ae69, file health/SKILL.md. License MIT, copyright \"Copyright (c) 2026 Garry Tan\", retained per the license notice. Clean-room adaptation: the toolchain auto-detection, per-category 0\u201310 scoring, weighted composite with weight redistribution, status-labeled dashboard, and ranked-repairs mechanism are re-derived; the green/yellow/red verdict and read-only installation-audit framing are adapted for this skill; no source expression is copied wholesale.",
+      "origin": "Origin: https://github.com/garrytan/gstack, revision 07b59e396c6be5a86619a43151cb9ed62a15ae69, file health/SKILL.md. License MIT, copyright \"Copyright (c) 2026 Garry Tan\", retained per the license notice. Clean-room adaptation: the toolchain auto-detection, per-category 0–10 scoring, weighted composite with weight redistribution, status-labeled dashboard, and ranked-repairs mechanism are re-derived; the green/yellow/red verdict and read-only installation-audit framing are adapted for this skill; no source expression is copied wholesale.",
       "input_candidates": ""
     },
     {
@@ -558,7 +531,7 @@
       "strategy": "R",
       "adaptation": "rename-only",
       "target": "skills/ios-build-fix/",
-      "origin": "Origin: https://github.com/garrytan/gstack, file `ios-fix/SKILL.md`, revision `07b59e396c6be5a86619a43151cb9ed62a15ae69`. License: MIT, Copyright (c) 2026 Garry Tan \u2014 retain the copyright and permission notice in copies. Adaptation: clean-room re-derivation of the iOS bug-fix loop (reproduce via the debug bridge, root-cause by source tracing, minimal fix, verify on device, regression test) with the gstack preamble, telemetry, AskUserQuestion framework, and skill-start infrastructure removed; the Iron Law, phase structure, debug-bridge endpoints, failure-mode table, and regression-test shape are preserved.",
+      "origin": "Origin: https://github.com/garrytan/gstack, file `ios-fix/SKILL.md`, revision `07b59e396c6be5a86619a43151cb9ed62a15ae69`. License: MIT, Copyright (c) 2026 Garry Tan — retain the copyright and permission notice in copies. Adaptation: clean-room re-derivation of the iOS bug-fix loop (reproduce via the debug bridge, root-cause by source tracing, minimal fix, verify on device, regression test) with the gstack preamble, telemetry, AskUserQuestion framework, and skill-start infrastructure removed; the Iron Law, phase structure, debug-bridge endpoints, failure-mode table, and regression-test shape are preserved.",
       "input_candidates": ""
     },
     {
@@ -652,15 +625,6 @@
       "input_candidates": "`current:current-a:current:ci-cd`<br>`source:source-addy:addy-ci-cd-and-automation`"
     },
     {
-      "slug": "ci-fix",
-      "module": "odin-code",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/ci-fix/",
-      "origin": "https://github.com/warpdotdev/oz-skills @ `6c08c49fc6c51b8f768bf8c53c041bc06a160765` (MIT)",
-      "input_candidates": "`source:sources-a:A-OZS-002`"
-    },
-    {
       "slug": "classify-ci-failure",
       "module": "odin-code",
       "strategy": "B",
@@ -668,24 +632,6 @@
       "target": "skills/classify-ci-failure/",
       "origin": "cobusgreyling/loop-engineering @ `d03dcb92cc1e0efb59789a2557131c6ad5897ccc` (MIT)",
       "input_candidates": "`source:source-loop:loop-engineering-classify-ci-failure`"
-    },
-    {
-      "slug": "cleanup-codebase",
-      "module": "odin-code",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/cleanup-codebase/",
-      "origin": "odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>current-odin-skill-tree @ `project-owned` (Project-owned or clean-room only; no copied source text)",
-      "input_candidates": "`current:current-a:current:cleanup-codebase`<br>`current:current-d:current:tidy`"
-    },
-    {
-      "slug": "code-improver-fixer",
-      "module": "odin-code",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/code-improver-fixer/",
-      "origin": "https://github.com/trailofbits/skills @ `d1f1575cff97816e5cc08af66cd2506099c681d3` (CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.)",
-      "input_candidates": "`source:source-trail-of-bits:trail-p3-004`"
     },
     {
       "slug": "code-simplification",
@@ -704,15 +650,6 @@
       "target": "skills/code-simplifier/",
       "origin": "getsentry/skills @ `c2f99a5b04b4cd992ec3022d7c2c3e23e938d241` (Apache-2.0)",
       "input_candidates": "`source:source-sentry:sentry-code-simplifier`"
-    },
-    {
-      "slug": "codebase-architecture",
-      "module": "odin-code",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/codebase-architecture/",
-      "origin": "mblode/agent-skills @ `e97a3b383f5944f90d41eb92b24b4fb3b917a7f9` (MIT)",
-      "input_candidates": "`source:source-mblode:mblode-codebase-architecture`"
     },
     {
       "slug": "codebase-design",
@@ -816,11 +753,11 @@
     {
       "slug": "deslop",
       "module": "odin-code",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
+      "strategy": "G",
+      "adaptation": "structured-merge-rewrite",
       "target": "skills/deslop/",
-      "origin": "odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text)",
-      "input_candidates": "`current:current-b:current:deslop`"
+      "origin": "odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>mblode/agent-skills @ `e97a3b383f5944f90d41eb92b24b4fb3b917a7f9` (MIT)<br>current-odin-skill-tree @ `project-owned` (Project-owned or clean-room only; no copied source text)",
+      "input_candidates": "`current:current-b:current:deslop`<br>`current:current-a:current:debloat`<br>`source:source-mblode:mblode-tidy`<br>`current:current-a:current:cleanup-codebase`<br>`current:current-d:current:tidy`"
     },
     {
       "slug": "deslop-branch-diff",
@@ -913,22 +850,13 @@
       "input_candidates": "`source:source-sentry:sentry-find-bugs`"
     },
     {
-      "slug": "fix-merge-conflicts",
-      "module": "odin-code",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/fix-merge-conflicts/",
-      "origin": "cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)",
-      "input_candidates": "`source:source-cursor:cursor-fix-merge-conflicts`"
-    },
-    {
       "slug": "gh-fix-ci",
       "module": "odin-code",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
+      "strategy": "G",
+      "adaptation": "structured-merge-rewrite",
       "target": "skills/gh-fix-ci/",
-      "origin": "odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text)",
-      "input_candidates": "`current:current-b:current:gh-fix-ci`"
+      "origin": "odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>https://github.com/warpdotdev/oz-skills @ `6c08c49fc6c51b8f768bf8c53c041bc06a160765` (MIT)",
+      "input_candidates": "`current:current-b:current:gh-fix-ci`<br>`source:sources-a:A-OZS-002`"
     },
     {
       "slug": "implement",
@@ -1048,103 +976,13 @@
       "input_candidates": "`source:source-addy:addy-planning-and-task-breakdown`"
     },
     {
-      "slug": "principle-boundary-discipline",
+      "slug": "principles",
       "module": "odin-code",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/principle-boundary-discipline/",
+      "strategy": "G",
+      "adaptation": "structured-merge-rewrite",
+      "target": "skills/principles/",
       "origin": "cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)",
-      "input_candidates": "`source:source-cursor:cursor-principle-boundary-discipline`"
-    },
-    {
-      "slug": "principle-build-the-lever",
-      "module": "odin-code",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/principle-build-the-lever/",
-      "origin": "cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)",
-      "input_candidates": "`source:source-cursor:cursor-principle-build-the-lever`"
-    },
-    {
-      "slug": "principle-fix-root-causes",
-      "module": "odin-code",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/principle-fix-root-causes/",
-      "origin": "cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)",
-      "input_candidates": "`source:source-cursor:cursor-principle-fix-root-causes`"
-    },
-    {
-      "slug": "principle-foundational-thinking",
-      "module": "odin-code",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/principle-foundational-thinking/",
-      "origin": "cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)",
-      "input_candidates": "`source:source-cursor:cursor-principle-foundational-thinking`"
-    },
-    {
-      "slug": "principle-laziness-protocol",
-      "module": "odin-code",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/principle-laziness-protocol/",
-      "origin": "cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)",
-      "input_candidates": "`source:source-cursor:cursor-principle-laziness-protocol`"
-    },
-    {
-      "slug": "principle-make-operations-idempotent",
-      "module": "odin-code",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/principle-make-operations-idempotent/",
-      "origin": "cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)",
-      "input_candidates": "`source:source-cursor:cursor-principle-make-operations-idempotent`"
-    },
-    {
-      "slug": "principle-migrate-callers-then-delete-legacy-apis",
-      "module": "odin-code",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/principle-migrate-callers-then-delete-legacy-apis/",
-      "origin": "cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)",
-      "input_candidates": "`source:source-cursor:cursor-principle-migrate-callers-then-delete-legacy-apis`"
-    },
-    {
-      "slug": "principle-minimize-reader-load",
-      "module": "odin-code",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/principle-minimize-reader-load/",
-      "origin": "cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)",
-      "input_candidates": "`source:source-cursor:cursor-principle-minimize-reader-load`"
-    },
-    {
-      "slug": "principle-model-the-domain",
-      "module": "odin-code",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/principle-model-the-domain/",
-      "origin": "cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)",
-      "input_candidates": "`source:source-cursor:cursor-principle-model-the-domain`"
-    },
-    {
-      "slug": "principle-subtract-before-you-add",
-      "module": "odin-code",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/principle-subtract-before-you-add/",
-      "origin": "cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)",
-      "input_candidates": "`source:source-cursor:cursor-principle-subtract-before-you-add`"
-    },
-    {
-      "slug": "principle-type-system-discipline",
-      "module": "odin-code",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/principle-type-system-discipline/",
-      "origin": "cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)",
-      "input_candidates": "`source:source-cursor:cursor-principle-type-system-discipline`"
+      "input_candidates": "`source:source-cursor:cursor-principle-encode-lessons-in-structure`<br>`source:source-cursor:cursor-principle-boundary-discipline`<br>`source:source-cursor:cursor-principle-build-the-lever`<br>`source:source-cursor:cursor-principle-fix-root-causes`<br>`source:source-cursor:cursor-principle-foundational-thinking`<br>`source:source-cursor:cursor-principle-laziness-protocol`<br>`source:source-cursor:cursor-principle-make-operations-idempotent`<br>`source:source-cursor:cursor-principle-migrate-callers-then-delete-legacy-apis`<br>`source:source-cursor:cursor-principle-minimize-reader-load`<br>`source:source-cursor:cursor-principle-model-the-domain`<br>`source:source-cursor:cursor-principle-subtract-before-you-add`<br>`source:source-cursor:cursor-principle-type-system-discipline`<br>`source:source-cursor:cursor-principle-redesign-from-first-principles`<br>`source:source-cursor:cursor-principle-separate-before-serializing-shared-state`<br>`source:source-cursor:cursor-principle-guard-the-context-window`<br>`source:source-cursor:cursor-principle-never-block-on-the-human`<br>`source:source-cursor:cursor-principle-experience-first`<br>`source:source-cursor:cursor-principle-exhaust-the-design-space`<br>`source:source-cursor:cursor-principle-outcome-oriented-execution`<br>`source:source-cursor:cursor-principle-prove-it-works`<br>`source:source-cursor:cursor-principle-sequence-verifiable-units`"
     },
     {
       "slug": "reproduce-and-fix-issues",
@@ -1176,20 +1014,11 @@
     {
       "slug": "resolve-merge-conflicts",
       "module": "odin-code",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
+      "strategy": "G",
+      "adaptation": "structured-merge-rewrite",
       "target": "skills/resolve-merge-conflicts/",
-      "origin": "https://github.com/warpdotdev/common-skills @ `f589e224907eda566c13755529f59db563090d14` (MIT)",
-      "input_candidates": "`source:source-warp-common:wc-12`"
-    },
-    {
-      "slug": "resolving-merge-conflicts",
-      "module": "odin-code",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/resolving-merge-conflicts/",
-      "origin": "odin-current @ `project-owned` (Project-owned or clean-room only; no copied source text)",
-      "input_candidates": "`current:current-c:current:resolving-merge-conflicts`"
+      "origin": "https://github.com/warpdotdev/common-skills @ `f589e224907eda566c13755529f59db563090d14` (MIT)<br>cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)<br>odin-current @ `project-owned` (Project-owned or clean-room only; no copied source text)",
+      "input_candidates": "`source:source-warp-common:wc-12`<br>`source:source-cursor:cursor-fix-merge-conflicts`<br>`current:current-c:current:resolving-merge-conflicts`"
     },
     {
       "slug": "review",
@@ -1336,15 +1165,6 @@
       "input_candidates": "`current:current-d:current:tests-adversarial`"
     },
     {
-      "slug": "tidy",
-      "module": "odin-code",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/tidy/",
-      "origin": "mblode/agent-skills @ `e97a3b383f5944f90d41eb92b24b4fb3b917a7f9` (MIT)",
-      "input_candidates": "`source:source-mblode:mblode-tidy`"
-    },
-    {
       "slug": "to-spec",
       "module": "odin-code",
       "strategy": "B",
@@ -1419,11 +1239,11 @@
     {
       "slug": "architect",
       "module": "odin-code-advanced",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
+      "strategy": "G",
+      "adaptation": "structured-merge-rewrite",
       "target": "skills/architect/",
-      "origin": "cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)",
-      "input_candidates": "`source:source-cursor:cursor-architect`"
+      "origin": "cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)<br>mblode/agent-skills @ `e97a3b383f5944f90d41eb92b24b4fb3b917a7f9` (MIT)<br>odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>mattpocock/skills @ `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76` (MIT)",
+      "input_candidates": "`source:source-cursor:cursor-architect`<br>`source:source-mblode:mblode-codebase-architecture`<br>`current:current-b:current:improve-architecture`<br>`source:source-matt:matt-improve-codebase-architecture`"
     },
     {
       "slug": "behavior-validator",
@@ -1651,24 +1471,6 @@
       "input_candidates": "`curated:curated-ideas:curated-065`"
     },
     {
-      "slug": "improve-architecture",
-      "module": "odin-code-advanced",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/improve-architecture/",
-      "origin": "odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text)",
-      "input_candidates": "`current:current-b:current:improve-architecture`"
-    },
-    {
-      "slug": "improve-codebase-architecture",
-      "module": "odin-code-advanced",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/improve-codebase-architecture/",
-      "origin": "mattpocock/skills @ `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76` (MIT)",
-      "input_candidates": "`source:source-matt:matt-improve-codebase-architecture`"
-    },
-    {
       "slug": "leave-only-first-principle",
       "module": "odin-code-advanced",
       "strategy": "B",
@@ -1710,7 +1512,7 @@
       "strategy": "R",
       "adaptation": "rename-only",
       "target": "skills/model-retuning/",
-      "origin": "Origin: https://github.com/EveryInc/compound-engineering-plugin, revision a1f601f17137f648be439965f8fdd9123303de5d, file skills/ce-retune/SKILL.md. License: MIT (Copyright (c) 2025 Every); mechanisms extracted and rewritten in ODIN style, not copied verbatim. Adaptation: the multi-phase measurement-first retuning method \u2014 pre-registered bars, baseline-mined archive passes, adversarial audit, surgical cut passes with disjoint file ownership \u2014 is preserved; reference files and engagement-specific numbers were folded into a self-contained procedure.",
+      "origin": "Origin: https://github.com/EveryInc/compound-engineering-plugin, revision a1f601f17137f648be439965f8fdd9123303de5d, file skills/ce-retune/SKILL.md. License: MIT (Copyright (c) 2025 Every); mechanisms extracted and rewritten in ODIN style, not copied verbatim. Adaptation: the multi-phase measurement-first retuning method — pre-registered bars, baseline-mined archive passes, adversarial audit, surgical cut passes with disjoint file ownership — is preserved; reference files and engagement-specific numbers were folded into a self-contained procedure.",
       "input_candidates": ""
     },
     {
@@ -1786,24 +1588,6 @@
       "input_candidates": "`source:source-skill-recorder:skill-recorder-002`"
     },
     {
-      "slug": "principle-redesign-from-first-principles",
-      "module": "odin-code-advanced",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/principle-redesign-from-first-principles/",
-      "origin": "cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)",
-      "input_candidates": "`source:source-cursor:cursor-principle-redesign-from-first-principles`"
-    },
-    {
-      "slug": "principle-separate-before-serializing-shared-state",
-      "module": "odin-code-advanced",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/principle-separate-before-serializing-shared-state/",
-      "origin": "cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)",
-      "input_candidates": "`source:source-cursor:cursor-principle-separate-before-serializing-shared-state`"
-    },
-    {
       "slug": "proof-driven",
       "module": "odin-code-advanced",
       "strategy": "B",
@@ -1874,15 +1658,6 @@
       "target": "skills/restart-keeping-lessons/",
       "origin": "odin-current @ `project-owned` (Project-owned or clean-room only; no copied source text)",
       "input_candidates": "`current:current-c:current:restart-keeping-lessons`"
-    },
-    {
-      "slug": "review-fix",
-      "module": "odin-code-advanced",
-      "strategy": "G",
-      "adaptation": "structured-merge-rewrite",
-      "target": "skills/review-fix/",
-      "origin": "Origin: https://github.com/garrytan/gstack, revision 07b59e396c6be5a86619a43151cb9ed62a15ae69. License: MIT (Copyright (c) 2026 Garry Tan), blob 35029511144443297cad2d26e4bac17d0e352f93. Adaptation: clean-room re-derivation of the pre-landing review pipeline (diff read, general and design checklists, eight specialist reviewers, fix-clear-defects-first ordering, subagent dispatch, and finding accounting) into a self-contained procedure; no third-party expressive prose or code copied wholesale.",
-      "input_candidates": ""
     },
     {
       "slug": "slicing-code-context",
@@ -2110,24 +1885,6 @@
       "input_candidates": "`source:sources-a:A-PPT-016`"
     },
     {
-      "slug": "principle-guard-the-context-window",
-      "module": "odin-core",
-      "strategy": "M",
-      "adaptation": "move-only",
-      "target": "skills/principle-guard-the-context-window/",
-      "origin": "cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)",
-      "input_candidates": "`source:source-cursor:cursor-principle-guard-the-context-window`"
-    },
-    {
-      "slug": "principle-never-block-on-the-human",
-      "module": "odin-core",
-      "strategy": "M",
-      "adaptation": "move-only",
-      "target": "skills/principle-never-block-on-the-human/",
-      "origin": "cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)",
-      "input_candidates": "`source:source-cursor:cursor-principle-never-block-on-the-human`"
-    },
-    {
       "slug": "unlazy-dispatch-gates",
       "module": "odin-core",
       "strategy": "M",
@@ -2157,11 +1914,11 @@
     {
       "slug": "architecture-diagram",
       "module": "odin-create",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
+      "strategy": "G",
+      "adaptation": "structured-merge-rewrite",
       "target": "skills/architecture-diagram/",
       "origin": "https://github.com/tt-a1i/archify @ `b36d79fdbc3aec3728744341485a7e79f03c0071` (MIT)",
-      "input_candidates": "`source:source-archify:archify-architecture-diagram`"
+      "input_candidates": "`source:source-archify:archify-architecture-diagram`<br>`source:source-archify:archify-architecture-delta`"
     },
     {
       "slug": "buzzword-hijack",
@@ -2216,15 +1973,6 @@
       "target": "skills/dataflow-diagram/",
       "origin": "https://github.com/tt-a1i/archify @ `b36d79fdbc3aec3728744341485a7e79f03c0071` (MIT)",
       "input_candidates": "`source:source-archify:archify-dataflow-diagram`"
-    },
-    {
-      "slug": "debloat",
-      "module": "odin-create",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/debloat/",
-      "origin": "odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text)",
-      "input_candidates": "`current:current-a:current:debloat`"
     },
     {
       "slug": "debloat-respect-richness",
@@ -2362,15 +2110,6 @@
       "input_candidates": "`source:source-warp-common:wc-08`"
     },
     {
-      "slug": "principle-experience-first",
-      "module": "odin-create",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/principle-experience-first/",
-      "origin": "cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)",
-      "input_candidates": "`source:source-cursor:cursor-principle-experience-first`"
-    },
-    {
       "slug": "prototype",
       "module": "odin-create",
       "strategy": "G",
@@ -2421,7 +2160,7 @@
       "strategy": "B",
       "adaptation": "byte-reuse",
       "target": "skills/render-excalidraw-diagram/",
-      "origin": "https://github.com/coleam00/excalidraw-diagram-skill @ `8646fcc9f74f38539c6cdb4c969723336a96ddcd` (NOASSERTION \u2014 no LICENSE/LICENSE.md/COPYING file exists; default all-rights-reserved)",
+      "origin": "https://github.com/coleam00/excalidraw-diagram-skill @ `8646fcc9f74f38539c6cdb4c969723336a96ddcd` (NOASSERTION — no LICENSE/LICENSE.md/COPYING file exists; default all-rights-reserved)",
       "input_candidates": "`source:sources-b:b-excalidraw-render-excalidraw-diagram`"
     },
     {
@@ -2551,30 +2290,12 @@
       "input_candidates": "`source:source-cursor:cursor-technical-writing`"
     },
     {
-      "slug": "unslop-dedash",
-      "module": "odin-create",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/unslop-dedash/",
-      "origin": "https://github.com/LilMGenius/paperthin @ `3bca079a51bcfff5dafb53d1d7f9f523d66ee317` (MIT)",
-      "input_candidates": "`source:sources-a:A-PPT-011`"
-    },
-    {
-      "slug": "unslop-detool",
-      "module": "odin-create",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/unslop-detool/",
-      "origin": "https://github.com/LilMGenius/paperthin @ `3bca079a51bcfff5dafb53d1d7f9f523d66ee317` (MIT)",
-      "input_candidates": "`source:sources-a:A-PPT-010`"
-    },
-    {
       "slug": "visual-argument-diagram",
       "module": "odin-create",
       "strategy": "B",
       "adaptation": "byte-reuse",
       "target": "skills/visual-argument-diagram/",
-      "origin": "https://github.com/coleam00/excalidraw-diagram-skill @ `8646fcc9f74f38539c6cdb4c969723336a96ddcd` (NOASSERTION \u2014 no LICENSE/LICENSE.md/COPYING file exists; default all-rights-reserved)",
+      "origin": "https://github.com/coleam00/excalidraw-diagram-skill @ `8646fcc9f74f38539c6cdb4c969723336a96ddcd` (NOASSERTION — no LICENSE/LICENSE.md/COPYING file exists; default all-rights-reserved)",
       "input_candidates": "`source:sources-b:b-excalidraw-visual-argument-diagram`"
     },
     {
@@ -2684,15 +2405,6 @@
       "target": "skills/all-scenarios-storm/",
       "origin": "project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>project-owned:user-supplied-source-brief @ `project-owned` (Project-owned or clean-room only; no copied source text)",
       "input_candidates": "`curated:curated-ideas:curated-062`<br>`curated:curated-ideas:curated-086`"
-    },
-    {
-      "slug": "architecture-delta",
-      "module": "odin-create-advanced",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/architecture-delta/",
-      "origin": "https://github.com/tt-a1i/archify @ `b36d79fdbc3aec3728744341485a7e79f03c0071` (MIT)",
-      "input_candidates": "`source:source-archify:archify-architecture-delta`"
     },
     {
       "slug": "attack-shape",
@@ -2810,15 +2522,6 @@
       "target": "skills/presentation-creator/",
       "origin": "mblode/agent-skills @ `e97a3b383f5944f90d41eb92b24b4fb3b917a7f9` (MIT)",
       "input_candidates": "`source:source-mblode:mblode-presentation-creator`"
-    },
-    {
-      "slug": "principle-exhaust-the-design-space",
-      "module": "odin-create-advanced",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/principle-exhaust-the-design-space/",
-      "origin": "cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)",
-      "input_candidates": "`source:source-cursor:cursor-principle-exhaust-the-design-space`"
     },
     {
       "slug": "quick-spec-render",
@@ -3199,15 +2902,6 @@
       "input_candidates": ""
     },
     {
-      "slug": "code-improver",
-      "module": "odin-loop",
-      "strategy": "G",
-      "adaptation": "structured-merge-rewrite",
-      "target": "skills/code-improver/",
-      "origin": "https://github.com/trailofbits/skills @ `d1f1575cff97816e5cc08af66cd2506099c681d3` (CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.)",
-      "input_candidates": "`source:source-trail-of-bits:trail-p3-001`"
-    },
-    {
       "slug": "coding-agent-hook-safety",
       "module": "odin-loop",
       "strategy": "N",
@@ -3366,8 +3060,8 @@
       "strategy": "G",
       "adaptation": "structured-merge-rewrite",
       "target": "skills/fix/",
-      "origin": "odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text)",
-      "input_candidates": "`current:current-b:current:fix`"
+      "origin": "odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>https://github.com/trailofbits/skills @ `d1f1575cff97816e5cc08af66cd2506099c681d3` (CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.)<br>Origin: https://github.com/garrytan/gstack, revision 07b59e396c6be5a86619a43151cb9ed62a15ae69. License: MIT (Copyright (c) 2026 Garry Tan), blob 35029511144443297cad2d26e4bac17d0e352f93. Adaptation: clean-room re-derivation of the pre-landing review pipeline (diff read, general and design checklists, eight specialist reviewers, fix-clear-defects-first ordering, subagent dispatch, and finding accounting) into a self-contained procedure; no third-party expressive prose or code copied wholesale.",
+      "input_candidates": "`current:current-b:current:fix`<br>`source:source-trail-of-bits:trail-p3-001`<br>`source:source-trail-of-bits:trail-p3-004`"
     },
     {
       "slug": "fixed-view-visual-benchmark",
@@ -3431,6 +3125,15 @@
       "target": "skills/goal-contract/",
       "origin": "project-owned; genuine-new rewrite; no third-party source",
       "input_candidates": ""
+    },
+    {
+      "slug": "grill-core",
+      "module": "odin-loop",
+      "strategy": "B",
+      "adaptation": "byte-reuse",
+      "target": "skills/grill-core/",
+      "origin": "current-odin-skill-tree @ `project-owned` (Project-owned or clean-room only; no copied source text)",
+      "input_candidates": "`current:current-d:current:grill-core`"
     },
     {
       "slug": "hypothesis-gen",
@@ -3915,7 +3618,7 @@
       "strategy": "G",
       "adaptation": "structured-merge-rewrite",
       "target": "skills/plan/",
-      "origin": "Origin: https://github.com/EveryInc/compound-knowledge-plugin | Revision: 766942e9eaee5204adbfe180f1d0651ffecf2575 | License: MIT \u2014 adaptation of the compound-knowledge-plugin planning mechanism. Both researcher-agent functions (past-work research and knowledge-base research) are preserved as parallel read-only research steps in Procedure. Local reversible write confirmed per source. Mechanism rewrites recorded in the root provenance ledger are permitted under the license.",
+      "origin": "Origin: https://github.com/EveryInc/compound-knowledge-plugin | Revision: 766942e9eaee5204adbfe180f1d0651ffecf2575 | License: MIT — adaptation of the compound-knowledge-plugin planning mechanism. Both researcher-agent functions (past-work research and knowledge-base research) are preserved as parallel read-only research steps in Procedure. Local reversible write confirmed per source. Mechanism rewrites recorded in the root provenance ledger are permitted under the license.",
       "input_candidates": ""
     },
     {
@@ -4371,20 +4074,11 @@
     {
       "slug": "docs-and-adrs",
       "module": "odin-research",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
+      "strategy": "G",
+      "adaptation": "structured-merge-rewrite",
       "target": "skills/docs-and-adrs/",
-      "origin": "odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text)",
-      "input_candidates": "`current:current-b:current:docs-and-adrs`"
-    },
-    {
-      "slug": "documentation-and-adrs",
-      "module": "odin-research",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/documentation-and-adrs/",
-      "origin": "addyosmani/agent-skills @ `d2c37ef6225dd8726cdd369a8030307f48592d26` (MIT)",
-      "input_candidates": "`source:source-addy:addy-documentation-and-adrs`"
+      "origin": "odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>addyosmani/agent-skills @ `d2c37ef6225dd8726cdd369a8030307f48592d26` (MIT)",
+      "input_candidates": "`current:current-b:current:docs-and-adrs`<br>`source:source-addy:addy-documentation-and-adrs`"
     },
     {
       "slug": "domain-modeling",
@@ -4923,7 +4617,7 @@
       "strategy": "R",
       "adaptation": "rename-only",
       "target": "skills/readiness-assessment/",
-      "origin": "**Origin**: compound-knowledge-plugin by EveryInc. **Source**: `plugins/compound-knowledge/skills/kw-confidence/SKILL.md`, revision `766942e9eaee5204adbfe180f1d0651ffecf2575`. **License**: MIT \u2014 Copyright (c) 2026 Every, Inc. Adaptation permitted per root provenance ledger mechanism rewrite record. **Adaptation**: Epistemic gut-check mechanism preserved. Authority scoped to read-only with explicit user-requested file write only. Module set to odin-research. Trigger and three-part assessment structure retained; no inference, scope-widening, or numeric scoring added.",
+      "origin": "**Origin**: compound-knowledge-plugin by EveryInc. **Source**: `plugins/compound-knowledge/skills/kw-confidence/SKILL.md`, revision `766942e9eaee5204adbfe180f1d0651ffecf2575`. **License**: MIT — Copyright (c) 2026 Every, Inc. Adaptation permitted per root provenance ledger mechanism rewrite record. **Adaptation**: Epistemic gut-check mechanism preserved. Authority scoped to read-only with explicit user-requested file write only. Module set to odin-research. Trigger and three-part assessment structure retained; no inference, scope-widening, or numeric scoring added.",
       "input_candidates": ""
     },
     {
@@ -5292,7 +4986,7 @@
       "strategy": "R",
       "adaptation": "rename-only",
       "target": "skills/recorded-feedback-analysis/",
-      "origin": "Origin: https://github.com/EveryInc/compound-engineering-plugin, revision a1f601f17137f648be439965f8fdd9123303de5d, file skills/ce-riffrec-feedback-analysis/SKILL.md. License MIT (Copyright (c) 2025 Every). Mechanisms extracted and rewritten in ODIN style under clean-room adaptation; the bundled analyzer script and reference files are not retained \u2014 the analysis procedure is restated as agent-performed steps.",
+      "origin": "Origin: https://github.com/EveryInc/compound-engineering-plugin, revision a1f601f17137f648be439965f8fdd9123303de5d, file skills/ce-riffrec-feedback-analysis/SKILL.md. License MIT (Copyright (c) 2025 Every). Mechanisms extracted and rewritten in ODIN style under clean-room adaptation; the bundled analyzer script and reference files are not retained — the analysis procedure is restated as agent-performed steps.",
       "input_candidates": ""
     },
     {
@@ -5843,33 +5537,6 @@
       "target": "skills/prepare-repository-for-public-release/",
       "origin": "https://github.com/trailofbits/skills @ `d1f1575cff97816e5cc08af66cd2506099c681d3` (CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.)",
       "input_candidates": "`source:source-trail-of-bits:trail-p4-009`"
-    },
-    {
-      "slug": "principle-outcome-oriented-execution",
-      "module": "odin-run",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/principle-outcome-oriented-execution/",
-      "origin": "cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)",
-      "input_candidates": "`source:source-cursor:cursor-principle-outcome-oriented-execution`"
-    },
-    {
-      "slug": "principle-prove-it-works",
-      "module": "odin-run",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/principle-prove-it-works/",
-      "origin": "cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)",
-      "input_candidates": "`source:source-cursor:cursor-principle-prove-it-works`"
-    },
-    {
-      "slug": "principle-sequence-verifiable-units",
-      "module": "odin-run",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/principle-sequence-verifiable-units/",
-      "origin": "cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)",
-      "input_candidates": "`source:source-cursor:cursor-principle-sequence-verifiable-units`"
     },
     {
       "slug": "propose-issue",
@@ -7287,11 +6954,11 @@
     {
       "slug": "unslop",
       "module": "odin-writing",
-      "strategy": "M",
-      "adaptation": "move-only",
+      "strategy": "G",
+      "adaptation": "structured-merge-rewrite",
       "target": "skills/unslop/",
-      "origin": "current-odin-skill-tree @ `project-owned` (Project-owned or clean-room only; no copied source text)",
-      "input_candidates": "`current:current-d:current:unslop`"
+      "origin": "current-odin-skill-tree @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>https://github.com/LilMGenius/paperthin @ `3bca079a51bcfff5dafb53d1d7f9f523d66ee317` (MIT)",
+      "input_candidates": "`current:current-d:current:unslop`<br>`source:sources-a:A-PPT-011`<br>`source:sources-a:A-PPT-010`"
     },
     {
       "slug": "blog-writing-guide",
