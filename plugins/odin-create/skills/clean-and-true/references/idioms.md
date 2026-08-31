@@ -2,9 +2,9 @@
 
 Owned by `clean-and-true`. Linked by consumers at `../clean-and-true/references/idioms.md`.
 
-- Edit safety: `rewrite-clean-v0`, `reorder`, `deslop` (bloat mode), `consolidate-to-one-home`
-- Clean room: `fresh-reader-review`, `decision-rationale-gaps`, `prism`, `evaluation-leakage-audit`, `autobahn`
-- Negatives as corpus: `restart-keeping-lessons`, `autobahn`
+- Edit safety: `rewrite-clean-v0`, `reorder`, `deslop` (bloat mode), `ssotize-audit-fold`
+- Clean room: `fresh-reader-review`, `decision-rationale-gaps`, `prism`, `evaluation-leakage-audit`, `guardrail-carve-run`
+- Negatives as corpus: `restart-keeping-lessons`, `guardrail-carve-run`
 
 ## Edit safety
 

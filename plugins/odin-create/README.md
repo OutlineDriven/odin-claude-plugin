@@ -2,7 +2,7 @@
 
 ODIN workflows for turning ideas into working artifacts.
 
-47 skills, category Productivity.
+45 skills, category Productivity.
 
 ## Install
 
@@ -27,7 +27,6 @@ codex plugin add odin-create@odin-marketplace
 - dataflow-diagram
 - debloat-respect-richness
 - define-goalstate
-- diataxis-docs-authoring
 - diverge
 - doc-coauthoring
 - docs-update
@@ -62,6 +61,5 @@ codex plugin add odin-create@odin-marketplace
 - visualise-chart
 - visualise-widget
 - workflow-diagram
-- write-feature-docs
 - write-prd
 - write-tech-spec

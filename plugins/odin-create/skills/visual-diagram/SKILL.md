@@ -1,6 +1,6 @@
 ---
 name: visual-diagram
-description: 'Use when the user asks to diagram, draw, map out, walk through, or visually explain a topic, system, process, or architecture. Produces a durable self-contained HTML file opened in the browser, or an ephemeral inline SVG fragment in a visualizer fence. Not for Excalidraw or document-embedded diagrams — use visual-argument-diagram or embed-diagram.'
+description: 'Use when the user asks to diagram, draw, map out, walk through, or visually explain a topic, system, process, or architecture. Produces a durable self-contained HTML file opened in the browser, or an ephemeral inline SVG fragment in a visualizer fence. Not for Excalidraw diagrams or document-embedded diagrams; use visual-argument-diagram or embed-diagram.'
 ---
 
 # Visual diagram
@@ -10,15 +10,15 @@ description: 'Use when the user asks to diagram, draw, map out, walk through, or
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to diagram, draw, map out, walk through, illustrate, or visually explain a topic, system, process, or architecture |
-| Authority | Stated by output mode. HTML mode: reversible-local — write only one named local HTML artifact; state the rollback path. SVG mode: read-only — no file, VCS, credential, paid, published, deployed, or remote mutation |
-| Side effect | Stated by output mode. HTML mode: writes one self-contained HTML file under the user diagrams directory; opens the page in a browser or reports the path. SVG mode: chat output only — a visualizer fence containing an SVG fragment, rendered by the client in a sandboxed iframe |
-| Done | Stated by output mode. HTML mode: complete document passing the final checklist — no console errors, no horizontal overflow, dual-theme or deliberate single theme, labeled Mermaid edges, figure captions with claims. SVG mode: a valid SVG diagram of the requested family is present in the visualizer fence |
+| Authority | Stated by output mode. HTML mode: reversible-local; write only one named local HTML artifact; state the rollback path. SVG mode: read-only; no file, VCS, credential, paid, published, deployed, or remote mutation |
+| Side effect | Stated by output mode. HTML mode: writes one self-contained HTML file under the user diagrams directory; opens the page in a browser or reports the path. SVG mode: chat output only; a visualizer fence containing an SVG fragment, rendered by the client in a sandboxed iframe |
+| Done | Stated by output mode. HTML mode: complete document passing the final checklist: no console errors, no horizontal overflow, dual-theme or deliberate single theme, labeled Mermaid edges, figure captions with claims. SVG mode: a valid SVG diagram of the requested family is present in the visualizer fence |
 
 ## Inputs
 
 Required:
 - **Diagram request**: the concept, system, process, or structure the user wants visualised, and optionally the diagram family (flowchart, structural, illustrative). If no family is stated, infer from context.
-- **Output modality**: HTML artifact (durable file) or inline SVG (ephemeral chat). Infer from the request — see Procedure step 1.
+- **Output modality**: HTML artifact (durable file) or inline SVG (ephemeral chat). Infer from the request; see Procedure step 1.
 
 Optional:
 - **Style direction**: preferred color palette, font, or layout hint from the user (HTML mode).

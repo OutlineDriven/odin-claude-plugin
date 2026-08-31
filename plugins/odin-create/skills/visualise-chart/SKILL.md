@@ -1,6 +1,6 @@
 ---
 name: visualise-chart
-description: 'Use when the user asks to visualise data as a chart. Returns a self-contained HTML chart fragment in a visualizer fence for sandboxed iframe rendering. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when the user asks to visualise data as a chart. Returns a self-contained HTML chart fragment using inline SVG or Canvas in a visualizer fence. Don''t use for tasks that require source or remote-system changes.'
 ---
 
 # Visualise chart
@@ -9,30 +9,32 @@ description: 'Use when the user asks to visualise data as a chart. Returns a sel
 
 | Field | Bound contract |
 |---|---|
-| Trigger | bar, line, doughnut, scatter, sparkline, inline SVG chart, D3 visualization, also chart/graph/plot/data visualization |
-| Authority | read-only: no file, VCS, credential, paid, published, deployed, or remote mutation |
-| Side effect | visualizer fence containing an HTML/SVG/canvas chart fragment, rendered by the client in a sandboxed iframe |
-| Done | valid chart rendered in the sandboxed iframe |
+| Trigger | User asks to chart, plot, graph, or visualise numeric or series data. |
+| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Side effect | Chat output only: a visualizer fence containing an HTML fragment with an inline SVG or Canvas chart. |
+| Done | A valid chart is present in the visualizer fence. |
 
 ## Inputs
 
-- **Required**: data (values, series, or raw data text the user provides), chart type (bar, line, doughnut, scatter, sparkline, SVG, D3, or other named chart format the user requests).
-- **Optional**: title, axis labels, legend preference, color palette guidance, width/height constraints.
+- Required: data (values, series, or raw numeric data the user provides) and chart type (bar, line, doughnut, scatter, sparkline, or other named chart format the user requests).
+- Optional: title, axis labels, legend preference, color palette guidance, width/height constraints.
 
 ## Procedure
 
-1. Parse the user-provided data and chart type. Validate data format at the trust boundary. Done when: data parses as valid numeric or series data, or the step has stopped with `INVALID_DATA`.
-2. Select a rendering approach from inline SVG, HTML5 canvas via Chart.js, or D3.js, whichever best fits the chart type and data shape. Done when: rendering approach is selected, or the step has stopped with `UNSUPPORTED_TYPE`.
-3. Generate a self-contained HTML fragment containing only the chosen chart renderer and the chart markup. Do not reference external scripts outside the standard CDN allowlist. Embed all data, labels, and configuration inline; do not fetch external data. Done when: fragment contains only inline data and allowlisted CDN references.
-4. Wrap the fragment in the visualizer fence marker so the client renders it in a sandboxed iframe. Done when: fragment is wrapped in the visualizer fence.
-5. Return the fenced fragment as the sole output. Do not write files, mutate repositories, or call external services beyond the CDN allowlist. Done when: fenced fragment is the only output in the response.
+1. Parse and validate the user-provided data and chart type. Validate data format at the trust boundary. Done when: data parses as valid numeric or series data, or the step has stopped with `INVALID_DATA`.
+2. Select an inline SVG or Canvas renderer, whichever best fits the chart type and data shape. Do not reference external scripts, CDNs, or libraries. All rendering logic is inline. Done when: a rendering approach is selected, or the step has stopped with `UNSUPPORTED_TYPE`.
+3. Generate a self-contained HTML fragment containing only the inline renderer and the chart markup. Embed all data, labels, and configuration inline. Do not fetch external data. Do not use `<iframe>`, `<object>`, or `<embed>`. Do not reference external scripts, stylesheets, or fonts. Done when: the fragment contains only inline data and inline rendering logic with no external references.
+4. Wrap the fragment in the visualizer fence marker so the client renders it in a sandboxed iframe. Done when: the fragment is wrapped in the visualizer fence.
+5. Return the fenced fragment as the sole output. Do not write files, mutate repositories, or call external services. Done when: the fenced fragment is the only output in the response.
 
 ## Failure and recovery
-- `INVALID_DATA`: malformed numeric or series data → return the named failure class and stop. Do not produce a chart fragment from invalid input.
-- `UNSUPPORTED_TYPE`: chart type not recognized → return the named failure class and stop. Do not invent a fallback chart type.
-- `NON_CONVERGED`: rendering cannot be completed → return `NON_CONVERGED` with the named failure class. Do not pretend the done predicate holds.
+
+- `INVALID_DATA`: malformed numeric or series data. Return the named failure class and stop. Do not produce a chart fragment from invalid input.
+- `UNSUPPORTED_TYPE`: chart type not recognized. Return the named failure class and stop. Do not invent a fallback chart type.
+- `NON_CONVERGED`: rendering cannot be completed. Return `NON_CONVERGED` with the named failure class. Do not pretend the done predicate holds.
 
 No mutation occurs; the only output is the visualizer fence or a named failure class.
 
 ## Output
-A visualizer fence containing a self-contained HTML/SVG/canvas chart fragment.
+
+A visualizer fence containing a self-contained HTML fragment with an inline SVG or Canvas chart. No external scripts, CDNs, stylesheets, fonts, or iframe elements.

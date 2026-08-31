@@ -1,6 +1,6 @@
 ---
 name: visual-plan
-description: 'Use when the user wants an implementation plan built and visualized for a goal. Researches the repository and writes a self-contained HTML plan page ending in an observable acceptance checklist. Not for prose plan documents — use plan.'
+description: 'Use when the user wants an implementation plan built and visualized for a goal. Researches the repository and writes a self-contained HTML plan page ending in an observable acceptance checklist. Not for prose plan documents; use plan.'
 ---
 
 # Visual plan

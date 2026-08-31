@@ -1,6 +1,6 @@
 ---
 name: render-excalidraw-diagram
-description: 'Use when a user supplies an existing .excalidraw file and asks for PNG rendering. Validates the JSON, renders via headless Chromium, and writes a PNG beside the source or to a specified output path. Not for creating or editing Excalidraw diagrams — supply the file.'
+description: 'Use when a user supplies an existing .excalidraw file and asks for PNG rendering. Validates the JSON, renders via headless Chromium using the Excalidraw library fetched from esm.sh, and writes a PNG beside the source or to a specified output path. Not for creating or editing Excalidraw diagrams.'
 ---
 
 # Render Excalidraw diagram
@@ -10,48 +10,45 @@ description: 'Use when a user supplies an existing .excalidraw file and asks for
 | Field | Bound contract |
 |---|---|
 | Trigger | User supplies an existing .excalidraw file and asks for PNG rendering, preview, verification, or export. |
-| Authority | Reversible-local: writes only the requested PNG file; never edits the source .excalidraw JSON. First run may bootstrap pinned rendering dependencies (Playwright, Chromium). Rollback is deleting the PNG. |
-| Side effect | Writes one PNG to the local filesystem. Source JSON is read-only. |
-| Done | The rendering script exits zero, the PNG file exists on disk, and validation plus in-browser render signals all passed. |
+| Authority | Reversible local write of a single PNG. Network access to fetch the Excalidraw rendering library from esm.sh. Source JSON remains read-only. Rollback is deleting the PNG. |
+| Side effect | Writes one PNG to the local filesystem. Source JSON is never modified. |
+| Done | The PNG file exists on disk and represents the source diagram at the requested scale. |
 
 ## Refusals
 
-- **Editing the source .excalidraw JSON**: rejected. The source file is read-only.
-- **Partial PNG surviving on disk after any failure**: rejected. On any failure the script exits 1 with an actionable error message and no file is written.
-- **Creating or editing Excalidraw diagrams**: rejected. This skill renders existing files only.
+- Editing the source .excalidraw JSON: rejected. The source file is read-only.
+- Partial PNG surviving on disk after any failure: rejected. On any failure no file is written.
+- Creating or editing Excalidraw diagrams: rejected. This skill renders existing files only.
 
 ## Inputs
 
-- **Required**: Path to an existing `.excalidraw` file containing valid JSON with `type: "excalidraw"` and a non-empty `elements` array.
-- **Optional**: Output PNG path (defaults to input stem with `.png` extension), device scale factor (defaults to 2), maximum viewport width in pixels (defaults to 1920).
+- Required: path to an existing `.excalidraw` file containing valid JSON with `type: "excalidraw"` and a non-empty `elements` array.
+- Optional: output PNG path (defaults to input stem with `.png` extension), device scale factor (defaults to 2), maximum viewport width in pixels (defaults to 1920).
 
 ## Procedure
 
-1. Validate input existence. Confirm the `.excalidraw` file exists at the supplied path. If missing, report the path and exit 1. **Done when**: the file is confirmed to exist or exit 1 is reported.
-2. Parse and validate JSON. Read the file as UTF-8 and parse as JSON. If parsing fails, report the parse error and exit 1. Check that `type` equals `"excalidraw"`, that `elements` is present and is a non-empty array. If any check fails, report each violation and exit 1. **Done when**: the JSON is parsed and all structure checks pass or exit 1 is reported.
-3. Compute viewport dimensions. Iterate over non-deleted elements to find the bounding box (min x, min y, max x, max y). For arrow and line elements, expand the bounds using every point in the `points` array relative to the element origin. For all other elements, use x, y, width, and height. If no elements survive the deleted filter, fall back to 800x600. Add 80 px of padding on each side. Cap the width at the max viewport width parameter; set the height to at least 600 px. **Done when**: viewport dimensions are computed.
-4. Locate rendering dependencies. Confirm the HTML template file exists in the same directory as the rendering script. Confirm Playwright and its Chromium browser are installed. If Playwright is missing, report the install command and exit 1. If Chromium is missing, report `playwright install chromium` and exit 1. **Done when**: all dependencies are confirmed or exit 1 is reported.
-5. Launch headless browser. Open Chromium in headless mode via Playwright. Create a page with the computed viewport size and the requested device scale factor. If the browser fails to launch, report the error and exit 1. **Done when**: the browser is launched with the correct viewport.
-6. Load the rendering template. Navigate to the HTML template file URI. The template loads the Excalidraw library from esm.sh as an ES module. Wait for the module-ready signal (`window.__moduleReady === true`) with a 30-second timeout. If the timeout fires, report the dependency load failure and exit 1. **Done when**: the module-ready signal is received.
-7. Inject diagram data and render. Serialize the parsed JSON and call `window.renderDiagram(data)` on the page. If the call returns null or `{ success: false }`, report the error message from the result and exit 1. **Done when**: `renderDiagram` returns success.
-8. Wait for render completion. Wait for `window.__renderComplete === true` with a 15-second timeout. If the timeout fires, report the render stall and exit 1. **Done when**: the render-complete signal is received.
-9. Capture screenshot. Query the page for `#root svg`. If no SVG element is found, report the missing SVG and exit 1. Take a screenshot of the SVG element and write it to the output PNG path. **Done when**: the PNG is written to the output path.
-10. Verify output. Confirm the PNG file exists on disk. Print the output path to stdout. **Done when**: the file is confirmed on disk and the path is printed.
+1. Validate the .excalidraw JSON structure and compute the bounding box. Confirm the file exists at the supplied path; if missing, report the path and stop. Read the file as UTF-8 and parse as JSON; if parsing fails, report the parse error and stop. Check that `type` equals `"excalidraw"` and that `elements` is a non-empty array; if any check fails, report each violation and stop. Iterate over non-deleted elements to find the bounding box (min x, min y, max x, max y). For arrow and line elements, expand the bounds using every point in the `points` array relative to the element origin. For all other elements, use x, y, width, and height. If no elements survive the deleted filter, fall back to 800x600. Add 80 px of padding on each side. Cap the width at the max viewport width parameter; set the height to at least 600 px. Done when: the JSON is validated and viewport dimensions are computed.
+
+2. Launch headless browser and fetch rendering dependencies. Open Chromium in headless mode via Playwright. If Playwright or its Chromium browser is missing, report the install command (`npm install playwright && npx playwright install chromium`) and stop. Create a page with the computed viewport size and the requested device scale factor. Done when: the browser is launched with the correct viewport, or the missing-dependency error is reported.
+
+3. Inject parsed diagram data into the rendering template. Build an inline HTML document that loads the Excalidraw library from `https://esm.sh/@excalidraw/excalidraw` as an ES module, exposes a `window.renderDiagram(data)` function that initializes Excalidraw with the parsed JSON, and signals `window.__renderComplete` when rendering finishes. Set the page content to this inline document. Serialize the parsed JSON and call `window.renderDiagram(data)` on the page. If the call returns an error, report it and stop. Done when: the diagram data is injected and the render call returns without error.
+
+4. Wait for render completion signal. Wait for `window.__renderComplete === true` with a 15-second timeout. If the timeout fires, report the render stall and stop. Done when: the render-complete signal is received.
+
+5. Capture SVG screenshot and write PNG to disk. Query the page for the Excalidraw SVG element. If no SVG is found, report the missing SVG and stop. Take a screenshot of the SVG element and write it to the output PNG path. Confirm the PNG file exists on disk and print the output path to stdout. Done when: the PNG is written and confirmed on disk.
 
 ## Failure and recovery
 
-- **Missing input file**: report path; exit 1; no file written.
-- **Invalid JSON**: report parse error; exit 1; no file written.
-- **Invalid Excalidraw structure**: report each violation; exit 1; no file written.
-- **Missing Playwright**: report install command; exit 1; no file written.
-- **Missing Chromium**: report `playwright install chromium`; exit 1; no file written.
-- **Browser launch failure**: report error; exit 1; no file written.
-- **Module load timeout**: report dependency load failure; exit 1; no file written.
-- **Render failure**: report error message; exit 1; no file written.
-- **Render timeout**: report stall; exit 1; no file written.
-- **Missing SVG**: report missing SVG; exit 1; no file written.
+- Missing input file: report path; no file written.
+- Invalid JSON: report parse error; no file written.
+- Invalid Excalidraw structure: report each violation; no file written.
+- Missing Playwright or Chromium: report install command; no file written.
+- Browser launch failure: report error; no file written.
+- Render failure: report error message; no file written.
+- Render timeout: report stall; no file written.
+- Missing SVG: report missing SVG; no file written.
 
-No partial PNG is ever written. The source `.excalidraw` file is never modified.
+No partial PNG is ever written. The source `.excalidraw` file is never modified. The network dependency on esm.sh is required; if the fetch fails, report the dependency load failure and stop.
 
 ## Output
 

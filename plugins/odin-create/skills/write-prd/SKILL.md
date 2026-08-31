@@ -1,6 +1,6 @@
 ---
 name: write-prd
-description: 'Use when a user asks to write a PRD or draft feature requirements. Produces a structured PRD with evidence-driven citations and opens a PR. Not for product specs with behavioral invariants — use write-product-spec; not for tech specs — use write-tech-spec.'
+description: 'Use when a user asks to write a PRD or draft feature requirements. Produces a structured PRD with evidence-driven citations and opens a PR. Not for product specs with behavioral invariants; use write-product-spec. Not for tech specs; use write-tech-spec.'
 disable-model-invocation: true
 ---
 
@@ -13,7 +13,7 @@ disable-model-invocation: true
 | Trigger | User asks to write a PRD, create a product spec, or draft requirements for a feature. |
 | Authority | Human-only: must be explicitly invoked. Credentials, paid actions, and remote publishing are previewed and confirmed before execution. |
 | Side effect | Saves a PRD to reports/prds/; creates a GitHub PR; optionally exports to Google Docs, Notion, or Slack as separate user-initiated steps. |
-| Done | A PRD file exists at reports/prds/prd_<feature_slug>_YYYY-MM-DD.md containing all seven required sections with content. |
+| Done | A PRD file exists at reports/prds/prd_<feature_slug>_YYYY-MM-DD.md containing all ten required sections in the order specified in the procedure. |
 
 ## Inputs
 
@@ -38,7 +38,7 @@ disable-model-invocation: true
 3. **Cite every claim.** Every claim in the Problem Statement and Technical Considerations sections must carry a citation to a source: report filename, URL, or issue number. Unattributed claims must be tagged `[UNCITED]` and resolved or flagged in Open Questions. Done when: every claim carries a citation or is tagged `[UNCITED]`.
 4. **Draft the PRD.** Produce a document with these sections in order: TL;DR, Problem Statement, Goals & Success Metrics (with non-goals), Target Users, Scope (in scope / out of scope), Proposed Solution (overview and key user flows), Technical Considerations, Competitive Context, Open Questions, References. Include the header block: title, author, date, status (Draft), priority. Done when: all sections are drafted with content and the section order is correct.
 5. **Save the PRD.** Derive the feature slug from the feature name (lowercase, hyphenated). Write the file to `reports/prds/prd_<feature_slug>_YYYY-MM-DD.md`. Create the directory if absent. Done when: the PRD file is written to the correct path.
-6. **Create a PR.** Stage and commit the PRD file; open a pull request against the tracked default branch. If VCS commands fail, report the error with the full path. Done when: the PR is open against the default branch.
+6. **Create a PR.** Before staging, present the saved PRD path and a content summary to the user and obtain explicit confirmation. Then stage and commit the PRD file; open a pull request against the tracked default branch. If VCS commands fail, report the error with the full path. Done when: the user confirms, the PRD is committed, and the PR is open against the default branch.
 7. **Optional exports.** Google Docs, Notion, and Slack are separate user-initiated steps outside this skill's required path. Do not invoke them as part of the core workflow. Done when: the user is informed that exports are separate steps.
 
 ## Failure and recovery
@@ -53,4 +53,4 @@ disable-model-invocation: true
 | Missing required section | PRD is incomplete | Do not claim Done; report which section is absent. |
 
 ## Output
-`reports/prds/prd_<feature_slug>_YYYY-MM-DD.md` — sections in order: TL;DR, Problem Statement, Goals & Success Metrics, Target Users, Scope, Proposed Solution, Technical Considerations, Competitive Context, Open Questions, References; plus an open PR against the default branch.
+`reports/prds/prd_<feature_slug>_YYYY-MM-DD.md` with sections in order: TL;DR, Problem Statement, Goals & Success Metrics, Target Users, Scope, Proposed Solution, Technical Considerations, Competitive Context, Open Questions, References; plus an open PR against the default branch.
