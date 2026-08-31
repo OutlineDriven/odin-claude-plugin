@@ -2,8 +2,25 @@
 
 Advanced ODIN workflows for substantial writing and editorial work.
 
-npm package: `@outlinedriven/odin-writing-advanced@2.0.0`
+6 skills, category Writing.
 
-Skills live in the canonical `skills/` tree. Package tarballs project this module's subset at pack time.
+## Install
 
-License: see `LICENSE`. Third-party notices: see `NOTICE`.
+```bash
+# Claude Code
+/plugin marketplace add OutlineDriven/odin-claude-plugin
+/plugin install odin-writing-advanced@odin-marketplace
+
+# Codex
+codex plugin marketplace add OutlineDriven/odin-claude-plugin
+codex plugin add odin-writing-advanced@odin-marketplace
+```
+
+## Skills
+
+- blog-writing-guide
+- copywriting-prose-creator
+- copywriting-tone-of-voice-creator
+- writing-beats
+- writing-fragments
+- writing-shape

@@ -2,8 +2,20 @@
 
 ODIN workflows for Lean proofs and formal verification.
 
-npm package: `@outlinedriven/odin-lean@2.0.0`
+1 skill, category Coding.
 
-Skills live in the canonical `skills/` tree. Package tarballs project this module's subset at pack time.
+## Install
 
-License: see `LICENSE`. Third-party notices: see `NOTICE`.
+```bash
+# Claude Code
+/plugin marketplace add OutlineDriven/odin-claude-plugin
+/plugin install odin-lean@odin-marketplace
+
+# Codex
+codex plugin marketplace add OutlineDriven/odin-claude-plugin
+codex plugin add odin-lean@odin-marketplace
+```
+
+## Skills
+
+- writing-lean-proofs

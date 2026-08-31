@@ -1,4 +1,5 @@
-# Pre-commit hooks for markdown and JSON text cleanup
+# Gates for the skill tree and its four distribution surfaces.
+# Run the whole set with: prek run --all-files
 repos:
   # General text cleanup for markdown and JSON files
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -22,7 +23,7 @@ repos:
 
   # TOML lint + format
   - repo: https://github.com/tombi-toml/tombi-pre-commit
-    rev: v1.1.3
+    rev: v1.5.0
     hooks:
       - id: tombi-lint
         args: ["--offline"]
@@ -37,26 +38,33 @@ repos:
         name: sync output-style doctrine cascade
         entry: python3 scripts/sync-baseline.py
         language: system
-        files: ^(system-prompt-baseline\.md|packages/odin-core/output-styles/.*\.md)$
+        files: ^(system-prompt-baseline\.md|plugins/odin-core/output-styles/.*\.md)$
         pass_filenames: false
 
-      - id: check-package-surfaces
-        name: check 29-package surfaces and NOTICE
-        entry: bash -c "node scripts/check-package-surfaces.mjs"
+      - id: check-plugin-surfaces
+        name: check plugin tree, manifests, and registries
+        entry: node scripts/check-plugin-surfaces.mjs
         language: system
-        files: ^(catalog/.*|packages/.*|licenses/NOTICE|scripts/(package-surfaces|render-package-surfaces|check-package-surfaces|skill-membership)\.mjs|\.claude-plugin/marketplace\.json|package\.json|LICENSE)$
+        files: ^(catalog/plugins\.json|plugins/.*|licenses/NOTICE|scripts/(plugin-surfaces|render-plugin-surfaces|check-plugin-surfaces)\.mjs|LICENSE)$
+        pass_filenames: false
+
+      - id: render-plugin-surfaces
+        name: check generated plugin surfaces match the catalog
+        entry: node scripts/render-plugin-surfaces.mjs --check
+        language: system
+        files: ^(catalog/plugins\.json|plugins/.*|licenses/NOTICE|scripts/(plugin-surfaces|render-plugin-surfaces)\.mjs|LICENSE)$
         pass_filenames: false
 
       - id: check-skill-routes
-        name: check skill routes, registry count, and manifest identity
+        name: check skill routes and manifest identity
         entry: node scripts/check-skill-routes.mjs
         language: system
-        files: ^(skills/.*/SKILL\.md|skills/.*/agents/openai\.yaml|catalog/skill-membership\.json|scripts/check-skill-routes\.mjs|scripts/render-skill-manifests\.mjs)$
+        files: ^(plugins/.*/skills/.*/SKILL\.md|plugins/.*/skills/.*/agents/openai\.yaml|catalog/plugins\.json|scripts/(check-skill-routes|render-skill-manifests)\.mjs)$
         pass_filenames: false
 
       - id: render-skill-manifests
         name: check skill manifests match SKILL.md frontmatter
         entry: node scripts/render-skill-manifests.mjs --check
         language: system
-        files: ^(skills/.*/SKILL\.md|skills/.*/agents/openai\.yaml|scripts/render-skill-manifests\.mjs)$
+        files: ^(plugins/.*/skills/.*/SKILL\.md|plugins/.*/skills/.*/agents/openai\.yaml|scripts/render-skill-manifests\.mjs)$
         pass_filenames: false

@@ -2,8 +2,44 @@
 
 Advanced ODIN workflows for ambitious, multi-part creative work.
 
-npm package: `@outlinedriven/odin-create-advanced@2.0.0`
+25 skills, category Productivity.
 
-Skills live in the canonical `skills/` tree. Package tarballs project this module's subset at pack time.
+## Install
 
-License: see `LICENSE`. Third-party notices: see `NOTICE`.
+```bash
+# Claude Code
+/plugin marketplace add OutlineDriven/odin-claude-plugin
+/plugin install odin-create-advanced@odin-marketplace
+
+# Codex
+codex plugin marketplace add OutlineDriven/odin-claude-plugin
+codex plugin add odin-create-advanced@odin-marketplace
+```
+
+## Skills
+
+- abstract-well
+- all-scenarios-storm
+- attack-shape
+- automatic-cybernetic-flow-design
+- automatic-freeform-graphs-design
+- devils-advocate-architecture
+- docs-canvas
+- fail-design
+- from-first-principle
+- fromzero
+- journey-trace-wizard
+- pr-review-canvas
+- pr-review-canvas-html
+- presentation-creator
+- quick-spec-render
+- release-promotion
+- rhythmic-taste
+- scaffold-exercises
+- single-file-html-deck
+- snippet-image-rendering
+- tasty-abstraction
+- training-report
+- visual-slides
+- visualise-explainer
+- waterfall-guide

@@ -2,8 +2,22 @@
 
 ODIN workflows for product strategy and developer adoption.
 
-npm package: `@outlinedriven/odin-product@2.0.0`
+3 skills, category Productivity.
 
-Skills live in the canonical `skills/` tree. Package tarballs project this module's subset at pack time.
+## Install
 
-License: see `LICENSE`. Third-party notices: see `NOTICE`.
+```bash
+# Claude Code
+/plugin marketplace add OutlineDriven/odin-claude-plugin
+/plugin install odin-product@odin-marketplace
+
+# Codex
+codex plugin marketplace add OutlineDriven/odin-claude-plugin
+codex plugin add odin-product@odin-marketplace
+```
+
+## Skills
+
+- pricing-projection
+- strategy
+- write-product-spec

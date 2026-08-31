@@ -1,36 +1,30 @@
-// Verify the canonical skills/ tree satisfies both public skill-install routes:
-//   npx skills add https://github.com/OutlineDriven/odin-claude-plugin/tree/<tag>/skills/<slug>
-//   gh skill install OutlineDriven/odin-claude-plugin skills/<slug>
-// Both routes discover skills as skills/<slug>/SKILL.md with frontmatter name matching the
-// directory. The distribution projection must carry the same roster, so a tag serves
-// identical skill sets over every route.
+// Verify every authored skill satisfies the install routes it is published on.
 //
-// Extended gates (G1/G3):
-//   (a) registry-as-count-authority: every skills/ dir has a membership row whose slug
-//       == dir name, and rows.length == skill_count == dir count.
-//   (b) frontmatter values containing ': ' MUST be single-quoted; unquoted is an error.
-//   (c) display_name uniqueness across every agents/openai.yaml (Set collision check).
+//   gh skill install OutlineDriven/odin-claude-plugin plugins/<plugin>/skills/<slug>
+//   plugin install <plugin>@odin-marketplace   (Claude, Codex, Cursor marketplaces)
+//
+// Both resolve a skill as <dir>/SKILL.md whose frontmatter name equals the
+// directory name, so a mismatch silently drops the skill from one route while
+// leaving the other working.
+//
+// Checks:
+//   (a) frontmatter parses, carries a name, and the name equals the directory
+//   (b) frontmatter values containing ': ' are single-quoted (AGENTS.md contract:
+//       an unquoted colon-space plain scalar is invalid YAML for strict parsers)
+//   (c) display_name is unique across every generated agents/openai.yaml, so two
+//       skills never present the same label in a harness picker
 //
 // Frontmatter is parsed with a tiny built-in structural YAML parser (no dependency)
 // so nested and hyphenated keys like metadata.short-description validate correctly.
-import { existsSync, readdirSync, readFileSync } from "node:fs";
-import { join, dirname } from "node:path";
-import { fileURLToPath } from "node:url";
-import { loadMembership } from "./skill-membership.mjs";
+import { existsSync, readFileSync } from "node:fs";
+import { join } from "node:path";
+import { ROOT, loadCatalog, skillRows } from "./plugin-surfaces.mjs";
 
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const errors = [];
-const note = (msg) => process.stderr.write(`check-skill-routes: ${msg}\n`);
-
-const skillsDir = join(ROOT, "skills");
-if (!existsSync(skillsDir)) {
-  note("missing canonical skills/ tree");
-  process.exit(1);
-}
-const slugs = readdirSync(skillsDir, { withFileTypes: true })
-  .filter((d) => d.isDirectory())
-  .map((d) => d.name)
-  .sort();
+// [slug, repository-relative directory] for every authored skill.
+const skills = loadCatalog().entries.flatMap((entry) =>
+  skillRows(entry).map((slug) => [slug, `${entry.directory}/skills/${slug}`]),
+);
 
 // --- tiny structural YAML frontmatter parser (no dependency) ---
 // Returns { entries: [{ path, key, value, quoted, raw }], error } or null when
@@ -81,31 +75,32 @@ function parseFrontmatterYaml(text) {
   return { entries, error: null };
 }
 
-// --- existing route checks: frontmatter presence + name == directory ---
+// --- (a) frontmatter presence + name == directory ---
 const badName = [];
 const badFrontmatter = [];
-for (const slug of slugs) {
-  const skillPath = join(skillsDir, slug, "SKILL.md");
+const parsed = new Map();
+for (const [slug, dir] of skills) {
+  const skillPath = join(ROOT, dir, "SKILL.md");
   if (!existsSync(skillPath)) {
-    badFrontmatter.push(`${slug}: missing SKILL.md`);
+    badFrontmatter.push(`${dir}: missing SKILL.md`);
     continue;
   }
-  const text = readFileSync(skillPath, "utf8");
-  const fm = parseFrontmatterYaml(text);
+  const fm = parseFrontmatterYaml(readFileSync(skillPath, "utf8"));
   if (fm === null) {
-    badFrontmatter.push(`${slug}: no frontmatter block`);
+    badFrontmatter.push(`${dir}: no frontmatter block`);
     continue;
   }
   if (fm.error) {
-    badFrontmatter.push(`${slug}: ${fm.error}`);
+    badFrontmatter.push(`${dir}: ${fm.error}`);
     continue;
   }
+  parsed.set(dir, fm);
   const nameEntry = fm.entries.find((e) => e.path === "name");
   if (!nameEntry) {
-    badFrontmatter.push(`${slug}: frontmatter has no name`);
+    badFrontmatter.push(`${dir}: frontmatter has no name`);
     continue;
   }
-  if (nameEntry.value !== slug) badName.push(`${slug}: name is ${nameEntry.value}`);
+  if (nameEntry.value !== slug) badName.push(`${dir}: name is ${nameEntry.value}`);
 }
 if (badFrontmatter.length)
   errors.push(
@@ -118,23 +113,15 @@ if (badName.length)
 
 // --- (b) frontmatter values containing ': ' must be single-quoted ---
 const badQuote = [];
-for (const slug of slugs) {
-  const skillPath = join(skillsDir, slug, "SKILL.md");
-  if (!existsSync(skillPath)) continue;
-  const text = readFileSync(skillPath, "utf8");
-  const fm = parseFrontmatterYaml(text);
-  if (!fm || fm.error) continue;
+for (const [, dir] of skills) {
+  const fm = parsed.get(dir);
+  if (!fm) continue;
   for (const entry of fm.entries) {
     if (!entry.raw.includes(": ")) continue;
-    // Contract (AGENTS.md): ': ' values must be single-quoted. Plain scalars
-    // misparse on ': '; double quotes drift from the contract.
     if (entry.quote === "'") continue;
     if (entry.quote === '"')
-      badQuote.push(
-        `${slug}: double-quoted ': ' value; contract requires single quotes (${entry.path})`,
-      );
-    else
-      badQuote.push(`${slug}: unquoted frontmatter value contains ': ' (${entry.path})`);
+      badQuote.push(`${dir}: double-quoted ': ' value; contract requires single quotes (${entry.path})`);
+    else badQuote.push(`${dir}: unquoted frontmatter value contains ': ' (${entry.path})`);
   }
 }
 if (badQuote.length)
@@ -142,78 +129,38 @@ if (badQuote.length)
     `': ' frontmatter values not single-quoted: ${badQuote.slice(0, 5).join("; ")} (${badQuote.length} total)`,
   );
 
-// --- (a) registry as count authority ---
-const membership = loadMembership(ROOT);
-const rowSet = new Set(membership.all);
-const missingRows = slugs.filter((s) => !rowSet.has(s));
-const extraRows = membership.all.filter((s) => !slugs.includes(s));
-const countMismatch = membership.skillCount !== slugs.length;
-const parts = [];
-if (missingRows.length)
-  parts.push(`dirs without rows: ${missingRows.slice(0, 5).join(", ")} (${missingRows.length})`);
-if (extraRows.length)
-  parts.push(`rows without dirs: ${extraRows.slice(0, 5).join(", ")} (${extraRows.length})`);
-if (countMismatch)
-  parts.push(
-    `count mismatch: skill_count=${membership.skillCount} dirs=${slugs.length}`,
-  );
-if (parts.length) errors.push(`registry count authority: ${parts.join("; ")}`);
-
-// --- (c) display_name uniqueness across agents/openai.yaml ---
-const displayNames = [];
+// --- (c) display_name uniqueness across generated manifests ---
+const byName = new Map();
 const missingManifest = [];
-for (const slug of slugs) {
-  const manifestPath = join(skillsDir, slug, "agents", "openai.yaml");
+for (const [, dir] of skills) {
+  const manifestPath = join(ROOT, dir, "agents/openai.yaml");
   if (!existsSync(manifestPath)) {
-    missingManifest.push(slug);
+    missingManifest.push(dir);
     continue;
   }
-  const text = readFileSync(manifestPath, "utf8");
-  const line = text.split("\n").find((l) => l.trim().startsWith("display_name:"));
-  if (!line) {
-    missingManifest.push(`${slug}: no display_name`);
+  const match = /^\s*display_name:\s*(.+)$/m.exec(readFileSync(manifestPath, "utf8"));
+  if (!match) {
+    missingManifest.push(dir);
     continue;
   }
-  const val = line.split("display_name:")[1].trim().replace(/^['"]|['"]$/g, "");
-  displayNames.push({ slug, name: val });
+  const name = match[1].trim().replace(/^["']|["']$/g, "");
+  byName.set(name, [...(byName.get(name) ?? []), dir]);
 }
 if (missingManifest.length)
   errors.push(
     `missing display_name: ${missingManifest.slice(0, 5).join(", ")} (${missingManifest.length} total)`,
   );
-const nameCounts = new Map();
-for (const { slug, name } of displayNames) {
-  if (!nameCounts.has(name)) nameCounts.set(name, []);
-  nameCounts.get(name).push(slug);
-}
-const dupes = [...nameCounts.entries()].filter(([, sl]) => sl.length > 1);
+const dupes = [...byName.entries()].filter(([, dirs]) => dirs.length > 1);
 if (dupes.length)
   errors.push(
     `duplicate display_name: ${dupes
       .slice(0, 5)
-      .map(([n, sl]) => `"${n}" [${sl.join(", ")}]`)
+      .map(([name, dirs]) => `${name} <- ${dirs.join(", ")}`)
       .join("; ")} (${dupes.length} group(s))`,
   );
 
-// --- roster parity with the distribution projection when it has been rendered ---
-const completeSkills = join(ROOT, ".release/distribution/plugins/odin-complete/skills");
-if (existsSync(completeSkills)) {
-  const distSlugs = new Set(
-    readdirSync(completeSkills, { withFileTypes: true })
-      .filter((d) => d.isDirectory())
-      .map((d) => d.name),
-  );
-  const missing = slugs.filter((s) => !distSlugs.has(s));
-  const extra = [...distSlugs].filter((s) => !slugs.includes(s));
-  if (missing.length)
-    errors.push(`distribution missing route skills: ${missing.slice(0, 5).join(", ")} (${missing.length})`);
-  if (extra.length)
-    errors.push(`distribution has non-route skills: ${extra.slice(0, 5).join(", ")} (${extra.length})`);
-}
-
 if (errors.length) {
-  for (const e of errors) note(e);
-  note(`${errors.length} gate(s) failed`);
+  for (const e of errors) process.stderr.write(`check-skill-routes: ${e}\n`);
   process.exit(1);
 }
-process.stdout.write(`skill-routes ok ${slugs.length} skills\n`);
+process.stdout.write(`skill-routes ok ${skills.length} skills\n`);

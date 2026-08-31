@@ -2,8 +2,37 @@
 
 ODIN workflows for security reviews and defensive implementation.
 
-npm package: `@outlinedriven/odin-security@2.0.0`
+18 skills, category Security.
 
-Skills live in the canonical `skills/` tree. Package tarballs project this module's subset at pack time.
+## Install
 
-License: see `LICENSE`. Third-party notices: see `NOTICE`.
+```bash
+# Claude Code
+/plugin marketplace add OutlineDriven/odin-claude-plugin
+/plugin install odin-security@odin-marketplace
+
+# Codex
+codex plugin marketplace add OutlineDriven/odin-claude-plugin
+codex plugin add odin-security@odin-marketplace
+```
+
+## Skills
+
+- agentic-actions-injection-audit
+- audit-context-building
+- c-security-review
+- codeql-security-analysis
+- confirmed-security-review
+- django-access-review
+- entry-point-analyzer
+- firebase-apk-scanner
+- function-audit-context-analyzer
+- gha-security-review
+- insecure-default-discovery
+- rust-security-review
+- security-hardening
+- security-review
+- semgrep-security-scan
+- sharp-edges
+- sharp-edges-analyzer
+- supply-chain-risk-auditor

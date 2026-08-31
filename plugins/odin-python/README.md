@@ -2,8 +2,22 @@
 
 ODIN workflows for modern Python development.
 
-npm package: `@outlinedriven/odin-python@2.0.0`
+3 skills, category Coding.
 
-Skills live in the canonical `skills/` tree. Package tarballs project this module's subset at pack time.
+## Install
 
-License: see `LICENSE`. Third-party notices: see `NOTICE`.
+```bash
+# Claude Code
+/plugin marketplace add OutlineDriven/odin-claude-plugin
+/plugin install odin-python@odin-marketplace
+
+# Codex
+codex plugin marketplace add OutlineDriven/odin-claude-plugin
+codex plugin add odin-python@odin-marketplace
+```
+
+## Skills
+
+- django-perf-review
+- modern-python
+- typing-exclusion-worker

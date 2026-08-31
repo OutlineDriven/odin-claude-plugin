@@ -1,0 +1,29 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "odin-apple",
+  "version": "2.0.0",
+  "description": "ODIN workflows for software on Apple platforms.",
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "repository": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "license": "SEE LICENSE IN LICENSE",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "apple"
+  ],
+  "extensions": {
+    "com.openai": {
+      "name": "odin-apple",
+      "interface": {
+        "displayName": "ODIN Apple",
+        "shortDescription": "ODIN workflows for software on Apple platforms.",
+        "category": "Coding"
+      }
+    }
+  }
+}

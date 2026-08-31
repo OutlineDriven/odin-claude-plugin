@@ -1,0 +1,29 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "odin-typescript",
+  "version": "2.0.0",
+  "description": "ODIN workflows for modern TypeScript development.",
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "repository": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "license": "SEE LICENSE IN LICENSE",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "typescript"
+  ],
+  "extensions": {
+    "com.openai": {
+      "name": "odin-typescript",
+      "interface": {
+        "displayName": "ODIN TypeScript",
+        "shortDescription": "ODIN workflows for modern TypeScript development.",
+        "category": "Coding"
+      }
+    }
+  }
+}

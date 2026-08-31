@@ -1,0 +1,29 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "odin-loop",
+  "version": "2.0.0",
+  "description": "ODIN workflows for bounded iteration with explicit completion checks.",
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "repository": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "license": "SEE LICENSE IN LICENSE",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "loop"
+  ],
+  "extensions": {
+    "com.openai": {
+      "name": "odin-loop",
+      "interface": {
+        "displayName": "ODIN Loop",
+        "shortDescription": "ODIN workflows for bounded iteration with explicit completion checks.",
+        "category": "Coding"
+      }
+    }
+  }
+}

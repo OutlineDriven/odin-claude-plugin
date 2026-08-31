@@ -1,22 +1,20 @@
 #!/usr/bin/env node
-// Derive every skills/<slug>/agents/openai.yaml from SKILL.md frontmatter:
+// Derive every plugins/<plugin>/skills/<slug>/agents/openai.yaml from SKILL.md:
 //   display_name      = title-cased frontmatter name with an in-script acronym table
 //   short_description = first sentence of description, hard-truncated at 64 chars
 // A short_description under 25 chars is a generation ERROR (listed, nonzero exit).
 // Default mode writes files; --check diffs generated vs on-disk and exits 1 on drift.
-// --only <dir>[,<dir>...] limits scope (fixture verification while skills/ mutates).
-import {
-  existsSync,
-  mkdirSync,
-  readdirSync,
-  readFileSync,
-  writeFileSync,
-} from "node:fs";
+// --only <slug>[,<slug>...] limits scope (fixture verification while the tree mutates).
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { ROOT, loadCatalog, skillRows } from "./plugin-surfaces.mjs";
 
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const skillsDir = join(ROOT, "skills");
+// slug -> repository-relative skill directory, in catalog then alphabetical order.
+const skillDirs = new Map(
+  loadCatalog().entries.flatMap((entry) =>
+    skillRows(entry).map((slug) => [slug, `${entry.directory}/skills/${slug}`]),
+  ),
+);
 
 // Whole-name literals: the display_name is not token title-casing.
 const NAME_LITERALS = {
@@ -116,7 +114,9 @@ function truncate64(s) {
 }
 
 function renderManifest(slug) {
-  const skillPath = join(skillsDir, slug, "SKILL.md");
+  const dir = skillDirs.get(slug);
+  if (!dir) throw new Error(`${slug}: not in any plugin skills/ directory`);
+  const skillPath = join(ROOT, dir, "SKILL.md");
   if (!existsSync(skillPath)) throw new Error(`${slug}: missing SKILL.md`);
   const fm = parseFrontmatter(readFileSync(skillPath, "utf8"));
   if (!fm) throw new Error(`${slug}: missing/invalid frontmatter`);
@@ -128,7 +128,7 @@ function renderManifest(slug) {
     `interface:\n` +
     `  display_name: ${JSON.stringify(display_name)}\n` +
     `  short_description: ${JSON.stringify(short_description)}\n`;
-  return { slug, display_name, short_description, yaml };
+  return { slug, dir, display_name, short_description, yaml };
 }
 
 const args = process.argv.slice(2);
@@ -138,15 +138,12 @@ let targets = null;
 if (onlyIdx !== -1) {
   const val = args[onlyIdx + 1];
   if (!val) {
-    console.error("render-skill-manifests: --only requires a dir list");
+    console.error("render-skill-manifests: --only requires a slug list");
     process.exit(2);
   }
   targets = val.split(",").map((s) => s.trim()).filter(Boolean);
 } else {
-  targets = readdirSync(skillsDir, { withFileTypes: true })
-    .filter((d) => d.isDirectory())
-    .map((d) => d.name)
-    .sort();
+  targets = [...skillDirs.keys()].sort();
 }
 
 const errors = [];
@@ -166,7 +163,7 @@ for (const slug of targets) {
       `${slug}: short_description under 25 chars (${manifest.short_description.length}): "${manifest.short_description}"`,
     );
   }
-  const dest = join(skillsDir, slug, "agents", "openai.yaml");
+  const dest = join(ROOT, manifest.dir, "agents", "openai.yaml");
   if (check) {
     if (!existsSync(dest)) {
       drifted.push(`${dest.slice(ROOT.length + 1)} (missing)`);
@@ -177,7 +174,7 @@ for (const slug of targets) {
   } else {
     mkdirSync(dirname(dest), { recursive: true });
     writeFileSync(dest, manifest.yaml);
-    process.stdout.write(`skills/${slug}/agents/openai.yaml\n`);
+    process.stdout.write(`${manifest.dir}/agents/openai.yaml\n`);
     written += 1;
   }
 }

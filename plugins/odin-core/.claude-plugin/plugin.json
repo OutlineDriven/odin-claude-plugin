@@ -14,11 +14,9 @@
   "keywords": [
     "odin",
     "outlinedriven",
-    "claude-code",
     "agent-skills",
     "core"
   ],
-  "skills": "./skills/",
   "mcpServers": "./mcp.json",
-  "outputStyles": "./output-styles/"
+  "outputStyles": "./output-styles"
 }

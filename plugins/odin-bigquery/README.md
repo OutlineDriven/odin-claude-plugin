@@ -2,8 +2,21 @@
 
 ODIN workflows for BigQuery data work and cost-aware queries.
 
-npm package: `@outlinedriven/odin-bigquery@2.0.0`
+2 skills, category Data.
 
-Skills live in the canonical `skills/` tree. Package tarballs project this module's subset at pack time.
+## Install
 
-License: see `LICENSE`. Third-party notices: see `NOTICE`.
+```bash
+# Claude Code
+/plugin marketplace add OutlineDriven/odin-claude-plugin
+/plugin install odin-bigquery@odin-marketplace
+
+# Codex
+codex plugin marketplace add OutlineDriven/odin-claude-plugin
+codex plugin add odin-bigquery@odin-marketplace
+```
+
+## Skills
+
+- analysis-artifacts
+- dbt-model-index

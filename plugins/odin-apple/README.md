@@ -2,8 +2,24 @@
 
 ODIN workflows for software on Apple platforms.
 
-npm package: `@outlinedriven/odin-apple@2.0.0`
+5 skills, category Coding.
 
-Skills live in the canonical `skills/` tree. Package tarballs project this module's subset at pack time.
+## Install
 
-License: see `LICENSE`. Third-party notices: see `NOTICE`.
+```bash
+# Claude Code
+/plugin marketplace add OutlineDriven/odin-claude-plugin
+/plugin install odin-apple@odin-marketplace
+
+# Codex
+codex plugin marketplace add OutlineDriven/odin-claude-plugin
+codex plugin add odin-apple@odin-marketplace
+```
+
+## Skills
+
+- ios-build-cleanup
+- ios-build-fix
+- ios-device-qa
+- xcode-project-sync
+- xcode-simulator-testing

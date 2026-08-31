@@ -14,9 +14,7 @@
   "keywords": [
     "odin",
     "outlinedriven",
-    "claude-code",
     "agent-skills",
     "create"
-  ],
-  "skills": "./skills/"
+  ]
 }

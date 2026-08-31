@@ -1,0 +1,29 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "odin-create",
+  "version": "2.0.0",
+  "description": "ODIN workflows for turning ideas into working artifacts.",
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "repository": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "license": "SEE LICENSE IN LICENSE",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "create"
+  ],
+  "extensions": {
+    "com.openai": {
+      "name": "odin-create",
+      "interface": {
+        "displayName": "ODIN Create",
+        "shortDescription": "ODIN workflows for turning ideas into working artifacts.",
+        "category": "Productivity"
+      }
+    }
+  }
+}

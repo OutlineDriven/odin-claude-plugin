@@ -1,0 +1,29 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "odin-security",
+  "version": "2.0.0",
+  "description": "ODIN workflows for security reviews and defensive implementation.",
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "repository": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "license": "SEE LICENSE IN LICENSE",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "security"
+  ],
+  "extensions": {
+    "com.openai": {
+      "name": "odin-security",
+      "interface": {
+        "displayName": "ODIN Security",
+        "shortDescription": "ODIN workflows for security reviews and defensive implementation.",
+        "category": "Security"
+      }
+    }
+  }
+}

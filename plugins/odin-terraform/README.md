@@ -2,8 +2,20 @@
 
 ODIN workflows for safe Terraform infrastructure changes.
 
-npm package: `@outlinedriven/odin-terraform@2.0.0`
+1 skill, category Infrastructure.
 
-Skills live in the canonical `skills/` tree. Package tarballs project this module's subset at pack time.
+## Install
 
-License: see `LICENSE`. Third-party notices: see `NOTICE`.
+```bash
+# Claude Code
+/plugin marketplace add OutlineDriven/odin-claude-plugin
+/plugin install odin-terraform@odin-marketplace
+
+# Codex
+codex plugin marketplace add OutlineDriven/odin-claude-plugin
+codex plugin add odin-terraform@odin-marketplace
+```
+
+## Skills
+
+- terraform-style-check
