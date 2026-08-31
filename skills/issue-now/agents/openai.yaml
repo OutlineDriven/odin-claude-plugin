@@ -1,3 +1,3 @@
 interface:
   display_name: "Issue Now"
-  short_description: "Reconcile one tracker issue with current reality"
+  short_description: "Use when a human asks to compare one closed or stale tracker"

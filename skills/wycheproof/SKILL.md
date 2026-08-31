@@ -1,6 +1,6 @@
 ---
 name: wycheproof
-description: 'Use when asked to validate a cryptographic implementation against Project Wycheproof test vectors or explain a vector disagreement. Produce parameterized tests covering valid, invalid, and acceptable cases with stable tcId identifiers. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when validating a cryptographic implementation against Project Wycheproof vectors or explaining a vector disagreement. Produces parameterized valid, invalid, and acceptable cases with stable tcId identifiers. Not for zeroization auditing — use zeroize-audit.'
 ---
 
 # Wycheproof
@@ -23,8 +23,7 @@ description: 'Use when asked to validate a cryptographic implementation against 
 
 ## Procedure
 
-1. **Acquire test vectors.** If no Wycheproof submodule exists, either add one (`git submodule add https://github.com/C2SP/wycheproof.git`) or fetch the relevant JSON files from `testvectors_v1/` into a local `.wycheproof/` directory. Use `testvectors_v1/` over `testvectors/` for more detailed metadata.
-
+1. **Acquire test vectors.** If no Wycheproof submodule exists, either add one (`git submodule add https://github.com/C2SP/wycheproof.git`) or fetch the relevant JSON files from `testvectors_v1/` into a local `.wycheproof/` directory. Use `testvectors_v1/` over `testvectors/` for more detailed metadata. Done when: the test vector JSON file is available locally.
 2. **Select the test file.** Map the algorithm target to its JSON file:
 
    | Algorithm | File |
@@ -42,6 +41,7 @@ description: 'Use when asked to validate a cryptographic implementation against 
    | X25519 | `x25519_test.json` |
    | X448 | `x448_test.json` |
 
+   Done when: the correct JSON file is selected for the algorithm target.
 3. **Parse the JSON.** Each file contains `algorithm`, `numberOfTests`, `notes` (flag definitions), and `testGroups`. Each test group shares attributes (key size, IV size, curve). Each test vector has:
    - `tcId`: stable unique identifier within the file.
    - `comment`: human-readable explanation.
@@ -49,24 +49,24 @@ description: 'Use when asked to validate a cryptographic implementation against 
    - `result`: one of `valid`, `invalid`, or `acceptable`.
    - Algorithm-specific fields (e.g., `key`, `iv`, `aad`, `msg`, `ct`, `tag` for AES-GCM; `msg`, `sig`, `pk` for EdDSA; `public`, `private`, `shared` for ECDH).
 
-4. **Filter test groups.** Select only groups matching the implementation's constraints (key size, IV size, curve). Skip groups outside supported parameters.
-
-5. **Convert hex to bytes.** Fields like `key`, `iv`, `aad`, `msg`, `ct`, `tag`, `sig`, `pk`, `public`, `private`, `shared` are hex-encoded in the JSON. Convert to the implementation's byte type before use.
-
+   Done when: the JSON is parsed and test groups with their vectors are identified.
+4. **Filter test groups.** Select only groups matching the implementation's constraints (key size, IV size, curve). Skip groups outside supported parameters. Done when: only matching test groups are selected.
+5. **Convert hex to bytes.** Fields like `key`, `iv`, `aad`, `msg`, `ct`, `tag`, `sig`, `pk`, `public`, `private`, `shared` are hex-encoded in the JSON. Convert to the implementation's byte type before use. Done when: all hex fields are converted to bytes.
 6. **Write parameterized tests.** Create one test function parameterized over all selected vectors, using `tcId` as the stable test identifier:
    - For `result == "valid"`: the operation must succeed and produce expected output.
    - For `result == "invalid"`: the operation must fail (raise an exception or return false).
    - For `result == "acceptable"`: the operation may succeed or fail; log the outcome but do not fail the test.
    - Use `tv['comment']` in assertion messages for diagnosability.
 
-7. **Test both directions.** For symmetric operations (encrypt/decrypt, sign/verify), write separate parameterized tests for each direction. A library may accept invalid inputs in one direction but not the other.
-
+   Done when: the parameterized test function covers all selected vectors with correct expectations per result type.
+7. **Test both directions.** For symmetric operations (encrypt/decrypt, sign/verify), write separate parameterized tests for each direction. A library may accept invalid inputs in one direction but not the other. Done when: both directions have separate parameterized tests.
 8. **Run and analyze.** Execute the test suite. For each failure:
    - Read the `comment` and `flags` fields to understand the vulnerability pattern.
    - Check the `notes` field in the test file for flag definitions.
    - Determine whether the failure is a genuine implementation bug or a parameter mismatch.
 
-9. **Integrate into CI.** Add the Wycheproof test suite to the project's CI pipeline. If using a submodule, update it on a schedule (weekly or monthly) to catch new test vectors.
+   Done when: the suite is executed and every failure is analyzed with comment, flags, and notes.
+9. **Integrate into CI.** Add the Wycheproof test suite to the project's CI pipeline. If using a submodule, update it on a schedule (weekly or monthly) to catch new test vectors. Done when: the suite is integrated into CI with a submodule update schedule if applicable.
 
 ## Failure and recovery
 - **Missing test vector file**: abort and report the expected file path. Do not generate synthetic vectors.
@@ -75,7 +75,7 @@ description: 'Use when asked to validate a cryptographic implementation against 
 - **Partial run**: if the suite is interrupted, report which `tcId` ranges completed and which did not. Do not claim the done predicate holds for untested vectors.
 
 ## Output
-A parameterized test file covering valid, invalid, and acceptable Wycheproof vectors for the target algorithm, with stable `tcId`-based test identifiers, assertion messages referencing `comment` and `flags`, and a summary of pass/fail/warn counts per result category.
+A parameterized test file covering valid, invalid, and acceptable Wycheproof vectors for the target algorithm — stable `tcId`-based test identifiers, assertion messages referencing `comment` and `flags`, and a summary of pass/fail/warn counts per result category.
 
 ## Provenance
 

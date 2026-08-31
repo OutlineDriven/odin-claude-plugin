@@ -1,6 +1,6 @@
 # Stack-specific examples for source-driven
 
-Worked illustrations pulled out of `source-driven/SKILL.md`'s per-step instructions, one set per step. The blocks are illustrations of one shape, not a partition of the stacks. Read whichever is closest to what you detected and generalize; a stack with no block of its own is expected.
+These worked illustrations provide one set of examples per step. They show one shape rather than dividing stacks into fixed categories. Read the closest match and generalize; stacks without their own block are expected.
 
 **Grounded: 2026-08-26**
 

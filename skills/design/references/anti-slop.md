@@ -2,7 +2,7 @@
 
 Depth for the SKILL.md §4 charter. Restraint anchored on production exemplars is the antidote to both flavors of slop.
 
-**Grounded: 2026-08-26**
+**Grounded: 2026-08-31**
 
 ## 1. Slop tells catalogue
 

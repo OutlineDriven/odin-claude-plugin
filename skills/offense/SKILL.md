@@ -1,6 +1,6 @@
 ---
 name: offense
-description: 'Use when a change spans multiple files, exceeds roughly 100 lines, adds a feature, or refactors. Produce atomic compilable commits with explicit invariants, fail-fast violations, and no special-case branches. Don''t use for untracked data or changes without a version-control rollback.'
+description: 'Use when a change spans multiple files, exceeds roughly 100 lines, adds a feature, or refactors. Produces atomic compilable commits with explicit invariants, fail-fast violations, and no special-case branches. Not for thin-slice feature delivery — use incremental.'
 ---
 
 # Offense
@@ -20,18 +20,20 @@ Supply the requested behavior, acceptance criteria, repository state, and permit
 
 ## Procedure
 
-1. Translate the requested behavior into explicit invariants and an end-to-end done predicate. Identify each trust boundary and define how invalid input fails immediately or becomes unrepresentable.
-2. Inspect the existing implementation and list the exact repository paths that may change. Stop before mutation if the request cannot be completed within that set; do not widen scope implicitly.
-3. Partition the work into atomic logical increments. Each increment must preserve the named invariants, compile, and leave applicable existing behavior verifiable.
-4. Implement the general case directly. Encode invariants in types or construction where practical; otherwise validate at the boundary and return or raise the repository's explicit error form. Replace branch-by-branch exceptions with the general rule, and do not add a dark feature flag for incomplete behavior.
-5. After each increment, run the narrowest applicable compile and behavioral checks that exercise its changed contract. If they pass, commit that one logical change with a descriptive message. Revalidate all named invariants affected by the next increment before continuing.
-6. Exercise the completed behavior end to end and run the applicable final verifier. Confirm the changed-path set is exactly the disclosed set and that no special-case branch or uncommitted partial increment remains.
+1. Translate the requested behavior into explicit invariants and an end-to-end done predicate. Identify each trust boundary and define how invalid input fails immediately or becomes unrepresentable. Done when: invariants and a done predicate are written with trust boundaries identified.
+2. Inspect the existing implementation and list the exact repository paths that may change. Stop before mutation if the request cannot be completed within that set; do not widen scope implicitly. Done when: the exact changeable path set is listed or the request is rejected as too narrow.
+3. Partition the work into atomic logical increments. Each increment must preserve the named invariants, compile, and leave applicable existing behavior verifiable. Done when: the work is partitioned into increments that each compile and preserve invariants.
+4. Implement the general case directly. Encode invariants in types or construction where practical; otherwise validate at the boundary and return or raise the repository's explicit error form. Replace branch-by-branch exceptions with the general rule, and do not add a dark feature flag for incomplete behavior. Done when: the general case is implemented with invariants encoded and no special-case branches or dark flags.
+5. After each increment, run the narrowest applicable compile and behavioral checks that exercise its changed contract. If they pass, commit that one logical change with a descriptive message. Revalidate all named invariants affected by the next increment before continuing. Done when: each increment is checked, committed, and its invariants revalidated for the next increment.
+6. Exercise the completed behavior end to end and run the applicable final verifier. Confirm the changed-path set is exactly the disclosed set and that no special-case branch or uncommitted partial increment remains. Done when: end-to-end behavior is exercised, the final verifier is green, and the changed-path set matches the disclosed set with no remnants.
 
 ## Failure and recovery
-Classify failure as invalid input, invariant violation, verification failure, unavailable verification, scope breach, or non-convergence. On invalid input or an invariant violation, fail before mutation when possible and report the violated invariant. On verification failure, stop; restore only the current atomic increment to the last green commit while preserving earlier green commits. On unavailable verification or a required path outside the disclosed set, make no further changes and return `blocked` with the missing check or exact additional path. If repeated attempts preserve neither the invariants nor the done predicate, return `non-converged` with the last green commit, failed increment, and verifier evidence. Never report success from a partial result or swallow an error.
+
+Classify failure as invalid input, invariant violation, verification failure, unavailable verification, scope breach, or non-convergence. On invalid input or an invariant violation, fail before mutation when possible and report the violated invariant. On verification failure, stop; restore only the current atomic increment to the last green commit while preserving earlier green commits. On unavailable verification or a required path outside the disclosed set, make no further changes and return `blocked` with the missing check or exact additional path. If repeated attempts preserve neither the invariants nor the done predicate, return `non-converged` with the last green commit, failed increment, and verifier evidence. Never report success from a partial result.
 
 ## Output
-Return the ordered atomic commit identifiers, exact changed paths, named invariants and how each is enforced, verification commands with observed results, and the end-to-end outcome. The terminal classification is `complete`, `blocked`, or `non-converged`; `complete` requires the bound done predicate.
+
+Return the ordered atomic commit identifiers, exact changed paths, named invariants and how each is enforced, verification commands with observed results, and the end-to-end outcome. Terminal classification: `complete`, `blocked`, or `non-converged`; `complete` requires the bound done predicate.
 
 ## Provenance
 

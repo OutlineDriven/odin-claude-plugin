@@ -1,3 +1,3 @@
 interface:
   display_name: "Anomaly Investigation"
-  short_description: "Confirmed root cause for an observed data anomaly"
+  short_description: "Use when a known observed anomaly needs a data-backed root"

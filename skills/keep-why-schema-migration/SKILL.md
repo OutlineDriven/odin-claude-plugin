@@ -1,6 +1,6 @@
 ---
 name: keep-why-schema-migration
-description: 'Use when a project context store has a recorded context-schema behind the installed entry-format version (applicable entry-format changes exist) or ahead of it (older skill on newer project). Classifies the store as behind, current, or ahead, then migrates existing entries per the catalog with explicit consent, marks missing info undefined instead of guessing, and advances the schema field only after the store is caught up. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a project context-schema differs from the installed entry format. Classifies behind/current/ahead, consent-gates migration, marks missing values undefined, and advances only after every entry catches up. Don''t use for remote, publish, deploy, or irreversible changes.'
 ---
 
 # Keep why schema migration
@@ -23,17 +23,17 @@ description: 'Use when a project context store has a recorded context-schema beh
 
 ## Procedure
 
-1. Perform this comparison before any other write to the store in the session. Read `context-schema` from the store config. If the value is absent or unparseable, stop with failure F1 and write nothing.
-2. Compare the recorded value with the current entry-format version 4 and classify: `current` (equal), `behind` (lower), `ahead` (higher).
-3. **Ahead** — state once that the store is newer than the installed skill, recommend updating the installed skill to the store format, make no writes, and tell the session not to rewrite existing entries until the skill is updated. Terminal: `ahead-blocked`.
-4. **Current** — report `current` and make no writes. Terminal: `current`.
-5. **Behind** — list which catalog versions between the recorded value and 4 changed what, then offer exactly one of: `migrate now`, `defer to next session`, `decline for this developer`.
-6. `defer` — no writes; the comparison repeats next session. Terminal: `deferred`.
-7. `decline` — record the decline personally for that developer, in this conversation or their own notes, never in the shared project store. The project schema stays unchanged and later sessions re-offer. Terminal: `declined`.
-8. `migrate now` — bound scope first: enumerate the store's entry files; then secure rollback: if the store is version-controlled, record the current commit as the restore point; otherwise copy every affected entry file to `<store>/migration-backup/schema-<recorded-version>/`.
-9. Apply the catalog rules for every version from recorded+1 through 4, in order, to each entry. A value that is missing or not determinable from the entry itself is written as `undefined: <reason>`; never fabricate or infer a value beyond what the entry states. An entry whose structure no rule can parse is left untouched and listed as unmigrated.
-10. After every entry is rewritten or confirmed caught up, set `context-schema` to 4 — including when some intermediate versions had nothing to apply; a no-op version still advances (nothing-to-migrate does not mean do-not-advance). If any entry is unmigrated, leave the schema value unchanged and report the store as still behind.
-11. Report per-entry results, the final schema value or the reason it is unchanged, and the rollback path.
+1. Perform this comparison before any other write to the store in the session. Read `context-schema` from the store config. If the value is absent or unparseable, stop with failure F1 and write nothing. Done when: the `context-schema` value is read and parseable, or F1 is reported and nothing is written.
+2. Compare the recorded value with the current entry-format version 4 and classify: `current` (equal), `behind` (lower), `ahead` (higher). Done when: the store is classified as current, behind, or ahead.
+3. **Ahead** — state once that the store is newer than the installed skill, recommend updating the installed skill to the store format, make no writes, and tell the session not to rewrite existing entries until the skill is updated. Terminal: `ahead-blocked`. Done when: the ahead state is stated, no writes are made, and the terminal is `ahead-blocked`.
+4. **Current** — report `current` and make no writes. Terminal: `current`. Done when: `current` is reported and no writes are made.
+5. **Behind** — list which catalog versions between the recorded value and 4 changed what, then offer exactly one of: `migrate now`, `defer to next session`, `decline for this developer`. Done when: the catalog changes are listed and one consent option is offered.
+6. `defer` — no writes; the comparison repeats next session. Terminal: `deferred`. Done when: no writes are made and the terminal is `deferred`.
+7. `decline` — record the decline personally for that developer, in this conversation or their own notes, never in the shared project store. The project schema stays unchanged and later sessions re-offer. Terminal: `declined`. Done when: the decline is recorded personally, the project schema is unchanged, and the terminal is `declined`.
+8. `migrate now` — bound scope first: enumerate the store's entry files; then secure rollback: if the store is version-controlled, record the current commit as the restore point; otherwise copy every affected entry file to `<store>/migration-backup/schema-<recorded-version>/`. Done when: all entry files are enumerated and the rollback path is secured.
+9. Apply the catalog rules for every version from recorded+1 through 4, in order, to each entry. A value that is missing or not determinable from the entry itself is written as `undefined: <reason>`; never fabricate or infer a value beyond what the entry states. An entry whose structure no rule can parse is left untouched and listed as unmigrated. Done when: every entry is rewritten per catalog rules or listed as unmigrated, and no value is fabricated.
+10. After every entry is rewritten or confirmed caught up, set `context-schema` to 4 — including when some intermediate versions had nothing to apply; a no-op version still advances (nothing-to-migrate does not mean do-not-advance). If any entry is unmigrated, leave the schema value unchanged and report the store as still behind. Done when: `context-schema` is set to 4 (all entries caught up) or left unchanged (unmigrated entries exist).
+11. Report per-entry results, the final schema value or the reason it is unchanged, and the rollback path. Done when: the report names every rewritten entry, every `undefined` value with its reason, any unmigrated entry, the final schema value, and the rollback path.
 
 ### Migration catalog
 
@@ -53,6 +53,7 @@ Current entry-format version: **4**.
 - Never swallow an error and never report `current` or `migrated` unless steps 2, 9, and 10 actually completed as written.
 
 ## Output
+
 One migration report with a terminal classification: `current`, `migrated` (schema advanced to 4, per-entry summary, rollback path), `deferred`, `declined` (personal record only; project unaffected), `ahead-blocked` (no writes; skill update recommended), or `failed` (F1–F4 with details). The report names every rewritten entry, every `undefined` value with its reason, and any unmigrated entry.
 
 ## Provenance

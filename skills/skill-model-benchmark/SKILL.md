@@ -24,21 +24,23 @@ disable-model-invocation: true
 
 ## Procedure
 
-1. Confirm the human invocation. Before any model call, preview the candidate models, the task set, the per-model run count, and the estimated spend; proceed only after the human confirms.
-2. Bound scope: fix the task set and model list. Do not add tasks or models mid-run.
-3. For each task, for each candidate model, run the task the fixed number of times and record each result plus the model, task, run index, and observed cost.
-4. Score or rank each result against the shared task's success criterion. Use the criterion stated with the task; if none is stated, ask the human for one before scoring rather than inventing one.
-5. Aggregate per-model scores across the task set into a comparison table: one row per model with aggregate score, per-task breakdown, total observed spend, and run count.
-6. Write the table to the chosen output path and return it to the human.
+1. Confirm the human invocation. Preview the candidate models, the task set, the per-model run count, and the estimated spend; proceed only after the human confirms. **Done when:** the human has explicitly approved the spend estimate and run plan.
+2. Bound scope: fix the task set and model list. **Done when:** the task set and model list are locked and no new tasks or models may be added.
+3. For each task and each candidate model, run the task the fixed number of times. Record each result with the model, task, run index, and observed cost. **Done when:** every model/task/run combination has a recorded result, cost, or failure marker.
+4. Score or rank each result against the shared task's success criterion. Use the criterion stated with the task; if none is stated, ask the human for one before scoring. **Done when:** each completed result has a score and no score was invented without human approval.
+5. Aggregate per-model scores across the task set into a comparison table with one row per model showing aggregate score, per-task breakdown, total observed spend, and run count. **Done when:** the table contains every model and accurately sums spend and run counts.
+6. Write the table to the chosen output path and return it to the human. **Done when:** the table exists at the output path and has been returned.
 
 ## Failure and recovery
-- A model call fails or is unavailable: record the failure for that model/task/run, mark the cell as failed, and continue the remaining runs. Do not retry past the fixed run count without human confirmation.
-- Spend exceeds the stated budget cap before completion: stop, return the partial table with completed rows and a `non-converged` marker, and issue no further paid calls.
-- No success criterion is available for a task: stop scoring that task and ask the human; do not invent a criterion.
-- Partial results are returned as a partial table; never present a failed or unrun cell as a score.
+
+- **Model call fails or is unavailable:** record the failure for that model/task/run, mark the cell as failed, and continue the remaining runs. Do not retry past the fixed run count without human confirmation.
+- **Spend exceeds the budget cap:** stop immediately, return the partial table with completed rows and a `non-converged` marker, and issue no further paid calls.
+- **No success criterion for a task:** stop scoring that task and ask the human for a criterion. Do not invent one.
+- **Partial results:** present a partial table with failed or unrun cells clearly marked as such. Never present them as scores.
 
 ## Output
-A model-comparison table: one row per candidate model with aggregate score, per-task score breakdown, total observed spend, and run count, written to the output path and returned to the human. A `non-converged` marker is appended when the run stopped early.
+
+A model-comparison table written to the output path, with one row per candidate model showing aggregate score, per-task breakdown, total observed spend, and run count, plus a `non-converged` marker when the run stopped early.
 
 ## Provenance
 

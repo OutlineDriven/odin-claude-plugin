@@ -1,6 +1,6 @@
 ---
 name: todos-update
-description: 'Re-sync a stale task list against what actually landed: mark real completions with proof, drop overtaken items, add discovered blockers, re-order what moved. Use when the user says "update the todos", "re-sync the task list", "choose the next task", or the plan and the tree have drifted apart. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Re-sync a stale task list against landed work: prove completions, drop overtaken items, add blockers, and re-order dependencies. Not for deepening coarse lists — use todos-enhance; not for adding requirements — use todo-add.'
 ---
 
 # Update todos
@@ -20,34 +20,36 @@ description: 'Re-sync a stale task list against what actually landed: mark real 
 - Codebase state via file reads and test/command output (required for proof).
 - Conversation context establishing design decisions (optional; used to detect overtaken items).
 
+## Refusals
+
+- Will not mark an item complete without proof — test output, command result, or `path:line` evidence.
+- Will not fabricate a list state if the todo tool fails.
+- Will not drop an overtaken item silently — every drop carries a one-line reason.
+- Will not pretend the done predicate holds when the codebase state cannot be fully determined.
+
 ## Procedure
 
-1. Read the current task list.
-2. Inspect the codebase: read changed files, run targeted tests or commands, check `path:line` references to determine what actually landed.
-3. Read conversation context for design changes that may have overtaken items.
-4. For each existing item, classify exactly once:
-
-   | Class | Meaning |
-   |---|---|
-   | `landed` | Done, with proof |
-   | `still-open` | Unchanged, still required |
-   | `overtaken` | A design change made it unnecessary |
-   | `blocked` | Cannot proceed until something external clears |
-   | `newly-discovered` | Not on the list; found during the work |
-
-5. A `landed` claim requires proof: the test, the command output, or the `path:line` that demonstrates it. An unproven completion stays `still-open`. Someone saying an item is done is not proof; it is the claim under test.
-6. Write the reconciled list back through the `todo` tool.
-7. An `overtaken` item is dropped with a one-line reason recorded in the report, never deleted silently. A dropped item with no recorded reason is indistinguishable from a forgotten item.
-8. Name exactly one next action: the first `still-open` item whose blockers are all clear, stated as a concrete action rather than a heading. When two items tie, the tiebreak is which one unblocks more of the remaining list. When every remaining item is `blocked`, name the blocker that has to clear first — one answer, not a list.
-9. Emit the delta only: what changed classification, and why.
+1. Read the current task list. **Done when:** the current list is loaded.
+2. Inspect the codebase: read changed files, run targeted tests or commands, check `path:line` references to determine what actually landed. **Done when:** the codebase state is determined for every item.
+3. Read conversation context for design changes that may have overtaken items. **Done when:** overtaken-item candidates are identified.
+4. For each existing item, classify exactly once: `landed` (done, with proof), `still-open` (unchanged, still required), `overtaken` (a design change made it unnecessary), `blocked` (cannot proceed until something external clears), `newly-discovered` (not on the list; found during the work). **Done when:** every item is classified.
+5. A `landed` claim requires proof: the test, the command output, or the `path:line` that demonstrates it. An unproven completion stays `still-open`. Someone saying an item is done is not proof; it is the claim under test. **Done when:** every `landed` item cites its proof.
+6. Write the reconciled list back through the `todo` tool. **Done when:** the reconciled list is written.
+7. An `overtaken` item is dropped with a one-line reason recorded in the report, never deleted silently. A dropped item with no recorded reason is indistinguishable from a forgotten item. **Done when:** every dropped item has a recorded reason.
+8. Name exactly one next action: the first `still-open` item whose blockers are all clear, stated as a concrete action rather than a heading. When two items tie, the tiebreak is which one unblocks more of the remaining list. When every remaining item is `blocked`, name the blocker that has to clear first — one answer, not a list. **Done when:** exactly one next action or one blocker is named.
+9. Emit the delta only: what changed classification, and why. **Done when:** the delta report is emitted.
 
 ## Failure and recovery
-- **Missing proof:** An item claimed complete but lacking test output, command result, or `path:line` evidence stays `still-open`. Record the proof gap in the report.
-- **Todo tool failure:** Do not fabricate a list state. Report the error; the list remains unchanged.
-- **Non-convergent delta:** If the codebase state cannot be fully determined, return a partial result with explicit gaps rather than pretending the done predicate holds.
+
+| Failure class | Behavior |
+|---|---|
+| Missing proof | An item claimed complete but lacking test output, command result, or `path:line` evidence stays `still-open`. Record the proof gap in the report. |
+| Todo tool failure | Do not fabricate a list state. Report the error; the list remains unchanged. |
+| Non-convergent delta | If the codebase state cannot be fully determined, return a partial result with explicit gaps rather than pretending the done predicate holds. |
 
 ## Output
-Delta report: each item whose classification changed, its new class, and the reason. Every `landed` item cites its proof. Exactly one next action is named, or one blocker is named as the reason none is. Zero stale items remain.
+
+Delta report: each item whose classification changed, its new class, and the reason — every `landed` item cites its proof, exactly one next action is named or one blocker is named as the reason none is, and zero stale items remain.
 
 ## Provenance
 

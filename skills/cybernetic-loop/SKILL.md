@@ -1,6 +1,6 @@
 ---
 name: cybernetic-loop
-description: 'Use when the caller supplies one falsifiable out-of-happy-path invariant and a finite patch budget, never for normal feature delivery or universal retries. Restore the invariant through bounded candidate patches or revert the run and report non-convergence. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the caller supplies one falsifiable out-of-happy-path invariant and a finite patch budget. Restores it through bounded candidate patches or reverts the run and reports non-convergence. Not for normal feature delivery or universal retries.'
 ---
 
 # Cybernetic loop
@@ -24,15 +24,15 @@ Use only the literal run concepts `invariant`, `executable check set`, `patch bu
 
 ## Procedure
 
-1. Validate that there is exactly one falsifiable invariant and that the patch budget is a finite positive integer. Reject normal feature work, a happy-path request, a universal retry request, or an invariant whose truth cannot be executed as a check.
-2. Derive the smallest working-tree scope that can restore the invariant. Record that scope; any required change outside it is scope widening and must stop the run.
-3. Translate the invariant without weakening it into an executable check with explicit pass and fail results. Combine it with the repository's existing executable checks. Freeze and echo the complete check set, exact commands, pass criteria, bounded scope, and patch budget as the run contract; do not add, remove, weaken, or replace a check after this point.
-4. Create a checkpoint that can restore every byte in the bounded scope to its pre-run state, including pre-existing edits. If an exact checkpoint cannot be made, stop before mutation as `non-converged` with an unavailable recovery mechanism.
-5. Run the full frozen check set before mutation and record every check result. If all checks pass in this one run, return `already-holds` without changing the working tree.
-6. While checks fail and budget remains, select one failing result and apply the smallest candidate patch within the bounded scope that could restore it. Spend one budget unit, run the full frozen check set, and record the patch and every result.
-7. Compare that run with the immediately preceding retained state. Keep the candidate only if at least one previously failing check passes and every previously passing check still passes. Otherwise revert the candidate exactly while retaining the spent budget unit.
-8. After each full run, return `restored` only if every frozen check passes together. Otherwise stop as `non-converged` if the budget is exhausted, an equivalent failure repeats, check results oscillate between prior states, any frozen check becomes unavailable, or restoration requires scope widening.
-9. For every `non-converged` stop, restore the whole bounded scope to the checkpoint before returning the complete run transcript. If restoration itself fails, report that recovery failure explicitly and do not claim a terminal success status.
+1. Validate that there is exactly one falsifiable invariant and that the patch budget is a finite positive integer. Reject normal feature work, a happy-path request, a universal retry request, or an invariant whose truth cannot be executed as a check. Done when: exactly one falsifiable invariant and a finite positive-integer budget are validated, or the run is rejected.
+2. Derive the smallest working-tree scope that can restore the invariant. Record that scope; any required change outside it is scope widening and must stop the run. Done when: the smallest scope is derived and recorded.
+3. Translate the invariant without weakening it into an executable check with explicit pass and fail results. Combine it with the repository's existing executable checks. Freeze and echo the complete check set, exact commands, pass criteria, bounded scope, and patch budget as the run contract; do not add, remove, weaken, or replace a check after this point. Done when: the frozen run contract is echoed with the complete check set, commands, criteria, scope, and budget.
+4. Create a checkpoint that can restore every byte in the bounded scope to its pre-run state, including pre-existing edits. If an exact checkpoint cannot be made, stop before mutation as `non-converged` with an unavailable recovery mechanism. Done when: the checkpoint can restore every byte in the bounded scope, or the run stops as `non-converged`.
+5. Run the full frozen check set before mutation and record every check result. If all checks pass in this one run, return `already-holds` without changing the working tree. Done when: all check results are recorded, or `already-holds` is returned.
+6. While checks fail and budget remains, select one failing result and apply the smallest candidate patch within the bounded scope that could restore it. Spend one budget unit, run the full frozen check set, and record the patch and every result. Done when: one candidate patch is applied, budget is spent, and full check results are recorded.
+7. Compare that run with the immediately preceding retained state. Keep the candidate only if at least one previously failing check passes and every previously passing check still passes. Otherwise revert the candidate exactly while retaining the spent budget unit. Done when: the candidate is kept or reverted with the decision and budget recorded.
+8. After each full run, return `restored` only if every frozen check passes together. Otherwise stop as `non-converged` if the budget is exhausted, an equivalent failure repeats, check results oscillate between prior states, any frozen check becomes unavailable, or restoration requires scope widening. Done when: `restored` is returned or `non-converged` is declared with a named stop class.
+9. For every `non-converged` stop, restore the whole bounded scope to the checkpoint before returning the complete run transcript. If restoration itself fails, report that recovery failure explicitly and do not claim a terminal success status. Done when: the bounded scope is restored to the checkpoint and the run transcript is returned, or recovery failure is reported.
 
 ## Failure and recovery
 - `invalid-input`: stop before mutation when the invariant is not singular, falsifiable, or outside the prior happy path, or when the patch budget is not a finite positive integer.
@@ -44,11 +44,7 @@ Use only the literal run concepts `invariant`, `executable check set`, `patch bu
 No partial retained patch is an output of `non-converged`; its only valid working-tree state is the checkpoint state.
 
 ## Output
-Return the frozen run contract and one terminal record:
-
-- `already-holds`: the pre-mutation full check results and confirmation that no candidate patch was attempted;
-- `restored`: each attempted candidate patch, its budget unit, full check results, keep-or-revert decision, and the final single run in which all frozen checks passed; or
-- `non-converged`: the named stop class, every attempted candidate patch and full check result, budget consumed and remaining, and proof that the bounded scope was restored to the checkpoint.
+The frozen run contract and one terminal record: `already-holds` (pre-mutation check results, no patch attempted), `restored` (candidate patches, budget, check results, final passing run), or `non-converged` (stop class, all patches and results, budget consumed, checkpoint-restoration proof).
 
 ## Provenance
 

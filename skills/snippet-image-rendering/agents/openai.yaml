@@ -1,3 +1,3 @@
 interface:
   display_name: "Snippet Image Rendering"
-  short_description: "Render code snippets as shareable PNG/SVG/WebP images"
+  short_description: "Use when the user explicitly names snipgrapher and wants code"

@@ -1,8 +1,8 @@
 # Go strict-mode bootstrap (2026)
 
-**Grounded: 2026-08-26**
+**Grounded: 2026-08-31**
 
-Go has no single strict-mode toggle. The 2026 idiom is golangci-lint with the `staticcheck` family enabled, plus `go vet` in CI, plus typed-error and context-first conventions enforced at review.
+Go has no single strict-mode toggle. The 2026 idiom combines golangci-lint with the `staticcheck` family, `go vet` in CI, and typed-error and context-first conventions enforced in review.
 
 ## .golangci.yml
 
@@ -10,7 +10,7 @@ Go has no single strict-mode toggle. The 2026 idiom is golangci-lint with the `s
 version: "2"
 run:
   timeout: 5m
-  go: "1.24"
+  go: "1.27"
 
 linters:
   enable:

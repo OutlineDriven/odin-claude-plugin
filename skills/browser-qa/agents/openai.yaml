@@ -1,3 +1,3 @@
 interface:
   display_name: "Browser QA"
-  short_description: "Run the QA pass and return report-only results, no fixes."
+  short_description: "Use when the user runs /browser-qa to run the QA verification"

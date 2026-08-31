@@ -1,6 +1,6 @@
 ---
 name: typescript-type-hardening
-description: 'Use when TypeScript code has type errors, uses any, needs complex generics, branded types, inference fixes, or utility-type design. Produces strict typed source with zero new any and passing tsc --noEmit. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when TypeScript code has type errors, any, difficult generics, branded types, or inference failures. Also handles utility-type derivation when primitives must compose. Not for strict-flag setup or runtime pitfalls — use ts-practice or ts-pitfalls.'
 ---
 
 # TypeScript type hardening
@@ -23,8 +23,8 @@ description: 'Use when TypeScript code has type errors, uses any, needs complex 
 
 ## Procedure
 
-1. Run `tsc --noEmit` to capture the baseline error set. Record the exact error list before any edit.
-2. Classify each error or requested type improvement into one of these categories: missing annotation, incorrect narrowing, any elimination, generic design, conditional/infer extraction, mapped/template-literal transform, branded/opaque type, utility-type derivation, function overload, or builder-pattern typing.
+1. Run `tsc --noEmit` to capture the baseline error set. **Done when:** the exact error list is recorded before any edit.
+2. Classify each error or requested type improvement as missing annotation, incorrect narrowing, any elimination, generic design, conditional/infer extraction, mapped/template-literal transform, branded/opaque type, utility-type derivation, function overload, or builder-pattern typing. **Done when:** every item has one classification.
 3. For each classified item, apply the narrowest matching mechanism:
    a. **Missing annotation / any elimination**: Add explicit type annotations. Replace `any` with `unknown` then narrow via type guards, discriminated unions, or assertion functions. Never widen to `object` or `{}` as a substitute.
    b. **Incorrect narrowing**: Add or correct discriminated union tags, `typeof`/`in`/`instanceof` guards, assertion functions, or control-flow analysis. Ensure exhaustiveness with `never` checks in switch/default.
@@ -37,10 +37,11 @@ description: 'Use when TypeScript code has type errors, uses any, needs complex 
    i. **Builder-pattern typing**: Use chained generics (`Builder<Step>`) with branded step types or literal type parameters so each method returns a builder constrained to valid next steps.
    j. **Array/index access**: Use `T[number]` for element types. Use `as const` assertions or `satisfies` for readonly tuple inference. Use variadic tuple types (`[...T, U]`) for push/prepend operations.
    k. **Deep inference**: For nested structures, use recursive conditional types. Limit recursion depth with a counter parameter to avoid TS instantiation-depth errors.
-4. After each edit, run `tsc --noEmit` on the changed file(s). If new errors appear that were not in the baseline, revert the last edit and apply a narrower fix.
-5. Write or update type-test files that demonstrate: the `any` that was eliminated (before/after), the generic that now constrains correctly, the branded type that rejects unbranded values, or the utility type that derives the expected shape. Use `// @ts-expect-error` for negative tests proving type rejection.
-6. Run `tsc --noEmit` a second time on the full project. Confirm zero new errors compared to baseline and zero new `any` occurrences (grep source for `: any`, `as any`, `<any>`).
-7. Verify all call sites that consumed the changed types still compile. If a call site breaks, update it to match the new contract rather than weakening the type.
+   **Done when:** every classified item has its mechanism applied.
+4. After each edit, run `tsc --noEmit` on the changed file(s). If the edit introduces errors outside the baseline, revert it and apply a narrower fix. **Done when:** no new errors appear outside the baseline.
+5. Write or update type-test files that demonstrate: the `any` that was eliminated (before/after), the generic that now constrains correctly, the branded type that rejects unbranded values, or the utility type that derives the expected shape. Use `// @ts-expect-error` for negative tests proving type rejection. **Done when:** positive and negative tests exist for each mechanism applied.
+6. Run `tsc --noEmit` a second time on the full project. Confirm zero new errors compared to baseline and zero new `any` occurrences (grep source for `: any`, `as any`, `<any>`). **Done when:** the full-project pass is clean against the baseline.
+7. Verify all call sites that consumed the changed types still compile. If a call site breaks, update it to match the new contract rather than weakening the type. **Done when:** every consuming call site compiles.
 
 ## Failure and recovery
 - **Type error persists after mechanism application**: Revert the failing edit. Report the exact error, the mechanism attempted, and why it did not resolve. Do not widen the type to suppress the error.
@@ -50,9 +51,7 @@ description: 'Use when TypeScript code has type errors, uses any, needs complex 
 - **No tsconfig.json found**: Block. Report the missing prerequisite. Do not create a tsconfig.
 
 ## Output
-- Modified TypeScript source files with strict types replacing `any` and fixing type errors.
-- Type-test file(s) with positive tests (correct values accepted) and negative tests (`@ts-expect-error` proving incorrect values rejected).
-- Terminal report: baseline error count, final error count, count of `any` eliminated, list of mechanisms applied, and tsc --noEmit pass/fail status for both runs.
+Modified source files, type-test files (positive and `@ts-expect-error` negative), and a terminal report (baseline count, final count, any eliminated, mechanisms applied, tsc status for both runs), in that order.
 
 ## Provenance
 

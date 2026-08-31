@@ -1,3 +1,3 @@
 interface:
-  display_name: "Live Project Catch-Up"
-  short_description: "Brief a returning human on project state from live evidence"
+  display_name: "Catchup"
+  short_description: "Use when the human returns after a gap, cannot follow the"

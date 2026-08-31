@@ -1,6 +1,6 @@
 ---
 name: control-cli
-description: 'Use when asked to reproduce, profile, or verify CLI/TUI behavior. Produces a deterministic transcript or profile proof with session cleanup. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to reproduce, profile, or verify CLI/TUI behavior. Produces a deterministic transcript or profile proof with session cleanup. Not for CLI design advice — use cli-for-agents.'
 ---
 
 # Control CLI
@@ -22,13 +22,13 @@ description: 'Use when asked to reproduce, profile, or verify CLI/TUI behavior. 
 
 ## Procedure
 
-1. Create a fresh temp session directory under the system temp path; it holds the captured artifact and PTY/tmux runtime scratch. Record it for cleanup.
-2. Spawn the target CLI/TUI under a PTY, or a tmux session attached to a PTY, so interactive behavior is observable. Apply one action per observation: send one input, then capture the full terminal render before sending the next.
-3. For reproduction: drive the supplied steps in order, appending the terminal state after each action to the transcript artifact.
-4. For profiling: run the target under the chosen profiler, capturing timing or allocation output into the profile artifact.
-5. For verification: exercise the scenario, compare the observed output against the expected output when supplied, and record the pass or fail classification in the transcript artifact.
-6. Terminate the PTY process, or detach and kill the tmux session.
-7. Remove the PTY/tmux runtime scratch (pipes and sockets); the captured transcript or profile artifact file remains as the retained proof.
+1. Create a fresh session directory under the system temp path for the captured artifact and PTY/tmux runtime scratch. Record the directory for cleanup. Done when: the session directory is created and recorded.
+2. Spawn the target CLI/TUI under a PTY, or a tmux session attached to a PTY, so interactive behavior is observable. Apply one action per observation: send one input, then capture the full terminal render before sending the next. Done when: the PTY or tmux session is spawned and interactive behavior is observable.
+3. For reproduction: drive the supplied steps in order, appending the terminal state after each action to the transcript artifact. Done when: every step is driven in order and the transcript artifact captures the terminal state after each action.
+4. For profiling: run the target under the chosen profiler, capturing timing or allocation output into the profile artifact. Done when: the profile artifact captures timing or allocation output.
+5. For verification: exercise the scenario, compare the observed output against the expected output when supplied, and record the pass or fail classification in the transcript artifact. Done when: the pass or fail classification is recorded in the transcript artifact.
+6. Terminate the PTY process, or detach and kill the tmux session. Done when: the PTY process or tmux session is terminated.
+7. Remove the PTY/tmux runtime scratch (pipes and sockets); the captured transcript or profile artifact file remains as the retained proof. Done when: runtime scratch is removed and the artifact file remains.
 
 ## Failure and recovery
 - PTY spawn failure or binary not found: record the error in the transcript, do not invent output, and return blocked with the spawn error.
@@ -37,7 +37,7 @@ description: 'Use when asked to reproduce, profile, or verify CLI/TUI behavior. 
 - Any failure: terminate the PTY or tmux process and remove its runtime scratch before returning; if no artifact was captured, delete the whole temp session directory. Never swallow errors or claim the done predicate holds when the proof is missing or inconclusive.
 
 ## Output
-A transcript or profile artifact containing the captured terminal evidence, plus a terminal classification: reproduced, profiled, verified-pass, verified-fail, blocked, or non-deterministic. The live PTY session is terminated and its runtime scratch removed before return.
+Transcript or profile artifact containing captured terminal evidence, plus final classification: reproduced, profiled, verified-pass, verified-fail, blocked, or non-deterministic. Live PTY session terminated and runtime scratch removed before return.
 
 ## Provenance
 

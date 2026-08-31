@@ -1,6 +1,6 @@
-# Autopilot — pipeline gates and the autofix-then-halt state machine
+# Autopilot: pipeline gates and the autofix-then-halt state machine
 
-Authoritative source for every phase gate, its autofix arm, and the halt behavior. `SKILL.md` carries the summary; this file carries the exact criteria and the machine. On any conflict, this file governs the mechanics and `~/.claude/claude/system-prompt-baseline.md` governs doctrine.
+This file is the authoritative source for every phase gate, its autofix arm, and halt behavior. `SKILL.md` summarizes the process; this file defines the exact criteria and state machine. On any conflict, this file governs the mechanics and `~/.claude/claude/system-prompt-baseline.md` governs doctrine.
 
 ## The autofix-then-halt state machine
 

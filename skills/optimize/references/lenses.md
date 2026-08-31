@@ -1,4 +1,4 @@
-# Optimize — Lens Catalogue
+# Optimize: lens catalogue
 
 Five independent lens prompts for the Phase 4 fan-out. Each is a verbatim agent prompt. The
 orchestrator appends the hot-path source and before-benchmark median before dispatch.
@@ -38,7 +38,7 @@ optimization is not a candidate.
 
 ---
 
-## Lens 1 — Algorithmic Complexity (`algo`)
+## Lens 1 — Algorithmic complexity (`algo`)
 
 You are an algorithmic optimization agent. Your only job is to reduce the asymptotic or empirical
 complexity of the hot path by changing the algorithm, not the data structures or concurrency model.
@@ -66,7 +66,7 @@ complexity of the hot path by changing the algorithm, not the data structures or
 
 ---
 
-## Lens 2 — Data Structure & Layout (`data`)
+## Lens 2 — Data structure and layout (`data`)
 
 You are a data-structure and memory-layout optimization agent. Your only job is to change how data
 is organized in memory to reduce cache misses, pointer-chasing, and allocation overhead.
@@ -97,7 +97,7 @@ is organized in memory to reduce cache misses, pointer-chasing, and allocation o
 
 ---
 
-## Lens 3 — Caching & Memoization (`cache`)
+## Lens 3 — Caching and memoization (`cache`)
 
 You are a caching and memoization optimization agent. Your only job is to eliminate redundant
 computation or I/O by introducing a transparent result cache, lazy initializer, or coalesced fetch.
@@ -126,7 +126,7 @@ computation or I/O by introducing a transparent result cache, lazy initializer, 
 
 ---
 
-## Lens 4 — Concurrency & Parallelism (`concur`)
+## Lens 4 — Concurrency and parallelism (`concur`)
 
 You are a concurrency and parallelism optimization agent. Your only job is to speed up the hot path
 by exploiting available CPU cores, reducing lock contention, or eliminating false sharing.
@@ -160,7 +160,7 @@ by exploiting available CPU cores, reducing lock contention, or eliminating fals
 
 ---
 
-## Lens 5 — Architectural / Structural (`arch`)
+## Lens 5 — Architectural and structural (`arch`)
 
 You are an architectural optimization agent. Your only job is to restructure the hot path at the
 module or system level — pipeline stages, call-graph depth, abstraction layers, dispatch

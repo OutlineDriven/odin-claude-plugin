@@ -1,6 +1,6 @@
 ---
 name: classify-ci-failure
-description: 'Use when a CI check is failed, absent, pending too long, unstable, or reported unexpectedly. Classify it into a deterministic failure class with the next owner, without patching during classification. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when a CI check is failed, absent, pending too long, unstable, or reported unexpectedly. Classify it into a deterministic failure class with the next owner, without patching. Not for sweeping and patching — use ci-sweeper.'
 ---
 
 # Classify CI failure
@@ -22,9 +22,9 @@ Optional: the failing job log, the changed files or commit range under test, and
 
 ## Procedure
 
-1. Record the check name, status, and run identifier before reading anything else. If the status is absent or the check never ran, treat that as a distinct input, not a missing one.
-2. Read the failing job log and any error, exit code, or annotation the run produced. Capture the exact failure line, signal, or message; do not paraphrase it away.
-3. Compare the failure against the commit range and changed files under test. Determine whether the failing code path was touched by the change or predates it.
+1. Record the check name, status, and run identifier before reading anything else. If the status is absent or the check never ran, treat that as a distinct input, not a missing one. **Done when:** the check name, status, and run identifier are recorded.
+2. Read the failing job log and any error, exit code, or annotation the run produced. Preserve the exact failure line, signal, or message. **Done when:** the failure signal is read and preserved exactly.
+3. Compare the failure against the commit range and changed files under test. Determine whether the failing code path was touched by the change or predates it. **Done when:** the failing path is determined as in-diff or pre-existing.
 4. Classify the failure into exactly one class:
    - **regression**: the change introduced or exposed the failure; the failing path is in the diff.
    - **flake/watch**: the failure is timing-, order-, or environment-dependent; it passes on retry or across runs without a code change.
@@ -32,20 +32,21 @@ Optional: the failing job log, the changed files or commit range under test, and
    - **configuration**: the failure stems from build, config, dependency, or environment setup, not from product logic.
    - **policy/absent-CI**: the check is absent, skipped, not configured, or blocked by a branch-protection or policy rule.
    - **human escalation**: the evidence is insufficient, contradictory, or outside the five classes above; a human must decide.
-5. Assign the next owner from the class: regression and configuration go to the change author; flake/watch goes to the test or platform owner; infrastructure goes to the platform or runner owner; policy/absent-CI goes to the repository or CI-config owner; human escalation goes to a human reviewer.
-6. State the next action the owner must take, concretely and in one sentence.
-7. If the same check was classified before and the new evidence matches the prior class, note the repeat; if it contradicts, re-classify from the new evidence.
+   **Done when:** the failure is classified into exactly one class.
+5. Assign the next owner from the class: regression and configuration go to the change author; flake/watch goes to the test or platform owner; infrastructure goes to the platform or runner owner; policy/absent-CI goes to the repository or CI-config owner; human escalation goes to a human reviewer. **Done when:** the next owner is assigned from the class.
+6. State the next action the owner must take, concretely and in one sentence. **Done when:** the next action is stated in one sentence.
+7. If the same check was classified before and the new evidence matches the prior class, note the repeat; if it contradicts, re-classify from the new evidence. **Done when:** the repeat or contradiction is noted, or no prior classification exists.
 
 ## Failure and recovery
-- **Insufficient evidence**: the log, status, or run identifier is missing or unreadable. Do not guess a class. Return `human escalation` with the missing evidence named.
-- **Contradictory evidence**: two signals imply different classes. Return `human escalation` with both signals stated; do not average or pick arbitrarily.
-- **No-CI state**: the check is absent or never ran. Classify as `policy/absent-CI`; do not skip it or treat it as passing.
-- **Blocked state**: the check is pending past the expected window or blocked by policy. Surface the blocked state and the next owner; do not mark it done.
-- **Non-mutation rule**: classification mutates nothing. If any step would require a write, stop and return `human escalation`.
-- **Partial result**: if only some checks in a run are inspectable, classify each inspectable one and explicitly mark the rest as unevaluated.
+- **Insufficient evidence:** the log, status, or run identifier is missing or unreadable. Do not guess a class. Return `human escalation` with the missing evidence named.
+- **Contradictory evidence:** two signals imply different classes. Return `human escalation` with both signals stated; do not average or pick arbitrarily.
+- **No-CI state:** the check is absent or never ran. Classify as `policy/absent-CI`; do not skip it or treat it as passing.
+- **Blocked state:** the check is pending past the expected window or blocked by policy. Surface the blocked state and the next owner; do not mark it done.
+- **Non-mutation rule:** classification mutates nothing. If any step would require a write, stop and return `human escalation`.
+- **Partial result:** if only some checks in a run are inspectable, classify each inspectable one and explicitly mark the rest as unevaluated.
 
 ## Output
-One chat record containing: the check name, the run identifier, the observed failure signal, the single deterministic class, the next owner, and the one-sentence next action. No-CI and blocked states are included as their own classes, not omitted.
+One chat record containing the check name, the run identifier, the observed failure signal, the single deterministic class, the next owner, and the one-sentence next action; no-CI and blocked states are included as their own classes, not omitted.
 
 ## Provenance
 

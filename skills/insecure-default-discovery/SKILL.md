@@ -1,6 +1,6 @@
 ---
 name: insecure-default-discovery
-description: 'Use when the user asks to audit a file, subtree, or repository for fallback secrets, usable default credentials, fail-open controls, weak security primitives, permissive access, or exposed debug behavior. Runs scoped read-only sweeps with refuting reachability verification and returns a coverage-aware findings report that keeps refuted candidates and coverage gaps visible. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when the user asks to audit a file, subtree, or repository for fallback secrets, default credentials, fail-open controls, weak primitives, permissive access, or exposed debug behavior. Returns a coverage-aware findings report. Not for exhaustive secret scanning.'
 ---
 
 # Insecure default discovery
@@ -17,7 +17,7 @@ description: 'Use when the user asks to audit a file, subtree, or repository for
 ## Inputs
 
 - Target: one file, one subtree, or a repository root. Optional; defaults to the current directory.
-- The user-named path is the target however test-like it looks: a run scoped to `tests/` audits the tests. Fixture, docs, and vendored-code exclusions apply only outside the named scope.
+- The user-named path is the target, even if it looks like a test path: a run scoped to `tests/` audits the tests. Fixture, docs, and vendored-code exclusions apply only outside the named scope.
 - This audit reports insecure defaults that reach production security decisions; it is not an exhaustive committed-secret scanner.
 
 ## Procedure
@@ -85,7 +85,7 @@ description: 'Use when the user asks to audit a file, subtree, or repository for
    2. Is the insecure value the one that runs? A **configurable** candidate (a lookup with a fallback) is only a bug if the app runs with the insecure value; a lookup that crashes when the variable is missing is fail-secure. An **unconditional** candidate (no configuration anywhere, insecure as written) cannot be refuted at this step — a missing env var is not grounds to refute it.
    3. Is the value actually insecure under the category's skip rules?
    4. Does it reach a security decision? Cite the sink: the call or enforcement point that consumes the value.
-   5. Configurable candidates only: does deployment always supply the variable? No answer refutes the candidate. Every manifest that sets it lowers severity; no manifest sets it, the candidate is CRITICAL; a partial or undetermined answer counts as reachable.
+   5. Configurable candidates only: does deployment always supply the variable? A missing answer does not refute the candidate. Every manifest that sets it lowers severity; if no manifest sets it, the candidate is CRITICAL; a partial or undetermined answer counts as reachable.
 
    An incomplete trace is refuted. Verify in per-category batches of at most 16 candidates and complete every verdict in a batch before starting the next, so no candidate ends with a partial verdict list or is silently dropped.
 6. **Rate and remediate.** For each confirmed finding, assign severity from the reachability evidence (CRITICAL reserved per step 5) and state a remediation that removes the insecure default, such as a fail-secure lookup or explicitly required configuration.

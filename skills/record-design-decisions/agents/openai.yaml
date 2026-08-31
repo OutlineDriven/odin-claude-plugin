@@ -1,3 +1,3 @@
 interface:
   display_name: "Record Design Decisions"
-  short_description: "Record durable decisions and resolved terms in CONTEXT.md"
+  short_description: "Use when codebase terminology or a durable technical decision"

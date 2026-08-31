@@ -10,7 +10,7 @@ CI secrets          → Stored in GitHub Secrets / vault
 Production secrets  → Stored in deployment platform / vault
 ```
 
-CI should never have production secrets. Use separate secrets for CI testing.
+Never give CI production secrets. Use separate secrets for CI testing.
 
 ## Automation beyond CI
 

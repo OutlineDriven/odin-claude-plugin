@@ -1,3 +1,3 @@
 interface:
-  display_name: "Agent Surface Hardening"
-  short_description: "Certainty-graded audit and tightening of agent surfaces"
+  display_name: "Enhance"
+  short_description: "Use when the user asks to enhance, improve, audit, or tighten a"

@@ -1,4 +1,4 @@
-# Tree-Clean Recovery
+# Tree-clean recovery
 
 A worker that dies mid-task leaves a dirty tree. Inspect first (`git status`,
 `git diff`) and revert **only** that worker's changes: discard its edits, remove

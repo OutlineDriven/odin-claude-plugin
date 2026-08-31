@@ -1,6 +1,6 @@
 ---
 name: ruzzy
-description: 'Use when asked to set up and run coverage-guided fuzzing of Ruby code and C extensions with Ruzzy, producing crash reports or clean campaign summaries. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to set up and run coverage-guided fuzzing of Ruby code or C extensions with Ruzzy, producing crash reports or clean campaign summaries. Not for C/C++ fuzzing — use fuzzing.'
 ---
 
 # Ruzzy fuzzing campaign
@@ -9,7 +9,7 @@ description: 'Use when asked to set up and run coverage-guided fuzzing of Ruby c
 
 | Field | Bound contract |
 |---|---|
-| Trigger | User needs coverage-guided fuzzing of Ruby code or a Ruby native extension with Ruzzy. |
+| Trigger | User needs Ruzzy to run coverage-guided fuzzing on Ruby code or a Ruby native extension. |
 | Authority | reversible-local: write only harness, tracer, sanitizer preload, and corpus files to the working directory. State rollback as file deletion. |
 | Side effect | Write Ruzzy harness scripts, tracer scripts, sanitizer LD_PRELOAD paths, and corpus files — local working directory only. |
 | Done | Ruzzy executes the intended Ruby target with the correct tracer or extension setup and reproduces saved failures. |
@@ -35,9 +35,9 @@ Optional: corpus directory path, libFuzzer arguments (e.g., `-max_len=1024`), cr
 ## Failure and recovery
 | Failure class | Meaning | Recovery |
 |---|---|---|
-| `platform-missing` | Not Linux x86-64/ARM64, clang unavailable, or Ruby not installed | Halt; suggest Docker environment |
+| `platform-missing` | Platform is not Linux x86-64/ARM64, clang is unavailable, or Ruby is not installed | Halt; suggest Docker environment |
 | `dependency-missing` | Gem not installed or wrong clang | Install gem with sanitizer flags; verify `Ruzzy::<SAN>_PATH` resolves |
-| `harness-error` | Ruby exception exits the fuzzer | Adjust harness exception handling; pure Ruby must not catch |
+| `harness-error` | Ruby exception exits the fuzzer | Adjust exception handling for a C extension harness; a pure Ruby harness must not catch exceptions |
 | `sanitizer-report` | ASan or UBSan error detected | Capture crash file; report class, address, reproducer |
 | `no-crashes-found` | Fuzzer ran without sanitizer violations | Report campaign completed cleanly |
 | `env-misconfigured` | Missing ASAN_OPTIONS or LD_PRELOAD | Set ASAN_OPTIONS and re-run inline LD_PRELOAD |
@@ -46,6 +46,7 @@ Rollback: delete written harness, tracer, and corpus files. No VCS mutation.
 
 ## Output
 Fuzzing campaign report containing:
+
 - Target gem or file fuzzed
 - Sanitizer and version
 - libFuzzer options used
@@ -55,4 +56,4 @@ Fuzzing campaign report containing:
 
 ## Provenance
 
-Adapted from [Trail of Bits skills/ruzzy](https://github.com/trailofbits/skills) (`d1f1575cff97816e5cc08af66cd2506099c681d3`), licensed CC-BY-SA-4.0. Attribution preserved; ShareAlike adaptation. No trademark rights claimed; trail-of-bits-mark.svg not reused.
+Adapted from [Trail of Bits skills/ruzzy](https://github.com/trailofbits/skills) (`d1f1575cff97816e5cc08af66cd2506099c681d3`) under CC-BY-SA-4.0. Attribution and ShareAlike adaptation preserved. No trademark rights claimed; trail-of-bits-mark.svg not reused.

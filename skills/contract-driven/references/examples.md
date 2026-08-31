@@ -1,6 +1,6 @@
 # Contract patterns by language
 
-Brief contract annotation patterns. Precondition + postcondition + invariant per language.
+These brief annotation patterns show a precondition, postcondition, and invariant for each language.
 
 ## Python
 

@@ -1,4 +1,4 @@
-# Experiment Mode -- metric-driven optimization for broad search spaces
+# Experiment mode: metric-driven optimization for broad search spaces
 
 An optional extension to the primary hot-path optimization loop. Use when the target has
 a measurable metric but the search space is broad -- parameter tuning, prompt optimization,

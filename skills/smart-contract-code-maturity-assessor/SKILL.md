@@ -1,6 +1,6 @@
 ---
 name: smart-contract-code-maturity-assessor
-description: 'Use when a smart-contract codebase needs an evidence-based maturity scorecard and prioritized improvement roadmap. Produces a nine-area maturity scorecard with evidence, risks, and an ordered remediation roadmap. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when a smart-contract codebase needs an evidence-based maturity scorecard and prioritized improvement roadmap. Rates nine areas from code and explicit off-chain evidence. Not for vulnerability auditing, source fixes, or claims about inaccessible processes.'
 ---
 
 # Smart contract code maturity assessor
@@ -23,13 +23,21 @@ Optional and asked at runtime:
 - Project context (DeFi, NFT, infrastructure, or other domain).
 - Off-chain process knowledge: monitoring infrastructure, incident response plans, team practices, privileged actor identity (EOA, multisig, or DAO).
 
+## Refuse first
+
+- Do not treat this maturity rubric as a vulnerability audit or proof of security.
+- Do not modify source, tests, documentation, repositories, credentials, or deployed systems.
+- Do not infer off-chain monitoring, incident response, governance, or team practices from code; ask or mark evidence unavailable.
+
 ## Procedure
 
 1. **Discover the codebase.** Locate contract and module files, test files, and documentation. Identify the platform and language.
 
-2. **Assess each of nine categories.** For each category, search code for relevant patterns, read key implementations, collect file:line evidence, and ask the human about off-chain processes I cannot observe in code. Apply the WEAK/MODERATE/SATISFACTORY/STRONG rating thresholds per the criteria below.
+   **Done when:** the assessed source, tests, documentation, platform, language, and known scope gaps are explicitly bounded.
 
-   Rating logic: ANY Weak criteria → Weak. NO Weak + SOME Moderate unmet → Moderate. ALL Moderate + SOME Satisfactory met → Satisfactory. ALL Satisfactory + exceptional practices → Strong.
+2. **Assess each of nine categories.** For each category, search code for relevant patterns, read key implementations, collect file:line evidence, and ask the human about off-chain processes that the code cannot show. Apply the WEAK/MODERATE/SATISFACTORY/STRONG rating thresholds using the criteria below.
+
+   Rating logic: Any Weak criterion makes the rating Weak. If no Weak criterion applies but some Moderate requirements are unmet, rate Moderate. If all Moderate requirements and some Satisfactory requirements are met, rate Satisfactory. If all Satisfactory requirements are met and exceptional practices are present, rate Strong.
 
    **1. ARITHMETIC**
    - Analyze: overflow protection (Solidity 0.8+, SafeMath, checked_*, saturating_*), unchecked blocks and documentation, division/rounding, critical-function arithmetic, arithmetic edge-case testing, arithmetic specifications.
@@ -93,24 +101,30 @@ Optional and asked at runtime:
    - MODERATE requires: all weak resolved; most functions and use cases tested; all tests pass; coverage reports available; automated testing for critical components; tests in CI/CD; integration tests where applicable; test code follows best practices.
    - SATISFACTORY requires: all moderate met; 100% reachable branch and statement coverage; end-to-end testing covers all entry points; isolated test cases; mutation testing used.
 
+   **Done when:** all nine categories have a threshold-derived rating, file-and-line evidence, explicit evidence gaps, and only human-supplied off-chain claims.
+
 3. **Compute overall maturity.** Average the nine category scores. Present findings with file:line evidence. Ask clarifying questions about off-chain processes.
+
+   **Done when:** the arithmetic average traces to all nine recorded category scores and every consequential finding cites evidence or an unanswered off-chain question.
 
 4. **Generate the report.** Produce the structured output: executive summary with overall score, top 3 strengths, top 3 gaps, and priority recommendations; maturity scorecard table with all nine categories; per-category detailed analysis with evidence; improvement roadmap ordered by CRITICAL, HIGH, MEDIUM with effort estimates and impact per item.
 
+   **Done when:** the report contains every output section, preserves category-to-evidence traceability, and orders remediation by severity, effort, and impact as specified.
+
 ## Failure and recovery
-**Insufficient evidence**: If code inspection cannot establish a rating for a category, state the gap explicitly and assign WEAK rather than inventing evidence. Mark the category as "evidence unavailable" in the scorecard.
 
-**Partial assessment**: If the codebase scope exceeds what can be covered in one session, produce the scorecard for the covered portions and explicitly list the uncovered areas as "not assessed". Do not extrapolate ratings to unexamined areas.
+### Evidence gaps
 
-**Assessment abandoned**: If the human withdraws or the codebase is inaccessible, return the partial scorecard with the last-known ratings and the questions that remained unanswered.
+- **Insufficient evidence:** If code inspection cannot establish a rating for a category, state the gap explicitly and assign WEAK rather than inventing evidence. Mark the category as `evidence unavailable` in the scorecard.
+
+### Scope and access failures
+
+- **Partial assessment:** If the codebase scope exceeds what can be covered in one session, produce the scorecard for the covered portions and explicitly list the uncovered areas as `not assessed`. Do not extrapolate ratings to unexamined areas.
+- **Assessment abandoned:** If the human withdraws or the codebase is inaccessible, return the partial scorecard with the last-known ratings and the questions that remained unanswered.
 
 ## Output
-A structured report containing:
 
-1. Executive summary: project name and platform, overall maturity score (average of nine categories), top 3 strengths, top 3 critical gaps, priority recommendation.
-2. Maturity scorecard: table with all nine categories, their ratings, numeric scores, and key findings notes.
-3. Detailed analysis: per-category breakdown with evidence (file:line references), gaps, and actions to reach the next level.
-4. Improvement roadmap: CRITICAL (immediate), HIGH (1–2 months), MEDIUM (2–4 months) — each with effort estimate and impact.
+**Output contract:** Return the executive summary first, then the nine-category scorecard, per-category evidence and next-level gaps, and a CRITICAL-to-HIGH-to-MEDIUM improvement roadmap with effort and impact.
 
 ## Provenance
 

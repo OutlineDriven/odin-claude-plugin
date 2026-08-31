@@ -1,6 +1,6 @@
 ---
 name: pr-triage
-description: 'Use when a human invokes grouped PR and issue triage with per-item approved actions. Don''t use for force pushes or applying actions without explicit user approval per item.'
+description: 'Use when a human invokes grouped PR and issue triage with per-item approved actions. Not for force pushes or applying actions without explicit user approval per item.'
 disable-model-invocation: true
 ---
 
@@ -22,29 +22,17 @@ disable-model-invocation: true
 
 ## Procedure
 
-1. Resolve the target repository from the supplied argument or the current directory remote. If resolution fails, stop and report the failure.
-2. Fetch all open pull requests: `gh pr list --repo <owner/repo> --state open --json number,title,author,labels,createdAt,headRefName,baseRefName,isDraft,url --limit 200`.
-3. Fetch all open issues: `gh issue list --repo <owner/repo> --state open --json number,title,author,labels,createdAt,url --limit 200`.
-4. Classify each PR and issue into groups:
-   - **Ready to merge**: PR with all checks passing, no unresolved review threads, and base branch is the default branch.
-   - **Needs review**: PR with no approvals or unresolved review threads.
-   - **Draft**: PR marked as draft.
-   - **Stale**: PR or issue with no activity in the last 14 days.
-   - **Bug**: issue or PR labeled `bug` or containing bug-related keywords in the title.
-   - **Feature request**: issue labeled `enhancement` or `feature`.
-   - **Other**: items not matching any above group.
-5. Present the grouped report to the user: one section per group, each listing number, title, author, age, and URL.
-6. For each group, propose actions:
-   - Ready to merge: offer merge (squash) per PR.
-   - Needs review: offer to request reviewers or post a status comment.
-   - Stale: offer to post a staleness comment or close.
-   - Bug: offer to label and prioritize.
-   - Feature request: offer to label.
-7. Wait for the user to approve, modify, or reject each proposed action. Execute only approved actions.
-8. For each approved merge: `gh pr merge <number> --repo <owner/repo> --squash --delete-branch`.
-9. For each approved label: `gh issue edit <number> --repo <owner/repo> --add-label <label>` or the PR equivalent.
-10. For each approved comment: `gh issue comment <number> --repo <owner/repo> --body <text>` or the PR equivalent.
-11. After all approved actions are applied, present a summary of actions taken and any items that remain pending.
+1. Resolve the target repository from the supplied argument or the current directory remote. If resolution fails, stop and report the failure. Done when: the target repository is resolved.
+2. Fetch all open pull requests: `gh pr list --repo <owner/repo> --state open --json number,title,author,labels,createdAt,headRefName,baseRefName,isDraft,url --limit 200`. Done when: open PRs are fetched.
+3. Fetch all open issues: `gh issue list --repo <owner/repo> --state open --json number,title,author,labels,createdAt,url --limit 200`. Done when: open issues are fetched.
+4. Classify each PR and issue into groups: **Ready to merge** (all checks passing, no unresolved review threads, base is default branch), **Needs review** (no approvals or unresolved threads), **Draft**, **Stale** (no activity in 14 days), **Bug** (labeled `bug` or bug keywords in title), **Feature request** (labeled `enhancement` or `feature`), or **Other**. Done when: every PR and issue is classified into a group.
+5. Present the grouped report to the user: one section per group, each listing number, title, author, age, and URL. Done when: the grouped report is presented.
+6. For each group, propose actions: Ready to merge → offer merge (squash); Needs review → offer to request reviewers or post a status comment; Stale → offer to post a staleness comment or close; Bug → offer to label and prioritize; Feature request → offer to label. Done when: proposed actions are prepared per group.
+7. Wait for the user to approve, modify, or reject each proposed action. Execute only approved actions. Done when: the user has approved, modified, or rejected each proposed action.
+8. For each approved merge: `gh pr merge <number> --repo <owner/repo> --squash --delete-branch`. Done when: every approved merge is executed.
+9. For each approved label: `gh issue edit <number> --repo <owner/repo> --add-label <label>` or the PR equivalent. Done when: every approved label is applied.
+10. For each approved comment: `gh issue comment <number> --repo <owner/repo> --body <text>` or the PR equivalent. Done when: every approved comment is posted.
+11. After all approved actions are applied, present a summary of actions taken and any items that remain pending. Done when: the summary is presented with applied and pending items.
 
 ## Failure and recovery
 - **Authentication failure**: `gh` is not authenticated or lacks permission on the target repo. Report the error and stop. No mutation attempted.

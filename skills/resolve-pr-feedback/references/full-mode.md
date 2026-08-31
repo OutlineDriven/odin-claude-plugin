@@ -1,10 +1,10 @@
-# Full Mode
+# Full mode
 
-Read this reference when Mode Detection (in SKILL.md) routes to **Full Mode**: no argument given, or a PR number was provided. Full mode processes all unresolved threads on the PR.
+Read this reference when Mode Detection in `SKILL.md` routes to **Full Mode**: no argument given, or a PR number provided. Full mode processes every unresolved thread on the PR.
 
-The shape: **fetch once, judge centrally, fan out only the fixes.** The orchestrator (you) holds every thread from a single fetch, so the legitimacy judgment happens in your context, where you can dedup reads, spot a systematically-wrong reviewer across threads, and weigh the author's design intent. Subagents are dispatched only to *implement* fixes you've already approved. Do not fan out the judgment: spinning a subagent per thread to decide validity re-pays per-agent overhead, re-reads the same files, and throws away the cross-thread view, and you'd pay it even for threads that turn out to be skips.
+**Fetch once, judge centrally, and fan out only fixes.** The orchestrator holds every thread from a single fetch, so legitimacy judgments happen in the context that can deduplicate reads, identify a systematically wrong reviewer across threads, and weigh the author's design intent. Dispatch subagents only to implement fixes you have approved. Do not fan out the judgment: a subagent per thread repeats overhead and file reads, loses the cross-thread view, and incurs that cost even for threads that are skipped.
 
-## 1. Fetch Unresolved Threads
+## 1. Fetch unresolved threads
 
 If no PR number was provided, detect from the current branch:
 ```bash
@@ -41,7 +41,7 @@ gh pr view PR_NUMBER --json reviews,comments
 gh api repos/{owner}/{repo}/pulls/PR_NUMBER/comments
 ```
 
-## 2. Triage: Separate New from Pending
+## 2. Triage: separate new from pending
 
 Before processing, classify each piece of feedback as **new** or **already handled**.
 
@@ -58,7 +58,7 @@ The distinction is about content, not who posted what. A deferral from a teammat
 
 If there are no new items across all feedback types, skip steps 3-8 and go straight to step 9.
 
-## 3. Consolidate & Decide (the legitimacy gate)
+## 3. Consolidate and decide (the legitimacy gate)
 
 This is the gate. Judge every **new** item here, in your own context, before any fix is dispatched. Apply the rubric in [references/evaluation-rubric.md](evaluation-rubric.md) (read it now) across the whole batch at once.
 
@@ -79,7 +79,7 @@ Create a task list of all new items (e.g., `TaskCreate` in Claude Code, `update_
 
 If the fix-list is empty (all verdicts are reply/needs-human), skip steps 4-6 and go to step 7.
 
-## 4. Fix (PARALLEL — fix-list only)
+## 4. Fix (parallel: fix-list only)
 
 Dispatch fixers **only** for fix-list items. Reply-list and human-list items never reach a subagent.
 
@@ -116,7 +116,7 @@ For `pr_comment` / `review_body` fix-list items (no file/line), the fixer identi
 
 Fixes can occasionally expand beyond their referenced file (e.g., renaming a method updates callers elsewhere). This is rare but can cause parallel fixers to collide. Step 5 (combined validation) catches test breakage; step 8 (verify) catches unresolved threads. If either surfaces inconsistent changes, re-run the affected fixers sequentially.
 
-## 5. Validate Combined State
+## 5. Validate combined state
 
 Aggregate `files_changed` across every fixer summary. If it's empty, skip steps 5 and 6 and proceed to step 7.
 
@@ -132,7 +132,7 @@ Fixers run only targeted tests on their own changes. This step runs the project'
 
 Record the validation outcome (command run, pass/fail counts, any pre-existing failures noted) for the step 9 summary.
 
-## 6. Commit and Push
+## 6. Commit and push
 
 1. Stage only files reported by fixers and commit with a message referencing the PR:
 
@@ -148,7 +148,7 @@ git commit -m "Address PR review feedback (#PR_NUMBER)
 git push
 ```
 
-## 7. Reply and Resolve
+## 7. Reply and resolve
 
 After the push succeeds, post replies and resolve where applicable. Post for every handled item: fix-list items use the fixer's `reply_text`; reply-list and human-list items use the reply text you composed in step 3. The mechanism depends on the feedback type.
 

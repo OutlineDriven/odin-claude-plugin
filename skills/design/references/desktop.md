@@ -2,7 +2,7 @@
 
 Surface reference for native desktop apps that are not built on Electron. Covers Tauri 2.x (web frontend + Rust backend), Slint 1.17 (declarative `.slint` markup), egui (immediate-mode), and Iced (Elm-inspired reactive). Companion to `references/paradigms.md` for paradigm fit and `references/anti-slop.md` for cross-platform color slop tells.
 
-**Grounded: 2026-08-26.** Re-verify versions and capability tables before relying on them in production.
+**Grounded: 2026-08-31.** Re-verify versions and capability tables before relying on them in production.
 
 ## 1. Posture
 

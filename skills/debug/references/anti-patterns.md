@@ -12,7 +12,7 @@ A prediction tests whether the understanding of the bug is correct, not just whe
 > Hypothesis: The null pointer is because `user` is not initialized.
 > Prediction: `user` will be null when I log it.
 
-This re-describes the symptom. It cannot be wrong if the hypothesis is right, so it cannot catch a wrong hypothesis.
+This restates the symptom, so confirming it adds no independent evidence and cannot expose a wrong hypothesis.
 
 **Good prediction (tests something non-obvious):**
 > Hypothesis: The null pointer is because the auth middleware skips initialization on cached requests.
@@ -28,11 +28,11 @@ This tests a different code path and a different observable. If the prediction i
 
 Changing multiple things at once to "see if it helps."
 
-**How it feels:** Productive. Changes are being made, tests are running, progress is happening.
+**How it feels:** Productive because changes are being made and tests are running.
 
-**What actually happens:** If the bug goes away, which change fixed it is unknown. If it persists, which changes are relevant is unknown. Variables were introduced instead of eliminated.
+**What actually happens:** If the bug goes away, you do not know which change fixed it. If it persists, you do not know which changes matter. The attempt introduced variables instead of eliminating them.
 
-**The fix:** One hypothesis, one change, one test. If the first change does not fix it, revert it before trying the next. Changes should be additive to understanding, not cumulative to the codebase.
+**The fix:** Use one hypothesis, one change, and one test. If the first change does not fix the bug, revert it before trying the next. Each change should add to your understanding, not accumulate in the codebase.
 
 ---
 

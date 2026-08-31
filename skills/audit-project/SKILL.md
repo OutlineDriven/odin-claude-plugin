@@ -1,6 +1,6 @@
 ---
 name: audit-project
-description: 'Use when asked to run an iterative multi-agent code audit when the user says "audit this code", "find all the bugs", "deep code audit", or "review until clean"; resolve every critical and high finding to zero or stop at a user decision gate or iteration cap. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to run an iterative multi-agent audit when the user says "audit this code", "find all the bugs", or "review until clean". Resolves every critical and high finding to zero or stops at a gate or cap. Don''t use for remote, credential, or irreversible changes.'
 ---
 
 # Audit project

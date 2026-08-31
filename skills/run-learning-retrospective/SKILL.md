@@ -1,6 +1,6 @@
 ---
 name: run-learning-retrospective
-description: 'Use when asked to review learning progress after a milestone. Produce a retrospective with an adjusted plan and a measurable next milestone. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when asked to review learning progress after a milestone. Produces a retrospective with an adjusted plan and a measurable next milestone. Not for an engineering retrospective — use retrospective; for an agent-environment retrospective — use retro.'
 ---
 
 # Run learning retrospective

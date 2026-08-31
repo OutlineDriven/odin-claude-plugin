@@ -1,6 +1,6 @@
 ---
 name: cycle-memo
-description: 'Use when work follows a build, QA pass, demo, user complaint, or abandoned attempt when the useful output is what the next pass must learn rather than the code itself, extract durable lessons into a local memo and next-cycle plan so a fresh agent can avoid the same failure without reading the old session. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use after a build, QA pass, demo, complaint, or abandoned attempt when the next pass needs lessons rather than code. Writes an evidence-backed local memo and next-cycle plan so a fresh agent can preserve working assets, reject failed patterns, and test the right gates first.'
 ---
 
 # Cycle memo
@@ -22,15 +22,15 @@ Optional but cited when present: QA evidence, user complaints, screenshots, tran
 
 ## Procedure
 
-1. Bound scope before mutation: extract lessons, not a changelog. File lists and effort summaries are not lessons. Do not defend the artifact; if it missed the product, say what missed.
-2. Gather cycle inputs: the original objective, the final artifact, QA evidence, user complaints, and any local planning notes. If the objective or final artifact is unavailable, stop and report blocked.
-3. Separate working assets from misleading progress. List contracts, schemas, tests, services, vocabulary, and examples that earned reuse; set aside UI, panels, scaffolds, or abstractions that only looked productive. Preserve negative corpus: failed paths are training data, not deletions.
-4. Generalize before recording. When feedback arrives as many specific complaints, cluster them upward into the shared root gap before writing anything. Record the root and its pattern family as the lesson; keep the specifics under it as evidence, not as lessons. A lesson that only fixes the reported case keeps the system human-in-the-loop: the same class returns anywhere a person did not point. Escalate every specific to the pattern that catches its whole class; the reporter's exact words are evidence, not the gate.
-5. Name each failure as an anti-pattern naming a concrete failure mode, not a mood.
-6. Convert repeated or high-impact failures into quality gates for the next pass. Prefer hard gates over advice.
-7. Convert vague user direction into architecture vocabulary a fresh agent can use.
-8. Write or refresh local docs for the cycle: a memo for lessons and a plan for next-cycle contracts, gates, and vocabulary. Cite evidence from the cycle for every lesson: objective, file facts, QA output, screenshots, transcripts, diffs, or user feedback. Keep provenance local; shipped artifacts must not describe their development history. If the next agent cannot act on a lesson, it is not a lesson yet.
-9. Verify a from-scratch agent could avoid the same failure from those docs alone: every lesson traces to observed cycle evidence; every anti-pattern names a concrete failure mode and the gate that catches it; no lesson is a single reported case in disguise; a fresh agent can tell what to preserve, discard, and test first without reading the whole old session.
+1. Bound scope before mutation: extract lessons, not a changelog. File lists and effort summaries are not lessons. Do not defend the artifact; if it missed the product, say what missed. Done when: the scope is bounded to lesson extraction, not changelog or defense.
+2. Gather cycle inputs: the original objective, the final artifact, QA evidence, user complaints, and any local planning notes. If the objective or final artifact is unavailable, stop and report blocked. Done when: the objective and final artifact are gathered, or the run stops blocked.
+3. Separate working assets from misleading progress. List contracts, schemas, tests, services, vocabulary, and examples that earned reuse; set aside UI, panels, scaffolds, or abstractions that only looked productive. Preserve negative corpus: failed paths are training data, not deletions. Done when: working assets and misleading progress are separated, with failed paths preserved as negative corpus.
+4. Generalize before recording. When feedback arrives as many specific complaints, cluster them upward into the shared root gap before writing anything. Record the root and its pattern family as the lesson; keep the specifics under it as evidence, not as lessons. A lesson that only fixes the reported case keeps the system human-in-the-loop: the same class returns anywhere a person did not point. Escalate every specific to the pattern that catches its whole class; the reporter's exact words are evidence, not the gate. Done when: every specific complaint is escalated to its pattern-level lesson with specifics kept as evidence.
+5. Name each failure as an anti-pattern naming a concrete failure mode, not a mood. Done when: every failure is named as a concrete failure mode, not a mood.
+6. Convert repeated or high-impact failures into quality gates for the next pass. Prefer hard gates over advice. Done when: repeated or high-impact failures have hard gates, not advice.
+7. Convert vague user direction into architecture vocabulary a fresh agent can use. Done when: vague direction is converted to architecture vocabulary.
+8. Write or refresh local docs for the cycle: a memo for lessons and a plan for next-cycle contracts, gates, and vocabulary. Cite evidence from the cycle for every lesson: objective, file facts, QA output, screenshots, transcripts, diffs, or user feedback. Keep provenance local; shipped artifacts must not describe their development history. If the next agent cannot act on a lesson, it is not a lesson yet. Done when: the memo and next-cycle plan are written with every lesson citing cycle evidence.
+9. Verify a from-scratch agent could avoid the same failure from those docs alone: every lesson traces to observed cycle evidence; every anti-pattern names a concrete failure mode and the gate that catches it; no lesson is a single reported case in disguise; a fresh agent can tell what to preserve, discard, and test first without reading the whole old session. Done when: a from-scratch agent could avoid the same failure from the docs alone.
 
 ## Failure and recovery
 - Missing evidence: if the objective or final artifact is unavailable, stop and report blocked. Do not fabricate lessons.

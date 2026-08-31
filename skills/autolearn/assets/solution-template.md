@@ -1,6 +1,6 @@
 # Solution doc templates
 
-Pick the template matching the `problem_type` track (see the solution-schema section in `../SKILL.md`). Fill every bracket; delete sections that have no real content rather than leaving a placeholder.
+Pick the template for the `problem_type` track (see the solution-schema section in `../SKILL.md`). Replace every bracketed placeholder. Delete sections with no real content instead of leaving placeholders.
 
 ---
 

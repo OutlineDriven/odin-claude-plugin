@@ -1,3 +1,3 @@
 interface:
   display_name: "Django Perf Review"
-  short_description: "Validate Django ORM and queryset performance issues."
+  short_description: "Use when reviewing Django performance, N+1 queries, or queryset"

@@ -1,6 +1,6 @@
 ---
 name: property-test-authoring
-description: 'Use when the user asks to add or improve property tests for an inverse, invariant, oracle, idempotence rule, parser, normalizer, algorithm, data structure, or smart-contract state machine. Encode the strongest grounded property with domain-aware generators and pinned edge cases so the test run passes while a plausible contract violation would fail it. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when adding or improving property tests for invariants, oracles, parsers, algorithms, data structures, or smart-contract state machines. Encodes the strongest grounded property with domain-aware generators and pinned edge cases. Not for review — use property-test-review.'
 ---
 
 # Property test authoring
@@ -10,8 +10,8 @@ description: 'Use when the user asks to add or improve property tests for an inv
 | Field | Bound contract |
 |---|---|
 | Trigger | The user asks to add or improve generated property tests for an inverse, invariant, oracle, idempotence rule, parser, normalizer, algorithm, data structure, or smart-contract state machine. |
-| Authority | Reversible-local: write property tests to local files tracked by version control. Rollback via `git revert` or `git checkout` of the test file. |
-| Side effect | Write property tests in the existing framework and, only with user approval, add a new testing dependency or production-code seam. |
+| Authority | Reversible-local: write property tests to local files tracked by version control. Roll back with `git revert` or `git checkout` of the test file. |
+| Side effect | Write property tests in the existing framework. Add a new testing dependency or production-code seam only with user approval. |
 | Done | The strongest grounded property is encoded with domain-aware generators and pinned edge cases, avoids tautology and vacuity, and the targeted test run passes while a plausible contract violation would fail it. |
 
 ## Inputs
@@ -24,9 +24,9 @@ description: 'Use when the user asks to add or improve property tests for an inv
 
 ## Procedure
 
-1. **Examine the target code** for an algebraic shape. Check whether the shape is missing or merely buried — a calculation wrapped in I/O, a string built by concatenation, an in-place mutation may have a property but no seam to assert it through. If the shape is buried, identify the refactoring that exposes it and propose it to the user before proceeding.
+1. **Examine the target code** for an algebraic shape. Check whether the shape is missing or merely buried. A calculation wrapped in I/O, a string built by concatenation, or an in-place mutation may have a property but no seam through which to assert it. If the shape is buried, identify the refactoring that exposes it and propose it to the user before proceeding. Done when: the stated outcome holds.
 
-2. **Determine which property applies.** Use the property catalog and strength ordering:
+2. **Determine which property applies.** Use the property catalog and strength ordering: Done when: the stated outcome holds.
 
    | Property | Formula | Where it applies |
    |---|---|---|
@@ -44,28 +44,29 @@ description: 'Use when the user asks to add or improve property tests for an inv
 
    Assert the strongest property the code supports. If "no crash" is all that can be found, explore whether a small rearrangement exposes something stronger before settling.
 
-3. **Design the generator.** Put constraints in the strategy, not in `assume()`. `assume()` discards inputs after generation, so a filter that rejects most candidates wastes the budget and trips the exhausted-filter guard. Build compound inputs with the framework's composition primitives (e.g. `st.builds`, `st.composite`, `.flatmap`) rather than generating independently and filtering. Reserve `assume()` for conditions that genuinely cannot be expressed as a generator — a relationship between two already-generated values.
+3. **Design the generator.** Put constraints in the strategy, not in `assume()`. `assume()` discards inputs after generation, so a filter that rejects most candidates wastes the budget and trips the exhausted-filter guard. Build compound inputs with the framework's composition primitives (e.g. `st.builds`, `st.composite`, `.flatmap`) rather than generating independently and filtering. Reserve `assume()` for conditions that genuinely cannot be expressed as a generator — a relationship between two already-generated values. Done when: the stated outcome holds.
 
-4. **Pin the edge cases** the domain already reveals. Empty, single-element, all-duplicates, zero, negative, and the maximum representable value recur across domains. Use the framework's example-pin mechanism (e.g. `@example`) so these run on every execution and document that the boundary was considered.
+4. **Pin the edge cases** the domain already reveals. Empty, single-element, all-duplicates, zero, negative, and the maximum representable value recur across domains. Use the framework's example-pin mechanism (e.g. `@example`) so these run on every execution and document that the boundary was considered. Done when: the stated outcome holds.
 
-5. **Configure settings** for the execution context:
+5. **Configure settings** for the execution context: Done when: the stated outcome holds.
    - Local iteration: `max_examples=10`.
    - CI: `max_examples=200`.
    - Nightly: `max_examples=1000, deadline=None`.
    - Always set `deadline=None` for anything doing real work. The default deadline turns a slow machine into a failing test, and that flake gets the suite deleted.
 
-6. **Assert determinism** where it is not obvious. `f(x) == f(x)` is a tautology for a pure function and a real test for serializers over dicts or sets, hashing, iteration order, or time-dependent code. Assert it where a broken implementation could falsify it.
+6. **Assert determinism** where it is not obvious. `f(x) == f(x)` is a tautology for a pure function and a real test for serializers over dicts or sets, hashing, iteration order, or time-dependent code. Assert it where a broken implementation could falsify it. Done when: the stated outcome holds.
 
-7. **Test the error path.** For decoders and parsers, the contract is usually "raises the documented exception or succeeds, never an unexpected exception, never hangs." Catch only the documented exception and let everything else fail the test.
+7. **Test the error path.** For decoders and parsers, the contract is usually "raises the documented exception or succeeds, never an unexpected exception, never hangs." Catch only the documented exception and let everything else fail the test. Done when: the stated outcome holds.
 
-8. **Verify the test** by running it against the target. Confirm it passes. Then confirm a plausible contract violation would fail it — if the test passes regardless of implementation correctness, it is tautological or vacuous and must be strengthened.
+8. **Verify the test** by running it against the target. Confirm it passes. Then confirm a plausible contract violation would fail it — if the test passes regardless of implementation correctness, it is tautological or vacuous and must be strengthened. Done when: the stated outcome holds.
 
-9. **Guard against tautology and vacuity:**
+9. **Guard against tautology and vacuity:** Done when: the stated outcome holds.
    - *Tautology*: `assert add(a, b) == a + b` restates the implementation. Pick a property that constrains the function without recomputing it. Exception: `f(x) == f(x)` is a genuine determinism property when `f` is not obviously pure.
    - *Vacuity*: `assume()` that filters out nearly every input passes without exercising anything. Self-contradictory `assume()` passes having run zero cases. Push constraints into the strategy.
 
 ## Failure and recovery
-- **No algebraic shape**: report honestly that the code is a poor property-test candidate and recommend example tests. Do not force a weak property.
+
+- **No algebraic shape**: report that the code is a poor property-test candidate and recommend example tests. Do not force a weak property.
 - **Generator cannot produce valid inputs**: move constraints into the strategy; if the framework still cannot express the domain, report the limitation with the specific constraint that blocks generation.
 - **Tautological or vacuous test**: strengthen the property or fix the generator before declaring done. Never ship a test that cannot fail on a real bug.
 - **User rejects new dependency**: work within the existing framework or report what is possible without it. Do not add a dependency without explicit approval.

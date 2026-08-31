@@ -1,6 +1,6 @@
 ---
 name: do-it-now
-description: 'Use when asked to ship the whole ask in one pass when work would otherwise be split into phases, staged rollouts, follow-up PRs, or TODO-later remainders, or when the user says ship it now, no phases, or do it now. Every in-scope path is implemented in one change with no stub, placeholder, or deferred remainder. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user says ship it now, no phases, or do it now, or when in-scope work would otherwise be deferred to phases, rollouts, follow-up PRs, or TODOs. Implements every in-scope path in one change. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Do it now
@@ -21,12 +21,11 @@ description: 'Use when asked to ship the whole ask in one pass when work would o
 
 ## Procedure
 
-1. Execute the whole ask in one pass. No phase 1 and phase 2, no staged rollout, and no follow-up PR for work already in scope.
-2. Finish every opened path. Write the real implementation instead of leaving a TODO, stub, placeholder, or raised NotImplemented.
-3. When a phased skill or plan is in play, collapse it to one pass: run its steps back to back in this change and ship the result. While this posture is active it takes precedence over phase-based execution.
-4. When the ask genuinely exceeds one pass, cut scope instead of deferring it. Name what was cut and why; never hand back a remainder.
-5. Report only what shipped. Done names the code that is in the tree right now.
-
+1. Execute the whole ask in one pass. No phase 1 and phase 2, no staged rollout, and no follow-up PR for work already in scope. **Done when:** the whole ask is executed in one pass.
+2. Finish every opened path. Write the real implementation instead of leaving a TODO, stub, placeholder, or raised NotImplemented. **Done when:** every opened path has a real implementation.
+3. When a phased skill or plan is in play, collapse it to one pass: run its steps back to back in this change and ship the result. While this posture is active it takes precedence over phase-based execution. **Done when:** any phased plan is collapsed into this change.
+4. When the ask genuinely exceeds one pass, cut scope instead of deferring it. Name what was cut and why; never hand back a remainder. **Done when:** scope that cannot fit is cut and named rather than deferred.
+5. Report only what shipped. Done names the code that is in the tree right now. **Done when:** the report names only code present in the tree.
 ## Failure and recovery
 - Unshipped remainder: a TODO, stub, placeholder, NotImplemented, or phase-2/later/follow-up label is unshipped work. Recover by writing the real implementation; if that is genuinely impossible in one pass, cut scope out loud in one line rather than carry pending work.
 - Scope exceeds one pass: cut scope, name what was cut and why in one line, and ship the reduced scope. Never return a deferred remainder or pretend the done predicate holds.

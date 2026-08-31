@@ -1,7 +1,7 @@
 # Optimize run state: append-only log and crash recovery
 
-Run state lives on disk, not in context. The one run-state file is
-`.outline/optimize/<target>/log.jsonl` is one JSON object per line, **append-only**: a record is
+Run state lives on disk, not in context. The single run-state file,
+`.outline/optimize/<target>/log.jsonl`, is one JSON object per line, **append-only**: a record is
 written the moment its fact is known and never rewritten. It sits beside the `agent-*` worktree
 dirs but is not matched by the Phase 7 cleanup glob (`…/agent-*`), so it survives the run.
 

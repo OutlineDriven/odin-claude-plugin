@@ -1,6 +1,6 @@
 ---
 name: typing-exclusion-worker
-description: 'Use when the user asks to remove modules from pyproject mypy exclusions or to run a typing-debt worker batch; removes only the assigned modules from the mypy exclusion override, fixes the surfaced typing issues in scope, and returns a batch summary backed by passing targeted mypy, targeted tests, and pre-commit. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when removing modules from pyproject mypy exclusions or running a typing-debt worker batch. Fixes surfaced typing issues in scope and returns a batch summary backed by passing targeted mypy, tests, and pre-commit. Not for cross-team or out-of-scope typing work.'
 ---
 
 # Typing exclusion worker
@@ -28,15 +28,15 @@ If any required input is missing or ambiguous, ask before editing.
 
 ## Procedure
 
-1. Bound the batch before mutation: record `git status --porcelain` as the baseline, confirm `mypy`, `pre-commit`, and `pytest` run in this repo, and confirm every assigned module name appears in the mypy exclusion override in `pyproject.toml`. An assigned module that is not excluded, or a missing tool, stops the batch before any edit.
-2. Remove only the assigned module entries from the mypy exclusion override in `pyproject.toml`; leave every other entry byte-identical.
-3. Run mypy on the assigned scope, targeted paths first. Fix each surfaced error with explicit typing in scope: `isinstance` narrowing before attribute access on unions, accurate return types, typed class attributes, signature-compatible method overrides, and relation-aware attribute access where stubs omit raw id fields. Never add a blanket `# type: ignore`; when a narrow ignore is unavoidable, write `# type: ignore[code]` with a one-line reason and record it for the summary.
-4. Run targeted pytest over the modules touched in step 3 and fix regressions in scope.
-5. Run `pre-commit run --files <changed files>`; if hooks auto-fix files, rerun until clean.
-6. After the final edit, re-run the targeted mypy and pytest commands, then diff `git status --porcelain` against the baseline to prove no unrelated file changed.
-7. Emit the batch summary in the exact structure under Output.
+1. Before editing, record `git status --porcelain` as the baseline. Confirm that `mypy`, `pre-commit`, and `pytest` run in this repo and that every assigned module name appears in the mypy exclusion override in `pyproject.toml`. **Done when:** the baseline is recorded and every assigned module is confirmed excluded.
+2. Remove only the assigned module entries from the mypy exclusion override in `pyproject.toml`; leave every other entry byte-identical. **Done when:** only the assigned entries are removed and all other entries are unchanged.
+3. Run mypy on the assigned scope, targeted paths first. Fix each surfaced error with explicit typing in scope: `isinstance` narrowing before attribute access on unions, accurate return types, typed class attributes, signature-compatible method overrides, and relation-aware attribute access where stubs omit raw id fields. Never add a blanket `# type: ignore`; when a narrow ignore is unavoidable, write `# type: ignore[code]` with a one-line reason and record it for the summary. **Done when:** targeted mypy passes on the assigned scope.
+4. Run targeted pytest over the modules touched in step 3 and fix regressions in scope. **Done when:** targeted pytest passes on the touched modules.
+5. Run `pre-commit run --files <changed files>`; if hooks auto-fix files, rerun until clean. **Done when:** pre-commit passes clean on changed files.
+6. After the final edit, re-run the targeted mypy and pytest commands, then diff `git status --porcelain` against the baseline to prove no unrelated file changed. **Done when:** targeted mypy and pytest pass and the diff shows no unrelated changes.
+7. Emit the batch summary in the exact structure under Output. **Done when:** the summary is emitted with every field filled from measured results.
 
-Stop and report instead of widening scope when a fix requires touching another team or domain, when the exclusion entries cannot be removed without an unresolvable conflict in `pyproject.toml`, or when the error volume shows the batch is too large and should be split.
+Stop and report rather than widening scope if a fix requires changes in another team or domain, the exclusion entries conflict irreconcilably in `pyproject.toml`, or the error volume makes the batch too large and calls for a split.
 
 ## Failure and recovery
 - Required input missing or unresolvably ambiguous after asking: no mutation; return blocked naming the input.
@@ -45,40 +45,10 @@ Stop and report instead of widening scope when a fix requires touching another t
 - Checks still fail after in-scope fixes are exhausted, or a fix needs out-of-scope edits: run `git restore -- <batch-touched files>` to return the worktree to the baseline, then return blocked with the failing check output and the files that need wider authority.
 - Pre-commit loop: if a hook modifies files on three consecutive runs, restore the files that hook touched from the baseline and return blocked naming the hook.
 
-Partial-result rule: the batch is either complete per the Done contract or fully reverted to the baseline; a worktree with some assigned modules unexcluded but checks failing is never reported as done. Proposing a smaller batch for the remainder belongs in the blocked reason; it is never executed without a new assigned module list.
+Partial-result rule: the batch is either complete per the Done contract or fully reverted to the baseline. Never report a worktree as done when some assigned modules remain excluded or checks fail. A smaller batch for the remainder may appear in the blocked reason, but must not run without a new assigned module list.
 
 ## Output
-Return exactly this structure, filling every field from measured results:
-
-```markdown
-### Batch summary
-
-- Branch/worktree: `<name>`
-- Ownership/domain: `<team-or-domain>`
-
-### Modules removed from exclusion
-
-- `<module.path>`
-
-### Files changed
-
-- `<path>`
-
-### Key typing fixes
-
-- `<short rationale + fix>`
-
-### Validation
-
-- `mypy`: `<pass/fail + scope>`
-- `pre-commit --files`: `<pass/fail>`
-- `pytest`: `<pass/fail + scope>`
-
-### Notes
-
-- Remaining blockers: `<none or details>`
-- New ignore entries: `<none or file + ignore code + reason>`
-```
+A batch summary with sections in order: branch/worktree and ownership, modules removed from exclusion, files changed, key typing fixes, validation (mypy, pre-commit, pytest pass/fail with scope), and notes (remaining blockers, new ignore entries).
 
 Terminal classification: `complete` when the Done contract holds; otherwise `blocked` with the named failure class and the recovery taken. Both carry the batch summary; a blocked result never claims passing checks.
 

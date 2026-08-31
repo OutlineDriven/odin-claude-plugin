@@ -1,6 +1,6 @@
 ---
 name: load-bearing-assumption-test
-description: 'Use when the user says "explain why this is wrong", or "poke holes in this". Returns one load-bearing objection that could kill the plan, plus the cheapest experiment that would prove whether it matters. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when the user asks why a plan is wrong or says "poke holes in this". Returns one load-bearing objection and the cheapest experiment that would prove whether it matters. Don''t use for tasks that require source or remote-system changes.'
 ---
 
 # Load-bearing assumption test
@@ -20,11 +20,11 @@ The plan, design, or claim under attack, supplied by the user in the conversatio
 
 ## Procedure
 
-1. Pin the load-bearing assumption: identify the single thing that must hold for the whole plan to stand.
-2. Attack on whatever axes apply: a fact that may be false, confabulation, analogy mistaken for isomorphism, a future-tense suture, or the sharpest one, a principle cited but its opposite implemented. For empirical plans, also leakage and statistical power or family-wise error.
-3. Collapse to one root: the single objection whose failure makes the rest moot. Not a list.
-4. Find the first nail: the cheapest falsification available before the expensive program runs.
-5. Return { root, first_nail }. Nothing else.
+1. Pin the load-bearing assumption: identify the single thing that must hold for the whole plan to stand. Done when: one assumption is named whose failure collapses the plan.
+2. Attack on whatever axes apply: a fact that may be false, confabulation, analogy mistaken for isomorphism, a future-tense suture, or the sharpest one, a principle cited but its opposite implemented. For empirical plans, also leakage and statistical power or family-wise error. Done when: every applicable axis has been tested against the pinned assumption.
+3. Collapse to one root: the single objection whose failure makes the rest moot. Not a list. Done when: one root objection is selected, not a register of objections.
+4. Find the first nail: the cheapest falsification available before the expensive program runs. Done when: one experiment is named that is cheaper than the plan and would prove whether root matters, or null is returned when no such experiment exists.
+5. Return { root, first_nail }. Nothing else. Done when: the pair is returned and no additional objections or scaffolding are appended.
 
 ## Failure and recovery
 - No load-bearing assumption found: state that the plan has no single point of failure and return the sharpest objection found, labeled as non-root. Do not fabricate a root.
@@ -33,7 +33,8 @@ The plan, design, or claim under attack, supplied by the user in the conversatio
 - Never swallow the absence of a root by pretending the done predicate holds.
 
 ## Output
-A single { root, first_nail } pair in chat. root is one load-bearing objection whose failure makes the rest moot. first_nail is the cheapest experiment that would prove whether root matters, or null when no falsification is cheaper than the plan.
+
+A single { root, first_nail } pair in chat: root is one load-bearing objection whose failure makes the rest moot; first_nail is the cheapest experiment that would prove whether root matters, or null when no falsification is cheaper than the plan.
 
 ## Provenance
 

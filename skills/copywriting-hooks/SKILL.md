@@ -1,6 +1,6 @@
 ---
 name: copywriting-hooks
-description: 'Use when a user asks for a hook, lede, or accroche for long-form content. Proposes 3-4 hooks from an 18-hook catalog with a type-fit table and anti-pattern cull, presents numbered A/B candidates, and records the chosen hook plus what it commits the opening to. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when a user asks for a hook, lede, or accroche for long-form content. Not for CTA design — use copywriting-cta; not for general copywriting — use copywriting.'
 ---
 
 # Copywriting hooks
@@ -21,7 +21,7 @@ description: 'Use when a user asks for a hook, lede, or accroche for long-form c
 
 ## Procedure
 
-A hook's only job is to make the reader want sentence 2. What makes a reader want sentence 2 is one of five levers, and a strong hook usually pulls two at once:
+A hook's only job is to make the reader want sentence 2. It does that through one of five levers, and a strong hook usually pulls two at once:
 
 1. **Open a gap** — pose something incomplete the reader needs to close (curiosity gap, question, open loop).
 2. **Break a prediction** — state something that violates the reader's prior (contrarian, definition reversal, surprising statistic).
@@ -29,16 +29,17 @@ A hook's only job is to make the reader want sentence 2. What makes a reader wan
 4. **Promise a payoff** — name an outcome the reader wants (benefit, conditional, direct problem).
 5. **Borrow weight** — lean on a name, number, or quote that carries embedded authority (authority hook, statistic, quote with disagreement).
 
-1. Confirm the brief (see Inputs). Ask before generating if a material field is missing.
-2. Pick 3 to 4 hooks from the 18-hook catalog below that are genuinely different — different levers, not three flavors of the same technique.
-3. Write 2 candidates per hook, specific to the user's article. The two candidates within one hook explore different angles (different anecdote, statistic, or scene), not rewordings of each other.
+1. Confirm the brief (see Inputs). Ask before generating if a material field is missing. Done when: the brief is confirmed or missing material fields are requested.
+2. Pick 3 to 4 hooks from the 18-hook catalog below that are genuinely different — different levers, not three flavors of the same technique. Done when: 3-4 genuinely different hooks are selected from the catalog, each pulling a different lever.
+3. Write 2 candidates per hook, specific to the user's article. The two candidates within one hook explore different angles (different anecdote, statistic, or scene), not rewordings of each other. Done when: 2 candidates per hook are written, each exploring a different angle.
 4. Apply the quality gates to every candidate:
    - Specific beats abstract: replace "many companies" with "Stripe, Shopify, Vercel"; replace "recently" with a date; replace "studies show" with the actual finding or cut the claim.
    - The first sentence must force the second: read each candidate cold; if sentence 2 would not be clicked after sentence 1, rewrite.
    - Match technique to article type using the type-fit table.
-5. Run every candidate through the anti-pattern cull. If a candidate matches any entry, rewrite it before presenting.
-6. Present using the Output format, ask the user through the question tool, and wait. Do not pick for them.
-7. After the pick, name what the choice commits the rest of the article to. A contrarian hook commits paragraphs 2-3 to defending the non-consensus claim. A scene opener commits the next section to resolving or productively delaying the scene.
+   Done when: every candidate passes the quality gates (specific detail, first-sentence-forces-second, type-fit).
+5. Run every candidate through the anti-pattern cull. If a candidate matches any entry, rewrite it before presenting. Done when: every candidate passes the anti-pattern cull or is rewritten.
+6. Present using the Output format, ask the user through the question tool, and wait. Do not pick for them. Done when: options are presented in the Output format and the user is asked to pick.
+7. After the pick, name what the choice commits the rest of the article to. A contrarian hook commits paragraphs 2-3 to defending the non-consensus claim. A scene opener commits the next section to resolving or productively delaying the scene. Done when: the chosen hook's opening commitments are named in one sentence.
 
 **Diversification rule.** Across the 3 to 4 options include at minimum one intellectual hook (contrarian, definition reversal, historical analogy, curiosity gap), one sensory hook (in medias res, concrete detail), and one reader-direct hook (conditional, direct problem, promise). Three flavors of contrarian is not a choice.
 
@@ -55,11 +56,11 @@ A hook's only job is to make the reader want sentence 2. What makes a reader wan
 | Longform analysis | historical analogy, statistic, contrarian | direct problem |
 | Newsletter issue | personal confession + open loop, conditional, curiosity gap | dictionary opener |
 
-**The 18-hook catalog.** Each hook: what it does, one example (EN or FR), when to use, when to avoid.
+**The 18-hook catalog.** Each entry explains what the hook does, gives one example (EN or FR), and states when to use or avoid it.
 
 1. **Curiosity Gap** — open an information gap the reader wants closed. EN: "How does Shen Yun make any money? Short answer: they don't." Use when the gap can honestly be closed in 2-3 sentences and the reader cares about it. Avoid vague gaps ("You won't believe what happened next") the reader cannot even guess at.
 2. **Contrarian** — knock down a consensus belief the reader holds. EN: "Prevailing wisdom claims the best way to achieve what we want in life is to set specific, actionable goals." Use when a defensible non-consensus view exists and 200-400 words are available to defend it. Avoid strawmen and contrarianism for its own sake.
-3. **Bold Claim / Promise** — state the outcome upfront, before the proof. EN: "At 60 miles an hour the loudest noise in this new Rolls-Royce comes from the electric clock." Use when the promise can be delivered concretely. Avoid promises larger than the payoff; it destroys trust permanently.
+3. **Bold Claim / Promise** — state the outcome upfront, before the proof. EN: "At 60 miles an hour the loudest noise in this new Rolls-Royce comes from the electric clock." Use when the promise can be delivered concretely. Avoid promises larger than the payoff; they destroy trust permanently.
 4. **Scene Opener / In Medias Res** — drop the reader inside a specific moment, no setup. EN: "Frank Sinatra, holding a glass of bourbon in one hand and a cigarette in the other, stood in a dark corner of the bar between two attractive but fading blondes who sat waiting for him to say something." Use for longform, profile, reported piece, essay. Avoid short technical pieces where the reader has not earned the scene.
 5. **Surprising Statistic** — lead with a number that violates the prior. EN: "You have five seconds to get people's attention." Use when the number is genuinely surprising and citable accurately. Avoid vague stats ("studies show 90%...") and stats that confirm the reader's prior.
 6. **Question** — pose a question the reader actually wants answered. EN: "If you collected lists of techniques for doing great work in a lot of different fields, what would the intersection look like?" Use when the reader was implicitly carrying the question. Avoid "Have you ever wondered...?", "Did you know...?", "What if I told you...?" — they presuppose curiosity not yet formed.
@@ -106,29 +107,7 @@ A hook's only job is to make the reader want sentence 2. What makes a reader wan
 - Non-mutation rule: nothing is written to disk or any external system; recovery is always regenerate-in-conversation.
 
 ## Output
-Present options exactly in this format:
-
-```
-### Hook options for: [working title]
-
-**Option 1: [Hook name]** ([lever])
-A. [Candidate 1]
-B. [Candidate 2]
-
-**Option 2: [Hook name]** ([lever])
-A. [Candidate 1]
-B. [Candidate 2]
-
-**Option 3: [Hook name]** ([lever])
-A. [Candidate 1]
-B. [Candidate 2]
-
-Which? Reply with letter combination (e.g., "1B") or "more" for different techniques.
-```
-
-If the user supplied an existing draft, it appears as Option 0 and 3 alternatives follow.
-
-After the user picks, return the chosen hook plus one sentence naming what it commits the opening to (e.g., "1B commits paragraphs 2-3 to defending the claim that generics should be deleted"). Do not write the rest of the article until the user has chosen.
+Return, in order: working title; 3-4 numbered hook types with two A/B candidates each; the user’s selection prompt; after selection, the chosen hook and one sentence naming what it commits the opening to.
 
 ## Provenance
 

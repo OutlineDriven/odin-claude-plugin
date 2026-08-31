@@ -1,6 +1,6 @@
 # Orchestration patterns
 
-Catalog of subagent orchestration patterns worth endorsing, plus the anti-patterns that shadow them. Read it before wiring a command that coordinates multiple subagent roles, or before introducing a role that "wraps" existing ones.
+This catalog lists endorsed subagent orchestration patterns and the anti-patterns that accompany them. Read it before wiring a command that coordinates multiple subagent roles or introducing a role that "wraps" existing ones.
 
 Governing rule: **the user (or a command) is the orchestrator. Subagents do not invoke other subagents.** Skills are mandatory hops inside a single subagent's workflow, not a hand-off to another agent.
 
@@ -165,7 +165,7 @@ Parallel fan-out (Pattern 3) generally requires issuing **multiple subagent call
 
 ## Worked example: agent teams for competing-hypothesis debugging
 
-This shows when to reach for **agent teams** instead of a subagent fan-out. The two look similar (both spawn the same handful of roles), but the value comes from a different place.
+This example shows when to choose **agent teams** over a subagent fan-out. Both spawn the same roles, but they solve different problems.
 
 ### The scenario
 
@@ -236,7 +236,7 @@ When the investigation lands on a root cause, tell the lead to clean up the team
 
 ### Cost expectation
 
-Three teammates running for ~10–15 minutes of investigation costs noticeably more than the same three roles spawned as a subagent fan-out. The justification is *quality of conclusion*: for production debugging where the wrong fix is expensive, the extra tokens are a bargain. For a routine PR review, stick with the fan-out.
+Three teammates running for ~10–15 minutes of investigation cost noticeably more than the same three roles spawned as a subagent fan-out. Use that extra cost only when reaching the wrong conclusion would be expensive, as in production debugging. For a routine PR review, stick with the fan-out.
 
 ### Anti-pattern in this scenario
 

@@ -1,6 +1,6 @@
 ---
 name: scaffold-cli
-description: 'Use when asked to create a complete Node.js 24 TypeScript 7 command-line project with ESM, pnpm 11, tsdown, Biome, Vitest, Changesets, a locked CI workflow, and one observable command test. The generated CLI builds, checks, tests, and runs from its local executable. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to create a complete Node.js 24 TypeScript 7 command-line project with ESM, pnpm 11, tsdown, Biome, Vitest, Changesets, a locked CI workflow, and one observable command test. Not for a Next.js app scaffold — use scaffold-nextjs.'
 ---
 
 # Scaffold CLI

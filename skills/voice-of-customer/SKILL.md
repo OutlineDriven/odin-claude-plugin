@@ -1,6 +1,6 @@
 ---
 name: voice-of-customer
-description: 'Synthesize customer call transcripts into a cited VoTC report'
+description: 'Use when the user asks for voice of the customer, VoTC analysis, or customer call insights. Synthesizes Grain call transcripts into a cited report with pain points, competitive mentions, and feature demand. Don''t use for ad-hoc summaries or non-VoTC formats.'
 disable-model-invocation: true
 ---
 
@@ -22,13 +22,13 @@ disable-model-invocation: true
 
 ## Procedure
 
-1. Validate that `GRAIN_API_TOKEN` is set. If missing, halt and report the missing secret to the operator.
-2. Run `fetch_grain_data.py` with the token and date range. The script calls the Grain API, retrieves call transcripts, and writes raw transcript files keyed by `participant_id` and call date.
-3. If the fetch returns zero transcripts, halt and report "No transcripts found for the requested range" without creating an empty report.
-4. Run `analyze_transcripts.py` over the fetched transcripts. The script extracts and categorizes: pain points, competitive mentions, feature demand, and success stories. It attributes every extracted item to a `participant_id` and call date.
-5. Compute week-over-week deltas by comparing the current period against the prior period of equal length.
-6. Assemble the report at `reports/votc_insights/votc_insights_YYYY-MM-DD.md` with sections: Pain Points, Competitive Mentions, Feature Demand, Success Stories, and Week-over-Week Changes. Every item carries a citation to `participant_id` and call date.
-7. Commit the report and open a PR against the default branch.
+1. Validate that `GRAIN_API_TOKEN` is set. Done when: token is confirmed present, or the step has halted and reported the missing secret.
+2. Run `fetch_grain_data.py` with the token and date range. The script calls the Grain API, retrieves call transcripts, and writes raw transcript files keyed by `participant_id` and call date. Done when: raw transcript files are written, or the step has halted on API failure.
+3. If the fetch returns zero transcripts, halt and report "No transcripts found for the requested range" without creating an empty report. Done when: zero-transcript condition is detected and reported.
+4. Run `analyze_transcripts.py` over the fetched transcripts. The script extracts and categorizes pain points, competitive mentions, feature demand, and success stories, attributing every item to a `participant_id` and call date. Done when: analysis output is produced, or the step has halted on analysis failure.
+5. Compute week-over-week deltas by comparing the current period against the prior period of equal length. Done when: deltas are computed.
+6. Assemble the report at `reports/votc_insights/votc_insights_YYYY-MM-DD.md` with sections: Pain Points, Competitive Mentions, Feature Demand, Success Stories, and Week-over-Week Changes. Every item carries a citation to `participant_id` and call date. Done when: report file is written with all five sections.
+7. Commit the report and open a PR against the default branch. Done when: PR is open, or the step has reported the git/PR error and the local report path.
 
 ## Failure and recovery
 | Failure class | Behavior |
@@ -42,14 +42,7 @@ disable-model-invocation: true
 Partial-result rule: never emit a report that omits a required section. If analysis produces data for only some categories, include those with explicit "No data found" entries for the missing categories and note the gap in the report header.
 
 ## Output
-A markdown report at `reports/votc_insights/votc_insights_YYYY-MM-DD.md` containing:
-- Pain Points with participant attribution and call dates
-- Competitive Mentions with participant attribution and call dates
-- Feature Demand with participant attribution and call dates
-- Success Stories with participant attribution and call dates
-- Week-over-Week Changes comparing current and prior periods
-
-The report is committed and delivered as a PR against the default branch.
+A markdown report at `reports/votc_insights/votc_insights_YYYY-MM-DD.md` with sections in order: Pain Points, Competitive Mentions, Feature Demand, Success Stories, Week-over-Week Changes — each item cited to `participant_id` and call date — committed and delivered as a PR.
 
 ## Provenance
 

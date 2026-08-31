@@ -1,6 +1,6 @@
 ---
 name: babysit
-description: 'Use when asked to poll a named changing job, log, or artifact until a supplied completion predicate becomes true. Report whether the predicate holds or the watch ended without convergence. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when asked to poll a named changing job, log, or artifact until a supplied completion predicate holds. Reports whether the predicate holds or the watch ended without convergence. Not for source or remote-system changes.'
 ---
 
 # Babysit
@@ -12,7 +12,7 @@ description: 'Use when asked to poll a named changing job, log, or artifact unti
 | Trigger | User wants to poll a changing job, log, or artifact until a supplied completion predicate becomes true. |
 | Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Local reads of the named changing job, log, or artifact only. |
-| Done | The supplied completion predicate has become true. |
+| Done | The supplied completion predicate has become true (`predicate-holds`), or the declared watch bound (deadline or maximum poll count) is reached without convergence (`non-converged`). |
 
 ## Inputs
 
@@ -23,12 +23,12 @@ description: 'Use when asked to poll a named changing job, log, or artifact unti
 
 ## Procedure
 
-1. Confirm the target is readable and the completion predicate is unambiguous. If either is missing or unclear, stop and report the problem — do not guess.
-2. Read the target surface. Do not write, modify, restart, or trigger anything.
-3. Evaluate the completion predicate against the current observed state.
-4. If the predicate holds, stop and report `predicate-holds` with the final observed state.
-5. If the predicate does not hold, wait the poll interval and repeat from step 2.
-6. Stop and report `non-converged` if any failure class in the next section is reached.
+1. Confirm the target is readable and the completion predicate is unambiguous. If either is missing or unclear, stop and report the problem — do not guess. Done when: the target is confirmed readable and the predicate is unambiguous, or the problem is reported.
+2. Read the target surface. Do not write, modify, restart, or trigger anything. Done when: the current state is observed without mutation.
+3. Evaluate the completion predicate against the current observed state. Done when: the predicate is evaluated to true or false.
+4. If the predicate holds, stop and report `predicate-holds` with the final observed state. Done when: the terminal classification is emitted.
+5. If the predicate does not hold, wait the poll interval and repeat from step 2. Done when: the poll interval has elapsed and the loop re-enters step 2.
+6. Stop and report `non-converged` if any failure class in the next section is reached. Done when: the failure class is named and the terminal classification is emitted.
 
 ## Failure and recovery
 - **Target unreadable or disappeared**: stop. Report the read failure and the last known state. Do not restart or recreate the target.
@@ -38,9 +38,7 @@ description: 'Use when asked to poll a named changing job, log, or artifact unti
 - No partial result is ever reported as success. The done predicate either holds or it does not.
 
 ## Output
-One terminal classification:
-- `predicate-holds` — the completion predicate is true; include the final observed state.
-- `non-converged` — the watch stopped without the predicate holding; include the last observed state, poll count, and the failure class that stopped it.
+One terminal classification: `predicate-holds` (with final observed state) or `non-converged` (with last observed state, poll count, and the failure class that stopped it).
 
 ## Provenance
 

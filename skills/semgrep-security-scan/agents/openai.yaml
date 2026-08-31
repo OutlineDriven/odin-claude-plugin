@@ -1,3 +1,3 @@
 interface:
   display_name: "Semgrep Security Scan"
-  short_description: "Run a Semgrep security scan, merge SARIF findings, and report"
+  short_description: "Use when a user asks for a Semgrep security audit or fast"

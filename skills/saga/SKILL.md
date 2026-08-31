@@ -1,6 +1,6 @@
 ---
 name: saga
-description: 'Use when a user runs saga or asks to autonomously build a sizable feature. The orchestrator produces a spec tree, delegates to worker subagents in isolated worktrees, validates at each milestone, and gates user acceptance before VCS commit. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a user runs saga or asks to autonomously build a sizable feature. Produces a spec tree, delegates to worker subagents in isolated worktrees, validates at each milestone, and gates user acceptance before VCS commit. Not for executing a given plan — use subagent-driven.'
 ---
 
 # Saga
@@ -34,11 +34,11 @@ description: 'Use when a user runs saga or asks to autonomously build a sizable 
    - How the program is launched for manual or interactive verification.
    Record findings in `SAGA.md` under the environment section.
 
-3. **Close ambiguity.** Iterate with the user via `ask_user_question` (with concrete options, recommended_option_index set) until there is no whitespace in behavior, scope boundaries, edge cases, data shapes, error handling, non-goals, and acceptance bar. Batch up to 4 related questions per call.
+3. **Close ambiguity.** Iterate with the user via `ask_user_question` (with concrete options, recommended_option_index set) until behavior, scope boundaries, edge cases, data shapes, error handling, non-goals, and the acceptance bar are unambiguous. Batch up to 4 related questions per call.
 
 4. **Write saga exit criteria.** Before decomposing, define the concrete, checkable conditions that mean the feature is complete and correct. These are the Phase 3 contract.
 
-5. **Decompose into milestones and tasks.** Break work into milestones (ordered by dependency, independently meaningful) and tasks (scoped for one worker in one focused effort). For each task specify: scope, owned files/surfaces, dependencies, and validation criteria plus validation method. Use the templates in the Reference files section below. Write the spec tree: milestone index and exit criteria in `SAGA.md`, milestone detail in `MILESTONE.md`, task detail in each task spec.
+5. **Decompose into milestones and tasks.** Break work into milestones (ordered by dependency, independently meaningful) and tasks (scoped for one worker in one focused effort). For each task, specify its scope, owned files/surfaces, dependencies, validation criteria, and validation method. Use the templates in the Reference files section below. Write the spec tree: milestone index and exit criteria in `SAGA.md`, milestone detail in `MILESTONE.md`, task detail in each task spec.
 
 6. **Get approval.** Present the full spec tree to the user via `ask_user_question`. Do not begin Phase 2 until approved.
 
@@ -247,7 +247,7 @@ Branch naming convention: saga/<saga-name>/m<M>t<T>-<task-slug>>
 ```markdown
 # Validation strategies
 
-Validation is what makes a saga autonomous: if each task's criteria are airtight and checked by an appropriate method, workers can self-verify and the orchestrator can trust their reports.
+Validation makes a saga autonomous. When each task has precise criteria checked by an appropriate method, workers can self-verify and the orchestrator can assess their reports.
 
 ### 1. Discover what validation is feasible
 
@@ -256,7 +256,7 @@ Before defining any criteria (Phase 1), establish:
 - Whether computer use (browser/GUI automation) is available to the orchestrator or to remote workers.
 - The test toolchain: test runner, integration harness, build, lint, typecheck — and confirm the commands actually run.
 - How the program is launched for manual or interactive verification.
-Record these in SAGA.md. Criteria that cannot actually be checked are worthless.
+Record these in SAGA.md. Criteria that cannot be checked cannot serve as validation.
 
 ### 2. Choose a validation method
 
@@ -269,9 +269,9 @@ Priority order:
 
 A task may combine methods. State the method(s) explicitly in the task.
 
-### 3. Write airtight validation criteria
+### 3. Write concrete validation criteria
 
-The bar: when the criteria are satisfied, there should be little-to-no possibility the task was completed incorrectly.
+The bar: when the criteria are satisfied, there should be little or no possibility the task was completed incorrectly.
 
 - **Make each criterion checkable, not aspirational.** "Login works" is not a criterion. "Submitting valid credentials redirects to /dashboard and shows the user's name; invalid credentials show an inline error and do not navigate" is.
 - **Name the observable signal.** Tie each criterion to a concrete signal: a passing test name, an HTTP status + body, an on-screen element/text, a CLI exit code + output, a file's contents.
@@ -304,7 +304,7 @@ Use this when asked to continue, resume, or pick up a saga — typically a fresh
 
 Find the saga under ~/.sagas/. If the user named it or gave a path, use that. Otherwise ls ~/.sagas/ and, if ambiguous, ask the user which one (via ask_user_question listing the candidates). The directory name is the saga's stable identity.
 
-### 2. Rebuild orientation cheaply
+### 2. Rebuild orientation
 
 Read, in this order, and stop once the next action is known:
 1. SAGA.md — problem statement, environment/capabilities, saga exit criteria, milestone index, and Status.
@@ -323,7 +323,7 @@ Update PROGRESS.md to match reality before proceeding, noting the reconciliation
 
 From the reconciled state:
 - If milestones remain, resume the Phase 2 orchestration loop at the current milestone.
-- If all milestones are integrated and validated, move to Phase 3: check the saga exit criteria and loop the user in for manual acceptance.
+- If all milestones are integrated and validated, move to Phase 3: check the saga exit criteria and ask the user for manual acceptance.
 - If a blocker or open question recorded in PROGRESS.md needs the user, resolve it first via ask_user_question with options.
 
 ### 5. Keep the contract intact

@@ -1,3 +1,3 @@
 interface:
-  display_name: "PR Writer"
-  short_description: "Creates or updates a concise draft PR"
+  display_name: "Publish PR"
+  short_description: "Use when the user explicitly asks to open, update, or refresh a"

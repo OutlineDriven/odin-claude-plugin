@@ -56,10 +56,10 @@ Optional:
       - Explain what this comment means before deciding.
       - Acknowledge without making code changes.
       - `Other...` (freeform field for custom response or approach).
-   d. If user selects explain: provide concise context about why the reviewer raised it, then re-ask the same question. Do not skip the decision.
-   e. If user selects a fix option: edit the file, run relevant validation, record the draft reply text and whether to resolve the thread.
-   f. If user selects acknowledge: ask for optional rationale to include in the draft reply.
-   In batch mode: defer code edits until after all decisions are collected. Information gathering stays interactive.
+   d. If the user selects explain: provide concise context about why the reviewer raised it, then re-ask the same question. Do not skip the decision.
+   e. If the user selects a fix option: edit the file, run relevant validation, record the draft reply text and whether to resolve the thread.
+   f. If the user selects acknowledge: ask for optional rationale to include in the draft reply.
+   In batch mode: defer code edits until after all decisions are collected. Information gathering remains interactive.
 
 6. **Maintain a decision record internally for every comment.** Each record includes comment URL, type (review-thread / PR-level / review-body), disposition (fix / explain-then-fix / acknowledge-without-changes / custom / no-action), planned code change, draft reply body, and whether to resolve the thread.
 

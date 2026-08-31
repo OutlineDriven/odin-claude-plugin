@@ -1,3 +1,3 @@
 interface:
-  display_name: "Weekly WYNK"
-  short_description: "Compiles weekly reports into a Notion WYNK, Slack post, and PR"
+  display_name: "Weekly Wynk"
+  short_description: "Use when the user asks to create a WYNK, compile weekly"

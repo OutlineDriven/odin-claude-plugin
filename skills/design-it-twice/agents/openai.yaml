@@ -1,3 +1,3 @@
 interface:
   display_name: "Design It Twice"
-  short_description: "Generate parallel interface designs and compare by depth"
+  short_description: "Use when asked to design a module interface, seam, or testable"

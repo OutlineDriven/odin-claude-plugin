@@ -19,37 +19,37 @@ description: 'Use when asked to build, run, and triage Clang libFuzzer campaigns
 - **Required:** Clang compiler (`clang++`) with libFuzzer runtime present.
 - **Required:** One `LLVMFuzzerTestOneInput` harness function visible to the linker.
 - **Required:** Source or object files for the code under test.
-- **Optional:** Seed corpus directory (may be empty; creates `./corpus/`).
-- **Optional:** Fuzzing dictionary file (see Dictionary Format below).
+- **Optional:** Seed corpus directory. It may be empty; when omitted, create `./corpus/`.
+- **Optional:** Fuzzing dictionary file (see Dictionary format below).
 - **Optional:** Clang build flags: `-fsanitize=address`, `-fsanitize=undefined`, `-g`, `-O2`, `-max_len`, `-dict`, `-timeout`, `-close_fd_mask`, `-fork`, `-ignore_crashes`.
 
 ## Procedure
 
-1. **Verify Clang.** Run `clang++ --version`. Stop if Clang is absent; install it before proceeding.
+1. **Verify Clang.** Run `clang++ --version`. Stop if Clang is absent; install it before proceeding. Done when: `clang++ --version` succeeds and Clang is confirmed present.
 
 2. **Build the harness binary.** Compile with:
    ```
    clang++ -fsanitize=fuzzer[,address,undefined] -g -O2 -U_FORTIFY_SOURCE <harness>.cc <target>.cc -o <binary>
    ```
-   Required: `-fsanitize=fuzzer` links the libFuzzer runtime and provides `main`. Add `,address` for heap/stack buffer overflow, use-after-free, and double-free detection. Add `,undefined` for signed-integer overflow, null dereference, and similar undefined behavior. Add `-U_FORTIFY_SOURCE` when using ASan to avoid fortification interference. Omit `-fsanitize=address` for a faster build when only checking sanitizer-uncovered defects.
+   Required: `-fsanitize=fuzzer` links the libFuzzer runtime and provides `main`. Add `,address` for heap/stack buffer overflow, use-after-free, and double-free detection. Add `,undefined` for signed-integer overflow, null dereference, and similar undefined behavior. Add `-U_FORTIFY_SOURCE` when using ASan to avoid fortification interference. Omit `-fsanitize=address` for a faster build when only checking sanitizer-uncovered defects. Done when: the binary compiles and links successfully.
 
-3. **Prepare the corpus directory.** Create `<corpus_dir>/`. Optionally seed it with valid example inputs representing the target format to reach code paths faster. The fuzzer discovers additional inputs during execution.
+3. **Prepare the corpus directory.** Create `<corpus_dir>/`. Optionally seed it with valid example inputs representing the target format to reach code paths faster. The fuzzer discovers additional inputs during execution. Done when: `<corpus_dir>/` exists and is optionally seeded.
 
 4. **Run the campaign.**
    ```
    <binary> [-max_len=<N>] [-timeout=<S>] [-dict=<dict_file>] [-close_fd_mask=3] [-fork=1 -ignore_crashes=1] [-jobs=<N> -workers=<N>] <corpus_dir>/
    ```
-   `-max_len`: cap per-input byte size (2× minimal realistic input is a reasonable start; omit to let libFuzzer grow dynamically). `-timeout`: abort test cases exceeding this many seconds. `-dict`: pass a fuzzing dictionary for format-aware mutation. `-close_fd_mask=3`: close stdout and stderr for a speed boost when the target writes to them. `-fork=1 -ignore_crashes=1`: continue after finding a crash rather than exiting. `-jobs`/`-workers`: run N parallel jobs sharing the corpus.
+   `-max_len`: cap per-input byte size (2× minimal realistic input is a reasonable start; omit to let libFuzzer grow dynamically). `-timeout`: abort test cases exceeding this many seconds. `-dict`: pass a fuzzing dictionary for format-aware mutation. `-close_fd_mask=3`: close stdout and stderr for a speed boost when the target writes to them. `-fork=1 -ignore_crashes=1`: continue after finding a crash rather than exiting. `-jobs`/`-workers`: run N parallel jobs sharing the corpus. Done when: the campaign runs and produces output (coverage stats, crash artifacts, or clean exit).
 
-5. **Collect crash artifacts.** When the binary exits with a deadly signal or sanitizer report, libFuzzer writes an artifact named `crash-<SHA1-hash-of-content>` in the current directory. Note the artifact path and the sanitizer output.
+5. **Collect crash artifacts.** When the binary exits with a deadly signal or sanitizer report, libFuzzer writes an artifact named `crash-<SHA1-hash-of-content>` in the current directory. Note the artifact path and the sanitizer output. Done when: every crash artifact path and its sanitizer output are recorded.
 
 6. **Reproduce the crash.** Re-run the binary directly on the artifact:
    ```
    <binary> ./crash-<hash>
    ```
-   Verify the same sanitizer error or deadly signal recurs. If it does not, check for non-determinism in the harness or target (remove random-number generators and uninitialized-memory reads).
+   Verify the same sanitizer error or deadly signal recurs. If it does not, check for non-determinism in the harness or target (remove random-number generators and uninitialized-memory reads). Done when: the crash reproduces with identical sanitizer output, or non-determinism is identified.
 
-7. **Report.** State the artifact path, the sanitizer violation type, and whether reproduction succeeded.
+7. **Report.** State the artifact path, the sanitizer violation type, and whether reproduction succeeded. Done when: the report states artifact path, violation type, and reproduction result.
 
 ### LLVMFuzzerTestOneInput harness signature
 
@@ -101,10 +101,8 @@ Partial-result rule: if the campaign finds no crash after a bounded run, report 
 Rollback: delete the compiled `<binary>`, the `<corpus_dir>/` contents, and any `crash-*` files to restore the pre-run state.
 
 ## Output
-- **Success:** Binary exits with zero or a sanitizer detects no violation → `non-converged` (no defect found in this run).
-- **Crash found:** Binary exits with deadly signal or sanitizer report → artifact path, sanitizer violation type, and reproduction result.
-- **Compilation failure:** `non-converged` with the compiler error message.
-- **All other failures:** class name and diagnostic message.
+
+Terminal classification: `non-converged` (binary exits zero or no sanitizer violation, with final coverage count), crash found (artifact path, sanitizer violation type, reproduction result), compilation failure (compiler error message), or failure class name with diagnostic message.
 
 ## Provenance
 

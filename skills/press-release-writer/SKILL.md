@@ -36,7 +36,7 @@ Extract as much as possible from any brief or document the user provides. Ask on
 
 ### 2. Identify and validate the news angle
 
-Articulate the angle in one sentence. Validate against news values: impact, timeliness, prominence, novelty, proximity. If the angle is weak, tell the user and suggest how to strengthen it. Do not proceed with a non-newsworthy angle.
+State the angle in one sentence. Validate it against the news values of impact, timeliness, prominence, novelty, and proximity. If the angle is weak, tell the user and suggest how to strengthen it. Do not proceed with a non-newsworthy angle.
 
 ### 3. Propose headline variants
 
@@ -131,7 +131,7 @@ Every release must pass all of the following before delivery:
 
 ### 6. Humanize
 
-Remove AI-generated patterns: inflated language, predictable sentence rhythm, hollow transitions, formulaic structure. Journalists spot AI copy immediately and discard it.
+Remove AI-generated patterns: inflated language, predictable sentence rhythm, hollow transitions, and formulaic structure.
 
 **Preserve the headline and lead.** The headline (Step 3) and lead paragraph (5W1H in 25–35 words) were deliberately crafted for news impact. Loosening them for "naturalness" breaks the inverted pyramid and the word-count constraint.
 
@@ -139,8 +139,8 @@ Remove AI-generated patterns: inflated language, predictable sentence rhythm, ho
 
 Present:
 
-1. **The press release** in the target language, culturally adapted (not word-for-word translated if targeting a non-English market).
-2. **Angle note** — one paragraph explaining why this angle was chosen and what news values it satisfies.
+1. **The press release** in the target language, culturally adapted (not word-for-word translated if targeting a non-English market). Done when: the stated outcome holds.
+2. **Angle note** — one paragraph explaining why this angle was chosen and what news values it satisfies. Done when: the stated outcome holds.
 
 ### 8. Suggest next steps
 
@@ -164,11 +164,7 @@ After delivery, offer:
 Partial results are not delivered. If the release cannot be completed due to missing inputs, return the specific questions needed rather than a partial draft.
 
 ## Output
-A complete press release draft in the target language and region conventions, plus:
-1. Angle note (one paragraph).
-2. Next-step options (journalist pitch, social teaser, distribution recommendation, journalist shortlist criteria).
-
-No files are written. All output is delivered as chat content.
+A complete press release draft in the target language and region conventions, plus: 1. Angle note (one paragraph). 2. Next-step options (journalist pitch, social teaser, distribution recommendation, journalist shortlist criteria). No files are written. All output is delivered as chat content.
 
 ## Provenance
 

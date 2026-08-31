@@ -1,6 +1,6 @@
 ---
 name: implement
-description: 'Use when a settled ticket or spec needs implementation. Produce code, behavioural tests at agreed seams, and commits that satisfy the contract without reopening or redesigning the plan. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a settled ticket or spec needs implementation. Produces code, behavioural tests at agreed seams, and commits that satisfy the contract. Not for ticket-DAG parallel execution — use implement-spec; not for PRODUCT.md/TECH.md spec-driven work — use implement-specs.'
 ---
 
 # Implement

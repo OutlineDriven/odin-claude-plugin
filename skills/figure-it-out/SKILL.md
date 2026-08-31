@@ -22,13 +22,13 @@ description: 'Use when asked to design a bespoke execution workflow when no play
 
 ## Procedure
 
-1. Confirm no existing playbook fits the task; if one does, stop and defer to it.
-2. Define a falsifiable success predicate: a check that can fail on the real product, not a tautology.
-3. Design the smallest bespoke workflow that reaches the predicate: name each lever (script, command, probe, or local artifact), its input, and its expected output.
-4. State the rollback path for every local artifact the workflow writes before writing it.
-5. Build and run each lever in order, recording the command, the real output, and whether it advanced the predicate.
-6. Verify the success predicate against the real product, not a mock or a proxy.
-7. Assemble the reviewable trail: the predicate, each lever run with its real output, and the final verification result.
+1. Confirm no existing playbook fits the task; if one does, stop and defer to it. Done when: no playbook fits, or the skill stops and defers.
+2. Define a falsifiable success predicate: a check that can fail on the real product, not a tautology. Done when: the predicate is stated and can fail.
+3. Design the smallest bespoke workflow that reaches the predicate: name each lever (script, command, probe, or local artifact), its input, and its expected output. Done when: every lever is named with its input and expected output.
+4. State the rollback path for every local artifact the workflow writes before writing it. Done when: every artifact's rollback path is stated before it is written.
+5. Build and run each lever in order, recording the command, the real output, and whether it advanced the predicate. Done when: every lever is run with its real output recorded.
+6. Verify the success predicate against the real product, not a mock or a proxy. Done when: the predicate is verified or fails on the real product.
+7. Assemble the reviewable trail: the predicate, each lever run with its real output, and the final verification result. Done when: the trail is assembled with predicate, lever runs, and verification result.
 
 ## Failure and recovery
 - No-fitting-playbook check fails: if a playbook fits, stop; do not invent a bespoke workflow.

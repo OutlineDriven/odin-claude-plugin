@@ -1,6 +1,6 @@
 ---
 name: entropy-assisted-planning
-description: 'Use when the user explicitly requests a Tarot draw or casually delegates an ambiguous choice among multiple valid approaches. Runs a cryptographically random 12-house Tarot draw and interprets the spread to state one planning or investigation direction. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user explicitly requests a Tarot draw or casually delegates an ambiguous choice among multiple valid approaches. Runs a cryptographically random 12-house Tarot draw and interprets the spread to state one planning or investigation direction.'
 ---
 
 # Entropy assisted planning
@@ -16,14 +16,14 @@ description: 'Use when the user explicitly requests a Tarot draw or casually del
 
 ## Inputs
 
-- The decision context: either a list of two or more valid options to choose between, or an open portent question about which direction to take. Must be supplied.
-- The user's tone. Optional, but when it is precision-seeking rather than casual, do not draw; ask clarifying questions instead.
+- Decision context (required): either a list of two or more valid options or an open portent question about which direction to take.
+- User tone (optional): when the user seeks precision rather than a casual choice, do not draw; ask clarifying questions instead.
 
 ## Procedure
 
-1. Confirm the trigger. Draw only when the user explicitly requested a Tarot draw or casually delegated an ambiguous choice among two or more valid approaches. If the user gave clear, specific instructions, or a single obvious correct approach exists, do not draw.
-2. Do not use this skill as the deciding authority for safety-critical work: security conclusions, data integrity, production deployment, release approval, or incident response. It may suggest where to inspect next but cannot prove safety or dismiss a risk.
-3. Run the cryptographic draw in one Bash call. The command uses Python's `secrets` module: Fisher-Yates shuffles via `secrets.randbelow()` (no modulo bias) on separate 22-card Major Arcana and 56-card Minor Arcana decks, deals 12 houses (one Major plus two Minor each), and assigns each of the 36 cards an independent 50% reversal via `secrets.randbits(1)`. The conservative unordered-card entropy budget exceeds 100 bits.
+1. Confirm the trigger. Draw only when the user explicitly requested a Tarot draw or casually delegated an ambiguous choice among two or more valid approaches. If the user gave clear, specific instructions, or a single obvious correct approach exists, do not draw. Done when: the trigger is confirmed or the run is declined with a reason.
+2. Do not use this skill as the deciding authority for safety-critical work: security conclusions, data integrity, production deployment, release approval, or incident response. It may suggest where to inspect next but cannot prove safety or dismiss a risk. Done when: safety-critical scope is excluded or the reading is bounded to investigation-path suggestion.
+3. Run the cryptographic draw in one Bash call. The command uses Python's `secrets` module. It shuffles separate 22-card Major Arcana and 56-card Minor Arcana decks with Fisher-Yates via `secrets.randbelow()` (no modulo bias), deals 12 houses (one Major plus two Minor each), and gives each of the 36 cards an independent 50% reversal via `secrets.randbits(1)`. The conservative unordered-card entropy budget exceeds 100 bits.
    ```bash
    python3 - <<'PY'
    import secrets, json
@@ -43,11 +43,12 @@ description: 'Use when the user explicitly requests a Tarot draw or casually del
    print(json.dumps(out,indent=2))
    PY
    ```
-4. Interpret the full 12-house spread as one narrative. Reversed cards invert or complicate the upright meaning rather than meaning "bad". Major Arcana carry more weight than Minor Arcana. Do not interpret any card in isolation; synthesize across all 12 houses before deciding.
-5. Map the interpretation to the concrete decision. If the input was a list of options, pick one option and state it with one sentence connecting card meaning to the choice. If the input was an open portent question, state the dominant theme across the spread, the main risk or blind spot, and the recommended next action.
-6. In security, audit, or correctness contexts, the reading only chooses an investigation path or hypothesis to test. Accept or dismiss any risk only with ordinary engineering evidence: source review, tests, proofs, traces, reproduction, or exploitability analysis. A favorable card is never permission to ship, suppress a finding, skip validation, or overrule a concrete risk.
-7. One draw per decision point; accept the reading. Do not redraw until a preferred result appears.
-8. Include the interpretation alongside the next action that implements the chosen direction. Do not output the interpretation as a text-only turn.
+   Done when: the draw command exits zero and emits valid JSON with 12 houses.
+4. Interpret the full 12-house spread as one narrative. Reversed cards invert or complicate the upright meaning rather than meaning "bad". Major Arcana carry more weight than Minor Arcana. Do not interpret any card in isolation; synthesize across all 12 houses before deciding. Done when: the 12-house spread is synthesized into one narrative.
+5. Map the interpretation to the concrete decision. If the input was a list of options, pick one option and state it with one sentence connecting card meaning to the choice. If the input was an open portent question, state the dominant theme across the spread, the main risk or blind spot, and the recommended next action. Done when: the interpretation is mapped to one chosen option or a three-bullet reading.
+6. In security, audit, or correctness contexts, the reading only chooses an investigation path or hypothesis to test. Accept or dismiss any risk only with ordinary engineering evidence: source review, tests, proofs, traces, reproduction, or exploitability analysis. A favorable card is never permission to ship, suppress a finding, skip validation, or overrule a concrete risk. Done when: any security or correctness implication is explicitly marked as subject to ordinary evidence.
+7. One draw per decision point; accept the reading. Do not redraw until a preferred result appears. Done when: the reading is accepted with no redraw for preference.
+8. Include the interpretation alongside the next action that implements the chosen direction. Do not output the interpretation as a text-only turn. Done when: the interpretation and the next action are both in the output.
 
 ## Failure and recovery
 - Draw command fails (crash, traceback, missing `python3`): report the failure to the user and skip the reading. Never invent cards or simulate a draw using the model's own randomness: the entire point is real cryptographic entropy.
@@ -56,8 +57,8 @@ description: 'Use when the user explicitly requests a Tarot draw or casually del
 - Blocked result: if the draw cannot run, the terminal output is "draw unavailable" with the error; no direction is stated.
 
 ## Output
-A stated direction or verdict derived from a complete 12-house reading: either a chosen option with a one-sentence card-grounded reason, or a three-bullet reading (dominant theme, main risk or blind spot, recommended next action). Any security or correctness implication in the output is explicitly marked as subject to ordinary evidence.
+A stated direction or verdict derived from a complete 12-house reading: either a chosen option with a one-sentence card-grounded reason, or a three-bullet reading (dominant theme, main risk or blind spot, recommended next action), with any security or correctness implication explicitly marked as subject to ordinary evidence.
 
 ## Provenance
 
-Origin: https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3, files /plugins/let-fate-decide/skills/let-fate-decide/SKILL.md and /plugins/let-fate-decide/agents/draw.md. License CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding. Adaptation: the entropy-assisted tie-breaking workflow and cryptographic draw mechanism are preserved; card and house meaning payloads are carried as model knowledge rather than source reference files, and the draw is reworded as a self-contained command with no external script dependency.
+Origin: https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3, files /plugins/let-fate-decide/skills/let-fate-decide/SKILL.md and /plugins/let-fate-decide/agents/draw.md. License CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding. Adaptation: the entropy-assisted tie-breaking workflow and cryptographic draw mechanism are preserved; card and house meaning payloads are carried as model knowledge rather than source reference files, and the draw is reworded as a self-contained command with no external file dependency.

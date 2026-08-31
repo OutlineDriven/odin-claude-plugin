@@ -1,6 +1,6 @@
 ---
 name: intent-proposal
-description: 'Use when material arrives without a fully-formed ask or the ask reads thinner than the data suggests. Reads the data end to end and proposes the intent behind it as a confirmation-ready proposal paired with a next-step sketch, so the user confirms, corrects, or adjusts with a short reply instead of composing the ask from scratch. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when material arrives without a fully formed ask or the ask is thinner than the data suggests. Proposes the intent as a confirmation-ready proposal with a next-step sketch. Not for an interview — use interview-me.'
 ---
 
 # Intent proposal
@@ -28,7 +28,7 @@ description: 'Use when material arrives without a fully-formed ask or the ask re
 
 ## Failure and recovery
 - **Data too thin to propose from**: say so and stop. Do not fall back to asking.
-- **Proposal without reading**: a guess; re-read the data before proposing.
+- **Proposal without reading**: this is a guess; re-read the data before proposing.
 - **User composes the ask from scratch**: the proposal was wrong or a question in disguise; redo the proposal grounded in the data.
 - No mutation occurs on any path; rollback is trivial: nothing was changed.
 

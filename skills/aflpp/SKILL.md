@@ -1,6 +1,6 @@
 ---
 name: aflpp
-description: 'Use when the user needs AFL++ setup, multi-core campaign operation, corpus handling, or AFL++ crash triage. Produces an instrumented fuzz target running against a seed corpus with interpretable campaign output. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user needs AFL++ setup, campaign operation, corpus handling, or crash triage. Produces an instrumented fuzz target running against a seed corpus with interpretable campaign output. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # AFL++
@@ -53,7 +53,7 @@ description: 'Use when the user needs AFL++ setup, multi-core campaign operation
    EOF
    chmod +x ./afl++
    ```
-   The wrapper joins everything after the mode argument into one shell string, so quoting does not survive: an argument containing a space arrives word-split. Rename files without spaces, or edit the wrapper for that run. The missing `-t` is deliberate — `docker run -ti` aborts with "the input device is not a TTY" when stdin is not a terminal, which covers CI and agent-driven runs; `afl-fuzz` then prints plain status lines instead of the full-screen UI. `$$` gives parallel instances distinct container names.
+   The wrapper joins everything after the mode argument into one shell string. Quoting therefore does not survive: an argument containing a space arrives word-split. Rename files without spaces, or edit the wrapper for that run. The missing `-t` is deliberate. `docker run -ti` aborts with "the input device is not a TTY" when stdin is not a terminal, including in CI and agent-driven runs. Without `-t`, `afl-fuzz` prints plain status lines instead of the full-screen UI. `$$` gives parallel instances distinct container names.
 
 2. Install or pull AFL++: either `apt install afl++ lld-<clang-version>` (host) or `docker pull aflplusplus/aflplusplus:stable` (Docker). Verify the binary is available: `./afl++ host afl-fuzz --version` or `./afl++ docker afl-fuzz --version`.
 
@@ -100,7 +100,7 @@ description: 'Use when the user needs AFL++ setup, multi-core campaign operation
    For real projects, gather representative inputs from example files, the project test suite, or minimal valid inputs for the target format.
 
 8. Set the environment variables that matter for the campaign:
-   - `AFL_TMPDIR=/dev/shm`: always set; uses tmpfs for a free performance win and avoids SSD wear.
+   - `AFL_TMPDIR=/dev/shm`: always set; uses tmpfs to improve performance and avoid SSD wear.
    - `AFL_FAST_CAL=1`: for slow targets (>10 ms/exec); speeds calibration ~2.5× with negligible precision loss.
    - `AFL_TESTCACHE_SIZE=100`: on all instances; caches test cases in memory (default 50 MB; 50–250 MB works well).
    - `AFL_FINAL_SYNC=1`: on the primary `-M` instance only; needed for later `afl-cmin`, not for fuzzing itself.
@@ -119,7 +119,7 @@ description: 'Use when the user needs AFL++ setup, multi-core campaign operation
     ./afl++ docker AFL_TMPDIR=/dev/shm AFL_TESTCACHE_SIZE=100 afl-fuzz -S secondary01 -i seeds -o state -- ./fuzz 1>secondary01.log 2>secondary01.error </dev/null &
     ./afl++ docker AFL_TMPDIR=/dev/shm AFL_TESTCACHE_SIZE=100 afl-fuzz -S secondary02 -i seeds -o state -- ./fuzz 1>secondary02.log 2>secondary02.error </dev/null &
     ```
-    The `</dev/null` is required, not decorative: `docker run -i` keeps the client reading stdin, and a backgrounded process that reads the terminal receives `SIGTTIN` and stops without it. List running jobs with `jobs`; stop all with `kill $(jobs -p)`.
+    The `</dev/null` redirect is required. `docker run -i` keeps the client reading stdin, and a backgrounded process that reads the terminal receives `SIGTTIN` and stops without the redirect. List running jobs with `jobs`; stop all with `kill $(jobs -p)`.
 
 11. To enable CMPLOG/RedQueen constraint solving, build with `AFL_LLVM_CMPLOG=1` and run one secondary with `-c0`:
     ```bash

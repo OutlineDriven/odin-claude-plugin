@@ -1,6 +1,6 @@
 ---
 name: context-engineering
-description: 'Use when a long session has accumulated stale or conflicting context or the user asks to refresh it, recheck context against source and drop stale items so the acting context is provably current and minimal. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a long session has accumulated stale or conflicting context or when the user asks to refresh it. Rechecks context against source and drops stale items so the acting context is provably current and minimal. No remote, credential, publish, deploy, or irreversible mutation.'
 ---
 
 # Context engineering
@@ -17,17 +17,17 @@ description: 'Use when a long session has accumulated stale or conflicting conte
 ## Inputs
 
 - The current acting context present in the session: stated facts, assumptions, inferred file state, and prior decisions.
-- The source of truth for each item under recheck: repository files, tool output, or user-stated ground truth.
+- The source of truth for each item being rechecked: repository files, tool output, or user-stated ground truth.
 - Optional: a user-named subset to recheck. If omitted, recheck the full acting context.
 
 ## Procedure
 
-1. Enumerate every item in the acting context: stated facts, assumptions, inferred file state, and prior decisions.
-2. For each item, recheck it against its source of truth by the narrowest action that settles it: read the file, re-run the tool, or ask the user. Classify the item as current, stale, or contradicted.
-3. Drop stale and contradicted items from the acting context. Replace a dropped item with the corrected value only when the source of truth supplies one.
-4. Remove redundant or duplicate items so the acting context holds only items that are provably current and needed for the remaining work.
-5. Inform the user of each dropped item and its reason, and of any item that could not be settled because its source of truth was unreachable.
-6. Optionally write a scratch state note recording the settled context and the dropped items. Do not touch any project file.
+1. Enumerate every item in the acting context: stated facts, assumptions, inferred file state, and prior decisions. Done when: every acting-context item is enumerated.
+2. For each item, recheck it against its source of truth by the narrowest action that settles it: read the file, re-run the tool, or ask the user. Classify the item as current, stale, or contradicted. Done when: every item is classified current, stale, or contradicted.
+3. Drop stale and contradicted items from the acting context. Replace a dropped item with the corrected value only when the source of truth supplies one. Done when: stale and contradicted items are dropped and replaced where a corrected value exists.
+4. Remove redundant or duplicate items so the acting context holds only items that are provably current and needed for the remaining work. Done when: no redundant or duplicate items remain.
+5. Tell the user which items were dropped and why, and identify any item that could not be settled because its source of truth was unreachable. Done when: dropped items and reasons are reported and unsettled items are identified.
+6. Optionally write a scratch state note recording the settled context and the dropped items. Do not touch any project file. Done when: the scratch note is written or skipped, and no project file is touched.
 
 ## Failure and recovery
 - Unreachable source of truth: leave the dependent item flagged as unsettled, do not drop or replace it, and report it to the user. Never assert an item is current without a settled source.
@@ -36,7 +36,7 @@ description: 'Use when a long session has accumulated stale or conflicting conte
 - Non-mutation boundary: if any step would require touching a project file or remote state, stop and report the boundary rather than widening authority.
 
 ## Output
-A refreshed acting context containing only provably current, minimal items; a user-facing list of dropped items with reasons; and, if written, an optional scratch state note. Unsettled items are listed separately and remain in context flagged as unsettled.
+Refreshed acting context (only provably current, minimal items) → user-facing list of dropped items with reasons → optional scratch state note. Unsettled items listed separately and remain flagged.
 
 ## Provenance
 

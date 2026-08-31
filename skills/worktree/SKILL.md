@@ -22,21 +22,12 @@ description: 'Use when a new isolated worktree or branch is requested, or an exi
 
 ## Procedure
 
-1. Determine the mode: if the caller named a ref (PR head, branch, or commit), this is isolate-existing-ref mode; otherwise new-work mode. Do not create a worktree for single-task work that can happen on a branch in the current checkout.
-2. Detect existing isolation before creating anything. Compare the resolved absolute git dir against the resolved absolute common git dir: run `git rev-parse --absolute-git-dir` and `(cd "$(git rev-parse --git-common-dir)" && pwd -P)`. If they are equal, this is a normal checkout; continue to step 3.
-3. If the two paths differ, run `git rev-parse --show-superproject-working-tree`. Non-empty output means a submodule; treat it as a normal checkout and continue to step 4. Empty output means the run is already in an isolated worktree: report the worktree path (`git rev-parse --show-toplevel`) and current branch. In new-work mode, proceed in place and stop. In isolate-existing-ref mode, check the named ref out here unless it is already the current branch, then stop. Do not create another worktree.
-4. Prefer the harness's native worktree primitive (for example Claude Code's `EnterWorktree`, a `/worktree` command, or a `--worktree` flag). Use it and stop. A behind-the-back `git worktree add` creates phantom state the harness cannot see, navigate to, or clean up.
-5. If no native tool exists and step 2 or 3 found no existing isolation, fall back to manual git worktree. Run from the repo root: `cd "$(git rev-parse --show-toplevel)"`.
-6. Choose a meaningful branch name from the work description (new-work mode) or a slug of the named ref (isolate-existing-ref mode). Pick a base branch: default to origin's default branch, else `main`.
-7. Ensure `.worktrees/` is gitignored before creating anything: `git check-ignore -q .worktrees/` (trailing slash). If not ignored, add `.worktrees/` to `.gitignore`.
-8. Best-effort refresh the base branch: `git fetch origin <from-branch>`. Treat failure as non-fatal.
-9. Create the worktree:
-   - New work: `git worktree add -b <branch-name> .worktrees/<branch-name> origin/<from-branch>` (fall back to local `<from-branch>` if the origin ref is missing).
-   - Isolate an existing branch or tag: `git worktree add .worktrees/<slug> <target-ref>`.
-   - Isolate a PR: `git fetch origin pull/<n>/head:pr-<n>` then `git worktree add .worktrees/pr-<n> pr-<n>`.
-   - Already-checked-out rule: a branch can be checked out in only one worktree at a time. If the named ref is already checked out elsewhere, report that path and let the caller act (work there in place; or, only if a clean separate tree is essential, create a detached worktree at the same commit). Never put one branch in two worktrees.
-10. Switch into the new worktree: `cd .worktrees/<branch-name>` (or the slug or `pr-<n>` path used above).
-11. Report the worktree's absolute path and current branch, and confirm the harness can see it (native tool) or that it lives under the tracked `.worktrees/` convention (git fallback).
+1. Determine the mode: if the caller named a ref (PR head, branch, or commit), this is isolate-existing-ref mode; otherwise new-work mode. Do not create a worktree for single-task work that can happen on a branch in the current checkout. Done when: the mode is decided and single-task work is ruled out.
+2. Detect existing isolation before creating anything. Compare the resolved absolute git dir against the resolved absolute common git dir: run `git rev-parse --absolute-git-dir` and `(cd "$(git rev-parse --git-common-dir)" && pwd -P)`. If they are equal, this is a normal checkout; continue to step 3. Done when: the isolation state is known (normal checkout, submodule, or already isolated).
+3. If the two paths differ, run `git rev-parse --show-superproject-working-tree`. Non-empty output means a submodule; treat it as a normal checkout and continue to step 4. Empty output means the run is already in an isolated worktree: report the worktree path (`git rev-parse --show-toplevel`) and current branch. In new-work mode, proceed in place and stop. In isolate-existing-ref mode, check the named ref out here unless it is already the current branch, then stop. Do not create another worktree. Done when: either already-isolated is handled and stopped, or the normal-checkout/submodule path continues to step 4.
+4. Prefer the harness's native worktree primitive (for example Claude Code's `EnterWorktree`, a `/worktree` command, or a `--worktree` flag). Use it and stop. A behind-the-back `git worktree add` creates phantom state the harness cannot see, navigate to, or clean up. Done when: a native tool created the worktree, or no native tool exists and the git fallback is the next step.
+5. If no native tool exists and step 2 or 3 found no existing isolation, fall back to manual git worktree creation following `references/git-fallback.md`. Done when: the worktree exists under `.worktrees/` and the harness can see it via the tracked convention.
+6. Report the worktree's absolute path and current branch, and confirm the harness can see it (native tool) or that it lives under the tracked `.worktrees/` convention (git fallback). Done when: the path, branch, mode, and creation method are reported.
 
 ## Failure and recovery
 - **Already in an isolated worktree**: do not create another. Report the existing path and proceed in place (new-work) or check out the named ref there (isolate-existing-ref).
@@ -47,7 +38,7 @@ description: 'Use when a new isolated worktree or branch is requested, or an exi
 - **Non-converged**: if isolation cannot be established and no fallback is confirmed, return the blocked result with the exact error and the paths inspected. Never claim the done predicate holds.
 
 ## Output
-The isolated worktree's absolute path and current branch, plus the mode used (new-work or isolate-existing-ref) and whether a native tool or the git fallback created it. If already isolated, the existing worktree path and branch with no new creation.
+The isolated worktree's absolute path, current branch, mode used (new-work or isolate-existing-ref), and creation method (native tool or git fallback); or the existing worktree path and branch if already isolated.
 
 ## Provenance
 

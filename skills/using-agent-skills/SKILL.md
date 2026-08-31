@@ -1,6 +1,6 @@
 ---
 name: using-agent-skills
-description: 'Use when asked to route incoming work to the owning skill or produce an explicit skill-gap note. The agent classifies the task against the installed catalog and invokes the best-matching trigger or records a gap. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when asked to route incoming work to the owning skill or produce an explicit skill-gap note. The agent classifies the task against the installed catalog and invokes the best-matching trigger or records a gap.'
 ---
 
 # Using agent skills
@@ -23,15 +23,12 @@ Both are required. If the catalog is unavailable, stop and report the blocker.
 
 ## Procedure
 
-1. Extract the core action and domain from the task description.
-2. Search the installed skill catalog for skills whose trigger predicate matches the extracted action and domain.
-3. If exactly one skill matches, invoke it. Report the matched skill name and the trigger sentence that matched.
-4. If multiple skills match, select the one whose trigger predicate is most specific to the task. Report the selection rationale.
-5. If no skill matches, produce a skill-gap note containing:
-   - The task description.
-   - Why no existing skill covers it.
-   - What a new skill would need to trigger on.
-6. Never invent behavior, fork a near-duplicate, or widen scope beyond the matched skill's contract.
+1. Extract the core action and domain from the task description. **Done when:** the core action and domain are identified.
+2. Search the installed skill catalog for skills whose trigger predicate matches the extracted action and domain. **Done when:** the matching set is enumerated.
+3. If exactly one skill matches, invoke it. Report the matched skill name and the trigger sentence that matched. **Done when:** the matched skill is invoked and reported.
+4. If multiple skills match, select the one whose trigger predicate is most specific to the task. Report the selection rationale. **Done when:** the most specific skill is selected and the rationale is stated.
+5. If no skill matches, produce a skill-gap note containing: the task description, why no existing skill covers it, and what a new skill would need to trigger on. **Done when:** the gap note contains all three elements.
+6. Never invent behavior, fork a near-duplicate, or widen scope beyond the matched skill's contract. **Done when:** no invention, fork, or scope widening occurred.
 
 ## Failure and recovery
 | Failure class | Rule |
@@ -44,9 +41,7 @@ Both are required. If the catalog is unavailable, stop and report the blocker.
 No partial results. If routing fails, the output is a gap note or a user clarification request, never a best-effort invocation.
 
 ## Output
-One of:
-- The matched skill name, its trigger sentence, and confirmation that it was invoked.
-- A skill-gap note with the task description, the gap reason, and the trigger predicate a new skill would need.
+Either the matched skill name with its trigger sentence and invocation confirmation, or a skill-gap note with the task description, gap reason, and trigger predicate a new skill would need.
 
 ## Provenance
 

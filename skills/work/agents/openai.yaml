@@ -1,3 +1,3 @@
 interface:
-  display_name: "End-to-End Implementation"
-  short_description: "End-to-end implementation from plan or prompt"
+  display_name: "Work"
+  short_description: "Use when implementing from a plan or spec path, or a clear"

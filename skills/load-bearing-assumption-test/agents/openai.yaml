@@ -1,3 +1,3 @@
 interface:
-  display_name: "Load-Bearing Objection Test"
-  short_description: "One load-bearing objection plus the cheapest falsifying test"
+  display_name: "Load Bearing Assumption Test"
+  short_description: "Use when the user asks why a plan is wrong or says \"poke holes"

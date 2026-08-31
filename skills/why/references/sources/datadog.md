@@ -1,4 +1,4 @@
-# Datadog Telemetry
+# Datadog telemetry
 
 ## What this source contains
 

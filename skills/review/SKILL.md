@@ -1,9 +1,9 @@
 ---
 name: review
-description: 'Use when a user asks to review a pull request or examine code changes, produce a structured review report with severity-graded validated findings, each with concrete fix recommendations. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when a user asks to review a pull request or examine code changes. Produces a structured review report with severity-graded validated findings and concrete fix recommendations. Not for an iterative review-and-fix loop — use review-fix-grill-loop.'
 ---
 
-# Severity graded review
+# Severity-graded review
 
 ## Contract
 

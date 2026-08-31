@@ -1,6 +1,6 @@
 ---
 name: diagram-contract
-description: 'Use when the user runs /diagram-contract, render a mermaid diagram offline and embed the rendered SVG or PNG into the target document. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user runs /diagram-contract to render a mermaid diagram offline and embed the SVG or PNG into a target document. Not for code-derived diagrams — use diagramming-code. No remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Diagram contract
@@ -16,24 +16,34 @@ description: 'Use when the user runs /diagram-contract, render a mermaid diagram
 
 ## Inputs
 
-- A diagram request: an English description of the structure to diagram, or mermaid source. Required.
-- A target document path where the rendered diagram will be embedded. Required; must exist and be writable.
+- A required diagram request: an English description of the structure to diagram, or mermaid source.
+- A required target document path. The document must exist and be writable.
 - Output directory: optional. Default `./diagrams/` when the cwd is a git repo, else `/tmp/gstack-diagrams/`.
 - Output slug: optional. Derived kebab-case from the diagram subject, ≤40 chars.
 
 ## Procedure
 
-1. Bound scope. Confirm the target document path exists and is writable. Decide the output directory and slug. Do not write outside the output directory or the target document.
-2. Author mermaid from the request. Prefer `graph LR` for pipelines and flows, `graph TD` for hierarchies. Keep node labels short; put detail in edge labels. 5-15 nodes is the readable range; if the ask needs more, split into multiple diagrams and say why. Flowcharts convert to a fully editable excalidraw scene; sequence, state, gantt, and other mermaid types render to SVG/PNG but the excalidraw artifact is skipped for them.
-3. Write the mermaid source to `<outdir>/<slug>.mmd` first. The source is the single source of truth.
-4. Render offline. Load a local mermaid renderer page in a headless browser and poll until it reports ready. The renderer bundles mermaid and the excalidraw converter locally; no CDN and no network. Do not improvise a CDN fallback — offline is the contract.
-5. Ship the mermaid source into the renderer via base64. Never splice file contents into a JS template literal: backticks, `${`, and backslashes in the source would be interpreted and corrupt it. For non-ASCII labels, recover UTF-8 exactly with `decodeURIComponent(escape(atob('…')))`.
-6. Render SVG. Call the renderer's mermaid render function with a unique id and the base64-decoded source; write the returned SVG string to `<outdir>/<slug>.svg`.
-7. Rasterize PNG. Call the renderer's rasterize function with the SVG and a target width in pixels computed as placed width in inches × 300; write the PNG to `<outdir>/<slug>.png`.
-8. For flowcharts only, call the renderer's mermaid-to-excalidraw converter with the base64-decoded source and write the scene JSON to `<outdir>/<slug>.excalidraw`. For other mermaid types, skip the excalidraw artifact and tell the user: sequence and other non-flowchart diagrams render but are not excalidraw-editable yet (upstream converter limitation — flowcharts are).
-9. Embed the rendered SVG (preferred for documents) or PNG into the target document at the requested location.
-10. Show the PNG to the user, list the artifact paths, and note that the `.excalidraw` file opens at excalidraw.com for editing.
-11. For changes, edit the `.mmd` source and re-run rendering from step 4. To re-render an edited `.excalidraw` scene from a user round-trip, load the scene file and export to SVG and PNG without touching the mermaid, using base64 transport again because scene JSON is full of quotes and backslashes.
+1. Bound scope. Confirm the target document path exists and is writable. Decide the output directory and slug. Do not write outside the output directory or the target document. **Done when:** the target document is confirmed writable and the output directory and slug are decided.
+
+2. Author mermaid from the request. Prefer `graph LR` for pipelines and flows, and `graph TD` for hierarchies. Keep node labels short and put detail in edge labels. The readable range is 5-15 nodes. If the request needs more, split it into multiple diagrams and explain why. Flowcharts convert to a fully editable excalidraw scene. Sequence, state, gantt, and other mermaid types render to SVG/PNG, but skip the excalidraw artifact. **Done when:** mermaid source is authored within the readable node range, or split into multiple diagrams with a reason.
+
+3. Write the mermaid source to `<outdir>/<slug>.mmd` first. The source is the single source of truth. **Done when:** the `.mmd` file is written.
+
+4. Render offline. Load a local mermaid renderer page in a headless browser and poll until it reports ready. The renderer bundles mermaid and the excalidraw converter locally; no CDN and no network. Do not improvise a CDN fallback. Offline is the contract. **Done when:** the local renderer reports ready.
+
+5. Ship the mermaid source into the renderer via base64. Never splice file contents into a JS template literal: backticks, `${`, and backslashes in the source would be interpreted and corrupt it. For non-ASCII labels, recover UTF-8 exactly with `decodeURIComponent(escape(atob('…')))`. **Done when:** the source is delivered to the renderer via base64 without template-literal splicing.
+
+6. Render SVG. Call the renderer's mermaid render function with a unique id and the base64-decoded source; write the returned SVG string to `<outdir>/<slug>.svg`. **Done when:** the `.svg` file is written.
+
+7. Rasterize PNG. Call the renderer's rasterize function with the SVG and a target width in pixels computed as placed width in inches × 300; write the PNG to `<outdir>/<slug>.png`. **Done when:** the `.png` file is written.
+
+8. For flowcharts only, call the renderer's mermaid-to-excalidraw converter with the base64-decoded source and write the scene JSON to `<outdir>/<slug>.excalidraw`. For other mermaid types, skip the excalidraw artifact and tell the user: sequence and other non-flowchart diagrams render but are not excalidraw-editable yet (upstream converter limitation; flowcharts are). **Done when:** the `.excalidraw` file is written for flowcharts, or the limitation is stated for other types.
+
+9. Embed the rendered SVG (preferred for documents) or PNG into the target document at the requested location. **Done when:** the render is embedded in the target document.
+
+10. Show the PNG to the user, list the artifact paths, and note that the `.excalidraw` file opens at excalidraw.com for editing. **Done when:** the PNG is shown and artifact paths are listed.
+
+11. For changes, edit the `.mmd` source and re-run rendering from step 4. To re-render an edited `.excalidraw` scene from a user round-trip, load the scene file and export to SVG and PNG without touching the mermaid, using base64 transport again because scene JSON is full of quotes and backslashes. **Done when:** the change cycle is documented for both mermaid and excalidraw round-trips.
 
 ## Failure and recovery
 - Renderer unavailable: stop and surface the build or setup command. Do not improvise a CDN fallback. Offline is the contract.
@@ -46,7 +56,7 @@ description: 'Use when the user runs /diagram-contract, render a mermaid diagram
 - Blocked result: state the blocker, what was tried, and the exact build or setup command needed.
 
 ## Output
-A rendered diagram (SVG and PNG) embedded in the target document, plus the mermaid source (`.mmd`) and, for flowcharts, an editable excalidraw scene (`.excalidraw`) in the output directory. Terminal status: DONE when the embed is confirmed; BLOCKED when the renderer or target document is unavailable.
+A rendered diagram (SVG and PNG) embedded in the target document, plus the mermaid source (`.mmd`) and, for flowcharts, an editable excalidraw scene (`.excalidraw`) in the output directory, ordered bound → author → write-mmd → render-offline → transport → svg → png → excalidraw → embed → show → changes, with terminal status DONE when the embed is confirmed or BLOCKED when the renderer or target document is unavailable.
 
 ## Provenance
 

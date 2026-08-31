@@ -1,6 +1,6 @@
 ---
 name: token-integration-analyzer
-description: 'Use when asked to analyze a token implementation or integration for ERC20/ERC721 standards conformity, owner privileges, 24+ known nonstandard token patterns, and defensive integration safety, and returns a prioritized remediation report. Don''t use for tasks that require source or remote-system changes.'
+description: 'Analyze a token implementation or integration for ERC20/ERC721 conformity, owner privileges, 24+ nonstandard patterns, and defensive integration safety. Returns a prioritized remediation report. Not for tasks that require source or remote-system changes.'
 ---
 
 # Token integration analyzer
@@ -25,29 +25,22 @@ Optional:
 - Deployed contract address (required for on-chain scarcity and holder analysis).
 - RPC endpoint URL (required when address is supplied).
 
+## Refusals
+
+- Will not fabricate on-chain facts when address or RPC is absent.
+- Will not invent evidence or call external tools not covered by this procedure.
+- Will not label a behavior as confirmed when it cannot be inferred from static code alone — label it unverified.
+
 ## Procedure
 
-1. **Determine analysis context.** Classify as token implementation, token integration, or both. Identify the platform (Ethereum, other EVM, or non-EVM). Confirm the token type(s) under analysis.
-
-2. **Run static analysis (Solidity).** If the codebase is Solidity and Slither is available, run `slither-check-erc` for ERC20 or ERC721 conformity, `slither --print human-summary` for complexity and upgrade analysis, and `slither --print contract-summary` for function inventory. Capture all output verbatim. If Slither is unavailable, manually verify all ERC conformity criteria from step 3 and document the gap.
-
-3. **Analyze all 10 assessment categories.** For each applicable category, evaluate every checklist item against the codebase and produce a compliance finding (pass, warning, or fail) with file and line references:
-   - **General Considerations**: audit history, team transparency, security contact.
-   - **Contract Composition**: complexity, SafeMath or Solidity 0.8+ arithmetic guards, non-token functions, single address entry point.
-   - **Owner Privileges**: upgradeability (proxy patterns), minting caps, pausability, blacklisting, team accountability.
-   - **ERC20 Conformity**: boolean return values on transfer/transferFrom, metadata presence, decimals type and value, race-condition mitigation (increaseAllowance/decreaseAllowance).
-   - **ERC20 Extension Risks**: external calls in transfer (ERC777 hooks), transfer fees, rebasing or yield-bearing mechanics.
-   - **Token Scarcity Analysis** (on-chain only when address and RPC are supplied): supply distribution, holder concentration, exchange listings, flash-loan and flash-mint risk.
-   - **Weird ERC20 Patterns**: check all 24 known nonstandard behaviors: reentrant calls (ERC777 hooks), missing return values (USDT, BNB, OMG), fee-on-transfer (STA, PAXG), balance modifications outside transfers (Ampleforth, Compound), upgradable tokens (USDC, USDT), flash-mintable (DAI), blocklists (USDC, USDT), pausable tokens (BNB, ZIL), approval race protections (USDT, KNC), revert on zero-address approval, revert on zero-value approval, revert on zero-value transfer, multiple token addresses, low decimals (USDC 6, Gemini 2), high decimals (YAM-V2 24), transferFrom with src==msg.sender, non-string metadata (MKR), revert on transfer to zero, no-revert-on-failure (ZRX, EURS), revert on large approvals (UNI, COMP ≥ 2^96), code injection via token name, u…
-   - **Token Integration Safety**: safe transfer patterns (SafeERC20), balance verification before/after transfer, allowlist pattern, wrapper contracts, reentrancy guards on token interactions.
-   - **ERC721 Conformity**: transfers to 0x0 revert, safeTransferFrom and onERC721Received, metadata functions, ownerOf behavior, approval clearing on transfer, token ID immutability.
-   - **ERC721 Common Risks**: onERC721Received reentrancy, safe minting to contracts, burning clears approvals.
-
-4. **Query on-chain data** if address and RPC are supplied. Retrieve name, symbol, decimals, totalSupply, owner/admin address, and pause status. Identify holder distribution and concentration. Do not hallucinate on-chain facts when address or RPC is absent.
-
-5. **Produce the prioritized remediation report.** Structure: executive summary with overall risk level and critical/high count; per-category findings with pass/warn/fail status and evidence; weird-token-pattern table listing each applicable pattern, presence, risk level, evidence, and mitigation; on-chain analysis section (when address supplied); integration-safety assessment (when analyzing protocol); prioritized recommendations grouped CRITICAL (fix before deployment), HIGH (fix soon), MEDIUM (improve), LOW (best practice). Each recommendation must cite the specific unsafe assumption and the concrete defensive change that addresses it.
+1. **Determine analysis context.** Classify as token implementation, token integration, or both. Identify the platform (Ethereum, other EVM, or non-EVM). Confirm the token type(s) under analysis. **Done when:** the context, platform, and token type(s) are confirmed.
+2. **Run static analysis (Solidity).** If the codebase is Solidity and Slither is available, run `slither-check-erc` for ERC20 or ERC721 conformity, `slither --print human-summary` for complexity and upgrade analysis, and `slither --print contract-summary` for function inventory. Capture all output verbatim. If Slither is unavailable, manually verify all ERC conformity criteria from step 3 and document the gap. **Done when:** static analysis output is captured or manual verification is documented.
+3. **Analyze all 10 assessment categories.** For each applicable category, evaluate every checklist item against the codebase and produce a compliance finding (pass, warning, or fail) with file and line references. The per-category checklist items are in `references/assessment-categories.md`. **Done when:** every applicable category is evaluated with findings.
+4. **Query on-chain data** if address and RPC are supplied. Retrieve name, symbol, decimals, totalSupply, owner/admin address, and pause status. Identify holder distribution and concentration. Do not hallucinate on-chain facts when address or RPC is absent. **Done when:** on-chain data is retrieved or the exclusion is noted.
+5. **Produce the prioritized remediation report.** Structure: executive summary with overall risk level and critical/high count; per-category findings with pass/warn/fail status and evidence; weird-token-pattern table listing each applicable pattern, presence, risk level, evidence, and mitigation; on-chain analysis section (when address supplied); integration-safety assessment (when analyzing protocol); prioritized recommendations grouped CRITICAL (fix before deployment), HIGH (fix soon), MEDIUM (improve), LOW (best practice). Each recommendation must cite the specific unsafe assumption and the concrete defensive change that addresses it. **Done when:** the report is produced with every recommendation tying one unsafe assumption to one defensive change.
 
 ## Failure and recovery
+
 | Failure class | Condition | Result |
 |---|---|---|
 | no-token-code | Codebase contains no token-related source | Report that no token implementation or integration was found; stop. |
@@ -61,13 +54,8 @@ Partial-result rule: return findings for all categories successfully evaluated; 
 Non-mutation rule: this skill performs no file writes, no credential use, and no remote mutations. No rollback required.
 
 ## Output
-A structured token security report containing:
-- Executive summary with overall risk level (CRITICAL / HIGH / MEDIUM / LOW) and counts per severity.
-- Per-category compliance checklist: all 10 categories with pass/warn/fail for each item.
-- Weird-token-pattern table: each of the 24 patterns that apply, with presence, risk level, evidence, and mitigation.
-- On-chain analysis section: scarcity, holder distribution, exchange listings, configuration (present only when address and RPC supplied).
-- Integration-safety assessment: safe-transfer usage, balance verification, defensive patterns, weird-token handling (present only when protocol integration is analyzed).
-- Prioritized recommendations: CRITICAL / HIGH / MEDIUM / LOW groups; each recommendation ties one unsafe assumption to one concrete defensive change.
+
+A structured token security report with executive summary (risk level and counts per severity), per-category compliance checklist (all 10 categories with pass/warn/fail), weird-token-pattern table (each of the 24 applicable patterns with presence, risk, evidence, mitigation), on-chain analysis section (when address and RPC supplied), integration-safety assessment (when protocol integration analyzed), and prioritized recommendations (CRITICAL/HIGH/MEDIUM/LOW, each tying one unsafe assumption to one defensive change) — ordering: summary, categories, patterns, on-chain, integration, recommendations.
 
 ## Provenance
 

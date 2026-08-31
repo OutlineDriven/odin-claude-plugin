@@ -1,6 +1,6 @@
 ---
 name: plan-review
-description: 'Use when a plan path or plan text is supplied, audit each item against the current codebase and produce an accuracy verdict page. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a plan path or text is supplied. Audits each item against the current codebase and produces an accuracy verdict page. Not for tuning review questions — use plan-review-tune; not for scoring — use planning.'
 ---
 
 # Visual plan review
@@ -24,30 +24,14 @@ The plan may be a markdown file, a text file, or a structured document. If a pat
 
 ## Procedure
 
-1. **Receive and bound input.** Accept either a plan path or plan text. Record which form was supplied. Do not widen scope beyond the supplied plan.
-2. **Parse the plan.** Extract every named change, file target, decision, or action item from the plan. If the plan is text, identify discrete items by structural markers (headers, list items, numbered steps, or fenced blocks). If the plan contains fewer than one extractable item, stop and report that the plan is empty or unparseable.
-3. **Map items to codebase targets.** For each extracted item, identify the file path or symbol it refers to. Normalize paths relative to the workspace root. Skip items that name no target.
-4. **Audit each item against the codebase.** For each item with a target:
-   - Read the target file if it exists.
-   - Compare the item's described state or change against the actual file content.
-   - Classify the item:
-     - **correct**: the item accurately describes the current codebase state
-     - **stale**: the codebase has diverged from what the item describes
-     - **risky**: the item describes a change that would conflict with or break existing code
-     - **unsupported**: the item references a target that cannot be verified (unreachable, permission denied, or ambiguous)
-     - **missing**: the item describes a target that does not exist
-5. **Record verdicts.** Accumulate the per-item classification and the evidence supporting it.
-6. **Synthesize the final decision.** Based on the distribution of verdicts:
-   - **approve**: all verifiable items are correct or stale with acceptable rationale
-   - **revise**: at least one item is stale or risky but no item is fundamentally incompatible with the codebase
-   - **reject**: at least one item is risky or unsupported and no reliable decision can be formed
-   - Include a rationale sentence explaining the decision.
-7. **Write the verdict page.** Create the `diagrams/` directory if it does not exist. Write `diagrams/plan-review.html` containing:
-   - The supplied plan title or first line
-   - A table of items with their classification and supporting evidence
-   - The final decision and rationale
-   - A timestamp
-8. **Open the verdict page.** Display the path to the user and present the final decision.
+1. **Receive and bound input.** Accept either a plan path or plan text. Record which form was supplied. Do not widen scope beyond the supplied plan. Done when: the input form is recorded and scope is bounded.
+2. **Parse the plan.** Extract every named change, file target, decision, or action item from the plan. If the plan is text, identify discrete items by structural markers (headers, list items, numbered steps, or fenced blocks). Done when: every extractable item is extracted, or the plan is reported empty/unparseable.
+3. **Map items to codebase targets.** For each extracted item, identify the file path or symbol it refers to. Normalize paths relative to the workspace root. Skip items that name no target. Done when: each item maps to a normalized target or is skipped as targetless.
+4. **Audit each item against the codebase.** For each item with a target, read the target file if it exists, compare the item's described state against the actual content, and classify it: **correct** (accurately describes current state), **stale** (codebase diverged), **risky** (would conflict or break existing code), **unsupported** (target cannot be verified), or **missing** (target does not exist). Done when: every item with a target is classified with supporting evidence.
+5. **Record verdicts.** Accumulate the per-item classification and the evidence supporting it. Done when: all verdicts and evidence are accumulated.
+6. **Synthesize the final decision.** Based on the distribution of verdicts: **approve** (all verifiable items correct or stale with acceptable rationale), **revise** (at least one stale or risky but no fundamentally incompatible item), or **reject** (at least one risky or unsupported with no reliable decision possible). Include a rationale sentence. Done when: the final decision and rationale are synthesized.
+7. **Write the verdict page.** Create the `diagrams/` directory if it does not exist. Write `diagrams/plan-review.html` containing the plan title or first line, a table of items with classification and evidence, the final decision and rationale, and a timestamp. Done when: `diagrams/plan-review.html` is written with all required sections.
+8. **Open the verdict page.** Display the path to the user and present the final decision. Done when: the path is displayed and the decision is presented.
 
 ## Failure and recovery
 **Missing-plan.** If no plan path is supplied and no plan text is given, stop and report that no plan was provided.
@@ -67,10 +51,7 @@ The plan may be a markdown file, a text file, or a structured document. If a pat
 **Rollback rule:** If an unintended file is written, restore it from VCS. The verdict page in `diagrams/` is the only intentional write.
 
 ## Output
-A verdict page written to `diagrams/plan-review.html` opened and displayed to the user. The page contains:
-- Per-item accuracy verdicts: correct, stale, risky, unsupported, or missing
-- A final decision: approve, revise, or reject
-- A rationale sentence
+A verdict page at `diagrams/plan-review.html` with per-item accuracy verdicts (correct, stale, risky, unsupported, missing), a final decision (approve, revise, reject), and rationale — opened and displayed to the user.
 
 ## Provenance
 

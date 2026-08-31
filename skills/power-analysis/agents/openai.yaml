@@ -1,3 +1,3 @@
 interface:
   display_name: "Power Analysis"
-  short_description: "Preregistered two-arm sample-size design"
+  short_description: "Use when a two-arm comparison needs sample sizing and validity"

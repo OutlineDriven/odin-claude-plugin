@@ -1,6 +1,6 @@
 ---
 name: deployment-setup
-description: 'Use when the user runs /deployment-setup, configure and verify the project deployment pipeline through CI or workflow files without triggering a deployment. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user runs /deployment-setup to configure and verify the project deployment pipeline through CI or workflow files without triggering a deployment. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Deployment setup
@@ -20,11 +20,11 @@ The project root containing the CI or workflow configuration to edit. The target
 
 ## Procedure
 
-1. Detect existing CI or workflow configuration in the project root and identify the deployment platform from it. If none exists, ask the user for the target platform and pipeline shape before creating any file.
-2. Bound scope: enumerate the exact CI or workflow files this skill will create or edit and show the set to the user before mutation. Write only those files.
-3. Configure the deployment pipeline stages (build, test, deploy) in the CI or workflow files using the user-supplied platform, environment, and commands. Do not add stages the user did not request.
-4. Verify the configuration by running the project's local check set (lint, build, test) against the pipeline definition. If the platform provides a local validation command for the workflow file, run it.
-5. Do not trigger a deployment. The pipeline is configured and verified locally only.
+1. Detect existing CI or workflow configuration in the project root and identify the deployment platform from it. If none exists, ask the user for the target platform and pipeline shape before creating any file. Done when: the deployment platform is identified from existing config or supplied by the user.
+2. Define the scope: enumerate the exact CI or workflow files this skill will create or edit and show the set to the user before mutation. Write only those files. Done when: the file set is enumerated and shown to the user before any mutation.
+3. Configure the deployment pipeline stages (build, test, deploy) in the CI or workflow files using the user-supplied platform, environment, and commands. Do not add stages the user did not request. Done when: the pipeline stages are configured with only user-requested stages.
+4. Verify the configuration by running the project's local check set (lint, build, test) against the pipeline definition. If the platform provides a local validation command for the workflow file, run it. Done when: every local check and platform validation command is run with pass or fail recorded.
+5. Do not trigger a deployment. The pipeline is configured and verified locally only. Done when: the pipeline is configured and verified with no deployment triggered.
 
 ## Failure and recovery
 - Missing platform or required inputs: stop and ask the user; do not create files or guess credentials.
@@ -33,7 +33,7 @@ The project root containing the CI or workflow configuration to edit. The target
 - Blocked result: name the missing input or failing check and stop; never claim the done predicate holds while a check is unverified.
 
 ## Output
-Configured CI or workflow files defining the deployment pipeline, plus a report listing the files written, the verification checks run, and each check's pass or fail status. No deployment is triggered.
+Configured CI or workflow files defining the deployment pipeline, plus a report listing files written and per-check pass or fail status; no deployment triggered.
 
 ## Provenance
 

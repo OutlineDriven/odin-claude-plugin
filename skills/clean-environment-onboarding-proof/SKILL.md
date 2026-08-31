@@ -1,9 +1,9 @@
 ---
 name: clean-environment-onboarding-proof
-description: 'Use when Onboarding instructions need proof from a clean disposable environment. Produces Clean-environment onboarding proof. Stop at the declared success, non-success, or bound.'
+description: 'Use when onboarding instructions need proof from a clean disposable environment. Runs the published instructions to a declared ready state, stopping at success, non-success, or the bound.'
 ---
 
-# clean-environment-onboarding-proof
+# Clean-environment onboarding proof
 
 ## Contract
 
@@ -13,19 +13,14 @@ description: 'Use when Onboarding instructions need proof from a clean disposabl
 | Authority | ISOLATED_ENVIRONMENT |
 | Side effect | Clean-environment onboarding proof |
 | Done | A documented ready state is reached from a disposable environment using only published instructions. |
-| Stop | blocked; unsafe setup; retry exhausted. Bound: Disposable environments and retry cap.. Receipt terminal classes: success, capped, stalled, blocked, exhausted, pending. Budget exhaustion is never success unless it is the predeclared success predicate. |
+| Stop | blocked; unsafe setup; retry exhausted. Bound: Disposable environments and retry cap. Receipt terminal classes: success, capped, stalled, blocked, exhausted, pending. Budget exhaustion is never success unless it is the predeclared success predicate. |
 
 ## Procedure
 
-1. Bind the declared bound and freeze it before mutation.
-2. Execute the Clean-environment onboarding proof inside the bound.
-3. Stop at outcome.success, any outcome.non_success, or outcome.bound.
-4. Persist per profiles.persistence.P1 (durable_location .outline/loops/<slug>/<run_id>/ when durable; emit receipt.json before return).
-
-## Verification
-
-1. Confirm outcome.success holds or a named non_success/bound terminal applies.
-2. Write an immutable K11 receipt with every K11 field.
+1. Bind the declared bound and freeze it before mutation. Done when: the bound is frozen and recorded before any mutation occurs.
+2. Execute the clean-environment onboarding proof inside the bound. Done when: the proof runs to a terminal outcome.
+3. Stop at outcome.success, any outcome.non_success, or outcome.bound. Done when: a terminal class is assigned.
+4. Persist per profiles.persistence.P1 (durable_location .outline/loops/<slug>/<run_id>/ when durable; emit receipt.json before return). Done when: receipt.json is written with every K11 field and outcome.success holds or a named non_success/bound terminal applies.
 
 ## Provenance
 

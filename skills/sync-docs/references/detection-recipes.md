@@ -1,4 +1,4 @@
-# Native Detection Recipes
+# Native detection recipes
 
 ## Manifest versions
 

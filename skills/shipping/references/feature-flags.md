@@ -1,4 +1,4 @@
-# Feature Flag Strategy
+# Feature flag strategy
 
 Ship behind feature flags to decouple deployment from release:
 

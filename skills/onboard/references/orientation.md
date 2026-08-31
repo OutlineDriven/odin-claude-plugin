@@ -1,6 +1,6 @@
 # Onboard orientation reference
 
-This reference is the self-contained checklist and output contract for the onboarding op. Use it to keep collection bounded, synthesis consistent, and degradation honest.
+This self-contained reference defines the checklist and output contract for the onboarding operation. Use it to keep collection bounded, synthesis consistent, and degradation honest.
 
 ## Data-collection checklist
 

@@ -1,4 +1,4 @@
-# Shared Repo-Grounding Profile Cache
+# Shared repo-grounding profile cache
 
 Read this when a repo-grounding skill needs the question-agnostic **project profile** (stack, deps, conventions, structure). The profile is derived once and reused within a session and across sessions and skills at an unchanged commit — only the *question-specific* grounding for the current run is ever re-derived.
 
@@ -14,7 +14,7 @@ A single JSON object, versioned by `profile_schema_version`:
 - **Conventions & instruction files** — paths + digests of the *root* `AGENTS.md`/`CLAUDE.md`/`GEMINI.md`/`ARCHITECTURE.md`/`README.md`/`CONTRIBUTING.md`/`STRATEGY.md`.
 - **Vocabulary** — `CONCEPTS.md` canonical terms.
 
-## What is NOT cached (always re-globbed fresh)
+## What is not cached (always re-globbed fresh)
 
 Never read from the cache — recompute every run:
 

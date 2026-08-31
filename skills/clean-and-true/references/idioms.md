@@ -2,7 +2,7 @@
 
 Owned by `clean-and-true`. Linked by consumers at `../clean-and-true/references/idioms.md`.
 
-- Edit safety: `rewrite-clean-v0`, `reorder`, `debloat`, `consolidate-to-one-home`
+- Edit safety: `rewrite-clean-v0`, `reorder`, `deslop` (bloat mode), `consolidate-to-one-home`
 - Clean room: `fresh-reader-review`, `decision-rationale-gaps`, `fan-out-fresh-reads`, `evaluation-leakage-audit`, `autobahn`
 - Negatives as corpus: `restart-keeping-lessons`, `autobahn`
 
@@ -18,10 +18,10 @@ renumbers.
 
 ## Clean room
 
-A fresh zero-context sub-session dispatched with the artifact and nothing else:
-no conversation history, no author's framing, no prior verdict. The point is
-that it cannot infer what the author meant. The sub-session reads and reports
-but does not edit.
+A fresh zero-context sub-session receives the artifact and nothing else: no
+conversation history, author's framing, or prior verdict. Without that context,
+it cannot infer what the author meant. The sub-session reads and reports but
+does not edit.
 
 ## Negatives as corpus
 

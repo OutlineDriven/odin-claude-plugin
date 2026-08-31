@@ -1,6 +1,6 @@
 ---
 name: cargo-fuzz
-description: 'Use when initializing, running, measuring, or triaging a cargo-fuzz target in a Rust crate. The named target runs under the intended sanitizer and reproduces any selected artifact. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when initializing, running, measuring, or triaging a cargo-fuzz target in a Rust crate. The named target runs under the intended sanitizer and reproduces any selected artifact. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # cargo-fuzz
@@ -24,9 +24,9 @@ description: 'Use when initializing, running, measuring, or triaging a cargo-fuz
 
 ## Procedure
 
-1. Verify the nightly toolchain and cargo-fuzz are installed: `rustup install nightly` and `cargo install cargo-fuzz`. Confirm with `cargo +nightly --version` and `cargo fuzz --version`. cargo-fuzz requires nightly because it relies on unstable compiler features and libFuzzer integration.
-2. Ensure the target crate exposes a library target. If the project is binary-only, move reusable code from `src/main.rs` into `src/lib.rs` so the fuzz harness can call it.
-3. Initialize the fuzz workspace: `cargo fuzz init`. This creates `fuzz/Cargo.toml` and `fuzz/fuzz_targets/fuzz_target_1.rs`.
+1. Install the nightly toolchain and cargo-fuzz with `rustup install nightly` and `cargo install cargo-fuzz`. Confirm both are installed with `cargo +nightly --version` and `cargo fuzz --version`. cargo-fuzz requires nightly because it relies on unstable compiler features and libFuzzer integration. **Done when:** nightly and cargo-fuzz are installed and confirmed.
+2. Ensure the target crate exposes a library target. If the project is binary-only, move reusable code from `src/main.rs` into `src/lib.rs` so the fuzz harness can call it. **Done when:** the crate exposes a library target.
+3. Initialize the fuzz workspace: `cargo fuzz init`. This creates `fuzz/Cargo.toml` and `fuzz/fuzz_targets/fuzz_target_1.rs`. **Done when:** the fuzz workspace is initialized.
 4. Write the harness in the generated fuzz target file using the `fuzz_target!` macro with `#![no_main]`:
    ```rust
    #![no_main]
@@ -36,9 +36,9 @@ description: 'Use when initializing, running, measuring, or triaging a cargo-fuz
        your_project::target_function(data);
    });
    ```
-   Handle `Result::Err` gracefully inside the harness; keep it deterministic with no RNG. For structure-aware fuzzing, derive `Arbitrary` on a type in the library crate (`#[derive(Debug, Arbitrary)]`), add `arbitrary = { version = "1", features = ["derive"] }` to the library `Cargo.toml`, and use that type as the `fuzz_target!` parameter instead of `&[u8]`.
-5. Run the campaign: `cargo +nightly fuzz run <target>`. AddressSanitizer is enabled by default. To disable it for pure safe Rust, first verify no unsafe code with `cargo install cargo-geiger && cargo geiger`, then run `cargo +nightly fuzz run --sanitizer none <target>` for approximately 2x throughput.
-6. Reproduce a crash artifact: `cargo +nightly fuzz run <target> fuzz/artifacts/<target>/crash-<hash>`. To replay the full corpus without fuzzing: `cargo +nightly fuzz run <target> fuzz/corpus/<target> -- -runs=0`. Pass libFuzzer options after `--` (e.g. `-timeout=10`, `-max_len=1024`, `-dict=dict.dict`).
+   Handle `Result::Err` gracefully inside the harness, and keep the harness deterministic with no RNG. For structure-aware fuzzing, derive `Arbitrary` on a type in the library crate (`#[derive(Debug, Arbitrary)]`) and add `arbitrary = { version = "1", features = ["derive"] }` to the library `Cargo.toml`. Use that type as the `fuzz_target!` parameter instead of `&[u8]`. **Done when:** the harness is written with deterministic behavior and graceful error handling.
+5. Run the campaign: `cargo +nightly fuzz run <target>`. AddressSanitizer is enabled by default. To disable it for pure safe Rust, first verify no unsafe code with `cargo install cargo-geiger && cargo geiger`, then run `cargo +nightly fuzz run --sanitizer none <target>` for approximately 2x throughput. **Done when:** the campaign is running or completed under the chosen sanitizer.
+6. Reproduce a crash artifact: `cargo +nightly fuzz run <target> fuzz/artifacts/<target>/crash-<hash>`. To replay the full corpus without fuzzing: `cargo +nightly fuzz run <target> fuzz/corpus/<target> -- -runs=0`. Pass libFuzzer options after `--` (e.g. `-timeout=10`, `-max_len=1024`, `-dict=dict.dict`). **Done when:** the artifact is reproduced or the corpus is replayed.
 7. Measure coverage: install `rustup toolchain install nightly --component llvm-tools-preview`, `cargo install cargo-binutils`, and `cargo install rustfilt`. Run `cargo +nightly fuzz coverage <target>`. Generate the HTML report:
    ```bash
    HOST=$(rustc -vV | sed -n 's|host: ||p')
@@ -48,21 +48,19 @@ description: 'Use when initializing, running, measuring, or triaging a cargo-fuz
      -show-line-counts-or-regions -show-instantiations \
      -format=html -o fuzz_html/ <source filter>
    ```
+   **Done when:** the HTML coverage report is generated under `fuzz_html/`.
 
 ## Failure and recovery
-- **"requires nightly" error**: the stable toolchain was selected. Re-run with `cargo +nightly fuzz`.
-- **Sanitizer compilation failure**: the installed nightly is incompatible. Pin a dated nightly with `rustup install nightly-<YYYY-MM-DD>` and re-run.
-- **"cannot find binary"**: the crate has no library target. Move code from `main.rs` into `lib.rs` and re-run `cargo fuzz init`.
-- **Low coverage**: the seed corpus is empty or sparse. Add representative sample inputs to `fuzz/corpus/<target>/`.
-- **Magic value not reached**: supply a dictionary file with `-dict=<file>`.
-- **Partial-result rule**: a crash artifact is a terminal finding, not a partial result; report it and stop.
-- **Rollback**: all mutations are confined to `fuzz/`, `target/`, and `fuzz_html/`. Remove `fuzz/` to revert initialization; delete `fuzz/corpus/<target>/`, `fuzz/artifacts/<target>/`, or `fuzz/coverage/` to revert a single phase. Never mutate files outside these directories.
+- **"requires nightly" error:** the stable toolchain was selected. Re-run with `cargo +nightly fuzz`.
+- **Sanitizer compilation failure:** the installed nightly is incompatible. Pin a dated nightly with `rustup install nightly-<YYYY-MM-DD>` and re-run.
+- **"cannot find binary":** the crate has no library target. Move code from `main.rs` into `lib.rs` and re-run `cargo fuzz init`.
+- **Low coverage:** the seed corpus is empty or sparse. Add representative sample inputs to `fuzz/corpus/<target>/`.
+- **Magic value not reached:** supply a dictionary file with `-dict=<file>`.
+- **Partial-result rule:** a crash artifact is a terminal finding, not a partial result; report it and stop.
+- **Rollback:** all mutations are confined to `fuzz/`, `target/`, and `fuzz_html/`. Remove `fuzz/` to revert initialization; delete `fuzz/corpus/<target>/`, `fuzz/artifacts/<target>/`, or `fuzz/coverage/` to revert a single phase. Never mutate files outside these directories.
 
 ## Output
-- A running or completed fuzz campaign under the chosen sanitizer.
-- A corpus under `fuzz/corpus/<target>/`.
-- Any crash artifacts under `fuzz/artifacts/<target>/`, each reproducible by re-running the target against the artifact path.
-- Optionally, an HTML coverage report under `fuzz_html/`.
+A running or completed fuzz campaign under the chosen sanitizer, a corpus under `fuzz/corpus/<target>/`, any crash artifacts under `fuzz/artifacts/<target>/` (each reproducible by re-running the target against the artifact path), and optionally an HTML coverage report under `fuzz_html/`.
 
 ## Provenance
 

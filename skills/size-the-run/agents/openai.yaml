@@ -1,3 +1,3 @@
 interface:
   display_name: "Size The Run"
-  short_description: "Recommend cheapest sufficient tier and effort for a task"
+  short_description: "Use when a run could be over- or under-powered, before"

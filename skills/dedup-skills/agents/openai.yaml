@@ -1,3 +1,3 @@
 interface:
   display_name: "Dedup Skills"
-  short_description: "Find repeated and conflicting skill rules"
+  short_description: "Use when asked to deduplicate skills or prompt directories,"

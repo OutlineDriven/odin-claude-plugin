@@ -1,3 +1,3 @@
 interface:
   display_name: "Notion Writer"
-  short_description: "Create, update, query, or archive Notion objects"
+  short_description: "Use when the user explicitly asks to create, update, query, or"

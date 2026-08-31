@@ -1,31 +1,36 @@
 ---
 name: thumbnail-accuracy-scorecard
-description: 'Use when thumbnail concepts need real-size, accuracy-first scoring without misleading claims. Produces Accuracy-gated thumbnail scorecard. Stop at the declared success, non-success, or bound.'
+description: 'Score thumbnail concepts with real-size, accuracy-first criteria without misleading claims. Not for generating thumbnails — use a generation tool; not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
-# thumbnail-accuracy-scorecard
+# Thumbnail accuracy scorecard
 
 ## Contract
 
 | Field | Bound contract |
 |---|---|
 | Trigger | Thumbnail concepts need real-size, accuracy-first scoring without misleading claims. |
-| Authority | REVERSIBLE_LOCAL_WITH_ASSET_APPROVAL |
-| Side effect | Accuracy-gated thumbnail scorecard |
+| Authority | Reversible local with asset approval. |
+| Side effect | Accuracy-gated thumbnail scorecard. |
 | Done | One accurate winner and two accurate runners-up clear the fixed rubric threshold. |
-| Stop | no accurate winner; approval blocked; round cap. Bound: Platform, audience, rubric, assets, and round cap.. Receipt terminal classes: success, capped, stalled, blocked, exhausted, pending. Budget exhaustion is never success unless it is the predeclared success predicate. |
+| Stop | No accurate winner; approval blocked; round cap. Bound: platform, audience, rubric, assets, and round cap. Receipt terminal classes: success, capped, stalled, blocked, exhausted, pending. Budget exhaustion is never success unless it is the predeclared success predicate. |
+
+## Refusals
+
+- Will not score thumbnails at sizes other than real platform dimensions.
+- Will not declare a winner that fails the accuracy rubric.
+- Will not claim success when the budget is exhausted unless exhaustion was the predeclared success predicate.
 
 ## Procedure
 
-1. Bind the declared bound and freeze it before mutation.
-2. Execute the Accuracy-gated thumbnail scorecard inside the bound.
-3. Stop at outcome.success, any outcome.non_success, or outcome.bound.
-4. Persist per profiles.persistence.P1 (durable_location .outline/loops/<slug>/<run_id>/ when durable; emit receipt.json before return).
+1. Bind the declared bound and freeze it before mutation. **Done when:** the bound is recorded and no mutation has begun.
+2. Execute the accuracy-gated thumbnail scorecard inside the bound. **Done when:** one accurate winner and two accurate runners-up clear the fixed rubric threshold, or a non-success terminal applies.
+3. Stop at outcome.success, any outcome.non_success, or outcome.bound. **Done when:** a terminal class is assigned.
+4. Persist per profiles.persistence.P1 (durable_location .outline/loops/<slug>/<run_id>/ when durable; emit receipt.json before return). Write an immutable K11 receipt with every K11 field. **Done when:** the receipt is written with every K11 field.
 
-## Verification
+## Output
 
-1. Confirm outcome.success holds or a named non_success/bound terminal applies.
-2. Write an immutable K11 receipt with every K11 field.
+A receipt.json with the terminal class, bound, and scorecard evidence, persisted at .outline/loops/<slug>/<run_id>/ — ordering: bound, scorecard evidence, terminal verdict, receipt.
 
 ## Provenance
 

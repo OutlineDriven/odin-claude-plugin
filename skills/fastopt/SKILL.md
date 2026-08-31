@@ -1,6 +1,6 @@
 ---
 name: fastopt
-description: 'Use when a user wants to optimize suspected hot paths without waiting for benchmarks, labeling claims as hypotheses. Emits labeled hypotheses and benchmark designs for suspected hot paths with no mutation or speed claim. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when a user wants to optimize suspected hot paths without waiting for benchmarks: label every cost observation as a hypothesis and emit benchmark designs, with no mutation or speed claim. Not for measured-floor rebuild campaigns — use extremely-optimize.'
 ---
 
 # Fastopt
@@ -22,12 +22,12 @@ Optional: prior measurements, profiling traces, or environment constraints the u
 
 ## Procedure
 
-1. For each named hot path, read the source and surrounding call graph read-only; record the inputs, allocations, loops, and branches that plausibly dominate cost.
-2. Label every cost observation a hypothesis, not a finding: state the assumed workload, the assumed dominant operation, and the assumed magnitude rank, with no speed claim.
-3. For each hypothesis, design a benchmark that would confirm or refute it: name the metric, the baseline, the variant, the workload generator, the warm-up, the repetition count, and the noise controls.
-4. Bound the change scope implied by each hypothesis to the named path; do not propose edits outside it or assume a fix is correct.
-5. If a hypothesis cannot be tested without mutating code, state the minimal mutation needed to measure it and stop before performing it.
-6. Emit the hypotheses and benchmark designs as chat output. Make no mutation and no speed claim.
+1. For each named hot path, read the source and surrounding call graph read-only; record the inputs, allocations, loops, and branches that plausibly dominate cost. Done when: every named path is read and its cost-plausible elements recorded.
+2. Label every cost observation a hypothesis, not a finding: state the assumed workload, the assumed dominant operation, and the assumed magnitude rank, with no speed claim. Done when: every observation carries its hypothesis label with workload, dominant operation, and magnitude rank.
+3. For each hypothesis, design a benchmark that would confirm or refute it: name the metric, the baseline, the variant, the workload generator, the warm-up, the repetition count, and the noise controls. Done when: every hypothesis has a benchmark design with all seven elements named.
+4. Bound the change scope implied by each hypothesis to the named path; do not propose edits outside it or assume a fix is correct. Done when: every hypothesis's implied change scope is bounded to its named path.
+5. If a hypothesis cannot be tested without mutating code, state the minimal mutation needed to measure it and stop before performing it. Done when: the blocking reason and minimal mutation are stated, or the hypothesis is testable read-only.
+6. Emit the hypotheses and benchmark designs as chat output. Make no mutation and no speed claim. Done when: the chat report is emitted with no mutation and no speed claim.
 
 ## Failure and recovery
 - Unmeasured path: mark the hypothesis unmeasured; do not infer slowness from absence of data.

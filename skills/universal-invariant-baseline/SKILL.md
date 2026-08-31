@@ -1,6 +1,6 @@
 ---
 name: universal-invariant-baseline
-description: 'Use when a user explicitly invokes it, apply an invariant-first, fail-fast, special-case-eliminating baseline to any implementation, producing a corrected file with all invariant checks passing. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a user explicitly invokes this skill to apply an invariant-first, fail-fast, special-case-eliminating baseline to a named implementation. Not for encoding domain models in types or design-by-contract — use type-driven or contract-driven.'
 ---
 
 # Universal invariant baseline
@@ -22,19 +22,15 @@ Required:
 
 ## Procedure
 
-1. **Validate the request.** Confirm `TARGET` is a concrete, scoped implementation task with a named local path. If `TARGET` is absent, empty, or points to a non-local artifact, raise `BLOCKED-INPUT` and stop.
-
-2. **Enumerate invariants.** For `LANGUAGE`, enumerate the language-native invariant patterns that govern correctness: type contracts, ownership/borrow rules, null/void guards, resource lifecycle ordering, and domain-specific preconditions. Write each as a named, executable check with a unique identifier.
-
-3. **Insert fail-fast guards.** Before every mutable state operation, every external call, and every branching decision, insert the matching invariant check. If any check fails, halt immediately with `INVARIANT-FAIL: <identifier>` and the observed violation. The target artifact is unchanged until all checks pass.
-
+1. **Validate the request.** Confirm `TARGET` is a concrete, scoped implementation task with a named local path. If `TARGET` is absent, empty, or points to a non-local artifact, raise `BLOCKED-INPUT` and stop. **Done when:** `TARGET` is confirmed as a concrete local path.
+2. **Enumerate invariants.** For `LANGUAGE`, enumerate the language-native invariant patterns that govern correctness: type contracts, ownership/borrow rules, null/void guards, resource lifecycle ordering, and domain-specific preconditions. Write each as a named, executable check with a unique identifier. **Done when:** every invariant pattern is a named, executable check with a unique identifier.
+3. **Insert fail-fast guards.** Before every mutable state operation, every external call, and every branching decision, insert the matching invariant check. If any check fails, halt immediately with `INVARIANT-FAIL: <identifier>` and the observed violation. The target artifact is unchanged until all checks pass. **Done when:** every mutable state operation, external call, and branching decision has a matching invariant guard.
 4. **Eliminate special cases.** Scan the target for:
    - Boolean flag arguments or module-level toggles that gate behavior.
    - Hardcoded branch paths that duplicate a general case.
    - Numeric or string domain constants used as inline guards.
-   For each found artifact, either refactor the boolean branch into a data-driven lookup, merge the special case into the general path, or convert the magic constant into a named constant with a documented invariant.
-
-5. **Re-validate.** Run all named invariant checks against the refined artifact. If any check fails, halt with `INVARIANT-FAIL: <identifier>` listing the specific failure. Record the complete set of removed special-case artifacts as the resolution log.
+   For each found artifact, either refactor the boolean branch into a data-driven lookup, merge the special case into the general path, or convert the magic constant into a named constant with a documented invariant. **Done when:** no boolean flags, hardcoded duplicate branches, or inline magic constants remain.
+5. **Re-validate.** Run all named invariant checks against the refined artifact. If any check fails, halt with `INVARIANT-FAIL: <identifier>` listing the specific failure. Record the complete set of removed special-case artifacts as the resolution log. **Done when:** all invariant checks pass and the resolution log is complete.
 
 ## Failure and recovery
 | Failure class | Condition | Result |
@@ -46,7 +42,7 @@ Required:
 Partial-result rule: no file is written until all steps complete without failure. Rollback path: `git restore TARGET` or delete the written artifact.
 
 ## Output
-The target local artifact replaced with its invariant-first, fail-fast, special-case-eliminating refinement. A resolution log listing every removed special case and the invariant identifier that now governs its behavior.
+The target local artifact replaced with its invariant-first refinement, plus a resolution log listing every removed special case and the invariant identifier that now governs its behavior.
 
 ## Provenance
 

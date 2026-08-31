@@ -1,3 +1,3 @@
 interface:
   display_name: "Promise Proof"
-  short_description: "Customer-promise evidence ledger"
+  short_description: "Use when customer-facing promises need linked evidence before"

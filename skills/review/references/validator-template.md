@@ -1,6 +1,6 @@
 # Validator sub-agent prompt template
 
-This template is used by the orchestrator to spawn one validator sub-agent per surviving finding before the final report. The validator's job is **independent re-verification**, not re-reasoning. It is a fresh second opinion, not a critic of the original persona's analysis.
+The orchestrator uses this template to spawn one validator sub-agent per surviving finding before the final report. The validator provides **independent re-verification**, not re-reasoning. It is a fresh second opinion, not a critic of the original persona's analysis.
 
 ---
 

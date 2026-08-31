@@ -1,6 +1,6 @@
 ---
 name: design-gate-brainstorming
-description: 'Use when a user requests creative work — a feature, component, or behavior change — and no approved design exists, so this skill fires before any implementation and routes the request through a spike, bounded, or architectural design path until the user approves the intent. The outcome is a recorded approval, an in-chat design, a reported recommendation, or a self-review-clean spec handed to the plan writer. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use before implementing creative work when no approved design exists; routes through spike, bounded, or architectural design until intent is approved. Not for work with an approved design already in context — proceed to implementation. No remote or irreversible changes.'
 ---
 
 # Design gate brainstorming
@@ -22,15 +22,22 @@ description: 'Use when a user requests creative work — a feature, component, o
 
 ## Procedure
 
-1. On any creative-work request with no approved design already in context, stop implementation and route. Confirm at the trust boundary that the request is creative work and that no approved design exists; if an approved design is present, do not route.
+1. On any creative-work request with no approved design already in context, stop implementation and route. Confirm at the trust boundary that the request is creative work and that no approved design exists; if an approved design is present, do not route. **Done when:** the request is confirmed as creative work with no approved design, or the skill stands down because an approved design exists.
+
 2. Classify the request into exactly one path:
    - **Spike** — the question is exploratory or the design space is unknown. Build nothing durable; any code produced is labeled throwaway. Produce a recommendation only.
    - **Bounded** — the change fits one component or a small, well-understood surface. Produce the design in chat: goal, constraints, key decisions, open questions.
    - **Architectural** — the change crosses module boundaries, alters a contract, or has durable blast radius. Write a spec document to a local file under the project covering problem, constraints, design, alternatives considered, and risks.
-3. For the architectural path only: self-review the spec against its own acceptance criteria, then dispatch a spec-reviewer subagent if available; revise until self-review is clean.
-4. On every path, present the result and ask the user for explicit approval before any implementation action.
-5. Record the user's decision: approved, approved-with-changes, or rejected. Do not begin implementation until approval is recorded.
-6. Architectural path: on approval, hand the clean spec to the plan writer. Bounded path: on approval, the in-chat design is the recorded decision. Spike path: the recommendation is the terminal output.
+
+   **Done when:** exactly one path is chosen and named.
+
+3. For the architectural path only: self-review the spec against its own acceptance criteria, then dispatch a spec-reviewer subagent if available; revise until self-review is clean. **Done when:** the spec is self-review-clean (and reviewer notes recorded if a reviewer ran).
+
+4. On every path, present the result and ask the user for explicit approval before any implementation action. **Done when:** the result is presented and explicit approval is requested.
+
+5. Record the user's decision: approved, approved-with-changes, or rejected. Do not begin implementation until approval is recorded. **Done when:** the decision is recorded and, if approved, implementation is cleared to start.
+
+6. Architectural path: on approval, hand the clean spec to the plan writer. Bounded path: on approval, the in-chat design is the recorded decision. Spike path: the recommendation is the terminal output. **Done when:** the path's terminal handoff is made.
 
 ## Failure and recovery
 - **Ambiguous path**: if the request does not clearly fit spike, bounded, or architectural, ask the user to pick the path before proceeding; do not default silently.
@@ -41,7 +48,7 @@ description: 'Use when a user requests creative work — a feature, component, o
 - **Non-mutation rule**: bounded and spike paths write no files. Architectural path writes only the spec document; rollback is deleting that file before approval.
 
 ## Output
-One terminal classification per path: spike → a reported recommendation; bounded → an in-chat design plus the user's recorded approval; architectural → a self-review-clean spec document plus handoff to the plan writer. The user's explicit approval or rejection is recorded before any implementation.
+One terminal classification per path: spike → a reported recommendation; bounded → an in-chat design plus the user's recorded approval; architectural → a self-review-clean spec plus handoff to the plan writer — ordered confirm-need → classify → self-review → present → record → handoff, with the user's explicit approval or rejection recorded before any implementation.
 
 ## Provenance
 

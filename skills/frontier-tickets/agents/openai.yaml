@@ -1,3 +1,3 @@
 interface:
   display_name: "Frontier Tickets"
-  short_description: "Decompose a settled plan into blocker-declared tickets."
+  short_description: "Use when a settled plan or spec needs tracer-bullet"

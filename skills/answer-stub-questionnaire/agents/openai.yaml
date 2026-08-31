@@ -1,3 +1,3 @@
 interface:
   display_name: "Answer Stub Questionnaire"
-  short_description: "Turn knowledge gaps into send-ready questionnaires"
+  short_description: "Use when needed knowledge must be gathered asynchronously from"

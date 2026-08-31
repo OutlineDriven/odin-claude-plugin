@@ -1,3 +1,3 @@
 interface:
-  display_name: "Self-Contained HTML Readout"
-  short_description: "Produce a self-contained HTML readout with cited sources"
+  display_name: "Readout"
+  short_description: "Use when a user wants a readable, shareable document of"

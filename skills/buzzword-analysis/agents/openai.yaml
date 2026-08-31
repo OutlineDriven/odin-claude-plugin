@@ -1,3 +1,3 @@
 interface:
   display_name: "Buzzword Analysis"
-  short_description: "Describe the current jargon landscape without advocacy."
+  short_description: "Use when the user wants the current jargon weather described"

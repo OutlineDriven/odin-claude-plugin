@@ -1,6 +1,6 @@
 ---
 name: keep-why-continuous-capture
-description: 'Use when a non-trivial change lands or is abandoned, capture the decision, its rejected alternatives, and the reason in a local topic file without inventing evidence or widening scope. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use after a non-trivial change lands or is abandoned to capture the decision, its rejected alternatives, and the reason in a local topic file without inventing evidence or widening scope. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Keep why continuous capture
@@ -29,30 +29,31 @@ description: 'Use when a non-trivial change lands or is abandoned, capture the d
 
 ## Procedure
 
-1. **Detect trigger.** Recognize a non-trivial change involving a design decision, rejected alternative, workaround, incident fix, operational constraint, or changed assumption. This includes any change that was started and then abandoned after discovering why it must not be touched (zero diff). Apply the proportionality gate: obvious or self-evident choices require a sentence, not a full entry; corrections of stale values or bugs belong in CHANGELOG, not here.
+1. **Detect trigger.** Recognize a non-trivial change involving a design decision, rejected alternative, workaround, incident fix, operational constraint, or changed assumption. This includes any change that was started and then abandoned after discovering why it must not be touched (zero diff). Apply the proportionality gate: obvious or self-evident choices require a sentence, not a full entry; corrections of stale values or bugs belong in CHANGELOG, not here. Done when: the trigger is confirmed or the skill exits silently for a trivial/corrective change.
 
-2. **Bound scope.** Identify the single decision or topic at the center of the change. Do not widen scope to related decisions, past history, or speculative futures. Stop if the change is trivial, purely corrective, or does not involve a decision worth recording.
+2. **Bound scope.** Identify the single decision or topic at the center of the change. Do not widen scope to related decisions, history, or speculative futures. Stop if the change is trivial, purely corrective, or does not involve a decision worth recording. Done when: one decision or topic is identified and scope is bounded.
 
-3. **Collect entry fields.** Gather the required fields: decision text, rejected alternative(s) and the reason each was rejected, reason the outcome was chosen, type, status, evidence quality, and source/verification if available. If the reason is unknown, state 'unknown — <what would confirm it>'. Never invent rationale or resolve conflicts unilaterally.
+3. **Collect entry fields.** Gather the required fields: decision text, rejected alternatives and why each was rejected, reason for the outcome, type, status, evidence quality, and source/verification if available. If the reason is unknown, state 'unknown — <what would confirm it>'. Never invent rationale or resolve conflicts unilaterally. Done when: all required fields are gathered or marked unknown.
 
-4. **Record conflicts open.** If two or more sources give conflicting reasons, record each with the conflict flagged as open. Do not resolve the conflict; flag it needs-review.
+4. **Record conflicts open.** If two or more sources give conflicting reasons, record each reason and its source, flag the conflict as open, and set the status to needs-review. Do not resolve the conflict. Done when: every conflict is recorded with both sides and flagged open.
 
-5. **Confirm with user.** Present the completed entry to the user for confirmation before writing. If the user declines or revises, incorporate feedback and reconfirm.
+5. **Confirm with user.** Present the completed entry to the user for confirmation before writing. If the user declines or revises, incorporate feedback and reconfirm. Done when: the user explicitly confirms the entry.
 
-6. **Write or update the topic file.** Locate or create the topic file in the context directory. If the topic already has an entry with the same decision, update the existing entry instead of creating a duplicate. Write the entry with all collected fields. Keep the context index lean: do not add a new index entry if one already exists for this topic.
+6. **Write or update the topic file.** Locate or create the topic file in the context directory. If the topic already has an entry with the same decision, update the existing entry instead of creating a duplicate. Write the entry with all collected fields. Keep the context index lean: do not add a new index entry if one already exists for this topic. Done when: the topic file is written or updated with the entry and the index is lean.
 
-7. **Stop on confirmation gate refusal.** If the user does not confirm, stop without writing. Return the collected (but uncommitted) fields as the result.
+7. **Stop on confirmation gate refusal.** If the user does not confirm, stop without writing. Return the collected (but uncommitted) fields as the result. Done when: the skill stops and returns the uncommitted fields.
 
 ## Failure and recovery
 - **No context directory configured**: stop and report that the context directory is required. Do not choose a default location.
 - **Topic file write fails (permission, disk full)**: stop, report the exact failure, and do not attempt rollback — the file is unchanged.
 - **User declines confirmation**: stop without writing. The entry is not persisted. Return the uncommitted fields.
-- **Invented rationale detected**: stop before writing. Flag the field as unknown and reconfirm rather than fabricate evidence.
+- **Invented rationale detected**: stop before writing. Flag the field as unknown and reconfirm rather than fabricating evidence.
 - **No non-trivial decision found**: exit silently without writing; do not manufacture an entry for a trivial or purely corrective change.
 - **Conflicting sources**: record each source as conflicting, set status to needs-review, do not resolve unilaterally.
 
 ## Output
-A new or updated entry in the topic file, or the uncommitted fields if confirmation was refused or the trigger did not fire. The entry contains: Decision, Rejected alternative(s) with reason, Reason, Type, Status, Evidence, Source/Verification, and conflict flags where applicable.
+
+A new or updated entry in the topic file (Decision, Rejected alternative(s) with reason, Reason, Type, Status, Evidence, Source/Verification, and conflict flags where applicable), or the uncommitted fields if confirmation was refused or the trigger did not fire.
 
 ## Provenance
 

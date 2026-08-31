@@ -1,6 +1,6 @@
 ---
 name: implement-specs
-description: 'Use when asked to implement an approved feature from PRODUCT.md and TECH.md, keeping specs and code aligned in the same PR as implementation evolves. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when implementing an approved feature from PRODUCT.md and TECH.md, keeping specs and code aligned in the same PR. Not for a single settled ticket — use implement; not for ticket-DAG parallel execution — use implement-spec.'
 ---
 
 # Implement specs

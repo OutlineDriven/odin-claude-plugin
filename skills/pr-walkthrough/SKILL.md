@@ -1,6 +1,6 @@
 ---
 name: pr-walkthrough
-description: 'Use when a user asks for a zoomable PR map or graph-canvas orientation. Produce a self-contained static HTML site with four D3 views, guided tours, and a passing validator. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a user asks for a zoomable PR map or graph-canvas orientation. Produces a self-contained static HTML site with four D3 views, guided tours, and a passing validator. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # PR walkthrough
@@ -22,25 +22,15 @@ description: 'Use when a user asks for a zoomable PR map or graph-canvas orienta
 
 ## Procedure
 
-1. Parse the supplied diff. Extract every changed file path, hunk range, insertion count, and deletion count. If the input is a URL, fetch the diff via the GitHub API before parsing.
-2. Build the file dependency graph. For each changed file, record edges to other changed files that share an import or include relationship detected in the diff context lines. Store the graph as an adjacency list.
-3. Build the commit timeline. If the diff spans multiple commits (git range input), extract each commit hash, author, date, and subject. If the diff is a single unified diff, create one synthetic commit entry covering all hunks.
-4. Build the change heatmap. Map each hunk to its file path and line range. Bucket lines into 50-line blocks. Record insertion and deletion counts per block.
-5. Build the review thread flow. If a GitHub PR URL was supplied, fetch review comments and group them by file and position. Otherwise, create an empty thread list.
-6. Generate the D3 canvas HTML. Produce one self-contained HTML file containing:
-   - An SVG-based file dependency graph with zoom and pan (d3-zoom), node coloring by change magnitude, and edge bundling.
-   - A horizontal commit timeline with zoom, click-to-inspect, and tooltip showing author, date, and subject.
-   - A change heatmap grid (files × line blocks) with color intensity proportional to edit density.
-   - A review thread flow diagram showing comment threads as connected nodes along a vertical file axis.
-   - A guided tour for each view: a sequence of highlight steps that zoom and annotate key structures. Tour steps are defined as a JSON array embedded in a `<script>` tag.
-   - Inline CSS and inline JavaScript. No external dependencies except the D3 v7 library loaded from a CDN `<script>` tag.
-7. Write the HTML file to the output directory as `index.html`.
-8. Run the validator script against the generated HTML. The validator checks:
-   - All four SVG containers are present.
-   - Each tour JSON array has at least one step.
-   - The D3 CDN script tag is present.
-   - No broken internal references (element IDs referenced by tour steps exist in the DOM).
-9. If the validator reports errors, fix the HTML and re-validate. Repeat up to three times. If errors persist after three attempts, report the validator output and stop.
+1. Parse the supplied diff. Extract every changed file path, hunk range, insertion count, and deletion count. If the input is a URL, fetch the diff via the GitHub API before parsing. Done when: all changed file paths, hunk ranges, and insertion/deletion counts are extracted.
+2. Build the file dependency graph. For each changed file, record edges to other changed files that share an import or include relationship detected in the diff context lines. Store the graph as an adjacency list. Done when: the dependency graph is stored as an adjacency list.
+3. Build the commit timeline. If the diff spans multiple commits (git range input), extract each commit hash, author, date, and subject. If the diff is a single unified diff, create one synthetic commit entry covering all hunks. Done when: the commit timeline is built with hash, author, date, and subject per commit.
+4. Build the change heatmap. Map each hunk to its file path and line range. Bucket lines into 50-line blocks. Record insertion and deletion counts per block. Done when: the heatmap maps every hunk to bucketed line blocks with insertion/deletion counts.
+5. Build the review thread flow. If a GitHub PR URL was supplied, fetch review comments and group them by file and position. Otherwise, create an empty thread list. Done when: review threads are grouped by file and position or the list is empty.
+6. Generate the D3 canvas HTML. Produce one self-contained HTML file containing: an SVG-based file dependency graph with zoom and pan (d3-zoom), node coloring by change magnitude, and edge bundling; a horizontal commit timeline with zoom, click-to-inspect, and tooltip; a change heatmap grid (files × line blocks) with color intensity proportional to edit density; a review thread flow diagram showing comment threads as connected nodes along a vertical file axis; a guided tour for each view (a sequence of highlight steps defined as a JSON array embedded in a `<script>` tag); and inline CSS and inline JavaScript with no external dependencies except D3 v7 from a CDN `<script>` tag. Done when: the HTML file contains all four SVG views, guided tours, and inline CSS/JS.
+7. Write the HTML file to the output directory as `index.html`. Done when: `index.html` is written to the output directory.
+8. Run the validator script against the generated HTML. The validator checks that all four SVG containers are present, each tour JSON array has at least one step, the D3 CDN script tag is present, and no broken internal references exist (element IDs referenced by tour steps exist in the DOM). Done when: the validator runs and reports its results.
+9. If the validator reports errors, fix the HTML and re-validate. Repeat up to three times. If errors persist after three attempts, report the validator output and stop. Done when: the validator reports zero errors or three attempts are exhausted.
 
 ## Failure and recovery
 | Failure class | Behavior |
@@ -54,7 +44,7 @@ description: 'Use when a user asks for a zoomable PR map or graph-canvas orienta
 Partial results: if the HTML was written but validation failed, the output directory contains the last attempt. No rollback is needed because all writes are local and overwritable.
 
 ## Output
-A self-contained static HTML site at the output directory containing `index.html` with four D3 views, guided tours, and a passing validator result. The validator stdout is included in the generation report.
+A self-contained static HTML site at the output directory containing `index.html` with four D3 views, guided tours, and a passing validator result — validator stdout included in the generation report.
 
 ## Provenance
 

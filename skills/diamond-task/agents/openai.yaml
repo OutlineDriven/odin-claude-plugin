@@ -1,3 +1,3 @@
 interface:
   display_name: "Diamond Task"
-  short_description: "Compose disjoint worker diffs with independent review"
+  short_description: "Use when one issue or PR is too large for a worker and"

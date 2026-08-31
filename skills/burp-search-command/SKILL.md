@@ -1,6 +1,6 @@
 ---
 name: burp-search-command
-description: 'Use when a human invokes the Burp search command with a required .burp project file and optional parser operation. The command runs the Burp Suite project parser wrapper and returns JSON search results. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when a human invokes the Burp search command with a required .burp project file and optional parser operation. Runs the Burp Suite project parser wrapper and returns JSON search results. Not for source or remote-system changes.'
 ---
 
 # Burp search command
@@ -33,15 +33,16 @@ Prerequisites: Burp Suite Professional with the `burpsuite-project-file-parser` 
 
 ## Procedure
 
-1. Validate that the project file argument is supplied and that the file exists at the given path. Stop with an error if it is missing or not a regular file.
-2. Resolve the Java executable: use `BURP_JAVA` if set, otherwise the platform default. Stop with an error if the path is empty or the executable is not found.
-3. Resolve the Burp JAR: use `BURP_JAR` if set, otherwise the platform default. Stop with an error if the path is empty or the JAR is not found.
-4. If no operation argument is supplied, print usage and stop.
+1. Validate that the project file argument is supplied and that the file exists at the given path. Stop with an error if it is missing or not a regular file. Done when: the project file is confirmed to exist at the supplied path.
+2. Resolve the Java executable: use `BURP_JAVA` if set, otherwise the platform default. Stop with an error if the path is empty or the executable is not found. Done when: the Java executable path is resolved and confirmed to exist.
+3. Resolve the Burp JAR: use `BURP_JAR` if set, otherwise the platform default. Stop with an error if the path is empty or the JAR is not found. Done when: the Burp JAR path is resolved and confirmed to exist.
+4. If no operation argument is supplied, print usage and stop. Done when: at least one operation argument is present or usage is printed.
 5. Run the parser wrapper by executing the resolved Java binary headless against the resolved JAR, passing `--project-file=<project-file>` followed by every operation argument verbatim:
    ```
    <java> -jar -Djava.awt.headless=true <burpsuite_pro.jar> --project-file=<project-file> <operation...>
    ```
-6. Stream the JSON output (one object per line) from the parser to stdout. Do not parse, filter, or mutate the output inside this command.
+   Done when: the parser wrapper is invoked with the correct arguments.
+6. Stream the JSON output (one object per line) from the parser to stdout. Do not parse, filter, or mutate the output inside this command. Done when: the parser's JSON output is streamed to stdout unchanged.
 
 ## Failure and recovery
 - **Project file not found**: Print an error naming the missing path and stop. No parser invocation occurs.
@@ -52,11 +53,8 @@ Prerequisites: Burp Suite Professional with the `burpsuite-project-file-parser` 
 - **Non-mutation rule**: This command never writes to or modifies the `.burp` project file. No rollback is needed; a failed run leaves the project file untouched.
 
 ## Output
-JSON objects, one per line, written to stdout. The shape depends on the operation:
-- `auditItems`: objects with `name`, `severity`, `confidence`, `host`, `port`, `protocol`, `url`.
-- `proxyHistory` / `siteMap`: complete request/response data, narrowed by any sub-component filter.
-- `responseHeader='regex'` / `responseBody='regex'`: objects with `url` and the matching header or body content.
+JSON objects (one per line, streamed to stdout) shaped by operation: `auditItems` — name/severity/confidence/host/port/protocol/url; `proxyHistory`/`siteMap` — complete request/response data narrowed by any sub-component filter; `responseHeader`/`responseBody` regex — url plus matching header or body content.
 
 ## Provenance
 
-Adapted from the Trail of Bits skills repository (`https://github.com/trailofbits/skills`), revision `d1f1575cff97816e5cc08af66cd2506099c681d3`, file `plugins/burpsuite-project-parser/commands/burp-search.md` and supporting script `plugins/burpsuite-project-parser/skills/burpsuite-project-parser/scripts/burp-search.sh`. Licensed CC-BY-SA-4.0; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse `trail-of-bits-mark.svg` as branding. This is a clean-room adaptation: the slash-command routing and skill-pointer indirection were replaced with a self-contained procedure that restates the parser wrapper invocation, operations, environment variables, and platform defaults directly.
+Adapted from the Trail of Bits skills repository (`https://github.com/trailofbits/skills`), revision `d1f1575cff97816e5cc08af66cd2506099c681d3`, file `plugins/burpsuite-project-parser/commands/burp-search.md` and supporting script `plugins/burpsuite-project-parser/skills/burpsuite-project-parser/scripts/burp-search.sh`. Licensed CC-BY-SA-4.0; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse `trail-of-bits-mark.svg` as branding. This is a clean-room adaptation: the slash-command routing and skill-pointer indirection were replaced with a self-contained procedure that restates the parser wrapper invocation, operations, environment variables, and platform defaults directly; no third-party expression is copied.

@@ -1,6 +1,6 @@
 ---
 name: no-comments
-description: 'Use when asked to audit and remove unearned comments from code files, restoring or editing each change reversibly and reporting the full accounting. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to audit and remove unearned comments from code files, restoring or editing each change reversibly and reporting the full accounting. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # No comments
@@ -28,10 +28,8 @@ If no veto list is supplied, every comment is subject to the audit criteria.
 
 ## Procedure
 
-1. Receive and validate target file paths. Reject paths that escape the working directory or are not readable. Stop if no valid path is supplied.
-
-2. Scan each target file for comments: single-line (`//`), multi-line (`/* */`), and doc-comment (`/** */`, `///`, `<!-- -->`) forms. Record line number, text content, and category.
-
+1. Receive and validate target file paths. Reject paths that escape the working directory or are not readable. Done when: all valid paths are accepted and invalid paths are rejected with a reason.
+2. Scan each target file for comments: single-line (`//`), multi-line (`/* */`), and doc-comment (`/** */`, `///`, `<!-- -->`) forms. Record line number, text content, and category. Done when: every comment in every target file is recorded with line number, text, and category.
 3. Classify each comment into one of these categories:
 
    a. **Dead code** — commented-out code or broken examples. Deletion candidate.
@@ -42,12 +40,16 @@ If no veto list is supplied, every comment is subject to the audit criteria.
    f. **Untyped** — comment longer than 120 characters that contains no `TODO`, `@param`, `@return`, `@throws`, `@example`, or other JSDoc/TSDoc tag. Candidates for reflow or deletion.
    g. **Earned** — comments that name a legal or business rule, document an API contract, cite a specification, or preserve a non-obvious design decision. Retained.
 
+   Done when: every comment has a category assignment.
+
 4. Propose one of the following structural alternatives for each deletion candidate that would otherwise leave the code less readable:
 
    - Rename a variable or function to make the comment redundant.
    - Extract a named function or constant to make the intent explicit.
    - Add an assertion or test that enforces the same constraint.
    - Introduce a well-named guard clause.
+
+   Done when: each deletion candidate has either a structural alternative or a delete-only plan.
 
 5. Offer the user a choice for each deletion candidate:
 
@@ -56,11 +58,13 @@ If no veto list is supplied, every comment is subject to the audit criteria.
    - **Restore** — leave the comment unchanged. Skip the file.
    - **Skip file** — skip all comments in this file.
 
-6. Apply each accepted edit. Before applying an edit to a file, capture its current content in memory. If the edit fails or the result is syntactically invalid, revert the file to the captured content and stop.
+   Done when: the user has chosen an action for every deletion candidate.
 
-7. On any failure, revert all changes made in the current session and report the reverted set.
+6. Apply each accepted edit. Before applying an edit to a file, capture its current content in memory. If the edit fails or the result is syntactically invalid, revert the file to the captured content and stop. Done when: all accepted edits are applied and verified syntactically valid.
+7. On any failure, revert all changes made in the current session and report the reverted set. Done when: all changes are reverted and the reverted set is reported.
 
 ## Failure and recovery
+
 | Failure class | Condition | Result |
 |---|---|---|
 | `invalid-path` | A target path is outside the working directory or unreadable | Stop before scanning. Report the path. |
@@ -71,14 +75,8 @@ If no veto list is supplied, every comment is subject to the audit criteria.
 Partial-result rule: if edits succeed on some files before a failure, report the edited set and the failed set separately.
 
 ## Output
-A structured report containing:
 
-- **Deleted**: comment text, file, and line number for each removed comment, grouped by category.
-- **Restored**: file and line number for each comment left unchanged.
-- **Changed**: structural edit applied (e.g., rename, extraction, guard) with file and line.
-- **Skipped**: file and line number for each comment skipped.
-- **Remaining work**: comment lines and files not acted on, if any.
-- **Status**: `clean` if no deletion candidates remain; `audit-needed` if candidates remain.
+One structured report: deleted, restored, changed, skipped, remaining work, status, in that order.
 
 ## Provenance
 

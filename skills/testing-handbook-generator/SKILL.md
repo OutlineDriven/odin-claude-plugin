@@ -1,6 +1,6 @@
 ---
 name: testing-handbook-generator
-description: 'Use when asked to discover, generate, refresh, or validate skills from the Trail of Bits Testing Handbook or appsec.guide. Approved handbook sections produce type-appropriate skills whose references resolve and whose activation and validation checks pass. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Discover, generate, refresh, or validate skills from the Trail of Bits Testing Handbook or appsec.guide. Not for tasks that require source or remote-system changes.'
 ---
 
 # Testing handbook skill generator
@@ -22,48 +22,30 @@ description: 'Use when asked to discover, generate, refresh, or validate skills 
 
 Invocation policy is model+human: the model executes discovery, classification, and generation; the human approves the plan before any skill is written.
 
+## Refusals
+
+- Will not proceed to generation without explicit user approval of the plan.
+- Will not deliver a file over 500 lines — split into sibling files.
+- Will not claim the done predicate holds when validation has not passed for a generated skill.
+- Will not mutate the handbook source, other plugins, or remote state.
+
 ## Procedure
 
-1. **Locate the handbook.** Check `./testing-handbook`, `../testing-handbook`, `~/testing-handbook` for a `content/docs/` directory. If not found, ask the user for the path. If the user does not know, offer to clone `https://github.com/trailofbits/testing-handbook` with depth 1. Stop if the handbook cannot be located or `content/docs/` is missing.
-
-2. **Scan directory structure.** Walk `{handbook_path}/content/docs/` and enumerate every directory. For each markdown file, parse YAML frontmatter for `title`, `summary`, `weight`, `bookCollapseSection`, and `draft`.
-
-3. **Classify candidates.** For each directory, apply the first matching rule:
-   - `/static-analysis/[name]/` with numbered files (00-, 10-): **tool** skill
-   - `/fuzzing/[lang]/[name]/` with `index.md` or numbered files: **fuzzer** skill
-   - `/fuzzing/techniques/[name]/` with any `.md` files: **technique** skill
-   - `/crypto/[name]/` with any `.md` files: **domain** skill
-   - `/web/[name]/` with numbered files or `_index.md`: **tool** skill (check exclusions first)
-   - `_index.md` with `bookCollapseSection: true`: container; scan children, create no skill for the container
-   - Any other directory with only `_index.md`: skip (insufficient content)
-
-   Most specific (deepest) path wins. When multiple types match, prefer Tool > Fuzzer > Technique > Domain.
-
-4. **Apply exclusions.** Skip any section where: `draft: true` in frontmatter, the directory is empty, the file is a template or placeholder, or the tool is GUI-only (e.g., `web/burp/`: Burp Suite requires visual interaction and cannot be operated headlessly).
-
-5. **Build candidate list.** For each candidate, record: name (slugified from `title`), type, source section path, summary from frontmatter, weight, whether a resources file (`99-resources.md` or `91-resources.md`) exists, and related sections.
-
-6. **Prioritize candidates.** Order by weight field (lower first), then content depth (more numbered files first), then presence of resources file, then core section status (fuzzing, static-analysis first).
-
-7. **Present plan to user.** Output a plan table: skill name, source section, type, related sections. List skipped sections with reasons. List external resources to fetch. Wait for explicit user approval before proceeding. Accept modifications: remove skills, change types, rename, add custom related sections.
-
-8. **Prepare generation context.** For each approved skill, collect: primary section content (`_index.md` or `index.md`), numbered files, related sections, and resources. Fetch non-video URLs with a 30-second timeout; skip on timeout and note in warnings. Extract video URLs as title and link only. Verify each candidate's primary content is non-empty, frontmatter has title and summary, and the template for its type exists.
-
-9. **Pass 1: content generation (parallel).** For each approved skill, generate a SKILL.md with all sections except Related Skills. Apply the type-appropriate section structure:
-   - **tool**: When to Use, Quick Reference, Installation, Core Workflow, Configuration, Advanced Usage, CI/CD Integration, Common Mistakes, Limitations, Resources
-   - **fuzzer**: When to Use, Quick Start, Installation, Writing a Harness, Compilation, Corpus Management, Running Campaigns, Coverage Analysis, Sanitizer Integration, Advanced Usage, Troubleshooting, Resources
-   - **technique**: When to Apply, Quick Reference, Step-by-Step, Common Patterns, Tool-Specific Guidance, Anti-Patterns, Troubleshooting, Resources
-   - **domain**: Background, When to Use, Quick Reference, Testing Workflow, Tools and Approaches, Key Techniques, Implementation Guide, Common Vulnerabilities, Resources
-
-   Convert Hugo shortcodes to plain markdown: `{{< hint info >}}X{{< /hint >}}` becomes `> **Note:** X`; `{{< hint warning >}}X{{< /hint >}}` becomes `> **Warning:** X`; `{{% relref "path" %}}` becomes `See: path`; omit mermaid blocks; convert tabs to headings; convert details and expand blocks to `<details>` elements. Preserve code blocks exactly (language specifier, indentation, content). Leave a Related Skills placeholder: `<!-- PASS2: populate after all skills exist -->`. If content exceeds 450 lines, extract large sections (Installation, Advanced Usage, CI/CD) into sibling files and add a decision tree to SKILL.md. Hard limit: 500 lines per file.
-
-10. **Pass 2: cross-reference population (sequential).** After all Pass 1 skills are written, list generated skill names. For each skill, determine related skills from: the discovery `related_sections` mapping, skill type relationships (fuzzers link to techniques; tools link to alternative tools), and explicit mentions in content. Replace each placeholder with a Related Skills table. Validate that every referenced skill directory exists.
-
-11. **Validate.** For each generated skill, verify: YAML frontmatter parses; `name` matches `^[a-z0-9-]{1,64}$`; `description` is non-empty and at most 1024 characters; required sections for the skill type are present; line count is under 500; no Hugo shortcodes remain; no escaped backtick sequences remain; all internal links resolve; and all cross-referenced skills exist.
-
-12. **Finalize.** Update the repository README with a table of generated skills (author: `testing-handbook-generator`). Update the Skills Cross-Reference graph from each skill's Related Skills section. Note any template, discovery, or content extraction issues encountered for future improvement.
+1. **Locate the handbook.** Check `./testing-handbook`, `../testing-handbook`, `~/testing-handbook` for a `content/docs/` directory. If not found, ask the user for the path. If the user does not know, offer to clone `https://github.com/trailofbits/testing-handbook` with depth 1. Stop if the handbook cannot be located or `content/docs/` is missing. **Done when:** the handbook is located with a `content/docs/` directory.
+2. **Scan directory structure.** Walk `{handbook_path}/content/docs/` and enumerate every directory. For each markdown file, parse YAML frontmatter for `title`, `summary`, `weight`, `bookCollapseSection`, and `draft`. **Done when:** every directory and markdown file is enumerated with its frontmatter.
+3. **Classify candidates.** For each directory, apply the first matching rule: `/static-analysis/[name]/` with numbered files (00-, 10-) — tool skill; `/fuzzing/[lang]/[name]/` with `index.md` or numbered files — fuzzer skill; `/fuzzing/techniques/[name]/` with any `.md` files — technique skill; `/crypto/[name]/` with any `.md` files — domain skill; `/web/[name]/` with numbered files or `_index.md` — tool skill (check exclusions first); `_index.md` with `bookCollapseSection: true` — container, scan children, create no skill for the container; any other directory with only `_index.md` — skip (insufficient content). Most specific (deepest) path wins. When multiple types match, prefer Tool > Fuzzer > Technique > Domain. **Done when:** every directory is classified or skipped.
+4. **Apply exclusions.** Skip a section if: `draft: true` appears in frontmatter, the directory is empty, the file is a template or placeholder, or the tool is GUI-only (e.g., `web/burp/`: Burp Suite requires visual interaction and cannot be operated headlessly). **Done when:** exclusions are applied and skipped sections are recorded.
+5. **Build candidate list.** For each candidate, record: name (slugified from `title`), type, source section path, summary from frontmatter, weight, whether a resources file (`99-resources.md` or `91-resources.md`) exists, and related sections. **Done when:** the candidate list is built with all fields.
+6. **Prioritize candidates.** Order by weight field (lower first), then content depth (more numbered files first), then presence of resources file, then core section status (fuzzing, static-analysis first). **Done when:** the candidate list is ordered.
+7. **Present plan to user.** Output a plan table: skill name, source section, type, related sections. List skipped sections with reasons. List external resources to fetch. Wait for explicit user approval before proceeding. Accept modifications: remove skills, change types, rename, add custom related sections. **Done when:** the user approves the plan.
+8. **Prepare generation context.** For each approved skill, collect: primary section content (`_index.md` or `index.md`), numbered files, related sections, and resources. Fetch non-video URLs with a 30-second timeout; skip on timeout and note in warnings. Extract video URLs as title and link only. Verify each candidate's primary content is non-empty, frontmatter has title and summary, and the template for its type exists. **Done when:** generation context is prepared for every approved skill.
+9. **Pass 1: content generation (parallel).** For each approved skill, generate a SKILL.md with all sections except Related Skills. Apply the type-appropriate section structure and Hugo shortcode conversion rules per `references/type-templates.md`. Preserve code blocks exactly. Leave a Related Skills placeholder. If content exceeds 450 lines, extract large sections into sibling files and add a decision tree to SKILL.md. Hard limit: 500 lines per file. **Done when:** every approved skill has a SKILL.md written with its type-appropriate sections.
+10. **Pass 2: cross-reference population (sequential).** After all Pass 1 skills are written, list generated skill names. For each skill, determine related skills per the rules in `references/type-templates.md`. Replace each placeholder with a Related Skills table. Validate that every referenced skill directory exists. **Done when:** every placeholder is replaced and all cross-references validate.
+11. **Validate.** For each generated skill, verify: YAML frontmatter parses; `name` matches `^[a-z0-9-]{1,64}$`; `description` is non-empty and at most 1024 characters; required sections for the skill type are present; line count is under 500; no Hugo shortcodes remain; no escaped backtick sequences remain; all internal links resolve; and all cross-referenced skills exist. **Done when:** every generated skill passes validation.
+12. **Finalize.** Update the repository README with a table of generated skills (author: `testing-handbook-generator`). Update the Skills Cross-Reference graph from each skill's Related Skills section. Note any template, discovery, or content extraction issues encountered for future improvement. **Done when:** the README and cross-reference graph are updated.
 
 ## Failure and recovery
+
 | Failure class | Rule |
 |---|---|
 | Handbook not found | Stop. Report that no `content/docs/` directory exists at the checked locations. Do not proceed to discovery. |
@@ -79,8 +61,9 @@ Partial results are valid: deliver all skills that pass validation and report an
 Rollback: delete the generated skill directories for the current run. No handbook, plugin, or remote state is affected.
 
 ## Output
-Generated skill directories under the configured output path, each containing a SKILL.md with type-appropriate sections, cross-references to sibling skills, and passing validation. An updated README table and cross-reference graph. A generation report per skill: line count, split status, populated sections, gaps, warnings, and references.
+
+Generated skill directories under the configured output path (each containing a SKILL.md with type-appropriate sections, cross-references, and passing validation), an updated README table and cross-reference graph, and a per-skill generation report (line count, split status, populated sections, gaps, warnings, references) — ordering: skills, README, graph, reports.
 
 ## Provenance
 
-Adapted from the Trail of Bits Testing Handbook Skills plugin. Origin: `https://github.com/trailofbits/skills`, revision `d1f1575cff97816e5cc08af66cd2506099c681d3`. License: CC-BY-SA-4.0. Source path: `/plugins/testing-handbook-skills/skills/testing-handbook-generator/SKILL.md` with support files `discovery.md`, `agent-prompt.md`, `testing.md`, and `templates/{tool,fuzzer,technique,domain}-skill.md`. Preserve Trail of Bits attribution and source link; mark modifications; license adaptations ShareAlike; claim no trademark rights; never reuse `trail-of-bits-mark.svg` as branding. Full license obligations in root PROVENANCE.md. Clean-room adaptation for ODIN 2.0: discovery-to-generation orchestrator inlined into a single self-contained skill with zero runtime dependencies on other ODIN skills or modules.
+Adapted from the Trail of Bits Testing Handbook Skills plugin. Origin: `https://github.com/trailofbits/skills`, revision `d1f1575cff97816e5cc08af66cd2506099c681d3`. License: CC-BY-SA-4.0. Source path: `/plugins/testing-handbook-skills/skills/testing-handbook-generator/SKILL.md` with support files `discovery.md`, `agent-prompt.md`, `testing.md`, and `templates/{tool,fuzzer,technique,domain}-skill.md`. Preserve Trail of Bits attribution and source link; mark modifications; license adaptations ShareAlike; claim no trademark rights; never reuse `trail-of-bits-mark.svg` as branding. Full license obligations in root PROVENANCE.md. Clean-room adaptation for ODIN 2.0: discovery-to-generation orchestrator inlined into a single self-contained skill with zero runtime dependencies; type-specific section structures and Hugo conversion rules moved to `references/type-templates.md` per I3.

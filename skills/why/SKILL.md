@@ -1,6 +1,6 @@
 ---
 name: why
-description: 'Use when ''why does X work this way'', ''rationale for choosing Y'', design rationale, regressions, postmortems, or data-backed thresholds. Discovers available MCPs and queries each evidence category in parallel, then returns a confidence-weighted cited narrative on decisions and tradeoffs. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use for ''why does X work this way'', design rationale, regressions, postmortems, or data-backed thresholds. Queries each evidence category in parallel and returns a confidence-weighted cited narrative. Don''t use for tasks that require source or remote-system changes.'
 ---
 
 # Why
@@ -39,41 +39,12 @@ Confidence qualifies support, not importance. Chronology alone does not establis
 
 ## Procedure
 
-1. **Frame the investigation.** Restate the question as a neutral rationale question, define the likely decision window, and list the seven categories with status `available` or `unavailable` and the reason. Do not assume the user's candidate explanation is correct.
-
-2. **Dispatch one parallel scout batch.** In one task batch, launch exactly one read-only investigator scout for each category marked available. Do not launch scouts for unavailable categories and do not combine two available categories under one scout. Give every scout the same question, entity/time scope, epistemic vocabulary, and this response schema:
-   - category and query scope;
-   - direct findings, each with a stable citation or permalink, source date, and short quoted or precisely paraphrased evidence;
-   - inferences, each linked to the findings that support it and carrying High/Medium/Low confidence;
-   - hypotheses, each carrying Low confidence unless direct evidence raises it, plus confirming or falsifying evidence;
-   - contradictions and chronology;
-   - null result or access gap;
-   - sources consulted.
-
-   Every scout is read-only. It must report a null result rather than filling silence with general knowledge.
-
-3. **Apply the category playbook inside each scout.** These are complete source instructions, not pointers to external references:
-   - **Source control:** inspect the relevant file history, blame/line provenance, commits, diffs, merge or pull-request discussion, tags, and nearby tests. Build a chronology from the first introduction through later reversions or fixes. Distinguish a commit message that states intent from code that merely demonstrates behavior; cite immutable commit, diff, or review links where available.
-   - **Issue tracker:** search the scoped component, identifiers, symptoms, rejected alternatives, and decision window. Read the full issue and linked work rather than relying on titles. Extract explicit requirements, ownership, prioritization, acceptance criteria, duplicates, and close/reopen history; cite stable issue and comment links.
-   - **Long-form docs:** search ADRs, RFCs, design docs, specifications, meeting notes, postmortems, and decision records. Capture status, author, date, alternatives, constraints, and whether the document was approved, superseded, or merely proposed. Cite a stable document or anchored section link and label retrospective explanations as hindsight.
-   - **Real-time chat:** search the scoped terms and time window, then read enough thread context to distinguish a decision from brainstorming. Preserve timestamps, speakers or roles, explicit objections, reactions that materially indicate agreement, and links to artifacts. Cite stable message/thread permalinks; do not treat an unanswered suggestion as consensus.
-   - **Infrastructure observability:** inspect read-only metrics, logs, traces, dashboards, deploy markers, capacity events, and alert history around the decision or incident. Record query/window, units, aggregation, baseline, and threshold. Use telemetry to establish operational conditions, not unstated human intent; cite stable snapshots or query/dashboard links when available.
-   - **Error tracking:** inspect issue/event history, stack traces, affected releases, first/last seen, recurrence, environment, frequency, and links to fixes or regressions. Separate grouped-event evidence from root-cause claims and cite stable issue/event links without exposing sensitive payloads.
-   - **Product analytics warehouse:** use read-only queries or saved analyses for the relevant event definition, population, segment, denominator, time window, experiment, funnel, or retention metric. Record the metric definition and query provenance, check whether instrumentation changed, and distinguish correlation from a product decision. Cite a stable saved query, notebook, dashboard, or result link when available.
-
-4. **Collect the batch without erasing nulls.** Build a seven-row evidence ledger. For each category record `available with evidence`, `available but no relevant evidence`, `unavailable`, or `failed read`, plus its citations or exact gap. This null accounting is required even when another category appears decisive.
-
-5. **Run one read-only synthesizer.** Supply the synthesizer only the framed question, the seven-row ledger, and the scouts' cited packets. Instruct it to:
-   - answer the question directly before narrating the search;
-   - preserve the Direct finding / Inference / Hypothesis labels and High/Medium/Low confidence;
-   - merge duplicate evidence without dropping citations;
-   - reconcile chronology and surface contradictions rather than choosing silently;
-   - distinguish original rationale, later rationalization, observed outcome, and current constraint;
-   - state which alternatives were considered or explicitly say none were found;
-   - account for every category and every material gap;
-   - end with a **Preserve / Change / Avoid / Risk** handoff grounded only in the evidence packet.
-
-6. **Verify the synthesis before returning it.** Check that every direct finding resolves to a supplied citation, every inference names its supporting findings, every hypothesis is visibly non-factual, all seven categories appear in source coverage, and no confidence label exceeds its evidence. Remove unsupported claims; never backfill them from model memory.
+1. Frame the investigation. Restate the question as a neutral rationale question, define the likely decision window, and list the seven categories with status `available` or `unavailable` and the reason. Do not assume the user's candidate explanation is correct. Done when: question is framed and all seven categories are listed with status.
+2. Dispatch one parallel scout batch. In one task batch, launch exactly one read-only investigator scout for each category marked available. Do not launch scouts for unavailable categories and do not combine two available categories under one scout. Give every scout the same question, entity/time scope, epistemic vocabulary, and this response schema: category and query scope; direct findings (each with a stable citation or permalink, source date, and short quoted or precisely paraphrased evidence); inferences (each linked to supporting findings, carrying High/Medium/Low confidence); hypotheses (each carrying Low confidence unless direct evidence raises it, plus confirming or falsifying evidence); contradictions and chronology; null result or access gap; sources consulted. Every scout is read-only and must report a null result rather than filling silence with general knowledge. Done when: one scout per available category is dispatched.
+3. Apply the category playbook inside each scout using `references/category-playbook.md`. Done when: each scout applies its category-specific source instructions.
+4. Collect the batch without erasing nulls. Build a seven-row evidence ledger. For each category record `available with evidence`, `available but no relevant evidence`, `unavailable`, or `failed read`, plus its citations or exact gap. This null accounting is required even when another category appears decisive. Done when: seven-row ledger is built with null accounting.
+5. Run one read-only synthesizer. Supply the synthesizer only the framed question, the seven-row ledger, and the scouts' cited packets. Instruct it to: answer the question directly before narrating the search; preserve the Direct finding / Inference / Hypothesis labels and High/Medium/Low confidence; merge duplicate evidence without dropping citations; reconcile chronology and surface contradictions rather than choosing silently; distinguish original rationale, later rationalization, observed outcome, and current constraint; state which alternatives were considered or explicitly say none were found; account for every category and every material gap; end with a Preserve / Change / Avoid / Risk handoff grounded only in the evidence packet. Done when: synthesizer is run with complete instructions.
+6. Verify the synthesis before returning it. Check that every direct finding resolves to a supplied citation, every inference names its supporting findings, every hypothesis is visibly non-factual, all seven categories appear in source coverage, and no confidence label exceeds its evidence. Remove unsupported claims; never backfill them from model memory. Done when: synthesis passes all verification checks.
 
 ## Failure and recovery
 
@@ -87,17 +58,7 @@ Confidence qualifies support, not importance. Chronology alone does not establis
 - **A source contains secrets or unnecessary personal data:** omit or minimally redact that material while retaining a stable citation and enough non-sensitive context to support the claim.
 
 ## Output
-
-Return only a cited narrative in chat with this structure:
-
-1. **Answer**: the best-supported rationale in one short paragraph with an overall High/Medium/Low confidence label.
-2. **What the evidence says**: Direct findings first, then Inferences, then Hypotheses; each item carries its own confidence and citations.
-3. **Decision chronology and alternatives**: contemporaneous rationale, later changes or outcomes, rejected options, and contradictions.
-4. **Source coverage and gaps**: all seven categories with evidence/null/unavailable/failed status and the material unanswered questions.
-5. **Handoff**: **Preserve**, **Change**, **Avoid**, and **Risk**, each tied to cited evidence or explicitly marked as an inference.
-6. **Sources**: deduplicated stable links with source category and date where known.
-
-Do not write files or modify any source. A response without confidence labels, citations, explicit gaps, seven-category null accounting, and the Preserve/Change/Avoid/Risk handoff is not done.
+A cited narrative in chat with sections in order: Answer (best-supported rationale with overall High/Medium/Low confidence), What the evidence says (Direct findings, then Inferences, then Hypotheses — each with confidence and citations), Decision chronology and alternatives, Source coverage and gaps (all seven categories with status), Handoff (Preserve/Change/Avoid/Risk tied to cited evidence or marked as inference), and Sources (deduplicated stable links with category and date).
 
 ## Provenance
 

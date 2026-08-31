@@ -1,3 +1,3 @@
 interface:
-  display_name: "Atomic Issues PRs"
-  short_description: "Publish one issue or PR per logical change on GitHub"
+  display_name: "Atomic Issues Prs"
+  short_description: "Use when the user says \"atomic PRs\" or requests one issue or PR"

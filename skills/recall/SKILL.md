@@ -1,6 +1,6 @@
 ---
 name: recall
-description: 'Use when asked to recover prior work and current status before resuming, returning a status-tagged capsule and one concrete next move. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when asked to recover prior work and current status before resuming. Returns a status-tagged capsule and one concrete next move. Not for handoff snapshots — use handoff. Not for tasks that require source or remote-system changes.'
 ---
 
 # Recall
@@ -14,6 +14,12 @@ description: 'Use when asked to recover prior work and current status before res
 | Side effect | Chat-output only. No file, credential, paid, published, deployed, or remote mutation. |
 | Done | Status-tagged capsule and one concrete next move. |
 
+## Refusals
+
+- **Fabricating state**: rejected. If no session file is found, return `session-not-found`. Do not invent artifacts or actions.
+- **Suppressing divergences**: rejected. Verified records with divergence flags are returned; divergences are not hidden to satisfy the done predicate.
+- **Source or remote-system changes**: rejected. This skill is read-only throughout.
+
 ## Inputs
 
 - **Session identifier** (required): the active session ID or session directory path to recover.
@@ -22,39 +28,25 @@ description: 'Use when asked to recover prior work and current status before res
 
 ## Procedure
 
-1. **Identify session source.** Locate the session state file or transcript corresponding to the supplied session identifier. If no session file is found, return the `session-not-found` failure.
-2. **Extract transcript.** Parse the session transcript. If parsing fails, return the `transcript-parse-failure` failure.
-3. **Mine transcript for work state.** Collect all completed actions, emitted artifacts, tool results, and navigation events from the transcript. Extract each as a discrete record with its outcome.
-4. **Verify against live repository state.** For each file, artifact, and VCS-tracked target mentioned in the transcript, read the live filesystem and confirm the record matches current state. Flag each mismatch as a `divergence`.
-5. **Tag the capsule.** Assign each recovered record one of: `completed`, `in-progress`, `blocked`, or `diverged`.
-6. **Identify the concrete next move.** From the in-progress and blocked records, select the highest-priority actionable item that is not blocked by an unresolved divergence. State it as one concrete next move.
-7. **Emit the capsule.** Return a structured capsule containing: all tagged records, the concrete next move, and a summary of divergences.
+1. Identify the session source. Locate the session state file or transcript corresponding to the supplied session identifier. If no session file is found, return `session-not-found`. **Done when**: the session file is located or `session-not-found` is returned.
+2. Extract the transcript. Parse the session transcript. If parsing fails, return `transcript-parse-failure`. **Done when**: the transcript is parsed or `transcript-parse-failure` is returned.
+3. Mine the transcript for work state. Collect all completed actions, emitted artifacts, tool results, and navigation events. Extract each as a discrete record with its outcome. **Done when**: every work record is extracted with its outcome.
+4. Verify against live repository state. For each file, artifact, and VCS-tracked target mentioned in the transcript, read the live filesystem and confirm the record matches current state. Flag each mismatch as a `divergence`. **Done when**: every record is verified or flagged as divergent.
+5. Tag the capsule. Assign each recovered record one of: `completed`, `in-progress`, `blocked`, or `diverged`. **Done when**: every record has a status tag.
+6. Identify the concrete next move. From the in-progress and blocked records, select the highest-priority actionable item that is not blocked by an unresolved divergence. State it as one concrete next move. **Done when**: one concrete next move is stated.
+7. Emit the capsule. Return a structured capsule containing all tagged records, the concrete next move, and a summary of divergences. **Done when**: the capsule is returned.
 
 ## Failure and recovery
-| Failure class | Condition | Result |
-|---|---|---|
-| `session-not-found` | No session state file exists for the supplied identifier | Return `session-not-found` with the identifier. Do not fabricate state. |
-| `transcript-parse-failure` | Transcript cannot be parsed or is corrupted | Return `transcript-parse-failure` with the parse error. Do not continue with partial data. |
-| `no-recoverable-state` | Transcript exists but contains no identifiable work records | Return `no-recoverable-state`. Do not invent artifacts or actions. |
 
-**Partial-result rule:** If some records verify and others diverge, return the verified records with divergence flags. Do not suppress divergences to satisfy the done predicate.
+- **`session-not-found`**: return with the identifier. Do not fabricate state.
+- **`transcript-parse-failure`**: return with the parse error. Do not continue with partial data.
+- **`no-recoverable-state`**: return when the transcript contains no identifiable work records. Do not invent artifacts or actions.
 
-**Rollback rule:** This skill performs no mutations. No rollback is required.
+If some records verify and others diverge, return the verified records with divergence flags. This skill performs no mutations; no rollback is required.
 
 ## Output
-A structured capsule:
-```
-{
-  "session_id": <identifier>,
-  "records": [
-    { "action": <string>, "outcome": <string>, "status": "completed" | "in-progress" | "blocked" | "diverged", "divergence_note": <string | null> }
-  ],
-  "next_move": <one concrete next-move sentence>,
-  "divergences": [ <string> ]
-}
-```
 
-If the done predicate cannot be satisfied, return the exact failure class from the table above.
+A structured capsule with `session_id`, `records` (each with action, outcome, status, divergence_note), `next_move`, and `divergences`, ordered as listed.
 
 ## Provenance
 

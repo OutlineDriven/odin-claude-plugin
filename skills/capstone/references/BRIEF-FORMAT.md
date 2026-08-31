@@ -1,4 +1,4 @@
-# BRIEF Format
+# Brief format
 
 ## Template
 
@@ -27,7 +27,7 @@
 
 ## Rules
 
-- "Understand X" is not a done test; an exercise sends it back to `drill`.
+- "Understand X" is not a done test. Send an exercise back to `drill`.
 - Fill the table's `Shows as` column with behaviour observable in the artifact, not intent.
 
 Review the finished work against the Done when and the Concepts exercised, item by item. Name what is not cleared and hand it to `drill`.

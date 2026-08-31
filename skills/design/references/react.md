@@ -2,7 +2,7 @@
 
 Surface reference for React applications. Companion to `references/web.md` for the vanilla CSS baseline; reach for vanilla first, React only when state crosses surface boundaries.
 
-**Grounded: 2026-08-26.** Library versions and APIs below were verified on that date; verify against react.dev, tailwindcss.com, and ui.shadcn.com before relying on any specific hook or directive in production.
+**Grounded: 2026-08-31.** Library versions and APIs below were verified on that date; verify against react.dev, tailwindcss.com, and ui.shadcn.com before relying on any specific hook or directive in production.
 
 ## 1. Posture
 
@@ -216,7 +216,7 @@ Motion-budget priority (highest first; spend attention on the top):
 5. Route change (entrance / exit)
 
 Browser support of the underlying View Transitions API (distinct from React's wrapper):
-- Same-document transitions: Baseline Newly Available (2025-10-14). Chromium 111+, Safari 18.2+, Firefox 144+ (stable).
+- Same-document transitions: Baseline Newly Available (2025-10-14). Chromium 111+, Safari 18.0+, Firefox 144+ (stable).
 - `:active-view-transition-type()` selector: Chromium 125+, Safari 18.2+, Firefox 147+.
 - Cross-document transitions: not Baseline, limited availability. Chromium 126+, Safari 18.2+, Firefox pending.
 

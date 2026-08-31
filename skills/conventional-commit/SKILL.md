@@ -1,6 +1,6 @@
 ---
 name: conventional-commit
-description: 'Use when the user asks to commit changes or draft a commit message. Creates a conventional commit with a clear, scoped, present-tense subject and proper issue references. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user asks to commit changes or draft a commit message. Creates a conventional commit with a clear, scoped, present-tense subject and proper issue references. Not for branch/worktree/changelog automation — use conventional-git.'
 ---
 
 # Conventional commit
@@ -22,14 +22,14 @@ description: 'Use when the user asks to commit changes or draft a commit message
 
 ## Procedure
 
-1. Run `git branch --show-current`. If the branch is `main` or `master`, create a feature branch unless the user explicitly requested a direct commit. Re-check the branch and stop if it is still `main` or `master`.
-2. Inspect the staged diff. Commit one coherent, independently reviewable change at a time. If the staged set spans multiple concerns, stop and report the concerns; do not commit a mixed set.
-3. Choose the type from the allowed set: `feat`, `fix`, `ref`, `perf`, `docs`, `test`, `build`, `ci`, `chore`, `style`, `meta`, `license`, `revert`. Use `ref` for refactoring without behavior changes, `style` for formatting without logic changes, and `meta` for repository metadata.
-4. Compose the subject in imperative, present tense; capitalize it, omit the trailing period, and keep it at 70 characters or fewer. Format it as `<type>(<scope>): <subject>`; the scope is optional. Add `!` before the `:` to mark a breaking change.
-5. Add a body only when useful: explain what changed and why, including previous behavior or motivation when it helps. Keep every line under 100 characters.
-6. Add footers as needed: `Fixes <issue>` to close an issue when merged, `Refs <issue>` to link an issue without closing it, and `BREAKING CHANGE: <impact>` for breaking changes.
-7. Never include customer or organization names, user emails, support ticket contents, secrets, or PII. Describe the technical symptom instead.
-8. Commit using separate `-m` arguments for paragraphs and footers. Never put literal `\n` sequences in the message or open an interactive editor.
+1. Run `git branch --show-current`. If the branch is `main` or `master`, create a feature branch unless the user explicitly requested a direct commit. Re-check the branch and stop if it is still `main` or `master`. Done when: the current branch is not `main` or `master`, or the user explicitly approved a direct commit.
+2. Inspect the staged diff. Commit one coherent, independently reviewable change at a time. If the staged set spans multiple concerns, stop and report the concerns; do not commit a mixed set. Done when: the staged set is a single coherent change or the concerns are reported and no commit is made.
+3. Choose the type from the allowed set: `feat`, `fix`, `ref`, `perf`, `docs`, `test`, `build`, `ci`, `chore`, `style`, `meta`, `license`, `revert`. Use `ref` for refactoring without behavior changes, `style` for formatting without logic changes, and `meta` for repository metadata. Done when: a type is selected from the allowed set and matches the change semantics.
+4. Compose the subject in imperative, present tense; capitalize it, omit the trailing period, and keep it at 70 characters or fewer. Format it as `<type>(<scope>): <subject>`; the scope is optional. Add `!` before the `:` to mark a breaking change. Done when: the subject is imperative, present tense, ≤70 chars, properly formatted, and capitalized with no trailing period.
+5. Add a body only when it helps explain what changed and why. Include previous behavior or motivation when useful. Keep every line under 100 characters. Done when: the body is present only when it adds explanatory value, with every line under 100 characters.
+6. Add footers as needed: `Fixes <issue>` to close an issue when merged, `Refs <issue>` to link an issue without closing it, and `BREAKING CHANGE: <impact>` for breaking changes. Done when: footers are present for every issue to close or link and for every breaking change.
+7. Never include customer or organization names, user emails, support ticket contents, secrets, or PII. Describe the technical symptom instead. Done when: the message contains no customer names, emails, ticket contents, secrets, or PII.
+8. Commit using separate `-m` arguments for paragraphs and footers. Never put literal `\n` sequences in the message or open an interactive editor. Done when: the commit is created with separate `-m` arguments and no literal `\n` or interactive editor.
 
 ## Failure and recovery
 - Default-branch guard: if the branch is `main` or `master` after the attempted switch, stop without committing and report the branch name.

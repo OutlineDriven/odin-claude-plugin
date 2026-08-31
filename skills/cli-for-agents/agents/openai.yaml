@@ -1,3 +1,3 @@
 interface:
   display_name: "CLI For Agents"
-  short_description: "Design flag-driven, pipeline-safe, idempotent agent CLIs"
+  short_description: "Use when asked to build or review a CLI intended for coding"

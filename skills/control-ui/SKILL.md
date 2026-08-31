@@ -22,13 +22,13 @@ Optional: a viewport size, an authentication state file, and an evidence directo
 
 ## Procedure
 
-1. Bound scope: confirm the target is a local app command, local URL, or Electron entry the human supplied. Refuse remote URLs or targets requiring credentials the human did not provide.
-2. Create or reuse the named evidence directory under the working directory.
-3. Capture the before state: launch the app or browser, navigate to the target, and record the viewport, screenshot, console log, and relevant DOM state into the evidence directory as `before.*`.
-4. Perform or reproduce the behavior under verification (click, input, navigation, or the reported reproduction steps). Record each step taken.
-5. Capture the after state: record the screenshot, console log, and DOM state into the evidence directory as `after.*`.
-6. Compare before and after evidence against the expected behavior. Record pass, fail, or mismatch with the differing evidence file names.
-7. Terminate every spawned app or browser process and confirm none remain.
+1. Confirm that the target is a local app command, local URL, or Electron entry supplied by the human. Refuse remote URLs or targets requiring credentials the human did not provide. Done when: the target is classified as local app, local URL, or Electron entry, and any remote or credential-bearing target is refused.
+2. Create or reuse the named evidence directory under the working directory. Done when: the evidence directory exists under the working directory.
+3. Capture the before state: launch the app or browser, navigate to the target, and record the viewport, screenshot, console log, and relevant DOM state into the evidence directory as `before.*`. Done when: `before.*` files (viewport, screenshot, console log, DOM state) are written to the evidence directory.
+4. Perform the behavior being verified (click, input, or navigation), or follow the reported reproduction steps. Record each step taken. Done when: every behavior step taken is recorded.
+5. Capture the after state: record the screenshot, console log, and DOM state into the evidence directory as `after.*`. Done when: `after.*` files (screenshot, console log, DOM state) are written to the evidence directory.
+6. Compare before and after evidence against the expected behavior. Record pass, fail, or mismatch with the differing evidence file names. Done when: a pass, fail, or mismatch classification is recorded citing the differing evidence file names.
+7. Terminate every spawned app or browser process and confirm none remain. Done when: no spawned app or browser process remains.
 
 ## Failure and recovery
 - Launch failure: the app or browser did not start. Record the error, leave no process, and return blocked with the launch error.

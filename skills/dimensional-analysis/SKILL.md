@@ -1,6 +1,6 @@
 ---
 name: dimensional-analysis
-description: 'Use when asked to annotate every in-scope arithmetic file in a financial, scientific, DeFi, blockchain, or off-chain codebase with dimensional unit comments and validate dimensional consistency to detect arithmetic bugs. Produces comment-only annotations, a scope manifest, a units vocabulary, and a findings report separating confirmed from refuted mismatches. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use to annotate arithmetic files in financial, scientific, DeFi, blockchain, or off-chain code with dimensional unit comments and validate consistency. Produces comment-only annotations, units vocabulary, scope manifest, and findings report. No remote or irreversible changes.'
 ---
 
 # Dimensional analysis
@@ -22,12 +22,17 @@ description: 'Use when asked to annotate every in-scope arithmetic file in a fin
 
 ## Procedure
 
-1. Bound scope. Confirm the project root. Identify every file containing numeric arithmetic with mixed units, precisions, scaling factors, rates, prices, shares, or conversions, and prioritize each as CRITICAL, HIGH, MEDIUM, or LOW. Write `DIMENSIONAL_SCOPE.json` to the project root with `project_root`, `in_scope_files` (all priorities), `discoverer_focus_files` (narrowed to CRITICAL/HIGH only when more than 50 arithmetic files are found), `recommended_discovery_order`, and every in-scope file initialized to `step2: "PENDING"`, `step3: "PENDING"`, `step4: "PENDING"`. If no arithmetic files exist, write an empty manifest and skip to Output with zero findings.
-2. Discover vocabulary. Read `DIMENSIONAL_SCOPE.json` as the source of truth. Infer base units, derived units, and precision prefixes from naming, interfaces, constants, and decimal scaling. Write `DIMENSIONAL_UNITS.md` to the project root with `Base Units`, `Derived Units`, and `Precision Prefixes` sections; write the same empty headings when `in_scope_files` is empty. Reuse a valid existing `DIMENSIONAL_UNITS.md` only when it matches this repo; otherwise discard and regenerate. If `in_scope_files` is empty after this step, skip to Output with zero findings.
-3. Annotate anchors (Step 2). For every `in_scope_files` entry, add dimensional comments at anchor points (state variables, struct fields, function parameters, return values, inline arithmetic) using the vocabulary and the `D{decimals}{dimension}` format. Batch files: 10 or fewer in one batch; 11-30 in one batch per category; more than 30 in one batch per category, splitting categories larger than 10 files into sub-batches of about 8. Process categories in `recommended_discovery_order`: math libraries, then oracles, then core logic, then peripheral. Set `step2 = "PENDING"` for every in-scope file before launch and persist the manifest. After each batch, persist exactly one status per file: `ANNOTATED`, `REVIEWED_NO_ANCHOR_CHANGES`, or `BLOCKED`; for `BLOCKED` also persist `step2_reason` and `step2_retry_count`. Retry each `BLOCKED` file once with a focused prompt. Do not advance while any `step2` is `PENDING`.
-4. Propagate dimensions (Step 3). For every `in_scope_files` entry, extend annotations through arithmetic, function calls, and assignments using dimension algebra (multiplication combines dimensions, division inverts, addition requires matching dimensions). Use the same batching and category order as Step 2. Confirm every file has a non-pending `step2` status before launch; then set `step3 = "PENDING"` and persist. After each batch, persist exactly one status per file: `PROPAGATED`, `REVIEWED_NO_PROPAGATION_CHANGES`, or `BLOCKED`; for `BLOCKED` also persist `step3_reason` and `step3_retry_count`. Retry each `BLOCKED` file once. Aggregate annotations by confidence (`CERTAIN`, `INFERRED`, `UNCERTAIN`), mismatches with severities, and coverage gaps that could not be inferred. Do not advance while any `step3` is `PENDING`.
-5. Validate and detect bugs (Step 4). Validate every `in_scope_files` entry. Process in this priority order without skipping lower tiers: (a) files with CRITICAL or HIGH Step 3 mismatches, (b) remaining CRITICAL and HIGH scanner-priority files, (c) remaining MEDIUM and LOW files. Confirm every file has a non-pending `step3` status before launch; then set `step4 = "PENDING"` and persist. Validate one file per unit, running in waves of roughly 10-30 files. Reject rationalizations of mismatches; a dimension that does not balance is a finding, not an explanation. After each wave, persist exactly one status per file: `VALIDATED` or `BLOCKED`; for `BLOCKED` also persist `step4_reason` and `step4_retry_count`. Retry each `BLOCKED` file once. Deduplicate findings: confirmed Step 3 mismatches keep their original IDs and severities; refuted Step 3 mismatches are noted as false positives and excluded from final counts; genuinely new findings receive new `DIM-XXX` IDs. Step 4 is complete only when no `step4` entry is `PENDING`.
-6. Reconcile. Derive `coverage.unprocessed_files` from terminal `BLOCKED` entries as `{ "path": "...", "blocked_step": "step2|step3|step4", "reason": "...", "retry_count": 1 }`. If the final report and `DIMENSIONAL_SCOPE.json` disagree, continue processing or reconcile the report until they match. Completion is determined by manifest coverage and final reported statuses, not by intent.
+1. Bound scope. Confirm the project root. Identify every file containing numeric arithmetic with mixed units, precisions, scaling factors, rates, prices, shares, or conversions, and prioritize each as CRITICAL, HIGH, MEDIUM, or LOW. Write `DIMENSIONAL_SCOPE.json` to the project root with `project_root`, `in_scope_files` (all priorities), `discoverer_focus_files` (narrowed to CRITICAL/HIGH only when more than 50 arithmetic files are found), `recommended_discovery_order`, and every in-scope file initialized to `step2: "PENDING"`, `step3: "PENDING"`, `step4: "PENDING"`. If no arithmetic files exist, write an empty manifest and skip to Output with zero findings. **Done when:** `DIMENSIONAL_SCOPE.json` is written with every in-scope file initialized to PENDING, or an empty manifest is written with zero findings.
+
+2. Discover vocabulary. Read `DIMENSIONAL_SCOPE.json` as the source of truth. Infer base units, derived units, and precision prefixes from naming, interfaces, constants, and decimal scaling. Write `DIMENSIONAL_UNITS.md` to the project root with `Base Units`, `Derived Units`, and `Precision Prefixes` sections; write the same empty headings when `in_scope_files` is empty. Reuse a valid existing `DIMENSIONAL_UNITS.md` only when it matches this repo; otherwise discard and regenerate. If `in_scope_files` is empty after this step, skip to Output with zero findings. **Done when:** `DIMENSIONAL_UNITS.md` is written with the three sections, or the empty-headings case skips to Output.
+
+3. Annotate anchors (Step 2). For every `in_scope_files` entry, add dimensional comments at anchor points (state variables, struct fields, function parameters, return values, inline arithmetic) using the vocabulary and the `D{decimals}{dimension}` format. Batch files: 10 or fewer in one batch; 11-30 in one batch per category; more than 30 in one batch per category, splitting categories larger than 10 files into sub-batches of about 8. Process categories in `recommended_discovery_order`: math libraries, then oracles, then core logic, then peripheral. Set `step2 = "PENDING"` for every in-scope file before launch and persist the manifest. After each batch, persist exactly one status per file: `ANNOTATED`, `REVIEWED_NO_ANCHOR_CHANGES`, or `BLOCKED`; for `BLOCKED` also persist `step2_reason` and `step2_retry_count`. Retry each `BLOCKED` file once with a focused prompt. Do not advance while any `step2` is `PENDING`. **Done when:** no `step2` entry is `PENDING`; each file is `ANNOTATED`, `REVIEWED_NO_ANCHOR_CHANGES`, or `BLOCKED` with reason and retry count.
+
+4. Propagate dimensions (Step 3). For every `in_scope_files` entry, extend annotations through arithmetic, function calls, and assignments using dimension algebra (multiplication combines dimensions, division inverts, addition requires matching dimensions). Use the same batching and category order as Step 2. Confirm every file has a non-pending `step2` status before launch; then set `step3 = "PENDING"` and persist. After each batch, persist exactly one status per file: `PROPAGATED`, `REVIEWED_NO_PROPAGATION_CHANGES`, or `BLOCKED`; for `BLOCKED` also persist `step3_reason` and `step3_retry_count`. Retry each `BLOCKED` file once. Aggregate annotations by confidence (`CERTAIN`, `INFERRED`, `UNCERTAIN`), mismatches with severities, and coverage gaps that could not be inferred. Do not advance while any `step3` is `PENDING`. **Done when:** no `step3` entry is `PENDING`; each file is `PROPAGATED`, `REVIEWED_NO_PROPAGATION_CHANGES`, or `BLOCKED` with reason and retry count.
+
+5. Validate and detect bugs (Step 4). Validate every `in_scope_files` entry. Process in this priority order without skipping lower tiers: (a) files with CRITICAL or HIGH Step 3 mismatches, (b) remaining CRITICAL and HIGH scanner-priority files, (c) remaining MEDIUM and LOW files. Confirm every file has a non-pending `step3` status before launch; then set `step4 = "PENDING"` and persist. Validate one file per unit, running in waves of roughly 10-30 files. Reject rationalizations of mismatches; a dimension that does not balance is a finding, not an explanation. After each wave, persist exactly one status per file: `VALIDATED` or `BLOCKED`; for `BLOCKED` also persist `step4_reason` and `step4_retry_count`. Retry each `BLOCKED` file once. Deduplicate findings: confirmed Step 3 mismatches keep their original IDs and severities; refuted Step 3 mismatches are noted as false positives and excluded from final counts; genuinely new findings receive new `DIM-XXX` IDs. Step 4 is complete only when no `step4` entry is `PENDING`. **Done when:** no `step4` entry is `PENDING`; every file is `VALIDATED` or `BLOCKED`, and findings are deduplicated with confirmed and refuted separated.
+
+6. Reconcile. Derive `coverage.unprocessed_files` from terminal `BLOCKED` entries as `{ "path": "...", "blocked_step": "step2|step3|step4", "reason": "...", "retry_count": 1 }`. If the final report and `DIMENSIONAL_SCOPE.json` disagree, continue processing or reconcile the report until they match. Completion is determined by manifest coverage and final reported statuses, not by intent. **Done when:** `coverage.unprocessed_files` matches the terminal BLOCKED set and the report and manifest agree.
 
 ## Failure and recovery
 - BLOCKED file: persist the blocking reason and retry count; retry once with a focused prompt; if still BLOCKED, keep the documented reason and continue. Never finalize while any in-scope file remains PENDING in any step.
@@ -37,31 +42,7 @@ description: 'Use when asked to annotate every in-scope arithmetic file in a fin
 - Never swallow errors, invent evidence, or substitute ad-hoc dimensional reasoning for a skipped or unlaunched phase.
 
 ## Output
-A structured summary in the project root:
-
-```json
-{
-  "mode": "full-auto",
-  "project_root": "<path>",
-  "vocabulary": { "base_units": [], "derived_units": [], "precision_prefixes": [] },
-  "annotations": { "total_added": 0, "by_file": {} },
-  "findings": { "critical": 0, "high": 0, "medium": 0, "details": [] },
-  "uncertainties_resolved": 0,
-  "coverage": {
-    "in_scope_files": 0,
-    "anchor_reviewed_files": "0/0",
-    "propagation_reviewed_files": "0/0",
-    "validation_reviewed_files": "0/0",
-    "annotated_functions": "0/0",
-    "annotated_variables": "0/0",
-    "unprocessed_files": [
-      { "path": "", "blocked_step": "step3", "reason": "", "retry_count": 1 }
-    ]
-  }
-}
-```
-
-Confirmed and refuted mismatches are separated; `coverage.unprocessed_files` exactly matches the final terminal BLOCKED set. A list of modified files is included when edits occurred.
+A structured summary in the project root carrying mode, project_root, vocabulary (base_units, derived_units, precision_prefixes), annotations (total_added, by_file), findings (critical, high, medium, details), uncertainties_resolved, and coverage (in_scope_files, anchor/propagation/validation reviewed ratios, annotated functions and variables, unprocessed_files matching the terminal BLOCKED set), with confirmed and refuted mismatches separated and a list of modified files when edits occurred, ordered bound → discover → annotate → propagate → validate → reconcile.
 
 ## Provenance
 

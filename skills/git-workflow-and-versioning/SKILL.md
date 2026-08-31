@@ -23,15 +23,15 @@ Optional: changelog path, remote name, tag message, prerelease suffix.
 
 ## Procedure
 
-1. Confirm the request names a release, version bump, changelog update, or branch workflow beyond a single commit. If it is a single commit, stop and defer to the caller.
-2. Inspect the working tree and recent history with `git status`, `git log` since the last tag, and the current branch. Identify the logical change-sets to express.
-3. Group changes into atomic commits so each commit is one logical change-set. Stage and commit each group with a message that states the change, not the diff.
-4. Derive the version bump from the change-sets (major for breaking contract changes, minor for additive, patch for fixes), or use the explicit version the user supplied.
-5. Update the changelog so each new entry matches a shipped contract change; date and version the new section.
-6. Preview the exact commits, tag, and changelog diff to the user before any tag, push, or protected-branch action.
-7. Create the version tag only after explicit human confirmation. Use an annotated tag carrying the version message.
-8. For any push, protected-branch target, or force-push, state the target and consequence and require explicit consent before executing. Never force-push or push to a protected branch without it.
-9. After mutation, verify `git log`, `git tag`, and the changelog reflect the intended state and confirm no unauthorized protected-branch action occurred.
+1. Confirm the request names a release, version bump, changelog update, or branch workflow beyond a single commit. If it is a single commit, stop and defer to the caller. Done when: the request names a release/version/changelog/branch-workflow beyond one commit, or the run deferred a single-commit request.
+2. Inspect the working tree and recent history with `git status`, `git log` since the last tag, and the current branch. Identify the logical change-sets to express. Done when: working tree, history since last tag, and current branch inspected and change-sets identified.
+3. Group changes into atomic commits so each commit is one logical change-set. Stage and commit each group with a message that states the change, not the diff. Done when: changes grouped into atomic commits, each one logical change-set with a change-stating message.
+4. Derive the version bump from the change-sets (major for breaking contract changes, minor for additive, patch for fixes), or use the explicit version the user supplied. Done when: the version bump is derived from change-sets or the user-supplied version is adopted.
+5. Update the changelog so each new entry matches a shipped contract change; date and version the new section. Done when: the changelog''s new entries each match a shipped contract change, dated and versioned.
+6. Preview the exact commits, tag, and changelog diff to the user before any tag, push, or protected-branch action. Done when: the commits, tag, and changelog diff are previewed to the user before any tag, push, or protected-branch action.
+7. Create the version tag only after explicit human confirmation. Use an annotated tag carrying the version message. Done when: an annotated version tag is created only after explicit human confirmation.
+8. For any push, protected-branch target, or force-push, state the target and consequence and require explicit consent before executing. Never force-push or push to a protected branch without it. Done when: every push, protected-branch target, or force-push states target and consequence and has explicit consent before executing.
+9. After mutation, verify `git log`, `git tag`, and the changelog reflect the intended state and confirm no unauthorized protected-branch action occurred. Done when: `git log`, `git tag`, and the changelog reflect the intended state with no unauthorized protected-branch action.
 
 ## Failure and recovery
 - Ambiguous change-set grouping: stop and ask the user to confirm the grouping before committing.

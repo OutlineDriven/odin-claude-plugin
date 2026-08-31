@@ -1,3 +1,3 @@
 interface:
   display_name: "Land Contribution"
-  short_description: "Review and land external pull requests with credit"
+  short_description: "Use when a maintainer or collaborator explicitly asks to review"

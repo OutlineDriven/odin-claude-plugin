@@ -1,6 +1,6 @@
 ---
 name: plan-review-tune
-description: 'Use when asked to plan-mode enforcement hooks intercept a plan review, or the user runs /plan-review-tune, to tune which plan-review questions fire. The tuned plan-review question flow is persisted to a local question-registry and hook configuration. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when plan-mode enforcement hooks intercept a plan review or the user runs /plan-review-tune to tune which plan-review questions fire. Persists the tuned question flow to a local question-registry and hook configuration. Not for auditing a plan against code — use plan-review.'
 ---
 
 # Plan review tune
@@ -22,12 +22,12 @@ description: 'Use when asked to plan-mode enforcement hooks intercept a plan rev
 
 ## Procedure
 
-1. Load the question-registry and developer profile from the local harness config directory; treat absent files as empty maps.
-2. For an inspect request, render the dual-track profile (declared versus behavior-suggested) and the current per-question preferences, then stop.
-3. For a per-question preference request, validate that the question id is a member of the plan-review question set and that the preference is one of `never-ask`, `always-ask`, `ask-only-for-one-way`. Reject unknown ids or values before any write.
-4. For an enable or disable request, set the question-tuning flag in the hook configuration.
-5. Persist the registry and hook configuration atomically: write to a temporary file in the config directory, then rename over the target. Leave every field the request did not name unchanged.
-6. Re-read the persisted files and confirm the persisted state matches the request exactly.
+1. Load the question-registry and developer profile from the local harness config directory; treat absent files as empty maps. Done when: the registry and profile are loaded or treated as empty.
+2. For an inspect request, render the dual-track profile (declared versus behavior-suggested) and the current per-question preferences, then stop. Done when: the dual-track profile and preference map are rendered.
+3. For a per-question preference request, validate that the question id is a member of the plan-review question set and that the preference is one of `never-ask`, `always-ask`, `ask-only-for-one-way`. Reject unknown ids or values before any write. Done when: the question id and preference are validated or rejected.
+4. For an enable or disable request, set the question-tuning flag in the hook configuration. Done when: the flag is set in the hook configuration.
+5. Persist the registry and hook configuration atomically: write to a temporary file in the config directory, then rename over the target. Leave every field the request did not name unchanged. Done when: the registry and hook configuration are persisted atomically with unnamed fields unchanged.
+6. Re-read the persisted files and confirm the persisted state matches the request exactly. Done when: the re-read confirms the persisted state matches the request.
 
 ## Failure and recovery
 - Unknown question id: stop, list the valid plan-review question ids, do not mutate the registry.
@@ -36,7 +36,7 @@ description: 'Use when asked to plan-mode enforcement hooks intercept a plan rev
 - Write or rename failure: leave the prior configuration intact, report the error, and do not claim the done predicate holds.
 
 ## Output
-The persisted question-registry and hook configuration, plus a one-line confirmation naming the question id or flag that changed and its new value. An inspect request returns the rendered dual-track profile and preference map instead.
+The persisted question-registry and hook configuration plus a one-line confirmation naming the changed question id or flag and its new value — or, for an inspect request, the rendered dual-track profile and preference map.
 
 ## Provenance
 

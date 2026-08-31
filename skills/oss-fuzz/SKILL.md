@@ -1,6 +1,6 @@
 ---
 name: oss-fuzz
-description: 'Use when asked to enroll an open-source project in OSS-Fuzz or run its helper workflow locally. The project image and fuzzers build locally, the named harness runs, and enrollment metadata meets the service contract. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to enroll a project in OSS-Fuzz or run its helper workflow locally. Builds the project image and fuzzers, runs the named harness, and checks enrollment metadata. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # OSS-Fuzz
@@ -31,35 +31,37 @@ description: 'Use when asked to enroll an open-source project in OSS-Fuzz or run
 
 ### Task A: run an enrolled project locally
 
-1. Verify `docker` is available and the user has permission to run containers (`docker info` exits 0).
+1. Verify `docker` is available and the user has permission to run containers (`docker info` exits 0). Done when: `docker info` exits 0.
 2. Clone oss-fuzz if `oss_fuzz_dir` does not exist or is not a git repository:
    ```bash
    git clone https://github.com/google/oss-fuzz "$oss_fuzz_dir"
    ```
+   Done when: the oss-fuzz repository is cloned and present at `oss_fuzz_dir`.
 3. Change to the oss-fuzz directory:
    ```bash
    cd "$oss_fuzz_dir"
    ```
+   Done when: the working directory is the oss-fuzz directory.
 4. Build the project Docker image:
    ```bash
    uv run --no-project python infra/helper.py build_image --pull "$project_name"
    ```
-   If `build_image` reports the project directory does not exist under `projects/`, stop and return `enrollment-missing`.
+   If `build_image` reports the project directory does not exist under `projects/`, stop and return `enrollment-missing`. Done when: the project Docker image builds successfully or `enrollment-missing` is returned.
 5. Build the fuzzers with AddressSanitizer:
    ```bash
    uv run --no-project python infra/helper.py build_fuzzers --sanitizer="${sanitizer:-address}" "$project_name"
    ```
-   Capture stdout/stderr. If the build exits non-zero, return `build-failed` with the captured output.
+   Capture stdout/stderr. If the build exits non-zero, return `build-failed` with the captured output. Done when: fuzzers compile with the configured sanitizer and stdout/stderr are captured.
 6. Run the named harness:
    ```bash
    uv run --no-project python infra/helper.py run_fuzzer "$project_name" "$harness_name" ${fuzzer_args:+"$fuzzer_args"}
    ```
-   Observe for at least 10 seconds. If the harness exits with a sanitizer report, return `crash-detected` with the report path. Otherwise return `harness-ran`.
+   Observe for at least 10 seconds. If the harness exits with a sanitizer report, return `crash-detected` with the report path. Otherwise return `harness-ran`. Done when: the harness runs for at least 10 seconds and returns `harness-ran` or `crash-detected`.
 
 ### Task B: enroll a new project
 
-1. Verify the project has an OSS-Fuzz-compatible harness at `$main_repo` or an associated harness repository.
-2. Create `projects/<project_name>/` under the oss-fuzz directory.
+1. Verify the project has an OSS-Fuzz-compatible harness at `$main_repo` or an associated harness repository. Done when: a compatible harness is confirmed at `$main_repo` or the associated repository.
+2. Create `projects/<project_name>/` under the oss-fuzz directory. Done when: the project directory is created.
 3. Write `projects/<project_name>/project.yaml`:
    ```yaml
    homepage: "<main_repo>"
@@ -71,16 +73,18 @@ description: 'Use when asked to enroll an open-source project in OSS-Fuzz or run
    sanitizers:
      - address
    ```
-   Extend `sanitizers` and `fuzzing_engines` if the task specifies additional values.
-4. Write `projects/<project_name>/Dockerfile` using `gcr.io/oss-fuzz-base/base-builder` as the base image; add language-specific and project-specific `RUN` commands to install build dependencies. Do not copy source code directly; use `git clone` in the Dockerfile.
+   Extend `sanitizers` and `fuzzing_engines` if the task specifies additional values. Done when: `project.yaml` is written with all required fields and any extensions.
+4. Write `projects/<project_name>/Dockerfile` using `gcr.io/oss-fuzz-base/base-builder` as the base image; add language-specific and project-specific `RUN` commands to install build dependencies. Do not copy source code directly; use `git clone` in the Dockerfile. Done when: `Dockerfile` is written with the base image and `git clone` for source.
 5. Write `projects/<project_name>/build.sh` as an executable script:
    - Set `#!/bin/bash -eu`.
    - Clone or build project dependencies.
    - Compile harnesses using `$CXX`, `$CXXFLAGS`, `$LIB_FUZZING_ENGINE`, `$SRC`, and `$OUT` as provided by the OSS-Fuzz environment.
    - Copy corpus and dictionary files to `$OUT` if present.
-6. Return `enrollment-artifacts-written` listing the three files and their paths.
+   Done when: `build.sh` is written as an executable script with all four elements.
+6. Return `enrollment-artifacts-written` listing the three files and their paths. Done when: the three artifact paths are returned.
 
 ## Failure and recovery
+
 | Failure class | Trigger | Result |
 |---|---|---|
 | `docker-unavailable` | `docker info` exits non-zero | Return `blocked: docker-unavailable`. Do not attempt container operations. |
@@ -90,6 +94,7 @@ description: 'Use when asked to enroll an open-source project in OSS-Fuzz or run
 | `rollback` | Any step fails; Docker images written by this session | Rollback: `docker rmi $(docker images -q "gcr.io/oss-fuzz/$(basename "$project_name")*") 2>/dev/null`; delete the `oss_fuzz_dir` clone if this session created it. |
 
 ## Output
+
 | Outcome | Output |
 |---|---|
 | Local run, build success, no crash | `done: harness-ran`: fuzzer is running and producing coverage or execution output. |

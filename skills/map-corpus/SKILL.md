@@ -21,24 +21,26 @@ description: 'Use when the user points to a folder of their study material and w
 
 ## Procedure
 
-1. Expand `~`, resolve the corpus folder to an absolute path, and verify that it exists and is a directory. Fix the corpus root and workspace-root output path before reading or writing.
-2. Recursively enumerate every file under the corpus root. Attempt to read each without converting it or modifying it. Classify each file as readable or unreadable and retain the reason for every unreadable result.
-3. For every readable file, record one source row containing its path relative to the corpus root, its material kind, and either the headings worth citing or `reference only`. The number of source rows must equal the number of readable files.
-4. Derive the concepts the readable corpus teaches. For each concept, use the source's term where available and record a one-sentence definition, its prerequisites, and at least one citation anchor. Every readable file must contribute a concept or be marked `reference only` in its source row.
-5. Form heading citations as `<path-relative-to-corpus-root>#<heading-slug>`. When a source has no headings, use `<path-relative-to-corpus-root>:<start>-<end>`. Do not place absolute paths in source rows or citations.
-6. Order the concepts as one flat numbered list. Put every prerequisite before its dependents. If two concepts depend on each other, place first the one introduced first by the corpus and disclose the cycle on the other concept's line. Merge concepts that the corpus always teaches together when the list would otherwise exceed roughly forty entries.
-7. Build `CORPUS.md` with, in order: `# Corpus: <name>`; `corpus_root: <absolute path>`; `mapped: <YYYY-MM-DD>`; a `## Sources` table with `File`, `Kind`, and `Cite from` columns; a `## Concepts` numbered list whose entries contain the term, definition, `Needs:`, and `Source:`; and a `## Unreadable` list containing each unreadable relative path and reason. Use `Needs: none` for concepts without prerequisites and state `None` when there are no unreadable files.
-8. Verify file accounting, concept coverage, citation form, and prerequisite order against the enumerated corpus. Only then write the completed content by wholly replacing workspace-root `CORPUS.md`; never write inside the corpus root.
+1. Expand `~`, resolve the corpus folder to an absolute path, and verify that it exists and is a directory. Fix the corpus root and workspace-root output path before reading or writing. Done when: the corpus root and output path are resolved and verified.
+2. Recursively enumerate every file under the corpus root. Attempt to read each without converting it or modifying it. Classify each file as readable or unreadable and retain the reason for every unreadable result. Done when: every file is enumerated and classified with its readability reason.
+3. For every readable file, record one source row containing its path relative to the corpus root, its material kind, and either the headings worth citing or `reference only`. The number of source rows must equal the number of readable files. Done when: source row count equals readable file count.
+4. Derive the concepts the readable corpus teaches. For each concept, use the source's term where available and record a one-sentence definition, its prerequisites, and at least one citation anchor. Every readable file must contribute a concept or be marked `reference only` in its source row. Done when: every readable file is accounted for as a concept or `reference only`.
+5. Form heading citations as `<path-relative-to-corpus-root>#<heading-slug>`. When a source has no headings, use `<path-relative-to-corpus-root>:<start>-<end>`. Do not place absolute paths in source rows or citations. Done when: every citation uses the relative-path form.
+6. Order the concepts as one flat numbered list. Put every prerequisite before its dependents. If two concepts depend on each other, place first the one introduced first by the corpus and disclose the cycle on the other concept's line. Merge concepts that the corpus always teaches together when the list would otherwise exceed roughly forty entries. Done when: every prerequisite precedes its dependents and every cycle is disclosed.
+7. Build `CORPUS.md` with, in order: `# Corpus: <name>`; `corpus_root: <absolute path>`; `mapped: <YYYY-MM-DD>`; a `## Sources` table with `File`, `Kind`, and `Cite from` columns; a `## Concepts` numbered list whose entries contain the term, definition, `Needs:`, and `Source:`; and a `## Unreadable` list containing each unreadable relative path and reason. Use `Needs: none` for concepts without prerequisites and state `None` when there are no unreadable files. Done when: the file content is assembled in the specified section order.
+8. Verify file accounting, concept coverage, citation form, and prerequisite order against the enumerated corpus. Only then write the completed content by wholly replacing workspace-root `CORPUS.md`; never write inside the corpus root. Done when: the verification passes and `CORPUS.md` is written.
 
 ## Failure and recovery
-- **Invalid corpus:** If the path is missing, does not exist, or is not a directory, do not write anything; return `blocked` with the failed validation.
-- **Unreadable members:** List each unreadable file and its observed reason, make no conversion attempt or converter recommendation, and complete the map from readable files. This is a valid partial corpus map only when every unreadable file is disclosed.
-- **Unsafe output boundary:** If the resolved output is not exactly workspace-root `CORPUS.md`, or writing it would modify the corpus root, do not write and return `blocked` with both resolved paths.
-- **Unprovable map:** If source accounting, concept coverage, citation anchors, or prerequisite ordering cannot be established from the material, preserve any existing `CORPUS.md`, write no partial replacement, and return `blocked` naming the unmet condition without inventing evidence.
-- **Write failure:** Report the write error and do not claim completion. If replacement began but did not complete, restore the prior `CORPUS.md` when available; otherwise remove the incomplete new file.
+
+- **Invalid corpus**: if the path is missing, does not exist, or is not a directory, do not write anything; return `blocked` with the failed validation.
+- **Unreadable members**: list each unreadable file and its observed reason, make no conversion attempt or converter recommendation, and complete the map from readable files. This is a valid partial corpus map only when every unreadable file is disclosed.
+- **Unsafe output boundary**: if the resolved output is not exactly workspace-root `CORPUS.md`, or writing it would modify the corpus root, do not write and return `blocked` with both resolved paths.
+- **Unprovable map**: if source accounting, concept coverage, citation anchors, or prerequisite ordering cannot be established from the material, preserve any existing `CORPUS.md`, write no partial replacement, and return `blocked` naming the unmet condition without inventing evidence.
+- **Write failure**: report the write error and do not claim completion. If replacement began but did not complete, restore the prior `CORPUS.md` when available; otherwise remove the incomplete new file.
 
 ## Output
-On success, return the path to workspace-root `CORPUS.md` and counts for readable sources, unreadable sources, and concepts. The file is the sole artifact and contains the complete source inventory, citation anchors, prerequisite-ordered concept spine, and unreadable-file disclosures.
+
+On success, return the path to workspace-root `CORPUS.md` and counts for readable sources, unreadable sources, and concepts. The file is the sole artifact and contains the complete source inventory, citation anchors, prerequisite-ordered concept list, and unreadable-file disclosures.
 
 ## Provenance
 

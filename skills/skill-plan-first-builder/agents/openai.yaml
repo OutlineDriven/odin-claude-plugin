@@ -1,3 +1,3 @@
 interface:
   display_name: "Skill Plan First Builder"
-  short_description: "Build agent skills from approved analysis plans using token"
+  short_description: "Use when a user requests a Skill from an approved analysis."

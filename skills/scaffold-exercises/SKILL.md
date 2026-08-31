@@ -1,6 +1,6 @@
 ---
 name: scaffold-exercises
-description: 'Use when a course needs numbered problem, solution, and explainer scaffolds, this skill scaffolds the files and validates them with the course linter. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a course needs numbered problem, solution, and explainer scaffolds. Creates those files and validates them with the course linter. Not for a CLI or Next.js project scaffold — use scaffold-cli or scaffold-nextjs.'
 ---
 
 # Scaffold exercises
@@ -17,6 +17,7 @@ description: 'Use when a course needs numbered problem, solution, and explainer 
 ## Inputs
 
 Must be supplied:
+
 - `section` — the section number as an integer (e.g. 1, 2, 3)
 - `exercise` — the exercise number as a positive integer
 - `type` — one of: `problem`, `solution`, `explainer`
@@ -37,29 +38,17 @@ Must be supplied:
 8. Report the paths created or updated.
 
 ## Failure and recovery
-**Invalid input** — stop; do not write any file; report the validation failure.
-**Write failure** — stop; do not run the linter; report the write error.
-**Linter failure** — revert writes made in step 4–5 via VCS checkout of the original content; report the linter output and the revert.
-**No course linter present** — treat this as a linter failure and revert.
+
+- **Invalid input** — stop; do not write any file; report the validation failure.
+- **Write failure** — stop; do not run the linter; report the write error.
+- **Linter failure** — revert writes made in step 4–5 via VCS checkout of the original content; report the linter output and the revert.
+- **No course linter present** — treat this as a linter failure and revert.
 
 Partial-result rule: never produce an unvalidated scaffold on disk.
 Rollback: any scaffold written before a linter pass must be reverted if the linter fails.
 
 ## Output
-A JSON object:
-```json
-{
-  "scaffolded": ["path/to/problem.md", "path/to/solution.md", "path/to/explainer.md"],
-  "linter": "passed"
-}
-```
-On failure:
-```json
-{
-  "error": "<named failure class>",
-  "detail": "<specific message>"
-}
-```
+A JSON object: `scaffolded` (paths) and `linter` status on success; `error` (named failure class) and `detail` on failure.
 
 ## Provenance
 

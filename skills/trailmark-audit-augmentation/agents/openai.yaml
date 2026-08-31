@@ -1,3 +1,3 @@
 interface:
   display_name: "Trailmark Audit Augmentation"
-  short_description: "Import SARIF, weAudit, or binary findings onto a code graph"
+  short_description: "Project SARIF, weAudit, or binary exports onto an existing"

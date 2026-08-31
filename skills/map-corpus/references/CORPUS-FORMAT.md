@@ -1,4 +1,4 @@
-# CORPUS Format
+# CORPUS format
 
 ## Template
 
@@ -22,7 +22,7 @@ mapped: {YYYY-MM-DD}
 ## Kind values
 
 - **textbook** — structured chapter/section exposition.
-- **paper** — peer-reviewed or preprint with venue-worthy claims.
+- **paper** — peer-reviewed publication or preprint that makes claims suitable for a research venue.
 - **practitioner book** — field guide, handbook, or how-to.
 - **work document** — notes, memos, onboarding docs authored on the job.
 - **notes** — the learner's own capture; may be fragmentary.

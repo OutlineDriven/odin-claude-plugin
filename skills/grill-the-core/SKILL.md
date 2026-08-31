@@ -1,6 +1,6 @@
 ---
 name: grill-the-core
-description: 'Use when the user wants root-shape repair instead of a symptom-first fix, debug, or resolve; the run repairs the long-horizon root shape with full review-history context and no monkey patches until the project check set passes clean. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user wants root-shape repair, not a symptom-first fix: long-horizon repair with full review-history context and no monkey patches until the project check set passes clean. Not for the review-only stance — use grill-core; never remote or irreversible changes.'
 ---
 
 # Grill the core
@@ -23,13 +23,13 @@ description: 'Use when the user wants root-shape repair instead of a symptom-fir
 
 ## Procedure
 
-1. Reject symptom-first framing. Before any edit, restate the defect as a root-shape problem: name the structural cause, not the surface symptom, and write it down.
-2. Gather full review-history context for the affected surface. Read prior review comments, fix attempts, and reverted patches from the repo and VCS so the repair is not blind to history.
-3. Bound scope. List the named local artifacts to be edited. Do not widen scope to unrelated code, and do not add retries, validation, telemetry, or abstraction unless they are the root-shape repair.
-4. Repair the root shape. Change the structure so the defect cannot recur: eliminate the special case, fix the data model, or correct the boundary that let the symptom through.
-5. After every behavioral change, run a fresh review. A reviewer that did not author the change examines it against the root-shape claim and the check set. Do not self-approve.
-6. Run the project check set. Confirm it passes with no monkey patches, shims, special-cased inputs, or suppressed symptoms left in the diff.
-7. If a monkey patch, shim, or symptom suppression appears, remove it and return to step 4.
+1. Reject symptom-first framing. Before any edit, restate the defect as a root-shape problem: name the structural cause, not the surface symptom, and write it down. Done when: the stated action, evidence, and guard all hold.
+2. Gather full review-history context for the affected surface. Read prior review comments, fix attempts, and reverted patches from the repo and VCS so the repair is not blind to history. Done when: the stated action, evidence, and guard all hold.
+3. Bound scope. List the named local artifacts to be edited. Do not widen scope to unrelated code, and do not add retries, validation, telemetry, or abstraction unless they are the root-shape repair. Done when: the stated action, evidence, and guard all hold.
+4. Repair the root shape. Change the structure so the defect cannot recur: eliminate the special case, fix the data model, or correct the boundary that let the symptom through. Done when: the stated action, evidence, and guard all hold.
+5. After every behavioral change, run a fresh review. A reviewer that did not author the change examines it against the root-shape claim and the check set. Do not self-approve. Done when: the stated action, evidence, and guard all hold.
+6. Run the project check set. Confirm it passes with no monkey patches, shims, special-cased inputs, or suppressed symptoms left in the diff. Done when: the stated action, evidence, and guard all hold.
+7. If a monkey patch, shim, or symptom suppression appears, remove it and return to step 4. Done when: the stated action, evidence, and guard all hold.
 
 ## Failure and recovery
 - Symptom-creep: if the repair drifts back to patching the symptom, stop, restate the root-shape problem, and restart at step 4.
@@ -39,11 +39,7 @@ description: 'Use when the user wants root-shape repair instead of a symptom-fir
 - Rollback: edits are limited to named local artifacts; revert via the working tree or VCS. Never widen scope to force convergence.
 
 ## Output
-- A repaired root shape in the named local artifacts.
-- A root-shape statement naming the structural cause and the structural fix.
-- The fresh-review verdict for each behavioral change.
-- The project check set result, with confirmation that no monkey patch, shim, or symptom suppression remains.
-- On non-convergence, a blocked report naming the root-shape cause, the artifacts tried, and why the check set cannot pass without a patch.
+A repaired root shape and cause/fix statement, then each fresh-review verdict, then the project check result confirming no monkey patch, shim, or symptom suppression remains; on non-convergence, a blocked report naming the cause, artifacts tried, and why the checks cannot pass cleanly.
 
 ## Provenance
 

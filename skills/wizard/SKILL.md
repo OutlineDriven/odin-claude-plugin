@@ -24,50 +24,17 @@ description: 'Use when asked to generate an interactive bash wizard that walks a
 
 ### 1. Scope the procedure
 
-Read the repository before asking anything:
+Read the repository before asking anything: `.env`, `.env.example`, and `.env.*`; `README`; `docker-compose*`; framework configuration; `.github/workflows/*`. Treat every `secrets.*` and `vars.*` reference in a workflow as a value the wizard must produce. For a migration, read the current state, the target state, and every irreversible action between them.
 
-- `.env`, `.env.example`, and `.env.*`
-- `README`
-- `docker-compose*`
-- Framework configuration
-- `.github/workflows/*`
-
-Treat every `secrets.*` and `vars.*` reference in a workflow as a value the wizard must produce. For a migration, read the current state, the target state, and every irreversible action between them.
-
-Show the ordered stage list and the values each stage produces. Confirm it with the user. Scoping is complete only when:
-
-- Every stage has a name and order.
-- Every captured value has a known source.
-- Every captured value has a destination: `.env`, a GitHub secret, both, or nowhere for a pure-action stage.
-- Every captured value is classified as secret or public.
+Show the ordered stage list and the values each stage produces. Confirm it with the user. Done when: every stage has a name and order, every captured value has a known source, every captured value has a destination (`.env`, a GitHub secret, both, or nowhere for a pure-action stage), and every captured value is classified as secret or public.
 
 ### 2. Map the human journey
 
-For each stage, write instructions a stranger can follow. Name the URL, the clicks, where the value appears, and which variable it fills. If the current UI or exact command is unknown, say so. Check the official docs or ask the user. Never invent a step.
+For each stage, write instructions a stranger can follow. Name the URL, the clicks, where the value appears, and which variable it fills. If the current UI or exact command is unknown, say so. Check the official docs or ask the user. Never invent a step. Done when: every stage has stranger-followable instructions naming the URL, clicks, value location, and target variable.
 
 ### 3. Author the script
 
-Copy `scripts/wizard-template.sh` to the target path. Replace the example with one `stage` per step in dependency order. Set `TOTAL_STAGES` and `TOTAL_MINUTES` to honest values because they drive the time-remaining display.
-
-Use the library helpers by contract:
-
-- `stage`: clear the screen and start one focused task.
-- `say`: print a plain instruction.
-- `step`: print one action for the human.
-- `note`: print supporting detail.
-- `warn`: print a warning.
-- `open_url`: open the target page.
-- `ask`: capture a public value.
-- `ask_secret`: capture a hidden value.
-- `write_env`: persist one value to `.env`.
-- `set_secret`: write a GitHub Actions secret.
-- `set_var`: write a GitHub Actions variable.
-- `pause`: wait for the human to finish a manual action.
-- `confirm`: gate an irreversible action.
-- `banner`: show the opening summary.
-- `finish`: show what was written and what remains.
-
-Open a URL before asking for its value. Use `ask_secret` for secrets. Call `write_env` for every persisted value. Call `set_secret` only for values CI needs. Call `confirm` before an irreversible action. A `stage` clears the screen, so keep it to one focused task or the human loses the instructions that scrolled away.
+Copy `scripts/wizard-template.sh` to the target path. Replace the example with one `stage` per step in dependency order. Set `TOTAL_STAGES` and `TOTAL_MINUTES` to honest values because they drive the time-remaining display. Use the library helpers by contract per `references/library-helpers.md`. Done when: script is written with one stage per step, honest totals, and all helpers used correctly.
 
 ### 4. Verify and hand off
 
@@ -77,6 +44,8 @@ Open a URL before asking for its value. Use `ask_secret` for secrets. Call `writ
 4. Trace every scoped value. Confirm it is captured and reaches its declared destination.
 5. Confirm every `set_secret` name matches a `secrets.*` workflow reference exactly.
 6. Tell the user how to run the script.
+
+Done when: script passes `bash -n` and shellcheck (when available), is executable, every scoped value is traced to its destination, and every `set_secret` name matches its workflow reference.
 
 Commit the wizard only when the user wants a repeatable setup path in the repository. Otherwise, treat it as ephemeral and delete it after the job is done.
 

@@ -22,34 +22,34 @@ description: 'Use when a user asks to audit what recall fed agents; returns a bo
 
 ## Procedure
 
-1. Verify `deja` is in PATH. Run `command -v deja`. If absent, return `null`.
+1. Verify `deja` is in PATH. Run `command -v deja`. If absent, return `null`. Done when: the stated action, evidence, and guard all hold.
 
-2. Run `deja log --json` with the harness filter and limit if supplied.
+2. Run `deja log --json` with the harness filter and limit if supplied. Done when: the stated action, evidence, and guard all hold.
 
-3. Capture stdout and exit code.
+3. Capture stdout and exit code. Done when: the stated action, evidence, and guard all hold.
 
-4. If exit code is non-zero, return `{ "error": "deja log failed", "hint": "install or rebuild deja" }`.
+4. If exit code is non-zero, return `{ "error": "deja log failed", "hint": "install or rebuild deja" }`. Done when: the stated action, evidence, and guard all hold.
 
-5. If stdout is the exact string `null\n`, return `null`.
+5. If stdout is the exact string `null\n`, return `null`. Done when: the stated action, evidence, and guard all hold.
 
-6. Parse stdout as JSON. If parse fails, return `{ "error": "malformed JSON from deja log" }`.
+6. Parse stdout as JSON. If parse fails, return `{ "error": "malformed JSON from deja log" }`. Done when: the stated action, evidence, and guard all hold.
 
-7. The parsed value is a JSON array of event objects or `null`.
+7. The parsed value is a JSON array of event objects or `null`. Done when: the stated action, evidence, and guard all hold.
 
-8. If the parsed value is `null`, return `null`.
+8. If the parsed value is `null`, return `null`. Done when: the stated action, evidence, and guard all hold.
 
-9. If the parsed value is an empty array, return `null`.
+9. If the parsed value is an empty array, return `null`. Done when: the stated action, evidence, and guard all hold.
 
-10. For each event object, extract the following fields into an audit row:
+10. For each event object, extract the following fields into an audit row: Done when: the stated action, evidence, and guard all hold.
     - `t` → `time` as the RFC3339 string from the source.
     - `kind` → `kind`.
     - `bytes` → `bytes` as the integer from the source.
     - `sessions` (absent → 0) → `sessions`.
     - `empty` (absent → false) → `empty`.
 
-11. Build and return an array of row objects with keys `time`, `kind`, `bytes`, `sessions`, `empty`.
+11. Build and return an array of row objects with keys `time`, `kind`, `bytes`, `sessions`, `empty`. Done when: the stated action, evidence, and guard all hold.
 
-12. Digest text fields (`digest`, `policy`, `into`, `terms`, `ids`) are never read, never included in output, and never surfaced to the model.
+12. Digest text fields (`digest`, `policy`, `into`, `terms`, `ids`) are never read, never included in output, and never surfaced to the model. Done when: the stated action, evidence, and guard all hold.
 
 ## Failure and recovery
 | Failure class | Condition | Result |
@@ -61,23 +61,7 @@ description: 'Use when a user asks to audit what recall fed agents; returns a bo
 Partial-result rule: if `deja log` produces a partial list (due to a cap or clock skew), return exactly what was returned. Do not extrapolate, impute, or estimate missing events. Non-mutation rule: no file, directory, index, or state is written or altered.
 
 ## Output
-An array of event rows sorted newest-first:
-
-```json
-[
-  {
-    "time": "2026-08-24T12:00:00Z",
-    "kind": "recall",
-    "bytes": 900,
-    "sessions": 2,
-    "empty": false
-  }
-]
-```
-
-Or the null object when the usage log is absent, empty, or `deja` is not installed: `null`.
-
-No digest text, policy, terms, session IDs, or injection target fields appear in output.
+Newest-first event rows ordered by `time`, `kind`, `bytes`, `sessions`, and `empty`; return `null` when the log is absent or empty or `deja` is unavailable, and never include digest text, policy, terms, session IDs, or injection targets.
 
 ## Provenance
 

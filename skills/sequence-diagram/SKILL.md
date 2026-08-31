@@ -1,6 +1,6 @@
 ---
 name: sequence-diagram
-description: 'Use when a user asks to visualize a time-ordered interaction, write a typed sequence JSON spec and a self-contained interactive HTML artifact. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a user asks to visualize a time-ordered interaction. Writes a typed sequence JSON spec and a self-contained interactive HTML artifact. Not for static architecture diagrams — use architecture-diagram.'
 ---
 
 # Sequence diagram
@@ -10,9 +10,13 @@ description: 'Use when a user asks to visualize a time-ordered interaction, writ
 | Field | Bound contract |
 |---|---|
 | Trigger | The user asks to visualize an API call chain, request lifecycle, asynchronous exchange, cache miss, return path, or another time-ordered interaction. |
-| Authority | reversible-local: write only the named local artifacts (typed sequence JSON spec and self-contained HTML artifact); rollback to zero state if any step fails. |
+| Authority | Reversible-local: write only the named local artifacts (typed sequence JSON spec and self-contained HTML artifact); rollback to zero state if any step fails. |
 | Side effect | Writes a typed sequence JSON specification and one self-contained interactive HTML artifact, with optional bounded visual-evidence sidecars. No other file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Done | Every participant and authored message is represented in source order, the specification validates fail-closed, the artifact passes the complete showcase and delivery gates, and the final receipt and visual-review status are truthful. |
+
+## Not for
+
+- Static architecture or component diagrams — use architecture-diagram.
 
 ## Inputs
 
@@ -26,25 +30,36 @@ The skill self-contains all schema governance. No reference to another skill, AG
 
 ## Procedure
 
-1. **Extract interaction facts.** Parse the user's description to identify participant names, message names, direction (caller → callee), sequence order, and any optional activations or variants. Bound the fact set before mutation.
-2. **Validate fact bounds.** Reject if fewer than 2 participants or fewer than 1 message. Stop rather than widen scope.
+1. **Extract interaction facts.** Parse the user's description to identify participant names, message names, direction (caller → callee), sequence order, and any optional activations or variants. Bound the fact set before mutation. **Done when:** the fact set is bounded and recorded.
+
+2. **Validate fact bounds.** Reject if fewer than 2 participants or fewer than 1 message. Stop rather than widen scope. **Done when:** the fact set passes validation or is rejected.
+
 3. **Construct typed sequence JSON.** Author the JSON with this inlined structure:
    - `title`: string — the diagram title.
    - `participants`: array of objects in source order, each with `name` (string) and optional `type` (string).
    - `messages`: array of objects in source order, each with `from` (participant name), `to` (participant name), `label` (string), `order` (integer, 1-based), and optional `direction` (one of `"request"`, `"response"`, `"self"`).
    - `activations` (optional): array of objects with `participant` (name), `startOrder` (integer), `endOrder` (integer).
    - `variants` (optional): array of objects with `label` (string), `messageOrders` (array of integers referencing message `order` values).
-   Do not copy source expression; re-derive from the observable contracts.
-4. **Write spec file.** Perform a reversible local write of the sequence JSON spec to `*.sequence.json`. Rollback the write if a subsequent step fails.
-5. **Validate specification.** Load the written spec and validate fail-closed against the inlined structure from step 3: every `from` and `to` value must match a participant `name`; every `order` value must be unique and sequential; every activation `startOrder` and `endOrder` must reference existing message orders; every variant `messageOrders` entry must reference an existing message order. Stop on any validation error.
-6. **Generate HTML artifact.** Author self-contained interactive HTML that renders the sequence diagram: all participants on horizontal lanes, messages as labeled arrows in source order, activations as stacked bars, variants as labeled branches. The artifact must not fetch external resources. Interactive hover or click states are permitted.
-7. **Write HTML artifact.** Perform a reversible local write of the HTML artifact to `*.sequence.html`. Rollback on failure.
-8. **Deliver optional sidecars.** If the user explicitly requests visual-evidence sidecars, write them as additional local files bounded to the same session scope. Do not invent sidecar content.
-9. **Run showcase gate.** Visually review the HTML artifact via browser tool or render simulation. Verify all named participants are present, all messages appear in the correct source order, arrows are labeled, and the layout is legible. Stop if any participant or message is missing, misordered, or unlabeled.
-10. **Run delivery gate.** Confirm both the JSON spec file and the HTML artifact file exist on disk and are non-empty. Stop if either is absent or empty.
-11. **Emit receipt.** Record the final paths of the spec and artifact. Mark visual-review status as truthful pass or fail. Do not emit a pass receipt if any gate failed.
+   Do not copy source expression; re-derive from the observable contracts. **Done when:** the JSON is authored with all fields populated.
+
+4. **Write spec file.** Perform a reversible local write of the sequence JSON spec to `*.sequence.json`. Rollback the write if a subsequent step fails. **Done when:** the spec file exists on disk.
+
+5. **Validate specification.** Load the written spec and validate fail-closed against the inlined structure from step 3: every `from` and `to` value must match a participant `name`; every `order` value must be unique and sequential; every activation `startOrder` and `endOrder` must reference existing message orders; every variant `messageOrders` entry must reference an existing message order. Stop on any validation error. **Done when:** the spec validates or the error is reported.
+
+6. **Generate HTML artifact.** Author self-contained interactive HTML that renders the sequence diagram: all participants on horizontal lanes, messages as labeled arrows in source order, activations as stacked bars, variants as labeled branches. The artifact must not fetch external resources. Interactive hover or click states are permitted. **Done when:** the HTML is authored.
+
+7. **Write HTML artifact.** Perform a reversible local write of the HTML artifact to `*.sequence.html`. Rollback on failure. **Done when:** the HTML file exists on disk.
+
+8. **Deliver optional sidecars.** If the user explicitly requests visual-evidence sidecars, write them as additional local files bounded to the same session scope. Do not invent sidecar content. **Done when:** sidecars are written or confirmed not requested.
+
+9. **Run showcase gate.** Visually review the HTML artifact via browser tool or render simulation. Verify all named participants are present, all messages appear in the correct source order, arrows are labeled, and the layout is legible. **Done when:** the showcase gate passes or the failure is reported.
+
+10. **Run delivery gate.** Confirm both the JSON spec file and the HTML artifact file exist on disk and are non-empty. **Done when:** both files are confirmed non-empty or the failure is reported.
+
+11. **Emit receipt.** Record the final paths of the spec and artifact. Mark visual-review status as truthful pass or fail. Do not emit a pass receipt if any gate failed. **Done when:** the receipt is emitted with truthful status.
 
 ## Failure and recovery
+
 | Class | Result |
 |---|---|
 | Schema validation failure | BLOCKED with the exact validation error message. No receipt. |
@@ -55,9 +70,8 @@ The skill self-contains all schema governance. No reference to another skill, AG
 Partial-result rule: if any step fails, roll back reversible writes before returning. Do not leave a partial artifact on disk without a failure report.
 
 ## Output
-- `*.sequence.json`: the typed sequence JSON specification.
-- `*.sequence.html`: the self-contained interactive HTML artifact.
-- Receipt: final paths, spec validation status, showcase gate pass/fail, delivery gate pass/fail, visual-review status.
+
+`*.sequence.json` (typed sequence JSON specification) and `*.sequence.html` (self-contained interactive HTML artifact), plus a receipt with final paths, spec validation status, showcase gate pass/fail, delivery gate pass/fail, and visual-review status.
 
 ## Provenance
 

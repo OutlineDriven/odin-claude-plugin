@@ -1,3 +1,3 @@
 interface:
   display_name: "Paid API Preflight"
-  short_description: "Fresh signed paid-API preflight attestation"
+  short_description: "Use when a paid API call needs a fresh integrity-checked"

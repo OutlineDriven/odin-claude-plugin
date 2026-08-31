@@ -1,3 +1,3 @@
 interface:
   display_name: "Competitor Changelog"
-  short_description: "Deduplicated competitor changelog report opened as a PR"
+  short_description: "Use when the user asks to summarize competitor changelogs or"

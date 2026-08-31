@@ -1,4 +1,4 @@
-# Incident & Postmortem Context
+# Incident & postmortem context
 
 Not a separate source, a **cross-cutting angle**. Incidents often motivate defensive code ("we added this check after the X outage"), so if the target looks defensive (null checks, retry logic, timeout handling, rate limiting, feature flags), specifically hunt for incident history across every available source:
 

@@ -1,11 +1,11 @@
 ---
 name: magicbox
-description: 'Use when asked to keep short project cards for possible worlds, considered options, human opinions, agent doubts, and obvious assumptions when the user invokes magicbox or asks to keep, park, or note a divergence for later. Each pass stores one short card file per qualifying item under magicbox/ in the project tree as tracked project knowledge, leaving organization to a later pass. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user asks to keep or park possible worlds, options, opinions, doubts, or assumptions for later. Stores one short project card per qualifying item under magicbox/ without organizing it. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Magicbox
 
-Capture divergence as short project cards; organization is a later pass, never this one.
+Capture divergence in short project cards. Organize them in a later pass, never this one.
 
 ## Contract
 
@@ -18,14 +18,17 @@ Capture divergence as short project cards; organization is a later pass, never t
 
 ## Inputs
 
-- Capture material: statements from the current session or named by the user — possible worlds, considered options, human opinions, agent doubts, obvious assumptions. Any subset qualifies; an empty set is valid.
+- Capture material: statements from the current session or named by the user — possible worlds (alternatives still standing), considered options (alternatives already weighed), human opinions (the user's stated judgments), agent doubts (this agent's reservations or uncertainties), obvious assumptions (taken-for-granted premises worth a later look). Any subset qualifies; an empty set is valid.
 - Project root: the current project by default; it must be supplied when the cards belong to a different project.
 
 ## Procedure
 
-1. **Collect candidates.** Sweep the current exchange for the five classes: possible worlds (alternatives still standing), considered options (alternatives already weighed), human opinions (the user's stated judgments), agent doubts (this agent's reservations or uncertainties), obvious assumptions (taken-for-granted premises worth a later look). Only items actually present in the session or named by the user qualify; never invent a card to fill an empty class.
-2. **Bound each card.** One item per card, a few lines at most: class, one-line statement, who it is from (`human` or `agent`), capture date. Material that needs more than a few lines is not a card — drop it from this pass and say so.
-3. **Check for an existing card.** If `magicbox/` already holds a card with the same class and statement, skip the write and cite the existing file instead.
+1. **Collect candidates.** Sweep the current exchange for the five classes: possible worlds (alternatives still standing), considered options (alternatives already weighed), human opinions (the user's stated judgments), agent doubts (this agent's reservations or uncertainties), obvious assumptions (taken-for-granted premises worth a later look). Only items actually present in the session or named by the user qualify; never invent a card to fill an empty class. Done when: every item present in the session or named by the user is collected across the five classes.
+
+2. **Bound each card.** Store one item per card in a few lines at most: class, one-line statement, who it is from (`human` or `agent`), capture date. Drop material that needs more than a few lines from this pass and say so. Done when: every collected item is bounded to a few lines or dropped with a stated reason.
+
+3. **Check for an existing card.** If `magicbox/` already holds a card with the same class and statement, skip the write and cite the existing file instead. Done when: every collected item is checked against existing cards and duplicates are skipped with citations.
+
 4. **Write the cards.** Create `<project>/magicbox/` if missing. Name each file `YYYY-MM-DD-<class>-<short-kebab-title>.md`, using exactly one class word per card: `possible-world`, `considered-option`, `human-opinion`, `agent-doubt`, `obvious-assumption`. Card content:
 
    ```markdown
@@ -35,16 +38,20 @@ Capture divergence as short project cards; organization is a later pass, never t
    - Captured: YYYY-MM-DD
    - Status: unorganized
    ```
-5. **Stop at capture.** Do not organize, merge, rank, resolve, or delete any card, and do not mark a card decided or active. Run no VCS commands; the files join project tracking through the project's normal flow.
-6. **Report** per Output.
+   Done when: every non-duplicate card is written to `<project>/magicbox/` with the correct filename and content shape.
+
+5. **Stop at capture.** Do not organize, merge, rank, resolve, or delete any card, and do not mark a card decided or active. Run no VCS commands; the files join project tracking through the project's normal flow. Done when: no organization, merge, rank, resolution, deletion, or VCS command is performed.
+
+6. **Report** per Output. Done when: the report is produced per the Output contract.
 
 ## Failure and recovery
-- **Not a project directory.** If the working directory or supplied root is not a project, cards stored there would not be project knowledge: write nothing and report why.
-- **Unwritable target.** If `magicbox/` cannot be created or a card cannot be written, stop the pass. Cards already written remain — each card is independently valid. Report exactly which landed and which failed. Rollback: delete the card files this pass added; revert them via the project's version control if already committed.
-- **Untraceable item.** An item that cannot be traced to the session or a user statement is dropped and reported as dropped, never stored as invented content.
-- **Nothing qualifies.** Report zero cards stored; do not write placeholder cards to make the done predicate look satisfied.
+- **Not a project directory.** If the working directory or supplied root is not a project, cards stored there would not be project knowledge. Write nothing and report why.
+- **Unwritable target.** If `magicbox/` cannot be created or a card cannot be written, stop the pass. Cards already written remain; each card is independently valid. Report exactly which landed and which failed. Rollback: delete the card files this pass added; revert them via the project's version control if already committed.
+- **Untraceable item.** Drop and report an item that cannot be traced to the session or a user statement. Never store it as invented content.
+- **Nothing qualifies.** Report zero cards stored. Do not write placeholder cards to make the done predicate look satisfied.
 
 ## Output
+
 A report listing, per class, each card file written with its one-line statement; duplicates skipped, citing the existing card's path; dropped items with their reasons; and the final card count. Zero cards is a valid terminal outcome and is reported as zero.
 
 ## Provenance

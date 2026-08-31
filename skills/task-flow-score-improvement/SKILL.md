@@ -1,9 +1,9 @@
 ---
 name: task-flow-score-improvement
-description: 'Use when a user task flow needs a before/after real-task score against a fixed checklist. Produces Fixed-checklist task-flow score improvement. Stop at the declared success, non-success, or bound.'
+description: 'Use when a user task flow needs a before/after real-task score against a fixed checklist. Runs the checklist score improvement loop and stops at the declared success, non-success, or bound. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
-# task-flow-score-improvement
+# Task flow score improvement
 
 ## Contract
 
@@ -13,20 +13,15 @@ description: 'Use when a user task flow needs a before/after real-task score aga
 | Authority | REVERSIBLE_LOCAL_WITH_BROWSER_CONSENT |
 | Side effect | Fixed-checklist task-flow score improvement |
 | Done | Clean-session task score improves without cross-screen regression. |
-| Stop | two no-gain rounds; blocked; unsafe change. Bound: Fixed checklist, task, screens, and round cap.. Receipt terminal classes: success, capped, stalled, blocked, exhausted, pending. Budget exhaustion is never success unless it is the predeclared success predicate. |
+| Stop | two no-gain rounds; blocked; unsafe change. Bound: fixed checklist, task, screens, and round cap. Receipt terminal classes: success, capped, stalled, blocked, exhausted, pending. Budget exhaustion is never success unless it is the predeclared success predicate. |
 
 ## Procedure
 
-1. Bind the declared bound and freeze it before mutation.
-2. Execute the Fixed-checklist task-flow score improvement inside the bound.
-3. Stop at outcome.success, any outcome.non_success, or outcome.bound.
-4. Persist per profiles.persistence.P1 (durable_location .outline/loops/<slug>/<run_id>/ when durable; emit receipt.json before return).
-
-## Verification
-
-1. Confirm outcome.success holds or a named non_success/bound terminal applies.
-2. Write an immutable K11 receipt with every K11 field.
+1. **Bind the declared bound and freeze it before mutation.** Done when: the fixed checklist, task, screens, and round cap are frozen.
+2. **Run the fixed-checklist task-flow score improvement within the bound.** Done when: outcome.success holds or a named non_success/bound terminal applies.
+3. **Stop at the terminal.** Record outcome.success, any outcome.non_success, or outcome.bound. Done when: a receipt terminal class is assigned.
+4. **Persist per profiles.persistence.P1.** Write to `durable_location .outline/loops/<slug>/<run_id>/` when durable; emit `receipt.json` before return. Done when: an immutable K11 receipt with every K11 field is written.
 
 ## Provenance
 
-- Profile P-CATALOG: source https://signals.forwardfuture.com/loop-library/catalog.json. Derived provenance ledger records catalog number, URL, access date, and no-expression-reuse attestation. Expression reuse: none.
+- Profile P-CATALOG source: https://signals.forwardfuture.com/loop-library/catalog.json. The derived provenance ledger records the catalog number, URL, access date, and no-expression-reuse attestation. Expression reuse: none.

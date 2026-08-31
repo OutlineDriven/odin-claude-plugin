@@ -1,7 +1,5 @@
 # State machine patterns by language
 
-Brief enum + match/transition patterns per language.
-
 ## Rust
 
 ```rust

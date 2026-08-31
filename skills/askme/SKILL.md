@@ -1,6 +1,6 @@
 ---
 name: askme
-description: 'Use when the task is ambiguous, maximum clarification is needed, or an explicit exhaustive, collaborative, or adversarial askme mode is requested, explore intent with Verbalized Sampling before planning. Every clarifying question is answered or discharged and intent is confirmed. Don''t use for tasks that require source or remote-system changes.'
+description: 'Explore intent with Verbalized Sampling before planning when the task is ambiguous, max clarification needed, or the user requests exhaustive, collaborative, or adversarial askme. Questions answered or discharged; intent confirmed. Don''t use for source or remote-system changes.'
 ---
 
 # Ask me

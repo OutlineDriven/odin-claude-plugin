@@ -12,7 +12,7 @@ disable-model-invocation: true
 |---|---|
 | Trigger | The user runs /ios-build-cleanup. |
 | Authority | Human-only. Require explicit human invocation; preview the target and consequence before any irreversible deletion. The model must not invoke this skill autonomously. |
-| Side effect | Local deletion of DerivedData and build artifacts only, untracked but fully regenerable by rebuild. No source, VCS, credential, or remote mutation. |
+| Side effect | Local deletion of DerivedData and build artifacts only. These artifacts are untracked and fully regenerable by a rebuild. No source, VCS, credential, or remote mutation. |
 | Done | A clean build state is restored: DerivedData and project build artifacts are removed and the next build starts from a clean cache. |
 
 ## Inputs
@@ -41,4 +41,4 @@ A report listing every target deleted, every target skipped as already-clean, an
 
 ## Provenance
 
-Adapted from the `ios-clean` skill in the gstack project (https://github.com/garrytan/gstack, revision 07b59e396c6be5a86619a43151cb9ed62a15ae69), MIT licensed (Copyright (c) 2026 Garry Tan). Expressive prose and procedure re-derived under clean-room adaptation; the MIT copyright and permission notice is retained.
+Adapted from the `ios-clean` skill in the gstack project (https://github.com/garrytan/gstack, revision 07b59e396c6be5a86619a43151cb9ed62a15ae69), MIT licensed (Copyright (c) 2026 Garry Tan). Expressive prose and procedure were re-derived under clean-room adaptation. The MIT copyright and permission notice is retained.

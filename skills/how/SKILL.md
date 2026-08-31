@@ -1,6 +1,6 @@
 ---
 name: how
-description: 'Use when the user says "how does X work", explain the code path or subsystem with an architecture walkthrough and its gotchas. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when the user asks "how does X work" and wants an architecture walkthrough of the code path or subsystem, including its gotchas. Don''t use for tasks that require source or remote-system changes.'
 ---
 
 # How
@@ -21,13 +21,13 @@ description: 'Use when the user says "how does X work", explain the code path or
 
 ## Procedure
 
-1. Receive the named target and confirm the scope implied by the user's phrasing. If the target is ambiguous, ask one clarifying question before proceeding.
+1. Identify the named target and confirm the scope implied by the user's phrasing. If the target is ambiguous, ask one clarifying question before proceeding.
 2. Locate the entry point of the target in the codebase. Use structural read operations (declaration-only summaries, line-range reads) to identify the primary file and its dependencies. Do not open every file blindly.
 3. Trace the control flow from the entry point: identify which functions, classes, or modules are called, in what order, and under what conditions. Map data that flows through the path.
 4. Identify architectural seams: where the code delegates to an external library, makes a system call, crosses a process or network boundary, or performs I/O.
 5. For each major step, note the behavior that a caller or newcomer would find surprising: implicit assumptions, edge conditions handled silently, global state relied upon, error paths that behave differently from happy paths, and performance characteristics that are not obvious from signatures alone.
-6. Synthesize the findings into a grounded walkthrough: describe the architecture as it exists, not as it was intended or documented. Include concrete file references and line ranges for key decisions.
-7. Return the walkthrough and the list of gotchas as a structured report in chat output.
+6. Turn the findings into a grounded walkthrough of the architecture as it exists, not as intended or documented. Cite concrete files and line ranges for key decisions.
+7. Return a structured chat report containing the walkthrough and gotchas.
 
 ## Failure and recovery
 - **Target not found**: the named path, symbol, or module does not exist in the codebase. Return `no-evidence` and state exactly which target was not found. Do not guess or infer the target's location.

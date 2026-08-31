@@ -1,4 +1,4 @@
-# charter-examples.md — worked Side A / Side B clusters
+# Worked Side A / Side B clusters
 
 Use these clusters to translate evidence into a generated two-sided charter. Side A is slop: default convergence, hedging, under-commitment. Side B is overkill: compensatory excess, decoration, ceremony, over-abstraction. Both fail by refusing to commit.
 

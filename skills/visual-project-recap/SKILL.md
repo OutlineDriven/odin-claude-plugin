@@ -1,6 +1,6 @@
 ---
 name: visual-project-recap
-description: 'Use when a developer returns to a project or loses context. Produces an 8-section HTML recap page so they can rebuild the mental model and derive next steps only from evidence. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a developer returns to a project or loses context. Produces an 8-section HTML recap page so they can rebuild the mental model and derive next steps only from evidence. Not for session handoff snapshots — use handoff.'
 ---
 
 # Visual project recap
@@ -21,9 +21,9 @@ description: 'Use when a developer returns to a project or loses context. Produc
 
 ## Procedure
 
-1. Confirm the project root exists and is readable.
-2. Detect the VCS type (git or hg) and read the current branch name.
-3. Walk the project tree. Identify the file kinds listed in the 8 sections: config files, source entry points, dependency declarations, test files, documentation files, build artifacts directory, and any module/package root.
+1. Confirm the project root exists and is readable. **Done when:** the project root is confirmed readable.
+2. Detect the VCS type (git or hg) and read the current branch name. **Done when:** the VCS type and branch name are determined.
+3. Walk the project tree. Identify the file kinds listed in the 8 sections: config files, source entry points, dependency declarations, test files, documentation files, build artifacts directory, and any module/package root. **Done when:** every file kind is identified.
 4. Gather the content for each of the 8 sections:
    - **Section 1 — Project name and branch**: project directory name and current branch or commit hash.
    - **Section 2 — Config files**: list of config files found (e.g., package.json, Cargo.toml, pyproject.toml, go.mod, Makefile, Dockerfile, .env.example, .editorconfig).
@@ -33,9 +33,10 @@ description: 'Use when a developer returns to a project or loses context. Produc
    - **Section 6 — Test files**: test files and test directory structure.
    - **Section 7 — Documentation**: README, CONTRIBUTING, docs/ directory.
    - **Section 8 — Build and deploy**: build scripts, CI configs, Dockerfiles, deployment configs.
-5. Compose a self-contained HTML page with all 8 sections rendered. Use inline CSS so no external resources are required. Use a single-file, no-dependency layout.
-6. Write the page to `<project-root>/diagrams/visual-project-recap.html`. If `diagrams/` does not exist, create it first.
-7. Open the file in the default browser or file viewer.
+   **Done when:** content is gathered for all 8 sections.
+5. Compose a self-contained HTML page with all 8 sections rendered. Use inline CSS so no external resources are required. Use a single-file, no-dependency layout. **Done when:** the HTML page is composed with all 8 sections.
+6. Write the page to `<project-root>/diagrams/visual-project-recap.html`. If `diagrams/` does not exist, create it first. **Done when:** the page is written to the target path.
+7. Open the file in the default browser or file viewer. **Done when:** the file is opened or the open failure is reported.
 
 ## Failure and recovery
 - **Unreadable project root**: stop; report that the project root cannot be read.
@@ -47,17 +48,7 @@ description: 'Use when a developer returns to a project or loses context. Produc
 - **Rollback**: if the file is written but the open step fails, the file remains on disk; the user can open it manually.
 
 ## Output
-A self-contained HTML file at `<project-root>/diagrams/visual-project-recap.html` containing 8 labeled sections:
-1. Project name and branch
-2. Config files
-3. Source entry points
-4. Module structure
-5. Dependencies
-6. Test files
-7. Documentation
-8. Build and deploy
-
-Each section contains a bulleted or tabular listing derived from evidence in the project tree. The page uses no external CDN, font, or script. It is fully readable offline.
+A self-contained HTML file at `<project-root>/diagrams/visual-project-recap.html` with 8 labeled sections (Project name/branch, Config files, Source entry points, Module structure, Dependencies, Test files, Documentation, Build and deploy), each derived from evidence in the project tree.
 
 ## Provenance
 

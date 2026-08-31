@@ -1,8 +1,8 @@
-# CONCEPTS.md vocabulary rules
+# `CONCEPTS.md` vocabulary rules
 
-Sync-lineage note: `skills/autolearn/references/concepts.md` is the sibling file — autolearn's own, independent entry-schema and reconciliation model for the same `CONCEPTS.md` surface, not a copy of this one. Don't merge them.
+Sync-lineage note: `skills/autolearn/references/concepts.md` is the sibling file. It contains autolearn's independent entry schema and reconciliation model for the same `CONCEPTS.md` surface; it is not a copy of this file. Don't merge them.
 
-`CONCEPTS.md` defines the words that mean something specific in this codebase — a shared reference that `docs/solutions/` and AGENTS.md can cite without redefinition. Lives at the repo root. Terms enter two ways — accretion and seeding (below) — and the file is created the first time either path produces a qualifying entry.
+`CONCEPTS.md` defines words with codebase-specific meanings. It is a shared reference that `docs/solutions/` and AGENTS.md can cite without redefining those words. The file lives at the repo root. Terms enter through accretion or seeding, as described below. Create the file when either path first produces a qualifying entry.
 
 ## How terms enter: accretion and seeding
 
@@ -26,7 +26,7 @@ When the team uses several words for the same concept, pick the best one and ret
 
 ## The file stands on its own
 
-Each entry teaches its concept to a reader with no access to anything else — no codebase, no PR history, no architecture meetings, no Slack. This rules out:
+Each entry must teach its concept to a reader who has no access to the codebase, PR history, architecture meetings, or Slack. This rules out:
 
 - Implementation specifics (file paths, class names, function signatures, table names, library calls)
 - Status fields, dates, owners on the entries
@@ -42,23 +42,23 @@ A term qualifies when its meaning here is precise enough that a new engineer wou
 
 ## Per entry
 
-Definition is one sentence — what the term means in this domain, what makes it distinct from neighbors. A term with non-obvious behavioral rules (lifecycle, cancellation semantics, ownership invariants) earns a second paragraph for those rules — never for elaborating the definition itself.
+A definition is one sentence: what the term means in this domain and what distinguishes it from neighboring terms. A term with non-obvious behavioral rules (lifecycle, cancellation semantics, ownership invariants) earns a second paragraph for those rules, never to elaborate on the definition itself.
 
 When retired synonyms exist, list them as an aliases line directly under the definition: *Avoid: Booking, appointment*. Entities typically need more depth than value types; status concepts may need transition notes.
 
 ## Relationships (optional)
 
-When relationships between entries carry load-bearing meaning (ownership, cardinality, lifecycle dependencies that span entries), capture them in a `## Relationships` section near the top of the file or its cluster. Skip when entries stand on their own without structural context — relationships are a lift for domains where structure is part of what makes terms meaningful, not a routine section.
+When relationships between entries carry load-bearing meaning (ownership, cardinality, lifecycle dependencies that span entries), capture them in a `## Relationships` section near the top of the file or its cluster. Skip this section when entries stand on their own; include it only when the domain's structure is part of the terms' meaning.
 
 ## Organization
 
-Cluster concepts by domain relationship — entities with their states, processes with their stages — so a reader sees structure without effort. A flat list works when the file is small. Reshape as the file grows.
+Cluster concepts by domain relationship — entities with their states, processes with their stages — so readers can see the structure. A flat list works when the file is small. Reshape it as the file grows.
 
 ## Flagged ambiguities (tail of file)
 
 When two terms were used interchangeably and the team settled on a distinction, record the resolution as a one-line note: *"'account' had been used for both Customer and User — these are distinct."* This section is the audit trail for opinions the team has formed.
 
-## One illustrative entry — the shape, not a template
+## One illustrative entry: shape, not template
 
 ```
 ## Booking

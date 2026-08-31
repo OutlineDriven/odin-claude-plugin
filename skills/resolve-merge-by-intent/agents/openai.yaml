@@ -1,3 +1,3 @@
 interface:
-  display_name: "Resolve Merge by Intent"
-  short_description: "Resolve merge conflicts by intent, finish green."
+  display_name: "Resolve Merge By Intent"
+  short_description: "Use when a merge or rebase has stopped on conflicts."

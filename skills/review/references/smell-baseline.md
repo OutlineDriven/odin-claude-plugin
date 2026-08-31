@@ -1,6 +1,6 @@
 # Fowler code smell baseline
 
-On top of whatever the repo documents, the Standards axis carries this smell baseline: a fixed set of twelve Fowler code smells (*Refactoring*, ch. 3) that applies even when a repo documents nothing.
+The Standards axis adds this baseline to the repository's documented rules: a fixed set of twelve Fowler code smells (*Refactoring*, ch. 3) that applies even when a repository documents nothing.
 
 ## Binding rules
 

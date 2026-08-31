@@ -1,3 +1,3 @@
 interface:
   display_name: "Culture Team Composition Analysis"
-  short_description: "Analyze team Culture Index profiles for Gas/Brake/Glue balance"
+  short_description: "Use when multiple Culture Index profiles need Gas/Brake/Glue"

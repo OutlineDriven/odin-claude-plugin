@@ -26,8 +26,8 @@ Optional: a topic slug for the filename, derived from the topic if not supplied.
 
 1. Ask, in one exchange, who the questionnaire goes to: the recipient's role, expertise, and relationship to the user. Stop when the recipient is identified and their knowledge beyond the user's is established.
 2. Ask, in one exchange, what the user needs back: the concrete decisions or facts the user cannot resolve alone. Stop once a concrete list exists of what the user must walk away able to do or decide.
-3. Draft questions aimed at the gap between what the recipient knows and what the user needs. Focus the interview on the send, not the subject: ask the user only about the send, never about the gap itself. Order questions most-important-first, because async may yield only one pass. Group questions under `##` headings by theme once there are more than a handful. Make every question one idea, never compound. Place an answer stub (a blank `>` blockquote line) directly beneath each question. Add a one-line _why this matters_ only where a question could be misread or invite a throwaway answer; that is the ambiguity rationale.
-4. Write the questionnaire to `to-questionnaire-<slug>.md` in the current directory, using the document structure in Output. Report the path. Stop when the file exists and every item the user named in step 2 is covered by a question.
+3. Draft questions aimed at the gap between what the recipient knows and what the user needs. Focus the interview on the send, not the subject: ask the user only about the send, never about the gap itself. Order questions most-important-first, because async may yield only one pass. Group questions under `##` headings by theme once there are more than a handful. Make every question one idea, never compound. Place an answer stub (a blank `>` blockquote line) directly beneath each question. Add a one-line _why this matters_ only where a question could be misread or invite a throwaway answer; that is the ambiguity rationale. Done when: questions are ordered most-important-first, each is one idea with an answer stub, and ambiguity rationale is added where needed.
+4. Write the questionnaire to `answer-stub-questionnaire-<slug>.md` in the current directory, using the document structure in Output. Report the path. Stop when the file exists and every item the user named in step 2 is covered by a question.
 
 ## Failure and recovery
 - **Missing recipient or needed answers**: do not invent a recipient, fabricate needed answers, or write questions for items the user never named. Re-ask the missing exchange; if it is still missing, stop and report exactly what is missing.
@@ -36,7 +36,7 @@ Optional: a topic slug for the filename, derived from the topic if not supplied.
 - **Blocked result**: report the missing input and the file path not written; do not claim the done predicate holds.
 
 ## Output
-A Markdown file at `to-questionnaire-<slug>.md` in the current directory, structured as:
+A Markdown file at `answer-stub-questionnaire-<slug>.md` in the current directory, structured as:
 
 - A header block: title, Purpose (why it exists and the decision riding on it), From (the user), To (recipient), How your answers will be used.
 - `## Context`: one paragraph orienting a recipient who was not in the user's head.

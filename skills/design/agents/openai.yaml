@@ -1,3 +1,3 @@
 interface:
-  display_name: "Defensible UI Direction"
-  short_description: "Frame, diverge, and implement one defensible UI direction."
+  display_name: "Design"
+  short_description: "Use when starting UI work, defining palettes or tokens, or"

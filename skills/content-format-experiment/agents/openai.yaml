@@ -1,3 +1,3 @@
 interface:
   display_name: "Content Format Experiment"
-  short_description: "Evidence-backed content-format experiment"
+  short_description: "Use when a public content format needs a finite single-variable"

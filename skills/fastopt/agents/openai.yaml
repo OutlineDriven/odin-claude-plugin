@@ -1,3 +1,3 @@
 interface:
-  display_name: "Hot Path Benchmark Design"
-  short_description: "Emit hot-path hypotheses and benchmark designs without mutation."
+  display_name: "Fastopt"
+  short_description: "Use when a user wants to optimize suspected hot paths without"

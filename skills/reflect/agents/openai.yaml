@@ -1,3 +1,3 @@
 interface:
-  display_name: "Post-Task Improvement Reflection"
-  short_description: "Reflect on completed tasks and apply approved improvements"
+  display_name: "Reflect"
+  short_description: "Use when a completed task needs reflection on the invoked"

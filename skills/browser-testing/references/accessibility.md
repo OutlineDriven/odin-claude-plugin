@@ -1,4 +1,4 @@
-# Accessibility Verification with DevTools
+# Accessibility verification with DevTools
 
 ```
 1. Read the accessibility tree

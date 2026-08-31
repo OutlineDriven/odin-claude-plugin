@@ -1,10 +1,10 @@
-# Drift taxonomy and report contract
+# Drift taxonomy
 
-Use this reference as the semantic rubric after collection. It is self-contained: classify, weight, cross-reference, then emit the required report.
+Reference detail for the drift-detect procedure. Applied at step 6 (classify) and step 8 (emit).
 
 ## Drift types
 
-| Type | Definition | Strong Signals | Default Severity |
+| Type | Definition | Strong signals | Default severity |
 |---|---|---|---|
 | Plan drift | Stated plan/phase/milestone no longer matches implementation progress | overdue milestone with open issues; PLAN checkbox percent <30% after 90 days; completed phase lacks matching code | high |
 | Documentation drift | Docs describe absent behavior or omit shipped behavior | README feature absent in code; docs import removed symbol; API docs mismatch endpoints/exports; doc has zero code coupling | high |
@@ -16,7 +16,7 @@ Use this reference as the semantic rubric after collection. It is self-contained
 
 ## Gap types
 
-| Gap | Definition | Evidence Examples | Severity Rule |
+| Gap | Definition | Evidence examples | Severity rule |
 |---|---|---|---|
 | Implementation gap | documented feature has no matching code | `PLAN.md:42` says OAuth; no `auth/oauth`, no provider config, no route | high; critical if promised for release |
 | Partial implementation gap | some code exists but named behavior is missing | login exists; password reset/session timeout/tests absent | medium/high |
@@ -28,8 +28,6 @@ Use this reference as the semantic rubric after collection. It is self-contained
 | Ownership gap | area has no clear recent maintainer | one author owns 80% then inactive; high churn since | medium/high |
 
 ## Prioritization weighting
-
-Score every candidate action. Bucket by score, but never hide severity; the report item carries both.
 
 ```text
 severityScore:
@@ -49,75 +47,27 @@ categoryMultiplier:
   cleanup        = 0.65
 
 bonuses:
-  blockerBonus       = +5   # unlocks release, milestone, or dependent tasks
-  quickWinBonus      = +2   # exact fix, small surface, high confidence
-  stalePriorityBonus = +2   # high-priority item inactive >60 days
-  riskAreaBonus      = +3   # maps to at-risk area or high bug-fix churn
+  blockerBonus       = +5
+  quickWinBonus      = +2
+  stalePriorityBonus = +2
+  riskAreaBonus      = +3
 
 penalties:
   lowCertaintyPenalty = -3
-  oldStalePenalty     = -1  # inactive >180 days and no current evidence
-```
+  oldStalePenalty     = -1
 
-Formula:
-
-```text
 score = (severityScore * categoryMultiplier) + bonuses - penalties
 ```
 
-Buckets:
-
-| Bucket | Criteria | Max Items | Meaning |
-|---|---:|---:|---|
-| Immediate | critical OR score >= 15 | 5 | this week; blocks release, users, security, or truthfulness |
-| Short-term | high OR score >= 10 | 10 | this month; high-value alignment work |
-| Medium-term | score >= 5 | 15 | this quarter; meaningful but not blocking |
-| Backlog | score < 5 | 20 | prune, document, or revisit later |
-
-Tie-break order: severity, evidence certainty, blocker effect, user-facing impact, quick win, recency.
+Buckets: Immediate (critical OR score >= 15, max 5), Short-term (high OR score >= 10, max 10), Medium-term (score >= 5, max 15), Backlog (score < 5, max 20). Tie-break: severity, evidence certainty, blocker effect, user-facing impact, quick win, recency.
 
 ## Fuzzy cross-reference matching
 
-Normalize before matching:
+Normalize before matching: lowercase; remove punctuation, hyphen, underscore, spaces; singularize trailing s; strip adjectives (robust, seamless, production-ready, comprehensive, scalable); map synonyms (auth=login=session=identity; api=route=endpoint=handler=controller; db=database=model=schema=migration).
 
-```text
-lowercase
-remove punctuation, hyphen, underscore, spaces
-singularize trivial trailing s
-strip adjectives: robust, seamless, production-ready, comprehensive, scalable
-map synonyms: auth=login=session=identity; api=route=endpoint=handler=controller; db=database=model=schema=migration
-```
+Match status: aligned (doc and code match semantically; tests/docs adequate), partial (code covers some but not all), documented-only (doc/issue/milestone promises; no code evidence), implemented-only (code exposes behavior; no doc/issue/plan), stale/obsolete (refers to removed/dropped behavior), unknown (evidence insufficient).
 
-Match status:
-
-| Status | Rule |
-|---|---|
-| aligned | doc item and code evidence match semantically; tests/docs are adequate for the claim |
-| partial | code covers some but not all named behavior |
-| documented-only | doc/issue/milestone promises behavior; no code evidence found |
-| implemented-only | code exposes user-facing behavior; no doc/issue/plan mention found |
-| stale/obsolete | tracker/doc item refers to removed or intentionally dropped behavior |
-| unknown | evidence insufficient; needs human or deeper code trace |
-
-Examples:
-
-| Documented / Tracked As | Code Evidence To Match | Notes |
-|---|---|---|
-| user authentication | `auth/`, `login`, `session`, `jwt`, `oauth`, `identity`, `passport`, `next-auth` | require route/controller + session/token handling for full alignment |
-| API endpoints | `routes/`, `api/`, `handlers/`, `controllers/`, `router.get/post`, OpenAPI file | endpoint docs must match actual verbs/paths |
-| database models | `models/`, `entities/`, `schema`, `migrations`, Prisma/Drizzle/SQLAlchemy/Django models | migration without runtime usage = partial |
-| caching layer | `cache`, `redis`, `memcache`, `lru`, `swr`, `react-query` | public performance claim needs measurable use path |
-| logging system | `logger`, `logs`, `telemetry`, `tracing`, `otel`, `sentry` | telemetry-only is not app logging unless docs say so |
-| payment flow | `stripe`, `checkout`, `billing`, `subscription`, `invoice`, webhook handlers | critical if release milestone includes billing |
-| background jobs | `queue`, `worker`, `cron`, `bullmq`, `celery`, `sidekiq` | queue config without worker = partial |
-| email notifications | `mailer`, `smtp`, `sendgrid`, `resend`, `notification` | template only = partial |
-| test coverage | `*.test.*`, `*.spec.*`, `_test.go`, `tests/`, CI test job | local tests without CI = medium gap |
-
-Certainty grading:
-
-- **HIGH** - exact doc line + exact code path/symbol/issue/PR/milestone evidence.
-- **MEDIUM** - semantic match across naming conventions plus supporting path/history evidence.
-- **LOW** - only broad keyword overlap or absence signal.
+Certainty: HIGH (exact doc line + exact code path/symbol/issue/PR/milestone), MEDIUM (semantic match + supporting path/history), LOW (broad keyword overlap or absence only).
 
 ## Native signal interpretation
 
@@ -133,17 +83,27 @@ Certainty grading:
 | no tests + implemented critical feature | quality/release gap | high/critical |
 | no CI + release milestone | release-readiness gap | high/critical |
 
+## Synthesis rules
+
+1. Completed checkboxes and phases are suspect until verified against code.
+2. Open issues are not stale merely because old; stale requires inactivity plus no matching current implementation or ownership signal.
+3. Public docs outrank internal docs for severity.
+4. Release dates and milestones outrank backlog plans.
+5. Security, correctness, and release blockers outrank documentation cleanup.
+6. Pattern-level drift matters more than isolated drift: five stale priority issues are one high finding; one stale low-priority issue is backlog.
+7. Do not produce a plan item that cannot be acted on without first naming a file, issue, milestone, or feature area.
+
 ## Report template
 
 ```markdown
-# Reality Check Report
+# Reality check report
 
 Generated: {timestamp}
 Scope: {scope}
 Sources: {github/docs/code availability summary}
 Depth: {quick|thorough}
 
-## Executive Summary
+### Executive summary
 
 {2-3 sentences: current alignment state, largest drift vector, biggest unblocker.}
 
@@ -155,7 +115,7 @@ Depth: {quick|thorough}
 - Features Aligned: {n}
 - Unknown / Unavailable Sources: {n}
 
-## Drift Analysis
+### Drift analysis
 
 ### {Drift title}
 **Type:** {plan/documentation/issue/scope/release/architecture/ownership}
@@ -165,7 +125,7 @@ Depth: {quick|thorough}
 **Evidence:** {issue # / PR # / milestone / doc line / file path / symbol / command result}
 **Recommendation:** {specific correction: close/reopen/update/test/implement/delete/defer}
 
-## Gap Analysis
+### Gap analysis
 
 ### {Gap title}
 **Category:** {implementation/tests/docs/tracking/release/cleanup/ownership}
@@ -175,30 +135,28 @@ Depth: {quick|thorough}
 **Evidence:** {specific source}
 **Recommendation:** {specific action}
 
-## Cross-Reference Table
+### Cross-reference table
 
 | Documented / Tracked Item | Implementation Evidence | Status | Certainty | Evidence |
 |---|---|---|---|---|
-| {README.md:42 OAuth login} | {src/auth/login.ts exists; no OAuth provider config} | partial | HIGH | {README.md:42; src/auth/login.ts} |
-| {issue #17 webhook retries} | {no webhook retry path found} | documented-only | MEDIUM | {issue #17; git grep webhook} |
-| {src/api/users route} | {not mentioned in README/API docs} | implemented-only | HIGH | {src/api/users.ts} |
+| {item} | {evidence} | {status} | {certainty} | {sources} |
 
-## Prioritized Reconstruction Plan
+### Prioritized reconstruction plan
 
-### Immediate (This Week)
+### Immediate (this week)
 1. **{Action title}**
    - **Severity:** {critical/high}
    - **Why now:** {blocker or truthfulness reason}
    - **Evidence:** {specific source}
    - **Done when:** {observable completion criterion}
 
-### Short-term (This Month)
+### Short-term (this month)
 1. **{Action title}**
    - **Severity:** {high/medium}
    - **Evidence:** {specific source}
    - **Done when:** {criterion}
 
-### Medium-term (This Quarter)
+### Medium-term (this quarter)
 1. **{Action title}**
    - **Severity:** {medium}
    - **Evidence:** {specific source}
@@ -210,26 +168,11 @@ Depth: {quick|thorough}
    - **Evidence:** {specific source}
    - **Done when:** {criterion}
 
-## Quick Wins
+### Quick wins
 
 Only include actions with HIGH certainty and small blast radius.
 
-1. Close issue #{n} - already implemented in {file}.
-2. Update {doc}:{line} to remove stale claim about {feature}.
-3. Add/enable test job for {existing test command} in {workflow file}.
-
-## Unknowns / Unavailable Sources
+### Unknowns / unavailable sources
 
 - {source} unavailable because {reason}; effect on certainty: {impact}.
-- {feature} could not be classified because {missing evidence}.
 ```
-
-## Synthesis rules
-
-1. Completed checkboxes and phases are suspect until verified against code.
-2. Open issues are not stale merely because old; stale requires inactivity plus no matching current implementation or ownership signal.
-3. Public docs outrank internal docs for severity.
-4. Release dates and milestones outrank backlog plans.
-5. Security, correctness, and release blockers outrank documentation cleanup.
-6. Pattern-level drift matters more than isolated drift: five stale priority issues are one high finding; one stale low-priority issue is backlog.
-7. Do not produce a plan item that cannot be acted on without first naming a file, issue, milestone, or feature area.

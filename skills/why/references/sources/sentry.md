@@ -1,4 +1,4 @@
-# Sentry Error History
+# Sentry error history
 
 ## What this source contains
 

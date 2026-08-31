@@ -1,6 +1,6 @@
 ---
 name: knowledge-refresh
-description: 'Use when a user asks to review or validate a knowledge artifact before sharing or executing it. Runs two parallel reviewers that merge findings into P1/P2/P3 plus Clean; every P1 blocks ordinary shipping and receives explicit next choices. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when a knowledge artifact needs review before sharing or execution. Runs strategic and data reviewers in parallel, merges P1/P2/P3/Clean findings, and blocks ordinary shipping on P1. Don''t use for tasks that require source or remote-system changes.'
 ---
 
 # Knowledge review
@@ -31,20 +31,35 @@ If the input is ambiguous, ask the user to supply a file path or paste the conte
    - If a file path is given, read the file.
    - If pasted content is given, use it directly.
    - If content references data (metrics, conversion rates, financial figures), also load any data context files cited in the artifact.
+   Done when: the artifact content is loaded and any cited data context files are read.
 
 2. **Run both reviewers in parallel.**
-   a. Launch a strategic alignment review using the full artifact content. Evaluate: goal clarity (goal connected to a measurable outcome), hypothesis falsifiability (testable "if-then" form), success metrics (defined and connected to goal; flag vanity metrics), scope proportionality (effort proportional to expected impact), resource awareness (time, people, tools, budget stated), strategic consistency (consistent with stated project goals), and opportunity cost (what is not being done and whether this is the best use of effort here).
-   b. Launch a data accuracy review using the full artifact content and data context files. Evaluate: source citation (every number has a cited source with file path, dashboard name, or calculation), comparison baselines (every comparison has a stated baseline; flag incomplete comparisons), canonical definitions (metrics match the project's canonical definitions), freshness (flag data older than 48 hours with a warning; flag data older than 7 days as P2), caveats acknowledged (known limitations of data sources are stated), hardcoded vs live (hardcoded numbers that should be live-queried), and baseline appropriateness (watch for seasonal skew or cherry-picked timeframes).
+   a. Launch a strategic alignment review using the full artifact content. Evaluate:
+      - goal clarity: the goal connects to a measurable outcome;
+      - hypothesis falsifiability: the hypothesis uses a testable "if-then" form;
+      - success metrics: metrics are defined and connected to the goal; flag vanity metrics;
+      - scope proportionality: effort is proportional to expected impact;
+      - resource awareness: time, people, tools, and budget are stated;
+      - strategic consistency: the artifact is consistent with stated project goals;
+      - opportunity cost: what is not being done and whether this is the best use of effort here.
+   b. Launch a data accuracy review using the full artifact content and data context files. Evaluate:
+      - source citation: every number has a cited source with a file path, dashboard name, or calculation;
+      - comparison baselines: every comparison has a stated baseline; flag incomplete comparisons;
+      - canonical definitions: metrics match the project's canonical definitions;
+      - freshness: flag data older than 48 hours with a warning and data older than 7 days as P2;
+      - caveats: known limitations of data sources are stated;
+      - hardcoded vs live: identify hardcoded numbers that should be live-queried;
+      - baseline appropriateness: watch for seasonal skew or cherry-picked timeframes.
    c. Wait for both reviewers to return before proceeding.
+   Done when: both reviewers have returned their findings.
 
 3. **Editorial check for external-facing content.**
    - If the artifact will be published, emailed, or posted publicly: check for AI writing patterns (generic phrasing, stock transitions, vague claims) and tone or voice consistency with the project's style guides.
    - If the artifact is internal (plan, brief, analysis for the team): skip this step.
+   Done when: the editorial check is run for external-facing content or skipped for internal content.
 
 4. **Merge findings.**
    Combine findings from both reviewers. Group all findings by severity:
-
-   Severity definitions:
 
    | Severity | What qualifies |
    |---|---|
@@ -53,32 +68,16 @@ If the input is ambiguous, ask the user to supply a file path or paste the conte
    | P3 Nice-to-have | Minor framing, additional context, formatting |
    | Clean | Sections that passed all checks |
 
-5. **Present findings.**
-   Format:
-   ```
-   ## Review: [Document Title]
+   Done when: all findings are grouped into P1, P2, P3, or Clean.
 
-   ### P1 — Blocks Shipping
-   [P1 findings, most critical first.]
+5. **Present findings.** Present a grouped review report with P1 (blocks shipping, most critical first), P2 (should fix), P3 (nice to have), and Clean (what passed) sections. Each finding is specific: "Revenue cited as $X but [source] shows $Y as of [date]" rather than "Revenue might be wrong." Done when: the grouped report is presented with specific findings in severity order.
 
-   ### P2 — Should Fix
-   [P2 findings.]
-
-   ### P3 — Nice to Have
-   [P3 findings.]
-
-   ### Clean
-   [Explicitly note what passed.]
-   ```
-
-6. **Offer next steps.** Ask: "Review complete. [N] findings ([P1 count] critical, [P2 count] important). What next?"
-   Options:
-   1. **Fix P1/P2 issues now** — Address findings inline, then re-review.
-   2. **Ship as-is** — Acknowledge findings and proceed without fixing.
+6. **Offer next steps.** Ask: "Review complete. [N] findings ([P1 count] critical, [P2 count] important). What next?" Options: (1) Fix P1/P2 issues now — address findings inline, then re-review; (2) Ship as-is — acknowledge findings and proceed without fixing. Done when: the user is offered the two next-step options.
 
 7. **Execute the chosen action.**
    - If the user chooses to fix: make targeted edits and re-run the review.
    - If the user chooses to ship as-is: acknowledge the outstanding findings and stop.
+   Done when: the chosen action is executed (fixes applied and re-reviewed, or findings acknowledged and stopped).
 
 ## Failure and recovery
 | Failure class | Recovery |
@@ -90,7 +89,8 @@ If the input is ambiguous, ask the user to supply a file path or paste the conte
 | External content check finds AI patterns | Present the finding as a P2; do not rewrite the content. |
 
 ## Output
-A grouped review report with P1, P2, P3, and Clean sections. Each finding is specific: "Revenue cited as $X but [source] shows $Y as of [date]" rather than "Revenue might be wrong." P1 findings explicitly block ordinary shipping and receive the next-steps prompt.
+
+A grouped review report with P1, P2, P3, and Clean sections (each finding specific with source and date), where P1 findings explicitly block ordinary shipping and receive the next-steps prompt.
 
 ## Provenance
 

@@ -10,34 +10,34 @@ description: >-
 
 # {skill_name}
 
-{skill_name} is a personal taste skill. It encodes observed taste through 5 evidence-derived anchors, each with a load-bearing concept, canonical exemplar, and two-sided failure boundary.
+This personal taste skill encodes observed taste through 5 evidence-derived anchors, each with a load-bearing concept, canonical exemplar, and two-sided failure boundary.
 
 ## Posture
 
 {posture_statement}
 
-Conviction with restraint. The anchors are the positive frame; the two-sided charter is the negative space. Side A blocks slop/default convergence. Side B blocks overkill/compensatory excess. Both sides fail by refusing to commit.
+Conviction with restraint. The anchors define what to pursue; the two-sided charter defines what to avoid. Side A blocks slop/default convergence. Side B blocks overkill/compensatory excess. Both sides fail by refusing to commit.
 
 ## Modes [LOAD-BEARING]
 
 Two modes share the auto-clarity exception.
 
-### Mode-selection
+### Mode selection
 
-Auto-detect from invoking-context phrasing, with slash-arg override:
+Auto-detect from the invocation phrasing, with a slash-arg override:
 
 - "is this slop?", "overkill?", "taste-test", "audit this", "review for taste", "what's wrong with this" -> **audit**.
 - "shape this before writing", "load taste", "anchor mode", "before I write" -> **anchor**.
 - Anything else -> **audit** by default.
 - Explicit override: `/{skill_name} audit`, `/{skill_name} anchor`. Override always wins.
 
-### audit mode
+### Audit mode
 
-Walk the 5 anchors against the artifact in hand. For each anchor: verdict (`pass` / `warn` / `fail`), Side A or Side B citation when violated, and concrete fix. Surface tensions when anchors imply conflicting fixes; do not auto-pick a hidden precedence. Close with top-3 ranked fixes.
+Evaluate the artifact against all 5 anchors. For each anchor: verdict (`pass` / `warn` / `fail`), Side A or Side B citation when violated, and concrete fix. Surface tensions when anchors imply conflicting fixes; do not auto-pick a hidden precedence. Close with top-3 ranked fixes.
 
-### anchor mode
+### Anchor mode
 
-Load the 5 anchors and two-sided charter as imperatives for subsequent responses. Persistence is best-effort: applies until the user signals "stop taste" or "normal mode" OR context is compacted, whichever comes first. Re-invoke anchor mode if drift is observed.
+Load the 5 anchors and two-sided charter as imperatives for subsequent responses. Persistence is best-effort: applies until the user signals "stop taste" or "normal mode" or context is compacted, whichever comes first. Re-invoke anchor mode if drift is observed.
 
 ## Two-sided charter
 
@@ -57,7 +57,7 @@ See `references/charter.md` for the full charter.
 | {anchor_4_name} | {anchor_4_influence} | {anchor_4_concept_short} |
 | {anchor_5_name} | {anchor_5_influence} | {anchor_5_concept_short} |
 
-Depth and canonical exemplars per anchor: see `references/anchors.md`.
+For each anchor's details and canonical exemplars, see `references/anchors.md`.
 
 ## Audit output shape
 

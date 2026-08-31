@@ -1,6 +1,6 @@
 ---
 name: fastify-inject-testing
-description: 'Use when asked to test Fastify applications without network sockets: auth, validation errors, uploads, streams, plugins, hooks. Integration tests exercise routes via inject() with no listener, covering auth, validation failure, and at least one stream/upload path, passing in parallel. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to test Fastify applications without network sockets: auth, validation errors, uploads, streams, plugins, hooks. Tests exercise routes via inject() with no listener. Not for building the app — use fastify-schema-first-service.'
 ---
 
 # Fastify inject testing
@@ -43,6 +43,8 @@ export async function buildTestApp(options = {}): Promise<{
 }
 ```
 
+Done when: the factory returns `{ app, inject }` without calling `listen()`.
+
 2. In each `describe` block, create a fresh app instance in `before` and close it in `after` so suites are isolated and can run in parallel.
 
 ```typescript
@@ -53,7 +55,9 @@ before(async () => { app = await buildApp(); await app.ready(); });
 after(async () => { await app.close(); });
 ```
 
-3. Exercise routes via `app.inject({ method, url, payload, headers, query })` and assert on `response.statusCode`, `response.headers`, `response.json()`, and `response.rawPayload`. Cover at minimum: an authenticated route, a validation failure, and one stream or upload path.
+Done when: each `describe` block creates and closes its own app instance.
+
+3. Exercise routes via `app.inject({ method, url, payload, headers, query })` and assert on `response.statusCode`, `response.headers`, `response.json()`, and `response.rawPayload`. Cover at minimum: an authenticated route, a validation failure, and one stream or upload path. Done when: at minimum an authenticated route, a validation failure, and one stream/upload path are exercised.
 
 4. Test authentication by injecting without credentials (expect `401`) and with an `authorization: Bearer <token>` header obtained from a login inject call.
 
@@ -64,6 +68,8 @@ const ok = await app.inject({ method: 'GET', url: '/profile', headers: { authori
 t.assert.equal(ok.statusCode, 200);
 ```
 
+Done when: the 401-without-credentials and 200-with-token cases are asserted.
+
 5. Test validation failure by sending a payload that violates the route JSON schema and assert `statusCode === 400` with the field name in `body.message`.
 
 ```typescript
@@ -71,6 +77,8 @@ const res = await app.inject({ method: 'POST', url: '/users', payload: { name: '
 t.assert.equal(res.statusCode, 400);
 t.assert.ok(res.json().message.includes('email'));
 ```
+
+Done when: `statusCode === 400` is asserted with the field name in `body.message`.
 
 6. Test file uploads by building a `form-data` instance with `createReadStream` and passing `payload: form` plus `headers: form.getHeaders()`.
 
@@ -83,13 +91,15 @@ const res = await app.inject({ method: 'POST', url: '/upload', payload: form, he
 t.assert.equal(res.statusCode, 200);
 ```
 
-7. Test streaming responses by injecting the streaming route and asserting `statusCode === 200` and `response.rawPayload.length > 0`.
+Done when: the form-data upload returns the expected status.
 
-8. Mock external dependencies with `node:test` `mock.fn()` and decorate the app (`app.decorate('db', mockDb)`) before registering routes, then assert call counts via `app.db.users.findAll.mock.calls.length`.
+7. Test streaming responses by injecting the streaming route and asserting `statusCode === 200` and `response.rawPayload.length > 0`. Done when: `statusCode === 200` and `rawPayload.length > 0` are asserted.
 
-9. Test plugins in isolation by registering only the plugin under test on a bare `Fastify()` instance and asserting decorators (`app.hasDecorator('cache')`) and behavior directly.
+8. Mock external dependencies with `node:test` `mock.fn()` and decorate the app (`app.decorate('db', mockDb)`) before registering routes, then assert call counts via `app.db.users.findAll.mock.calls.length`. Done when: `mock.fn` is used and call counts are asserted.
 
-10. Test hooks by injecting a route and asserting side-effect headers (`response.headers['x-request-id']`) or captured log lines from a custom logger stream.
+9. Test plugins in isolation by registering only the plugin under test on a bare `Fastify()` instance and asserting decorators (`app.hasDecorator('cache')`) and behavior directly. Done when: the plugin is registered on a bare instance and decorators/behavior are asserted.
+
+10. Test hooks by injecting a route and asserting side-effect headers (`response.headers['x-request-id']`) or captured log lines from a custom logger stream. Done when: side-effect headers or captured log lines are asserted.
 
 11. For database integration, wrap each test in a transaction begun in `beforeEach` and rolled back in `afterEach` so tests stay isolated and parallel-safe.
 
@@ -98,7 +108,9 @@ beforeEach(async () => { transaction = await app.db.beginTransaction(); app.db.s
 afterEach(async () => { await transaction.rollback(); });
 ```
 
-12. Run the suite with `node --test` (add `--experimental-test-coverage` or `--watch` as needed). Each `describe` block uses its own app instance so suites pass in parallel.
+Done when: each test begins and rolls back a transaction.
+
+12. Run the suite with `node --test` (add `--experimental-test-coverage` or `--watch` as needed). Each `describe` block uses its own app instance so suites pass in parallel. Done when: the suite passes under `node --test` with suites running in parallel.
 
 ## Failure and recovery
 - `app.ready()` rejects: the factory or a plugin failed to boot. Do not call `listen()` as a workaround; fix the plugin registration or provide the missing option. Roll back by removing the added test file.

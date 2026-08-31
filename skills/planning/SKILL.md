@@ -1,6 +1,6 @@
 ---
 name: planning
-description: 'Use when asked to create or review a plan, produce a structured plan file scored against a completeness, feasibility, scope, testability, risk, and assumptions rubric with checkable claims; iterate until the plan scores 5/5 or a blocker is named. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a plan must be created or reviewed and scored for completeness, feasibility, scope, testability, risk, and assumptions until 5/5 or a named blocker. Not for a committed-direction brief — use plan; not for task breakdown — use planning-and-task-breakdown.'
 ---
 
 # Planning
@@ -22,34 +22,12 @@ description: 'Use when asked to create or review a plan, produce a structured pl
 
 ## Procedure
 
-1. **Gather and bound scope.** If the user supplied a feature description, extract the stated goal, constraints, and known dependencies. If information is missing, ask the user a precise clarifying question before proceeding. Do not assume scope.
-
-2. **Write the first plan draft.** Structure the plan as:
-   - **Goal**: one-sentence desired outcome
-   - **Scope**: what is included and explicitly excluded
-   - **Steps**: numbered, ordered, each step stating who does what and what evidence proves it done
-   - **Feasibility check**: confirm each step is achievable with available tools and authority
-   - **Assumptions**: list every assumption the plan relies on
-   - **Risk**: name every risk with a mitigation
-   - **Testability**: state how each step's success is verifiable
-
-3. **Score the draft.** Evaluate the plan against six dimensions (1–5 each):
-   - Completeness: all required parts present
-   - Feasibility: each step is achievable
-   - Scope: boundaries are explicit
-   - Testability: each claim has a checkable outcome
-   - Risk: risks are named and mitigations stated
-   - Assumptions: all material assumptions are listed
-
-4. **If any dimension scores below 5:**
-   - Name the specific gap in the review report
-   - Revise the plan to address that gap
-   - Re-score
-   - Repeat until every dimension scores 5, or a named blocker is identified that the plan cannot resolve
-
-5. **Deliver the final plan file** with the review report stating each dimension score and what was changed in each iteration.
-
-6. **Confirm.** Present the scored plan to the user and ask if it meets their needs or if they want to adjust scope.
+1. **Gather and bound scope.** If the user supplied a feature description, extract the stated goal, constraints, and known dependencies. If information is missing, ask the user a precise clarifying question before proceeding. Do not assume scope. Done when: goal, constraints, and dependencies are extracted or a clarifying question is asked.
+2. **Write the first plan draft.** Structure the plan as goal (one-sentence desired outcome), scope (included and explicitly excluded), steps (numbered, ordered, each stating who does what and what evidence proves it done), feasibility check, assumptions, risk (named with mitigation), and testability. Done when: the draft contains all seven structural parts.
+3. **Score the draft.** Evaluate the plan against six dimensions (1–5 each): Completeness, Feasibility, Scope, Testability, Risk, Assumptions. Done when: every dimension has a numeric score.
+4. **If any dimension scores below 5:** name the specific gap in the review report, revise the plan to address that gap, re-score, and repeat until every dimension scores 5 or a named blocker is identified that the plan cannot resolve. Done when: every dimension scores 5 or a named blocker is recorded.
+5. **Deliver the final plan file** with the review report stating each dimension score and what was changed in each iteration. Done when: the plan file and review report are written with per-dimension scores and iteration log.
+6. **Confirm.** Present the scored plan to the user and ask if it meets their needs or if they want to adjust scope. Done when: the user confirms or requests adjustment.
 
 ## Failure and recovery
 | Failure | Recovery |
@@ -60,9 +38,7 @@ description: 'Use when asked to create or review a plan, produce a structured pl
 | Iteration limit reached without 5/5 | Output the plan with current scores and name every dimension that did not reach 5. State "plan did not reach 5/5" in the review report. |
 
 ## Output
-- A plan file (`PLAN.md` or named by the user) containing: goal, scope, steps, feasibility check, assumptions, risks, testability notes
-- A review report containing: six-dimension scores, what changed in each iteration, any named blockers, and the final verdict (5/5 or incomplete with named gaps)
-- If no plan was written due to missing input: a one-sentence refusal message naming the missing input
+A plan file (`PLAN.md` or user-named) with goal, scope, steps, feasibility, assumptions, risks, and testability notes, plus a review report with six-dimension scores, iteration changes, named blockers, and the final verdict — or a one-sentence refusal naming the missing input when no plan is written.
 
 ## Provenance
 

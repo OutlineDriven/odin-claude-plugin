@@ -1,6 +1,6 @@
 ---
 name: test-driven
-description: 'Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions red-green-refactor, or wants integration tests. Produces passing vertical slices at agreed seams with no test at an unconfirmed seam. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Build features or fixes test-first as red-green-refactor slices at agreed seams. Also handles integration tests at public boundaries. Not for adversarial hardening — use tests-adversarial; not for test deletion — use tests-purge-unneeded.'
 ---
 
 # Test-driven development
@@ -16,18 +16,25 @@ description: 'Test-driven development. Use when the user wants to build features
 
 ## Inputs
 
-- **Required**: A feature, bug fix, or behavior to implement; the public interface or seam under test.
-- **Optional**: Existing test patterns in the project for convention alignment; a specification or known-good literal for expected values.
+- **Feature or fix** (required): the behavior to implement and the public interface or seam under test.
+- **Project context** (optional): existing project test patterns, a specification, or a known-good literal for expected values.
+
+## Refusals
+
+- Will not write a test at an unconfirmed seam — ask the user to name the public boundary first.
+- Will not weaken a test to make implementation pass — revise the implementation instead.
+- Will not add tests at unagreed seams, refactor during the loop, or implement beyond the current slice.
+- Will not accept a tautological test whose expected value is recomputed the same way the code computes it.
 
 ## Procedure
 
-1. **Identify the seam.** Ask the user which public boundary to test. A seam is the interface where behavior is observed without reaching into internals. No test is written at an unconfirmed seam.
-2. **Write the failing test.** Author one test at the agreed seam that specifies observable behavior. Use a known-good literal, worked example, or specification as the expected value; never recompute it the way the implementation does. The test must fail when run.
-3. **Run the test and confirm red.** Execute the project test runner. If the test passes without implementation, the expected value is tautological; discard and rewrite step 2 with an independent source of truth.
-4. **Write minimal implementation.** Write only enough code to make the failing test pass. Do not anticipate future tests or add speculative features.
-5. **Run the test and confirm green.** Execute the project test runner. If the test fails, revise the implementation; do not weaken the test.
-6. **Advance or stop.** If agreed seams remain, return to step 1 for the next seam. If all agreed seams have passing tests, proceed to step 7.
-7. **Verify seam coverage.** Confirm every passing test lives at an agreed seam. If any test exists at an unconfirmed seam, remove it.
+1. **Identify the seam.** Ask the user which public boundary to test. A seam is the interface where behavior is observed without reaching into internals. No test is written at an unconfirmed seam. **Done when:** the seam is named and confirmed by the user.
+2. **Write the failing test.** Author one test at the agreed seam that specifies observable behavior. Use a known-good literal, worked example, or specification as the expected value; never recompute it the way the implementation does. The test must fail when run. **Done when:** the test exists and fails for the right reason.
+3. **Run the test and confirm red.** Execute the project test runner. If the test passes without implementation, the expected value is tautological; discard and rewrite step 2 with an independent source of truth. **Done when:** the test fails.
+4. **Write minimal implementation.** Write only enough code to make the failing test pass. Do not anticipate future tests or add speculative features. **Done when:** the implementation is the smallest change that could turn the test green.
+5. **Run the test and confirm green.** Execute the project test runner. If the test fails, revise the implementation; do not weaken the test. **Done when:** the test passes.
+6. **Advance or stop.** If agreed seams remain, return to step 1 for the next seam. If all agreed seams have passing tests, proceed to step 7. **Done when:** either the next seam is started or all seams are exhausted.
+7. **Verify seam coverage.** Confirm every passing test lives at an agreed seam. If any test exists at an unconfirmed seam, remove it. **Done when:** every test maps to an agreed seam and no unconfirmed-seam test remains.
 
 ### Anti-pattern guard
 
@@ -37,6 +44,7 @@ Before writing or accepting any test, check:
 - **Horizontal slicing**: all tests written before any implementation. Reject; work in vertical slices: one test, one implementation, repeat.
 
 ## Failure and recovery
+
 | Failure class | Rule |
 |---|---|
 | Unclear seam | Stop. Ask the user to clarify the public boundary before writing any test. Do not guess or infer a seam. |
@@ -47,7 +55,8 @@ Before writing or accepting any test, check:
 Partial-result rule: completed vertical slices are retained. A blocked cycle does not invalidate prior passing slices.
 
 ## Output
-Each cycle produces one passing test and its matching minimal implementation as a vertical slice at an agreed seam. Final state: a test suite covering every agreed seam, each test specifying observable behavior, no test at an unconfirmed seam.
+
+Each cycle produces one passing test and its matching minimal implementation as a vertical slice at an agreed seam — final state: a test suite covering every agreed seam, each specifying observable behavior, no test at an unconfirmed seam.
 
 ## Provenance
 

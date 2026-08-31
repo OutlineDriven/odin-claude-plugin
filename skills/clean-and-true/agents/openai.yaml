@@ -1,3 +1,3 @@
 interface:
   display_name: "Clean And True"
-  short_description: "Route a just-changed artifact through earned hygiene passes"
+  short_description: "Use when the automatic trigger applies: after editing a durable"

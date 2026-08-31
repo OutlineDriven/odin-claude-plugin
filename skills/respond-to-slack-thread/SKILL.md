@@ -1,6 +1,6 @@
 ---
 name: respond-to-slack-thread
-description: 'Use when the user asks to reply to or follow up on a Slack thread. Posts one reply and returns its permalink. Don''t use for top-level (non-thread) messages, deleting messages, or composing the reply text.'
+description: 'Use when the user asks to reply to or follow up on a Slack thread. Posts one reply and returns its permalink. Not for top-level (non-thread) messages, deleting messages, or composing the reply text.'
 disable-model-invocation: true
 ---
 
@@ -43,15 +43,7 @@ Credentials (`SLACK_BOT_TOKEN`, channel configuration) are ambient operator-mana
 Rollback: Slack messages cannot be deleted by this skill. Recovery, if needed, is manual deletion by the user.
 
 ## Output
-```json
-{
-  "ok": true,
-  "ts": "1234567890.123456",
-  "permalink": "https://workspace.slack.com/archives/CHANNEL/p1234567890123456?thread_ts=111222333.444555&cid=CHANNEL"
-}
-```
-
-On failure, the output contains `ok: false` and an `error` field describing the failure class and API detail.
+One JSON object: `ok`, `ts`, and `permalink` on success; `ok: false` plus an `error` field naming the failure class and API detail on failure.
 
 ## Provenance
 

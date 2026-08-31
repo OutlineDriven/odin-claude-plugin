@@ -1,12 +1,12 @@
 ---
 name: site-launch-checklist
-description: 'Pre-launch audit and go-live readiness'
+description: 'Use when a user says a site or app is ready to ship or asks for checks before go-live. Runs a ten-phase pre-launch audit with explicit user decisions, pass/fail results, and a fix queue. Not for deployment execution — use shipping.'
 disable-model-invocation: true
 ---
 
 # Site launch checklist
 
-Pre-launch audit and setup workflow for shipping a new website. Ten phases, each verified with curl and dig, reported pass/fail with a fix queue.
+Run a ten-phase pre-launch audit before shipping a new website. Verify applicable checks with `curl`, `dig`, and browser tools, then report pass/fail results with a fix queue.
 
 ## Contract
 
@@ -56,7 +56,7 @@ Ask: "Is the domain already on Cloudflare with standard config?" (`yes-standard`
 5. Verify custom 404 page: `curl -sI https://{domain}/this-does-not-exist`.
 6. If migration: verify 301 redirect map for every old URL with `curl -sIL` per URL.
 
-**Backups** (ask user data stores: `database-only` | `database-plus-file-storage` | `file-storage-only` | `stateless-no-persistent-data`; skip if stateless):
+**Backups.** Ask which data stores the site uses: `database-only` | `database-plus-file-storage` | `file-storage-only` | `stateless-no-persistent-data`. Skip these checks if the site is stateless.
 
 7. Verify automated daily backups enabled with retention ≥30 days.
 8. Verify PITR enabled if available.
@@ -64,7 +64,7 @@ Ask: "Is the domain already on Cloudflare with standard config?" (`yes-standard`
 10. Verify restore drill performed before launch.
 11. Verify secrets stored in a secrets manager, not in `.env` files.
 
-Report pass/fail per item. On fail, ask user: fix now or queue.
+Report pass/fail for each item. For each failure, ask the user whether to fix it now or add it to the queue. Done when: every domain and infrastructure item is pass/fail with failures queued or fixed.
 
 ### Phase 2: analytics and observability
 
@@ -75,26 +75,26 @@ Report pass/fail per item. On fail, ask user: fix now or queue.
 5. Set up brand monitoring alerts for domain name, brand name, and key feature names.
 6. Ask user about optional tools: error tracking, uptime monitoring, live chat.
 
-Report pass/fail per item.
+Report pass/fail per item. Done when: every analytics and observability item is pass/fail.
 
 ### Phase 3: legal and compliance
 
 Ask: "Is this site subject to French law?" (`yes-fr-operator-or-audience` | `no-eu-only` | `no-non-eu`).
 
-If FR:
+If the site is subject to French law:
 1. Mentions legales page present.
 2. CGV present if commercial activity.
 3. Privacy policy present.
 4. Terms of service present.
 5. CNIL-compliant cookie consent that gates tracker script loading. Verify with browser Network tab: no tracker fires before explicit consent.
 
-If non-FR but EU: verify GDPR-compliant consent and privacy policy.
+If the site is not subject to French law but is subject to EU law, verify GDPR-compliant consent and a privacy policy.
 
-Report pass/fail per item.
+Report pass/fail per item. Done when: every legal and compliance item is pass/fail per jurisdiction.
 
 ### Phase 4: security
 
-Ask CSP tightness level: `strict-default-src-none` | `balanced-allow-self` | `permissive-for-marketing`.
+Ask the user to choose a CSP tightness level: `strict-default-src-none` | `balanced-allow-self` | `permissive-for-marketing`.
 
 1. Verify security headers:
    ```bash
@@ -106,7 +106,7 @@ Ask CSP tightness level: `strict-default-src-none` | `balanced-allow-self` | `pe
 5. Target observatory.mozilla.org score 90+.
 6. Verify no leaked secrets in client bundle.
 
-Report pass/fail per item.
+Report pass/fail per item. Done when: every security header and check is pass/fail.
 
 ### Phase 5: SEO and GEO
 
@@ -131,7 +131,7 @@ Report pass/fail per item.
 10. Typo and grammar pass on all visible text.
 11. Internal linking audit: every important page reachable in ≤3 clicks from homepage.
 
-Report pass/fail per item.
+Report pass/fail per item. Done when: every SEO and GEO item is pass/fail.
 
 ### Phase 6: Open Graph and social preview
 
@@ -146,7 +146,7 @@ Report pass/fail per item.
 6. Twitter Cards: `twitter:card=summary_large_image`, title, description, image, site handle.
 7. Manual check: paste URL in LinkedIn DM, Slack channel, Discord, iMessage. Preview must render.
 
-Report pass/fail per item.
+Report pass/fail per item. Done when: every OG and social preview item is pass/fail.
 
 ### Phase 7: favicons and web manifest
 
@@ -160,7 +160,7 @@ Report pass/fail per item.
 2. Required: `favicon.ico` (multi-res 16/32/48), `favicon.svg` with dark mode support, `favicon-96x96.png`, `apple-touch-icon.png` 180x180 no transparency, `web-app-manifest-192x192.png`, `web-app-manifest-512x512.png`, `manifest.json` with theme_color/background_color/name/short_name/display.
 3. Verify HTML head references all icons and manifest.
 
-Report pass/fail per item.
+Report pass/fail per item. Done when: every favicon and manifest item is pass/fail.
 
 ### Phase 8: quality gates
 
@@ -172,7 +172,7 @@ Report pass/fail per item.
 6. Cross-browser smoke test: Chrome, Safari, Firefox latest stable.
 7. Print stylesheet sanity.
 
-Report pass/fail per item.
+Report pass/fail per item. Done when: every quality gate item is pass/fail.
 
 ### Phase 9: ecosystem cross-linking
 
@@ -183,13 +183,13 @@ For each relevant domain:
 2. Add link to new site in matching GitHub repo README if applicable.
 3. Verify reciprocal links where appropriate.
 
-Do not over-link. Only cross-link where topically relevant.
+Do not over-link. Only cross-link where topically relevant. Done when: every relevant ecosystem domain is cross-linked or explicitly skipped.
 
 ### Phase 10: weekly SEO maintenance agent
 
 Ask user: "Set up the weekly SEO agent now?" (`yes-create-agent-file` | `yes-but-defer` | `skip-for-now`).
 
-If yes: create a scheduled background agent definition that runs weekly to monitor SEO health, covering backlink tracking, analytics correlation, SERP monitoring, and Search Console data. Output a concrete agent file matching the user's harness.
+If yes: create a scheduled background agent definition that runs weekly to monitor SEO health, covering backlink tracking, analytics correlation, SERP monitoring, and Search Console data. Output a concrete agent file matching the user's harness. Done when: the weekly SEO agent is created, deferred, or skipped per user choice.
 
 ## Failure and recovery
 - **Verification failure**: report the exact command output and the gap. Ask user whether to fix now or queue. Never skip a failed item silently.
@@ -201,21 +201,7 @@ If yes: create a scheduled background agent definition that runs weekly to monit
 Never pretend a failed check passed. Never mark a skipped phase as complete.
 
 ## Output
-Status report grouped by phase:
-
-```
-Phase 1: Domain and Infrastructure  [N/M pass]
-  ✓ item
-  ✗ item. Fix: action
-  ...
-```
-
-Followed by three lists in order:
-1. **Blockers** (must fix before launch)
-2. **Recommended fixes** (should fix before announcing)
-3. **Optional improvements** (post-launch)
-
-End by asking: "Which list do you want to tackle next?" (`blockers` | `recommended` | `optional` | `done-for-now`).
+Status report grouped by phase (pass/fail per item with fix actions), followed by three ordered lists — blockers (must fix before launch), recommended fixes (should fix before announcing), optional improvements (post-launch) — ending with a single-select asking which list to tackle next.
 
 ## Provenance
 

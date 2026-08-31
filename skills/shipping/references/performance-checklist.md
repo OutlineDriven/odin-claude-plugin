@@ -1,17 +1,17 @@
-# Performance Checklist
+# Performance checklist
 
 Quick reference checklist for web application performance.
 
-## Table of Contents
+## Table of contents
 
-- [Core Web Vitals Targets](#core-web-vitals-targets)
-- [TTFB Diagnosis](#ttfb-diagnosis)
-- [Frontend Checklist](#frontend-checklist)
-- [Backend Checklist](#backend-checklist)
-- [Measurement Commands](#measurement-commands)
-- [Common Anti-Patterns](#common-anti-patterns)
+- [Core Web Vitals targets](#core-web-vitals-targets)
+- [TTFB diagnosis](#ttfb-diagnosis)
+- [Frontend checklist](#frontend-checklist)
+- [Backend checklist](#backend-checklist)
+- [Measurement commands](#measurement-commands)
+- [Common anti-patterns](#common-anti-patterns)
 
-## Core Web Vitals Targets
+## Core Web Vitals targets
 
 | Metric | Good | Needs Work | Poor |
 |--------|------|------------|------|
@@ -19,7 +19,7 @@ Quick reference checklist for web application performance.
 | INP (Interaction to Next Paint) | ≤ 200ms | ≤ 500ms | > 500ms |
 | CLS (Cumulative Layout Shift) | ≤ 0.1 | ≤ 0.25 | > 0.25 |
 
-## TTFB Diagnosis
+## TTFB diagnosis
 
 When TTFB is slow (> 800ms), check each component in DevTools Network waterfall:
 
@@ -27,7 +27,7 @@ When TTFB is slow (> 800ms), check each component in DevTools Network waterfall:
 - [ ] **TCP/TLS handshake** slow → enable HTTP/2, consider edge deployment, verify keep-alive
 - [ ] **Server processing** slow → profile backend, check slow queries, add caching
 
-## Frontend Checklist
+## Frontend checklist
 
 ### Images
 - [ ] Images use modern formats (WebP, AVIF)
@@ -83,7 +83,7 @@ When TTFB is slow (> 800ms), check each component in DevTools Network waterfall:
 - [ ] Off-screen sections use `content-visibility: auto` with `contain-intrinsic-size` to skip layout/paint of non-visible areas
 - [ ] No `unload` event handlers and no `Cache-Control: no-store` on HTML responses — preserves back/forward cache (bfcache) eligibility
 
-## Backend Checklist
+## Backend checklist
 
 ### Database
 - [ ] No N+1 query patterns (use eager loading / joins)
@@ -105,7 +105,7 @@ When TTFB is slow (> 800ms), check each component in DevTools Network waterfall:
 - [ ] Horizontal scaling configured (if needed)
 - [ ] Health check endpoint for load balancer
 
-## Measurement Commands
+## Measurement commands
 
 ### INP field data and DevTools workflow
 
@@ -139,7 +139,7 @@ onINP(({ value, attribution }) => {
 });
 ```
 
-## Common Anti-Patterns
+## Common anti-patterns
 
 | Anti-Pattern | Impact | Fix |
 |---|---|---|

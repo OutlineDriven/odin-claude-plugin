@@ -1,3 +1,3 @@
 interface:
-  display_name: "CI CD"
-  short_description: "Author CI/CD pipelines with blocking gates and rollback."
+  display_name: "CI Cd"
+  short_description: "Use when asked to set up or modify CI/CD pipelines, quality"

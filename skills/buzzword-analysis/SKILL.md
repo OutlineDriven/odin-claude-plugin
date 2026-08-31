@@ -1,6 +1,6 @@
 ---
 name: buzzword-analysis
-description: 'Use when the user wants the current jargon weather described without advocacy. Returns a jargon-landscape report that takes no side. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when the user wants the current jargon weather described without advocacy. Returns a jargon-landscape report that takes no side. Not for choosing a positioning move — use buzzword-hijack.'
 ---
 
 # Buzzword analysis
@@ -22,23 +22,23 @@ description: 'Use when the user wants the current jargon weather described witho
 
 ## Procedure
 
-1. Identify the domain the user named. If none is named, ask once and stop; do not fabricate a domain.
-2. Enumerate the jargon terms currently circulating in that domain, noting who uses each and what each is claimed to mean.
-3. For each term, separate its descriptive meaning from its rhetorical or marketing freight: what it denotes versus what adopting it signals.
-4. Classify each term's weather state as rising, peak, fading, or residual, based on observed usage trajectory.
-5. Where a term's popular meaning has drifted from its technical origin, note the drift without correcting it.
-6. Present the landscape as a weather report: which terms are hot, cooling, or stale, and what each is being used to sell or signal.
-7. Take no position on whether any term or its adoption is good or bad. Describe; do not advocate.
+1. Identify the domain the user named. If none is named, ask once and stop; do not fabricate a domain. **Done when:** the domain is identified or the user is asked for one.
+2. Enumerate the jargon terms currently circulating in that domain, noting who uses each and what each is claimed to mean. **Done when:** the circulating terms are listed with users and claimed meanings.
+3. For each term, separate its descriptive meaning from its rhetorical or marketing freight: what it denotes versus what adopting it signals. **Done when:** each term has its descriptive meaning separated from its signaling freight.
+4. Classify each term's weather state as rising, peak, fading, or residual, based on observed usage trajectory. **Done when:** each term has a weather state or is labeled `unclear`.
+5. Where a term's popular meaning has drifted from its technical origin, note the drift without correcting it. **Done when:** drift is noted where present.
+6. Present the landscape as a weather report: which terms are hot, cooling, or stale, and what each is being used to sell or signal. **Done when:** the landscape is presented as a weather report.
+7. Take no position on whether any term or its adoption is good or bad. Describe; do not advocate. **Done when:** the report takes no side on adoption.
 
 ## Failure and recovery
-- Unnamed domain: ask once, stop, do not invent a domain.
-- Insufficient basis to classify a term's trajectory: label it `unclear` rather than guessing a weather state.
-- A term cannot be separated from advocacy: report that it functions primarily as advocacy and continue; do not force a neutral reading the evidence does not support.
-- Partial result: return the terms that could be classified and explicitly list the ones that could not.
-- No mutation occurs on any failure; the only output is the chat report.
+- **Unnamed domain:** ask once, stop, do not invent a domain.
+- **Insufficient basis to classify a term's trajectory:** label it `unclear` rather than guessing a weather state.
+- **A term cannot be separated from advocacy:** report that it functions primarily as advocacy and continue; do not force a neutral reading the evidence does not support.
+- **Partial result:** return the terms that could be classified and explicitly list the ones that could not.
+- **No mutation occurs on any failure;** the only output is the chat report.
 
 ## Output
-A jargon-weather report in chat: a list of current terms, each with its descriptive meaning, its signaling or marketing freight, its weather state (rising, peak, fading, residual, or unclear), and any drift from technical origin. The report takes no side on adoption.
+A jargon-weather report in chat — a list of current terms, each with its descriptive meaning, its signaling or marketing freight, its weather state (rising, peak, fading, residual, or unclear), and any drift from technical origin — taking no side on adoption.
 
 ## Provenance
 

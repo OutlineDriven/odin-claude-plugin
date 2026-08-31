@@ -1,3 +1,3 @@
 interface:
   display_name: "Create Plugin Scaffold"
-  short_description: "Scaffold a valid agent plugin tree and report."
+  short_description: "Use when asked to create an agent plugin or marketplace package."

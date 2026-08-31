@@ -1,6 +1,6 @@
 # Design systems reference
 
-**Grounded: 2026-08-26.** Re-verify versions and capability tables before relying on them in production. Specs evolve; the citations below are correct as of the snapshot date.
+**Grounded: 2026-08-31.** Re-verify versions and capability tables before relying on them in production. Specs evolve; the citations below are correct as of the snapshot date.
 
 ## §1. Posture
 
@@ -35,7 +35,7 @@ Shape: JSON with `$type` discriminator (`color`, `dimension`, `typography`, `sha
         "fontFamily": "Inter",
         "fontWeight": 600,
         "fontSize": "32px",
-        "lineHeight": "1.2"
+        "lineHeight": 1.2
       }
     }
   }

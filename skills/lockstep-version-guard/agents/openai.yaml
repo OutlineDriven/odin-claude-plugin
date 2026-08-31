@@ -1,3 +1,3 @@
 interface:
   display_name: "Lockstep Version Guard"
-  short_description: "Checks all ten modules share one release version"
+  short_description: "Use when a human invokes the release gate to prove all ten ODIN"

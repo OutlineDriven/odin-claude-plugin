@@ -1,6 +1,6 @@
 ---
 name: gate-and-merge
-description: 'Use when a set of open PRs needs landing together: gate, fix minor findings, merge parent-first. Don''t use for single PRs without a stack or for review-only passes.'
+description: 'Use when a set of open PRs needs landing together: gate, fix minor findings, merge parent-first. Not for single-PR review feedback — use resolve-pr-feedback. Not for gate-only evaluation without merge — use gate-proposed-change. Human-only.'
 disable-model-invocation: true
 ---
 
@@ -14,6 +14,12 @@ disable-model-invocation: true
 | Authority | Human-only. The human authorizes the queue once before the first merge and authorizes every push to a branch they do not own. Preview the target and consequence before any remote bulk mutation. |
 | Side effect | PR review comments for blocking findings, minor follow-up commits pushed to PR head branches, and stack merges on GitHub. No merge on a pending or pre-fix head. |
 | Done | Every PR merged, held-with-gate-comment, or fixed-then-merged; one line per PR; no merge on a pending or pre-fix oid. |
+
+## Not for
+
+- Single-PR review feedback resolution — use resolve-pr-feedback.
+- Gate-only evaluation without merge — use gate-proposed-change.
+- Review-only passes — this skill lands PRs, it does not just review them.
 
 ## Inputs
 
@@ -32,9 +38,11 @@ Run one serial loop: gate a PR, act on its findings, merge it, move to the next.
 gh pr list --state open --limit 100 --json number,title,url,headRefName,baseRefName,headRefOid,isDraft,mergeable,mergeStateStatus,reviewDecision,maintainerCanModify
 ```
 
-2. Build the stack order. A PR whose `baseRefName` equals another open PR's `headRefName` is that PR's child; everything else is a root. Order topologically, parents first, roots by ascending number. Print the order as a tree and take one yes before the first merge. After a parent merges GitHub retargets its children, so re-read the child's `baseRefName` at its turn rather than trusting the graph drawn at the start.
+Done when: every open PR is listed with the exact field set.
 
-3. For each PR in order, run the gate ladder below and apply the single severity table. Do not build a mechanical prefilter plus a separate QA pass: a draft flag and an unhandled nil are both findings, differing only in what produced them.
+2. Build the stack order. A PR whose `baseRefName` equals another open PR's `headRefName` is that PR's child; everything else is a root. Order topologically, parents first, roots by ascending number. Print the order as a tree and take one yes before the first merge. After a parent merges GitHub retargets its children, so re-read the child's `baseRefName` at its turn rather than trusting the graph drawn at the start. Done when: the stack order is printed as a tree and the human says yes.
+
+3. For each PR in order, run the gate ladder below and apply the single severity table. Do not build a mechanical prefilter plus a separate QA pass: a draft flag and an unhandled nil are both findings, differing only in what produced them. Done when: every PR is merged, held, or fixed-then-merged.
 
 | Severity | Decidable definition | Action |
 |---|---|---|
@@ -102,18 +110,20 @@ A behavior change with no test that fails without it is minor where the repo has
 4. `gh pr merge <n> --merge --match-head-commit <current headRefOid>`. The flag is the race guard, refusing if the head moved again under a concurrent push.
 
 ## Failure and recovery
-- `blocking` finding: post one PR review via `gh pr review <n> --comment --body-file -` carrying every blocking finding, hold the PR, continue the queue. Do not merge.
-- `mergeable: "UNKNOWN"`: re-read once; still unknown is blocking.
-- Pending check: `gh pr checks <n> --watch --fail-fast`, then re-read; never merge on a non-`COMPLETED` status.
-- Conflict: resolve on the PR head branch, push, re-gate; never bury a resolution in the merge commit.
-- Push refused by `maintainerCanModify: false`: deliver the fix as a comment carrying the patch; do not attempt a second push flow.
-- Race on merge: `--match-head-commit` refuses if the head moved; re-read `headRefOid` and re-merge.
-- A gate override requires the user to name the gate and the PR; a blanket skip is refused.
-- Partial result: the queue is serial and per-PR independent; a held or failed PR does not block later PRs unless a later PR's base is the held PR's head. In that case stop and report the stack stall.
+
+- **`blocking` finding**: post one PR review via `gh pr review <n> --comment --body-file -` carrying every blocking finding, hold the PR, continue the queue. Do not merge.
+- **`mergeable: "UNKNOWN"`**: re-read once; still unknown is blocking.
+- **Pending check**: `gh pr checks <n> --watch --fail-fast`, then re-read; never merge on a non-`COMPLETED` status.
+- **Conflict**: resolve on the PR head branch, push, re-gate; never bury a resolution in the merge commit.
+- **Push refused by `maintainerCanModify: false`**: deliver the fix as a comment carrying the patch; do not attempt a second push flow.
+- **Race on merge**: `--match-head-commit` refuses if the head moved; re-read `headRefOid` and re-merge.
+- **Gate override**: requires the user to name the gate and the PR; a blanket skip is refused.
+- **Partial result**: the queue is serial and per-PR independent; a held or failed PR does not block later PRs unless a later PR's base is the held PR's head. In that case stop and report the stack stall.
 - Never swallow an error or pretend the done predicate holds.
 
 ## Output
-One line per PR: `merged`, `held with <gate> and <comment URL>`, or `fixed-then-merged with <follow-up SHA>`. No merge on a pending or pre-fix oid.
+
+One line per PR: `merged`, `held with <gate> and <comment URL>`, or `fixed-then-merged with <follow-up SHA>` — no merge on a pending or pre-fix oid.
 
 ## Provenance
 

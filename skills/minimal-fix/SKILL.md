@@ -21,12 +21,12 @@ description: 'Use when a defect is reported, apply the smallest correct change t
 
 ## Procedure
 
-1. Confirm the defect by reproducing it using the provided steps or equivalent observable behavior. Stop if reproduction cannot be demonstrated.
-2. Diagnose the root cause by tracing the execution path from the observed failure to the offending statement or condition. Do not infer from surface symptoms alone.
-3. Validate that the identified root cause is sufficient: removing or correcting it must prevent the defect from occurring.
-4. Apply the smallest change that removes the root cause. If no single-file, single-location change satisfies the root cause, stop and report scope too broad.
-5. Verify the reproduction no longer triggers using the same observable check from step 1. Asserting absence without re-running the reproduction is not permitted.
-6. Confirm the diff is minimal: no added or removed lines are unrelated to the root cause. Revert any adjacent or incidental change.
+1. Confirm the defect by reproducing it using the provided steps or equivalent observable behavior. Stop if reproduction cannot be demonstrated. Done when: the step’s stated result is achieved or its stop condition is reported.
+2. Diagnose the root cause by tracing the execution path from the observed failure to the offending statement or condition. Do not infer from surface symptoms alone. Done when: the step’s stated result is achieved or its stop condition is reported.
+3. Validate that the identified root cause is sufficient: removing or correcting it must prevent the defect from occurring. Done when: the step’s stated result is achieved or its stop condition is reported.
+4. Apply the smallest change that removes the root cause. If no single-file, single-location change satisfies the root cause, stop and report scope too broad. Done when: the step’s stated result is achieved or its stop condition is reported.
+5. Verify the reproduction no longer triggers using the same observable check from step 1. Asserting absence without re-running the reproduction is not permitted. Done when: the step’s stated result is achieved or its stop condition is reported.
+6. Confirm the diff is minimal: no added or removed lines are unrelated to the root cause. Revert any adjacent or incidental change. Done when: the step’s stated result is achieved or its stop condition is reported.
 
 ## Failure and recovery
 - **Root cause not found**: Stop. Do not apply any change. Report the defect as requiring broader investigation.

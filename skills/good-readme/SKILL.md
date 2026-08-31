@@ -1,6 +1,6 @@
 ---
 name: good-readme
-description: 'Use when the user asks to create, rewrite, review, or polish an open-source README, edit README.md into a progressively disclosed, evidence-grounded introduction, example, and getting-started guide whose claims are sourced and whose headings alone tell the story. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user asks to create, rewrite, review, or polish an open-source README into a progressively disclosed, evidence-grounded guide whose claims are sourced and whose headings alone tell the story. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Good README
@@ -21,14 +21,13 @@ description: 'Use when the user asks to create, rewrite, review, or polish an op
 
 ## Procedure
 
-1. Read the existing README.md if present, plus the repo's package manifest, source entry points, and any benchmark or size data. Record which facts (differentiators, numbers, sizes, platforms) are present and which are missing.
-2. In an existing README, remove all badges; if a badge carries a real fact such as version or build status, state that fact in text instead.
-3. Write the opening block first: one plain-language paragraph answering what the project does, how the user benefits, and what makes it different from alternatives. If the real differentiators are not in the repo, ask the user before writing them.
-4. Add a scannable facts list right after the opening: lead each bullet with 1–2 bold keywords, then back it with concrete evidence from the repo — real benchmark numbers, exact sizes, side-by-side code comparison with the closest alternative, or a screenshot or diagram that replaces a paragraph. For any number not present in the repo, ask the user or how to measure it; never estimate.
-5. Add a 4–10-line self-explanatory usage example that shows its output in a comment, so the reader sees the result without running anything. The example illustrates usage; the real setup guide comes next.
-6. Add a getting-started guide: explicit, copy-pasteable commands for adding the tool to an existing project, with every step present. Validate it by following it from scratch as if the project had never been seen, and fix every gap.
-7. Format for skimmers: headings for hierarchy, bold for key points, lists over dense paragraphs, horizontal rules between layers, and must-not-miss lines in blockquotes or bold. If the README exceeds roughly two screens, add a table of contents after the opening block. Confirm that skimming only headings and bold text still tells the story.
-8. Run the finishing checklist: the first paragraph alone sells the project (what, benefit, difference); every number and claim is real and sourced from the repo, the user, or a measurement; the example is self-explanatory, 4–10 lines, and shows its output; getting started works from a clean machine; headings and bold text alone tell the story.
+1. Read the existing README.md if present, plus the repo's package manifest, source entry points, and any benchmark or size data. Record which facts (differentiators, numbers, sizes, platforms) are present and which are missing. Done when: the stated action, evidence, and guard all hold.
+2. In an existing README, remove all badges; if a badge carries a real fact such as version or build status, state that fact in text instead. Done when: the stated action, evidence, and guard all hold.
+3. Write the opening block first: one plain-language paragraph answering what the project does, how the user benefits, and what makes it different from alternatives. If the real differentiators are not in the repo, ask the user before writing them. Done when: the stated action, evidence, and guard all hold.
+4. Add a scannable facts list right after the opening: lead each bullet with 1–2 bold keywords, then back it with concrete evidence from the repo — real benchmark numbers, exact sizes, side-by-side code comparison with the closest alternative, or a screenshot or diagram that replaces a paragraph. For any number not present in the repo, ask the user or how to measure it; never estimate. Done when: the stated action, evidence, and guard all hold.
+5. Add a 4–10-line self-explanatory usage example that shows its output in a comment, so the reader sees the result without running anything. The example illustrates usage; the real setup guide comes next. Done when: the stated action, evidence, and guard all hold.
+6. Add a getting-started guide: explicit, copy-pasteable commands for adding the tool to an existing project, with every step present. Validate it by following it from scratch as if the project had never been seen, and fix every gap. Done when: the stated action, evidence, and guard all hold.
+7. Format for skimmers: headings for hierarchy, bold for key points, lists over dense paragraphs, horizontal rules between layers, and must-not-miss lines in blockquotes or bold. If the README exceeds roughly two screens, add a table of contents after the opening block. Confirm that skimming only headings and bold text still tells the story. Done when: the stated action, evidence, and guard all hold.
 
 ## Failure and recovery
 - Unsourced claim: if a needed fact (differentiator, number, size, platform) is not in the repo and the user cannot supply it, omit that claim rather than estimate. Never write a number not measured or received.

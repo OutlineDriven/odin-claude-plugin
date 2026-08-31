@@ -1,6 +1,6 @@
 ---
 name: infrastructure-mentor
-description: 'Use when a user, especially a new hire, asks for mentoring, guidance, or explanation of Sentry infrastructure or practices, research the topic and provide a clear, sourced explanation with references and concrete next learning steps. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when a user, especially a new hire, asks for mentoring, guidance, or explanation of Sentry infrastructure or practices. Returns a clear, sourced explanation with references and concrete next learning steps.'
 ---
 
 # Infrastructure mentor
@@ -27,9 +27,9 @@ description: 'Use when a user, especially a new hire, asks for mentoring, guidan
 5. Close with concrete next steps: what to read, try, or ask next.
 
 ## Failure and recovery
-- **Outside scope**: The topic is not about Sentry infrastructure or practices. State this directly. Do not invent Sentry content.
-- **Information unavailable**: sufficient information cannot be found. Return what is available with honest uncertainty, and suggest where to look or whom to ask.
-- **Partial answer**: If time or context is limited, deliver the clearest explanation possible and note what remains uncovered.
+- **Outside scope:** the topic is not about Sentry infrastructure or practices. State this directly. Do not invent Sentry content.
+- **Information unavailable:** sufficient information cannot be found. Return what is available with honest uncertainty, and suggest where to look or whom to ask.
+- **Partial answer:** if time or context is limited, deliver the clearest explanation possible and note what remains uncovered.
 
 ## Output
 A clear, sourced explanation of the Sentry concept or practice the user asked about, with explicit references and concrete next steps. Delivered as a structured report in chat.

@@ -1,3 +1,3 @@
 interface:
   display_name: "No Hide"
-  short_description: "Detect clever-concealment patterns that obscure code structure"
+  short_description: "Use when the user asks to detect clever-concealment patterns"

@@ -1,6 +1,6 @@
 ---
 name: watch-for
-description: 'Observe a changing surface and emit a judgment on anomalies. Use when the user wants to monitor a file, log, endpoint, or stateful artifact for drift, errors, or unexpected changes and receive a per-tick anomaly verdict. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when the user wants to monitor a file, log, endpoint, or stateful artifact for drift, errors, or unexpected changes and receive a per-tick anomaly verdict. Don''t use for tasks that require source or remote-system changes.'
 ---
 
 # Watch for
@@ -22,14 +22,13 @@ description: 'Observe a changing surface and emit a judgment on anomalies. Use w
 
 ## Procedure
 
-1. **Bound the surface.** Record the surface address and anomaly criteria. Refuse to observe anything outside this declared scope.
-2. **Capture baseline.** Read the surface once. Record the initial state as the baseline snapshot.
-3. **Sample.** Read the surface at each tick. If the surface is unreadable, emit an error judgment and wait for the next tick rather than widening scope.
-4. **Compare.** Diff the current sample against the baseline using the anomaly criteria. Classify the sample as normal or anomalous.
-5. **Emit judgment.** If anomalous, emit a judgment containing: surface address, timestamp, what changed, why it matches the anomaly criteria, and severity (informational, warning, critical). If normal, emit a brief no-anomaly confirmation.
-6. **Update baseline.** After each judgment, set the current sample as the new baseline for the next comparison cycle.
-7. **Check stop.** If the user signals stop or the optional stop condition is met, end the watch and emit a final summary: total ticks, anomalies found, and final surface state.
-8. **Repeat** from step 3 until stopped.
+1. Bound the surface. Record the surface address and anomaly criteria. Refuse to observe anything outside this declared scope. Done when: surface address and anomaly criteria are recorded.
+2. Capture baseline. Read the surface once. Record the initial state as the baseline snapshot. Done when: baseline snapshot is recorded.
+3. Sample. Read the surface at each tick. If the surface is unreadable, emit an error judgment and wait for the next tick rather than widening scope. Done when: a sample is read or an error judgment is emitted.
+4. Compare. Diff the current sample against the baseline using the anomaly criteria. Classify the sample as normal or anomalous. Done when: sample is classified.
+5. Emit judgment. If anomalous, emit a judgment containing: surface address, timestamp, what changed, why it matches the anomaly criteria, and severity (informational, warning, critical). If normal, emit a brief no-anomaly confirmation. Done when: judgment is emitted.
+6. Update baseline. Set the current sample as the new baseline for the next comparison cycle. Done when: baseline is updated.
+7. Check stop. If the user signals stop or the optional stop condition is met, end the watch and emit a final summary: total ticks, anomalies found, and final surface state. Otherwise, repeat from step 3. Done when: stop is detected and final summary is emitted, or the next tick begins.
 
 ## Failure and recovery
 | Failure class | Behavior |
@@ -42,14 +41,7 @@ description: 'Observe a changing surface and emit a judgment on anomalies. Use w
 No failure class causes the watcher to pretend the done predicate holds. Every tick produces a judgment or an explicit error.
 
 ## Output
-A stream of per-tick judgments, each containing:
-- Surface address
-- Timestamp
-- Classification: normal | anomalous | error | stale
-- Description of what changed (if anomalous) or why the read failed (if error)
-- Severity (if anomalous): informational | warning | critical
-
-A final summary on stop: total ticks observed, anomaly count, and final surface state.
+A stream of per-tick judgments (surface address, timestamp, classification: normal/anomalous/error/stale, what changed or why the read failed, severity if anomalous), with a final summary on stop: total ticks, anomaly count, and final surface state.
 
 ## Provenance
 

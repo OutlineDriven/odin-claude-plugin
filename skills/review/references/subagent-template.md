@@ -1,6 +1,6 @@
 # Sub-agent prompt template
 
-This template is used by the orchestrator to spawn each reviewer sub-agent. Variable substitution slots are filled at spawn time.
+The orchestrator uses this template to spawn each reviewer sub-agent. It fills the variable substitution slots at spawn time.
 
 ---
 

@@ -1,3 +1,3 @@
 interface:
-  display_name: "Apply and Verify Decision"
-  short_description: "Resolve a fork, take the pick, apply and verify it in one turn."
+  display_name: "Decide"
+  short_description: "Use when the user has a fork and wants it resolved and applied,"

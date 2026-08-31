@@ -1,6 +1,6 @@
-# Property Test Patterns by Language
+# Property test patterns by language
 
-Brief property test patterns. One property per language demonstrating a round-trip or invariant.
+Each language has one brief property test pattern that demonstrates a round trip or invariant.
 
 ## Rust
 

@@ -1,6 +1,6 @@
 ---
 name: design-prototype
-description: 'Use when asked to run /design-prototype, which produces a polished responsive Pretext-native HTML artifact whose text layout is computed on resize and refined through a user feedback loop. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user runs /design-prototype to produce a polished responsive Pretext-native HTML artifact refined through a feedback loop. Not for variant galleries — use design-variants; not for live-URL audit — use design-review.'
 ---
 
 # Design prototype
@@ -22,7 +22,7 @@ description: 'Use when asked to run /design-prototype, which produces a polished
 
 ## Procedure
 
-1. Detect the design source. Look for an approved mockup image, a product or design plan, and a repo-root DESIGN.md. If none are found, ask the user to supply a freeform description or a PNG path. Record the mode: approved-mockup, plan-driven, freeform, or evolve (a prior finalized HTML exists and the user chooses to iterate on it).
+1. Detect the design source. Look for an approved mockup image, a product or design plan, and a repo-root DESIGN.md. If none are found, ask the user to supply a freeform description or a PNG path. Record the mode: approved-mockup, plan-driven, freeform, or evolve (a prior finalized HTML exists and the user chooses to iterate on it). **Done when:** exactly one source mode is recorded or the user has been asked for one.
 
 2. Apply the UX doctrine to every layout and visual decision before generating any markup. The doctrine is observed user behavior, not preference:
    - Every page is self-evident; if a user must think "what do I click," the design failed.
@@ -38,13 +38,17 @@ description: 'Use when asked to run /design-prototype, which produces a polished
    - Every friction point depletes a finite goodwill reservoir; replenish by making the user's goal obvious and recovery easy.
    - Mobile raises the stakes: 44px minimum touch targets, visible affordances, ruthless prioritization.
 
-3. Build an implementation spec: colors (hex), fonts (family and weights), spacing scale, component list, layout type. Extract from the mockup image, the plan prose, or the freeform description. DESIGN.md tokens override extracted system-level values. Generate real content from the source; never use lorem ipsum or placeholder text.
+   **Done when:** every layout and visual decision in the spec traces to a named doctrine line.
+
+3. Build an implementation spec: colors (hex), fonts (family and weights), spacing scale, component list, layout type. Extract from the mockup image, the plan prose, or the freeform description. DESIGN.md tokens override extracted system-level values. Generate real content from the source; never use lorem ipsum or placeholder text. **Done when:** the spec lists colors, fonts, spacing, components, and layout, all sourced from the input with no placeholder content.
 
 4. Classify the design into a Pretext tier and state the chosen APIs:
    - Simple layout or card/grid: prepare() + layout() for resize-aware heights and self-sizing cards.
    - Chat/messaging: prepareWithSegments() + walkLineRanges() for tight-fit bubbles and minimum width.
    - Content-heavy editorial: prepareWithSegments() + layoutNextLine() for text around obstacles.
    - Complex editorial: full engine + layoutWithLines() for manual line rendering.
+
+   **Done when:** one tier is named with its API set.
 
 5. Wire Pretext using the correct pattern for the tier. The Pretext API:
    - prepare(text, font) returns a handle; call once after document.fonts.ready. Font is a CSS shorthand like '16px Inter'.
@@ -56,15 +60,17 @@ description: 'Use when asked to run /design-prototype, which produces a polished
    - clearCache() clears measurement caches; setLocale(locale?) retargets the word segmenter.
    The basic pattern: prepare all [data-pretext] elements after fonts load, store handles in a Map, run layout to set element heights, observe resize with ResizeObserver to relayout, and re-prepare on contenteditable changes with a MutationObserver.
 
-6. If a framework was detected and the user chose framework output, add @chenglou/pretext to the project dependencies using the detected package manager and use standard imports in the component. Otherwise produce a self-contained vanilla HTML file. For vanilla output, inline the vendored Pretext bundle in a script tag if available; fall back to a CDN module import if the bundle is missing.
+   **Done when:** the tier's API calls are wired with resize and edit observers in place.
 
-7. Write one artifact file. Always include: the Pretext source (inlined or CDN), CSS custom properties for the design tokens, Google Fonts via a link tag plus a document.fonts.ready gate before the first prepare(), semantic HTML5 elements, responsive behavior via Pretext relayout (not just media queries) with breakpoint adjustments at 375px, 768px, 1024px, 1440px, ARIA attributes and heading hierarchy and focus-visible states, contenteditable text elements with a MutationObserver to re-prepare and relayout on edit, a ResizeObserver to relayout on resize, prefers-color-scheme for dark mode, prefers-reduced-motion for animation respect, and real content from the source. Never include AI-slop defaults: purple/blue gradients, generic 3-column feature grids, center-everything layouts, decorative blobs or waves not in the source, stock-photo placeholder divs, generic "Get Started"/"Learn More" CTAs, rounded-corner drop-shadow cards as the default component, emoji as visual elements, generic testimonial sections, or cookie-cutter hero-with-left-text-right-image sections.
+6. If a framework was detected and the user chose framework output, add @chenglou/pretext to the project dependencies using the detected package manager and use standard imports in the component. Otherwise produce a self-contained vanilla HTML file. For vanilla output, inline the vendored Pretext bundle in a script tag if available; fall back to a CDN module import if the bundle is missing. **Done when:** Pretext is importable in the chosen output form.
 
-8. Start a local HTTP server in the output directory for live preview; fall back to opening the file directly if no server is available. Tell the user the preview URL.
+7. Write one artifact file. Always include: the Pretext source (inlined or CDN), CSS custom properties for the design tokens, Google Fonts via a link tag plus a document.fonts.ready gate before the first prepare(), semantic HTML5 elements, responsive behavior via Pretext relayout (not just media queries) with breakpoint adjustments at 375px, 768px, 1024px, 1440px, ARIA attributes and heading hierarchy and focus-visible states, contenteditable text elements with a MutationObserver to re-prepare and relayout on edit, a ResizeObserver to relayout on resize, prefers-color-scheme for dark mode, prefers-reduced-motion for animation respect, and real content from the source. Never include AI-slop defaults: purple/blue gradients, generic 3-column feature grids, center-everything layouts, decorative blobs or waves not in the source, stock-photo placeholder divs, generic "Get Started"/"Learn More" CTAs, rounded-corner drop-shadow cards as the default component, emoji as visual elements, generic testimonial sections, or cookie-cutter hero-with-left-text-right-image sections. **Done when:** the single artifact file contains every required inclusion and no named AI-slop default.
 
-9. Run the refinement loop (maximum 10 iterations): show the approved mockup alongside the live HTML for comparison when one exists; ask the user what needs to change; on "done"/"ship it"/"looks good"/"perfect" exit to step 10; otherwise apply surgical edits with a targeted edit tool (never regenerate the whole file, because the user may have made manual contenteditable edits to preserve); give a 2-3 line change summary; re-verify at 375px, 768px, and 1440px viewports if a screenshot tool is available, checking for text overflow, layout collapse, and responsive breakage. After 10 iterations without acceptance, ask whether to continue or finalize.
+8. Start a local HTTP server in the output directory for live preview; fall back to opening the file directly if no server is available. Tell the user the preview URL. **Done when:** the user has a reachable preview URL.
 
-10. Save finalized.json metadata alongside the artifact: source mockup path or null, source plan path or null, mode, html file path, pretext tier, framework, iteration count, ISO 8601 date, screen name, and current branch. If no repo-root DESIGN.md exists, offer to create one from the generated HTML's tokens. Stop the preview server.
+9. Run the refinement loop for a maximum of 10 iterations. When an approved mockup exists, show it alongside the live HTML for comparison. Ask the user what needs to change. On "done"/"ship it"/"looks good"/"perfect", exit to step 10. Otherwise, apply surgical edits with a targeted edit tool; never regenerate the whole file because the user may have made manual contenteditable edits to preserve. Give a 2-3 line change summary. If a screenshot tool is available, re-verify at 375px, 768px, and 1440px viewports, checking for text overflow, layout collapse, and responsive breakage. After 10 iterations without acceptance, ask whether to continue or finalize. **Done when:** the user signals acceptance or the 10-iteration gate asks continue-or-finalize.
+
+10. Save finalized.json metadata alongside the artifact with the source mockup path or null, source plan path or null, mode, html file path, pretext tier, framework, iteration count, ISO 8601 date, screen name, and current branch. If no repo-root DESIGN.md exists, offer to create one from the generated HTML's tokens. Stop the preview server. **Done when:** finalized.json is written with all listed fields and the preview server is stopped.
 
 ## Failure and recovery
 - No design source and the user supplies none: stop and ask for a freeform description or PNG path; do not invent content.
@@ -74,7 +80,7 @@ description: 'Use when asked to run /design-prototype, which produces a polished
 - Partial result rule: the artifact file is the single deliverable; if generation stops mid-file, the file is incomplete and not done. Rollback is deleting the incomplete artifact and metadata files.
 
 ## Output
-One polished, responsive, self-contained Pretext-native HTML artifact file (or one framework-native component file) saved under the project design directory, plus a finalized.json metadata file. The HTML computes text layout on resize, supports contenteditable re-layout, and matches the approved mockup or the user's accepted freeform design.
+One polished, responsive, self-contained Pretext-native HTML artifact (or framework-native component) plus a finalized.json metadata file under the project design directory — ordered detect-source → spec → tier → wire → write → preview → refine → finalize, computing text layout on resize and matching the approved mockup or accepted freeform design.
 
 ## Provenance
 

@@ -1,6 +1,6 @@
 ---
 name: linkedin-ghostwriting
-description: 'Use when a user provides a founder story or result, generate a LinkedIn post with a chosen hook and humanized post body. No file or credential mutations. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when a user provides a founder story or result and asks for a LinkedIn post with a chosen hook and humanized body. No file or credential mutations. Don''t use for tasks that require source or remote-system changes.'
 ---
 
 # LinkedIn ghostwriting
@@ -10,31 +10,31 @@ description: 'Use when a user provides a founder story or result, generate a Lin
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to turn a founder story or result into a LinkedIn post. |
-| Authority | read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Delivers drafted hook and post text; no writes beyond the conversation. |
 | Done | Chosen hook plus post body, humanized with the hook preserved. |
 
 ## Inputs
 
 Required:
-- **Founder story or result** — the raw material to convert. Must be supplied by the user in the same conversation. Accepts a story, a metric, a milestone, a lesson, or any combination of these.
+- **Founder story or result:** the raw material to convert. The user must supply it in the same conversation. Accepts a story, a metric, a milestone, a lesson, or any combination of these.
 
 Optional:
-- **Preferred hook style** — if the user names a framework (e.g., contrast hook, question hook, data hook) or references a past post they liked, honour it.
-- **Target audience** — if the user names a persona (e.g., other founders, engineers, enterprise buyers), tailor the voice and examples accordingly.
+- **Preferred hook style:** if the user names a framework (e.g., contrast hook, question hook, data hook) or references a past post they liked, honour it.
+- **Target audience:** if the user names a persona (e.g., other founders, engineers, enterprise buyers), tailor the voice and examples accordingly.
 
 ## Procedure
 
-1. **Extract the raw material.** Confirm what the user has provided. If the user supplied only a vague statement ("I grew MRR"), ask one clarifying question to surface the concrete story, metric, or moment behind it. Do not write any post until the material is specific enough to generate a verifiable claim.
+1. **Extract the raw material.** Confirm what the user has provided. If the user supplied only a vague statement ("I grew MRR"), ask one clarifying question to surface the concrete story, metric, or moment behind it. Do not write any post until the material is specific enough to generate a verifiable claim. Done when: the raw material contains a concrete story, metric, or moment.
 
-2. **Validate before writing.** The story must contain at least one of: a specific metric with context, a concrete before/after contrast, a named decision or trade-off, or a real lesson from a real event. If the material is still too abstract after clarification, state the gap and stop without producing a draft.
+2. **Validate before writing.** The story must contain at least one of: a specific metric with context, a concrete before/after contrast, a named decision or trade-off, or a real lesson from a real event. If the material is still too abstract after clarification, state the gap and stop without producing a draft. Done when: the material passes the validation gate, or the gap is stated and the skill stops.
 
 3. **Select a hook.** Generate three distinct hooks drawn from the founder's material:
    - Hook A: contrast (before vs. after, old belief vs. new belief, or expectation vs. reality)
    - Hook B: question or pattern interrupt (poses a counter-intuitive question the post will answer)
    - Hook C: data or milestone framing (leads with a number or a first)
 
-   Label each hook. Present all three to the user and ask which they prefer, or whether they want a combination. Do not proceed to the post body until the user has chosen or approved a hook.
+   Label each hook. Present all three to the user and ask which they prefer, or whether they want a combination. Do not proceed to the post body until the user has chosen or approved a hook. Done when: the user has chosen or approved one hook (or combination).
 
 4. **Draft the post body.** Using the chosen hook and the validated founder material, write the full post body in the voice of the founder:
    - Open with the chosen hook verbatim.
@@ -42,10 +42,11 @@ Optional:
    - Include at least one concrete detail (metric, quote, decision, mistake, or lesson) drawn directly from the user's material.
    - End with a natural call-to-view or question; do not append a generic CTA such as "drop a comment" unless the user requested it.
    - Keep the total post under 1,300 characters (approximately 250–300 words); LinkedIn's algorithm penalises longer posts.
+   Done when: the post body is drafted with the hook verbatim, concrete detail, natural ending, and under 1,300 characters.
 
-5. **Humanize the draft.** Remove all AI-sounding constructions: no hedge phrases ("It's worth noting that", "One might argue"), no passive voice, no lists introduced with "here are three ways to" or similar templates. The post should read as if typed by a person at 9 p.m. after a long day, not generated by a model.
+5. **Humanize the draft.** Remove AI-sounding constructions: no hedge phrases ("It's worth noting that", "One might argue"), passive voice, or lists introduced with "here are three ways to" or similar templates. The post should read as if typed by a person at 9 p.m. after a long day, not generated by a model. Done when: the draft is free of AI-sounding constructions and reads in founder voice.
 
-6. **Return the final output.** Present the chosen hook in bold, then the full post body. Confirm to the user that they can edit further before publishing.
+6. **Return the final output.** Present the chosen hook in bold, then the full post body. Confirm to the user that they can edit further before publishing. Done when: the hook and post body are presented and the user is told they can edit further.
 
 ## Failure and recovery
 | Failure class | Result |
@@ -58,11 +59,8 @@ Optional:
 Partial-result rule: if the user provides additional material mid-draft, incorporate only what is directly relevant to the already-chosen hook. Do not rewrite the hook to accommodate new material.
 
 ## Output
-A single LinkedIn post consisting of:
-- **Hook** (bold, verbatim from user selection)
-- **Post body** (2–4 short paragraphs, under 1,300 characters, in founder voice, humanized)
 
-No hashtags unless the user explicitly asks for them. No images or link attachments. No draft saved to any file or external service.
+A single LinkedIn post: chosen hook (bold, verbatim from user selection) followed by post body (2-4 short paragraphs, under 1,300 characters, in founder voice, humanized) — no hashtags unless explicitly requested, no images or link attachments, no draft saved to any file or external service.
 
 ## Provenance
 

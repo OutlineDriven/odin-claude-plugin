@@ -1,3 +1,3 @@
 interface:
   display_name: "Zeroize Audit"
-  short_description: "Audit secrets code for missing or eliminated zeroization"
+  short_description: "Use when auditing C, C++, or Rust secret-handling code for"

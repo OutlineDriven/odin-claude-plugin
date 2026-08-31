@@ -1,4 +1,4 @@
-# Notion Docs
+# Notion docs
 
 ## What this source contains
 

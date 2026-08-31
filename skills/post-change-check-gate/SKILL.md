@@ -1,6 +1,6 @@
 ---
 name: post-change-check-gate
-description: 'Use when an artifact or skill has just changed and is about to be called done, committed, or handed off. Run and apply the relevant hygiene checks. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when an artifact or skill has just changed and is about to be called done, committed, or handed off. Runs the relevant hygiene checks and applies their findings. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Post change check gate
@@ -10,8 +10,8 @@ description: 'Use when an artifact or skill has just changed and is about to be 
 | Field | Bound contract |
 |---|---|
 | Trigger | Right after creating or changing an artifact/skill, before calling it done, committing, or handing off |
-| Authority | Reversible local: write only to the named artifact; rollback path: revert the artifact to pre-check state |
-| Side effect | Applies findings to the artifact (or consciously defers with stated reason); never touches git |
+| Authority | Make reversible local changes only to the named artifact; rollback path: revert the artifact to its pre-check state |
+| Side effect | Applies findings to the artifact, or defers each with a stated reason; never touches git |
 | Done | Relevant checks actually ran (not eyeballed); artifact changed or every skipped check has a stated reason |
 
 ## Inputs
@@ -21,11 +21,11 @@ description: 'Use when an artifact or skill has just changed and is about to be 
 
 ## Procedure
 
-1. **Run checks inline.** Do not accept "looks fine" or "eyeballed" as proof. For each applicable hygiene concern (lint, type, test, format, link, security scan, or domain-specific validation), invoke the check and capture its concrete pass/fail/skip output.
-2. **Log every result.** Record pass, fail, or skip with the specific check name and a one-line reason for skip.
-3. **Apply fixes only to the artifact.** When a check fails, edit the artifact to fix the finding. Do not edit unrelated files.
-4. **Record skip reasons.** If a check is skipped, write the reason explicitly into the check log before proceeding.
-5. **Verify the check set passes.** Re-run checks until all relevant checks pass or every skip is documented. If a check cannot be made to pass, stop and leave the artifact in a documented deferred state; do not commit or hand off a dirty artifact.
+1. **Run checks inline.** Do not accept "looks fine" or "eyeballed" as proof. For each applicable hygiene concern (lint, type, test, format, link, security scan, or domain-specific validation), invoke the check and capture its concrete pass/fail/skip output. Done when: every applicable check is invoked with concrete output captured.
+2. **Log every result.** Record pass, fail, or skip with the specific check name and a one-line reason for skip. Done when: every check result is logged with name and outcome.
+3. **Apply fixes only to the artifact.** When a check fails, edit the artifact to fix the finding. Do not edit unrelated files. Done when: every failed check's finding is fixed in the artifact or deferred with a reason.
+4. **Record skip reasons.** If a check is skipped, write the reason explicitly into the check log before proceeding. Done when: every skipped check has an explicit reason in the log.
+5. **Verify the check set passes.** Re-run checks until all relevant checks pass or every skip is documented. If a check cannot be made to pass, stop and leave the artifact in a documented deferred state; do not commit or hand off a dirty artifact. Done when: all relevant checks pass or every skip is documented and the artifact is in a clean or documented-deferred state.
 
 ## Failure and recovery
 - **Check fails and fix fails or is unavailable:** Report the failure class and the specific finding. Stop. The artifact is not done, committed, or handed off.
@@ -34,7 +34,7 @@ description: 'Use when an artifact or skill has just changed and is about to be 
 - Partial-result rule: if any check fails and cannot be resolved, the done predicate is not met regardless of other passing checks.
 
 ## Output
-The artifact is changed with all check findings applied, or the check log records every skip with its reason. A concrete check-run report is emitted: artifact path, checks invoked, results per check, and any deferred items with stated reasons.
+The artifact with all check findings applied, or the check log recording every skip with its reason — plus a concrete check-run report naming artifact path, checks invoked, results per check, and any deferred items with stated reasons.
 
 ## Provenance
 

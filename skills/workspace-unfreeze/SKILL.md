@@ -17,24 +17,24 @@ disable-model-invocation: true
 
 ## Inputs
 
-- A path argument naming the frozen path to unfreeze. Required.
+- **Path** (required): the frozen path to unfreeze.
 
 ## Procedure
 
-1. Receive the path argument from the explicit /workspace-unfreeze invocation. Do not act on any model-generated or inferred path.
-2. Locate the freeze lock marker file associated with the named path. If no marker exists, the path is already editable; report that and stop.
-3. Before deleting, preview the marker file path and state the consequence: the freeze guardrail on that path will be removed and the path will become editable.
-4. Delete only that single marker file. Do not delete any other file, do not edit the protected path's contents, and do not touch any other freeze marker.
-5. Confirm the marker file is gone and the named path is editable again.
+1. Receive the path argument from the explicit /workspace-unfreeze invocation. Do not act on any model-generated or inferred path. Done when: the path argument is confirmed as human-supplied.
+2. Locate the freeze lock marker file associated with the named path. If no marker exists, the path is already editable; report that and stop. Done when: the marker file path is known or the path is confirmed already editable.
+3. Before deleting, preview the marker file path and state the consequence: the freeze guardrail on that path will be removed and the path will become editable. Done when: the human has seen the preview and the consequence.
+4. Delete only that single marker file. Do not delete any other file, do not edit the protected path's contents, and do not touch any other freeze marker. Done when: the single marker file is deleted.
+5. Confirm the marker file is gone and the named path is editable again. Done when: the marker file is absent and the path is editable.
 
 ## Failure and recovery
-- Marker not found: the path is already unfrozen. Report this state; do not delete anything. Done predicate holds.
-- Path argument missing: stop and request the path. Do not guess or scan for frozen paths.
-- Deletion fails (permission, missing parent, I/O error): report the exact error, leave all markers in place, and return blocked. Do not widen scope or attempt partial deletion.
-- Marker exists for a path other than the one named: do not delete it; report the mismatch and stop.
+- **Marker not found**: the path is already unfrozen. Report this state; do not delete anything. Done predicate holds.
+- **Path argument missing**: stop and request the path. Do not guess or scan for frozen paths.
+- **Deletion fails** (permission, missing parent, I/O error): report the exact error, leave all markers in place, and return blocked. Do not widen scope or attempt partial deletion.
+- **Marker exists for a different path**: do not delete it; report the mismatch and stop.
 
 ## Output
-A terminal report stating which path was unfrozen (or that it was already editable), and confirmation that the freeze lock marker for that path is absent so the path is editable again.
+Terminal report naming the unfrozen path (or stating it was already editable) and confirming the freeze lock marker is absent.
 
 ## Provenance
 

@@ -83,7 +83,7 @@ trait Api {
 }
 ```
 
-The SDK-style approach yields:
+SDK-style interfaces provide:
 
 - One mock per shape; no conditionals in test setup
 - Visible call surface: readers see which endpoints a test exercises

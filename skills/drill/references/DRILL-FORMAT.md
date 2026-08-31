@@ -1,4 +1,4 @@
-# DRILL Format
+# Drill format
 
 ## Template
 
@@ -39,7 +39,7 @@
 ## Rules
 
 - One exercise per block. Mixed-concept quizzes get one block per item.
-- Criterion in the rubric is checkable: a named condition the attempt either meets or misses.
-- Misconception entries carry symptom, what it reveals, and the correction; never just "wrong".
+- The rubric criterion must be checkable: a named condition the attempt either meets or misses.
+- Each misconception entry must include the symptom, what it reveals, and the correction; never just "wrong".
 - Keep the hint tiers in order; never combine nudge and strategy into one line.
 - Record the attempt in `PROGRESS.md` before revealing the next rung.

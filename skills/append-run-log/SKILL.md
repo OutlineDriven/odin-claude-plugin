@@ -1,6 +1,6 @@
 ---
 name: append-run-log
-description: 'Use when a completed agent run must be recorded as durable, queryable evidence. Appends exactly one entry to the append-only JSONL run log under an ISO-only date guard, prunes entries older than the declared retention window, and updates the last-run pointer so aggregate metrics are derivable from the log alone. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a completed agent run must be recorded as durable, queryable evidence. Appends one entry to the JSONL run log under an ISO date guard, prunes expired entries, and updates the last-run pointer. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Append run log
@@ -25,13 +25,12 @@ description: 'Use when a completed agent run must be recorded as durable, querya
 
 ## Procedure
 
-1. Validate inputs at the trust boundary before any mutation: `run_id` is non-empty; `started_at` and `ended_at` parse as ISO 8601 UTC and `ended_at` is not before `started_at`; `metrics` is a JSON object. Reject any timestamp that is not ISO-only. Scan the log for an existing line whose parsed `run_id` equals the supplied one; if found, stop with `rejected-duplicate` and do not mutate.
-2. Bound scope: open `log_path` in append-only mode. Do not read-modify-write or rewrite any prior line.
-3. Compose one JSONL entry as a single line: `run_id`, `started_at`, `ended_at`, `metrics`, and `date` set to the ISO date portion of `ended_at` as the date guard.
-4. Append the entry as exactly one line terminated by a newline, then flush. No other line is altered.
-5. If `retention_window` is supplied, compute the cutoff from the current UTC date minus the window. Delete whole lines whose `date` precedes the cutoff. Never alter the content of a surviving line; deletion is the only mutation permitted on prior entries.
-6. Update the last-run pointer at `last_run_pointer_path` to an object containing the new `run_id` and `ended_at`.
-7. Verify the done predicate: the log contains exactly one line with this `run_id`; any malformed existing line is skipped during this check rather than rewritten; the entry's `metrics` are sufficient to derive aggregates without any external source.
+1. Validate inputs at the trust boundary before any mutation: `run_id` is non-empty; `started_at` and `ended_at` parse as ISO 8601 UTC and `ended_at` is not before `started_at`; `metrics` is a JSON object. Reject any timestamp that is not ISO-only. Scan the log for an existing line whose parsed `run_id` equals the supplied one; if found, stop with `rejected-duplicate` and do not mutate. Done when: inputs parse and no duplicate `run_id` exists.
+2. Bound scope: open `log_path` in append-only mode. Do not read-modify-write or rewrite any prior line. Done when: `log_path` is open in append-only mode.
+3. Compose one JSONL entry as a single line: `run_id`, `started_at`, `ended_at`, `metrics`, and `date` set to the ISO date portion of `ended_at` as the date guard. Done when: the entry is a single line with all fields and metrics sufficient to derive aggregates.
+4. Append the entry as exactly one line terminated by a newline, then flush. No other line is altered. Done when: exactly one line with this `run_id` exists in the log.
+5. If `retention_window` is supplied, compute the cutoff from the current UTC date minus the window. Delete whole lines whose `date` precedes the cutoff. Never alter the content of a surviving line; deletion is the only mutation permitted on prior entries. Done when: expired lines are deleted and surviving lines are unaltered.
+6. Update the last-run pointer at `last_run_pointer_path` to an object containing the new `run_id` and `ended_at`. Done when: the pointer contains the new `run_id` and `ended_at`.
 
 ## Failure and recovery
 - `rejected-invalid-input` — a required input is missing, a timestamp is not ISO-only, or `metrics` is not a JSON object. No mutation occurs. Report the rejected field and stop.

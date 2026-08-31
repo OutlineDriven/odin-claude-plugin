@@ -1,6 +1,6 @@
-# Evaluation Rubric
+# Evaluation rubric
 
-The **orchestrator** applies this to decide each item's verdict **before** any fix is dispatched. This is the legitimacy gate: judgment happens here, in the one context that holds every thread at once -- not inside an isolated fixer that has lost the author's design intent. Read the actual code when a verdict turns on it; never decide validity from the comment text alone.
+The **orchestrator** assigns each item's verdict **before** dispatching any fix. Keep this legitimacy judgment in the one context that holds every thread, not in an isolated fixer that lacks the author's design intent. Read the actual code when a verdict depends on it; never judge validity from the comment text alone.
 
 The output of applying this rubric is a verdict per item, sorted into:
 - **fix-list** -- `fixed` / `fixed-differently` intent; dispatched to fixers.
@@ -22,14 +22,14 @@ Read enough to decide the verdict, no more:
 - **Recover the author's intent before overriding deliberate-looking code.** `git log`/`git blame` the lines, read the PR description and the surrounding code. The intent the author had is the thing an isolated reviewer lacked; weigh it against the finding rather than assuming the reviewer saw more.
 - **Dedup reads by file.** Multiple threads on the same file: read it once, judge them together.
 
-## Cross-item reasoning (when judging more than one item)
+## Cross-item reasoning when judging more than one item
 
 You hold every thread at once -- use that:
 
 - **Cluster by root assumption.** If one source (often a bot) makes the same kind of claim across several threads and you find it doesn't hold in one place, scrutinize the siblings: a systematically-wrong premise produces a cluster of plausible-but-wrong findings. This is the single biggest advantage of judging centrally instead of per-isolated-agent.
 - **Converging requests are a strong fix signal.** The same change asked for by multiple independent reviewers rarely warrants a divert.
 
-## Diverts (apply per item)
+## Diverts applied per item
 
 Divert from fixing only on a concrete signal:
 

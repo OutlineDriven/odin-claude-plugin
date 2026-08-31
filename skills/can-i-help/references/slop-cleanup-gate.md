@@ -1,4 +1,4 @@
-# Slop Cleanup Gate
+# Slop cleanup gate
 
 Cleanup candidates are attractive but dangerous because "deletion-only" is easy to overclaim.
 

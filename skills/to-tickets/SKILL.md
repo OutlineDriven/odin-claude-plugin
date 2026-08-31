@@ -1,6 +1,6 @@
 ---
 name: to-tickets
-description: 'Use when a settled plan needs implementation tickets, tracer bullets, or expand-contract sequencing published as blocker-linked GitHub issues or local ticket files, and a human invokes the publication. Don''t use for implementation, unsupervised publication, or changes beyond the approved ticket set and the plan''s Delivery section.'
+description: 'Publish a settled plan as blocker-linked implementation tickets, vertical path first. Also handles expand-migrate-contract sequencing when refactors cannot land green. Not for implementation — use work; not for unsupervised publication.'
 disable-model-invocation: true
 ---
 
@@ -27,74 +27,39 @@ Optional:
 - A parent issue reference, used only in the GitHub issue body.
 - A feature slug for the local file layout, taken from the plan when one is present and supplied by the human otherwise.
 
+## Refusals
+
+- Will not draft from an unsettled plan.
+- Will not publish before the human approves the complete draft, exact targets, and consequence.
+- Will not implement the tickets or mutate anything beyond the approved ticket set and the source plan's Delivery section.
+- Will not invent storage when the repository answers it.
+
 ## Procedure
 
-1. Check the plan is settled: the route is decided and implementation has not begun. If not, stop, publish nothing, and name what is unsettled.
+1. Check the plan is settled: the route is decided and implementation has not begun. If not, stop, publish nothing, and name what is unsettled. **Done when:** the plan is confirmed settled.
 
-2. Draft tickets as vertical slices. Cut each slice as a narrow but complete path through every layer it needs, make each completed slice demoable or verifiable on its own, and size each slice to fit one fresh context window. Put prefactoring first: make the change easy, then make the easy change.
+2. Draft tickets as vertical slices. Cut each slice as a narrow but complete path through every layer it needs, make each completed slice demoable or verifiable on its own, and size each slice to fit one fresh context window. Put prefactoring first: make the change easy, then make the easy change. **Done when:** every ticket is a bounded, independently verifiable vertical slice.
 
-3. Give every ticket its blocked-by list: the tickets that must finish before it can start. A ticket with no blockers starts immediately. The execution frontier is any ticket whose blockers are all done.
+3. Give every ticket its blocked-by list: the tickets that must finish before it can start. A ticket with no blockers starts immediately. The execution frontier is any ticket whose blockers are all done. **Done when:** every ticket declares its blockers and the frontier is identifiable.
 
 4. Sequence a wide refactor — one mechanical change whose blast radius fans across the codebase so no vertical slice can land green — as expand, migrate, then contract:
    - **Expand.** Add the new form beside the old form so nothing breaks.
    - **Migrate.** Move call sites in batches sized by blast radius. Make each batch a ticket blocked by the expand ticket, and keep CI green between batches because the old form still exists.
    - **Contract.** Delete the old form in a final ticket blocked by every migrate ticket.
 
-   When a migrate batch cannot stay green alone, keep the sequence but use a shared integration branch: every batch then blocks one final integrate-and-verify ticket, and green is promised only at that final ticket.
+   When a migrate batch cannot stay green alone, keep the sequence but use a shared integration branch: every batch then blocks one final integrate-and-verify ticket, and green is promised only at that final ticket. **Done when:** each wide refactor has an expand-migrate-contract dependency chain, with an integration ticket where required.
 
-5. Present the draft as a numbered list showing each ticket's title, blocked-by list, and delivered behavior. Ask whether the granularity is right, whether each blocking edge genuinely gates its ticket, and whether any ticket should merge with another or split further. Iterate until the human approves. Publish nothing before approval.
+5. Present the draft as a numbered list showing each ticket's title, blocked-by list, and delivered behavior. Ask whether the granularity is right, whether each blocking edge genuinely gates its ticket, and whether any ticket should merge with another or split further. Iterate until the human approves. Publish nothing before approval. **Done when:** the human approves the complete draft.
 
 6. Resolve storage from the repository; never ask when the repository answers it.
    - **GitHub remote present.** Publish one issue per ticket in dependency order, blockers first, so each edge references a real identifier. Use native blocking or sub-issue links when GitHub provides them; otherwise add a `Blocked by` section. Apply `ready-for-agent` only when the repository already defines that label.
-   - **No GitHub remote.** Write one file per ticket at `.outline/to-tickets/<feature-slug>/<NN>-<slug>.md`. Number files from `01` in dependency order, blockers first. Never combine tickets into one file.
+   - **No GitHub remote.** Write one file per ticket at `.outline/to-tickets/<feature-slug>/<NN>-<slug>.md`. Number files from `01` in dependency order, blockers first. Never combine tickets into one file. **Done when:** every approved ticket is published in dependency order to the resolved storage.
 
-7. Fill each ticket body from these templates.
+7. Fill each ticket body from the matching storage branch in `references/ticket-templates.md`. **Done when:** every ticket follows its template and preserves the plan's decisions.
 
-   Local file:
+8. Write the published issue URLs or file paths back into the source plan's Delivery section so the plan links every published ticket. If the plan has no Delivery section, add one at the end. **Done when:** the Delivery section links every real published identifier or path.
 
-   ```markdown
-   # <NN>: <Ticket title>
-
-   ## What to build
-
-   <End-to-end behavior from the user's point of view, not a layer-by-layer list.>
-
-   ## Blocked by
-
-   <Ticket numbers and titles, or "None, can start immediately".>
-
-   ## Acceptance criteria
-
-   - [ ] Observable criterion one
-   - [ ] Observable criterion two
-   ```
-
-   GitHub issue:
-
-   ```markdown
-   ## Parent
-
-   <Optional parent issue reference. Omit this section when there is no parent.>
-
-   ## What to build
-
-   <End-to-end behavior from the user's point of view, not a layer-by-layer list.>
-
-   ## Blocked by
-
-   <Issue references, or "None, can start immediately".>
-
-   ## Acceptance criteria
-
-   - [ ] Observable criterion one
-   - [ ] Observable criterion two
-   ```
-
-   Omit file paths and code snippets because they go stale. A prototype-produced snippet may be inlined when it records a decision more precisely than prose, such as a state machine, reducer, schema, or type shape; trim it to the decision-rich part and state that it came from a prototype.
-
-8. Write the published issue URLs or file paths back into the source plan's Delivery section so the plan links every published ticket. If the plan has no Delivery section, add one at the end.
-
-9. Report the identifier or path of every published ticket, its blocked-by edges, and the plan location updated.
+9. Report the identifier or path of every published ticket, its blocked-by edges, and the plan location updated. **Done when:** the report accounts for every approved ticket.
 
 ## Failure and recovery
 - **Unsettled plan.** Stop before drafting; publish nothing; return what is undecided.
@@ -104,7 +69,8 @@ Optional:
 - **Blocked result.** Return blocked with the stop reason, the draft state, and the exact published-or-unpublished status of every ticket. Never swallow a publishing error or claim the done predicate while any ticket is unpublished or unlinked.
 
 ## Output
-The published ticket set — one GitHub issue or one local file per ticket, each declaring its blockers with the vertical end-to-end path first — the source plan's Delivery section linking every published ticket, and a report giving each ticket's identifier and blocked-by edges. Terminal classifications: published-complete when the done predicate holds, blocked otherwise with the exact remainder.
+
+The published ticket set ordered blockers-first, then the source plan's Delivery links, then a report of each identifier/path and blocked-by edge; terminal classification is published-complete only when every approved ticket is published and linked, otherwise blocked with the exact remainder.
 
 ## Provenance
 

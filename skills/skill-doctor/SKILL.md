@@ -1,6 +1,6 @@
 ---
 name: skill-doctor
-description: 'Use when a user wants agent setup graded from conversation history. Produces an HTML report with scores, findings, and evidence-cited suggestions. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a user wants agent setup graded from conversation history. Produces an HTML report with 0-10 scores, evidence-cited findings, and ranked suggestions. Not for skill fixing — use skill-improver; not for security scanning — use skill-scanner.'
 ---
 
 # Skill doctor
@@ -28,12 +28,14 @@ description: 'Use when a user wants agent setup graded from conversation history
    - Locate the conversation history from the supplied path, directory, or default harness log.
    - If no transcript is found, write a minimal report.html stating "No conversation history found" and stop.
    - Read the transcript file. If the file is empty or contains fewer than 2 turns, write a minimal report.html stating "Session too short to assess" and stop.
+   Done when: the transcript is located and read, or a minimal report is written for the empty/short case.
 
 2. **Decode transcript into structured turns.**
    - Parse each message into a turn record with fields: `role` (user/assistant/tool), `content` (text), `tool_name` (if applicable), `tool_input` (if applicable), `tool_output` (if applicable), `timestamp` (if available).
    - For JSON/JSONL transcripts, parse each line or object directly.
    - For plain-text logs, identify turn boundaries by role markers (e.g., "User:", "Assistant:", "Tool:", or harness-specific prefixes). Extract tool calls from fenced code blocks or structured markers.
    - Produce an ordered list of turn records.
+   Done when: an ordered list of turn records is produced.
 
 3. **Score efficiency (0-10).**
    Evaluate the agent's task-completion efficiency against these criteria:
@@ -42,6 +44,7 @@ description: 'Use when a user wants agent setup graded from conversation history
    - **Retry waste** (0-2, inverted): How many failed attempts or redundant retries occurred? 2 = none, 1 = one retry, 0 = multiple retries.
    - **Turn economy** (0-2, inverted): Was the turn count reasonable for the task complexity? 2 = concise, 1 = slightly verbose, 0 = significantly excessive turns.
    - Sum sub-scores for the raw efficiency score (0-10).
+   Done when: the efficiency score (0-10) is computed.
 
 4. **Score code quality (0-10).**
    Evaluate the agent's code changes against these criteria:
@@ -51,10 +54,12 @@ description: 'Use when a user wants agent setup graded from conversation history
    - **Regression avoidance** (0-2): Did changes avoid introducing bugs, dead code, or broken imports? 2 = clean, 1 = minor issues, 0 = introduced regressions.
    - Sum sub-scores for the raw code quality score (0-10).
    - If the session contains no code changes, set code quality to N/A and note this in findings.
+   Done when: the code quality score (0-10 or N/A) is computed.
 
 5. **Normalize scores.**
    - Efficiency normalized = raw efficiency score (already 0-10).
    - Code quality normalized = raw code quality score (already 0-10), or N/A if no code changes.
+   Done when: both scores are normalized.
 
 6. **Compile findings with evidence.**
    - For each sub-score that is not at maximum, produce a finding with:
@@ -63,6 +68,7 @@ description: 'Use when a user wants agent setup graded from conversation history
      - Evidence: cite specific turn numbers and content excerpts that justify the score.
      - Suggestion: one concrete, actionable improvement.
    - Rank suggestions by potential score impact (highest possible improvement first).
+   Done when: all non-maximum sub-scores have findings with evidence and ranked suggestions.
 
 7. **Generate report.html.**
    - Create the output directory.
@@ -73,10 +79,12 @@ description: 'Use when a user wants agent setup graded from conversation history
      - Findings section: each finding as a card with category, score, evidence block (cited turn excerpts in a styled blockquote), and suggestion.
      - Suggestions summary: ranked list of all improvement suggestions.
    - Use clean, readable styling: white background, dark text, clear section headings, adequate spacing. No external fonts, no JavaScript, no network dependencies.
+   Done when: report.html is written with all sections present.
 
 8. **Verify report.**
    - Confirm report.html exists in the output directory.
    - Confirm it contains the score summary, at least one finding, and at least one suggestion (unless the session was too short or had no history, in which case the minimal report satisfies the done predicate).
+   Done when: report.html exists and contains the required sections.
 
 ## Failure and recovery
 | Failure class | Detection | Response |
@@ -93,11 +101,7 @@ Rollback: delete the entire scratch output directory to undo all effects.
 Non-converged result: if the report cannot be generated at all, the skill returns a text description of the failure reason without creating any files.
 
 ## Output
-A self-contained report.html in the scratch output directory containing:
-- Normalized 0-10 efficiency score (always).
-- Normalized 0-10 code quality score, or N/A if no code changes in session.
-- Per-category findings with evidence-cited turn excerpts.
-- Ranked improvement suggestions with potential score impact.
+A self-contained report.html in the scratch output directory: normalized 0-10 efficiency score (always), normalized 0-10 code quality score or N/A, per-category findings with evidence-cited turn excerpts, and ranked improvement suggestions with potential score impact.
 
 ## Provenance
 

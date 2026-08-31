@@ -1,6 +1,6 @@
 ---
 name: review-reception-protocol
-description: 'Use when asked to receive code review feedback: clarify every item, implement accepted items locally with tests, draft technical pushback for questionable items, and stop before any GitHub reply or remote mutation. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to receive code review feedback: clarify every item, implement accepted items locally with tests, draft technical pushback for questionable items, and stop before any GitHub reply or remote mutation. Not for posting replies — use resolve-pr-feedback.'
 ---
 
 # Review reception protocol
@@ -23,7 +23,7 @@ description: 'Use when asked to receive code review feedback: clarify every item
 ## Procedure
 
 1. **Extract every distinct feedback item** from the review. Do not combine, rephrase, or infer unstated items.
-2. **Clarify each item before acting on it**. Ask the user (or infer from context) the precise intent behind each suggestion. Stop if the item cannot be resolved to a concrete, implementable statement.
+2. **Clarify each item before acting on it**. Resolve the precise intent behind each suggestion from context or by asking the user. Stop if the item cannot be resolved to a concrete, implementable statement.
 3. **Classify each clarified item**:
    - *Accepted*: the suggestion aligns with the codebase and the user's intent.
    - *Questionable*: the suggestion is technically incorrect, out of scope, or conflicts with design intent.
@@ -31,7 +31,7 @@ description: 'Use when asked to receive code review feedback: clarify every item
    a. Apply the change to the relevant source file.
    b. Write or update a test that covers the change.
    c. Verify the test passes before moving to the next item.
-5. **Draft factual pushback for questionable items**. Write a concise, technically grounded reply in a local draft file. State the specific reason the suggestion is not accepted (e.g., design conflict, incorrect assumption, out of scope). Do not post it.
+5. **Draft factual pushback for questionable items**. Write a concise, technically grounded reply in a local draft file. State the specific reason the suggestion is not accepted, such as a design conflict, incorrect assumption, or scope mismatch. Do not post it.
 6. **Stop**. Do not post any GitHub reply, open any issue, trigger any CI pipeline, or otherwise mutate any remote system.
 
 ## Failure and recovery

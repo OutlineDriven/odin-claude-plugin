@@ -1,6 +1,6 @@
 ---
 name: compile-3d-workflow
-description: 'Use when the user asks for direction and a compilable 3D workflow from an interview. Interview for direction and produce a verified compilable local 3D workflow artifact combining graph topology, ontology groups, and feedback loops. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user asks for direction and a compilable 3D workflow from an interview. Produces a verified local artifact combining graph topology, ontology groups, and feedback loops. No remote, credential, publish, deploy, or irreversible mutation.'
 ---
 
 # Compile 3D workflow
@@ -21,14 +21,15 @@ description: 'Use when the user asks for direction and a compilable 3D workflow 
 
 ## Procedure
 
-1. Conduct the direction interview. Ask the user for the problem, success criteria, binding constraints, and explicit out-of-scope. Record the answers verbatim.
+1. Conduct the direction interview. Ask the user for the problem, success criteria, binding constraints, and explicit out-of-scope. Record the answers verbatim. Done when: all four interview inputs are recorded verbatim or the missing input is named and the skill stops.
 2. Compile the 3D workflow artifact from the interview answers, combining three dimensions:
    - **Graph topology**: a semi-deterministic DAG of tasks with named dependencies. The skeleton is fixed; routing inside it may change dynamically.
    - **Ontology groups**: named concept clusters that classify the work domains, each non-empty.
    - **Feedback loops**: cybernetic control cycles, each naming its sensor (what is measured), comparator (what is expected), and actuator (what action re-routes).
-3. Verify the artifact compiles: every task node has defined dependencies; every ontology group is non-empty and named; every feedback loop names its sensor, comparator, and actuator; the skeleton is fixed while internal routing may vary.
-4. If the user requested tracker projection, prepare a projection plan or payload mapping workflow nodes to tracker items. Write it to a local file. Do not create, update, or bulk-mutate any remote tracker item. Stop and hand the plan or payload to the human.
-5. Write the verified artifact to a local file. State the rollback path: delete the local artifact file and, if present, the projection file. No remote state was touched.
+   Done when: the artifact combines all three dimensions from the interview answers.
+3. Verify the artifact compiles: every task node has defined dependencies; every ontology group is non-empty and named; every feedback loop names its sensor, comparator, and actuator; the skeleton is fixed while internal routing may vary. Done when: every compile check passes or the specific defect is named and the skill stops.
+4. If the user requested tracker projection, prepare a projection plan or payload mapping workflow nodes to tracker items. Write it to a local file. Do not create, update, or bulk-mutate any remote tracker item. Stop and hand the plan or payload to the human. Done when: the projection plan or payload is written locally and no remote tracker item was mutated.
+5. Write the verified artifact to a local file. State the rollback path: delete the local artifact file and, if present, the projection file. No remote state was touched. Done when: the artifact file is written and the rollback path is stated.
 
 ## Failure and recovery
 - **Interview incomplete**: if the user cannot supply the problem, success criteria, constraints, or scope, stop and report which inputs are missing. Do not infer or fabricate direction.
@@ -37,8 +38,7 @@ description: 'Use when the user asks for direction and a compilable 3D workflow 
 - **Non-mutation rule**: no remote tracker item is created, updated, or bulk-mutated by this skill. Rollback is local file deletion; no remote state requires recovery.
 
 ## Output
-- A compilable local 3D workflow artifact file combining graph topology, ontology groups, and feedback loops, verified against the compile checks.
-- Optionally, a local tracker projection plan or payload file, not executed.
+Compilable local 3D workflow artifact file (graph topology, ontology groups, feedback loops, verified against compile checks), optionally a local tracker projection plan or payload file (not executed).
 
 ## Provenance
 

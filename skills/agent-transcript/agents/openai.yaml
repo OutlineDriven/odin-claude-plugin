@@ -1,3 +1,3 @@
 interface:
   display_name: "Agent Transcript"
-  short_description: "Append a redacted trimmed agent transcript to a PR or issue body"
+  short_description: "Use when a redacted, trimmed agent transcript must be appended"

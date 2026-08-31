@@ -1,3 +1,3 @@
 interface:
   display_name: "Keep Why Setup Wizard"
-  short_description: "Configure research knowledge store on first activation"
+  short_description: "Use when a project's first activation or a missing personal"

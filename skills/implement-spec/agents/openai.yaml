@@ -1,3 +1,3 @@
 interface:
   display_name: "Implement Spec"
-  short_description: "Execute a ticket DAG into a green draft PR"
+  short_description: "Use when a ticket DAG from a complete specification needs"

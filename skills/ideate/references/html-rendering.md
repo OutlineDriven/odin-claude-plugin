@@ -1,6 +1,6 @@
 # `ideate` HTML view — render `docs/ideation/<slug>.md` for human reading
 
-The opt-in rendering reference for `ideate`. The skill is markdown-default: `docs/ideation/<slug>.md` is written every run and is the canonical surface. The `format:html` flag renders a second file, `docs/ideation/<slug>.html`, as a human-reading **view derived from that markdown**. Read this file only when a run carries `format:html`.
+This reference defines opt-in HTML rendering for `ideate`. Every run writes the canonical `docs/ideation/<slug>.md`. The `format:html` flag also renders `docs/ideation/<slug>.html` as a human-readable **view derived from that markdown**. Read this file only when a run carries `format:html`.
 
 ## When to render HTML
 
@@ -27,7 +27,7 @@ The markdown has a fixed shape (subject statement, `## Grounding`, `## Survivors
 - **Rejected** — a `<table>`: Candidate | Rejection rationale, one row per loser. Losers stay visible and explained; never drop the table to "tidy" the view.
 - **Next step** — `<section>` restating the `askme` handoff.
 
-## Style — opinionated fallback, honored preferences win
+## Style: opinionated fallback, honored preferences win
 
 Honor style preferences in order, highest first:
 
@@ -38,7 +38,7 @@ Honor style preferences in order, highest first:
 
 The single-file invariant holds across all four tiers.
 
-## No JS framework runtimes
+## No JavaScript framework runtimes
 
 A small inline `<script>` for anchor or TOC behavior is acceptable; React/Vue/Svelte or any framework bundle is not. An ideation doc is short — a static layout almost always suffices.
 

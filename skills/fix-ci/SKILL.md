@@ -1,6 +1,6 @@
 ---
 name: fix-ci
-description: 'Use when a PR or branch has failing CI checks. Don''t use for local test failures without CI or for feature implementation.'
+description: 'Use when a PR or branch has failing CI checks. Not for GitHub PR-specific CI repair with remote push — use gh-fix-ci; not for local test failures without CI or feature implementation.'
 disable-model-invocation: true
 ---
 
@@ -23,14 +23,14 @@ disable-model-invocation: true
 
 ## Procedure
 
-1. Identify the target PR or branch. Pull the current check status and the full list of failing checks with their logs.
-2. Triage every failing check: classify each as a root cause or a downstream symptom of another failure. A single root cause may surface as several failing checks. Order the work so root causes are fixed before the symptoms they produce.
-3. For each root-cause failure, read the failure log and the relevant source to determine the minimal change that resolves the cause. Do not widen scope beyond that cause.
-4. Apply the minimal fix. Run the local equivalent of the failing CI check to confirm the fix before any push.
-5. Commit the fix with a message naming the root cause and the check it repairs.
-6. Push the fix to the PR or branch remote. This is an irreversible remote mutation; push only after the local check passes and only for a change tied to a failing check.
-7. Observe the re-run CI checks. If new failures appear, repeat from step 2 treating the new failures as the current set. Stop only when every check in the set is green.
-8. Produce the ordered root-cause record: for each root cause, the check name, the root cause, the minimal fix applied, and the commit SHA.
+1. Identify the target PR or branch. Pull the current check status and the full list of failing checks with their logs. Done when: every failing check is named with its log.
+2. Triage every failing check: classify each as a root cause or a downstream symptom of another failure. A single root cause may surface as several failing checks. Order the work so root causes are fixed before the symptoms they produce. Done when: every failing check is classified as root cause or symptom, and the work is ordered.
+3. For each root-cause failure, read the failure log and the relevant source to determine the minimal change that resolves the cause. Do not widen scope beyond that cause. Done when: the minimal fix for each root cause is determined from the log and source.
+4. Apply the minimal fix. Run the local equivalent of the failing CI check to confirm the fix before any push. Done when: the local check passes for the fix.
+5. Commit the fix with a message naming the root cause and the check it repairs. Done when: the fix is committed with a root-cause-naming message.
+6. Push the fix to the PR or branch remote. This is an irreversible remote mutation; push only after the local check passes and only for a change tied to a failing check. Done when: the fix is pushed to the remote.
+7. Observe the re-run CI checks. If new failures appear, repeat from step 2 treating the new failures as the current set. Stop only when every check in the set is green. Done when: every check in the target set is green, or new failures restart the loop from step 2.
+8. Produce the ordered root-cause record: for each root cause, the check name, the root cause, the minimal fix applied, and the commit SHA. Done when: the root-cause record is produced with all four fields per root cause.
 
 ## Failure and recovery
 - Local check does not reproduce the CI failure: do not push. Report the reproduction gap and attach the CI log as the blocked state.

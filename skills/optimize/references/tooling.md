@@ -1,12 +1,11 @@
-# Optimize — Tooling Matrix & Harness Templates
+# Optimize: tooling matrix and harness templates
 
 Used in Phase 2 (light locate) and Phase 3 (baseline benchmark) of the `/optimize` workflow.
-A profiling/locate tooling matrix, extended
-with benchmark harness templates for Phase 3's author-a-harness path.
+This matrix pairs profiling and location tools with benchmark harness templates for Phase 3.
 
 ---
 
-## Per-Language Tooling Matrix
+## Per-language tooling matrix
 
 | Language | CPU profiler | Memory/alloc profiler | Benchmark / differential |
 |---|---|---|---|
@@ -25,7 +24,7 @@ with benchmark harness templates for Phase 3's author-a-harness path.
 
 ---
 
-## Minimal Harness Templates
+## Minimal harness templates
 
 Use these when Phase 3 finds no existing benchmark harness for the hot path. It is a **throwaway
 instrument** — its only purpose is to measure `HOT_PATH` in isolation with realistic inputs.
@@ -167,7 +166,7 @@ let () =
 
 ---
 
-## Measurement Discipline
+## Measurement discipline
 
 - **stddev > 20 % of median** — stop and fix measurement noise before proceeding.
   Causes: CPU frequency scaling, background load, cold cache, OS jitter.

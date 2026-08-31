@@ -1,6 +1,6 @@
 ---
 name: factory-mcp-bootstrap
-description: 'Use when someone outside Warp wants to wire a third-party coding agent (Claude Code, Codex, or Cursor) to a Warp Factory MCP endpoint. Confirms the oz CLI, runs login, mints a 30-day API key, writes a bearer-token MCP registration, and verifies the endpoint. Don''t use for remote publish, deploy, or changes beyond the local MCP registration and credential.'
+description: 'Use when someone outside Warp wants to wire a third-party coding agent (Claude Code, Codex, or Cursor) to a Warp Factory MCP endpoint: confirm the oz CLI, run login, mint a 30-day API key, write a bearer-token MCP registration, and verify the endpoint.'
 disable-model-invocation: true
 ---
 
@@ -23,19 +23,20 @@ disable-model-invocation: true
 
 ## Procedure
 
-1. Confirm the `oz` CLI is installed by running `oz --version`. If it is not on PATH, tell the user that `oz` is required and stop. Do not invent or guess an install command.
-2. Run `oz login` and let the human complete authentication interactively. Do not proceed until login succeeds.
-3. Mint a 30-day API key with `oz` and export it as `WARP_API_KEY` in the shell environment that will launch the target harness.
-4. Determine the target harness and write its MCP registration pointing at `{server_root}/api/v1/mcp/factory` with an `Authorization: Bearer $WARP_API_KEY` header:
+1. Confirm the `oz` CLI is installed by running `oz --version`. If it is not on PATH, tell the user that `oz` is required and stop. Do not invent or guess an install command. Done when: oz is confirmed installed, or the user is told it is required and the skill stops.
+2. Run `oz login` and let the human complete authentication interactively. Do not proceed until login succeeds. Done when: login succeeds.
+3. Mint a 30-day API key with `oz` and export it as `WARP_API_KEY` in the shell environment that will launch the target harness. Done when: WARP_API_KEY is exported.
+4. Write the target harness's MCP registration. Point it at `{server_root}/api/v1/mcp/factory` and set the `Authorization: Bearer $WARP_API_KEY` header:
    - **Claude Code**: add the server via the harness MCP config command or by editing its MCP settings file.
    - **Codex**: add the server entry to the Codex MCP configuration.
    - **Cursor**: add the server entry to the Cursor MCP configuration.
-5. Restart or reload the harness so it picks up the new registration.
-6. Call `tools/list` on the registered endpoint and confirm the ten Factory tools are present.
-7. Call `list_factories` and confirm the response is not an authentication error. An empty list is acceptable.
-8. Confirm the endpoint serves its factory setup document: `resources/list` includes the document URI and `resources/read` returns its content without an auth error.
-9. If the user explicitly requested a factory, create it now; otherwise skip.
-10. Tell the user setup is done, hand off, and stop.
+   Done when: the MCP registration is written for the target harness.
+5. Restart or reload the harness so it picks up the new registration. Done when: the harness picks up the new registration.
+6. Call `tools/list` on the registered endpoint and confirm the ten Factory tools are present. Done when: the ten Factory tools are present.
+7. Call `list_factories` and confirm the response is not an authentication error. An empty list is acceptable. Done when: the response is not an auth error (empty list allowed).
+8. Confirm the endpoint serves its factory setup document: `resources/list` includes the document URI and `resources/read` returns its content without an auth error. Done when: resources/list includes the document URI and resources/read returns content without an auth error.
+9. If the user explicitly requested a factory, create it now; otherwise skip. Done when: the factory is created or skipped.
+10. Tell the user setup is done, hand off, and stop. Done when: the user is told setup is done and the agent stops.
 
 ## Failure and recovery
 - **oz not installed**: tell the user `oz` is required and stop. Never invent an install command.

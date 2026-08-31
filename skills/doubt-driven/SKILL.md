@@ -1,6 +1,6 @@
 ---
 name: doubt-driven
-description: 'Use when a non-trivial decision sits under uncertainty and correctness matters more than speed; returns fresh-context adversarial review findings with classified reconciliation and a met stop condition. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when a non-trivial decision sits under uncertainty and correctness matters more than speed. Returns fresh-context adversarial findings with classified reconciliation and a stop condition. Not for patch review — use review; not for plan attacks — use advocate.'
 ---
 
 # Doubt-driven development
@@ -22,8 +22,8 @@ description: 'Use when a non-trivial decision sits under uncertainty and correct
 
 ## Procedure
 
-1. **CLAIM.** Name the non-trivial decision compactly as `CLAIM: "<statement>"` plus `WHY THIS MATTERS: <consequence>`. A decision that cannot be stated that compactly is a vibe, not a decision; surface it before scrutinizing.
-2. **EXTRACT.** Isolate the smallest reviewable unit: the artifact and the contract, stripped of the reviewer's reasoning. Handing over conclusions yields back validation of those conclusions. A 500-line PR decomposes first; the unit must fit one read.
+1. **CLAIM.** Name the non-trivial decision compactly as `CLAIM: "<statement>"` plus `WHY THIS MATTERS: <consequence>`. A decision that cannot be stated that compactly is a vibe, not a decision; surface it before scrutinizing. Done when: the decision is stated as a compact CLAIM with its consequence.
+2. **EXTRACT.** Isolate the smallest reviewable unit: the artifact and the contract, without the reviewer's reasoning. Passing conclusions to the reviewer invites validation of those conclusions. Decompose a 500-line PR first; the unit must fit one read. Done when: the smallest reviewable unit is isolated and fits one read.
 3. **DOUBT.** Spawn a fresh-context subagent with isolated context using this adversarial prompt verbatim so it overrides any default balanced response shape:
 
    ```
@@ -43,10 +43,11 @@ description: 'Use when a non-trivial decision sits under uncertainty and correct
    CONTRACT: <paste contract>
    ```
 
-   Pass ARTIFACT + CONTRACT only. Do NOT pass the CLAIM: handing the reviewer a conclusion biases it toward agreement. If a reviewer's default shape cannot be overridden to issues-only, fall back to a generic subagent with the adversarial prompt.
-4. **Cross-model.** In interactive sessions, after the single-model review and before reconcile, always offer the user a cross-model second opinion (Gemini CLI, Codex CLI, manual external review, or skip); never silently skip, even on low-stakes artifacts. If the user picks a CLI: verify PATH/version and the working binary, write the full prompt to a file and pipe it through stdin (never interpolate the artifact into a shell-quoted argument; embedded backticks and `$(...)` would truncate or execute), confirm the exact command with the user, and run only after explicit per-call authorization. If the CLI is unavailable or fails, surface the failure and offer manual retry, a different tool, or skip. If the user skips, acknowledge the skip in the output. In non-interactive contexts, skip cross-model and announce the skip in the output; never invoke an external CLI without explicit user authorization.
-5. **RECONCILE.** Re-read the artifact text against each finding before classifying; rubber-stamping the reviewer is the same failure as ignoring it. Classify each finding in this precedence order, first match wins: (a) **contract misread**: the CONTRACT was unclear or incomplete, fix it and re-classify next cycle; (b) **valid + actionable**: real issue, change the artifact and re-loop; (c) **valid trade-off**: real but fixing costs more than accepting, document the trade-off; (d) **noise**: correct under context the reviewer lacked, note it and consider adding that context to the contract.
-6. **STOP.** Stop when the next iteration returns only trivial or already-considered findings, or 3 cycles are completed (escalate to the user, do not grind a fourth alone), or the user explicitly says to ship. If 3 cycles still surface substantive issues, the artifact may not be ready; surface this to the user. Three unresolved cycles is information about the artifact, not a reason to keep looping. If 3 cycles is obviously insufficient because the artifact is large, the artifact is too big: return to Step 2 and decompose; do not lift the bound.
+   Pass ARTIFACT + CONTRACT only. Do NOT pass the CLAIM: handing the reviewer a conclusion biases it toward agreement. If a reviewer's default shape cannot be overridden to issues-only, fall back to a generic subagent with the adversarial prompt. Done when: a fresh-context review is spawned passing ARTIFACT + CONTRACT only.
+
+4. **Cross-model.** In interactive sessions, after the single-model review and before reconcile, always offer the user a cross-model second opinion (Gemini CLI, Codex CLI, manual external review, or skip); never silently skip, even on low-stakes artifacts. If the user picks a CLI: verify PATH/version and the working binary, write the full prompt to a file and pipe it through stdin (never interpolate the artifact into a shell-quoted argument; embedded backticks and `$(...)` would truncate or execute), confirm the exact command with the user, and run only after explicit per-call authorization. If the CLI is unavailable or fails, surface the failure and offer manual retry, a different tool, or skip. If the user skips, acknowledge the skip in the output. In non-interactive sessions, announce the skip. Done when: cross-model is offered and the disposition (taken, skipped, or announced) is recorded.
+5. **RECONCILE.** Re-read the artifact against each finding before classifying it. Rubber-stamping the reviewer fails just as surely as ignoring it. Classify each finding in this precedence order, first match wins: (a) **contract misread**: the CONTRACT was unclear or incomplete, fix it and re-classify next cycle; (b) **valid + actionable**: real issue, change the artifact and re-loop; (c) **valid trade-off**: real but fixing costs more than accepting, document the trade-off; (d) **noise**: correct under context the reviewer lacked, note it and consider adding that context to the contract. Done when: every finding is classified with first-match-wins precedence.
+6. **STOP.** Stop when the next iteration returns only trivial or already-considered findings, or 3 cycles are completed (escalate to the user, do not grind a fourth alone), or the user explicitly says to ship. If 3 cycles still surface substantive issues, the artifact may not be ready; surface this to the user. Three unresolved cycles is information about the artifact, not a reason to keep looping. If 3 cycles is obviously insufficient because the artifact is large, the artifact is too big: return to Step 2 and decompose; do not lift the bound. Done when: a stop condition is met (trivial findings, 3 cycles, user says ship, or escalation).
 
 **Nested-subagent fallback.** This skill runs in the main session, where Step 3 can spawn a fresh-context reviewer. Do not run it from inside a subagent, where spawning another subagent is blocked. If that happens, surface to the user that doubt-driven cannot run nested and let the main session handle it. As a last resort only, a degraded self-questioning fallback exists: rewrite ARTIFACT + CONTRACT as a fresh self-prompt with a hard mental separator from the prior reasoning and walk Steps 1–6. This is not fresh-context review, so flag the result as degraded.
 
@@ -64,7 +65,7 @@ description: 'Use when a non-trivial decision sits under uncertainty and correct
 - **Non-mutation rule:** read-only; no file, VCS, credential, paid, published, deployed, or remote mutation. Re-loop changes are recommendations in chat output, not applied edits.
 
 ## Output
-A report listing each non-trivial decision named as a CLAIM, the fresh-context review findings, the classification of each finding (contract misread / valid + actionable / valid trade-off / noise), the stop condition met, and the cross-model disposition (offered and acknowledged, or skip announced). Actionable findings carry a recommended artifact change stated as a recommendation, not an applied edit.
+A report listing each CLAIM, the fresh-context review findings, the classification of each finding (contract misread / valid + actionable / valid trade-off / noise), the stop condition met, and the cross-model disposition — with actionable findings carrying a recommended artifact change stated as a recommendation, not an applied edit.
 
 ## Provenance
 

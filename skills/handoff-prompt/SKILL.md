@@ -1,6 +1,6 @@
 ---
 name: handoff-prompt
-description: 'Use when the user asks for a handoff, a delegation, or a clipboard-ready prompt for another agent; the run writes a standalone path-free prompt, copies it to the clipboard, and confirms with the task title. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user asks for a handoff, delegation, or clipboard-ready prompt for another agent: a standalone path-free prompt copied to the clipboard, confirmed by title. Not for session-snapshot briefs — use handoff; never remote, credential, publish, deploy, or irreversible.'
 ---
 
 # Handoff prompt
@@ -22,12 +22,12 @@ Optional, gathered only to make the prompt useful: repo or product identity, rel
 
 ## Procedure
 
-1. Identify the task from the user text. When the user gives only a short label, infer the boundary from the current repo, recent discussion, branch name, linked issue/PR, docs, and obvious nearby context.
-2. Gather enough context to orient a fresh agent: repo/product identity, relevant issue/PR/branch names or URLs, likely modules, constraints, known symptoms, and the desired output shape. Stop short of doing the receiving agent's review or picking its technical direction.
-3. Assemble a standalone prompt using portable anchors only — repo owner/name, product or module names, issue/PR URLs, branch names, package or plugin names, public symbols, command names, config keys, exact error text, docs titles, and search terms. Include no absolute paths, home-directory paths, checkout names, or repo-relative file paths unless the user explicitly requests them.
-4. The first real instruction to the receiving agent must be to review, discuss, and assess — not a command-only work order. Make clear the receiving agent owns that review; the handoff gives only starting context and known constraints, and the agent should decide whether the task is still real, stale, already solved, over-scoped, or better handled differently.
-5. Include constraints, non-goals, validation expectations, the desired output shape, and an instruction to re-check live repo/GitHub/CI state where relevant. Tell the receiving agent not to push, merge, close issues/PRs, label, or post public comments unless the handoff explicitly asks for it.
-6. Use this shape by default, filling each bracketed field from gathered context:
+1. Identify the task from the user text. When the user gives only a short label, infer the boundary from the current repo, recent discussion, branch name, linked issue/PR, docs, and obvious nearby context. Done when: the stated action, evidence, and guard all hold.
+2. Gather enough context to orient a fresh agent: repo/product identity, relevant issue/PR/branch names or URLs, likely modules, constraints, known symptoms, and the desired output shape. Stop short of doing the receiving agent's review or picking its technical direction. Done when: the stated action, evidence, and guard all hold.
+3. Assemble a standalone prompt using portable anchors only — repo owner/name, product or module names, issue/PR URLs, branch names, package or plugin names, public symbols, command names, config keys, exact error text, docs titles, and search terms. Include no absolute paths, home-directory paths, checkout names, or repo-relative file paths unless the user explicitly requests them. Done when: the stated action, evidence, and guard all hold.
+4. The first real instruction to the receiving agent must be to review, discuss, and assess — not a command-only work order. Make clear the receiving agent owns that review; the handoff gives only starting context and known constraints, and the agent should decide whether the task is still real, stale, already solved, over-scoped, or better handled differently. Done when: the stated action, evidence, and guard all hold.
+5. Include constraints, non-goals, validation expectations, the desired output shape, and an instruction to re-check live repo/GitHub/CI state where relevant. Tell the receiving agent not to push, merge, close issues/PRs, label, or post public comments unless the handoff explicitly asks for it. Done when: the stated action, evidence, and guard all hold.
+6. Use this shape by default, filling each bracketed field from gathered context: Done when: the stated action, evidence, and guard all hold.
 
 ```text
 I want to discuss and possibly work on: <short task title>
@@ -62,8 +62,8 @@ Output:
 - Do not push, merge, close issues/PRs, label, or post public comments unless explicitly told.
 ```
 
-7. Copy the full assembled prompt to the clipboard. Use a temp file or pipe rather than inline shell quoting, because prompts may contain backticks, `$`, quotes, or user text. On macOS use `pbcopy`; otherwise use the platform clipboard tool (`wl-copy`, `xclip`, `clip.exe`). If no clipboard tool is available, print the prompt and state that clipboard copy was unavailable.
-8. Final reply: a terse confirmation with the task title. Do not paste the full prompt unless the user asks.
+7. Copy the full assembled prompt to the clipboard. Use a temp file or pipe rather than inline shell quoting, because prompts may contain backticks, `$`, quotes, or user text. On macOS use `pbcopy`; otherwise use the platform clipboard tool (`wl-copy`, `xclip`, `clip.exe`). If no clipboard tool is available, print the prompt and state that clipboard copy was unavailable. Done when: the stated action, evidence, and guard all hold.
+8. Final reply: a terse confirmation with the task title. Do not paste the full prompt unless the user asks. Done when: the stated action, evidence, and guard all hold.
 
 ## Failure and recovery
 - **Missing task**: the user gave no task and none is inferable from nearby context. Stop and ask for the task; emit no prompt.

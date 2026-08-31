@@ -1,6 +1,6 @@
 ---
 name: native-capability-catalogue
-description: 'Use when any builder run must resolve its target architecture and build kind into a system-prompt capability catalogue. The run receives the correct per-architecture native-tool catalogue, version-stamped and parity-checked, or fails closed naming the architectures that support the requested build kind. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when a builder run must resolve target architecture and build kind into a system-prompt capability catalogue. Returns the matching version-stamped, parity-checked native-tool catalogue or fails closed. Not for live tool introspection — use embedded constants only.'
 ---
 
 # Native capability catalogue
@@ -182,12 +182,12 @@ and imperative, with a short "When to use" and the ordered steps.
 
 ## Procedure
 
-1. Read the pair supplied by the builder run. If the architecture is not one of `scout`, `cowork`, `agent-skill`, `copilot-studio`, or the kind is not `skill` or `automation`, stop: report the valid vocabulary. Nothing is resolved.
-2. Check the embedded manifest against its invariants (Inputs). On any violation, stop: report the violated invariant. Never resolve from constants that fail their own invariants.
-3. Look up the pair. If the row is absent, disabled (e.g. `copilot-studio` / `skill`), or lacks a version or body, fail closed with exactly `That target architecture isn't available yet. Choose <labels>.` where `<labels>` names the architectures whose rows for that kind are enabled — for `skill`: `Scout, Cowork, or Agent skill`; for `automation`: `Scout`. Never synthesize a catalogue, substitute another row, or probe the target.
-4. Emit the catalogue section for the row: one line `Catalogue version: <version>` followed by the row's body byte-for-byte, and attach the section to the builder system prompt. Do not paraphrase, trim, or reflow the body. Never enumerate a running agent's tools or fetch a capability report at run time.
-5. Parity guard: re-derive the expected section by reading the constants again — a second pass that does not reuse the first rendering — and compare it byte-for-byte against the attached section, version line included. On any difference, detach the section and stop; the prompt must not ship a catalogue that differs from the constants.
-6. Never mutate: a run of this skill writes no file, bumps no version, and edits no constant. If the caller asserts the target's native tools changed, emit the embedded body unchanged with its version and report the asserted mismatch as an open item for this skill's maintainers.
+1. Read the pair supplied by the builder run. If the architecture is not one of `scout`, `cowork`, `agent-skill`, `copilot-studio`, or the kind is not `skill` or `automation`, stop: report the valid vocabulary. Nothing is resolved. Done when: the step’s stated result is achieved or its stop condition is reported.
+2. Check the embedded manifest against its invariants (Inputs). On any violation, stop: report the violated invariant. Never resolve from constants that fail their own invariants. Done when: the step’s stated result is achieved or its stop condition is reported.
+3. Look up the pair. If the row is absent, disabled (e.g. `copilot-studio` / `skill`), or lacks a version or body, fail closed with exactly `That target architecture isn't available yet. Choose <labels>.` where `<labels>` names the architectures whose rows for that kind are enabled — for `skill`: `Scout, Cowork, or Agent skill`; for `automation`: `Scout`. Never synthesize a catalogue, substitute another row, or probe the target. Done when: the step’s stated result is achieved or its stop condition is reported.
+4. Emit the catalogue section for the row: one line `Catalogue version: <version>` followed by the row's body byte-for-byte, and attach the section to the builder system prompt. Do not paraphrase, trim, or reflow the body. Never enumerate a running agent's tools or fetch a capability report at run time. Done when: the step’s stated result is achieved or its stop condition is reported.
+5. Parity guard: re-derive the expected section by reading the constants again — a second pass that does not reuse the first rendering — and compare it byte-for-byte against the attached section, version line included. On any difference, detach the section and stop; the prompt must not ship a catalogue that differs from the constants. Done when: the step’s stated result is achieved or its stop condition is reported.
+6. Never mutate: a run of this skill writes no file, bumps no version, and edits no constant. If the caller asserts the target's native tools changed, emit the embedded body unchanged with its version and report the asserted mismatch as an open item for this skill's maintainers. Done when: the step’s stated result is achieved or its stop condition is reported.
 
 ## Failure and recovery
 - Invalid request — architecture or kind outside the vocabulary. Terminal; report the valid values; no catalogue produced.

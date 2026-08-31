@@ -1,3 +1,3 @@
 interface:
   display_name: "Conventional Commit"
-  short_description: "Create scoped present-tense conventional commit with issue refs"
+  short_description: "Use when the user asks to commit changes or draft a commit"

@@ -1,3 +1,3 @@
 interface:
   display_name: "Universal Invariant Baseline"
-  short_description: "Apply invariant-first, fail-fast engineering to every change"
+  short_description: "Use when a user explicitly invokes this skill to apply an"

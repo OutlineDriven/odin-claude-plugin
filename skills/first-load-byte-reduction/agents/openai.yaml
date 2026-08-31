@@ -1,3 +1,3 @@
 interface:
   display_name: "First Load Byte Reduction"
-  short_description: "Pixel-identical first-load byte reduction"
+  short_description: "Use when a first screen needs lower transfer bytes without"

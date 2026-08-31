@@ -1,3 +1,3 @@
 interface:
   display_name: "Planning And Task Breakdown"
-  short_description: "Break multi-step work into ordered tasks with done checks"
+  short_description: "Use when multi-step work must be planned or broken into"

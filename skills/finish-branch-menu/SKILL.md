@@ -24,7 +24,7 @@ disable-model-invocation: true
 
 ## Procedure
 
-1. Run the project's full test suite on the current tree. If it fails, report the failures and stop — the menu comes only after a green suite.
+1. Run the project's full test suite on the current tree. If it fails, report the failures and stop — the menu comes only after a green suite. Done when: the full test suite is green on the current tree, or the skill stops on failure.
 2. Detect the environment and capture, before any directory change, the values cleanup will need:
 
    ```bash
@@ -33,9 +33,9 @@ disable-model-invocation: true
    WORKTREE_PATH=$(git rev-parse --show-toplevel)
    ```
 
-   `GIT_DIR == GIT_COMMON` is a normal repo. `GIT_DIR != GIT_COMMON` with a named branch is a worktree this skill may clean up. `GIT_DIR != GIT_COMMON` with a detached HEAD is an externally managed workspace — present the reduced menu and leave it in place.
+   `GIT_DIR == GIT_COMMON` is a normal repo. `GIT_DIR != GIT_COMMON` with a named branch is a worktree this skill may clean up. `GIT_DIR != GIT_COMMON` with a detached HEAD is an externally managed workspace — present the reduced menu and leave it in place. Done when: `GIT_DIR`, `GIT_COMMON`, and `WORKTREE_PATH` are captured and the environment is classified.
 
-3. Determine the base branch from the plan, the conversation, or the branch's upstream. If it is not already known, ask and confirm before merging — merging into the wrong base is expensive to undo.
+3. Determine the base branch from the plan, the conversation, or the branch's upstream. If it is not already known, ask and confirm before merging — merging into the wrong base is expensive to undo. Done when: the base branch is determined and confirmed.
 4. Present the menu exactly as written and wait for the user's selection; the integration decision is theirs.
 
    Normal repo or named-branch worktree:
@@ -60,6 +60,8 @@ disable-model-invocation: true
 
    Which option?
    ```
+
+   Done when: the user selects an option.
 
 5. Execute the chosen option. Merge first and verify success before removing anything.
 
@@ -86,6 +88,8 @@ disable-model-invocation: true
 
    - **Keep as-is:** report the branch name and the worktree path; preserve both.
 
+   Done when: the chosen option is executed — merge verified green with branch deleted, PR created with URL reported, or branch and worktree preserved.
+
 6. Discard runs only as a response to an explicit user request to throw the work away. Preview the consequence and require the typed word `discard`:
 
    ```
@@ -104,6 +108,8 @@ disable-model-invocation: true
    cd "$MAIN_ROOT"
    git branch -D <feature-branch>
    ```
+
+   Done when: the typed word `discard` is received and the branch is force-deleted, or the confirmation is not given and nothing is deleted.
 
 7. Clean up the workspace. This runs for merge and confirmed discard only; push-and-PR and keep always preserve the worktree. Both callers have already changed directory to the main repo root — worktree removal must run from outside the worktree — and use the `GIT_DIR`, `GIT_COMMON`, and `WORKTREE_PATH` captured in step 2, from before that directory change.
 
@@ -136,6 +142,8 @@ disable-model-invocation: true
      Carry out the choice, then remove the worktree.
 
    - Otherwise: the host environment owns this workspace — leave it in place.
+
+   Done when: the workspace is cleaned up (worktree removed or left in place per the rules above), or untracked files are resolved via the user's commit/move/delete choice.
 
 ## Failure and recovery
 - **Tests fail on the tree to integrate:** report the failures and stop. Do not present the menu; a green run only proves the tree it ran on.

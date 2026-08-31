@@ -1,8 +1,8 @@
 # `CONCEPTS.md` — entry schema and reconciliation rules
 
-Sync-lineage note: `skills/compound/references/concepts.md` is the sibling file — compound's own, independent accretion/seeding model for the same `CONCEPTS.md` surface, not a copy of this one. Don't merge them.
+Sync-lineage note: `skills/compound/references/concepts.md` is an independent sibling file. It defines compound's own accretion and seeding model for the same `CONCEPTS.md` surface; it is not a copy of this file. Don't merge them.
 
-Read this in Mode 4 (Concepts capture) and when refreshing `CONCEPTS.md`. It defines the entry shape and the one-definition-per-concept reconciliation/refresh loop. The file lives at the **operating repo root** — one glossary, shared between autolearn and `compound` as its second legitimate writer; this doc covers autolearn's own entry schema and reconciliation loop for it. Create it only when a term actually clears the gate; never scaffold an empty file.
+Read this in Mode 4 (Concepts capture) and when refreshing `CONCEPTS.md`. It defines the entry shape and the reconciliation and refresh loop that enforces one definition per concept. The file lives at the **operating repo root**. It is one glossary shared by autolearn and `compound`, its second legitimate writer. This document covers autolearn's entry schema and reconciliation loop. Create the file only when a term clears the gate; never scaffold an empty file.
 
 ## What earns a slot — the reject-by-default gate, applied to vocabulary
 
@@ -22,7 +22,7 @@ Nothing clears the gate → write nothing. A clean "no durable term here" is cor
 
 ## The file stands on its own
 
-Each entry teaches its concept to a reader with no codebase, no PR history, no chat. This rules out:
+Each entry must teach its concept to a reader without access to the codebase, PR history, or chat. This rules out:
 
 - Implementation specifics — file paths, class/function names, table names, library calls.
 - Status fields, dates, owners on entries.
@@ -33,7 +33,7 @@ Cross-references between entries *within* the file are fine — they resolve int
 
 ## Organization
 
-Cluster concepts by domain relationship — entities with their states, processes with their stages — so structure is visible without effort. A flat list is fine while the file is small; reshape as it grows. When relationships carry load-bearing meaning (ownership, cardinality, cross-entry lifecycle), capture them in a short `## Relationships` section near the top; skip it when entries stand alone.
+Cluster concepts by domain relationship so the structure is easy to see: entities with their states, and processes with their stages. A flat list is fine while the file is small; reshape it as it grows. When relationships carry load-bearing meaning (ownership, cardinality, cross-entry lifecycle), capture them in a short `## Relationships` section near the top. Skip that section when entries stand alone.
 
 **Flagged ambiguities (tail of file):** when two terms were used interchangeably and the team settled a distinction, record it as a one-line note — *"'account' had been used for both Customer and User — these are distinct."* This tail is the audit trail for settled opinions.
 

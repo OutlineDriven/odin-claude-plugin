@@ -1,6 +1,6 @@
 ---
 name: find-bugs
-description: 'Use when the user asks to review changes, find bugs, run a security review, or audit code on the current branch. Returns a prioritized findings list with evidence and no invented or style-only findings. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when the user asks to review changes, find bugs, run a security review, or audit code on the current branch. Returns a prioritized findings list with evidence and no invented or style-only findings. Not for repair — use fix.'
 ---
 
 # Find bugs
@@ -20,13 +20,13 @@ The change set under review, taken from the current branch diff against its base
 
 ## Procedure
 
-1. Determine the change set from the current branch diff against its base. If the user named files, directories, or a focus area, restrict scope to those.
-2. Read each changed region and the immediate callers and surrounding state needed to reason about its behavior. Do not read unrelated code.
-3. For each changed region, identify defects across three classes: correctness bugs, security issues, and code-quality problems that affect behavior or maintainability.
-4. For each candidate finding, locate concrete evidence in the diff or surrounding code (the line, input path, or state transition) that proves the defect is real. Discard any candidate without evidence.
-5. Exclude style-only findings (formatting, naming preference, cosmetic) that do not change behavior, security, or correctness.
-6. Rank remaining findings by severity (security above correctness above quality) and within a class by impact and confidence.
-7. Return the prioritized list. Each finding states its location, defect class, description, evidence, and suggested fix direction.
+1. Determine the change set from the current branch diff against its base. If the user named files, directories, or a focus area, restrict scope to those. Done when: the change set is determined and scoped.
+2. Read each changed region and the immediate callers and surrounding state needed to reason about its behavior. Do not read unrelated code. Done when: every changed region is read with its callers and surrounding state.
+3. For each changed region, identify defects across three classes: correctness bugs, security issues, and code-quality problems that affect behavior or maintainability. Done when: every changed region is analyzed across all three defect classes.
+4. For each candidate finding, locate concrete evidence in the diff or surrounding code (the line, input path, or state transition) that proves the defect is real. Discard any candidate without evidence. Done when: every surviving finding has concrete evidence; evidence-less candidates are discarded.
+5. Exclude style-only findings (formatting, naming preference, cosmetic) that do not change behavior, security, or correctness. Done when: no style-only finding remains in the candidate list.
+6. Rank remaining findings by severity (security above correctness above quality) and within a class by impact and confidence. Done when: the findings list is ranked.
+7. Return the prioritized list. Each finding states its location, defect class, description, evidence, and suggested fix direction. Done when: the list is returned with every field per finding.
 
 ## Failure and recovery
 - No evidence for a candidate: drop it. Never report an invented issue.

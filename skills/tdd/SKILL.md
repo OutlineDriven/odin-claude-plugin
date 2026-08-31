@@ -20,33 +20,30 @@ description: 'Use when asked to develop a fix or feature test-first. Produces a 
 - **Bug description or feature requirement**: a concrete statement of what the test must assert. Required.
 - **Test framework**: the project's existing test runner and assertion library. Optional if discoverable from the project; required if the project has no tests yet.
 
+## Refusal
+
+- Test cannot be written: stop. Report the missing prerequisite (unclear requirement, untestable coupling, missing framework). Do not proceed to implementation.
+- Test framework unavailable and not discoverable: stop. Report the missing dependency. Do not install or assume a framework.
+- Implementation breaks existing tests: revert the implementation. Narrow the change to affect only the new test's assertion. Re-run the full suite.
+
 ## Procedure
 
-1. Read the target code and identify the smallest observable behavior that the requirement describes.
-2. Write a single focused test that asserts the expected behavior. Name it to describe the behavior, not the implementation.
-3. Run the test suite. Record the exact failing output including the test name and assertion message. This is the failing-before evidence.
-4. Implement the minimal change in the target code that makes the new test pass. Do not refactor unrelated code.
-5. Run the test suite again. Record the exact passing output. This is the passing-after evidence.
-6. If the test passes on first run without any implementation change, the test is not exercising the intended behavior. Rewrite the test to fail against the current implementation, then return to step 3.
-7. Commit the test and implementation together with a message that names the behavior tested.
+1. **Read the target code** and identify the smallest observable behavior that the requirement describes. Done when: one observable behavior is named.
+2. **Write a single focused test** that asserts the expected behavior. Name it to describe the behavior, not the implementation. Done when: one test is written.
+3. **Run the test suite.** Record the exact failing output including the test name and assertion message. This is the failing-before evidence. Done when: failing output is recorded.
+4. **Implement the minimal change** in the target code that makes the new test pass. Do not refactor unrelated code. Done when: the test passes.
+5. **Run the test suite again.** Record the exact passing output. This is the passing-after evidence. Done when: passing output is recorded.
+6. **Check for false green.** If the test passes on first run without any implementation change, the test is not exercising the intended behavior. Rewrite the test to fail against the current implementation, then return to step 3. Done when: the test genuinely fails before implementation and passes after.
+7. **Commit the test and implementation together** with a message that names the behavior tested. Done when: one commit contains both files.
 
-## Failure and recovery
-| Failure class | Response |
-|---|---|
-| Test cannot be written | Stop. Report the missing prerequisite (unclear requirement, untestable coupling, missing framework). Do not proceed to implementation. |
-| Test passes without implementation change | Rewrite the test to assert the unmet behavior. Do not skip to step 5. |
-| Implementation breaks existing tests | Revert the implementation. Narrow the change to affect only the new test's assertion. Re-run the full suite. |
-| Test framework unavailable and not discoverable | Stop. Report the missing dependency. Do not install or assume a framework. |
+## Failure modes
 
-Partial result rule: if the test is written and fails but implementation is incomplete, the artifact is the failing test and its output. Do not claim the done predicate.
-
-Rollback: revert the implementation commit. The test file may remain if it documents a valid future behavior.
+- Partial result (test written and fails but implementation incomplete): the artifact is the failing test and its output. Do not claim the done predicate.
+- Rollback: revert the implementation commit. The test file may remain if it documents a valid future behavior.
 
 ## Output
-- The test file path.
-- The failing-before run output (test name, assertion, expected vs actual).
-- The passing-after run output.
-- The implementation commit SHA.
+
+Test file path, failing-before run output (test name, assertion, expected vs actual), passing-after run output, implementation commit SHA — in that order.
 
 ## Provenance
 

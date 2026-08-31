@@ -1,4 +1,4 @@
-# ORIGIN-SEARCH Format
+# Origin search format
 
 ## Template
 

@@ -2,7 +2,7 @@
 
 How motion behaves across web, React, TUI, and desktop runtimes. Each runtime has a different cost model for motion (frame budget, GPU offload, retained vs immediate mode); the timing bands and easing curves are constants because they map to perception, not implementation.
 
-**Grounded: 2026-08-26**
+**Grounded: 2026-08-31**
 
 This file is loaded only via the SKILL.md surface-routing table — surface references (web.md, react.md, tui.md, desktop.md) do not backlink here. A reader needing cross-runtime motion guidance re-enters via SKILL.md.
 
@@ -93,7 +93,7 @@ Animate `transform` and `opacity` by default — they composite on the GPU witho
 .card { transition: width 200ms; }  /* forces reflow every frame */
 ```
 
-View Transitions API (same-document: Chromium 111+, Safari 18.2+, Firefox 144+) handles cross-state morphs without manual paired keyframes — declare which elements share identity across states; the browser interpolates the rest.
+View Transitions API (same-document: Chromium 111+, Safari 18.0+, Firefox 144+) handles cross-state morphs without manual paired keyframes — declare which elements share identity across states; the browser interpolates the rest.
 
 `animation-timeline: scroll()` for scroll-driven progress without a JS scroll listener (Chromium stable, Safari 26+, Firefox flag-gated). Falls back gracefully — scroll-driven becomes "animation runs once" on engines that do not yet implement it.
 

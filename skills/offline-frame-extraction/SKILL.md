@@ -1,6 +1,6 @@
 ---
 name: offline-frame-extraction
-description: 'Use when a recording session ends or a describer requests frame evidence, extract sparse visually-distinct JPEG snapshots from the session without decoding the WebM; write video-frames.json and retained JPEGs under frames/ with 1 fps snapshot cadence. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a recording ends or a describer requests frame evidence. Extracts sparse, visually distinct JPEG snapshots without decoding the WebM; writes video-frames.json and retained JPEGs under frames/. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Offline frame extraction
@@ -33,23 +33,30 @@ One of `events` or `window` must be supplied.
 
 ## Procedure
 
-1. **Validate trust boundaries.** Reject `sessionDir` and all derived paths that contain `..` path segments or resolve outside the user's home directory. If `capturedFramesManifest` or `videoPath` is supplied, apply the same check to each. Stop on any violation.
-2. **Create output directory.** If `framesDir` does not exist, create it. Stop if creation fails.
-3. **Load captured-frame manifest.** If `capturedFramesManifest` exists and its JSON parses as `{ version: 1, format: "jpeg", frames: CapturedVideoFrame[] }`, read and sort the frames by `tMs` ascending; otherwise use an empty array. A frame entry is valid only when it has `file`, `tMs`, `offsetMs`, `width > 0`, `height > 0` and the referenced JPEG file exists at an absolute path derived by resolving `file` relative to the manifest's directory. Skip invalid entries silently.
-4. **Load or initialize retained-frame manifest.** If `framesDir/video-frames.json` exists and parses as a `FrameRecord[]`, read it; otherwise start with an empty array.
-5. **Determine extraction pipeline.** If captured source frames are available, use the manifest pipeline. If no captured frames exist and `videoPath` points to a readable WebM, use the legacy system-FFmpeg pipeline. If neither source is available, return the existing retained-frame manifest unchanged with no new extractions.
+1. **Validate trust boundaries.** Reject `sessionDir` and all derived paths that contain `..` path segments or resolve outside the user's home directory. If `capturedFramesManifest` or `videoPath` is supplied, apply the same check to each. Stop on any violation. Done when: all paths pass trust-boundary validation or a violation is rejected.
+
+2. **Create output directory.** If `framesDir` does not exist, create it. Stop if creation fails. Done when: `framesDir` exists and is writable.
+
+3. **Load captured-frame manifest.** If `capturedFramesManifest` exists and its JSON parses as `{ version: 1, format: "jpeg", frames: CapturedVideoFrame[] }`, read and sort the frames by `tMs` ascending; otherwise use an empty array. A frame entry is valid only when it has `file`, `tMs`, `offsetMs`, `width > 0`, `height > 0` and the referenced JPEG file exists at an absolute path derived by resolving `file` relative to the manifest's directory. Skip invalid entries silently. Done when: the captured-frame manifest is loaded and sorted, or an empty array is initialized.
+
+4. **Load or initialize retained-frame manifest.** If `framesDir/video-frames.json` exists and parses as a `FrameRecord[]`, read it; otherwise start with an empty array. Done when: the retained-frame manifest is loaded or initialized.
+
+5. **Determine extraction pipeline.** If captured source frames are available, use the manifest pipeline. If no captured frames exist and `videoPath` points to a readable WebM, use the legacy system-FFmpeg pipeline. If neither source is available, return the existing retained-frame manifest unchanged with no new extractions. Done when: the extraction pipeline is determined or the existing manifest is returned unchanged.
+
 6. **For event-anchored extraction** (`events` supplied):
    a. Sort `events` by `tMs` ascending.
    b. For each event, compute `offsetSec = max(0, (event.tMs - anchorEpochMs) / 1000)`.
    c. Compute `cell = round(offsetSec / frameGridSec)` where `frameGridSec` defaults to 0.5. Skip this event if its cell was already seen in this run.
    d. Guard against duration: if `durationSec` is known and `offsetSec > durationSec`, skip this event.
    e. Find the nearest captured source frame to `event.tMs` using binary search over the sorted captured frame list. If no captured frames are available, fall through to the legacy pipeline.
-   f. Copy the source JPEG to `framesDir` using a name derived as `{source}_{offsetMs}_{stem}.jpg` where `source` is the `FrameSource` string (`event`, `scene`, or `probe`) and `stem` is sanitized to `[a-zA-Z0-9_-]` with length ≤ 80.
-   g. Run perceptual hash (dHash, 9×8 grayscale resize, 64-bit Hamming) on the copied JPEG. If dHash is unavailable (sharp not installed), retain the frame without a hash.
-   h. Apply near-duplicate suppression: compute Hamming distance between the new frame's hash and every already-retained frame's hash; if any distance ≤ `dedupeThreshold`, delete the newly copied JPEG and skip this event.
-   i. Apply `maxFrames` cap: if retained count ≥ `maxFrames`, delete the newly copied JPEG and skip this event.
+   f. Copy the source JPEG to `framesDir` using a name derived as `{source}_{offsetMs}_{stem}.jpg` where `source` is the `FrameSource` string (`event`, `scene`, or `probe`) and `stem` is sanitized to `[a-zA-Z0-9_-]` with length <= 80.
+   g. Run perceptual hash (dHash, 9x8 grayscale resize, 64-bit Hamming) on the copied JPEG. If dHash is unavailable (sharp not installed), retain the frame without a hash.
+   h. Apply near-duplicate suppression: compute Hamming distance between the new frame's hash and every already-retained frame's hash; if any distance <= `dedupeThreshold`, delete the newly copied JPEG and skip this event.
+   i. Apply `maxFrames` cap: if retained count >= `maxFrames`, delete the newly copied JPEG and skip this event.
    j. Append a `FrameRecord` to the in-memory manifest: `{ file, tMs: epochForOffset(offsetSec), offsetSec, source, phash, reason? }`.
    k. Suppress duplicate source-file selection: if the same captured source file was already selected in this run, skip.
+   Done when: every event is processed with dedup, cap, and duplicate-source suppression applied.
+
 7. **For window extraction** (`window` supplied):
    a. Clamp `startMs` to `anchorEpochMs` or later, and `endMs` to `max(startMs, endMs)`.
    b. Limit `fps` to the range `1..30`, defaulting to 1. Limit `maxFrames` to `1..maxFrames`, defaulting to 24.
@@ -57,11 +64,15 @@ One of `events` or `window` must be supplied.
    d. If no captured source frames exist, fall through to the legacy FFmpeg window pipeline.
    e. Render each selected captured frame: copy directly if no `crop` is supplied; otherwise invoke sharp to extract `{ left: round(crop.x), top: round(crop.y), width: round(crop.w), height: round(crop.h) }` with JPEG quality 88. Validate crop bounds against the source frame dimensions; reject and skip on out-of-bounds.
    f. Name output files `probe_{stamp}_{paddedIndex}.jpg` where `stamp` is a random UUID suffix and `index` is zero-padded to 4 digits.
-   g. Apply dedupe and `maxFrames` cap as in step 6h–6i.
-8. **Persist.** Write the updated in-memory manifest sorted by `tMs` to `framesDir/video-frames.json` as pretty-printed JSON. If persistence fails, log the warning and continue; the in-memory result is still returned.
-9. **Return** the updated `FrameRecord[]` sorted by `tMs`.
+   g. Apply dedupe and `maxFrames` cap as in step 6h-6i.
+   Done when: every window candidate is processed with crop validation, dedup, and cap applied.
+
+8. **Persist.** Write the updated in-memory manifest sorted by `tMs` to `framesDir/video-frames.json` as pretty-printed JSON. If persistence fails, log the warning and continue; the in-memory result is still returned. Done when: the manifest is persisted to video-frames.json or persistence failure is logged with the in-memory result returned.
+
+9. **Return** the updated `FrameRecord[]` sorted by `tMs`. Done when: the sorted FrameRecord[] is returned.
 
 ## Failure and recovery
+
 | Failure class | Partial-result rule | Recovery |
 |---|---|---|
 | Source manifest unreadable or invalid | Use empty captured-frame list; proceed if legacy pipeline is available | Re-read on next invocation; manifest is reloaded from disk each run |
@@ -76,9 +87,8 @@ One of `events` or `window` must be supplied.
 The blocked result is: the returned `FrameRecord[]` has fewer entries than the number of valid events or window samples, and `framesDir/video-frames.json` does not reflect the in-memory result.
 
 ## Output
-- `framesDir/video-frames.json` — array of `FrameRecord` objects sorted by `tMs` ascending; each record: `{ file: string, tMs: number, offsetSec: number, source: "event"|"scene"|"probe", phash: string, reason?: string }`
-- `framesDir/*.jpg` — retained JPEG files named either `{source}_{offsetMs}_{stem}.jpg` (event/scene) or `probe_{stamp}_{index}.jpg` (window probe)
-- Return value: the sorted `FrameRecord[]` written to `video-frames.json`
+
+`framesDir/video-frames.json` (sorted FrameRecord[]), retained JPEGs under `framesDir/`, and the sorted FrameRecord[] as return value.
 
 ## Provenance
 

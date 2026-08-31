@@ -19,7 +19,7 @@ deploy-preview:
 
 ## Feature flags
 
-Feature flags decouple deployment from release. Deploy incomplete or risky features behind flags so you can:
+Feature flags decouple deployment from release. Put incomplete or risky features behind flags to:
 
 - **Ship code without enabling it.** Merge to main early, enable when ready.
 - **Roll back without redeploying.** Disable the flag instead of reverting code.

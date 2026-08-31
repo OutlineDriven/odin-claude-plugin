@@ -1,3 +1,3 @@
 interface:
-  display_name: "CodeQL Security Analysis"
-  short_description: "Build a CodeQL database and run quality-gated security analysis"
+  display_name: "Codeql Security Analysis"
+  short_description: "Use when building or reusing a CodeQL database, running CodeQL"

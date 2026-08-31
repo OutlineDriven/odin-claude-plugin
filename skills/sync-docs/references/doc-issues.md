@@ -1,8 +1,8 @@
-# Documentation Drift Issue Taxonomy
+# Documentation drift issue taxonomy
 
-Use this table as the classification contract for `sync-docs`. Safe-fix is intentionally tiny. A finding may be HIGH certainty and still flag-only when the correct prose cannot be inferred mechanically.
+Use this table as the classification contract for `sync-docs`. The safe-fix set is intentionally narrow. A finding may be HIGH certainty and still be flag-only when the correct prose cannot be inferred mechanically.
 
-## Default Ignore List
+## Default ignore list
 
 Exclude these paths from doc-drift / zero-coupling checks unless the user explicitly scopes them:
 
@@ -15,7 +15,7 @@ Exclude these paths from doc-drift / zero-coupling checks unless the user explic
 
 For related-doc discovery, start with `README.md`, root `*.md`, and `docs/**/*.md`; include ignored paths only on direct user request.
 
-## Common Evidence Fields
+## Common evidence fields
 
 Every issue carries:
 
@@ -33,7 +33,7 @@ Every issue carries:
 }
 ```
 
-Line is `?` only for whole-file drift where no exact stale line exists. Prefer exact `file:line` from `search`, `git grep -n`, codegraph output, or a read range.
+Use `?` for `line` only when whole-file drift has no exact stale line. Prefer an exact `file:line` from `search`, `git grep -n`, codegraph output, or a read range.
 
 ## Taxonomy
 
@@ -50,7 +50,7 @@ Line is `?` only for whole-file drift where no exact stale line exists. Prefer e
 | `documents-wrapper` | MEDIUM | No | Codegraph callees/callers show documented symbol is a single-call passthrough/wrapper. Fallback: ast-grep body contains one direct return/call and no domain logic. | Flag as possible overdocumented wrapper; prose may need to describe underlying behavior. |
 | `dead-doc` | LOW/MEDIUM | No | Markdown references only deleted files, removed commands, or old packages and has no current code coupling. Stronger when all referenced paths fail `git grep --files-with-matches` / codegraph_files. | Flag for deletion/rewrite review. |
 
-## Detection Recipes
+## Detection recipes
 
 ### Changed code from diff
 
@@ -66,7 +66,7 @@ git diff --name-status HEAD~5..HEAD
 git diff --name-status --find-renames "origin/$base"...HEAD
 ```
 
-Treat `R old new` as both a removed old path and a changed new path. Related docs mentioning `old` are likely stale; docs mentioning `new` are coupled.
+Treat `R old new` as both a removed old path and a changed new path. Related docs that mention `old` are likely stale; docs that mention `new` are coupled.
 
 ### Related docs by filenames/imports/symbols
 
@@ -116,7 +116,7 @@ Sources of truth:
 - `pyproject.toml`: `[project].version`.
 - `setup.cfg`: `metadata.version` (MEDIUM if dynamic elsewhere).
 
-Doc matches safe to edit only when line context labels it as product/package version:
+Edit a matching doc version only when the line context identifies it as the product or package version:
 
 ```bash
 git grep -nE '(version|Version|@)[[:space:]:="'"'']*[0-9]+\.[0-9]+\.[0-9]+' -- README.md docs/ '*.md'
@@ -152,7 +152,7 @@ Prefer existing subsections if present:
 
 Do not edit historical release sections.
 
-## Safe-fix Boundary
+## Safe-fix boundary
 
 Safe-fix:
 
@@ -172,7 +172,7 @@ Flag-only:
 
 If a fix is not in the safe-fix set, it must have `safeFix: false` and a non-empty `reasonFlagOnly`.
 
-## Severity and Certainty
+## Severity and certainty
 
 Severity describes user impact; certainty describes evidence quality.
 

@@ -1,3 +1,3 @@
 interface:
   display_name: "Copywriting Tone Of Voice Creator"
-  short_description: "Build a machine-parseable brand voice guide (TONE.md)."
+  short_description: "Use when a user asks to create, refresh, or port a brand voice"

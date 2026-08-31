@@ -1,4 +1,3 @@
 interface:
   display_name: "Todo Add"
-  short_description: "Add one requirement to its source and native todo"
-  default_prompt: "Process this TODO ADD request atomically under the todo-first contract. Update the owning requirement source and native todo, then report both identifiers."
+  short_description: "Add a requirement from `TODO ADD: <text>` to the durable source"

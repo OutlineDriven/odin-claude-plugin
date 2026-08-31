@@ -1,6 +1,6 @@
-# Session Signal Heuristics
+# Session signal heuristics
 
-Rules for deciding which transcript turns yield save-worthy memory proposals.
+Use these rules to decide which transcript turns yield save-worthy memory proposals.
 `scan-session.sh` applies these patterns to JSONL session files.
 
 ## Turn structure (Claude Code JSONL)
@@ -82,7 +82,7 @@ Extract the type and the bracketed description as the basis for the proposal.
 
 Proposed type: whatever `<type>` is.
 
-## Negative signals (skip — do not propose)
+## Negative signals (skip; do not propose)
 
 - Turns that are pure code, shell commands, or tool output with no explanatory text
 - Questions from the user (ends with `?`) — these are inquiries, not rules

@@ -1,3 +1,3 @@
 interface:
-  display_name: "Library API Migration Research"
-  short_description: "Research libraries, APIs, and migration guides"
+  display_name: "Research"
+  short_description: "Use when researching a named library, framework, SDK, API, or"

@@ -1,6 +1,6 @@
 ---
 name: resolve-merge-by-intent
-description: 'Use when a merge or rebase has stopped on conflicts. Resolve every conflict by reading both sides'' commit, PR, and issue intent, preserving compatible intents, naming trade-offs, and finishing as a green commit. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a merge or rebase has stopped on conflicts. Reads the intent in both sides'' commits, PRs, and issues, preserves compatible intents, names trade-offs, and finishes with a green commit. Not for a hunk-by-hunk fix without intent analysis — use resolve-merge-conflicts.'
 ---
 
 # Resolve merge by intent
@@ -24,7 +24,7 @@ description: 'Use when a merge or rebase has stopped on conflicts. Resolve every
 
 1. Identify the merge or rebase type and list every conflicted file.
 2. For each side of the conflict, read the commit messages, PR body, and linked issues to extract the intent behind the change. Record each intent as a short statement.
-3. Compare the two intents per conflict hunk:
+3. Compare both intents for each conflict hunk:
    a. If both intents are compatible (they address different concerns or can coexist), merge them into a single resolution that preserves both.
    b. If the intents conflict (they modify the same logic in incompatible ways), name the trade-off explicitly, choose the resolution that best serves the project's current priorities, and document the discarded intent in the commit message.
 4. Resolve every conflicted hunk. Remove all conflict markers.

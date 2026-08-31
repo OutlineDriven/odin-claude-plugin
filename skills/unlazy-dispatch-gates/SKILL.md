@@ -1,6 +1,6 @@
 ---
 name: unlazy-dispatch-gates
-description: 'Enforce completion discipline for substantial work by writing observable acceptance gates before execution, decomposing with a depth tree, executing only inspected checks, and reverifying evidence before reporting done. Use when work has been returned half-done, stubs are present, scope has been silently narrowed, a done claim is premature, a build splits three or more layers deep, or the user or model invokes unlazy, /unlazy, $unlazy, tree N, gates, or do not stop until it is done. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when substantial work needs approval-bound gates, strict parsing, parent reverification, and dispatch-state enforcement before a done claim. Also handles builds split three or more layers deep. Not for solo gate files — use unlazy.'
 ---
 
 # Unlazy dispatch gates
@@ -54,6 +54,7 @@ ABANDON: <id> <non-blank reason>
 ```
 
 A runnable gate has both `CHECK` and `EXPECT`; a manual gate has neither. One gate owns one observable outcome. Keep an abandoned gate in place and append its `ABANDON` line. Never convert abandonment into success.
+**Done when:** every required outcome has one valid gate, one owner, and any abandonment remains visible.
 
 ### 2. Parse strictly without executing
 
@@ -75,6 +76,7 @@ Then lint each parsed gate without execution:
 - Error if a child exists without a parent integration gate, an outcome lacks one owner, or two concurrent leaves have overlapping `OWNS` globs.
 
 Fix every error. Resolve every warning by strengthening the gate or recording why the existing real-surface oracle is not weak. Parsing and linting never imply approval and never execute CHECK.
+**Done when:** parsing and linting report no unresolved errors or warnings.
 
 ### 3. Bind human approval to the exact CHECK
 
@@ -98,6 +100,7 @@ PATH=<exact inherited PATH>
 The human must explicitly approve that displayed binding. Record approval in the ledger evidence as the qualified gate id, approval source, approval time, and the complete binding or its SHA-256 fingerprint alongside the canonical displayed binding in `.unlazy/<scope>/logs/approvals` (or beside `GATES.md` in solo mode). Approval is valid only when every field matches byte-for-byte at execution. Any change to CHECK, EXPECT, CWD, shell, timeout, output limits, platform, or inherited PATH invalidates approval and requires a new display and approval. Approval of one gate, prior run, group, or similar command does not transfer.
 
 Do not execute while approval is absent, ambiguous, stale, or mismatched. Report `missing approval` with the displayed binding.
+**Done when:** every runnable gate has a current, byte-exact human approval binding.
 
 ### 4. Execute CHECKs and record bounded evidence
 
@@ -108,12 +111,14 @@ For success, persist only: qualified gate id, approval-binding fingerprint, star
 For failure, leave the gate unchecked and record bounded diagnostic output only in the active report or failure log needed for recovery; label truncation. Never turn a failed run into evidence. Repair the source or oracle, obtain fresh approval if any bound field changes, and execute again.
 
 For a manual gate, inspect the named actual surface, record who/what/when and the concrete observation, then check it. Opinion, plan text, or worker self-report is not manual evidence.
+**Done when:** each gate is checked only from approved execution or concrete manual inspection, with bounded evidence.
 
 ### 5. Work and reverify leaves
 
 For each leaf: implement the complete owned deliverable; re-read it as a domain expert; fix correctness, integration, portability, performance, and evidence defects; apply low-cost polish; repeat until a full pass finds no change worth making.
 
 On return from a child, the parent reruns every runnable leaf CHECK using its still-valid exact approval binding, or obtains new approval when the environment or any bound input changed. Parent inspection supplies manual evidence. Child-produced evidence alone cannot mark the leaf VERIFIED. After all children verify, run branch integration gates. A checked box with pending evidence remains unmet.
+**Done when:** every returned leaf has been independently parent-reverified and branch integration gates pass.
 
 ### 6. Apply the dispatch state machine
 
@@ -148,12 +153,14 @@ Transitions:
 Reject start after seal, seal with an unstarted leaf, return before seal, duplicate handles, return for an unstarted/already returned leaf, transitions from `RETURNED` or `ABANDONED`, and opening a wave with unready or overlapping leaves. Open the next wave only after returned leaves are independently VERIFIED and their dependents become ready.
 
 An optional Stop hook may enforce the same parser and state rules only through the host's documented native hook configuration, after previewing the exact configuration and receiving explicit human consent. The skill does not require or install a script. Absence of a hook does not weaken the mandatory pre-return checks below.
+**Done when:** dispatch state is valid, every accepted transition is atomic, and optional hook behavior remains consented.
 
 ### 7. Reconcile before return
 
 Re-read the current request and amendments. Reconcile every independently required outcome against PLAN and qualified gate ids. Reparse all ledgers, remeasure counts, confirm returned leaves were parent-reverified, and run branch integration gates. Report measured met, unmet, and abandoned counts and ids.
 
 Done requires: parse and lint have no unresolved errors; every required gate is currently evidenced met; unmet count is zero; abandoned count is zero; every returned child was parent-reverified; branch integration gates pass; and final claims match the ledger. Explicit abandonment satisfies accounting but produces HANDOFF REQUIRED and blocks done.
+**Done when:** required gates reconcile to zero unmet and zero abandoned, with all return claims matching the ledger.
 
 ## Failure and recovery
 
@@ -171,14 +178,7 @@ Done requires: parse and lint have no unresolved errors; every required gate is 
 Stop rather than narrow scope, invent evidence or handles, widen authority, execute unapproved shell, or accept a checked box with pending evidence.
 
 ## Output
-
-Return exactly one class:
-
-1. **Done**: only when met count equals total required gates and both unmet and abandoned counts are zero. Include measured counts, qualified gate ids, parent reverification, branch integration results, and final remeasured claims.
-2. **HANDOFF REQUIRED**: when any gate or dispatch wave is abandoned. Include qualified abandonment ids, bounded reason summary, current met/unmet counts, and the fact that completion is blocked. Never call this done.
-3. **Partial result**: for parse errors, missing approval, failed checks, invalid dispatch transitions, or remaining unmet gates. Include all qualified met, unmet, and abandoned ids, current wave/leaf states, exact blocker, and allowed next action.
-
-Successful evidence contains metadata and fingerprints only, never raw successful command output.
+Return exactly one terminal class: Done with measured gate counts, ids, parent reverification, integration results, and remeasured claims; Handoff Required with unmet/abandoned ids and blockers; or Blocked with the failed safety condition and retained state. Successful evidence contains metadata and fingerprints only.
 
 ## Provenance
 

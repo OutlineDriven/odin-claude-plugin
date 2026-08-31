@@ -1,6 +1,6 @@
 ---
 name: restart-keeping-lessons
-description: 'Use when an implementation has accumulated more workarounds than structure and another patch will not pay, or the human says "start over", "scrap it and rebuild", or "restart from scratch". Produces an evidence-backed keep/discard split and a new v0 skeleton with one complete vertical loop and a named first gate. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when an implementation has accumulated more workarounds than structure and another patch will not pay. Produces an evidence-backed keep/discard split and a v0 skeleton. Not for re-deriving a subsystem contract in place — use breaking-driven.'
 ---
 
 # Restart keeping lessons

@@ -1,6 +1,6 @@
-# anchor-derivation.md — evidence to anchor pipeline
+# Evidence-to-anchor pipeline
 
-This pipeline converts local evidence into five generated anchors. Use it in order. Do not start from favorite influences. Start from evidence.
+This pipeline converts local evidence into five generated anchors. Follow it in order. Start from evidence, not favorite influences.
 
 ## Pipeline overview
 

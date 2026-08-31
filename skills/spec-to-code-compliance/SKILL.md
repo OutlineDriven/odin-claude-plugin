@@ -1,6 +1,6 @@
 ---
 name: spec-to-code-compliance
-description: 'Use when asked to check implementation path-by-path against an authoritative specification and return one grounded verdict per requirement with evidence of matches or divergences. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when implementation must be checked requirement-by-requirement against an authoritative specification, with evidence for each verdict. Not for writing or updating specs — use spec-driven-implementation. Don''t use for remote or irreversible changes.'
 ---
 
 # Spec to code compliance
@@ -25,48 +25,34 @@ Optional:
 - `coverage`: percentage or section target; defaults to 100 percent of stated requirements.
 - `divergence_thresholds`: minimum evidence count to confirm a divergence; defaults to two independent reads.
 
+## Refusal
+
+- Missing spec: stop. Report "No specification provided."
+- Unreadable spec: stop. Report the file or URL that could not be read.
+- Zero requirements extracted: stop. Report "Could not extract verifiable requirements from specification."
+- Missing implementation: stop. Report "No implementation provided."
+- Empty audit scope: stop. Report "No requirements in scope for audit."
+- All requirements unchecked: fail. Report "Audit could not verify any requirement."
+
 ## Procedure
 
-1. **Collect specification.** Read or parse the supplied spec document. Confirm it contains identifiable requirements. Stop if the document is unreadable or yields zero requirements.
-2. **Collect implementation.** List the source files or directories to audit. Stop if no implementation path is accessible.
-3. **Extract verifiable requirements.** Enumerate each distinct requirement the spec states. Assign each a stable identifier. Record the expected behavior verbatim from the spec.
-4. **Scope audit coverage.** If a `requirements` subset is supplied, limit the audit to those identifiers. If `coverage` is supplied, report the attained coverage fraction.
-5. **Audit each requirement independently.**
-   - 5a. For each requirement, locate the corresponding implementation paths using targeted searches across the implementation surface.
-   - 5b. Read the specific lines of code or configuration that implement the requirement.
-   - 5c. Compare the observed behavior against the spec's expected behavior.
-   - 5d. Record the requirement identifier, verdict, evidence (search query used and lines read), and the spec clause matched.
-6. **Test divergences independently.** For each requirement marked divergent:
-   - 6a. Run a second, independent search using a different query path or location strategy.
-   - 6b. Confirm or refute the divergence with the independent read.
-   - 6c. If refuted, revert the divergence verdict; if confirmed, retain it with both reads.
-7. **Reverse undocumented behavior.** Search the implementation for behaviors not covered by any spec requirement. Flag each as an undocumented behavior with its implementation location.
-8. **Compile report.** Assemble all findings into the output format. Mark any requirement that was not auditable due to unreadable paths, binary content, or access errors as `UNCHECKED` with the specific reason.
+1. **Collect specification.** Read or parse the supplied spec document. Confirm it contains identifiable requirements. Done when: the spec is parsed and contains at least one requirement, or a stop condition is reported.
+2. **Collect implementation.** List the source files or directories to audit. Done when: at least one implementation path is accessible, or a stop condition is reported.
+3. **Extract verifiable requirements.** Enumerate each distinct requirement the spec states. Assign each a stable identifier. Record the expected behavior verbatim from the spec. Done when: every requirement has an identifier and verbatim expected behavior.
+4. **Scope audit coverage.** If a `requirements` subset is supplied, limit the audit to those identifiers. If `coverage` is supplied, report the attained coverage fraction. Done when: the audit scope is bounded.
+5. **Audit each requirement independently.** For each requirement: locate the corresponding implementation paths using targeted searches, read the specific lines of code or configuration that implement the requirement, compare the observed behavior against the spec's expected behavior, and record the requirement identifier, verdict, evidence (search query used and lines read), and the spec clause matched. Done when: every in-scope requirement has a verdict with evidence.
+6. **Test divergences independently.** For each requirement marked divergent: run a second, independent search using a different query path or location strategy. Confirm or refute the divergence with the independent read. If refuted, revert the divergence verdict; if confirmed, retain it with both reads. Done when: every divergence is confirmed or refuted by a second independent read.
+7. **Reverse undocumented behavior.** Search the implementation for behaviors not covered by any spec requirement. Flag each as an undocumented behavior with its implementation location. Done when: undocumented behaviors are enumerated.
+8. **Compile report.** Assemble all findings into the output format. Mark any requirement that was not auditable due to unreadable paths, binary content, or access errors as `UNCHECKED` with the specific reason. Done when: the report is assembled with every requirement classified.
 
-## Failure and recovery
-- **Missing spec:** Stop. Report "No specification provided."
-- **Unreadable spec:** Stop. Report the file or URL that could not be read.
-- **Zero requirements extracted:** Stop. Report "Could not extract verifiable requirements from specification."
-- **Missing implementation:** Stop. Report "No implementation provided."
-- **Empty audit scope:** Stop. Report "No requirements in scope for audit."
-- **Unauditable requirement:** Record as `UNCHECKED` with reason; continue to next requirement. Do not fabricate a verdict.
-- **All requirements unchecked:** Fail. Report "Audit could not verify any requirement."
-- Partial-result rule: if the audit completes with some `UNCHECKED` or `DIVERGENT` findings, return the partial report with coverage caveat explicitly stated.
+## Failure modes
+
+- Unauditable requirement: record as `UNCHECKED` with reason; continue to next requirement. Do not fabricate a verdict.
+- Partial result: if the audit completes with some `UNCHECKED` or `DIVERGENT` findings, return the partial report with coverage caveat explicitly stated.
 
 ## Output
-A structured compliance report containing:
 
-- `spec_identifier`: name or version of the specification used.
-- `implementation_identifier`: path or version of the audited codebase.
-- `coverage`: fraction of requirements that received a verdict versus those that were unchecked.
-- `findings`: array of one record per requirement, each with:
-  - `requirement_id`: stable identifier from step 3.
-  - `status`: `COMPLIANT`, `DIVERGENT`, or `UNCHECKED`.
-  - `spec_clause`: the verbatim expected behavior.
-  - `evidence`: search queries used and source lines read.
-  - `divergence_verification`: for `DIVERGENT`, both independent reads confirming the gap.
-  - `undocumented_behavior`: for undocumented behaviors found in step 7, the location and observed behavior not covered by any spec requirement.
-- `unchecked_scope`: list of requirements that could not be audited and the reason for each.
+A structured compliance report: `spec_identifier`, `implementation_identifier`, `coverage` (verdicted vs unchecked fraction), `findings` (one record per requirement with `requirement_id`, `status` of `COMPLIANT`/`DIVERGENT`/`UNCHECKED`, `spec_clause`, `evidence`, `divergence_verification` for DIVERGENT, `undocumented_behavior` for step 7 findings), `unchecked_scope` (requirements that could not be audited with reasons).
 
 ## Provenance
 

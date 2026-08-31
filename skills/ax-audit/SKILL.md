@@ -1,6 +1,6 @@
 ---
 name: ax-audit
-description: 'Use when asked to audit an agent or AI feature for agentic-experience quality and return a severity-tiered report with a ship-readiness verdict. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when asked to audit an agent or AI feature for agentic-experience quality. Returns a severity-tiered report with a ship-readiness verdict. Not for source or remote-system changes.'
 ---
 
 # AX audit
@@ -22,7 +22,7 @@ description: 'Use when asked to audit an agent or AI feature for agentic-experie
 
 ## Procedure
 
-1. Read the target source or described behavior within the stated scope. Do not mutate anything.
+1. Read the target source or described behavior within the stated scope. Do not mutate anything. Done when: the target is read within the scope boundary.
 2. Evaluate the target against two audit axes, each with four rule families. Record every finding as `file:line — family — severity — explanation`.
 
    Architecture axis (rules-arch):
@@ -37,12 +37,14 @@ description: 'Use when asked to audit an agent or AI feature for agentic-experie
    - Control: no approval gate where one is needed for irreversible actions; no escape hatch to interrupt or redirect; control buried under conversational friction.
    - Trust: no confidence cues where the agent asserts without signaling certainty; no escalation path when the agent is stuck or uncertain; no uncertainty markers on outputs.
 
-3. Assign each finding a severity: Critical (blocks ship), Major (degrades trust or correctness), Minor (polish).
-4. Write the AX Relationship Summary: one paragraph stating how the agent and user relate across control, trust, context, and communication — whether the relationship is human-led, agent-led, or collaborative — and where it breaks down.
+   Done when: every rule family across both axes is evaluated and findings are recorded or marked unscannable.
+3. Assign each finding a severity: Critical (blocks ship), Major (degrades trust or correctness), Minor (polish). Done when: every finding has its severity assigned.
+4. Write the AX Relationship Summary. In one paragraph, state how the agent and user relate across control, trust, context, and communication. Classify the relationship as human-led, agent-led, or collaborative, and explain where it breaks down. Done when: the relationship summary paragraph is written with its classification.
 5. Issue the ship-readiness verdict:
    - PASS: no Critical findings; Major findings are acknowledged and acceptable.
    - FAIL: one or more Critical findings.
    - INCOMPLETE: scope or target was insufficient to evaluate one or more rule families.
+   Done when: the verdict is issued with its reason.
 
 ## Failure and recovery
 - Insufficient target: if the source or described behavior does not expose enough to evaluate a rule family, mark that family INCOMPLETE rather than guessing. Do not invent findings.
@@ -50,10 +52,7 @@ description: 'Use when asked to audit an agent or AI feature for agentic-experie
 - No mutation on failure: the audit is read-only; there is nothing to roll back. Re-run with expanded scope or additional source if the human provides it.
 
 ## Output
-A chat report containing:
-- Severity-tiered findings list, each with file:line, rule family, severity, and explanation.
-- AX Relationship Summary paragraph.
-- Ship-readiness verdict: PASS, FAIL, or INCOMPLETE, with the reason.
+A chat report ordered: severity-tiered findings (each with file:line, rule family, severity, explanation), AX Relationship Summary paragraph, ship-readiness verdict (PASS/FAIL/INCOMPLETE with reason).
 
 ## Provenance
 

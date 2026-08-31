@@ -1,13 +1,13 @@
-# Memory Audit Checklist
+# Memory audit checklist
 
-13 structural transforms + staleness detection.
+The audit covers 13 structural transforms and staleness detection.
 `audit-memory.sh` maps each finding to one of these categories.
 
 ## Severity levels
 
 - **critical** — data loss risk, security risk, or index/file inconsistency that corrupts future reads
 - **warn** — quality issue that degrades memory usefulness
-- **info** — cosmetic / maintenance issue
+- **info** — cosmetic or maintenance issue
 
 ---
 

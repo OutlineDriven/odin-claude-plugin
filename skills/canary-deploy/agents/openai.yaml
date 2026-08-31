@@ -1,3 +1,3 @@
 interface:
   display_name: "Canary Deploy"
-  short_description: "Drive a canary release to promote or roll back with evidence."
+  short_description: "Use when the user runs /canary-deploy to drive a canary release"

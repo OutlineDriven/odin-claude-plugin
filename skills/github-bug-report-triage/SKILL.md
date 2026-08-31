@@ -1,6 +1,6 @@
 ---
 name: github-bug-report-triage
-description: 'Use when evaluating whether a bug issue has sufficient detail and identifying missing information from the reporter. Don''t use for feature requests, questions, or non-bug issues.'
+description: 'Use when evaluating whether a bug issue has sufficient detail and identifying missing information from the reporter. Don''t use for feature requests, questions, non-bug issues, or repo-wide backlog triage — use github-backlog-triage.'
 disable-model-invocation: true
 ---
 
@@ -23,25 +23,21 @@ The project bug-report issue template, if one exists. Optional; located by the p
 
 ## Procedure
 
-1. Bound scope to a single bug issue. Do not edit, label, close, or post anything until the human authorizes.
-2. Read the issue title, body, and existing comments.
-3. If the issue is a feature request or a question, stop: do not evaluate it as a bug report.
-4. Locate the project bug-report template in this order: `.github/ISSUE_TEMPLATE/bug_report.md`, `.github/ISSUE_TEMPLATE/bug_report.yml`, `.github/ISSUE_TEMPLATE/*.md`, `.github/ISSUE_TEMPLATE.md`, `ISSUE_TEMPLATE.md`. If none exists, evaluate the issue against this bug-report field set: Summary (what is broken), Expected behavior, Actual behavior (including any error messages), Steps to reproduce or a reproduction link / minimal code example, and Environment (OS, runtime, version or commit, install method).
-5. Judge actionability against the minimum information needed to investigate, not against every template field being filled: a clear problem description plus a reproduction path (steps, link, or minimal code) or enough context to debug is sufficient.
-6. Classify the issue. Ready: clear problem description, a reproduction path or sufficient debug context, and actually a bug. Needs-info: vague description, missing reproduction and no code example, unclear expected behavior, or missing critical context such as an error message.
-7. If Ready, confirm the issue is actionable. If Needs-info, list each specific missing item constructively.
-8. Draft the comment text. Preview the comment and the target issue to the human. The human posts the comment or applies any label; the model does not post, label, or close autonomously.
+1. Bound scope to a single bug issue. Do not edit, label, close, or post anything until the human authorizes. Done when: the stated action, evidence, and guard all hold.
+2. Read the issue title, body, and existing comments. Done when: the stated action, evidence, and guard all hold.
+3. If the issue is a feature request or a question, stop: do not evaluate it as a bug report. Done when: the stated action, evidence, and guard all hold.
+4. Locate the project bug-report template in this order: `.github/ISSUE_TEMPLATE/bug_report.md`, `.github/ISSUE_TEMPLATE/bug_report.yml`, `.github/ISSUE_TEMPLATE/*.md`, `.github/ISSUE_TEMPLATE.md`, `ISSUE_TEMPLATE.md`. If none exists, evaluate the issue against this bug-report field set: Summary (what is broken), Expected behavior, Actual behavior (including any error messages), Steps to reproduce or a reproduction link / minimal code example, and Environment (OS, runtime, version or commit, install method). Done when: the stated action, evidence, and guard all hold.
+5. Judge actionability against the minimum information needed to investigate, not against every template field being filled: a clear problem description plus a reproduction path (steps, link, or minimal code) or enough context to debug is sufficient. Done when: the stated action, evidence, and guard all hold.
+6. Classify the issue. Ready: clear problem description, a reproduction path or sufficient debug context, and actually a bug. Needs-info: vague description, missing reproduction and no code example, unclear expected behavior, or missing critical context such as an error message. Done when: the stated action, evidence, and guard all hold.
+7. If Ready, confirm the issue is actionable. If Needs-info, list each specific missing item constructively. Done when: the stated action, evidence, and guard all hold.
+8. Draft the comment text. Preview the comment and the target issue to the human. The human posts the comment or applies any label; the model does not post, label, or close autonomously. Done when: the stated action, evidence, and guard all hold.
 
 ## Failure and recovery
-Non-bug issue: stop without evaluation and report that the issue is a feature request or question.
-
-Issue inaccessible or template unreadable: report the blocker; do not guess fields or invent missing-information requests.
-
-Ambiguous boundary (enough context to debug but no explicit reproduction): classify as Ready only when the error or context is specific enough to investigate; otherwise Needs-info, and state the reasoning.
-
-Partial result: never post a partial or placeholder missing-information request. If the determination is uncertain, return Needs-info naming the specific gap rather than asserting Ready.
-
-Non-mutation: on any failure no comment is posted and no issue state changes.
+- Non-bug issue: stop without evaluation and report that the issue is a feature request or question.
+- Issue inaccessible or template unreadable: report the blocker; do not guess fields or invent missing-information requests.
+- Ambiguous boundary (enough context to debug but no explicit reproduction): classify as Ready only when the error or context is specific enough to investigate; otherwise Needs-info, and state the reasoning.
+- Partial result: never post a partial or placeholder missing-information request. If the determination is uncertain, return Needs-info naming the specific gap rather than asserting Ready.
+- Non-mutation: on any failure no comment is posted and no issue state changes.
 
 ## Output
 A determination of Ready or Needs-info with reasoning, plus a drafted comment. For Needs-info the comment lists each specific missing item. No issue is mutated until the human posts the comment.

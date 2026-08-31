@@ -1,3 +1,3 @@
 interface:
   display_name: "Production Data Cleanup"
-  short_description: "Policy-conformant production dataset with a corrected classifier"
+  short_description: "Use when a production dataset violates a declared policy and"

@@ -1,6 +1,6 @@
 ---
 name: doc-review
-description: 'Use when the user asks to review or critique a prose planning document — a plan, spec, PRD, requirements doc, or design doc, or invokes /doc-review. Returns tiered findings with verbatim evidence from read-only multi-persona review and never edits the document under review. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when reviewing a prose plan, spec, PRD, requirements doc, design doc, or brainstorm, or invoking /doc-review. Returns tiered findings with verbatim evidence without editing the document. Not for collaborative drafting — use doc-coauthoring. No remote or irreversible changes.'
 ---
 
 # Doc review
@@ -22,11 +22,11 @@ description: 'Use when the user asks to review or critique a prose planning docu
 
 ## Procedure
 
-1. **Detect mode.**
+1. **Detect mode.** **Done when:** one mode is fixed for the run.
 
 Strip flag tokens from the arguments; use the remaining token as the document path. If `mode:headless` is present, run headless for the whole workflow: findings return as structured text, no blocking-question prompts, no interactive routing, Phase 5 returns immediately with `Review complete`. Otherwise run interactive mode.
 
-2. **Locate and classify by shape.**
+2. **Locate and classify by shape.** **Done when:** the document is resolved and classified by shape.
 
 Resolve the document. Prefer an explicit path. With none given (interactive), list `.md` candidates from likely homes and ask the user which one. One match → confirm and proceed. Several → present and let the user choose. Empty or missing → say so in one line and exit; launch no agents. Headless with no path → output `Review failed: headless mode requires a document path.` and exit.
 
@@ -39,7 +39,7 @@ When shape is genuinely ambiguous, default to `requirements` (the conservative c
 
 This skill reviews prose planning documents only. If the target is a diff or code file, stop — it is out of scope.
 
-3. **Select personas by signal.**
+3. **Select personas by signal.** **Done when:** the persona roster is justified by document signals.
 
 Always dispatch **coherence** + **feasibility**. Add a conditional lens only when the document carries its signal (spawning an unwarranted lens manufactures noise). Announce the team and a one-line justification per conditional persona before dispatch.
 
@@ -52,7 +52,7 @@ Always dispatch **coherence** + **feasibility**. Add a conditional lens only whe
 | scope-guardian | right-sizing / earns-its-keep | has priority tiers (P0/P1/P2), >8 requirements or units, stretch/future-work sections, or scope-boundary language misaligned with goals |
 | adversarial | falsification / assumption-surfacing | is a requirements doc with 2+ challengeable claims, touches a high-stakes domain (auth/payments/migrations/compliance/crypto), proposes a new abstraction/framework, is a plan with `origin: none`, or extends scope beyond its origin. NOT on a routine plan derived from a validated origin that stays in scope. |
 
-4. **Dispatch in parallel (read-only).**
+4. **Dispatch in parallel (read-only).** **Done when:** all selected personas are dispatched in one read-only parallel batch.
 
 Launch every selected persona in **one parallel tool-call message**. Sequential dispatch breaks the single-batch concurrency contract. Each subagent is read-only: no Write, no Edit, no files; it returns findings JSON only (it may use non-mutating tools — read, glob, grep, git log — to gather codebase context).
 
@@ -191,7 +191,7 @@ Pass the **full document**; never split into sections. An empty findings list is
 
 **Decision primer.** Round 1: `{decision_primer}` is an empty block. Round 2+: accumulate prior-round decisions (Applied, Skipped, Deferred, Acknowledged) with evidence snippets so synthesis can suppress re-raised rejected findings (R29) and verify fixes landed (R30). Cross-session persistence is out of scope; a new invocation starts fresh.
 
-5. **Synthesize findings.**
+5. **Synthesize findings.** **Done when:** findings complete the ordered synthesis pipeline.
 
 Run all returned findings through this pipeline. Order matters; re-evaluate state at each step boundary.
 
@@ -238,7 +238,7 @@ Run all returned findings through this pipeline. Order matters; re-evaluate stat
 
 **Four output tiers** (user-facing labels in parentheses): safe-auto (accepted recommendations), gated-auto (proposed fixes), manual (decisions), FYI (FYI observations).
 
-6. **Present and route.**
+6. **Present and route.** **Done when:** surviving findings are presented and routed.
 
 **User-facing vocabulary rule:** internal enum values (`safe_auto`, `gated_auto`, `manual`, `FYI`) stay inside the schema and synthesis prose. Every user-visible word uses plain language — "accepted recommendations", "proposed fixes", "decisions", "FYI observations" — except the `Tier` column in rendered tables, which names the internal enum. All tables are pipe-delimited markdown; escape literal `|` in cells as `\|`; never use ASCII box-drawing characters.
 
@@ -271,18 +271,17 @@ Option C is suppressed when all findings are already FYI-only.
 
 After the loop terminates, emit the unified completion report: per-finding entries (title, severity, action taken, optional reason) grouped by action bucket in order Accepted / Deferred / Skipped / Acknowledged, then summary counts, then Coverage, then the verdict; omit any zero-count bucket. Zero-findings degenerate case: emit the verdict with no per-finding entries.
 
-7. **Terminal question (interactive only).**
+7. **Terminal question (interactive only).** **Done when:** the interactive terminal choice resolves.
 
 After all findings are resolved, ask `Apply decisions and what next?` (when no decisions are queued, drop the `Apply decisions and` prefix). When `decisions_recorded_count > 0`: `A. Persist review record and exit` / `B. Re-review with updated context` / `C. Exit without persisting`. When `decisions_recorded_count == 0`: `A. Persist review record and exit` / `B. Exit without persisting`. After 2 refinement passes, recommend completion. Return `Review complete` as the terminal signal regardless of the choice. On re-review, re-dispatch with the decision primer and re-synthesize; fixed findings self-suppress (evidence gone), rejected findings are handled by R29, accepted-recommendation verification uses R30; if findings repeat after these mechanisms run, recommend completion.
 
-8. **Review-record (only on request).**
+8. **Review-record (only on request).** **Done when:** only the requested review record is written and read back.
 
 Default: report findings inline; write nothing. The reviewed document and the rest of the tree stay untouched. On `--record` (or when the user asks to persist), write **one** file: `docs/reviews/<doc-slug>-review.md` containing the tiered findings, the classification, and the persona roster. Then read it back to confirm it landed and stage only that path:
 ```
 git add docs/reviews/<doc-slug>-review.md
 ```
 Never `git add -A` / `git add .`. Never stage the reviewed document. Commit by the repo's normal flow.
-
 ## Failure and recovery
 - **Document not resolvable:** empty/missing candidate set → say so in one line and exit; launch no agents. Headless with no path → `Review failed: headless mode requires a document path.` and exit.
 - **Subagent failure or timeout:** proceed with findings from subagents that completed; note the failed reviewer in Coverage. Never block the entire review on a single reviewer failure.

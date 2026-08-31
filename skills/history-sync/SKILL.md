@@ -1,6 +1,6 @@
 ---
 name: history-sync
-description: 'Use when the user explicitly requests memory transfer to or from their own named peer machine. Exports redacted static JSONL batches, imports them idempotently, and advances per-peer watermarks. Don''t use for unnamed peers, unredacted transfer, live remote database access, or irreversible changes.'
+description: 'Use when the user requests memory transfer to or from a named peer. Exports redacted static JSONL batches, imports them idempotently, and advances per-peer watermarks. Not for recalling a session — use history-recall; not for store registration — use history-source-registry.'
 disable-model-invocation: true
 ---
 

@@ -1,31 +1,42 @@
 ---
 name: frame-rate-stability
-description: 'Use when a rendering path needs stable frame-time, CPU, GPU, and memory evidence. Produces Multi-metric frame-rate stability. Stop at the declared success, non-success, or bound.'
+description: 'Use when a rendering path needs stable frame-time, CPU, GPU, and memory evidence: stabilize frame rate against fixed targets, then prove every target with two consecutive same-scenario runs. Not for one-shot profiling or visual quality review.'
 ---
 
-# frame-rate-stability
+# Frame-rate stability
 
 ## Contract
 
 | Field | Bound contract |
 |---|---|
 | Trigger | A rendering path needs stable frame-time, CPU, GPU, and memory evidence. |
-| Authority | REVERSIBLE_LOCAL |
-| Side effect | Multi-metric frame-rate stability |
+| Authority | Reversible local: write only named local artifacts; state and follow the rollback path before mutating. |
+| Side effect | Multi-metric frame-rate stabilization: local writes to the rendering path and its configuration. |
 | Done | Every fixed target holds for two consecutive same-scenario runs. |
-| Stop | no safe gain; blocked; budget exhausted. Bound: Fixed hardware, build, scene, settings, and budget.. Receipt terminal classes: success, capped, stalled, blocked, exhausted, pending. Budget exhaustion is never success unless it is the predeclared success predicate. |
+
+## Inputs
+
+- The fixed hardware, build, scene, settings, and budget. Required.
+- The bound: freeze all before any mutation.
 
 ## Procedure
 
-1. Bind the declared bound and freeze it before mutation.
-2. Execute the Multi-metric frame-rate stability inside the bound.
-3. Stop at outcome.success, any outcome.non_success, or outcome.bound.
-4. Persist per profiles.persistence.P1 (durable_location .outline/loops/<slug>/<run_id>/ when durable; emit receipt.json before return).
+1. Bind the fixed hardware, build, scene, settings, and budget; freeze all before any mutation. Done when: every bound element is named and frozen.
+2. Stabilize frame rate against the fixed targets inside the bound, collecting frame-time, CPU, GPU, and memory evidence. Done when: every target is addressed with evidence.
+3. Prove every target with two consecutive same-scenario runs. Done when: both runs hold every target, or a target fails and is revisited.
+4. Stop at success (all targets hold for two consecutive runs), any non-success terminal (no safe gain, blocked, budget exhausted), or the bound. Done when: a terminal class is reached and named.
+5. Persist the run per the durability policy; emit the receipt before return. Done when: the run record and receipt are written.
 
-## Verification
+## Failure and recovery
 
-1. Confirm outcome.success holds or a named non_success/bound terminal applies.
-2. Write an immutable K11 receipt with every K11 field.
+- **No safe gain**: no stabilization preserves the targets without a visual or behavioral regression. Terminal `stalled`; report what was attempted and why the gain was unsafe.
+- **Blocked**: the hardware, build, or scene cannot be exercised. Terminal `blocked`; report the blocking condition.
+- **Budget exhausted**: the declared budget is spent before every target holds for two consecutive runs. Terminal `capped`; report which targets held and which remain. Budget exhaustion is never success unless it is the predeclared success predicate.
+- **Partial result**: emit the evidence and target results obtained; never present a single-run pass as two-consecutive-run proof.
+
+## Output
+
+A terminal classification (`success`, `capped`, `stalled`, `blocked`, `exhausted`, or `pending`) plus the per-target frame-time, CPU, GPU, and memory evidence from both consecutive runs, and the run receipt.
 
 ## Provenance
 

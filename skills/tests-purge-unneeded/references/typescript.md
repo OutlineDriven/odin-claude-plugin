@@ -61,7 +61,7 @@ it("service.getUser calls repo.findById", () => {
 });
 ```
 
-Asserting that the mock was called with what the test passed, returning the fixture the test set up. Zero real surface. Replace with a real-DB integration test or delete.
+This test asserts that the mock was called with the value the test passed and returned the fixture the test set up. It exposes no real bug surface. Replace it with a real-DB integration test or delete it.
 
 ## Keep
 

@@ -4,7 +4,7 @@ Use this rubric when ranking GitHub evidence for a concrete engineering problem 
 
 ## Default score: 100 points
 
-| Category | Points | What to Check |
+| Category | Points | What to check |
 | --- | ---: | --- |
 | Problem match | 35 | Same error, symptom, API, dependency, framework, version class, runtime, config, workflow, capability, or failure mode. |
 | Evidence strength | 20 | Maintainer confirmation, merged PR, released fix, official example, test fixture, repeated independent reports, clear reproduction, or mature project implementation. |

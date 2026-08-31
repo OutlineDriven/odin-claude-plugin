@@ -19,7 +19,7 @@ The goal is forensic context without data exposure. A logged secret in a debug s
 
 ## Root-cause tracing
 
-When a bug manifests deep in the call stack, the instinct is to fix where the error appears. That treats a symptom. Instead, trace backward through the call chain to find where the bad state originated.
+When a bug manifests deep in the call stack, the instinct is to fix the point where the error appears. That treats the symptom. Trace backward through the call chain instead to find where the bad state originated.
 
 **Backward tracing:**
 
@@ -59,7 +59,7 @@ Use `console.error()` in tests; logger output may be suppressed. Log before the 
 
 ## Multi-component boundary instrumentation
 
-Root-cause tracing walks one call chain. When a bug crosses subsystems (CI to build to signing, API to service to database, frontend to API to background worker), the failure localizes poorly to a single chain. Instead, capture a tagged state snapshot at each component boundary in one run, and let the evidence point to the failing layer.
+Root-cause tracing follows one call chain. When a bug crosses subsystems (CI to build to signing, API to service to database, frontend to API to background worker), the failure is hard to localize to one chain. Capture a tagged state snapshot at each component boundary in one run, then use the evidence to identify the failing layer.
 
 **Shape:**
 
@@ -90,7 +90,7 @@ echo "=== [L4:codesign] entry ==="
 codesign --sign "$IDENTITY" --verbose=4 "$APP"
 ```
 
-One run, and the log shows precisely which layer drops the value: L1 shows SET, L2 shows UNSET, so focus investigation on the workflow-to-build-script inheritance, not on signing. Never log the raw value of a secret; log only its presence.
+The log from one run shows precisely which layer drops the value: L1 shows SET and L2 shows UNSET, so investigate the workflow-to-build-script inheritance, not signing. Never log the raw value of a secret; log only its presence.
 
 **When this beats backward tracing:** When the symptom is far from the trigger (many components apart), when components are owned by different systems (CI vs app code), when the "call stack" is conceptual rather than literal (message bus, HTTP, process boundaries). Backward tracing still applies within each layer once the failing layer is identified.
 
@@ -206,7 +206,7 @@ The minimized repro often reveals the root cause directly: "the bug only trigger
 
 ## Stepping debugger vs instrumentation
 
-Print-debugging is the default reach; it is fast to add and scales across many cases. But there are cases where an interactive stepping debugger converges to the root cause far faster. The rule of thumb:
+Print-debugging is the default tool: it is fast to add and scales across many cases. An interactive stepping debugger can reach the root cause much faster in some cases. Use this rule of thumb:
 
 - **Reach for a stepping debugger when:** the failing code path is localized (a specific function or tight call chain), the bug is reliably reproducible, and precise state at a known point is needed: values of many locals at once, the exact shape of a structure, or the progression of state across a loop. One break, inspect everything.
 - **Reach for instrumentation when:** the bug is intermittent, spans many calls or distributed components, or happens in a context where breaking execution is disruptive (production, concurrent code whose timing matters, long-running processes). Instrumentation captures diffuse behavior across time and environments.
@@ -290,7 +290,7 @@ The defining rule: if the bug is sensitive to observation, the fix must survive 
 
 ## Evidence harvesting across systems
 
-When a bug spans a real environment (production, staging, a multi-service setup), the richest evidence usually already exists in logs, traces, and error-tracker payloads. Use it rather than reproducing from scratch when possible.
+When a bug spans a real environment (production, staging, a multi-service setup), useful evidence usually already exists in logs, traces, and error-tracker payloads. Use it rather than reproducing from scratch when possible.
 
 **Follow a single request end-to-end.** Pick one concrete failing request (an exact timestamp, user ID, or event ID from an error tracker). Then:
 

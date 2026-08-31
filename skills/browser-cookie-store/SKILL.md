@@ -1,6 +1,6 @@
 ---
 name: browser-cookie-store
-description: 'Use when the user runs /browser-cookie-store to populate the session cookie store from installed browsers. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user runs /browser-cookie-store to populate the session cookie store from installed browsers. Not for remote, credential, publish, deploy, or irreversible changes.'
 disable-model-invocation: true
 ---
 
@@ -17,16 +17,16 @@ disable-model-invocation: true
 
 ## Inputs
 
-- Installed browsers on the local machine (optional which browsers are present, but at least one must be available).
+- Installed browsers on the local machine. The user may specify which browsers are present, but at least one must be available.
 - The skill session cookie store path (supplied by the harness).
 
 ## Procedure
 
-1. Enumerate installed browsers on the local machine; stop if none are present.
-2. For each installed browser, read its local cookie database and extract session cookies only.
-3. Write the extracted session cookies into the skill session cookie store.
-4. Keep every read and write on the local host; never transmit cookies to any remote endpoint.
-5. Verify the store contains the imported cookies and report ready.
+1. Enumerate installed browsers on the local machine; stop if none are present. Done when: the browser list is confirmed non-empty or the stop is reported.
+2. For each installed browser, read its local cookie database and extract session cookies only. Done when: session cookies are extracted from each available browser or the browser is marked skipped.
+3. Write the extracted session cookies into the skill session cookie store. Done when: the store holds the extracted cookies.
+4. Keep every read and write on the local host; never transmit cookies to any remote endpoint. Done when: no network transmission occurred during extraction or write.
+5. Verify the store contains the imported cookies and report ready. Done when: the store is verified and the ready report is emitted.
 
 ## Failure and recovery
 - No installed browser: stop, report not-ready, do not write the store.

@@ -1,6 +1,6 @@
 ---
 name: history-source-registry
-description: 'Use when a coding-agent session store is added or its format drifts, to document its discovery, layout, roles, time handling, and quirks in the registry with a passing conformance fixture. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a coding-agent session store is added or its format drifts, to document its layout, roles, time handling, and quirks in the registry with a passing conformance fixture. Not for recalling a session — use history-recall; not for peer transfer — use history-sync.'
 ---
 
 # History source registry
@@ -31,9 +31,9 @@ description: 'Use when a coding-agent session store is added or its format drift
 
 3. **Bound scope.** Do not read real transcripts beyond the minimum needed to extract layout, roles, time, and quirks. Use the smallest representative record. Never copy or expose real transcript content into documentation or fixtures.
 
-4. **Create or update the registry entry.** Add or modify the store entry in the registry JSON. Fields: identifier, discovery glob, layout summary, roles, time format, known quirks, page date, and documentation page path. Ensure the page date matches the current date.
+4. **Create or update the registry entry.** Add or modify the store entry in the registry JSON. Include these fields: identifier, discovery glob, layout summary, roles, time format, known quirks, page date, and documentation page path. Ensure the page date matches the current date.
 
-5. **Write or update the documentation page.** Create or update the per-source markdown page under the documentation root. Document: how to discover transcripts, the file layout, role encoding, timestamp format, and known quirks. Use a synthetic redacted example, never a real transcript.
+5. **Write or update the documentation page.** Create or update the per-source markdown page under the documentation root. Explain how to discover transcripts, the file layout, role encoding, timestamp format, and known quirks. Use a synthetic redacted example, never a real transcript.
 
 6. **Create or update the conformance fixture.** Under the fixture root, create or update a minimal synthetic fixture that exercises the store discovery glob and loader path. The fixture must contain no real credentials or transcript content. It must be loadable by the test harness.
 

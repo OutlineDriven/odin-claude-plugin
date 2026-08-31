@@ -1,3 +1,3 @@
 interface:
   display_name: "Constant Time Analysis"
-  short_description: "Detect secret-dependent variable-time code in compiled output."
+  short_description: "Use when reviewing cryptographic code for timing side-channels"

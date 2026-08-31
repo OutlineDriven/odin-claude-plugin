@@ -1,4 +1,4 @@
-# Boundaries and Routing
+# Boundaries and routing
 
 Load this when the input's fit for `pov` is in doubt, or to route a Hold (SKILL.md Phase 0).
 

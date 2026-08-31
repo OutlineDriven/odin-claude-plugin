@@ -1,3 +1,3 @@
 interface:
   display_name: "Guardrail Carve Run"
-  short_description: "Carve guardrail scope, run safe remainder"
+  short_description: "Use when a task carries guardrail-adjacent material — stealth,"

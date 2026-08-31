@@ -1,6 +1,6 @@
 ---
 name: backlog
-description: 'Use when asked to park an undecided idea without representing it as decided or active work. The idea lands in a reversible local backlog entry with recorded evidence and a readiness threshold for later promotion. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to park an undecided idea without representing it as decided or active work. Creates or updates one reversible local backlog entry with evidence and a readiness threshold. Not for decided or active work — use the project task system.'
 ---
 
 # Backlog
@@ -24,12 +24,12 @@ description: 'Use when asked to park an undecided idea without representing it a
 
 ## Procedure
 
-1. Validate inputs at their trust boundary: confirm the idea statement is a single coherent proposal, the undecided reason names a concrete missing input, and the readiness threshold is falsifiable — a human or tool could test it and get a yes/no.
-2. Bound scope: this skill only parks the idea. Do not evaluate, rank, or promote it. Do not create tasks, requirements, or tickets.
-3. Locate or create the backlog store. If a backlog file exists, append to it; otherwise create one with a header marking it as undecided-parking only.
-4. Write one entry containing: a stable identifier, the idea statement, the undecided reason, the readiness threshold, any supplied evidence, and the timestamp. Mark the entry status `parked`.
-5. Record the entry as a reversible local state change: the file write is the only mutation. No commit, push, or remote call occurs.
-6. Confirm the done predicate: the entry exists, is marked `parked`, and carries its readiness threshold so a later promotion step can test it.
+1. Validate the inputs: confirm the idea statement is a single coherent proposal, the undecided reason names a concrete missing input, and the readiness threshold is falsifiable. A human or tool must be able to test it and get a yes/no result. Done when: all three required inputs are validated as coherent, concrete, and falsifiable.
+2. Bound scope: this skill only parks the idea. Do not evaluate, rank, or promote it. Do not create tasks, requirements, or tickets. Done when: scope is bounded to parking only with no evaluation, ranking, or promotion.
+3. Locate or create the backlog store. If a backlog file exists, append to it; otherwise create one with a header marking it as undecided-parking only. Done when: the backlog store is located or created.
+4. Write one entry with the idea statement, undecided reason, readiness threshold, any supplied evidence, timestamp, and a stable identifier. Derive the identifier from the idea statement as a kebab-case slug (lowercase words joined by hyphens, with non-alphanumerics dropped); on collision with an existing identifier, append `-2`, `-3`, and so on. Mark the entry status `parked`. Done when: the entry is written with all fields and marked `parked`.
+5. Record the entry as a reversible local state change: the file write is the only mutation. No commit, push, or remote call occurs. Done when: the entry is recorded as the only mutation with no commit, push, or remote call.
+6. Confirm the done predicate: the entry exists, is marked `parked`, and carries its readiness threshold so a later promotion step can test it. Done when: the entry is confirmed present, parked, and threshold-carrying.
 
 ## Failure and recovery
 - **Non-falsifiable threshold**: if the readiness threshold cannot be checked with a yes/no outcome, stop and ask the user to restate it as a testable condition. Do not park an entry whose promotion trigger is subjective.
@@ -38,8 +38,11 @@ description: 'Use when asked to park an undecided idea without representing it a
 - **Partial result**: no partial state is valid. Either the full entry is written or nothing is written. A failed write leaves the backlog unchanged.
 
 ## Output
-One backlog entry in the local backlog store, marked `parked`, carrying its idea statement, undecided reason, readiness threshold, evidence, and timestamp. The entry is ready to be promoted by a later decision step that tests the threshold.
+One backlog entry in the local backlog store, marked `parked`, carrying its idea statement, undecided reason, readiness threshold, evidence, and timestamp — ready to be promoted by a later decision step that tests the threshold.
 
 ## Provenance
 
-Origin: user-curated idea-intake workflow recorded in `project-owned:user-curated-skill-ideas` (supplemented by `project-owned:user-supplied-source-brief`). Revision: unpinned. License: project-owned. Adaptation: clean-room restatement of the idea-intake and triage mechanism — park undecided ideas with recorded evidence, promote ready items when they meet a reversible readiness threshold.
+- Origin: user-curated idea-intake workflow recorded in `project-owned:user-curated-skill-ideas` (supplemented by `project-owned:user-supplied-source-brief`).
+- Revision: unpinned.
+- License: project-owned.
+- Adaptation: clean-room restatement of the idea-intake and triage mechanism — park undecided ideas with recorded evidence, then promote ready items when they meet a reversible readiness threshold.

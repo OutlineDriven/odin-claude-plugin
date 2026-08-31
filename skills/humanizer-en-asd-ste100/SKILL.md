@@ -1,6 +1,6 @@
 ---
 name: humanizer-en-asd-ste100
-description: 'Use when asked to rewrite technical English for STE compliance: strip ambiguity and AI-style patterns so non-native readers and downstream agents parse every sentence correctly. Trigger: user asks for STE-rewritten or de-slopped technical prose. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when asked to rewrite technical English for STE compliance, stripping ambiguity and AI-style patterns so non-native readers and downstream agents parse every sentence. Not for French de-AI-ification — use humaniseur-fr.'
 ---
 
 # Humanizer en ASD-STE100
@@ -18,7 +18,7 @@ description: 'Use when asked to rewrite technical English for STE compliance: st
 ## Inputs
 
 - **Source text** (required): the document or prose passage to rewrite. May be provided inline or as a file path.
-- **Mode** (optional): `rewrite` applies full structural rules and flags lexical residuals; `write` applies full structural rules and enforces the lexical direction of travel. If omitted, infer from document type: procedures and error strings default to `write`; explanatory prose defaults to `rewrite`.
+- **Mode** (optional): `rewrite` applies full structural rules and flags lexical residuals; `write` applies full structural and lexical rules. If omitted, infer from document type: procedures and error strings default to `write`; explanatory prose defaults to `rewrite`.
 - **Rule table** (optional, default false): set to `true` to emit a before/after rule-violation table alongside the rewritten text.
 
 ## Procedure
@@ -57,7 +57,7 @@ In `write` mode, enforce; in `rewrite` mode, flag but do not enforce.
 | Simple tenses (Rule 3.2) | Infinitive, imperative, simple present, simple past, simple future; avoid present perfect unless current relevance is asserted |
 | Domain terms | Keep necessary technical nouns; define each once if not common English |
 
-5. **Check modality before committing any rewrite.**
+5. **Check modality before rewriting.**
 
 Hedges ("may", "could", "is likely to") carry the author's confidence. Replacing them with assertions changes the claim. If simplifying a sentence would promote a hedge, keep the longer form and flag the trade-off instead of silently changing the claim.
 
@@ -90,4 +90,4 @@ The done predicate holds when the returned document contains no structural STE v
 
 Origin: `samber/cc-skills` (source: `source:source-samber:samber-humanizer-en-asd-ste100`), revision `f9953962e135235137628ea92d06ea085688031f`. License: MIT.
 
-Clean-room adaptation of the ASD-STE100 Issue 9 (Jan 2025) rule categories into a model+human skill procedure, with rewrite and write modes covering the full structural/lexical split. ASD-STE100 is a registered standard of ASD (AeroSpace and Defence Industries Association of Europe). The ~900-word approved dictionary is not reproduced; lexical rules are applied as a direction of travel without claiming full standard compliance.
+Clean-room adaptation of the ASD-STE100 Issue 9 (Jan 2025) rule categories into a model+human skill procedure, with rewrite and write modes covering the full structural/lexical split. ASD-STE100 is a registered standard of ASD (AeroSpace and Defence Industries Association of Europe). The ~900-word approved dictionary is not reproduced; lexical rules guide the rewrite without claiming full standard compliance.

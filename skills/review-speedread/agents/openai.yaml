@@ -1,3 +1,3 @@
 interface:
   display_name: "Review Speedread"
-  short_description: "Show a compact change shape before reading a full diff."
+  short_description: "Use when a human asks for the change shape before reading a"

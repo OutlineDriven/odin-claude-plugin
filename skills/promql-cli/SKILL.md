@@ -1,9 +1,9 @@
 ---
 name: promql-cli
-description: 'Use when a user asks to execute or investigate PromQL or to debug latency, error, or saturation signals. Correct query output (table/csv/json/graph) or a debug diagnosis is returned. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when a user asks to execute or investigate PromQL or to debug latency, error, or saturation signals. Returns correct query output (table/csv/json/graph) or a debug diagnosis. Don''t use for tasks that require source or remote-system changes.'
 ---
 
-# Promql CLI
+# PromQL CLI
 
 ## Contract
 
@@ -24,13 +24,13 @@ description: 'Use when a user asks to execute or investigate PromQL or to debug 
 
 ## Procedure
 
-1. Validate that the PromQL query is non-empty and syntactically plausible.
-2. Confirm the Prometheus server URL is reachable; stop if connection fails.
-3. Construct the promql CLI invocation with the query, server URL, and any optional time range, step, or format flags.
-4. Execute the promql CLI read-only.
-5. Capture stdout and stderr.
-6. If stderr contains errors, classify the failure (see Failure and recovery).
-7. Return the output in the requested format.
+1. Validate that the PromQL query is non-empty and syntactically plausible. Done when: the query is non-empty and syntactically plausible.
+2. Confirm the Prometheus server URL is reachable; stop if connection fails. Done when: the server URL is confirmed reachable or the run stops.
+3. Construct the promql CLI invocation with the query, server URL, and any optional time range, step, or format flags. Done when: the CLI invocation is constructed with all supplied parameters.
+4. Execute the promql CLI read-only. Done when: the CLI has been executed.
+5. Capture stdout and stderr. Done when: stdout and stderr are captured.
+6. If stderr contains errors, classify the failure (see Failure and recovery). Done when: errors are classified or stderr is clean.
+7. Return the output in the requested format. Done when: the output is returned in the requested format.
 
 ## Failure and recovery
 - **Connection failure**: Prometheus server unreachable or DNS resolution fails. Report the URL and error; do not retry silently.
@@ -41,7 +41,7 @@ description: 'Use when a user asks to execute or investigate PromQL or to debug 
 - No partial results are returned on failure. No files are written.
 
 ## Output
-Query results in the requested format (table, csv, json, or graph). On failure, a diagnosis describing the failure class and the server or CLI error message.
+Return query results in the requested format (table, csv, json, or graph). On failure, return a diagnosis that names the failure class and includes the server or CLI error message.
 
 ## Provenance
 

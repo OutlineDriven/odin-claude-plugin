@@ -1,6 +1,6 @@
 # Feeding CI failures back to agents
 
-CI and AI agents work together through the failure feedback loop. When CI fails:
+When CI fails, use this feedback loop with the agent:
 
 ```
 CI fails

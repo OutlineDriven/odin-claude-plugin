@@ -1,6 +1,6 @@
 ---
 name: fastify-production-hardening
-description: 'Use when asked to prepare a Fastify service for production load and exposure: performance, load shedding, CORS/security headers, rate limiting, redacted logging, proxying, and deployment config. Leaves a measured performance baseline, enabled load shedding, configured rate limiting and security headers, and redacted secrets from logs. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to prepare a Fastify service for production load and exposure: performance, load shedding, CORS/security headers, rate limiting, redacted logging, proxying, and deployment config. Not for building the app — use fastify-schema-first-service.'
 ---
 
 # Fastify production hardening
@@ -21,15 +21,15 @@ Optional: a target base URL for load/profiling checks (defaults to a local insta
 
 ## Procedure
 
-1. Read the current server entry point and config to inventory which hardening concerns are already set: connection and keep-alive timeouts, body and param limits, CORS, security headers, rate limiting, logger redaction, trustProxy, and any proxy registration.
-2. Enable load shedding and performance limits in the Fastify server options: set `connectionTimeout`, `keepAliveTimeout`, `requestTimeout`, `bodyLimit`, and `maxParamLength` to production values; register `@fastify/under-pressure` (or equivalent memory/heap shedding) with a max heap or RSS threshold that returns 503 under pressure.
-3. Configure rate limiting: register `@fastify/rate-limit` with a global max and time window, and per-route overrides for expensive endpoints. Set `trustProxy` so the limiter and logs see the real client IP behind a reverse proxy.
-4. Configure CORS and security headers: register `@fastify/cors` with an explicit origin allowlist (not wildcard) and `@fastify/helmet` with default production directives; tighten or relax directives only against the service's actual response surface.
-5. Redact secrets from logs: set the pino logger `redact` paths to cover authorization headers, cookies, tokens, passwords, and any field the service places secrets in; verify a sample request logs no secret value.
-6. Configure proxying only if the service fronts an upstream: register `@fastify/http-proxy` with the upstream and prefix; keep the proxy path rewriting explicit and do not forward the redacted headers upstream unchanged.
-7. Set deployment config: bind `host` to the production interface, set `port` from the deployment environment, enable graceful shutdown via the server close path so in-flight requests drain on SIGTERM, and confirm the process manager (PM2, systemd, or container) respects that signal.
-8. Run a load/profiling check against the target: ramp requests with an existing load tool, capture throughput, latency percentiles, and error rate, and confirm the shedding and rate-limit paths return 503 or 429 under overload rather than crashing.
-9. Record the measured performance baseline (throughput, p50/p95/p99 latency, error rate, shedding threshold) in a file or report committed alongside the config.
+1. Read the current server entry point and config to inventory which hardening concerns are already set: connection and keep-alive timeouts, body and param limits, CORS, security headers, rate limiting, logger redaction, trustProxy, and any proxy registration. Done when: the hardening inventory is complete.
+2. Enable load shedding and performance limits in the Fastify server options: set `connectionTimeout`, `keepAliveTimeout`, `requestTimeout`, `bodyLimit`, and `maxParamLength` to production values; register `@fastify/under-pressure` (or equivalent memory/heap shedding) with a max heap or RSS threshold that returns 503 under pressure. Done when: timeouts, limits, and under-pressure shedding are set.
+3. Configure rate limiting: register `@fastify/rate-limit` with a global max and time window, and per-route overrides for expensive endpoints. Set `trustProxy` so the limiter and logs see the real client IP behind a reverse proxy. Done when: `@fastify/rate-limit` is registered with global max, time window, per-route overrides, and `trustProxy` is set.
+4. Configure CORS and security headers: register `@fastify/cors` with an explicit origin allowlist (not wildcard) and `@fastify/helmet` with default production directives; tighten or relax directives only against the service's actual response surface. Done when: `@fastify/cors` with explicit origin allowlist and `@fastify/helmet` with production directives are registered.
+5. Redact secrets from logs: set the pino logger `redact` paths to cover authorization headers, cookies, tokens, passwords, and any field the service places secrets in; verify a sample request logs no secret value. Done when: pino `redact` paths cover all secret fields and a sample request logs no secret.
+6. Configure proxying only if the service fronts an upstream: register `@fastify/http-proxy` with the upstream and prefix; keep the proxy path rewriting explicit and do not forward the redacted headers upstream unchanged. Done when: `@fastify/http-proxy` is registered with upstream and prefix, or the service has no upstream.
+7. Set deployment config: bind `host` to the production interface, set `port` from the deployment environment, enable graceful shutdown via the server close path so in-flight requests drain on SIGTERM, and confirm the process manager (PM2, systemd, or container) respects that signal. Done when: host, port, graceful shutdown, and process-manager signal handling are configured.
+8. Run a load/profiling check against the target: ramp requests with an existing load tool, capture throughput, latency percentiles, and error rate, and confirm the shedding and rate-limit paths return 503 or 429 under overload rather than crashing. Done when: throughput, latency percentiles, and error rate are captured, and shedding/rate-limit paths return 503/429 under overload.
+9. Record the measured performance baseline (throughput, p50/p95/p99 latency, error rate, shedding threshold) in a file or report committed alongside the config. Done when: the baseline is committed alongside the config.
 
 ## Failure and recovery
 - Missing plugin: stop and report which plugin is unavailable; do not substitute an unverified alternative. Roll back by reverting config to the prior VCS revision.

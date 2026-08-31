@@ -1,3 +1,3 @@
 interface:
   display_name: "Find Bugs"
-  short_description: "Prioritized bug, security, and quality findings with evidence."
+  short_description: "Use when the user asks to review changes, find bugs, run a"

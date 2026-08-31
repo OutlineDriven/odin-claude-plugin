@@ -1,4 +1,4 @@
-# False-positive Contract and Audit Loop Rules
+# False-positive contract and audit loop rules
 
 This file is the adjudication contract for audit-project. Reviewer output is untrusted until it passes these rules.
 

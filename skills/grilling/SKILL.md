@@ -1,6 +1,6 @@
 ---
 name: grilling
-description: 'Use when a complex decision tree needs round-by-round user choices. Map the decision frontier, fire it as batched single-select questions, and loop until the frontier is empty and shared understanding is confirmed. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when a complex decision tree needs round-by-round user choices; fire batched single-select questions and loop until the frontier is empty and understanding is confirmed. Not for numbered stress-test rounds — use grill-me; never source or remote-system changes.'
 ---
 
 # Grilling
@@ -20,12 +20,12 @@ The user's stated problem or decision topic, supplied in the invoking message or
 
 ## Procedure
 
-1. **Map the decision tree.** From the user's stated problem and the conversation context, enumerate every decision point and the dependency edges between them (which decision gates which downstream decisions). This open set is the frontier.
-2. **Resolve agent-owned facts first.** For each decision point whose answer is an environmental or codebase fact, look it up with read-only tools (`read`, `grep`, `glob`) rather than asking the user. Record the resolution and its basis, and remove that point from the frontier. The agent owns facts; it never asks the user for something the repo can answer.
-3. **Fire the frontier as batched single-select questions.** Present the current frontier as one batch of single-select questions, one question per open decision point, each carrying a recommended default marked as non-binding. The user owns the decision; the agent never selects on the user's behalf.
-4. **Apply the answers and advance the frontier.** For each user answer, prune the resolved branch, unblock dependent decision points the answer exposes, and re-scan for newly revealed decisions. Add any new decision points to the frontier.
-5. **Loop round by round.** Repeat steps 2 through 4 until the frontier is empty. Each round is one fact-resolution pass plus one question batch; never batch a second round before the user answers the first.
-6. **Confirm shared understanding.** Once the frontier is empty, restate the full resolved decision tree back to the user as a single summary and ask one final confirmation question. The skill is done only when the user confirms.
+1. **Map the decision tree.** From the user's stated problem and the conversation context, enumerate every decision point and the dependency edges between them (which decision gates which downstream decisions). This open set is the frontier. Done when: the stated action, evidence, and guard all hold.
+2. **Resolve agent-owned facts first.** For each decision point whose answer is an environmental or codebase fact, look it up with read-only tools (`read`, `grep`, `glob`) rather than asking the user. Record the resolution and its basis, and remove that point from the frontier. The agent owns facts; it never asks the user for something the repo can answer. Done when: the stated action, evidence, and guard all hold.
+3. **Fire the frontier as batched single-select questions.** Present the current frontier as one batch of single-select questions, one question per open decision point, each carrying a recommended default marked as non-binding. The user owns the decision; the agent never selects on the user's behalf. Done when: the stated action, evidence, and guard all hold.
+4. **Apply the answers and advance the frontier.** For each user answer, prune the resolved branch, unblock dependent decision points the answer exposes, and re-scan for newly revealed decisions. Add any new decision points to the frontier. Done when: the stated action, evidence, and guard all hold.
+5. **Loop round by round.** Repeat steps 2 through 4 until the frontier is empty. Each round is one fact-resolution pass plus one question batch; never batch a second round before the user answers the first. Done when: the stated action, evidence, and guard all hold.
+6. **Confirm shared understanding.** Once the frontier is empty, restate the full resolved decision tree back to the user as a single summary and ask one final confirmation question. The skill is done only when the user confirms. Done when: the stated action, evidence, and guard all hold.
 
 ## Failure and recovery
 - **Empty frontier, no decisions found.** The stated problem was not a decision tree. Stop and report that no decisions were found; do not invent questions to justify a run.

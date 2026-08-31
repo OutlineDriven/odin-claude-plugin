@@ -1,6 +1,6 @@
 ---
 name: culture-team-composition-analysis
-description: 'Use when multiple Culture Index profiles need Gas/Brake/Glue balance, gap, friction, and hiring analysis. Returns a team roster, balance assessment, gaps, friction pairs, and hiring recommendations. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when multiple Culture Index profiles need Gas/Brake/Glue balance, gap, friction, and hiring analysis. Returns a team roster, balance assessment, gaps, friction pairs, and hiring recommendations. Not for pairwise profile comparison — use culture-profile-comparison.'
 ---
 
 # Culture team composition analysis
@@ -16,20 +16,20 @@ description: 'Use when multiple Culture Index profiles need Gas/Brake/Glue balan
 
 ## Inputs
 
-For each team member, supply: name, pattern/archetype, trait distances from the arrow for A (Autonomy), B (Social Ability), C (Pace/Patience), and D (Conformity), and EU values (Survey and Job). Right of the arrow is high; left is low.
+For each team member, supply the name, pattern/archetype, trait distances from the arrow for A (Autonomy), B (Social Ability), C (Pace/Patience), and D (Conformity), and EU values (Survey and Job). Right of the arrow is high; left is low.
 
-The current business season must be supplied before analysis: high-growth/turnaround, consolidation/stability, culture building, complex operations, innovation/R&D, or compliance-heavy. Team function context (sales, engineering, customer success, operations, marketing, finance, HR, executive) is optional but improves function-fit assessment.
+Supply the current business season before analysis: high-growth/turnaround, consolidation/stability, culture building, complex operations, innovation/R&D, or compliance-heavy. Team function context (sales, engineering, customer success, operations, marketing, finance, HR, executive) is optional but improves function-fit assessment.
 
 ## Procedure
 
-1. Load every team member's profile: name, pattern/archetype, A/B/C/D distances from the arrow, and EU Survey and Job values. Reject any profile missing trait distances; do not infer them.
-2. Categorize each member into a primary and secondary Gas/Brake/Glue role using distance from the arrow, never absolute values: Gas = High A (right of arrow), Brake = High D (right of arrow), Glue = High B (right of arrow). Build a roster table of Name, Pattern, Primary Role, Secondary Role.
-3. Count Gas, Brake, and Glue members and assess balance against the supplied business season: high-growth/turnaround prioritizes Gas; consolidation/stability and compliance-heavy prioritize Brake; culture building prioritizes Glue; complex operations needs Brake plus Glue; innovation/R&D needs Gas plus Low D. Map symptoms to gaps: stagnation or no decisive action means too little Gas; quality erosion, mistakes, or compliance issues means too little Brake; morale problems or no fun means too little Glue; chaos, recklessness, or burnout means too much Gas; paralysis, perfectionism, or cannot ship means too much Brake; all talk, groupthink, or avoiding hard decisions means too much Glue.
-4. Review C (Pace/Patience) distribution across the team: mostly Low C is fast-moving and urgent with risk of unnecessary chaos; mostly High C is steady and patient but may resist change; mixed C is healthy tension. Flag whether the distribution supports urgent pivots, which need some Low C, or sustained focus, which need some High C.
-5. Review team-wide A versus B balance: A greater than B is task-focused and results-driven but may neglect relationships; B greater than A is people-focused and harmonious but may avoid tough decisions; mixed is healthy tension.
-6. Flag friction pairs from trait-distance mismatches and name the specific member pairs: High A versus Low A is independence versus collaboration; High B versus Low B is social-needs mismatch; High C versus Low C is pace and urgency mismatch; High D versus Low D is detail-orientation clash; High A versus High A is power struggles; High D versus High D is perfectionist clash. Record a mitigation for each pair.
-7. For each gap, specify an ideal hire profile by trait distance from the arrow with a reason for each of A, B, C, and D. Skip the hiring section when no gap exists; do not fabricate a gap.
-8. Compile the team report with these sections: Team Roster, Balance Assessment with counts, Current Gaps with impact, Potential Friction Points with named pairs and mitigation, Hiring Recommendations if gaps exist, Team Strengths, and Watch Areas.
+1. Load every team member's profile: name, pattern/archetype, A/B/C/D distances from the arrow, and EU Survey and Job values. Reject any profile missing trait distances; do not infer them. Done when: every member is loaded with trait distances and EU values, or rejected with the missing field named.
+2. Categorize each member into a primary and secondary Gas/Brake/Glue role using distance from the arrow, never absolute values: Gas = High A (right of arrow), Brake = High D (right of arrow), Glue = High B (right of arrow). Build a roster table of Name, Pattern, Primary Role, Secondary Role. Done when: every member has a primary and secondary role assigned from arrow distance.
+3. Count Gas, Brake, and Glue members and assess balance against the supplied business season: high-growth/turnaround prioritizes Gas; consolidation/stability and compliance-heavy prioritize Brake; culture building prioritizes Glue; complex operations needs Brake plus Glue; innovation/R&D needs Gas plus Low D. Map symptoms to gaps: stagnation or no decisive action means too little Gas; quality erosion, mistakes, or compliance issues means too little Brake; morale problems or no fun means too little Glue; chaos, recklessness, or burnout means too much Gas; paralysis, perfectionism, or cannot ship means too much Brake; all talk, groupthink, or avoiding hard decisions means too much Glue. Done when: Gas/Brake/Glue counts are stated and balance is assessed against the business season with symptom-to-gap mapping.
+4. Review C (Pace/Patience) distribution across the team: mostly Low C is fast-moving and urgent with risk of unnecessary chaos; mostly High C is steady and patient but may resist change; mixed C is healthy tension. Flag whether the distribution supports urgent pivots, which need some Low C, or sustained focus, which need some High C. Done when: C distribution is classified and its support for pivots or sustained focus is flagged.
+5. Review team-wide A versus B balance: A greater than B is task-focused and results-driven but may neglect relationships; B greater than A is people-focused and harmonious but may avoid tough decisions; mixed is healthy tension. Done when: A-vs-B balance is classified with its risk noted.
+6. Flag friction pairs from trait-distance mismatches and name the specific member pairs: High A versus Low A is independence versus collaboration; High B versus Low B is social-needs mismatch; High C versus Low C is pace and urgency mismatch; High D versus Low D is detail-orientation clash; High A versus High A is power struggles; High D versus High D is perfectionist clash. Record a mitigation for each pair. Done when: every friction pair is named with the specific members and a mitigation.
+7. For each gap, specify an ideal hire profile by trait distance from the arrow with a reason for each of A, B, C, and D. Skip the hiring section when no gap exists; do not fabricate a gap. Done when: each gap has an ideal hire profile with per-trait reasons, or the hiring section is omitted because no gap exists.
+8. Compile the team report with these sections: Team Roster, Balance Assessment with counts, Current Gaps with impact, Potential Friction Points with named pairs and mitigation, Hiring Recommendations if gaps exist, Team Strengths, and Watch Areas. Done when: the report contains all sections in order.
 
 ## Failure and recovery
 - Missing profile data: a member lacks trait distances or EU values. Stop and request the missing fields. Do not categorize a member from incomplete data.
@@ -39,7 +39,7 @@ The current business season must be supplied before analysis: high-growth/turnar
 - Partial result: return only fully categorized members and list every excluded member with the missing field. Never claim the done predicate holds while any supplied member remains uncategorized.
 
 ## Output
-A team composition analysis report with sections: Team Roster (members with patterns and roles), Balance Assessment (Gas, Brake, Glue counts and assessment), Current Gaps (each gap with impact), Potential Friction Points (named member pairs with mitigation), Hiring Recommendations (ideal hire profile per gap, omitted when no gaps), Team Strengths, and Watch Areas.
+A team composition analysis report in chat text with sections in procedure order: team roster, balance assessment, current gaps, friction points, hiring recommendations, team strengths, watch areas.
 
 ## Provenance
 

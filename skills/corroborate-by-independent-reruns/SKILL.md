@@ -1,6 +1,6 @@
 ---
 name: corroborate-by-independent-reruns
-description: 'Use when a candidate patch or answer needs independent corroboration before it is trusted. Run N isolated sandboxed attempts and return the strict-majority byte-identical patch with its agreement count, or report no consensus. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a candidate patch or answer needs independent corroboration before it is trusted. Run N isolated sandboxed attempts and return the strict-majority byte-identical patch with its agreement count, or report no consensus. Not for multi-stance investigation — use council.'
 ---
 
 # Corroborate by independent reruns
@@ -23,13 +23,13 @@ description: 'Use when a candidate patch or answer needs independent corroborati
 
 ## Procedure
 
-1. Receive the candidate, N, and the sandbox execution command. Bound scope to N isolated runs; do not widen to additional runs or mutate the shared working tree.
-2. Launch N isolated sandboxed attempts, each starting from the same clean baseline and running the same task without access to any other run's output.
-3. Capture each run's full output bytes.
-4. Classify each output: a no-change run whose output is byte-identical to the baseline or empty is excluded from consensus and never carries consensus.
-5. Group the remaining outputs by byte identity. If a single byte-identical group is a strict majority of the N launched runs (count > N/2), return that output with its agreement count.
-6. If no byte-identical group reaches a strict majority, report no consensus.
-7. Treat byte identity as a corroboration signal only, never as a correctness oracle; do not assert the majority output is correct.
+1. Receive the candidate, N, and the sandbox execution command. Bound scope to N isolated runs; do not widen to additional runs or mutate the shared working tree. Done when: scope is bounded to exactly N isolated runs with no shared-tree mutation.
+2. Launch N isolated sandboxed attempts, each starting from the same clean baseline and running the same task without access to any other run's output. Done when: N isolated runs are launched, each from a clean baseline with no cross-run access.
+3. Capture each run's full output bytes. Done when: every launched run's full output bytes are captured.
+4. Classify each output: a no-change run whose output is byte-identical to the baseline or empty is excluded from consensus and never carries consensus. Done when: every output is classified as candidate or no-change, with no-change runs excluded from consensus.
+5. Group the remaining outputs by byte identity. If a single byte-identical group is a strict majority of the N launched runs (count > N/2), return that output with its agreement count. Done when: outputs are grouped by byte identity and either a strict-majority group is identified or no majority exists.
+6. If no byte-identical group reaches a strict majority, report no consensus. Done when: no-consensus is reported with the per-run output groups, or the strict-majority output is returned with its count.
+7. Treat byte identity as a corroboration signal only, never as a correctness oracle; do not assert the majority output is correct. Done when: the result is presented as a corroboration signal with no correctness claim.
 
 ## Failure and recovery
 - Sandbox failure: a run that errors or cannot capture output counts as a launched run that produced no candidate; it contributes to no byte-identical group.

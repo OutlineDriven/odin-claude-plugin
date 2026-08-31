@@ -1,6 +1,6 @@
 ---
 name: implement-spec
-description: 'Use when a ticket DAG from a complete specification needs parallel execution into a green draft PR. Don''t use for specification creation or ticket decomposition.'
+description: 'Use when a ticket DAG from a complete specification needs parallel execution into a green draft PR. Not for a single settled ticket — use implement; not for ticket decomposition — use to-tickets.'
 disable-model-invocation: true
 ---
 
@@ -17,7 +17,9 @@ disable-model-invocation: true
 
 ## Inputs
 
-Required: the complete specification; a finite ticket DAG with stable ticket identifiers, dependencies, acceptance criteria, and owned file scopes; the repository and integration base; the required check commands; the review-clear criterion; and the remote repository, target branch, and draft pull-request destination. The human must supply publication and cleanup approval when prompted. Credentials may be used only after that approval. Optional: ticket-specific verification commands and a pull-request title or body.
+- Required: the complete specification; a finite ticket DAG with stable ticket identifiers, dependencies, acceptance criteria, and owned file scopes; the repository and integration base; the required check commands; the review-clear criterion; and the remote repository, target branch, and draft pull-request destination.
+- Approval: the human must supply publication and cleanup approval when prompted. Credentials may be used only after that approval.
+- Optional: ticket-specific verification commands and a pull-request title or body.
 
 ## Procedure
 
@@ -32,7 +34,15 @@ Required: the complete specification; a finite ticket DAG with stable ticket ide
 9. Preview the exact temporary worktrees and branches eligible for cleanup. After explicit human approval, remove only those whose commits are reachable from the published integration branch. Preserve any target containing unintegrated or uncommitted work and report it instead of deleting it.
 
 ## Failure and recovery
-`invalid-input` means the specification, DAG, ownership, repository, commands, or destination cannot be validated; make no mutation. `ticket-failed` preserves the ticket worktree and commit evidence and blocks its dependents. `integration-conflict` preserves both commits and the integration branch at the last verified state. `check-failed` or `review-blocked` permits only bounded correction through the owning ticket; unavailable checks, repeated equivalent failure, oscillation, or required scope expansion returns `non-converged`. `publication-failed` preserves the verified local branch and reports the attempted remote operation without claiming a pull request exists. `cleanup-blocked` preserves every uncertain target. On any partial result, report completed tickets, remaining frontier, commits, checks, findings, remote state, and retained worktrees; never discard unintegrated work, swallow an error, or claim the done predicate.
+
+- `invalid-input`: the specification, DAG, ownership, repository, commands, or destination cannot be validated. Make no mutation.
+- `ticket-failed`: preserve the ticket worktree and commit evidence; block its dependents.
+- `integration-conflict`: preserve both commits and the integration branch at the last verified state.
+- `check-failed` or `review-blocked`: permit only bounded correction through the owning ticket. Return `non-converged` when checks are unavailable, an equivalent failure repeats, results oscillate, or correction requires wider scope.
+- `publication-failed`: preserve the verified local branch and report the attempted remote operation without claiming that a pull request exists.
+- `cleanup-blocked`: preserve every uncertain target.
+
+For any partial result, report completed tickets, the remaining frontier, commits, checks, findings, remote state, and retained worktrees. Never discard unintegrated work, swallow an error, or claim the done predicate.
 
 ## Output
 On success, return the ticket-to-commit ledger, empty frontier, integrated commit identifier, passing check evidence, review-clear evidence, draft pull-request URL and head commit, and cleanup result. Otherwise return exactly one terminal classification—`invalid-input`, `blocked`, `ticket-failed`, `integration-conflict`, `check-failed`, `review-blocked`, `non-converged`, `publication-failed`, or `cleanup-blocked`—with the partial-result ledger and the next human-resolvable blocker.

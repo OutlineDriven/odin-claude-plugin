@@ -4,7 +4,7 @@ How to reason about confidence when evidence is historical, fragmentary, and som
 
 Code doesn't carry its own motivation. You can read what code does; you can't read *why it exists*. That lives in commits, PRs, tickets, docs, and conversations, all incomplete, biased, and sometimes missing entirely. Pretending otherwise produces confident-sounding guesses that mislead the user.
 
-## Confidence Tiers
+## Confidence tiers
 
 Every claim in the final output must sit in one of these tiers. The tier determines which output section the claim goes in and how it's phrased.
 
@@ -58,7 +58,7 @@ You looked and couldn't find out. A valid and important outcome. Document it.
 
 Phrasing: "We searched X, Y, and Z and found no evidence of why." Be specific about *what* you searched. "We couldn't find out" is less useful than "we searched the ticket tracker with keywords A and B, scanned the 6 PRs that touched this file since 2023, and grep'd the repo for string literals matching the threshold; none surfaced a rationale."
 
-## Phrasing Guide
+## Phrasing guide
 
 ### Words that carry confidence. Use carefully
 
@@ -103,13 +103,13 @@ Resist the urge to:
 - Assume a consistent pattern across the codebase was intentional when it might be copy-paste
 - Turn an absence of evidence into evidence of absence ("no one mentioned security concerns, so it must not have been a concern")
 
-## The Sycophancy Trap
+## The sycophancy trap
 
 Users often phrase `why` questions with an embedded hypothesis: "Why do we do it this way, I assume it's for performance?" Don't simply confirm it. Treat it as one candidate among others and check the evidence independently. If the evidence supports it, say so with citations; if not, say so and present what the evidence *does* support.
 
 The user's guess is a prompt for investigation, not a conclusion to validate.
 
-## When Evidence Contradicts
+## When evidence contradicts
 
 If two sources disagree (the PR description says one thing, the ticket says another), surface both. Don't pick the one that fits a tidier narrative. A typical pattern:
 
@@ -118,7 +118,7 @@ If two sources disagree (the PR description says one thing, the ticket says anot
 
 Both may be true (the ticket motivated the work, the PR is the author's framing of it), or one may be wrong. Present both with their citations and let the user make the call.
 
-## When Evidence Is Missing
+## When evidence is missing
 
 An honest "we don't know" is one of the most valuable outputs this skill can produce. The user now knows:
 
@@ -134,7 +134,7 @@ When you hit a gap, name it concretely:
 - What you searched for in each
 - What you found (nothing, or only tangentially related material)
 
-## Calibration Check Before Finalizing
+## Calibration check before finalizing
 
 Before delivering the output, the synthesizer should review every claim in "What We Found" and "What We Can Reasonably Infer" and ask:
 

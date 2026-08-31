@@ -1,3 +1,3 @@
 interface:
-  display_name: "LLMs Visibility"
-  short_description: "Add llms.txt and LLM-readability headers to any web project"
+  display_name: "Llms Visibility"
+  short_description: "Use when asked to add llms.txt, Markdown Accept negotiation,"

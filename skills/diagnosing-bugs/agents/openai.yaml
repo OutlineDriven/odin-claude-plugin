@@ -1,3 +1,3 @@
 interface:
   display_name: "Diagnosing Bugs"
-  short_description: "Reproduce, isolate, fix, and prove a defect's root cause."
+  short_description: "Use when a failure, flake, regression, or slowness needs"

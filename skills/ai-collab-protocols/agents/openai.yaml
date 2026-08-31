@@ -1,3 +1,3 @@
 interface:
   display_name: "AI Collab Protocols"
-  short_description: "Resolve ambiguous refs to durable handles; flag anti-patterns"
+  short_description: "Use when the user describes an AI workflow gap or uses an"

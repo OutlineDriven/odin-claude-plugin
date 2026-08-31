@@ -1,6 +1,6 @@
 ---
 name: agentic-actions-injection-audit
-description: 'Use when a GitHub repository runs Claude Code Action, Gemini CLI, OpenAI Codex, GitHub AI Inference, or wrappers around them and the user asks for prompt-injection, privilege, sandbox, or agentic-workflow security review. Returns a read-only findings report with per-vector evidence, source-to-sink data flow, contextual severity, and action-specific remediation. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when a GitHub repo runs Claude Code Action, Gemini CLI, OpenAI Codex, or wrappers and the user asks for prompt-injection or agentic security review. Returns a read-only findings report with evidence, data flow, and remediation. Don''t use for source or remote-system changes.'
 ---
 
 # Agentic actions injection audit
@@ -164,7 +164,7 @@ Structure each finding in this order:
 - **Non-mutation rule:** never modify, create, or delete workflow files, repository state, or credentials. Never pipe fetched content to an interpreter or shell execution context. Findings are reported, not exploited.
 
 ## Output
-A structured findings report with: executive summary, per-workflow summary table, per-finding detail (title, severity, file, step, impact, evidence, data flow or amplification note, remediation), cross-reference notes, and clean-repo coverage when no findings exist. Remote reports add repo headers, GitHub file links, and source attribution.
+Return a structured findings report with an executive summary, per-workflow summary table, and per-finding details: title, severity, file, step, impact, evidence, data flow or amplification note, and remediation. Include cross-reference notes and clean-repo coverage when no findings exist. Remote reports also include repo headers, GitHub file links, and source attribution.
 
 ## Provenance
 

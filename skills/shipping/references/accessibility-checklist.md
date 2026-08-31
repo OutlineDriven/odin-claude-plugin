@@ -1,18 +1,18 @@
-# Accessibility Checklist
+# Accessibility checklist
 
 Quick reference for WCAG 2.1 AA compliance.
 
-## Table of Contents
+## Table of contents
 
-- [Essential Checks](#essential-checks)
-- [Common HTML Patterns](#common-html-patterns)
-- [Testing Tools](#testing-tools)
-- [Quick Reference: ARIA Live Regions](#quick-reference-aria-live-regions)
-- [Common Anti-Patterns](#common-anti-patterns)
+- [Essential checks](#essential-checks)
+- [Common HTML patterns](#common-html-patterns)
+- [Testing tools](#testing-tools)
+- [Quick reference: ARIA live regions](#quick-reference-aria-live-regions)
+- [Common anti-patterns](#common-anti-patterns)
 
-## Essential Checks
+## Essential checks
 
-### Keyboard Navigation
+### Keyboard navigation
 - [ ] All interactive elements focusable via Tab key
 - [ ] Focus order follows visual/logical order
 - [ ] Focus is visible (outline/ring on focused elements)
@@ -21,7 +21,7 @@ Quick reference for WCAG 2.1 AA compliance.
 - [ ] Skip-to-content link at top of page - visible (at least) on keyboard focus
 - [ ] Modals trap focus while open, return focus on close
 
-### Screen Readers
+### Screen readers
 - [ ] All images have `alt` text (or `alt=""` for decorative images)
 - [ ] All form inputs have associated labels (`<label>` or `aria-label`)
 - [ ] Buttons and links have descriptive text (not "Click here")
@@ -52,9 +52,9 @@ Quick reference for WCAG 2.1 AA compliance.
 - [ ] Touch targets ≥ 44x44px on mobile
 - [ ] Meaningful empty states (not blank screens)
 
-## Common HTML Patterns
+## Common HTML patterns
 
-### Buttons vs. Links
+### Buttons vs. links
 
 ```html
 <!-- Use <button> for actions -->
@@ -67,7 +67,7 @@ Quick reference for WCAG 2.1 AA compliance.
 <div onClick={handleDelete}>Delete</div>  <!-- BAD -->
 ```
 
-### Form Labels
+### Form labels
 
 ```html
 <!-- Explicit label association -->
@@ -84,7 +84,7 @@ Quick reference for WCAG 2.1 AA compliance.
 <input type="search" aria-label="Search tasks" />
 ```
 
-### ARIA Roles
+### ARIA roles
 
 ```html
 <!-- Navigation -->
@@ -109,7 +109,7 @@ Quick reference for WCAG 2.1 AA compliance.
 </div>
 ```
 
-### Accessible Lists
+### Accessible lists
 
 ```html
 <ul role="list" aria-label="Tasks">
@@ -120,7 +120,7 @@ Quick reference for WCAG 2.1 AA compliance.
 </ul>
 ```
 
-## Testing Tools
+## Testing tools
 
 ```bash
 # Automated audit
@@ -137,7 +137,7 @@ npx pa11y             # CLI accessibility checker
 # Linux: Orca
 ```
 
-## Quick Reference: ARIA Live Regions
+## Quick reference: ARIA live regions
 
 | Value | Behavior | Use For |
 |-------|----------|---------|
@@ -146,7 +146,7 @@ npx pa11y             # CLI accessibility checker
 | `role="status"` | Same as `polite` | Status messages |
 | `role="alert"` | Same as `assertive` | Error messages |
 
-## Common Anti-Patterns
+## Common anti-patterns
 
 | Anti-Pattern | Problem | Fix |
 |---|---|---|

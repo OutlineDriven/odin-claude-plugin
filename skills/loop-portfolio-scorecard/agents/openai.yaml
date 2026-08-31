@@ -1,3 +1,3 @@
 interface:
   display_name: "Loop Portfolio Scorecard"
-  short_description: "Loop-portfolio scorecard with keep/pivot/retire calls"
+  short_description: "Use when a portfolio of existing loops needs comparable"

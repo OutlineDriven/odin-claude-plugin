@@ -1,9 +1,15 @@
 ---
 name: snippet-image-rendering
-description: 'Use when asked to turn code into polished shareable images (PNG/SVG/WebP) for docs, changelogs, or social posts when the user explicitly mentions snipgrapher. Produces a rendered image file at the specified output path. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user explicitly names snipgrapher and wants code rendered to a polished PNG, SVG, or WebP for documentation or sharing. Writes the image at an explicit local path. Not for other renderers, publishing, remote actions, or guessing unsupported flags.'
 ---
 
 # Snippet image rendering
+
+## Refuse first
+
+- Do not substitute another renderer when snipgrapher is missing.
+- Do not publish, upload, or touch credentials or remote systems.
+- Do not guess CLI flags; use only options exposed by the installed version.
 
 ## Contract
 
@@ -16,58 +22,74 @@ description: 'Use when asked to turn code into polished shareable images (PNG/SV
 
 ## Inputs
 
-- **Source code**: The code snippet to render (required). Supplied as a file path or inline code block.
-- **Output path**: Where to write the image (required). Must be an explicit path with .png, .svg, or .webp extension.
-- **Profile**: Optional snipgrapher profile name. If not supplied, snipgrapher uses its default.
-- **Language**: Optional language hint for syntax highlighting. If not supplied, snipgrapher infers from file extension or content.
+- **Source code**: The code snippet to render (required), supplied as a file path or inline code block.
+- **Output path**: The explicit output path (required), with a .png, .svg, or .webp extension.
+- **Profile**: An optional snipgrapher profile name. If omitted, snipgrapher uses its default.
+- **Language**: An optional language hint for syntax highlighting. If omitted, snipgrapher infers it from the file extension or content.
 
 ## Procedure
 
-1. Verify snipgrapher is installed and accessible:
+1. **Verify snipgrapher is installed and accessible.**
    ```
    command -v snipgrapher
    ```
-   If not found, stop and report: "snipgrapher is not installed or not in PATH. Install it before proceeding."
+   If not found, stop and report: `snipgrapher is not installed or not in PATH. Install it before proceeding.`
 
-2. Verify the source code input exists (if a file path was supplied):
+   **Done when:** the executable resolves from PATH, or the workflow stops with the exact missing-dependency report.
+
+2. **Verify a file source.** If a file path was supplied, run:
    ```
    test -f <source_path>
    ```
-   If not found, stop and report the missing file.
+   If not found, stop and report the missing file. Inline code needs no file check.
 
-3. Construct the snipgrapher command. Use only flags the installed version supports. Check available flags:
+   **Done when:** the source file exists or the inline snippet is present and non-empty.
+
+3. **Construct the installed-version command.** Check available flags:
    ```
    snipgrapher --help
    ```
-   If the help output shows a `--profile` flag and a profile was supplied, include `--profile <name>`. If the help output shows a `--language` flag and a language was supplied, include `--language <lang>`.
+   Include `--profile <name>` only when the help output exposes `--profile` and a profile was supplied. Include `--language <lang>` only when help exposes `--language` and a language was supplied.
 
-4. Run the render command:
+   **Done when:** every selected optional flag is both requested and supported by the installed CLI.
+
+4. **Render.** Run:
    ```
    snipgrapher <source_path> --output <output_path>
    ```
-   Append any validated optional flags from step 3.
+   Append only the validated optional flags from step 3.
 
-5. Verify the output file exists and has non-zero size:
+   **Done when:** snipgrapher exits successfully after targeting the explicit output path.
+
+5. **Verify the artifact.** Run:
    ```
    test -s <output_path>
    ```
-   If the file does not exist or is empty, stop and report the snipgrapher error output.
+   If the file is missing or empty, stop and report snipgrapher's error output.
 
-6. Report the output path and file size in bytes:
+   **Done when:** the requested PNG, SVG, or WebP exists at the exact output path with non-zero size.
+
+6. **Measure and report.** Run:
    ```
    wc -c <output_path>
    ```
 
+   **Done when:** the final report names the exact output path and measured byte count.
+
 ## Failure and recovery
-- **snipgrapher not installed**: Stop. Report the missing dependency. Do not attempt alternative renderers.
-- **Source file missing**: Stop. Report the path that does not exist.
-- **Render failure**: Stop. Report snipgrapher's stderr output. Do not retry with different flags unless the user instructs.
-- **Output file empty or missing**: Stop. Report that the render produced no output. Check snipgrapher's error messages.
-- **Rollback**: Delete any partially written output file on failure.
+
+### Dependency and input failures
+- **snipgrapher not installed:** Stop and report the missing dependency. Do not attempt alternative renderers.
+- **Source file missing:** Stop and report the nonexistent path.
+
+### Render and artifact failures
+- **Render failure:** Stop and report snipgrapher's stderr. Do not retry with different flags unless the user instructs.
+- **Output file empty or missing:** Stop and report that rendering produced no output, including snipgrapher's error messages.
+- **Rollback:** Delete any partially written output file on failure.
 
 ## Output
-- The rendered image file at the specified output path.
-- A brief report stating the output path and byte size.
+
+**Output contract:** Return the rendered image at the explicit path, then one brief report containing that path and its measured byte size.
 
 ## Provenance
 

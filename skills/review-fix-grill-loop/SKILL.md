@@ -1,6 +1,6 @@
 ---
 name: review-fix-grill-loop
-description: 'Use when the user says "grill these changes" or wants their diff reviewed and fixed iteratively until clean. If the user asks for an interactive walk, present one finding per turn with Keep, Skip, and Discuss choices before resuming the loop. Produces zero open at-or-above-floor findings in the change-set, or an explicit user deferral path. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user says grill these changes or wants their diff reviewed and fixed iteratively until clean. Produces zero open at-or-above-floor findings, or an explicit user deferral path. Not for a single review pass — use review; for analyzing one comment — use resolve.'
 ---
 
 # Review fix grill loop

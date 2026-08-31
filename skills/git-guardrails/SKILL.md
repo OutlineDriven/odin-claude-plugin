@@ -1,6 +1,6 @@
 ---
 name: git-guardrails
-description: 'Use when a repository needs a tool-time safety net against force-push, hard reset, forced clean, forced branch deletion, or working-tree discard. Installing it copies a quoting-aware block script and registers a PreToolUse hook that exits 2 on those commands while plain git push stays allowed. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a repository needs a safety net against force-push, hard reset, forced clean, forced branch deletion, or working-tree discard; installs a PreToolUse hook exiting 2 on them; plain git push allowed. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Set up Git guardrails
@@ -22,10 +22,10 @@ description: 'Use when a repository needs a tool-time safety net against force-p
 
 ## Procedure
 
-1. Ask the user to choose project or global scope. Mutate nothing before the choice.
-2. Copy `scripts/block-dangerous-git.py` to the chosen location — project: `.claude/hooks/block-dangerous-git.py`; global: `~/.claude/hooks/block-dangerous-git.py` — and run `chmod +x` on the copy. Leave the skill's source copy untouched.
-3. Show the default blocked operations — forced pushes and forced refspecs; `reset --hard`; forced `clean`; forced branch deletion; `checkout .` and `restore .`; `stash drop` and `stash clear`; `reflog expire`; `gc --prune=now` — and ask whether to add or remove a rule. On approval, edit only the installed copy.
-4. Verify before registration. For each payload below, run:
+1. Ask the user to choose project or global scope. Mutate nothing before the choice. Done when: the user has chosen project or global scope, with no mutation made.
+2. Copy `scripts/block-dangerous-git.py` to the chosen location — project: `.claude/hooks/block-dangerous-git.py`; global: `~/.claude/hooks/block-dangerous-git.py` — and run `chmod +x` on the copy. Leave the skill's source copy untouched. Done when: the hook copy exists at the chosen path, is executable, and the source copy is unchanged.
+3. Show the default blocked operations — forced pushes and forced refspecs; `reset --hard`; forced `clean`; forced branch deletion; `checkout .` and `restore .`; `stash drop` and `stash clear`; `reflog expire`; `gc --prune=now` — and ask whether to add or remove a rule. On approval, edit only the installed copy. Done when: the blocked-operations list is shown and any approved rule change is applied to the installed copy only.
+4. Verify before registration. For each payload below, run: Done when: the stated action, evidence, and guard all hold.
 
    ```bash
    printf '%s\n' '<payload>' | <path-to-hook>
@@ -54,8 +54,9 @@ description: 'Use when a repository needs a tool-time safety net against force-p
    ```text
    BLOCKED: '<command>' matches dangerous pattern '<pattern>'. The user has prevented you from doing this.
    ```
+   Done when: all eleven payloads exit as expected — the eight dangerous commands exit 2 and the three safe ones exit 0 — and the BLOCKED stderr message is confirmed.
 
-5. After all eleven cases pass, merge the entry into the existing `hooks.PreToolUse` array of the chosen settings file. Never overwrite the settings file or discard existing hooks.
+5. After all eleven cases pass, merge the entry into the existing `hooks.PreToolUse` array of the chosen settings file. Never overwrite the settings file or discard existing hooks. Done when: the entry is merged into the existing `hooks.PreToolUse` array with all prior hooks preserved.
 
    Project fragment:
 
@@ -113,10 +114,7 @@ Rollback: delete the installed hook copy and remove the registered `hooks.PreToo
 Blocked result: report `BLOCKED: git-guardrails <exact reason>` with no settings change made. Never swallow an error; never claim done while any check failed.
 
 ## Output
-- Executable hook at the chosen hooks path.
-- One merged `hooks.PreToolUse` entry in the chosen settings file.
-- The verification transcript: eleven `exit=<n>` lines, one per payload.
-- Terminal classification: `installed (project)`, `installed (global)`, or `blocked: <reason>`.
+An executable hook at the chosen path, then one merged `hooks.PreToolUse` entry, then the eleven-line verification transcript, then terminal classification `installed (project)`, `installed (global)`, or `blocked: <reason>`.
 
 ## Provenance
 

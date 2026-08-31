@@ -1,4 +1,4 @@
-# False-positive Contract and Grill-loop Rules
+# False-positive contract and grill-loop rules
 
 > **Sync lineage:** this contract is a self-contained copy of `skills/audit-project/references/false-positive-contract.md`, adapted for change-set scope, a configurable severity floor, an inserted resolve state, and the `.outline/review-fix-grill/` state dir. The normalization, blocked-ratio, stall-hash, and routing rules share an ancestor with audit-project; a canonical edit to one must be hand-propagated to the other (this repo has no CI to enforce it).
 

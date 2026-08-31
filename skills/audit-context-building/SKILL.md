@@ -1,6 +1,6 @@
 ---
 name: audit-context-building
-description: 'Use when starting an audit, threat model, or architecture review on unfamiliar code spanning a codebase or multiple functions, before any vulnerability-hunting pass. Produces a dossier and per-function records capturing entry points, actors, persistent state, cross-function invariants, unenforced assumptions, disagreements, coverage, and open questions with source locations. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when starting an audit, threat model, or architecture review on unfamiliar code across functions, before vulnerability hunting. Produces a dossier and per-function records: entry points, actors, state, assumptions, open questions. Don''t use for source or remote changes.'
 ---
 
 # Audit context building
@@ -17,22 +17,22 @@ description: 'Use when starting an audit, threat model, or architecture review o
 ## Inputs
 
 - Target path (required): a codebase root, or a set of functions or files to analyze. The target must span more than one function; a single function is out of scope here.
-- Domain or language hints (optional): smart contract, C/C++, decompiled firmware, web service, or other — used only to decide what counts as a call whose interior cannot be seen.
+- Domain or language hints (optional): smart contract, C/C++, decompiled firmware, web service, or other. Use these hints only to decide what counts as a call whose interior cannot be seen.
 - Prior findings or orienting notes (optional): carried forward as context only; this skill produces no verdicts.
 
 No vulnerability names, fixes, proofs-of-concept, or severity ratings are inputs or outputs. Those belong to the hunting phase that runs after this one.
 
 ## Procedure
 
-1. Bound scope. Confirm the target path is readable. Create `audit-context/` and `audit-context/functions/`. Write nowhere else; edit, delete, or move no source.
-2. Orient. Read entry points, module boundaries, and the call graph. Identify the actors (callers and privilege boundaries), the persistent state (storage, globals, caches, files), and the full list of functions in scope. Record the function list and entry points in the dossier skeleton.
-3. Analyze each function in an isolated pass and write its record to `audit-context/functions/<name>.md` before starting the next. Dispatching a function's pass to a subagent is how context-isolation is achieved: no single context must hold every function's detail, and only compact records return to the orchestrator.
-4. In each function record, state: what must always be true (with the source line that shows it), what the function takes on faith (with whatever establishes it), which functions it calls and what it needs from each, and anything still unclear.
-5. Follow the calls. For every call the function depends on, read the called function and follow every path through it, not only the succeeding path. State what makes each assumption true. When nothing in the code makes it true, write `nothing found` and cite no line — that absence is the record.
-6. Every claim cites a source location (`file:line`) or becomes an open question. No claim stands without a location, and no unclear point is closed with a confident answer.
-7. Where two records disagree, quote both rather than reconcile. Record the disagreement as a fact about the code, not a flaw in the analysis.
-8. Assemble `audit-context/DOSSIER.md` from the per-function records: entry points; actors and who can reach what; persistent state; cross-function invariants (rules spanning several functions); unenforced assumptions marked `nothing found`; disagreements with both sides quoted; coverage (which functions were analyzed and which paths were followed); and open questions carried forward.
-9. Do not name vulnerabilities, suggest fixes, write proofs-of-concept, or rate severity. When the code counts on something and nothing checks it, record that plainly and move on.
+1. Bound scope. Confirm the target path is readable. Create `audit-context/` and `audit-context/functions/`. Write nowhere else; edit, delete, or move no source. Done when: `audit-context/` and `audit-context/functions/` are created and no source is edited.
+2. Orient. Read entry points, module boundaries, and the call graph. Identify the actors (callers and privilege boundaries), the persistent state (storage, globals, caches, files), and the full list of functions in scope. Record the function list and entry points in the dossier skeleton. Done when: actors, persistent state, and the full function list are recorded in the dossier skeleton.
+3. Analyze each function in an isolated pass and write its record to `audit-context/functions/<name>.md` before starting the next. Dispatch each function's pass to a subagent to isolate its context. Do not hold every function's details in a single context; only compact records return to the orchestrator. Done when: each function's record is written before the next starts.
+4. In each function record, state: what must always be true (with the source line that shows it), what the function takes on faith (with whatever establishes it), which functions it calls and what it needs from each, and anything still unclear. Done when: invariants, assumptions, calls, and unclear points are stated with source lines.
+5. Follow the calls. For every call the function depends on, read the called function and follow every path through it, not only the successful path. State what makes each assumption true. When nothing in the code makes it true, write `nothing found` and cite no line. That absence is the record. Done when: every called function is read through every path, with assumptions confirmed or marked `nothing found`.
+6. Every claim cites a source location (`file:line`) or becomes an open question. No claim stands without a location, and no unclear point is closed with a confident answer. Done when: every claim has a `file:line` or is an open question.
+7. When two records disagree, quote both instead of reconciling them. Record the disagreement as a fact about the code, not a flaw in the analysis. Done when: disagreements are quoted from both sides, not reconciled.
+8. Assemble `audit-context/DOSSIER.md` from the per-function records: entry points; actors and who can reach what; persistent state; cross-function invariants (rules spanning several functions); unenforced assumptions marked `nothing found`; disagreements with both sides quoted; coverage (which functions were analyzed and which paths were followed); and open questions carried forward. Done when: the dossier contains entry points, actors, state, invariants, assumptions, disagreements, coverage, and open questions.
+9. Do not name vulnerabilities, suggest fixes, write proofs-of-concept, or rate severity. When the code counts on something that nothing checks, record that fact and move on. Done when: no vulnerabilities, fixes, POCs, or severity ratings are produced.
 
 ## Failure and recovery
 - Target not found or unreadable: stop, report the path and the error, and write no dossier.

@@ -1,6 +1,6 @@
 ---
 name: product-idea-consultation
-description: 'Use when the user runs /product-idea-consultation with an idea or repository, develop the idea into a redaction-checked design document and hand it off with a tiered closing and next-skill offer. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user runs /product-idea-consultation with an idea or repository. Develop the idea into a redaction-checked design document and hand it off with a tiered closing and next-skill offer. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Product idea consultation
@@ -20,13 +20,13 @@ An idea description or a repository path must be supplied. Optional gbrain or pr
 
 ## Procedure
 
-1. Read the supplied idea or repository to gather context. Open any referenced URLs as reads only; never mutate a remote resource.
-2. Run a startup diagnostic: from the repository and idea, identify the problem, the intended audience, and the hard constraints.
-3. Run a builder brainstorm: enumerate candidate approaches, select the strongest against the diagnostic, and record the selection rationale.
-4. Draft the design document from the diagnostic and the brainstorm, covering the problem, approach, scope, and open questions.
-5. Redaction check: scan the draft for secrets, credentials, and private data. Remove or redact every match before any file is saved; never persist a secret.
-6. Save the redaction-checked design document and the builder profile to local files, and record the analytics records for this session.
-7. Present a tiered closing: summarize the saved design, state a confidence tier, and offer the next skill for the build phase.
+1. Read the supplied idea or repository to gather context. Open any referenced URLs as reads only; never mutate a remote resource. Done when: context is gathered from the idea or repository and no remote resource is mutated.
+2. Run a startup diagnostic: from the repository and idea, identify the problem, the intended audience, and the hard constraints. Done when: the problem, audience, and hard constraints are identified.
+3. Run a builder brainstorm: enumerate candidate approaches, select the strongest against the diagnostic, and record the selection rationale. Done when: the strongest approach is selected with rationale recorded.
+4. Draft the design document from the diagnostic and the brainstorm, covering the problem, approach, scope, and open questions. Done when: the design document is drafted covering problem, approach, scope, and open questions.
+5. Redaction check: scan the draft for secrets, credentials, and private data. Remove or redact every match before any file is saved; never persist a secret. Done when: the draft is scanned and all secrets, credentials, and private data are removed or redacted.
+6. Save the redaction-checked design document and the builder profile to local files, and record the analytics records for this session. Done when: the design document, builder profile, and analytics records are saved to local files.
+7. Present a tiered closing: summarize the saved design, state a confidence tier, and offer the next skill for the build phase. Done when: the tiered closing is presented with summary, confidence tier, and next-skill offer.
 
 ## Failure and recovery
 - Missing idea or repository: stop and request the input; write no file.

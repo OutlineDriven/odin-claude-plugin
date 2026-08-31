@@ -1,6 +1,6 @@
 ---
 name: resolve
-description: 'Use when addressing review feedback or analyzing whether a comment is valid. Produces a classification and evidence-based solution for each comment. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when addressing review feedback or analyzing whether a comment is valid. Classifies each comment VALID ISSUE / NOT AN ISSUE / NEEDS CLARIFICATION with evidence and a recommended solution. Not for GitHub PR review threads — use resolve-pr-feedback.'
 ---
 
 # Resolve
@@ -39,28 +39,7 @@ The user supplies review comments — the text of each comment and any associate
 - Non-mutation rule: no edit, write, commit, push, deployment, credential use, or remote call is ever performed.
 
 ## Output
-For each review comment, emit:
-
-```
-Comment: [brief description]
-
-Status: VALID ISSUE | NOT AN ISSUE | NEEDS CLARIFICATION
-
-If VALID ISSUE:
-Solution 1: [description] — Trade-offs: [pros/cons]
-Solution 2: [description] — Trade-offs: [pros/cons]
-Solution 3: [description] — Trade-offs: [pros/cons]
-Recommended: Solution [N] because [justification]
-
-If NOT AN ISSUE:
-Reason: [why this is not a problem]
-Evidence: [code references or pattern citations]
-
-If NEEDS CLARIFICATION:
-Missing: [exact information needed to assess]
-```
-
-Stop after the last comment. Do not emit summary paragraphs, recommendations for the overall PR, or any content beyond the per-comment structured output.
+Per comment, in order: Comment, Status (VALID ISSUE | NOT AN ISSUE | NEEDS CLARIFICATION), then the status-specific block — for VALID ISSUE three numbered Solutions with trade-offs and the Recommended pick; for NOT AN ISSUE the Reason and Evidence; for NEEDS CLARIFICATION the exact Missing information. Stop after the last comment; emit no summary or overall-PR content.
 
 ## Provenance
 

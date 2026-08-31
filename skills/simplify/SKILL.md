@@ -1,6 +1,6 @@
 ---
 name: simplify
-description: 'Use when the user says "simplify this diff", or asks for a compression pass over a change-set. Decomposes the diff into reuse, quality, and efficiency axes; applies validated findings as atomic issue-class commits; auto-reverts any that regress. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user says "simplify this diff" or asks for a compression pass over a change-set. Decomposes the diff into reuse, quality, and efficiency axes; applies validated findings as atomic issue-class commits; auto-reverts regressions. Not for dead-code sweeps — use deslop.'
 ---
 
 # Simplify: axis-decomposed compression pass on a diff
@@ -27,7 +27,7 @@ Derived from the diff:
 
 ## Procedure
 
-1. **Phase 1: Detect diff scope.** Capture every commit since the branch diverged from its base, plus staged, plus unstaged. Do not guess the base. Resolve via the first base ref that exists, then run `git diff <base>`:
+1. **Phase 1: Detect diff scope.** Capture every commit since the branch diverged from its base, including staged and unstaged changes. Do not guess the base. Resolve via the first base ref that exists, then run `git diff <base>`:
    1. `git merge-base HEAD origin/main`
    2. `git merge-base HEAD origin/master`
    3. `git merge-base HEAD main`
@@ -43,6 +43,8 @@ Derived from the diff:
 
    **Explicit-base override:** `simplify against <ref>` bypasses the resolution above and runs `git --no-pager diff "<ref>"` directly.
 
+   Done when: the diff is captured or an exit code is returned.
+
 2. **Phase 2: Dispatch three review agents in one message.** Issue one tool-call message containing three Agent invocations, never three sequential messages. Each agent receives `<axis-prompt from references/> + "\n\n---\n\nDIFF:\n" + <captured diff>`. All three agents are read-only; disjoint axes; independence asserted in the spawn message:
    > "Three agents dispatched in parallel. Axes are disjoint by construction: reuse-axis owns Graft (existing-utility detection), quality-axis owns Excess + Sprawl on code shape, efficiency-axis owns Excess + Sprawl on execution cost. All three agents are read-only; none edits files; none reads or writes shared mutable state."
 
@@ -55,7 +57,9 @@ Derived from the diff:
 
    See `references/orchestration.md` for the concrete dispatch shape and shell snippet.
 
-3. **Phase 3: Audit, then apply.** Wait for all three. Aggregate findings by `{axis, file, line, issue-class}`; dedupe identical cross-axis findings (keep once, attribute to first reporter, note second axis as co-signer). Dispatch a Reviewer agent (also `Explore`-typed, read-only) to audit the composed list against completeness / consistency / accuracy / scope. The Reviewer's output is the **validated survivor set**. Orchestrator applies survivors directly, one issue-class per atomic commit; drops non-survivors without comment. No re-adjudication. After each commit, run repo-native tests; on red, auto-revert via `git revert HEAD --no-edit` and stop that class's run.
+   Done when: all three agents return their findings.
+
+3. **Phase 3: Audit, then apply.** Wait for all three agents. Aggregate findings by `{axis, file, line, issue-class}`. Deduplicate identical cross-axis findings: keep each once, attribute it to the first reporter, and note the second axis as a co-signer. Dispatch a Reviewer agent (also `Explore`-typed and read-only) to audit the composed list for completeness, consistency, accuracy, and scope. The Reviewer's output is the **validated survivor set**. The orchestrator applies survivors directly, one issue class per atomic commit, and drops non-survivors without comment or re-adjudication. After each commit, run repo-native tests. On red, auto-revert via `git revert HEAD --no-edit` and stop that class's run.
 
    Commit sequencing by class:
    1. Duplicate commit: reuse-axis survivors + any other axis flagged `issue-class: duplicate`
@@ -64,7 +68,9 @@ Derived from the diff:
 
    Commit message format: capitalized imperative subject, ≤50 chars target, ≤72 hard, no trailing period.
 
-   After the final commit: audit the simplify patch itself for unneeded surface, duplicated logic, structure without cause, or broken consumer contract. Any hit → revert the entire simplify chain via `git revert <first-simplify-commit>..HEAD --no-edit` and exit 14.
+   After the final commit, audit the simplify patch itself for unneeded surface, duplicated logic, structure without cause, or a broken consumer contract. If the audit finds any, revert the entire simplify chain via `git revert <first-simplify-commit>..HEAD --no-edit` and exit 14.
+
+   Done when: all survivor commits are applied and green, or an exit code is returned.
 
 ## Failure and recovery
 | Exit code | Trigger | Recovery |

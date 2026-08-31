@@ -2,7 +2,7 @@
 
 When the pipeline exceeds 10 minutes, apply these strategies in order of impact:
 
-**Grounded: 2026-08-26**
+**Grounded: 2026-08-31**
 
 ```
 Slow CI pipeline?

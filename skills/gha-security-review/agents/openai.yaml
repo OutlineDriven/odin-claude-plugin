@@ -1,3 +1,3 @@
 interface:
-  display_name: "GHA Security Review"
-  short_description: "Reports exploitable GHA vulnerabilities with attack scenarios."
+  display_name: "Gha Security Review"
+  short_description: "Use when asked to review GitHub Actions workflows for"

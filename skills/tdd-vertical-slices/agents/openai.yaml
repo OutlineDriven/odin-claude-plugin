@@ -1,3 +1,3 @@
 interface:
-  display_name: "TDD Vertical Slices"
-  short_description: "Build features test-first. Red-before-green, minimal"
+  display_name: "Tdd Vertical Slices"
+  short_description: "Use when asked to build or fix behaviour test-first."

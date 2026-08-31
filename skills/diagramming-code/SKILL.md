@@ -1,6 +1,6 @@
 ---
 name: diagramming-code
-description: 'Use when the user asks for a call graph, class hierarchy, module dependency map, containment view, complexity heatmap, or attack-surface/data-flow view derived from code. Produces valid Mermaid graph text scoped to a readable size or honestly reports why no matching edges exist. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use for a call graph, class hierarchy, module-deps map, containment view, complexity heatmap, or data-flow view derived from code. Emits valid, readable Mermaid or explains why no edges exist. Not for embedded rendering — use diagram-contract. No remote or irreversible changes.'
 ---
 
 # Diagramming code
@@ -26,18 +26,25 @@ description: 'Use when the user asks for a call graph, class hierarchy, module d
 
 ## Procedure
 
-1. Confirm the target directory and diagram type. Do not widen to other types or mutate source files.
-2. Derive graph edges from actual code structure by reading and searching the target, not by inventing relationships. Map the request to its diagram type and Mermaid form:
+1. Confirm the target directory and diagram type. Do not widen to other types or mutate source files. **Done when:** the target directory and diagram type are confirmed.
+
+2. Read and search the target code to derive graph edges from its actual structure. Do not invent relationships. Map the request to its diagram type and Mermaid form:
    - call-graph → `flowchart`; edges from call relationships; arrow style by confidence: `-->` certain (direct call), `-.->` inferred (attribute access on non-self), `..->` uncertain (dynamic dispatch).
    - class-hierarchy → `classDiagram`; `<|--` inherits, `<|..` implements.
    - module-deps → `flowchart LR`; edges from import relationships.
    - containment → `classDiagram` with member lists; edges from containment relationships.
    - complexity → `flowchart` with `classDef` styles; include only nodes meeting the threshold; color scale: `low` green CC < 5, `medium` yellow CC 5-10, `high` red CC > 10.
    - data-flow → `flowchart`; paths from entrypoints (user input, API endpoints) to sensitive functions; style entrypoints blue. Without focus, target the top 10 complexity hotspots reachable from entrypoints.
-3. Sanitize every node ID: replace any non-alphanumeric character except `_` with `_`, and prefix `n_` if the result starts with a digit. Quote all labels with `["..."]`; escape a literal `"` in a label as `#quot;`. Use fully qualified IDs (module-prefixed) to avoid reserved words `end`, `graph`, `subgraph`, `style`, `classDef`, `click`.
-4. Scope to a readable size. Use focus-equivalent centering for call-graph and data-flow on non-trivial codebases; default depth 2; if the graph would exceed roughly 100 nodes, narrow focus or reduce depth rather than emit an unreadable diagram.
-5. Verify the output starts with `flowchart` or `classDiagram` and contains at least one node with valid Mermaid syntax. If no edges of the required type exist, emit a single-node diagram with an explanatory message instead of failing or fabricating edges.
-6. Wrap the result in a ` ```mermaid ` fence and deliver it.
+
+   **Done when:** edges are derived from actual structure and mapped to the diagram type's Mermaid form.
+
+3. Sanitize every node ID: replace any non-alphanumeric character except `_` with `_`, and prefix `n_` if the result starts with a digit. Quote all labels with `["..."]`; escape a literal `"` in a label as `#quot;`. Use fully qualified IDs (module-prefixed) to avoid reserved words `end`, `graph`, `subgraph`, `style`, `classDef`, `click`. **Done when:** every node ID and label is sanitized and escaped.
+
+4. Scope the graph to a readable size. Center call-graph and data-flow diagrams on the focus node for non-trivial codebases. Use the default depth of 2. If the graph would exceed roughly 100 nodes, narrow the focus or reduce the depth rather than emit an unreadable diagram. **Done when:** the graph is centered on the focus node where required and stays within the readable size bound.
+
+5. Verify the output starts with `flowchart` or `classDiagram` and contains at least one node with valid Mermaid syntax. If no edges of the required type exist, emit a single-node diagram with an explanatory message instead of failing or fabricating edges. **Done when:** the output is valid Mermaid with at least one node, or a single-node explanatory diagram is emitted.
+
+6. Wrap the result in a ` ```mermaid ` fence and deliver it. **Done when:** the fenced mermaid block is delivered.
 
 ## Failure and recovery
 - No matching edges (e.g., no inheritance edges in a Go or C codebase): emit a single-node explanatory diagram; do not invent edges.
@@ -48,7 +55,7 @@ description: 'Use when the user asks for a call graph, class hierarchy, module d
 - Blocked result: report exactly which diagram type and target could not be resolved and why; do not claim the done predicate holds.
 
 ## Output
-A fenced `mermaid` code block (`flowchart` or `classDiagram`) scoped to a readable size, or a single-node explanatory diagram when no matching edges exist.
+A fenced `mermaid` code block (`flowchart` or `classDiagram`) scoped to a readable size, or a single-node explanatory diagram when no matching edges exist, ordered confirm → derive-edges → sanitize → scope → verify → deliver.
 
 ## Provenance
 

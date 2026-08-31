@@ -1,6 +1,6 @@
 ---
 name: influence-and-negotiation
-description: 'Use when an agreement-seeking interaction arises, including mid-conversation moments the model detects. The skill produces a prepared mandate with a mutual-gains agenda, live response scripts, or a retrospective debrief with pathology analysis. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when an agreement-seeking interaction arises, including mid-conversation moments the model detects. Produces a prepared mandate with mutual-gains agenda, live response scripts, or a retrospective debrief with pathology analysis.'
 ---
 
 # Influence and negotiation

@@ -1,3 +1,3 @@
 interface:
   display_name: "Attack Shape"
-  short_description: "Agent attacks a shape; human defends; survivor is recorded."
+  short_description: "Use when a user invokes the agent to attack a proposed"

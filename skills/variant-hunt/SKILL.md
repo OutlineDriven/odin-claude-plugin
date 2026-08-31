@@ -1,6 +1,6 @@
 ---
 name: variant-hunt
-description: 'Use when asked to hunt codebase-wide for other manifestations of a confirmed root cause. Returns a triaged variant report with confirmed findings, false positives, and a CI-ready regression rule. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a confirmed root cause must be searched across a codebase or turned into a search rule. Returns triaged variants, false positives, and a CI-ready regression rule. Not for graph-neighborhood seeding — use variant-neighborhood-seeding.'
 ---
 
 # Variant hunt
@@ -12,7 +12,7 @@ description: 'Use when asked to hunt codebase-wide for other manifestations of a
 | Trigger | A specific vulnerability, logic bug, or bad pattern has already been confirmed and the user asks where else the same root cause occurs or asks to generalize it into a search rule. |
 | Authority | `reversible-local`: write only named local artifacts, the variant report and any CI-ready regression rule, to the working directory. Delete or edit by hand to reverse. |
 | Side effect | Searches the full codebase, may execute ripgrep, Semgrep, or CodeQL, and may write a variant report and CI-ready regression rule. No other repository file is modified. |
-| Done | The exact pattern hits the known bug, abstraction changes are calibrated one at a time, every candidate is triaged; confirmed variants and false positives are reported with evidence; a reproducible final pattern and regression guard are supplied. |
+| Done | The exact pattern hits the known bug, abstraction changes are calibrated one at a time, and every candidate is triaged. Confirmed variants and false positives are reported with evidence, and a reproducible final pattern and regression guard are supplied. |
 
 ## Inputs
 
@@ -26,12 +26,12 @@ Optional:
 
 ## Procedure
 
-1. **Receive and validate the root cause.** Require a root cause statement and the original bug location or snippet. If either is absent, stop and return `blocked: root cause and original location required`. Validate the location exists in the codebase before proceeding.
-2. **Enumerate expansion axes.** Ask four questions: what operation is dangerous, what data makes it dangerous, what is missing, and what context enables it. List all independent directions a variant could hide: related identifiers, other manifestations of the same mistake, data-type edge cases. Do not skip edge cases: null comparisons, empty strings, zero vs null, unauthenticated callers, boundary values.
-3. **Write an exact-match pattern.** Write a ripgrep, Semgrep, or CodeQL pattern that matches ONLY the known bug location. Run it; confirm it hits the known instance and nothing else. A pattern that matches zero locations means the root cause is misunderstood; stop and report that before building on it.
-4. **Generalize one element at a time.** From the exact match, climb the abstraction ladder: variable names, then surrounding structure, then semantics. Make one change per iteration. Run the pattern after each change. Stop and revert when more than half the matches are noise. Record every pattern tried with its match count, true-positive count, and false-positive count.
-5. **Triage every candidate.** Read the surrounding function, callers, and types for each candidate. Look specifically for guards, sanitizers, type constraints, or callers that never supply attacker-controlled input. Record the reason every ruled-out candidate is safe. Attach severity and confidence to every verdict.
-6. **Write the report.** Produce a variant report containing: root cause statement, original location, methodology table (pattern version, tool, matches, TP, FP), confirmed findings with evidence, false-positive table grouped by reason, and a CI-ready regression rule derived from the pattern that found the most variants.
+1. **Receive and validate the root cause.** Require a root cause statement and the original bug location or snippet. If either is absent, stop and return `blocked: root cause and original location required`. Validate the location exists in the codebase before proceeding. **Done when:** the root cause statement and original location are validated.
+2. **Enumerate expansion axes.** Ask four questions: what operation is dangerous, what data makes it dangerous, what is missing, and what context enables it. List every independent direction where a variant could hide: related identifiers, other manifestations of the same mistake, and data-type edge cases. Do not skip edge cases: null comparisons, empty strings, zero vs null, unauthenticated callers, boundary values. **Done when:** every expansion axis is enumerated including edge cases.
+3. **Write an exact-match pattern.** Write a ripgrep, Semgrep, or CodeQL pattern that matches ONLY the known bug location. Run it; confirm it hits the known instance and nothing else. A pattern that matches zero locations means the root cause is misunderstood; stop and report that before building on it. **Done when:** the pattern hits the known bug location and nothing else.
+4. **Generalize one element at a time.** From the exact match, climb the abstraction ladder: variable names, then surrounding structure, then semantics. Make one change per iteration. Run the pattern after each change. If more than half the matches are noise, stop and revert that change. Record every pattern tried with its match count, true-positive count, and false-positive count. **Done when:** the generalized pattern is stable with ≤50% false positives.
+5. **Triage every candidate.** Read the surrounding function, callers, and types for each candidate. Look specifically for guards, sanitizers, type constraints, or callers that never supply attacker-controlled input. Record the reason every ruled-out candidate is safe. Attach severity and confidence to every verdict. **Done when:** every candidate is triaged with a verdict, severity, and confidence.
+6. **Write the report.** Produce a variant report containing: root cause statement, original location, methodology table (pattern version, tool, matches, TP, FP), confirmed findings with evidence, false-positive table grouped by reason, and a CI-ready regression rule derived from the pattern that found the most variants. **Done when:** the report contains all six sections with evidence.
 
 ## Failure and recovery
 | Failure class | Result |
@@ -47,14 +47,7 @@ Partial-result rule: if the write step fails after steps 1–5 succeed, delete a
 Rollback: any written artifact is reversed by deleting the named report and any regression rule file from the working directory.
 
 ## Output
-A local variant report containing:
-- Root cause statement and original bug location with quoted vulnerable code.
-- Methodology table with every pattern version tried.
-- Confirmed findings, each severity-rated, with quoted code and exploitability analysis.
-- False-positive table grouped by reason.
-- A CI-ready regression rule in Semgrep or CodeQL.
-
-The report is the sole deliverable. No VCS commit, no remote mutation, no credential access.
+A local variant report with root cause statement, original location, methodology table, confirmed findings (severity-rated with evidence), false-positive table grouped by reason, and a CI-ready regression rule.
 
 ## Provenance
 

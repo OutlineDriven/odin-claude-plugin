@@ -1,3 +1,3 @@
 interface:
   display_name: "Visual Fact Check"
-  short_description: "Verify every factual claim against its cited sources"
+  short_description: "Use when invoked as visual-fact-check with a document path."

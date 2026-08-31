@@ -1,3 +1,3 @@
 interface:
-  display_name: "GitHub Gh CLI Operations"
-  short_description: "Resolve or create GitHub objects via gh and watch PR CI."
+  display_name: "Github GH CLI Operations"
+  short_description: "Use when a prompt contains a github.com URL or any git/GitHub"

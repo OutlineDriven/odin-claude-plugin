@@ -1,6 +1,6 @@
 ---
 name: create-branch
-description: 'Use when the user asks to create a new branch or start work on a new branch, create a local git branch named <type>/<short-description> on the correct base with no name collisions. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user asks to create a new branch or start work on one. Creates a local git branch named <type>/<short-description> on the correct base with no name collisions. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Create branch
@@ -16,18 +16,17 @@ description: 'Use when the user asks to create a new branch or start work on a n
 
 ## Inputs
 
-- Branch type and short description, taken from the user request. Type follows the team convention (commonly `feature`, `fix`, `chore`, `docs`, `refactor`, `test`). Short description is lowercase, hyphen-separated, no spaces.
+- Take the branch type and short description from the user request. The type follows the team convention (commonly `feature`, `fix`, `chore`, `docs`, `refactor`, `test`). The short description is lowercase and hyphen-separated, with no spaces.
 - Base commit, optional. Defaults to the current branch HEAD. The user may name a branch, tag, or commit SHA.
 
 ## Procedure
 
-1. Derive `<type>` and `<short-description>` from the user request. If either is missing or ambiguous, stop and ask the user to supply both before any mutation.
-2. Compose the branch name as `<type>/<short-description>`.
-3. Resolve the base. If the user named a base, confirm it resolves with `git rev-parse --verify <base>`; if it does not resolve, stop. If no base was named, use the current branch HEAD.
-4. Verify the name does not already exist: `git rev-parse --verify <branch>` must fail. If it succeeds, stop and report the collision rather than overwriting or suffixing.
-5. Inspect the working tree with `git status --porcelain`. If uncommitted changes are present and the user has not accounted for them, stop and report the changed files so the user can stash, commit, or abort before branching.
-6. Create and switch in one step: `git checkout -b <type>/<short-description> <base>`.
-7. Confirm success: `git rev-parse --abbrev-ref HEAD` equals the new branch name and `git rev-parse HEAD` equals the resolved base commit.
+1. Derive `<type>` and `<short-description>` from the user request. If either is missing or ambiguous, stop and ask the user to supply both before any mutation. Done when: both type and short-description are derived from the request or the user is asked to supply them.
+2. Compose the branch name as `<type>/<short-description>`. Done when: the branch name is composed in the `<type>/<short-description>` format.
+3. Resolve the base. If the user named a base, confirm it resolves with `git rev-parse --verify <base>`; if it does not resolve, stop. If no base was named, use the current branch HEAD. Done when: the base commit is resolved and verified, or an unresolvable base is reported.
+4. Verify the name does not already exist: `git rev-parse --verify <branch>` must fail. If it succeeds, stop and report the collision rather than overwriting or suffixing. Done when: the branch name is confirmed not to exist, or a collision is reported.
+5. Inspect the working tree with `git status --porcelain`. If uncommitted changes are present and the user has not accounted for them, stop and report the changed files so the user can stash, commit, or abort before branching. Done when: the working tree is clean or uncommitted changes are reported for user decision.
+6. Create and switch in one step: `git checkout -b <type>/<short-description> <base>`. Done when: `git rev-parse --abbrev-ref HEAD` equals the new branch name and `git rev-parse HEAD` equals the resolved base commit.
 
 ## Failure and recovery
 - Name collision: the branch already exists. Do not create or overwrite. Report the existing branch and its base; suggest a different name or `git switch <branch>` to reuse it.
@@ -37,7 +36,7 @@ description: 'Use when the user asks to create a new branch or start work on a n
 - Non-mutation rule: every validation in steps 3-5 runs before the mutation in step 6, so a blocked attempt leaves the repository unchanged.
 
 ## Output
-The new branch is checked out. Report the branch name, the base commit SHA it was created from, and confirmation that HEAD points at the new branch. If the attempt was blocked, report the failure class and the exact blocker with no branch created.
+On success, report the new branch name, its base commit SHA, and confirmation that HEAD points to it. If the attempt was blocked, report the failure class and exact blocker, and confirm that no branch was created.
 
 ## Provenance
 

@@ -1,6 +1,6 @@
-# Ideation Sections
+# Ideation sections
 
-This is the section contract for the ideation artifact — it describes *what* a persisted ideation document contains. It defines the markdown structure that `docs/ideation/<slug>.md` follows.
+This section contract defines what a persisted ideation document contains and the Markdown structure that `docs/ideation/<slug>.md` follows.
 
 ## What the artifact contains
 
@@ -16,15 +16,15 @@ Markdown renders metadata as YAML frontmatter at the top of the file.
 
 **No status field — not on the doc, not per idea.** An ideation doc is a point-in-time discovery artifact, not a tracked work item: it carries no `active -> completed` lifecycle and no per-idea "explored" marker. Tracking mutable workflow progress inside the artifact would create a second source of truth that drifts — whether an idea was later pursued is knowable from downstream artifacts (a plan that picked it up), so it is not duplicated here.
 
-### Grounding Context
+### Grounding context
 
 The Phase 1 grounding summary the ideas were qualified against.
 
-### Topic Axes (conditional)
+### Topic axes (conditional)
 
 The 3-5 axes from Phase 1.5, one per line. When Phase 1.5 was skipped, a single line records why. Omit the section entirely when not applicable.
 
-### Ranked Ideas
+### Ranked ideas
 
 The surviving candidates, ranked. Each idea carries:
 
@@ -48,7 +48,7 @@ Decoration — a visual with no shape to show, or one that just restates the tit
 
 Rendering mechanics: a nomnoml or D2 source rendered to a committed SVG in markdown, authored per the `diagram-contract` skill; inline SVG in HTML. Keep visuals at the idea's altitude — illustrative overviews, not authoritative specs. Detailed architecture, sequence diagrams, and wireframes belong downstream, once a direction is chosen and technical planning begins, not here.
 
-### Rejection Summary
+### Rejection summary
 
 A table of considered-and-cut ideas with a one-line reason each. When an axis ended with zero survivors despite recovery, record it as its own row so the coverage gap is visible rather than silently absent.
 

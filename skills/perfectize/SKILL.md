@@ -1,6 +1,6 @@
 ---
 name: perfectize
-description: 'Use when asked to push an already-working artifact to finished structure, grain, and feel without confusing implementation completion with composition. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to push an already-working artifact to finished structure, grain, and feel without confusing implementation completion with composition. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Perfectize
@@ -21,14 +21,14 @@ description: 'Use when asked to push an already-working artifact to finished str
 
 ## Procedure
 
-1. Confirm the artifact path and that it is working as delivered.
-2. Classify the artifact type (document, code file, config, spec, report, or other).
-3. Propose three polish dimensions — structural coherence, compositional refinement, and presentational polish — unless the human named them.
-4. Obtain explicit human confirmation of the polish targets before mutating any file.
-5. If the artifact is tracked in version control, note its current committed version as the rollback source. If it is not tracked, require the human to supply an existing recovery source before mutation; otherwise stop as blocked.
-6. Apply polish to the artifact along the confirmed dimensions only. Do not change implementation correctness.
-7. Verify the polished artifact preserves the original functionality: run a smoke test if applicable.
-8. Replace the original artifact with the polished version.
+1. Confirm the artifact path and that it is working as delivered. Done when: the artifact path is confirmed and the artifact is working.
+2. Classify the artifact type (document, code file, config, spec, report, or other). Done when: the artifact type is classified.
+3. Propose three polish dimensions (structural coherence, compositional refinement, and presentational polish) unless the human named them. Done when: three polish dimensions are proposed or the human's named targets are adopted.
+4. Obtain explicit human confirmation of the polish targets before mutating any file. Done when: the human confirms the polish targets.
+5. If the artifact is tracked in version control, note its current committed version as the rollback source. If it is not tracked, require the human to supply an existing recovery source before mutation; otherwise stop as blocked. Done when: the rollback source is noted or the run is blocked for lacking one.
+6. Apply polish to the artifact along the confirmed dimensions only. Do not change implementation correctness. Done when: polish is applied along the confirmed dimensions with implementation correctness unchanged.
+7. Verify the polished artifact preserves the original functionality: run a smoke test if applicable. Done when: original functionality is confirmed intact.
+8. Replace the original artifact with the polished version. Done when: the polished version replaces the original at the named path.
 
 ## Failure and recovery
 - **Polish broke the artifact**: restore the named artifact from its VCS version or the human-supplied recovery source. Return `rollback` and a report of what broke.
@@ -36,7 +36,7 @@ description: 'Use when asked to push an already-working artifact to finished str
 - **Polish oscillates or degrades without progress**: stop after three refinement cycles. Return `non-converged`. Do not produce an artifact under this outcome.
 
 ## Output
-A polished artifact at the named path. A one-paragraph summary of which dimensions were refined and which choices were made in each dimension.
+A polished artifact at the named path plus a one-paragraph summary of which dimensions were refined and which choices were made in each dimension.
 
 ## Provenance
 

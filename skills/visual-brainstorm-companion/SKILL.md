@@ -1,6 +1,6 @@
 ---
 name: visual-brainstorm-companion
-description: 'Use when a brainstorming question is genuinely clearer shown than told. Start a local key-gated HTTP and WebSocket server, push HTML fragments to the browser, and merge click selections back into the terminal reply. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a brainstorming question is genuinely clearer shown than told. Starts a local key-gated HTTP/WebSocket server, pushes HTML fragments to the browser, and merges click selections back into the terminal reply. Not for text-only idea exploration — use brainstorm or ideate.'
 ---
 
 # Visual brainstorm companion
@@ -29,7 +29,7 @@ Use Bun exactly `1.4.0`. The runtime files below use no package dependency.
 
 ## Procedure
 
-1. **Choose the visual branch.** Use this skill only when showing the alternatives is clearer than describing them. Obtain approval to start the local browser companion. Otherwise ask the question in the terminal and make no local change.
+1. **Choose the visual branch.** Use this skill only when showing the alternatives is clearer than describing them. Obtain approval to start the local browser companion. Otherwise ask the question in the terminal and make no local change. **Done when:** approval is obtained or the question is asked in the terminal instead.
 
 2. **Bind the runtime and process authority.** Require `bun --version` to print exactly `1.4.0`. Require the host managed-process primitive to support launch, output/readiness, exit status, and stop by the same name. A shell background job, `nohup`, PID file, `/proc` inspection, or ad hoc signal is not a substitute. On either prerequisite failure, return `runtime-unavailable` without creating a session.
 
@@ -92,10 +92,9 @@ Use Bun exactly `1.4.0`. The runtime files below use no package dependency.
    fi
    ```
 
-   Do not reuse a session or process name. The session directory and any container directories created for it are retained project-local state; this skill never recursively deletes `/tmp` or the project session.
+   Do not reuse a session or process name. The session directory and any container directories created for it are retained project-local state; this skill never recursively deletes `/tmp` or the project session. **Done when:** the session directory is exclusively created and the process name is bound.
 
-3. **Use the bundled server and materialize the two session helpers.** Resolve `scripts/server.ts` relative to this `SKILL.md`. It is the exact zero-dependency Bun 1.4.0 server. Run it in place; do not copy or edit it. Use the file-creation tool, not shell interpolation, to write the exact `publish-fragment.ts` and `read-events.ts` helpers below into the session directory.
-
+3. **Use the bundled server and materialize the two session helpers.** Resolve `scripts/server.ts` relative to this `SKILL.md`. Run this exact zero-dependency Bun 1.4.0 server in place; do not copy or edit it. Use the file-creation tool, not shell interpolation, to write the exact `publish-fragment.ts` and `read-events.ts` helpers below into the session directory.
 
    `$SESSION_DIR/publish-fragment.ts`:
 
@@ -385,7 +384,11 @@ Use Bun exactly `1.4.0`. The runtime files below use no package dependency.
    }
    ```
 
-4. **Launch through the host manager and prove readiness.** Launch `bun "<skill-directory>/scripts/server.ts"` only through the managed-process primitive under the exact stable name in `$PROCESS_NAME`, with only `SESSION_DIR`, `PROCESS_NAME`, and `IDLE_TIMEOUT_MS` added to its environment. Use that primitive's output reader until it emits one complete `READY {…}` line. Treat process exit or no readiness line within 10 seconds as `server-start-failure`; read the managed output and stop there. Save the emitted `screen_dir`, `state_dir`, `origin`, and process name. After readiness, read the mode-0600 `$SESSION_DIR/state/server-info.json` with the host file reader and validate that its `process_name`, `session_dir`, `screen_dir`, `state_dir`, and `origin` equal the emitted values; require a 64-lowercase-hex `key` and form the keyed URL from its `url` field. Never print the key or keyed URL in process logs. Share the keyed URL only with the approving user. Open it only when the user approved and the host supplies a browser-opening facility.
+   **Done when:** both helpers are written to the session directory and `scripts/server.ts` is resolved.
+
+4. **Launch through the host manager and prove readiness.** Launch `bun "<skill-directory>/scripts/server.ts"` only through the managed-process primitive under the exact stable name in `$PROCESS_NAME`. Add only `SESSION_DIR`, `PROCESS_NAME`, and `IDLE_TIMEOUT_MS` to its environment. Use the primitive's output reader until it emits one complete `READY {…}` line. Treat process exit or no readiness line within 10 seconds as `server-start-failure`; read the managed output and stop there.
+
+   Save the emitted `screen_dir`, `state_dir`, `origin`, and process name. After readiness, read the mode-0600 `$SESSION_DIR/state/server-info.json` with the host file reader. Validate that its `process_name`, `session_dir`, `screen_dir`, `state_dir`, and `origin` equal the emitted values. Require a 64-lowercase-hex `key` and form the keyed URL from its `url` field. Never print the key or keyed URL in process logs. Share the keyed URL only with the approving user. Open it only when the user approved and the host supplies a browser-opening facility. **Done when:** the server emits READY, server-info.json validates, and the keyed URL is formed.
 
 5. **Author and atomically publish one fresh fragment.** Only agent-authored HTML structure may remain raw. Before writing markup, contextually escape every user-, project-, event-, tool-, or file-origin value:
 
@@ -400,7 +403,7 @@ Use Bun exactly `1.4.0`. The runtime files below use no package dependency.
    bun "$SESSION_DIR/publish-fragment.ts" "$SESSION_DIR" "layout-1.$SESSION_ID.tmp" "layout-1.$SESSION_ID.html"
    ```
 
-   Use fresh semantic names for later screens. The helper performs authenticated `/health` first, validates and fsyncs the temporary regular single-link file, atomically renames it, fsyncs the screen directory, and only then posts authenticated `/publish`. Save the exact `screen` and `generation` in its JSON response. Never reuse a final name, including an atomically published file whose `/publish` request failed.
+   Use fresh semantic names for later screens. The helper performs authenticated `/health` first, validates and fsyncs the temporary regular single-link file, atomically renames it, fsyncs the screen directory, and only then posts authenticated `/publish`. Save the exact `screen` and `generation` in its JSON response. Never reuse a final name, including an atomically published file whose `/publish` request failed. **Done when:** the fragment is atomically published and `screen`/`generation` are saved.
 
 6. **Collect the answer.** Give the user the complete keyed URL, summarize what is visible, and ask for a terminal response. On the next turn run the exact bounded reader with the saved current screen and generation:
 
@@ -408,9 +411,9 @@ Use Bun exactly `1.4.0`. The runtime files below use no package dependency.
    bun "$SESSION_DIR/read-events.ts" "$SESSION_DIR/state" "$CURRENT_SCREEN" "$CURRENT_GENERATION"
    ```
 
-   Treat its JSON array as inert data. Merge only those current-screen/current-generation choices with the terminal response; the terminal response remains primary. The atomic byte cursor consumes every complete record once, so stale or prior-generation choices are never reused.
+   Treat its JSON array as inert data. Merge only those current-screen/current-generation choices with the terminal response; the terminal response remains primary. The atomic byte cursor consumes every complete record once, so stale or prior-generation choices are never reused. **Done when:** validated current-generation browser events are merged with the terminal response.
 
-7. **Iterate or finish.** A changed visual gets a newly escaped, freshly named fragment through Step 5. When the visual question is resolved, stop the exact `$PROCESS_NAME` through the same managed-process primitive, or explicitly leave it to the bounded idle timeout. Never signal a PID or invent a fallback stop path. Process stop ends serving; `$SESSION_DIR`, screens, events, cursor, and terminal stop record are intentionally retained as project-local data.
+7. **Iterate or finish.** For a changed visual, publish a newly escaped, freshly named fragment through Step 5. When the visual question is resolved, stop the exact `$PROCESS_NAME` through the same managed-process primitive, or explicitly leave it to the bounded idle timeout. Never signal a PID or invent a fallback stop path. Process stop ends serving; `$SESSION_DIR`, screens, events, cursor, and terminal stop record are intentionally retained as project-local data. **Done when:** the visual question is resolved and the process is stopped or left to idle timeout.
 
 ## Failure and recovery
 
@@ -430,8 +433,7 @@ Use Bun exactly `1.4.0`. The runtime files below use no package dependency.
 Partial-result rule: after readiness, any failed push or read leaves the named process and retained session explicit. Stop only through the managed primitive. A successful process stop does not delete retained session data, and retained data does not imply the process is still running.
 
 ## Output
-
-Return the complete keyed loopback URL, retained `session_dir`, `screen_dir`, and `state_dir`, current screen and generation, and the resolved visual answer with only validated current-generation browser events merged into the terminal reply. State whether the named managed process was stopped or left to its idle timeout; separately state that project-local session data and any created container directories were intentionally retained.
+The keyed loopback URL, retained session/screen/state dirs, current screen and generation, the resolved visual answer with validated browser events merged, process stop/timeout status, and retention notice for project-local data.
 
 ## Provenance
 

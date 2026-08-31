@@ -1,3 +1,3 @@
 interface:
   display_name: "New Space"
-  short_description: "Split userspace decisions from agentspace execution"
+  short_description: "Use when a user starts a new work session and asks to split"

@@ -2,7 +2,7 @@
 
 Cross-locale direction-shaping for CJK surfaces — locale tagging, Pan-CJK font selection, shared typography rules, and the cross-CJK slop tells. Per-locale depth lives in `korean.md`, `japanese.md`, `chinese.md`.
 
-**Grounded: 2026-08-26**
+**Grounded: 2026-08-31**
 
 This file is loaded only via the SKILL.md routing table — per-locale references do not backlink here. A reader needing cross-CJK guidance re-enters via SKILL.md.
 

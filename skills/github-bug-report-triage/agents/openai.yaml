@@ -1,3 +1,3 @@
 interface:
-  display_name: "GitHub Bug Report Triage"
-  short_description: "Triage bug issues as actionable or needs-info, listing gaps"
+  display_name: "Github Bug Report Triage"
+  short_description: "Use when evaluating whether a bug issue has sufficient detail"

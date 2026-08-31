@@ -1,6 +1,6 @@
 ---
 name: instruction-understanding-gate
-description: 'Use when a request is long, bundled, high-stakes, hard to undo, or has ambiguous scope or referents such as this, that, it, the other one, whatever is cleaner, or whichever order makes sense. Verifies the model''s understanding of the instruction before spending non-trivial work: restates internally, cross-checks against available context, proceeds silently when resolved, and surfaces only a genuine surviving fork. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a request is long, bundled, high-stakes, or has ambiguous referents. Verifies understanding before non-trivial work: restates, cross-checks context, proceeds silently, surfaces a surviving fork. Not for tiered scans — use clarify; not for interviews — use interview-me.'
 ---
 
 # Instruction understanding gate
@@ -18,7 +18,7 @@ Verify understanding before acting.
 
 ## Inputs
 
-The user's instruction and all context reachable by read: current message, session history, project memory files, filesystem, and established project conventions. All inputs are sourced by the model; no user-provided artifact is required.
+The user's instruction and all readable context: the current message, session history, project memory files, filesystem, and established project conventions. The model obtains these inputs; the user does not need to provide an artifact.
 
 ## Procedure
 
@@ -33,7 +33,7 @@ The user's instruction and all context reachable by read: current message, sessi
    - If context resolves every fork: proceed silently. Do not surface a question for a resolved or unambiguous request.
    - If a genuine fork survives: surface one specific clarifying question anchored to the restated understanding. Name the choice; do not ask a vague "does this look right?" question.
 
-5. **Log substantial work.** Before beginning any substantial work, write one durable "understood as: ..." log line so a later reader can audit whether the work matched the confirmed read. "Substantial" means plans, multi-file changes, irreversible actions, or work a fresh reviewer may need to audit. A routine single-turn response does not need a log.
+5. **Log substantial work.** Before beginning substantial work, write one durable "understood as: ..." log line so a later reader can audit whether the work matched the confirmed read. Substantial work includes plans, multi-file changes, irreversible actions, or work a fresh reviewer may need to audit. A routine single-turn response does not need a log.
 
 ## Failure and recovery
 | Failure class | Result |

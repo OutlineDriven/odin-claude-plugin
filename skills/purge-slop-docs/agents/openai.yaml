@@ -1,3 +1,3 @@
 interface:
   display_name: "Purge Slop Docs"
-  short_description: "Purge stale docs and repair Markdown hierarchy"
+  short_description: "Use when a human asks to purge stale docs, clean Markdown, or"

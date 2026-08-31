@@ -1,6 +1,6 @@
 ---
 name: customer-feedback-report
-description: 'Use when the user asks for weekly customer feedback analysis, trending issues, NPS, churn, or email feedback over a window. Synthesizes themes, exact counts, an equal-length week-over-week comparison, cited GitHub issue links, and verbatim quotes into a report and PR. Don''t use without explicit human authorization for credential use, publication, or PR creation, or for unscoped or wildcard analysis.'
+description: 'Use when customer feedback, NPS, churn, or email feedback needs analysis over a time window. Produces themes, exact counts, week-over-week comparison, cited links, and verbatim quotes in a report and PR. Requires human authorization for credentials, publication, and PR creation.'
 disable-model-invocation: true
 ---
 
@@ -30,9 +30,9 @@ Before proceeding, show the resolved values and explain that the run will read c
 
 ## Procedure
 
-1. **Authorize access.** Require an explicit human response authorizing the displayed source scope and credential use. If the response changes any scope, source, window, or target, display the revised preview and obtain authorization again. Do not write a report or create a PR at this stage.
+1. **Authorize access.** Require an explicit human response authorizing the displayed source scope and credential use. If the response changes any scope, source, window, or target, display the revised preview and obtain authorization again. Do not write a report or create a PR at this stage. Done when: human authorization is obtained for the displayed scope and credentials, or re-obtained after a scope change.
 
-2. **Resolve the two windows.** Interpret the current interval in the supplied timezone and compute the immediately preceding equal-duration interval. Use the same boundary convention for both windows. Record both intervals in the report so every count has an auditable denominator.
+2. **Resolve the two windows.** Interpret the current interval in the supplied timezone and compute the immediately preceding equal-duration interval. Use the same boundary convention for both windows. Record both intervals in the report so every count has an auditable denominator. Done when: both windows are computed with equal duration and the same boundary convention.
 
 3. **Fetch each enabled source inline and read-only.** Use an available authenticated integration or source-native read/query tool; do not call a repository script or assume a particular provider API.
    - **GitHub issues:** restrict every query to the authorized organization and repository/team set and to records created or updated in either window. Collect issue title/body, relevant customer-authored comments, timestamps, state, labels, stable issue number, and canonical issue URL. Exclude records outside the allowed repositories even if search returns them.
@@ -41,7 +41,9 @@ Before proceeding, show the resolved values and explain that the run will read c
    - **Churn:** restrict the warehouse/export/query by the authorized account/team/cohort and both windows. Collect event or customer-record ID, effective timestamp, reason text, relevant status metadata, and an accessible source link or stable source identifier. Read only; do not update customer records.
    If a source integration is unavailable or access is denied, record that source as unavailable rather than replacing it with an unscoped search.
 
-4. **Normalize and deduplicate inline.** Represent every fetched item with `source`, stable source ID, timestamp, scoped account/team, feedback text, canonical link when available, and source-specific score/state metadata. Deduplicate only identical source IDs; never collapse distinct customers merely because their text is similar. Preserve the original text separately from any summary so quotes remain verbatim.
+   Done when: every enabled source is fetched read-only within scope, or recorded as unavailable.
+
+4. **Normalize and deduplicate inline.** Represent every fetched item with `source`, stable source ID, timestamp, scoped account/team, feedback text, canonical link when available, and source-specific score/state metadata. Deduplicate only identical source IDs; never collapse distinct customers merely because their text is similar. Preserve the original text separately from any summary so quotes remain verbatim. Done when: every fetched item is normalized with stable ID and original text preserved.
 
 5. **Apply the analysis mechanism inline.** Analyze the combined current and comparison records without invoking `analyze_feedback.py` or any absent helper file:
    - Derive a single theme codebook from both windows together, naming each theme in concrete customer language and defining its inclusion rule.
@@ -52,11 +54,13 @@ Before proceeding, show the resolved values and explain that the run will read c
    - Tie every GitHub-derived claim and quote to its canonical issue link. For other private sources, cite the stable source ID and include an accessible link only when the authorized integration provides one.
    - Explain material week-over-week movement from observed evidence only. Label interpretations that are not directly stated by customers as inferences.
 
-6. **Render a complete in-memory report before writing.** Use this order: title and windows; scope and source coverage; executive summary; theme table and counts; week-over-week comparison; findings by theme; verbatim quotes with citations; source notes and limitations. Include zero-result and unavailable-source accounting. Validate that every number can be recomputed from the normalized records, every quote is an exact substring of its source text after marked redactions, and every GitHub citation is a canonical issue link.
+   Done when: themes, counts, quotes, and citations are produced inline with every claim tied to a source.
 
-7. **Authorize publication.** Preview the exact report path, a concise summary of the report, and the fact that the next action writes the file. Obtain explicit human authorization before saving it. Save only under `reports/customer_feedback_summaries/` using the requested convention or, when none was supplied, `feedback_analysis_<current-window-end-date>.md`.
+6. **Render a complete in-memory report before writing.** Use this order: title and windows; scope and source coverage; executive summary; theme table and counts; week-over-week comparison; findings by theme; verbatim quotes with citations; source notes and limitations. Include zero-result and unavailable-source accounting. Validate that every number can be recomputed from the normalized records, every quote is an exact substring of its source text after marked redactions, and every GitHub citation is a canonical issue link. Done when: the in-memory report passes all validation checks in the stated section order.
 
-8. **Authorize and create the PR.** Preview the repository, base branch, changed report path, PR title, and remote consequence. Obtain explicit human authorization specifically covering PR creation unless the latest authorization explicitly covered both the displayed report publication and this displayed PR. Create the PR with only the report change and return its URL.
+7. **Authorize publication.** Preview the exact report path, a concise summary of the report, and the fact that the next action writes the file. Obtain explicit human authorization before saving it. Save only under `reports/customer_feedback_summaries/` using the requested convention or, when none was supplied, `feedback_analysis_<current-window-end-date>.md`. Done when: the report is saved under `reports/customer_feedback_summaries/` after human authorization.
+
+8. **Authorize and create the PR.** Preview the repository, base branch, changed report path, PR title, and remote consequence. Obtain explicit human authorization specifically covering PR creation unless the latest authorization explicitly covered both the displayed report publication and this displayed PR. Create the PR with only the report change and return its URL. Done when: the PR is created with only the report change and its URL is returned.
 
 ## Failure and recovery
 
@@ -70,14 +74,7 @@ Before proceeding, show the resolved values and explain that the run will read c
 - **Write or PR creation fails:** preserve the already authorized, successfully completed state, report the exact failure, and retry only the failed operation after confirming that its target is unchanged. Never claim done without both the saved report and PR URL.
 
 ## Output
-
-On success, return:
-
-- the saved report path under `reports/customer_feedback_summaries/`;
-- the PR URL; and
-- a short coverage statement naming included, empty, unavailable, and excluded sources.
-
-The report itself must contain themes, exact counts, the equal-length week-over-week comparison, cited GitHub issue links, and verbatim quotes. If any required element or authorization is missing, return a blocked or unpublished result instead of claiming success.
+The saved report path under `reports/customer_feedback_summaries/`, the PR URL, and a coverage statement naming included, empty, unavailable, and excluded sources; the report contains themes, counts, week-over-week comparison, cited issue links, and verbatim quotes in the section order from step 6.
 
 ## Provenance
 

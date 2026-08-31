@@ -1,6 +1,6 @@
 ---
 name: humaniseur-fr
-description: 'Use when the user supplies French text that reads like AI output and asks to naturalize it, transform it in one pass to remove AI tells while preserving register. Returns the rewritten French text; no durable writes. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when the user supplies French text that reads like AI output and asks to naturalize it. One pass removes AI tells while preserving register; returns the rewritten French text. Not for English STE rewriting — use humanizer-en-asd-ste100.'
 ---
 
 # Humaniseur fr
@@ -55,7 +55,7 @@ Apply per-sentence. Stop scanning once a sentence has received its two-class cap
 
 #### Connecteurs
 
-6. **Listes numérotées forzées.** `` Premièrement … Deuxièmement … Troisièmement … En conclusion ''. Natural prose rarely uses this structure in French outside legal texts. Integrate the items into the sentence flow or use `` d'abord … ensuite … enfin ''.
+6. **Listes numérotées forcées.** `` Premièrement … Deuxièmement … Troisièmement … En conclusion ''. Natural prose rarely uses this structure in French outside legal texts. Integrate the items into the sentence flow or use `` d'abord … ensuite … enfin ''.
 7. **Connecteurs en cascade.** Three or more `` par conséquent / ainsi / dès lors / en effet / moreover '' in the same paragraph. Reduce to one or two. Natural French uses fewer explicit connectors; the logic follows from the content.
 8. **« Et ce, » et « ce, » comme relatives.** `` Le projet, et ce, malgré les obstacles … ''. Cut `` et ce '' and rewrite: `` Le projet, malgré les obstacles … ''.
 9. **« Notamment / entre autres » en ouverture.** `` Notamment, nous observons … '', `` Entre autres, il faut … ''. These are weak openers. Replace with `` Nous observons … '', `` Il faut … ''.

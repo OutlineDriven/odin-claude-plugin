@@ -1,6 +1,6 @@
 ---
 name: next-best-action
-description: 'Use when a project is between phases, the author asks what to do next, too many valid threads are open, or work needs re-entry: read the current state and return exactly one next action with an observable done-when and a cited reason it beats other visible options. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when a project is between phases, the author asks what to do next, too many threads are open, or work needs re-entry. Returns exactly one next action with an observable done-when and a cited reason it beats other visible options. Not for gating a task — use next-action-gate.'
 ---
 
 # Next best action
@@ -23,14 +23,15 @@ description: 'Use when a project is between phases, the author asks what to do n
 
 ## Procedure
 
-1. Read the current supplied context: plan files, task lists, recent task outputs, and named current task/plan artifacts present in the conversation.
-2. Identify the highest-priority unblocked task, the most critical blocker, or the single action whose completion would most advance the stated goal.
-3. Select exactly one action as the next best action.
-4. Cite the specific evidence from step 1 that supports this selection.
-5. State the done-when observable: a concrete, verifiable condition that marks the action complete.
-6. Name one alternative option that was considered and state why the selected action beats it.
+1. Read the current supplied context: plan files, task lists, recent task outputs, and named current task/plan artifacts present in the conversation. Done when: all available context is read.
+2. Identify the highest-priority unblocked task, the most critical blocker, or the single action whose completion would most advance the stated goal. Done when: one candidate action is identified.
+3. Select exactly one action as the next best action. Done when: exactly one action is selected.
+4. Cite the specific evidence from step 1 that supports this selection. Done when: the evidence citation names the source artifact or context.
+5. State the done-when observable: a concrete, verifiable condition that marks the action complete. Done when: the done-when is observable and verifiable.
+6. Name one alternative option that was considered and state why the selected action beats it. Done when: one alternative is named with a stated reason the selection wins.
 
 ## Failure and recovery
+
 | Failure class | Condition | Result |
 |---|---|---|
 | insufficient-state | No author-supplied state description and no current supplied context reachable as a named artifact | Block: return "blocked: insufficient state — supply a project state description or make a plan/task artifact available in the current context" |
@@ -42,13 +43,8 @@ Partial-result rule: if optional evidence exists but is incomplete, return what 
 Non-mutation rule: authority is read-only; return no changes to any file, variable, or state.
 
 ## Output
-One prioritized action recommendation containing:
-- The next action (imperative verb phrase)
-- The specific evidence citation that prompted the selection
-- The done-when observable
-- The reason this action beats one alternative option
 
-Format: plain text, no list of options, no ranked menu, exactly one action.
+One prioritized action recommendation: next action, evidence citation, done-when observable, reason it beats one alternative — in that order, plain text, exactly one action.
 
 ## Provenance
 

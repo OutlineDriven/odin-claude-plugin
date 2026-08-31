@@ -1,6 +1,6 @@
 ---
 name: apple-design-review
-description: 'Use when the user invokes /apple-design-review to audit an iOS app visuals on a real device. Produces a per-screen design-review report scoring ten dimensions 0-10 with a biggest-leverage fix for each. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user invokes /apple-design-review to audit an iOS app''s visuals on a real device. Produces a per-screen design-review report scoring ten dimensions 0-10 with a biggest-leverage fix for each. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Apple design review
@@ -9,10 +9,10 @@ description: 'Use when the user invokes /apple-design-review to audit an iOS app
 
 | Field | Bound contract |
 |---|---|
-| Trigger | the user runs /apple-design-review |
-| Authority | reversible-local: write only the named review-report artifact; delete or overwrite it to roll back |
-| Side effect | local-write to iOS screen design-review findings (one markdown report file) |
-| Done | an iOS design-review report is produced |
+| Trigger | The user runs `/apple-design-review`. |
+| Authority | Reversible-local: write only the named review-report artifact; delete or overwrite it to roll back. |
+| Side effect | Local-write to iOS screen design-review findings (one Markdown report file). |
+| Done | An iOS design-review report is produced. |
 
 ## Inputs
 
@@ -22,8 +22,8 @@ description: 'Use when the user invokes /apple-design-review to audit an iOS app
 
 ## Procedure
 
-1. Acquire the observation session in a read-only capability. Issue no mutating calls to the device or app.
-2. Determine the screen set. Use the user-supplied list when provided; otherwise enumerate screens from the accessibility tree and confirm the set with the user before proceeding.
+1. Acquire read-only access to the observation session. Issue no mutating calls to the device or app.
+2. Determine the screen set. Use the user-supplied list when provided; otherwise, enumerate screens from the accessibility tree and confirm the set with the user before proceeding.
 3. For each screen in the set:
    1. Capture a screenshot.
    2. Query the accessibility tree for elements.
@@ -36,12 +36,12 @@ description: 'Use when the user invokes /apple-design-review to audit an iOS app
    4. Touch targets. Every interactive element is at least 44x44pt. No tappable text smaller than 24pt.
    5. Loading, empty, and error states. Each is present and intentional. No blank screens during async work. Empty states tell the user what to do next.
    6. Accessibility. VoiceOver labels exist on every interactive element. Dynamic Type up to XXL does not break layouts. Reduce Motion is respected. The palette is checked against deuteranopia.
-   7. Animation discipline. No more than two simultaneous animations. UI feedback durations land in 200-300ms. Spring damping suits the flow seriousness.
-   8. iOS idiom alignment. Native components (NavigationStack, List, Form, system sheets) are used where appropriate. Navigation is not re-invented. No web-style hamburger menus on phone.
+   7. Animation discipline. No more than two simultaneous animations. UI feedback durations land in 200-300ms. Spring damping matches the seriousness of the flow.
+   8. iOS idiom alignment. Native components (NavigationStack, List, Form, system sheets) are used where appropriate. Navigation is not reinvented. No web-style hamburger menus on phone.
    9. Information density. Per-screen content fits without horizontal scroll. Long screens carry section anchors. Lists use real iOS list patterns (swipe actions, contextual menus).
    10. AI-slop check. No generic stock layouts, leftover placeholder data, cargo-culted Material Design imported from Android, or gradients that read as AI-generated.
 5. For every dimension scoring below 7 on any screen, surface the issue with a recommended fix and its tradeoff and let the user decide whether to address it. Do not auto-apply fixes.
-6. Write the report artifact described under Output.
+6. Write the report artifact described under Output. Done when: every reviewed screen has ten scores, concrete findings, and one biggest-leverage fix per dimension, while unscored screens carry their blocker.
 
 ## Failure and recovery
 - Observation session unavailable or rejects read-only access: stop and report the exact error. Do not attempt to start, upgrade, or re-mint the session. Roll back is trivial: no report is written.
@@ -52,7 +52,7 @@ description: 'Use when the user invokes /apple-design-review to audit an iOS app
 - Blocked result: report BLOCKED with the exact blocker and what was attempted; do not emit a done predicate that does not hold.
 
 ## Output
-A markdown report written to a local path under the project directory, named `ios-design-review-<date>.md`. It contains, per screen: the screenshot, the 0-10 score for each of the ten dimensions, the what-would-make-it-a-10 note for each dimension, and one biggest-leverage fix per dimension. Screens scoring below 7 on any dimension are flagged with the surfaced fix and tradeoff. The report is the terminal deliverable; no source, device, or app state is changed.
+A Markdown report written to a local path under the project directory, named `ios-design-review-<date>.md`. It contains, per screen: the screenshot, the 0-10 score for each of the ten dimensions, the what-would-make-it-a-10 note for each dimension, and one biggest-leverage fix per dimension. Screens scoring below 7 on any dimension are flagged with the surfaced fix and tradeoff. The report is the terminal deliverable; no source, device, or app state is changed.
 
 ## Provenance
 

@@ -1,6 +1,6 @@
 ---
 name: history-recall
-description: 'Use when a user explicitly requests the reasoning behind one matched session by query or opaque handle. Returns one capped typed record of problem category, decisions, outcome, touched-file handles, lifecycle, spawn edges, and message-count buckets plus an opaque handle. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when a user requests the reasoning behind one matched session by query or handle. Returns a capped record of decisions, outcome, touched files, lifecycle, and spawn edges. Not for peer transfer — use history-sync; not for store registration — use history-source-registry.'
 ---
 
 # History session brief

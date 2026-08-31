@@ -96,7 +96,7 @@ The agent also picks per artifact:
 
 ## Brainstorm metadata fields
 
-every requirements-only plan carries stable metadata fields. In markdown these fields appear as YAML frontmatter; in HTML they appear as visible header text.
+Every requirements-only plan carries stable metadata fields. In markdown these fields appear as YAML frontmatter; in HTML they appear as visible header text.
 
 ### Required
 

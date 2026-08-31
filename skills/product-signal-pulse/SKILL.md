@@ -1,6 +1,6 @@
 ---
 name: product-signal-pulse
-description: 'Use when asked to invoke /product-signal-pulse with an optional lookback window to query configured product signals and produce a compact pulse report; a 30-40 line report is written under docs/pulse-reports with headlines and the top followup surfaced in chat. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when invoking /product-signal-pulse with an optional lookback window to query configured product signals. Writes a 30-40 line pulse report under docs/pulse-reports with headlines and top followup in chat. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Product signal pulse
@@ -25,8 +25,8 @@ description: 'Use when asked to invoke /product-signal-pulse with an optional lo
 
 ### Config resolution
 
-1. Resolve the repo root with `git rev-parse --show-toplevel`.
-2. Read `.odin/config.local.yaml`, then `config.yaml`. For each `pulse_*` key, the first active (non-commented) value wins; an invalid value continues to the next layer, then the skill default. For lists and maps, a present key replaces the whole key. Missing files are skipped.
+1. Resolve the repo root with `git rev-parse --show-toplevel`. Done when: the stated outcome holds.
+2. Read `.odin/config.local.yaml`, then `config.yaml`. For each `pulse_*` key, the first active (non-commented) value wins; an invalid value continues to the next layer, then the skill default. For lists and maps, a present key replaces the whole key. Missing files are skipped. Done when: the stated outcome holds.
 
 ### Config keys
 
@@ -47,12 +47,12 @@ description: 'Use when asked to invoke /product-signal-pulse with an optional lo
 
 ### Phase 0: route by config state
 
-3. If `pulse_product_name` is unset after cascade, or the repo root cannot be resolved, or the argument was `setup`, `reconfigure`, or `edit config`, run Phase 1 first. Otherwise start at Phase 2. Every run passes through Phase 2 and Phase 3.
+3. If `pulse_product_name` is unset after cascade, or the repo root cannot be resolved, or the argument was `setup`, `reconfigure`, or `edit config`, run Phase 1 first. Otherwise start at Phase 2. Every run passes through Phase 2 and Phase 3. Done when: the stated outcome holds.
 
 ### Phase 1: First-run interview
 
-4. Read the strategy doc (`STRATEGY.md`, else first of `VISION.md`, `PRODUCT.md`). If it exists, extract the product name from the `name` frontmatter key or the H1 title (stripping a trailing ` Strategy`), and the key metrics from `## Key metrics` or the section listing success measures by meaning. When `STRATEGY.md` carries no metrics but points to a legacy sibling doc for content it defers, read the metrics from there. Surface what was extracted and invite correction. If no strategy doc exists, note it and run from scratch.
-5. Ask one question at a time using the host's blocking question tool (match by capability, not host-specific name; fall back to numbered options on the chat surface only when no such tool is available or a call errors). Run the interview in order:
+4. Read the strategy doc (`STRATEGY.md`, else first of `VISION.md`, `PRODUCT.md`). If it exists, extract the product name from the `name` frontmatter key or the H1 title (stripping a trailing ` Strategy`), and the key metrics from `## Key metrics` or the section listing success measures by meaning. When `STRATEGY.md` carries no metrics but points to a legacy sibling doc for content it defers, read the metrics from there. Surface what was extracted and invite correction. If no strategy doc exists, note it and run from scratch. Done when: the stated outcome holds.
+5. Ask one question at a time using the host's blocking question tool (match by capability, not host-specific name; fall back to numbered options on the chat surface only when no such tool is available or a call errors). Run the interview in order: Done when: the stated outcome holds.
    1. Product name (confirm or edit the seeded value).
    2. Primary engagement event — the single event that fires when a user is actively using the product. Apply the SMART bar: specific (named event), measurable (tool returns a count), actionable (if it moves, the team notices), relevant (ties to the product's job), timely (reads in short windows). Apply the engagement-vs-value test: engagement is earlier (they're in it), value is later (it worked); if the candidate is really value-realization, push back. One round of pushback per section max; if the second answer is not usable, capture it flagged `needs-review` and move on.
    3. Value-realization event — the event that fires when the user gets value. May equal the engagement event. If value is a feeling not an event, ask for a proxy (completion, time-to-first-X, return rate, copy/share/export).
@@ -61,30 +61,30 @@ description: 'Use when asked to invoke /product-signal-pulse with an optional lo
    6. Data sources — for each signal (engagement, value, completions, strategy metrics), ask which tool and what query shape. Consolidate entries in the same tool. Record per-strategy-metric source overrides in `pulse_metric_sources` as `metric=source` pairs. For dual-source signals, pick one canonical source. For un-instrumented strategy metrics, offer defer (`pulse_pending_metrics`, renders `no data`) or drop (`pulse_excluded_metrics`); never silently skip. Nudge toward MCP: search the MCP registry for each tool; record coverage. Refuse read-write database access. Offer a read-only replica or skip DB entirely. DB is optional. Apply the source-count check: 3-4 sources for 3-4 distinct metrics is fine; 4+ sources for 1-2 metrics is over-instrumented; above …
    7. System performance — recommended default: top 5 error signatures by count with one-line context, p50/p95/p99 latency vs prior window. Confirm or customize. If no tracing tool, omit the section.
    8. Default lookback window.
-6. Write the captured config to `.odin/config.local.yaml` as flat `pulse_*` keys. If the file exists, merge preserving non-pulse keys. If the directory or file does not exist, create it. If `config.local.yaml` is not in `.gitignore`, offer to add the entry before writing. Show the resulting pulse block and offer one round of edits.
-7. Offer a scheduling recommendation (daily, weekly, not now, later). If yes, hand off to the host's scheduling primitive; do not schedule inline. Capture the choice.
+6. Write the captured config to `.odin/config.local.yaml` as flat `pulse_*` keys. If the file exists, merge preserving non-pulse keys. If the directory or file does not exist, create it. If `config.local.yaml` is not in `.gitignore`, offer to add the entry before writing. Show the resulting pulse block and offer one round of edits. Done when: the stated outcome holds.
+7. Offer a scheduling recommendation (daily, weekly, not now, later). If yes, hand off to the host's scheduling primitive; do not schedule inline. Capture the choice. Done when: the stated outcome holds.
 
 ### Phase 2: run the pulse
 
-8. If Phase 1 ran, re-apply the config cascade (local then tracked) to pick up edits. Otherwise use the Phase 0 values. Apply defaults for anything unset.
-9. Resolve the lookback window: use the argument if parseable; if empty, use `pulse_lookback_default`; if unset, `24h`. If unparseable, ask the user to clarify. Apply a 15-minute trailing buffer to the upper bound (e.g. for `24h`, query `[now - 24h - 15m, now - 15m]`).
-10. Dispatch in parallel (different tools, no shared load):
+8. If Phase 1 ran, re-apply the config cascade (local then tracked) to pick up edits. Otherwise use the Phase 0 values. Apply defaults for anything unset. Done when: the stated outcome holds.
+9. Resolve the lookback window: use the argument if parseable; if empty, use `pulse_lookback_default`; if unset, `24h`. If unparseable, ask the user to clarify. Apply a 15-minute trailing buffer to the upper bound (e.g. for `24h`, query `[now - 24h - 15m, now - 15m]`). Done when: the stated outcome holds.
+10. Dispatch in parallel (different tools, no shared load): Done when: the stated outcome holds.
     - Product analytics query: primary event count, value-realization count, completions, conversion ratios over the window.
     - Application tracing query: error counts by category, latency distribution (p50/p95/p99), top error signatures over the window.
     - Payments query (if configured): new customers, churn, revenue delta over the window.
-11. Dispatch serially after the parallel batch: read-only database queries, only when `pulse_db_enabled` is `true`. One at a time, tight scoped queries only, never full-table scans on large tables. If a query would be expensive, skip it and note "DB query skipped (estimated cost too high)".
-12. If `pulse_quality_scoring` is `true`, sample up to 10 sessions or conversations from the window and score each 1-5 on `pulse_quality_dimension`. Default to 4-5 when the session looks normal; reserve 1-3 for clear failure modes. Capture a count distribution (e.g. "8x 5, 1x 4, 1x 2") and a short anonymized note on any session scored below 4. No PII in the score summary.
-13. Assemble the report. Resolve the strategy doc (same as step 4) and re-read key metrics. For each strategy metric: if in `pulse_excluded_metrics`, omit; if in `pulse_pending_metrics`, render `no data (instrumentation pending)`; otherwise resolve the source from `pulse_metric_sources` or fall back to `pulse_analytics_source` with a `(default source)` marker, query and render with current value and delta. Four sections in order:
+11. Dispatch serially after the parallel batch: read-only database queries, only when `pulse_db_enabled` is `true`. One at a time, tight scoped queries only, never full-table scans on large tables. If a query would be expensive, skip it and note "DB query skipped (estimated cost too high)". Done when: the stated outcome holds.
+12. If `pulse_quality_scoring` is `true`, sample up to 10 sessions or conversations from the window and score each 1-5 on `pulse_quality_dimension`. Default to 4-5 when the session looks normal; reserve 1-3 for clear failure modes. Capture a count distribution (e.g. "8x 5, 1x 4, 1x 2") and a short anonymized note on any session scored below 4. No PII in the score summary. Done when: the stated outcome holds.
+13. Assemble the report. Resolve the strategy doc (same as step 4) and re-read key metrics. For each strategy metric: if in `pulse_excluded_metrics`, omit; if in `pulse_pending_metrics`, render `no data (instrumentation pending)`; otherwise resolve the source from `pulse_metric_sources` or fall back to `pulse_analytics_source` with a `(default source)` marker, query and render with current value and delta. Four sections in order: Done when: the stated outcome holds.
     1. **Headlines** — 2-3 lines summarizing the window. Lead with the most notable item.
     2. **Usage** — primary engagement (count, delta vs prior equal-length window), value realization (count, delta, ratio vs engagement), completions (each: count, delta), strategy metrics (value, delta or `no data`), quality sample (distribution) if configured.
     3. **System performance** — latency p50/p95/p99 with delta; top 5 errors by count descending with one-line context each. Omit the entire section if no tracing tool is configured.
     4. **Followups** — 1-5 specific, actionable items.
-14. Keep the total to 30-40 lines. If a section is thin, leave it thin; do not pad. Use real numbers, not ranges or hedges. Percent deltas compare the current window to the previous equal-length window; if no comparison is possible, omit the delta. No hardcoded thresholds; do not label "high" or "low" or color anything. No PII: no emails, account IDs, or message content.
-15. Write the report to `docs/pulse-reports/YYYY-MM-DD_HH-MM.md` using the local time of the run. Create `docs/pulse-reports/` if it does not exist. The filename and in-file timestamp use the same wall-clock time.
+14. Keep the total to 30-40 lines. If a section is thin, leave it thin; do not pad. Use real numbers, not ranges or hedges. Percent deltas compare the current window to the previous equal-length window; if no comparison is possible, omit the delta. No hardcoded thresholds; do not label "high" or "low" or color anything. No PII: no emails, account IDs, or message content. Done when: the stated outcome holds.
+15. Write the report to `docs/pulse-reports/YYYY-MM-DD_HH-MM.md` using the local time of the run. Create `docs/pulse-reports/` if it does not exist. The filename and in-file timestamp use the same wall-clock time. Done when: the stated outcome holds.
 
 ### Phase 3: scheduling
 
-16. If the argument was a schedule keyword (`daily`, `hourly`, `weekly`), say this run is ad-hoc and point at the host's scheduling primitive. If no schedule is on file and this is the third or later run, mention once that scheduling is available. Do not nag on every run. Never schedule automatically; any handoff to a scheduling primitive requires explicit confirmation.
+16. If the argument was a schedule keyword (`daily`, `hourly`, `weekly`), say this run is ad-hoc and point at the host's scheduling primitive. If no schedule is on file and this is the third or later run, mention once that scheduling is available. Do not nag on every run. Never schedule automatically; any handoff to a scheduling primitive requires explicit confirmation. Done when: the stated outcome holds.
 
 ## Failure and recovery
 - **Unparseable lookback window:** ask the user to clarify; do not guess.
@@ -98,9 +98,7 @@ description: 'Use when asked to invoke /product-signal-pulse with an optional lo
 - **Rollback:** the only mutations are the report file and config.local.yaml. Delete the report file to discard a run; revert config.local.yaml to its prior state to undo settings. No external system is mutated.
 
 ## Output
-- A 30-40 line markdown report at `docs/pulse-reports/YYYY-MM-DD_HH-MM.md` with four sections (Headlines, Usage, System performance, Followups).
-- In chat: the Headlines section verbatim, the top Followup if action looks urgent, and the saved file path. Do not paste the full report into chat; the file is the artifact.
-- On first run: a `pulse_*` config block written to `.odin/config.local.yaml`.
+- A 30-40 line markdown report at `docs/pulse-reports/YYYY-MM-DD_HH-MM.md` with four sections (Headlines, Usage, System performance, Followups). - In chat: the Headlines section verbatim, the top Followup if action looks urgent, and the saved file path. Do not paste the full report into chat; the file is the artifact. - On first run: a `pulse_*` config block written to `.odin/config.local.yaml`.
 
 ## Provenance
 

@@ -1,6 +1,6 @@
-# The DevTools Debugging Workflow
+# The DevTools debugging workflow
 
-## For UI Bugs
+## For UI bugs
 
 ```
 1. REPRODUCE
@@ -29,7 +29,7 @@
    └── Run automated tests
 ```
 
-## For Network Issues
+## For network issues
 
 ```
 1. CAPTURE
@@ -53,7 +53,7 @@
    └── Fix the issue, replay the action, confirm the response
 ```
 
-## For Performance Issues
+## For performance issues
 
 ```
 1. BASELINE

@@ -1,6 +1,6 @@
 ---
 name: post-merge-cleanup
-description: 'Use when a merge, release, or completed change lands; scan its diff for stale TODOs, deprecation notices, unused feature flags, and documentation gaps; reconcile what is safe to fix locally and defer the rest to tracked tickets. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a landed merge, release, or change needs its cleanup surface reconciled. Scans for stale TODOs, satisfied deprecations, unused flags, and documentation gaps; fixes bounded local items and tickets the rest. Not for unrelated refactoring.'
 ---
 
 # Post-merge cleanup
@@ -25,36 +25,13 @@ Inputs are validated at their trust boundary: the merge reference must resolve t
 
 ## Procedure
 
-1. **Resolve the merge reference.** Fetch the diff of the landed commit or PR. Confirm it merges into the tracked branch (main, trunk, or equivalent). Reject if the reference does not resolve or is not on the tracked branch.
-
-2. **Scan the diff for cleanup surface.** Enumerate all changed files and comments. Collect candidates across every distinct surface:
-   - Stale TODO / FIXME / XXX comments with or without linked tickets
-   - Deprecation notices that are satisfied by the diff
-   - `// remove after <date>` or `// TODO: remove after <event>` comments fulfilled by the merge
-   - Unused feature flags: defined in the diff, not referenced downstream
-   - Documentation gaps: doc comments, README entries, or API examples that are inconsistent with the landed diff
-   - Changelog entries that are now stale or redundant
-
-3. **Filter out noise and out-of-scope items.** Reject:
-   - Commits authored by `dependabot`, `renovate`, or any automated dependency bot
-   - Items in denylisted paths: `auth/`, `payments/`, and any path touching a public API contract
-   - Items where the cleanup surface is referenced in a sibling or child repository (flagged for escalation, not acted on)
-   - Candidates with fewer than 3 lines of diff context unless they carry a linked ticket
-
-4. **Apply size budget.** A safe fix is within budget when:
-   - It touches no more than 5 files
-   - It changes no more than 100 lines total
-   - It does not alter behavior except for explicit dead-code removal
-   - All changed files are under version control and have a rollback path (the pre-merge commit)
-
-5. **Execute or ticket.**
-   - For each in-scope candidate within budget: create a named worktree from the tracked branch, apply the minimal fix, run the project's existing test suite as the verifier, and open a PR.
-   - For each out-of-budget item, large change, or flagged escalation: create a ticket with the merge SHA, affected path, candidate class, and owner unset.
-   - Do not open a single cleanup PR touching more than 10 files without human approval.
-
-6. **Update state.** Record each item as `completed`, `deferred`, or `ticket-created` in the state file. Prune entries older than 14 days.
-
-7. **Verify.** Confirm the test suite passes on the proposed worktree changes. Revert immediately if any test fails and reclassify the item as `deferred`.
+1. **Resolve the merge reference.** Fetch the diff of the landed commit or PR. Confirm it merges into the tracked branch (main, trunk, or equivalent). Reject if the reference does not resolve or is not on the tracked branch. Done when: the merge reference resolves to a real commit on the tracked branch.
+2. **Scan the diff for cleanup surface.** Enumerate all changed files and comments. Collect candidates across every distinct surface: stale TODO/FIXME/XXX comments with or without linked tickets; deprecation notices satisfied by the diff; `// remove after <date>` or `// TODO: remove after <event>` comments fulfilled by the merge; unused feature flags (defined in the diff, not referenced downstream); documentation gaps (doc comments, README entries, or API examples inconsistent with the landed diff); changelog entries now stale or redundant. Done when: all cleanup candidates are collected across every surface.
+3. **Filter out noise and out-of-scope items.** Reject commits authored by `dependabot`, `renovate`, or any automated dependency bot; items in denylisted paths (`auth/`, `payments/`, and any path touching a public API contract); items where the cleanup surface is referenced in a sibling or child repository (flagged for escalation, not acted on); candidates with fewer than 3 lines of diff context unless they carry a linked ticket. Done when: noise and out-of-scope items are filtered with escalations flagged.
+4. **Apply size budget.** A safe fix is within budget when it touches no more than 5 files, changes no more than 100 lines total, does not alter behavior except for explicit dead-code removal, and all changed files are under version control with a rollback path (the pre-merge commit). Done when: each candidate is classified as within-budget or out-of-budget.
+5. **Execute or ticket.** For each in-scope candidate within budget: create a named worktree from the tracked branch, apply the minimal fix, run the project's existing test suite as the verifier, and open a PR. For each out-of-budget item, large change, or flagged escalation: create a ticket with the merge SHA, affected path, candidate class, and owner unset. Do not open a single cleanup PR touching more than 10 files without human approval. Done when: every in-budget candidate has a PR and every out-of-budget item has a ticket.
+6. **Update state.** Record each item as `completed`, `deferred`, or `ticket-created` in the state file. Prune entries older than 14 days. Done when: the state file is updated with all item statuses and old entries pruned.
+7. **Verify.** Confirm the test suite passes on the proposed worktree changes. Revert immediately if any test fails and reclassify the item as `deferred`. Done when: the test suite passes on all worktree changes or failing items are reverted and reclassified.
 
 ## Failure and recovery
 | Failure class | Partial-result rule | Recovery |
@@ -69,12 +46,7 @@ Inputs are validated at their trust boundary: the merge reference must resolve t
 The result is blocked if the done predicate does not hold. A blocked result includes the list of items that were not resolved and the reason each was not resolved.
 
 ## Output
-- A `post-merge-cleanup-report.md` summarizing: the merge reference, candidates found, candidates acted on (with worktree or PR link), candidates deferred (with reason), and tickets created (with owner unset).
-- An updated `post-merge-state.md` if it was provided or created.
-- Zero or more open PRs for safe-fix candidates within budget.
-- Zero or more tickets for out-of-budget, escalated, or deferred candidates.
-
-If no candidates were found, output a single confirmation line stating that the merge was scanned and no cleanup surface was detected.
+A `post-merge-cleanup-report.md` summarizing the merge reference, candidates found, candidates acted on (with worktree or PR link), candidates deferred (with reason), and tickets created (with owner unset) — plus an updated `post-merge-state.md`, zero or more open PRs for safe-fix candidates, and zero or more tickets for out-of-budget, escalated, or deferred candidates; or a single confirmation line when no cleanup surface is detected.
 
 ## Provenance
 

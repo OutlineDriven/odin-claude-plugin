@@ -1,3 +1,3 @@
 interface:
   display_name: "Visualise Widget"
-  short_description: "Visual comparison, metric, and mockup widgets"
+  short_description: "Use when a user requests a comparison table, data record,"

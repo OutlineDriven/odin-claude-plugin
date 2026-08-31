@@ -1,6 +1,6 @@
 # Rust strict-mode bootstrap (2026)
 
-**Grounded: 2026-08-26**
+**Grounded: 2026-08-31**
 
 ## Cargo.toml
 
@@ -66,4 +66,3 @@ pub enum RequestError {
 ## Notes
 
 - Test-side strict config (no-ignored-tests, deny-warnings under `#[cfg(test)]`) defers to whatever test runner the project uses (cargo-nextest is the 2026 default for parallel test execution).
-- `#![forbid(unsafe_code)]` at crate root is the strictest stance and cannot be relaxed by inner attributes. Crates that need unsafe must factor the unsafe surface into a sibling crate (consumed as a normal dependency) rather than soften the forbid.

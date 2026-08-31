@@ -1,3 +1,3 @@
 interface:
   display_name: "Commit Economy"
-  short_description: "Rewrite commit messages to handoff-ready form, tree unchanged."
+  short_description: "Use when the user asks to clean up a finished commit message or"

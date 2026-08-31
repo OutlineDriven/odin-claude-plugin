@@ -1,6 +1,6 @@
 ---
 name: review-speedread
-description: 'Use when a human asks for the change shape before reading a diff. It renders a compact visual summary of added/removed files, line counts, and change type so the human can decide whether and where to dive in. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when a human asks for the change shape before reading a diff. Renders a compact summary of added/removed files, line counts, and change type so the human can decide where to dive in. Not for a full findings report — use review; for an interactive walk — use show-review.'
 ---
 
 # Review speedread
@@ -22,8 +22,8 @@ Required: a diff context such as a PR/MR URL, a commit range, a branch compariso
 
 1. Detect the diff source. If the source is ambiguous, absent, or cannot be resolved, stop and report that no diff context is available.
 2. Retrieve the diff surface: file names, additions, deletions, and change type for each changed file. Stop rather than fetch full file contents.
-3. Render a compact change-shape summary: ASCII table or structured paragraph showing at minimum the count of changed files, total lines added and removed, and a short label for each changed file (e.g., "M src/foo.ts +12 -3", "A docs/readme.md +45 -0"). Highlight files that are new or deleted. Do not render the full diff.
-4. Present the summary as a chat-native artifact so the human can absorb the shape in one read before opening the diff.
+3. Render a compact change-shape summary as an ASCII table or structured paragraph. Include at minimum the changed-file count, total lines added and removed, and a short label for each changed file (e.g., "M src/foo.ts +12 -3", "A docs/readme.md +45 -0"). Highlight new and deleted files. Do not render the full diff.
+4. Present the summary in chat so the human can absorb the shape in one read before opening the diff.
 
 ## Failure and recovery
 - **No-diff-context**: the skill cannot locate the diff source. Returns "no diff context found"; does not fabricate a summary.

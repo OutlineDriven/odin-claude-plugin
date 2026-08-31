@@ -1,6 +1,6 @@
 ---
 name: rhythmic-taste
-description: 'Use when a user wants a hard creative constraint for section or layer rhythm from a disclosed random seed and five random Wikipedia titles: derive a rhythm constraint from the seed and titles. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when a user wants to derive a hard creative constraint for section or layer rhythm from a disclosed random seed and five random Wikipedia titles. Not for judging an artifact''s taste — use taste.'
 ---
 
 # Rhythmic taste

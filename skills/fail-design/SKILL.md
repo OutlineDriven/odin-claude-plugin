@@ -1,6 +1,6 @@
 ---
 name: fail-design
-description: 'Use when a user wants to define failure states, recovery, bypasses, and degraded modes during design. The outcome is a design document where failure states, recovery, bypasses, and degraded modes are defined at design time. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a user wants a design document that defines failure states, recovery, bypasses, and degraded modes at design time. Not for runtime recovery — use fail-recover.'
 ---
 
 # Fail design
@@ -21,12 +21,12 @@ description: 'Use when a user wants to define failure states, recovery, bypasses
 
 ## Procedure
 
-1. Enumerate the failure states the component can reach: input violations, dependency outages, resource exhaustion, partial data loss, and timeout.
-2. For each failure state, define the recovery action: retry, fallback, circuit break, shed load, or fail closed.
-3. Define each bypass: which path is taken when a dependency is unavailable and what correctness or consistency it sacrifices.
-4. Define each degraded mode: which features are reduced, disabled, or served from stale data, and the user-visible signal that degradation is active.
-5. Record the failure states, recovery actions, bypasses, and degraded modes in the design document so they are decided at design time rather than discovered at runtime.
-6. Stop when every enumerated failure state has a named recovery, bypass, or degraded mode; do not implement the design or write production code.
+1. Enumerate the failure states the component can reach: input violations, dependency outages, resource exhaustion, partial data loss, and timeout. Done when: every reachable failure state is named.
+2. For each failure state, define the recovery action: retry, fallback, circuit break, shed load, or fail closed. Done when: every enumerated failure state has a named recovery action.
+3. Define each bypass: which path is taken when a dependency is unavailable and what correctness or consistency it sacrifices. Done when: every bypass is defined with its trade-off.
+4. Define each degraded mode: which features are reduced, disabled, or served from stale data, and the user-visible signal that degradation is active. Done when: every degraded mode is defined with its user-visible signal.
+5. Record these decisions in the design document so they are made at design time rather than discovered at runtime. Done when: the design document carries every failure state, recovery, bypass, and degraded mode.
+6. Stop when every enumerated failure state has a named recovery, bypass, or degraded mode; do not implement the design or write production code. Done when: every failure state is covered and no implementation code is written.
 
 ## Failure and recovery
 - Unenumerated failure state: stop and report the gap; do not invent a recovery for a state not yet identified.

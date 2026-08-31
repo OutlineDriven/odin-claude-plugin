@@ -1,6 +1,6 @@
 ---
 name: culture-burnout-detection
-description: 'Use when asked to survey and Job Culture Index profiles need analysis for stress, frustration, burnout, disengagement, or flight-risk signals. Calculates energy utilization and every trait movement, flags material shifts, states uncertainty, and produces actionable nonclinical recommendations. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when Survey and Job Culture Index profiles need analysis for stress, burnout, disengagement, or flight-risk signals. Also handles frustration when Job energy falls below Survey energy. Not for clinical diagnosis — use a qualified clinician.'
 ---
 
 # Culture burnout detection
@@ -20,17 +20,17 @@ Two Culture Index charts for one person are required: the Survey graph (who they
 
 ## Procedure
 
-1. Load both charts. Record arrow position, all trait values (A, B, C, D, L, I), and EU for Survey and for Job. Stop if either chart is missing.
-2. Calculate energy utilization: `Utilization = (Job EU / Survey EU) × 100`. Classify: 70-130% Healthy (sustainable), >130% STRESS (overutilization, burnout risk), <70% FRUSTRATION (underutilization, flight risk). For >130%, distinguish good stress (self-induced, caring deeply) from bad stress (too much work or too much behavior modification); both still carry burnout risk after 3-6 months. For <70%, the work does not fit their traits and flight risk rises if unaddressed.
-3. Compare arrow movement Survey to Job. Arrow shifts right = STRESS (pushing harder than natural). Arrow shifts left = FRUSTRATION (pulling back, disengaging). Unchanged = stable.
-4. Analyze each trait's movement Survey to Job and record the signed change. Interpret raising versus dropping: A raising = needs to drive/lead more (self-induced or required); A dropping = being held back (ask who or what is blocking). B raising = role requires more relationship building; B dropping = role isolates them (demotivating if naturally high B). C raising = more focus/patience required than comfortable; C dropping = more urgency/variety required than comfortable. D raising = expected to be more perfectionist/accountable; D dropping = role allows more flexibility. L raising = trying to be more emotional/open; L dropping = compartmentalizing emotions at work. I raising = trying to be more inventive (traditional approach not working); I dropping = focusing on practical execution.
-5. Identify polarizing shifts: any trait dot that moves from one side of the norm to the other. Record the trait, the side it moved from and to, and severity (moderate or severe). A polarizing shift is drastic behavior modification and is almost certainly not sustainable.
-6. Check for the opposite-pattern warning: when Job behaviors show the opposite of Survey traits across the board (all dots flipped to the opposite side). This is an imminent flight-risk signal; something must change or the person will leave.
-7. Check D specifically as the most common stress indicator: D raised significantly = expected to be more perfectionist/accountable than natural; D polarizing low to high = the most common source of unsustainable stress.
-8. Identify likely stress sources. Job behaviors reflect perception of what the role requires. Sources are their leader (manager expectations and communication), the work itself (actual responsibilities), and coworkers. Ask why they perceive they need to behave this way.
-9. Assess the 3-6 month risk. If behavior modification has continued 3-6+ months, expect burnout, stress, disengagement, low morale, and mailing it in (70% effort when capable of 100%). Use the known duration if supplied; otherwise state the duration as unknown and note the risk horizon is conditional on sustained modification.
-10. Assign risk level: LOW, MODERATE, HIGH, or CRITICAL, based on utilization band, arrow movement, number and severity of polarizing shifts, the opposite-pattern warning, and sustained duration.
-11. Produce the report in the Output format. Recommendations must be actionable and nonclinical. Avoid these mistakes: ignoring small EU differences (even 10-15% over 130% matters), focusing only on EU (trait movement matters too), dismissing good stress (self-induced stress still causes burnout), using stale data (Job behaviors should be resurveyed every 6 months), and recommending solutions before understanding the source.
+1. Load both charts. Record arrow position, all trait values (A, B, C, D, L, I), and EU for Survey and for Job. Stop if either chart is missing. Done when: this step’s stated action, evidence, and checks are complete.
+2. Calculate energy utilization: `Utilization = (Job EU / Survey EU) × 100`. Classify: 70-130% Healthy (sustainable), >130% STRESS (overutilization, burnout risk), <70% FRUSTRATION (underutilization, flight risk). For >130%, distinguish good stress (self-induced, caring deeply) from bad stress (too much work or too much behavior modification); both still carry burnout risk after 3-6 months. For <70%, the work does not fit their traits and flight risk rises if unaddressed. Done when: this step’s stated action, evidence, and checks are complete.
+3. Compare arrow movement Survey to Job. Arrow shifts right = STRESS (pushing harder than natural). Arrow shifts left = FRUSTRATION (pulling back, disengaging). Unchanged = stable. Done when: this step’s stated action, evidence, and checks are complete.
+4. Analyze each trait's movement Survey to Job and record the signed change. Interpret raising versus dropping: A raising = needs to drive/lead more (self-induced or required); A dropping = being held back (ask who or what is blocking). B raising = role requires more relationship building; B dropping = role isolates them (demotivating if naturally high B). C raising = more focus/patience required than comfortable; C dropping = more urgency/variety required than comfortable. D raising = expected to be more perfectionist/accountable; D dropping = role allows more flexibility. L raising = trying to be more emotional/open; L dropping = compartmentalizing emotions at work. I raising = trying to be more inventive (traditional approach not working); I dropping = focusing on practical execution. Done when: this step’s stated action, evidence, and checks are complete.
+5. Identify polarizing shifts: any trait dot that moves from one side of the norm to the other. Record the trait, the side it moved from and to, and severity (moderate or severe). A polarizing shift is drastic behavior modification and is almost certainly not sustainable. Done when: this step’s stated action, evidence, and checks are complete.
+6. Check for the opposite-pattern warning: when Job behaviors show the opposite of Survey traits across the board (all dots flipped to the opposite side). This is an imminent flight-risk signal; something must change or the person will leave. Done when: this step’s stated action, evidence, and checks are complete.
+7. Check D specifically as the most common stress indicator: D raised significantly = expected to be more perfectionist/accountable than natural; D polarizing low to high = the most common source of unsustainable stress. Done when: this step’s stated action, evidence, and checks are complete.
+8. Identify likely stress sources. Job behaviors reflect perception of what the role requires. Sources are their leader (manager expectations and communication), the work itself (actual responsibilities), and coworkers. Ask why they perceive they need to behave this way. Done when: this step’s stated action, evidence, and checks are complete.
+9. Assess the 3-6 month risk. If behavior modification has continued 3-6+ months, expect burnout, stress, disengagement, low morale, and mailing it in (70% effort when capable of 100%). Use the known duration if supplied; otherwise state the duration as unknown and note the risk horizon is conditional on sustained modification. Done when: this step’s stated action, evidence, and checks are complete.
+10. Assign risk level: LOW, MODERATE, HIGH, or CRITICAL, based on utilization band, arrow movement, number and severity of polarizing shifts, the opposite-pattern warning, and sustained duration. Done when: this step’s stated action, evidence, and checks are complete.
+11. Produce the report in the Output format. Recommendations must be actionable and nonclinical. Avoid these mistakes: ignoring small EU differences (even 10-15% over 130% matters), focusing only on EU (trait movement matters too), dismissing good stress (self-induced stress still causes burnout), using stale data (Job behaviors should be resurveyed every 6 months), and recommending solutions before understanding the source. Done when: this step’s stated action, evidence, and checks are complete.
 
 ## Failure and recovery
 - Missing chart: If either Survey or Job graph is absent, stop. Report which chart is missing and that burnout detection requires both. Do not infer the missing chart or fall back to a single-chart interpretation.
@@ -41,50 +41,7 @@ Two Culture Index charts for one person are required: the Survey graph (who they
 - Non-mutation: This skill writes nothing to disk, VCS, credentials, or any remote system. A blocked run leaves no side effect beyond the chat message naming the blocker.
 
 ## Output
-A burnout risk assessment report with these sections:
-
-```
-### Burnout risk assessment: [Name]
-
-### Energy utilization
-- Survey EU: [X]
-- Job EU: [X]
-- Utilization: [X]%
-- Status: [HEALTHY / STRESS / FRUSTRATION]
-
-### Arrow movement
-- Survey arrow: [X]
-- Job arrow: [X]
-- Direction: [Right=Stress / Left=Frustration / Stable]
-
-### Trait movement summary
-| Trait | Survey | Job | Change | Concern Level |
-|-------|--------|-----|--------|---------------|
-| A | | | | Low/Medium/High |
-| B | | | | Low/Medium/High |
-| C | | | | Low/Medium/High |
-| D | | | | Low/Medium/High |
-
-### Polarizing shifts
-- [Any traits that flipped sides]
-
-### Risk level: [LOW / MODERATE / HIGH / CRITICAL]
-
-### Stress sources (likely)
-1. [Source 1]
-2. [Source 2]
-
-### Recommended actions
-1. [Action 1 - e.g., "Discuss workload with manager"]
-2. [Action 2 - e.g., "Resurvey in 3 months"]
-3. [Action 3 - e.g., "Consider role adjustment"]
-
-### Timeline
-- Current duration estimate: [X months or unknown]
-- Risk horizon: [When burnout likely if unchanged]
-```
-
-State any uncertainty explicitly: unknown duration, inferred stress sources, or traits whose movement is ambiguous. Recommendations are nonclinical workplace interventions, not psychological diagnoses. Culture Index measures behavioral traits, not intelligence or skills; it is one data point, not a complete picture.
+Return, in order: subject and evidence limits; energy utilization; material trait movements; stress, frustration, burnout, disengagement, and flight-risk signals; current impact; nonclinical workplace recommendations; timeline; explicit uncertainties.
 
 ## Provenance
 

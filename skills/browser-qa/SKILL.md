@@ -1,6 +1,6 @@
 ---
 name: browser-qa
-description: 'Use when the user runs /browser-qa, run the QA verification pass and return report-only results without entering a fix loop. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user runs /browser-qa to run the QA verification pass and return report-only results without entering a fix loop. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Browser qa
@@ -21,12 +21,12 @@ description: 'Use when the user runs /browser-qa, run the QA verification pass a
 
 ## Procedure
 
-1. Bound scope to the supplied paths or diff range, or the whole tree when none is given. Do not read or change files outside that scope.
-2. Run each configured QA check in order (build, then tests, then lint) and capture exit status, stdout, and stderr for each.
-3. Collect every finding into a single list tagged by check name and severity.
-4. Write the findings to one local QA report file under the repository working tree.
-5. Return the report contents as the result.
-6. Do not apply any fix, edit, or further check after step 5. The fix loop is intentionally skipped; this is the distinguishing mechanism of the report-only variant.
+1. Bound scope to the supplied paths or diff range, or the whole tree when none is given. Do not read or change files outside that scope. Done when: the scope boundary is established and enforced.
+2. Run each configured QA check in order (build, then tests, then lint) and capture exit status, stdout, and stderr for each. Done when: every check has been run or recorded as non-runnable.
+3. Collect every finding into a single list tagged by check name and severity. Done when: all findings are collected with their check and severity tags.
+4. Write the findings to one local QA report file under the repository working tree. Done when: the report file exists with all findings.
+5. Return the report contents as the result. Done when: the report contents are returned.
+6. After step 5, do not apply fixes, edit files, or run more checks. This report-only variant intentionally skips the fix loop. Done when: no fixes are applied and no further checks run.
 
 ## Failure and recovery
 - Check command missing or non-runnable: record the command name and error in the report; continue the remaining checks. Do not substitute a different command.

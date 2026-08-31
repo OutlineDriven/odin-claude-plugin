@@ -21,15 +21,16 @@ description: 'Use when asked to prune an existing design or codebase until only 
 
 ## Procedure
 
-1. **Name the target.** Confirm the exact design artifact or codebase path. Stop if more than one target is named.
-2. **Inventory every component.** Enumerate all named modules, classes, functions, data structures, and abstractions. Do not skip deprecated or generated sections.
+1. **Name the target.** Confirm the exact design artifact or codebase path. Stop if more than one target is named. Done when: exactly one target is confirmed.
+2. **Inventory every component.** Enumerate all named modules, classes, functions, data structures, and abstractions. Do not skip deprecated or generated sections. Done when: every named component in the target is listed.
 3. **Classify each as primitive or composite.**
    - **Primitive**: language keyword, stdlib call, well-known third-party library call with a single documented responsibility, or a human-declared irreducible building block.
    - **Composite**: anything that hides a decision, delegates to another named component, or can be expressed more simply.
-4. **Decompose composites recursively.** For each composite, write its name and the primitives it is made from. If a sub-component is also composite, recurse.
-5. **Stop recursion when a leaf is a primitive.** A primitive does not decompose further.
-6. **Record every irreducible primitive as a leaf.** No composite may survive as a leaf.
-7. **Write the map.** Produce a tree or list where every leaf is a primitive. Annotate leaves that are architectural decisions rather than code units.
+   Done when: every inventoried component has a primitive-or-composite label.
+4. **Decompose composites recursively.** For each composite, write its name and the primitives it is made from. If a sub-component is also composite, recurse. Done when: every composite has been expanded into its constituents.
+5. **Stop recursion when a leaf is a primitive.** A primitive does not decompose further. Done when: no composite remains unexpanded at a leaf.
+6. **Record every irreducible primitive as a leaf.** No composite may survive as a leaf. Done when: every leaf in the map is a primitive.
+7. **Write the map.** Produce a tree or list where every leaf is a primitive. Annotate leaves that are architectural decisions rather than code units. Done when: the map file is written and every leaf is primitive.
 
 ## Failure and recovery
 - **Ambiguous scope**: the human named more than one target or the boundary is unclear. Stop and ask for a single, bounded target.
@@ -38,10 +39,8 @@ description: 'Use when asked to prune an existing design or codebase until only 
 - **Partial result**: stop is reached before full decomposition. Return the partial map with a `non-converged` marker. Do not claim the map is complete.
 
 ## Output
-A tree or structured list file in the working directory titled `<target-name>-primitives.md` containing:
-- Every component of the original, classified
-- Each composite decomposed into its primitive leaves
-- A `non-converged` marker if any section was not fully resolved
+
+A tree or structured list file `<target-name>-primitives.md` containing every component classified, each composite decomposed into its primitive leaves, and a `non-converged` marker if any section was not fully resolved.
 
 ## Provenance
 

@@ -1,3 +1,3 @@
 interface:
   display_name: "CI Sweeper"
-  short_description: "Sweep CI failures to a verified minimal repair proposal."
+  short_description: "Use when a requested sweep monitors CI failures over a bounded"

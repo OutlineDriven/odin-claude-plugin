@@ -1,6 +1,6 @@
-# Grill-loop Orchestration
+# Grill-loop orchestration
 
-The authored core of `review-fix-grill-loop`: change-scope resolution, the severity-floor + confidence-guard + stall policy, the resolve-gate spec, and the double-loop semantics. The reviewer roster lives in `review-roster.md`; the adjudication contract lives in `false-positive-contract.md`.
+This document defines change-scope resolution, the severity-floor, confidence-guard, and stall policies, the resolve-gate specification, and double-loop semantics. The reviewer roster lives in `review-roster.md`; the adjudication contract lives in `false-positive-contract.md`.
 
 ## Phase 1 — Resolve the change-scope
 

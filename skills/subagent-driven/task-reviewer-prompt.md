@@ -1,13 +1,8 @@
-# Task Reviewer Prompt Template
+# Task reviewer prompt template
 
-Fill this template when dispatching a task reviewer. One task per dispatch — a
-fresh tailored variant of subagent, self-contained. The reviewer sees only what
-you put here; it does not inherit your session, the plan file, or prior
-workers' context. The reviewer reads the task's diff once and returns two
-verdicts: spec compliance and code quality. This is the loop's gate.
+Fill this template when dispatching a task reviewer. Use a fresh, self-contained subagent for each task. It sees only what you put here; it does not inherit your session, the plan file, or prior workers' context. The reviewer reads the task's diff once and returns two verdicts: spec compliance and code quality. Those verdicts gate the loop.
 
-**Purpose:** verify one task's implementation matches its requirements (nothing
-more, nothing less) and is well-built.
+**Purpose:** verify that one task's implementation matches its requirements (nothing more, nothing less) and is well-built.
 
 ```
 Subagent:

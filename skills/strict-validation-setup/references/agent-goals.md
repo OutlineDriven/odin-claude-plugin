@@ -1,6 +1,6 @@
 # Per-task `GOALS.md` template (task-ephemeral)
 
-This is the *task-ephemeral* counterpart to `AGENTS.md` (project-stable). Project invariants live in AGENTS.md; per-task success criteria live here, in `.agent-tasks/<task-id>/GOALS.md` (or whatever path the project chose; AGENTS.md cites the location).
+This is the *task-ephemeral* counterpart to `AGENTS.md` (project-stable). Project invariants live in AGENTS.md. Per-task success criteria live in `.agent-tasks/<task-id>/GOALS.md` (or the path the project chose and cites in AGENTS.md).
 
 ## Architectural rule
 

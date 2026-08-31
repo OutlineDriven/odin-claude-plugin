@@ -1,6 +1,6 @@
 ---
 name: fastopt-extreme
-description: 'Use when a user wants to optimize estimated hot paths and complexity-neutral cold paths while refusing complexity theater. Hot and cold path hypotheses and benchmark designs are emitted and complexity theater is refused. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when a user wants to optimize estimated hot paths and complexity-neutral cold paths while refusing complexity theater. Emits hypotheses and benchmark designs. Not for measured-floor rebuilds — use extremely-optimize; not for hypothesis-only — use fastopt.'
 ---
 
 # Fastopt extreme
@@ -20,13 +20,13 @@ The target code region or module to analyze. Optional: known call frequencies, p
 
 ## Procedure
 
-1. Bound scope to the named code region or module. Do not widen to unrelated code.
-2. Estimate hot paths from call frequency, loop depth, allocation density, and I/O or syscall blocking. Label every estimate as a hypothesis, not a measured fact.
-3. Identify complexity-neutral cold paths: paths whose optimization adds no new abstraction, wrapper, configuration flag, caching layer, or indirection. The change must be simpler than or equal in complexity to the original.
-4. For each hot-path hypothesis, design a benchmark that would confirm or refute it. State the metric, the baseline measurement, and the falsification condition under which the hypothesis is rejected.
-5. For each complexity-neutral cold-path candidate, state the specific simplification and why it adds no complexity.
-6. Refuse complexity theater: reject any proposed optimization that introduces a new abstraction, wrapper, flag, caching layer, or indirection whose complexity exceeds the gain it claims. State the refusal, the complexity cost, and the claimed gain.
-7. Emit all hypotheses, benchmark designs, simplification proposals, and refusals as chat output. Do not mutate any file.
+1. Bound scope to the named code region or module. Do not widen to unrelated code. Done when: the scope is bounded to the named region or module.
+2. Estimate hot paths from call frequency, loop depth, allocation density, and I/O or syscall blocking. Label every estimate as a hypothesis, not a measured fact. Done when: every hot-path estimate is labeled as a hypothesis with its basis stated.
+3. Identify complexity-neutral cold paths: paths whose optimization adds no new abstraction, wrapper, configuration flag, caching layer, or indirection. The change must be simpler than or equal in complexity to the original. Done when: every cold-path candidate is classified as complexity-neutral or rejected.
+4. For each hot-path hypothesis, design a benchmark that would confirm or refute it. State the metric, the baseline measurement, and the falsification condition under which the hypothesis is rejected. Done when: every hot-path hypothesis has a benchmark design with metric, baseline, and falsification condition.
+5. For each complexity-neutral cold-path candidate, state the specific simplification and why it adds no complexity. Done when: every cold-path candidate has its simplification and complexity justification stated.
+6. Refuse complexity theater: reject any proposed optimization that introduces a new abstraction, wrapper, flag, caching layer, or indirection whose complexity exceeds the gain it claims. State the refusal, the complexity cost, and the claimed gain. Done when: every complexity-theater proposal is refused with its cost and claimed gain stated.
+7. Emit all hypotheses, benchmark designs, simplification proposals, and refusals as chat output. Do not mutate any file. Done when: the chat report is emitted with no file mutation.
 
 ## Failure and recovery
 - **No code supplied**: request the target region; do not guess or analyze from memory.

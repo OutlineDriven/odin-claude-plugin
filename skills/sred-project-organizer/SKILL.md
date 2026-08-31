@@ -1,6 +1,6 @@
 ---
 name: sred-project-organizer
-description: 'Use when the user asks to organize SRED projects or prepare a SRED submission. Creates one Notion child doc per SREDable project found in a work summary. Don''t use for writing the work summary itself (use sred-work-summary), local-only organization, or non-Notion targets.'
+description: 'Use when the user asks to organize SRED projects or prepare a SRED submission. Creates one Notion child doc per SREDable project found in a work summary. Not for writing the work summary itself — use sred-work-summary. Not for local-only organization or non-Notion targets.'
 disable-model-invocation: true
 ---
 
@@ -18,44 +18,41 @@ disable-model-invocation: true
 ## Inputs
 
 Required:
-- **Work Summary**: A document (Notion page, text, or structured summary) that contains one or more project descriptions or entries.
-- **Notion parent page ID**: The Notion page ID of the SRED Project Descriptions parent document into which child project pages are created.
-- **Project template**: The page template to apply to each child project summary (may be embedded, referenced by ID, or provided inline).
-- **Notion API integration token**: A valid integration token with insert permissions on the target parent page.
+- **Work Summary**: a document (Notion page, text, or structured summary) that contains one or more project descriptions or entries.
+- **Notion parent page ID**: the Notion page ID of the SRED Project Descriptions parent document into which child project pages are created.
+- **Project template**: the page template to apply to each child project summary (may be embedded, referenced by ID, or provided inline).
+- **Notion API integration token**: a valid integration token with insert permissions on the target parent page.
 
 Optional:
-- **SRED eligibility criteria**: Explicit list of criteria used to classify a project as SREDable; if absent, apply the default SRED eligibility rules stated in the reference material.
+- **SRED eligibility criteria**: explicit list of criteria used to classify a project as SREDable; if absent, apply the default SRED eligibility rules stated in the reference material.
+
+## Refusal
+
+- Missing required input: stop; name the missing field; do not proceed.
+- Zero projects found in Work Summary: stop; report zero projects; create no pages.
+- Zero SREDable projects identified: stop; report zero SREDable; create no pages.
+- Human authority withheld: stop immediately; no API calls.
+- Parent Notion doc creation fails: stop; do not create child pages.
 
 ## Procedure
 
-1. **Validate inputs at trust boundary.** Confirm every required input is present and non-empty. Confirm the Notion API integration token is present. If any required input is absent, stop and report the missing field by name; do not proceed.
-2. **Parse the Work Summary.** Extract every project entry. Treat each entry as a candidate. If the Work Summary contains no project entries, stop and report that zero projects were found; do not fabricate projects.
-3. **Classify each project as SREDable or not.** Apply the SRED eligibility criteria to each parsed project. Produce a list of confirmed SREDable projects. If the list is empty, stop and report that no SREDable projects were identified; do not create any Notion pages.
-4. **Confirm human authority before mutation.** Present the list of projects that will be created as Notion child docs. Wait for explicit human confirmation. If confirmation is withheld or the human rejects any project, stop without creating any pages.
-5. **Create the parent Notion page if absent.** Check whether the SRED Project Descriptions Notion doc exists at the specified parent page ID. If it does not exist, create it. If creation fails, stop and report the failure; do not proceed.
-6. **Create one child Notion page per SREDable project.** For each confirmed SREDable project, create a child page under the parent using the project template. Populate the template fields from the Work Summary entry. If any individual page creation fails, record the failure by project name and continue with the remaining projects. Do not retry failed pages.
-7. **Report completion.** List every child page that was created successfully, every project that was skipped or failed, and the total count. If all projects failed, report the failure and state that no Notion doc was created.
+1. **Validate inputs at trust boundary.** Confirm every required input is present and non-empty. Confirm the Notion API integration token is present. Done when: every required input is confirmed present, or a missing field is named.
+2. **Parse the Work Summary.** Extract every project entry. Treat each entry as a candidate. Done when: every project entry is extracted, or zero projects found is reported.
+3. **Classify each project as SREDable or not.** Apply the SRED eligibility criteria to each parsed project. Produce a list of confirmed SREDable projects. Done when: the SREDable list is produced, or zero SREDable is reported.
+4. **Confirm human authority before mutation.** Present the list of projects that will be created as Notion child docs. Wait for explicit human confirmation. Done when: the human confirms, or authority is withheld and the skill stops.
+5. **Create the parent Notion page if absent.** Check whether the SRED Project Descriptions Notion doc exists at the specified parent page ID. If it does not exist, create it. Done when: the parent doc exists or creation failure is reported.
+6. **Create one child Notion page per SREDable project.** For each confirmed SREDable project, create a child page under the parent using the project template. Populate the template fields from the Work Summary entry. If any individual page creation fails, record the failure by project name and continue with the remaining projects. Do not retry failed pages. Done when: every SREDable project has a child page or a recorded failure.
+7. **Report completion.** List every child page that was created successfully, every project that was skipped or failed, and the total count. If all projects failed, report the failure and state that no Notion doc was created. Done when: the report lists successes, failures, and totals.
 
-## Failure and recovery
-| Failure class | Rule |
-|---|---|
-| Missing required input | Stop; name the missing field; do not proceed |
-| Zero projects found in Work Summary | Stop; report zero projects; create no pages |
-| Zero SREDable projects identified | Stop; report zero SREDable; create no pages |
-| Human authority withheld | Stop immediately; no API calls |
-| Parent Notion doc creation fails | Stop; do not create child pages |
-| Individual child page creation fails | Record failure by project name; continue remaining projects; include failures in report |
+## Failure modes
 
-Partial-result rule: If some child pages succeed and others fail, report the successes and the failures. The done predicate does not hold if any confirmed SREDable project lacks a child page. Do not claim the skill is done if failures exist.
-
-Non-rollback rule: Already-created Notion pages are not deleted on failure.
+- Individual child page creation fails: record failure by project name; continue remaining projects; include failures in report.
+- Partial result: if some child pages succeed and others fail, report the successes and the failures. The done predicate does not hold if any confirmed SREDable project lacks a child page. Do not claim the skill is done if failures exist.
+- Non-rollback: already-created Notion pages are not deleted on failure.
 
 ## Output
-A structured completion report containing:
-- The Notion parent page ID and its URL.
-- A table of child pages: project name, child page ID, child page URL, and status (created / failed).
-- Count of SREDable projects, pages created, and pages failed.
-- If zero pages were created, the report states the skill did not complete and names the blocking failure.
+
+A structured completion report: Notion parent page ID and URL, table of child pages (project name, child page ID, child page URL, status of created/failed), counts of SREDable projects, pages created, and pages failed. If zero pages were created, the report states the skill did not complete and names the blocking failure.
 
 ## Provenance
 

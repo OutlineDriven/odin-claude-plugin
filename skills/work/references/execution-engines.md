@@ -1,10 +1,10 @@
-# Execution Engines
+# Execution engines
 
 `/work` runs an implementation-ready unified code plan through one of three engines. The engine is chosen once, after Phase 0 classifies the plan as `artifact_readiness: implementation-ready` plus `execution: code`. The engine decides *how* implementation runs; it never changes who owns the shipping tail.
 
 Engine selection applies only to code execution. Knowledge-work and legacy plans keep the inline/subagent flow in `SKILL.md`.
 
-## Step 1: Probe host capability
+## Step 1: probe host capability
 
 An engine is usable only when the host exposes a callable primitive for it. Do not assume one exists from its name.
 
@@ -18,7 +18,7 @@ Rule of thumb: probe for the callable tool, not the command's existence. If the 
 
 **Codex specifically.** Codex exposes goal tools to skills (gated by `features.goals`): `create_goal(objective)` sets **and activates** a persistent objective — the **current session** then works toward it automatically. It is not a background worker and returns no awaitable envelope. `update_goal(status: complete|blocked)` reports terminal status when the objective is genuinely met or repeatedly blocked. The skill calls `create_goal` with the objective content; the working session handles `update_goal` itself. Use `create_goal` only in standalone use, never when `/work` is called by another orchestrator that owns the tail — it would keep the session pursuing the objective instead of returning control.
 
-## Step 2: Pick the engine by plan shape
+## Step 2: pick the engine by plan shape
 
 When more than one engine is callable, choose by the plan's decomposition shape:
 
@@ -30,7 +30,7 @@ When more than one engine is callable, choose by the plan's decomposition shape:
 
 Recommend exactly one path. Present a non-default engine as an advanced / large-scale option only when the plan shape warrants it — never as an equal coin-flip.
 
-## Step 3: Run the chosen engine
+## Step 3: run the chosen engine
 
 ### Inline / subagent (default)
 
@@ -69,7 +69,7 @@ Use the plan as authority. Build the workflow around the Implementation Units an
 
 Keep emitted prompts under 4,000 characters and always substitute the literal plan path.
 
-## Step 4: Resume the correct tail
+## Step 4: resume the correct tail
 
 After any engine finishes implementation, inspect the diff and continue at the tail that matches the caller. The engine never owns more than implementation + local verification on its own.
 

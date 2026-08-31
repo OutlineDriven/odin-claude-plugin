@@ -1,6 +1,6 @@
 ---
 name: skill-benchmark
-description: 'Use when the user runs /skill-benchmark to score agent skills via LLM judges with baseline comparison, regression detection, and trend analysis. Don''t use for tasks that require source or remote-system changes; the only writes are benchmark reports.'
+description: 'Use when the user runs /skill-benchmark to score agent skills via LLM judges with baseline comparison, regression detection, and trend analysis. Not for release gating — use skill-benchmark-gate; not for model comparison — use skill-model-benchmark.'
 disable-model-invocation: true
 ---
 
@@ -26,23 +26,25 @@ disable-model-invocation: true
 
 ## Procedure
 
-1. Create `.gstack/benchmark-reports/` and `.gstack/benchmark-reports/baselines/`.
-2. Resolve the skill set. If `--skills` is supplied, use those names. If `--diff`, run `git diff <base>...HEAD --name-only` and select skills whose files changed. Otherwise auto-discover all skills in the skill directory.
-3. Preview to the user: the skill list, the judge model, the rubric criteria, and the estimated model spend. Stop and wait for confirmation before any judge call.
+1. Create `.gstack/benchmark-reports/` and `.gstack/benchmark-reports/baselines/`. Done when: both directories exist.
+2. Resolve the skill set. If `--skills` is supplied, use those names. If `--diff`, run `git diff <base>...HEAD --name-only` and select skills whose files changed. Otherwise auto-discover all skills in the skill directory. Done when: the skill set is resolved and non-empty.
+3. Show the user a preview containing the skill list, judge model, rubric criteria, and estimated model spend. Stop and wait for confirmation before any judge call. Done when: the user confirms the preview.
 4. For each skill, send the skill body and the following rubric to the LLM judge. Collect a 0-10 score per criterion and an overall score (mean of criteria).
    - Trigger clarity: does the trigger predicate unambiguously route the skill?
    - Procedure executability: can the procedure be followed step-by-step without ambiguity?
    - Failure recovery: are failure classes named with recovery or stop rules?
    - Output concreteness: does the output section name a concrete artifact?
-5. If `--baseline`: write per-skill per-criterion scores, timestamp, and branch to `.gstack/benchmark-reports/baselines/baseline.json`. Report absolute scores and stop.
+   Done when: every skill has per-criterion and overall scores.
+5. If `--baseline`: write per-skill per-criterion scores, timestamp, and branch to `.gstack/benchmark-reports/baselines/baseline.json`. Report absolute scores and stop. Done when: the baseline file is written and absolute scores are reported.
 6. If a baseline exists and `--baseline` was not passed: compare each current score against the baseline.
    - Score drop greater than 50% of the baseline value or more than 2 points absolute: REGRESSION.
    - Score drop greater than 20%: WARNING.
    - Otherwise: OK.
-7. Check each skill against the quality budget: overall score 7 or above passes, below 7 fails. Compute the overall grade from the fraction of skills passing.
-8. Rank skills by lowest current score. For each failing skill, name the weakest criterion and quote the judge rationale.
-9. If `--trend`: load historical baseline files, tabulate overall scores over time, and state whether quality is improving, stable, or degrading.
-10. Write the report to `.gstack/benchmark-reports/<date>-benchmark.md` and `.gstack/benchmark-reports/<date>-benchmark.json`.
+   Done when: every skill has a regression status.
+7. Check each skill against the quality budget: overall score 7 or above passes, below 7 fails. Compute the overall grade from the fraction of skills passing. Done when: the overall grade is computed.
+8. Rank skills by lowest current score. For each failing skill, name the weakest criterion and quote the judge rationale. Done when: failing skills are ranked with weakest-criterion rationale.
+9. If `--trend`: load historical baseline files, tabulate overall scores over time, and state whether quality is improving, stable, or degrading. Done when: the trend table is produced or `--trend` was not passed.
+10. Write the report to `.gstack/benchmark-reports/<date>-benchmark.md` and `.gstack/benchmark-reports/<date>-benchmark.json`. Done when: both report files are written.
 
 ## Failure and recovery
 - **Judge unavailable or rate-limited:** stop scoring, report which skills were scored and which were not, write a partial report, and return BLOCKED with the judge error.
@@ -52,7 +54,7 @@ disable-model-invocation: true
 - Non-mutation rule: no skill, source, or configuration file is modified. The only writes are to `.gstack/benchmark-reports/`.
 
 ## Output
-A scored benchmark report containing per-skill per-criterion scores, overall grade, regression status against baseline when available, failing skills ranked by lowest score with judge rationale, and a trend table when `--trend` is passed. Written as Markdown and JSON under `.gstack/benchmark-reports/`.
+A scored benchmark report (Markdown + JSON under `.gstack/benchmark-reports/`) containing per-skill per-criterion scores, the overall grade, regression status against the baseline when available, failing skills ranked by lowest score with judge rationale, and a trend table when `--trend` is passed.
 
 ## Provenance
 

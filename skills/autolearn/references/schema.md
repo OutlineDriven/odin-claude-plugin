@@ -1,6 +1,6 @@
 # Frontmatter contract — `docs/solutions/`
 
-Canonical schema for learning docs written by `autolearn`. Read this when classifying a track, assembling frontmatter, or validating. The validator (`scripts/validate-frontmatter.py`) only catches silent YAML-corruption; the field/enum rules below are yours to honor.
+Canonical schema for learning docs written by `autolearn`. Read this when classifying a track, assembling frontmatter, or validating. The validator (`scripts/validate-frontmatter.py`) catches only silent YAML corruption; you must still enforce the field and enum rules below.
 
 ## Two tracks
 
@@ -77,7 +77,7 @@ Filename: `[sanitized-problem-slug].md` — no date suffix (the `date` field car
 
 ## Backward compatibility
 
-Pre-existing docs may carry bug-track fields (`symptoms`/`root_cause`/`resolution_type`) on a knowledge-track `problem_type`. Harmless — leave them. Strip only when rewriting the doc for other reasons. New docs follow the track rules above.
+Pre-existing docs may carry bug-track fields (`symptoms`/`root_cause`/`resolution_type`) on a knowledge-track `problem_type`. These fields are harmless; leave them. Strip them only when rewriting the doc for other reasons. New docs follow the track rules above.
 
 ## YAML safety (array items)
 

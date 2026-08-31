@@ -1,6 +1,6 @@
 ---
 name: skill-improver
-description: 'Use when a user asks to iteratively improve a Claude Code skill or fix skill-quality findings. The skill resolves the target, runs structured reviews, applies fixes, and repeats until no critical or major findings remain or a terminal status is reached. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a user asks to iteratively improve a skill or fix skill-quality findings. Resolves the target, runs structured reviews, applies fixes, and repeats until clean. Not for agent grading — use skill-doctor; not for security — use skill-scanner.'
 ---
 
 # Skill improver
@@ -22,8 +22,8 @@ description: 'Use when a user asks to iteratively improve a Claude Code skill or
 
 ## Procedure
 
-1. **Resolve target.** Locate the `SKILL.md` file. If the path does not exist or does not contain a valid skill frontmatter block, report `invalid-target` and stop. Record the resolved path in `.code-improver/run-<timestamp>/target.txt`.
-2. **Bound scope.** The improvement scope is the single resolved skill directory. No file outside that directory or the `.code-improver/` artifact tree may be read or written.
+1. **Resolve target.** Locate the `SKILL.md` file. If the path does not exist or does not contain a valid skill frontmatter block, report `invalid-target` and stop. Record the resolved path in `.code-improver/run-<timestamp>/target.txt`. Done when: the target is resolved and recorded, or `invalid-target` is reported.
+2. **Bound scope.** The improvement scope is the single resolved skill directory. No file outside that directory or the `.code-improver/` artifact tree may be read or written. Done when: the scope boundary is established.
 3. **Initial review.** Read the full `SKILL.md` and any `agents/openai.yaml` in the skill directory. Evaluate against these quality dimensions:
    - **Trigger clarity**: does the frontmatter description and trigger predicate route precisely?
    - **Authority fidelity**: does the body restatement match the declared authority without expansion?
@@ -32,15 +32,16 @@ description: 'Use when a user asks to iteratively improve a Claude Code skill or
    - **Failure coverage**: are named failure classes present with partial-result rules, rollback rules, and exact blocked-terminal output?
    - **Self-containment**: does the body avoid pointers to other skills, AGENTS.md, system prompts, or rule files?
    - **Provenance**: is origin, revision, license, and adaptation statement present?
-   Classify each finding as `critical`, `major`, or `minor`. Write findings to `.code-improver/run-<timestamp>/review-<N>.json`.
-4. **Gate check.** If zero critical and zero major findings exist, proceed to step 7 (finalization). If the iteration count equals max iterations, proceed to step 6 (non-converged terminal).
+   Classify each finding as `critical`, `major`, or `minor`. Write findings to `.code-improver/run-<timestamp>/review-<N>.json`. Done when: findings are classified and written.
+4. **Gate check.** If zero critical and zero major findings exist, proceed to step 7 (finalization). If the iteration count equals max iterations, proceed to step 6 (non-converged terminal). Done when: the gate decision is made.
 5. **Fix cycle.** For each critical and major finding, in severity-then-file-order:
    a. Read the affected section.
    b. Apply the minimal edit that resolves the finding without changing the skill's contract, trigger, authority, side-effect, or done predicate.
    c. Write the edit. Record the diff in `.code-improver/run-<timestamp>/fix-<N>.json`.
    d. After all fixes for this iteration, re-run the review (step 3) with incremented iteration counter.
-6. **Non-converged terminal.** If max iterations are exhausted with remaining critical or major findings, report `non-converged` with the remaining finding count and severity breakdown. Do not present this as convergence.
-7. **Finalization.** Run a scope check: confirm no edit changed the trigger predicate, authority class, side-effect target, or done predicate. Run a regression check: confirm the edited skill still parses (valid frontmatter, required sections present). If either check fails, revert the last iteration's edits and report `finalization-failed`. If both pass, write the final review to `.code-improver/run-<timestamp>/final-review.json` and report `converged`.
+   Done when: all critical and major findings for this iteration are fixed and the review is re-run.
+6. **Non-converged terminal.** If max iterations are exhausted with remaining critical or major findings, report `non-converged` with the remaining finding count and severity breakdown. Do not present this as convergence. Done when: the non-converged status is reported.
+7. **Finalization.** Run a scope check: confirm no edit changed the trigger predicate, authority class, side-effect target, or done predicate. Run a regression check: confirm the edited skill still parses (valid frontmatter, required sections present). If either check fails, revert the last iteration's edits and report `finalization-failed`. If both pass, write the final review to `.code-improver/run-<timestamp>/final-review.json` and report `converged`. Done when: the finalization verdict is reported.
 
 ## Failure and recovery
 | Failure class | Behavior |
@@ -54,11 +55,7 @@ description: 'Use when a user asks to iteratively improve a Claude Code skill or
 Partial results: each iteration's review and fix artifacts are written incrementally. A mid-run interruption preserves all artifacts written so far. Resume by passing the `.code-improver/run-<timestamp>` directory as the improvement scope.
 
 ## Output
-On `converged`: a report listing the final review findings (all minor or informational), the total iteration count, and the path to `.code-improver/run-<timestamp>/final-review.json`.
-
-On `non-converged`: a report listing the remaining critical and major findings, the iteration count, and the path to the last review artifact.
-
-On `invalid-target`, `finalization-failed`, or `review-error`: a terminal status message with the specific failure class and diagnostic detail.
+On `converged`: a report listing the final review findings (all minor or informational), the total iteration count, and the path to `.code-improver/run-<timestamp>/final-review.json`. On `non-converged`: remaining critical and major findings, iteration count, and last review artifact path. On `invalid-target`, `finalization-failed`, or `review-error`: a terminal status message with the specific failure class and diagnostic detail.
 
 ## Provenance
 

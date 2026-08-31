@@ -1,6 +1,6 @@
 # Review output template
 
-This is the **canonical skeleton** for deep-mode review output -- copy the section structure; the example shows one good rendering, not the only permitted layout. Shape each finding for the reader's next action. Findings are grouped by severity, not by persona.
+Use this **canonical skeleton** for deep-mode review output. Copy the section structure; the example shows one good rendering, not the only permitted layout. Shape each finding for the reader's next action. Group findings by severity, not by persona.
 
 **Hard constraints (non-negotiable):** ASCII-safe only -- no box-drawing or per-item horizontal-rule separators, no Unicode arrows, middot, or em dashes; use `->` for arrows, `--` for dashes. Don't paste file contents or re-print the diff -- cite `file:line`. Stable `#` numbering, reused wherever a finding reappears. The Verdict blockquote is always last and self-sufficient. The Actionable Findings section is conditional (include when the queue is non-empty) and always precedes Pre-existing and Coverage.
 

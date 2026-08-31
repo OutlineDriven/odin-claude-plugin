@@ -1,6 +1,6 @@
 ---
 name: x-api-mcp-guide
-description: 'Use when calling or troubleshooting the X MCP integration. Read this before any X call and on any X error. Return correct bounded X calls without futile retry. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when calling or troubleshooting the X MCP integration. Read this before any X call and on any X error. Returns correct bounded X calls without futile retry. Not for tasks that require source or remote-system changes.'
 ---
 
 # X API MCP guide
@@ -35,6 +35,7 @@ description: 'Use when calling or troubleshooting the X MCP integration. Read th
    >
    > Requests use credits: you'll need to purchase credits at https://console.x.com for this to work. I'll show you a cost estimate before anything expensive.
 
+   Done when: the capabilities message is sent and `capabilities_sent` is set to true (or was already true).
 2. **Resolve the current user.** Call `xd://mcp__x_get_users_me` with `user.fields=id,name,username,description,public_metrics`. Match the result:
 
    | Result | Next |
@@ -43,6 +44,7 @@ description: 'Use when calling or troubleshooting the X MCP integration. Read th
    | Error with `type` / `reason` matching Error 1, 2, or 3 below | Stop. Return that error's fixed message. Do not search or call any other X tool. |
    | 200 with `errors[]` in body | Ignore `errors[]`. Keep `data`. Proceed with `{me}`. |
 
+   Done when: `{me}` is cached from a successful response, or a fixed error message is returned and the skill stops.
 3. **Parse the user's ask.**
 
    | Input | Action |
@@ -55,6 +57,7 @@ description: 'Use when calling or troubleshooting the X MCP integration. Read th
    | Topic search | Rewrite as X search query; if no query, ask |
    | Any other ask | Handle directly; fall back to asking for a link or handle |
 
+   Done when: the ask is parsed into a concrete action with the required parameters.
 4. **Estimate cost before any X MCP call.** Read `references/pricing.md` below. For live prices: https://console.x.com/api/credits/pricing wins over the pinned reference.
 
    Estimate = (resources requested × per-resource price) + per-request price. Each pagination page is billed again. Expanded returned objects are billed. Failed requests are not billed.
@@ -64,6 +67,7 @@ description: 'Use when calling or troubleshooting the X MCP integration. Read th
    | Under $0.25 | Proceed with `max_results` of 10–25 unless the user asked for more |
    | $0.25 or over, pagination loop, or bulk lookup | Stop. Give a one-line dollar estimate and ask for confirmation before proceeding. If cumulative spend will roughly double the estimate, stop and reconfirm |
 
+   Done when: the cost is estimated and the threshold action is taken.
 5. **Call the X MCP tool.** Use `xd://mcp__x_*` device routes. Set appropriate `max_results` and request these fields:
 
    - Tweet fields: `created_at,public_metrics,author_id,lang,conversation_id`
@@ -72,8 +76,7 @@ description: 'Use when calling or troubleshooting the X MCP integration. Read th
 
    Use `meta.next_token` → `pagination_token` for pagination. Stop when `meta.next_token` is absent.
 
-   Prefer recent data (7-day window), then `{me}` reads, then small full-archive pages. Do not paginate unless the user asked for it.
-
+   Prefer recent data (7-day window), then `{me}` reads, then small full-archive pages. Do not paginate unless the user asked for it. Done when: the X MCP tool is called with bounded `max_results` and the requested fields.
 6. **Handle the response.**
 
    | Condition | Action |
@@ -90,37 +93,31 @@ description: 'Use when calling or troubleshooting the X MCP integration. Read th
    | 5xx | Back off. If it keeps failing, direct to https://developer.x.com/status |
    | 200 with `errors[]` | Keep `data`; ignore `errors[]` |
 
+   Done when: the response is handled per the matching condition and the user receives data, a fixed error message, or a retry.
+
 ## Failure and recovery
-**Failure class: unresolved error.** The skill did not achieve the done predicate. The user receives a fixed message and the session stops making X calls for this ask.
-
-**Partial-result rule:** If a tool returns 200 with partial data and no error type, return the data. Do not treat partial success as failure.
-
-**Non-retry rule for specific errors:** 401 / 403 enrollment / credits-blocked: never retry unchanged. Rate-limit 429: retry once with reduced scope only.
-
-**Blocked result:** Futile retry loops on auth, enrollment, or quota errors are not a valid completion. The skill is done only when the user either gets their data or receives a fixed error message with a clear next step.
+- **Unresolved error**: the skill did not achieve the done predicate. The user receives a fixed message and the session stops making X calls for this ask.
+- **Partial-result rule**: if a tool returns 200 with partial data and no error type, return the data. Do not treat partial success as failure.
+- **Non-retry rule**: 401 / 403 enrollment / credits-blocked — never retry unchanged. Rate-limit 429 — retry once with reduced scope only.
+- **Blocked result**: futile retry loops on auth, enrollment, or quota errors are not a valid completion. The skill is done only when the user either gets their data or receives a fixed error message with a clear next step.
 
 ## Output
-- The requested X data (posts, user profiles, timeline, bookmarks, search results, news, trends, counts, or parsed IDs), or
-- One of the fixed error messages below, followed by a suggested next step that does not involve retrying the same failed call, or
-- A confirmation prompt for estimated cost over $0.25.
+The requested X data (posts, profiles, timeline, bookmarks, search results, news, trends, counts, or parsed IDs); or one of the fixed error messages below with a suggested next step; or a confirmation prompt for estimated cost over $0.25.
 
 Fixed error messages:
 
 1. **Sign-in failed (401):** "You're not signed in to X. Reconnect the X plugin in this chat. Don't paste keys or passwords. Then I'll retry."
-
 2. **Not onboarded (403):** "This X account isn't set up yet. Go to https://console.x.com, register and onboard with this same X account, then come back and I'll retry."
-
 3. **Out of credits:** "You're out of credits. Go to https://console.x.com and add credits, then I'll retry."
-
 4. **Private account:** "I can't open that. If it's yours, reconnect X. If it's someone else's private account, I don't have access."
 
 ## Provenance
 
-- **Origin:** cursor/plugins `third_party/x` skill blob — outside the 63 manifest-backed marketplace plugins
-- **Source paths:** `third_party/x/skills/x-api-mcp-guide/SKILL.md`, `third_party/x/skills/x-api-mcp-guide/references/pricing.md`
-- **Pinned revision:** `68836ddaf5697224520f1847d90cdb90ca8babaa`
-- **License:** MIT — inherited from the cursor/plugins root README declaration
-- **Adaptation:** ODIN voice, contract table, ODIN section order, ODIN failure taxonomy, authority translated to operational language, pricing reference inlined as support content, model+human invocation flag applied.
+- Origin: cursor/plugins `third_party/x` skill blob — outside the 63 manifest-backed marketplace plugins
+- Source paths: `third_party/x/skills/x-api-mcp-guide/SKILL.md`, `third_party/x/skills/x-api-mcp-guide/references/pricing.md`
+- Pinned revision: `68836ddaf5697224520f1847d90cdb90ca8babaa`
+- License: MIT — inherited from the cursor/plugins root README declaration
+- Adaptation: ODIN voice, contract table, ODIN section order, ODIN failure taxonomy, authority translated to operational language, pricing reference inlined as support content, model+human invocation flag applied.
 
 ### references/pricing.md
 

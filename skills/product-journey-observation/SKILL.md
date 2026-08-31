@@ -3,7 +3,7 @@ name: product-journey-observation
 description: 'Use when a product journey needs observed persona-specific moments and ranked recommendations. Produces Persona-grounded product-journey feedback. Stop at the declared success, non-success, or bound.'
 ---
 
-# product-journey-observation
+# Product journey observation
 
 ## Contract
 
@@ -13,19 +13,14 @@ description: 'Use when a product journey needs observed persona-specific moments
 | Authority | OBSERVE_ONLY |
 | Side effect | Persona-grounded product-journey feedback |
 | Done | The persona journey map and evidence-linked recommendations are complete. |
-| Stop | journey blocked; evidence insufficient. Bound: One pass per declared persona.. Receipt terminal classes: success, capped, stalled, blocked, exhausted, pending. Budget exhaustion is never success unless it is the predeclared success predicate. |
+| Stop | journey blocked; evidence insufficient. Bound: One pass per declared persona. Receipt terminal classes: success, capped, stalled, blocked, exhausted, pending. Budget exhaustion is never success unless it is the predeclared success predicate. |
 
 ## Procedure
 
-1. Bind the declared bound and freeze it before mutation.
-2. Execute the Persona-grounded product-journey feedback inside the bound.
-3. Stop at outcome.success, any outcome.non_success, or outcome.bound.
-4. Persist per profiles.persistence.P1 (durable_location .outline/loops/<slug>/<run_id>/ when durable; emit receipt.json before return).
-
-## Verification
-
-1. Confirm outcome.success holds or a named non_success/bound terminal applies.
-2. Write an immutable K11 receipt with every K11 field.
+1. Bind the declared bound and freeze it before mutation. Done when: the bound is frozen and no mutation has occurred.
+2. Execute the Persona-grounded product-journey feedback inside the bound. Done when: the persona journey map and evidence-linked recommendations are complete.
+3. Stop at outcome.success, any outcome.non_success, or outcome.bound. Done when: outcome.success holds or a named non_success/bound terminal applies.
+4. Persist per profiles.persistence.P1 (durable_location .outline/loops/<slug>/<run_id>/ when durable; emit receipt.json before return). Done when: an immutable K11 receipt with every K11 field is written.
 
 ## Provenance
 

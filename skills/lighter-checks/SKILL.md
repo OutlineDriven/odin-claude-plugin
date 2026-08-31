@@ -1,6 +1,6 @@
 ---
 name: lighter-checks
-description: 'Use when verification is looping, a check would re-run against untouched code, another tool would prove an established fact, or the user asks to stop over-checking. Run the minimum complete verification gate once and deliver on the first green result. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when verification is looping, would re-run untouched code, or duplicates an established proof. Runs the minimum complete gate once and delivers on the first green result. Don''t use for tasks that require source or remote-system changes.'
 ---
 
 # Lighter checks
@@ -16,16 +16,21 @@ description: 'Use when verification is looping, a check would re-run against unt
 
 ## Inputs
 
-Required: the claims to prove, the changed files or explicitly bounded changed surface, the languages touched, and the project's typecheck, lint, and test commands for those languages. Existing results may be supplied with their command, scope, and outcome. No optional input may be assumed to establish evidence.
+Required inputs are the claims to prove, the changed files or explicitly bounded changed surface, the languages touched, and the project's typecheck, lint, and test commands for those languages. Supplied results must include their command, scope, and outcome. Never assume an optional input establishes evidence.
 
 ## Procedure
 
-1. Bound verification to the supplied changed surface and touched languages. If either is unknown, stop rather than inspect or verify unrelated scope.
-2. Map each claim to the narrowest action that directly proves it. Reuse a supplied result only when its command and scope cover that claim and the relevant code has not changed since it ran.
-3. Remove any proposed re-run against unchanged code and any second tool that covers the same failure class as an accepted result. Keep a second action only when it proves a distinct claim or failure class.
-4. Run the project's complete typecheck, lint, and test gate once for every touched language. Use the narrowest project-supported scope that still covers the changed surface; use a repository-wide command only when no narrower command covers it.
-5. Treat each command's output as its evidence. Do not re-read a diff, repeat a green command, or add a stricter tool solely for reassurance.
-6. If every required action is green, stop immediately and return the evidence with a deliver decision. Do not perform any further check after the first complete green gate.
+1. Bound verification to the supplied changed surface and touched languages. If either is unknown, stop rather than inspect or verify unrelated scope. Done when: the changed surface and touched languages are bounded, or the skill stops for unknown scope.
+
+2. Map each claim to the narrowest action that directly proves it. Reuse a supplied result only when its command and scope cover that claim and the relevant code has not changed since it ran. Done when: every claim is mapped to one narrowest proving action or a reused result that covers it.
+
+3. Remove any proposed re-run against unchanged code and any second tool that covers the same failure class as an accepted result. Keep a second action only if it proves a distinct claim or failure class. Done when: no redundant re-runs or duplicate-class tools remain in the plan.
+
+4. Run the project's complete typecheck, lint, and test gate once for every touched language. Use the narrowest project-supported scope that still covers the changed surface; use a repository-wide command only when no narrower command covers it. Done when: one complete gate has run per touched language.
+
+5. Treat each command's output as its evidence. Do not re-read a diff, repeat a green command, or add a stricter tool solely for reassurance. Done when: each command's output is recorded as evidence and no reassurance re-run is performed.
+
+6. If every required action is green, stop immediately and return the evidence with a deliver decision. Do not perform any further check after the first complete green gate. Done when: the deliver decision is returned on the first green gate, or a failure is reported.
 
 ## Failure and recovery
 - **Missing boundary or command:** Return `blocked` with the missing changed surface, language, or project command; do not substitute a guessed command or widen scope.
@@ -34,8 +39,9 @@ Required: the claims to prove, the changed files or explicitly bounded changed s
 - **Mutation required or observed:** Stop before mutation, or stop immediately if a command reports one, and return `blocked` with the affected target. Never report delivery while any required claim is failed, unavailable, inconclusive, or unproved.
 
 ## Output
+
 Return a chat report listing each claim, its single proving command and scope, its observed result, any omitted redundant checks and why they were redundant, and exactly one terminal classification: `deliver`, `red`, or `blocked`.
 
 ## Provenance
 
-Project-owned adaptation of `skills/lighter-checks/SKILL.md` from the ODIN 1.x current skill candidate `current:current-b:current:lighter-checks`. No source revision or license identifier was supplied. The adaptation preserves scoped one-pass verification, distinct-failure-class gating, whole project gates for touched languages, and first-green delivery while making the read-only boundary explicit.
+Project-owned adaptation of `skills/lighter-checks/SKILL.md` from the ODIN 1.x current skill candidate `current:current-b:current:lighter-checks`. No source revision or license identifier was supplied. The adaptation preserves scoped one-pass verification, distinct-failure-class gating, whole project gates for touched languages, and first-green delivery. It also makes the read-only boundary explicit.

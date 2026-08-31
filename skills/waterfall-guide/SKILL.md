@@ -22,22 +22,22 @@ description: 'Use when a user wants to lock greenfield architecture and interfac
 
 ## Procedure
 
-1. Receive the project brief and any constraints from the human. If the brief is missing or names no product, stop and request it rather than inferring scope.
-2. Identify the core modules the system requires. For each module, name it, state its single responsibility, and list the data it owns. Do not invent modules the brief does not justify.
-3. Define the interface contracts between modules. For each interface, specify: the caller and callee modules, the request shape (fields and types), the response shape (fields and types), the error semantics (error codes or categories and their meaning), and the versioning strategy (how the contract evolves without breaking callers).
-4. Identify cross-cutting concerns: authentication, logging, configuration, error propagation. Assign each to exactly one owning module. Do not leave ownership ambiguous.
-5. Write the architecture document. Structure: system overview (one paragraph naming the product and its purpose), module inventory (table: module name, responsibility, data owned), interface contracts (one subsection per interface with request, response, errors, versioning), cross-cutting ownership (table: concern, owning module), and open questions (list any decision the human must make before execution begins; mark each as blocking or non-blocking).
-6. Present the architecture document to the human for review. Incorporate requested changes. Once the human confirms, lock the document and distribute it to all execution teams.
+1. Receive the project brief and any constraints from the human. If the brief is missing or names no product, stop and request it rather than inferring scope. Done when: brief is received and names a product and core capability, or the step has stopped requesting the missing information.
+2. Identify the core modules the system requires. For each module, name it, state its single responsibility, and list the data it owns. Do not invent modules the brief does not justify. Done when: every module is named with its responsibility and owned data.
+3. Define the interface contracts between modules. For each interface, specify caller and callee modules, request shape (fields and types), response shape (fields and types), error semantics (error codes or categories and their meaning), and versioning strategy (how the contract evolves without breaking callers). Done when: every inter-module interface is specified with all five elements.
+4. Identify cross-cutting concerns: authentication, logging, configuration, error propagation. Assign each to exactly one owning module. Do not leave ownership ambiguous. Done when: every cross-cutting concern has exactly one owning module.
+5. Write the architecture document with: system overview (one paragraph naming the product and its purpose), module inventory (table with module name, responsibility, and data owned), interface contracts (one subsection per interface with request, response, errors, and versioning), cross-cutting ownership (table with concern and owning module), and open questions (every decision the human must make before execution begins, marked as blocking or non-blocking). Done when: architecture document is written with all five sections.
+6. Present the architecture document to the human for review. Incorporate requested changes. Once the human confirms, lock the document and distribute it to all execution teams. Done when: document is locked and distributed.
 
 ## Failure and recovery
-- **Incomplete brief**: the human provides no product name or core capability. Result: stop at step 1 and request the missing information. Do not infer or fabricate scope.
-- **Contradictory constraints**: the brief or constraints name incompatible technologies or impossible deadlines. Result: surface the contradiction in the open questions section and ask the human to resolve it before proceeding.
-- **Ambiguous interface**: two modules could own the same data or responsibility. Result: list the ambiguity in open questions as a blocking item. Do not assign ownership arbitrarily.
-- **Partial completion**: any step fails after earlier steps produced artifacts. Result: discard partial outputs. The locked architecture is all-or-nothing; partial results are not distributed.
-- **Non-convergence**: the human requests changes that contradict the existing architecture without withdrawing the contradiction. Result: stop and state the conflict explicitly. Do not silently overwrite prior decisions.
+- **Incomplete brief**: the human provides no product name or core capability. Stop at step 1 and request the missing information. Do not infer or fabricate scope.
+- **Contradictory constraints**: the brief or constraints name incompatible technologies or impossible deadlines. Surface the contradiction in the open questions section and ask the human to resolve it before proceeding.
+- **Ambiguous interface**: two modules could own the same data or responsibility. List the ambiguity in open questions as a blocking item. Do not assign ownership arbitrarily.
+- **Partial completion**: any step fails after earlier steps produced artifacts. Discard partial outputs. The locked architecture is all-or-nothing; partial results are not distributed.
+- **Non-convergence**: the human requests changes that contradict the existing architecture without withdrawing the contradiction. Stop and state the conflict explicitly. Do not silently overwrite prior decisions.
 
 ## Output
-A locked architecture document containing: system overview, module inventory, interface contracts with request/response/error/versioning details, cross-cutting ownership assignments, and an open-questions list. The document is distributed to all execution teams as the coordination contract for parallel work.
+A locked architecture document with sections in order: system overview, module inventory, interface contracts, cross-cutting ownership, open questions — distributed to all execution teams as the coordination contract for parallel work.
 
 ## Provenance
 

@@ -17,7 +17,21 @@ disable-model-invocation: true
 
 ## Inputs
 
-Required from the user: the release branch name; strip a leading `origin/` before validating. Optional from the user: a Slack channel and an optional thread link; ask before posting if absent. Supplied by the operator environment before any step: `INTERNAL_REPO` (`owner/repo` holding the release branches and the workflow), `REPO_DIR` (absolute path to its local checkout), `RC_WORKFLOW_NAME` (default `Cut New Release Candidate`), `RELEASE_CHANNELS` (default `preview stable`), `RELEASE_BRANCH_PREFIX` (default `{channel}_release/`, `{channel}` replaced by each channel name), and `SLACK_BOT_TOKEN` (bot token with `chat:write`; read from the environment only, never hardcoded or committed). If `INTERNAL_REPO` or `SLACK_BOT_TOKEN` is unset, stop and ask before running. Tools: `git`, an authenticated `gh`, `jq`, `curl`. All git and gh operations run inside the release repo.
+Required from the user:
+
+- The release branch name. Strip a leading `origin/` before validating.
+- Optionally, a Slack channel and an optional thread link. Ask before posting if no destination was supplied.
+
+The operator environment must supply these values before any step:
+
+- `INTERNAL_REPO`: the `owner/repo` containing the release branches and workflow.
+- `REPO_DIR`: the absolute path to its local checkout.
+- `RC_WORKFLOW_NAME`: default `Cut New Release Candidate`.
+- `RELEASE_CHANNELS`: default `preview stable`.
+- `RELEASE_BRANCH_PREFIX`: default `{channel}_release/`, with `{channel}` replaced by each channel name.
+- `SLACK_BOT_TOKEN`: a bot token with `chat:write`. Read it only from the environment; never hardcode or commit it.
+
+If `INTERNAL_REPO` or `SLACK_BOT_TOKEN` is unset, stop and ask before running. Required tools: `git`, an authenticated `gh`, `jq`, and `curl`. Run all git and gh operations inside the release repo.
 
 ## Procedure
 
@@ -36,8 +50,10 @@ Required from the user: the release branch name; strip a leading `origin/` befor
    [ "$is_release" = 1 ] || { echo "Not a release branch: $BRANCH_NAME"; exit 1; }
    ```
 
-2. Preview the mutation: state `INTERNAL_REPO`, `$RC_WORKFLOW_NAME`, `$BRANCH_NAME`, and the consequence — a release-candidate build starts on that branch and one Slack update is posted. Proceed only on the user's explicit invocation.
-3. Enter the repo context: `cd "$REPO_DIR"`. If `REPO_DIR` is unset or the path does not exist, ask the user for the local path to the release repo checkout and `cd` there; stop if none is given.
+   Done when: the branch passes the channel-prefix check or the run stops with `Not a release branch`.
+
+2. Preview the mutation: state `INTERNAL_REPO`, `$RC_WORKFLOW_NAME`, `$BRANCH_NAME`, and the consequence — a release-candidate build starts on that branch and one Slack update is posted. Proceed only on the user's explicit invocation. Done when: the mutation preview is stated and the user explicitly invokes the run.
+3. Enter the repo context: `cd "$REPO_DIR"`. If `REPO_DIR` is unset or the path does not exist, ask the user for the local path to the release repo checkout and `cd` there; stop if none is given. Done when: the working directory is inside the release repo checkout.
 4. Confirm the branch exists on origin before dispatching:
 
    ```bash
@@ -45,11 +61,15 @@ Required from the user: the release branch name; strip a leading `origin/` befor
    git ls-remote --exit-code --heads origin "$BRANCH_NAME" >/dev/null
    ```
 
+   Done when: the branch is confirmed to exist on origin.
+
 5. Dispatch the workflow by name on the branch ref:
 
    ```bash
    gh workflow run "$RC_WORKFLOW_NAME" --repo "$INTERNAL_REPO" --ref "$BRANCH_NAME"
    ```
+
+   Done when: the workflow dispatch exits zero.
 
 6. Fetch the newest run for this workflow on this branch and share its `url`; do not watch or wait for completion:
 
@@ -63,6 +83,8 @@ Required from the user: the release branch name; strip a leading `origin/` befor
      --jq '.[0]'
    ```
 
+   Done when: the newest run URL is fetched and shared.
+
 7. Post the Slack update carrying the branch name and run URL. Use the channel the user named; for a thread link of the form `https://<workspace>.slack.com/archives/<CHANNEL>/p<TIMESTAMP>`, reply in-thread with `thread_ts` set to the first 10 digits of `<TIMESTAMP>`, a dot, then the remaining 6; if the user gave no destination, stop and ask for the channel and optional thread link. Send:
 
    ```bash
@@ -72,7 +94,7 @@ Required from the user: the release branch name; strip a leading `origin/` befor
      -d '{"channel":"<CHANNEL>","thread_ts":"<THREAD_TS>","text":"Triggered *'"$RC_WORKFLOW_NAME"'* for `'"$BRANCH_NAME"'`.\nRun: <RUN_URL>"}'
    ```
 
-   Omit `thread_ts` for a channel-root post. Require `"ok":true` in the response.
+   Omit `thread_ts` for a channel-root post. Require `"ok":true` in the response. Done when: the Slack post returns `"ok":true`.
 
 ## Failure and recovery
 - Non-release branch: the prefix check in step 1 exits — stop before any remote call, report `Not a release branch: $BRANCH_NAME`, and ask for a release branch. Nothing was mutated.

@@ -25,7 +25,7 @@ def test_user_service_returns_user(mocker):
     assert result == User(id=1, name="x")  # asserting the mock's fixture
 ```
 
-The mock returns a fixture; the test asserts the fixture. Zero real I/O, zero real validation, zero real bug surface. Delete or replace with a real-DB integration test.
+The test uses no real I/O or validation and exposes no real bug surface. Delete it or replace it with a real-DB integration test.
 
 ### Constructor reflects its arguments
 

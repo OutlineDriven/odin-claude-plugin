@@ -1,6 +1,6 @@
 ---
 name: session-viewer
-description: 'Use when the user asks to view, export, inspect, or share a Codex, Claude Code, OpenClaw, or Pi session transcript in a browser. Produces one local single-file searchable HTML viewer from the session JSONL with credential scrubbing, explicit raw-embed opt-in, and optional browser launch. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user asks to view, export, inspect, or share a session transcript in a browser. Produces one local single-file searchable HTML viewer from the session JSONL with credential scrubbing and optional browser launch. Not for sharing a session — use session-share.'
 ---
 
 # Session viewer
@@ -11,8 +11,13 @@ description: 'Use when the user asks to view, export, inspect, or share a Codex,
 |---|---|
 | Trigger | User asks to view, export, inspect, or share a Codex, Claude Code, OpenClaw, or Pi session transcript in a browser. |
 | Authority | Reversible local write. Create only the single HTML viewer file and one disposable generator script in the system temp directory; never modify the session file, never touch the network, never publish or upload. Rollback is deleting the generated HTML; the scratch script is deleted after the run. |
-| Side effect | One single-file searchable HTML viewer embedding the (optionally raw) session JSONL is produced; it is opened in a browser only when the user asked to view it or passed `--open`. |
+| Side effect | A single-file searchable HTML viewer embedding the (optionally raw) session JSONL is produced; it is opened in a browser only when the user asked to view it or passed `--open`. |
 | Done | HTML file is generated and opens; session is correctly detected and normalized; tool output is searchable; private/credential content is not exposed. |
+
+
+## Not for
+
+- Beaming or publishing a session to a remote endpoint — use session-share.
 
 ## Inputs
 
@@ -22,12 +27,12 @@ description: 'Use when the user asks to view, export, inspect, or share a Codex,
 
 ## Procedure
 
-1. Validate the input path at the trust boundary before any mutation: the file must exist, be non-empty, and be at most 256 MiB; otherwise stop with no writes.
-2. Fix the privacy mode before writing: default mode embeds a normalized, credential-scrubbed projection. Embed raw lines only when the user explicitly opts in with `--raw`; raw mode changes fidelity, never the scrub or the local-only boundary.
-3. Write the generator script below exactly as given to a scratch file in the system temp directory (for example `/tmp/session_viewer_gen.py`). It uses only the Python 3 standard library. Do not edit it.
-4. Run `python3 <scratch> <session.jsonl>` with any optional flags. The script detects the format from structural signatures with a path-hint tiebreak, parses the JSONL line by line, normalizes each line into unified records (index, timestamp, kind: user, assistant, system, summary, thinking, tool-call, tool-result, other; role, tool name, text), scrubs credential-shaped strings (sk- tokens, ghp_ tokens, AKIA keys, xox tokens, bearer headers, key/token/password assignments), and renders one self-contained HTML viewer: embedded JSON payload, substring search across message text, tool names, roles, and tool output, role filter chips, collapsible raw lines in raw mode, a metadata header, no external assets, and no network access; every record is rendered through textContent so session content cannot inject markup.
-5. Read the script report: format and how it was chosen, line, record, and skipped counts, masked-string count, raw mode, output path, and size. To prove the done predicate, open the file when the user asked to view it (or run with `--open`) and confirm it renders and that searching returns tool output.
-6. Delete the scratch script. The HTML file is the only remaining artifact; deleting it is the complete rollback.
+1. Validate the input path at the trust boundary before any mutation: the file must exist, be non-empty, and be at most 256 MiB; otherwise stop with no writes. **Done when:** the path is validated or the stop is reported.
+2. Fix the privacy mode before writing: default mode embeds a normalized, credential-scrubbed projection. Embed raw lines only when the user explicitly opts in with `--raw`; raw mode changes fidelity, never the scrub or the local-only boundary. **Done when:** the privacy mode is fixed.
+3. Write the generator script below exactly as given to a scratch file in the system temp directory (for example `/tmp/session_viewer_gen.py`). It uses only the Python 3 standard library. Do not edit it. **Done when:** the scratch script is written.
+4. Run `python3 <scratch> <session.jsonl>` with any optional flags. The script detects the format from structural signatures with a path-hint tiebreak, parses the JSONL line by line, and normalizes each line into unified records (index, timestamp, kind: user, assistant, system, summary, thinking, tool-call, tool-result, other; role, tool name, text). It scrubs credential-shaped strings (sk- tokens, ghp_ tokens, AKIA keys, xox tokens, bearer headers, key/token/password assignments). It renders one self-contained HTML viewer with an embedded JSON payload, substring search across message text, tool names, roles, and tool output, role filter chips, collapsible raw lines in raw mode, a metadata header, no external assets, and no network access. Every record is rendered through textContent so session content cannot inject markup. **Done when:** the HTML viewer is generated and the script report is captured.
+5. Read the script report: format and how it was chosen, line, record, and skipped counts, masked-string count, raw mode, output path, and size. To prove the done predicate, open the file when the user asked to view it (or run with `--open`) and confirm it renders and that searching returns tool output. **Done when:** the report is read and the done predicate is proven or disproven.
+6. Delete the scratch script. The HTML file is the only remaining artifact; deleting it is the complete rollback. **Done when:** the scratch script is deleted and only the HTML file remains.
 
 ```python
 #!/usr/bin/env python3
@@ -481,7 +486,7 @@ if __name__ == "__main__":
 - The script never uploads, publishes, or opens a network connection. Never swallow errors or claim the done predicate holds while detection was forced-and-failed, the file did not open, or the report shows zero records.
 
 ## Output
-- The HTML viewer at the resolved output path plus the stdout report (format and how it was chosen, counts, masked hits, raw mode, path, size). The viewer is local-only; sharing happens only when the user copies the file. Terminal states: done (file opens and searches) or blocked (exit 2 or 3 after the single explicit-format retry).
+The HTML viewer at the resolved path plus the stdout report (format, counts, masked hits, raw mode, path, size); the viewer is local-only, sharing happens only when the user copies the file; terminal states: done (file opens and searches) or blocked (exit 2 or 3 after the single explicit-format retry).
 
 ## Provenance
 

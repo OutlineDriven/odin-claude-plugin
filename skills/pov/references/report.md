@@ -1,4 +1,4 @@
-# The Optional Full Write-Up
+# The optional full write-up
 
 Load this only when the user asks for the full write-up (SKILL.md Phase 4). The default deliverable is the compact chat TL;DR; this is the opt-in expanded artifact — for reading, sharing, or handing to the next skill.
 

@@ -20,17 +20,12 @@ The trigger identifies which explanation failed. No external files are required.
 
 ## Procedure
 
-1. Identify the explanation that did not land: the last assistant message immediately before the trigger.
-2. Restate the same claim, preserving its substance and conclusions. Do not soften, hedge, or replace it with an easier version.
-3. Re-pitch it:
-   - Lead with the context the explanation assumed: one or two sentences on where the conversation is and what the message was answering. The gap is a missing frame, not a missing word.
-   - Write in ISO 24495-1 English: short sentences, active voice, direct address, common words replacing jargon.
-   - Use the project''s ubiquitous language.
+1. Identify the explanation that did not land: the last assistant message immediately before the trigger. Done when: the failed explanation is identified.
+2. Restate the same claim, preserving its substance and conclusions. Do not soften, hedge, or replace it with an easier version. Done when: the claim is restated with substance and conclusions intact.
+3. Re-pitch it: lead with the context the explanation assumed (one or two sentences on where the conversation is and what the message was answering — the gap is a missing frame, not a missing word); write in ISO 24495-1 English (short sentences, active voice, direct address, common words replacing jargon); use the project''s ubiquitous language. Done when: the claim is re-pitched with the missing frame supplied in plain English and ubiquitous language.
 
 ## Failure and recovery
-**Non-converged:** the user signals they do not understand after one re-pitch.
-
-Stop. Do not elaborate, restate a third time, or widen scope. The user is the authority on whether the explanation landed. Report `non-converged`.
+**Non-converged:** the user signals they do not understand after one re-pitch. Stop. Do not elaborate, restate a third time, or widen scope. The user is the authority on whether the explanation landed. Report `non-converged`.
 
 ## Output
 A single re-pitched message in the conversation, in plain English with the missing context supplied.

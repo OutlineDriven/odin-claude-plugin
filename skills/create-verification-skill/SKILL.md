@@ -1,6 +1,6 @@
 ---
 name: create-verification-skill
-description: 'Use when asked to create a project-local executable verification skill by interviewing the repository, writing the harness, and proving it end to end. The verification skill runs and passes against the live repository. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to create a project-local executable verification skill by interviewing the repository, writing the harness, and proving it end to end. Not for remote or deployed verification — use the project’s remote-proof workflow.'
 ---
 
 # Create verification skill
@@ -22,13 +22,13 @@ description: 'Use when asked to create a project-local executable verification s
 
 ## Procedure
 
-1. Interview the repository: read the relevant source, tests, build config, and run commands to determine how the target feature is built, invoked, and observed.
-2. Define the verification contract: state the observable behavior, the inputs that exercise it, and the pass/fail condition as concrete assertions.
-3. Bound scope: name the exact files the verification skill will write (the skill directory and any harness script under it). Do not touch source under test, CI config, or unrelated paths.
-4. Write the verification skill: a project-local, self-contained skill that re-states the contract, the run command, and the pass/fail condition so it executes without this skill.
-5. Run the verification harness live against the repository. Capture the actual command output.
-6. Confirm the harness passes: every assertion holds against the real output. If any assertion fails, fix the harness, not the source under test, and re-run.
-7. Record the live proof: the exact command, its output, and the pass result inside the verification skill.
+1. Interview the repository: read the relevant source, tests, build config, and run commands to determine how the target feature is built, invoked, and observed. Done when: the build, run, and observe mechanism for the target feature is determined from the repository.
+2. Define the verification contract: state the observable behavior, the inputs that exercise it, and the pass/fail condition as concrete assertions. Done when: the observable behavior, exercise inputs, and pass/fail assertions are stated.
+3. Bound scope: name the exact files the verification skill will write (the skill directory and any harness script under it). Do not touch source under test, CI config, or unrelated paths. Done when: the exact write paths are named and source-under-test and CI config are excluded.
+4. Write the verification skill: a project-local, self-contained skill that restates the contract, the run command, and the pass/fail condition so it executes without this skill. Done when: the verification skill is written and is self-contained.
+5. Run the verification harness live against the repository. Capture the actual command output. Done when: the harness is run live and its actual output is captured.
+6. Confirm the harness passes: every assertion holds against the real output. If any assertion fails, fix the harness, not the source under test, and re-run. Done when: every assertion holds against the real output, or a failing assertion is identified for harness correction.
+7. Record the live proof: the exact command, its output, and the pass result inside the verification skill. Done when: the command, output, and pass result are recorded inside the verification skill.
 
 ## Failure and recovery
 - Repository interview incomplete: if the build, run, or observe mechanism cannot be determined from the repository, stop and report what is missing. Do not invent a verification command.

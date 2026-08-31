@@ -1,7 +1,7 @@
 # Event sourcing integration
 
-When state machines guard event-sourced aggregates:
-1. Command arrives -> validate against current aggregate state machine
-2. If transition valid -> emit immutable event
-3. State rebuilt from event replay
-4. Invalid transitions rejected before events created: impossible to corrupt event log
+When a state machine guards an event-sourced aggregate:
+1. Validate each incoming command against the aggregate's current state.
+2. If the transition is valid, emit an immutable event.
+3. Rebuild state by replaying events.
+4. Reject invalid transitions before creating events so they cannot corrupt the event log.

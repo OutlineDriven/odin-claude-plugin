@@ -1,6 +1,6 @@
 ---
 name: typography-audit
-description: 'Use when asked to audit typography across a codebase when invoked with trigger phrases like audit the typography or review the type. Produces a file:line report with concrete CSS and HTML fixes ordered by impact across 10 categories. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when asked to audit typography across a codebase. Produces a file:line report with concrete CSS and HTML fixes ordered by impact across 10 categories. Not for building a type system or token scale — use better-typography.'
 ---
 
 # Typography audit
@@ -22,9 +22,9 @@ description: 'Use when asked to audit typography across a codebase when invoked 
 
 ## Procedure
 
-1. Collect all CSS, SCSS, Less, HTML, JSX, TSX, Vue, and Svelte files in scope. Skip node_modules, dist, build, vendor, and .git directories.
-2. For each file, extract font-family declarations, font-size values, line-height values, letter-spacing values, color declarations on text elements, @font-face blocks, font-feature-settings, and typographic HTML elements (h1-h6, p, blockquote, ul, ol, li, em, strong, small, sup, sub, abbr, cite, q, dl, dt, dd).
-3. Audit against the following 10-category rule set. For each violation found, record the file path, line number, rule name, severity (critical/high/medium/low), and a concrete CSS or HTML fix.
+1. Collect all CSS, SCSS, Less, HTML, JSX, TSX, Vue, and Svelte files in scope. Skip node_modules, dist, build, vendor, and .git directories. **Done when:** every in-scope source file is collected or reported unreadable.
+2. For each file, extract font-family declarations, font-size values, line-height values, letter-spacing values, color declarations on text elements, @font-face blocks, font-feature-settings, and typographic HTML elements (h1-h6, p, blockquote, ul, ol, li, em, strong, small, sup, sub, abbr, cite, q, dl, dt, dd). **Done when:** every collected file has its typographic surface extracted.
+3. Audit against the following 10-category rule set. For each violation found, record the file path, line number, rule name, severity (critical/high/medium/low), and a concrete CSS or HTML fix. **Done when:** all 10 categories have been checked.
 
 ### Category 1 — brand identity
 
@@ -139,17 +139,15 @@ description: 'Use when asked to audit typography across a codebase when invoked 
    - **High**: Violates a core typographic principle (wrong scale, missing fallback, broken hierarchy).
    - **Medium**: Degrades quality but does not break readability (suboptimal tracking, missing opentype features).
    - **Low**: Polish-level improvement (hair spaces, hanging punctuation, swash usage).
-
-5. Sort findings by severity (critical first), then by category order.
-
+   **Done when:** every finding has one severity.
+5. Sort findings by severity (critical first), then by category order. **Done when:** the ordering is deterministic.
 6. For each finding, produce a concrete fix:
    - CSS fix: the exact property and value to change, with the selector.
    - HTML fix: the exact markup correction.
    - Example: `h1 { letter-spacing: -0.02em; }` or replace `<font>` with `<span class="heading">`.
-
-7. Compile the report grouped by category, with a summary count per category and an overall severity distribution.
-
-8. If the user requests fixes to be applied, generate the minimal CSS patch or HTML edit for each finding. Apply only the requested fixes; do not widen scope.
+   **Done when:** every finding has an exact CSS or HTML fix.
+7. Compile the report grouped by category, with a summary count per category and an overall severity distribution. **Done when:** category and severity counts reconcile with the findings.
+8. If the user requests fixes to be applied, generate the minimal CSS patch or HTML edit for each finding. Apply only the requested fixes; do not widen scope. **Done when:** requested fixes are applied or the read-only report is complete.
 
 ## Failure and recovery
 - **No files found**: Return a message stating no CSS/HTML/JSX files exist in scope. Do not fabricate findings.
@@ -159,12 +157,7 @@ description: 'Use when asked to audit typography across a codebase when invoked 
 - **Non-convergent fix**: If applying a fix introduces a new violation in the same category, stop that fix, report the conflict, and continue with other findings.
 
 ## Output
-A structured report containing:
-
-1. **Summary**: Total findings count, severity distribution (critical/high/medium/low), categories with findings.
-2. **Per-category findings**: For each of the 10 categories, a table of findings with columns: File, Line, Rule, Severity, Description, Fix.
-3. **Severity-ordered fix list**: All findings sorted by severity descending, ready for batch application.
-4. **Optional CSS patch**: If fixes were requested, the consolidated CSS additions/modifications.
+A report with sections in order: summary, per-category findings table (File, Line, Rule, Severity, Description, Fix), severity-ordered fix list, and an optional consolidated CSS patch when fixes were requested.
 
 ## Provenance
 

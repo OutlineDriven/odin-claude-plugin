@@ -1,3 +1,3 @@
 interface:
   display_name: "Promql CLI"
-  short_description: "Execute PromQL queries and debug metrics signals read-only"
+  short_description: "Use when a user asks to execute or investigate PromQL or to"

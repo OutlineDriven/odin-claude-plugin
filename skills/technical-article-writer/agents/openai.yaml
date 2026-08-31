@@ -1,3 +1,3 @@
 interface:
   display_name: "Technical Article Writer"
-  short_description: "Complete draft with title, hook, CTA, and humanization"
+  short_description: "Use when a user asks to write a blog post or technical article."

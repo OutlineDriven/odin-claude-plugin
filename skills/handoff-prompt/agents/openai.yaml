@@ -1,3 +1,3 @@
 interface:
   display_name: "Handoff Prompt"
-  short_description: "Write a clipboard-ready handoff prompt for another agent."
+  short_description: "Use when the user asks for a handoff, delegation, or"

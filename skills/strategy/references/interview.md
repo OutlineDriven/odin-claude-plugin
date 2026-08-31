@@ -1,12 +1,12 @@
 # Strategy interview: question bank and pushback flow
 
-Load before any interview turn (Phase 1 first-run, Phase 2 per-section). The pushback rules, anti-pattern examples, and per-section quality bar live here; improvising them from memory produces a passive transcription instead of a strategy.
+Load this file before any interview turn (Phase 1 first-run, Phase 2 per-section). It contains the pushback rules, anti-pattern examples, and per-section quality bar; improvising them from memory produces passive transcription instead of strategy.
 
-Each section below maps one-to-one to a section in `assets/strategy-template.md`. For each: ask the opening question, judge the answer against the bar, push back when it hits a named anti-pattern, capture the final answer in the user's own language.
+Each section maps one-to-one to a section in `assets/strategy-template.md`. For each section, ask the opening question, judge the answer against the bar, push back when it hits a named anti-pattern, then capture the final answer in the user's own language.
 
 ## VS preamble (before section 1)
 
-The orchestrator runs a short Verbalized Sampling preamble (the `askme` skill) first: surface the distinct framings the user could mean by "strategy" for this repo, pin one. Without a pinned intent the interview anchors the wrong product. Skip only when the user already stated a single unambiguous intent.
+The orchestrator first runs a short Verbalized Sampling preamble (the `askme` skill) to surface the distinct framings the user could mean by "strategy" for this repo and pin one. Without a pinned intent, the interview anchors the wrong product. Skip only when the user already stated a single unambiguous intent.
 
 ## Overall rules
 
@@ -134,4 +134,4 @@ Default skip. 2–3 lines max if present.
 
 ## After the interview
 
-Once sections 1–5 clear the reject-by-default gate (plus any optional sections the user engaged), read `assets/strategy-template.md`, fill it in the user's language, present the full draft in chat, offer one edit round, then hand back to the SKILL's Phase 3 write/read-back/commit. If sections 1–5 can't clear the gate after two rounds of pushback each, write nothing and say so in one line.
+Once sections 1–5 clear the reject-by-default gate (plus any optional sections the user engaged), read `assets/strategy-template.md`, fill it in the user's language, present the full draft in chat, offer one edit round, then hand back to the SKILL's Phase 3 write/read-back/stage. If sections 1–5 can't clear the gate after two rounds of pushback each, write nothing and say so in one line.

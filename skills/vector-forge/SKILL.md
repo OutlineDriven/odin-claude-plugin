@@ -1,6 +1,6 @@
 ---
 name: vector-forge
-description: 'Use when existing cryptographic implementations and a vector-consuming harness need mutation-driven, cross-implementation test-vector expansion. Finds escaped mutants via mutation testing, generates Wycheproof-style vectors that deliberately exercise the uncovered code paths, and reports before/after kill-rate deltas plus proactive value. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when existing cryptographic implementations and a vector-consuming harness need mutation-driven, cross-implementation test-vector expansion. Produces targeted Wycheproof-style vectors and measured before/after kill-rate deltas. Not for general fuzzing — use fuzzing.'
 ---
 
 # Vector forge
@@ -46,6 +46,7 @@ Execute all six phases in order. Each phase is mandatory unless the contract spe
 2. For each implementation, record: language, mutation framework, pure vs FFI classification, existing test suite size.
 3. Identify which API surface the test vectors exercise (deserialization, signing, verification, hashing, etc.).
 
+**Done when:** every implementation, harness surface, and exercised API is classified.
 ### Phase 2: harness
 
 1. For each pure implementation, verify a test harness exists that:
@@ -62,6 +63,7 @@ Execute all six phases in order. Each phase is mandatory unless the contract spe
    - C/C++: test binary linked against the implementation.
 3. If the implementation already has test vectors: plan to run mutation testing three times — with existing vectors only, new vectors only, and combined — to measure delta.
 
+**Done when:** each pure implementation has a vector harness and the three-run comparison plan is fixed where prior vectors exist.
 ### Phase 3: baseline
 
 1. Select the mutation testing framework by language:
@@ -91,6 +93,7 @@ Execute all six phases in order. Each phase is mandatory unless the contract spe
    - Efficacy percentage: Killed / (Killed + Survived).
    - Coverage percentage: (Total - Not covered) / Total.
 
+**Done when:** each implementation has a complete baseline mutation log with resolved timeouts and recorded metrics.
 ### Phase 4: escape analysis
 
 1. Build a Trailmark call graph for each implementation:
@@ -133,6 +136,7 @@ Execute all six phases in order. Each phase is mandatory unless the contract spe
 
 5. Group escaped mutants by vector strategy for Phase 5.
 
+**Done when:** every escaped mutant is classified, prioritized, and grouped by vector strategy.
 ### Phase 5: vector generation
 
 1. For each escaped code path group, design test vectors targeting that path:
@@ -153,6 +157,7 @@ Execute all six phases in order. Each phase is mandatory unless the contract spe
 4. Verify every new vector against at least two independent implementations before adding it to the suite. If implementations disagree, investigate: one implementation has a bug.
 5. For Wycheproof contributions: use the `vectorgen` tool (CLI or `github.com/c2sp/wycheproof/vectorgen` programmatic API) with a JSON envelope rather than formatting vector files by hand. Follow the upstream vectorgen guide for current requirements.
 
+**Done when:** each new vector isolates one path, passes cross-implementation verification, and uses vectorgen where required.
 ### Phase 6: validation
 
 1. Re-run mutation testing with new vectors included. Use per-file mutation testing for fast iteration during development; run full-crate tests only for the final before/after comparison.
@@ -169,6 +174,7 @@ Execute all six phases in order. Each phase is mandatory unless the contract spe
 4. Report both retroactive value (measurable kill-rate improvement in existing implementations) and proactive value (vectors that would catch bugs in future implementations even if they do not improve kill rates in existing ones).
 5. Write the complete report to `VECTOR_FORGE_REPORT.md` in the working directory.
 
+**Done when:** Phase 6 metrics, deltas, retroactive/proactive value, and the complete report are recorded.
 ## Failure and recovery
 | Failure class | Response |
 |--------------|----------|
@@ -181,14 +187,7 @@ Execute all six phases in order. Each phase is mandatory unless the contract spe
 Partial-result rule: if the campaign stops before Phase 6 completes, return all intermediate artifacts: mutation logs, escape classifications, generated vectors, and a status report stating which phase stopped and why. Do not claim the done predicate holds without the full before/after comparison.
 
 ## Output
-All artifacts written to the working directory:
-
-- `VECTOR_FORGE_REPORT.md`: full report covering target algorithm, implementations tested, baseline results, escape analysis, new vectors, after results, before/after delta, and conclusions.
-- New Wycheproof-format JSON vectors (one file per algorithm variant).
-- Harness files colocated inside each implementation package.
-- Mutation logs as JSON from Phase 3 and Phase 6.
-
-No remote state is changed. No credentials are modified. No VCS commits are made.
+Write artifacts in order: `VECTOR_FORGE_REPORT.md`, Wycheproof-format JSON vectors per algorithm variant, colocated harness files, and Phase 3/6 mutation logs; change no remote, credential, or VCS state.
 
 ## Provenance
 

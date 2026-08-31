@@ -1,4 +1,4 @@
-# eval-authored workflows (oh-my-pi)
+# Eval-authored workflows (oh-my-pi)
 
 The fan-out primitive is orchestration code in the `eval` tool: author the
 wave as a Python or JS cell, dispatch with `agent()`, batch with `parallel()`
@@ -7,9 +7,9 @@ the same `getSessionSpawns()` policy, and the same `task.maxConcurrency`
 ceiling as the `task` tool, so an eval wave is real subagent dispatch and not
 an emulation of one.
 
-The `task` tool keeps the work you never block on: background jobs collected
-later, `hub`-coordinated peers, detached processes. A workflow phase is a wave
-you wait on, so it belongs in `eval`.
+Use the `task` tool for work the parent does not block on: background jobs
+collected later, `hub`-coordinated peers, and detached processes. A workflow
+phase is a wave the parent waits on, so it belongs in `eval`.
 
 ## Helpers
 
@@ -30,11 +30,11 @@ object and awaits each call.
 - `pipeline(items, *stages)`: map items left to right with a barrier between
   stages. Every item clears stage N before stage N+1 starts, so reach for it
   only when a stage needs the whole previous set: dedup, merge, early exit.
-- `completion(prompt, *, model="default", system=None, schema=None)`: oneshot
-  stateless model call, no tools and no history. Tiers are `smol`, `default`,
-  `slow`. Cheap classification or scoring inside a wave.
-- `log(message)` and `phase(title)`: a progress line, and the phase heading
-  that the following lines group under.
+- `completion(prompt, *, model="default", system=None, schema=None)`: one-shot
+  stateless model call with no tools or history. Tiers are `smol`, `default`,
+  and `slow`. Use it for cheap classification or scoring inside a wave.
+- `log(message)` writes a progress line; `phase(title)` sets the phase heading
+  for the following lines.
 - `budget`: `budget.total` is the output-token ceiling attribute or `None`;
   `budget.spent()` and `budget.remaining()` are calls. Gate a loop on
   `budget.total` first, because it is `None` when the user set no ceiling.

@@ -1,3 +1,3 @@
 interface:
   display_name: "PR Link Issue"
-  short_description: "Link GitHub and Linear issues to a PR"
+  short_description: "Use when a human explicitly asks to link a GitHub issue and"

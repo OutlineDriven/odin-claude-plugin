@@ -1,3 +1,3 @@
 interface:
   display_name: "Toolchain Health"
-  short_description: "Return a green, yellow, or red toolchain verdict with repairs."
+  short_description: "Audit the installed toolchain and return a green, yellow, or"

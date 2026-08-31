@@ -1,3 +1,3 @@
 interface:
   display_name: "Batch Ask Me"
-  short_description: "Walk a decision tree in batched rounds to shared understanding."
+  short_description: "Use when the user faces multi-fork decisions or unresolved"

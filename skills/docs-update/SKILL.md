@@ -1,6 +1,6 @@
 ---
 name: docs-update
-description: 'Sync user-facing docs to code changes and open a linked PR.'
+description: 'Sync user-facing docs to code changes and open a linked PR. Also handles multi-repo documentation setups when a separate docs repository is configured. Not for ADRs or architectural rationale — use docs-and-adrs; not for Diataxis-style doc writing — use docs-writing.'
 disable-model-invocation: true
 ---
 
@@ -23,15 +23,15 @@ disable-model-invocation: true
 
 ## Procedure
 
-1. Find the default branch and gather commits within the timeframe (default 24 hours, or user-specified). Examine each commit's diff to understand what was modified.
-2. Filter for significant user-facing changes: new features or capabilities, API changes (new endpoints, parameters, return values), breaking changes, new configuration options, new CLI commands or flags, and changes to user-facing behavior. Skip internal refactoring, test-only changes, minor bug fixes, code typo corrections, and performance optimizations without user impact. Be conservative: when significance is doubtful, skip the update.
-3. Locate the documentation: check for a docs directory in the current repo (monorepo pattern), or a separate docs repository in the environment (multi-repo). Determine the platform from configuration files and directory structure (Mintlify, Docusaurus, GitBook, Fumadocs, or generic markdown); default to standard markdown syntax if the platform is unclear.
-4. Read several existing documentation files to capture tone, voice, structure, code-example patterns, terminology, and formatting conventions, including any style guide or contribution documentation.
-5. Map each significant code change to a documentation need (new content, modification, or addition to existing content). Prioritize user-facing changes over implementation details, match existing documentation verbosity, preserve existing accurate content, and stay strictly additive.
-6. Generate the documentation changes matching the captured style: same tone and formality, same heading hierarchy, consistent terminology, matched code-block formatting (language tags, highlighting), and platform conventions (frontmatter, special syntax, custom components).
-7. If testing mode was requested, output the preview summary described in Output and stop. Do not create a branch or PR.
-8. Before any mutation, preview the proposed branch name, the documentation files to change, and the PR consequence to the human. On explicit approval, create a descriptive branch (for example `docs/auto-update-YYYYMMDD`), apply the documentation changes, and commit with a descriptive message listing the changes.
-9. Push the branch and open a PR whose description links each documentation update to its triggering source commit (commit references or URLs from the source repository) and requests human review for accuracy and completeness. Do not merge the PR.
+1. Find the default branch and gather commits within the timeframe (default 24 hours, or user-specified). Examine each commit's diff to understand what was modified. Done when: every commit in the timeframe has its diff examined.
+2. Filter for significant user-facing changes: new features or capabilities, API changes (new endpoints, parameters, return values), breaking changes, new configuration options, new CLI commands or flags, and changes to user-facing behavior. Skip internal refactoring, test-only changes, minor bug fixes, code typo corrections, and performance optimizations without user impact. Be conservative: when significance is doubtful, skip the update. Done when: the filtered set contains only significant user-facing changes.
+3. Locate the documentation: check for a docs directory in the current repo (monorepo pattern), or a separate docs repository in the environment (multi-repo). Determine the platform from configuration files and directory structure (Mintlify, Docusaurus, GitBook, Fumadocs, or generic markdown); default to standard markdown syntax if the platform is unclear. Done when: the documentation location and platform are determined.
+4. Read several existing documentation files to capture tone, voice, structure, code-example patterns, terminology, and formatting conventions, including any style guide or contribution documentation. Done when: tone, voice, structure, and formatting conventions are captured.
+5. Map each significant code change to a documentation need (new content, modification, or addition to existing content). Prioritize user-facing changes over implementation details, match existing documentation verbosity, preserve existing accurate content, and stay strictly additive. Done when: each significant change has a mapped documentation need.
+6. Generate the documentation changes matching the captured style: same tone and formality, same heading hierarchy, consistent terminology, matched code-block formatting (language tags, highlighting), and platform conventions (frontmatter, special syntax, custom components). Done when: generated changes match the captured style.
+7. If testing mode was requested, output the preview summary described in Output and stop. Do not create a branch or PR. Done when: the preview is output and no mutation occurred.
+8. Before any mutation, preview the proposed branch name, the documentation files to change, and the PR consequence to the human. On explicit approval, create a descriptive branch (for example `docs/auto-update-YYYYMMDD`), apply the documentation changes, and commit with a descriptive message listing the changes. Done when: the branch is created, changes applied, and committed with a descriptive message.
+9. Push the branch and open a PR whose description links each documentation update to its triggering source commit (commit references or URLs from the source repository) and requests human review for accuracy and completeness. Do not merge the PR. Done when: the PR is open with each update linked to its source commit.
 
 ## Failure and recovery
 - No significant changes found: report that no documentation updates are needed. Create no branch or PR.
@@ -42,9 +42,7 @@ disable-model-invocation: true
 - Blocked or non-converged result: return a report naming the failure class and what was tried, with no documentation branch or PR created. Never swallow the error or claim the done predicate holds.
 
 ## Output
-- Testing mode: a text summary of the changes detected in commits, the documentation files that would be modified, the content that would be added or changed, and the rationale for each update.
-- Execution mode: a pushed documentation branch and one open PR whose description links each documentation update to its source commit and requests human review.
-- No-op: a report that no significant user-facing changes were found.
+A pushed documentation branch and one open PR linking each update to its source commit, or a testing-mode preview summary, or a no-op report that no significant user-facing changes were found.
 
 ## Provenance
 

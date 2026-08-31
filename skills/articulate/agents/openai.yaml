@@ -1,4 +1,3 @@
 interface:
   display_name: "Articulate"
-  short_description: "Express an intended thought without inventing intent"
-  default_prompt: "Turn this thought into a faithful, audience-ready statement. Preserve scope and surface unsupported choices instead of filling them in."
+  short_description: "Turn a vague intended thought into a faithful, audience-ready"

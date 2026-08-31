@@ -1,6 +1,6 @@
-# charter.md — two-sided ban-list
+# Two-sided ban list
 
-Both sides come from refusing to commit. Slop averages into the default. Overkill piles compensation on top of a thin idea. The generated skill rejects both.
+Both failures avoid commitment. Slop averages into the default. Overkill piles compensation on top of a thin idea. The generated skill rejects both.
 
 ## Side A — slop
 

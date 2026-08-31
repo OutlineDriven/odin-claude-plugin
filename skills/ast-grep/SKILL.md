@@ -23,11 +23,11 @@ description: 'Use when asked to run AST-based structural search, lint, or rewrit
 
 ## Procedure
 
-1. Confirm the task is structural (call, function, class, or import shaped like a pattern), not text/regex/filename matching (use grep) or semantic type/reference lookup (use LSP or the compiler). ast-grep matches syntax, not bytes.
-2. Validate the pattern before searching: `python3 scripts/ast_grep_helper.py validate '<pattern>' --lang <L>`. Exit 0 means ast-grep parses it cleanly; exit 2 means malformed (the helper prints the parsed pattern tree showing the ERROR node). Fix and re-validate.
-3. For a rewrite, run the dry-run: `python3 scripts/ast_grep_helper.py replace '<pattern>' '<rewrite>' --lang <L> <paths>`. Read the diff and the `N matches across M files` count. If the blast radius is wrong, stop and refine the pattern (tighten meta-variables, add `--lang`, add context); re-run the dry-run.
-4. Apply only after the dry-run diff is correct: `python3 scripts/ast_grep_helper.py replace '<pattern>' '<rewrite>' --lang <L> <paths> --apply`. The helper writes via a separate `--update-all` pass.
-5. Invoke `ast-grep`, never `sg`: `sg` collides with the `setgroups` binary on many systems.
+1. Confirm the task is structural (call, function, class, or import shaped like a pattern), not text/regex/filename matching (use grep) or semantic type/reference lookup (use LSP or the compiler). ast-grep matches syntax, not bytes. Done when: the task is confirmed structural.
+2. Validate the pattern before searching: `python3 scripts/ast_grep_helper.py validate '<pattern>' --lang <L>`. Exit 0 means ast-grep parses it cleanly; exit 2 means malformed (the helper prints the parsed pattern tree showing the ERROR node). Fix and re-validate. Done when: validate exits 0.
+3. For a rewrite, run the dry-run: `python3 scripts/ast_grep_helper.py replace '<pattern>' '<rewrite>' --lang <L> <paths>`. Read the diff and the `N matches across M files` count. If the blast radius is wrong, stop and refine the pattern (tighten meta-variables, add `--lang`, add context); re-run the dry-run. Done when: the dry-run diff and match count are correct.
+4. Apply only after the dry-run diff is correct: `python3 scripts/ast_grep_helper.py replace '<pattern>' '<rewrite>' --lang <L> <paths> --apply`. The helper writes via a separate `--update-all` pass. Done when: files are updated via `--update-all`.
+5. Invoke `ast-grep`, never `sg`: `sg` collides with the `setgroups` binary on many systems. Done when: `ast-grep` is invoked, not `sg`.
 
 Pattern syntax: `$VAR` matches any single node; `$$$ARGS` matches zero or more nodes; `$_` matches any node (non-capturing).
 

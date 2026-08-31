@@ -20,19 +20,19 @@ description: 'Use when asked to create an agent plugin or marketplace package. P
 - Target root directory (required): the filesystem path under which the plugin tree is created.
 - Entry point file name (optional): defaults to `index.ts`; supplied when a non-default entry is needed.
 - Marketplace entry (optional): when supplied, a marketplace manifest entry is generated alongside the plugin tree.
-- Plugin manifest fields (optional): author, version, description, and capability list; defaults applied when omitted.
+- Plugin manifest fields (optional): author, version, description, and capability list. Apply defaults to omitted fields.
 
 ## Procedure
 
-1. Confirm the required inputs are present. If the plugin name or target root is missing, stop and report the missing input.
-2. Resolve the target root to an absolute path and verify it exists and is writable. Do not create or modify directories outside the resolved plugin path.
-3. Compute the plugin directory as `<target root>/<plugin name>`. If it already exists and is non-empty, stop and report the collision rather than overwriting.
-4. Create the plugin directory tree: the plugin root, an `agents/` subdirectory, and a `skills/` subdirectory.
-5. Write the plugin manifest at the plugin root with the supplied or default fields: name, version (default `0.1.0`), description, author, entry point, and capability list.
-6. Write the entry point file at the plugin root using the supplied or default name, containing the plugin registration stub that exports the declared capabilities.
-7. If a marketplace entry was requested, write the marketplace manifest entry file referencing the plugin name and path. If not requested, skip this step.
-8. Run validation over the created tree: confirm the manifest parses, every declared entry point file exists, every declared capability has a corresponding file, and no required directory is missing.
-9. Produce the validation report listing each check, its pass or fail result, and the absolute path of every created artifact.
+1. Confirm the required inputs are present. If the plugin name or target root is missing, stop and report the missing input. Done when: plugin name and target root are confirmed present, or the missing input is reported.
+2. Resolve the target root to an absolute path and verify it exists and is writable. Do not create or modify directories outside the resolved plugin path. Done when: the target root is resolved to an absolute path and confirmed writable.
+3. Compute the plugin directory as `<target root>/<plugin name>`. If it already exists and is non-empty, stop and report the collision rather than overwriting. Done when: the plugin directory path is computed and confirmed not to collide with an existing non-empty directory.
+4. Create the plugin directory tree: the plugin root, an `agents/` subdirectory, and a `skills/` subdirectory. Done when: the plugin root, `agents/`, and `skills/` directories exist.
+5. Write the plugin manifest at the plugin root with the supplied values or defaults: name, version (default `0.1.0`), description, author, entry point, and capability list. Done when: the manifest is written with all fields populated from supplied values or defaults.
+6. Write the entry point file at the plugin root using the supplied or default name, containing the plugin registration stub that exports the declared capabilities. Done when: the entry point file exists and exports the declared capabilities.
+7. If a marketplace entry was requested, write the marketplace manifest entry file referencing the plugin name and path. If not requested, skip this step. Done when: the marketplace entry file exists when requested, or the step is skipped when not requested.
+8. Run validation over the created tree: confirm the manifest parses, every declared entry point file exists, every declared capability has a corresponding file, and no required directory is missing. Done when: every validation check passes or every failure is identified.
+9. Produce a validation report that lists each check, its pass or fail result, and the absolute path of every created artifact. Done when: the validation report lists every check result and every created artifact path.
 
 ## Failure and recovery
 - Missing required input: stop before any write; report which input is missing. No files are created.

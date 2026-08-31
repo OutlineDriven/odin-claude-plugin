@@ -1,3 +1,3 @@
 interface:
   display_name: "Audit Context Building"
-  short_description: "Build a pre-audit dossier of assumptions and open questions."
+  short_description: "Use when starting an audit, threat model, or architecture"

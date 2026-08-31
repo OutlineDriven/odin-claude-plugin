@@ -1,8 +1,8 @@
-# Post-Ideation Workflow
+# Post-ideation workflow
 
 Read this file after Phase 2 ideation agents return and the orchestrator has merged and deduped their outputs into a master candidate list. Do not load before Phase 2 completes.
 
-## Phase 3: Adversarial Filtering
+## Phase 3: Adversarial filtering
 
 Review every candidate idea critically. Critique runs in two layers — a fresh-context verifier first, then orchestrator arbitration. Fresh-context verification outperforms self-critique: the orchestrator synthesized some of these candidates itself and carries the full generation history, so it is anchored in ways a verifier that never saw the generation is not.
 
@@ -39,13 +39,13 @@ Target output:
 - if too many survive, run a second stricter pass
 - if fewer than 5 survive, report that honestly rather than lowering the bar
 
-## Phase 4: Write and Present the Deliverable
+## Phase 4: Write and present the deliverable
 
 The ideation artifact is produced **automatically** — persistence is not opt-in. After filtering, write the deliverable and show a concise summary. The full content lives in the file; the session shows only an orienting summary.
 
 **Checkpoint B.** Before writing the deliverable, write `/tmp/odin-ideate/<run-id>/survivors.md` containing the survivor list plus key context (focus hint, grounding summary, rejection summary). Best-effort: if the write fails, log a warning and proceed; the checkpoint is not load-bearing.
 
-### 4.1 Write the Deliverable (automatic)
+### 4.1 Write the deliverable (automatic)
 
 Write the file every run — do not wait for the user to ask.
 
@@ -57,7 +57,7 @@ Write the file every run — do not wait for the user to ask.
 
 **Resume:** update the existing file in place, in its existing format; carry the prior ideas and rejection summary forward, adding to them rather than overwriting.
 
-### 4.2 Present a Concise Summary (not the full deliverable)
+### 4.2 Present a concise summary (not the full deliverable)
 
 The full cards, rationale, downsides, and the rejection table live in the file. Do **not** reproduce them in the session — reprinting the whole deliverable as chat text defeats the rich format. Show a tight orientation instead:
 
@@ -68,12 +68,12 @@ The full cards, rationale, downsides, and the rejection table live in the file. 
 
 This ranked list doubles as the index the user references when choosing an idea in Phase 5.
 
-### 4.3 Present It
+### 4.3 Present it
 
 - **HTML (`format:html`):** best-effort open the file in the browser (`open` on macOS, `xdg-open` on Linux); always print the absolute path. Skip auto-open in headless / pipeline runs.
 - **Markdown (default):** print the path.
 
-## Phase 5: Next Steps — askme Handoff
+## Phase 5: Next steps — `askme` handoff
 
 Hand the survivors to `askme` to clarify intent on the chosen direction(s) before any planning. The deliverable already exists (Phase 4), so the handoff is purely *what next*.
 
@@ -90,7 +90,7 @@ Offer four options:
 
 If the user already named what they want to work on inline (e.g., "brainstorm the table tool", "tighten the highlighter idea"), skip the follow-up that asks what to work on.
 
-### 5.1 Discuss or Refine the Ideas First
+### 5.1 Discuss or refine the ideas first
 
 This stays in ideate — no skill handoff. It is the "think across the set before committing" step, and it is a normal, expected outcome of ideation: seeing several strong candidates and wanting to deliberate is more common than instantly committing one. The orchestrator still holds the full grounding and generation context, so it can reason across every survivor — this is where that context pays off. The work here is either **single-idea** (sharpen or interrogate one) or **cross-idea** (compare, combine, or merge several); do not force the user to name a single idea before they can engage.
 
@@ -121,7 +121,7 @@ Only when the file was **created fresh this run**: delete it, confirm the deleti
 
 Do not delete the run's scratch directory (`/tmp/odin-ideate/<run-id>`) on completion — it holds the web research cache, checkpoint files, and grounding artifacts. OS handles eventual cleanup.
 
-## Quality Bar
+## Quality bar
 
 Before finishing, check:
 

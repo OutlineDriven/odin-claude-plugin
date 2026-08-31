@@ -1,6 +1,6 @@
 # Per-ecosystem hook contents
 
-**Grounded: 2026-08-26**
+**Grounded: 2026-08-31**
 
 **Node ecosystems**: write `.husky/pre-commit`:
 
@@ -16,14 +16,14 @@ Drop missing scripts and tell the user. Write `.lintstagedrc`:
 { "*": "prettier --ignore-unknown --write" }
 ```
 
-Formatter policy is **out of scope** for this skill. Do NOT auto-create `.prettierrc`. If no Prettier config exists, surface that fact and ask the user.
+Formatter policy is **out of scope** for this skill. Do not auto-create `.prettierrc`. If no Prettier config exists, surface that fact and ask the user.
 
 **Python**: write `.pre-commit-config.yaml`:
 
 ```yaml
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.16.4
+    rev: v0.16.5
     hooks:
       - id: ruff-check
       - id: ruff-format

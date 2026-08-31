@@ -1,3 +1,3 @@
 interface:
   display_name: "Typing Exclusion Worker"
-  short_description: "Clears assigned mypy exclusions with all checks passing"
+  short_description: "Use when removing modules from pyproject mypy exclusions or"

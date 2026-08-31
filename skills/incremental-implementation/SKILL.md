@@ -1,6 +1,6 @@
 ---
 name: incremental-implementation
-description: 'Use when asked to implement any multi-file change, building a new feature from a breakdown, refactoring, or when about to write more than a small amount of code at once. Each slice is individually tested and committed, the full suite passes, the build is clean, and the feature works end-to-end without uncommitted changes. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when implementing a multi-file change, building a feature from a breakdown, or writing a large amount of code. Each slice is individually tested and committed; the full suite passes and the feature works end-to-end. Not for a single settled ticket — use implement.'
 ---
 
 # Incremental implementation

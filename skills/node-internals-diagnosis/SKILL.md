@@ -1,6 +1,6 @@
 ---
 name: node-internals-diagnosis
-description: 'Use when diagnosing native segfaults, addon crashes, native/heap memory leaks, event-loop anomalies, thread-pool saturation, or unexplained V8 deoptimizations in Node.js. Identifies the root cause and emits a concrete classification with supporting tool evidence. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when deep diagnostics target Node.js segfaults, addon crashes, memory leaks, event-loop anomalies, thread-pool saturation, or V8 deoptimizations. Returns a root-cause classification with tool evidence. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Node internals diagnosis
@@ -31,7 +31,7 @@ Optional:
 
 ## Procedure
 
-1. **Classify the symptom.** Match to one of: segfault/addon crash, native/heap memory leak, event-loop anomaly, thread-pool saturation, V8 deoptimization, or binding.gyp failure. If the symptom does not match any class, stop and return `blocked: symptom-not-in-scope`.
+1. **Classify the symptom.** Match to one of: segfault/addon crash, native/heap memory leak, event-loop anomaly, thread-pool saturation, V8 deoptimization, or binding.gyp failure. If the symptom does not match any class, stop and return `blocked: symptom-not-in-scope`. Done when: the symptom is classified or returned as out-of-scope.
 
 2. **Collect the minimum evidence for the class.**
 
@@ -43,17 +43,22 @@ Optional:
    - **V8 deoptimization:** Parse `--trace-deopt` output. For each deopt site, reconstruct the hidden class and property access order. If a deopt fires at the same site repeatedly, identify whether a polymorphic inline cache transitioned to megamorphic state.
    - **binding.gyp failure:** Inspect `include_dirs`, `libraries`, and `cflags_c` in the generated `build/config.gypi`. Verify the target Node.js abi_`{NODE_MODULE_VERSION}` matches the runtime. Check that platform (win/darwin/linux) is correctly detected.
 
+   Done when: the minimum evidence for the matched class is collected.
+
 3. **Apply the nodejs-core decision tree for the matched class.**
 
    - **segfault:** Follow HandleScope lifetime and libuv-lifetime checks. Determine whether a C++ object was accessed after destruction or a handle was closed prematurely.
    - **deoptimization:** Follow hidden-class and property-order fixes. Determine whether property insertion order varies across calls or a constructor returns a different layout than it initially constructed.
    - **binding.gyp failure:** Follow include_dirs, ABI, and platform checks.
 
-4. **Name the root cause** as: C++ object lifetime violation, megamorphic IC, hidden-class layout mismatch, thread-pool starvation, libuv handle leak, ABI mismatch, or other.
+   Done when: the decision tree is applied and a root-cause hypothesis is formed.
 
-5. **Return `done: root-cause-identified`** with the named root cause and the supporting tool evidence.
+4. **Name the root cause** as: C++ object lifetime violation, megamorphic IC, hidden-class layout mismatch, thread-pool starvation, libuv handle leak, ABI mismatch, or other. Done when: the root cause is named.
+
+5. **Return `done: root-cause-identified`** with the named root cause and the supporting tool evidence. Done when: the classification object is returned with root cause and evidence.
 
 ## Failure and recovery
+
 - **`no-evidence-acquired`:** The diagnostic binary exited with an error or produced no output. Capture the stderr. Return `blocked: no-evidence-acquired` with the error message. Do not fabricate a root cause.
 - **`inconclusive-evidence`:** Tool output is present but contradicts itself (e.g., a leak reported but the snapshot shows no growth). Return `blocked: inconclusive-evidence` and list both findings.
 - **`unmatched-symptom`:** The symptom does not map to any known decision tree. Return `blocked: symptom-not-in-scope`.
@@ -61,24 +66,8 @@ Optional:
 - **Rollback:** Delete any written diagnostic artifact (heap snapshot, trace file, core dump copy) when the session ends or on explicit request. Do not leave artifacts in the working tree.
 
 ## Output
-A terminal classification object:
 
-```json
-{
-  "done": "root-cause-identified",
-  "symptom_class": "<segfault|memory-leak|event-loop|thread-pool|deoptimization|binding-gyp>",
-  "root_cause": "<named root cause>",
-  "evidence": [
-    {
-      "tool": "<gdb|lldb|asan|valgrind|heap-snapshot|trace-deopt|LIBUV_TRACE|binding-gyp-inspect>",
-      "output": "<file path or verbatim excerpt>"
-    }
-  ],
-  "missing_evidence": ["<what was not available>"]
-}
-```
-
-If blocked, return `{"done": "blocked", "blocker": "<failure class>", "detail": "<error message or contradiction>"}`.
+One terminal classification object: done/symptom_class/root_cause/evidence/missing_evidence, or blocked/blocker/detail when blocked.
 
 ## Provenance
 

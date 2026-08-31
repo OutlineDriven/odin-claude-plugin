@@ -1,6 +1,6 @@
 ---
 name: bro
-description: 'Use when asked to restate the last response in plain language. Returns a simple concise restatement without jargon. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when asked to restate the last response in plain language. Returns a concise restatement without jargon. Not for source or remote-system changes.'
 ---
 
 # Bro
@@ -12,7 +12,7 @@ description: 'Use when asked to restate the last response in plain language. Ret
 | Trigger | The human asks to restate the last response in plain language. |
 | Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | None. |
-| Done | A simple concise restatement of the last response is returned, without jargon. |
+| Done | A concise restatement of the last response is returned, without jargon. |
 
 ## Inputs
 
@@ -20,10 +20,10 @@ description: 'Use when asked to restate the last response in plain language. Ret
 
 ## Procedure
 
-1. Identify the last assistant response in the conversation.
-2. If no prior assistant response exists, stop and report that there is nothing to restate.
-3. Restate that response in plain language: short, concise, and free of jargon.
-4. Preserve the original meaning; do not add new claims, opinions, or information not present in the source response.
+1. Identify the last assistant response in the conversation. Done when: the target response is located or confirmed absent.
+2. If no prior assistant response exists, stop and report that there is nothing to restate. Done when: the absence is reported and no restatement is produced.
+3. Restate that response concisely in plain language without jargon. Done when: the restatement covers the original meaning in plain language.
+4. Preserve the original meaning; do not add new claims, opinions, or information not present in the source response. Done when: the restatement adds nothing beyond the source.
 
 ## Failure and recovery
 - No prior response: stop without producing a restatement; report that there is nothing to restate. Do not fabricate a prior response.

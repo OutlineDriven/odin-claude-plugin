@@ -20,7 +20,7 @@ The human provides the provisioning context: target service or platform, credent
 
 ## Procedure
 
-1. **Confirm target path.** Agree with the human on the wizard file path. Fail if a file already exists at that path; do not overwrite.
+1. **Confirm target path.** Agree with the human on the wizard file path. Fail if a file already exists at that path; do not overwrite. Done when: one unused wizard path is agreed.
 
 2. **Author the wizard.** Write an interactive shell wizard to the agreed path covering every provisioning step in scope. For each prompt-read cycle:
    - Emit a clear prompt describing what is collected and why.
@@ -28,20 +28,21 @@ The human provides the provisioning context: target service or platform, credent
    - Immediately validate or sanitize the value.
    - Route the value to its stated destination.
    - Handle errors with a named failure path that prints an error and exits non-zero.
+   Done when: the wizard file is written and every provisioning step in scope has a prompt-read-validate-route cycle.
 
-3. **Check syntax.** Run `bash -n "$wizard_path"`. Fail on non-zero exit.
+3. **Check syntax.** Run `bash -n "$wizard_path"`. Fail on non-zero exit. Done when: `bash -n` exits zero.
 
-4. **Lint.** Run `shellcheck "$wizard_path"` if shellcheck is available. Record warnings; fail on errors.
+4. **Lint.** Run `shellcheck "$wizard_path"` if shellcheck is available. Record warnings; fail on errors. Done when: shellcheck reports no errors (or is absent and warnings are recorded).
 
 5. **Static journey trace.** Parse the wizard script without executing it. For every read cycle confirm:
    - The read variable has a named destination.
    - Every destination is a writable path or a named env-var export.
    - The script terminates with a clear success message and exit 0.
-   If any read cycle is untraced, fail.
+   If any read cycle is untraced, fail. Done when: every read cycle is traced to a destination and the script terminates with exit 0.
 
-6. **Set permissions.** Set the wizard file to owner-execute (chmod u+x).
+6. **Set permissions.** Set the wizard file to owner-execute (chmod u+x). Done when: the wizard file is owner-executable.
 
-7. **Hand off.** Tell the human the wizard path and how to run it. Do not execute the wizard.
+7. **Hand off.** Tell the human the wizard path and how to run it. Do not execute the wizard. Done when: the human is told the path and run instruction.
 
 ## Failure and recovery
 | Failure class | Rule |
@@ -54,9 +55,8 @@ The human provides the provisioning context: target service or platform, credent
 Roll back means delete the wizard file. On any failure the blocked result is: wizard file absent, human notified with failure class and error output. The agent never retries unfixable failures; the skill returns failure class and error output.
 
 ## Output
-On success: the wizard file at the agreed path with owner-execute permission, plus a human-readable summary of what the wizard does, the validated inputs, and how to run it.
 
-On failure: failure class name and the exact error output. No file is left behind.
+On success: the wizard file path with owner-execute permission, plus a human-readable summary of what the wizard does, the validated inputs, and how to run it. On failure: failure class name and the exact error output; no file is left behind.
 
 ## Provenance
 

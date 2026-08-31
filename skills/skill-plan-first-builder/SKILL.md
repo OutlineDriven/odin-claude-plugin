@@ -1,6 +1,6 @@
 ---
 name: skill-plan-first-builder
-description: 'Use when a user requests a Skill from an approved analysis. Agent builds a complete SKILL.md whose body follows the approved plan verbatim with all fixed values resolved via token substitution. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a user requests a Skill from an approved analysis. Builds a SKILL.md whose body follows the approved plan verbatim with all fixed values resolved via token substitution. Not for scrape-based creation — use skill-creator; not for general authoring — use skill-writer.'
 ---
 
 # Skill plan first builder
@@ -11,8 +11,8 @@ description: 'Use when a user requests a Skill from an approved analysis. Agent 
 |---|---|
 | Trigger | user requests a Skill from an approved analysis |
 | Authority | reversible-local: write only named local artifacts; rollback by deleting the written file |
-| Side effect | Writes SKILL.md into the target agent skills folder or an export dir; agent writes only the markdown body and references each fixed value by token |
-| Done | Built skill whose body follows the approved plan verbatim and whose values resolve via renderSkillMarkdown token substitution, no stale or unknown tokens |
+| Side effect | writes SKILL.md into the target agent skills folder or an export dir; agent writes only the markdown body and references each fixed value by token |
+| Done | built skill whose body follows the approved plan verbatim and whose values resolve via renderSkillMarkdown token substitution, no stale or unknown tokens |
 
 ## Inputs
 
@@ -21,14 +21,15 @@ description: 'Use when a user requests a Skill from an approved analysis. Agent 
 
 ## Procedure
 
-1. Read the approved analysis and extract the skill definition: slug, trigger predicate, authority class, side-effect target, and done predicate.
-2. Identify every `{{id}}` value token in the plan body. Each token must reference a catalogue entry with a known resolution.
-3. Validate each token against the catalogue. If any token is unknown or stale, stop and report the unresolved token list.
-4. Build the SKILL.md frontmatter from the extracted slug and trigger predicate.
-5. Render the markdown body by substituting each `{{id}}` token with its catalogue-resolved value. Preserve all non-token text verbatim from the approved plan.
-6. Write the completed SKILL.md to the target directory. If no target directory is specified, write to the default agent skills folder.
+1. Read the approved analysis and extract the skill definition: slug, trigger predicate, authority class, side-effect target, and done predicate. **Done when:** the skill definition is extracted and recorded.
+2. Identify every `{{id}}` value token in the plan body. Each token must reference a catalogue entry with a known resolution. **Done when:** all tokens are inventoried and each has a catalogue key.
+3. Validate each token against the catalogue. **Done when:** all tokens resolve to known values, or the full list of unresolved tokens is reported and no file is written.
+4. Build the SKILL.md frontmatter from the extracted slug and trigger predicate. **Done when:** the frontmatter is valid YAML with the correct `name` and `description`.
+5. Render the markdown body by substituting each `{{id}}` token with its catalogue-resolved value, preserving all non-token text verbatim from the approved plan. **Done when:** the rendered body matches the approved plan exactly, with every token replaced.
+6. Write the completed SKILL.md to the target directory, or to the default agent skills folder if none is specified. **Done when:** the file is written and its contents match the rendered body.
 
 ## Failure and recovery
+
 | Failure class | Behavior |
 |---|---|
 | Missing or malformed analysis | Stop. Report the defect. Do not write any file. |
@@ -39,6 +40,7 @@ description: 'Use when a user requests a Skill from an approved analysis. Agent 
 Partial-result rule: no partial file is ever written. Rollback rule: if the file was written before a late validation failure, delete it. Blocked result: no SKILL.md artifact exists.
 
 ## Output
+
 A complete SKILL.md file whose body follows the approved plan verbatim, with all `{{id}}` tokens resolved to their catalogue values. No stale tokens, no unknown tokens, no deviations from the approved plan.
 
 ## Provenance

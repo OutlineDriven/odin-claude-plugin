@@ -1,6 +1,6 @@
 ---
 name: to-questionnaire
-description: 'Use when the user wants to turn a knowledge gap into an async questionnaire for someone else: identify the recipient and the needed answers, then write a discovery questionnaire to to-questionnaire-<slug>.md. Triggers: "turn this into a questionnaire", "questionnaire for X", "async answers from another person", async information gathering. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Turn a knowledge gap into an async questionnaire for someone else, written to to-questionnaire-<slug>.md. Not for direct conversation elicitation — use askme; not for agent-driven research — use research; not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # To questionnaire
@@ -18,17 +18,20 @@ description: 'Use when the user wants to turn a knowledge gap into an async ques
 
 Required: the topic or context of the knowledge gap. Optional: the recipient's role or name, constraints such as a deadline or format requirement.
 
+## Refusals
+
+- Will not write a questionnaire before the recipient is identified.
+- Will not write a questionnaire before the needed answers are identified.
+- Will not send, file an issue, or deliver the questionnaire — the user does that.
+- Will not include a question the repository itself can answer.
+
 ## Procedure
 
-1. Identify the recipient. Ask the user in one exchange: who the recipient is, their role and expertise, and what they know that the user does not. Stop when the recipient is named or scoped.
-
-2. Identify needed answers. Ask the user in one exchange: the specific decisions or facts they cannot resolve alone. Stop when a concrete list of user-needed outcomes exists.
-
-3. Derive the slug. Convert the topic into kebab-case for the filename. If no meaningful slug can be derived, use "questionnaire".
-
-4. Draft the questions. Target the gap between what the recipient knows (step 1) and what the user needs back (step 2). Order questions most-important-first because async means only one pass is guaranteed. Group under `##` headings by theme once there are more than a handful.
-
-5. Write the questionnaire. Use the template below. Output it to `to-questionnaire-<slug>.md` in the current working directory. Do not write any other file.
+1. Identify the recipient. Ask the user in one exchange: who the recipient is, their role and expertise, and what they know that the user does not. **Done when:** the recipient is named or scoped.
+2. Identify needed answers. Ask the user in one exchange: the specific decisions or facts they cannot resolve alone. **Done when:** a concrete list of user-needed outcomes exists.
+3. Derive the slug. Convert the topic into kebab-case for the filename. If no meaningful slug can be derived, use "questionnaire". **Done when:** the slug is derived.
+4. Draft the questions. Target the gap between what the recipient knows (step 1) and what the user needs back (step 2). Order questions by importance because only one async pass is guaranteed. Group them under `##` headings by theme once there are more than a handful. **Done when:** every needed answer from step 2 has a corresponding question.
+5. Write the questionnaire to `to-questionnaire-<slug>.md` in the current working directory using the template below. Do not write any other file. **Done when:** the file exists on disk.
 
 <questionnaire-template>
 
@@ -41,7 +44,7 @@ Required: the topic or context of the knowledge gap. Optional: the recipient's r
 
 ### Context
 
-One paragraph orienting a recipient who was not in the user's head. Enough to answer well, not a page.
+One paragraph of context for a recipient who has not seen the prior discussion. Include enough to answer well, but keep it brief.
 
 ### How to answer
 
@@ -65,16 +68,20 @@ A closing catch-all: anything we did not ask that we should know?
 
 </questionnaire-template>
 
-6. Confirm the file exists and that every item named in step 2 is covered by a question. Report the written path.
+6. Confirm the file exists and that every item named in step 2 is covered by a question. Report the written path. **Done when:** the file is verified and every needed answer has a question.
 
 ## Failure and recovery
-- **No recipient identified**: stop before writing. Ask the user to name or describe the recipient.
-- **No needed answers identified**: stop before writing. Ask the user to list what they need back.
-- **File already exists**: confirm whether to overwrite before writing.
-- **Slug undeterminable**: use "questionnaire" as the filename stub.
+
+| Failure class | Behavior |
+|---|---|
+| No recipient identified | Stop before writing. Ask the user to name or describe the recipient. |
+| No needed answers identified | Stop before writing. Ask the user to list what they need back. |
+| File already exists | Confirm whether to overwrite before writing. |
+| Slug undeterminable | Use "questionnaire" as the filename stub. |
 
 ## Output
-A standalone Markdown discovery questionnaire file written to `to-questionnaire-<slug>.md` in the current working directory. The user is responsible for delivering the file and acting on responses.
+
+A standalone Markdown discovery questionnaire file at `to-questionnaire-<slug>.md` in the current working directory, with per-theme grouped questions ordered by importance, a return route, and a closing catch-all — the user delivers the file and acts on responses.
 
 ## Provenance
 

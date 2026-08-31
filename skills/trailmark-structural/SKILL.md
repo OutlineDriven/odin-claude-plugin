@@ -1,6 +1,6 @@
 ---
 name: trailmark-structural
-description: 'Use when a target needs detailed single-snapshot hotspots, entrypoints, coarse taint, blast radius, privilege boundaries, proxies, subgraphs, and available type references. Returns languages, summary, attack surface, hotspots, proxies, all named subgraph counts, available edge/type details, and empty-pass results as a full JSON payload without fabrication. Don''t use for tasks that require source or remote-system changes.'
+description: 'Run detailed single-snapshot Trailmark analysis for hotspots, entrypoints, coarse taint, blast radius, boundaries, proxies, subgraphs, and type references. Not for a quick overview — use trailmark-summary; not for branch diffs — use trailmark-review-gate.'
 ---
 
 # Trailmark structural analysis
@@ -16,12 +16,19 @@ description: 'Use when a target needs detailed single-snapshot hotspots, entrypo
 
 ## Inputs
 
-- Target directory path. Required. Passed via the `args` parameter.
-- Trailmark installed in the environment. Required; the user must install it themselves.
+- **Required**: Target directory path, passed via the `args` parameter.
+- **Required**: Trailmark installed in the environment; the user must install it themselves.
+
+## Refusals
+
+- Will not install, upgrade, or clone Trailmark or any dependency.
+- Will not substitute manual analysis when Trailmark imports fail.
+- Will not fabricate missing payload sections or treat an empty pass as failure.
+- Will not assume a version-gated method exists without `hasattr()` proof.
 
 ## Procedure
 
-1. Check that trailmark is available. If neither command works, report "trailmark is not installed" and return. Do not run `pip install`, `uv pip install`, `git clone`, or any install command. Optionally record the version; do not fail if the version command is missing. Use API feature probes in step 3 instead.
+1. Check that trailmark is available. If both commands fail, report "trailmark is not installed" and return. Do not run `pip install`, `uv pip install`, `git clone`, or any install command. Optionally record the version; do not fail if the version command is missing. Use API feature probes in step 3 instead. **Done when:** Trailmark availability is confirmed or the installation gap is reported.
    ```bash
    trailmark analyze --help 2>/dev/null || \
      uv run trailmark analyze --help 2>/dev/null
@@ -30,7 +37,7 @@ description: 'Use when a target needs detailed single-snapshot hotspots, entrypo
    trailmark --version 2>/dev/null || uv run trailmark --version 2>/dev/null || true
    ```
 
-2. Detect languages with Trailmark's parse API. If the import fails, rerun the same snippet with `uv run --with trailmark python - "{args}"`. If the result is `[]`, report "Trailmark found no supported languages under target" and return.
+2. Detect languages with Trailmark's parse API. If the import fails, rerun the same snippet with `uv run --with trailmark python - "{args}"`. If the result is `[]`, report "Trailmark found no supported languages under target" and return. **Done when:** supported languages are detected or the language gap is reported.
    ```bash
    python3 - "{args}" <<'PY'
    import json
@@ -46,7 +53,7 @@ description: 'Use when a target needs detailed single-snapshot hotspots, entrypo
    PY
    ```
 
-3. Run the full structural analysis via `QueryEngine`. Run with `python3`; if the import fails, rerun under `uv run --with trailmark python - "{args}"`. The snippet builds a graph, runs `engine.preanalysis()` (all four pre-analysis passes), and assembles the payload with version-gated feature probes. Probe v0.4-only methods with `hasattr()` before querying them.
+3. Run the full structural analysis via `QueryEngine`. Run with `python3`; if the import fails, rerun under `uv run --with trailmark python - "{args}"`. The snippet builds a graph, runs `engine.preanalysis()` (all four pre-analysis passes), and assembles the payload with version-gated feature probes. Probe v0.4-only methods with `hasattr()` before querying them. **Done when:** the full JSON payload is assembled or the exact import failure is reported.
    ```bash
    python3 - "{args}" <<'PY'
    import json
@@ -105,7 +112,7 @@ description: 'Use when a target needs detailed single-snapshot hotspots, entrypo
    PY
    ```
 
-4. Verify the output. The payload must include `languages`, `summary`, `preanalysis`, `hotspots` (possibly empty), `proxy_nodes` (empty on v0.2.x or when there are no unresolved calls; on 0.5.0+ may include `proxy.external:*` entries declared in `.trailmark/links.toml`), and `subgraphs` with counts and sample IDs. On Trailmark 0.5.0+, `attack_surface` entries may carry an `attributes` object (e.g. `solidity_visibility`, `solidity_overridden_by`); pass it through unchanged. Some subgraphs may have zero nodes for some codebases; this is normal. Return the full JSON payload regardless.
+4. Verify the output. The payload must include `languages`, `summary`, `preanalysis`, `hotspots` (possibly empty), `proxy_nodes` (empty on v0.2.x or when there are no unresolved calls; on 0.5.0+ may include `proxy.external:*` entries declared in `.trailmark/links.toml`), and `subgraphs` with counts and sample IDs. On Trailmark 0.5.0+, `attack_surface` entries may carry an `attributes` object; pass it through unchanged. Some subgraphs may have zero nodes; this is normal. Return the full JSON payload regardless. **Done when:** every required field is present and empty sections remain explicit.
 
 ## Failure and recovery
 - **Trailmark not installed**: Report "trailmark is not installed" and return. Do not install, upgrade, or clone anything.
@@ -116,7 +123,8 @@ description: 'Use when a target needs detailed single-snapshot hotspots, entrypo
 - **Partial-result rule**: Return whatever the engine produced up to the failure point. Do not fabricate missing sections. Never swallow errors or pretend the done predicate holds.
 
 ## Output
-A JSON payload containing: `languages`, `summary`, `preanalysis` (all four pre-analysis passes), `attack_surface` (up to 25 entries), `hotspots` (up to 25), `proxy_nodes` (up to 25), `subgraphs` (per-name count, sample IDs, and edge count when available), and `type_reference_samples` (when the engine supports it). Empty sections are included explicitly rather than omitted.
+
+A JSON payload ordered as languages, summary, preanalysis, attack_surface, hotspots, proxy_nodes, subgraphs, then type_reference_samples when supported; empty sections remain explicit and no missing evidence is fabricated.
 
 ## Provenance
 

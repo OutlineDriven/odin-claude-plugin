@@ -24,16 +24,16 @@ disable-model-invocation: true
 
 ## Procedure
 
-1. Resolve the code diff from the supplied reference. If uncommitted changes, capture the working-tree diff. If a commit or branch diff, resolve the full diff against the merge base.
-2. Validate scope: if the diff is empty, stop and report nothing to review. If the diff exceeds the selected reviewer's context window, report the size and ask the user to narrow scope before proceeding.
-3. Collect optional focus area and project guidance from the user.
-4. Before sending anything external, present the user with a preview: which reviewer(s) will be invoked, what diff content will be sent, and that this is a paid external action with data leaving the local environment. Obtain explicit confirmation to proceed.
-5. Invoke the selected reviewer(s):
+1. Resolve the code diff from the supplied reference. If uncommitted changes, capture the working-tree diff. If a commit or branch diff, resolve the full diff against the merge base. Done when: the step’s stated result is achieved or its stop condition is reported.
+2. Validate scope: if the diff is empty, stop and report nothing to review. If the diff exceeds the selected reviewer's context window, report the size and ask the user to narrow scope before proceeding. Done when: the step’s stated result is achieved or its stop condition is reported.
+3. Collect optional focus area and project guidance from the user. Done when: the step’s stated result is achieved or its stop condition is reported.
+4. Before sending anything external, present the user with a preview: which reviewer(s) will be invoked, what diff content will be sent, and that this is a paid external action with data leaving the local environment. Obtain explicit confirmation to proceed. Done when: the step’s stated result is achieved or its stop condition is reported.
+5. Invoke the selected reviewer(s): Done when: the step’s stated result is achieved or its stop condition is reported.
    - **Codex**: Send the diff and focus guidance to the Codex API. Codex runs in a read-only sandboxed environment. Collect the structured findings response.
    - **Gemini**: Send the diff and focus guidance to the Gemini API. Warn the user that Gemini headless invocation may auto-approve extension tool calls. Collect the structured findings response.
-6. If a reviewer is unavailable or returns an error, report the failure for that reviewer explicitly. Do not substitute another reviewer without user approval.
-7. If multiple reviewers ran, synthesize findings: identify agreements (both reviewers flag the same issue) and disagreements (one flags, the other does not). Present the synthesis alongside per-reviewer detail.
-8. Compile the final report with per-reviewer findings (exact file paths, line numbers, confidence levels where supported), the multi-reviewer synthesis if applicable, and notes on any unavailable reviewers or scope limitations.
+6. If a reviewer is unavailable or returns an error, report the failure for that reviewer explicitly. Do not substitute another reviewer without user approval. Done when: the step’s stated result is achieved or its stop condition is reported.
+7. If multiple reviewers ran, synthesize findings: identify agreements (both reviewers flag the same issue) and disagreements (one flags, the other does not). Present the synthesis alongside per-reviewer detail. Done when: the step’s stated result is achieved or its stop condition is reported.
+8. Compile the final report with per-reviewer findings (exact file paths, line numbers, confidence levels where supported), the multi-reviewer synthesis if applicable, and notes on any unavailable reviewers or scope limitations. Done when: the step’s stated result is achieved or its stop condition is reported.
 
 ## Failure and recovery
 | Failure class | Behavior |

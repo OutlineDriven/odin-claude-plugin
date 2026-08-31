@@ -1,4 +1,4 @@
-# Divergent Ideation (Phase 2)
+# Divergent ideation (Phase 2)
 
 Read this file at the start of Phase 2 — after Phase 1 grounding completes and before building any ideation dispatch prompt. It defines the ideation fleet, the dispatch payload, the frames, the per-idea output contract, and the post-merge synthesis steps.
 
@@ -11,7 +11,7 @@ Dispatch parallel ideation sub-agents per ODIN's standard subagent dispatch. The
 
 Each frame targets ~6-8 ideas (a two-frame agent targets that per frame), yielding ~36-48 raw ideas; roughly 25-30 survive dedupe. Adjust per-frame targets when volume overrides apply (e.g., "100 ideas" raises it, "top 3" may lower the survivor count instead).
 
-## Dispatch Payload (cache-friendly, long-context ordered)
+## Dispatch payload (cache-friendly, long-context ordered)
 
 Build one shared grounding block and keep it byte-identical across every ideation dispatch this run — identical prefixes let platforms with prompt caching reuse the expensive part. Longform shared material goes first; the agent-specific task goes last:
 
@@ -44,7 +44,7 @@ Assign each subagent its frame (or frame pair) as a **starting bias, not a const
 
 **Axis spread instruction.** When an axis list is present, instruct each sub-agent to distribute its ideas across multiple axes — the frame's lens applies to every axis, but ideas should not all cluster on one. Each idea must be tagged with the axis it targets. The frame is a lens; the axis list is the surface map. A frame that plausibly reaches an axis should produce at least one idea there before doubling up on a different axis. When decomposition was skipped (atomic subject), omit the axis instruction entirely — do not invent axes at dispatch time.
 
-## Per-Idea Output Contract (uniform across all frames)
+## Per-idea output contract (uniform across all frames)
 
 Each subagent returns this structure per idea:
 
@@ -68,7 +68,7 @@ Basis is required, not optional. If a subagent cannot articulate a basis of at l
 - Stay within the subject's identity. Product expansions, new surfaces, new markets, retirements, and architectural pivots are fair game when the basis supports them. Subject-replacement moves (abandoning the project, pivoting to unrelated domains, becoming a different organization) are out regardless of basis.
 - **Honor the asked scope.** When the focus hint names a part of the subject (a flow, a stage, a section, a feature within a larger product — e.g., "account settings", "onboarding flow", "pricing page copy", "gameplay rules"), ideate at full ambition *within that scope*. Expanding the surface to the whole subject — proposing fundamental changes to the broader product when the user named one slice — is a scope mismatch even when no subject-replacement occurred. Big-picture thinking still applies; it just operates inside the bounded surface the user named, not by widening the surface.
 
-## After All Subagents Return
+## After all subagents return
 
 1. Merge and dedupe into one master candidate list.
 2. Synthesize cross-cutting combinations — scan for ideas from different frames that combine into something stronger. Expect 3-5 additions at most.

@@ -1,3 +1,3 @@
 interface:
   display_name: "Snyk Agent Scan Compliance"
-  short_description: "Restructures skills until snyk-agent-scan alerts clear clean"
+  short_description: "Use when snyk-agent-scan reports W001, W011, or W012 on a"

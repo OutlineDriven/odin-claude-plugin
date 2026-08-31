@@ -58,7 +58,7 @@ description: 'Use when a user needs coverage-guided fuzzing for Python code or a
 
 8. **Run the campaign.** `uv run python fuzz.py corpus/` with optional `-max_total_time=<seconds>`, `-max_len=<bytes>`, and `-workers=N -jobs=N` for parallel exploration. Read the output: `NEW cov: X` means new coverage and corpus growth; `ERROR: libFuzzer` means a crash was detected and a crash artifact was written.
 
-9. **Reproduce failures.** A crash artifact (named `crash-*` or `leak-*`) is written next to the harness. Replay it deterministically with `uv run python fuzz.py <artifact>` and confirm the same failure recurs. The done predicate requires that a saved artifact reproduces.
+9. **Reproduce failures.** A crash artifact (named `crash-*` or `leak-*`) is written next to the harness. Replay it deterministically with `uv run python fuzz.py <artifact>` and confirm the same failure recurs. Done when: each saved artifact reproduces the same failure or is classified as nondeterministic.
 
 ## Failure and recovery
 - **No coverage increase.** Cause: poor seed corpus or target not instrumented. Recovery: add representative seeds; confirm `instrument_imports()` wraps the target imports and `@atheris.instrument_func` wraps the entry point. Do not declare success on a stall.

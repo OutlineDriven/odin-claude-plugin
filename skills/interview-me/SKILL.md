@@ -1,6 +1,6 @@
 ---
 name: interview-me
-description: 'Use when a user says "requirements interview" or asks to define requirements or choose between options. A structured question dialogue exposes and validates every unstated assumption, producing a user-approved decision record before any file change begins. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a user asks to define requirements or choose between options. A structured interview surfaces every unstated assumption one question at a time and produces a user-approved decision record before any file change. Not for intent-from-data — use intent-proposal.'
 ---
 
 # Interview me
@@ -26,7 +26,7 @@ description: 'Use when a user says "requirements interview" or asks to define re
 
 2. **Surface the first assumption.** Ask one focused question that exposes the most fundamental unstated assumption in the user's stated goal. Wait for a response before asking the next question.
 
-3. **Record the answer.** After each user response, restate what was confirmed or corrected. Note it as a row in the running decision log.
+3. **Record the answer.** After each user response, restate what was confirmed or corrected. Add it as a row in the running decision log.
 
 4. **Repeat until the user indicates completeness.** After each confirmed or corrected assumption, ask: "What else is unstated or assumed in this goal?" Stop when the user says there is nothing left, explicitly declines to continue, or confirms the decision record is complete.
 

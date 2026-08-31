@@ -1,6 +1,6 @@
 ---
 name: scheduler
-description: 'Use when asked to set a personal reminder or run a lightweight local task at a specific date/time or interval. The user receives a confirmed named scheduled item with its action, human-readable trigger, and delivery method, and can list or manage it. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to set a personal reminder or run a lightweight local task at a specific date/time or interval. Installs a confirmed named scheduled item with action, trigger, and delivery method. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Scheduler

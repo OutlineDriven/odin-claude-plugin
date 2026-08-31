@@ -242,7 +242,7 @@ Use it when the real question is: "Has the open-source ecosystem already solved 
 
 | Capability | Included | Boundary |
 | --- | --- | --- |
-| GitHub CLI first | Uses `gh search repos`, `gh search issues`, `gh search prs`, `gh search code`, `gh repo view`, `gh pr view`, `gh issue view`, and `gh api` as the default inspection surface | No bundled Python search script is required; `gh` output still needs deep-reading and local verification |
+| GitHub CLI first | Uses `gh search repos`, `gh search issues`, `gh search prs`, `gh search code`, `gh repo view`, `gh pr view`, `gh issue view`, and `gh api` as the default inspection surface | No bundled Python search script is required; `gh` output still needs close review and local verification |
 | Problem evidence search | Searches issues, PRs, code, examples, release notes, and docs using exact errors, package/API names, versions, config keys, frameworks, and failing commands | GitHub is evidence, not proof by link count or popularity |
 | Repository candidate research | Compares public repositories by problem fit, Stars, license, activity, example quality, and adaptation cost | Stars are maturity signals; they do not override maintainer evidence, merged PRs, official examples, or reproducible code |
 | Conditional subagent research | Splits read-only research across subagents when a task spans multiple ecosystems, query families, or evidence surfaces | Subagents are not mandatory by default; the controller remains responsible for scope, deduplication, ranking, local adaptation, and final verification |

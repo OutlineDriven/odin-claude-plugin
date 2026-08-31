@@ -1,6 +1,6 @@
 ---
 name: run-smoke-tests
-description: 'Use when asked to run smoke tests, verify the local build and apply minimal fixes to unblock a stable smoke result with honest flake risk. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to run smoke tests, verify a local build, and apply minimal fixes that unblock a stable smoke result while reporting flake risk honestly. Not for iterative bug fixing — use fix.'
 ---
 
 # Run smoke tests
@@ -10,7 +10,7 @@ description: 'Use when asked to run smoke tests, verify the local build and appl
 | Field | Bound contract |
 |---|---|
 | Trigger | Explicit human request to run end-to-end smoke verification |
-| Authority | Reversible local: write only named local artifacts; state the rollback path before mutating |
+| Authority | Reversible local changes only: write only named local artifacts; state the rollback path before mutating |
 | Side effect | Builds, runs tests, and may apply minimal fixes to local files only |
 | Done | Check set passes: stable smoke result with honest flake risk classification |
 
@@ -31,9 +31,9 @@ description: 'Use when asked to run smoke tests, verify the local build and appl
    - Exit 0 with stderr warnings: `pass-with-warnings`.
    - Non-zero exit with known flaky candidates: `flake-suspect`.
    - Non-zero exit with no known flake candidates: `fail`.
-6. **Minimal fix attempt (authority-gated).** If the result is `fail` or `flake-suspect` and the failure is a single recognisable type (missing import, typo, broken symlink, incorrect env-var), apply the minimal correction directly. Do not refactor, add features, or widen scope. Re-run the smoke target once after the fix.
+6. **Minimal fix attempt (authority-gated).** If the result is `fail` or `flake-suspect` and the failure has one recognizable cause (missing import, typo, broken symlink, incorrect env-var), apply the minimal correction directly. Do not refactor, add features, or widen scope. Re-run the smoke target once after the fix.
 7. **Rollback rule.** If the second run still fails, revert all changes made in step 6 before reporting.
-8. **Report.** Emit the final classification, the number of runs, any diffs applied and reverted, and the rollback anchor.
+8. **Report.** Emit the final classification, run count, any diffs applied and reverted, and the rollback anchor.
 
 ## Failure and recovery
 | Class | Meaning | Recovery |
@@ -47,17 +47,11 @@ description: 'Use when asked to run smoke tests, verify the local build and appl
 Partial-result rule: always report the classification of the last unreverted run. Never claim `pass` if any run in the sequence exited non-zero and was not reverted.
 
 ## Output
-```
-SMOKE <classification>
-Runs: <N>
-Rollback: <HEAD commit at step 1>
-Applied diffs: <list or none>
-Reverted: <yes or no>
-```
+A `SMOKE <classification>` block: classification, run count, rollback anchor (HEAD at step 1), applied diffs, and a reverted flag.
 
 ## Provenance
 
 - Origin: `cursor/plugins` (Cursor Team Kit)
 - Source revision: `68836ddaf5697224520f1847d90cdb90ca8babaa`
-- License: MIT — declared by the cursor/plugins root README and the candidate plugin manifest, as recorded in the pinned source audit
-- Adaptation: Clean-room rewrite for ODIN 2.0 roster; procedure restructured to use explicit failure classes, rollback anchors, and authority-gated minimal fix steps
+- License: MIT, declared by the cursor/plugins root README and the candidate plugin manifest, as recorded in the pinned source audit
+- Adaptation: Clean-room rewrite for ODIN 2.0 roster. The procedure uses explicit failure classes, rollback anchors, and authority-gated minimal fix steps.

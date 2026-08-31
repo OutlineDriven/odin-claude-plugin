@@ -1,14 +1,8 @@
-# Implementer Subagent Prompt Template
+# Implementer subagent prompt template
 
-Fill this template when dispatching an implementer subagent. One task per
-dispatch — a fresh, tailored variant of subagent that is entirely self-contained.
-The subagent sees only what you put here; it does not inherit your session,
-the plan file, or prior workers' context. Provide everything the implementer
-needs to succeed: the task brief path, relevant context from earlier tasks,
-and any decisions or interfaces it must respect.
+Fill this template when dispatching an implementer. Use a fresh, self-contained subagent for each task. It sees only what you put here; it does not inherit your session, the plan file, or prior workers' context. Provide the task brief path, relevant context from earlier tasks, and every decision or interface the implementer must respect.
 
-**Purpose:** execute one task's implementation with precision, producing tested
-code that matches the brief exactly — nothing more, nothing less.
+**Purpose:** implement one task precisely, producing tested code that matches the brief exactly — nothing more, nothing less.
 
 ```
 Subagent:

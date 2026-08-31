@@ -11,7 +11,7 @@ description: 'Use when asked to change state in an external system, propose the 
 |---|---|
 | Trigger | Work must change state in an external system such as a tracker, chat workspace, or remote repository rather than local files. |
 | Authority | Reversible-local: write only named local artifacts. Rollback path is deletion of the persisted proposal file. |
-| Side effect | Discovers through a least-privilege read connector, emits one signed and minimized write proposal, persists it, and stops at the human gate; no direct external mutation. |
+| Side effect | Uses a least-privilege read connector for discovery, emits one signed and minimized write proposal, persists it, and stops at the human gate; no direct external mutation. |
 | Done | The proposal is persisted and the run halts awaiting a human decision; no external write occurred without that decision. |
 
 ## Inputs
@@ -25,12 +25,12 @@ description: 'Use when asked to change state in an external system, propose the 
 
 ## Procedure
 
-1. Validate the external system type and the proposed change. Reject if the target is a local file or an unspecified system.
-2. Establish a least-privilege read connector to the named external system. Perform discovery only. Stop if the connector cannot connect or returns no access.
-3. Validate that a signing identity is present and unambiguous. If missing or ambiguous, halt and request the identity; do not substitute or infer one. From discovery output, emit one JSON proposal containing: the system, the specific change, the signing identity, and the affected scope.
-4. Minimize the proposal to the smallest scoped change that satisfies the requested outcome. Reject overbroad changes.
-5. Persist the signed, minimized proposal as a local artifact.
-6. Stop. Do not execute any write against the external system. Halt at the human gate.
+1. Validate the external system type and the proposed change. Reject if the target is a local file or an unspecified system. Done when: the system type is validated and the target is not local or unspecified.
+2. Establish a least-privilege read connector to the named external system. Perform discovery only. Stop if the connector cannot connect or returns no access. Done when: a read connector is established and discovery is complete, or the run stops on connection failure.
+3. Validate that a signing identity is present and unambiguous. If missing or ambiguous, halt and request the identity; do not substitute or infer one. Using the discovery output, emit one JSON proposal containing: the system, the specific change, the signing identity, and the affected scope. Done when: the signing identity is validated and one JSON proposal is emitted, or the run halts requesting identity.
+4. Minimize the proposal to the smallest scoped change that satisfies the requested outcome. Reject overbroad changes. Done when: the proposal is minimized to the smallest scoped change.
+5. Persist the signed, minimized proposal as a local artifact. Done when: the proposal is persisted to local storage.
+6. Stop. Do not execute any write against the external system. Halt at the human gate. Done when: the run halts at the human gate with no external write executed.
 
 ## Failure and recovery
 | Failure class | Behavior |

@@ -1,6 +1,6 @@
 ---
 name: culture-manager-coaching
-description: 'Use when a manager needs profile-specific communication, one-on-one, motivation, and energy guidance for a direct report. Returns a coaching guide with trait-gap adjustments, tailored cadence, and energy-risk actions. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when a manager needs profile-specific communication, one-on-one, motivation, and energy guidance for a direct report. Returns trait-gap adjustments, tailored cadence, and energy-risk actions. Not for general profile compatibility — use culture-profile-comparison.'
 ---
 
 # Culture manager coaching
@@ -29,18 +29,22 @@ If a profile is missing the arrow position, stop and request it. Never substitut
 
 ## Procedure
 
-1. **Load both profiles.** Record each person's archetype and each trait's position relative to their own arrow. State positions as distance-from-arrow (e.g. "+3 centiles", "on arrow", "opposite side"), never as bare raw scores. L and I are the exception: use their absolute values.
+1. **Load both profiles.** Record each person's archetype and each trait's position relative to their own arrow. State positions as distance-from-arrow (e.g. "+3 centiles", "on arrow", "opposite side"), never as bare raw scores. L and I are the exception: use their absolute values. Done when: both profiles are recorded with archetype and per-trait distance-from-arrow.
 
 2. **Calculate trait gaps.** For A, B, C, D, compute the gap between manager and direct report and assign friction risk:
    - Same side of arrow, similar distance: Low friction.
    - Same side of arrow, different distance: Medium friction.
    - Opposite sides of arrow: High friction potential.
 
+   Done when: each A/B/C/D gap has a friction-risk assignment.
+
 3. **Identify primary friction points.** Flag the largest gaps (opposite sides of arrow or >3 centile difference). Map each to the conflict it produces:
    - High A vs Low A: manager expects initiative; report waits for direction. Low A vs High A: manager collaborates; report acts independently.
    - High B vs Low B: manager wants connection; report wants to work. Low B vs High B: manager skips rapport; report needs relationship first.
    - High C vs Low C: manager methodical; report impatient. Low C vs High C: manager creates urgency; report resists rush.
    - High D vs Low D: manager detail-focused; report big-picture. Low D vs High D: manager flexible; report needs structure.
+
+   Done when: each large gap maps to a named conflict pattern.
 
 4. **Generate communication adjustments** for the direct report's trait positions:
    - High A: bullet points focused on ROI, not paragraphs; give outcomes not step-by-step; ask questions to get buy-in; allow autonomy; be direct and confident.
@@ -52,11 +56,15 @@ If a profile is missing the arrow position, stop and request it. Never substitut
    - High D: frame feedback as process improvement not personal criticism; provide training/learning opportunities; do not break trust (long memories); build SOPs for new responsibilities; recognize attention to quality.
    - Low D: give creative problems to solve; provide options not mandates; build systems to catch their gaps; focus on the three things that matter most; accept 80% completion and assign finishers.
 
+   Done when: the direct report's trait positions each have a concrete communication adjustment.
+
 5. **Design the one-on-one.** Tailor frequency, duration, and format to the direct report:
    - Frequency: Low A → more frequent (weekly); High A → less frequent (bi-weekly or as needed); High C → consistent schedule, same time/day; Low C → flexible timing, short check-ins.
    - Duration: High B → allow buffer for rapport; Low B → keep focused and efficient; High C → single-topic, predictable length; Low C → can be shorter, faster-paced.
    - Format: High D → structured agenda, action items; Low D → flexible, allow tangents; High B → start with personal connection; Low B → start with business.
    - Produce a sample agenda: opening by B trait, agenda structure by C/D traits, feedback approach by A trait, closing/action items by D trait.
+
+   Done when: frequency, duration, format, and a sample agenda are tailored to the direct report.
 
 6. **Identify motivators** by the direct report's trait positions:
    - High A: autonomy, ROI, winning → give ownership, variable comp. Low A: clear direction, team success → specific praise, stable comp.
@@ -64,15 +72,17 @@ If a profile is missing the arrow position, stop and request it. Never substitut
    - High C: stability, predictability → consistent routines, advance notice. Low C: variety, deadlines → keep busy, clear deadlines.
    - High D: knowledge, trust → training, recognition for quality. Low D: freedom, options → creative problems, flexibility.
 
+   Done when: each trait position has a named motivator with implementation.
+
 7. **Flag energy concerns.** When both Survey and Job EU are available, compute utilization = Job EU / Survey EU × 100%:
    - 70-130%: Healthy — maintain current approach.
    - Below 70%: Frustration — address mismatch, discuss role engagement.
    - Above 130%: Stress — the direct report is overextending.
-   Survey traits are hardwired (top graph); Job behaviors are adaptive (bottom graph). A large Survey-vs-Job difference means behavior modification that drains energy and predicts burnout if sustained 3-6+ months.
+   Survey traits are hardwired (top graph); Job behaviors are adaptive (bottom graph). A large Survey-vs-Job difference means behavior modification that drains energy and predicts burnout if sustained 3-6+ months. Done when: EU utilization is computed and classified, or energy is marked unassessable.
 
-8. **Compile the coaching guide** with these sections: key trait gaps (trait, gap, adjustment needed); communication style adjustments; one-on-one recommendations (frequency, duration, format, opening, feedback); primary motivators with implementation; watch areas; energy status (EU utilization, status, action); things to avoid.
+8. **Compile the coaching guide** with these sections: key trait gaps (trait, gap, adjustment needed); communication style adjustments; one-on-one recommendations (frequency, duration, format, opening, feedback); primary motivators with implementation; watch areas; energy status (EU utilization, status, action); things to avoid. Done when: the guide contains all eight sections in order.
 
-9. **Apply the anti-patterns guard** before returning. Do not: expect the person to change (change the environment, not the person); project the coach's own motivators onto them; use one-size-fits-all one-on-ones; ignore EU signals (low utilization predicts disengagement and flight risk); treat gaps as problems rather than complementary strengths; forget that the coach's own profile biases how the person is perceived.
+9. **Check for anti-patterns** before returning. Change the environment rather than expecting the person to change. Do not project the coach's own motivators onto them, use one-size-fits-all one-on-ones, ignore EU signals (low utilization predicts disengagement and flight risk), treat gaps as problems rather than complementary strengths, or forget that the coach's own profile biases how the person is perceived. Done when: no anti-pattern remains — environment-not-person, no projected motivators, no one-size-fits-all, EU signals addressed, gaps framed as complementary.
 
 ## Failure and recovery
 - **Missing arrow position:** A profile lacks the red-arrow reference for A, B, C, D. Stop. Request the arrow position. Do not fall back to raw absolute values or visual estimation; both produce 20-30% error and invalidate the gap calculation.
@@ -82,7 +92,7 @@ If a profile is missing the arrow position, stop and request it. Never substitut
 - **Rollback:** This skill is read-only and mutates nothing. Recovery is re-running with corrected or completed inputs.
 
 ## Output
-A single coaching guide in chat text: a trait-gap map with friction risk, per-trait communication adjustments, a tailored one-on-one design (frequency, duration, format, sample agenda), motivators with implementation, energy status when EU is available, watch areas, and avoidances. The guide is complete when every major trait gap has a concrete manager adjustment, cadence and format are tailored to the direct report's profile, and energy risks are addressed or explicitly noted as unassessable.
+A coaching guide in chat text with sections in procedure order: trait-gap map, communication adjustments, one-on-one design, motivators, energy status, watch areas, avoidances.
 
 ## Provenance
 

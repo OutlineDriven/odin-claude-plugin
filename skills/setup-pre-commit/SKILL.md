@@ -1,6 +1,6 @@
 ---
 name: setup-pre-commit
-description: 'Use when asked to install or repair one repository-local pre-commit hook path using the project current gate commands. Existing hook tooling is extended instead of duplicated; new JavaScript projects use Lefthook and Biome, while Python, Rust, and OCaml use prek-compatible local hooks. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when installing or repairing one repository-local pre-commit hook using the project''s current gates. Extends existing hook tooling instead of duplicating it; JS uses Lefthook and Biome, Python/Rust/OCaml use prek. Not for remote or irreversible changes.'
 ---
 
 # Setup pre-commit
@@ -22,20 +22,20 @@ description: 'Use when asked to install or repair one repository-local pre-commi
 
 ## Procedure
 
-1. Read the repository manifests, lockfiles, declared gate scripts, hook config, and `.git/hooks/pre-commit`. Detect `pnpm-lock.yaml`, `bun.lock`, legacy `bun.lockb`, `uv.lock`, `go.mod`, `Cargo.toml`, and `dune-project`. Do not infer a gate command that the repository does not declare.
-2. If one hook manager already exists, extend it. If multiple managers can fire for the same commit, stop and report the conflict; do not add a third path.
-3. If none exists, select one manager: Lefthook for a pnpm, Bun, or Go repository; prek for Python, Rust, or OCaml. In a mixed repository, select the manager already represented by its lockfile or task runner. Ask only when two choices remain equally supported by repository evidence.
-4. Install through the current project toolchain: `pnpm add -D lefthook @biomejs/biome && pnpm exec lefthook install` for JavaScript or TypeScript; `go install github.com/evilmartians/lefthook@latest && lefthook install` for Go; `uv tool install prek && prek install` for Python, Rust, or OCaml. Do not install ESLint, Prettier, Black, isort, mypy, or a second package manager.
+1. Read the repository manifests, lockfiles, declared gate scripts, hook config, and `.git/hooks/pre-commit`. Detect `pnpm-lock.yaml`, `bun.lock`, legacy `bun.lockb`, `uv.lock`, `go.mod`, `Cargo.toml`, and `dune-project`. Do not infer a gate command that the repository does not declare. **Done when:** the repository's manifests, lockfiles, gate scripts, and existing hooks are inventoried.
+2. If one hook manager already exists, extend it. If multiple managers can fire for the same commit, stop and report the conflict; do not add a third path. **Done when:** the hook-manager state is classified as extend, conflict, or install-new.
+3. If none exists, select one manager: Lefthook for a pnpm, Bun, or Go repository; prek for Python, Rust, or OCaml. In a mixed repository, select the manager already represented by its lockfile or task runner. Ask only when two choices remain equally supported by repository evidence. **Done when:** the manager is selected or the user is asked.
+4. Install through the current project toolchain: `pnpm add -D lefthook @biomejs/biome && pnpm exec lefthook install` for JavaScript or TypeScript; `go install github.com/evilmartians/lefthook@latest && lefthook install` for Go; `uv tool install prek && prek install` for Python, Rust, or OCaml. Do not install ESLint, Prettier, Black, isort, mypy, or a second package manager. **Done when:** the manager is installed.
 5. Write only commands the repository can execute:
    - JavaScript or TypeScript Lefthook: `pnpm exec biome check --write --no-errors-on-unmatched .`, the declared type-check script, and the declared targeted-test script.
    - Python prek local hooks: `uv run ruff check --fix .`, `uv run ruff format --check .`, `uv run pyright`, and the declared targeted pytest command.
    - Go Lefthook: fail when `gofmt -l .` returns a path, then run `go vet ./...` and `go test ./...`.
    - Rust prek local hooks: `cargo fmt --check`, `cargo clippy --all-targets -- -D warnings`, and the repository test command, preferring `cargo nextest run` when configured.
    - OCaml prek local hooks: `dune fmt`, `dune build @runtest`, and any stricter repository alias already declared.
-   Set `pass_filenames: false` for whole-repository commands. Keep independent read-only checks parallel only when their tools do not edit the same files.
-6. Run the manager's all-files entry point: `pnpm exec lefthook run pre-commit` or `prek run --all-files`. If a formatter changes files, inspect the diff and repeat until the non-mutating gate passes.
-7. Prove enforcement without creating history. Add one temporary, reversible formatting violation inside an owned scratch file that the hook includes. Run the hook and require non-zero or an automatic repair followed by a dirty diff. Restore the scratch file, rerun the hook, and require zero. Never weaken a command to make the probe pass.
-8. Confirm exactly one executable `.git/hooks/pre-commit` entry remains and that it delegates to the selected manager. Report changed files and both probe outcomes. Do not commit unless the user separately asks.
+   Set `pass_filenames: false` for whole-repository commands. Keep independent read-only checks parallel only when their tools do not edit the same files. **Done when:** the config is written with repository-native commands only.
+6. Run the manager's all-files entry point: `pnpm exec lefthook run pre-commit` or `prek run --all-files`. If a formatter changes files, inspect the diff and repeat until the non-mutating gate passes. **Done when:** the all-files command passes with no uncommitted formatter changes.
+7. Prove enforcement without creating history. Add one temporary, reversible formatting violation inside an owned scratch file that the hook includes. Run the hook and require non-zero or an automatic repair followed by a dirty diff. Restore the scratch file, rerun the hook, and require zero. Never weaken a command to make the probe pass. **Done when:** the failing probe blocks and the passing probe exits zero.
+8. Confirm exactly one executable `.git/hooks/pre-commit` entry remains and that it delegates to the selected manager. Report changed files and both probe outcomes. Do not commit unless the user separately asks. **Done when:** one hook entry is confirmed and the report is emitted.
 
 ## Failure and recovery
 
@@ -47,7 +47,7 @@ description: 'Use when asked to install or repair one repository-local pre-commi
 
 ## Output
 
-Return the selected manager, config and manifest paths changed, installed hook path, all-files command and output, failing-probe evidence, passing-probe evidence, and rollback command. The repository has one pre-commit owner and no superseded formatter, linter, or type checker introduced by this skill.
+The selected manager, config and manifest paths changed, installed hook path, all-files command and output, failing-probe evidence, passing-probe evidence, and rollback command; the repository has one pre-commit owner and no superseded formatter, linter, or type checker introduced by this skill.
 
 ## Provenance
 

@@ -1,3 +1,3 @@
 interface:
   display_name: "Cost Reduction"
-  short_description: "Guardrail-safe measured cost reduction"
+  short_description: "Use when a measured cost surface needs one-change-at-a-time"

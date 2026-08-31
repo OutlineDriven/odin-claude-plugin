@@ -1,6 +1,6 @@
 ---
 name: to-spec
-description: 'Use when settled decisions need synthesis into an agent-ready implementation spec. Synthesize the current conversation into a local specification file and stop before publication. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Synthesize settled conversation decisions into an agent-ready implementation spec at docs/specs/<feature-slug>-spec.md, stopping before publication. Not for turning plans into tickets — use to-tickets; not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # To spec
@@ -17,18 +17,25 @@ description: 'Use when settled decisions need synthesis into an agent-ready impl
 ## Inputs
 
 - **Conversation context.** The current conversation must contain settled decisions: what is being built, why, and how completion will be judged. If the conversation lacks settled decisions, stop and state what is missing.
-- **Codebase state.** Explore the repository to understand the current state. Use the project's domain glossary vocabulary throughout the spec and respect any ADRs (Architecture Decision Records) in the area being touched.
+- **Codebase state.** Explore the repository to understand the current state. Use the project's domain glossary vocabulary throughout the spec and respect any ADRs in the area being touched.
 - **Optional: CONTEXT.md or domain docs.** If present, read them for vocabulary and constraints. Do not require them.
+
+## Refusals
+
+- Will not interview the user or open a new round of questioning — synthesize what has already been decided.
+- Will not fabricate decisions or fill gaps with assumptions.
+- Will not publish, distribute, or assign labels — publication is a human handoff.
+- Will not proceed to spec writing until the user confirms the identified seams.
 
 ## Procedure
 
-1. Explore the repository to understand the current state of the codebase if not already done. Identify the project's domain vocabulary and any ADRs in the relevant area.
-2. Identify the seams at which the feature will be tested. Prefer existing seams to new ones. Use the highest seam possible. If new seams are needed, propose them at the highest point possible. Fewer seams across the codebase is better; the ideal number is one.
-3. Present the identified seams to the user and confirm they match expectations. Do not proceed until the user confirms.
-4. Synthesize the spec from the conversation context, codebase understanding, and confirmed seams. Do NOT interview the user or open a new round of questioning. Capture what has already been decided.
-5. Write the spec to a local file using the template below. The file path follows the pattern `docs/specs/<feature-slug>-spec.md`.
-6. Verify the written file contains all seven sections populated with substantive content. If any section is empty or stubbed, fill it before declaring done.
-7. Stop. Do not publish, distribute, or assign labels. Report the file path and that publication is a human handoff.
+1. Explore the repository to understand the current state of the codebase if not already done. Identify the project's domain vocabulary and any ADRs in the relevant area. **Done when:** the codebase state and domain vocabulary are understood.
+2. Identify the seams at which the feature will be tested. Prefer existing seams to new ones, and use the highest existing seam possible. If a new seam is needed, propose it at the highest practical point. Fewer seams across the codebase are better; the ideal number is one. **Done when:** the testing seams are identified.
+3. Present the identified seams to the user and confirm they match expectations. Do not proceed until the user confirms. **Done when:** the user confirms the seams.
+4. Synthesize the spec from the conversation context, codebase understanding, and confirmed seams. Do not interview the user or open a new round of questioning. Capture what has already been decided. **Done when:** the spec content is synthesized from settled decisions.
+5. Write the spec to `docs/specs/<feature-slug>-spec.md` using the template below. **Done when:** the spec file is written to disk.
+6. Verify the written file contains all seven sections populated with substantive content. If any section is empty or stubbed, fill it before declaring done. **Done when:** all seven sections are substantive.
+7. Stop. Do not publish, distribute, or assign labels. Report the file path and that publication is a human handoff. **Done when:** the file path is reported and no publication action is taken.
 
 ### Spec template
 
@@ -82,14 +89,18 @@ Any additional notes about the feature.
 ```
 
 ## Failure and recovery
-- **Missing settled decisions.** If the conversation lacks concrete decisions about what is being built, stop. Report exactly which decisions are missing. Do not fabricate decisions or fill gaps with assumptions.
-- **No seams identifiable.** If the codebase structure does not reveal testable seams, propose seams at the highest reasonable points and present them as proposals, not facts.
-- **User rejects seams.** If the user rejects the proposed seams, ask what they would prefer and iterate. Do not proceed to spec writing until seams are confirmed.
-- **Write failure.** If the spec file cannot be written to disk, report the error. No partial artifact is acceptable; delete any incomplete file.
-- **Non-convergent synthesis.** If the conversation context is contradictory or underspecified, name the contradiction and stop rather than choosing a side silently.
+
+| Failure class | Behavior |
+|---|---|
+| Missing settled decisions | Stop. Report exactly which decisions are missing. Do not fabricate decisions or fill gaps with assumptions. |
+| No seams identifiable | Propose seams at the highest reasonable points and present them as proposals, not facts. |
+| User rejects seams | Ask what they would prefer and iterate. Do not proceed to spec writing until seams are confirmed. |
+| Write failure | Report the error. No partial artifact is acceptable; delete any incomplete file. |
+| Non-convergent synthesis | Name the contradiction and stop rather than choosing a side silently. |
 
 ## Output
-A local specification file at `docs/specs/<feature-slug>-spec.md` containing all seven sections (Problem Statement, Solution, User Stories, Implementation Decisions, Testing Decisions, Out of Scope, Further Notes) populated with substantive, agent-ready content. The file is ready for a fresh agent session to pick up implementation. Publication to an issue tracker or project management tool is a separate human step not performed by this skill.
+
+A local specification file at `docs/specs/<feature-slug>-spec.md` with all seven sections (Problem Statement, Solution, User Stories, Implementation Decisions, Testing Decisions, Out of Scope, Further Notes) populated and agent-ready — publication is a separate human step.
 
 ## Provenance
 

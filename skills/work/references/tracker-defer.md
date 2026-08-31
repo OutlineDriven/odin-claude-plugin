@@ -1,10 +1,10 @@
-# Tracker Detection and Defer Execution
+# Tracker detection and defer execution
 
-This reference covers how residual actionable findings are filed in the project's tracker. Loaded by caller workflows (for example `/work` Residual Work Gate) — not by `/review`, which stops after the report.
+This reference explains how to file residual actionable findings in the project's tracker. Caller workflows such as the `/work` Residual Work Gate load it; `/review` does not because it stops after the report.
 
 ---
 
-## Execution Modes
+## Execution modes
 
 Tracker-defer has two execution modes. The caller selects one; the detection, fallback chain, and ticket composition are shared.
 
@@ -31,7 +31,7 @@ The caller decides how to surface the result to the user. The non-interactive mo
 
 ## Detection
 
-The agent determines the project's tracker from whatever documentation is obvious. Primary source: the project's active instructions and conventions already in its context — no need to open or name specific instruction files. Read a file directly only when the relevant instructions aren't already in context: a subdirectory-scoped instruction file governing the area you're working in, or when you're a fresh subagent that wasn't given the project's instructions. Supplementary signals (when primary documentation is ambiguous): `CONTRIBUTING.md`, `README.md`, PR templates under `.github/`, visible tracker URLs in the repo.
+The agent determines the project's tracker from obvious project documentation. Start with the active project instructions and conventions already in context; do not open or name specific instruction files unnecessarily. Read a file directly only when the relevant instructions are not already in context, such as a subdirectory-scoped instruction file governing the work area or when a fresh subagent did not receive the project's instructions. When primary documentation is ambiguous, use supplementary signals: `CONTRIBUTING.md`, `README.md`, PR templates under `.github/`, and visible tracker URLs in the repo.
 
 A tracker can be surfaced via MCP tool (e.g., a Linear MCP server), CLI (e.g., `gh`), or direct API. All are acceptable. The detection output is a tuple with two availability flags — one for the named tracker specifically (drives label confidence in Interactive mode) and one for the full fallback chain (drives whether Defer is offered at all):
 

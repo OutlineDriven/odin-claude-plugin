@@ -1,6 +1,6 @@
 ---
 name: autolearn
-description: 'Use when a verified non-trivial fix lands or the user says compound this, document this fix, or remember this. Writes a durable in-repo learning doc or CONCEPTS.md entry from the solved problem, or determines that nothing qualifies. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a verified non-trivial fix lands or the user says compound this, document this fix, or remember this. Writes a durable learning doc or CONCEPTS.md entry, or determines nothing qualifies. Also handles refresh when solution docs may have drifted. Not for unverified fixes.'
 ---
 
 # Autolearn
@@ -36,6 +36,8 @@ Fire automatically on a trigger phrase ("that worked", "it's fixed", "working no
 
 One run can do all three repo-scoped actions: write a learning doc, reconcile a concept, and flag a memory-handoff candidate.
 
+Done when: the mode is routed and `mode:` tokens are stripped from arguments.
+
 ### 1. Reject-by-default gate
 
 A doc is earned, not assumed. Verify all three preconditions:
@@ -48,15 +50,17 @@ Then apply the reject-by-default gate (all three filters in order):
 
 1. **Would I forget this?** Skip baseline knowledge anyone in this codebase already carries.
 2. **Already covered?** If an existing docs/solutions/ doc covers it, updating that doc beats spawning a second one. A duplicate is drift, not knowledge.
-3. **Universal or local?** Scope-qualify. A repo-specific quirk says so; a general truth says so. An unqualified claim is a future trap.
+3. **Universal or local?** Scope-qualify the claim. Say when a quirk is repo-specific and when a truth is general. An unqualified claim is a future trap.
 
 The gate governs CONCEPTS.md entries too: a term earns a slot only when its precise local meaning would otherwise be forgotten, it is not already defined there, and it is scope-qualified to this project rather than general programming or domain English.
 
 If nothing clears the gate, say so in one line and exit. A clean "nothing worth compounding here" is a valid, correct result.
 
+Done when: all three preconditions and all three gate filters are evaluated, with a pass or a one-line "nothing qualifies" exit.
+
 ### 2. Compound — research (parallel, read-only)
 
-Scan any injected auto-memory block for entries related to the problem. If absent or empty, skip. If relevant entries exist, carry them as a labeled supplementary context block. Memory is supplementary; codebase and conversation win every tie. Tag any memory-derived line that lands in the final doc with `(auto memory [claude])`.
+Scan any injected auto-memory block for entries related to the problem. If it is absent or empty, skip it. If relevant entries exist, carry them as a labeled supplementary context block. Memory is supplementary; when it conflicts with the codebase or conversation, prefer the codebase or conversation. Tag any memory-derived line that lands in the final doc with `(auto memory [claude])`.
 
 Dispatch three subagents in parallel. Each returns text and writes nothing.
 
@@ -66,28 +70,32 @@ Dispatch three subagents in parallel. Each returns text and writes nothing.
 
 Wait for all three before assembling.
 
+Done when: all three subagents return and their results are assembled for the write step.
+
 ### 3. Compound — assemble and write
 
-1. **Overlap gate**: High (4–5) → update the existing doc, keep its path and frontmatter, add `last_updated: YYYY-MM-DD`. Moderate (2–3) → create normally; note as a refresh/consolidation candidate. Low or none → create normally.
-2. Read `assets/solution-template.md`; assemble the doc with the track's section structure.
-3. Frontmatter per the Solution schema section; apply the YAML-safety quoting rule to array items.
-4. `mkdir -p docs/solutions/<category>/`, write `docs/solutions/<category>/<slug>.md`.
-5. Validate: `python3 scripts/validate-frontmatter.py <path>`. Exit 0 = parser-safe; exit 1 names the offending field. Quote, re-write, re-run until 0.
-6. Read the file back to confirm it landed as intended.
-7. **Concept reconciliation** (optional, when warranted): if the run surfaced a durable project term that clears the gate, reconcile CONCEPTS.md per step 5.
+1. **Overlap gate**: High (4–5) → update the existing doc, keep its path and frontmatter, add `last_updated: YYYY-MM-DD`. Moderate (2–3) → create normally; note as a refresh/consolidation candidate. Low or none → create normally. Done when: the overlap gate decision is made.
+2. Read `assets/solution-template.md`; assemble the doc with the track's section structure. Done when: the doc is assembled with the correct track structure.
+3. Frontmatter per the Solution schema section; apply the YAML-safety quoting rule to array items. Done when: frontmatter follows the Solution schema with YAML-safe quoting.
+4. `mkdir -p docs/solutions/<category>/`, write `docs/solutions/<category>/<slug>.md`. Done when: the doc file is written to the correct category directory.
+5. Validate: `python3 scripts/validate-frontmatter.py <path>`. Exit 0 = parser-safe; exit 1 names the offending field. Quote, re-write, re-run until 0. Done when: the validator exits 0.
+6. Read the file back to confirm it landed as intended. Done when: the file is read back and confirmed correct.
+7. **Concept reconciliation** (optional, when warranted): if the run surfaced a durable project term that clears the gate, reconcile CONCEPTS.md per step 5. Done when: concept reconciliation is performed or skipped.
 
 ### 4. Refresh check (selective, not automatic)
 
 Suggest refresh with a narrow scope only when the new fix contradicts or supersedes an older doc, the work was a refactor/migration/rename/dependency-bump that likely invalidated references, or the Related-Docs Finder surfaced strong refresh candidates or moderate overlap. Otherwise do not. Capture the new learning first; refresh is targeted maintenance after.
 
+Done when: a refresh recommendation is made or explicitly skipped.
+
 ### 5. Vocabulary capture — CONCEPTS.md
 
-CONCEPTS.md at the operating repo root is the shared-vocabulary glossary: words that mean something precise in this codebase, one definition per concept. It is a shared surface that may also be written by other knowledge-capture processes; follow the one-definition-per-concept discipline regardless.
+CONCEPTS.md at the operating repo root is the shared-vocabulary glossary. It holds words with a precise meaning in this codebase, with one definition per concept. Other knowledge-capture processes may also write to this shared surface; always follow the one-definition-per-concept discipline.
 
-1. Locate the file: `fd -g 'CONCEPTS.md' --max-depth 2`. Absent and a term clears the gate → create it. Absent and nothing clears → write nothing; never scaffold an empty file.
-2. Search for the term and its synonyms: `git grep -ni '<term>' CONCEPTS.md`. A hit means the concept exists — refresh on drift, never add a second entry.
-3. New term → add one entry: a one-sentence definition of what it means here and what distinguishes it from neighbors; a second paragraph only for non-obvious behavioral rules. Retire synonyms as an `*Avoid:*` aliases line. No file paths, dates, owners, or version-specific claims. The file stands on its own.
-4. Read the file back to confirm the merge landed and created no duplicate heading.
+1. Locate the file: `fd -g 'CONCEPTS.md' --max-depth 2`. Absent and a term clears the gate → create it. Absent and nothing clears → write nothing; never scaffold an empty file. Done when: the file is located or its absence is handled.
+2. Search for the term and its synonyms: `git grep -ni '<term>' CONCEPTS.md`. A hit means the concept exists — refresh on drift, never add a second entry. Done when: the term is searched and existing entries are identified.
+3. New term → add one entry: a one-sentence definition of what it means here and what distinguishes it from neighbors; a second paragraph only for non-obvious behavioral rules. Retire synonyms as an `*Avoid:*` aliases line. No file paths, dates, owners, or version-specific claims. The file stands on its own. Done when: the new entry is written with its definition and alias line.
+4. Read the file back to confirm the merge landed and created no duplicate heading. Done when: the file is read back with no duplicate headings.
 
 ### 6. Refresh — maintain existing docs
 
@@ -130,9 +138,13 @@ Then per file: path, classification, evidence, action taken or recommended.
 
 After refreshing, check whether the repo's documentation would lead an agent to discover and search `docs/solutions/`. If not, surface a discoverability recommendation in the report. Do not edit instruction files.
 
+Done when: every in-scope doc is classified and acted on, and the refresh report is emitted.
+
 ### 7. Commit
 
 One learning per commit. Stage only the surfaces this skill wrote or edited (a solution doc, CONCEPTS.md, or both). Never stage other dirty files. Commit and publish by the operating repo's normal flow. Skip the commit if nothing was modified.
+
+Done when: the commit is made with only this skill's surfaces staged, or skipped when nothing was modified.
 
 ## Failure and recovery
 - **Nothing qualifies**: if no fix clears the reject-by-default gate, state "nothing worth compounding here" in one line and exit. This is a valid result, not a failure.
@@ -144,11 +156,7 @@ One learning per commit. Stage only the surfaces this skill wrote or edited (a s
 - **Rollback**: all writes are to local files under version control. Revert the commit or restore the file from git history.
 
 ## Output
-- One validated learning doc at `docs/solutions/<category>/<slug>.md`, or an updated existing doc.
-- Optionally, one CONCEPTS.md entry (new or refreshed).
-- Optionally, a memory-handoff candidate surfaced for the memory system.
-- In refresh mode, a report classifying every scanned doc into Keep/Update/Consolidate/Replace/Delete/stale, with applied and recommended actions.
-- A one-line "nothing qualifies" determination when the gate rejects all candidates.
+One validated learning doc at `docs/solutions/<category>/<slug>.md` (or updated existing doc), optionally a CONCEPTS.md entry and a memory-handoff candidate, or a one-line "nothing qualifies" determination — in refresh mode, a report classifying every scanned doc into Keep/Update/Consolidate/Replace/Delete/stale with applied and recommended actions.
 
 ## Provenance
 

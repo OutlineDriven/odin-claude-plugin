@@ -14,7 +14,7 @@ These hold regardless of which skill produced the artifact.
 - **All metadata appears as visible text — single source of truth.** The artifact's metadata (title, type, date, etc. — exact fields per-skill, defined in the section contract) renders as visible HTML elements. No hidden machine-readable copy: no `<script type="application/json">` frontmatter block, no `data-*` attribute mirror, and no `<meta name="created">` / `<meta name="origin">` in `<head>` duplicating visible values.
 
   The text-and-attribute redundancy in `<time datetime="2026-05-12">2026-05-12</time>` is acceptable because the attribute is a parser hint, not a hidden copy.
-- **Stable IDs as anchor IDs AND visible text.** every ID-bearing item (R-IDs, U-IDs, A-IDs, F-IDs, AE-IDs, KTDs) gets `id="r1"` on its element AND appears as visible text inside the element.
+- **Stable IDs as anchor IDs AND visible text.** Every ID-bearing item (R-IDs, U-IDs, A-IDs, F-IDs, AE-IDs, KTDs) gets `id="r1"` on its element AND appears as visible text inside the element.
 - **Source / composition signal.** A visible footer at the bottom names the composition timestamp and the source identifier (the user prompt context, the upstream brainstorm doc when one exists, or just the composing skill name when there is no external source). Example: `<footer class="composition-signal">Composed 2026-05-17T14:23Z by /brainstorm from <code>docs/plans/...-requirements.md</code></footer>`.
 - **ASCII identifiers.** Class names, element IDs, data attribute names are ASCII-only.
 - **ODIN plan navigation.** ODIN plan artifacts include a visible navigation region near the top linking to stable section anchors for `goal-capsule`, `odin-spec-outline`, `planning-outline`, `implementation-units`, `verification-contract`, `definition-of-done`, and `appendix` when those sections exist. Requirements-only artifacts omit links to absent implementation sections.
@@ -118,7 +118,7 @@ Long HTML plans are consumed as source text as often as they are read in a brows
 
 ### Text contrast is local
 
-every text-on-background pairing must hold up on its own. A color that works for prose on the page background does not automatically work for a small label inside a tinted container. Test by reading each filled shape's labels at the rendered scale.
+Every text-on-background pairing must hold up on its own. A color that works for prose on the page background does not automatically work for a small label inside a tinted container. Test by reading each filled shape's labels at the rendered scale.
 
 ### Body bold not colored by default
 
@@ -176,7 +176,7 @@ When a wireframe is included:
 - **Fidelity ceiling: wireframe, not mockup.** Gray boxes for layout regions, text labels for content placeholders, intentional placeholder copy (`[Product name]`, `[CTA label]`, `[user avatar]`). No pixel-perfect colors, typography, component-library references.
 - **Static only.** Inline SVG or simple HTML/CSS for layout. No JS interaction, working form fields, state changes, live data.
 - **Anti-padding.** One wireframe per distinct visual concept.
-- **Mandatory directional caption.** every wireframe carries a "directional, not the spec" note: *"Directional only — illustrates the intended user-facing shape. Exact colors, spacing, copy, and component choices are placeholders for review, not requirements."*
+- **Mandatory directional caption.** Every wireframe carries a "directional, not the spec" note: *"Directional only — illustrates the intended user-facing shape. Exact colors, spacing, copy, and component choices are placeholders for review, not requirements."*
 
 ## Affordance idioms
 

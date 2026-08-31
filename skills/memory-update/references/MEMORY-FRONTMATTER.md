@@ -1,4 +1,4 @@
-# Memory File Frontmatter Schema
+# Memory file frontmatter schema
 
 Every memory file must start with YAML frontmatter between `---` delimiters.
 

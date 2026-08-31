@@ -1,4 +1,4 @@
-# Dynamic Workflows (Claude Code)
+# Dynamic workflows (Claude Code)
 
 Claude Code compiles workflow logic into a background JavaScript orchestration
 script and runs it with context-isolated subagents (v2.1.246+).
@@ -8,8 +8,8 @@ script and runs it with context-isolated subagents (v2.1.246+).
 ## Script shape
 
 Export `meta`; the body is top-level orchestration code. The runtime wraps the
-body, so a top-level `return <object>` ends the run and passes the result
-back; precondition failures `throw new Error(...)`.
+body, so a top-level `return <object>` ends the run and returns the result;
+precondition failures `throw new Error(...)`.
 
 ```js
 export const meta = {

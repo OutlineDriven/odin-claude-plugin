@@ -1,3 +1,3 @@
 interface:
   display_name: "Smart Contract Code Maturity Assessor"
-  short_description: "Scores smart-contract maturity across nine engineering areas"
+  short_description: "Use when a smart-contract codebase needs an evidence-based"

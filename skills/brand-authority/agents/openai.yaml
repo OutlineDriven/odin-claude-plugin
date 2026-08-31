@@ -1,3 +1,3 @@
 interface:
   display_name: "Brand Authority"
-  short_description: "Style-governed deliverables from a fetched brand authority."
+  short_description: "Use when the user asks for branded or style-governed output."

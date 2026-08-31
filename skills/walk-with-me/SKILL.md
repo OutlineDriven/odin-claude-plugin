@@ -1,6 +1,6 @@
 ---
 name: walk-with-me
-description: 'Use when the user wants to be walked through code rather than handed a report: "walk through this", "guided code walk", or "explain this codebase". The agent renders a visual shape and hands the user the next step each turn. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when the user wants to be walked through code rather than handed a report: "walk through this", "guided code walk", or "explain this codebase". Renders a visual shape and hands the user the next step each turn. Don''t use for tasks that require source or remote-system changes.'
 ---
 
 # Walk with me
@@ -21,12 +21,12 @@ description: 'Use when the user wants to be walked through code rather than hand
 
 ## Procedure
 
-1. If the target is a diff, a PR number, or a branch against its base, walk the change directly here: render the diff hunks or the commit range against its base as the first visual, then apply the same one-visual, one-selection descent over the changed lines, their base, and the surrounding code they touch. If the target is unfamiliar code with no diff, proceed with the codebase route. State the selected route in one line.
-2. Render one visual of the whole codebase before any detail: a shallow file tree naming what each directory owns, or a module diagram. Then present one single-select of which part to descend into, offering three or four real named targets from the code, with `(Recommended)` on the one the entry point reaches first.
-3. Each subsequent turn: render one visual, write one or two lines of prose, and present one single-select of where to go next. Options are always real named targets read from the code, never "continue" or "go deeper". Print the visual in the message body beside the prose, not in the question preview.
-4. In review-help mode: the same walk applies, but each turn ends on what the user makes of what is on screen, and the options are competing readings of the code rather than verdicts on it. Record what the user concludes. The walk never adds a finding of its own.
-5. After six turns, present one single-select offering to close (recommended) or continue. Any stop phrase closes the walk on any turn.
-6. On close: report a one-line tally of what was covered and what the user concluded, then present one single-select: stop (recommended), write it down, or act on it.
+1. If the target is a diff, a PR number, or a branch against its base, walk the change directly here: render the diff hunks or the commit range against its base as the first visual, then apply the same one-visual, one-selection descent over the changed lines, their base, and the surrounding code they touch. If the target is unfamiliar code with no diff, proceed with the codebase route. State the selected route in one line. Done when: route is selected and stated.
+2. Render one visual of the whole codebase before any detail: a shallow file tree naming what each directory owns, or a module diagram. Then present one single-select of which part to descend into, offering three or four real named targets from the code, with `(Recommended)` on the one the entry point reaches first. Done when: visual is rendered and single-select with real named targets is presented.
+3. Each subsequent turn: render one visual, write one or two lines of prose, and present one single-select of where to go next. Options are always real named targets read from the code, never "continue" or "go deeper". Print the visual in the message body beside the prose, not in the question preview. Done when: one visual with one single-select of real named targets is presented.
+4. In review-help mode: the same walk applies, but each turn ends on what the user makes of what is on screen, and the options are competing readings of the code rather than verdicts on it. Record what the user concludes. The walk never adds a finding of its own. Done when: the turn ends on the user's reading with competing-reading options.
+5. After six turns, present one single-select offering to close (recommended) or continue. Any stop phrase closes the walk on any turn. Done when: close-or-continue single-select is presented or a stop phrase is received.
+6. On close: report a one-line tally of what was covered and what the user concluded, then present one single-select: stop (recommended), write it down, or act on it. Done when: tally is reported and the user's decision is recorded.
 
 ## Failure and recovery
 - No code found: report the blocker and stop the walk. Do not fabricate a codebase or invent structure.
@@ -35,9 +35,7 @@ description: 'Use when the user wants to be walked through code rather than hand
 - The walk never issues the conclusion the walk exists to let the user reach. If the agent states a finding instead of asking, the walk has failed its contract.
 
 ## Output
-- Per-turn: one visual (file tree, module diagram, or code excerpt) with one single-select of real named targets.
-- On close: a covered-tally line and the user's recorded decision (stop, write down, or act).
-- Nothing lands on disk; every view is chat output.
+Per-turn: one visual (file tree, module diagram, or code excerpt) with one single-select of real named targets. On close: a covered-tally line and the user's recorded decision (stop, write down, or act). Nothing lands on disk.
 
 ## Provenance
 

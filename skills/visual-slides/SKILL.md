@@ -1,6 +1,6 @@
 ---
 name: visual-slides
-description: 'Use when the user explicitly requests a slide deck, generate a self-contained HTML presentation in the diagrams directory, optionally exporting a static .pptx on --pptx; state fidelity limits when PPTX is requested. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user explicitly requests a slide deck by command, flag, or natural language. Generates a self-contained HTML deck in the diagrams directory; also handles .pptx export when the request contains --pptx, with stated fidelity limits. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Visual slides
@@ -26,38 +26,24 @@ Optional:
 
 ## Procedure
 
-1. Confirm the slide count by enumerating the source items before writing any file. Stop if no source items are supplied.
-2. Resolve the diagrams directory. Use the session diagrams directory if known; otherwise derive it from context or create `diagrams/` under the project root. Create the directory if absent.
-3. Derive the output filename from the topic or title of the first slide. Lowercase, spaces to hyphens, `.html` suffix.
-4. Generate the HTML deck:
-   - One slide section per source item.
-   - Embed all CSS inline in a `<style>` block.
-   - Embed all JavaScript inline in a `<script>` block: no external CDN scripts, no `<script src>`, no `eval`, no `data:` URLs.
-   - No external fonts; use system font stack.
-   - Apply a short-landscape viewport budget: each slide fits within a 16:9 landscape viewport without horizontal scroll under `prefers-reduced-motion`.
-   - Navigation: keyboard arrows and a visible progress indicator.
-5. Write the HTML file to the diagrams directory under the derived filename.
-6. If `--pptx` was in the request, attempt PPTX export:
-   - Run the export script against the HTML deck.
-   - If the export dependency is absent, fail softly: state the PPTX fidelity limits to the user instead of blocking.
-   - Write the `.pptx` next to the HTML file.
-7. Report the HTML path and, if produced, the PPTX path.
+1. Confirm the slide count by enumerating the source items before writing any file. Done when: slide count is confirmed, or the step has stopped with `no-source-items`.
+2. Resolve the diagrams directory. Use the session diagrams directory if known; otherwise derive it from context or create `diagrams/` under the project root. Create the directory if absent. Done when: diagrams directory exists and is writable, or the step has stopped with `directory-error`.
+3. Derive the output filename from the topic or title of the first slide. Lowercase, spaces to hyphens, `.html` suffix. Done when: filename is derived.
+4. Generate the HTML deck: one slide section per source item; embed all CSS inline in a `<style>` block; embed all JavaScript inline in a `<script>` block (no external CDN scripts, no `<script src>`, no `eval`, no `data:` URLs); no external fonts, use system font stack; apply a short-landscape viewport budget (each slide fits within 16:9 landscape without horizontal scroll under `prefers-reduced-motion`); keyboard arrows and a visible progress indicator for navigation. Done when: HTML deck contains one slide per source item and passes the viewport budget check.
+5. Write the HTML file to the diagrams directory under the derived filename. Done when: file exists in the diagrams directory, or the step has stopped with `write-failure`.
+6. If the request contains literal `--pptx`, attempt PPTX export: run the export script against the HTML deck; if the export dependency is absent, fail softly (state the PPTX fidelity limits instead of blocking); write the `.pptx` next to the HTML file. Done when: `.pptx` is written or fidelity limits are stated, or the step has stopped with `pptx-export-failure`.
+7. Report the HTML path and, if produced, the PPTX path. Done when: paths are in the response.
 
 ## Failure and recovery
-**Named failure classes:**
 - `no-source-items`: source items empty or unreadable → stop, return error.
 - `directory-error`: diagrams directory cannot be created → stop, do not write.
 - `write-failure`: file write returns non-zero → stop, do not report success.
 - `pptx-export-failure`: export script missing or fails → fail softly; report fidelity limits; HTML deck remains the source of truth.
 
-**Partial-result rule:** If the HTML file is not written and validated, discard all output. Do not report done.
-
-**Rollback:** Deleting the written HTML file (and `.pptx` if present) restores the pre-invocation state. The tool does not delete pre-existing files.
-
-**Blocked result:** The done predicate does not hold until every source item is mapped to a slide, the viewport budget check passes, and the HTML file exists in the diagrams directory.
+Partial-result rule: if the HTML file is not written and validated, discard all output. Rollback: delete the written HTML file (and `.pptx` if present); the tool does not delete pre-existing files.
 
 ## Output
-A complete self-contained HTML slide deck in the diagrams directory. Optionally a `.pptx` beside it. Both paths reported to the user.
+A self-contained HTML slide deck in the diagrams directory, optionally a `.pptx` beside it, with both paths reported.
 
 ## Provenance
 

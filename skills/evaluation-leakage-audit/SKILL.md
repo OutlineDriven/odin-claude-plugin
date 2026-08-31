@@ -1,6 +1,6 @@
 ---
 name: evaluation-leakage-audit
-description: 'Use when building or reviewing an evaluation, benchmark, or scoring harness, or when asked whether it leaks or is contaminated. Return a read-only audit naming every detected leakage pattern, where independent ground truth enters or fails to enter, and an independence fix for each finding. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when reviewing an evaluation, benchmark, or scoring harness for leakage or contamination. Returns a read-only audit naming detected leakage patterns, where independent ground truth enters or fails to enter, and a fix for each finding.'
 ---
 
 # Evaluation leakage audit
@@ -20,8 +20,8 @@ Supply the evaluation or benchmark design and the available artifacts that estab
 
 ## Procedure
 
-1. Bound the audit to the supplied evaluation and evidence. Name the model or subject, scorer, designer, dataset, labels, controls, train split, holdout split, and the origin of any claimed ground truth. Mark unavailable components as unknown rather than inferring them.
-2. Trace each result backward through scoring and labels to determine whether ground truth enters from a source independent of the system, subject, designer, and outputs being judged. Record both the verified independent entry points and the places where no independent ground truth enters.
+1. Bound the audit to the supplied evaluation and evidence. Name the model or subject, scorer, designer, dataset, labels, controls, train split, holdout split, and the origin of any claimed ground truth. Mark unavailable components as unknown rather than inferring them. Done when: every role is named or marked unknown.
+2. Trace each result backward through scoring and labels to determine whether ground truth enters from a source independent of the system, subject, designer, and outputs being judged. Record both the verified independent entry points and the places where no independent ground truth enters. Done when: every result is traced to its ground truth source with entry points and gaps recorded.
 3. Test every pattern that the supplied design and evidence make applicable:
    1. **Recall, not reason:** determine whether success can come from reproducing memorized benchmark answers rather than deriving an answer. A firing finding must propose fresh or access-controlled items whose answers are independently produced after model training.
    2. **Wrong null hypothesis:** determine whether a control removes the label while retaining a proxy or signal that predicts it. A firing finding must propose a control that removes or balances the retained signal while preserving unrelated task structure.
@@ -31,8 +31,9 @@ Supply the evaluation or benchmark design and the available artifacts that estab
    6. **Shared-pool bias:** determine whether training and holdout labels come from the same labeler pool, allowing shared systematic bias to appear as generalization. A firing finding must propose an independently recruited or independently adjudicated holdout label source.
    7. **Frame injection:** determine whether the prompt or question supplies the hypothesis, expected relation, or answer frame being measured. A firing finding must propose neutral wording and blinded alternatives that do not reveal the target hypothesis.
    8. **Demand characteristics:** determine whether subjects know the behavior or outcome being measured and can adapt to it. A firing finding must propose blinding, masking, or an unobtrusive measure that withholds the tested expectation without compromising consent.
-4. Report a pattern only when evidence shows that it fires. For each finding, identify the component and evidence, explain how independence is broken, and state the concrete independence fix. Do not rewrite the experiment or widen the audit beyond the supplied scope.
-5. If no pattern fires after all applicable tests, return a pass that says no leak was found and separately lists unknowns that prevented any pattern from being tested; do not convert missing evidence into either a finding or proof of independence.
+   Done when: every applicable pattern is tested with a firing/non-firing determination.
+4. Report a pattern only when evidence shows that it fires. For each finding, identify the component and evidence, explain how independence is broken, and state the concrete independence fix. Do not rewrite the experiment or widen the audit beyond the supplied scope. Done when: every firing pattern is reported with component, evidence, broken-independence explanation, and fix.
+5. If no pattern fires after all applicable tests, return a pass that says no leak was found and separately lists unknowns that prevented any pattern from being tested; do not convert missing evidence into either a finding or proof of independence. Done when: a terminal classification of leak found, no leak found, or blocked is returned.
 
 ## Failure and recovery
 - **Missing design evidence:** if roles, data lineage, scoring lineage, or label provenance needed for a test are absent, mark that test `blocked` and name the exact missing evidence. Return supported findings as partial results, but do not claim the audit passed.
@@ -41,7 +42,7 @@ Supply the evaluation or benchmark design and the available artifacts that estab
 - **Non-converged classification:** if the available evidence supports incompatible leakage classifications that cannot be resolved, return `non-converged` for the affected pattern with both evidence chains. Never suppress the conflict or claim the done predicate.
 
 ## Output
-Return a chat report containing: the audited scope and component map; verified independent ground-truth entry points; detected patterns with evidence, broken-independence explanation, and fix; blocked or non-converged tests with required evidence; and a terminal classification of `leak found`, `no leak found`, or `blocked`. Use `no leak found` only when every applicable pattern was testable and none fired.
+A chat report with the audited scope and component map, verified independent ground-truth entry points, detected patterns with evidence and fix, blocked or non-converged tests with required evidence, and a terminal classification of `leak found`, `no leak found`, or `blocked`.
 
 ## Provenance
 

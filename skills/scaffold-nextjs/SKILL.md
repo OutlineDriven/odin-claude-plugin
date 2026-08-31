@@ -1,6 +1,6 @@
 ---
 name: scaffold-nextjs
-description: 'Use when asked to scaffold Next.js turborepo end to end. Trigger: scaffold Next.js, Next.js turborepo, Vercel app, Next.js app with turborepo. Outcome: a working local Next.js turborepo exists with verified app setup and turbo configuration; deployment and launch are deferred to a human. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to scaffold a Next.js turborepo end to end. Produces a working local turborepo with verified app setup and turbo configuration; deployment and launch are deferred to a human. Not for a CLI scaffold — use scaffold-cli; for course exercises — use scaffold-exercises.'
 ---
 
 # Scaffold Next.js
@@ -83,7 +83,7 @@ Ask only for what is missing. Do not infer values.
    export default nextConfig;
    ```
 
-  `partialPrefetching` requires `cacheComponents`; they ship together or not at all. Validate in `next dev`: instant navigation insights are development-only and never fail `next build`.
+   `partialPrefetching` requires `cacheComponents`; they ship together or not at all. Validate in `next dev`: instant navigation insights are development-only and never fail `next build`.
 
 5. **Phase 3: Install Blode UI components.**
 
@@ -270,6 +270,7 @@ Ask only for what is missing. Do not infer values.
 10. **Stop.** Do not create the GitHub repo, do not run Vercel deployment, do not run the pre-launch checklist. The turborepo is scaffolded. Deployment and launch are deferred to the human.
 
 ## Failure and recovery
+
 - **`create-next-app` fails or network is unavailable.** Report the error verbatim. Do not retry with different flags unless the failure message explicitly requests it. Do not scaffold by hand.
 - **TypeScript 7 install fails or `tsc` reports errors after install.** Report the first diagnostic. A type error in a file `next build` used to skip now blocks the build; fixing it is the user's responsibility before continuing.
 - **`pnpm run dev` does not start or app does not load at `http://localhost:3000`.** Report the startup error. Stop; do not proceed to later phases until this resolves.
@@ -278,7 +279,8 @@ Ask only for what is missing. Do not infer values.
 - **Partial-result rule.** If the skill stops mid-scaffold (user cancels, error, or stop), leave the working tree as-is. The rollback path is `git init` — the only committed state before skill start is empty.
 
 ## Output
-The skill produces:
+
+The scaffold contains:
 
 - `{{name}}/` — project root directory
 - `{{name}}/apps/web/` — Next.js application with TypeScript 7, Tailwind CSS, React Compiler, Instant Navigations, shadcn/ui + Blode registry, Blode icons, Agentation, Ultracite tooling
@@ -288,7 +290,7 @@ The skill produces:
 - `{{name}}/knip.json` — dead-code configuration
 - `{{name}}/apps/web/next.config.ts` — Next.js config with Instant Navigations flags
 - `{{name}}/apps/web/package.json` — turbo-compatible workspace scripts
-- Installed all workspace dependencies with a frozen pnpm lockfile
+- A frozen pnpm lockfile with all workspace dependencies installed
 
 No GitHub repo, no Vercel deployment, no favicon, no OG images, no pre-launch checklist.
 

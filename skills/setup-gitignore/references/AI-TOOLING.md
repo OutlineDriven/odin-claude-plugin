@@ -2,7 +2,7 @@
 
 Paste this block verbatim into the `# === AI TOOLING ===` section of the composed `.gitignore`.
 
-**Before using:** some of these patterns apply to dirs that agent-enabled repos intentionally commit (e.g., a repo that IS a Claude project commits `.claude/`). Review each entry for your repo before including it.
+**Before using:** Review every entry before including it. Agent-enabled repositories may intentionally commit some of these directories; for example, a Claude project may commit `.claude/`.
 
 ```gitignore
 # AI agent scratch / plan artifacts (safe to ignore in all repos)

@@ -1,3 +1,3 @@
 interface:
-  display_name: "Project Technology Verdict"
-  short_description: "Project-grounded technology verdicts"
+  display_name: "Pov"
+  short_description: "Use when asked to judge whether this project should adopt,"

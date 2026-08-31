@@ -1,8 +1,8 @@
-# Shipping Workflow
+# Shipping workflow
 
-This file contains the shipping workflow (Phase 3-4). Load it when all Phase 2 tasks are complete and execution transitions to quality check.
+Load this workflow when all Phase 2 tasks are complete and execution moves to the quality check.
 
-## Phase 3: Quality Check
+## Phase 3: quality check
 
 1. **Run Core Quality Checks**
 
@@ -75,7 +75,7 @@ This file contains the shipping workflow (Phase 3-4). Load it when all Phase 2 t
      - Validation window and owner
    - If there is truly no production/runtime impact, still include the section with: `No additional operational monitoring required` and a one-line reason.
 
-## Phase 4: Ship It
+## Phase 4: ship it
 
 1. **Prepare Validation Context**
 
@@ -101,7 +101,7 @@ This file contains the shipping workflow (Phase 3-4). Load it when all Phase 2 t
    - Note any follow-up work needed.
    - Suggest next steps if applicable.
 
-## Quality Checklist
+## Quality checklist
 
 Before creating PR, verify:
 
@@ -118,7 +118,7 @@ Before creating PR, verify:
 - [ ] Code review: `/review` ran (self-sized), or skipped (mechanical diff / unavailable — noted in summary); residuals handled via the Residual Work Gate
 - [ ] PR description includes summary, testing notes, and evidence when captured
 
-## Code Review
+## Code review
 
 Single portable path: **`/review`** self-sizes (lite roster for small low-risk code-only diffs, full roster otherwise). No harness-native review detection, no escalation tiers.
 

@@ -1,6 +1,6 @@
 # Contract libraries by language
 
-**Grounded: 2026-08-26**
+**Grounded: 2026-08-31**
 
 | Language | Library/Approach | Style |
 |----------|-----------------|-------|

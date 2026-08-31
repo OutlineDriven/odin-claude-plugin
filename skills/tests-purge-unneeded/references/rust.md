@@ -1,6 +1,6 @@
 # Rust — cargo test deletion patterns
 
-Rust's type system is the strongest of the mainstream languages — ownership, lifetimes, exhaustive matching, no implicit conversions, no null. **A test that asserts a struct has the fields the compiler proved it has catches nothing.** The compiler is the test for structure; `cargo test` is for behavior at boundaries.
+Rust checks ownership and lifetimes, requires exhaustive matching, and has no implicit conversions or null. **A test that asserts a struct has the fields the compiler proved it has catches nothing.** The compiler is the test for structure; `cargo test` is for behavior at boundaries.
 
 ## Delete
 
@@ -109,7 +109,7 @@ fn validate_returns_invalid_email_for_no_at() {
 }
 ```
 
-Tests the *semantic* of the error variant — what failure produces what error. Real-bug surface (a refactor could silently return a different variant). Keep.
+Tests the *semantics* of the error variant: what failure produces what error. This is a real-bug surface because a refactor could silently return a different variant. Keep.
 
 ### Trait impl behavior at boundary
 
@@ -137,7 +137,7 @@ fn from_raw_parts_handles_zero_length() {
 }
 ```
 
-Tests the contract of `unsafe` code at its boundary — exactly where the compiler stops helping. Keep, and keep proudly.
+Tests the contract of `unsafe` code at its boundary, exactly where the compiler stops helping. Keep.
 
 ### Concurrency invariant
 

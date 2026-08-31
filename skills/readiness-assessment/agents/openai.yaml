@@ -1,3 +1,3 @@
 interface:
-  display_name: "Knowledge Confidence"
-  short_description: "Assess what is concretely known versus unknown before deciding"
+  display_name: "Readiness Assessment"
+  short_description: "Use when a user asks whether enough is known to proceed, or"

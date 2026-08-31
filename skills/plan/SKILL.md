@@ -1,6 +1,6 @@
 ---
 name: plan
-description: 'Use when a user commits to a direction and asks to plan, brief, structure, research, or operationalize it, this skill classifies the request type and tier, runs read-only parallel research, and writes a plan artifact to plans/ with user acknowledgment before the file is considered done. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a user commits to a direction and asks to plan, brief, research, or operationalize it. Classifies type and tier, researches read-only, and writes to plans/ after acknowledgment. Not for scoring — use planning; not for codebase audit — use plan-review.'
 ---
 
 # Knowledge plan
@@ -21,17 +21,17 @@ description: 'Use when a user commits to a direction and asks to plan, brief, st
 
 ## Procedure
 
-1. **Classify type.** Map the user's ask to one of: Product Plan, Technical Plan, Research Brief, Operational Plan. Map the tier to one of: Exploration, Proposal, Execution, Audit.
-2. **Research prior work.** Read every file under plans/ relevant to the direction. Record what already exists and what gaps remain.
-3. **Research knowledge base.** Query available context (memories, session notes, codebase knowledge) for relevant facts, constraints, and prior decisions.
-4. **Research live data.** When the plan requires measurable or factual grounding, fetch current evidence: live search, API lookups, or tool calls that read current state.
-5. **Surface origin tensions.** Flag any contradictions between prior work, stated knowledge, and live data. List them as open questions in the plan.
-6. **Draft the context brief.** Write one paragraph summarizing the direction, the classified type and tier, and the key tensions surfaced. Present it to the user.
-7. **Await acknowledgment.** Do not proceed to file write until the user confirms the context brief is accurate.
-8. **Write the plan artifact.** Write plans/{type}-{descriptive-name}.md. If a file at that path already exists, append a date stamp to the filename before writing.
-9. **Lead with the type-correct answer.** Open the file with the answer, conclusion, or verdict first, before any background or rationale.
-10. **Include sourced metrics, questions, and references.** Every factual claim in the plan carries a source or a citation marker. Open questions are listed explicitly.
-11. **Declare done.** Report the written file path and confirm that type, tier, research checks, acknowledgment, leading answer, and sourced references are all present.
+1. **Classify type.** Map the user's ask to one of: Product Plan, Technical Plan, Research Brief, Operational Plan. Map the tier to one of: Exploration, Proposal, Execution, Audit. Done when: type and tier are classified.
+2. **Research prior work.** Read every file under plans/ relevant to the direction. Record what already exists and what gaps remain. Done when: existing plans under plans/ are read and gaps recorded.
+3. **Research knowledge base.** Query available context (memories, session notes, codebase knowledge) for relevant facts, constraints, and prior decisions. Done when: relevant facts, constraints, and prior decisions are queried.
+4. **Research live data.** When the plan requires measurable or factual grounding, fetch current evidence: live search, API lookups, or tool calls that read current state. Done when: current evidence is fetched when the plan requires it.
+5. **Surface origin tensions.** Flag any contradictions between prior work, stated knowledge, and live data. List them as open questions in the plan. Done when: contradictions are listed as open questions.
+6. **Draft the context brief.** Write one paragraph summarizing the direction, the classified type and tier, and the key tensions surfaced. Present it to the user. Done when: one paragraph covering direction, type, tier, and tensions is presented.
+7. **Await acknowledgment.** Do not proceed to file write until the user confirms the context brief is accurate. Done when: the user confirms the context brief.
+8. **Write the plan artifact.** Write plans/{type}-{descriptive-name}.md. If a file at that path already exists, append a date stamp to the filename before writing. Done when: the file is written at the correct path (date-stamped on collision).
+9. **Lead with the type-correct answer.** Open the file with the answer, conclusion, or verdict first, before any background or rationale. Done when: the file opens with the answer before any background.
+10. **Include sourced metrics, questions, and references.** Every factual claim in the plan carries a source or a citation marker. Open questions are listed explicitly. Done when: every factual claim carries a source and open questions are listed.
+11. **Declare done.** Report the written file path and confirm that type, tier, research checks, acknowledgment, leading answer, and sourced references are all present. Done when: the file path is reported and all checks confirmed present.
 
 ## Failure and recovery
 - **No direction or name supplied.** Skill stops. No plan is written.
@@ -41,7 +41,7 @@ description: 'Use when a user commits to a direction and asks to plan, brief, st
 - **No research findings.** Write the plan with a "Sparse" marker and an explicit list of what was checked and found empty.
 
 ## Output
-A file at `plans/{type}-{descriptive-name}.md` (or `plans/{type}-{descriptive-name}-{date}.md` on collision), containing: the type-correct answer first, the classified type and tier, sourced metrics, explicit open questions, and references. The file is not done until the user acknowledges the context brief.
+A file at `plans/{type}-{descriptive-name}.md` (or `-{date}.md` on collision) containing the type-correct answer first, then classified type and tier, sourced metrics, open questions, and references — not done until the user acknowledges the context brief.
 
 ## Provenance
 

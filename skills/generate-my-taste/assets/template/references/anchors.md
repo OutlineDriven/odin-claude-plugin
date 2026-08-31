@@ -1,8 +1,8 @@
-# anchors.md — 5 evidence-derived anchors
+# Five evidence-derived anchors
 
-The taste-spine. Each anchor names an influence, a load-bearing concept, and a canonical exemplar. The anchor is the concept; the influence is the credit; the exemplar is the evidence.
+Each anchor names an influence, a load-bearing concept, and a canonical exemplar. The concept is the anchor; the influence gives credit; the exemplar provides evidence.
 
-Cross-domain: every anchor applies to prose, code, design, and decisions. The manifestation differs per domain; the anchor does not.
+Every anchor applies across prose, code, design, and decisions. Its manifestation changes by domain; the anchor does not.
 
 ## {anchor_1_name}
 

@@ -1,9 +1,6 @@
-# Parallel Dispatch
+# Parallel dispatch
 
-Tasks with no shared files and no ordering dependency can run as concurrent
-workers. Document the independence argument before you do. Two tasks touching
-one file are not independent. Respect the platform's active-subagent limit, queue
-overflow, and treat spawn errors as backpressure (slow down, don't drop the task).
+Tasks with no shared files and no ordering dependency can run as concurrent workers. Before dispatch, document why they are independent. Two tasks touching one file are not independent. Respect the platform's active-subagent limit and queue tasks that exceed it. Treat spawn errors as backpressure: slow down; don't drop the task.
 
 The per-task gate does not relax under parallelism; every result is audited
 on its own before it reaches the shared branch; concurrency only overlaps the
@@ -19,6 +16,6 @@ Serialize the integration so one result lands at a time. Never let two workers
 commit into one shared index or HEAD. No parallel primitive → run the same tasks
 sequentially.
 
-# Red Flags
+# Red flags
 
 - **Two workers editing one file concurrently.** Concurrent edits corrupt each other's diffs. Sequence shared-file tasks or give each a worktree.

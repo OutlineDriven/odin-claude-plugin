@@ -1,6 +1,6 @@
 ---
 name: property-test-review
-description: 'Use when the user asks to review existing Hypothesis, fast-check, proptest, jqwik, rapid, Echidna, Medusa, or equivalent property tests for meaningful coverage and defects. The report identifies tautological, vacuous, assertion-free, reimplemented, weak, over-filtered, or misconfigured tests with evidence, severity, and the strongest available replacement property. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when reviewing existing property tests for coverage and defects. Reports tautological, vacuous, assertion-free, reimplemented, weak, or over-filtered tests with evidence, severity, and strongest replacement property. Not for generating tests — use property-test-authoring.'
 ---
 
 # Property test review
@@ -22,16 +22,16 @@ description: 'Use when the user asks to review existing Hypothesis, fast-check, 
 
 ## Procedure
 
-1. **Locate property tests.** If the user names specific files, read them. Otherwise search for framework markers:
+1. **Locate property tests.** If the user names specific files, read them. Otherwise search for framework markers: Done when: the stated outcome holds.
    - Python/Hypothesis: `rg "@given\(|from hypothesis import" --type py`
    - TypeScript/fast-check: `rg "fc\.(assert|property)" --type ts --type js`
    - Rust/proptest: `rg "proptest!|#\[quickcheck\]" --type rust`
    - Java/jqwik: `rg "@Property|@ForAll" --type java`
    - Solidity/Echidna/Medusa: `rg "function test|echidna_" --type sol`
 
-2. **Read production contracts.** For each tested function, read its implementation, type signature, and any specification. Identify the function's algebraic shape—whether it has an inverse, preserves an invariant, is idempotent, commutative, associative, or admits an oracle.
+2. **Read production contracts.** For each tested function, read its implementation, type signature, and any specification. Identify the function's algebraic shape—whether it has an inverse, preserves an invariant, is idempotent, commutative, associative, or admits an oracle. Done when: the stated outcome holds.
 
-3. **Classify each test against the defect taxonomy.** For every property test, determine which defect class applies:
+3. **Classify each test against the defect taxonomy.** For every property test, determine which defect class applies: Done when: the stated outcome holds.
 
    | Defect | Severity | Detection rule |
    |---|---|---|
@@ -43,7 +43,7 @@ description: 'Use when the user asks to review existing Hypothesis, fast-check, 
    | Over-filtered | MEDIUM | Stacked `assume()` where a strategy constraint belongs. Push constraints into the generator so it produces valid inputs directly. |
    | Settings | LOW | `max_examples=5`, or no deadline on an expensive strategy. |
 
-4. **Compare against the property catalog.** For each tested function, identify the strongest property the code supports but the suite does not assert:
+4. **Compare against the property catalog.** For each tested function, identify the strongest property the code supports but the suite does not assert: Done when: the stated outcome holds.
 
    | Property | Formula | Where it applies |
    |---|---|---|
@@ -59,13 +59,13 @@ description: 'Use when the user asks to review existing Hypothesis, fast-check, 
 
    Strength ordering, weakest to strongest: `no crash → type preservation → invariant → idempotence → roundtrip / oracle`. Assert the strongest property the code supports. "No crash" alone rarely justifies the dependency—if that is all that can be found, either a small rearrangement exposes something stronger, or the honest report is that this code is a poor PBT candidate.
 
-5. **Flag fragile patterns.** Report these regardless of defect class:
+5. **Flag fragile patterns.** Report these regardless of defect class: Done when: the stated outcome holds.
    - Floating-point equality without a tolerance
    - Assertions on dict/set iteration order
    - Anything reading the clock
-   - These produce flakes that get blamed on the PBT framework and then get deleted.
+   - These patterns produce flakes that get blamed on the PBT framework and then deleted.
 
-6. **Assemble the report.** For each finding, include: the test location, the defect class, the severity, the evidence (the specific assertion or configuration), and the strongest available replacement property.
+6. **Assemble the report.** For each finding, include: the test location, the defect class, the severity, the evidence (the specific assertion or configuration), and the strongest available replacement property. Done when: the stated outcome holds.
 
 ## Failure and recovery
 - **No property tests found.** Report that the codebase contains no property tests. Do not generate tests—that is a separate skill.
@@ -74,16 +74,7 @@ description: 'Use when the user asks to review existing Hypothesis, fast-check, 
 - **Partial results.** If some tests are reviewable and others are not (missing source, generated code, external dependencies), report findings for the reviewable subset and name the unreviewable tests with the reason.
 
 ## Output
-A structured report containing:
-
-1. **Summary**: Total tests reviewed, count by severity, overall assessment.
-2. **Findings**: For each defect found:
-   - Location (file, line, test name)
-   - Defect class and severity
-   - Evidence (the specific assertion, configuration, or pattern)
-   - Strongest replacement property the code supports
-3. **Recommendations**: Prioritized list of improvements, ordered by severity.
-4. **Unreviewable tests**: If any, with reasons.
+A structured report containing: 1. **Summary**: Total tests reviewed, count by severity, overall assessment. 2. **Findings**: For each defect found: - Location (file, line, test name) - Defect class and severity - Evidence (the specific assertion, configuration, or pattern) - Strongest replacement property the code supports 3. **Recommendations**: Prioritized list of improvements, ordered by severity. 4. **Unreviewable tests**: If any, with reasons.
 
 ## Provenance
 

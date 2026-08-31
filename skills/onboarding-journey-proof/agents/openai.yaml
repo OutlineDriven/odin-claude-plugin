@@ -1,3 +1,3 @@
 interface:
   display_name: "Onboarding Journey Proof"
-  short_description: "First-time onboarding journey proof"
+  short_description: "Use when a first-time onboarding journey needs clean-session"

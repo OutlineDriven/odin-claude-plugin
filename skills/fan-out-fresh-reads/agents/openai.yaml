@@ -1,3 +1,3 @@
 interface:
   display_name: "Fan Out Fresh Reads"
-  short_description: "Report fresh zero-context read divergences before agreements"
+  short_description: "Use when one read might be an artifact of how the question was"

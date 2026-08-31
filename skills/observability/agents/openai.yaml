@@ -1,3 +1,3 @@
 interface:
-  display_name: "RED Observability Stack"
-  short_description: "Structured logs, RED metrics, traces, and symptom-based alerts"
+  display_name: "Observability"
+  short_description: "Use when adding telemetry, reviewing alerting rules, shipping a"

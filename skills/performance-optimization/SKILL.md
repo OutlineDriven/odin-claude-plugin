@@ -1,6 +1,6 @@
 ---
 name: performance-optimization
-description: 'Optimize application performance by measuring before and after every change. Use when performance requirements exist, users report slowness, Core Web Vitals are below thresholds, a regression is suspected, or profiling reveals bottlenecks. Produces measurably improved bottlenecks with green tests and no regressions. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when measured slowness, a performance requirement, a Web Vitals miss, or profiling identifies a bottleneck. Measures before and after each change and keeps only wins with green tests. Not for unmeasured general optimization — use optimize.'
 ---
 
 # Performance optimization
@@ -20,17 +20,12 @@ Required: a performance symptom and the codebase under optimization. Optional: e
 
 ## Procedure
 
-1. **Establish baseline.** Measure the bottleneck with profiling tools or timing data before touching any code. Record the specific metric, the tool or method used, and the measured value. If baseline cannot be established, stop and report blocked.
-
-2. **Identify the specific bottleneck.** Use the symptom to determine the profiling target: frontend performance (Lighthouse, DevTools Performance tab, web-vitals RUM), backend latency (APM, query logging, EXPLAIN ANALYZE), bundle analysis, or heap profiling. Do not assume the cause. The query plan is the measurement for database queries; the trace is the measurement for frontend jank.
-
-3. **Fix the identified bottleneck only.** Apply one targeted change. Code it completely before measuring again. Common fixes: N+1 queries -> single query with join or include; unbounded pagination -> limit and offset; missing index -> CREATE INDEX with composite key shaped to the query; connection pool exhaustion -> size pool to database ceiling; large bundle -> code splitting or lazy loading; unoptimized images -> responsive srcset, lazy loading, modern format; unnecessary re-renders -> React.memo, useMemo, stable references; missing caching -> cache expensive reads with stated TTL and key design.
-
-4. **Re-measure under identical conditions.** Use the same tool, same conditions, same measurement method as the baseline. One change at a time. If the improvement falls within measurement noise, revert.
-
-5. **Keep or revert strictly.** Past threshold and tests green: keep. Within noise or tests red: revert immediately. Neutral is a revert. An optimization that wins by dropping needed work is a revert.
-
-6. **Guard the metric.** Add a synthetic CI performance budget or a field monitor (RUM p75) for the primary metric. This prevents the fix from regressing unseen.
+1. **Establish baseline.** Measure the bottleneck with profiling tools or timing data before touching any code. Record the specific metric, the tool or method used, and the measured value. If baseline cannot be established, stop and report blocked. Done when: the metric, tool, and measured value are recorded.
+2. **Identify the specific bottleneck.** Use the symptom to determine the profiling target: frontend performance (Lighthouse, DevTools Performance tab, web-vitals RUM), backend latency (APM, query logging, EXPLAIN ANALYZE), bundle analysis, or heap profiling. Do not assume the cause. The query plan is the measurement for database queries; the trace is the measurement for frontend jank. Done when: the profiling target is determined from the symptom.
+3. **Fix the identified bottleneck only.** Apply one targeted change. Code it completely before measuring again. Common fixes: N+1 queries -> single query with join or include; unbounded pagination -> limit and offset; missing index -> CREATE INDEX with composite key shaped to the query; connection pool exhaustion -> size pool to database ceiling; large bundle -> code splitting or lazy loading; unoptimized images -> responsive srcset, lazy loading, modern format; unnecessary re-renders -> React.memo, useMemo, stable references; missing caching -> cache expensive reads with stated TTL and key design. Done when: one targeted change is coded completely.
+4. **Re-measure under identical conditions.** Use the same tool, same conditions, same measurement method as the baseline. One change at a time. If the improvement falls within measurement noise, revert. Done when: the after-measurement is recorded under identical conditions.
+5. **Keep or revert strictly.** Past threshold and tests green: keep. Within noise or tests red: revert immediately. Neutral is a revert. An optimization that wins by dropping needed work is a revert. Done when: the change is kept (past threshold, tests green) or reverted (noise, tests red, or neutral).
+6. **Guard the metric.** Add a synthetic CI performance budget or a field monitor (RUM p75) for the primary metric. This prevents the fix from regressing unseen. Done when: a CI performance budget or field monitor guards the primary metric.
 
 ## Failure and recovery
 **Baseline unavailable.** Measurement tools are unavailable or the codebase cannot be profiled. Result: blocked. Do not proceed without baseline evidence.
@@ -46,7 +41,7 @@ Required: a performance symptom and the codebase under optimization. Optional: e
 Partial-result rule: reverted code leaves no trace. Keep a ledger entry (baseline, fix applied, before/after measurement, verdict) so discarded ideas are not re-profiled.
 
 ## Output
-Optimized code with before/after measurements in the commit message. Ledger entry for each attempt (kept and reverted) documenting the hypothesis, baseline, result, and verdict. The commit message states the metric name, baseline value, result value, and the tool used to measure.
+Optimized code with before/after measurements in the commit message, plus a ledger entry per attempt (kept and reverted) documenting the hypothesis, baseline, result, and verdict — the commit message states the metric name, baseline value, result value, and tool used.
 
 ## Provenance
 

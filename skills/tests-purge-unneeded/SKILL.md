@@ -1,6 +1,6 @@
 ---
 name: tests-purge-unneeded
-description: 'Delete tests that do not catch real bugs. Use when reviewing legacy suites, investigating slow CI, sweeping tests after a refactor, or checking whether the type system already covers an assertion. Don''t use for untracked data or changes without a version-control rollback.'
+description: 'Delete tests proved unable to catch real bugs through mutation, type guarantees, or boundary analysis. Not for tests superseded by a new harness — use test-migration-coverage-gate; not for untracked data or changes without VCS rollback.'
 ---
 
 # Purge unneeded tests
@@ -20,20 +20,27 @@ description: 'Delete tests that do not catch real bugs. Use when reviewing legac
 - **Language or framework** (optional): if omitted, detect from project config files (package.json, Cargo.toml, pyproject.toml, go.mod, pom.xml, build.gradle).
 - **Scope constraint** (optional): limit audit to specific directories, file patterns, or changed-files-only mode.
 
+## Refusals
+
+- Will not delete a test whose injected mutation was caught — it is load-bearing.
+- Will not delete a boundary-contract test (protocol compliance, error semantics, security invariants, real-I/O integration).
+- Will not delete a test in a dynamic language that verifies a boundary shape the type system cannot guarantee.
+- Will not persist any production-code mutation beyond the proof step.
+- Will not delete a test whose failure mode cannot be articulated — keep it pending human review.
+
 ## Procedure
 
-1. **Bound scope.** Identify the set of test files under audit. List every file path. Do not expand scope beyond the declared root or constraint.
-2. **Identify candidates.** For each test, check: (a) it asserts structure the type system already guarantees, (b) it passes input through verbatim, (c) it asserts a mock return against the fixture that configured it, (d) it has survived mutation testing with no caught mutation, or (e) the real bug its failure would indicate cannot be articulated.
-3. **Articulate the bug.** For each candidate, write one sentence: "this test fails when ___ goes wrong." If the sentence cannot name a concrete failure mode that a real code change could plausibly introduce, the test is a deletion candidate.
-4. **Check static guarantee.** For the test's language:
-   - **Static-guarantee languages (Rust, TypeScript-strict, Kotlin, Java, C++, OCaml)**: structural assertions are redundant. A test that asserts a struct has the fields the compiler proved it has catches no bug. Mark for deletion.
-   - **Dynamic languages (Python, JavaScript, Ruby)**: no compile-time guarantee that a function returns the shape the docstring claims. A boundary shape test IS a real-bug test. Keep unless step 5 proves otherwise.
-5. **Check boundary contract.** Does the test verify protocol compliance (HTTP status codes, message formats, retry semantics), error semantics (malformed input, partial failure, timeout), security invariants (authn/authz enforcement, input validation, rate limits), or real-I/O integration (DB transactions, file I/O, network calls)? If yes, keep regardless of step 4.
-6. **Inject the bug.** For each remaining deletion candidate, modify the production code to introduce the specific bug the test claims to catch. Run the test. If the test still passes, it does not catch that bug. Record the mutation and the test outcome. If the test fails, it is load-bearing: revert the mutation and keep the test.
-7. **Delete in batches.** Delete tests whose mutation-proof is recorded. Each batch is an atomic commit with a rationale naming the mutation that survived. Run the full suite after each batch. If the suite regresses, revert the batch and investigate.
-8. **Report.** Produce the output artifact (see Output section).
+1. **Bound scope.** Identify the set of test files under audit. List every file path. Do not expand scope beyond the declared root or constraint. **Done when:** every file path in the audit set is listed.
+2. **Identify candidates.** For each test, check: (a) it asserts structure the type system already guarantees, (b) it passes input through verbatim, (c) it asserts a mock return against the fixture that configured it, (d) it has survived mutation testing with no caught mutation, or (e) the real bug its failure would indicate cannot be articulated. **Done when:** every test is classified as candidate or not-candidate with a reason.
+3. **Articulate the bug.** For each candidate, write one sentence: "this test fails when ___ goes wrong." If the sentence cannot name a concrete failure mode that a real code change could plausibly introduce, the test is a deletion candidate. **Done when:** every candidate has its one-sentence failure mode or is marked unarticulable.
+4. **Check static guarantee.** For static-guarantee languages (Rust, TypeScript-strict, Kotlin, Java, C++, OCaml): structural assertions are redundant — a test that asserts a struct has the fields the compiler proved it has catches no bug; mark for deletion. For dynamic languages (Python, JavaScript, Ruby): no compile-time guarantee that a function returns the shape the docstring claims — a boundary shape test is a real-bug test; keep unless step 5 proves otherwise. **Done when:** each candidate is classified by language guarantee.
+5. **Check boundary contract.** Does the test verify protocol compliance (HTTP status codes, message formats, retry semantics), error semantics (malformed input, partial failure, timeout), security invariants (authn/authz enforcement, input validation, rate limits), or real-I/O integration (DB transactions, file I/O, network calls)? If yes, keep regardless of step 4. **Done when:** each candidate is classified as boundary or non-boundary.
+6. **Inject the bug.** For each remaining deletion candidate, modify the production code to introduce the specific bug the test claims to catch. Run the test. If the test still passes, it does not catch that bug — record the mutation and the test outcome. If the test fails, it is load-bearing: revert the mutation and keep the test. **Done when:** every remaining candidate has a recorded mutation proof (survived or caught).
+7. **Delete in batches.** Delete tests whose mutation-proof is recorded. Each batch is an atomic commit with a rationale naming the mutation that survived. Run the full suite after each batch. If the suite regresses, revert the batch and investigate. **Done when:** all proved-useless tests are deleted in atomic commits and the full suite passes after each batch.
+8. **Report.** Produce the output artifact. **Done when:** the deletion report is emitted.
 
 ## Failure and recovery
+
 | Failure class | Condition | Recovery |
 |---|---|---|
 | Framework not detected | Cannot identify test runner or language | Abort. Report: test framework not detected; manual identification required. |
@@ -47,10 +54,8 @@ Partial-result rule: if any batch succeeds, its deletions stand. Rolled-back bat
 Non-mutation rule: no production code mutation persists beyond the proof step. Every injected bug is reverted before the next batch or before reporting.
 
 ## Output
-A deletion report containing:
-- List of deleted tests, each with: file path, test name, the mutation that survived, and the batch commit hash.
-- List of kept tests, each with: file path, test name, and the reason kept (boundary contract, load-bearing mutation, or unclear carve-out).
-- Final suite pass/fail status after the last batch.
+
+A deletion report listing deleted tests (file path, test name, surviving mutation, batch commit hash), kept tests (file path, test name, reason kept), and final suite pass/fail status — ordering: deleted, kept, suite status.
 
 ## Provenance
 

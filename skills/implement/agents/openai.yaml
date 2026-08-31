@@ -1,3 +1,3 @@
 interface:
-  display_name: "Plan-Based Implementation"
-  short_description: "Implement a settled plan with code, tests, and commits."
+  display_name: "Implement"
+  short_description: "Use when a settled ticket or spec needs implementation."

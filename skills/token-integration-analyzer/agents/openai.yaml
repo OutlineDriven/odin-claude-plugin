@@ -1,3 +1,3 @@
 interface:
   display_name: "Token Integration Analyzer"
-  short_description: "Token security and integration risk report."
+  short_description: "Analyze a token implementation or integration for ERC20/ERC721"

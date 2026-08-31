@@ -1,6 +1,6 @@
 ---
 name: tailwind-best-practices
-description: 'Use when a user asks to write, edit, review, clean, refactor, or audit Tailwind classes, components, or configuration. The skill reorders, deduplicates, and minifies class lists while enforcing semantic utility use and component-level token extraction. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when writing, editing, reviewing, or auditing Tailwind classes, components, or configuration. Reorders and deduplicates classes, replaces arbitrary values with project tokens, and checks component extraction. Not for general CSS without Tailwind.'
 ---
 
 # Tailwind best practices
@@ -17,34 +17,35 @@ description: 'Use when a user asks to write, edit, review, clean, refactor, or a
 ## Inputs
 
 - One or more files containing Tailwind class strings, component definitions, or a Tailwind configuration file.
-- Optional: target Tailwind CSS version (defaults to the version declared in the project's `package.json` or `tailwind.config`).
+- Optional target Tailwind CSS version; defaults to the version declared in the project's `package.json` or Tailwind configuration.
+
+## Refusal
+
+- No Tailwind config or dependency found: stop before editing. Report the missing prerequisite. Modify no files.
+- Class string parse failure: skip the malformed string. Record its file and line, then continue.
+- Ambiguous utility replacement: keep the original utility and flag it for human review. Do not guess.
+- Required `@apply` block: leave an `@apply` inside a pseudo-element or `@layer` unchanged and record why.
 
 ## Procedure
 
-1. **Identify Tailwind version.** Read `package.json` or `tailwind.config.js`/`tailwind.config.ts` to determine the installed Tailwind CSS major version. If absent, stop and report the missing prerequisite.
-2. **Scan class strings.** Locate every `class`, `className`, `class:list`, template literal containing utility classes, and `@apply` directive in the supplied files.
-3. **Remove unnecessary utilities.** Delete utilities that duplicate another utility in the same string (same property, same breakpoint scope). Delete utilities whose effect is overridden by a later utility in the same group.
-4. **Enforce semantic utility use.** Replace arbitrary value brackets (`[...]`) with the nearest named utility when one exists. Replace raw color literals in arbitrary values with the project's design-token color scale if defined.
-5. **Reorder class strings.** Group utilities by category in this order: layout, flexbox/grid, spacing, sizing, typography, backgrounds, borders, effects, filters, tables, transitions/transforms, interactivity, accessibility. Within each category, sort alphabetically.
-6. **Extract repeated patterns into components.** When three or more identical class strings appear across files, propose extracting them into a reusable component or a `@apply`-free utility class in the project's stylesheet. Record the extraction but do not auto-apply if the project lacks a component directory.
-7. **Minimize @apply usage.** For each `@apply` block, check whether the same combination can be expressed as a single utility class or a short utility string. If yes, replace the `@apply` block with inline utilities. If the `@apply` block is inside a `@layer` or pseudo-element that requires it, leave it and annotate the reason.
-8. **Check fixed variants.** Flag responsive variants (`sm:`, `md:`, `lg:`, `xl:`, `2xl:`) that use fixed pixel breakpoints inconsistent with the project's `theme.screens` configuration. Report each mismatch.
-9. **Verify minification readiness.** Confirm the project's build pipeline includes CSS minification (check for `cssnano`, `lightningcss`, or Tailwind's built-in minification in v4+). If absent, report the gap.
-10. **Emit report.** Produce a summary listing each file changed, the count of utilities removed, reordered, or replaced, and any flags raised.
+1. **Identify the Tailwind version.** Read `package.json` or the Tailwind configuration to determine the installed major version. Done when: the version is known or the missing prerequisite is reported.
+2. **Scan class strings.** Locate every `class`, `className`, `class:list`, template literal containing utility classes, and `@apply` directive in the supplied files. Done when: every supplied file has been scanned.
+3. **Remove unnecessary utilities.** Delete utilities that duplicate another utility in the same string and breakpoint scope. Delete utilities overridden by a later utility in the same group. Done when: no known duplicate or overridden utility remains.
+4. **Enforce semantic utility use.** Replace arbitrary value brackets with the nearest named utility when one exists. Replace raw color literals with the project's design-token color scale when defined. Done when: each arbitrary value is replaced or retained with a reason.
+5. **Reorder class strings.** Group utilities in this order: layout, flexbox/grid, spacing, sizing, typography, backgrounds, borders, effects, filters, tables, transitions/transforms, interactivity, accessibility. Sort alphabetically within each category. Done when: every parsed class string follows the order.
+6. **Extract repeated patterns into components.** When three or more identical class strings appear across files, propose a reusable component or an `@apply`-free utility class. Record the extraction but do not apply it when the project lacks a component directory. Done when: repeated patterns are extracted or flagged.
+7. **Minimize `@apply`.** Replace each `@apply` block with inline utilities when the same combination has a direct expression. Keep blocks required by a pseudo-element or `@layer` and record why. Done when: every block is converted or justified.
+8. **Check fixed variants.** Flag responsive variants whose fixed pixel breakpoints conflict with `theme.screens`. Done when: every mismatch is reported.
+9. **Verify minification readiness.** Check for `cssnano`, `lightningcss`, or Tailwind's built-in minification in v4+. Done when: minification is confirmed or the gap is reported.
+10. **Emit the report.** Record each file changed, utility counts removed/reordered/replaced, and every flag. Done when: the report accounts for every edit and unresolved item.
 
-## Failure and recovery
-| Failure class | Behavior |
-|---|---|
-| No Tailwind config or dependency found | Stop before editing. Report the missing prerequisite. No files are modified. |
-| Class string parse failure (malformed template literal) | Skip the malformed string. Log the file and line. Continue with remaining strings. |
-| Ambiguous utility replacement | Keep the original utility. Flag it for human review. Do not guess. |
-| @apply block required by pseudo-element or @layer | Leave the block unchanged. Annotate with the reason. |
+## Failure modes
 
-Partial results are valid: files already edited remain edited. No rollback is performed for completed edits; the user can revert via version control.
+- Partial result: completed file edits remain. The user can restore prior content through version control; do not roll back successful edits because another class string could not be parsed.
 
 ## Output
-- Edited files with reordered, deduplicated, and semantically corrected class strings.
-- A summary report listing: files touched, utilities removed, utilities reordered, arbitrary values replaced, @apply blocks converted, fixed-variant flags, and minification-gap flags.
+
+Edited files, then a summary report ordered by file with utilities removed, reordered, arbitrary values replaced, `@apply` blocks converted, fixed-variant flags, and minification gaps.
 
 ## Provenance
 

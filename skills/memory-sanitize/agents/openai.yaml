@@ -1,3 +1,3 @@
 interface:
   display_name: "Memory Sanitize"
-  short_description: "Creates redacted memory copies with credential report"
+  short_description: "Use when the user asks to sanitize memory for sharing, redact"

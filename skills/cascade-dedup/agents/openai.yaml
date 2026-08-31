@@ -1,3 +1,3 @@
 interface:
   display_name: "Cascade Dedup"
-  short_description: "Cascade-family directive dedup and drift repair"
+  short_description: "Use when prompt-doctrine is duplicated, drifted, or conflicting"

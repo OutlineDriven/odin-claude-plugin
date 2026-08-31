@@ -1,4 +1,4 @@
-# Writing Test Plans for Complex UI Bugs
+# Writing test plans for complex UI bugs
 
 For complex UI issues, write a structured test plan the agent can follow in the browser:
 

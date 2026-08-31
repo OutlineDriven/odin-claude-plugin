@@ -22,14 +22,14 @@ description: 'Use when the user says remember this or settles one durable fact, 
 
 ## Procedure
 
-1. Identify the durable fact from the user's remember-this statement or settled fact. Bound scope to one self-contained fact; if several were supplied, capture the first and stop, or ask once for the single item to capture.
-2. Reject the fact if it is verbatim transcript content, conversation echo, or obvious from the current code (restates a function signature, file path, or visible state). Stop with rejected-content; do not append.
-3. Redact secrets and PII from the fact text: replace credentials, API keys, paths under the user home, email addresses, and numeric identifiers with a redaction marker. If redaction would erase the fact's meaning, stop with rejected-content.
-4. Validate the redacted fact is non-empty, strict UTF-8, and bounded to one sentence or one short clause; reject paragraphs.
-5. Build one JSONL object with fields time (RFC3339 UTC), project, fact (redacted), and tags (optional, omitted when none).
-6. Append the line to the local append-only note store at the configured path; create the file if absent. Do not overwrite or edit prior lines.
-7. Index the new line by project and tags so it is recallable by later search.
-8. Confirm recallability: read the store back and locate the appended line by its time and project.
+1. Identify the durable fact from the user's remember-this statement or settled fact. Bound scope to one self-contained fact; if several were supplied, capture the first and stop, or ask once for the single item to capture. Done when: the stated action, evidence, and guard all hold.
+2. Reject the fact if it is verbatim transcript content, conversation echo, or obvious from the current code (restates a function signature, file path, or visible state). Stop with rejected-content; do not append. Done when: the stated action, evidence, and guard all hold.
+3. Redact secrets and PII from the fact text: replace credentials, API keys, paths under the user home, email addresses, and numeric identifiers with a redaction marker. If redaction would erase the fact's meaning, stop with rejected-content. Done when: the stated action, evidence, and guard all hold.
+4. Validate the redacted fact is non-empty, strict UTF-8, and bounded to one sentence or one short clause; reject paragraphs. Done when: the stated action, evidence, and guard all hold.
+5. Build one JSONL object with fields time (RFC3339 UTC), project, fact (redacted), and tags (optional, omitted when none). Done when: the stated action, evidence, and guard all hold.
+6. Append the line to the local append-only note store at the configured path; create the file if absent. Do not overwrite or edit prior lines. Done when: the stated action, evidence, and guard all hold.
+7. Index the new line by project and tags so it is recallable by later search. Done when: the stated action, evidence, and guard all hold.
+8. Confirm recallability: read the store back and locate the appended line by its time and project. Done when: the stated action, evidence, and guard all hold.
 
 ## Failure and recovery
 - rejected-content: the fact is transcript, code-obvious, or redaction-erased; no append; return the rejection reason.
@@ -40,8 +40,7 @@ description: 'Use when the user says remember this or settles one durable fact, 
 - Blocked/non-converged: if the fact cannot be reduced to one bounded self-contained item after one clarification, return blocked with the reason; do not widen scope or append partial content.
 
 ## Output
-- One appended strict UTF-8 JSONL line in the local note store, with RFC3339 time, project, optional tags, and a redacted fact, indexed and recallable.
-- A terminal report: the appended line, its index key, and a recall confirmation; or a rejected-content, schema-invalid, store-unavailable, or blocked classification with reason and no mutation.
+One indexed, recallable strict UTF-8 JSONL line with RFC3339 time, project, optional tags, and redacted fact, followed by its index key and recall confirmation; otherwise a `rejected-content`, `schema-invalid`, `store-unavailable`, or `blocked` classification with reason and no mutation.
 
 ## Provenance
 

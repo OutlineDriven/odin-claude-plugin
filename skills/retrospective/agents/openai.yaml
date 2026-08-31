@@ -1,3 +1,3 @@
 interface:
   display_name: "Retrospective"
-  short_description: "Engineering retrospective with team breakdowns and habits"
+  short_description: "Use when the user runs /retrospective for a period."

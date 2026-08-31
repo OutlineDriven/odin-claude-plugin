@@ -24,15 +24,15 @@ disable-model-invocation: true
 
 ## Procedure
 
-1. Resolve the supplied reference to exactly one issue. Stop if it is missing, ambiguous, inaccessible, or resolves to a pull request or another tracker object.
-2. Read the issue's current title, body, state, labels, recent discussion, and completion criteria that are available without changing remote state.
-3. Inspect current, directly relevant evidence available from the tracker and referenced project material. Separate observed facts from human claims, and stop rather than infer completion or invent evidence when the comparison cannot be supported.
-4. Compare each material issue claim or completion criterion with that evidence. Classify the issue as complete, still valid as written, stale but actionable, or indeterminate.
-5. Derive the semantic-minimum reconciliation for that one issue: close it when the recorded work is demonstrably complete; reopen it when a closed issue remains actionable; otherwise update only the stale fields or text needed to reflect current reality. Preserve accurate history and content.
-6. Present a pre-mutation preview naming the issue, its current state, the evidence used, the exact proposed changes, and the consequence. Ask for explicit approval of that preview. Treat silence, general encouragement, or approval of a different proposal as no approval.
-7. If the human changes the proposal, repeat the comparison and preview. Do not widen the operation beyond the identified issue.
-8. After explicit approval, perform only the approved remote mutation on that issue. Do not add unapproved comments, labels, assignments, milestones, or related-item changes.
-9. Read the issue again from the tracker and compare its resulting state and content with the approved preview. Report success only when this fresh read confirms the match.
+1. Resolve the supplied reference to exactly one issue. Stop if it is missing, ambiguous, inaccessible, or resolves to a pull request or another tracker object. Done when: one issue is resolved and confirmed not a pull request or other object.
+2. Read the issue's current title, body, state, labels, recent discussion, and completion criteria that are available without changing remote state. Done when: the issue's current state and content are captured.
+3. Inspect current, directly relevant evidence available from the tracker and referenced project material. Separate observed facts from human claims, and stop rather than infer completion or invent evidence when the comparison cannot be supported. Done when: observed facts and human claims are separated and evidence is gathered or the gap is reported.
+4. Compare each material issue claim or completion criterion with that evidence. Classify the issue as complete, still valid as written, stale but actionable, or indeterminate. Done when: the issue has one classification.
+5. Derive the semantic-minimum reconciliation for that one issue: close it when the recorded work is demonstrably complete; reopen it when a closed issue remains actionable; otherwise update only the stale fields or text needed to reflect current reality. Preserve accurate history and content. Done when: one reconciliation action is derived that changes the minimum needed.
+6. Present a pre-mutation preview naming the issue, its current state, the evidence used, the exact proposed changes, and the consequence. Ask for explicit approval of that preview. Treat silence, general encouragement, or approval of a different proposal as no approval. Done when: the user explicitly approves the exact preview, or the skill stops for lack of approval.
+7. If the human changes the proposal, repeat the comparison and preview. Do not widen the operation beyond the identified issue. Done when: the revised preview is approved or the skill stops.
+8. After explicit approval, perform only the approved remote mutation on that issue. Do not add unapproved comments, labels, assignments, milestones, or related-item changes. Done when: the approved mutation is performed and the tracker acknowledges it.
+9. Read the issue again from the tracker and compare its resulting state and content with the approved preview. Report success only when this fresh read confirms the match. Done when: the fresh read confirms the issue state and content match the approved preview.
 
 ## Failure and recovery
 - **Invalid or ambiguous target:** make no mutation and return `blocked` with the missing or conflicting identifier.
@@ -44,6 +44,7 @@ disable-model-invocation: true
 - A read-only comparison and preview are valid partial results. No remote state change counts as complete until the post-mutation read confirms it.
 
 ## Output
+
 Return the issue reference, evidence-based classification, approved change, mutation result, and freshly observed final state. The terminal classification is exactly one of `confirmed`, `awaiting-approval`, `indeterminate`, `blocked`, `failed`, or `unconfirmed`; only `confirmed` means the issue now matches current reality.
 
 ## Provenance

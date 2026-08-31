@@ -1,6 +1,6 @@
 ---
 name: conventional-git
-description: 'Use when a user asks to create branches/worktrees, make commits, or automate changelog generation. History is parseable and auto-generates changelogs, SemVer bumps, and issue closes. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a user asks to create branches/worktrees, make commits, or automate changelog generation. History is parseable and auto-generates changelogs, SemVer bumps, and issue closes. Not for commit-message-only drafting — use conventional-commit.'
 ---
 
 # Conventional git
@@ -16,23 +16,23 @@ description: 'Use when a user asks to create branches/worktrees, make commits, o
 
 ## Inputs
 
-- The work being done (feature, fix, docs, refactor, etc.): required to pick the type.
+- The type of work (feature, fix, docs, refactor, etc.): required to choose the commit type.
 - An issue or tracker number, when one exists: optional; prefixed into the branch name and referenced in the commit footer.
 - The target platform (GitHub or GitLab): required only when closing issues cross-repo or cross-project.
 
 ## Procedure
 
-1. Name the branch `<type>/[issue-]<description>`: lowercase, hyphens only, no special characters except `/`. Prefix the issue number when one exists (`feat/42-user-authentication`). Keep the description under 50 characters. Match the type to the work. Never include `worktree` in a branch name: worktrees are a local checkout mechanism that must not leak into the remote.
+1. Name the branch `<type>/[issue-]<description>`: lowercase, hyphens only, no special characters except `/`. Prefix the issue number when one exists (`feat/42-user-authentication`). Keep the description under 50 characters. Match the type to the work. Never include `worktree` in a branch name: worktrees are a local checkout mechanism that must not leak into the remote. Done when: the branch name is lowercase, hyphen-separated, typed, under 50 chars, and contains no `worktree`.
 
-2. When creating a worktree, run `git worktree list` first and reuse an existing worktree if it already covers the same branch. Place worktrees under `.claude/worktrees/` and name the directory by replacing the branch `/` separator with `-` (`git worktree add .claude/worktrees/feat-user-authentication feat/user-authentication`). Keep each worktree scoped to a single branch. Remove the worktree once its branch is merged (`git worktree remove …` then `git worktree prune`).
+2. When creating a worktree, run `git worktree list` first and reuse an existing worktree if it already covers the same branch. Place worktrees under `.claude/worktrees/` and name the directory by replacing the branch `/` separator with `-` (`git worktree add .claude/worktrees/feat-user-authentication feat/user-authentication`). Keep each worktree scoped to a single branch. Remove the worktree once its branch is merged (`git worktree remove …` then `git worktree prune`). Done when: a single worktree exists for the branch under `.claude/worktrees/`, or an existing one is reused.
 
-3. Write the commit subject as `<type>[optional scope]: <description>`. Use the type table to pick the type and its SemVer effect: `feat` (MINOR), `fix` (PATCH), `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert` (none). Keep the subject ≤ 72 characters, imperative mood, no capital letter, no trailing period. Separate any body with a blank line.
+3. Write the commit subject as `<type>[optional scope]: <description>`. Use the type table to pick the type and its SemVer effect: `feat` (MINOR), `fix` (PATCH), `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert` (none). Keep the subject ≤ 72 characters, imperative mood, no capital letter, no trailing period. Separate any body with a blank line. Done when: the subject is ≤72 chars, imperative, lowercase, no trailing period, and typed with its SemVer effect.
 
-4. Mark breaking changes with `!` after the type/scope or with a `BREAKING CHANGE:` footer so changelog tools detect the MAJOR bump; body-only descriptions are invisible to them. For `revert`, keep the `This reverts commit <hash>.` line that `git revert` generates. Never add a Claude signature, AI agent attribution, or `Co-authored-by` trailer for Claude or any AI agent.
+4. Mark breaking changes with `!` after the type/scope or with a `BREAKING CHANGE:` footer so changelog tools detect the MAJOR bump; body-only descriptions are invisible to them. For `revert`, keep the `This reverts commit <hash>.` line that `git revert` generates. Never add a Claude signature, AI agent attribution, or `Co-authored-by` trailer for Claude or any AI agent. Done when: breaking changes are marked with `!` or a `BREAKING CHANGE:` footer, and no AI attribution trailer is present.
 
-5. Close issues from the commit footer (preferred, it keeps the subject clean) using a case-insensitive keyword (`close(s/d)`, `fix(es/d)`, `resolve(s/d)`) followed by the reference. On GitHub: `Closes #42`, `Closes owner/repo#99`, or `Closes #42, closes #43`; triggers on merge to the default branch. On GitLab: `Resolves #101`, `Closes group/project#42`, or `Closes #101, closes #102`; triggers on merge to the default branch. Pair the keyword with the commit type (`fix:` closing a bug, `feat:` closing a feature).
+5. Close issues from the commit footer (preferred, it keeps the subject clean) using a case-insensitive keyword (`close(s/d)`, `fix(es/d)`, `resolve(s/d)`) followed by the reference. On GitHub: `Closes #42`, `Closes owner/repo#99`, or `Closes #42, closes #43`; triggers on merge to the default branch. On GitLab: `Resolves #101`, `Closes group/project#42`, or `Closes #101, closes #102`; triggers on merge to the default branch. Pair the keyword with the commit type (`fix:` closing a bug, `feat:` closing a feature). Done when: every issue to close is referenced in the footer with a platform-correct keyword.
 
-6. When squash-merging a PR/MR, set the PR/MR title to conventional-commits format before squashing: the title becomes the single commit message and non-conforming titles break changelog generation silently.
+6. When squash-merging a PR/MR, set the PR/MR title to conventional-commits format before squashing: the title becomes the single commit message and non-conforming titles break changelog generation silently. Done when: the PR/MR title is in conventional-commits format before the squash.
 
 ## Failure and recovery
 - Non-conforming branch or commit name: do not create or amend it. Correct the name in place (rename the branch with `git branch -m`, or rewrite the unpushed commit) and re-check against the format before proceeding.

@@ -1,3 +1,3 @@
 interface:
   display_name: "Humaniseur Fr"
-  short_description: "Naturalize AI French text; remove tells, preserve register"
+  short_description: "Use when the user supplies French text that reads like AI"

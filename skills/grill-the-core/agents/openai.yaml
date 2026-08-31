@@ -1,3 +1,3 @@
 interface:
   display_name: "Grill The Core"
-  short_description: "Repair the root shape, not the symptom, until checks pass clean."
+  short_description: "Use when the user wants root-shape repair, not a symptom-first"

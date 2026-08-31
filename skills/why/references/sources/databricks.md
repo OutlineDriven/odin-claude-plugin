@@ -1,4 +1,4 @@
-# Databricks Analytics & System Tables
+# Databricks analytics & system tables
 
 ## What this source contains
 

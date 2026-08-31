@@ -1,6 +1,6 @@
 ---
 name: sred-work-summary
-description: 'Use when the user explicitly asks to create a SRED work summary or gather a year of work. Creates one Notion document grouping PRs, Linear tickets, and docs by project. Don''t use for organizing projects into child pages (use sred-project-organizer) or local-only summaries.'
+description: 'Use when the user explicitly asks to create a SRED work summary or gather a year of work. Creates one Notion document grouping PRs, Linear tickets, and docs by project. Not for organizing projects into child pages — use sred-project-organizer. Not for local-only summaries.'
 disable-model-invocation: true
 ---
 
@@ -25,31 +25,33 @@ disable-model-invocation: true
 
 No input is invented. Missing or refused credentials stop the skill without partial action.
 
+## Refusal
+
+- Missing credentials: stop before any network call. Return the credential name that is absent or unconfirmed.
+- API error during gather: stop gather for that source. Report what was gathered and what source failed. Do not proceed to Notion write.
+- Notion write partial or truncated: treat as failure. Report the last successfully written project. Do not claim done.
+- Notion write error: stop. Report API error. Do not claim done.
+- Human revokes confirmation mid-flow: stop immediately. No rollback needed (Notion write has not occurred).
+
 ## Procedure
 
-1. **Confirm scope with human**: Present the date range, sources (GitHub PRs, Linear tickets, Notion pages), and proposed grouping approach (project name → list of links). Obtain explicit confirmation before proceeding.
-2. **Gather GitHub PRs**: Query GitHub for merged PRs in the specified repositories and date range. Extract PR title, URL, merged date, and repository.
-3. **Gather Linear tickets**: Query Linear for completed issues assigned to the user or team in the specified date range. Extract title, URL, state, and project.
-4. **Gather Notion pages**: Query Notion for pages created or updated in the specified date range within the known workspace. Extract title and URL.
-5. **Group into projects**: Organize all items by inferred or specified project. Each project bucket holds PR links, ticket links, and doc links. Use PR titles and descriptions, Notion document content, and Linear ticket titles and descriptions for grouping.
-6. **Preview grouping**: Present the grouped structure to the human. Confirm or adjust groupings before Notion write.
-7. **Create Notion document**: Using the confirmed parent page ID and Notion integration token, create one new child page titled with the summary period (e.g., "SRED Work Summary — YYYY"). Populate with one section per project. Each project section contains a project name header, a summary line counting PRs, Notion docs, and Linear tickets, and subsections for each source type listing every item as a link with its date. Write all grouped items; do not truncate or abbreviate with phrases like "and N more".
-8. **Confirm creation**: Retrieve the created page via Notion API to confirm it exists and contains all items.
-9. **Return the document URL**: Present the Notion document URL to the user as the final report. The URL must be the actual Notion page link, not a placeholder.
+1. **Confirm scope with human.** Present the date range, sources (GitHub PRs, Linear tickets, Notion pages), and proposed grouping approach (project name to list of links). Obtain explicit confirmation before proceeding. Done when: the human confirms the scope.
+2. **Gather GitHub PRs.** Query GitHub for merged PRs in the specified repositories and date range. Extract PR title, URL, merged date, and repository. Done when: the PR list is gathered or the source failed.
+3. **Gather Linear tickets.** Query Linear for completed issues assigned to the user or team in the specified date range. Extract title, URL, state, and project. Done when: the ticket list is gathered or the source failed.
+4. **Gather Notion pages.** Query Notion for pages created or updated in the specified date range within the known workspace. Extract title and URL. Done when: the page list is gathered or the source failed.
+5. **Group into projects.** Organize all items by inferred or specified project. Each project bucket holds PR links, ticket links, and doc links. Use PR titles and descriptions, Notion document content, and Linear ticket titles and descriptions for grouping. Done when: every item is assigned to a project bucket.
+6. **Preview grouping.** Present the grouped structure to the human. Confirm or adjust groupings before Notion write. Done when: the human confirms the groupings.
+7. **Create Notion document.** Using the confirmed parent page ID and Notion integration token, create one new child page titled with the summary period (e.g., "SRED Work Summary — YYYY"). Populate with one section per project. Each project section contains a project name header, a summary line counting PRs, Notion docs, and Linear tickets, and subsections for each source type listing every item as a link with its date. Write all grouped items; do not truncate or abbreviate with phrases like "and N more". Done when: the Notion document is created with all items.
+8. **Confirm creation.** Retrieve the created page via Notion API to confirm it exists and contains all items. Done when: the page is confirmed to exist with all items.
+9. **Return the document URL.** Present the Notion document URL to the user as the final report. The URL must be the actual Notion page link, not a placeholder. Done when: the URL is returned.
 
-## Failure and recovery
-| Failure class | Behavior |
-|---|---|
-| Missing credentials | Stop before any network call. Return credential name that is absent or unconfirmed. |
-| API error during gather | Stop gather for that source. Report what was gathered and what source failed. Do not proceed to Notion write. |
-| Notion write partial or truncated | Treat as failure. Report the last successfully written project. Do not claim Done. |
-| Notion write error | Stop. Report API error. Do not claim Done. |
-| Human revokes confirmation mid-flow | Stop immediately. No rollback needed (Notion write has not occurred). |
+## Failure modes
 
-Partial-result rule: if a gather source fails, the skill stops and reports; it does not proceed with partial data.
+- Partial result: if a gather source fails, the skill stops and reports; it does not proceed with partial data.
 
 ## Output
-One Notion document URL, returned to the user as the final report. The document title matches the requested period. All gathered items are grouped into projects with zero truncation. No local file is produced.
+
+One Notion document URL returned to the user. The document title matches the requested period. All gathered items are grouped into projects with zero truncation. No local file is produced.
 
 ## Provenance
 

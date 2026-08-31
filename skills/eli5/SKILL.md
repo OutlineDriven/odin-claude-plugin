@@ -1,6 +1,6 @@
 ---
 name: eli5
-description: 'Use when asked to explain for a beginner, ELI5, simplify this concept, plain language, or no AI prose; returns a plain-language explanation with one gist, one analogy, and the next action first. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when asked for ELI5, beginner language, or a simpler explanation. Returns one plain-language gist, one analogy, and the next action first. Not for scaffolded practice — use drill; not for multi-angle explanations — use explain-concept.'
 ---
 
 # Eli5
@@ -16,16 +16,15 @@ description: 'Use when asked to explain for a beginner, ELI5, simplify this conc
 
 ## Inputs
 
-The concept or passage to simplify. Required: the user names a concept, term, or text to explain. Optional: the audience level or a specific angle; if omitted, default to a five-year-old's vocabulary.
+Required: a concept, term, or passage to simplify. Optional: the audience level or a specific angle. If omitted, use a five-year-old's vocabulary.
 
 ## Procedure
 
-1. Name the concept from the request. If the request does not name one, stop and ask; do not invent a topic.
-2. Write the gist: one sentence stating what the concept is, using only words a five-year-old would know.
-3. Write one analogy that connects the concept to an everyday object or experience a child recognizes.
-4. Lead the explanation with the next action the reader should take, then the gist, then the analogy.
-5. Strip AI-isms: remove hedging ("it's worth noting", "importantly"), motivational framing ("let's dive in", "imagine for a moment"), list ceremony with no payload, and filler connectives. Keep only sentences that carry meaning.
-6. Read the result back and check the done predicate: exactly one gist, exactly one analogy, next action first, no AI-isms. Rewrite until it holds.
+1. Name the concept from the request. If the request does not name one, stop and ask; do not invent a topic. Done when: the concept is named from the request or the run stopped to ask.
+2. Write the gist: one sentence stating what the concept is, using only words a five-year-old would know. Done when: one gist sentence exists in five-year-old vocabulary.
+3. Write one analogy that connects the concept to an everyday object or experience a child recognizes. Done when: one analogy connects the concept to a child-recognized object or experience.
+4. Lead the explanation with the next action the reader should take, then the gist, then the analogy. Done when: the explanation is ordered as next action, gist, analogy.
+5. Strip AI-isms: remove hedging ("it's worth noting", "importantly"), motivational framing ("let's dive in", "imagine for a moment"), list ceremony with no payload, and filler connectives. Keep only sentences that carry meaning. Done when: no AI-isms remain and every sentence carries meaning.
 
 ## Failure and recovery
 - Unspecified concept: ask the user for the concept; return nothing else.

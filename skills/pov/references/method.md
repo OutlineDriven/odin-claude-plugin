@@ -1,4 +1,4 @@
-# Method and Verdict Contract
+# Method and verdict contract
 
 Load this before reasoning about the verdict (SKILL.md Phase 2). It defines the Verify and Verdict steps, the two cross-cutting properties, the two-floor gate, and the verdict contract.
 
@@ -25,7 +25,7 @@ A conversation claim (warm mode) never satisfies a floor until a scout corrobora
 
 ## The verdict contract
 
-every verdict carries a fixed vocabulary and a fixed shape so it is comparable and the next run's precedent search can find it.
+Every verdict carries a fixed vocabulary and a fixed shape so it is comparable and the next run's precedent search can find it.
 
 **Grade** — exactly one of:
 

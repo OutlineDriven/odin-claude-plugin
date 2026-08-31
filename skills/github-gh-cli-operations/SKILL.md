@@ -22,17 +22,17 @@ disable-model-invocation: true
 
 ## Procedure
 
-1. If the prompt includes a github.com URL, treat the URL alone as sufficient reason to act and translate it into the relevant gh/git workflow before anything else.
-2. Use the gh CLI for every GitHub operation; never suggest or use the GitHub web interface.
-3. Before running an unfamiliar gh command, validate it with `gh help <command>` and use the confirmed syntax.
-4. Open PRs with explicit base and head and a body file: `gh pr create --base main --head <branch> --title "<title>" --body-file <file>`. Use `--body-file` (a temporary file) rather than `--body` to avoid newline escaping issues.
-5. Write PR bodies as short plain prose. Add no subsections or headings such as `## Summary` or `## Testing`, and no testing section. Add a longer description only for architecture changes that need extra context.
-6. After opening a PR, watch CI to completion with `gh pr checks <num> --watch 2>&1` and proactively fix any failures.
-7. For an interactive rebase: run `git rebase -i <base>`, verify with `git log --oneline -n 10`, and on conflict resolve the file, `git add <file>`, then `git rebase --continue`; abort anytime with `git rebase --abort`.
-8. For merge conflict resolution: find conflicts with `git status`, inspect with `git diff`, resolve every marker, `git add <resolved-file>`, then `git merge --continue` (or `git rebase --continue`); confirm a clean state with `git status`.
-9. For branch cleanup: list with `git branch --merged main`, delete locally with `git branch -d <branch>`, delete remotely with `git push origin --delete <branch>`, then `git fetch --prune`.
-10. Never alter git signing key configuration (`user.signingkey`) or signing mode. If signing is already enabled and correctly configured, create signed commits with the existing setup; otherwise proceed without signing.
-11. Never add AI co-authorship attribution (e.g. `Co-Authored-By: Claude`) to commits or PR bodies.
+1. If the prompt includes a github.com URL, treat the URL alone as a sufficient trigger and translate it into the relevant gh/git workflow before anything else. Done when: the stated action, evidence, and guard all hold.
+2. Use the gh CLI for every GitHub operation; never suggest or use the GitHub web interface. Done when: the stated action, evidence, and guard all hold.
+3. Before running an unfamiliar gh command, validate it with `gh help <command>` and use the confirmed syntax. Done when: the stated action, evidence, and guard all hold.
+4. Open PRs with explicit base and head and a body file: `gh pr create --base main --head <branch> --title "<title>" --body-file <file>`. Use `--body-file` (a temporary file) rather than `--body` to avoid newline escaping issues. Done when: the stated action, evidence, and guard all hold.
+5. Write PR bodies as short plain prose. Do not add subsections, headings such as `## Summary` or `## Testing`, or a testing section. Add a longer description only for architecture changes that need extra context. Done when: the stated action, evidence, and guard all hold.
+6. After opening a PR, watch CI to completion with `gh pr checks <num> --watch 2>&1` and proactively fix any failures. Done when: the stated action, evidence, and guard all hold.
+7. For an interactive rebase: run `git rebase -i <base>`, verify with `git log --oneline -n 10`, and on conflict resolve the file, `git add <file>`, then `git rebase --continue`; abort anytime with `git rebase --abort`. Done when: the stated action, evidence, and guard all hold.
+8. For merge conflict resolution: find conflicts with `git status`, inspect with `git diff`, resolve every marker, `git add <resolved-file>`, then `git merge --continue` (or `git rebase --continue`); confirm a clean state with `git status`. Done when: the stated action, evidence, and guard all hold.
+9. For branch cleanup: list with `git branch --merged main`, delete locally with `git branch -d <branch>`, delete remotely with `git push origin --delete <branch>`, then `git fetch --prune`. Done when: the stated action, evidence, and guard all hold.
+10. Never alter git signing key configuration (`user.signingkey`) or signing mode. If signing is already enabled and correctly configured, create signed commits with the existing setup; otherwise proceed without signing. Done when: the stated action, evidence, and guard all hold.
+11. Never add AI co-authorship attribution (e.g. `Co-Authored-By: Claude`) to commits or PR bodies. Done when: the stated action, evidence, and guard all hold.
 
 ## Failure and recovery
 - Unfamiliar gh command: stop and confirm syntax with `gh help <command>` before running; never guess flags.

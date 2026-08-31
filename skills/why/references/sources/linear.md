@@ -1,4 +1,4 @@
-# Linear Tickets
+# Linear tickets
 
 ## What this source contains
 

@@ -12,7 +12,7 @@ description: 'Use when asked to invoke the eval scripts to score skill scenarios
 | Trigger | A human invokes `pnpm run eval`, `eval:builder`, `eval:skill`, or `eval:sensitive`. |
 | Authority | Reversible-local: write only to a git-ignored results directory under an isolated temp sessions root. No VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Writes results JSON to the git-ignored results dir; exits non-zero on any rubric failure; forbidden-noise and forbidden-tool hits fail outright. |
-| Done | Repeatable, fast (~15-25s per scenario) runs where every rubric check passes and a failure points at model/instructions/catalogue rather than capture flakiness; a seeded frozen approved analysis isolates the builder from describer variance. |
+| Done | Runs are repeatable and fast (~15-25s per scenario), every rubric check passes, and failures point to the model/instructions/catalogue rather than capture flakiness. A seeded frozen approved analysis isolates the builder from describer variance. |
 
 ## Inputs
 
@@ -22,20 +22,20 @@ description: 'Use when asked to invoke the eval scripts to score skill scenarios
 
 ## Procedure
 
-1. Bound scope before any run: resolve an isolated temp sessions root for this run and confirm the results directory is git-ignored before writing to it.
-2. Select the scenario suite from the invoked script (`eval:builder`, `eval:skill`, `eval:sensitive`, or the aggregate `eval`).
-3. For each scenario, load its fixture and, when supplied, the seeded frozen approved analysis; do not regenerate a seeded analysis.
-4. Run the scenario capture under the configured model, instructions, and catalogue; keep each scenario fast (~15-25s).
-5. Score rubric-primary: evaluate each scenario against its rubric checks. Treat forbidden-noise and forbidden-tool hits as outright failures independent of the rubric pass count.
-6. When the opt-in judge is enabled, run it only on scenarios the rubric did not already resolve; judge output is advisory unless a rubric check consumes it.
-7. Write the results JSON to the git-ignored results directory.
-8. Exit non-zero if any rubric, forbidden-noise, or forbidden-tool check failed; exit zero only when the full check set passes.
+1. Before any run, bound the scope: resolve an isolated temp sessions root for this run and confirm that the results directory is git-ignored before writing to it. Done when: the temp sessions root is resolved and the results directory is confirmed git-ignored.
+2. Select the scenario suite from the invoked script (`eval:builder`, `eval:skill`, `eval:sensitive`, or the aggregate `eval`). Done when: the suite is selected.
+3. For each scenario, load its fixture and, when supplied, the seeded frozen approved analysis; do not regenerate a seeded analysis. Done when: every scenario's fixture (and seeded analysis when supplied) is loaded.
+4. Run the scenario capture under the configured model, instructions, and catalogue; keep each scenario fast (~15-25s). Done when: every scenario is captured with its real output.
+5. Use rubric-primary scoring to evaluate each scenario against its rubric checks. Treat forbidden-noise and forbidden-tool hits as outright failures independent of the rubric pass count. Done when: every scenario is scored, with forbidden hits treated as outright failures.
+6. When the opt-in judge is enabled, run it only on scenarios the rubric did not already resolve; judge output is advisory unless a rubric check consumes it. Done when: the judge is run on unresolved scenarios only (or skipped when disabled).
+7. Write the results JSON to the git-ignored results directory. Done when: the results JSON is written.
+8. Exit non-zero if any rubric, forbidden-noise, or forbidden-tool check failed; exit zero only when the full check set passes. Done when: the exit code reflects the full check set outcome.
 
 ## Failure and recovery
-- Capture failure (timeout, crash, missing fixture): mark that scenario failed, record the capture error in the results JSON, and continue the remaining scenarios; do not attribute a capture failure to the model, instructions, or catalogue.
+- Capture failure (timeout, crash, missing fixture): mark the scenario as failed, record the capture error in the results JSON, and continue with the remaining scenarios. Do not attribute a capture failure to the model, instructions, or catalogue.
 - Rubric failure: non-zero exit; the results JSON names the failing check so the failure points at model/instructions/catalogue rather than capture flakiness.
 - forbidden-noise or forbidden-tool hit: non-zero exit, outright, regardless of rubric results.
-- Partial results: scenarios completed before a capture failure are retained in the results JSON; the run still exits non-zero if any retained scenario failed or any check failed.
+- Partial results: retain scenarios completed before a capture failure in the results JSON. The run still exits non-zero if any retained scenario or check failed.
 - Rollback: all writes are confined to the git-ignored results dir under the isolated temp sessions root; delete that directory to discard a run. No mutation outside it.
 
 ## Output

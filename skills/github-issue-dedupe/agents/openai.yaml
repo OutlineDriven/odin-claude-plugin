@@ -1,3 +1,3 @@
 interface:
-  display_name: "GitHub Issue Dedupe"
-  short_description: "Find duplicate GitHub issues; post a high-confidence comment"
+  display_name: "Github Issue Dedupe"
+  short_description: "Use when finding duplicate GitHub issues, checking for similar"

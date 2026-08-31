@@ -1,8 +1,8 @@
-# Interest Routing Contract
+# Interest routing contract
 
 Use this reference as the deterministic routing layer after base context and contribution signals have been collected. It is intentionally self-contained: no external cache, no plugin state, no dependency on other skills.
 
-## Signal Shapes
+## Signal shapes
 
 Normalize every collector result before matching:
 
@@ -21,7 +21,7 @@ Normalize every collector result before matching:
 
 Missing optional fields are acceptable; missing `kind`, `file` for file-backed work, or `evidence` downgrades the candidate to LOW and usually excludes it from the final list.
 
-## Interest → Signal Map
+## Interest → signal map
 
 | Developer interest | Primary signals | Secondary signals | Ranking rule | Degradation |
 |---|---|---|---|---|
@@ -32,7 +32,7 @@ Missing optional fields are acceptable; missing `kind`, `file` for file-backed w
 | Want to improve docs | stale inline symbols/import paths; docs with zero code coupling | open issues labelled `documentation`; README examples that fail lookup | broken symbol/path beats coarse zero-coupling; docs issue + stale reference beats both | if docs signal empty, say no stale docs found and offer tests or cleanup |
 | Want quick cleanup | verified commented-out code; verified orphan exports | passthrough wrappers with visible call sites; redundant always-true branches as bug investigation | pure deletion HIGH before contained refactor MEDIUM; never start with exported public surface | if all cleanup counts zero, say no safe cleanup candidates detected and offer docs/tests |
 
-## Candidate Scoring
+## Candidate scoring
 
 Use scoring to order candidates within the selected interest; do not show raw scores unless useful.
 
@@ -47,7 +47,7 @@ score = base + overlap_bonus + locality_bonus + issue_bonus - risk_penalty
 
 Suppress candidates with `score <= 1` unless every signal is weak; in that case disclose LOW certainty and ask whether to inspect deeper.
 
-## Four-field Recommendation Template
+## Four-field recommendation template
 
 Every recommendation uses this exact shape.
 
@@ -65,7 +65,7 @@ Every recommendation uses this exact shape.
 
 Do not include a recommendation that cannot fill all four fields. If line numbers are unavailable, the First step must produce them (`rg -n` or `bat -P -p -n`).
 
-## Slop Verification Rules
+## Slop verification rules
 
 Cleanup recommendations require a separate verification pass before any zero-behavior wording.
 
@@ -125,7 +125,7 @@ First step:
 bat -P -p -n <file> and read the variables feeding the predicate; infer the intended comparison from adjacent branches/tests before editing.
 ```
 
-## Native Signal Recipes
+## Native signal recipes
 
 These recipes are runnable and replace external analyzers with local evidence.
 
@@ -202,7 +202,7 @@ Label routing:
 - `test`, `testing`, `coverage` → tests.
 - `cleanup`, `refactor`, `chore` → cleanup only after repo verification.
 
-## Error / Degradation Table
+## Error / degradation table
 
 | Situation | Response | Fallback |
 |---|---|---|

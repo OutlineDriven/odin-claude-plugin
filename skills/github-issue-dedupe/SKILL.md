@@ -24,17 +24,17 @@ disable-model-invocation: true
 
 ## Procedure
 
-1. Resolve the target issue: read its title, body, labels, and comments with `gh issue view`. Extract symptom phrases, error messages, stack traces, and distinctive keywords.
-2. Bound the search scope to the named repository. Do not search outside it unless the human explicitly supplies a broader scope.
-3. Run a multi-strategy search over open and recently closed issues using `gh search issues` and `gh issue list`:
+1. Resolve the target issue: read its title, body, labels, and comments with `gh issue view`. Extract symptom phrases, error messages, stack traces, and distinctive keywords. Done when: the stated action, evidence, and guard all hold.
+2. Bound the search scope to the named repository. Do not search outside it unless the human explicitly supplies a broader scope. Done when: the stated action, evidence, and guard all hold.
+3. Run a multi-strategy search over open and recently closed issues using `gh search issues` and `gh issue list`: Done when: the stated action, evidence, and guard all hold.
    - Keyword and title-similarity search from the extracted terms.
    - Error-message and stack-trace overlap search.
    - Symptom-phrase overlap search using multiple phrasings of the reported problem.
-4. For each candidate, compare it against the target issue: title similarity, shared error text, overlapping symptom descriptions, and reproduction steps. Discard the target issue itself.
-5. Score each remaining candidate for duplicate confidence. A candidate is a high-confidence duplicate only when its core problem, error signature, or reproduction matches the target at 92% or above.
-6. If no candidate reaches the threshold, return a no-duplicates result. Do not post a comment.
-7. If one or more candidates reach the threshold, present the duplicates list to the human with the target issue reference, each duplicate's number and title, and the matching evidence.
-8. Only when the human confirms, post one comment on the target issue listing the high-confidence duplicates. Do not modify, close, label, or delete any duplicate issue.
+4. For each candidate, compare it against the target issue: title similarity, shared error text, overlapping symptom descriptions, and reproduction steps. Discard the target issue itself. Done when: the stated action, evidence, and guard all hold.
+5. Score each remaining candidate for duplicate confidence. A candidate is a high-confidence duplicate only when its core problem, error signature, or reproduction matches the target at 92% or above. Done when: the stated action, evidence, and guard all hold.
+6. If no candidate reaches the threshold, return a no-duplicates result. Do not post a comment. Done when: the stated action, evidence, and guard all hold.
+7. If one or more candidates reach the threshold, present the duplicates list to the human with the target issue reference, each duplicate's number and title, and the matching evidence. Done when: the stated action, evidence, and guard all hold.
+8. Only when the human confirms, post one comment on the target issue listing the high-confidence duplicates. Do not modify, close, label, or delete any duplicate issue. Done when: the stated action, evidence, and guard all hold.
 
 ## Failure and recovery
 - Ambiguous or partial target issue: stop and report what is missing; do not guess the problem or invent search terms.

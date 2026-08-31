@@ -1,3 +1,3 @@
 interface:
   display_name: "Rewrite Clean V0"
-  short_description: "Rewrites a drifted artifact as its clean first version."
+  short_description: "Use when a document or file has been edited piecemeal and reads"

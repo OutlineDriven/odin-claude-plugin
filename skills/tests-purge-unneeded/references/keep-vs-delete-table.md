@@ -1,6 +1,6 @@
-# Keep vs Delete — language-agnostic decision rubric
+# Keep vs. delete: language-agnostic decision rubric
 
-The discriminator is always: **what real bug, in the production code, would this test catch?** If you cannot name one, the test does not earn its keep.
+Always ask: **what real bug, in the production code, would this test catch?** If you cannot name one, the test does not earn its keep.
 
 ## Decision table
 
@@ -40,7 +40,7 @@ When the table is ambiguous:
 
 1. **Can you inject a bug that the test catches?** If yes, keep. If no, delete.
 2. **Does the test fail when you change the production code in a wrong way?** If only when you change the test, delete.
-3. **Is the test the only thing covering this behavior?** If yes, lean toward keep — but lean toward writing a *better* test that catches more.
+3. **Is the test the only thing covering this behavior?** If yes, keep it, but prefer a *better* test that catches more.
 4. **Is the test in a security-sensitive path?** Keep, even if redundant. Defense in depth has a real cost-benefit.
 
 ## Anti-patterns to recognize and delete

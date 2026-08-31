@@ -21,13 +21,13 @@ Required: the repository and head branch, supplied by the user or resolved from 
 
 ## Procedure
 
-1. Resolve the repository, head branch, base branch, and operation type. Use read-only `git` and `gh` queries to inspect the branch diff, commits, remote default branch, and existing PRs. If the repository, branches, or update target remain ambiguous, stop without publishing.
-2. For creation, verify that no open PR already represents the same head branch. For update, verify that exactly one target exists and is a draft; do not create a duplicate, convert a ready PR to draft, or select a PR by guesswork.
-3. Derive a conventional title in the form `<type>(<scope>): <summary>`, omitting the scope when none is evidenced. Keep the summary specific to the actual change.
-4. Draft a concise body with `## Summary` and `## Testing`. State what changed and why for reviewers. Record only observed test results; when no test result is available, say `Not run` and give no invented reason. Add issue links, screenshots, rollout notes, or reviewer guidance only when applicable and verified.
-5. Preview the exact repository, head and base branches, create-or-update consequence, title, and body before any authenticated publishing command. The user's explicit invocation authorizes only this previewed operation.
-6. Publish with `gh pr create --draft` for a new PR or `gh pr edit` for the identified draft PR, passing the previewed title and body without interpolation through an unsafe shell string.
-7. Query the remote PR after publication and confirm its URL, draft state, head and base branches, title, and body. Success requires all values to match the preview.
+1. Resolve the repository, head branch, base branch, and operation type. Use read-only `git` and `gh` queries to inspect the branch diff, commits, remote default branch, and existing PRs. If the repository, branches, or update target remain ambiguous, stop without publishing. Done when: repository, head, base, and operation are resolved, or the run stops on ambiguity.
+2. For creation, verify that no open PR already represents the same head branch. For update, verify that exactly one target exists and is a draft; do not create a duplicate, convert a ready PR to draft, or select a PR by guesswork. Done when: no duplicate exists for creation, or exactly one draft target is confirmed for update.
+3. Derive a conventional title in the form `<type>(<scope>): <summary>`, omitting the scope when none is evidenced. Keep the summary specific to the actual change. Done when: a conventional title is derived with a specific summary.
+4. Draft a concise body with `## Summary` and `## Testing`. State what changed and why for reviewers. Record only observed test results; when no test result is available, say `Not run` and give no invented reason. Add issue links, screenshots, rollout notes, or reviewer guidance only when applicable and verified. Done when: the body is drafted with Summary and Testing sections and only verified content.
+5. Preview the exact repository, head and base branches, create-or-update consequence, title, and body before any authenticated publishing command. The user's explicit invocation authorizes only this previewed operation. Done when: the preview is presented before any authenticated command.
+6. Publish with `gh pr create --draft` for a new PR or `gh pr edit` for the identified draft PR, passing the previewed title and body without interpolation through an unsafe shell string. Done when: the publish command is executed with the previewed title and body.
+7. Query the remote PR after publication and confirm its URL, draft state, head and base branches, title, and body. Success requires all values to match the preview. Done when: all remote PR values match the preview.
 
 ## Failure and recovery
 - **Invalid or ambiguous target:** stop before mutation and report the unresolved repository, branch, duplicate, or PR identity.

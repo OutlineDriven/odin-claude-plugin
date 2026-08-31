@@ -1,6 +1,6 @@
 ---
 name: retrospective
-description: 'Use when the user runs /retrospective for a period, produce an engineering retrospective with team breakdowns and habits assembled from telemetry and review logs. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user runs /retrospective for a period. Produces an engineering retrospective with team breakdowns and habits assembled from telemetry and review logs. Not for an agent-environment retrospective — use retro; for a learning milestone — use run-learning-retrospective.'
 ---
 
 # Retrospective

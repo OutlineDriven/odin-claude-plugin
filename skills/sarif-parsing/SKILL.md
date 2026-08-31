@@ -1,6 +1,6 @@
 ---
 name: sarif-parsing
-description: 'Use when a user supplies existing SARIF, inspect, filter, aggregate, deduplicate, diff, convert, or gate findings without running a scanner. Produces the requested findings or derived artifacts with correct severity resolution, path normalization, and metadata retained. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a user supplies existing SARIF to inspect, filter, aggregate, deduplicate, diff, convert, or gate findings without running a scanner. Produces the requested findings or derived artifacts. Not for running a scanner — use the relevant security-review skill.'
 ---
 
 # SARIF analysis

@@ -1,6 +1,6 @@
 ---
 name: diataxis-docs-authoring
-description: 'Use when writing, structuring, or reviewing documentation and choosing between tutorial, how-to, reference, or explanation. Each document becomes a single Diataxis type that passes its type-specific validation with cross-links connecting the types. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when writing, structuring, or reviewing docs as tutorial, how-to, reference, or explanation. Each document becomes one Diataxis type with type-specific validation and cross-links. Not for collaborative drafting — use doc-coauthoring. No remote or irreversible changes.'
 ---
 
 # Diataxis docs authoring
@@ -20,15 +20,21 @@ Required: the documentation file(s) to author or restructure, or a request namin
 
 ## Procedure
 
-1. Classify each document into exactly one Diataxis type: tutorial, how-to, reference, or explanation. A document mixing types must be split into separate documents, one per type.
-2. Bound scope: list every file to create or edit before any mutation. Keep a copy of prior content for rollback.
-3. Author per type:
-   - Tutorial: learning-oriented; a beginner completes it unaided and each step yields a visible result. State what the reader will learn, then ordered steps.
-   - How-to: task-oriented; an experienced user completes it without backtracking. Steps toward a concrete goal, no theory.
+1. Classify each document into exactly one Diataxis type: tutorial, how-to, reference, or explanation. A document mixing types must be split into separate documents, one per type. **Done when:** every document is classified as exactly one type, with mixed-type documents split.
+
+2. Bound scope: list every file to create or edit before any mutation. Keep a copy of prior content for rollback. **Done when:** the file list is enumerated and prior-content copies are kept.
+
+3. Author each type:
+   - Tutorial: learning-oriented; a beginner completes it unaided, and each step yields a visible result. State what the reader will learn, followed by ordered steps.
+   - How-to: task-oriented; an experienced user completes it without backtracking. Give steps toward a concrete goal, with no theory.
    - Reference: information-oriented; a fact is findable in under 30 seconds. Each entry uses the format name -> type -> default -> description -> example.
-   - Explanation: understanding-oriented; the reader can restate the why. Discuss design choices and context, no steps.
-4. Add cross-links between types: a tutorial links to the how-to and reference it prepares for; a how-to links to the reference and explanation behind it; reference and explanation link back to the practical types.
-5. Run the done validation for each document against its type predicate. Stop on the first document that fails rather than widening scope.
+   - Explanation: understanding-oriented; the reader can restate the why. Discuss design choices and context, with no steps.
+
+   **Done when:** each document is authored to its type's orientation and structure.
+
+4. Add cross-links between types: a tutorial links to the how-to and reference it prepares for; a how-to links to the reference and explanation behind it; reference and explanation link back to the practical types. **Done when:** cross-links connect each type to its related types.
+
+5. Run the done validation for each document against its type predicate. Stop on the first document that fails rather than widening scope. **Done when:** every document passes its type predicate, or the skill stops on the first failure.
 
 ## Failure and recovery
 - Mixed-type document: split into separate documents, one per type; do not merge types to save a file.
@@ -37,7 +43,7 @@ Required: the documentation file(s) to author or restructure, or a request namin
 - Rollback: restore prior file content from the pre-edit copy or version control; never leave a half-restructured tree.
 
 ## Output
-A set of documentation files, each a single Diataxis type passing its validation, with cross-links connecting the types, plus a list of any document that failed validation with its failed predicate.
+A set of documentation files, each a single Diataxis type passing its validation, with cross-links connecting the types, plus a list of any document that failed validation with its failed predicate, ordered classify → bound → author → cross-link → validate.
 
 ## Provenance
 

@@ -22,15 +22,15 @@ description: 'Use when a user opts into narration and records speech during capt
 
 ## Procedure
 
-1. Confirm the user has explicitly opted into narration. If not, stop — do not enable narration implicitly.
-2. Begin capturing audio from the active input device. Monitor device status continuously; if the device disconnects, stop capture visibly and report the disconnect to the user rather than silently switching to another input.
-3. Decode and resample the captured audio to the format required by the transcription engine (16 kHz mono PCM). Use the audio decode path to normalize raw device output.
-4. Apply silence detection to the decoded audio. Segments below the silence threshold are excluded from transcription to avoid processing non-speech audio.
-5. If the Whisper model is not cached locally, prompt the user for explicit approval before downloading the ~252 MB model. If the user declines, halt the pipeline and report the block — do not fall back to a remote service or skip transcription.
-6. Run local Whisper inference on each non-silence audio segment to produce word-level transcriptions with millisecond timestamps (atMs).
-7. Detect the language of each transcribed segment and tag the output with the identified language code.
-8. Write narration.json to the output directory containing the transcribed words, their atMs offsets, and language tags. Write the corresponding version-2 audio segments alongside it.
-9. Verify the output files exist and are non-empty. If verification passes, the pipeline is complete.
+1. Confirm the user has explicitly opted into narration. If not, stop — do not enable narration implicitly. Done when: the step’s stated result is achieved or its stop condition is reported.
+2. Begin capturing audio from the active input device. Monitor device status continuously; if the device disconnects, stop capture visibly and report the disconnect to the user rather than silently switching to another input. Done when: the step’s stated result is achieved or its stop condition is reported.
+3. Decode and resample the captured audio to the format required by the transcription engine (16 kHz mono PCM). Use the audio decode path to normalize raw device output. Done when: the step’s stated result is achieved or its stop condition is reported.
+4. Apply silence detection to the decoded audio. Segments below the silence threshold are excluded from transcription to avoid processing non-speech audio. Done when: the step’s stated result is achieved or its stop condition is reported.
+5. If the Whisper model is not cached locally, prompt the user for explicit approval before downloading the ~252 MB model. If the user declines, halt the pipeline and report the block — do not fall back to a remote service or skip transcription. Done when: the step’s stated result is achieved or its stop condition is reported.
+6. Run local Whisper inference on each non-silence audio segment to produce word-level transcriptions with millisecond timestamps (atMs). Done when: the step’s stated result is achieved or its stop condition is reported.
+7. Detect the language of each transcribed segment and tag the output with the identified language code. Done when: the step’s stated result is achieved or its stop condition is reported.
+8. Write narration.json to the output directory containing the transcribed words, their atMs offsets, and language tags. Write the corresponding version-2 audio segments alongside it. Done when: the step’s stated result is achieved or its stop condition is reported.
+9. Verify the output files exist and are non-empty. If verification passes, the pipeline is complete. Done when: the step’s stated result is achieved or its stop condition is reported.
 
 ## Failure and recovery
 | Failure class | Behavior |

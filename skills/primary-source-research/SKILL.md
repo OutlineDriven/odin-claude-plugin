@@ -22,13 +22,13 @@ description: 'Use when a task needs primary-source reading. Produces one durable
 
 ## Procedure
 
-1. Confirm the subject is a named library, framework, SDK, API, CLI tool, or service. If it is a question about local repository code, stop.
-2. Extract the canonical identifier and version. If version is unstated, look up latest stable from official documentation.
-3. Search only authoritative primary sources: official documentation, official API reference pages, official repository README or docs folders, or source code. Stop after first authoritative match; do not iterate a ladder.
-4. Record every factual claim with a citation to its primary source URL or file path. Each citation must uniquely own the claim it annotates.
-5. If a claim cannot be sourced from a primary source, write it with the label `[Unverified — no primary source available]` and stop without filling the gap.
-6. Write all verified findings into a single Markdown file at the target path. Each claim in the file must have at least one primary-source citation inline.
-7. Return the artifact path.
+1. Confirm the subject is a named library, framework, SDK, API, CLI tool, or service. If it is a question about local repository code, stop. Done when: the subject is confirmed as an external library, framework, SDK, API, CLI tool, or service, or the run stops.
+2. Extract the canonical identifier and version. If version is unstated, look up latest stable from official documentation. Done when: the canonical identifier and version are extracted.
+3. Search only authoritative primary sources: official documentation, official API reference pages, official repository README or docs folders, or source code. Stop after first authoritative match; do not iterate a ladder. Done when: an authoritative primary source is found or the search stops.
+4. Record every factual claim with a citation to its primary source URL or file path. Each citation must uniquely own the claim it annotates. Done when: every factual claim has a unique primary-source citation.
+5. If a claim cannot be sourced from a primary source, write it with the label `[Unverified — no primary source available]` and stop without filling the gap. Done when: unsourced claims are labeled and no gap is filled with non-primary content.
+6. Write all verified findings into a single Markdown file at the target path. Each claim in the file must have at least one primary-source citation inline. Done when: a single Markdown file exists at the target path with every claim cited inline.
+7. Return the artifact path. Done when: the artifact path is returned.
 
 ## Failure and recovery
 | Failure class | Result |
@@ -42,11 +42,7 @@ description: 'Use when a task needs primary-source reading. Produces one durable
 Partial-result rule: if the artifact was partially written before a failure, it must be deleted before reporting completion. The done predicate does not hold until the complete artifact exists.
 
 ## Output
-A single Markdown file at the target path containing:
-- Canonical subject name and version
-- Every verified claim with an inline primary-source citation
-- Each unverifiable claim explicitly labeled `[Unverified — no primary source available]`
-- No claims derived solely from training data without citation
+A single Markdown file at the target path with canonical name and version, verified claims with inline citations, unverifiable claims labeled, and no uncited claims.
 
 ## Provenance
 

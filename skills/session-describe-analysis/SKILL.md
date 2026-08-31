@@ -1,6 +1,6 @@
 ---
 name: session-describe-analysis
-description: 'Use when a user clicks Analyze on a recorded session to produce an editable analysis with overall intent and ordered steps that gates builder unlock upon approval. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a user clicks Analyze on a recorded session to produce an editable analysis with overall intent and ordered steps that gates builder unlock upon approval. Not for resuming a dead session — use session-resurrection.'
 ---
 
 # Session describe analysis
@@ -9,10 +9,14 @@ description: 'Use when a user clicks Analyze on a recorded session to produce an
 
 | Field | Bound contract |
 |---|---|
-| Trigger | user clicks Analyze on a recorded session |
-| Authority | reversible-local: write only named local artifacts in the session directory; rollback by deleting analysis.json and description.md |
-| Side effect | sends only redacted timeline, events, and frames to the provider; persists analysis.json and description.md in the session dir |
-| Done | one overall intent plus an ordered list of steps exists in description.md, user-editable until approved; approval unlocks the builders |
+| Trigger | User clicks Analyze on a recorded session. |
+| Authority | Reversible-local: write only named local artifacts in the session directory; rollback by deleting analysis.json and description.md. |
+| Side effect | Sends only redacted timeline, events, and frames to the provider; persists analysis.json and description.md in the session dir. |
+| Done | One overall intent plus an ordered list of steps exists in description.md, user-editable until approved; approval unlocks the builders. |
+
+## Not for
+
+- Resuming a dead or interrupted session — use session-resurrection.
 
 ## Inputs
 
@@ -21,25 +25,23 @@ description: 'Use when a user clicks Analyze on a recorded session to produce an
 
 ## Procedure
 
-1. Validate that the session directory exists and contains timeline, events, and frame data. If any required artifact is missing, stop and report the gap.
-2. Read the session bundle: timeline, events, and frames from the session directory.
-3. Redact the bundle: strip credentials, tokens, personal identifiers, and any content outside the recorded interaction before provider submission. Only redacted data leaves the local boundary.
-4. Send the redacted bundle to the configured provider with instructions to identify one overall intent and produce an ordered list of interaction steps.
-5. Receive the provider response and persist two artifacts in the session directory:
-   - `analysis.json`: structured representation with `intent` (string) and `steps` (ordered array of step objects, each with `index`, `action`, and `evidence` fields).
-   - `description.md`: human-readable prose rendering the same intent and steps, editable by the user.
-6. Mark the description as pending approval. The user reviews and edits description.md. Upon explicit approval, unlock the builder tools for downstream artifact generation from the approved steps.
+1. Validate that the session directory exists and contains timeline, events, and frame data. **Done when:** all required artifacts are confirmed present or the gap is reported.
+2. Read the session bundle: timeline, events, and frames from the session directory. **Done when:** the bundle is loaded into memory.
+3. Redact the bundle: strip credentials, tokens, personal identifiers, and any content outside the recorded interaction before provider submission. Only redacted data leaves the local boundary. **Done when:** the bundle is redacted or the redaction gap is reported.
+4. Send the redacted bundle to the configured provider with instructions to identify one overall intent and produce an ordered list of interaction steps. **Done when:** the provider response is received or the provider error is reported.
+5. Receive the provider response and persist two artifacts in the session directory: `analysis.json` (structured representation with `intent` string and `steps` ordered array of step objects, each with `index`, `action`, and `evidence` fields) and `description.md` (human-readable prose rendering the same intent and steps, editable by the user). **Done when:** both files exist with the intent and steps.
+6. Mark the description as pending approval. The user reviews and edits description.md. Upon explicit approval, unlock the builder tools for downstream artifact generation from the approved steps. **Done when:** the description is marked pending and builders are locked until approval.
 
 ## Failure and recovery
-- **Missing session data**: stop before step 3. No artifacts written. Report which required file is absent.
-- **Provider error**: stop after step 4. No partial artifacts written. Report the provider error. User may retry.
-- **Redaction failure**: stop before step 3. Do not send unredacted data. Report the redaction gap.
-- **Approval not granted**: description.md remains in pending state. Builders stay locked. No timeout or auto-approval.
+
+- **Missing session data:** stop before step 3. No artifacts written. Report which required file is absent.
+- **Provider error:** stop after step 4. No partial artifacts written. Report the provider error. User may retry.
+- **Redaction failure:** stop before step 3. Do not send unredacted data. Report the redaction gap.
+- **Approval not granted:** description.md remains in pending state. Builders stay locked. No timeout or auto-approval.
 
 ## Output
-- `analysis.json` in the session directory: structured intent and ordered steps.
-- `description.md` in the session directory: human-readable, user-editable analysis pending approval.
-- Upon approval: builder tools unlocked for downstream artifact generation from approved steps.
+
+`analysis.json` (structured intent and ordered steps) and `description.md` (human-readable, user-editable, pending approval) in the session directory; upon approval, builder tools unlocked for downstream artifact generation.
 
 ## Provenance
 

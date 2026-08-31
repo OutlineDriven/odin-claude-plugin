@@ -1,4 +1,4 @@
-# Audit Project Review Roster
+# Audit project review roster
 
 Every reviewer is launched as a generic ODIN `reviewer` or `task` agent. Reviewers are read-only during the review pass. They return JSON only and never apply fixes.
 

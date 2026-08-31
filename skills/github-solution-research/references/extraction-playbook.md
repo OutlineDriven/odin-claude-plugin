@@ -1,10 +1,10 @@
 # GitHub solution extraction playbook
 
-Use this playbook after GitHub evidence or repository candidates have been found. The goal is to turn projects, issues, PRs, code, examples, releases, and docs into a local solution for the user's specific problem.
+Use this playbook after finding GitHub evidence or repository candidates. Turn projects, issues, PRs, code, examples, releases, and docs into a local solution for the user's specific problem.
 
 ## Read in this order
 
-Use GitHub CLI (`gh`) as the default inspection entrypoint before browser scraping or custom scripts. Start from `gh search repos`, `gh search issues`, `gh search prs`, `gh search code`, `gh repo view`, `gh issue view`, `gh pr view`, and `gh api`, then deep-read the strongest evidence.
+Use GitHub CLI (`gh`) as the default inspection starting point before browser scraping or custom scripts. Start with `gh search repos`, `gh search issues`, `gh search prs`, `gh search code`, `gh repo view`, `gh issue view`, `gh pr view`, and `gh api`, then read the strongest evidence closely.
 
 1. Repository README/docs for candidate projects to identify what the project does, its public workflow/API, setup path, stated limitations, and license.
 2. Examples, templates, source code, tests, and fixtures that show the correct implementation or configuration shape.

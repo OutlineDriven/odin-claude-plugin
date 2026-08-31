@@ -26,9 +26,9 @@ description: 'Use when a TypeScript repo needs enforced package entry-point boun
 
 ## Procedure
 
-1. **Verify prerequisite.** Run `pnpm exec depcruise --version` from the repo root. If it exits non-zero or is not found, stop with the prerequisite message above.
+1. **Verify prerequisite.** Run `pnpm exec depcruise --version` from the repo root. If it exits non-zero or is not found, stop with the prerequisite message above. Done when: the step’s stated result is achieved or its stop condition is reported.
 
-2. **Write the config.** Create `.dependency-cruiser.cjs` in the repo root with the following content, replacing `PACKAGES_ROOT` with the supplied packages root value:
+2. **Write the config.** Create `.dependency-cruiser.cjs` in the repo root with the following content, replacing `PACKAGES_ROOT` with the supplied packages root value: Done when: the step’s stated result is achieved or its stop condition is reported.
 
 ```javascript
 /** @type {import('dependency-cruiser').IConfiguration} */
@@ -95,24 +95,24 @@ module.exports = {
 
 Replace every literal `PACKAGES_ROOT` in the config above with the actual packages root path relative to the repo root (e.g. `src/packages`).
 
-3. **Wire the lint script.** Add a `lint:boundaries` script to `package.json`:
+3. **Wire the lint script.** Add a `lint:boundaries` script to `package.json`: Done when: the step’s stated result is achieved or its stop condition is reported.
    ```json
    "lint:boundaries": "depcruise <packages-root>"
    ```
    Replace `<packages-root>` with the actual packages root. If an existing lint script or pre-check hook exists, append `lint:boundaries` to it.
 
-4. **Scaffold the example package.** Create `<packages-root>/example/` with:
+4. **Scaffold the example package.** Create `<packages-root>/example/` with: Done when: the step’s stated result is achieved or its stop condition is reported.
    - `index.ts`: exports one function that delegates to an internal file.
    - `lib/impl.ts`: contains the internal implementation.
    - `tests/example.test.ts`: imports `../index.ts` and tests the export.
 
-5. **Prove pass.** Run `lint:boundaries`. Must exit zero.
+5. **Prove pass.** Run `lint:boundaries`. Must exit zero. Done when: the step’s stated result is achieved or its stop condition is reported.
 
-6. **Prove fail.** Add a temporary file `<packages-root>/example/lib/deep-import.ts` that imports `../index.ts` and re-exports it. This is a deep import that violates the boundary. Run `lint:boundaries`; it must exit non-zero and report a violation.
+6. **Prove fail.** Add a temporary file `<packages-root>/example/lib/deep-import.ts` that imports `../index.ts` and re-exports it. This is a deep import that violates the boundary. Run `lint:boundaries`; it must exit non-zero and report a violation. Done when: the step’s stated result is achieved or its stop condition is reported.
 
-7. **Revert and prove clean.** Delete the temporary deep-import file. Run `lint:boundaries` again; it must exit zero. Do not leave the proof artifact in the repo.
+7. **Revert and prove clean.** Delete the temporary deep-import file. Run `lint:boundaries` again; it must exit zero. Do not leave the proof artifact in the repo. Done when: the step’s stated result is achieved or its stop condition is reported.
 
-8. **Document the convention.** Write `<packages-root>/README.md` covering: the layout (root files are entry points, `lib/` for implementation, `tests/` for tests), the rule (import only through entry points), and how to run `lint:boundaries`.
+8. **Document the convention.** Write `<packages-root>/README.md` covering: the layout (root files are entry points, `lib/` for implementation, `tests/` for tests), the rule (import only through entry points), and how to run `lint:boundaries`. Done when: the step’s stated result is achieved or its stop condition is reported.
 
 ## Failure and recovery
 - **Prerequisite missing**: report that dependency-cruiser is not installed and the exact install command; stop.

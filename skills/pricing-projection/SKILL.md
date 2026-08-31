@@ -1,6 +1,6 @@
 ---
 name: pricing-projection
-description: 'Use when a user asks to project cost, estimate BYO cost, estimate spend, how much will this cost, or size a deal. Projection delivered with pricing model, run-rate, scenario comparison, conversion assumption, and sensitivity grid. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when projecting cost, estimating BYO cost or spend, or sizing a deal. Delivers a projection with pricing model, run-rate, scenario comparison, conversion assumption, and sensitivity grid. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Pricing projection
@@ -27,14 +27,14 @@ Optional:
 
 ## Procedure
 
-1. Confirm all four required inputs are present. If `pricing_table` is absent or its validated schema lacks `provider`, `model`, `input_cost_per_million`, or `output_cost_per_million`, abort and name the missing columns.
-2. If `scenario_params` is absent, use the default scenario map. If `conversion_ratio` is absent, set it to `1.0`.
-3. Validate the pricing table schema: each required column must be present in every row. Reject rows with missing required fields.
-4. Generate `/tmp/project_credits.py` as a Python script that loads the usage records and pricing table; computes each model cost as `input_tokens * input_cost_per_million / 1_000_000 + output_tokens * output_cost_per_million / 1_000_000`; applies the conversion ratio; computes daily, weekly, and monthly mid-scenario run-rate; compares all three scenarios; and builds a sensitivity grid across token volume and model choice. Run it with `--usage <usage_records>`, `--pricing <pricing_table>`, `--scenarios <scenario_params>`, `--conversion <conversion_ratio>`, and `--output <output_path>`.
-5. Pipe script stdout to the terminal.
-6. If the script exits non-zero, capture stderr, report the error verbatim, and return with status `blocked` and the five required output elements absent.
-7. If the script exits zero and output exists, confirm it contains the five required elements: pricing model, run-rate, scenario comparison table, conversion assumption, and sensitivity grid.
-8. Return the completed projection brief with all five elements present.
+1. Confirm all four required inputs are present. If `pricing_table` is absent or its validated schema lacks `provider`, `model`, `input_cost_per_million`, or `output_cost_per_million`, abort and name the missing columns. Done when: all four required inputs are confirmed present with valid schema.
+2. If `scenario_params` is absent, use the default scenario map. If `conversion_ratio` is absent, set it to `1.0`. Done when: scenario_params and conversion_ratio are resolved with defaults applied where absent.
+3. Validate the pricing table schema: each required column must be present in every row. Reject rows with missing required fields. Done when: every row in the pricing table has all required columns.
+4. Generate `/tmp/project_credits.py` as a Python script that loads the usage records and pricing table; computes each model cost as `input_tokens * input_cost_per_million / 1_000_000 + output_tokens * output_cost_per_million / 1_000_000`; applies the conversion ratio; computes daily, weekly, and monthly mid-scenario run-rate; compares all three scenarios; and builds a sensitivity grid across token volume and model choice. Run it with `--usage <usage_records>`, `--pricing <pricing_table>`, `--scenarios <scenario_params>`, `--conversion <conversion_ratio>`, and `--output <output_path>`. Done when: the projection script is generated and run with all parameters.
+5. Pipe script stdout to the terminal. Done when: script stdout is piped to the terminal.
+6. If the script exits non-zero, capture stderr, report the error verbatim, and return with status `blocked` and the five required output elements absent. Done when: non-zero exit is handled with stderr captured and status `blocked` returned.
+7. If the script exits zero and output exists, confirm it contains the five required elements: pricing model, run-rate, scenario comparison table, conversion assumption, and sensitivity grid. Done when: the five required elements are confirmed present in the output.
+8. Return the completed projection brief with all five elements present. Done when: the projection brief is returned with all five elements.
 
 ## Failure and recovery
 | Failure class | Response |
@@ -47,14 +47,7 @@ Optional:
 Partial-result rule: if the script produces output but omits one or more of the five required elements, return what was produced and name the absent elements. Do not fabricate or infer missing elements.
 
 ## Output
-A cost projection brief containing:
-1. **Pricing model**: per-model cost breakdown from the pricing table.
-2. **Run-rate**: computed daily/weekly/monthly cost at the mid scenario.
-3. **Scenario comparison**: side-by-side cost table across all three scenarios.
-4. **Conversion assumption**: the conversion ratio applied and its effect on the projected cost.
-5. **Sensitivity grid**: tabular sensitivity of cost to changes in token volume and model selection.
-
-Report format: plain text or Markdown printed to terminal and saved to `reports/pricing/`.
+A cost projection brief with pricing model, run-rate, scenario comparison, conversion assumption, and sensitivity grid, in that order; printed to terminal and saved to `reports/pricing/`.
 
 ## Provenance
 

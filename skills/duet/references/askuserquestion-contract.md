@@ -1,6 +1,6 @@
 # `AskUserQuestion` tool contract (Claude Code reference)
 
-> Sync lineage: `skills/askme/SKILL.md` (section `AskUserQuestion` tool contract) is this contract's canonical source — check it for drift before treating this copy as authoritative.
+> Sync lineage: `skills/askme/SKILL.md` (section `AskUserQuestion` tool contract) is this contract's canonical source. Check it for drift before treating this copy as authoritative.
 
 **Per fire:** `questions` array, `minItems: 1, maxItems: 4`; renders as one batched UI, one user round-trip per fire.
 

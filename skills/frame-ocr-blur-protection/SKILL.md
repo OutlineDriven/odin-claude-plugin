@@ -1,6 +1,6 @@
 ---
 name: frame-ocr-blur-protection
-description: 'Use when a raster frame is requested for the describer while advanced protection is enabled, redact detected sensitive values by compositing opaque pixel boxes over OCR word spans so only redacted frames leave the frame store. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a raster frame is requested for the describer while advanced protection is enabled: redact detected sensitive values by compositing opaque pixel boxes over OCR word spans so only redacted frames leave the frame store.'
 ---
 
 # Frame OCR blur protection
@@ -23,14 +23,14 @@ description: 'Use when a raster frame is requested for the describer while advan
 
 ## Procedure
 
-1. Receive the requested raster frame. If advanced protection is not enabled, pass the frame through unchanged and stop.
-2. Run OCR over the frame to obtain word spans with bounding boxes.
-3. Detect sensitive values: match word spans against sensitive patterns; cross-feed clean-text-known session values to catch values not present as literal spans; reassemble cards split across OCR tokens before matching.
-4. For each detected sensitive span, expand its bounding box to a padded pixel box.
-5. Composite opaque rectangles over the padded boxes in memory, producing a redacted frame. Compositing touches only the requested frame; the original raster outside this request is untouched.
-6. On any OCR failure, unresolvable span, or uncertain sensitive-value boundary, withhold the frame (fail-closed) rather than ship an unredacted or partially redacted frame.
-7. Store only the redacted frame in the frame store. Clean frames with no detected sensitive values pass through unchanged.
-8. Confirm coverage with evals/sensitive/frames and the opt-in real-OCR harness before treating the done predicate as holding.
+1. Receive the requested raster frame. If advanced protection is not enabled, pass the frame through unchanged and stop. Done when: the frame is received, or passed through unchanged when advanced protection is off.
+2. Run OCR over the frame to obtain word spans with bounding boxes. Done when: word spans with bounding boxes are obtained.
+3. Detect sensitive values: match word spans against sensitive patterns; cross-feed clean-text-known session values to catch values not present as literal spans; reassemble cards split across OCR tokens before matching. Done when: all sensitive values are detected, including cross-feed and split-card reassembly.
+4. For each detected sensitive span, expand its bounding box to a padded pixel box. Done when: every sensitive span has a padded pixel box.
+5. Composite opaque rectangles over the padded boxes in memory, producing a redacted frame. Compositing touches only the requested frame; the original raster outside this request is untouched. Done when: the redacted frame is produced in memory.
+6. On any OCR failure, unresolvable span, or uncertain sensitive-value boundary, withhold the frame (fail-closed) rather than ship an unredacted or partially redacted frame. Done when: the frame is withheld (fail-closed) on any failure, or redaction is complete.
+7. Store only the redacted frame in the frame store. Clean frames with no detected sensitive values pass through unchanged. Done when: only the redacted frame is in the frame store; clean frames pass unchanged.
+8. Confirm coverage with evals/sensitive/frames and the opt-in real-OCR harness before treating the done predicate as holding. Done when: coverage is confirmed with evals/sensitive/frames and the opt-in real-OCR harness.
 
 ## Failure and recovery
 - OCR failure or OCR unavailable: withhold the frame; return no frame from the store. Never ship an unredacted frame.

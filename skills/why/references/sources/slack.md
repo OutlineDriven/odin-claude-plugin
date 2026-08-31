@@ -1,4 +1,4 @@
-# Slack Conversations
+# Slack conversations
 
 ## What this source contains
 

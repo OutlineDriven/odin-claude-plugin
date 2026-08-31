@@ -1,3 +1,3 @@
 interface:
   display_name: "Prompt Optimize"
-  short_description: "Best verified prompt under a user-supplied black-box evaluation"
+  short_description: "Use when a prompt feeds a system with a user-supplied"

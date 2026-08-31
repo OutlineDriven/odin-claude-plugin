@@ -1,3 +1,3 @@
 interface:
-  display_name: "Human-Only Bash Wizard"
-  short_description: "Generate a self-contained bash wizard script for human-only"
+  display_name: "Wizard"
+  short_description: "Use when asked to generate an interactive bash wizard that"

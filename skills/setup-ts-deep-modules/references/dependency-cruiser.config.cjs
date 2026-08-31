@@ -1,24 +1,24 @@
 // @ts-check
 // Deep-module enforcement for dependency-cruiser.
 //
-// Each package under the packages root is a DEEP MODULE: a lot of behaviour
-// behind a small interface. A package's PUBLIC SURFACE is its ENTRY POINTS —
-// the files at the package root. Implementation lives in SUBFOLDERS and is
-// private — by convention `lib/` for implementation and `tests/` for tests,
+// Each package under the packages root is a deep module: substantial behaviour
+// behind a small interface. Its public surface consists of its entry points,
+// the files at the package root. Implementation lives in subfolders and is
+// private. By convention, `lib/` holds implementation and `tests/` holds tests,
 // though any subfolder is private. A package may expose several small entry
-// points (index.ts, client.ts, server.ts, …) — prefer that over one giant
-// barrel index.
+// points (index.ts, client.ts, server.ts, …). Prefer that to one giant barrel
+// index.
 //
-// The only thing you should ever need to edit here is PACKAGES_ROOT.
+// Only edit PACKAGES_ROOT.
 
-/** Where packages live. One immediate child dir per package (flat, no nesting). */
+/** Where packages live. One immediate child directory per package (flat, no nesting). */
 const PACKAGES_ROOT = "src/packages";
 
 // --- derived patterns (no need to edit) -------------------------------------
 const R = PACKAGES_ROOT;
 /**
  * A package's private internals: anything nested inside a package subfolder.
- * The package's root files are its entry points and are NOT matched here —
+ * The package's root files are its entry points and are not matched here, so
  * they stay importable from outside.
  */
 const PACKAGE_INTERNALS = `^${R}/[^/]+/[^/]+/`;

@@ -4,7 +4,7 @@
 2. Test it works (`gemini --version` or equivalent) before passing the full prompt; a stale or broken binary may pass `which` but fail on real input.
 3. Confirm the exact invocation with the user, including required flags, auth, and env vars (e.g., API keys). Implementations vary; never assume.
 4. Pass ARTIFACT + CONTRACT + the adversarial prompt **only**. No session context, no CLAIM.
-5. Mind shell escaping. If the artifact contains quotes, `$(...)`, or backticks, prefer stdin or a heredoc over inline `-p "…"`. When in doubt, ask the user to confirm the invocation before running it.
+5. Keep shell metacharacters inert. If the artifact contains quotes, `$(...)`, or backticks, prefer stdin or a heredoc over inline `-p "…"`. When in doubt, ask the user to confirm the invocation before running it.
 6. Take the output into Step 4 (RECONCILE).
 
 Example shapes (verify flags against your installed tool; syntax differs across implementations and versions):

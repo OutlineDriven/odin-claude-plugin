@@ -1,6 +1,6 @@
-# Apply Code Review Findings (after `/review`)
+# Apply code review findings (after `/review`)
 
-Load this reference when `/review` has finished and `/work` (or another caller) should apply fixes before the Residual Work Gate.
+Load this reference after `/review` finishes, when `/work` or another caller must apply fixes before the Residual Work Gate.
 
 `/review` is invoked here with `mode:agent`, so it is **review-only** in this context — it reports findings and writes artifacts and does not mutate the checkout, commit, push, or file tickets. **The caller owns apply/fix policy.** (In its own default/interactive mode the review applies safe fixes itself; that path does not apply here.)
 

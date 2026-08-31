@@ -1,3 +1,3 @@
 interface:
   display_name: "Changed Route Browser Testing"
-  short_description: "Browser-test affected routes and report Pass, Fail, or Skip."
+  short_description: "Use when asked to run browser tests for pages affected by a PR"

@@ -1,3 +1,3 @@
 interface:
   display_name: "Save MD"
-  short_description: "Saves a URL, file, or text as a .md file with YAML frontmatter"
+  short_description: "Use when asked to save a named source as a .md file with"

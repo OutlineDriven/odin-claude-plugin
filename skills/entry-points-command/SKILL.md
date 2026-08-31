@@ -1,6 +1,6 @@
 ---
 name: entry-points-command
-description: 'Use when a human explicitly invokes the entry-points command with an optional directory path. The command resolves the directory argument and reports the state-changing entry points found in the smart contract source under that scope. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when a human invokes the entry-points command with an optional directory. Resolves its scope and reports state-changing smart-contract entry points. Not for full access classification — use entry-point-analyzer.'
 ---
 
 # Entry points command
@@ -20,14 +20,14 @@ description: 'Use when a human explicitly invokes the entry-points command with 
 
 ## Procedure
 
-1. Parse the directory path from the invocation arguments. If the argument is empty, use the current working directory.
-2. Resolve the directory to an absolute path and confirm it exists and is a directory. Stop if it does not.
-3. Bound the analysis scope to that directory tree. Do not read or report outside it.
-4. Locate smart contract source files in the scope by extension and content patterns for the supported ecosystems: Solidity, Vyper, Solana, CosmWasm, Move on Aptos, Move on Sui, and TON.
-5. For each source file, identify entry points: public or externally callable functions, message handlers, or contract interface functions that can mutate contract state.
-6. For each candidate entry point, determine whether it performs a state-changing operation such as a storage write, token transfer, balance change, access-control set, or equivalent mutation of on-chain state.
-7. Collect the identified state-changing entry points with file path, function or handler name, and a one-line description of the state change.
-8. Emit the report as chat output for the resolved scope.
+1. Parse the directory path from the invocation arguments. If the argument is empty, use the current working directory. Done when: the directory path is parsed or defaulted to the current working directory.
+2. Resolve the directory to an absolute path and confirm it exists and is a directory. Stop if it does not. Done when: the directory is resolved to an absolute path and confirmed to exist.
+3. Bound the analysis scope to that directory tree. Do not read or report outside it. Done when: the scope is bounded to the resolved directory tree.
+4. Locate smart contract source files in the scope by extension and content patterns for the supported ecosystems: Solidity, Vyper, Solana, CosmWasm, Move on Aptos, Move on Sui, and TON. Done when: smart contract source files are located or confirmed absent.
+5. For each source file, identify entry points: public or externally callable functions, message handlers, or contract interface functions that can mutate contract state. Done when: every candidate entry point is identified.
+6. For each candidate entry point, determine whether it performs a state-changing operation such as a storage write, token transfer, balance change, access-control set, or equivalent mutation of on-chain state. Done when: each candidate is classified as state-changing or read-only.
+7. Collect the identified state-changing entry points with file path, function or handler name, and a one-line description of the state change. Done when: every state-changing entry point is collected with path, name, and state-change description.
+8. Emit the report as chat output for the resolved scope. Done when: the report is emitted for the resolved scope.
 
 ## Failure and recovery
 - Unresolved or non-existent directory: stop and report the unresolved path. Do not default silently or widen scope.
@@ -36,7 +36,7 @@ description: 'Use when a human explicitly invokes the entry-points command with 
 - Partial results are reported with the files that succeeded and the files that were skipped. No rollback is required because no mutation occurs.
 
 ## Output
-A chat-output report listing, for the resolved directory scope, each state-changing entry point with its source file path, function or handler name, and a one-line description of the state change. If no smart contract source is present, the report states that no entry points were found.
+A chat-output report listing, for the resolved directory scope, each state-changing entry point with its source file path, function or handler name, and a one-line description of the state change, or a statement that no entry points were found when no smart contract source is present.
 
 ## Provenance
 

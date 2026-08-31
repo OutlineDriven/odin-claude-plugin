@@ -1,6 +1,6 @@
 ---
 name: history-forget
-description: 'Use when the user human-confirmedly asks to remove a session or note from recall, this skill tombstones or excludes the record and atomically rebuilds the index so the record never re-ingests. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user human-confirmedly asks to remove a session or note from recall; tombstones or excludes the record and atomically rebuilds the index so the record never re-ingests. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # History forget
@@ -20,13 +20,13 @@ The target session or note identifier to forget, unforget, or inspect. The opera
 
 ## Procedure
 
-1. Require a human-confirmed request naming one concrete session or note identifier; if confirmation is absent or the target is ambiguous, stop before any write.
-2. Bound scope to the named record only; do not read or mutate unrelated records or the underlying source files.
-3. For forget: write a tombstone overlay marker for the target record, or add it to the exclusion set, without deleting the source record.
-4. Atomically rebuild the index so the tombstone or exclusion is in effect before any recall query can observe the record; the rebuild must complete before the effect is reported.
-5. For list: enumerate current tombstones and exclusions, and narrate any stale exclusion whose target no longer exists rather than silently dropping it.
-6. For unforget: remove the tombstone for the named record and atomically rebuild the index, reversing the forget.
-7. Verify the done predicate holds: the record no longer re-ingests on recall, exclusions also block export, and the rebuild is reported complete.
+1. Require a human-confirmed request naming one concrete session or note identifier; if confirmation is absent or the target is ambiguous, stop before any write. Done when: the stated action, evidence, and guard all hold.
+2. Bound scope to the named record only; do not read or mutate unrelated records or the underlying source files. Done when: the stated action, evidence, and guard all hold.
+3. For forget: write a tombstone overlay marker for the target record, or add it to the exclusion set, without deleting the source record. Done when: the stated action, evidence, and guard all hold.
+4. Atomically rebuild the index so the tombstone or exclusion is in effect before any recall query can observe the record; the rebuild must complete before the effect is reported. Done when: the stated action, evidence, and guard all hold.
+5. For list: enumerate current tombstones and exclusions, and narrate any stale exclusion whose target no longer exists rather than silently dropping it. Done when: the stated action, evidence, and guard all hold.
+6. For unforget: remove the tombstone for the named record and atomically rebuild the index, reversing the forget. Done when: the stated action, evidence, and guard all hold.
+7. Verify the done predicate holds: the record no longer re-ingests on recall, exclusions also block export, and the rebuild is reported complete. Done when: the stated action, evidence, and guard all hold.
 
 ## Failure and recovery
 - Unconfirmed or ambiguous request: stop, do not write; request human confirmation or a disambiguating target.

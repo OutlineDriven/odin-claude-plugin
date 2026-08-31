@@ -22,19 +22,19 @@ description: 'Use when a cryptographic Mermaid sequenceDiagram is supplied and t
 
 ## Procedure
 
-1. Parse the Mermaid `sequenceDiagram` into an abstract syntax tree. Extract every named participant and every directed message (`A->>B: label`). Record message order.
-2. Represent each participant as a `let p = ...` process in ProVerif. Map each actor declaration to `new p:name;`.
-3. Convert each message into a ProVerif reduction or event pair. If the message label contains a cryptographic operation keyword (`encrypt`, `sign`, `hash`, `sharedkey`, `dh`, `pk`, `sk`), emit the matching ProVerif reduction; otherwise emit a `recv`/`out` event pair preserving the ordering.
-4. Write the `.pv` model file. Prefix it with a `(* ADAPTED FROM: Trail of Bits mermaid-to-proverif skill; CC-BY-SA-4.0; https://github.com/trailofbits/skills *)` comment block and a `(* ASSUMPTIONS: <list of assumptions> *)` block derived from the diagram annotations or human-supplied constraints.
-5. Append one reachability query `query event(e_start) ... event(e_end) ...` for each end-to-end message sequence before any security query, so reachability is established before security results are trusted.
-6. Append security queries:
+1. Parse the Mermaid `sequenceDiagram` into an abstract syntax tree. Extract every named participant and every directed message (`A->>B: label`). Record message order. Done when: the step’s stated result is achieved or its stop condition is reported.
+2. Represent each participant as a `let p = ...` process in ProVerif. Map each actor declaration to `new p:name;`. Done when: the step’s stated result is achieved or its stop condition is reported.
+3. Convert each message into a ProVerif reduction or event pair. If the message label contains a cryptographic operation keyword (`encrypt`, `sign`, `hash`, `sharedkey`, `dh`, `pk`, `sk`), emit the matching ProVerif reduction; otherwise emit a `recv`/`out` event pair preserving the ordering. Done when: the step’s stated result is achieved or its stop condition is reported.
+4. Write the `.pv` model file. Prefix it with a `(* ADAPTED FROM: Trail of Bits mermaid-to-proverif skill; CC-BY-SA-4.0; https://github.com/trailofbits/skills *)` comment block and a `(* ASSUMPTIONS: <list of assumptions> *)` block derived from the diagram annotations or human-supplied constraints. Done when: the step’s stated result is achieved or its stop condition is reported.
+5. Append one reachability query `query event(e_start) ... event(e_end) ...` for each end-to-end message sequence before any security query, so reachability is established before security results are trusted. Done when: the step’s stated result is achieved or its stop condition is reported.
+6. Append security queries: Done when: the step’s stated result is achieved or its stop condition is reported.
    - `secrecy`: `query secret ~m.;` per sensitive message variable `m`.
    - `authentication`: `query event(e_received(A,m)) ==> event(e_sent(B,m)).` per message variable `m`.
    - `replay`: `query not event(replay_attempted).` per identified vulnerable transition.
    - `forward_secrecy`: `query secret ~m. @weak_agree ...` per session-key-derived variable.
-7. Execute `proverif <output>.pv`. Collect the type-check result, all `query` results, and any `WARNING` or `RESULT` line.
-8. Validate the output: type-check must succeed; participant sends and receives in ProVerif must correspond to the original diagram participants; each security query must be preceded by a proved reachability query; all assumptions listed in the file header must be acknowledged in the report.
-9. Write the verification report to `<output>_report.txt` containing type-check status, participant correspondence confirmation, each reachability result, each security query result, and the assumption list.
+7. Execute `proverif <output>.pv`. Collect the type-check result, all `query` results, and any `WARNING` or `RESULT` line. Done when: the step’s stated result is achieved or its stop condition is reported.
+8. Validate the output: type-check must succeed; participant sends and receives in ProVerif must correspond to the original diagram participants; each security query must be preceded by a proved reachability query; all assumptions listed in the file header must be acknowledged in the report. Done when: the step’s stated result is achieved or its stop condition is reported.
+9. Write the verification report to `<output>_report.txt` containing type-check status, participant correspondence confirmation, each reachability result, each security query result, and the assumption list. Done when: the step’s stated result is achieved or its stop condition is reported.
 
 ## Failure and recovery
 - **Type-check failure**: ProVerif reports a syntax or type error. Report the error verbatim, stop. Do not trust any query result. No partial model is produced.

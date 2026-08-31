@@ -1,6 +1,6 @@
 # `ideate` — generate → critique → survivor-rationale method
 
-The heavy payload for `ideate`: the divergence matrix, the verbatim generator and critic agent prompts, the adjudicated output schema, and the `docs/ideation/<slug>.md` section structure. The SKILL body names and routes; this file carries the prompts the orchestrator pastes into subagents. Read at Phase 2 (generation) and Phase 5 (assembly).
+This reference contains the divergence matrix, the verbatim generator and critic agent prompts, the adjudicated output schema, and the `docs/ideation/<slug>.md` section structure. The SKILL body names and routes; this file carries the prompts the orchestrator pastes into subagents. Read it during Phase 2 (generation) and Phase 5 (assembly).
 
 ## The method, in one line
 

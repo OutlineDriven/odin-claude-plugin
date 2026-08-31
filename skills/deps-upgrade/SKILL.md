@@ -1,6 +1,6 @@
 ---
 name: deps-upgrade
-description: 'Use when asked to upgrade dependencies in tiered batches when CVE remediation, a major upstream release, a compatibility-forced sweep, scheduled dependency hygiene, or a pre-release lockfile audit is due. The run ends with selected upgrades locked, tested, migration guidance applied for majors, license and SBOM churn checked, and the final vulnerability scan recorded. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when dependency upgrades need tiered batches for CVEs, a major release, forced compatibility, scheduled hygiene, or a pre-release lockfile audit. Not for cadence-driven sweeps — use dependency-sweeper; not for PR queue triage — use dependency-pr-queue-triage.'
 ---
 
 # Deps upgrade
@@ -20,16 +20,16 @@ Must be supplied: a working repository with VCS history; toolchains for each in-
 
 ## Procedure
 
-1. **Gate (no mutation yet)**: stop without changing anything if any holds: active feature branch with high churn; pre-release freeze window; mid-incident; the task is an API-break-driven refactor rather than a dependency upgrade. Report which gate tripped.
-2. **Bound scope**: fix from the operator directives the ecosystem list, path scope, tier ceiling, and allowlist/blocklist. Never widen during the run; findings outside scope become report items, not work.
-3. **Baseline**: record the pre-campaign HEAD SHA and snapshot every lockfile to a temporary directory; this snapshot is the audit baseline and the rollback anchor.
+1. **Gate (no mutation yet)**: stop without changing anything if any holds: active feature branch with high churn; pre-release freeze window; mid-incident; the task is an API-break-driven refactor rather than a dependency upgrade. Report which gate tripped. Done when: all gates pass or the tripped gate is reported without mutation.
+2. **Bound scope**: fix from the operator directives the ecosystem list, path scope, tier ceiling, and allowlist/blocklist. Never widen during the run; findings outside scope become report items, not work. Done when: all scope fields are frozen.
+3. **Baseline**: record the pre-campaign HEAD SHA and snapshot every lockfile to a temporary directory; this snapshot is the audit baseline and the rollback anchor. Done when: the HEAD and every lockfile snapshot are recorded.
 4. **Inventory**: enumerate manifests and lockfiles across the in-scope ecosystems. Canonical names are often extensionless (`go.mod`, `Gemfile`, `pom.xml`), so filter on filenames, not extensions; `fd` takes one glob per call, so anchor on canonical filenames with one regex:
 
    ```sh
    fd -t f '^(package(-lock)?\.json|pnpm-lock\.yaml|yarn\.lock|Cargo\.(toml|lock)|pyproject\.toml|poetry\.lock|requirements.*\.txt|Pipfile\.lock|go\.(mod|sum)|pom\.xml|build\.gradle(\.kts)?|settings\.gradle(\.kts)?|libs\.versions\.toml|gradle\.lockfile|Gemfile(\.lock)?|.*\.gemspec|.*\.opam|dune-project|opam\.locked|mix\.(exs|lock)|composer\.(json|lock))$'
    ```
 
-   Add ecosystem-specific names the project uses beyond this list (`Pipfile`, `Brewfile`, `flake.nix`, `shard.yml`, `pubspec.yaml`).
+   Add ecosystem-specific names the project uses beyond this list (`Pipfile`, `Brewfile`, `flake.nix`, `shard.yml`, `pubspec.yaml`). Done when: every in-scope manifest and lockfile is inventoried.
 5. **Scan outdated** with the per-family commands and capture each report (read reports and later CHANGELOGs with `bat -P -p -n`, never `cat`):
 
    | Family | Outdated scan | Upgrade command | Lockfile |
@@ -44,10 +44,10 @@ Must be supplied: a working repository with VCS history; toolchains for each in-
    | Java/Kotlin (Maven) | `mvn versions:display-dependency-updates` | `mvn versions:use-latest-releases` | `pom.xml` |
    | OCaml | `opam list --upgradable` | `opam upgrade <pkg>`, `opam pin <pkg>.<ver>` | `*.opam.locked` |
 
-   A family whose scan tool is missing is excluded from scope and reported. Tooling mandates for the whole run: `fd` (not `find`), `difft` (not `diff`), `bat -P -p -n` (not `cat`), `git grep -n -F` (not plain `grep`).
-6. **Categorize**: bin every candidate as **patch**, **minor**, or **major** against the tier ceiling; candidates above the ceiling are reported only.
-7. **Patch batch**: bump all patches at once; confirm the diff is lockfile-only; run the full test suite; commit everything including the lockfile diffs as `chore(deps): patch sweep`. Floating ranges that skip the lockfile commit create non-reproducible builds; the lockfile diff is always committed.
-8. **Minor batch**: bump minors together; read each minor's CHANGELOG; run a smoke test (minors can shift behavior); commit as `chore(deps): minor sweep`.
+   A family whose scan tool is missing is excluded from scope and reported. Tooling mandates for the whole run: `fd` (not `find`), `difft` (not `diff`), `bat -P -p -n` (not `cat`), `git grep -n -F` (not plain `grep`). Done when: each included family has a captured outdated and advisory report, and exclusions are recorded.
+6. **Categorize**: bin every candidate as **patch**, **minor**, or **major** against the tier ceiling; candidates above the ceiling are reported only. Done when: every candidate has a tier and in-scope or report-only disposition.
+7. **Patch batch**: bump all patches at once; confirm the diff is lockfile-only; run the full test suite; commit everything including the lockfile diffs as `chore(deps): patch sweep`. Floating ranges that skip the lockfile commit create non-reproducible builds; the lockfile diff is always committed. Done when: the patch batch is committed with a green full suite or reverted.
+8. **Minor batch**: bump minors together; read each minor's CHANGELOG; run a smoke test (minors can shift behavior); commit as `chore(deps): minor sweep`. Done when: the minor batch is committed with changelogs reviewed and smoke test green, or reverted.
 9. **Major, one per commit**. For each major bump, before writing any code:
    - Read the upstream `CHANGELOG.md` / `MIGRATION.md` / release notes; a major bump without primary-source review is forbidden.
    - Identify removed, renamed, behavior-changed, and default-changed APIs.
@@ -57,10 +57,10 @@ Must be supplied: a working repository with VCS history; toolchains for each in-
    - Verify the license has not changed in a blocking direction.
    - Verify the SBOM diff will match the expected dependency-tree change.
 
-   Then apply the migration guidance (codemod or manual edits, confined to compatibility code), run the full suite plus adversarial tests with deprecation warnings enabled as errors, validate any hot path with `hyperfine` against the previous commit, and commit `chore(deps)!: bump <pkg> <old>→<new>`. Never disable deprecation or audit signals to make a gate pass; a warning that cannot be fixed now is recorded as follow-up debt.
-10. **Lockfile audit**: compare the pre- and post-campaign snapshots with `difft` (never `diff`; lockfiles are machine-generated and coarser diffs misread them). Check transitive churn: surface dependencies can look clean while a transitive bump carries the CVE fix, or a new transitive CVE.
-11. **Re-scan**: run the CVE scanner again post-upgrade (`cargo audit`, `pip-audit`, `pnpm audit` / `npm audit`, `govulncheck`, per family). Read the output and record it; auto-fix flags that bypass reading (`npm audit fix --force`) are forbidden.
-12. **Stop at the boundary**: a major whose migration requires API-break propagation across the codebase beyond compatibility code is not started: it is reported. New CVEs surfaced by the re-scan are recorded, not remediated, inside this campaign.
+   Then apply the migration guidance (codemod or manual edits, confined to compatibility code), run the full suite plus adversarial tests with deprecation warnings enabled as errors, validate any hot path with `hyperfine` against the previous commit, and commit `chore(deps)!: bump <pkg> <old>→<new>`. Never disable deprecation or audit signals to make a gate pass; a warning that cannot be fixed now is recorded as follow-up debt. Done when: each major is one green commit with migration, compatibility, license, SBOM, and performance evidence.
+10. **Lockfile audit**: compare the pre- and post-campaign snapshots with `difft` (never `diff`; lockfiles are machine-generated and coarser diffs misread them). Check transitive churn: surface dependencies can look clean while a transitive bump carries the CVE fix, or a new transitive CVE. Done when: expected and unexpected transitive churn are recorded.
+11. **Re-scan**: run the CVE scanner again post-upgrade (`cargo audit`, `pip-audit`, `pnpm audit` / `npm audit`, `govulncheck`, per family). Read the output and record it; auto-fix flags that bypass reading (`npm audit fix --force`) are forbidden. Done when: every included family has recorded post-upgrade scan results.
+12. **Stop at the boundary**: a major whose migration requires API-break propagation across the codebase beyond compatibility code is not started: it is reported. New CVEs surfaced by the re-scan are recorded, not remediated, inside this campaign. Done when: boundary-crossing majors and newly surfaced CVEs are report items, not campaign work.
 
 ## Failure and recovery
 - **Gate refusal** (step 1): no mutation; report the tripped gate and stop.
@@ -72,7 +72,7 @@ Must be supplied: a working repository with VCS history; toolchains for each in-
 - **Blocked result**: report `blocked` with the failing gate, the SHA reverted to, and the remaining unprocessed candidates.
 
 ## Output
-On success: concern-atomic local commits on the current branch (one per bin, one per major), updated manifests and lockfiles, and an upgrade report containing: per-package old→new with tier; test results per bin; migration notes applied per major (codemod used, symbols migrated); SBOM and license churn; the pre/post lockfile `difft` summary with transitive churn; the recorded post-upgrade CVE scan results; and follow-up items (deprecation debt, dropped or blocked packages, majors needing API-break propagation, new CVEs). Terminal classification is `done` or `blocked` with the exact state; `done` only when the done predicate in the Contract holds.
+A terminal `done` or `blocked` upgrade report with sections in order: concern-atomic commits, per-package tiers and versions, checks per bin, major migration notes, license and SBOM churn, lockfile audit, post-upgrade CVE scans, follow-up items.
 
 ## Provenance
 

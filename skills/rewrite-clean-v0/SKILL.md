@@ -1,6 +1,6 @@
 ---
 name: rewrite-clean-v0
-description: 'Use when a document or file has been edited piecemeal and reads as sediment. Rewrites the artifact as a clean v0 so stale deltas, duplicated passages, and changelog scars do not survive. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a document or file has been edited piecemeal and reads as sediment. Rewrites the artifact as a clean v0 so stale deltas, duplicated passages, and changelog scars do not survive. Not for re-deriving a code subsystem contract — use breaking-driven.'
 ---
 
 # Rewrite clean V0

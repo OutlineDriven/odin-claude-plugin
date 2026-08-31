@@ -1,6 +1,6 @@
 ---
 name: exhaustive
-description: 'Prove a decision space, state space, requirement set, or behavior surface is fully covered by enumerating every cell and classifying each as covered, gap, or deferred with an executed check. Use when the user says "exhaustive", "prove coverage", "find missing cases", "enumerate the state space", or when a refactor or feature needs a completeness audit before it is called done. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Prove a decision, state, requirement, or behavior space is fully covered by enumerating every cell as covered, gap, or deferred with an executed check. Use when asked to prove coverage, find missing cases, or enumerate the state space.'
 ---
 
 # Exhaustive
@@ -28,19 +28,19 @@ description: 'Prove a decision space, state space, requirement set, or behavior 
    - **Requirement space** — a spec or feature: the requirement-to-symbol map, each acceptance criterion traced to a code or test symbol.
    - **Behavior surface** — a refactor or deletion: every exported symbol and reachable path in scope.
 
-   Enumeration is algorithmic and single-pass; it is not round-based questioning or hypothesis sampling.
+   Enumeration is algorithmic and single-pass; it is not round-based questioning or hypothesis sampling. Done when: the enumeration type is chosen, named, and restated.
 
-2. Enumerate the full cell list for the chosen space with tool-backed discovery: structural search for code constructors and match arms, reference search for symbols and callsites, direct reads for spec criteria. Every cell carries an `id` and a one-line description. The list is the universe: nothing outside it is in scope, and nothing inside it may be silently dropped.
+2. Enumerate the full cell list for the chosen space with tool-backed discovery: structural search for code constructors and match arms, reference search for symbols and callsites, direct reads for spec criteria. Every cell carries an `id` and a one-line description. The list is the universe: nothing outside it is in scope, and nothing inside it may be silently dropped. Done when: the full cell list is enumerated with every cell carrying an id and description.
 
-3. Execute the check per cell: run a programmatic check that proves coverage or exposes the gap — structural or reference search for code, a read for prose, or a test run where a test is the proof. A cell with no executable check is classified by an explicit reasoned argument, never by silence.
+3. Execute the check per cell: run a programmatic check that proves coverage or exposes the gap — structural or reference search for code, a read for prose, or a test run where a test is the proof. A cell with no executable check is classified by an explicit reasoned argument, never by silence. Done when: every cell has an executed check or an explicit reasoned argument.
 
-4. Classify every cell exactly one of `covered`, `gap`, or `deferred`, each with a one-line reason. `deferred` requires a named owner or follow-up; it is not a silent drop.
+4. Classify every cell exactly one of `covered`, `gap`, or `deferred`, each with a one-line reason. `deferred` requires a named owner or follow-up; it is not a silent drop. Done when: every cell is classified with a one-line reason.
 
-5. Emit the coverage manifest: the classified cell list plus the one-line tally `covered: N, gap: M, deferred: K, total: T`. For a code state space, also assert zero wildcard catch-alls over the enumerated constructors, verifiable with structural search.
+5. Emit the coverage manifest: the classified cell list plus the one-line tally `covered: N, gap: M, deferred: K, total: T`. For a code state space, also assert zero wildcard catch-alls over the enumerated constructors, verifiable with structural search. Done when: the manifest is emitted with the tally and, for code state spaces, the wildcard-catch-all assertion.
 
-6. Sort `gap` cells in dependency order so a caller can hand them to a follow-up workflow without rebuilding the space, and emit the ordered gaps. Do not run downstream question or ideation workflows.
+6. Sort `gap` cells in dependency order so a caller can hand them to a follow-up workflow without rebuilding the space, and emit the ordered gaps. Do not run downstream question or ideation workflows. Done when: the gap cells are sorted in dependency order and emitted.
 
-7. After any fix the user applies to a `gap`, re-enumerate once; stop when a re-enumeration adds no new unclassified cell.
+7. After any fix the user applies to a `gap`, re-enumerate once; stop when a re-enumeration adds no new unclassified cell. Done when: a re-enumeration adds no new unclassified cell.
 
 ## Failure and recovery
 - **Unbounded space**: stop after one read, ask exactly one bounding question, and mutate nothing; if it remains unbounded, return blocked naming the missing boundary and emit no manifest as done.
@@ -51,7 +51,7 @@ description: 'Prove a decision space, state space, requirement set, or behavior 
 - **Non-converged result**: if re-enumerations keep adding unclassified cells, stop and return the last manifest with its tally and the open `gap` list; never swallow a check failure or pretend the done predicate holds.
 
 ## Output
-The coverage manifest: every cell with `id`, one-line description, classification (`covered`, `gap`, or `deferred`), one-line reason, and the executed check; the tally line `covered: N, gap: M, deferred: K, total: T`; the named target space; the wildcard-catch-all assertion for code state spaces; the dependency-ordered `gap` list. In a plain interactive run, emit only the human-readable classified list plus tally. On explicit request for structured output, emit the manifest as a fenced `exhaustive-manifest/v1` block containing a YAML list of `{id, description, classification, reason, check}` plus the tally line. A written manifest file is the only file the run creates.
+The coverage manifest: every cell with id, description, classification, reason, and executed check, the tally line, the named target space, the wildcard-catch-all assertion for code state spaces, and the dependency-ordered gap list, emitted as human-readable or `exhaustive-manifest/v1` YAML on request.
 
 ## Provenance
 

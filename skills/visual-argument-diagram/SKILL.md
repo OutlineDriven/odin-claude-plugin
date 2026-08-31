@@ -1,6 +1,6 @@
 ---
 name: visual-argument-diagram
-description: 'Use when a user wants to create a conceptual, workflow, architecture, or protocol diagram, or repair an existing diagram''s visual layout. Produces a valid .excalidraw.json file and a rendered PNG whose quality checks pass. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a user wants to create a conceptual, workflow, architecture, or protocol diagram, or repair an existing diagram''s visual layout. Produces a .excalidraw.json and rendered PNG passing quality checks. Not for HTML diagrams or chat visuals — use visual-diagram or show-me.'
 ---
 
 # Visual argument diagram
@@ -23,27 +23,17 @@ description: 'Use when a user wants to create a conceptual, workflow, architectu
 
 ## Procedure
 
-1. **Parse the request.** If `Topic` is a path ending in `.excalidraw.json`, load it as the base diagram to repair. Otherwise treat it as a natural-language diagram brief.
-2. **Bootstrap Playwright (first run only).** Run `pnpm dlx playwright install chromium --with-deps`. If this fails, stop and report the bootstrap failure: the render step cannot proceed without Chromium.
+1. **Parse the request.** If `Topic` is a path ending in `.excalidraw.json`, load it as the base diagram to repair. Otherwise treat it as a natural-language diagram brief. **Done when:** the request is classified as create or repair.
+2. **Bootstrap Playwright (first run only).** Run `pnpm dlx playwright install chromium --with-deps`. If this fails, stop and report the bootstrap failure: the render step cannot proceed without Chromium. **Done when:** Chromium is available or the failure is reported.
 3. **Generate or edit the Excalidraw JSON.**
-   - If repairing: load the existing JSON, identify the defect classes (clipping, overlap, arrow routing, spacing, balance), apply targeted layout corrections.
-   - If creating: emit a new `.excalidraw.json` conforming to the Excalidraw element schema (`type`, `x`, `y`, `width`, `height`, `angle`, `strokeColor`, `backgroundColor`, `fillStyle`, `strokeWidth`, `roughness`, `groupIds`, `frameId`, `roundness`, `boundElements`, `link`, `locked` for each element; `type`, `id`, `name`, `text`, `fontSize`, `fontFamily`, `textAlign`, `verticalAlign`, `baseline`, `groupIds`, `frameId`, `roundness`, `boundElements`, `link`, `locked` for each `TextElement`).
-   - Nodes: rectangular boxes with rounded corners. Connections: straight or elbow arrows with arrowheads. Groups: visual clusters via `frameId` or `groupIds`.
-   - Color usage: ≤ 5 distinct stroke/fill pairs; consistent across element types.
-4. **Render the JSON to PNG.** Run Playwright headlessly, open the Excalidraw library (`https://linkpic.pages.dev` or equivalent working CDN-hosted Excalidraw renderer), serialize the JSON into the page, trigger export to PNG, capture the screenshot at 2× pixel ratio. Save to `<output_dir>/<basename>.png`. If Playwright reports no target or navigation timeout after 30 s, stop and report the render failure.
-5. **Validate the render.** Inspect the PNG programmatically (pixel region sampling or OCR-free geometry inference) or via a visual-language model call. Check:
-   - **Conceptual structure**: all expected nodes and edges appear.
-   - **Evidence**: every labeled element has legible text; no clipped labels.
-   - **Eye flow**: primary reading direction left-to-right or top-down is unbroken.
-   - **Dominance**: the top-level focal element is the largest or highest-contrast element.
-   - **Clipping**: no element is cut off at the canvas boundary.
-   - **Overlap**: no two opaque elements share pixels.
-   - **Arrow routing**: no arrow crosses a node body without a termination point.
-   - **Spacing**: minimum inter-element gap ≥ 8 px at 1× scale.
-   - **Balance**: the diagram's bounding box center is within 20% of the canvas center.
-   - **Export readability**: the PNG exports at ≥ 720 px on its longest axis.
-   - **Text-to-container ratio**: count text elements whose bounding box is identical to a parent container box; if ≥ 30%, fail with the defect count.
-6. **Quality gate.** If any check fails, roll back the written files (delete the JSON and PNG), stop, and report the specific failing checks. Do not silently accept a sub-quality render.
+   - When repairing, load the existing JSON, identify the defect classes (clipping, overlap, arrow routing, spacing, balance), and apply targeted layout corrections.
+   - When creating, emit a new `.excalidraw.json` conforming to the Excalidraw element schema (`type`, `x`, `y`, `width`, `height`, `angle`, `strokeColor`, `backgroundColor`, `fillStyle`, `strokeWidth`, `roughness`, `groupIds`, `frameId`, `roundness`, `boundElements`, `link`, `locked` for each element; `type`, `id`, `name`, `text`, `fontSize`, `fontFamily`, `textAlign`, `verticalAlign`, `baseline`, `groupIds`, `frameId`, `roundness`, `boundElements`, `link`, `locked` for each `TextElement`).
+   - Use rectangular boxes with rounded corners for nodes, straight or elbow arrows with arrowheads for connections, and `frameId` or `groupIds` for visual clusters.
+   - Use ≤ 5 distinct stroke/fill pairs, consistently across element types.
+   **Done when:** the JSON conforms to the schema and layout rules.
+4. **Render the JSON to PNG.** Run Playwright headlessly, open the Excalidraw library (`https://linkpic.pages.dev` or equivalent working CDN-hosted Excalidraw renderer), serialize the JSON into the page, trigger export to PNG, capture the screenshot at 2× pixel ratio. Save to `<output_dir>/<basename>.png`. If Playwright reports no target or navigation timeout after 30 s, stop and report the render failure. **Done when:** the PNG is saved to the output directory.
+5. **Validate the render.** Inspect the PNG programmatically (pixel region sampling or OCR-free geometry inference) or via a visual-language model call. Check: conceptual structure (all expected nodes and edges appear), evidence (every labeled element has legible text; no clipped labels), eye flow (primary reading direction unbroken), dominance (top-level focal element is largest or highest-contrast), clipping (no element cut off at canvas boundary), overlap (no two opaque elements share pixels), arrow routing (no arrow crosses a node body without a termination point), spacing (minimum inter-element gap ≥ 8 px at 1× scale), balance (bounding box center within 20% of canvas center), export readability (PNG ≥ 720 px on longest axis), text-to-container ratio (count text elements whose bounding box is identical to a parent container box; if ≥ 30%, fail with the defect count). **Done when:** every check passes or a failing check is identified.
+6. **Quality gate.** If any check fails, roll back the written files (delete the JSON and PNG), stop, and report the specific failing checks. Do not accept a render that fails the quality checks. **Done when:** all checks pass or the rollback is complete with failing checks reported.
 
 ## Failure and recovery
 | Failure class | Condition | Result |
@@ -57,9 +47,7 @@ description: 'Use when a user wants to create a conceptual, workflow, architectu
 Rollback rule: after any failure, delete every file written during this invocation before reporting. Never leave partial artifacts on disk.
 
 ## Output
-On success: `{ json_path: <absolute path>, png_path: <absolute path>, quality_report: { passed: true, checks: { structure: true, evidence: true, eye_flow: true, dominance: true, clipping: false, overlap: false, arrow_routing: true, spacing: true, balance: true, export_readability: true, text_container_ratio: <float> } } }`.
-
-On failure: `{ status: "failed", failure_class: <class>, detail: <string> }`.
+On success: `{ json_path, png_path, quality_report: { passed: true, checks: { ... } } }`; on failure: `{ status: "failed", failure_class, detail }`.
 
 ## Provenance
 

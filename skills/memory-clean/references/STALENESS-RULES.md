@@ -1,6 +1,6 @@
-# Staleness Detection Rules
+# Staleness detection rules
 
-How to cross-reference memory files against session-history transcripts to identify outdated rules.
+Use these rules to cross-reference memory files against session-history transcripts and identify outdated rules.
 
 ## Core question
 

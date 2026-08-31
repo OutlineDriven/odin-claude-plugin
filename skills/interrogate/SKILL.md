@@ -1,6 +1,6 @@
 ---
 name: interrogate
-description: 'Use when asked to interrogate, run an adversarial multi-model review of the supplied code artifact and return an act/consider/note/dismiss verdict with an agreement map. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when asked to "interrogate" or run an adversarial multi-model review of a supplied code artifact. Returns an act/consider/note/dismiss verdict with an agreement map. Don''t use for tasks that require source or remote-system changes.'
 ---
 
 # Interrogate
@@ -30,9 +30,9 @@ description: 'Use when asked to interrogate, run an adversarial multi-model revi
 
 2. Load the shared rubric. Confirm it defines concrete evaluation criteria. If the rubric is absent or defines no criteria, halt and report `blocked: rubric missing or invalid`.
 
-3. Select at least two distinct models from the reviewing pool. If fewer than two are available, halt and report `blocked: insufficient model pool`.
+3. Select at least two distinct models from the reviewing model pool. If fewer than two are available, halt and report `blocked: insufficient model pool`.
 
-4. Fan out one review request per model simultaneously. Each request submits the same code artifact, the same review scope, and the same rubric. Do not share one model's output with another model before all reviews complete.
+4. Fan out one review request per model simultaneously. Send each model the same code artifact, review scope, and rubric. Do not share one model's output with another model before all reviews complete.
 
 5. Collect all individual reviews. If any review fails to return, proceed with the available reviews and record the missing model in the failure log.
 
@@ -46,7 +46,7 @@ description: 'Use when asked to interrogate, run an adversarial multi-model revi
 
 8. If the lead synthesis fails, skip synthesis and return all individual reviews with the agreement map. Do not block on synthesis.
 
-9. Assemble the final report: verdict, agreement map, lead synthesis (if available), any failure log. Return it as the terminal output.
+9. Assemble the final report: verdict, agreement map, lead synthesis (if available), and any failure log. Return it as the terminal output.
 
 ## Failure and recovery
 | Failure class | Partial-result rule | Blocked result |

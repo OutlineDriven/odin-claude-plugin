@@ -1,6 +1,6 @@
 ---
 name: pr-review-canvas
-description: 'Use when asked to render a PR review in Cursor Canvas. Produces a local canvas artifact with risky hunks foregrounded. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to render a PR review in Cursor Canvas. Produces a local canvas artifact with risky hunks foregrounded. Not for standalone HTML rendering — use pr-review-canvas-html.'
 ---
 
 # PR review canvas
@@ -21,12 +21,12 @@ description: 'Use when asked to render a PR review in Cursor Canvas. Produces a 
 
 ## Procedure
 
-1. Read the PR diff. Parse it into individual hunks grouped by file.
-2. Classify each hunk as risky or safe. A hunk is risky if it touches control flow, error handling, concurrency, public API boundaries, security-sensitive paths, or data integrity logic. A hunk is safe if it is documentation-only, import reordering, formatting, or trivial renaming with no behavioral change.
-3. Order hunks: risky hunks first within each file, preserving file order from the diff. This foregrounds the hunks most likely to contain defects.
-4. For each hunk, generate a review block containing: file path, hunk line range, the diff text, and a risk annotation explaining why the hunk is classified as risky or safe.
-5. Assemble the canvas document: header with PR metadata summary, then risky hunk blocks, then safe hunk blocks. Each block is a distinct canvas section.
-6. Write the canvas document to `<pr-identifier>.canvas` in the working directory. If the file exists, overwrite it.
+1. Read the PR diff. Parse it into individual hunks grouped by file. Done when: the diff is parsed into file-grouped hunks.
+2. Classify each hunk as risky or safe. A hunk is risky if it touches control flow, error handling, concurrency, public API boundaries, security-sensitive paths, or data integrity logic. A hunk is safe if it is documentation-only, import reordering, formatting, or trivial renaming with no behavioral change. Done when: every hunk is classified as risky or safe.
+3. Within each file, place risky hunks before safe hunks while preserving the file order from the diff. This foregrounds the hunks most likely to contain defects. Done when: risky hunks precede safe hunks within each file with file order preserved.
+4. Create a review block for each hunk containing the file path, hunk line range, diff text, and a risk annotation that explains the classification. Done when: every hunk has a review block with path, range, diff text, and risk annotation.
+5. Assemble the canvas document with a PR metadata summary, followed by risky hunk blocks and then safe hunk blocks. Make each block a distinct canvas section. Done when: the canvas document is assembled with metadata, risky blocks, then safe blocks.
+6. Write the canvas document to `<pr-identifier>.canvas` in the working directory. Overwrite the file if it exists. Done when: the `.canvas` file is written to the working directory.
 
 ## Failure and recovery
 | Failure class | Behavior |
@@ -36,15 +36,10 @@ description: 'Use when asked to render a PR review in Cursor Canvas. Produces a 
 | Write permission denied | Stop. Report the target path and the permission error. No rollback needed since no file was written. |
 | Hunk classification ambiguous | Mark the hunk as risky (conservative default). Note the ambiguity in the risk annotation. Do not drop the hunk. |
 
-No partial artifacts are committed. If the procedure stops before step 6, no canvas file exists on disk.
+The procedure never writes a partial artifact. If it stops before step 6, it does not create or overwrite a canvas file.
 
 ## Output
-A single `.canvas` file named after the PR identifier. The file contains:
-- A header section with PR title, description, and file count.
-- Risky hunk sections, each with file path, line range, diff text, and risk annotation.
-- Safe hunk sections in the same format, listed after all risky hunks.
-
-The canvas is a local artifact. It is not published, pushed, or sent to any remote service.
+A single `.canvas` file named after the PR identifier, with a header section (PR title, description, file count), risky hunk sections (path, range, diff, annotation), then safe hunk sections in the same format — local only, never published or pushed.
 
 ## Provenance
 

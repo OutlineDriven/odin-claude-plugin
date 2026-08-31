@@ -1,6 +1,6 @@
 ---
 name: ios-build-fix
-description: 'Use when asked to run /ios-build-fix to fix a failing iOS build or UI behavior through the debug bridge. Do not use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to run /ios-build-fix to fix a failing iOS build or UI behavior through the debug bridge. Not for a clean rebuild — use ios-build-cleanup.'
 ---
 
 # iOS build fix
@@ -17,12 +17,12 @@ description: 'Use when asked to run /ios-build-fix to fix a failing iOS build or
 ## Inputs
 
 Required:
-- A bug finding: a description of the failing behavior, a screenshot, and the suspected accessibility-tree node. Supplied by the user or a prior QA pass.
+- A bug finding with a description of the failing behavior, a screenshot, and the suspected accessibility-tree node. Supplied by the user or a prior QA pass.
 - The iOS debug bridge (StateServer) running with a connected device or simulator, identified by UDID.
 - The Xcode scheme name and build destination.
 
 Optional:
-- The user's choice among plausible root causes when more than one remains after source tracing.
+- The user's choice among plausible root causes, if more than one remains after source tracing.
 
 ## Procedure
 
@@ -32,7 +32,7 @@ Optional:
 4. Capture `GET /state/snapshot` and write it to `test/fixtures/ios-fix/<bug-slug>-pre.json`.
 5. Capture `GET /screenshot` and write it to `test/fixtures/ios-fix/<bug-slug>-pre.png`.
 6. Record one line stating what is wrong and the expected behavior.
-7. Locate the root cause: read the Swift source and trace from the buggy screen back to the view model, the data flow, and the state mutation. Identify the smallest change that fixes the behavior.
+7. Locate the root cause. Read the Swift source and trace the buggy screen back to the view model, data flow, and state mutation. Identify the smallest change that fixes the behavior.
 8. If more than one plausible root cause remains, present them to the user and let the user pick the one to fix before editing.
 9. Apply the fix: edit the Swift source, keeping the diff minimal. Rollback path: `git checkout -- <edited files>` reverts this edit.
 10. Rebuild and reinstall: `xcodebuild -scheme <SchemeName> -destination 'platform=iOS,id=<UDID>' build install`. The daemon reconnects the StateServer tunnel after the rebuild; re-deploy through the boot-token rotation flow.
@@ -43,7 +43,7 @@ Optional:
 15. Commit the snapshot fixture, the pre-fix and post-fix screenshots, and the regression test alongside the Swift fix.
 
 ## Failure and recovery
-- 3 iterations with the bug still present: STOP. Report to the user with the current best hypothesis. Do not claim the done predicate holds.
+- Bug still present after 3 iterations: STOP. Report to the user with the current best hypothesis. Do not claim the done predicate holds.
 - `409 schema_mismatch` on `POST /state/restore` after a rebuild: re-codegen the accessors (`swift run gen-accessors`), re-snapshot, then retry verification.
 - Device disconnects mid-fix: the daemon auto-reconnects; resume from the verification step (step 11).
 - Build fails: revert the Swift edits and investigate the compile error before re-applying the fix. Do not commit a broken build.

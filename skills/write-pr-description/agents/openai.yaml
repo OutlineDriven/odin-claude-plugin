@@ -1,3 +1,3 @@
 interface:
   display_name: "Write PR Description"
-  short_description: "Draft a PR description that gives reviewers needed context."
+  short_description: "Use when drafting or revising a PR description that gives"

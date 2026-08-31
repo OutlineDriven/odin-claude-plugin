@@ -1,6 +1,6 @@
 ---
 name: competitor-feature-research
-description: 'Use when the user asks to research a specific feature across competitor products and publish a cited report. Don''t use for automated or model-initiated publication without explicit human approval.'
+description: 'Use when the user asks to research a specific feature across competitor products and publish a cited report. Not for summarizing changelogs — use competitor-changelog.'
 disable-model-invocation: true
 ---
 
@@ -24,14 +24,14 @@ disable-model-invocation: true
 
 ## Procedure
 
-1. Confirm `feature`, `competitors`, and `product_docs_url` are supplied. Stop and request any missing required input before writing anything.
-2. For each competitor, fetch the product docs at the configured `product_docs_url` (or the per-competitor URL) and extract the capabilities relevant to the target feature. Record the exact source URL for every extracted claim.
-3. Build a per-competitor feature list; each entry is cited with its product-docs URL.
-4. Construct a comparison table: rows are competitors, columns are the feature's sub-capabilities, cells are supported / not supported / partial, each non-empty cell cited with a URL.
-5. Identify gaps (capabilities no competitor offers), risks (capabilities that are partial or fragile across competitors), and insights (patterns or differentiators).
-6. Write a TL;DR summarizing the comparison in three to five sentences.
-7. Assemble the report at `reports/feature_research/feature_research_<date>.md` with sections in this order: TL;DR, Competitor Feature Lists, Comparison Table, Gaps, Risks, Insights. Every non-obvious claim carries a cited product-docs URL.
-8. Stop before publishing or opening a PR. Present the report path to the human. Only after explicit human approval, open a pull request referencing the report path.
+1. Confirm `feature`, `competitors`, and `product_docs_url` are supplied. Stop and request any missing required input before writing anything. Done when: all required inputs are confirmed or the missing input is named and the skill stops.
+2. For each competitor, fetch the product docs at the configured `product_docs_url` (or the per-competitor URL) and extract the capabilities relevant to the target feature. Record the exact source URL for every extracted claim. Done when: every competitor's docs are fetched and capabilities extracted with source URLs, or the unreachable competitor is marked unknown.
+3. Build a per-competitor feature list; each entry is cited with its product-docs URL. Done when: every competitor has a cited feature list.
+4. Construct a comparison table: rows are competitors, columns are the feature's sub-capabilities, cells are supported / not supported / partial, each non-empty cell cited with a URL. Done when: the comparison table is complete with cited cells.
+5. Identify gaps (capabilities no competitor offers), risks (capabilities that are partial or fragile across competitors), and insights (patterns or differentiators). Done when: gaps, risks, and insights are each listed.
+6. Write a TL;DR summarizing the comparison in three to five sentences. Done when: the TL;DR is written.
+7. Assemble the report at `reports/feature_research/feature_research_<date>.md` with sections in this order: TL;DR, Competitor Feature Lists, Comparison Table, Gaps, Risks, Insights. Every non-obvious claim carries a cited product-docs URL. Done when: the report is assembled with all six sections in order and every non-obvious claim cited.
+8. Stop before publishing or opening a PR. Present the report path to the human. Only after explicit human approval, open a pull request referencing the report path. Done when: the PR is open after explicit human approval, or the report path is presented and the skill awaits approval.
 
 ## Failure and recovery
 - Missing required input: stop, name the missing input, do not write the report.
@@ -41,15 +41,14 @@ disable-model-invocation: true
 - Partial result: ship the report with the available competitors and explicit `unknown` cells; never silently omit a competitor from the list.
 
 ## Output
-- A Markdown report at `reports/feature_research/feature_research_<date>.md` containing TL;DR, Competitor Feature Lists, Comparison Table, Gaps, Risks, and Insights, each non-obvious claim cited with a product-docs URL.
-- After human approval, an open pull request referencing the report path.
+Report at `reports/feature_research/feature_research_<date>.md` (TL;DR → Competitor Feature Lists → Comparison Table → Gaps → Risks → Insights, each non-obvious claim cited), plus after human approval an open PR referencing the report path.
 
 ## Provenance
 
-- Origin: warpdotdev/competitive-intelligence-agent-oss, path `.warp/skills/feature_research/SKILL.md`.
-- Revision: `9e0363e810a14405ef876fb354562735002797fb`.
-- License: MIT; notice retained, mechanism adapted.
-- Adaptation: kept the TL;DR plus comparison table plus gaps/risks structure; made the product docs URL a config value; remapped the workflow to odin-research; constrained PR creation to human-only approval.
+Origin: warpdotdev/competitive-intelligence-agent-oss, path `.warp/skills/feature_research/SKILL.md`.
+Revision: `9e0363e810a14405ef876fb354562735002797fb`.
+License: MIT; notice retained, mechanism adapted.
+Adaptation: kept the TL;DR plus comparison table plus gaps/risks structure; made the product docs URL a config value; remapped the workflow to odin-research; constrained PR creation to human-only approval.
 
 MIT permission text for the reused mechanism:
 

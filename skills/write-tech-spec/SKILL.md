@@ -1,6 +1,6 @@
 ---
 name: write-tech-spec
-description: 'Use when a user asks for a tech spec or architecture doc. Produces a self-contained TECH.md that translates intent into an executable implementation plan. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a user asks for a tech spec or architecture doc. Produces a self-contained TECH.md that translates intent into an executable implementation plan. Not for PRDs — use write-prd; not for product specs with behavioral invariants — use write-product-spec.'
 ---
 
 # Write tech spec
@@ -21,18 +21,12 @@ description: 'Use when a user asks for a tech spec or architecture doc. Produces
 
 ## Procedure
 
-1. Extract the core objective from the intent. Restate it as a single sentence at the top of the spec.
-2. Identify constraints: performance, compatibility, security, timeline, or scope boundaries stated or implied by the user.
-3. Survey the codebase for relevant modules, interfaces, data flows, and existing patterns. Record only what the spec references.
-4. Draft the spec with these sections in order:
-   - **Objective**: one-sentence goal.
-   - **Background**: minimal context needed to understand the plan.
-   - **Design**: architecture, data flow, component responsibilities, and interface contracts.
-   - **Implementation plan**: ordered steps with file paths, function signatures, or module names. Each step must be concrete enough for an engineer to execute without guessing.
-   - **Risks and mitigations**: named risks with proposed mitigations or explicit acceptance.
-   - **Open questions**: unresolved items that block implementation, each with the information needed to resolve it.
-5. Validate every implementation step against the codebase: confirm referenced paths, types, and interfaces exist or are explicitly created by a prior step.
-6. Write the completed spec to `TECH.md` in the working directory.
+1. Extract the core objective from the intent. Restate it as a single sentence at the top of the spec. Done when: the objective is restated as a single sentence.
+2. Identify constraints: performance, compatibility, security, timeline, or scope boundaries stated or implied by the user. Done when: all stated or implied constraints are recorded.
+3. Survey the codebase for relevant modules, interfaces, data flows, and existing patterns. Record only what the spec references. Done when: every referenced module, interface, data flow, and pattern is recorded with its file path.
+4. Draft the spec with these sections in order: Objective (one-sentence goal), Background (minimal context needed to understand the plan), Design (architecture, data flow, component responsibilities, and interface contracts), Implementation plan (ordered steps with file paths, function signatures, or module names, each concrete enough for an engineer to execute without guessing), Risks and mitigations (named risks with proposed mitigations or explicit acceptance), Open questions (unresolved items that block implementation, each with the information needed to resolve it). Done when: all sections are drafted with concrete content and no placeholders, TODOs, or deferred sections.
+5. Validate every implementation step against the codebase: confirm referenced paths, types, and interfaces exist or are explicitly created by a prior step. Done when: every implementation step is validated against the codebase.
+6. Write the completed spec to `TECH.md` in the working directory. Done when: TECH.md is written to the working directory.
 
 ## Failure and recovery
 | Failure class | Detection | Response |
@@ -43,11 +37,10 @@ description: 'Use when a user asks for a tech spec or architecture doc. Produces
 | Technical uncertainty | A design decision depends on unknown behavior | Record the assumption explicitly in the spec. Flag it in Open questions with the test or investigation needed to confirm. |
 
 Partial result: if the spec is partially drafted when a failure is detected, do not write TECH.md. Return the partial draft and the blocking issue.
-
 Rollback: delete `TECH.md` to undo the side effect.
 
 ## Output
-`TECH.md` in the working directory containing a complete, self-contained implementation plan with no placeholders, TODOs, or deferred sections.
+`TECH.md` in the working directory — sections in order: Objective, Background, Design, Implementation plan, Risks and mitigations, Open questions; no placeholders, TODOs, or deferred sections.
 
 ## Provenance
 

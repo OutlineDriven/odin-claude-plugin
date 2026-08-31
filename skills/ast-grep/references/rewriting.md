@@ -4,7 +4,7 @@ ast-grep replaces matched code with a `fix` string, or reshapes captured values 
 
 **Grounded: 2026-08-26**
 
-## Basic Rewrite (`fix`)
+## Basic rewrite (`fix`)
 
 The `fix` field in YAML or `--rewrite` CLI flag specifies the replacement string.
 
@@ -17,7 +17,7 @@ fix: logger.info($MSG)
 - **Meta-variables**: Preserved from pattern match.
 - **Indentation**: Automatically adjusted to match context.
 
-## Range Expansion (`fix` object)
+## Range expansion (`fix` object)
 
 Expand the range of code to be replaced (e.g., to remove trailing commas).
 

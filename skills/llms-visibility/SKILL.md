@@ -21,17 +21,17 @@ description: 'Use when asked to add llms.txt, Markdown Accept negotiation, alter
 
 ## Procedure
 
-1. **Audit scope.** Identify the project framework (Next.js, Astro, Nuxt, plain static, Express, Hono, FastAPI, or other). Identify the public URL root. List every route path or pattern that should be LLM-discoverable.
+1. **Audit scope.** Identify the project framework (Next.js, Astro, Nuxt, plain static, Express, Hono, FastAPI, or other). Identify the public URL root. List every route path or pattern that should be LLM-discoverable. Done when: the framework, public URL root, and discoverable route list are identified.
 
-2. **Write llms.txt.** Create `/llms.txt` at the project root containing one absolute URL per line, one blank line between sections, and a trailing newline. Do not include URLs for non-public, auth-gated, or dynamically-generated-without-static-equivalent routes. If `llms-full.txt` is requested, create `/llms-full.txt` containing the same URLs plus paths excluded from the public index with a comment prefix on each line.
+2. **Write llms.txt.** Create `/llms.txt` at the project root containing one absolute URL per line, one blank line between sections, and a trailing newline. Do not include URLs for non-public, auth-gated, or dynamically-generated-without-static-equivalent routes. If `llms-full.txt` is requested, create `/llms-full.txt` containing the same URLs plus paths excluded from the public index with a comment prefix on each line. Done when: `/llms.txt` is written with valid absolute URLs, and `/llms-full.txt` is written if requested.
 
-3. **Add Markdown Accept negotiation.** For each identified Markdown route, add `text/markdown` to the route's `Accept` header handling. If the framework uses content negotiation natively, ensure `text/markdown` is explicitly listed alongside `text/html`. If not, add a middleware or handler that matches `Accept: text/markdown` (including `Accept: text/markdown, */*;q=0`) and returns the raw Markdown file with `Content-Type: text/markdown` and `Vary: Accept`.
+3. **Add Markdown Accept negotiation.** For each identified Markdown route, add `text/markdown` to the route's `Accept` header handling. If the framework uses content negotiation natively, ensure `text/markdown` is explicitly listed alongside `text/html`. If not, add a middleware or handler that matches `Accept: text/markdown` (including `Accept: text/markdown, */*;q=0`) and returns the raw Markdown file with `Content-Type: text/markdown` and `Vary: Accept`. Done when: every Markdown route serves `text/markdown` with `Vary: Accept` on `Accept: text/markdown`.
 
-4. **Add alternate link headers.** Add a `Link` response header on every Markdown route and on the root `/llms.txt` response: `Link: <URL>; rel="alternate"; type="text/markdown"`. For the `llms.txt` itself, add `Link: </>; rel="start"; type="text/html"`. Use absolute URLs. Set `Vary: Accept` on all responses carrying alternate metadata.
+4. **Add alternate link headers.** Add a `Link` response header on every Markdown route and on the root `/llms.txt` response: `Link: <URL>; rel="alternate"; type="text/markdown"`. For the `llms.txt` itself, add `Link: </>; rel="start"; type="text/html"`. Use absolute URLs. Set `Vary: Accept` on all responses carrying alternate metadata. Done when: every Markdown route and `/llms.txt` carry the correct `Link` header with absolute URLs and `Vary: Accept`.
 
-5. **Add Content-Signal.** On the root HTML response, add a `<link rel="author" href="/llms.txt" title="LLM-readable index">` tag in `<head>`. On each Markdown page, add `<link rel="alternate" type="text/markdown" href="/path/page.md">` referencing the raw Markdown source.
+5. **Add Content-Signal.** On the root HTML response, add a `<link rel="author" href="/llms.txt" title="LLM-readable index">` tag in `<head>`. On each Markdown page, add `<link rel="alternate" type="text/markdown" href="/path/page.md">` referencing the raw Markdown source. Done when: the root HTML and each Markdown page carry their Content-Signal link tags.
 
-6. **Validate.** Request each modified route with `Accept: text/markdown` and confirm it returns a Markdown body with `Content-Type: text/markdown`. Confirm every machine-readable response carries `Vary: Accept`. Confirm `/llms.txt` returns `Content-Type: text/plain` and contains only valid absolute URLs. If a public scanner (such as the Content@Scale validator or any third-party llms.txt checker) is available, request a pass and record the result. Reject any change that adds a non-standard or rejected pseudo-standard header, tag, or file.
+6. **Validate.** Request each modified route with `Accept: text/markdown` and confirm it returns a Markdown body with `Content-Type: text/markdown`. Confirm every machine-readable response carries `Vary: Accept`. Confirm `/llms.txt` returns `Content-Type: text/plain` and contains only valid absolute URLs. If a public scanner (such as the Content@Scale validator or any third-party llms.txt checker) is available, request a pass and record the result. Reject any change that adds a non-standard or rejected pseudo-standard header, tag, or file. Done when: every route validates with correct headers and content types, and no rejected pseudo-standard is present.
 
 ## Failure and recovery
 - **Unsupported framework**: stop; report the framework name and the specific gap preventing header/middleware injection. Do not add untested fallbacks.
@@ -42,12 +42,8 @@ description: 'Use when asked to add llms.txt, Markdown Accept negotiation, alter
 - **Partial rollback**: on any unrecoverable failure, remove every file and code addition this skill made; leave the project in its prior state.
 
 ## Output
-- `/llms.txt` at the project root: plain text, one absolute URL per line, `Content-Type: text/plain`.
-- `/llms-full.txt` (if requested): same format with excluded paths annotated.
-- Per-route Markdown Accept handling: `Accept: text/markdown` returns raw Markdown with `Content-Type: text/markdown` and `Vary: Accept`.
-- Per-route `Link` headers: `</>; rel="alternate"; type="text/markdown"` on Markdown routes; `</llms.txt>; rel="author"` on root HTML.
-- Content-Signal HTML `<link>` tags in page `<head>` elements.
-- Validation report listing every route, its final headers, and scanner pass/fail.
+
+`/llms.txt` at project root (plain text, one absolute URL per line, `Content-Type: text/plain`), optionally `/llms-full.txt`; per-route Markdown Accept handling with `Vary: Accept`; per-route `Link` headers; Content-Signal HTML link tags; and a validation report listing every route, its final headers, and scanner pass/fail.
 
 ## Provenance
 

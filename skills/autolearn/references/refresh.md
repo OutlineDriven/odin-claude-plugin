@@ -1,6 +1,6 @@
 # Refresh — maintain `docs/solutions/` against the current code
 
-Read this for `autolearn mode:refresh [scope]`. It maintains existing learnings as the code evolves: their individual accuracy and the design of the set as a whole. Create mode writes one new doc; refresh mode keeps the old ones honest.
+Read this for `autolearn mode:refresh [scope]`. It maintains existing learnings as the code evolves, both their individual accuracy and the design of the set as a whole. Create mode writes one new doc; refresh mode keeps existing docs accurate.
 
 ## Maintenance model — five outcomes
 
@@ -16,11 +16,11 @@ Classify every candidate doc into exactly one:
 
 ## Core rules
 
-1. **Evidence informs judgment.** Engineering judgment, not a mechanical scorecard.
+1. **Evidence informs judgment.** Use engineering judgment, not a mechanical scorecard.
 2. **Prefer no-write Keep.** Don't edit a doc just to leave a review breadcrumb.
-3. **Match docs to reality, not the reverse.** Code changed → the doc matches the code.
+3. **Match docs to reality, not the reverse.** When code changes, update the doc to match it.
 4. **Be decisive.** Ask only when the right action is genuinely ambiguous.
-5. **No low-value churn.** No typo fixes, prose polish, cosmetic edits.
+5. **No low-value churn.** No typo fixes, prose polish, or cosmetic edits.
 6. **Delete, don't archive.** No `_archived/`. Git history preserves every deleted file. If `docs/solutions/_archived/` exists, flag it in the report as a legacy artifact to clean up.
 
 ## Scope and route
@@ -110,7 +110,7 @@ Then per file processed: path, classification, evidence (tag memory-sourced find
 
 ## Discoverability
 
-A learning store nobody searches is dead weight. After refreshing, check whether the repo's `AGENTS.md`/`CLAUDE.md` would lead an agent to discover and search `docs/solutions/` — that a searchable store exists, its category/frontmatter structure, and when to search it. If the spirit is already met, do nothing. If not, draft the smallest addition (a line in an existing section beats a new heading). Interactive: show it and ask. Headless: don't edit instruction files — surface a "Discoverability recommendation" line in the report instead.
+After refreshing, check whether the repo's `AGENTS.md`/`CLAUDE.md` would lead an agent to discover and search `docs/solutions/`: that a searchable store exists, how its categories and frontmatter are structured, and when to search it. If the spirit is already met, do nothing. If not, draft the smallest addition (a line in an existing section beats a new heading). Interactive: show it and ask. Headless: don't edit instruction files; surface a "Discoverability recommendation" line in the report instead.
 
 ## Commit
 

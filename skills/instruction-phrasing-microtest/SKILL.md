@@ -1,6 +1,6 @@
 ---
 name: instruction-phrasing-microtest
-description: 'Use when the request is to change the wording of a rule in a skill, prompt template, or agent instruction where the change is meant to alter model output. Produces a scored results table comparing each variant against a no-guidance control on programmatic markers with every match hand-verified. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when changing the wording of a rule in a skill, prompt template, or agent instruction where the change is meant to alter model output. Produces a scored results table comparing each variant against a no-guidance control, with every match hand-verified.'
 ---
 
 # Instruction phrasing microtest
@@ -19,7 +19,7 @@ description: 'Use when the request is to change the wording of a rule in a skill
 1. **Control text** (required): the current wording of the rule or instruction being evaluated.
 2. **Variant texts** (required): one or more proposed rephrasings. Each variant must be a complete, self-contained instruction — not a diff or delta from the control.
 3. **Fixture scenario** (required): a realistic mid-workflow user message or task prompt that would trigger the rule. Must be specific enough to tempt the failure the instruction targets.
-4. **Scoring markers** (required): programmatic patterns to grep in model output — regex or literal strings that indicate compliance or violation. At least one compliance marker and one violation marker.
+4. **Scoring markers** (required): regex patterns or literal strings to search for in model output that indicate compliance or violation. At least one compliance marker and one violation marker.
 5. **Target metric** (required): which scoring marker the variant must improve over the control.
 6. **Sample count** (optional, default 5): number of model calls per variant. Minimum 5 for statistical signal.
 7. **Model** (optional): the model to sample. Must match the model that writes the artifact in production.
@@ -43,7 +43,7 @@ description: 'Use when the request is to change the wording of a rule in a skill
 
 4. **Score programmatically.** For each sample output, run every scoring marker. Record match counts. Do not interpret or summarize — raw counts only.
 
-5. **Inspect every match manually.** Before trusting any programmatic score, read each flagged output. One common false positive: the model correctly quoting the prohibition in its reasoning, which the grep mislabels as a violation. Another: automated negation detection mislabeling compliant output. Discard false positives and re-score.
+5. **Inspect every match manually.** Before trusting any programmatic score, read each flagged output. A common false positive is the model correctly quoting the prohibition in its reasoning, which the grep mislabels as a violation. Automated negation detection can also mislabel compliant output. Discard false positives and re-score.
 
 6. **Compute per-variant summary.** For each variant and the control, report:
    - Mean and variance of each scoring marker across samples.

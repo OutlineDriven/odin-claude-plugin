@@ -1,6 +1,6 @@
 ---
 name: review-and-ship
-description: 'Use when the user explicitly asks to review changes, verify behavior, and open or update a PR. Don''t use for merging PRs, force pushes, history rewrites, or deployments.'
+description: 'Use when the user explicitly asks to review changes, verify behavior, and open or update a PR. Not when the task includes merging PRs, force pushes, history rewrites, or deployments — use commit-push-pr for ship-only and review for review-only.'
 disable-model-invocation: true
 ---
 
@@ -45,23 +45,7 @@ The repository must be clean or have staged changes, and the working tree must b
 - **Partial result**: If steps 1–6 succeed but step 7 or 8 fails, do not report success. Return the findings and check results collected so far and mark the PR step as blocked.
 
 ## Output
-```
-### Review findings
-<bullet list of findings from step 3>
-
-### Check results
-<pass|fail>: <command> — <summary>
-
-### Planned commits
-<commit subject> <SHA-1>
-...
-
-### Publication
-<fast-forward push to <remote>/<branch> at <SHA-1> | blocked: <reason>>
-
-### PR
-<URL or blocked: <reason>>
-```
+A report with sections in order: Review findings, Check results, Planned commits, Publication, PR. Each section carries its own pass-or-blocked status; a blocked section names the reason.
 
 ## Provenance
 

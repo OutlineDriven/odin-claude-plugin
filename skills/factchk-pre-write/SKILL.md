@@ -1,9 +1,9 @@
 ---
 name: factchk-pre-write
-description: 'Use when an artifact or the sentence about to be written asserts something as plausible, absurd, novel, or impossible from intuition and metacognitive doubt arises before relying on a factual claim; verifies each reality-grounded assertion against external sources in both directions, fixes mechanically-clear errors with cited sources, flags judgment calls, and returns a fixes-vs-flags report with the failure direction named. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when an artifact or sentence about to be written asserts something as plausible, absurd, novel, or impossible and doubt arises: verify each assertion against external sources in both directions, fix clear errors, flag judgment calls, and return a fixes-vs-flags report.'
 ---
 
-# Factchk pre write
+# Factchk pre-write
 
 ## Contract
 
@@ -20,12 +20,12 @@ The artifact under review: a file, a passage, or the sentence about to be writte
 
 ## Procedure
 
-1. Scan the supplied artifact — and the sentence about to be written if one is in flight — for reality-grounded assertions: anything leaning on "this is plausible / realistic / absurd / novel / impossible because X." Include claims not yet on the page.
-2. For each assertion, verify against external sources in both directions: could the "absurd" be real? could the "obvious" or "novel" be false or long-established?
-3. Classify each verdict. A mechanically-clear error — a wrong date, a misattributed source, a falsified number — correct it in the local artifact with a cited source. A judgment call — a contested or interpretive claim — flag it; do not silently rewrite.
-4. If an external source cannot be reached for a claim, flag it as unverifiable; never assert a verdict from intuition.
-5. Distinguish deliberate fiction ("in our world, boxes float" is a declared in-world choice) from real-world assertions; leave deliberate fiction alone. When it is unclear whether a claim is an in-world choice or a real-world assertion, flag, do not fix.
-6. If the scan finds no reality-grounded assertions, change nothing.
+1. Scan the supplied artifact and any sentence about to be written for reality-grounded assertions. Look for claims that depend on "this is plausible / realistic / absurd / novel / impossible because X." Include claims not yet on the page. Done when: every reality-grounded assertion in the artifact (including unwritten sentences) is identified.
+2. For each assertion, verify against external sources in both directions: could the "absurd" be real? could the "obvious" or "novel" be false or long-established? Done when: every assertion is verified in both directions or flagged as unverifiable.
+3. Classify each verdict. Correct a mechanically-clear error — a wrong date, a misattributed source, a falsified number — in the local artifact with a cited source. Flag a judgment call — a contested or interpretive claim — rather than silently rewriting it. Done when: every assertion has a verdict (verified, fixed, or flagged).
+4. If an external source cannot be reached for a claim, flag it as unverifiable; never assert a verdict from intuition. Done when: every unreachable claim is flagged as unverifiable.
+5. Distinguish deliberate fiction ("in our world, boxes float" is a declared in-world choice) from real-world assertions. Leave deliberate fiction alone. If it is unclear whether a claim is an in-world choice or a real-world assertion, flag it; do not fix it. Done when: every ambiguous fiction-vs-assertion case is flagged.
+6. If the scan finds no reality-grounded assertions, change nothing. Done when: the scan is complete and either changes were made or no assertions were found.
 
 ## Failure and recovery
 - Unreachable source: flag the claim as unverifiable; do not assert a verdict from intuition.

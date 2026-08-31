@@ -1,6 +1,6 @@
 ---
 name: consult-deployment
-description: 'Use when the user asks to rank deployment platforms and stacks against their product with quantitative trade-offs, return a ranked platform and stack list with the per-axis numbers that determined the order. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when the user asks to rank deployment platforms and stacks against their product with quantitative trade-offs. Returns a ranked platform and stack list with the per-axis numbers that determined the order. Read-only; no source or remote mutation.'
 ---
 
 # Consult deployment
@@ -24,11 +24,11 @@ If a required input is missing, ask for it before ranking rather than guessing.
 
 ## Procedure
 
-1. Collect the required inputs and any optional constraints the user supplies. Stop and ask when a required input is absent.
-2. Enumerate candidate deployment platforms and stacks that plausibly fit the product and constraints. Include at least the obvious default and one divergent alternative so the ranking is not a single entry.
-3. For each candidate, score it on quantitative axes drawn from the stated constraints: monthly cost at the stated scale, cold-start or p99 latency, build and deploy time, autoscale ceiling, managed-service coverage breadth, vendor lock-in cost, observability depth, and security or compliance posture. Use measured or documented numbers; where a number is unavailable, mark the axis unknown instead of inventing a value.
-4. Apply the user's weighting to the per-axis scores to produce a single ranked order. Record the weighting used.
-5. Return the ranked list with each candidate's per-axis numbers and a short statement of the trade-off that placed it where it sits.
+1. Collect the required inputs and any optional constraints the user supplies. Stop and ask when a required input is absent. Done when: all required inputs are collected or the missing input is named and the skill stops.
+2. Enumerate candidate deployment platforms and stacks that plausibly fit the product and constraints. Include at least the obvious default and one divergent alternative so the ranking is not a single entry. Done when: at least two candidates are enumerated (the default and a divergent alternative).
+3. For each candidate, score it on quantitative axes drawn from the stated constraints: monthly cost at the stated scale, cold-start or p99 latency, build and deploy time, autoscale ceiling, managed-service coverage breadth, vendor lock-in cost, observability depth, and security or compliance posture. Use measured or documented numbers; where a number is unavailable, mark the axis unknown instead of inventing a value. Done when: every candidate is scored on every applicable axis or the unknown axis is marked.
+4. Apply the user's weighting to the per-axis scores to produce a single ranked order. Record the weighting used. Done when: a single ranked order is produced with the weighting recorded.
+5. Return the ranked list with each candidate's per-axis numbers and a short statement of the trade-off that placed it where it sits. Done when: the ranked list is returned with per-axis numbers and trade-off statements.
 
 ## Failure and recovery
 - Missing required input: ask for it; do not rank on assumed product or constraints. Partial results are not returned for this class.
@@ -37,7 +37,7 @@ If a required input is missing, ask for it before ranking rather than guessing.
 - Conflicting constraints that no candidate satisfies: return the conflict and the candidates that come closest, rather than silently dropping a constraint.
 
 ## Output
-A ranked list of deployment platforms and stacks, each with its per-axis quantitative scores, the weighting applied, and the trade-off statement that determined its position. The result is chat output only; no files, deployments, or remote state are changed.
+Ranked list of deployment platforms and stacks, each with per-axis quantitative scores, the weighting applied, and the trade-off statement that determined its position. Chat output only.
 
 ## Provenance
 

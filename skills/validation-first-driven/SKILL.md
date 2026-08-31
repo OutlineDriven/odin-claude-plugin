@@ -1,6 +1,6 @@
 ---
 name: validation-first-driven
-description: 'Defines state machines, invariants, and temporal properties. Use when building protocols, workflows, concurrent systems, or lifecycle-heavy state. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Defines state machines, invariants, and temporal properties. Use when building protocols, workflows, concurrent systems, or lifecycle-heavy state. Not for encoding domain models in types or design-by-contract — use type-driven or contract-driven.'
 ---
 
 # Validation-first development
@@ -22,23 +22,17 @@ description: 'Defines state machines, invariants, and temporal properties. Use w
 
 ## Procedure
 
-1. **Identify scope.** Confirm the work involves explicit states, transitions, temporal properties, or lifecycle-heavy state. If it is a stateless endpoint, pure data transformation, simple CRUD without lifecycle, configuration parse, or stateless batch process, stop and return the work unaltered.
-
-2. **Capture states and transitions.** Extract all named states, state variables, actions, guards, and side effects from the requirements. Identify every temporal property: "always eventually", "never", "until", "leads-to".
-
+1. **Identify scope.** Confirm the work involves explicit states, transitions, temporal properties, or lifecycle-heavy state. If it is a stateless endpoint, pure data transformation, simple CRUD without lifecycle, configuration parse, or stateless batch process, stop and return the work unaltered. **Done when:** the work is confirmed as state-heavy or returned unaltered.
+2. **Capture states and transitions.** Extract all named states, state variables, actions, guards, and side effects from the requirements. Identify every temporal property: "always eventually", "never", "until", "leads-to". **Done when:** all states, transitions, and temporal properties are extracted.
 3. **Choose mechanism level.**
-
-   | Level | Mechanism | Strength | Use when |
-   |-------|-----------|----------|----------|
-   | Typestate | Generic type params, phantom data | Invalid transitions unrepresentable | Protocol APIs, builder patterns, Rust FFI |
-   | Statecharts | Nested states, parallel regions | Complex workflows, entry/exit actions | Game state, multi-modal UI, XState |
-   | Flat FSM | Enum + match/switch | Simple, auditable | Order lifecycle, connection management |
-   | Actor model | Independent entities, message passing | Concurrent state | Distributed systems, Erlang/Elixir, XState v5 |
-
-   Default: use the strongest mechanism the language supports. Typestate in Rust, sealed classes in Kotlin, discriminated unions in TypeScript.
-
+   | Level | Mechanism | Use when |
+   |-------|-----------|----------|
+   | Typestate | Generic type params, phantom data | Protocol APIs, builder patterns, Rust FFI |
+   | Statecharts | Nested states, parallel regions | Game state, multi-modal UI, XState |
+   | Flat FSM | Enum + match/switch | Order lifecycle, connection management |
+   | Actor model | Independent entities, message passing | Distributed systems, Erlang/Elixir |
+   Default: use the strongest mechanism the language supports. **Done when:** one mechanism level is chosen with rationale.
 4. **Write state machine specification.** Use this template:
-
    ```
    STATE MACHINE: <Name>
      STATES: S1 | S2 | S3
@@ -47,22 +41,13 @@ description: 'Defines state machines, invariants, and temporal properties. Use w
      ACTION name(args): PRE: guard -> POST: new_state, effects
      INVARIANT: condition_that_always_holds
    ```
-
-5. **Define validation level.** Rank each invariant by enforcement strength:
-
-   ```
-   Type system (strongest) > State machine > Contract > Runtime check (weakest)
-   ```
-
-6. **Encode compile-time properties in types.** Use typestate, sealed classes, or discriminated unions to make invalid states unrepresentable. Encode every invariant the type system can express.
-
-7. **Layer state machine modeling.** For properties types cannot express, define a state machine with explicit states and transitions. For high-risk designs, write a TLA+ or Alloy spec and run the model checker.
-
-8. **Check every transition.** Verify invariants hold after each action. Confirm exhaustive matching on all states. Block on any invariant violation.
-
-9. **Write assertions and tests.** Map each temporal property to an assertion, a test, or a model-checker run. Every transition must have a test. Every invariant must have a verification point.
-
-10. **Implement.** Mirror the specification exactly: one state type, one transition function, one invariant check per concern. Keep state and behavior together.
+   **Done when:** the specification is written with all states, variables, actions, and invariants.
+5. **Define validation level.** Rank each invariant by enforcement strength: Type system (strongest) > State machine > Contract > Runtime check (weakest). **Done when:** every invariant has a validation level.
+6. **Encode compile-time properties in types.** Use typestate, sealed classes, or discriminated unions to make invalid states unrepresentable. Encode every invariant the type system can express. **Done when:** every type-expressible invariant is encoded.
+7. **Layer state machine modeling.** For properties types cannot express, define a state machine with explicit states and transitions. For high-risk designs, write a TLA+ or Alloy spec and run the model checker. **Done when:** every non-type-expressible property has a state machine or model-checker spec.
+8. **Check every transition.** Verify invariants hold after each action. Confirm exhaustive matching on all states. Block on any invariant violation. **Done when:** every transition is checked and invariants hold.
+9. **Write assertions and tests.** Map each temporal property to an assertion, a test, or a model-checker run. Every transition must have a test. Every invariant must have a verification point. **Done when:** every temporal property, transition, and invariant has a verification point.
+10. **Implement.** Mirror the specification exactly: one state type, one transition function, one invariant check per concern. Keep state and behavior together. **Done when:** the implementation mirrors the specification.
 
 ## Failure and recovery
 - **Wrong-scope work** — Return the work unaltered. Do not apply state machine modeling to stateless work.
@@ -75,11 +60,7 @@ description: 'Defines state machines, invariants, and temporal properties. Use w
 - **Non-converged** — If the state space is undecidable or the model checker does not terminate, stop and report the open temporal properties with no coverage.
 
 ## Output
-- State machine specification document (pseudocode or formal notation).
-- Verified implementation with assertions for every transition and invariant.
-- Test suite covering all states and transitions.
-- Optional: TLA+ or Alloy model for high-risk temporal properties.
-- Exit code: 0 (all gates pass) or the blocking gate code.
+A state machine specification, verified implementation with assertions for every transition and invariant, test suite covering all states and transitions, optional TLA+/Alloy model, and exit code (0 or the blocking gate code).
 
 ## Provenance
 

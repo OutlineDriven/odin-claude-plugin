@@ -1,6 +1,6 @@
 ---
 name: keep-why-autostart-examples
-description: 'Use when a user asks to make skill or knowledge activation more reliable in their agent tool, or first-run wizard reaches the activation-reliability question. Configures a project-scoped activation hook that measurably improves activation on affected eval cases. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when skill or knowledge activation is unreliable, or setup reaches activation reliability. Configures a project-scoped, marker-gated hook and measures affected evals before and after. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Keep why autostart examples
@@ -22,14 +22,14 @@ description: 'Use when a user asks to make skill or knowledge activation more re
 
 ## Procedure
 
-1. Identify the agent platform's native hook or session-start mechanism. If the platform exposes no hook mechanism, state this limitation explicitly and stop — do not invent a workaround.
-2. Inventory the target skills/knowledge items and confirm each has at least one eval case that tests whether it activates when expected.
-3. Run the eval set once without any hook to record the before-metric (expected: near 0/n on affected cases where activation was unreliable).
-4. Design a config marker (e.g., `keep-the-why:config`) that scopes the hook to fire only when present in the project configuration. The marker must be a project-local artifact, not a global or user-wide setting.
-5. Implement the activation hook: at session start, when the config marker is present, inject a concise reminder that lists the target skills/knowledge items and their activation triggers. The hook must not fire when the marker is absent.
-6. Run the eval set again with the hook active to record the after-metric.
-7. Compare before and after metrics. Report the exact numbers.
-8. If the platform supports hooks but the hook mechanism differs from the reference implementation (Claude Code SessionStart), adapt the hook to the platform's native form while preserving the config-marker scoping pattern.
+1. Identify the agent platform's native hook or session-start mechanism. If the platform exposes no hook mechanism, state this limitation explicitly and stop — do not invent a workaround. Done when: the platform's hook mechanism is identified or the limitation is declared and the skill stops.
+2. Inventory the target skills/knowledge items and confirm each has at least one eval case that tests whether it activates when expected. Done when: every target item has at least one eval case.
+3. Run the eval set once without any hook to record the before-metric (expected: near 0/n on affected cases where activation was unreliable). Done when: the before-metric is recorded.
+4. Design a config marker (e.g., `keep-the-why:config`) that scopes the hook to fire only when present in the project configuration. The marker must be a project-local artifact, not a global or user-wide setting. Done when: one config marker is designed and is project-local.
+5. Implement the activation hook: at session start, when the config marker is present, inject a concise reminder that lists the target skills/knowledge items and their activation triggers. The hook must not fire when the marker is absent. Done when: the hook is implemented and fires only when the marker is present.
+6. Run the eval set again with the hook active to record the after-metric. Done when: the after-metric is recorded.
+7. Compare before and after metrics. Report the exact numbers. Done when: before and after numbers are reported.
+8. If the platform supports hooks but the hook mechanism differs from the reference implementation (Claude Code SessionStart), adapt the hook to the platform's native form while preserving the config-marker scoping pattern. Done when: the adapted hook preserves the config-marker scoping pattern.
 
 ## Failure and recovery
 | Failure class | Detection | Response |
@@ -43,11 +43,8 @@ Partial results: if the hook improves some but not all affected cases, report pe
 Rollback: remove the config marker and the hook configuration file. No other artifacts are modified.
 
 ## Output
-A report containing:
-- Before-metric: activation rate on affected eval cases without the hook.
-- After-metric: activation rate on affected eval cases with the hook active.
-- Hook configuration: the config marker artifact and the hook implementation or reference to the platform-native hook.
-- Platform-limitation statements: explicit declaration if the platform lacks a hook mechanism, or if any aspect of the reference pattern could not be replicated.
+
+A report containing before-metric, after-metric, hook configuration (config marker artifact and hook implementation or reference to the platform-native hook), and platform-limitation statements where applicable.
 
 ## Provenance
 

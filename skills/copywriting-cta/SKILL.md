@@ -1,9 +1,9 @@
 ---
 name: copywriting-cta
-description: 'Use when a user asks to design or review a bottom-of-article CTA. Returns a complete CTA recommendation with copy, form, mechanism, A/B plan, and accessibility checks. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when a user asks to design or review a bottom-of-article CTA. Not for general copywriting — use copywriting; not for hooks/ledes — use copywriting-hooks.'
 ---
 
-# End-of-Article CTA designer
+# End-of-article CTA designer
 
 ## Contract
 
@@ -19,7 +19,7 @@ description: 'Use when a user asks to design or review a bottom-of-article CTA. 
 Required from the user (ask one question at a time with 2-4 tappable options; skip any already answered; fall back to free text only if the answer cannot be enumerated):
 
 1. **Article context:** Personal/independent blog or essay · Newsletter/paid publication · Brand/company/content-marketing blog · Other.
-2. **Primary objective:** Newsletter/email subscription · Social follow · Lead generation (gated asset) · Product/service signup or free trial · Demo or sales call booking · Direct purchase · Community join · Engagement (reply/comment/share) · Reader support (paid sub/tip) · Try-it/direct action · Other. If the user lists more than one, ask which is primary; multiple objectives is the dominant cause of CTA failure.
+2. **Primary objective:** Newsletter/email subscription · Social follow · Lead generation (gated asset) · Product/service signup or free trial · Demo or sales call booking · Direct purchase · Community join · Engagement (reply/comment/share) · Reader support (paid sub/tip) · Try-it/direct action · Other. If the user lists more than one, ask which is primary; choosing multiple objectives is the dominant cause of CTA failure.
 3. **Audience and relationship:** First-time visitor · Returning reader, not subscribed · Existing subscriber/customer · Mixed/unknown.
 4. **Funnel stage:** TOFU (discovery, no buying intent) · MOFU (evaluating, comparing) · BOFU (ready to act) · Not applicable.
 5. **Mechanism preference** (ask only if a mechanism could legitimately help; for skeptical or repeat-reader audiences default to "None / value-only" without asking): None/value-only · Curiosity gap · Reciprocity (free asset first) · Discount/offer · Urgency (real deadline) · Scarcity/FOMO · Social proof.
@@ -28,9 +28,9 @@ Optional: free-text constraints the user volunteers (length limit, brand voice, 
 
 ## Procedure
 
-1. **Interview.** Ask the five inputs above in order, one at a time, skipping any already supplied. Capture volunteered constraints.
+1. **Interview.** Ask the five inputs above in order, one at a time, skipping any already supplied. Capture volunteered constraints. Done when: all five inputs are collected or reported missing.
 
-2. **Diagnose.** Map the inputs to one archetype via this decision tree:
+2. **Diagnose.** Map the inputs to one archetype via this decision tree: Done when: the inputs are mapped to one archetype via the decision tree.
 
    ```
    context = INDEPENDENT / PERSONAL
@@ -60,7 +60,7 @@ Optional: free-text constraints the user volunteers (length limit, brand voice, 
    └── objective = engagement              → E (rarely right here)
    ```
 
-3. **Compose the recommendation** in this exact structure:
+3. **Compose the recommendation** in this exact structure: Done when: the recommendation is composed in the exact structure with all sections filled.
 
    ```markdown
    ## Recommended CTA
@@ -97,9 +97,9 @@ Optional: free-text constraints the user volunteers (length limit, brand voice, 
    - **Color-independence:** [non-color affordance]
    ```
 
-4. **Anti-pattern warnings.** After the recommendation, list 2-3 anti-patterns the user is at risk of given their inputs, as a contrarian check. Failure modes to call out by name: multiple competing CTAs, generic "Subscribe for more" / "Learn More", mechanism mismatch (urgency/scarcity where none exists), SaaS landing-page voice on a personal essay, proofless ask, "Book a Demo" on TOFU content, open-ended reply questions on social.
+4. **Anti-pattern warnings.** After the recommendation, list 2-3 anti-patterns the user is at risk of given their inputs, as a contrarian check. Failure modes to call out by name: multiple competing CTAs, generic "Subscribe for more" / "Learn More", mechanism mismatch (urgency/scarcity where none exists), SaaS landing-page voice on a personal essay, proofless ask, "Book a Demo" on TOFU content, open-ended reply questions on social. Done when: 2-3 anti-patterns are listed as a contrarian check.
 
-5. **Enforce operating principles during composition:**
+5. **Enforce operating principles during composition:** Done when: operating principles are enforced during composition.
    - **One primary CTA per post.** Multiple competing CTAs is the dominant failure mode.
    - **Match the voice of the publication.** A personal-essay footer that reads like a SaaS landing page collapses credibility.
    - **Specificity beats cleverness.** "Get one essay a week on indie filmmaking" beats "Subscribe to our awesome newsletter." The "I want to ___" completion test is the cleanest filter for button copy.
@@ -107,9 +107,9 @@ Optional: free-text constraints the user volunteers (length limit, brand voice, 
    - **Mechanisms are tools, not garnish.** Add urgency, scarcity, FOMO, or discount only when the context genuinely supports them; theatrical mechanisms erode trust.
    - **Push back on bad asks.** If the user wants a CTA that will fail (e.g., "Book a Demo" at the bottom of a beginner tutorial for first-time visitors), say so, propose the alternative, explain why, then deliver the original only with the failure mode flagged.
 
-6. **Language and style.** Adapt copy to the user's stated brand voice, the article's language (never default to English), the publication's existing cadence, and the reader's expertise level. Honor formality cues (tu/vous, du/Sie) and flag the choice. If non-English, translate the content section but keep structure headings in English.
+6. **Language and style.** Adapt copy to the user's stated brand voice, the article's language (never default to English), the publication's existing cadence, and the reader's expertise level. Honor formality cues (tu/vous, du/Sie) and flag the choice. If non-English, translate the content section but keep structure headings in English. Done when: copy is adapted to brand voice, language, cadence, and expertise level with formality cues flagged.
 
-7. **Offer next moves.** Suggest 2-3 follow-ups: steelman the opposite CTA, variant for a different audience or platform, or end-to-end article review for CTA-supporting signals.
+7. **Offer next moves.** Suggest 2-3 follow-ups: steelman the opposite CTA, variant for a different audience or platform, or end-to-end article review for CTA-supporting signals. Done when: 2-3 follow-ups are suggested.
 
 ## Failure and recovery
 - **Missing inputs.** If any of the five required inputs cannot be obtained, stop and report which input is missing rather than guessing. A CTA designed on assumed inputs produces the universal failure mode (generic "Subscribe for more").

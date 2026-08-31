@@ -1,3 +1,3 @@
 interface:
-  display_name: "Firebase APK Scanner"
-  short_description: "Extracts Firebase config from APKs and probes endpoints"
+  display_name: "Firebase Apk Scanner"
+  short_description: "Use when an authorized user needs to extract Firebase"

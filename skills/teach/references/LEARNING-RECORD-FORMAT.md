@@ -1,5 +1,5 @@
 ---
-# Learning Record Format
+# Learning record format
 
 Learning records live in `./learning-records/` and use sequential numbering: `0001-slug.md`, `0002-slug.md`, etc. Create the directory lazily — only when the first record is written.
 
@@ -31,9 +31,9 @@ Scan `./learning-records/` for the highest existing number and increment by one.
 
 Write one when any of these is true:
 
-1. **The user demonstrated genuine understanding of something non-trivial** — not just exposure, but evidence they can use the concept correctly. This sets a new floor for what to teach next.
+1. **The user demonstrated genuine understanding of something non-trivial** — not just exposure, but evidence they can use the concept correctly. This determines what to teach next.
 2. **The user disclosed prior knowledge** — "I already know X." Record it so future sessions don't re-teach it. Also record the _depth_ claimed.
-3. **A misconception was corrected** — the user previously believed something wrong and now sees why. These are high-value: they predict future stumbling blocks for related topics.
+3. **A misconception was corrected** — the user previously believed something wrong and now sees why. Record these corrections because they predict future stumbling blocks for related topics.
 4. **The mission shifted in response to learning** — the user discovered they cared about something different than they thought. Cross-link to [[MISSION.md]] and update it.
 
 ### What does _not_ qualify

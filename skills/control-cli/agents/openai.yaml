@@ -1,3 +1,3 @@
 interface:
   display_name: "Control CLI"
-  short_description: "Reproduce and verify CLI/TUI behavior via PTY evidence."
+  short_description: "Use when asked to reproduce, profile, or verify CLI/TUI"

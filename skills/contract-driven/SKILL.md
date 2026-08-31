@@ -1,9 +1,9 @@
 ---
 name: contract-driven
-description: 'Use when crossing a public API boundary, guarding complex invariants, or hardening untrusted input or integration seams; every planned PRE/POST/INV contract is implemented at the appropriate static, test, debug, or runtime layer and violations fail explicitly at the boundary. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when crossing a public API boundary, guarding complex invariants, or hardening untrusted input or integration seams. Implements PRE/POST/INV contracts at the appropriate enforcement layer; violations fail explicitly at the boundary. No remote or irreversible mutation.'
 ---
 
-# Contract driven
+# Contract-driven
 
 ## Contract
 
@@ -16,22 +16,28 @@ description: 'Use when crossing a public API boundary, guarding complex invarian
 
 ## Inputs
 
-Required: the requirements or specification for the operation whose contract is being designed, and the target source file or module containing the public API boundary, invariant, or untrusted seam.
+Required:
 
-Optional: existing tests that must continue to pass.
+- The requirements or specification for the operation whose contract is being designed.
+- The target source file or module containing the public API boundary, invariant, or untrusted seam.
+
+Optional:
+
+- Existing tests that must continue to pass.
 
 ## Procedure
 
-1. Plan: extract PRE/POST/INV from the requirements. Formalize each contract with an ID and a one-line description (e.g. PRE-1: amount > 0; POST-1: balance == old(balance) - amount; INV-1: balance >= 0). Do not begin implementation until every planned contract has an ID.
-2. Select verification level: for each contract, choose the strongest layer that can enforce it, preferring static over runtime:
+1. Plan: extract PRE/POST/INV from the requirements. Give each contract an ID and a one-line description (e.g. PRE-1: amount > 0; POST-1: balance == old(balance) - amount; INV-1: balance >= 0). Do not begin implementation until every planned contract has an ID. Done when: every planned contract has an ID and a one-line description.
+2. Select verification level: choose the strongest layer that can enforce each contract, preferring static over runtime:
    - Static type system or static_assert for type size, alignment, null/type safety, and exhaustiveness.
    - Test assertions for expensive O(n)+ properties.
    - Debug-only invariants for internal invariants.
    - Runtime guards for public API input, and always for external or untrusted input.
    If a property can be verified statically, do not add a runtime contract.
-3. Create: implement every PRE, POST, INV at its chosen level in the target local code. Runtime contracts, where used, must be active and not compiled out or disabled.
-4. Verify: run the type checker, static analysis, and build. Contracts must compile and lint.
-5. Test: write one violation test per PRE/POST/INV proving the contract catches bad input or bad state. Static contracts are verified by the type checker; runtime contracts by violation tests that assert the boundary fails explicitly.
+   Done when: every contract has a selected verification level, static preferred over runtime.
+3. Create: implement every PRE, POST, INV at its chosen level in the target local code. Runtime contracts, where used, must be active and not compiled out or disabled. Done when: every contract is implemented at its chosen level and runtime contracts are active.
+4. Verify: run the type checker, static analysis, and build. Contracts must compile and lint. Done when: the type checker, static analysis, and build pass with all contracts.
+5. Test: write one violation test per PRE/POST/INV proving the contract catches bad input or bad state. Static contracts are verified by the type checker; runtime contracts by violation tests that assert the boundary fails explicitly. Done when: one violation test per contract passes, proving the boundary fails on bad input or state.
 
 ## Failure and recovery
 - Contract lint or build fails: fix the contract or implementation; do not disable or compile out the runtime contract to make it pass.
@@ -45,4 +51,4 @@ Local code with every planned PRE/POST/INV contract implemented at its verificat
 
 ## Provenance
 
-Origin: ODIN 1.x current skill `skills/contract-driven/SKILL.md`. Revision: unpinned current. License: project-owned. Adaptation: re-expressed as a self-contained Design-by-Contract procedure preserving the PRE/POST/INV extraction, static-over-runtime verification hierarchy, and per-contract violation-test mechanism; no third-party expression copied.
+Origin: ODIN 1.x current skill `skills/contract-driven/SKILL.md`. Revision: unpinned current. License: project-owned. Adaptation: re-expressed as a self-contained Design-by-Contract procedure. It preserves PRE/POST/INV extraction, the static-over-runtime verification hierarchy, and the per-contract violation-test mechanism; no third-party expression was copied.
