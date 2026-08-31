@@ -1,3 +1,0 @@
-interface:
-  display_name: "CI Fix"
-  short_description: "Diagnoses CI failures and pushes a minimal verified fix branch."
