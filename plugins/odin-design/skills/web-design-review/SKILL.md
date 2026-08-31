@@ -1,6 +1,6 @@
 ---
 name: web-design-review
-description: 'Use when the user runs /web-design-review with a URL to visually audit a live UI through the browser and fix findings in a screenshot-verified loop. Not for design direction picking — use design; not for variant galleries — use design-variants.'
+description: 'Use when the user runs /web-design-review with a URL to visually audit a live UI through the browser and fix findings in a screenshot-verified loop. Not for design direction picking; use design. Not for variant galleries; use design-variants.'
 ---
 
 # Web design review
@@ -45,9 +45,9 @@ description: 'Use when the user runs /web-design-review with a URL to visually a
    - AI Slop Detection: purple/violet/indigo gradients, the 3-column icon-in-circle feature grid, centered everything, uniform bubbly radius, decorative blobs, emoji as design elements, colored left-border cards, generic hero copy, cookie-cutter section rhythm, system-ui as primary font.
    - Performance as Design: LCP under 2.0s (apps) or 1.5s (informational), CLS under 0.1, lazy images with dimensions, font-display swap, no visible font-swap flash.
 
-   **Done when:** every page has 5-10 findings, each with id, impact, category, screenshot, and specific suggestion.
+   **Done when:** every page's findings are recorded, each with id, impact, category, screenshot, and specific suggestion; a defect-free page records zero findings with its screenshots as evidence.
 
-7. Walk 2-3 key user flows and evaluate feel, not just function: response, transition quality, feedback clarity, form polish. Maintain a Goodwill Reservoir starting at 70/100. Subtract for hidden information (-15), format punishment (-10), unnecessary requests (-10), interstitials or forced tours (-15), sloppy appearance (-10), ambiguous choices (-5 each). Add for obvious top tasks (+10), upfront costs (+5), saved steps (+5 each), graceful error recovery (+10). Report the final goodwill score. **Done when:** 2-3 flows are walked and a numeric goodwill score is reported.
+7. Walk 2-3 key user flows and evaluate feel as well as function: response, transition quality, feedback clarity, form polish. Maintain a Goodwill Reservoir starting at 70/100. Subtract for hidden information (-15), format punishment (-10), unnecessary requests (-10), interstitials or forced tours (-15), sloppy appearance (-10), ambiguous choices (-5 each). Add for obvious top tasks (+10), upfront costs (+5), saved steps (+5 each), graceful error recovery (+10). Report the final goodwill score. **Done when:** 2-3 flows are walked and a numeric goodwill score is reported.
 
 8. Compare screenshots and observations across pages for consistency: navigation bar, footer, component reuse versus one-off designs, tone, spacing rhythm. **Done when:** cross-page consistency is stated with named elements compared.
 
@@ -70,7 +70,7 @@ description: 'Use when the user runs /web-design-review with a URL to visually a
 13. Final Design Audit. Re-run the audit on all affected pages. Recompute the final Design Score and AI Slop Score. If final scores are worse than baseline, warn prominently: something regressed. If a prior `web-design-baseline.json` exists, append a regression table with per-category grade deltas, new findings, and resolved findings. **Done when:** final scores are recomputed and a regression table is appended when a prior baseline exists.
 
 ## Failure and recovery
-- No browser available: fall back to opening comparison boards via `file://` in any browser so the user views the HTML directly. Findings that need live interaction are marked best-effort.
+- No browser automation available: write static comparison boards as HTML files and tell the user to open them directly; findings that need live interaction are marked best-effort.
 - Site requires authentication: detect `/login`, `/signin`, `/auth`, or `/sso` in the URL. Ask the user to import browser cookies or run browser setup before continuing. Do not attempt to bypass auth.
 - A fix introduces a regression: revert it with `git revert HEAD`, mark the finding deferred, continue the loop. Never leave a regressing fix in place.
 - Risk exceeds 20% or the 30-fix cap is reached: stop the fix loop. Report what was done, what remains, and the risk level. Do not continue past the cap.
@@ -78,4 +78,4 @@ description: 'Use when the user runs /web-design-review with a URL to visually a
 - Never claim the done predicate holds when findings remain unverified. Best-effort and reverted findings are reported as such, not as verified.
 
 ## Output
-A report directory `web-design-audit-<YYYYMMDD>/` holding the audit report, screenshots/, web-design-baseline.json, a findings table, a summary, and a one-line PR summary — ordered capture → first-impression → inferred-system → trunk-test → checklist → flows → consistency → score → triage → fix-loop → self-regulate → final-audit, with every finding classified verified / best-effort / reverted / deferred.
+A report directory `web-design-audit-<YYYYMMDD>/` holding the audit report, screenshots/, web-design-baseline.json, a findings table, a summary, and a one-line PR summary, ordered capture → first-impression → inferred-system → trunk-test → checklist → flows → consistency → score → triage → fix-loop → self-regulate → final-audit, with every finding classified verified / best-effort / reverted / deferred.

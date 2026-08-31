@@ -1,6 +1,6 @@
 ---
 name: typography-audit
-description: 'Use when asked to audit typography across a codebase. Produces a file:line report with concrete CSS and HTML fixes ordered by impact across 10 categories. Not for building a type system or token scale.'
+description: 'Use when asked to audit typography across a codebase. Produces a file:line report with concrete CSS and HTML fixes ordered by impact across 10 categories, and records rules that need rendered metrics as not-verifiable-from-source instead of fabricating violations. Not for building a type system or token scale.'
 ---
 
 # Typography audit
@@ -11,8 +11,8 @@ description: 'Use when asked to audit typography across a codebase. Produces a f
 |---|---|
 | Trigger | User says audit my typography, fix the fonts, review my type, font pairing, type scale, or web typography |
 | Authority | Read-only scan of project files; no file, VCS, credential, paid, published, deployed, or remote mutation. May apply fixes only when user explicitly requests. |
-| Side effect | Chat output: file:line findings with concrete CSS/HTML fix suggestions |
-| Done | Report covers all 10 categories with file:line fixes ordered by impact |
+| Side effect | Chat output: file:line findings with concrete CSS/HTML fix suggestions, plus not-verifiable-from-source verdicts for rules that need rendered metrics |
+| Done | Report covers all 10 categories; every finding is either a verified file:line violation with a concrete fix or a not-verifiable-from-source verdict naming the rendered metric that would decide it; findings are ordered by impact with no fabricated file:line violations |
 
 ## Inputs
 
@@ -24,9 +24,9 @@ description: 'Use when asked to audit typography across a codebase. Produces a f
 
 1. Collect all CSS, SCSS, Less, HTML, JSX, TSX, Vue, and Svelte files in scope. Skip node_modules, dist, build, vendor, and .git directories. **Done when:** every in-scope source file is collected or reported unreadable.
 2. For each file, extract font-family declarations, font-size values, line-height values, letter-spacing values, color declarations on text elements, @font-face blocks, font-feature-settings, and typographic HTML elements (h1-h6, p, blockquote, ul, ol, li, em, strong, small, sup, sub, abbr, cite, q, dl, dt, dd). **Done when:** every collected file has its typographic surface extracted.
-3. Audit against the following 10-category rule set. For each violation found, record the file path, line number, rule name, severity (critical/high/medium/low), and a concrete CSS or HTML fix. **Done when:** all 10 categories have been checked.
+3. Audit against the following 10-category rule set. For each violation found, record the file path, line number, rule name, severity (critical/high/medium/low), and a concrete CSS or HTML fix. When a rule's verdict depends on rendered metrics that static source cannot decide, record the finding as not-verifiable-from-source: name the rule, the files and declarations examined, and the rendered metric that would decide it. Rules that commonly need rendered facts include size-line-length (measure depends on font metrics and container width), layout-widows-orphans and layout-optical-balance (line breaking), pairing-contrast-harmony and pairing-stress-skeleton (x-height and stress need glyph or font-metric inspection), brand-dark-backgrounds (contrast when colors resolve through custom properties the scan cannot statically resolve), display-grid-breaking (baseline rhythm is rendered), and display-drop-caps (rendered cap metrics). Never force a file:line verdict for a rendered-metric rule. **Done when:** all 10 categories have been checked, with every finding either verified at file:line or recorded as not-verifiable-from-source.
 
-### Category 1 — brand identity
+### Category 1: brand identity
 
 1. **brand-capitalization**: Check that brand names use their canonical casing. Flag all-caps or all-lowercase brand names in user-facing text.
 2. **brand-color**: Verify text colors align with brand palette. Flag hardcoded colors that deviate from declared brand tokens or CSS custom properties.
@@ -37,7 +37,7 @@ description: 'Use when asked to audit typography across a codebase. Produces a f
 7. **brand-licensing**: Flag @font-face declarations that reference fonts without verifiable licensing (e.g., fonts served from unauthorized CDNs or local paths without license documentation).
 8. **brand-logo-typeface**: Verify that logo text or wordmarks use the designated brand typeface or are set as SVG/images, not restyled body fonts.
 
-### Category 2 — display and headlines
+### Category 2: display and headlines
 
 1. **display-drop-caps**: Flag drop-cap implementations that use font-size alone without adjusting float, line-height, and margin. Suggest ::first-letter with proper metrics.
 2. **display-grid-breaking**: Check that display text respects grid baselines. Flag headline sizes that break vertical rhythm without compensating margin.
@@ -47,7 +47,7 @@ description: 'Use when asked to audit typography across a codebase. Produces a f
 6. **display-lead-paragraph**: Verify lead/intro paragraphs have distinct styling (larger size, lighter weight, or increased line-height) from body text.
 7. **display-swashes**: Flag swash characters or stylistic sets applied to body text. Swashes belong only in display contexts with controlled line breaks.
 
-### Category 3 — font selection and setup
+### Category 3: font selection and setup
 
 1. **font-body-selection**: Verify body text uses a typeface designed for sustained reading (e.g., Georgia, Merriweather, Source Serif, Inter). Flag decorative or display faces on body text.
 2. **font-condensed-extended**: Flag condensed or extended widths used for body text. These belong in display or UI contexts only.
@@ -61,7 +61,7 @@ description: 'Use when asked to audit typography across a codebase. Produces a f
 10. **font-variable-fonts**: If variable fonts are used, verify axis ranges (wght, wdth, ital, slnt, opsz) are declared correctly and that fallback @font-face blocks exist for static-font browsers.
 11. **font-weight-body**: Verify body text uses weight 400 (regular) or the typeface's intended body weight. Flag light (300) or semibold (600) weights on body text.
 
-### Category 4 — hierarchy and scale
+### Category 4: hierarchy and scale
 
 1. **hierarchy-body-first**: Verify the body text size is set before headings scale from it. Flag projects that define heading sizes without a base body size.
 2. **hierarchy-caps-subheads**: Check that subheadings using all-caps have letter-spacing of at least 0.05em. Flag tight tracking on uppercase subheads.
@@ -72,7 +72,7 @@ description: 'Use when asked to audit typography across a codebase. Produces a f
 7. **hierarchy-size-contrast**: Verify at least 20% size difference between heading levels. Flag adjacent levels with less than 15% difference.
 8. **hierarchy-weight-contrast**: Check that headings use a weight at least one step above body text (e.g., 600 or 700 vs 400). Flag headings at body weight with no other visual distinction.
 
-### Category 5 — layout and composition
+### Category 5: layout and composition
 
 1. **layout-center-alignment**: Flag center-aligned body text (text-align: center on paragraphs or multi-line blocks). Center alignment is reserved for short display text.
 2. **layout-justified-text**: Flag justified text (text-align: justify) without hyphenation (hyphens: auto or manual soft hyphens). Justified text without hyphens creates uneven word spacing.
@@ -81,7 +81,7 @@ description: 'Use when asked to audit typography across a codebase. Produces a f
 5. **layout-proximity-dividers**: Flag horizontal rules or borders used between closely related content where whitespace alone would communicate grouping. Suggest margin/padding instead.
 6. **layout-widows-orphans**: Check for orphan words (single word on the last line of a paragraph) and widow lines (single line of a paragraph at the top of a column). Flag and suggest CSS fixes (e.g., text-wrap: balance, or manual break adjustments).
 
-### Category 6 — OpenType features
+### Category 6: OpenType features
 
 1. **opentype-body-features**: Verify that body text enables common OpenType features: kerning (kern), standard ligatures (liga), and contextual alternates (calt). Flag text with font-feature-settings: normal.
 2. **opentype-kerning**: Check that kerning is enabled via font-kerning: normal or font-feature-settings: 'kern'. Flag font-kerning: none on body text.
@@ -91,7 +91,7 @@ description: 'Use when asked to audit typography across a codebase. Produces a f
 6. **opentype-small-caps**: Verify small caps use font-variant-caps: small-caps or the smcp feature, not font-size reduction with text-transform: uppercase. Flag fake small caps.
 7. **opentype-tabular-figures**: Check that numerical data in tables uses tabular figures (tnum) or font-variant-numeric: tabular-nums. Flag proportional figures in data tables.
 
-### Category 7 — font pairing
+### Category 7: font pairing
 
 1. **pairing-contrast-harmony**: Verify paired typefaces have contrast in structure (serif + sans-serif) or weight but harmony in proportion and x-height. Flag pairings with no clear contrast or clashing x-heights.
 2. **pairing-limit-typefaces**: Flag projects using more than 3 typeface families. Two is ideal; three is the practical maximum.
@@ -99,7 +99,7 @@ description: 'Use when asked to audit typography across a codebase. Produces a f
 4. **pairing-superfamilies**: Verify that when a superfamily is used (e.g., Roboto, Source, IBM Plex), the paired weights and widths maintain visual coherence.
 5. **pairing-ui-fonts**: Check that UI elements (buttons, inputs, labels, navigation) use a legible, neutral typeface at appropriate sizes (14-16px). Flag decorative fonts on UI elements.
 
-### Category 8 — punctuation and symbols
+### Category 8: punctuation and symbols
 
 1. **punct-abbreviations**: Check that abbreviations use proper markup (abbr with title attribute) and that e.g., and i.e., are followed by commas.
 2. **punct-ampersands**: Flag bare ampersands (&) in running text. Use the HTML entity &amp; or the word "and" unless the ampersand is part of a brand name.
@@ -114,16 +114,16 @@ description: 'Use when asked to audit typography across a codebase. Produces a f
 11. **punct-smart-quotes**: Verify curly quotes (\u2018, \u2019, \u201c, \u201d) are used in prose instead of straight quotes (' , "). Flag straight quotes in running text.
 12. **punct-symbols**: Check that symbols (©, ®, ™, §, ¶) are used correctly and rendered as Unicode characters, not image replacements.
 
-### Category 9 — size and proportions
+### Category 9: size and proportions
 
 1. **size-body-text**: Verify body text is 16-18px (1-1.125rem) on desktop and at least 14px on mobile. Flag text below these thresholds.
-2. **size-emphasis**: Check that em/strong elements produce visible emphasis (italic or weight change), not just color change. Flag color-only emphasis.
+2. **size-emphasis**: Check that em/strong elements produce visible emphasis (italic or weight change), rather than color change alone. Flag color-only emphasis.
 3. **size-hanging-punctuation**: Verify blockquotes and lists use hanging punctuation (text-indent: -0.5em or hanging punctuation CSS property) where supported.
 4. **size-line-height**: Check that body line-height is 1.4-1.6 and heading line-height is 1.0-1.3. Flag line-height below 1.2 for body text or above 1.5 for headings.
 5. **size-line-length**: Verify body text measures 45-75 characters per line (roughly 60-70ch or equivalent max-width). Flag lines exceeding 80 characters.
 6. **size-responsive**: Check that text sizes use relative units (rem, em, clamp, vw) rather than fixed px for responsive behavior. Flag fixed px sizes on body text and headings.
 
-### Category 10 — spacing and rhythm
+### Category 10: spacing and rhythm
 
 1. **spacing-hair-thin-spaces**: Verify hair spaces (\u200A) or thin spaces (\u2009) are used between numbers and units (e.g., 100 px → 100\u2009px), around em dashes, and between initials.
 2. **spacing-letterspacing-body**: Check that body text has default (normal) letter-spacing. Flag any letter-spacing set on body text that is not zero or normal.
@@ -139,22 +139,23 @@ description: 'Use when asked to audit typography across a codebase. Produces a f
    - **High**: Violates a core typographic principle (wrong scale, missing fallback, broken hierarchy).
    - **Medium**: Degrades quality but does not break readability (suboptimal tracking, missing opentype features).
    - **Low**: Polish-level improvement (hair spaces, hanging punctuation, swash usage).
-   **Done when:** every finding has one severity.
+   A not-verifiable-from-source finding carries no severity; it records a measurement gap, not a violation. **Done when:** every verified finding has one severity and every not-verifiable-from-source finding is recorded without one.
 5. Sort findings by severity (critical first), then by category order. **Done when:** the ordering is deterministic.
 6. For each finding, produce a concrete fix:
    - CSS fix: the exact property and value to change, with the selector.
    - HTML fix: the exact markup correction.
    - Example: `h1 { letter-spacing: -0.02em; }` or replace `<font>` with `<span class="heading">`.
    **Done when:** every finding has an exact CSS or HTML fix.
-7. Compile the report grouped by category, with a summary count per category and an overall severity distribution. **Done when:** category and severity counts reconcile with the findings.
+7. Compile the report grouped by category, with a summary count per category and an overall severity distribution. Include a count of not-verifiable-from-source findings. **Done when:** category, severity, and not-verifiable counts reconcile with the findings.
 8. If the user requests fixes to be applied, generate the minimal CSS patch or HTML edit for each finding. Apply only the requested fixes; do not widen scope. **Done when:** requested fixes are applied or the read-only report is complete.
 
 ## Failure and recovery
 - **No files found**: Return a message stating no CSS/HTML/JSX files exist in scope. Do not fabricate findings.
+- **Rendered-metric rule cannot be decided from source**: record not-verifiable-from-source with the metric that would decide it. Never fabricate a file:line violation to complete a category.
 - **No violations found**: Return a clean report stating all 10 categories passed with zero findings.
 - **Partial scan**: If some files are unreadable (binary, encoding errors), list them as skipped and continue with remaining files. Report the skip count.
 - **Scope exceeded**: If the user requests fixes beyond the audit findings, decline and state the audit boundary.
 - **Non-convergent fix**: If applying a fix introduces a new violation in the same category, stop that fix, report the conflict, and continue with other findings.
 
 ## Output
-A report with sections in order: summary, per-category findings table (File, Line, Rule, Severity, Description, Fix), severity-ordered fix list, and an optional consolidated CSS patch when fixes were requested.
+A report with sections in order: summary, per-category findings table (File, Line, Rule, Severity, Description, Fix), severity-ordered fix list, and a not-verifiable-from-source list naming each undecidable rule and the rendered metric it needs, plus an optional consolidated CSS patch when fixes were requested.

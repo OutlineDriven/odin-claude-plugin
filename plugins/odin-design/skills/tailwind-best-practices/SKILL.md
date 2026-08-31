@@ -1,6 +1,6 @@
 ---
 name: tailwind-best-practices
-description: 'Use when writing, editing, reviewing, or auditing Tailwind classes, components, or configuration. Reorders and deduplicates classes, replaces arbitrary values with project tokens, and checks component extraction. Not for general CSS without Tailwind.'
+description: 'Use when writing, editing, cleaning, or refactoring Tailwind classes, components, or configuration. Reorders and deduplicates classes, replaces arbitrary values with project tokens, and checks component extraction. Not for read-only audits of Tailwind code, or general CSS without Tailwind.'
 ---
 
 # Tailwind best practices
@@ -9,7 +9,7 @@ description: 'Use when writing, editing, reviewing, or auditing Tailwind classes
 
 | Field | Bound contract |
 |---|---|
-| Trigger | User asks to write, edit, review, clean, refactor, or audit Tailwind classes, components, or configuration. |
+| Trigger | User asks to write, edit, clean, or refactor Tailwind classes, components, or configuration. Read-only review or audit requests are out of scope. |
 | Authority | Reversible local writes only. Edit class lists and component variants in place; every mutation is reversible by restoring the prior class string or file content. |
 | Side effect | Edits class lists and component variants; flags ad-hoc tokens, @apply-heavy styles, magic values, and missing minification. |
 | Done | Token and component prerequisites exist; unnecessary utilities, semantics, ordering, @apply avoidance, and fixed variants are checked with version-aware minification. |
@@ -25,6 +25,7 @@ description: 'Use when writing, editing, reviewing, or auditing Tailwind classes
 - Class string parse failure: skip the malformed string. Record its file and line, then continue.
 - Ambiguous utility replacement: keep the original utility and flag it for human review. Do not guess.
 - Required `@apply` block: leave an `@apply` inside a pseudo-element or `@layer` unchanged and record why.
+- Read-only review or audit requested with no edits: out of scope. Report that this skill runs only as a write, edit, clean, or refactor pass, and modify no files.
 
 ## Procedure
 

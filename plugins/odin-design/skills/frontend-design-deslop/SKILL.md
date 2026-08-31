@@ -1,6 +1,6 @@
 ---
 name: frontend-design-deslop
-description: 'Use when a user builds or styles a web frontend or asks to make it not look AI-generated. Commits a token system and crafted interface passing a slop-audit and WCAG 2.2 AA gate. Not for component-level UI work without the token system — use frontend-ui. Local writes only.'
+description: 'Use when a user builds or styles a web frontend or asks to make it not look AI-generated. Commits a token system and crafted interface passing a slop-audit and WCAG 2.2 AA gate. Not for component-level UI work without the token system; use frontend-ui-engineering. Local writes only.'
 ---
 
 # Frontend design deslop
@@ -16,8 +16,8 @@ description: 'Use when a user builds or styles a web frontend or asks to make it
 
 ## Not for
 
-- Component-level UI work without a token system — use frontend-ui.
-- Clean-room reconstruction of an authorized reference surface — use frontend-fidelity-rebuild.
+- Component-level UI work without a token system: use frontend-ui-engineering.
+- Clean-room reconstruction of an authorized reference surface: use frontend-fidelity-rebuild.
 - Remote, credential, publish, deploy, or irreversible changes.
 
 ## Inputs
@@ -52,4 +52,4 @@ Optional: brand palette, typeface preferences, existing token files, and a targe
 
 ## Output
 
-Committed DESIGN.md, token system file, and component CSS implementing the crafted interface, plus a recorded slop-audit pass and WCAG 2.2 AA gate pass — the done predicate holds only when both gates pass and the artifacts are committed.
+Committed DESIGN.md, token system file, and component CSS implementing the crafted interface, plus a recorded slop-audit pass and WCAG 2.2 AA gate pass; the done predicate holds only when both gates pass and the artifacts are committed.

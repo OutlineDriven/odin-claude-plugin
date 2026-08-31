@@ -2,7 +2,7 @@
 
 ODIN workflows for practical interface and visual design.
 
-14 skills, category Design.
+13 skills, category Design.
 
 ## Install
 
@@ -23,7 +23,6 @@ codex plugin add odin-design@odin-marketplace
 - design-gate-brainstorming
 - design-variants
 - frontend-design-deslop
-- frontend-ui
 - frontend-ui-engineering
 - ios-visual-review
 - polished-web-prototype
