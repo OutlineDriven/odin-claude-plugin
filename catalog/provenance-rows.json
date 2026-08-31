@@ -1,7 +1,7 @@
 {
   "schema": "odin-package-provenance-rows/v1",
   "releaseVersion": "2.0.0",
-  "skill_count": 779,
+  "skill_count": 776,
   "rows": [
     {
       "slug": "agents-md",
@@ -1122,38 +1122,11 @@
     {
       "slug": "tdd",
       "module": "odin-code",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
+      "strategy": "G",
+      "adaptation": "structured-merge-rewrite",
       "target": "skills/tdd/",
-      "origin": "cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)",
-      "input_candidates": "`source:source-cursor:cursor-tdd`"
-    },
-    {
-      "slug": "tdd-plan-writer",
-      "module": "odin-code",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/tdd-plan-writer/",
-      "origin": "https://github.com/obra/superpowers @ `b36e0829c6d0140e93cfef2ca599b1b07d4a7797` (MIT)",
-      "input_candidates": "`source:source-superpowers:superpowers-002`"
-    },
-    {
-      "slug": "tdd-vertical-slices",
-      "module": "odin-code",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/tdd-vertical-slices/",
-      "origin": "mattpocock/skills @ `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76` (MIT)",
-      "input_candidates": "`source:source-matt:matt-tdd`"
-    },
-    {
-      "slug": "test-driven",
-      "module": "odin-code",
-      "strategy": "B",
-      "adaptation": "byte-reuse",
-      "target": "skills/test-driven/",
-      "origin": "current-odin-skill-tree @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>addyosmani/agent-skills @ `d2c37ef6225dd8726cdd369a8030307f48592d26` (MIT)<br>https://github.com/obra/superpowers @ `b36e0829c6d0140e93cfef2ca599b1b07d4a7797` (MIT)",
-      "input_candidates": "`current:current-d:current:test-driven`<br>`source:source-addy:addy-test-driven-development`<br>`source:source-superpowers:superpowers-016`"
+      "origin": "cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)<br>current-odin-skill-tree @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>addyosmani/agent-skills @ `d2c37ef6225dd8726cdd369a8030307f48592d26` (MIT)<br>https://github.com/obra/superpowers @ `b36e0829c6d0140e93cfef2ca599b1b07d4a7797` (MIT)<br>mattpocock/skills @ `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76` (MIT)",
+      "input_candidates": "`source:source-cursor:cursor-tdd`<br>`current:current-d:current:test-driven`<br>`source:source-addy:addy-test-driven-development`<br>`source:source-superpowers:superpowers-016`<br>`source:source-superpowers:superpowers-002`<br>`source:source-matt:matt-tdd`"
     },
     {
       "slug": "tests-adversarial",

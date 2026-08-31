@@ -1,3 +1,3 @@
 interface:
   display_name: "Analysis Artifacts"
-  short_description: "Use when the user requests a deep dive, exploratory analysis,"
+  short_description: "Use when the user requests a deep dive, exploratory analysis"

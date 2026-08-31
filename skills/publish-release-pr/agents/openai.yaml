@@ -1,3 +1,3 @@
 interface:
   display_name: "Publish Release PR"
-  short_description: "Use when a human runs /publish-release-pr to ship a versioned,"
+  short_description: "Use when a human runs /publish-release-pr to ship a versioned"

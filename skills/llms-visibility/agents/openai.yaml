@@ -1,3 +1,3 @@
 interface:
   display_name: "Llms Visibility"
-  short_description: "Use when asked to add llms.txt, Markdown Accept negotiation,"
+  short_description: "Use when asked to add llms.txt, Markdown Accept negotiation"

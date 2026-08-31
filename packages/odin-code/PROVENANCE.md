@@ -2,7 +2,7 @@
 
 OutlineDriven-authored material in this package is Apache-2.0. See the repository `LICENSE`.
 
-This package ships 72 public skills from the canonical `skills/<slug>/` tree. Package-local skill copies are generated only at pack time.
+This package ships 69 public skills from the canonical `skills/<slug>/` tree. Package-local skill copies are generated only at pack time.
 
 | Skill | Strategy | Adaptation | Target | Origin |
 |---|---|---|---|---|
@@ -66,10 +66,7 @@ This package ships 72 public skills from the canonical `skills/<slug>/` tree. Pa
 | `source-driven` | B | byte-reuse | `skills/source-driven/` | current-odin-skill-tree @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>addyosmani/agent-skills @ `d2c37ef6225dd8726cdd369a8030307f48592d26` (MIT) |
 | `spec-driven` | B | byte-reuse | `skills/spec-driven/` | current-odin-skill-tree @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>addyosmani/agent-skills @ `d2c37ef6225dd8726cdd369a8030307f48592d26` (MIT) |
 | `spec-driven-implementation` | B | byte-reuse | `skills/spec-driven-implementation/` | https://github.com/warpdotdev/common-skills @ `f589e224907eda566c13755529f59db563090d14` (MIT) |
-| `tdd` | B | byte-reuse | `skills/tdd/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
-| `tdd-plan-writer` | B | byte-reuse | `skills/tdd-plan-writer/` | https://github.com/obra/superpowers @ `b36e0829c6d0140e93cfef2ca599b1b07d4a7797` (MIT) |
-| `tdd-vertical-slices` | B | byte-reuse | `skills/tdd-vertical-slices/` | mattpocock/skills @ `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76` (MIT) |
-| `test-driven` | B | byte-reuse | `skills/test-driven/` | current-odin-skill-tree @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>addyosmani/agent-skills @ `d2c37ef6225dd8726cdd369a8030307f48592d26` (MIT)<br>https://github.com/obra/superpowers @ `b36e0829c6d0140e93cfef2ca599b1b07d4a7797` (MIT) |
+| `tdd` | G | structured-merge-rewrite | `skills/tdd/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)<br>current-odin-skill-tree @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>addyosmani/agent-skills @ `d2c37ef6225dd8726cdd369a8030307f48592d26` (MIT)<br>https://github.com/obra/superpowers @ `b36e0829c6d0140e93cfef2ca599b1b07d4a7797` (MIT)<br>mattpocock/skills @ `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76` (MIT) |
 | `tests-adversarial` | B | byte-reuse | `skills/tests-adversarial/` | current-odin-skill-tree @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `to-spec` | B | byte-reuse | `skills/to-spec/` | mattpocock/skills @ `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76` (MIT) |
 | `trailmark-summary` | B | byte-reuse | `skills/trailmark-summary/` | https://github.com/trailofbits/skills @ `d1f1575cff97816e5cc08af66cd2506099c681d3` (CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.) |
