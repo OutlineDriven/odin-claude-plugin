@@ -1,3 +1,0 @@
-interface:
-  display_name: "Quick Spec Render"
-  short_description: "Use when --quick is passed on diagram, diff-review"

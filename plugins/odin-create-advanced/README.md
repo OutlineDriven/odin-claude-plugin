@@ -2,7 +2,7 @@
 
 Advanced ODIN workflows for ambitious, multi-part creative work.
 
-25 skills, category Productivity.
+22 skills, category Productivity.
 
 ## Install
 
@@ -23,16 +23,13 @@ codex plugin add odin-create-advanced@odin-marketplace
 - attack-shape
 - automatic-cybernetic-flow-design
 - automatic-freeform-graphs-design
-- devils-advocate-architecture
 - docs-canvas
 - fail-design
 - from-first-principle
 - fromzero
-- journey-trace-wizard
 - pr-review-canvas
 - pr-review-canvas-html
 - presentation-creator
-- quick-spec-render
 - release-promotion
 - rhythmic-taste
 - scaffold-exercises

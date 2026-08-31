@@ -1,6 +1,6 @@
 ---
 name: single-file-html-deck
-description: 'Use when an explicit request asks to create a Sentry presentation, build slides, or make a deck. Scaffolds one self-contained, keyboard-navigable HTML file with real-data charts and Sentry branding. Not for general HTML artifacts — use html; not for PowerPoint — use pptx.'
+description: 'Use when an explicit request asks to create a Sentry presentation, build slides, or make a deck. Scaffolds one self-contained, keyboard-navigable HTML file with real-data charts and Sentry branding. For general HTML artifacts use html; for PowerPoint use pptx.'
 ---
 
 # Single-file HTML deck
@@ -27,13 +27,13 @@ description: 'Use when an explicit request asks to create a Sentry presentation,
 1. **Gather inputs.** Confirm topic, audience, and any source material. If topic or audience is missing, stop and request them before proceeding. Done when: topic and audience are confirmed.
 
 2. **Scaffold the project.** Create a working directory. Initialize a React + Vite + Recharts project with the following structure:
-   - `src/App.jsx` — main slide deck component with keyboard navigation.
-   - `src/components/Slide.jsx` — individual slide component.
-   - `src/components/Chart.jsx` — Recharts wrapper for data visualizations.
-   - `src/data/` — real data files only; never fabricate placeholder data.
-   - `src/styles/` — Sentry-branded styles.
-   - `index.html` — entry point.
-   - `package.json` — dependencies: react, react-dom, vite, recharts.
+   - `src/App.jsx`: main slide deck component with keyboard navigation.
+   - `src/components/Slide.jsx`: individual slide component.
+   - `src/components/Chart.jsx`: Recharts wrapper for data visualizations.
+   - `src/data/`: real data files only; never fabricate placeholder data.
+   - `src/styles/`: Sentry-branded styles.
+   - `index.html`: entry point.
+   - `package.json`: dependencies react, react-dom, vite, recharts.
    Done when: the project directory and all listed files exist.
 
 3. **Apply Sentry branding.** Use the Sentry design system:
