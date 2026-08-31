@@ -1,3 +1,3 @@
 interface:
   display_name: "Modern Python"
-  short_description: "Use when a user wants to create or migrate a Python project or"
+  short_description: "Use when creating or migrating a Python project or script to"

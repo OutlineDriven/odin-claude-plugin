@@ -1,13 +1,13 @@
 # Project-type branches
 
-Each branch produces a working `pyproject.toml`, `uv.lock`, and tooling config.
-The shared spine in SKILL.md detects the project type and validates the done
-predicate; this file holds the per-type setup steps.
-
+Each branch produces the toolchain files appropriate to its type. The shared spine in
+SKILL.md detects the project type and validates the done predicate with per-type checks;
+this file holds the per-type setup steps.
 ## Single-file scripts (PEP 723)
 
 - Add PEP 723 inline metadata header to the script file: `# /// - projdeps`, then `# ///`, then a `[[project]]` or `[project]` table with name, version, requires-python, and dependencies.
 - Confirm the file is runnable with `uv run python <script>`.
+- Add ruff to the inline metadata dev dependencies and run `uv run ruff check <script>` to verify lint passes.
 
 ## New multi-file projects
 
