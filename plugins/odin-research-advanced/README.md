@@ -2,7 +2,7 @@
 
 Advanced ODIN workflows for deep research and evidence synthesis.
 
-15 skills, category Research.
+13 skills, category Research.
 
 ## Install
 
@@ -22,7 +22,6 @@ codex plugin add odin-research-advanced@odin-marketplace
 - cross-critique
 - cross-lens-converge
 - deep-research
-- document-collaboration
 - framing-divergence-fanout
 - interrogate
 - load-bearing-assumption-test
@@ -31,5 +30,4 @@ codex plugin add odin-research-advanced@odin-marketplace
 - rationale-by-source
 - recorded-feedback-analysis
 - research
-- subagent-survey-research
 - visual-fact-check

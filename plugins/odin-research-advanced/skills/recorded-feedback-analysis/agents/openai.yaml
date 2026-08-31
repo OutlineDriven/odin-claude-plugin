@@ -1,3 +1,3 @@
 interface:
   display_name: "Recorded Feedback Analysis"
-  short_description: "Use when asked to analyze a Riffrec capture, screen, voice, or"
+  short_description: "Use when asked to analyze a screen recording, voice capture, or"
