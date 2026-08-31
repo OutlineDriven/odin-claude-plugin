@@ -41,7 +41,3 @@ description: 'Use when asked to prune an existing design or codebase until only 
 ## Output
 
 A tree or structured list file `<target-name>-primitives.md` containing every component classified, each composite decomposed into its primitive leaves, and a `non-converged` marker if any section was not fully resolved.
-
-## Provenance
-
-Origin: curated-ideas collection (`project-owned:user-curated-skill-ideas`, line 66). Adaptation of the user-curated skill idea `leave-only-first-principle`. Clean-room rewrite; no third-party expression copied.

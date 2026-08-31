@@ -39,7 +39,3 @@ description: 'Use when asked to mine prior chats on a scheduled or watcher tick 
 
 ## Output
 Statement of which deduplicated high-signal memory updates were applied to AGENTS.md and the continual-learning index, or that no update was made and why no candidate survived.
-
-## Provenance
-
-Origin: cursor/plugins. Pinned revision: 68836ddaf5697224520f1847d90cdb90ca8babaa. License: MIT, declared by the cursor/plugins root README and the candidate plugin manifest per the pinned source audit. Adaptation: a clean-room rewrite of the continual-learning skill and its memory-updater agent workflow. The self-contained procedure preserves scheduled chat mining and deduplicated local-write memory maintenance.

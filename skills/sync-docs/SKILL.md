@@ -47,7 +47,3 @@ description: 'Use when a behavioral diff may have left docs or CHANGELOG stale. 
 ## Output
 
 A JSON fix ledger: `opCell`, `scope`, `base`, `changedCode` array, `relatedDocs` array, `fixesApplied` array, `flagged` array. Completion means safe fixes are applied or explicitly unavailable, and all remaining drift is flagged. A clean report with no edits is valid only after the diff-to-doc mapping and taxonomy pass ran.
-
-## Provenance
-
-Origin: current ODIN skill tree, candidate `current:current-d:current:sync-docs`. No pinned revision; adapted from the existing `skills/sync-docs/SKILL.md` body. Project-owned; no third-party expression copied. License: project-owned.

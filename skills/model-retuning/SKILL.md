@@ -45,7 +45,3 @@ Cross-cutting rules for every fan-out: pass large context by path plus a short g
 ## Output
 
 A retuned corpus whose measured behavior on the target model clears the pre-registered bar, with each removal attributable to a named problem class and a per-pass commit. Plus a written finding: the mechanism, before and after, measured numbers, and the hypotheses that died. If the bar does not clear, a report naming the specific unsupported claim and the unmeasured paths — not a green suite presented as success.
-
-## Provenance
-
-Origin: https://github.com/EveryInc/compound-engineering-plugin, revision a1f601f17137f648be439965f8fdd9123303de5d, file skills/ce-retune/SKILL.md. License: MIT (Copyright (c) 2025 Every); mechanisms extracted and rewritten in ODIN style, not copied verbatim. Adaptation: the multi-phase measurement-first retuning method — pre-registered bars, baseline-mined archive passes, adversarial audit, surgical cut passes with disjoint file ownership — is preserved; reference files and engagement-specific numbers were folded into a self-contained procedure.

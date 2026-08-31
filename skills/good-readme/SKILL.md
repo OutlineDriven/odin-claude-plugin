@@ -1,6 +1,6 @@
 ---
 name: good-readme
-description: 'Use when the user asks to create, rewrite, review, or polish an open-source README into a progressively disclosed, evidence-grounded guide whose claims are sourced and whose headings alone tell the story. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user asks to create, rewrite, review, or polish an open-source README into a progressively disclosed, evidence-grounded guide whose claims are sourced and whose headings alone tell the story. Also produces shop-window READMEs with section templates, badges, and a quality checklist, and enforces a house standard with pre-ship verification gates. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Good README
@@ -22,7 +22,7 @@ description: 'Use when the user asks to create, rewrite, review, or polish an op
 ## Procedure
 
 1. Read the existing README.md if present, plus the repo's package manifest, source entry points, and any benchmark or size data. Record which facts (differentiators, numbers, sizes, platforms) are present and which are missing. Done when: the stated action, evidence, and guard all hold.
-2. In an existing README, remove all badges; if a badge carries a real fact such as version or build status, state that fact in text instead. Done when: the stated action, evidence, and guard all hold.
+2. In an existing README, prefer text over badges: if a badge carries a real fact such as version or build status, state that fact in text instead. Badges are optional; when kept, each must be proven by project files and render dynamically (HTTP 200, not the shields "invalid" card). Omit any badge whose value cannot be proven. Done when: the stated action, evidence, and guard all hold.
 3. Write the opening block first: one plain-language paragraph answering what the project does, how the user benefits, and what makes it different from alternatives. If the real differentiators are not in the repo, ask the user before writing them. Done when: the stated action, evidence, and guard all hold.
 4. Add a scannable facts list right after the opening: lead each bullet with 1–2 bold keywords, then back it with concrete evidence from the repo — real benchmark numbers, exact sizes, side-by-side code comparison with the closest alternative, or a screenshot or diagram that replaces a paragraph. For any number not present in the repo, ask the user or how to measure it; never estimate. Done when: the stated action, evidence, and guard all hold.
 5. Add a 4–10-line self-explanatory usage example that shows its output in a comment, so the reader sees the result without running anything. The example illustrates usage; the real setup guide comes next. Done when: the stated action, evidence, and guard all hold.
@@ -38,9 +38,26 @@ description: 'Use when the user asks to create, rewrite, review, or polish an op
 ## Output
 An edited README.md structured as opening block, facts list, 4–10-line example with output, and getting-started guide, formatted for skimmers, with every claim sourced from the repo, the user, or a measurement. When blocked, the partial README plus a report naming the unsourced claims and the unresolved clean-machine setup gaps.
 
-## Provenance
+## Shop-window and section templates
 
-- Origin: https://github.com/evilmartians/agent-skills, skills/good-readme/SKILL.md.
-- Pinned revision: a2a83b280a2c5b9a6176c5934298fad0224bbce4.
-- License: MIT (LICENSE). Copyright and permission notice must be preserved in all copies or substantial portions; adaptation and rewrite are permitted with attribution retained.
-- Adaptation: clean-room rewrite preserving the README authoring mechanism — progressive-disclosure structure, never-invent-facts rule, opening what/benefit/difference block, bold-keyword evidence list, 4–10-line example with output in a comment, clean-machine getting-started validation, and skim-by-headings check — without copying Evil Martians' expression.
+For a shop-window README, draft the opening as project name, one-line tagline, one-sentence description, and a visual separator. Choose section templates from `references/section-templates.md` matching the project type (library, CLI, web app, or the general-purpose minimum). Include at minimum Installation, Quick Start, Features, Usage, Contributing, and License. Populate each section with real content derived from project files; summarize and link to source locations rather than copying code from source files. If installation instructions cannot be derived from project files, stop and report `no-install-path` with the files checked. Clarify ambiguous intent with one question about primary audience, project phase, or any emphasized section before writing; if intent cannot be clarified, stop and return `blocked: unresolvable-intent`.
+
+## Badges
+
+Select only badges whose repository, workflow, registry package, license, or coverage integration is proven by project files, using the URL patterns and limits in `references/badges.md`. Replace every angle-bracket variable with a derived value, place the badges below the project title and tagline, and omit any badge whose value cannot be proven. Use flat-square or flat style, keep the badge row to one line (wrap to a second only when more than five badges are proven), and use a semantic color (green for passing, red for failing). The house standard requires every badge URL to return HTTP 200 and not the shields "invalid" card; a badge that fails this gate is removed, not kept.
+
+## Quality checklist
+
+Evaluate the draft against every applicable item in `references/quality-checklist.md` before finalizing. Fix each failing item before proceeding; an item that does not apply to the detected project type may be omitted only when the README does not claim that surface. The checklist covers structure (project name and tagline, visual separator, Installation, Quick Start, Features, Usage, Contributing, License), content (accurate installation, copy-pasteable quick start, features describing user capability not implementation, real tested usage examples, contributing workflow, license named and linked), accuracy (no non-standard tools beyond Installation, no hardcoded paths contradicting the project, no version numbers contradicting the manifest, no claims about features the project lacks), and presentation (badge images load, no broken relative links, code blocks have language tags, no overly long paragraphs, consistent heading levels).
+
+## House standard and verification gates
+
+For a public README that must match the house standard, enforce a fixed section order and five pre-ship verification gates. The fixed order is: What is this, Install, Quick start, core sections, Development, License; no extra top-level sections appear before Install or after License. Per-archetype templates (CLI tool, npm library, Swift package, macOS app, web service) define which sections appear after Quick start and Development; infer the archetype from project structure (`package.json`, `go.mod`, `Package.swift`, `*.xcodeproj`, `Cargo.toml`) or from user-supplied metadata, and stop if the structure matches no known archetype and none is supplied. Run all five gates before shipping:
+
+1. Every command in the Install and Quick start sections runs against the current project; if a command cannot run (missing binary, no network), mark it blocked and state why.
+2. Every code sample typechecks or compiles against the current API.
+3. Every relative link resolves to an existing file in the repo; every external link returns HTTP 200 non-404; every badge URL returns HTTP 200 and not the shields "invalid" card.
+4. No hardcoded package versions, stale minimums, or "coming soon" for shipped features; compare against `package.json`, `go.mod`, `Package.swift`, or equivalent.
+5. The section order matches the fixed order and no extra top-level sections appear before Install or after License.
+
+Each gate gets a pass, fail, or blocked verdict with a concrete finding for every non-pass. Claiming done when any gate fails or is blocked is rejected; report partial passes as partial passes. If a write partially succeeds, restore the file to its pre-write state before reporting the failure. The terminal classification is `done`, `done-with-fixes`, or `non-converged`.

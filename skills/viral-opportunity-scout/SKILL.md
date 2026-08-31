@@ -37,8 +37,3 @@ description: 'Use when asked to find where a template or artifact can travel thr
 
 ## Output
 A structured scout report with artifact summary, channel opportunities grouped by family (each with reach, fit, entry_barrier, engagement_tone, rationale), primary recommendations (top three by reach × fit), secondary opportunities, and notes.
-
-## Provenance
-
-Origin: `project-owned:user-curated-skill-ideas` (curated-082) and `project-owned:user-supplied-source-brief`.
-Adaptation: rewritten into a bounded, read-only scouting contract with enumerated channel families, scored by reach and fit, and structured report output. No third-party expression copied; all guidance is ODIN-owned synthesis.

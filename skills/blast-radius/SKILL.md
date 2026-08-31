@@ -43,7 +43,3 @@ A diff, branch, or set of changed files to analyze. The change must be readable 
 
 ## Output
 A report ordered: what-it-does, the-one-fact (with certainty-ladder step and proof output), risks (confirmed only, each with file:line/likelihood/cost/check), cleared, before-merging (cheapest test or repro with proof output).
-
-## Provenance
-
-Adapted from the `blast-radius` skill in the pstack Cursor plugin (cursor/plugins, revision 68836ddaf5697224520f1847d90cdb90ca8babaa), authored by Lauren Tan under the MIT license. Clean-room adaptation: the certainty-ladder confidence rating, the single-load-bearing-fact method, the grep-stops search scope, and the five-part report structure are preserved as mechanisms; expression is rewritten.

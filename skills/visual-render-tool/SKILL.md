@@ -40,7 +40,3 @@ Partial-result rule: if the complete file is not written and normalized, discard
 
 ## Output
 A complete HTML artifact saved under the output jail with the file path and open status reported.
-
-## Provenance
-
-Adapted from `nicobailon/visual-explainer` (MIT) at `7163c3e10660912e0b89e1af465db9f387282b88`. Source files: `plugins/visual-explainer/extension.ts`, `plugins/visual-explainer/mcp/server.mjs`, `plugins/visual-explainer/mcp/README.md`. MIT notice retained. Clean-room rederivation of the rendering procedure; HTML generation rewritten from scratch.

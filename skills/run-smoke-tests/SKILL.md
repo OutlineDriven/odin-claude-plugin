@@ -48,10 +48,3 @@ Partial-result rule: always report the classification of the last unreverted run
 
 ## Output
 A `SMOKE <classification>` block: classification, run count, rollback anchor (HEAD at step 1), applied diffs, and a reverted flag.
-
-## Provenance
-
-- Origin: `cursor/plugins` (Cursor Team Kit)
-- Source revision: `68836ddaf5697224520f1847d90cdb90ca8babaa`
-- License: MIT, declared by the cursor/plugins root README and the candidate plugin manifest, as recorded in the pinned source audit
-- Adaptation: Clean-room rewrite for ODIN 2.0 roster. The procedure uses explicit failure classes, rollback anchors, and authority-gated minimal fix steps.

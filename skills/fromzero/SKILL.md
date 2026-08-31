@@ -45,7 +45,3 @@ disable-model-invocation: true
 ## Output
 
 A new greenfield attempt on a clean pad carrying only proven requirements, with the old attempt recoverable through VCS history.
-
-## Provenance
-
-Origin: `project-owned:user-curated-skill-ideas` (the `fromzero` entry), supplemented by the raw Korean source at `project-owned:user-supplied-source-brief`. Revision: none pinned. License: project-owned. Adaptation: clean-room restatement of the user-curated one-line brief into a bounded, VCS-reversible-destructive, human-only procedure; no third-party expression copied.

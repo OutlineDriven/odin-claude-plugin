@@ -66,7 +66,3 @@ Optional: a preferred output filename. If omitted, derive it from the protocol n
 
 ## Output
 One Markdown file containing a Mermaid `sequenceDiagram` and a Protocol Summary, plus an inline ASCII sequence diagram and the same Protocol Summary printed in the response with the output filename stated. The diagram represents every distinct protocol message, party, cryptographic operation, phase, and material abort path, with ambiguities and divergences labelled `⚠️`.
-
-## Provenance
-
-Origin: https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3, file /plugins/trailmark/skills/crypto-protocol-diagram/SKILL.md with its references and examples. License: CC-BY-SA-4.0. This is a clean-room semantic adaptation that preserves the source dual-path extraction (code versus spec, including ProVerif and Tamarin constructs) and dual-rendering (Mermaid file plus inline ASCII) mechanism without copying its expression. Preserve Trail of Bits attribution and the source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.

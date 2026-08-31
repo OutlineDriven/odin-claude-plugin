@@ -158,7 +158,3 @@ description: 'Use when asked to audit typography across a codebase. Produces a f
 
 ## Output
 A report with sections in order: summary, per-category findings table (File, Line, Rule, Severity, Description, Fix), severity-ordered fix list, and an optional consolidated CSS patch when fixes were requested.
-
-## Provenance
-
-Adapted from mblode/agent-skills typography-audit (revision e97a3b383f5944f90d41eb92b24b4fb3b917a7f9). Licensed under MIT — Copyright (c) 2026 Matthew Blode. Preserve the copyright notice and the license text in all copies or substantial portions. Clean-room adaptation: all rule content re-derived from the source mechanism descriptions, not copied verbatim.

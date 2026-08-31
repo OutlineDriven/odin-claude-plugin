@@ -45,10 +45,3 @@ A retrospective report containing:
 3. **Strategy assessment**: which approaches worked, which did not, and why, grounded in evidence.
 4. **Adjusted plan**: concrete changes to the learning plan, each motivated by evidence.
 5. **Next milestone**: a specific, measurable goal with explicit success criteria.
-
-## Provenance
-
-- Origin: cursor/plugins, path `teaching/skills/run-learning-retrospective/SKILL.md`.
-- Pinned revision: 68836ddaf5697224520f1847d90cdb90ca8babaa.
-- License: MIT.
-- Adaptation: clean-room adaptation from the cursor/plugins source into the ODIN 2.0 skill format. No third-party expression is copied.

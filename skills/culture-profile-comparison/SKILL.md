@@ -49,7 +49,3 @@ Trait key (distances are relative to each person's own arrow unless noted):
 
 ## Output
 A profile comparison report in chat text with sections in procedure order: quick-view table, trait comparison table, similarities, differences, friction points with mitigations, complementary strengths, communication recommendations, collaboration forecast.
-
-## Provenance
-
-Adapted from the Trail of Bits "interpreting-culture-index" compare-profiles workflow (source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3, file /plugins/culture-index/skills/interpreting-culture-index/workflows/compare-profiles.md) and its primary-traits and secondary-traits references. Licensed CC-BY-SA-4.0; Trail of Bits attribution and source link preserved, modifications marked, adaptations licensed ShareAlike. No trademark rights claimed; trail-of-bits-mark.svg is not reused as branding. Adaptation restates the comparison mechanism (distance-from-arrow comparison with the L/I absolute exception, friction/communication/complementary-strength analysis, and the no-absolute-comparison rule) as a self-contained procedure without copying third-party expression.

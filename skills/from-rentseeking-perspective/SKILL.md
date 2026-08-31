@@ -41,7 +41,3 @@ The subject to analyze must be supplied by the user. Optional: the specific ques
 ## Output
 
 A chat-only rent-seeking-perspective analysis answering the question from the extraction-without-building seat — no other perspective blended in.
-
-## Provenance
-
-Origin: project-owned:user-curated-skill-ideas (user-curated perspective-lens brief; "from-rentseeking-perspective: extraction without building"). Revision unpinned. Project-owned marker. Clean-room adaptation: the seat definition is restated in this skill's own words; no third-party expression is copied.

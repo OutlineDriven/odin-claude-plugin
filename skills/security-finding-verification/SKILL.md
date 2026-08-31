@@ -70,7 +70,3 @@ Optional:
 ## Output
 
 A structured verdict in chat for each finding: classification (`true positive` or `false positive`), complete source-to-sink data flow trace, class-specific check results, threat model, exploitability assessment and PoC if constructed, adversarial challenge with response, severity and exploitability rating if true positive, and recommended remediation steps.
-
-## Provenance
-
-Adapted from Trail of Bits fp-check workflow (`fp-check`) under CC-BY-SA-4.0. Source: https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3. Modifications: restructured procedure as a self-contained ODIN 2.0 skill, removed proprietary tooling assumptions, inlined reference content, and reduced to one workflow. Attribution preserved per license. No trademark rights claimed; trail-of-bits-mark.svg not used as branding.

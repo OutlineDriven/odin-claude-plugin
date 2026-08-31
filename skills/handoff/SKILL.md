@@ -51,7 +51,3 @@ Optional: an explicit session or project handle to package when the user names o
 
 ## Output
 One <=6KB typed handoff brief, to stdout or a single file under the current project. The brief contains a handle-bearing framing header, noise-filtered problem statements, key conclusions, and a "Where it stopped" tail; a source receipt is printed before it; and the applicable staleness warning, exclusion refusal, or wrong-project notice is shown. No raw transcript appears. No target agent is launched.
-
-## Provenance
-
-Adapted from the `deja handoff` command and `internal/digest` package of deja-vu (https://github.com/vshulcz/deja-vu, revision 6f766fd4716edcaf24662c794368e420e5058f47), MIT license, Copyright (c) 2026 Vladislav Shulcz. The 6KB digest budget with its three-quarter body reserve, the handle-based framing header, the source receipt, the seven-day staleness warning with unknown-age handling for clock skew, the exclusion refusal, the strict wrong-project scope with withheld-newer-work notice, the noise-filtered lossy slice with cut markers, and the reserved "where it stopped" tail are preserved; the launch-the-target step is removed and left to explicit human confirmation. Mechanisms are rewritten in ODIN style; no third-party expression is copied.

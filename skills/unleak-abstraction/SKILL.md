@@ -43,9 +43,3 @@ Optional:
 
 ## Output
 Refactored code with the leak sealed or exposed, plus a one-line complexity ratio `wrapper / hidden = N.N`; on gate failure, the ratio and blocked result only.
-
-## Provenance
-
-Origin: `project-owned:user-curated-skill-ideas` / `project-owned:user-supplied-source-brief`.
-License: project-owned marker; no third-party expression copied.
-Adaptation: user-curated abstraction-refactoring workflow; `reversible-local` authority with explicit wrapper-complexity gate.

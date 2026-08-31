@@ -44,7 +44,3 @@ Required: the documentation file(s) to author or restructure, or a request namin
 
 ## Output
 A set of documentation files, each a single Diataxis type passing its validation, with cross-links connecting the types, plus a list of any document that failed validation with its failed predicate, ordered classify → bound → author → cross-link → validate.
-
-## Provenance
-
-Origin: mcollina/skills, revision 856efd268ae85482d882f3d0bed869fd020b5c06, MIT. Mechanism adapted: the Diataxis four-type structure and per-type validation criteria are preserved; wording is clean-room.

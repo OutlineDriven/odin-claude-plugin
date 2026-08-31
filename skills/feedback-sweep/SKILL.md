@@ -70,7 +70,3 @@ Configuration is read from `<repo-root>/.odin/config.local.yaml` then `.odin/con
 - `<root>/plans/feedback-sweep-plan.md`: the autopilot-ready, requirements-only plan.
 - `<state>`: repo-internal sweep state in committed mode, machine-local state otherwise.
 - A terminal summary printed after `run-record` and `lease-release`, ending with the plan path and the rendered handoff invocation.
-
-## Provenance
-
-Origin: https://github.com/EveryInc/compound-engineering-plugin, revision `a1f601f17137f648be439965f8fdd9123303de5d`, source skill `skills/ce-sweep/SKILL.md`. License MIT (Copyright (c) 2025 Every): mechanisms are extracted and rewritten in ODIN style, not copied verbatim, so the obligation reduces to preserving attribution in the root provenance ledger. Adaptation: the bundled state engine and reference files are not shipped; the state schema, single-writer lease discipline, ordering invariant, approved-only acknowledgment, fix-ref shape validation, private media scratch, plan reconciliation rules, and lfg handoff rendering are restated inline as a self-contained procedure.

@@ -51,7 +51,3 @@ Optional but needed when applicable:
 
 ## Output
 Output directory containing: database, build evidence, resolved query suite and ruleset, data-extension models, analysis log, raw SARIF, final SARIF. Terminal classification: done or blocked with named failure class and evidence.
-
-## Provenance
-
-Origin: https://github.com/trailofbits/skills at revision d1f1575cff97816e5cc08af66cd2506099c681d3, path /plugins/static-analysis/skills/codeql/SKILL.md. License CC-BY-SA-4.0. This is a clean-room adaptation: preserve Trail of Bits attribution and the source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.

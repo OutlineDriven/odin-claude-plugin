@@ -43,7 +43,3 @@ Partial-result rule: no file is written until all steps complete without failure
 
 ## Output
 The target local artifact replaced with its invariant-first refinement, plus a resolution log listing every removed special case and the invariant identifier that now governs its behavior.
-
-## Provenance
-
-Origin: `curated:curated-ideas:curated-053` (local). Adaptation: renamed from `curated-offense` to `universal-invariant-baseline` to expose the always-on/every-implementation scope. Authority and mechanism re-grounded to reversible-local writes, fail-fast guards, and explicit special-case elimination. Project-owned; no third-party expression copied.

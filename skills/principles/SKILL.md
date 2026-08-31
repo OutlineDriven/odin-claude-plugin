@@ -214,7 +214,3 @@ Keep raw payload (full files, bulk search results) out of main context; delegate
 **Bites when** context fills and reasoning room shrinks.
 
 If the payload cannot be distilled into a decision, say so — do not pretend the context is clean.
-
-## Provenance
-
-All 21 principles derive from pstack (cursor/plugins, revision `68836ddaf5697224520f1847d90cdb90ca8babaa`), authored by Lauren Tan (poteto), MIT licensed (`pstack/LICENSE` blob `6b5400237fdf6545be0b8fae370d6f2fcff8fb25`). Each was a clean-room adaptation; no third-party expression copied verbatim. This register merges the 21 into one indexed anchor set, preserving each law and its bite point.

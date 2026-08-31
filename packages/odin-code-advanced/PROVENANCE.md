@@ -2,7 +2,7 @@
 
 OutlineDriven-authored material in this package is Apache-2.0. See the repository `LICENSE`.
 
-This package ships 59 public skills from the canonical `skills/<slug>/` tree. Package-local skill copies are generated only at pack time.
+This package ships 54 public skills from the canonical `skills/<slug>/` tree. Package-local skill copies are generated only at pack time.
 
 | Skill | Strategy | Adaptation | Target | Origin |
 |---|---|---|---|---|
@@ -18,7 +18,6 @@ This package ships 59 public skills from the canonical `skills/<slug>/` tree. Pa
 | `control-ui` | B | byte-reuse | `skills/control-ui/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
 | `crabbox` | B | byte-reuse | `skills/crabbox/` | https://github.com/openclaw/agent-skills @ `ae75f60e8d454f1cf44ec4613e10ec9ea7f2ade7` (MIT) |
 | `create-verification-skill` | B | byte-reuse | `skills/create-verification-skill/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
-| `deep-review` | G | structured-merge-rewrite | `skills/deep-review/` | Adaptation of the MIT-licensed Cursor plugins thermos skill. Origin: `cursor/plugins` @ `68836ddaf5697224520f1847d90cdb90ca8babaa`. License: MIT (cursor/plugins root README and plugin manifest). Two-parallel-reviewer combined audit orchestrator; distinct fan-out/synthesis contract from the single deep audits. |
 | `dependency-sweeper` | B | byte-reuse | `skills/dependency-sweeper/` | cobusgreyling/loop-engineering @ `d03dcb92cc1e0efb59789a2557131c6ad5897ccc` (MIT) |
 | `deprecate-and-migrate` | B | byte-reuse | `skills/deprecate-and-migrate/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>addyosmani/agent-skills @ `d2c37ef6225dd8726cdd369a8030307f48592d26` (MIT) |
 | `design-it-twice` | B | byte-reuse | `skills/design-it-twice/` | mattpocock/skills @ `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76` (MIT) |
@@ -28,9 +27,7 @@ This package ships 59 public skills from the canonical `skills/<slug>/` tree. Pa
 | `extremely-optimize` | B | byte-reuse | `skills/extremely-optimize/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `fastopt` | B | byte-reuse | `skills/fastopt/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `fastopt-extreme` | B | byte-reuse | `skills/fastopt-extreme/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
-| `frame-ocr-blur-protection` | B | byte-reuse | `skills/frame-ocr-blur-protection/` | https://github.com/microsoft/skill-recorder @ `c7f2fe4402527a0eb7f4fc1b653bf438229bac61` (MIT) |
 | `git-branchless` | B | byte-reuse | `skills/git-branchless/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text) |
-| `grill-the-core` | B | byte-reuse | `skills/grill-the-core/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `grill-with-docs` | B | byte-reuse | `skills/grill-with-docs/` | mattpocock/skills @ `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76` (MIT) |
 | `guillotine` | B | byte-reuse | `skills/guillotine/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `leave-only-first-principle` | B | byte-reuse | `skills/leave-only-first-principle/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
@@ -43,9 +40,7 @@ This package ships 59 public skills from the canonical `skills/<slug>/` tree. Pa
 | `no-hide` | B | byte-reuse | `skills/no-hide/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `offensive-possible-worlds-qa` | B | byte-reuse | `skills/offensive-possible-worlds-qa/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `optimize` | G | structured-merge-rewrite | `skills/optimize/` | odin-current @ `project-owned` (Project-owned or clean-room only; no copied source text) |
-| `performance-optimization` | B | byte-reuse | `skills/performance-optimization/` | addyosmani/agent-skills @ `d2c37ef6225dd8726cdd369a8030307f48592d26` (MIT) |
 | `pr-impact-quiz` | B | byte-reuse | `skills/pr-impact-quiz/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
-| `pre-send-sensitive-redaction` | B | byte-reuse | `skills/pre-send-sensitive-redaction/` | https://github.com/microsoft/skill-recorder @ `c7f2fe4402527a0eb7f4fc1b653bf438229bac61` (MIT) |
 | `proof-driven` | B | byte-reuse | `skills/proof-driven/` | odin-current @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `property-test-authoring` | B | byte-reuse | `skills/property-test-authoring/` | https://github.com/trailofbits/skills @ `d1f1575cff97816e5cc08af66cd2506099c681d3` (CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.) |
 | `property-test-failure-triage` | B | byte-reuse | `skills/property-test-failure-triage/` | https://github.com/trailofbits/skills @ `d1f1575cff97816e5cc08af66cd2506099c681d3` (CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.) |

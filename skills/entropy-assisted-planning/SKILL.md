@@ -58,7 +58,3 @@ description: 'Use when the user explicitly requests a Tarot draw or casually del
 
 ## Output
 A stated direction or verdict derived from a complete 12-house reading: either a chosen option with a one-sentence card-grounded reason, or a three-bullet reading (dominant theme, main risk or blind spot, recommended next action), with any security or correctness implication explicitly marked as subject to ordinary evidence.
-
-## Provenance
-
-Origin: https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3, files /plugins/let-fate-decide/skills/let-fate-decide/SKILL.md and /plugins/let-fate-decide/agents/draw.md. License CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding. Adaptation: the entropy-assisted tie-breaking workflow and cryptographic draw mechanism are preserved; card and house meaning payloads are carried as model knowledge rather than source reference files, and the draw is reworded as a self-contained command with no external file dependency.

@@ -62,7 +62,3 @@ A blocked result names the failure class, the finding or gap, and the exact acti
 
 ## Output
 On success, return a structured summary: list of files created or updated, the applied license and SPDX identifiers, the CI hardening actions taken, the release automation configuration, the detected language-specific packaging setup, the readiness gaps that remain with their rationale, and the confirmed outcome of the secrets audit. State that the visibility switch is the human-controlled next action. On blocked: return the failure class, finding or gap, and the action not completed.
-
-## Provenance
-
-Adapted from `trailofbits/skills`, path `plugins/open-sourcing/skills/open-sourcing/SKILL.md`, pinned at revision `d1f1575cff97816e5cc08af66cd2506099c681d3` under CC-BY-SA-4.0. This version preserves the ordered execution (secrets audit first), the fresh-repository decision boundary for history with secrets, the deliberate stop before the visibility switch, the language-reference table, and the outsider-build final review while restating the procedure for this contract. Attribution to Trail of Bits and source link preserved per license terms.

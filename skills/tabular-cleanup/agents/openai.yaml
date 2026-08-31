@@ -1,3 +1,0 @@
-interface:
-  display_name: "Tabular Cleanup"
-  short_description: "Use when a messy tabular dump needs deterministic cleanup to an"

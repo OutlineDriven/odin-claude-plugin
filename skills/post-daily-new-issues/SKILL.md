@@ -34,7 +34,3 @@ Classify invalid or missing inputs and absent human authorization as `blocked-in
 
 ## Output
 For an empty Sentry window, a silent `no-op` with no Slack message or digest content. For success, `posted` with the UTC window, Slack channel, created-message identifier, release URL, total issue count, and the three-or-fewer posted issue identities and counts. For failure, the exact terminal classification (`blocked-input`, `blocked-fetch`, `blocked-digest`, `blocked-post`, or `post-unknown`) with the failed stage and available non-secret recovery evidence.
-
-## Provenance
-
-Adapted from `warpdotdev/client-release-agent-oss` at revision `9c1394804c5148820a9bab6c01802fde4330d725`, using the daily Sentry fetch and bounded Slack digest mechanism from `.warp/skills/post-daily-new-issues/SKILL.md` and `.warp/skills/post-daily-new-issues/scripts/fetch_new_issues.sh`, with configuration context from `README.md` and `.env.example`. Licensed under MIT; retain the upstream copyright and permission notice with copies or substantial portions of this adaptation.

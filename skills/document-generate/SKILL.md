@@ -39,7 +39,3 @@ description: 'Use when the user runs /document-generate. Produces reviewed user-
 
 ## Output
 One or more reviewed documentation files or diagram sources saved at the requested target path, plus a report listing each saved path.
-
-## Provenance
-
-Origin https://github.com/garrytan/gstack, revision 07b59e396c6be5a86619a43151cb9ed62a15ae69, MIT license (Copyright (c) 2026 Garry Tan). Clean-room adaptation: the documentation and diagram generation procedure is re-derived from the source mechanism; no source expression is copied.

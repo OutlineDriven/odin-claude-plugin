@@ -81,7 +81,3 @@ No partial config-only or GOALS-only result satisfies the contract.
 ## Output
 
 Detected ecosystem's strict-mode config merged idempotently at the exact path; `AGENTS.md` with the stable GOALS.md pointer and no task-specific criteria; `.agent-tasks/<task-id>/GOALS.md` with complete goal, observable criteria, and test links; `.agent-tasks/<task-id>/tests/` with one executable deliberately failing test per criterion. No `CLAUDE.md`, support reference, compatibility alias, or unlisted file is created.
-
-## Provenance
-
-Origin: `current-odin-skill-tree`, source path `skills/strict-validation-setup/SKILL.md`; revision and license unspecified. Adaptation: clean-room ODIN 2.0 restatement preserving the one-shot strict-config and verifiable-goals bootstrap, temporal separation of project-stable configuration from task-ephemeral goals, idempotent merge requirement, and language-specific failing-test contract. Ecosystem config branches remain in `references/`; the shared GOALS.md and failing-test spine stays here.

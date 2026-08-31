@@ -33,7 +33,3 @@ description: 'Use when the user says ship it now, no phases, or do it now, or wh
 
 ## Output
 The complete change with every in-scope path implemented, plus one line naming anything cut and why if scope was reduced.
-
-## Provenance
-
-Origin: ODIN 1.x current skill at skills/do-it-now/SKILL.md. No pinned revision; project-owned, no third-party license. Clean-room adaptation to the ODIN 2.0 contract format, preserving the single-pass execution-posture mechanism (one pass, finish every path, collapse phased plans, cut scope instead of defer, report only shipped code).

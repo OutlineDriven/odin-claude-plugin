@@ -53,12 +53,3 @@ Optional:
 ## Output
 
 A structured completion report: Notion parent page ID and URL, table of child pages (project name, child page ID, child page URL, status of created/failed), counts of SREDable projects, pages created, and pages failed. If zero pages were created, the report states the skill did not complete and names the blocking failure.
-
-## Provenance
-
-Origin: `getsentry/skills` (Apache-2.0)
-Revision: `c2f99a5b04b4cd992ec3022d7c2c3e23e938d241`
-License: Apache-2.0
-Paths: `skills/sred-project-organizer/SKILL.md`
-
-Adaptation statement: Knowledge-gathering and remote Notion bulk doc creation procedure distilled from the upstream skill. Human-only authority enforced per authority classification. Module remapped from `odin-research-advanced` to `odin-run` because the substance is document creation and delivery execution, not research and analysis. SRED eligibility classification and Notion API integration steps made explicit. Remote bulk mutation guard made a mandatory human-confirmation step before any API call fires. Clean-room adaptation: procedure reconstructed from the upstream contract; no third-party expression copied.

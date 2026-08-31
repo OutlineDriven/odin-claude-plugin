@@ -31,7 +31,3 @@ description: 'Accelerate a slow test suite under unchanged behavior and coverage
 ## Output
 
 A receipt.json with the terminal class, bound, and per-step evidence, persisted at .outline/loops/<slug>/<run_id>/ — ordering: bound, execution evidence, terminal verdict, receipt.
-
-## Provenance
-
-- Profile P-CATALOG: source https://signals.forwardfuture.com/loop-library/catalog.json. Derived provenance ledger records catalog number, URL, access date, and no-expression-reuse attestation. Expression reuse: none.

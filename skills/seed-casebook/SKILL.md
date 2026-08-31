@@ -47,11 +47,3 @@ description: 'Use when a user opens a new build cycle in a repo with an establis
 ## Output
 
 A casebook directory at the repo's iteration convention path, containing either `RETRO.local.md` (lightweight) or `DESIGN.local.md` + `WORKFLOW.local.md` + `EVIDENCE.local.md` (full); the directory is never empty at creation; the skill reports which path was taken and why.
-
-## Provenance
-
-Origin: `skills/coil/re0-plan` in `github.com/LilMGenius/paperthin` at `3bca079a51bcfff5dafb53d1d7f9f523d66ee317`.
-
-License: MIT (c) 2026 LilMGenius. NOTICE: additionally vendors verbatim material from `mattpocock/skills` (MIT, (c) 2026 Matt Pocock) with per-source attribution. Retain the MIT copyright+permission notice for substantial reuse; per-source attribution obligation binds only verbatim vendor material, which the foundry does not copy.
-
-Adaptation: Clean-room ODIN 2.0 port. Generalized `.re0/iteration/` convention to the workspace's local provenance home. Removed paperthin-only skill references (`re0-release`, `re0-memo`, `re0-loop`, `re0-work`). Retained: never-empty-at-creation, no-padding lightweight rule, full-path gate traceability, provisional bump rule, and the shippable-surface developer-instruction/product-README split. Module `odin-run`; single-setup-task execution is common, not multi-agent.

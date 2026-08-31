@@ -1,3 +1,0 @@
-interface:
-  display_name: "Debug"
-  short_description: "Use when the user runs /debug with a bug."

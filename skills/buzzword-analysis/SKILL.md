@@ -39,7 +39,3 @@ description: 'Use when the user wants the current jargon weather described witho
 
 ## Output
 A jargon-weather report in chat — a list of current terms, each with its descriptive meaning, its signaling or marketing freight, its weather state (rising, peak, fading, residual, or unclear), and any drift from technical origin — taking no side on adoption.
-
-## Provenance
-
-Origin: user-curated market-language research brief (project-owned:user-curated-skill-ideas, supplemented by project-owned:user-supplied-source-brief). Revision: none pinned. License: project-owned clean-room adaptation. Adaptation: the source one-line brief "describe the current jargon weather without advocacy" is expanded into a bounded read-only research procedure; no third-party expression is copied. This skill is distinct from buzzword-hijack, which chooses and executes a bounded positioning move rather than describing the landscape.

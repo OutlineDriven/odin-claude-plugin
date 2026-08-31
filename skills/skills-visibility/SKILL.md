@@ -103,7 +103,3 @@ description: 'Use when asked to publish a discoverable integrity-protected agent
 ## Output
 
 A complete publishable tree in the output directory: `.well-known/agent-skills/index.json` conforming to the discovery schema, `agent-skills/<name>/SKILL.md` for each single-file skill, `agent-skills/<name>.tar.gz` for each multi-file skill (flat archive, deterministic build), optionally `agent-skills/<bundle>-bundle.tar.gz` for bundles, and a report listing each skill, its shape, its digest, and the install commands that were verified.
-
-## Provenance
-
-Adapted from [Evil Martians agent-skills](https://github.com/evilmartians/agent-skills), revision `a2a83b280a2c5b9a6176c5934298fad0224bbce4`, path `skills/skills-visibility/SKILL.md`. Licensed under MIT — copyright and permission notice preserved. This is a clean-room adaptation that preserves the catalog-publication mechanism (discovery index schema, SHA-256 integrity digests, flat archive convention, multi-method install commands, publisher-controlled domain requirement) while restructuring for the ODIN 2.0 skill format.

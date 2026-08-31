@@ -47,7 +47,3 @@ Remote or irreversible actions are outside reversible-local authority until the 
 ## Output
 
 Return: `playbook` (selected name, or ordered names for independently requested outcomes), `status` (`done`, `blocked`, or `failed`), `actions` (concrete actions completed), `verification` (real surface exercised and observed result for each playbook), `approval` (each remote or irreversible action approved and performed, or the exact pending action), and `next-action` (required only when blocked or failed) — `done` is valid only when every selected playbook completed and its real-surface done check passed.
-
-## Provenance
-
-Origin: `cursor/plugins` pstack repository, authored by Lauren Tan (poteto). Pinned revision: `68836ddaf5697224520f1847d90cdb90ca8babaa`. License: MIT. Adaptation statement: clean-room reimplementation of the 23-playbook role-model routing mechanism and per-playbook execution contracts, preserving the role-model routing and per-playbook contract mechanism while restructuring for the ODIN skill contract format and authority model. The MIT license permits adaptation and reuse with attribution.

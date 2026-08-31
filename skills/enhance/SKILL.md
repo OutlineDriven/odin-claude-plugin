@@ -71,7 +71,3 @@ description: 'Use when the user asks to enhance, improve, audit, or tighten a pl
 
 ## Output
 A markdown enhancement report with target path and flags, analyzers run, an executive summary table with HIGH/MEDIUM/LOW/autoFixableHigh counts per analyzer, every HIGH finding with file/line/check/evidence/fix, MEDIUM/LOW counts (full sections only under --verbose), and an auto-fix section listing applied edits and re-analysis results or safe edits without --apply.
-
-## Provenance
-
-Origin: odin-1.x current skill `skills/enhance/SKILL.md`. Revision: unpinned current. License: project-owned; no third-party license evidence. Adaptation: clean-room rewrite to the ODIN 2.0 contract format. The 1.x `references/analyzer-checks.md` support file is inlined as the check catalog. Suppression learning, reset/export suppression flags, editor-platform adapters, model pins, and binary cache state present in the 1.x source were deleted as non-load-bearing.

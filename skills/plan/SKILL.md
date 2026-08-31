@@ -42,7 +42,3 @@ description: 'Use when a user commits to a direction and asks to plan, brief, re
 
 ## Output
 A file at `plans/{type}-{descriptive-name}.md` (or `-{date}.md` on collision) containing the type-correct answer first, then classified type and tier, sourced metrics, open questions, and references — not done until the user acknowledges the context brief.
-
-## Provenance
-
-Origin: https://github.com/EveryInc/compound-knowledge-plugin | Revision: 766942e9eaee5204adbfe180f1d0651ffecf2575 | License: MIT — adaptation of the compound-knowledge-plugin planning mechanism. Both researcher-agent functions (past-work research and knowledge-base research) are preserved as parallel read-only research steps in Procedure. Local reversible write confirmed per source. Mechanism rewrites recorded in the root provenance ledger are permitted under the license.

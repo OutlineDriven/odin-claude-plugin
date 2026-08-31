@@ -38,7 +38,3 @@ description: 'Use when the user runs /retrospective for a period. Produces an en
 
 ## Output
 One retrospective report file for the period, containing team breakdowns, habits, and the evidence behind each finding, plus the report file path and a one-line summary returned to the user.
-
-## Provenance
-
-Origin: https://github.com/garrytan/gstack at revision 07b59e396c6be5a86619a43151cb9ed62a15ae69. License: MIT (Copyright (c) 2026 Garry Tan). Adapted clean-room from the gstack retro skill and its report-format section; the duplicate openclaw-retro contract was merged into this skill. Prose and procedure re-derived; no third-party expression copied wholesale.

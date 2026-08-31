@@ -56,7 +56,3 @@ description: 'Use when the user asks whether a repository is ready for public re
 ## Output
 
 One prioritized readiness report: secret-history risk, outsider build/use readiness, license consistency, CI/supply-chain posture, packaging/release gaps, deliberate omissions vs genuine gaps, recommended next steps by severity, in that order.
-
-## Provenance
-
-Adapted from Trail of Bits open-sourcing skill (https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3, path /plugins/open-sourcing/skills/open-sourcing/SKILL.md). Licensed CC-BY-SA-4.0. This is a clean-room adaptation into a read-only audit: the source workflow includes repository mutation steps (visibility changes, file creation, CI configuration) that are excluded here. Trail of Bits attribution and source link preserved per license terms. Modifications marked. Adaptation licensed ShareAlike. No trademark rights claimed. trail-of-bits-mark.svg not reused as branding.

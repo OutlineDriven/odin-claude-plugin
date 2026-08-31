@@ -38,7 +38,3 @@ Required: the target implementation and its test command; requirements or contra
 
 ## Output
 On success, return exit 0 with the created or changed property/proof files, deterministic regression tests for all counterexamples, bounded remediation files, commands run, passing property and proof counts, zero skipped/pending counts, line-coverage percentage, and the requirement-to-property hierarchy. Otherwise return exit 11, 12, 13, or 14 with the exact blocked or non-converged evidence described above and the bounded files that remain modified.
-
-## Provenance
-
-Adapted from project-owned ODIN source `skills/proof-driven/SKILL.md`, candidate `current:current-c:current:proof-driven`. No pinned revision or external license identifier was supplied. This self-contained adaptation retains requirements-first property design, property categories and hierarchy, example-test pairing, model-based stateful testing, shrinking, formal proof strategies, totality, iterative remediation, blocking gates, counterexample regression, and exit classifications without depending on external reference files.

@@ -63,7 +63,3 @@ description: 'Use when a smart-contract team invokes this before check-in or dep
 ## Output
 
 **Output contract:** Return the consolidated Markdown status report first, then documented properties, generated tests and raw tool outputs, manual-review notes, deployment checks, and visualizations; order stages 1–5 and findings by severity.
-
-## Provenance
-
-Adapted from Trail of Bits secure-workflow-guide (https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3). Licensed CC-BY-SA-4.0. This is a clean-room adaptation that preserves the five-stage security workflow structure and orchestration pattern. Modifications: reformatted to ODIN 2.0 skill template, added explicit failure classes and compensating-analysis rules, specified local-artifact authority boundary. Trail of Bits attribution preserved; no trademark rights claimed; trail-of-bits-mark.svg not reused.

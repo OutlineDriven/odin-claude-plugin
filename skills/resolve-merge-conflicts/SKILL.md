@@ -34,11 +34,11 @@ Optional context:
 2. **Gather context for each conflicted file.** Read the three versions — ancestor (`:1:`), theirs (`:2:`), yours (`:3:`) — via `git show`. Use `read` with the `:conflicts` selector to enumerate marker blocks; fall back to ranged `read` calls for files the selector returns empty. Use `difft` for side-by-side comparison when either intent is unclear.
    *Done when: every conflicted file's three versions and conflict-marker blocks have been examined.*
 
-3. **Read the primary sources for both sides.** Read the commit messages, pull requests, and original issues or tickets for both changes. State why each side exists in one sentence before editing any hunk.
-   *Done when: each side's intent is stated and recorded.*
+3. **Read the primary sources for both sides.** Read the commit messages, pull requests, and original issues or tickets for both changes. State why each side exists in one sentence before editing any hunk. If neither side's commit, PR, or linked issue expresses a clear intent, stop and report the ambiguous files, asking the human to supply the missing intent before continuing; do not guess an intent to drive the resolution.
+   *Done when: each side's intent is stated and recorded, or ambiguous files are reported and the skill pauses for human input.*
 
-4. **Resolve each hunk.** Preserve both intents when they fit together. When they genuinely conflict, choose the side that matches the integration's stated goal and record the trade-off. Invent no new behaviour. Remove all conflict markers from each resolved file.
-   *Done when: no conflict markers remain in any tracked file.*
+4. **Resolve each hunk.** Preserve both intents when they fit together. When they genuinely conflict, choose the side that matches the integration's stated goal, name the trade-off, and record the discarded intent so the finishing commit message can name both sides' intents and the resolution rationale. Invent no new behaviour. Remove all conflict markers from each resolved file.
+   *Done when: no conflict markers remain in any tracked file and every conflict resolution has its trade-off and any discarded intent recorded.*
 
 5. **Regenerate lockfiles with tooling.** If a lockfile is among the conflicting files, regenerate it with the project package manager rather than hand-editing.
    *Done when: lockfiles are regenerated, or confirmed not among the conflicted set.*
@@ -50,7 +50,7 @@ Optional context:
    *Done when: scoped checks pass, or pre-existing failures are reported without suppression.*
 
 8. **Finish the integration.** Complete the in-progress operation:
-   - **Merge**: commit the merge.
+   - **Merge**: commit the merge with a message that names both sides' intents and the resolution rationale, including any discarded intent recorded in Step 4.
    - **Rebase**: `git rebase --continue` until every commit is replayed and no conflict remains.
    - **Cherry-pick**: `git cherry-pick --continue` (or commit, then continue if multiple commits remain).
    - **Stash pop**: the stash is applied after resolution; `git stash drop` if the stash entry was not auto-dropped.
@@ -65,6 +65,9 @@ Optional context:
 | Lockfile regeneration fails | Package manager cannot regenerate the lockfile | Do not hand-edit the lockfile; report the failure and leave it unresolved |
 | Scoped check failure | A check introduced by the integration fails | Fix only integration-introduced failures; report pre-existing failures without suppression |
 | Unresolved marker | Any `<<<<<<<` found after staging | Stop; report the path and line range |
+| Intent ambiguity | Neither side's commit, PR, or linked issue expresses a clear intent | Stop; report the ambiguous files and ask the human to supply the missing intent before continuing |
+| Scope creep | Resolving one conflict reveals additional unrelated conflicts or issues | Stop at the current merge/rebase/cherry-pick/stash scope; do not refactor, clean up, or fix code outside the conflicted hunks |
+| Non-convergence | Two resolution attempts produce the same check failure | Stop; report the conflict pair, both attempted resolutions, and the failure output |
 
 **Partial-result rule:** If fewer than all conflicted files are resolved, the run is incomplete. Do not commit, do not claim success. Report every unresolved hunk by file and line range.
 
@@ -73,12 +76,3 @@ Optional context:
 ## Output
 
 A per-file report listing each resolved hunk, the chosen resolution, and any unresolved remainder; lockfile regeneration result; scoped-check outcome (pass or named failure); final `git status` summary.
-
-## Provenance
-
-**Origins (three merged skills):**
-- `warpdotdev/common-skills` — `.agents/skills/resolve-merge-conflicts/`, revision `f589e224907eda566c13755529f59db563090d14`. License: MIT. Contribution: four conflict-stop types (merge, rebase, cherry-pick, stash pop), three-version context presentation (`:1:`/`:2:`/`:3:`).
-- `cursor/plugins` — `cursor-team-kit/skills/fix-merge-conflicts/`, revision `68836ddaf5697224520f1847d90cdb90ca8babaa`. License: MIT. Contribution: lockfile regeneration with tooling, conflict-marker scan, scoped compile/lint/test validation.
-- `odin-current` — `skills/resolving-merge-conflicts/SKILL.md`. License: project-owned. Contribution: primary-source intent reading, `difft` side-by-side, finish-the-integration contract (commit and continue rebase), partial-result rule.
-
-**Adaptation:** Clean-room merge of three conflict-resolution skills into one. The three variants' depth knobs — primary-source reading, lockfile regeneration, marker scan, three-version presentation, scoped checks, finish-the-integration — become ordered procedure steps. The two absorbed skills' non-commit stance is subsumed by the finish-the-integration contract; no push, no tag, no force-push, no history rewrite is retained from all three.

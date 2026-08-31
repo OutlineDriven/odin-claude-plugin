@@ -41,7 +41,3 @@ Supply one state-model, logic, or data-shape question; the relevant state, actio
 
 ## Output
 Return the standalone throwaway HTML path, the state-model question, the exercised happy-path, edge-case, and illegal-action scenarios, their observed transitions, and one terminal classification: `validated`, `blocked`, or `non-converged`. For `validated`, also return the human verdict, the local throwaway-branch commit, and the real-code target containing the validated module. Never report or ship the HTML shell as production code.
-
-## Provenance
-
-Project-owned adaptation of `skills/prototype-logic/SKILL.md` from the `odin-current` source candidate `current:current-c:current:prototype-logic`. No source revision or external license identifier was supplied. This version preserves the clickable single-file demo, isolated liftable logic module, visible state, free play, deterministic guided scenarios, human handoff, throwaway-branch record, and validated-module integration mechanisms while rewriting them to the ODIN 2.0 contract.

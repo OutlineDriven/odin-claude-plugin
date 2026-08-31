@@ -47,7 +47,3 @@ The TypeScript source files in scope. The target tsconfig.json if present.
 ## Output
 
 TypeScript source files with narrowed types, discriminated unions, readonly fields, exhaustive variant checks, and validated trust boundaries — no invented strict flags, no universal branded-type or `as` bans.
-
-## Provenance
-
-Origin: cursor/plugins | Revision: 68836ddaf5697224520f1847d90cdb90ca8babaa | License: MIT | Adaptation from pstack/typescript-best-practices (Lauren Tan/poteto). Clean-room adaptation: frontmatter normalized to ODIN 2.0 schema, trigger/authority/end-state translated to ODIN 2.0 contract table, procedures bound to TypeScript 7 doctrine flags, universal `as` and branded-type bans removed per doctrine, external validation through Standard Schema named.

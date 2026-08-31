@@ -66,10 +66,3 @@ Partial-result rule: if any batch succeeded before a failure, the doc link is st
 
 ## Output
 Shareable Google Docs URL (with `?tab=<tab_id>` when a tab was used); on failure, an error report naming the failure class and partial state.
-
-## Provenance
-
-- Origin: warpdotdev/competitive-intelligence-agent-oss, path `.warp/skills/write_google_docs/SKILL.md`.
-- Revision: `9e0363e810a14405ef876fb354562735002797fb`.
-- License: MIT. MIT license notice retained; mechanism adapted for ODIN 2.0 module structure.
-- Adaptation: markdown-to-Google-Docs formatting rules and tab support preserved. Module remapped from odin-orchestration to odin-run. Authority set to human-only for remote mutation.

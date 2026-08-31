@@ -40,10 +40,3 @@ description: 'Use when a significant feature begins or specs are checked in: aut
 ## Output
 
 Checked-in spec files covering all behavioral requirements of the feature, aligned with the implementation, and commit messages naming the spec labels satisfied.
-
-## Provenance
-
-Origin: `github.com/warpdotdev/common-skills`
-Revision: `f589e224907eda566c13755529f59db563090d14`
-License: MIT — Copyright (c) 2026 Denver Technologies, Inc. Adaptation and redistribution permitted provided the copyright notice and permission notice are retained in copies or substantial portions. Attribution recorded in module provenance ledger. Vendored third-party JS bundle (pierre-diffs.js, ~1.1 MB) not carried over.
-Adaptation: Clean-room rewrite in ODIN literal format with behavioral spec discipline. Spec-tree discipline preserved; implement-specs and validate-changes-match-specs procedures retained as structural anchors.

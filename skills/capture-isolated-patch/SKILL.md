@@ -39,10 +39,3 @@ description: 'Use when a candidate change must be produced without touching the 
 
 ## Output
 On success, a binary-safe patch file path, the command's exit code, and captured stdout/stderr; on extraction failure, the preserved worktree path, the command's exit code, and the failure reason; the original working tree is unchanged in every case.
-
-## Provenance
-
-- Origin: `cobusgreyling/loop-engineering`; source paths `/tools/loop-sandbox/src/sandbox.ts`, `/tools/loop-sandbox/README.md`, `/stories/loop-sandbox-ephemeral-isolation.md`.
-- Pinned revision: `d03dcb92cc1e0efb59789a2557131c6ad5897ccc`.
-- License: MIT.
-- Adaptation: clean-room adaptation of the ephemeral-worktree isolation mechanism into a self-contained procedure; no third-party expression copied.

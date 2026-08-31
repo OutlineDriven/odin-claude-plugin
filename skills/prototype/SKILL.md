@@ -103,9 +103,3 @@ Route before writing because LOGIC and UI variants require different artifact st
 
 ## Output
 - **Decision**: one line answering the question. - **Evidence**: the prototype HTML file (LOGIC) or variant components and switcher (UI), committed to a throwaway branch off main. - **Verdict record**: the question, the answer, and the chosen path recorded in the issue or commit message on the throwaway branch.
-
-## Provenance
-
-**Origin**: mattpocock/skills, revision `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76`.
-**License**: MIT — Copyright (c) 2026 Matt Pocock. Permission notice retained in `licenses/NOTICE`.
-**Adaptation**: ADAPT into odin-create. LOGIC and UI procedure branching preserved as two sub-procedures under a shared routing step; shared rules inlined verbatim. Reversible-local authority, throwaway-branch evidence contract, and one-line decision capture are odin-native additions.

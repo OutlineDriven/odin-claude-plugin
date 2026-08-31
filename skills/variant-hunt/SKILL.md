@@ -48,7 +48,3 @@ Rollback: any written artifact is reversed by deleting the named report and any 
 
 ## Output
 A local variant report with root cause statement, original location, methodology table, confirmed findings (severity-rated with evidence), false-positive table grouped by reason, and a CI-ready regression rule.
-
-## Provenance
-
-Adapted from `variant-analysis` (Trail of Bits, Axel Mierczuk, CC-BY-SA-4.0). Source: https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3/plugins/variant-analysis/skills/variant-analysis. Pinned revision: `d1f1575cff97816e5cc08af66cd2506099c681d3`. Adaptation: scoped to one confirmed root cause per invocation, single-agent direct workflow (no parallel subagents), removed plugin-specific workflow entry point, authority restricted to `reversible-local` local artifact write, added explicit partial-result and rollback rules. Attribution preserved per license.

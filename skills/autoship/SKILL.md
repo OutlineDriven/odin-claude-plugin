@@ -69,7 +69,3 @@ The release workflow runs twice. First, push a commit carrying a pending `.chang
 
 ## Output
 The published version string from `npm view <package> version` confirmed against the merged `package.json`, plus a one-line release summary — on any blocked or non-converged state, a report naming the failed step, remaining error count or failing check, and next human action.
-
-## Provenance
-
-Adapted from `mblode/agent-skills`, revision `e97a3b383f5944f90d41eb92b24b4fb3b917a7f9`, file `skills/autoship/SKILL.md` and its `references/` directory. MIT licensed; reuse preserves the copyright notice and license text. Copyright (c) 2026 Matthew Blode. Self-contained adaptation for ODIN 2.0: the reference files were inlined and cross-skill pointers removed; the release-loop mechanism, gate order, merge preconditions, and npm-verification evidence are preserved.

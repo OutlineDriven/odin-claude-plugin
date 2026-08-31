@@ -40,7 +40,3 @@ description: 'Use when a release or a since-tag window needs user-facing release
 
 ## Output
 One draft release note file covering exactly the since-tag window organized by change category, the since-tag state marker advanced once to the current head, and a report listing the draft path, the window covered, the change count per category, and an explicit statement that publishing remains a separate human action.
-
-## Provenance
-
-Origin: cobusgreyling/loop-engineering, revision d03dcb92cc1e0efb59789a2557131c6ad5897ccc, MIT license. Source paths: /patterns/changelog-drafter.md, /changelog-drafter-state.md, /.github/workflows/changelog-drafter.yml, /starters/changelog-drafter/LOOP.md, /stories/changelog-drafter-week-one.md. Clean-room adaptation: the since-tag draft composition and one-shot marker-advance-without-publish mechanism is preserved; no third-party expression is copied.

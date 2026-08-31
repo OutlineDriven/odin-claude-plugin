@@ -77,7 +77,3 @@ odin run list --output-format text
 ```
 
 Skipped P0s (inactionable, low-confidence, or already addressed) are listed with their reason. No agent runs without user confirmation.
-
-## Provenance
-
-Origin: `warpdotdev/competitive-intelligence-agent-oss`, `.warp/skills/fix_p0_issues/SKILL.md`. Pinned revision `9e0363e810a14405ef876fb354562735002797fb`. License MIT; mechanism adapted (clean-room): the Oz cloud-agent binary is replaced by the ODIN cloud-agent, and human confirmation before spawning is added as a guardrail.

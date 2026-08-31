@@ -48,7 +48,3 @@ description: 'Use when asked to run browser tests for pages affected by a PR or 
 
 ## Output
 A markdown summary with sections in order: test scope and server URL, pages-tested table (Route / Status / Notes), console errors, human verifications, failures, and overall result (PASS / FAIL / PARTIAL) — every affected route appears as Pass, Fail, or Skip with a reason; when a preflight blocker stops testing before any route can be exercised, the output is the blocker and what would clear it.
-
-## Provenance
-
-Origin: https://github.com/EveryInc/compound-engineering-plugin, revision a1f601f17137f648be439965f8fdd9123303de5d, file skills/ce-test-browser/SKILL.md. License: MIT (Copyright (c) 2025 Every). Mechanisms extracted and rewritten in ODIN style, not copied verbatim; the obligation reduces to preserving attribution in the root provenance ledger.

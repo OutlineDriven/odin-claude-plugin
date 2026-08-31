@@ -41,7 +41,3 @@ description: 'Use when a workflow, plan, or diff must be checked for practices t
 
 ## Output
 A chat-only report: per detected practice — class name, exact evidence line, one cheaper alternative (or explicit statement that none was found); if nothing matched — a clean verdict naming the five classes scanned and the artifact scope covered. The report changes no file, branch, credential, or remote state.
-
-## Provenance
-
-Origin: cobusgreyling/loop-engineering. Pinned revision d03dcb92cc1e0efb59789a2557131c6ad5897ccc. License: MIT. Source paths: /docs/anti-patterns.md, /docs/failure-modes.md, /stories/score-climbs-then-budget-burns.md, /stories/why-we-killed-ci-sweeper.md, /docs/distribution/substack-score-climbs-then-budget-burns.md. Clean-room adaptation: the five practice classes and the evidence-plus-cheaper-alternative audit shape are derived from the source's anti-pattern and failure-mode documentation; no third-party expression is copied.

@@ -40,7 +40,3 @@ The procedure never writes a partial artifact. If it stops before step 6, it doe
 
 ## Output
 A single `.canvas` file named after the PR identifier, with a header section (PR title, description, file count), risky hunk sections (path, range, diff, annotation), then safe hunk sections in the same format — local only, never published or pushed.
-
-## Provenance
-
-Adapted from `cursor/plugins` commit `68836ddaf5697224520f1847d90cdb90ca8babaa`. Original license: MIT, declared by the cursor/plugins root README and the candidate plugin manifest as recorded in the pinned source audit. This is a clean-room adaptation preserving the Cursor Canvas review rendering mechanism; no third-party expression is copied.

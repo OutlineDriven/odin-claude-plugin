@@ -54,7 +54,3 @@ Partial-result rule: a clear pass or fail with diagnostics is the only done stat
 
 ## Output
 A terminal pass/fail classification for the remote command with diagnostics (phase timing, failed test, JUnit digest), a recorded line stating provider, id, run URL, command, and observed result, and confirmation that untrusted code did not run on the provider and that only owned ids were stopped. A blocked result names the failure layer and the exact blocker instead of claiming a pass.
-
-## Provenance
-
-Origin: https://github.com/openclaw/agent-skills, path `skills/crabbox/SKILL.md`, revision `ae75f60e8d454f1cf44ec4613e10ec9ea7f2ade7`. License: MIT; the copyright and permission notice requirement is retained per the license reuse constraint. Adaptation: provider-routing rules, the source-trust decision tree, preflight commands, and untrusted-code safeguards are preserved; long backend command examples are condensed rather than kept verbatim; consumer-specific resolution is read from the target repository's own instructions. Expression rewritten; no third-party expression is copied verbatim.

@@ -42,7 +42,3 @@ The question or proposal to analyze from the codebase seat. The codebase under a
 ## Output
 
 One codebase-perspective analysis in chat: what the existing code tolerates, what it punishes, and the code evidence for each — no decision selected or recorded; comparison with other lenses happens after their independent outputs.
-
-## Provenance
-
-Origin: user-curated perspective-lens brief (local curated-ideas, candidate curated-067). License: project-owned, clean-room adaptation. The lens rule that each seat answers only from its named seat and that lenses do not blend mid-answer is preserved from the source.

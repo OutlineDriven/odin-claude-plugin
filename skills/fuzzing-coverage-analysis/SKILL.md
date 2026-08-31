@@ -57,7 +57,3 @@ Optional:
 ## Output
 
 A coverage report (text summary plus HTML detail) and a region classification written under the target directory — each uncovered region listed as reachable-uncovered, blocked-by-magic-value, or dead, paired with a concrete campaign-work item (dictionary entry, seed input, or harness change); when a baseline was supplied, coverage gained or lost versus that baseline.
-
-## Provenance
-
-Origin: https://github.com/trailofbits/skills, path `/plugins/testing-handbook-skills/skills/coverage-analysis/SKILL.md`, revision `d1f1575cff97816e5cc08af66cd2506099c681d3`. License: CC-BY-SA-4.0; preserve Trail of Bits attribution and the source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse `trail-of-bits-mark.svg` as branding. Adaptation: clean-room rewrite preserving the source mechanism (dedicated coverage toolchain over a post-campaign corpus, harness-noise exclusion, magic-value and dead-code classification, and conversion of uncovered regions to dictionary/seed/harness work) without copying its expression.

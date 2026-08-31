@@ -58,7 +58,3 @@ Partial results are never reported as success. The rollback path is deleting the
 ## Output
 
 The rule directory containing `<rule-id>.yaml` (one rule) and `<rule-id>.<ext>` (annotated test file), plus a run report stating: validation pass, the test matrix (vulnerable, safe, edge, nested) green before and after optimization, AST dump used to confirm the pattern, final scan target and finding count, and confirmation that no message contains an uninterpolated metavariable; terminal states: done (all checks passed) or blocked (named failure class, artifacts rolled back or the exact failing check stated).
-
-## Provenance
-
-Origin: Trail of Bits semgrep-rule-creator, https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3 (source paths: plugins/semgrep-rule-creator/commands/semgrep-rule.md, plugins/semgrep-rule-creator/README.md, plugins/semgrep-rule-creator/skills/semgrep-rule-creator/SKILL.md, plugins/semgrep-rule-creator/skills/semgrep-rule-creator/references/quick-reference.md, plugins/semgrep-rule-creator/skills/semgrep-rule-creator/references/workflow.md). License: CC-BY-SA-4.0. This file is a modified adaptation; Trail of Bits attribution and source link are preserved, the adaptation is licensed under CC-BY-SA-4.0 (ShareAlike), no trademark rights are claimed, and trail-of-bits-mark.svg is never used as branding.

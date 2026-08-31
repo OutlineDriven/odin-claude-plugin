@@ -50,7 +50,3 @@ Non-mutation rule: the skill writes nothing anywhere, so there is nothing to rol
 ## Output
 
 A report containing the detected language list, the full `trailmark analyze --language auto --summary` output including its `Entrypoints:` and `Dependencies:` lines, and the trailmark version in the metadata when captured — or a terminal gap classification (`trailmark is not installed`, `Trailmark found no supported languages under target`, or the named missing-field gap).
-
-## Provenance
-
-Origin: https://github.com/trailofbits/skills (Trail of Bits), path `/plugins/trailmark/skills/trailmark-summary/SKILL.md`, pinned revision `d1f1575cff97816e5cc08af66cd2506099c681d3`. License: CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3. Adaptation: adapted for ODIN 2.0 with modifications marked here — Trail of Bits plugin peer-skill routing removed and the workflow re-bound to the ODIN read-only contract — and the adaptation is distributed under CC-BY-SA-4.0 (ShareAlike). Trail of Bits attribution and the source link are preserved; no trademark rights are claimed and `trail-of-bits-mark.svg` is never used as branding.

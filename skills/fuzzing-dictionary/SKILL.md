@@ -46,7 +46,3 @@ Optional: an existing corpus, known boundary values, and the target's `-max_len`
 ## Output
 
 A fuzzer-parseable dictionary file plus the single fuzzer configuration flag set to load it, with a coverage comparison confirming the tokens reach target validation or parsing gates.
-
-## Provenance
-
-Origin: https://github.com/trailofbits/skills at revision d1f1575cff97816e5cc08af66cd2506099c681d3, file plugins/testing-handbook-skills/skills/fuzzing-dictionary/SKILL.md. License CC-BY-SA-4.0: preserve Trail of Bits attribution and the source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding. Adapted to a self-contained ODIN procedure preserving dictionary extraction, syntax, and validation.

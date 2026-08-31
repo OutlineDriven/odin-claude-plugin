@@ -43,11 +43,3 @@ Partial-result rule: never emit a report that omits a required section. If analy
 
 ## Output
 A markdown report at `reports/votc_insights/votc_insights_YYYY-MM-DD.md` with sections in order: Pain Points, Competitive Mentions, Feature Demand, Success Stories, Week-over-Week Changes — each item cited to `participant_id` and call date — committed and delivered as a PR.
-
-## Provenance
-
-- Origin: warpdotdev/competitive-intelligence-agent-oss
-- Pinned revision: 9e0363e810a14405ef876fb354562735002797fb
-- License: MIT — MIT notice retained; mechanism adapted
-- Source path: .warp/skills/votc_insights/SKILL.md
-- Adaptation: Module remapped from odin-knowledge to odin-research. Two-stage fetch-and-analyze mechanism and participant_id attribution preserved. Grain token elevated to first-class required secret. Human-only invocation enforced for PR creation side effect.

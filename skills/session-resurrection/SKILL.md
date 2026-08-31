@@ -1,6 +1,6 @@
 ---
 name: session-resurrection
-description: 'Use when an agent session dies or is interrupted and must be resumed cheaply. Writes SDD notes, progress graph, and death point so another session can pick up where the prior session stopped. Not for analyzing a recorded session — use session-describe-analysis.'
+description: 'Use when an agent session dies or is interrupted and must be resumed cheaply. Writes SDD notes, progress graph, and death point so another session can pick up where the prior session stopped.'
 ---
 
 # Session resurrection
@@ -13,10 +13,6 @@ description: 'Use when an agent session dies or is interrupted and must be resum
 | Authority | Reversible local writes only. Write named resurrection artifacts to ignored repository-local storage. Rollback is deletion of the resurrection directory. |
 | Side effect | SDD notes, progress graph, and explicit death point written to ignored repository-local storage. |
 | Done | SDD notes, progress graph, and death point exist so another session can resume cheaply. |
-
-## Not for
-
-- Analyzing a recorded session to produce an editable description — use session-describe-analysis.
 
 ## Inputs
 
@@ -47,10 +43,3 @@ description: 'Use when an agent session dies or is interrupted and must be resum
 ## Output
 
 Resurrection artifacts in ignored repository-local storage: SDD notes (decisions, discoveries, context), progress graph (directed graph of tasks, decisions, blockers, relationships), and death point (last action, next action, blockers, timestamp); sufficient for another session to resume without replaying the full prior session.
-
-## Provenance
-
-- **Origin**: `project-owned:user-curated-skill-ideas`, curated-013 (`session-resurrection`).
-- **Pinned revision**: none (source is user-curated, not version-controlled).
-- **License**: project-owned.
-- **Adaptation**: clean-room adaptation of the user-curated resume workflow concept. No third-party expression copied.

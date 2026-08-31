@@ -74,7 +74,3 @@ On any failure, the result reports exactly what was attempted, what succeeded, a
   "converged": <boolean>
 }
 ```
-
-## Provenance
-
-Origin: cobusgreyling/loop-engineering (MIT). Revision: d03dcb92cc1e0efb59789a2557131c6ad5897ccc. Adaptation: self-contained ODIN 2.0 skill implementing template-driven drift reconciliation for the fixed auto-fixable set, with all other drift reported rather than auto-written. Clean-room implementation against loop-sync/src/sync.ts and the four template files (STATE.md.template, gate.yaml.template, loop-budget.md.template, loop-run-log.md.template). No third-party expression copied.

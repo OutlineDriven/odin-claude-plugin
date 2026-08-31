@@ -46,7 +46,3 @@ description: 'Use when a user invokes a candid after-action account of a complet
 ## Output
 
 A local file `retrospective-<cycle-slug>.md` with sections Cycle, Goal, Account, Failures, Wins, Changed practices, ordered as listed.
-
-## Provenance
-
-Origin: user-curated idea `curated:curated-ideas:curated-061` from `project-owned:user-curated-skill-ideas`. Adapted from the directive "force a candid after-action account with concrete changed practice." No third-party license applies; the source is user-authored project material. This is a clean-room adaptation into a structured retrospective workflow.

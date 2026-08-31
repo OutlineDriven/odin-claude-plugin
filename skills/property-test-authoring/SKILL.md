@@ -74,7 +74,3 @@ description: 'Use when adding or improving property tests for invariants, oracle
 
 ## Output
 A property test file in the project's existing framework containing: the strongest grounded property for the target code, domain-aware generators with constraints in the strategy, pinned edge cases for known boundaries, and a passing test run. If the code lacks an algebraic shape, the output is a written recommendation for example tests with the specific reason no property applies.
-
-## Provenance
-
-Adapted from Trail of Bits property-based testing skill (https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3). Licensed CC-BY-SA-4.0. Source paths: plugins/property-based-testing/skills/property-based-testing/SKILL.md, plugins/property-based-testing/skills/property-based-testing/references/generating.md. This adaptation is licensed ShareAlike, preserves Trail of Bits attribution and source link, marks modifications, claims no trademark rights, and does not reuse trail-of-bits-mark.svg as branding.

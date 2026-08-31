@@ -42,10 +42,3 @@ description: 'Use when one named review viewpoint must run fix cycles until a fr
 
 ## Output
 One review report next to the reviewed artifact (`<artifact-basename>.<viewpoint>-review.md` or user-supplied path) containing the viewpoint charter, per-cycle log with model family, every applied fix patch with check result, human-owned questions, unresolved findings, and terminal classification — plus artifact state with check-verified fixes applied or baseline restored on rejection.
-
-## Provenance
-
-- Origin: user-curated Skill Foundry idea `perspective-complete-review` (candidate `curated:curated-ideas:curated-026`) from the user's curated ideas brief, supplemented by the user's raw session notes.
-- Pinned revision: none.
-- License: project-owned user brief; no third-party expression copied.
-- Adaptation: the curated one-line workflow was expanded into this bounded single-viewpoint loop; the raw session notes were normalized into the fresh-reviewer mechanism (isolated context, different model family) and were not copied verbatim.

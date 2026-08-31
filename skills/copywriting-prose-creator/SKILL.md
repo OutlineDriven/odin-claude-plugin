@@ -161,7 +161,3 @@ Versioning footer: semver, date, owner, changelog stub. Prose guides decay; a PR
 
 ## Output
 Return, in order: `PROSE.md` with the five layers, mechanics, channel overrides, cultural adaptation, anti-LLM controls, semver footer, owner, date, and changelog stub; then `AUDIT-MEMO.md` in AUDIT or corpus-backed BUILD mode; in ADAPT mode, the appended or standalone channel override.
-
-## Provenance
-
-Origin: samber/cc-skills, revision f9953962e135235137628ea92d06ea085688031f, file `skills/copywriting-prose-creator/SKILL.md`, MIT license. Clean-room adaptation: the five-layer codification with per-rule rationale, the empirical-AUDIT-before-BUILD ordering, the ≤ 5 parallel audit sub-agents, the four channel groupings, the 11 category defaults, and the anti-LLM countermeasure inventory are preserved as mechanism; reference-file indirection and cross-skill pointers were inlined and removed so the skill is self-contained. No third-party expression is copied.

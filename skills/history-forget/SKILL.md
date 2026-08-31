@@ -36,7 +36,3 @@ The target session or note identifier to forget, unforget, or inspect. The opera
 
 ## Output
 A terminal report naming the operation performed (forget, list, or unforget), the affected record, whether the atomic rebuild completed, and any stale exclusions narrated. For list, the full enumeration of current tombstones and exclusions.
-
-## Provenance
-
-Adapted from the runForget tombstone mechanism and the cmdIndex exclusion-changed notice in cmd/deja/main.go, and the local-writes security model in docs/SECURITY-MODEL.md, of github.com/vshulcz/deja-vu at revision 6f766fd4716edcaf24662c794368e420e5058f47. License: MIT, Copyright (c) 2026 Vladislav Shulcz; the copyright and permission notice are retained. Mechanisms rewritten in ODIN style; no third-party expression is copied.

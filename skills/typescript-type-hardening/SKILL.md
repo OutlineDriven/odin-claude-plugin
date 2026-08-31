@@ -52,7 +52,3 @@ description: 'Use when TypeScript code has type errors, any, difficult generics,
 
 ## Output
 Modified source files, type-test files (positive and `@ts-expect-error` negative), and a terminal report (baseline count, final count, any eliminated, mechanisms applied, tsc status for both runs), in that order.
-
-## Provenance
-
-Adapted from Matteo Collina's typescript-magician skill (mcollina/skills, MIT, revision 856efd268ae85482d882f3d0bed869fd020b5c06). MIT license notice retained. Mechanism adapted and consolidated from 15 source rule files into a single self-contained procedure for type-level TypeScript work.

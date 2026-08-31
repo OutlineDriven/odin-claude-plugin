@@ -43,11 +43,3 @@ description: 'Use when the user asks for a flattened view of roadmaps and next a
 
 ## Output
 A single chat message: a flat dependency-ordered task list grouped by milestone with status glyphs and next actions per item, followed by a `## Next actions` frontier section listing only immediately actionable items. No execution commitment, tracker mutation, or follow-up scheduling.
-
-## Provenance
-
-- Origin: `project-owned:user-curated-skill-ideas` — curated entry `show-way`: "flatten roadmaps and next actions for the human without taking execution authority."
-- Supplementary source: `project-owned:user-supplied-source-brief` (Korean chat log; context for user's planning philosophy, no direct textual content reproduced).
-- Revision: not pinned (source is a living curated list).
-- License: project-owned (clean-room adaptation from user-curated brief; no third-party expression reproduced).
-- Adaptation: the curated entry's one-line description was expanded into a full procedure preserving the read-only, no-execution-authority constraint.

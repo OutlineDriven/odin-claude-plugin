@@ -43,7 +43,3 @@ Optional: existing REST client code to replace, preferred runtime (Node or Bun),
 
 ## Output
 Integration code with an authenticated @cursor/sdk client and agent, all resources disposed, all async operations awaited, errors typed at the boundary, and REST call sites replaced when migrating; plus the end-to-end verification result.
-
-## Provenance
-
-Origin: cursor/plugins repository, path cursor-sdk/skills/cursor-sdk/. Pinned revision 68836ddaf5697224520f1847d90cdb90ca8babaa. License: MIT, declared by the cursor/plugins root README and the candidate plugin manifest. Adapted clean-room from the seven source references (advanced, auth, error-handling, mcp, patterns, runtime-choice, streaming) into this self-contained procedure; no third-party expression copied.

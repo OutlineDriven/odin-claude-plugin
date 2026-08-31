@@ -52,11 +52,3 @@ The plan may be a markdown file, a text file, or a structured document. If a pat
 
 ## Output
 A verdict page at `diagrams/plan-review.html` with per-item accuracy verdicts (correct, stale, risky, unsupported, missing), a final decision (approve, revise, reject), and rationale — opened and displayed to the user.
-
-## Provenance
-
-Origin: nicobailon/visual-explainer (MIT); pinned revision: 7163c3e10660912e0b89e1af465db9f387282b88.
-
-License: MIT.
-
-Adaptation: Audit procedure and verdict taxonomy are rederived from independent clean-room analysis of the codebase. No third-party expression is copied. MIT notice retained per license treatment.

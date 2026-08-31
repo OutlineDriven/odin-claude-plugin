@@ -41,7 +41,3 @@ disable-model-invocation: true
 ## Output
 
 A model-comparison table written to the output path, with one row per candidate model showing aggregate score, per-task breakdown, total observed spend, and run count, plus a `non-converged` marker when the run stopped early.
-
-## Provenance
-
-Adapted from `benchmark-models/SKILL.md` in github.com/garrytan/gstack at revision 07b59e396c6be5a86619a43151cb9ed62a15ae69 (MIT, Copyright (c) 2026 Garry Tan). Expressive prose and procedure re-derived; the gstack model-versus-model comparison mechanism preserved. Copyright and permission notice retained per the MIT reuse constraints.

@@ -44,8 +44,3 @@ description: 'Requires fresh, actually-run evidence before any claim that a task
 
 ## Output
 One terminal classification (VERIFIED, PARTIAL, UNVERIFIED, FAILED, or TIMEOUT) with the action run, what it showed, and the claim wording it supports or contradicts; non-VERIFIED classifications followed by one sentence stating the reason.
-
-## Provenance
-
-- **current:verification-before-completion:** Source ODIN skill tree. In-tree origin; no external license applies.
-- **source:superpowers-017:** github.com/obra/superpowers, revision b36e0829c6d0140e93cfef2ca599b1b07d4a7797. MIT License (copied_allowed: true; holder: Jesse Vincent; year: 2025). Absorbed into verification-before-completion under global exact-contract deduplication. Clean-room adaptation: the superpowers source supplied the same four-field contract; the ADAPT candidate is the authoritative version.

@@ -48,10 +48,3 @@ Partial results are always returned. No failure class suppresses the structured 
 
 ## Output
 A structured report containing watch surface identity, observed state snapshot, classified severity level, routing targets, on-call disposition (paged/escalated/acknowledged/not-applicable/page-failed/page-rejected), observation timestamp, and paging confirmation timestamp when applicable.
-
-## Provenance
-
-- Origin: curated:curated-ideas:curated-032 from project-owned:user-curated-skill-ideas
-- Revision: null (no pinned source revision)
-- License: project-owned (clean-room adaptation of the watch-for pattern with structured severity, routing, and on-call paging)
-- Adaptation: adds severity classification, routing table lookup, and on-call paging to the watch-for observation pattern. It remains distinct from watch-for because it may page an on-call API. Paging is an external, irreversible action, so authority remains human-only.

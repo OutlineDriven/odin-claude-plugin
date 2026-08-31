@@ -1,6 +1,6 @@
 ---
 name: skill-creator
-description: 'Use when the user runs /skill-creator to codify a prior /scrape result into a permanent, tested browser-skill directory that is installed and validated. Not for general skill authoring — use skill-writer; not for plan-first builds — use skill-plan-first-builder.'
+description: 'Use when the user runs /skill-creator to codify a prior /scrape result into a permanent, tested browser-skill directory that is installed and validated. Not for general skill authoring — use skill-writer.'
 ---
 
 # Skill creator
@@ -54,7 +54,3 @@ Optional: the user may rename the proposed skill or choose project tier instead 
 
 ## Output
 A committed, self-contained browser-skill directory at the chosen tier path (`~/.gstack/browser-skills/<name>/` for global, `<project>/.gstack/browser-skills/<name>/` for project), containing `SKILL.md`, `script.ts`, `script.test.ts`, `_lib/browse-client.ts`, and a fixture — verified by `$B skill list` and `$B skill run`.
-
-## Provenance
-
-Origin: https://github.com/garrytan/gstack, revision 07b59e396c6be5a86619a43151cb9ed62a15ae69, file `skillify/SKILL.md`. License: MIT, Copyright (c) 2026 Garry Tan. Clean-room adaptation: expressive prose and procedure re-derived from the source mechanism; no third-party expression copied wholesale. The iron contract (temp-dir stage, test gate, approval gate, atomic commit or discard) and the pure-parser-with-fixture-test pattern are preserved as the distinguishing source mechanisms.

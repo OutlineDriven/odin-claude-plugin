@@ -115,7 +115,3 @@ Terminal classification:
 Report: scope, selected reviewers, iterations, critical/high fixed, remaining critical/high, low debt count, verification commands run, regressions rolled back, queue path.
 
 Artifacts: `.outline/audit/queue.json` (scope, framework, flags, prioritySignals, selectedReviewers, iteration, maxIterations, rawResults, items, lowDebt, counts, falsePositive, hashHistory, verification, decisions, updatedAt); `.outline/audit/iterations/<n>.json` (changed files, batches, verification command/output summary, re-review result hash); and optionally `TECHNICAL_DEBT.md`.
-
-## Provenance
-
-Origin: ODIN 1.x current skill `skills/audit-project/SKILL.md` (project-owned; no third-party license). Pinned revision: none (current source). License: project-owned. Adaptation: clean-room rewrite to the ODIN 2.0 literal contract — the reviewer roster and false-positive contract that previously lived in `references/` are inlined so the skill is self-contained with no peer-file pointers; the distinguishing mechanisms (parallel domain-separated reviewers with a JSON schema and false-positive clause, finding normalization and dedupe, blocked-ratio gate, priority-signal gathering and routing, batch-verified fix loop with `git restore` rollback, stall-hash detection and per-iteration decision gate, targeted re-review routing, low-debt extraction) are preserved.

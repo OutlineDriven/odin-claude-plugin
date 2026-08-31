@@ -75,9 +75,3 @@ description: 'Use when a user needs coverage-guided fuzzing for Python code or a
 - A `corpus/` directory of seed and discovered inputs, plus any `crash-*`/`leak-*` artifacts.
 - A campaign report: coverage reached, corpus size, executions per second, and for each crash artifact a confirmed reproduction (same failure on replay) or a nondeterminism flag.
 - Terminal classification per crash: **confirmed defect** (reproduces), **nondeterministic** (does not reproduce), or **no crash found** (partial result, not proof of absence).
-
-## Provenance
-
-- Origin: https://github.com/trailofbits/skills , revision `d1f1575cff97816e5cc08af66cd2506099c681d3`, file `/plugins/testing-handbook-skills/skills/atheris/SKILL.md`.
-- License: CC-BY-SA-4.0. Preserve Trail of Bits attribution and the source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse `trail-of-bits-mark.svg` as branding.
-- Adaptation: clean-room semantic adaptation. The Atheris harness structure (`TestOneInput`, `@atheris.instrument_func`, `Setup`/`Fuzz`), `FuzzedDataProvider` fixed-draw-order rule, native-extension compilation and `LD_PRELOAD` contract, corpus management, and crash-reproduction requirement are preserved as the load-bearing mechanism. Source comparison tables, external resource lists, Docker boilerplate, and cross-skill pointers were omitted to produce a self-contained procedure.

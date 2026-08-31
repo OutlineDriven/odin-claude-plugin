@@ -36,7 +36,3 @@ Required: a framed thesis with named quality gates for the first pass, or a prev
 
 ## Output
 A cycle memo naming at least one lesson, anti-pattern, or gate; an explicit keep/iterate/restart decision; and a state transition to the next lap, restart, or termination. Version labels apply only to quality-cleared artifacts.
-
-## Provenance
-
-Origin: https://github.com/LilMGenius/paperthin, revision 3bca079a51bcfff5dafb53d1d7f9f523d66ee317. License: MIT (c) 2026 LilMGenius. Adaptation of `skills/coil/re0-loop/SKILL.md` under MIT license with the same copyright terms. Description, section structure, and frontmatter rewritten to the ODIN 2.0 authoring contract. Workflow re-ordered to the mandatory section sequence. Goal section elided as redundant with Contract and Procedure. Rules section absorbed into Procedure steps and Failure and recovery. Verification section absorbed into Procedure step Done-when conditions.

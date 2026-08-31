@@ -39,7 +39,3 @@ description: 'Use when a user wants a looser conceptual graph for exploratory wo
 
 ## Output
 A single freeform conceptual graph artifact ordered: node list (with confidence markers), labeled edge list (allowing cycles), provisional cluster summary, high-value bridge targets, open-questions list — human-readable, revisable without tooling.
-
-## Provenance
-
-Origin: user-curated skill ideas (project-owned:user-curated-skill-ideas, curated-021). The source brief distinguishes this workflow from production-DAG generation (dependency-safe execution ordering) and project-root-graph maintenance (canonical project structure). This skill is a clean-room adaptation: the procedure and contract are derived from the one-line brief and the design axioms in the source, not copied from any third-party expression. No license evidence was supplied with the source; the adaptation is project-owned.

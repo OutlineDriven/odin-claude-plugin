@@ -97,11 +97,3 @@ description: 'Use when multi-session learning needs a sourced workspace where ev
 ## Output
 
 The persistent workspace: `MISSION.md` (reason for learning with concrete success criteria), `RESOURCES.md` (curated trusted sources), `GLOSSARY.md` (canonical terminology), `./learning-records/*.md` (one record per lesson), `./lessons/*.html` (one lesson per sourced win), `./assets/style.css` (reusable components), `NOTES.md` (user preferences and working notes).
-
-## Provenance
-
-- **Origin**: mattpocock/skills (https://github.com/mattpocock/skills)
-- **Pinned revision**: 6654f6b60cd9d5be8b54c6fafe44346dabeb3b76
-- **License**: MIT — Copyright (c) 2026 Matt Pocock
-- **Obligation**: Retain the copyright and permission notice in root PROVENANCE.md.
-- **Adaptation**: Adapted from mattpocock/skills productivity/teach into odin-research persistent sourced learning workspace. Matt's teach skill provides the three-layer philosophy (knowledge, skills, wisdom), the workspace file structure, the lesson format, and the four template formats (MISSION, RESOURCES, LEARNING-RECORD, GLOSSARY). This variant requires one sourced win per lesson and retention-based progression. Sourced wins and demonstrated retention are explicit gate conditions for advancing. Four FORMAT.md templates are incorporated inline rather than as separate support files. Obligor: project-owned.

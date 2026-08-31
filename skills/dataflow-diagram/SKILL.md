@@ -38,7 +38,3 @@ The user must supply the data contracts and movement facts to depict: sources, s
 
 ## Output
 A typed dataflow JSON specification, one self-contained interactive HTML artifact, any requested bounded visual-evidence sidecars, and a hash-bound receipt listing the delivered file hashes, the schema versions validated against, and a truthful visual-review status. The terminal classification is done only when the done predicate holds; otherwise it is blocked with the named failing check.
-
-## Provenance
-
-Clean-room adaptation of the dataflow-diagram workflow from https://github.com/tt-a1i/archify at revision b36d79fdbc3aec3728744341485a7e79f03c0071, licensed MIT. Source expression is not copied; the workflows and mechanisms are re-derived from the observable contracts. Preserve the copyright and permission notice: Copyright (c) 2026 tt-a1i (Archify); Copyright (c) 2025 Cocoon AI (original "architecture-diagram-generator"). The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.

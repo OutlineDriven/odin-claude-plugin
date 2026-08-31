@@ -61,10 +61,3 @@ Partial-result rule: if the user provides additional material mid-draft, incorpo
 ## Output
 
 A single LinkedIn post: chosen hook (bold, verbatim from user selection) followed by post body (2-4 short paragraphs, under 1,300 characters, in founder voice, humanized) — no hashtags unless explicitly requested, no images or link attachments, no draft saved to any file or external service.
-
-## Provenance
-
-- Origin: samber/cc-skills, slug `linkedin-ghostwriting`
-- Revision: `f9953962e135235137628ea92d06ea085688031f`
-- License: MIT
-- Adaptation statement: Self-contained procedure authored from normalized roster metadata; no third-party expression copied. Retained mechanism: quantified validation gate (step 2) ensures the model never drafts from vague input, matching the source's gate-before-write discipline. Retained mechanism: three-hook presentation with user selection (step 3) preserves the source's human-in-the-loop drafting checkpoint. Retained mechanism: humanization pass (step 5) restates the source's explicit anti-AI-voice requirement.

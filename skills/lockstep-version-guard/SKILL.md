@@ -39,7 +39,3 @@ Input-boundary failure, catalog-coverage failure, path-boundary failure, parse f
 ## Output
 
 A deterministic per-file listing containing path, version field, observed value or exact error, canonical version, and match status, followed by exit 0 for complete lockstep or exit 1 for any mismatch, invalid input, incomplete catalog coverage, or blocked read.
-
-## Provenance
-
-Clean-room adaptation of the lockstep release-version check in `nicobailon/visual-explainer` at revision `7163c3e10660912e0b89e1af465db9f387282b88`, originally represented by `scripts/check-versions.mjs`, package and plugin manifests, marketplace metadata, and skill metadata. Source license: MIT. The adaptation retains the canonical-version comparison, cross-manifest coverage, deterministic per-file mismatch reporting, and release-gate exit semantics while extending coverage to the 29-package ODIN catalog.

@@ -55,7 +55,3 @@ The current topic from the user prompt. The skill picks the minimal view type th
 ## Output
 
 An ephemeral visual shown inline beside its short supporting text; the visual carries the point alone, prose supplies only context the visual cannot; nothing is written to disk.
-
-## Provenance
-
-Origin: odin-current, path skills/show-me/SKILL.md. Project-owned. Adaptation is clean-room: the view-selection table and shape examples are preserved as the execution mechanism; the original preamble and prose bridge are removed as redundant with the Contract section.

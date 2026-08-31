@@ -52,7 +52,3 @@ Optional: existing route/plugin/schema files to modify, database adapter choice,
 
 ## Output
 Fastify application code: schema-bearing routes, encapsulated plugins in dependency order, lifecycle hooks at the correct stage, typed decorators with declaration-merged types, shaped validation and error handlers, configured content-type parsers, and database wiring via official adapters. The application boots with `app.ready()` and a schema-violating request returns a shaped 400.
-
-## Provenance
-
-Origin: `mcollina/skills`, revision `856efd268ae85482d882f3d0bed869fd020b5c06`. License: MIT (notice retained; mechanism adapted). Adapted from the `skills/fastify` rule set (plugins, routes, schemas, serialization, hooks, decorators, content-type, database, error-handling, typescript) into a single self-contained procedure. No third-party expression copied verbatim; mechanisms re-expressed.

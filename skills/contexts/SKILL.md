@@ -40,10 +40,3 @@ description: 'Use when the user says "get context on X", "how does X work", or w
 
 ## Output
 First line `detected: <mode> — scope=<paths|libs|both> sources=<brief summary>`, then `code-ref` (8-section architecture report), `doc-ref` (source-cited claims with confidence labels), or `both` (both reports in sequence, each section labeled). Terminal classification `ambiguous` when the gate is unanswered.
-
-## Provenance
-
-- Origin: ODIN 1.x current skill `skills/contexts/SKILL.md`.
-- Revision: unpinned (current).
-- License: project-owned.
-- Adaptation: restructured into the ODIN 2.0 contract section order. It inlines the codebase-exploration and external-research workflows as concrete procedure steps, making the skill self-contained with no dependency on other skills or modules.

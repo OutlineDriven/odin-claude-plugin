@@ -165,7 +165,3 @@ Structure each finding in this order:
 
 ## Output
 Return a structured findings report with an executive summary, per-workflow summary table, and per-finding details: title, severity, file, step, impact, evidence, data flow or amplification note, and remediation. Include cross-reference notes and clean-repo coverage when no findings exist. Remote reports also include repo headers, GitHub file links, and source attribution.
-
-## Provenance
-
-Adapted from the Trail of Bits `agentic-actions-auditor` skill (https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3, source path `/plugins/agentic-actions-auditor/skills/agentic-actions-auditor/SKILL.md`). Licensed CC-BY-SA-4.0: preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding. This adaptation restructures the original nine-vector, cross-file-aware methodology into a self-contained read-only contract with inlined vector heuristics and action-specific remediation; no external reference files are carried.

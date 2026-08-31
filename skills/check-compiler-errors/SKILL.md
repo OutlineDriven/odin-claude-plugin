@@ -38,7 +38,3 @@ description: 'Use when compile or type-check failures block validation. Run the 
 
 ## Output
 Clean check confirmation, or a precise remaining-error list (file, line, message, diagnostic code) with the count of unresolved errors.
-
-## Provenance
-
-Adapted from cursor/plugins, cursor-team-kit/skills/check-compiler-errors/SKILL.md, revision 68836ddaf5697224520f1847d90cdb90ca8babaa, MIT license. Clean-room adaptation preserving the check-driven compile-error clearance mechanism; no third-party expression copied.

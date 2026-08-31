@@ -1,6 +1,6 @@
 ---
 name: skill-writer
-description: 'Use when a user asks to create, update, or maintain an agent skill. Produces a validated, registered skill with a concise router, source coverage, and provenance. Not for approved-plan builds — use skill-plan-first-builder; not for scrape-based builds — use skill-creator.'
+description: 'Use when a user asks to create, update, or maintain an agent skill. Produces a validated, registered skill with a concise router, source coverage, and provenance. Not for scrape-based builds — use skill-creator.'
 ---
 
 # Skill writer
@@ -45,7 +45,3 @@ No partial-result rule applies. A failure always produces a classification, neve
 ## Output
 
 A validated, registered skill directory containing `SKILL.md` with frontmatter, Contract, Inputs, Procedure, Failure and recovery, Output, and Provenance sections; `agents/openai.yaml` with `display_name` and `short_description`; `SPEC.md` for the skill specification; `SOURCES.md` for source coverage and provenance; `references/` for deferred-load material (if any); and a valid registration entry.
-
-## Provenance
-
-Origin: getsentry/skills. Revision: c2f99a5b04b4cd992ec3022d7c2c3e23e938d241. License: Apache-2.0. Adaptation: clean-room reimplementation for odin-agent module with remapped module path per Q49 (skills). Source accounting: single source path `skills/skill-writer/SKILL.md` adapted to ODIN 2.0 format; no third-party expression copied.

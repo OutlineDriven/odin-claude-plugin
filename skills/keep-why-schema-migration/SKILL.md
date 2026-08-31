@@ -55,7 +55,3 @@ Current entry-format version: **4**.
 ## Output
 
 One migration report with a terminal classification: `current`, `migrated` (schema advanced to 4, per-entry summary, rollback path), `deferred`, `declined` (personal record only; project unaffected), `ahead-blocked` (no writes; skill update recommended), or `failed` (F1–F4 with details). The report names every rewritten entry, every `undefined` value with its reason, and any unmigrated entry.
-
-## Provenance
-
-Adapted from `keep-the-why` (https://github.com/oliver-zehentleitner/keep-the-why), pinned revision c01597a506efa24652d7ecb9e18b6a8ccc97b175 (`references/migrations.md`, `SKILL.md`). MIT (LICENSE): Copyright (c) 2026 Oliver Zehentleitner; retain the copyright and permission notice in copies or substantial portions. Clean-room re-expression: the behind/current/ahead state machine, the three-outcome consent ladder, the unknown-not-guessed marking rule, the no-silent-write guarantee in the ahead state, the schema-field-last caught-up gate, and the advance-even-when-nothing-applied invariant are preserved; the migration catalog re-derives the source's three documented context-schema changes (Type field, undefined-with-reason, repeated Type lines) under a fresh integer version axis; the personal decline record is restated without the source's project-file carrier.

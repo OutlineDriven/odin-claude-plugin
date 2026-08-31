@@ -52,7 +52,3 @@ When optional context is absent, gather it across five dimensions: who the desig
 
 ## Output
 A variant gallery inline and side-by-side for selection, then an approved record in the design directory naming the chosen variant, per-variant ratings, comments, overall direction, date, screen, and branch, plus an updated taste record — ordered bound → gather → read-taste → generate → confirm → render → gallery → select → summarize → save.
-
-## Provenance
-
-Origin: https://github.com/garrytan/gstack at revision 07b59e396c6be5a86619a43151cb9ed62a15ae69. License: MIT, Copyright (c) 2026 Garry Tan. Clean-room adaptation: the multi-direction variant generation, anti-convergence rule, taste-memory biasing, comparison-gallery feedback loop, and per-project design-directory discipline are re-derived from the source behavior; no source prose or code is copied wholesale.

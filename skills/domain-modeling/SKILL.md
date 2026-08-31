@@ -38,7 +38,3 @@ Required: the term, conflict, or fuzzy usage to resolve from the current design 
 
 ## Output
 Updated or newly created glossary files in the layout chosen at step 1, with every resolved term appearing once with a one-line definition and its rejected synonyms, plus a terminal report listing terms resolved and recorded, conflicts surfaced, model-versus-code contradictions with the ruling, entries whose code cross-check was not performed, and terms left unresolved with reasons.
-
-## Provenance
-
-Origin: ODIN 1.x current skill `skills/domain-modeling/SKILL.md`, project-owned, no pinned revision, no third-party license. Adapted into the ODIN 2.0 router format: the source's separate glossary-format reference (`references/CONTEXT-FORMAT.md`) is inlined as the step-6 entry shape, and the source's cross-skill ADR reference was removed because this skill depends on no other skill. No third-party expression is reproduced.

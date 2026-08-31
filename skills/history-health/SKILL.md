@@ -62,7 +62,3 @@ Partial-result rule: if `deja log` produces a partial list (due to a cap or cloc
 
 ## Output
 Newest-first event rows ordered by `time`, `kind`, `bytes`, `sessions`, and `empty`; return `null` when the log is absent or empty or `deja` is unavailable, and never include digest text, policy, terms, session IDs, or injection targets.
-
-## Provenance
-
-Origin: https://github.com/vshulcz/deja-vu, revision `6f766fd4716edcaf24662c794368e420e5058f47`. License: MIT, Copyright (c) 2026 Vladislav Shulcz. Adaptation: `cmd/deja/log.go`, `internal/usage/usage.go`, and `docs/json-output.md` as the source event schema and output contract. Clean-room adaptation per MIT reuse constraints. Source mechanism: usage log event audit from `deja log --json` with digest replay refused. Module: odin-research. Authority: read-only. Invocation: model+human per roster.

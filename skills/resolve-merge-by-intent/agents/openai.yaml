@@ -1,3 +1,0 @@
-interface:
-  display_name: "Resolve Merge By Intent"
-  short_description: "Use when a merge or rebase has stopped on conflicts."

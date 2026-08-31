@@ -75,7 +75,3 @@ description: 'Use when reviewing existing property tests for coverage and defect
 
 ## Output
 A structured report containing: 1. **Summary**: Total tests reviewed, count by severity, overall assessment. 2. **Findings**: For each defect found: - Location (file, line, test name) - Defect class and severity - Evidence (the specific assertion, configuration, or pattern) - Strongest replacement property the code supports 3. **Recommendations**: Prioritized list of improvements, ordered by severity. 4. **Unreviewable tests**: If any, with reasons.
-
-## Provenance
-
-Adapted from Trail of Bits property-based testing skill (https://github.com/trailofbits/skills, commit d1f1575cff97816e5cc08af66cd2506099c681d3). Licensed CC-BY-SA-4.0. This is a read-only test-quality review contract, not test generation or failure diagnosis. Trail of Bits attribution and source link preserved; modifications marked; adaptations licensed ShareAlike; no trademark rights claimed; trail-of-bits-mark.svg not reused as branding.

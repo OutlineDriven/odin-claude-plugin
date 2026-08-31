@@ -78,10 +78,3 @@ description: 'Use when a smart-contract project needs architecture, implementati
 ## Output
 
 **Output contract:** Return system documentation first, then architecture analysis, implementation review, CRITICAL-to-LOW recommendations, and the overall maturity path; order every finding within its section by severity and source location.
-
-## Provenance
-
-- **Origin**: https://github.com/trailofbits/skills (Building Secure Contracts plugin, guidelines-advisor skill).
-- **Revision**: d1f1575cff97816e5cc08af66cd2506099c681d3.
-- **License**: CC-BY-SA-4.0. Preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.
-- **Adaptation**: Clean-room adaptation into ODIN 2.0 skill format. Source mechanism preserved: broad secure-development advice covering documentation, architecture, implementation, dependencies, upgradeability, and testing as a single assessment pass, distinct from vulnerability scanning and workflow execution.

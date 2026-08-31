@@ -45,7 +45,3 @@ disable-model-invocation: true
 
 ## Output
 A recorded canary decision — `promoted` or `rolled-back`, each with the collected metric evidence and the threshold classification that justified it; or `indeterminate` / `unavailable-checks` with evidence and no state change beyond rollback forced by unavailable checks.
-
-## Provenance
-
-Origin: https://github.com/garrytan/gstack, path canary/SKILL.md, revision 07b59e396c6be5a86619a43151cb9ed62a15ae69. License: MIT (Copyright (c) 2026 Garry Tan), blob 35029511144443297cad2d26e4bac17d0e352f93. Clean-room adaptation: the canary deploy, metric watch, and promote-or-rollback-with-evidence mechanism is re-derived, not copied.

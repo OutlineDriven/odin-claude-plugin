@@ -48,8 +48,3 @@ Rollback rule: after any failure, delete every file written during this invocati
 
 ## Output
 On success: `{ json_path, png_path, quality_report: { passed: true, checks: { ... } } }`; on failure: `{ status: "failed", failure_class, detail }`.
-
-## Provenance
-
-Origin: `https://github.com/coleam00/excalidraw-diagram-skill` at `8646fcc9f74f38539c6cdb4c969723336a96ddcd`.
-License: NOASSERTION — no LICENSE/LICENSE.md/COPYING file exists; default all-rights-reserved. This skill is a clean-room mechanism rewrite. No upstream prose, palette, template bytes, `render_excalidraw.py`, or `render_template.html` are retained. Upstream runtime dependencies are MIT/Apache-2.0; pin to known-stable revisions before running.

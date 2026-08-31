@@ -57,7 +57,3 @@ description: 'Use when the user runs /diagram-contract to render a mermaid diagr
 
 ## Output
 A rendered diagram (SVG and PNG) embedded in the target document, plus the mermaid source (`.mmd`) and, for flowcharts, an editable excalidraw scene (`.excalidraw`) in the output directory, ordered bound → author → write-mmd → render-offline → transport → svg → png → excalidraw → embed → show → changes, with terminal status DONE when the embed is confirmed or BLOCKED when the renderer or target document is unavailable.
-
-## Provenance
-
-Origin: github.com/garrytan/gstack, `diagram/SKILL.md` and `lib/diagram-render`, revision `07b59e396c6be5a86619a43151cb9ed62a15ae69`. License MIT, Copyright (c) 2026 Garry Tan. Clean-room adaptation: re-derived the rendering procedure (offline bundled renderer, base64 source transport, flowchart-to-excalidraw conversion with non-flowchart limitation, 300dpi rasterization, embed into a target document) without copying gstack's preamble, telemetry, browse-daemon plumbing, or expressive prose.

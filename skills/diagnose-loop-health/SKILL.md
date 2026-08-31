@@ -41,7 +41,3 @@ The user must supply the loop directory to inspect. No file is created or writte
 
 ## Output
 A severity report carrying one of healthy, warning, or blocked, the matching exit code 0, 1, or 2, and zero to three prioritized actions, each naming the exact missing or stale charter, state, gate, or budget file by path and class, ordered obtain-dir → bound-scope → read-files → classify → emit-actions → exit.
-
-## Provenance
-
-Adapted from cobusgreyling/loop-engineering (MIT), revision d03dcb92cc1e0efb59789a2557131c6ad5897ccc, files /tools/loop/src/doctor.ts, /tools/loop/src/status.ts, /tools/loop/README.md, /docs/loop-design-checklist.md. Clean-room adaptation: the healthy/warning/blocked severity ladder, the 0/1/2 exit-code mapping, the at-most-three prioritized actions limit, and the four-file health model are preserved; no source expression is copied.

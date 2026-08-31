@@ -52,7 +52,3 @@ A partial result is never a completed workflow. On any failure, preserve valid p
 ## Output
 
 Return the paths of the completed `workflows/*.md` specs and `NOTES.md` if changed, a concise statement of each workflow's trigger and output, and confirmation that an implementer-question review found no unresolved question. Otherwise return the exact blocked classification, affected paths, recovery performed, and unresolved questions.
-
-## Provenance
-
-Adapted from the project-owned ODIN 1.x `loop-me` skill at `skills/loop-me/SKILL.md` (`current:current-b:current:loop-me`). No pinned revision or external license identifier was supplied. This self-contained adaptation retains the recurring-loop lens, weighted hypothesis-and-falsifier sampling, stateful one-question interview, conditional workflow vocabulary, late checkpoint briefs, workspace note capture, and implementer-ready completion test without copying a third-party source.

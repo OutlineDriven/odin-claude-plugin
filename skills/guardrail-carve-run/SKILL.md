@@ -40,7 +40,3 @@ description: 'Use when a task carries guardrail-adjacent material — stealth, s
 
 ## Output
 A safe deliverable from the runner, plus a distinct descope ledger with one entry per guardrail-adjacent item: class (bright-line or gray-zone), verdict (descoped or kept-by-owner), reason, safe alternative, and archive destination. The archive entries are written after the run closes. Exclusions are visible decisions, not gaps.
-
-## Provenance
-
-Origin: `https://github.com/LilMGenius/paperthin`, `skills/depth/autobahn/SKILL.md` at revision `3bca079a51bcfff5dafb53d1d7f9f523d66ee317`. License: MIT, (c) 2026 LilMGenius; the source NOTICE additionally vendors verbatim material from mattpocock/skills (MIT, (c) 2026 Matt Pocock), but this skill is a clean-room adaptation that copies no verbatim vendor expression. Adaptation: restructured into the carve-and-run orchestration for guardrail-adjacent work, inlining the shared-state leak guard, archive-after-run-close timing, bright-line appeal routing, and never-probe rule as self-contained procedure rather than external references.

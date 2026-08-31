@@ -46,7 +46,3 @@ The user's task prompt or current work context. Optional: a stated fork threshol
 
 ## Output
 A sequence of consented fork picks and checkpoint confirmations emitted as AskUserQuestion batches in chat, with no review-bottleneck diff produced, each fork ending in one terminal classification (consented-pick, executed-silently, or blocked), and the retained pick set constituting the agreed architecture on disengagement.
-
-## Provenance
-
-Origin: odin-1.x current skill at skills/duet/SKILL.md (revision untracked; no third-party license — project-owned). Adaptation: folded the references/askuserquestion-contract.md support contract and the cross-skill VS+falsifier deltas into a self-contained procedure; removed motivational prose and all pointers to other skills, support files, and rule files; preserved the collaboration posture, VS-gated question protocol, three-phase loop, fork taxonomy, presentation and batching rules, AskUserQuestion field contract, failure antidotes, and pick-retention on disengage.

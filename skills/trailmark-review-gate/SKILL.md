@@ -47,7 +47,3 @@ Two git refs, a branch name, a commit range, or before/after directories. The be
 ## Output
 
 A Markdown review packet with verdict (PASS/WARN/FAIL/UNKNOWN), confidence, triggered rules table, structural changes table, entrypoint and reachability changes, privilege and taint changes, blast radius and complexity changes, limitations, and recommended reviewer actions — ordering: verdict, triggered rules, structural changes, entrypoint, privilege, blast radius, limitations, recommendations.
-
-## Provenance
-
-Origin: https://github.com/trailofbits/skills | Revision: d1f1575cff97816e5cc08af66cd2506099c681d3 | License: CC-BY-SA-4.0; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding. | Adaptation: rewritten to the ODIN 2.0 contract schema; gate rules, default thresholds, sensitive-sink categories, verdict precedence, output format, and review-integration guidance inlined so the skill is self-contained; reference-file pointers removed; rule and threshold tables preserved for deterministic parity.

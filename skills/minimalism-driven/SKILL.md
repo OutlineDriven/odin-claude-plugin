@@ -40,7 +40,3 @@ Never report the done predicate while a required check fails or evidence is miss
 ## Output
 
 Return the completed local code change and a concise report naming the behavior implemented, the files changed, the necessity of each new surface, the verification performed and its observed result, and any blocked adjacent work. On failure, return the exact blocked or non-converged classification defined above and preserve or restore the pre-edit state as specified.
-
-## Provenance
-
-Project-owned adaptation of `skills/minimalism-driven/SKILL.md` from the `odin-current` candidate `current:current-c:current:minimalism-driven`. No source revision or external license identifier was supplied. This version preserves the source mechanisms—reuse before addition, delete then edit before creating, one-sentence necessity, obvious intent and failure paths, and strict scope—while rewriting them into the ODIN 2.0 self-contained contract.

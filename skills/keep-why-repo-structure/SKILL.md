@@ -60,7 +60,3 @@ description: 'Use when project documentation needs a layout or a knowledge item 
 ## Output
 
 One of three terminal results: layout created (files written with Status and Evidence lines, index matching existing files, rollback set), routing verdict (single home or 'different artifact class', no mutation), or blocked report (ambiguity, convention conflict, or unwritable target with options).
-
-## Provenance
-
-Origin: https://github.com/oliver-zehentleitner/keep-the-why, pinned revision c01597a506efa24652d7ecb9e18b6a8ccc97b175. License: MIT (LICENSE at that revision) — Copyright (c) 2026 Oliver Zehentleitner; the copyright and permission notice are retained per the license terms. Adapted from skills/keep-the-why/SKILL.md and skills/keep-the-why/references/repository-structure.md, informed by references/methodology.md and context/entry-format.md at the same revision. Carried over: the question-per-file routing table, the topic-file-plus-lean-index structure, the flat grep-filterable entry lines, the proportionality gate, and the never-invent-rationale rule. Not carried: capture-confirmation wizards, interview and migration machinery, and the personal-config file conventions, which belong to the source's capture workflow rather than placement.

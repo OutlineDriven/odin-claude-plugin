@@ -53,7 +53,3 @@ Optional: brand palette, typeface preferences, existing token files, and a targe
 ## Output
 
 Committed DESIGN.md, token system file, and component CSS implementing the crafted interface, plus a recorded slop-audit pass and WCAG 2.2 AA gate pass — the done predicate holds only when both gates pass and the artifacts are committed.
-
-## Provenance
-
-Origin: samber/cc-skills, skill `frontend-design-deslop`. Pinned revision f9953962e135235137628ea92d06ea085688031f. License: MIT. Adapted as a clean-room semantic-minimum procedure preserving the source mechanism: a strategy-driven frontend design workflow with a NEVER-slop list and a WCAG 2.2 AA pass/fail gate that writes DESIGN.md, tokens, and component CSS.

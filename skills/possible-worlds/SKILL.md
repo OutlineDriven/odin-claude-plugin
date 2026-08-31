@@ -33,7 +33,3 @@ Return `not-applicable: design dispute does not contain at least two live interp
 
 ## Output
 One prose paragraph at a five-year-old abstraction level laying out the live possible worlds and ending with exactly one non-binding recommendation — design selection, decision recording, and downstream action left to the caller.
-
-## Provenance
-
-Project-owned adaptation of the user-named priority-five candidate `priority:priority-five:PF-05` and user-named extension candidate `invention:inventions:INV-05`, adjudicated as NW-01 under AR-1. No source revision or third-party license was supplied. The adaptation combines the dispute-only paragraph contract with premise-delta world construction while remaining self-contained and read-only.

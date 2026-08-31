@@ -78,7 +78,3 @@ Partial result: the only deliverable short of an opened PR is the uncommitted re
 
 ## Output
 One markdown report at reports/weekly_sentiment_analysis/weekly_sentiment_report_<end_date>.md — header stats line, Positive, Testimonials, Neutral, Negative, Notable patterns, Product feedback patterns, in that order — plus one PR containing that report. Success returns the PR URL; anything else returns the blocked classification naming the failed step.
-
-## Provenance
-
-Origin: warpdotdev/competitive-intelligence-agent-oss, path .warp/skills/weekly_sentiment_analysis/SKILL.md, pinned revision 9e0363e810a14405ef876fb354562735002797fb. License: MIT (SPDX: MIT); upstream MIT notice retained; mechanism adapted. Adaptation: the two-week Octolens fetch, the sentiment score formula, the sign-prefixed absolute week-over-week delta format, the filtered pattern sections, and the report-then-PR flow are re-expressed as a human-only ODIN skill in module odin-research; human-only gating and explicit preview-before-publish were added because the workflow ends in a published PR.

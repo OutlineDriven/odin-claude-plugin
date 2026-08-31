@@ -1,6 +1,6 @@
 ---
 name: goal-init
-description: 'Use when a durable effort needs an approved, checkable success predicate before work starts; writes the goal, verifier, budget, and run-log scaffold. Not for requirement-to-evidence contracts — use goal-contract. Never remote, credential, publish, deploy, or irreversible.'
+description: 'Use when a durable effort needs an approved, checkable success predicate before work starts; writes the goal, verifier, budget, and run-log scaffold. Not for requirement-to-evidence contract ledgers. Never remote, credential, publish, deploy, or irreversible.'
 ---
 
 # Goal init
@@ -37,7 +37,3 @@ A human-supplied goal description stating the desired end state in operational t
 
 ## Output
 A goal scaffold directory containing four artifacts (goal statement, verifier, budget, run log) with exactly one approved, checkable success predicate recorded, ready for an effort to bind.
-
-## Provenance
-
-Adapted clean-room from cobusgreyling/loop-engineering (revision d03dcb92cc1e0efb59789a2557131c6ad5897ccc, MIT). The source mechanism in tools/goal-init/src/cli.ts writes goal, verifier, budget, and run-log artifacts before any effort binds; this skill restates that mechanism without copying source expression.

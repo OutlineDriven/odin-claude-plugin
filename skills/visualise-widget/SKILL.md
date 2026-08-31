@@ -36,10 +36,3 @@ description: 'Use when a user requests a comparison table, data record, metric c
 
 ## Output
 A visualizer fence containing one valid, self-contained HTML fragment that renders the requested widget pattern in a sandboxed iframe.
-
-## Provenance
-
-- Origin: https://github.com/bentossell/visualise at revision 35cd185b58af5db2f9d0fe13d9872b544a467483
-- License: MIT (README-only declaration; no dedicated LICENSE file at this revision). Preserve copyright and full MIT text. Clean-room rederived layout snippets; source expression not copied.
-- Paths referenced: SKILL.md, references/design-system.md, references/components.md
-- Adaptation: Module remapped from odin-design to odin-create per editorial common-tier ruling. Expression clean-room rederived from upstream mechanisms.

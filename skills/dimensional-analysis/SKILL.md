@@ -43,7 +43,3 @@ description: 'Use to annotate arithmetic files in financial, scientific, DeFi, b
 
 ## Output
 A structured summary in the project root carrying mode, project_root, vocabulary (base_units, derived_units, precision_prefixes), annotations (total_added, by_file), findings (critical, high, medium, details), uncertainties_resolved, and coverage (in_scope_files, anchor/propagation/validation reviewed ratios, annotated functions and variables, unprocessed_files matching the terminal BLOCKED set), with confirmed and refuted mismatches separated and a list of modified files when edits occurred, ordered bound → discover → annotate → propagate → validate → reconcile.
-
-## Provenance
-
-Origin: https://github.com/trailofbits/skills at revision d1f1575cff97816e5cc08af66cd2506099c681d3, plugin `dimensional-analysis` (Coriolan Pinhas & Benjamin Samuels, Trail of Bits). License: CC-BY-SA-4.0. This is a clean-room adaptation: the four-phase, all-files, manifest-gated annotation and bug-detection workflow is re-expressed in self-contained prose; no third-party expression is copied. Trail of Bits attribution and the source link are preserved; modifications are marked; adaptations are licensed ShareAlike; no trademark rights are claimed and `trail-of-bits-mark.svg` is never reused as branding.

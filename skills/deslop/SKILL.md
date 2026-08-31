@@ -1,17 +1,17 @@
 ---
 name: deslop
-description: 'Use when the user says deslop, debloat, tidy, simplify, or clean up this diff, or asks to remove dead code, placeholders, stubs, dead fields, redundant wrappers, or stale config, or the slop skill routes here. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user says deslop, debloat, tidy, simplify, clean up this diff, or deslop a branch diff, or asks to remove dead code, placeholders, stubs, dead fields, redundant wrappers, or stale config, or the slop skill routes here. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Deslop
 
-Three modes share one spine: bound scope, verify with the repo's own command, rollback on regression, atomic commits separate from behavior changes.
+Four modes share one spine: bound scope, verify with the repo's own command, rollback on regression, atomic commits separate from behavior changes.
 
 ## Contract
 
 | Field | Bound contract |
 |---|---|
-| Trigger | The user says deslop, debloat, tidy, simplify, clean up this diff, remove dead code, find placeholders or stubs, remove dead fields, redundant wrappers, or stale config, or the slop skill routes code findings here |
+| Trigger | The user says deslop, debloat, tidy, simplify, clean up this diff, deslop a branch diff, remove dead code, find placeholders or stubs, remove dead fields, redundant wrappers, or stale config, or the slop skill routes code findings here |
 | Authority | Reversible local writes to production source files or prose artifacts; may run the repo verifier and `git restore` on regression |
 | Side effect | Local writes to production source files or prose artifacts; no edits to tests, fixtures, mocks, examples, generated, vendored, or lockfile/build artifacts |
 | Done | Mode-specific done predicate holds; verifier green or rollback confirmed |
@@ -28,6 +28,7 @@ Not for behavior changes, new abstractions, or refactors that introduce patterns
 | debloat, tighten this, too long | bloat | One padded prose artifact (document, skill, spec) |
 | tidy this up, simplify, clean up this diff, polish my changes, make this simpler | tidy | Code in the working tree |
 | dead field, redundant wrapper, stale config, duplicate state, speculative abstraction | tidy | Code already under edit |
+| deslop this branch diff, remove AI debris from my branch, clean up added lines only | diff | Added/modified lines in a branch diff |
 
 ## Shared spine
 
@@ -100,6 +101,19 @@ Remove constructs that do not earn their keep from code in the working tree, the
 
 Done when: working tree has fewer dead/redundant/special-cased constructs, every removal is confirmed dead across all consumers, build/lint passes, and no ghost references remain.
 
+## Diff mode
+
+Remove AI-generated debris from a branch diff, bounded to added/modified diff lines only. The shared spine applies; the diff-specific steps below resolve the branch scope and bound every edit to the lines the branch introduced.
+
+1. **Resolve the branch diff scope.** Capture every commit since the branch diverged from its base plus staged and unstaged changes. Try base refs in order and use the first that resolves: `git merge-base HEAD origin/main`, then `origin/master`, then `main`, then `master`, then `@{upstream}`. Run `git diff <base>` (no `..HEAD`, so working-tree changes are included). If none resolves, check HEAD: if `git rev-parse --verify HEAD` fails, HEAD is unborn and the scope is user-named files only; if `HEAD^` fails, HEAD is the root commit and the scope is the working tree (`git diff HEAD`); otherwise stop and request an explicit base, because falling back to `git diff HEAD` on a local-only branch with committed work would silently drop that work. Done when: a base ref resolves and `git diff <base>` runs, or the scope is confirmed as user-named files / working tree / root commit, or the skill stops to request an explicit base.
+2. **Enumerate changed files from the diff.** Exclude tests, fixtures, mocks, examples, benchmarks, generated output, vendored code, lockfiles, and build artifacts; they may intentionally contain placeholders, fake tokens, and debug output. Done when: the changed-file list is produced with exclusions applied.
+3. **Read local style context.** For each changed file, read the diff hunks plus enough surrounding unchanged lines to judge the file's dominant indentation, naming, comment density, and import ordering. "Matching local style" is the done predicate, so this context is required before any edit. Done when: per-file dominant indentation, naming, comment density, and import ordering are recorded.
+4. **Identify AI-generated debris in added lines only.** Scan the lines the branch introduced, not unchanged context. Debris classes: debug output left after debugging (console/print/debug macros/shell tracing), excluding output that is the product (CLIs, loggers, entrypoints); placeholder or unimplemented bodies (empty block, no-op, not-yet-implemented throw/abort, `TODO: implement`); commented-out code blocks; restating-the-code comments and motivational or hedging comments ("Let me...", "Now we...", "Here we..."); placeholder text in string literals (lorem ipsum, `foo bar baz`, `replace this`); unused imports or variables introduced by the change; redundant defensive guards that duplicate a check already present in the same path; mixed tabs+spaces or trailing whitespace on added lines. Done when: every added line is scanned and findings are listed by debris class.
+5. **Classify each finding before editing.** Apply only removals that cannot change behavior: delete debug prints, delete restating/hedging/motivational comments, delete commented-out code blocks, delete unused added imports and variables, and normalize added-line indentation and trailing whitespace to the file's dominant convention. Flag-only, no edit: placeholder implementations on live API surfaces, hardcoded credentials, crash-on-failure shortcuts (forced unwrap, unchecked cast, abort-on-error where failure is recoverable), and dead code requiring control-flow judgment. Done when: each finding is marked remove or flag-only.
+6. **Bound every edit to added/modified diff lines.** Never edit unchanged context lines, never reformat the whole file, and never introduce new logic, imports, or abstractions. The diff must shrink or stay focused; it must not grow. Done when: edits are applied only on added/modified lines and the diff has not grown.
+
+Done when: focused diff matching local style, verifier green or rollback confirmed.
+
 ## Failure and recovery
 
 | Failure mode | Rule |
@@ -115,13 +129,13 @@ Done when: working tree has fewer dead/redundant/special-cased constructs, every
 | New abstraction introduced during cleanup | Cleanup must be net-deletion. Separate the abstraction into its own commit with independent justification, or drop it |
 | No verifier available | Treat every fix as unverified; state the limitation; do not claim the done predicate holds |
 | Nothing to improve | A pass that finds nothing genuine to improve changes nothing |
+| Empty change-set (diff mode) | No diff after all resolutions and no user-named files. Stop, report pass-through, make no edits |
+| No base ref resolves and committed history exists (diff mode) | Stop and request an explicit base (`deslop against <ref>`). Do not fall back to working-tree-only, which would silently drop committed branch work |
+| Finding requires behavior or control-flow judgment (diff mode) | Flag-only, no edit. Never swallow the failure or pretend the done predicate holds |
 
 Partial-result rule: applied fixes that verify stay; any fix whose verification is unconfirmed or failed is reverted and reported as blocked. In tidy mode, a pass that confirms some candidates dead and leaves others unverified lands only the confirmed deletions; unverified candidates stay untouched. Non-mutation rule (tidy mode): nothing is deleted until the dead-confirmation grep covers code, tests, docs, configs, and error messages. Never swallow an error or pretend the done predicate holds.
 
 ## Output
 
-A compact report naming the mode, changed files, fixes applied (HIGH only in slop mode), findings left for manual inspection, the verifier command and its result, and any rollback action taken. Bloat mode: the artifact rewritten in place plus a one-line summary of what was cut and which non-bloat problems were handed off. Tidy mode: removed/fixed/skipped counts with one-phrase skip reasons. If nothing needed doing: `Deslop: nothing to do.`
+A compact report naming the mode, changed files, fixes applied (HIGH only in slop mode), findings left for manual inspection, the verifier command and its result, and any rollback action taken. Bloat mode: the artifact rewritten in place plus a one-line summary of what was cut and which non-bloat problems were handed off. Tidy mode: removed/fixed/skipped counts with one-phrase skip reasons. Diff mode: resolved base ref (or working-tree/root-commit note), changed files cleaned, debris classes removed with file/line, flag-only findings left for manual review, the verifier command and its result, and any rollback action taken. If nothing needed doing: `Deslop: nothing to do.`
 
-## Provenance
-
-Origin: ODIN 1.x current skills `deslop`, `debloat`, `tidy`, `cleanup-codebase` — all project-owned except `tidy` (adapted from mblode/agent-skills revision e97a3b38, MIT, © 2026 Matthew Blode; clean-room adaptation, procedure rewritten without copying third-party expression). `debloat` becomes bloat mode. `tidy` and `cleanup-codebase` merge into tidy mode — `tidy` was an exact four-field contract duplicate of `cleanup-codebase` and is merged without an alias. `cleanup-codebase`'s `references/dead-fields.md`, `references/dead-config.md`, and `references/redundant-wrappers.md` moved here. The original `references/slop-catalog.md` remains as the slop-mode reference. No third-party expression is copied.

@@ -44,7 +44,3 @@ description: 'Use when inspecting, searching, verifying, or parsing DWARF debug 
 
 ## Output
 A terminal query result (matched DIE tree, address-covering DIE, or filtered attribute set with offsets and tool/platform identified), an integrity report (verify exit code, error detail, statistics JSON when requested), a standard explanation grounded in an authoritative source, or a parser implementation using a named library.
-
-## Provenance
-
-Origin: https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3, source path /plugins/dwarf-expert/skills/dwarf-expert/SKILL.md. License CC-BY-SA-4.0: preserve Trail of Bits attribution and the source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding. Adapted into the ODIN 2.0 contract format, preserving the source mechanisms (tool and platform identification, search-escalation ladder, authoritative-source ladder, verification workflows, library recommendations, and DWARF pitfalls) with modifications marked.

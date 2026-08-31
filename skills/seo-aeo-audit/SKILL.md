@@ -43,8 +43,3 @@ description: 'Use when asked to improve SEO, optimize for search, fix meta tags,
 ## Output
 
 A markdown audit report with a header (target URL, audit timestamp, scope), four sections (Technical SEO, On-Page SEO, Structured Data, AEO Visibility) each with severity-labeled issues and fixes, validated JSON-LD code blocks for every structured-data fix, a Verification section with exact re-verification commands, and a summary table with issue count by severity.
-
-## Provenance
-
-Origin: https://github.com/warpdotdev/oz-skills revision 6c08c49fc6c51b8f768bf8c53c041bc06a160765.
-License: MIT (Copyright 2026 Warp). Adaptation: read-only tool-evidence audit replacing CI/CD integration with model+human evidence gathering. Support scripts (lighthouse.sh, pagespeed.sh, search-console-export.mjs) used as local tool references only; not executed unless the user provides a local environment. A caller-supplied JSON-LD template remains an optional input. No third-party expression copied; clean-room adaptation.

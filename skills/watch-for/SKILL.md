@@ -42,10 +42,3 @@ No failure class causes the watcher to pretend the done predicate holds. Every t
 
 ## Output
 A stream of per-tick judgments (surface address, timestamp, classification: normal/anomalous/error/stale, what changed or why the read failed, severity if anomalous), with a final summary on stop: total ticks, anomaly count, and final surface state.
-
-## Provenance
-
-- Origin: `project-owned:user-curated-skill-ideas` (curated-031)
-- Pinned revision: none
-- License: project-owned
-- Adaptation: clean-room rewrite from user-curated watcher workflow brief. Authority brief adds bounded source, sampling rule, cancellation owner, stale-data behavior, and durable result.

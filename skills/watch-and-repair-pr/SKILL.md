@@ -38,7 +38,3 @@ Required: the open pull request, its repository and candidate branch, access to 
 
 ## Output
 One cycle report containing the pull request and candidate branch, the review-tape snapshot read in that cycle, bounded findings and their dispositions, verification evidence for each pushed fix, any published commit or report identifiers, remaining blockers with owners, and exactly one terminal classification: `mergeable`, `blocked-with-owner`, or `handed-off`.
-
-## Provenance
-
-Clean-room adaptation of the PR babysitter mechanism from `cobusgreyling/loop-engineering` at revision `d03dcb92cc1e0efb59789a2557131c6ad5897ccc`, derived from `/patterns/pr-babysitter.md`, `/starters/pr-babysitter/.claude/skills/pr-review-triage/SKILL.md`, `/examples/hermes/pr-babysitter.md`, and `/stories/pr-babysitter-week-one.md`. Source license: MIT. The adaptation preserves watcher-tick invocation, full review-tape re-reading, bounded fixes on the pull request branch, remote-mutation consent, and the no-merge/no-force-push boundary without copying source expression.

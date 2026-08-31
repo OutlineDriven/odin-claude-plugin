@@ -1,3 +1,0 @@
-interface:
-  display_name: "Entry Points Command"
-  short_description: "Use when a human invokes the entry-points command with an"

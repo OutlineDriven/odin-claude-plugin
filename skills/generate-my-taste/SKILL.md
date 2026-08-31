@@ -55,7 +55,3 @@ description: 'Use when asked to generate a personal taste skill from local evide
 ## Output
 
 Three written files at the target or draft path — `references/anchors.md`, `references/charter.md`, generated `SKILL.md` last — plus a report listing written paths and verification notes: evidence source classes scanned, question shapes, generated SKILL.md order, anti-slop search results, compact frontmatter description, and write-safety confirmation.
-
-## Provenance
-
-Origin: odin-1.x current skill `skills/generate-my-taste/SKILL.md`. Revision: null (unpinned working copy). License: project-owned (no third-party license identifier). Adaptation: clean-room re-statement as a self-contained ODIN 2.0 procedure preserving the taste-skill-generator observable contract — evidence scan order, candidate inclusion gating, confirmation forks, synthesis-preview gate, write order and collision safety, generated skill shape, and anti-slop discipline — with pointers to non-retained reference files replaced by inlined load-bearing criteria.

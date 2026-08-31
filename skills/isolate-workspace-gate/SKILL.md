@@ -51,7 +51,3 @@ Partial results are never silently accepted. Each failure class has a specific s
 - **On success**: the isolated workspace absolute path, the branch name, and confirmation that the baseline test suite is green.
 - **On in-place fallback**: the current working directory, the branch name, the fallback reason, and test suite status.
 - **On test failure**: the workspace path, the branch name, and the test failure summary with a proceed-or-investigate question.
-
-## Provenance
-
-Adapted from `obra/superpowers` `skills/using-git-worktrees/SKILL.md` at revision `b36e0829c6d0140e93cfef2ca599b1b07d4a7797`. License: MIT, Copyright 2025 Jesse Vincent. The detection-first isolation gate (GIT_DIR vs GIT_COMMON, superproject submodule guard, consent-authorization bridge, green-baseline gate) is preserved as the core mechanism. Translation to ODIN worktree pattern is a clean-room adaptation; no third-party expression is copied.

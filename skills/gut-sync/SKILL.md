@@ -36,7 +36,3 @@ description: 'Use when a user resumes work and needs an orientation card without
 
 ## Output
 A small orientation card with three sections - Shape, Invariants, Smell locations - each populated from workspace reads or marked unknown.
-
-## Provenance
-
-Origin: user-curated resume/orientation workflow (project-owned:user-curated-skill-ideas, candidate curated-012). Revision: none pinned. License: project-owned. Adaptation: clean-room restatement of the curated brief; no third-party expression copied.

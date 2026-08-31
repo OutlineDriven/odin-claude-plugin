@@ -34,7 +34,3 @@ description: 'Use when material arrives without a fully formed ask or the ask is
 
 ## Output
 A one-line intent proposal grounded in the data, a next-step sketch, and a confirm/correct/adjust prompt. No file, state, or remote change.
-
-## Provenance
-
-Origin: https://github.com/LilMGenius/paperthin, revision 3bca079a51bcfff5dafb53d1d7f9f523d66ee317, path skills/depth/aim/SKILL.md. License MIT (c) 2026 LilMGenius; NOTICE vendors verbatim material from mattpocock/skills (MIT, (c) 2026 Matt Pocock) with per-source attribution. Clean-room adaptation: the proposal-not-question intent reflex and read-before-propose mechanism are re-expressed in ODIN 2.0 contract form; no verbatim vendor material is copied.

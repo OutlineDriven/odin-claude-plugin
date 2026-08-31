@@ -70,7 +70,3 @@ Create mode runs steps 1-13 in order. Adapt mode runs steps 14-17. Ask every que
 
 ## Output
 Return, in order: plain-markdown `TONE.md` with the stable step-12 sections and pass conditions; or, in Adapt mode, the appended channel section or `TONE-<channel>.md`; never PDF, decorative formatting, or ASCII art.
-
-## Provenance
-
-Origin: samber/cc-skills, revision f9953962e135235137628ea92d06ea085688031f, license MIT. Clean-room adaptation: the voice-fixed/tone-modulated distinction, the NN/g four-dimension non-midpoint rule, and research-first coverage of uncovered categories are preserved as mechanisms, but no third-party expression is copied.

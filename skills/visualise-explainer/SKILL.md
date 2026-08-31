@@ -42,9 +42,3 @@ Partial-result rule: never emit an explainer with non-functional controls. If an
 
 ## Output
 A self-contained HTML document with working controls and live-updating state, delivered in a visualizer fence for sandboxed iframe rendering.
-
-## Provenance
-
-- Origin: https://github.com/bentossell/visualise at revision 35cd185b58af5db2f9d0fe13d9872b544a467483
-- License: MIT (README-only declaration; no dedicated LICENSE file at this revision). Preserve copyright and full MIT text.
-- Adaptation: clean-room rederivation of mechanisms from upstream SKILL.md, references/design-system.md, and references/components.md. No third-party expression copied. Module remapped from odin-design to odin-create-advanced per editorial advanced-tier ruling.

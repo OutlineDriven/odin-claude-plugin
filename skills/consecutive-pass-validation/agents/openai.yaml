@@ -1,3 +1,0 @@
-interface:
-  display_name: "Consecutive Pass Validation"
-  short_description: "Use when a result must prove repeated quality rather than one"

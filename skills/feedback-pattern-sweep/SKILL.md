@@ -37,7 +37,3 @@ description: 'Use when recent resolved feedback may reveal a broader recurring d
 ## Output
 
 A terminal classification (`success`, `capped`, `stalled`, `blocked`, `exhausted`, or `pending`) plus the root-cause clusters, per-root recurrence results, and the run receipt.
-
-## Provenance
-
-- Profile P-CATALOG: source https://signals.forwardfuture.com/loop-library/catalog.json. Derived provenance ledger records catalog number, URL, access date, and no-expression-reuse attestation. Expression reuse: none.

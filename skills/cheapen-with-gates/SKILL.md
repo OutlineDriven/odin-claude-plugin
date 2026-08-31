@@ -51,7 +51,3 @@ description: 'Use when an agent workflow or pipeline is too expensive and a cost
 
 ## Output
 One append-only experiment-log entry per rung containing rung name, pre-registered estimate, measured dollar range, N=5 gate results, judgment-audit results, and a terminal classification of adopted or dead; a dead entry names the measurement that killed it and the standing bar; no workflow change lands unless the rung is adopted.
-
-## Provenance
-
-Origin: github.com/obra/superpowers, file docs/superpowers/specs/2026-06-10-strict-cost-sdd-design.md, revision b36e0829c6d0140e93cfef2ca599b1b07d4a7797. License: MIT, holder Jesse Vincent, 2025. Clean-room adaptation: the pre-registered cost ladder, judgment guardrail with enumerated judgment points, N=5 gate battery plus judgment audit, post-hoc claim re-attribution, and negative-results register with standing bar are restated as a self-contained agent cost-engineering procedure; no source expression is copied.

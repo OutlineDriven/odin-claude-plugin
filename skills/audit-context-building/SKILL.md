@@ -44,7 +44,3 @@ No vulnerability names, fixes, proofs-of-concept, or severity ratings are inputs
 
 ## Output
 `audit-context/DOSSIER.md` plus one file per analyzed function under `audit-context/functions/`. The dossier records entry points, actors, persistent state, cross-function invariants, unenforced assumptions (`nothing found`), disagreements (both sides quoted), coverage, and open questions, each with source locations where a location exists. It contains no severity ratings, fixes, vulnerability names, or proofs-of-concept.
-
-## Provenance
-
-Origin: Trail of Bits skills plugin `audit-context-building`, https://github.com/trailofbits/skills, revision `d1f1575cff97816e5cc08af66cd2506099c681d3`. License: CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse `trail-of-bits-mark.svg` as branding. Adaptation: procedural restatement preserving the multi-function orchestration, context-isolation, and dossier end state; modifications marked; no Trail of Bits expression copied verbatim and no trademark or branding reused.

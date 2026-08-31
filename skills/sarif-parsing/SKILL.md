@@ -54,7 +54,3 @@ One of:
 - A converted artifact in the requested format (CSV, HTML, or SARIF variant).
 - An aggregation summary table with row counts grouped by the requested dimension and any aggregation metadata (tool name, run date, total result count).
 - A gating report listing each evaluated rule and its pass/fail status.
-
-## Provenance
-
-Origin: Trail of Bits Skills (`https://github.com/trailofbits/skills`); pinned revision `d1f1575cff97816e5cc08af66cd2506099c681d3`; path `plugins/static-analysis/skills/sarif-parsing/SKILL.md`; license `CC-BY-SA-4.0`. Adapted from the Trail of Bits static-analysis plugin. Attribution and source link are preserved. Modifications are marked. Adaptations are licensed ShareAlike under CC-BY-SA-4.0. No trademark rights claimed; `trail-of-bits-mark.svg` is not reused.

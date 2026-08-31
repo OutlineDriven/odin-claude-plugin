@@ -102,7 +102,3 @@ Non-converged result: if the report cannot be generated at all, the skill return
 
 ## Output
 A self-contained report.html in the scratch output directory: normalized 0-10 efficiency score (always), normalized 0-10 code quality score or N/A, per-category findings with evidence-cited turn excerpts, and ranked improvement suggestions with potential score impact.
-
-## Provenance
-
-Adapted from warpdotdev/common-skills (https://github.com/warpdotdev/common-skills) at commit f589e224907eda566c13755529f59db563090d14 under MIT license (Copyright (c) 2026 Denver Technologies, Inc). Original scripts (collect_sessions.py, warp_decoder.py, render_report.py), scorer definitions (efficiency.md, code-quality.md), and reference materials (skill-improvements.md, supported-harnesses.md) are re-implemented as inline procedures in this skill. The vendored third-party pierre-diffs.js bundle (~1.1 MB) from the original is excluded; report rendering uses self-contained HTML with embedded CSS instead. Mechanisms rewritten in ODIN style with attribution per MIT permissiveness.

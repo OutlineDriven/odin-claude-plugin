@@ -43,7 +43,3 @@ Investigate rather than pattern-match. Every codebase enforces authorization dif
 
 ## Output
 A markdown report with: a brief description of the codebase's authorization model; findings each tagged with an ID, severity, confidence, location, the question investigated, traced steps, evidence snippet, impact, and an enforcing suggested fix; a "Needs Manual Verification" section for MEDIUM items; and an "Areas Not Reviewed" section listing uncovered endpoints or flows.
-
-## Provenance
-
-Adapted clean-room from the Django access-control review procedure in `getsentry/skills` (revision `c2f99a5b04b4cd992ec3022d7c2c3e23e938d241`, Apache-2.0). The investigation-over-pattern-matching approach, the core authorization question, the confidence tiers, and the enforce-not-document fix rule are preserved; expression is rewritten.

@@ -44,7 +44,3 @@ Partial-result rule: if the HTML file is not written and validated, discard all 
 
 ## Output
 A self-contained HTML slide deck in the diagrams directory, optionally a `.pptx` beside it, with both paths reported.
-
-## Provenance
-
-Adapted from `nicobailon/visual-explainer` (MIT) at `7163c3e10660912e0b89e1af465db9f387282b88`. Source files: `plugins/visual-explainer/commands/generate-slides.md`, `plugins/visual-explainer/templates/slide-deck.html`, `plugins/visual-explainer/references/slide-patterns.md`, `plugins/visual-explainer/references/css-patterns.md`, `plugins/visual-explainer/references/libraries.md`, `plugins/visual-explainer/pptx/export.mjs`, `plugins/visual-explainer/pptx/README.md`, `plugins/visual-explainer/SKILL.md`. MIT notice retained. Clean-room rederivation of the slide-deck generation procedure; HTML template rewritten from scratch.

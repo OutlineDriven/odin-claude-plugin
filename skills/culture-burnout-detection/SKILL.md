@@ -42,7 +42,3 @@ Two Culture Index charts for one person are required: the Survey graph (who they
 
 ## Output
 Return, in order: subject and evidence limits; energy utilization; material trait movements; stress, frustration, burnout, disengagement, and flight-risk signals; current impact; nonclinical workplace recommendations; timeline; explicit uncertainties.
-
-## Provenance
-
-Origin: https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3, file /plugins/culture-index/skills/interpreting-culture-index/workflows/detect-burnout.md. License CC-BY-SA-4.0. Preserve Trail of Bits attribution and the source link. This is an adaptation: modifications are marked, adaptations are licensed ShareAlike under CC-BY-SA-4.0, no trademark rights are claimed, and trail-of-bits-mark.svg is never reused as branding. The two-chart temporal comparison, energy-utilization thresholds, arrow-movement signals, per-trait raising/dropping interpretation, polarizing-shift and opposite-pattern warnings, stress-source categories, 3-6 month risk horizon, D-trait stress check, and the report template are preserved from the source workflow.

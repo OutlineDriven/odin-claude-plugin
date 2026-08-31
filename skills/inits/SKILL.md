@@ -39,7 +39,3 @@ A partial draft is not success. Return it only as a partial result with unsuppor
 
 ## Output
 On success, the concrete artifact is the resolved `AGENTS.md`, accompanied by a report listing evidence files actually read, human-supplied rules, applied additions or changes, applied removals with reasons, and the rollback path. Otherwise, output the exact `blocked` classification and any partial-state or rollback details required above.
-
-## Provenance
-
-Adapted from the project-owned ODIN 1.x `init` skill at `skills/init/SKILL.md` (candidate `current:current-b:current:init`). No source revision or license identifier was supplied. This clean adaptation retains the normative-first admission gate, the non-derivability test, evidence from files actually read, descriptive-line removal, and the prohibition on fabricated rules or rationale.

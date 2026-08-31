@@ -43,7 +43,3 @@ On invalid input, unresolved target, authentication failure, read failure, or an
 
 ## Output
 One terminal classification: `success` with the pull request URL and fresh-read proof; `no-op` with the same proof; `blocked` with the named pre-mutation or command failure; or `partial-result` with the pull request URL and observed post-submission state.
-
-## Provenance
-
-Adapted from `getsentry/skills`, candidate `source:source-sentry:sentry-pr-link-issue`, at revision `c2f99a5b04b4cd992ec3022d7c2c3e23e938d241`, licensed Apache-2.0. This procedure preserves the source mechanism of using `gh` to append issue references to a pull request body while restating it as a self-contained ODIN contract.

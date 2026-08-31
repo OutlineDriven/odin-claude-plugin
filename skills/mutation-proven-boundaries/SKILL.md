@@ -130,7 +130,3 @@ Partial-result rule: stop at the first failure. Do not commit a broken state.
 - `<packages-root>/README.md` documenting the convention.
 
 The done predicate is satisfied when three sequential runs of `lint:boundaries` produce: pass, non-zero, then pass again.
-
-## Provenance
-
-Origin: `mattpocock/skills` (mattpocock/skills, MIT). Adaptation: clean-room re-derivation from the dependency-cruiser entry-point boundary enforcement mechanism with mutation-verified pass/fail/revert proof. The dependency-cruiser config is derived from `skills/in-progress/setup-ts-deep-modules/dependency-cruiser.config.cjs` at revision `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76`. Copyright (c) 2026 Matt Pocock, MIT.

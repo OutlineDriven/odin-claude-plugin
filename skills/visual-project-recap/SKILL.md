@@ -49,10 +49,3 @@ description: 'Use when a developer returns to a project or loses context. Produc
 
 ## Output
 A self-contained HTML file at `<project-root>/diagrams/visual-project-recap.html` with 8 labeled sections (Project name/branch, Config files, Source entry points, Module structure, Dependencies, Test files, Documentation, Build and deploy), each derived from evidence in the project tree.
-
-## Provenance
-
-- **Origin**: nicobailon/visual-explainer, plugin `visual-explainer`
-- **Source revision**: 7163c3e10660912e0b89e1af465db9f387282b88
-- **License**: MIT — expression reuse and clean-room rederivation permitted; MIT notice retained
-- **Adaptation**: clean-room rederivation of the 8-section HTML recap page procedure; original trigger and authority semantics preserved; module remapped from `odin-knowledge` to `odin-research` after module audit determined this is common context-recovery work rather than advanced adversarial research

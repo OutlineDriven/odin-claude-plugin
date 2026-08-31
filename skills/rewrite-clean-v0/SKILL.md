@@ -36,7 +36,3 @@ Partial-result rule: if rewrite is interrupted, the on-disk artifact is left in 
 
 ## Output
 The rewritten artifact on disk. A report listing what was removed and what was kept. A pass that finds nothing to genuinely improve changes nothing.
-
-## Provenance
-
-Origin: odin-current. No external revision pin. License: project-owned. Adaptation: procedure and completion language from the source skill body; mechanism preserved, structure rewritten to contract section template. No third-party expression copied.

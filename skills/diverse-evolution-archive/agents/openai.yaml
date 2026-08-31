@@ -1,3 +1,0 @@
-interface:
-  display_name: "Diverse Evolution Archive"
-  short_description: "Use when an ML program or model needs bounded population search"

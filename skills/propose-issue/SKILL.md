@@ -42,7 +42,3 @@ No failure path may claim completion. Partial evidence and drafts may be returne
 
 ## Output
 Return exactly one terminal classification: - **Filed:** the target repository and confirmed issue URL. - **Aborted:** the target repository when known, the retained draft or duplicate match when available, and the specific failed or blocked criterion. Never return both classifications.
-
-## Provenance
-
-Adapted from the ODIN project-owned `skills/propose-issue/SKILL.md` candidate `current:current-c:current:propose-issue`. No pinned revision or external license identifier was supplied; this is a semantic-minimum project-owned adaptation preserving source grounding, cause-versus-symptom analysis, duplicate detection, the six-part filing gate, and confirmed remote publication.

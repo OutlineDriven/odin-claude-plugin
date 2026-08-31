@@ -51,7 +51,3 @@ Partial-result rule: the batch is either complete per the Done contract or fully
 A batch summary with sections in order: branch/worktree and ownership, modules removed from exclusion, files changed, key typing fixes, validation (mypy, pre-commit, pytest pass/fail with scope), and notes (remaining blockers, new ignore entries).
 
 Terminal classification: `complete` when the Done contract holds; otherwise `blocked` with the named failure class and the recovery taken. Both carry the batch summary; a blocked result never claims passing checks.
-
-## Provenance
-
-Origin: getsentry/skills, path `skills/typing-exclusion-worker/SKILL.md`, pinned revision `c2f99a5b04b4cd992ec3022d7c2c3e23e938d241`, license Apache-2.0. Adapted to the ODIN 2.0 skill contract: the batch workflow, scope limits, stop conditions, and summary template are retained from the Apache-2.0 source; the purpose framing, standalone best-practices list, and section structure were rewritten for this catalog rather than copied verbatim.

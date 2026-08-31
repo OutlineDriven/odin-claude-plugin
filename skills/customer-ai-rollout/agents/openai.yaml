@@ -1,3 +1,0 @@
-interface:
-  display_name: "Customer AI Rollout"
-  short_description: "Use when a customer AI change needs a dry-run, monitored"

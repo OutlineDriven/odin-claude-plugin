@@ -44,13 +44,3 @@ Rollback: Slack messages cannot be deleted by this skill. Recovery, if needed, i
 
 ## Output
 One JSON object: `ok`, `ts`, and `permalink` on success; `ok: false` plus an `error` field naming the failure class and API detail on failure.
-
-## Provenance
-
-**Origin:** Warp client-release-agent-oss — https://github.com/warpdotdev/client-release-agent-oss
-**Revision:** `9c1394804c5148820a9bab6c01802fde4330d725`
-**License:** MIT — https://opensource.org/licenses/MIT
-
-MIT requires the copyright notice and permission notice in all copies or substantial portions; adapted SKILL.md and script files must retain the license and attribution.
-
-**Adaptation statement:** Adapted from Warp client-release-agent-oss for the ODIN skill catalog. Thread-reply mechanism preserved; scoped to one Slack API call for one reply. Authority classified as `human-only-external-or-irreversible` per ODIN Q14. Credentials are treated as ambient operator-managed capabilities — no token or secret is ever requested from or exposed to the user. No third-party expression copied; clean-room adaptation from the documented API interaction pattern.

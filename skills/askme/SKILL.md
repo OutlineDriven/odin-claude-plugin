@@ -61,7 +61,3 @@ description: 'Explore intent with Verbalized Sampling before planning when the t
 
 ## Output
 Chat output only: the VS block (exhaustive, or once at the start of adversarial), the batched question sets, and a terminal intent summary stating the consolidated direction, assumptions, and discharged questions. No file, persisted artifact, or state transition is produced.
-
-## Provenance
-
-Origin: ODIN 1.x current skill `skills/askme/SKILL.md` (project-owned, no third-party license declared). Revision: current working copy (unpinned). License: project-owned marker. Adaptation: clean-room rewrite into the ODIN 2.0 contract format; the Verbalized Sampling protocol, three-mode selection, collaborative→adversarial escalation, per-axis single-select question contract, and override-checklist antipattern are preserved as mechanisms, with prose condensed to the semantic minimum. Escalation signal patterns are treated as guidance (Cursor Plan Mode practices; NeurIPS 2025 Multi-Agent Clarification), not copied expression.

@@ -40,7 +40,3 @@ Supply the current business season before analysis: high-growth/turnaround, cons
 
 ## Output
 A team composition analysis report in chat text with sections in procedure order: team roster, balance assessment, current gaps, friction points, hiring recommendations, team strengths, watch areas.
-
-## Provenance
-
-Adapted from Trail of Bits skills, https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3, workflow analyze-team.md and reference team-composition.md. Licensed CC-BY-SA-4.0; preserve Trail of Bits attribution and the source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding. Clean-room adaptation: the Gas/Brake/Glue balance model and the trait-distance-from-arrow procedure are re-expressed; no third-party prose is copied.

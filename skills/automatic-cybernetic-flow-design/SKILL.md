@@ -38,7 +38,3 @@ The user must describe the interactive system: what state it controls, what it o
 
 ## Output
 A cybernetic flow design document ordered: sensors, actuators, feedback, delay, oscillation, wiring diagram, dynamic-routing note — the document is the terminal artifact.
-
-## Provenance
-
-Origin: user-curated skill idea `automatic-cybernetic-flow-design` from `project-owned:user-curated-skill-ideas`, candidate `curated:curated-ideas:curated-022`. Revision: none pinned. License: project-owned; clean-room adaptation. The one-line brief "generate sensors, actuators, feedback, delay, and oscillation for interactive systems" was expanded into a bounded, self-contained procedure with explicit failure and rollback rules. No third-party expression was copied.

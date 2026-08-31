@@ -40,7 +40,3 @@ description: 'Use when asked to audit, profile, or debug page load performance, 
 
 ## Output
 A structured performance audit report with sections in order: Summary (framework/bundler, overall grade, top three issues), Core Web Vitals (LCP/CLS/INP/FCP/TTFB with median, spread, pass/fail against Google thresholds), Network analysis (transfer size, request count, largest assets, render-blocking resources), Accessibility snapshot, JavaScript execution (long tasks, blocking time, third-party contribution), Prioritized issues (ranked with affected metric, estimated impact, recommendation), and Framework-specific guidance.
-
-## Provenance
-
-Adapted from warpdotdev/oz-skills `.agents/skills/web-performance-audit/SKILL.md` at revision 6c08c49fc6c51b8f768bf8c53c041bc06a160765. Original license: MIT (Copyright 2026 Warp). This adaptation is clean-room and licensed under MIT. The source path is not in the Apache-2.0-restricted subdirectories (mcp-builder, webapp-testing).

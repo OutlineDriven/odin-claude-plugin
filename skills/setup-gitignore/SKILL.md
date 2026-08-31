@@ -113,7 +113,3 @@ Optional input is a set of empirical ignore patterns explicitly confirmed by the
 ## Output
 
 The repository-root `.gitignore`, created or updated with `LANGUAGE TEMPLATES`, `AI TOOLING`, `IDE / EDITOR`, and `EMPIRICAL` anchors. The response reports before/after untracked counts, remaining paths, and the snapshot path when an existing file was merged.
-
-## Provenance
-
-Origin: `odin-current` (`current:current-c:current:setup-gitignore`). Revision and license: unspecified by the source. Adaptation: ODIN 2.0 self-contained restatement preserving per-repository scope, snapshot-before-merge, network template composition, local baseline blocks, empirical confirmation, and byte-idempotent anchored merging.

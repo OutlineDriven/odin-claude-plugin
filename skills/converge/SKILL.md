@@ -34,7 +34,3 @@ Required inputs are the open decision field (the set of considered options, reco
 
 ## Output
 A local decision record containing the chosen option and its distinguishing rationale, with the field marked collapsed.
-
-## Provenance
-
-Origin: local user-curated skill brief (skill-foundry-user-curated-ideas.md, "Divergence and convergence" group). Revision: unpinned. License: project-owned. Adaptation: clean-room adaptation of the user-curated convergence workflow — collapses the decision field to one decision with recorded rationale, distinct from diverge (expand the field) and solidate (freeze the chosen artifact).

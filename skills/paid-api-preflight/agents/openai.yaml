@@ -1,3 +1,0 @@
-interface:
-  display_name: "Paid API Preflight"
-  short_description: "Use when a paid API call needs a fresh integrity-checked"

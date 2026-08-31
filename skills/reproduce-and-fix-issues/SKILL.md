@@ -47,10 +47,3 @@ disable-model-invocation: true
 ## Output
 
 A verified fix with captured evidence and cleanup, or a blocked/non-converged result with evidence at the stopping step, and if a draft PR is opened the PR URL and change summary.
-
-## Provenance
-
-Origin: pstack/automations/benny/skills/reproduce-and-fix-issues (MIT, Lauren Tan / poteto).
-Pinned revision: 68836ddaf5697224520f1847d90cdb90ca8babaa.
-License: MIT.
-Adaptation: Clean-room reimplementation of the Benny reproduce-and-fix workflow adapted for ODIN 2.0 authority model. MIT license evidence: pstack/LICENSE blob 6b5400237fdf6545be0b8fae370d6f2fcff8fb25 (1067 bytes).

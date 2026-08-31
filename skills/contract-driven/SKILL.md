@@ -48,7 +48,3 @@ Optional:
 
 ## Output
 Local code with every planned PRE/POST/INV contract implemented at its verification layer, plus one violation test per contract. Violations fail explicitly at the boundary. Each contract traces to a requirement by ID.
-
-## Provenance
-
-Origin: ODIN 1.x current skill `skills/contract-driven/SKILL.md`. Revision: unpinned current. License: project-owned. Adaptation: re-expressed as a self-contained Design-by-Contract procedure. It preserves PRE/POST/INV extraction, the static-over-runtime verification hierarchy, and the per-contract violation-test mechanism; no third-party expression was copied.

@@ -125,7 +125,3 @@ description: 'Run detailed single-snapshot Trailmark analysis for hotspots, entr
 ## Output
 
 A JSON payload ordered as languages, summary, preanalysis, attack_surface, hotspots, proxy_nodes, subgraphs, then type_reference_samples when supported; empty sections remain explicit and no missing evidence is fabricated.
-
-## Provenance
-
-Adapted from Trail of Bits trailmark-structural skill (github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3, CC-BY-SA-4.0). Modifications made: restructured into ODIN 2.0 contract format, consolidated execution steps, removed peer-skill cross-references. Adaptations licensed CC-BY-SA-4.0 per the ShareAlike requirement. Trail of Bits attribution preserved; no trademark rights claimed; trail-of-bits-mark.svg not reused as branding.

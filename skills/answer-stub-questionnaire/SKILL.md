@@ -45,7 +45,3 @@ A Markdown file at `answer-stub-questionnaire-<slug>.md` in the current director
 - `## Anything else?`: a closing catch-all for things not asked.
 
 Report the file path.
-
-## Provenance
-
-Origin: mattpocock/skills, path `skills/productivity/to-questionnaire/SKILL.md`. Pinned revision: `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76`. License: SPDX MIT, Copyright (c) 2026 Matt Pocock; the copyright and permission notice is retained in `licenses/NOTICE`. Adaptation: rewritten into the ODIN 2.0 contract format; the distinguishing mechanism is preserved — the questionnaire grills the sender (not the subject) and carries prioritised one-idea questions with answer stubs and ambiguity rationale.

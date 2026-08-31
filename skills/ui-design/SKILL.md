@@ -101,9 +101,3 @@ description: 'Use when directing, building, or auditing React/Next.js UI in Tail
 
 ## Output
 Return the selected mode’s artifact: Direction decision set, Build code, Audit JSON findings and ship verdict, divergent Options, semantic Scaffold, applied Retrofit, or extracted Componentize result.
-
-## Provenance
-
-Origin: mblode/agent-skills, revision e97a3b383f5944f90d41eb92b24b4fb3b917a7f9.
-License: MIT — Copyright (c) 2026 Matthew Blode. Preserve the copyright notice and the license text in all copies or substantial portions. Third-party obligations are documented in the root PROVENANCE.md.
-Adaptation: Clean-room rewrite per MIT reuse constraints. Trigger, authority, mode resolution, audit process, deslop rungs, quality bar, and verification derived from the original skill design; written to ODIN 2.0 SKILL.md schema without copying expression.

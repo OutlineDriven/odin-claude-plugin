@@ -41,10 +41,3 @@ description: 'Use when the user says remember this or settles one durable fact, 
 
 ## Output
 One indexed, recallable strict UTF-8 JSONL line with RFC3339 time, project, optional tags, and redacted fact, followed by its index key and recall confirmation; otherwise a `rejected-content`, `schema-invalid`, `store-unavailable`, or `blocked` classification with reason and no mutation.
-
-## Provenance
-
-- Origin: https://github.com/vshulcz/deja-vu (cmd/deja/main.go runRemember, internal/sources/notes.go, cmd/deja/mcp.go remember tool, docs/ARCHITECTURE.md Notes source).
-- Pinned revision: 6f766fd4716edcaf24662c794368e420e5058f47.
-- License: MIT (LICENSE); Copyright (c) 2026 Vladislav Shulcz. Mechanisms rewritten in ODIN style; no third-party expression copied.
-- Adaptation: append-only local note capture preserved with redaction and transcript/code-obvious rejection rules; routed to odin-research; model+human invocation.

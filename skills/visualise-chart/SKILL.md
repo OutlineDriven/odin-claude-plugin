@@ -36,7 +36,3 @@ No mutation occurs; the only output is the visualizer fence or a named failure c
 
 ## Output
 A visualizer fence containing a self-contained HTML/SVG/canvas chart fragment.
-
-## Provenance
-
-Origin: https://github.com/bentossell/visualise, revision 35cd185b58af5db2f9d0fe13d9872b544a467483. License: MIT. Adaptation: clean-room rederivation of chart-snippet generation mechanism from the upstream SKILL.md, retaining the visualizer-fence output pattern, read-only authority, and CDN-allowlist constraint. No upstream expression copied directly.

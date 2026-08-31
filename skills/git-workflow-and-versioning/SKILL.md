@@ -43,7 +43,3 @@ Optional: changelog path, remote name, tag message, prerelease suffix.
 
 ## Output
 A history of atomic commits, an annotated version tag, and a changelog section matching the shipped contract changes, plus a report listing the commits, the tag, the changelog diff, and confirmation that no unauthorized protected-branch action occurred; or a blocked or non-converged result naming the failing step.
-
-## Provenance
-
-Origin: addyosmani/agent-skills, paths skills/git-workflow-and-versioning/SKILL.md and commands/ship.toml. Pinned revision: d2c37ef6225dd8726cdd369a8030307f48592d26. License: MIT, Copyright (c) 2025 Addy Osmani; the copyright notice and MIT permission text are retained in derived distributions. Adaptation: rewritten as ODIN consent-gated release and versioning discipline; source mechanisms preserved are atomic-commit grouping, version-bump derivation from contract changes, changelog-to-contract matching, and consent-gated protected-branch and force-push actions.

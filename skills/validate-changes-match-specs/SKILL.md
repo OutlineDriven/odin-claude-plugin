@@ -130,7 +130,3 @@ The skill reads the current branch diff and any specs present in the repository.
 
 ## Output
 A summary with sections in order: specs checked, mismatches found, resolutions applied, files changed, validation result, commit/push status, and remaining unresolved or acknowledged mismatches.
-
-## Provenance
-
-Origin: `https://github.com/warpdotdev/common-skills` at revision `f589e224907eda566c13755529f59db563090d14`. License: MIT (`MIT License; Copyright (c) 2026 Denver Technologies, Inc.; adaptation and redistribution permitted provided copyright notice and permission notice are retained in copies or substantial portions; no copyleft obligations`). Adaptation: clean-room rewrite in ODIN 2.0 style. Attribution entered in the module provenance ledger. The vendored `pierre-diffs.js` third-party bundle is not carried over.

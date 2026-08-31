@@ -2,7 +2,7 @@
 
 OutlineDriven-authored material in this package is Apache-2.0. See the repository `LICENSE`.
 
-This package ships 26 public skills from the canonical `skills/<slug>/` tree. Package-local skill copies are generated only at pack time.
+This package ships 25 public skills from the canonical `skills/<slug>/` tree. Package-local skill copies are generated only at pack time.
 
 | Skill | Strategy | Adaptation | Target | Origin |
 |---|---|---|---|---|
@@ -11,7 +11,6 @@ This package ships 26 public skills from the canonical `skills/<slug>/` tree. Pa
 | `attack-shape` | B | byte-reuse | `skills/attack-shape/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `automatic-cybernetic-flow-design` | B | byte-reuse | `skills/automatic-cybernetic-flow-design/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `automatic-freeform-graphs-design` | B | byte-reuse | `skills/automatic-freeform-graphs-design/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
-| `automation-plan-first-builder` | B | byte-reuse | `skills/automation-plan-first-builder/` | https://github.com/microsoft/skill-recorder @ `c7f2fe4402527a0eb7f4fc1b653bf438229bac61` (MIT) |
 | `devils-advocate-architecture` | B | byte-reuse | `skills/devils-advocate-architecture/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `docs-canvas` | B | byte-reuse | `skills/docs-canvas/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
 | `fail-design` | B | byte-reuse | `skills/fail-design/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |

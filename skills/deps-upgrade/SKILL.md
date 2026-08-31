@@ -1,6 +1,6 @@
 ---
 name: deps-upgrade
-description: 'Use when dependency upgrades need tiered batches for CVEs, a major release, forced compatibility, scheduled hygiene, or a pre-release lockfile audit. Not for cadence-driven sweeps — use dependency-sweeper; not for PR queue triage — use dependency-pr-queue-triage.'
+description: 'Use when dependency upgrades need tiered batches for CVEs, a major release, forced compatibility, scheduled hygiene, or a pre-release lockfile audit. Not for cadence-driven sweeps — use dependency-sweeper; not for PR queue triage — use github-backlog-triage.'
 ---
 
 # Deps upgrade
@@ -73,7 +73,3 @@ Must be supplied: a working repository with VCS history; toolchains for each in-
 
 ## Output
 A terminal `done` or `blocked` upgrade report with sections in order: concern-atomic commits, per-package tiers and versions, checks per bin, major migration notes, license and SBOM churn, lockfile audit, post-upgrade CVE scans, follow-up items.
-
-## Provenance
-
-Origin: ODIN project-owned `odin-1.x-current-skill`, path `skills/deps-upgrade/SKILL.md`; no pinned upstream revision. License: project-owned. Adapted to the ODIN 2.0 literal format (section order, authority translation, semantic minimum); the retained mechanism is manifest/lockfile dependency upgrade under per-tier gates with CVE re-scan.

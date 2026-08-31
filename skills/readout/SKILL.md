@@ -81,7 +81,3 @@ No index failure is a successful partial result because the frozen done predicat
 ## Output
 
 `~/.readouts/<output_name>.html` (self-contained HTML with brief, UTC timestamp, escaped source text) and `~/.readouts/index.html` (deterministically sorted self-contained index), ordered: readout, index.
-
-## Provenance
-
-Origin: `warpdotdev/common-skills`, revision `f589e224907eda566c13755529f59db563090d14`. License: MIT, Copyright (c) 2026 Denver Technologies, Inc.; preserve the copyright and permission notices in copies or substantial portions. Adaptation: clean-room ODIN 2.0 restatement of the HTML-template, source-embedding, and index-refresh mechanisms. No source support assets or vendored third-party bundle are carried or required.

@@ -41,7 +41,3 @@ description: 'Use when the user requests a deep dive, exploratory analysis, or d
 
 ## Output
 A dated analyses/<name>/ directory containing README.md with the approved plan, explicit cohort definitions, linked SQL and visualization files, a TLDR, key takeaways, and documented source_paths; assets/queries/*.sql files; and assets/visualizations/*.{png,svg,html} files. The directory is the single artifact; no external state is modified.
-
-## Provenance
-
-Adapted from the Warp oz-skills analysis-artifacts skill (https://github.com/warpdotdev/oz-skills, revision 6c08c49fc6c51b8f768bf8c53c041bc06a160765, MIT license, file .agents/skills/analysis-artifacts/SKILL.md). Clean-room adaptation: the plan-approval gate, canonical analyses tree, per-query SQL files, linked visualizations, and honest partial-result reporting are preserved as mechanism; expression is rewritten for the ODIN contract format.

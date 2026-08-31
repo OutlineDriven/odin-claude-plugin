@@ -37,7 +37,3 @@ The target code region or module to analyze. Optional: known call frequencies, p
 
 ## Output
 A report containing: hot-path hypotheses (each labeled as a hypothesis with a benchmark design specifying metric, baseline, and falsification condition), complexity-neutral cold-path simplification proposals (each with the specific simplification and complexity justification), and explicit refusals of complexity theater (each with the complexity cost and claimed gain stated).
-
-## Provenance
-
-Origin: `project-owned:user-curated-skill-ideas`, user-curated skill idea `fastopt-extreme`. Pinned revision: none. License: none (project-owned user curation). Adaptation: clean-room procedural restatement of the one-line curated brief; no third-party expression copied.

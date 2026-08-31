@@ -39,7 +39,3 @@ description: 'Use when a new isolated worktree or branch is requested, or an exi
 
 ## Output
 The isolated worktree's absolute path, current branch, mode used (new-work or isolate-existing-ref), and creation method (native tool or git fallback); or the existing worktree path and branch if already isolated.
-
-## Provenance
-
-Adapted from the current ODIN skill tree (`skills/worktree/SKILL.md` and `skills/worktree/references/git-fallback.md`), project-owned, no pinned revision or third-party license. Mechanisms retained: existing-isolation detection, native-tool-first preference, and git-fallback creation under the `.worktrees/` convention. Rewritten as a self-contained ODIN 2.0 literal with no external reference dependency.

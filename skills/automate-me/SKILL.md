@@ -42,7 +42,3 @@ disable-model-invocation: true
 
 ## Output
 A reviewable PR URL, the skill file path, and a one-line summary of the encoded personal workflow backed by the history evidence or description used — classified done only when the PR URL exists, otherwise blocked with the failure class named.
-
-## Provenance
-
-Origin: cursor/plugins (pstack/skills/automate-me/SKILL.md), pinned revision 68836ddaf5697224520f1847d90cdb90ca8babaa. License: MIT (pstack authored by Lauren Tan, poteto). Adaptation: clean-room rewrite preserving the history-mined personal skill authoring to remote PR mechanism; no third-party expression copied.

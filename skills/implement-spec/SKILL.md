@@ -1,6 +1,6 @@
 ---
 name: implement-spec
-description: 'Use when a ticket DAG from a complete specification needs parallel execution into a green draft PR. Not for a single settled ticket — use implement; not for ticket decomposition — use to-tickets.'
+description: 'Use when a ticket DAG from a complete specification needs parallel execution into a green draft PR. A single approved feature is the degenerate one-ticket DAG. Not for a single settled ticket with no spec — use work; not for ticket decomposition — use to-tickets.'
 disable-model-invocation: true
 ---
 
@@ -47,6 +47,11 @@ For any partial result, report completed tickets, the remaining frontier, commit
 ## Output
 On success, return the ticket-to-commit ledger, empty frontier, integrated commit identifier, passing check evidence, review-clear evidence, draft pull-request URL and head commit, and cleanup result. Otherwise return exactly one terminal classification—`invalid-input`, `blocked`, `ticket-failed`, `integration-conflict`, `check-failed`, `review-blocked`, `non-converged`, `publication-failed`, or `cleanup-blocked`—with the partial-result ledger and the next human-resolvable blocker.
 
-## Provenance
+## Single-feature case (degenerate DAG)
 
-Adapted from `mattpocock/skills` paths `skills/in-progress/implement-spec/SKILL.md` and `skills/in-progress/implement-spec/agents/openai.yaml` at revision `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76`, licensed MIT, Copyright (c) 2026 Matt Pocock. This version preserves parallel ticket-DAG execution, isolated worktree ownership, sparse artifact pointers, integrated verification and review, draft-pull-request publication, and guarded cleanup while rewriting the procedure for this self-contained contract. The required copyright and permission notice is retained in `licenses/NOTICE`.
+When the specification is one approved feature described by a product spec and a tech spec (for example `PRODUCT.md` and `TECH.md`), the DAG has exactly one ticket. Run the procedure with that single ticket: validate it traces to both specs, execute it in one worktree, integrate trivially, and ship the draft PR. Two extra rules apply only to the spec-driven single-feature case:
+
+- **Spec-code alignment in the same PR.** If implementation reveals that intended behavior or design should change, update the checked-in spec immediately rather than leaving it stale. Update the product spec when user-facing behavior or success criteria change; update the tech spec when architecture or validation strategy changes. Do not leave specs and code unsynchronized.
+- **Spec drift is a failure.** If code diverges from a spec, either correct the code or update the spec to match the reality discovered during implementation. Stage the spec updates, code, and tests together in the same PR.
+
+Read the product spec first as the source of truth for user-facing behavior, UX, edge cases, and success criteria; read the tech spec as the source of truth for architecture, module boundaries, sequencing, and implementation shape. If either spec file is absent, stop and report the missing file before writing any code.

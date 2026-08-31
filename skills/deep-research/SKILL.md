@@ -45,7 +45,3 @@ description: 'Use when the user asks to research a topic and produce a thorough 
 
 ## Output
 A prose-first cited Markdown report at ./research/{type}-{topic}-{YYYY-MM-DD}.md (at least 80% prose; bullets only for true lists) with sections for scoped findings by axis, Key Findings, Strategic Recommendations, Risks and Uncertainties, and Next Steps. Every claim carries a source URL; critical claims carry 2+ sources or a confidence:Low label. Optionally a PDF beside the Markdown when requested and a converter is available.
-
-## Provenance
-
-Origin: samber/cc-skills, skills/deep-research/SKILL.md. Pinned revision f9953962e135235137628ea92d06ea085688031f. License: MIT. Clean-room adaptation: the cited research-report workflow, parallel sub-agent fan-out, write-as-you-go discipline, confidence and citation rules, and prose-first report shape are preserved as mechanism; expression is rewritten for this self-contained skill with no dependency on the source's reference or asset files.

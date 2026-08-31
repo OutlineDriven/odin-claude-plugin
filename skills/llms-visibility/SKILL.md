@@ -44,10 +44,3 @@ description: 'Use when asked to add llms.txt, Markdown Accept negotiation, alter
 ## Output
 
 `/llms.txt` at project root (plain text, one absolute URL per line, `Content-Type: text/plain`), optionally `/llms-full.txt`; per-route Markdown Accept handling with `Vary: Accept`; per-route `Link` headers; Content-Signal HTML link tags; and a validation report listing every route, its final headers, and scanner pass/fail.
-
-## Provenance
-
-Origin: https://github.com/evilmartians/agent-skills (skills/llms-visibility/SKILL.md)
-Revision: a2a83b280a2c5b9a6176c5934298fad0224bbce4
-License: MIT — "Copyright and permission notice must be preserved in all copies or substantial portions; adaptation and rewrite are permitted under MIT if attribution is retained."
-Adaptation: This skill translates the Evil Martians llms-visibility procedure into an ODIN 2.0 contract with explicit authority bounds, concrete validation steps, and reversible-rollback failure handling. The core mechanism — llms.txt generation, Markdown Accept negotiation, Link headers, Content-Signal tags — is preserved. ODIN-specific framing (reversible-local authority, check-set-passes done predicate, failure taxonomy) replaces the original skill's execution model.

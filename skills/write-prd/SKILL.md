@@ -54,10 +54,3 @@ disable-model-invocation: true
 
 ## Output
 `reports/prds/prd_<feature_slug>_YYYY-MM-DD.md` — sections in order: TL;DR, Problem Statement, Goals & Success Metrics, Target Users, Scope, Proposed Solution, Technical Considerations, Competitive Context, Open Questions, References; plus an open PR against the default branch.
-
-## Provenance
-
-- Origin: warpdotdev/competitive-intelligence-agent-oss
-- Revision: 9e0363e810a14405ef876fb354562735002797fb
-- License: MIT — MIT notice retained; mechanism adapted.
-- Adaptation: Optional external exports (Google Docs, Notion, Slack) moved outside the required path per Q47/Q51. Evidence-driven citation rule and open-questions section retained. Module remapped from odin-orchestration to odin-create. Human-only authority applied to all write operations.

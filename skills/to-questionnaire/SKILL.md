@@ -82,7 +82,3 @@ A closing catch-all: anything we did not ask that we should know?
 ## Output
 
 A standalone Markdown discovery questionnaire file at `to-questionnaire-<slug>.md` in the current working directory, with per-theme grouped questions ordered by importance, a return route, and a closing catch-all — the user delivers the file and acts on responses.
-
-## Provenance
-
-Origin: current-odin-skill-tree. Adaptation: narrowed to asynchronous elicitation artifact for named recipient; distanced from askme (direct conversation) and research (agent finds answers). No third-party content copied.

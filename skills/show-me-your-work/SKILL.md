@@ -53,7 +53,3 @@ Optional:
 ## Output
 
 Append-only TSV artifact at `log_path` with eleven fields per row (timestamp, session, decision_id, context, decision, rationale, alternatives, consequences, evidence, reviewer, status), ending with a blank line and an `## Attention` section; the done predicate holds when both the row and Attention section are written.
-
-## Provenance
-
-Origin: cursor/plugins pstack/skills/show-me-your-work revision 68836ddaf5697224520f1847d90cdb90ca8babaa. License: MIT (pstack authored by Lauren Tan (poteto) per MIT license block at pstack/LICENSE blob 6b5400237fdf6545be0b8fae370d6f2fcff8fb25). Adapted for ODIN 2.0 clean-room reimplementation. Support files (decision-log-template.tsv, log.sh) not carried; their mechanism reproduced inline.

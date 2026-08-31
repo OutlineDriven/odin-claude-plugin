@@ -51,11 +51,3 @@ description: 'Triage one anchored finding into Promote, Needs manual review, Dep
 ## Output
 
 A single evidence packet with verdict (Promote, Needs manual review, Deprioritize, or Blocked), binding (source anchor, file, line range, function), reachability, boundaries, blast radius, manual review targets, and limitations — ordering: verdict, binding, reachability, boundaries, blast radius, review targets, limitations.
-
-## Provenance
-
-Adapted from Trail of Bits trailmark-finding-triage skill.
-- Origin: https://github.com/trailofbits/skills
-- Revision: d1f1575cff97816e5cc08af66cd2506099c681d3
-- License: CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.
-- Adaptation: Clean-room rewrite for ODIN 2.0 module odin-code-advanced. Procedure derived from source mechanisms (input normalization, output format, query recipes). No third-party expression copied.

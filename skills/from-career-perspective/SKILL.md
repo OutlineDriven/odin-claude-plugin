@@ -34,7 +34,3 @@ The question or topic to analyze. No files, credentials, or external services ar
 
 ## Output
 A career-perspective analysis: the effects of the subject on human trajectories, argued only from the career seat, with no blended lenses.
-
-## Provenance
-
-Origin: user-curated skill brief at `project-owned:user-curated-skill-ideas` (Perspective lenses section). Pinned revision: none. License: project-owned. Adaptation: clean-room restatement of the user's curated lens contract; no third-party expression copied.

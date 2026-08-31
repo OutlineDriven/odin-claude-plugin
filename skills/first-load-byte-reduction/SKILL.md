@@ -37,7 +37,3 @@ description: 'Use when a first screen needs lower transfer bytes without visual 
 ## Output
 
 A terminal classification (`success`, `capped`, `stalled`, `blocked`, `exhausted`, or `pending`) plus the before/after compressed byte counts, pixel-identity confirmation, test result, and the run receipt.
-
-## Provenance
-
-- Profile P-CATALOG: source https://signals.forwardfuture.com/loop-library/catalog.json. Derived provenance ledger records catalog number, URL, access date, and no-expression-reuse attestation. Expression reuse: none.

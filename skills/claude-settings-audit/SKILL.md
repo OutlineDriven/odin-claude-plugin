@@ -58,7 +58,3 @@ description: 'Use when setting up a project, auditing Claude Code settings, or a
 
 ## Output
 A chat report with four parts: a detected-stack summary table (languages, package manager, frameworks, services, build tools); the complete recommended `.claude/settings.json` with `permissions.allow` grouped by category and `permissions.deny` empty; MCP suggestions for `.mcp.json` when Sentry or Linear is detected; and merge instructions when an existing `settings.json` was found.
-
-## Provenance
-
-Adapted clean-room from `getsentry/skills` (`skills/claude-settings-audit/SKILL.md`, revision `c2f99a5b04b4cd99ec3022d7c2c3e23e938d241`, Apache-2.0). The Sentry-internal skill allow list and Sentry-only always-include domains were dropped; the read-only detection and local-config-emit mechanism is preserved.

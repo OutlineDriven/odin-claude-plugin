@@ -50,7 +50,3 @@ description: 'Use when the user runs /ios-device-qa to drive a real iPhone over 
 
 ## Output
 A device QA report containing: the accessor list generated; each verified interaction with its before/after screenshots and the state delta; any bugs found with reproduction steps; unverified interactions with their failure symptom; and the evidence tier (fixture-driven state, provider UI, or actual external-provider success) for each finding. Screenshots and session logs are written under `~/.gstack/`.
-
-## Provenance
-
-Adapted from the gstack `ios-qa` skill (https://github.com/garrytan/gstack, revision 07b59e396c6be5a86619a43151cb9ed62a15ae69), MIT licensed, Copyright (c) 2026 Garry Tan. Clean-room re-derivation of the device QA procedure: the debug-bridge architecture, boot-token rotation, vision-driven screenshot-decide-act-verify loop, capability tiers, and demo-mode override are re-expressed as executable steps without copying the source's gstack preamble, telemetry, AskUserQuestion framework, or runtime tooling.

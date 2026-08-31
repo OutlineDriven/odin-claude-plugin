@@ -39,7 +39,3 @@ description: 'Use when asked to audit validation that looks too clean or self-co
 
 ## Output
 A read-only report with the bounded claim, each firing pattern by name with evidence and fix, the patterns 3–5 self-audit, the optional N=1 auditor comparison, one root independence failure, and a terminal verdict of `independent`, `not independent`, or `blocked`.
-
-## Provenance
-
-Adapted from LilMGenius/paperthin at revision `3bca079a51bcfff5dafb53d1d7f9f523d66ee317`, leakage-audit skill under `skills/depth/`, under MIT. This is a clean-room restatement of the validation self-audit mechanism; no vendored expression was copied. See root `PROVENANCE.md` for the retained third-party notice and reuse obligations.

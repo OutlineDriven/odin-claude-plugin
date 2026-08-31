@@ -37,11 +37,3 @@ Required: the set of non-negotiable constraints the change must satisfy, each st
 
 ## Output
 Constraints record naming each invariant with its check, the delivered code change in which every constraint holds, and a check-run report stating which constraints passed, which floor-guard moves were flagged (none on success), and any constraint that could not be checked and why.
-
-## Provenance
-
-Adapted from `addyosmani/agent-skills`, `skills/constraint-driven-development`, revision `d2c37ef6225dd8726cdd369a8030307f48592d26`, MIT license. Copyright (c) 2025 Addy Osmani; the MIT permission notice applies to derived distributions. The source establishes a project quality bar as a written contract plus a diff-scoped floor guard; this adaptation narrows it to implementing under given non-negotiable constraints, extracting them into invariants up front and checking every change. Procedure rewritten for this contract; no third-party expression copied.
-
-Retained MIT permission text for Copyright (c) 2025 Addy Osmani:
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

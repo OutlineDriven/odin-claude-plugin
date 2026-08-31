@@ -54,7 +54,3 @@ description: 'Use when asked to set up or harden Node.js service foundations: en
 ## Output
 
 Local named files: src/env.ts (validated env schema), src/logger.ts (structured JSON logger with redaction), src/errors.ts (typed ServiceError base and subclasses), tsconfig.json (strict type-stripping config), package.json (ESM, engines, scripts). All reversible via the stated rollback path.
-
-## Provenance
-
-Adapted from `mcollina/skills` (commit `856efd268ae85482d882f3d0bed869fd020b5c06`) under the MIT license. Source files: `skills/node/SKILL.md`, `skills/node/rules/environment.md`, `skills/node/rules/logging.md`, `skills/node/rules/error-handling.md`, `skills/node/rules/modules.md`, `skills/node/rules/async-patterns.md`, `skills/node/rules/typescript.md`, `skills/node/rules/node-modules-exploration.md`, `skills/fastify/rules/configuration.md`. MIT notice retained; mechanism adapted for ODIN 2.0 module `odin-code`.

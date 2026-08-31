@@ -1,6 +1,6 @@
 ---
 name: next-best-action
-description: 'Use when a project is between phases, the author asks what to do next, too many threads are open, or work needs re-entry. Returns exactly one next action with an observable done-when and a cited reason it beats other visible options. Not for gating a task — use next-action-gate.'
+description: 'Use when a project is between phases, the author asks what to do next, too many threads are open, or work needs re-entry. Returns exactly one next action with an observable done-when and a cited reason it beats other visible options. Not for gating whether one named task may proceed.'
 ---
 
 # Next best action
@@ -45,10 +45,3 @@ Non-mutation rule: authority is read-only; return no changes to any file, variab
 ## Output
 
 One prioritized action recommendation: next action, evidence citation, done-when observable, reason it beats one alternative — in that order, plain text, exactly one action.
-
-## Provenance
-
-Origin: https://github.com/LilMGenius/paperthin (skills/coil/nba/SKILL.md)
-Revision: 3bca079a51bcfff5dafb53d1d7f9f523d66ee317
-License: MIT — MIT (c) 2026 LilMGenius. NOTICE additionally vendors verbatim material from mattpocock/skills (MIT, (c) 2026 Matt Pocock) with per-source attribution. Retain the MIT copyright+permission notice for substantial reuse; per-source attribution obligation binds only verbatim vendor material, which the foundry does not copy.
-Adaptation: Clean-room adaptation. Authored as a distinct read-only next-action skill with one state-cited action, where-you-are/why-now/done-when framing, and paired with aim. Module: odin-run. Policy: model+human.

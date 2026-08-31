@@ -48,10 +48,3 @@ Non-mutation rule: on any failure, the PR body at the remote is unchanged from i
 
 ## Output
 The approved description written to the GitHub PR body, with confirmation the write succeeded; on failure, the failure class with the PR body unmodified.
-
-## Provenance
-
-- Origin: adapted from warpdotdev/common-skills `.agents/skills/write-pr-description/` (SKILL.md, references/plain-language.md, references/review-guide.md).
-- Pinned revision: f589e224907eda566c13755529f59db563090d14.
-- License: MIT — Copyright (c) 2026 Denver Technologies, Inc. Permissive: adaptation and redistribution permitted provided the copyright notice and permission notice are retained.
-- Adaptation: clean-room rewrite in ODIN style. Plain-language and review-guide reference content inlined into the Procedure section. No third-party expression copied verbatim. The vendored pierre-diffs.js bundle is not carried over.

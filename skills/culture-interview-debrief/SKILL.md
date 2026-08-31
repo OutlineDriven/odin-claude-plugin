@@ -56,7 +56,3 @@ Predictions are preliminary; the actual Culture Index survey is administered aft
 
 ## Output
 A chat debrief report containing: predicted profile summary with per-trait confidence; predicted-versus-required comparison with Y / ~ / N match classification; red-flag check with hit count and severity; team fit (if data available) with Gas/Brake/Glue contribution and friction risks; manager fit (if data available) with trait gaps and working-relationship points; confidence-weighted scores per dimension; a recommendation on the Proceed / Proceed with Note / Proceed with Awareness / Discuss / Pause ladder with rationale; areas to verify with the actual survey; onboarding considerations; and prediction-limitation caveats.
-
-## Provenance
-
-Adapted from Trail of Bits skills (https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3), file plugins/culture-index/skills/interpreting-culture-index/workflows/interview-debrief.md. Licensed CC-BY-SA-4.0: preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding. Modifications: procedure and report structure re-expressed as a self-contained ODIN skill.

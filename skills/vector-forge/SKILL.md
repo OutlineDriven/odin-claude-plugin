@@ -188,11 +188,3 @@ Partial-result rule: if the campaign stops before Phase 6 completes, return all 
 
 ## Output
 Write artifacts in order: `VECTOR_FORGE_REPORT.md`, Wycheproof-format JSON vectors per algorithm variant, colocated harness files, and Phase 3/6 mutation logs; change no remote, credential, or VCS state.
-
-## Provenance
-
-Origin: `https://github.com/trailofbits/skills`, revision `d1f1575cff97816e5cc08af66cd2506099c681d3`.
-
-License: CC-BY-SA-4.0. Attribution and source link are preserved. Adaptations are marked as clean-room: procedure sections are restructured to ODIN section order and the authority/side-effect/done contract is added; source mechanisms (language detection, framework commands, output parsing, fault simulation, vector patterns, lessons learned) are preserved in full; cross-skill integration references are removed; the integration table is replaced with self-contained descriptions of each topic area the skill addresses.
-
-Source paths used: `plugins/trailmark/skills/vector-forge/SKILL.md`, `plugins/trailmark/skills/vector-forge/references/fault-simulation.md`, `plugins/trailmark/skills/vector-forge/references/lessons-learned.md`, `plugins/trailmark/skills/vector-forge/references/mutation-frameworks.md`, `plugins/trailmark/skills/vector-forge/references/report-template.md`, `plugins/trailmark/skills/vector-forge/references/vector-patterns.md`.

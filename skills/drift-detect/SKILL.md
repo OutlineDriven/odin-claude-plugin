@@ -96,7 +96,3 @@ description: 'Use when roadmap, plans, or docs may have drifted from code, or wh
 
 ## Output
 A Reality Check Report with executive summary, drift analysis, gap analysis, cross-reference table, prioritized reconstruction plan, quick wins, and unknowns, every item evidence-cited, optionally written to `.outline/drift-detect/reality-check-YYYYMMDD-HHMM.md` when too long for chat.
-
-## Provenance
-
-Origin: ODIN 1.x current skill `skills/drift-detect/SKILL.md`. Revision: not pinned (current). License: project-owned. Adaptation: the `references/drift-taxonomy.md` rubric (drift types, gap types, prioritization weighting, fuzzy cross-reference matching, native signal interpretation, synthesis rules, report template) is referenced from the procedure per I3 branching disclosure. Moved from odin-code to odin-research because the trigger is detecting plan/roadmap/docs drift from code and the end state is an evidence-gathering report, not code implementation or review.

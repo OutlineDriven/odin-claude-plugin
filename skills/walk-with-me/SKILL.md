@@ -36,9 +36,3 @@ description: 'Use when the user wants to be walked through code rather than hand
 
 ## Output
 Per-turn: one visual (file tree, module diagram, or code excerpt) with one single-select of real named targets. On close: a covered-tally line and the user's recorded decision (stop, write down, or act). Nothing lands on disk.
-
-## Provenance
-
-- Origin: current-odin-skill-tree, candidate `current:current-d:current:walk-with-me`.
-- Pinned revision: none (project-owned, continuously adapted).
-- License: project-owned. No third-party expression copied; adaptation is clean-room from the source mechanism.

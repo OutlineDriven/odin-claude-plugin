@@ -41,7 +41,3 @@ Rollback: delete `TECH.md` to undo the side effect.
 
 ## Output
 `TECH.md` in the working directory — sections in order: Objective, Background, Design, Implementation plan, Risks and mitigations, Open questions; no placeholders, TODOs, or deferred sections.
-
-## Provenance
-
-Adapted from warpdotdev/common-skills (commit f589e224907eda566c13755529f59db563090d14) under MIT license. Copyright (c) 2026 Denver Technologies, Inc. Clean-room adaptation into ODIN style with attribution. No third-party expression carried over.

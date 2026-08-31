@@ -1,6 +1,6 @@
 ---
 name: prompt-optimizer
-description: 'Use when asked to improve, optimize, rewrite, tune, or port prompts, or build prompt evals. Returns a shorter, reliable prompt validated on holdout cases with target, success criteria, external context, and adapter notes. Not for scored optimization — use prompt-optimize.'
+description: 'Use when asked to improve, optimize, rewrite, tune, or port prompts, or build prompt evals. Returns a shorter, reliable prompt validated on holdout cases with target, success criteria, external context, and adapter notes.'
 ---
 
 # Prompt optimizer
@@ -51,9 +51,3 @@ Optional:
 
 ## Output
 A structured response with optimized prompt text, target statement, success criteria, external context, residual risks, and holdout validation summary, in that order.
-
-## Provenance
-
-Origin: getsentry/skills (Apache-2.0)
-Revision: c2f99a5b04b4cd992ec3022d7c2c3e23e938d241
-Adaptation: Prompt engineering and eval construction procedure extracted and restated as a self-contained, read-only ODIN 2.0 skill. No third-party expression copied. Apache-2.0 license.

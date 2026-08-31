@@ -38,7 +38,3 @@ description: 'Use when a user requests the reasoning behind one matched session 
 
 ## Output
 One typed record: `handle`, `harness`, `project`, `tier`, `capped`, `problem_category`, `decisions`, `outcome`, `touched_files`, `lifecycle`, `spawn_edges`, `message_counts`. No prose digest and no raw text. The opaque handle re-opens the whole session on a later call.
-
-## Provenance
-
-Origin: https://github.com/vshulcz/deja-vu, revision 6f766fd4716edcaf24662c794368e420e5058f47, MIT license (Copyright (c) 2026 Vladislav Shulcz; keep the copyright and permission notice in copies or substantial portions). Source paths: cmd/deja/main.go (cmdCtx), internal/digest, cmd/deja/mcp.go (recall_context), docs/json-output.md. Adapted clean-room in ODIN style: the single-session match by query or handle, the whole-session upgrade so the decision reaches the record, trust-policy scoping with lifecycle demotion, and the cap-with-handle envelope are preserved; the source markdown digest output is replaced by a capped typed record.

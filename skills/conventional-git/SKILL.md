@@ -1,6 +1,6 @@
 ---
 name: conventional-git
-description: 'Use when a user asks to create branches/worktrees, make commits, or automate changelog generation. History is parseable and auto-generates changelogs, SemVer bumps, and issue closes. Not for commit-message-only drafting — use conventional-commit.'
+description: 'Use when a user asks to create branches/worktrees, make commits, or automate changelog generation. History is parseable and auto-generates changelogs, SemVer bumps, and issue closes. Not for commit-message-only drafting — use commit.'
 ---
 
 # Conventional git
@@ -26,11 +26,11 @@ description: 'Use when a user asks to create branches/worktrees, make commits, o
 
 2. When creating a worktree, run `git worktree list` first and reuse an existing worktree if it already covers the same branch. Place worktrees under `.claude/worktrees/` and name the directory by replacing the branch `/` separator with `-` (`git worktree add .claude/worktrees/feat-user-authentication feat/user-authentication`). Keep each worktree scoped to a single branch. Remove the worktree once its branch is merged (`git worktree remove …` then `git worktree prune`). Done when: a single worktree exists for the branch under `.claude/worktrees/`, or an existing one is reused.
 
-3. Write the commit subject as `<type>[optional scope]: <description>`. Use the type table to pick the type and its SemVer effect: `feat` (MINOR), `fix` (PATCH), `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert` (none). Keep the subject ≤ 72 characters, imperative mood, no capital letter, no trailing period. Separate any body with a blank line. Done when: the subject is ≤72 chars, imperative, lowercase, no trailing period, and typed with its SemVer effect.
+3. Write the commit subject as `<type>[optional scope]: <description>`. Use the type table to pick the type and its SemVer effect: `feat` (MINOR), `fix` (PATCH), `docs`, `style` (formatting with no logic change), `refactor` or its alias `ref` (refactoring with no behavior change), `perf`, `test`, `build`, `ci`, `chore`, `meta` (repository metadata), `license`, `revert` (none). Keep the subject ≤ 72 characters, imperative mood, no capital letter, no trailing period. Separate any body with a blank line. Done when: the subject is ≤72 chars, imperative, lowercase, no trailing period, and typed with its SemVer effect.
 
 4. Mark breaking changes with `!` after the type/scope or with a `BREAKING CHANGE:` footer so changelog tools detect the MAJOR bump; body-only descriptions are invisible to them. For `revert`, keep the `This reverts commit <hash>.` line that `git revert` generates. Never add a Claude signature, AI agent attribution, or `Co-authored-by` trailer for Claude or any AI agent. Done when: breaking changes are marked with `!` or a `BREAKING CHANGE:` footer, and no AI attribution trailer is present.
 
-5. Close issues from the commit footer (preferred, it keeps the subject clean) using a case-insensitive keyword (`close(s/d)`, `fix(es/d)`, `resolve(s/d)`) followed by the reference. On GitHub: `Closes #42`, `Closes owner/repo#99`, or `Closes #42, closes #43`; triggers on merge to the default branch. On GitLab: `Resolves #101`, `Closes group/project#42`, or `Closes #101, closes #102`; triggers on merge to the default branch. Pair the keyword with the commit type (`fix:` closing a bug, `feat:` closing a feature). Done when: every issue to close is referenced in the footer with a platform-correct keyword.
+5. Close issues from the commit footer (preferred, it keeps the subject clean) using a case-insensitive keyword (`close(s/d)`, `fix(es/d)`, `resolve(s/d)`) followed by the reference. On GitHub: `Closes #42`, `Closes owner/repo#99`, or `Closes #42, closes #43`; triggers on merge to the default branch. On GitLab: `Resolves #101`, `Closes group/project#42`, or `Closes #101, closes #102`; triggers on merge to the default branch. Pair the keyword with the commit type (`fix:` closing a bug, `feat:` closing a feature). To link an issue without closing it, use `Refs #42` (GitHub) or `Refs #101` (GitLab) in the footer. Done when: every issue to close or link is referenced in the footer with a platform-correct keyword.
 
 6. When squash-merging a PR/MR, set the PR/MR title to conventional-commits format before squashing: the title becomes the single commit message and non-conforming titles break changelog generation silently. Done when: the PR/MR title is in conventional-commits format before the squash.
 
@@ -44,7 +44,3 @@ description: 'Use when a user asks to create branches/worktrees, make commits, o
 
 ## Output
 A local repository whose branch names, worktree directories, and commit messages follow Conventional Commits v1.0.0, so tooling can auto-generate changelogs, enforce SemVer bumps, and close referenced issues on merge to the default branch.
-
-## Provenance
-
-Origin: samber/cc-skills, revision f9953962e135235137628ea92d06ea085688031f, MIT. Clean-room adaptation of the conventional-git skill — Conventional Commits v1.0.0 branch, worktree, and commit conventions restated as an executable procedure.

@@ -59,10 +59,3 @@ A review directory containing:
 - \`findings.sarif\`: SARIF 2.1.0 output for integration with security tooling.
 
 The Markdown report always identifies: what was audited, how much was covered, all surviving findings organized by severity, and any workers that did not complete.
-
-## Provenance
-
-Origin: https://github.com/trailofbits/skills — Trail of Bits public skill library.
-Revision: d1f1575cff97816e5cc08af66cd2506099c681d3.
-License: CC-BY-SA-4.0. Preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.
-Adaptation statement: adapted for ODIN 2.0. Contract reshaped to match ODIN literal schema. Worker dispatch and reporting procedure preserved. Attribution and license terms of the source material are maintained.

@@ -65,7 +65,3 @@ description: 'Use when the user mentions mewt, muton, or mutation testing and as
 ## Output
 
 A validated `mewt.toml` or `muton.toml` confirmed against the Phase 5 checklist, with mutant count, test duration estimate, and timeout policy known — ordered by the procedure phases that produced them. The campaign is ready to run via `mewt run` in a separate session.
-
-## Provenance
-
-Origin: Trail of Bits mutation-testing plugin (`github.com/trailofbits/skills`). Pinned revision: `d1f1575cff97816e5cc08af66cd2506099c681d3`. License: CC-BY-SA-4.0. Source paths: `/plugins/mutation-testing/skills/mutation-testing/SKILL.md`, `/plugins/mutation-testing/skills/mutation-testing/workflows/configuration.md`, `/plugins/mutation-testing/skills/mutation-testing/references/optimization-strategies.md`. Adapted from the 5-phase configuration workflow into a self-contained ODIN skill. Attribution and source link preserved per license terms. Modifications marked; adaptations ShareAlike. Trail of Bits trademark not claimed.

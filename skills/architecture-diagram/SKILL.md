@@ -68,7 +68,3 @@ Pick delta when the user supplies both a before and an after snapshot and asks w
 Single mode: a frozen schema-validated architecture JSON specification; one self-contained interactive HTML artifact; optionally bounded visual-check screenshots and a contact sheet; a JSON evidence receipt binding specification hash, artifact hash, nine showcase-check results, and truthful visual-review status. Terminal classification: delivered or blocked.
 
 Delta mode: one self-contained Before/Delta/After HTML artifact; one machine-readable sidecar receipt (JSON) recording input identifiers, proof level, per-element classification, and a deterministic classification-set hash. Terminal classification: every comparable element classified, incomparable inputs failed closed, honest proof level stated, no unsupported risk or merge recommendation asserted.
-
-## Provenance
-
-Origin: https://github.com/tt-a1i/archify, revision b36d79fdbc3aec3728744341485a7e79f03c0071, MIT license (LICENSE blob 4c27b7152c7e4593dfdd153761ce178177d30464). Copyright (c) 2026 tt-a1i (Archify); Copyright (c) 2025 Cocoon AI (original "architecture-diagram-generator"). Adaptation: clean-room re-derivation from the observable contracts; source expression is not copied. The MIT copyright and permission notice is preserved.

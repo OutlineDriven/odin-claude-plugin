@@ -45,10 +45,3 @@ description: 'Use when a requested sweep monitors CI failures over a bounded att
 
 ## Output
 A terminal classification per swept check (reproduced root cause, non-actionable, or blocked) with, for a reproduced root cause, a minimal verified patch returned as a proposal with verifier evidence and the attempt count; for blocked or non-actionable, a handoff record with the accumulated evidence and the stopping reason.
-
-## Provenance
-
-- Origin: cobusgreyling/loop-engineering (patterns/ci-sweeper.md, patterns/registry.yaml, tools/loop-action/action.yml, stories/ci-sweeper-symptom-patching-and-circuit-breaker.md, stories/why-we-killed-ci-sweeper.md).
-- Revision: d03dcb92cc1e0efb59789a2557131c6ad5897ccc.
-- License: MIT.
-- Adaptation: clean-room adaptation to the ODIN reversible-local contract; no third-party expression copied.

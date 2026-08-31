@@ -53,10 +53,3 @@ description: 'Use when contradictions, revisit conditions, or duplicates appear 
 ## Output
 
 Modified topic file with status flips, superseded markers, and merge results applied, plus a maintenance report listing changes made, entries affected, and any split proposals pending human decision — all VCS-recoverable.
-
-## Provenance
-
-- Origin: https://github.com/oliver-zehentleitner/keep-the-why
-- Pinned revision: c01597a506efa24652d7ecb9e18b6a8ccc97b175
-- License: MIT — Copyright (c) 2026 Oliver Zehentleitner. Retain the copyright notice and this permission notice in all copies or substantial portions of the Software.
-- Adaptation: Clean-room adaptation into ODIN 2.0 skill format. The two-tier authorization mechanism (mechanical status flip vs gated judgmental rewrite) and the non-deletion principle (superseded markers instead of removal) are preserved from the source. No third-party expression copied.

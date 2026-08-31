@@ -87,10 +87,3 @@ description: 'Use when creating or hardening an npm release with Trusted or Stag
 
 ## Output
 `.github/workflows/publish.yaml` (hardened CI release workflow draft), `.github/workflows/check-workflows.yaml` (zizmor lint workflow), project config files with cooldown and postinstall-disablement settings, and `publish-setup-handoff.md` (human handoff listing every Trusted Publisher entry, 2FA enforcement, tag ruleset, immutable-releases setting, token revocation, first-publish command, and tag-to-approve release flow); no credential is removed, no remote setting or tag is changed, no release is published.
-
-## Provenance
-
-- Origin: https://github.com/evilmartians/agent-skills, `skills/secure-npm-package/SKILL.md`
-- Source revision: `a2a83b280a2c5b9a6176c5934298fad0224bbce4`
-- License: MIT — "Copyright and permission notice must be preserved in all copies or substantial portions; adaptation and rewrite are permitted under MIT if attribution is retained."
-- Adaptation: bound to odin-run module (release/publish pipeline hardening); supply-chain-hardening mechanism preserved; skill authority restricted to reversible-local writes only; every credential, setting, tag, and publish action converted into a human handoff; model-invokable scope defined by Q14 boundary repair (local hardening drafts are model-safe; remote and publishing actions are human-only).

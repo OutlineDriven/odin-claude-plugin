@@ -5,7 +5,6 @@ description: 'Use when asked to rewrite technical English for STE compliance, st
 
 # Humanizer en ASD-STE100
 
-
 ## Contract
 
 | Field | Bound contract |
@@ -85,9 +84,3 @@ Partial-result rule: if the text is long and partially compliant, return the com
 - `rule_table: true`: add before/after rule-violation table.
 
 The done predicate holds when the returned document contains no structural STE violations and all lexical departures are named.
-
-## Provenance
-
-Origin: `samber/cc-skills` (source: `source:source-samber:samber-humanizer-en-asd-ste100`), revision `f9953962e135235137628ea92d06ea085688031f`. License: MIT.
-
-Clean-room adaptation of the ASD-STE100 Issue 9 (Jan 2025) rule categories into a model+human skill procedure, with rewrite and write modes covering the full structural/lexical split. ASD-STE100 is a registered standard of ASD (AeroSpace and Defence Industries Association of Europe). The ~900-word approved dictionary is not reproduced; lexical rules guide the rewrite without claiming full standard compliance.

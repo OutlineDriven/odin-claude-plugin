@@ -40,7 +40,3 @@ description: 'Use when a design dispute has two live interpretations and needs o
 
 ## Output
 One paragraph at a five-year-old abstraction level ending in one recommendation, emitted to chat — ordered confirm-threshold → produce → simplify → recommend → withhold-selection, with no design selection, decision record, or downstream mutation.
-
-## Provenance
-
-Origin: user-curated design-dispute exploration workflow (curated:curated-ideas:curated-055), adapted from the priority-five `possible-worlds` contract. Pinned revision: none (local curated artifact). License: project-owned. Adaptation: renamed from curated-possible-worlds to design-dispute-recommend; emits one paragraph recommendation without explicitly laying out interpretations, distinguishing it from the interpretation-laying-out possible-worlds.

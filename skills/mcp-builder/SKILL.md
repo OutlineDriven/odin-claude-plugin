@@ -49,10 +49,3 @@ Blocked result: if the API specification is unparseable or the language is unsup
 ## Output
 
 A complete MCP server project: server entry point with all tools registered, tool definitions with typed schemas and annotations, test suite with 16 read-only evaluations, and build/inspector/evaluation results — ordered by the procedure steps that produced them.
-
-## Provenance
-
-- Origin: https://github.com/warpdotdev/oz-skills
-- Pinned revision: 6c08c49fc6c51b8f768bf8c53c041bc06a160765
-- License: Apache-2.0 (attribution notices preserved; not relicensed under MIT)
-- Adaptation: adapted as a tool-creation flow for LLM composability with typed schemas, annotations, JSON Schema outputs, and stable read-only evaluations. Content is clean-room procedural adaptation, not copied expression.

@@ -43,7 +43,3 @@ description: 'Use when the user wants an answer only from the moat seat: buildin
 ## Output
 
 A moat-perspective analysis in chat: the defensibility mechanisms at work, where they are absent or eroding, and the moat-seat verdict on the subject — ending with an optional one-line pointer to other seats worth consulting, without blending them.
-
-## Provenance
-
-Origin: user-curated perspective-lens brief in `project-owned:user-curated-skill-ideas` (Perspective lenses section). No upstream revision or third-party license; project-owned. Clean-room adaptation: the lens rule (each lens answers only from its named seat; lenses are compared after independent outputs and do not blend mid-answer) and the moat seat definition (building, keeping, thickening defensibility) are restated in this skill's own words.

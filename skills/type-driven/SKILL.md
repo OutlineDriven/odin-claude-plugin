@@ -49,7 +49,3 @@ Optional: existing types or callers to refactor.
 ## Output
 
 A domain type system where every algebraic constructor is present, every boundary has a parse function returning the new type, every state-machine variant is matched exhaustively, and no runtime validation scattered outside the parse layer remains.
-
-## Provenance
-
-Origin: ODIN 1.x current skill tree. License: project-owned; no external license. Adaptation: distilled from the full current body to the ODIN 2.0 self-contained section contract. Runtime dependencies: zero.

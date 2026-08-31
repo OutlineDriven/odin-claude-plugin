@@ -46,7 +46,3 @@ disable-model-invocation: true
 
 ## Output
 A duplicates report containing the target issue reference, each high-confidence duplicate's number and title with matching evidence, and confidence scores. When the human confirms and confidence is 92%+, one comment is posted on the target issue listing the duplicates. When no duplicate reaches the threshold, a no-duplicates classification is returned and no comment is posted.
-
-## Provenance
-
-Origin: https://github.com/warpdotdev/oz-skills, revision 6c08c49fc6c51b8f768bf8c53c041bc06a160765. License: MIT (Copyright 2026 Warp). Adapted as a clean-room multi-strategy search-and-compare workflow; no third-party expression is copied.

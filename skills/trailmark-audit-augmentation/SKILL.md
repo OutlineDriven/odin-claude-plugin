@@ -54,11 +54,3 @@ description: 'Project SARIF, weAudit, or binary exports onto an existing Trailma
 ## Output
 
 An augmentation report listing sources imported (path and format), matched and unmatched findings per source, subgraphs created, cross-reference highlights (tainted nodes, high blast radius, privilege boundaries), and skipped inputs with reasons — ordering: sources, counts, subgraphs, cross-references, skipped.
-
-## Provenance
-
-Adapted from Trail of Bits trailmark audit-augmentation skill.
-- Origin: https://github.com/trailofbits/skills
-- Revision: d1f1575cff97816e5cc08af66cd2506099c681d3
-- License: CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.
-- Adaptation: Clean-room rewrite for ODIN 2.0 module odin-code-advanced. Procedure derived from source mechanisms (SARIF import, weAudit import, binary graph import, severity subgraph creation, preanalysis cross-referencing). No third-party expression copied.

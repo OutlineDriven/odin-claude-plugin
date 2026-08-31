@@ -46,7 +46,3 @@ disable-model-invocation: true
 ## Output
 
 Return the issue reference, evidence-based classification, approved change, mutation result, and freshly observed final state. The terminal classification is exactly one of `confirmed`, `awaiting-approval`, `indeterminate`, `blocked`, `failed`, or `unconfirmed`; only `confirmed` means the issue now matches current reality.
-
-## Provenance
-
-Project-owned adaptation of `curated:curated-ideas:curated-078` from `project-owned:user-curated-skill-ideas` and `project-owned:user-supplied-source-brief`. No source revision or external license was supplied. This procedure preserves the curated mechanism—compare one stale or closed issue with current reality, then mark it done or update it—while translating the remote mutation into explicit preview, human approval, bounded execution, and confirmation requirements.

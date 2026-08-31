@@ -38,7 +38,3 @@ description: 'Use when agent strategies need a reproducible finite tournament un
 ## Output
 
 A tournament scorecard: terminal class (success, capped, stalled, blocked, exhausted, pending), completed matchups, move records, scores, identity validation, and the receipt path — ordered by the procedure steps that produced them.
-
-## Provenance
-
-- Profile P-CATALOG: source https://signals.forwardfuture.com/loop-library/catalog.json. Derived provenance ledger records catalog number, URL, access date, and no-expression-reuse attestation. Expression reuse: none.

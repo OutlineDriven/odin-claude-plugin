@@ -35,7 +35,3 @@ The user must supply the intended finished system: what it must do (behavior) an
 
 ## Output
 A local finished-system contract document with sections in order: behavior, protocols, allowed states, forbidden states, impossible states, falsifiable success predicate.
-
-## Provenance
-
-Origin: user-curated planning workflow (project-owned:user-curated-skill-ideas, project-owned:user-supplied-source-brief). Revision: unpinned (null). License: project-owned. Adaptation: clean-room adaptation of the user's curated planning axiom—write the finished-system contract, including behavior, protocols, allowed states, forbidden states, and impossible states, before wayfinding begins—into a self-contained, human-gated contract-authoring procedure.

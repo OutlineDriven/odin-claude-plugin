@@ -108,8 +108,3 @@ Emit exactly one verdict: `shipped-the-bet | scope-crept | under-delivered | dif
 ## Output
 
 build-shape or to-good-shape: a shaped pitch in chat with five labeled ingredients at fat-marker altitude. shape-check: a revised pitch with every answered axis folded in and unanswered axes listed as open bets. feel-shape: one verdict per ingredient with evidence, plus the single top-line verdict.
-
-## Provenance
-
-- Origin: `odin-current` (project-owned).
-- Adaptation: clean-room translation of Basecamp Shape Up shaping methodology into a self-contained ODIN 2.0 skill. Breadboard notation and altitude tests reproduced from first principles consistent with the Shape Up methodology.

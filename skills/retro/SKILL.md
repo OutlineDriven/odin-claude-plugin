@@ -40,7 +40,3 @@ A severity-ranked markdown report. Each candidate entry contains:
 - `evidence`: verbatim session evidence
 - `severity`: `high`, `medium`, or `low`
 - `friction_removed`: what eliminating this friction would achieve
-
-## Provenance
-
-Origin: mattpocock/skills. Pinned revision: `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76`. License: MIT (`SPDX: MIT`). Adaptation: post-session environment retrospective, read-only, from observed friction only, returned as a severity-ranked candidate report. Obligation: retain copyright and permission notice in `licenses/NOTICE`. Copyright: Copyright (c) 2026 Matt Pocock.

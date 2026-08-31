@@ -202,7 +202,3 @@ Never pretend a failed check passed. Never mark a skipped phase as complete.
 
 ## Output
 Status report grouped by phase (pass/fail per item with fix actions), followed by three ordered lists — blockers (must fix before launch), recommended fixes (should fix before announcing), optional improvements (post-launch) — ending with a single-select asking which list to tackle next.
-
-## Provenance
-
-Adapted from samber/cc-skills `skills/site-launch-checklist/SKILL.md` at revision f9953962e135235137628ea92d06ea085688031f. License: MIT. Clean-room adaptation: source mechanisms (ten-phase checklist, curl/dig verification, pass/fail reporting, fix queue) preserved; companion skill references, MCP dependencies, and external tool install workflows removed for self-containment.

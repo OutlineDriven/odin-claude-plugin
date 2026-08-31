@@ -40,7 +40,3 @@ disable-model-invocation: true
 
 ## Output
 A cut report: the enumerated target set as approved, the members removed, the POST-condition results, and the VCS recovery reference for each removed member. Terminal classification is `cut` when every enumerated member is gone and the check set passes, or `blocked` when a failure class stopped the cut.
-
-## Provenance
-
-Origin: user-curated skill idea `guillotine` from `project-owned:user-curated-skill-ideas` ("cut accumulated records and residue under an explicit destructive gate; do not preserve history by reflex"). Revision: none pinned. License: none; project-owned clean-room adaptation. The destructive-gate, PRE/INVARIANT/POST checklist, and approval-bound enumerated-set mechanism are adapted from the user brief; no third-party expression is copied.

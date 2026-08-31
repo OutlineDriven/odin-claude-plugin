@@ -40,27 +40,3 @@ description: 'Use when a human-curated dbt model index must guide BigQuery SQL f
 
 ## Output
 A BigQuery SQL query that references the correct fully-qualified model name, applies every documented standard filter, constrains partitioned-table scans to a bounded date range, and states the model grain. Also name each selected model and explain why it was chosen.
-
-## Provenance
-
-Adapted from warpdotdev/oz-skills, `.agents/skills/dbt-model-index/SKILL.md`, revision 6c08c49fc6c51b8f768bf8c53c041bc06a160765, MIT license (Copyright 2026 Warp). Clean-room adaptation: the original template scaffold was restructured into a self-contained read-only advisory procedure preserving the model-index, grain, standard-filter, partition, and cost-control mechanisms.
-
-### Curated model index
-
-The human maintains this section. Organize model entries by domain. For each model, record: fully-qualified table reference, grain (one row per what), useful-for query patterns, join keys, standard filters, and partition fields.
-
-### Standard filters
-
-Document every filter that must always appear in user-facing queries (for example, `where not is_internal_user`). List each filter and its purpose.
-
-### Production dataset path
-
-Document the default project and dataset for fully-qualified table references.
-
-### Plan or tier valid values
-
-If the product has subscription tiers or plan types, list the valid values so queries filter correctly.
-
-### Sensitive datasets
-
-If any models live in a separate dataset, call out the dataset path explicitly so queries use the right fully-qualified reference.

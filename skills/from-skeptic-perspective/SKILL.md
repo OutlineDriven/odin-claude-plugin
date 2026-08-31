@@ -44,7 +44,3 @@ description: 'Use when a user wants an answer only from the skeptic seat: cold r
 ## Output
 
 A skeptic-perspective analysis: the restated claim, load-bearing assumptions with support status, the skeptic conclusion or insufficiency statement, and the strongest counterargument — no file or state mutation.
-
-## Provenance
-
-Origin: user-curated perspective-lens brief at `project-owned:user-curated-skill-ideas` and `project-owned:user-supplied-source-brief`. Revision: none pinned. License: project-owned clean-room adaptation. The skeptic lens is one of a set of named seats that answer independently and are compared only after their outputs.

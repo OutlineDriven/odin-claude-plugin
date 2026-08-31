@@ -70,7 +70,3 @@ description: 'Use when asked to implement or fix service termination handling: S
 ## Output
 
 Edited source files implementing the graceful shutdown sequence, plus a passing companion test file demonstrating the 503 health flip and clean 0 exit. No output artifact or report is emitted.
-
-## Provenance
-
-Origin: Matteo Collina graceful-shutdown skill collection (`mcollina/skills`), revision `856efd268ae85482d882f3d0bed869fd020b5c06`. License: MIT. Mechanism adapted for ODIN `odin-code` module; MIT notice retained. Source paths: `skills/node/rules/graceful-shutdown.md`, `skills/node/rules/assets/graceful-server.ts`, `skills/node/rules/assets/graceful-server.test.ts`, `skills/fastify/rules/deployment.md`.

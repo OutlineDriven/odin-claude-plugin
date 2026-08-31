@@ -1,6 +1,6 @@
 ---
 name: wait-what
-description: 'Use when the user says "wait, what", "the explanation is unclear", or "say that again", re-pitch the previous explanation with the missing frame supplied, in plain English and the project''s ubiquitous language. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when the user says "wait, what", "the explanation is unclear", "say that again", or asks to restate the last response in plain language. Re-pitches the previous explanation with the missing frame supplied, in plain English and the project''s ubiquitous language. Don''t use for tasks that require source or remote-system changes.'
 ---
 
 # Wait, what
@@ -18,6 +18,16 @@ description: 'Use when the user says "wait, what", "the explanation is unclear",
 
 The trigger identifies which explanation failed. No external files are required. Read `CONTEXT.md` at the repository root (or the per-context `CONTEXT.md` beside the relevant source when the project keeps a `CONTEXT-MAP.md`) to use the project''s ubiquitous language. If no glossary exists, use the names already in the code.
 
+## Entry phrasings
+
+One skill, three entry phrasings, one mechanism — re-pitch the same claim with the missing frame supplied in plain language:
+
+- "wait, what" or "say that again": the explanation did not land. Re-pitch the same claim, preserving its substance and conclusions, and lead with the context the explanation assumed.
+- "the explanation is unclear" or "context was omitted": the prior explanation skipped background, definitions, assumptions, causal links, or prerequisite steps. Re-pitch from scratch in plain language, embedding the missing context at the point where the original jumped ahead.
+- "restate in plain language" or "bro": restate the last response concisely without jargon. Preserve the original meaning and add no new claims, opinions, or information beyond the source response.
+
+All three produce one plain-language re-pitch in chat. None touches disk.
+
 ## Procedure
 
 1. Identify the explanation that did not land: the last assistant message immediately before the trigger. Done when: the failed explanation is identified.
@@ -26,10 +36,10 @@ The trigger identifies which explanation failed. No external files are required.
 
 ## Failure and recovery
 **Non-converged:** the user signals they do not understand after one re-pitch. Stop. Do not elaborate, restate a third time, or widen scope. The user is the authority on whether the explanation landed. Report `non-converged`.
+- **No prior explanation or response:** if no prior assistant message exists to re-pitch or restate, stop and report that there is nothing to restate. Do not invent a prior explanation.
+- **Ambiguous confusion signal:** if the user's indication is unclear about which part was hard to follow, ask which part of the prior explanation was unclear before re-pitching.
+- **Scope creep:** if the re-pitch would require teaching an entire prerequisite topic, state the prerequisite boundary and offer to cover it separately. Do not widen into a tutorial.
+- **Clean re-pitch:** keep the re-pitch free of caveats, meta-commentary, or references to the original explanation's failure.
 
 ## Output
 A single re-pitched message in the conversation, in plain English with the missing context supplied.
-
-## Provenance
-
-Origin: current-odin-skill-tree. License: project-owned. Adaptation: restructured to ODIN 2.0 SKILL.md section format; content and mechanism preserved from `skills/wait-what/SKILL.md`.

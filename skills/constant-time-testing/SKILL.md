@@ -37,7 +37,3 @@ Optional: the compiler and flags used in production (default tests at the produc
 
 ## Output
 One of: leakage detected (leak site, violated pattern, tool and signal, exercised configuration) or bounded inconclusive (exercised configuration named, statistical testing covers only exercised paths and inputs).
-
-## Provenance
-
-Adapted from the Trail of Bits `constant-time-testing` skill (https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3, path /plugins/testing-handbook-skills/skills/constant-time-testing/SKILL.md). Licensed CC-BY-SA-4.0; preserve Trail of Bits attribution and the source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding. This adaptation restates the runtime statistical (dudect, Welch's t-test) and dynamic (Timecop over Valgrind) testing mechanism as a semantic-minimum procedure and is marked as a modification of the original.

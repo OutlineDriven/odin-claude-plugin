@@ -48,7 +48,3 @@ description: 'Use when assessing npm, PyPI, or Go dependency supply-chain risk. 
 ## Output
 
 `findings.json` (structured JSON with per-dependency risk assessment, advisory matches, and coverage summary) and `report.md` (human-readable report with direct-dependency findings, lockfile-wide advisories, three-state coverage, and separated remediation guidance).
-
-## Provenance
-
-Adapted from Trail of Bits supply-chain-risk-auditor skill (CC-BY-SA-4.0). Source: https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3. Trail of Bits attribution and source link preserved. Modifications marked. Adaptations licensed ShareAlike. No trademark rights claimed. trail-of-bits-mark.svg not reused as branding.

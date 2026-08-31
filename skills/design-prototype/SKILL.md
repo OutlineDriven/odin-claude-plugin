@@ -81,7 +81,3 @@ description: 'Use when the user runs /design-prototype to produce a polished res
 
 ## Output
 One polished, responsive, self-contained Pretext-native HTML artifact (or framework-native component) plus a finalized.json metadata file under the project design directory — ordered detect-source → spec → tier → wire → write → preview → refine → finalize, computing text layout on resize and matching the approved mockup or accepted freeform design.
-
-## Provenance
-
-Origin: https://github.com/garrytan/gstack, revision 07b59e396c6be5a86619a43151cb9ed62a15ae69. License: MIT, Copyright (c) 2026 Garry Tan (LICENSE blob sha 35029511144443297cad2d26e4bac17d0e352f93). Adaptation: clean-room re-derivation of the Pretext-native HTML production procedure and the UX doctrine from design-html/SKILL.md, design-html/sections/doctrine.md, and design-html/sections/pretext-patterns.md; expressive prose and code patterns re-derived, not copied wholesale.

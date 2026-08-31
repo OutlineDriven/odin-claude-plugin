@@ -79,7 +79,3 @@ One of three artifacts, determined by mode:
 - **prepare**: A structured report containing the Mandascan five-point map for all parties, the identified axis of agreement, the mandate (opening/target/reservation), the MAP with package trades, the opening statement script, and the top-three objection responses.
 - **live**: A response script for the latest counterparty move, with move classification, implicit concession flags, and a recommendation on next action (close, package-trade, or pause).
 - **debrief**: A retrospective report with the negotiation timeline, Mandascan assessment accuracy scores, identified pathologies with moment-level attribution, cost analysis per pathology, and transferable lessons.
-
-## Provenance
-
-Adapted from samber/cc-skills `skills/influence-and-negotiation/SKILL.md` at revision f9953962e135235137628ea92d06ea085688031f under the MIT license. Clean-room adaptation for ODIN 2.0. No third-party expression copied; structure and mechanisms re-derived from the source skill's documented workflow.

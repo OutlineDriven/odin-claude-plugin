@@ -43,10 +43,3 @@ description: 'Use when a user asks whether enough is known to proceed, or before
 ## Output
 
 A three-part prose assessment with Known, Unknown, and Recommended (Proceed, Proceed with caveat, or Pause), ordered as listed, written to a file only if the user explicitly requested one.
-
-## Provenance
-
-**Origin**: compound-knowledge-plugin by EveryInc.
-**Source**: `plugins/compound-knowledge/skills/kw-confidence/SKILL.md`, revision `766942e9eaee5204adbfe180f1d0651ffecf2575`.
-**License**: MIT — Copyright (c) 2026 Every, Inc. Adaptation permitted per root provenance ledger mechanism rewrite record.
-**Adaptation**: Epistemic gut-check mechanism preserved. Authority scoped to read-only with explicit user-requested file write only. Module set to odin-research. Trigger and three-part assessment structure retained; no inference, scope-widening, or numeric scoring added.

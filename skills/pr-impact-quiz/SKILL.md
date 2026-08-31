@@ -42,9 +42,3 @@ No rollback is required. No partial result is returned when the done predicate d
 
 ## Output
 Three concrete, non-generic impact questions in chat, each addressing a distinct area of potential effect on the existing codebase.
-
-## Provenance
-
-- Origin: `project-owned:user-curated-skill-ideas` — Review, QA, and completeness section.
-- License: Project-owned.
-- Adaptation: Extracted from a general curated-ideas roster into a standalone read-only skill with bounded inputs, authority, and failure classes. The skill preserves the source mechanism: low-frequency pre-review quiz generation focused on verifying author understanding of change impact on the existing codebase.

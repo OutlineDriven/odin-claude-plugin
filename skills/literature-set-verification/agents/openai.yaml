@@ -1,3 +1,0 @@
-interface:
-  display_name: "Literature Set Verification"
-  short_description: "Use when a question needs a deduplicated relevant paper set"

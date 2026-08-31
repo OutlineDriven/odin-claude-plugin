@@ -32,7 +32,3 @@ The subject to analyze (a decision, design, change, or situation). Optional: the
 
 ## Output
 A breaking-perspective analysis covering stakeholders, dependencies, accounting, and compatibility under destructive pressure, with no content from other lenses.
-
-## Provenance
-
-Origin: user-curated perspective-lens framework in `project-owned:user-curated-skill-ideas`. Revision: unversioned. License: project-owned. Adaptation: clean-room restatement of the breaking-seat lens contract; no third-party expression copied.

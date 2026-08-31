@@ -45,11 +45,3 @@ Rollback: remove the config marker and the hook configuration file. No other art
 ## Output
 
 A report containing before-metric, after-metric, hook configuration (config marker artifact and hook implementation or reference to the platform-native hook), and platform-limitation statements where applicable.
-
-## Provenance
-
-- Origin: https://github.com/oliver-zehentleitner/keep-the-why
-- Pinned revision: c01597a506efa24652d7ecb9e18b6a8ccc97b175
-- License: MIT (Copyright (c) 2026 Oliver Zehentleitner. Retain the copyright notice and this permission notice in all copies or substantial portions of the Software.)
-- Source paths: `references/autostart.md`, `references/setup.md`
-- Adaptation: clean-room adaptation of the delegate-to-platform and measure-before-claiming mechanisms. No third-party expression copied.

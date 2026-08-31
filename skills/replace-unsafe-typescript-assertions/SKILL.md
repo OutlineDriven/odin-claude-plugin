@@ -54,9 +54,3 @@ import { fromAny, fromExact, fromPartial } from "@total-typescript/shoehorn";
 ## Output
 
 A per-file report with assertions replaced, shoehorn function selected for each, skipped assertions with reasons, the exact typecheck command, and its final result.
-
-## Provenance
-
-Adapted from `mattpocock/skills` at revision `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76`, paths `skills/misc/migrate-to-shoehorn/SKILL.md` and `skills/misc/migrate-to-shoehorn/agents/openai.yaml`.
-
-License: MIT. Copyright (c) 2026 Matt Pocock. The root `PROVENANCE.md` retains the full permission notice and source record. This adaptation preserves the source's test-only boundary and the `fromPartial`, `fromAny`, and `fromExact` decision while removing package-manager and typecheck assumptions from the executable contract.

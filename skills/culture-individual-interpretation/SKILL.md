@@ -99,7 +99,3 @@ The profile must be extracted data, not visual estimation. Visual estimation has
 
 ## Output
 A chat report containing: the named archetype, a trait table with position, distance, and interpretation for A, B, C, D, L, I, ranked leading traits, 2-3 strengths, 2-3 development areas, energy status with EU utilization percentage and label (when both graphs available), Survey-vs-Job comparison (when available), and 2-3 actionable recommendations. All A/B/C/D interpretations are relative to the arrow; L and I are absolute. No trait is labeled good or bad. Culture Index is stated as one data point.
-
-## Provenance
-
-Origin: https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3, file /plugins/culture-index/skills/interpreting-culture-index/workflows/interpret-individual.md. License: CC-BY-SA-4.0. Preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding. Adapted from the individual interpretation workflow: domain reference content (primary traits, secondary traits, patterns-archetypes, anti-patterns) inlined to make the procedure self-contained; extraction-script and multi-workflow routing removed as out of scope for single-profile interpretation.

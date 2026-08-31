@@ -66,9 +66,3 @@ description: 'Use when reviewing cryptographic code for timing side-channels (C,
 
 ## Output
 Per-configuration report (`PASSED` with warnings listed separately, or `FAILED` with flagged instructions per function), each naming compiler, architecture, and optimization level. Every flagged instruction carries a verdict (true positive, false positive, or untraced) with data-flow justification.
-
-## Provenance
-
-- Origin: https://github.com/trailofbits/skills, revision `d1f1575cff97816e5cc08af66cd2506099c681d3`, file `/plugins/constant-time-analysis/skills/constant-time-analysis/SKILL.md`.
-- License: CC-BY-SA-4.0. Preserve Trail of Bits attribution and the source link; mark modifications; license adaptations ShareAlike; claim no trademark rights; never reuse `trail-of-bits-mark.svg` as branding.
-- Adaptation: clean-room adaptation to self-contained form. Preserved the static compiler-output inspection mechanism, the error- and warning-severity detector families, the multi-architecture/optimization sweep, the no-data-flow triage to secret or public operands, the per-language coverage limits, and the constant-time comparison and lookup fix primitives. Removed references to non-shipped reference guides and to other skills or plugins. Per-language coverage limits, constant-time comparison primitives, and prerequisites moved to `references/per-language-reference.md`.

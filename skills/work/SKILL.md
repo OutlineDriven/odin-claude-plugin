@@ -1,6 +1,6 @@
 ---
 name: work
-description: 'Use when implementing from a plan or spec path, or a clear build request. Drives end-to-end execution from input triage through shipping. Don''t use for open-ended debugging (use debug), exploration, or read-only research.'
+description: 'Use when implementing from a plan or spec path, a clear build request, or a single settled ticket. Drives end-to-end execution from input triage through shipping; a single settled ticket takes the narrow single-ticket entry. Don''t use for open-ended debugging (use debug), exploration, or read-only research.'
 disable-model-invocation: true
 ---
 
@@ -47,6 +47,12 @@ disable-model-invocation: true
 11. Apply review findings: fix every actionable comment. For contested findings citing a project doc as mandating a change, resolve with evidence. For declined findings, record the reason. Done when: all findings are resolved or declined with reasons recorded.
 12. Ship the work. If residuals remain after the review cycle, name each residual explicitly, report it, and yield. Done when: work is shipped or yielded with residuals named.
 
+## Single-ticket mode
+
+A single settled ticket or spec is the narrow entry of the end-to-end pipeline. Phase 0 routes it here instead of building a multi-unit task list. Read the settled plan or ticket end to end and extract the contract: the behaviour promised, the inputs and outputs that define it, and the seams the plan names for behavioural tests. Then implement the contract in code following existing project conventions, reuse existing patterns rather than introducing new ones, and write behavioural tests at each named seam that verify the contract from the caller's perspective (tests must fail on a plausible bug, not restate the source). Run the project's check suite; fix the implementation, never suppress a check or widen scope to unrelated code. Run a fresh diff review; if it reopens a settled decision, overreaches the contract, or leaves a seam untested, fix the gap before committing. Commit with a message that names the contract satisfied and the seams tested.
+
+Never reopen or redesign the plan during single-ticket execution. If the plan is ambiguous, contradictory, or missing a named seam, stop and report the gap; do not infer scope. If the implementation reopens a settled plan decision, revert the overreach and implement only what the plan names. If a named seam has no behavioural test, add it before committing; do not defer. If scope widens beyond the plan, revert the unrelated changes and commit only the contracted work. Partial results are not committed; if the procedure cannot reach the done predicate, report the blocker and leave the working tree unchanged or revert partial edits via VCS.
+
 ## Failure and recovery
 | Failure | Rule |
 |---|---|
@@ -60,12 +66,12 @@ disable-model-invocation: true
 | Serial unit review diff out of scope | Fix before next unit. |
 | Review finding contested with doc evidence | Resolve with evidence; record declined finding with reason. |
 | Non-converged after review cycle | Ship what passes. Name residuals explicitly. Yield terminal report. |
+| Single-ticket plan ambiguous or contradictory | Stop. Report the specific gap. Do not guess or redesign. |
+| Single-ticket implementation reopens a settled decision | Revert the overreach. Implement only what the plan names. |
+| Named seam has no behavioural test | Add the test before committing. Do not defer. |
+| Single-ticket scope widens beyond the plan | Revert unrelated changes. Commit only the contracted work. |
 
 Partial-result rule: ship what is implemented and verified. Never claim done when tests fail or review findings are unresolved.
 
 ## Output
 Shipped code (all plan units implemented, verified tests pass, commits landed, shipping tail run) or a terminal yield with residuals named when work cannot be completed.
-
-## Provenance
-
-Origin: current-odin-skill-tree. License: project-owned. Adapted from skills/work/SKILL.md (current:current-d:current:work) and skills/executing-plans/SKILL.md (source:source-superpowers:superpowers-013, MIT Jesse Vincent 2025, copied_allowed: true). Clean-room adaptation: procedure and contract restructured per SKILL.md literal contract; execution-engine selection and parallel-dispatch safety-check preserved inline from source.

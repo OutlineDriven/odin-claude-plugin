@@ -19,10 +19,11 @@ description: 'Use when prose is drafted or edited, reviewed for AI tells, or the
 - **Code debris and dead code**: use `deslop`. Unslop edits prose; deslop cuts code.
 - **Korean or other non-English humanization**: unslop applies the same full-mode checks; where a check's example list is English-specific, judge the underlying pattern (puffery, filler, passive voice, meta-narration) in the target language rather than the literal words.
 - **The routing verdict**: use `deslop` for code debris and `purge-slop-docs` for stale doc trees; use unslop when the answer is prose editing.
+- **Already clean**: if the text contains no AI tell patterns, return it unchanged and report the text is already clean.
 
 ## Inputs
 
-- **Prose file or scope** (required): the file, text block, directory, or glob to edit.
+- **Prose file, scope, or inline text** (required): the file, text block, directory, glob, or pasted text to edit. When the user supplies text inline rather than a path, edit that text directly and return the result.
 - **Mode** (optional): `full` (default — all 20 checks), `dedash` (em-dash purge by grammatical role), `detool` (incidental tool-name neutralization in portable artifacts).
 - **Tone guidance** (optional): intended register or audience; defaults to the file's existing voice.
 - **Strictness** (optional, dedash only): `default` replaces clear-cut cases; `strict` surfaces every occurrence as a judgment call.
@@ -66,7 +67,7 @@ Triggered when a durable artifact claims portability or tool-neutrality while ca
 
 **Language**
 4. AI vocabulary: additionally, crucial, delve, enduring, enhance, fostering, garner, interplay, intricate, landscape (abstract), pivotal, showcase, tapestry (abstract), testament, underscore, vibrant. Replace with plain words.
-5. Fancy copulas and forced structures: "serves as", "stands as", "Not just X, but Y", rule of three, synonym cycling, false ranges. Say it directly with the natural number of points.
+5. Fancy copulas and forced structures: "serves as", "stands as", "boasts", "features", "Not just X, but Y", rule of three, synonym cycling, false ranges. Say it directly with the natural number of points.
 
 **Style**
 6. Em-dash overuse: do not stack several in one paragraph; replace each with the punctuation that spot needs (period, comma, colon, parentheses, or nothing). Count look-alikes (en dash, double hyphen, minus sign, horizontal bar); judge each on its own. For the full grammatical-role classification and leave-alone rules, run dedash mode or see `references/dedash.md`.
@@ -115,6 +116,3 @@ Triggered when a durable artifact claims portability or tool-neutrality while ca
 
 The rewritten prose file with all checks passing and original meaning preserved; dedash and detool modes append a per-occurrence or per-hit report.
 
-## Provenance
-
-Origin: current-odin-skill-tree. Paths: skills/unslop/SKILL.md, skills/unslop-dedash/SKILL.md (absorbed), skills/unslop-detool/SKILL.md (absorbed). License: project-owned. Adaptation: clean-room rewrite of the unslop skill for the odin-create module; dedash and detool procedures folded as named modes with branch detail in references/.

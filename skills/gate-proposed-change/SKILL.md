@@ -56,7 +56,3 @@ description: 'Use when asked to evaluate a proposed commit, merge, or auto-merge
 ## Output
 
 A verdict record: `allowed` (boolean), `trigger` (one of `ok`, `denylist`, `file-count`, `not-allowlisted`), `reason` (human-readable), and `matchedPaths` (the exact paths responsible; empty when `ok`) — the gate emits this record only; it performs no merge, commit, or write.
-
-## Provenance
-
-Origin: `cobusgreyling/loop-engineering`, revision `d03dcb92cc1e0efb59789a2557131c6ad5897ccc`, MIT. Source paths: `/tools/loop-gate/src/gate.ts`, `/gate.yaml`, `/templates/gate.yaml.template`, `/.github/ruleset-main-protection.json`, `/.github/workflows/fork-pr-gate.yml`. Clean-room adaptation: the evaluation order (denylist, then file count, then allowlist), dot-aware glob matching, strict version-1 config validation, and the allow/deny-with-matched-paths contract are preserved; no source expression is copied.

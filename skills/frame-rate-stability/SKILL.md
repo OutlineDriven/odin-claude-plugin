@@ -37,7 +37,3 @@ description: 'Use when a rendering path needs stable frame-time, CPU, GPU, and m
 ## Output
 
 A terminal classification (`success`, `capped`, `stalled`, `blocked`, `exhausted`, or `pending`) plus the per-target frame-time, CPU, GPU, and memory evidence from both consecutive runs, and the run receipt.
-
-## Provenance
-
-- Profile P-CATALOG: source https://signals.forwardfuture.com/loop-library/catalog.json. Derived provenance ledger records catalog number, URL, access date, and no-expression-reuse attestation. Expression reuse: none.

@@ -65,7 +65,3 @@ description: 'Use when asked to diagnose Node.js tests that hang after the runne
 ## Output
 
 One terminal or file report: reproduction command and timeout exit code, stop point, open-descriptor observations, root cause with file and line (or blocked), fix applied (or unresolved/blocked), confirmation results.
-
-## Provenance
-
-Adapted from `mcollina/skills` (`skills/node/rules/stuck-processes-and-tests.md`, `skills/node/rules/flaky-tests.md`), revision `856efd268ae85482d882f3d0bed869fd020b5c06`, licensed under MIT. MIT notice retained; procedure rewritten for the ODIN skill contract, authority, and Node 24 `node:test` behavior.

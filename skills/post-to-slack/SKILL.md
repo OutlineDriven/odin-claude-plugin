@@ -39,7 +39,3 @@ disable-model-invocation: true
 
 ## Output
 The destination label when supplied, a safe message summary or the exact message when appropriate, and one terminal classification: `posted` for confirmed HTTP 200 `ok`, `blocked` before mutation, `failed` for a confirmed rejection or pre-delivery transport failure, or `unknown` when delivery cannot be determined — never including the webhook URL or secret path.
-
-## Provenance
-
-Adapted from `warpdotdev/competitive-intelligence-agent-oss`, `.warp/skills/post_to_slack/SKILL.md`, revision `9e0363e810a14405ef876fb354562735002797fb`, licensed MIT. This adaptation retains the focused incoming-webhook post and webhook-host validation while making suggestions advisory and explicit human invocation mandatory.

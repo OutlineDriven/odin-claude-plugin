@@ -37,7 +37,3 @@ The question or decision to investigate (required). Number of council members or
 
 ## Output
 A decision memo containing recommendation, consensus, dissenting views, residual risks, and evidence. Terminal classification is converged (consensus reached) or non-converged (insufficient evidence or unresolved disagreement).
-
-## Provenance
-
-Origin: https://github.com/warpdotdev/common-skills, path .agents/skills/council/SKILL.md. Pinned revision f589e224907eda566c13755529f59db563090d14. License MIT, Copyright (c) 2026 Denver Technologies, Inc. Clean-room rewrite in ODIN style preserving the parallel second-opinion mechanism; no third-party expression copied.

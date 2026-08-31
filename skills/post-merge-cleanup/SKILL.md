@@ -47,10 +47,3 @@ The result is blocked if the done predicate does not hold. A blocked result incl
 
 ## Output
 A `post-merge-cleanup-report.md` summarizing the merge reference, candidates found, candidates acted on (with worktree or PR link), candidates deferred (with reason), and tickets created (with owner unset) — plus an updated `post-merge-state.md`, zero or more open PRs for safe-fix candidates, and zero or more tickets for out-of-budget, escalated, or deferred candidates; or a single confirmation line when no cleanup surface is detected.
-
-## Provenance
-
-Origin: cobusgreyling/loop-engineering, pattern `post-merge-cleanup`.
-Revision: d03dcb92cc1e0efb59789a2557131c6ad5897ccc.
-License: MIT.
-Adaptation: clean-room reimplementation of the post-merge cleanup loop pattern adapted to the odin-run delivery-operations charter. The original loop-engineering pattern provided the state machine, failure modes, verification strategy, and human handoff taxonomy. The odin-run skill restates those as a bounded reversible-local procedure with explicit budget enforcement and no L3 automation. MIT license permits adaptation.

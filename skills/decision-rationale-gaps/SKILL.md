@@ -41,9 +41,3 @@ description: 'Use when a current decision needs pressure-testing until the ratio
 
 ## Output
 A decision-press report with sections in order: neutral restatement, per-gap state (closed with user explanation or open with unexplained assumption), gap counts, re-review flags for open gaps.
-
-## Provenance
-
-Origin: https://github.com/LilMGenius/paperthin (MIT, (c) 2026 LilMGenius). Revision: 3bca079a51bcfff5dafb53d1d7f9f523d66ee317. Path: skills/depth/feynman/SKILL.md.
-
-License: MIT. Adaptation: clean-room. Material from mattpocock/skills (MIT, (c) 2026 Matt Pocock) is vendor-verbatim in the paperthin source and is not directly copied; the foundry adapts the paperthin feynman teaching technique as a decision-pressing workflow, preserving: the isolated-critic sub-session requirement, the narrow-don't-repeat instruction class, the single-gap-at-a-time return rule, and the never-supply-rationale invariant. The ODIN skill narrows scope to post-decision advisory critique, sets authority to read-only advisory, removes teaching-role framing, and targets ODIN run-flow quality gates.

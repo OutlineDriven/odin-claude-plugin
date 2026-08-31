@@ -43,7 +43,3 @@ A partial or unconfirmed ledger is diagnostic output only and does not satisfy D
 ## Output
 
 One in-chat markdown ledger with Agreed facts, Corrected beliefs, and Open assumptions, followed by either `confirmed — shared context established`, `blocked — <reason>`, or `non-converged — shared context not confirmed`. Evidence labels remain attached to every claim.
-
-## Provenance
-
-Adapted from the project-owned ODIN current skill at `skills/mutual-sync/SKILL.md` for candidate `current:current-c:current:mutual-sync`. No source revision or license identifier was supplied. This version preserves the topic-scoped three-party reconciliation, live-state delta check, evidence arbitration, bounded user questions, confirmation loop, and no-write persistence boundary while making the procedure self-contained.

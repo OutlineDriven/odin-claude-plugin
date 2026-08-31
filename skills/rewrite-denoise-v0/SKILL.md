@@ -45,7 +45,3 @@ description: 'Use when a user asks to clean up, sync, dedupe, de-noise, or rewri
 
 ## Output
 The target artifact rewritten in place as a clean v0. Optionally, additional files if the user requested them.
-
-## Provenance
-
-Adapted from `skills/depth/re0/SKILL.md` in [LilMGenius/paperthin](https://github.com/LilMGenius/paperthin) at revision `3bca079a51bcfff5dafb53d1d7f9f523d66ee317`. Licensed MIT (c) 2026 LilMGenius. Clean-room adaptation — no verbatim expression copied. The source-noise unwrapping mechanism (one source line per paragraph/list item) and edit-safety conventions (MISS not silent no-op, unicode-safe, per-occurrence) are folded into the in-place clean-v0 rewrite.

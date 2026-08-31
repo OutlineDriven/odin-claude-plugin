@@ -47,9 +47,3 @@ Optional: evidence of failure patterns, specific lines or sections to target, or
 ## Output
 
 A reflection report with each analyzed skill and findings, each approved change and its result, each rejected or deferred proposal and the reason, and any filed backlog items, ordered as listed, ending with a statement that the done predicate holds or the specific outstanding block.
-
-## Provenance
-
-Origin: cursor-reflect skill from pstack (cursor/plugins), revision 68836ddaf5697224520f1847d90cdb90ca8babaa.
-License: MIT — per pstack/LICENSE blob 6b5400237fdf6545be0b8fae370d6f2fcff8fb25; pstack authored by Lauren Tan (poteto).
-Adaptation: rebuilt from MIT-licensed source under clean-room adaptation rules. Structural mechanism (approval-gated improvement workflow) preserved. Execution authority and failure handling aligned to ODIN 2.0 contracts.

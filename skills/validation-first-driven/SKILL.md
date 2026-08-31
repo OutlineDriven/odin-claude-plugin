@@ -61,7 +61,3 @@ description: 'Defines state machines, invariants, and temporal properties. Use w
 
 ## Output
 A state machine specification, verified implementation with assertions for every transition and invariant, test suite covering all states and transitions, optional TLA+/Alloy model, and exit code (0 or the blocking gate code).
-
-## Provenance
-
-Origin: current-odin-skill-tree. License: null. Adaptation: clean-room derivation from the current-odin-skill-tree body under `skills/validation-first-driven/SKILL.md` to the skill-foundry contract template. State machine taxonomy, validation levels, anti-patterns, constitutional rules, and validation gates carried from the source body. Support file references inlined as summary anchors. No third-party expression copied.

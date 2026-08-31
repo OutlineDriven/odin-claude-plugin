@@ -68,7 +68,3 @@ disable-model-invocation: true
 
 ## Output
 A final deploy report with PR details, merge metadata, per-stage timing, review/CI/deploy/verification status, and a terminal VERDICT. The report is displayed to the user and saved to a deploy-reports directory.
-
-## Provenance
-
-Origin: https://github.com/garrytan/gstack, revision 07b59e396c6be5a86619a43151cb9ed62a15ae69. License: MIT, Copyright (c) 2026 Garry Tan. Adapted from the `land-and-deploy` skill (SKILL.md, sections/first-run-validation.md, sections/merge-and-deploy.md, sections/readiness-gate.md). Expressive prose and procedure re-derived under clean-room adaptation; gstack-specific tooling replaced with standard `gh`, `git`, and `curl` commands. The MIT copyright and permission notice is retained.

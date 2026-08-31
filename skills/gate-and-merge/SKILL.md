@@ -124,7 +124,3 @@ A behavior change with no test that fails without it is minor where the repo has
 ## Output
 
 One line per PR: `merged`, `held with <gate> and <comment URL>`, or `fixed-then-merged with <follow-up SHA>` — no merge on a pending or pre-fix oid.
-
-## Provenance
-
-Origin: odin-1.x current skill `skills/gate-and-merge/SKILL.md`. Revision: unpinned. License: project-owned. Adaptation: clean-room rewrite preserving the multi-PR merge observable contract — the serial loop, the single severity table, the five-gate ladder with exact field lists, the stack edge rule, and the match-head-commit race guard — with peer-skill routing removed for self-containment.

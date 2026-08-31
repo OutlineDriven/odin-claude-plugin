@@ -51,9 +51,3 @@ description: 'Use when the user begins knowledge work with notes, a transcript, 
 
 ## Output
 In conversation: the structured summary in the user's wording, prior-knowledge findings (directly relevant, tangentially relevant, or explicit none), themes/tensions/gaps, resolved load-bearing answers, one reasoned direction with caveat — on save or planning: `plans/brainstorm-{descriptive-name}.md` written before any planning begins.
-
-## Provenance
-
-- Origin: https://github.com/EveryInc/compound-knowledge-plugin at revision 766942e9eaee5204adbfe180f1d0651ffecf2575 — `plugins/compound-knowledge/skills/kw-brainstorm/SKILL.md` and `plugins/compound-knowledge/agents/research/knowledge-base-researcher.md`.
-- License: MIT (`plugins/compound-knowledge/LICENSE`), Copyright (c) 2026 Every, Inc. — copies or substantial portions carry the copyright and permission notice; mechanism rewrites are permitted.
-- Adaptation: mechanism rewrite for ODIN 2.0 — the brainstorm-capture pipeline and the read-only knowledge-researcher search are preserved; plugin-command scaffolding, sibling-skill handoffs, and pipeline mode are removed; the next-step offering is reduced to the save-or-plan origin-file gate. Not a copy of third-party expression.

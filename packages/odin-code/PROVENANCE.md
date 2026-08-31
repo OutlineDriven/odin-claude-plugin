@@ -2,7 +2,7 @@
 
 OutlineDriven-authored material in this package is Apache-2.0. See the repository `LICENSE`.
 
-This package ships 69 public skills from the canonical `skills/<slug>/` tree. Package-local skill copies are generated only at pack time.
+This package ships 57 public skills from the canonical `skills/<slug>/` tree. Package-local skill copies are generated only at pack time.
 
 | Skill | Strategy | Adaptation | Target | Origin |
 |---|---|---|---|---|
@@ -11,39 +11,28 @@ This package ships 69 public skills from the canonical `skills/<slug>/` tree. Pa
 | `check-compiler-errors` | B | byte-reuse | `skills/check-compiler-errors/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
 | `check-impl-against-spec` | B | byte-reuse | `skills/check-impl-against-spec/` | https://github.com/warpdotdev/common-skills @ `f589e224907eda566c13755529f59db563090d14` (MIT) |
 | `ci-cd` | B | byte-reuse | `skills/ci-cd/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>addyosmani/agent-skills @ `d2c37ef6225dd8726cdd369a8030307f48592d26` (MIT) |
+| `ci-fix` | G | structured-merge-rewrite | `skills/ci-fix/` | odin-2.0 consolidation @ `project-owned` (Project-owned clean-room rewrite) |
 | `classify-ci-failure` | B | byte-reuse | `skills/classify-ci-failure/` | cobusgreyling/loop-engineering @ `d03dcb92cc1e0efb59789a2557131c6ad5897ccc` (MIT) |
 | `code-simplification` | B | byte-reuse | `skills/code-simplification/` | addyosmani/agent-skills @ `d2c37ef6225dd8726cdd369a8030307f48592d26` (MIT) |
-| `code-simplifier` | B | byte-reuse | `skills/code-simplifier/` | getsentry/skills @ `c2f99a5b04b4cd992ec3022d7c2c3e23e938d241` (Apache-2.0) |
 | `codebase-design` | B | byte-reuse | `skills/codebase-design/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `commit` | G | structured-merge-rewrite | `skills/commit/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `commit-economy` | B | byte-reuse | `skills/commit-economy/` | https://github.com/LilMGenius/paperthin @ `3bca079a51bcfff5dafb53d1d7f9f523d66ee317` (MIT) |
 | `compose-observability` | B | byte-reuse | `skills/compose-observability/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `constraint-driven-development` | B | byte-reuse | `skills/constraint-driven-development/` | addyosmani/agent-skills @ `d2c37ef6225dd8726cdd369a8030307f48592d26` (MIT) |
 | `contract-driven` | B | byte-reuse | `skills/contract-driven/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text) |
-| `conventional-commit` | B | byte-reuse | `skills/conventional-commit/` | getsentry/skills @ `c2f99a5b04b4cd992ec3022d7c2c3e23e938d241` (Apache-2.0) |
 | `conventional-git` | B | byte-reuse | `skills/conventional-git/` | samber/cc-skills @ `f9953962e135235137628ea92d06ea085688031f` (MIT) |
 | `create-branch` | B | byte-reuse | `skills/create-branch/` | getsentry/skills @ `c2f99a5b04b4cd992ec3022d7c2c3e23e938d241` (Apache-2.0) |
-| `debug` | G | structured-merge-rewrite | `skills/debug/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>https://github.com/obra/superpowers @ `b36e0829c6d0140e93cfef2ca599b1b07d4a7797` (MIT) |
 | `deps-upgrade` | B | byte-reuse | `skills/deps-upgrade/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `deslop` | G | structured-merge-rewrite | `skills/deslop/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>mblode/agent-skills @ `e97a3b383f5944f90d41eb92b24b4fb3b917a7f9` (MIT)<br>current-odin-skill-tree @ `project-owned` (Project-owned or clean-room only; no copied source text) |
-| `deslop-branch-diff` | B | byte-reuse | `skills/deslop-branch-diff/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
 | `devcontainer-setup` | B | byte-reuse | `skills/devcontainer-setup/` | https://github.com/trailofbits/skills @ `d1f1575cff97816e5cc08af66cd2506099c681d3` (CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.) |
-| `diagnose-ci-failures` | B | byte-reuse | `skills/diagnose-ci-failures/` | https://github.com/warpdotdev/common-skills @ `f589e224907eda566c13755529f59db563090d14` (MIT) |
-| `diagnosing-bugs` | B | byte-reuse | `skills/diagnosing-bugs/` | mattpocock/skills @ `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76` (MIT) |
 | `diagramming-code` | B | byte-reuse | `skills/diagramming-code/` | https://github.com/trailofbits/skills @ `d1f1575cff97816e5cc08af66cd2506099c681d3` (CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.) |
 | `doubt-driven` | B | byte-reuse | `skills/doubt-driven/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>addyosmani/agent-skills @ `d2c37ef6225dd8726cdd369a8030307f48592d26` (MIT) |
 | `dx-audit` | B | byte-reuse | `skills/dx-audit/` | mblode/agent-skills @ `e97a3b383f5944f90d41eb92b24b4fb3b917a7f9` (MIT) |
-| `entry-points-command` | B | byte-reuse | `skills/entry-points-command/` | https://github.com/trailofbits/skills @ `d1f1575cff97816e5cc08af66cd2506099c681d3` (CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.) |
 | `explore` | B | byte-reuse | `skills/explore/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text) |
-| `find-bugs` | B | byte-reuse | `skills/find-bugs/` | getsentry/skills @ `c2f99a5b04b4cd992ec3022d7c2c3e23e938d241` (Apache-2.0) |
-| `gh-fix-ci` | G | structured-merge-rewrite | `skills/gh-fix-ci/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>https://github.com/warpdotdev/oz-skills @ `6c08c49fc6c51b8f768bf8c53c041bc06a160765` (MIT) |
-| `implement` | B | byte-reuse | `skills/implement/` | mattpocock/skills @ `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76` (MIT) |
-| `implement-specs` | B | byte-reuse | `skills/implement-specs/` | https://github.com/warpdotdev/common-skills @ `f589e224907eda566c13755529f59db563090d14` (MIT) |
 | `incremental-implementation` | B | byte-reuse | `skills/incremental-implementation/` | addyosmani/agent-skills @ `d2c37ef6225dd8726cdd369a8030307f48592d26` (MIT) |
 | `isolate-work-in-worktree` | B | byte-reuse | `skills/isolate-work-in-worktree/` | cobusgreyling/loop-engineering @ `d03dcb92cc1e0efb59789a2557131c6ad5897ccc` (MIT) |
 | `isolate-workspace-gate` | B | byte-reuse | `skills/isolate-workspace-gate/` | https://github.com/obra/superpowers @ `b36e0829c6d0140e93cfef2ca599b1b07d4a7797` (MIT) |
 | `lighter-checks` | B | byte-reuse | `skills/lighter-checks/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text) |
-| `minimal-fix` | B | byte-reuse | `skills/minimal-fix/` | cobusgreyling/loop-engineering @ `d03dcb92cc1e0efb59789a2557131c6ad5897ccc` (MIT) |
 | `minimalism-driven` | B | byte-reuse | `skills/minimalism-driven/` | odin-current @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `no-comments` | B | byte-reuse | `skills/no-comments/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
 | `observability` | B | byte-reuse | `skills/observability/` | odin-current @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>addyosmani/agent-skills @ `d2c37ef6225dd8726cdd369a8030307f48592d26` (MIT) |
@@ -53,7 +42,6 @@ This package ships 69 public skills from the canonical `skills/<slug>/` tree. Pa
 | `principles` | G | structured-merge-rewrite | `skills/principles/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
 | `reproduce-and-fix-issues` | B | byte-reuse | `skills/reproduce-and-fix-issues/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
 | `reproduce-bug-report` | B | byte-reuse | `skills/reproduce-bug-report/` | https://github.com/warpdotdev/common-skills @ `f589e224907eda566c13755529f59db563090d14` (MIT) |
-| `resolve-merge-by-intent` | B | byte-reuse | `skills/resolve-merge-by-intent/` | mattpocock/skills @ `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76` (MIT) |
 | `resolve-merge-conflicts` | G | structured-merge-rewrite | `skills/resolve-merge-conflicts/` | https://github.com/warpdotdev/common-skills @ `f589e224907eda566c13755529f59db563090d14` (MIT)<br>cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)<br>odin-current @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `review` | G | structured-merge-rewrite | `skills/review/` | odin-current @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `review-reception-protocol` | B | byte-reuse | `skills/review-reception-protocol/` | https://github.com/obra/superpowers @ `b36e0829c6d0140e93cfef2ca599b1b07d4a7797` (MIT) |

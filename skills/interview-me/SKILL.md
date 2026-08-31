@@ -49,10 +49,3 @@ description: 'Use when a user asks to define requirements or choose between opti
 
 ## Output
 A local file named `DECISION-LOG.md` (or a user-specified name) containing the approved decision record. Each row states one assumption, its resolution, and the final agreed scope or decision. No implementation plan, code, or action items beyond the record itself.
-
-## Provenance
-
-- **Origin:** `addyosmani/agent-skills` (`skills/interview-me/SKILL.md`)
-- **Pinned revision:** `d2c37ef6225dd8726cdd369a8030307f48592d26`
-- **License:** MIT — Copyright (c) 2025 Addy Osmani. Retain the copyright notice and MIT permission text in derived distributions; otherwise unrestricted use, modification, and redistribution.
-- **Adaptation:** ADAPT. One-question-per-turn requirements interview contract adapted for ODIN 2.0 `odin-research` module. Trigger, mechanism, and successful end state preserved. Module corrected from original to `odin-research`. Side-effect boundary tightened: nothing written during the interview; only the approved record is written afterward.

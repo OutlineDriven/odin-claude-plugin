@@ -46,7 +46,3 @@ If a lockstep mirror write partially fails (e.g., one of several mirrors is read
 ## Output
 
 A local write to the target listing path (and each `mirror_path` if supplied) with the same items in the new order, plus a terminal one-line summary: `<principle> – <N> item(s) moved`.
-
-## Provenance
-
-Origin: `https://github.com/LilMGenius/paperthin` at revision `3bca079a51bcfff5dafb53d1d7f9f523d66ee317`. License: MIT — MIT (c) 2026 LilMGenius. NOTICE: additionally vendors verbatim material from `mattpocock/skills` (MIT, (c) 2026 Matt Pocock) with per-source attribution. Adaptation: clean-room rewrite of `skills/depth/reorder/SKILL.md` into a user-invoked hygiene skill scoped to `odin-create`. The respect-deliberate-order constraint (preserve intentionally ranked items) and MISS reporting are retained from the source. The skill is narrowed to move-only edits with no content mutation.

@@ -14,7 +14,6 @@ description: 'Use when the user asks to view, export, inspect, or share a sessio
 | Side effect | A single-file searchable HTML viewer embedding the (optionally raw) session JSONL is produced; it is opened in a browser only when the user asked to view it or passed `--open`. |
 | Done | HTML file is generated and opens; session is correctly detected and normalized; tool output is searchable; private/credential content is not exposed. |
 
-
 ## Not for
 
 - Beaming or publishing a session to a remote endpoint — use session-share.
@@ -69,7 +68,6 @@ SCRUBBERS = (
 
 masked_hits = [0]
 
-
 def scrub(text):
     if not isinstance(text, str):
         return text
@@ -77,7 +75,6 @@ def scrub(text):
         text, count = pattern.subn(replacement, text)
         masked_hits[0] += count
     return text
-
 
 def record(index, kind, role, text, tool="", ts="", raw=None):
     return {
@@ -89,7 +86,6 @@ def record(index, kind, role, text, tool="", ts="", raw=None):
         "text": scrub(text) if isinstance(text, str) else "",
         "raw": raw,
     }
-
 
 def text_of(content):
     if isinstance(content, str):
@@ -105,7 +101,6 @@ def text_of(content):
     elif content is not None:
         parts.append(str(content))
     return chr(10).join(part for part in parts if part)
-
 
 def detect_format(path, lines):
     scores = dict.fromkeys(FORMATS, 0)
@@ -147,7 +142,6 @@ def detect_format(path, lines):
         return None, scores
     return winners[0], scores
 
-
 def parse_claude(obj, recs, raw):
     t = obj.get("type")
     ts = obj.get("timestamp", "")
@@ -186,7 +180,6 @@ def parse_claude(obj, recs, raw):
                 recs.append(record(len(recs), "other", role, text_of(block), ts=ts, raw=raw))
         return True
     return False
-
 
 def parse_codex(obj, recs, meta, raw):
     t = obj.get("type")
@@ -227,7 +220,6 @@ def parse_codex(obj, recs, meta, raw):
         return True
     recs.append(record(len(recs), "other", "other", text_of(payload), ts=ts, raw=raw))
     return True
-
 
 def parse_messageish(obj, recs, meta, raw):
     t = obj.get("type")
@@ -279,7 +271,6 @@ def parse_messageish(obj, recs, meta, raw):
         recs.append(record(len(recs), kind, role, text_of(content), ts=ts, raw=raw))
         return True
     return False
-
 
 HTML = """<!doctype html>
 <html lang="en">
@@ -381,7 +372,6 @@ render();
 </html>
 """
 
-
 def main(argv=None):
     ap = argparse.ArgumentParser(description="Render an agent session JSONL as one searchable HTML file.")
     ap.add_argument("session", help="path to the session .jsonl file")
@@ -473,7 +463,6 @@ def main(argv=None):
         webbrowser.open(out.resolve().as_uri())
     return 0
 
-
 if __name__ == "__main__":
     sys.exit(main())
 ```
@@ -487,8 +476,3 @@ if __name__ == "__main__":
 
 ## Output
 The HTML viewer at the resolved path plus the stdout report (format, counts, masked hits, raw mode, path, size); the viewer is local-only, sharing happens only when the user copies the file; terminal states: done (file opens and searches) or blocked (exit 2 or 3 after the single explicit-format retry).
-
-## Provenance
-
-- Origin: https://github.com/openclaw/agent-skills at pinned revision ae75f60e8d454f1cf44ec4613e10ec9ea7f2ade7, licensed MIT (LICENSE at the repository root). The MIT redistribution terms apply: retain the upstream copyright and permission notice when redistributing substantial portions.
-- Adaptation: format detection, the renderer contract, and the privacy boundary (raw import is an explicit opt-in, content is scrubbed, and output stays local until the user shares it) are preserved. The upstream TypeScript detection, JSONL, type, importer, HTML, and CLI scripts are not shipped; their mechanism is re-expressed as the single inline generator above, and no third-party expression is copied beyond this attribution.

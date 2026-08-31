@@ -51,11 +51,3 @@ description: 'Use when asked to predict Culture Index traits from an interview t
 
 ## Output
 Return, in order: candidate and transcript header; per-trait prediction table with confidence and supporting quotes; likely pattern or insufficient-data verdict; uncertainty areas; evidence summary; caveats distinguishing prediction from survey result.
-
-## Provenance
-
-- **Origin:** Trail of Bits skills repository, `plugins/culture-index/skills/interpreting-culture-index/workflows/predict-from-interview.md`.
-- **Revision:** d1f1575cff97816e5cc08af66cd2506099c681d3
-- **Source:** https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3
-- **License:** CC-BY-SA-4.0. Preserve Trail of Bits attribution and source link. Mark modifications. License adaptations ShareAlike. Claim no trademark rights. Never reuse trail-of-bits-mark.svg as branding.
-- **Adaptation:** Clean-room adaptation. The transcript-based prediction workflow was extracted as a standalone skill with self-contained trait signal definitions, removing dependencies on the parent interpreting-culture-index skill's reference files and routing.

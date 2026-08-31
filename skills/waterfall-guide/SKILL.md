@@ -38,11 +38,3 @@ description: 'Use when a user wants to lock greenfield architecture and interfac
 
 ## Output
 A locked architecture document with sections in order: system overview, module inventory, interface contracts, cross-cutting ownership, open questions — distributed to all execution teams as the coordination contract for parallel work.
-
-## Provenance
-
-- Origin: curated:curated-ideas:curated-018 from project-owned:user-curated-skill-ideas (Planning, maps, and workflow synthesis section: "lock greenfield architecture and interfaces early enough for coherent parallel execution").
-- Supplementary raw source: project-owned:user-supplied-source-brief (Korean chat log; architectural planning discussion context).
-- Revision: not pinned (source is a living curated ideas document).
-- License: project-owned (curated ideas artifact produced within the ODIN project).
-- Adaptation: clean-room adaptation from the one-line curated brief into a complete procedural skill. No third-party expression copied.

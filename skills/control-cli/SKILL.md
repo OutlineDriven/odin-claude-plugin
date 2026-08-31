@@ -38,7 +38,3 @@ description: 'Use when asked to reproduce, profile, or verify CLI/TUI behavior. 
 
 ## Output
 Transcript or profile artifact containing captured terminal evidence, plus final classification: reproduced, profiled, verified-pass, verified-fail, blocked, or non-deterministic. Live PTY session terminated and runtime scratch removed before return.
-
-## Provenance
-
-Origin: cursor/plugins, path cursor-team-kit/skills/control-cli/SKILL.md, revision 68836ddaf5697224520f1847d90cdb90ca8babaa. License: MIT, declared by the cursor/plugins root README and the candidate plugin manifest per the pinned source audit. Clean-room adaptation: the PTY/tmux one-action-per-observation evidence-harness mechanism is preserved; expression is rewritten.

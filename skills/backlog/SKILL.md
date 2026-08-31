@@ -39,10 +39,3 @@ description: 'Use when asked to park an undecided idea without representing it a
 
 ## Output
 One backlog entry in the local backlog store, marked `parked`, carrying its idea statement, undecided reason, readiness threshold, evidence, and timestamp — ready to be promoted by a later decision step that tests the threshold.
-
-## Provenance
-
-- Origin: user-curated idea-intake workflow recorded in `project-owned:user-curated-skill-ideas` (supplemented by `project-owned:user-supplied-source-brief`).
-- Revision: unpinned.
-- License: project-owned.
-- Adaptation: clean-room restatement of the idea-intake and triage mechanism — park undecided ideas with recorded evidence, then promote ready items when they meet a reversible readiness threshold.

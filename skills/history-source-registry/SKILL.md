@@ -56,7 +56,3 @@ description: 'Use when a coding-agent session store is added or its format drift
 - Updated or new conformance fixture under the fixture root.
 - Passing loader test for the registered store.
 - Drift report (if re-verifying) naming only changed fields with redacted examples.
-
-## Provenance
-
-Adapted from [vshulcz/deja-vu](https://github.com/vshulcz/deja-vu) at revision `6f766fd4716edcaf24662c794368e420e5058f47`. Licensed under MIT. Copyright (c) 2026 Vladislav Shulcz. Mechanisms rewritten in ODIN style; registry-maintenance pattern preserved with conformance fixtures.

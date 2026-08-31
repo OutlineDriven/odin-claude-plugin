@@ -72,11 +72,3 @@ Partial-result rule: if any step fails, roll back reversible writes before retur
 ## Output
 
 `*.sequence.json` (typed sequence JSON specification) and `*.sequence.html` (self-contained interactive HTML artifact), plus a receipt with final paths, spec validation status, showcase gate pass/fail, delivery gate pass/fail, and visual-review status.
-
-## Provenance
-
-Origin: https://github.com/tt-a1i/archify, revision b36d79fdbc3aec3728744341485a7e79f03c0071.
-
-License: MIT. Copyright (c) 2026 tt-a1i (Archify). Copyright (c) 2025 Cocoon AI (original "architecture-diagram-generator"). The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-Adaptation: clean-room re-derivation. Source expression is not copied. Workflows and mechanisms are re-derived from the observable contracts of the sequence schema, the rendering interaction, and the validation gates. Reuse is compatible with clean-room adaptation requirements.

@@ -39,7 +39,3 @@ description: 'Use when asked to create a project-local executable verification s
 
 ## Output
 A project-local executable verification skill directory containing the skill definition and harness, plus the recorded live proof (command, output, pass result). The terminal classification is proven or written-but-unproven.
-
-## Provenance
-
-Origin: cursor/plugins pstack create-verification-skill (Lauren Tan / poteto). Pinned revision 68836ddaf5697224520f1847d90cdb90ca8babaa. License MIT (pstack LICENSE blob 6b5400237fdf6545be0b8fae370d6f2fcff8fb25). Clean-room adaptation: the repository-interviewed verification-harness-with-live-proof mechanism is re-expressed; no third-party expression is copied.

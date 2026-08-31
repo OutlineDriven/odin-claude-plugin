@@ -37,7 +37,3 @@ Required: the request, its acceptance criteria, and enough source context for ea
 
 ## Output
 One reviewed composition mapping each concern to its result with review passage recorded — or, on failure, usable partial results, terminal classification (`blocked` or `non-converged`), exact gap, observed error or conflict, restoration status, and one targeted follow-up.
-
-## Provenance
-
-Project-owned adaptation of the existing ODIN `parallel-launch` workflow, with its fan-out, isolated-context, composition, and independent-review mechanisms retained. The parallel-dispatch source mechanism was also adapted from `obra/superpowers` at revision `b36e0829c6d0140e93cfef2ca599b1b07d4a7797`, licensed MIT, Copyright 2025 Jesse Vincent. The wording is normalized for this contract; no runtime dependency or alternate invocation path is retained.

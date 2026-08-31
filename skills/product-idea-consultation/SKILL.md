@@ -37,7 +37,3 @@ An idea description or a repository path must be supplied. Optional gbrain or pr
 
 ## Output
 A saved, redaction-checked design document with a builder profile and analytics records, delivered with a tiered closing summary and a next-skill offer for the build phase.
-
-## Provenance
-
-Origin: https://github.com/garrytan/gstack at revision 07b59e396c6be5a86619a43151cb9ed62a15ae69. License: MIT, Copyright (c) 2026 Garry Tan; retain the copyright and permission notice. Two source candidates were merged: the office-hours skill and its design-and-handoff, startup-diagnostic, and builder-brainstorm sections, plus the OpenClaw office-hours variant, which was an exact contract duplicate absorbed into this survivor. Expressive prose and procedure were re-derived clean-room rather than copied wholesale.

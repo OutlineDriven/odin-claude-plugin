@@ -78,7 +78,3 @@ Side B — overkill compensation (slop's louder cousin):
 
 ## Output
 One picked direction plus a committed token set (color, type, space, radius, shadow, motion) in the runtime's native token system and implementation artifacts that reference those tokens — ordered frame → direction → tokens → implementation, passing the anti-slop charter and cross-surface invariants.
-
-## Provenance
-
-Origin: ODIN 1.x `skills/design/SKILL.md` (project-owned, no third-party license). Adapted for ODIN 2.0: frontmatter and section order normalized to the skill-foundry contract; reference-file pointers inlined as a self-contained procedure; mechanism preserved (frame → diverge → derive tokens/motion/type → implement against runtime → audit).

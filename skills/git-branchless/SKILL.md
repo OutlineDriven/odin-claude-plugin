@@ -98,10 +98,3 @@ disable-model-invocation: true
 ## Output
 
 Applied branchless command sequence and resulting smartlog state; or a publish result (feature stack submitted, or main pushed after the ancestry check); or the explicit inert line `git-branchless not initialized; skill inactive`.
-
-## Provenance
-
-- Origin: odin-1.x current skill, `skills/git-branchless/SKILL.md`.
-- Revision: unpinned (no source revision recorded).
-- License: project-owned (ODIN).
-- Adaptation: clean-room adaptation to the ODIN 2.0 self-contained literal. The pre-flight gate, operation-class command table, decision rubric, publish gate, auto-restack rule, and self-skepticism caveats are preserved; the un-shipped reference docs and all peer-skill, hook, and baseline pointers were removed so the skill depends on no other skill, module, or prompt.

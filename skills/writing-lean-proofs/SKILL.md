@@ -40,7 +40,3 @@ description: 'Use when asked to design, write, review, refactor, lint, or perfor
 
 ## Output
 Lean source files with stable declarations, structured proofs, and no ungated `sorry`; axiom footprint matching the declared policy; linter output clean under the selected profile; for custom tactics, failure-surface tests and structured tracing.
-
-## Provenance
-
-Adapted from Trail of Bits `writing-lean-proofs` skill (https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3). Licensed CC-BY-SA-4.0. Trail of Bits attribution and source link preserved. Modifications marked. Adaptations licensed ShareAlike. No trademark rights claimed. trail-of-bits-mark.svg not reused as branding.

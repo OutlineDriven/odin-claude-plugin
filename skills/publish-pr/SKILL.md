@@ -40,7 +40,3 @@ A blocked result names the failure class, target, observed remote state when ava
 
 ## Output
 On success, return the draft PR URL and number, whether it was created or updated, its repository, head and base branches, conventional title, and the confirmed body sections and optional aids. On failure, return the blocked result defined above.
-
-## Provenance
-
-Adapted from `getsentry/skills`, path `skills/pr-writer/SKILL.md`, pinned at revision `c2f99a5b04b4cd992ec3022d7c2c3e23e938d241` under Apache-2.0. This version preserves the `gh`-based remote PR creation and update mechanism, draft publication boundary, conventional title, concise reviewer-facing body, and optional review aids while restating the procedure for this contract.

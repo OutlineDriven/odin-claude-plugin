@@ -37,7 +37,3 @@ Optional: prior measurements, profiling traces, or environment constraints the u
 
 ## Output
 A chat report containing, per suspected hot path: one labeled hypothesis (workload, dominant operation, magnitude rank, no speed claim) and one benchmark design (metric, baseline, variant, workload generator, warm-up, repetitions, noise controls). Blocked paths are reported as blocked with the reason.
-
-## Provenance
-
-Origin: user-curated performance-hypothesis workflow (project-owned:user-curated-skill-ideas, project-owned:user-supplied-source-brief). Revision: unversioned. License: project-owned, clean-room adaptation. Adapted to the read-only authority: emit hypotheses and benchmark designs before any mutation or claim.

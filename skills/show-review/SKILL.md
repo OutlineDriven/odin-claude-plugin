@@ -49,9 +49,3 @@ description: 'Use when the user wants a per-finding visual walk through a diff o
 
 ## Output
 Per turn: one finding as an ephemeral visual (focused diff, pseudocode, call tree, component tree, shallow file tree, diagram, or whole block) with one-two impact lines and a Keep/Skip/Discuss single-select. On close: a one-line kept/skipped/discussed tally and the user's recorded choice (stop, apply kept, grill kept). Nothing written to disk.
-
-## Provenance
-
-- Origin: current-odin-skill-tree, candidate `current:current-d:current:show-review`, skills/show-review/SKILL.md.
-- Pinned revision: none (project-owned, continuously adapted).
-- License: project-owned. No third-party expression copied; adaptation is clean-room from the source mechanism. The per-finding visual walk, impact ranking, view-selection table, eight-turn skip gate, and close tally are preserved from the source. Routing references to peer skills were inlined as generic negative-scope boundaries.

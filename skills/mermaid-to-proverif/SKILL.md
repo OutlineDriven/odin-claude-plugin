@@ -52,7 +52,3 @@ description: 'Use when a cryptographic Mermaid sequenceDiagram is supplied and t
   - Each reachability query result.
   - Each security query result with `RESULT` classification.
   - The complete assumption list.
-
-## Provenance
-
-Origin: Trail of Bits skills repository (https://github.com/trailofbits/skills), revision d1f1575cff97816e5cc08af66cd2506099c681d3. License: CC-BY-SA-4.0. Adaptation: converted Mermaid sequence diagrams to ProVerif protocol models with added reachability-before-security-query ordering, assumption tracking, and structured verification report. Retained all cryptographic operation mapping logic. Trail of Bits attribution and source link preserved; adaptations marked. No trademark rights claimed.

@@ -48,13 +48,3 @@ No mutation. This skill writes nothing to disk or VCS. Recovery is to restate th
 
 ## Output
 A surviving-shape record in chat containing the final structure, the list of attacks it survived with their rebuttals, the changes made during the session, and any deferred or non-converged axes with their open questions. If the shape did not survive, output the non-converged record naming the unresolved axes.
-
-## Provenance
-
-Origin: user-curated skill idea `attack-shape` from the user's curated ideas brief (project-owned:user-curated-skill-ideas), supplemented by the raw Korean source log (project-owned:user-supplied-source-brief).
-
-Revision: unpinned (null).
-
-License: project-owned. User-curated material adapted clean-room; no third-party expression copied.
-
-Adaptation: distilled from the one-line brief "the agent attacks architecture, structure, and shape while the human defends" into a bounded, falsifiable attack-and-defense ritual. Distinct from `devils-advocate-architecture` because here the agent is the attacker and the human is the defender, not the reverse.

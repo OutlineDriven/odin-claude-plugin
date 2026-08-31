@@ -40,7 +40,3 @@ The user supplies review comments — the text of each comment and any associate
 
 ## Output
 Per comment, in order: Comment, Status (VALID ISSUE | NOT AN ISSUE | NEEDS CLARIFICATION), then the status-specific block — for VALID ISSUE three numbered Solutions with trade-offs and the Recommended pick; for NOT AN ISSUE the Reason and Evidence; for NEEDS CLARIFICATION the exact Missing information. Stop after the last comment; emit no summary or overall-PR content.
-
-## Provenance
-
-Origin: odin-current. No revision pin. License: project-owned. Adaptation: clean-room rewrite of `skills/resolve/SKILL.md` into ODIN 2.0 literal form; role-framing, generic reminders, and introduction removed; contract table, named failure classes, and per-comment terminal classification added.

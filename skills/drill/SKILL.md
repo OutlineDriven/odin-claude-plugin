@@ -44,7 +44,3 @@ description: 'Use when a concept needs practising: the user asks for an exercise
 
 ## Output
 One completed move plus one appended `PROGRESS.md` line per attempt (or in-session only when no files exist), with the rung outcome for `practice`, graded items for `quiz`, due concepts retrieved for `recall`, or a ranked gap list for `probe`.
-
-## Provenance
-
-Origin: odin-1.x current skill `skills/drill/SKILL.md` (revision unpinned, no third-party license evidence — project-owned). Adaptation: clean-room rewrite to the ODIN 2.0 self-contained literal, preserving the `PROGRESS.md`/`CORPUS.md` ownership contract and the four-move rung ladder; dropped the external `references/DRILL-FORMAT.md` pointer and cross-skill references so the skill depends on no other file, skill, or module.

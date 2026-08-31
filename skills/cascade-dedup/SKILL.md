@@ -57,7 +57,3 @@ disable-model-invocation: true
 
 ## Output
 A final report containing the 6/6 invariant re-verification diff results, strips per file with baseline-pair citations, conflicts resolved with the winner named, kept harness-adaptations, the complete divergence ledger (one classification per divergence), every externally edited path flagged for user review, the `prek run --all-files` result, and the `releaseVersion` bump decision (bumped literal plus regenerated surfaces, or no-bump rationale); repo changes land as one atomic commit, external edits land in place and are never committed.
-
-## Provenance
-
-Origin: ODIN 1.x current skill `skills/cascade-dedup/SKILL.md`. Revision: none pinned (current working copy). License: project-owned (no third-party expression). Adaptation: restructured into the ODIN 2.0 contract section order; zone definitions, Jaccard thresholds, divergence-ledger classification, manifest-bump rule, and authorization gate preserved from the source.

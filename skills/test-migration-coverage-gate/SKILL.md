@@ -52,7 +52,3 @@ description: 'Delete a superseded test only after every assertion maps to its re
 ## Output
 
 Per-assertion coverage table mapping each original assertion to its replacement check, a commit message receipt embedded in the deletion commit, the list of updated or annotated references across the project tree, and the commit SHA confirming the deletion.
-
-## Provenance
-
-Adapted from the independent-reviewer per-assertion coverage gate mechanism described in obra/superpowers at revision b36e0829c6d0140e93cfef2ca599b1b07d4a7797, path docs/superpowers/specs/2026-05-06-lift-drill-into-evals-design.md. Licensed MIT, copyright 2025 Jesse Vincent. This is a clean-room adaptation of the mechanism, not a copy of the source expression.

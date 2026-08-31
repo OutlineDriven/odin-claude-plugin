@@ -295,13 +295,3 @@ The scaffold contains:
 No GitHub repo, no Vercel deployment, no favicon, no OG images, no pre-launch checklist.
 
 Done predicate satisfied when: `pnpm run dev` starts from the project root, `pnpm run build` succeeds with zero errors, `pnpm run check-types` passes, and `pnpm run check` passes Ultracite checks.
-
-## Provenance
-
-**Origin:** `mblode/agent-skills` — `skills/scaffold-nextjs/SKILL.md` and its reference files `references/app-setup.md`, `references/deploy-and-launch.md`, `references/turbo-configs.md`.
-
-**Revision:** `e97a3b383f5944f90d41eb92b24b4fb3b917a7f9`
-
-**License:** MIT — Copyright (c) 2026 Matthew Blode. Reuse constraint: preserve the copyright notice and license text in all copies or substantial portions.
-
-**Adaptation statement:** Adapted from the upstream MIT-licensed source. Phases 7 (GitHub and Vercel setup) and 8 (pre-launch checklist) are excised because they fall outside the reversible-local authority boundary and the side-effect contract: the skill stops after local scaffolding, defers deployment to a human. Reference file content is reproduced verbatim for source-mechanism fidelity. No deployment, remote, or irreversible actions are performed.

@@ -1,3 +1,0 @@
-interface:
-  display_name: "Coding Agent Hook Safety"
-  short_description: "Use when a repository needs bounded coding-agent event guards"

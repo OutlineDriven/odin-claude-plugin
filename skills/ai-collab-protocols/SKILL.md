@@ -35,7 +35,3 @@ The user's message may contain ambiguous references: names or descriptions witho
 
 ## Output
 A reply that, for each ambiguous reference, states the stable handle the user supplied or marks it unresolved, plus any anti-pattern surfaced when reached. No file, state transition, or external mutation.
-
-## Provenance
-
-Origin: ODIN 1.x skill `ai-collab-protocols` (`skills/ai-collab-protocols/SKILL.md`), project-owned, no third-party license. Adapted for ODIN 2.0: frontmatter `disable-model-invocation` flipped from `true` to omitted (model+human invocation); body restructured into the contract/inputs/procedure/failure/output/provenance order; cross-skill and rule-file pointers removed per the self-contained-skill rule. Mechanisms preserved: URL-as-entity-reference, durable PR-comment threads as session memory, anti-pattern surfacing (screenshot-only context; token-usage/LOC-as-quality framing).

@@ -70,7 +70,3 @@ EOF
 
 ## Output
 The current branch carries one commit per logical concern, each proven by `git status` and reported with its hash and subject line, pushed to `origin/<current-branch>`; or a terminal state is reported: detached HEAD, nothing to do, no origin remote, or push rejected with divergence counts.
-
-## Provenance
-
-Origin: ODIN 1.x `commit-push-current` skill (`skills/commit-push-current/SKILL.md`). Revision: unpinned (current). License: project-owned. Adaptation: restated to the ODIN 2.0 contract format with the complete atomic-commit mechanism inlined (concern grouping, revert test, mechanism split via filtered patch and `git apply --cached` with first-split confirmation, sweep and build-order rules, native verification gate, named-file staging over `git add -A`, heredoc message preservation, post-commit status and hash proof), cross-skill pointers removed, and the human-only invocation gate and push-to-origin contract added.

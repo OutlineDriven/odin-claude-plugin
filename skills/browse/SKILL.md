@@ -39,7 +39,3 @@ description: 'Use when the user asks to open or take over the gstack browser. La
 
 ## Output
 A user-visible headed Chromium window with the gstack sidebar extension loaded, the side panel showing a live activity feed, and confirmation that `Mode: headed` and port 34567 are active — the session is ready for the user to watch or take over.
-
-## Provenance
-
-Origin: https://github.com/garrytan/gstack, revision 07b59e396c6be5a86619a43151cb9ed62a15ae69, file `open-gstack-browser/SKILL.md`. License: MIT, Copyright (c) 2026 Garry Tan. Clean-room adaptation: the procedure and mechanism are re-derived from the source skill's browse-connect-verify-guide flow; no source expression is copied wholesale.

@@ -37,7 +37,3 @@ description: 'Use when a Culture Index PDF must become verified structured profi
 
 ## Output
 Extracted Culture Index JSON (traits, arrow, EU, identity, archetype, energy analysis) and an ASCII verification summary chart, written to stdout or the user-selected output file.
-
-## Provenance
-
-Adapted from Trail of Bits skills (https://github.com/trailofbits/skills) at revision d1f1575cff97816e5cc08af66cd2506099c681d3, workflow `plugins/culture-index/skills/interpreting-culture-index/workflows/extract-from-pdf.md`. License CC-BY-SA-4.0: preserve Trail of Bits attribution and the source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding. Adapted into a self-contained extraction skill; the original OpenCV extraction script is not bundled, so the procedure states the computer-vision mechanism rather than a fixed script path.

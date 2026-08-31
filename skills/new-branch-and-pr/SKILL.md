@@ -41,7 +41,3 @@ Required: the repository containing the work, the intended changes to publish, a
 
 ## Output
 On success, return `complete` with the local and remote branch name, base branch, commit identifier, included files, checks actually run and their results, and the confirmed pull-request URL. On failure, return the exact `blocked` or `partial` result defined above, including completed mutations and the recovery point; never claim the done predicate without a confirmed URL.
-
-## Provenance
-
-Adapted from `cursor/plugins` candidate `source:source-cursor:cursor-new-branch-and-pr`, source path `cursor-team-kit/skills/new-branch-and-pr/SKILL.md`, pinned at revision `68836ddaf5697224520f1847d90cdb90ca8babaa`. The source is MIT-licensed, as declared by the repository README and candidate plugin manifest in the pinned source audit. This adaptation preserves the branch-to-commit-to-push-to-pull-request mechanism while expressing the procedure independently for this contract.

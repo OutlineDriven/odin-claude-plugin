@@ -52,7 +52,3 @@ Optional:
 
 ## Output
 A minimal Swift source fix committed with its reproducing snapshot (`<bug-slug>-pre.json`), pre-fix and post-fix screenshots, and a regression test that restores the pre-bug snapshot and asserts the post-fix behavior on a device or simulator. Terminal status is DONE with the verification evidence, or BLOCKED with the blocker and the attempts made.
-
-## Provenance
-
-Origin: https://github.com/garrytan/gstack, file `ios-fix/SKILL.md`, revision `07b59e396c6be5a86619a43151cb9ed62a15ae69`. License: MIT, Copyright (c) 2026 Garry Tan — retain the copyright and permission notice in copies. Adaptation: clean-room re-derivation of the iOS bug-fix loop (reproduce via the debug bridge, root-cause by source tracing, minimal fix, verify on device, regression test) with the gstack preamble, telemetry, AskUserQuestion framework, and skill-start infrastructure removed; the Iron Law, phase structure, debug-bridge endpoints, failure-mode table, and regression-test shape are preserved.

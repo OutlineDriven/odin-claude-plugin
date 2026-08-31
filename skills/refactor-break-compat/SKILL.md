@@ -48,7 +48,3 @@ Partial results are never reported as success. If any failure class triggers, th
 ## Output
 
 A migration report with blast-radius manifest, deleted artifacts list, caller-migration checklist, test-rewrite summary, zero-residue verification result, and final exit code (0 = clean demolition, 1 = residue, 2 = broken build, 3 = stalled migration), ordered as listed.
-
-## Provenance
-
-Origin: odin-current. Adapted from `skills/refactor-break-compat/SKILL.md`. License: project-owned (ODIN 2.0). No third-party expression retained.

@@ -47,7 +47,3 @@ description: 'Use when a user asks to visualize a process, approval flow, runboo
 
 ## Output
 A frozen schema-validated workflow JSON specification, one self-contained interactive HTML artifact with one obvious main path and truthful relationship labels, optionally bounded visual-check screenshots and a contact sheet, and a JSON evidence receipt binding the specification hash, artifact hash, nine showcase-check results, and truthful visual-review status — with a terminal classification of delivered (all checks pass) or blocked (a named check failed).
-
-## Provenance
-
-Origin: https://github.com/tt-a1i/archify, revision b36d79fdbc3aec3728744341485a7e79f03c0071, MIT license (LICENSE blob 4c27b7152c7e4593dfdd153761ce178177d30464). Copyright (c) 2026 tt-a1i (Archify); Copyright (c) 2025 Cocoon AI (original "architecture-diagram-generator"). Adaptation: clean-room re-derivation from the observable contracts; source expression is not copied. The MIT copyright and permission notice is preserved: the above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.

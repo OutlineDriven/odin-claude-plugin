@@ -49,7 +49,3 @@ description: 'Snapshot external job or tracker state into a local artifact on a 
 ## Output
 
 Two artifacts in the configured output directory: `snapshot.json` (captured external state) and `.last-run.json` (run metadata: run_id, timestamp, source, status, snapshot_bytes) — ordering: snapshot first, then marker.
-
-## Provenance
-
-Adapted from cobusgreyling/loop-engineering, revision d03dcb92cc1e0efb59789a2557131c6ad5897ccc, MIT license. Source paths: `/patterns/thin-loop.md`, `/starters/thin-loop/.github/workflows/thin-loop.yml`, `/starters/thin-loop/LOOP.md`, `/examples/mcp/safe-write-pattern.md`. Clean-room adaptation for ODIN 2.0; no third-party expression copied.

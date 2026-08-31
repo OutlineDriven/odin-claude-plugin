@@ -40,7 +40,3 @@ Blocked result: return the missing input and the unfinished entry text. Never re
 
 ## Output
 One appended decision-diary entry at the agreed location, containing in order: winning decision, considered worlds, winning rationale, per-rejected-world loss reasons, named opinions or doubts.
-
-## Provenance
-
-Origin: project-owned:user-curated-skill-ideas (candidate curated:curated-ideas:curated-060). Revision: none. License: project-owned. Adaptation: clean-room restatement of the user-curated decision-knowledge workflow that records why one world won; no third-party expression copied.

@@ -57,7 +57,3 @@ Optional, supplied by the user when known: a human-readable project name (otherw
 
 ## Output
 Five files under the repository's `.devcontainer/` (Dockerfile, devcontainer.json, post_install.py, .zshrc, install.sh) with all placeholders resolved, all detected languages represented without duplicate configuration, a composed postCreateCommand, explicit security mounts and token forwarding, and re-grounded toolchain versions and reviewed privileges, plus a short report of detected languages, chosen versions and privilege set, and VS Code and CLI startup instructions, ordered detect → infer → generate → re-ground → merge → compose → validate → present, with no false build/launch claim.
-
-## Provenance
-
-Origin: Trail of Bits skills repository, `plugins/devcontainer-setup/skills/devcontainer-setup/SKILL.md`, pinned revision `d1f1575cff97816e5cc08af66cd2506099c681d3`. License: CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3. Adaptation is clean-room: the project-aware generation logic—reconnaissance, language detection, multi-language merge in priority order, template substitution, postCreateCommand composition, security mounts, token forwarding, and the validation checklist—is preserved, while pinned toolchain versions and broad container privileges are re-grounded and security-reviewed rather than copied. Preserve Trail of Bits attribution and the source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.

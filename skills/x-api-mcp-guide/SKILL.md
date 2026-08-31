@@ -110,31 +110,3 @@ Fixed error messages:
 2. **Not onboarded (403):** "This X account isn't set up yet. Go to https://console.x.com, register and onboard with this same X account, then come back and I'll retry."
 3. **Out of credits:** "You're out of credits. Go to https://console.x.com and add credits, then I'll retry."
 4. **Private account:** "I can't open that. If it's yours, reconnect X. If it's someone else's private account, I don't have access."
-
-## Provenance
-
-- Origin: cursor/plugins `third_party/x` skill blob — outside the 63 manifest-backed marketplace plugins
-- Source paths: `third_party/x/skills/x-api-mcp-guide/SKILL.md`, `third_party/x/skills/x-api-mcp-guide/references/pricing.md`
-- Pinned revision: `68836ddaf5697224520f1847d90cdb90ca8babaa`
-- License: MIT — inherited from the cursor/plugins root README declaration
-- Adaptation: ODIN voice, contract table, ODIN section order, ODIN failure taxonomy, authority translated to operational language, pricing reference inlined as support content, model+human invocation flag applied.
-
-### references/pricing.md
-
-Live pricing from `https://console.x.com/api/credits/pricing` wins. Pinned reference prices at `68836ddaf5697224520f1847d90cdb90ca8babaa`:
-
-| Tool class | Cost |
-|---|---|
-| `get_users_me` | free |
-| user lookup/search | $0.01 per user |
-| post lookup/search | $0.005 per post |
-| own timelines/bookmarks | $0.001 per post |
-| reposting-user lookup | $0.01 per user |
-| liking-user lookup | free |
-| recent post count | $0.005 per call |
-| bookmark write/delete | $0.005 per call |
-| bookmark folders | free |
-| news | $0.005 per story |
-| trends | $0.01 per call |
-
-Writes: standard post $0.015; post containing URL $0.20; summoned reply/quote $0.01; post delete $0.005; like $0.015; unlike $0.01; repost $0.015; undo repost $0.005; follow $0.015; unfollow $0.01; mute $0.01; unmute $0.005. Failed requests are not billed. Expanded returned objects are billed. Keep requested object counts and expansions bounded.

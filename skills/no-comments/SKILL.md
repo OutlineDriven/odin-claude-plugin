@@ -77,10 +77,3 @@ Partial-result rule: if edits succeed on some files before a failure, report the
 ## Output
 
 One structured report: deleted, restored, changed, skipped, remaining work, status, in that order.
-
-## Provenance
-
-- Origin: cursor/plugins `pstack/skills/no-comments/SKILL.md` and `pstack/agents/comment-sicko.md`
-- Revision: `68836ddaf5697224520f1847d90cdb90ca8babaa`
-- License: MIT — pstack authored by Lauren Tan (poteto) per license block audit
-- Adaptation: rewritten from cursor/plugins source; MIT license retained; structural alternatives and veto list added per odin-code module routing.

@@ -83,11 +83,3 @@ description: 'Build a multi-language Trailmark graph for call paths, attack surf
 ## Output
 
 A graph evidence report ordered as version and parser coverage, languages, graph summary, preanalysis results, requested query results, then limitations; each query cites version gates and the report states that reachability is not data-flow proof.
-
-## Provenance
-
-Adapted from Trail of Bits trailmark skill.
-- Origin: https://github.com/trailofbits/skills
-- Revision: d1f1575cff97816e5cc08af66cd2506099c681d3
-- License: CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.
-- Adaptation: Clean-room rewrite for ODIN 2.0 module odin-code-advanced. Procedure derived from source mechanisms (graph construction, version gating, preanalysis passes, query patterns, repository links, graph model, security-claim boundaries). No third-party expression copied.

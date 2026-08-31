@@ -95,7 +95,3 @@ description: 'Use when writing UI text, error messages, empty states, onboarding
 
 ## Output
 Edited copy with each string presented with its tone selection (Plain Speech or Sentry Voice) and the rule applied; unedited strings flagged with the reason.
-
-## Provenance
-
-Adapted from getsentry/skills `skills/brand-guidelines/SKILL.md` at revision c2f99a5b04b4cd992ec3022d7c2c3e23e938d241 (Apache-2.0). Clean-room adaptation: the tone selection table, Plain Speech rules, Sentry Voice principles, spelling, punctuation, word-choice, dash usage, UI element guidelines, and anti-patterns are restated from the source's public brand guidelines; no third-party expression is copied.

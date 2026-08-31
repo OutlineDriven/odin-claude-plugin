@@ -39,7 +39,3 @@ A partial classification may be returned only with unresolved items named; it is
 ## Output
 
 A scope decision: outcome, minimum proof, admitted actions (each with its contract gap), rejected candidates (each with its delete-test result), and status (`sufficient`, `already done`, or `blocked`) — ordered by the procedure steps that produced them.
-
-## Provenance
-
-Project-owned adaptation of `skills/necessary-work/SKILL.md` from the `odin-current` candidate `current:current-c:current:necessary-work`. No source revision or external license identifier was supplied. This version preserves the delete test, the four permitted sources of necessity, smallest-consistent ambiguity binding, and stopping at proof while restructuring the procedure into the ODIN 2.0 contract.

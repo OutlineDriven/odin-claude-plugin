@@ -64,7 +64,3 @@ Seam discipline: one adapter means a hypothetical seam; two adapters mean a real
 
 ## Output
 A design comparison in chat: problem-space framing, three or more radically different interface designs, a prose comparison by depth, locality, and seam placement, and one opinionated recommendation — ordered frame → diverge → compare → recommend, with no files written.
-
-## Provenance
-
-Adapted from `mattpocock/skills` (`skills/engineering/codebase-design/DESIGN-IT-TWICE.md`, `DEEPENING.md`, and `SKILL.md`), pinned revision `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76`, MIT license (Copyright (c) 2026 Matt Pocock). The design-it-twice parallel-generation technique, the deep-module vocabulary, and the dependency-category taxonomy are retained; the procedure is restated in ODIN voice.

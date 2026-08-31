@@ -45,7 +45,3 @@ Required: the nodejs/node checkout path, the contribution or review target, its 
 ## Output
 
 Return the bounded changed-file and commit sets, base and merge-base revisions, rebuild commands, focused test and `make lint` and clang-format-diff and DCO and `core-validate-commit` results, documentation and CLI/configuration surfaces updated, review findings when applicable, and publication coordinates plus confirmed remote state when publication was explicitly directed. Terminal classification: `complete`, `blocked`, `failed-checks`, or `publish-failed`.
-
-## Provenance
-
-Clean-room mechanism adaptation from `mcollina/skills` at revision `856efd268ae85482d882f3d0bed869fd020b5c06`, drawing on its Node.js core contribution, build/test, lint, commit/PR, review, documentation, CLI option, configure, build-system, and primordials workflows. Source license: MIT; the source MIT notice is retained in project provenance records, while this procedure uses newly written expression.

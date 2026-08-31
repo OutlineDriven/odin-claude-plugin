@@ -38,7 +38,3 @@ Partial results are acceptable only when each incomplete section is explicitly l
 
 ## Output
 A self-contained `diagrams/visual-diff-review.html` with seven sections in order: Overview, Before State, After State, Risk Assessment, Coupling Analysis, Merge Recommendation, Evidence Log — every section citing evidence or marked `INSUFFICIENT EVIDENCE`.
-
-## Provenance
-
-Origin: `nicobailon/visual-explainer` at commit `7163c3e10660912e0b89e1af465db9f387282b88`. License: MIT — MIT notice retained; expression reuse or clean-room rederivation permitted. Source paths: `plugins/visual-explainer/commands/diff-review.md`, `plugins/visual-explainer/SKILL.md`, `plugins/visual-explainer/references/css-patterns.md`, `plugins/visual-explainer/references/libraries.md`, `plugins/visual-explainer/references/responsive-nav.md`. Adaptation: ODIN 2.0 ODIN-CODE module remap; executable procedure derived from `diff-review.md`; 7-section structure from `SKILL.md`; CSS patterns from `css-patterns.md`; layout from `responsive-nav.md`.

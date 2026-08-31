@@ -56,7 +56,3 @@ disable-model-invocation: true
 
 ## Output
 The confirmed operation result — `tokenUrl` for publish, content for read/pull, `revision` for edit/review/title, or `shareState: "DELETED"` for delete — plus a short summary.
-
-## Provenance
-
-Adapted from the `ce-proof` skill in Every's compound-engineering plugin (https://github.com/EveryInc/compound-engineering-plugin), pinned at revision `a1f601f17137f648be439965f8fdd9123303de5d`, licensed MIT (LICENSE, Copyright (c) 2025 Every). Mechanisms are extracted and rewritten in ODIN style rather than copied verbatim; attribution is preserved in this section and in the root provenance ledger.

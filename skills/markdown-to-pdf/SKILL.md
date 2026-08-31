@@ -46,7 +46,3 @@ description: 'Use when the user runs /markdown-to-pdf on Markdown to render a pu
 ## Output
 
 The rendered PDF at the output path (stdout prints the path, one line) plus a gate report: for each of the four gates (emoji, diagram, landscape, combined), green or red with the evidence used to confirm it. Terminal status: DONE with the PDF path when all four gates are green; BLOCKED with the failed gate and evidence when any gate is red or the renderer is unavailable.
-
-## Provenance
-
-Origin: https://github.com/garrytan/gstack, revision `07b59e396c6be5a86619a43151cb9ed62a15ae69`, file `make-pdf/SKILL.md`. License: MIT (Copyright (c) 2026 Garry Tan). Adaptation: re-derived the Chromium PDF rendering procedure with the emoji, diagram, landscape, and combined gates as a self-contained ODIN skill; no third-party expressive prose or code copied wholesale.

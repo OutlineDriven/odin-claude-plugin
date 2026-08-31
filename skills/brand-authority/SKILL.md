@@ -35,7 +35,3 @@ description: 'Use when the user asks for branded or style-governed output. Produ
 
 ## Output
 One or more local deliverable file(s) conforming to the fetched authority, plus a short note of the material brand constraints that shaped the result — if the authority was unavailable, the output is the unavailability notice and the user prompt, no branded artifact.
-
-## Provenance
-
-Origin: github.com/warpdotdev/common-skills, revision f589e224907eda566c13755529f59db563090d14, file .agents/skills/brandalf/SKILL.md. License: MIT (Copyright (c) 2026 Denver Technologies, Inc.). Adaptation: clean-room rewrite of the fetch-authority-then-apply mechanism in ODIN style; no third-party expression copied, attribution retained in this module provenance ledger. The vendored pierre-diffs.js bundle noted in the source license is not carried over.

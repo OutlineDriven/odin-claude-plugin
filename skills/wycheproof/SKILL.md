@@ -76,10 +76,3 @@ description: 'Use when validating a cryptographic implementation against Project
 
 ## Output
 A parameterized test file covering valid, invalid, and acceptable Wycheproof vectors for the target algorithm — stable `tcId`-based test identifiers, assertion messages referencing `comment` and `flags`, and a summary of pass/fail/warn counts per result category.
-
-## Provenance
-
-- **Origin**: https://github.com/trailofbits/skills — `plugins/testing-handbook-skills/skills/wycheproof/SKILL.md`
-- **Revision**: d1f1575cff97816e5cc08af66cd2506099c681d3
-- **License**: CC-BY-SA-4.0. Preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights.
-- **Adaptation**: Clean-room rewrite distilling the executable procedure from the source reference material. Background, case studies, related skills, and dependency maps from the source are omitted per the semantic minimum.

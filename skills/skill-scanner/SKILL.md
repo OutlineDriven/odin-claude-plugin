@@ -59,9 +59,3 @@ description: 'Use when a user asks to scan, audit, or validate a skill for secur
 ## Output
 
 A structured risk assessment report with `risk_level`, `skill_name`, `file_count`, `findings`, `false_positives_filtered`, `recommendation`, and `coverage_note`, in that order.
-
-## Provenance
-
-- Origin: getsentry/skills, path `skills/skill-scanner/SKILL.md` at revision c2f99a5b04b4cd992ec3022d7c2c3e23e938d241.
-- License: Apache-2.0; source https://github.com/getsentry/skills/tree/c2f99a5b04b4cd992ec3022d7c2c3e23e938d241.
-- Adaptation: clean-room restructure for ODIN 2.0 format. The bundled `scan_skill.py` script and three reference files (`prompt-injection-patterns.md`, `dangerous-code-patterns.md`, `permission-analysis.md`) were inlined into the procedure as analysis passes; no third-party expression was copied. The `uv` CLI runtime dependency was removed.

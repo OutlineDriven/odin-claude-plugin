@@ -60,7 +60,3 @@ description: 'Document a training session or workshop (compte rendu): Markdown d
 ## Output
 
 Two files in the same output directory: `training_report_[team]_[date].md` (canonical Markdown draft) and `training_report_[team]_[date].docx` (terminal derivative generated once from the approved Markdown) — the .md is the source of truth; the .docx is a styled rendering of the final approved text.
-
-## Provenance
-
-Origin: `samber/cc-skills`, path `skills/training-report/SKILL.md`, pinned revision `f9953962e135235137628ea92d06ea085688031f`. License: MIT. Source reference files (`references/tone-of-voice.md`, `references/markdown-draft.md`, `references/docx-generation.md`) were read from the same revision for mechanism fidelity; they are not runtime dependencies. Adaptation: clean-room rewrite for ODIN 2.0 — reference-file guidance inlined into the procedure, peer-skill dependencies removed, ODIN contract frontmatter and authority table added, and all expressions restated. No third-party expression copied.

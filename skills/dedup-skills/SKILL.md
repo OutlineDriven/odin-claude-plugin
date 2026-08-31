@@ -43,7 +43,3 @@ description: 'Use when asked to deduplicate skills or prompt directories, find r
 
 ## Output
 A ledger in chat: totals per classification; repeat findings grouped into families with per-copy file:line locations and shorten-in-place proposals; conflicts with both sides quoted verbatim; one-line discharge reasons for every intentional-keep and not-a-finding; and the verification performed (spot-checked cluster count, conflict-pass falsifiability). The scanned tree is untouched. Apply is a separate, later pass gated on per-row or per-family user approval.
-
-## Provenance
-
-Origin: odin-1.x current skill at `skills/dedup-skills/SKILL.md`. No revision pinned. License: project-owned. Adapted to the ODIN 2.0 self-contained literal, preserving the vendored-set, frontmatter-strip cluster, conflict-falsifiability, judgment-classification, and no-edit-ledger mechanisms.

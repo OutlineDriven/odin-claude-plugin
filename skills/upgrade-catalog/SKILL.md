@@ -84,7 +84,3 @@ Every skill in the convergence target must be installed under the chosen scope a
 
 ## Output
 Reconciliation plan (scope, retire, add, refresh, untouched, discovery-notice wiring), executed commands and results, verification report (no deprecated names, full catalog, unknown names untouched, retry/fallback present, hooks idempotent), and any skipped step or unresolved ambiguity.
-
-## Provenance
-
-Origin: https://github.com/LilMGenius/paperthin, skills/breadth/re0-upgrade/SKILL.md, revision 3bca079a51bcfff5dafb53d1d7f9f523d66ee317. License: MIT (c) 2026 LilMGenius; NOTICE additionally vendors verbatim material from mattpocock/skills (MIT, (c) 2026 Matt Pocock) with per-source attribution. This is a clean-room adaptation: the foundry does not copy verbatim vendor material. Adaptation: re-targeted from paperthin's npx-skills installer to the ODIN harness plugin installer; preserved the rename/deprecation SSOT, shadow-install detection, confirmation gate, and idempotent backed-up version-pinned discovery-hook wiring; dropped the silent auto-star step (gh api PUT user/starred) as a non-consented side effect.

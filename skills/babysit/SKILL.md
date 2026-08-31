@@ -39,10 +39,3 @@ description: 'Use when asked to poll a named changing job, log, or artifact unti
 
 ## Output
 One terminal classification: `predicate-holds` (with final observed state) or `non-converged` (with last observed state, poll count, and the failure class that stopped it).
-
-## Provenance
-
-- Origin: user-curated watcher workflow (curated-ideas:curated-030).
-- Revision: none (local source, no pinned revision).
-- License: project-owned; clean-room adaptation from the user's watcher family brief.
-- Adaptation: normalized a generic watcher concept into a bounded read-only polling contract with an explicit completion predicate and named failure classes.

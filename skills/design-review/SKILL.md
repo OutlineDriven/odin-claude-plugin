@@ -79,7 +79,3 @@ description: 'Use when the user runs /design-review with a URL to visually audit
 
 ## Output
 A report directory `design-audit-<YYYYMMDD>/` holding the audit report, screenshots/, design-baseline.json, a findings table, a summary, and a one-line PR summary — ordered capture → first-impression → inferred-system → trunk-test → checklist → flows → consistency → score → triage → fix-loop → self-regulate → final-audit, with every finding classified verified / best-effort / reverted / deferred.
-
-## Provenance
-
-Origin: https://github.com/garrytan/gstack, revision 07b59e396c6be5a86619a43151cb9ed62a15ae69, file design-review/SKILL.md. License MIT, copyright (c) 2026 Garry Tan. Clean-room adaptation: the visual-audit-through-browser mechanism, the 10-category checklist, the dual-score grading rule, the goodwill reservoir, and the fix-and-verify loop were re-derived in original prose; no source expression was copied wholesale. The MIT copyright and permission notice is retained.

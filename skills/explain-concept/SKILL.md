@@ -51,7 +51,3 @@ The concept to explain must be supplied. An explicit angle argument (`intuition`
 
 ## Output
 The explanation in the chat reply: one screen per angle, fifteen lines for origin, the rendered SVG with alt text and caption for picture, the contrast table with its per-item reach-for lines, closing with the terminal classification of the chosen angle's done condition met or exactly which condition remains unmet.
-
-## Provenance
-
-Adapted from the ODIN project-owned skill source `skills/explain-concept/SKILL.md` (candidate `current:current-b:current:explain-concept`, origin `odin-1.x-current-skill`, revision not pinned, no third-party expression). Adaptation for ODIN 2.0: module assigned to `odin-research` by editorial ruling (common research workflow); the origin search-and-approval protocol formerly in a support file and the diagram tool-selection rules formerly delegated to a peer skill are inlined here because the final roster carries no support files; diagram delivery moved into the chat reply to hold read-only authority.

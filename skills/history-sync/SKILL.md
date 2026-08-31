@@ -44,7 +44,3 @@ The terminal result is exactly one of `synced`, `empty`, `partial`, or `blocked`
 
 ## Output
 Return the terminal classification; resolved peer and direction; static JSONL batch path or identifier when one was written; selected, exported, imported, duplicate, excluded, redacted, and failed counts; old and new per-peer watermark; exact partial boundary or blocker; confirmation that imported records are export-ineligible; confirmation that stored alias spelling was preserved; and confirmation that no live or writable remote database was exposed.
-
-## Provenance
-
-Mechanism-level adaptation of `vshulcz/deja-vu` at revision `6f766fd4716edcaf24662c794368e420e5058f47`, drawing on `cmd/deja/sync.go`, `internal/peers`, and the sync, machine-identity, and explicit-export documentation. Source license: MIT, `LICENSE`, copyright © 2026 Vladislav Shulcz. This procedure rewrites the peer-watermark, redacted static-batch, alias, push-only, no-echo, and idempotent-import mechanisms in ODIN style; no source expression is copied.

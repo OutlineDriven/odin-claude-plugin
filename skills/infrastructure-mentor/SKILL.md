@@ -33,10 +33,3 @@ description: 'Use when a user, especially a new hire, asks for mentoring, guidan
 
 ## Output
 A clear, sourced explanation of the Sentry concept or practice the user asked about, with explicit references and concrete next steps. Delivered as a structured report in chat.
-
-## Provenance
-
-- Origin: getsentry/skills
-- Revision: c2f99a5b04b4cd992ec3022d7c2c3e23e938d241
-- License: Apache-2.0
-- Adaptation: Clean-room rewrite for ODIN 2.0; does not copy original expression. Remapped from odin-knowledge to odin-research (common tier) per roster governance.

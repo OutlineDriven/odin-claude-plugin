@@ -56,7 +56,3 @@ No partial PNG is ever written. The source `.excalidraw` file is never modified.
 ## Output
 
 A PNG file at the specified output path or at `<input-stem>.png` beside the source file, containing the rendered Excalidraw diagram at the requested scale factor.
-
-## Provenance
-
-Clean-room mechanism rewrite of the render-verify pipeline from coleam00/excalidraw-diagram-skill at revision 8646fcc9f74f38539c6cdb4c969723336a96ddcd. Upstream license is NOASSERTION (no LICENSE file exists; default all-rights-reserved). No upstream prose, palette bytes, template markup, or script code is retained. Runtime dependencies (Playwright, Chromium) are MIT/Apache-2.0; pin their versions in the project manifest.

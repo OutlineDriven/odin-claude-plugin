@@ -101,10 +101,3 @@ Any additional notes about the feature.
 ## Output
 
 A local specification file at `docs/specs/<feature-slug>-spec.md` with all seven sections (Problem Statement, Solution, User Stories, Implementation Decisions, Testing Decisions, Out of Scope, Further Notes) populated and agent-ready — publication is a separate human step.
-
-## Provenance
-
-- Origin: mattpocock/skills, `skills/engineering/to-spec/SKILL.md` and `skills/engineering/to-spec/agents/openai.yaml`.
-- Pinned revision: 6654f6b60cd9d5be8b54c6fafe44346dabeb3b76.
-- License: MIT. Copyright (c) 2026 Matt Pocock. Retain copyright and permission notice in licenses/NOTICE.
-- Adaptation: ODIN voice; synthesis-only mechanism preserved; issue-tracker publication replaced with local file write and explicit publication stop; language-agnostic; self-contained with no peer-skill or setup-skill dependency.

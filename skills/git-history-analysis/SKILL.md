@@ -57,10 +57,3 @@ disable-model-invocation: true
 
 ## Output
 A report at `reports/git_history_analysis/git_analysis_YYYY-MM-DD.md` ordered: title and period header, TL;DR, active features in progress, recently completed (merged to main), commit breakdown by type, most active areas, key insights, risks & observations, follow-up questions. Evidence-driven — cite specific commits, branches, or metrics; separate facts from interpretations; note incomplete data. No author attribution.
-
-## Provenance
-
-- Origin: warpdotdev/competitive-intelligence-agent-oss, `.warp/skills/analyze_git_history/SKILL.md`.
-- Pinned revision: 9e0363e810a14405ef876fb354562735002797fb.
-- License: MIT; notice retained; mechanism adapted.
-- Adaptation: clean-room rewrite for product-relevant framing with no individual attribution, a human-gated optional Slack branch, and a report-only done state. No third-party expression copied.

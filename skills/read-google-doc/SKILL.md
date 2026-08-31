@@ -51,7 +51,3 @@ If the metadata call succeeds but the document body call fails, return the metad
 ## Output
 
 A report with `title`, `id`, `link`, and `content` (plain text or JSON per format), or on error the error class and message only.
-
-## Provenance
-
-Origin: `warpdotdev/competitive-intelligence-agent-oss`, pinned at `9e0363e810a14405ef876fb354562735002797fb`. License: MIT. MIT notice retained; mechanism adapted. ADAPT as a focused read utility for odin-research module (read-only external-source retrieval). Support paths: none.

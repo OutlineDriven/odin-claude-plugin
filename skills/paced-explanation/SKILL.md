@@ -41,10 +41,3 @@ description: 'Use when asked to teach a subsystem or change. Returns a plain pac
 ## Output
 
 A single plain explanation in layered prose, starting from purpose and progressing to code depth on request. Diagrams rendered inline on explicit request. No persistent workspace, no session state, no multi-turn follow-up required.
-
-## Provenance
-
-Origin: cursor/plugins — pstack/skills/teach/SKILL.md.
-Revision: 68836ddaf5697224520f1847d90cdb90ca8babaa.
-License: MIT (pstack authored by Lauren Tan; MIT license blob 6b5400237fdf6545be0b8fae370d6f2fcff8fb25).
-Adaptation: read-only single-explanation workflow isolated from the workspace-building teach variant. Scope narrowed to progressive-depth single explanation with no persistent state.

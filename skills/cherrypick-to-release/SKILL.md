@@ -42,7 +42,3 @@ disable-model-invocation: true
 
 ## Output
 A report listing, per requested release channel, the cherrypick branch, the PR URL and title with the on-call reviewer assigned, or the conflict that stopped that channel; terminal classification `done` when every requested channel has an opened, correctly titled, reviewer-assigned PR, otherwise `blocked` with the stopped channels named.
-
-## Provenance
-
-Origin: https://github.com/warpdotdev/client-release-agent-oss, revision 9c1394804c5148820a9bab6c01802fde4330d725, MIT (LICENSE). The cherry-pick-and-PR-per-release-channel mechanism is clean-room adapted for ODIN release operations; no third-party expression is copied.

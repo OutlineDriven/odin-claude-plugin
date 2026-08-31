@@ -1,3 +1,0 @@
-interface:
-  display_name: "Production Data Cleanup"
-  short_description: "Use when a production dataset violates a declared policy and"

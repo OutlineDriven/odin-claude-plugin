@@ -38,7 +38,3 @@ Classify failures as invalid input, authorization mismatch, spawn failure, worke
 ## Output
 
 Return the final task graph with each node's terminal classification, branch and revision, verified handoff, checks actually observed, merge result, remote mutations performed, and remaining risks. Terminal classification: `completed`, `blocked`, `failed`, or `cancelled`; `completed` is valid only when the graph is drained and every authorized merge and verification satisfies the contract.
-
-## Provenance
-
-Adapted from `cursor/plugins` candidate `source:source-cursor:cursor-orchestrate` at revision `68836ddaf5697224520f1847d90cdb90ca8babaa`, licensed MIT. This adaptation preserves planner, dispatcher, cloud-worker spawning, branch coordination, structured handoff, independent verifier, and stop-condition mechanisms while expressing a self-contained ODIN procedure.

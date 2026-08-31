@@ -40,7 +40,3 @@ description: 'Use when work has distinct modes and the user wants states, events
 ## Output
 
 A state-machine specification file: all states with entry conditions, all transitions with source/destination/event/guard/outcome, all terminal outcomes, all illegal transitions with rationale — sufficient to encode in types, a state-machine library, or a runtime enum.
-
-## Provenance
-
-Project-owned. Adapted from user-curated workflow-synthesis ideas. No third-party content.

@@ -40,10 +40,3 @@ description: 'Use when the user wants to test extreme worlds to raise product co
 ## Output
 - A set of extreme-world test-case files in the local working tree.
 - A completeness-gap report listing each enumerated world with its classification (covered, gap, untestable), the observed behavior, the violated criterion or blocker, and the test-case file path.
-
-## Provenance
-
-- Origin: local user-curated skill idea `adverse-possible-worlds-qa` (one-line brief: test extreme worlds to raise product completeness, not to collect green checks).
-- Revision: null (unversioned local brief).
-- License: project-owned.
-- Adaptation: clean-room adaptation from the user's one-line brief. No third-party expression copied. The workflow is distinct from break-first QA and from design-dispute world generation.

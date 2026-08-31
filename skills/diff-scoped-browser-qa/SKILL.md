@@ -59,10 +59,3 @@ description: 'Use /diff-scoped-browser-qa for branch-diff browser QA. Every scen
 
 ## Output
 A finalized dogfood report at `<root>/dogfood-reports/<YYYY-MM-DD>-<branch-slug>-dogfood.md` with every scenario classified (`Pass`, `Fixed`, `Skipped`, or terminal `Blocked`), the automated suite result recorded, a ready/not-ready verdict, and a **Decisions for a human** section, plus auto-fix commits on the target branch each with a regression test that failed before and passes after, ordered resolve-target → resolve-root → verify-prereqs → analyze-diff → map-flows → derive-matrix → checkpoint → start-server → execute → fix-loop → terminal-states → run-suite → finalize, ready only when the matrix and suite are both green.
-
-## Provenance
-
-- Origin: https://github.com/EveryInc/compound-engineering-plugin, `skills/ce-dogfood/SKILL.md`.
-- Pinned revision: `a1f601f17137f648be439965f8fdd9123303de5d`.
-- License: MIT (Copyright (c) 2025 Every). Mechanisms extracted and rewritten in ODIN style, not copied verbatim; attribution is preserved in the root provenance ledger.
-- Adaptation: the phase, matrix, report-template, isolation, and fix-loop mechanics that the source delegated to reference files and peer CE skills are inlined here so the skill is self-contained with no runtime peer dependency.

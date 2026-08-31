@@ -68,7 +68,3 @@ One skill per run; another source is another run. Paraphrase the source; do not 
 
 ## Output
 A self-contained `SKILL.md` (and optional `references/<topic>.md`) under the chosen target directory, carrying an attribution line and passing all four validation checks and the probe set — the report states the classification, chosen name, target path, validation results, and probe results (positive and negative).
-
-## Provenance
-
-Origin: odin-1.x current skill at `skills/book-to-skill/SKILL.md` with its `references/OUTPUT-SHAPES.md` support. No pinned revision; project-owned (odin). Adaptation: restructured into the ODIN 2.0 contract section order and inlined the output-shape templates so the skill is self-contained with no external reference dependency; the nine-step construction mechanism, the four-bucket extraction, the procedure-or-reference classification rule, and the probe-and-place step are preserved.

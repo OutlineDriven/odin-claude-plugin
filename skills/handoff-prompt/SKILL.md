@@ -74,7 +74,3 @@ Output:
 
 ## Output
 A standalone, path-free prompt on the clipboard, plus a terse confirmation naming the task title. The prompt orients a fresh receiving agent and opens with a review/assess instruction rather than a command-only work order.
-
-## Provenance
-
-Origin: github.com/openclaw/agent-skills, skills/handoff/SKILL.md at revision ae75f60e8d454f1cf44ec4613e10ec9ea7f2ade7. License: MIT (copyright and permission notice required in copies). Adaptation: renamed to handoff-prompt to avoid collision with a session-snapshot handoff skill; restructured into the ODIN 2.0 contract sections; the prompt template shape, path-free rule, portable anchors, review-first instruction, and clipboard fallback were preserved as the load-bearing mechanism and restated in this skill's own words.

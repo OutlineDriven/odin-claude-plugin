@@ -43,7 +43,3 @@ description: 'Use when asked to set up or modify CI/CD pipelines, quality gates,
 
 ## Output
 CI workflow and deployment configuration files in the repository implementing the fixed gate order, blocking branch protection, secrets-manager secret placement, a deployment rollback mechanism, and a bounded pipeline time, plus a verification report confirming each done-predicate element holds.
-
-## Provenance
-
-Origin: odin-1.x current skill (skills/ci-cd/SKILL.md, project-owned, no license) and addyosmani/agent-skills (skills/ci-cd-and-automation/SKILL.md, pinned revision d2c37ef6225dd8726cdd369a8030307f48592d26, MIT, Copyright (c) 2025 Addy Osmani). The addyosmani candidate was an exact four-field duplicate of the current skill and was merged into this survivor with no alias retained. Clean-room adaptation: the gate-order, no-skip, shift-left, failure-feedback, and rollback mechanisms are restated in this skill's own words; no third-party expression is copied.

@@ -45,7 +45,3 @@ description: 'Use when asked to create a complete Node.js 24 TypeScript 7 comman
 ## Output
 
 A new Node.js 24 TypeScript 7 CLI project with source, one integration test, strict compiler configuration, Biome configuration, tsdown build, Changesets configuration, frozen pnpm lockfile, and CI. Return the created path and the exact outputs of the check, test, build, and built-command invocation.
-
-## Provenance
-
-Origin: odin-current (`skills/scaffold-cli/SKILL.md`). Project-owned; no third-party license applies. Re-derived for the ODIN 2.0 Node.js 24, TypeScript 7, pnpm 11, Biome 2.5, and tsdown toolchain.

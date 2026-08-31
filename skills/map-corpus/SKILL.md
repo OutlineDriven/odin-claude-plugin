@@ -41,7 +41,3 @@ description: 'Use when the user points to a folder of their study material and w
 ## Output
 
 On success, return the path to workspace-root `CORPUS.md` and counts for readable sources, unreadable sources, and concepts. The file is the sole artifact and contains the complete source inventory, citation anchors, prerequisite-ordered concept list, and unreadable-file disclosures.
-
-## Provenance
-
-Adapted from the project-owned ODIN current skill `skills/map-corpus/SKILL.md`, candidate `current:current-c:current:map-corpus`. No source revision or license identifier was supplied. This version preserves the recursive inventory, row accounting, concept coverage, citation-anchor, prerequisite-ordering, cycle-disclosure, unreadable-file, and whole-file rewrite mechanisms while expressing them as a self-contained procedure.

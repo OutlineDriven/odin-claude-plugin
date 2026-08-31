@@ -165,10 +165,3 @@ Partial results are not delivered. If the release cannot be completed due to mis
 
 ## Output
 A complete press release draft in the target language and region conventions, plus: 1. Angle note (one paragraph). 2. Next-step options (journalist pitch, social teaser, distribution recommendation, journalist shortlist criteria). No files are written. All output is delivered as chat content.
-
-## Provenance
-
-- **Origin**: samber/cc-skills, `skills/press-release-writer/SKILL.md`.
-- **Pinned revision**: f9953962e135235137628ea92d06ea085688031f.
-- **License**: MIT.
-- **Adaptation**: Adapted from samber/cc-skills press-release-writer v1.0.2 under MIT license. Reference files (press-release-types.md, regional-conventions.md, media-formats.md, journalist-email-pitch.md, writing-principles.md, output-options.md) inlined into procedure. Mechanisms preserved: inverted pyramid structure, 25–35-word 5W1H lead constraint, banned-phrase list, region-specific conventions (style guides, dateline formats, send windows, cultural no-gos), media format adaptations, journalist email pitch structure, headline variant generation with labeled hook types, quality checklist, humanize-while-preserving-headline/lead instruction.

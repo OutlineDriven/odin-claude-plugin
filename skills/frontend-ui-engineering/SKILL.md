@@ -59,7 +59,3 @@ Optional:
 ## Output
 
 Created or modified UI component and page files in the local working tree, plus a per-component verification report naming each check and its pass or fail state: console-clean, keyboard navigation, screen-reader conveyance, responsive breakpoints, loading/error/empty states, design-system adherence, and accessibility scan.
-
-## Provenance
-
-Origin: addyosmani/agent-skills. Pinned revision: d2c37ef6225dd8726cdd369a8030307f48592d26. Source path: skills/frontend-ui-engineering/SKILL.md. License: SPDX MIT, copyright "Copyright (c) 2025 Addy Osmani"; the MIT copyright notice and permission text are retained in derived distributions. Adaptation: clean-room adaptation into odin-create (source module odin-design). The source mechanism is preserved — accessible, performant, production-grade UI construction with design-system adherence, WCAG 2.1 AA keyboard and focus requirements, mobile-first responsive layouts, real content, and rejection of the AI aesthetic — while the expression is rewritten.

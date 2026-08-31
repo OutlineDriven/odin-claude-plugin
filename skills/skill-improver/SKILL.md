@@ -56,11 +56,3 @@ Partial results: each iteration's review and fix artifacts are written increment
 
 ## Output
 On `converged`: a report listing the final review findings (all minor or informational), the total iteration count, and the path to `.code-improver/run-<timestamp>/final-review.json`. On `non-converged`: remaining critical and major findings, iteration count, and last review artifact path. On `invalid-target`, `finalization-failed`, or `review-error`: a terminal status message with the specific failure class and diagnostic detail.
-
-## Provenance
-
-Adapted from Trail of Bits `code-improver` plugin skill-improver (`/plugins/code-improver/skills/skill-improver/SKILL.md`).
-Origin: https://github.com/trailofbits/skills
-Pinned revision: d1f1575cff97816e5cc08af66cd2506099c681d3
-License: CC-BY-SA-4.0. This adaptation preserves Trail of Bits attribution and source link, marks modifications, licenses adaptations ShareAlike, claims no trademark rights, and does not reuse trail-of-bits-mark.svg as branding.
-Adaptation: Clean-room rewrite for ODIN 2.0 module structure. Content derived from normalized candidate metadata; no third-party expression was copied verbatim.

@@ -42,7 +42,3 @@ description: 'Use when the user runs /release-landing-report to summarize landed
 ## Output
 
 A landing summary report as chat output covering landed changes in the window with no state change, ordered: scope, landed changes by time, net effect.
-
-## Provenance
-
-Origin: https://github.com/garrytan/gstack at revision 07b59e396c6be5a86619a43151cb9ed62a15ae69. License: MIT, Copyright (c) 2026 Garry Tan. Adapted clean-room from landing-report/SKILL.md: the landed-change summarizing mechanism is re-derived, not copied wholesale.

@@ -103,7 +103,3 @@ Optional:
 ## Output
 
 Return the specification path, the HTML path, any sidecar paths, the validation verdict, the per-check delivery results, and a receipt whose visual-review status is truthfully `reviewed` or `unreviewed`.
-
-## Provenance
-
-Origin: https://github.com/tt-a1i/archify at revision b36d79fdbc3aec3728744341485a7e79f03c0071, licensed MIT (repo-root LICENSE and archify/LICENSE, blob 4c27b7152c7e4593dfdd153761ce178177d30464; copyright "Copyright (c) 2026 tt-a1i (Archify)" and "Copyright (c) 2025 Cocoon AI (original \"architecture-diagram-generator\")"). Adaptation: clean-room re-derivation - this procedure re-derives the workflow from the observable contracts (typed lifecycle specification; schema-governed lanes, states, transitions, state kinds, and bounded phase and outcome columns; recovery-transition requirement); no Archify source expression is copied.

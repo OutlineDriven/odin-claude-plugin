@@ -51,7 +51,3 @@ Supply any existing local commands, endpoints, logs, metrics queries, schemas, t
 ## Output
 
 Return the exact local files changed and their rollback paths; the former human gate and its replacement trigger, persisted output, structured observation, or assertion; the result of the exercised iteration; and one terminal classification: `autonomous`, `outer-loop-human`, `handoff-required`, `blocked`, or `non-converged`. For `autonomous`, include the passing completion assertion. For any other classification, name each remaining gate and the concrete action or missing evidence required.
-
-## Provenance
-
-Project-owned adaptation of the ODIN 1.x `llm-self-loop` skill from `skills/llm-self-loop/SKILL.md`, candidate `current:current-b:current:llm-self-loop`. No pinned source revision or license identifier was supplied. This version preserves the source mechanisms—surfacing the gate, replacing UI triggers with callable operations, persisting outputs, querying dashboards structurally, encoding eyeball judgments as contracts, and moving irreducible human work to an outer loop or discrete handoff—while restating them as a self-contained ODIN 2.0 procedure.

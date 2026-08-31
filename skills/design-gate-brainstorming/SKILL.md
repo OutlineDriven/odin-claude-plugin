@@ -49,7 +49,3 @@ description: 'Use before implementing creative work when no approved design exis
 
 ## Output
 One terminal classification per path: spike → a reported recommendation; bounded → an in-chat design plus the user's recorded approval; architectural → a self-review-clean spec plus handoff to the plan writer — ordered confirm-need → classify → self-review → present → record → handoff, with the user's explicit approval or rejection recorded before any implementation.
-
-## Provenance
-
-Origin: https://github.com/obra/superpowers, revision b36e0829c6d0140e93cfef2ca599b1b07d4a7797, MIT license (Jesse Vincent, 2025). Adapted from the upstream brainstorming skill's three-path design router (spike/bounded/architectural); no upstream expression copied verbatim.

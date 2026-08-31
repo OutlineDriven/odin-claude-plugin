@@ -39,10 +39,3 @@ description: 'Use when the user requests an accessibility audit, a11y check, or 
 
 ## Output
 A report returned in the conversation (no files created) with sections in order: Summary (scope, WCAG level, issue counts by severity, automated coverage, failed checks), Findings (in severity order: Critical, Serious, Moderate, Minor — each with WCAG criterion, `path:line` locations, before/after code, and fix rationale), Manual testing recommendations, and Next steps.
-
-## Provenance
-
-- Origin: https://github.com/warpdotdev/oz-skills, `.agents/skills/web-accessibility-audit/` (`SKILL.md`, `references/WCAG-criteria.md`, `references/grep-patterns.md`, `references/ARIA-patterns.md`, `references/screen-reader-guide.md`, `scripts/run-eslint.sh`).
-- Pinned revision: 6c08c49fc6c51b8f768bf8c53c041bc06a160765.
-- License: MIT per the repository root `LICENSE` (Copyright 2026 Warp). The repository's Apache-2.0 sub-license carve-outs cover only `.agents/skills/mcp-builder/` and `.agents/skills/webapp-testing/` and do not apply to this skill.
-- Adaptation: restructured into the ODIN skill format; the reference documents and the ESLint helper script were reduced to their load-bearing mechanisms and inlined; the source's result-file writes (eslint and Lighthouse output under `.claude/skills/a11y-auditor/`) were removed to hold read-only authority; the violation classes, severity tiers, contrast thresholds, per-finding report format, and manual-testing coverage are preserved from the pinned revision.

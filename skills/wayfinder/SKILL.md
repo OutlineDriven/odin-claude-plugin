@@ -61,10 +61,3 @@ Partial-result rule: the map and any completed tickets are kept on failure. Neve
 
 ## Output
 A map (GitHub issue labeled wayfinder:map or .outline/wayfinder/map.md with destination, notes, decisions so far, fog items, and out-of-scope items), decision tickets (GitHub child issues or local files with type, question, blocking edges, and resolution), research results in ticket comments or closing entries, and a handoff artifact when the route is clear.
-
-## Provenance
-
-- Origin: current-odin-skill-tree, skills/wayfinder/SKILL.md.
-- Revision: unpinned.
-- License: project-owned (no third-party license).
-- Adaptation: clean-room adaptation from the current skill tree wayfinder skill into the ODIN 2.0 literal format. The map structure, ticket types, fog-of-war mechanism, and two-mode invocation flow are preserved from the source. Interactive interviewing and research subagent dispatch were inlined as self-contained procedure descriptions without cross-skill pointers. Reference-document pointers were inlined.

@@ -39,7 +39,3 @@ description: 'Use when asked to design a bespoke execution workflow when no play
 
 ## Output
 A reviewable trail containing the falsifiable predicate, the bespoke workflow with each named lever, the real output of every lever run, and the final predicate verification result (verified or not verified).
-
-## Provenance
-
-Origin: cursor/plugins pstack/skills/figure-it-out/SKILL.md. Revision 68836ddaf5697224520f1847d90cdb90ca8babaa. License: MIT (pstack authored by Lauren Tan). Clean-room adaptation: no third-party expression copied; the mechanism is re-expressed as a self-contained bespoke falsifiable-predicate execution workflow.

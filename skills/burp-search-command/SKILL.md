@@ -54,7 +54,3 @@ Prerequisites: Burp Suite Professional with the `burpsuite-project-file-parser` 
 
 ## Output
 JSON objects (one per line, streamed to stdout) shaped by operation: `auditItems` — name/severity/confidence/host/port/protocol/url; `proxyHistory`/`siteMap` — complete request/response data narrowed by any sub-component filter; `responseHeader`/`responseBody` regex — url plus matching header or body content.
-
-## Provenance
-
-Adapted from the Trail of Bits skills repository (`https://github.com/trailofbits/skills`), revision `d1f1575cff97816e5cc08af66cd2506099c681d3`, file `plugins/burpsuite-project-parser/commands/burp-search.md` and supporting script `plugins/burpsuite-project-parser/skills/burpsuite-project-parser/scripts/burp-search.sh`. Licensed CC-BY-SA-4.0; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse `trail-of-bits-mark.svg` as branding. This is a clean-room adaptation: the slash-command routing and skill-pointer indirection were replaced with a self-contained procedure that restates the parser wrapper invocation, operations, environment variables, and platform defaults directly; no third-party expression is copied.

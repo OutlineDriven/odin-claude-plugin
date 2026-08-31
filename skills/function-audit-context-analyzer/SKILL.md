@@ -59,7 +59,3 @@ Finishing with open questions is a complete analysis. Finishing with open questi
 ## Output
 
 Two artifacts: the prose analysis at the given path (the deliverable) and the compact record returned to the caller (an index into it) — the prose covers how the code is put together, what must always be true for it to work, and what it takes on faith; it does not name vulnerabilities, suggest fixes, write exploits, or rate severity.
-
-## Provenance
-
-Origin: https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3, file /plugins/audit-context-building/agents/function-analyzer.md with format and domain notes from /plugins/audit-context-building/skills/audit-context-building/resources/. License: CC-BY-SA-4.0. Preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding. Adapted clean-room: the per-function dispatch, fixed write-up format, callee-path-walking mechanism, "nothing found" convention, and grounding rules are preserved; the multi-function orchestration workflow, plugin packaging, and cross-file resource pointers were removed to make the skill self-contained.

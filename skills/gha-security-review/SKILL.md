@@ -59,7 +59,3 @@ Workflows in other repositories are out of scope; note the dependency only.
 ## Output
 
 A markdown report titled `## GitHub Actions Security Review` with Findings (one section per finding: workflow path and line, trigger, confidence, five-element exploitation scenario, impact, and fix), Needs Verification (MEDIUM items with explanation), and Reviewed and Cleared (workflows confirmed safe) — or "No exploitable vulnerabilities identified. All workflows reviewed and cleared." when no findings.
-
-## Provenance
-
-Origin: getsentry/skills, revision c2f99a5b04b4cd992ec3022d7c2c3e23e938d241, license Apache-2.0. Clean-room adaptation: the attack-pattern taxonomy, threat model, vulnerability-class checks, safe-pattern allowlist, confidence gating, five-element exploitation scenario, and report structure are re-expressed from the source procedure without copying its expression; reference files were not retained.

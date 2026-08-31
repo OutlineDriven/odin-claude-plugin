@@ -102,14 +102,3 @@ Rollback: delete the output directory created by this run. Writes are confined t
 ## Output
 
 For each language with verdict `APPLICABLE` or `APPLICABLE_WITH_ADAPTATION`, one subdirectory under `outputDir` containing `<original-id>-<lang>.yaml` and `<original-id>-<lang>.<ext>`; the report names each language and its final verdict; a language is done only when its `semgrep --test` JSON verdict reports zero failures.
-
-## Provenance
-
-Adapted from the Trail of Bits `semgrep-rule-variant-creator` skill.
-
-Origin: https://github.com/trailofbits/skills
-Pinned revision: d1f1575cff97816e5cc08af66cd2506099c681d3
-License: CC-BY-SA-4.0
-Reference: [Applicability Analysis](https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3/plugins/semgrep-rule-variant-creator/skills/semgrep-rule-variant-creator/references/applicability-analysis.md); [Language Syntax Guide](https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3/plugins/semgrep-rule-variant-creator/skills/semgrep-rule-variant-creator/references/language-syntax-guide.md); [Workflow Mechanics](https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3/plugins/semgrep-rule-variant-creator/skills/semgrep-rule-variant-creator/references/workflow.md)
-
-Adaptation rationale: Porting existing rules through per-language applicability analysis and independent attack-first cycles (vulnerable-code test cases written to catch the sloppy port before the rule lands) is a distinct workflow from creating a rule from a bug-pattern description. The original's workflow script is replaced with direct agent procedure; the reference guides are embedded in the Procedure section and not called as external files.

@@ -77,9 +77,3 @@ Done when: the report is written using the template.
 
 ## Output
 Report at `reports/competitor_changelog_reports/competitive_changelog_<YYYY-MM-DD>.md` (TL;DR → competitor entries → common themes → product comparison → risks) committed on a branch and opened as one PR, plus the full report text returned untruncated. Terminal classification: complete, partial, or blocked.
-
-## Provenance
-
-- Origin: `warpdotdev/competitive-intelligence-agent-oss`, `.warp/skills/summarize_changelogs/SKILL.md`, pinned revision `9e0363e810a14405ef876fb354562735002797fb`.
-- License: MIT. Notice retained: "MIT License — Copyright (c) 2026 Denver Technologies, Inc."; the MIT permission notice applies to the adapted mechanism.
-- Adaptation: the source's hardcoded competitor changelog URLs and `YOUR_PRODUCT_CHANGELOG_URL` placeholder were moved into a configurable tracker; deduplication against `reports/competitor_changelog_reports/`, the report format, the product comparison, the shipped-date and cadence notes, and PR creation are retained; the analysis window is configurable with a 14-day default.

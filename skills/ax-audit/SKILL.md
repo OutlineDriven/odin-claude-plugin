@@ -53,7 +53,3 @@ description: 'Use when asked to audit an agent or AI feature for agentic-experie
 
 ## Output
 A chat report ordered: severity-tiered findings (each with file:line, rule family, severity, explanation), AX Relationship Summary paragraph, ship-readiness verdict (PASS/FAIL/INCOMPLETE with reason).
-
-## Provenance
-
-Adapted from mblode/agent-skills (revision e97a3b383f5944f90d41eb92b24b4fb3b917a7f9), MIT licensed, Copyright (c) 2026 Matthew Blode. Clean-room adaptation: the two-axis rule framework — Architecture (Communication, Context, Granularity, Parity) and Agentic Experience (Communication, Context, Control, Trust) — together with severity-tiered findings and the ship-readiness verdict are preserved as mechanism; expression is rewritten.

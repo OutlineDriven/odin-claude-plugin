@@ -46,7 +46,3 @@ disable-model-invocation: true
 ## Output
 
 Return the snapshot path, resolved audit scope, severity-grouped JSON findings, per-group previews and confirmation decisions, applied and restored file lists, fresh re-audit result, residual warnings and information, and exactly one terminal classification: `complete`, `blocked`, or `non-converged`. `complete` is valid only when the fresh audit contains zero critical findings.
-
-## Provenance
-
-Project-owned adaptation from `skills/memory-clean/SKILL.md` in the `odin-current` source. No source revision or license identifier was supplied. This version preserves the deterministic structural and staleness audit, snapshot-first recovery, evidence display, per-group human confirmation, and durable-store mutation boundary while making the procedure self-contained.

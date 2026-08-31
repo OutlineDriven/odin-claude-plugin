@@ -41,7 +41,3 @@ description: 'Use when the user asks to sanitize memory for sharing, redact PII,
 ## Output
 
 Return the destination path, the sanitizer JSON report, the original-to-copy diff for every processed file, warnings for skipped nested files, and one terminal classification: `sanitized for human review`, `blocked: credential detected`, or `blocked: sanitization or proof incomplete`.
-
-## Provenance
-
-Project-owned adaptation of `skills/memory-sanitize/SKILL.md` from the `odin-current` source. No source revision or license identifier was supplied. This version preserves the tiered regex redaction, credential-detection exit status, copy-only boundary, diff review, and credential-abort mechanism while rewriting the procedure for the ODIN 2.0 contract.

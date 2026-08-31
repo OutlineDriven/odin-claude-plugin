@@ -2,7 +2,7 @@
 
 OutlineDriven-authored material in this package is Apache-2.0. See the repository `LICENSE`.
 
-This package ships 124 public skills from the canonical `skills/<slug>/` tree. Package-local skill copies are generated only at pack time.
+This package ships 118 public skills from the canonical `skills/<slug>/` tree. Package-local skill copies are generated only at pack time.
 
 | Skill | Strategy | Adaptation | Target | Origin |
 |---|---|---|---|---|
@@ -10,7 +10,6 @@ This package ships 124 public skills from the canonical `skills/<slug>/` tree. P
 | `answer-stub-questionnaire` | B | byte-reuse | `skills/answer-stub-questionnaire/` | mattpocock/skills @ `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76` (MIT) |
 | `audit-punishing-practices` | B | byte-reuse | `skills/audit-punishing-practices/` | cobusgreyling/loop-engineering @ `d03dcb92cc1e0efb59789a2557131c6ad5897ccc` (MIT) |
 | `autolearn` | G | structured-merge-rewrite | `skills/autolearn/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text) |
-| `bro` | B | byte-reuse | `skills/bro/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
 | `browse` | G | structured-merge-rewrite | `skills/browse/` | Origin: https://github.com/garrytan/gstack, revision 07b59e396c6be5a86619a43151cb9ed62a15ae69, file `open-gstack-browser/SKILL.md`. License: MIT, Copyright (c) 2026 Garry Tan. Clean-room adaptation: the procedure and mechanism are re-derived from the source skill's browse-connect-verify-guide flow; no source expression is copied wholesale. |
 | `buzzword-analysis` | B | byte-reuse | `skills/buzzword-analysis/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `can-i-help` | B | byte-reuse | `skills/can-i-help/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text) |
@@ -65,8 +64,6 @@ This package ships 124 public skills from the canonical `skills/<slug>/` tree. P
 | `get-pr-comments` | B | byte-reuse | `skills/get-pr-comments/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
 | `git-history-analysis` | B | byte-reuse | `skills/git-history-analysis/` | warpdotdev/competitive-intelligence-agent-oss @ `9e0363e810a14405ef876fb354562735002797fb` (MIT) |
 | `github-solution-research` | B | byte-reuse | `skills/github-solution-research/` | odin-1.x-current-skill @ `project-owned` (Upstream LICENSE retained for verified-compatible-license provenance (skills/github-solution-research/LICENSE)) |
-| `grill-me` | B | byte-reuse | `skills/grill-me/` | mattpocock/skills @ `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76` (MIT) |
-| `grilling` | B | byte-reuse | `skills/grilling/` | mattpocock/skills @ `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76` (MIT) |
 | `ground-latest` | B | byte-reuse | `skills/ground-latest/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `gut-sync` | B | byte-reuse | `skills/gut-sync/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `handoff` | G | structured-merge-rewrite | `skills/handoff/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text) |
@@ -97,7 +94,6 @@ This package ships 124 public skills from the canonical `skills/<slug>/` tree. P
 | `onboard` | B | byte-reuse | `skills/onboard/` | odin-current @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `open-source-readiness-audit` | B | byte-reuse | `skills/open-source-readiness-audit/` | https://github.com/trailofbits/skills @ `d1f1575cff97816e5cc08af66cd2506099c681d3` (CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.) |
 | `paced-explanation` | B | byte-reuse | `skills/paced-explanation/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
-| `primary-source-research` | B | byte-reuse | `skills/primary-source-research/` | mattpocock/skills @ `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76` (MIT) |
 | `product-idea-consultation` | R | rename-only | `skills/product-idea-consultation/` | Origin: https://github.com/garrytan/gstack at revision 07b59e396c6be5a86619a43151cb9ed62a15ae69. License: MIT, Copyright (c) 2026 Garry Tan; retain the copyright and permission notice. Two source candidates were merged: the office-hours skill and its design-and-handoff, startup-diagnostic, and builder-brainstorm sections, plus the OpenClaw office-hours variant, which was an exact contract duplicate absorbed into this survivor. Expressive prose and procedure were re-derived clean-room rather than copied wholesale. |
 | `punishing-practices` | B | byte-reuse | `skills/punishing-practices/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `read-google-doc` | B | byte-reuse | `skills/read-google-doc/` | warpdotdev/competitive-intelligence-agent-oss @ `9e0363e810a14405ef876fb354562735002797fb` (MIT) |
@@ -107,7 +103,6 @@ This package ships 124 public skills from the canonical `skills/<slug>/` tree. P
 | `retrospective` | R | rename-only | `skills/retrospective/` | Origin: https://github.com/garrytan/gstack at revision 07b59e396c6be5a86619a43151cb9ed62a15ae69. License: MIT (Copyright (c) 2026 Garry Tan). Adapted clean-room from the gstack retro skill and its report-format section; the duplicate openclaw-retro contract was merged into this skill. Prose and procedure re-derived; no third-party expression copied wholesale. |
 | `run-learning-retrospective` | B | byte-reuse | `skills/run-learning-retrospective/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
 | `scrape` | R | rename-only | `skills/scrape/` | Origin: https://github.com/garrytan/gstack, revision `07b59e396c6be5a86619a43151cb9ed62a15ae69`, file `scrape/SKILL.md`. License MIT, Copyright (c) 2026 Garry Tan; retain the copyright and permission notice in copies. Clean-room adaptation: the read-only browser-scrape mechanism (navigate, snapshot, extract, refuse mutation, untrusted-content handling, single-JSON output discipline) is re-derived as a self-contained research procedure that downloads assets and writes a manifest. No gstack runtime, browser-skill registry, telemetry, or skillify tooling is required. |
-| `session-describe-analysis` | B | byte-reuse | `skills/session-describe-analysis/` | https://github.com/microsoft/skill-recorder @ `c7f2fe4402527a0eb7f4fc1b653bf438229bac61` (MIT) |
 | `session-share` | R | rename-only | `skills/session-share/` | - Origin: https://github.com/openclaw/agent-skills, revision ae75f60e8d454f1cf44ec4613e10ec9ea7f2ade7, MIT license (LICENSE). - Adaptation: clean-room adaptation preserving transcript targeting rules, the redaction contract, HTTPS/authentication, and session-end hook commands as configuration examples; synchronization opt-in preserved. No third-party expression copied. |
 | `session-viewer` | B | byte-reuse | `skills/session-viewer/` | https://github.com/openclaw/agent-skills @ `ae75f60e8d454f1cf44ec4613e10ec9ea7f2ade7` (MIT) |
 | `show-review` | B | byte-reuse | `skills/show-review/` | current-odin-skill-tree @ `project-owned` (Project-owned or clean-room only; no copied source text) |
@@ -116,7 +111,6 @@ This package ships 124 public skills from the canonical `skills/<slug>/` tree. P
 | `sourced-learning-workspace` | B | byte-reuse | `skills/sourced-learning-workspace/` | mattpocock/skills @ `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76` (MIT) |
 | `ssotize-audit-fold` | B | byte-reuse | `skills/ssotize-audit-fold/` | https://github.com/LilMGenius/paperthin @ `3bca079a51bcfff5dafb53d1d7f9f523d66ee317` (MIT) |
 | `summarize-google-docs` | B | byte-reuse | `skills/summarize-google-docs/` | warpdotdev/competitive-intelligence-agent-oss @ `9e0363e810a14405ef876fb354562735002797fb` (MIT) |
-| `supply-missing-context` | B | byte-reuse | `skills/supply-missing-context/` | mattpocock/skills @ `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76` (MIT) |
 | `teach` | B | byte-reuse | `skills/teach/` | current-odin-skill-tree @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `to-questionnaire` | B | byte-reuse | `skills/to-questionnaire/` | current-odin-skill-tree @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `verify-both-ways` | B | byte-reuse | `skills/verify-both-ways/` | current-odin-skill-tree @ `project-owned` (Project-owned or clean-room only; no copied source text) |

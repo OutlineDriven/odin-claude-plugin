@@ -41,7 +41,3 @@ description: 'Use when deciding whether PBT fits a code path, which property and
 
 ## Output
 A chat assessment containing exactly: the verdict (PBT fits, or decline); for a fit, the property with its formula, the input domain, the strategy seam, and the library — existing, or proposed with the once-only consent note — plus at most one optional refactor with the property it unlocks, marked as the user's decision; for a decline, the reason example tests are the better method. No files change.
-
-## Provenance
-
-Adapted from the Trail of Bits `skills` repository, `plugins/property-based-testing/skills/property-based-testing/SKILL.md` with its `references/libraries.md` and `references/refactoring.md`, at revision `d1f1575cff97816e5cc08af66cd2506099c681d3` (https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3). License: CC-BY-SA-4.0. Trail of Bits attribution and the source link are preserved; this file is a modified adaptation that narrows the source to read-only method selection and removes its writing, reviewing, and failure-triage guidance and code examples; adaptations are licensed ShareAlike under CC-BY-SA-4.0; no trademark rights are claimed and no Trail of Bits mark is used as branding.

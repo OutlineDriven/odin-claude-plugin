@@ -64,9 +64,3 @@ description: 'Use when a smart-contract project must become review-ready before 
 ## Output
 
 **Output contract:** Return `audit/goals.md`, `audit/build-and-test.md`, `audit/known-issues.md`, `audit/architecture.md`, and `audit/readiness-checklist.md`, then the local freeze branch and tag, then READY only if every checklist row passes—otherwise NOT READY with named gaps and evidence pointers.
-
-## Provenance
-
-- Origin: Trail of Bits, https://github.com/trailofbits/skills, path /plugins/building-secure-contracts/skills/audit-prep-assistant/SKILL.md at revision d1f1575cff97816e5cc08af66cd2506099c681d3.
-- License: CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3.
-- Adaptation: restructured from Trail of Bits' audit-prep-assistant into the ODIN contract form. Modified by bounding authority to handoff-package writes (findings are triaged into notes instead of applied as source fixes), removing cross-skill routing and example transcripts, and adding explicit failure, rollback, and proof rules. This adaptation is distributed under CC-BY-SA-4.0 (ShareAlike). Trail of Bits attribution and source link are preserved; no trademark rights are claimed, and trail-of-bits-mark.svg is never used as branding.

@@ -53,9 +53,3 @@ Optional:
 
 ## Output
 A refusal ledger (every verbatim refusal with generalization, concretization, and matched items), a closure table (number, kind, title, URL, result per item: confirmed closed as not planned / confirmed closed / unconfirmed / failed with error text), the docs record path when written or "not requested", a terminal classification (done / partial / blocked), and borderline items intentionally left open.
-
-## Provenance
-
-- Candidate: `curated:curated-ideas:curated-080`, origin `project-owned:user-curated-skill-ideas`, mechanism recorded in `project-owned:user-supplied-source-brief`.
-- Pinned revision: none supplied. License: none supplied; project-owned.
-- Adapted from a user-curated chat-log mechanism into this standalone GitHub tracker-hygiene workflow. The preserved mechanism: elicit refused directions, generalize and concretize them, close matching issues and pull requests as not planned, and optionally preserve the refusal record in docs. No third-party expression is copied.

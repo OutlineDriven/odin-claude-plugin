@@ -71,7 +71,3 @@ A structured guidance report containing:
 2. **Hardening flags**: the recommended compiler flag set, noting any unsupported flags.
 3. **Anti-pattern replacements**: each identified anti-pattern with its modern replacement.
 4. **Unavailable features**: features gated behind absent or insufficient feature-test macros, with deferral notes.
-
-## Provenance
-
-Adapted from Trail of Bits C++ modern practices skill (https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3). Licensed CC-BY-SA-4.0. This adaptation preserves Trail of Bits attribution and source link, marks modifications, licenses adaptations ShareAlike, claims no trademark rights, and does not reuse trail-of-bits-mark.svg as branding. Clean-room adaptation for ODIN 2.0 skill format; procedure re-derived from source mechanisms, not copied verbatim.

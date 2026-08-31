@@ -52,7 +52,3 @@ Non-mutation rule: no file, credential, paid, published, deployed, or remote mut
 When the gate passes silently: proceed with the work; no output to the user beyond the work itself.
 
 When a fork survives: one specific clarifying question anchored to the restated understanding, naming the choice.
-
-## Provenance
-
-Origin: https://github.com/LilMGenius/paperthin, revision 3bca079a51bcfff5dafb53d1d7f9f523d66ee317. License: MIT (c) 2026 LilMGenius. NOTICE: additionally vendors verbatim material from mattpocock/skills (MIT, (c) 2026 Matt Pocock) with per-source attribution. Retain the MIT copyright+permission notice for substantial reuse; per-source attribution obligation binds only verbatim vendor material, which the foundry does not copy. Adaptation: ADAPT as a distinct model-invoked intent gate, kept separate from clarify (user-invoked tiered scan) and mutual-sync (stale-picture reconciliation); silent-pass-is-the-good-outcome retained. Module odin: universal pre-work intent gate. Policy model+human: read-only until the gate passes. No third-party expression copied; clean-room adaptation.

@@ -36,7 +36,3 @@ The fork: the decision point the user named, or one surfaced from the code. Opti
 
 ## Output
 One line naming the fork, the pick, and the resulting change, with the pick implemented and verified in the same turn.
-
-## Provenance
-
-Origin: odin-1.x current skill `skills/decide/SKILL.md`. Revision: unpinned. License: project-owned. Adaptation: restructured into the ODIN 2.0 contract section order; routing pointers to peer skills and the askme file-path reference removed per self-containment; the decision-loop mechanism (ground-from-evidence, single-select framing, act-in-same-turn, chained forks, user-picks-against-advice, observable-surface gate) preserved.

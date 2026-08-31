@@ -34,7 +34,3 @@ The project root containing the CI or workflow configuration to edit. The target
 
 ## Output
 Configured CI or workflow files defining the deployment pipeline, plus a report listing files written and per-check pass or fail status; no deployment triggered.
-
-## Provenance
-
-Adapted from the `setup-deploy` skill in github.com/garrytan/gstack at revision 07b59e396c6be5a86619a43151cb9ed62a15ae69 (MIT, Copyright (c) 2026 Garry Tan). Expressive prose and code were re-derived; no third-party expression was copied wholesale.

@@ -139,7 +139,3 @@ The worker returns exactly:
 ```
 
 **Output contract:** Return the canonical packet, then the worker response, then a validation report ordered by budget check, citation containment, consequential-claim checks, and proposed-edit disposition; never apply an edit.
-
-## Provenance
-
-Adapted from the Trail of Bits Trailmark plugin `slicing-code-context` skill, `code-slice-worker` agent, and `slice-packet.md` reference. Source: https://github.com/trailofbits/skills at revision `d1f1575cff97816e5cc08af66cd2506099c681d3`. License: CC-BY-SA-4.0. Preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, and claim no trademark rights. This ODIN 2.0 adaptation replaces the non-shipped packet builder with the inline deterministic schema, ordering, budget, boundary, delegation, and citation algorithms above.

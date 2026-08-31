@@ -39,10 +39,3 @@ description: 'Use during PR review when checked-in spec context exists in the re
 
 ## Output
 `review.json` updated with material spec-drift findings (broad concerns in the review summary, inline comments tied to changed diff lines) or an explicit close-match entry; no separate report file is produced.
-
-## Provenance
-
-- Origin: warpdotdev/common-skills, `.agents/skills/check-impl-against-spec/SKILL.md`.
-- Revision: `f589e224907eda566c13755529f59db563090d14`.
-- License: MIT — Copyright (c) 2026 Denver Technologies, Inc.
-- Adaptation: clean-room rewrite in ODIN style. Spec-drift detection is part of the review workflow rather than a standalone process; the mechanism (extract commitments, compare against the implementation, flag only material drift, fold into review.json) is preserved.

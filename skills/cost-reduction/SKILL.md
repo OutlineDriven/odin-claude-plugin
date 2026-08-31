@@ -32,7 +32,3 @@ description: 'Use when a measured cost surface needs one-change-at-a-time reduct
 
 ## Output
 Return, in order: terminal class (`success`, `capped`, `stalled`, `blocked`, `exhausted`, or `pending`); measured cost delta; guardrail result; frozen bound; and immutable K11 `receipt.json` location.
-
-## Provenance
-
-- Profile P-CATALOG: source https://signals.forwardfuture.com/loop-library/catalog.json. Derived provenance ledger records catalog number, URL, access date, and no-expression-reuse attestation. Expression reuse: none.

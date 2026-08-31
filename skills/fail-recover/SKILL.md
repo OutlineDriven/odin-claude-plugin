@@ -35,7 +35,3 @@ Required: the known failure (symptom and identity), the single recovery operatio
 
 ## Output
 Terminal classification: `restored` or `not-restored`. Include the recovery operation applied, the named local target changed, the rollback path, and the remaining symptom when not restored.
-
-## Provenance
-
-Origin: `project-owned:user-curated-skill-ideas` (curated-049). Revision: none. License: project-owned. Adaptation: clean-room restatement of a user-curated runtime-recovery workflow as a single bounded recovery operation.

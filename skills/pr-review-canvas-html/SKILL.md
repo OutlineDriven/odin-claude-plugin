@@ -101,9 +101,3 @@ Partial-result rule: if the artifact cannot be fully assembled, do not write or 
 
 ## Output
 File `/tmp/pr-review-<number>.html` (self-contained HTML with embedded CSS, JS, and safe JSON patch data) served at `http://127.0.0.1:8432/pr-review-<number>.html` (or next available port) — the interactive risk-first review canvas renders in the browser.
-
-## Provenance
-
-- Origin: `cursor/plugins` at pinned revision `68836ddaf5697224520f1847d90cdb90ca8babaa`.
-- License: MIT (declared by the cursor/plugins root README and plugin manifest).
-- Adaptation: clean-room rewrite of `cursor-team-kit/skills/pr-review-canvas/SKILL.md`, `renderer.js`, `styles.css`, and `template.html`. The safe JSON injection mechanism (escaping `<` `>` `&` via Python before embedding in `<script>`) and the fixed-localhost-port serving pattern are retained as distinguishing source mechanics. The model composes the review HTML from the fetched gh API data rather than relying on a separate rendering pipeline.

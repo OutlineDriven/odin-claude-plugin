@@ -125,9 +125,3 @@ Optional and asked at runtime:
 ## Output
 
 **Output contract:** Return the executive summary first, then the nine-category scorecard, per-category evidence and next-level gaps, and a CRITICAL-to-HIGH-to-MEDIUM improvement roadmap with effort and impact.
-
-## Provenance
-
-Origin: Trail of Bits Building Secure Contracts — Code Maturity Evaluation Framework v0.1.0 (https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3).
-
-License: CC-BY-SA-4.0. Adaptation from the Trail of Bits "code-maturity-assessor" skill. Preserve Trail of Bits attribution and source link. Mark modifications. License adaptations are ShareAlike. No trademark rights claimed. Do not reuse trail-of-bits-mark.svg as branding.

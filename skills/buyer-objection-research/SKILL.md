@@ -31,7 +31,3 @@ description: 'Use when Product copy needs buyer-objection evidence collected thr
 
 ## Output
 A buyer-objection copy recommendation grounded in anonymized exact language, plus an immutable K11 receipt with every K11 field and the terminal class (success, capped, stalled, blocked, exhausted, or pending).
-
-## Provenance
-
-- Profile P-CATALOG: source https://signals.forwardfuture.com/loop-library/catalog.json. Derived provenance ledger records catalog number, URL, access date, and no-expression-reuse attestation. Expression reuse: none.

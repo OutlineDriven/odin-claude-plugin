@@ -47,7 +47,3 @@ Required: the repository or directory that bounds the Markdown tree and an expli
 ## Output
 
 The cleaned documentation tree plus a terminal report with scope, file count, per-class finding counts, applied versus reported-only findings, deletions with approvals, pointer-check results, and `DONE`, `BLOCKED`, or `NON-CONVERGED`.
-
-## Provenance
-
-Adapted from the project-owned `purge-slop-docs` skill candidate `current:current-c:current:purge-slop-docs` at `skills/purge-slop-docs/SKILL.md`. No source revision or license identifier was supplied. This version preserves the source's four evidence classes, certainty gate, per-file deletion approval, hierarchy operations, and pointer verification while making the procedure self-contained for ODIN 2.0.

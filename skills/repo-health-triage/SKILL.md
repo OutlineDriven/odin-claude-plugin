@@ -49,7 +49,3 @@ description: 'Use when a scheduled or watcher tick requests a repository-health 
 ## Output
 
 A bounded report file with header (repository target, timestamp, scope), High/Watch/Noise sections with evidence lines, run-log entry, isolated-fix proposal if any, and informational score if computed, ordered: header, High, Watch, Noise, run-log, fix proposal, score.
-
-## Provenance
-
-Origin: cobusgreyling/loop-engineering, patterns/daily-triage.md and related files. Pinned revision: d03dcb92cc1e0efb59789a2557131c6ad5897ccc. License: MIT. Adaptation: clean-room rewrite for ODIN 2.0 odin-run module; source mechanism (scheduled triage sweep with evidence-backed classification) preserved, execution adapted to local-write authority and bounded report contract.

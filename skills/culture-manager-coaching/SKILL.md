@@ -93,7 +93,3 @@ If a profile is missing the arrow position, stop and request it. Never substitut
 
 ## Output
 A coaching guide in chat text with sections in procedure order: trait-gap map, communication adjustments, one-on-one design, motivators, energy status, watch areas, avoidances.
-
-## Provenance
-
-Origin: https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3, file /plugins/culture-index/skills/interpreting-culture-index/workflows/coach-manager.md. License: CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3. Preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding. Adaptation: restructured the workflow into a self-contained read-only coaching procedure, inlining the trait-relative-to-arrow interpretation rules, friction patterns, per-trait communication and one-on-one guidance, motivators, and EU energy check without external file references.

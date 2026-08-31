@@ -55,8 +55,3 @@ No rollback is needed if the only write is the artifact directory itself.
 ## Output
 
 An artifact directory containing a structured report (`repro-summary.md` or `repro-summary.json`) with fields status, steps, environment, evidence, next_step, plus any evidence files captured during the repro run, with the directory path returned to the caller.
-
-## Provenance
-
-Origin: warpdotdev/common-skills (`https://github.com/warpdotdev/common-skills`), revision `f589e224907eda566c13755529f59db563090d14`.
-License: MIT — Copyright (c) 2026 Denver Technologies, Inc. Adaptation performed in ODIN style with attribution in the module provenance ledger. No copyleft obligations. The vendored JS bundle (`pierre-diffs.js`) was not carried over.

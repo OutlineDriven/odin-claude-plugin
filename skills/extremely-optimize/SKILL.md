@@ -56,7 +56,3 @@ Partial-result rule: a target that has not reached the done predicate is reverte
 
 ## Output
 Exit code 0: hot units rebuilt against their floors with a proven win (≥ 1.05× over baseline), cold units each carrying a fixed / at-floor / left verdict, residue symbols returning nothing, verifier green, each target on its own commit. Any non-zero exit code above is a terminal classification with the specific blocker named.
-
-## Provenance
-
-Origin: ODIN 1.x current skill `skills/extremely-optimize/SKILL.md`. Revision: unpinned. License: project-owned. Adaptation: clean-room rewrite preserving the floor-based performance-rebuild mechanism, hot/cold split, boundary gating, divergence audit, atomic-commit landing, and exit-code contract.

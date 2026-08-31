@@ -40,10 +40,3 @@ Rollback: `git checkout -- .` restores pre-mutation state. Do not push partial m
 ## Output
 
 A configured Python project with `pyproject.toml`, `uv.lock`, tooling config, and source layout — ordered by the procedure steps that produced them. The done predicate holds only when lint, type, and test all exit 0.
-
-## Provenance
-
-- **Origin**: Trail of Bits skills repository, `plugins/modern-python/skills/modern-python/SKILL.md`.
-- **Pinned revision**: `d1f1575cff97816e5cc08af66cd2506099c681d3`.
-- **License**: CC-BY-SA-4.0. Trail of Bits attribution and source link preserved; modifications marked; adaptations ShareAlike; no trademark rights claimed.
-- **Adaptation**: Clean-room rewrite for ODIN 2.0 skill format. Per-type setup detail moved to `references/project-types.md` per I3 branching disclosure. No third-party expression copied verbatim.

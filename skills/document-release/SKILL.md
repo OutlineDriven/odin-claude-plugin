@@ -61,7 +61,3 @@ description: 'Use when the user runs /document-release to synchronize README, CL
 
 ## Output
 A local commit with synchronized documentation, a health summary listing each file as Updated/Current/Polished/Skipped with a one-line detail, and a coverage map with gaps flagged — no push, no PR or MR update.
-
-## Provenance
-
-Adapted from the `document-release` skill in garrytan/gstack (revision 07b59e396c6be5a86619a43151cb9ed62a15ae69), MIT licensed, Copyright (c) 2026 Garry Tan. Clean-room re-derivation: the clobber-protected CHANGELOG voice polish, Diataxis coverage map, auto-update versus ask classification, VERSION bump gate, redaction scan, and named-file local commit are preserved as mechanism. All gstack runtime binaries, preamble, telemetry, codex cross-model review, AskUserQuestion tool format, PR/MR body update, and push steps were removed to fit reversible-local authority with no runtime dependencies. The MIT copyright and permission notice are retained.

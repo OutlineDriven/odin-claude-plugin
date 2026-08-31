@@ -108,7 +108,3 @@ A hook's only job is to make the reader want sentence 2. It does that through on
 
 ## Output
 Return, in order: working title; 3-4 numbered hook types with two A/B candidates each; the user’s selection prompt; after selection, the chosen hook and one sentence naming what it commits the opening to.
-
-## Provenance
-
-Origin: samber/cc-skills, `skills/copywriting-hooks/SKILL.md`, revision f9953962e135235137628ea92d06ea085688031f. License: MIT. Adaptation: condensed and restructured into the ODIN 2.0 contract form; retained the 18-hook catalog, five-lever model, type-fit table, diversification rule, anti-pattern cull, and numbered A/B output discipline; dropped the post-title section and external reference files to match the hook/lede/accroche trigger scope. Clean-room adaptation of the method; no third-party expression copied verbatim beyond the cited illustrative hook fragments, which are attributed inline to their authors.

@@ -1,6 +1,6 @@
 ---
 name: onboard
-description: 'Use when the user asks for onboarding, orientation, a repository tour, or where to start. Produces an evidence-backed seven-section map, deep-reads real files, and asks for the next move. Not for proving an onboarding journey completion — use onboarding-journey-proof.'
+description: 'Use when the user asks for onboarding, orientation, a repository tour, or where to start. Produces an evidence-backed seven-section map, deep-reads real files, and asks for the next move.'
 ---
 
 # Onboard
@@ -62,7 +62,3 @@ description: 'Use when the user asks for onboarding, orientation, a repository t
 ## Output
 
 In-chat orientation with the seven ordered sections, certainty labels where needed, a two-or-three-file source deep read with concrete paths and relationships, explicit degradations, and a single-select next-move question. Terminal classification: `complete` only when the root is valid, core evidence collection was attempted, at least one real source file was read, commands are grounded, and the next-move question is present; otherwise `blocked` with the unmet predicate and the useful partial orientation.
-
-## Provenance
-
-Project-owned adaptation of `current:current-c:current:onboard` from `skills/onboard/SKILL.md`. No source revision or license identifier was supplied. This version preserves the bounded evidence collection, seven-section synthesis, real-file deep read, certainty grading, graceful degradation, and next-move decision while removing external runtime dependencies.

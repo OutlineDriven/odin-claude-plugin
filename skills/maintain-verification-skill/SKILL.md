@@ -42,7 +42,3 @@ description: 'Use when asked to repair drift in a project verification skill. Re
 ## Output
 
 Report a terminal classification — **clean**, **changed**, or **blocked** — with the files edited (if any), the drift repaired, any remaining drift, and the PR URL if one was opened.
-
-## Provenance
-
-Origin: cursor/plugins (pstack), revision 68836ddaf5697224520f1847d90cdb90ca8babaa. MIT license. Clean-room adaptation: the mechanism — drift repair scoped to the verification-skill directory with an honest terminal classification — is preserved; expression is rewritten.

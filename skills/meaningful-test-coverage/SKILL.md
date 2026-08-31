@@ -38,7 +38,3 @@ description: 'Use when a test surface needs meaningful coverage raised to a conf
 ## Output
 
 A coverage result: terminal class (success, capped, stalled, blocked, exhausted, pending), coverage reached, files edited, and the receipt path — ordered by the procedure steps that produced them.
-
-## Provenance
-
-- Profile P-CATALOG: source https://signals.forwardfuture.com/loop-library/catalog.json. Derived provenance ledger records catalog number, URL, access date, and no-expression-reuse attestation. Expression reuse: none.

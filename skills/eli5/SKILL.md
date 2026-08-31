@@ -33,7 +33,3 @@ Required: a concept, term, or passage to simplify. Optional: the audience level 
 
 ## Output
 A chat explanation ordered as next action, gist, analogy, with no AI-isms and no code changes.
-
-## Provenance
-
-Origin: mblode/agent-skills, revision e97a3b383f5944f90d41eb92b24b4fb3b917a7f9. License: MIT (Copyright (c) 2026 Matthew Blode). Clean-room adaptation: the plain-language, no-AI-prose mechanism is re-expressed here without copying third-party expression.

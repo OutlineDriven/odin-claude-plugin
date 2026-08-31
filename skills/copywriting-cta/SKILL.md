@@ -120,7 +120,3 @@ Optional: free-text constraints the user volunteers (length limit, brand voice, 
 
 ## Output
 A single in-conversation recommendation containing: archetype selection with rationale, copy (headline, body, button, risk reversal), form (placement, visual weight, layout, proof), mechanism, A/B test plan, WCAG 2.2 accessibility check, 2-3 anti-pattern warnings, and 2-3 suggested next moves.
-
-## Provenance
-
-Origin: samber/cc-skills, `skills/copywriting-cta/SKILL.md`. Pinned revision: f9953962e135235137628ea92d06ea085688031f. License: MIT. Adaptation: clean-room rewrite — the decision tree (archetypes A-K), one-primary-CTA rule, A/B plan structure, and WCAG 2.2 check are preserved as mechanism; reference files were inlined and expression rewritten.

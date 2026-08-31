@@ -39,7 +39,3 @@ description: 'Use when invoked as visual-fact-check with a document path. Verifi
 
 ## Output
 The target document with evidence-backed corrections and one appended verification summary; the returned report lists each claim, citation, classification, before/after text when corrected, and the structural-integrity result.
-
-## Provenance
-
-Origin: `nicobailon/visual-explainer`, revision `7163c3e10660912e0b89e1af465db9f387282b88`, source path `plugins/visual-explainer/commands/fact-check.md`. License: MIT. This clean-room adaptation preserves the source mechanism of checking every document claim and correcting factual errors while embedding the executable procedure so runtime access to the source repository is unnecessary. The root provenance ledger retains the source notice.

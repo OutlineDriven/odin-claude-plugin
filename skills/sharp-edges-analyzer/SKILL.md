@@ -60,9 +60,3 @@ No rollback is required for read-only operations. No state is written that requi
 ## Output
 
 A structured sharp-edge findings report in the caller's session: a findings table with one row per misuse (category, severity, source location, minimal misuse example, exploitability determination, recommendation) sorted by severity descending, plus a summary line with total findings per severity level; no file writes, no credential issuance, no VCS changes.
-
-## Provenance
-
-Origin: Trail of Bits `sharp-edges` tool, `plugins/sharp-edges/agents/sharp-edges-analyzer.md`, revision `d1f1575cff97816e5cc08af66cd2506099c681d3`, `https://github.com/trailofbits/skills`.
-License: CC-BY-SA-4.0. The source license requires: preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse `trail-of-bits-mark.svg` as branding.
-Adaptation: Clean-room. The concepts of authentication anti-patterns, cryptographic API misuse, configuration hardening, and interface contract violations are derived from the source's functional description. The four-phase procedure, severity scale, and report schema are expressed in original wording. No source expression is copied.

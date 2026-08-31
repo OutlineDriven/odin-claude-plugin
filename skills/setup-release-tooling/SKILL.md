@@ -48,10 +48,3 @@ disable-model-invocation: true
 ## Output
 
 A human-readable report naming each selected release tool, its prerequisite status, which credentials are present in `.env`, and which release workflows are ready; the `.env` file contains the keys the user supplied; no credentials are echoed in the report.
-
-## Provenance
-
-Origin: https://github.com/warpdotdev/client-release-agent-oss
-Revision: 9c1394804c5148820a9bab6c01802fde4330d725
-License: MIT — requires the copyright notice and permission notice in all copies or substantial portions.
-Adaptation: adapted from `.warp/skills/setup/SKILL.md`, `.env.example`, and `README.md` of the upstream repository. Setup-and-verify mechanism preserved; scope broadened to odin-run's full release-tooling breadth. Credential gathering (Slack, Sentry) added. Human-only invocation required because `.env` creation with user-supplied credentials is a credential-or-data-at-rest side effect under the authoring contract.

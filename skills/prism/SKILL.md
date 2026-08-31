@@ -37,7 +37,3 @@ All failures preserve the read-only boundary: there is no mutation to roll back.
 
 ## Output
 Return a chat report with sections Lenses, Grouping, Decisive question, Status in that order.
-
-## Provenance
-
-Project-owned adaptation of `skills/prism/SKILL.md` from the `odin-current` source candidate `current:current-c:current:prism`. No source revision or license identifier was supplied. This adaptation preserves the independent two-to-five-lens review, one verdict and one load-bearing reason per lens, explicit agreement grouping, non-averaging of disagreement, and single decisive-question mechanism while translating authority to a read-only, chat-only contract.

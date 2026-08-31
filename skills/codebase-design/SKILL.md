@@ -49,7 +49,3 @@ description: 'Use when designing or improving a module interface, locating a sea
 
 ## Output
 Design recommendation in the fixed vocabulary: interface and implementation → external and internal seams → deep/shallow verdict with deletion-test result → interface-narrowing steps → seam placement → testability restructure → applied local edits with rollback point.
-
-## Provenance
-
-Adapted from the ODIN 1.x project-owned skill at `skills/codebase-design/SKILL.md` (candidate `current:current-a:current:codebase-design`; source revision not recorded). Terms, deep/shallow mechanics, the deletion test, testability patterns, cross-language anchors, and rejected framings are retained; wording was rewritten for the ODIN 2.0 literal contract and the vocabulary discipline now binds the procedure. No third-party expression was copied.

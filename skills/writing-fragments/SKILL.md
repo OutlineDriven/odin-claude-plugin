@@ -40,7 +40,3 @@ Must be supplied: a working title (the human's intent or the opening prompt). Op
 
 ## Output
 A markdown file — first line `# Working title`, remaining content fragments separated by `---`; no heading inside the body, no tags, no metadata.
-
-## Provenance
-
-Origin: `mattpocock/skills` (MIT, Copyright (c) 2026 Matt Pocock). Pinned revision: `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76`. Adaptation: restructured for ODIN 2.0 contract schema; procedure mechanics preserved from source. Obligation: retain copyright and permission notice per license.

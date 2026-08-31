@@ -40,8 +40,3 @@ description: 'Use when documenting or fixing OpenAPI docs for a Sentry endpoint 
 
 ## Output
 The endpoint with correct `@extend_schema` decorators, TypedDict responses, and (when applicable) PUBLIC status, plus a report naming changed paths, validation results, and any downstream `sentry-api-schema` regeneration dependency.
-
-## Provenance
-
-- Origin: getsentry/skills, revision c2f99a5b04b4cd992ec3022d7c2c3e23e938d241, license Apache-2.0.
-- Clean-room adaptation preserving the drf-spectacular endpoint documentation, type-drift correction, legacy migration, and PUBLIC promotion mechanism.

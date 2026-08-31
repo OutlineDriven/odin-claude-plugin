@@ -38,8 +38,3 @@ description: 'Use when a user asks to mine recent chats for workflow preferences
 
 ## Output
 A structured report with sections in order: extracted preference signals with source citations, synthesized preference profile with confidence ratings, and proposed workflow artifacts with trigger, inputs, steps, and done criterion.
-
-## Provenance
-
-Origin: cursor/plugins, revision 68836ddaf5697224520f1847d90cdb90ca8babaa, path cursor-team-kit/skills/workflow-from-chats/SKILL.md.
-License: MIT. Adaptation: clean-room implementation from MIT-licensed source. Trigger narrowed to chat-mining preference research. Authority remains read-only. Side effect reduced to propose-only. Module assigned to odin-research by roster ruling.

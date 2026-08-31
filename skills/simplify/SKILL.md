@@ -88,7 +88,3 @@ Non-mutation rule: sequential dispatch (not one tool-call message with three age
 
 ## Output
 Terminal classification with an exit code. On exit 0: the change-set is compressed along reuse / quality / efficiency axes with one atomic commit per issue class, every fix commit green, and no new bloat introduced.
-
-## Provenance
-
-Origin: current-odin-skill-tree / skills/simplify/SKILL.md. Revision: null. License: project-owned. Adaptation: canonical ODIN 2.0 section order and frontmatter contract applied; no third-party expression copied.

@@ -45,10 +45,3 @@ description: 'Use when a user wants to enumerate hostile worlds and actively mak
 ## Output
 
 One structured report: world catalog, break log, survived log, summary (worlds attempted, breaks found, survived, strongest break), in that order.
-
-## Provenance
-
-- Origin: curated:curated-ideas:curated-034 from project-owned:user-curated-skill-ideas and project-owned:user-supplied-source-brief.
-- Revision: null (no pinned revision).
-- License: project-owned.
-- Adaptation: clean-room rewrite of the user-curated entry "offensive-possible-worlds-qa: enumerate hostile worlds and actively make the product break" into a bounded, falsifiable procedure. No third-party expression copied.

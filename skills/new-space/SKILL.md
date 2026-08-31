@@ -43,7 +43,3 @@ description: 'Use when a user starts a new work session and asks to split usersp
 ## Output
 
 One workspace directory (`run/<session-id>/`) containing brief.md, spawn.md, work.md, review.md, human-gate.md — in that order.
-
-## Provenance
-
-Origin: `project-owned:user-curated-skill-ideas` (license: null, revision: null). Adapted from the workspace-splitting workflow entry (curated:curated-ideas:curated-011). Design axioms retained: Q5 human gates at start and end; Q47 and Q51 each skill completes independently and must not depend on another skill to complete.

@@ -56,11 +56,3 @@ Non-mutation rule: no production code mutation persists beyond the proof step. E
 ## Output
 
 A deletion report listing deleted tests (file path, test name, surviving mutation, batch commit hash), kept tests (file path, test name, reason kept), and final suite pass/fail status — ordering: deleted, kept, suite status.
-
-## Provenance
-
-- Origin: current-odin-skill-tree (candidate `current:current-d:current:tests-purge-unneeded`).
-- Source path: `skills/tests-purge-unneeded/SKILL.md`.
-- Pinned revision: none (current tree, no commit hash pinned).
-- License: project-owned. No third-party expression copied.
-- Adaptation: clean-room rewrite. The original skill's per-language reference files (python.md, typescript.md, rust.md, keep-vs-delete-table.md) are inlined into the procedure and decision rubric. The mutate-first proof mechanism, four mandates, static-guarantee carve-out, and boundary contract taxonomy are preserved verbatim in substance. External file pointers and system-prompt-baseline.md cross-reference are removed per self-containment requirement.

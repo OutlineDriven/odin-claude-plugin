@@ -1,3 +1,0 @@
-interface:
-  display_name: "Frame Ocr Blur Protection"
-  short_description: "Use when a raster frame is requested for the describer while"

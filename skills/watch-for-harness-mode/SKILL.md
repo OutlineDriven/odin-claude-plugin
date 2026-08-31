@@ -41,7 +41,3 @@ description: 'Use when a proven watch pattern should become a reusable harness a
 
 ## Output
 One terminal result: adopted (harness artifact exists and user confirmed, with name and path), withdrawn (user declined, artifact deleted, no harness exists), or blocked (input validation failed or watch transcript insufficient, with the blocking reason).
-
-## Provenance
-
-Origin: `project-owned:user-curated-skill-ideas`, curated-ideas line 51. License: project-owned marker (clean-room adaptation). This skill turns a proven watch pattern into a reusable artifact. The `babysit` skill (curated-ideas line 48) supplies the watch mechanism; this skill adds extraction and harness synthesis as a distinct mechanism.

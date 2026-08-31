@@ -63,7 +63,3 @@ description: 'Use when two refs or source snapshots need security-relevant struc
 
 ## Output
 A `GRAPH_EVOLUTION_{project}_{before_ref}_{after_ref}.md` report containing: a summary metric table; critical structural changes with severity, evidence, and recommendations; attack surface evolution; complexity evolution; taint propagation changes; blast radius shifts; privilege boundary changes; added and removed nodes and edges; and a methodology section with honest limitations. Temporary worktrees are removed and their removal is accounted for in the report.
-
-## Provenance
-
-Origin: https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3. License: CC-BY-SA-4.0. Adapted clean-room from the Trailmark graph-evolution skill. Preserve Trail of Bits attribution and source link. Modifications are marked; adaptations are licensed ShareAlike. No trademark rights claimed; trail-of-bits-mark.svg is not reused as branding.

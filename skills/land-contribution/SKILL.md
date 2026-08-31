@@ -61,7 +61,3 @@ No failure permits deleting the contributor branch, rewriting contributor commit
 ## Output
 
 Return one terminal record containing the repository and pull-request number; contributor; reviewed head revision; thesis; classification (`landed`, `declined`, or `blocked`); findings and check outcomes; previewed and confirmed remote operations; `land/pr-<n>` revision when created; contributor commits and authorship confirmation; separate maintainer commits; approval reference; landed revision and closure state; credit-comment reference; rename explanation when applicable; retained branches; and any exact blocking failure. `landed` and `declined` require remote read-back evidence for every applicable Done predicate.
-
-## Provenance
-
-Clean-room adaptation of the external-contribution acceptance mechanism from LilMGenius/paperthin, `skills/depth/re0-merge/SKILL.md`, pinned at revision `3bca079a51bcfff5dafb53d1d7f9f523d66ee317`, licensed MIT, copyright 2026 LilMGenius. This procedure preserves the workflow's thesis-based, reviewer-agnostic, reduced-capability review; contributor-authorship preservation; separate maintainer repairs; approval-before-close ordering; credited closure; branch-preserving decline; and explained rename mechanisms without copying third-party expression or vendored material.

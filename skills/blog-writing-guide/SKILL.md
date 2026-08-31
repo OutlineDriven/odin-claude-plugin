@@ -49,7 +49,3 @@ description: 'Use when asked to write, review, or improve a Sentry engineering b
 
 ## Output
 A local blog draft file (Markdown) with a real byline, no corporate fluff, real numbers, tested code, a diagram for multi-component systems, information-conveying headings, a specific title, and a useful closing — for review tasks, a marked-up draft plus feedback quoting each weak passage and rewriting it to standard.
-
-## Provenance
-
-Origin: getsentry/skills, revision c2f99a5b04b4cd992ec3022d7c2c3e23e938d241, license Apache-2.0, source path skills/blog-writing-guide/SKILL.md. Clean-room adaptation: the Sentry blog writing standards (voice, banned language, opening rule, reader's-questions structure, skimmability formatting, developer-content SEO, AI-pattern detection, technical quality bar, title and closing rules, post-type byline rules, share test, and review checklists) are restated in self-contained procedural form; no third-party expression is copied.

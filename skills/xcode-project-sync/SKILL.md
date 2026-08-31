@@ -37,7 +37,3 @@ description: 'Use when /xcode-project-sync must regenerate an Xcode project from
 
 ## Output
 The regenerated xcodeproj under the app root, a diff summary of changed files, and a terminal classification: the project builds (DONE), or BLOCKED with the failing step and what was attempted.
-
-## Provenance
-
-Origin: https://github.com/garrytan/gstack, revision `07b59e396c6be5a86619a43151cb9ed62a15ae69`, path `ios-sync/SKILL.md`. License: MIT, Copyright (c) 2026 Garry Tan. Clean-room adaptation: the gstack iOS debug-bridge resync procedure was re-derived as an Xcode project regeneration skill; no third-party expression was copied wholesale.

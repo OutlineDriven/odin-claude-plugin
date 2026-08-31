@@ -35,7 +35,3 @@ The plan, design, or claim under attack, supplied by the user in the conversatio
 ## Output
 
 A single { root, first_nail } pair in chat: root is one load-bearing objection whose failure makes the rest moot; first_nail is the cheapest experiment that would prove whether root matters, or null when no falsification is cheaper than the plan.
-
-## Provenance
-
-Origin: odin-1.x-current-skill (skills/hate/SKILL.md). No pinned revision. Project-owned, no third-party license. Clean-room adaptation preserving the single-objection observable contract and the load-bearing-root-plus-first-nail mechanism.

@@ -50,7 +50,3 @@ description: 'Use when a run needs its own branch and checkout to avoid collisio
 - Reconcile: orphan paths and dropped entry ids.
 - Reads: manifest rows `<status> <id> <branch> (<pattern>)`.
 - Terminal classification: done only when every worktree is manifest-registered with a legal status, no active worktree was swept, and no removal used `--force`.
-
-## Provenance
-
-Adapted from `cobusgreyling/loop-engineering` (the `loop-worktree` tool), revision `d03dcb92cc1e0efb59789a2557131c6ad5897ccc`, MIT license; source paths `/tools/loop-worktree/src/worktree.ts`, `/tools/loop-worktree/src/cli.ts`, `/stories/loop-worktree-week-two.md`. The mechanism — manifest mutex with stale recovery, one-step branch-plus-worktree creation, five-status machine with atomic manifest writes, terminal-only cleanup without `--force`, create rollback, manifest-disk reconciliation — is preserved; the TypeScript CLI is re-expressed as an agent-executable git-and-manifest procedure and no source text is copied.

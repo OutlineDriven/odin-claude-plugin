@@ -40,7 +40,3 @@ disable-model-invocation: true
 
 ## Output
 Close report: per-item (number, title, final state, classification reason) → excluded items with reasons → gate decision (Approve, Deny, partial, or pending).
-
-## Provenance
-
-Origin: the user-curated skill idea `close-done` in the Issue and pull-request hygiene section of `project-owned:user-curated-skill-ideas`, supplemented by the raw Korean source at `project-owned:user-supplied-source-brief`. No revision pinned (local artifacts). License: project-owned, user-curated; clean-room adaptation, no third-party expression copied. The one-line idea — batch-close resolved or outdated tracker items behind an Approve or Deny gate even when the user says to proceed directly — is expanded into a bounded, executable, human-only procedure that preserves the mandatory gate.

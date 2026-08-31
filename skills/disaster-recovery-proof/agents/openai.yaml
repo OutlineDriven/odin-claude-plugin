@@ -1,3 +1,0 @@
-interface:
-  display_name: "Disaster Recovery Proof"
-  short_description: "Use when a disaster-recovery plan needs an isolated restore and"

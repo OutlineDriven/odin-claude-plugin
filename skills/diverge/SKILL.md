@@ -38,7 +38,3 @@ description: 'Use when the user wants to expand a decision field with additional
 
 ## Output
 A chat report containing the decision question, options (known then new), and dimensions (known then new), each tagged, ordered restate → inventory → expand-options → expand-dimensions → tag → return; no file is written and no decision is made.
-
-## Provenance
-
-Origin: user-curated skill ideas (project-owned:user-curated-skill-ideas, "Divergence and convergence" section, line: `diverge`: expand a decision field). Revision: none pinned. License: project-owned. Adaptation: clean-room rewrite of the one-line brief into a bounded, read-only divergence procedure.

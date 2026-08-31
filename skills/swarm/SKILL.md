@@ -45,7 +45,3 @@ Optional:
 ## Output
 
 Consolidated evidence table (partition ID, tests run, tests passed, coverage delta, dropouts; one summary row) plus a gap report naming every partition with a dropout or sub-threshold coverage by partition ID, symptom, and affected slice.
-
-## Provenance
-
-Origin: `pstack/skills/swarm/SKILL.md` from https://github.com/cursor/plugins, ref `68836ddaf5697224520f1847d90cdb90ca8babaa`. License: MIT (`pstack/LICENSE` blob `6b5400237fdf6545be0b8fae370d6f2fcff8fb25`; pstack authored by Lauren Tan under MIT per audit license block). Adaptation: clean-room structural derivation — partitioned parallel worker dispatch mechanism adapted to ODIN 2.0 authority model (reversible-local, no publish), ODIN contract table, explicit concurrency cap, evidence consolidation with gap reporting.

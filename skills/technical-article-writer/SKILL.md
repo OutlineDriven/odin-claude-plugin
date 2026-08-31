@@ -43,10 +43,3 @@ description: 'Use when a user asks to write a blog post or technical article. De
 ## Output
 
 Complete article text in chat: title, hook, structured body with subheadings, CTA block — humanization pass applied, engineered lines (hook, title, CTA) preserved verbatim unless a factual correction is required.
-
-## Provenance
-
-- Origin: samber/cc-skills, skills/technical-article-writer/SKILL.md.
-- Pinned revision: f9953962e135235137628ea92d06ea085688031f.
-- License: MIT.
-- Adaptation: clean-room adaptation for ODIN 2.0. Source mechanisms (Evans/Shapiro idea-quality filters, one-objective CTA, delegated hooks and CTA) preserved. No third-party expression copied.

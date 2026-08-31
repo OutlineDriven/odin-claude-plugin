@@ -43,7 +43,3 @@ Optional:
 
 ## Output
 A first-90-days plan in chat text with sections in procedure order: buddy choice, ally and friction map, manager briefing, communication preferences, 30/60/90 actions, success indicators.
-
-## Provenance
-
-Origin: https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3, source path /plugins/culture-index/skills/interpreting-culture-index/workflows/plan-onboarding.md. License CC-BY-SA-4.0. Clean-room adaptation: this skill restates the onboarding-plan mechanism in original wording, marks these modifications, licenses the adaptation ShareAlike, claims no trademark rights, and does not reuse trail-of-bits-mark.svg as branding. Preserve Trail of Bits attribution and the source link.

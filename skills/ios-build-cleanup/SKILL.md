@@ -38,7 +38,3 @@ disable-model-invocation: true
 
 ## Output
 A report listing every target deleted, every target skipped as already-clean, and any target that failed deletion. The terminal classification is `clean` when all targets are removed or were already absent, or `blocked` when any target could not be deleted.
-
-## Provenance
-
-Adapted from the `ios-clean` skill in the gstack project (https://github.com/garrytan/gstack, revision 07b59e396c6be5a86619a43151cb9ed62a15ae69), MIT licensed (Copyright (c) 2026 Garry Tan). Expressive prose and procedure were re-derived under clean-room adaptation. The MIT copyright and permission notice is retained.

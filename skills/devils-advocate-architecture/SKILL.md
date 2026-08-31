@@ -40,7 +40,3 @@ The problem or system to be architected, supplied by the human. Optional: constr
 
 ## Output
 A recorded architecture decision as chat output: the surviving shape (components, boundaries, data flow, load-bearing decision), the attacks it survived, the conceded open risks, and the round count, ordered restate → propose → invite-attack → revise → repeat → record.
-
-## Provenance
-
-Origin: project-owned:user-curated-skill-ideas (curated-037), supplemented by project-owned:user-supplied-source-brief. No pinned revision or third-party license; project-owned clean-room adaptation of a user-curated architecture design ritual. Adaptation: normalized the "agent proposes, human attacks until the shape survives" ritual into a bounded read-only contract with explicit failure and recovery.

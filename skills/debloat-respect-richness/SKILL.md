@@ -38,9 +38,3 @@ description: 'Use when a user asks to tighten verbose-but-correct prose without 
 
 ## Output
 The target artifact with words cut in place to load-bearing density, plus a report listing sections tightened, load-bearing claims confirmed, unchanged sections, and any duplication or drift handoff.
-
-## Provenance
-
-- Origin: github.com/LilMGenius/paperthin, skills/depth/debloat/SKILL.md, revision 3bca079a51bcfff5dafb53d1d7f9f523d66ee317.
-- License: MIT (c) 2026 LilMGenius; NOTICE vendors verbatim material from mattpocock/skills (MIT, (c) 2026 Matt Pocock). The foundry does not copy verbatim vendor material.
-- Adaptation: clean-room. The density-compression mechanism, intended-richness respect, and duplication/drift handoff rules are re-expressed; no third-party expression is copied.

@@ -62,7 +62,3 @@ Partial-result rule: a partially authored script is never handed off. Rollback: 
 
 ## Output
 A self-contained bash wizard script at the target path containing the shared library, stages in dependency order, honest `TOTAL_STAGES` and `TOTAL_MINUTES`, and every scoped value captured and routed to its declared destination.
-
-## Provenance
-
-Origin: current-odin-skill-tree (`skills/wizard/SKILL.md`). Revision: current. License: project-owned. The `scripts/wizard-template.sh` library is project-owned, shared identically across all wizards, and never hand-edited. Adaptation: rewritten from the current skill into ODIN 2.0 roster format with no third-party expression.

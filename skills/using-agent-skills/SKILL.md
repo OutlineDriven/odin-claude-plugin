@@ -42,7 +42,3 @@ No partial results. If routing fails, the output is a gap note or a user clarifi
 
 ## Output
 Either the matched skill name with its trigger sentence and invocation confirmation, or a skill-gap note with the task description, gap reason, and trigger predicate a new skill would need.
-
-## Provenance
-
-Adapted from addyosmani/agent-skills at revision d2c37ef6225dd8726cdd369a8030307f48592d26 (MIT). Clean-room rewrite for ODIN 2.0 catalog routing. The root PROVENANCE.md contains the full license notice.

@@ -39,7 +39,3 @@ description: 'Use when writing or verifying framework-specific code, boilerplate
 
 ## Output
 STACK DETECTED block first (pinned versions, latest versions, version gaps), then the verified code with full-URL citations in comments, UNVERIFIED flags on anything unverifiable, and CONFLICT DETECTED blocks for each surfaced contradiction.
-
-## Provenance
-
-Two sources. (1) `current:current-d:current:source-driven` — existing odin-code skill, origin `current-odin-skill-tree`, no external license, adapted for ODIN 2.0 authoring format and authority contract. (2) `source:source-addy:addy-source-driven-development` — MIT-licensed skill from addyosmani/agent-skills (Copyright (c) 2025 Addy Osmani; SPDX: MIT; pinned revision d2c37ef6225dd8726cdd369a8030307f48592d26; obligation: retain copyright notice and MIT permission text in derived distributions; otherwise unrestricted use); exact four-field duplicate of current:source-driven, absorbed into that survivor with no surviving alias.

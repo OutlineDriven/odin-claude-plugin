@@ -1,3 +1,0 @@
-interface:
-  display_name: "Native Capability Catalogue"
-  short_description: "Use when a builder run must resolve target architecture and"

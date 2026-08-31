@@ -42,7 +42,3 @@ disable-model-invocation: true
 ## Output
 
 The filed GitHub issue URL, the local archived spec file path with frontmatter, and the implementer handle (or an explicit statement that no implementer was requested).
-
-## Provenance
-
-Origin: https://github.com/garrytan/gstack at revision 07b59e396c6be5a86619a43151cb9ed62a15ae69. License: MIT (Copyright (c) 2026 Garry Tan). Adaptation: clean-room re-derivation of the interrogation-through-redaction-gates-into-a-filed-issue-with-optional-worktree-implementer mechanism; no third-party expressive prose or code copied.

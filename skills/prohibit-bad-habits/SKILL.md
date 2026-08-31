@@ -58,10 +58,3 @@ description: 'Use when a user wants to define patterns the agent should not do; 
 
 ## Output
 - `done: prohibited-habits-documented` with the file path. The human confirmed the written artifact. - `partial: file-written` with the file path. The file was written but the human declined to review. - `blocked: non-concrete-description`: the human could not describe a prohibited pattern concretely. - `blocked: unreviewed-file-exists`: a pre-existing file at the target path was not reviewed in this session.
-
-## Provenance
-
-- **Origin:** curated ideas catalog, entry `curated:curated-ideas:curated-085`; adapted from a group chat discussing AI boundary-setting, prohibited behavior documentation, and AI slop terminology.
-- **Revision:** none pinned.
-- **License:** project-owned.
-- **Adaptation statement:** extracted an agent-rule construction contract from conversational evidence into a self-contained, executable ODIN skill. No third-party expression copied.

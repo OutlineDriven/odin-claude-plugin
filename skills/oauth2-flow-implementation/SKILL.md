@@ -66,9 +66,3 @@ Optional:
 ## Output
 
 Auth implementation code for the specified OAuth flow: authorization server routes or client helper functions, server-side token storage with no raw token in logs, and a security configuration summary listing each checklist item with pass/fail/na status.
-
-## Provenance
-
-Origin: `mcollina/skills` (`github.com/mcollina/skills`)
-Revision: `856efd268ae85482d882f3d0bed869fd020b5c06`
-License: MIT (SPDX) — MIT notice retained; mechanism adapted from source skill `skills/oauth/SKILL.md`

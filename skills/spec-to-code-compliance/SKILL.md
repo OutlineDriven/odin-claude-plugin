@@ -53,15 +53,3 @@ Optional:
 ## Output
 
 A structured compliance report: `spec_identifier`, `implementation_identifier`, `coverage` (verdicted vs unchecked fraction), `findings` (one record per requirement with `requirement_id`, `status` of `COMPLIANT`/`DIVERGENT`/`UNCHECKED`, `spec_clause`, `evidence`, `divergence_verification` for DIVERGENT, `undocumented_behavior` for step 7 findings), `unchecked_scope` (requirements that could not be audited with reasons).
-
-## Provenance
-
-Origin: Trail of Bits skills repository, https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3.
-
-License: CC-BY-SA-4.0. Adaptations preserve attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and do not reuse trail-of-bits-mark.svg as branding.
-
-Source paths adapted:
-- /plugins/spec-to-code-compliance/skills/spec-to-code-compliance/SKILL.md
-- /plugins/spec-to-code-compliance/agents/spec-compliance-checker.md
-
-Clean-room adaptation: the requirement-to-enforcement audit procedure with independent divergence refutation is preserved as the core mechanism; formatting, section structure, and ODIN frontmatter are authored to ODIN 2.0 specification.

@@ -59,7 +59,3 @@ Confidence qualifies support, not importance. Chronology alone does not establis
 
 ## Output
 A cited narrative in chat with sections in order: Answer (best-supported rationale with overall High/Medium/Low confidence), What the evidence says (Direct findings, then Inferences, then Hypotheses — each with confidence and citations), Decision chronology and alternatives, Source coverage and gaps (all seven categories with status), Handoff (Preserve/Change/Avoid/Risk tied to cited evidence or marked as inference), and Sources (deduplicated stable links with category and date).
-
-## Provenance
-
-Adapted from the current ODIN skill tree, `skills/why/SKILL.md`. The original epistemics framework, investigator and synthesizer protocols, and source playbooks are incorporated inline so this skill has no external support path or peer-skill runtime dependency. The module remains `odin-research`; the trigger, read-only authority, chat-only side effect, invocation policy, and successful end state remain unchanged.

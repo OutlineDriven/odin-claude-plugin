@@ -41,7 +41,3 @@ Required inputs are the claims to prove, the changed files or explicitly bounded
 ## Output
 
 Return a chat report listing each claim, its single proving command and scope, its observed result, any omitted redundant checks and why they were redundant, and exactly one terminal classification: `deliver`, `red`, or `blocked`.
-
-## Provenance
-
-Project-owned adaptation of `skills/lighter-checks/SKILL.md` from the ODIN 1.x current skill candidate `current:current-b:current:lighter-checks`. No source revision or license identifier was supplied. The adaptation preserves scoped one-pass verification, distinct-failure-class gating, whole project gates for touched languages, and first-green delivery. It also makes the read-only boundary explicit.

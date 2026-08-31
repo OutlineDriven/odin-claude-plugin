@@ -42,7 +42,3 @@ description: 'Use when /design-consultation proposes a design system with mockup
 
 ## Output
 DESIGN.md with the approved design system (tokens, primitives, application rules), CLAUDE.md pointers naming DESIGN.md as source of truth, and design artifacts alongside — ordered read-context → propose → preview → present → persist → keep-artifacts, gated on user approval before any persistence.
-
-## Provenance
-
-Origin: https://github.com/garrytan/gstack, revision 07b59e396c6be5a86619a43151cb9ed62a15ae69. License: MIT, Copyright (c) 2026 Garry Tan. Adaptation: clean-room re-derivation of the design-consultation procedure; no third-party expressive prose or code copied wholesale.

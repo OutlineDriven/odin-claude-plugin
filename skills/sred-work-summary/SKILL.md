@@ -52,10 +52,3 @@ No input is invented. Missing or refused credentials stop the skill without part
 ## Output
 
 One Notion document URL returned to the user. The document title matches the requested period. All gathered items are grouped into projects with zero truncation. No local file is produced.
-
-## Provenance
-
-- Origin: getsentry/skills (`skills/sred-work-summary/SKILL.md`)
-- Revision: `c2f99a5b04b4cd992ec3022d7c2c3e23e938d241`
-- License: Apache-2.0
-- Adaptation: Clean-room adaptation of work-history gathering from GitHub, Linear, and Notion with remote Notion document creation as the sole output artifact. Human-only invocation because the skill performs remote bulk mutation (Notion doc creation) on behalf of the user.

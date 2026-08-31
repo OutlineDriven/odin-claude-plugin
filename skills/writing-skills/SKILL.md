@@ -43,7 +43,3 @@ This skill is read-only: it emits guidance only and writes nothing. No rollback 
 
 ## Output
 Guidance applied to the authored or refactored document — sharpened pointers, a defended information hierarchy, checkable and exhaustive completion criteria, leading words that recruit pretrained priors, and no sediment or no-ops.
-
-## Provenance
-
-Origin: current ODIN skill tree (skills/writing-skills/SKILL.md) — project-owned. Merged source: obra/superpowers (https://github.com/obra/superpowers, revision b36e0829c6d0140e93cfef2ca599b1b07d4a7797, MIT, Copyright (c) 2025 Jesse Vincent). Adaptation: skill-specific mechanics (invocation choice, splitting by invocation, router skills) moved to `references/SKILL-MECHANICS.md` per I3 branch disclosure; peer-skill runtime routing removed; the universal writing-for-agents reference and the skill-specific branch consolidated into one self-contained read-only contract. Third-party obligations: see root PROVENANCE.md.

@@ -64,10 +64,3 @@ description: 'Use when a project''s first activation or a missing personal confi
 ## Output
 
 Both project and personal config blocks present and valid in the entry-point file, timer timestamps recorded, any update-check failure surfaced once with a disable option, and a report of blocks written, fields backfilled (if any), and timer evaluation results.
-
-## Provenance
-
-- Origin: https://github.com/oliver-zehentleitner/keep-the-why
-- Revision: c01597a506efa24652d7ecb9e18b6a8ccc97b175
-- License: MIT — Copyright (c) 2026 Oliver Zehentleitner. Retain the copyright notice and this permission notice in all copies or substantial portions of the Software.
-- Adaptation: Clean-room adaptation for ODIN 2.0. Two-wizard split (project vs personal), missing≠present distinction, opportunistic timer scheduling (skills have no background execution), and module remap from odin-orchestration to odin-research because this workflow configures the research knowledge store.

@@ -39,7 +39,3 @@ description: 'Use when asked to explore the codebase to map structure, symbols, 
 
 ## Output
 A structured orientation report with 8 sections in order: task understanding, architecture context, pattern context, tooling context, dependency map, critical files summary, constraints and considerations, and recommended next steps, omitting a section only when not applicable with a stated reason.
-
-## Provenance
-
-Origin: odin-1.x-current-skill (`skills/explore/SKILL.md`). Revision: none pinned. License: project-owned. Clean-room adaptation preserving the dispatch/escalation tiers, token-efficient discovery flags, 8-section report contract, read-only tool restrictions, heavy-codebase escape hatch, and recursion guard.

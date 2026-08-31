@@ -45,7 +45,3 @@ Rollback: if a reposition corrupts or loses content, restore from VCS. This auth
 ## Output
 
 A repositioned listing where the reader can name the ordering principle, every item is still present, kin are adjacent, and mirrored copies carry the identical order, or the original unchanged if nothing needed reordering.
-
-## Provenance
-
-Origin: odin-current. Revision: none pinned. License: project-owned (no third-party license applies). Adaptation: the source `skills/reorder/SKILL.md` was restructured into this contract section format. The source `disable-model-invocation: true` flag conflicts with the current reversible-local authority profile and is removed: a reversible in-place move is a safe public skill under model+human invocation.

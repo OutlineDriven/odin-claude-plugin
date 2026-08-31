@@ -40,7 +40,3 @@ Optional: a specific ASan report to interpret, a preferred sanitizer combination
 
 ## Output
 An instrumented binary or fuzz target, the exercise run result, and for any detected memory error a statement of the error type, the faulting source location, and the allocation/deallocation locations — sufficient to reproduce the failure.
-
-## Provenance
-
-Origin: github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3, file plugins/testing-handbook-skills/skills/address-sanitizer/SKILL.md. License CC-BY-SA-4.0: preserve Trail of Bits attribution and the source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding. This skill is a clean-room adaptation that preserves the sanitizer-setup and memory-error-diagnosis mechanism without copying the source expression.

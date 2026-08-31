@@ -295,7 +295,3 @@ Never `git add -A` / `git add .`. Never stage the reviewed document. Commit by t
 
 ## Output
 A tiered findings report: every survivor labeled safe-auto / gated-auto / manual / FYI, each carrying a verbatim document quote and an anchored confidence value. Interactive mode adds a routing decision per actionable finding and a unified completion report. On `--record`, additionally one file `docs/reviews/<doc-slug>-review.md`. The reviewed document is never modified. The run terminates with the literal signal `Review complete` (or `Review failed: <reason>` on a blocked path).
-
-## Provenance
-
-Origin: ODIN 1.x `doc-review` skill (project-owned). Source path: `skills/doc-review/SKILL.md` plus its `references/` tree (walkthrough, review-output-template, subagent-template, synthesis-and-presentation, bulk-preview, findings-schema, open-questions-defer, and the six persona files). Revision: unpinned (current). License: project-owned (no third-party license applies). Adaptation: the reference files and persona lenses are folded into this single self-contained procedure; mechanisms (content-shape classification, signal-gated persona selection, parallel read-only dispatch with the sanitization contract, the findings schema, the 16-stage synthesis pipeline, the four-tier routing, headless/interactive modes, and review-record discipline) are preserved verbatim in intent; teaching examples and motivational prose were removed.

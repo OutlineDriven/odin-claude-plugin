@@ -39,7 +39,3 @@ description: 'Use when a candidate patch or answer needs independent corroborati
 
 ## Output
 Either the strict-majority byte-identical patch or answer with its agreement count, or a no-consensus classification listing the per-run output groups. Never a correctness claim.
-
-## Provenance
-
-Origin: cobusgreyling/loop-engineering. Revision: d03dcb92cc1e0efb59789a2557131c6ad5897ccc. License: MIT. Source paths: /tools/loop-swarm/src/swarm.ts, /tools/loop-swarm/README.md, /scripts/issue-bodies/quickstart-loop-swarm.md. Adaptation: the loop-swarm N-rerun byte-identity consensus mechanism is restated as a corroboration signal demoted from correctness oracle to identity signal; expression is clean-room, no third-party text copied.

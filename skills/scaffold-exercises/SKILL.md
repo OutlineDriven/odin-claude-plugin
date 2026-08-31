@@ -49,7 +49,3 @@ Rollback: any scaffold written before a linter pass must be reverted if the lint
 
 ## Output
 A JSON object: `scaffolded` (paths) and `linter` status on success; `error` (named failure class) and `detail` on failure.
-
-## Provenance
-
-Adaptation of `mattpocock/skills` `scaffold-exercises` (MIT, Copyright (c) 2026 Matt Pocock). Original: `mattpocock/skills` at `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76`. Paths: `skills/misc/scaffold-exercises/SKILL.md`, `skills/misc/scaffold-exercises/agents/openai.yaml`. Adaptation: scoped to numbered course scaffolds with mandatory course-linter gate before commit. License obligation: retain the copyright and permission notice in licenses/NOTICE.

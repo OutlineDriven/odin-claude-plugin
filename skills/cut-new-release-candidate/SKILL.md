@@ -108,7 +108,3 @@ Report partial results exactly: name which of dispatch, run URL, and Slack post 
 
 ## Output
 A report naming the branch, the workflow name, the run URL, the queried `status` and `conclusion` at fetch time (completion is not awaited), the Slack destination posted, and the exact message text. Terminal classification: `done` only when the dispatch exited zero, the run URL is non-null, and the Slack response was `ok:true`; otherwise `blocked` with the failing step and the partial state.
-
-## Provenance
-
-Adapted from `warpdotdev/client-release-agent-oss` — `.warp/skills/cut-new-release-candidate/SKILL.md`, `README.md`, and `.env.example` — at revision `9c1394804c5148820a9bab6c01802fde4330d725`, licensed MIT (`LICENSE`; the copyright and permission notice requirement is met by this attribution). Mechanism-preserving adaptation: environment-driven configuration, channel-prefix validation, origin existence check, named-workflow dispatch on the branch ref, run-URL retrieval without waiting, the follow-up Slack update, the exact message text, and the `gh` auth recovery follow the upstream steps; the upstream hand-off to a peer Slack-reply skill is replaced with a direct Slack Web API `chat.postMessage` call so this skill is self-contained.

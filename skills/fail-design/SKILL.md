@@ -36,7 +36,3 @@ description: 'Use when a user wants a design document that defines failure state
 
 ## Output
 A failure-state design document containing the enumerated failure states, the recovery action for each, the defined bypasses with their trade-offs, and the degraded-mode specifications with their user-visible signals.
-
-## Provenance
-
-Origin: user-curated design-time failure-engineering workflow recorded in the Skill Foundry curated-ideas source. Revision: null. License: null (project-owned). Adapted as a clean-room self-contained procedure; no third-party expression copied. The design-time definition boundary is distinct from runtime recovery and the fail-fast principle, expressed here as an operational scope limit rather than a dependency.

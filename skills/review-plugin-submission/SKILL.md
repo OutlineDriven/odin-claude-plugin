@@ -44,9 +44,3 @@ description: 'Use when asked to review a plugin for marketplace readiness throug
 
 ## Output
 A chat message containing the complete sectioned report. No file is written. The report is the sole artifact.
-
-## Provenance
-
-Origin: cursor/plugins repository at commit 68836ddaf5697224520f1847d90cdb90ca8babaa.
-License: MIT — declared by the cursor/plugins root README and the candidate plugin manifest, as recorded in the pinned source audit.
-Adaptation: source adapted for odin-agent; plugin-quality-gates.mdc consulted as the gate specification source; MIT license retained.

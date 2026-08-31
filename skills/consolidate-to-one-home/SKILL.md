@@ -40,7 +40,3 @@ description: 'Use when the same rule, constant, or definition is repeated across
 
 ## Output
 Consolidation report (occurrences, classifications, home, decisions) plus terminal classification: `consolidated` (home holds complete truth, every copy resolves to it), `blocked` (missing approval or decision named), or `no-op` (nothing improved, zero edits).
-
-## Provenance
-
-Adapted from the ODIN 1.x current skill at `skills/consolidate-to-one-home/SKILL.md` (origin `odin-1.x-current-skill`, no pinned revision, project-owned with no third-party license). Re-normalized to the ODIN 2.0 section order; the external edit-safety reference was replaced with the inline rollback-capture step and peer-skill routing was dropped as prohibited cross-skill pointing.

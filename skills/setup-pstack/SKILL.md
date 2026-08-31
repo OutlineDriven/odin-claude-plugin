@@ -41,7 +41,3 @@ description: 'Use when asked to configure pstack role-to-model choices so every 
 ## Output
 
 Rule file path, configured role–model pairs, and a rollback record (original content or `(no prior file)`).
-
-## Provenance
-
-Adaptation of `pstack/skills/setup-pstack/SKILL.md` from cursor/plugins at revision `68836ddaf5697224520f1847d90cdb90ca8babaa`. Authored by Lauren Tan (poteto) under MIT license (LICENSE blob `6b5400237fdf6545be0b8fae370d6f2fcff8fb25`). Clean-room adaptation: original skill mechanics translated into odin-agent authoring contract shape without copying expression.

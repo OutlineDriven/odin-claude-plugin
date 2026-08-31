@@ -52,10 +52,3 @@ Partial results are not accepted. If any gate fails, the procedure stops at the 
 ## Output
 
 A validation gate table (assumptions documented, violations tested, errors meaningful, sanitizers pass) with exit code 0 (all clear), 1 (untested assumptions), 2 (silent failures), or 3 (crashes or panics) — ordering: gate table, then exit code with its meaning.
-
-## Provenance
-
-- Origin: current-odin-skill-tree, path `skills/tests-adversarial/SKILL.md`.
-- Revision: none pinned (current working tree).
-- License: project-owned.
-- Adaptation: clean-room rewrite of the existing adversarial testing skill into the ODIN 2.0 literal contract. No third-party expression retained.

@@ -1,0 +1,3 @@
+interface:
+  display_name: "CI Fix"
+  short_description: "Repair failing CI on a PR or branch."

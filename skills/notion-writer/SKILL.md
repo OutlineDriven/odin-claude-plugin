@@ -47,7 +47,3 @@ disable-model-invocation: true
 ## Output
 
 Terminal classification (`succeeded`, `partial`, `failed`, or `blocked`) with the requested operation, Notion object type and ID, confirmed resulting metadata, and when applicable the object URL, last-edited timestamp, query continuation state, retry details, or exact service error.
-
-## Provenance
-
-Adapted as a focused Notion CRUD procedure from `warpdotdev/competitive-intelligence-agent-oss`, `.warp/skills/write_notion/SKILL.md`, pinned at revision `9e0363e810a14405ef876fb354562735002797fb`. Source license: MIT; the MIT notice treatment is retained in project provenance, and the rate-limit and destructive-operation confirmation mechanisms are adapted here.

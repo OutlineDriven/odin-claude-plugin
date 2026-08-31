@@ -111,7 +111,3 @@ disable-model-invocation: true
 
 ## Output
 A terminal classification: Done (Notion weekly page URL, six child page URLs, local file path, Slack confirmation, PR URL — Sections 1-5 passed factual self-review, Section 6 labeled agent-generated recommendations), Partial (which of the four targets succeeded and which step failed), or Blocked (missing prerequisite or failed check, with mutation status).
-
-## Provenance
-
-Origin: `warpdotdev/competitive-intelligence-agent-oss`, `.warp/skills/weekly_wynk/SKILL.md`, pinned revision `9e0363e810a14405ef876fb354562735002797fb`; the Notion API and Slack webhook mechanics come from the same revision's `write_notion` and `post_to_slack` skills, which the source delegates to. License: MIT, notice retained; mechanism adapted. Adapted into this self-contained ODIN run-module skill: the delegated helper mechanics are inlined, the organization placeholders (`YOUR_NOTION_PARENT_PAGE_ID`, `YOUR_CONTINUOUS_PLANNING_PAGE_ID`, `YOUR_NOTION_DATA_SOURCE_ID`, `YOUR_ORG/YOUR_REPO`) became operator-supplied inputs, and no third-party expression is reproduced beyond the retained notice and adapted mechanism.

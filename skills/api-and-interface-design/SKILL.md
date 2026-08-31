@@ -36,7 +36,3 @@ The interface being designed or changed: its name and kind (API endpoint, route,
 
 ## Output
 A contract document stating semantics and errors for every operation, field, and flag. The migrated-consumer list. Confirmation that a search for the old signature returns no live reference. For a blocked run, the unmigrated-consumer list and the unresolved-semantics list instead of a done confirmation.
-
-## Provenance
-
-Clean-room adaptation from addyosmani/agent-skills, skills/api-and-interface-design/SKILL.md, pinned revision d2c37ef6225dd8726cdd369a8030307f48592d26, MIT (SPDX: MIT). Derived distributions retain the notice "Copyright (c) 2025 Addy Osmani" and the MIT permission text. Adapted to a contract-first, breaking-change-cutover procedure that migrates every caller and leaves no legacy path, with no runtime peer dependency.

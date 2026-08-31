@@ -56,7 +56,3 @@ description: 'Use for a call graph, class hierarchy, module-deps map, containmen
 
 ## Output
 A fenced `mermaid` code block (`flowchart` or `classDiagram`) scoped to a readable size, or a single-node explanatory diagram when no matching edges exist, ordered confirm → derive-edges → sanitize → scope → verify → deliver.
-
-## Provenance
-
-Origin: https://github.com/trailofbits/skills. Pinned revision: d1f1575cff97816e5cc08af66cd2506099c681d3. License: CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding. Clean-room adaptation: the source mechanism is preserved (six code-derived diagram types, edge-confidence arrow styling, node ID sanitization and label escaping, complexity color scale, data-flow entrypoint styling, empty-diagram honesty, and size scoping) while the expression is rewritten and the original tool-backed script dependency is removed for a self-contained, runtime-dependency-free procedure.

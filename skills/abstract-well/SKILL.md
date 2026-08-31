@@ -41,7 +41,3 @@ description: 'Use when the user wants to classify abstractions as useful, bad, o
 
 ## Output
 A classification table with one row per abstraction: name, raw-form summary, cooked-form summary, and class (useful, bad, busy, or unclassified). Followed by the one selected shallow level with its cooked-versus-raw justification, or an explicit statement that no shallow level was selected because no abstraction is useful.
-
-## Provenance
-
-Origin: user-curated abstraction-review workflow recorded at `project-owned:user-curated-skill-ideas` (entry `curated-040`). Clean-room adaptation: no third-party expression is copied. The useful/bad/busy taxonomy and the cooked-form-easier-than-raw-form test are the user's distinguishing mechanism, preserved verbatim in intent. This skill classifies existing abstractions and selects one shallow level; it does not design a new abstraction or seal complexity leaks.

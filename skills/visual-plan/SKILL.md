@@ -35,7 +35,3 @@ The goal statement is required from the invocation; if it is missing or too vagu
 
 ## Output
 The final page path, confirmation of the nine sections in order ending with the acceptance checklist, and the browser-open result; otherwise `blocked-input` with what is missing, or `write-blocker` with the exact error.
-
-## Provenance
-
-Adapted from nicobailon/visual-explainer, `plugins/visual-explainer/commands/generate-visual-plan.md`, revision 7163c3e10660912e0b89e1af465db9f387282b88, SPDX MIT with notice retained. Adaptation: the source's peer-skill load is replaced by inline delivery rules; probe-based writability checks and their cleanup are removed — writability is proven by the final write or reported as a write blocker; module remapped to odin-create. Reproduction obligations are recorded in the repository root `PROVENANCE.md`.

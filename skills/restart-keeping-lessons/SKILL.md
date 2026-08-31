@@ -39,7 +39,3 @@ description: 'Use when an implementation has accumulated more workarounds than s
 
 ## Output
 Three artifacts inside the restart scope: the keep/discard split with per-entry evidence citations, the evidence archive of failed branches and negatives with failure notes, and the new v0 skeleton containing one complete vertical loop plus its named first gate. Terminal classification is exactly one of `done` (all artifacts exist and the loop clears the gate), `blocked` (no valid evidence or scope mismatch, nothing written), or `non-converged` (the loop fails the gate; failing gate and evidence reported).
-
-## Provenance
-
-Origin: odin-current project-owned skill at `skills/restart-keeping-lessons/SKILL.md`; no pinned revision; project-owned content, no third-party license applies. Adaptation: disposition ADAPT — the source method was rewritten into this bound contract form. The read-before-discard inventory, evidence-backed keep/discard split, negatives-as-archive, named-first-gate, and single-vertical-loop procedure are preserved; external reference pointers and peer-skill routing were removed so the skill is self-contained.

@@ -48,10 +48,3 @@ Partial-result rule: if the script produces output but omits one or more of the 
 
 ## Output
 A cost projection brief with pricing model, run-rate, scenario comparison, conversion assumption, and sensitivity grid, in that order; printed to terminal and saved to `reports/pricing/`.
-
-## Provenance
-
-- Origin: warpdotdev/competitive-intelligence-agent-oss
-- Revision: 9e0363e810a14405ef876fb354562735002797fb
-- License: MIT — MIT notice retained; mechanism adapted
-- Adaptation: Based on `.warp/skills/answer_pricing/SKILL.md` and supporting scripts. Table/column names moved from inline literals to a validated schema config per the adaptation note. Conversion-ratio caveat and projection-script mechanism preserved.

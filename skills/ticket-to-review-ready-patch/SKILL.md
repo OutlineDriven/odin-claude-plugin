@@ -31,7 +31,3 @@ description: 'Turn a ticket into the smallest credible review-ready patch backed
 ## Output
 
 A receipt.json with the terminal class, bound, and patch evidence, persisted at .outline/loops/<slug>/<run_id>/ — ordering: bound, reproduction and root-cause evidence, patch and regression results, terminal verdict, receipt.
-
-## Provenance
-
-- Profile P-CATALOG: source https://signals.forwardfuture.com/loop-library/catalog.json. Derived provenance ledger records catalog number, URL, access date, and no-expression-reuse attestation. Expression reuse: none.

@@ -61,7 +61,3 @@ disable-model-invocation: true
 ## Output
 
 A versioned PR on the remote whose body carries the complete evidence body (summary of every substantive commit, test results and coverage diagram, pre-landing and adversarial review findings, Greptile comment disposition, scope drift and plan completion, verification results, TODOS state, and documentation sync), with VERSION and CHANGELOG bumped. For an Apple target, the signed build is uploaded and submitted with the durable-effect idempotency log and the standing-credential disclosure in the closing report.
-
-## Provenance
-
-Origin: https://github.com/garrytan/gstack, revision 07b59e396c6be5a86619a43151cb9ed62a15ae69. License: MIT (Copyright (c) 2026 Garry Tan; LICENSE blob 35029511144443297cad2d26e4bac17d0e352f93). Reuse constraints require retaining the copyright and permission notice and re-deriving expressive prose and code rather than copying wholesale. This skill is a clean-room adaptation: the release-pipeline mechanism (base merge, evidence-ledged tests with ownership triage, coverage audit with regression rule, pre-landing and adversarial review, queue-aware version bump, theme-grouped changelog, bisectable commits, verification gate, redaction-gated PR, and the App Store durable-effect adapter) is re-derived in self-contained procedure form; no gstack expression is copied.

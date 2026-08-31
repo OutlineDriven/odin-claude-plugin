@@ -153,7 +153,3 @@ disable-model-invocation: true
 ## Output
 
 Four artifacts: `docs/agents/issue-tracker.md`, `docs/agents/triage-labels.md`, `docs/agents/domain.md`, and the steering-file `## Agent skills` block, plus a terminal report naming every written file and its chosen convention; terminal classification: complete, partial (some confirmed files written), or blocked (nothing written, with the reason).
-
-## Provenance
-
-Adapted from mattpocock/skills (revision `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76`), MIT licensed, Copyright (c) 2026 Matt Pocock. Adaptation: renamed to `setup-repo-skills`; the five source support docs (`domain.md`, `issue-tracker-github.md`, `issue-tracker-gitlab.md`, `issue-tracker-local.md`, `triage-labels.md`) are inlined as seeds so the skill is self-contained; peer-skill routing was removed — the label section no longer gates on another skill's installation, consumer skills are described by function rather than name, and the `wayfinder:` label prefix was genericized to `effort:`; per-section human confirmation was retained and preview-before-write made explicit. License obligation — retain the copyright and permission notice — is recorded in the root `PROVENANCE.md`.

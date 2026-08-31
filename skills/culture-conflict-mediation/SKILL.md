@@ -40,7 +40,3 @@ Required: two colleagues' Culture Index profiles, each with A/B/C/D trait positi
 
 ## Output
 A markdown mediation report containing: a profile comparison table (A/B/C/D positions and gaps for both persons), the identified primary friction pattern with explanation, reciprocal perception lists for each person, person-specific accommodation lists, process change recommendations, hardwired behaviors that will not change, EU energy status, a conversation guide, success indicators, and escalation criteria.
-
-## Provenance
-
-Origin: Trail of Bits skills repository, `plugins/culture-index/skills/interpreting-culture-index/workflows/mediate-conflict.md`, revision `d1f1575cff97816e5cc08af66cd2506099c681d3`. License: CC-BY-SA-4.0; source link https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3. Preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding. This skill is a clean-room adaptation of the mediation workflow; trait-gap mapping, friction patterns, reciprocal accommodations, process interventions, hardwired-trait acknowledgment, energy checking, and escalation boundaries are preserved as mechanism.

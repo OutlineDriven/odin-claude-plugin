@@ -44,7 +44,3 @@ description: 'Use when a user wants an answer only from the human seat: what a p
 ## Output
 
 A single human-perspective analysis answering the input from the human seat only, with any other relevant seats named as separate lenses to run later — no blending.
-
-## Provenance
-
-Origin: project-owned:user-curated-skill-ideas (Perspective lenses) and project-owned:user-supplied-source-brief. Revision: unversioned. License: project-owned (clean-room adaptation of the user's curated brief). Adaptation: the named-seat, no-blend, compare-after mechanism is preserved; the human seat's domain (love, trust, tolerate) is restated as the binding lens scope.

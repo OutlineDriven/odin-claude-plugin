@@ -37,7 +37,3 @@ description: 'Use when starting a codebase or service, scaffolding, migrating or
 
 ## Output
 A dated grounded set written into the change (plan, ADR, or PR body). Per entry: pinned version, release date, end-of-support date, release-channel link, LTS-vs-latest decision, and any repo floor that overrode the pick. Dropped choices are listed with their named replacement or marked dropped-without-replacement.
-
-## Provenance
-
-Origin: odin-1.x `ground-latest` skill. Revision: none pinned. License: project-owned. Adaptation: restated as a self-contained version-grounding procedure; peer-skill pointers removed and the verified-checklist folded into the done predicate.

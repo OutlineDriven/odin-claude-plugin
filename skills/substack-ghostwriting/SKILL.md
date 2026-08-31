@@ -50,7 +50,3 @@ Phase-1 intake is mandatory before drafting:
 ## Output
 
 Sections in order: subject-line options (substack) or SEO title+meta (web-post), formatted body, Notes teaser, one companion post per distribution channel, coverage notes listing unsupported gaps and failed references.
-
-## Provenance
-
-Origin: https://github.com/samber/cc-skills, revision f9953962e135235137628ea92d06ea085688031f. License: MIT. Adaptation: clean-room, self-contained reconstruction of mandatory Phase-1 intake, source-grounded voice matching, value-gated call-to-action placement, Notes teaser production, and channel-specific distribution drafting. Runtime dependencies: zero.

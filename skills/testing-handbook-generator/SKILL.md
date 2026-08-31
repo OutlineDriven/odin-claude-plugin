@@ -63,7 +63,3 @@ Rollback: delete the generated skill directories for the current run. No handboo
 ## Output
 
 Generated skill directories under the configured output path (each containing a SKILL.md with type-appropriate sections, cross-references, and passing validation), an updated README table and cross-reference graph, and a per-skill generation report (line count, split status, populated sections, gaps, warnings, references) — ordering: skills, README, graph, reports.
-
-## Provenance
-
-Adapted from the Trail of Bits Testing Handbook Skills plugin. Origin: `https://github.com/trailofbits/skills`, revision `d1f1575cff97816e5cc08af66cd2506099c681d3`. License: CC-BY-SA-4.0. Source path: `/plugins/testing-handbook-skills/skills/testing-handbook-generator/SKILL.md` with support files `discovery.md`, `agent-prompt.md`, `testing.md`, and `templates/{tool,fuzzer,technique,domain}-skill.md`. Preserve Trail of Bits attribution and source link; mark modifications; license adaptations ShareAlike; claim no trademark rights; never reuse `trail-of-bits-mark.svg` as branding. Full license obligations in root PROVENANCE.md. Clean-room adaptation for ODIN 2.0: discovery-to-generation orchestrator inlined into a single self-contained skill with zero runtime dependencies; type-specific section structures and Hugo conversion rules moved to `references/type-templates.md` per I3.

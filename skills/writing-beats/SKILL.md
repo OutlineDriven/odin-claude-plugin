@@ -46,9 +46,3 @@ Partial-result rule: if the write partially succeeds before failing, rollback de
 
 ## Output
 The assembled piece file path and the count of beats selected; if no beats were selected, the target piece path is created as an empty file.
-
-## Provenance
-
-Origin: `mattpocock/skills` at revision `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76`.
-License: MIT — Copyright (c) 2026 Matt Pocock. Permission notice retained in `licenses/NOTICE`.
-Adaptation: Clean-room rewrite for ODIN `odin-create-advanced` module. Beat assembly procedure adapted; original mechanism (user selects beats from a ledger-listed pile and writes to a target file) preserved. Trigger, authority, side effect, and done predicate restated for ODIN contract.

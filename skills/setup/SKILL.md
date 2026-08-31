@@ -57,9 +57,3 @@ Rollback: if a write fails mid-way, already-written credential files are retaine
 ## Output
 
 Written or updated `.env`, `token.json`, a uv-managed `.venv`, and any modified skill scripts; a terminal report with a ready/not-ready checklist and one example prompt per configured integration.
-
-## Provenance
-
-- Origin: `warpdotdev/competitive-intelligence-agent-oss` at revision `9e0363e810a14405ef876fb354562735002797fb`.
-- License: MIT — MIT notice retained; mechanism adapted.
-- Adaptation statement: Warp's original "Setup" skill bootstrapped competitive-intelligence-agent-oss on its first run. The ODIN adaptation replaces Warp/Oz-specific steps with ODIN equivalents while preserving the idempotent, ask-first credential pattern. No third-party expression was copied; only the functional mechanism (ask, confirm, write, report) was retained and re-expressed.

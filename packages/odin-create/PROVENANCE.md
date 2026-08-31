@@ -2,7 +2,7 @@
 
 OutlineDriven-authored material in this package is Apache-2.0. See the repository `LICENSE`.
 
-This package ships 53 public skills from the canonical `skills/<slug>/` tree. Package-local skill copies are generated only at pack time.
+This package ships 50 public skills from the canonical `skills/<slug>/` tree. Package-local skill copies are generated only at pack time.
 
 | Skill | Strategy | Adaptation | Target | Origin |
 |---|---|---|---|---|
@@ -31,8 +31,6 @@ This package ships 53 public skills from the canonical `skills/<slug>/` tree. Pa
 | `prototype` | G | structured-merge-rewrite | `skills/prototype/` | mattpocock/skills @ `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76` (MIT) |
 | `prototype-logic` | B | byte-reuse | `skills/prototype-logic/` | odin-current @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `purge-slop-docs` | B | byte-reuse | `skills/purge-slop-docs/` | odin-current @ `project-owned` (Project-owned or clean-room only; no copied source text) |
-| `readme-creator` | B | byte-reuse | `skills/readme-creator/` | mblode/agent-skills @ `e97a3b383f5944f90d41eb92b24b4fb3b917a7f9` (MIT) |
-| `readme-standard` | B | byte-reuse | `skills/readme-standard/` | https://github.com/openclaw/agent-skills @ `ae75f60e8d454f1cf44ec4613e10ec9ea7f2ade7` (MIT) |
 | `render-excalidraw-diagram` | B | byte-reuse | `skills/render-excalidraw-diagram/` | https://github.com/coleam00/excalidraw-diagram-skill @ `8646fcc9f74f38539c6cdb4c969723336a96ddcd` (NOASSERTION — no LICENSE/LICENSE.md/COPYING file exists; default all-rights-reserved) |
 | `reorder` | B | byte-reuse | `skills/reorder/` | odin-current @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `reorder-respect-deliberate` | B | byte-reuse | `skills/reorder-respect-deliberate/` | https://github.com/LilMGenius/paperthin @ `3bca079a51bcfff5dafb53d1d7f9f523d66ee317` (MIT) |
@@ -42,7 +40,6 @@ This package ships 53 public skills from the canonical `skills/<slug>/` tree. Pa
 | `sequence-diagram` | B | byte-reuse | `skills/sequence-diagram/` | https://github.com/tt-a1i/archify @ `b36d79fdbc3aec3728744341485a7e79f03c0071` (MIT) |
 | `show-me` | B | byte-reuse | `skills/show-me/` | odin-current @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `show-way` | B | byte-reuse | `skills/show-way/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
-| `shower-contents-handoff` | B | byte-reuse | `skills/shower-contents-handoff/` | https://github.com/LilMGenius/paperthin @ `3bca079a51bcfff5dafb53d1d7f9f523d66ee317` (MIT) |
 | `solidate` | B | byte-reuse | `skills/solidate/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `state-machine-workflow` | B | byte-reuse | `skills/state-machine-workflow/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `sync-docs` | B | byte-reuse | `skills/sync-docs/` | current-odin-skill-tree @ `project-owned` (Project-owned or clean-room only; no copied source text) |

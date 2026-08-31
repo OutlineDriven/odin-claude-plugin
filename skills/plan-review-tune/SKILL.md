@@ -37,7 +37,3 @@ description: 'Use when plan-mode enforcement hooks intercept a plan review or th
 
 ## Output
 The persisted question-registry and hook configuration plus a one-line confirmation naming the changed question id or flag and its new value — or, for an inspect request, the rendered dual-track profile and preference map.
-
-## Provenance
-
-Origin: https://github.com/garrytan/gstack at revision 07b59e396c6be5a86619a43151cb9ed62a15ae69, path plan-tune/SKILL.md. License: MIT, Copyright (c) 2026 Garry Tan. Clean-room adaptation: the per-question preference vocabulary, dual-track developer profile, and question-tuning enable/disable mechanism are re-derived; no source expression is copied.

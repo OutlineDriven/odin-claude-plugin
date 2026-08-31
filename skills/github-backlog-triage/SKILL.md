@@ -36,7 +36,7 @@ disable-model-invocation: true
    git log --oneline "origin/$default_branch" | grep -iE "(close|fix|resolve)[sd]? +#<N>([^0-9]|$)"
    ```
 
-3. **Triage open pull requests when any are open.** Summarize them and ask whether to handle PRs now or skip to issues, then follow `references/pr-triage.md`. After merges, re-fetch the step-2 merged-PR list before classifying issues. Done when: every open PR is classified, approved merges landed one at a time with re-verification, and opted-in reviews remain read-only.
+3. **Triage open pull requests when any are open.** Summarize them and ask whether to handle PRs now or skip to issues, then follow `references/pr-triage.md`, which covers classification, incremental merges, review subagents, and per-item approved actions (staleness comments, closes, reviewer requests, status comments, labeling) executed only on per-item user approval. After merges, re-fetch the step-2 merged-PR list before classifying issues. Done when: every open PR is classified, approved merges landed one at a time with re-verification, opted-in reviews remain read-only, and every per-item write action ran only after its own approval.
 
 4. **Classify each open issue** into exactly one bucket. Done when: the stated action, evidence, and guard all hold.
    - **Bucket A — Already resolved** (the work landed, the issue was left open). Requires concrete evidence, preferring corroboration: a merged PR lists the issue in `closingIssuesReferences` or references `#N` with a closing keyword (strongest); a default-branch commit references `#N` with a closing keyword; or the behavior the issue asks for demonstrably exists in the current code — verify by reading the relevant code, do not assume; a different or partial implementation does not resolve it. Proposed write: close with a comment naming the resolving PR/commit:
@@ -69,7 +69,3 @@ disable-model-invocation: true
 
 ## Output
 A complete triage of every open issue and PR for `OWNER/REPO`: each PR categorized (mergeable bot / approved & ready / never reviewed / needs work) with any merges executed one at a time with per-merge re-verification; each issue classified into Already resolved / Pending PR / Outstanding; approved closes and cross-links executed as separate commands with per-action reporting; outstanding issues carrying local-only priority, size, estimated lines/files, and basis; optional `github-pr-<number>-review.md` files for reviewed PRs; and, when the outstanding table exceeds the display cutoff, a saved `github-triage-OWNER-REPO-YYYYMMDD.md` report. Priority, size, and basis of estimate are never posted to GitHub.
-
-## Provenance
-
-Adapted from the Trail of Bits `github-triage` skill at https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3 (path `/plugins/github-triage/skills/github-triage/SKILL.md`, revision `d1f1575cff97816e5cc08af66cd2506099c681d3`). Licensed CC-BY-SA-4.0; source link preserved, modifications marked, adaptations licensed ShareAlike. No trademark rights claimed; `trail-of-bits-mark.svg` is not reused as branding. This is a clean-room adaptation: the operational contract, phase structure, field-shape rules, safety rules, and review rubric are restated in this skill's own words; no third-party expression is copied beyond the license-attribution statement.

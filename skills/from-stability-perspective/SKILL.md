@@ -41,7 +41,3 @@ The subject under analysis (a design, change, system, or decision) must be suppl
 ## Output
 
 A stability-perspective analysis as chat output: preservation and risk findings from the stability seat only, with any out-of-seat concerns flagged for separate lens runs.
-
-## Provenance
-
-Origin: project-owned:user-curated-skill-ideas, Perspective lenses section. Revision: null. License: null (project-owned). Adapted from the user-curated `from-stability-perspective` lens into a self-contained read-only analytical skill; clean-room adaptation of the seat definition, no third-party expression copied.

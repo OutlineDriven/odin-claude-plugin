@@ -45,12 +45,3 @@ description: 'Use when a user wants to design the abstraction a sharp engineer w
 ## Output
 
 One local abstraction specification file: abstraction name and purpose, boundary definition, surface comparison (raw-form concepts mapped to abstraction concepts), leak surface (every seam, override, and known breakage point), complexity ratio, escape-hatch mapping, usage contract (when to use, when to bypass, what the engineer must still understand about the raw form).
-
-## Provenance
-
-- Origin: `project-owned:user-curated-skill-ideas`, line 62.
-- Supplementary source: `project-owned:user-supplied-source-brief`.
-- Candidate ID: `curated:curated-ideas:curated-041`.
-- Revision: not pinned.
-- License: project-owned.
-- Adaptation: clean-room rewrite of the user-curated brief into an executable skill contract. No third-party expression copied.

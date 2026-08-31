@@ -47,7 +47,3 @@ description: 'Use when an existing repository needs its unexplained rationale re
 ## Output
 
 Created/updated topic files (each entry carrying Evidence, Status, and where practical Source and Verification; superseded knowledge marked not deleted; unrecoverable entries carrying unknown markers with needs-maintainer notes) plus a terminal report (complete gap enumeration with per-entry classification, explicit unknown list, open conflicts with both sides, remaining scope if scoped, and rollback command for every touched file).
-
-## Provenance
-
-Origin: https://github.com/oliver-zehentleitner/keep-the-why at pinned revision `c01597a506efa24652d7ecb9e18b6a8ccc97b175`, licensed MIT — Copyright (c) 2026 Oliver Zehentleitner; retain the copyright and permission notice in copies or substantial portions. Adaptation: the retrospective-recovery mode was extracted from the upstream four-mode skill and rewritten for ODIN. Preserved mechanisms: gap-scan heuristics, the evidence search order with its search-order-versus-trust-order split, dual-axis Evidence/Status classification with Source/Verification, conflicts recorded with both sides and flagged open, and explicit unknowns as the success gate. Removed: continuous-capture, interview, and maintenance modes, setup and migration wizards, and all cross-references to upstream files; the workflow is restated self-contained. The expression is adapted, not copied.

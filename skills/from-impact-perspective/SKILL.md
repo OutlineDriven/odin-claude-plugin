@@ -40,7 +40,3 @@ The question or subject to analyze from the impact seat (required). Optional: th
 ## Output
 
 A standalone impact-perspective analysis identifying who and what actually moves, with unverified impact marked as inference — no blended perspectives.
-
-## Provenance
-
-Origin: user-curated perspective-lens brief (curated-068). Revision: null. License: project-owned. Clean-room procedural restatement of the single-perspective lens contract; no third-party expression copied.

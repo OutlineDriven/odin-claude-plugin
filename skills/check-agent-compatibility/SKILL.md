@@ -42,7 +42,3 @@ description: 'Use when a human explicitly asks for a full repository agent-compa
 
 ## Output
 A chat report containing the compatibility score, the prioritized fix list, the per-dimension findings from the four review passes, and a separate scanner-unavailability notice when the scanner did not run.
-
-## Provenance
-
-Origin: cursor/plugins `agent-compatibility` plugin. Pinned revision `68836ddaf5697224520f1847d90cdb90ca8babaa`. License: MIT, declared by the cursor/plugins root README and the candidate plugin manifest. Adapted clean-room from the multi-reviewer agent-compatibility audit mechanism; no third-party expression copied.

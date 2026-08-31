@@ -44,7 +44,3 @@ description: 'Use when auditing C, C++, or Rust secret-handling code for missing
 
 ## Output
 `findings.json` (schema-valid array with evidence, confidence, and PoC status per finding) and `final-report.md` (executive summary, per-finding detail, coverage gaps, remediation); both under the temporary audit directory with intermediate evidence and PoC sources.
-
-## Provenance
-
-Adapted from Trail of Bits zeroize-audit skill (https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3). Licensed CC-BY-SA-4.0. Trail of Bits attribution and source link preserved; this adaptation is marked as modified. Modifications: consolidated multi-agent carrier into a single self-contained procedure while preserving all evidence-gated observable contracts (source estimates, semantic context, compiler artifacts, hard-evidence classes, coverage gaps, PoC runtime and semantic-verification outputs). No trademark rights claimed; trail-of-bits-mark.svg not reused as branding.

@@ -39,10 +39,3 @@ description: 'Use when a passing test suite has survived production mutants or r
 ## Output
 
 GENOTOXIC_REPORT.md: mutation-triage ledger, per-classification summary counts, and recommended next actions — ordered by the procedure steps that produced them.
-
-## Provenance
-
-- Origin: Trail of Bits skills repository, genotoxic plugin.
-- Revision: d1f1575cff97816e5cc08af66cd2506099c681d3.
-- License: CC-BY-SA-4.0 with Trail of Bits attribution preserved; modifications marked; adaptations licensed ShareAlike; no trademark rights claimed; trail-of-bits-mark.svg not reused as branding.
-- Adaptation: Clean-room adaptation from four source references (SKILL.md, graph-analysis.md, mutation-frameworks.md, triage-methodology.md). Graph-backed triage replaced with self-contained mutation-triage ledger. No source expression copied verbatim.

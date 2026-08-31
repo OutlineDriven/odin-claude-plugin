@@ -51,7 +51,3 @@ description: 'Write, review, or generate Terraform HCL that passes fmt and valid
 ## Output
 
 Formatted and validated HCL files in place, plus a compliance report listing files touched, per-category pass/fail (organization, naming, version pinning, security), and terraform fmt/validate exit codes — on failure, the specific diagnostic, the failed step, and the set of files modified before failure.
-
-## Provenance
-
-Adapted from `https://github.com/warpdotdev/oz-skills` at revision `6c08c49fc6c51b8f768bf8c53c041bc06a160765`, path `.agents/skills/terraform-style-check/SKILL.md`. Licensed under MIT (Copyright 2026 Warp). This adaptation is clean-room; no third-party expression is copied verbatim.

@@ -46,7 +46,3 @@ description: 'Use when the automatic trigger applies: after editing a durable ar
 
 ## Output
 The revised artifact with findings applied, plus a per-route record stating whether each route ran, was skipped (with reason), or was deferred (with reason); if a pass finds no genuine improvement, it changes nothing.
-
-## Provenance
-
-Origin: ODIN 1.x current skill at `skills/clean-and-true/SKILL.md`. Revision: unpinned (current). License: project-owned. Adaptation: re-expressed the routing table as self-contained hygiene categories without naming peer skills as required dependencies, preserving the route, skip, and apply mechanism.

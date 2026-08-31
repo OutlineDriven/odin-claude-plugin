@@ -1,3 +1,0 @@
-interface:
-  display_name: "Next Action Gate"
-  short_description: "Use when a task needs an evidence-based PASS, DELAY, or BLOCK"

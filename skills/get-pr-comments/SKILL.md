@@ -43,7 +43,3 @@ description: 'Use when asked to summarize feedback on the active PR. Returns sev
 ## Output
 
 A chat report with feedback grouped by severity tier (blocking, suggestion, nit, question) and an ordered action list — each action traceable to its source comment.
-
-## Provenance
-
-Origin: cursor/plugins. Pinned revision: 68836ddaf5697224520f1847d90cdb90ca8babaa. License: MIT (declared by the cursor/plugins root README and the candidate plugin manifest, per the pinned source audit). Adaptation: clean-room rewrite preserving the read-only PR-feedback-research mechanism; no third-party expression copied.

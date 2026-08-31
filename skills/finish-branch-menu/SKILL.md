@@ -163,10 +163,3 @@ The chosen integration outcome executed on a green suite, plus a report of the r
 | Create PR | — | yes | yes | — |
 | Keep as-is | — | — | yes | — |
 | Discard (explicit request only) | — | — | — | yes (force) |
-
-## Provenance
-
-- Origin: `obra/superpowers`, skill `skills/finishing-a-development-branch/SKILL.md`.
-- Pinned revision: `b36e0829c6d0140e93cfef2ca599b1b07d4a7797`.
-- License: MIT, Jesse Vincent, 2025 (copying permitted).
-- Adaptation: renamed to `finish-branch-menu` and moved to the `odin-run` module; restated as a human-only contract that preserves the four-way finish menu, the typed-`discard` gate, framework-owned worktree cleanup with the refused-removal commit/move/delete choice, and the load-bearing ordering constraints — capture `GIT_DIR`/`GIT_COMMON`/`WORKTREE_PATH` before the directory change, merge and verify before any removal, and remove the worktree from outside it. No other skill, module, or rule file is required to execute this contract.

@@ -95,7 +95,3 @@ description: 'Use when an explicit request asks to create a Sentry presentation,
 
 ## Output
 A single self-contained HTML file: full slide deck with keyboard navigation, Recharts visualizations using only real data (if provided), Sentry branding (colors, typography, logo), no external runtime dependencies, and QA pass results listing any issues and their resolution status.
-
-## Provenance
-
-Adapted from `getsentry/skills` (`skills/presentation-creator/SKILL.md`), revision `c2f99a5b04b4cd992ec3022d7c2c3e23e938d241`. Licensed under Apache-2.0. This is a clean-room adaptation; no third-party expression was copied. The original license notice and text must be preserved in all copies or substantial portions.

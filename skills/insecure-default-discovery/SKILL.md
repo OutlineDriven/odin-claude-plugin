@@ -106,7 +106,3 @@ One chat report:
 - Refuted candidates, each with the step number that killed it.
 - Coverage gaps: scopes that could not be read, sweeps with empty derived pattern lists.
 - When nothing matched anywhere: the explicit no-candidates statement with the not-proof-of-absence note.
-
-## Provenance
-
-Adapted from Trail of Bits, repository https://github.com/trailofbits/skills at revision d1f1575cff97816e5cc08af66cd2506099c681d3, paths `/plugins/insecure-defaults/commands/audit.md` and `/plugins/insecure-defaults/references/` (source link: https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3). License: CC-BY-SA-4.0. Trail of Bits attribution and source link preserved. This file is a modified adaptation: the plugin command and multi-agent workflow are re-expressed as one self-contained read-only procedure, and the reference corpus is inlined. Adaptations are licensed ShareAlike under CC-BY-SA-4.0. No trademark rights are claimed, and `trail-of-bits-mark.svg` is never used as branding.

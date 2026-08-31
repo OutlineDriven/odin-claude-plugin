@@ -39,7 +39,3 @@ Optional: a viewport size, an authentication state file, and an evidence directo
 
 ## Output
 A before/after evidence directory containing screenshots, console logs, and DOM state, plus a one-line classification (pass, fail, mismatch, or blocked) citing the evidence file names.
-
-## Provenance
-
-Origin: cursor/plugins, cursor-team-kit/skills/control-ui/SKILL.md. Pinned revision 68836ddaf5697224520f1847d90cdb90ca8babaa. License: MIT, declared by the cursor/plugins root README and the candidate plugin manifest. Clean-room adaptation: the procedure is rewritten from the source mechanism (UI verification harness with before/after evidence) without copying its expression.

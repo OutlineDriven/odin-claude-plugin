@@ -40,7 +40,3 @@ Required inputs are the release identifier, the repository or pull-request sourc
 
 ## Output
 The release and repository, create-or-update action, Slack destination, resulting message permalink on success, and a concise count of listed pull requests and preserved manually verified statuses — terminal classification `complete` only when the done predicate is verified, otherwise `blocked` with the failure class, partial-result state, and exact unresolved evidence.
-
-## Provenance
-
-Adapted from `warpdotdev/client-release-agent-oss`, paths `.warp/skills/post-release-status/SKILL.md`, `README.md`, and `.env.example`, pinned at revision `9c1394804c5148820a9bab6c01802fde4330d725`. The source is MIT-licensed under its `LICENSE`; this adaptation retains source attribution and the status-board reporting mechanism while rewriting the procedure for this contract.

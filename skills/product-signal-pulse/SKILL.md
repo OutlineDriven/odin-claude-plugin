@@ -99,7 +99,3 @@ description: 'Use when invoking /product-signal-pulse with an optional lookback 
 
 ## Output
 - A 30-40 line markdown report at `docs/pulse-reports/YYYY-MM-DD_HH-MM.md` with four sections (Headlines, Usage, System performance, Followups). - In chat: the Headlines section verbatim, the top Followup if action looks urgent, and the saved file path. Do not paste the full report into chat; the file is the artifact. - On first run: a `pulse_*` config block written to `.odin/config.local.yaml`.
-
-## Provenance
-
-Origin: https://github.com/EveryInc/compound-engineering-plugin, revision a1f601f17137f648be439965f8fdd9123303de5d, MIT license (Copyright (c) 2025 Every). Mechanisms extracted and rewritten in ODIN style, not copied verbatim. Attribution is preserved in the root provenance ledger.

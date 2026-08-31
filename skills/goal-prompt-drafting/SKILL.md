@@ -71,7 +71,3 @@ Missing:
 - measurable end state — which metric and threshold count as "faster"
 - verification — the benchmark or command that proves it
 - stop bound — e.g. "or stop after 20 turns"
-
-## Provenance
-
-Origin: https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3, file `/plugins/goal-prompt/skills/goal-prompt/SKILL.md`. License: CC-BY-SA-4.0. Clean-room adaptation: preserved the terminating-predicate contract and the anti-reward-hacking output shape (AND-never-or join, easy-out closure, never-invent Missing list, deterministic one-line normalizer); no third-party expression copied. Preserve Trail of Bits attribution and the source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.

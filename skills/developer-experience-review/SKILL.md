@@ -57,7 +57,3 @@ description: 'Use when /developer-experience-review dogfoods a developer product
 
 ## Output
 A review log with measured time to hello world for the target and each benchmark, an eight-dimension scorecard with one measured-evidence sentence per score, a prioritized list of concrete DX fixes tied to dimensions and evidence, and an appended plan-review section when the user supplied a plan, ordered record-start → dogfood → measure → benchmark → score → prioritize → write → return, with the terminal return being the scorecard and prioritized fixes.
-
-## Provenance
-
-Origin: https://github.com/garrytan/gstack, path devex-review/SKILL.md, revision 07b59e396c6be5a86619a43151cb9ed62a15ae69. License MIT, copyright (c) 2026 Garry Tan, LICENSE blob sha 35029511144443297cad2d26e4bac17d0e352f93. Adaptation: clean-room re-derivation of the dogfooding evaluation method; expressive prose and the eight-dimension scorecard are re-derived, not copied from the source.

@@ -38,10 +38,3 @@ disable-model-invocation: true
 
 ## Output
 A populated skill session cookie store ready for authenticated browsing, plus a per-browser import report naming each browser as imported or skipped.
-
-## Provenance
-
-- Origin: https://github.com/garrytan/gstack, path setup-browser-cookies/SKILL.md.
-- Revision: 07b59e396c6be5a86619a43151cb9ed62a15ae69.
-- License: MIT, Copyright (c) 2026 Garry Tan; retain the copyright and permission notice in copies.
-- Adaptation: clean-room re-derivation of the cookie-import procedure; no third-party expressive prose copied.

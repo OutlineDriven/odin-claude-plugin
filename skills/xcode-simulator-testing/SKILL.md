@@ -42,7 +42,3 @@ description: 'Use when asked to run /xcode-simulator-testing with a scheme name 
 
 ## Output
 Xcode test report — fields in order: project or workspace, scheme, simulator, build result, screens tested, per-surface PASS/FAIL/SKIP evidence, console errors, human verifications, residual failures, overall PASS/FAIL/PARTIAL result.
-
-## Provenance
-
-Origin: https://github.com/EveryInc/compound-engineering-plugin, file `skills/ce-test-xcode/SKILL.md` at revision `a1f601f17137f648be439965f8fdd9123303de5d`. License: MIT, Copyright (c) 2025 Every. The source delegates to two reference files (`references/setup-and-build.md`, `references/test-and-report.md`) and a docs guide and routes failures to a peer debug skill; those mechanisms were extracted, inlined into one self-contained procedure, and rewritten in ODIN style, not copied verbatim. The peer-skill failure route was replaced with an authority-narrowed handback that names no other skill, satisfying the MIT obligation to preserve attribution in the root provenance ledger.

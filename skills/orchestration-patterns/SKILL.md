@@ -70,7 +70,3 @@ description: 'Use when work decomposes across subagents or role panels: select a
 ## Output
 
 One reconciled synthesis artifact at the supplied local path, citing every contributing subagent artifact and recording a disposition for every spawned unit. On failure, return the named failure class, affected units, failed criteria, and rollback state without a partial synthesis.
-
-## Provenance
-
-Adapted from addyosmani/agent-skills (`references/orchestration-patterns.md`, `docs/agents.md`) at revision `d2c37ef6225dd8726cdd369a8030307f48592d26`, MIT, Copyright (c) 2025 Addy Osmani. Distribution obligations and the retained MIT notice are recorded in the repository root `PROVENANCE.md`. The source's coupling-based selection, context-isolated research, parallel fan-out, ordered handoffs, adversarial role panels, depth-one rule, and owner-side artifact verification are expressed here as complete bounded mechanisms.

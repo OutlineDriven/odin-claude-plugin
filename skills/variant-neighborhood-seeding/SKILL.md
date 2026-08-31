@@ -51,7 +51,3 @@ Rollback: delete `variant-neighborhood-seed.md` from the working directory to re
 
 ## Output
 A local file `variant-neighborhood-seed.md` with ordered sections: Seed Node, Candidate Rank Table, Inclusion Reasons, Exclusions, and Search Guidance.
-
-## Provenance
-
-Adapted from `trailmark-variant-neighborhood` (Trail of Bits, CC-BY-SA-4.0). Source: https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3/plugins/trailmark/skills/trailmark-variant-neighborhood. Pinned revision: `d1f1575cff97816e5cc08af66cd2506099c681d3`. Adaptation: scoped to emit review-target seeds only (not asserted variants, semantic root-cause search, or CI rules); removed dependency on other Trailmark skills; authority restricted to `reversible-local` local artifact write; graph scope capped and bounded. Attribution preserved per license. Modifications marked inline.

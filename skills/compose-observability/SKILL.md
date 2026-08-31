@@ -38,7 +38,3 @@ Supply the target system or module, the existing observability stack and convent
 ## Output
 
 Minimal verified observability surface in the codebase: bounded signals, cardinality-bounded label scheme, trace path across critical boundaries, dashboard grouped by failure mode.
-
-## Provenance
-
-Origin `project-owned:user-curated-skill-ideas` (candidate `curated:curated-ideas:curated-047`); revision null; license null (project-owned). Adapted from the user-curated observability-instrumentation workflow into a self-contained, bounded procedure.

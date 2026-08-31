@@ -44,7 +44,3 @@ description: 'Use when asked to create an agent plugin or marketplace package. P
 
 ## Output
 A plugin scaffold tree under `<target root>/<plugin name>` containing the manifest, entry point, `agents/`, and `skills/` directories, an optional marketplace entry file, and a validation report listing each check result and the absolute path of every created artifact.
-
-## Provenance
-
-Origin: cursor/plugins repository, path `create-plugin/skills/create-plugin-scaffold/SKILL.md` and `create-plugin/agents/plugin-architect.md`. Pinned revision: `68836ddaf5697224520f1847d90cdb90ca8babaa`. License: MIT, declared by the cursor/plugins root README and the candidate plugin manifest as recorded in the pinned source audit. Adaptation: clean-room rewrite preserving the agent-plugin scaffolding mechanism and local reversible tree creation; no third-party expression copied.

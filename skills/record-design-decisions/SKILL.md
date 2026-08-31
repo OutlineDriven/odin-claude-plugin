@@ -47,10 +47,3 @@ description: 'Use when codebase terminology or a durable technical decision chan
 ## Output
 
 Each written record: a CONTEXT.md entry (term, definition, avoid, recorded_at) and/or an ADR file path in `docs/decisions/`, or on block a classification with reason, ordered: terminology, decision.
-
-## Provenance
-
-Origin: `mattpocock/skills` repository.
-Pinned revision: `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76`.
-License: MIT — `skills/engineering/domain-modeling/SKILL.md` and its supporting `ADR-FORMAT.md` and `CONTEXT-FORMAT.md` are published under the MIT license as declared in the upstream `LICENSE` file.
-Adaptation: Clean-room adaptation. The glossary-writing mechanism is preserved. The ADR-writing mechanism is preserved. The reversible-local authority and repository-root scope are enforced per the roster authority ruling. No third-party expression is copied verbatim.

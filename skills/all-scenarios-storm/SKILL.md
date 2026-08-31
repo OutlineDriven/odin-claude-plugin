@@ -37,7 +37,3 @@ description: 'Use when a user wants to enumerate plausible designs, configuratio
 
 ## Output
 A local artifact containing the exhaustive enumerated field (one-line descriptions and tradeoffs per option, cross-references across dimensions) and a diagram of the full field. No recommendation or chosen path is produced.
-
-## Provenance
-
-Origin: user-curated skill idea (`project-owned:user-curated-skill-ideas`) and raw chat brief (`project-owned:user-supplied-source-brief`). The raw chat names the technique "pre-resulting" — enumerating all possible outcomes before commitment — and assigns the alias `/time-stone`, which is merged into this contract with no surviving alias. No third-party license applies; project-owned clean-room adaptation.

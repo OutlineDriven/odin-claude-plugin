@@ -55,7 +55,3 @@ description: 'Use when a user asks for a product spec with numbered behavioral i
 
 ## Output
 `specs/<id>/PRODUCT.md` — sections in order: Summary, Behavior (numbered invariants), optional Problem, optional Goals/Non-goals, optional Open questions; no Validation, Success criteria, or Testing sections.
-
-## Provenance
-
-Adapted from `write-product-spec` in warpdotdev/common-skills (https://github.com/warpdotdev/common-skills) at revision f589e224907eda566c13755529f59db563090d14. Licensed under MIT — Copyright (c) 2026 Denver Technologies, Inc. Permissive: adaptation and redistribution permitted provided the copyright notice and permission notice are retained. Clean-room adaptation: Warp-specific references, external tool dependencies, and example content removed. Core mechanism (dialogue-based context gathering, structured behavioral invariants, consumer-perspective framing) preserved in ODIN style.

@@ -44,10 +44,3 @@ description: 'Use when asked to receive code review feedback: clarify every item
 
 ## Output
 A local report listing every feedback item, its classification (accepted or questionable), the actions taken for each accepted item, and the location of any drafted pushback. No remote state is changed.
-
-## Provenance
-
-- Origin: https://github.com/obra/superpowers
-- Revision: b36e0829c6d0140e93cfef2ca599b1b07d4a7797
-- License: MIT (Jesse Vincent, 2025)
-- Adaptation: Clean-room adaptation of `skills/receiving-code-review` for ODIN 2.0. Added clarify-all-first gate, YAGNI check, banned-phrase list, and blocking-then-simple-then-complex ordering. Removed the independently risky reply-publication branch. Integrated with ODIN resolve and adjudicate-contested-review-finding without duplication.

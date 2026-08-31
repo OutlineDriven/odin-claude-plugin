@@ -46,7 +46,3 @@ description: 'Use when asked to analyze a Riffrec capture, screen, voice, or not
 ## Output
 
 Setup: a capture path and integration guidance with no artifacts. Quick: one concise evidence-backed bug report printed inline or written to `bug-report.md`. Extensive: the complete artifact set (`analysis.md`, `problem-analysis.md`, `review-prompt.md`, `source-materials.md`, `requirements-kickoff.md`, `analysis.json`, local-only `frames/` and `raw/`) and a brainstorm handoff. Text/metadata artifacts may be committed for traceability only when they contain no sensitive data and use repo-relative screenshot paths; `raw/` and `frames/` stay local-only by default.
-
-## Provenance
-
-Origin: https://github.com/EveryInc/compound-engineering-plugin, revision a1f601f17137f648be439965f8fdd9123303de5d, file skills/ce-riffrec-feedback-analysis/SKILL.md. License MIT (Copyright (c) 2025 Every). Mechanisms extracted and rewritten in ODIN style under clean-room adaptation; the bundled analyzer script and reference files are not retained, the analysis procedure is restated as agent-performed steps.

@@ -47,10 +47,3 @@ If some records verify and others diverge, return the verified records with dive
 ## Output
 
 A structured capsule with `session_id`, `records` (each with action, outcome, status, divergence_note), `next_move`, and `divergences`, ordered as listed.
-
-## Provenance
-
-- Origin: `cursor/plugins` — pstack `recall` skill authored by Lauren Tan (poteto), MIT-licensed.
-- Revision: `68836ddaf5697224520f1847d90cdb90ca8babaa`
-- License: MIT (evidence: `pstack/LICENSE` blob `6b5400237fdf6545be0b8fae370d6f2fcff8fb25`; pstack authored by Lauren Tan under MIT per audit license block)
-- Adaptation: Clean-room rewrite for ODIN 2.0 `odin-research` module. Transcript-mining mechanism retained; authority scoped to read-only; output shaped to the ODIN capsule contract.

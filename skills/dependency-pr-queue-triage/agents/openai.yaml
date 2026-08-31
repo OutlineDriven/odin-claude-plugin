@@ -1,3 +1,0 @@
-interface:
-  display_name: "Dependency PR Queue Triage"
-  short_description: "Use when a dependency PR queue needs serial fresh-state triage"

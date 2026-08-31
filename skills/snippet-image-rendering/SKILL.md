@@ -90,10 +90,3 @@ description: 'Use when the user explicitly names snipgrapher and wants code rend
 ## Output
 
 **Output contract:** Return the rendered image at the explicit path, then one brief report containing that path and its measured byte size.
-
-## Provenance
-
-- Origin: mcollina/skills, skills/snipgrapher/SKILL.md
-- Revision: 856efd268ae85482d882f3d0bed869fd020b5c06
-- License: MIT (notice retained; mechanism adapted)
-- Adaptation: Trigger narrowed to explicit snipgrapher mention; module remapped to odin-create-advanced; verification changed from ls -lh to test -s; profile handling made conditional on installed version support.

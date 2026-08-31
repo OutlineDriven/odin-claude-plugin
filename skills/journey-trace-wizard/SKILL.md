@@ -57,7 +57,3 @@ Roll back means delete the wizard file. On any failure the blocked result is: wi
 ## Output
 
 On success: the wizard file path with owner-execute permission, plus a human-readable summary of what the wizard does, the validated inputs, and how to run it. On failure: failure class name and the exact error output; no file is left behind.
-
-## Provenance
-
-Adapted from the wizard skill by Matt Pocock, origin mattpocock/skills at revision 6654f6b60cd9d5be8b54c6fafe44346dabeb3b76. Licensed under MIT. Obligation: retain the copyright and permission notice in licenses/NOTICE. Adaptation for ODIN 2.0: ODIN create-advanced module; reversible-local authority; static journey trace validation; wizard authored but never executed. Clean-room adaptation: procedure, naming, and validation rules derived from the contract and provenance description, not from expression in the source repository.

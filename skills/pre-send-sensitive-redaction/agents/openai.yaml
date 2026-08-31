@@ -1,3 +1,0 @@
-interface:
-  display_name: "Pre Send Sensitive Redaction"
-  short_description: "Use on Analyze when session content is about to leave the"

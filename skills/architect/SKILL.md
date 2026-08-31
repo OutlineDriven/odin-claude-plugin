@@ -91,7 +91,3 @@ Use these terms consistently in every recommendation and design sketch:
 ## Output
 
 A design package containing: the usage surface (greenfield) or the surveyed scope and ranked candidates (brownfield); the competing sketches or candidate list; the red-flag evaluation or deletion-test results; the selected design with tradeoffs and rejected alternatives; the coherent implementation shape; and, in implement mode, the interface-level checks and observed results, any `CONTEXT.md` or accepted ADR update, and the replacement and deletion performed. Terminal classification: `done`, `no-design-needed`, `no-candidate`, `blocked`, `blocked-by-decision`, `failed-rolled-back`, or `recovery-required`.
-
-## Provenance
-
-Survivor origin: cursor/plugins pstack architect skill, pinned revision 68836ddaf5697224520f1847d90cdb90ca8babaa, MIT — clean-room adaptation preserving the usage-first design, competing-sketch, and redesign-threshold mechanism. Absorbed: mblode/agent-skills codebase-architecture (pinned e97a3b383f5944f90d41eb92b24b4fb3b917a7f9, MIT, clean-room — deep-module vocabulary and design procedure re-derived); project-owned ODIN 1.x improve-architecture (no source revision supplied — scoped exploration, deletion test, two-adapter seam discipline, adversarial grilling, design-twice comparison, dependency-class testing, replace-don't-layer migration retained); mattpocock/skills improve-codebase-architecture (pinned 6654f6b60cd9d5be8b54c6fafe44346dabeb3b76, MIT — read-only survey producing ranked deepening candidates retained).

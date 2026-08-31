@@ -56,7 +56,3 @@ Optional: existing license declaration, third-party dependency licenses, tradema
 ## Output
 
 Either a recommendation only (chosen license, reasoning, tradeoffs, obligations, compatibility, attribution, SPDX ID, manual application steps) or a full update (written file paths, chosen license, SPDX ID, consistency statement), plus the provenance section.
-
-## Provenance
-
-Adapted from the Trail of Bits open-sourcing skill (source-trail-of-bits:trail-p4-008), origin https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3, licensed CC-BY-SA-4.0. Adaptation preserves Trail of Bits attribution and source link, marks modifications, applies ShareAlike to adaptations, claims no trademark rights, and does not reuse trail-of-bits-mark.svg as branding. Procedure is a clean-room re-derivation of the license-family decision logic and file-update workflow from the source; no source expression is copied.

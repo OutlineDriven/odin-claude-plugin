@@ -114,10 +114,3 @@ Top-3 fixes: 1. Pick one direction (Intent + One-strong-moment).
 ```
 
 **Anchor mode**: a register-load confirmation listing the eleven anchors, the Side A and Side B block patterns, and the persistence caveat.
-
-## Provenance
-
-- Origin: current-odin-skill-tree, skills/taste/SKILL.md (candidate current:current-d:current:taste, disposition ADAPT) merged with skills/slop/SKILL.md (candidate current:current-d:current:slop, disposition MERGE into taste).
-- Revision: none pinned.
-- License: project-owned.
-- Adaptation: clean-room rewrite preserving the eleven-anchor charter, two-sided Side A/B framework, audit/anchor dual-mode procedure, and auto-clarity exception from the current taste skill. Slop's trigger predicate and interface metadata transfer at the wall; its domain-routing table (referencing peer skills) is excluded per the self-containment requirement.

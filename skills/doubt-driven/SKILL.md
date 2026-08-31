@@ -66,7 +66,3 @@ description: 'Use when a non-trivial decision sits under uncertainty and correct
 
 ## Output
 A report listing each CLAIM, the fresh-context review findings, the classification of each finding (contract misread / valid + actionable / valid trade-off / noise), the stop condition met, and the cross-model disposition — with actionable findings carrying a recommended artifact change stated as a recommendation, not an applied edit.
-
-## Provenance
-
-Adapted from the odin-1.x current skill `skills/doubt-driven/SKILL.md` (project-owned, no third-party license). Merged source: `addyosmani/agent-skills`, revision `d2c37ef6225dd8726cdd369a8030307f48592d26`, MIT license, Copyright (c) 2025 Addy Osmani — an exact four-field contract duplicate absorbed into this survivor with no surviving alias. Clean-room adaptation; no third-party expression copied. MIT obligation: retain the copyright notice and permission text in derived distributions.

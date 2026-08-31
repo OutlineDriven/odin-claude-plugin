@@ -51,10 +51,3 @@ description: 'Use for adversarial security audits of auth, input parsing, depend
 ## Output
 
 A structured audit report with executive summary (finding counts by severity), STRIDE findings table (threat class, component, severity, description, remediation owner), OWASP walkthrough (pass/fail per category), supply-chain scan results (CVE count, secrets found, SBOM status), and merge gate decision (block if critical/high present, else pass).
-
-## Provenance
-
-- Origin: odin-current (project-owned).
-- Source: skills/security-review/SKILL.md.
-- License: project-owned; no third-party expression.
-- Adaptation: restructured from current skill body to ODIN 2.0 authoring contract format.

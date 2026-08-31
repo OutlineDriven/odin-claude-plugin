@@ -43,9 +43,3 @@ disable-model-invocation: true
 
 ## Output
 A pushed documentation branch and one open PR linking each update to its source commit, or a testing-mode preview summary, or a no-op report that no significant user-facing changes were found.
-
-## Provenance
-
-- Origin: https://github.com/warpdotdev/oz-skills, revision 6c08c49fc6c51b8f768bf8c53c041bc06a160765, file `.agents/skills/docs-update/SKILL.md`.
-- License: MIT (Copyright 2026 Warp). This skill is outside the two Apache-2.0 subdirectories (`.agents/skills/mcp-builder/` and `.agents/skills/webapp-testing/`), so the repository-root MIT terms apply.
-- Adaptation: clean-room adaptation to a human-only knowledge-sync workflow. Preserved mechanisms: filter commits for user-facing changes, preserve existing documentation voice and style, stay strictly additive, and open a PR linking documentation updates to source commits. Removed the Warp co-author line and automation-only framing; added human-preview-before-PR authority and explicit failure and recovery classes.

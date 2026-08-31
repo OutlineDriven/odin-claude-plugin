@@ -47,7 +47,3 @@ Optional: per-unit routing overrides (issue+PR vs PR-only) stated by the user; d
 
 ## Output
 A run report listing, per unit: the routing (Issue+PR or PR-only), the branch, the push URL, the PR number and URL, and (when filed) the issue number and URL. Classify the run as done only when one issue or PR per logical change exists on the correct base/head, links are appended, and URLs are reported.
-
-## Provenance
-
-Origin: ODIN 1.x current skill `skills/atomic-issues-prs/SKILL.md` (project-owned, no pinned revision, no third-party license). Adaptation: restructured into the ODIN 2.0 contract section order, added `disable-model-invocation: true` for human-only authority, and restated every safety and execution rule self-contained without peer-skill references.

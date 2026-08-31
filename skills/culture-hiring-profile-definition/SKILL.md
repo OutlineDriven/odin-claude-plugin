@@ -44,7 +44,3 @@ Culture Index measures behavioral drives, not skills or intelligence. Traits: A 
 
 ## Output
 A chat report containing: role context; an ideal trait table (A, B, C, D, L, I) with position, confidence, and role-grounded rationale; target pattern; acceptable alternative patterns with rationale; red flags with explanations; interview focus areas; and a usage note stating the profile is one input among many and measures drives not capabilities.
-
-## Provenance
-
-Origin: https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3, source file /plugins/culture-index/skills/interpreting-culture-index/workflows/define-hiring-profile.md. License CC-BY-SA-4.0; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding. Clean-room adaptation: re-expressed as a self-contained role-profile definition procedure with no dependency on the source plugin's reference files or extraction tooling.

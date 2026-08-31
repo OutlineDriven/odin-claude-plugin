@@ -34,7 +34,3 @@ The question or decision to analyze from the business seat. Optional: any suppli
 
 ## Output
 A business-perspective analysis covering money, customers, and timing, returned as chat output, with no other lens blended in.
-
-## Provenance
-
-Origin: project-owned:user-curated-skill-ideas (Perspective lenses section) and project-owned:user-supplied-source-brief. No pinned revision; no third-party license (project-owned source). Clean-room adaptation: the user-curated brief defines the business lens as money, customers, and timing within an 11-lens set where each lens answers only from its named seat and lenses are compared only after their independent outputs exist.

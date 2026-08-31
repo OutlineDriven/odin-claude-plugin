@@ -44,10 +44,3 @@ description: 'Use when the user asks to save a learning or closes a meaningful k
 ## Output
 
 Markdown files written to docs/knowledge/ (or the configured directory), each with frontmatter (type, tags, confidence, date, source, Context, Implication), plus a terminal confirmation naming retrieval tags for each saved record.
-
-## Provenance
-
-- Origin: https://github.com/EveryInc/compound-knowledge-plugin
-- Revision: 766942e9eaee5204adbfe180f1d0651ffecf2575
-- License: MIT — Copyright (c) 2026 Every, Inc. Include the copyright and permission notice in copies or substantial portions; mechanism rewrites recorded in the root provenance ledger are permitted.
-- Adaptation: clean-room rewrite of the compounding mechanism with the stale-knowledge checking logic folded inline per the inventory MERGE row. The original stale-knowledge-checker.md agent prompt is not retained as a separate file; its tag-overlap and contradiction-detection logic is restated as Procedure step 2. No third-party expression copied directly.

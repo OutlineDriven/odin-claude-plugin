@@ -43,7 +43,3 @@ disable-model-invocation: true
 
 ## Output
 The referenced GitHub object is resolved or created through gh, unfamiliar commands were validated, and for any opened PR the CI watch completed with failures addressed. Commits and PR bodies carry no AI attribution and signing settings are unchanged.
-
-## Provenance
-
-Origin: mcollina/skills, revision 856efd268ae85482d882f3d0bed869fd020b5c06, file skills/octocat/SKILL.md. License: MIT; notice retained, mechanism adapted. Adapted to the odin-run module with a human-only authority boundary, a contract table, failure/recovery classes, and provenance; the gh-first, URL-trigger, command-validation, PR-body, CI-watch, signing, and attribution mechanisms are preserved.

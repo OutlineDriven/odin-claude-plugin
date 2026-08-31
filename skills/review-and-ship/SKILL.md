@@ -46,7 +46,3 @@ The repository must be clean or have staged changes, and the working tree must b
 
 ## Output
 A report with sections in order: Review findings, Check results, Planned commits, Publication, PR. Each section carries its own pass-or-blocked status; a blocked section names the reason.
-
-## Provenance
-
-Origin: `cursor/plugins`, path `cursor-team-kit/skills/review-and-ship/SKILL.md`, pinned revision `68836ddaf5697224520f1847d90cdb90ca8babaa`. License: MIT, declared by the cursor/plugins root README and the candidate plugin manifest. Adaptation: clean-room adaptation; no third-party expression copied — the review-verify-publish mechanism is re-derived from the roster contract fields. The root `PROVENANCE.md` ledger records this origin, revision, and license; keep its entry in sync with this section.

@@ -38,7 +38,3 @@ description: 'Use when the learner is ready to apply cleared concepts in a real 
 
 ## Output
 `capstone-<slug>.md` at the workspace root with the concepts exercised, working milestones, and an observable done test; then, on the review visit, a per-item verdict against that done test and concept list and the named not-cleared concepts handed to the learner as practice items. No progress record is written by this skill.
-
-## Provenance
-
-Adapted from the ODIN 1.x current skill `skills/capstone/SKILL.md` (origin `odin-1.x-current-skill`, no pinned revision, project-owned content). Retained mechanisms: cleared-concept scoping with the no-progress-file ask-once fallback, the cleared-plus-at-most-one-unfamiliar bound with tutorial cutoff, the workspace-root brief format, observable done tests, working milestones, and item-by-item judgment. The separate brief-format reference file and the cross-skill handoff pointer were inlined or restated as self-contained boundaries. No third-party expression is copied.

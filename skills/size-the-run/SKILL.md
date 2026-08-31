@@ -58,11 +58,3 @@ move_up_if: <signals that would justify a stronger tier or higher effort>
 move_down_if: <signals that would justify a cheaper tier or lower effort>
 proof_surface: <verification still required>
 ```
-
-## Provenance
-
-- Origin: current-odin-skill-tree.
-- Source path: `skills/size-the-run/SKILL.md`.
-- Revision: not pinned (current working tree).
-- License: project-owned (ODIN internal skill, no third-party expression).
-- Adaptation: restructured from existing skill body to ODIN 2.0 section contract; mechanism preserved verbatim.

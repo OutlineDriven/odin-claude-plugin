@@ -41,7 +41,3 @@ Never swallow tracker errors or report the done predicate while any approved tar
 
 ## Output
 Return the tracker scope, the approved target set, and one terminal status per target with its stable identifier and observed remote state. Return overall `confirmed` only when all approved targets are verified closed; otherwise return `blocked`, `cancelled`, `partial`, or `unknown-result` with the exact reason and any remote mutations already confirmed.
-
-## Provenance
-
-Project-owned adaptation of candidate `curated:curated-ideas:curated-079` from `project-owned:user-curated-skill-ideas`, also represented in `project-owned:user-supplied-source-brief`. The source has no pinned revision or stated license. This literal cleanly restates the curated interactive tracker-hygiene mechanism without copying third-party expression.

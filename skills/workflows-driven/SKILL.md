@@ -50,7 +50,3 @@ Partial-result rule: evidence files from successful workers in a failed wave are
 
 ## Output
 The parent produces a consolidated report per phase: evidence summary, contradictions resolved, proof pass result, and next-phase readiness. The final phase output is the workflow closure report.
-
-## Provenance
-
-Origin: current-odin-skill-tree. Adaptation: the host-materialization paragraph was inlined from `skills/workflows-driven/references/claude-code.md` and `skills/workflows-driven/references/omp.md` (support paths not carried; content inlined per the authoring contract self-containment requirement). Module audited and moved from odin-run to odin-run-advanced per skill-foundry roster editorial ruling. No third-party expression copied.

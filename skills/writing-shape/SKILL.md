@@ -41,9 +41,3 @@ Rollback: version control. Do not commit unapproved or rejected paragraphs.
 
 ## Output
 `<source_path>.shaped.md` — approved paragraphs in original order with rejected paragraphs marked as named gaps; original source file unmodified.
-
-## Provenance
-
-Origin: mattpocock/skills (mattpocock/skills, revision 6654f6b60cd9d5be8b54c6fafe44346dabeb3b76).
-License: MIT (Copyright (c) 2026 Matt Pocock).
-Adaptation: clean-room adaptation into odin-create; paragraph-by-paragraph shaping of a supplied read-only pile with named unsupported gaps retained as the core mechanism.

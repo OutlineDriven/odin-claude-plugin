@@ -43,10 +43,3 @@ A grounded architecture walkthrough describing:
 - Gotchas: surprising behaviors, silent edge cases, and non-obvious assumptions
 
 Output ends with `done` or one of the named failure states: `no-evidence`, `inconclusive`.
-
-## Provenance
-
-- Origin: cursor/plugins (pstack/skills/how)
-- Revision: 68836ddaf5697224520f1847d90cdb90ca8babaa
-- License: MIT (pstack authored by Lauren Tan, poteto)
-- Adaptation: clean-room reconstruction from provenance metadata and contract requirements. No source files were copied. Source mechanisms preserved: parallel-explorer architecture explanation via phased structural reads, read-only authority boundary, gotcha surfacing as distinct output category.

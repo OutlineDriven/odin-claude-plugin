@@ -71,7 +71,3 @@ Required: the repo root of the Next.js App Router app to change, or a deployed o
 ## Output
 
 A completed pass/fail checklist with per-check command evidence, the list of applied file changes each with recorded prior content for rollback, a recommendation-only list for findings not applied, and remaining blockers with exact URLs and owner/action. Done is claimed only when the checklist passes with sitemap, robots, and meta correct and Core Web Vitals green.
-
-## Provenance
-
-Adapted from `skills/optimise-seo/SKILL.md` and its four reference files (`seo-checklist.md`, `nextjs-implementation.md`, `internationalisation.md`, `technical-hardening.md`) in mblode/agent-skills at revision `e97a3b383f5944f90d41eb92b24b4fb3b917a7f9`. MIT License (`LICENSE.md`), Copyright (c) 2026 Matthew Blode; the license requires preserving the copyright notice and license text in substantial portions, which this statement provides. Mechanisms are preserved and rewritten for this self-contained form: the reference files are folded into the Procedure, per-type code patterns are condensed to their invariants, and cross-references to third-party skills were removed.

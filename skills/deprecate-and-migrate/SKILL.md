@@ -44,10 +44,3 @@ description: 'Use when asked to remove old code, migrate consumers, or decide wh
 
 ## Output
 A terminal `migrated-and-removed` or `blocked` report with sections in order: deprecation notice and guide, consumer migration evidence, removed tracked artifacts, rollback range, monitoring watch set, remaining blockers.
-
-## Provenance
-
-- Origin: odin-1.x current skill `skills/deprecate-and-migrate/SKILL.md` (project-owned, no third-party license), merged with addyosmani/agent-skills `skills/deprecation-and-migration/SKILL.md`.
-- Pinned revision: d2c37ef6225dd8726cdd369a8030307f48592d26 (addyosmani/agent-skills).
-- License: MIT — Copyright (c) 2025 Addy Osmani. The copyright notice and MIT permission text are retained in derived distributions.
-- Adaptation: clean-room rewrite to the ODIN 2.0 contract format. Source mechanisms (maintain/sunset decision, replacement proof, incremental consumer migration, obsolete-code removal after zero usage) are preserved; no third-party expression is copied verbatim.

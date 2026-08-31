@@ -42,7 +42,3 @@ description: 'Use when asked to audit a code surface for security-relevant edge 
 ## Output
 
 A structured findings report with one entry per sharp edge (severity, category, location, misuse, impact, recommendation), sorted by severity descending; an empty findings array with a confirmation message when no edges are found.
-
-## Provenance
-
-Clean-room adaptation. Origin: https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3. License: CC-BY-SA-4.0. This adaptation preserves Trail of Bits attribution and the source link, marks the text as modified, and remains under CC-BY-SA-4.0 ShareAlike. It claims no Trail of Bits trademark rights and does not reuse `trail-of-bits-mark.svg` as branding.

@@ -41,9 +41,3 @@ description: 'Use when asked to migrate a JavaScript or TypeScript project from 
 
 ## Output
 One `biome.json` or `biome.jsonc`, updated package scripts/hooks/CI/dependencies/lockfile, a coverage map for legacy rules and file scopes with every unsupported invariant, and a terminal classification of `migrated` or `blocked` with exact command evidence.
-
-## Provenance
-
-- Origin: `mcollina/skills`, revision `856efd268ae85482d882f3d0bed869fd020b5c06`.
-- License: MIT; notice retained, mechanism adapted.
-- Adaptation: the source ESLint 9 migration was re-derived as an ESLint-to-Biome cutover for the current ODIN toolchain. Its useful inventory, parity, CI, and rollback mechanisms remain; no third-party expression is copied.

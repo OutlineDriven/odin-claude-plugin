@@ -38,7 +38,3 @@ A local git repository path (defaults to the current working directory). No remo
 
 ## Output
 A categorized report of every local branch (`merged`, `unmerged-with-evidence`, `unanalyzed`, or `protected`) and every worktree (`clean`, `dirty`, or `protected`), each recommended deletion with its evidence and exact quoted command, the set of confirmed commands, and a per-command result of `deleted` or `failed` with the git error message. Branches or worktrees never confirmed remain listed as not deleted.
-
-## Provenance
-
-Adapted clean-room from the Trail of Bits skills repository (https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3), source paths `/plugins/git-cleanup/commands/git-cleanup.md`, `/plugins/git-cleanup/README.md`, and `/plugins/git-cleanup/references/merge-evidence.md`. Licensed CC-BY-SA-4.0; preserve Trail of Bits attribution and the source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.

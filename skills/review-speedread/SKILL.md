@@ -34,7 +34,3 @@ Partial-result rule: if retrieval succeeds for a subset of files, render what wa
 
 ## Output
 A chat-native change-shape summary: compact ASCII table or structured paragraph listing each changed file with its change type and line delta, plus aggregate totals. The human reads this and then reads the full diff.
-
-## Provenance
-
-Origin: `project-owned:user-curated-skill-ideas` / `project-owned:user-supplied-source-brief`. No external revision pinned. License: project-owned adaptation. Mechanism: user-curated common review aid; read-only pre-review step. No third-party expression copied.

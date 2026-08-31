@@ -51,7 +51,3 @@ Rollback: delete the conditional compilation block (or remove the fuzz build con
 ## Output
 
 Conditional-compilation patches in the System Under Test (each gated on the fuzzing build flag and documented), a coverage delta showing improved reachability over the unpatched baseline, and a per-patch false-positive risk classification (LOW / MEDIUM / MITIGATED) with rationale — unresolved obstacles reported as such with evidence rather than marked done.
-
-## Provenance
-
-Adapted from Trail of Bits, https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3, file `/plugins/testing-handbook-skills/skills/fuzzing-obstacles/SKILL.md`. Licensed CC-BY-SA-4.0; source link preserved, modifications marked, adaptations licensed ShareAlike, no trademark rights claimed, and `trail-of-bits-mark.svg` is not reused as branding. This ODIN adaptation restates the conditional-compilation safety contract in the ODIN contract format.

@@ -45,7 +45,3 @@ Required: the target API entry point to fuzz and the input shape (raw bytes or s
 ## Output
 
 A version-controlled fuzz harness and target adapter that runs the corpus deterministically, reaches the intended API, and preserves reproducible crashes, plus a report listing covered API paths, corpus entries, and any preserved crash artifacts.
-
-## Provenance
-
-Adapted from the Trail of Bits harness-writing skill (https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3, path /plugins/testing-handbook-skills/skills/harness-writing/SKILL.md). Licensed CC-BY-SA-4.0; preserve Trail of Bits attribution and the source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding. This is a clean-room adaptation preserving the harness-design mechanism; no third-party expression is copied.

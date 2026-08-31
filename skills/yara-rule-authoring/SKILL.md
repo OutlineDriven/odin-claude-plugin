@@ -120,7 +120,3 @@ Non-mutation rule: rule file creation or modification is the only file mutation.
 
 ## Output
 New or modified YARA-X rule file on disk with proper naming, metadata, short-circuiting condition, and bounded performant patterns; validation report with separated signals (syntax/format, linter codes, atom quality, positive-sample count and timing, goodware count, unperformed validations); migration report when migrating (legacy issues, fixes, post-fix verification without relaxed mode).
-
-## Provenance
-
-Adapted from Trail of Bits skills repository (`plugins/yara-authoring/skills/yara-rule-authoring/SKILL.md`), revision d1f1575cff97816e5cc08af66cd2506099c681d3. Licensed CC-BY-SA-4.0. Source: https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3. Preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding. This adaptation restructures the source into the ODIN 2.0 skill contract format, moves branch-specific procedure detail (reviewing, migrating, CRX, DEX, structural pivots, rationalizations) to `references/branches.md` per I3, and preserves every source mechanism (string selection heuristics, condition design, performance optimization, platform patterns, module analysis, migration workflow, rationalization rejection, and separated validation output). No source expression is copied beyond what the CC-BY-SA-4.0 ShareAlike obligation requires; structure and wording are original to this adaptation.

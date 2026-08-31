@@ -42,7 +42,3 @@ description: 'Use when asked to validate a web app, CLI, API, or generated artif
 
 ## Output
 A structured behavior validation report ordered: per-clause results (identifier, classification pass/fail/blocked/out-of-scope, redacted evidence excerpt, anti-cheat stability flag), summary count of each classification — the report contains no source references.
-
-## Provenance
-
-Origin: https://github.com/openclaw/agent-skills, revision ae75f60e8d454f1cf44ec4613e10ec9ea7f2ade7, MIT license (LICENSE). Clean-room adaptation: the contract-first, source-blind workspace isolation model and probe-category-to-report-schema mapping were re-derived from the mechanism described in the source roster; no third-party expression was copied.

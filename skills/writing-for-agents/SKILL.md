@@ -57,7 +57,3 @@ Must be supplied: the target document path and the agent-consumed document type 
 
 ## Output
 The target document, edited or restructured — every line earning its place by changing routing, authority, reads/writes, procedure, success proof, failure handling, or attribution; no stale duplication, no unreachable pointers, no peer-skill runtime routing, all necessary mechanics inlined.
-
-## Provenance
-
-Origin: mattpocock/skills, pinned revision 6654f6b60cd9d5be8b54c6fafe44346dabeb3b76. License: MIT, Copyright (c) 2026 Matt Pocock. Obligation: Retain the copyright and permission notice in licenses/NOTICE. Adapted into odin-agent: authoring and restructuring discipline for agent-consumed documents; SKILL-MECHANICS.md content inlined; peer-skill runtime routing and local authoring-contract pointers removed.

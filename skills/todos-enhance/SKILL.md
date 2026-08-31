@@ -43,7 +43,3 @@ The current task list in context. Required. Must be present in full.
 ## Output
 
 A rewritten task list where every item is atomic, ordered by real dependency, and annotated with one observable acceptance criterion each — or a terminal report listing remaining unclassified or unverifiable items if the done predicate cannot be reached.
-
-## Provenance
-
-Origin: current-odin-skill-tree. Project-owned. Adapted from `skills/sophisticate-todos/SKILL.md`. Edits were driven by the task-decomposition end state, not the source verbatim. Distinct from `update-todos`, which reconciles stale lists rather than deepening coarse ones.

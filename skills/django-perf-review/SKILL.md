@@ -39,7 +39,3 @@ Optional: the specific app or module paths to bound scope; a running app or test
 
 ## Output
 Return a report with one entry per validated issue: file, line, queryset expression, triggered query pattern, severity, query-count growth, and the concrete fix with the rewritten queryset. List unvalidated candidates separately with their blocker. Include an explicit empty-validated-findings statement when none are confirmed.
-
-## Provenance
-
-Origin: getsentry/skills. Pinned revision: c2f99a5b04b4cd992ec3022d7c2c3e23e938d241. License: Apache-2.0. Clean-room adaptation: the procedure was re-derived from the Django ORM performance-review mechanism (N+1 detection, queryset misuse, unbounded reads, severity by impact); no third-party expression was copied.

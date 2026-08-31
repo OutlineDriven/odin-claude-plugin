@@ -44,7 +44,3 @@ description: 'Use when asked to generate and judge competing artifact implementa
 
 ## Output
 One synthesized artifact at the chosen base path. One synthesis note alongside it naming: the base candidate, each graft with its source candidate, each rejection with its reason, any dropouts, the cross-judge verdict, and the verification result.
-
-## Provenance
-
-Origin: cursor/plugins, pstack/skills/arena/SKILL.md at revision 68836ddaf5697224520f1847d90cdb90ca8babaa. License: MIT (pstack by Lauren Tan, poteto). Adaptation: clean-room rewrite preserving the rubric-judged candidate generation and grafted-synthesis mechanism; restated inline the separation, first-principles grafting, and verification rules that the source delegated to peer principle skills; removed pstack-specific model config and cursor rule-file references.

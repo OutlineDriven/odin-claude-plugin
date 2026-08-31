@@ -35,7 +35,3 @@ description: 'Use when an artifact or skill has just changed and is about to be 
 
 ## Output
 The artifact with all check findings applied, or the check log recording every skip with its reason — plus a concrete check-run report naming artifact path, checks invoked, results per check, and any deferred items with stated reasons.
-
-## Provenance
-
-Origin: https://github.com/LilMGenius/paperthin (skills/depth/sip/SKILL.md). Revision: 3bca079a51bcfff5dafb53d1d7f9f523d66ee317. License: MIT — Copyright (c) 2026 LilMGenius. Permission is hereby granted, free of charge, to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software. The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. Adaptation: refined trigger predicate to the check-running verification gate with claim-gated conditional firing and mandatory skip-reporting as the distinguishing mechanism.

@@ -67,10 +67,3 @@ Non-converged result when: merged SARIF is null (no valid output) OR the plan un
 ## Output
 
 A structured JSON report with semgrep_version, target, ruleset, coverage, plan_units, actual_units, unit_statuses, findings_count, findings (severity, rule_id, message, file, start_line, end_line), clone_paths, merged_sarif_path, and exit_codes.
-
-## Provenance
-
-Origin: Trail of Bits Semgrep skill — https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3/plugins/static-analysis/skills/semgrep/SKILL.md
-Pinned revision: `d1f1575cff97816e5cc08af66cd2506099c681d3`
-License: CC-BY-SA-4.0
-Adaptation: Adapted from the Trail of Bits Semgrep skill for ODIN 2.0. The original rulesets and Semgrep engine are used as-is from their respective upstream sources. Trail of Bits attribution and source links are preserved. Modifications are marked as ODIN-specific automation and configuration. Adaptations are ShareAlike under CC-BY-SA-4.0. No trademark rights are claimed. The `trail-of-bits-mark.svg` is not used as branding.

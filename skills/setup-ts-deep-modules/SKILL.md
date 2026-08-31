@@ -53,9 +53,3 @@ Optional: the preferred packages root if the repo has a different convention.
 ## Output
 
 `.dependency-cruiser.cjs` with four forbidden rules; `lint:boundaries` script in `package.json` folded into the umbrella check; `<packages-root>/example/` as a starter template; `<packages-root>/README.md` and AGENTS.md/CLAUDE.md pointer; done predicate confirmed via pass-fail-pass sequence.
-
-## Provenance
-
-Origin: `odin-current` (project-owned).
-
-Adaptation: clean-room implementation of the dependency-cruiser deep-module boundary workflow. The four forbidden rules, path-depth based private/public distinction, intra-package freedom via `$1` back-reference, and three-step bite proof are preserved from the source mechanism. Written for the ODIN 2.0 Skill Foundry literal authoring contract.

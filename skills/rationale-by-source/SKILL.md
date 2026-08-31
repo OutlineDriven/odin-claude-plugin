@@ -44,7 +44,3 @@ description: 'Use when asked to investigate design rationale, regression causes,
 ## Output
 
 A structured report with investigation question, confidence-tiered narrative (well-sourced, weakly-sourced, unsupported, unknown), source coverage summary, and open unknowns, ordered as listed.
-
-## Provenance
-
-Adapted from pstack/skills/why by Lauren Tan (poteto), revision 68836ddaf5697224520f1847d90cdb90ca8babaa. Licensed under MIT (pstack/LICENSE blob 6b5400237fdf6545be0b8fae370d6f2fcff8fb25). Clean-room adaptation: source playbooks and investigation workflow preserved as the distinguishing mechanism; no third-party expression copied.

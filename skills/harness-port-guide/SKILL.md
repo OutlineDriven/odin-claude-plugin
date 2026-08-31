@@ -42,7 +42,3 @@ The target harness name and its install mechanism (plugin, extension, marketplac
 
 ## Output
 A port for the target harness comprising a manifest or entry point, a bootstrap injector or extension-declared context file, a tool-mapping reference, tests, and install docs — all delivered through the harness's own install mechanism, with the version tracked in the source manifest. A captured acceptance-test transcript showing the relevant skill auto-triggering before any code is written. A terminal classification: done, when all six done-conditions hold, or non-converged, naming which conditions fail.
-
-## Provenance
-
-Origin: github.com/obra/superpowers, docs/porting-to-a-new-harness.md, revision b36e0829c6d0140e93cfef2ca599b1b07d4a7797. License: MIT, holder Jesse Vincent, 2025; copying is permitted. Adaptation: clean-room generalization of the Superpowers porting doctrine — the three integration shapes, the capability checklist, the marker-test discipline, the six done-conditions, and the install-mechanism rule — into a harness-agnostic procedure; framework-specific names and references are generalized, and no third-party expression is copied verbatim.

@@ -57,9 +57,3 @@ Partial-result rule: if step 7 fails, the original artifact is not modified. No 
 
 ## Output
 The hardened artifact is written back to its original path and the skill returns one confirmation line in fixed order: `Hardened: <artifact-path>`, assumptions resolved count, invariants named count, temporary choices resolved count, `End state verified: true`. On `end-state-unverified` it instead lists the failing checks and does not claim the done predicate.
-
-## Provenance
-
-Origin: `curated:curated-ideas:curated-058` — local curated idea repository (`project-owned:user-curated-skill-ideas`, `project-owned:user-supplied-source-brief`). No revision pin, no third-party license.
-
-Adaptation statement: this skill adapts the user-curated hardening workflow described in the curated idea. It restates D28 (resolve loose assumptions, name invariants, remove temporary choices, verify stable end state) as a bounded, reversible local procedure with named failure classes. Clean-room adaptation; no third-party expression copied.

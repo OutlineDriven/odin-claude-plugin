@@ -33,7 +33,3 @@ description: 'Use when asked to summarize authored work from the last week. Read
 
 ## Output
 A structured report with sections in order: Executive Summary (2-4 sentence overview), Work Classification (grouped by type: feature, fix, refactor, docs, test, chore), Author Statistics (from shortlog), and Commit Log (raw `git log` output).
-
-## Provenance
-
-Origin: cursor/plugins cursor-team-kit/skills/weekly-review/SKILL.md at 68836ddaf5697224520f1847d90cdb90ca8babaa. License: MIT. Adaptation: clean-room rewrite for ODIN 2.0 odin-research module with read-only authority and bounded-range git history analysis.

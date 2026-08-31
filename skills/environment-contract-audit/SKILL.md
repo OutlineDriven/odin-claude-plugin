@@ -29,7 +29,3 @@ description: 'Use when environment-dependent code, templates, or deployment conf
 
 ## Output
 A bidirectionally reconciled environment-variable contract with every referenced variable supplied and documented at the correct required/optional and public/secret scope, plus an immutable K11 receipt.
-
-## Provenance
-
-- Profile P-SHOW: source https://loops.show/loops. Record the loops.show URL, retrieval date, clean-room attestation, and unsupported upstream authorship/license fields. Expression reuse: none.

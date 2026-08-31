@@ -62,8 +62,3 @@ Non-mutation rule: this skill never edits files, creates commits, or sends chang
 
 ## Output
 A triage report with classification category, quoted evidence, minimal repair action, any ambiguity, and `is_defect` boolean, in that order.
-
-## Provenance
-
-Origin: Property-Based Testing skill suite, Trail of Bits (https://github.com/trailofbits/skills), revision d1f1575cff97816e5cc08af66cd2506099c681d3.
-License: CC-BY-SA-4.0. Attribution preserved. Source link preserved. Modifications are clean-room adaptations of the published procedure patterns into ODIN 2.0 self-contained skill form; no third-party expression is copied verbatim. ShareAlike propagation applies to further adaptations.

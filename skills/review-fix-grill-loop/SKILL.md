@@ -70,9 +70,3 @@ A structured report saved to `.outline/review-fix-grill/queue.json` and `.outlin
 - Queue file path
 
 Terminal output: a one-paragraph summary of the final state matching the completion contract.
-
-## Provenance
-
-Origin: project-internal skill from `skills/review-fix-grill-loop/SKILL.md` in the current catalog.
-Adaptation: restructured per the ODIN 2.0 authoring contract; all content self-contained with no external skill or reference-file dependencies; authority and side effects scoped to reversible local mutations only.
-License: project-internal.

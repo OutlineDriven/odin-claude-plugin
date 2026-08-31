@@ -45,7 +45,3 @@ Partial results: if the HTML was written but validation failed, the output direc
 
 ## Output
 A self-contained static HTML site at the output directory containing `index.html` with four D3 views, guided tours, and a passing validator result — validator stdout included in the generation report.
-
-## Provenance
-
-Adapted from `source:source-warp-common:wc-08` at revision `f589e224907eda566c13755529f59db563090d14`. Original repository: https://github.com/warpdotdev/common-skills. License: MIT, Copyright (c) 2026 Denver Technologies, Inc. Mechanisms rewritten in ODIN style per permissive adaptation terms. The vendored third-party JS bundle (pierre-diffs.js) from the original skill-doctor assets is excluded from this adaptation.

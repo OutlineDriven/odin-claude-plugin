@@ -38,7 +38,3 @@ description: 'Use when any bounded workflow starts or reaches an action, path, p
 
 ## Output
 For each evaluated boundary, a chat verdict (permit; narrow with the narrowed form stated; or refuse with the reason recorded), with the verdict sequence proving constraints were loaded before the first action, re-evaluated at every boundary, and an unreadable constraint set produced refusal rather than default-allow.
-
-## Provenance
-
-Origin: cobusgreyling/loop-engineering. Revision: d03dcb92cc1e0efb59789a2557131c6ad5897ccc. License: MIT. Adapted as a clean-room self-contained procedure preserving the fail-safe constraint-loading and boundary re-evaluation mechanism; no third-party expression copied.

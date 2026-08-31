@@ -37,7 +37,3 @@ description: 'Use when asked to push an already-working artifact to finished str
 
 ## Output
 A polished artifact at the named path plus a one-paragraph summary of which dimensions were refined and which choices were made in each dimension.
-
-## Provenance
-
-Origin: project-owned user-curated design supplied for the ODIN 2.0 rebuild on 2026-08-29. Adaptation: a bounded composition-polish workflow derived from the user's perfectization mechanism. License: project-owned.

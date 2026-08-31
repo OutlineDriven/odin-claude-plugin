@@ -102,8 +102,3 @@ description: 'Use when asked to enroll a project in OSS-Fuzz or run its helper w
 | Enrollment artifacts written | `done: enrollment-artifacts-written`: `project.yaml`, `Dockerfile`, `build.sh` paths listed. |
 | Build failed | `failed: build-failed`: full build log for diagnosis. |
 | Prerequisites not met | `blocked: <failure-class>`: reason stated, no progress claimed. |
-
-## Provenance
-
-Origin: [Trail of Bits Skills — OSS-Fuzz](https://github.com/trailofbits/skills) @ `d1f1575cff97816e5cc08af66cd2506099c681d3`.
-License: CC-BY-SA-4.0. Adaptation: procedural workflow preserved; reference tables, motivational sections, related-skills links, and anti-pattern prose removed. Attribution preserved per license. No trademark rights claimed. Source link marked per license.

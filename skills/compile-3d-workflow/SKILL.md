@@ -39,10 +39,3 @@ description: 'Use when the user asks for direction and a compilable 3D workflow 
 
 ## Output
 Compilable local 3D workflow artifact file (graph topology, ontology groups, feedback loops, verified against compile checks), optionally a local tracker projection plan or payload file (not executed).
-
-## Provenance
-
-- Origin: user-curated skill foundry ideas; source slugs `unlazy-wayfinder` and `wayfinding-goal` merged into `compile-3d-workflow`.
-- Revision: not pinned (local user artifact).
-- License: project-owned.
-- Adaptation: clean-room adaptation from the user's curated brief. The 3D workflow concept — graph topology, ontology groups, and feedback loops compiled into a semi-deterministic skeleton with dynamic routing inside — is preserved from the source mechanism. A boundary correction places remote tracker projection execution behind human action while retaining local preparation.

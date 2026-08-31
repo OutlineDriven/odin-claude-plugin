@@ -49,7 +49,3 @@ description: 'Use when asked to build user-facing interfaces that must look hand
 ## Output
 
 A UI component or layout, in the project's stack, that renders without console errors, is keyboard and screen-reader accessible, is responsive across 320-1440px, conforms to the project design system, and handles loading, error, and empty states.
-
-## Provenance
-
-Origin: odin-1.x current skill at `skills/frontend-ui/SKILL.md`. Revision unpinned. License: project-owned. Adaptation: collapsed two overlapping accessibility references into one inline WCAG 2.1 AA standard and folded the generic-principle references into this self-contained procedure; no third-party expression copied.

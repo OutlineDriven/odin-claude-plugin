@@ -32,7 +32,3 @@ description: 'Use when authorized workflow history may contain a repeated proces
 
 ## Output
 A contradiction-tested workflow mined from authorized history, with an immutable K11 receipt binding the outcome to the declared bound and pass cap.
-
-## Provenance
-
-- Profile P-CATALOG: source https://signals.forwardfuture.com/loop-library/catalog.json. Derived provenance ledger records catalog number, URL, access date, and no-expression-reuse attestation. Expression reuse: none.

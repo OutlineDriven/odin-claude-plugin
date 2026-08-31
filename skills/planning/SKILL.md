@@ -39,9 +39,3 @@ description: 'Use when a plan must be created or reviewed and scored for complet
 
 ## Output
 A plan file (`PLAN.md` or user-named) with goal, scope, steps, feasibility, assumptions, risks, and testability notes, plus a review report with six-dimension scores, iteration changes, named blockers, and the final verdict — or a one-sentence refusal naming the missing input when no plan is written.
-
-## Provenance
-
-- Origin: mblode/agent-skills (MIT), revision e97a3b383f5944f90d41eb92b24b4fb3b917a7f9
-- License: MIT — Copyright (c) 2026 Matthew Blode; adaptation preserves copyright and MIT license text
-- Adaptation: translated from the mblode planning skill into the ODIN 2.0 SKILL.md format; authority mapped to reversible-local; procedure structured into bounded steps with explicit scoring dimensions; failure classes named with non-converged output defined; no ODIN skill, module, or system-prompt dependency introduced

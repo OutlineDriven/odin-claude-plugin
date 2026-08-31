@@ -41,7 +41,3 @@ Optional: an existing task JSONL ledger to extend. If absent, create one.
 
 ## Output
 An amended plan, a task JSONL ledger of aggregated implementation tasks, updated TODOs, and a final approval gate presenting both the amended plan and the aggregated tasks for the human decision.
-
-## Provenance
-
-Origin: https://github.com/garrytan/gstack, revision 07b59e396c6be5a86619a43151cb9ed62a15ae69. License: MIT, Copyright (c) 2026 Garry Tan. Adapted clean-room from the autoplan multi-phase review pipeline (CEO, design, DX, engineering phases, six-principle decision register, aggregated task ledger); expressive prose re-derived, not copied.

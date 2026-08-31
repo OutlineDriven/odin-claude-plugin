@@ -1,3 +1,0 @@
-interface:
-  display_name: "Database Query Shape Audit"
-  short_description: "Use when database-backed public query code changes or shows"

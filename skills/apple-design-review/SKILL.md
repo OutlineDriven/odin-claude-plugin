@@ -53,7 +53,3 @@ description: 'Use when the user invokes /apple-design-review to audit an iOS app
 
 ## Output
 A Markdown report written to a local path under the project directory, named `ios-design-review-<date>.md`. It contains, per screen: the screenshot, the 0-10 score for each of the ten dimensions, the what-would-make-it-a-10 note for each dimension, and one biggest-leverage fix per dimension. Screens scoring below 7 on any dimension are flagged with the surfaced fix and tradeoff. The report is the terminal deliverable; no source, device, or app state is changed.
-
-## Provenance
-
-Origin: https://github.com/garrytan/gstack, revision 07b59e396c6be5a86619a43151cb9ed62a15ae69, path ios-design-review/SKILL.md. License: MIT, Copyright (c) 2026 Garry Tan. This skill is a clean-room adaptation: the ten-dimension iOS design-audit mechanism and 0-10 what-would-make-it-a-10 scoring frame are re-derived from the source, with platform-specific daemon and tooling prose replaced by self-contained observation-session inputs. No third-party expressive prose is copied wholesale.

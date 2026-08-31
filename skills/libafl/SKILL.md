@@ -57,7 +57,3 @@ description: 'Use when a custom LibAFL fuzzer needs an executor, observer, feedb
 ## Output
 
 Compiled fuzzing engine binary in `target/`, live corpus in the output directory, persisted crash and timeout findings (each replayable against the target), and coverage statistics printed to the event manager monitor.
-
-## Provenance
-
-Origin: Trail of Bits testing-handbook LibAFL skill. Revision: d1f1575cff97816e5cc08af66cd2506099c681d3. License: CC-BY-SA-4.0 with Trail of Bits attribution preserved. Source: https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3. Adapted to ODIN 2.0 format; modifications licensed ShareAlike. No trademark rights claimed; trail-of-bits-mark.svg not reused as branding.

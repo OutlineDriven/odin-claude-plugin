@@ -46,7 +46,3 @@ When no backend is pinned, write against the vendor-neutral OpenTelemetry APIs s
 ## Output
 
 Modified target source files carrying structured logs, metrics, tracing setup, and alert definitions; the written on-call questions; the alert list with runbook links; and a verification report marking each check pass or fail. Terminal classification: done (all checks pass) or `blocked` (the named failing, unjustified, or unverifiable item).
-
-## Provenance
-
-Adapted from the odin-current skill at `skills/observability/SKILL.md` (project-owned, no external license). Absorbs the merged candidate `skills/observability-and-instrumentation/SKILL.md` from addyosmani/agent-skills at pinned revision d2c37ef6225dd8726cdd369a8030307f48592d26, SPDX MIT, Copyright (c) 2025 Addy Osmani — an exact contract duplicate whose mechanisms this file carries; derived distributions retain that copyright notice and the MIT permission text. Rewritten to this self-contained, semantic-minimum ODIN skill contract.

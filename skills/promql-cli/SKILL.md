@@ -42,7 +42,3 @@ description: 'Use when a user asks to execute or investigate PromQL or to debug 
 
 ## Output
 Return query results in the requested format (table, csv, json, or graph). On failure, return a diagnosis that names the failure class and includes the server or CLI error message.
-
-## Provenance
-
-Origin: samber/cc-skills, revision f9953962e135235137628ea92d06ea085688031f. License: MIT. Adapted for ODIN 2.0 literal format; source mechanisms preserved without third-party expression.

@@ -49,7 +49,3 @@ The user's request is mandatory. The requester must approve the spec before plan
 ## Output
 
 A reviewed, approved spec saved to a file in the repository covering all six areas, a human-approved plan, a human-approved task list, and implementation that follows that spec through offensive-first TDD. The spec is a living document committed to version control.
-
-## Provenance
-
-Two sources. (1) `current:current-d:current:spec-driven` — existing odin-code skill, origin `current-odin-skill-tree`, no external license, adapted for ODIN 2.0 authoring format and authority contract. (2) `source:source-addy:addy-spec-driven-development` — MIT-licensed skill from addyosmani/agent-skills (Copyright (c) 2025 Addy Osmani; SPDX: MIT; pinned revision d2c37ef6225dd8726cdd369a8030307f48592d26; obligation: retain copyright notice and MIT permission text in derived distributions; otherwise unrestricted use); exact four-field duplicate of current:spec-driven, absorbed into that survivor with no surviving alias.

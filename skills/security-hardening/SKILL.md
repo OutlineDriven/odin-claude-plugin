@@ -51,7 +51,3 @@ description: 'Use when handling untrusted input, auth/authz, data storage, or ex
 ## Output
 
 Hardened source files with security controls applied, plus a verification report listing which checklist items passed and which remain open; if blocked, the classification and named failure class.
-
-## Provenance
-
-Origin: odin-current (`current:current-c:current:security-hardening`). Source path: `skills/security-hardening/SKILL.md`. No external revision or license. Adaptation: threat-model-first process adapted from OWASP; STRIDE table adapted from Microsoft SDL; always-do / ask-first / never-do tier system original to ODIN. MIT-licensed material from addyosmani/agent-skills (`source:source-addy:addy-security-and-hardening`, revision `d2c37ef`, MIT) absorbed via global exact-contract deduplication; no third-party expression copied.

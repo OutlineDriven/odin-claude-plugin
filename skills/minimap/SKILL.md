@@ -41,7 +41,3 @@ No rollback applies because the procedure performs no mutation. Never suppress a
 
 ## Output
 Return either the complete compact view or one exact `blocked: <failure-class>` result with the failing input and reason. The complete view contains only the `conquered`, `disputed`, and `fog` classes; each entry contains a claim, source identities, and the evidence-join justification.
-
-## Provenance
-
-Project-owned clean-room adaptation of the user-named PF-04, INV-04, and INV-07 workflow records. PF-04 supplies the compact read-only view; INV-04 supplies the current-agreement, contradiction, stale-proof, dirty-state, and missing-evidence join; INV-07 supplies the phase-boundary SDD-minimap ownership folded into the same result. No source revision or external license identifier was supplied, so no third-party expression or unverified evidence is incorporated.

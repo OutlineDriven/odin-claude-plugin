@@ -39,7 +39,3 @@ description: 'Use when the user asks to clean up a finished commit message or br
 
 ## Output
 Rewritten local history over the target range: handoff-ready messages, tree byte-identical to original, each commit re-signed with dates preserved by position. Report naming the commit set, backup ref, and verification results (empty diff, dates matched, log carries handoff).
-
-## Provenance
-
-Adapted from `skills/depth/re0-git/SKILL.md` in [LilMGenius/paperthin](https://github.com/LilMGenius/paperthin) at revision `3bca079a51bcfff5dafb53d1d7f9f523d66ee317`, MIT ((c) 2026 LilMGenius). Clean-room adaptation: the commit-economy message-rewrite standard is re-expressed here; no verbatim vendor material from mattpocock/skills is copied. The never-create-or-suggest-a-commit and message-only-tree-identical mechanisms are preserved.

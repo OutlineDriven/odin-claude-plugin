@@ -49,7 +49,3 @@ disable-model-invocation: true
 
 ## Output
 A terminal classification: setup done (all done-predicate checks passed) or blocked (named failure class with the exact failing step). The user is told the result and the agent hands off and stops.
-
-## Provenance
-
-Origin: https://github.com/warpdotdev/warp-factories-skills, revision d91db3403d27c85adf2a57bd642047e29e98a51a. No explicit license exists at that revision; all rights reserved. Clean-room rederivation only — no source expression (prose, YAML frontmatter, structure, or exact bytes) was copied. The observable bootstrap procedure (oz CLI confirmation, login, API-key minting, bearer-token MCP registration, tool-list and list_factories verification, skill-resource readability check) was rederived in ODIN style. The source's refusal to invent an install command is preserved as a contract rule.

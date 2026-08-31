@@ -42,7 +42,3 @@ description: 'Use when a completed agent run must be recorded as durable, querya
 
 ## Output
 One new JSONL line in the run log, an updated last-run pointer, and any retention-pruned expired lines. Terminal classification is one of `recorded`, `rejected-duplicate`, `rejected-invalid-input`, or `blocked`. On `recorded`, aggregate metrics are derivable from the log alone.
-
-## Provenance
-
-Origin: `cobusgreyling/loop-engineering` (`scripts/append-run-log.mjs`, `tools/loop-metrics/src/metrics.ts`). Pinned revision: `d03dcb92cc1e0efb59789a2557131c6ad5897ccc`. License: MIT. Clean-room adaptation: the append-only JSONL run-log composition mechanism with ISO date guard, retention pruning, and last-run pointer is re-expressed as a self-contained ODIN `odin-run` contract; no source expression is copied.

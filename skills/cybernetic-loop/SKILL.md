@@ -45,7 +45,3 @@ No partial retained patch is an output of `non-converged`; its only valid workin
 
 ## Output
 The frozen run contract and one terminal record: `already-holds` (pre-mutation check results, no patch attempted), `restored` (candidate patches, budget, check results, final passing run), or `non-converged` (stop class, all patches and results, budget consumed, checkpoint-restoration proof).
-
-## Provenance
-
-Project-owned adaptation of the user-named priority-five workflow (`priority:priority-five:PF-03`) and its conversation-invented merged mechanism (`invention:inventions:INV-03`). No source revision was supplied and no third-party license applies. The adaptation preserves the finite budget, frozen invariant-plus-check set, monotonic candidate retention, whole-run checkpoint rollback, stop taxonomy, and terminal run transcript without importing third-party expression.

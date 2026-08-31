@@ -50,7 +50,3 @@ disable-model-invocation: true
 
 ## Output
 A loadable MV3 extension under the working directory (manifest, service worker, content scripts, UI surfaces, and build config as needed), or, when publishing is explicitly invoked, a store submission initiated with human-supplied credentials, plus a report listing the surfaces built, the permissions requested, and any failing surface.
-
-## Provenance
-
-Origin: samber/cc-skills, `skills/chrome-extension/SKILL.md`, revision `f9953962e135235137628ea92d06ea085688031f`, MIT. Clean-room adaptation: the procedure is rewritten from the described MV3 extension mechanism (manifest, service worker, content scripts, messaging, storage, permissions, CSP, publishing) without copying the source expression.

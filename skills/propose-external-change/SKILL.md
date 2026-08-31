@@ -44,7 +44,3 @@ Partial-result rule: if a proposal is written before a failure, the file is left
 
 ## Output
 A signed, minimized JSON proposal persisted to local storage. The proposal names the external system, the specific change, the signing identity, and the affected scope. The run halts at the human gate. No mutation of the external system has occurred.
-
-## Provenance
-
-Origin: cobusgreyling/loop-engineering, revision d03dcb92cc1e0efb59789a2557131c6ad5897ccc, license MIT. Adaptation of the safe-write-pattern and github-propose examples for odin-run-advanced. No third-party expression copied directly.

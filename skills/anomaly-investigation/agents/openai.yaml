@@ -1,3 +1,0 @@
-interface:
-  display_name: "Anomaly Investigation"
-  short_description: "Use when a known observed anomaly needs a data-backed root"

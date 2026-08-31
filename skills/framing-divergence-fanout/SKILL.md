@@ -46,7 +46,3 @@ A structured report containing:
 4. Ordered presentation: divergent-incompatible first, compatible second, convergent last.
 5. Convergence-reassurance label on every convergent read.
 6. No consensus, agreement, majority, or weight language anywhere in the report.
-
-## Provenance
-
-Adapted from `skills/depth/macrothink/SKILL.md` in [LilMGenius/paperthin](https://github.com/LilMGenius/paperthin) at revision `3bca079a51bcfff5dafb53d1d7f9f523d66ee317`. Licensed MIT (c) 2026 LilMGenius. Clean-room adaptation preserving the no-majority-vote, no-averaging, no-consensus-verification constraints and the 2-5 read cap. No verbatim vendor material copied.

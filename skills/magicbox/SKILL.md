@@ -53,7 +53,3 @@ Capture divergence in short project cards. Organize them in a later pass, never 
 ## Output
 
 A report listing, per class, each card file written with its one-line statement; duplicates skipped, citing the existing card's path; dropped items with their reasons; and the final card count. Zero cards is a valid terminal outcome and is reported as zero.
-
-## Provenance
-
-Origin: user-curated brief `project-owned:user-curated-skill-ideas`, candidate `curated:curated-ideas:curated-054`, supplementing the user's raw Korean source `project-owned:user-supplied-source-brief`. No upstream revision pin; no third-party license — project-owned curated material. Adaptation: the one-line curated idea was expanded into this bounded capture procedure; the five card classes, the short-card shape, capture-now/organize-later deferral, tracked-project-knowledge storage, and human/agent attribution carry over from the brief.

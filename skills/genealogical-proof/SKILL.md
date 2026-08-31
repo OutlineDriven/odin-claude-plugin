@@ -37,7 +37,3 @@ description: 'Use when a genealogical identity or relationship needs correlation
 ## Output
 
 An immutable K11 receipt with every K11 field, recording the terminal class (success, capped, stalled, blocked, exhausted, or pending) and the proof classification (proved, disproved, likely, or possible) with its proof note.
-
-## Provenance
-
-- Profile P-CATALOG: source https://signals.forwardfuture.com/loop-library/catalog.json. Derived provenance ledger records catalog number, URL, access date, and no-expression-reuse attestation. Expression reuse: none.

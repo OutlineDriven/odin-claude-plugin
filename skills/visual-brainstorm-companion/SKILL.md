@@ -434,32 +434,3 @@ Partial-result rule: after readiness, any failed push or read leaves the named p
 
 ## Output
 The keyed loopback URL, retained session/screen/state dirs, current screen and generation, the resolved visual answer with validated browser events merged, process stop/timeout status, and retention notice for project-local data.
-
-## Provenance
-
-- Roster: module `odin-design-advanced`, slug `visual-brainstorm-companion`, candidate `source:source-superpowers:superpowers-008`, invocation policy `model+human`.
-- Origin: `https://github.com/obra/superpowers`, revision `b36e0829c6d0140e93cfef2ca599b1b07d4a7797`, MIT.
-- Source paths: `skills/brainstorming/visual-companion.md`, `skills/brainstorming/scripts/server.cjs`, `skills/brainstorming/scripts/start-server.sh`, `skills/brainstorming/scripts/stop-server.sh`, `skills/brainstorming/scripts/helper.js`, `skills/brainstorming/scripts/frame-template.html`.
-- Adaptation: preserves the local visual question, browser push, and click-event return mechanism while replacing source process and filesystem handling with a self-contained, fail-closed Bun 1.4.0 design. It has no ODIN peer skill or module dependency.
-- Official Bun API documentation: `Bun.serve`, random port `0`, `server.port`, `server.upgrade`, `server.publish`, `server.stop(true)`, WebSocket topics, and `websocket.maxPayloadLength` are documented at <https://bun.com/docs/runtime/http/server>. Bun `fetch` is documented at <https://bun.com/docs/runtime/networking/fetch>. Direct TypeScript execution is documented at <https://bun.com/docs/runtime/typescript>.
-- Official Node API documentation: cryptographic randomness and constant-time comparison at <https://nodejs.org/api/crypto.html>; `open`, `O_NOFOLLOW`, `FileHandle.stat/read/write/sync/chmod`, `rename`, `realpath`, and directory operations at <https://nodejs.org/api/fs.html>; path operations at <https://nodejs.org/api/path.html>; process signals and handlers at <https://nodejs.org/api/process.html>; fatal UTF-8 decoding at <https://nodejs.org/api/util.html#class-utiltextdecoder>.
-
-Copyright (c) 2025 Jesse Vincent
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.

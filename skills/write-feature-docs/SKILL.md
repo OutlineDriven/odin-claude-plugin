@@ -36,7 +36,3 @@ description: 'Use when an engineer needs a first-pass docs page for a feature. P
 
 ## Output
 Markdown docs file at the target path — sections in order: Overview, Prerequisites, Usage, API Reference, Configuration, Troubleshooting; screenshots embedded or marked pending with count and reasons.
-
-## Provenance
-
-Adapted from Warp common-skills (https://github.com/warpdotdev/common-skills), revision f589e224907eda566c13755529f59db563090d14, under MIT license (Copyright (c) 2026 Denver Technologies, Inc.). Mechanisms rewritten in ODIN style with attribution. No third-party expression copied.

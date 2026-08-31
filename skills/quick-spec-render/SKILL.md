@@ -48,7 +48,3 @@ No partial HTML artifact may survive on disk after any failure. Rollback is dele
 ## Output
 
 A single self-contained HTML file at the specified output path with all styles embedded inline, or on failure no output file and a report naming the failure class and exact error followed by full HTML workflow invocation.
-
-## Provenance
-
-Origin: nicobailon/visual-explainer, revision 7163c3e10660912e0b89e1af465db9f387282b88. License: MIT. Treatment: MIT notice retained; expression reuse or clean-room rederivation permitted. Source mechanisms: flag-gated bounded render path with schema validation, scoped to four outcome types, with mandatory fallback on validation failure.

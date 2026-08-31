@@ -56,7 +56,3 @@ Do not widen scope to find passing scenarios that offset failures. Do not suppre
 
 ## Output
 Gate verdict (PASS or FAIL), run log with full scenario results, filed issues (one per gate failure), and a scheduled post-merge rerun if the gate passes.
-
-## Provenance
-
-Origin: mcollina/skills, skills/skill-optimizer/ (SKILL.md, rules/benchmark-loop.md, rules/activation-design.md, rules/context-budget.md, rules/regression-triage.md, rules/release-gates.md, docs/skill-benchmarking.md, docs/skill-benchmark-runs.md). Pinned revision: 856efd268ae85482d882f3d0bed869fd020b5c06. License: MIT. Treatment: MIT notice retained; mechanism adapted from skill-optimizer benchmark-loop, activation-design, context-budget, regression-triage, and release-gates rules into a single human-only gate skill for the odin-agent module.

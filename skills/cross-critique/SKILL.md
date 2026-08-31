@@ -51,9 +51,3 @@ description: 'Use when independent proposals on a contested decision need struct
 
 ## Output
 A conversational synthesis containing: the recommendation; where authors converged or changed their minds after seeing alternatives; the strongest objection raised and whether it is decisive; why the recommended option survives critique against the decision criteria; and remaining risks, unknowns, and confidence. No repo mutation.
-
-## Provenance
-
-- Origin: github.com/warpdotdev/common-skills, path .agents/skills/cross-critique/SKILL.md, revision f589e224907eda566c13755529f59db563090d14.
-- License: MIT (Copyright (c) 2026 Denver Technologies, Inc.). Permissive adaptation and redistribution; no copyleft obligations.
-- Adaptation: clean-room rewrite in ODIN style. The adversarial cross-examination mechanism — reuse round-one subagents, circulate each proposal only to the other authors, demand structured pros and cons plus a revision/ranking, synthesize by evidence quality — is preserved. Motivational prose, peer-skill pointers, and the final-answer template were cut to semantic minimum.

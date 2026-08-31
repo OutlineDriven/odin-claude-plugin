@@ -49,7 +49,3 @@ Rollback: delete or revert any files created during the current invocation. The 
 ## Output
 
 A scaffolded multi-tenant TypeScript package: tenant model, routing middleware, data-access layer, custom-domain wiring, platform config, tenant management surface, and isolation validation report — ordered by the procedure steps that produced them.
-
-## Provenance
-
-Adapted from `mblode/agent-skills` commit `e97a3b383f5944f90d41eb92b24b4fb3b917a7f9`. Original licensed MIT, Copyright (c) 2026 Matthew Blode. This is a clean-room adaptation — no third-party expression is copied. Reuse constraint: preserve the copyright notice and license text in all copies or substantial portions.

@@ -39,7 +39,3 @@ description: 'Use when reversible work is mixed with irreversible, credential, d
 
 ## Output
 The deliverable plus a descope ledger (one row per risky item: class, verdict, reason, safe alternative, archive destination) and a local archive holding the descoped negatives verbatim — terminal states: complete and undiluted, or failed verification with the failing direction named.
-
-## Provenance
-
-Origin: project-owned skill `skills/autobahn/SKILL.md` from the odin-1.x current tree (candidate current:current-a:current:autobahn), revision unversioned, license project-owned. Adapted to the ODIN 2.0 contract: section order normalized, cross-skill idiom references inlined and rewritten as semantic-minimum self-contained instructions; no third-party expression copied.

@@ -43,7 +43,3 @@ Optional: user-supplied links, constraints, decision criteria, a named incumbent
 
 ## Output
 Either the nine-field graded verdict block or an exact Hold classification with attempted evidence surfaces, retained partial results, and the evidence required to resume — plus, when explicitly requested, one expanded report written to the supplied local path.
-
-## Provenance
-
-Adapted from the project-owned ODIN current `pov` skill (`skills/pov/SKILL.md`), candidate `current:current-c:current:pov`; no pinned revision or external license was supplied. This clean-cutover adaptation retains project-specific evidence floors, tier-sized four-role scouting, deterministic profile-cache invalidation, provenance separation, graded verdicts, and warm-invocation behavior without copying third-party material.

@@ -38,7 +38,3 @@ Required: the user's description of the goal or feature to be planned. Optional 
 
 ## Output
 A task-breakdown report in chat containing an ordered task list with per-task acceptance criteria and scope, dependency order, checkpoints, risks, and open questions — no file written.
-
-## Provenance
-
-Adapted from the MIT-licensed "Planning and Task Breakdown" skill by Addy Osmani, origin `addyosmani/agent-skills`, pinned revision `d2c37ef6225dd8726cdd369a8030307f48592d26`, SPDX `MIT`. The MIT obligation to retain the copyright notice "Copyright (c) 2025 Addy Osmani" and permission text is satisfied in this artifact. Adaptation for ODIN is clean-room: the procedure restates the method as a self-contained, executable contract without copying expression from the source.

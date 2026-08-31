@@ -46,7 +46,3 @@ No external input required. The user's invocation phrase activates the register;
 
 ## Output
 Every response while active is written in the Compacted Formal-logic English register: ASCII-only, keyword connectives, predicate-form facts, quantified rules, explicit gaps, and enumerated-then-recommended choices — the register deactivates when the user signals "stop axiom-mode" or "normal mode".
-
-## Provenance
-
-Origin: ODIN 1.x current skill `skills/axiom-mode/SKILL.md` (revision unpinned, license project-owned). Adaptation: clean-room rewrite preserving the response-register toggle, vocabulary contract, CompactAxiomEnglish construction rules, decision register, token-vs-precision rule, and auto-clarity exception as a self-contained procedure. No third-party expression copied.

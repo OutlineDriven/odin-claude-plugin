@@ -52,7 +52,3 @@ description: 'Prove a decision, state, requirement, or behavior space is fully c
 
 ## Output
 The coverage manifest: every cell with id, description, classification, reason, and executed check, the tally line, the named target space, the wildcard-catch-all assertion for code state spaces, and the dependency-ordered gap list, emitted as human-readable or `exhaustive-manifest/v1` YAML on request.
-
-## Provenance
-
-Origin: ODIN 1.x current skill `skills/exhaustive/SKILL.md` (origin id `odin-1.x-current-skill`), project-owned; no pinned source revision; no third-party license applies. Adapted to the ODIN 2.0 literal contract; the target-space taxonomy, tool-backed enumeration, per-cell executed checks, covered/gap/deferred classification, tally, wildcard-catch-all assertion, dependency-ordered gaps, re-enumeration stop rule, and `exhaustive-manifest/v1` output are preserved mechanisms. No third-party expression copied.

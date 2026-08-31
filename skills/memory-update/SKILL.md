@@ -42,7 +42,3 @@ A memory type must be `feedback`, `project`, `user`, or `reference`. Its filenam
 ## Output
 
 Return the accepted, rejected, and blocked proposal classifications; for each successful write, return its evidence turn IDs or explicit user statement, memory path, index entry, and read-back line count. The terminal result is `done` only when all confirmed writes pass YAML and content verification; otherwise it is `blocked` with the exact failure and recovery state.
-
-## Provenance
-
-Project-owned adaptation of `skills/memory-update/SKILL.md` from the `odin-current` source. No source revision or license identifier was supplied. This version preserves deterministic session scanning, evidence citation, per-proposal confirmation, duplicate detection, constrained durable writes, and read-back validation while restating the workflow as a self-contained contract.

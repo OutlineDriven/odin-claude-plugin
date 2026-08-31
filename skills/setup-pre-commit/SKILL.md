@@ -48,7 +48,3 @@ description: 'Use when installing or repairing one repository-local pre-commit h
 ## Output
 
 The selected manager, config and manifest paths changed, installed hook path, all-files command and output, failing-probe evidence, passing-probe evidence, and rollback command; the repository has one pre-commit owner and no superseded formatter, linter, or type checker introduced by this skill.
-
-## Provenance
-
-Origin: odin-current (`skills/setup-pre-commit/SKILL.md`). Project-owned; no third-party license applies. Re-derived for one-owner hooks and the current pnpm, Biome, uv, ruff, pyright, prek, Lefthook, Go, Rust, and OCaml toolchains.

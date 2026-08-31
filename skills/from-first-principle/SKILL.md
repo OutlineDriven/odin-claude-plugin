@@ -44,7 +44,3 @@ Required: the target to rebuild (a design, an organization, or an API) and acces
 ## Output
 
 A local first-principles rebuild specification artifact: enumerated primitives, derived structure, per-element derivation steps, change/elimination diff against the existing target, and open assumptions — in that order.
-
-## Provenance
-
-Origin: `project-owned:user-curated-skill-ideas` (user-curated one-line workflow: "rebuild a design, organization, or API from primitives"). Revision: null. License: project-owned. Adaptation: clean-room expansion of the curated one-line workflow into a bounded local-write procedure with explicit primitive enumeration, derivation recording, and open-assumption handling.

@@ -35,7 +35,3 @@ Input or path validation failure, an unidentifiable subject, unavailable groundi
 
 ## Output
 On success, return the canonical `docs/ideation/<slug>.md`, optional parity-checked `docs/ideation/<slug>.html`, the exact committed path list and local commit identifier, counts of raw candidates, survivors, and rejections, and an intent-clarification prompt based only on the Reviewer's survivors. On failure, return the terminal blocked or non-converged classification, the failed gate, any partial files, and the precise rollback action; do not return a success classification.
-
-## Provenance
-
-Project-owned clean adaptation of the ODIN 1.x `ideate` skill at `skills/ideate/SKILL.md`, candidate `current:current-b:current:ideate`. No source revision or license identifier was supplied. This version preserves grounded axis–frame divergence, single-dispatch parallel generation, reject-by-default criticism, single-Reviewer adjudication, survivor and rejection accounting, canonical Markdown with opt-in HTML parity, read-back verification, scoped staging, reversible local recovery, and the stop before planning or implementation without retaining source-specific cross-file dependencies.

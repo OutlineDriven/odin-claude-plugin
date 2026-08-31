@@ -51,7 +51,3 @@ Partial results: state exactly which threads were replied and resolved and which
 - One reply per handled thread quoting the original finding with its outcome.
 - All handled threads resolved via GraphQL; `needs-human` threads left open with replies posted.
 - A summary report with per-thread dispositions (`fix`, `not-addressing`, `declined`, `replied`, `needs-human`) and the verify result from `scripts/get-pr-comments`.
-
-## Provenance
-
-Project-owned, adapted from the ODIN current skills tree source `skills/resolve-pr-feedback/SKILL.md` (project-owned marker; no upstream revision pin). The four GraphQL scripts are retained verbatim. The full-mode and targeted-mode references, evaluation rubric, and fixer-prompt asset were inlined into this file so the skill is self-contained; the mechanism (single central fetch, one legitimacy gate, generic fixer subagents, quoted replies, GraphQL resolution, verify by refetch) is preserved unchanged.

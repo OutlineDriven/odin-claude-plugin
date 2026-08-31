@@ -1,3 +1,0 @@
-interface:
-  display_name: "GH Fix CI"
-  short_description: "Use when the user asks to debug or fix failing CI on a GitHub"

@@ -2,7 +2,7 @@
 
 OutlineDriven-authored material in this package is Apache-2.0. See the repository `LICENSE`.
 
-This package ships 89 public skills from the canonical `skills/<slug>/` tree. Package-local skill copies are generated only at pack time.
+This package ships 81 public skills from the canonical `skills/<slug>/` tree. Package-local skill copies are generated only at pack time.
 
 | Skill | Strategy | Adaptation | Target | Origin |
 |---|---|---|---|---|
@@ -14,11 +14,9 @@ This package ships 89 public skills from the canonical `skills/<slug>/` tree. Pa
 | `browser-cookie-store` | R | rename-only | `skills/browser-cookie-store/` | - Origin: https://github.com/garrytan/gstack, path setup-browser-cookies/SKILL.md. - Revision: 07b59e396c6be5a86619a43151cb9ed62a15ae69. - License: MIT, Copyright (c) 2026 Garry Tan; retain the copyright and permission notice in copies. - Adaptation: clean-room re-derivation of the cookie-import procedure; no third-party expressive prose copied. |
 | `browser-qa` | G | structured-merge-rewrite | `skills/browser-qa/` | Adapted from the QA pass in https://github.com/garrytan/gstack (revision 07b59e396c6be5a86619a43151cb9ed62a15ae69), licensed MIT (Copyright (c) 2026 Garry Tan). Clean-room re-derivation of the report-only variant that skips the fix loop; no upstream expression copied wholesale. |
 | `canary-deploy` | R | rename-only | `skills/canary-deploy/` | Origin: https://github.com/garrytan/gstack, path canary/SKILL.md, revision 07b59e396c6be5a86619a43151cb9ed62a15ae69. License: MIT (Copyright (c) 2026 Garry Tan), blob 35029511144443297cad2d26e4bac17d0e352f93. Clean-room adaptation: the canary deploy, metric watch, and promote-or-rollback-with-evidence mechanism is re-derived, not copied. |
-| `capture-consent-gate` | B | byte-reuse | `skills/capture-consent-gate/` | https://github.com/microsoft/skill-recorder @ `c7f2fe4402527a0eb7f4fc1b653bf438229bac61` (MIT) |
 | `cherrypick-to-release` | B | byte-reuse | `skills/cherrypick-to-release/` | https://github.com/warpdotdev/client-release-agent-oss @ `9c1394804c5148820a9bab6c01802fde4330d725` (MIT) |
 | `chrome-mcp-troubleshooting` | B | byte-reuse | `skills/chrome-mcp-troubleshooting/` | https://github.com/trailofbits/skills @ `d1f1575cff97816e5cc08af66cd2506099c681d3` (CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.) |
 | `close-done` | B | byte-reuse | `skills/close-done/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
-| `create-pr` | B | byte-reuse | `skills/create-pr/` | https://github.com/warpdotdev/common-skills @ `f589e224907eda566c13755529f59db563090d14` (MIT) |
 | `create-pull-request` | B | byte-reuse | `skills/create-pull-request/` | https://github.com/warpdotdev/oz-skills @ `6c08c49fc6c51b8f768bf8c53c041bc06a160765` (MIT) |
 | `cut-new-release-candidate` | B | byte-reuse | `skills/cut-new-release-candidate/` | https://github.com/warpdotdev/client-release-agent-oss @ `9c1394804c5148820a9bab6c01802fde4330d725` (MIT) |
 | `cycle-memo` | B | byte-reuse | `skills/cycle-memo/` | https://github.com/LilMGenius/paperthin @ `3bca079a51bcfff5dafb53d1d7f9f523d66ee317` (MIT) |
@@ -27,9 +25,7 @@ This package ships 89 public skills from the canonical `skills/<slug>/` tree. Pa
 | `duet` | B | byte-reuse | `skills/duet/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `fail-recover` | B | byte-reuse | `skills/fail-recover/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `finish-branch-menu` | B | byte-reuse | `skills/finish-branch-menu/` | https://github.com/obra/superpowers @ `b36e0829c6d0140e93cfef2ca599b1b07d4a7797` (MIT) |
-| `fix-ci` | B | byte-reuse | `skills/fix-ci/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
 | `fix-p0-issues` | B | byte-reuse | `skills/fix-p0-issues/` | warpdotdev/competitive-intelligence-agent-oss @ `9e0363e810a14405ef876fb354562735002797fb` (MIT) |
-| `frontier-tickets` | B | byte-reuse | `skills/frontier-tickets/` | mattpocock/skills @ `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76` (MIT) |
 | `gate-and-merge` | G | structured-merge-rewrite | `skills/gate-and-merge/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `gh-review-requests` | B | byte-reuse | `skills/gh-review-requests/` | getsentry/skills @ `c2f99a5b04b4cd992ec3022d7c2c3e23e938d241` (Apache-2.0) |
 | `git-cleanup` | B | byte-reuse | `skills/git-cleanup/` | https://github.com/trailofbits/skills @ `d1f1575cff97816e5cc08af66cd2506099c681d3` (CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.) |
@@ -48,21 +44,17 @@ This package ships 89 public skills from the canonical `skills/<slug>/` tree. Pa
 | `land-contribution` | B | byte-reuse | `skills/land-contribution/` | https://github.com/LilMGenius/paperthin @ `3bca079a51bcfff5dafb53d1d7f9f523d66ee317` (MIT) |
 | `loop-me` | G | structured-merge-rewrite | `skills/loop-me/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `make-pr-easy-to-review` | B | byte-reuse | `skills/make-pr-easy-to-review/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
-| `narration-analysis-pipeline` | B | byte-reuse | `skills/narration-analysis-pipeline/` | https://github.com/microsoft/skill-recorder @ `c7f2fe4402527a0eb7f4fc1b653bf438229bac61` (MIT) |
 | `new-branch-and-pr` | B | byte-reuse | `skills/new-branch-and-pr/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
 | `new-space` | B | byte-reuse | `skills/new-space/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `next-best-action` | B | byte-reuse | `skills/next-best-action/` | https://github.com/LilMGenius/paperthin @ `3bca079a51bcfff5dafb53d1d7f9f523d66ee317` (MIT) |
 | `notion-writer` | B | byte-reuse | `skills/notion-writer/` | warpdotdev/competitive-intelligence-agent-oss @ `9e0363e810a14405ef876fb354562735002797fb` (MIT) |
-| `offline-frame-extraction` | B | byte-reuse | `skills/offline-frame-extraction/` | https://github.com/microsoft/skill-recorder @ `c7f2fe4402527a0eb7f4fc1b653bf438229bac61` (MIT) |
 | `open-source-license-selection` | B | byte-reuse | `skills/open-source-license-selection/` | https://github.com/trailofbits/skills @ `d1f1575cff97816e5cc08af66cd2506099c681d3` (CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.) |
-| `os-activity-collectors` | B | byte-reuse | `skills/os-activity-collectors/` | https://github.com/microsoft/skill-recorder @ `c7f2fe4402527a0eb7f4fc1b653bf438229bac61` (MIT) |
 | `planning` | B | byte-reuse | `skills/planning/` | mblode/agent-skills @ `e97a3b383f5944f90d41eb92b24b4fb3b917a7f9` (MIT) |
 | `post-daily-new-issues` | B | byte-reuse | `skills/post-daily-new-issues/` | https://github.com/warpdotdev/client-release-agent-oss @ `9c1394804c5148820a9bab6c01802fde4330d725` (MIT) |
 | `post-merge-cleanup` | B | byte-reuse | `skills/post-merge-cleanup/` | cobusgreyling/loop-engineering @ `d03dcb92cc1e0efb59789a2557131c6ad5897ccc` (MIT) |
 | `post-release-status` | B | byte-reuse | `skills/post-release-status/` | https://github.com/warpdotdev/client-release-agent-oss @ `9c1394804c5148820a9bab6c01802fde4330d725` (MIT) |
 | `post-to-slack` | B | byte-reuse | `skills/post-to-slack/` | warpdotdev/competitive-intelligence-agent-oss @ `9e0363e810a14405ef876fb354562735002797fb` (MIT) |
 | `pr-link-issue` | B | byte-reuse | `skills/pr-link-issue/` | getsentry/skills @ `c2f99a5b04b4cd992ec3022d7c2c3e23e938d241` (Apache-2.0) |
-| `pr-triage` | G | structured-merge-rewrite | `skills/pr-triage/` | Origin: EveryInc/compound-engineering-plugin, file `.claude/commands/triage-prs.md`, revision `a1f601f17137f648be439965f8fdd9123303de5d`. License: MIT (Copyright (c) 2025 Every). Mechanisms extracted and rewritten in ODIN style; not copied verbatim. Attribution preserved in the root provenance ledger per MIT notice-retention obligation. |
 | `prepare-repository-for-public-release` | B | byte-reuse | `skills/prepare-repository-for-public-release/` | https://github.com/trailofbits/skills @ `d1f1575cff97816e5cc08af66cd2506099c681d3` (CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.) |
 | `propose-issue` | B | byte-reuse | `skills/propose-issue/` | odin-current @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `publish-branch` | G | structured-merge-rewrite | `skills/publish-branch/` | Origin: ODIN 1.x `commit-push-current` skill (`skills/commit-push-current/SKILL.md`). Revision: unpinned (current). License: project-owned. Adaptation: restated to the ODIN 2.0 contract format with the complete atomic-commit mechanism inlined (concern grouping, revert test, mechanism split via filtered patch and `git apply --cached` with first-split confirmation, sweep and build-order rules, native verification gate, named-file staging over `git add -A`, heredoc message preservation, post-commit status and hash proof), cross-skill pointers removed, and the human-only invocation gate and push-to-origin contract added. |

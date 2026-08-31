@@ -54,10 +54,3 @@ description: 'Use after a non-trivial change lands or is abandoned to capture th
 ## Output
 
 A new or updated entry in the topic file (Decision, Rejected alternative(s) with reason, Reason, Type, Status, Evidence, Source/Verification, and conflict flags where applicable), or the uncommitted fields if confirmation was refused or the trigger did not fire.
-
-## Provenance
-
-Origin: https://github.com/oliver-zehentleitner/keep-the-why
-Revision: c01597a506efa24652d7ecb9e18b6a8ccc97b175
-License: MIT — Copyright (c) 2026 Oliver Zehentleitner. Retain the copyright notice and this permission notice in all copies or substantial portions of the Software. No other obligations; verified at pinned SHA.
-Adaptation: Clean-room adaptation for ODIN 2.0: the artifact-state-change trigger class replaces the source's change-completion event; the zero-diff abandoned-change clause is preserved verbatim; reversible-local authority restricts writes to the context directory; the confirmation gate, conflict-open flagging, and proportionality gate are new. No expression copied directly.

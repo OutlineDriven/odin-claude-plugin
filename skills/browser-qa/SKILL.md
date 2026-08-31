@@ -37,7 +37,3 @@ description: 'Use when the user runs /browser-qa to run the QA verification pass
 
 ## Output
 One local QA report file containing per-check status and findings, plus the same findings returned as the result. No fixes are applied.
-
-## Provenance
-
-Adapted from the QA pass in https://github.com/garrytan/gstack (revision 07b59e396c6be5a86619a43151cb9ed62a15ae69), licensed MIT (Copyright (c) 2026 Garry Tan). Clean-room re-derivation of the report-only variant that skips the fix loop; no upstream expression copied wholesale.

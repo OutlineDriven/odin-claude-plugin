@@ -37,7 +37,3 @@ A documentation source must be supplied: a file path, directory, or URL that is 
 
 ## Output
 One self-contained HTML canvas artifact at the stated path containing a navigable overview, rendered sections, and a sources list, plus a one-line report naming the output path and the section count.
-
-## Provenance
-
-Adapted from the cursor/plugins `docs-canvas` outline (revision `68836ddaf5697224520f1847d90cdb90ca8babaa`, MIT). The published outline was explicitly incomplete; this is a clean-room adaptation that preserves the interactive-documentation-canvas mechanism without copying third-party expression.

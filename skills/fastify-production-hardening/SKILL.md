@@ -40,7 +40,3 @@ Optional: a target base URL for load/profiling checks (defaults to a local insta
 
 ## Output
 A Fastify service with production hardening config applied, plus a committed performance baseline report. Terminal classification: hardened-and-baselined, or blocked with the named missing concern.
-
-## Provenance
-
-Origin: mcollina/skills (skills/fastify/rules/performance.md, cors-security.md, http-proxy.md, logging.md, deployment.md). Pinned revision: 856efd268ae85482d882f3d0bed869fd020b5c06. License: MIT; notice retained, mechanism adapted. Adaptation: consolidated the five rule files into one self-contained production-hardening procedure with explicit load-shedding, redaction, and baseline steps.

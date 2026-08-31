@@ -43,7 +43,3 @@ description: 'Use when asked to find duplication, check consistency, establish o
 ## Output
 
 A structured report: canonical home path and completeness status, occurrences by type (canonical, copy, partial, stale, out-of-scope), contradictions found and their resolutions, the mutation plan presented to the human, the mutations executed (after approval), and the validation results against the done predicate.
-
-## Provenance
-
-Origin: https://github.com/LilMGenius/paperthin | Revision: 3bca079a51bcfff5dafb53d1d7f9f523d66ee317 | License: MIT (c) 2026 LilMGenius. NOTICE: this skill vendors verbatim material from mattpocock/skills (MIT, (c) 2026 Matt Pocock) with per-source attribution. Retain the MIT copyright+permission notice for substantial reuse; per-source attribution obligation binds only verbatim vendor material, which the foundry does not copy. Adaptation: clean-room reimplementation of consolidate-to-one-home with added occurrence-taxonomy audit phase, fold-unique-details-first ordering, trust/permission-boundary consent rule, and fold-audit-into-mutator ordering enforced as a hard precondition. Slug collision resolved: renamed from lilmgenius-paperthin-consolidate-to-one-home to ssotize-audit-fold.

@@ -51,7 +51,3 @@ description: 'Use when asked to derive the general rule a request carries when i
 ## Output
 
 A generalization contract: the case set (each case marked positive/negative with features), candidate rules (weight, status, killing case), surviving rule, invariant attributes, incidental attributes, boundary (covers, excludes, nearest excluded neighbour), and probe (item, basis, resolved-by) — for a data drop, also the inferred intent as a proposal to confirm; on structured-output request, a fenced `generalization/v1` YAML block.
-
-## Provenance
-
-Origin: ODIN 1.x current skill `skills/generalize-from-cases/SKILL.md` (project-owned, no third-party license evidence). Revision: unpinned current. License: project-owned. Adaptation: clean-room rewrite to the ODIN 2.0 self-contained literal contract; rule-recovery mechanism (case set, feature split, invariant/incidental, rival rules, evidence-first probe, bounded rule) preserved, peer-skill and tool-contract pointers removed.

@@ -42,7 +42,3 @@ Optional but cited when present: QA evidence, user complaints, screenshots, tran
 
 ## Output
 A local memo of evidence-backed lessons, anti-patterns, and gates, plus a next-cycle plan of contracts, gates, and vocabulary. Together they let a fresh agent preserve working assets, discard misleading progress, and test the failure gates first without reading the whole old session.
-
-## Provenance
-
-Adapted from LilMGenius/paperthin, `skills/coil/re0-memo/SKILL.md`, revision 3bca079a51bcfff5dafb53d1d7f9f523d66ee317 (MIT, (c) 2026 LilMGenius). Clean-room adaptation: the cycle-retrospective extraction mechanism is re-expressed as a self-contained odin-run procedure; no verbatim vendor material is copied.

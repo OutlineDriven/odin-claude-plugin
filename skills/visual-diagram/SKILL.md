@@ -60,9 +60,3 @@ Rollback: `rm <written-filename>` restores the pre-invocation state.
 
 ## Output
 One self-contained HTML file at `<user diagrams directory>/<derived-filename>.html`, opened in the browser or its path reported.
-
-## Provenance
-
-Origin: nicobailon/visual-explainer (MIT), revision 7163c3e10660912e0b89e1af465db9f387282b88.
-License: MIT — MIT notice retained; expression reuse or clean-room rederivation permitted.
-Adaptation: self-contained HTML diagram generation rederived for odin-create module; trigger and authority preserved; provenance paths used as reference template structure only.

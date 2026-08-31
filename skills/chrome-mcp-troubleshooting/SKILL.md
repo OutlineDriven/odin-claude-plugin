@@ -53,7 +53,3 @@ description: 'Use when Claude-in-Chrome MCP tools on macOS report a disconnected
 
 ## Output
 A terminal classification stating which native host is active, whether its expected socket exists, and whether a restarted client connects, with the one active config and the one `.disabled` config named; no partial success is reported as done.
-
-## Provenance
-
-Origin: https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3, file `/plugins/claude-in-chrome-troubleshooting/skills/chrome-mcp-troubleshooting/SKILL.md`. License CC-BY-SA-4.0; preserve Trail of Bits attribution and the source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding. Original skill by @jeffzwang (ExaAILabs). This is a clean-room adaptation: the diagnosis-and-repair mechanism is restated in ODIN contract form without copying the source prose or scripts.

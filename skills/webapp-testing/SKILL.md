@@ -43,10 +43,3 @@ Partial-result rule: if evidence was captured before the failure, surface it in 
 
 ## Output
 Test exit code with stdout/stderr summary, screenshot file paths and console log output if captured, and a verdict: `PASS` (script exited zero) or `FAIL` with evidence file paths (non-zero).
-
-## Provenance
-
-- Origin: https://github.com/warpdotdev/oz-skills
-- Revision: 6c08c49fc6c51b8f768bf8c53c041bc06a160765
-- License: Apache-2.0 (attribution notices preserved; not relicensed under MIT)
-- Adaptation: Clean-room adaptation of the warpdotdev/oz-skills webapp-testing source into an ODIN 2.0 skill for the odin-code module. Front-matter description, contract table, procedure steps, failure classes, and output section are original expressions derived from the source mechanism. No third-party expression copied.

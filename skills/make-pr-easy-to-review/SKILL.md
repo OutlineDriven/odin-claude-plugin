@@ -43,7 +43,3 @@ Required: the pull request or local branch, its base ref, and the human's reques
 ## Output
 
 Return the proposed pull request title and description, an ordered reviewer path, a risk-to-path-and-evidence table, and a terminal classification. For an approved successful rewrite, also return the original and rewritten tip identifiers, recovery ref, identical pre- and post-rewrite tree identifier, and `ready-local`. For annotation-only work, return `annotated`. For failure, return exactly the applicable `blocked`, `not-authorized`, or `tree-mismatch` result with recovery status.
-
-## Provenance
-
-Adapted from `cursor/plugins`, path `cursor-team-kit/skills/make-pr-easy-to-review/SKILL.md`, pinned at revision `68836ddaf5697224520f1847d90cdb90ca8babaa`. Source license: MIT, as declared by the repository README and candidate plugin manifest in the pinned source audit. This version restates the consent-gated history rewrite and tree-identity proof as a self-contained ODIN procedure.

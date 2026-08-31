@@ -1,6 +1,6 @@
 ---
 name: entry-point-analyzer
-description: 'Use when mapping state-changing external entry points in a smart-contract codebase by access level. Returns signatures, access classification, restriction evidence, and callbacks. Not for command argument routing — use entry-points-command.'
+description: 'Use when mapping state-changing external entry points in a smart-contract codebase by access level. Returns signatures, access classification, restriction evidence, and callbacks. A human-invoked entry-points command with an optional directory is a supported invocation form.'
 ---
 
 # Entry point analyzer
@@ -19,6 +19,10 @@ description: 'Use when mapping state-changing external entry points in a smart-c
 - A smart-contract codebase path (required). Supported languages: Solidity (`.sol`), Vyper (`.vy`), Solana/Rust (`.rs` with a `Cargo.toml` containing `solana-program`), Move Sui (`.move` with a `Move.toml` containing `edition`), Move Aptos (`.move` with a `Move.toml` containing `Aptos`), TON (`.fc`/`.func`/`.tact`), and CosmWasm (`.rs` with a `Cargo.toml` containing `cosmwasm-std`).
 - An optional directory filter restricting analysis to a subpath.
 - An optional project name for the report header.
+
+## Invocation
+
+The human-invoked `entry-points` command is a supported entry: pass an optional directory path to bound the scope. With no argument, the current working directory is the scope. Resolve the directory to an absolute path and confirm it exists before analysis; stop and report an unresolved path rather than defaulting silently or widening scope. The optional directory filter in the procedure handles this bound.
 
 ## Procedure
 
@@ -47,7 +51,3 @@ description: 'Use when mapping state-changing external entry points in a smart-c
 
 ## Output
 A markdown report with header (project, timestamp, scope, languages, focus), summary count table (Public/Role-Restricted/Restricted/Contract-Only/Total), per-category tables with Function/File/Restriction/Notes, Files Analyzed list with per-file counts, and Analysis Warnings for unparsable files or Slither fallbacks.
-
-## Provenance
-
-Origin: https://github.com/trailofbits/skills, pinned revision d1f1575cff97816e5cc08af66cd2506099c681d3, source path /plugins/entry-point-analyzer/skills/entry-point-analyzer/SKILL.md. License: CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3. Preserve Trail of Bits attribution and the source link; mark modifications; license adaptations ShareAlike; claim no trademark rights; never reuse trail-of-bits-mark.svg as branding. Adaptation statement: clean-room adaptation preserving the entry-point extraction, access-classification, callback-tracking, and Slither-integration mechanism as a self-contained procedure with no external reference files or peer-skill dependencies.

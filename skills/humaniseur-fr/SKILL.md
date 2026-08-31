@@ -121,9 +121,3 @@ Apply per-sentence. Stop scanning once a sentence has received its two-class cap
 
 ## Output
 Return the rewritten French text in the preserved register, with no more than two pattern-class fixes per sentence, and no pattern fixed in more than 80 % of its instances across the whole text.
-
-## Provenance
-
-**Origin:** adapted from `` samber/cc-skills ``, revision `` f9953962e135235137628ea92d06ea085688031f ``, MIT license.
-**Source mechanism:** French de-AI-ification across a 38-pattern catalog with register preservation (soutenu stays soutenu), 80 % rule, and one pass only.
-**Changes from source:** pattern catalog translated and expanded for French-specific AI tells; procedure adapted for French grammar and register conventions; no additional runtime dependencies.

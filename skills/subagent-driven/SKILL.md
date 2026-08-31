@@ -51,7 +51,3 @@ Required: an ordered multi-task plan file. The plan defines task boundaries, fil
 ## Output
 
 Atomic commits per task on a branch, each preceded by a review package file and followed by a reviewer verdict. Durable ledger file at `.outline/sdd/progress.md` tracking completion state. Whole-branch review dispatched and resolved. Final ship via ODIN atomic path.
-
-## Provenance
-
-Origin: current-odin-skill-tree. Revision: null (live skill). License: project-owned. Adaptation: current body from `skills/subagent-driven/SKILL.md` reformatted to the literal schema; all support files (implementer-prompt.md, task-reviewer-prompt.md, review-package, task-brief, sd-workspace) are retained verbatim from the live skill's support paths. No third-party expression copied.

@@ -40,7 +40,3 @@ description: 'Use when asked for a research-backed answer requiring codebase and
 ## Output
 
 A sourced answer with file paths and line ranges for every cited claim, `code`/`docs`/`inference` labels, acknowledged uncertainty, and a refusal statement if the user requested file changes.
-
-## Provenance
-
-Adapted from warpdotdev/oz-skills `.agents/skills/slack-qa-investigate/SKILL.md` at revision 6c08c49fc6c51b8f768bf8c53c041bc06a160765. Licensed MIT (Copyright 2026 Warp). Clean-room adaptation for the odin-research module: restructured into Contract/Procedure/Failure/Output sections, consolidated prohibitions into authority binding, removed motivational prose.

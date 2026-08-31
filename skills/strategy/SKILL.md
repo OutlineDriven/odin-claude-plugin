@@ -65,10 +65,3 @@ The reject-by-default gate runs in order: (1) Specific, not vague — names a co
 ## Output
 
 One `STRATEGY.md` written to the operating repository root, read back to confirm, and staged. A clean "not enough to anchor yet" is a valid terminal output when required sections cannot clear the gate.
-
-## Provenance
-
-- Origin: current-odin-skill-tree
-- Source: `skills/strategy/SKILL.md`
-- License: project-owned
-- Adaptation: restructured per skill-foundry-literal-authoring-contract section order; intellectual grounding from Richard Rumelt's *Good Strategy Bad Strategy* retained as framing note; constitutional rules embedded as operational imperatives in Procedure.

@@ -48,7 +48,3 @@ description: 'Name a codebase field (dark, red, blue, or brown) with one-fact ev
 ## Output
 
 A chat report naming the field, its one-fact evidence, the first corrective action executed, files touched, the rollback path, the verification result, and the next action for the field; darkfield also leaves the one newcomer-doc artifact — greenfield is reached when a re-diagnosis assigns no color to any scoped subsystem.
-
-## Provenance
-
-Project-owned. Origin: the project's own ODIN skill tree at `skills/to-greenfield/SKILL.md`; no external source and no third-party license apply. Adapted for ODIN 2.0: the per-field peer-skill routing was replaced by direct execution of the bounded first corrective action under this skill's reversible-local authority; the field taxonomy, precedence, one-fact evidence rule, per-subsystem field maps, and first-action definitions are preserved.

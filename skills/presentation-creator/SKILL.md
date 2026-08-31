@@ -51,7 +51,3 @@ description: 'Use when asked to create a deck, presentation, pitch deck, speaker
 
 ## Output
 A complete deck artifact containing: - The full slide deck in the requested format (markdown or web-deck HTML). - A story spine summary showing the narrative throughline. - Speaker notes for every slide. - Visual design specifications (palette, typography, layout templates). - QA pass results listing any issues found and their resolution status.
-
-## Provenance
-
-Adapted from `mblode/agent-skills` (`skills/presentation-creator/SKILL.md`), revision `e97a3b383f5944f90d41eb92b24b4fb3b917a7f9`. Licensed under MIT, Copyright (c) 2026 Matthew Blode. This is a clean-room adaptation; no third-party expression was copied. The original license notice and text must be preserved in all copies or substantial portions.

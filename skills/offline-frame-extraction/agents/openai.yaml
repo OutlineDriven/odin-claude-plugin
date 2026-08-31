@@ -1,3 +1,0 @@
-interface:
-  display_name: "Offline Frame Extraction"
-  short_description: "Use when a recording ends or a describer requests frame"

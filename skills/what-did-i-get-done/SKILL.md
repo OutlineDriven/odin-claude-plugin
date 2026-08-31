@@ -40,10 +40,3 @@ Partial-result rule: if some steps succeed, return what was gathered; stop on th
 
 ## Output
 Chat text containing a concise dated status update: the range label, commit count, per-commit lines (`<hash> <date> <subject>`), and author summary if available.
-
-## Provenance
-
-- **Origin**: `cursor/plugins` — `cursor-team-kit/skills/what-did-i-get-done/SKILL.md`
-- **Source revision**: `68836ddaf5697224520f1847d90cdb90ca8babaa`
-- **License**: MIT — declared by the `cursor/plugins` root README and the candidate plugin manifest
-- **Adaptation**: Clean-room adaptation for ODIN 2.0 `odin-research` module; authority narrowed to read-only; output bounded to chat text only; no external dependency on cursor/plugins code.

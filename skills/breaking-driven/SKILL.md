@@ -43,7 +43,3 @@ A named path or identified target must be supplied or named in the request and d
 
 ## Output
 Each target produces a clean demolition: consumer contract restated, replacement derived from it, every old behavior classified essential or residue, residue deleted, essential behaviors tested, target committed atomically with verifier green — a repo-wide campaign produces one such commit per target in ranked order.
-
-## Provenance
-
-Origin: ODIN 1.x current skill `skills/breaking-driven/SKILL.md`. No pinned revision or third-party license; project-owned marker. Clean-room adaptation to the ODIN 2.0 literal contract: frontmatter and section order rewritten, while the load-bearing mechanism — bloat-triggered demolition, consumer-contract re-derivation, interior/boundary classification, exhaustive divergence audit, residue cutting, essential-behavior tests, and atomic per-target commits — is preserved.

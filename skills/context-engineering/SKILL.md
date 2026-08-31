@@ -37,11 +37,3 @@ description: 'Use when a long session has accumulated stale or conflicting conte
 
 ## Output
 Refreshed acting context (only provably current, minimal items) → user-facing list of dropped items with reasons → optional scratch state note. Unsettled items listed separately and remain flagged.
-
-## Provenance
-
-Adapted from addyosmani/agent-skills, skills/context-engineering/SKILL.md, pinned revision d2c37ef6225dd8726cdd369a8030307f48592d26 (MIT). Copyright (c) 2025 Addy Osmani. This is a clean-room adaptation: the mechanism of refreshing stale or contradicted context from source and keeping acting context minimal is re-expressed; no third-party expression is copied.
-
-Retained MIT permission text for Copyright (c) 2025 Addy Osmani:
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

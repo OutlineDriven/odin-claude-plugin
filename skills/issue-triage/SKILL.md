@@ -48,8 +48,3 @@ Partial-result rule: if Slack post succeeded but tracker issue creation failed, 
 ## Output
 
 One JSON object: verdict (ack|defer|escalate|close|track), slack_reply_ts, tracker_issue_url (null when verdict is not track or creation was skipped as duplicate), and is_duplicate.
-
-## Provenance
-
-Origin: `cursor/plugins` at revision `68836ddaf5697224520f1847d90cdb90ca8babaa`.
-License: MIT. Source: pstack/automations/benny/skills/triage-issue-reports/SKILL.md and pstack/automations/benny/skills/triage-issue-reports/references/routing.example.md. Authored by Lauren Tan (poteto) under MIT license (pstack/LICENSE blob `6b5400237fdf6545be0b8fae370d6f2fcff8fb25`, 1067 bytes). Adaptation: clean-room rewrite. All expressions restated; no third-party expression copied.

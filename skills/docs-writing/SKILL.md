@@ -42,7 +42,3 @@ Optional: an existing Diataxis map of the doc set; a scope limit naming which fi
 
 ## Output
 The rewritten or restructured documentation files in the target directory, plus a report listing each doc's Diataxis type and the audit result (pass, unmet criterion, or blocked).
-
-## Provenance
-
-Adapted clean-room from mblode/agent-skills `skills/docs-writing`, revision e97a3b383f5944f90d41eb92b24b4fb3b917a7f9, MIT license (Copyright (c) 2026 Matthew Blode). The rule-based audit criteria are derived from the source rule-file names; no third-party expression is copied.

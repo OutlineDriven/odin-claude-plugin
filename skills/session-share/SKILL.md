@@ -49,8 +49,3 @@ disable-model-invocation: true
 ## Output
 
 On success, a valid shareable Beam URL plus confirmation that the published payload contains only visible user/assistant messages and aggregate tool counts; on failure, a blocked result naming the failure class with no URL published.
-
-## Provenance
-
-- Origin: https://github.com/openclaw/agent-skills, revision ae75f60e8d454f1cf44ec4613e10ec9ea7f2ade7, MIT license (LICENSE).
-- Adaptation: clean-room adaptation preserving transcript targeting rules, the redaction contract, HTTPS/authentication, and session-end hook commands as configuration examples; synchronization opt-in preserved. No third-party expression copied.

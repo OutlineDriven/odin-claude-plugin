@@ -46,7 +46,3 @@ description: 'Use when writing, editing, reviewing, or auditing Tailwind classes
 ## Output
 
 Edited files, then a summary report ordered by file with utilities removed, reordered, arbitrary values replaced, `@apply` blocks converted, fixed-variant flags, and minification gaps.
-
-## Provenance
-
-Adapted from `evilmartians/agent-skills` at revision `a2a83b280a2c5b9a6176c5934298fad0224bbce4`. Original license: MIT. Copyright and permission notice preserved. This is a clean-room adaptation; no third-party expression is copied verbatim.

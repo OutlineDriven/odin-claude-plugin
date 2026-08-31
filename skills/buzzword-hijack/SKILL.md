@@ -39,7 +39,3 @@ description: 'Use when a user wants to choose and execute a bounded positioning 
 
 ## Output
 A written local positioning artifact (copy, landing, or messaging) that rides the named jargon wave, plus a report naming the file path, the chosen surface, the jargon term(s), the boundary where the jargon stops, and the list of factual claims confirmed to stand without the jargon.
-
-## Provenance
-
-Origin: user-curated skill idea `buzzword-hijack` from `project-owned:user-curated-skill-ideas`, supplemented by the raw source at `project-owned:user-supplied-source-brief`. Revision: unpinned. License: project-owned, clean-room adaptation. Adaptation: the one-line curated brief — "choose and execute a bounded positioning move that rides a jargon wave without confusing trend with truth" — is expanded into a self-contained procedure that names inputs, bounds the move to a local artifact, and enforces the trend-truth separation as an explicit verification step.

@@ -34,7 +34,3 @@ The current direction the session is building on: the claim, plan, or framing un
 
 ## Output
 A divergence-first report: each read classified, divergences sharing a root collapsed to that root, divergence leads, and convergence described as reassurance rather than proof.
-
-## Provenance
-
-Origin: odin-1.x current skill (`skills/fan-out-fresh-reads/SKILL.md`). Revision: unpinned. License: project-owned. Adaptation: restructured into the ODIN 2.0 contract section order, removed the cross-skill pointer to `clean-and-true`, and restated the clean-room framing-strip inline; the framing-blind-sampling mechanism and divergence-first successful end state are preserved.

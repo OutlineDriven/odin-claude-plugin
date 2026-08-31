@@ -51,10 +51,3 @@ description: 'Use when the user wants ongoing teaching across sessions in a pers
 ## Output
 
 The persistent teaching workspace at the working directory: `MISSION.md` (grounded reason for learning), `RESOURCES.md` (curated trusted sources with annotations), `./lessons/*.html` (self-contained interactive lessons), `./learning-records/*.md` (evidence of understanding and ZPD signal), `GLOSSARY.md` (compressed canonical terminology), `./reference/*.html` (compressed reference documents), `./assets/*` (reusable lesson components including the shared stylesheet), `NOTES.md` (user preferences and session steering notes).
-
-## Provenance
-
-- Origin: current-odin-skill-tree, path `skills/teach/SKILL.md`.
-- Revision: none pinned.
-- License: project-owned.
-- Adaptation: adapted from the ODIN teach skill. Format templates remain in `references/` and are loaded by the procedure. The peer-skill routing table was replaced by the explicit sourced-learning-workspace refusal.

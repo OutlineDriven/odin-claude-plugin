@@ -75,7 +75,3 @@ description: 'Use when making an architectural decision, changing a public API, 
 
 ## Output
 A report listing every file created or edited with a one-line change description, the ADR numbers and titles created, and surfaced gaps (decisions with unknown rationale, stale TODOs reported), ordered by artifact type then file path.
-
-## Provenance
-
-Adapted from the ODIN 1.x project-owned skill `skills/docs-and-adrs/SKILL.md` (candidate `current:current-b:current:docs-and-adrs`); no upstream revision pin applies to that lineage. Absorbs `skills/documentation-and-adrs/SKILL.md`, adapted from `addyosmani/agent-skills` at pinned revision `d2c37ef6225dd8726cdd369a8030307f48592d26` (MIT, Copyright (c) 2025 Addy Osmani): convention detection before defaults, alternatives with rejection reasons, ADR cross-references from gotchas, and the never-delete-superseded-ADRs rule. The MIT permission notice is retained in derived distributions.

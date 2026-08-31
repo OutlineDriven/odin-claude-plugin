@@ -35,7 +35,3 @@ disable-model-invocation: true
 
 ## Output
 Terminal report naming the unfrozen path (or stating it was already editable) and confirming the freeze lock marker is absent.
-
-## Provenance
-
-Adapted from the gstack freeze/workspace-unfreeze guardrail (https://github.com/garrytan/gstack, revision 07b59e396c6be5a86619a43151cb9ed62a15ae69, source path unfreeze/SKILL.md). License MIT, copyright (c) 2026 Garry Tan (LICENSE blob sha 35029511144443297cad2d26e4bac17d0e352f93). This is a clean-room re-derivation of the procedure; no third-party expression is copied verbatim.

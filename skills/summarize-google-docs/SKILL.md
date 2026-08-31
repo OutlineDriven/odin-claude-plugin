@@ -52,11 +52,3 @@ disable-model-invocation: true
 ## Output
 
 A Markdown file at `reports/google_doc_summaries/<timestamp>.md` and, if the human confirmed, a GitHub pull request URL. No other files are written. No external calls are made without human approval at each step.
-
-## Provenance
-
-**Origin:** warpdotdev/competitive-intelligence-agent-oss
-**Revision:** 9e0363e810a14405ef876fb354562735002797fb
-**Source path:** `.warp/skills/summarize_google_docs/SKILL.md`
-**License:** MIT — MIT notice retained; mechanism adapted.
-**Adaptation:** The original skill targeted the Warp agent ecosystem. This adaptation maps the module to `odin-research` for internal-docs research synthesis. It raises the authority level to `human-only`, requiring human confirmation before every external call and every file-system mutation. The output path is `reports/google_doc_summaries/`, and PR creation requires explicit human confirmation. The document-fetching mechanism (Google Drive `files.list` + Google Docs `documents.get`) is retained.

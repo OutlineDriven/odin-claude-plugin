@@ -50,7 +50,3 @@ description: 'Re-sync a stale task list against landed work: prove completions, 
 ## Output
 
 Delta report: each item whose classification changed, its new class, and the reason — every `landed` item cites its proof, exactly one next action is named or one blocker is named as the reason none is, and zero stale items remain.
-
-## Provenance
-
-Origin: current ODIN skill tree, candidate `current:current-d:current:update-todos`. Revision: none pinned. License: project-owned. Adaptation: clean-room rewrite preserving the three-way reconciliation mechanism, classification taxonomy, proof requirement, single-next-action tiebreak, and delta-only report from the source skill.

@@ -41,7 +41,3 @@ Return `blocked` without target mutation when required input, a checkpoint, isol
 
 ## Output
 On success, return `approved` with the applied composed local result and a run report containing the complete partition, worker diffs and proofs, composed check results, byte-for-byte comparison, and fresh-review approval; on a clean stop, return `blocked`, `split-falsified`, or `node-falsified` with the unchanged or restored target, no partial composition, the responsible node or split, and the falsifying evidence, ordered checkpoint → partition → run → validate → compose → attribute → review → apply.
-
-## Provenance
-
-Project-owned adaptation with no supplied pinned revision or third-party license. `priority:priority-five:PF-02` contributes the binding disjoint-worker, mechanical-union, independent-review, and clean-stop contract. `invention:inventions:INV-02` contributes complete writable-surface partitioning, one-node falsification and replay, graph-independent execution, and production task-DAG ownership. `invention:inventions:INV-06` contributes automatic partition design, absorbed into the surviving production task-DAG procedure without a separate invocation path.

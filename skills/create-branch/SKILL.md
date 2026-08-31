@@ -37,7 +37,3 @@ description: 'Use when the user asks to create a new branch or start work on one
 
 ## Output
 On success, report the new branch name, its base commit SHA, and confirmation that HEAD points to it. If the attempt was blocked, report the failure class and exact blocker, and confirm that no branch was created.
-
-## Provenance
-
-Origin: getsentry/skills, revision `c2f99a5b04b4cd992ec3022d7c2c3e23e938d241`, license Apache-2.0. Clean-room adaptation: the branch-naming, base-resolution, collision-check, and clean-tree-gate mechanism is re-expressed here; no third-party expression is copied.

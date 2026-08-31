@@ -42,7 +42,3 @@ description: 'Use when asked to set a personal reminder or run a lightweight loc
 
 ## Output
 One of: a confirmation block (name, action, human-readable trigger in local time, delivery method); a list report (name, type, schedule, delivery, status per item); a state transition (paused, active, updated, deleted) with the updated record; or a terminal `blocked` classification naming the exact unresolved question or failing step.
-
-## Provenance
-
-Adapted from `.agents/skills/scheduler/SKILL.md` in Warp `oz-skills` (https://github.com/warpdotdev/oz-skills), pinned revision 6c08c49fc6c51b8f768bf8c53c041bc06a160765. License: MIT (repository root `LICENSE`, Copyright 2026 Warp); this skill is not one of the two Apache-2.0 subdirectory skills. Adaptation: kept the ask-when-unspecified delivery rule, the no-silent-downshift rule, confirm-before-install, kebab-case naming, and list/pause/unpause/delete/update management; restructured to the ODIN skill contract; scoped delivery to OS-native local mechanisms so authority stays reversible-local; added the metadata-record rollback and partial-result rules.

@@ -42,10 +42,3 @@ description: 'Use when a repo needs package-manager-native commit-time checks. I
 ## Output
 
 Hook mechanism installed as a project dependency, hook configuration file at the mechanism's expected path, hooks activated in the local git repository, and a verification report with commit hash, checks run, and pass/fail status for each.
-
-## Provenance
-
-- Origin: `mattpocock/skills` at revision `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76`.
-- Source paths: `skills/misc/setup-pre-commit/SKILL.md`, `skills/misc/setup-pre-commit/agents/openai.yaml`.
-- License: MIT. Copyright (c) 2026 Matt Pocock. Retain the copyright and permission notice in licenses/NOTICE.
-- Adaptation: clean-room adaptation into odin-code. The source installs package-manager-native commit-time checks verified by a real commit exercising all configured checks. This adaptation preserves that mechanism, adds explicit manifest detection, distinguishes hook-wiring from check-content failures, and requires rollback-path disclosure before writes.

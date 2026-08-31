@@ -46,10 +46,3 @@ disable-model-invocation: true
 
 ## Output
 Either return a PR/issue body file with an appended, redacted, trimmed `## Agent Transcript` section inside a collapsed `<details>` block, ready for `gh pr create --body-file` or a body update, plus an optional local HTML preview file; or return the unchanged drafted body with no transcript section. Return the unchanged body when no safe session is found, the hosted-session exception applies, or the user declines.
-
-## Provenance
-
-- Origin: https://github.com/openclaw/agent-skills
-- Revision: ae75f60e8d454f1cf44ec4613e10ec9ea7f2ade7
-- License: MIT (LICENSE); reuse requires retaining the copyright and permission notice.
-- Adaptation: adaptation of the agent-transcript skill preserving the hosted-session exception for `*.openclaw.ai`, the redaction rules (fail-closed on secrets; drop prompts, raw outputs, reasoning, env, cookies, tokens, paths; keep user prompts, assistant decisions, terse tool summaries, test/proof outcomes), the find/render/preview/append workflow, automatic trimming and PR/issue-scope filtering, the user-approval gate with local preview, local-only no-network behavior, and the collapsed-details no-placeholder update-existing-markers rule. The bundled helper script was not retained; the procedure performs find/render/preview/append directly. No third-party expression is copied verbatim.

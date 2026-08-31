@@ -53,7 +53,3 @@ Fuzzing campaign report containing:
 - Execution duration and corpus state
 - For each crash: sanitizer error type, crash file path, Base64 input, reproducer command
 - If clean: total inputs, exec/s, coverage summary lines
-
-## Provenance
-
-Adapted from [Trail of Bits skills/ruzzy](https://github.com/trailofbits/skills) (`d1f1575cff97816e5cc08af66cd2506099c681d3`) under CC-BY-SA-4.0. Attribution and ShareAlike adaptation preserved. No trademark rights claimed; trail-of-bits-mark.svg not reused.

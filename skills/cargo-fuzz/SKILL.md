@@ -61,7 +61,3 @@ description: 'Use when initializing, running, measuring, or triaging a cargo-fuz
 
 ## Output
 A running or completed fuzz campaign under the chosen sanitizer, a corpus under `fuzz/corpus/<target>/`, any crash artifacts under `fuzz/artifacts/<target>/` (each reproducible by re-running the target against the artifact path), and optionally an HTML coverage report under `fuzz_html/`.
-
-## Provenance
-
-Adapted from Trail of Bits skills (https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3), licensed CC-BY-SA-4.0. The cargo-fuzz Cargo integration, nightly toolchain requirement, and `fuzz_target!` harness syntax are preserved as the source mechanism; expression is rewritten. Preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.

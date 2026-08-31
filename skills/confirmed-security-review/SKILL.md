@@ -45,7 +45,3 @@ The user must supply the file, diff, or code component to review. A specific con
 
 ## Output
 Markdown report titled `## Security Review: [File/Component Name]`: Summary (count by severity, risk level, confidence) → Findings (`[VULN-NNN] [Type] (Severity)` with Location, Confidence, Issue, Impact, Evidence, Fix) → Needs Verification (`[VERIFY-NNN]` with Location and Question). Cleared report states "No high-confidence vulnerabilities identified."
-
-## Provenance
-
-Origin: getsentry/skills, revision c2f99a5b04b4cd992ec3022d7c2c3e23e938d241. The source `skills/security-review/SKILL.md` is Apache-2.0; OWASP-derived reference, language, and infrastructure guides in that skill are CC BY-SA 4.0 (OWASP Cheat Sheet Series). This skill is a clean-room adaptation: it retains the distinguishing mechanism — the attacker-confirmed HIGH-confidence reporting bar with research-before-flagging — and omits the external reference, language, and infrastructure files. No third-party expression is copied; the procedure and confidence contract are re-derived from the mechanism.

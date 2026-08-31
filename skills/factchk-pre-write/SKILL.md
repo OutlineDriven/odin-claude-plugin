@@ -36,7 +36,3 @@ The artifact under review: a file, a passage, or the sentence about to be writte
 
 ## Output
 A fixes-vs-flags report listing each reality-grounded claim, its verdict (verified / fixed / flagged), the cited external source, and — for a failed claim — which direction it failed (the absurd was real, or the obvious was false). Applied fixes appear as corrected text with their source. Flagged claims appear with the reason and any competing readings. A scan that found no reality-grounded assertions returns that fact and changes nothing.
-
-## Provenance
-
-Origin: github.com/LilMGenius/paperthin, skills/depth/factchk/SKILL.md. Pinned revision 3bca079a51bcfff5dafb53d1d7f9f523d66ee317. License MIT (c) 2026 LilMGenius; the source NOTICE additionally vendors verbatim material from mattpocock/skills (MIT, (c) 2026 Matt Pocock) with per-source attribution — this adaptation is clean-room and copies no verbatim vendor material. Adaptation: renamed to factchk-pre-write to expose the proactive about-to-write trigger, and restated the both-directions verification, fix-vs-flag split, and flag-when-unreachable rules as a self-contained procedure.

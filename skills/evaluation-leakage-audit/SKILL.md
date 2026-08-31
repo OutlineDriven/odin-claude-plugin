@@ -43,7 +43,3 @@ Supply the evaluation or benchmark design and the available artifacts that estab
 
 ## Output
 A chat report with the audited scope and component map, verified independent ground-truth entry points, detected patterns with evidence and fix, blocked or non-converged tests with required evidence, and a terminal classification of `leak found`, `no leak found`, or `blocked`.
-
-## Provenance
-
-Adapted from the project-owned ODIN 1.x `mandela` skill (`skills/mandela/SKILL.md`). No source revision or external license identifier was supplied. This version preserves the eight-pattern leakage audit, independent-ground-truth test, read-only boundary, per-finding independence fixes, and explicit clean-pass behavior while replacing the former external procedure pointer with a self-contained procedure.

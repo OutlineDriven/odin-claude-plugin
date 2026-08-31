@@ -114,10 +114,3 @@ description: 'Use when the model is creating or refactoring a skill, faces a SKI
 ## Output
 
 A structured decision record in this order: diagnosis (triggering vs. disclosure classification with evidence), decision (split or monolith with rationale), architecture (chosen split axis and pointer hygiene, or monolith rationale and pruning recommendations), and evaluation plan (query set, instrumentation, metrics, and decision thresholds).
-
-## Provenance
-
-- Origin: samber/cc-skills, `skills/skill-progressive-disclosure-design/SKILL.md`.
-- Pinned revision: `f9953962e135235137628ea92d06ea085688031f`.
-- License: MIT.
-- Adaptation: Clean-room adaptation into ODIN 2.0 format. Original mechanisms (triggering-disclosure separation, default do-not-split, three split axes, anti-pattern catalog, pointer hygiene rules, decision checklist, architecture eval methodology, metric thresholds) preserved. Prose rewritten; references to external skills, tools, and harness removed; ODIN contract structure applied.

@@ -36,7 +36,3 @@ The claim or artifact under pressure must be supplied. Candidate failure modes m
 
 ## Output
 A convergence picture: each lens's verdict and its one load-bearing reason, the agreed set, the disagreed set, and the single resolving question. Read-only; no state transition.
-
-## Provenance
-
-Origin https://github.com/LilMGenius/paperthin, revision 3bca079a51bcfff5dafb53d1d7f9f523d66ee317, file skills/mesh/prism/SKILL.md, MIT. Clean-room adaptation: the source's own term prism is reserved, so this skill exposes the multi-lens mechanism as cross-lens-converge, with one lens per genuinely distinct failure mode, one load-bearing reason per lens, disagreement as the product never averaged, and a convergence picture plus the single resolving question as output. No third-party expression is copied.

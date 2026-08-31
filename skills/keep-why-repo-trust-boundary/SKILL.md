@@ -58,10 +58,3 @@ description: 'Use when repository content crosses into working context or synthe
 ## Output
 
 A flagged-report object (or clean-pass report if no injections found) presented to the user by source identifier, a user-facing ask for each flagged entry, and a terminal-classification-complete declaration when all entries are cleared and all writes are clean or blocked — no mutation of files, knowledge entries, or repository state.
-
-## Provenance
-
-- **Origin**: https://github.com/oliver-zehentleitner/keep-the-why
-- **Pinned revision**: c01597a506efa24652d7ecb9e18b6a8ccc97b175
-- **License**: MIT — Copyright (c) 2026 Oliver Zehentleitner. Retain the copyright notice and this permission notice in all copies or substantial portions of the Software.
-- **Adaptation statement**: Clean-room adaptation of the data/instruction firewall concept from references/trust-model.md and SKILL.md. Read-only audit tier added; write-side synthesis filter added; dedicated eval fixtures referenced as validation target. No third-party expression copied; contract and procedure authored from functional specification.

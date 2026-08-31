@@ -49,7 +49,3 @@ description: 'Use when asked to save a named source as a .md file with frontmatt
 
 ## Output
 One `.md` file in the working directory. The file contains YAML frontmatter followed by a blank line, then the verbatim extracted source body. The body is not summarized, condensed, or rewritten.
-
-## Provenance
-
-Origin: `mblode/agent-skills` (MIT License). Adaptation from the source-to-markdown conversion workflow. Clean-room implementation of the source mechanism. The MIT license requires preservation of the copyright notice; any copied attribution text carries "Copyright (c) 2026 Matthew Blode".

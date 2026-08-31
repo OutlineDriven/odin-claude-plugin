@@ -75,7 +75,3 @@ description: 'Use when departing knowledge must enter project topic files throug
 ## Output
 
 Synthesized topic-file entries appended to the project's local knowledge file(s), each containing Topic, Why, Alternatives considered (or OPEN), Open gaps (or absent), and Source: interview — no session narrative, no personal details, no verbatim transcription.
-
-## Provenance
-
-Origin: https://github.com/oliver-zehentleitner/keep-the-why — MIT license (Copyright (c) 2026 Oliver Zehentleitner; retain copyright notice and permission notice in all copies or substantial portions). Pinned at revision c01597a506efa24652d7ecb9e18b6a8ccc97b175. Adaptation: procedure rewritten as a self-contained odin-research skill; interview-playbook mechanisms distilled into two-phase elicitation (narration-first, then targeted closure) bound to odin's topic-file schema. Clean-room derivation from MIT-licensed source.

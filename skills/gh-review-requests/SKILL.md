@@ -46,7 +46,3 @@ description: 'Use when the user asks to find PRs to review or check the team rev
 ## Output
 
 A chat-output table of open PRs needing review, one row per PR, with Repository, PR, Author, URL, and Reason columns; or a no-results report when no unread review requests match the filters — partial results labeled as such.
-
-## Provenance
-
-Origin: getsentry/skills. Pinned revision: c2f99a5b04b4cd992ec3022d7c2c3e23e938d241. License: Apache-2.0. Adapted clean-room from `skills/gh-review-requests/SKILL.md`: remapped from odin-orchestration to odin-run and restated as a read-only, model+human procedure that fetches unread GitHub review-request notifications and filters by team.

@@ -154,7 +154,3 @@ Optional:
 
 ## Output
 A final report listing: comments addressed, disposition per comment, files changed, validation outcome, commit and push status, replies posted with URLs, threads resolved, and any unresolved items requiring manual action.
-
-## Provenance
-
-Origin: `https://github.com/warpdotdev/common-skills` at pinned revision `f589e224907eda566c13755529f59db563090d14`. License: MIT. Adaptation from Warp terminal skill `respond-to-pr-comments-in-blocklist` (MIT licensed, Denver Technologies, Inc.) rewritten in ODIN style. Removed Warp-specific skill references, branding, and Co-Authored-By convention. All procedural steps rederived from first principles against the wc-13 mechanism contract. MIT attribution retained in the module provenance ledger per license reuse constraints.

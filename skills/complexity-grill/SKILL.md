@@ -36,7 +36,3 @@ The code region, module, or design surface to analyze must be supplied. Optional
 ## Output
 
 Ranked complexity-source report: ordered root causes, each naming its location, the effort it forces, and whether a deeper source produces it. Any metric appears only as a confirmation footnote after the ranking.
-
-## Provenance
-
-Origin: `project-owned:user-curated-skill-ideas`, entry `complexity-grill` ("identify the true sources of complexity qualitatively before counting metrics"), supplemented by the raw Korean source at `project-owned:user-supplied-source-brief`. No upstream revision or third-party license pin; project-owned user-curated brief. Adapted into a self-contained read-only qualitative-analysis procedure that preserves the metrics-after-ranking mechanism.

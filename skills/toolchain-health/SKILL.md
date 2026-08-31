@@ -49,7 +49,3 @@ description: 'Audit the installed toolchain and return a green, yellow, or red v
 ## Output
 
 A green, yellow, or red health verdict plus a per-category dashboard (tool, score, status, duration, detail counts), the top issues for any category below 7, and a repairs list ranked by impact — no file, history, or project state is changed.
-
-## Provenance
-
-Origin: https://github.com/garrytan/gstack, revision 07b59e396c6be5a86619a43151cb9ed62a15ae69, file health/SKILL.md. License MIT, copyright "Copyright (c) 2026 Garry Tan", retained per the license notice. Clean-room adaptation: the toolchain auto-detection, per-category 0-10 scoring, weighted composite with weight redistribution, status-labeled dashboard, and ranked-repairs mechanism are re-derived; the green/yellow/red verdict and read-only installation-audit framing are adapted for this skill; no source expression is copied wholesale.

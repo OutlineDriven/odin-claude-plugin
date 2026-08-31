@@ -43,7 +43,3 @@ Each failure result names the class, operation, failing check, observed evidence
 
 ## Output
 On success, return the complete project-root `graph.yaml` and a `created`, `revision-appended`, or `focus-replanned` result containing the revision, approved write set, gate when applicable, validation results, replay digest, and rollback checkpoint identity.
-
-## Provenance
-
-Project-owned adaptation of the user-named priority-five `graph-backbone` contract and the conversation-invented W16 typed-graph mechanism, represented by candidates `priority:priority-five:PF-01` and `invention:inventions:INV-01`. No source revision or external license was supplied; no third-party expression is copied. The adaptation preserves the closed static graph compiler, immutable per-revision topology, append-only transitions, deterministic replay, approval of the frozen backbone, gate-scoped replanning, additive-metadata preservation, and reversible-local authority.

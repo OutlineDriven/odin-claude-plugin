@@ -56,9 +56,3 @@ Non-mutation rule: this skill performs no file writes, no credential use, and no
 ## Output
 
 A structured token security report with executive summary (risk level and counts per severity), per-category compliance checklist (all 10 categories with pass/warn/fail), weird-token-pattern table (each of the 24 applicable patterns with presence, risk, evidence, mitigation), on-chain analysis section (when address and RPC supplied), integration-safety assessment (when protocol integration analyzed), and prioritized recommendations (CRITICAL/HIGH/MEDIUM/LOW, each tying one unsafe assumption to one defensive change) — ordering: summary, categories, patterns, on-chain, integration, recommendations.
-
-## Provenance
-
-Origin: Trail of Bits — Building Secure Contracts: Token Integration Checklist and Weird ERC20 Database. URL: https://github.com/trailofbits/skills. Revision: d1f1575cff97816e5cc08af66cd2506099c681d3. License: CC-BY-SA-4.0. Attribution and source link preserved per license terms; modifications marked. Trademark rights to trail-of-bits-mark.svg not claimed.
-
-Adaptation: The 10-category assessment rubric, 24-pattern weird-ERC20 database, 5-phase analysis flow, and rationalization table are adapted into clean-room procedure and recovery language. No third-party expression is copied directly; all analysis steps are re-derived from the source mechanism description and provenance paths.

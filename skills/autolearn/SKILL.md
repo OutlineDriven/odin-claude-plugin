@@ -158,10 +158,6 @@ Done when: the commit is made with only this skill's surfaces staged, or skipped
 ## Output
 One validated learning doc at `docs/solutions/<category>/<slug>.md` (or updated existing doc), optionally a CONCEPTS.md entry and a memory-handoff candidate, or a one-line "nothing qualifies" determination — in refresh mode, a report classifying every scanned doc into Keep/Update/Consolidate/Replace/Delete/stale with applied and recommended actions.
 
-## Provenance
-
-Origin: odin-1.x current skill (`skills/autolearn/SKILL.md`). Project-owned, no third-party license. Adapted for ODIN 2.0 by inlining the schema, concepts, and refresh reference files into a self-contained procedure; preserving the reject-by-default gate, two-track classification, overlap gate, parallel research, frontmatter validation, CONCEPTS.md reconciliation, and five-outcome refresh model.
-
 ## Solution schema
 
 Canonical frontmatter contract for `docs/solutions/` learning docs. The validator (`scripts/validate-frontmatter.py`) only catches silent YAML corruption; the field and enum rules below remain binding.

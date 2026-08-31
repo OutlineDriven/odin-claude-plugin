@@ -44,7 +44,3 @@ The free-form argument is the source of truth for what shipped and which channel
 ## Output
 
 Labeled copy-pasteable copy blocks, one or more per requested channel, each leading with user-facing outcome and shaped to its channel, with a revision offer, ordered by channel.
-
-## Provenance
-
-Origin: https://github.com/EveryInc/compound-engineering-plugin, revision a1f601f17137f648be439965f8fdd9123303de5d, file skills/ce-promote/SKILL.md. License: MIT (Copyright (c) 2025 Every). Mechanisms extracted and rewritten in ODIN style, not copied verbatim; the optional Spiral CLI voice-matching integration was dropped to keep the skill self-contained with no runtime dependencies, preserving the core mechanism of channel-aware launch copy drafting from shipped-change evidence.

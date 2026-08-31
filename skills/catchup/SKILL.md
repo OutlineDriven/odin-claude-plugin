@@ -40,7 +40,3 @@ The project working directory, inferred from the current repository when not sup
 
 ## Output
 A screen-length briefing with three sections in decision order (Needs you, Changed while you were away, New words), every claim tracing to a file, commit, or artifact path, every project-specific term glossed at first use, and drill-down offers per section; the briefing requires no pre-gap memory to parse.
-
-## Provenance
-
-Origin: https://github.com/LilMGenius/paperthin, skills/coil/catchup/SKILL.md. Pinned revision 3bca079a51bcfff5dafb53d1d7f9f523d66ee317. License: MIT (c) 2026 LilMGenius; NOTICE additionally vendors verbatim material from mattpocock/skills (MIT, (c) 2026 Matt Pocock) with per-source attribution. Clean-room adaptation: the foundry does not copy verbatim vendor material; the procedure, rules, and verification steps are re-expressed as a self-contained ODIN 2.0 skill preserving the source mechanisms (state-grounded claims, last-touch anchoring, first-use glosses, screen-length default, decision-order composition, read-only authority).

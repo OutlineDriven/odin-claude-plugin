@@ -93,7 +93,3 @@ description: 'Use when the user asks "where to help", "contribution opportunitie
 
 ## Output
 A ranked list of 2 to 5 recommendations, each in the four-field shape (What / Why / How / First step), preceded by the developer's chosen interest and the signals that routed to it. Each recommendation carries a certainty label (HIGH, MEDIUM, or LOW). The list closes with an offer to walk through one recommendation in depth. If no safe recommendation survives, a terminal report stating that no data-backed contribution opportunity was found, naming the signals checked and the reason each was empty.
-
-## Provenance
-
-Origin: ODIN 1.x current skill `skills/can-i-help/SKILL.md` with references `interest-routing.md` and `slop-cleanup-gate.md`. Revision: unpinned (current working copy). License: project-owned (ODIN plugin). Adaptation: clean-room rewrite consolidating the skill body and both reference files into a single self-contained procedure; signal recipes, interest-to-signal routing, candidate scoring, slop verification rules, and the four-field recommendation template are re-expressed without copying third-party expression.

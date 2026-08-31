@@ -38,10 +38,3 @@ description: 'Use when answering requires reading many files or conducting a wid
 ## Output
 
 A direct answer report: answer, evidence paths per claim, explicit caveats — in that order.
-
-## Provenance
-
-- Origin: https://github.com/warpdotdev/common-skills
-- Revision: f589e224907eda566c13755529f59db563090d14
-- License: MIT — Copyright (c) 2026 Denver Technologies, Inc. Adaptation with attribution in module provenance ledger. Vendored third-party JS bundle (pierre-diffs.js) is NOT carried over.
-- Adaptation: Clean-room rewrite of `.agents/skills/research/SKILL.md` into ODIN 2.0 structure. Subagent survey mechanism preserved; artifact-write branch removed; report-returned made explicit.

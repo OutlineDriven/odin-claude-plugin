@@ -46,7 +46,3 @@ description: 'Use when building, debugging, or verifying browser-rendered code r
 
 ## Output
 A verification report ordered: console status, network results, screenshot before/after, accessibility-tree findings, performance metrics (when in scope), untrusted-content findings — terminal classification done when every checklist item passes, otherwise blocked naming the unverified items.
-
-## Provenance
-
-Origin: odin-1.x current skill `skills/browser-testing/SKILL.md` (project-owned) and addyosmani/agent-skills `skills/browser-testing-with-devtools/SKILL.md`. Pinned revision of the external source: d2c37ef6225dd8726cdd369a8030307f48592d26. License: MIT — Copyright (c) 2025 Addy Osmani; retain this copyright notice and the MIT permission text in derived distributions. Adaptation: clean-room adaptation distilled into a self-contained procedure; no third-party expression copied.

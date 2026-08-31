@@ -68,10 +68,3 @@ Optional:
 ## Output
 
 One terminal classification object: done/symptom_class/root_cause/evidence/missing_evidence, or blocked/blocker/detail when blocked.
-
-## Provenance
-
-Origin: `mcollina/skills` Node.js Core diagnostics rules.
-Pinned revision: `856efd268ae85482d882f3d0bed869fd020b5c06`.
-License: MIT — MIT notice retained.
-Adaptation: Clean-room translation from Node.js Core diagnostic decision trees into a self-contained ODIN 2.0 skill procedure. Subject remapped to odin-code-advanced per platform-internals fit. authority translated to reversible-local per skill contract. Support paths not carried; procedure is derived from mechanism described by source paths.

@@ -64,7 +64,3 @@ description: 'Use when asked to search or analyze a Burp Suite .burp project to 
 
 ## Output
 JSON objects, one per line, piped through `jq` for formatting — audit items include name, severity, confidence, host, port, protocol, and url; header searches return url and header fields; body searches return url and body fields truncated to 1000 characters; total output capped at 50 KB; Burp findings presented as indicators requiring validation, not as proof.
-
-## Provenance
-
-Adapted from Trail of Bits skills (https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3). Licensed CC-BY-SA-4.0; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding. This adaptation preserves the output-safety limits, sub-component filter guidance, and Burp-specific prerequisites as a self-contained investigation procedure without the wrapper script dependency.

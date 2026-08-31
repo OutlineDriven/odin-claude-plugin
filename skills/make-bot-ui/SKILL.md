@@ -43,7 +43,3 @@ Optional: an existing server route to extend, UI constraints, the local or remot
 ## Output
 
 Return the exact created or modified files and any approved host or Tailscale state changes, the command and target used for the end-to-end probe, the observed wake result, and a credential-redacted account of the browser-side secret inspection. End with `success` only when the done predicate holds; otherwise end with `blocked` and the applicable recovery state.
-
-## Provenance
-
-Clean-room adaptation of `pstack/skills/make-bot-ui/SKILL.md` from `cursor/plugins` at revision `68836ddaf5697224520f1847d90cdb90ca8babaa`. The source is MIT-licensed; license evidence is `pstack/LICENSE` blob `6b5400237fdf6545be0b8fae370d6f2fcff8fb25`, attributed in the audit record to Lauren Tan (poteto). This version preserves server-side secret isolation, an end-to-end UI probe, and optional human-approved Tailscale host installation without copying source expression.

@@ -115,7 +115,3 @@ Blocked result: report `BLOCKED: git-guardrails <exact reason>` with no settings
 
 ## Output
 An executable hook at the chosen path, then one merged `hooks.PreToolUse` entry, then the eleven-line verification transcript, then terminal classification `installed (project)`, `installed (global)`, or `blocked: <reason>`.
-
-## Provenance
-
-Origin: `odin-current`, source path `skills/setup-git-guardrails/SKILL.md`, candidate `current:current-c:current:setup-git-guardrails`. No pinned upstream revision. License: project-owned; no third-party license applies. Adapted from the odin-current skill body into this section order; `scripts/block-dangerous-git.py` is retained verbatim from the same candidate.

@@ -91,11 +91,3 @@ If the input is ambiguous, ask the user to supply a file path or paste the conte
 ## Output
 
 A grouped review report with P1, P2, P3, and Clean sections (each finding specific with source and date), where P1 findings explicitly block ordinary shipping and receive the next-steps prompt.
-
-## Provenance
-
-Origin: https://github.com/EveryInc/compound-knowledge-plugin, revision 766942e9eaee5204adbfe180f1d0651ffecf2575.
-
-License: MIT. Copyright (c) 2026 Every, Inc. Include the copyright and permission notice in copies or substantial portions.
-
-Adaptation: Parallel two-reviewer gate preserved with both reviewer checklists folded in per the inventory MERGE rows; odin-research breadth; advisory read-only authority with writes deferred to explicit user fix choice; model+human per Q14.

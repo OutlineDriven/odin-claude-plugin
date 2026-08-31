@@ -66,7 +66,3 @@ The user may supply context in shorthand, as an unstructured context dump, or by
 
 ## Output
 A structured document draft delivered in chat, built and iterated section by section, that passes reader testing against a fresh-context reader and meets the user''s stated impact goals. On non-convergence, a non-converged report naming the unresolved gaps and failing sections. No file is created or modified.
-
-## Provenance
-
-Adapted from getsentry/skills, `skills/doc-coauthoring/SKILL.md`, revision c2f99a5b04b4cd992ec3022d7c2c3e23e938d241, Apache-2.0. Clean-room adaptation: the three-stage co-authoring mechanism (context gathering, section-by-section refinement with surgical edits, and fresh-context reader testing) is preserved; expression is rewritten and scoped to read-only chat output with no file mutation.

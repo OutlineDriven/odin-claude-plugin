@@ -56,7 +56,3 @@ Partial results are never reported as success. If any step after Q1 fails, the r
 ## Output
 
 A release report with version released and tag SHA, commit hash and message, release notes path, workflow run identifier and final status, credited contributors, retired iteration folder path, and done-predicate confirmation or the exact list of failed checks, ordered as listed.
-
-## Provenance
-
-Adapted from LilMGenius/paperthin `skills/depth/re0-release/SKILL.md` at revision `3bca079a51bcfff5dafb53d1d7f9f523d66ee317`. Licensed MIT (c) 2026 LilMGenius. Clean-room adaptation: repo-specific catalog surfaces generalized to foundry roster surfaces; kind-not-size discriminator and workflow-owns-publishing rule retained. No verbatim third-party expression copied. Per-source attribution obligation binds only verbatim vendor material, which this adaptation does not contain.

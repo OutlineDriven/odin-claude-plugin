@@ -75,7 +75,3 @@ Before proceeding, show the resolved values and explain that the run will read c
 
 ## Output
 The saved report path under `reports/customer_feedback_summaries/`, the PR URL, and a coverage statement naming included, empty, unavailable, and excluded sources; the report contains themes, counts, week-over-week comparison, cited issue links, and verbatim quotes in the section order from step 6.
-
-## Provenance
-
-Adapted from `warpdotdev/competitive-intelligence-agent-oss` at revision `9e0363e810a14405ef876fb354562735002797fb`, path `.warp/skills/analyze_customer_feedback/SKILL.md` (MIT; notice retained, mechanism adapted). This adaptation preserves scoped multi-source GitHub, Gmail, NPS, and churn collection and the analysis behavior while moving credentials to human-supplied configuration and expressing the fetch and synthesis mechanisms inline rather than depending on unshipped helper scripts.

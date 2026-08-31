@@ -63,7 +63,3 @@ description: 'Use when snyk-agent-scan reports W001, W011, or W012 on a skill, o
 ## Output
 
 **Output contract:** Return one per-file remediation report ordered by alert queue, listing code, restructuring, before-and-after counts, then final clean status or exact blockers, and finish with the pre-authoring checklist result.
-
-## Provenance
-
-Adapted from `samber/cc-skills`, path `skills/snyk-agent-scan-compliance/SKILL.md`, revision `f9953962e135235137628ea92d06ea085688031f`, MIT license. Adaptation restructures the source into the ODIN 2.0 skill contract: the three reference pattern catalogs are folded into the procedure as inline rules; the remediation loop (one fix, re-scan, verify the count dropped), the false-positive restructuring rule, and the pre-authoring checklist are preserved from the source mechanism; source frontmatter metadata, tool allowlists, and contribution links are not carried over.

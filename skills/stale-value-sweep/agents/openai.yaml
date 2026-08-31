@@ -1,3 +1,0 @@
-interface:
-  display_name: "Stale Value Sweep"
-  short_description: "Use when a changed value may still survive in code, docs"

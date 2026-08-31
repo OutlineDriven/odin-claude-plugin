@@ -106,7 +106,3 @@ Three to five concepts. Each concept has three parts: (1) a brand principle, one
 
 ## Output
 Return, in order: Mode A brief with marked inferences, 2-3 labeled alternatives, recommendation, edit notes, and pass result; or Mode B before/after diffs with labels, rationale, issue count, top pattern, and confidence; then `VOICE.md` only when offered and accepted.
-
-## Provenance
-
-Origin: `mblode/agent-skills`, revision `e97a3b383f5944f90d41eb92b24b4fb3b917a7f9`, file `skills/copywriting/SKILL.md` with its `references/` directory. License: MIT ("Copyright (c) 2026 Matthew Blode"; preserve the notice and license text in copies). Adaptation: clean-room rewrite for ODIN 2.0. The two-mode workflow, context-gathering fields, voice discovery order, voice/tone distinction, framework routing, AI-ism tiers and severity triage, seven sweeps, flag labels, banned words, UI state rule IDs, length budgets, page-type norms, voice chart structure, and hyphenation pass are preserved; the reference files were inlined and the procedure condensed to a semantic-minimum self-contained form. Cross-skill handoffs and personal-voice file lookups from the source were removed so the skill depends on no other skill, module, or external file.

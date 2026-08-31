@@ -54,7 +54,3 @@ Done when: the run directory is created and its path is echoed.
 
 ## Output
 A durable explainer artifact at `$RUN_DIR/explainer.html` (or `explainer.md`), displayed as an inline summary plus the file path, plus any check-in exercises run in chat when **Quiz me** was selected, with any publication or remote relocation reported as an unexecuted human handoff, or a done run with no artifact (operational question answered in chat, empty window, unanswered bare invocation).
-
-## Provenance
-
-Origin: https://github.com/EveryInc/compound-engineering-plugin, revision a1f601f17137f648be439965f8fdd9123303de5d, file skills/ce-explain/SKILL.md. License: MIT (Copyright (c) 2025 Every). Mechanisms extracted and rewritten in ODIN style, not copied verbatim; attribution is preserved in this ledger. Adaptation: remapped to odin-research as on-demand explanation work; publication converted from an automated destination flow to an explicit stop-and-handoff boundary so artifact creation remains the model-invokable mechanism.

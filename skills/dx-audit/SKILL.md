@@ -51,7 +51,3 @@ Optional: a comparison baseline or prior release contract when the diff changes 
 
 ## Output
 A compact report with scope receipt, findings ranked CRITICAL/HIGH/MEDIUM by root cause with file/line/evidence/fix, and deferred out-of-scope candidates summarized by category, or one pass line naming the surfaces and categories checked when no findings are material.
-
-## Provenance
-
-Origin: `mblode/agent-skills`, revision `e97a3b383f5944f90d41eb92b24b4fb3b917a7f9`, MIT license (Copyright (c) 2026 Matthew Blode). Clean-room adaptation: the source's rule-file-per-check structure and external reference files were inlined into a self-contained category table; the severity-tiered, root-cause-ranked, candidate-first selection mechanism, evidence ladder, and compact report format are preserved. Fix mode was dropped to honor read-only authority.

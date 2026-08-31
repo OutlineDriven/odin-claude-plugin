@@ -38,7 +38,3 @@ If a required input is missing, ask for it before ranking rather than guessing.
 
 ## Output
 Ranked list of deployment platforms and stacks, each with per-axis quantitative scores, the weighting applied, and the trade-off statement that determined its position. Chat output only.
-
-## Provenance
-
-Origin: user-curated skill idea `consult-deployment` from the local Skill Foundry curated-ideas brief, supplemented by the raw Korean source chat. Revision: none pinned. License: project-owned. Adaptation: clean-room restatement of an advisory research workflow; no third-party expression copied.

@@ -42,7 +42,3 @@ description: 'Use when a measurable claim needs before/after proof. Runs control
 
 ## Output
 A terminal classification (VERIFIED, NOT VERIFIED, or INCONCLUSIVE) with the hypothesis, baseline and treatment measurements, computed delta, evidence paths, and rollback path.
-
-## Provenance
-
-Adapted from cursor/plugins `cursor-team-kit/skills/verify-this/SKILL.md` at revision `68836ddaf5697224520f1847d90cdb90ca8babaa`. License: MIT, declared by the cursor/plugins root README and the candidate plugin manifest. This is a clean-room adaptation preserving the controlled baseline/treatment verification mechanism. The root `PROVENANCE.md` contains the complete repository and license notices.

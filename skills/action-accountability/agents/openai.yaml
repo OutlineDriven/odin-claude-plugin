@@ -1,3 +1,0 @@
-interface:
-  display_name: "Action Accountability"
-  short_description: "Use when a sequence of actions needs explicit before-state"

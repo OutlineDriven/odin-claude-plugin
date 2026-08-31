@@ -41,10 +41,3 @@ description: 'Use when asked to partition non-overlapping scopes across subagent
 
 ## Output
 One `actual-work-map.md` listing every scope with terminal status (done, blocked, or failed), reviewer verdict, and fix count — plus one review report per scope, one fix report per scope that required fixes, and one brief file per scope.
-
-## Provenance
-
-Origin: `project-owned:user-curated-skill-ideas` (project-owned), Subagents section, entry: `subagent-driven: partition non-overlapping scopes; assign scope and review duty; require a fresh review after each result; require a glanceable actual-work map; use brief, report, and fix-report as the unit; borrow determinism from a compiled map.`
-Pinned revision: null (current roster)
-License: project-owned
-Adaptation: User-curated workflow extracted from the curated ideas brief. Derived from the `subagent-driven` family but renamed to expose the scope-partition mechanism. Distinguishes from ordered-task execution by partitioning non-overlapping scopes, requiring per-scope fresh review cycles, and producing a glanceable actual-work map as the coordination artifact.

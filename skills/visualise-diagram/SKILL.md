@@ -37,7 +37,3 @@ No failure class swallows an error or pretends the done predicate holds when it 
 
 ## Output
 A single SVG diagram wrapped in a visualizer fence, declaring `xmlns`, with a `viewBox` containing all content, `<text>` elements for all labels, arrow markers in `<defs>` where directional edges exist, no external resource references, and logical grouping via `<g>` elements.
-
-## Provenance
-
-Adapted from bentossell/visualise (https://github.com/bentossell/visualise), revision 35cd185b58af5db2f9d0fe13d9872b544a467483. License: MIT as declared in the upstream README. No dedicated LICENSE file exists at the pinned revision. All SVG examples and diagram patterns are clean-room rederived; no third-party expression is copied. Copyright notice and full MIT text are preserved as required by the upstream license declaration.

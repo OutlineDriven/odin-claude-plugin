@@ -69,9 +69,3 @@ Optional:
 
 ## Output
 One structured rule/pattern document at the user-supplied path. The document contains at least one entry across any of the four sections (Forbidden, Tokens, Examples, Rules). The skill is done only when the artifact exists and the user has validated it.
-
-## Provenance
-
-- Origin: user-curated taste and experience (project-owned)
-- License: project-owned marker
-- Adaptation: user is the domain expert; the skill turns their taste into a machine-consumable format. No third-party expression copied.

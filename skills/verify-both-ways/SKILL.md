@@ -36,10 +36,3 @@ description: 'Use when a load-bearing claim is unverified, a plausible statement
 
 ## Output
 A per-claim report with claim text, verdict, source or flag reason, direction-a and direction-b pass/fail/flagged status, and correction if applicable; or a single `all-verified` summary when every claim is `confirmed` and no corrections apply.
-
-## Provenance
-
-Origin: `skills/verify-both-ways` in the current ODIN skill tree.
-Revision: current (no pinned SHA; tree version at time of authoring).
-License: ODIN project-owned; no third-party expression copied.
-Adaptation: restructured from `## Method` into the canonical five-section contract layout per the ODIN 2.0 authoring contract; procedure steps derived from source method bullets; all authority, side-effect, and done predicates restated from roster metadata.

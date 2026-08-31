@@ -41,7 +41,3 @@ The project bug-report issue template, if one exists. Optional; located by the p
 
 ## Output
 A determination of Ready or Needs-info with reasoning, plus a drafted comment. For Needs-info the comment lists each specific missing item. No issue is mutated until the human posts the comment.
-
-## Provenance
-
-Adapted from warpdotdev/oz-skills, revision 6c08c49fc6c51b8f768bf8c53c041bc06a160765, MIT (Copyright 2026 Warp). Clean-room adaptation: the bug-report field set and the ready/needs-info gate are re-expressed from the source skill; no source expression is copied. The source fallback template file is not retained.

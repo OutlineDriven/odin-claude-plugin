@@ -46,9 +46,3 @@ description: 'Use when asked to build spring, easing, gesture, and choreographed
 
 ## Output
 A code artifact with named animations/curves/spring parameters per element, duration and easing per transition, a reduced-motion substitution flag if applied, and fitted parameters plus script name if curve fitting was performed.
-
-## Provenance
-
-Origin: mblode/agent-skills, revision e97a3b383f5944f90d41eb92b24b4fb3b917a7f9.
-License: MIT — Copyright (c) 2026 Matthew Blode. Preserve the copyright notice and the license text in all copies or substantial portions.
-Adaptation: Clean-room rewrite per MIT reuse constraints. Trigger, authority, and procedure derived from the original skill design; written to ODIN 2.0 SKILL.md schema without copying expression.

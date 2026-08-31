@@ -42,7 +42,3 @@ The question, design, or artifact to analyze. The lens is fixed to the innovatio
 ## Output
 
 A single innovation-perspective analysis answering the supplied subject from the original-technique, talent, and culture seat only — no blended lenses.
-
-## Provenance
-
-Origin: `project-owned:user-curated-skill-ideas` (Perspective lenses doctrine and the `from-innovation-perspective` row). Revision: none pinned. License: none recorded; project-owned clean-room adaptation of the user's curated brief. The named-seat, no-blend mechanism and the original-technique/talent/culture scope are preserved from source; the procedure and failure rules are adapted to a self-contained contract.

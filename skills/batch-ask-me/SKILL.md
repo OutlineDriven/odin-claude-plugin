@@ -38,10 +38,3 @@ The user's problem or design space to explore, stated in the conversation or inf
 
 ## Output
 A confirmed shared understanding of the design space: every branch of the decision tree visited, the frontier empty, and the user's confirmation recorded — no file, state, or external mutation occurs.
-
-## Provenance
-
-Origin: ODIN 1.x current skill at `skills/batch-ask-me/SKILL.md`.
-Revision: unpinned (current).
-License: project-owned.
-Adaptation: restructured into the ODIN 2.0 contract format. The Verbalized Sampling procedure and single-select question-shape contract are restated inline without referencing peer skills; the decision-tree frontier round-loop mechanism is preserved.

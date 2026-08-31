@@ -41,7 +41,3 @@ Optional inputs; request any that are absent:
 
 ## Output
 Return a conversation artifact with ordered milestones mapped to sessions, one practice exercise per milestone, and a review rubric with not-yet, partial, and met criteria for each milestone.
-
-## Provenance
-
-Origin: cursor/plugins, path teaching/skills/create-learning-path/SKILL.md, revision 68836ddaf5697224520f1847d90cdb90ca8babaa. License: MIT, declared by the cursor/plugins root README and the candidate plugin manifest. Adaptation: clean-room rewrite preserving the learner-input-driven plan-authoring mechanism; no third-party expression copied.

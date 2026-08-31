@@ -44,7 +44,3 @@ Return `BLOCKED` with the failed stage, exact reason, completed artifacts and re
 
 ## Output
 One terminal classification: `DONE` (with delivered behavior, changed artifacts, verification commands/scenarios with observed results, branch and PR destination, delegated babysitting outcome, observed close-out state) or `BLOCKED` (with failed stage, reason, partial results, remote mutations made, proof status, recovery status, concrete requirement to resume).
-
-## Provenance
-
-Clean-room adaptation of the end-to-end delivery and delegated PR-operation mechanisms from EveryInc's `compound-engineering-plugin`, path `skills/lfg/SKILL.md`, pinned at revision `a1f601f17137f648be439965f8fdd9123303de5d`. Source license: MIT, Copyright (c) 2025 Every; attribution is preserved in the project provenance ledger, and no third-party expression is copied here.

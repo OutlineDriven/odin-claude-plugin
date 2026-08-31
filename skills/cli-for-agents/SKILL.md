@@ -38,7 +38,3 @@ description: 'Use when asked to build or review a CLI intended for coding agents
 
 ## Output
 Chat report: command surface → per-rule verdicts (flag-driven, pipeline-safe, idempotent, ergonomic) → prescribed fixes or proposed surface, flag set, exit-code map, stdout/stderr contract. Chat output only.
-
-## Provenance
-
-Origin: cursor/plugins, path `cli-for-agent/skills/cli-for-agents/SKILL.md`, revision `68836ddaf5697224520f1847d90cdb90ca8babaa`. License: MIT, declared by the cursor/plugins root README and the candidate plugin manifest per the pinned source audit. Adaptation: clean-room rewrite of the advisory contract for agent-facing CLI design; no third-party expression copied, mechanism preserved as the flag-driven, pipeline-safe, idempotent design rules.

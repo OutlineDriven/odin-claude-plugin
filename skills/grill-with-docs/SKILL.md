@@ -33,7 +33,3 @@ A repository working tree containing a decision to make. Optional: an existing C
 
 ## Output
 The output is an updated CONTEXT.md containing every resolved term, one numbered ADR file per resolved decision, and a report listing any frontier items left open.
-
-## Provenance
-
-Adapted from mattpocock/skills (revision 6654f6b60cd9d5be8b54c6fafe44346dabeb3b76), MIT licensed, Copyright (c) 2026 Matt Pocock. Adapted for odin-code-advanced as interview-driven decision and terminology recording grounded in the code domain model.

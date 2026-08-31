@@ -55,7 +55,3 @@ disable-model-invocation: true
 
 ## Output
 A scored benchmark report (Markdown + JSON under `.gstack/benchmark-reports/`) containing per-skill per-criterion scores, the overall grade, regression status against the baseline when available, failing skills ranked by lowest score with judge rationale, and a trend table when `--trend` is passed.
-
-## Provenance
-
-Adapted from garrytan/gstack benchmark/SKILL.md at revision 07b59e396c6be5a86619a43151cb9ed62a15ae69 (MIT, Copyright (c) 2026 Garry Tan). Clean-room re-derivation: the source measures web page performance via a browse daemon; this skill measures agent skill quality via LLM judges. Preserved mechanisms: baseline capture, relative-threshold regression detection, trend analysis, graded report, read-only non-mutation. Copyright and permission notice retained per MIT.

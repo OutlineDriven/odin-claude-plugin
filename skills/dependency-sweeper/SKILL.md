@@ -1,6 +1,6 @@
 ---
 name: dependency-sweeper
-description: 'Use when dependencies need cadence-driven or vulnerability-triggered audit and updates. Classifies each update on a risk ladder, verifies it, or defers it with a reason. Not for tiered batch upgrades — use deps-upgrade; not for PR queue triage — use dependency-pr-queue-triage.'
+description: 'Use when dependencies need cadence-driven or vulnerability-triggered audit and updates. Classifies each update on a risk ladder, verifies it, or defers it with a reason. Not for tiered batch upgrades — use deps-upgrade; not for PR queue triage — use github-backlog-triage.'
 ---
 
 # Dependency sweeper
@@ -37,7 +37,3 @@ The inputs are the project dependency manifest and lockfile in the working tree.
 
 ## Output
 A dependency sweep report listing each dependency, its risk-ladder classification, applied-or-deferred status, verification result, and deferral reason. The working tree contains only verified updates; deferred majors are not applied.
-
-## Provenance
-
-Adapted from cobusgreyling/loop-engineering (patterns/dependency-sweeper.md, .github/dependabot.yml, stories/dependency-sweeper-week-one.md) at revision d03dcb92cc1e0efb59789a2557131c6ad5897ccc, MIT license. Clean-room adaptation: the risk-laddered, cadence-driven sweep mechanism is restated; no source expression is copied.

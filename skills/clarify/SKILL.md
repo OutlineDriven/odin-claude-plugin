@@ -44,7 +44,3 @@ description: 'Use when the user says "clarify", "what is ambiguous here", or whe
 
 ## Output
 A findings report grouped by tier with `manual` last, one block per finding with fields `id`, `quote` (the exact ambiguous span), `tier`, `recommendation` (`—` for `fyi`), and `basis` (the fact or convention supporting it); `gated` recommendations marked locked-unless-overridden, `manual` ones non-locking, `auto` resolutions appearing compactly with their basis; the manual questions fired (at most four per fire) and the CONCEPTS.md candidates recorded from settled terms; on explicit request for structured output, one fenced `clarify-findings/v1` block containing a YAML list of the per-finding fields.
-
-## Provenance
-
-Adapted from the ODIN 1.x current skill `skills/clarify/SKILL.md` (origin `odin-1.x-current-skill`; no upstream revision recorded; project-owned, no third-party license). Adaptation for ODIN 2.0: contract-table normalization, the manual-question contract restated inline in place of a peer-skill pointer, and settled-term recording restated without a peer-skill pointer. Mechanisms retained unchanged: target precedence, restatement-first, fact pre-scan, four certainty tiers, MECE finding set with one post-override re-scan, bounded manual questions, CONCEPTS.md candidate recording, and `clarify-findings/v1` structured output.

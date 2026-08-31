@@ -123,7 +123,3 @@ Done when: each test begins and rolls back a transaction.
 
 ## Output
 A node:test suite that boots Fastify via `inject()` with no listener, covering authenticated routes, validation failures, and at least one stream or upload path, plus any plugin, hook, mock, or transaction-isolation cases requested. The suite passes under `node --test` with suites running in parallel. Terminal classification: done when every required path is exercised and green; otherwise a per-path failure report naming the unverified mechanism class.
-
-## Provenance
-
-Origin: `mcollina/skills`, path `skills/fastify/rules/testing.md`, revision `856efd268ae85482d882f3d0bed869fd020b5c06`. License: MIT (SPDX), notice retained; mechanism adapted into a self-contained ODIN procedure. Adaptation: preserved the inject()-without-listener mechanism, auth-header testing, schema validation-failure assertions, multipart upload via form-data, stream rawPayload assertion, mock.fn dependency mocking, plugin isolation, hook side-effect testing, test-factory pattern, transaction-rollback isolation, and parallel per-suite app instances; restructured into the contract/procedure/failure/output form.

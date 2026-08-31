@@ -1,6 +1,6 @@
 ---
 name: research
-description: 'Use when researching a named library, framework, SDK, API, or service, or finding a migration guide. Produces a cited Markdown artifact written to disk with source-cited claims, confidence labels, and open questions. Not for codebase-internal research — use scout.'
+description: 'Use when researching a named library, framework, SDK, API, or service, or finding a migration guide. Produces a cited Markdown artifact written to disk with source-cited claims, confidence labels, and open questions. A primary-source-only mode restricts the ladder to official docs, API refs, and source code. Not for codebase-internal research — use scout.'
 ---
 
 # Research command
@@ -45,6 +45,10 @@ Target path (optional): preferred output directory. Defaults to `docs/research/`
 4. Cite every claim. Every factual claim must cite at least one primary source URL or doc path. Assertions derived solely from training data must carry `[Speculative — training data only]`. **Done when**: every claim has a citation or speculative label.
 5. Write the artifact. Persist all findings into a single Markdown file at the target location. The file name is a slug of the subject. **Done when**: the artifact is written to disk.
 
+## Primary-source-only mode
+
+When the task needs primary-source reading, restrict the ladder to its strictest tier: search only authoritative primary sources (Tier 1 official docs, Tier 2 API refs and repository README/docs folders, and source code). Stop after the first authoritative match; do not iterate the rest of the ladder. Every factual claim must link to its owning primary source URL or file path, and each citation must uniquely own the claim it annotates. A claim that cannot be sourced from a primary source is written with the label `[Unverified — no primary source available]` and the gap is left unfilled; never substitute a community, tutorial, or non-authoritative source to close it. If a primary source is unreachable, stop after one retry rather than dropping to a lower tier. If the target write fails, delete any partial file before reporting. This mode never widens beyond primary sources; the lower tiers (3-5) are not probed.
+
 ## Failure and recovery
 
 - **`ladder-exhausted`**: no authoritative source found after Tier 5; surface all attempted tiers and any partial findings.
@@ -56,7 +60,3 @@ Target path (optional): preferred output directory. Defaults to `docs/research/`
 ## Output
 
 A single cited Markdown artifact (`<subject-slug>.md`) with subject id, source-cited claims with confidence labels (Verified for Tier 1-2, Probable for Tier 3-4, Speculative for training data only), and open questions listing attempted tiers, ordered: subject id, claims, open questions.
-
-## Provenance
-
-Origin: `odin-current` (skills/research/SKILL.md). Revision: none. License: project-owned, no third-party expression copied. Adaptation: clean-room re-derivation into the odin-research-advanced module, preserving the external-research contract, 5-tier source ladder mechanism, and background subagent dispatch pattern. No third-party text was copied.

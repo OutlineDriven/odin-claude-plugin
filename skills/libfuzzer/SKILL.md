@@ -103,8 +103,3 @@ Rollback: delete the compiled `<binary>`, the `<corpus_dir>/` contents, and any 
 ## Output
 
 Terminal classification: `non-converged` (binary exits zero or no sanitizer violation, with final coverage count), crash found (artifact path, sanitizer violation type, reproduction result), compilation failure (compiler error message), or failure class name with diagnostic message.
-
-## Provenance
-
-Origin: Trail of Bits skills library, revision `d1f1575cff97816e5cc08af66cd2506099c681d3`.
-License: CC-BY-SA-4.0. Adaptation from the libFuzzer technique skill. Retained: LLVMFuzzerTestOneInput harness signature and rules, `-fsanitize=fuzzer` compilation contract, corpus directory behavior, dictionary format and generation, sanitizer integration choices, campaign flags (`-fork`, `-ignore_crashes`, `-jobs`, `-workers`, `-close_fd_mask`, `-max_len`, `-timeout`, `-dict`), output interpretation table, and crash triage procedure. Removed: motivational framing, comparison tables against AFL++/LibAFL/Honggfuzz, "When to Use" routing, "Related Skills" cross-references, "Resources" section, and "Tips and Tricks" recommendations not grounded in the compilation or triage mechanism. Provenance adaptation: clean-room restatement of the LLVM/LLVMFuzzerTestOneInput contract; no third-party expression copied verbatim.

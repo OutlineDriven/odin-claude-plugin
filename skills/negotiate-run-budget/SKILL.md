@@ -44,7 +44,3 @@ No rollback of a recorded decision. No silent continuation after decline.
 ## Output
 
 On grant: run state updated with one bounded extension recorded; run continues. On decline: run marked WAITING_FOR_BUDGET in report-only mode; run does not continue. On invalid inputs or repeated request: no state change; no output beyond a brief internal stop notice.
-
-## Provenance
-
-Origin: cobusgreyling/loop-engineering (budget-negotiator skill and its templates). Revision: d03dcb92cc1e0efb59789a2557131c6ad5897ccc. License: MIT. Adaptation: Single bounded extension at 90% budget with a human budget owner and WAITING_FOR_BUDGET report-only fallback; never self-grants; framed as an odin-run-advanced contract. No third-party expression copied directly.

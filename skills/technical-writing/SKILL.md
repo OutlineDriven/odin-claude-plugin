@@ -49,10 +49,3 @@ description: 'Write or review technical prose using real symbols and controlled 
 ## Output
 
 Edited prose artifact written to the target file, plus a change summary naming each controlled-English rule applied and the version-control command to restore the prior state.
-
-## Provenance
-
-- Origin: cursor/plugins, path pstack/skills/technical-writing/SKILL.md.
-- Pinned revision: 68836ddaf5697224520f1847d90cdb90ca8babaa.
-- License: MIT (pstack/LICENSE blob 6b5400237fdf6545be0b8fae370d6f2fcff8fb25; authored by Lauren Tan (poteto)).
-- Adaptation: clean-room rewrite of Diataxis-style controlled-English prose editing workflow. No third-party expression copied; procedure re-derived from the source mechanism description.

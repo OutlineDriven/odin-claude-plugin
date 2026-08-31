@@ -78,9 +78,3 @@ description: 'Use when asked to build Node.js stream ETL pipelines with backpres
 ## Output
 
 Pipeline source file with typed transforms, backpressure comments, and justified cache, plus a benchmark or demonstration run showing bounded memory and throughput, plus a pass/fail report against each contract field.
-
-## Provenance
-
-Origin: mcollina/skills — `skills/node/SKILL.md`, `skills/node/rules/streams.md`, `skills/node/rules/async-patterns.md`, `skills/node/rules/caching.md`, `skills/node/rules/performance.md`.
-Pinned revision: `856efd268ae85482d882f3d0bed869fd020b5c06`.
-License: MIT — notice retained; mechanism adapted from original stream, async-patterns, caching, and performance rules.
