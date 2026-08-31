@@ -1,6 +1,6 @@
 # ODIN Security Advanced
 
-ODIN advanced security workflows for bounded, inspectable, verified change.
+Advanced ODIN workflows for threat analysis and security hardening.
 
 npm package: `@outlinedriven/odin-security-advanced@2.0.0`
 

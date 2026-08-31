@@ -3,7 +3,7 @@
   "name": "odin-research",
   "displayName": "ODIN Research",
   "version": "2.0.0",
-  "description": "ODIN research workflows for bounded, inspectable, verified change.",
+  "description": "ODIN workflows for focused research and source-backed findings.",
   "author": {
     "name": "OutlineDriven",
     "url": "https://github.com/OutlineDriven"

@@ -2,18 +2,17 @@
 
 OutlineDriven-authored material in this package is Apache-2.0. See the repository `LICENSE`.
 
-This package ships 57 public skills from the canonical `skills/<slug>/` tree. Package-local skill copies are generated only at pack time.
+This package ships 53 public skills from the canonical `skills/<slug>/` tree. Package-local skill copies are generated only at pack time.
 
 | Skill | Strategy | Adaptation | Target | Origin |
 |---|---|---|---|---|
-| `architecture-diagram` | B | byte-reuse | `skills/architecture-diagram/` | https://github.com/tt-a1i/archify @ `b36d79fdbc3aec3728744341485a7e79f03c0071` (MIT) |
+| `architecture-diagram` | G | structured-merge-rewrite | `skills/architecture-diagram/` | https://github.com/tt-a1i/archify @ `b36d79fdbc3aec3728744341485a7e79f03c0071` (MIT) |
 | `buzzword-hijack` | B | byte-reuse | `skills/buzzword-hijack/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `changelog-updates` | B | byte-reuse | `skills/changelog-updates/` | cobusgreyling/loop-engineering @ `d03dcb92cc1e0efb59789a2557131c6ad5897ccc` (MIT) |
 | `clean-and-true` | B | byte-reuse | `skills/clean-and-true/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `compile-3d-workflow` | B | byte-reuse | `skills/compile-3d-workflow/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `converge` | B | byte-reuse | `skills/converge/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `dataflow-diagram` | B | byte-reuse | `skills/dataflow-diagram/` | https://github.com/tt-a1i/archify @ `b36d79fdbc3aec3728744341485a7e79f03c0071` (MIT) |
-| `debloat` | B | byte-reuse | `skills/debloat/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `debloat-respect-richness` | B | byte-reuse | `skills/debloat-respect-richness/` | https://github.com/LilMGenius/paperthin @ `3bca079a51bcfff5dafb53d1d7f9f523d66ee317` (MIT) |
 | `define-goalstate` | B | byte-reuse | `skills/define-goalstate/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `diagram-contract` | G | structured-merge-rewrite | `skills/diagram-contract/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text) |
@@ -29,7 +28,6 @@ This package ships 57 public skills from the canonical `skills/<slug>/` tree. Pa
 | `lifecycle-diagram` | B | byte-reuse | `skills/lifecycle-diagram/` | https://github.com/tt-a1i/archify @ `b36d79fdbc3aec3728744341485a7e79f03c0071` (MIT) |
 | `markdown-to-pdf` | R | rename-only | `skills/markdown-to-pdf/` | Origin: https://github.com/garrytan/gstack, revision `07b59e396c6be5a86619a43151cb9ed62a15ae69`, file `make-pdf/SKILL.md`. License: MIT (Copyright (c) 2026 Garry Tan). Adaptation: re-derived the Chromium PDF rendering procedure with the emoji, diagram, landscape, and combined gates as a self-contained ODIN skill; no third-party expressive prose or code copied wholesale. |
 | `pr-walkthrough` | B | byte-reuse | `skills/pr-walkthrough/` | https://github.com/warpdotdev/common-skills @ `f589e224907eda566c13755529f59db563090d14` (MIT) |
-| `principle-experience-first` | B | byte-reuse | `skills/principle-experience-first/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
 | `prototype` | G | structured-merge-rewrite | `skills/prototype/` | mattpocock/skills @ `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76` (MIT) |
 | `prototype-logic` | B | byte-reuse | `skills/prototype-logic/` | odin-current @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `purge-slop-docs` | B | byte-reuse | `skills/purge-slop-docs/` | odin-current @ `project-owned` (Project-owned or clean-room only; no copied source text) |
@@ -50,8 +48,6 @@ This package ships 57 public skills from the canonical `skills/<slug>/` tree. Pa
 | `sync-docs` | B | byte-reuse | `skills/sync-docs/` | current-odin-skill-tree @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `taste` | B | byte-reuse | `skills/taste/` | current-odin-skill-tree @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>current-odin-skill-tree @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `technical-writing` | B | byte-reuse | `skills/technical-writing/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
-| `unslop-dedash` | B | byte-reuse | `skills/unslop-dedash/` | https://github.com/LilMGenius/paperthin @ `3bca079a51bcfff5dafb53d1d7f9f523d66ee317` (MIT) |
-| `unslop-detool` | B | byte-reuse | `skills/unslop-detool/` | https://github.com/LilMGenius/paperthin @ `3bca079a51bcfff5dafb53d1d7f9f523d66ee317` (MIT) |
 | `visual-argument-diagram` | B | byte-reuse | `skills/visual-argument-diagram/` | https://github.com/coleam00/excalidraw-diagram-skill @ `8646fcc9f74f38539c6cdb4c969723336a96ddcd` (NOASSERTION — no LICENSE/LICENSE.md/COPYING file exists; default all-rights-reserved) |
 | `visual-diagram` | B | byte-reuse | `skills/visual-diagram/` | nicobailon/visual-explainer @ `7163c3e10660912e0b89e1af465db9f387282b88` (MIT) |
 | `visual-plan` | B | byte-reuse | `skills/visual-plan/` | nicobailon/visual-explainer @ `7163c3e10660912e0b89e1af465db9f387282b88` (MIT) |

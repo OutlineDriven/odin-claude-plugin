@@ -1,6 +1,6 @@
 # ODIN Prometheus
 
-ODIN Prometheus-specific workflows for bounded, inspectable, verified change.
+ODIN workflows for Prometheus metrics and monitoring.
 
 npm package: `@outlinedriven/odin-prometheus@2.0.0`
 

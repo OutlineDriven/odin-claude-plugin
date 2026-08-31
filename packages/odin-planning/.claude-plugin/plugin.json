@@ -3,7 +3,7 @@
   "name": "odin-planning",
   "displayName": "ODIN Planning",
   "version": "2.0.0",
-  "description": "ODIN planning workflows for bounded, inspectable, verified change.",
+  "description": "ODIN workflows for shaping requirements and implementation plans.",
   "author": {
     "name": "OutlineDriven",
     "url": "https://github.com/OutlineDriven"

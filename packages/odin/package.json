@@ -1,7 +1,7 @@
 {
   "name": "@outlinedriven/odin",
   "version": "2.0.0",
-  "description": "Choose ODIN modules with the OutlineDriven universal installer.",
+  "description": "Choose ODIN modules through OutlineDriven's universal installer.",
   "keywords": [
     "odin",
     "outlinedriven",

@@ -3,7 +3,7 @@
   "name": "odin-typescript",
   "displayName": "ODIN TypeScript",
   "version": "2.0.0",
-  "description": "ODIN TypeScript-specific workflows for bounded, inspectable, verified change.",
+  "description": "ODIN workflows for modern TypeScript development.",
   "author": {
     "name": "OutlineDriven",
     "url": "https://github.com/OutlineDriven"

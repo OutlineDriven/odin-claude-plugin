@@ -1,6 +1,6 @@
 # ODIN Code Advanced
 
-ODIN advanced coding workflows for bounded, inspectable, verified change.
+Advanced ODIN workflows for complex code changes and technical audits.
 
 npm package: `@outlinedriven/odin-code-advanced@2.0.0`
 

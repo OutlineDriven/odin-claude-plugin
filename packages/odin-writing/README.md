@@ -1,6 +1,6 @@
 # ODIN Writing
 
-ODIN writing workflows for bounded, inspectable, verified change.
+ODIN workflows for clear, useful technical writing.
 
 npm package: `@outlinedriven/odin-writing@2.0.0`
 

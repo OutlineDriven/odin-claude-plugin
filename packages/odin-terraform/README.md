@@ -1,6 +1,6 @@
 # ODIN Terraform
 
-ODIN Terraform-specific workflows for bounded, inspectable, verified change.
+ODIN workflows for safe Terraform infrastructure changes.
 
 npm package: `@outlinedriven/odin-terraform@2.0.0`
 

@@ -3,7 +3,7 @@
   "name": "odin-code",
   "displayName": "ODIN Code",
   "version": "2.0.0",
-  "description": "ODIN coding workflows for bounded, inspectable, verified change.",
+  "description": "ODIN workflows for writing, reviewing, and maintaining code.",
   "author": {
     "name": "OutlineDriven",
     "url": "https://github.com/OutlineDriven"

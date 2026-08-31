@@ -1,7 +1,7 @@
 {
   "name": "@outlinedriven/odin-code",
   "version": "2.0.0",
-  "description": "ODIN coding workflows for bounded, inspectable, verified change.",
+  "description": "ODIN workflows for writing, reviewing, and maintaining code.",
   "keywords": [
     "odin",
     "outlinedriven",

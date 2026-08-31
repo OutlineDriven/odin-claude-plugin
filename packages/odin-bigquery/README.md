@@ -1,6 +1,6 @@
 # ODIN BigQuery
 
-ODIN BigQuery-specific workflows for bounded, inspectable, verified change.
+ODIN workflows for BigQuery data work and cost-aware queries.
 
 npm package: `@outlinedriven/odin-bigquery@2.0.0`
 

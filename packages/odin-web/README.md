@@ -1,6 +1,6 @@
 # ODIN Web
 
-ODIN web-platform workflows for bounded, inspectable, verified change.
+ODIN workflows for building and refining web applications.
 
 npm package: `@outlinedriven/odin-web@2.0.0`
 

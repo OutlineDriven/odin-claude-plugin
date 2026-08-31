@@ -1,6 +1,6 @@
 # ODIN Loop
 
-ODIN bounded-loop workflows for inspectable, verified change.
+ODIN workflows for bounded iteration with explicit completion checks.
 
 npm package: `@outlinedriven/odin-loop@2.0.0`
 

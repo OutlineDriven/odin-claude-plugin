@@ -2,12 +2,11 @@
 
 OutlineDriven-authored material in this package is Apache-2.0. See the repository `LICENSE`.
 
-This package ships 60 public skills from the canonical `skills/<slug>/` tree. Package-local skill copies are generated only at pack time.
+This package ships 57 public skills from the canonical `skills/<slug>/` tree. Package-local skill copies are generated only at pack time.
 
 | Skill | Strategy | Adaptation | Target | Origin |
 |---|---|---|---|---|
-| `agents-md` | B | byte-reuse | `skills/agents-md/` | mblode/agent-skills @ `e97a3b383f5944f90d41eb92b24b4fb3b917a7f9` (MIT) |
-| `agents-md-curation` | B | byte-reuse | `skills/agents-md-curation/` | mcollina/skills @ `856efd268ae85482d882f3d0bed869fd020b5c06` (MIT) |
+| `agents-md` | G | structured-merge-rewrite | `skills/agents-md/` | mblode/agent-skills @ `e97a3b383f5944f90d41eb92b24b4fb3b917a7f9` (MIT)<br>mcollina/skills @ `856efd268ae85482d882f3d0bed869fd020b5c06` (MIT)<br>getsentry/skills @ `c2f99a5b04b4cd992ec3022d7c2c3e23e938d241` (Apache-2.0) |
 | `audit-loop-scaffold` | G | structured-merge-rewrite | `skills/audit-loop-scaffold/` | cobusgreyling/loop-engineering @ `d03dcb92cc1e0efb59789a2557131c6ad5897ccc` (MIT) |
 | `automate-me` | B | byte-reuse | `skills/automate-me/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
 | `ax-audit` | B | byte-reuse | `skills/ax-audit/` | mblode/agent-skills @ `e97a3b383f5944f90d41eb92b24b4fb3b917a7f9` (MIT) |
@@ -32,13 +31,11 @@ This package ships 60 public skills from the canonical `skills/<slug>/` tree. Pa
 | `inits` | R | rename-only | `skills/inits/` | Adapted from the project-owned ODIN 1.x `init` skill at `skills/init/SKILL.md` (candidate `current:current-b:current:init`). No source revision or license identifier was supplied. This clean adaptation retains the normative-first admission gate, the non-derivability test, evidence from files actually read, descriptive-line removal, and the prohibition on fabricated rules or rationale. |
 | `instruction-phrasing-microtest` | B | byte-reuse | `skills/instruction-phrasing-microtest/` | https://github.com/obra/superpowers @ `b36e0829c6d0140e93cfef2ca599b1b07d4a7797` (MIT) |
 | `keep-why-autostart-examples` | B | byte-reuse | `skills/keep-why-autostart-examples/` | https://github.com/oliver-zehentleitner/keep-the-why @ `c01597a506efa24652d7ecb9e18b6a8ccc97b175` (MIT) |
-| `lean-agents-md` | B | byte-reuse | `skills/lean-agents-md/` | getsentry/skills @ `c2f99a5b04b4cd992ec3022d7c2c3e23e938d241` (Apache-2.0) |
 | `llm-self-loop` | B | byte-reuse | `skills/llm-self-loop/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `lockstep-version-guard` | B | byte-reuse | `skills/lockstep-version-guard/` | nicobailon/visual-explainer @ `7163c3e10660912e0b89e1af465db9f387282b88` (MIT) |
 | `mcp-builder` | B | byte-reuse | `skills/mcp-builder/` | https://github.com/warpdotdev/oz-skills @ `6c08c49fc6c51b8f768bf8c53c041bc06a160765` (Apache-2.0) |
 | `native-capability-catalogue` | B | byte-reuse | `skills/native-capability-catalogue/` | https://github.com/microsoft/skill-recorder @ `c7f2fe4402527a0eb7f4fc1b653bf438229bac61` (MIT) |
 | `plan-review-tune` | G | structured-merge-rewrite | `skills/plan-review-tune/` | Origin: https://github.com/garrytan/gstack at revision 07b59e396c6be5a86619a43151cb9ed62a15ae69, path plan-tune/SKILL.md. License: MIT, Copyright (c) 2026 Garry Tan. Clean-room adaptation: the per-question preference vocabulary, dual-track developer profile, and question-tuning enable/disable mechanism are re-derived; no source expression is copied. |
-| `principle-encode-lessons-in-structure` | B | byte-reuse | `skills/principle-encode-lessons-in-structure/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
 | `prohibit-bad-habits` | B | byte-reuse | `skills/prohibit-bad-habits/` | project-owned:user-supplied-source-brief @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `prompt-optimizer` | B | byte-reuse | `skills/prompt-optimizer/` | getsentry/skills @ `c2f99a5b04b4cd992ec3022d7c2c3e23e938d241` (Apache-2.0) |
 | `reflect` | B | byte-reuse | `skills/reflect/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |

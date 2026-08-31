@@ -1,7 +1,7 @@
 {
   "name": "@outlinedriven/odin-terraform",
   "version": "2.0.0",
-  "description": "ODIN Terraform-specific workflows for bounded, inspectable, verified change.",
+  "description": "ODIN workflows for safe Terraform infrastructure changes.",
   "keywords": [
     "odin",
     "outlinedriven",

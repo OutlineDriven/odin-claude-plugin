@@ -3,7 +3,7 @@
   "name": "odin-code-advanced",
   "displayName": "ODIN Code Advanced",
   "version": "2.0.0",
-  "description": "ODIN advanced coding workflows for bounded, inspectable, verified change.",
+  "description": "Advanced ODIN workflows for complex code changes and technical audits.",
   "author": {
     "name": "OutlineDriven",
     "url": "https://github.com/OutlineDriven"

@@ -3,7 +3,7 @@
   "name": "odin-writing",
   "displayName": "ODIN Writing",
   "version": "2.0.0",
-  "description": "ODIN writing workflows for bounded, inspectable, verified change.",
+  "description": "ODIN workflows for clear, useful technical writing.",
   "author": {
     "name": "OutlineDriven",
     "url": "https://github.com/OutlineDriven"

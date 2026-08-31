@@ -1,6 +1,6 @@
 # ODIN Writing Advanced
 
-ODIN advanced writing workflows for bounded, inspectable, verified change.
+Advanced ODIN workflows for substantial writing and editorial work.
 
 npm package: `@outlinedriven/odin-writing-advanced@2.0.0`
 

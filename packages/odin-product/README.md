@@ -1,6 +1,6 @@
 # ODIN Product
 
-ODIN product workflows for bounded, inspectable, verified change.
+ODIN workflows for product strategy and developer adoption.
 
 npm package: `@outlinedriven/odin-product@2.0.0`
 

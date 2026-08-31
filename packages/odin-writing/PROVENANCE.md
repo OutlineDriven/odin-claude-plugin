@@ -19,5 +19,5 @@ This package ships 14 public skills from the canonical `skills/<slug>/` tree. Pa
 | `strip-ai-tells` | M | move-only | `skills/strip-ai-tells/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
 | `substack-ghostwriting` | M | move-only | `skills/substack-ghostwriting/` | samber/cc-skills @ `f9953962e135235137628ea92d06ea085688031f` (MIT) |
 | `technical-article-writer` | M | move-only | `skills/technical-article-writer/` | samber/cc-skills @ `f9953962e135235137628ea92d06ea085688031f` (MIT) |
-| `unslop` | M | move-only | `skills/unslop/` | current-odin-skill-tree @ `project-owned` (Project-owned or clean-room only; no copied source text) |
+| `unslop` | G | structured-merge-rewrite | `skills/unslop/` | current-odin-skill-tree @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>https://github.com/LilMGenius/paperthin @ `3bca079a51bcfff5dafb53d1d7f9f523d66ee317` (MIT) |
 

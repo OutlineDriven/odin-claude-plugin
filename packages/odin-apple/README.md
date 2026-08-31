@@ -1,6 +1,6 @@
 # ODIN Apple
 
-ODIN Apple-platform workflows for bounded, inspectable, verified change.
+ODIN workflows for software on Apple platforms.
 
 npm package: `@outlinedriven/odin-apple@2.0.0`
 

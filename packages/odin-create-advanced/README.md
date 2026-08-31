@@ -1,6 +1,6 @@
 # ODIN Create Advanced
 
-ODIN advanced creation workflows for bounded, inspectable, verified change.
+Advanced ODIN workflows for ambitious, multi-part creative work.
 
 npm package: `@outlinedriven/odin-create-advanced@2.0.0`
 

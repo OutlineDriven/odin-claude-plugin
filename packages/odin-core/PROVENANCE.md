@@ -2,7 +2,7 @@
 
 OutlineDriven-authored material in this package is Apache-2.0. See the repository `LICENSE`.
 
-This package ships 19 public skills from the canonical `skills/<slug>/` tree. Package-local skill copies are generated only at pack time.
+This package ships 17 public skills from the canonical `skills/<slug>/` tree. Package-local skill copies are generated only at pack time.
 
 | Skill | Strategy | Adaptation | Target | Origin |
 |---|---|---|---|---|
@@ -20,8 +20,6 @@ This package ships 19 public skills from the canonical `skills/<slug>/` tree. Pa
 | `necessary-work` | M | move-only | `skills/necessary-work/` | odin-current @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `possible-worlds` | G | structured-merge-rewrite | `skills/possible-worlds/` | user-named invention; binding contract project-owned:priority-five-contract (decision tree Q55) @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>user-named extension name from the supplied conversation; adjudicated as NW-01 possible-worlds in the audit ledger under AR-1 @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `post-change-check-gate` | M | move-only | `skills/post-change-check-gate/` | https://github.com/LilMGenius/paperthin @ `3bca079a51bcfff5dafb53d1d7f9f523d66ee317` (MIT) |
-| `principle-guard-the-context-window` | M | move-only | `skills/principle-guard-the-context-window/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
-| `principle-never-block-on-the-human` | M | move-only | `skills/principle-never-block-on-the-human/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
 | `unlazy-dispatch-gates` | M | move-only | `skills/unlazy-dispatch-gates/` | https://github.com/Leonxlnx/unlazy @ `da0b00a3a6b706b471797cd4ef579ae1001ff6d7` (MIT) |
 | `using-agent-skills` | M | move-only | `skills/using-agent-skills/` | addyosmani/agent-skills @ `d2c37ef6225dd8726cdd369a8030307f48592d26` (MIT) |
 | `verification-before-completion` | M | move-only | `skills/verification-before-completion/` | current-odin-skill-tree @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>https://github.com/obra/superpowers @ `b36e0829c6d0140e93cfef2ca599b1b07d4a7797` (MIT) |

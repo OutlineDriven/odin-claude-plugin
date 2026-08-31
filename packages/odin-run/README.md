@@ -1,6 +1,6 @@
 # ODIN Run
 
-ODIN execution and delivery workflows for bounded, inspectable, verified change.
+ODIN workflows for executing plans and shipping finished changes.
 
 npm package: `@outlinedriven/odin-run@2.0.0`
 

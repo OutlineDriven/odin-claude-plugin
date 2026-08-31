@@ -1,6 +1,6 @@
 # ODIN Installer
 
-Choose ODIN modules with the OutlineDriven universal installer.
+Choose ODIN modules through OutlineDriven's universal installer.
 
 npm package: `@outlinedriven/odin@2.0.0`
 

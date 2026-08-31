@@ -3,7 +3,7 @@
   "name": "odin-prometheus",
   "displayName": "ODIN Prometheus",
   "version": "2.0.0",
-  "description": "ODIN Prometheus-specific workflows for bounded, inspectable, verified change.",
+  "description": "ODIN workflows for Prometheus metrics and monitoring.",
   "author": {
     "name": "OutlineDriven",
     "url": "https://github.com/OutlineDriven"

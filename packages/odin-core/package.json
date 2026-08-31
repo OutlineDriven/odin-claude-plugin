@@ -1,7 +1,7 @@
 {
   "name": "@outlinedriven/odin-core",
   "version": "2.0.0",
-  "description": "ODIN foundational workflows for bounded, inspectable, verified change.",
+  "description": "Core ODIN workflows for planning, executing, and checking changes.",
   "keywords": [
     "odin",
     "outlinedriven",
@@ -28,7 +28,6 @@
     "skills",
     "mcp.json",
     "output-styles",
-    "vendor/mcp",
     "PROVENANCE.md"
   ],
   "exports": {

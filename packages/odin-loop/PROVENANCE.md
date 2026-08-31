@@ -17,7 +17,6 @@ This package ships 80 public skills from the canonical `skills/<slug>/` tree. Pa
 | `buyer-objection-research` | N | genuine-new-rewrite | `skills/buyer-objection-research/` | project-owned; genuine-new rewrite; no third-party source |
 | `claim-evidence-ledger` | N | genuine-new-rewrite | `skills/claim-evidence-ledger/` | project-owned; genuine-new rewrite; no third-party source |
 | `clean-environment-onboarding-proof` | N | genuine-new-rewrite | `skills/clean-environment-onboarding-proof/` | project-owned; genuine-new rewrite; no third-party source |
-| `code-improver` | G | structured-merge-rewrite | `skills/code-improver/` | https://github.com/trailofbits/skills @ `d1f1575cff97816e5cc08af66cd2506099c681d3` (CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.) |
 | `coding-agent-hook-safety` | N | genuine-new-rewrite | `skills/coding-agent-hook-safety/` | project-owned; genuine-new rewrite; no third-party source |
 | `complete-batch-release` | N | genuine-new-rewrite | `skills/complete-batch-release/` | project-owned; genuine-new rewrite; no third-party source |
 | `consecutive-pass-validation` | N | genuine-new-rewrite | `skills/consecutive-pass-validation/` | project-owned; genuine-new rewrite; no third-party source |
@@ -35,7 +34,7 @@ This package ships 80 public skills from the canonical `skills/<slug>/` tree. Pa
 | `expert-scorecard` | N | genuine-new-rewrite | `skills/expert-scorecard/` | project-owned; genuine-new rewrite; no third-party source |
 | `feedback-pattern-sweep` | N | genuine-new-rewrite | `skills/feedback-pattern-sweep/` | project-owned; genuine-new rewrite; no third-party source |
 | `first-load-byte-reduction` | N | genuine-new-rewrite | `skills/first-load-byte-reduction/` | project-owned; genuine-new rewrite; no third-party source |
-| `fix` | G | structured-merge-rewrite | `skills/fix/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text) |
+| `fix` | G | structured-merge-rewrite | `skills/fix/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>https://github.com/trailofbits/skills @ `d1f1575cff97816e5cc08af66cd2506099c681d3` (CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.)<br>Origin: https://github.com/garrytan/gstack, revision 07b59e396c6be5a86619a43151cb9ed62a15ae69. License: MIT (Copyright (c) 2026 Garry Tan), blob 35029511144443297cad2d26e4bac17d0e352f93. Adaptation: clean-room re-derivation of the pre-landing review pipeline (diff read, general and design checklists, eight specialist reviewers, fix-clear-defects-first ordering, subagent dispatch, and finding accounting) into a self-contained procedure; no third-party expressive prose or code copied wholesale. |
 | `fixed-view-visual-benchmark` | N | genuine-new-rewrite | `skills/fixed-view-visual-benchmark/` | project-owned; genuine-new rewrite; no third-party source |
 | `flaky-test-stabilization` | N | genuine-new-rewrite | `skills/flaky-test-stabilization/` | project-owned; genuine-new rewrite; no third-party source |
 | `frame-rate-stability` | N | genuine-new-rewrite | `skills/frame-rate-stability/` | project-owned; genuine-new rewrite; no third-party source |
@@ -43,6 +42,7 @@ This package ships 80 public skills from the canonical `skills/<slug>/` tree. Pa
 | `full-product-evaluation` | N | genuine-new-rewrite | `skills/full-product-evaluation/` | project-owned; genuine-new rewrite; no third-party source |
 | `genealogical-proof` | N | genuine-new-rewrite | `skills/genealogical-proof/` | project-owned; genuine-new rewrite; no third-party source |
 | `goal-contract` | N | genuine-new-rewrite | `skills/goal-contract/` | project-owned; genuine-new rewrite; no third-party source |
+| `grill-core` | B | byte-reuse | `skills/grill-core/` | current-odin-skill-tree @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `hypothesis-gen` | N | genuine-new-rewrite | `skills/hypothesis-gen/` | project-owned; genuine-new rewrite; no third-party source |
 | `hypothesis-refinement` | N | genuine-new-rewrite | `skills/hypothesis-refinement/` | project-owned; genuine-new rewrite; no third-party source |
 | `interaction-timing-compliance` | N | genuine-new-rewrite | `skills/interaction-timing-compliance/` | project-owned; genuine-new rewrite; no third-party source |

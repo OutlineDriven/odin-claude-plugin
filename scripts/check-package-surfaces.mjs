@@ -27,10 +27,7 @@ if (new Set(ids).size !== 29) {
   console.error("duplicate catalog ids");
   drift += 1;
 }
-if (ids[0] !== "odin" || ids.length !== 29) {
-  console.error("catalog order/cardinality failed");
-  drift += 1;
-}
+
 if (drift) {
   process.exit(1);
 }

@@ -56,7 +56,7 @@ const PACKAGE_KEYS = [
 const FILES = {
   installer: [".claude-plugin", "PROVENANCE.md"],
   runtime: [".claude-plugin", "skills", "PROVENANCE.md"],
-  core: [".claude-plugin", "skills", "mcp.json", "output-styles", "vendor/mcp", "PROVENANCE.md"],
+  core: [".claude-plugin", "skills", "mcp.json", "output-styles", "PROVENANCE.md"],
 };
 
 export function renderPackageJson(entry) {
@@ -101,7 +101,7 @@ export function renderPluginJson(entry) {
       name: "odin",
       displayName: "ODIN Installer",
       version: RELEASE_VERSION,
-      description: "Choose ODIN modules with the OutlineDriven universal installer.",
+      description: "Choose ODIN modules through OutlineDriven's universal installer.",
       author: { name: "OutlineDriven", url: "https://github.com/OutlineDriven" },
       homepage: "https://github.com/OutlineDriven/outline-driven",
       repository: "https://github.com/OutlineDriven/odin-claude-plugin",
@@ -176,15 +176,14 @@ export function renderRootPackageJson() {
     scripts: {
       "generate:package-surfaces": "node scripts/render-package-surfaces.mjs",
       "generate:package-provenance": "node scripts/render-package-provenance.mjs",
+      "generate:distribution": "node scripts/render-distribution.mjs",
+      "pack:packages": "node scripts/pack-packages.mjs",
       "check:package-surfaces": "node scripts/check-package-surfaces.mjs",
       "check:package-provenance": "node scripts/check-package-provenance.mjs",
-      "check:claude": "node scripts/validate-claude-surfaces.mjs",
-      "check:marketplace-sources:workspace": "node scripts/resolve-marketplace-sources.mjs --mode=workspace",
-      "check:package-tarballs": "node scripts/pack-packages.mjs --check",
+      "check:distribution": "node scripts/check-distribution.mjs",
+      "check:skill-routes": "node scripts/check-skill-routes.mjs",
       check:
-        "npm run check:package-surfaces && npm run check:package-provenance && npm run check:claude && npm run check:marketplace-sources:workspace && npm run check:package-tarballs",
-      "release:publish": "node scripts/publish-packages.mjs",
-      "release:verify": "node scripts/resolve-marketplace-sources.mjs --mode=registry",
+        "npm run check:package-surfaces && npm run check:package-provenance && npm run check:distribution && npm run check:skill-routes",
     },
   });
 }

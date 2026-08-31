@@ -3,7 +3,7 @@
   "name": "odin-agent",
   "displayName": "ODIN Agent",
   "version": "2.0.0",
-  "description": "ODIN agent-engineering workflows for bounded, inspectable, verified change.",
+  "description": "ODIN workflows for designing and improving AI agents.",
   "author": {
     "name": "OutlineDriven",
     "url": "https://github.com/OutlineDriven"

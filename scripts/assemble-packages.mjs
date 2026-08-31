@@ -4,27 +4,22 @@
  * Does not commit package-local skill mirrors.
  */
 import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
-import { dirname, join } from "node:path";
+import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadCatalog } from "./package-surfaces.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = join(ROOT, ".release/npm/staging");
 
-function loadMembership() {
-  const v6 = JSON.parse(
-    readFileSync(
-      join(
-        process.env.HOME,
-        ".omp/agent/sessions/-.claude-claude/2026-08-30T22-35-52-550Z_01a054d0-9b66-7766-9f51-9d204b454e3c/local/skill-foundry-final-authoring-audit-input.json",
-      ),
-      "utf8",
-    ),
-  );
+function loadMembership(root = ROOT) {
+  const membershipPath = process.env.ODIN_MEMBERSHIP_PATH
+    ? process.env.ODIN_MEMBERSHIP_PATH
+    : join(root, "catalog/provenance-rows.json");
+  const ledger = JSON.parse(readFileSync(membershipPath, "utf8"));
   const byModule = new Map();
-  for (const skill of v6.skills) {
-    if (!byModule.has(skill.module)) byModule.set(skill.module, []);
-    byModule.get(skill.module).push(skill.slug);
+  for (const row of ledger.rows) {
+    if (!byModule.has(row.module)) byModule.set(row.module, []);
+    byModule.get(row.module).push(row.slug);
   }
   for (const slugs of byModule.values()) slugs.sort();
   return byModule;
@@ -71,7 +66,7 @@ export function assemblePackages(root = ROOT, out = OUT) {
   return { copied, packages: catalog.entries.length };
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && fileURLToPath(import.meta.url) === resolve(process.argv[1])) {
   const result = assemblePackages();
   process.stdout.write(`staging packages=${result.packages} skills=${result.copied}\n`);
 }

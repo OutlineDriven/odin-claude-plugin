@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import { dirname, join } from "node:path";
+import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadCatalog } from "./package-surfaces.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 
-function loadRows(root = ROOT) {
+export function loadRows(root = ROOT) {
   const ledger = JSON.parse(readFileSync(join(root, "catalog/provenance-rows.json"), "utf8"));
-  if (ledger.skill_count !== 816 || ledger.rows.length !== 816) {
-    throw new Error(`provenance-rows.json must contain 816 rows, got ${ledger.rows.length}`);
+  if (typeof ledger.skill_count !== "number" || ledger.rows.length !== ledger.skill_count) {
+    throw new Error(`provenance-rows.json rows (${ledger.rows.length}) must match skill_count (${ledger.skill_count})`);
   }
   return ledger;
 }
@@ -36,7 +36,7 @@ export function renderProvenance(entry, rows) {
   }
   const mine = rows.filter((row) => row.module === entry.id).sort((a, b) => (a.slug < b.slug ? -1 : 1));
   lines.push(
-    `This package ships ${mine.length} public skills from the canonical \`skills/<slug>/\` tree. Package-local skill copies are generated only at pack time.`,
+    `This package ships ${mine.length} public ${mine.length === 1 ? "skill" : "skills"} from the canonical \`skills/<slug>/\` tree. Package-local skill copies are generated only at pack time.`,
     "",
     "| Skill | Strategy | Adaptation | Target | Origin |",
     "|---|---|---|---|---|",
@@ -59,7 +59,7 @@ export function renderAllProvenance(root = ROOT) {
   }));
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && fileURLToPath(import.meta.url) === resolve(process.argv[1])) {
   const files = renderAllProvenance(ROOT);
   for (const file of files) {
     const dest = join(ROOT, file.path);

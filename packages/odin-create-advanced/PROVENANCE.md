@@ -2,13 +2,12 @@
 
 OutlineDriven-authored material in this package is Apache-2.0. See the repository `LICENSE`.
 
-This package ships 28 public skills from the canonical `skills/<slug>/` tree. Package-local skill copies are generated only at pack time.
+This package ships 26 public skills from the canonical `skills/<slug>/` tree. Package-local skill copies are generated only at pack time.
 
 | Skill | Strategy | Adaptation | Target | Origin |
 |---|---|---|---|---|
 | `abstract-well` | B | byte-reuse | `skills/abstract-well/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `all-scenarios-storm` | B | byte-reuse | `skills/all-scenarios-storm/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>project-owned:user-supplied-source-brief @ `project-owned` (Project-owned or clean-room only; no copied source text) |
-| `architecture-delta` | B | byte-reuse | `skills/architecture-delta/` | https://github.com/tt-a1i/archify @ `b36d79fdbc3aec3728744341485a7e79f03c0071` (MIT) |
 | `attack-shape` | B | byte-reuse | `skills/attack-shape/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `automatic-cybernetic-flow-design` | B | byte-reuse | `skills/automatic-cybernetic-flow-design/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `automatic-freeform-graphs-design` | B | byte-reuse | `skills/automatic-freeform-graphs-design/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
@@ -22,7 +21,6 @@ This package ships 28 public skills from the canonical `skills/<slug>/` tree. Pa
 | `pr-review-canvas` | B | byte-reuse | `skills/pr-review-canvas/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
 | `pr-review-canvas-html` | B | byte-reuse | `skills/pr-review-canvas-html/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
 | `presentation-creator` | B | byte-reuse | `skills/presentation-creator/` | mblode/agent-skills @ `e97a3b383f5944f90d41eb92b24b4fb3b917a7f9` (MIT) |
-| `principle-exhaust-the-design-space` | B | byte-reuse | `skills/principle-exhaust-the-design-space/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
 | `quick-spec-render` | B | byte-reuse | `skills/quick-spec-render/` | nicobailon/visual-explainer @ `7163c3e10660912e0b89e1af465db9f387282b88` (MIT) |
 | `release-promotion` | R | rename-only | `skills/release-promotion/` | Origin: https://github.com/EveryInc/compound-engineering-plugin, revision a1f601f17137f648be439965f8fdd9123303de5d, file skills/ce-promote/SKILL.md. License: MIT (Copyright (c) 2025 Every). Mechanisms extracted and rewritten in ODIN style, not copied verbatim; the optional Spiral CLI voice-matching integration was dropped to keep the skill self-contained with no runtime dependencies, preserving the core mechanism of channel-aware launch copy drafting from shipped-change evidence. |
 | `rhythmic-taste` | B | byte-reuse | `skills/rhythmic-taste/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |

@@ -3,7 +3,7 @@
   "name": "odin-loop",
   "displayName": "ODIN Loop",
   "version": "2.0.0",
-  "description": "ODIN bounded-loop workflows for inspectable, verified change.",
+  "description": "ODIN workflows for bounded iteration with explicit completion checks.",
   "author": {
     "name": "OutlineDriven",
     "url": "https://github.com/OutlineDriven"

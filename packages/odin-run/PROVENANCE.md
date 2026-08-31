@@ -2,7 +2,7 @@
 
 OutlineDriven-authored material in this package is Apache-2.0. See the repository `LICENSE`.
 
-This package ships 92 public skills from the canonical `skills/<slug>/` tree. Package-local skill copies are generated only at pack time.
+This package ships 89 public skills from the canonical `skills/<slug>/` tree. Package-local skill copies are generated only at pack time.
 
 | Skill | Strategy | Adaptation | Target | Origin |
 |---|---|---|---|---|
@@ -64,9 +64,6 @@ This package ships 92 public skills from the canonical `skills/<slug>/` tree. Pa
 | `pr-link-issue` | B | byte-reuse | `skills/pr-link-issue/` | getsentry/skills @ `c2f99a5b04b4cd992ec3022d7c2c3e23e938d241` (Apache-2.0) |
 | `pr-triage` | G | structured-merge-rewrite | `skills/pr-triage/` | Origin: EveryInc/compound-engineering-plugin, file `.claude/commands/triage-prs.md`, revision `a1f601f17137f648be439965f8fdd9123303de5d`. License: MIT (Copyright (c) 2025 Every). Mechanisms extracted and rewritten in ODIN style; not copied verbatim. Attribution preserved in the root provenance ledger per MIT notice-retention obligation. |
 | `prepare-repository-for-public-release` | B | byte-reuse | `skills/prepare-repository-for-public-release/` | https://github.com/trailofbits/skills @ `d1f1575cff97816e5cc08af66cd2506099c681d3` (CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.) |
-| `principle-outcome-oriented-execution` | B | byte-reuse | `skills/principle-outcome-oriented-execution/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
-| `principle-prove-it-works` | B | byte-reuse | `skills/principle-prove-it-works/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
-| `principle-sequence-verifiable-units` | B | byte-reuse | `skills/principle-sequence-verifiable-units/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
 | `propose-issue` | B | byte-reuse | `skills/propose-issue/` | odin-current @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `publish-branch` | G | structured-merge-rewrite | `skills/publish-branch/` | Origin: ODIN 1.x `commit-push-current` skill (`skills/commit-push-current/SKILL.md`). Revision: unpinned (current). License: project-owned. Adaptation: restated to the ODIN 2.0 contract format with the complete atomic-commit mechanism inlined (concern grouping, revert test, mechanism split via filtered patch and `git apply --cached` with first-split confirmation, sweep and build-order rules, native verification gate, named-file staging over `git add -A`, heredoc message preservation, post-commit status and hash proof), cross-skill pointers removed, and the human-only invocation gate and push-to-origin contract added. |
 | `publish-pr` | G | structured-merge-rewrite | `skills/publish-pr/` | Adapted from `getsentry/skills`, path `skills/pr-writer/SKILL.md`, pinned at revision `c2f99a5b04b4cd992ec3022d7c2c3e23e938d241` under Apache-2.0. This version preserves the `gh`-based remote PR creation and update mechanism, draft publication boundary, conventional title, concise reviewer-facing body, and optional review aids while restating the procedure for this contract. |

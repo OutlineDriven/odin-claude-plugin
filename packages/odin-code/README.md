@@ -1,6 +1,6 @@
 # ODIN Code
 
-ODIN coding workflows for bounded, inspectable, verified change.
+ODIN workflows for writing, reviewing, and maintaining code.
 
 npm package: `@outlinedriven/odin-code@2.0.0`
 

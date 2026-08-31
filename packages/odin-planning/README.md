@@ -1,6 +1,6 @@
 # ODIN Planning
 
-ODIN planning workflows for bounded, inspectable, verified change.
+ODIN workflows for shaping requirements and implementation plans.
 
 npm package: `@outlinedriven/odin-planning@2.0.0`
 

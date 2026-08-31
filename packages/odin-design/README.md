@@ -1,6 +1,6 @@
 # ODIN Design
 
-ODIN design workflows for bounded, inspectable, verified change.
+ODIN workflows for practical interface and visual design.
 
 npm package: `@outlinedriven/odin-design@2.0.0`
 

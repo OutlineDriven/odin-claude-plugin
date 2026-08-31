@@ -3,7 +3,7 @@
   "name": "odin-python",
   "displayName": "ODIN Python",
   "version": "2.0.0",
-  "description": "ODIN Python-specific workflows for bounded, inspectable, verified change.",
+  "description": "ODIN workflows for modern Python development.",
   "author": {
     "name": "OutlineDriven",
     "url": "https://github.com/OutlineDriven"

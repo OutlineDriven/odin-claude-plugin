@@ -1,6 +1,6 @@
 # ODIN Create
 
-ODIN creation workflows for bounded, inspectable, verified change.
+ODIN workflows for turning ideas into working artifacts.
 
 npm package: `@outlinedriven/odin-create@2.0.0`
 

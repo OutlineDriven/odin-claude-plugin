@@ -3,7 +3,7 @@
   "name": "odin-run",
   "displayName": "ODIN Run",
   "version": "2.0.0",
-  "description": "ODIN execution and delivery workflows for bounded, inspectable, verified change.",
+  "description": "ODIN workflows for executing plans and shipping finished changes.",
   "author": {
     "name": "OutlineDriven",
     "url": "https://github.com/OutlineDriven"

@@ -3,7 +3,7 @@
   "name": "odin-apple",
   "displayName": "ODIN Apple",
   "version": "2.0.0",
-  "description": "ODIN Apple-platform workflows for bounded, inspectable, verified change.",
+  "description": "ODIN workflows for software on Apple platforms.",
   "author": {
     "name": "OutlineDriven",
     "url": "https://github.com/OutlineDriven"

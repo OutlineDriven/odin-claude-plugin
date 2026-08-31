@@ -1,6 +1,6 @@
 # ODIN Lean
 
-ODIN Lean-specific workflows for bounded, inspectable, verified change.
+ODIN workflows for Lean proofs and formal verification.
 
 npm package: `@outlinedriven/odin-lean@2.0.0`
 

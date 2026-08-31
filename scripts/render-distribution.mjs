@@ -4,9 +4,10 @@
  * Native catalogs list 28 runtime entries then informational odin last.
  */
 import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
-import { dirname, join } from "node:path";
+import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadCatalog } from "./package-surfaces.mjs";
+import { loadRows } from "./render-package-provenance.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = join(ROOT, ".release/distribution");
@@ -16,23 +17,18 @@ function jsonBytes(value) {
   return `${JSON.stringify(value, null, 2)}\n`;
 }
 
-function loadMembership() {
-  const v6 = JSON.parse(
-    readFileSync(
-      join(
-        process.env.HOME,
-        ".omp/agent/sessions/-.claude-claude/2026-08-30T22-35-52-550Z_01a054d0-9b66-7766-9f51-9d204b454e3c/local/skill-foundry-final-authoring-audit-input.json",
-      ),
-      "utf8",
-    ),
-  );
+function loadMembership(root = ROOT) {
+  const membershipPath = process.env.ODIN_MEMBERSHIP_PATH
+    ? process.env.ODIN_MEMBERSHIP_PATH
+    : join(root, "catalog/provenance-rows.json");
+  const ledger = JSON.parse(readFileSync(membershipPath, "utf8"));
   const byModule = new Map();
-  for (const skill of v6.skills) {
-    if (!byModule.has(skill.module)) byModule.set(skill.module, []);
-    byModule.get(skill.module).push(skill.slug);
+  for (const row of ledger.rows) {
+    if (!byModule.has(row.module)) byModule.set(row.module, []);
+    byModule.get(row.module).push(row.slug);
   }
   for (const slugs of byModule.values()) slugs.sort();
-  return { byModule, all: v6.skills.map((s) => s.slug).sort() };
+  return { byModule, all: ledger.rows.map((r) => r.slug).sort() };
 }
 
 function copySkill(root, destSkills, slug) {
@@ -100,21 +96,47 @@ function renderGrokCatalog(entries) {
   });
 }
 
+const REPOSITORY_URL = "https://github.com/OutlineDriven/odin-claude-plugin";
+
 function renderKimiCatalog(entries) {
   return jsonBytes({
     version: "2",
     plugins: entries.map((entry) => ({
       id: entry.id,
       displayName: entry.display_name,
-      source: `./plugins/modules/${entry.id}`,
+      source: `${REPOSITORY_URL}/tree/main/plugins/modules/${entry.id}`,
     })),
   });
 }
 
+function renderCompleteProvenance(rows) {
+  const sorted = [...rows].sort((a, b) => (a.slug < b.slug ? -1 : 1));
+  const lines = [
+    "# Provenance — ODIN Complete",
+    "",
+    "OutlineDriven-authored material in this package is Apache-2.0. See the repository `LICENSE`.",
+    "",
+    `This package ships ${sorted.length} public ${sorted.length === 1 ? "skill" : "skills"} from the canonical \`skills/<slug>/\` tree. Package-local skill copies are generated only at pack time.`,
+    "",
+    "| Skill | Strategy | Adaptation | Target | Origin |",
+    "|---|---|---|---|---|",
+  ];
+  for (const row of sorted) {
+    const esc = String(row.origin).replaceAll("|", "\\|");
+    lines.push(
+      `| \`${row.slug}\` | ${row.strategy} | ${row.adaptation} | \`${row.target}\` | ${esc} |`,
+    );
+  }
+  lines.push("");
+  return `${lines.join("\n")}\n`;
+}
+
 export function renderDistribution(root = ROOT, out = OUT) {
   const catalog = loadCatalog(root);
-  const { byModule, all } = loadMembership();
-  if (all.length !== 816) throw new Error(`expected 816 slugs, got ${all.length}`);
+  const ledger = loadRows(root);
+  const skillCount = ledger.skill_count;
+  const { byModule, all } = loadMembership(root);
+  if (all.length !== skillCount) throw new Error(`expected ${skillCount} slugs, got ${all.length}`);
   rmSync(out, { recursive: true, force: true });
   mkdirSync(out, { recursive: true });
 
@@ -150,7 +172,7 @@ export function renderDistribution(root = ROOT, out = OUT) {
     name: "odin-complete",
     displayName: "ODIN Complete",
     version: RELEASE_VERSION,
-    description: "Complete 816-skill ODIN plugin for hosts without a native 29-entry marketplace.",
+    description: `Complete ${skillCount}-skill ODIN plugin for hosts without a native 29-entry marketplace.`,
     author: { name: "OutlineDriven", url: "https://github.com/OutlineDriven" },
     homepage: "https://github.com/OutlineDriven/odin-claude-plugin",
     repository: "https://github.com/OutlineDriven/odin-claude-plugin",
@@ -160,7 +182,7 @@ export function renderDistribution(root = ROOT, out = OUT) {
   writeFileSync(join(complete, ".devin-plugin/plugin.json"), completePlugin);
   writeFileSync(join(complete, "plugin.json"), completePlugin);
   cpSync(join(root, "LICENSE"), join(complete, "LICENSE"));
-  cpSync(join(root, "packages/odin-core/PROVENANCE.md"), join(complete, "PROVENANCE.md"));
+  writeFileSync(join(complete, "PROVENANCE.md"), renderCompleteProvenance(ledger.rows));
   for (const slug of all) copySkill(root, join(complete, "skills"), slug);
 
   mkdirSync(join(out, ".agents/plugins"), { recursive: true });
@@ -175,7 +197,7 @@ export function renderDistribution(root = ROOT, out = OUT) {
   const manifest = {
     schema: "odin-distribution-manifest/v1",
     releaseVersion: RELEASE_VERSION,
-    skill_count: 816,
+    skill_count: skillCount,
     module_skill_copies: copied,
     catalogs: [
       ".agents/plugins/marketplace.json",
@@ -189,7 +211,7 @@ export function renderDistribution(root = ROOT, out = OUT) {
   return manifest;
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && fileURLToPath(import.meta.url) === resolve(process.argv[1])) {
   const manifest = renderDistribution();
   process.stdout.write(
     `distribution ${manifest.skill_count} skills modules=${manifest.module_skill_copies} last=${manifest.informational_last}\n`,

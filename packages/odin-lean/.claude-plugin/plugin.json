@@ -3,7 +3,7 @@
   "name": "odin-lean",
   "displayName": "ODIN Lean",
   "version": "2.0.0",
-  "description": "ODIN Lean-specific workflows for bounded, inspectable, verified change.",
+  "description": "ODIN workflows for Lean proofs and formal verification.",
   "author": {
     "name": "OutlineDriven",
     "url": "https://github.com/OutlineDriven"

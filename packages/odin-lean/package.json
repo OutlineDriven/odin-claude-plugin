@@ -1,7 +1,7 @@
 {
   "name": "@outlinedriven/odin-lean",
   "version": "2.0.0",
-  "description": "ODIN Lean-specific workflows for bounded, inspectable, verified change.",
+  "description": "ODIN workflows for Lean proofs and formal verification.",
   "keywords": [
     "odin",
     "outlinedriven",

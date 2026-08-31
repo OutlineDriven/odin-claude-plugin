@@ -3,7 +3,7 @@
   "name": "odin-run-advanced",
   "displayName": "ODIN Run Advanced",
   "version": "2.0.0",
-  "description": "ODIN advanced execution and delivery workflows for bounded, inspectable, verified change.",
+  "description": "Advanced ODIN workflows for complex execution and delivery.",
   "author": {
     "name": "OutlineDriven",
     "url": "https://github.com/OutlineDriven"

@@ -1,6 +1,6 @@
 # ODIN Research
 
-ODIN research workflows for bounded, inspectable, verified change.
+ODIN workflows for focused research and source-backed findings.
 
 npm package: `@outlinedriven/odin-research@2.0.0`
 

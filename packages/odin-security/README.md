@@ -1,6 +1,6 @@
 # ODIN Security
 
-ODIN security workflows for bounded, inspectable, verified change.
+ODIN workflows for security reviews and defensive implementation.
 
 npm package: `@outlinedriven/odin-security@2.0.0`
 

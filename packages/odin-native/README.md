@@ -1,6 +1,6 @@
 # ODIN Native
 
-ODIN native-toolchain workflows for bounded, inspectable, verified change.
+ODIN workflows for native systems, toolchains, and performance.
 
 npm package: `@outlinedriven/odin-native@2.0.0`
 

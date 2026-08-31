@@ -1,6 +1,6 @@
 # ODIN Agent
 
-ODIN agent-engineering workflows for bounded, inspectable, verified change.
+ODIN workflows for designing and improving AI agents.
 
 npm package: `@outlinedriven/odin-agent@2.0.0`
 

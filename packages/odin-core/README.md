@@ -1,6 +1,6 @@
 # ODIN Core
 
-ODIN foundational workflows for bounded, inspectable, verified change.
+Core ODIN workflows for planning, executing, and checking changes.
 
 npm package: `@outlinedriven/odin-core@2.0.0`
 

@@ -40,7 +40,7 @@
       "kind": "installer-catalog",
       "package": "@outlinedriven/odin",
       "display_name": "ODIN Installer",
-      "description": "Choose ODIN modules with the OutlineDriven universal installer.",
+      "description": "Choose ODIN modules through OutlineDriven's universal installer.",
       "tags": [
         "odin",
         "outlinedriven",
@@ -71,7 +71,7 @@
       "kind": "runtime",
       "package": "@outlinedriven/odin-core",
       "display_name": "ODIN Core",
-      "description": "ODIN foundational workflows for bounded, inspectable, verified change.",
+      "description": "Core ODIN workflows for planning, executing, and checking changes.",
       "tags": [
         "odin",
         "outlinedriven",
@@ -96,8 +96,7 @@
         "provenance": "packages/odin-core/PROVENANCE.md",
         "skills_root": "packages/odin-core/skills",
         "mcp_config": "packages/odin-core/mcp.json",
-        "mcp_vendor_manifest": "packages/odin-core/vendor/mcp/manifest.json",
-        "mcp_vendor_root": "packages/odin-core/vendor/mcp",
+        "_removed": "mcp_vendor_manifest (packages/odin-core/vendor/mcp/manifest.json) and mcp_vendor_root (packages/odin-core/vendor/mcp) — vendor/mcp does not exist on disk and no vendored bytes are shipped",
         "output_styles_root": "packages/odin-core/output-styles"
       }
     },
@@ -107,7 +106,7 @@
       "kind": "runtime",
       "package": "@outlinedriven/odin-code",
       "display_name": "ODIN Code",
-      "description": "ODIN coding workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for writing, reviewing, and maintaining code.",
       "tags": [
         "odin",
         "outlinedriven",
@@ -139,7 +138,7 @@
       "kind": "runtime",
       "package": "@outlinedriven/odin-code-advanced",
       "display_name": "ODIN Code Advanced",
-      "description": "ODIN advanced coding workflows for bounded, inspectable, verified change.",
+      "description": "Advanced ODIN workflows for complex code changes and technical audits.",
       "tags": [
         "odin",
         "outlinedriven",
@@ -172,7 +171,7 @@
       "kind": "runtime",
       "package": "@outlinedriven/odin-create",
       "display_name": "ODIN Create",
-      "description": "ODIN creation workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for turning ideas into working artifacts.",
       "tags": [
         "odin",
         "outlinedriven",
@@ -204,7 +203,7 @@
       "kind": "runtime",
       "package": "@outlinedriven/odin-create-advanced",
       "display_name": "ODIN Create Advanced",
-      "description": "ODIN advanced creation workflows for bounded, inspectable, verified change.",
+      "description": "Advanced ODIN workflows for ambitious, multi-part creative work.",
       "tags": [
         "odin",
         "outlinedriven",
@@ -237,7 +236,7 @@
       "kind": "runtime",
       "package": "@outlinedriven/odin-research",
       "display_name": "ODIN Research",
-      "description": "ODIN research workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for focused research and source-backed findings.",
       "tags": [
         "odin",
         "outlinedriven",
@@ -269,7 +268,7 @@
       "kind": "runtime",
       "package": "@outlinedriven/odin-research-advanced",
       "display_name": "ODIN Research Advanced",
-      "description": "ODIN advanced research workflows for bounded, inspectable, verified change.",
+      "description": "Advanced ODIN workflows for deep research and evidence synthesis.",
       "tags": [
         "odin",
         "outlinedriven",
@@ -302,7 +301,7 @@
       "kind": "runtime",
       "package": "@outlinedriven/odin-run",
       "display_name": "ODIN Run",
-      "description": "ODIN execution and delivery workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for executing plans and shipping finished changes.",
       "tags": [
         "odin",
         "outlinedriven",
@@ -334,7 +333,7 @@
       "kind": "runtime",
       "package": "@outlinedriven/odin-run-advanced",
       "display_name": "ODIN Run Advanced",
-      "description": "ODIN advanced execution and delivery workflows for bounded, inspectable, verified change.",
+      "description": "Advanced ODIN workflows for complex execution and delivery.",
       "tags": [
         "odin",
         "outlinedriven",
@@ -367,7 +366,7 @@
       "kind": "runtime",
       "package": "@outlinedriven/odin-agent",
       "display_name": "ODIN Agent",
-      "description": "ODIN agent-engineering workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for designing and improving AI agents.",
       "tags": [
         "odin",
         "outlinedriven",
@@ -399,7 +398,7 @@
       "kind": "runtime",
       "package": "@outlinedriven/odin-security",
       "display_name": "ODIN Security",
-      "description": "ODIN security workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for security reviews and defensive implementation.",
       "tags": [
         "odin",
         "outlinedriven",
@@ -431,7 +430,7 @@
       "kind": "runtime",
       "package": "@outlinedriven/odin-security-advanced",
       "display_name": "ODIN Security Advanced",
-      "description": "ODIN advanced security workflows for bounded, inspectable, verified change.",
+      "description": "Advanced ODIN workflows for threat analysis and security hardening.",
       "tags": [
         "odin",
         "outlinedriven",
@@ -464,7 +463,7 @@
       "kind": "runtime",
       "package": "@outlinedriven/odin-design",
       "display_name": "ODIN Design",
-      "description": "ODIN design workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for practical interface and visual design.",
       "tags": [
         "odin",
         "outlinedriven",
@@ -496,7 +495,7 @@
       "kind": "runtime",
       "package": "@outlinedriven/odin-design-advanced",
       "display_name": "ODIN Design Advanced",
-      "description": "ODIN advanced design workflows for bounded, inspectable, verified change.",
+      "description": "Advanced ODIN workflows for polished interfaces and design systems.",
       "tags": [
         "odin",
         "outlinedriven",
@@ -529,7 +528,7 @@
       "kind": "runtime",
       "package": "@outlinedriven/odin-writing",
       "display_name": "ODIN Writing",
-      "description": "ODIN writing workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for clear, useful technical writing.",
       "tags": [
         "odin",
         "outlinedriven",
@@ -561,7 +560,7 @@
       "kind": "runtime",
       "package": "@outlinedriven/odin-writing-advanced",
       "display_name": "ODIN Writing Advanced",
-      "description": "ODIN advanced writing workflows for bounded, inspectable, verified change.",
+      "description": "Advanced ODIN workflows for substantial writing and editorial work.",
       "tags": [
         "odin",
         "outlinedriven",
@@ -594,7 +593,7 @@
       "kind": "runtime",
       "package": "@outlinedriven/odin-product",
       "display_name": "ODIN Product",
-      "description": "ODIN product workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for product strategy and developer adoption.",
       "tags": [
         "odin",
         "outlinedriven",
@@ -626,7 +625,7 @@
       "kind": "runtime",
       "package": "@outlinedriven/odin-loop",
       "display_name": "ODIN Loop",
-      "description": "ODIN bounded-loop workflows for inspectable, verified change.",
+      "description": "ODIN workflows for bounded iteration with explicit completion checks.",
       "tags": [
         "odin",
         "outlinedriven",
@@ -658,7 +657,7 @@
       "kind": "runtime",
       "package": "@outlinedriven/odin-planning",
       "display_name": "ODIN Planning",
-      "description": "ODIN planning workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for shaping requirements and implementation plans.",
       "tags": [
         "odin",
         "outlinedriven",
@@ -690,7 +689,7 @@
       "kind": "runtime",
       "package": "@outlinedriven/odin-python",
       "display_name": "ODIN Python",
-      "description": "ODIN Python-specific workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for modern Python development.",
       "tags": [
         "odin",
         "outlinedriven",
@@ -722,7 +721,7 @@
       "kind": "runtime",
       "package": "@outlinedriven/odin-typescript",
       "display_name": "ODIN TypeScript",
-      "description": "ODIN TypeScript-specific workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for modern TypeScript development.",
       "tags": [
         "odin",
         "outlinedriven",
@@ -754,7 +753,7 @@
       "kind": "runtime",
       "package": "@outlinedriven/odin-web",
       "display_name": "ODIN Web",
-      "description": "ODIN web-platform workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for building and refining web applications.",
       "tags": [
         "odin",
         "outlinedriven",
@@ -786,7 +785,7 @@
       "kind": "runtime",
       "package": "@outlinedriven/odin-native",
       "display_name": "ODIN Native",
-      "description": "ODIN native-toolchain workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for native systems, toolchains, and performance.",
       "tags": [
         "odin",
         "outlinedriven",
@@ -818,7 +817,7 @@
       "kind": "runtime",
       "package": "@outlinedriven/odin-apple",
       "display_name": "ODIN Apple",
-      "description": "ODIN Apple-platform workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for software on Apple platforms.",
       "tags": [
         "odin",
         "outlinedriven",
@@ -850,7 +849,7 @@
       "kind": "runtime",
       "package": "@outlinedriven/odin-lean",
       "display_name": "ODIN Lean",
-      "description": "ODIN Lean-specific workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for Lean proofs and formal verification.",
       "tags": [
         "odin",
         "outlinedriven",
@@ -882,7 +881,7 @@
       "kind": "runtime",
       "package": "@outlinedriven/odin-terraform",
       "display_name": "ODIN Terraform",
-      "description": "ODIN Terraform-specific workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for safe Terraform infrastructure changes.",
       "tags": [
         "odin",
         "outlinedriven",
@@ -914,7 +913,7 @@
       "kind": "runtime",
       "package": "@outlinedriven/odin-bigquery",
       "display_name": "ODIN BigQuery",
-      "description": "ODIN BigQuery-specific workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for BigQuery data work and cost-aware queries.",
       "tags": [
         "odin",
         "outlinedriven",
@@ -946,7 +945,7 @@
       "kind": "runtime",
       "package": "@outlinedriven/odin-prometheus",
       "display_name": "ODIN Prometheus",
-      "description": "ODIN Prometheus-specific workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for Prometheus metrics and monitoring.",
       "tags": [
         "odin",
         "outlinedriven",

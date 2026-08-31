@@ -12,7 +12,7 @@
       "name": "odin",
       "displayName": "ODIN Installer",
       "version": "2.0.0",
-      "description": "Choose ODIN modules with the OutlineDriven universal installer.",
+      "description": "Choose ODIN modules through OutlineDriven's universal installer.",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -40,7 +40,7 @@
       "name": "odin-core",
       "displayName": "ODIN Core",
       "version": "2.0.0",
-      "description": "ODIN foundational workflows for bounded, inspectable, verified change.",
+      "description": "Core ODIN workflows for planning, executing, and checking changes.",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -67,7 +67,7 @@
       "name": "odin-code",
       "displayName": "ODIN Code",
       "version": "2.0.0",
-      "description": "ODIN coding workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for writing, reviewing, and maintaining code.",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -94,7 +94,7 @@
       "name": "odin-code-advanced",
       "displayName": "ODIN Code Advanced",
       "version": "2.0.0",
-      "description": "ODIN advanced coding workflows for bounded, inspectable, verified change.",
+      "description": "Advanced ODIN workflows for complex code changes and technical audits.",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -122,7 +122,7 @@
       "name": "odin-create",
       "displayName": "ODIN Create",
       "version": "2.0.0",
-      "description": "ODIN creation workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for turning ideas into working artifacts.",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -149,7 +149,7 @@
       "name": "odin-create-advanced",
       "displayName": "ODIN Create Advanced",
       "version": "2.0.0",
-      "description": "ODIN advanced creation workflows for bounded, inspectable, verified change.",
+      "description": "Advanced ODIN workflows for ambitious, multi-part creative work.",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -177,7 +177,7 @@
       "name": "odin-research",
       "displayName": "ODIN Research",
       "version": "2.0.0",
-      "description": "ODIN research workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for focused research and source-backed findings.",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -204,7 +204,7 @@
       "name": "odin-research-advanced",
       "displayName": "ODIN Research Advanced",
       "version": "2.0.0",
-      "description": "ODIN advanced research workflows for bounded, inspectable, verified change.",
+      "description": "Advanced ODIN workflows for deep research and evidence synthesis.",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -232,7 +232,7 @@
       "name": "odin-run",
       "displayName": "ODIN Run",
       "version": "2.0.0",
-      "description": "ODIN execution and delivery workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for executing plans and shipping finished changes.",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -259,7 +259,7 @@
       "name": "odin-run-advanced",
       "displayName": "ODIN Run Advanced",
       "version": "2.0.0",
-      "description": "ODIN advanced execution and delivery workflows for bounded, inspectable, verified change.",
+      "description": "Advanced ODIN workflows for complex execution and delivery.",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -287,7 +287,7 @@
       "name": "odin-agent",
       "displayName": "ODIN Agent",
       "version": "2.0.0",
-      "description": "ODIN agent-engineering workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for designing and improving AI agents.",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -314,7 +314,7 @@
       "name": "odin-security",
       "displayName": "ODIN Security",
       "version": "2.0.0",
-      "description": "ODIN security workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for security reviews and defensive implementation.",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -341,7 +341,7 @@
       "name": "odin-security-advanced",
       "displayName": "ODIN Security Advanced",
       "version": "2.0.0",
-      "description": "ODIN advanced security workflows for bounded, inspectable, verified change.",
+      "description": "Advanced ODIN workflows for threat analysis and security hardening.",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -369,7 +369,7 @@
       "name": "odin-design",
       "displayName": "ODIN Design",
       "version": "2.0.0",
-      "description": "ODIN design workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for practical interface and visual design.",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -396,7 +396,7 @@
       "name": "odin-design-advanced",
       "displayName": "ODIN Design Advanced",
       "version": "2.0.0",
-      "description": "ODIN advanced design workflows for bounded, inspectable, verified change.",
+      "description": "Advanced ODIN workflows for polished interfaces and design systems.",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -424,7 +424,7 @@
       "name": "odin-writing",
       "displayName": "ODIN Writing",
       "version": "2.0.0",
-      "description": "ODIN writing workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for clear, useful technical writing.",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -451,7 +451,7 @@
       "name": "odin-writing-advanced",
       "displayName": "ODIN Writing Advanced",
       "version": "2.0.0",
-      "description": "ODIN advanced writing workflows for bounded, inspectable, verified change.",
+      "description": "Advanced ODIN workflows for substantial writing and editorial work.",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -479,7 +479,7 @@
       "name": "odin-product",
       "displayName": "ODIN Product",
       "version": "2.0.0",
-      "description": "ODIN product workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for product strategy and developer adoption.",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -506,7 +506,7 @@
       "name": "odin-loop",
       "displayName": "ODIN Loop",
       "version": "2.0.0",
-      "description": "ODIN bounded-loop workflows for inspectable, verified change.",
+      "description": "ODIN workflows for bounded iteration with explicit completion checks.",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -533,7 +533,7 @@
       "name": "odin-planning",
       "displayName": "ODIN Planning",
       "version": "2.0.0",
-      "description": "ODIN planning workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for shaping requirements and implementation plans.",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -560,7 +560,7 @@
       "name": "odin-python",
       "displayName": "ODIN Python",
       "version": "2.0.0",
-      "description": "ODIN Python-specific workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for modern Python development.",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -587,7 +587,7 @@
       "name": "odin-typescript",
       "displayName": "ODIN TypeScript",
       "version": "2.0.0",
-      "description": "ODIN TypeScript-specific workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for modern TypeScript development.",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -614,7 +614,7 @@
       "name": "odin-web",
       "displayName": "ODIN Web",
       "version": "2.0.0",
-      "description": "ODIN web-platform workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for building and refining web applications.",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -641,7 +641,7 @@
       "name": "odin-native",
       "displayName": "ODIN Native",
       "version": "2.0.0",
-      "description": "ODIN native-toolchain workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for native systems, toolchains, and performance.",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -668,7 +668,7 @@
       "name": "odin-apple",
       "displayName": "ODIN Apple",
       "version": "2.0.0",
-      "description": "ODIN Apple-platform workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for software on Apple platforms.",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -695,7 +695,7 @@
       "name": "odin-lean",
       "displayName": "ODIN Lean",
       "version": "2.0.0",
-      "description": "ODIN Lean-specific workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for Lean proofs and formal verification.",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -722,7 +722,7 @@
       "name": "odin-terraform",
       "displayName": "ODIN Terraform",
       "version": "2.0.0",
-      "description": "ODIN Terraform-specific workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for safe Terraform infrastructure changes.",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -749,7 +749,7 @@
       "name": "odin-bigquery",
       "displayName": "ODIN BigQuery",
       "version": "2.0.0",
-      "description": "ODIN BigQuery-specific workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for BigQuery data work and cost-aware queries.",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -776,7 +776,7 @@
       "name": "odin-prometheus",
       "displayName": "ODIN Prometheus",
       "version": "2.0.0",
-      "description": "ODIN Prometheus-specific workflows for bounded, inspectable, verified change.",
+      "description": "ODIN workflows for Prometheus metrics and monitoring.",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"

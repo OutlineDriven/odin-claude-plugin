@@ -1,6 +1,6 @@
 # ODIN TypeScript
 
-ODIN TypeScript-specific workflows for bounded, inspectable, verified change.
+ODIN workflows for modern TypeScript development.
 
 npm package: `@outlinedriven/odin-typescript@2.0.0`
 

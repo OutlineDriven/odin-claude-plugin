@@ -2,12 +2,12 @@
 
 OutlineDriven-authored material in this package is Apache-2.0. See the repository `LICENSE`.
 
-This package ships 64 public skills from the canonical `skills/<slug>/` tree. Package-local skill copies are generated only at pack time.
+This package ships 59 public skills from the canonical `skills/<slug>/` tree. Package-local skill copies are generated only at pack time.
 
 | Skill | Strategy | Adaptation | Target | Origin |
 |---|---|---|---|---|
 | `adverse-possible-worlds-qa` | B | byte-reuse | `skills/adverse-possible-worlds-qa/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
-| `architect` | B | byte-reuse | `skills/architect/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
+| `architect` | G | structured-merge-rewrite | `skills/architect/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT)<br>mblode/agent-skills @ `e97a3b383f5944f90d41eb92b24b4fb3b917a7f9` (MIT)<br>odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>mattpocock/skills @ `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76` (MIT) |
 | `behavior-validator` | B | byte-reuse | `skills/behavior-validator/` | https://github.com/openclaw/agent-skills @ `ae75f60e8d454f1cf44ec4613e10ec9ea7f2ade7` (MIT) |
 | `blast-radius` | B | byte-reuse | `skills/blast-radius/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
 | `breaking-driven` | G | structured-merge-rewrite | `skills/breaking-driven/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text) |
@@ -33,8 +33,6 @@ This package ships 64 public skills from the canonical `skills/<slug>/` tree. Pa
 | `grill-the-core` | B | byte-reuse | `skills/grill-the-core/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `grill-with-docs` | B | byte-reuse | `skills/grill-with-docs/` | mattpocock/skills @ `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76` (MIT) |
 | `guillotine` | B | byte-reuse | `skills/guillotine/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
-| `improve-architecture` | B | byte-reuse | `skills/improve-architecture/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text) |
-| `improve-codebase-architecture` | B | byte-reuse | `skills/improve-codebase-architecture/` | mattpocock/skills @ `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76` (MIT) |
 | `leave-only-first-principle` | B | byte-reuse | `skills/leave-only-first-principle/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `maintain-verification-skill` | B | byte-reuse | `skills/maintain-verification-skill/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
 | `make-bot-ui` | B | byte-reuse | `skills/make-bot-ui/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
@@ -48,8 +46,6 @@ This package ships 64 public skills from the canonical `skills/<slug>/` tree. Pa
 | `performance-optimization` | B | byte-reuse | `skills/performance-optimization/` | addyosmani/agent-skills @ `d2c37ef6225dd8726cdd369a8030307f48592d26` (MIT) |
 | `pr-impact-quiz` | B | byte-reuse | `skills/pr-impact-quiz/` | project-owned:user-curated-skill-ideas @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `pre-send-sensitive-redaction` | B | byte-reuse | `skills/pre-send-sensitive-redaction/` | https://github.com/microsoft/skill-recorder @ `c7f2fe4402527a0eb7f4fc1b653bf438229bac61` (MIT) |
-| `principle-redesign-from-first-principles` | B | byte-reuse | `skills/principle-redesign-from-first-principles/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
-| `principle-separate-before-serializing-shared-state` | B | byte-reuse | `skills/principle-separate-before-serializing-shared-state/` | cursor/plugins @ `68836ddaf5697224520f1847d90cdb90ca8babaa` (MIT) |
 | `proof-driven` | B | byte-reuse | `skills/proof-driven/` | odin-current @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `property-test-authoring` | B | byte-reuse | `skills/property-test-authoring/` | https://github.com/trailofbits/skills @ `d1f1575cff97816e5cc08af66cd2506099c681d3` (CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.) |
 | `property-test-failure-triage` | B | byte-reuse | `skills/property-test-failure-triage/` | https://github.com/trailofbits/skills @ `d1f1575cff97816e5cc08af66cd2506099c681d3` (CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.) |
@@ -58,7 +54,6 @@ This package ships 64 public skills from the canonical `skills/<slug>/` tree. Pa
 | `record-design-decisions` | B | byte-reuse | `skills/record-design-decisions/` | mattpocock/skills @ `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76` (MIT) |
 | `refactor-break-compat` | G | structured-merge-rewrite | `skills/refactor-break-compat/` | odin-current @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `restart-keeping-lessons` | G | structured-merge-rewrite | `skills/restart-keeping-lessons/` | odin-current @ `project-owned` (Project-owned or clean-room only; no copied source text) |
-| `review-fix` | G | structured-merge-rewrite | `skills/review-fix/` | Origin: https://github.com/garrytan/gstack, revision 07b59e396c6be5a86619a43151cb9ed62a15ae69. License: MIT (Copyright (c) 2026 Garry Tan), blob 35029511144443297cad2d26e4bac17d0e352f93. Adaptation: clean-room re-derivation of the pre-landing review pipeline (diff read, general and design checklists, eight specialist reviewers, fix-clear-defects-first ordering, subagent dispatch, and finding accounting) into a self-contained procedure; no third-party expressive prose or code copied wholesale. |
 | `slicing-code-context` | B | byte-reuse | `skills/slicing-code-context/` | https://github.com/trailofbits/skills @ `d1f1575cff97816e5cc08af66cd2506099c681d3` (CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.) |
 | `smart-contract-code-maturity-assessor` | B | byte-reuse | `skills/smart-contract-code-maturity-assessor/` | https://github.com/trailofbits/skills @ `d1f1575cff97816e5cc08af66cd2506099c681d3` (CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.) |
 | `smart-contract-guidelines-advisor` | B | byte-reuse | `skills/smart-contract-guidelines-advisor/` | https://github.com/trailofbits/skills @ `d1f1575cff97816e5cc08af66cd2506099c681d3` (CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding.) |

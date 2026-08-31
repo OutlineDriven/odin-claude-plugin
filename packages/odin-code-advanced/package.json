@@ -1,7 +1,7 @@
 {
   "name": "@outlinedriven/odin-code-advanced",
   "version": "2.0.0",
-  "description": "ODIN advanced coding workflows for bounded, inspectable, verified change.",
+  "description": "Advanced ODIN workflows for complex code changes and technical audits.",
   "keywords": [
     "odin",
     "outlinedriven",

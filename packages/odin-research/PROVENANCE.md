@@ -2,7 +2,7 @@
 
 OutlineDriven-authored material in this package is Apache-2.0. See the repository `LICENSE`.
 
-This package ships 125 public skills from the canonical `skills/<slug>/` tree. Package-local skill copies are generated only at pack time.
+This package ships 124 public skills from the canonical `skills/<slug>/` tree. Package-local skill copies are generated only at pack time.
 
 | Skill | Strategy | Adaptation | Target | Origin |
 |---|---|---|---|---|
@@ -41,8 +41,7 @@ This package ships 125 public skills from the canonical `skills/<slug>/` tree. P
 | `decision-rationale-gaps` | G | structured-merge-rewrite | `skills/decision-rationale-gaps/` | Origin: https://github.com/LilMGenius/paperthin (MIT, (c) 2026 LilMGenius). Revision: 3bca079a51bcfff5dafb53d1d7f9f523d66ee317. Path: skills/depth/feynman/SKILL.md. License: MIT. Adaptation: clean-room. Material from mattpocock/skills (MIT, (c) 2026 Matt Pocock) is vendor-verbatim in the paperthin source and is not directly copied; the foundry adapts the paperthin feynman teaching technique as a decision-pressing workflow, preserving: the isolated-critic sub-session requirement, the narrow-don't-repeat instruction class, the single-gap-at-a-time return rule, and the never-supply-rationale invariant. The ODIN skill narrows scope to post-decision advisory critique, sets authority to read-only advisory, removes teaching-role framing, and targets ODIN run-flow quality gates. |
 | `developer-experience-review` | R | rename-only | `skills/developer-experience-review/` | Origin: https://github.com/garrytan/gstack, path devex-review/SKILL.md, revision 07b59e396c6be5a86619a43151cb9ed62a15ae69. License MIT, copyright (c) 2026 Garry Tan, LICENSE blob sha 35029511144443297cad2d26e4bac17d0e352f93. Adaptation: clean-room re-derivation of the dogfooding evaluation method; expressive prose and the eight-dimension scorecard are re-derived, not copied from the source. |
 | `doc-review` | G | structured-merge-rewrite | `skills/doc-review/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text) |
-| `docs-and-adrs` | B | byte-reuse | `skills/docs-and-adrs/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text) |
-| `documentation-and-adrs` | B | byte-reuse | `skills/documentation-and-adrs/` | addyosmani/agent-skills @ `d2c37ef6225dd8726cdd369a8030307f48592d26` (MIT) |
+| `docs-and-adrs` | G | structured-merge-rewrite | `skills/docs-and-adrs/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text)<br>addyosmani/agent-skills @ `d2c37ef6225dd8726cdd369a8030307f48592d26` (MIT) |
 | `domain-modeling` | B | byte-reuse | `skills/domain-modeling/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `drift-detect` | B | byte-reuse | `skills/drift-detect/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text) |
 | `drill` | B | byte-reuse | `skills/drill/` | odin-1.x-current-skill @ `project-owned` (Project-owned or clean-room only; no copied source text) |

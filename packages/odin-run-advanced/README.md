@@ -1,6 +1,6 @@
 # ODIN Run Advanced
 
-ODIN advanced execution and delivery workflows for bounded, inspectable, verified change.
+Advanced ODIN workflows for complex execution and delivery.
 
 npm package: `@outlinedriven/odin-run-advanced@2.0.0`
 

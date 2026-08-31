@@ -1,6 +1,6 @@
 # ODIN Design Advanced
 
-ODIN advanced design workflows for bounded, inspectable, verified change.
+Advanced ODIN workflows for polished interfaces and design systems.
 
 npm package: `@outlinedriven/odin-design-advanced@2.0.0`
 

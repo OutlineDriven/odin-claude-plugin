@@ -3,7 +3,7 @@
   "name": "odin-security-advanced",
   "displayName": "ODIN Security Advanced",
   "version": "2.0.0",
-  "description": "ODIN advanced security workflows for bounded, inspectable, verified change.",
+  "description": "Advanced ODIN workflows for threat analysis and security hardening.",
   "author": {
     "name": "OutlineDriven",
     "url": "https://github.com/OutlineDriven"

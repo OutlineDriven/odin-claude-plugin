@@ -1,6 +1,6 @@
 # ODIN Python
 
-ODIN Python-specific workflows for bounded, inspectable, verified change.
+ODIN workflows for modern Python development.
 
 npm package: `@outlinedriven/odin-python@2.0.0`
 

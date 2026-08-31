@@ -1,7 +1,7 @@
 {
   "name": "@outlinedriven/odin-security",
   "version": "2.0.0",
-  "description": "ODIN security workflows for bounded, inspectable, verified change.",
+  "description": "ODIN workflows for security reviews and defensive implementation.",
   "keywords": [
     "odin",
     "outlinedriven",

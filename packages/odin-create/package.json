@@ -1,7 +1,7 @@
 {
   "name": "@outlinedriven/odin-create",
   "version": "2.0.0",
-  "description": "ODIN creation workflows for bounded, inspectable, verified change.",
+  "description": "ODIN workflows for turning ideas into working artifacts.",
   "keywords": [
     "odin",
     "outlinedriven",

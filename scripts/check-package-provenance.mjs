@@ -1,12 +1,13 @@
 #!/usr/bin/env node
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadCatalog } from "./package-surfaces.mjs";
-import { renderAllProvenance } from "./render-package-provenance.mjs";
+import { renderAllProvenance, loadRows } from "./render-package-provenance.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const catalog = loadCatalog(ROOT);
+const ledger = loadRows(ROOT);
 const expected = renderAllProvenance(ROOT);
 let drift = 0;
 let runtimeRows = 0;
@@ -31,13 +32,22 @@ if (!odin.includes("Shipped skill rows: 0.")) {
   console.error("odin provenance must ship zero skill rows");
   drift += 1;
 }
-if (runtimeRows !== 816) {
-  console.error(`runtime provenance rows ${runtimeRows}, want 816`);
+if (runtimeRows !== ledger.skill_count) {
+  console.error(`runtime provenance rows ${runtimeRows}, want ${ledger.skill_count}`);
   drift += 1;
 }
-if (catalog.entries.length !== 29) {
-  console.error("catalog cardinality failed");
+const skillsDir = join(ROOT, "skills");
+const skillsOnDisk = new Set(
+  readdirSync(skillsDir, { withFileTypes: true })
+    .filter((d) => d.isDirectory())
+    .map((d) => d.name),
+);
+const missingSlugs = ledger.rows
+  .map((r) => r.slug)
+  .filter((slug) => !skillsOnDisk.has(slug));
+if (missingSlugs.length > 0) {
+  console.error(`ledger slugs without canonical skills/ directory: ${missingSlugs.join(", ")}`);
   drift += 1;
 }
 if (drift) process.exit(1);
-process.stdout.write("package-provenance match 816\n");
+process.stdout.write(`package-provenance match ${ledger.skill_count}\n`);
