@@ -1,3 +1,0 @@
-interface:
-  display_name: "Test Driven"
-  short_description: "Build features or fixes test-first as red-green-refactor slices"

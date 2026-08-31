@@ -1,3 +1,0 @@
-interface:
-  display_name: "Tdd Vertical Slices"
-  short_description: "Use when asked to build or fix behaviour test-first."
