@@ -18,9 +18,9 @@ codex plugin add odin-writing-advanced@odin-marketplace
 
 ## Skills
 
-- blog-writing-guide
 - copywriting-prose-creator
 - copywriting-tone-of-voice-creator
+- engineering-blog-writing
 - writing-beats
 - writing-fragments
 - writing-shape
