@@ -1,6 +1,6 @@
 # Worked audits
 
-Three terse examples — prose, code, decision. Each: artifact → per-anchor verdict → top-3 fixes → revised.
+Three terse examples: prose, code, and decision. Each follows artifact → per-anchor verdict → top-3 fixes → revised.
 
 ## Example 1 — Prose (corporate-blog opener)
 

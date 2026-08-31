@@ -1,6 +1,6 @@
 # Charter
 
-The two-sided ban list. Side A is the centroid-AI default. Side B is decoration covering thin ideas. Both come from refusing to commit. `/taste` rejects both, equally.
+The two-sided ban list. Side A is the centroid-AI default. Side B is decoration covering thin ideas. Both come from refusing to commit, and `/taste` rejects them equally.
 
 ## Side A — slop (centroid-AI default convergence)
 

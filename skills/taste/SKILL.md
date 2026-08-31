@@ -32,14 +32,14 @@ Auto-detect from the user's phrasing, with slash-arg override:
 
 ### Audit mode
 
-1. Walk the eight anchors one at a time against the artifact.
+1. Walk the eleven anchors one at a time against the artifact.
 2. For each anchor: state the anchor, judge the artifact (pass / warn / fail), cite the Side A or Side B charter row when violated, and write a concrete fix.
 3. When two anchors fail with conflicting fixes (e.g., Restraint says compress, Generosity says expand), surface the tension explicitly. Do not auto-pick. Tie-break is user-led.
 4. Close with the top-3 ranked fixes.
 
 ### Anchor mode
 
-1. Load the charter and anchors as imperatives honored across subsequent responses.
+1. Load the charter and anchors as imperatives for subsequent responses.
 2. Persistence is best-effort: applies until the user signals "stop taste" or "normal mode" OR context is compacted, whichever comes first.
 3. Re-invoke `/taste anchor` if drift is observed.
 
@@ -69,7 +69,7 @@ Resume the register once the high-stakes section ends.
 
 ### Anchors
 
-Eight anchors apply across prose, code, design, and decisions:
+Eleven anchors apply across prose, code, design, and decisions:
 
 - **Clarity**: the artifact says what it means; reader does not have to decode.
 - **Hierarchy**: important looks important; secondary supports.
@@ -77,8 +77,11 @@ Eight anchors apply across prose, code, design, and decisions:
 - **Coherence**: parts agree; tension only where deliberately staged.
 - **Restraint**: default posture; compress before adding.
 - **Generosity**: gives more than required at the right moment.
-- **Honesty**: no decoration covering missing depth; no slop covering missing POV.
+- **Honesty**: no decoration covering missing depth; no slop covering missing POV. Care finishes the unseen.
 - **One strong moment**: exactly one commitment carries the lift; the rest supports.
+- **Invariants**: the artifact names what must hold; preconditions, postconditions, and invariants are explicit.
+- **Audience**: the artifact enters through the reader's frame, not the author's.
+- **Emptiness**: the artifact leaves space the user completes; the least assertion.
 
 ## Failure and recovery
 | Failure class | Response |
@@ -88,7 +91,7 @@ Eight anchors apply across prose, code, design, and decisions:
 | Anchor mode drift after context compaction | Re-invoke `/taste anchor`; do not assume persistence. |
 | User artifact is in a domain with no charter row | Apply the anchors directly; note the domain gap in the verdict table. |
 
-No partial-result fabrication. If fewer than eight anchors can be judged, return only the judged anchors and name the blocker.
+No partial-result fabrication. If fewer than eleven anchors can be judged, return only the judged anchors and name the blocker.
 
 ## Output
 **Audit mode**: a per-anchor verdict table (Anchor | Verdict | Citation | Fix) followed by ranked top-3 fixes.
@@ -110,11 +113,11 @@ Top-3 fixes: 1. Pick one direction (Intent + One-strong-moment).
              3. Cut the framing paragraph (Restraint).
 ```
 
-**Anchor mode**: a register-load confirmation listing the eight anchors, the Side A and Side B block patterns, and the persistence caveat.
+**Anchor mode**: a register-load confirmation listing the eleven anchors, the Side A and Side B block patterns, and the persistence caveat.
 
 ## Provenance
 
 - Origin: current-odin-skill-tree, skills/taste/SKILL.md (candidate current:current-d:current:taste, disposition ADAPT) merged with skills/slop/SKILL.md (candidate current:current-d:current:slop, disposition MERGE into taste).
 - Revision: none pinned.
 - License: project-owned.
-- Adaptation: clean-room rewrite preserving the eight-anchor charter, two-sided Side A/B framework, audit/anchor dual-mode procedure, and auto-clarity exception from the current taste skill. Slop's trigger predicate and interface metadata transfer at the wall; its domain-routing table (referencing peer skills) is excluded per the self-containment requirement.
+- Adaptation: clean-room rewrite preserving the eleven-anchor charter, two-sided Side A/B framework, audit/anchor dual-mode procedure, and auto-clarity exception from the current taste skill. Slop's trigger predicate and interface metadata transfer at the wall; its domain-routing table (referencing peer skills) is excluded per the self-containment requirement.
