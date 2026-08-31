@@ -1,6 +1,6 @@
 ---
 name: docs-and-adrs
-description: 'Use when making an architectural decision, changing a public API, shipping a user-facing feature, or capturing context for future engineers and agents. Produces ADRs, README and API documentation, inline gotcha comments, changelog entries, and current agent-rules files. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when making an architectural decision, changing a public API, or shipping a feature needing rationale. Produces ADRs, inline gotchas, README/API docs, and changelog entries. Not for Diataxis doc writing — use docs-writing; not for PR-based doc sync — use docs-update.'
 ---
 
 # Docs and ADRs
@@ -18,12 +18,14 @@ description: 'Use when making an architectural decision, changing a public API, 
 
 - Required: the decision, API change, feature, or context that fired the trigger, with the rationale and constraints the user can supply.
 - Optional: existing ADR directory, README, `CHANGELOG.md`, OpenAPI spec, and agent-rules file; where one is absent, create it at the location the Procedure names.
+- Optional: the repository's documentation convention (ADR directory, numbering, extension, markup, heading set), detected by inspection; an established convention overrides the Procedure's defaults.
 - Dates, rejected alternatives, and constraints come only from the user or the repository; never invent them.
 
 ## Procedure
 
-1. Bound scope before any write: enumerate only the decisions, APIs, and features named by the trigger. Do not document code whose meaning is obvious from reading it, write comments restating what code already says, or document throwaway prototypes.
-2. For each significant decision — a framework or library choice, data model, auth strategy, API architecture, or any expensive-to-reverse choice, including a choice between competing approaches — write one ADR. Read the existing ADR directory to confirm the next number, then write `docs/adr/NNNN-<kebab-title>.md` (create `docs/adr/` when absent; `NNNN` continues existing numbering or starts at `0001`):
+1. Bound scope before any write: enumerate only the decisions, APIs, and features named by the trigger. Do not document code whose meaning is obvious from reading it, write comments restating what code already says, or document throwaway prototypes. Done when: the scope list names only items from the trigger and nothing invented.
+2. Inspect the repository for an established documentation convention: existing ADRs, project instructions, ADR tooling config. Match the existing location, extension, markup, numbering, and heading set; when evidence conflicts, surface the conflict instead of introducing a second scheme. Apply the defaults below only when no convention exists. Done when: the convention is matched, or the default layout is selected with any conflict surfaced.
+3. For each significant decision — a framework or library choice, data model, auth strategy, API architecture, or any expensive-to-reverse choice, including a choice between competing approaches — write one ADR. Read the existing ADR directory to confirm the next number, then write `docs/adr/NNNN-<kebab-title>.md` (create `docs/adr/` when absent; `NNNN` continues existing numbering or starts at `0001`):
 
    ```markdown
    # NNNN. <Title>
@@ -38,7 +40,11 @@ description: 'Use when making an architectural decision, changing a public API, 
 
    ## Context
 
-   Requirements, constraints, and the alternatives considered.
+   Requirements, constraints, and forces.
+
+   ## Alternatives considered
+
+   Each alternative with pros, cons, and its rejection reason.
 
    ## Decision
 
@@ -49,34 +55,27 @@ description: 'Use when making an architectural decision, changing a public API, 
    What becomes easier, what becomes harder, and what this enables or blocks later.
    ```
 
-3. Manage the ADR lifecycle in place: an ADR recording a decision taken in this session is `accepted`; when a later ADR reverses an earlier one, set the old ADR's status to `superseded by NNNN`, and never delete an ADR file.
-4. Inline comments: write only why-comments — the constraint, trade-off, or trap the code cannot show. Replace what-comments (`i++; // increment i`) with why-comments (`i++; // retry budget: the upstream limiter drops the first burst per connection`).
-5. Document each known trap as a gotcha comment at the exact place a future engineer or agent would hit it, stating the trigger and the reason (`// NOTE: call flush() before close(); close() silently drops buffered records otherwise.`). Delete commented-out code on this pass, and report a TODO comment that has sat for weeks as stale instead of leaving it as documentation.
-6. API documentation: for every public API function added or changed, write JSDoc carrying its TypeScript parameter and return types; for every REST endpoint added or changed, add or update its OpenAPI/Swagger entry — path, method, parameters, and response schema — in the project's OpenAPI spec.
-7. README: when the project has no README or its README is stale relative to this work, update it to cover quick start, commands, an architecture overview, and contributing, preserving existing correct content.
-8. Changelog: when shipping a feature that changes user-facing behavior, add a Keep-a-Changelog-style entry at the top of `CHANGELOG.md` (create `## [Unreleased]` when absent) under one of `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Security`.
-9. Keep agent-facing documentation current in the same pass: the agent-rules file (`CLAUDE.md` or `AGENTS.md`) carries the conventions agents must follow, spec files stay updated so agents build the right thing, ADRs record why past decisions were made so agents do not re-decide them, and inline gotchas sit where agents will hit them.
-10. Stop rather than widen scope: never expand the pass into documenting the whole codebase, and never write an artifact whose content would have to be invented.
+   Done when: an ADR file exists at `docs/adr/NNNN-<kebab-title>.md` (or the detected convention's path) for each significant decision, with sequential numbering continuing the existing sequence.
+4. Manage the ADR lifecycle in place. Mark an ADR recording a decision taken in this session as `accepted`. When a later ADR reverses an earlier one, set the old ADR's status to `superseded by NNNN`. Never delete an ADR file. Done when: each ADR's status field reflects its lifecycle position.
+5. Inline comments: write only why-comments that explain the constraint, trade-off, or trap the code cannot show. Replace what-comments (`i++; // increment i`) with why-comments (`i++; // retry budget: the upstream limiter drops the first burst per connection`). Done when: every comment in the changed surface is a why-comment; no what-comments remain.
+6. Document each known trap as a gotcha comment at the exact place a future engineer or agent would hit it. State the trigger and the reason, and cross-reference the governing ADR by number where one exists (`// NOTE: call flush() before close(); close() silently drops buffered records otherwise. See ADR 0007.`). Delete commented-out code on this pass. Report a TODO comment that has sat for weeks as stale instead of leaving it as documentation. Done when: each known trap has a gotcha comment at its code site and no commented-out code remains in the changed surface.
+7. API documentation: for every public API function added or changed, write JSDoc with its TypeScript parameter and return types, thrown errors, and a usage example. For every REST endpoint added or changed, add or update its OpenAPI/Swagger entry in the project's OpenAPI spec, including path, method, parameters, and response schema. Done when: every public API function in scope has typed JSDoc and every REST endpoint in scope has an OpenAPI entry.
+8. README: when the project has no README or its README is stale relative to this work, update it to cover quick start, commands, an architecture overview linking to ADRs, and contributing, preserving existing correct content. Done when: README covers quick start, commands, architecture overview, and contributing.
+9. Changelog: when shipping a feature that changes user-facing behavior, add a Keep-a-Changelog-style entry at the top of `CHANGELOG.md` (create `## [Unreleased]` when absent) under one of `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Security`, with the issue or PR reference where one exists. Done when: a changelog entry exists under the correct section for each user-facing behavior change.
+10. Keep agent-facing documentation current in the same pass. Put agent conventions in the agent-rules file (`CLAUDE.md` or `AGENTS.md`). Keep spec files updated so agents build the right thing. Use ADRs to record why past decisions were made so agents do not re-decide them. Place inline gotchas where agents will encounter them. Done when: agent-rules files and spec files reflect current conventions and no settled decision lacks a discoverable rationale.
+11. Stop rather than widen scope: never expand the pass into documenting the whole codebase, and never write an artifact whose content would have to be invented. Done when: no artifact was written whose content had to be invented and no out-of-trigger code was documented.
 
 ## Failure and recovery
-- Missing rationale: do not fabricate constraints, alternatives, or dates. Ask the human for the why, or record the ADR with an explicit `Rationale: unknown` line and report the gap; never present a fabricated rationale as done.
+- Missing rationale: do not fabricate constraints, alternatives, or dates. Ask the human for the reason, or record the ADR with an explicit `Rationale: unknown` line and report the gap. Never present a fabricated rationale as done.
+- Conflicting documentation convention: stop and surface the conflict with the evidence found; never write an ADR under an invented or second scheme.
 - Conflicting or stale existing docs: edit in place and preserve correct existing content; never rewrite unrelated sections to impose a structure.
 - Interrupted pass: each written artifact is self-contained, so partial results stay valid; list exactly which files were created or edited and touch nothing further.
 - Rollback: every change is a plain working-tree edit; restore the touched tracked files with version control or delete created ADR files to revert completely.
 - Blocked: when the decision or its rationale cannot be obtained, stop before writing and report which decision is blocked and which input is missing; the done predicate never reports true while a checklist item fails.
 
 ## Output
-A report listing every file created or edited with a one-line change description, the ADR numbers and titles created, surfaced gaps (decisions with unknown rationale, stale TODOs reported), and this checklist with per-item pass state:
-
-- [ ] ADR exists for all significant architectural decisions
-- [ ] README covers quick start, commands, and architecture overview
-- [ ] Public API functions have parameter and return type documentation; REST endpoints have OpenAPI entries
-- [ ] Known gotchas are documented inline where they matter
-- [ ] No commented-out code remains
-- [ ] Agent-rules files are current and accurate
-
-Terminal state is done only when every checklist item passes; otherwise the report names the failing items and stops.
+A report listing every file created or edited with a one-line change description, the ADR numbers and titles created, and surfaced gaps (decisions with unknown rationale, stale TODOs reported), ordered by artifact type then file path.
 
 ## Provenance
 
-Adapted from the ODIN 1.x project-owned skill `skills/docs-and-adrs/SKILL.md` (candidate `current:current-b:current:docs-and-adrs`); no upstream revision pin and no external license apply. Normalized to the ODIN 2.0 router format; the five reference files (`references/adrs.md`, `references/inline-comments.md`, `references/api-documentation.md`, `references/readme-structure.md`, `references/changelog.md`) are folded inline per the editorial ruling and no third-party expression is copied.
+Adapted from the ODIN 1.x project-owned skill `skills/docs-and-adrs/SKILL.md` (candidate `current:current-b:current:docs-and-adrs`); no upstream revision pin applies to that lineage. Absorbs `skills/documentation-and-adrs/SKILL.md`, adapted from `addyosmani/agent-skills` at pinned revision `d2c37ef6225dd8726cdd369a8030307f48592d26` (MIT, Copyright (c) 2025 Addy Osmani): convention detection before defaults, alternatives with rejection reasons, ADR cross-references from gotchas, and the never-delete-superseded-ADRs rule. The MIT permission notice is retained in derived distributions.

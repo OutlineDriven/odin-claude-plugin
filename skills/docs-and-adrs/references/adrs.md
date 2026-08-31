@@ -1,6 +1,6 @@
-# Architecture Decision Records (ADRs)
+# Architecture decision records (ADRs)
 
-ADRs capture the reasoning behind significant technical decisions. They're the highest-value documentation you can write.
+ADRs record the reasoning behind significant technical decisions.
 
 ## When to write an ADR
 
