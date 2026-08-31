@@ -82,10 +82,10 @@ disable-model-invocation: true
 10. Post to Slack. Refuse any webhook URL whose host is not `hooks.slack.com`. Write `{"text": "<Executive Summary and the Notion weekly page link>"}` to a JSON file and send it:
 
     ```bash
-    curl -s -X POST -H "Content-type: application/json" --data @/tmp/wynk_slack.json "$SLACK_WEBHOOK_URL"
+    curl -s --fail-with-body -w '\nHTTP %{http_code}\n' -X POST -H "Content-type: application/json" --data @/tmp/wynk_slack.json "$SLACK_WEBHOOK_URL"
     ```
 
-    Only a 2xx response confirms the post. Done when: Slack post is confirmed with 2xx, or the step has stopped on failure.
+    `--fail-with-body` makes the command exit non-zero on any 4xx/5xx while still printing the response body; only a 2xx with a zero curl exit confirms the post. Done when: Slack post is confirmed with a 2xx status and a zero curl exit, or the step has stopped on a 4xx/5xx failure.
 
 11. Open the PR containing the new report file and nothing else:
 
@@ -105,8 +105,7 @@ disable-model-invocation: true
 - Stop before any mutation, reporting exactly what is missing, when: no report exists in any directory; `NOTION_API_KEY`, the Weekly WYNK parent page ID, or `SLACK_WEBHOOK_URL` is absent; `SLACK_WEBHOOK_URL` does not point at `hooks.slack.com`; the Notion authentication probe returns non-2xx; or the directory is not a git repository.
 - HTTP 429 from Notion: honor `Retry-After` and retry the same request with exponential backoff.
 - A Notion write fails mid-publish: keep every page already created; enumerate the created page IDs and the sections not yet populated; recover forward by re-issuing only the failed block-append requests. Never claim done while any section is unpopulated. Never archive or delete pages without the operator's explicit instruction (archiving is `PATCH /v1/pages/{page_id}` with `{"archived": true}`).
-- The Slack post fails after Notion and the local copy succeeded: fix the cause and re-send only the Slack message; done does not hold until a 2xx response.
-- The push or PR creation fails: report the branch, the local file path, and the failing command; done does not hold until the PR is open.
+- The Slack post fails after Notion and the local copy succeeded: fix the cause and re-send only the Slack message; done does not hold until a 2xx response with a zero `curl` exit (`--fail-with-body` exits non-zero on 4xx/5xx).
 - Never swallow an error, never substitute placeholder content for missing evidence, and never report done while any of the four publish targets is unconfirmed.
 
 ## Output

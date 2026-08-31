@@ -10,8 +10,8 @@ description: 'Use when calling or troubleshooting the X MCP integration. Read th
 | Field | Bound contract |
 |---|---|
 | Trigger | Use or troubleshoot the X MCP integration |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation; no secrets; no app or project creation |
-| Side effect | Chat output only: guidance and error messages |
+| Authority | Billed X calls are paid side effects: every billed X API call waits for explicit user confirmation before it fires; no free-form credit spend. No file, VCS, credential, published, deployed, or other remote mutation; no secrets; no app or project creation. |
+| Side effect | Billed X API calls charged to the user''s credit balance, each gated on explicit confirmation; otherwise chat output only. |
 | Done | Correct bounded X calls without futile retry |
 
 ## Inputs
@@ -58,16 +58,16 @@ description: 'Use when calling or troubleshooting the X MCP integration. Read th
    | Any other ask | Handle directly; fall back to asking for a link or handle |
 
    Done when: the ask is parsed into a concrete action with the required parameters.
-4. **Estimate cost before any X MCP call.** Read `references/pricing.md` below. For live prices: https://console.x.com/api/credits/pricing wins over the pinned reference.
+4. **Estimate cost and confirm before any X MCP call.** Read `references/pricing.md` below. For live prices: `https://console.x.com/api/credits/pricing` wins over the pinned reference.
 
-   Estimate = (resources requested × per-resource price) + per-request price. Each pagination page is billed again. Expanded returned objects are billed. Failed requests are not billed.
+   Every successful X MCP call is billed to the user''s account: no billed call may fire without explicit confirmation. Estimate = (resources requested × per-resource price) + per-request price. Each pagination page is billed again. Expanded returned objects are billed. Failed requests are not billed.
 
    | Threshold | Action |
    |---|---|
-   | Under $0.25 | Proceed with `max_results` of 10–25 unless the user asked for more |
-   | $0.25 or over, pagination loop, or bulk lookup | Stop. Give a one-line dollar estimate and ask for confirmation before proceeding. If cumulative spend will roughly double the estimate, stop and reconfirm |
+   | Under $0.25 | Give a one-line dollar estimate and get the user''s explicit confirmation before the call fires |
+   | $0.25 or over, pagination loop, or bulk lookup | Give a one-line dollar estimate and get explicit confirmation before proceeding. If cumulative spend will roughly double the estimate, stop and reconfirm |
 
-   Done when: the cost is estimated and the threshold action is taken.
+   Done when: the cost is estimated and the user''s explicit confirmation to spend that estimate is recorded before the call fires.
 5. **Call the X MCP tool.** Use `xd://mcp__x_*` device routes. Set appropriate `max_results` and request these fields:
 
    - Tweet fields: `created_at,public_metrics,author_id,lang,conversation_id`
@@ -76,7 +76,7 @@ description: 'Use when calling or troubleshooting the X MCP integration. Read th
 
    Use `meta.next_token` → `pagination_token` for pagination. Stop when `meta.next_token` is absent.
 
-   Prefer recent data (7-day window), then `{me}` reads, then small full-archive pages. Do not paginate unless the user asked for it. Done when: the X MCP tool is called with bounded `max_results` and the requested fields.
+   Prefer recent data (7-day window), then `{me}` reads, then small full-archive pages. Do not paginate unless the user asked for it. Done when: the X MCP tool is called with bounded `max_results`, the requested fields, and the user''s confirmation from step 4 already recorded.
 6. **Handle the response.**
 
    | Condition | Action |
@@ -102,7 +102,7 @@ description: 'Use when calling or troubleshooting the X MCP integration. Read th
 - **Blocked result**: futile retry loops on auth, enrollment, or quota errors are not a valid completion. The skill is done only when the user either gets their data or receives a fixed error message with a clear next step.
 
 ## Output
-The requested X data (posts, profiles, timeline, bookmarks, search results, news, trends, counts, or parsed IDs); or one of the fixed error messages below with a suggested next step; or a confirmation prompt for estimated cost over $0.25.
+The requested X data (posts, profiles, timeline, bookmarks, search results, news, trends, counts, or parsed IDs); or one of the fixed error messages below with a suggested next step; or a confirmation prompt for every billed call before it fires.
 
 Fixed error messages:
 

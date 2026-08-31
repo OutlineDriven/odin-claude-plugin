@@ -11,14 +11,14 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | Prompt-doctrine duplication, drift, or conflict across the cascade family. |
-| Authority | Human-only. Require explicit human invocation; preview the target and consequence before rewriting prompt doctrine at rest, bumping manifests, or editing authorized external harness embeds. |
-| Side effect | Rewrites cascade prefixes/tails, bumps manifests, and edits authorized external embeds. |
+| Authority | Human-only. Require explicit human invocation; preview the target and consequence before rewriting prompt doctrine at rest, bumping the catalog `releaseVersion`, or editing authorized external harness embeds. |
+| Side effect | Rewrites cascade prefixes/tails, bumps the catalog `releaseVersion` and re-renders package surfaces, and edits authorized external embeds. |
 | Done | All canonical tails match, every strip is evidenced, divergence ledger complete, verification green. |
 
 ## Inputs
 
 - The canonical baseline file `system-prompt-baseline.md` — must exist and be the agreed source of truth.
-- The six output-style embeds: `output-styles/{axiom-mode,builder,duet,linus,odin,benchmark}.md`.
+- The six output-style embeds: `packages/odin-core/output-styles/{axiom-mode,builder,duet,linus,odin,benchmark}.md`.
 - The two external harness embeds: `~/.omp/agent/AGENTS.md` and `~/.codex/AGENTS.md`.
 - Explicit user authorization, recorded in the run, before any `benchmark.md` tail repair or authorized external embed edit.
 
@@ -27,7 +27,7 @@ disable-model-invocation: true
 1. **Map the cascade family and zones.** The canonical baseline `system-prompt-baseline.md` is the whole-file source of truth and wins every conflict. For each output-style embed (`axiom-mode`, `builder`, `duet`, `linus`, `odin`, `benchmark`), the persona prefix above the charter `<role>` (the second `<role>` in each file) is the strip zone. The tail from the charter `<role>` to EOF is the byte-identity invariant zone and is never a dedup target. Never touch the `benchmark.md` auto-generated margin-runner preamble. The external harness embeds `~/.omp/agent/AGENTS.md` and `~/.codex/AGENTS.md` are editable in place but never committable; harness-adapted tool sections are legitimate divergence. **Done when:** the cascade family is mapped with strip zones, invariant zones, and external embeds identified.
 2. **Verify the invariant before dedup.** Copy the canonical baseline to a temporary file. For each output style, diff the canonical against the file's tail of equal byte length:
    ```
-   diff -q /tmp/canon.md <(tail -c "$(wc -c < /tmp/canon.md)" output-styles/X.md)
+   diff -q /tmp/canon.md <(tail -c "$(wc -c < /tmp/canon.md)" packages/odin-core/output-styles/X.md)
    ```
    Drift in the invariant zone is a sync bug, not duplication. Repair by replacing the file's entire tail (from its charter `<role>` to EOF) with the canonical content as one block; dedup edits inside the invariant zone stay forbidden. For `benchmark.md`, obtain explicit user authorization before repairing. Record each diff result. **Done when:** all six tails are verified byte-identical (after repair where needed), or `benchmark.md` repair is deferred for lack of authorization.
 3. **Strip-zone scan (persona prefixes).** `benchmark.md` has no eligible strip zone (its persona prefix sits inside the auto-generated block), so scan the five hand-authored styles and skip `benchmark.md`. Classify every sentence of each persona prefix as `voice`, `duplicate`, `conflict`, or `unique-directive`:
@@ -42,7 +42,7 @@ disable-model-invocation: true
    **Done when:** a divergence ledger with exactly one classification per divergence is produced, none unclassified.
 5. **Apply and verify.**
    - Commit repo files in one atomic commit. Any `benchmark.md` change (tail repair included) ships only with explicit user authorization recorded in this run. Re-run the step 2 diffs after editing; run `prek run --all-files`.
-   - Strips and conflict resolutions are doctrine changes -> patch-bump all three manifest version fields (`plugin.json` `.version`, `marketplace.json` `.version` and `.plugins[0].version`) from the origin/main base in the same commit. A run that only re-syncs an embedded baseline with zero strips is a pure sync change -> no bump.
+   - Strips and conflict resolutions are doctrine changes -> bump the single `releaseVersion` literal in `catalog/packages.json` and let the package-surfaces generator (`scripts/render-package-surfaces.mjs`) re-render every package surface (`packages/<id>/package.json` and `.claude-plugin/plugin.json`) from that one literal; commit the regenerated surfaces in the same atomic commit. A run that only re-syncs an embedded baseline with zero strips is a pure sync change -> no bump.
    - External files: edit in place, never commit; end the report with an explicit warning listing every externally edited path for user review.
    - Output styles load at session start — smoke-test doctrine effects in a fresh session.
    **Done when:** the final report contains strips per file with citations, conflicts resolved with the winner named, kept harness-adaptations, externally edited paths, the `prek` result, and the invariant re-verified 6/6.
@@ -56,7 +56,7 @@ disable-model-invocation: true
 - **Rollback:** repo changes are VCS-tracked; revert the atomic commit if verification fails. External file edits are not VCS-tracked — record the original content before editing and restore from that record on failure.
 
 ## Output
-A final report containing the 6/6 invariant re-verification diff results, strips per file with baseline-pair citations, conflicts resolved with the winner named, kept harness-adaptations, the complete divergence ledger (one classification per divergence), every externally edited path flagged for user review, the `prek run --all-files` result, and the manifest bump decision (patch-bumped fields or no-bump rationale); repo changes land as one atomic commit, external edits land in place and are never committed.
+A final report containing the 6/6 invariant re-verification diff results, strips per file with baseline-pair citations, conflicts resolved with the winner named, kept harness-adaptations, the complete divergence ledger (one classification per divergence), every externally edited path flagged for user review, the `prek run --all-files` result, and the `releaseVersion` bump decision (bumped literal plus regenerated surfaces, or no-bump rationale); repo changes land as one atomic commit, external edits land in place and are never committed.
 
 ## Provenance
 

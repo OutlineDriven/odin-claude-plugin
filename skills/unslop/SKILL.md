@@ -17,8 +17,8 @@ description: 'Use when prose is drafted or edited, reviewed for AI tells, or the
 ## Refusals
 
 - **Code debris and dead code**: use `deslop`. Unslop edits prose; deslop cuts code.
-- **Korean humanization**: use `humanizer`. Unslop works on English prose.
-- **The routing verdict**: use `slop` to pick the domain, then unslop if prose is the answer.
+- **Korean or other non-English humanization**: unslop applies the same full-mode checks; where a check's example list is English-specific, judge the underlying pattern (puffery, filler, passive voice, meta-narration) in the target language rather than the literal words.
+- **The routing verdict**: use `deslop` for code debris and `purge-slop-docs` for stale doc trees; use unslop when the answer is prose editing.
 
 ## Inputs
 

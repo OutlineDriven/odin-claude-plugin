@@ -1,3 +1,3 @@
 interface:
   display_name: "Lockstep Version Guard"
-  short_description: "Use when a human invokes the release gate to prove all ten ODIN"
+  short_description: "Use when a human invokes the release gate to prove all 29 ODIN"
