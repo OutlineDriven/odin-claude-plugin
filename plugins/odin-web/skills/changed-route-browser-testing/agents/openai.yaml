@@ -1,3 +1,0 @@
-interface:
-  display_name: "Changed Route Browser Testing"
-  short_description: "Use when asked to run browser tests for pages affected by a PR"

@@ -1,204 +1,107 @@
 ---
 name: site-launch-checklist
-description: 'Use when a user says a site or app is ready to ship or asks for checks before go-live. Runs a ten-phase pre-launch audit with explicit user decisions, pass/fail results, and a fix queue. Not for deployment execution — use shipping.'
+description: 'Use when a user says a site or app is ready to ship and wants a decision-gated pre-launch readiness pass. Runs infrastructure, security, content, discovery, and quality checks with pass/fail accounting and an ordered fix queue. Not for deployment execution — use shipping.'
 disable-model-invocation: true
 ---
 
 # Site launch checklist
 
-Run a ten-phase pre-launch audit before shipping a new website. Verify applicable checks with `curl`, `dig`, and browser tools, then report pass/fail results with a fix queue.
-
 ## Contract
 
 | Field | Bound contract |
 |---|---|
-| Trigger | User says a site/app is 'ready to ship' or asks for 'before go live' checks. |
-| Authority | Human-only. Every phase requires explicit user input before proceeding. No phase runs autonomously. |
-| Side effect | Configures DNS/DNSSEC records, HTTP headers, analytics, and backups on the live site. |
-| Done | Every launch phase is reported pass/fail with a fix queue, using provider-variant weekly-SEO assets. |
+| Trigger | User says a site or app is ready to ship, or asks for checks before go-live. |
+| Authority | Read-and-report by default: run curl, dig, and Lighthouse, record pass/fail. Live mutations (DNS, headers, analytics, backups) happen only after an explicit per-phase yes from the user, and are recorded as performed-by-user or performed-with-consent, never silently. |
+| Side effect | Runs read-only diagnostic commands. On explicit user consent per phase, may guide or perform live DNS, header, analytics, or backup configuration changes. |
+| Done | Every phase is pass, fail, skipped, or indeterminate. Three ordered fix queues exist (blockers, recommended, optional). No failed check is reported as passed and no skipped phase as complete. |
 
 ## Inputs
 
-- **Domain** (required): the target site URL or domain name.
-- **Site type** (required, ask user): `doc-site` | `marketing-lead-gen` | `saas-app` | `training-paid-course` | `personal-portfolio`.
-- **Migration status** (required, ask user): `greenfield-new-domain` | `migration-need-301-redirects` | `replacing-existing-on-same-domain`.
-- **Multilingual** (required, ask user): `single-locale` | `en` | `fr-en` | `other-multi`.
-- **Hosting stack** (required, ask user): DNS provider, hosting platform, analytics tools already in use.
-- **AI scraper policy** (required, ask user): `use-default-for-site-type` | `customize-per-bot` | `block-all`.
-- **Browser tool** (required, ask user): `claude-chrome-extension` | `playwright` | `neither-skip-browser-checks`.
+- Target domain (required): the site URL or domain name to audit.
+- Site type (required): doc-site, marketing-lead-gen, saas-app, training-paid-course, personal-portfolio.
+- Migration status (required): greenfield-new-domain, migration-need-301-redirects, replacing-existing-on-same-domain.
+- Locale set (required): single-locale, en, fr-en, other-multi.
+- Hosting stack (required): DNS provider, hosting platform, analytics in use.
+- AI-scraper policy (required): use-default-for-site-type, customize-per-bot, block-all.
+- Browser-check capability (required): any tool that can load pages and run Lighthouse, or explicitly none.
 
-Ask each question one at a time with 2-4 tappable options. Never proceed past a decision point without explicit user input.
+Ask each question one at a time. Never proceed past a decision point without explicit user input.
 
 ## Procedure
 
-### Phase 1: domain and infrastructure
+### Stage 1: interview
 
-Ask: "Is the domain already on Cloudflare with standard config?" (`yes-standard` | `yes-needs-review` | `no-fresh-setup`).
+Walk the user through the six required decisions above, one at a time. Record each answer. Done when: all six decisions are recorded, or the user stops and the run exits partial.
 
-1. Verify DNS records:
-   ```bash
-   dig +short A {domain}
-   dig +short AAAA {domain}
-   dig +short MX {domain}
-   dig +short TXT {domain}
-   dig +short TXT _dmarc.{domain}
-   dig +short CAA {domain}
-   dig +dnssec {domain} | grep RRSIG
-   ```
-2. Verify TLS and HTTPS redirect:
-   ```bash
-   curl -sIL https://{domain} | head
-   curl -sI https://www.{domain}
-   openssl s_client -showcerts -connect {domain}:443 < /dev/null 2>/dev/null | openssl x509 -noout -dates
-   ```
-3. Verify hosting: project linked, env vars set, custom domain attached.
-4. Decide www vs apex canonical; configure 308 redirect for non-canonical.
-5. Verify custom 404 page: `curl -sI https://{domain}/this-does-not-exist`.
-6. If migration: verify 301 redirect map for every old URL with `curl -sIL` per URL.
+### Stage 2: infrastructure and security checks
 
-**Backups.** Ask which data stores the site uses: `database-only` | `database-plus-file-storage` | `file-storage-only` | `stateless-no-persistent-data`. Skip these checks if the site is stateless.
+Run each check with curl or dig and record pass/fail with the command output as evidence.
 
-7. Verify automated daily backups enabled with retention ≥30 days.
-8. Verify PITR enabled if available.
-9. Verify off-site backup copy configured.
-10. Verify restore drill performed before launch.
-11. Verify secrets stored in a secrets manager, not in `.env` files.
+1. DNS records: `dig +short A {domain}`, `dig +short AAAA {domain}`, `dig +short MX {domain}`, `dig +short TXT {domain}`, `dig +short TXT _dmarc.{domain}`, `dig +short CAA {domain}`, `dig +dnssec {domain} | grep RRSIG`.
+2. TLS and HTTPS redirect: `curl -sIL https://{domain} | head`, `curl -sI https://www.{domain}`, `openssl s_client -showcerts -connect {domain}:443 < /dev/null 2>/dev/null | openssl x509 -noout -dates`.
+3. Hosting: project linked, env vars set, custom domain attached.
+4. Canonical: www vs apex decided; 308 redirect configured for non-canonical.
+5. Custom 404: `curl -sI https://{domain}/this-does-not-exist`.
+6. Migration: if migration-need-301-redirects, verify 301 redirect map for every old URL with `curl -sIL` per URL.
+7. Backups: ask which data stores the site uses (database-only, database-plus-file-storage, file-storage-only, stateless-no-persistent-data). Skip if stateless. Otherwise verify automated daily backups with retention >=30 days, PITR if available, off-site backup copy, restore drill performed, secrets in a secrets manager not .env files.
+8. Security headers: `curl -sI https://{domain} | grep -iE 'content-security-policy|strict-transport-security|x-frame-options|x-content-type-options|referrer-policy|permissions-policy'`. Target: CSP with nonces, HSTS max-age=31536000 includeSubDomains preload, X-Frame-Options DENY, X-Content-Type-Options nosniff, Referrer-Policy strict-origin-when-cross-origin, Permissions-Policy denying unused camera/microphone/geolocation/payment. HSTS submitted to hstspreload.org. No leaked secrets in client bundle.
 
-Report pass/fail for each item. For each failure, ask the user whether to fix it now or add it to the queue. Done when: every domain and infrastructure item is pass/fail with failures queued or fixed.
+For each failure, ask the user whether to fix now or add to the queue. Live changes (DNS, headers, backups) happen only after an explicit yes and are recorded as performed-by-user or performed-with-consent. Done when: every infrastructure and security item is pass, fail, skipped, or indeterminate with command evidence.
 
-### Phase 2: analytics and observability
+### Stage 3: content and discovery checks
 
-1. Verify Google Analytics 4: property created, measurement ID embedded, consent-gated.
-2. Verify PostHog or equivalent analytics: configured and CORS verified.
-3. Verify Google Search Console: site verified, sitemap submitted.
-4. Verify Bing Webmaster Tools: site verified, sitemap submitted.
-5. Set up brand monitoring alerts for domain name, brand name, and key feature names.
-6. Ask user about optional tools: error tracking, uptime monitoring, live chat.
+1. robots.txt present and references sitemap: `curl -s https://{domain}/robots.txt`.
+2. sitemap.xml present and valid: `curl -s https://{domain}/sitemap.xml | head -40`.
+3. llms.txt present per the llmstxt.org Markdown-structured format.
+4. AI scraper policy encoded in robots.txt based on the user's choice; confirm each non-default decision with the user.
+5. Schema markup (JSON-LD): Organization + WebSite + BreadcrumbList site-wide; per-page types where applicable. `curl -s https://{domain}/ | grep -A 50 'application/ld+json'`.
+6. Meta tags per page: unique title (50-60 chars), unique meta description (150-160 chars), canonical link, robots meta if needed.
+7. hreflang tags on every page if multilingual.
+8. OG tags: `curl -s https://{domain}/ | grep -iE 'og:|twitter:'`. Required: og:title, og:description, og:url, og:type, og:site_name, og:image 1200x630 absolute URL with width/height/alt. Twitter Cards: summary_large_image with title, description, image, site handle. Per-page og:image, not one global. If multilingual: og:locale and og:locale:alternate.
+9. Favicons and web manifest: `curl -sI https://{domain}/favicon.ico`, `curl -sI https://{domain}/favicon.svg`, `curl -sI https://{domain}/apple-touch-icon.png`, `curl -s https://{domain}/manifest.json | jq .`. Required: favicon.ico multi-res, favicon.svg with dark mode, apple-touch-icon 180x180, manifest with theme_color/background_color/name/short_name/display. HTML head references all icons and manifest.
+10. Legal and compliance: if subject to French law, verify mentions legales, CGV if commercial, privacy policy, terms of service, CNIL-compliant cookie consent gating tracker loading. If EU but not French, verify GDPR-compliant consent and privacy policy. If non-EU, verify privacy policy.
+11. Typo and grammar pass on all visible text.
+12. Internal linking audit: every important page reachable in <=3 clicks from homepage.
 
-Report pass/fail per item. Done when: every analytics and observability item is pass/fail.
+Done when: every content and discovery item is pass, fail, skipped, or indeterminate with command evidence.
 
-### Phase 3: legal and compliance
+### Stage 4: quality gates
 
-Ask: "Is this site subject to French law?" (`yes-fr-operator-or-audience` | `no-eu-only` | `no-non-eu`).
+Run within the declared browser-check capability. If the user declared none, mark all quality gate items as indeterminate and continue.
 
-If the site is subject to French law:
-1. Mentions legales page present.
-2. CGV present if commercial activity.
-3. Privacy policy present.
-4. Terms of service present.
-5. CNIL-compliant cookie consent that gates tracker script loading. Verify with browser Network tab: no tracker fires before explicit consent.
-
-If the site is not subject to French law but is subject to EU law, verify GDPR-compliant consent and a privacy policy.
-
-Report pass/fail per item. Done when: every legal and compliance item is pass/fail per jurisdiction.
-
-### Phase 4: security
-
-Ask the user to choose a CSP tightness level: `strict-default-src-none` | `balanced-allow-self` | `permissive-for-marketing`.
-
-1. Verify security headers:
-   ```bash
-   curl -sI https://{domain} | grep -iE 'content-security-policy|strict-transport-security|x-frame-options|x-content-type-options|referrer-policy|permissions-policy'
-   ```
-2. Target headers: CSP with nonces (no `unsafe-inline` for scripts), HSTS `max-age=31536000; includeSubDomains; preload`, X-Frame-Options `DENY`, X-Content-Type-Options `nosniff`, Referrer-Policy `strict-origin-when-cross-origin`, Permissions-Policy denying camera/microphone/geolocation/payment unless used.
-3. Submit HSTS to hstspreload.org.
-4. Target securityheaders.com grade A+.
-5. Target observatory.mozilla.org score 90+.
-6. Verify no leaked secrets in client bundle.
-
-Report pass/fail per item. Done when: every security header and check is pass/fail.
-
-### Phase 5: SEO and GEO
-
-1. Verify `/robots.txt` present and references sitemap:
-   ```bash
-   curl -s https://{domain}/robots.txt
-   ```
-2. Verify `/sitemap.xml` present and valid:
-   ```bash
-   curl -s https://{domain}/sitemap.xml | head -40
-   ```
-3. Verify `/llms.txt` present per llmstxt.org spec.
-4. Encode AI scraper policy in `robots.txt` based on site type; confirm each non-default decision with user.
-5. Verify schema markup (JSON-LD): Organization + WebSite + BreadcrumbList site-wide; per-page types where applicable.
-   ```bash
-   curl -s https://{domain}/ | grep -A 50 'application/ld+json'
-   ```
-6. Verify meta tags per page: unique title (50-60 chars), unique meta description (150-160 chars), canonical link, robots meta if needed.
-7. Verify hreflang tags on every page if multilingual.
-8. Run keyword analysis: validate direction with Google Trends, size opportunity with keyword research tools, produce ranked shortlist of 3-5 target queries per page.
-9. Run AI visibility audit: check how the site appears in AI-generated answers.
-10. Typo and grammar pass on all visible text.
-11. Internal linking audit: every important page reachable in ≤3 clicks from homepage.
-
-Report pass/fail per item. Done when: every SEO and GEO item is pass/fail.
-
-### Phase 6: Open Graph and social preview
-
-1. Verify OG tags:
-   ```bash
-   curl -s https://{domain}/ | grep -iE 'og:|twitter:'
-   ```
-2. Required: `og:title`, `og:description`, `og:url`, `og:type`, `og:site_name`.
-3. Required: `og:image` 1200x630px, absolute URL, width/height declared, alt set.
-4. Per-page `og:image`, not one global.
-5. If multilingual: `og:locale` + `og:locale:alternate` for each language.
-6. Twitter Cards: `twitter:card=summary_large_image`, title, description, image, site handle.
-7. Manual check: paste URL in LinkedIn DM, Slack channel, Discord, iMessage. Preview must render.
-
-Report pass/fail per item. Done when: every OG and social preview item is pass/fail.
-
-### Phase 7: favicons and web manifest
-
-1. Verify minimum modern set:
-   ```bash
-   curl -sI https://{domain}/favicon.ico
-   curl -sI https://{domain}/favicon.svg
-   curl -sI https://{domain}/apple-touch-icon.png
-   curl -s https://{domain}/manifest.json | jq .
-   ```
-2. Required: `favicon.ico` (multi-res 16/32/48), `favicon.svg` with dark mode support, `favicon-96x96.png`, `apple-touch-icon.png` 180x180 no transparency, `web-app-manifest-192x192.png`, `web-app-manifest-512x512.png`, `manifest.json` with theme_color/background_color/name/short_name/display.
-3. Verify HTML head references all icons and manifest.
-
-Report pass/fail per item. Done when: every favicon and manifest item is pass/fail.
-
-### Phase 8: quality gates
-
-1. Run Lighthouse all 4 axes, mobile mode: target ≥90 each.
-2. Run Lighthouse all 4 axes, desktop mode: target ≥95 each.
-3. Core Web Vitals field data: LCP < 2.5s, INP < 200ms, CLS < 0.1 on both mobile and desktop.
-4. Accessibility (WCAG 2.2 AA): keyboard nav, focus rings, color contrast ≥4.5:1, alt text, monotonic heading hierarchy, ARIA labels on icon-only buttons.
-5. Real mobile device test (not just devtools emulator).
-6. Cross-browser smoke test: Chrome, Safari, Firefox latest stable.
+1. Lighthouse all 4 axes, mobile: target >=90 each.
+2. Lighthouse all 4 axes, desktop: target >=95 each.
+3. Core Web Vitals: LCP < 2.5s, INP < 200ms, CLS < 0.1 on mobile and desktop.
+4. Accessibility (WCAG 2.2 AA): keyboard nav, focus rings, color contrast >=4.5:1, alt text, monotonic heading hierarchy, ARIA labels on icon-only buttons.
+5. Real mobile device test if a device is available.
+6. Cross-browser smoke: Chrome, Safari, Firefox latest stable.
 7. Print stylesheet sanity.
 
-Report pass/fail per item. Done when: every quality gate item is pass/fail.
+Done when: every quality gate item is pass, fail, skipped, or indeterminate within the declared capability.
 
-### Phase 9: ecosystem cross-linking
+### Stage 5: report and fix queues
 
-Ask user: "List other domains in your ecosystem that are topically relevant."
+Emit the phase-grouped pass/fail report. Group results by stage (infrastructure and security, content and discovery, quality gates). For each item: status (pass, fail, skipped, indeterminate), the command or check that produced it, and the observed output.
 
-For each relevant domain:
-1. Add link from existing site to new site where topically relevant.
-2. Add link to new site in matching GitHub repo README if applicable.
-3. Verify reciprocal links where appropriate.
+Build three ordered fix queues:
+- Blockers: must fix before launch.
+- Recommended: should fix before announcing.
+- Optional: post-launch improvements.
 
-Do not over-link. Only cross-link where topically relevant. Done when: every relevant ecosystem domain is cross-linked or explicitly skipped.
+End with a single-select question asking the user which queue to tackle next.
 
-### Phase 10: weekly SEO maintenance agent
-
-Ask user: "Set up the weekly SEO agent now?" (`yes-create-agent-file` | `yes-but-defer` | `skip-for-now`).
-
-If yes: create a scheduled background agent definition that runs weekly to monitor SEO health, covering backlink tracking, analytics correlation, SERP monitoring, and Search Console data. Output a concrete agent file matching the user's harness. Done when: the weekly SEO agent is created, deferred, or skipped per user choice.
+Done when: the report is emitted with every item classified, three fix queues exist, and the next-step question is presented.
 
 ## Failure and recovery
-- **Verification failure**: report the exact command output and the gap. Ask user whether to fix now or queue. Never skip a failed item silently.
-- **User declines a phase**: record as skipped with reason. Proceed to next phase.
-- **External service unavailable**: report the service as unreachable, mark the check as indeterminate, continue with remaining checks.
-- **Partial run**: if the session ends mid-phase, report completed phases with their pass/fail status and list remaining phases as not-started.
-- **Scope widening blocked**: if a check reveals an issue outside the ten phases, record it once as an out-of-scope finding with its evidence, impact, and concrete next action. Do not expand this run and do not invoke another skill.
+
+- Verification failure: report the exact command output and the gap. Ask the user whether to fix now or queue. Never skip a failed item silently.
+- Phase declined: the user declines a phase. Record as skipped with the reason. Proceed to the next phase.
+- Service unreachable: a check target is unreachable. Mark the check as indeterminate. Continue with remaining checks.
+- Partial run: the session ends mid-phase. Report completed phases with their pass/fail status and list remaining phases as not-started.
+- Out-of-scope finding: a check reveals an issue outside the five stages. Record it once with evidence, impact, and a concrete next action. Do not expand this run and do not invoke another skill.
 
 Never pretend a failed check passed. Never mark a skipped phase as complete.
 
 ## Output
-Status report grouped by phase (pass/fail per item with fix actions), followed by three ordered lists — blockers (must fix before launch), recommended fixes (should fix before announcing), optional improvements (post-launch) — ending with a single-select asking which list to tackle next.
+
+A status report grouped by stage with pass/fail/skipped/indeterminate per item and command evidence, followed by three ordered fix queues (blockers, recommended, optional), ending with a single-select asking which queue to tackle next.

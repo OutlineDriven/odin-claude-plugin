@@ -1,6 +1,6 @@
 ---
 name: chrome-extension
-description: 'Use when the user explicitly asks to build, modify, or publish a working Manifest V3 Chrome extension.'
+description: 'Use when the user explicitly asks to build, modify, or publish a Manifest V3 Chrome extension. Authors manifest.json, service worker, content scripts, messaging, storage, and UI surfaces with minimal permissions and CSP compliance. Store submission requires explicit human invocation and human-supplied credentials.'
 disable-model-invocation: true
 ---
 
@@ -13,7 +13,7 @@ disable-model-invocation: true
 | Trigger | User works on a Chrome extension: manifest, service worker, content scripts, messaging, or publishing. |
 | Authority | Human only. The model may write extension project files (local, reversible). Store submission or publication is irreversible and external, so it requires explicit human invocation and is never initiated autonomously. |
 | Side effect | Writes extension project files under the working directory. Only on explicit human invocation, may submit or publish the extension to a browser store. |
-| Done | A working extension or store submission exists, backed by the 13-area MV3 reference coverage enumerated in the procedure. |
+| Done | A loadable MV3 extension exists with manifest, service worker, content scripts, messaging, storage, permissions, CSP, and UI surfaces verified, or a store submission is initiated with human-supplied credentials. |
 
 ## Inputs
 
