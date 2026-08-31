@@ -37,14 +37,12 @@ repos:
         name: sync output-style doctrine cascade
         entry: python3 scripts/sync-baseline.py
         language: system
-        files: ^(system-prompt-baseline\.md|output-styles/.*\.md)$
+        files: ^(system-prompt-baseline\.md|packages/odin-core/output-styles/.*\.md)$
         pass_filenames: false
 
-      # Mirror version/description from .claude-plugin/plugin.json to every harness
-      # manifest, and shape-check the static catalogs.
-      - id: sync-manifests
-        name: sync harness plugin manifests
-        entry: python3 scripts/sync-manifests.py
+      - id: check-package-surfaces
+        name: check 29-package surfaces and provenance
+        entry: bash -c "node scripts/check-package-surfaces.mjs && node scripts/check-package-provenance.mjs"
         language: system
-        files: ^(plugin\.json|\.(claude|cursor|kimi|devin)-plugin/.*\.json|\.agents/plugins/.*\.json)$
+        files: ^(catalog/.*|packages/.*|scripts/(package-surfaces|render-package-surfaces|check-package-surfaces|render-package-provenance|check-package-provenance)\.mjs|\.claude-plugin/marketplace\.json|package\.json)$
         pass_filenames: false

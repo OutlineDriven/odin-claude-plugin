@@ -20,93 +20,38 @@ ODIN is a professional-grade Claude Code plugin that transforms Claude into a co
 
 ## Installation
 
-One repository serves every harness below. There is no build step and no converter.
-each tool reads `skills/` directly.
+Claude Code is the proved install target on this source branch. The repository
+is a private npm workspace of 28 runtime packages plus informational
+`@outlinedriven/odin`. Skills live once at `skills/<slug>/SKILL.md`. Package
+trees copy those skills only at pack time.
 
-### Prerequisites
+### Claude Code marketplace
 
-- Claude Code installed and running
-- Git (for marketplace installation)
-
-### Full Install Script (Claude Code)
-
-```shell
-claude plugin marketplace add OutlineDriven/odin-claude-plugin && claude plugin install odin@odin-marketplace
-```
-
-### Other coding agents
-
-| Harness | Install | Extra files needed |
-|---|---|---|
-| Codex CLI | `codex plugin marketplace add OutlineDriven/odin-claude-plugin` then `codex plugin add odin@odin-marketplace` | none; Codex reads `.claude-plugin/` |
-| Grok Build CLI | `grok plugin install OutlineDriven/odin-claude-plugin` | none; Grok reads Claude Code plugins with zero configuration |
-| Devin CLI | `devin plugins install OutlineDriven/odin-claude-plugin` | `.devin-plugin/` |
-| Antigravity (`agy`) | `agy plugin install https://github.com/OutlineDriven/odin-claude-plugin` | root `plugin.json` |
-| Cursor | `/add-plugin odin` in Cursor Agent chat | `.cursor-plugin/` |
-| Kimi Code CLI | `/plugins install https://github.com/OutlineDriven/odin-claude-plugin` then `/reload` | `.kimi-plugin/` |
-| opencode | local checkout only; see below | `.opencode/plugins/odin.js` |
-
-Codex and Grok need no ODIN-specific manifest: both resolve `.claude-plugin/plugin.json`,
-and Codex also reads `.claude-plugin/marketplace.json`.
-`.agents/plugins/marketplace.json` is shipped as Codex's current (non-legacy) marketplace
-path.
-
-**Devin** documents a `.claude-plugin/` fallback from 3000.3.22, but builds before that
-hard-fail without `.devin-plugin/plugin.json`, so ODIN ships one. Devin also gates plugins
-behind a closed beta, so request access from Cognition first. Skills surface as
-`/odin:<skill>`.
-
-**opencode** documents `plugin[]` entries for npm packages only, so there is no
-one-command install from this repository. Clone it and point `opencode.json` at the
-plugin file:
-
-```json
-{
-  "plugin": ["/path/to/odin-claude-plugin/.opencode/plugins/odin.js"]
-}
-```
-
-The plugin registers `skills/` on `config.skills.paths` and adds one command per skill,
-skipping the six marked `disable-model-invocation` because opencode has no manual-only
-gate.
-
-Verified at `1.17.101` on Linux: Devin from a clean local clone of this repository, Codex
-from the published marketplace at the same revision, the rest against the working tree.
-Every version below was read from the installed binary with `--version`, not assumed:
-
-| Harness | Installed version | Check | Result |
-|---|---|---|---|
-| Codex CLI | `codex-cli 0.147.0` | `plugin marketplace upgrade` + `plugin add` | installed at `1.17.101`, 127 skills in plugin root |
-| Devin CLI | `devin 3000.2.17` | `devin plugins install` | installed, 127 skills exposed as `/odin:<skill>` |
-| Antigravity | `agy 1.1.12` | `agy plugin validate .` | ok, 128 processed: the 127 skills plus `skills/LICENSES.md`, which agy counts as a skill |
-| Grok Build | `grok 0.2.118 [stable]` | `grok plugin validate .` | manifest valid, 1 skill dir, 0 command dirs, 0 agent dirs |
-| Claude Code | `2.1.228` | `claude plugin validate .` | passed with warnings |
-| opencode | not installed | module exercised directly | 121 commands, 6 manual-only excluded |
-
-**Cursor and Kimi installs are unproven.** `kimi 0.28.1` has no `plugin` subcommand, so its
-plugin install is untested, but its skills do load headlessly: `kimi -p '<prompt>'
---skills-dir <repo>/skills` resolved `show-me` from its description at `1.17.101`.
-`cursor-agent 2026.07.23` does expose `plugin marketplace add <gitUrl>`, but marketplaces
-there are account-scoped, so installing would mutate account state and was not exercised.
-Both manifests match the vendors' published schemas; treat first install as unproven.
-
-`claude plugin validate --strict` fails on this repo, and did so before any harness work:
-`repository` in `.claude-plugin/plugin.json`, and `metadata.lastUpdated`, `.maintainer`,
-`.website` and `.support` in `.claude-plugin/marketplace.json`, are unknown to Claude Code,
-which ignores them at load time. Non-strict validation passes with those five warnings.
-
-### Verify Installation
+The shared catalog is `.claude-plugin/marketplace.json`. Every entry is an
+exact npm source at `2.0.0`. Install the 28 runtime modules; do not install
+informational `odin`.
 
 ```shell
-# List available agents
-/agents
-
-# View all commands
-/help
-
-# See the installed plugins
-/plugin
+claude plugin marketplace add OutlineDriven/odin-claude-plugin
+claude plugin install odin-core@odin-marketplace
 ```
+
+The universal current-user installer remains Claude-specific and lives in
+[OutlineDriven/outline-driven](https://github.com/OutlineDriven/outline-driven).
+It is not this repository.
+
+### Other harnesses
+
+Codex, Cursor, Grok, and Kimi consume a generated `distribution` projection,
+not this source branch. Devin and Antigravity consume `plugins/odin-complete/`
+from that same projection. Those catalogs are not published from this commit.
+
+### Skills
+
+There are 816 public skills in 28 runtime packages. Identity and ownership
+are in `catalog/packages.json`. Do not scan `packages/*/skills`; that path is
+not authored.
+
 
 ## Core Philosophy
 
@@ -129,189 +74,7 @@ Before any non-trivial implementation:
 4. **Memory** - Ownership, lifetimes, allocation patterns, safety guarantees
 5. **Optimization** - Bottlenecks, targets, complexity bounds, resource budgets
 
-## Skills (148 total)
-
-Skills are invokable workflows that extend ODIN with process- and domain-specific protocols. Invoke with `/<skill-name>`; many also trigger on natural language cues described in their frontmatter.
-
-### Planning & Exploration (26 skills)
-
-- `askme` - Verbalized Sampling protocol for deep intent exploration before planning
-- `decide` - Frame a fork as one recommended single-select, take the pick, and apply it
-- `batch-ask-me` - Walk a dependency-aware design tree in batched question rounds until shared understanding
-- `wayfinder` - Chart a multi-session effort into a destination, mapped fog, and decision tickets on the frontier
-- `mutual-sync` - Three-way grounding: verify user, agent, and codebase share one picture of current state before proceeding
-- `loop-me` - Design recurring workflows through a stateful `askme` session and cwd specs
-- `to-questionnaire` - Turn a knowledge gap into an async questionnaire for the person who can answer it
-- `clarify` - Scan a request, document, or conversation for ambiguities and unstated assumptions; certainty-tiered findings with defaults
-- `generalize-from-cases` - Derive the rule the user means from the examples they gave, with rival readings and a stated boundary
-- `exhaustive` - Prove a decision, state, or requirement space is fully covered by enumerating every cell as covered, gap, or deferred
-- `shape` - Shape Up shaping: appetite, breadboard, rabbit holes, no-gos for a bet on work
-- `to-tickets` - Break a plan into tracer-bullet tickets with blocking edges, on GitHub or in `.outline/`
-- `contexts` - Coordinate context sweep before coding
-- `domain-modeling` - Build and sharpen a project's ubiquitous language, glossary, and domain decisions as you design
-- `init` - Analyze a codebase and create or improve AGENTS.md
-- `brainstorm` - Explore vague or ambitious ideas into a right-sized requirements-only plan
-- `explore` - Read-only codebase exploration to map structure, symbols, and dependencies
-- `strategy` - Sharp interview to write or maintain STRATEGY.md as the product anchor
-- `ideate` - Generate grounded, divergent ideas from the codebase into docs/ideation
-- `design` - Set visual and interaction direction for UI surfaces before writing code
-- `prototype-logic` - Throwaway single-file HTML demo that answers one question about a state model
-- `pov` - Decisive, project-grounded verdict on adopting or switching technology
-- `research` - Gather external knowledge from authoritative sources with verified citations
-- `hate` - One load-bearing objection plus the cheapest shot that would prove it matters
-- `fan-out-fresh-reads` - Fan a question to several fresh zero-context reads and report divergence first
-- `feynman` - Press a decision you just made until you can explain it or name the gap
-
-### Writing & Learning (8 skills)
-
-- `teach` - Run a persistent cwd teaching workspace, and route to the corpus skills when the material already exists
-- `map-corpus` - Inventory a folder of your own study material into one CORPUS.md with prerequisite-ordered concepts
-- `explain-concept` - Make one concept clear from a chosen angle: intuition, motivation, origin, picture, or contrast
-- `drill` - Practise a concept and get graded: scaffolded exercises, quizzes, spaced recall, and gap probes
-- `capstone` - Scope and judge a real project sized to what the learner has actually cleared
-- `writing-skills` - Reference for writing agent-consumed documents so they run predictably: context load, hierarchy, leading words, and pruning
-- `book-to-skill` - Distil a book or comparable source into a validated, trigger-probed agent skill
-- `unslop` - Cut AI tells from writing and restore human voice
-
-### Working Posture (8 skills)
-
-- `duet` - Two-party posture: user as director, agent as executor. Surfaces every fork via AskUserQuestion with structural framing and a recommended default. Eliminates the review-bottleneck and prevents codebase-understanding debt. Pair with the `Duet` output style.
-- `size-the-run` - Size the cheapest sufficient tier and effort for a task on a neutral two-dial scale
-- `axiom-mode` - Compact formal-logic English register using predicate claims and ASCII keywords
-- `ai-collab-protocols` - Surface in-task AI collaboration protocols one tactic at a time
-- `taste` - Apply distinctive judgment to prose, code, design, or decisions instead of AI mediocrity
-- `do-it-now` - Single-pass posture: ship the whole ask now, with no phases, stubs, or follow-up remainders
-- `necessary-work` - Gate every candidate action on the delete test: outcome unmet or unproven, or the action is rejected
-- `wait-what` - Re-pitch a message that did not land, with context, plain-language phrasing, and the project's own vocabulary
-
-### Engineering Methodologies (16 skills)
-
-- `test-driven` - TDD with 10-language support
-- `type-driven` - Type-driven development (Idris 2, with 10-language support)
-- `proof-driven` - Proof-driven development (Lean 4, with property-based testing fallback and 10-language support)
-- `contract-driven` - Design-by-Contract (DbC): pre/post/invariants at API boundaries, state invariants, and trust boundaries
-- `validation-first-driven` - State machines, invariants, and temporal properties (Quint spec) before implementation
-- `tests-purge-unneeded` - Delete tests that don't catch real bugs (the inverse of TDD); load-bearing principles, static-vs-dynamic carve-out, language-specific examples
-- `spec-driven` - Write a structured spec before writing code
-- `source-driven` - Ground implementation decisions in official documentation with version-aware citations
-- `ground-latest` - Pin versions, stacks, and practices from today's release channels instead of from recall
-- `doubt-driven` - Subject non-trivial decisions to adversarial review before they stand
-- `minimalism-driven` - Minimalism as enforced doctrine: null-solution start, need-gated additions, delete > edit > add as authoring-time gates
-- `verification-before-completion` - Require fresh, fully-read run evidence before any completion claim
-- `lighter-checks` - Size verification to the change: one proving action, scoped, no repeat runs, gate intact
-- `codebase-design` - Shared vocabulary for deep modules: module, interface, depth, seam, adapter, leverage, locality
-- `security-hardening` - Harden code against vulnerabilities as you build it
-- `observability` - Instrument code with logging, metrics, traces, and alerts
-
-### Tooling (10 skills)
-
-- `ast-grep` - Structural code search, analysis, and refactoring
-- `browser-testing` - Test and debug browser code with Chrome DevTools MCP
-- `diagram-contract` - Author a diagram to the house contract: nomnoml or D2 source, house palette, rendered SVG committed beside it
-- `git-branchless` - Idiomatic git-branchless workflows for stack edits, rebases, and stacked-PR publishing
-- `setup-gitignore` - Compose or revise .gitignore from templates, editor patterns, and confirmed untracked noise
-- `setup-pre-commit` - Install ecosystem-appropriate pre-commit hooks for formatting, linting, and test gates
-- `setup-git-guardrails` - Install a PreToolUse hook that blocks irreversible git operations before they run
-- `setup-ts-deep-modules` - Enforce TypeScript package boundaries through entry points with dependency-cruiser
-- `strict-validation-setup` - Bootstrap strict-mode tooling and per-task GOALS.md scaffolding for self-verifying agent loops
-- `wizard` - Generate an interactive bash wizard that walks a human through a manual setup or migration
-
-### Execution (20 skills)
-
-- `parallel-launch` - Decompose a task into independent concerns and execute via agents
-- `tests-adversarial` - Adversarial tests that stress failure paths
-- `work` - Execute a plan or concrete work prompt end-to-end
-- `subagent-driven` - Delegate a multi-task plan to fresh subagents, auditing results before proceeding
-- `autobahn` - Carve guardrail-adjacent scope out of a task, then run the safe remainder at full strength
-- `restart-keeping-lessons` - Restart from v0 keeping only proven lessons, archiving the rest as evidence
-- `workflows-driven` - Deterministic phased fan-out with per-task contracts and adversarial verification; materializes on Claude Code Dynamic Workflows or omp eval orchestration
-- `fix` - Iterative repair loop that fixes one thing at a time and keeps changes on green
-- `resolving-merge-conflicts` - Resolve an in-progress merge or rebase conflict from both sides' primary sources, then finish the integration
-- `autopilot` - Hands-off plan-to-ship pipeline chaining existing skills
-- `llm-self-loop` - Restructure human-gated workflows into autonomous LLM loops with file-based outputs
-- `incremental` - Deliver changes in small, testable slices
-- `update-todos` - Re-sync a stale task list against what actually landed, with proof required per completion
-- `sophisticate-todos` - Split compound tasks into atomic ones, order by dependency, pin an acceptance criterion to each
-- `debug` - Hypothesis-driven debugging with minimal reproduction
-- `frontend-ui` - Build production-quality user-facing interfaces
-- `optimize` - Locate a hot path, benchmark transformations, and commit the proven winner
-- `extremely-optimize` - Rebuild code from its performance floor: hot paths demolished and re-derived first, cold paths grilled after
-- `shipping` - Prepare a production launch with checklists, monitoring, and rollback planning
-- `unlazy` - Gate-file discipline over a task decomposition: prove done against a checked ledger, not a claim
-
-### Review & Resolution (12 skills)
-
-- `review` - Review code changes on the current branch
-- `show-review` - Walk a diff as one-finding visuals, Keep/Skip/Discuss per turn
-- `resolve` - Resolve code review comments with validity checks
-- `doc-review` - Review requirements docs, plans, specs, and PRDs through persona-based lenses
-- `security-review` - Adversarial security audit using STRIDE, OWASP, supply-chain checks, and secrets scans
-- `review-fix-grill-loop` - Review and fix a diff in verified batches until no medium-or-higher finding remains
-- `simplify` - Compress-op review pass on reuse, quality, and efficiency axes
-- `shower` - Cold-read an artifact with fresh eyes to answer whether it stands alone
-- `verify-both-ways` - Verify reality-grounded claims against sources in both directions
-- `mandela` - Audit an eval for leakage across 8 independence patterns
-- `clean-and-true` - Taste your own output by routing to the hygiene skills the change earned
-- `prism` - Split one artifact across independent lenses and return the one question that resolves the split
-
-### Cleanup & Refactoring (13 skills)
-
-- `refactor-break-compat` - Refactor by removing backward-compatibility and legacy layers (public API surface)
-- `breaking-driven` - Bloat-triggered demolition: state the contract, derive the replacement blind, cut the residue; interior surfaces go without asking, boundary surfaces stop for a yes
-- `cleanup-codebase` - Internal micro-hygiene: dead fields, redundant wrappers, stale config flags, identity passthrough. Applied while touching nearby code, not as standalone PRs
-- `tidy` - Dispatch compress operations to the right domain: file, diff, memory, workspace, git stack, or doc
-- `improve-architecture` - Surface deepening refactors that turn shallow modules into deep ones
-- `deprecate-and-migrate` - Plan and execute deprecation and migration of old systems, APIs, or features
-- `to-greenfield` - Diagnose a degraded codebase's field state (darkfield/redfield/bluefield/brownfield) and route the recovery
-- `slop` - Slop front door: verdict or purge for code, prose, decisions, or UI, routed to the right domain authority
-- `purge-slop-docs` - Sweep the markdown tree for overstatement, jargon, stale references, and duplication, then reorder what survives
-- `rewrite-clean-v0` - Rewrite a drifted artifact as a clean v0, cutting sediment
-- `reorder` - Realign a listing into a logical order under one stated principle
-- `debloat` - Compress a bloated artifact to its load-bearing density
-- `consolidate-to-one-home` - Audit a scattered fact and fold it into one canonical home
-
-### GitHub Integration (13 skills)
-
-- `pr-review` - Review code on a GitHub PR using `gh`
-- `gate-and-merge` - Gate open PRs on a QA ladder, fix minor findings on the branch, land the stack parent-first
-- `gh-fix-ci` - Inspect failing CI checks, pull logs, propose fixes
-- `commit` - Create a git commit with a clear, value-communication message
-- `commit-push` - Commit working-tree changes and push to the remote; no PR
-- `commit-push-current` - Commit and push to the current branch: no branch creation, no branch switch, no PR
-- `commit-push-pr` - Commit, push, and open a PR
-- `atomic-issues-prs` - Publish a change-set as atomic GitHub issues or PRs
-- `github-triage` - Triage GitHub issues through a configurable label-based state machine
-- `github-solution-research` - Find proven open-source solutions on GitHub for concrete engineering problems
-- `propose-issue` - Turn a symptom into a source-grounded GitHub issue: evidence, analysis, self-review gate, then file
-- `resolve-pr-feedback` - Resolve PR review feedback and fix code-review comments
-- `worktree` - Set up isolated git worktrees for new or existing branches/PRs
-
-### Codebase Intelligence & Workflow (22 skills)
-
-- `deslop` - Three-phase certainty-graded AI-slop detection with HIGH-only guarded autofix
-- `sync-docs` - Diff-driven doc-vs-code drift detection; safe version/CHANGELOG fixes, rest flagged
-- `drift-detect` - Plan-vs-reality reality check across GitHub, docs, and code
-- `audit-project` - Iterative multi-agent code audit with a false-positive contract
-- `why` - Investigate design rationale from git, tickets, docs, and chat with cited confidence
-- `onboard` - New-codebase orientation tour with interactive guidance
-- `can-i-help` - Route contributors to data-backed contribution opportunities
-- `enhance` - Certainty-graded enhancement of agent/plugin surfaces via parallel analyzers
-- `docs-and-adrs` - Record decisions and documentation that explain why the codebase is shaped as it is
-- `ci-cd` - Set up or modify CI/CD pipelines and deployment automation
-- `deps-upgrade` - Run a dependency-upgrade campaign from outdated scan through lockfile audit
-- `memory-clean` - Audit memory files for structural rot and staleness, reporting before fixing
-- `memory-sanitize` - Produce share-safe copies of memory files with PII and credentials redacted
-- `memory-update` - Scan session history for save-worthy signals and propose memory files
-- `autolearn` - Compound a solved problem into a durable in-repo learning doc
-- `compound` - Document a durable solution or project concept in the repo
-- `generate-my-taste` - Generate a personal taste skill from local evidence and confirmation forks
-- `cascade-dedup` - Strip duplicate and conflicting directives across the system-prompt cascade family
-- `dedup-skills` - Ledger-first dedup of a skills/ tree: find repeated or self-conflicting rules across skill files
-- `handoff` - Snapshot the current session into a resumable handoff artifact for a cold session, agent, or person
-- `show-me` - Answer the current topic with the smallest visual: pseudocode, tree, diagram, or diff
-- `walk-with-me` - Walk code together turn by turn, visual first, the user picking each next step
-
-## Output Styles (6 total)
+## Output styles
 
 Output styles shape *how* the agent communicates. Switch via Claude Code's `/config` or by setting `outputStyle` in `settings.json`.
 

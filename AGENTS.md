@@ -29,29 +29,13 @@ cd /home/alpha/.claude/claude && git push origin main
 
 Plain `git push` only; force-push is denied at the Claude permissions layer (`git push -f`, `--force`, and every `--force-with-lease*` variant are blocked).
 
-## Patch-bump convention
+## Coordinated package version
 
-Behavior changes (paradigm shifts, agent rule changes, skill behavior changes) bump patch (+0.0.1) in the same commit as the change, on all SEVEN manifest version fields in lockstep. Bumping some but not all ships a stale plugin entry to whichever harness reads the one you missed:
+Public package, plugin, and marketplace versions are the single literal `2.0.0` (`releaseVersion`). `catalog/packages.json` is the identity ledger. `scripts/render-package-surfaces.mjs` and `scripts/check-package-surfaces.mjs` own the 29 committed package roots and the shared Claude/OMP catalog. `scripts/render-package-provenance.mjs` owns the 29 `PROVENANCE.md` files. Do not bump a subset of manifests. Do not invent a second authored skill tree under `packages/*/skills`.
 
-| Field | Read by |
-|---|---|
-| `.claude-plugin/plugin.json` `.version` | Claude Code: **canonical source**; Codex and Grok resolve this too |
-| `.claude-plugin/marketplace.json` `.version` | Claude Code marketplace |
-| `.claude-plugin/marketplace.json` `.plugins[0].version` | Claude Code marketplace entry |
-| `plugin.json` `.version` | Antigravity (`agy`) |
-| `.cursor-plugin/plugin.json` `.version` | Cursor |
-| `.kimi-plugin/plugin.json` `.version` | Kimi Code |
-| `.devin-plugin/plugin.json` `.version` | Devin CLI: required before 3000.3.22, which hard-fails without it |
+Tooling-only changes (pre-commit hooks, formatter config) and editing-primer doc updates (this file) do not change `releaseVersion`.
 
-Do not hand-edit the six non-canonical fields: bump `.claude-plugin/plugin.json`, then run `python3 scripts/sync-manifests.py`, which mirrors `version` and `description` outward and shape-checks the static catalogs. `--check` reports drift (exit 1) or a structural fault (exit 2). The `sync-manifests` prek hook runs it on any manifest change.
-
-The static catalogs carry no plugin version and are validated only: `.cursor-plugin/marketplace.json`, `.kimi-plugin/marketplace.json` (its top-level `version` is the catalog **schema** version, the literal `"2"`), and `.agents/plugins/marketplace.json`. Their `source` rules are mutually contradictory and enforced by the script, not by memory: Codex requires a local `"./"` source, Kimi rejects one and requires a URL.
-
-Choose the bump base deterministically, immediately before editing: `git fetch origin`, read the version values from `origin/main`'s manifests, require them to agree, and bump that base by one patch. If local and origin differ, rebase onto `origin/main` and take its manifests as the base, never reuse a version literal planned earlier in the session. Push each behavior commit before starting the next, so the next fetch sees a base that already includes it.
-
-Tooling-only changes (pre-commit hooks, formatter config), pure sync changes (e.g., normalizing an embedded baseline back to canonical), and editing-primer doc updates (this file) do not bump.
-
-Do not add or backfill `CHANGELOG.md` entries for routine patch bumps.
+Do not add or backfill `CHANGELOG.md` entries for routine version work.
 
 ## Skill frontmatter
 
