@@ -59,7 +59,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# Node modules (if any extensions use them)
+# Node modules (nothing here needs them; this catches a stray install)
 node_modules/
 
 # Environment files
@@ -86,6 +86,3 @@ checkpoint-*.json
 
 # Specific files found in this directory
 __store.db
-
-# Generated pack and distribution projections
-.release/
