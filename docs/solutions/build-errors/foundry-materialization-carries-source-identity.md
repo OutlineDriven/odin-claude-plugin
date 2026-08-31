@@ -1,7 +1,7 @@
 ---
 title: Foundry materialization carries source identity into renamed skills
 date: 2026-08-31
-category: build-errors
+category: docs/solutions/build-errors
 module: skills
 problem_type: logic_error
 component: tooling
@@ -38,9 +38,9 @@ The 2.0 skill foundry renames imported skills to ODIN slugs at the directory lev
 
 Build a name map (old source name -> new slug) from the provenance ledger, then repair by class with dedicated detectors:
 
-1. Require `name:` to equal the directory slug (gate: `.outline/gates/check-skill-names.py`).
-2. Catch invocation leaks: slash, backtick, and path forms of every old name, exempting provenance/attribution lines (gate: `.outline/gates/check-old-name-leaks.py`).
-3. Strip brand names and bare old names from H1 headings and `openai.yaml` display names (a separate audit pass, since `.outline/gates/check-old-name-leaks.py` checks invocation patterns rather than bare heading text).
+1. Require `name:` to equal the directory slug (gate: `node scripts/check-skill-routes.mjs`, which fails on name/directory mismatches).
+2. Catch invocation leaks: slash, backtick, and path forms of every old name, exempting provenance/attribution lines (a session-scope grep over the renamed slugs; no shipped gate exists for this class yet).
+3. Strip brand names and bare old names from H1 headings and `openai.yaml` display names (a separate audit pass, since the invocation-leak grep checks slash/backtick/path patterns rather than bare heading text).
 4. Rewrite operational paths to the repo state-dir convention (`~/.odin/`).
 5. Fix verb-flipped slugs caught by reading the contract rather than the name: `workspace-freeze` described unfreezing; the directory itself was renamed.
 
@@ -52,11 +52,11 @@ The defect stems from one mechanism: renaming directories while keeping file con
 
 ## Prevention
 
-- Run the two gates in `.outline/gates/` after any materialization or bulk import into `skills/`.
+- Run `node scripts/check-skill-routes.mjs` and `node scripts/render-skill-manifests.mjs --check` after any materialization or bulk import into `skills/`. The first enforces name == directory, provenance-row parity, frontmatter colon-space quoting, and display_name uniqueness; the second catches manifest drift when generated display_name/short_description no longer match the SKILL.md frontmatter. Supplement with a session-scope grep over slash, backtick, and path forms of renamed slugs to catch invocation leaks the shipped gates do not cover.
 - When importing a skill under a new slug, treat the rename as a content transform, not a directory move: map `name:`, triggers, H1, `display_name`, and state paths in the same pass.
 - A slug whose verb contradicts its contract (freeze vs unfreeze) is a name defect even when no source name leaks; read the Done row of the contract when adopting a slug.
 
 ## Related Issues
 
-- `.outline/evidence/skill-foundry/name-map.json` — the old->new map this repair used.
+- `catalog/provenance-rows.json` — the provenance ledger; derive the old->new name map from its source-name and slug columns.
 - `docs/solutions/workflow-issues/cascade-dedup-jaccard-misses-semantic-duplication.md` — sibling foundry-era learning.

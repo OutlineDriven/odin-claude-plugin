@@ -2,7 +2,8 @@
 
 Six councils (Merge, Hierarchy, Interface, Voice, Experience, Infra) produced 48 candidates.
 A reject-by-default critic passed 29; a deep adjudicator audited all 48 verdicts, overturned 7,
-and sealed the set: **26 survive, 22 rejected**. Full verdicts: `agent://FoundryAdjudicator`.
+and sealed the set: **26 survive, 22 rejected**. The survivors and rejected candidates are
+enumerated in the sections below (Survivors by axis, Rejected).
 
 ## Survivors by axis
 
