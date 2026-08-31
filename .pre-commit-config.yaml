@@ -41,17 +41,17 @@ repos:
         pass_filenames: false
 
       - id: check-package-surfaces
-        name: check 29-package surfaces and provenance
-        entry: bash -c "node scripts/check-package-surfaces.mjs && node scripts/check-package-provenance.mjs"
+        name: check 29-package surfaces and NOTICE
+        entry: bash -c "node scripts/check-package-surfaces.mjs"
         language: system
-        files: ^(catalog/.*|packages/.*|scripts/(package-surfaces|render-package-surfaces|check-package-surfaces|render-package-provenance|check-package-provenance)\.mjs|\.claude-plugin/marketplace\.json|package\.json|LICENSE)$
+        files: ^(catalog/.*|packages/.*|licenses/NOTICE|scripts/(package-surfaces|render-package-surfaces|check-package-surfaces|skill-membership)\.mjs|\.claude-plugin/marketplace\.json|package\.json|LICENSE)$
         pass_filenames: false
 
       - id: check-skill-routes
         name: check skill routes, registry count, and manifest identity
         entry: node scripts/check-skill-routes.mjs
         language: system
-        files: ^(skills/.*/SKILL\.md|skills/.*/agents/openai\.yaml|catalog/provenance-rows\.json|scripts/check-skill-routes\.mjs|scripts/render-skill-manifests\.mjs)$
+        files: ^(skills/.*/SKILL\.md|skills/.*/agents/openai\.yaml|catalog/skill-membership\.json|scripts/check-skill-routes\.mjs|scripts/render-skill-manifests\.mjs)$
         pass_filenames: false
 
       - id: render-skill-manifests

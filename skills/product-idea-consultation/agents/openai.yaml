@@ -1,3 +1,0 @@
-interface:
-  display_name: "Product Idea Consultation"
-  short_description: "Use when the user runs /product-idea-consultation with an idea"

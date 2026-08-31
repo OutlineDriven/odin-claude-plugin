@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-**15 skills ported from the `agent-sh` plugin marketplace**: re-homed as native, self-contained ODIN skills. All external dependencies (the `agent-analyzer` binary, `repo-intel.json` cache, editor shims, bespoke JS `lib/`, and opus/sonnet/haiku model routing) are replaced by native tooling: codegraph MCP, `git`/`ast-grep`/`git grep` recipes, repomix, generic ODIN agents, and the `ask` tool. Attribution in `skills/LICENSES.md`.
+**15 skills ported from the `agent-sh` plugin marketplace**: re-homed as native, self-contained ODIN skills. All external dependencies (the `agent-analyzer` binary, `repo-intel.json` cache, editor shims, bespoke JS `lib/`, and opus/sonnet/haiku model routing) are replaced by native tooling: codegraph MCP, `git`/`ast-grep`/`git grep` recipes, repomix, generic ODIN agents, and the `ask` tool. Attribution in `licenses/NOTICE`.
 
 - `repo-intel`: native repository intelligence (hotspots, coupling, bus factor, bugspots, ownership, entry points) from git history + codegraph; no cache, every signal recomputed on demand.
 - `agnix`: native agent-config lint pass (skill frontmatter, CLAUDE.md/AGENTS.md, hooks, MCP, plugin manifests, agent files) graded HIGH/MEDIUM/LOW.
@@ -37,7 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `learn`: online research → scored sources → summaries-only → RAG-optimized learning guide + retrieval index.
 - `system-prompt-curator`: create or improve autonomous-agent system prompts from research-backed principles.
 - `skillers`: mine local agent transcripts (sanitized first) into automation recommendations; never auto-creates files.
-- `enhance`: certainty-graded enhancement of agent/plugin surfaces via parallel analyzers; HIGH-only `--apply`.
+- `agent-surface-forge` (formerly `enhance`): certainty-graded enhancement of agent, plugin, and instruction surfaces through parallel analyzers; HIGH-only `--apply`.
 - `perf-investigate`: self-contained multi-phase performance investigation (baseline → hypotheses → profile → one-change optimization).
 - `next-task` (explicit-only): self-contained backlog orchestrator: selects the next task and drives it through isolated git-branchless implementation, review, docs, and verification gates.
 

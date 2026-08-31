@@ -1,6 +1,6 @@
 # Execution engines
 
-`/work` runs an implementation-ready unified code plan through one of three engines. The engine is chosen once, after Phase 0 classifies the plan as `artifact_readiness: implementation-ready` plus `execution: code`. The engine decides *how* implementation runs; it never changes who owns the shipping tail.
+`/work` runs an implementation-ready unified code plan through one of three engines. The engine is chosen once, after Phase 0 classifies the plan as `artifact_readiness: implementation-ready` plus `execution: code`. The engine decides *how* implementation runs; caller mode decides where work returns control.
 
 Engine selection applies only to code execution. Knowledge-work and legacy plans keep the inline/subagent flow in `SKILL.md`.
 
@@ -34,7 +34,7 @@ Recommend exactly one path. Present a non-default engine as an advanced / large-
 
 ### Inline / subagent (default)
 
-Follow the dispatch strategy in `SKILL.md` Phase 1 Step 4 (inline, serial subagents, or parallel subagents) and the Phase 2 execution loop. `/work` owns task creation, unit sequencing, dispatch, verification, and commits.
+Follow the dispatch strategy in `SKILL.md` Phase 1 Step 4 (inline, serial subagents, or parallel subagents) and the Phase 2 execution loop. `/work` owns task creation, unit sequencing, dispatch, implementation, and local verification. The finalizer owns review and commit packaging.
 
 ### Goal-mode and dynamic-workflow
 
@@ -54,9 +54,9 @@ Copyable goal-mode prompt (standalone — emit verbatim, substituting only the l
 
 The plan is the authority — don't read it whole. Scan headings, read the Goal Capsule, then work the units in dependency order, reading each unit plus its cited R/F/AE/KTD as you go. Run the plan's Verification Contract gates and satisfy each unit's test scenarios. Track progress outside the plan file, not in it.
 
-This goal owns implementation and local verification only. Run simplification and code review only when the calling `/work` invocation explicitly asks for them; otherwise leave the quality gates, commit packaging, and shipping tail for `/work` to resume. Surface a genuine blocker — something that changes scope or contradicts the plan — instead of guessing; use your judgment on details the plan leaves open.
+This goal owns implementation and local verification only. Run simplification only when the calling `/work` invocation explicitly asks for it. Do not review, commit, push, or open a PR. Return the verified diff to `/work`, which either returns it to the orchestrator or delegates finalization to `review-and-ship`. Surface a genuine blocker — something that changes scope or contradicts the plan — instead of guessing; use your judgment on details the plan leaves open.
 
-Done when the transcript shows: every non-deferrable Per-Unit DoD row has an observed verification result; the Verification Contract's required checks passed or are documented as not applicable; applicable simplification/review gates ran or were explicitly skipped with reason; dead-end or experimental code from approaches that did not pan out has been removed from the diff; and no progress/status was written into the plan file. Before declaring done, re-open the plan and re-check the active units, Verification Contract, and Definition of Done against the diff — context may have been compacted to a summary that dropped detail.
+Done when the transcript shows: every non-deferrable Per-Unit DoD row has an observed verification result; the Verification Contract's required local checks passed or are documented as not applicable; dead-end or experimental code from approaches that did not pan out has been removed from the diff; no progress or status was written into the plan file; and no review, commit, push, or PR operation ran. Before declaring done, re-open the plan and re-check the active units, Verification Contract, and Definition of Done against the diff — context may have been compacted to a summary that dropped detail.
 ```
 
 Copyable dynamic-workflow prompt (large fan-out — emit verbatim):
@@ -64,7 +64,7 @@ Copyable dynamic-workflow prompt (large fan-out — emit verbatim):
 ```text
 ultracode: Execute <plan-path> as an end-to-end dynamic workflow.
 
-Use the plan as authority. Build the workflow around the Implementation Units and Definition of Done. Parallelize only independent U-IDs with disjoint file ownership, keep intermediate agent results inside the workflow, run simplification/review/verification gates inside the workflow tail, and return a final summary with changed files, U-IDs completed, verification results, residual findings, and blockers.
+Use the plan as authority. Build the workflow around the Implementation Units and Definition of Done. Parallelize only independent U-IDs with disjoint file ownership, keep intermediate agent results inside the workflow, run implementation and local-verification gates inside the workflow, and return a structured summary with changed files, U-IDs completed, verification results, residual findings, and blockers. Do not review, commit, push, open a PR, or run CI.
 ```
 
 Keep emitted prompts under 4,000 characters and always substitute the literal plan path.
@@ -75,11 +75,11 @@ After any engine finishes implementation, inspect the diff and continue at the t
 
 | Caller | After implementation, `/work` ... |
 |---|---|
-| **Standalone** (user invoked `/work` directly, or an approved plan-mode session handed off interactively) | Resumes its normal post-implementation tail — Phase 3-4 quality gates, simplification, review, commit, and handoff in `references/shipping-workflow.md`. A goal-mode run does not skip these; verify they ran or were explicitly skipped with reason. |
-| **Orchestrated** (called by another skill/agent that owns simplification, review, PR, and CI) | Performs implementation and local verification only, then returns a structured summary to the caller. Does not run simplify/review/PR/CI — the caller owns those. |
+| **Standalone** (user invoked `/work` directly, or an approved plan-mode session handed off interactively) | Delegates the verified diff to `review-and-ship` with explicit delegated authority. That finalizer owns review, commit packaging, publication classification, push, PR, and the final report. |
+| **Orchestrated** (called by another skill or agent that owns the tail) | Returns a structured implementation and local-verification result. It does not simplify, review, commit, push, open a PR, or run CI unless the caller separately delegates that operation. |
 
 Using goal-mode or a dynamic workflow is a way to get better sustained implementation focus, not a way to skip the owning workflow's finish discipline.
 
 ## Progress visibility
 
-Tail ownership decides who opens the **final** PR; it does not forbid progress signals during a long run. For multi-hour goals, meaningful commits as units complete and an optional scratch progress artifact at `/tmp/odin/work/<run-id>/progress.json` keep the trajectory observable. Never write progress or status into the plan body — git, commits, and the envelope carry it.
+Caller mode decides who opens the **final** PR; it does not forbid progress signals during a long run. For multi-hour goals, record durable progress in `local://work-<run-id>-progress.json`. Never write progress or status into the plan body. The task tracker and durable progress artifact carry it until the caller or finalizer records repository history.

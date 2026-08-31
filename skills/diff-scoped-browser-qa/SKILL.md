@@ -1,6 +1,6 @@
 ---
 name: diff-scoped-browser-qa
-description: 'Use /diff-scoped-browser-qa for branch-diff browser QA. Every scenario ends Pass, Fixed, Skipped, or Blocked; suite result and dogfood report are recorded. Not for live-URL visual audit — use design-review. No remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use /diff-scoped-browser-qa for branch-diff browser QA. Every scenario ends Pass, Fixed, Skipped, or Blocked; suite result and dogfood report are recorded. Not for live-URL visual audit — use web-design-review. No remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Diff-scoped browser QA

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Agent Surface Forge"
+  short_description: "Use when the user asks to audit or repair agent surfaces"

@@ -1,6 +1,6 @@
 ---
 name: infrastructure-mentor
-description: 'Use when a user, especially a new hire, asks for mentoring, guidance, or explanation of Sentry infrastructure or practices. Returns a clear, sourced explanation with references and concrete next learning steps.'
+description: 'Use when a user, especially a new hire, asks for mentoring, guidance, or explanation of infrastructure or engineering practices. Returns a clear, sourced explanation with references and concrete next learning steps.'
 ---
 
 # Infrastructure mentor
@@ -9,10 +9,10 @@ description: 'Use when a user, especially a new hire, asks for mentoring, guidan
 
 | Field | Bound contract |
 |---|---|
-| Trigger | User, especially a new hire, asks for mentoring, guidance, or explanation of Sentry infrastructure or practices |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation |
-| Side effect | Researches the topic and delivers a clear, sourced explanation with references and concrete next steps |
-| Done | User understands the concept enough to explain it and has concrete next learning steps |
+| Trigger | User, especially a new hire, asks for mentoring, guidance, or explanation of infrastructure or engineering practices. |
+| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Side effect | Researches the topic and delivers a clear, sourced explanation with references and concrete next steps. |
+| Done | User understands the concept enough to explain it and has concrete next learning steps. |
 
 ## Inputs
 
@@ -21,15 +21,17 @@ description: 'Use when a user, especially a new hire, asks for mentoring, guidan
 ## Procedure
 
 1. Clarify the user's specific question if it is ambiguous or too broad.
-2. Research the topic using available documentation, codebase knowledge, and Sentry infrastructure context.
+2. Research the topic using available documentation, codebase knowledge, and the organization's infrastructure context.
 3. Synthesize findings into a clear, structured explanation.
 4. Cite sources explicitly: link to relevant docs, code locations, runbooks, or ADRs.
 5. Close with concrete next steps: what to read, try, or ask next.
 
 ## Failure and recovery
-- **Outside scope:** the topic is not about Sentry infrastructure or practices. State this directly. Do not invent Sentry content.
+
+- **Outside scope:** the topic is not about infrastructure or engineering practices. State this directly. Do not invent content.
 - **Information unavailable:** sufficient information cannot be found. Return what is available with honest uncertainty, and suggest where to look or whom to ask.
 - **Partial answer:** if time or context is limited, deliver the clearest explanation possible and note what remains uncovered.
 
 ## Output
-A clear, sourced explanation of the Sentry concept or practice the user asked about, with explicit references and concrete next steps. Delivered as a structured report in chat.
+
+A clear, sourced explanation of the infrastructure concept or practice the user asked about, with explicit references and concrete next steps. Delivered as a structured report in chat. Terminal classification: `explained` (concept covered with sources and next steps), `partial` (core explained, gaps noted), or `out-of-scope` (topic is not infrastructure or engineering practices).

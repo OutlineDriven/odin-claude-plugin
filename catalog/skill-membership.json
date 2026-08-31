@@ -1,0 +1,2635 @@
+{
+  "schema": "odin-skill-membership/v1",
+  "releaseVersion": "2.0.0",
+  "skill_count": 657,
+  "rows": [
+    {
+      "slug": "abstract-well",
+      "module": "odin-create-advanced"
+    },
+    {
+      "slug": "address-sanitizer",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "adverse-possible-worlds-qa",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "aflpp",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "agent-environment-retrospective",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "agent-surface-forge",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "agent-transcript",
+      "module": "odin-research"
+    },
+    {
+      "slug": "agentic-actions-injection-audit",
+      "module": "odin-security"
+    },
+    {
+      "slug": "agents-md",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "ai-collab-protocols",
+      "module": "odin-core"
+    },
+    {
+      "slug": "all-scenarios-storm",
+      "module": "odin-create-advanced"
+    },
+    {
+      "slug": "analysis-artifacts",
+      "module": "odin-bigquery"
+    },
+    {
+      "slug": "answer-stub-questionnaire",
+      "module": "odin-research"
+    },
+    {
+      "slug": "api-and-interface-design",
+      "module": "odin-code"
+    },
+    {
+      "slug": "append-run-log",
+      "module": "odin-run"
+    },
+    {
+      "slug": "architect",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "architecture-diagram",
+      "module": "odin-create"
+    },
+    {
+      "slug": "articulate",
+      "module": "odin-writing"
+    },
+    {
+      "slug": "artifact-arena",
+      "module": "odin-run-advanced"
+    },
+    {
+      "slug": "askme",
+      "module": "odin-planning"
+    },
+    {
+      "slug": "ast-grep",
+      "module": "odin-code"
+    },
+    {
+      "slug": "atheris",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "atomic-issues-prs",
+      "module": "odin-run"
+    },
+    {
+      "slug": "attack-shape",
+      "module": "odin-create-advanced"
+    },
+    {
+      "slug": "audit-context-building",
+      "module": "odin-security"
+    },
+    {
+      "slug": "audit-loop-scaffold",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "audit-project",
+      "module": "odin-loop"
+    },
+    {
+      "slug": "autobahn",
+      "module": "odin-run"
+    },
+    {
+      "slug": "autolearn",
+      "module": "odin-research"
+    },
+    {
+      "slug": "automate-me",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "automatic-cybernetic-flow-design",
+      "module": "odin-create-advanced"
+    },
+    {
+      "slug": "automatic-freeform-graphs-design",
+      "module": "odin-create-advanced"
+    },
+    {
+      "slug": "autopilot",
+      "module": "odin-run-advanced"
+    },
+    {
+      "slug": "autoplan",
+      "module": "odin-planning"
+    },
+    {
+      "slug": "autoship",
+      "module": "odin-run"
+    },
+    {
+      "slug": "ax-audit",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "axiom-mode",
+      "module": "odin-core"
+    },
+    {
+      "slug": "backlog",
+      "module": "odin-planning"
+    },
+    {
+      "slug": "batch-ask-me",
+      "module": "odin-planning"
+    },
+    {
+      "slug": "behavior-validator",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "blast-radius",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "blog-writing-guide",
+      "module": "odin-writing-advanced"
+    },
+    {
+      "slug": "book-to-skill",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "brainstorm",
+      "module": "odin-planning"
+    },
+    {
+      "slug": "brand-authority",
+      "module": "odin-writing"
+    },
+    {
+      "slug": "brand-guidelines",
+      "module": "odin-writing"
+    },
+    {
+      "slug": "breaking-driven",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "browse",
+      "module": "odin-research"
+    },
+    {
+      "slug": "browser-cookie-store",
+      "module": "odin-run"
+    },
+    {
+      "slug": "browser-qa",
+      "module": "odin-run"
+    },
+    {
+      "slug": "browser-testing",
+      "module": "odin-web"
+    },
+    {
+      "slug": "burp-search-command",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "burpsuite-project-parser",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "buyer-objection-research",
+      "module": "odin-loop"
+    },
+    {
+      "slug": "buzzword-analysis",
+      "module": "odin-research"
+    },
+    {
+      "slug": "buzzword-hijack",
+      "module": "odin-create"
+    },
+    {
+      "slug": "c-security-review",
+      "module": "odin-security"
+    },
+    {
+      "slug": "can-i-help",
+      "module": "odin-research"
+    },
+    {
+      "slug": "canary-deploy",
+      "module": "odin-run"
+    },
+    {
+      "slug": "capstone",
+      "module": "odin-research"
+    },
+    {
+      "slug": "capture-isolated-patch",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "cargo-fuzz",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "cascade-dedup",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "catchup",
+      "module": "odin-research"
+    },
+    {
+      "slug": "chain-vulnerability-scanner",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "changed-route-browser-testing",
+      "module": "odin-web"
+    },
+    {
+      "slug": "changelog-updates",
+      "module": "odin-create"
+    },
+    {
+      "slug": "check-agent-compatibility",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "check-impl-against-spec",
+      "module": "odin-code"
+    },
+    {
+      "slug": "cherrypick-to-release",
+      "module": "odin-run"
+    },
+    {
+      "slug": "chrome-extension",
+      "module": "odin-web"
+    },
+    {
+      "slug": "chrome-mcp-troubleshooting",
+      "module": "odin-run"
+    },
+    {
+      "slug": "ci-cd",
+      "module": "odin-code"
+    },
+    {
+      "slug": "ci-fix",
+      "module": "odin-code"
+    },
+    {
+      "slug": "ci-sweeper",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "clarify",
+      "module": "odin-planning"
+    },
+    {
+      "slug": "classify-ci-failure",
+      "module": "odin-code"
+    },
+    {
+      "slug": "claude-settings-audit",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "clean-and-true",
+      "module": "odin-create"
+    },
+    {
+      "slug": "clean-clean-cut",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "cli-for-agents",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "close-done",
+      "module": "odin-run"
+    },
+    {
+      "slug": "cloud-task-orchestrator",
+      "module": "odin-run-advanced"
+    },
+    {
+      "slug": "code-simplification",
+      "module": "odin-code"
+    },
+    {
+      "slug": "codebase-design",
+      "module": "odin-code"
+    },
+    {
+      "slug": "codeql-security-analysis",
+      "module": "odin-security"
+    },
+    {
+      "slug": "commit",
+      "module": "odin-code"
+    },
+    {
+      "slug": "commit-economy",
+      "module": "odin-code"
+    },
+    {
+      "slug": "competitor-changelog",
+      "module": "odin-research"
+    },
+    {
+      "slug": "competitor-feature-research",
+      "module": "odin-research"
+    },
+    {
+      "slug": "compile-3d-workflow",
+      "module": "odin-create"
+    },
+    {
+      "slug": "complexity-grill",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "compound",
+      "module": "odin-research"
+    },
+    {
+      "slug": "confirmed-security-review",
+      "module": "odin-security"
+    },
+    {
+      "slug": "consolidate-to-one-home",
+      "module": "odin-research"
+    },
+    {
+      "slug": "constant-time-analysis",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "constant-time-testing",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "constraint-driven-development",
+      "module": "odin-code"
+    },
+    {
+      "slug": "consult-deployment",
+      "module": "odin-research"
+    },
+    {
+      "slug": "context-engineering",
+      "module": "odin-research"
+    },
+    {
+      "slug": "continual-learning",
+      "module": "odin-research"
+    },
+    {
+      "slug": "contract-driven",
+      "module": "odin-code"
+    },
+    {
+      "slug": "control-cli",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "control-ui",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "conventional-git",
+      "module": "odin-code"
+    },
+    {
+      "slug": "converge",
+      "module": "odin-create"
+    },
+    {
+      "slug": "copywriting",
+      "module": "odin-writing"
+    },
+    {
+      "slug": "copywriting-cta",
+      "module": "odin-writing"
+    },
+    {
+      "slug": "copywriting-hooks",
+      "module": "odin-writing"
+    },
+    {
+      "slug": "copywriting-prose-creator",
+      "module": "odin-writing-advanced"
+    },
+    {
+      "slug": "copywriting-tone-of-voice-creator",
+      "module": "odin-writing-advanced"
+    },
+    {
+      "slug": "corroborate-by-independent-reruns",
+      "module": "odin-run-advanced"
+    },
+    {
+      "slug": "cost-reduction",
+      "module": "odin-loop"
+    },
+    {
+      "slug": "council",
+      "module": "odin-research-advanced"
+    },
+    {
+      "slug": "create-branch",
+      "module": "odin-code"
+    },
+    {
+      "slug": "create-learning-path",
+      "module": "odin-research"
+    },
+    {
+      "slug": "create-plugin-scaffold",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "create-pull-request",
+      "module": "odin-run"
+    },
+    {
+      "slug": "create-verification-skill",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "cross-critique",
+      "module": "odin-research-advanced"
+    },
+    {
+      "slug": "cross-lens-converge",
+      "module": "odin-research-advanced"
+    },
+    {
+      "slug": "cross-run-playbook",
+      "module": "odin-loop"
+    },
+    {
+      "slug": "crypto-protocol-diagram",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "culture-burnout-detection",
+      "module": "odin-research"
+    },
+    {
+      "slug": "culture-conflict-mediation",
+      "module": "odin-research"
+    },
+    {
+      "slug": "culture-interview-debrief",
+      "module": "odin-research"
+    },
+    {
+      "slug": "culture-interview-profile-prediction",
+      "module": "odin-research"
+    },
+    {
+      "slug": "culture-manager-coaching",
+      "module": "odin-research"
+    },
+    {
+      "slug": "culture-onboarding-plan",
+      "module": "odin-research"
+    },
+    {
+      "slug": "cursor-sdk",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "customer-feedback-report",
+      "module": "odin-research"
+    },
+    {
+      "slug": "cut-new-release-candidate",
+      "module": "odin-run"
+    },
+    {
+      "slug": "cybernetic-loop",
+      "module": "odin-core"
+    },
+    {
+      "slug": "cycle-memo",
+      "module": "odin-run"
+    },
+    {
+      "slug": "dataflow-diagram",
+      "module": "odin-create"
+    },
+    {
+      "slug": "dbt-model-index",
+      "module": "odin-bigquery"
+    },
+    {
+      "slug": "debloat-respect-richness",
+      "module": "odin-create"
+    },
+    {
+      "slug": "decide",
+      "module": "odin-planning"
+    },
+    {
+      "slug": "decision-diary",
+      "module": "odin-research"
+    },
+    {
+      "slug": "decision-rationale-gaps",
+      "module": "odin-research"
+    },
+    {
+      "slug": "dedup-skills",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "deep-research",
+      "module": "odin-research-advanced"
+    },
+    {
+      "slug": "define-goalstate",
+      "module": "odin-create"
+    },
+    {
+      "slug": "dependency-sweeper",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "deployment-setup",
+      "module": "odin-run"
+    },
+    {
+      "slug": "deprecate-and-migrate",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "deps-upgrade",
+      "module": "odin-code"
+    },
+    {
+      "slug": "design",
+      "module": "odin-design"
+    },
+    {
+      "slug": "design-consultation",
+      "module": "odin-design"
+    },
+    {
+      "slug": "design-dispute-recommend",
+      "module": "odin-design-advanced"
+    },
+    {
+      "slug": "design-gate-brainstorming",
+      "module": "odin-design"
+    },
+    {
+      "slug": "design-it-twice",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "design-variants",
+      "module": "odin-design"
+    },
+    {
+      "slug": "deslop",
+      "module": "odin-code"
+    },
+    {
+      "slug": "devcontainer-setup",
+      "module": "odin-code"
+    },
+    {
+      "slug": "developer-experience-review",
+      "module": "odin-research"
+    },
+    {
+      "slug": "devils-advocate-architecture",
+      "module": "odin-create-advanced"
+    },
+    {
+      "slug": "diagnose-loop-health",
+      "module": "odin-run-advanced"
+    },
+    {
+      "slug": "diagramming-code",
+      "module": "odin-code"
+    },
+    {
+      "slug": "diamond-task",
+      "module": "odin-core"
+    },
+    {
+      "slug": "diataxis-docs-authoring",
+      "module": "odin-create"
+    },
+    {
+      "slug": "diff-scoped-browser-qa",
+      "module": "odin-web"
+    },
+    {
+      "slug": "differential-security-review",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "dimensional-analysis",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "diverge",
+      "module": "odin-create"
+    },
+    {
+      "slug": "django-access-review",
+      "module": "odin-security"
+    },
+    {
+      "slug": "django-perf-review",
+      "module": "odin-python"
+    },
+    {
+      "slug": "doc-coauthoring",
+      "module": "odin-create"
+    },
+    {
+      "slug": "doc-review",
+      "module": "odin-research"
+    },
+    {
+      "slug": "docs-and-adrs",
+      "module": "odin-research"
+    },
+    {
+      "slug": "docs-canvas",
+      "module": "odin-create-advanced"
+    },
+    {
+      "slug": "docs-update",
+      "module": "odin-create"
+    },
+    {
+      "slug": "docs-writing",
+      "module": "odin-create"
+    },
+    {
+      "slug": "document-api-endpoint",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "document-collaboration",
+      "module": "odin-research-advanced"
+    },
+    {
+      "slug": "domain-modeling",
+      "module": "odin-research"
+    },
+    {
+      "slug": "doubt-driven",
+      "module": "odin-code"
+    },
+    {
+      "slug": "drift-detect",
+      "module": "odin-research"
+    },
+    {
+      "slug": "drill",
+      "module": "odin-research"
+    },
+    {
+      "slug": "duet",
+      "module": "odin-run"
+    },
+    {
+      "slug": "dwarf-expert",
+      "module": "odin-native"
+    },
+    {
+      "slug": "dx-audit",
+      "module": "odin-code"
+    },
+    {
+      "slug": "eli5",
+      "module": "odin-research"
+    },
+    {
+      "slug": "embed-diagram",
+      "module": "odin-create"
+    },
+    {
+      "slug": "enforce-workflow-constraints",
+      "module": "odin-core"
+    },
+    {
+      "slug": "engineering-retrospective",
+      "module": "odin-research"
+    },
+    {
+      "slug": "entropy-assisted-planning",
+      "module": "odin-core"
+    },
+    {
+      "slug": "entry-point-analyzer",
+      "module": "odin-security"
+    },
+    {
+      "slug": "environment-contract-audit",
+      "module": "odin-loop"
+    },
+    {
+      "slug": "eslint-to-biome-migration",
+      "module": "odin-typescript"
+    },
+    {
+      "slug": "evaluation-leakage-audit",
+      "module": "odin-research"
+    },
+    {
+      "slug": "exhaustive",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "explain-concept",
+      "module": "odin-research"
+    },
+    {
+      "slug": "explainer-artifact",
+      "module": "odin-research"
+    },
+    {
+      "slug": "explore",
+      "module": "odin-code"
+    },
+    {
+      "slug": "extremely-optimize",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "factory-mcp-bootstrap",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "fail-design",
+      "module": "odin-create-advanced"
+    },
+    {
+      "slug": "fail-recover",
+      "module": "odin-run"
+    },
+    {
+      "slug": "fastify-inject-testing",
+      "module": "odin-typescript"
+    },
+    {
+      "slug": "fastify-production-hardening",
+      "module": "odin-typescript"
+    },
+    {
+      "slug": "fastify-schema-first-service",
+      "module": "odin-typescript"
+    },
+    {
+      "slug": "fastopt",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "fastopt-extreme",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "feedback-pattern-sweep",
+      "module": "odin-loop"
+    },
+    {
+      "slug": "feedback-sweep",
+      "module": "odin-run-advanced"
+    },
+    {
+      "slug": "figure-it-out",
+      "module": "odin-run-advanced"
+    },
+    {
+      "slug": "final-grain",
+      "module": "odin-design-advanced"
+    },
+    {
+      "slug": "finish-branch-menu",
+      "module": "odin-run"
+    },
+    {
+      "slug": "finish-it-now",
+      "module": "odin-run"
+    },
+    {
+      "slug": "firebase-apk-scanner",
+      "module": "odin-security"
+    },
+    {
+      "slug": "first-load-byte-reduction",
+      "module": "odin-loop"
+    },
+    {
+      "slug": "fix-p0-issues",
+      "module": "odin-run"
+    },
+    {
+      "slug": "fixed-view-visual-benchmark",
+      "module": "odin-loop"
+    },
+    {
+      "slug": "flaky-test-stabilization",
+      "module": "odin-loop"
+    },
+    {
+      "slug": "frame-rate-stability",
+      "module": "odin-loop"
+    },
+    {
+      "slug": "framing-divergence-fanout",
+      "module": "odin-research-advanced"
+    },
+    {
+      "slug": "fresh-reader-review",
+      "module": "odin-research"
+    },
+    {
+      "slug": "from-breaking-perspective",
+      "module": "odin-research"
+    },
+    {
+      "slug": "from-business-perspective",
+      "module": "odin-research"
+    },
+    {
+      "slug": "from-career-perspective",
+      "module": "odin-research"
+    },
+    {
+      "slug": "from-codebase-perspective",
+      "module": "odin-research"
+    },
+    {
+      "slug": "from-first-principle",
+      "module": "odin-create-advanced"
+    },
+    {
+      "slug": "from-human-perspective",
+      "module": "odin-research"
+    },
+    {
+      "slug": "from-impact-perspective",
+      "module": "odin-research"
+    },
+    {
+      "slug": "from-innovation-perspective",
+      "module": "odin-research"
+    },
+    {
+      "slug": "from-moat-perspective",
+      "module": "odin-research"
+    },
+    {
+      "slug": "from-rentseeking-perspective",
+      "module": "odin-research"
+    },
+    {
+      "slug": "from-skeptic-perspective",
+      "module": "odin-research"
+    },
+    {
+      "slug": "from-stability-perspective",
+      "module": "odin-research"
+    },
+    {
+      "slug": "fromzero",
+      "module": "odin-create-advanced"
+    },
+    {
+      "slug": "frontend-design-deslop",
+      "module": "odin-design"
+    },
+    {
+      "slug": "frontend-fidelity-rebuild",
+      "module": "odin-loop"
+    },
+    {
+      "slug": "frontend-ui",
+      "module": "odin-design"
+    },
+    {
+      "slug": "frontend-ui-engineering",
+      "module": "odin-design"
+    },
+    {
+      "slug": "full-product-evaluation",
+      "module": "odin-loop"
+    },
+    {
+      "slug": "function-audit-context-analyzer",
+      "module": "odin-security"
+    },
+    {
+      "slug": "fuzz-harness-writing",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "fuzzing-coverage-analysis",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "fuzzing-dictionary",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "fuzzing-obstacles",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "gate-and-merge",
+      "module": "odin-run"
+    },
+    {
+      "slug": "gate-proposed-change",
+      "module": "odin-run-advanced"
+    },
+    {
+      "slug": "genealogical-proof",
+      "module": "odin-loop"
+    },
+    {
+      "slug": "generalize",
+      "module": "odin-planning"
+    },
+    {
+      "slug": "generate-my-taste",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "get-pr-comments",
+      "module": "odin-research"
+    },
+    {
+      "slug": "gh-review-requests",
+      "module": "odin-run"
+    },
+    {
+      "slug": "gha-security-review",
+      "module": "odin-security"
+    },
+    {
+      "slug": "git-branchless",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "git-cleanup",
+      "module": "odin-run"
+    },
+    {
+      "slug": "git-guardrails",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "git-history-analysis",
+      "module": "odin-research"
+    },
+    {
+      "slug": "git-workflow-and-versioning",
+      "module": "odin-run"
+    },
+    {
+      "slug": "github-backlog-triage",
+      "module": "odin-run"
+    },
+    {
+      "slug": "github-bug-report-triage",
+      "module": "odin-run"
+    },
+    {
+      "slug": "github-gh-cli-operations",
+      "module": "odin-run"
+    },
+    {
+      "slug": "github-issue-dedupe",
+      "module": "odin-run"
+    },
+    {
+      "slug": "github-solution-research",
+      "module": "odin-research"
+    },
+    {
+      "slug": "goal-init",
+      "module": "odin-run"
+    },
+    {
+      "slug": "goal-prompt-drafting",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "good-readme",
+      "module": "odin-create"
+    },
+    {
+      "slug": "graph-backbone",
+      "module": "odin-core"
+    },
+    {
+      "slug": "graph-evolution",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "grill-with-docs",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "ground-latest",
+      "module": "odin-research"
+    },
+    {
+      "slug": "guardrail-carve-run",
+      "module": "odin-run"
+    },
+    {
+      "slug": "guillotine",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "gut-sync",
+      "module": "odin-research"
+    },
+    {
+      "slug": "handoff",
+      "module": "odin-research"
+    },
+    {
+      "slug": "handoff-prompt",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "harness-port-guide",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "history-forget",
+      "module": "odin-research"
+    },
+    {
+      "slug": "history-health",
+      "module": "odin-research"
+    },
+    {
+      "slug": "history-notes",
+      "module": "odin-research"
+    },
+    {
+      "slug": "history-recall",
+      "module": "odin-research"
+    },
+    {
+      "slug": "history-source-registry",
+      "module": "odin-research"
+    },
+    {
+      "slug": "history-sync",
+      "module": "odin-research"
+    },
+    {
+      "slug": "how",
+      "module": "odin-research"
+    },
+    {
+      "slug": "humaniseur-fr",
+      "module": "odin-writing"
+    },
+    {
+      "slug": "humanizer-en-asd-ste100",
+      "module": "odin-writing"
+    },
+    {
+      "slug": "humansense2system",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "idea-sparkbox",
+      "module": "odin-research"
+    },
+    {
+      "slug": "idea-to-design",
+      "module": "odin-research"
+    },
+    {
+      "slug": "ideate",
+      "module": "odin-create"
+    },
+    {
+      "slug": "implement-spec",
+      "module": "odin-run"
+    },
+    {
+      "slug": "incremental-implementation",
+      "module": "odin-code"
+    },
+    {
+      "slug": "influence-and-negotiation",
+      "module": "odin-research"
+    },
+    {
+      "slug": "infrastructure-mentor",
+      "module": "odin-research"
+    },
+    {
+      "slug": "inits",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "insecure-default-discovery",
+      "module": "odin-security"
+    },
+    {
+      "slug": "instruction-phrasing-microtest",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "instruction-understanding-gate",
+      "module": "odin-core"
+    },
+    {
+      "slug": "intent-proposal",
+      "module": "odin-core"
+    },
+    {
+      "slug": "interactive-drop-selector",
+      "module": "odin-run"
+    },
+    {
+      "slug": "interrogate",
+      "module": "odin-research-advanced"
+    },
+    {
+      "slug": "interview-me",
+      "module": "odin-research"
+    },
+    {
+      "slug": "ios-build-cleanup",
+      "module": "odin-apple"
+    },
+    {
+      "slug": "ios-build-fix",
+      "module": "odin-apple"
+    },
+    {
+      "slug": "ios-device-qa",
+      "module": "odin-apple"
+    },
+    {
+      "slug": "ios-visual-review",
+      "module": "odin-design"
+    },
+    {
+      "slug": "isolate-work-in-worktree",
+      "module": "odin-code"
+    },
+    {
+      "slug": "isolate-workspace-gate",
+      "module": "odin-code"
+    },
+    {
+      "slug": "issue-intake",
+      "module": "odin-run"
+    },
+    {
+      "slug": "issue-now",
+      "module": "odin-run"
+    },
+    {
+      "slug": "issue-triage",
+      "module": "odin-run"
+    },
+    {
+      "slug": "journey-trace-wizard",
+      "module": "odin-create-advanced"
+    },
+    {
+      "slug": "keep-why-autostart-examples",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "keep-why-continuous-capture",
+      "module": "odin-research"
+    },
+    {
+      "slug": "keep-why-interview",
+      "module": "odin-research"
+    },
+    {
+      "slug": "keep-why-maintenance",
+      "module": "odin-research"
+    },
+    {
+      "slug": "keep-why-repo-structure",
+      "module": "odin-research"
+    },
+    {
+      "slug": "keep-why-repo-trust-boundary",
+      "module": "odin-core"
+    },
+    {
+      "slug": "keep-why-retrospective",
+      "module": "odin-research"
+    },
+    {
+      "slug": "keep-why-schema-migration",
+      "module": "odin-research"
+    },
+    {
+      "slug": "keep-why-setup-wizard",
+      "module": "odin-research"
+    },
+    {
+      "slug": "knowledge-refresh",
+      "module": "odin-research"
+    },
+    {
+      "slug": "land-contribution",
+      "module": "odin-run"
+    },
+    {
+      "slug": "learning-retrospective",
+      "module": "odin-research"
+    },
+    {
+      "slug": "leave-only-first-principle",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "libafl",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "libfuzzer",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "lifecycle-diagram",
+      "module": "odin-create"
+    },
+    {
+      "slug": "lighter-checks",
+      "module": "odin-code"
+    },
+    {
+      "slug": "linkedin-ghostwriting",
+      "module": "odin-writing"
+    },
+    {
+      "slug": "llm-self-loop",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "llms-visibility",
+      "module": "odin-web"
+    },
+    {
+      "slug": "load-bearing-assumption-test",
+      "module": "odin-research-advanced"
+    },
+    {
+      "slug": "lockstep-version-guard",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "loop-me",
+      "module": "odin-run"
+    },
+    {
+      "slug": "maintain-verification-skill",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "make-bot-ui",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "make-pr-easy-to-review",
+      "module": "odin-run"
+    },
+    {
+      "slug": "map-corpus",
+      "module": "odin-research"
+    },
+    {
+      "slug": "markdown-to-pdf",
+      "module": "odin-create"
+    },
+    {
+      "slug": "mcp-builder",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "meaningful-test-coverage",
+      "module": "odin-loop"
+    },
+    {
+      "slug": "memory-clean",
+      "module": "odin-research"
+    },
+    {
+      "slug": "memory-sanitize",
+      "module": "odin-research"
+    },
+    {
+      "slug": "memory-update",
+      "module": "odin-research"
+    },
+    {
+      "slug": "merge-and-deploy",
+      "module": "odin-run-advanced"
+    },
+    {
+      "slug": "mermaid-to-proverif",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "minimalism-driven",
+      "module": "odin-code"
+    },
+    {
+      "slug": "minimap",
+      "module": "odin-core"
+    },
+    {
+      "slug": "model-challenge",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "model-retuning",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "modern-cpp-practices",
+      "module": "odin-native"
+    },
+    {
+      "slug": "modern-python",
+      "module": "odin-python"
+    },
+    {
+      "slug": "multi-agent-tournament-scorecard",
+      "module": "odin-loop"
+    },
+    {
+      "slug": "multi-tenant-architecture",
+      "module": "odin-typescript"
+    },
+    {
+      "slug": "mutation-campaign-configuration",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "mutation-proven-boundaries",
+      "module": "odin-typescript"
+    },
+    {
+      "slug": "mutation-triage-genotoxic",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "mutual-sync",
+      "module": "odin-research"
+    },
+    {
+      "slug": "necessary-work",
+      "module": "odin-core"
+    },
+    {
+      "slug": "negotiate-run-budget",
+      "module": "odin-run-advanced"
+    },
+    {
+      "slug": "new-branch-and-pr",
+      "module": "odin-run"
+    },
+    {
+      "slug": "new-space",
+      "module": "odin-run"
+    },
+    {
+      "slug": "next-best-action",
+      "module": "odin-run"
+    },
+    {
+      "slug": "no-comments",
+      "module": "odin-code"
+    },
+    {
+      "slug": "no-hide",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "node-core-contribution-cycle",
+      "module": "odin-typescript"
+    },
+    {
+      "slug": "node-internals-diagnosis",
+      "module": "odin-typescript"
+    },
+    {
+      "slug": "nodejs-graceful-shutdown",
+      "module": "odin-typescript"
+    },
+    {
+      "slug": "nodejs-hanging-test-diagnosis",
+      "module": "odin-typescript"
+    },
+    {
+      "slug": "nodejs-service-foundations",
+      "module": "odin-typescript"
+    },
+    {
+      "slug": "nodejs-stream-pipeline",
+      "module": "odin-typescript"
+    },
+    {
+      "slug": "notion-writer",
+      "module": "odin-run"
+    },
+    {
+      "slug": "oauth2-flow-implementation",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "observability",
+      "module": "odin-code"
+    },
+    {
+      "slug": "offense",
+      "module": "odin-code"
+    },
+    {
+      "slug": "offensive-possible-worlds-qa",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "onboard",
+      "module": "odin-research"
+    },
+    {
+      "slug": "open-source-license-selection",
+      "module": "odin-run"
+    },
+    {
+      "slug": "open-source-readiness-audit",
+      "module": "odin-research"
+    },
+    {
+      "slug": "optimise-seo",
+      "module": "odin-typescript"
+    },
+    {
+      "slug": "optimize",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "orchestration-patterns",
+      "module": "odin-run-advanced"
+    },
+    {
+      "slug": "oss-fuzz",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "paced-explanation",
+      "module": "odin-research"
+    },
+    {
+      "slug": "package-native-pre-commit",
+      "module": "odin-code"
+    },
+    {
+      "slug": "parallel-launch",
+      "module": "odin-run-advanced"
+    },
+    {
+      "slug": "partition-scopes-to-subagents",
+      "module": "odin-run-advanced"
+    },
+    {
+      "slug": "perspective-complete-review",
+      "module": "odin-loop"
+    },
+    {
+      "slug": "plan",
+      "module": "odin-planning"
+    },
+    {
+      "slug": "plan-review",
+      "module": "odin-planning"
+    },
+    {
+      "slug": "plan-review-tune",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "planning",
+      "module": "odin-run"
+    },
+    {
+      "slug": "planning-and-task-breakdown",
+      "module": "odin-code"
+    },
+    {
+      "slug": "polished-web-prototype",
+      "module": "odin-design"
+    },
+    {
+      "slug": "possible-worlds",
+      "module": "odin-core"
+    },
+    {
+      "slug": "post-change-check-gate",
+      "module": "odin-core"
+    },
+    {
+      "slug": "post-daily-new-issues",
+      "module": "odin-run"
+    },
+    {
+      "slug": "post-merge-cleanup",
+      "module": "odin-run"
+    },
+    {
+      "slug": "post-release-status",
+      "module": "odin-run"
+    },
+    {
+      "slug": "post-to-slack",
+      "module": "odin-run"
+    },
+    {
+      "slug": "poteto-mode",
+      "module": "odin-run-advanced"
+    },
+    {
+      "slug": "pov",
+      "module": "odin-planning"
+    },
+    {
+      "slug": "pr-impact-quiz",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "pr-link-issue",
+      "module": "odin-run"
+    },
+    {
+      "slug": "pr-review-canvas",
+      "module": "odin-create-advanced"
+    },
+    {
+      "slug": "pr-review-canvas-html",
+      "module": "odin-create-advanced"
+    },
+    {
+      "slug": "pr-walkthrough",
+      "module": "odin-create"
+    },
+    {
+      "slug": "prepare-repository-for-public-release",
+      "module": "odin-run"
+    },
+    {
+      "slug": "presentation-creator",
+      "module": "odin-create-advanced"
+    },
+    {
+      "slug": "press-release-writer",
+      "module": "odin-writing"
+    },
+    {
+      "slug": "pricing-projection",
+      "module": "odin-product"
+    },
+    {
+      "slug": "principles",
+      "module": "odin-code"
+    },
+    {
+      "slug": "prism",
+      "module": "odin-research-advanced"
+    },
+    {
+      "slug": "product-design",
+      "module": "odin-design"
+    },
+    {
+      "slug": "product-signal-pulse",
+      "module": "odin-research-advanced"
+    },
+    {
+      "slug": "prohibit-bad-habits",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "prompt-optimizer",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "promql-cli",
+      "module": "odin-prometheus"
+    },
+    {
+      "slug": "proof-driven",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "property-test-authoring",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "property-test-failure-triage",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "property-test-review",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "property-testing-fit-assessment",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "propose-external-change",
+      "module": "odin-run-advanced"
+    },
+    {
+      "slug": "propose-issue",
+      "module": "odin-run"
+    },
+    {
+      "slug": "prototype",
+      "module": "odin-create"
+    },
+    {
+      "slug": "prototype-logic",
+      "module": "odin-create"
+    },
+    {
+      "slug": "publish-branch",
+      "module": "odin-run"
+    },
+    {
+      "slug": "publish-pr",
+      "module": "odin-run"
+    },
+    {
+      "slug": "publish-release-pr",
+      "module": "odin-run-advanced"
+    },
+    {
+      "slug": "punishing-practices",
+      "module": "odin-research"
+    },
+    {
+      "slug": "purge-slop-docs",
+      "module": "odin-create"
+    },
+    {
+      "slug": "quick-spec-render",
+      "module": "odin-create-advanced"
+    },
+    {
+      "slug": "rationale-by-source",
+      "module": "odin-research-advanced"
+    },
+    {
+      "slug": "read-google-doc",
+      "module": "odin-research"
+    },
+    {
+      "slug": "readiness-assessment",
+      "module": "odin-research"
+    },
+    {
+      "slug": "readout",
+      "module": "odin-research"
+    },
+    {
+      "slug": "recall",
+      "module": "odin-research"
+    },
+    {
+      "slug": "record-design-decisions",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "recorded-feedback-analysis",
+      "module": "odin-research-advanced"
+    },
+    {
+      "slug": "refactor-break-compat",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "reflect",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "release-gate",
+      "module": "odin-run"
+    },
+    {
+      "slug": "release-landing-report",
+      "module": "odin-run"
+    },
+    {
+      "slug": "release-promotion",
+      "module": "odin-create-advanced"
+    },
+    {
+      "slug": "render-excalidraw-diagram",
+      "module": "odin-create"
+    },
+    {
+      "slug": "reorder",
+      "module": "odin-create"
+    },
+    {
+      "slug": "reorder-respect-deliberate",
+      "module": "odin-create"
+    },
+    {
+      "slug": "replace-unsafe-typescript-assertions",
+      "module": "odin-typescript"
+    },
+    {
+      "slug": "repo-health-triage",
+      "module": "odin-run"
+    },
+    {
+      "slug": "reproduce-and-fix-issues",
+      "module": "odin-code"
+    },
+    {
+      "slug": "reproduce-bug-report",
+      "module": "odin-code"
+    },
+    {
+      "slug": "research",
+      "module": "odin-research-advanced"
+    },
+    {
+      "slug": "resolve",
+      "module": "odin-run"
+    },
+    {
+      "slug": "resolve-merge-conflicts",
+      "module": "odin-code"
+    },
+    {
+      "slug": "resolve-pr-feedback",
+      "module": "odin-run"
+    },
+    {
+      "slug": "respond-to-pr-comments-in-blocklist",
+      "module": "odin-run"
+    },
+    {
+      "slug": "respond-to-slack-thread",
+      "module": "odin-run"
+    },
+    {
+      "slug": "restart-keeping-lessons",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "review",
+      "module": "odin-code"
+    },
+    {
+      "slug": "review-and-ship",
+      "module": "odin-run"
+    },
+    {
+      "slug": "review-fix-grill-loop",
+      "module": "odin-loop"
+    },
+    {
+      "slug": "review-plugin-submission",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "review-reception-protocol",
+      "module": "odin-code"
+    },
+    {
+      "slug": "review-speedread",
+      "module": "odin-code"
+    },
+    {
+      "slug": "rewrite-clean-v0",
+      "module": "odin-create"
+    },
+    {
+      "slug": "rewrite-denoise-v0",
+      "module": "odin-create"
+    },
+    {
+      "slug": "rhythmic-taste",
+      "module": "odin-create-advanced"
+    },
+    {
+      "slug": "run-smoke-tests",
+      "module": "odin-code"
+    },
+    {
+      "slug": "rust-security-review",
+      "module": "odin-security"
+    },
+    {
+      "slug": "ruzzy",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "saga",
+      "module": "odin-run-advanced"
+    },
+    {
+      "slug": "sarif-parsing",
+      "module": "odin-code"
+    },
+    {
+      "slug": "save-md",
+      "module": "odin-create"
+    },
+    {
+      "slug": "scaffold-cli",
+      "module": "odin-typescript"
+    },
+    {
+      "slug": "scaffold-exercises",
+      "module": "odin-create-advanced"
+    },
+    {
+      "slug": "scaffold-nextjs",
+      "module": "odin-typescript"
+    },
+    {
+      "slug": "scheduler",
+      "module": "odin-run"
+    },
+    {
+      "slug": "scrape",
+      "module": "odin-research"
+    },
+    {
+      "slug": "secure-npm-package",
+      "module": "odin-run"
+    },
+    {
+      "slug": "security-finding-verification",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "security-hardening",
+      "module": "odin-security"
+    },
+    {
+      "slug": "security-review",
+      "module": "odin-security"
+    },
+    {
+      "slug": "seed-casebook",
+      "module": "odin-run"
+    },
+    {
+      "slug": "semgrep-rule-authoring",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "semgrep-rule-variant-creator",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "semgrep-security-scan",
+      "module": "odin-security"
+    },
+    {
+      "slug": "seo-aeo-audit",
+      "module": "odin-web"
+    },
+    {
+      "slug": "sequence-diagram",
+      "module": "odin-create"
+    },
+    {
+      "slug": "session-share",
+      "module": "odin-research"
+    },
+    {
+      "slug": "session-viewer",
+      "module": "odin-research"
+    },
+    {
+      "slug": "setup",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "setup-benny",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "setup-gitignore",
+      "module": "odin-code"
+    },
+    {
+      "slug": "setup-pre-commit",
+      "module": "odin-code"
+    },
+    {
+      "slug": "setup-pstack",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "setup-release-tooling",
+      "module": "odin-run"
+    },
+    {
+      "slug": "setup-repo-skills",
+      "module": "odin-run"
+    },
+    {
+      "slug": "setup-ts-deep-modules",
+      "module": "odin-typescript"
+    },
+    {
+      "slug": "shape",
+      "module": "odin-planning"
+    },
+    {
+      "slug": "sharp-edges",
+      "module": "odin-security"
+    },
+    {
+      "slug": "sharp-edges-analyzer",
+      "module": "odin-security"
+    },
+    {
+      "slug": "shipping",
+      "module": "odin-run"
+    },
+    {
+      "slug": "show-me",
+      "module": "odin-create"
+    },
+    {
+      "slug": "show-me-your-work",
+      "module": "odin-run"
+    },
+    {
+      "slug": "show-review",
+      "module": "odin-research"
+    },
+    {
+      "slug": "show-way",
+      "module": "odin-create"
+    },
+    {
+      "slug": "simplify",
+      "module": "odin-code"
+    },
+    {
+      "slug": "single-file-html-deck",
+      "module": "odin-create-advanced"
+    },
+    {
+      "slug": "site-launch-checklist",
+      "module": "odin-web"
+    },
+    {
+      "slug": "size-the-run",
+      "module": "odin-run"
+    },
+    {
+      "slug": "skill-benchmark",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "skill-benchmark-gate",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "skill-doctor",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "skill-gap-finder",
+      "module": "odin-core"
+    },
+    {
+      "slug": "skill-improver",
+      "module": "odin-loop"
+    },
+    {
+      "slug": "skill-progressive-disclosure-design",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "skill-scanner",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "skill-writer",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "skills-visibility",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "slack-qa-investigate",
+      "module": "odin-research"
+    },
+    {
+      "slug": "slicing-code-context",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "smart-contract-audit-prep",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "smart-contract-code-maturity-assessor",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "smart-contract-guidelines-advisor",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "smart-contract-secure-workflow",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "snippet-image-rendering",
+      "module": "odin-create-advanced"
+    },
+    {
+      "slug": "snyk-agent-scan-compliance",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "social-sentiment",
+      "module": "odin-research"
+    },
+    {
+      "slug": "solidate",
+      "module": "odin-create"
+    },
+    {
+      "slug": "source-driven",
+      "module": "odin-code"
+    },
+    {
+      "slug": "sourced-learning-workspace",
+      "module": "odin-research"
+    },
+    {
+      "slug": "spec-driven",
+      "module": "odin-code"
+    },
+    {
+      "slug": "spec-driven-implementation",
+      "module": "odin-code"
+    },
+    {
+      "slug": "spec-to-code-compliance",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "sred-project-organizer",
+      "module": "odin-run"
+    },
+    {
+      "slug": "sred-work-summary",
+      "module": "odin-run"
+    },
+    {
+      "slug": "ssotize-audit-fold",
+      "module": "odin-research"
+    },
+    {
+      "slug": "state-machine-workflow",
+      "module": "odin-create"
+    },
+    {
+      "slug": "strategy",
+      "module": "odin-product"
+    },
+    {
+      "slug": "strict-validation-setup",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "strike-the-root",
+      "module": "odin-loop"
+    },
+    {
+      "slug": "subagent-driven",
+      "module": "odin-run-advanced"
+    },
+    {
+      "slug": "subagent-survey-research",
+      "module": "odin-research-advanced"
+    },
+    {
+      "slug": "substack-ghostwriting",
+      "module": "odin-writing"
+    },
+    {
+      "slug": "summarize-google-docs",
+      "module": "odin-research"
+    },
+    {
+      "slug": "supply-chain-risk-auditor",
+      "module": "odin-security"
+    },
+    {
+      "slug": "swarm",
+      "module": "odin-run-advanced"
+    },
+    {
+      "slug": "sync-docs",
+      "module": "odin-create"
+    },
+    {
+      "slug": "tailwind-best-practices",
+      "module": "odin-design"
+    },
+    {
+      "slug": "taste",
+      "module": "odin-create"
+    },
+    {
+      "slug": "tasty-abstraction",
+      "module": "odin-create-advanced"
+    },
+    {
+      "slug": "tdd",
+      "module": "odin-code"
+    },
+    {
+      "slug": "teach",
+      "module": "odin-research"
+    },
+    {
+      "slug": "technical-article-writer",
+      "module": "odin-writing"
+    },
+    {
+      "slug": "technical-writing",
+      "module": "odin-create"
+    },
+    {
+      "slug": "terraform-style-check",
+      "module": "odin-terraform"
+    },
+    {
+      "slug": "test-migration-coverage-gate",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "test-suite-acceleration",
+      "module": "odin-loop"
+    },
+    {
+      "slug": "testing-handbook-generator",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "tests-adversarial",
+      "module": "odin-code"
+    },
+    {
+      "slug": "tests-purge-unneeded",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "thin-repo-pulse",
+      "module": "odin-run-advanced"
+    },
+    {
+      "slug": "thumbnail-accuracy-scorecard",
+      "module": "odin-loop"
+    },
+    {
+      "slug": "ticket-to-review-ready-patch",
+      "module": "odin-loop"
+    },
+    {
+      "slug": "to-greenfield",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "to-questionnaire",
+      "module": "odin-research"
+    },
+    {
+      "slug": "to-spec",
+      "module": "odin-code"
+    },
+    {
+      "slug": "to-tickets",
+      "module": "odin-planning"
+    },
+    {
+      "slug": "todo-add",
+      "module": "odin-planning"
+    },
+    {
+      "slug": "todos-enhance",
+      "module": "odin-planning"
+    },
+    {
+      "slug": "todos-update",
+      "module": "odin-planning"
+    },
+    {
+      "slug": "token-integration-analyzer",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "toolchain-health",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "trailmark-audit-augmentation",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "trailmark-code-graph",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "trailmark-finding-triage",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "trailmark-review-gate",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "trailmark-structural",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "trailmark-summary",
+      "module": "odin-code"
+    },
+    {
+      "slug": "training-report",
+      "module": "odin-create-advanced"
+    },
+    {
+      "slug": "type-driven",
+      "module": "odin-code"
+    },
+    {
+      "slug": "typescript-best-practices",
+      "module": "odin-typescript"
+    },
+    {
+      "slug": "typescript-type-hardening",
+      "module": "odin-typescript"
+    },
+    {
+      "slug": "typing-exclusion-worker",
+      "module": "odin-python"
+    },
+    {
+      "slug": "typography-audit",
+      "module": "odin-design"
+    },
+    {
+      "slug": "ui-animation",
+      "module": "odin-design-advanced"
+    },
+    {
+      "slug": "ui-design",
+      "module": "odin-design"
+    },
+    {
+      "slug": "universal-invariant-baseline",
+      "module": "odin-code"
+    },
+    {
+      "slug": "unlazy",
+      "module": "odin-run"
+    },
+    {
+      "slug": "unleak-abstraction",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "unslop",
+      "module": "odin-writing"
+    },
+    {
+      "slug": "upgrade-catalog",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "validate-changes-match-specs",
+      "module": "odin-code"
+    },
+    {
+      "slug": "validation-first-driven",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "validation-self-audit",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "variant-hunt",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "variant-neighborhood-seeding",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "vector-forge",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "verification-before-completion",
+      "module": "odin-core"
+    },
+    {
+      "slug": "verify-both-ways",
+      "module": "odin-research"
+    },
+    {
+      "slug": "verify-this",
+      "module": "odin-research"
+    },
+    {
+      "slug": "viral-opportunity-scout",
+      "module": "odin-research"
+    },
+    {
+      "slug": "visual-argument-diagram",
+      "module": "odin-create"
+    },
+    {
+      "slug": "visual-brainstorm-companion",
+      "module": "odin-design-advanced"
+    },
+    {
+      "slug": "visual-diagram",
+      "module": "odin-create"
+    },
+    {
+      "slug": "visual-diff-review",
+      "module": "odin-code"
+    },
+    {
+      "slug": "visual-fact-check",
+      "module": "odin-research-advanced"
+    },
+    {
+      "slug": "visual-plan",
+      "module": "odin-create"
+    },
+    {
+      "slug": "visual-project-recap",
+      "module": "odin-research"
+    },
+    {
+      "slug": "visual-render-tool",
+      "module": "odin-create"
+    },
+    {
+      "slug": "visual-slides",
+      "module": "odin-create-advanced"
+    },
+    {
+      "slug": "visualise-chart",
+      "module": "odin-create"
+    },
+    {
+      "slug": "visualise-explainer",
+      "module": "odin-create-advanced"
+    },
+    {
+      "slug": "visualise-widget",
+      "module": "odin-create"
+    },
+    {
+      "slug": "voice-of-customer",
+      "module": "odin-research"
+    },
+    {
+      "slug": "vulnerability-triage-brocards",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "wait-what",
+      "module": "odin-research"
+    },
+    {
+      "slug": "walk-with-me",
+      "module": "odin-research"
+    },
+    {
+      "slug": "watch-and-repair-pr",
+      "module": "odin-loop"
+    },
+    {
+      "slug": "watch-for",
+      "module": "odin-run"
+    },
+    {
+      "slug": "watch-for-harness-mode",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "watch-for-structured",
+      "module": "odin-run"
+    },
+    {
+      "slug": "watch-until",
+      "module": "odin-run"
+    },
+    {
+      "slug": "waterfall-guide",
+      "module": "odin-create-advanced"
+    },
+    {
+      "slug": "wayfinder",
+      "module": "odin-planning"
+    },
+    {
+      "slug": "web-accessibility-audit",
+      "module": "odin-design-advanced"
+    },
+    {
+      "slug": "web-design-review",
+      "module": "odin-design"
+    },
+    {
+      "slug": "web-performance-audit",
+      "module": "odin-web"
+    },
+    {
+      "slug": "webapp-testing",
+      "module": "odin-web"
+    },
+    {
+      "slug": "weekly-review",
+      "module": "odin-research"
+    },
+    {
+      "slug": "weekly-wynk",
+      "module": "odin-run"
+    },
+    {
+      "slug": "what-did-i-get-done",
+      "module": "odin-research"
+    },
+    {
+      "slug": "why",
+      "module": "odin-research"
+    },
+    {
+      "slug": "wizard",
+      "module": "odin-run"
+    },
+    {
+      "slug": "wontfix",
+      "module": "odin-run"
+    },
+    {
+      "slug": "work",
+      "module": "odin-run"
+    },
+    {
+      "slug": "workflow-diagram",
+      "module": "odin-create"
+    },
+    {
+      "slug": "workflow-evidence-mining",
+      "module": "odin-loop"
+    },
+    {
+      "slug": "workflow-from-chats",
+      "module": "odin-research"
+    },
+    {
+      "slug": "workflows-driven",
+      "module": "odin-run-advanced"
+    },
+    {
+      "slug": "workspace-unfreeze",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "worktree",
+      "module": "odin-code"
+    },
+    {
+      "slug": "write-feature-docs",
+      "module": "odin-create"
+    },
+    {
+      "slug": "write-google-doc",
+      "module": "odin-run"
+    },
+    {
+      "slug": "write-pr-description",
+      "module": "odin-run"
+    },
+    {
+      "slug": "write-prd",
+      "module": "odin-create"
+    },
+    {
+      "slug": "write-product-spec",
+      "module": "odin-product"
+    },
+    {
+      "slug": "write-tech-spec",
+      "module": "odin-create"
+    },
+    {
+      "slug": "writing-beats",
+      "module": "odin-writing-advanced"
+    },
+    {
+      "slug": "writing-for-agents",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "writing-fragments",
+      "module": "odin-writing-advanced"
+    },
+    {
+      "slug": "writing-lean-proofs",
+      "module": "odin-lean"
+    },
+    {
+      "slug": "writing-shape",
+      "module": "odin-writing-advanced"
+    },
+    {
+      "slug": "writing-skills",
+      "module": "odin-agent"
+    },
+    {
+      "slug": "wycheproof",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "x-api-mcp-guide",
+      "module": "odin-code-advanced"
+    },
+    {
+      "slug": "xcode-project-sync",
+      "module": "odin-apple"
+    },
+    {
+      "slug": "xcode-simulator-testing",
+      "module": "odin-apple"
+    },
+    {
+      "slug": "yara-rule-authoring",
+      "module": "odin-security-advanced"
+    },
+    {
+      "slug": "zeroize-audit",
+      "module": "odin-security-advanced"
+    }
+  ]
+}

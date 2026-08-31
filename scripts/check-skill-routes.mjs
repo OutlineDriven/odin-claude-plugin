@@ -6,7 +6,7 @@
 // identical skill sets over every route.
 //
 // Extended gates (G1/G3):
-//   (a) registry-as-count-authority: every skills/ dir has a provenance row whose slug
+//   (a) registry-as-count-authority: every skills/ dir has a membership row whose slug
 //       == dir name, and rows.length == skill_count == dir count.
 //   (b) frontmatter values containing ': ' MUST be single-quoted; unquoted is an error.
 //   (c) display_name uniqueness across every agents/openai.yaml (Set collision check).
@@ -16,6 +16,7 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { loadMembership } from "./skill-membership.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const errors = [];
@@ -142,31 +143,21 @@ if (badQuote.length)
   );
 
 // --- (a) registry as count authority ---
-const registryPath = join(ROOT, "catalog/provenance-rows.json");
-if (!existsSync(registryPath)) {
-  errors.push("missing catalog/provenance-rows.json");
-} else {
-  const registry = JSON.parse(readFileSync(registryPath, "utf8"));
-  const rowSlugs = registry.rows.map((r) => r.slug);
-  const rowSet = new Set(rowSlugs);
-  const missingRows = slugs.filter((s) => !rowSet.has(s));
-  const extraRows = rowSlugs.filter((s) => !slugs.includes(s));
-  const dupRows = rowSlugs.length - rowSet.size;
-  const countMismatch =
-    registry.rows.length !== registry.skill_count ||
-    registry.skill_count !== slugs.length;
-  const parts = [];
-  if (missingRows.length)
-    parts.push(`dirs without rows: ${missingRows.slice(0, 5).join(", ")} (${missingRows.length})`);
-  if (extraRows.length)
-    parts.push(`rows without dirs: ${extraRows.slice(0, 5).join(", ")} (${extraRows.length})`);
-  if (dupRows) parts.push(`${dupRows} duplicate row slug(s)`);
-  if (countMismatch)
-    parts.push(
-      `count mismatch: rows=${registry.rows.length} skill_count=${registry.skill_count} dirs=${slugs.length}`,
-    );
-  if (parts.length) errors.push(`registry count authority: ${parts.join("; ")}`);
-}
+const membership = loadMembership(ROOT);
+const rowSet = new Set(membership.all);
+const missingRows = slugs.filter((s) => !rowSet.has(s));
+const extraRows = membership.all.filter((s) => !slugs.includes(s));
+const countMismatch = membership.skillCount !== slugs.length;
+const parts = [];
+if (missingRows.length)
+  parts.push(`dirs without rows: ${missingRows.slice(0, 5).join(", ")} (${missingRows.length})`);
+if (extraRows.length)
+  parts.push(`rows without dirs: ${extraRows.slice(0, 5).join(", ")} (${extraRows.length})`);
+if (countMismatch)
+  parts.push(
+    `count mismatch: skill_count=${membership.skillCount} dirs=${slugs.length}`,
+  );
+if (parts.length) errors.push(`registry count authority: ${parts.join("; ")}`);
 
 // --- (c) display_name uniqueness across agents/openai.yaml ---
 const displayNames = [];

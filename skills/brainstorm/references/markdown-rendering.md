@@ -82,7 +82,7 @@ The agent picks more elaborate or simpler shapes based on what each specific art
 
 ## Diagrams
 
-When the section contract calls for a diagram (architecture, sequence, flowchart, state machine, swim lane, data-flow), author it per the `diagram-contract` skill: a nomnoml or D2 source in `assets/` beside the document, rendered to a committed SVG and embedded with a caption.
+When the section contract calls for a diagram (architecture, sequence, flowchart, state machine, swim lane, data-flow), author it per the `embed-diagram` skill: a nomnoml or D2 source in `assets/` beside the document, rendered to a committed SVG and embedded with a caption.
 
 ````markdown
 ![Approval path from draft to publish](assets/approval-path.svg)

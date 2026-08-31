@@ -1,6 +1,6 @@
 ---
 name: work
-description: 'Use when implementing from a plan or spec path, a clear build request, or a single settled ticket. Drives end-to-end execution from input triage through shipping; a single settled ticket takes the narrow single-ticket entry. Don''t use for open-ended debugging (use debug), exploration, or read-only research.'
+description: 'Use when implementing from a plan or spec path, a clear build request, or a single settled ticket. Single-unit executor with two caller modes: orchestrated (stops after implementation and local verification, returns a structured result) and standalone (delegates finalization to review-and-ship). Don''t use for open-ended debugging (use debug), exploration, or read-only research.'
 disable-model-invocation: true
 ---
 
@@ -11,9 +11,12 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | Implementation starts from a plan or spec path or a clear build request (not an open-ended bug). |
-| Authority | Write only named local artifacts; rollback path is git. |
-| Side effect | Implements plan units, lands commits, runs system-wide test checks, and executes the shipping tail (review plus residual-work gate). |
-| Done | All plan units are implemented and verified, the shipping tail has run, and the work is shipped or handed off with residuals named. |
+| Authority | Write only named local artifacts; rollback path is VCS. Work never commits, pushes, or opens a PR. |
+| Caller mode | Orchestrated or standalone, set by the caller. Orchestrated: a supervisor passes an explicit orchestrated signal. Standalone: invoked directly by a human. The mode governs where execution stops. |
+| Side effect (orchestrated) | Implements plan units, runs local verification, returns a structured result. No review, commit, push, or PR. |
+| Side effect (standalone) | Implements plan units, runs local verification, then delegates commit packaging and finalization to review-and-ship with explicit delegated shipping authority. |
+| Done (orchestrated) | All plan units implemented and locally verified; structured result returned. |
+| Done (standalone) | All plan units implemented and locally verified; finalization delegated to review-and-ship. |
 
 ## Inputs
 
@@ -36,22 +39,23 @@ disable-model-invocation: true
 
 ### Phase 2: execute
 
-6. Task execution loop — for each task in priority order: mark in-progress; read referenced files; check for existing matching work; find similar patterns and existing tests; implement following existing conventions; honor `Execution note` (offensive-first tdd, characterization-first, or pragmatic); add/update/remove tests; run System-Wide Test Check per `references/execution-detail.md` before marking done; mark completed; evaluate for incremental commit per `references/execution-detail.md`. Done when: task is executed per its execution note with the system-wide check green.
+6. Task execution loop — for each task in priority order: mark in-progress; read referenced files; check for existing matching work; find similar patterns and existing tests; implement following existing conventions; honor `Execution note` (offensive-first TDD, characterization-first, or pragmatic); add, update, or remove tests; run the System-Wide Test Check from `references/execution-detail.md`; mark the task complete only when that check passes. Done when: the task is implemented and its system-wide check is green.
 7. Test continuously: run relevant tests after each behavior-bearing change. Fix failures immediately. Add new tests for new behavior. Done when: tests pass for the current change.
 8. Simplify opportunistically: at phase boundaries or when the diff reaches 30 lines, reread the changed units and remove dead branches, repeated logic, tiny one-use wrappers, and special cases the general path can absorb. Preserve observable behavior and rerun changed-path checks. Done when: simplification pass is complete with behavior preserved.
-9. Track progress: update task tracker as tasks complete. Note blockers using plan IDs (U-IDs, R/F/AE IDs); do not invent IDs the plan does not supply. For long-running work, write progress to `/tmp/odin/work/<run-id>/progress.json` so state survives context compaction. Done when: progress is recorded.
+9. Track progress: update the task tracker as tasks complete. Note blockers using plan IDs (U-IDs, R/F/AE IDs); do not invent IDs the plan does not supply. For long-running work, write progress to `local://work-<run-id>-progress.json` so state survives context compaction. Done when: progress is recorded.
 
-### Phase 3–4: quality check and shipping tail
+### Phase 3: local verification and mode split
 
-10. Run a fresh diff review sized to the change. Check correctness, security boundaries, error paths, concurrency, resource ownership, changed-contract tests, and every affected caller. Skip only for a purely mechanical diff. Done when: review is complete with findings recorded.
-11. Apply review findings: fix every actionable comment. For contested findings citing a project doc as mandating a change, resolve with evidence. For declined findings, record the reason. Done when: all findings are resolved or declined with reasons recorded.
-12. Ship the work. If residuals remain after the review cycle, name each residual explicitly, report it, and yield. Done when: work is shipped or yielded with residuals named.
+10. Run local verification: execute the project's test suite and lint check for the changed surface. Fix failures immediately. Done when: tests and lint pass for the changed surface.
+11. Mode split.
+    - **Orchestrated mode**: stop. Return a structured result containing the implementation summary (units completed), verification results (tests, lint), diff summary (files changed), working-tree state (branch, HEAD), and any residuals or blockers. Do not review, commit, push, or create a PR.
+    - **Standalone mode**: delegate finalization to review-and-ship. Pass explicit delegated shipping authority (`authority: delegated`), the implementation context (branch, diff summary, verification results), and any residuals. review-and-ship owns review, commit packaging, publication classification, checks, push, and PR. Do not ship directly.
 
 ## Single-ticket mode
 
-A single settled ticket or spec is the narrow entry of the end-to-end pipeline. Phase 0 routes it here instead of building a multi-unit task list. Read the settled plan or ticket end to end and extract the contract: the behaviour promised, the inputs and outputs that define it, and the seams the plan names for behavioural tests. Then implement the contract in code following existing project conventions, reuse existing patterns rather than introducing new ones, and write behavioural tests at each named seam that verify the contract from the caller's perspective (tests must fail on a plausible bug, not restate the source). Run the project's check suite; fix the implementation, never suppress a check or widen scope to unrelated code. Run a fresh diff review; if it reopens a settled decision, overreaches the contract, or leaves a seam untested, fix the gap before committing. Commit with a message that names the contract satisfied and the seams tested.
+A single settled ticket or spec is the narrow entry of the end-to-end pipeline. Phase 0 routes it here instead of building a multi-unit task list. Read the settled plan or ticket end to end and extract the contract: the behaviour promised, the inputs and outputs that define it, and the seams the plan names for behavioural tests. Then implement the contract in code following existing project conventions, reuse existing patterns rather than introducing new ones, and write behavioural tests at each named seam that verify the contract from the caller's perspective (tests must fail on a plausible bug, not restate the source). Run the project's check suite; fix the implementation, never suppress a check or widen scope to unrelated code. Self-check the diff against the contract: if it reopens a settled decision, overreaches the contract, or leaves a seam untested, fix the gap. Then apply the Phase 3 mode split: in orchestrated mode, return a structured result; in standalone mode, delegate commit packaging and finalization to review-and-ship with explicit delegated shipping authority.
 
-Never reopen or redesign the plan during single-ticket execution. If the plan is ambiguous, contradictory, or missing a named seam, stop and report the gap; do not infer scope. If the implementation reopens a settled plan decision, revert the overreach and implement only what the plan names. If a named seam has no behavioural test, add it before committing; do not defer. If scope widens beyond the plan, revert the unrelated changes and commit only the contracted work. Partial results are not committed; if the procedure cannot reach the done predicate, report the blocker and leave the working tree unchanged or revert partial edits via VCS.
+Never reopen or redesign the plan during single-ticket execution. If the plan is ambiguous, contradictory, or missing a named seam, stop and report the gap; do not infer scope. If the implementation reopens a settled plan decision, revert the overreach and implement only what the plan names. If a named seam has no behavioural test, add it before local verification; do not defer. If scope widens beyond the plan, revert the unrelated changes and keep only the contracted work. Work never commits partial or complete results; the finalizer owns commit packaging. If the procedure cannot reach the done predicate, report the blocker and leave the partial diff for the caller to inspect or revert.
 
 ## Failure and recovery
 | Failure | Rule |
@@ -64,14 +68,15 @@ Never reopen or redesign the plan during single-ticket execution. If the plan is
 | Harness isolation unavailable for parallel | Fall back to serial subagents or inline. |
 | Contending units in shared workspace | Fall back to serial. |
 | Serial unit review diff out of scope | Fix before next unit. |
-| Review finding contested with doc evidence | Resolve with evidence; record declined finding with reason. |
-| Non-converged after review cycle | Ship what passes. Name residuals explicitly. Yield terminal report. |
+| Local verification cannot reach green | Report the failure and any partial fix in the structured result (orchestrated) or pass to review-and-ship as a blocker (standalone). Do not ship. |
 | Single-ticket plan ambiguous or contradictory | Stop. Report the specific gap. Do not guess or redesign. |
 | Single-ticket implementation reopens a settled decision | Revert the overreach. Implement only what the plan names. |
-| Named seam has no behavioural test | Add the test before committing. Do not defer. |
-| Single-ticket scope widens beyond the plan | Revert unrelated changes. Commit only the contracted work. |
+| Named seam has no behavioural test | Add the test before local verification. Do not defer. |
+| Single-ticket scope widens beyond the plan | Revert unrelated changes. Keep only the contracted work. |
 
-Partial-result rule: ship what is implemented and verified. Never claim done when tests fail or review findings are unresolved.
+Partial-result rule: report what is implemented and verified. Never claim done when tests fail. In orchestrated mode, name residuals in the structured result. In standalone mode, pass residuals to review-and-ship.
 
 ## Output
-Shipped code (all plan units implemented, verified tests pass, commits landed, shipping tail run) or a terminal yield with residuals named when work cannot be completed.
+- **Orchestrated mode**: a structured result — implementation summary, verification results, diff summary, working-tree state, and residuals or blockers.
+- **Standalone mode**: implementation and local verification complete; finalization delegated to review-and-ship. The final report comes from review-and-ship.
+- **Blocked**: a terminal yield naming the blocker and what was tried.

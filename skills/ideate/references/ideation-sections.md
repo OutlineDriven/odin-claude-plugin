@@ -46,7 +46,7 @@ The surviving candidates, ranked. Each idea carries:
 
 Decoration — a visual with no shape to show, or one that just restates the title — is the failure mode. A visual that genuinely shows the idea's shape is never decoration, however many ideas warrant one. Keep the prose standing alone: a reader who ignores the visual still gets the complete idea and its basis.
 
-Rendering mechanics: a nomnoml or D2 source rendered to a committed SVG in markdown, authored per the `diagram-contract` skill; inline SVG in HTML. Keep visuals at the idea's altitude — illustrative overviews, not authoritative specs. Detailed architecture, sequence diagrams, and wireframes belong downstream, once a direction is chosen and technical planning begins, not here.
+Rendering mechanics: a nomnoml or D2 source rendered to a committed SVG in markdown, authored per the `embed-diagram` skill; inline SVG in HTML. Keep visuals at the idea's altitude — illustrative overviews, not authoritative specs. Detailed architecture, sequence diagrams, and wireframes belong downstream, once a direction is chosen and technical planning begins, not here.
 
 ### Rejection summary
 

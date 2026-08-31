@@ -1,6 +1,6 @@
 ---
 name: autolearn
-description: 'Use when a verified non-trivial fix lands or the user says compound this, document this fix, or remember this. Writes a durable learning doc or CONCEPTS.md entry, or determines nothing qualifies. Also handles refresh when solution docs may have drifted. Not for unverified fixes.'
+description: 'Use when a verified non-trivial fix lands. Automatically captures a durable learning doc to docs/solutions/ or a CONCEPTS.md entry, or determines nothing qualifies. Also handles refresh when solution docs may have drifted. Not for unverified fixes.'
 ---
 
 # Autolearn
@@ -26,7 +26,7 @@ description: 'Use when a verified non-trivial fix lands or the user says compoun
 
 Strip `mode:` tokens from arguments before treating the remainder as context or scope.
 
-- **Compound** (default): document one solved problem into docs/solutions/.
+- **Capture** (default): document one solved problem into docs/solutions/.
 - **Vocabulary capture**: a durable, reusable project term surfaces; reconcile CONCEPTS.md.
 - **Memory handoff**: a fact about the user, preferences, or cross-project context surfaces; do not write it into docs/solutions/ or CONCEPTS.md; surface it as a memory-handoff candidate for the memory system to capture.
 - **Refresh**: maintain existing docs/solutions/ and CONCEPTS.md.
@@ -54,11 +54,11 @@ Then apply the reject-by-default gate (all three filters in order):
 
 The gate governs CONCEPTS.md entries too: a term earns a slot only when its precise local meaning would otherwise be forgotten, it is not already defined there, and it is scope-qualified to this project rather than general programming or domain English.
 
-If nothing clears the gate, say so in one line and exit. A clean "nothing worth compounding here" is a valid, correct result.
+If nothing clears the gate, say so in one line and exit. A clean "nothing worth capturing here" is a valid, correct result.
 
 Done when: all three preconditions and all three gate filters are evaluated, with a pass or a one-line "nothing qualifies" exit.
 
-### 2. Compound — research (parallel, read-only)
+### 2. Capture — research (parallel, read-only)
 
 Scan any injected auto-memory block for entries related to the problem. If it is absent or empty, skip it. If relevant entries exist, carry them as a labeled supplementary context block. Memory is supplementary; when it conflicts with the codebase or conversation, prefer the codebase or conversation. Tag any memory-derived line that lands in the final doc with `(auto memory [claude])`.
 
@@ -72,7 +72,7 @@ Wait for all three before assembling.
 
 Done when: all three subagents return and their results are assembled for the write step.
 
-### 3. Compound — assemble and write
+### 3. Capture — assemble and write
 
 1. **Overlap gate**: High (4–5) → update the existing doc, keep its path and frontmatter, add `last_updated: YYYY-MM-DD`. Moderate (2–3) → create normally; note as a refresh/consolidation candidate. Low or none → create normally. Done when: the overlap gate decision is made.
 2. Read `assets/solution-template.md`; assemble the doc with the track's section structure. Done when: the doc is assembled with the correct track structure.
@@ -147,7 +147,7 @@ One learning per commit. Stage only the surfaces this skill wrote or edited (a s
 Done when: the commit is made with only this skill's surfaces staged, or skipped when nothing was modified.
 
 ## Failure and recovery
-- **Nothing qualifies**: if no fix clears the reject-by-default gate, state "nothing worth compounding here" in one line and exit. This is a valid result, not a failure.
+- **Nothing qualifies**: if no fix clears the reject-by-default gate, state "nothing worth capturing here" in one line and exit. This is a valid result, not a failure.
 - **Validation failure**: `scripts/validate-frontmatter.py` exits 1 naming the offending field. Quote the value, re-write the file, re-run until exit 0. Do not declare success while validation fails.
 - **Overlap collision**: High overlap with an existing doc → update the existing doc, do not create a duplicate. Creating a duplicate when an update was warranted is drift, not knowledge.
 - **Insufficient evidence for Replace**: mark the doc stale in place (`status: stale`, `stale_reason`, `stale_date`) rather than guessing a successor.

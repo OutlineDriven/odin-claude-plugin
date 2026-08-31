@@ -1,0 +1,3 @@
+interface:
+  display_name: "Artifact Arena"
+  short_description: "Use when asked to run /artifact-arena to generate and judge"

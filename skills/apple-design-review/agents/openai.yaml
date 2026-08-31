@@ -1,3 +1,0 @@
-interface:
-  display_name: "Apple Design Review"
-  short_description: "Use when the user invokes /apple-design-review to audit an iOS"

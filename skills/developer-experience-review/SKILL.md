@@ -1,6 +1,6 @@
 ---
 name: developer-experience-review
-description: 'Use when /developer-experience-review dogfoods a developer product or workflow and returns an evidence-backed eight-dimension DX scorecard with measured time to hello world and prioritized fixes. Not for visual UI audit — use design-review. No remote or irreversible changes.'
+description: 'Use when /developer-experience-review dogfoods a developer product or workflow and returns an evidence-backed eight-dimension DX scorecard with measured time to hello world and prioritized fixes. Not for visual UI audit — use web-design-review. No remote or irreversible changes.'
 ---
 
 # Developer experience review

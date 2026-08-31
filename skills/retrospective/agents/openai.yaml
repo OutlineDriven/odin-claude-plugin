@@ -1,3 +1,0 @@
-interface:
-  display_name: "Retrospective"
-  short_description: "Use when the user runs /retrospective for a period."

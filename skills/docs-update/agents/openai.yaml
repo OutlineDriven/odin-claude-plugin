@@ -1,3 +1,3 @@
 interface:
   display_name: "Docs Update"
-  short_description: "Sync user-facing docs to code changes and open a linked PR."
+  short_description: "Synchronize user-facing documentation with code changes, then"

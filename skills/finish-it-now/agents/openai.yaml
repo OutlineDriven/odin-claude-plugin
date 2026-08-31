@@ -1,0 +1,3 @@
+interface:
+  display_name: "Finish It Now"
+  short_description: "Use when the user says ship it now, no phases, or finish it"

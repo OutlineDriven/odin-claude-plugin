@@ -1,3 +1,0 @@
-interface:
-  display_name: "Check Compiler Errors"
-  short_description: "Use when compile or type-check failures block validation."

@@ -19,7 +19,7 @@
     "url": "git+https://github.com/OutlineDriven/odin-claude-plugin.git",
     "directory": "packages/odin-run-advanced"
   },
-  "license": "SEE LICENSE IN PROVENANCE.md",
+  "license": "SEE LICENSE IN LICENSE",
   "author": {
     "name": "OutlineDriven",
     "url": "https://github.com/OutlineDriven"
@@ -27,7 +27,7 @@
   "files": [
     ".claude-plugin",
     "skills",
-    "PROVENANCE.md"
+    "NOTICE"
   ],
   "exports": {
     "./plugin.json": "./.claude-plugin/plugin.json",

@@ -61,10 +61,10 @@ catalogs are not published from this commit.
 
 ### Skills
 
-There are 779 public skills in 28 runtime packages. Identity and ownership
-are in `catalog/packages.json`; the skill registry `catalog/provenance-rows.json`
-pins the count (`skill_count` == directory count == `rows.length`). Do not scan
-`packages/*/skills`; that path is not authored.
+There are 657 public skills in 28 runtime packages. Identity and ownership
+are in `catalog/packages.json`; `catalog/skill-membership.json` owns skill
+membership and pins the count. Do not scan `packages/*/skills`; that path is not
+authored.
 
 ## Core Philosophy
 

@@ -6,4 +6,4 @@ npm package: `@outlinedriven/odin@2.0.0`
 
 This entry is informational. It ships no skills and runs no installer.
 
-License: see `PROVENANCE.md`.
+License: see `LICENSE`. Third-party notices: see `NOTICE`.

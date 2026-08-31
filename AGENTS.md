@@ -31,9 +31,8 @@ Keep every public package, plugin, and marketplace version at the single `releas
 
 Treat the following generated files as generator-owned:
 
-- `scripts/render-package-surfaces.mjs` and `scripts/check-package-surfaces.mjs` own the 29 committed package roots, the root `package.json` script block, and the shared Claude/OMP catalog.
-- `scripts/render-package-provenance.mjs` owns the 29 `PROVENANCE.md` files.
-
+- `scripts/render-package-surfaces.mjs` and `scripts/check-package-surfaces.mjs` own the 29 committed package roots, the root `package.json` script block, and the shared Claude/OMP catalog. `scripts/skill-membership.mjs` owns skill-membership loading and validation.
+- `scripts/package-surfaces.mjs` projects the canonical `licenses/NOTICE` byte-identically to every `packages/<id>/NOTICE`.
 Never hand-edit a generator-owned surface. Change its generator or catalog input, rerun the renderer, and commit the input and rendered output together. Do not create another authored skill tree under `packages/*/skills`.
 
 Do not change `releaseVersion` for tooling-only changes such as pre-commit hooks or formatter configuration, or for edits to this file. Do not add or backfill `CHANGELOG.md` entries for routine version work.
@@ -44,7 +43,7 @@ Single-quote every `SKILL.md` frontmatter value that contains `: `, including `d
 
 `agents/openai.yaml` is generated, not hand-authored. `scripts/render-skill-manifests.mjs` derives every manifest from SKILL.md frontmatter: `interface.display_name` is the title-cased name with an in-script acronym table (api→API, ci→CI, gh→GH, …); `interface.short_description` is the first sentence of `description`, hard-truncated at 64 chars on overflow and failed, not padded, under 25. Adding a skill means adding `SKILL.md` and running the generator (`node scripts/render-skill-manifests.mjs`); the prek hook `render-skill-manifests --check` fails on any drift between frontmatter and the on-disk manifest. Do not hand-edit a manifest; change the frontmatter and rerun the generator.
 
-`scripts/check-skill-routes.mjs` is the commit-time identity gate. It checks that each directory name equals its frontmatter `name`, equals a registry row slug, and equals the manifest identity; that `catalog/provenance-rows.json` count is consistent (`rows.length` == `skill_count` == directory count); and that every `display_name` is unique across all manifests (Set collision check). Edit the registry rows and `skill_count` in the same commit that touches `skills/`.
+`scripts/check-skill-routes.mjs` is the commit-time identity gate. It checks that each directory name equals its frontmatter `name`, equals a membership row slug, and equals the manifest identity; that `catalog/skill-membership.json` count is consistent (`rows.length` == `skill_count` == directory count); and that every `display_name` is unique across all manifests (Set collision check). Edit the membership rows and `skill_count` in the same commit that touches `skills/`.
 
 ## Verification
 

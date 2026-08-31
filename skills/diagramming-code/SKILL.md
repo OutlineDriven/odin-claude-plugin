@@ -1,6 +1,6 @@
 ---
 name: diagramming-code
-description: 'Use for a call graph, class hierarchy, module-deps map, containment view, complexity heatmap, or data-flow view derived from code. Emits valid, readable Mermaid or explains why no edges exist. Not for embedded rendering — use diagram-contract. No remote or irreversible changes.'
+description: 'Use for a call graph, class hierarchy, module-deps map, containment view, complexity heatmap, or data-flow view derived from code. Emits valid, readable Mermaid or explains why no edges exist. Not for embedded rendering — use embed-diagram. No remote or irreversible changes.'
 ---
 
 # Diagramming code

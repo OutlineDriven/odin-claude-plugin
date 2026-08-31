@@ -1,6 +1,6 @@
 ---
 name: review-and-ship
-description: 'Use when the user explicitly asks to review changes, verify behavior, and open or update a PR. Not when the task includes merging PRs, force pushes, history rewrites, or deployments — use publish-pr for ship-only and review for review-only.'
+description: 'Reviews an existing diff, fixes release-blocking findings, verifies it, packages atomic commits, and opens or updates its pull request. Use on direct human request or explicit delegated shipping authority. Not for merging pull requests, force pushes, history rewrites, or deployment.'
 disable-model-invocation: true
 ---
 
@@ -10,39 +10,42 @@ disable-model-invocation: true
 
 | Field | Bound contract |
 |---|---|
-| Trigger | Explicit human request to review changes, verify behavior, and open or update a PR |
-| Authority | Requires explicit human invocation. Preview the target and consequence before credentials, data-at-rest changes, paid actions, publishing, deployment, remote bulk mutation, or irreversible deletion |
-| Side effect | Commits, pushes, and opens or updates PR. Publishes only the reviewed branch by ordinary fast-forward push after explicit human approval; force flags are forbidden |
-| Done | Findings, check results, and confirmed PR URL returned |
+| Trigger | A human directly requests review and publication, or `work` passes the explicit signal `authority: delegated`. |
+| Authority | Direct or explicitly delegated shipping authority. A route name or surrounding context never implies delegation. Preview any credential, paid, data-at-rest, remote bulk, or irreversible consequence not already covered by that authority. |
+| Side effect | Repairs the reviewed diff, creates local commits, pushes one branch without force, and opens or updates one pull request. |
+| Done | No release-blocking finding remains, native checks pass, every intended commit is on the remote branch, and a confirmed pull-request URL is returned. |
 
 ## Inputs
 
-The repository must be clean or have staged changes, and the working tree must be on the target branch. The human must specify the target branch or confirm the default. GitHub CLI (`gh`) must be authenticated.
+- `$AUTHORITY`: `direct` or `delegated`. Default to `direct` only on direct human invocation.
+- The existing staged, unstaged, untracked, or already-committed diff.
+- The repository's loaded Git, review, verification, and pull-request conventions.
+- The publication remote, base branch, and head branch, resolved from repository state unless the caller supplied them.
 
 ## Procedure
 
-1. Confirm HEAD with `git log --oneline -1`, fetch the target remote with `git fetch <remote>`, and confirm `gh` authentication with `gh auth status`. Stop on any failure.
-2. Produce `git diff [--cached] [<base>..<HEAD>]` for the full diff and read every changed file.
-3. Review the diff: flag logic errors, scope creep, missing tests, and violations of project conventions.
-4. Run the local check suite relevant to the changed surface (lint, type-check, unit tests). If a check command is not supplied, infer it from the project tooling (Makefile, package.json scripts, pyproject.toml, Cargo.toml, or equivalent). Stop if any check fails; report the failure with the command and output.
-5. Classify the publication: run `git status --porcelain`, `git log --oneline -n 10`, and `git rev-list --left-right --count <remote>/<branch>...HEAD`. Record each commit SHA-1 that will be pushed and classify the branch as ahead-only, behind-only, diverged, or a new-branch publication when `<remote>/<branch>` does not exist.
-6. Present findings, check results, planned commits, and the publication classification to the human, and wait for explicit confirmation. If the branch is behind-only or diverged, state that an ordinary push will be refused and that the divergence must be resolved by the human before this skill runs again; do not propose force flags, history rewrite, `git reset`, or branch deletion.
-7. After explicit confirmation, publish with `git push <remote> <branch>`. Use no force flag of any kind (`--force`, `-f`, `--force-with-lease`, or a `+<branch>` refspec). If the remote rejects the push, stop and return the verbatim rejection output to the human.
-8. Create or update the PR without discarding any command output:
-   - Run `gh pr view --json number,state,url`. On a non-zero exit, read the error: a no-PR-for-branch result proceeds to creation; an authentication, permission, or network error stops the skill and is reported.
-   - If a PR exists, run `gh pr edit <number> --title '<title>' --body '<composed body>'`.
-   - If no PR exists, run `gh pr create --title '<title>' --body '<composed body>'`.
-   - Compose `<body>` inline to summarize findings, check results, and planned commits; use no stdin pipe and no `--body-file -` redirection.
-9. Extract the PR URL from the `gh` JSON output and return it in the final report.
+1. Establish authority. Reject a delegated run without the literal `authority: delegated` signal. Resolve the remote, base, head, and current HEAD. If HEAD is detached, attach it to a new publication branch named from the change. Do not change branches when that would discard or hide work.
+2. Inspect the complete publication range and working tree. Include staged, unstaged, untracked, and ahead-of-remote commits. Exclude unrelated or sensitive files before review; never stage with a catch-all path.
+3. Review every changed file against behavior, security boundaries, repository rules, and scope. Repair actionable critical and high findings inside the requested change. Re-review each repaired region. Stop when a finding needs a product decision, destructive act, or scope increase that authority does not cover.
+4. Run the repository-native checks for every touched language and changed behavior. Fix source failures and repeat the affected check. Do not weaken, skip, or replace a configured gate to obtain green output.
+5. Package the working-tree diff into atomic commits. Split by reason for change, not by file count. Stage exact paths or exact hunks, apply the repository's message convention, and leave each commit buildable. Do not amend or rewrite existing history unless the human explicitly requested that separate operation.
+6. Fetch the publication remote. Classify the head as new, ahead-only, behind-only, or diverged against its remote branch. List the exact commits and checks that will publish. A behind-only or diverged branch blocks ordinary publication; never answer it with a force flag, reset, rebase, or branch deletion.
+7. Proceed under the authority established in Step 1; do not ask for the same confirmation twice. Push the head branch with an ordinary fast-forward push. No `--force`, `-f`, `--force-with-lease`, or `+refspec` is permitted.
+8. Query for an existing pull request on the head branch. Update its title and body when one exists; otherwise create one against the resolved base. Preserve command errors: a no-pull-request result permits creation, while authentication, permission, network, or validation errors block publication.
+9. Read the pull request back from the host. Confirm its URL, base, head, state, and published commit tip. Return the final report only when those values match the intended publication.
 
 ## Failure and recovery
-- **Auth failure**: `gh auth status` or any `gh` call reports an authentication error. Do not push or open a PR. Return the exact error output.
-- **Check failure**: A relevant check exits non-zero. Do not push or open a PR. Return the failing command, its output, and the affected files.
-- **Non-fast-forward rejection**: The remote refuses `git push`. Keep the rejection output verbatim in the report. Never retry with a force flag; never `git reset`, rebase, or delete the branch to clear the error. Stop and return the state to the human.
-- **Remote unavailable**: `git push` fails with a connection error. Return the error. Do not retry silently.
-- **No PR URL**: `gh pr create` or `gh pr edit` returns no URL. Surface the remote URL and the branch name as the best available record, labeled blocked.
-- **Evidence preservation**: Keep verbatim stdout and stderr of every failed command in the report. Never silence, truncate, or discard command output, and never delete logs, diffs, or failure artifacts as cleanup.
-- **Partial result**: If steps 1–6 succeed but step 7 or 8 fails, do not report success. Return the findings and check results collected so far and mark the PR step as blocked.
+
+| Failure | Action |
+|---|---|
+| Missing delegated authority | Stop before review or mutation and name the missing signal. |
+| Release-blocking finding cannot be repaired in scope | Keep the reviewed diff and return the finding, evidence, and required decision. Do not publish. |
+| Native check fails | Keep the failure output and affected paths. Do not commit or publish the failing group. |
+| Branch is behind or diverged | Return the classification and exact counts. Do not rewrite history or force push. |
+| Commit packaging partially succeeds | Preserve created commits and list the remaining unstaged groups. Do not publish a partial change set. |
+| Push or pull-request operation fails | Preserve the exact remote error, branch, and pushed commit state. Never retry with broader authority. |
+| Host response lacks a confirmed pull-request URL or tip | Return `BLOCKED` with the remote and branch. Do not claim publication complete. |
 
 ## Output
-A report with sections in order: Review findings, Check results, Planned commits, Publication, PR. Each section carries its own pass-or-blocked status; a blocked section names the reason.
+
+Return, in order: review findings and repairs; native check results; commit hashes and subjects; publication classification; push result; pull-request URL, base, head, state, and confirmed tip. Mark every section `PASS` or `BLOCKED`.

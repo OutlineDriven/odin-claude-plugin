@@ -1,0 +1,3 @@
+interface:
+  display_name: "Agent Environment Retrospective"
+  short_description: "Use when a completed session needs an agent-environment"

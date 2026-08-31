@@ -1,0 +1,3 @@
+interface:
+  display_name: "Learning Retrospective"
+  short_description: "Use when asked to review learning progress after a milestone."

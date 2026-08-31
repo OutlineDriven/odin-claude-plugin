@@ -1,3 +1,3 @@
 interface:
   display_name: "Skill Writer"
-  short_description: "Use when a user asks to create, update, or maintain an agent"
+  short_description: "Authors, ports, rephrases, and upgrades agent skills from a"

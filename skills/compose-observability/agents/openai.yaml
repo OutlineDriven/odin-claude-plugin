@@ -1,3 +1,0 @@
-interface:
-  display_name: "Compose Observability"
-  short_description: "Use when a user wants to add the smallest signal, cardinality"

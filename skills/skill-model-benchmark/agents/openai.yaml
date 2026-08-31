@@ -1,3 +1,0 @@
-interface:
-  display_name: "Skill Model Benchmark"
-  short_description: "Use when the user runs /skill-model-benchmark to compare"

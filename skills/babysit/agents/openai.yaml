@@ -1,3 +1,0 @@
-interface:
-  display_name: "Babysit"
-  short_description: "Use when asked to poll a named changing job, log, or artifact"

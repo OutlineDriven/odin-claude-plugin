@@ -1,0 +1,3 @@
+interface:
+  display_name: "Final Grain"
+  short_description: "Use when asked to push an already-working artifact to finished"

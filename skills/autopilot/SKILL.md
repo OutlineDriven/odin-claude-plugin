@@ -1,6 +1,6 @@
 ---
 name: autopilot
-description: 'Use when a human invokes /autopilot to deliver a feature from plan through shipped PR. Not for tasks outside the described feature or without explicit invocation.'
+description: 'Supervise an approved delivery plan by delegating implementation to work and finalization to review-and-ship.'
 disable-model-invocation: true
 ---
 
@@ -10,37 +10,39 @@ disable-model-invocation: true
 
 | Field | Bound contract |
 |---|---|
-| Trigger | A human explicitly invokes `/autopilot` with a feature description and may assign planning or implementation to a named model or harness. |
-| Authority | Treat the invocation as authority to execute the stated delivery campaign, including delegated work and remote publication; before using credentials, incurring cost, changing data at rest, publishing, deploying, mutating remote state in bulk, or irreversibly deleting anything, preview the exact target and consequence, and stop if the invocation does not authorize them. |
-| Side effect | Plan, implement, simplify, review, test, and ship only the described feature; delegated PR babysitting may push commits or open and maintain its PR without pausing between authorized stages. |
-| Done | Emit `DONE` only after implementation, review findings, required checks, publication, and PR close-out are complete; otherwise stop with `BLOCKED` and the reason. |
+| Trigger | A human explicitly invokes `/autopilot` with a feature description and an approved execution plan. |
+| Authority | The invocation authorizes the described campaign. Preview the exact target and consequence before credentials, paid actions, data-at-rest changes, publication, deployment, remote bulk mutation, or irreversible deletion. Continue only when the invocation covers that consequence. Pass authorized push and PR targets to `review-and-ship`; do not publish directly. |
+| Operation | Supervise one delivery chain: delegate implementation, gate its result, delegate simplification and review, then delegate finalization. |
+| Done | Return `DONE` only after the requested close-out state is observed. Otherwise return `BLOCKED` with a resumable handoff. |
 
 ## Inputs
 
-Required: the feature description, the repository or workspace containing the work, and an explicit `/autopilot` invocation from the human.
+Required: feature description, approved plan, repository, acceptance criteria, and close-out condition.
 
-Optional: acceptance criteria; scope limits; target branch, remote, and PR destination; required checks; shipping instructions; and a named model or harness for planning or implementation. When an optional value is absent, derive it only from repository evidence and the feature description; if a safe, unique target cannot be established, stop blocked rather than guess.
+Optional: scope limits; assigned executor; target branch, remote, and PR destination; required checks; shipping instructions. Derive an omitted value only when repository evidence gives one safe, unique answer.
 
 ## Procedure
 
-1. Parse the feature description, acceptance criteria, assignments, scope limits, repository, branch, remote, PR destination, required checks, and shipping instructions. Reject contradictory instructions or an unavailable assigned executor. Done when: all inputs are parsed and contradictions or unavailable executors are rejected.
-2. Inspect the relevant repository evidence and establish the exact files, behavior, validation, remote target, and close-out conditions in scope. Do not widen the campaign beyond the requested feature. Done when: the in-scope files, behavior, validation, remote target, and close-out conditions are established.
-3. Before any credential use, paid action, data-at-rest change, publication, deployment, remote bulk mutation, or irreversible deletion, present the exact target and consequence. Continue only when that action is covered by the explicit invocation and supplied shipping instructions; otherwise emit `BLOCKED` before performing it. Done when: every risky action is previewed and authorized or blocked.
-4. Produce an executable plan that maps each acceptance criterion to implementation work and proof. If planning was assigned, send the bounded feature, evidence, constraints, and required return shape to that executor, then validate its result against the same scope. Done when: the plan maps every acceptance criterion to work and proof, or the assigned executor's result is validated.
-5. Implement the plan in dependency order. If implementation was assigned, delegate only the bounded work and require the executor to return changed artifacts, observed results, and unresolved failures; inspect those results before integration. Done when: the plan is implemented in dependency order with results inspected.
-6. Simplify the completed implementation without changing its required behavior: remove redundant code and obsolete paths introduced or exposed by the change, while retaining every acceptance criterion. Done when: redundant code and obsolete paths are removed and every acceptance criterion is retained.
-7. Review the full in-scope change for correctness, security, maintainability, scope compliance, and missing acceptance criteria. Apply supported findings and repeat simplification and review when a fix materially changes the reviewed behavior. Stop blocked on contradictory findings, repeated equivalent failure, or evidence that resolution requires scope widening. Done when: the review is complete with findings applied or a blocking condition is reached.
-8. Run the repository checks and direct scenarios required to prove the changed behavior. Record the exact commands or scenarios and their observed results; never infer a pass from unrun or unavailable checks. Done when: the checks and scenarios are run with observed results recorded.
-9. Ship only after the implementation and required proof pass. Push the authorized commits and open or update the PR at the previewed destination, then delegate PR babysitting with the exact repository, branch, PR, acceptance criteria, and authority boundary. Done when: the commits are pushed and the PR is opened or updated with babysitting delegated.
-10. Babysit the PR through authorized close-out: monitor checks and review feedback, apply supported in-scope fixes, rerun affected proof, and push updates. Do not merge, deploy, publish elsewhere, or perform another remote mutation unless the invocation and shipping instructions authorize that consequence. Done when: the PR reaches its close-out conditions or a blocking condition is reached.
-11. Emit `DONE` only when the requested shipping state and PR close-out conditions are observed. Include the resulting branch or PR, delivered behavior, and verification evidence. Done when: `DONE` is emitted with the branch/PR, delivered behavior, and verification evidence.
+1. Parse the plan, scope, assignments, acceptance criteria, repository, required proof, shipping destination, and close-out condition. Reject contradictions and unavailable assigned executors.
+2. Confirm that the human approved the plan. If not, stop before implementation and route to planning.
+3. Inspect enough repository evidence to bind the plan to exact artifacts, behavior, verification, and remote targets. Keep the campaign inside the approved scope.
+4. Preview each risky consequence. Stop when authority is absent or the target is ambiguous.
+5. Delegate the bounded plan to `work` in **Orchestrated** mode. Include acceptance criteria, constraints, repository evidence, required verifier, and the required structured return. `work` owns implementation and local verification; autopilot does not reproduce those steps. Apply the gate state machine in `references/pipeline-gates.md`: a failing work verifier gets one `fix` pass and one recheck; a second failure halts the chain.
+6. Delegate simplification to `simplify` on the completed diff. Gate: `simplify` exits `0`, `11`, or `12` with behavior preserved. Halt on exit `14` (new bloat) or `15` (mixed-concern).
+7. Delegate review to `review` on the in-scope change. If critical or high findings remain, delegate one `fix` pass and re-review the changed files. Halt on residual critical or high findings.
+8. Delegate finalization to `review-and-ship`. Pass the reviewed diff, explicit delegated shipping authority, branch, remote, PR destination, required checks, and shipping instructions. The finalizer owns checks, commits, publication classification, push, and PR creation or update; autopilot performs none of them.
+9. Observe authorized close-out. Route any supported in-scope fix back through `work` in Orchestrated mode, repeat affected gates, and invoke `review-and-ship` for each authorized update. Do not merge, deploy, or publish elsewhere without matching authority.
+10. Return the terminal classification and include the finalizer report. The gate and handoff formats in `references/pipeline-gates.md` are binding.
 
 ## Failure and recovery
-Classify invalid or contradictory input, unavailable assigned execution, ambiguous mutation target, missing authority, implementation failure, failed or unavailable proof, non-converging review, rejected remote mutation, and incomplete PR close-out as blocking failures.
 
-Before remote mutation, leave remote state unchanged on failure. After a partial local or remote result, preserve successful in-scope work, report every observed state transition, and use repository version history or the hosting service's reversible operations to recover only changes made by this run; never discard unrelated work or claim rollback without observing it.
+Stop on a missing approved plan, contradictory input, unavailable executor, ambiguous target, absent authority, failed gate, non-converging review, rejected remote mutation, or incomplete close-out. Preserve successful in-scope work and observed remote state. Recover only mutations made by this run, using reversible repository or hosting operations; never discard unrelated work.
 
-Return `BLOCKED` with the failed stage, exact reason, completed artifacts and remote actions, failed or unavailable checks, recovery state, and the smallest concrete requirement for continuation. Never emit `DONE` for a partial result, swallowed error, guessed target, or unverified close-out.
+Return `BLOCKED` with the failed stage, exact reason, autofix result, partial artifacts, remote mutations, proof state, recovery state, and the single concrete requirement to resume. Never claim rollback, publication, or close-out without observing it.
 
 ## Output
-One terminal classification: `DONE` (with delivered behavior, changed artifacts, verification commands/scenarios with observed results, branch and PR destination, delegated babysitting outcome, observed close-out state) or `BLOCKED` (with failed stage, reason, partial results, remote mutations made, proof status, recovery status, concrete requirement to resume).
+
+Exactly one terminal result:
+
+- `DONE`: delivered behavior, changed artifacts, verification evidence, branch and PR, the complete `review-and-ship` report, and observed close-out state.
+- `BLOCKED`: failed stage, reason, partial result, remote state, proof and recovery status, and the next required action.

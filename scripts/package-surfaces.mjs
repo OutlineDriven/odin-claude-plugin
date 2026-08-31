@@ -54,9 +54,9 @@ const PACKAGE_KEYS = [
 ];
 
 const FILES = {
-  installer: [".claude-plugin", "PROVENANCE.md"],
-  runtime: [".claude-plugin", "skills", "PROVENANCE.md"],
-  core: [".claude-plugin", "skills", "mcp.json", "output-styles", "PROVENANCE.md"],
+  installer: [".claude-plugin", "NOTICE"],
+  runtime: [".claude-plugin", "skills", "NOTICE"],
+  core: [".claude-plugin", "skills", "mcp.json", "output-styles", "NOTICE"],
 };
 
 export function renderPackageJson(entry) {
@@ -76,7 +76,7 @@ export function renderPackageJson(entry) {
           url: "git+https://github.com/OutlineDriven/odin-claude-plugin.git",
           directory: `packages/${entry.id}`,
         },
-        license: "SEE LICENSE IN PROVENANCE.md",
+        license: "SEE LICENSE IN LICENSE",
         author: { name: "OutlineDriven", url: "https://github.com/OutlineDriven" },
         files,
         exports: {
@@ -105,7 +105,7 @@ export function renderPluginJson(entry) {
       author: { name: "OutlineDriven", url: "https://github.com/OutlineDriven" },
       homepage: "https://github.com/OutlineDriven/outline-driven",
       repository: "https://github.com/OutlineDriven/odin-claude-plugin",
-      license: "SEE LICENSE IN PROVENANCE.md",
+      license: "SEE LICENSE IN LICENSE",
       keywords: ["odin", "outlinedriven", "claude-code", "installer", "catalog"],
       defaultEnabled: false,
       metadata: {
@@ -123,7 +123,7 @@ export function renderPluginJson(entry) {
     author: { name: "OutlineDriven", url: "https://github.com/OutlineDriven" },
     homepage: "https://github.com/OutlineDriven/odin-claude-plugin",
     repository: "https://github.com/OutlineDriven/odin-claude-plugin",
-    license: "SEE LICENSE IN PROVENANCE.md",
+    license: "SEE LICENSE IN LICENSE",
     keywords: entry.tags,
     skills: "./skills/",
   };
@@ -144,7 +144,7 @@ export function renderMarketplace(catalog) {
       author: { name: "OutlineDriven", url: "https://github.com/OutlineDriven" },
       homepage: entry.homepage,
       repository: "https://github.com/OutlineDriven/odin-claude-plugin",
-      license: "SEE LICENSE IN PROVENANCE.md",
+      license: "SEE LICENSE IN LICENSE",
       tags: entry.tags,
       strict: true,
       source: {
@@ -175,15 +175,13 @@ export function renderRootPackageJson() {
     workspaces: ["packages/*"],
     scripts: {
       "generate:package-surfaces": "node scripts/render-package-surfaces.mjs",
-      "generate:package-provenance": "node scripts/render-package-provenance.mjs",
       "generate:distribution": "node scripts/render-distribution.mjs",
       "pack:packages": "node scripts/pack-packages.mjs",
       "check:package-surfaces": "node scripts/check-package-surfaces.mjs",
-      "check:package-provenance": "node scripts/check-package-provenance.mjs",
       "check:distribution": "node scripts/check-distribution.mjs",
       "check:skill-routes": "node scripts/check-skill-routes.mjs",
       check:
-        "npm run check:package-surfaces && npm run check:package-provenance && npm run check:distribution && npm run check:skill-routes",
+        "npm run check:package-surfaces && npm run check:distribution && npm run check:skill-routes",
     },
   });
 }
@@ -200,7 +198,7 @@ export function renderPackageReadme(entry) {
       ? "This entry is informational. It ships no skills and runs no installer."
       : "Skills live in the canonical `skills/` tree. Package tarballs project this module's subset at pack time.",
     "",
-    "License: see `PROVENANCE.md`.",
+    "License: see `LICENSE`. Third-party notices: see `NOTICE`.",
     "",
   ];
   return lines.join("\n");
@@ -212,6 +210,7 @@ export function renderAll(root = ROOT) {
   files.push({ path: "package.json", content: renderRootPackageJson() });
   files.push({ path: ".claude-plugin/marketplace.json", content: renderMarketplace(catalog) });
   const license = readFileSync(join(root, "LICENSE"));
+  const notice = readFileSync(join(root, "licenses/NOTICE"));
   for (const entry of catalog.entries) {
     files.push({ path: `packages/${entry.id}/package.json`, content: renderPackageJson(entry) });
     files.push({
@@ -220,6 +219,7 @@ export function renderAll(root = ROOT) {
     });
     files.push({ path: `packages/${entry.id}/README.md`, content: renderPackageReadme(entry) });
     files.push({ path: `packages/${entry.id}/LICENSE`, content: license });
+    files.push({ path: `packages/${entry.id}/NOTICE`, content: notice });
   }
   return files;
 }

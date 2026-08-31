@@ -1,3 +1,0 @@
-interface:
-  display_name: "Diagram Contract"
-  short_description: "Use when the user runs /diagram-contract to render a mermaid"

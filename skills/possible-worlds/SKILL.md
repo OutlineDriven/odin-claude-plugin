@@ -16,7 +16,7 @@ description: 'Use when a design dispute has at least two live interpretations an
 
 ## Inputs
 
-Supply a design dispute containing at least two live interpretations. Include any declared premises, axes of disagreement, or evidence needed to distinguish them. A tracked `magicbox` card may be supplied as evidence, but execution does not require one.
+Supply a design dispute containing at least two live interpretations. Include any declared premises, axes of disagreement, or evidence needed to distinguish them. A tracked `idea-sparkbox` card may be supplied as evidence, but execution does not require one.
 
 ## Procedure
 

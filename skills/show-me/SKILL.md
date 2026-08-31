@@ -17,7 +17,7 @@ description: 'Use when the user says show this or diagram this about the current
 ## Not for
 
 - An auditable decision trail for unattended work — use show-me-your-work.
-- A committed diagram in a document — use diagram-contract.
+- A committed diagram in a document — use embed-diagram.
 - An interactive clickable sketch — use prototype-logic.
 - Teaching a concept with explanation and examples — use explain-concept.
 - A visual walk of review findings one at a time — use show-review.

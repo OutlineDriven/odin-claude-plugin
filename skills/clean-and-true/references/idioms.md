@@ -3,7 +3,7 @@
 Owned by `clean-and-true`. Linked by consumers at `../clean-and-true/references/idioms.md`.
 
 - Edit safety: `rewrite-clean-v0`, `reorder`, `deslop` (bloat mode), `consolidate-to-one-home`
-- Clean room: `fresh-reader-review`, `decision-rationale-gaps`, `fan-out-fresh-reads`, `evaluation-leakage-audit`, `autobahn`
+- Clean room: `fresh-reader-review`, `decision-rationale-gaps`, `prism`, `evaluation-leakage-audit`, `autobahn`
 - Negatives as corpus: `restart-keeping-lessons`, `autobahn`
 
 ## Edit safety

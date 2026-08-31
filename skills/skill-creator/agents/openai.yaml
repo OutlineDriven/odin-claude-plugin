@@ -1,3 +1,0 @@
-interface:
-  display_name: "Skill Creator"
-  short_description: "Use when the user runs /skill-creator to codify a prior /scrape"

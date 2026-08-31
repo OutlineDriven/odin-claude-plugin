@@ -10,6 +10,7 @@ Quick reference for instrumenting production code. Use alongside the `observabil
 - [Distributed tracing](#distributed-tracing)
 - [Alerting](#alerting)
 - [Dashboards](#dashboards)
+- [Maintained surface](#maintained-surface)
 - [Verify the telemetry](#verify-the-telemetry)
 - [Pre-launch gate](#pre-launch-gate)
 
@@ -19,6 +20,7 @@ Telemetry without a question is noise. Before instrumenting anything:
 
 - [ ] 2–4 questions an on-call engineer will ask about this feature are written down
 - [ ] Every signal below maps to one of those questions
+- [ ] Every signal maps to a decision an operator will act on — non-actionable signals are rejected
 - [ ] Each question is matched to the right signal type: metrics say **that** something is wrong, traces say **where**, logs say **why**
 
 ## Structured logging
@@ -49,6 +51,7 @@ Telemetry without a question is noise. Before instrumenting anything:
 - [ ] Trace context propagated on every outbound call (W3C `traceparent`/`tracestate`) and extracted from every inbound request
 - [ ] Context survives async boundaries — queue messages carry trace metadata
 - [ ] Manual spans only around meaningful internal units of work, with the attributes on-call will filter by
+- [ ] Span count is the minimum that reconstructs the critical request path — every span earns its place
 - [ ] No secrets or PII as span attributes
 - [ ] Head-based sampling at a low default rate; 100% of errors kept if tail sampling is available
 
@@ -68,11 +71,20 @@ Telemetry without a question is noise. Before instrumenting anything:
 - [ ] Dependency health panel shows per-service error rates and latency
 - [ ] Dashboard answers the on-call questions from the top of this checklist — not "everything except the answer"
 - [ ] Default time range is sensible (1h–6h, not 30d)
+- [ ] Every dashboard panel maps to a failure mode — no panel without one
+- [ ] No unread panels — if no one will read a chart, omit it
+
+## Maintained surface
+
+- [ ] No signal, label, span, or panel duplicates an existing one
+- [ ] Every surface has an owner who will keep it current
+- [ ] Unowned or duplicate instrumentation removed before verification
 
 ## Verify the telemetry
 
 Instrumentation is code; it can be wrong:
 
+- [ ] Surface compiles, loads, and emits intended signals before any staged proof
 - [ ] Forced an error in staging → found it in the logs by correlation ID
 - [ ] Sent test traffic → metric series appear with expected labels and sane values
 - [ ] Followed one request end-to-end in the tracing UI → no broken spans

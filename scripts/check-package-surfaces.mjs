@@ -22,6 +22,19 @@ for (const file of expected) {
     drift += 1;
   }
 }
+const forbidden = [
+  "catalog/provenance-rows.json",
+  "scripts/render-package-provenance.mjs",
+  "scripts/check-package-provenance.mjs",
+  "skills/LICENSES.md",
+  ...catalog.entries.map((entry) => `packages/${entry.id}/PROVENANCE.md`),
+];
+for (const path of forbidden) {
+  if (existsSync(join(ROOT, path))) {
+    console.error(`retired provenance surface ${path}`);
+    drift += 1;
+  }
+}
 const ids = catalog.entries.map((e) => e.id);
 if (new Set(ids).size !== ids.length) {
   console.error("duplicate catalog ids");

@@ -7,7 +7,7 @@ problem_type: convention
 component: tooling
 severity: medium
 applies_when:
-  - "Editing root package.json, packages/*/README.md, packages/*/PROVENANCE.md, or packages/*/.claude-plugin/plugin.json"
+  - "Editing root package.json, packages/*/README.md, packages/*/NOTICE, or packages/*/.claude-plugin/plugin.json"
   - "A review finding names a defect inside one of those files"
 tags: [generated-surfaces, package-surfaces, check-hooks, render-scripts]
 ---
@@ -24,10 +24,10 @@ The generator family owns these committed surfaces:
 
 - root `package.json` (script block baked in by `scripts/package-surfaces.mjs`)
 - `packages/*/package.json`, `packages/*/.claude-plugin/plugin.json` (same generator)
-- `packages/*/README.md` (`renderPackageReadme()` in the same file)
-- `packages/*/PROVENANCE.md` (`scripts/render-package-provenance.mjs`)
+- `packages/*/README.md` (`renderPackageReadme()` in the same generator)
+- `packages/*/NOTICE` (generated copies from authored `licenses/NOTICE`)
 
-To change any of them: edit the generator (or its inputs, `catalog/packages.json` / `catalog/provenance-rows.json`), run the matching render script, and commit generator plus regenerated output together. When removing a package, delete the obsolete generated package root (`packages/<pkg>/`) manually because `render-package-surfaces.mjs` writes active package surfaces but does not prune removed package trees. Check scripts verify synchronization; a defect present in both generator and output is self-consistent and invisible to them.
+To change any of them: edit the generator (or its inputs, `catalog/packages.json`, `catalog/skill-membership.json`, `licenses/NOTICE`), run `node scripts/render-package-surfaces.mjs`, and commit generator plus regenerated output together. When removing a package, delete the obsolete generated package root (`packages/<pkg>/`) manually because `render-package-surfaces.mjs` writes active package surfaces but does not prune removed package trees. Check scripts verify synchronization; a defect present in both generator and output is self-consistent and invisible to them.
 
 ## Why This Matters
 

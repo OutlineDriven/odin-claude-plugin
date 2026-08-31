@@ -62,7 +62,7 @@
         "plugin_manifest": "packages/odin/.claude-plugin/plugin.json",
         "readme": "packages/odin/README.md",
         "license": "packages/odin/LICENSE",
-        "provenance": "packages/odin/PROVENANCE.md"
+        "notice": "packages/odin/NOTICE"
       }
     },
     {
@@ -93,11 +93,11 @@
         "plugin_manifest": "packages/odin-core/.claude-plugin/plugin.json",
         "readme": "packages/odin-core/README.md",
         "license": "packages/odin-core/LICENSE",
-        "provenance": "packages/odin-core/PROVENANCE.md",
         "skills_root": "packages/odin-core/skills",
         "mcp_config": "packages/odin-core/mcp.json",
         "_removed": "mcp_vendor_manifest (packages/odin-core/vendor/mcp/manifest.json) and mcp_vendor_root (packages/odin-core/vendor/mcp) — vendor/mcp does not exist on disk and no vendored bytes are shipped",
-        "output_styles_root": "packages/odin-core/output-styles"
+        "output_styles_root": "packages/odin-core/output-styles",
+        "notice": "packages/odin-core/NOTICE"
       }
     },
     {
@@ -128,8 +128,8 @@
         "plugin_manifest": "packages/odin-code/.claude-plugin/plugin.json",
         "readme": "packages/odin-code/README.md",
         "license": "packages/odin-code/LICENSE",
-        "provenance": "packages/odin-code/PROVENANCE.md",
-        "skills_root": "packages/odin-code/skills"
+        "skills_root": "packages/odin-code/skills",
+        "notice": "packages/odin-code/NOTICE"
       }
     },
     {
@@ -161,8 +161,8 @@
         "plugin_manifest": "packages/odin-code-advanced/.claude-plugin/plugin.json",
         "readme": "packages/odin-code-advanced/README.md",
         "license": "packages/odin-code-advanced/LICENSE",
-        "provenance": "packages/odin-code-advanced/PROVENANCE.md",
-        "skills_root": "packages/odin-code-advanced/skills"
+        "skills_root": "packages/odin-code-advanced/skills",
+        "notice": "packages/odin-code-advanced/NOTICE"
       }
     },
     {
@@ -193,8 +193,8 @@
         "plugin_manifest": "packages/odin-create/.claude-plugin/plugin.json",
         "readme": "packages/odin-create/README.md",
         "license": "packages/odin-create/LICENSE",
-        "provenance": "packages/odin-create/PROVENANCE.md",
-        "skills_root": "packages/odin-create/skills"
+        "skills_root": "packages/odin-create/skills",
+        "notice": "packages/odin-create/NOTICE"
       }
     },
     {
@@ -226,8 +226,8 @@
         "plugin_manifest": "packages/odin-create-advanced/.claude-plugin/plugin.json",
         "readme": "packages/odin-create-advanced/README.md",
         "license": "packages/odin-create-advanced/LICENSE",
-        "provenance": "packages/odin-create-advanced/PROVENANCE.md",
-        "skills_root": "packages/odin-create-advanced/skills"
+        "skills_root": "packages/odin-create-advanced/skills",
+        "notice": "packages/odin-create-advanced/NOTICE"
       }
     },
     {
@@ -258,8 +258,8 @@
         "plugin_manifest": "packages/odin-research/.claude-plugin/plugin.json",
         "readme": "packages/odin-research/README.md",
         "license": "packages/odin-research/LICENSE",
-        "provenance": "packages/odin-research/PROVENANCE.md",
-        "skills_root": "packages/odin-research/skills"
+        "skills_root": "packages/odin-research/skills",
+        "notice": "packages/odin-research/NOTICE"
       }
     },
     {
@@ -291,8 +291,8 @@
         "plugin_manifest": "packages/odin-research-advanced/.claude-plugin/plugin.json",
         "readme": "packages/odin-research-advanced/README.md",
         "license": "packages/odin-research-advanced/LICENSE",
-        "provenance": "packages/odin-research-advanced/PROVENANCE.md",
-        "skills_root": "packages/odin-research-advanced/skills"
+        "skills_root": "packages/odin-research-advanced/skills",
+        "notice": "packages/odin-research-advanced/NOTICE"
       }
     },
     {
@@ -323,8 +323,8 @@
         "plugin_manifest": "packages/odin-run/.claude-plugin/plugin.json",
         "readme": "packages/odin-run/README.md",
         "license": "packages/odin-run/LICENSE",
-        "provenance": "packages/odin-run/PROVENANCE.md",
-        "skills_root": "packages/odin-run/skills"
+        "skills_root": "packages/odin-run/skills",
+        "notice": "packages/odin-run/NOTICE"
       }
     },
     {
@@ -356,8 +356,8 @@
         "plugin_manifest": "packages/odin-run-advanced/.claude-plugin/plugin.json",
         "readme": "packages/odin-run-advanced/README.md",
         "license": "packages/odin-run-advanced/LICENSE",
-        "provenance": "packages/odin-run-advanced/PROVENANCE.md",
-        "skills_root": "packages/odin-run-advanced/skills"
+        "skills_root": "packages/odin-run-advanced/skills",
+        "notice": "packages/odin-run-advanced/NOTICE"
       }
     },
     {
@@ -388,8 +388,8 @@
         "plugin_manifest": "packages/odin-agent/.claude-plugin/plugin.json",
         "readme": "packages/odin-agent/README.md",
         "license": "packages/odin-agent/LICENSE",
-        "provenance": "packages/odin-agent/PROVENANCE.md",
-        "skills_root": "packages/odin-agent/skills"
+        "skills_root": "packages/odin-agent/skills",
+        "notice": "packages/odin-agent/NOTICE"
       }
     },
     {
@@ -420,8 +420,8 @@
         "plugin_manifest": "packages/odin-security/.claude-plugin/plugin.json",
         "readme": "packages/odin-security/README.md",
         "license": "packages/odin-security/LICENSE",
-        "provenance": "packages/odin-security/PROVENANCE.md",
-        "skills_root": "packages/odin-security/skills"
+        "skills_root": "packages/odin-security/skills",
+        "notice": "packages/odin-security/NOTICE"
       }
     },
     {
@@ -453,8 +453,8 @@
         "plugin_manifest": "packages/odin-security-advanced/.claude-plugin/plugin.json",
         "readme": "packages/odin-security-advanced/README.md",
         "license": "packages/odin-security-advanced/LICENSE",
-        "provenance": "packages/odin-security-advanced/PROVENANCE.md",
-        "skills_root": "packages/odin-security-advanced/skills"
+        "skills_root": "packages/odin-security-advanced/skills",
+        "notice": "packages/odin-security-advanced/NOTICE"
       }
     },
     {
@@ -485,8 +485,8 @@
         "plugin_manifest": "packages/odin-design/.claude-plugin/plugin.json",
         "readme": "packages/odin-design/README.md",
         "license": "packages/odin-design/LICENSE",
-        "provenance": "packages/odin-design/PROVENANCE.md",
-        "skills_root": "packages/odin-design/skills"
+        "skills_root": "packages/odin-design/skills",
+        "notice": "packages/odin-design/NOTICE"
       }
     },
     {
@@ -518,8 +518,8 @@
         "plugin_manifest": "packages/odin-design-advanced/.claude-plugin/plugin.json",
         "readme": "packages/odin-design-advanced/README.md",
         "license": "packages/odin-design-advanced/LICENSE",
-        "provenance": "packages/odin-design-advanced/PROVENANCE.md",
-        "skills_root": "packages/odin-design-advanced/skills"
+        "skills_root": "packages/odin-design-advanced/skills",
+        "notice": "packages/odin-design-advanced/NOTICE"
       }
     },
     {
@@ -550,8 +550,8 @@
         "plugin_manifest": "packages/odin-writing/.claude-plugin/plugin.json",
         "readme": "packages/odin-writing/README.md",
         "license": "packages/odin-writing/LICENSE",
-        "provenance": "packages/odin-writing/PROVENANCE.md",
-        "skills_root": "packages/odin-writing/skills"
+        "skills_root": "packages/odin-writing/skills",
+        "notice": "packages/odin-writing/NOTICE"
       }
     },
     {
@@ -583,8 +583,8 @@
         "plugin_manifest": "packages/odin-writing-advanced/.claude-plugin/plugin.json",
         "readme": "packages/odin-writing-advanced/README.md",
         "license": "packages/odin-writing-advanced/LICENSE",
-        "provenance": "packages/odin-writing-advanced/PROVENANCE.md",
-        "skills_root": "packages/odin-writing-advanced/skills"
+        "skills_root": "packages/odin-writing-advanced/skills",
+        "notice": "packages/odin-writing-advanced/NOTICE"
       }
     },
     {
@@ -615,8 +615,8 @@
         "plugin_manifest": "packages/odin-product/.claude-plugin/plugin.json",
         "readme": "packages/odin-product/README.md",
         "license": "packages/odin-product/LICENSE",
-        "provenance": "packages/odin-product/PROVENANCE.md",
-        "skills_root": "packages/odin-product/skills"
+        "skills_root": "packages/odin-product/skills",
+        "notice": "packages/odin-product/NOTICE"
       }
     },
     {
@@ -647,8 +647,8 @@
         "plugin_manifest": "packages/odin-loop/.claude-plugin/plugin.json",
         "readme": "packages/odin-loop/README.md",
         "license": "packages/odin-loop/LICENSE",
-        "provenance": "packages/odin-loop/PROVENANCE.md",
-        "skills_root": "packages/odin-loop/skills"
+        "skills_root": "packages/odin-loop/skills",
+        "notice": "packages/odin-loop/NOTICE"
       }
     },
     {
@@ -679,8 +679,8 @@
         "plugin_manifest": "packages/odin-planning/.claude-plugin/plugin.json",
         "readme": "packages/odin-planning/README.md",
         "license": "packages/odin-planning/LICENSE",
-        "provenance": "packages/odin-planning/PROVENANCE.md",
-        "skills_root": "packages/odin-planning/skills"
+        "skills_root": "packages/odin-planning/skills",
+        "notice": "packages/odin-planning/NOTICE"
       }
     },
     {
@@ -711,8 +711,8 @@
         "plugin_manifest": "packages/odin-python/.claude-plugin/plugin.json",
         "readme": "packages/odin-python/README.md",
         "license": "packages/odin-python/LICENSE",
-        "provenance": "packages/odin-python/PROVENANCE.md",
-        "skills_root": "packages/odin-python/skills"
+        "skills_root": "packages/odin-python/skills",
+        "notice": "packages/odin-python/NOTICE"
       }
     },
     {
@@ -743,8 +743,8 @@
         "plugin_manifest": "packages/odin-typescript/.claude-plugin/plugin.json",
         "readme": "packages/odin-typescript/README.md",
         "license": "packages/odin-typescript/LICENSE",
-        "provenance": "packages/odin-typescript/PROVENANCE.md",
-        "skills_root": "packages/odin-typescript/skills"
+        "skills_root": "packages/odin-typescript/skills",
+        "notice": "packages/odin-typescript/NOTICE"
       }
     },
     {
@@ -775,8 +775,8 @@
         "plugin_manifest": "packages/odin-web/.claude-plugin/plugin.json",
         "readme": "packages/odin-web/README.md",
         "license": "packages/odin-web/LICENSE",
-        "provenance": "packages/odin-web/PROVENANCE.md",
-        "skills_root": "packages/odin-web/skills"
+        "skills_root": "packages/odin-web/skills",
+        "notice": "packages/odin-web/NOTICE"
       }
     },
     {
@@ -807,8 +807,8 @@
         "plugin_manifest": "packages/odin-native/.claude-plugin/plugin.json",
         "readme": "packages/odin-native/README.md",
         "license": "packages/odin-native/LICENSE",
-        "provenance": "packages/odin-native/PROVENANCE.md",
-        "skills_root": "packages/odin-native/skills"
+        "skills_root": "packages/odin-native/skills",
+        "notice": "packages/odin-native/NOTICE"
       }
     },
     {
@@ -839,8 +839,8 @@
         "plugin_manifest": "packages/odin-apple/.claude-plugin/plugin.json",
         "readme": "packages/odin-apple/README.md",
         "license": "packages/odin-apple/LICENSE",
-        "provenance": "packages/odin-apple/PROVENANCE.md",
-        "skills_root": "packages/odin-apple/skills"
+        "skills_root": "packages/odin-apple/skills",
+        "notice": "packages/odin-apple/NOTICE"
       }
     },
     {
@@ -871,8 +871,8 @@
         "plugin_manifest": "packages/odin-lean/.claude-plugin/plugin.json",
         "readme": "packages/odin-lean/README.md",
         "license": "packages/odin-lean/LICENSE",
-        "provenance": "packages/odin-lean/PROVENANCE.md",
-        "skills_root": "packages/odin-lean/skills"
+        "skills_root": "packages/odin-lean/skills",
+        "notice": "packages/odin-lean/NOTICE"
       }
     },
     {
@@ -903,8 +903,8 @@
         "plugin_manifest": "packages/odin-terraform/.claude-plugin/plugin.json",
         "readme": "packages/odin-terraform/README.md",
         "license": "packages/odin-terraform/LICENSE",
-        "provenance": "packages/odin-terraform/PROVENANCE.md",
-        "skills_root": "packages/odin-terraform/skills"
+        "skills_root": "packages/odin-terraform/skills",
+        "notice": "packages/odin-terraform/NOTICE"
       }
     },
     {
@@ -935,8 +935,8 @@
         "plugin_manifest": "packages/odin-bigquery/.claude-plugin/plugin.json",
         "readme": "packages/odin-bigquery/README.md",
         "license": "packages/odin-bigquery/LICENSE",
-        "provenance": "packages/odin-bigquery/PROVENANCE.md",
-        "skills_root": "packages/odin-bigquery/skills"
+        "skills_root": "packages/odin-bigquery/skills",
+        "notice": "packages/odin-bigquery/NOTICE"
       }
     },
     {
@@ -967,8 +967,8 @@
         "plugin_manifest": "packages/odin-prometheus/.claude-plugin/plugin.json",
         "readme": "packages/odin-prometheus/README.md",
         "license": "packages/odin-prometheus/LICENSE",
-        "provenance": "packages/odin-prometheus/PROVENANCE.md",
-        "skills_root": "packages/odin-prometheus/skills"
+        "skills_root": "packages/odin-prometheus/skills",
+        "notice": "packages/odin-prometheus/NOTICE"
       }
     }
   ]

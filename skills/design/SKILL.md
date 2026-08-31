@@ -1,6 +1,6 @@
 ---
 name: design
-description: 'Use when starting UI work, defining palettes or tokens, or fixing AI-generic UI. Also handles TUI, CLI, and desktop when the runtime is named. Not for persisted design systems — use design-consultation; not for live-URL audits — use design-review. No irreversible changes.'
+description: 'Use when starting UI work, defining palettes or tokens, or fixing AI-generic UI. Also handles TUI, CLI, and desktop when the runtime is named. Not for persisted design systems — use design-consultation; not for live-URL audits — use web-design-review. No irreversible changes.'
 ---
 
 # Design

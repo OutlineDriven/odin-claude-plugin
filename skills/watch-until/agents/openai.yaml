@@ -1,0 +1,3 @@
+interface:
+  display_name: "Watch Until"
+  short_description: "Use when asked to poll a named changing job, log, or artifact"

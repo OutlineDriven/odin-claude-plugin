@@ -1,6 +1,6 @@
 ---
 name: culture-manager-coaching
-description: 'Use when a manager needs profile-specific communication, one-on-one, motivation, and energy guidance for a direct report. Returns trait-gap adjustments, tailored cadence, and energy-risk actions. Not for general profile compatibility — use culture-profile-comparison.'
+description: 'Use when a manager needs profile-specific communication, one-on-one, motivation, and energy guidance for a direct report. Returns trait-gap adjustments, tailored cadence, and energy-risk actions. Not for general pair or team compatibility analysis.'
 ---
 
 # Culture manager coaching

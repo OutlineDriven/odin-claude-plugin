@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Validates the generated distribution (.release/distribution) and staging
-// (.release/npm/staging) projections against the catalog and provenance ledger.
+// (.release/npm/staging) projections against the catalog and skill membership.
 // On a clean checkout these generated artifacts are absent (.release/ is
 // gitignored), so the script skips gracefully with a note instead of failing.
 // Run `npm run generate:distribution` (and the pack staging step) first to
@@ -9,7 +9,7 @@ import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadCatalog } from "./package-surfaces.mjs";
-import { loadRows } from "./render-package-provenance.mjs";
+import { loadMembership } from "./skill-membership.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DIST = join(ROOT, ".release/distribution");
@@ -25,11 +25,20 @@ function fail(msg) {
   console.error(msg);
   process.exit(1);
 }
+function validateNotice(path, label, expected) {
+  if (!existsSync(path)) fail(`${label} missing NOTICE`);
+  if (!readFileSync(path).equals(expected)) fail(`${label} NOTICE differs from licenses/NOTICE`);
+}
+
+function rejectProvenance(path, label) {
+  if (existsSync(path)) fail(`${label} contains retired PROVENANCE.md`);
+}
 
 const catalog = loadCatalog(ROOT);
-const ledger = loadRows(ROOT);
-const skillCount = ledger.skill_count;
+const membership = loadMembership(ROOT);
+const skillCount = membership.skillCount;
 const catalogIds = catalog.entries.map((e) => e.id);
+const notice = readFileSync(join(ROOT, "licenses/NOTICE"));
 
 if (!existsSync(join(DIST, "MANIFEST.json"))) fail("missing .release/distribution/MANIFEST.json");
 const manifest = JSON.parse(readFileSync(join(DIST, "MANIFEST.json"), "utf8"));
@@ -53,8 +62,10 @@ for (const id of catalogIds) {
 // Count actual skill directories in each module and the complete plugin.
 let distSkillTotal = 0;
 for (const entry of catalog.entries) {
-  if (entry.id === "odin") continue;
   const modDir = join(distModulesDir, entry.id);
+  validateNotice(join(modDir, "NOTICE"), `distribution module ${entry.id}`, notice);
+  rejectProvenance(join(modDir, "PROVENANCE.md"), `distribution module ${entry.id}`);
+  if (entry.id === "odin") continue;
   for (const carrier of [".codex-plugin", ".cursor-plugin", ".kimi-plugin"]) {
     if (!existsSync(join(modDir, carrier, "plugin.json"))) {
       fail(`distribution module ${entry.id} missing ${carrier}/plugin.json`);
@@ -68,9 +79,18 @@ for (const entry of catalog.entries) {
     .map((d) => d.name);
   distSkillTotal += slugs.length;
 }
-for (const p of ["plugin.json", ".devin-plugin/plugin.json", "LICENSE", "PROVENANCE.md"]) {
+for (const p of ["plugin.json", ".devin-plugin/plugin.json", "LICENSE", "NOTICE"]) {
   if (!existsSync(join(DIST, "plugins/odin-complete", p))) fail(`odin-complete missing ${p}`);
 }
+validateNotice(
+  join(DIST, "plugins/odin-complete/NOTICE"),
+  "distribution complete plugin",
+  notice,
+);
+rejectProvenance(
+  join(DIST, "plugins/odin-complete/PROVENANCE.md"),
+  "distribution complete plugin",
+);
 const completeSkillsDir = join(DIST, "plugins/odin-complete/skills");
 if (!existsSync(completeSkillsDir)) fail("missing odin-complete skills directory");
 const completeSlugs = readdirSync(completeSkillsDir, { withFileTypes: true })
@@ -80,9 +100,9 @@ if (completeSlugs.length !== skillCount) {
   fail(`odin-complete has ${completeSlugs.length} skills, want ${skillCount}`);
 }
 
-// Validate every ledger slug has a directory in the complete plugin.
+// Validate every membership slug has a directory in the complete plugin.
 const completeSet = new Set(completeSlugs);
-const missingComplete = ledger.rows.map((r) => r.slug).filter((s) => !completeSet.has(s));
+const missingComplete = membership.all.filter((s) => !completeSet.has(s));
 if (missingComplete.length > 0) {
   fail(`odin-complete missing skills: ${missingComplete.join(", ")}`);
 }
@@ -127,6 +147,9 @@ for (const id of catalogIds) {
 }
 let stagingSkillTotal = 0;
 for (const entry of catalog.entries) {
+  const pkgDir = join(stagingDir, entry.id);
+  validateNotice(join(pkgDir, "NOTICE"), `staging package ${entry.id}`, notice);
+  rejectProvenance(join(pkgDir, "PROVENANCE.md"), `staging package ${entry.id}`);
   if (entry.id === "odin") continue;
   const pkgSkills = join(stagingDir, entry.id, "skills");
   if (!existsSync(pkgSkills)) fail(`staging package ${entry.id} missing skills directory`);

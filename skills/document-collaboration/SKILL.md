@@ -1,6 +1,6 @@
 ---
 name: document-collaboration
-description: 'Publishes, reads, comments on, and edits Proof documents via the Proof API or typed MCP tools. Not for local documentation files — use docs-writing; not for generating new docs — use document-generate.'
+description: 'Publishes, reads, comments on, and edits Proof documents via the Proof API or typed MCP tools. Not for local documentation files or generating new documentation — use docs-writing.'
 disable-model-invocation: true
 ---
 

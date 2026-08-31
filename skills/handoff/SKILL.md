@@ -1,53 +1,54 @@
 ---
 name: handoff
-description: 'Use when the user asks to continue current work in a different agent or session: packages live context into a bounded typed brief a receiving agent can resume. Not for clipboard-ready prompts — use handoff-prompt; never remote, credential, publish, deploy, or irreversible.'
+description: 'Preserve and resume substantive work across session boundaries, or package it for an explicit handoff. Maintains ignored local continuity state and emits a bounded portable brief without launching its receiver.'
 ---
 
-# History handoff
+# Session continuity and handoff
 
-## Contract
+## Trigger
 
-| Field | Bound contract |
-|---|---|
-| Trigger | User explicitly asks to continue current work in a different agent or session. |
-| Authority | Reversible local write: produce one bounded handoff file or stdout only. Launching the target agent is a separate explicit human action and is never performed here. |
-| Side effect | Writes at most one handoff file under the current project, or emits the brief to stdout. No remote, credential, VCS, or deployed mutation. |
-| Done | A <=6KB typed brief uses handles and shows a source receipt, a staleness warning after seven days, exclusion refusal, and wrong-project visibility; no raw transcript appears. |
+Use this procedure when substantive work starts, reaches a significant boundary, resumes after interruption, completes, or must move to another session, agent, harness, directory, repository, or person. An explicit handoff request selects the packaging branch.
+
+## Authority
+
+The trigger authorizes reversible writes to ignored repository-local continuity files and, on explicit handoff, one portable brief or stdout. It does not authorize receiver launch, receiver work, remote mutation, credentials, paid actions, publication, deployment, data-at-rest changes outside these artifacts, bulk mutation, or irreversible effects.
 
 ## Inputs
 
-Required: the current conversation or session context being handed off — its problem statements, the conclusions reached, and where the work stopped.
+- Current repository identity, session handle, goal, scope, active files, and current time.
+- Current tasks, decisions with rationale, blockers, evidence, and next action.
+- Existing continuity artifacts, when present.
+- For explicit handoff: an optional source handle, destination path, and project exclude list.
 
-Optional: an explicit session or project handle to package when the user names one; otherwise package the current work in scope. An exclude list of project patterns the user has declared private, used only to refuse.
+Use `.handoff/continuity/` for `notes.md`, `graph.md`, and `death-point.md`. Use `.handoff/handoffs/` for portable briefs. Before the first write, prove `.handoff/` is ignored. If it is not, add the repository-local exclusion and prove it again. Do not stage these files.
 
 ## Procedure
 
-1. Resolve what is being handed off. If the user named a session or project handle, use it; otherwise use the current work in scope. Apply strict project scope so a directory-name match does not package a different project's work. If more than one distinct session matches the current scope, pick the newest and state that an explicit handle would choose otherwise. Done when: the stated action, evidence, and guard all hold.
+1. **Choose resume or fresh.** Follow [resume.md](references/resume.md). Resume only from the complete, readable, unfinished continuity set whose recorded repository identity matches the current repository. Start fresh when it is absent, completed, corrupt, stale, incomplete, or belongs to another project. A minimal emergency death point starts a fresh record with its available context. Preserve unusable files and report why they were rejected.
 
-2. Print a source receipt before producing the brief: the session or harness kind, the project name, a short handle for the session id, and the age of the work. The user must always see what is being handed off so a wrong-project or stale handoff is obvious before it lands. Done when: the stated action, evidence, and guard all hold.
+2. **Initialize continuity state.** In fresh mode, write `death-point.md` first with the available goal, repository identity, session handle, timestamp, status `active`, and next action `initialize continuity state`. Flush that minimal death point before creating `notes.md` and `graph.md`. Then write the goal, scope, repository identity, session handle, and initial rationale to `notes.md`; create a directed graph of task, decision, and blocker nodes with dependency, sequence, and resolution edges; and replace the death point with the last completed action, next action, blockers, timestamp, and status `active`. In resume mode, append a timestamped resumption record, mark the prior death-point node `resumed`, and reconcile current facts without rewriting prior rationale.
 
-3. If the work is older than seven days, emit a staleness warning naming the age and suggesting the user pass an explicit handle for newer work. Treat a timestamp ahead of the clock as unknown age rather than a number that cannot be true. Done when: the stated action, evidence, and guard all hold.
+3. **Maintain one live record.** At each decision, discovery that changes the plan, task-state transition, blocker change, phase boundary, interruption risk, or scope change, update the rationale notes, graph, and death point before continuing. Record the changed fact and why it matters; omit tool chatter and intermediate noise. Flush all three artifacts after the update.
 
-4. Refuse to hand off context from a project the exclude list covers. An index built before the pattern was added can still hold the session, so refusal is the privacy control; tell the user to rebuild without the pattern or remove the pattern to hand it off. Done when: the stated action, evidence, and guard all hold.
+4. **Mark the ending.** On interruption or ordinary session exit, set the death point to `interrupted` with the last completed action, exact next action, active blockers, and timestamp. On goal completion, append the achieved result and residual work to the notes, resolve or classify every open graph node, and set the death point to `completed`. A later session always starts fresh after a `completed` marker.
 
-5. If newer work in the same project is withheld by a trust or visibility policy, say so and state that the packaged session is the newest the policy allows. Done when: the stated action, evidence, and guard all hold.
+5. **Package only on explicit handoff.** Resolve the requested source by exact handle when supplied; otherwise use the current live state. Reject ambiguity and wrong-project matches. Before reading source content into the package, apply the exclude list to the canonical project identity and every candidate path. Refuse the package if any source is excluded; a stale index does not override the current exclude list.
 
-6. Build the brief within a 6KB budget. Spend three quarters of the budget on the packaged body and reserve the rest for the tail. The body opens with a framing header using handles — session kind, project, date — then noise-filtered user problem statements and key conclusions. Drop raw transcript: filter out tool output, command dumps, JSON and CLI walls, system reminders, and passages with long unbroken token runs; keep only prose a person or agent wrote. Select conclusions as the assistant lines that carry a decision marker plus the final outcome line, in transcript order. When a passage is cut to fit the budget, end it with a cut marker and write nothing after the marker; never leave a section header standing with nothing under it. Done when: the stated action, evidence, and guard all hold.
+6. **Print the source receipt.** Show session or harness kind, canonical project identity, short session handle, source timestamp, and computed age. Treat future or invalid timestamps as unknown age. For work older than seven days, print a warning with its age before continuing. If policy withholds newer matching work, disclose that this is the newest visible source.
 
-7. Append a "Where it stopped" tail: the last few substantive exchanges, verbatim and noise-filtered, so the receiving agent sees the live state and not only conclusions. The tail is paid out of the reserved budget. Done when: the stated action, evidence, and guard all hold.
+7. **Build one UTF-8 brief of at most 6,144 bytes.** Include typed sections for source receipt, goal and scope, active files, task/decision/blocker graph, decisions with rationale, evidence, next action, and `Where it stopped`. Filter raw transcript, tool output, command dumps, JSON or CLI walls, system reminders, repeated material, and long token runs. Preserve conclusions in order. Reserve at least one quarter of the budget for `Where it stopped`, containing the final substantive, noise-filtered exchanges or the death-point facts. When truncation is required, end that section with `[cut for handoff budget]`; do not leave an empty heading or append content after the marker.
 
-8. End the brief by telling the receiving agent this is a compact slice and that it should continue from the packaged context instead of re-deriving what is already done. Done when: the stated action, evidence, and guard all hold.
+8. **Emit and stop.** Write the brief under `.handoff/handoffs/` or emit it to stdout. End with: `Continue from this compact context; do not re-derive completed work.` Report the path or stdout result and current continuity status. Never launch or instruct tooling to launch the receiver.
 
-9. Emit the brief to stdout or write it to one handoff file under the current project. Do not launch any target agent. State that launching is a separate explicit human action. Done when: the stated action, evidence, and guard all hold.
+## Failure
 
-## Failure and recovery
-- Wrong-project match: stop and report which project the match came from; do not package it. Recovery is an explicit handle from the user.
-- Excluded project: refuse and name the project; do not produce a brief. Recovery is rebuilding without the pattern or removing the pattern.
-- Stale work: produce the brief with the staleness warning; do not silently hand over older work when newer work is withheld.
-- Budget overflow: cut with a marker and stop the block; never write past a cut marker or let a section header stand empty.
-- Ambiguous handle: report the ambiguity and stop; do not pick silently among distinct sessions.
-- No session in scope: stop and ask for an explicit handle; do not invent a session.
-- Partial result: a brief that fails the done predicate is not emitted as complete; report what failed and stop. Never swallow an error or pretend the done predicate holds.
+- **Unusable prior state:** preserve it, name `corrupt`, `stale`, `incomplete`, `completed`, or `wrong project`, and start fresh.
+- **Unverified ignore rule:** stop before writing continuity state and name the failed ignore check.
+- **Ambiguous or absent handoff source:** stop packaging and request an exact handle; keep maintaining current continuity state.
+- **Excluded source:** name the matched project or path and emit no brief.
+- **Budget failure:** emit no complete brief until its UTF-8 byte count is at most 6,144 and every required section is nonempty.
+- **Partial write:** preserve every complete artifact and report the failed file. A complete minimal `death-point.md` is an emergency recovery marker: the next session starts fresh from its available goal and timestamp, then rebuilds notes and graph from current evidence. Any other partial set is not a usable resume point.
 
 ## Output
-One <=6KB typed handoff brief, to stdout or a single file under the current project. The brief contains a handle-bearing framing header, noise-filtered problem statements, key conclusions, and a "Where it stopped" tail; a source receipt is printed before it; and the applicable staleness warning, exclusion refusal, or wrong-project notice is shown. No raw transcript appears. No target agent is launched.
+
+During work, output the ignored local continuity status: `fresh`, `resumed`, `interrupted`, or `completed`, with the death-point path. On resume, also name any rejected continuity set and its reason. On explicit handoff, output the source receipt, any age or visibility warning, and one compliant brief path or stdout result. The procedure ends there; no receiver is launched.

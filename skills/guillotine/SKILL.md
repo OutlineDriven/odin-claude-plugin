@@ -1,42 +1,50 @@
 ---
 name: guillotine
-description: 'Use when asked to cut accumulated records and residue under an explicit destructive gate with version-control recovery. Don''t use for untracked targets, changes without a version-control rollback, or git branch/worktree cleanup — use git-cleanup.'
-disable-model-invocation: true
+description: 'Cuts proven interior debt across code, documentation, tests, dependencies, configuration, workflows, and generated residue while preserving observable behavior. Use for a cross-surface purge backed by evidence. Not for deleting an already enumerated record set — use clean-clean-cut.'
 ---
 
 # Guillotine
+
+Remove weight the product does not use. Interior cleanup needs proof, not sentiment.
 
 ## Contract
 
 | Field | Bound contract |
 |---|---|
-| Trigger | User wants to cut accumulated records and residue under an explicit destructive gate. |
-| Authority | Delete only VCS-tracked targets inside an enumerated set; show the exact set before cutting; use version control as recovery. |
-| Side effect | Remove accumulated records, residue, and dependent code elements within the enumerated target set. |
-| Done | Purge checklist is confirmed and the enumerated targets are removed; the cut is recoverable through VCS. |
-
-## Inputs
-
-- An enumerated target set: the records, residue, and dependent code elements to cut. Each member must be VCS-tracked.
-- A purge checklist: the explicit PRE conditions, the INVARIANT that must hold during the cut, and the POST conditions that prove the enumerated set is gone.
-- Human approval bound to the enumerated target set. Approval must name the exact set; approval of a wider or narrower set does not authorize the cut.
+| Trigger | A repository or subsystem needs dead, duplicate, superseded, or generated residue removed across more than one artifact class. |
+| Authority | Reversible local edits and deletion of VCS-tracked interior artifacts. No remote mutation, history rewrite, data migration, credential change, or deletion of untracked or critical data. |
+| Invariant | The named observable boundary keeps the same behavior, public contract, and required evidence. |
+| Done | Every removed artifact has a proof of non-necessity, no live route remains, the observable boundary still passes, and the repository gate is green. |
 
 ## Procedure
 
-1. Enumerate the target set. List every record, residue file, and dependent code element to cut. Reject any member that is not VCS-tracked; an untracked target is out of scope. Done when: the stated action, evidence, and guard all hold.
-2. Confirm the PRE conditions: the target set is complete, each member is VCS-tracked, and no member outside the enumerated set is touched. Done when: the stated action, evidence, and guard all hold.
-3. Publish the purge checklist to the human: the enumerated set, the INVARIANT (only enumerated members change, nothing else), and the POST conditions (each enumerated member is absent and the stated check set passes). Done when: the stated action, evidence, and guard all hold.
-4. Wait for human approval that names the exact enumerated set. Do not cut on approval of a different set, on silence, or on model self-authorization. Done when: the stated action, evidence, and guard all hold.
-5. Cut the enumerated set only. Remove each member in the stated order. Do not widen the set, follow dependent chains beyond the enumeration, or preserve history by reflex. Done when: the stated action, evidence, and guard all hold.
-6. Verify the POST conditions: every enumerated member is absent and the stated check set passes. Done when: the stated action, evidence, and guard all hold.
-7. Confirm the cut is recoverable through VCS: the removed members exist in version control history. Done when: the stated action, evidence, and guard all hold.
+1. Name the subsystem and its observable boundary. List the commands, public routes, generated outputs, or user scenarios that must remain unchanged. If no boundary can prove the cut, stop before editing.
+2. Build a candidate ledger. For each code path, document, test, dependency, configuration entry, workflow, or generated file, record its claimed job, live callers or readers, source of truth, and evidence that it is dead, duplicate, superseded, or reproducible.
+3. Classify every candidate:
+   - **dead**: no live caller, route, import, loader, build step, or documented consumer;
+   - **duplicate**: another artifact owns the same fact or operation and all consumers can move to it;
+   - **superseded**: the active path covers the required contract and no supported path selects the old one;
+   - **generated residue**: the repository generator reproduces the required output and does not select this copy;
+   - **keep**: evidence still names a live job, even when the artifact looks ugly.
+4. Prove the cut from both directions. Search from each candidate to its consumers, then from each required consumer back to its owner. Run a focused behavioral, mutation, build, or generation probe when static references cannot prove necessity.
+5. Stop for approval if the proposed cut reaches an observable API, user command, stored data, history, remote state, untracked file, credential, or critical target. Show the exact consequence and a recoverable alternative. Interior VCS-tracked debt with a proven unchanged boundary does not need a second approval.
+6. Cut one dependency-closed slice at a time. Move live consumers to the single surviving owner, then delete the obsolete implementation, tests that protect only obsolete behavior, dependency entries, configuration, workflow steps, and generated copies. Do not leave aliases, shims, dual paths, tombstones, or “deprecated” wrappers.
+7. Regenerate every repository-owned surface affected by the cut. Reject a generator that recreates the removed residue; fix its source selection instead of deleting its output again.
+8. Exercise the observable boundary and run the repository-native gate. If behavior changes, restore the smallest failed slice from VCS, correct its ledger classification, and continue with the remaining proven cuts.
+9. Re-run route, import, registration, and source-of-truth searches. The old path must be absent, and every required consumer must resolve to one live owner.
 
 ## Failure and recovery
-- Untracked target: stop before cutting. Report the member, state that it is not VCS-tracked, and require the human to either track it or remove it from the set. Do not delete untracked files.
-- Approval-set mismatch: stop. The approval names a different set than the enumeration. Re-publish the enumerated set and require approval that matches it exactly.
-- POST condition failure: stop. Report which enumerated member remains or which check failed. Do not declare done. VCS-tracked deletions recover through version control; no in-place rollback is required.
-- Scope drift: stop if any change would touch a member outside the enumerated set. Report the drift and require a new enumeration and approval.
-- Non-converged result: the enumerated set is not fully removed or the check set does not pass. Return the partial state, the failing condition, and the VCS recovery path. Never claim done when a target remains.
+
+| Failure | Action |
+|---|---|
+| A candidate still has a live consumer | Reclassify it as keep or move that consumer inside the same dependency-closed slice. |
+| Two artifacts both appear canonical | Stop the cut and establish one owner before deleting either copy. |
+| A test fails only because it asserts obsolete internals | Prove the observable contract elsewhere, then delete or rewrite the test. Do not weaken a real boundary test. |
+| A dependency looks unused but participates in loading, build, or delivery | Keep it until a real package or artifact probe proves removal safe. |
+| Generation recreates removed files | Fix the generator or membership source. Do not hand-delete generated output as the final state. |
+| Boundary verification changes | Restore the failed slice from VCS and report the classification error. |
+| The cut reaches an approval-gated boundary | Return the exact target, consequence, evidence, and recovery path; wait for explicit authority. |
 
 ## Output
-A cut report: the enumerated target set as approved, the members removed, the POST-condition results, and the VCS recovery reference for each removed member. Terminal classification is `cut` when every enumerated member is gone and the check set passes, or `blocked` when a failure class stopped the cut.
+
+Return the candidate ledger with cut or keep verdicts, removed paths grouped by artifact class, surviving owners, observable-boundary evidence, native gate results, and any approval-gated remainder.

@@ -1,3 +1,0 @@
-interface:
-  display_name: "Crabbox"
-  short_description: "Use when the operator explicitly requests a remote Crabbox"

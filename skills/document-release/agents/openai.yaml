@@ -1,3 +1,0 @@
-interface:
-  display_name: "Document Release"
-  short_description: "Use when the user runs /document-release to synchronize README"

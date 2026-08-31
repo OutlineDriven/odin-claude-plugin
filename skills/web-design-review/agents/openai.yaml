@@ -1,0 +1,3 @@
+interface:
+  display_name: "Web Design Review"
+  short_description: "Use when the user runs /web-design-review with a URL to"

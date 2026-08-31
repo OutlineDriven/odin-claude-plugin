@@ -1,5 +1,10 @@
 # Ideation: skill organization overhaul
 
+Status: historical ideation, not the current skill roster. Later approved
+consolidation rounds changed several survivors, including `ci-fix` and
+`strike-the-root`. The current roster lives in
+`catalog/skill-membership.json`.
+
 Six councils (Merge, Hierarchy, Interface, Voice, Experience, Infra) produced 48 candidates.
 A reject-by-default critic passed 29; a deep adjudicator audited all 48 verdicts, overturned 7,
 and sealed the set: **26 survive, 22 rejected**. The survivors and rejected candidates are
@@ -43,11 +48,13 @@ enumerated in the sections below (Survivors by axis, Rejected).
 ### Infrastructure (gates that make reduction safe)
 - Derive agents/openai.yaml from SKILL.md frontmatter via generator; delete hand-authored manifests.
 - Wire check-skill-routes.mjs into the prek pre-commit gate.
-- Skill-count invariant: provenance ledger count == skills/ directory count.
+- Skill-count invariant: catalog/skill-membership.json count == skills/ directory count.
 - Frontmatter colon-space quoting validator.
-- Invert provenance-rows.json into the canonical skill registry (renames = one row edit + generator run).
+- Use catalog/skill-membership.json as canonical neutral membership source (renames = one edit + generator run).
+- Generate packages/*/NOTICE copies from authored licenses/NOTICE.
 - display_name uniqueness collector that fails on collision.
-- Atomic rename identity gate: dir name == frontmatter name == provenance slug == manifest.
+- Atomic rename identity gate: dir name == frontmatter name == membership slug == manifest.
+- Multi-class rename leak auditor: detect slash triggers, backticks, paths, headings, and state dirs from old names.
 
 ## Rejected (headline reasons)
 - from-* 12→1 collapse: from-first-principle writes an artifact; not a seat variant.
