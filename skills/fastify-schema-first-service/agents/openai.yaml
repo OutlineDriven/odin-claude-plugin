@@ -1,0 +1,3 @@
+interface:
+  display_name: "Fastify Schema First Service"
+  short_description: "Schema-first Fastify routes, plugins, and shaped errors"

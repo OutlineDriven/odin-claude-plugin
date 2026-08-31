@@ -1,0 +1,3 @@
+interface:
+  display_name: "Fuzz Harness Writing"
+  short_description: "Write deterministic fuzz harnesses reaching the target API."

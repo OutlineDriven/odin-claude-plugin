@@ -1,0 +1,63 @@
+---
+name: negotiate-run-budget
+description: 'Use when a high-priority run reaches at least 90% of its budget and requests an extension, ask its human owner once; on grant record the bounded extension and continue, on decline record the decision and mark the run WAITING_FOR_BUDGET; never self-grants. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+---
+
+# Negotiate run budget
+
+## Contract
+
+| Field | Bound contract |
+|---|---|
+| Trigger | A high-priority run reaches at least 90% of its budget and requests an extension |
+| Authority | Reversible-local: one bounded extension may be requested from the human budget owner |
+| Side effect | One extension request output to the user; on decline the run enters WAITING_FOR_BUDGET report-only; never self-grants |
+| Done | Either one bounded extension is granted and recorded, or the run is report-only in WAITING_FOR_BUDGET; there is no silent continuation |
+
+## Inputs
+
+Required:
+- `run_id`: the identifier of the run requesting an extension
+- `budget_used_pct`: current budget consumption as a percentage (must be >= 90)
+- `extension_request`: the absolute or percentage amount being requested
+
+Optional:
+- `priority`: priority tier of the run, if present
+
+## Procedure
+
+1. **Validate trigger conditions**
+   - Confirm `budget_used_pct` >= 90.
+   - Confirm `extension_request` is a positive, bounded quantity (a percentage or absolute value, not unlimited/open-ended).
+   - If either condition is unmet, stop. Do not issue a request.
+
+2. **Compose the extension request**
+   - State `run_id`, current `budget_used_pct`, and requested `extension_request`.
+   - State the consequence: if granted, the run continues with the new budget ceiling; if declined, the run enters WAITING_FOR_BUDGET and does not continue silently.
+   - Do not add a second request, a deadline ultimatum, or an auto-escalation path.
+
+3. **Await the human decision**
+   - Grant: record the extension in the run state and allow continuation.
+   - Decline: record the decline and set the run to WAITING_FOR_BUDGET. Do not continue the run.
+
+## Failure and recovery
+| Failure class | Result |
+|---|---|
+| Budget_used_pct < 90 | Stop. No request issued. |
+| Unbounded extension_request | Stop. Do not request an unlimited extension. |
+| User grants with no bounded amount recorded | Treated as decline. Run enters WAITING_FOR_BUDGET. |
+| Request already issued for this run | Stop. Only one extension request per run is permitted. |
+
+No rollback of a recorded decision. No silent continuation after decline.
+
+## Output
+- **On grant**: run state updated with one bounded extension recorded; run continues.
+- **On decline**: run marked WAITING_FOR_BUDGET in report-only mode; run does not continue.
+- **On invalid inputs or repeated request**: no state change; no output beyond a brief internal stop notice.
+
+## Provenance
+
+Origin: cobusgreyling/loop-engineering (budget-negotiator skill and its templates)
+Revision: d03dcb92cc1e0efb59789a2557131c6ad5897ccc
+License: MIT
+Adaptation: Single bounded extension at 90% budget with a human budget owner and WAITING_FOR_BUDGET report-only fallback; never self-grants; framed as an odin-run-advanced contract. No third-party expression copied directly.

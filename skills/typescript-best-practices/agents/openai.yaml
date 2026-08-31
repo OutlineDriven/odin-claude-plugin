@@ -1,0 +1,3 @@
+interface:
+  display_name: "TypeScript Best Practices"
+  short_description: "Shape TypeScript changes with discriminated unions, readonly"

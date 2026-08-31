@@ -1,0 +1,3 @@
+interface:
+  display_name: "Pixel Safe CSS Reduction"
+  short_description: "Pixel-identical shipped-CSS reduction"

@@ -1,3 +1,3 @@
 interface:
-  display_name: "Form a Point of View"
-  short_description: "Get a verdict on adopting a technology"
+  display_name: "Project Technology Verdict"
+  short_description: "Project-grounded technology verdicts"

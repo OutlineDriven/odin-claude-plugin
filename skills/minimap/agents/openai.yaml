@@ -1,0 +1,3 @@
+interface:
+  display_name: "Compact Project Evidence"
+  short_description: "Compact Git, test, and graph evidence view"

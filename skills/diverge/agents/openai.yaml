@@ -1,0 +1,3 @@
+interface:
+  display_name: "Decision Field Expansion"
+  short_description: "Expand a decision field with new options and dimensions."

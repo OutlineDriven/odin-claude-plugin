@@ -1,4 +1,4 @@
-# Orchestration Patterns
+# Orchestration patterns
 
 Catalog of subagent orchestration patterns worth endorsing, plus the anti-patterns that shadow them. Read it before wiring a command that coordinates multiple subagent roles, or before introducing a role that "wraps" existing ones.
 
@@ -73,7 +73,7 @@ If any answer is "no," fall back to direct invocation or a single-role command.
 
 ### 4. Sequential pipeline as user-driven commands
 
-The user runs commands in a defined order, carrying context (or commit history) between them. No orchestrator agent — the user is the orchestrator.
+The user runs commands in a defined order, carrying context (or commit history) between them. No orchestrator agent: the user is the orchestrator.
 
 ```
 user runs:  spec  →  plan  →  build  →  verify  →  review  →  ship
@@ -104,7 +104,7 @@ orchestrator → research subagent (reads 50 files) → digest → orchestrator 
 
 **Cost:** one isolated subagent context. Worth it any time the alternative is loading hundreds of files into the main context.
 
-**Prefer a built-in read-only exploration subagent** over a custom research role where the harness ships one — they run on a cheap model, are denied write/edit tools, and are purpose-built for this pattern. Define a custom research subagent only when the built-in does not fit (e.g. you need a domain-specific system prompt the model would not infer).
+**Prefer a built-in read-only exploration subagent** over a custom research role where the harness ships one: they run on a cheap model, are denied write/edit tools, and are purpose-built for this pattern. Define a custom research subagent only when the built-in does not fit (e.g. you need a domain-specific system prompt the model would not infer).
 
 ---
 
@@ -125,16 +125,16 @@ Some harnesses expose two parallelism primitives. Pattern 3 (parallel fan-out wi
 | Coordination | Orchestrator fans out, subagents only report back | Teammates message each other, share a task list |
 | Context | Own context window per subagent | Own context window per teammate |
 | When to use | Independent tasks producing reports | Collaborative work needing discussion |
-| Status | Stable | Often experimental — may require a feature flag |
-| Cost | Lower | Higher — each teammate is a separate model instance |
+| Status | Stable | Often experimental, may require a feature flag |
+| Cost | Lower | Higher: each teammate is a separate model instance |
 
 **A role definition works in both modes.** Spawned as subagents, roles report findings to the main session; spawned as teammates, they challenge each other's findings directly. The definition is the same; only the spawning context changes.
 
-One subtlety: frontmatter fields such as `skills` and `mcpServers` may be honored when a role runs as a subagent but **ignored when it runs as a teammate** — teammates often load skills and MCP servers from session and user settings instead. If a role depends on a specific skill or MCP server being loaded, configure it at the session level so it is available in both modes.
+One subtlety: frontmatter fields such as `skills` and `mcpServers` may be honored when a role runs as a subagent but **ignored when it runs as a teammate**; teammates often load skills and MCP servers from session and user settings instead. If a role depends on a specific skill or MCP server being loaded, configure it at the session level so it is available in both modes.
 
 ### Platform-enforced rules
 
-Two rules in this catalog are not just convention — many harnesses enforce them:
+Two rules in this catalog are enforced by many harnesses:
 
 - **Subagents cannot spawn other subagents.** Anti-pattern B (role-calls-role) and anti-pattern D (deep role trees) cannot exist by construction.
 - **No nested teams.** Teammates cannot spawn their own teams. The same anti-patterns are blocked at the team level.
@@ -149,13 +149,13 @@ Before defining a custom subagent, check whether a built-in covers the role:
 |----------|---------|
 | Exploration/research subagent | Read-only codebase search and analysis. Use this for Pattern 5 (research isolation). |
 | Planning subagent | Read-only research during planning. |
-| Task/domain-specialist subagent | Multi-step tasks needing both exploration and modification — pick a tailored agent scoped to the task rather than a generic one. |
+| Task/domain-specialist subagent | Multi-step tasks needing both exploration and modification; pick a tailored agent scoped to the task rather than a generic one. |
 
 Do not redefine these. Layer specialist roles (review, security-audit, test/coverage) on top of them.
 
 ### Frontmatter restrictions
 
-Plugin-scoped subagents may not support every frontmatter field — fields like hooks, MCP servers, or permission mode can be silently ignored depending on harness. If a role needs one of those, the user typically copies the definition into a user- or project-scoped location instead. Confirm the supported field set against your harness docs; identity, description, tool allow/deny lists, model, skills, and memory are commonly honored.
+Plugin-scoped subagents may not support every frontmatter field: fields like hooks, MCP servers, or permission mode can be silently ignored depending on harness. If a role needs one of those, the user typically copies the definition into a user- or project-scoped location instead. Confirm the supported field set against your harness docs; identity, description, tool allow/deny lists, model, skills, and memory are commonly honored.
 
 ### Spawning multiple subagents in parallel
 
@@ -165,7 +165,7 @@ Parallel fan-out (Pattern 3) generally requires issuing **multiple subagent call
 
 ## Worked example: agent teams for competing-hypothesis debugging
 
-This shows when to reach for **agent teams** instead of a subagent fan-out. The two look similar — both spawn the same handful of roles — but the value comes from a different place.
+This shows when to reach for **agent teams** instead of a subagent fan-out. The two look similar (both spawn the same handful of roles), but the value comes from a different place.
 
 ### The scenario
 
@@ -178,7 +178,7 @@ Plausible root causes (mutually exclusive, all fit the symptoms):
 3. A missing index on a query that scales with cart size
 4. A flaky third-party API where the SDK retries silently before timing out
 
-A single agent picks the first plausible theory and stops investigating. A fan-out of independent subagents would have each role report separately — but the reports never meet, so nothing rules out the wrong theories. With independent investigators actively trying to disprove each other, the theory that survives is much more likely to be the actual root cause.
+A single agent picks the first plausible theory and stops investigating. A fan-out of independent subagents would have each role report separately; the reports never meet, so nothing rules out the wrong theories. With independent investigators actively trying to disprove each other, the theory that survives is much more likely to be the actual root cause.
 
 ### Why this is not a fan-out job
 
@@ -192,7 +192,7 @@ A fan-out is a verdict; an agent team is an investigation.
 
 ### Setup
 
-Agent teams are often experimental — enable the team feature in your harness settings where it is gated behind a flag. Existing role definitions are picked up automatically; there are no team-config files to author by hand.
+Agent teams are often experimental: enable the team feature in your harness settings where it is gated behind a flag. Existing role definitions are picked up automatically; there are no team-config files to author by hand.
 
 ### The trigger prompt
 
@@ -224,25 +224,25 @@ The lead spawns three teammates referencing the existing role names. Each role b
 1. Each teammate runs in its own context window, exploring the codebase from its own lens.
 2. Teammates message findings to each other directly. The lead does not have to relay.
 3. The shared task list shows who is investigating what, visible through the harness's team view.
-4. When the review role finds a concurrent batch that should run sequentially — a JavaScript `Promise.all`, a Go `errgroup` of goroutines, or a Python `asyncio.gather` — it messages the security-audit role to confirm the auth call is not part of the race. That role checks and replies, either confirming the race or producing counter-evidence.
+4. When the review role finds a concurrent batch that should run sequentially (a JavaScript `Promise.all`, a Go `errgroup` of goroutines, or a Python `asyncio.gather`), it messages the security-audit role to confirm the auth call is not part of the race. That role checks and replies, either confirming the race or producing counter-evidence.
 5. The test/coverage role proposes a focused integration test for whichever theory is winning, which the team uses to verify before declaring consensus.
 6. The lead synthesizes the converged finding and presents it to you.
 
-You can interrupt any teammate through the harness's controls — useful for redirecting an investigator that has gone down a wrong path.
+You can interrupt any teammate through the harness's controls, useful for redirecting an investigator that has gone down a wrong path.
 
 ### When to clean up
 
-When the investigation lands on a root cause, tell the lead to clean up the team. Always clean up through the lead, not a teammate — teammates lack full team context for cleanup.
+When the investigation lands on a root cause, tell the lead to clean up the team. Always clean up through the lead, not a teammate; teammates lack full team context for cleanup.
 
 ### Cost expectation
 
-Three teammates running for ~10–15 minutes of investigation costs noticeably more than the same three roles spawned as a subagent fan-out. The justification is *quality of conclusion* — for production debugging where the wrong fix is expensive, the extra tokens are a bargain. For a routine PR review, stick with the fan-out.
+Three teammates running for ~10–15 minutes of investigation costs noticeably more than the same three roles spawned as a subagent fan-out. The justification is *quality of conclusion*: for production debugging where the wrong fix is expensive, the extra tokens are a bargain. For a routine PR review, stick with the fan-out.
 
 ### Anti-pattern in this scenario
 
-Do **not** rebuild this as a debug command that fans out subagents. Subagents cannot message each other — you lose the adversarial debate that makes the pattern work. If a workflow keeps recurring, document the trigger prompt above as a snippet rather than wrapping it in a command that misuses subagents.
+Do **not** rebuild this as a debug command that fans out subagents. Subagents cannot message each other; you lose the adversarial debate that makes the pattern work. If a workflow keeps recurring, document the trigger prompt above as a snippet rather than wrapping it in a command that misuses subagents.
 
-### When NOT to use agent teams
+### When not to use agent teams
 
 - Production-bound verdict on a known diff → subagent fan-out.
 - One specialist perspective on one artifact → direct role invocation.
@@ -293,7 +293,7 @@ An agent that runs spec, then plan, then build, etc. on the user's behalf.
 
 **Why it fails:**
 - Loses the human checkpoints that catch wrong-direction work
-- Each hand-off summarizes context — accumulated drift over a long pipeline
+- Each hand-off summarizes context: accumulated drift over a long pipeline
 - Doubles token cost: orchestrator turn + subagent turn for every step
 - Removes user agency at exactly the points where judgment matters most
 

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Subagent Survey Research"
+  short_description: "Spawns local research subagent(s) for wide file-reading surveys"

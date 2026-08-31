@@ -1,0 +1,3 @@
+interface:
+  display_name: "Grill With Docs"
+  short_description: "Interview the domain model; record resolved terms and decisions."

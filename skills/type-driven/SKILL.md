@@ -1,118 +1,44 @@
 ---
 name: type-driven
-description: Develop with refined types. Use when modeling a domain, encoding a state machine in types, hardening an API boundary against malformed input, or the user says "make invalid states unrepresentable" or "parse don't validate".
+description: 'Develop with refined types. Use when modeling a domain, encoding a state machine in types, hardening an API boundary against malformed input, or the user says ''make invalid states unrepresentable'' or ''parse don''t validate''. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Type-driven development
 
-## Three principles
+## Contract
 
-1. **Make illegal states unrepresentable** (Yaron Minsky). If the compiler can construct a value, that value must be valid. A state the domain forbids should have no type that names it.
-2. **Parse, don't validate** (Alexis King). For a parsed opaque domain type inside a trusted boundary, if the type compiles, the value is valid — the proof travels with the value, not with a bool the caller must remember to check.
-3. **Types never lie.** Design from requirements before implementation. A type that admits invalid values to satisfy a broken caller is lying about what it guarantees.
+| Field | Bound contract |
+|---|---|
+| Trigger | The work is modeling a domain, encoding a state machine, hardening an API boundary, making invalid states unrepresentable, or parsing instead of validating. |
+| Authority | Reversible local. No file, VCS, credential, paid, published, or remote mutation. |
+| Side effect | Rewrites domain types, public signatures, and affected callers and tests to the new algebraic model. |
+| Done | Invalid states are unconstructible, matches are exhaustive, boundaries parse, and no scattered post-hoc validation remains. |
 
-Type richness matches risk — start simple, add complexity where bugs actually occur.
+## Inputs
 
-See [patterns](references/patterns.md) for language-specific refined types, state machine techniques, and language-specific validation gates.
-See [examples](references/examples.md) for brief "parse, don't validate" patterns per language.
-See [formal-tools](references/formal-tools.md) for dependent type systems and verification tools.
+Required: the domain problem, data model, or API surface to encode.
+Optional: existing types or callers to refactor.
 
----
+## Procedure
 
-## Parse, Don't Validate
+1. **Plan.** State the domain in one paragraph. List all valid states, all invalid states, and every operation with its preconditions and postconditions. If any operation is partial, mark it as such.
+2. **Design types first.** For each invalid state, write a type that the compiler prevents. Use ADTs, phantom types, branded types, newtype wrappers, sealed hierarchies, or opaque types, whichever the language supports. Do not write implementation bodies until all types compile.
+3. **Parse at boundaries.** For every untrusted input (external data, deserialization, FFI, user input), write a `parse` constructor that returns the new type. Do not return `bool` and defer validity to callers.
+4. **Exhaustive matching.** Encode state machine transitions as exhaustive `match`/`switch`/`visit` on the sum type. Compiler warnings on incomplete arms are failures.
+5. **Verify.** Run the language's strict type checker and exhaustiveness check. Fix the type design, not the implementation, when the checker reports an illegal state is representable.
+6. **Build.** Run the full target build. Implement the bodies guided by the types.
 
-- **Validate**: Check if data is valid -> return bool -> caller must remember check happened. Proof is lost.
-- **Parse**: Transform untrusted data into typed value that proves validity -> return new type. Proof is preserved.
-- **Consequence**: Once parsed into an opaque domain type, internal code within trusted boundaries receives typed values and should not re-validate the same invariant. Note: deserialization, casts, FFI, and unsafe escape hatches can bypass the type system -- runtime checks remain necessary at those boundaries.
-- **Alexis King clarification**: Newtypes are convenient but encapsulation-dependent. Best for simple invariants. Phantom types and branded types provide richer guarantees.
+## Failure and recovery
+- **Unsupported language:** If the language lacks ADTs, sealed hierarchies, or equivalent sum-type support, skip this approach and report.
+- **Type checker failure:** Block. Fix the type design until the invalid state is unrepresentable. Do not add runtime guards.
+- **Non-exhaustive match:** Compile-time failure. Add the missing variant to the type, not a wildcard arm.
+- **Invalid state remains representable:** Block. The type design is insufficient; iterate until the compiler enforces the invariant.
+- **Type holes remain:** Block. Complete all incomplete bodies or remove the holes before proceeding.
+- **Build fails:** Block. Resolve implementation errors until the target build passes.
 
-## Making Illegal States Unrepresentable
+## Output
+A domain type system where every algebraic constructor is present, every boundary has a parse function returning the new type, every state-machine variant is matched exhaustively, and no runtime validation scattered outside the parse layer remains.
 
-1. **ADTs / Discriminated Unions**: Model business rules as sum types. `Payment = Pending | Processing { id } | Success { id, amount } | Failed { reason }`. Compiler ensures every case handled.
-2. **Phantom/Branded Types**: Prevent accidental mixing of structurally identical but semantically different values (UserId vs PostId). Zero runtime cost.
-3. **Typestate Pattern**: Encode valid method sequences in types. `Client<Disconnected>` has no `read()` method. Compile error if called wrong.
-4. **Newtype Wrappers**: Lightweight validated wrappers. `EmailAddress(String)` with private constructor + validation in `new()`.
+## Provenance
 
----
-
-## When to Apply
-
-- Domain modeling (money, email, permissions, IDs)
-- State machines encoded in types (typestate pattern)
-- Complex business rules with multiple valid configurations
-- API boundary types -- parse external data into domain types
-- Anywhere primitive obsession exists (raw strings, ints as IDs)
-- Builder patterns requiring ordered construction steps
-
-## Reasoning approach
-
-Before designing types, reason through the domain: SHORT-form KEYWORDS for internal scratchwork, break down valid and invalid states, critically review which operations are total vs partial, validate that the type design forbids invalid states. Decompose the domain model into atomic types, then compose them. Verify that illegal states are truly unrepresentable by attempting to construct them. For cardinality math (state-space size, bit-width sufficiency), invoke `fend` per the baseline rule; never self-calculate. Type-shape reasoning and exhaustiveness checking are in-head. They are not arithmetic.
-
-## When NOT to Apply
-
-- Thin wrapper scripts with short lifespan
-- Rapid prototyping where types add friction
-- Languages without expressive type systems
-- Configuration/glue code
-- When type complexity exceeds domain complexity -- type gymnastics that obscure intent
-- Internal code where a simple assertion suffices
-
----
-
-## Anti-patterns
-
-- **Primitive obsession**: Raw strings for emails, ints for money, unbranded IDs
-- **Validating after construction**: If the constructor allows invalid values, the type is lying
-- **Trusting external data**: JSON/API/user input must be parsed, never `as`-cast
-- **Stringly-typed APIs**: `fn process(action: string)` instead of `fn process(action: Action)`
-- **Over-engineering with types**: Phantom types for every invariant -> complexity explosion; unreadable signatures defeat documentation purpose
-- **Type gymnastics without clarity**: Complex generics/HKT that obscure intent -- worse than runtime validation
-
----
-
-## The Reinforcing Cycle
-
-```
-Type-Driven Design (static proofs) -> reduces test scope needed
-  -> Test-Driven Development (examples + edges) -> validates type assumptions
-    -> Design by Contract (runtime boundaries) -> documents type guarantees
-      -> Types + TDD + DbC = highest confidence software
-```
-
----
-
-## Workflow (language-neutral)
-
-1. **PLAN** -- Identify value, relationship, state, and proof constraints from requirements
-2. **CREATE** -- Write type definitions first. Use the language's mechanism for incomplete implementations (typed holes, abstract members, stubs) to sketch the shape. Follow "parse, don't validate" at boundaries.
-3. **VERIFY** -- Type-check with the project's strict mode. Zero incomplete markers, exhaustive matching, no escape hatches. See [patterns](references/patterns.md) for language-specific check commands and hole markers.
-4. **IMPLEMENT** -- Fill in bodies guided by types. The type checker is your pair programmer.
-
----
-
-## Constitutional Rules (Non-Negotiable)
-
-1. **CREATE Types First**: All type definitions before implementation
-2. **Types Never Lie**: If it doesn't type-check, fix implementation (not types)
-3. **Holes Before Bodies**: Leave function bodies unimplemented and let the type checker report what is required before filling them in
-4. **Exhaustiveness Enforced**: All match/switch cases covered by the compiler
-
-## Validation Gates
-
-| Gate | Pass Criteria | Blocking |
-|------|---------------|----------|
-| Types Compile | Type checker reports no errors | Yes |
-| Exhaustiveness | No missing match/switch cases | Yes |
-| Holes | Zero incomplete implementation markers (language-specific -- see [patterns](references/patterns.md)) | Yes |
-| Target Build | Full build succeeds | Yes |
-
-## Exit Codes
-
-| Code | Meaning |
-|------|---------|
-| 0 | Types verified, implementation complete |
-| 11 | Type checker not available |
-| 12 | Type check failed |
-| 13 | Exhaustiveness/totality check failed |
-| 14 | Type holes remaining |
-| 15 | Target implementation failed |
+Origin: ODIN 1.x current skill tree. License: project-owned; no external license. Adaptation: distilled from the full current body to the ODIN 2.0 self-contained section contract. Runtime dependencies: zero.

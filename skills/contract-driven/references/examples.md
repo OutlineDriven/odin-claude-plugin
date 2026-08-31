@@ -1,4 +1,4 @@
-# Contract Patterns by Language
+# Contract patterns by language
 
 Brief contract annotation patterns. Precondition + postcondition + invariant per language.
 

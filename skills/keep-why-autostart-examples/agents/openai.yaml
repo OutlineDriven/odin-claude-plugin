@@ -1,0 +1,3 @@
+interface:
+  display_name: "Keep Why Autostart Examples"
+  short_description: "Configure a scoped activation hook and measure target evals"

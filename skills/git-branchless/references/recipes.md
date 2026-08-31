@@ -1,4 +1,4 @@
-# Git-branchless Recipes + Decision Rubric
+# Git-branchless recipes + decision rubric
 
 Concrete command sequences for the workflows enforced by this skill. Each
 recipe is verbatim — copy-paste, then adapt the placeholders. All examples

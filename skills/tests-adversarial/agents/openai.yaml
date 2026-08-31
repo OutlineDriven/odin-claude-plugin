@@ -1,3 +1,3 @@
 interface:
-  display_name: "Adversarial Testing"
-  short_description: "Write adversarial tests that hunt silent failures"
+  display_name: "Tests Adversarial"
+  short_description: "Write assumption-violation tests with passing sanitizer gates"

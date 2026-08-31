@@ -1,3 +1,3 @@
 interface:
-  display_name: "Debloat"
-  short_description: "Compress prose, keep every rule"
+  display_name: "Lossless Binding Compression"
+  short_description: "Compress a padded binding artifact in place, keeping every rule."

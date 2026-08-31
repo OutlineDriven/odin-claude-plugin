@@ -1,0 +1,3 @@
+interface:
+  display_name: "All-Caller Legacy API Cutover"
+  short_description: "Migrate all callers in one wave, then delete the legacy API."

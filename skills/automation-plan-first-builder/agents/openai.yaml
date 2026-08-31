@@ -1,0 +1,3 @@
+interface:
+  display_name: "Automation Plan First Builder"
+  short_description: "Export a scheduled automation from an approved analysis."

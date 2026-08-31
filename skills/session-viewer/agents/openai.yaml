@@ -1,0 +1,3 @@
+interface:
+  display_name: "Session Viewer"
+  short_description: "Builds a searchable single-file HTML viewer for session JSONL"

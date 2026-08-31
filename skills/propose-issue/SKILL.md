@@ -1,79 +1,53 @@
 ---
 name: propose-issue
-description: 'Turn a symptom into a source-grounded GitHub issue: find the evidence, analyse cause versus symptom, draft the issue, pass a self-review gate, then file it. Use when the user says "propose an issue", "file an issue for this", "open a bug report", or hands you a defect to turn into a tracked issue.'
-metadata:
-  short-description: 'Evidence-grounded GitHub issue: analyse, self-review, file'
+description: 'Use when the user asks to propose an issue, file or open a bug report, or turn a reported defect into a tracked issue. Grounds the defect in cited source, gates it, and files one issue. Don''t use for fixing the defect, triaging existing issues, or reviewing PRs.'
+disable-model-invocation: true
 ---
 
-# propose-issue
+# Propose issue
 
-A filed issue is a claim someone else will act on. The cost of a wrong one is not the issue, it is the hour the maintainer spends disproving it. So the work is not writing: it is grounding the symptom in source, naming the mechanism behind it, and passing a gate strict enough to stand in for a human reviewer.
+## Contract
 
-Run the sections in order. Filing is reachable only through the gate.
+| Field | Bound contract |
+|---|---|
+| Trigger | A human explicitly asks to propose an issue, file or open a bug report, or turn a reported defect into a tracked issue. |
+| Authority | Human-only. Preview the repository, proposed title, body, and consequence before using authenticated GitHub access; the explicit invocation authorizes creation of at most one issue in that previewed repository, and no other remote mutation. |
+| Side effect | Create one GitHub issue with `gh` only after the evidence, duplicate, and six-criterion self-review gates all pass. |
+| Done | Report the created issue URL, or abort and name the failing criterion; never report both. |
 
-## Evidence
+## Inputs
 
-Locate the defect in real source before describing it. Open the files; do not reason from memory or from the user's paraphrase.
+The reported symptom or suspected defect is required. An explicit target repository is optional; otherwise resolve the repository from the current checkout. Source files and history needed to investigate the report must be readable. Authenticated `gh` access is required only for tracker search and issue creation. Reproduction details, affected versions, and configurations are optional evidence and must not be invented when absent.
 
-Every factual claim destined for the issue body carries a `path:line` citation read during this run. A symptom the user reported but you could not locate in source is recorded as unconfirmed and stays unconfirmed in the draft. Never assert it.
+## Procedure
 
-**Completion criterion:** every claim destined for the issue body has a `path:line` citation, or is explicitly marked unconfirmed.
+1. Resolve the target repository from the explicit target or the current checkout. Before any authenticated GitHub command, preview the resolved repository, the intended consequence of creating one public or repository-visible issue, and the fact that no other remote state will change. Stop if the repository cannot be resolved unambiguously.
+2. Locate the reported behavior in source opened during this run. Attach a `path:line` citation to every factual claim intended for the issue. Record a user-reported symptom that cannot be located only as an explicitly attributed, unconfirmed report; do not assert it as fact.
+3. Separate mechanism from symptom. Name the causal mechanism supported by the cited source, determine the affected callers, versions, and configurations that the available evidence supports, and reproduce the defect. If reproduction is impossible, record the exact reason in one line rather than claiming a result.
+4. Search all issue states before drafting with `gh issue list --repo <target> --state all --search "<mechanism and symptom terms>"`. Record either `no match` or the matching issue number. Treat the same mechanism as a duplicate even when wording differs; do not treat the same symptom caused by a different mechanism as a duplicate. If a matching issue exists, stop without creating anything and report its URL or number.
+5. Draft a title that states the defect rather than a proposed fix. Draft the body with exactly these headings in this order: `Summary`, `Reproduction`, `Evidence`, `Expected vs actual`, and `Scope`. Include only claims supported under steps 2 and 3.
+6. Preview the final target repository, title, complete body, and issue-creation consequence. Then mark each gate criterion explicitly as pass or fail: (1) every factual claim has a `path:line` citation read during this run; (2) the report is a defect rather than a preference or style opinion; (3) the supported mechanism is named rather than only the symptom; (4) the duplicate search ran and found no match; (5) the title states the defect rather than the fix; and (6) no claim relies on a file not opened during this run. Any failure stops filing.
+7. Only when all six criteria pass, run `gh issue create --repo <target> --title <title> --body <body>` once. Accept success only when the command confirms creation with an issue URL; do not retry a result that may have created the issue until the tracker has been checked for that exact title and body.
 
-## Analysis
+## Failure and recovery
+- **Unresolved target or unavailable source:** make no remote change; return the draft material available, the missing input, and the criterion that cannot be established.
+- **Unsupported defect or failed reproduction:** preserve unsupported observations as explicitly attributed, unconfirmed reports, make no remote change, and return the draft with the failed evidence or mechanism criterion.
+- **Duplicate found:** make no remote change and return the matching issue instead of a new draft as though filing succeeded.
+- **Gate failure:** make no remote change; return the draft, all six pass/fail marks, and every failing criterion.
+- **Tracker search failure:** do not infer `no match`; make no remote change and return the command failure as a blocked duplicate criterion.
+- **Create failure with confirmed no issue created:** make no further remote change and return the error with the retained final draft.
+- **Ambiguous create result:** search the target for the exact title and body before any retry. If exactly one matching issue exists, report its URL; if none or more than one exists, do not retry and return a blocked result naming the ambiguity.
 
-Separate cause from symptom. State the mechanism, not the surface: "the loop reuses the buffer across iterations" is a mechanism, "output is garbled" is a surface.
+No failure path may claim completion. Partial evidence and drafts may be returned, but the terminal result remains an abort until the issue URL is confirmed.
 
-Determine blast radius: which callers, which versions, which configurations. Then reproduce the defect, or state exactly why reproduction is not possible.
+## Output
+Return exactly one terminal classification:
 
-**Completion criterion:** the issue names one mechanism with its evidence, and reproduction is either demonstrated or its absence explained in one line.
+- **Filed:** the target repository and confirmed issue URL.
+- **Aborted:** the target repository when known, the retained draft or duplicate match when available, and the specific failed or blocked criterion.
 
-## Duplicate check
+Never return both classifications.
 
-Before drafting, search the tracker:
+## Provenance
 
-```bash
-gh issue list --repo <target> --state all --search "<key terms>"
-```
-
-An existing issue covering the same mechanism aborts filing. Report the match instead. Same symptom under a different mechanism is not a duplicate.
-
-**Completion criterion:** the search was run and its result recorded, either "no match" or the matched issue number.
-
-## Draft
-
-The issue body uses exactly these headings, in this order:
-
-- `Summary`
-- `Reproduction`
-- `Evidence`
-- `Expected vs actual`
-- `Scope`
-
-The title states the defect, never the proposed fix. "Buffer reused across loop iterations" is a title; "Add per-iteration buffer allocation" is a patch description wearing a title's clothes.
-
-## Self-review gate [LOAD-BEARING]
-
-This gate replaces user approval, so it is the load-bearing section of the skill. Mark each of the six explicitly. All six must pass.
-
-1. Every factual claim carries a `path:line` citation read this run.
-2. The reported thing is a defect, not a preference or a style opinion.
-3. The mechanism is named, not just the symptom.
-4. The duplicate search ran and returned no match.
-5. The title states the defect, not the fix.
-6. No claim rests on a file that was not opened this run.
-
-Any single failure means do not file. Emit the draft and name the failing criterion.
-
-**Completion criterion:** all six explicitly marked pass, or the filing is aborted with the failing criterion named.
-
-## File
-
-Reachable only when the gate passes fully.
-
-```bash
-gh issue create --repo <target> --title <title> --body <body>
-```
-
-The target repo defaults to the current checkout, resolved via `gh repo view --json nameWithOwner`. An explicit target overrides it.
-
-**Completion criterion:** the issue URL is reported, or the abort reason from the gate is reported. Never both.
+Adapted from the ODIN project-owned `skills/propose-issue/SKILL.md` candidate `current:current-c:current:propose-issue`. No pinned revision or external license identifier was supplied; this is a semantic-minimum project-owned adaptation preserving source grounding, cause-versus-symptom analysis, duplicate detection, the six-part filing gate, and confirmed remote publication.

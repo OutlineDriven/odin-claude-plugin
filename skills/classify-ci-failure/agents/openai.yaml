@@ -1,0 +1,3 @@
+interface:
+  display_name: "Classify CI Failure"
+  short_description: "Classify a CI failure into a deterministic class and next owner."

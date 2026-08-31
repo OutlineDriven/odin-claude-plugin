@@ -1,238 +1,50 @@
 ---
 name: observability
-description: Instrument code with structured logs, metrics, and traces. Use when adding telemetry, setting up or reviewing alerting rules, shipping a production feature, or diagnosing opaque production issues.
+description: 'Use when adding telemetry, reviewing alerting rules, shipping a production feature, or diagnosing an opaque production issue. Instrument structured logs with a correlation ID, RED or USE metrics, distributed tracing, and symptom-based alerts, then verify the telemetry against an induced staging failure until every check passes. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
-# Observability and instrumentation
+# Observability
 
-## Overview
+## Contract
 
-Code you can't observe is code you can't operate. Observability is the ability to answer "what is the system doing and why?" from the outside, using the telemetry the code emits. Instrumentation is not a post-launch add-on. It's written alongside the feature, the same way tests are. If a feature ships without telemetry, the first user-reported bug becomes archaeology instead of a query.
-
-## When to use
-
-- Building any feature that will run in production
-- Adding a new service, endpoint, background job, or external integration
-- A production incident took too long to diagnose ("we couldn't tell what happened")
-- Setting up or reviewing alerting rules
-- Reviewing a PR that adds I/O, retries, queues, or cross-service calls
-
-**NOT for:**
-- Diagnosing a failure happening right now
-- Profiling and optimizing measured slowness
-- Launch-day monitoring checklists and rollback triggers. This skill covers the instrumentation that feeds them.
-
-## Process
-
-### 1. Define "working" before instrumenting
-
-Telemetry without a question is noise. Before adding any instrumentation, write down 2 to 4 questions an on-call engineer will ask about this feature:
-
-```
-FEATURE: checkout payment retry
-QUESTIONS ON-CALL WILL ASK:
-1. What fraction of payments succeed on first attempt vs after retry?
-2. When a payment fails permanently, why? (provider error? timeout? validation?)
-3. Is the payment provider slower than usual?
-→ Every signal below must help answer one of these.
-```
-
-If you can't name the questions, you're not ready to instrument. You'll log everything and learn nothing.
-
-### 2. Pick the right signal for each question
-
-| Signal | Answers | Cost profile | Example |
-|---|---|---|---|
-| **Structured log** | "What happened in this specific case?" | Per-event; grows with traffic | `payment_failed` with provider error code |
-| **Metric** | "How often / how fast, in aggregate?" | Fixed per series; cheap to query | p99 latency of provider calls |
-| **Trace** | "Where did time go across services?" | Per-request; usually sampled | One slow checkout, broken down by hop |
-
-Rule of thumb: metrics tell you **that** something is wrong, traces tell you **where**, logs tell you **why**.
-
-### 3. Structured logging
-
-Log events, not prose. Every log line is a JSON object with a stable event name and machine-readable fields:
-
-```typescript
-// BAD: string interpolation — unqueryable, inconsistent
-logger.info(`Payment ${id} failed for user ${userId} after ${n} retries`);
-
-// GOOD: stable event name + structured fields
-logger.warn({
-  event: 'payment_failed',
-  paymentId: id,
-  provider: 'stripe',
-  errorCode: err.code,
-  attempt: n,
-}, 'payment failed');
-```
-
-```python
-# Python (structlog): same rule — string interpolation is BAD, structured fields are GOOD
-log.info(f"Payment {id} failed for user {user_id} after {n} retries")  # BAD
-log.warning("payment_failed", payment_id=id, provider="stripe",        # GOOD
-            error_code=err.code, attempt=n)
-```
-
-**Log levels: use them consistently:**
-
-| Level | Meaning | On-call action |
-|---|---|---|
-| `error` | Invariant broken; someone may need to act | Investigate |
-| `warn` | Degraded but handled (retry succeeded, fallback used) | Watch for trends |
-| `info` | Significant business event (order placed, job finished) | None |
-| `debug` | Diagnostic detail | Off in production by default |
-
-**Correlation IDs are mandatory.** Generate (or accept) a request ID at the system boundary and attach it to every log line, span, and outbound call. Without it, you cannot reconstruct a single request from interleaved logs:
-
-```typescript
-// Express: child logger per request, ID propagated downstream
-app.use((req, res, next) => {
-  req.id = req.headers['x-request-id'] ?? crypto.randomUUID();
-  req.log = logger.child({ requestId: req.id });
-  res.setHeader('x-request-id', req.id);
-  next();
-});
-```
-
-```python
-# Flask: bind a request ID at the boundary and propagate it downstream
-@app.before_request
-def attach_request_id():
-    rid = request.headers.get("x-request-id") or str(uuid.uuid4())
-    g.request_id = rid
-    g.log = log.bind(request_id=rid)  # structlog child logger
-
-@app.after_request
-def echo_request_id(resp):
-    resp.headers["x-request-id"] = g.request_id
-    return resp
-```
-
-**Never log secrets, tokens, passwords, or full PII.** Telemetry pipelines are a classic data-leak path. Allowlist fields; don't log whole request bodies.
-
-### 4. Metrics
-
-For request-driven services, instrument **RED** on every endpoint and every external dependency: **R**ate (requests/sec), **E**rrors (failure rate), **D**uration (latency histogram, not average). For resources (queues, pools, hosts), use **USE**: **U**tilization, **S**aturation, **E**rrors.
-
-As with tracing, the vendor-neutral path is the OpenTelemetry metrics API (same SDK and context as step 5). The example below uses Prometheus' `prom-client`. One common backend choice, not the only one; the RED/USE and cardinality rules are identical either way.
-
-```typescript
-import { Histogram } from 'prom-client';
-
-const httpDuration = new Histogram({
-  name: 'http_request_duration_seconds',
-  help: 'HTTP request duration',
-  labelNames: ['method', 'route', 'status_class'],  // '2xx', not '200'
-  buckets: [0.05, 0.1, 0.25, 0.5, 1, 2.5, 5],
-});
-```
-
-```python
-from prometheus_client import Histogram
-
-http_duration = Histogram(
-    "http_request_duration_seconds",
-    "HTTP request duration",
-    ["method", "route", "status_class"],  # '2xx', not '200'
-    buckets=(0.05, 0.1, 0.25, 0.5, 1, 2.5, 5),
-)
-```
-
-**Cardinality is the failure mode.** Every unique label combination is a separate time series. Labels must come from small, fixed sets (route template, status class, provider name). Never use user IDs, raw URLs, error messages, or other unbounded values as labels. That belongs in logs and traces.
-
-```
-OK as label:    route="/api/tasks/:id"   status_class="5xx"   provider="stripe"
-NEVER a label:  user_id, email, request_id, full URL, error message text
-```
-
-Track averages never, percentiles always: an average hides the 1% of users having a terrible time. Use histograms and read p50/p95/p99.
-
-### 5. Distributed tracing
-
-Use OpenTelemetry. It's the vendor-neutral standard, and auto-instrumentation covers HTTP, gRPC, and common DB clients with near-zero code:
-
-```typescript
-// tracing.ts — must be imported before anything else
-import { NodeSDK } from '@opentelemetry/sdk-node';
-import { getNodeAutoInstrumentations } from '@opentelemetry/auto-instrumentations-node';
-
-const sdk = new NodeSDK({
-  serviceName: 'checkout-service',
-  instrumentations: [getNodeAutoInstrumentations()],
-});
-sdk.start();
-```
-
-```python
-# tracing.py — imported before app code; auto-instruments HTTP, gRPC, and DB clients
-from opentelemetry import trace
-from opentelemetry.sdk.trace import TracerProvider
-
-trace.set_tracer_provider(TracerProvider())
-# run with: OTEL_SERVICE_NAME=checkout-service opentelemetry-instrument python app.py
-```
-
-Add manual spans only around meaningful internal units of work (e.g., `applyDiscounts`, `chargeProvider`) and attach the attributes on-call will filter by. Propagate context across every async boundary (HTTP headers, queue message metadata), or the trace dies at the gap. Sample head-based at a low rate by default; keep 100% of errors if your backend supports tail sampling.
-
-### 6. Alerting
-
-Alert on **symptoms users feel**, not on causes:
-
-```
-SYMPTOM (page-worthy):           CAUSE (dashboard, not a page):
-error rate > 1% for 5 min        CPU at 85%
-p99 latency > 2s                 one pod restarted
-queue age > 10 min               disk at 70%
-```
-
-Cause-based alerts fire when nothing is wrong and miss failures you didn't predict. Symptom-based alerts fire exactly when users are hurt, regardless of the cause.
-
-Rules for every alert you create:
-
-1. **It must be actionable.** If the response is "ignore it, it self-heals", delete the alert.
-2. **It links to a runbook**, even three lines: what it means, first query to run, escalation path.
-3. **It has a threshold and duration** justified by the SLO or by historical data, not by a guess.
-4. Use two severities only: **page** (user-facing, act now) and **ticket** (degradation, act this week). A third tier becomes noise that trains people to ignore everything.
-
-### 7. Verify the telemetry itself
-
-Instrumentation is code; it can be wrong. Before calling the work done, trigger the paths and look at the actual output:
-
-- Force an error in staging → find it in the logs by `requestId`, confirm fields are structured (not `[object Object]`)
-- Send test traffic → confirm metric series appear with the expected labels and sane values
-- Follow one request across services in the tracing UI → no broken spans
-- Fire each new alert once (lower the threshold temporarily) → confirm it reaches the right channel and the runbook link works
-
-## Common rationalizations
-
-| Rationalization | Reality |
+| Field | Bound contract |
 |---|---|
-| "I'll add logging after it works" | "After" becomes "after the first incident", which is the most expensive moment to discover you're blind. Instrument as you build. |
-| "More logs = more observability" | Unstructured noise makes incidents slower, not faster. Three queryable events beat three hundred prose lines. |
-| "console.log is fine for now" | Unstructured output can't be filtered, correlated, or alerted on. The structured logger costs five extra minutes once. |
-| "We can just look at the dashboards when something breaks" | Dashboards built without defined questions show you everything except the answer. Start from on-call questions. |
-| "Alert on everything important, we'll tune later" | A noisy pager trains people to ignore it. The tuning never happens; the missed real page does. |
-| "User ID as a metric label makes debugging easier" | It also makes your metrics backend fall over. High-cardinality lookups belong in logs and traces. |
-| "Tracing is overkill for our two services" | Two services already means cross-service latency questions logs can't answer. Auto-instrumentation makes the cost trivial. |
+| Trigger | Adding telemetry, reviewing alerting rules, shipping a production feature, or diagnosing an opaque production issue. Not for diagnosing a failure happening right now, profiling measured slowness, or launch-day runbooks. |
+| Authority | Reversible-local: write only instrumentation code and local telemetry configuration in the working tree; every change is rolled back by discarding the edits. No credentials, paid services, publishing, deployment, or remote mutation. |
+| Side effect | Adds instrumentation — structured log calls, metric instruments, tracer setup, alert definitions — to the target code, and nothing else. |
+| Done | Structured logs carry a correlation ID, RED metrics exist with bounded labels, one request traces end-to-end without broken spans, symptom-based alerts are test-fired, and an induced staging failure is located via telemetry alone. |
 
-## Red flags
+## Inputs
 
-- A feature PR with retries, queues, or external calls and zero new telemetry
-- Alerts that fire daily and get acknowledged without action
-- "It works on my machine" as the only evidence a production feature is healthy
+Required: the target source files or endpoints to instrument, and their runtime (language and framework).
+Optional: existing logging, metrics, or tracing libraries; a pinned metrics or tracing backend; SLOs or historical latency and error data for threshold justification; the alert delivery channel and runbook location.
+When no backend is pinned, write against the vendor-neutral OpenTelemetry APIs so the exporter can be configured later.
 
-## Verification
+## Procedure
 
-After instrumenting a feature, confirm:
+1. Read the named target code and confirm its runtime and write surface. If the target cannot be identified, stop without writing.
+2. Write down 2-4 on-call questions for the feature (for example: what fraction of attempts succeed on the first try; why does a permanent failure happen; is the provider slower than usual). Every signal added below must answer one of these questions. If no question can be named, stop and report; do not instrument.
+3. Map each question to one signal: how often or how fast in aggregate → metric; where time goes across services → trace; what happened in one specific case → log. Instrument RED (rate, errors, duration) on every request-driven endpoint and external dependency; instrument USE (utilization, saturation, errors) on queues, pools, and hosts.
+4. Add structured logging: every line is a JSON object with a stable event name and machine-readable fields (IDs, provider, error code, attempt count). Never interpolate values into prose strings. Use levels consistently: `error` for broken invariants needing investigation, `warn` for degraded but handled, `info` for significant business events, `debug` off in production by default.
+5. Generate or accept a request ID at the system boundary (for example the `x-request-id` header, else a UUID), attach it to every log line, span, and outbound call, and echo it on the response. Without it a single request cannot be reconstructed from interleaved logs.
+6. Never log secrets, tokens, passwords, or unredacted PII. Allowlist logged fields; never log whole request bodies. Telemetry pipelines are a classic data-leak path.
+7. Add metrics: a latency histogram per endpoint and dependency (for example `http_request_duration_seconds`, buckets spanning roughly 0.05s-5s, labels `method`, route template, and `status_class` holding `2xx`/`5xx` classes, never the raw status code). Read p50/p95/p99, never averages — an average hides the worst 1% of requests. Labels come only from small fixed sets (route template, status class, provider name); never user IDs, emails, request IDs, full URLs, or error message text — every unique label combination is a separate time series, and unbounded values belong in logs and traces.
+8. Add tracing: enable OpenTelemetry auto-instrumentation for HTTP, gRPC, and database clients, initialized before application code, with the service name set. Add manual spans only around meaningful internal units of work, carrying the attributes on-call will filter by. Propagate context across every async boundary — HTTP headers, queue message metadata — or the trace dies at the gap. Sample head-based at a low rate; keep all errors via tail sampling when the backend supports it.
+9. Add alerts on symptoms users feel — sustained error rate over a small percentage, p99 latency over seconds, queue age over minutes — never on causes like CPU, pod restarts, or disk usage; cause-based alerts fire when nothing is wrong and miss failures not predicted. Each alert must be actionable (if the response is to ignore it, delete it), link a runbook stating its meaning, first query, and escalation path, carry a threshold and duration justified by the SLO or historical data — never a guess — and use exactly two severities: `page` (user-facing, act now) and `ticket` (degradation, act this week); a third tier trains people to ignore everything.
+10. Verify the telemetry itself in a staging-like environment: force an error and find it in the logs by request ID with structured fields intact (no `[object Object]`); send test traffic and confirm the metric series appear with expected labels and sane values; follow one request end-to-end in the tracing UI with no broken spans; temporarily lower each new alert threshold, fire it once, and confirm it reaches the right channel with a working runbook link; then locate the induced failure using telemetry alone, without reading the source.
 
-- [ ] The on-call questions for this feature are written down, and each signal maps to one
-- [ ] All log output is structured (JSON), with stable event names and a correlation ID on every line
-- [ ] No secrets, tokens, or unredacted PII in any log line (spot-check actual output)
-- [ ] RED metrics exist for every new endpoint and every external dependency, with bounded label sets
-- [ ] Latency is a histogram; p95/p99 are queryable
-- [ ] A single request can be followed end-to-end in the tracing UI without broken spans
-- [ ] Every new alert is symptom-based, has a runbook link, and was test-fired once
-- [ ] An induced failure in staging was located via telemetry alone, without reading the source
+## Failure and recovery
+- On-call questions cannot be named (step 2): no mutation; report that the feature needs defined questions before instrumentation. This is the stop gate against logging everything and learning nothing.
+- Target or runtime not identifiable (step 1): stop before any write; terminal classification `blocked`.
+- No SLO or historical data justifies an alert threshold: do not guess a number. Record the alert with its query and mark its threshold unjustified; the done predicate is not met for that alert.
+- A verification check fails — unstructured log output, missing or mislabeled metric series, broken spans, undelivered alert, failure not locatable from telemetry: treat it as an instrumentation bug, fix the instrumentation, and re-run the failed checks. Never report done with a failing or unexecuted check.
+- No staging or verification environment exists: the mutations stand, but done is not reached; terminal classification `blocked` with telemetry unverified.
+- Partial result: keep the parts that pass instrumented and list every check as pass or fail in the report. Never swallow errors or claim the done predicate holds.
+- Rollback: all changes are local working-tree edits; discard or revert them to restore the pre-instrumentation state.
 
-For the at-a-glance version of this list, including the pre-launch instrumentation gate, see `references/observability-checklist.md`.
+## Output
+Modified target source files carrying structured logs, metrics, tracing setup, and alert definitions; the written on-call questions; the alert list with runbook links; and a verification report marking each check pass or fail. Terminal classification: done (all checks pass) or `blocked` (the named failing, unjustified, or unverifiable item).
+
+## Provenance
+
+Adapted from the odin-current skill at `skills/observability/SKILL.md` (project-owned, no external license). Absorbs the merged candidate `skills/observability-and-instrumentation/SKILL.md` from addyosmani/agent-skills at pinned revision d2c37ef6225dd8726cdd369a8030307f48592d26, SPDX MIT, Copyright (c) 2025 Addy Osmani — an exact contract duplicate whose mechanisms this file carries; derived distributions retain that copyright notice and the MIT permission text. Rewritten to this self-contained, semantic-minimum ODIN skill contract.

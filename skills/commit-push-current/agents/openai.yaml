@@ -1,3 +1,0 @@
-interface:
-  display_name: "Git Commit and Push (Current)"
-  short_description: "Commit and push changes to the current branch"

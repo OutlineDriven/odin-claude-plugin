@@ -1,0 +1,3 @@
+interface:
+  display_name: "Function Audit Context Analyzer"
+  short_description: "Analysis of one function for audit context with compact record"

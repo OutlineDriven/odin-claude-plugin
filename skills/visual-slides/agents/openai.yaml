@@ -1,0 +1,3 @@
+interface:
+  display_name: "Visual Slides"
+  short_description: "Generate a self-contained HTML slide deck in the diagrams"

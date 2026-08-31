@@ -1,0 +1,3 @@
+interface:
+  display_name: "Conventional Git"
+  short_description: "Conventional Commits branches, worktrees, and messages."

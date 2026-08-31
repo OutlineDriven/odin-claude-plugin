@@ -1,0 +1,3 @@
+interface:
+  display_name: "Knowledge Confidence"
+  short_description: "Assess what is concretely known versus unknown before deciding"

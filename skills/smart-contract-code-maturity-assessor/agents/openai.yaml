@@ -1,0 +1,3 @@
+interface:
+  display_name: "Smart Contract Code Maturity Assessor"
+  short_description: "Scores smart-contract maturity across nine engineering areas"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Node Core Contribution Cycle"
+  short_description: "Build, validate, review, and publish Node core changes"

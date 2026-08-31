@@ -1,0 +1,3 @@
+interface:
+  display_name: "Mutation Proven Boundaries"
+  short_description: "Enforce TypeScript package entry-point boundaries"

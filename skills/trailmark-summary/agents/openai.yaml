@@ -1,0 +1,3 @@
+interface:
+  display_name: "Trailmark Summary"
+  short_description: "Quick structural overview: languages, entrypoints, dependencies"

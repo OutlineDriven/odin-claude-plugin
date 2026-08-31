@@ -1,0 +1,3 @@
+interface:
+  display_name: "Sharp Edges"
+  short_description: "Identifies security footguns and misuse risks in code surfaces."

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Review Speedread"
+  short_description: "Show a compact change shape before reading a full diff."

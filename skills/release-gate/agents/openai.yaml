@@ -1,0 +1,3 @@
+interface:
+  display_name: "Release Gate"
+  short_description: "Ship a release with two human confirmations"

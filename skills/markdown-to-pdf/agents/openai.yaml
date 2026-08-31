@@ -1,0 +1,3 @@
+interface:
+  display_name: "Markdown To PDF"
+  short_description: "Render Markdown to a gated publication-quality PDF"

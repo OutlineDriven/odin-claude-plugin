@@ -1,6 +1,6 @@
-# Rewriting & Transformations
+# Rewriting and transformations
 
-ast-grep provides powerful tools for modifying code, from simple replacements to complex AST manipulations.
+ast-grep replaces matched code with a `fix` string, or reshapes captured values with `transform` and `rewriters`.
 
 **Grounded: 2026-08-26**
 
@@ -39,7 +39,7 @@ transform:
     substring($OLD_VAR, startChar=1, endChar=-1)
 ```
 
-### Supported Transformations
+### Supported transformations
 - **substring**: Extract part of string.
 - **replace**: Regex replacement.
   ```yaml
@@ -54,10 +54,10 @@ transform:
 
 For transforming sub-nodes (e.g., elements in a list) individually.
 
-1. **Define Rewriter**: Top-level `rewriters` list.
-2. **Apply Rewriter**: Use `rewrite` in `transform`.
+1. **Define rewriter**: top-level `rewriters` list.
+2. **Apply rewriter**: use `rewrite` in `transform`.
 
-### Example: Dict Args to Literal
+### Example: dict args to literal
 
 ```yaml
 rewriters:
@@ -80,4 +80,4 @@ transform:
 fix: '{ $DICT_BODY }'
 ```
 
-This transforms `dict(a=1, b=2)` into `{ 'a': 1, 'b': 2 }`.
+This converts `dict(a=1, b=2)` into `{ 'a': 1, 'b': 2 }`.

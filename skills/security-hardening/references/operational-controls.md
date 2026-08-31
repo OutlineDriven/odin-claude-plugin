@@ -1,6 +1,6 @@
-# Operational Controls
+# Operational controls
 
-## Rate Limiting
+## Rate limiting
 
 ```typescript
 import rateLimit from 'express-rate-limit';
@@ -41,7 +41,7 @@ async def login(request: Request):
 
 Always apply a tighter limit to authentication endpoints than to general traffic.
 
-## Secrets Management
+## Secrets management
 
 ```
 .env files:

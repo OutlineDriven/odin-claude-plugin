@@ -1,0 +1,3 @@
+interface:
+  display_name: "Adversarial Review Agreement Map"
+  short_description: "Adversarial multi-model code review with agreement map."

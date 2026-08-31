@@ -1,3 +1,3 @@
 interface:
   display_name: "Wait What"
-  short_description: "Rephrase an explanation that missed"
+  short_description: "Re-explain the last message when the user does not follow"

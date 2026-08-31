@@ -1,0 +1,3 @@
+interface:
+  display_name: "Not Planned Closure"
+  short_description: "Close refused-direction issues and PRs as not planned"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Repository State Cleanup"
+  short_description: "Evidence-backed repository-state cleanup"

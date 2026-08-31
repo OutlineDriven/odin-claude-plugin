@@ -1,0 +1,3 @@
+interface:
+  display_name: "Single File HTML Deck"
+  short_description: "Scaffold a keyboard-navigable single HTML deck with real-data"

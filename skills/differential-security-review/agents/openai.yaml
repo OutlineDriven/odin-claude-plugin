@@ -1,0 +1,3 @@
+interface:
+  display_name: "Differential Security Review"
+  short_description: "Risk-classify a diff and write a security review report."

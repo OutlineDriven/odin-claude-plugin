@@ -1,0 +1,3 @@
+interface:
+  display_name: "Remote Crabbox Proof"
+  short_description: "Run remote Crabbox proof with safe provider routing and cleanup."

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Reproduce and Fix Issues"
+  short_description: "Reproduce a trusted bug, fix it, open a draft PR"

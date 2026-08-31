@@ -1,0 +1,3 @@
+interface:
+  display_name: "Disaster Recovery Proof"
+  short_description: "Repeatable disaster-recovery proof"

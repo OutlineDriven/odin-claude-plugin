@@ -1,127 +1,48 @@
 ---
 name: contract-driven
-description: Design-by-Contract (DbC). Use when crossing public API boundaries, guarding complex state invariants, or hardening untrusted inputs and integration seams.
+description: 'Use when crossing a public API boundary, guarding complex invariants, or hardening untrusted input or integration seams; every planned PRE/POST/INV contract is implemented at the appropriate static, test, debug, or runtime layer and violations fail explicitly at the boundary. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
-# Design-by-Contract development
+# Contract driven
 
-Contracts (PRE/POST/INV) define behavioral specification -- design from requirements before code exists. Formalized as Hoare Triples: `{P} C {Q}` where P=precondition, C=code, Q=postcondition.
+## Contract
 
-**Modern insight (2025)**: DbC complements LLM-generated code by serving as safety guardrails -- contracts clarify intent and prevent AI from breaking integrations. Spec-driven development (2025) positions contracts as "executable specifications."
+| Field | Bound contract |
+|---|---|
+| Trigger | Crossing a public API boundary, guarding complex invariants, or hardening untrusted input or integration seams. |
+| Authority | Write only named local types, assertions, validators, and tests at contract boundaries; rollback is deleting the added local code or reverting the boundary change. |
+| Side effect | Adds or refines local types, assertions, validators, and tests at contract boundaries. |
+| Done | Every planned contract is implemented at the appropriate static/test/debug/runtime layer and violations fail explicitly at the boundary. |
 
-See [libraries](references/libraries.md) for language-specific contract tools.
-See [examples](references/examples.md) for brief contract patterns per language.
+## Inputs
 
----
+Required: the requirements or specification for the operation whose contract is being designed, and the target source file or module containing the public API boundary, invariant, or untrusted seam.
 
-## Verification Hierarchy
+Optional: existing tests that must continue to pass.
 
-Use compile-time verification before runtime contracts. If a property can be verified statically, do NOT add a runtime contract.
+## Procedure
 
-```
-Static Assertions (compile-time) > Test/Debug Contracts > Runtime Contracts
-```
+1. Plan: extract PRE/POST/INV from the requirements. Formalize each contract with an ID and a one-line description (e.g. PRE-1: amount > 0; POST-1: balance == old(balance) - amount; INV-1: balance >= 0). Do not begin implementation until every planned contract has an ID.
+2. Select verification level: for each contract, choose the strongest layer that can enforce it, preferring static over runtime:
+   - Static type system or static_assert for type size, alignment, null/type safety, and exhaustiveness.
+   - Test assertions for expensive O(n)+ properties.
+   - Debug-only invariants for internal invariants.
+   - Runtime guards for public API input, and always for external or untrusted input.
+   If a property can be verified statically, do not add a runtime contract.
+3. Create: implement every PRE, POST, INV at its chosen level in the target local code. Runtime contracts, where used, must be active and not compiled out or disabled.
+4. Verify: run the type checker, static analysis, and build. Contracts must compile and lint.
+5. Test: write one violation test per PRE/POST/INV proving the contract catches bad input or bad state. Static contracts are verified by the type checker; runtime contracts by violation tests that assert the boundary fails explicitly.
 
-| Property | Static | Test | Debug | Runtime |
-|----------|--------|------|-------|---------|
-| Type size/alignment | `static_assert` | - | - | - |
-| Null/type safety | Type checker | - | - | - |
-| Exhaustiveness | Pattern match | - | - | - |
-| Expensive O(n)+ | - | test_ensures | - | - |
-| Internal invariants | - | - | debug_invariant | - |
-| Public API input | - | - | - | requires |
-| External/untrusted | - | - | - | Always required |
+## Failure and recovery
+- Contract lint or build fails: fix the contract or implementation; do not disable or compile out the runtime contract to make it pass.
+- A violation test does not fire: the contract is not enforced at the chosen layer; re-select the layer or strengthen the check; never delete the test to make it pass.
+- A contract restates the implementation trivially (e.g. ensures(result == x - y) for subtract(x, y)): delete that contract; it is contract fatigue, not a boundary guarantee.
+- Partial result: if some contracts cannot be implemented because a requirement is missing, stop and report the missing requirement; do not invent contracts or widen scope.
+- Rollback: delete the added local types, assertions, validators, or tests, or revert the boundary change; no remote, credential, published, or deployed artifact is touched.
 
----
+## Output
+Local code with every planned PRE/POST/INV contract implemented at its verification layer, plus one violation test per contract. Violations fail explicitly at the boundary. Each contract traces to a requirement by ID.
 
-## When to Apply
+## Provenance
 
-- Public API boundaries -- callers need clear contracts
-- Complex state invariants -- balance >= 0, capacity limits
-- Financial/business rule enforcement -- regulatory compliance
-- Untrusted external data -- always validate at boundaries
-- Multi-component integration points -- service contracts
-- AI-generated code -- contracts serve as guardrails for LLM output
-
-## When NOT to Apply
-
-- Internal helpers with obvious behavior
-- Simple getters/setters, trivial pure functions
-- Performance-critical hot paths (runtime contract overhead)
-- Prototyping -- contracts add ceremony
-- When the type system already enforces the property (prefer static)
-
----
-
-## Anti-patterns
-
-- **Contract fatigue**: Decorating everything -- focus on boundaries and invariants
-- **Postconditions restating implementation**: `ensures(result == x - y)` for `subtract(x, y)` adds nothing
-- **Forgetting old() semantics**: Postconditions often need the pre-state value
-
----
-
-## Contract Inheritance Rules
-
-- **Preconditions**: Can be weakened (loosened) in subtypes -- accept more
-- **Postconditions**: Can be strengthened (tightened) in subtypes -- guarantee more
-- **Invariants**: Strengthened in subtypes; never weakened
-- This enforces Liskov Substitution automatically.
-
-## DbC vs Defensive Programming (decision guidance)
-
-| Approach | Philosophy | When |
-|----------|-----------|------|
-| **Defensive** | Don't trust caller; always check | Unknown callers, legacy APIs, untrusted input |
-| **DbC** | Clear contract; caller handles pre, method handles post | Internal APIs, well-scoped teams, correctness-critical |
-| **Hybrid** | Defensive at boundary; DbC internally | Best practice for modern systems |
-
----
-
-## Contract Formalization
-
-```
-Operation: withdraw(amount)
-
-Preconditions:
-  PRE-1: amount > 0
-  PRE-2: amount <= balance
-  PRE-3: account.status == Active
-
-Postconditions:
-  POST-1: balance == old(balance) - amount
-  POST-2: result == amount
-
-Invariants:
-  INV-1: balance >= 0
-```
-
----
-
-## Workflow (language-neutral)
-
-1. **PLAN** -- Extract PRE/POST/INV from requirements. Formalize each with ID and description.
-2. **CREATE** -- Enforce contracts at the appropriate verification level per the hierarchy: static proof, test assertion, debug check, or runtime guard. Reserve runtime contracts for public API boundaries and untrusted input.
-3. **VERIFY** -- Run static analysis and build. Contracts must compile and lint.
-4. **TEST** -- Write violation tests proving contracts catch bad inputs. Every PRE/POST/INV has a test.
-
----
-
-## Constitutional Rules (Non-Negotiable)
-
-1. **CREATE All Contracts**: Implement every PRE, POST, INV from plan at the appropriate verification level per the hierarchy
-2. **Enforcement Enabled**: Runtime contracts, where used, must be active (not compiled out or disabled)
-3. **Violations Caught**: Tests prove contracts work -- static contracts verified by type checker, runtime contracts by violation tests
-4. **Documentation**: Each contract traces to requirement
-
-## Exit Codes
-
-| Code | Meaning |
-|------|---------|
-| 0 | All contracts enforced and tested |
-| 1 | Precondition violation in production code |
-| 2 | Postcondition violation in production code |
-| 3 | Invariant violation in production code |
-| 11 | Contract library not installed |
-| 13 | Runtime assertions disabled |
-| 14 | Contract lint failed |
+Origin: ODIN 1.x current skill `skills/contract-driven/SKILL.md`. Revision: unpinned current. License: project-owned. Adaptation: re-expressed as a self-contained Design-by-Contract procedure preserving the PRE/POST/INV extraction, static-over-runtime verification hierarchy, and per-contract violation-test mechanism; no third-party expression copied.

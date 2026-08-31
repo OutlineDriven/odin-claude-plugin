@@ -1,4 +1,4 @@
-# Sub-agent Prompt Template
+# Sub-agent prompt template
 
 This template is used by the orchestrator to spawn each reviewer sub-agent. Variable substitution slots are filled at spawn time.
 
@@ -64,7 +64,7 @@ Diff:
 </review-context>
 ```
 
-## Variable Reference
+## Variable reference
 
 | Variable | Source | Description |
 |----------|--------|-------------|

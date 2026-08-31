@@ -1,0 +1,3 @@
+interface:
+  display_name: "Trailmark Review Gate"
+  short_description: "Emit PASS/WARN/FAIL/UNKNOWN graph review packet for a diff"

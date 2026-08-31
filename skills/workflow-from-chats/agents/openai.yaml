@@ -1,0 +1,3 @@
+interface:
+  display_name: "Workflow From Chats"
+  short_description: "Mine recent chats and return a reusable workflow specification"

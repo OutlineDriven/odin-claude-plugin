@@ -1,0 +1,3 @@
+interface:
+  display_name: "Customer Feedback Report"
+  short_description: "Synthesize weekly customer feedback into a cited report."

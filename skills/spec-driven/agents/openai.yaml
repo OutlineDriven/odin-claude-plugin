@@ -1,3 +1,3 @@
 interface:
-  display_name: "Spec-Driven Development"
-  short_description: "Turn unclear requirements into a shared spec"
+  display_name: "Spec Driven"
+  short_description: "Turn unclear requirements into a reviewed, approved shared spec"

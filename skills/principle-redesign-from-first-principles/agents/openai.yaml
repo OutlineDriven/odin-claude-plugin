@@ -1,0 +1,3 @@
+interface:
+  display_name: "Principle Redesign From First Principles"
+  short_description: "Integrate requirements by propagating structural edits"

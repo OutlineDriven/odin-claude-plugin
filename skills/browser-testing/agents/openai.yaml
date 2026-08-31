@@ -1,3 +1,3 @@
 interface:
-  display_name: "Browser Testing with DevTools"
-  short_description: "Test and debug browser UI in Chrome DevTools"
+  display_name: "Browser Testing"
+  short_description: "Verify browser UI with DevTools console and network evidence."

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Update Todos"
+  short_description: "Re-derive the task list from current reality"

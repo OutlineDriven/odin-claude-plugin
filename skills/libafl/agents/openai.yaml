@@ -1,0 +1,3 @@
+interface:
+  display_name: "Custom libAFL Engine"
+  short_description: "Compose a custom LibAFL fuzzing engine from modular components"

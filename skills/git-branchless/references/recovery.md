@@ -1,4 +1,4 @@
-# Recovery, Undo, and Safety Semantics
+# Recovery, undo, and safety semantics
 
 The recovery story is what makes branchless safe to use aggressively. Most
 "history mistakes" reachable via plain Git are reversible here — provided
@@ -14,7 +14,7 @@ Wiki source of truth: <https://github.com/arxanas/git-branchless/wiki>
 
 Branchless tracks every reference-changing operation in a per-repository
 event log stored under `.git/branchless/`. Each entry records the entire
-repo state delta, not just a single ref move.
+repo state delta rather than a single ref move.
 
 | Mechanism | What it tracks | Recovery surface |
 |-----------|----------------|------------------|

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Skill Model Benchmark"
+  short_description: "Compare candidate models on a shared task set in a ranked table"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Cost Reduction"
+  short_description: "Guardrail-safe measured cost reduction"

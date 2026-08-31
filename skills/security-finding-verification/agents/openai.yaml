@@ -1,0 +1,3 @@
+interface:
+  display_name: "Security Finding Verification"
+  short_description: "Determine if a security finding is a true/false positive"

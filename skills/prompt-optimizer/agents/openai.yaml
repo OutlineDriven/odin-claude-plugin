@@ -1,0 +1,3 @@
+interface:
+  display_name: "Prompt Optimizer"
+  short_description: "Improve prompts with holdout validation and success criteria"

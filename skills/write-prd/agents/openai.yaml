@@ -1,0 +1,3 @@
+interface:
+  display_name: "Write PRD"
+  short_description: "Write a structured PRD covering scope, solution, and risks"

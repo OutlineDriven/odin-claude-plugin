@@ -1,0 +1,3 @@
+interface:
+  display_name: "Dataflow Diagram"
+  short_description: "Typed dataflow JSON spec and self-contained HTML diagram."

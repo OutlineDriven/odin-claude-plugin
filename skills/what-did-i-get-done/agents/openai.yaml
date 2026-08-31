@@ -1,0 +1,3 @@
+interface:
+  display_name: "What Did I Get Done"
+  short_description: "Dated commit summary within a named git range"

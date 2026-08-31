@@ -1,4 +1,4 @@
-# IDE and Editor Patterns
+# IDE and editor patterns
 
 Paste this block verbatim into the `# === IDE / EDITOR ===` section of the composed `.gitignore`.
 These patterns cover IDE-specific runtime state not already handled by gitignore.io templates.

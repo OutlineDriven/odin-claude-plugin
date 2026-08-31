@@ -1,0 +1,3 @@
+interface:
+  display_name: "Prohibit Bad Habits"
+  short_description: "Document patterns the agent should never repeat"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Diagnosing Bugs"
+  short_description: "Reproduce, isolate, fix, and prove a defect's root cause."

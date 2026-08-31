@@ -1,0 +1,3 @@
+interface:
+  display_name: "Dependency PR Queue Triage"
+  short_description: "Evidence-backed dependency pull-request queue disposition"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Document Collaboration"
+  short_description: "Publishes, reads, comments on, and edits Proof documents"

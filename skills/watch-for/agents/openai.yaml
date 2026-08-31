@@ -1,0 +1,3 @@
+interface:
+  display_name: "Watch For"
+  short_description: "Emit anomaly judgments on a watched surface"

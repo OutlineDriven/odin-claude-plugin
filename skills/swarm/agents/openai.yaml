@@ -1,0 +1,3 @@
+interface:
+  display_name: "Isolated Parallel Swarm"
+  short_description: "Run partitioned parallel coverage or races across isolated"

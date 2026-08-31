@@ -1,3 +1,3 @@
 interface:
-  display_name: "Shipping and Launch"
-  short_description: "Ship releases with safe launch safeguards"
+  display_name: "Staged Production Deployment"
+  short_description: "Safeguard and execute a staged production deployment"

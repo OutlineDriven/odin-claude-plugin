@@ -6,7 +6,7 @@ Surface reference for Qt — the most mature cross-platform native UI toolkit.
 
 ## 1. Posture
 
-Qt is the most mature cross-platform native UI toolkit, with a generation of production deployments behind it. QML plus Quick Controls 2 is the recommended target for new code; Widgets remains supported for legacy and rich-desktop apps where the immediate-mode QML retained-tree shape is the wrong fit. Do not fight Qt's idioms — embrace QML, embrace property bindings, embrace the singleton-as-theme-provider pattern. Bypassing the binding graph is the single most common source of Qt-specific slop.
+Qt is the most mature cross-platform native UI toolkit, with a generation of production deployments behind it. QML plus Quick Controls 2 is the recommended target for new code; Widgets remains supported for legacy and rich-desktop apps where the immediate-mode QML retained-tree shape is the wrong fit. Do not fight Qt's idioms — use QML, property bindings, and the singleton-as-theme-provider pattern. Bypassing the binding graph is the single most common source of Qt-specific slop.
 
 ## 2. Qt versions
 

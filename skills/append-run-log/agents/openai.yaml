@@ -1,0 +1,3 @@
+interface:
+  display_name: "Append Run Log"
+  short_description: "Append one durable JSONL run-log entry with retention pruning."

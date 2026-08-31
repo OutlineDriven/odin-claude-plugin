@@ -1,0 +1,3 @@
+interface:
+  display_name: "New Branch And PR"
+  short_description: "Create a focused branch and open its PR"

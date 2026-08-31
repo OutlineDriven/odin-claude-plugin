@@ -1,6 +1,6 @@
-# Good and Bad Tests
+# Good and bad tests
 
-## Good Tests
+## Good tests
 
 **Integration-style**: drive the system through real public interfaces, not through mocks of internal parts.
 
@@ -36,7 +36,7 @@ Characteristics of good tests:
 - Describe **what**, not **how**
 - One logical assertion per test
 
-## Bad Tests
+## Bad tests
 
 **Implementation-detail tests**: coupled to internal structure; break under refactors that preserve behavior.
 
@@ -72,7 +72,7 @@ Red flags:
 - Test name describes **how**, not **what**
 - Verifying outcomes through a side channel instead of through the interface
 
-## Tautological Tests
+## Tautological tests
 
 A tautological assertion computes its expected value with the same rule as the implementation, so it cannot reveal a disagreement. Use a known-good literal, worked example, or specification instead.
 

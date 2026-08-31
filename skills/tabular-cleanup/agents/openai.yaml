@@ -1,0 +1,3 @@
+interface:
+  display_name: "Tabular Cleanup"
+  short_description: "Cleaned tabular dataset satisfying an approved contract"

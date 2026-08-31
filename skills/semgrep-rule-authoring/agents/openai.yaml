@@ -1,0 +1,3 @@
+interface:
+  display_name: "Semgrep Rule Authoring"
+  short_description: "One test-first Semgrep rule with a passing annotated test file"

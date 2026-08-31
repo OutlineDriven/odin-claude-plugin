@@ -1,4 +1,4 @@
-# README Structure
+# README structure
 
 Every project should have a README that covers:
 

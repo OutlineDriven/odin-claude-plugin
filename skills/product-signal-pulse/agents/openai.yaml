@@ -1,0 +1,3 @@
+interface:
+  display_name: "Product Signal Pulse"
+  short_description: "Write a 30-40 line product pulse report from configured signals"

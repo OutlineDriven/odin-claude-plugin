@@ -1,0 +1,3 @@
+interface:
+  display_name: "Recoverable Record Guillotine"
+  short_description: "Cut enumerated records and residue under a VCS-recoverable gate"

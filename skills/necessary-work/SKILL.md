@@ -1,47 +1,49 @@
 ---
 name: necessary-work
-description: 'Gate every candidate action against one test: would deleting it leave the requested outcome unmet or unproven? Use when work is about to grow past the ask with an extra check, artifact, abstraction, retry, threshold, or follow-up, when deciding whether the task is already done, or when the user says minimum, only what is needed, or stop when it works. Applies to coding, research, planning, debugging, review, and writing alike.'
+description: 'Use when work is about to grow past the ask, when deciding whether the task is already done, or when the user requests only the minimum necessary work. Produce a bounded contract whose every admitted action is necessary to satisfy or prove the requested outcome, then stop at proof. Don''t use for tasks that require source or remote-system changes.'
 ---
 
-# Necessary Work
+# Necessary work
 
-Do only the work that satisfies and proves the requested outcome.
+## Contract
 
-## Kernel
+| Field | Bound contract |
+|---|---|
+| Trigger | Work is about to grow past the ask, the task may already be done, or the user requests the minimum, only what is needed, or a stop once it works. |
+| Authority | Read and assess available request, environment, policy, and evidence only; do not mutate files, version control, credentials, paid services, publications, deployments, or remote state. |
+| Side effect | Narrow the scope of work by classification only; produce no operational side effect. |
+| Done | The contract is written before work, every admitted action fails the delete test, and classification stops once the minimum proof is identified. |
 
-For every candidate action `c`:
+## Inputs
 
-```
-delete(c) => outcome unmet or unproven ? do_minimum(c) + prove(c) : reject(c)
-```
+Supply the request and the available evidence of its current state. Include any binding environmental limits or authoritative policies that constrain the outcome. Existing measurements are optional; do not create measurements unless the delete test establishes that they are necessary. If the request is ambiguous and the available inputs cannot resolve it, use the smallest interpretation consistent with the stated intent and record that interpretation.
 
-- Define the requested outcome and the minimum proof before acting.
-- Nothing is necessary merely because it is useful, conventional, safer, cleaner, or more thorough.
-- Add no constraint, process, artifact, abstraction, check, or follow-up without a source of necessity.
-- Prefer the smallest sufficient implementation.
-- Once the outcome is proven, stop.
-- If ambiguity cannot be resolved, bind the smallest interpretation consistent with stated intent and report it.
+## Procedure
 
-## Do this
+1. Write the contract before admitting work: state the requested outcome and the minimum evidence that would prove it.
+2. Enumerate only candidate actions that could close a stated outcome or proof gap. Treat no action as automatically necessary because it is useful, conventional, safer, cleaner, or more thorough.
+3. For each candidate `c`, apply the delete test: if deleting `c` would leave the contract unmet or unproven, admit only the smallest reliable form of `c`; otherwise reject it.
+4. Admit a limit, threshold, retry, budget, abstraction, artifact, check, process, or follow-up only when its necessity comes from the request, the environment, authoritative policy, or measured evidence.
+5. Classify the admitted and rejected candidates without executing them or changing any state. Do not widen scope or invent evidence when an input is missing.
+6. Stop as soon as the admitted actions and minimum proof are sufficient for the contract. Do not add speculative follow-up work.
 
-1. Define the contract: the requested outcome plus the minimum evidence that proves it.
-2. Treat every possible piece of work as a candidate, never as automatically necessary.
-3. Admit a candidate only when removing it would leave the contract unmet or unproven.
-4. Execute the smallest reliable action that closes that gap.
-5. Stop the moment the contract is proven.
+## Failure and recovery
+- **Unresolved ambiguity:** bind the smallest interpretation consistent with stated intent, identify the ambiguity in the output, and do not widen the contract.
+- **Missing necessity source:** reject the candidate and name the absent request, environmental limit, authoritative policy, or measured evidence; do not invent support for it.
+- **Insufficient available evidence:** return `blocked` with the exact unproven part of the contract and the missing evidence; do not claim completion or perform a new check under this read-only authority.
+- **Accidental scope admission:** remove any candidate that does not fail the delete test and recompute the minimum set. Because this procedure makes no mutations, rollback is not required.
 
-A source of necessity is one of four: the request, the environment, authoritative policy, or measured evidence. Limits, thresholds, retries, budgets, abstractions, artifacts, and process come from one of those four or they do not come at all.
+A partial classification may be returned only with unresolved items named; it is not a successful result unless the done predicate holds.
 
-## Report
+## Output
+Return a scope decision containing:
 
-- **Outcome** - what was requested, and that it now holds.
-- **Evidence** - what proves it.
-- **Rejected** - candidates the kernel dropped, and any ambiguity left unresolved.
+- **Outcome:** the bounded requested outcome.
+- **Minimum proof:** the evidence required to establish it.
+- **Admitted:** each necessary action and the contract gap that deleting it would leave.
+- **Rejected:** each considered addition that failed the delete test.
+- **Status:** `sufficient`, `already done`, or `blocked`, with any smallest-bound ambiguity stated explicitly.
 
-Speculative follow-up work is not part of the report.
+## Provenance
 
-## Verify
-
-- [ ] The contract was written down before work started: outcome plus minimum proof.
-- [ ] Every admitted action fails the delete test, so removing it would leave the contract unmet or unproven.
-- [ ] Work stopped at the proof, with no useful-but-unrequested additions.
+Project-owned adaptation of `skills/necessary-work/SKILL.md` from the `odin-current` candidate `current:current-c:current:necessary-work`. No source revision or external license identifier was supplied. This version preserves the delete test, the four permitted sources of necessity, smallest-consistent ambiguity binding, and stopping at proof while restructuring the procedure into the ODIN 2.0 contract.

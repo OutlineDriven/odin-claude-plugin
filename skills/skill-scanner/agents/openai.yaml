@@ -1,0 +1,3 @@
+interface:
+  display_name: "Skill Scanner"
+  short_description: "Static security analysis of skills with install recommendation"

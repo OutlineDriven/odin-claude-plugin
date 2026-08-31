@@ -157,7 +157,7 @@ Generic context shape: `{ state, actions, meta }` is the boring-correct triple. 
 
 ## 6. View Transitions
 
-`<ViewTransition>` and `addTransitionType()` are React-side wrappers around the browser View Transitions API. As of this grounding they ship in React's Experimental / Canary channel — they have NOT been promoted to stable in 19.2. Treat them as preview APIs subject to surface changes; the browser primitive is the stable substrate.
+`<ViewTransition>` and `addTransitionType()` are React-side wrappers around the browser View Transitions API. As of this grounding they ship in React's Experimental / Canary channel — they have NOT been promoted to stable in 19.2. Treat them as preview APIs subject to surface changes; the browser primitive is the stable foundation.
 
 `<ViewTransition>` wraps the content that should animate, NOT a sibling of it. The element directly inside the wrapper participates; siblings do not. Common error: putting `<ViewTransition>` next to the changing element instead of around it.
 

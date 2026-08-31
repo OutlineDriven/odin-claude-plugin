@@ -1,0 +1,3 @@
+interface:
+  display_name: "Ruzzy Ruby Fuzzing"
+  short_description: "Fuzz Ruby code and C extensions with sanitizer-guided Ruzzy"

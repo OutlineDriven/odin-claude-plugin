@@ -1,164 +1,57 @@
 ---
 name: deprecate-and-migrate
-description: Use when removing old code, migrating users to a new implementation, or deciding whether to maintain or sunset something.
+description: 'Use when asked to remove old code, migrate users to a replacement, or decide whether to maintain or sunset a system; produces a production-proven replacement, migrated consumers, and removed obsolete VCS-tracked code with rollback evidence recorded. Don''t use for untracked data or changes without a version-control rollback.'
 ---
 
-# Deprecation and Migration
+# Deprecate and migrate
 
-## Overview
+## Contract
 
-Deprecation removes code that no longer earns its cost. Migration moves consumers from the old path to the new one without breaking them.
-
-Building is the easy half. Removal is the half most teams skip. This skill covers removal.
-
-## When to Use
-
-- Replacing an old system, API, or library with a new one
-- Sunsetting a feature that's no longer needed
-- Consolidating duplicate implementations
-- Removing dead code that nobody owns but everybody depends on
-- Planning the lifecycle of a new system (deprecation planning starts at design time)
-- Deciding whether to maintain a legacy system or invest in migration
-
-## Core Principles
-
-### Code Is a Liability
-
-Every line costs maintenance: tests, docs, security patches, dependency updates, and cognitive load on nearby work. Functionality is what users buy; the code is what you pay. When the same functionality fits in less code, less state, or a cleaner interface, retire the old code.
-
-### Hyrum's Law Makes Removal Hard
-
-Past a certain consumer count, every observable behavior gets depended on, including bugs, timing quirks, and undocumented side effects. Deprecation therefore needs active migration rather than just an announcement. A consumer cannot "just switch" while it relies on behavior the replacement does not reproduce.
-
-### Deprecation Planning Starts at Design Time
-
-When building something new, ask how it gets removed in three years. Clean interfaces, feature flags, and a small surface keep a system removable. Leaked implementation details make it permanent.
-
-## The Deprecation Decision
-
-Answer these before deprecating anything:
-
-```
-1. Does this system still provide unique value?
-   → If yes, maintain it. If no, proceed.
-
-2. How many users/consumers depend on it?
-   → Quantify the migration scope.
-
-3. Does a replacement exist?
-   → If no, build the replacement first.
-
-4. What's the migration cost for each consumer?
-   → If trivially automated, do it. If manual and high-effort, weigh against maintenance cost.
-
-5. What's the ongoing maintenance cost of NOT deprecating?
-   → Security risk, engineer time, opportunity cost of complexity.
-```
-
-## Compulsory vs Advisory Deprecation
-
-| Type | When to Use | Mechanism |
-|------|-------------|-----------|
-| **Advisory** | Migration is optional, old system is stable | Warnings, documentation, nudges. Users migrate on their own timeline. |
-| **Compulsory** | Old system has security issues, blocks progress, or maintenance cost is unsustainable | Hard deadline. Old system will be removed by date X. Provide migration tooling. |
-
-**Default to advisory.** Compulsory is justified only when maintenance cost or risk forces the issue, and it obligates you to ship migration tooling, documentation, and support. A deadline alone is not a migration.
-
-## The Migration Process
-
-### Step 1: Build the Replacement
-
-No deprecation without a working alternative. The replacement must:
-
-- Cover all critical use cases of the old system
-- Have documentation and a migration guide
-- Be proven in production, not merely argued to be theoretically better
-
-### Step 2: Announce and Document
-
-```markdown
-## Deprecation Notice: OldService
-
-**Status:** Deprecated as of 2025-03-01
-**Replacement:** NewService (see migration guide below)
-**Removal date:** Advisory; no hard deadline yet
-**Reason:** OldService requires manual scaling and lacks observability.
-            NewService handles both automatically.
-
-### Migration Guide
-1. Swap the old client dependency for the new one — e.g. `old-service` → `new-service`
-   as the import in a TypeScript/JS project, the package path in a Go import, or the
-   module in a Python `import`.
-2. Update configuration (see examples below).
-3. Run the migration verification check shipped with the replacement.
-```
-
-### Step 3: Migrate Incrementally
-
-Migrate consumers one at a time, not all at once. For each consumer:
-
-```
-1. Identify all touchpoints with the deprecated system
-2. Update to use the replacement
-3. Verify behavior matches (tests, integration checks)
-4. Remove references to the old system
-5. Confirm no regressions
-```
-
-**The Churn Rule:** If you own the infrastructure being deprecated, you own migrating its users, or you ship backward-compatible updates that require no migration.
-
-### Step 4: Remove the Old System
-
-Only after all consumers have migrated:
-
-```
-1. Verify zero active usage (metrics, logs, dependency analysis)
-2. Remove the code
-3. Remove associated tests, documentation, and configuration
-4. Remove the deprecation notices
-5. Celebrate — removing code is an achievement
-```
-
-## Migration Patterns
-
-Read `references/migration-patterns.md` when the migration needs a formal cutover strategy rather than a single incremental switch — it covers the Strangler Pattern (phased traffic cutover with a canary), the Adapter Pattern (new implementation behind the old interface, with TypeScript and Python examples), and Feature Flag Migration (cohort-gated toggle, with Go and TypeScript examples). Skip it for a simple one-step swap with no parallel-run phase.
-
-## Zombie Code
-
-Zombie code is code that nobody owns but everybody depends on. It is unmaintained, has no owner, and accumulates security vulnerabilities and compatibility rot. Signs:
-
-- No commits in 6+ months but active consumers exist
-- No assigned maintainer or team
-- Failing tests that nobody fixes
-- Dependencies with known vulnerabilities that nobody updates
-- Documentation that references systems that no longer exist
-
-**Response:** Assign an owner and maintain it properly, or deprecate it with a concrete migration plan. Zombie code does not stay in limbo. It gets investment or it gets removed.
-
-## Common Rationalizations
-
-| Rationalization | Reality |
+| Field | Bound contract |
 |---|---|
-| "It still works, why remove it?" | Working code that nobody maintains accumulates security debt and complexity. The maintenance cost grows silently. |
-| "Someone might need it later" | If it's needed later, rebuild it. Keeping unused code "just in case" costs more than rebuilding. |
-| "The migration is too expensive" | Compare migration cost to two or three years of maintenance cost. Migration is usually cheaper long-term. |
-| "We'll deprecate it after we finish the new system" | Deprecation planning starts at design time. By the time the new system ships, you'll have new priorities. Plan now. |
-| "Users will migrate on their own" | They won't. Provide tooling, documentation, and incentives, or do the migration yourself (the Churn Rule). |
-| "We can maintain both systems indefinitely" | Two systems doing the same job is double the maintenance, testing, documentation, and onboarding cost. |
+| Trigger | Removing old code, migrating users to a replacement, or deciding whether to maintain or sunset a system. |
+| Authority | VCS-reversible-destructive: changes are restricted to VCS-tracked code, config, and docs; the exact changed set is shown before any mutation; version control is the recovery path. |
+| Side effect | Builds or verifies a replacement, updates consumers and docs, and removes obsolete VCS-tracked code/config/docs only after migration evidence clears. |
+| Done | All consumers use the production-proven replacement, old usage is zero, obsolete code/config/docs are removed, and rollback/monitoring evidence is recorded. |
 
-## Red Flags
+## Inputs
 
-- "Soft" deprecation that's been advisory for years with no progress
-- New features added to a deprecated system (invest in the replacement instead)
-- Deprecation without measuring current usage
+- The deprecated system: its VCS-tracked code, tests, config, and docs, and the full set of consumers. Must be supplied.
+- A replacement that is production-proven and covers every critical use case of the old system, or a decision to build one first. Must exist before any removal.
+- Current usage evidence: metrics, logs, and dependency analysis proving active usage. Must be supplied to prove zero usage before removal.
+- Optional: a hard removal deadline (compulsory deprecation) and migration tooling.
 
-## Verification
+## Procedure
 
-After completing a deprecation:
+1. Bound scope. List the deprecated system's VCS-tracked files (code, tests, config, docs) and every consumer. Show this exact set before any mutation; do not mutate untracked targets.
+2. Make the maintain-or-sunset decision. Answer, in order: does the system still provide unique value (if yes, maintain it and stop); how many consumers depend on it; does a production-proven replacement exist (if no, build it first); what is each consumer's migration cost; what is the ongoing maintenance cost of not deprecating. Stop at maintain if the system still provides unique value.
+3. Choose the deprecation pressure. Default to advisory: warnings, documentation, and nudges, with users migrating on their own timeline. Use compulsory (a hard removal deadline plus shipped migration tooling, documentation, and support) only when maintenance cost or security risk forces it. A deadline alone is not a migration.
+4. Verify the replacement is production-proven and covers every critical use case of the old system, with a migration guide containing concrete steps and examples. No deprecation proceeds without a working, production-proven alternative.
+5. Announce. Write a deprecation notice naming status, replacement, removal date, and reason, plus the migration guide.
+6. Migrate consumers one at a time. For each consumer: identify all touchpoints with the old system, update to the replacement, verify behavior matches via tests and integration checks, remove old-system references, and confirm no regressions. For a formal cutover, sequence consumers under one approved rollback boundary; never leave the old and new paths active together after the cutover. The Churn Rule: the owner of deprecated infrastructure owns migrating every consumer in the same cutover; do not shift migration work to consumers or carry a compatibility path.
+7. Prove zero active usage via metrics, logs, and dependency analysis.
+8. Remove the old system. Delete the code, associated tests, documentation, configuration, and the deprecation notices. Commit each removal so version control is the recovery path.
+9. Record rollback and monitoring evidence: the commit range that reverts the removal, and the metric/log watch set that confirms no consumer regressed after removal.
 
-- [ ] Replacement is production-proven and covers all critical use cases
-- [ ] Migration guide exists with concrete steps and examples
-- [ ] All active consumers have been migrated (verified by metrics/logs)
-- [ ] Old code, tests, documentation, and configuration are fully removed
-- [ ] No references to the deprecated system remain in the codebase
-- [ ] Deprecation notices are removed (they served their purpose)
+## Failure and recovery
+- Replacement-not-proven: the replacement is not production-proven or does not cover a critical use case. Stop before removing old code; build or harden the replacement. Old code stays. The blocked result names the missing proof.
+- Consumer-blocked: a consumer cannot migrate because it relies on behavior the replacement does not reproduce (Hyrum's Law). Do not force removal. Either reproduce the behavior in the replacement or keep that consumer on the old path and widen the migration window. The blocked result names the consumer and the unreproduced behavior.
+- Usage-not-zero: metrics, logs, or dependency analysis show active usage. Do not remove; continue migration. Removal is blocked until usage is zero. The blocked result names the remaining usage.
+- Partial-result rule: migrated consumers stay migrated. Do not roll back completed migrations unless a regression is confirmed.
+- Non-mutation rule: never remove old code while any consumer is unmigrated or usage is unverified.
+- Scope-widening: if the task grows past the bounded VCS-tracked set, stop and re-scope rather than mutate untracked targets.
+- The blocked or non-converged result names the unmigrated consumers and the missing usage or replacement evidence; it never claims the done predicate holds.
+
+## Output
+- A deprecation notice and migration guide.
+- A migrated consumer set with per-consumer behavior-verification evidence.
+- Removed obsolete VCS-tracked code, tests, config, and docs, committed and recoverable via version control.
+- A rollback record (the revert commit range) and a monitoring watch set.
+- Terminal classification: migrated-and-removed, or blocked with the named unmigrated consumers and the missing evidence.
+
+## Provenance
+
+- Origin: odin-1.x current skill `skills/deprecate-and-migrate/SKILL.md` (project-owned, no third-party license), merged with addyosmani/agent-skills `skills/deprecation-and-migration/SKILL.md`.
+- Pinned revision: d2c37ef6225dd8726cdd369a8030307f48592d26 (addyosmani/agent-skills).
+- License: MIT — Copyright (c) 2025 Addy Osmani. The copyright notice and MIT permission text are retained in derived distributions.
+- Adaptation: clean-room rewrite to the ODIN 2.0 contract format. Source mechanisms (maintain/sunset decision, replacement proof, incremental consumer migration, obsolete-code removal after zero usage) are preserved; no third-party expression is copied verbatim.

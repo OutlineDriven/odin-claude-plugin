@@ -1,4 +1,4 @@
-# Document Review Output Template
+# Document review output template
 
 Use this **exact format** when presenting synthesized review findings in Interactive mode. Findings are grouped by severity, not by reviewer.
 
@@ -102,7 +102,7 @@ Chains: 1 root with 2 dependents
 Restated: 2 (residual/deferred items suppressed as duplicates of actionable findings)
 ```
 
-## Section Rules
+## Section rules
 
 - **Summary line**: Always present after the reviewer list. Format: "Accepted N recommendations. K items need attention (X errors, Y omissions). Z FYI observations." Omit any zero clause except the FYI clause when zero (it's informative that none surfaced).
 - **Accepted recommendations**: List all findings that were accepted as recommendations (`safe_auto` tier). Include enough detail per recommendation to convey the substance. Omit section if none.
@@ -114,7 +114,7 @@ Restated: 2 (residual/deferred items suppressed as duplicates of actionable find
 - **Coverage**: Always include. All counts are **post-synthesis**. **Findings** must equal Auto + Proposed + Decisions + FYI exactly. **Residual** = count of `residual_risks` from this persona's raw output. The `Auto` column counts `safe_auto` findings at anchor `100`, `Proposed` counts `gated_auto` findings at anchor `75` or `100`, `Decisions` counts `manual` findings at anchor `75` or `100`, and `FYI` counts findings at anchor `50` regardless of `autofix_class`. Findings at anchors `0` or `25` were dropped by synthesis and do not appear in any column.
 - **Coverage footnote lines** (optional, appear below the table when non-zero): `Dropped: N (anchors 0/25 suppressed)` when synthesis 3.2 dropped any findings. `Chains: N root(s) with M dependents` when premise-dependency chains exist. `Restated: N (residual/deferred items suppressed as duplicates of actionable findings)` when synthesis 3.9 suppressed any restatements. Order: `Dropped:`, then `Chains:`, then `Restated:`, each on its own line. Omit any footnote whose count is zero.
 
-## Chain-Rendering Rules
+## Chain-rendering rules
 
 Premise-dependency chains from synthesis step 3.5c annotate roots and dependents.
 

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Xcode Project Sync"
+  short_description: "Regenerate the Xcode project from project.yml after edits."

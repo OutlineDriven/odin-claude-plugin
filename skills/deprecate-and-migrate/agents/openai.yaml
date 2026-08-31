@@ -1,3 +1,3 @@
 interface:
-  display_name: "Deprecation and Migration"
-  short_description: "Retire old code and migrate users safely"
+  display_name: "Deprecate And Migrate"
+  short_description: "Migrate consumers to a proven replacement, remove obsolete code"

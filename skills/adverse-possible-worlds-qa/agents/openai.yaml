@@ -1,0 +1,3 @@
+interface:
+  display_name: "Adverse Possible Worlds QA"
+  short_description: "Test extreme worlds to surface completeness gaps."

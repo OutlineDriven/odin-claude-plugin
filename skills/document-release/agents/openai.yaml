@@ -1,0 +1,3 @@
+interface:
+  display_name: "Document Release"
+  short_description: "Sync and commit release docs with clobber protection."

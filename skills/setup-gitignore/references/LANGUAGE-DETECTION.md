@@ -1,4 +1,4 @@
-# Language Detection Table
+# Language detection table
 
 Map manifest filenames (found via `fd --max-depth 2 -t f`) to gitignore.io key(s).
 Build the CSV from all keys whose manifests are present.
@@ -22,10 +22,10 @@ Build the CSV from all keys whose manifests are present.
 | `pubspec.yaml` | `flutter,dart` | |
 | `composer.json` | `php,composer` | |
 | `Package.swift` | `swift` | |
-| `nx.json` | (bundled only — no gitignore.io Nx key) | Add `.nx/cache/` manually |
-| `turbo.json` | (bundled only — no gitignore.io Turborepo key) | Add `.turbo/` manually |
-| `WORKSPACE` or `MODULE.bazel` | (bundled only — no gitignore.io Bazel key) | Add `bazel-*` manually |
-| `Makefile` (alone, no other manifest) | (skip — too ambiguous) | |
+| `nx.json` | (bundled only, no gitignore.io Nx key) | Add `.nx/cache/` manually |
+| `turbo.json` | (bundled only, no gitignore.io Turborepo key) | Add `.turbo/` manually |
+| `WORKSPACE` or `MODULE.bazel` | (bundled only, no gitignore.io Bazel key) | Add `bazel-*` manually |
+| `Makefile` (alone, no other manifest) | (skip, too ambiguous) | |
 
 ## Monorepo tool supplemental patterns
 
@@ -56,8 +56,8 @@ List all supported keys: `curl -sf "https://www.toptal.com/developers/gitignore/
 ## Anti-patterns to warn users about
 
 - `dist/` and `build/` without a leading `/` can hide committed scripts in subdirectories. Prefer `/dist/` anchored to repo root.
-- `bin/` is too broad — shell scripts in `bin/` are commonly committed.
-- Negation (`!build/important.sh`) does not work when the parent dir is ignored — restructure instead.
+- `bin/` is too broad: shell scripts in `bin/` are commonly committed.
+- Negation (`!build/important.sh`) does not work when the parent dir is ignored; restructure instead.
 - **Already-tracked files**: `.gitignore` updates do not un-track committed files. Run `git rm --cached <path>` first.
 
 ## Notes

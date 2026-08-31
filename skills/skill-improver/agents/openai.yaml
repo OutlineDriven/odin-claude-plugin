@@ -1,0 +1,3 @@
+interface:
+  display_name: "Skill Improver"
+  short_description: "Iteratively review and fix a skill until no critical findings"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Plain Language Restatement"
+  short_description: "Restate the last response in plain language without jargon"

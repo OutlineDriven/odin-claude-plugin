@@ -1,0 +1,3 @@
+interface:
+  display_name: "LLMs Visibility"
+  short_description: "Add llms.txt and LLM-readability headers to any web project"

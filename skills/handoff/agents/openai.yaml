@@ -1,3 +1,3 @@
 interface:
-  display_name: "Handoff"
-  short_description: "Pack the session into a resumable handoff"
+  display_name: "History Handoff"
+  short_description: "Package live work into a bounded resume brief for a new agent."

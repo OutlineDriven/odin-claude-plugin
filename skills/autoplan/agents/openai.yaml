@@ -1,0 +1,3 @@
+interface:
+  display_name: "Autoplan"
+  short_description: "Four review phases, aggregated tasks, human approval gate."

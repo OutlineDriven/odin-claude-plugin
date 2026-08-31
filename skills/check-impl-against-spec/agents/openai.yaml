@@ -1,0 +1,3 @@
+interface:
+  display_name: "Check Impl Against Spec"
+  short_description: "Fold material spec-drift findings into review.json"

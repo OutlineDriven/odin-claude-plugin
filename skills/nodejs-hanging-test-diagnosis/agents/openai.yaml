@@ -1,0 +1,3 @@
+interface:
+  display_name: "Nodejs Hanging Test Diagnosis"
+  short_description: "Diagnose and fix Node.js test hangs"

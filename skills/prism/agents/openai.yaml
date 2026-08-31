@@ -1,3 +1,3 @@
 interface:
-  display_name: "Prism"
-  short_description: "Split an artifact across lenses"
+  display_name: "Cross-Lens Decision Prism"
+  short_description: "Expose cross-lens agreement and the decisive question"

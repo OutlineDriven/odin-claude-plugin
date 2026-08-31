@@ -1,0 +1,3 @@
+interface:
+  display_name: "Dependency Sweeper"
+  short_description: "Audit and update dependencies on a risk ladder"

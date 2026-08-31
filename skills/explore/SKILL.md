@@ -1,44 +1,48 @@
 ---
 name: explore
-description: Explore the codebase to map structure, symbols, and dependencies. Use when the user says "explore", "find where X is", "how does X work in the code", or "map the codebase".
+description: 'Use when asked to explore the codebase to map structure, symbols, and dependencies. Emits a structured orientation report with architecture, pattern, tooling, dependency, and critical-file sections. Don''t use for tasks that require source or remote-system changes.'
 ---
 
-# Explore command
+# Explore
 
-Read-only codebase orientation. Emit architecture, pattern, tooling, and dependency summaries for a repo-local task.
+## Contract
 
-## When to apply / NOT
+| Field | Bound contract |
+|---|---|
+| Trigger | User says "explore", "find where X is", "how does X work in the code", or "map the codebase" for repo-local orientation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Side effect | Chat-output structured orientation report; may dispatch Explore subagents. No state mutation. |
+| Done | All 8 output sections emitted or applicability stated, scope declared, and dispatch/escalation rules followed. |
 
-**Apply:**
-- Pre-implementation codebase orientation (feature, fix, refactor)
-- File and symbol mapping: "where is X defined", "what uses Y"
-- Architectural surveys: module boundaries, control flow, coupling
-- Dependency tracing: import graphs, transitive deps, config files
+## Inputs
 
-**NOT apply:**
-- External library docs, SDK APIs, or framework behavior; use a doc-retrieval workflow instead
-- User wants a packed repo file as a deliverable artifact
-- Implementation, editing, or committing anything
+- Task text (supplied): the orientation question or concern to map.
+- Repo working tree (supplied by environment): read-only access to the local checkout.
+- Optional: specific files, directories, or concerns used to bound scope before dispatch.
 
-## Process
+## Procedure
 
-1. **Scope**: parse the task. Identify files/dirs/concerns. State scope explicitly before dispatching.
-2. **Dispatch decision**: for multi-file or uncertain tasks, dispatch Explore agent(s) instead of reading directly. Escalation: 1 agent for single-concern known scope; 3 agents for multiple concerns or unknown scope; 5 agents for cross-module or architectural survey. Auto-skip (direct reads allowed) only for single file under 50 LOC.
-3. **Discovery**: token-efficient flags mandatory:
-   - File discovery: `fd -e <ext> --max-results 50`
-   - Symbol search: `ast-grep run -p 'PATTERN' -l <lang> -C 1` or `git --no-pager grep -n -C 2 'pattern'`
-   - Content preview: `bat -P -p -n -r START:END file` or `Read -offset -limit`
-   - Directory structure: `eza --tree --level=2`
-4. **Synthesis**: emit all Required Output sections.
-5. **Heavy-codebase escape hatch**: scope > 50 files: use a codebase-packing tool if available as an internal analysis aid (not handed to the user as output); search the packed output for targeted extraction.
+1. **Scope.** Parse the task; identify the files, directories, and concerns in scope. State the scope explicitly before any dispatch or read.
+2. **Dispatch decision.** For multi-file or uncertain tasks, dispatch Explore subagents instead of reading directly. Escalation: 1 subagent for a single-concern known scope; 3 subagents for multiple concerns or unknown scope; 5 subagents for a cross-module or architectural survey. Auto-skip (direct reads allowed) only for a single file under 50 LOC. Dispatch first; do not grep or glob a multi-file task before dispatching.
+3. **Discovery with token-efficient flags.** File discovery: `fd -e <ext> --max-results 50`. Symbol search: `ast-grep run -p 'PATTERN' -l <lang> -C 1` or `git --no-pager grep -n -C 2 'pattern'`. Content preview: `bat -P -p -n -r START:END file` or read with offset/limit. Directory structure: `eza --tree --level=2`.
+4. **Synthesis.** Emit all 8 output sections below. Omit a section only when genuinely not applicable and state why.
+5. **Heavy-codebase escape hatch.** When scope exceeds 50 files, use a codebase-packing tool as an internal analysis aid only (never hand packed output to the user); search the packed output for targeted extraction. If no packing tool is available, narrow scope and state the narrowing.
+6. **Tool restrictions.** Allowed (read-only): `eza`, `fd`, `ast-grep` (find-only), `git grep`, `rg`, `bat`, `tokei`, `Read`, `codebase_search`, and any available codebase-analysis or codebase-packing MCP tooling. Banned: `Edit`, `Write`, `mcp__edit__edit_file`, `git commit`, and any state-mutating bash command.
+7. **Recursion guard.** Do not re-enter a router or orchestrator skill from within this leaf skill.
 
-## Required output
+## Failure and recovery
+- **Scope too large (> 50 files).** Apply the heavy-codebase escape hatch; if no packing tool is available, narrow scope, state the narrowing, and proceed with the reduced scope.
+- **Empty or missing source.** For each affected section, state that it is not applicable and why rather than fabricate content.
+- **Dispatch failure.** Return a partial result containing the sections that could be filled; never claim the done predicate holds when required sections are missing.
+- **Banned mutating tool attempted.** Stop immediately, do not perform the mutation, and report the attempt. No rollback is needed because no mutation occurs.
+- **Blocked / non-converged result.** Terminal classification stating which sections could not be filled and the concrete reason.
 
-Emit all 8 sections. Omit a section only when genuinely not applicable; state why.
+## Output
+A structured orientation report with these 8 sections (omit a section only when not applicable, stating why):
 
 ### Task understanding
 
-Brief restatement of the task and identified scope boundaries.
+Brief restatement of the task and the identified scope boundaries.
 
 ### Architecture context
 
@@ -75,8 +79,6 @@ External:
 
 ### Critical files summary
 
-Prioritized list of files most relevant to the task:
-
 | Priority | File | Purpose | Action Hint |
 |----------|------|---------|-------------|
 | P0 | path/to/core.ts | Core logic | Modify |
@@ -93,14 +95,6 @@ Prioritized list of files most relevant to the task:
 1. [First action with specific file reference]
 2. [Second action with specific file reference]
 
-## Tool restrictions
+## Provenance
 
-**Allowed (read-only):** `eza`, `fd`, `ast-grep` (find-only), `git grep`, `rg`, `bat`, `tokei`, `Read`, `codebase_search`, and any available codebase-analysis or codebase-packing MCP tooling
-
-**Banned:** `Edit`, `Write`, `mcp__edit__edit_file`, `git commit`, any state-mutating bash command
-
-## Anti-patterns
-
-- Grepping/globbing before dispatching Explore agents on multi-file tasks; dispatch first
-- Bypassing token-efficient flags; use `bat -P -p -n`, `rg -l`, `fd --max-results 50`
-- Re-entering a router or orchestrator skill from within this leaf skill; forbidden (recursion guard)
+Origin: odin-1.x-current-skill (`skills/explore/SKILL.md`). Revision: none pinned. License: project-owned. Clean-room adaptation preserving the dispatch/escalation tiers, token-efficient discovery flags, 8-section report contract, read-only tool restrictions, heavy-codebase escape hatch, and recursion guard.

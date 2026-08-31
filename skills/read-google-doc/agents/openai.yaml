@@ -1,0 +1,3 @@
+interface:
+  display_name: "Read Google Doc"
+  short_description: "Read a Google Doc and return its title, link, and content"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Agent Environment Setup"
+  short_description: "Set up the agent environment, credentials, and placeholders."

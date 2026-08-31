@@ -1,0 +1,3 @@
+interface:
+  display_name: "Issue Intake"
+  short_description: "Files an approved spec as a GitHub issue with local archive."

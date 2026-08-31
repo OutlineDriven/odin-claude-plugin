@@ -1,6 +1,6 @@
-# Responsive Design and Loading
+# Responsive design and loading
 
-## Responsive Design
+## Responsive design
 
 Build mobile-first, then widen. Express breakpoints with utility classes or plain CSS. Both are framework-neutral:
 
@@ -23,7 +23,7 @@ Build mobile-first, then widen. Express breakpoints with utility classes or plai
 
 Test at these breakpoints: 320px, 768px, 1024px, 1440px.
 
-## Loading and Transitions
+## Loading and transitions
 
 Use skeletons for content, not spinners. The skeleton markup is stack-neutral:
 

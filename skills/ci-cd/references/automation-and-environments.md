@@ -1,6 +1,6 @@
-# Automation and Environments
+# Automation and environments
 
-## Environment Management
+## Environment management
 
 ```
 .env.example       → Committed (template for developers)
@@ -12,7 +12,7 @@ Production secrets  → Stored in deployment platform / vault
 
 CI should never have production secrets. Use separate secrets for CI testing.
 
-## Automation Beyond CI
+## Automation beyond CI
 
 ### Dependabot / Renovate
 
@@ -27,7 +27,7 @@ updates:
     open-pull-requests-limit: 5
 ```
 
-### PR Checks
+### PR checks
 
 - **Required reviews:** At least 1 approval before merge
 - **Required status checks:** CI must pass before merge

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Fail Design"
+  short_description: "Define failure states, recovery, bypasses, and degraded modes."

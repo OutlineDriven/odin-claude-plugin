@@ -1,0 +1,3 @@
+interface:
+  display_name: "Redacted Session Sharing"
+  short_description: "Beam a redacted session payload and return a shareable URL."

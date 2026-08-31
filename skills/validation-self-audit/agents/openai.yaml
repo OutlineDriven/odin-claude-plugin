@@ -1,0 +1,3 @@
+interface:
+  display_name: "Validation Self Audit"
+  short_description: "Expose self-confirming validation and its fix"

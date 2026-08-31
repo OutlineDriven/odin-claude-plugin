@@ -1,0 +1,3 @@
+interface:
+  display_name: "iOS Build Cleanup"
+  short_description: "Delete DerivedData and build artifacts for a clean rebuild."

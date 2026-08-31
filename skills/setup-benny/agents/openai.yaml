@@ -1,0 +1,3 @@
+interface:
+  display_name: "Setup Benny"
+  short_description: "Install the Benny automation pack and prepare triage and repro"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Incremental Implementation"
+  short_description: "Ship multi-file changes as tested, committed vertical slices."

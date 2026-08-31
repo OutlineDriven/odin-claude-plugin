@@ -1,0 +1,43 @@
+---
+name: goal-init
+description: 'Use when a durable effort needs an approved, checkable success predicate before work starts, write the goal, verifier, budget, and run-log scaffold so exactly one approved predicate is ready for an effort to bind. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+---
+
+# Goal init
+
+## Contract
+
+| Field | Bound contract |
+|---|---|
+| Trigger | A durable effort needs an approved, checkable success predicate before work starts. |
+| Authority | Reversible-local: write only the named goal scaffold artifacts under the goal directory. Rollback is deleting that directory before any effort binds. |
+| Side effect | Writes the goal scaffold artifacts (goal statement, budget, run log, verifier); performs no implementation work and binds no effort. |
+| Done | Exactly one approved success predicate exists with its verifier and budget recorded, ready for an effort to bind it. |
+
+## Inputs
+
+A human-supplied goal description stating the desired end state in operational terms. The success predicate extracted from it must be checkable: a verifier can return pass or fail without human judgment of the outcome. Optional: a budget ceiling (time, token, or step limit) and a verifier method. If the human cannot state a checkable predicate, stop.
+
+## Procedure
+
+1. Receive the human-supplied goal description. Bound scope before any mutation: this skill writes only scaffold artifacts, performs no implementation work, and binds no effort.
+2. Validate the goal at its trust boundary. Confirm the human states exactly one checkable success predicate. A predicate is checkable when a verifier can return pass or fail without human judgment of the outcome. If zero or more than one predicate is present, or the predicate is not checkable, stop and report without writing.
+3. Write the goal statement artifact recording the approved success predicate.
+4. Write the verifier artifact recording how the predicate is checked, such that the check returns pass or fail.
+5. Write the budget artifact recording the effort ceiling (time, token, or step limit). If the human supplied none, record an explicit unbounded marker and flag it for human approval.
+6. Write the run-log artifact as an empty log ready for an effort to append execution records.
+7. Confirm the done predicate: exactly one approved success predicate exists with its verifier and budget recorded.
+
+## Failure and recovery
+- Uncheckable predicate: stop, write nothing, report that the predicate cannot be verified.
+- Multiple or zero predicates: stop, write nothing, report the count found.
+- Missing budget: write the scaffold with an explicit unbounded marker and flag it for human approval; do not fail, because the predicate and verifier are still valid.
+- Partial write failure: delete the scaffold directory written so far as rollback and report the blocked state; never leave a partial scaffold that an effort could bind.
+- Blocked or non-converged result: report "blocked: goal scaffold not approved" with the specific reason; no effort is bound.
+
+## Output
+A goal scaffold directory containing four artifacts (goal statement, verifier, budget, run log) with exactly one approved, checkable success predicate recorded, ready for an effort to bind.
+
+## Provenance
+
+Adapted clean-room from cobusgreyling/loop-engineering (revision d03dcb92cc1e0efb59789a2557131c6ad5897ccc, MIT). The source mechanism in tools/goal-init/src/cli.ts writes goal, verifier, budget, and run-log artifacts before any effort binds; this skill restates that mechanism without copying source expression.

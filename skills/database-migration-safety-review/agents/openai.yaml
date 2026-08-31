@@ -1,0 +1,3 @@
+interface:
+  display_name: "Database Migration Safety Review"
+  short_description: "Migration compatibility, destructive-effect, index, and rollback"

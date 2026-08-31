@@ -1,0 +1,3 @@
+interface:
+  display_name: "Rust Security Review"
+  short_description: "Security and correctness audit of Rust code with SARIF output"

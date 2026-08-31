@@ -1,4 +1,4 @@
-# Defer Action — Report Recording
+# Defer action — report recording
 
 This reference defines the Defer action's recording mechanic. When the user chooses Defer on a finding (from the walk-through or from the bulk-preview defer-in-report path), the finding and its rationale are recorded in the completion report's deferred section. The reviewed document is never mutated.
 

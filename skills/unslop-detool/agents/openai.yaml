@@ -1,0 +1,3 @@
+interface:
+  display_name: "Unslop Detool"
+  short_description: "Remove incidental stack nouns from portable artifacts"

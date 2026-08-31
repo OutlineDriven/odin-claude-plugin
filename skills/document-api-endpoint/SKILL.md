@@ -1,0 +1,49 @@
+---
+name: document-api-endpoint
+description: 'Use when asked to document or fix OpenAPI docs for a Sentry endpoint by adding @extend_schema decorators, typing responses with TypedDicts, and validating the generated spec. The endpoint ends with correct schema decorators, TypedDict responses, and docs that pass validation. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+---
+
+# Document & type a Sentry API endpoint
+
+## Contract
+
+| Field | Bound contract |
+|---|---|
+| Trigger | User asks to document, type, or fix OpenAPI docs for a Sentry endpoint, add @extend_schema, or promote an endpoint |
+| Authority | Write only the endpoint class, its response types, and the api-docs files for that one path; all changes are VCS-tracked, revert to recover |
+| Side effect | Updates or adds OpenAPI documentation and response types for one endpoint path |
+| Done | Endpoint has correct @extend_schema, TypedDict responses, and generated docs pass validation |
+
+## Inputs
+
+- The endpoint route and HTTP method(s) to document, plus the endpoint class that serves it.
+- Optional: a request to promote the endpoint from PRIVATE/EXPERIMENTAL to PUBLIC.
+- A live Sentry API token is needed to confirm runtime response shape; supply it or confirm the behavior via the MCP tool that calls the endpoint.
+
+## Procedure
+
+1. Identify the endpoint class serving the route and confirm what it actually returns; the fastest confirmation is the MCP tool that calls it or a live request with a real token.
+2. Add class-level `@extend_schema(tags=[...])` using the closest existing `OPENAPI_TAGS` entry.
+3. Add method-level `@extend_schema(operation_id=..., parameters=[...], responses={...}, examples=...)`; reuse `src/sentry/apidocs/parameters.py` and `examples/*.py`, and set `owner = ApiOwner.<TEAM>`.
+4. Compare the declared types against the runtime response. Hit the live endpoint and diff keys and types against the TypedDict. Correct the declared type to match runtime: counts returned as floats instead of integers, IDs declared `int` emitted as strings, nested types declaring the wrong number of fields.
+5. Reuse the canonical response type instead of re-declaring a copy in a `*_types.py`. Use the `XxxResponseOptional(TypedDict, total=False)` mixin where the main class declares required fields. `T | None` means the key is always present and the value may be null; `NotRequired[T]` means the key is set only under a condition such as an `expand` query param. If no clean canonical type exists (a payload proxied from another service like vroom/profiling), type it `dict[str, Any]` and confirm the shape from the owning service's repo, not the serializer.
+6. Infer the response type from the producing code. Do not use `cast` or `# type: ignore`; refactor the producing code so the type is inferred rather than forced.
+7. If a legacy `api-docs/paths/**/*.json` covers the path, migrate every method on that path in one commit: delete the legacy JSON file and remove its `$ref` from `api-docs/openapi.json`. drf-spectacular's `APPEND_PATHS` does not merge HTTP methods, so once any method on a path uses `@extend_schema`, all legacy methods on that path vanish from the generated spec.
+8. To promote to PUBLIC, run the workflow above, then on the concrete endpoint only (leave siblings PRIVATE): bump `publish_status[<METHOD>]` to `PUBLIC` and set `owner = ApiOwner.<TEAM>`; remove the method from `API_OWNERSHIP_ALLOWLIST_DONT_MODIFY` in the same change as the flip. If the endpoint is redundant or being renamed, delete or deprecate the old version in its own change first, then stack the publish on top. Note in the PR if scopes widen (e.g. `event:read` to `event:{admin,read,write}`); that is documentation-only, regenerated from `permission_classes`. The change reaches the `@sentry/api` SDK / MCP only after `sentry-api-schema` regenerates downstream.
+9. Validate: `make build-api-docs`, `pnpm run validate-api-examples`, `.venv/bin/pytest -q --reuse-db tests/apidocs/endpoints/<area>/test_<name>.py`, and `.venv/bin/prek run -q --files <changed paths>`.
+
+## Failure and recovery
+- Declared type drifts from runtime: correct the declared type to match runtime or refactor the producing code; never paper over the drift with `cast` or `# type: ignore`.
+- Partial legacy migration: if not every method on a path is migrated in one commit, the unmigrated legacy methods vanish from the generated spec. Roll back the path change and migrate all methods together in one commit.
+- Validation failure: do not claim the done predicate holds. Report the failing check and the offending diff; keep the change uncommitted or revert it.
+- Rollback: all changes are VCS-tracked local artifacts; revert the commit or hunks to recover.
+
+## Output
+- The endpoint carries correct class- and method-level `@extend_schema` decorators, TypedDict response types, and (when applicable) PUBLIC status with ownership set.
+- Generated docs pass `make build-api-docs`, `pnpm run validate-api-examples`, the endpoint area pytest, and pre-commit on changed paths.
+- Report the changed paths, the validation results, and whether promotion still depends on downstream `sentry-api-schema` regeneration.
+
+## Provenance
+
+- Origin: getsentry/skills, revision c2f99a5b04b4cd992ec3022d7c2c3e23e938d241, license Apache-2.0.
+- Clean-room adaptation preserving the drf-spectacular endpoint documentation, type-drift correction, legacy migration, and PUBLIC promotion mechanism.

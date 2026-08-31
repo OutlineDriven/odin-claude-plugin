@@ -1,0 +1,3 @@
+interface:
+  display_name: "Instruction Phrasing Microtest"
+  short_description: "Score instruction variants against hand-verified matches"

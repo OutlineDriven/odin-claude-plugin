@@ -1,6 +1,6 @@
-# Inline Documentation
+# Inline documentation
 
-## When to Comment
+## When to comment
 
 Comment the *why*, not the *what*:
 
@@ -18,7 +18,7 @@ if (now - windowStart > WINDOW_SIZE_MS) {
 }
 ```
 
-## When NOT to Comment
+## When not to comment
 
 ```typescript
 // Don't comment self-explanatory code
@@ -33,7 +33,7 @@ function calculateTotal(items: CartItem[]): number {
 // const oldImplementation = () => { ... }  ← Delete it, git has history
 ```
 
-## Document Known Gotchas
+## Document known gotchas
 
 ```typescript
 /**

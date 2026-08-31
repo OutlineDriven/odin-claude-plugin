@@ -1,0 +1,3 @@
+interface:
+  display_name: "Test Suite Acceleration"
+  short_description: "Test-suite acceleration under unchanged behavior and coverage"

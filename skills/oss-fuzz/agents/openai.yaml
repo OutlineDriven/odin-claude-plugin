@@ -1,0 +1,3 @@
+interface:
+  display_name: "OSS Fuzz"
+  short_description: "Enroll a project in OSS-Fuzz; run its harnesses locally"

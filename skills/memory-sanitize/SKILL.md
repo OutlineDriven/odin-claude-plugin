@@ -1,73 +1,45 @@
 ---
 name: memory-sanitize
-description: Use when sanitizing memory for sharing, redacting PII, or scanning for credentials.
+description: 'Use when the user asks to sanitize memory for sharing, redact PII, or scan memory for credentials. Create redacted copies, show their diff, and report any credential-bearing source without changing originals. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
-Redact PII and scan for credentials in memory files: write copies to `/tmp`, never touch originals.
+# Memory sanitize
 
-## Scope
+## Contract
 
-Memory-dir-only. Does not read session histories. Structural audit (orphans, duplicates) belongs in `memory-clean`; run that first if the directory is messy. This skill is a best-effort redactor, not a formal DLP tool: the user is the final reviewer.
+| Field | Bound contract |
+|---|---|
+| Trigger | The user asks to sanitize memory for sharing, redact PII, or scan memory for credentials. |
+| Authority | Read the selected memory directory and write only a new local `/tmp/memory-sanitized-<timestamp>` directory; never modify originals, credentials, version control, or remote state. |
+| Side effect | Create redacted copies of top-level Markdown memory files under the new temporary directory. The rollback path is deletion of that generated directory. |
+| Done | Return the sanitizer report and show the diff from every original to its copy; if any Tier-1 credential remains present in a copy, stop with a critical warning and do not approve sharing. |
 
-## Path resolution
+## Inputs
 
-```sh
-SKILL_SCRIPTS="${MEMORY_SANITIZE_SKILL_SCRIPTS:-$HOME/.claude/claude/skills/memory-sanitize/scripts}"
-MEMORY_DIR=$("$SKILL_SCRIPTS/resolve-paths.sh" memory_dir)
-```
+- Required: the memory directory to sanitize, supplied explicitly or resolved from the current project by `scripts/resolve-paths.sh memory_dir`.
+- Optional: `MEMORY_DIR` may override resolution after path validation.
+- Process only top-level `*.md` files. Do not read session histories or nested Markdown files.
+- Use a fresh destination named `/tmp/memory-sanitized-<timestamp>`; it must not already exist.
 
-`SESSION_HISTORY_GLOB` is not used by this skill. Abort on non-zero exit. Override `MEMORY_SANITIZE_SKILL_SCRIPTS` if installed outside `$HOME/.claude`.
+## Procedure
 
-## Workflow
+1. Resolve the source directory and reject a missing directory, control bytes, or shell metacharacters accepted by neither the resolver nor this contract. Confirm the destination is a fresh path under `/tmp` before any write.
+2. Run `scripts/sanitize-memory.sh <memory-dir> <destination>` while preserving its JSON stdout and exit status. The sanitizer detects Tier-1 OpenAI, GitHub, AWS, Slack, bearer-token, and ECR credential patterns without replacing them; it replaces Tier-2 home paths, email addresses, session IDs, and dates older than 30 days in the copies.
+3. Treat exit `0` as a completed scan, exit `2` as a credential stop, and any other nonzero status as failure. Do not discard the JSON report or generated copies on exit `2`, because they are required to identify credential sources and show the unsafe diff.
+4. Compare each reported source with its reported destination and show the complete diff. Verify that the report accounts for every processed top-level Markdown file and states redaction counts, credential-hit classes, credential-bearing source files, and total redactions.
+5. If any credential hit is reported or visible unredacted in a copy, issue a critical warning, name the affected source and copy, abort approval for sharing, and require manual remediation of the original before a new run. Pattern matching is not proof that unrecognized or obfuscated sensitive data is absent.
+6. Otherwise, report the generated directory and ask the user to review the displayed diff before sharing. Leave originals unchanged; the generated directory is a disposable review artifact, not a replacement memory store.
 
-### 1. Resolve memory dir (above)
+## Failure and recovery
+- **Invalid source or destination:** stop before sanitization. Report the rejected path and reason; choose a new timestamp only for a destination collision.
+- **Nested Markdown:** report that nested files were skipped and classify the result as partial rather than claiming the directory was fully sanitized.
+- **Credential stop (exit 2):** retain the copies and report solely for review, show the diff, emit the critical warning, and return `blocked: credential detected`; never approve or publish the copies.
+- **Sanitizer or diff failure:** return `blocked: sanitization or proof incomplete`, including the command failure and any generated paths. Do not infer missing results or claim the done predicate.
+- Originals require no rollback because they are never written. To roll back local output, delete only the named generated `/tmp/memory-sanitized-<timestamp>` directory after preserving any report the user needs.
 
-### 2. Run sanitizer
+## Output
+Return the destination path, the sanitizer JSON report, the original-to-copy diff for every processed file, warnings for skipped nested files, and one terminal classification: `sanitized for human review`, `blocked: credential detected`, or `blocked: sanitization or proof incomplete`.
 
-```sh
-DST="/tmp/memory-sanitized-$(date +%s)"
-"$SKILL_SCRIPTS/sanitize-memory.sh" "$MEMORY_DIR" "$DST"
-```
+## Provenance
 
-The script writes redacted copies under `$DST/` and emits a JSON report to stdout:
-
-```json
-{
-  "files": [
-    { "source": "feedback_foo.md", "redactions": 3, "credentials": 0 },
-    { "source": "MEMORY.md",       "redactions": 1, "credentials": 1 }
-  ],
-  "total_redactions": 4,
-  "total_credentials": 1
-}
-```
-
-Read `references/REDACTION-RULES.md` for the full pattern table and severity tiers.
-
-### 3. Show diff and credential hits
-
-```sh
-difft "$MEMORY_DIR" "$DST"
-```
-
-For each file with credential hits, show the specific line(s) with the hit pattern highlighted. **If any credential remains in the source originals (zero redaction applied despite a credential pattern match), abort with a critical warning** and recommend the user manually remediate the original before sharing.
-
-### 4. Present to user
-
-Render:
-
-```
-Sanitized N files → $DST
-  N redactions applied (paths, emails, session IDs, dates)
-  N credential hits (see above)
-
-Original files are unchanged. Review the diff before sharing.
-```
-
-Wait for user acknowledgement before exiting.
-
-## Boundary fences
-
-- Read-only on originals. Writes only to `/tmp/memory-sanitized-<ts>/`.
-- Does not update `MEMORY.md` in the originals: sanitized copies are not a replacement.
-- Security limitation: pattern-based scanning misses novel or obfuscated formats.
+Project-owned adaptation of `skills/memory-sanitize/SKILL.md` from the `odin-current` source. No source revision or license identifier was supplied. This version preserves the tiered regex redaction, credential-detection exit status, copy-only boundary, diff review, and credential-abort mechanism while rewriting the procedure for the ODIN 2.0 contract.

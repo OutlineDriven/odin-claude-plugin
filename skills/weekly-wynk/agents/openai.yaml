@@ -1,0 +1,3 @@
+interface:
+  display_name: "Weekly WYNK"
+  short_description: "Compiles weekly reports into a Notion WYNK, Slack post, and PR"

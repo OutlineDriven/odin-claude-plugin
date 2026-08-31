@@ -1,8 +1,8 @@
-# Deployment Strategies
+# Deployment strategies
 
 **Grounded: 2026-08-26**
 
-## Preview Deployments
+## Preview deployments
 
 Every PR gets a preview deployment for manual testing:
 
@@ -17,7 +17,7 @@ deploy-preview:
       run: npx vercel --token=${{ secrets.VERCEL_TOKEN }}
 ```
 
-## Feature Flags
+## Feature flags
 
 Feature flags decouple deployment from release. Deploy incomplete or risky features behind flags so you can:
 
@@ -36,7 +36,7 @@ return renderLegacyCheckout();
 
 **Flag lifecycle:** Create → Enable for testing → Canary → Full rollout → Remove the flag and dead code. Flags that live forever become technical debt. Set a cleanup date when you create them.
 
-## Staged Rollouts
+## Staged rollouts
 
 ```
 PR merged to main
@@ -54,7 +54,7 @@ PR merged to main
     └── Clean → Done
 ```
 
-## Rollback Plan
+## Rollback plan
 
 Every deployment should be reversible:
 

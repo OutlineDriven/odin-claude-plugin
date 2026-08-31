@@ -1,0 +1,3 @@
+interface:
+  display_name: "Maintain Verification Skill"
+  short_description: "Repair drift in a project verification skill directory"

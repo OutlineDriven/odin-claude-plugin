@@ -1,0 +1,3 @@
+interface:
+  display_name: "From Codebase Perspective"
+  short_description: "Report what existing code tolerates or punishes from one seat."

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Training Report"
+  short_description: "Document a training session as .md then .docx"

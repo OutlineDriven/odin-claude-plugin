@@ -1,0 +1,3 @@
+interface:
+  display_name: "Generalize From Cases"
+  short_description: "Recover and bound the rule behind example-driven requests."

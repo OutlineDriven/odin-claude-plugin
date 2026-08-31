@@ -1,0 +1,3 @@
+interface:
+  display_name: "History Sync"
+  short_description: "Sync redacted history batches between peer machines"

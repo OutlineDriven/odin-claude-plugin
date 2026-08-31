@@ -1,0 +1,3 @@
+interface:
+  display_name: "Standalone Reader Verdict"
+  short_description: "Verdict on whether an artifact stands alone for new readers"

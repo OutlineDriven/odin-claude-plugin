@@ -1,0 +1,62 @@
+---
+name: skill-benchmark-gate
+description: 'Use when a skill change is about to ship and must pass a release gate: runs activation, regression, and context-cost benchmarks and blocks shipping on any gate failure. Don''t use for automated or unattended runs; the gate requires explicit human invocation and previews every target before running.'
+disable-model-invocation: true
+---
+
+# Skill benchmark gate
+
+## Contract
+
+| Field | Bound contract |
+|---|---|
+| Trigger | Before shipping any skill change; diagnosing weak skill activation, regressions, or context cost; setting release gates for skill packs. |
+| Authority | Human-only. Requires explicit human invocation. Preview target and consequence before running evaluation loops, writing run-log entries, or opening follow-up issues. |
+| Side effect | Runs evaluation loops; writes run-log entries; opens follow-up issues on GitHub or equivalent tracker. |
+| Done | Gate satisfied before shipping: zero universal 0% criteria with skill enabled, zero negative deltas on critical scenarios, run recorded, issues filed; post-merge rerun scheduled after model updates. |
+
+## Inputs
+
+1. **Skill change** (required): the diff, branch, or description of the skill modification under test.
+2. **Gate criteria** (optional): override defaults for universal-activation thresholds, critical-scenario set, and context-budget ceiling. If omitted, use the standard gate criteria defined in the procedure.
+3. **Benchmark scenarios** (optional): override the default scenario set. If omitted, derive scenarios from the skill's trigger predicate and known activation paths.
+
+## Procedure
+
+1. Identify the skill change under test. Record the skill slug, change description, and commit or branch reference.
+2. Design benchmark scenarios:
+   a. Activation scenarios: test whether the skill fires on each trigger predicate variant with the skill enabled.
+   b. Regression scenarios: test critical paths that the skill must continue to handle correctly after the change.
+   c. Context-cost scenarios: measure token consumption for the skill's context load against the budget ceiling.
+3. Run evaluation loops:
+   a. Execute each scenario with the skill enabled.
+   b. Record activation (fired or missed), output correctness (pass or fail), and context token count per scenario.
+   c. Repeat until all scenarios are executed or the iteration budget is exhausted.
+4. Collect results and apply gate criteria:
+   a. Universal activation: every scenario in the universal set must show activation > 0% with the skill enabled. Any 0% activation is a gate failure.
+   b. Regression deltas: compare each critical scenario's result against the baseline. Any negative delta is a gate failure.
+   c. Context budget: total context tokens must not exceed the ceiling. An overrun is a gate failure.
+5. For each gate failure, open a follow-up issue with the failure class, scenario ID, observed value, and expected threshold.
+6. Write the run-log entry: timestamp, skill slug, change reference, scenario results, gate verdict, and filed issue references.
+7. If the gate passes, schedule a post-merge rerun to execute after the next model update.
+8. Render the gate verdict: PASS or FAIL with the specific failure classes if failed.
+
+## Failure and recovery
+| Failure class | Trigger | Partial-result rule | Blocked result |
+|---|---|---|---|
+| Universal 0% activation | One or more universal scenarios show 0% activation with skill enabled | Record all collected results; mark gate as FAIL | Skill change blocked from shipping. Issue filed per failing scenario. |
+| Negative regression delta | One or more critical scenarios show negative delta vs baseline | Record all collected results; mark gate as FAIL | Skill change blocked from shipping. Issue filed per regressing scenario. |
+| Non-convergent evaluation | Evaluation loop exhausts iteration budget without completing all scenarios | Record partial results collected so far; mark gate as FAIL | Skill change blocked from shipping. Issue filed for incomplete run. |
+| Context budget overrun | Total context tokens exceed ceiling | Record measured cost; mark gate as FAIL | Skill change blocked from shipping. Issue filed with measured vs. allowed cost. |
+
+Do not widen scope to find passing scenarios that offset failures. Do not suppress or reclassify failures. If the gate fails, the skill change does not ship.
+
+## Output
+- **Gate verdict**: PASS or FAIL.
+- **Run log**: written to the designated run-log location with full scenario results.
+- **Filed issues**: one per gate failure, linked in the run log.
+- **Scheduled rerun**: post-merge rerun entry if gate passes.
+
+## Provenance
+
+Origin: mcollina/skills, skills/skill-optimizer/ (SKILL.md, rules/benchmark-loop.md, rules/activation-design.md, rules/context-budget.md, rules/regression-triage.md, rules/release-gates.md, docs/skill-benchmarking.md, docs/skill-benchmark-runs.md). Pinned revision: 856efd268ae85482d882f3d0bed869fd020b5c06. License: MIT. Treatment: MIT notice retained; mechanism adapted from skill-optimizer benchmark-loop, activation-design, context-budget, regression-triage, and release-gates rules into a single human-only gate skill for the odin-agent module.

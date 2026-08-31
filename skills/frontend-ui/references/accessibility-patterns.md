@@ -1,6 +1,6 @@
-# Accessibility Patterns
+# Accessibility patterns
 
-## Keyboard Navigation
+## Keyboard navigation
 
 The native element is focusable and operable in any stack:
 
@@ -39,7 +39,7 @@ When a custom widget is unavoidable, restore the keyboard contract. Add `tabinde
 </script>
 ```
 
-## ARIA Labels
+## ARIA labels
 
 Label every interactive element that lacks visible text. The markup is stack-neutral (React uses `htmlFor` where plain HTML uses `for`):
 
@@ -55,7 +55,7 @@ Label every interactive element that lacks visible text. The markup is stack-neu
 <input aria-label="Search tasks" type="search" />
 ```
 
-## Focus Management
+## Focus management
 
 Move focus when content appears, and trap it inside modal surfaces until they close:
 
@@ -93,7 +93,7 @@ function Dialog({ isOpen, onClose }: DialogProps) {
 </script>
 ```
 
-## Meaningful Empty and Error States
+## Meaningful empty and error states
 
 Never render a blank screen. Give the empty state a purpose and a next action:
 

@@ -1,0 +1,3 @@
+interface:
+  display_name: "TypeScript Type Hardening"
+  short_description: "Eliminate any and harden TypeScript types to strict"

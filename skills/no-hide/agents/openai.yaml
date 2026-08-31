@@ -1,0 +1,3 @@
+interface:
+  display_name: "No Hide"
+  short_description: "Detect clever-concealment patterns that obscure code structure"

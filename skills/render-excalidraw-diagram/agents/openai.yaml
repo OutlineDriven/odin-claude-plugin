@@ -1,0 +1,3 @@
+interface:
+  display_name: "Render Excalidraw Diagram"
+  short_description: "Render .excalidraw files to PNG with visual validation"

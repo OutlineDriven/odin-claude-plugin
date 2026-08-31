@@ -1,0 +1,3 @@
+interface:
+  display_name: "Release Baseline Capture"
+  short_description: "Release-bound benchmark baseline"

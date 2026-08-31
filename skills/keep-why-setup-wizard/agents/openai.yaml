@@ -1,0 +1,3 @@
+interface:
+  display_name: "Keep Why Setup Wizard"
+  short_description: "Configure research knowledge store on first activation"

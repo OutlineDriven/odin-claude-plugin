@@ -1,0 +1,3 @@
+interface:
+  display_name: "Framing Divergence Fanout"
+  short_description: "Fan-out direction reads, classify, cluster, surface divergence"

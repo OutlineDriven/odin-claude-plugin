@@ -1,0 +1,3 @@
+interface:
+  display_name: "Multi Tenant Architecture"
+  short_description: "Scaffold multi-tenant TypeScript SaaS architecture"

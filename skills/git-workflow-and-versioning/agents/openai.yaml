@@ -1,0 +1,3 @@
+interface:
+  display_name: "Git Workflow And Versioning"
+  short_description: "Atomic commits, version tags, and changelog with consent gates."

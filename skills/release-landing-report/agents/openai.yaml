@@ -1,0 +1,3 @@
+interface:
+  display_name: "Release Landing Report"
+  short_description: "Summarize landed changes into a landing report."

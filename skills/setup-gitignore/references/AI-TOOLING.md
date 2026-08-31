@@ -1,4 +1,4 @@
-# AI Tooling Patterns
+# AI tooling patterns
 
 Paste this block verbatim into the `# === AI TOOLING ===` section of the composed `.gitignore`.
 

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Graph Evolution"
+  short_description: "Classifies structural changes between two code-graph snapshots"

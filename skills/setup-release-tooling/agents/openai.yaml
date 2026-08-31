@@ -1,0 +1,3 @@
+interface:
+  display_name: "Setup Release Tooling"
+  short_description: "Install release tooling and create its verified environment"

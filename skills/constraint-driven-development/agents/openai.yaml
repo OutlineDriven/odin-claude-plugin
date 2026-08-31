@@ -1,0 +1,3 @@
+interface:
+  display_name: "Constraint Driven Development"
+  short_description: "Hold non-negotiable constraints on every code change."

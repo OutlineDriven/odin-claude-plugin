@@ -1,3 +1,3 @@
 interface:
   display_name: "Explain Concept"
-  short_description: "Build intuition for a concept and why it exists"
+  short_description: "Explains one concept through a single chosen angle"

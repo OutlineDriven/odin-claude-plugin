@@ -1,0 +1,3 @@
+interface:
+  display_name: "Visual Argument Diagram"
+  short_description: "Creates or repairs an Excalidraw diagram and renders it to PNG"

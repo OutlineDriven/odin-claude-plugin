@@ -1,0 +1,3 @@
+interface:
+  display_name: "Humanizer EN ASD-STE100"
+  short_description: "Rewrite technical prose for ASD-STE100; flag residual issues"

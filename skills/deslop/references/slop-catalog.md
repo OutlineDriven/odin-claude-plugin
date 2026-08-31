@@ -1,12 +1,12 @@
-# Slop Catalog
+# Slop catalog
 
 Use this catalog to classify findings before editing. `HIGH` means deterministic presence; it does **not** always mean auto-removable. Autofix strategies are constrained to `remove-line`, `add-comment`, `remove-block`, `replace-whitespace`, or `flag-only`.
 
 Categories are behavioral, not per-language: one category names a runtime behavior, and its table lists the instance each language surfaces. Read a category top-to-bottom to see how the same defect looks across the stack; read a single row when you already know the language in front of you.
 
-## Category Index
+## Category index
 
-CWE anchors are optional cross-walk metadata for tools that key on them (Semgrep, CodeQL, Sonar, SARIF `taxa`). They do not change certainty or autofix strategy. `—` means no CWE fits; do not invent one. All 19 categories live in one table under [Slop Categories](#slop-categories); filter on the Category column for the rows below.
+CWE anchors are optional cross-walk metadata for tools that key on them (Semgrep, CodeQL, Sonar, SARIF `taxa`). They do not change certainty or autofix strategy. `—` means no CWE fits; do not invent one. All 19 categories live in one table under [Slop categories](#slop-categories); filter on the Category column for the rows below.
 
 | Category | Rows | CWE anchor |
 |---|---:|---|
@@ -30,9 +30,9 @@ CWE anchors are optional cross-walk metadata for tools that key on them (Semgrep
 | Infrastructure without implementation | 1 | — |
 | Residual: external tool signals | 6 | — |
 
-Supporting sections: [Global Exclusions](#global-exclusions) · [Certainty Rules](#certainty-rules) · [Slop Categories](#slop-categories) · [Autofix Strategy Semantics](#autofix-strategy-semantics) · [Report Shape](#report-shape).
+Supporting sections: [Global exclusions](#global-exclusions) · [Certainty rules](#certainty-rules) · [Slop categories](#slop-categories) · [Autofix strategy semantics](#autofix-strategy-semantics) · [Report shape](#report-shape).
 
-## Global Exclusions
+## Global exclusions
 
 Exclude these from automatic fixes: tests, fixtures, mocks, examples, generated code, vendored code, lockfiles, minified bundles, build output, coverage output, and Markdown whitespace.
 
@@ -45,7 +45,7 @@ dist/** build/** target/** coverage/** vendor/** node_modules/** *.min.* *.lock
 *.generated.* *.pb.* openapi/** generated/**
 ```
 
-## Certainty Rules
+## Certainty rules
 
 | Certainty | Rule | Edit policy |
 |---|---|---|
@@ -53,7 +53,7 @@ dist/** build/** target/** coverage/** vendor/** node_modules/** *.min.* *.lock
 | MEDIUM | Requires control-flow, codegraph, ratio, or cross-file reasoning | Report only |
 | LOW | Optional external CLI heuristic or noisy smell | Report only |
 
-## Slop Categories
+## Slop categories
 
 One table across all 19 categories. Read a category's rows top-to-bottom to see how the same defect looks across the stack; filter by Language when you already know what's in front of you. `Any` means the category is keyed to something other than a language (a provider secret shape, a codegraph ratio, an external tool) and applies across the whole file set regardless of source language.
 
@@ -109,7 +109,7 @@ One table across all 19 categories. Read a category's rows top-to-bottom to see 
 | Crash-on-failure shortcut | Go | Panic for recoverable error | MEDIUM | `search pattern="panic\\("` outside init/test/main invariant code | `flag-only` |
 | Crash-on-failure shortcut | Swift | Force unwrap / forced cast | HIGH | `search pattern="try!\\s|\\bas!\\s|\\w\\!\\." paths=["**/*.swift"]` excluding tests; inspect for optional-binding alternative | `flag-only`; requires error-path design |
 | Stub return value | JavaScript / TypeScript | Stub return only | MEDIUM | `ast-grep pat="function $NAME($$$ARGS) { return $VALUE; }"`; the semicolon-less variant `ast-grep pat="function $NAME($$$ARGS) { return $VALUE }"` catches the same shape; check `$VALUE` in `0/null/undefined/true/false/[]/{}/""` and no other significant statements | `flag-only` |
-| Stub return value | C / C++ | Stub return only | MEDIUM | `ast-grep pat="$RET $NAME($$$ARGS) { return $VALUE; }"` — use this form, not the JavaScript `function ...` one: that pattern parses in C++ but binds `function` as the return *type*, so it only matches functions literally returning a type named `function` | `flag-only` |
+| Stub return value | C / C++ | Stub return only | MEDIUM | `ast-grep pat="$RET $NAME($$$ARGS) { return $VALUE; }"`; use this form, not the JavaScript `function ...` one: that pattern parses in C++ but binds `function` as the return *type*, so it only matches functions literally returning a type named `function` | `flag-only` |
 | Stub return value | Python | Stub return only | MEDIUM | inspect `def` body with one significant line returning `None/0/True/False/[]/{}/""` | `flag-only` |
 | Stub return value | Rust | Stub return only | MEDIUM | function body only returns `None/0/true/false/String::new()/Vec::new()/vec![]/()/""/Default::default()` | `flag-only` |
 | Stub return value | Go | Stub return only | MEDIUM | function body only returns `nil/0/""/false/true/[]T{}/map[...]T{}/&T{}` | `flag-only` |
@@ -139,7 +139,7 @@ One table across all 19 categories. Read a category's rows top-to-bottom to see 
 | Comment bloat | Any | Verbosity ratio >2 | MEDIUM | Count comments vs code inside one function/class; ignore license/API docs and generated declarations | `flag-only` |
 | Over-engineering | Any | Over-engineering | MEDIUM | Use codegraph/files: file/export ratio >20, lines/export >500, depth >4 without module boundary | `flag-only` |
 | Unsubstantiated capability claim | Any | Buzzword inflation | MEDIUM | Search claims `production-ready`, `production-grade`, `enterprise-grade`, `secure`, `scalable`, `highly available`; require fewer than 2 concrete evidence hits | `flag-only` |
-| Infrastructure without implementation | Any | Infrastructure without implementation | MEDIUM | Find setup names ending `Client/Connection/Pool/Service/Provider/Manager/Factory/Repository/Gateway/Queue/Cache/Store`; codegraph callers/callees or search shows no use outside setup/export. Where the language has a `new`-expression an AST match is more precise, but it needs **both** forms — the assignment form `ast-grep pat="$NAME = new $TYPE($$$ARGS)"` matches only bare assignments (`client = new Client()`, `this.store = new Store()`) and silently misses the far more common declaration, so pair it with the declaration form for the language: `var`/`let`/`const $NAME = new $TYPE($$$ARGS)` as three separate runs (JavaScript/TypeScript — the keyword is literal, so one run per keyword), and `$TYPE $NAME = new $CTOR($$$ARGS)` (Java, C++, C# — in C# this also covers `var` declarations, since `var` is itself a type identifier). Verified matching in JavaScript/TypeScript, Java, C++, and C#; Go and Python have no `new`-expression, so use codegraph or the name search there | `flag-only` |
+| Infrastructure without implementation | Any | Infrastructure without implementation | MEDIUM | Find setup names ending `Client/Connection/Pool/Service/Provider/Manager/Factory/Repository/Gateway/Queue/Cache/Store`; codegraph callers/callees or search shows no use outside setup/export. Where the language has a `new`-expression an AST match is more precise, but it needs **both** forms: the assignment form `ast-grep pat="$NAME = new $TYPE($$$ARGS)"` matches only bare assignments (`client = new Client()`, `this.store = new Store()`) and silently misses the far more common declaration, so pair it with the declaration form for the language: `var`/`let`/`const $NAME = new $TYPE($$$ARGS)` as three separate runs (JavaScript/TypeScript; the keyword is literal, so one run per keyword), and `$TYPE $NAME = new $CTOR($$$ARGS)` (Java, C++, C#; in C# this also covers `var` declarations, since `var` is itself a type identifier). Verified matching in JavaScript/TypeScript, Java, C++, and C#; Go and Python have no `new`-expression, so use codegraph or the name search there | `flag-only` |
 | Residual: external tool signals | Any | Duplicate code | LOW | Run existing `jscpd` only if present; parse duplicated blocks | `flag-only` |
 | Residual: external tool signals | JavaScript / TypeScript | Dependency cycles | LOW | Run existing `madge` only if present | `flag-only` |
 | Residual: external tool signals | JavaScript / TypeScript | Existing lint findings | LOW | Run repo-local `eslint` script/config only if already present | `flag-only` |
@@ -147,7 +147,7 @@ One table across all 19 categories. Read a category's rows top-to-bottom to see 
 | Residual: external tool signals | Go | Existing lint findings | LOW | Run `golangci-lint` only if repo config/binary exists | `flag-only` |
 | Residual: external tool signals | Any | High complexity | LOW | Existing complexity tool only; threshold >10 cyclomatic flags, >20 severe | `flag-only` |
 
-## Autofix Strategy Semantics
+## Autofix strategy semantics
 
 | Strategy | Allowed change | Never do |
 |---|---|---|
@@ -157,7 +157,7 @@ One table across all 19 categories. Read a category's rows top-to-bottom to see 
 | `remove-block` | Delete isolated commented-out code or unreachable placeholder block proven disconnected from public behavior | Delete live API stubs or exported symbols |
 | `flag-only` | Report exact evidence and recommended human action | Apply an edit |
 
-## Report Shape
+## Report shape
 
 Use this compact shape for handoff:
 

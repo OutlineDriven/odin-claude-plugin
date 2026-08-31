@@ -1,0 +1,3 @@
+interface:
+  display_name: "Skill Benchmark"
+  short_description: "Score agent skills via LLM judges with baseline comparison"

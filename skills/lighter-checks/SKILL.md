@@ -1,25 +1,41 @@
 ---
 name: lighter-checks
-description: 'Size verification to the change so results ship. Use when checking has started to loop, when a check is about to re-run against code nothing touched, when a second tool would prove what the first already proved, or when the user says stop over-checking, just ship, or this is taking too long to verify.'
+description: 'Use when verification is looping, a check would re-run against untouched code, another tool would prove an established fact, or the user asks to stop over-checking. Run the minimum complete verification gate once and deliver on the first green result. Don''t use for tasks that require source or remote-system changes.'
 ---
 
-# Lighter Checks
+# Lighter checks
 
-Verification proves the change; it is not the deliverable. `verification-before-completion` sets the evidence bar for a claim. This skill sets its size.
+## Contract
 
-## Do this
+| Field | Bound contract |
+|---|---|
+| Trigger | Checking has started to loop, a check would re-run against untouched code, a second tool would prove what the first proved, or the user asks to stop over-checking and ship. |
+| Authority | Read commands and emit a delivery decision only; do not mutate files, version control, credentials, paid services, publications, deployments, or remote state. |
+| Side effect | Run scoped typecheck, lint, and test verification once per touched language, trim redundant verification, and report whether delivery may proceed. |
+| Done | One proving action has run per claim, no action was repeated for reassurance, each touched language's complete project gate ran once, and the result is delivered on the first green gate. |
 
-1. Pick the one action that proves this change, run it, and deliver on green.
-2. Scope the run to the surface you changed. A repo-wide suite is the fallback when nothing narrower covers the change, not the opening move.
-3. Run a second tool only when it covers a different failure class. Three tools agreeing on one fact is still one fact.
-4. Treat tool output as the verification. An applied edit is proven by what the run says, not by reading the diff again.
-5. On red, fix and re-run that same check. On green, ship. Green is the stop condition, not a prompt to go looking for a stricter check.
-6. Keep the repo gate whole: the project's own typecheck, lint, and test commands still run once for every language you touched. Cut the repetition, never the gate.
+## Inputs
 
-## Verify
+Required: the claims to prove, the changed files or explicitly bounded changed surface, the languages touched, and the project's typecheck, lint, and test commands for those languages. Existing results may be supplied with their command, scope, and outcome. No optional input may be assumed to establish evidence.
 
-- [ ] One proving action per claim, scoped to the changed surface.
-- [ ] Nothing was re-run purely for reassurance.
-- [ ] No second tool ran to confirm a fact the first already established.
-- [ ] The repo's own typecheck, lint, and test gate ran once per touched language.
-- [ ] Delivery happened on the first green.
+## Procedure
+
+1. Bound verification to the supplied changed surface and touched languages. If either is unknown, stop rather than inspect or verify unrelated scope.
+2. Map each claim to the narrowest action that directly proves it. Reuse a supplied result only when its command and scope cover that claim and the relevant code has not changed since it ran.
+3. Remove any proposed re-run against unchanged code and any second tool that covers the same failure class as an accepted result. Keep a second action only when it proves a distinct claim or failure class.
+4. Run the project's complete typecheck, lint, and test gate once for every touched language. Use the narrowest project-supported scope that still covers the changed surface; use a repository-wide command only when no narrower command covers it.
+5. Treat each command's output as its evidence. Do not re-read a diff, repeat a green command, or add a stricter tool solely for reassurance.
+6. If every required action is green, stop immediately and return the evidence with a deliver decision. Do not perform any further check after the first complete green gate.
+
+## Failure and recovery
+- **Missing boundary or command:** Return `blocked` with the missing changed surface, language, or project command; do not substitute a guessed command or widen scope.
+- **Failed check:** Return `red` with the exact command, scope, and failure output. Make no repair under read-only authority. After a correction is supplied, re-run only the failed action unless the correction changed another action's covered surface.
+- **Unavailable or inconclusive check:** Return `blocked` and identify the unproved claim; partial green results remain evidence only for the claims they directly cover.
+- **Mutation required or observed:** Stop before mutation, or stop immediately if a command reports one, and return `blocked` with the affected target. Never report delivery while any required claim is failed, unavailable, inconclusive, or unproved.
+
+## Output
+Return a chat report listing each claim, its single proving command and scope, its observed result, any omitted redundant checks and why they were redundant, and exactly one terminal classification: `deliver`, `red`, or `blocked`.
+
+## Provenance
+
+Project-owned adaptation of `skills/lighter-checks/SKILL.md` from the ODIN 1.x current skill candidate `current:current-b:current:lighter-checks`. No source revision or license identifier was supplied. The adaptation preserves scoped one-pass verification, distinct-failure-class gating, whole project gates for touched languages, and first-green delivery while making the read-only boundary explicit.

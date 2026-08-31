@@ -1,0 +1,3 @@
+interface:
+  display_name: "User Error Message Verification"
+  short_description: "Reachable, verified user error-message pass"

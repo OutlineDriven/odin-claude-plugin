@@ -1,0 +1,3 @@
+interface:
+  display_name: "Mermaid To Proverif"
+  short_description: "Mermaid to ProVerif cryptographic model compiler"

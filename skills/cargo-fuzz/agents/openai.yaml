@@ -1,0 +1,3 @@
+interface:
+  display_name: "Cargo Fuzz"
+  short_description: "Initialize, run, and triage cargo-fuzz targets in Rust crates"

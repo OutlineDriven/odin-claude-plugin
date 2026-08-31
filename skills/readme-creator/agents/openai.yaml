@@ -1,0 +1,3 @@
+interface:
+  display_name: "Readme Creator"
+  short_description: "Writes a complete README.md with shop-window, sections, badges"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Unslop Dedash"
+  short_description: "Replace em dashes by grammatical role without changing meaning"

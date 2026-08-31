@@ -1,0 +1,3 @@
+interface:
+  display_name: "Parallel Decision Council"
+  short_description: "Parallel second-opinion council returning a decision memo"

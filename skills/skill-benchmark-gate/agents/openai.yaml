@@ -1,0 +1,3 @@
+interface:
+  display_name: "Skill Benchmark Gate"
+  short_description: "Run skill benchmarks, gate shipping on zero regressions"

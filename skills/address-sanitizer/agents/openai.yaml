@@ -1,0 +1,3 @@
+interface:
+  display_name: "Address Sanitizer"
+  short_description: "Instrument native code with ASan and diagnose memory errors."

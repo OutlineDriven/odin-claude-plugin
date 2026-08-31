@@ -1,0 +1,3 @@
+interface:
+  display_name: "Capture Isolated Patch"
+  short_description: "Isolated worktree patch capture; working tree untouched."

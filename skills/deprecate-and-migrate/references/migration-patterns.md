@@ -1,6 +1,6 @@
-# Migration Patterns
+# Migration patterns
 
-## Strangler Pattern
+## Strangler pattern
 
 Run old and new in parallel. Route traffic incrementally from old to new. When the old system handles 0% of traffic, remove it.
 
@@ -12,7 +12,7 @@ Phase 4: New system handles 100%, old system idle
 Phase 5: Remove old system
 ```
 
-## Adapter Pattern
+## Adapter pattern
 
 Wrap the new implementation behind the old interface. Consumers keep calling the old API while the backend moves to the replacement.
 
@@ -37,7 +37,7 @@ class LegacyTaskService(OldTaskAPI):
         return to_old_format(self._next.find_by_id(str(task_id)))
 ```
 
-## Feature Flag Migration
+## Feature flag migration
 
 Flip consumers from old to new one cohort at a time, gated by a flag.
 

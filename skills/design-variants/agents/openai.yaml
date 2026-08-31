@@ -1,0 +1,3 @@
+interface:
+  display_name: "Design Variants"
+  short_description: "Generate distinct design variants into a gallery for selection."

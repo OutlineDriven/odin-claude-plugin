@@ -1,115 +1,41 @@
 ---
 name: ideate
-description: Generate grounded, divergent ideas from the codebase. Use when the user says "ideate", "what should we build", or "any ideas for". To shape one vague idea into a scoped requirements plan instead of generating options, use brainstorm.
-metadata:
-  short-description: Grounded divergent generation → survivors + rejection rationale → docs/ideation/
+description: 'Use when a human asks to brainstorm, asks what to build, requests ideas for a divergent subject, or invokes /ideate. Produce a grounded ideation artifact containing adjudicated survivors and reasons for every rejection. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
-# Ideate: grounded divergent generation behind a reject-by-default gate
+# Ideate
 
-`ideate` turns a vague subject into a bounded set of candidate directions that survived critique, with the rejected candidates kept and explained rather than dropped. Flow: ground the subject in the real codebase, generate many candidates across parallel generators, critique all, then write the survivors plus the rejection rationale for the losers. It writes one surface by default: the operating repo's `docs/ideation/<slug>.md`, markdown; always the canonical surface. The opt-in `format:html` flag additionally renders a human-reading HTML view derived from that markdown (`references/html-rendering.md`); it never replaces the markdown and never changes the default output. Idea selection is reject-by-default. A candidate earns a place by surviving the critique, never by default.
+## Contract
 
-`Op:` of an ideate run is `extend`. A new ideation doc is a load-bearing capability added to the repo's decision record.
+| Field | Bound contract |
+|---|---|
+| Trigger | A human says “let’s brainstorm,” asks “what should we build” or “any ideas for,” or invokes `/ideate` on a divergent subject. |
+| Authority | Read the repository and write only the named local ideation artifact, optionally its HTML view, and the staging index entries for those files. Do not modify source, other documents, existing unrelated staging, remotes, credentials, or external state. |
+| Side effect | Always write `docs/ideation/<slug>.md`; with `format:html`, also write `docs/ideation/<slug>.html` derived from the Markdown. Stage and commit only files written by this run. All delegated exploration, generation, critique, and review is read-only. |
+| Done | The canonical Markdown records grounded survivors and a reason for every rejected candidate; every candidate cites its basis; one Reviewer has adjudicated the complete pool; each output has been read back; only the run’s outputs are included in one staged-scope commit; and the result ends at intent clarification rather than planning or implementation. |
 
-## Auto-invoke
+## Inputs
 
-<auto_invoke>
-<trigger_phrases>
-- "let's brainstorm"
-- "what should we build"
-- "what should we build next"
-- "any ideas for"
-- "ideas for"
-</trigger_phrases>
-Fire automatically on a trigger phrase or on `/ideate`. The reject-by-default critique below still decides which candidates earn a place in the doc. Auto-firing is permission to evaluate behind that gate, not permission to fabricate ideas to look productive. If the subject is unidentifiable, ask one clarifying question (or hand off to `askme`) and stop; do not generate against an unknown subject.
-<manual_override>`/ideate [subject]` runs immediately without waiting for a trigger phrase. The remainder of `$ARGUMENTS` after stripping any leading flag is the subject. `ideate format:html [subject]` additionally renders the opt-in HTML view; the default stays markdown-only.</manual_override>
-</auto_invoke>
+The human must supply an identifiable divergent subject, either as ordinary text or after `/ideate`. An optional leading `format:html` requests a self-contained HTML view in addition to the mandatory Markdown. The operating repository is the grounding corpus. If the root contains `STRATEGY.md`, use it as optional strategic context; its absence is not an error. Derive `<slug>` by lowercasing the subject, replacing each run of non-alphanumeric characters with one hyphen, and trimming leading and trailing hyphens; reject an empty result.
 
-## When to Apply
+## Procedure
 
-- The user opens with a brainstorm phrase, asks what to build, or invokes `/ideate` on a subject.
-- The subject is divergent (many possible directions) and needs candidate generation before any one direction is chosen.
-- A repo exists to ground the scan, or the subject names a concrete in-repo surface.
+1. Parse the optional format flag and subject. Reject unsupported flags, an empty subject, an empty derived slug, or a target that would escape `docs/ideation/`. Before any write, fix the exact output set as the Markdown path and, only when requested, the matching HTML path. If either target already exists, stop rather than overwrite it.
+2. Ground the subject before generating ideas. Read the smallest relevant repository surfaces and `STRATEGY.md` when present. Record architecture, existing patterns, constraints, and strategic context with `file:line` citations. For a single known concern, use one read-only explorer; for multiple or uncertain concerns, use three in parallel; for a cross-module or architectural subject, use five in parallel. If the evidence does not identify the subject, stop with `blocked: subject-unidentified` and request clarification without writing or staging anything.
+3. Build distinct generation assignments by crossing repository-relevant topic axes with different frames such as user value, workflow, architecture, reliability, leverage, and constraint removal. Launch every read-only generator in one parallel dispatch, supplying the same grounding summary but a different axis–frame assignment. Require roughly six to eight concise candidates from each generator and require every candidate to include an idea, rationale, and `file:line` basis; allow `external:<source>` only when that source was actually inspected. Drop ungrounded candidates and record that rejection rather than inventing a citation.
+4. Give the complete raw pool to one read-only critic. Treat every candidate as rejected unless it clears all four tests: its cited basis supports it, it is feasible in this repository, it is not a restatement of another survivor, and it would change a meaningful decision. Require `survive` or `reject` plus a one-line reason for every candidate; no candidate may disappear silently.
+5. Give the grounding summary, full raw pool, and all critic verdicts to one read-only Reviewer. Require the Reviewer to audit completeness, consistency, accuracy, and scope, then return the sole authoritative survivor set and rejection reasons. Apply that adjudication without rescuing a rejection or re-litigating a survivor. If any candidate lacks a final verdict and reason, stop with `non-converged: incomplete-adjudication` before writing.
+6. Assemble `docs/ideation/<slug>.md` with, in order: the subject; grounding context and citations; topic axes and generation frames; survivors, each with rationale and evidence; rejected candidates, each with its rejection reason and evidence; and a next step that asks the human to clarify intent among the survivors. Do not plan or implement a survivor.
+7. Create the parent directory if needed, write only the fixed Markdown target, and read it back. Verify that every adjudicated candidate appears exactly once as surviving or rejected, every survivor has rationale and evidence, every rejection has a reason and evidence, and the next step is intent clarification. A failed check blocks staging.
+8. If `format:html` was supplied, render one self-contained HTML file from the verified Markdown without adding or removing substantive content. Write only the fixed HTML target, read it back, and verify heading, survivor, rejection, rationale, citation, and next-step parity with the Markdown. The Markdown remains canonical.
+9. Show the exact output set, then stage only those paths by explicit path. Never stage all changes and never alter pre-existing unrelated index entries. Inspect the staged paths and stop with `blocked: staging-scope` unless they exactly equal this run’s output set. Create one local commit containing exactly that staged set. Verify the commit path set equals the output set. Do not publish or push. The result remains reversible through a commit revert; before commit creation, unstage only the explicit paths and delete only files newly created by this run.
 
-## When NOT to Apply
+## Failure and recovery
+Input or path validation failure, an unidentifiable subject, unavailable grounding evidence, failed parallel dispatch, incomplete critique, incomplete Reviewer adjudication, write or read-back failure, HTML parity failure, or staging-scope mismatch prevents the done predicate. Before the first write, failure leaves the repository and index unchanged. After a partial write, report the exact files created and do not stage them; recovery is to delete only those newly created files after preserving any requested diagnostic output. After staging failure, unstage only this run’s explicit paths and retain unrelated index entries. If commit creation or commit-path verification fails, stop without publishing or pushing and report the exact local state; revert only the run’s commit when one was created. Return `blocked: <failure-class>` with the failed gate and available evidence. Return `non-converged: incomplete-adjudication` when the full pool cannot receive authoritative verdicts and reasons. Never widen the subject, fabricate evidence, silently drop a candidate, overwrite an existing artifact, or claim completion from a partial result.
 
-- **Subject unidentifiable after one clarifying question**: stop; do not generate against nothing.
+## Output
+On success, return the canonical `docs/ideation/<slug>.md`, optional parity-checked `docs/ideation/<slug>.html`, the exact committed path list and local commit identifier, counts of raw candidates, survivors, and rejections, and an intent-clarification prompt based only on the Reviewer’s survivors. On failure, return the terminal blocked or non-converged classification, the failed gate, any partial files, and the precise rollback action; do not return a success classification.
 
-## Support files: read on demand
+## Provenance
 
-Don't bulk-load at start. Read at the step that needs it; pass the relevant content into any subagent you spawn.
-
-- `references/ideation-method.md`: the generate → critique → survivor-rationale method: the axis × frame divergence matrix, the verbatim generator and critic agent prompts, the survivor/rejection output schema, and the `docs/ideation/<slug>.md` section structure. Read at Phase 2 and Phase 5.
-- `references/divergent-ideation.md`: the fleet dispatch, six frames, per-idea output contract, and post-merge synthesis for Phase 2. Read at Phase 2 before building dispatch prompts.
-- `references/ideation-sections.md`: the section contract for the ideation artifact: metadata, Grounding Context, Topic Axes, Ranked Ideas, Rejection Summary. Read at Phase 5.
-- `references/post-ideation-workflow.md`: adversarial filtering, auto-write, concise summary, and the askme handoff. Read after Phase 2 completes.
-- `references/web-research-cache.md`: session-scoped web research cache for reuse across runs. Read at Phase 1.
-- `references/html-rendering.md`: how to render the canonical markdown to a self-contained HTML view. Read only when a run carries `format:html`.
-
-## Workflow
-
-### Phase 1: Ground the scan
-
-Ungrounded ideation is fabrication. Before generating, ground the subject in the real codebase. Escalate Explore agents by scope: **1** for a single known concern, **3** for multiple concerns or unknown scope, **5** for a cross-module or architectural survey. Auto-skip to direct reads only for a single file under 50 LOC. **Seed the grounding scope with `STRATEGY.md`:** the grounding Explore agent(s) read it (when present at the repo root) as optional upstream grounding so candidates stay on-anchor, and fold its diagnosis/guiding-policy into the returned summary; if absent, note that in one line and proceed. Strategy grounding never blocks. (In an auto-skip run, the orchestrator reads it directly.)
-
-Read `references/web-research-cache.md` to check for cached web research from prior runs in this session before dispatching any web research.
-
-Explore agents are read-only and return architecture / pattern / constraint summaries with `file:line` cites. Use token-efficient discovery only: `fd -e <ext> --max-results 50`, `ast-grep run -p 'PATTERN' -l <lang> -C 1` or `git --no-pager grep -n -C 2 'pattern'`, preview with `bat -P -p -n -r START:END file`, structure with `eza --tree --level=2`. The output is a grounding summary every later candidate must cite against. If the scan cannot identify the subject, route to `askme` and stop.
-
-### Phase 2: Generate candidates (parallel, read-only)
-
-Read `references/ideation-method.md` and `references/divergent-ideation.md`. Dispatch the generator subagents **in one tool-call message**, each seeded with the grounding summary and a **distinct axis × frame assignment** so they diverge instead of converging on the one salient reading. Each generator returns ~6-8 raw candidates, every candidate carrying a basis (`file:line` or `external:<source>`). Generators **write nothing**. Sequential dispatch invalidates the divergence contract.
-
-### Phase 3: Critique all (reject by default)
-
-Dispatch a critic over the full raw candidate pool. **Every candidate is rejected by default**; it survives only by clearing the critique filters: grounded (the cited basis holds), feasible (buildable in this repo), non-duplicate (not a restatement of a peer survivor), load-bearing (the direction would change a decision). The critic tags each candidate `survive | reject` with a one-line reason. A rejection without a reason is invalid output.
-
-### Phase 4: Reviewer-gated merge
-
-Dispatch a Reviewer subagent to audit the critic's verdicts against completeness / consistency / accuracy / scope. The Reviewer's output is the adjudicated set: the **survivors** and the **rejection rationale** for the losers. The Reviewer is the single adjudication authority. The orchestrator applies its set, does not rescue a rejected candidate, and does not re-litigate an accepted one.
-
-### Phase 5: Assemble and write
-
-1. Build `docs/ideation/<slug>.md` per the section structure in `references/ideation-method.md` and `references/ideation-sections.md`: subject + grounding summary, **Survivors** (each: idea, rationale, evidence cite), **Rejected** (each: idea + one-line rejection rationale: losers are explained, never silently dropped), and the next step. **Markdown is the canonical surface, always written.** Slug is the sanitized subject.
-2. `mkdir -p docs/ideation/`, then write `docs/ideation/<slug>.md`.
-3. **Read the file back** to confirm it landed as intended.
-4. **Opt-in HTML view (only if the run carries `format:html`).** Read `references/html-rendering.md` and render `docs/ideation/<slug>.html` as a self-contained view derived from the markdown read back in step 3; read it back and verify content parity with the markdown. Default (no flag) runs skip this step; the output is markdown only.
-5. **Gated auto-commit**: stage ONLY what this run wrote: `git add docs/ideation/<slug>.md` (and `docs/ideation/<slug>.html` when `format:html`). **Never `git add -A`.** Read-back precedes staging.
-
-### Phase 6: Route onward to askme
-
-Hand the survivors to `askme` to clarify intent on the chosen direction(s) before any planning. `ideate` ends here. Do not skip straight to implementation planning. The chosen direction needs intent-clarification first.
-
-## Constitutional Rules (Non-Negotiable)
-
-2. **No ungrounded ideation.** Phase 1 is a precondition, not optional. Every candidate cites a basis (`file:line` or `external:<source>`); a candidate with no basis is dropped before critique.
-3. **Reject by default.** The critique rejects every candidate unless it earns survival, and every loser carries a recorded rejection rationale. Silent drops and optimistic ranking are both rejected. Ranking buries weak ideas; the gate cuts them and says why.
-4. **The Reviewer audit is the single adjudication authority.** The orchestrator applies the Reviewer's survivor set and rejection rationale; it neither rescues rejected candidates nor re-litigates accepted ones.
-5. **Markdown is the canonical surface, always written.** `docs/ideation/<slug>.md` is written every run and is the source of truth the `askme` handoff reads. HTML is opt-in via `format:html` and only ever a view derived from that markdown. It never replaces it and never changes the default output.
-6. **Stage only what this run wrote.** `git add docs/ideation/<slug>.md` (plus `docs/ideation/<slug>.html` when `format:html`), never `git add -A`, and only after reading each file back.
-7. **Generators in one tool-call message.** Parallel dispatch with distinct axis × frame assignments; sequential dispatch is rejected at the validation gate.
-8. **Routes to `askme` for intent-clarification, never auto-implements.** If any rule here conflicts with `~/.claude/claude/system-prompt-baseline.md`, the baseline wins.
-
-## Validation Gates
-
-| Gate | Pass Criteria | Blocking |
-|---|---|---|
-| Subject identified | Phase 1 scan grounded the subject; a basis exists | Yes, else route to `askme` and stop |
-| Strategy grounding | `STRATEGY.md` folded into the grounding scope if present; absence noted in one line; never blocked | No |
-| Grounding dispatched | Explore agent(s) per the 1/3/5 escalation returned summaries | Yes |
-| Single-message generation | All generator subagents launched in one tool-call message | Yes |
-| Every candidate grounded | Each carries a `file:line` or `external:` basis | Yes; ungrounded candidates dropped |
-| Critique applied to all | Every candidate has a `survive \| reject` verdict + reason | Yes |
-| Reviewer audit | Survivor set + rejection rationale audited before write | Yes |
-| Canonical markdown written | `docs/ideation/<slug>.md` written every run, regardless of flag | Yes |
-| HTML view parity | If `format:html`: `<slug>.html` derived from the markdown, single self-contained file, content parity | Yes when `format:html` |
-| Doc read back | Each written file re-read after write to confirm it landed | Yes |
-| Stage scope | Only this run's `docs/ideation/<slug>.{md,html}` staged; no `git add -A` | Yes |
-
-## Commits
-
-One ideation doc per commit (a load-bearing addition to the repo's decision record). Stage only what `ideate` wrote: `git add docs/ideation/<slug>.md` (and `docs/ideation/<slug>.html` when `format:html`), never other dirty files, never `git add -A`. Read each file back before staging. Publish by the operating repo's normal flow.
-
-## Operating surface
-
-`ideate` writes one surface by default: the operating repo's `docs/ideation/<slug>.md` (markdown, the canonical surface). With `format:html` it additionally writes `docs/ideation/<slug>.html`, a view derived from that markdown. Everywhere else it is read-only. Explore, generator, critic, and Reviewer subagents write nothing. Staging is scoped to the file(s) this run wrote; no writes to undefined or doubly-owned locations.
+Project-owned clean adaptation of the ODIN 1.x `ideate` skill at `skills/ideate/SKILL.md`, candidate `current:current-b:current:ideate`. No source revision or license identifier was supplied. This version preserves grounded axis–frame divergence, single-dispatch parallel generation, reject-by-default criticism, single-Reviewer adjudication, survivor and rejection accounting, canonical Markdown with opt-in HTML parity, read-back verification, scoped staging, reversible local recovery, and the stop before planning or implementation without retaining source-specific cross-file dependencies.

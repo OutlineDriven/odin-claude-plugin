@@ -1,0 +1,3 @@
+interface:
+  display_name: "History Usage Audit"
+  short_description: "Audit what recall fed agents: event table with kind, time"

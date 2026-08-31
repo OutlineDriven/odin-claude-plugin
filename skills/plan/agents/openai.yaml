@@ -1,0 +1,3 @@
+interface:
+  display_name: "Knowledge Plan"
+  short_description: "Classify intent, run parallel research, and write a sourced plan"

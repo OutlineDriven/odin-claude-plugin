@@ -1,0 +1,3 @@
+interface:
+  display_name: "Claim Evidence Ledger"
+  short_description: "Contested-claim polarity and provenance ledger"

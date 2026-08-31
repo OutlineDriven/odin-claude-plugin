@@ -1,0 +1,3 @@
+interface:
+  display_name: "Crypto Protocol Diagram"
+  short_description: "Extract crypto protocol flow into Mermaid and ASCII diagrams"

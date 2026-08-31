@@ -1,4 +1,4 @@
-# Design Systems Reference
+# Design systems reference
 
 **Grounded: 2026-08-26.** Re-verify versions and capability tables before relying on them in production. Specs evolve; the citations below are correct as of the snapshot date.
 

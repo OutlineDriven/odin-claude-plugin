@@ -1,83 +1,47 @@
 ---
 name: frontend-ui
-description: Build user-facing interfaces. Use when creating or modifying components, implementing layouts, managing state, or when the output must look hand-crafted rather than AI-generated.
+description: 'Use when asked to build user-facing interfaces when creating or modifying components, implementing layouts and state, or when output must look hand-crafted. The component renders without console errors, is keyboard and screen-reader accessible, responsive across 320-1440px, design-system-compliant, and handles every interaction state. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
-# Frontend UI Engineering
+# Frontend UI engineering
 
-## Overview
+## Contract
 
-Build UIs that read as hand-crafted production work, not machine output. The failure mode is the generic "AI aesthetic": default palettes, oversized cards, template layouts with no tie to the content. Conform to the project's real design system, meet WCAG 2.1 AA, and handle every interaction state.
-
-## When to Use
-
-- Building new UI components or pages
-- Modifying existing user-facing interfaces
-- Implementing responsive layouts
-- Adding interactivity or state management
-- Fixing visual or UX issues
-
-## State Management
-
-The narrowest-to-widest state category table (local, lifted, context, URL, server, global store) and the prop-drilling guard live in `references/state-management.md` — read it when the task adds or changes component state; skip it for pure styling, accessibility, or layout-only changes.
-
-## Design System Adherence
-
-Take the spacing scale, type hierarchy, and semantic color tokens from `references/design-system.md`. Never invent values the project's system does not define.
-
-### Avoid the AI Aesthetic
-
-Machine-generated UI has recognizable tells. Reject each:
-
-| AI Default | Why It Is a Problem | Production Quality |
-|---|---|---|
-| Purple/indigo everything | Models default to visually "safe" palettes, making every app look identical | Use the project's actual color palette |
-| Excessive gradients | Gradients add visual noise and clash with most design systems | Flat or subtle gradients matching the design system |
-| Rounded everything (rounded-2xl) | Maximum rounding signals "friendly" but ignores the hierarchy of corner radii in real designs | Consistent border-radius from the design system |
-| Generic hero sections | Template-driven layout with no connection to the actual content or user need | Content-first layouts |
-| Lorem ipsum-style copy | Placeholder text hides layout problems that real content reveals (length, wrapping, overflow) | Realistic placeholder content |
-| Oversized padding everywhere | Equal generous padding destroys visual hierarchy and wastes screen space | Consistent spacing scale |
-| Stock card grids | Uniform grids are a layout shortcut that ignores information priority and scanning patterns | Purpose-driven layouts |
-| Shadow-heavy design | Layered shadows add depth that competes with content and slows rendering on low-end devices | Subtle or no shadows unless the design system specifies |
-
-## Accessibility (WCAG 2.1 AA)
-
-Every component meets these standards. Use the native element first; reach for ARIA only when no native element fits. Detailed WCAG checks and testing tools are in `references/accessibility-checklist.md`; working code for keyboard navigation, ARIA labels, focus management, and empty/error states is in `references/accessibility-patterns.md`.
-
-## Reference materials
-
-Where these references show component code, they pair a JavaScript component framework (React) with a server-rendered template stack (Django/Python); CSS and HTML examples are framework-neutral. The patterns hold across frameworks. Apply the equivalent in whatever stack the project uses.
-
-- `references/component-architecture.md`: file colocation, composition over configuration, and separating data from presentation.
-- `references/design-system.md`: the spacing scale, type hierarchy, and semantic color tokens.
-- `references/state-management.md`: the narrowest-to-widest state category table and the prop-drilling guard.
-- `references/accessibility-patterns.md`: keyboard navigation, ARIA labels, focus management, and empty/error states.
-- `references/accessibility-checklist.md`: WCAG 2.1 AA checks and the tools that verify them.
-- `references/responsive-and-loading.md`: mobile-first breakpoints, skeletons, and optimistic updates with rollback.
-
-## Common Rationalizations
-
-| Rationalization | Reality |
+| Field | Bound contract |
 |---|---|
-| "Accessibility is a nice-to-have" | It's a legal requirement in many jurisdictions and an engineering quality standard. |
-| "We'll make it responsive later" | Retrofitting responsive design is 3x harder than building it from the start. |
-| "The design isn't final, so I'll skip styling" | Use the design system defaults. Unstyled UI creates a broken first impression for reviewers. |
-| "This is just a prototype" | Prototypes become production code. Build the foundation right. |
-| "The AI aesthetic is fine for now" | It signals low quality. Use the project's actual design system from the start. |
+| Trigger | Creating or modifying UI components, implementing layouts and state, or output must look hand-crafted |
+| Authority | Write only named local UI component and layout files; rollback by reverting the changed files |
+| Side effect | UI components and layouts written against project design tokens and accessibility standards |
+| Done | Component renders without console errors, keyboard and screen-reader accessible, responsive at 320-1440px, design-system-compliant, all states handled |
 
-## Red Flags
+## Inputs
 
-- Components with more than 200 lines (split them)
-- Color as the sole indicator of state (red/green without text or icons)
+- The build or modify request naming the component or layout to produce.
+- The project design system: spacing scale, type hierarchy, and semantic color tokens. Required; if absent, request it before building.
+- The target stack and framework the project uses. Required.
+- The existing component to modify, when the task is a modification. Optional for new builds.
 
-## Verification
+## Procedure
 
-After building UI:
+1. Read the project design system and take spacing, type hierarchy, and semantic color tokens from it. Never invent values the system does not define; if the system is missing, stop and request it.
+2. Choose the narrowest state category that fits, in order: local component state, lifted to parent, context, URL, server, global store. Lift state or use context before prop-drilling past one level.
+3. Use the native HTML element first; reach for ARIA only when no native element fits. Meet WCAG 2.1 AA for every interactive element.
+4. Reject the AI aesthetic with concrete tells: use the project's actual color palette rather than purple/indigo defaults, flat or subtle gradients matching the system, consistent border-radius from the system, content-first layouts over generic hero sections, realistic placeholder content over lorem ipsum, the system's spacing scale over oversized uniform padding, purpose-driven layouts over stock card grids, and subtle or no shadows unless the system specifies them.
+5. Build responsive mobile-first and verify the layout at 320px, 768px, 1024px, and 1440px.
+6. Handle loading, error, and empty states explicitly for every data-driven view.
+7. Keep each component under 200 lines; split larger components by composition. Never use color as the sole indicator of state; pair color with text or icons.
+8. Verify the result: render without console errors, Tab through every interactive element, confirm a screen reader conveys content and structure, and run axe-core or dev-tools accessibility checks with zero warnings.
 
-- [ ] Component renders without console errors
-- [ ] All interactive elements are keyboard accessible (Tab through the page)
-- [ ] Screen reader can convey the page's content and structure
-- [ ] Responsive: works at 320px, 768px, 1024px, 1440px
-- [ ] Loading, error, and empty states all handled
-- [ ] Follows the project's design system (spacing, colors, typography)
-- [ ] No accessibility warnings in dev tools or axe-core
+## Failure and recovery
+- Missing design system: stop and request it; do not invent tokens. No file is written.
+- Component exceeds 200 lines: split it before declaring done.
+- Accessibility check fails (keyboard trap, missing label, axe-core warning): fix the native-element or ARIA issue; never suppress the warning or special-case the input.
+- Console errors or accessibility warnings remain: the done predicate does not hold. Report blocked with the exact failing check and the file; do not claim success.
+- Rollback: revert the changed local files. This skill performs no remote, VCS-force, credential, paid, publish, or deploy mutation.
+
+## Output
+A UI component or layout, in the project's stack, that renders without console errors, is keyboard and screen-reader accessible, is responsive across 320-1440px, conforms to the project design system, and handles loading, error, and empty states.
+
+## Provenance
+
+Origin: odin-1.x current skill at `skills/frontend-ui/SKILL.md`. Revision unpinned. License: project-owned. Adaptation: collapsed two overlapping accessibility references into one inline WCAG 2.1 AA standard and folded the generic-principle references into this self-contained procedure; no third-party expression copied.

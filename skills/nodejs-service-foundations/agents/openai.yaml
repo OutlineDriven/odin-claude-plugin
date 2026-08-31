@@ -1,0 +1,3 @@
+interface:
+  display_name: "Nodejs Service Foundations"
+  short_description: "Scaffold validated env, structured logs, and typed errors"

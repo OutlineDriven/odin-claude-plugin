@@ -1,6 +1,6 @@
-# CLI Reference
+# CLI reference
 
-## Common Commands
+## Common commands
 
 ### `ast-grep run` (default)
 Run one-time search or rewrite.

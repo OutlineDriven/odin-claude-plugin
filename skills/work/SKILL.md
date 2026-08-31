@@ -1,306 +1,198 @@
 ---
 name: work
-description: Execute a plan or concrete work prompt end-to-end. Use when implementing from a plan or spec path, or a clear build request; use /debug for open-ended bugs.
-argument-hint: "[Plan doc path or description of work. Blank to auto use latest plan doc]"
-metadata:
-  short-description: End-to-end implementation from plan or prompt
+description: 'Use when implementing from a plan or spec path, or a clear build request. Drives end-to-end execution from input triage through shipping. Don''t use for open-ended debugging (use debug), exploration, or read-only research.'
+disable-model-invocation: true
 ---
 
-# Work Execution
+# Work execution
 
-Execute a plan or prompt systematically.
+## Contract
 
-This skill adds structured plan handling, execution-engine selection, and a shipping tail to plain implementation.
+| Field | Bound contract |
+|---|---|
+| Trigger | Implementation starts from a plan or spec path or a clear build request (not an open-ended bug). |
+| Authority | Write only named local artifacts; rollback path is git. |
+| Side effect | Implements plan units, lands commits, runs system-wide test checks, and executes the shipping tail (review plus residual-work gate). |
+| Done | All plan units are implemented and verified, the shipping tail has run, and the work is shipped or handed off with residuals named. |
 
-## Input document
+## Inputs
 
-`<input_document>` = `$ARGUMENTS`
+- `$ARGUMENTS`: plan path, spec path, or bare work description. Blank to auto-detect the newest implementation-ready code plan in `docs/plans/`. Non-empty string is treated as a path only when it resolves to an existing readable file.
+- Plan document (path input resolves to file): read metadata before body.
+- Bare prompt (no file resolves): scan work area, assess complexity, route.
 
-## Phase 0: Input triage
+## Procedure
 
-Determine how to proceed based on `<input_document>`.
+### Phase 0: input triage
 
-**Plan document** (input is a path to an existing plan or spec):
+**Plan document** (input resolves to an existing file):
 
-- Read the plan's metadata first: YAML frontmatter for markdown, visible header for HTML.
-- Classify `artifact_readiness` before reading the body.
-  - `requirements-only` → stop. Tell the user this plan states requirements only and needs an implementation-ready plan before execution: work it up in Claude Code's built-in plan mode (approved via `ExitPlanMode`), or enrich the artifact in place, then re-invoke.
-  - `implementation-ready` plus `execution: code` → continue to Phase 1 using the unified-plan reader strategy.
-  - Any other readiness value or non-code/unclassified execution mode → do not auto-execute as code. Route `execution: knowledge-work` to the carve-out; otherwise stop and ask the user for an implementation-ready code plan.
-  - Progress-like values (`active`, `in_progress`, `completed`, `done`) are invalid readiness values. Stop and ask for plan repair.
-- If it carries `execution: knowledge-work`, load `references/non-code-execution.md` and follow that carve-out.
-- Otherwise (legacy plan, field absent, or `execution: code`) → continue to Phase 1.
+1. Read frontmatter (YAML) or visible header (HTML) for `artifact_readiness` before reading the body.
+2. Classify `artifact_readiness`:
+   - `requirements-only` → stop. Tell the user the plan states requirements only and needs an implementation-ready plan before execution. Work it up in plan mode or enrich the artifact, then re-invoke.
+   - `implementation-ready` plus `execution: code` → continue to Phase 1.
+   - Any other readiness value or non-code/unclassified execution mode → stop and ask the user for an implementation-ready code plan. Do not auto-execute as code.
+   - `execution: knowledge-work` → stop and route to the knowledge-work carve-out.
+   - Progress-like values (`active`, `in_progress`, `completed`, `done`) are invalid readiness values. Stop and ask for plan repair.
+3. If `execution: knowledge-work` is present, stop and route to the knowledge-work carve-out.
+4. Otherwise (legacy plan, field absent, or `execution: code`) → continue to Phase 1.
 
-**Blank invocation:** glob `docs/plans/*.md` and `docs/plans/*.html`. Inspect metadata for the newest candidates and auto-select only when the newest matching artifact is `implementation-ready` plus `execution: code` or a legacy code plan. Stop instead of silently executing a requirements-only, knowledge-work, approach-plan, or unclassified artifact. Ask for an explicit path or an implementation-ready plan.
+**Blank invocation:**
 
-**Superseded sibling:** if a requirements-only candidate has a same-basename file in the other format (`<basename>.md` / `<basename>.html`) that is `implementation-ready`, the requirements-only copy is stale, so select the implementation-ready sibling instead of stopping.
+1. Glob `docs/plans/*.md` and `docs/plans/*.html`.
+2. Inspect metadata for the newest candidates and auto-select only when the newest matching artifact is `implementation-ready` plus `execution: code` or a legacy code plan.
+3. Stop instead of silently executing a requirements-only, knowledge-work, approach-plan, or unclassified artifact. Ask for an explicit path or an implementation-ready plan.
+4. If a requirements-only candidate has a same-basename file in the other format (`<basename>.md` / `<basename>.html`) that is `implementation-ready`, the requirements-only copy is stale: select the implementation-ready sibling instead of stopping.
 
-**Bare prompt** (input is a description, not a file path):
+**Bare prompt** (input does not resolve to an existing file):
 
-1. **Scan the work area.**
-   - Identify files likely to change.
-   - Find existing test files for those areas (search for test/spec files that import, reference, or share names with the implementation files). This is Test Discovery, reapplied per file in Phase 2.
-   - Note local patterns and conventions.
+1. Scan the work area: identify files likely to change.
+2. Find existing test files for those areas (Test Discovery).
+3. Note local patterns and conventions.
+4. Assess complexity:
+   - **Trivial** (1–2 files, no behavioral change): proceed to Phase 1 step 2, then implement directly with no task list and no execution loop. Apply Test Discovery if behavior-bearing code is touched.
+   - **Small / Medium** (clear scope, under ~10 files): build a task list from discovery. Proceed to Phase 1 step 2.
+   - **Large** (cross-cutting, 10+ files, touches auth/payments/migrations): inform the user this would benefit from a planning pass in plan mode. Honor their choice. If proceeding, build a task list and continue.
 
-2. **Assess complexity and route.**
+### Phase 1: quick start
 
-   | Complexity | Signals | Action |
-   |---|---|---|
-   | **Trivial** | 1-2 files, no behavioral change (typo, config, rename) | Proceed to Phase 1 step 2 (environment setup), then implement directly, with no task list and no execution loop. Apply Test Discovery if behavior-bearing code is touched. |
-   | **Small / Medium** | Clear scope, under ~10 files | Build a task list from discovery. Proceed to Phase 1 step 2. |
-   | **Large** | Cross-cutting, architectural decisions, 10+ files, touches auth/payments/migrations | Inform the user this would benefit from a planning pass in Claude Code's built-in plan mode to surface edge cases and scope boundaries. Honor their choice. If proceeding, build a task list and continue. |
+**Step 1 — Read plan and clarify** (skip if arriving from Phase 0 with a bare prompt):
 
-## Phase 1: Quick start
+1. Do not read the whole plan first. Build a section map, then read: metadata, `Goal Capsule`, `Verification Contract`, `Definition of Done`, the `Implementation Units` heading list, and only the active U-ID section plus referenced R/F/AE/KTD excerpts.
+2. Scan headings: Markdown via `rg -n '^#{1,3} ' <plan>`; HTML via `<h1>` through `<h3>` with anchor ids.
+3. Match stable section names / unit IDs, ignoring wrapper tags.
+4. Treat the plan as a decision artifact, not an execution script.
+5. Note `Execution note` on each unit (execution posture).
+6. Note `Deferred to Implementation` / `Implementation-Time Unknowns` before starting.
+7. Note `Scope Boundaries` (explicit non-goals); refer back if implementation drifts.
+8. If anything is unclear, ask clarifying questions now. Do not edit the plan body during execution.
 
-1. **Read plan and clarify** _(skip if arriving from Phase 0 with a bare prompt)_
+**Step 2 — Setup environment:**
 
-   - For unified plans, size your read. A short plan (a screen or two) can be read in full. For a long implementation-ready plan, do **not** read the whole document first; build a section map, then read only what the active unit needs: metadata, `Goal Capsule`, `Verification Contract`, `Definition of Done`, the `Implementation Units` heading list, and only the active U-ID section plus referenced R/F/AE/KTD excerpts. Read appendices or unrelated U-IDs only when cited.
-     - Markdown: scan headings with `rg -n '^#{1,3} ' <plan>`.
-     - HTML: scan `<h1>` through `<h3>` elements and anchor ids.
-     - Match stable section names / unit IDs (`Goal Capsule`, `Verification Contract`, `### U<N>.`, …), ignoring wrapper tags.
-   - For legacy plans, read the document completely.
-   - Treat the plan as a decision artifact, not an execution script.
-   - Use sections such as `Implementation Units`, `Work Breakdown`, `Requirements`, `Files`, `Test Scenarios`, or `Verification` as primary source material.
-   - Note `Execution note` on each unit; these carry execution posture (e.g., test-first, characterization-first).
-   - Note `Deferred to Implementation` / `Implementation-Time Unknowns` before starting.
-   - Note `Scope Boundaries`: explicit non-goals. Refer back if implementation drifts.
-   - If anything is unclear or ambiguous, ask clarifying questions now.
-   - Do not edit the plan body during execution. Progress lives in git commits and the task tracker, not the plan. Ignore legacy `- [ ]` / `- [x]` marks or `status:` fields on unit headings.
+```bash
+current_branch=$(git branch --show-current)
+default_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
+if [ -z "$default_branch" ]; then
+  default_branch=$(git rev-parse --verify origin/main >/dev/null 2>&1 && echo "main" || echo "master")
+fi
+```
 
-2. **Setup environment**
+- **On a feature branch** (not default): if branch name is opaque, suggest `git branch -m <meaningful-name>` derived from the plan title. Ask: continue on current branch, create new branch, or use worktree.
+- **On default branch**: offer Option A (new branch), Option B (worktree), or Option C (explicit human permission to commit to default).
 
-   First, check the current branch:
+**Step 3 — Create task list** (skip if Phase 0 routed as Trivial):
 
-   ```bash
-   current_branch=$(git branch --show-current)
-   default_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
+1. Derive tasks from implementation units, dependencies, files, test targets, and verification criteria.
+2. Preserve U-IDs as prefixes in task subjects (e.g., "U3: Add parser coverage").
+3. Carry each unit's `Execution note` into the task when present.
+4. Read each unit's `Patterns to follow` before implementing.
+5. Use each unit's `Verification` field as the primary done signal.
+6. Do not expect the plan to contain exact shell commands or micro-step TDD instructions.
+7. Include dependencies between tasks. Prioritize. Include testing and quality-check tasks.
 
-   if [ -z "$default_branch" ]; then
-     default_branch=$(git rev-parse --verify origin/main >/dev/null 2>&1 && echo "main" || echo "master")
-   fi
-   ```
+**Step 4 — Choose execution engine and strategy:**
 
-   **If already on a feature branch** (not default):
+Probe the harness for engine availability:
 
-   - Check whether the branch name is meaningful (e.g., `feat/login`, `fix/email-validation`). Auto-generated worktree names or opaque names are not meaningful.
-   - If meaningless, suggest `git branch -m <meaningful-name>` derived from the plan title or work description.
-   - Ask: "Continue working on `[current_branch]`, or create a new branch?"
-   - If continuing, proceed to step 3. If creating new, follow Option A or B below.
+| Engine | Availability signal |
+|---|---|
+| Parallel subagents | Harness supports `Agent` with `isolation: "worktree"` and `run_in_background: true` |
+| Serial subagents | Harness supports subagent dispatch |
+| Inline | Fallback when no subagent mechanism available |
 
-   **If on the default branch**, choose:
+Prefer subagents for structured multi-unit plans. Parallelize independent units only after confirming harness isolation capability. Never nest worktrees.
 
-   **Option A: Create a new branch**
-   ```bash
-   git pull origin [default_branch]
-   git checkout -b feature-branch-name
-   ```
-   Use a meaningful name (e.g., `feat/user-authentication`, `fix/email-validation`).
+Dispatch each worker with: the plan path, a bounded unit packet (Goal Capsule, Definition of Done, unit section, Verification Contract entries, referenced R/F/AE/KTD excerpts), the unit's Goal, Files, Approach, Execution note, Patterns, Test scenarios, Verification, and resolved deferred questions. Instruct workers to check Test Scenario Completeness before writing tests.
 
-   **Option B: Use a worktree (recommended for parallel development)**
-   ```
-   /worktree
-   # Detects existing isolation, prefers harness-native worktree tool, else creates from default branch.
-   ```
+Dispatch constraints:
+- Omit `mode` parameter so user permission settings apply. Do not pass `mode: "auto"`.
+- In shared workspace: workers must not `git add`, commit, or run the full test suite concurrently.
+- In worktree-isolated branches: workers may stage and commit inside their own branch; orchestrator owns merging in dependency order and runs authoritative tests.
 
-   **Option C: Continue on the default branch**
-   - Requires explicit user confirmation.
-   - Only proceed after the user explicitly says "yes, commit to [default_branch]".
-   - Never commit directly to the default branch without explicit permission.
+After each serial unit: review the diff against unit scope and `Files:`, run relevant tests, fix before dispatching next, update task list, commit.
 
-3. **Create task list** _(skip if Phase 0 already built one, or if Phase 0 routed as Trivial)_
+### Phase 2: execute
 
-   Use the platform's task tracking tool to break the plan into actionable tasks.
+**Task execution loop** — for each task in priority order:
 
-   - Derive tasks from implementation units, dependencies, files, test targets, and verification criteria.
-   - Preserve U-IDs as prefixes in task subjects (e.g., "U3: Add parser coverage").
-   - Carry each unit's `Execution note` into the task when present.
-   - Read each unit's `Patterns to follow` before implementing.
-   - Use each unit's `Verification` field as the primary "done" signal.
-   - Do not expect the plan to contain implementation code, micro-step TDD instructions, or exact shell commands.
-   - Include dependencies between tasks.
-   - Prioritize based on what must happen first.
-   - Include testing and quality-check tasks.
-   - Keep tasks specific and completable.
-
-4. **Choose execution engine, then strategy**
-
-   For implementation-ready unified code plans, first pick the engine: inline/subagent (default), goal-mode, or dynamic-workflow. Read `references/execution-engines.md` for the host-capability probe, selection table, copyable prompts, and resume rules. An engine choice never changes tail ownership.
-
-   For the inline/subagent engine, **prefer subagents for any structured multi-unit plan**: each worker gets a fresh context window for one unit. **Parallelize independent units whenever safe**; fall back to serial only when parallel isn't safe or the harness cannot isolate concurrent writes. Let the plan's `Dependencies` and `Files` drive batching.
-
-   | Strategy | When to use |
-   |---|---|
-   | **Inline** | Trivial work, user interaction mid-flight, or bare prompts without structured units. |
-   | **Serial subagents** | Default for structured multi-unit plans whose units are dependent, few, or whose parallel-safety is uncertain. |
-   | **Parallel subagents** | Independent units (per the Parallel Safety Check) when the harness can isolate concurrent work. |
-
-   The Parallel Safety Check — file-overlap mapping, contention rules, the
-   concurrency cap, and abort criteria — lives in
-   `references/parallel-dispatch.md`. Read it before dispatching any batch
-   under the Parallel subagents strategy.
-
-   **Isolation is the harness's job, never `/work`'s**. Never run `git worktree add` yourself. Probe what your subagent mechanism provides and pick the parallel path:
-   - **Harness-native isolated workers**: each worker edits an isolated workspace the harness manages (e.g., Claude Code `Agent` with `isolation: "worktree"` + `run_in_background: true`). Parallelize freely, including overlapping-file units, subject to merge-cost judgment. Works even when already inside a worktree, because harness worktrees are peers rather than nested.
-   - **Shared workspace only**: subagents run in your working directory. Parallelize disjoint-file units only; contending units run serial.
-   - **No subagent mechanism:** run inline.
-
-   **Dispatch** uses the harness's subagent/worker mechanism. Give each worker:
-   - The plan path plus a **bounded unit packet**: Goal Capsule, Definition of Done, the unit's section, relevant Verification Contract entries, and any referenced R/F/AE/KTD excerpts. Do not send "read the whole plan."
-   - The unit's Goal, Files, Approach, Execution note, Patterns, Test scenarios, Verification, and any resolved deferred questions.
-   - Instruction to check whether test scenarios cover happy paths, edge cases, error paths, and integration, and supplement gaps before writing tests.
-   - Instruction to report changed file paths in its final message.
-   - **Do not commit in a shared workspace.** In worktree-isolated branches, workers may stage and commit inside their own branch; the orchestrator still owns merging those branches in dependency order and the authoritative test runs.
-
-   **Shared-workspace constraints**: subagents that share your working directory must not `git add`, commit, or run the full test suite concurrently (index corruption + test interference); the orchestrator does all that after the batch. A worker may run a single focused unit test only if it touches no shared state.
-
-   **Permission mode:** Omit the `mode` parameter when dispatching subagents so the user's configured permission settings apply. Do not pass `mode: "auto"`.
-
-   **After each serial unit:** review the diff against the unit's scope and `Files:`, run relevant tests, fix before dispatching the next, update the task list, and commit.
-
-   The post-batch integration procedure — collision detection, per-unit
-   review/test/commit ordering, and worker release — lives in
-   `references/parallel-dispatch.md`, alongside the Parallel Safety Check.
-   Read it once every dispatched worker in a parallel batch has finished.
-
-## Phase 2: Execute
-
-1. **Task execution loop**
-
-   For each task in priority order:
-
-   ```
-   while tasks remain:
-     - Mark task in-progress
-     - Read any referenced files from the plan or Phase 0
-     - If the unit's work is already present and matches the plan's intent, verify it matches, mark complete, and move on
-     - Look for similar patterns in codebase
-     - Find existing test files for implementation files being changed (Test Discovery)
-     - Implement following existing conventions
-     - Add, update, or remove tests to match changes
-     - Run System-Wide Test Check
-     - Run tests after changes
-     - Assess testing coverage
-     - Mark task completed
-     - Evaluate for incremental commit
-   ```
-
-   When a unit carries an `Execution note`, honor it. For test-first units, write the failing test before implementation. For characterization-first units, capture existing behavior before changing it. For units without an `Execution note`, proceed pragmatically.
-
-   Guardrails:
-   - Do not write the test and implementation in the same step when working test-first.
-   - Do not skip verifying that a new test fails before implementing the fix or feature.
-   - Do not over-implement beyond the current behavior slice when working test-first.
-   - Skip test-first discipline for trivial renames, pure configuration, and pure styling work.
-
-   **Test Discovery**: see Phase 0 step 1 — reapply per file being changed.
-
-   **Test Scenario Completeness**: before writing tests for a feature-bearing unit, check whether the plan's `Test scenarios` cover all applicable categories. If a category is missing or vague, supplement from the unit's context:
-
-   | Category | When it applies | How to derive if missing |
-   |---|---|---|
-   | Happy path | Always for feature-bearing units | Read the unit's Goal and Approach for core input/output pairs. |
-   | Edge cases | Unit has meaningful boundaries | Identify boundary values, empty/nil inputs, concurrent access. |
-   | Error/failure paths | Unit has failure modes | Enumerate invalid inputs, permission/auth denials, downstream failures. |
-   | Integration | Unit crosses layers | Identify the cross-layer chain and exercise it without mocks. |
-
-   **System-Wide Test Check**: before marking a task done, pause and ask:
-
-   | Question | What to do |
-   |---|---|
-   | What fires when this runs? | Read actual code for callbacks, middleware, observers, event handlers, and trace two levels out. |
-   | Do my tests exercise the real chain? | Write at least one integration test using real objects through the full chain. No mocks for interacting layers. |
-   | Can failure leave orphaned state? | Trace failure path with real objects. Test cleanup or idempotency. |
-   | What other interfaces expose this? | Grep for the method/behavior in related classes. Add parity now if needed. |
-   | Do error strategies align across layers? | List specific error classes at each layer. Verify rescue list matches what lower layer raises. |
-
+1. Mark task in-progress.
+2. Read referenced files from the plan or Phase 0.
+3. If unit work is already present and matches plan intent, verify match, mark complete, move on.
+4. Look for similar patterns in codebase.
+5. Find existing test files for implementation files being changed (Test Discovery).
+6. Implement following existing conventions.
+7. Honor `Execution note`: for test-first units write the failing test before implementation; for characterization-first units capture existing behavior before changing; for units without an Execution note proceed pragmatically.
+8. Add, update, or remove tests to match changes.
+9. Run System-Wide Test Check before marking done:
+   - What fires when this runs? (trace two levels out from callbacks, middleware, observers, event handlers)
+   - Do tests exercise the real chain? (write at least one integration test using real objects, no mocks for interacting layers)
+   - Can failure leave orphaned state? (trace failure path, test cleanup or idempotency)
+   - What other interfaces expose this? (grep for method/behavior in related classes)
+   - Do error strategies align across layers? (list specific error classes at each layer)
    Skip for leaf-node changes with no callbacks, no state persistence, no parallel interfaces.
+10. Mark task completed.
+11. Evaluate for incremental commit.
 
-2. **Incremental commits**
+**Test Scenario Completeness** — before writing tests for a feature-bearing unit, verify coverage:
 
-   | Commit when... | Don't commit when... |
-   |---|---|
-   | Logical unit complete | Small part of a larger unit |
-   | Tests pass + meaningful progress | Tests failing |
-   | About to switch contexts | Purely scaffolding with no behavior |
-   | About to attempt risky/uncertain changes | Would need a "WIP" message |
+| Category | When | How to derive if missing |
+|---|---|---|
+| Happy path | Always | Unit's Goal and Approach for core input/output pairs |
+| Edge cases | Unit has meaningful boundaries | Boundary values, empty/nil inputs, concurrent access |
+| Error/failure paths | Unit has failure modes | Invalid inputs, permission/auth denials, downstream failures |
+| Integration | Unit crosses layers | Cross-layer chain exercised without mocks |
 
-   Heuristic: "Can I write a commit message that describes a complete, valuable change?"
+**Incremental commits:**
 
-   If the plan has Implementation Units, use them as a starting guide for commit boundaries, but adapt based on what you find. Use each unit's Goal to inform the commit message.
+| Commit when | Do not commit when |
+|---|---|
+| Logical unit complete | Small part of a larger unit |
+| Tests pass + meaningful progress | Tests failing |
+| About to switch contexts | Purely scaffolding with no behavior |
+| About to attempt risky/uncertain changes | Would need a "WIP" message |
 
-   Commit workflow:
-   ```bash
-   # 1. Verify tests pass (project's test command)
-   # 2. Stage only files related to this logical unit
-   git add <files related to this logical unit>
-   # 3. Commit with conventional message
-   git commit -m "feat(scope): description of this unit"
-   ```
+```bash
+git add <files related to this logical unit>
+git commit -m "feat(scope): description of this unit"
+```
+Handle merge conflicts immediately.
 
-   Handle merge conflicts immediately. Incremental commits make conflict resolution easier.
+**Test continuously:** run relevant tests after each behavior-bearing change. Fix failures immediately. Add new tests for new behavior.
 
-3. **Follow existing patterns**
+**Simplify opportunistically:** at phase boundaries or when the diff reaches 30 lines, reread the changed units and remove dead branches, repeated logic, tiny one-use wrappers, and special cases that the general path can absorb. Preserve observable behavior and rerun the changed-path checks. Do not run this pass after every small unit.
 
-   - The plan should reference similar code. Read those files first.
-   - Match naming conventions exactly.
-   - Reuse existing components where possible.
-   - Follow the project's coding standards already in context.
-   - When in doubt, grep for similar implementations.
+**Track progress:** update task tracker as tasks complete. Note blockers using plan IDs (U-IDs, R/F/AE IDs); do not invent IDs the plan does not supply. For long-running work, write progress to `/tmp/odin/work/<run-id>/progress.json` so state survives context compaction.
 
-4. **Test continuously**
+### Phase 3–4: quality check and shipping tail
 
-   - Run relevant tests after each significant change.
-   - Fix failures immediately.
-   - Add new tests for new behavior, update tests for changed behavior, remove tests for deleted behavior.
-   - Unit tests with mocks prove logic in isolation. Integration tests with real objects prove layers work together. If your change touches callbacks, middleware, or error handling, you need both.
+When all Phase 2 tasks are complete:
 
-5. **Simplify as you go**
+1. Run a fresh diff review sized to the change. Check correctness, security boundaries, error paths, concurrency, resource ownership, changed-contract tests, and every affected caller. Skip only for a purely mechanical diff such as formatting, dependency metadata, lint-only output, or generated files.
+2. Keep the review read-only. Record each finding with severity, file and line, failure scenario, and concrete correction; apply fixes only after the finding set is complete. Handle residuals through the Residual Work Gate.
+3. Apply review findings: fix every actionable comment. For contested findings citing a project doc as mandating a change, resolve with evidence. For declined findings, record the reason.
+4. After all findings are resolved or declined: ship the work.
+5. If residuals remain after the review cycle: name each residual explicitly, report it, and yield.
 
-   After completing a cluster of related implementation units (or every 2-3 units), review recently changed files for simplification opportunities: consolidate duplicated patterns, extract shared helpers, improve reuse.
+## Failure and recovery
+| Failure | Rule |
+|---|---|
+| Requirements-only plan | Stop. Request implementation-ready plan. |
+| Invalid readiness value | Stop. Request plan repair. |
+| Non-code/unclassified mode | Stop. Request explicit human decision. |
+| Blank invocation, no implementation-ready plan | Stop. Ask for explicit path. |
+| Large work, user declines planning pass | Proceed with task list and execution. |
+| Harness isolation unavailable for parallel | Fall back to serial subagents or inline. |
+| Contending units in shared workspace | Fall back to serial. |
+| Serial unit review diff out of scope | Fix before next unit. |
+| Review finding contested with doc evidence | Resolve with evidence; record declined finding with reason. |
+| Non-converged after review cycle | Ship what passes. Name residuals explicitly. Yield terminal report. |
 
-   Do not simplify after every single unit; early patterns may diverge intentionally in later units. Wait for a natural phase boundary or when accumulated complexity is visible.
+Partial-result rule: ship what is implemented and verified. Never claim done when tests fail or review findings are unresolved.
 
-   Invoke `/simplify` at phase boundaries when the diff is >=30 lines. If `/simplify` is unavailable, do a brief manual pass.
+## Output
+- Shipped code: all plan units implemented, verified tests pass, commits landed, shipping tail run.
+- Terminal yield with residuals named when work cannot be completed.
 
-6. **Figma Design Sync** (if applicable)
+## Provenance
 
-   For UI work with Figma designs:
-
-   - Implement components following design specs.
-   - Load `references/agents/figma-design-sync.md` and dispatch a generic subagent seeded with that local prompt to compare implementation against the Figma design.
-   - Fix visual differences identified.
-   - Repeat until implementation matches design.
-
-7. **Frontend design guidance** (if applicable)
-
-   For UI tasks without a Figma design, where the implementation touches view, template, component, layout, or page files, creates user-visible routes, or the plan contains explicit UI/frontend/design language:
-
-   - Preserve existing design-system conventions.
-   - Use real UI controls and states.
-   - Keep layouts responsive.
-   - Verify text does not overflow or overlap.
-   - When browser tooling is available, inspect at desktop and mobile widths before final validation. If no browser access is available, do a code-level responsive/layout review and record that browser verification was unavailable.
-
-8. **Track progress**
-
-   - Keep the task list updated as tasks complete.
-   - Note blockers or unexpected discoveries.
-   - Create new tasks if scope expands.
-   - Keep the user informed of major milestones.
-   - Reference U-IDs and stable R-IDs / A/F/AE IDs in blockers, deferred-work notes, task summaries, and final verification, not routine status updates. Use IDs the plan supplies; do not invent ones it does not.
-   - For long-running work, write a scratch progress artifact to `/tmp/odin/work/<run-id>/progress.json` (or equivalent) so state survives context compaction. Never write progress into the plan body.
-
-## Phase 3-4: Quality check and finishing work
-
-When all Phase 2 tasks are complete, load `references/shipping-workflow.md` and run the full shipping tail. Do not skip this.
-
-**Code review path.** Review with `/review`. It self-sizes. Skip dedicated review only for purely mechanical diffs (formatting, dep-bumps, lint-only, generated). `/review` is review-only; apply fixes afterward per `references/review-findings-followup.md`, then handle residuals through the Residual Work Gate in `references/shipping-workflow.md`.
-
-## Behavioral rules
-
-- Ask clarifying questions once at the start; do not re-scope the plan into human-time phases or session subsets.
-- Use the plan as authority; load the references it provides and match existing patterns rather than inventing.
-- Run tests after each behavior-bearing change and fix failures immediately; do not batch testing to the end.
-- Review every non-mechanical diff with `/review`; document the reason when skipping.
-- Mark all tasks complete before finishing; do not leave features 80% done.
-- Track progress in the task tracker, never in the plan body.
+Origin: current-odin-skill-tree. License: project-owned. Adapted from skills/work/SKILL.md (current:current-d:current:work) and skills/executing-plans/SKILL.md (source:source-superpowers:superpowers-013, MIT Jesse Vincent 2025, copied_allowed: true). Clean-room adaptation: procedure and contract restructured per SKILL.md literal contract; execution-engine selection and parallel-dispatch safety-check preserved inline from source.

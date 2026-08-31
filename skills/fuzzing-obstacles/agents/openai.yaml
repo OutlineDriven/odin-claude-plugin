@@ -1,0 +1,3 @@
+interface:
+  display_name: "Fuzzing Obstacles"
+  short_description: "Bypass fuzz-blocking checks behind a fuzz build flag"

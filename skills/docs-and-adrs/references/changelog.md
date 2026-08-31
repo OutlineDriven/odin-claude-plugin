@@ -1,4 +1,4 @@
-# Changelog Maintenance
+# Changelog maintenance
 
 For shipped features:
 

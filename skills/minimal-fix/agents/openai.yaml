@@ -1,0 +1,3 @@
+interface:
+  display_name: "Minimal Fix"
+  short_description: "Apply the smallest correct change that removes the defect's root"

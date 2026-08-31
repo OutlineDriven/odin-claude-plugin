@@ -1,0 +1,53 @@
+---
+name: universal-invariant-baseline
+description: 'Use when a user explicitly invokes it, apply an invariant-first, fail-fast, special-case-eliminating baseline to any implementation, producing a corrected file with all invariant checks passing. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+---
+
+# Universal invariant baseline
+
+## Contract
+
+| Field | Bound contract |
+|---|---|
+| Trigger | User explicitly requests an invariant-first, fail-fast, special-case-eliminating baseline for a named implementation. |
+| Authority | reversible-local: write only the named local artifact; rollback path is VCS restore or file deletion. |
+| Side effect | Replace the target local file with its invariant-first, fail-fast, special-case-eliminating refinement. |
+| Done | All named invariant checks pass and no unresolved special-case artifacts remain. |
+
+## Inputs
+
+Required:
+- `TARGET`: path to the local source file or module to baseline.
+- `LANGUAGE`: the target's language (e.g., `python`, `rust`, `typescript`). Required to select correct invariant patterns.
+
+## Procedure
+
+1. **Validate the request.** Confirm `TARGET` is a concrete, scoped implementation task with a named local path. If `TARGET` is absent, empty, or points to a non-local artifact, raise `BLOCKED-INPUT` and stop.
+
+2. **Enumerate invariants.** For `LANGUAGE`, enumerate the language-native invariant patterns that govern correctness: type contracts, ownership/borrow rules, null/void guards, resource lifecycle ordering, and domain-specific preconditions. Write each as a named, executable check with a unique identifier.
+
+3. **Insert fail-fast guards.** Before every mutable state operation, every external call, and every branching decision, insert the matching invariant check. If any check fails, halt immediately with `INVARIANT-FAIL: <identifier>` and the observed violation. The target artifact is unchanged until all checks pass.
+
+4. **Eliminate special cases.** Scan the target for:
+   - Boolean flag arguments or module-level toggles that gate behavior.
+   - Hardcoded branch paths that duplicate a general case.
+   - Numeric or string domain constants used as inline guards.
+   For each found artifact, either refactor the boolean branch into a data-driven lookup, merge the special case into the general path, or convert the magic constant into a named constant with a documented invariant.
+
+5. **Re-validate.** Run all named invariant checks against the refined artifact. If any check fails, halt with `INVARIANT-FAIL: <identifier>` listing the specific failure. Record the complete set of removed special-case artifacts as the resolution log.
+
+## Failure and recovery
+| Failure class | Condition | Result |
+|---|---|---|
+| BLOCKED-INPUT | `TARGET` absent, empty, or non-local | Stop. No file changed. |
+| INVARIANT-FAIL | A named invariant check fails | Stop. Artifact unchanged. Report `<identifier>`. |
+| SPECIAL-CASE-INCOMPLETE | Not all special-case artifacts resolved | Stop. Report the unresolved set. |
+
+Partial-result rule: no file is written until all steps complete without failure. Rollback path: `git restore TARGET` or delete the written artifact.
+
+## Output
+The target local artifact replaced with its invariant-first, fail-fast, special-case-eliminating refinement. A resolution log listing every removed special case and the invariant identifier that now governs its behavior.
+
+## Provenance
+
+Origin: `curated:curated-ideas:curated-053` (local). Adaptation: renamed from `curated-offense` to `universal-invariant-baseline` to expose the always-on/every-implementation scope. Authority and mechanism re-grounded to reversible-local writes, fail-fast guards, and explicit special-case elimination. Project-owned; no third-party expression copied.

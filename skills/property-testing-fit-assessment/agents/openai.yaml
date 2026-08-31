@@ -1,0 +1,3 @@
+interface:
+  display_name: "Property Testing Fit Assessment"
+  short_description: "Read-only verdict on property-based testing fit and library"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Secure npm Package"
+  short_description: "Harden npm publishing with Trusted Publishing, staged releases"

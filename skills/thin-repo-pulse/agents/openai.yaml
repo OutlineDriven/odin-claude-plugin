@@ -1,0 +1,3 @@
+interface:
+  display_name: "Thin Repo Pulse"
+  short_description: "Capture external job or tracker state into a local snapshot"

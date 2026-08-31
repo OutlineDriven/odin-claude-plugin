@@ -1,46 +1,41 @@
 ---
 name: ai-collab-protocols
-description: Surface in-task AI collaboration protocols one tactic at a time, replacing ambiguous references with durable, recoverable handles.
-disable-model-invocation: true
+description: 'Use when the user describes an AI workflow gap or uses an ambiguous cross-session reference such as ''the PR Bob mentioned'' or ''that bug from last week''. Resolves each ambiguous reference to a stable handle and surfaces collaboration anti-patterns when reached. Don''t use for tasks that require source or remote-system changes.'
 ---
 
-Spot the protocol gap, name the better tactic, point at the durable handle. Small surgical interventions, not a lecture.
+# AI collab protocols
 
-## Core protocols
+## Contract
 
-### URL-as-entity-reference
+| Field | Bound contract |
+|---|---|
+| Trigger | User describes an AI workflow gap or uses an ambiguous cross-session reference such as 'the PR Bob mentioned' or 'that bug from last week'. |
+| Authority | Read-only: reply content only; no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Side effect | None; reply content only. |
+| Done | Every ambiguous reference resolves to a stable handle; anti-patterns surface when reached. |
 
-If the user says "the PR Bob mentioned", "that bug from last week", or "the function we discussed", stop and ask for the URL or the symbol path. *Why:* names are ambiguous in long-context sessions and unrecoverable across sessions. A stable URL (GitHub PR comment permalink, MCP resource URI like `@github:pr/owner/repo/123#comment-456`, file:line reference) survives compaction and enables exact match. The chat that prompted this skill explicitly named this as the highest-signal collaboration tip.
+## Inputs
 
-### Durable PR-comment threads as session memory
+The user's message, which may contain ambiguous references (a name or description without a locator, e.g. "the PR Bob mentioned", "that bug from last week", "the function we discussed") or describe a workflow gap. Optional: a stable handle the user can supply when asked — a GitHub PR or comment permalink, an MCP resource URI such as `@github:pr/owner/repo/123#comment-456`, or a file:line reference. The skill fetches and mutates nothing; it asks the user for the handle.
 
-Long-running PR comment threads outlive any single session and form the persistence layer for multi-session work. Prefer leaving a comment on the PR over a chat-only handoff. *Why:* the next session (yours, a colleague's, or a future agent's) can resume from the thread without replaying context. Chat is ephemeral; PR comments are addressable.
+## Procedure
 
-### Fit the protocol
+1. Scan the user's message for ambiguous references — a name or description without a locator — or a described workflow gap. If none is present, do not route.
+2. For each ambiguous reference, stop and ask the user for a stable handle: a GitHub PR/comment permalink, an MCP resource URI (e.g. `@github:pr/owner/repo/123#comment-456`), or a file:line reference. State why: names are ambiguous in long-context sessions and unrecoverable across sessions, while a stable URL survives compaction and enables exact match.
+3. Surface one tactic at a time, not a lecture. When the user is handing off multi-session work, recommend leaving a comment on the PR — an addressable, compaction-surviving thread — over a chat-only handoff, so the next session, colleague, or agent can resume without replaying context.
+4. When an anti-pattern is reached, surface it: (a) screenshot-only context loses URL grounding, copy-paste, and search — pair every screenshot with its URL or text export; (b) token-usage or lines-of-code framing as a quality proxy — quantity is not capability; surface the rejection.
+5. Stop once every ambiguous reference has a stable handle and any reached anti-pattern has been named. Do not widen scope or invent handles the user did not supply.
 
-When a project has an `AGENTS.md`, `CLAUDE.md`, or `.clinerules`, read it before acting. When the project has none and the work is non-trivial, propose authoring one. Defer to `init` for AGENTS.md authoring rather than re-doing it here. *Why:* project-level rule files are the cross-tool agent-config convention; fighting them creates drift across sessions.
+## Failure and recovery
+- **Unresolved reference**: the user cannot supply a stable handle. Report the reference as unresolved; do not guess a URL or symbol. The done predicate is not met for that reference.
+- **Non-stable handle**: the user supplies a bare repo name or a chat paraphrase instead of a locator. Ask once for the permalink or file:line form; if still absent, mark the reference unresolved.
+- **No reference and no gap**: the skill does not route; return nothing.
+- **Partial result**: report which references resolved and which remain unresolved; never claim all resolved when any is not.
+- **Non-mutation**: this skill writes nothing; recovery is re-asking or stopping, never editing files or state.
 
-## Anti-patterns to flag
+## Output
+A reply that, for each ambiguous reference, states the stable handle the user supplied or marks it unresolved, plus any anti-pattern surfaced when reached. No file, state transition, or external mutation.
 
-- **Screenshot-only context**: loses URL grounding, copy-paste, and search. Pair every screenshot with the URL or text export.
-- **Token-usage / LOC framing as a quality proxy**: quantity is not capability. The chat that prompted this skill explicitly rejects this framing; surface the rejection if the user reaches for it.
+## Provenance
 
-## Optional 2026 research extensions (verification status)
-
-Earlier candidate extensions, second-pass verified. Usage details belong in a dedicated reference, not here:
-
-- **✅ Tool Search Tool** *(verified, Anthropic official)*. Source: `https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool`.
-- **❌ REVERSE_PROMPT.md / TASKLOG.md bidirectional pattern** *(unverified)*. No primary-source documentation found. Do not cite as 2026 standard.
-- **⚠️ Structured-output filtering / summarization** *(partial; different API names)*. Concepts exist in the Messages API but not under the names originally claimed. Refer to the official Messages API reference before citing.
-
-## Modality differentiation
-
-| Skill                    | When                                                                                |
-| ------------------------ | ----------------------------------------------------------------------------------- |
-| **`ai-collab-protocols`** | In-task tactic surfacing: user describes an AI workflow informally                |
-| `contexts`               | Pre-implementation context sweep: gather files / patterns / tooling for a feature  |
-| `init`                   | AGENTS.md authoring: onboarding a repository, capturing hard-to-rediscover conventions |
-
-## Posture
-
-Surface one tactic at a time. Name the protocol. Show the better handle in concrete form (the actual URL, the actual file path, the actual symbol name).
+Origin: ODIN 1.x skill `ai-collab-protocols` (`skills/ai-collab-protocols/SKILL.md`), project-owned, no third-party license. Adapted for ODIN 2.0: frontmatter `disable-model-invocation` flipped from `true` to omitted (model+human invocation); body restructured into the contract/inputs/procedure/failure/output/provenance order; cross-skill and rule-file pointers removed per the self-contained-skill rule. Mechanisms preserved: URL-as-entity-reference, durable PR-comment threads as session memory, anti-pattern surfacing (screenshot-only context; token-usage/LOC-as-quality framing).

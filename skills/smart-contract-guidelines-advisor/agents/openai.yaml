@@ -1,0 +1,3 @@
+interface:
+  display_name: "Smart Contract Guidelines Advisor"
+  short_description: "Assess smart-contract security across eleven development areas"

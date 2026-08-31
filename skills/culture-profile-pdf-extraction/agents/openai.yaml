@@ -1,0 +1,3 @@
+interface:
+  display_name: "Culture Profile PDF Extraction"
+  short_description: "Machine-extract Culture Index PDF traits to verified JSON."

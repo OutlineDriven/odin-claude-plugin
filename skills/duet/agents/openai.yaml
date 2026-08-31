@@ -1,3 +1,3 @@
 interface:
-  display_name: "Duet"
-  short_description: "Pair through tough design decisions"
+  display_name: "Consent-Gated Execution"
+  short_description: "Consent every fork before execution"

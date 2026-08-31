@@ -1,0 +1,3 @@
+interface:
+  display_name: "DWARF Expert"
+  short_description: "Inspect, verify, and parse DWARF debug info in binaries."

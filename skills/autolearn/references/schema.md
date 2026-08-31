@@ -69,7 +69,7 @@ Filename: `[sanitized-problem-slug].md` — no date suffix (the `date` field car
 
 1. Determine the track from `problem_type`.
 2. All shared required fields present.
-3. Bug-track docs additionally carry `symptoms`, `root_cause`, `resolution_type`.
+3. Bug-track docs also carry `symptoms`, `root_cause`, `resolution_type`.
 4. Knowledge-track docs need no extra required fields.
 5. Enum fields match allowed values exactly.
 6. Array fields respect min/max item counts.

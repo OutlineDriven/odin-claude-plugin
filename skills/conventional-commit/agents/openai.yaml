@@ -1,0 +1,3 @@
+interface:
+  display_name: "Conventional Commit"
+  short_description: "Create scoped present-tense conventional commit with issue refs"

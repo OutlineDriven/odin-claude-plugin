@@ -1,118 +1,72 @@
 ---
 name: cleanup-codebase
-description: Reduce internal duplication, dead code, and ceremony. Use when you spot dead fields, redundant wrappers, or speculative abstractions in code you are already editing.
+description: 'Use when a dead field, redundant wrapper, duplicate state, stale config, or speculative abstraction appears in nearby code already under edit; the candidate is proven dead or redundant across all consumers, removed without behavior change, and repository validation passes. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
-# Cleanup codebase: local simplicity, ruthlessly applied
+# Cleanup codebase
 
-Code rots in two directions: outward (drift from the original design) and downward (accretion of dead state, redundant indirection, speculative ceremony). This skill addresses the second. The thesis is local: you are already in nearby code for some other reason; while you are there, remove what does not earn its keep.
+## Contract
 
-See [dead-fields](references/dead-fields.md) for examples of dead fields, properties, and members.
-See [redundant-wrappers](references/redundant-wrappers.md) for examples of single-line passthrough functions that should be inlined.
-See [dead-config](references/dead-config.md) for stale feature flags, environment variables, and dead config branches.
+| Field | Bound contract |
+|---|---|
+| Trigger | A dead field, redundant wrapper, duplicate state, stale config, or speculative abstraction appears in nearby code already under edit. |
+| Authority | Reversible local: edit only the named local artifacts already touched by the active change; recover any deletion through version control. |
+| Side effect | Deletes proven-dead local code/config and inlines redundant local wrappers, each as a separate atomic cleanup commit. |
+| Done | Candidate is proven dead or redundant across all consumers, removed without behavior change, and repository validation passes. |
 
----
+## Inputs
 
-## Mandates, not suggestions
+- A candidate spotted in code already under edit for another reason: a dead field, redundant wrapper, duplicate state, stale config branch, or speculative abstraction.
+- The repository-native validation command (build, tests, type-check) for every touched language. Must be supplied or discoverable in the repo.
+- Optional: `ast-grep` for structural dead-code confirmation; fall back to `git --no-pager grep -n` when unavailable.
 
-These are mandates, not suggestions. Internalize them as rules; do not paraphrase.
+## Procedure
 
-### 1. Minimize concepts, duplication, and ceremony.
+1. **Bound scope.** Confirm the candidate lies in a file already touched by the active change. If it does not, stop: opportunistic sweeps across untouched files are out of scope.
+2. **Classify the candidate** against the rubric below to decide remove versus keep.
+3. **Confirm dead across all consumers.** Run `git --no-pager grep -n` (or `ast-grep`) for every reference to the candidate in code, tests, docs, configs, error messages, and log lines. A field is dead only if it is never read after assignment; a wrapper is redundant only if it adds nothing but a rename or forward. If any consumer is unverified, stop and investigate rather than delete.
+4. **Check coupling effects.** Determine whether removal breaks the build or forces a refactor of the only consumer. If it does, that is a separate decision; record it and do not delete in this pass.
+5. **Apply the deletion.** Remove the file with `rm` then `git add <path>`, or make a precise edit for partial removal. Inline a redundant wrapper at every call site, then delete the wrapper. Never comment out code as a substitute for deletion.
+6. **Keep the cleanup atomic.** The cleanup must be its own commit, separate from any behavior change. If it is mixed in, split it with `git move --fixup` or `git split` so each commit has exactly one concern. Never add a new abstraction during cleanup; the diff must be net-deletion or inline-and-delete only.
+7. **Verify.** Run the repository-native validation (build, tests, type-check) on every touched language. If a test was the only consumer of the dead code, that test was probably testing the dead code; remove or update it.
+8. **Search for ghosts.** Grep docs, error messages, config keys, env vars, and log lines for string references to the removed concept. Leftover references mean the cleanup is incomplete.
 
-Every concept the reader has to hold in their head has a cost. Every duplicated piece of logic has two places to drift apart. Every ceremonial wrapper, factory, or builder that does not protect a real boundary is a tax on every future reader. Reducing concepts is not the same as reducing lines. It is reducing the number of distinct things a reader has to track.
+### Decision rubric
 
-### 2. One real owner per contract. No mirroring, no wrappers unless they remove real coupling.
+| Pattern | Action |
+|---|---|
+| Wrapper that adds nothing but a rename | Inline at call sites, then delete the wrapper |
+| Field set but never read after | Delete the field and its assignment |
+| Config flag whose both branches are dead | Delete the flag, keep the winning path |
+| Adapter between two structurally equivalent local types | Collapse to one type |
+| Helper used in one place wrapping a short body | Inline |
+| State mirrored across two structs or services | Pick one owner; the other reads from it |
+| Comment that contradicts the code | Update or delete the comment |
+| Helper used in three or more places that names a real shared concept | Keep |
 
-A "contract" is the truth about what some piece of state means or what some operation does. It must have exactly one owner. Mirroring (two structures holding the same field; two services maintaining the same cached state) is a guaranteed-future-bug pattern. Wrappers are coupling-removal tools: if a wrapper just renames or forwards without removing coupling, it is ceremony.
+Indirection earns its keep only at a real boundary: public API surfaces, process or network seams, untrusted-input boundaries, async/sync seams, runtime FFI seams, or test/production seams where mocks substitute. A swappable-implementation contract counts only when more than one real implementation ships today. Internal modules in the same package, same-file helpers, and cross-module calls without a co-change constraint are not boundaries.
 
-### 3. Local simplicity over speculative abstraction. Add indirection only when it removes real coupling or protects a real boundary.
+## Failure and recovery
+- **Unverified consumer (exit 11).** A consumer was not in the original grep. Do not delete. Investigate and either preserve the candidate or migrate the consumer first.
+- **Build or test regression (exit 12).** Rollback the deletion via version control. The removal was not behavior-preserving; re-classify and re-confirm before retrying.
+- **Mixed-concern commit (exit 13).** The cleanup is bundled with behavior change. Split with `git move --fixup` before merging; never merge a mixed commit.
+- **New abstraction introduced (exit 14).** Cleanup must be net-deletion. Separate the abstraction into its own commit with independent justification, or drop it.
+- **Ghost references (exit 15).** Leftover string references remain. Complete the cleanup by removing them, or rollback if they indicate the candidate was not actually dead.
 
-"Speculative" means "I might need this later." You will not need it later in the form you imagine now, and the indirection you add now will make the actual future change harder. Indirection earns its keep when it removes coupling that *currently* exists, or when it protects a *current* boundary (process, untrusted-input, async/sync seam). Otherwise it is dead-weight ceremony.
+Partial-result rule: a pass that confirms some candidates dead and leaves others unverified lands only the confirmed deletions; unverified candidates stay untouched. Non-mutation rule: nothing is deleted until the dead-confirmation grep covers code, tests, docs, configs, and error messages. The blocked result is the candidate left in place with the unverified consumer or regression recorded for a separate decision.
 
-### 4. When caller and callee are both local with no real boundary, change both directly.
-
-A "local change" that has to ripple through three wrapper layers is not local. It is coupled. If `caller` and `callee` are both yours, both in the same module, with no API boundary between them, refactoring them in lockstep is correct. Resist the urge to "preserve the interface" of internal functions; an internal function's interface is whoever calls it.
-
-### 5. Remove dead code, fields, config, and stale state while touching nearby code.
-
-Dead code is not free. It misleads readers about what the system does, it survives grep searches and pulls attention, it tricks reviewers into preserving it "just in case." While you are in nearby code for some other reason, remove what is dead.
-
----
-
-## What "real boundary" means
-
-Indirection earns its keep at: **public API surfaces**, **process/network seams** (RPC, HTTP, queues), **untrusted-input boundaries**, **async/sync seams**, **runtime seams** (FFI such as JNI, WASM), and **test/production seams** where mocks legitimately substitute. A swappable-implementation contract counts only when >1 real impl ships today, not when the second impl is only hypothetical.
-
-Not boundaries: internal modules in the same module/package, helpers in the same file, cross-module calls without a constraint that prevents co-change.
-
----
-
-## When to Apply
-
-- You are editing a file for an unrelated feature; while reading it, you notice a dead field
-- A refactor commit just ripped out a code path; the leftover wrapper, dead branch, or stale flag should leave with it
-- Reviewing a PR diff that adds an unnecessary wrapper or duplicates state; flag and request inline simplification
-- Onboarding to a codebase: surface candidates for the original author to confirm dead
-
-## When NOT to Apply
-
-- **Standalone "cleanup sweep" PRs**. These mix unrelated changes, become unreviewable, and conflict with the `<git>` charter's "one concern per commit" rule. Solution: `git move --fixup` to embed the cleanup as an atomic commit alongside the active change.
-- **Files you are not otherwise touching**. Opportunistic edits become unreviewable noise; the cleanup must ride alongside work that justifies you being in that file.
-- **Speculative removals you cannot prove are safe**. If you cannot grep-confirm that nothing reads a field, do not delete it; investigate first.
-
----
-
-## Decision rubric
-
-| Pattern | Action | Notes |
-|---------|--------|-------|
-| Wrapper that adds nothing but a rename | Inline, then delete the wrapper | Renames are not abstractions |
-| Field set in constructor, never read after | Delete the field and its assignment | Grep all consumers first |
-| Config flag where both branches are dead (always-on or always-off) | Delete the flag, keep the winning path | Often legacy migration debt |
-| Adapter between two structurally equivalent local types | Collapse to one type | Different names ≠ different concepts |
-| Helper used in 3+ places that genuinely names a shared concept | Keep | Real reuse, real naming |
-| Helper used in 1 place that wraps a 2-line body | Inline | The wrapper is overhead |
-| State mirrored across two services / two structs | Pick one owner; the other reads from it | Mirroring is the bug |
-| Comment that contradicts the code | Update or delete the comment | Stale comments mislead |
-| `TODO` from > 6 months ago | Open issue or delete | Indefinite TODOs are noise |
-
----
-
-## Workflow
-
-1. **Identify candidate**. While in the file for another reason, spot dead/redundant code.
-2. **Confirm dead**. `git --no-pager grep -n` (or `ast-grep`) to verify no consumers; check tests, docs, configs, error messages.
-3. **Check coupling effects**. Does removal break the build? Force a refactor of the only consumer? That is a separate decision; record it.
-4. **Verify against `~/.claude/claude/system-prompt-baseline.md` `<git>` charter**. Cleanup is its own atomic commit. If it is mixed in with behavior change, split via `git move --fixup` / `git split`.
-5. **Apply the deletion**. `rm -rf` the file, then `git add <path>` so the deletion is staged for step 4's atomic commit; or precise `Edit` for partial removal. Never comment-out.
-6. **Verify**. Build, tests, type-check still pass. If a test was the only consumer of the dead code, that test was probably testing the dead code.
-7. **Search for ghosts**. String references in docs, error messages, config keys, env vars, log lines that mention the removed concept.
-
----
-
-## Constitutional Rules (Non-Negotiable)
-
-1. **Never bundle cleanup with behavior change in one commit**. Split via `git move --fixup` so each commit has exactly one concern. Cleanup commits ride alongside behavior commits in the same PR; that is fine and encouraged.
-2. **Never add an abstraction during cleanup**. Cleanup removes; if a new abstraction is genuinely warranted, that is a *separate* commit with its own justification.
-3. **Never extend cleanup beyond files already touched by the active change**. Opportunistic sweeps across the codebase are out of scope; they belong in scheduled refactor work that has its own plan.
-
-## Validation Gates
-
-| Gate | Pass Criteria | Blocking |
-|------|---------------|----------|
-| Atomic commit | Cleanup is its own commit, separate from behavior change | Yes |
-| Dead confirmation | `grep`/`ast-grep` confirms no consumers in code, tests, docs, configs | Yes |
-| No new abstractions | Diff is net-deletion (or inline-and-delete) only | Yes |
-| Build + tests pass | Repo-native verification on every touched language | Yes |
-| Ghost search | No leftover references in docs, error messages, env vars | Yes |
-
-## Exit Codes
+## Output
+A terminal classification per candidate:
 
 | Code | Meaning |
-|------|---------|
-| 0 | Clean. Atomic deletion landed, all consumers updated, build green |
-| 11 | Consumer found that was not in the original grep. Investigate and either preserve or migrate |
-| 12 | Build / test regression. Rollback required |
-| 13 | Mixed-concern commit. Must split via `git move --fixup` before merging |
-| 14 | New abstraction introduced. Separate the commit, justify the abstraction independently |
-| 15 | Ghost references found. Cleanup incomplete |
+|---|---|
+| 0 | Clean: atomic deletion landed, all consumers updated, validation green |
+| 11 | Unverified consumer found; candidate preserved pending investigation |
+| 12 | Build or test regression; deletion rolled back |
+| 13 | Mixed-concern commit; must split before merge |
+| 14 | New abstraction introduced; separate or drop |
+| 15 | Ghost references remain; cleanup incomplete |
+
+## Provenance
+
+Origin: odin-1.x current skill `cleanup-codebase` (skills/cleanup-codebase/SKILL.md) and current ODIN skill-tree `tidy` (skills/tidy/SKILL.md). No pinned revision; project-owned, no third-party license. `tidy` was an exact four-field contract duplicate of `cleanup-codebase` and is merged here without an alias. This is a clean-room, self-contained restatement of the local dead-code removal mechanism; no third-party expression is copied.

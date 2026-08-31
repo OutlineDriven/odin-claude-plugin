@@ -1,34 +1,54 @@
 ---
 name: setup-pre-commit
-description: Use when the user wants commit-time checks, or says "install husky/pre-commit/lefthook".
+description: 'Use when asked to install or repair one repository-local pre-commit hook path using the project current gate commands. Existing hook tooling is extended instead of duplicated; new JavaScript projects use Lefthook and Biome, while Python, Rust, and OCaml use prek-compatible local hooks. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
-Detect the ecosystem, pick the right hook tool, install with formatter + type-check + test gates.
+# Setup pre-commit
 
-## Detection (run first)
+## Contract
 
-Dispatch Explore agent, or for a single-language repo, probe directly via `fd` for lockfile / manifest signature. Map the first manifest hit to an ecosystem. Multi-language repos: ask the maintainer which surface to gate, or apply both.
+| Field | Bound contract |
+|---|---|
+| Trigger | Install, repair, or standardize local pre-commit checks in an existing repository. |
+| Authority | Reversible local writes to hook configuration, dependency manifests, and lockfiles. No push, remote setting, credential, or release mutation. |
+| Side effect | Extends the existing hook manager or installs one current manager, writes its config, and installs the local Git hook. |
+| Done | Exactly one hook manager owns pre-commit; its all-files command runs the repository formatter, linter, type checker, and targeted tests successfully; a deliberate failing probe blocks and a passing probe exits zero. |
 
-## Ecosystem → hook tool
+## Inputs
 
-| Ecosystem            | Hook tool                  | Install command                                                  |
-| -------------------- | -------------------------- | ---------------------------------------------------------------- |
-| npm / yarn / pnpm / bun | husky + lint-staged     | `<pm> add -D husky lint-staged prettier && npx husky init`       |
-| Python (poetry/pip)  | pre-commit (framework)     | `pipx install pre-commit && pre-commit install`                  |
-| Go                   | lefthook (or pre-commit)   | `go install github.com/evilmartians/lefthook@latest && lefthook install` |
-| Rust (cargo)         | cargo-husky (or pre-commit)| add `cargo-husky` as `[dev-dependencies]`; runs on `cargo test`  |
-| OCaml (dune)         | pre-commit + dune hooks    | `pipx install pre-commit && pre-commit install`                  |
+- Repository root with `.git`: required.
+- Repository-native format, lint, type-check, and targeted-test commands: required; infer only from committed scripts and configuration.
+- Existing hook manager: optional; detect Husky, Lefthook, prek/pre-commit, cargo-husky, and native `.git/hooks/pre-commit` before adding anything.
 
-## Per-ecosystem hook contents
+## Procedure
 
-The exact file to write (Node/Python/Go/Rust/OCaml) lives in `references/hook-recipes.md` — read the block matching the ecosystem you detected above; a single-language repo never needs the other four.
+1. Read the repository manifests, lockfiles, declared gate scripts, hook config, and `.git/hooks/pre-commit`. Detect `pnpm-lock.yaml`, `bun.lock`, legacy `bun.lockb`, `uv.lock`, `go.mod`, `Cargo.toml`, and `dune-project`. Do not infer a gate command that the repository does not declare.
+2. If one hook manager already exists, extend it. If multiple managers can fire for the same commit, stop and report the conflict; do not add a third path.
+3. If none exists, select one manager: Lefthook for a pnpm, Bun, or Go repository; prek for Python, Rust, or OCaml. In a mixed repository, select the manager already represented by its lockfile or task runner. Ask only when two choices remain equally supported by repository evidence.
+4. Install through the current project toolchain: `pnpm add -D lefthook @biomejs/biome && pnpm exec lefthook install` for JavaScript or TypeScript; `go install github.com/evilmartians/lefthook@latest && lefthook install` for Go; `uv tool install prek && prek install` for Python, Rust, or OCaml. Do not install ESLint, Prettier, Black, isort, mypy, or a second package manager.
+5. Write only commands the repository can execute:
+   - JavaScript or TypeScript Lefthook: `pnpm exec biome check --write --no-errors-on-unmatched .`, the declared type-check script, and the declared targeted-test script.
+   - Python prek local hooks: `uv run ruff check --fix .`, `uv run ruff format --check .`, `uv run pyright`, and the declared targeted pytest command.
+   - Go Lefthook: fail when `gofmt -l .` returns a path, then run `go vet ./...` and `go test ./...`.
+   - Rust prek local hooks: `cargo fmt --check`, `cargo clippy --all-targets -- -D warnings`, and the repository test command, preferring `cargo nextest run` when configured.
+   - OCaml prek local hooks: `dune fmt`, `dune build @runtest`, and any stricter repository alias already declared.
+   Set `pass_filenames: false` for whole-repository commands. Keep independent read-only checks parallel only when their tools do not edit the same files.
+6. Run the manager's all-files entry point: `pnpm exec lefthook run pre-commit` or `prek run --all-files`. If a formatter changes files, inspect the diff and repeat until the non-mutating gate passes.
+7. Prove enforcement without creating history. Add one temporary, reversible formatting violation inside an owned scratch file that the hook includes. Run the hook and require non-zero or an automatic repair followed by a dirty diff. Restore the scratch file, rerun the hook, and require zero. Never weaken a command to make the probe pass.
+8. Confirm exactly one executable `.git/hooks/pre-commit` entry remains and that it delegates to the selected manager. Report changed files and both probe outcomes. Do not commit unless the user separately asks.
 
-## Verify
+## Failure and recovery
 
-- `fd -d 2 -t f '\.husky|\.pre-commit-config\.yaml|lefthook\.yml'` shows the expected file.
-- The hook is executable.
-- Run a no-op commit (`git commit --allow-empty -m "Verify hooks"`). Every gate must run and pass.
+- **No repository-native gates:** stop before installation and report which format, lint, type, or test command is missing.
+- **Competing hook managers:** do not guess. Report every firing path and the smallest clean cutover; removal requires the user's approval when it changes an observable workflow.
+- **Install failure:** restore the manifest, lockfile, hook config, and `.git/hooks/pre-commit` from the captured baseline.
+- **Probe does not trip:** the hook is not load-bearing. Fix its file matching or command and repeat; a green normal run alone does not satisfy done.
+- **Probe residue:** restore the scratch path and confirm the worktree matches the pre-probe baseline before returning.
 
-## Commit
+## Output
 
-`Install pre-commit hooks (<tool>)`. The commit itself trips the new hook, a first-class smoke test.
+Return the selected manager, config and manifest paths changed, installed hook path, all-files command and output, failing-probe evidence, passing-probe evidence, and rollback command. The repository has one pre-commit owner and no superseded formatter, linter, or type checker introduced by this skill.
+
+## Provenance
+
+Origin: odin-current (`skills/setup-pre-commit/SKILL.md`). Project-owned; no third-party license applies. Re-derived for one-owner hooks and the current pnpm, Biome, uv, ruff, pyright, prek, Lefthook, Go, Rust, and OCaml toolchains.

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Local Reminder Scheduler"
+  short_description: "Set, list, and manage local reminders and scheduled tasks"

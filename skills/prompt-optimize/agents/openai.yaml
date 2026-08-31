@@ -1,0 +1,3 @@
+interface:
+  display_name: "Prompt Optimize"
+  short_description: "Best verified prompt under a user-supplied black-box evaluation"

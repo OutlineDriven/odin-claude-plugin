@@ -1,0 +1,3 @@
+interface:
+  display_name: "Gut Sync"
+  short_description: "Return a resume orientation card: shape, invariants, smells."

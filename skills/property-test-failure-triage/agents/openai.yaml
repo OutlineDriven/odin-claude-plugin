@@ -1,0 +1,3 @@
+interface:
+  display_name: "Property Test Failure Triage"
+  short_description: "Classify property-test failures and prescribe the next action"

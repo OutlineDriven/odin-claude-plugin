@@ -1,0 +1,3 @@
+interface:
+  display_name: "Corroborate By Independent Reruns"
+  short_description: "Return majority byte-identical patch or report no consensus."

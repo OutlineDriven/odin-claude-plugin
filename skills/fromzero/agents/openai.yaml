@@ -1,0 +1,3 @@
+interface:
+  display_name: "Clean Greenfield Restart"
+  short_description: "Restart greenfield on a clean pad with only proven requirements."

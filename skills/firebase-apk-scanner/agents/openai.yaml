@@ -1,0 +1,3 @@
+interface:
+  display_name: "Firebase APK Scanner"
+  short_description: "Extracts Firebase config from APKs and probes endpoints"

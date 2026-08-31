@@ -1,0 +1,3 @@
+interface:
+  display_name: "Agents MD Curation"
+  short_description: "Curate AGENTS.md to non-discoverable, mistake-reducing lines."

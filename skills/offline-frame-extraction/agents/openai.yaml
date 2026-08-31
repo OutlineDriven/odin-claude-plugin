@@ -1,0 +1,3 @@
+interface:
+  display_name: "Offline Frame Extraction"
+  short_description: "Extract JPEGs from recordings using manifest-first sampling"

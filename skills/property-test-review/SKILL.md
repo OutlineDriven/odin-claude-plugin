@@ -1,0 +1,90 @@
+---
+name: property-test-review
+description: 'Use when the user asks to review existing Hypothesis, fast-check, proptest, jqwik, rapid, Echidna, Medusa, or equivalent property tests for meaningful coverage and defects. The report identifies tautological, vacuous, assertion-free, reimplemented, weak, over-filtered, or misconfigured tests with evidence, severity, and the strongest available replacement property. Don''t use for tasks that require source or remote-system changes.'
+---
+
+# Property test review
+
+## Contract
+
+| Field | Bound contract |
+|---|---|
+| Trigger | The user asks to review existing Hypothesis, fast-check, proptest, jqwik, rapid, Echidna, Medusa, or equivalent property tests for meaningful coverage and defects. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Side effect | Read existing property tests and production contracts and return findings without changing code unless fixes are separately requested. |
+| Done | The report identifies tautological, vacuous, assertion-free, reimplemented, weak, over-filtered, or misconfigured tests with evidence, severity, and the strongest available replacement property. |
+
+## Inputs
+
+- **Test files**: Property test source files (required). The user names them or the skill discovers them via framework-specific search patterns.
+- **Production contracts**: The code under test—function signatures, type annotations, docstrings, or specifications (required). Needed to compare asserted properties against the code's algebraic shape.
+- **Property catalog reference**: The property catalog below (included). Used to identify the strongest unasserted property.
+
+## Procedure
+
+1. **Locate property tests.** If the user names specific files, read them. Otherwise search for framework markers:
+   - Python/Hypothesis: `rg "@given\(|from hypothesis import" --type py`
+   - TypeScript/fast-check: `rg "fc\.(assert|property)" --type ts --type js`
+   - Rust/proptest: `rg "proptest!|#\[quickcheck\]" --type rust`
+   - Java/jqwik: `rg "@Property|@ForAll" --type java`
+   - Solidity/Echidna/Medusa: `rg "function test|echidna_" --type sol`
+
+2. **Read production contracts.** For each tested function, read its implementation, type signature, and any specification. Identify the function's algebraic shape—whether it has an inverse, preserves an invariant, is idempotent, commutative, associative, or admits an oracle.
+
+3. **Classify each test against the defect taxonomy.** For every property test, determine which defect class applies:
+
+   | Defect | Severity | Detection rule |
+   |---|---|---|
+   | Tautological | CRITICAL | Assertion is true regardless of the implementation. `assert result == result` or `assert f(x) == f(x)` where `f` is obviously pure. Exception: `f(x) == f(x)` is a genuine determinism property when `f` is not obviously pure—serializers over dicts or sets, hashing, anything reading the clock. Ask whether a broken implementation could falsify it. |
+   | Vacuous | CRITICAL | `assume()` filters out nearly every input, or self-contradictory `assume()` passes having run zero cases. `assume(x == 42)` is the subtler version: it runs, it passes, and it is an example test wearing a `@given` decorator. |
+   | No assertion | HIGH | Body calls the function and stops. No `assert`, `expect`, or property check. |
+   | Reimplementation | HIGH | Assertion recomputes the function's own logic. `assert add(a, b) == a + b` restates the implementation; no bug they share can fail it. |
+   | Weaker property available | MEDIUM | Length checked, ordering not. The code supports a stronger property the suite does not assert. |
+   | Over-filtered | MEDIUM | Stacked `assume()` where a strategy constraint belongs. Push constraints into the generator so it produces valid inputs directly. |
+   | Settings | LOW | `max_examples=5`, or no deadline on an expensive strategy. |
+
+4. **Compare against the property catalog.** For each tested function, identify the strongest property the code supports but the suite does not assert:
+
+   | Property | Formula | Where it applies |
+   |---|---|---|
+   | Roundtrip | `decode(encode(x)) == x` | Serialization, conversion pairs |
+   | Inverse | `f(g(x)) == x` | encrypt/decrypt, compress/decompress |
+   | Oracle | `new(x) == reference(x)` | Optimization, refactoring, reimplementation |
+   | Idempotence | `f(f(x)) == f(x)` | Normalization, formatting, sorting |
+   | Invariant | Holds before and after | Any transformation, contract state |
+   | Easy to verify | `is_sorted(sort(x))` | Complex algorithms with cheap checkers |
+   | Commutativity | `f(a, b) == f(b, a)` | Binary and set operations |
+   | Associativity | `f(f(a,b), c) == f(a, f(b,c))` | Combining operations |
+   | Identity | `f(x, e) == x` | Operations with a neutral element |
+
+   Strength ordering, weakest to strongest: `no crash → type preservation → invariant → idempotence → roundtrip / oracle`. Assert the strongest property the code supports. "No crash" alone rarely justifies the dependency—if that is all that can be found, either a small rearrangement exposes something stronger, or the honest report is that this code is a poor PBT candidate.
+
+5. **Flag fragile patterns.** Report these regardless of defect class:
+   - Floating-point equality without a tolerance
+   - Assertions on dict/set iteration order
+   - Anything reading the clock
+   - These produce flakes that get blamed on the PBT framework and then get deleted.
+
+6. **Assemble the report.** For each finding, include: the test location, the defect class, the severity, the evidence (the specific assertion or configuration), and the strongest available replacement property.
+
+## Failure and recovery
+- **No property tests found.** Report that the codebase contains no property tests. Do not generate tests—that is a separate skill.
+- **No algebraic shape found.** If the code under test has no inverse, invariant, oracle, or other assertable property, report that honestly. A small rearrangement may expose something stronger; note this possibility. If not, the code is a poor PBT candidate.
+- **Ambiguous tautology.** When `f(x) == f(x)` could be either tautological or a genuine determinism property, report the ambiguity and ask whether a broken implementation could falsify it. Do not decide on the author's behalf.
+- **Partial results.** If some tests are reviewable and others are not (missing source, generated code, external dependencies), report findings for the reviewable subset and name the unreviewable tests with the reason.
+
+## Output
+A structured report containing:
+
+1. **Summary**: Total tests reviewed, count by severity, overall assessment.
+2. **Findings**: For each defect found:
+   - Location (file, line, test name)
+   - Defect class and severity
+   - Evidence (the specific assertion, configuration, or pattern)
+   - Strongest replacement property the code supports
+3. **Recommendations**: Prioritized list of improvements, ordered by severity.
+4. **Unreviewable tests**: If any, with reasons.
+
+## Provenance
+
+Adapted from Trail of Bits property-based testing skill (https://github.com/trailofbits/skills, commit d1f1575cff97816e5cc08af66cd2506099c681d3). Licensed CC-BY-SA-4.0. This is a read-only test-quality review contract, not test generation or failure diagnosis. Trail of Bits attribution and source link preserved; modifications marked; adaptations licensed ShareAlike; no trademark rights claimed; trail-of-bits-mark.svg not reused as branding.

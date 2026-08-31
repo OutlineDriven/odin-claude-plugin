@@ -1,0 +1,3 @@
+interface:
+  display_name: "OAuth2 Flow Implementation"
+  short_description: "RFC-compliant OAuth 2.0 flows with PKCE and security validation"

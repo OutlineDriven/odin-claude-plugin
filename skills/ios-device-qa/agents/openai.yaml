@@ -1,0 +1,3 @@
+interface:
+  display_name: "iOS Device QA"
+  short_description: "Drive a real iPhone over USB and return a verified QA report."

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Session Friction Retrospective"
+  short_description: "Analyze session friction and rank improvement candidates"

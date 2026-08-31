@@ -1,0 +1,3 @@
+interface:
+  display_name: "Cursor SDK"
+  short_description: "Construct disposed, guarded @cursor/sdk integrations."

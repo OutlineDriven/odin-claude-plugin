@@ -1,0 +1,3 @@
+interface:
+  display_name: "ESLint to Biome Migration"
+  short_description: "Replace legacy JavaScript linting with Biome 2.5"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Paced Explanation"
+  short_description: "Progressive-depth explanation of a subsystem"

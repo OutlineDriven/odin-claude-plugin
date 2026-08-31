@@ -1,0 +1,3 @@
+interface:
+  display_name: "Semgrep Security Scan"
+  short_description: "Run a Semgrep security scan, merge SARIF findings, and report"

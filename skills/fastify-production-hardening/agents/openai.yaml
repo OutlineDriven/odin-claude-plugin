@@ -1,0 +1,3 @@
+interface:
+  display_name: "Fastify Production Hardening"
+  short_description: "Harden a Fastify service for production load and exposure."

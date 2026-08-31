@@ -1,0 +1,3 @@
+interface:
+  display_name: "Trailmark Structural"
+  short_description: "Full structural analysis: hotspots, taint, blast radius"

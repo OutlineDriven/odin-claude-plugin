@@ -1,0 +1,3 @@
+interface:
+  display_name: "Review And Ship"
+  short_description: "Reviews changes, verifies behavior, and ships a pull request"

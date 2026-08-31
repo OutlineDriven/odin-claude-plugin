@@ -1,0 +1,3 @@
+interface:
+  display_name: "Isolate Workspace Gate"
+  short_description: "Isolate feature work in a gated git worktree"

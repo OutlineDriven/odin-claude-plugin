@@ -1,0 +1,3 @@
+interface:
+  display_name: "Human Taste Constraints"
+  short_description: "Translate human taste signals into explicit system constraints"

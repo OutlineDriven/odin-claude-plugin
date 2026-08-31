@@ -1,0 +1,3 @@
+interface:
+  display_name: "Sharp Edges Analyzer"
+  short_description: "Find misuse-prone APIs and report concrete safer designs"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Lifecycle Diagram"
+  short_description: "Validated lifecycle spec and self-contained interactive HTML"

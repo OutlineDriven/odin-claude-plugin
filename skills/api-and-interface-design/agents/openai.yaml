@@ -1,0 +1,3 @@
+interface:
+  display_name: "API and Interface Design"
+  short_description: "Document the contract, migrate every caller, drop legacy."

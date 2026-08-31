@@ -1,0 +1,3 @@
+interface:
+  display_name: "Multi Agent Tournament Scorecard"
+  short_description: "Reproducible multi-agent tournament scorecard"

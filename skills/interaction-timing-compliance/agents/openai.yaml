@@ -1,0 +1,3 @@
+interface:
+  display_name: "Interaction Timing Compliance"
+  short_description: "Runtime interaction timing compliance"

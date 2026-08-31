@@ -1,123 +1,86 @@
 ---
 name: validation-first-driven
-description: Define state machines, invariants, and temporal properties. Use when building protocols, workflows, concurrent systems, or lifecycle-heavy state.
+description: 'Defines state machines, invariants, and temporal properties. Use when building protocols, workflows, concurrent systems, or lifecycle-heavy state. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Validation-first development
 
-Define state machines from requirements before implementation. Specifications say what the system MUST do. Encode compile-time properties in types first, then layer state machine modeling for properties types cannot express.
+## Contract
 
-State machines exist on a spectrum from runtime enums to compile-time typestates. XState v5 introduces actor model semantics: state machines are first-class concurrent entities, not just enum switches.
+| Field | Bound contract |
+|---|---|
+| Trigger | The work builds protocols, workflows, concurrent systems, or lifecycle-heavy state, or needs temporal properties or a state machine. |
+| Authority | Reversible local: no file, VCS, credential, paid, published, deployed, or remote mutation outside the stated target. |
+| Side effect | Writes the model and spec plus implementation assertions and tests; may create a TLA+/Alloy spec for high-risk designs. |
+| Done | The state space is explicit, transitions are total, invariants are checked, and each temporal property maps to an assertion, test, or model-checker run. |
 
-See [approaches](references/approaches.md) for language-specific state machine mechanisms.
-See [examples](references/examples.md) for brief state machine patterns per language.
-See [formal-tools](references/formal-tools.md) for specification and model checking tools.
+## Inputs
 
----
+- Requirements or design document. Required.
+- Current codebase. Optional.
+- Support files: approaches, examples, formal-tools, event-sourcing reference notes. Optional; the skill is self-contained without them.
 
-## State Machine Taxonomy (decision guidance)
+## Procedure
 
-| Level | Mechanism | Strength | Use When |
-|-------|-----------|----------|----------|
-| **Typestate** (compile-time) | Generic type params, phantom data | Invalid transitions unrepresentable | Protocol APIs, builder patterns, Rust FFI |
-| **Statecharts** (hierarchical) | Nested states, parallel regions | Complex workflows, entry/exit | Game state, multi-modal UI, XState |
-| **Flat FSM** (runtime) | Enum + match/switch | Simple, auditable | Order lifecycle, connection mgmt |
-| **Actor model** | Independent entities, message passing | Concurrent state | Distributed systems, Erlang/Elixir, XState v5 |
+1. **Identify scope.** Confirm the work involves explicit states, transitions, temporal properties, or lifecycle-heavy state. If it is a stateless endpoint, pure data transformation, simple CRUD without lifecycle, configuration parse, or stateless batch process, stop and return the work unaltered.
 
-**Default choice**: Use the strongest mechanism the language supports. Typestate in Rust, sealed classes in Kotlin, discriminated unions in TypeScript.
+2. **Capture states and transitions.** Extract all named states, state variables, actions, guards, and side effects from the requirements. Identify every temporal property: "always eventually", "never", "until", "leads-to".
 
-## Validation Levels
+3. **Choose mechanism level.**
 
-```
-Type system (strongest) > State machine > Contract > Runtime check (weakest)
-```
+   | Level | Mechanism | Strength | Use when |
+   |-------|-----------|----------|----------|
+   | Typestate | Generic type params, phantom data | Invalid transitions unrepresentable | Protocol APIs, builder patterns, Rust FFI |
+   | Statecharts | Nested states, parallel regions | Complex workflows, entry/exit actions | Game state, multi-modal UI, XState |
+   | Flat FSM | Enum + match/switch | Simple, auditable | Order lifecycle, connection management |
+   | Actor model | Independent entities, message passing | Concurrent state | Distributed systems, Erlang/Elixir, XState v5 |
 
----
+   Default: use the strongest mechanism the language supports. Typestate in Rust, sealed classes in Kotlin, discriminated unions in TypeScript.
 
-## When to Apply
+4. **Write state machine specification.** Use this template:
 
-- Protocol implementations (network, API, auth flows)
-- Workflow engines (approval chains, CI/CD pipelines)
-- Concurrent/distributed systems (coordination state)
-- Order lifecycle (e-commerce, payments, shipping)
-- Connection/session management
-- Actor systems with message-driven state
-- Event sourcing aggregates (command validation against current state)
+   ```
+   STATE MACHINE: <Name>
+     STATES: S1 | S2 | S3
+     VARIABLES: var1: type, var2: type
+     INIT: var1 = val, state = S1
+     ACTION name(args): PRE: guard -> POST: new_state, effects
+     INVARIANT: condition_that_always_holds
+   ```
 
-## When NOT to Apply
+5. **Define validation level.** Rank each invariant by enforcement strength:
 
-- Stateless REST endpoints
-- Pure data transformations (map/filter/reduce)
-- Simple CRUD without lifecycle
-- Configuration parsing
-- Batch processing without state
+   ```
+   Type system (strongest) > State machine > Contract > Runtime check (weakest)
+   ```
 
----
+6. **Encode compile-time properties in types.** Use typestate, sealed classes, or discriminated unions to make invalid states unrepresentable. Encode every invariant the type system can express.
 
-## Anti-patterns
+7. **Layer state machine modeling.** For properties types cannot express, define a state machine with explicit states and transitions. For high-risk designs, write a TLA+ or Alloy spec and run the model checker.
 
-- **Boolean soup**: `{ isLoading: true, isError: true, data: X }` -- contradictory states representable. Use discriminated unions instead.
-- **Stringly-typed states**: `state: "pending"` with no exhaustiveness check
-- **Partial transition coverage**: Some transitions undefined -- runtime "impossible" states
-- **Split-brain**: State and behavior in separate modules -- changes require cross-module updates
-- **Invariants at boundaries only**: Check invariants at every transition, not just entry/exit
-- **Implicit transitions**: State changes scattered across codebase -- impossible to audit
-- **State explosion without hierarchy**: Flat FSM with 50+ states -- use statecharts (nested states)
+8. **Check every transition.** Verify invariants hold after each action. Confirm exhaustive matching on all states. Block on any invariant violation.
 
----
+9. **Write assertions and tests.** Map each temporal property to an assertion, a test, or a model-checker run. Every transition must have a test. Every invariant must have a verification point.
 
-## Pseudocode Template
+10. **Implement.** Mirror the specification exactly: one state type, one transition function, one invariant check per concern. Keep state and behavior together.
 
-```
-STATE MACHINE: <Name>
-  STATES: S1 | S2 | S3
-  VARIABLES: var1: type, var2: type
-  INIT: var1 = val, state = S1
-  ACTION name(args): PRE: guard -> POST: new_state, effects
-  INVARIANT: condition_that_always_holds
-```
+## Failure and recovery
+- **Wrong-scope work** — Return the work unaltered. Do not apply state machine modeling to stateless work.
+- **Checker unavailable** — Return exit code 11 and a blocked verdict. Do not proceed without verification.
+- **Specification syntax or type error** — Return exit code 12 and the first error location. Block implementation.
+- **Invariant violation** — Return exit code 13 and the violating state or transition. Block implementation. Do not mask or suppress.
+- **Test failure** — Return exit code 14 and the failing test. Block if tests are required.
+- **Implementation not matching spec** — Return exit code 15 and the mismatched function or type. Block finalization.
+- **Partial result** — Return the highest verification gate that passed with its exit code and evidence. Do not claim the done predicate holds if any blocking gate failed.
+- **Non-converged** — If the state space is undecidable or the model checker does not terminate, stop and report the open temporal properties with no coverage.
 
-## Event Sourcing Integration
+## Output
+- State machine specification document (pseudocode or formal notation).
+- Verified implementation with assertions for every transition and invariant.
+- Test suite covering all states and transitions.
+- Optional: TLA+ or Alloy model for high-risk temporal properties.
+- Exit code: 0 (all gates pass) or the blocking gate code.
 
-The command-validate-emit-replay cycle for state machines guarding
-event-sourced aggregates lives in `references/event-sourcing.md`. Read it
-when the system under design is event-sourced (commands validated against
-current aggregate state before events are emitted); skip it for protocol,
-workflow, or connection-lifecycle state machines that are not event-sourced.
+## Provenance
 
----
-
-## Workflow (language-neutral)
-
-1. **PLAN** -- Identify states, variables, actions, invariants from requirements. Draw state diagram.
-2. **CREATE** -- Define state machine spec using pseudocode template. Choose mechanism level (typestate/FSM/actor).
-3. **VERIFY** -- Type-check, confirm exhaustive matching on all states, validate invariants hold at every transition.
-4. **IMPLEMENT** -- Target code mirrors spec. One state type, one transition function, one invariant check per concern.
-
----
-
-## Constitutional Rules (Non-Negotiable)
-
-1. **CREATE First**: Define state machine specification from plan
-2. **Invariants Must Hold**: All invariants verified at every transition
-3. **Actions Must Type**: All actions type-check with exhaustive matching
-4. **Implementation Follows Spec**: Target code mirrors specification structure
-
-## Validation Gates
-
-| Gate | Pass Criteria | Blocking |
-|------|---------------|----------|
-| Typecheck | No errors; exhaustive match where language enforces it | Yes |
-| Invariants | All invariant assertions pass after each action | Yes |
-| Tests | All state transition tests pass | If present |
-
-## Exit Codes
-
-| Code | Meaning |
-|------|---------|
-| 0 | Specification verified, ready for implementation |
-| 11 | Checker not available |
-| 12 | Syntax/type errors in specification |
-| 13 | Invariant violation detected |
-| 14 | Specification tests failed |
-| 15 | Implementation incomplete |
+Origin: current-odin-skill-tree. License: null. Adaptation: clean-room derivation from the current-odin-skill-tree body under `skills/validation-first-driven/SKILL.md` to the skill-foundry contract template. State machine taxonomy, validation levels, anti-patterns, constitutional rules, and validation gates carried from the source body. Support file references inlined as summary anchors. No third-party expression copied.

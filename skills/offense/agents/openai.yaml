@@ -1,0 +1,3 @@
+interface:
+  display_name: "Invariant-First Fail-Fast Changes"
+  short_description: "Build invariant-first changes that fail fast"

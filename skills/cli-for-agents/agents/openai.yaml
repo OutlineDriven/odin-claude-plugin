@@ -1,0 +1,3 @@
+interface:
+  display_name: "CLI For Agents"
+  short_description: "Design flag-driven, pipeline-safe, idempotent agent CLIs"

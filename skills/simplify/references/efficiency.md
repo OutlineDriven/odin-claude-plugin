@@ -1,8 +1,8 @@
-# `simplify` — efficiency axis agent prompt
+# `simplify`: efficiency axis agent prompt
 
 Verbatim prompt for the efficiency-axis review agent. The orchestrator dispatches this prompt with the captured diff appended after the `DIFF:` marker.
 
-## Table of Contents
+## Table of contents
 
 - Seven patterns: unnecessary work · missed concurrency · hot-path bloat ·
   recurring no-op updates · unnecessary existence checks · memory/listener

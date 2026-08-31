@@ -1,14 +1,14 @@
-# Configuration Reference (YAML)
+# Configuration reference (YAML)
 
 Detailed reference for rule configuration fields.
 
-## Basic Information
+## Basic information
 
 - **`id`** (Required): Unique identifier string (kebab-case recommended).
 - **`language`** (Required): Target language (e.g., `TypeScript`, `Python`, `Rust`).
-  - See [Supported Languages](#supported-languages) below.
+  - See [Supported languages](#supported-languages) below.
 
-## Finding & Patching
+## Finding and patching
 
 - **`rule`** (Required): The [Atomic/Relational/Composite rule](rule-config.md) to match.
 - **`constraints`**: Filter meta-variables.
@@ -16,7 +16,7 @@ Detailed reference for rule configuration fields.
 - **`fix`**: Replacement string or object.
 - **`rewriters`**: List of rewriter rules for sub-node transformation.
 
-## Linting & Reporting
+## Linting and reporting
 
 - **`severity`**: `error`, `warning`, `info`, `hint`, or `off`.
 - **`message`**: Concise message explaining the issue. Can use meta-variables (e.g., `Found $VAR`).
@@ -24,7 +24,7 @@ Detailed reference for rule configuration fields.
 - **`url`**: Link to documentation.
 - **`metadata`**: Custom key-value pairs (e.g., CVE ID).
 
-## File Filtering (Globbing)
+## File filtering (globbing)
 
 - **`files`**: Only apply rule to matching files.
 - **`ignores`**: Exclude matching files (checked before `files`).
@@ -37,7 +37,7 @@ files:
     caseInsensitive: true
 ```
 
-## Supported Languages
+## Supported languages
 
 Common languages and their aliases:
 

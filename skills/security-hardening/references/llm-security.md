@@ -1,4 +1,4 @@
-# Securing AI / LLM Features
+# Securing AI / LLM features
 
 If the app calls an LLM (chatbots, summarizers, agents, RAG), it inherits a new attack surface. Map it to the [OWASP Top 10 for LLM Applications (2025)](https://genai.owasp.org/llm-top-10/):
 

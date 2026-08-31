@@ -1,6 +1,6 @@
 # chinese.md — clreq, PingFang, Ant Design 6, Mini Programs
 
-How Chinese ships in production. Mainland is mobile-first to a degree no other major market matches (CNNIC 99.4%); the design system landscape is dense (Ant 6 / Ant X / TDesign / Arco / Element Plus); the platform reality is fractured across Mini Programs (WeChat / Alipay / Douyin / Xiaohongshu); and the regulatory layer (ICP / 公安网备 footers) is non-optional layout. Loaded via `cjk.md` routing — `cjk.md` carries cross-CJK rules; this file carries the Chinese direction.
+How Chinese ships in production. Mainland is mobile-first to a degree no other major market matches (CNNIC 99.4%); the design system field is dense (Ant 6 / Ant X / TDesign / Arco / Element Plus); the platform reality is fractured across Mini Programs (WeChat / Alipay / Douyin / Xiaohongshu); and the regulatory layer (ICP / 公安网备 footers) is non-optional layout. Loaded via `cjk.md` routing — `cjk.md` carries cross-CJK rules; this file carries the Chinese direction.
 
 **Grounded: 2026-08-26**
 
@@ -36,7 +36,7 @@ System and licensable families to track:
 
 License caveats matter: MiSans reads as SIL-OFL-shaped from a distance, ships under a proprietary EULA up close. Verify before bundling — the `chinese.md §2` license restriction is the single most-missed detail in mainland font selection. (developer.apple.com/forums/thread/758189; github.com/adobe-fonts/source-han-sans; github.com/huawei-fonts/HarmonyOS-Sans; hyperos.mi.com/font; github.com/xiaomi-fonts/MiSans).
 
-## 3. Chinese DS landscape 2026
+## 3. Chinese DS market 2026
 
 The densest market for design systems in CJK. Five tracked in production:
 

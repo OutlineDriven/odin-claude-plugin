@@ -1,0 +1,3 @@
+interface:
+  display_name: "Scaffold CLI"
+  short_description: "Create a strict Node.js 24 TypeScript CLI project"

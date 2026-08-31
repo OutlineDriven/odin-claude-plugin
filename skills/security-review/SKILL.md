@@ -1,66 +1,67 @@
 ---
 name: security-review
-description: Run an adversarial security audit using STRIDE, OWASP, supply-chain checks, secrets scans, and auth analysis. Use when changes touch auth, input parsing, dependencies, or network I/O, or before a production release.
+description: 'Use when asked to run an adversarial security audit using STRIDE, OWASP, supply-chain checks, secrets scans, and auth analysis when changes touch auth, input parsing, dependencies, network input and output, or pre-release. Produce a severity-graded report with critical/high findings blocking merge. Don''t use for tasks that require source or remote-system changes.'
 ---
 
-Threat modeling is hypothesis generation for an adversary. Walk the change set as the attacker would: where does untrusted input enter, what trust boundary does it cross, what does it gain on the other side. Every unaudited path is a free move for the attacker.
+# Security review
 
-## When to Apply / NOT
+## Contract
 
-Apply: new external surface (HTTP route, RPC method, file upload); AuthN/AuthZ change; deserialization / parsing of untrusted input; new dependency or major-version upgrade; cryptographic change; pre-release of public-facing service; incident postmortem.
+| Field | Bound contract |
+|---|---|
+| Trigger | Changes touch auth, input parsing, dependencies, network I/O, or pre-release of public-facing service |
+| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation |
+| Side effect | Produces a security-audit report with findings; no code edits; secret scanning reads and never mutates credentials |
+| Done | Audit report with STRIDE findings, OWASP walkthrough, severity contract (critical/high block merge) |
 
-NOT apply: internal refactor with no trust-boundary delta; pure performance work; documentation-only changes; internal-only experimental code.
+## Inputs
 
-## Anti-patterns
+- **Change set**: diff, commit range, or file list under audit. Required.
+- **Ecosystem context**: language family, framework, dependency manager. Optional; inferred from repo if absent.
+- **Scope hint**: specific concern (auth, crypto, injection, supply-chain). Optional; full STRIDE/OWASP walk when absent.
 
-- **Allowlist-by-omission**: treating "no obvious issue" as "secure".
-- **Trust the client**: validating only client-side.
-- **Logging secrets**: tokens, PII, session cookies in logs.
-- **Default-permit ACL**: authorization checks on opt-in basis.
-- **Magic-string config**: secrets in source / env files.
-- **Outdated SBOM**: stale dependency snapshots.
-- **Skipping the threat model**: jumping to checklist without naming assets/actors/boundaries.
+## Procedure
 
-## STRIDE Question Template
+1. **Bound scope**: identify every file in the change set. Map each to a trust boundary (external input, internal service, data store, credential surface).
+2. **STRIDE walk**: for each component touching a trust boundary, apply the six-question template:
+   - **Spoofing**: Who is the principal? How is identity proven? Can the credential be forged, replayed, or stolen? Is MFA/mutual-auth enforced?
+   - **Tampering**: What inputs cross the trust boundary? Are they validated against an explicit schema? Are messages integrity-protected?
+   - **Repudiation**: Are security-relevant actions logged with actor + timestamp + outcome? Are logs append-only/tamper-evident?
+   - **Information Disclosure**: What data is returned in error paths, logs, telemetry? Are PII/secrets ever serialized? Are timing side-channels addressed?
+   - **Denial of Service**: Are inputs bounded (size, count, depth)? Is parsing resource-limited? Are external calls rate-limited?
+   - **Elevation of Privilege**: What privilege does the new code execute under? Is least privilege honored? Can input alter privilege?
+3. **OWASP Top 10 walkthrough**:
+   - Broken Access Control: trace authorization policy.
+   - Cryptographic Failures: grep for weak primitives (MD5, SHA1, DES, Math.random).
+   - Injection: check unparameterized queries, shell concat, template eval.
+   - Insecure Design: cross-check STRIDE findings.
+   - Security Misconfiguration: TLS, CORS, CSP, cookie flags, debug toggles.
+   - Vulnerable Components: run ecosystem CVE scanner.
+   - Auth Failures: token TTL, refresh, session fixation, MFA.
+   - Integrity Failures: lockfile pinned, signature-verified artifacts.
+   - Logging Failures: audit log coverage, alert on auth-fail.
+   - SSRF: egress allowlist, SSRF guard on URL inputs.
+4. **Supply-chain scan**: run per-ecosystem CVE scanner and secrets/history scanner from the dep-audit-tooling matrix.
+5. **Severity grading**: assign each finding Critical/High/Medium/Low/Informational. Critical and high block merge.
+6. **Compile report**: structured findings with severity, location, description, remediation owner.
 
-Apply each prompt to every component touched by the change.
+## Failure and recovery
+- **Incomplete change set**: report what was audited and what was skipped; do not widen scope.
+- **Tool unavailable**: note the missing scanner; proceed with manual review; flag as gap in report.
+- **Ambiguous trust boundary**: document the ambiguity; flag for human review; do not assume safety.
+- **Scope creep**: stop at the declared boundary; file separate findings for out-of-scope concerns.
 
-| Letter | Threat | Required questions |
-|---|---|---|
-| **S** | Spoofing | Who is the principal? How is identity proven? Can the credential be forged, replayed, or stolen? Is MFA / mutual-auth enforced? |
-| **T** | Tampering | What inputs cross the trust boundary? Are they validated against an explicit schema (Zod / Pydantic / serde)? Are messages integrity-protected (HMAC / signature / TLS)? |
-| **R** | Repudiation | Are security-relevant actions logged with actor + timestamp + outcome? Are logs append-only / tamper-evident? |
-| **I** | Information Disclosure | What data is returned in error paths, logs, telemetry? Are PII / secrets ever serialized? Are timing side-channels addressed (constant-time compare)? |
-| **D** | Denial of Service | Are inputs bounded (size, count, depth)? Is parsing resource-limited (zip-bomb, billion-laughs, ReDoS)? Are external calls rate-limited? |
-| **E** | Elevation of Privilege | What privilege does the new code execute under? Is least privilege honored? Can input alter privilege (path traversal, SQL injection, deserialization gadget)? |
+## Output
+Structured audit report containing:
+- Executive summary with finding counts by severity.
+- STRIDE findings table (threat class, component, severity, description, remediation owner).
+- OWASP walkthrough with pass/fail per category.
+- Supply-chain scan results (CVE count, secrets found, SBOM status).
+- Merge gate decision: block (critical/high present) or pass.
 
-For each "yes" / "unclear" answer, file a finding with severity and remediation owner.
+## Provenance
 
-## OWASP Top 10 (2021) Walkthrough
-
-1. **Broken Access Control**: `git grep -n -C 3 'authorize\|@PreAuthorize\|require_role'` then trace policy.
-2. **Cryptographic Failures**: `git grep -n -E 'MD5|SHA1|DES|Random\(\)'` for weak primitives. Use `-E` (extended regex) for alternation; `-F` (fixed-string) breaks the pipe-as-OR. Add ecosystem patterns as needed: `Math.random`, `secrets.choice`, `Mersenne` constants.
-3. **Injection**: `ast-grep` patterns for unparameterized queries / shell concat / template eval.
-4. **Insecure Design**: threat model walk; cross-check STRIDE.
-5. **Security Misconfiguration**: TLS / CORS / CSP / cookie flags / debug toggles.
-6. **Vulnerable & Outdated Components**: language-family CVE scanner.
-7. **Identification & Authentication Failures**: token TTL, refresh, session fixation, MFA.
-8. **Software & Data Integrity Failures**: lockfile pinned; signature-verified artifacts; CI provenance.
-9. **Security Logging & Monitoring Failures**: audit log coverage; alert on auth-fail / privilege-escalation.
-10. **Server-Side Request Forgery**: egress allowlist; SSRF guard on URL inputs.
-
-## Parallel Dep-Audit Tooling
-
-Per-language-family CVE scanner, secrets/history scanner, and SBOM commands live in `references/dep-audit-tooling.md` — read the row for the ecosystem under audit; the other five families' rows are not needed for a single-stack codebase.
-
-Use `fd -e <ext>` (not `find`). Use `git grep -n -F 'literal'` (not `grep`). Use `bat -P -p -n` (not `cat`).
-
-## Constitutional Rules
-
-1. **Default deny**.
-2. **Validate at the trust boundary**: schema-validate every input.
-3. **Never roll your own crypto**.
-4. **No secrets in source**: vault-only; enforce via `gitleaks`.
-5. **Pin and verify**: lockfiles checked in, integrity hashes enforced.
-6. **Log security events**: every AuthN/AuthZ outcome.
-7. **Severity is a contract**: Critical/high block merge.
+- Origin: odin-current (project-owned).
+- Source: skills/security-review/SKILL.md.
+- License: project-owned; no third-party expression.
+- Adaptation: restructured from current skill body to ODIN 2.0 authoring contract format.

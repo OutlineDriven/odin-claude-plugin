@@ -1,0 +1,3 @@
+interface:
+  display_name: "Consult Deployment"
+  short_description: "Rank deployment platforms and stacks by quantitative trade-offs"

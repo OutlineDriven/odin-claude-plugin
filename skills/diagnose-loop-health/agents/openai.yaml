@@ -1,0 +1,3 @@
+interface:
+  display_name: "Diagnose Loop Health"
+  short_description: "Classify a loop setup as healthy, warning, or blocked."

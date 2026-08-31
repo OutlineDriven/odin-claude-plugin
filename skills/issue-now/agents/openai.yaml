@@ -1,0 +1,3 @@
+interface:
+  display_name: "Issue Now"
+  short_description: "Reconcile one tracker issue with current reality"

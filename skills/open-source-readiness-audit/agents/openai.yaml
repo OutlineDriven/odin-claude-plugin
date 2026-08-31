@@ -1,0 +1,3 @@
+interface:
+  display_name: "Open Source Readiness Audit"
+  short_description: "Prioritized gap report for public release readiness"

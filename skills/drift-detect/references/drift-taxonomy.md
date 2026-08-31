@@ -2,7 +2,7 @@
 
 Use this reference as the semantic rubric after collection. It is self-contained: classify, weight, cross-reference, then emit the required report.
 
-## Drift Types
+## Drift types
 
 | Type | Definition | Strong Signals | Default Severity |
 |---|---|---|---|
@@ -14,7 +14,7 @@ Use this reference as the semantic rubric after collection. It is self-contained
 | Architecture drift | Documented layer/boundary differs from actual wiring | no-op/passthrough wrapper for documented abstraction; orphan exported module for planned capability; code path bypasses stated layer | medium/high |
 | Ownership drift | Planned area became risky because ownership/activity changed | high bug-fix churn, low recent owner activity, stale PRs/issues mapped to one area | high |
 
-## Gap Types
+## Gap types
 
 | Gap | Definition | Evidence Examples | Severity Rule |
 |---|---|---|---|
@@ -27,7 +27,7 @@ Use this reference as the semantic rubric after collection. It is self-contained
 | Cleanup gap | abandoned work remains after scope changed | orphan exports, dead feature flags, stale TODO clusters | low/medium |
 | Ownership gap | area has no clear recent maintainer | one author owns 80% then inactive; high churn since | medium/high |
 
-## Prioritization Weighting
+## Prioritization weighting
 
 Score every candidate action. Bucket by score, but never hide severity; the report item carries both.
 
@@ -76,7 +76,7 @@ Buckets:
 
 Tie-break order: severity, evidence certainty, blocker effect, user-facing impact, quick win, recency.
 
-## Fuzzy Cross-Reference Matching
+## Fuzzy cross-reference matching
 
 Normalize before matching:
 
@@ -119,7 +119,7 @@ Certainty grading:
 - **MEDIUM** - semantic match across naming conventions plus supporting path/history evidence.
 - **LOW** - only broad keyword overlap or absence signal.
 
-## Native Signal Interpretation
+## Native signal interpretation
 
 | Signal | Interpretation | Severity |
 |---|---|---|
@@ -133,7 +133,7 @@ Certainty grading:
 | no tests + implemented critical feature | quality/release gap | high/critical |
 | no CI + release milestone | release-readiness gap | high/critical |
 
-## Report Template
+## Report template
 
 ```markdown
 # Reality Check Report
@@ -224,7 +224,7 @@ Only include actions with HIGH certainty and small blast radius.
 - {feature} could not be classified because {missing evidence}.
 ```
 
-## Synthesis Rules
+## Synthesis rules
 
 1. Completed checkboxes and phases are suspect until verified against code.
 2. Open issues are not stale merely because old; stale requires inactivity plus no matching current implementation or ownership signal.

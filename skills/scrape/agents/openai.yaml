@@ -1,0 +1,3 @@
+interface:
+  display_name: "Scrape"
+  short_description: "Scrape a URL and save assets with a manifest locally"

@@ -1,94 +1,53 @@
 ---
 name: autopilot
-description: Run a hands-off plan-to-ship pipeline by chaining existing skills. Use when the user says "autopilot", "take this from plan to shipped", "run the whole pipeline", "hands-off ship it", or "do the end-to-end build".
-metadata:
-  short-description: Hands-off plan→ship pipeline chaining existing skills
+description: 'Use when a human invokes /autopilot to deliver a feature from plan through shipped PR. Don''t use for tasks outside the described feature or without explicit invocation.'
+disable-model-invocation: true
 ---
 
-# Autopilot: hands-off plan→ship pipeline that chains existing skills
+# Autopilot
 
-`autopilot` runs a build request from plan to shipped without re-prompting at every step. It is a **chain**: each phase invokes an existing ODIN skill via the Skill tool and gates on the result before the next phase begins. It owns sequencing, the phase gates, and the terminal report; nothing else. It writes no code surface of its own; the chained skills do.
+## Contract
 
-## When to Apply
+| Field | Bound contract |
+|---|---|
+| Trigger | A human explicitly invokes `/autopilot` with a feature description and may assign planning or implementation to a named model or harness. |
+| Authority | Treat the invocation as authority to execute the stated delivery campaign, including delegated work and remote publication; before using credentials, incurring cost, changing data at rest, publishing, deploying, mutating remote state in bulk, or irreversibly deleting anything, preview the exact target and consequence, and stop if the invocation does not authorize them. |
+| Side effect | Plan, implement, simplify, review, test, and ship only the described feature; delegated PR babysitting may push commits or open and maintain its PR without pausing between authorized stages. |
+| Done | Emit `DONE` only after implementation, review findings, required checks, publication, and PR close-out are complete; otherwise stop with `BLOCKED` and the reason. |
 
-- The user hands an execution-ready task and wants it taken from plan to shipped without step-by-step approval: "autopilot", "ship it end to end", "take it from plan to PR".
-- A concrete change is specified, enough for the approved plan to name implementation units. The pipeline executes; it does not discover what to build.
+## Inputs
 
-## When NOT to Apply
+Required: the feature description, the repository or workspace containing the work, and an explicit `/autopilot` invocation from the human.
 
-- **A single execution step against an approved plan** → `work`. autopilot wraps `work` with the rest of the arc; if that arc is unwanted, call `work` directly.
+Optional: acceptance criteria; scope limits; target branch, remote, and PR destination; required checks; shipping instructions; and a named model or harness for planning or implementation. When an optional value is absent, derive it only from repository evidence and the feature description; if a safe, unique target cannot be established, stop blocked rather than guess.
 
-## Inputs and Flags
+## Procedure
 
-- `[task]`: the execution-ready request the approved plan covers. Required; an empty or ambiguous task fails the precondition below — the chain does not start.
-- `against <ref>`: base-ref override forwarded to the diff-scoped phases (`simplify`, `review`).
-- `mode:local`: force local-only (skip push + CI) even when a remote exists.
-- `mode:headless`: non-interactive overlay; pass through to each chained skill's headless variant where it has one. No phase prompts the user; a gate that would prompt instead HALTs with the question in the report.
+1. Parse the feature description, acceptance criteria, assignments, scope limits, repository, branch, remote, PR destination, required checks, and shipping instructions. Reject contradictory instructions or an unavailable assigned executor.
+2. Inspect the relevant repository evidence and establish the exact files, behavior, validation, remote target, and close-out conditions in scope. Do not widen the campaign beyond the requested feature.
+3. Before any credential use, paid action, data-at-rest change, publication, deployment, remote bulk mutation, or irreversible deletion, present the exact target and consequence. Continue only when that action is covered by the explicit invocation and supplied shipping instructions; otherwise emit `BLOCKED` before performing it.
+4. Produce an executable plan that maps each acceptance criterion to implementation work and proof. If planning was assigned, send the bounded feature, evidence, constraints, and required return shape to that executor, then validate its result against the same scope.
+5. Implement the plan in dependency order. If implementation was assigned, delegate only the bounded work and require the executor to return changed artifacts, observed results, and unresolved failures; inspect those results before integration.
+6. Simplify the completed implementation without changing its required behavior: remove redundant code and obsolete paths introduced or exposed by the change, while retaining every acceptance criterion.
+7. Review the full in-scope change for correctness, security, maintainability, scope compliance, and missing acceptance criteria. Apply supported findings and repeat simplification and review when a fix materially changes the reviewed behavior. Stop blocked on contradictory findings, repeated equivalent failure, or evidence that resolution requires scope widening.
+8. Run the repository checks and direct scenarios required to prove the changed behavior. Record the exact commands or scenarios and their observed results; never infer a pass from unrun or unavailable checks.
+9. Ship only after the implementation and required proof pass. Push the authorized commits and open or update the PR at the previewed destination, then delegate PR babysitting with the exact repository, branch, PR, acceptance criteria, and authority boundary.
+10. Babysit the PR through authorized close-out: monitor checks and review feedback, apply supported in-scope fixes, rerun affected proof, and push updates. Do not merge, deploy, publish elsewhere, or perform another remote mutation unless the invocation and shipping instructions authorize that consequence.
+11. Emit `DONE` only when the requested shipping state and PR close-out conditions are observed. Include the resulting branch or PR, delivered behavior, and verification evidence.
 
-## Precondition: an approved plan exists
+## Failure and recovery
+Classify invalid or contradictory input, unavailable assigned execution, ambiguous mutation target, missing authority, implementation failure, failed or unavailable proof, non-converging review, rejected remote mutation, and incomplete PR close-out as blocking failures.
 
-The chain begins only when an approved plan exists — one the user approved through Claude Code's built-in plan mode (`ExitPlanMode`), or an equivalent written plan the user has approved. autopilot does not produce that plan and never invents one: "scope unknown" is not autofixable. No approved plan → do not start; return to plan mode, or hand off upstream to `askme` / `strategy` for an execution-ready task.
+Before remote mutation, leave remote state unchanged on failure. After a partial local or remote result, preserve successful in-scope work, report every observed state transition, and use repository version history or the hosting service's reversible operations to recover only changes made by this run; never discard unrelated work or claim rollback without observing it.
 
-## The chain
+Return `BLOCKED` with the failed stage, exact reason, completed artifacts and remote actions, failed or unavailable checks, recovery state, and the smallest concrete requirement for continuation. Never emit `DONE` for a partial result, swallowed error, guessed target, or unverified close-out.
 
-Each row is one phase: the named skill is invoked, not reimplemented. This is the phase map only. The gate that advances each phase, its autofix arm, and the halt action are defined once: in the Validation Gates table below for the in-body summary, and in `references/pipeline-gates.md` for the authoritative pass-criteria, state machine, and halt/report formats.
+## Output
+Return exactly one terminal classification:
 
-| # | Phase | Invokes | Note |
-|---|-------|---------|------|
-| 1 | Execute | `work` | **Orchestrated** caller mode: implementation + local verification only; autopilot owns simplify/review/PR/CI as later phases |
-| 2 | Simplify | `simplify` | compress the new diff |
-| 3 | Review | `review` | read-only assessment |
-| 4 | Apply fixes | `fix` | **conditional**: runs only when G3 fails; it is the review gate's autofix arm, not an unconditional step |
-| 5 | Commit + push | `commit-push` | push half skipped local-only |
-| 6 | CI | `gh-fix-ci` | skipped local-only |
-| 7 | Report | none | always, on success or HALT |
+- `DONE` — delivered behavior, changed artifacts, verification commands or scenarios with observed results, branch and PR destination, delegated babysitting outcome, and observed close-out state.
+- `BLOCKED` — failed stage, reason, partial results, remote mutations already made, proof status, recovery status, and the concrete requirement to resume.
 
-## Support files: read on demand
+## Provenance
 
-Don't bulk-load. Read at the step that needs it.
-
-- `references/pipeline-gates.md`: the authoritative source for every gate's exact pass-criteria, the autofix arm per gate, the autofix-then-halt state machine, local-only detection, and the halt-handoff and report formats. The Validation Gates table below is the in-body summary; read the reference when running any gate or deciding a halt.
-
-## Workflow
-
-The sequence and its halt mechanics; exact pass-criteria per gate are in the Validation Gates table and `references/pipeline-gates.md`.
-
-1. **Phase 1: Execute.** Invoke `work` against the approved plan in its **Orchestrated** caller mode — implementation and local verification only, returning a structured summary. It must not run simplify, review, PR, or CI; autopilot owns those as Phases 2, 3, 5, and 6. G1 red → autofix arm `fix` runs **once**, re-check; still red → HALT.
-2. **Phase 2: Simplify.** Invoke `simplify` on the new diff. `simplify` self-reverts a behavior regression; an unrecoverable exit (new bloat / mixed commit) is G2 fail → HALT.
-3. **Phase 3 (+4): Review-gate.** Invoke `review` (read-only). Only if a critical/high finding exists, invoke `fix` **once** on those findings (Phase 4), then re-review the changed files. Residual critical/high after the one pass is G3 fail → HALT.
-4. **Phase 5: Commit + push.** Detect remote via `git remote`. Invoke `commit-push`; local-only → commits only, push half skipped. A push refusal (force/protected) is G5 fail and not autofixable → HALT.
-5. **Phase 6: CI.** Skipped local-only. Otherwise invoke `gh-fix-ci`, which watches PR checks and runs its own fix arm **once**; still red is G6 fail → HALT, hand off failing-check logs/URLs.
-6. **Phase 7: Report.** Always, on success or at the halt point. Phases run, gates passed/failed, residual handoff, commits/PR, the next operator's action.
-
-## Constitutional Rules (Non-Negotiable)
-
-1. **Chain, never reimplement.** Each phase delegates to its named skill via the Skill tool. autopilot owns sequencing, gates, and the report; nothing else. Inlining a phase's logic is Graft.
-2. **Execution-only entry.** The chain starts from an approved plan and never invokes `strategy` or `ideate`. Greenfield discovery is upstream and manual; auto-chaining it to "be helpful" on a vague request is Excess.
-3. **Gated sequencing.** A phase begins only after the prior gate passes.
-4. **Autofix-then-halt.** On a failing gate, run the bounded autofix arm **once** (`fix` for the verifier and review gates, `gh-fix-ci` for the CI gate), then re-check. Still failing → HALT, hand off residual findings, run the report. Never carry a red gate into the next phase; compounding a bad change across phases is the exact failure this rule prevents.
-5. **Local-only when no remote.** Detect via `git remote`; empty (or `mode:local`) → skip the push half and the whole CI phase; still commit and still report.
-6. **Baseline wins.** On any conflict with `~/.claude/claude/system-prompt-baseline.md`, the baseline governs.
-
-## Validation Gates
-
-Gate id equals phase number; Phase 4 (`fix`, G3's autofix arm) and Phase 7 (Report) are gateless, so there is no G4 or G7.
-
-| Gate | Pass Criteria | Autofix arm (once) | Blocking |
-|------|---------------|--------------------|----------|
-| Precondition | an approved plan exists (plan mode / `ExitPlanMode`, or an equivalent approved written plan) | none; "scope unknown" is not autofixable | Yes; do not start, hand off to upstream `askme`/`strategy` |
-| G1 Execute | `work`'s Orchestrated pass returns its structured summary and the repo-native verifier is green | `fix` | Yes; HALT on still-red |
-| G2 Simplify | clean exit, behavior preserved | `simplify` self-revert | Yes; HALT on new bloat / mixed commit |
-| G3 Review | no critical/high finding after one fix pass + re-review | `fix` then re-review | Yes; HALT on residual critical/high |
-| G5 Commit/push | atomic commits made; push ok (local-only: commits only) | none | Yes; HALT on push refusal |
-| G6 CI | PR checks green | `gh-fix-ci` watch+fix | Yes; HALT on still-red; skipped local-only |
-| Report emitted | terminal report produced on success or HALT | none | Yes |
-
-## Anti-patterns
-
-- **Looping an autofix arm until green.** The posture is once-then-halt. A second autofix attempt hides a bad plan and compounds risk; HALT and hand off instead.
-- **Carrying a red gate forward** "to fix later". The next phase amplifies the defect over a larger surface.
-- **Inventing a remote** to push a local-only repo. No remote → commit and report.
-
-## Operating surface
-
-`work` and `fix` write the working tree; `commit-push` writes commits and the remote; `review` is read-only; `simplify` self-reverts on regression. No writes to undefined or doubly-owned locations.
+Clean-room adaptation of the end-to-end delivery and delegated PR-operation mechanisms from EveryInc's `compound-engineering-plugin`, path `skills/lfg/SKILL.md`, pinned at revision `a1f601f17137f648be439965f8fdd9123303de5d`. Source license: MIT, Copyright (c) 2025 Every; attribution is preserved in the project provenance ledger, and no third-party expression is copied here.

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Cycle Memo"
+  short_description: "Extract cycle lessons into a local memo and next-cycle plan."

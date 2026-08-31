@@ -1,0 +1,3 @@
+interface:
+  display_name: "Post Change Check Gate"
+  short_description: "Verify checks ran before calling an artifact done"

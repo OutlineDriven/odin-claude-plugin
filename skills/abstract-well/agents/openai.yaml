@@ -1,0 +1,3 @@
+interface:
+  display_name: "Abstract Well"
+  short_description: "Classify abstractions as useful, bad, or busy; keep one level."

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Press Decision"
+  short_description: "Press a decision until you can explain it to a skeptic"

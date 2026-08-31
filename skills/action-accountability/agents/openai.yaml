@@ -1,0 +1,3 @@
+interface:
+  display_name: "Action Accountability"
+  short_description: "World-state action-accountability ledger"

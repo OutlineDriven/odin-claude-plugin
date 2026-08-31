@@ -1,4 +1,4 @@
-# Parallel Dep-Audit Tooling
+# Parallel dep-audit tooling
 
 | Family | CVE scanner | Secrets / history | SBOM |
 |---|---|---|---|

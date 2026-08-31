@@ -2,7 +2,7 @@
 
 The model defaults toward centroid output. Diversity is engineered, not wished. This file documents six techniques for engineering it; combine them — none alone is sufficient. Skipping any one technique re-anchors the candidate set to the centroid; the techniques compound, they do not substitute.
 
-## §1. Verbalized Sampling
+## §1. Verbalized sampling
 
 Source: arXiv 2510.01171 ("Verbalized Sampling Yields More Diverse and Higher-Quality LLM Generations").
 

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Second Opinion External Review"
+  short_description: "Independent Codex or Gemini review with findings"

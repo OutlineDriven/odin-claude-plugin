@@ -1,0 +1,3 @@
+interface:
+  display_name: "Property Test Review"
+  short_description: "Find tautologies, vacuities, and weak property-test coverage"

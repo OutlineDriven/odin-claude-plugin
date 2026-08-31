@@ -1,0 +1,3 @@
+interface:
+  display_name: "LaTeX Preprint Verification"
+  short_description: "Traceable native-visual LaTeX preprint"

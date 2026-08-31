@@ -1,0 +1,3 @@
+interface:
+  display_name: "Resolve Merge by Intent"
+  short_description: "Resolve merge conflicts by intent, finish green."

@@ -1,38 +1,64 @@
 ---
 name: taste
-description: Apply taste judgment to an artifact or decision. Use when asking "overkill?", "elegant?", "audit", or "taste-test this", or setting a taste register.
+description: 'Use when asking "overkill?", "elegant?", "audit", or "taste-test this", or setting a taste register. Returns a per-anchor verdict table with ranked fixes in audit mode, or loads the judgment register in anchor mode. Don''t use for tasks that require source or remote-system changes.'
 ---
 
 # Taste
 
-Distinctive judgment over centroid-AI default convergence. Restraint as default. One strong intentional moment per artifact. The two failure modes, slop and overkill, are reciprocal: both come from refusing to commit. Slop hedges by averaging into AI defaults; overkill hedges by piling on decoration that covers thin ideas.
+## Contract
 
-`/taste` operates across prose, code, design, and decisions with the same charter and the same eight anchors. It is a judgment register; it does not transform the artifact, it decides what about the artifact is committed and what remains a hedge.
+| Field | Bound contract |
+|---|---|
+| Trigger | User asks 'overkill?', 'elegant?', 'audit', or 'taste-test this', or asks to set a taste register |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Side effect | Audit returns a verdict table and ranked fixes in chat; anchor mode persists the register best-effort; no files are written. |
+| Done | A per-anchor verdict table with ranked top-3 fixes is returned, or the taste register is loaded in anchor mode. |
 
-## Modes [LOAD-BEARING]
+## Inputs
 
-### Mode-selection (hybrid)
+- The artifact or decision to judge (required for audit mode).
+- No inputs required for anchor mode beyond the invocation.
+
+## Procedure
+
+### Mode selection
 
 Auto-detect from the user's phrasing, with slash-arg override:
 
-- User wording matches `is this slop?`, `overkill?`, `elegant?`, `audit`, `taste-test this`, `judge this` → **audit** mode.
-- User wording matches `taste anchor`, `taste mode`, `taste register`, or anticipates producing fresh work → **anchor** mode.
-- Anything else → **audit** (default; cheaper to run; no behavior commitment).
-- Explicit override: `/taste audit`, `/taste anchor`. Override always wins.
+1. User wording matches `overkill?`, `elegant?`, `audit`, `taste-test this`, `judge this` → **audit** mode.
+2. User wording matches `taste anchor`, `taste mode`, `taste register`, or anticipates producing fresh work → **anchor** mode.
+3. Anything else → **audit** (default; cheaper to run; no behavior commitment).
+4. Explicit override: `/taste audit` or `/taste anchor`. Override always wins.
 
-### `audit` mode procedure
+### Audit mode
 
-Walk the eight anchors one at a time against the artifact. For each: state the anchor, judge the artifact (pass / warn / fail), cite the Side A or Side B charter row when violated, and write a concrete fix. Close with the top-3 ranked fixes. **Conflict-handling**: when two anchors fail with conflicting fixes (e.g., Restraint says compress, Generosity says expand), surface the tension explicitly. Do not auto-pick, and do not use a fixed precedence list. Tie-break is user-led.
+1. Walk the eight anchors one at a time against the artifact.
+2. For each anchor: state the anchor, judge the artifact (pass / warn / fail), cite the Side A or Side B charter row when violated, and write a concrete fix.
+3. When two anchors fail with conflicting fixes (e.g., Restraint says compress, Generosity says expand), surface the tension explicitly. Do not auto-pick. Tie-break is user-led.
+4. Close with the top-3 ranked fixes.
 
-### `anchor` mode procedure
+### Anchor mode
 
-Load the charter and anchors as imperatives the model will honor across subsequent responses. **Persistence is best-effort**: applies until the user signals "stop taste" or "normal mode" OR context is compacted, whichever comes first. Re-invoke `/taste anchor` if drift is observed. The model honors a directive loaded once into context.
+1. Load the charter and anchors as imperatives honored across subsequent responses.
+2. Persistence is best-effort: applies until the user signals "stop taste" or "normal mode" OR context is compacted, whichever comes first.
+3. Re-invoke `/taste anchor` if drift is observed.
 
-## The two-sided charter
+### Auto-clarity exception
 
-**Side A: slop** (centroid-AI default convergence): generic openers ("Sure!", "Of course"), hedge-stacks ("perhaps it might be"), validation phrases ("you're absolutely right"), AI-flat prose with no rhythm, default palettes, defensive nil-checks where impossible, 50/50 decision hedges that pick nothing.
+Suspend the register temporarily for:
 
-**Side B: overkill** (decoration covering thin ideas): gradient stacks on every section, thesaurus-soup prose ("orchestrate the holistic synthesis of"), abstraction towers (4 layers where 1 suffices), complexity-flex masking absent conviction, ceremony that performs depth without delivering it.
+- Destructive or irreversible operation confirmations (e.g., `git push --force`, `rm -rf`).
+- Security or data-loss warnings.
+- Multi-step procedures where order or atomicity matters and the judgment register would obscure structure.
+- Direct user clarification requests.
+
+Resume the register once the high-stakes section ends.
+
+### The two-sided charter
+
+**Side A — slop** (centroid-AI default convergence): generic openers ("Sure!", "Of course"), hedge-stacks ("perhaps it might be"), validation phrases ("you're absolutely right"), AI-flat prose with no rhythm, default palettes, defensive nil-checks where impossible, 50/50 decision hedges that pick nothing.
+
+**Side B — overkill** (decoration covering thin ideas): gradient stacks on every section, thesaurus-soup prose ("orchestrate the holistic synthesis of"), abstraction towers (4 layers where 1 suffices), complexity-flex masking absent conviction, ceremony that performs depth without delivering it.
 
 | Domain   | Side A (slop)                            | Side B (overkill)                        |
 |----------|------------------------------------------|------------------------------------------|
@@ -41,11 +67,9 @@ Load the charter and anchors as imperatives the model will honor across subseque
 | Design   | Default purple-blue gradient             | Gradient on every section + glow + glass |
 | Decision | "Both options have merit, so..."         | 12-criterion weighted scoring matrix     |
 
-See `references/charter.md` for the full charter.
+### Anchors
 
-## Anchors (cross-domain, portable)
-
-Eight anchors apply to every domain:
+Eight anchors apply across prose, code, design, and decisions:
 
 - **Clarity**: the artifact says what it means; reader does not have to decode.
 - **Hierarchy**: important looks important; secondary supports.
@@ -56,11 +80,18 @@ Eight anchors apply to every domain:
 - **Honesty**: no decoration covering missing depth; no slop covering missing POV.
 - **One strong moment**: exactly one commitment carries the lift; the rest supports.
 
-See `references/anchors.md` for cross-domain manifestations of each anchor.
+## Failure and recovery
+| Failure class | Response |
+|---|---|
+| Artifact too short or ambiguous to judge | Return "insufficient surface" with the specific missing element; do not fabricate verdicts. |
+| Anchors produce conflicting fixes | Surface the tension; do not auto-pick. Tie-break is user-led. |
+| Anchor mode drift after context compaction | Re-invoke `/taste anchor`; do not assume persistence. |
+| User artifact is in a domain with no charter row | Apply the anchors directly; note the domain gap in the verdict table. |
 
-## Audit output shape
+No partial-result fabrication. If fewer than eight anchors can be judged, return only the judged anchors and name the blocker.
 
-Per-anchor table, then ranked top-3 fixes:
+## Output
+**Audit mode**: a per-anchor verdict table (Anchor | Verdict | Citation | Fix) followed by ranked top-3 fixes.
 
 ```
 Anchor             | Verdict | Citation              | Fix
@@ -79,28 +110,11 @@ Top-3 fixes: 1. Pick one direction (Intent + One-strong-moment).
              3. Cut the framing paragraph (Restraint).
 ```
 
-See `references/examples.md` for three worked audits — prose, code, decision — each carried from artifact through per-anchor verdict to revised form. Calibrate verdict severity against them before emitting a table.
+**Anchor mode**: a register-load confirmation listing the eight anchors, the Side A and Side B block patterns, and the persistence caveat.
 
-## Anchor mode output shape
+## Provenance
 
-When `/taste anchor` activates, emit a short register-load message:
-
-```
-/taste anchor active.
-Anchors: Clarity, Hierarchy, Intent, Coherence, Restraint, Generosity, Honesty,
-One-strong-moment.
-Side A (slop) blocks: generic openers, hedge-stacks, validation phrases, AI-flat prose.
-Side B (overkill) blocks: thesaurus soup, abstraction towers, decoration covering thin ideas.
-Persistence: best-effort. Stop with "stop taste" or "normal mode". May reset on context compaction.
-```
-
-## Auto-clarity exception
-
-Suspend `/taste` register temporarily for:
-
-- Destructive or irreversible operation confirmations (e.g., `git push --force`, `rm -rf`).
-- Security or data-loss warnings.
-- Multi-step procedures where order or atomicity matters and judgment register would obscure structure.
-- Direct user clarification requests.
-
-Resume the register once the high-stakes section ends.
+- Origin: current-odin-skill-tree, skills/taste/SKILL.md (candidate current:current-d:current:taste, disposition ADAPT) merged with skills/slop/SKILL.md (candidate current:current-d:current:slop, disposition MERGE into taste).
+- Revision: none pinned.
+- License: project-owned.
+- Adaptation: clean-room rewrite preserving the eight-anchor charter, two-sided Side A/B framework, audit/anchor dual-mode procedure, and auto-clarity exception from the current taste skill. Slop's trigger predicate and interface metadata transfer at the wall; its domain-routing table (referencing peer skills) is excluded per the self-containment requirement.

@@ -1,0 +1,45 @@
+---
+name: corroborate-by-independent-reruns
+description: 'Use when a candidate patch or answer needs independent corroboration before it is trusted. Run N isolated sandboxed attempts and return the strict-majority byte-identical patch with its agreement count, or report no consensus. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+---
+
+# Corroborate by independent reruns
+
+## Contract
+
+| Field | Bound contract |
+|---|---|
+| Trigger | A candidate patch or answer needs independent corroboration before it is trusted |
+| Authority | Reversible local: write only the named corroboration report; discard it if rejected. Each run mutates only its own isolated sandbox, discarded after capture |
+| Side effect | Runs N isolated sandboxed attempts and returns the majority patch plus its agreement count; byte identity is a corroboration signal, not a correctness oracle; no-change runs never carry consensus |
+| Done | Either a strict majority of launched runs produced byte-identical output and it is returned with its count, or no consensus is reported |
+
+## Inputs
+
+- The candidate patch or answer to corroborate.
+- N, the number of isolated runs to launch (N >= 1).
+- The sandbox execution command or task prompt each run performs independently from a clean baseline.
+- Optional: a baseline output to classify no-change runs against.
+
+## Procedure
+
+1. Receive the candidate, N, and the sandbox execution command. Bound scope to N isolated runs; do not widen to additional runs or mutate the shared working tree.
+2. Launch N isolated sandboxed attempts, each starting from the same clean baseline and running the same task without access to any other run's output.
+3. Capture each run's full output bytes.
+4. Classify each output: a no-change run whose output is byte-identical to the baseline or empty is excluded from consensus and never carries consensus.
+5. Group the remaining outputs by byte identity. If a single byte-identical group is a strict majority of the N launched runs (count > N/2), return that output with its agreement count.
+6. If no byte-identical group reaches a strict majority, report no consensus.
+7. Treat byte identity as a corroboration signal only, never as a correctness oracle; do not assert the majority output is correct.
+
+## Failure and recovery
+- Sandbox failure: a run that errors or cannot capture output counts as a launched run that produced no candidate; it contributes to no byte-identical group.
+- Partial results: never return a partial majority; consensus requires a strict majority of all N launched runs, not a plurality.
+- Non-mutation: each run operates in an isolated sandbox discarded after capture; the only named local artifact is the returned corroboration report, which the caller discards if rejected.
+- Blocked or non-converged: if no byte-identical group is a strict majority, the terminal result is no consensus with the per-run output groups. Do not fabricate agreement, promote a plurality, or claim the majority output is correct.
+
+## Output
+Either the strict-majority byte-identical patch or answer with its agreement count, or a no-consensus classification listing the per-run output groups. Never a correctness claim.
+
+## Provenance
+
+Origin: cobusgreyling/loop-engineering. Revision: d03dcb92cc1e0efb59789a2557131c6ad5897ccc. License: MIT. Source paths: /tools/loop-swarm/src/swarm.ts, /tools/loop-swarm/README.md, /scripts/issue-bodies/quickstart-loop-swarm.md. Adaptation: the loop-swarm N-rerun byte-identity consensus mechanism is restated as a corroboration signal demoted from correctness oracle to identity signal; expression is clean-room, no third-party text copied.

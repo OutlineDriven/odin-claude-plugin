@@ -1,0 +1,3 @@
+interface:
+  display_name: "Session Describe Analysis"
+  short_description: "Analyze a recorded session into an editable step list"

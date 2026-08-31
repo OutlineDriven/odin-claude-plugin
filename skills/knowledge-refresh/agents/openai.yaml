@@ -1,0 +1,3 @@
+interface:
+  display_name: "Knowledge Review"
+  short_description: "Dual-reviewer quality gate for plans and briefs; findings merge"

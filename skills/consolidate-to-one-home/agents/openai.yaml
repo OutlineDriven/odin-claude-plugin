@@ -1,3 +1,3 @@
 interface:
-  display_name: "Consolidate to One Home"
-  short_description: "Fold a scattered fact together"
+  display_name: "Consolidate To One Home"
+  short_description: "Folds repeated statements into one canonical home with pointers"

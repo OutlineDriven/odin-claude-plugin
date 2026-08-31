@@ -1,0 +1,3 @@
+interface:
+  display_name: "GitHub Issue Dedupe"
+  short_description: "Find duplicate GitHub issues; post a high-confidence comment"

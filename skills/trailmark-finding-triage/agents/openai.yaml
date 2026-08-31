@@ -1,0 +1,3 @@
+interface:
+  display_name: "Trailmark Finding Triage"
+  short_description: "Classify one finding as Promote, Review, Deprioritize, or Blocked"

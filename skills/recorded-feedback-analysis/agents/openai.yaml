@@ -1,0 +1,3 @@
+interface:
+  display_name: "Recorded Feedback Analysis"
+  short_description: "Turn Riffrec captures into evidence-backed bug reports"

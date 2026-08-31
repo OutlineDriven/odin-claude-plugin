@@ -1,0 +1,3 @@
+interface:
+  display_name: "MCP Builder"
+  short_description: "Build an MCP server with typed tools and 16 evaluations"

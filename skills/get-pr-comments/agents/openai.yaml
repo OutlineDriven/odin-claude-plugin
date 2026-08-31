@@ -1,0 +1,3 @@
+interface:
+  display_name: "Get PR Comments"
+  short_description: "Severity-grouped PR feedback and action list."

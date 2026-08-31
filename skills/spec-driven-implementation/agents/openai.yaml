@@ -1,0 +1,3 @@
+interface:
+  display_name: "Spec Driven Implementation"
+  short_description: "Author and update behavioral specs that match what ships"

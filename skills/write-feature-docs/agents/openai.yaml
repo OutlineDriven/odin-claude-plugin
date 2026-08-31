@@ -1,0 +1,3 @@
+interface:
+  display_name: "Write Feature Docs"
+  short_description: "Draft a docs page grounded in spec and codebase with screenshots"

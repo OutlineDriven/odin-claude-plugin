@@ -1,0 +1,3 @@
+interface:
+  display_name: "OS Activity Collectors"
+  short_description: "Persist correlated host activity as a session bundle"

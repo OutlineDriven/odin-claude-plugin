@@ -1,0 +1,3 @@
+interface:
+  display_name: "Cross Critique"
+  short_description: "Synthesize a contested decision from cross-critiqued proposals"

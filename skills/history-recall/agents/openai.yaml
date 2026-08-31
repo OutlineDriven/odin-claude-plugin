@@ -1,0 +1,3 @@
+interface:
+  display_name: "History Session Brief"
+  short_description: "One capped typed record of a matched past session's reasoning."

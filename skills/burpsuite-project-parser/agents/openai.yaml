@@ -1,0 +1,3 @@
+interface:
+  display_name: "Burpsuite Project Parser"
+  short_description: "Search Burp Suite .burp projects for audit items and traffic"

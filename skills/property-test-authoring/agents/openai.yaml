@@ -1,0 +1,3 @@
+interface:
+  display_name: "Property Test Authoring"
+  short_description: "Author property tests that find real bugs in code"

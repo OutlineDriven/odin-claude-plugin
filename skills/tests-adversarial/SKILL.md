@@ -1,85 +1,78 @@
 ---
 name: tests-adversarial
-description: Write adversarial tests. Use when hardening error handling, validating boundary behavior, or hunting silent failures.
+description: 'Use when asked to write adversarial tests when hardening error handling, validating boundary behavior, or hunting silent failures. Produces assumption-violation tests with passing sanitizer gates. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
-# Adversarial Testing: Think Like the Attacker
+# Adversarial test authoring
 
-Every line of code makes assumptions. Your job is to find them and violate them systematically, not randomly. The goal is distrust, not coverage.
+## Contract
 
-## The Adversarial Mindset
+| Field | Bound contract |
+|---|---|
+| Trigger | The work is hardening error handling, validating boundary behavior, or hunting silent failures. |
+| Authority | Reversible-local: write only test files and local artifacts; rollback by reverting the commit or deleting added files. |
+| Side effect | Writes assumption-violation tests over inputs, ordering, timing, state, resources, and impossible cases; runs sanitized race-detector gates. |
+| Done | Every documented assumption has a violation test and the sanitizers pass with zero warnings. |
 
-1. **Every input is a lie.** Callers will send garbage, nulls, negative numbers, empty strings, and types that satisfy the compiler but violate intent.
-2. **Implicit contracts are targets.** If the code assumes ordering, uniqueness, non-emptiness, or positive values without enforcing it, that is your entry point.
-3. **The system is your adversary.** Files disappear, connections drop, clocks jump, memory runs out, permissions change between check and use.
-4. **Passing tests prove nothing.** They prove the happy path works. Adversarial tests prove the sad paths do not silently corrupt.
+## Inputs
 
-## Assumption Hunting (Core Technique)
+- **Code under test** (required): source files, modules, or functions to harden.
+- **Language runtime and sanitizer toolchain** (required): compiler, test runner, and available sanitizers (ASan, TSan, MSan, Miri, `-race`, or equivalent).
+- **Existing test suite** (optional): prior tests to avoid duplication and to identify gaps.
 
-For every function or module under test, ask these six questions:
+## Procedure
 
-1. **What does it assume about inputs?** Violate each assumption: wrong type coercion, boundary values, null/nil/None, empty collections, maximum-size payloads.
-2. **What does it assume about ordering?** Reorder arguments, reverse sequences, interleave concurrent calls, call methods out of lifecycle order.
-3. **What does it assume about timing?** Delay responses past timeouts, deliver results before the consumer is ready, inject clock skew, expire tokens mid-operation.
-4. **What does it assume about state?** Start from half-initialized state, corrupt shared state mid-operation, test post-error recovery state, double-close resources.
-5. **What does it assume about resources?** Exhaust file descriptors, fill disk, revoke permissions, return allocation failures, saturate connection pools.
-6. **What does it assume will NOT happen?** Make it happen. Concurrent modification during iteration, recursive re-entry, self-referential data, stack overflow via deep nesting.
+1. **Read the code under test.** Understand actual behavior, not documentation claims.
+2. **Document every implicit assumption.** For each function or module, record assumptions across six categories:
+   - **Inputs**: types, nullability, ranges, empty collections, boundary values, encoding.
+   - **Ordering**: argument order, sequence dependencies, lifecycle ordering, concurrent call interleaving.
+   - **Timing**: timeouts, premature delivery, clock skew, token expiry mid-operation.
+   - **State**: half-initialized state, shared-state corruption during operation, post-error recovery, double-close.
+   - **Resources**: file descriptor exhaustion, disk full, permission revocation, allocation failure, connection pool saturation.
+   - **Impossible cases**: concurrent modification during iteration, recursive re-entry, self-referential data, deep nesting overflow.
+3. **Write one violation test per assumption.** Name each test after what it violates (e.g., `test_rejects_negative_quantity`, `test_handles_empty_result_set`, `test_recovers_from_mid_write_crash`). Test through the public API only; if private access is needed to trigger a failure, record that as a finding.
+4. **Apply attack vectors systematically:**
+   - *Data*: zero, negative, MAX_INT, NaN, Infinity, negative zero, empty string, null bytes, multi-byte Unicode (emoji, RTL, ZWJ), empty/single/capacity collections, encode-corrupt-decode.
+   - *State*: double-close, use-after-dispose, read-after-error, concurrent mutation during iteration or serialization, half-written interrupted state, out-of-state-machine events.
+   - *Environment*: file not found, permission denied, disk full, read-only filesystem, network timeout, connection reset, DNS failure, partial write, clock jumps, OOM during cleanup.
+   - *Protocol*: out-of-order messages, duplicate delivery, missing acknowledgment, partial writes (truncated JSON/protobuf), version mismatch, request after close, response after timeout.
+5. **Verify error quality.** Every failure path must produce a descriptive error. Silent corruption or generic messages are failures.
+6. **Test boundaries from both sides.** If the limit is N, test N-1, N, and N+1. If the limit is 0, test -1, 0, and 1.
+7. **Run sanitizers and race detectors.** Execute the full test suite under ASan, MSan, TSan, `-race`, Miri, or the language equivalent. Tests that pass without sanitizers may hide undefined behavior.
+8. **Commit test files.** Stage and commit with a message identifying the assumptions violated and the sanitizer results.
 
-## Attack Vectors (Thinking Prompts)
+## Failure and recovery
+| Failure class | Detection | Recovery |
+|---|---|---|
+| Untested assumptions | Assumption list has entries without corresponding violation tests | Write the missing tests before committing |
+| Silent failures | Code swallows errors or produces wrong output without signaling | Flag as exit code 2; do not commit until error paths produce descriptive output |
+| Crashes or panics | Unhandled exceptions, segfaults, or undefined behavior under sanitizers | Flag as exit code 3; fix or document the defect before committing |
+| Sanitizer warnings | Non-zero warning count from ASan/TSan/MSan/Miri | Do not commit; resolve every warning |
 
-**Data:**
-- Zero, negative, MAX_INT, NaN, Infinity, negative zero
-- Empty string, null bytes in strings, multi-byte Unicode (emoji, RTL, ZWJ sequences)
-- Empty collections, single-element, collections at capacity
-- Encode a value, corrupt one byte, decode it
+Partial results are not accepted. If any gate fails, the procedure stops at the failing gate and reports the exit code. No rollback is needed because no commit occurs until all gates pass.
 
-**State:**
-- Double-close, use-after-free/dispose, read-after-error
-- Concurrent mutation during iteration or serialization
-- Half-written state from interrupted operation (crash mid-transaction)
-- State machine receiving events for a different state
-
-**Environment:**
-- File not found, permission denied, disk full, read-only filesystem
-- Network timeout, connection reset, DNS failure, partial write
-- Clock jumps (forward 1 hour, backward 5 minutes, NTP correction)
-- OOM at the worst possible moment (during cleanup/rollback)
-
-**Protocol:**
-- Out-of-order messages, duplicate delivery, missing acknowledgment
-- Partial writes (half a JSON object, truncated protobuf)
-- Version mismatch between client and server
-- Request after connection close, response after timeout already fired
-
-## The No-Cheating Rule
-
-- Test through the **public API only**. If you need private access to break it, the abstraction is leaking. File that as a finding.
-- If a scenario is "impossible," prove it with types or contracts. If you cannot prove it, it is not impossible. Test it.
-- Every test scenario must be **production-plausible**. Cosmic rays flipping bits are not plausible; a user pasting 10MB into a text field is.
-
-## Writing Strategy
-
-1. **Read the code.** Understand what it does, not what the docs say it does.
-2. **List assumptions.** Write them down explicitly, one per line, with no hedging.
-3. **Write violation tests.** One test per assumption. Name it after what it violates: `test_rejects_negative_quantity`, `test_handles_empty_result_set`, `test_recovers_from_mid_write_crash`.
-4. **Verify error quality.** When the code fails, does it produce a meaningful error? Silent corruption is worse than a crash.
-5. **Test boundaries from both sides.** If the limit is 100, test 99, 100, and 101. If the limit is 0, test -1, 0, and 1.
-6. **Run sanitizers and race detectors.** After writing tests: ASan, MSan, TSan, `-race`, Miri, or your language's equivalent. Tests that pass without sanitizers may hide undefined behavior.
-
-## Validation Gates
+## Output
+Validation gate table:
 
 | Gate | Condition |
-|------|-----------|
+|---|---|
 | Assumptions documented | Every implicit assumption in the code under test is written down |
 | Violations tested | Each documented assumption has at least one test that violates it |
-| Errors are meaningful | Every failure path produces a descriptive error, not silence or generic message |
-| Sanitizers pass | All tests pass under sanitizers / race detectors with zero warnings |
+| Errors are meaningful | Every failure path produces a descriptive error, not silence or a generic message |
+| Sanitizers pass | All tests pass under sanitizers and race detectors with zero warnings |
 
-## Exit Codes
+Exit codes:
 
 | Code | Meaning |
-|------|---------|
-| 0 | All assumptions identified, violated, and handled: error paths produce meaningful output |
+|---|---|
+| 0 | All assumptions identified, violated, and handled; error paths produce meaningful output |
 | 1 | Untested assumptions remain: some assumptions lack violation tests |
 | 2 | Silent failures found: code swallows errors or produces wrong output without signaling |
 | 3 | Crashes or panics discovered: unhandled exceptions, segfaults, or undefined behavior found |
+
+## Provenance
+
+- Origin: current-odin-skill-tree, path `skills/tests-adversarial/SKILL.md`.
+- Revision: none pinned (current working tree).
+- License: project-owned.
+- Adaptation: clean-room rewrite of the existing adversarial testing skill into the ODIN 2.0 literal contract. No third-party expression retained.

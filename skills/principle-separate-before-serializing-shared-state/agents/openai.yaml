@@ -1,0 +1,3 @@
+interface:
+  display_name: "Principle Separate Before Serializing Shared State"
+  short_description: "Separate per-actor state before locking to prevent race"

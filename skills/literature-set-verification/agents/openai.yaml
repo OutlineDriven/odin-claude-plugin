@@ -1,0 +1,3 @@
+interface:
+  display_name: "Literature Set Verification"
+  short_description: "Deduplicated DOI-verified relevant literature set"

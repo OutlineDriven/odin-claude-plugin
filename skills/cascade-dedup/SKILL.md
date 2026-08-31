@@ -1,62 +1,67 @@
 ---
 name: cascade-dedup
-description: 'Strip duplicate and conflicting directives across the system-prompt cascade family: the canonical baseline, the six output-style embeds, and the two external harness embeds.'
+description: 'Use when prompt-doctrine is duplicated, drifted, or conflicting across the cascade family of output-style embeds and external harness AGENTS files. Strips duplicate directives, repairs invariant-zone drift, and records a divergence ledger with one classification per divergence. Don''t use for remote, credential, publish, deploy, or irreversible changes, or for editing the canonical baseline itself.'
 disable-model-invocation: true
-metadata:
-  short-description: 'Cascade-family directive dedup and drift repair'
 ---
 
 # Cascade dedup
 
-The cascade family replicates one canonical prompt across three harnesses. Dedup means: verify the intentional replication byte-for-byte, strip the accidental repetition, and resolve conflicts with the canonical as winner.
+## Contract
 
-| File | Role | Zones |
-|---|---|---|
-| `system-prompt-baseline.md` | Canonical; wins every conflict | Whole file is the source of truth |
-| `output-styles/{axiom-mode,builder,duet,linus,odin,benchmark}.md` | Style embeds | Persona prefix **above** the charter `<role>` (the second `<role>` per file) = strip zone. Tail **from** the charter `<role>` = byte-identity invariant zone, never a dedup target |
-| `output-styles/benchmark.md` auto-gen preamble (margin-runner header) | Generated | Never touch. Repairs to benchmark.md's cascade tail require explicit user authorization first |
-| `~/.omp/agent/AGENTS.md`, `~/.codex/AGENTS.md` | Harness embeds | Harness-adapted tool sections are legitimate divergence; targets are internal duplication and accidental drift. Outside the repo: editable, never committable |
+| Field | Bound contract |
+|---|---|
+| Trigger | Prompt-doctrine duplication, drift, or conflict across the cascade family. |
+| Authority | Human-only. Require explicit human invocation; preview the target and consequence before rewriting prompt doctrine at rest, bumping manifests, or editing authorized external harness embeds. |
+| Side effect | Rewrites cascade prefixes/tails, bumps manifests, and edits authorized external embeds. |
+| Done | All canonical tails match, every strip is evidenced, divergence ledger complete, verification green. |
 
-## Step 1 — Verify the invariant before dedup
+## Inputs
 
-Extract the canonical: `cp system-prompt-baseline.md /tmp/canon.md` (its charter `<role>` is line 1, so the canonical is the whole file). Per output-style:
+- The canonical baseline file `system-prompt-baseline.md` — must exist and be the agreed source of truth.
+- The six output-style embeds: `output-styles/{axiom-mode,builder,duet,linus,odin,benchmark}.md`.
+- The two external harness embeds: `~/.omp/agent/AGENTS.md` and `~/.codex/AGENTS.md`.
+- Explicit user authorization, recorded in the run, before any `benchmark.md` tail repair or authorized external embed edit.
 
-```bash
-diff -q /tmp/canon.md <(tail -c "$(wc -c < /tmp/canon.md)" output-styles/X.md)
-```
+## Procedure
 
-Drift here is a sync bug, not duplication. Repair means replacing the file's entire tail (from its charter `<role>` to EOF) with the canonical content, as one block; dedup edits inside the invariant zone stay forbidden. For `benchmark.md`, get explicit user authorization before repairing.
+1. **Map the cascade family and zones.** The canonical baseline `system-prompt-baseline.md` is the whole-file source of truth and wins every conflict. Per output-style embed (`axiom-mode`, `builder`, `duet`, `linus`, `odin`, `benchmark`): the persona prefix above the charter `<role>` (the second `<role>` per file) is the strip zone; the tail from the charter `<role>` to EOF is the byte-identity invariant zone and is never a dedup target. The `benchmark.md` auto-generated margin-runner preamble is never touched. The external harness embeds `~/.omp/agent/AGENTS.md` and `~/.codex/AGENTS.md` are editable in place but never committable; harness-adapted tool sections are legitimate divergence.
 
-**Completion criterion:** 6/6 byte-identical (after repair where needed), each diff result recorded.
+2. **Verify the invariant before dedup.** Copy the canonical to a temp file. Per output-style, diff the canonical against the file's tail of equal byte length:
+   ```
+   diff -q /tmp/canon.md <(tail -c "$(wc -c < /tmp/canon.md)" output-styles/X.md)
+   ```
+   Drift in the invariant zone is a sync bug, not duplication. Repair by replacing the file's entire tail (from its charter `<role>` to EOF) with the canonical content as one block; dedup edits inside the invariant zone stay forbidden. For `benchmark.md`, obtain explicit user authorization before repairing. Record each diff result. Completion: 6/6 byte-identical (after repair where needed).
 
-## Step 2 — Strip-zone scan (persona prefixes)
+3. **Strip-zone scan (persona prefixes).** `benchmark.md` has no eligible strip zone (its persona prefix sits inside the auto-generated block), so scan the five hand-authored styles and skip `benchmark.md`. Classify every sentence of each persona prefix as `voice`, `duplicate`, `conflict`, or `unique-directive`:
+   - Normalize (lowercase tokens, stopwords removed). Jaccard >= 0.65 against a baseline rule -> **duplicate**: strip it; the baseline copy stands.
+   - Jaccard >= 0.45 plus opposing modal verbs (must/never, always/must-not) -> **conflict**: the baseline wins; delete or rewrite the prefix line.
+   - Persona voice (identity, tone, register) is not a directive: keep.
+   - Unique directives (persona-specific rules with no baseline pair): keep.
+   Completion: every prefix sentence classified; every strip cites its baseline pair.
 
-`benchmark.md` has no eligible strip zone — its entire persona prefix sits inside the auto-generated margin-runner block — so Step 2 covers the five hand-authored styles and skips `benchmark.md` completely. Classify every sentence of each persona prefix as `voice | duplicate | conflict | unique-directive`:
+4. **Harness embeds.** Per external file (`~/.omp/agent/AGENTS.md`, `~/.codex/AGENTS.md`):
+   - Internal duplication within the file, same thresholds as step 3.
+   - Directive-level comparison against the baseline. Classify each divergence: `harness-adaptation` (names that harness's tools or commands: keep), `accidental drift` (same rule, mutated wording: align to baseline wording), `conflict` (baseline wins, unless the divergence fits harness-specific tooling).
+   Completion: a divergence ledger with exactly one classification per divergence, none unclassified.
 
-- Normalize (lowercase tokens, stopwords removed). Jaccard >= 0.65 against a baseline rule → **duplicate**: strip it; the baseline copy stands.
-- Jaccard >= 0.45 plus opposing modal verbs (must/never, always/must-not) → **conflict**: the baseline wins; delete or rewrite the prefix line.
-- Persona voice — identity, tone, register — is not a directive: keep.
-- Unique directives (persona-specific rules with no baseline pair): keep.
+5. **Apply and verify.**
+   - Repo files: one atomic commit. Any `benchmark.md` change (tail repair included) ships only with explicit user authorization recorded in this run. Re-run the step 2 diffs after editing; run `prek run --all-files`.
+   - Strips and conflict resolutions are doctrine changes -> patch-bump all three manifest version fields (`plugin.json` `.version`, `marketplace.json` `.version` and `.plugins[0].version`) from the origin/main base in the same commit. A run that only re-syncs an embedded baseline with zero strips is a pure sync change -> no bump.
+   - External files: edit in place, never commit; end the report with an explicit warning listing every externally edited path for user review.
+   - Output styles load at session start — smoke-test doctrine effects in a fresh session.
+   Completion: final report contains strips per file with citations, conflicts resolved with the winner named, kept harness-adaptations, externally edited paths, the `prek` result, and the invariant re-verified 6/6.
 
-**Completion criterion:** every prefix sentence classified; every strip cites its baseline pair.
+## Failure and recovery
+- **Invariant-zone drift detected:** a sync bug, not duplication. Repair by replacing the entire tail as one block; never edit inside the invariant zone. If the canonical itself is suspect, stop and surface the discrepancy rather than rewriting the canonical.
+- **benchmark.md repair without authorization:** do not touch `benchmark.md` (tail or preamble) until explicit user authorization is recorded in the run. Without it, leave the file unchanged and report the needed authorization.
+- **Ambiguous classification (Jaccard in the 0.45-0.65 band without opposing modals):** do not strip; classify as `unique-directive` and report it for human review.
+- **prek failure or invariant not 6/6 after edit:** the done predicate does not hold. Do not commit; report the failing diff or check and the file responsible.
+- **Partial-result rule:** a run that completes classification but fails final verification produces no commit. The divergence ledger and classification record are still reported as the partial result; the invariant must be re-verified before any commit.
+- **Rollback:** repo changes are VCS-tracked; revert the atomic commit if verification fails. External file edits are not VCS-tracked — record the original content before editing and restore from that record on failure.
 
-## Step 3 — Harness embeds
+## Output
+A final report containing: the 6/6 invariant re-verification diff results; strips per file with baseline-pair citations; conflicts resolved with the winner named; kept harness-adaptations; the complete divergence ledger (one classification per divergence); every externally edited path flagged for user review; the `prek run --all-files` result; and the manifest bump decision (patch-bumped fields or no-bump rationale). Repo changes land as one atomic commit; external edits land in place and are never committed.
 
-Per external file (`~/.omp/agent/AGENTS.md`, `~/.codex/AGENTS.md`):
+## Provenance
 
-1. **Internal duplication** within the file, same thresholds as Step 2.
-2. **Directive-level comparison against the baseline.** Classify each divergence:
-   - `harness-adaptation` — names that harness's tools or commands: keep.
-   - `accidental drift` — same rule, mutated wording: align to the baseline wording.
-   - `conflict` — the baseline wins, unless the divergence exists to fit harness-specific tooling.
-
-**Completion criterion:** a divergence ledger with exactly one classification per divergence — none unclassified.
-
-## Step 4 — Apply and verify
-
-1. Repo files: one atomic commit. Any `benchmark.md` change (tail repair included) ships only with explicit user authorization recorded in this run. Re-run the Step 1 diffs after editing; run `prek run --all-files`.
-2. Strips and conflict resolutions are doctrine changes → patch-bump all three manifest version fields (`plugin.json` `.version`, `marketplace.json` `.version` and `.plugins[0].version`) from the origin/main base in the same commit. A run that only re-syncs an embedded baseline, zero strips, is a pure sync change → no bump.
-3. External files: edit in place, never commit; end the report with an explicit warning listing every externally edited path for user review.
-4. Output styles load at session start — smoke-test doctrine effects in a fresh session.
-
-**Completion criterion:** final report contains strips per file with citations, conflicts resolved with the winner named, kept harness-adaptations, externally edited paths, the `prek` result, and the invariant re-verified 6/6.
+Origin: ODIN 1.x current skill `skills/cascade-dedup/SKILL.md`. Revision: none pinned (current working copy). License: project-owned (no third-party expression). Adaptation: restructured into the ODIN 2.0 contract section order; zone definitions, Jaccard thresholds, divergence-ledger classification, manifest-bump rule, and authorization gate preserved from the source.

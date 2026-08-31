@@ -1,0 +1,3 @@
+interface:
+  display_name: "YARA Rule Authoring"
+  short_description: "Produce validated YARA-X rules with zero goodware FPs"

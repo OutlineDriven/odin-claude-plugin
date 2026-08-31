@@ -1,0 +1,3 @@
+interface:
+  display_name: "History Forget"
+  short_description: "Tombstone or exclude a record and atomically rebuild the index."

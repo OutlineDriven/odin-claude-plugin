@@ -1,3 +1,3 @@
 interface:
-  display_name: "Taste"
-  short_description: "Judge artifacts and decisions or set a taste register"
+  display_name: "Ranked Taste Verdicts"
+  short_description: "Per-anchor taste verdict table with ranked fixes"

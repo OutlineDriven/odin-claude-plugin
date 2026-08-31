@@ -1,0 +1,3 @@
+interface:
+  display_name: "Workspace Unfreeze"
+  short_description: "Remove a freeze lock so a path is editable again."

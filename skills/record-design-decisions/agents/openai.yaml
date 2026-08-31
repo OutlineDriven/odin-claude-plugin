@@ -1,0 +1,3 @@
+interface:
+  display_name: "Record Design Decisions"
+  short_description: "Record durable decisions and resolved terms in CONTEXT.md"

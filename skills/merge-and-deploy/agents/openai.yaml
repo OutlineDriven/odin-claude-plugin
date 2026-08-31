@@ -1,0 +1,3 @@
+interface:
+  display_name: "Merge and Deploy"
+  short_description: "Merge a PR, trigger deploy, and verify production health"

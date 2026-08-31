@@ -1,0 +1,3 @@
+interface:
+  display_name: "Competing Architecture Sketches"
+  short_description: "Design code via competing sketches and a redesign threshold."

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Migrate to Shoehorn"
+  short_description: "Replace unsafe test assertions with intent-matching helpers"

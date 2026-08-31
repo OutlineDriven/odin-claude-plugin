@@ -1,0 +1,3 @@
+interface:
+  display_name: "Modern Python"
+  short_description: "Migrate Python projects to uv, Ruff, ty, pytest, and packaging"

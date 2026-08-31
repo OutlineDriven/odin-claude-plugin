@@ -1,0 +1,3 @@
+interface:
+  display_name: "Rhythmic Taste"
+  short_description: "Rhythm constraint from seed and Wikipedia titles"

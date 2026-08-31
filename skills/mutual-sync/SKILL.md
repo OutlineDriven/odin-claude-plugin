@@ -1,37 +1,47 @@
 ---
 name: mutual-sync
-description: 'Use when user, agent, and codebase may hold different pictures of the current state: before substantive work after a gap, or mid-session when parties talk past each other. Triggers: "mutual sync", "sync up", "are we on the same page", "catch me up", "what did I miss", stale user claims about the code, refuted agent assumptions.'
+description: 'Use when the user and agent may hold different pictures of current state, including after a gap, when asked to sync up or catch up, or after a stale claim or assumption is exposed. Produce a confirmed, evidence-backed ledger of agreed facts, corrected beliefs, and open assumptions. Don''t use for tasks that require source or remote-system changes.'
 ---
 
-# Mutual Sync
+# Mutual sync
 
-Ground the three parties in one shared picture of the current state before proceeding: the user's mental model, the agent's working model, and the actual codebase. A desync is any load-bearing claim about current state that one party holds and another would dispute. Facts are the agent's job; the user is consulted only where the user is the authority.
+## Contract
 
-## Three entry situations, one workflow
+| Field | Bound contract |
+|---|---|
+| Trigger | The user asks for a mutual sync, sync-up, shared-context check, or catch-up, or the conversation exposes a stale user claim or refuted agent assumption. |
+| Authority | Read-only: inspect only topic-relevant conversation, files, search results, version-control status, and recent history; do not mutate files, version control, credentials, paid services, publications, deployments, or remote state. |
+| Side effect | Write only an in-chat shared-context ledger and, after confirmation, offer a separate persistence action without performing it here. |
+| Done | The user confirms a ledger containing Agreed facts, Corrected beliefs, and Open assumptions. |
 
-- **Pre-work ritual**: invoked before substantive work (a new task, a return after a gap). The claim set seeds from the task: what must be true about the code for the planned work to make sense.
-- **Mid-session repair**: invoked when the conversation shows desync: the user references state that no longer holds, or an agent assumption got refuted. The claim set seeds from the contested claims in the conversation.
-- **Cold re-entry**: invoked when the agent has no working model at all, on a new session over in-flight work or a return after a long gap. There is nothing to exchange yet, so step 3 inverts. Build the claim set from live state first, reading open diffs, the task list, the recent commits, and in-flight branches, and include any project vocabulary that entered while you were away, defined from the code that introduced it. Present claims only after that.
+## Inputs
 
-Detect which situation applies from context; never ask. Same loop either way.
+A named topic is optional when the current task or contested claims identify the scope. The conversation supplies the parties' existing claims. The repository or other accessible local evidence must be available for claims about in-repository state. User testimony is required only for intent or external state that cannot be inspected.
 
-## The sync loop
+## Procedure
 
-1. **Resolve scope.** Sync around the named topic, or infer it from the task at hand. Bare invocation with no inferable topic: fire one blocking single-select proposing 2-3 candidate scopes.
-2. **Ground the codebase leg.** Verify each claim in the claim set against the repo with targeted reads and greps, topic-scoped, never a whole-repo scan. Then run the repo-delta check: `git log --oneline -15` and `git status --short` (read-only). New commits since the last shared point or a dirty tree go into the ledger as facts; the ground may have moved under both parties.
-3. **Exchange claims.** Present the agent's model as short numbered claims, each carrying `file:line` evidence or the label `[unverified]`. Alongside, ask at most 3 targeted questions where the user is the likely authority: intent, external state (deploys, sibling repos, other sessions), recent decisions. Follow the AskUserQuestion contract in `skills/askme/SKILL.md`; use an open question only where the answer is narrative. Never ask the user for a fact a read or grep can answer.
-4. **Arbitrate.** Code is the arbiter for anything verifiable in-repo: corrections carry `file:line` evidence and flow both ways; a stale user belief and a wrong agent assumption get the same treatment. The user is the arbiter for intent and for external facts the agent cannot see; record those as trusted-unverified assumptions. If a party disputes a claim after evidence, record the dissent in the ledger and move on; do not re-litigate.
-5. **Emit the ledger.** In-chat markdown, three sections:
-   - **Agreed facts**: claim plus evidence (`file:line` or `[user-attested]`)
-   - **Corrected beliefs**: who held it, what the evidence showed
-   - **Open assumptions**: trusted-unverified and disputed items, each with its owner
-6. **Confirm.** One blocking single-select: "Shared context confirmed (Recommended)" / "Corrections needed". On corrections, fold them into the claim set and rerun from step 2 for the affected claims only. Do not proceed to substantive work on an unconfirmed ledger.
-7. **Offer persistence once.** After confirmation, offer to persist the shared context. If accepted, invoke the `handoff` skill; mutual-sync writes no files of its own.
+1. Classify the entry situation without asking: pre-work after a new task or gap, mid-session repair after a disputed claim, or cold re-entry with no usable working model. Seed the claim set from task prerequisites for pre-work, from contested claims for repair, or from live local state for cold re-entry.
+2. Bound the sync to the named or inferable topic. If a bare invocation has no inferable topic, present one blocking single-select question with two or three candidate scopes and stop until one is selected.
+3. Ground each in-repository claim with targeted file reads and searches; do not scan the whole repository. Inspect read-only version-control status and the latest 15 commit summaries to detect a dirty tree or movement since the last shared point. For cold re-entry, also inspect topic-relevant open changes, task state, in-flight branches, and newly introduced project terms before presenting claims.
+4. Present the agent's model as short numbered claims. Attach `file:line` evidence to each verified repository claim and `[unverified]` to every claim not established by inspected evidence. Never ask the user for a fact available through a targeted read or search.
+5. Ask no more than three targeted questions when the user is the likely authority for intent, deployments, sibling repositories, other sessions, or recent decisions. Use a bounded choice when the known options are complete and an open question only when the answer must be narrative.
+6. Arbitrate repository-verifiable claims by inspected code and history, correcting stale user beliefs and wrong agent assumptions on equal terms with `file:line` evidence. Treat user statements about intent or inaccessible external state as `[user-attested]`, not independently verified. If a claim remains disputed after evidence is shown, record the dissent and its owner rather than forcing consensus.
+7. Emit an in-chat markdown ledger with exactly three sections: **Agreed facts**, listing each claim with `file:line` or `[user-attested]`; **Corrected beliefs**, naming who held each prior belief and what the evidence established; and **Open assumptions**, listing every unverified or disputed item with its owner.
+8. Present one blocking choice: `Shared context confirmed (Recommended)` or `Corrections needed`. If corrections are supplied, update the claim set, repeat grounding only for affected claims, re-emit the complete ledger, and ask for confirmation again. Do not begin substantive work while the ledger is unconfirmed.
+9. After confirmation, offer persistence once. This read-only procedure neither writes a persistence artifact nor performs the separate persistence action.
 
-## Anti-patterns
+## Failure and recovery
+- **Unresolved scope:** return `blocked — scope not selected` with the proposed scopes; inspect nothing beyond evidence needed to propose them.
+- **Missing or inaccessible evidence:** retain the claim under Open assumptions with its owner and the exact unavailable source; never convert absence of evidence into a fact.
+- **Disputed evidence:** preserve both the evidenced claim and the dissent under Open assumptions; do not widen the search or force agreement.
+- **Corrections do not converge:** after each correction, recheck only affected claims. If the same dispute repeats without new evidence, return `non-converged — shared context not confirmed` with the latest complete ledger.
+- **Read-only boundary risk:** stop before any mutation and return `blocked — requested action exceeds read-only authority`, identifying the proposed target and action.
 
-- Asking the user for anything a grep can answer.
-- Forcing consensus on an external fact the agent cannot verify.
-- Whole-repo orientation scans; the sync is topic-scoped plus the delta check.
-- Skipping the confirmation gate because the ledger "looks obviously right".
-- Writing a new persistence format instead of routing to `handoff`.
+A partial or unconfirmed ledger is diagnostic output only and does not satisfy Done. No rollback is needed because this procedure makes no mutation.
+
+## Output
+Return one in-chat markdown ledger with Agreed facts, Corrected beliefs, and Open assumptions, followed by either `confirmed — shared context established`, `blocked — <reason>`, or `non-converged — shared context not confirmed`. Evidence labels remain attached to every claim.
+
+## Provenance
+
+Adapted from the project-owned ODIN current skill at `skills/mutual-sync/SKILL.md` for candidate `current:current-c:current:mutual-sync`. No source revision or license identifier was supplied. This version preserves the topic-scoped three-party reconciliation, live-state delta check, evidence arbitration, bounded user questions, confirmation loop, and no-write persistence boundary while making the procedure self-contained.

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Keep Why Continuous Capture"
+  short_description: "Capture why behind every decision, workaround, and constraint"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Plan-Based Implementation"
+  short_description: "Implement a settled plan with code, tests, and commits."

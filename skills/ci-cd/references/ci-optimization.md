@@ -1,4 +1,4 @@
-# CI Optimization
+# CI optimization
 
 When the pipeline exceeds 10 minutes, apply these strategies in order of impact:
 

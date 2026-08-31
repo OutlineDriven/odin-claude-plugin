@@ -1,0 +1,3 @@
+interface:
+  display_name: "Keep Why Repo Trust Boundary"
+  short_description: "Detect injection in repository reads and ask before acting"

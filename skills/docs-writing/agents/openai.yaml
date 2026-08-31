@@ -1,0 +1,3 @@
+interface:
+  display_name: "Docs Writing"
+  short_description: "Write and audit docs against Diataxis and rule checks"

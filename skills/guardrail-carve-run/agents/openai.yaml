@@ -1,0 +1,3 @@
+interface:
+  display_name: "Guardrail Carve Run"
+  short_description: "Carve guardrail scope, run safe remainder"

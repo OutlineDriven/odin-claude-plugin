@@ -1,98 +1,49 @@
 ---
 name: ci-cd
-description: Set up or modify CI/CD pipelines and deployment automation. Use when setting up build pipelines, automating quality gates, configuring test runners in CI, or establishing deployment strategies.
+description: 'Use when asked to set up or modify CI/CD pipelines, quality gates, test runners, or deployment strategy. Produces in-repository workflow and deployment configuration with blocking gates, safe secret placement, bounded pipeline time, and rollback. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
-# CI/CD and Automation
+# CI/CD and automation
 
-## Overview
+## Contract
 
-Automate quality gates so that no change reaches production without passing tests, lint, type checking, and build. CI/CD is the enforcement mechanism for every other skill.
-
-**Shift Left:** Catch problems as early in the pipeline as possible. A bug caught in linting costs minutes; the same bug caught in production costs hours. Move checks upstream: static analysis before tests, tests before staging, staging before production.
-
-**Faster is Safer:** Smaller batches and more frequent releases reduce risk, not increase it. A deployment with 3 changes is easier to debug than one with 30. Frequent releases build confidence in the release process itself.
-
-## When to Use
-
-- Setting up a new project's CI pipeline
-- Adding or modifying automated checks
-- Configuring deployment pipelines
-- When a change should trigger automated verification
-- Debugging CI failures
-
-## The Quality Gate Pipeline
-
-Every change goes through these gates before merge:
-
-```
-Pull Request Opened
-    │
-    ▼
-┌─────────────────┐
-│   LINT CHECK     │  eslint, prettier
-│   ↓ pass         │
-│   TYPE CHECK     │  tsc --noEmit
-│   ↓ pass         │
-│   UNIT TESTS     │  jest/vitest
-│   ↓ pass         │
-│   BUILD          │  npm run build
-│   ↓ pass         │
-│   INTEGRATION    │  API/DB tests
-│   ↓ pass         │
-│   E2E (optional) │  Playwright/Cypress
-│   ↓ pass         │
-│   SECURITY AUDIT │  npm audit
-│   ↓ pass         │
-│   BUNDLE SIZE    │  bundlesize check
-└─────────────────┘
-    │
-    ▼
-  Ready for review
-```
-
-**No gate can be skipped.** If lint fails, fix lint. Do not disable the rule. If a test fails, fix the code. Do not skip the test.
-
-> **Note:** The gates are language-general; only the commands change per ecosystem. The Node commands in the gates above map directly to other stacks. For example, Python (`ruff check`, `mypy`, `pytest`, `pip-audit`) or Rust (`cargo build`, `cargo clippy`, `cargo test`, `cargo audit`). Keep the same gate order regardless of language.
-
-## Feeding CI Failures Back to Agents
-
-Read `references/ci-failure-feedback-loop.md` when a CI run has already failed and the failure needs to be routed back to an agent for a fix. Skip it when setting up a new pipeline or adding a gate for the first time — that branch has no failure yet to feed back.
-
-## Reference materials
-
-The gate order above is fixed. These supply the commands and config that realize it.
-
-- `references/github-actions.md`: workflow YAML for the quality pipeline, Postgres-backed integration tests, and Playwright E2E.
-- `references/deployment-strategies.md`: preview deploys, feature-flag lifecycle, staged rollouts, and the rollback workflow.
-- `references/automation-and-environments.md`: where env vars and secrets live across `.env*` and CI, plus Dependabot and branch protection.
-- `references/ci-optimization.md`: the slow-pipeline decision tree, caching, and job parallelism.
-- `references/ci-failure-feedback-loop.md`: the copy-error-to-agent feedback loop; read only once a CI run has failed.
-
-## Common Rationalizations
-
-| Rationalization | Reality |
+| Field | Bound contract |
 |---|---|
-| "CI is too slow" | Optimize the pipeline (see `references/ci-optimization.md`), don't skip it. A 5-minute pipeline prevents hours of debugging. |
-| "This change is trivial, skip CI" | Trivial changes break builds. CI is fast for trivial changes anyway. |
-| "The test is flaky, just re-run" | Flaky tests mask real bugs and waste everyone's time. Fix the flakiness. |
-| "We'll add CI later" | Projects without CI accumulate broken states. Set it up on day one. |
-| "Manual testing is enough" | Manual testing doesn't scale and isn't repeatable. Automate what you can. |
+| Trigger | Setting up or modifying CI/CD pipelines, quality gates, test runners, or deployment strategy. |
+| Authority | Reversible local: may write CI workflow and deployment configuration files in the local repository. Does not execute deployments, publish, or make remote mutations. |
+| Side effect | Writes CI workflow and deployment configuration files locally; no deployment, publishing, credential, or remote mutation. |
+| Done | Blocking gates, safe secret placement, bounded pipeline time, and rollback configuration are present. |
 
-## Red Flags
+## Inputs
 
-- Production deploys without staging verification
-- No rollback mechanism
-- Secrets stored in code or CI config files (not secrets manager)
+- The target repository and its CI provider (e.g., GitHub Actions). Required.
+- The quality gates the project requires. Required; defaults to the fixed gate order below.
+- The project ecosystem commands that realize each gate (lint, type-check, test, build, integration, security audit, bundle size). Required.
+- The deployment target and its rollback strategy. Required when a deployment stage is in scope.
+- An existing pipeline to modify. Optional; supply when modifying rather than creating.
 
-## Verification
+## Procedure
 
-After setting up or modifying CI:
+1. Bound scope: confirm the work is authoring or modifying CI workflow and deployment configuration files in the repository. Do not run deployments, publish artifacts, or mutate remote systems.
+2. Establish the fixed gate order that every PR and push to main must pass, in this sequence: lint, type check, unit tests, build, integration tests, E2E (optional), security audit, bundle size. The order is fixed across ecosystems; only the commands change (Node: `pnpm exec biome check .`, `pnpm exec tsc --noEmit`, `pnpm exec vitest run`, `pnpm run build`; Python: `uv run ruff check .`, `uv run ruff format --check .`, `uv run pyright`, `uv run pytest`, `uvx pip-audit`; Rust: `cargo clippy`, `cargo test`, `cargo build`, `cargo audit`).
+3. Make every gate blocking. No gate may be skipped. If lint fails, fix lint; if a test fails, fix the code. Do not disable the rule or skip the test.
+4. Place secrets in the CI secrets manager and reference them as masked environment variables. Never store secrets in code or in workflow configuration files.
+5. Configure branch protection so gate failures block merge, and the pipeline runs on every PR and on push to main.
+6. Add a deployment stage with a rollback mechanism. Verify staging before production. Prefer smaller batches and more frequent releases to reduce deployment risk.
+7. Bound pipeline time: target the test suite under 10 minutes. Apply caching and job parallelism to stay within budget; do not drop a gate to meet the budget.
+8. When a CI run has already failed, route the failure back to the agent that owns the change: copy the failing job name, the error text, and the repo state at failure, so the root cause is fixed rather than re-run. Skip this step when setting up a new pipeline that has no failure yet.
+9. Verify against the Done predicate before declaring complete: all gates present, pipeline runs on every PR and push to main, failures block merge, CI results feed back into the development loop, secrets are in the secrets manager, deployment has a rollback mechanism, and the test-suite pipeline runs under 10 minutes.
 
-- [ ] All quality gates are present (lint, types, tests, build, audit)
-- [ ] Pipeline runs on every PR and push to main
-- [ ] Failures block merge (branch protection configured)
-- [ ] CI results feed back into the development loop
-- [ ] Secrets are stored in the secrets manager, not in code
-- [ ] Deployment has a rollback mechanism
-- [ ] Pipeline runs in under 10 minutes for the test suite
+## Failure and recovery
+- Gate failure: fix the code or configuration that caused the failure. Never disable the gate, skip the test, or re-run a flaky test; fix the flakiness.
+- Secret leak in a config or code file: remove the secret from the file, rotate it, and re-place it in the secrets manager before proceeding.
+- Missing rollback: do not mark deployment configuration done; add the rollback mechanism first.
+- Pipeline exceeds the time budget: apply caching and job parallelism. Do not drop gates to meet the budget.
+- Partial result: keep all completed gate configuration, but do not commit a pipeline that is missing a blocking gate, a secret boundary, or a rollback. The blocked, non-converged result is a report listing exactly which Done-predicate element is missing (gate, secret placement, rollback, or time bound) and what was tried.
+
+## Output
+CI workflow and deployment configuration files in the repository implementing the fixed gate order, blocking branch protection, secrets-manager secret placement, a deployment rollback mechanism, and a bounded pipeline time; plus a verification report confirming each Done-predicate element holds.
+
+## Provenance
+
+Origin: odin-1.x current skill (skills/ci-cd/SKILL.md, project-owned, no license) and addyosmani/agent-skills (skills/ci-cd-and-automation/SKILL.md, pinned revision d2c37ef6225dd8726cdd369a8030307f48592d26, MIT, Copyright (c) 2025 Addy Osmani). The addyosmani candidate was an exact four-field duplicate of the current skill and was merged into this survivor with no alias retained. Clean-room adaptation: the gate-order, no-skip, shift-left, failure-feedback, and rollback mechanisms are restated in this skill's own words; no third-party expression is copied.

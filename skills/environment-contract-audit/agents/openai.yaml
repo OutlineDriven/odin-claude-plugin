@@ -1,0 +1,3 @@
+interface:
+  display_name: "Environment Contract Audit"
+  short_description: "Bidirectionally reconciled environment-variable contract"

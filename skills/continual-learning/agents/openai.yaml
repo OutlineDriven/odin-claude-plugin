@@ -1,0 +1,3 @@
+interface:
+  display_name: "Continual Learning"
+  short_description: "Maintain deduplicated project memory from prior chats."

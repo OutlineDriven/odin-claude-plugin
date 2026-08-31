@@ -1,0 +1,3 @@
+interface:
+  display_name: "Factchk Pre-write"
+  short_description: "Verify claims both ways; fix clear errors, flag judgment calls."

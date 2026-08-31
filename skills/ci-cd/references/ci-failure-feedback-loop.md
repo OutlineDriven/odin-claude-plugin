@@ -1,6 +1,6 @@
-# Feeding CI Failures Back to Agents
+# Feeding CI failures back to agents
 
-The power of CI with AI agents is the feedback loop. When CI fails:
+CI and AI agents work together through the failure feedback loop. When CI fails:
 
 ```
 CI fails

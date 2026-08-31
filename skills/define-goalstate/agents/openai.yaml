@@ -1,0 +1,3 @@
+interface:
+  display_name: "Define Goalstate"
+  short_description: "Finished-system contract: allowed, forbidden, impossible states"

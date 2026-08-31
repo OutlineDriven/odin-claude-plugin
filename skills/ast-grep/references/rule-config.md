@@ -1,8 +1,8 @@
-# Rule Configuration (YAML)
+# Rule configuration (YAML)
 
 YAML rules allow precise targeting of code using Atomic, Relational, and Composite matching.
 
-## Anatomy of a Rule
+## Anatomy of a rule
 
 ```yaml
 id: my-rule-id
@@ -13,16 +13,16 @@ rule:
 fix: # ... optional rewrite string ...
 ```
 
-## Rule Categories
+## Rule categories
 
-### 1. Atomic Rules
+### 1. Atomic rules
 Match individual nodes based on intrinsic properties.
 - **pattern**: Matches code structure (e.g., `console.log($MSG)`).
 - **kind**: Matches AST node kind (e.g., `function_declaration`, `identifier`).
 - **regex**: Matches text content against Rust regex.
 - **range**: Matches specific line/column range.
 
-### 2. Relational Rules
+### 2. Relational rules
 Match nodes based on their relationship to other nodes.
 - **inside**: Target is descendant of match.
   ```yaml
@@ -38,14 +38,14 @@ Match nodes based on their relationship to other nodes.
 - **follows**: Target is after match.
 - **precedes**: Target is before match.
 
-### 3. Composite Rules
+### 3. Composite rules
 Combine multiple rules.
 - **all**: AND logic. Match all sub-rules.
 - **any**: OR logic. Match any sub-rule.
 - **not**: NOT logic. Invert match.
 - **matches**: Reference a utility rule.
 
-## Utility Rules
+## Utility rules
 Reusable rule definitions.
 
 ```yaml

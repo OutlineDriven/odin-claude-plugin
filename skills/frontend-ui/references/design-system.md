@@ -1,6 +1,6 @@
-# Design System Adherence
+# Design system adherence
 
-## Spacing and Layout
+## Spacing and layout
 
 Use the project's spacing scale. Do not invent off-scale values:
 

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Seed Casebook"
+  short_description: "Seed an iteration casebook with real content on new build"

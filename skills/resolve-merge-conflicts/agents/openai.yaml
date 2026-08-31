@@ -1,0 +1,3 @@
+interface:
+  display_name: "Resolve Merge Conflicts"
+  short_description: "Resolve unmerged file conflicts after a merge, rebase"

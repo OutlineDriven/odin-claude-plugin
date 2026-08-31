@@ -1,0 +1,3 @@
+interface:
+  display_name: "Django Access Review"
+  short_description: "Validated Django/DRF IDOR and authz findings with fixes."

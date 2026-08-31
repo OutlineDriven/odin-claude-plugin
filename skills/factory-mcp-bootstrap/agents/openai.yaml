@@ -1,0 +1,3 @@
+interface:
+  display_name: "Factory MCP Bootstrap"
+  short_description: "Wire a coding agent to Warp Factory MCP with a bearer token."

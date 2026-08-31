@@ -1,0 +1,3 @@
+interface:
+  display_name: "Pricing Projection"
+  short_description: "Estimate cost, size a deal, and project spend from usage data."

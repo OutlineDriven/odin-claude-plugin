@@ -1,0 +1,3 @@
+interface:
+  display_name: "History Note Capture"
+  short_description: "Capture one redacted durable fact as JSONL."

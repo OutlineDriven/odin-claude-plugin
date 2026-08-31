@@ -1,0 +1,3 @@
+interface:
+  display_name: "Browse"
+  short_description: "Launch headed Chromium with sidebar for user takeover"

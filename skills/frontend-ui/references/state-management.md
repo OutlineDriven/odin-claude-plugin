@@ -1,4 +1,4 @@
-# State Management
+# State management
 
 Pick the narrowest scope that holds the state. Categories, narrowest to widest:
 

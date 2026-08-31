@@ -1,0 +1,3 @@
+interface:
+  display_name: "Document Generate"
+  short_description: "Generate reviewed user-facing docs and diagrams."

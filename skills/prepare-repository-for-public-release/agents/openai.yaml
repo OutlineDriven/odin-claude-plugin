@@ -1,0 +1,3 @@
+interface:
+  display_name: "Prepare Repository For Public Release"
+  short_description: "Prepare a repo for public launch"

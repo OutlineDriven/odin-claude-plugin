@@ -1,0 +1,3 @@
+interface:
+  display_name: "Parallel Branch Audits"
+  short_description: "Parallel bug/security and code-quality branch audits"

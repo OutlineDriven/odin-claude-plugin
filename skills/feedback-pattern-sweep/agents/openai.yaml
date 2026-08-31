@@ -1,0 +1,3 @@
+interface:
+  display_name: "Feedback Pattern Sweep"
+  short_description: "Recent-feedback root-cause pattern sweep"

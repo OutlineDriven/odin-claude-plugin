@@ -1,0 +1,63 @@
+---
+name: entropy-assisted-planning
+description: 'Use when the user explicitly requests a Tarot draw or casually delegates an ambiguous choice among multiple valid approaches. Runs a cryptographically random 12-house Tarot draw and interprets the spread to state one planning or investigation direction. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+---
+
+# Entropy assisted planning
+
+## Contract
+
+| Field | Bound contract |
+|---|---|
+| Trigger | The user explicitly requests a Tarot draw or casually delegates an ambiguous choice among multiple valid approaches. |
+| Authority | Run a local cryptographically random draw and record the chosen direction in chat. No file, VCS, credential, paid, published, deployed, or remote mutation. Rollback is to discard the reading or redraw; no persistent state requires recovery. |
+| Side effect | Chat output only: a 12-house draw and its interpreted direction. The draw command touches no repository or remote state. |
+| Done | A complete 12-house reading yields a stated direction or verdict, and any security or correctness implication remains subject to ordinary evidence. |
+
+## Inputs
+
+- The decision context: either a list of two or more valid options to choose between, or an open portent question about which direction to take. Must be supplied.
+- The user's tone. Optional, but when it is precision-seeking rather than casual, do not draw; ask clarifying questions instead.
+
+## Procedure
+
+1. Confirm the trigger. Draw only when the user explicitly requested a Tarot draw or casually delegated an ambiguous choice among two or more valid approaches. If the user gave clear, specific instructions, or a single obvious correct approach exists, do not draw.
+2. Do not use this skill as the deciding authority for safety-critical work: security conclusions, data integrity, production deployment, release approval, or incident response. It may suggest where to inspect next but cannot prove safety or dismiss a risk.
+3. Run the cryptographic draw in one Bash call. The command uses Python's `secrets` module: Fisher-Yates shuffles via `secrets.randbelow()` (no modulo bias) on separate 22-card Major Arcana and 56-card Minor Arcana decks, deals 12 houses (one Major plus two Minor each), and assigns each of the 36 cards an independent 50% reversal via `secrets.randbits(1)`. The conservative unordered-card entropy budget exceeds 100 bits.
+   ```bash
+   python3 - <<'PY'
+   import secrets, json
+   MAJOR=[f"{i:02d}-{n}" for i,n in enumerate(("the-fool","the-magician","the-high-priestess","the-empress","the-emperor","the-hierophant","the-lovers","the-chariot","strength","the-hermit","wheel-of-fortune","justice","the-hanged-man","death","temperance","the-devil","the-tower","the-star","the-moon","the-sun","judgement","the-world"))]
+   RANKS=("ace","two","three","four","five","six","seven","eight","nine","ten","page","knight","queen","king")
+   SUITS=("wands","cups","swords","pentacles")
+   MINOR=[f"{r}-of-{s}" for s in SUITS for r in RANKS]
+   HOUSES=("Self","Resources","Communication","Foundations","Creativity","Practice","Partnership","Transformation","Exploration","Calling","Community","The Hidden")
+   def shuf(d):
+       for i in range(len(d)-1,0,-1):
+           j=secrets.randbelow(i+1); d[i],d[j]=d[j],d[i]
+       return d
+   shuf(MAJOR); shuf(MINOR)
+   out=[]
+   for i in range(12):
+       out.append({"house":i+1,"name":HOUSES[i],"major":MAJOR[i],"minor1":MINOR[2*i],"minor2":MINOR[2*i+1],"reversed":[secrets.randbits(1)==1 for _ in range(3)]})
+   print(json.dumps(out,indent=2))
+   PY
+   ```
+4. Interpret the full 12-house spread as one narrative. Reversed cards invert or complicate the upright meaning rather than meaning "bad". Major Arcana carry more weight than Minor Arcana. Do not interpret any card in isolation; synthesize across all 12 houses before deciding.
+5. Map the interpretation to the concrete decision. If the input was a list of options, pick one option and state it with one sentence connecting card meaning to the choice. If the input was an open portent question, state the dominant theme across the spread, the main risk or blind spot, and the recommended next action.
+6. In security, audit, or correctness contexts, the reading only chooses an investigation path or hypothesis to test. Accept or dismiss any risk only with ordinary engineering evidence: source review, tests, proofs, traces, reproduction, or exploitability analysis. A favorable card is never permission to ship, suppress a finding, skip validation, or overrule a concrete risk.
+7. One draw per decision point; accept the reading. Do not redraw until a preferred result appears.
+8. Include the interpretation alongside the next action that implements the chosen direction. Do not output the interpretation as a text-only turn.
+
+## Failure and recovery
+- Draw command fails (crash, traceback, missing `python3`): report the failure to the user and skip the reading. Never invent cards or simulate a draw using the model's own randomness: the entire point is real cryptographic entropy.
+- Partial result: if the command emits malformed JSON, treat the draw as failed and report it; do not interpret a partial spread.
+- Non-mutation: no repository, file, credential, or remote state is touched, so there is nothing to roll back beyond discarding the reading.
+- Blocked result: if the draw cannot run, the terminal output is "draw unavailable" with the error; no direction is stated.
+
+## Output
+A stated direction or verdict derived from a complete 12-house reading: either a chosen option with a one-sentence card-grounded reason, or a three-bullet reading (dominant theme, main risk or blind spot, recommended next action). Any security or correctness implication in the output is explicitly marked as subject to ordinary evidence.
+
+## Provenance
+
+Origin: https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3, files /plugins/let-fate-decide/skills/let-fate-decide/SKILL.md and /plugins/let-fate-decide/agents/draw.md. License CC-BY-SA-4.0; source https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3; preserve Trail of Bits attribution and source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding. Adaptation: the entropy-assisted tie-breaking workflow and cryptographic draw mechanism are preserved; card and house meaning payloads are carried as model knowledge rather than source reference files, and the draw is reworded as a self-contained command with no external script dependency.

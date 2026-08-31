@@ -1,0 +1,49 @@
+---
+name: design-variants
+description: 'Use when the user runs /design-variants, generate multiple distinct design directions and present a variant gallery ready for user selection. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+---
+
+# Design variants
+
+## Contract
+
+| Field | Bound contract |
+|---|---|
+| Trigger | the user runs /design-variants |
+| Authority | reversible-local: write only design variant pages and files under a per-project design directory; recover by deleting that directory |
+| Side effect | local-write to a design directory; no project source, VCS, credential, or remote mutation |
+| Done | a variant gallery is ready for user selection |
+
+## Inputs
+
+Required: a screen or surface to explore, named by the user or inferred from the request.
+
+Optional but gathered when absent, across five dimensions: who the design is for, the job to be done on that screen, what already exists in the codebase, the user flow in and out, and edge cases (long names, zero results, error states, mobile, first-time vs power user). A project design-system document, if present, is the default visual constraint unless the user says otherwise. Prior approved designs for the project, if present, bias generation toward demonstrated taste.
+
+## Procedure
+
+1. Bound the output directory before any generation: a per-project design folder that persists across branches and conversations. Never write variants to project source, a context cache, a docs tree, or a system temp directory.
+2. Gather context across the five dimensions. Auto-read any project design-system document and list existing components and pages first; pre-fill what was inferred, then ask only for the gaps in one combined question. Stop gathering after two rounds and proceed with stated assumptions.
+3. Read prior approved-design records for the project. If they exist, extract the strongest taste signals (fonts, colors, layouts, aesthetics the user approved and rejected) and bias generation toward them. If a current request contradicts a strong prior signal, flag the conflict and ask whether to update the taste record or treat this as a one-off before proceeding.
+4. Generate N text concepts (default 3, up to 8 for important screens), each a distinct creative direction. Apply the anti-convergence rule: every variant must use a different font family, color palette, and layout approach. Test by swapping the headline text between two variants; if the swap goes unnoticed, they are too similar and the weaker one must be regenerated in a deliberately different direction. Every direction must satisfy self-evident hierarchy, scannable layout, obviously clickable affordances, and eliminated noise.
+5. Present the concepts as a lettered list and confirm with the user before generating visuals: generate all, change some, add more, or drop some. Re-present after each adjustment, max two rounds.
+6. Generate the confirmed variants in parallel, each to a temporary location then copied into the design directory. Each generation retries on rate-limit failure up to three times and verifies its output file exists and is non-empty before reporting done.
+7. Display every generated variant inline so the user sees them immediately, then build a comparison gallery that presents all variants side-by-side with rating, comment, and remix controls.
+8. Wait for the user's selection. The gallery is the chooser. If the user submits a final choice, proceed; if the user requests regenerate or remix, read the requested action, generate new variants from the updated brief, rebuild and reload the gallery, and wait again. Repeat until a final choice is submitted.
+9. Summarize the understood feedback (preferred variant, per-variant ratings, comments, overall direction) and confirm with the user before saving.
+10. Save an approved record to the design directory containing the chosen variant, the feedback, the date, the screen name, and the current branch. Update the taste record with the approved and explicitly rejected variants.
+
+## Failure and recovery
+- Rate limit or generation error: retry the failing variant up to three times with a short wait. If all parallel attempts fail, fall back to sequential generation one variant at a time, showing each as it lands.
+- Zero variants succeeded after retry and sequential fallback: stop and report which variants failed and the errors; do not present an empty gallery as done.
+- Comparison gallery cannot be served: show each variant inline and ask the user's preference directly; this is a degraded path, not a silent substitute.
+- User request contradicts a strong taste signal: flag it and ask before proceeding; never silently override recorded taste.
+- Rollback: the design directory is the only mutation target. To discard a session, delete that directory. No project source, VCS state, credential, or remote resource is touched, so recovery is deletion of the directory.
+- Never swallow a generation failure or present a gallery as ready when variants are missing.
+
+## Output
+A variant gallery ready for user selection, displayed inline and in a side-by-side comparison view. After approval, an approved record in the design directory naming the chosen variant, per-variant ratings, comments, overall direction, date, screen, and branch, plus an updated taste record. When invoked from another workflow, the approved record and chosen variant are the consumable result.
+
+## Provenance
+
+Origin: https://github.com/garrytan/gstack at revision 07b59e396c6be5a86619a43151cb9ed62a15ae69. License: MIT, Copyright (c) 2026 Garry Tan. Clean-room adaptation: the multi-direction variant generation, anti-convergence rule, taste-memory biasing, comparison-gallery feedback loop, and per-project design-directory discipline are re-derived from the source behavior; no source prose or code is copied wholesale.

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Finish Branch Menu"
+  short_description: "Finish a green branch by merge, PR, keep, or discard."

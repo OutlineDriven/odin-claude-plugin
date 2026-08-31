@@ -1,0 +1,3 @@
+interface:
+  display_name: "Visualise Chart"
+  short_description: "Generate an inline chart from supplied quantitative data"

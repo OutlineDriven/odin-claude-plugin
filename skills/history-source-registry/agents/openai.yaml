@@ -1,0 +1,3 @@
+interface:
+  display_name: "History Source Registry"
+  short_description: "Register session stores with drift-checked conformance fixtures"

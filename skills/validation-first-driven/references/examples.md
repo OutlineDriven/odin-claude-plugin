@@ -1,4 +1,4 @@
-# State Machine Patterns by Language
+# State machine patterns by language
 
 Brief enum + match/transition patterns per language.
 

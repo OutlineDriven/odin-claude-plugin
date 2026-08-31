@@ -1,118 +1,49 @@
 ---
 name: pov
-description: Verdict on whether to adopt, switch to, or revisit a technology, library, pattern, platform, or architecture; also a mid-session second opinion. Use for a verdict against the current project, not for neutral explainers or option-generation. For open-ended scoping before a verdict, use brainstorm.
-argument-hint: "[the external thing to judge, plus any links], or invoke bare mid-session for a second opinion"
-metadata:
-  short-description: Project-grounded verdict on an external technology, library, pattern, or platform
+description: 'Use when explicitly asked to judge whether this project should adopt, switch to, reject, or revisit a technology, library, pattern, platform, or architecture, including a mid-session second opinion. Produce a project-grounded graded verdict that clears independent project and external-evidence floors and names the next action. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
-# Form a Point of View
+# Pov
 
-Return a decisive, **graded verdict** on something from the outside world, judged against *this project*, not in the abstract.
+## Contract
 
-<pov_request> #$ARGUMENTS </pov_request>
+| Field | Bound contract |
+|---|---|
+| Trigger | Explicit invocation to judge a technology, library, pattern, platform, or architecture against the current project, or to give a mid-session second opinion. |
+| Authority | Read project and external evidence; write only a run-specific scratch directory, the deterministic project-profile cache under `/tmp/odin/repo-profile/`, and an optional local report at a user-supplied path. Do not mutate project files, VCS state, credentials, paid services, deployments, publications, or remote state. |
+| Side effect | Cache a question-agnostic repository profile and scout dossiers locally; return the verdict in chat by default. Delete the run scratch directory, any cache entry created by this run, and any optional report to roll back local writes. |
+| Done | A compact graded verdict passes both evidence floors, states its reversibility tier and confidence, cites the decisive evidence, records conditions and reversal triggers, and gives the computed next action; or an exact Hold result identifies the failed floor. |
 
-*(If `$ARGUMENTS` above appears as a literal token rather than the user's words, it was not substituted on this host, so use the user's actual request from the conversation as the input.)*
+## Inputs
 
-**Note: The current year is 2026.** Use this when weighting source recency and dating any captured record.
+Required: the subject to judge and the intended decision—adopt, migrate, compare, determine fit, reject, or revisit. For a mid-session invocation, take the question and claims to verify from the surrounding conversation, but do not treat them as evidence. If the intent is ambiguous, obtain one answer before research.
 
-## The one rule that is the whole moat
+Optional: user-supplied links, constraints, decision criteria, a named incumbent, and a local output path for a full report. Treat supplied claims and links as unverified input until corroborated.
 
-**Do not issue a verdict you did not earn against the project's own context.** Generic web research already covers "tell me about X"; the differentiator is never "research the web". It is the refusal to answer in the abstract. The verdict must clear **two absolute floors** (see `references/method.md`): a **project floor** (a concrete verified project fact: a named incumbent + a touchpoint, or for a net-new adoption the verified absence of one plus where it would fit, or a prior decision) and an **external floor** (at least one verified external source). The floors are absolute and independent. Strong external evidence never compensates for a thin project leg, and vice versa. Neither the conversation nor the user's own assertions substitute for grounding.
+## Procedure
 
-## Interaction Method
+1. State the subject and decision frame in one line. If the request asks to choose from an unbounded field or lacks usable criteria, return `Hold — unbounded selection` with the missing boundary or criterion; do not invent candidates. Classify the decision as Tier 1 when readily reversible or Tier 2/3 when it affects data, authentication, public contracts, migration, security, or legal commitments.
+2. Resolve the repository root and invoke `scripts/repo-profile-cache.py get`. On `HIT`, use the returned question-agnostic profile. On `MISS`, dispatch a repository-profile scout to inspect manifests, dependency and license surfaces, topology, conventions, and vocabulary; require a JSON object with `stack`, `dependencies`, `topology`, `conventions`, and `vocabulary`, then invoke `scripts/repo-profile-cache.py put <profile-file>`. On `NO-CACHE`, malformed output, or helper failure, derive that profile in the scout and continue without caching. A cached dependency name is only a lead, never proof of a current touchpoint.
+3. Create one unique `/tmp/odin/pov/<random-id>/` scratch directory. Give every scout the same framed question, tier, named incumbent, supplied links, profile, and scratch path. Require each scout to write a dossier there and return only its path and a short gist.
+4. For Tier 1, dispatch in parallel a project-grounding scout and an external-evidence scout. The project scout must freshly verify an incumbent and concrete call site, or verify absence and the exact integration point, and must scan local decision records for precedent. For Tier 2/3, also dispatch an independent precedent-and-activity scout. That scout always searches local decision records and, when reachable, issue and change history. The external scout verifies current primary documentation and independent evidence, checks dates and source entailment, and records unavailable surfaces. The repository-profile scout, project-grounding scout, precedent-and-activity scout, and external-evidence scout are the four distinct research roles; the first runs only on a cache miss and the precedent role is folded into project grounding for Tier 1.
+5. Keep four provenance buckets separate: observed project facts, verified external facts, conversation claims, and unconfirmed assumptions. Missing tracker or web access lowers confidence; continue with reachable surfaces. Never promote conversation claims or assumptions into either evidence floor.
+6. Apply two independent pass/fail floors. The project floor requires a freshly verified named incumbent plus a concrete touchpoint, verified absence plus a concrete fit point for net-new adoption, or a verified prior decision. The external floor requires at least one current, relevant external source whose content entails the claim used. Strong evidence on one side cannot compensate for failure on the other.
+7. If either floor fails, forbid Adopt and Reject. Return `Hold — project evidence missing`, `Hold — external evidence missing`, or `Hold — both evidence floors missing`, name the attempted surfaces and the exact evidence needed to resume, and preserve any valid partial dossiers as explicitly partial results.
+8. When both floors pass, reason from project constraints, incumbent cost, compatibility and licensing, external maturity and activity, reversibility, and credible alternatives. Adopt a skeptic stance: state the strongest counterargument, conditions that would change the result, and a tier-sized reversal trigger. Grade the result `Adopt`, `Trial`, `Hold`, `Reject`, or `Not our problem`; do not overstate confidence beyond the weakest evidence leg.
+9. Emit a compact chat block with `Grade`, `Decision`, `Project evidence`, `External evidence`, `Tier`, `Confidence`, `Conditions`, `Reversal trigger`, and `Next action`. Keep Tier 1 to one screen; for Tier 2/3 cite dossiers and sources rather than reproducing them. Compute one next action from the grade: implementation planning for a clear Adopt, requirements clarification for a fuzzy Adopt, a timeboxed experiment for Trial, and no handoff for Hold, Reject, or Not our problem.
+10. For a mid-session second opinion, return the verdict and hand control back without prompting a follow-up. Otherwise, write an expanded local report only when requested and only to the supplied path; the chat verdict remains the required result.
 
-When you must ask the user a question, use the platform's blocking question tool: `AskUserQuestion` in Claude Code (call `ToolSearch` with `select:AskUserQuestion` first if its schema isn't loaded), `request_user_input` in Codex, `ask_question` in Antigravity CLI (`agy`), `ask_user` in Pi (requires the `pi-ask-user` extension). Fall back to numbered options in chat only when no blocking tool exists in the harness or the call errors (e.g., Codex edit modes), not because a schema load is required. Never silently skip the question. Ask one question at a time.
+## Failure and recovery
+- **Ambiguous frame:** ask one blocking question; if no answer is available, return `Hold — frame unresolved` and make no research writes.
+- **Scout or surface unavailable:** retain successful dossiers, mark unavailable evidence explicitly, and apply the floors without substitution. If a required floor fails, return its exact Hold subtype.
+- **Cache failure:** continue from a fresh repository profile without caching. Never treat cache availability as a correctness condition or serve a profile whose freshness is unproved.
+- **Conflicting evidence:** report the conflict and return `Hold — conflicting evidence` unless the conflict can be resolved from a primary source within the framed scope.
+- **Partial local write:** remove only the run-specific scratch directory, cache entry created by this run, or optional report created by this run. Leave pre-existing cache entries and unrelated files untouched.
+- **Non-convergence or scope widening:** stop and return `Hold — non-converged`, listing the repeated conflict or newly required decision boundary. Never widen the subject, invent evidence, or claim the done predicate.
 
-## Model Tiers
+## Output
+Return either the nine-field graded verdict block or an exact Hold classification with attempted evidence surfaces, retained partial results, and the evidence required to resume. When explicitly requested, also write one expanded report to the supplied local path.
 
-Dispatch is tiered by task shape, never hardcoded to a model name:
+## Provenance
 
-- **Extraction tier**. The project-grounding scout and the precedent-&-activity scout: search-and-quote work. Use the platform's cheapest capable model when the harness exposes a known override; otherwise inherit.
-- **Generation tier**. The external-evidence researcher: web/docs retrieval and entailment checking. Use the platform's mid-tier model when a known override exists; otherwise inherit.
-- **Ceiling tier**. The verdict reasoning itself (the two-floor gate, the skeptic synthesis, the verdict contract). This runs in the main conversation on the orchestrator's model; nothing is dispatched for it.
-
-**Degradation rule.** When the platform's subagent primitive cannot select per-agent models, dispatch every scout on the inherited model and keep their read budgets. Cost control then comes from the read budgets and the tier-sensitive scout count, not from tiering.
-
-## Execution Flow
-
-### Phase 0: Frame and Classify
-
-**Output mode:** by default `pov` writes no document. The verdict is a compact chat block. An optional full write-up is available on request at Phase 4. Do not resolve an `OUTPUT_FORMAT` or load a rendering reference up front.
-
-1. **Detect the invocation context (cold or warm).** Warm means `pov` was invoked mid-session for a second opinion, with the question sitting in the surrounding conversation or absent. For the warm contract beyond the frame, taking only the *question and claims-to-verify* (never grounding), the guest output, the provenance buckets, read `references/invocation.md`.
-
-2. **Establish the frame before grounding.** Orient, then infer or propose; never guess. The same input supports very different verdicts: a bare link to a new sign-in method could mean adopt it, migrate to it, compare it to what we have, or just answer a question about it. Guessing sends the scouts after the wrong question. So orient cheaply on what was provided: fetch a bare link lightly to learn what it is, recognize a bare topic, read a paste (orientation, not grounding), then settle the **subject and the POV intent** (adopt / migrate / compare / is-this-our-problem / explainer):
-   - Both clear → state the frame in one line and proceed.
-   - Intent ambiguous (a bare link or topic with no stated intent, or a warm invocation with no clear question) → **read `references/intake.md`** and follow it: propose the concrete candidate framings this input suggests and confirm before grounding. Do not guess and fan out.
-
-3. **Apply the selection escape hatch.** If the input is a *selection* over a field ("what should we use for auth?"), it belongs here only when the realistic field is bounded (roughly five or fewer real candidates) and the criteria are knowable. If the field can't be bounded without inventing options, or the criteria are unclear, **stop**: return a Hold and route to `ideate` (to enumerate) or `brainstorm` (to surface criteria), then offer to re-run. Read `references/boundaries.md` only when the input's fit for `pov` is genuinely in doubt or the field can't be bounded; skip it for a clearly in-scope verdict.
-
-4. **Classify the reversibility tier.** Infer it from project signals: a dependency, lint rule, or config reads as a **two-way door (Tier 1)**; a data store, auth provider, public API/contract, migration, or a security/legal surface reads as a **one-way door (Tier 2/3)**. State the tier in the verdict and let the user override. The tier sizes the rest of the run (Phase 1 scout count, Phase 2 depth, Phase 3 reversal trigger). Do not run a Tier-3 workup on a trivially reversible `npm i`.
-
-### Phase 1: Ground (dispatch scouts, never inline)
-
-Grounding searches code, git, the issue tracker, PRs, and docs. This is noisy work that would flood this context and crowd out the verdict reasoning. Dispatch it to scout sub-agents that search in their own context and return only a dossier path plus a short gist; read a dossier on demand, never inline the raw search.
-
-**Resolve the project profile from the shared cache first.** The question-agnostic profile (stack, dependency surface + licenses, conventions, structure) is identical for every run at this commit, so reuse it instead of re-deriving. Set `SKILL_DIR` to this skill's directory and run the helper (full protocol in `references/repo-profile-cache.md`):
-
-```bash
-SKILL_DIR="<absolute path of the directory containing the SKILL.md you just read>"
-python3 "$SKILL_DIR/scripts/repo-profile-cache.py" get
-```
-
-On `HIT`, load the profile JSON, which is your agnostic project orientation; do not re-derive it. On `MISS`, dispatch a generic subagent with `references/agents/repo-profiler.md` to derive the profile, write its JSON to a file, then persist with `python3 "$SKILL_DIR/scripts/repo-profile-cache.py" put <file>` (re-set `SKILL_DIR` in that call; shell vars don't persist between Bash invocations). On `NO-CACHE`, or if the call errors or returns nothing, derive it inline via that persona and skip the `put`; never block on the cache. The profile supplies the agnostic facts; the scouts below only run the **candidate-specific** slice on top of it.
-
-Create the scratch dir once, and reuse the echoed path for every scout this run:
-
-```bash
-SCRATCH_DIR="/tmp/odin/pov/$(openssl rand -hex 4)"
-mkdir -p "$SCRATCH_DIR"
-echo "$SCRATCH_DIR"
-```
-
-**Every scout payload carries the same context.** A fresh subagent does not inherit this conversation, so fill the persona files' `{subject}` / `{scratch-dir}` placeholders at dispatch: pass each scout the framed question (subject + intent), the named incumbent and the reversibility tier, and the resolved `<scratch-dir>` path, plus any user-supplied links for the external researcher. A scout seeded with only its generic persona grounds "some external thing" and can produce an empty or unfocused dossier.
-
-**Tier-sensitive dispatch.** For **Tier 1** (reversible), run a single combined grounding pass: seed one subagent with `references/agents/project-grounding-scout.md` covering the candidate-specific project facts (incumbent, call-sites) on top of the cached profile at a tight read budget, and one with `references/agents/external-evidence-researcher.md`; skip the standalone precedent scout. On this tier the project-grounding scout's **prior-decision scan** (`docs/solutions/`, ADRs, design docs) is the precedent check, so it must run. For **Tier 2/3**, dispatch the full fleet in parallel:
-
-- **project-grounding scout** (extraction tier). Read `references/agents/project-grounding-scout.md` and seed a generic subagent with it. With the agnostic profile already loaded from the cache, this scout runs only the **candidate-specific** slice: the named incumbent for *this* candidate, its call-sites/footprint, incumbent-pain, and the license/compat check against the profile's dependency-license set. Do not re-derive stack, conventions, or structure. Those are in the profile. But note the profile may *name* an incumbent dependency, and a named dep is only a **lead**. It does not satisfy the project floor (see `references/method.md`), which still requires a freshly verified call-site the cache never holds. Do not let a cache-named incumbent short-circuit the fresh touchpoint check.
-- **precedent-&-activity scout** (extraction tier). Read `references/agents/precedent-activity-scout.md` and seed a generic subagent with it. Always run its **local-doc precedent pass** (`docs/solutions/`, ADRs, design docs; file reads, no tools needed). Only its tracker/PR portion is capability-gated and degrades gracefully when those interfaces aren't reachable. Do **not** skip the whole scout for missing tracker access. That would drop the only path that surfaces a prior local adopt/reject decision.
-- **external-evidence researcher** (generation tier). Read `references/agents/external-evidence-researcher.md` and seed a generic subagent with it; capability-gated on web tools.
-
-**Capability gating is two-level:** skip only a scout (or scout-portion) with **no reachable surface at all**: the project-grounding scout and the precedent scout's local-doc pass are file reads and always run; the tracker/PR reads and the external researcher are tool-gated and degrade. Let a scout that loses a tool mid-run self-report "unavailable." Never block on a missing surface. Record it and let it lower the verdict's stated confidence, or trip the external floor (Phase 2) when the external leg is entirely absent.
-
-**Populate the provenance buckets** from the returned dossiers, keeping them separate for Phase 2: *observed-project-facts* and *verified-external-facts* (these count as grounding) vs. *conversation-claims* and *unconfirmed-assumptions* from a warm invocation (these do not count until a scout corroborates them). Read dossiers from their paths on demand; do not pull their bulk into this context.
-
-### Phase 2: Verify against the two floors
-
-**Read `references/method.md` now**, before reasoning about the verdict. It defines the Verify and Verdict steps, the skeptic stance and reversibility tiering as cross-cutting properties, and the two-floor Invalid-Verdict gate. Apply that gate as a pass/fail checklist over the dossiers: a failed floor forbids Adopt/Reject and returns the matching Hold subtype. Do this reasoning on the clean context. Read a dossier on demand; never pull their bulk in.
-
-### Phase 3: Verdict
-
-Emit the verdict contract defined in `references/method.md`. Grade vocabulary, schema fields, tier sizing, and output economy are all specified there. The verdict is a **compact chat block, not a research report**: lead with the grade, keep each schema field terse, and never reprint scout dossiers or raw search output. Size it to the tier. A Tier 1 verdict fits one screen; Tier 2/3 carries the full workup but still leads with the verdict and cites evidence rather than pasting it.
-
-### Phase 4: Follow-up
-
-The chat verdict (the TL;DR) is the deliverable. What you offer next is **reasoned from the verdict and sized to the tier**. Never offer a fixed menu, and never assume everything routes to a plan.
-
-**Compute the next step.** From the grade and the verdict's Handoff field, reason about the single best next move and a one-clause why. It is not always obvious between plan and brainstorm, so decide in context:
-
-- **Adopt**, scope clear → take it into implementation planning.
-- **Adopt**, scope still fuzzy → `brainstorm` to pin down what "adopt" means before planning.
-- **Trial** → scope a timeboxed spike (`work`).
-- **Hold / Reject / Not-our-problem** → no handoff; there is nothing to take forward.
-
-**Tier-gate the offer (anti-ritual):**
-
-- **Tier 1, or a Reject / Not-our-problem grade** → end with a single prose line, e.g. "Want the full write-up, or `<computed next step>`? Otherwise we're done." No blocking menu; silence means done.
-- **Tier 2/3 with an actionable grade** → ask via the platform's blocking question tool, with the *computed* next step as the first, dynamically-labeled option:
-  1. **`<computed next step>`** (e.g. "Plan the adoption"). Seeded with the verdict substance, not a file pointer.
-  2. **Full write-up**. The expanded, shareable artifact.
-  3. **Done.**
-
-**On each selection:**
-
-- **Computed next step** → invoke that skill via the platform's skill-invocation primitive, seeding it with the verdict substance (the decision, conditions, and verified facts).
-- **Full write-up** → read `references/report.md` and follow it (HTML by default; opened locally or published via an available HTML tool). Opt-in; the default stays chat-only.
-
-**Warm invocations stay a guest:** output the verdict block, hand control back, and offer none of the above unless the user asks. A mid-session interjection does not push a next-step or capture decision.
+Adapted from the project-owned ODIN current `pov` skill (`skills/pov/SKILL.md`), candidate `current:current-c:current:pov`; no pinned revision or external license was supplied. This clean-cutover adaptation retains project-specific evidence floors, tier-sized four-role scouting, deterministic profile-cache invalidation, provenance separation, graded verdicts, and warm-invocation behavior without copying third-party material.

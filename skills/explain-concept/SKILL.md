@@ -1,46 +1,55 @@
 ---
 name: explain-concept
-description: 'Use when a concept needs making clear rather than practising: build the intuition, explain why it exists and what it replaced, trace where it came from, draw it, or contrast it against what it gets confused with. For exercises and grading, use drill.'
-argument-hint: "Which concept — intuition, motivation, origin, picture, or contrast?"
+description: 'Use when a concept needs making clear rather than practising: explain it simply, why does this exist, draw it, or what is the difference. Delivers one one-screen explanation in the single chosen angle and stops when that angle done condition is met. Don''t use for tasks that require source or remote-system changes.'
 ---
 
-One concept, one angle per run. The table picks the angle unless the argument names it directly.
+# Explain concept
 
-## Pick the angle
+## Contract
 
-An explicit argument overrides the table; no match means **intuition**.
-
-| The user asks | Angle |
+| Field | Bound contract |
 |---|---|
-| "what is really going on", "I don't get it", "explain it simply" | intuition |
-| "why does this exist", "what problem does it solve", "why not just X" | motivation |
-| "where did this come from", "who came up with it", "what did it replace" | origin |
-| "draw it", "what does it look like" | picture |
-| "what is the difference", "when do I use X instead of Y" | contrast |
+| Trigger | A concept needs making clear not practising; explain simply, why does this exist, draw it, what's the difference |
+| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. Reading files, one web citation search, and a transient diagram render that leaves no artifact are the only outward operations. |
+| Side effect | Chat output only: a one-screen explanation for the chosen angle, one authored diagram for the picture angle, one citation search for the origin angle. Nothing is written to any file or repository. |
+| Done | The chosen angle's done condition met: learner restates in their own words for intuition; corpus anchors cited or absence stated |
 
-## intuition
+## Inputs
 
-One analogy drawn from something the learner already owns, the smallest example showing the behaviour, and the one sentence that survives when they forget the rest. Then stop and ask them to restate it in their own words. Done when the restatement exists and has been confirmed or corrected. One screen.
+The concept to explain — must be supplied. An explicit angle argument (`intuition`, `motivation`, `origin`, `picture`, or `contrast`) — optional; the request wording selects the angle when the argument is absent. A grounding source — `CORPUS.md` when it exists; otherwise the source named in answer to the one-time grounding question in the procedure.
 
-## motivation
+## Procedure
 
-What people did before this existed, where that broke, what this buys, what it costs. Leave history to the origin angle. Done when all four are on the page and the cost is real rather than a token concession. One screen.
+1. Pick the one angle for this run. An explicit argument overrides the table; no match means **intuition**.
 
-## origin
+   | The learner asks | Angle |
+   |---|---|
+   | "what is really going on", "I don't get it", "explain it simply" | intuition |
+   | "why does this exist", "what problem does it solve", "why not just X" | motivation |
+   | "where did this come from", "who came up with it", "what did it replace" | origin |
+   | "draw it", "what does it look like" | picture |
+   | "what is the difference", "when do I use X instead of Y" | contrast |
 
-Who, when, what it displaced, one citation the learner can go read. The search and approval protocol is in [references/ORIGIN-SEARCH.md](references/ORIGIN-SEARCH.md). Done when a citation is on the page or the user declined the search. Fifteen lines. Asked for alongside the intuition, run the intuition first: the evidence that history teaches is thin, so this is a hook rather than a prerequisite, and saying so when the user opens here is part of the angle.
+2. Ground every claim about the concept. When `CORPUS.md` exists, cite its anchor for each claim; when a claim is not in the corpus, say so in the sentence that makes it. With no `CORPUS.md`, ask once which source to ground in, then proceed and mark unanchored claims the same way in the sentence that makes them.
+3. Ask the learner to say why a step is taken before revealing the reason.
+4. Run exactly the chosen angle:
+   - **intuition** — one analogy drawn from something the learner already owns, the smallest example showing the behaviour, and the one sentence that survives when they forget the rest. Then stop and ask them to restate it in their own words. Done when the restatement exists and has been confirmed or corrected. One screen.
+   - **motivation** — what people did before this existed, where that broke, what this buys, what it costs. Leave history to the origin angle. Done when all four are on the page and the cost is real rather than a token concession. One screen.
+   - **origin** — who, when, what it displaced, one citation the learner can go read. Fifteen lines. Search and approval: state in one line what will be searched and run the search only on learner approval; search primary sources (original publication, first release notes, project history) and put one readable citation on the page with a clause on what it establishes. Done when a citation is on the page or the learner declined the search. Asked for alongside intuition, run the intuition first and say so on entry: the evidence history teaches is thin, so this is a hook rather than a prerequisite.
+   - **picture** — one diagram: nomnoml for structure and flow, D2 for architecture, house palette. Render it, require the render to exit zero, and place the SVG in the reply with alt text and a caption. Done when the render exits zero and the embed carries its alt text and caption. A concept with no structure, flow, or architecture worth drawing gets one line saying so instead; a box drawn around a definition costs attention and returns nothing.
+   - **contrast** — a table whose rows are the properties where the items differ, plus one line per item saying when to reach for it. Done when every row separates rather than shares and at least one row is a difference with a consequence the learner can act on.
+5. One angle per run. Another angle is another run.
 
-## picture
+## Failure and recovery
+- **No restatement (intuition):** re-analogize once from a different thing the learner owns. If no restatement exists after that, end the run with the done condition explicitly unmet; never claim it met.
+- **Render exits non-zero (picture):** fix the diagram source and re-render once. If it still exits non-zero, end the angle stating the render failed; never embed a diagram whose render did not succeed.
+- **No usable citation (origin):** state the absence on the page; that satisfies the origin done condition. On learner decline, give the origin from model knowledge explicitly marked unverified.
+- **No grounding source and no answer to the grounding question:** proceed, with every unanchored claim marked ungrounded in its own sentence.
+- **Partial result:** deliver what the completed steps produced, name the angle, and list exactly which done conditions are unmet. The run is read-only, so there is nothing to roll back; a blocked run reports the angle, the failed step, and the unmet condition.
 
-One diagram, authored per the `diagram-contract` skill: nomnoml for structure and flow, D2 for architecture, house palette, rendered SVG committed beside its source in `assets/`. Done when the render exits zero and the embed carries its alt text and caption. A concept with no structure, flow, or architecture worth drawing gets one line saying so instead; a box drawn around a definition costs attention and returns nothing.
+## Output
+The explanation in the chat reply: one screen per angle, fifteen lines for origin, the rendered SVG with alt text and caption for picture, the contrast table with its per-item reach-for lines. Close with the terminal classification: the chosen angle's done condition met, or exactly which condition remains unmet.
 
-## contrast
+## Provenance
 
-A table whose rows are the properties where the items differ, plus one line per item saying when to reach for it. Done when every row separates rather than shares, and at least one row is a difference with a consequence the learner can act on.
-
-## Rules
-
-- One angle per run. Another angle is another run.
-- Ask the learner to say why a step is taken before revealing the reason.
-- Cite the corpus anchor for every claim about the concept when `CORPUS.md` exists. When a claim is not in the corpus, say so in the sentence that makes it.
-- No `CORPUS.md` means ask which source to ground in, once, then proceed.
+Adapted from the ODIN project-owned skill source `skills/explain-concept/SKILL.md` (candidate `current:current-b:current:explain-concept`, origin `odin-1.x-current-skill`, revision not pinned, no third-party expression). Adaptation for ODIN 2.0: module assigned to `odin-research` by editorial ruling (common research workflow); the origin search-and-approval protocol formerly in a support file and the diagram tool-selection rules formerly delegated to a peer skill are inlined here because the final roster carries no support files; diagram delivery moved into the chat reply to hold read-only authority.

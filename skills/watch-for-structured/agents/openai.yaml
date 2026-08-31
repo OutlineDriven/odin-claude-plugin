@@ -1,0 +1,3 @@
+interface:
+  display_name: "Watch For Structured"
+  short_description: "Severity-classified watch report with routing and on-call paging"

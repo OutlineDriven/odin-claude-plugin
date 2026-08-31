@@ -1,0 +1,3 @@
+interface:
+  display_name: "Setup Pstack"
+  short_description: "Configure pstack role-to-model mappings and verify every role"

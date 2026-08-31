@@ -1,0 +1,3 @@
+interface:
+  display_name: "Capture Consent Gate"
+  short_description: "Gates recording start on disclosure acknowledgement"

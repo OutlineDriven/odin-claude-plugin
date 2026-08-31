@@ -1,0 +1,3 @@
+interface:
+  display_name: "SRED Project Organizer"
+  short_description: "Organize SRED projects into Notion child pages from a summary"

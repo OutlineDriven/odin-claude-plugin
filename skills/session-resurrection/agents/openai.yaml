@@ -1,0 +1,3 @@
+interface:
+  display_name: "Session Resurrection"
+  short_description: "Resume dead sessions from SDD notes and progress graph"

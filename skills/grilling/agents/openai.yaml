@@ -1,0 +1,3 @@
+interface:
+  display_name: "Decision Tree Grilling"
+  short_description: "Drive a decision tree to closure with round-by-round questions."

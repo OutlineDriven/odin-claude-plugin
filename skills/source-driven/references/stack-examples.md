@@ -4,7 +4,7 @@ Worked illustrations pulled out of `source-driven/SKILL.md`'s per-step instructi
 
 **Grounded: 2026-08-26**
 
-## Step 1 — stack-detection report shape
+## Step 1: stack-detection report shape
 
 ```
 STACK DETECTED:
@@ -20,7 +20,7 @@ STACK DETECTED:
 → Fetch official docs for the patterns in scope.
 ```
 
-## Step 2 — fetch precisely
+## Step 2: fetch precisely
 
 ```
 BAD:  Fetch the React homepage
@@ -30,7 +30,7 @@ BAD:  Search "django authentication best practices"
 GOOD: Fetch docs.djangoproject.com/en/5.2/topics/auth/
 ```
 
-## Step 3 — conflict-detected dialogue
+## Step 3: conflict-detected dialogue
 
 **When the docs conflict with existing project code:**
 
@@ -60,7 +60,7 @@ B) Match existing code (sync_to_async wrappers) — matches the codebase
 → Which do you prefer?
 ```
 
-## Step 4 — citation formats
+## Step 4: citation formats
 
 ```typescript
 // React 19 form state via useActionState (replaces manual isPending/setIsPending)

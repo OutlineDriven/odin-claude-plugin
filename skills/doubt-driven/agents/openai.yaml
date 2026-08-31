@@ -1,3 +1,3 @@
 interface:
-  display_name: "Doubt-Driven Development"
-  short_description: "Review code adversarially to verify claims"
+  display_name: "Doubt Driven"
+  short_description: "Fresh-context adversarial review with classified findings."

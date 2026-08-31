@@ -1,3 +1,3 @@
 interface:
-  display_name: "Clarify"
-  short_description: "Find ambiguities and gaps in a request"
+  display_name: "Certainty-Tiered Ambiguity Report"
+  short_description: "Certainty-tiered ambiguity report with bounded manual questions"

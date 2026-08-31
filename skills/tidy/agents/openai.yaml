@@ -1,3 +1,3 @@
 interface:
-  display_name: "Tidy"
-  short_description: "Compress files, diffs, memory and git stacks"
+  display_name: "Dead Code Tidying"
+  short_description: "Simplify code by removing dead and redundant constructs"

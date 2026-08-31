@@ -1,0 +1,3 @@
+interface:
+  display_name: "Mutation Campaign Configuration"
+  short_description: "Configure mewt or muton campaign scope and readiness"

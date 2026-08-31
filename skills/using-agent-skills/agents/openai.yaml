@@ -1,0 +1,3 @@
+interface:
+  display_name: "Using Agent Skills"
+  short_description: "Route tasks to owning skills or record explicit gaps"

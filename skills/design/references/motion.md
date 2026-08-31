@@ -103,7 +103,7 @@ SVG transforms quirk: `transform-origin` on SVG elements inside a parent `<svg>`
 
 ## 5. React
 
-`<ViewTransition>` and `addTransitionType()` ship in React's Experimental / Canary channel as of 19.2 (not stable). Treat as preview APIs. The browser primitive (View Transitions API) is the stable substrate; React's wrapper layers on top.
+`<ViewTransition>` and `addTransitionType()` ship in React's Experimental / Canary channel as of 19.2 (not stable). Treat as preview APIs. The browser primitive (View Transitions API) is the stable foundation; React's wrapper layers on top.
 
 Reserve `name` for shared-element transitions only; non-shared enter / exit omits `name` and React picks per-render IDs.
 

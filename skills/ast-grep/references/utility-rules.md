@@ -1,8 +1,8 @@
-# Utility Rules
+# Utility rules
 
-Utility rules allow you to define reusable rule components, reducing duplication and enabling complex patterns like recursion.
+Utility rules are reusable rule components: they cut duplication and enable patterns like recursion.
 
-## Local Utility Rules
+## Local utility rules
 
 Defined within a rule file under the `utils` key. Accessible only within that file.
 
@@ -18,7 +18,7 @@ rule:
   matches: is-literal # Reference the utility
 ```
 
-## Global Utility Rules
+## Global utility rules
 
 Defined in separate files in a dedicated directory (configured in `sgconfig.yml`), accessible across the entire project.
 
@@ -28,7 +28,7 @@ Defined in separate files in a dedicated directory (configured in `sgconfig.yml`
      - utils
    ```
 
-2. **Define Global Util** (e.g., `utils/is-literal.yml`):
+2. **Define the global util** (e.g., `utils/is-literal.yml`):
    ```yaml
    id: is-literal
    language: TypeScript
@@ -38,7 +38,7 @@ Defined in separate files in a dedicated directory (configured in `sgconfig.yml`
        - kind: number_literal
    ```
 
-3. **Use in Rule**:
+3. **Use it in a rule**:
    ```yaml
    # rules/my-rule.yml
    id: use-global-util
@@ -47,7 +47,7 @@ Defined in separate files in a dedicated directory (configured in `sgconfig.yml`
      matches: is-literal
    ```
 
-## Recursive Rules
+## Recursive rules
 
 You can use utility rules to match recursive structures (like nested parentheses).
 

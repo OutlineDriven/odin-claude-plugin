@@ -1,0 +1,3 @@
+interface:
+  display_name: "AFL++ Fuzzing Campaigns"
+  short_description: "Run AFL++ multi-core fuzzing campaigns with crash triage"

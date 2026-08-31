@@ -1,0 +1,3 @@
+interface:
+  display_name: "Spec To Code Compliance"
+  short_description: "Check code against authoritative spec, verdict per requirement"

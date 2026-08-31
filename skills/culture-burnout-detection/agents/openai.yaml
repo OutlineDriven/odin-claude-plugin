@@ -1,0 +1,3 @@
+interface:
+  display_name: "Culture Burnout Detection"
+  short_description: "Detect burnout and flight-risk from CI Survey vs Job profiles"

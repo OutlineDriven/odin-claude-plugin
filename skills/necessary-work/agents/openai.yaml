@@ -1,3 +1,3 @@
 interface:
   display_name: "Necessary Work"
-  short_description: "Cut work that the request does not need"
+  short_description: "Cuts work to the minimum that satisfies the request"

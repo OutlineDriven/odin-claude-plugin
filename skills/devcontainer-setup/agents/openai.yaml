@@ -1,0 +1,3 @@
+interface:
+  display_name: "Devcontainer Setup"
+  short_description: "Generate five .devcontainer files with merged language tooling."

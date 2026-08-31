@@ -1,0 +1,3 @@
+interface:
+  display_name: "Next Action Gate"
+  short_description: "Evidence-backed task status and next-action permission"

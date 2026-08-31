@@ -1,0 +1,3 @@
+interface:
+  display_name: "Diagramming Code"
+  short_description: "Derive Mermaid code-structure diagrams from code analysis."

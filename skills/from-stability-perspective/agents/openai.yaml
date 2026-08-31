@@ -1,0 +1,3 @@
+interface:
+  display_name: "From Stability Perspective"
+  short_description: "Stability-seat analysis preserving the working machine."

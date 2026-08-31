@@ -1,0 +1,3 @@
+interface:
+  display_name: "Write Google Doc"
+  short_description: "Create a Google Doc or write Markdown to one document tab"

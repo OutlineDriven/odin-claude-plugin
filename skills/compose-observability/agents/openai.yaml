@@ -1,0 +1,3 @@
+interface:
+  display_name: "Compose Observability"
+  short_description: "Add the minimal durable observability surface to keep."

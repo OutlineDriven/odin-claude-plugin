@@ -1,8 +1,8 @@
-# OWASP Top 10 Prevention Patterns
+# OWASP Top 10 prevention patterns
 
 These are prevention patterns, not a ranking. `references/security-checklist.md` holds the 2021 ordering as a quick-reference table, along with the detailed security checklists and pre-commit verification steps. Examples appear in two language families; the mitigation is the same across stacks.
 
-## Injection (SQL, NoSQL, OS Command)
+## Injection (SQL, NoSQL, OS command)
 
 ```typescript
 // BAD: SQL injection via string concatenation
@@ -28,7 +28,7 @@ user = session.query(User).filter(User.id == user_id).one_or_none()
 
 The same rule holds for OS commands: pass an argument vector (`execFile`, `subprocess.run([...])`), never a shell string built from input.
 
-## Broken Authentication
+## Broken authentication
 
 ```typescript
 import { hash, compare } from 'bcrypt';
@@ -74,7 +74,7 @@ SESSION_COOKIE = dict(
 
 The secret comes from the environment in both cases; never hard-code it.
 
-## Cross-Site Scripting (XSS)
+## Cross-site scripting (XSS)
 
 ```typescript
 // BAD: rendering user input as HTML
@@ -102,7 +102,7 @@ clean = bleach.clean(user_input)
 
 The bypass paths (`innerHTML`, `|safe`, `mark_safe`, `render_template_string` with concatenation) are where XSS enters.
 
-## Broken Access Control
+## Broken access control
 
 Check authorization, not just authentication. Verify the caller owns the resource.
 
@@ -134,7 +134,7 @@ async def update_task(task_id: str, body: TaskUpdate, user=Depends(authenticate)
 
 Missing ownership checks are IDOR: authenticated, but acting on another user's row.
 
-## Security Misconfiguration
+## Security misconfiguration
 
 ```typescript
 import helmet from 'helmet';
@@ -181,7 +181,7 @@ app.add_middleware(
 
 CORS is an allowlist of known origins. Never reflect arbitrary origins and never pair `*` with credentials.
 
-## Sensitive Data Exposure
+## Sensitive data exposure
 
 ```typescript
 // Strip sensitive fields from API responses
@@ -210,7 +210,7 @@ if not API_KEY:
 
 Default to an explicit allowlist of returned fields rather than denylisting secrets one by one.
 
-## Server-Side Request Forgery (SSRF)
+## Server-side request forgery (SSRF)
 
 Any time the server fetches a URL the user influenced (webhooks, "import from URL", image proxies, link previews), an attacker can aim it at internal services (cloud metadata, `localhost`, private IPs).
 

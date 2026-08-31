@@ -1,0 +1,3 @@
+interface:
+  display_name: "Writing Beats"
+  short_description: "Assembles only user-selected beats into the target piece"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Versioned Experiments"
+  short_description: "Fresh-holdout champion and resumable best checkpoint"

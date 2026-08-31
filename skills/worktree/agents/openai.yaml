@@ -1,3 +1,3 @@
 interface:
-  display_name: "Worktree Isolation"
-  short_description: "Set up isolated git worktrees per branch"
+  display_name: "Isolated Git Worktree"
+  short_description: "Set up an isolated git worktree per branch or ref"

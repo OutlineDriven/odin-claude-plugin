@@ -1,0 +1,3 @@
+interface:
+  display_name: "Expert Scorecard"
+  short_description: "Independently rescored expert scorecard"

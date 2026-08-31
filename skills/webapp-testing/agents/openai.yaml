@@ -1,0 +1,3 @@
+interface:
+  display_name: "Webapp Testing"
+  short_description: "Run Playwright tests, capture evidence, verify UI behavior"

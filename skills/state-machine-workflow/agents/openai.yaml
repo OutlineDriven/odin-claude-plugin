@@ -1,0 +1,3 @@
+interface:
+  display_name: "State Machine Workflow"
+  short_description: "Generate states, events, guards, and transitions"

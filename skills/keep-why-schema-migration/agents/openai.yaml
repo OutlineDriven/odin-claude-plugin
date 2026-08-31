@@ -1,0 +1,3 @@
+interface:
+  display_name: "Keep Why Schema Migration"
+  short_description: "Migrates project context entries to the current schema"

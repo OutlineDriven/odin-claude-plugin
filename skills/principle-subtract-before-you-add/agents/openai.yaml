@@ -1,0 +1,3 @@
+interface:
+  display_name: "Principle Subtract Before You Add"
+  short_description: "Remove obsolete code before adding new work to a cleaner base."

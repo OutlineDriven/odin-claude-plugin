@@ -1,0 +1,3 @@
+interface:
+  display_name: "Design Review"
+  short_description: "Visually audit a live UI and fix findings in a verify loop."

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Visualise Explainer"
+  short_description: "Interactive HTML explainer with controls and live state updates"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Consecutive Pass Validation"
+  short_description: "Consecutive quality-bar proof"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Visual Diagram"
+  short_description: "Generate and open one self-contained HTML diagram"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Leave Only First Principle"
+  short_description: "Strip a design or codebase down to its irreducible primitives"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "DX Audit"
+  short_description: "Severity-tiered DX findings with root-cause fixes"

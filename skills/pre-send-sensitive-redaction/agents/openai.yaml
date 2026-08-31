@@ -1,0 +1,3 @@
+interface:
+  display_name: "Pre Send Sensitive Redaction"
+  short_description: "Mask credentials and PII in session content before sending."

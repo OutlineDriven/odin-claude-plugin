@@ -1,0 +1,3 @@
+interface:
+  display_name: "Skill Creator"
+  short_description: "Codify a successful scrape into a tested browser-skill"

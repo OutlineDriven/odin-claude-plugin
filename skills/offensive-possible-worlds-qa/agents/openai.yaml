@@ -1,0 +1,3 @@
+interface:
+  display_name: "Offensive Possible Worlds QA"
+  short_description: "Enumerate hostile worlds and make the product break with proof."

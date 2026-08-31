@@ -1,0 +1,3 @@
+interface:
+  display_name: "Docs Update"
+  short_description: "Sync user-facing docs to code changes and open a linked PR."

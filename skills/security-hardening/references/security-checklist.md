@@ -1,24 +1,24 @@
-# Security Checklist
+# Security checklist
 
 Quick reference for application security. Use alongside the `security-hardening` skill. Code blocks appear in two language families; the controls are the same across stacks.
 
-## Table of Contents
+## Table of contents
 
-- [Threat Modeling (Start Here)](#threat-modeling-start-here)
-- [Pre-Commit Checks](#pre-commit-checks)
+- [Threat modeling (start here)](#threat-modeling-start-here)
+- [Pre-commit checks](#pre-commit-checks)
 - [Authentication](#authentication)
 - [Authorization](#authorization)
-- [Input Validation](#input-validation)
-- [Security Headers](#security-headers)
-- [CORS Configuration](#cors-configuration)
-- [Data Protection](#data-protection)
-- [Dependency Security](#dependency-security)
-- [AI / LLM Security](#ai--llm-security)
-- [Error Handling](#error-handling)
-- [OWASP Top 10 Quick Reference](#owasp-top-10-quick-reference)
-- [OWASP Top 10 for LLMs Quick Reference](#owasp-top-10-for-llms-quick-reference)
+- [Input validation](#input-validation)
+- [Security headers](#security-headers)
+- [CORS configuration](#cors-configuration)
+- [Data protection](#data-protection)
+- [Dependency security](#dependency-security)
+- [AI / LLM security](#ai--llm-security)
+- [Error handling](#error-handling)
+- [OWASP Top 10 quick reference](#owasp-top-10-quick-reference)
+- [OWASP Top 10 for LLMs quick reference](#owasp-top-10-for-llms-quick-reference)
 
-## Threat Modeling (Start Here)
+## Threat modeling (start here)
 
 Before reaching for controls, spend five minutes as the attacker:
 
@@ -27,7 +27,7 @@ Before reaching for controls, spend five minutes as the attacker:
 - [ ] STRIDE run per boundary (Spoofing, Tampering, Repudiation, Info disclosure, DoS, Elevation)
 - [ ] Abuse cases written next to use cases ("how would I misuse this?")
 
-## Pre-Commit Checks
+## Pre-commit checks
 
 - [ ] No secrets in staged code (scan the staged diff for `password`, `secret`, `api_key`, `token`)
 - [ ] `.gitignore` covers: `.env`, `.env.local`, `*.pem`, `*.key`
@@ -51,7 +51,7 @@ Before reaching for controls, spend five minutes as the attacker:
 - [ ] API keys scoped to minimum necessary permissions
 - [ ] JWT tokens validated (signature, expiration, issuer)
 
-## Input Validation
+## Input validation
 
 - [ ] All user input validated at system boundaries (API routes, form handlers)
 - [ ] Validation uses allowlists (not denylists)
@@ -64,7 +64,7 @@ Before reaching for controls, spend five minutes as the attacker:
 - [ ] URLs validated before redirect (prevent open redirect)
 - [ ] Server-side URL fetches allowlisted; private/reserved IPs blocked (prevent SSRF)
 
-## Security Headers
+## Security headers
 
 ```
 Content-Security-Policy: default-src 'self'; script-src 'self'
@@ -76,7 +76,7 @@ Referrer-Policy: strict-origin-when-cross-origin
 Permissions-Policy: camera=(), microphone=(), geolocation=()
 ```
 
-## CORS Configuration
+## CORS configuration
 
 ```typescript
 // Restrictive (recommended)
@@ -108,7 +108,7 @@ app.add_middleware(
 
 - [ ] CORS restricted to known origins (never `*` paired with credentials)
 
-## Data Protection
+## Data protection
 
 - [ ] Sensitive fields excluded from API responses (`passwordHash`, `resetToken`, etc.)
 - [ ] Sensitive data not logged (passwords, tokens, full CC numbers)
@@ -116,7 +116,7 @@ app.add_middleware(
 - [ ] HTTPS for all external communication
 - [ ] Database backups encrypted
 
-## Dependency Security
+## Dependency security
 
 ```bash
 # Node
@@ -138,7 +138,7 @@ govulncheck ./...
 - [ ] New dependencies reviewed (maintenance, downloads, install-time scripts: `postinstall`, `setup.py`, `build.rs`)
 - [ ] No typosquats (`cross-env` vs `crossenv`, `requests` vs `request`)
 
-## AI / LLM Security
+## AI / LLM security
 
 For any feature that calls an LLM (chatbots, summarizers, agents, RAG):
 
@@ -148,7 +148,7 @@ For any feature that calls an LLM (chatbots, summarizers, agents, RAG):
 - [ ] Tool/agent permissions scoped; destructive or irreversible actions require confirmation
 - [ ] Token, rate, and recursion/loop limits set (bound consumption)
 
-## Error Handling
+## Error handling
 
 ```typescript
 // Production: generic error, no internals
@@ -174,7 +174,7 @@ return JSONResponse(
 # NEVER in production: returning the exception message, traceback, or query text
 ```
 
-## OWASP Top 10 Quick Reference
+## OWASP Top 10 quick reference
 
 | # | Vulnerability | Prevention |
 |---|---|---|
@@ -189,7 +189,7 @@ return JSONResponse(
 | 9 | Logging Failures | Log security events, don't log secrets |
 | 10 | SSRF | Validate/allowlist URLs, restrict outbound requests |
 
-## OWASP Top 10 for LLMs Quick Reference
+## OWASP Top 10 for LLMs quick reference
 
 For apps with LLM features. See the [OWASP GenAI Security Project](https://genai.owasp.org/llm-top-10/).
 

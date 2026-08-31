@@ -1,0 +1,3 @@
+interface:
+  display_name: "Behavior Validator"
+  short_description: "Validates runtime behavior against a source-blind contract."

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Upgrade Catalog"
+  short_description: "Converge installed ODIN skills to the full current catalog"

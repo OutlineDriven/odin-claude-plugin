@@ -1,4 +1,4 @@
-# Triaging Dependency Audit Results
+# Triaging dependency audit results
 
 Not every audit finding needs immediate action. Use this decision tree:
 
@@ -25,7 +25,7 @@ the dependency audit reports a vulnerability
 
 When you defer a fix, document the reason and set a review date.
 
-## Supply-Chain Hygiene
+## Supply-chain hygiene
 
 A vulnerability audit catches known CVEs; it will not catch a malicious or typosquatted package. Also:
 

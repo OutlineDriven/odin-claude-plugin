@@ -1,0 +1,3 @@
+interface:
+  display_name: "Fastify Inject Testing"
+  short_description: "Test Fastify routes via inject() with no listener"

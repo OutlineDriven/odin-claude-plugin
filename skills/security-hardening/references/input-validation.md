@@ -1,6 +1,6 @@
-# Input Validation Patterns
+# Input validation patterns
 
-## Schema Validation at Boundaries
+## Schema validation at boundaries
 
 ```typescript
 import { z } from 'zod';
@@ -46,7 +46,7 @@ async def create_task(raw: dict):
 
 Validate at the boundary with an allowlist schema; reject anything that does not parse.
 
-## File Upload Safety
+## File upload safety
 
 ```typescript
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];

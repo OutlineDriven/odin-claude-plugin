@@ -1,0 +1,3 @@
+interface:
+  display_name: "Triage Issue Reports"
+  short_description: "Triage a Slack issue report and post one classified verdict"

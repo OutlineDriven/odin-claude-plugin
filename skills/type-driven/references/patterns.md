@@ -1,4 +1,4 @@
-# Type Patterns by Language
+# Type patterns by language
 
 | Language | Refined Types | State Machines |
 |----------|--------------|----------------|
@@ -13,7 +13,7 @@
 | Swift | struct + protocol | enum + associated values |
 | Scala 3 | opaque types | match types, ADTs |
 
-## Language-Specific Validation Gates
+## Language-specific validation gates
 
 | Language | Check Command | Hole Markers | Escape Hatches to Audit |
 |----------|--------------|--------------|------------------------|
@@ -28,7 +28,7 @@
 | Swift | `swift build` | `fatalError("not implemented")` | `as!` force casts |
 | Scala 3 | `sbt compile` | `???` | `asInstanceOf` |
 
-All commands use `$CHECK_CMD` variable -- override with project-specific build command when detected.
+All commands use the `$CHECK_CMD` variable; override with the project-specific build command when detected.
 
 ## Notes
 

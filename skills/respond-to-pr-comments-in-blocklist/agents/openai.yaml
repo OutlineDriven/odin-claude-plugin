@@ -1,0 +1,3 @@
+interface:
+  display_name: "Respond To PR Comments In Blocklist"
+  short_description: "Walk PR review comments, collect decisions, post replies"

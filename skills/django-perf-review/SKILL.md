@@ -1,0 +1,46 @@
+---
+name: django-perf-review
+description: 'Use when the user asks to review Django performance, find N+1 queries, optimize Django, or check queryset performance, validate Django ORM and queryset performance issues and return a report with severity-matched findings and zero false positives. Don''t use for tasks that require source or remote-system changes.'
+---
+
+# Django perf review
+
+## Contract
+
+| Field | Bound contract |
+|---|---|
+| Trigger | User asks to review Django performance, find N+1 queries, optimize Django, or check queryset performance. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Fixes are reported, never applied. |
+| Side effect | Chat output only: reports validated Django performance issues. |
+| Done | Report with validated N+1/ORM/queryset issues; severity matches impact; zero false positives. |
+
+## Inputs
+
+Required: read access to the Django codebase under review (models, managers, querysets, views, DRF viewsets/serializers, signals, template tags).
+Optional: the specific app or module paths to bound scope; a running app or test suite for query-count confirmation; Django settings/INSTALLED_APPS for app discovery.
+
+## Procedure
+
+1. Bound scope to the app or module paths the user named. If none named, ask once for the scope before scanning. Do not edit files.
+2. Enumerate ORM call sites: scan models, managers, views, DRF viewsets, serializers, signals, and template tags for queryset construction and relation access (`.filter`, `.get`, `.exclude`, `.select_related`, `.prefetch_related`, `.values`, `.values_list`, `.annotate`, `.aggregate`, `.iterator`, `.exists`, `.count`, `.only`, `.defer`, `__` lookups, reverse managers, `.related_model` access).
+3. Trace relation access per row: for each queryset, follow foreign-key, one-to-one, many-to-many, and reverse relations accessed inside loops, templates, serializer nested fields, or per-instance property access. Flag a relation access that runs one query per row when the relation is not loaded on that code path via `select_related` or `prefetch_related`.
+4. Detect queryset misuse: querysets evaluated more than once on the same path, `len(qs)`/`list(qs)` before iteration, slicing after evaluation, `.count()` where `.exists()` would suffice, missing `.iterator()` on large result sets, `.only()`/`.defer()` that still triggers deferred-field loads.
+5. Detect unbounded reads: list/index views without pagination, admin actions without queryset scoping, filter/order fields without a matching database index.
+6. Validate every finding against the actual code path: cite file, line, the queryset expression, the relation access, and the per-row query it triggers. Confirm the relation is not already prefetched or selected on that exact path. A finding without a confirmed access path is not reported as validated.
+7. Classify severity by impact and query-count growth: N+1 in a list/index/hot path is high (O(n) queries per request); per-request single-row access is medium; rare/admin-only path is low. State the growth as queries per request or per row.
+8. For each validated finding, give the concrete fix with the exact queryset rewrite: `select_related` for FK/one-to-one, `prefetch_related` or `Prefetch` for many-to-many/reverse, pagination, `.iterator()`, `.only()`, or a migration adding the index. Show the before and after queryset.
+9. Return the report. Do not apply fixes, run migrations, or modify the codebase.
+
+## Failure and recovery
+- Ambiguous relation (generic FK, polymorphic, dynamic model class): mark unvalidated; do not report as a confirmed N+1. State the missing evidence (which model/relation cannot be resolved statically).
+- Cannot determine evaluation context (template vs view vs signal vs cached property): mark as a candidate, not validated; require the user to confirm the access path before promoting it.
+- No Django models or querysets found in scope: return an empty report stating the scope contained no Django ORM code. Do not invent findings.
+- Partial result: report only validated findings in the main list; list unvalidated candidates separately with their blocker. Never merge unvalidated candidates into the validated set.
+- Non-mutation: no files are changed, so rollback is not applicable. If a scan error occurs, stop and report the error and the partial findings already validated.
+
+## Output
+A report with one entry per validated issue: file, line, queryset expression, triggered query pattern, severity, query-count growth, and the concrete fix with the rewritten queryset. Unvalidated candidates listed separately with their blocker. An explicit empty-validated-findings statement when none are confirmed.
+
+## Provenance
+
+Origin: getsentry/skills. Pinned revision: c2f99a5b04b4cd992ec3022d7c2c3e23e938d241. License: Apache-2.0. Clean-room adaptation: the procedure was re-derived from the Django ORM performance-review mechanism (N+1 detection, queryset misuse, unbounded reads, severity by impact); no third-party expression was copied.

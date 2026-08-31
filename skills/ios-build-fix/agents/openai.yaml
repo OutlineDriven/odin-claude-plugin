@@ -1,0 +1,3 @@
+interface:
+  display_name: "iOS Build Fix"
+  short_description: "Fix an iOS build or UI bug and verify it on device or sim."

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Poteto Mode"
+  short_description: "Classify and execute pstack rigor playbooks end-to-end"

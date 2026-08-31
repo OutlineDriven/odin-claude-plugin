@@ -1,0 +1,3 @@
+interface:
+  display_name: "Data Analysis"
+  short_description: "Iterative self-checked findings over a bound dataset"

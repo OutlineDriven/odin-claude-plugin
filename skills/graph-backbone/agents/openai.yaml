@@ -1,0 +1,3 @@
+interface:
+  display_name: "Graph Backbone"
+  short_description: "Creates a validated, revisioned graph.yaml"

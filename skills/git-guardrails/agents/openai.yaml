@@ -1,0 +1,3 @@
+interface:
+  display_name: "Setup Git Guardrails"
+  short_description: "Installs a hook that blocks destructive git commands."

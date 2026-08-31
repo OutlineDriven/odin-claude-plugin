@@ -1,129 +1,49 @@
 ---
 name: github-solution-research
-description: Find open-source solutions on GitHub. Use when facing a bug, integration failure, dependency issue, unclear API usage, implementation blocker, or tool capability need.
+description: 'Use when asked to find open-source solutions on GitHub when facing a bug, integration failure, dependency issue, unclear API usage, implementation blocker, or tool capability need. Returns a local problem profile, search path, key evidence with links, a reuse/adapt/avoid recommendation, a verification command, and a confidence label when evidence is weak. Don''t use for tasks that require source or remote-system changes.'
 ---
 
-# GitHub Solution Research
+# GitHub solution research
 
-Use GitHub as problem-solving evidence and an implementation source. The goal is to find open-source projects and GitHub evidence that already solve the user's specific engineering problem, report the relevant project information, then translate the existing solution into a local fix, implementation path, or verification plan.
+## Contract
 
-This skill is for concrete problems first. For general tool or architecture selection, use it only after the local goal has been framed as a specific capability, blocker, workflow, or integration need.
+| Field | Bound contract |
+|---|---|
+| Trigger | Facing a bug, integration failure, dependency issue, unclear API usage, implementation blocker, or tool capability need |
+| Authority | Read-only: runs `gh` searches and optional read-only research subagents; reads local code, logs, and config; no file, VCS, credential, paid, published, deployed, or remote mutation |
+| Side effect | Chat output only: a recommendation with reuse/adapt/avoid, a verification command, and a confidence label when evidence is weak |
+| Done | A report containing a local problem profile, the search path, key evidence with links, a recommended reuse/adapt/avoid, a verification command, and a confidence label when evidence is weak |
 
-## When to Use
+## Inputs
 
-- Runtime, build, test, deploy, package, SDK, API, dependency, framework, or integration errors.
-- A feature implementation is blocked by an unclear edge case, missing usage pattern, or uncertain API behavior.
-- A local issue resembles something that maintainers or other open-source users may have resolved in issues, PRs, examples, code, or release notes.
-- The user asks whether GitHub/open-source projects can solve the same problem.
-- Mature implementation examples or reusable projects would reduce uncertainty for one concrete capability.
-- The answer should compare suitable GitHub repositories and explain how to use one with local adaptation.
+- The concrete problem: goal, symptom or error signature, reproduction path, versions, runtime, dependency/framework names, recent changes, constraints, and attempted fixes. Inspect local files and logs to fill discoverable facts before asking.
+- Optional: explicit authorization to inspect private repositories. Do not inspect private repositories unless the user explicitly scopes and authorizes that access.
 
-Do not use for tiny edits, copy changes, local-only refactors where the codebase already dictates the answer, or requests that explicitly forbid web/GitHub research. Do not inspect private repositories unless the user explicitly scopes and authorizes that access.
+## Procedure
 
-## Default Workflow
+1. Frame the problem locally first. Capture goal, symptom/error, reproduction path, versions, runtime, dependency/framework names, recent changes, constraints, and attempted fixes. Inspect local files and logs before asking for any discoverable fact.
+2. Choose the evidence mode. For errors/regressions, search issues, PRs, releases, and code first. For capability or tool needs, search repository candidates first. For feature implementation, use both repository candidates and issue/PR/code evidence.
+3. Decide whether conditional read-only research subagents improve breadth, evidence quality, or review coverage. Use subagents only when the problem spans 2+ independent ecosystems, when repository discovery needs broad candidate coverage, when evidence can be split cleanly by project/version/surface, or when a final recommendation benefits from independent review. Skip subagents for narrow single-surface errors, when local context must be understood before external research, or when rate limits, private repositories, secrets, or sensitive logs make delegation risky. State the reason when subagents are skipped.
+4. Create targeted searches. Prefer exact error text, package/API names, version numbers, framework + symptom, file names, config keys, stack trace fragments, failing command names, or capability + framework/runtime/API names. Start narrow, then add constraints (version, language, platform, deployment target, bundler, database, auth provider, runtime).
+5. Use the GitHub CLI (`gh`) as the default search and inspection surface. Prefer `gh search repos`, `gh search issues`, `gh search prs`, `gh search code`, `gh repo view`, `gh issue view`, `gh pr view`, and `gh api` before browser scraping or custom scripts. Adjust query, repo, fields, and limits to the local problem. Run `gh auth status` only when a command fails with 403, 429, a private-repository authorization error, or an explicit not-authenticated message; inspect the emitted rate-limit or authorization context before retrying, reducing breadth, or switching endpoints.
+6. Search evidence surfaces in this order when relevant: issues/PRs/discussions, merged fixes, release notes/changelog, examples/templates, source code, then repository-level candidates. For implementation blockers without an error, search the desired capability plus framework/runtime/API names. For public platform data needs (trends, hot lists, topic search, engagement metrics), look for reusable public endpoints, open-source crawlers, archived datasets, and API field evidence before browser scraping; verify the chosen source with a minimal real request and separate anonymous hot-list data from logged-in search/topic data.
+7. Find suitable GitHub projects when a project itself may solve the problem. Prefer high-fit, high-Star, active, non-archived repositories with clear licenses and real examples. Lower the Star threshold when the high-Star set is too broad or misses the exact problem. Record Stars, forks, language, license, activity, and basic content.
+8. Rank by problem fit first. Maintainer-confirmed issues, merged PRs, released fixes, official examples, and exact matching code beat popular adjacent projects. Use Stars and forks only as supporting maturity context and tie-breakers among similarly fitting repositories. Demote matches that are old, version-mismatched, archived, unresolved, speculative, or based only on user guesses. For security, auth, payments, infrastructure, or production operations, cross-check findings against current official docs or repositories when facts may have changed.
+9. Deep-read the strongest projects and evidence. Extract project basics, reusable surfaces, root cause or implementation pattern, version constraints, risks, adaptation boundaries, and verification steps. For each serious evidence item identify: exact match (same error, behavior, API, version, environment, workflow); evidence strength (maintainer confirmation, merged PR, released fix, reproducible code example, test fixture, repeated independent reports); applicability (conditions that must match locally); implementation value (patch, config, API usage, dependency version, workflow, test, operational pattern); and risk (stale version, unresolved issue, unsafe workaround, license concern, security/privacy impact, deployment mismatch, overbroad change).
+10. When using subagents, define each subagent's query family, repository scope, evidence surface, constraints, allowed write scope, and expected output; require direct links, verified metadata, problem-fit rationale, risk notes, and explicit rejection reasons; keep subagents read-only; merge and deduplicate results before ranking (do not count repeated reports of the same issue, PR, code path, or repository as independent evidence); and directly verify the strongest claims with `gh`, source reads, tests, logs, real requests, or official docs before finalizing.
+11. Translate to local work with minimal adaptation. Prefer the existing GitHub solution's public workflow, API, or architecture. Adapt only the parts required by the user's local interfaces, configuration, data/auth model, deployment target, or language/runtime. Prefer reading patterns and reusing existing public interfaces over copying code; if code reuse is necessary, check the license and keep attribution/obligation risks visible. Avoid large rewrites of an existing GitHub solution and large verbatim excerpts from repositories, READMEs, issues, PRs, or documentation.
+12. If evidence is weak, do not stretch weak matches into a confident recommendation. Mark the recommendation as first-principles or local-only when GitHub evidence is insufficient.
 
-1. **Frame the problem locally first.** Capture the goal, actual symptom, error signature, reproduction path, versions, runtime, dependency/framework names, recent changes, constraints, and attempted fixes. If a discoverable fact is missing, inspect local files/logs before asking.
-2. **Choose the evidence mode.** For errors/regressions, search issues, PRs, releases, and code first. For capability or tool needs, search repository candidates first. For feature implementation, use both repository candidates and issue/PR/code evidence.
-3. **Evaluate subagent usefulness.** Before substantial GitHub research, decide whether conditional subagent work would improve breadth, evidence quality, or review coverage. If not using subagents, state the reason briefly when reporting the search path.
-4. **Create targeted searches.** Prefer exact error text, package/API names, version numbers, framework + symptom, file names, config keys, stack trace fragments, failing command names, or capability + framework/runtime/API names.
-5. **Find suitable GitHub projects when relevant.** Prefer high-fit, high-Star, active, non-archived repositories with clear licenses and real examples. Lower the Star threshold when the high-Star set is too broad or misses the exact problem.
-6. **Search GitHub evidence surfaces.** Use issues, PRs, discussions, code, examples, release notes, and official project docs within relevant open-source repos. Repository search is required when a project itself may solve the problem.
-7. **Rank by problem fit first, with Stars as a strong maturity signal.** A high-Star repository is a strong candidate for inspection, but maintainer-confirmed issues, merged PRs, released fixes, official examples, and exact matching code beat popular adjacent projects. Use [research-rubric.md](references/research-rubric.md) when ranking matters.
-8. **Deep-read the strongest projects and evidence.** Use [extraction-playbook.md](references/extraction-playbook.md) to extract project basics, reusable surfaces, root cause or implementation pattern, version constraints, risks, adaptation boundaries, and verification steps.
-9. **Translate to local work with minimal adaptation.** Prefer the existing GitHub solution's public workflow, API, or architecture. Adapt only the parts required by the user's local interfaces, configuration, data/auth model, deployment target, or language/runtime.
-10. **If evidence is weak, say so.** Do not stretch weak matches into a confident recommendation. Mark the recommendation as first-principles or local-only when GitHub evidence is insufficient.
+## Failure and recovery
+- Network or `gh` access unavailable: state that GitHub research could not be performed and mark the recommendation as local-only. Do not fabricate evidence.
+- GitHub 403/429 or authorization error: inspect the emitted rate-limit or authorization context before retrying, reducing breadth, or switching endpoints. Do not paste or persist tokens, cookies, private repository contents, or credentials in prompts, files, logs, or memory; do not pass tokens, cookies, private repository contents, sensitive logs, secrets, production data, or credentials to subagents.
+- Weak or no strong GitHub solution: mark the recommendation first-principles or local-only with a confidence label; do not let external examples override local constraints.
+- Private repository access not explicitly authorized: do not inspect; treat as out of scope.
+- Partial results: report what was found and what could not be verified; never swallow errors or pretend the done predicate holds. No file, VCS, credential, or remote mutation occurs, so no rollback is required.
 
-## Subagent / Parallel Research Guidance
+## Output
+A report containing: a local problem profile (goal, symptom/error, versions/environment, local constraints); the search path (queries or discovery methods used, GitHub surfaces searched, whether subagents were used or skipped); a subagent trace when subagents were used (each subagent's scope, evidence surfaces, key findings, rejected candidates, deduplication results, and which claims the controller directly verified); project candidates when a GitHub project is relevant (repo link, Stars, forks, language, license, activity, basic content, match rationale, local use) in a compact table; key evidence (links to issues, PRs, code, examples, releases, or repos, with match rationale); a recommended solution (what to reuse directly, what to adapt locally, what to avoid copying, and why it fits); rejected or risky options with reasons; a verification standard (test, build, reproduction command, real request, or manual check required to confirm the fix); and a confidence label when evidence is weak or no strong GitHub solution was found. For website, SaaS, landing-page, theme, or frontend-template candidates, include both the repository URL and the live preview/demo URL for every serious candidate; if no preview is available or verified, state that and downgrade the candidate. Do not answer with only links, Stars, or popularity rankings, and do not write "common GitHub pattern" without linked evidence.
 
-Subagents are conditional research aids, not a default requirement. The controller remains responsible for problem framing, scope control, evidence ranking, local adaptation, and final verification.
+## Provenance
 
-Use subagents when at least one of these applies:
-
-- The problem spans 2+ independent ecosystems, frameworks, languages, tools, deployment surfaces, or GitHub communities.
-- Repository discovery needs broad candidate coverage across multiple query families.
-- Issue, PR, discussion, code, release, and example evidence can be split cleanly by project, version, or search surface.
-- A final recommendation benefits from independent evidence review, risk review, or candidate rejection review.
-
-Do not use subagents when any of these applies:
-
-- The task is a narrow error with one obvious package, repository, API, or maintainer surface.
-- Local repository context, logs, config, or reproduction details must be understood before external research can be scoped safely.
-- GitHub rate limits, authorization boundaries, private repositories, secrets, production data, or sensitive logs would make delegation risky.
-- Subagents would mostly duplicate the same searches or edit the same local files.
-
-When using subagents, the controller must:
-
-- Define each subagent's query family, repository scope, evidence surface, constraints, allowed write scope, and expected output.
-- Require direct links, verified metadata, problem-fit rationale, risk notes, and explicit rejection reasons.
-- Keep subagents read-only unless a separate implementation phase has a narrow allowed write scope.
-- Merge and deduplicate results before ranking; do not count repeated reports of the same issue, PR, code path, or repository as independent evidence.
-- Directly verify the strongest claims with `gh`, source reads, tests, logs, real requests, or official docs before finalizing.
-
-## GitHub CLI First
-
-Use the GitHub CLI (`gh`) as the default search and inspection surface. Prefer `gh search repos`, `gh search issues`, `gh search prs`, `gh search code`, `gh repo view`, `gh issue view`, `gh pr view`, and `gh api` before browser scraping or custom scripts. Do not add or rely on bundled search scripts for this skill.
-
-Use these short command templates as starting points, then adjust the query, repo, fields, and limits to the local problem:
-
-```bash
-gh search repos "<query>" --archived=false --sort stars --order desc --limit 10 --json fullName,url,description,stargazersCount,forksCount,language,license,pushedAt,isArchived,openIssuesCount
-gh search issues "<query>" --repo owner/repo --sort updated --order desc --limit 10 --json title,url,state,updatedAt,commentsCount,repository,body
-gh search prs "<query>" --repo owner/repo --merged --sort updated --order desc --limit 10 --json title,url,state,updatedAt,commentsCount,repository,body
-gh search code "<query>" --repo owner/repo --limit 10 --json path,url,repository,sha
-gh repo view owner/repo --json nameWithOwner,url,description,stargazerCount,forkCount,licenseInfo,primaryLanguage,pushedAt,repositoryTopics,homepageUrl
-gh api -X GET search/repositories -f q='<query> archived:false' -f sort=stars -f order=desc
-```
-
-Only run `gh auth status` when a command fails with 403, 429, a private repository authorization error, or an explicit `gh` not-authenticated message. If GitHub returns 403/429, inspect the emitted rate-limit or authorization context before retrying, reducing breadth, or switching endpoints. Do not paste or persist tokens, cookies, private repository contents, or credentials in prompts, files, logs, or memory.
-
-## Search Strategy
-
-- Start narrow: exact error string, exception class, CLI output, package + method name, config key, or stack trace fragment.
-- Add constraints: package/framework version, language, platform, deployment target, bundler, database, auth provider, or runtime.
-- Search surfaces in this order when relevant: issues/PRs/discussions, merged fixes, release notes/changelog, examples/templates, source code, then repository-level candidates.
-- For implementation blockers without an error, search for the desired capability plus framework/runtime/API names.
-- For public platform data needs such as trends, hot lists, topic search, or engagement metrics, do not start with visual browser scraping. First look for reusable public endpoints, open-source crawlers, archived datasets, and API field evidence; then verify the chosen source with a minimal real request and clearly separate anonymous hot-list data from logged-in search/topic data.
-- For reusable project discovery, search repositories sorted by Stars, then deep-read only candidates that match the local problem. Record Stars, forks, language, license, activity, and basic content.
-- Demote matches that are old, version-mismatched, archived, unresolved, speculative, or based only on user guesses.
-- Use Stars/forks only as supporting maturity context and tie-breakers among similarly fitting repositories. They do not override problem fit, maintainer-confirmed evidence, merged PRs, release notes, official examples, or reproducible code.
-- For security, auth, payments, infrastructure, or production operations, cross-check open-source findings against current official docs or repositories when facts may have changed.
-
-## Evidence Standard
-
-For each serious evidence item, identify:
-
-- exact match: same error, behavior, API, version, environment, or workflow;
-- evidence strength: maintainer confirmation, merged PR, released fix, reproducible code example, test fixture, or repeated independent reports;
-- applicability: what conditions must match locally for the solution to apply;
-- implementation value: patch, config, API usage, dependency version, workflow, test, or operational pattern worth adapting;
-- project basics when a repository is a candidate: name, URL, Stars, forks, language, license, activity, basic content, fit rationale, and adaptation cost;
-- risk: stale version, unresolved issue, unsafe workaround, license concern, security/privacy impact, deployment mismatch, or overbroad change.
-
-## Output Contract
-
-When this skill materially affects the answer, include:
-
-- local problem profile: goal, symptom/error, versions/environment, and local constraints;
-- search path: queries or discovery methods used, GitHub surfaces searched, and whether subagents were used or skipped;
-- subagent trace when subagents were used: each subagent's scope, evidence surfaces, key findings, rejected candidates, deduplication results, and which claims the controller directly verified;
-- project candidates when a GitHub project itself is relevant: repo link, Stars, forks, language, license, activity, basic content, match rationale, and how it can be used locally;
-- key evidence: links to issues, PRs, code, examples, releases, or repos, with match rationale;
-- recommended solution: what to reuse directly, what to adapt locally, what to avoid copying, and why it fits;
-- rejected or risky options: why they do not apply or need caution;
-- verification standard: test, build, reproduction command, real request, or manual check required to confirm the fix;
-- confidence label when evidence is weak or no strong GitHub solution was found.
-
-When repository-level solutions are relevant, include a compact project table. For pure issue/PR/code fixes, the table is optional, but include repository context if it affects trust or applicability.
-
-Do not answer with only links, Stars, or popularity rankings. Do not write "common GitHub pattern" without linked evidence. Do not let external examples override local constraints.
-
-For website, SaaS, landing-page, theme, or frontend-template candidate research, include both the repository URL and the live preview/demo URL for every serious candidate. If no preview is available or verified, state that explicitly and downgrade the candidate.
-
-## Safety Boundaries
-
-- Prefer reading patterns and reusing existing public interfaces over copying code. If code reuse is necessary, check the license and keep attribution/obligation risks visible.
-- Avoid large rewrites of an existing GitHub solution. Keep its proven flow intact and make only the local adaptations required for the user's problem.
-- Avoid large verbatim excerpts from repositories, READMEs, issues, PRs, or documentation.
-- Do not save GitHub tokens, cookies, private repository contents, or credentials in outputs, logs, skills, or memory.
-- Do not pass tokens, cookies, private repository contents, sensitive logs, secrets, production data, or credentials to subagents.
-- If network access is unavailable, state that GitHub research could not be performed and mark the recommendation as local-only.
+Origin: ODIN 1.x current skill `skills/github-solution-research/SKILL.md` (odin-1.x-current-skill). Revision: unpinned current. License: upstream LICENSE retained for verified-compatible-license provenance (skills/github-solution-research/LICENSE). Adaptation: clean-room semantic compression to a self-contained read-only research contract; no third-party expression copied.

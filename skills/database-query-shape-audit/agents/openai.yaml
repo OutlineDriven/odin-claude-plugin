@@ -1,0 +1,3 @@
+interface:
+  display_name: "Database Query Shape Audit"
+  short_description: "Measured query-shape, pagination, index, N+1, bounds, and render"

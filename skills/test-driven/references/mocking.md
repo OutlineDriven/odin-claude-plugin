@@ -1,9 +1,9 @@
-# When to Mock
+# When to mock
 
 Mock at **system boundaries** only:
 
 - External APIs (payment, email, etc.)
-- Databases (sometimes — prefer a test DB)
+- Databases (sometimes; prefer a test DB)
 - Time / randomness
 - File system (sometimes)
 
@@ -13,7 +13,7 @@ Do not mock:
 - Internal collaborators
 - Anything under the same change boundary as the test subject
 
-## Designing for Mockability
+## Designing for mockability
 
 At system boundaries, design interfaces that are easy to mock.
 
@@ -86,5 +86,5 @@ trait Api {
 The SDK-style approach yields:
 
 - One mock per shape; no conditionals in test setup
-- Visible call surface — readers see which endpoints a test exercises
+- Visible call surface: readers see which endpoints a test exercises
 - Per-endpoint type safety

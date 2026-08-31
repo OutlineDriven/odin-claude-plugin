@@ -1,0 +1,3 @@
+interface:
+  display_name: "Completion Predicate Polling"
+  short_description: "Poll a job or log until a completion predicate holds"

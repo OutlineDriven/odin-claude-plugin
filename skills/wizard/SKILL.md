@@ -1,17 +1,26 @@
 ---
 name: wizard
-description: 'Generate an interactive bash wizard that walks a human through steps only they can perform: provisioning infrastructure, setting up credentials or CI secrets, walking an unfamiliar third-party dashboard, or running a one-off migration or cutover. Author it, never run it — for steps the agent can perform itself, do them directly.'
+description: 'Use when asked to generate an interactive bash wizard that walks a human through steps only they can perform — provisioning, credentials, dashboards, migrations — and produce a self-contained script with the shared library inlined. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Wizard
 
-**Author the wizard. Never run it.** It opens browsers and blocks on human input. ODIN runs no process that waits on stdin, so verify the script statically.
+## Contract
 
-A wizard is a bash script that walks a human through a manual procedure one step at a time.
+| Field | Bound contract |
+|---|---|
+| Trigger | User needs provisioning, credentials, dashboard, or migration steps that only a human can perform. |
+| Authority | Reversible-local: write only the wizard script to the named target path; delete the file to roll back. |
+| Side effect | Writes the wizard script to the target path and stages it; verification is static only — the script is never executed. |
+| Done | The wizard script exists, is staged, passes static verification, and every collected value is traced to its destination. |
 
-Everything above the `STAGES` marker in `scripts/wizard-template.sh` is the shared library. It is identical in every wizard and is never hand-edited. Scope the procedure and write only the stages below that marker.
+## Inputs
 
-## Process
+1. **Procedure description** (required): what the wizard must accomplish: provisioning, credential setup, dashboard walkthrough, migration, or cutover.
+2. **Target path** (optional): where to write the script; default `scripts/setup-<topic>.sh`.
+3. **Repository context** (read automatically): `.env`, `.env.example`, `.env.*`, `README`, `docker-compose*`, framework configuration, `.github/workflows/*`.
+
+## Procedure
 
 ### 1. Scope the procedure
 
@@ -70,3 +79,21 @@ Open a URL before asking for its value. Use `ask_secret` for secrets. Call `writ
 6. Tell the user how to run the script.
 
 Commit the wizard only when the user wants a repeatable setup path in the repository. Otherwise, treat it as ephemeral and delete it after the job is done.
+
+## Failure and recovery
+| Failure class | Behavior |
+|---|---|
+| Scope not confirmed | Stop before authoring. Re-present the stage list and wait. |
+| Value trace fails | Stop. Report which value has no capture or no destination. Do not hand off. |
+| `bash -n` or shellcheck fails | Stop. Report the syntax error. Fix before handoff. |
+| `set_secret` name mismatch | Stop. Report the secret name and the workflow reference. Reconcile before handoff. |
+| `gh` unavailable | Record in `SKIPPED`. The script warns at runtime; the user sets the secret manually. |
+
+Partial-result rule: a partially authored script is never handed off. Rollback: delete the script file if it has not been committed.
+
+## Output
+A self-contained bash wizard script at the target path containing the shared library, stages in dependency order, honest `TOTAL_STAGES` and `TOTAL_MINUTES`, and every scoped value captured and routed to its declared destination.
+
+## Provenance
+
+Origin: current-odin-skill-tree (`skills/wizard/SKILL.md`). Revision: current. License: project-owned. The `scripts/wizard-template.sh` library is project-owned, shared identically across all wizards, and never hand-edited. Adaptation: rewritten from the current skill into ODIN 2.0 roster format with no third-party expression.

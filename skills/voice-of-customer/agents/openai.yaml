@@ -1,0 +1,3 @@
+interface:
+  display_name: "Voice of Customer"
+  short_description: "Synthesize customer call transcripts into a cited VoTC report"

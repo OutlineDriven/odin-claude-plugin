@@ -1,172 +1,236 @@
 ---
 name: autolearn
-description: Compound a solved problem into a durable in-repo learning doc. Use when a verified non-trivial fix lands, the user says "compound this", "document this fix", or "remember this". This is the automatic-capture entry point; for an explicitly requested one-off write-up, use compound.
-metadata:
-  short-description: Compound a solved problem into docs/solutions/ + refresh learnings
+description: 'Use when a verified non-trivial fix lands or the user says compound this, document this fix, or remember this. Writes a durable in-repo learning doc or CONCEPTS.md entry from the solved problem, or determines that nothing qualifies. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
-# Autolearn: compound a solved problem, keep the learnings honest
+# Autolearn
 
-`autolearn` turns a verified fix into one in-repo learning doc, maintains those docs as the code moves, captures durable project vocabulary, and hands user/preference facts to the memory writer. It writes exactly **two** in-repo surfaces itself: the operating repo's `docs/solutions/` (one learning per file, sole to autolearn — no other skill edits it) and the repo-root `CONCEPTS.md` (the shared-vocabulary glossary, one definition per concept). `CONCEPTS.md` is a shared surface: `compound` also writes it directly, as a second legitimate writer following the same one-definition-per-concept discipline. Every auto-memory write is delegated to `memory-update`.
+## Contract
 
-`Op:` of a compound run is `extend` (a new learning) or, in refresh, `correct`/`purge` (see Commits).
+| Field | Bound contract |
+|---|---|
+| Trigger | A non-trivial fix has been verified (observed working, not hoped working), or explicit autolearn or refresh invocation. |
+| Authority | Reversible-local: write only the operating repo's docs/solutions/ and repo-root CONCEPTS.md. Rollback via git revert or file restore from history. No VCS push, credential, paid, published, deployed, or remote mutation. |
+| Side effect | Writes or refreshes docs/solutions/ learning docs and CONCEPTS.md; stages only the surfaces this skill wrote or edited. |
+| Done | A validated learning or concept entry exists, or an explicit determination that nothing qualifies. |
 
-## Auto-invoke
+## Inputs
 
-<auto_invoke>
-<trigger_phrases>
-- "that worked"
-- "it's fixed"
-- "working now"
-- "problem solved"
-- "verified the fix"
-- "tests pass now"
-- "build succeeds"
-- "that approach failed"
-</trigger_phrases>
-Fire automatically on a trigger phrase or after a verified non-trivial fix. The reject-by-default gate below still decides whether a doc is actually warranted. Auto-firing is permission to evaluate, not permission to fabricate.
+- The verified fix or solved problem, from conversation history or codebase. Must be supplied or derivable from context.
+- Optional: `mode:refresh [scope]` to maintain existing docs; `mode:headless` for non-interactive operation.
+- Optional: an injected auto-memory block (supplementary context, not primary evidence).
 
-**Skill integration:** after any non-trivial verified outcome, the orchestrating skill should invoke `/autolearn` to evaluate whether a `docs/solutions/` or `CONCEPTS.md` entry is warranted.
-<manual_override>`/autolearn [context]` documents immediately without waiting for a trigger phrase. `autolearn mode:refresh [scope]` runs maintenance. `mode:headless` makes any mode non-interactive.</manual_override>
-</auto_invoke>
+## Procedure
 
-## Preconditions: then the reject-by-default gate
+### 0. Route the mode
 
-A doc is earned, not assumed. First the preconditions, then the reject-by-default gate.
+Strip `mode:` tokens from arguments before treating the remainder as context or scope.
 
-**Preconditions** (all three):
-1. The problem is solved, not in progress. An abandoned attempt counts as solved for this purpose once it is finished, meaning the branch is dead and the decision to stop is made. Its learning is the anti-pattern: what was tried, the specific reason it failed, and the condition under which it would be worth trying again. It lands on the knowledge track with `What Didn't Work` carrying the substance rather than `Solution`. An attempt still in progress does not qualify either way.
+- **Compound** (default): document one solved problem into docs/solutions/.
+- **Vocabulary capture**: a durable, reusable project term surfaces; reconcile CONCEPTS.md.
+- **Memory handoff**: a fact about the user, preferences, or cross-project context surfaces; do not write it into docs/solutions/ or CONCEPTS.md; surface it as a memory-handoff candidate for the memory system to capture.
+- **Refresh**: maintain existing docs/solutions/ and CONCEPTS.md.
+- **Headless**: overlays any mode; skip all questions, never pause, apply safe actions, mark uncertain as stale.
+
+Fire automatically on a trigger phrase ("that worked", "it's fixed", "working now", "problem solved", "verified the fix", "tests pass now", "build succeeds", "that approach failed") or after a verified non-trivial fix. Auto-firing is permission to evaluate, not permission to fabricate.
+
+One run can do all three repo-scoped actions: write a learning doc, reconcile a concept, and flag a memory-handoff candidate.
+
+### 1. Reject-by-default gate
+
+A doc is earned, not assumed. Verify all three preconditions:
+
+1. The problem is solved, not in progress. An abandoned attempt counts as solved once it is finished (branch dead, decision to stop made); its learning is the anti-pattern — what was tried, the specific reason it failed, and the condition under which it would be worth trying again.
 2. The solution is verified: observed working, not hoped working.
-3. It was non-trivial, not a typo or an obvious one-liner.
+3. It was non-trivial, not a typo or obvious one-liner.
 
-**Reject-by-default gate**. A lesson earns a doc only if it clears all three filters in order:
-1. **Would I forget this?** Skip baseline knowledge anyone in this codebase already carries. If you'd remember it without a note, it isn't a learning.
-2. **Already covered?** If an existing `docs/solutions/` doc covers it, updating that doc beats spawning a second one. A duplicate is drift, not knowledge.
+Then apply the reject-by-default gate (all three filters in order):
+
+1. **Would I forget this?** Skip baseline knowledge anyone in this codebase already carries.
+2. **Already covered?** If an existing docs/solutions/ doc covers it, updating that doc beats spawning a second one. A duplicate is drift, not knowledge.
 3. **Universal or local?** Scope-qualify. A repo-specific quirk says so; a general truth says so. An unqualified claim is a future trap.
 
-**If nothing clears the gate, say so in one line and exit. Never fabricate a doc to look productive.** A clean "nothing worth compounding here" is a valid, correct result.
+The gate governs CONCEPTS.md entries too: a term earns a slot only when its precise local meaning would otherwise be forgotten, it is not already defined there, and it is scope-qualified to this project rather than general programming or domain English.
 
-The gate governs `CONCEPTS.md` entries too: a term earns a slot only when you'd otherwise forget its precise *local* meaning (filter 1), it isn't already defined there (filter 2: one definition per concept, no duplicates), and it is scope-qualified to this project rather than general programming or domain English (filter 3). A term that clears the gate is a Vocabulary-capture candidate; one that does not is noise.
+If nothing clears the gate, say so in one line and exit. A clean "nothing worth compounding here" is a valid, correct result.
 
-## Mode routing
+### 2. Compound — research (parallel, read-only)
 
-Strip `mode:` tokens from `$ARGUMENTS` before treating the remainder as context/scope.
+Scan any injected auto-memory block for entries related to the problem. If absent or empty, skip. If relevant entries exist, carry them as a labeled supplementary context block. Memory is supplementary; codebase and conversation win every tie. Tag any memory-derived line that lands in the final doc with `(auto memory [claude])`.
 
-| Mode | Trigger | What it does |
-|------|---------|--------------|
-| **Compound** (default) | none | Document one solved problem → `docs/solutions/` |
-| **Vocabulary capture** | a durable, reusable *project* term/concept surfaces | Reconcile the repo-root `CONCEPTS.md` (one definition per concept). Read `references/concepts.md`. |
-| **Memory handoff** | a fact about the *user / preferences / cross-project context* surfaces | Invoke `memory-update`; that skill writes auto-memory |
-| **Refresh** | `mode:refresh [scope]` | Maintain existing `docs/solutions/` docs. Read `references/refresh.md`. |
-| **Headless** | `mode:headless` | Non-interactive overlay on whichever mode is active |
+Dispatch three subagents in parallel. Each returns text and writes nothing.
 
-The repo-vs-user fork is the routing decision: a repo-scoped engineering lesson → Compound (this skill writes the doc); a user/preference/cross-project fact → Memory handoff (`memory-update` writes it). Within the repo-scoped side there's a second fork: a solved problem → Compound (a learning doc); a durable project term whose meaning isn't obvious → Vocabulary capture (a `CONCEPTS.md` entry). One run can do all three: write a learning doc, reconcile a concept, and hand a preference fact to `memory-update`.
-
-## Support files: read on demand
-
-Read each at the step that needs it; pass the relevant content into any subagent you spawn.
-
-- `references/schema.md`. Frontmatter contract: bug/knowledge tracks, enums, category map, YAML safety. Read when classifying and validating.
-- `references/refresh.md`. The whole refresh model and phases. Read only in `mode:refresh`.
-- `references/concepts.md`. `CONCEPTS.md` entry schema and the one-definition-per-concept reconciliation/refresh rules. Read in Vocabulary capture and when refreshing `CONCEPTS.md`.
-- `assets/solution-template.md`. Section structure for a new doc. Read when assembling.
-- `scripts/validate-frontmatter.py`. The one runnable check. Run on every written/edited doc.
-
----
-
-# Mode 1: Compound (default)
-
-**The deliverable is ONE file: the final learning doc.** Research subagents return text to you; they do not write. Only the orchestrator writes.
-
-### Phase 0.5: Auto-memory scan
-
-Before research, scan the injected auto-memory block (a "user's auto-memory" block in the system prompt) for entries related to the problem. If the block is absent or empty, skip. If relevant entries exist, carry them as a labeled **supplementary** context block:
-
-```
-## Supplementary notes from auto memory
-Treat as additional context, not primary evidence. Conversation history and
-codebase findings take priority.
-[relevant entries]
-```
-
-Pass it to the research subagents. Tag any memory-derived line that lands in the final doc with `(auto memory [claude])`. Memory is supplementary. Codebase and conversation win every tie.
-
-### Phase 1: Research (parallel, read-only)
-
-Dispatch three subagents in parallel. Each **returns text and writes nothing**. No Write, no Edit, no files:
-
-1. **Context Analyzer**. Reads `references/schema.md`; from the problem decides the track (bug vs knowledge), the `problem_type`, the category directory, and a slug filename (`[sanitized-problem-slug].md`, no date suffix). Returns a frontmatter skeleton (including `category:`) and which track applies. Does not invent enum values or fields.
-2. **Solution Extractor**. Extracts the substance from the conversation, folding in the auto-memory excerpt as supplementary evidence. Bug track: Problem, Symptoms, What Didn't Work, Solution (with code), Why This Works, Prevention. Knowledge track: Context, Guidance, Why This Matters, When to Apply, Examples.
-3. **Related-Docs Finder**. Greps `docs/solutions/` (`title:`, `tags:`, `module:`, `component:` on extracted keywords; narrow to the candidate subdirectory when known), reads only frontmatter of candidates, fully reads only strong matches. **Scores overlap** across problem statement, root cause, solution approach, referenced files, prevention rules: High (4 to 5 dimensions), Moderate (2 to 3), Low (0 to 1). Returns links and the overlap verdict.
+1. **Context Analyzer**: from the problem, decide the track (bug vs knowledge), the problem_type, the category directory, and a slug filename (`[sanitized-problem-slug].md`, no date suffix). Return a frontmatter skeleton and which track applies. Do not invent enum values or fields.
+2. **Solution Extractor**: extract the substance from the conversation, folding in the auto-memory excerpt as supplementary evidence. Bug track: Problem, Symptoms, What Didn't Work, Solution (with code), Why This Works, Prevention. Knowledge track: Context, Guidance, Why This Matters, When to Apply, Examples.
+3. **Related-Docs Finder**: grep docs/solutions/ (`title:`, `tags:`, `module:`, `component:` on extracted keywords; narrow to the candidate subdirectory when known), read only frontmatter of candidates, fully read only strong matches. Score overlap across problem statement, root cause, solution approach, referenced files, prevention rules: High (4–5 dimensions), Moderate (2–3), Low (0–1). Return links and the overlap verdict.
 
 Wait for all three before assembling.
 
-### Phase 2: Assemble and write
+### 3. Compound — assemble and write
 
-1. **Overlap gate** (from Related-Docs Finder):
-
-   | Overlap | Action |
-   |---------|--------|
-   | **High** (4 to 5) | Update the existing doc, don't create a duplicate. Keep its path and frontmatter; add `last_updated: YYYY-MM-DD`. |
-   | **Moderate** (2 to 3) | Create normally; note it as a refresh/consolidation candidate. |
-   | **Low / none** | Create normally. |
-
-   This is the gate's filter 2 made concrete.
+1. **Overlap gate**: High (4–5) → update the existing doc, keep its path and frontmatter, add `last_updated: YYYY-MM-DD`. Moderate (2–3) → create normally; note as a refresh/consolidation candidate. Low or none → create normally.
 2. Read `assets/solution-template.md`; assemble the doc with the track's section structure.
-3. Frontmatter per `references/schema.md`; apply the YAML-safety quoting rule to array items.
+3. Frontmatter per the Solution schema section; apply the YAML-safety quoting rule to array items.
 4. `mkdir -p docs/solutions/<category>/`, write `docs/solutions/<category>/<slug>.md`.
-5. **Validate:** `python3 scripts/validate-frontmatter.py <path>`. Exit 0 = parser-safe; exit 1 names the offending field. Quote, re-write, re-run until 0. Don't declare success while it fails.
-6. **Read the file back** to confirm it landed as intended.
-7. **Concept reconciliation (optional, when warranted).** If the run surfaced a durable project term that clears the reject-by-default gate, reconcile `CONCEPTS.md` in the same run per Mode 4. One definition per concept, refresh on drift, no duplicate. The solution doc is still the deliverable; a concept entry is an additional write, not a substitute. Read `references/concepts.md` before writing it.
+5. Validate: `python3 scripts/validate-frontmatter.py <path>`. Exit 0 = parser-safe; exit 1 names the offending field. Quote, re-write, re-run until 0.
+6. Read the file back to confirm it landed as intended.
+7. **Concept reconciliation** (optional, when warranted): if the run surfaced a durable project term that clears the gate, reconcile CONCEPTS.md per step 5.
 
-### Phase 2.5: Refresh check (selective, not automatic)
+### 4. Refresh check (selective, not automatic)
 
-Refresh is not a default follow-up. Suggest or invoke `mode:refresh` with a narrow scope only when the new fix contradicts or supersedes an older doc, the work was a refactor/migration/rename/dependency-bump that likely invalidated references, or the Related-Docs Finder surfaced strong refresh candidates or moderate overlap (consolidation opportunity). Otherwise do not. Capture the new learning first; refresh is targeted maintenance after.
+Suggest refresh with a narrow scope only when the new fix contradicts or supersedes an older doc, the work was a refactor/migration/rename/dependency-bump that likely invalidated references, or the Related-Docs Finder surfaced strong refresh candidates or moderate overlap. Otherwise do not. Capture the new learning first; refresh is targeted maintenance after.
 
----
+### 5. Vocabulary capture — CONCEPTS.md
 
-# Mode 4: Concepts capture
+CONCEPTS.md at the operating repo root is the shared-vocabulary glossary: words that mean something precise in this codebase, one definition per concept. It is a shared surface that may also be written by other knowledge-capture processes; follow the one-definition-per-concept discipline regardless.
 
-`CONCEPTS.md` at the operating repo root is the shared-vocabulary glossary: the words that mean something precise in *this* codebase, one definition per concept. Autolearn writes this surface; `compound` also writes it directly as a second legitimate writer, following the same one-definition-per-concept discipline from its own accretion model. **Read `references/concepts.md`** for autolearn's entry schema and reconciliation rules before writing.
-
-**When it fires.** A durable project term surfaces in a learning capture (accretion), or because the user named a concept worth pinning. It must clear the reject-by-default gate above (would-forget / not-already-defined / scope-qualified to this project). General programming and domain English never qualify.
-
-**Reconcile, don't append blindly:**
-1. Locate `CONCEPTS.md` at the repo root: `fd -g 'CONCEPTS.md' --max-depth 2`. Absent + a term clears the gate → create it. Absent + nothing clears → write nothing; never scaffold an empty file.
-2. Search it for the term and its synonyms: `git grep -ni '<term>' CONCEPTS.md`. **One definition per concept:** a hit means the concept already exists. Refresh it on drift; never add a second entry.
+1. Locate the file: `fd -g 'CONCEPTS.md' --max-depth 2`. Absent and a term clears the gate → create it. Absent and nothing clears → write nothing; never scaffold an empty file.
+2. Search for the term and its synonyms: `git grep -ni '<term>' CONCEPTS.md`. A hit means the concept exists — refresh on drift, never add a second entry.
 3. New term → add one entry: a one-sentence definition of what it means here and what distinguishes it from neighbors; a second paragraph only for non-obvious behavioral rules. Retire synonyms as an `*Avoid:*` aliases line. No file paths, dates, owners, or version-specific claims. The file stands on its own.
-4. **Read the file back** to confirm the merge landed and created no duplicate heading.
+4. Read the file back to confirm the merge landed and created no duplicate heading.
 
-**Refresh loop.** `autolearn mode:refresh [scope]` maintains `CONCEPTS.md` alongside `docs/solutions/`: re-derive each in-scope definition against current code, refresh drifted ones, de-duplicate, delete a concept whose domain is gone. Per-concept rules in `references/concepts.md`.
+### 6. Refresh — maintain existing docs
 
----
+Find every `.md` under `docs/solutions/`, excluding `README.md` and anything under `_archived/`. A `[scope]` hint narrows it — try in order, stop at first hit: (1) subdirectory name, (2) frontmatter `module`/`component`/`tags` match, (3) filename partial match, (4) content keyword. No match → report the miss and exit. No scope hint → process everything.
 
-# Mode 2: Memory handoff
+Classify every candidate doc into exactly one outcome:
 
-A fact about *the user, their preferences, or cross-project context* is **not** a repo learning. Do not write it into `docs/solutions/`, and never write `memory/` or `MEMORY.md` yourself. Invoke the `memory-update` skill and hand it the fact. `memory-update` owns and writes the entire auto-memory surface, with its own frontmatter schema and per-proposal confirmation. One writer, no MEMORY.md race.
+| Outcome | When | Action |
+|---------|------|--------|
+| Keep | Still accurate and useful | No edit. Report reviewed-and-trustworthy. |
+| Update | Core solution correct, references drifted | Evidence-backed in-place edits. |
+| Consolidate | Two or more docs overlap heavily, both correct | Merge unique content into the canonical doc, delete the subsumed one. |
+| Replace | Old guidance is now misleading, better answer known | Write a trustworthy successor, then delete the old. |
+| Delete | No longer useful, applicable, or distinct | Delete the file. |
 
-Hand off when the lesson is: a stable user preference or working style, who the user is or their goals, an external-system pointer, or a fact that holds across repos. Keep in Compound when the lesson is a repo-specific engineering fix or pattern.
+Core rules: evidence informs judgment, not a mechanical scorecard; prefer no-write Keep; match docs to reality, not the reverse; be decisive; no low-value churn (no typo fixes, prose polish, cosmetic edits); delete, don't archive (no `_archived/`, git history preserves everything).
 
----
+**Investigate each doc**: read it, cross-reference claims against current codebase. Check references (file paths, symbols, modules — still exist or moved?), solution (does the fix still match how the code works today?), code examples (do snippets reflect current implementation?), related docs (cross-referenced learnings still present and consistent?), overlap (another in-scope doc covering the same domain?). Update vs Replace boundary: references moved but approach still correct → Update; recommended solution conflicts with current code or architecture changed → Replace; if rewriting the Solution section, it is Replace, not Update. Age alone is not a stale signal. Check for a successor before deleting.
 
-# Mode 3: Refresh
+**Document-set analysis**: step back and judge the set as a whole. High overlap across 3+ dimensions → strong Consolidate signal. Older narrow precursor vs newer canonical doc → consolidation candidate. Retrieval-value test: does keeping these separate help discoverability or just create drift risk? Cross-doc contradictions are more urgent than individual staleness.
 
-`autolearn mode:refresh [scope]` maintains existing `docs/solutions/` docs as code evolves. **Read `references/refresh.md`** and follow it. The five-outcome model (Keep / Update / Consolidate / Replace / Delete), scope routing, investigation phases, per-action flows, the headless `status: stale` variant, and the report format all live there. Prefer no-write Keep; match docs to reality; delete, don't archive.
+**Execute per action**:
+- Keep: no edit, summarize why it remains trustworthy.
+- Update: in-place edits only when solution is still substantively correct. Not Update territory: typo/style-only edits, or old fix is now an anti-pattern → Replace.
+- Consolidate: confirm canonical doc (broader, more current); extract unique content from subsumed doc(s); merge into canonical; repoint cross-references; delete subsumed. Three or more overlapping → process pairwise.
+- Replace: process one at a time. Write a successor, validate with `scripts/validate-frontmatter.py` until exit 0, then delete the old file. Evidence insufficient → mark stale in place: add `status: stale`, `stale_reason`, `stale_date: YYYY-MM-DD`.
+- Delete: only when referenced code/workflow is gone, problem domain no longer exists, and inbound links absent or unambiguously decorative. Before unlinking, grep repo markdown for citations. Decorative → delete fine, clean up citation; substantive → Replace signal; mixed/unclear → stale-mark. A late-discovered citation that is anything but unambiguously decorative stops the Delete.
 
-Refresh also maintains the repo-root `CONCEPTS.md` when it falls in scope: re-derive definitions against current code, refresh drifted ones, de-duplicate entries that name the same concept, delete a concept whose domain is gone. The per-concept refresh rules are in `references/concepts.md`.
+**Headless variant**: skip all questions, never pause. Process every in-scope doc. Attempt all safe actions. Uncertain → mark `status: stale`. A write that fails is recorded as Recommended, not retried. Emit a report split into Applied and Recommended.
 
----
+**Report**:
+```
+Refresh Summary
+===============
+Scanned: N docs
 
-## Commits
+Kept: X   Updated: Y   Consolidated: C   Replaced: Z   Deleted: W   Marked stale: S
+```
+Then per file: path, classification, evidence, action taken or recommended.
 
-One learning per commit. ODIN `Op:` trailer in the body:
+After refreshing, check whether the repo's documentation would lead an agent to discover and search `docs/solutions/`. If not, surface a discoverability recommendation in the report. Do not edit instruction files.
 
-- **New doc** — a load-bearing capability added to the doc set.
+### 7. Commit
 
-`CONCEPTS.md` writes follow the same trailers: a new entry → `extend`; a refreshed definition → `correct`; a deleted or de-duplicated concept → `purge`.
+One learning per commit. Stage only the surfaces this skill wrote or edited (a solution doc, CONCEPTS.md, or both). Never stage other dirty files. Commit and publish by the operating repo's normal flow. Skip the commit if nothing was modified.
 
-Stage only the surfaces autolearn wrote or edited (a solution doc, `CONCEPTS.md`, or both). Never stage other dirty files; commit and publish by the operating repo's normal flow.
+## Failure and recovery
+- **Nothing qualifies**: if no fix clears the reject-by-default gate, state "nothing worth compounding here" in one line and exit. This is a valid result, not a failure.
+- **Validation failure**: `scripts/validate-frontmatter.py` exits 1 naming the offending field. Quote the value, re-write the file, re-run until exit 0. Do not declare success while validation fails.
+- **Overlap collision**: High overlap with an existing doc → update the existing doc, do not create a duplicate. Creating a duplicate when an update was warranted is drift, not knowledge.
+- **Insufficient evidence for Replace**: mark the doc stale in place (`status: stale`, `stale_reason`, `stale_date`) rather than guessing a successor.
+- **Late-discovered citation blocks Delete**: reclassify to stale-mark or Replace; do not delete.
+- **Partial-result rule**: if a write fails during refresh, record it as Recommended, do not retry into a mess.
+- **Rollback**: all writes are to local files under version control. Revert the commit or restore the file from git history.
 
-## Operating surface
+## Output
+- One validated learning doc at `docs/solutions/<category>/<slug>.md`, or an updated existing doc.
+- Optionally, one CONCEPTS.md entry (new or refreshed).
+- Optionally, a memory-handoff candidate surfaced for the memory system.
+- In refresh mode, a report classifying every scanned doc into Keep/Update/Consolidate/Replace/Delete/stale, with applied and recommended actions.
+- A one-line "nothing qualifies" determination when the gate rejects all candidates.
 
-`autolearn` writes exactly two in-repo surfaces: the operating repo's `docs/solutions/` (sole to autolearn) and the repo-root `CONCEPTS.md` (shared with `compound`, a second legitimate writer). All auto-memory writes are delegated to `memory-update`. Do not write to undefined locations, and don't treat `CONCEPTS.md`'s dual writership as license to write anywhere else.
+## Provenance
+
+Origin: odin-1.x current skill (`skills/autolearn/SKILL.md`). Project-owned, no third-party license. Adapted for ODIN 2.0 by inlining the schema, concepts, and refresh reference files into a self-contained procedure; preserving the reject-by-default gate, two-track classification, overlap gate, parallel research, frontmatter validation, CONCEPTS.md reconciliation, and five-outcome refresh model.
+
+## Solution schema
+
+Canonical frontmatter contract for `docs/solutions/` learning docs. The validator (`scripts/validate-frontmatter.py`) only catches silent YAML corruption; the field and enum rules below remain binding.
+
+### Two tracks
+
+`problem_type` picks the track. The track decides which extra fields are required.
+
+| Track | problem_types | What it is |
+|-------|---------------|------------|
+| Bug | `build_error`, `test_failure`, `runtime_error`, `performance_issue`, `database_issue`, `security_issue`, `ui_bug`, `integration_issue`, `logic_error` | Defects and failures that were diagnosed and fixed |
+| Knowledge | `best_practice`, `documentation_gap`, `workflow_issue`, `developer_experience`, `architecture_pattern`, `design_pattern`, `tooling_decision`, `convention` | Practices, patterns, conventions, decisions, workflow improvements. Prefer the narrowest value; `best_practice` is the fallback. |
+
+### Required fields (both tracks)
+
+- `title` — clear problem/topic title (string).
+- `date` — `YYYY-MM-DD`.
+- `category` — the `docs/solutions/` subdirectory (see Category map).
+- `module` — module or area affected (string).
+- `problem_type` — one enum value from the tracks table; determines the track.
+- `component` — component or subsystem involved (free-form string). Keep it consistent within a repo so frontmatter search works.
+- `severity` — one of `critical`, `high`, `medium`, `low`.
+
+### Bug-track required fields
+
+- `symptoms` — array, 1–5 observable symptoms (errors, broken behavior).
+- `root_cause` — one of: `missing_association`, `missing_include`, `missing_index`, `wrong_api`, `scope_issue`, `thread_violation`, `async_timing`, `memory_leak`, `config_error`, `logic_error`, `test_isolation`, `missing_validation`, `missing_permission`, `missing_workflow_step`, `inadequate_documentation`, `missing_tooling`, `incomplete_setup`.
+- `resolution_type` — one of: `code_fix`, `migration`, `config_change`, `test_fix`, `dependency_update`, `environment_setup`, `workflow_improvement`, `documentation_update`, `tooling_addition`, `seed_data_update`.
+
+### Knowledge-track fields
+
+No required fields beyond the shared core. All optional:
+
+- `applies_when` — array (≤5), conditions where the guidance applies.
+- `symptoms` — array (≤5), the gap or friction that prompted the guidance.
+- `root_cause` — from the bug-track enum, if there is a specific one.
+- `resolution_type` — from the bug-track enum, if a change was applied.
+
+### Optional fields (both tracks)
+
+- `related_components` — array of other components involved.
+- `tags` — array (≤8) of search keywords, lowercase and hyphen-separated.
+
+### Category map (problem_type → directory)
+
+| problem_type | directory |
+|---|---|
+| `build_error` | `docs/solutions/build-errors/` |
+| `test_failure` | `docs/solutions/test-failures/` |
+| `runtime_error` | `docs/solutions/runtime-errors/` |
+| `performance_issue` | `docs/solutions/performance-issues/` |
+| `database_issue` | `docs/solutions/database-issues/` |
+| `security_issue` | `docs/solutions/security-issues/` |
+| `ui_bug` | `docs/solutions/ui-bugs/` |
+| `integration_issue` | `docs/solutions/integration-issues/` |
+| `logic_error` | `docs/solutions/logic-errors/` |
+| `developer_experience` | `docs/solutions/developer-experience/` |
+| `workflow_issue` | `docs/solutions/workflow-issues/` |
+| `best_practice` | `docs/solutions/best-practices/` |
+| `documentation_gap` | `docs/solutions/documentation-gaps/` |
+| `architecture_pattern` | `docs/solutions/architecture-patterns/` |
+| `design_pattern` | `docs/solutions/design-patterns/` |
+| `tooling_decision` | `docs/solutions/tooling-decisions/` |
+| `convention` | `docs/solutions/conventions/` |
+
+Filename: `[sanitized-problem-slug].md` — no date suffix (the `date` field carries that).
+
+### Validation rules
+
+1. Determine the track from `problem_type`.
+2. All shared required fields present.
+3. Bug-track docs also carry `symptoms`, `root_cause`, `resolution_type`.
+4. Knowledge-track docs need no extra required fields.
+5. Enum fields match allowed values exactly.
+6. Array fields respect min/max item counts.
+7. `date` matches `YYYY-MM-DD`.
+
+### YAML safety (array items)
+
+Strict YAML parsers misread array items that start with a reserved indicator as unquoted scalars. For any array-of-strings field (`symptoms`, `applies_when`, `tags`, `related_components`), wrap the value in double quotes when it starts with any of: `` ` `` `[` `]` `{` `}` `,` `*` `&` `!` `|` `>` `%` `@` `?`. Also quote when the value contains `": "`. Scalar fields (`title:`, `module:`) have a separate failure mode — an unquoted ` #` truncates at the comment, an unquoted `: ` reframes as a mapping. `scripts/validate-frontmatter.py` catches those; quote and re-run until it exits 0.

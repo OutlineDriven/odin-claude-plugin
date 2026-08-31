@@ -1,0 +1,3 @@
+interface:
+  display_name: "Cybernetic Loop"
+  short_description: "Restore one invariant within a finite patch budget"

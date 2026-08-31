@@ -1,4 +1,4 @@
-# Interface Design
+# Interface design
 
 When the user wants to explore alternative interfaces for a chosen deepening candidate, follow this parallel sub-agent pattern. Based on "Design It Twice" (Ousterhout) — the first idea is unlikely to be the best.
 
@@ -41,4 +41,4 @@ Each sub-agent outputs:
 
 Present designs sequentially so the user can absorb each one, then compare them in prose. Contrast by **depth** (leverage at the interface), **locality** (where change concentrates), and **seam placement**.
 
-After comparing, give an opinionated recommendation: which design is strongest and why. If elements from different designs would combine well, propose a hybrid. Be decisive — the user wants a strong read, not a menu.
+After comparing, give an opinionated recommendation: which design is strongest and why. If elements from different designs would combine well, propose a hybrid. Be decisive: the user wants a strong read, not a menu.

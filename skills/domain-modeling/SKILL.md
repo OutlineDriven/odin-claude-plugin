@@ -1,33 +1,44 @@
 ---
 name: domain-modeling
-description: 'Build and sharpen a project''s ubiquitous language as you design: challenge terms against the glossary, sharpen fuzzy ones, and write CONTEXT.md the moment a term resolves. Use when pinning down domain terminology or maintaining the domain model. Not the `contexts` skill, which routes pre-implementation context gathering.'
+description: 'Use when pinning down domain terminology, maintaining the domain model, or resolving a term conflict or sharpening need. It resolves each term to one canonical owner, records it in CONTEXT.md with rejected synonyms, and keeps the glossary implementation-free. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Domain modeling
 
-This skill maintains a project's domain glossary. It has nothing to do with the `contexts` skill, which routes pre-implementation context gathering.
+## Contract
 
-Use this skill to change the model, not merely to read it.
+| Field | Bound contract |
+|---|---|
+| Trigger | Pinning down domain terminology, maintaining the domain model, or a term conflict/sharpening need |
+| Authority | Reversible-local: write only the named glossary artifacts — `CONTEXT.md` at the repository root, `CONTEXT-MAP.md`, and per-context `CONTEXT.md` files beside their context source. Rollback is reverting the glossary edit or deleting a lazily created file. |
+| Side effect | Lazily creates or updates `CONTEXT.md` / `CONTEXT-MAP.md` glossaries and per-context `CONTEXT.md` files; no other file, VCS, credential, or remote change. |
+| Done | Each resolved term recorded in `CONTEXT.md` with rejected synonyms; glossary stays canonical and implementation-free. |
 
-## File layout
+## Inputs
 
-- For one context, keep `CONTEXT.md` at the repository root.
-- For several contexts, keep `CONTEXT-MAP.md` at the root. Put each context's `CONTEXT.md` beside that context's source.
+Must be supplied: the term, conflict, or fuzzy usage to resolve, drawn from the current design conversation, plus the human ruling when a conflict needs one. Optional: an existing `CONTEXT.md` or `CONTEXT-MAP.md` (absence is normal; files are created lazily), and the implementation source behind a term (when absent or unreadable, the code cross-check is skipped and reported). Scope is the terms in the current design work; a repository-wide glossary sweep is out of scope unless the invocation names it.
 
-Create these files lazily. Do not create a file until there is something to record.
+## Procedure
 
-Load `references/CONTEXT-FORMAT.md` before creating or updating either format.
+1. **Load the layout.** Check the repository root for `CONTEXT.md` and `CONTEXT-MAP.md`. `CONTEXT.md` at the root means one context and one glossary. `CONTEXT-MAP.md` at the root means several contexts: each context's `CONTEXT.md` sits beside that context's source, and `CONTEXT-MAP.md` maps them. Read the applicable glossary before judging any term. If neither exists, create nothing yet.
+2. **Challenge conflicting terms.** Compare each term used in the current design work against the glossary. The moment a use contradicts a glossary entry, state both meanings and ask which one is correct before continuing — for example, a glossary that defines cancellation as ending an Order versus a use that changes one Line Item.
+3. **Sharpen fuzzy terms.** When a name is vague or overloaded, pick the single domain term that owns the rule; every other name becomes a rejected synonym.
+4. **Stress-test relationships.** Construct an edge case that forces a relationship boundary into view — one Order split across two shipments: when may Billing issue the invoice? — and resolve which term owns each side of the boundary.
+5. **Check claims against code.** Read the implementation behind each term under resolution. Surface any contradiction between the model and the code and rule which is authoritative; when the code wins, correct the model term — this skill never edits code. If the implementation is unreadable or absent, skip the cross-check and mark it not performed.
+6. **Record each resolution immediately.** The moment a term resolves, write an entry to the applicable glossary file with exactly three parts: the canonical term, a one-line definition, and its rejected synonyms. Create `CONTEXT.md` (one context) or `CONTEXT-MAP.md` plus the per-context `CONTEXT.md` (several contexts) only at this first write — never before there is something to record.
+7. **Keep the glossary pure.** Entries carry definitions and rejected synonyms only. Implementation details, specification content, and scratch notes are refused in glossary files; put them in their own artifacts or drop them.
 
-## Work during the session
+## Failure and recovery
+- **Unresolvable conflict.** Neither the design conversation, the human ruling, nor the code settles which meaning owns the rule: record nothing, leave the glossary unchanged, and report the term as unresolved. Do not pick a winner to force closure.
+- **Implementation unavailable.** Step 5 cannot run: record the term only if the design conversation resolved it, mark its code cross-check as not performed, and say so in the report. Never claim code agreement that was not observed.
+- **Purity pressure.** A resolution only makes sense together with implementation detail or specification content: write the glossary entry without that content and route it to its own artifact.
+- **Partial results.** A session may resolve some terms and not others; only resolved terms are written, and unresolved terms stay out of the files.
+- **Rollback.** Revert the glossary edit; delete a lazily created file that ended the session with no surviving entry.
+- **Blocked result.** The terminal failure output names each unresolved or unrecorded term with its reason. Never present Done while a resolved term lacks its entry or its rejected synonyms.
 
-1. **Challenge conflicting terms.** Compare each term with the glossary and call out a conflict at once. Example: "The glossary defines cancellation as ending an Order, but this use changes one Line Item. Which meaning is correct?"
-2. **Sharpen fuzzy terms.** Replace vague or overloaded language with one canonical term. Example: "Does account mean Customer or User? Pick the domain term that owns this rule."
-3. **Stress-test relationships.** Invent an edge case that forces boundaries into view. Example: "If Fulfillment splits one Order across two shipments, when may Billing issue the invoice?"
-4. **Check claims against code.** Read the implementation and surface contradictions. Example: "The code cancels the full Order, but the model allows partial cancellation. Which one is authoritative?"
-5. **Update the glossary inline.** Write the resolved term to `CONTEXT.md` immediately. Example: after choosing Customer over account, add Customer and its rejected synonyms before continuing.
+## Output
+Updated or newly created glossary files in the layout chosen at step 1: `CONTEXT.md` at the repository root for one context, or `CONTEXT-MAP.md` plus per-context `CONTEXT.md` files beside each context's source for several contexts. Every resolved term appears once with a one-line definition and its rejected synonyms. The terminal report lists terms resolved and recorded, conflicts surfaced, model-versus-code contradictions with the ruling, entries whose code cross-check was not performed, and terms left unresolved with reasons.
 
-`CONTEXT.md` is a glossary and nothing else. Keep implementation details, specification content, and scratch notes out of it.
+## Provenance
 
-## Architecture decisions
-
-Use `docs-and-adrs/references/adrs.md` for the ADR gate and format. Keep the decision criteria in that one place.
+Origin: ODIN 1.x current skill `skills/domain-modeling/SKILL.md`, project-owned, no pinned revision, no third-party license. Adapted into the ODIN 2.0 router format: the source's separate glossary-format reference (`references/CONTEXT-FORMAT.md`) is inlined as the step-6 entry shape, and the source's cross-skill ADR reference was removed because this skill depends on no other skill. No third-party expression is reproduced.

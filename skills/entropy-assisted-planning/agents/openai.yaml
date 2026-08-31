@@ -1,0 +1,3 @@
+interface:
+  display_name: "Entropy Assisted Planning"
+  short_description: "Cryptographic Tarot draw that picks a planning direction."

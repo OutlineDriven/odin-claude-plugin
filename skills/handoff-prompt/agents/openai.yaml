@@ -1,0 +1,3 @@
+interface:
+  display_name: "Handoff Prompt"
+  short_description: "Write a clipboard-ready handoff prompt for another agent."

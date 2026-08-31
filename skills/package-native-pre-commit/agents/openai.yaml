@@ -1,0 +1,3 @@
+interface:
+  display_name: "Package Native Pre Commit"
+  short_description: "Install package-manager-native commit-time checks and verify"

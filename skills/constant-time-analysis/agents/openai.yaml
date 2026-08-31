@@ -1,0 +1,3 @@
+interface:
+  display_name: "Constant Time Analysis"
+  short_description: "Detect secret-dependent variable-time code in compiled output."

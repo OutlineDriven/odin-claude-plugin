@@ -1,0 +1,3 @@
+interface:
+  display_name: "Fuzzing Dictionary"
+  short_description: "Build a focused fuzzer dictionary from target tokens."

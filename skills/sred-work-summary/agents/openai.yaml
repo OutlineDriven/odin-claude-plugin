@@ -1,0 +1,3 @@
+interface:
+  display_name: "SRED Work Summary"
+  short_description: "Creates a Notion work summary grouped by project from PRs, docs"

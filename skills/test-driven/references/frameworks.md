@@ -1,4 +1,4 @@
-# Test Frameworks by Language
+# Test frameworks by language
 
 **Grounded: 2026-08-26**
 
@@ -17,7 +17,7 @@
 
 ## Notes
 
-- **Python**: HypoFuzz (v25.11.1) provides adaptive fuzzing as a complement to Hypothesis -- coverage-guided property testing.
+- **Python**: HypoFuzz (v25.11.1) provides adaptive fuzzing as a complement to Hypothesis: coverage-guided property testing.
 - **Rust**: proptest supports stateful testing. Bolero combines PBT + fuzzing with libFuzzer/AFL backends.
 - **TypeScript**: vitest includes built-in coverage via v8. fast-check supports model-based testing.
 - **Java/Kotlin**: PIT (pitest) is the standard mutation testing tool for JVM. jqwik integrates with the JUnit platform.

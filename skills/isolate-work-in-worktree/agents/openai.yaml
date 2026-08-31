@@ -1,0 +1,3 @@
+interface:
+  display_name: "Isolate Work In Worktree"
+  short_description: "Isolates each run on its own git branch and tracked worktree."

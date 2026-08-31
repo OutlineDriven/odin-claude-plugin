@@ -1,0 +1,3 @@
+interface:
+  display_name: "No Comments"
+  short_description: "Audit code comments, remove unearned, suggest alternatives."

@@ -1,4 +1,4 @@
-# Per-finding Walk-through
+# Per-finding walk-through
 
 This reference defines Interactive mode's per-finding walk-through -- the path the user enters by picking option A from the routing question, plus the unified completion report that every terminal path emits. The walk-through is fully read-only: decisions are recorded in the completion report, never applied to the reviewed document.
 

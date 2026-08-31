@@ -1,0 +1,3 @@
+interface:
+  display_name: "Atheris Python Fuzzing"
+  short_description: "Run coverage-guided Atheris fuzzing on Python targets."

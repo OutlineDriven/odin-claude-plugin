@@ -1,0 +1,3 @@
+interface:
+  display_name: "Burp Search Command"
+  short_description: "Search Burp Suite project files and return JSON results"

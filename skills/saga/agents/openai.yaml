@@ -1,0 +1,3 @@
+interface:
+  display_name: "Autonomous Spec Feature Build"
+  short_description: "Autonomous spec-driven feature build via orchestrator + worker"

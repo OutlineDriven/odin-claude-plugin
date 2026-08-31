@@ -1,0 +1,3 @@
+interface:
+  display_name: "Scientific Figure"
+  short_description: "Publication-quality figure with reproducible plot code"

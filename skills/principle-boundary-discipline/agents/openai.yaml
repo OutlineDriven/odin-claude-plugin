@@ -1,0 +1,3 @@
+interface:
+  display_name: "Principle Boundary Discipline"
+  short_description: "Places validation and error handling at system trust boundaries"

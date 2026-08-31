@@ -1,4 +1,4 @@
-# Review Output Template
+# Review output template
 
 This is the **canonical skeleton** for deep-mode review output -- copy the section structure; the example shows one good rendering, not the only permitted layout. Shape each finding for the reader's next action. Findings are grouped by severity, not by persona.
 
@@ -75,7 +75,7 @@ This is the **canonical skeleton** for deep-mode review output -- copy the secti
 > **Fix order:** P0 auth bypass -> P1 memory -> P2 error handling if straightforward
 ```
 
-## Formatting Rules
+## Formatting rules
 
 - **ASCII-safe only** -- never box-drawing characters or per-item horizontal-rule separators between entries, no Unicode arrows or middot; use `->`.
 - **Escape literal `|` in table cells** -- any `|` inside a finding title, issue description, code snippet, or example must be written as `\|`.

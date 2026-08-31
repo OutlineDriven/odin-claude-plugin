@@ -1,0 +1,3 @@
+interface:
+  display_name: "AX Audit"
+  short_description: "Severity-tiered AX report with ship-readiness verdict"

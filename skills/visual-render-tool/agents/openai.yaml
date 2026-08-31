@@ -1,0 +1,3 @@
+interface:
+  display_name: "Visual Render Tool"
+  short_description: "Render plans, architectures, diffs, or code as a visual artifact"

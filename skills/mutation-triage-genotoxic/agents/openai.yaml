@@ -1,0 +1,3 @@
+interface:
+  display_name: "Mutation Triage Genotoxic"
+  short_description: "Classify survived mutants and write GENOTOXIC_REPORT.md"

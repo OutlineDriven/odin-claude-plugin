@@ -1,0 +1,3 @@
+interface:
+  display_name: "Coding Agent Hook Safety"
+  short_description: "Documented, scoped, safe coding-agent event hooks proved on allo"

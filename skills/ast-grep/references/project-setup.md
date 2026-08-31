@@ -1,6 +1,6 @@
-# Project Setup & Testing
+# Project setup and testing
 
-To use ast-grep for linting or scanning a codebase efficiently, you should set up a project structure.
+Set up a project structure before using ast-grep to lint or scan a codebase.
 
 ## Scaffolding
 
@@ -38,11 +38,11 @@ testConfigs:
   - testDir: rule-tests
 ```
 
-## Testing Rules
+## Testing rules
 
-Testing is crucial for ensuring rules match what you expect and don't produce false positives (noisy matches) or false negatives (missing matches).
+Test rules to confirm they match what you expect and produce neither false positives (noisy matches) nor false negatives (missing matches).
 
-### Test File Structure
+### Test file structure
 
 Test files (e.g., `rule-tests/my-rule-test.yml`) map test cases to a rule ID.
 
@@ -56,7 +56,7 @@ invalid:
   - "eval(foo);"
 ```
 
-### Running Tests
+### Running tests
 
 ```bash
 # Run all tests
@@ -71,4 +71,4 @@ ast-grep test -i
 
 ### Snapshots
 
-When you run tests with `-U`, ast-grep creates a `__snapshots__` directory. This stores the expected output (error messages, fix replacements) for your invalid cases. This ensures that not only does the rule trigger, but it produces the correct diagnostic/fix.
+When you run tests with `-U`, ast-grep creates a `__snapshots__` directory. This stores the expected output (error messages, fix replacements) for your invalid cases. This checks that the rule triggers and produces the correct diagnostic/fix.

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Git History Analysis"
+  short_description: "Summarize recent git history into a categorized report."

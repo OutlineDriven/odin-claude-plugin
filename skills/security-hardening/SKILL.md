@@ -1,120 +1,64 @@
 ---
 name: security-hardening
-description: Harden code against vulnerabilities as you build it. Use when handling untrusted input, authentication or authorization, data storage, or external integrations.
+description: 'Use when handling untrusted input, auth/authz, data storage, or external integrations. Result: security controls verified against the always-do checklist. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
-# Security and Hardening
+# Harden code security
 
-## Overview
+## Contract
 
-Security-first development. Three standing constraints: treat every external input as hostile until validated, keep every secret out of code and logs, and check authorization on every protected action. Security is a property of each line that touches user data, authentication, or external systems, built in during construction rather than retrofitted afterward.
-
-## When to Use
-
-- Building anything that accepts user input
-- Implementing authentication or authorization
-- Storing or transmitting sensitive data
-- Integrating with external APIs or services
-- Adding file uploads, webhooks, or callbacks
-- Handling payment or PII data
-
-## Process: Threat Model First
-
-A control added without a threat model is a guess. Before hardening, spend five minutes as the attacker:
-
-1. **Map the trust boundaries.** Where does untrusted data cross into the system? HTTP requests, form fields, file uploads, webhooks, third-party APIs, message queues, and **LLM output**. Every boundary is attack surface.
-2. **Name the assets.** What is worth stealing or breaking? Credentials, PII, payment data, admin actions, money movement.
-3. **Run STRIDE over each boundary**: a lens, not a ceremony:
-
-| Threat | Ask | Typical mitigation |
-|---|---|---|
-| **S**poofing | Can someone impersonate a user/service? | Authentication, signature verification |
-| **T**ampering | Can data be altered in transit or at rest? | Integrity checks, parameterized queries, HTTPS |
-| **R**epudiation | Can an action be denied later? | Audit logging of security events |
-| **I**nformation disclosure | Can data leak? | Encryption, field allowlists, generic errors |
-| **D**enial of service | Can it be overwhelmed? | Rate limiting, input size caps, timeouts |
-| **E**levation of privilege | Can a user gain rights they shouldn't? | Authorization checks, least privilege |
-
-4. **Write abuse cases next to use cases.** For each feature, ask "how would I misuse this?" Then make that the first test.
-
-If you cannot name a feature's trust boundaries, you cannot secure it. This is OWASP **A04: Insecure Design**; design flaws, not code typos, drive most breaches.
-
-## The Three-Tier Boundary System
-
-### Always Do (No Exceptions)
-
-- **Validate all external input** at the system boundary (API routes, form handlers)
-- **Parameterize all database queries**: never concatenate user input into SQL
-- **Encode output** to prevent XSS (use framework auto-escaping; do not bypass it)
-- **Use HTTPS** for all external communication
-- **Hash passwords** with bcrypt/scrypt/argon2 (never store plaintext)
-- **Set security headers** (CSP, HSTS, X-Frame-Options, X-Content-Type-Options)
-- **Use httpOnly, secure, sameSite cookies** for sessions
-- **Run the dependency audit** (`npm audit`, `pip-audit`, `cargo audit`, `govulncheck`, or equivalent) before every release
-
-### Ask First (Requires Human Approval)
-
-- Adding new authentication flows or changing auth logic
-- Storing new categories of sensitive data (PII, payment info)
-- Adding new external service integrations
-- Changing CORS configuration
-- Adding file upload handlers
-- Modifying rate limiting or throttling
-- Granting elevated permissions or roles
-
-### Never Do
-
-- **Never commit secrets** to version control (API keys, passwords, tokens)
-- **Never log sensitive data** (passwords, tokens, full credit card numbers)
-- **Never trust client-side validation** as a security boundary
-- **Never disable security headers** for convenience
-- **Never feed user data to dynamic execution or raw markup** (`eval`, `innerHTML`, `exec`, template injection)
-- **Never store sessions in client-accessible storage** (auth tokens in localStorage)
-- **Never expose stack traces** or internal error details to users
-
-## Reference materials
-
-Read on demand; the threat model and the boundary tiers above decide which.
-
-- `references/owasp-patterns.md`: per-vulnerability prevention code for injection, broken auth, XSS, access control, misconfiguration, data exposure, and SSRF, in two language families.
-- `references/input-validation.md`: schema validation at the trust boundary (zod, pydantic) and file-upload safety.
-- `references/dependency-audit.md`: triage tree for audit findings, plus supply-chain hygiene beyond what a CVE scan catches.
-- `references/operational-controls.md`: rate limiting and secrets management, including rotation after an exposure.
-- `references/llm-security.md`: OWASP LLM Top 10 mitigations and treating model output as untrusted input.
-- `references/security-checklist.md`: the OWASP 2021 ordering as a quick-reference table, the detailed review checklists, and pre-commit verification steps.
-
-## Common Rationalizations
-
-| Rationalization | Reality |
+| Field | Bound contract |
 |---|---|
-| "This is an internal tool, security doesn't matter" | Internal tools get compromised. Attackers target the weakest link. |
-| "We'll add security later" | Retrofitting security costs far more than building it in. Add it now. |
-| "No one would try to exploit this" | Automated scanners will find it. Security by obscurity is not security. |
-| "The framework handles security" | Frameworks provide tools, not guarantees. You still have to use them correctly. |
-| "It's just a prototype" | Prototypes become production. Security habits from day one. |
-| "Threat modeling is overkill here" | Five minutes of "how would I attack this?" prevents the design flaws no control can patch later. |
-| "It's just LLM output, it's only text" | That "text" can be a SQL statement, a script tag, or a shell command. Treat it like any untrusted input. |
+| Trigger | Handling untrusted input, auth/authz, data storage, external integrations, files/uploads/payment |
+| Authority | Reversible-local: adds security controls to code during construction; rollback restores prior state |
+| Side effect | Local-write: changes to code files only; no credential, deployment, or remote mutation |
+| Done | Security-relevant code passes the always-do checks and verification checklist |
 
-## Red Flags
+## Inputs
 
-- User input passed directly to database queries, shell commands, or HTML rendering
-- API endpoints without authentication or authorization checks
-- Missing CORS configuration or wildcard (`*`) origins
-- No rate limiting on authentication endpoints
-- Server fetches user-supplied URLs without an allowlist (SSRF)
-- LLM/model output passed into a query, the DOM, a shell, or `eval`
-- Secrets, PII, or the full system prompt placed inside an LLM context window
+- **Codebase context**: files or modules that will be modified, or the specific vulnerability class to address
+- **Language/framework**: optional but recommended when the hardening pattern is language-specific
+- **Trust boundary location**: optional; the skill will map it if not provided
 
-## Verification
+## Procedure
 
-After implementing security-relevant code:
+1. **Threat model before writing code.** Spend five minutes as the attacker:
+   a. Map trust boundaries: HTTP requests, form fields, file uploads, webhooks, third-party APIs, message queues, and LLM output.
+   b. Name high-value assets: credentials, PII, payment data, admin actions, money movement.
+   c. Apply STRIDE to each boundary: Spoofing, Tampering, Repudiation, Information disclosure, Denial of service, Elevation of privilege.
+   d. Write abuse cases next to use cases; make each abuse case the first test.
+   If a feature's trust boundaries cannot be named, hardening for it is blocked.
 
-- [ ] Dependency audit shows no critical or high vulnerabilities
-- [ ] No secrets in source code or git history
-- [ ] All user input validated at system boundaries
-- [ ] Authentication and authorization checked on every protected endpoint
-- [ ] Security headers present in response (check with browser DevTools)
-- [ ] Error responses don't expose internal details
-- [ ] Rate limiting active on auth endpoints
-- [ ] Server-side URL fetches validated against an allowlist (no SSRF)
-- [ ] LLM/model output validated and encoded before use (if AI features present)
+2. **Classify the operation against the three tiers.**
+   - **Always Do** (no human approval required): validate all external input at the system boundary; parameterize all database queries; encode output to prevent XSS; use HTTPS for all external communication; hash passwords with Argon2id; set CSP, HSTS, X-Frame-Options, X-Content-Type-Options headers; use httpOnly/secure/sameSite cookies; run dependency audit (`pnpm audit`, `uvx pip-audit`, `cargo audit`, `govulncheck`) before every release.
+   - **Ask First** (requires human approval): new authentication flows or auth logic changes; storing new categories of sensitive data; new external service integrations; changing CORS configuration; adding file upload handlers; modifying rate limiting; granting elevated permissions or roles.
+   - **Never Do**: commit secrets or credentials to version control; log passwords, tokens, or full credit card numbers; trust client-side validation as a security boundary; disable security headers for convenience; pass user input to `eval`, `innerHTML`, `exec`, or template injection; store auth tokens in localStorage; expose stack traces or internal errors to users.
+
+3. **Implement controls.** Apply the appropriate always-do controls for the identified threat model. For injection: parameterize queries, encode output, validate and sanitize input at the boundary. For broken auth: enforce password hashing, session tokens in httpOnly cookies, CSRF tokens. For XSS: output encoding, CSP, framework auto-escaping. For SSRF: URL allowlist, no user-supplied URLs in server fetches. For data exposure: encryption at rest, field allowlists, generic errors.
+
+4. **Verify against the checklist.** Confirm all always-do items are satisfied before declaring done:
+   - Dependency audit shows no critical or high vulnerabilities
+   - No secrets in source code or git history
+   - All user input validated at system boundaries
+   - Authentication and authorization checked on every protected endpoint
+   - Security headers present in responses
+   - Error responses do not expose internal details
+   - Rate limiting active on auth endpoints
+   - Server-side URL fetches validated against allowlist (no SSRF)
+   - LLM/model output validated and encoded before use (if AI features present)
+
+5. **Rollback on failure.** If the checklist does not pass or the threat model cannot be completed, restore all changed files to their pre-invocation state.
+
+## Failure and recovery
+- **Blocked (threat-model)**: Trust boundaries cannot be named for the feature. Stop. Do not add controls without a threat model.
+- **Non-converged (checklist)**: One or more always-do items cannot be satisfied. Do not declare done. Report which items failed and why.
+- **No-action (out-of-scope)**: The requested operation falls under Ask First without approval, or Never Do. Return a classification explaining which tier applies and what human approval would be required.
+- **Partial-result rule**: If some files pass the checklist and others do not, report per-file status. Roll back files that fail.
+- **Rollback rule**: On any non-converged result, restore every changed file to its pre-invocation state.
+
+## Output
+Hardened source files with security controls applied, plus a verification report listing which checklist items passed and which (if any) remain open. If blocked, return the classification and the named failure class.
+
+## Provenance
+
+Origin: odin-current (`current:current-c:current:security-hardening`). Source path: `skills/security-hardening/SKILL.md`. No external revision or license. Adaptation: threat-model-first process adapted from OWASP; STRIDE table adapted from Microsoft SDL; always-do / ask-first / never-do tier system original to ODIN. MIT-licensed material from addyosmani/agent-skills (`source:source-addy:addy-security-and-hardening`, revision `d2c37ef`, MIT) absorbed via global exact-contract deduplication; no third-party expression copied.

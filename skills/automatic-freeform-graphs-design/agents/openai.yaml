@@ -1,0 +1,3 @@
+interface:
+  display_name: "Automatic Freeform Graphs Design"
+  short_description: "Generate a freeform conceptual graph for exploratory work."

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Skill Progressive Disclosure Design"
+  short_description: "Decide skill split-or-monolith architecture"

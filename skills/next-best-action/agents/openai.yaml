@@ -1,0 +1,3 @@
+interface:
+  display_name: "Next Best Action"
+  short_description: "Return one prioritized next action with done-when"

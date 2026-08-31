@@ -1,4 +1,4 @@
-# `simplify` — reuse axis agent prompt
+# `simplify`: reuse axis agent prompt
 
 Verbatim prompt for the reuse-axis review agent. The orchestrator dispatches this prompt with the captured diff appended after the `DIFF:` marker.
 

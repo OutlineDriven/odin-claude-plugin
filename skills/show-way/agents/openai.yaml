@@ -1,0 +1,3 @@
+interface:
+  display_name: "Show Way"
+  short_description: "Flatten roadmaps into next-action lists"

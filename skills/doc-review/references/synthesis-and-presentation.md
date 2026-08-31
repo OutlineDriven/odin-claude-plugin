@@ -1,10 +1,10 @@
-# Phases 3-5: Synthesis, Presentation, and Next Action
+# Phases 3-5: Synthesis, presentation, and next action
 
-## Phase 3: Synthesize Findings
+## Phase 3: Synthesize findings
 
 Process findings from all agents through this pipeline. Order matters -- each step depends on the previous. The pipeline implements the finding-lifecycle state machine: **Raised -> (Confidence Gate | FYI-eligible | Dropped) -> Deduplicated -> Classified -> SafeAuto | GatedAuto | Manual | FYI**. Re-evaluate state at each step boundary; derive each step's state from the current finding set rather than carrying forward earlier-step assumptions as prose-level shortcuts.
 
-### Routing Decision Table
+### Routing decision table
 
 | Phase | Condition | Action |
 |-------|-----------|--------|
@@ -27,7 +27,7 @@ Process findings from all agents through this pipeline. Order matters -- each st
 
 Five phases carry branching, multi-step procedures too dense for a single table cell; their full logic is preserved as prose below, unchanged from the pre-table version.
 
-### 3.2 Confidence Gate (Anchor-Based)
+### 3.2 Confidence gate (anchor-based)
 
 Gate findings by their `confidence` anchor value. Anchors are discrete integers (`0`, `25`, `50`, `75`, `100`) with behavioral definitions documented in `references/findings-schema.json` and embedded in the persona rubric (`references/subagent-template.md`).
 
@@ -45,7 +45,7 @@ Gate findings by their `confidence` anchor value. Anchors are discrete integers 
 
 **Why this threshold, not a higher one:** Document review has opposite economics from code review. There is no linter backstop -- the review IS the backstop. Premise-level concerns (product, adversarial) naturally cap at anchors 50-75 because "is the motivation valid?" cannot be verified against ground truth. The routing menu already makes dismissal cheap (Skip, Append to Open Questions), so surfaced-and-skipped is a low-cost outcome while missed-and-shipped derails downstream implementation. Filter low (`>= 50`) and let the routing menu handle volume.
 
-### 3.5b Deterministic Recommended-Action Tie-Break
+### 3.5b Deterministic recommended-action tie-break
 
 Every merged finding carries exactly one `recommended_action` field consumed by the walk-through (`references/walkthrough.md`) to mark the `(recommended)` option, by the best-judgment path (`references/bulk-preview.md`) to choose what to execute in bulk, and by the stem's yes/no framing. When a merged finding was flagged by multiple personas who implied different actions, synthesis picks the recommended action deterministically so identical review artifacts produce identical walk-through and best-judgment behavior across runs.
 
@@ -74,7 +74,7 @@ This gate holds for every branch of the tie-break: if the winning action is `App
 
 **Downstream invariant.** The walk-through and bulk-preview read `recommended_action` as authoritative and render `(recommended)` on the matching option. Best-judgment-the-rest and routing option B execute the `recommended_action` across the scoped finding set in bulk. This keeps best-judgment outcomes reproducible and auditable: the same review artifact always produces the same bulk plan.
 
-### 3.5c Premise-Dependency Chain Linking
+### 3.5c Premise-dependency chain linking
 
 Document reviews often produce fanout: a single premise challenge ("is this work justified?") generates downstream findings that all evaporate if the premise is rejected. Surfacing each as an independent decision forces the user to re-litigate the same root question N times. This step links dependent findings to their root so presentation can group them and the walk-through can cascade a single root decision across the chain.
 
@@ -121,7 +121,7 @@ Preserve each finding's class, route, and confidence anchor in this step. Linkin
 
 **Count invariant.** `M` in the coverage line is the number of findings with `depends_on` set after Step 4 completes. If a finding appears in a root's `dependents` array, it MUST appear nested under that root in the presentation, and that nested position MUST be its only appearance in the output.
 
-### 3.9 Promote Auto-Eligible Findings
+### 3.9 Promote auto-eligible findings
 
 Scan `manual` findings for promotion to `safe_auto` or `gated_auto`. Promote when the finding meets one of the consolidated auto-promotion patterns:
 
@@ -135,7 +135,7 @@ Keep such findings at `manual` when they involve scope or priority changes where
 
 **Strawman-downgrade safeguard.** If a `safe_auto` finding names dismissed alternatives in `why_it_matters`, verify the alternatives are genuinely strawmen. If any alternative is a plausible design choice that the persona dismissed too aggressively, downgrade to `gated_auto`.
 
-### 3.10 Route by Autofix Class
+### 3.10 Route by autofix class
 
 **Severity and autofix_class are independent.** A P1 finding can be `safe_auto` if the correct fix is obvious. The test is not "how important?" but "is there one clear correct fix, or does this require judgment?"
 
@@ -154,7 +154,7 @@ Findings reaching 3.10 have already been gated to anchors `50`, `75`, or `100` b
 | `50`   | any           | Surface in the FYI subsection regardless of `autofix_class`, skipping the walk-through and any bulk action. |
 
 
-## Phase 4: Present Findings
+## Phase 4: Present findings
 
 **User-facing vocabulary rule (applies to ALL user-visible output in Phase 4).** Internal enum values -- `safe_auto`, `gated_auto`, `manual`, `FYI` -- stay inside the schema and synthesis prose. Every word the user sees in Phase 4 output MUST use user-facing vocabulary: "accepted recommendations" (for `safe_auto`), "proposed fixes" (for `gated_auto`), "decisions" (for `manual` findings at anchor `75` or `100`), "FYI observations" (for any finding at anchor `50`). The only exception is the `Tier` column in rendered tables, which names the internal enum for transparency.
 
@@ -167,7 +167,7 @@ Record `safe_auto` findings **at confidence anchor `100`** as accepted recommend
 
 List every accepted recommendation in the output summary so the user can see what was recommended.
 
-### Route Remaining Findings
+### Route remaining findings
 
 After safe_auto findings are recorded, remaining findings split into buckets:
 
@@ -234,7 +234,7 @@ Include the Coverage table, accepted recommendations, FYI observations (as a dis
 
 **All tables MUST be pipe-delimited markdown (`| col | col |`). Do NOT use ASCII box-drawing characters under any circumstances.**
 
-## Phase 5: Next Action -- Terminal Question
+## Phase 5: Next action -- terminal question
 
 **Headless mode:** Return "Review complete" immediately, without asking questions.
 
@@ -265,13 +265,13 @@ After 2 refinement passes, recommend completion -- diminishing returns are likel
 
 Return "Review complete" as the terminal signal for callers, regardless of which option the user picked.
 
-## What NOT to Do
+## What not to do
 
 - Do not rewrite the entire document
 - Do not add new sections or requirements the user didn't discuss
 - Do not over-engineer or add complexity
 - Do not create separate review files or add metadata sections
 
-## Iteration Guidance
+## Iteration guidance
 
 On subsequent passes, re-dispatch personas with the multi-round decision primer and re-synthesize. Fixed findings self-suppress because their evidence is gone from the current doc; rejected findings are handled by the R29 pattern-match suppression rule; accepted-recommendation verification uses the R30 matching predicate. If findings are repetitive across passes after these mechanisms run, recommend completion.

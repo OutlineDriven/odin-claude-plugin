@@ -1,0 +1,3 @@
+interface:
+  display_name: "Cherrypick To Release"
+  short_description: "Open one cherry-pick PR per release channel, on-call reviewed."

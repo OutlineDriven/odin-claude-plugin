@@ -38,7 +38,7 @@ out := panelStyle(tokens, isDark).Render("ready")
 lipgloss.Println(out)
 ```
 
-The `Update(msg) (Model, Cmd)` shape forces every state mutation through the message tape — diffable, replayable, and the right substrate for snapshot testing. Reach for it when the TUI has more than one input source (keys + ticker + network); for a single-shot status print, use `references/cli.md` instead.
+The `Update(msg) (Model, Cmd)` shape forces every state mutation through the message tape — diffable, replayable, and the right base for snapshot testing. Reach for it when the TUI has more than one input source (keys + ticker + network); for a single-shot status print, use `references/cli.md` instead.
 
 ```go
 // Init kicks the background-color query; Update folds the response back in.
@@ -86,7 +86,7 @@ Reach for Ratatui when the surface needs deterministic layout (every frame is re
 
 ## 4. Textual (Python)
 
-Textual 8.2.x ships a CSS-like layout system on top of Python and runs against both terminal and web (via Textual Web). Trade-off: dual-target costs some terminal density and ties the surface to Python startup latency, but unlocks one codebase for two delivery surfaces.
+Textual 8.2.x ships a CSS-like layout system on top of Python and runs against both terminal and web (via Textual Web). Trade-off: dual-target costs some terminal density and ties the surface to Python startup latency, but gives one codebase for two delivery surfaces.
 
 - **App / Screen / Widget** — three-level hierarchy; widgets compose into screens, screens stack inside an app. Reactive properties (`reactive[T]`) trigger automatic re-render on assignment.
 - **CSS-in-Python** — selectors, pseudo-classes, theme variables (`$primary`, `$surface`), and a subset of CSS properties; not full CSS, but the mental model transfers.

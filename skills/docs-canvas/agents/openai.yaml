@@ -1,0 +1,3 @@
+interface:
+  display_name: "Docs Canvas"
+  short_description: "Render documentation as a navigable interactive canvas."

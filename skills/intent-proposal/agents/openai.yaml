@@ -1,0 +1,3 @@
+interface:
+  display_name: "Intent Confirmation Prompt"
+  short_description: "Propose the intent behind thin data for a one-word confirm."

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Power Analysis"
+  short_description: "Preregistered two-arm sample-size design"

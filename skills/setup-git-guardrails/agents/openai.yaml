@@ -1,3 +1,0 @@
-interface:
-  display_name: "Set Up Git Guardrails"
-  short_description: "Block irreversible git commands with a hook"

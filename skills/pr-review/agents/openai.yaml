@@ -1,3 +1,0 @@
-interface:
-  display_name: "PR Review"
-  short_description: "Review a PR diff for quality and security"

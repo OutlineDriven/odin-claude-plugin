@@ -1,0 +1,3 @@
+interface:
+  display_name: "Visual Project Recap"
+  short_description: "Writes an 8-section HTML recap page to the diagrams directory"

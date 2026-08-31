@@ -1,0 +1,3 @@
+interface:
+  display_name: "Insecure Default Discovery"
+  short_description: "Traces insecure defaults to production security decisions"

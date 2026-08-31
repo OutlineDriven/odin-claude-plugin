@@ -1,41 +1,46 @@
 ---
 name: walk-with-me
-description: 'Use when the user wants to be walked through code rather than handed a report: "walk me through this", "walk with me", "help me understand this codebase", or "help me review this". Renders the shape first and hands the user the next step each turn. A diff, PR, or branch walk goes to show-review; one visual with no walk goes to show-me; a written orientation report goes to onboard.'
-argument-hint: "What should we walk through?"
+description: 'Use when the user wants to be walked through code rather than handed a report: "walk through this", "guided code walk", or "explain this codebase". The agent renders a visual shape and hands the user the next step each turn. Don''t use for tasks that require source or remote-system changes.'
 ---
 
-# Walk With Me
+# Walk with me
 
-You hold the map, the user holds the wheel. Never issue the conclusion the walk exists to let the user reach. In review-help mode that is the whole point: show the code and ask what they see, never state the finding first.
+## Contract
 
-## Route on turn zero
+| Field | Bound contract |
+|---|---|
+| Trigger | User wants to be walked through code: "walk me through this", "walk with me", or "help me understand this codebase". |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Side effect | Per-turn visuals and single-selects render in chat; nothing is written to disk. |
+| Done | The covered tally is reported and the user's stop, write-down, or act single-select is recorded. |
 
-A diff, a PR number, or a branch against its base belongs to `show-review`, so hand it off and stop. Unfamiliar code with no diff walks here. Say which route you took in one line.
+## Inputs
 
-## Turn zero, the shape
+- Codebase to walk through (required): supplied as a directory path, file set, or repository URL.
+- Entry point or starting file (optional): if omitted, the agent identifies the main entry point from the code structure.
 
-One visual of the whole thing before any detail, picked the way `show-me` picks views: a shallow file tree naming what each directory owns, or a module diagram. Then one single-select of which part to descend into, offering three or four real named targets from the code, with `(Recommended)` on the one the entry point reaches first.
+## Procedure
 
-## A turn
+1. If the target is a diff, a PR number, or a branch against its base, walk the change directly here: render the diff hunks or the commit range against its base as the first visual, then apply the same one-visual, one-selection descent over the changed lines, their base, and the surrounding code they touch. If the target is unfamiliar code with no diff, proceed with the codebase route. State the selected route in one line.
+2. Render one visual of the whole codebase before any detail: a shallow file tree naming what each directory owns, or a module diagram. Then present one single-select of which part to descend into, offering three or four real named targets from the code, with `(Recommended)` on the one the entry point reaches first.
+3. Each subsequent turn: render one visual, write one or two lines of prose, and present one single-select of where to go next. Options are always real named targets read from the code, never "continue" or "go deeper". Print the visual in the message body beside the prose, not in the question preview.
+4. In review-help mode: the same walk applies, but each turn ends on what the user makes of what is on screen, and the options are competing readings of the code rather than verdicts on it. Record what the user concludes. The walk never adds a finding of its own.
+5. After six turns, present one single-select offering to close (recommended) or continue. Any stop phrase closes the walk on any turn.
+6. On close: report a one-line tally of what was covered and what the user concluded, then present one single-select: stop (recommended), write it down, or act on it.
 
-One visual, one or two lines of prose, one single-select of where to go next. Options are always real named targets read out of the code, never "continue" or "go deeper". Question contract: `skills/askme/SKILL.md:64-127`. Print the visual in the message body beside the prose, not in the question preview.
+## Failure and recovery
+- No code found: report the blocker and stop the walk. Do not fabricate a codebase or invent structure.
+- User stops early: close the walk with whatever was covered. Report the partial tally honestly; do not pretend the full codebase was walked.
+- Codebase too large to walk in six turns: present the high-level shape and let the user choose where to focus. Do not widen scope beyond what the user selects.
+- The walk never issues the conclusion the walk exists to let the user reach. If the agent states a finding instead of asking, the walk has failed its contract.
 
-## Review-help mode
+## Output
+- Per-turn: one visual (file tree, module diagram, or code excerpt) with one single-select of real named targets.
+- On close: a covered-tally line and the user's recorded decision (stop, write down, or act).
+- Nothing lands on disk; every view is chat output.
 
-The same walk, where each turn ends on what the user makes of what is on screen, and the options are competing readings of the code rather than verdicts on it. Record what the user concludes. The walk never adds a finding of its own, because that is `show-review` or `review`.
+## Provenance
 
-## Depth stop
-
-After six turns, one single-select offering to close (recommended) or continue. Any stop phrase closes the walk on any turn.
-
-## Close
-
-A one-line tally of what was covered and what the user concluded, then one single-select: stop (recommended), write it down with `compound`, or act on it with `work`.
-
-## Boundaries
-
-- Nothing lands on disk, since every view is chat output.
-- Diff, PR, and branch walks go to `show-review`.
-- One visual with no walk goes to `show-me`.
-- A written seven-section orientation artifact goes to `onboard`.
-- Runtime behavior of a specific path goes to `contexts`.
+- Origin: current-odin-skill-tree, candidate `current:current-d:current:walk-with-me`.
+- Pinned revision: none (project-owned, continuously adapted).
+- License: project-owned. No third-party expression copied; adaptation is clean-room from the source mechanism.

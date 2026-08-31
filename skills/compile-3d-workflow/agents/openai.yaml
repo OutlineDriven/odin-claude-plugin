@@ -1,0 +1,3 @@
+interface:
+  display_name: "Compile 3D Workflow"
+  short_description: "Interview for direction, compile a local 3D workflow artifact."

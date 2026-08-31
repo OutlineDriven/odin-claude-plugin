@@ -1,0 +1,3 @@
+interface:
+  display_name: "Plan Review Tune"
+  short_description: "Tune plan-review questions and persist the flow."

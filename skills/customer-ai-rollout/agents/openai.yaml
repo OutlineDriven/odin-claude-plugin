@@ -1,0 +1,3 @@
+interface:
+  display_name: "Customer AI Rollout"
+  short_description: "Validated staged customer AI rollout"

@@ -1,101 +1,65 @@
 ---
 name: setup-ts-deep-modules
-description: 'Wire dependency-cruiser into a TypeScript repo so each package is a deep module: implementation hidden in subfolders, reachable only through its entry-point files. Use when the user asks to enforce package boundaries, set up deep modules, stop deep imports, or wants code outside a package to import only its entry points.'
+description: 'Wire dependency-cruiser into a TypeScript repo so each package is a deep module: implementation hidden in subfolders, reachable only through its entry-point files. Use when the user asks to enforce package boundaries, set up deep modules, stop deep imports, or wants code outside a package to import only its entry points. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Setup TS deep modules
 
-Make every package in this repo a **deep module**: a lot of behaviour behind a small interface. A package's public surface is its **entry points** (the files at the package root), and everything in its subfolders is hidden. This skill installs [dependency-cruiser](https://github.com/sverweij/dependency-cruiser) and the rules that make the entry points the only way in, then proves the rules bite.
+## Contract
 
-For the vocabulary (deep module, interface, seam, depth), run the `codebase-design` skill. Use that language throughout.
+| Field | Bound contract |
+|---|---|
+| Trigger | User asks to enforce package boundaries, set up deep modules, stop deep imports, or import only entry points |
+| Authority | Reversible-local: writes .dependency-cruiser.cjs, package.json, package scripts, and optional example package and README; refuses to overwrite existing config or touch tsconfig |
+| Side effect | Installs dependency-cruiser as devDependency; writes .dependency-cruiser.cjs, lint:boundaries script, example package, packages README, and AGENTS.md/CLAUDE.md pointer |
+| Done | lint:boundaries passes on the clean example; fails on a deep import; passes after revert |
 
-## The shape this enforces
+## Inputs
 
-```
-src/packages/
-  <name>/
-    index.ts        ← an entry point (public). Import this from outside.
-    client.ts       ← another entry point. Packages may expose SEVERAL.
-    lib/            ← implementation: hidden from outside, free to import each other.
-    tests/          ← co-located tests + fixtures (a subfolder, so private).
-```
+Required: a TypeScript monorepo with a packages root (`src/packages/` or `packages/`).
 
-The public surface is the package's **root files**, not one designated `index.ts`. By convention implementation lives in `lib/` and tests in `tests/`, giving every package the same two-folder shape. The rule itself is general, though: *anything* in *any* subfolder is private, so you never extend the config to add a folder.
+Optional: the preferred packages root if the repo has a different convention.
 
-Four rules, all `error`:
+## Procedure
 
-1. **Entry-point boundary**: code outside a package (app code or another package) may import only that package's entry points (its root files), never anything in its subfolders.
-2. **Intra-package freedom**: a package's own files import each other freely.
-3. **Tests through the entry points**: files under `<pkg>/tests/` may import any package's entry points and their own `tests/` fixtures, but never any package's subfolder internals (not even their own). Integration tests across packages are fine; deep imports are not.
-4. **No cycles**: no dependency cycles.
+1. **Detect the environment.** Identify the package manager: `pnpm-lock.yaml` → pnpm, `yarn.lock` → yarn, `bun.lock` or `bun.lockb` → bun, else npm. Identify the packages root: use `src/packages` if `src/` exists, else `packages`. Check for an existing `.dependency-cruiser.*` config file.
 
-**Entry points, not a barrel.** Because the public surface is *every* root file, a package can expose several small entry points (`index.ts`, `client.ts`, `server.ts`) instead of funnelling everything through one giant `index.ts`. Barrel files that re-export a whole subtree are discouraged: keep entry points small and hide implementation in subfolders.
+2. **Install dependency-cruiser.** Add `dependency-cruiser` as a devDependency using the detected package manager.
 
-Layering (which packages may depend on which) is a *different* concern and is left as a commented stub in the config for this repo to fill in.
+3. **Write the config.** Write `.dependency-cruiser.cjs` to the repo root with these four error-level forbidden rules:
 
-## Steps
+   - `entrypoint-boundary-from-app`: importers outside any package (`pathNot: ^PACKAGES_ROOT/`) may not reach `PACKAGES_ROOT/[^/]+/[^/]+/` (subfolder internals).
+   - `entrypoint-boundary-across-packages`: importers inside a package but not in its `tests/` folder may reach other packages' subfolder internals only if not cross-package; same-package internals are allowed (intra-package freedom).
+   - `tests-through-entrypoints`: importers in `PACKAGES_ROOT/([^/]+)/tests/` may reach subfolder internals of any package except their own `tests/` fixtures.
+   - `no-circular`: no dependency cycles.
 
-### 1. Detect the environment
+   Set `PACKAGES_ROOT` to the detected root (e.g. `src/packages`). Use `.cjs` (not `.js`) for compatibility with `"type": "module"` repos. The rules are path-depth based and extension-agnostic; the `PACKAGES_ROOT` constant is the only thing to adapt.
 
-- **Package manager:** `pnpm-lock.yaml` → pnpm, `yarn.lock` → yarn, `bun.lockb` → bun, else npm. Use it for every command below (`pnpm`/`yarn`/`npm run`/`bunx`).
-- **Packages root:** if `src/` exists use `src/packages`, else `packages`. Confirm the choice with the user if the repo already has a different obvious convention.
-- **Existing config:** check for a `.dependency-cruiser.*` file. If one exists, do **not** overwrite it: merge the four rules and the options in, and tell the user what you added.
+4. **Wire the lint script.** Add a `lint:boundaries` npm script: `depcruise <packages-root>`. Fold it into the existing umbrella check command (e.g. `check`, `ci`, `validate`). Do not touch tsconfig or add path aliases. If no umbrella script exists, add `lint:boundaries` and instruct the user to include it in CI.
 
-**Done when:** package manager, packages root, and existing-config status are all known.
+5. **Scaffold the example package.** Create `<packages-root>/example/` with: `index.ts` exporting a function that delegates to an internal file; `lib/impl.ts` in a subfolder, imported by `index.ts`; `tests/example.test.ts` importing only `../index` and asserting on the public function. Mark it as a copy-me template.
 
-### 2. Install dependency-cruiser
+6. **Prove the rules bite.** Run `lint:boundaries`: it must pass. Temporarily add a deep import to `tests/example.test.ts` (e.g. `import { thing } from "../lib/impl"`). Run `lint:boundaries`: it must fail with `tests-through-entrypoints`. Revert the deep import. Run once more: it must pass. If step 2 does not fail, the rules are not wired correctly; fix before finishing.
 
-Install `dependency-cruiser` as a devDependency with the detected package manager.
+7. **Document the convention.** Write `<packages-root>/README.md` covering: the `<name>/` layout (entry points at root, `lib/` for implementation, `tests/` for tests), the four boundary rules, how to run `lint:boundaries`, and an explicit warning against barrel files. Add one line to the repo's `CLAUDE.md` or `AGENTS.md` (create if absent): `Packages are deep modules: see [src/packages/README.md](./src/packages/README.md) before adding or importing one.`
 
-**Done when:** `dependency-cruiser` is in `devDependencies`.
+## Failure and recovery
+| Failure class | Condition | Result |
+|---|---|---|
+| `existing-config` | `.dependency-cruiser.*` already exists | Merge the four forbidden rules and options into it; report what was added |
+| `package-manager-unknown` | No lockfile detected and no explicit preference | Ask the user which package manager to use |
+| `step-2-does-not-fail` | Deep import does not trigger a lint:boundaries error | Config rules are incorrect; inspect and fix the regex patterns before continuing |
+| `example-does-not-pass` | Clean example produces lint errors | Package layout or config is wrong; do not proceed until the clean example passes |
 
-### 3. Write the config
+## Output
+- `.dependency-cruiser.cjs` written to repo root with the four forbidden rules.
+- `lint:boundaries` script added to `package.json` and folded into the umbrella check.
+- `<packages-root>/example/` committed as a starter template.
+- `<packages-root>/README.md` and AGENTS.md/CLAUDE.md pointer created.
+- Done predicate confirmed: pass → fail (deep import) → pass (after revert).
 
-Copy [`references/dependency-cruiser.config.cjs`](references/dependency-cruiser.config.cjs) to the repo root as `.dependency-cruiser.cjs`. Set `PACKAGES_ROOT` to the root detected in step 1. The rules are path-depth based and extension-agnostic, so nothing else needs adapting.
+## Provenance
 
-**Done when:** `.dependency-cruiser.cjs` exists with the correct `PACKAGES_ROOT`, and the four forbidden rules are present.
+Origin: `odin-current` (project-owned).
 
-### 4. Wire it into the checks
-
-- Add a `lint:boundaries` script: `depcruise <packages-root>` (or `depcruise src`).
-- Fold it into the repo's umbrella check command (the one that already runs typecheck, e.g. a `check` / `ci` / `validate` script). Do **not** touch `tsconfig` or add path aliases.
-- If there is no umbrella script, add `lint:boundaries` and tell the user to include it in CI.
-
-**Done when:** `lint:boundaries` exists and runs as part of the same command as typecheck.
-
-### 5. Scaffold the example package
-
-Create a committed `<packages-root>/example/` as a copy-me template:
-
-- `index.ts`: an entry point. Export one function that delegates to an internal file (so the package is visibly *deep*, not a pass-through).
-- `lib/impl.ts`: an internal file in a **subfolder**, imported by `index.ts`, not reachable from outside.
-- `tests/example.test.ts`: imports **only** `../index` (an entry point), and asserts against the public function.
-
-Tell the user this is a starter template to copy or delete.
-
-**Done when:** the example package exists, exposes its behaviour through a root entry point, and hides `impl` in a subfolder.
-
-### 6. Prove the rules bite
-
-This is the completion criterion for the whole skill: a config that doesn't fail on a violation is worthless.
-
-1. Run `lint:boundaries`. It must **pass** on the clean example.
-2. Temporarily add a deep import to `tests/example.test.ts` (e.g. `import { thing } from "../lib/impl"`). Run `lint:boundaries` again: it must **fail** with `tests-through-entrypoints`.
-3. Revert the deep import. Run once more: it must **pass**.
-
-**Done when:** you have observed a pass, then a fail on the deep import, then a pass again. If step 2 does not fail, the rules are not wired correctly; fix before finishing.
-
-### 7. Document the convention
-
-Write a `README.md` **in the packages folder** (`<packages-root>/README.md`), next to the packages it governs, covering: the `src/packages/<name>/` layout (entry points at the root, `lib/` for implementation, `tests/` for tests), "import only through a package's entry points (its root files)", and how to run `lint:boundaries`. **Discourage barrel files** explicitly: expose several small entry points instead of re-exporting a whole subtree through one index. Keep it to the copy-me snippet plus the four rules in one paragraph each.
-
-Then add a **context pointer** to it from the repo's agent-instructions file: `CLAUDE.md` if present, else `AGENTS.md` (create `AGENTS.md` if neither exists). One line is enough, e.g. `Packages are deep modules — see [src/packages/README.md](./src/packages/README.md) before adding or importing one.` This is what makes an agent discover the boundary rule instead of tripping over it.
-
-**Done when:** `<packages-root>/README.md` exists and discourages barrels, and the repo's `CLAUDE.md`/`AGENTS.md` links to it.
-
-## Notes
-
-- The config's `$1` back-references (dependency-cruiser's group matching) are what let a package reach its own internals while outsiders can't; don't flatten them into separate per-package rules.
-- Public vs private is decided by **depth**: a package's root files are entry points; anything in a subfolder is private. The conventional subfolders are `lib/` (implementation) and `tests/`, but the rule doesn't hardcode them, so any subfolder is private and a new folder never needs a config change. Adding an entry point is just adding a root file; no barrel.
-- Packages are **flat**: one tier of immediate children under the root. A package's internals may nest as deep as you like; a package may not contain another package.
-- Use `.cjs` (not `.js`) so the config's `module.exports` works even in `"type": "module"` repos.
+Adaptation: clean-room implementation of the dependency-cruiser deep-module boundary workflow. The four forbidden rules, path-depth based private/public distinction, intra-package freedom via `$1` back-reference, and three-step bite proof are preserved from the source mechanism. Written for the ODIN 2.0 Skill Foundry literal authoring contract.

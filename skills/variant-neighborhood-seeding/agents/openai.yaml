@@ -1,0 +1,3 @@
+interface:
+  display_name: "Variant Neighborhood Seeding"
+  short_description: "Seed variant analysis with ranked graph-derived review targets"

@@ -1,0 +1,47 @@
+---
+name: create-learning-path
+description: 'Use when asked to create a multi-session learning plan. Returns a milestoned plan, practice, and review rubric. Don''t use for tasks that require source or remote-system changes.'
+---
+
+# Create learning path
+
+## Contract
+
+| Field | Bound contract |
+|---|---|
+| Trigger | Create a multi-session learning plan. |
+| Authority | Read-only; author a plan as a conversation artifact. No file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Side effect | Conversation artifact only. |
+| Done | Milestoned plan, practice, and review rubric returned. |
+
+## Inputs
+
+Required from the learner:
+- Learning goal: the skill or topic to master.
+- Current level: what the learner already knows or can do.
+
+Optional, request if absent:
+- Session count or total time budget.
+- Session length and cadence.
+- Constraints (materials, deadlines, prior gaps).
+
+## Procedure
+
+1. Collect the required inputs and any optional inputs the learner supplies. Ask for missing required inputs before proceeding; do not invent them.
+2. Decompose the goal into ordered milestones, each a demonstrable capability, sequenced so no milestone depends on a later one.
+3. Map milestones onto the available sessions, respecting the session count, length, and cadence. If no budget is given, propose a default and label it as proposed.
+4. For each milestone, define one practice exercise that produces observable evidence the milestone was reached.
+5. Define a review rubric: for each milestone, the criteria that distinguish not-yet, partial, and met, so the learner can self-assess.
+6. Return the plan, practice, and rubric as a single conversation artifact.
+
+## Failure and recovery
+- Missing required input: stop and request it; do not fabricate a goal or level.
+- Goal too broad for the stated budget: report the mismatch, propose a narrowed scope, and let the learner confirm before continuing. Do not silently widen the budget.
+- No recovery action mutates files, credentials, or remote state. A partial result is returned only as an explicit incomplete plan with the missing milestone or rubric named.
+
+## Output
+A conversation artifact containing: ordered milestones mapped to sessions, one practice exercise per milestone, and a review rubric with not-yet, partial, and met criteria per milestone.
+
+## Provenance
+
+Origin: cursor/plugins, path teaching/skills/create-learning-path/SKILL.md, revision 68836ddaf5697224520f1847d90cdb90ca8babaa. License: MIT, declared by the cursor/plugins root README and the candidate plugin manifest. Adaptation: clean-room rewrite preserving the learner-input-driven plan-authoring mechanism; no third-party expression copied.

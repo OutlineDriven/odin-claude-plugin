@@ -1,0 +1,3 @@
+interface:
+  display_name: "Verify This"
+  short_description: "Test a claim with baseline/treatment proof and classify it"

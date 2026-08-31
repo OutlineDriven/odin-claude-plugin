@@ -1,19 +1,19 @@
-# Observability Checklist
+# Observability checklist
 
 Quick reference for instrumenting production code. Use alongside the `observability` skill.
 
-## Table of Contents
+## Table of contents
 
-- [On-Call Questions (Start Here)](#on-call-questions-start-here)
-- [Structured Logging](#structured-logging)
+- [On-call questions (start here)](#on-call-questions-start-here)
+- [Structured logging](#structured-logging)
 - [Metrics](#metrics)
-- [Distributed Tracing](#distributed-tracing)
+- [Distributed tracing](#distributed-tracing)
 - [Alerting](#alerting)
 - [Dashboards](#dashboards)
-- [Verify the Telemetry](#verify-the-telemetry)
-- [Pre-Launch Gate](#pre-launch-gate)
+- [Verify the telemetry](#verify-the-telemetry)
+- [Pre-launch gate](#pre-launch-gate)
 
-## On-Call Questions (Start Here)
+## On-call questions (start here)
 
 Telemetry without a question is noise. Before instrumenting anything:
 
@@ -21,7 +21,7 @@ Telemetry without a question is noise. Before instrumenting anything:
 - [ ] Every signal below maps to one of those questions
 - [ ] Each question is matched to the right signal type: metrics say **that** something is wrong, traces say **where**, logs say **why**
 
-## Structured Logging
+## Structured logging
 
 - [ ] Logs are structured (JSON) with stable event names — not free-form strings
 - [ ] Every log line carries a correlation/request ID, generated or accepted at the system boundary
@@ -42,7 +42,7 @@ Telemetry without a question is noise. Before instrumenting anything:
 - [ ] Status codes grouped by class (`5xx`, not `503`)
 - [ ] Queue depth and processing duration tracked for every worker/queue
 
-## Distributed Tracing
+## Distributed tracing
 
 - [ ] OpenTelemetry (or equivalent) initialized at service startup, before other imports
 - [ ] Auto-instrumentation enabled for HTTP, gRPC, and DB clients
@@ -69,7 +69,7 @@ Telemetry without a question is noise. Before instrumenting anything:
 - [ ] Dashboard answers the on-call questions from the top of this checklist — not "everything except the answer"
 - [ ] Default time range is sensible (1h–6h, not 30d)
 
-## Verify the Telemetry
+## Verify the telemetry
 
 Instrumentation is code; it can be wrong:
 
@@ -78,7 +78,7 @@ Instrumentation is code; it can be wrong:
 - [ ] Followed one request end-to-end in the tracing UI → no broken spans
 - [ ] An induced failure was diagnosed from telemetry alone, without reading the source
 
-## Pre-Launch Gate
+## Pre-launch gate
 
 Before a feature ships to production, all of the following are true:
 

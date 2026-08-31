@@ -15,7 +15,7 @@ This file is loaded only via the SKILL.md routing table — per-locale reference
 
 ## 2. Posture
 
-Direction-shaping, not tutorial. Surface the rules a CJK surface has to commit to before a single line of CSS lands; the per-locale fan-out below carries the production trend depth (DS landscape, studios, glyph specifics). Load this file when content is CJK in any flavor; route into a single locale file when the surface is single-locale.
+Direction-shaping, not tutorial. Surface the rules a CJK surface has to commit to before a single line of CSS lands; the per-locale fan-out below carries the production trend depth (DS market, studios, glyph specifics). Load this file when content is CJK in any flavor; route into a single locale file when the surface is single-locale.
 
 ## 3. Locale tagging
 

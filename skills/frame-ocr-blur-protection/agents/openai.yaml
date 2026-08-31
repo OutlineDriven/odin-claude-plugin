@@ -1,0 +1,3 @@
+interface:
+  display_name: "Frame OCR Blur Protection"
+  short_description: "Redact sensitive values in raster frames via fail-closed OCR"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Automatic Cybernetic Flow Design"
+  short_description: "Produce a cybernetic flow design for an interactive system."

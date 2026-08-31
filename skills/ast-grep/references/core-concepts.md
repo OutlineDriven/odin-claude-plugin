@@ -1,6 +1,6 @@
-# Core Concepts
+# Core concepts
 
-Understanding how ast-grep matches code requires knowing a few key concepts about the underlying Tree-sitter parser and ast-grep's matching algorithms.
+A few concepts from the underlying Tree-sitter parser explain how ast-grep matches code.
 
 ## AST vs CST
 
@@ -9,7 +9,7 @@ Understanding how ast-grep matches code requires knowing a few key concepts abou
 
 ast-grep uses **CST** for matching by default (via the `smart` algorithm) but can be configured to use AST-level matching.
 
-## Named vs Unnamed Nodes
+## Named vs unnamed nodes
 
 Tree-sitter distinguishes between:
 - **Named Nodes**: Have a specific `kind` (e.g., `identifier`, `function_declaration`). Usually important.
@@ -17,7 +17,7 @@ Tree-sitter distinguishes between:
 
 **Note**: Meta-variables (e.g., `$VAR`) match **only named nodes** by default. Use double-dollar `$$VAR` to match unnamed nodes as well.
 
-## Kind vs Field
+## Kind vs field
 
 - **Kind**: The type of the node itself (e.g., `binary_expression`, `string_literal`).
 - **Field**: The role of a node relative to its parent (e.g., `lhs`, `rhs` in a binary expression, or `key`, `value` in a pair).
@@ -31,7 +31,7 @@ rule:
     kind: pair
 ```
 
-## Matching Algorithms (Strictness)
+## Matching algorithms (strictness)
 
 ast-grep offers different "strictness" levels for matching patterns.
 
@@ -43,7 +43,7 @@ ast-grep offers different "strictness" levels for matching patterns.
 | `relaxed` | Like `ast` but also ignores comments. | |
 | `signature` | Matches only named node **kinds**. | Ignores text content (identifiers, literals). |
 
-### Configuring Strictness
+### Configuring strictness
 
 **CLI**:
 ```bash

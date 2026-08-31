@@ -1,190 +1,52 @@
 ---
 name: duet
-description: Use when the user invokes /duet, says "pair with me", or faces aesthetic, architectural, or irreversible decisions.
+description: 'Use when the user invokes /duet, says "pair on this", or faces aesthetic, architectural, or irreversible decisions. Surfaces every genuine fork as a user pick at the moment of decision so no review-bottleneck diff is produced and every irreversible checkpoint is asked. Don''t use for tasks that require source or remote-system changes.'
 ---
 
 # Duet
 
-Two-party working posture: **user is the director, agent is the executor.**
+## Contract
 
-## Why this exists
-
-Working with agents has two chronic failure modes:
-
-1. **Review bottleneck**: the agent does everything, the user becomes a reviewer of a giant diff at the end. Review is slow, exhausting, and frequently misses things the user would have caught at the moment of the choice.
-2. **Codebase-understanding debt**: when the agent silently picks architecture, libraries, boundaries, and names on the user's behalf, the user ends up *owning code they do not understand*. The debt compounds: every future change requires the user to re-learn what the agent decided for them.
-
-Duet addresses both by surfacing every genuine fork as a pick, in plain structural language, at the moment of the decision. Review gets distributed across the task; there is no giant diff at the end because every call was already consented to. And because the *user* picked, the user *remembers*; the mental model is built as the code is built, not reconstructed afterward.
-
-This is the load-bearing principle. Everything below is mechanics.
-
-## Role inversion
-
-- **Agent** → executor. Carries the jargon, the tooling, the syntax, the plumbing, the reading of unfamiliar code. Translates a technical surface into a small set of human-picksable options.
-- **User** → director. Makes every call on scope, boundaries, taste, naming-that-will-be-read-often, architecture, and anything irreversible.
-
-The agent's value-add is **compression**: turning a technical surface the user doesn't want to carry into a decision the user *does* want to carry.
-
-## Antipatterns and shape discipline [LOAD-BEARING]
-
-**Never use `multiSelect` for axis-with-default override semantics.** The "rarely has to type" objective is satisfied by N per-axis single-select questions with `(Recommended)` first. Never collapse N axes into one multi-pick checklist.
-
-## VS-gated question protocol [MANDATORY]
-
-Run VS + falsifier protocol before every `AskUserQuestion` fire (Phase 1, Phase 2, Phase 3). `askme` defines the base VS + falsifier format; what follows is duet's deltas from it only:
-
-- **Format (compressed visible):** Render numbered survivors with weights only; no falsifier block:
-  ```
-  VS (N→M):
-  1. [Weight: 0.42] <hypothesis>
-  2. [Weight: 0.28] <hypothesis>
-  ```
-- **Phase 2 short-circuit:** Exactly 1 survivor → skip the `AskUserQuestion`, execute silently.
-- **Phase 1 & Phase 3 exception:** Always fire `AskUserQuestion` regardless of survivor count; no short-circuit. Phase 1 needs scope/intent confirmation; Phase 3 needs explicit user consent.
-- **Cap:** >4 survivors → keep top-ranked (Recommended) + 3 most structurally distinct.
-- **Position:** VS block immediately precedes the `AskUserQuestion` call.
-
-## When it applies
-
-Active from invocation or a trigger phrase until the user disengages ("go ahead on your own now", "full autonomy", "/duet off").
-
-Applies to:
-- **Every genuine fork** (≥ 2 defensible paths with different downstream implications).
-- **Every taste choice** (layout, density, naming, tone, error surface, directory shape, public API shape).
-
-Does **not** apply to:
-- Pure mechanics: syntax, import order, boilerplate, obvious bug fixes, test scaffolding, repo-conventional choices (follow existing pattern silently *unless* the pattern itself is the fork).
-
-## The three-phase loop
-
-### Phase 1: Intent elicitation (adaptive)
-
-Before firing the elicitation batch, run the VS-gated question protocol (above) at askme's baseline tier; escalate to high-risk or architectural per askme's tier rules if the prompt warrants.
-
-At task start, fire one `AskUserQuestion` batch with up to 4 **single-select** questions covering the orthogonal axes that have defensible alternatives for this prompt (typically Scope, Goal, Constraint, Pattern; pick whichever 2-4 actually have plausible alternatives):
-
-- Each axis is its own single-select question with 2-4 plausible concrete options
-- One option per axis carries `(Recommended)` in its label with a one-sentence rationale
-- Options must cover the defensible space; every option is a concrete pick, never a "default stands" placeholder
-- Structural/taste framing first; jargon in parens on first mention
-- If an axis has only one defensible value, drop the question entirely; that's not a real fork
-
-The auto-provided `Other` free-text escape covers anything outside the listed options; do not add an explicit "you pick" option.
-
-Keep it to one batch. Deepen with a second batch *only if* the answers reveal real ambiguity or surface a new axis. If the task is already clearly scoped in the user's prompt, skip straight to Phase 2.
-
-Use previews when the choice is visual: file-tree shapes, architecture sketches, config variants. Previews are single-select only (tool constraint), which fits this protocol natively.
-
-**Example shape (one batched fire, two axes shown):**
-
-> **Q1: Scope** (single-select)
-> - Touch only the files named in the prompt *(Recommended: minimum diff, lowest blast radius)*
-> - Touch named files plus their direct importers
-> - Touch the whole module the named files live in
->
-> **Q2: Goal** (single-select)
-> - Minimal diff that satisfies the request *(Recommended: prefer delete over edit, edit over add)*
-> - Refactor the surrounding code while we're here
-> - Add new behavior in addition to the request
-
-### Phase 2: Execution with fork-surfacing
-
-For every fork encountered during work:
-
-1. Run the VS-gated question protocol (above) to generate candidates. Survivors become the defensible paths (2-4, capped per the protocol). If exactly 1 survives, skip the fork.
-2. Frame each in **structural or taste terms first**: what it means for the outcome (shape, boundary, surface, density). Put the technical term in parens on first mention; drop it thereafter.
-3. Mark one option `(Recommended)` with a one-sentence rationale. Users can override; the recommendation is a default, not a verdict. If no defensible one-sentence rationale comes to mind, the choice isn't a real fork; execute the default silently and skip the question entirely.
-4. Attach a **concrete preview** if comparison is visual (ASCII layout, code diff ≤ 20 lines, directory tree, config snippet).
-5. Batch related decisions into one `AskUserQuestion` fire, so the user can see them together.
-6. Option lists must cover the defensible space. If you expect `Other` to be a realistic pick for more than ~10% of users on this prompt, the list is incomplete; add the missing option before firing.
-
-Between forks, execute quietly. The user does not need narration of mechanics.
-
-### Phase 3: Irreversible checkpoints
-
-Before any of these: **ask.**
-
-- `git push`, `git reset --hard`, `git rebase` on shared branches
-- `rm`, destructive migrations, dropping a table
-- Paid API calls, external emails, deployments
-- Multi-file rewrites (> 5 files) or any refactor that would produce a review-bottleneck diff
-
-The checkpoint question is not a fork: it's a confirmation. Still uses `AskUserQuestion` so the user can say "hold, let me look first."
-
-Checkpoint confirmations also run the VS-gated protocol at askme's high-risk tier. A binary yes/hold question may still surface "hold and verify X first" as a candidate; that is exactly what the higher tier is for.
-
-## Fork taxonomy
-
-| Counts as a fork (surface it) | Does NOT count (do it) |
+| Field | Bound contract |
 |---|---|
-| Name of a public function, route, DB column, CLI flag | Local variable names, loop indices, private helper names |
-| Library or framework choice | Import order, alias conventions |
-| Auth scheme, storage engine, sync vs async | Syntax, brace placement, trailing commas |
-| Error surface (throw vs Result vs log-and-continue) | Matching an error pattern already used in the file |
-| Directory shape, module split boundaries | Filename casing that matches the repo's existing convention |
-| Layout density, component granularity | CSS utility vs inline when the repo has one convention |
-| Tone of user-facing copy | Punctuation/spacing of copy |
-| Irreversible action (push, migration, rm) | Reversible action (local edit, new test file) |
+| Trigger | /duet, "pair with me", or facing aesthetic, architectural, or irreversible decisions |
+| Authority | Read-only. Emits AskUserQuestion batches and fork picks in chat only; does not itself mutate files, VCS, credentials, paid actions, or remote state. Consent obtained through duet gates the agent's separate execution; irreversible actions are asked, not taken. |
+| Side effect | AskUserQuestion batches and fork picks in chat; asks before irreversible actions; retains agreed architecture on disengage |
+| Done | Every real fork consented before execution, no review-bottleneck diff produced, irreversible checkpoints asked, picks retained on disengagement |
 
-When in doubt: **does a second defensible path exist?** If yes, surface it. If no, do it.
+## Inputs
 
-## Presentation protocol
+The user's task prompt or current work context. Optional: a stated fork threshold (default — surface a fork only if a wrong pick would cost more than 10 minutes to unwind). The agent reads the working surface to frame forks; no file or repo mutation is required to run the protocol.
 
-Every option follows this shape:
+## Procedure
 
-```
-<Label: structural/taste framing> (jargon-in-parens, first mention only)
-<Description: what it means for the outcome. Include rationale trade-off.>
-```
+1. Enter duet on invocation or trigger phrase and remain active until the user disengages ("go ahead on your own", "full autonomy", "you drive from here", "/duet off", or similar).
+2. Hold the posture: the user is the director — makes every call on scope, boundaries, taste, naming-that-will-be-read-often, architecture, and anything irreversible; the agent is the executor — carries the jargon, tooling, syntax, plumbing, and reading of unfamiliar code, and whose value-add is compression: turning a technical surface the user does not want to carry into a decision the user does want to carry.
+3. Define a fork: at least 2 defensible paths with different downstream implications, or any taste choice (layout, density, naming, tone, error surface, directory shape, public API shape). Counts as a fork: name of a public function/route/DB column/CLI flag; library or framework choice; auth scheme, storage engine, sync vs async; error surface (throw vs Result vs log-and-continue); directory shape or module split boundary; layout density or component granularity; tone of user-facing copy; any irreversible action. Does NOT count as a fork: local variable names, loop indices, private helper names; import order, alias conventions; syntax, brace placement, trailing commas; matching an error pattern already used in the file; filename casing that matches the repo convention; CSS utility vs inline when the repo has one convention; punctuation/spacing of copy; reversible local actions. When in doubt: does a second defensible path exist? If yes, surface it; if no, do it.
+4. Before every question fire, run the VS-gated protocol: generate the defensible candidate paths, weight each by how well it survives a falsification pass (would a downstream consequence invalidate it?), drop falsified or weak ones, and keep the survivors as numbered weighted hypotheses placed immediately before the question call. Cap: more than 4 survivors → keep the top-ranked plus the 3 most structurally distinct.
+5. Phase 1 — Intent elicitation. At task start, fire one AskUserQuestion batch of up to 4 single-select questions, one per orthogonal axis that has defensible alternatives (typically Scope, Goal, Constraint, Pattern; pick the 2-4 that actually have plausible alternatives). Each axis is its own single-select question with 2-4 concrete options; one option per axis carries (Recommended) first with a one-sentence rationale; drop any axis with only one defensible value. Always fire Phase 1 regardless of survivor count. Deepen with a second batch only if answers reveal real ambiguity or a new axis; if the prompt is already clearly scoped, skip to Phase 2. Use previews (file-tree shapes, architecture sketches, config variants) when the choice is visual.
+6. Phase 2 — Execution with fork-surfacing. Between forks, execute quietly under the agent's default authority; the user does not need narration of mechanics. For each fork encountered: run the VS-gated protocol (step 4); if exactly 1 survivor, skip the question and execute that path silently. Otherwise frame each survivor in structural or taste terms first — what it means for the outcome (shape, boundary, surface, density) — with the technical term in parens on first mention only; mark one option (Recommended) with a one-sentence rationale (if no defensible one-sentence rationale comes to mind, the choice is not a real fork — execute the default silently and skip); attach a concrete preview (ASCII layout, code diff ≤ 20 lines, directory tree, config snippet) when comparison is visual; batch related forks into one fire; ensure option lists cover the defensible space (if the auto-provided Other free-text escape would be a realistic pick for more than ~10% of users, add the missing option before firing).
+7. Phase 3 — Irreversible checkpoints. Before any git push, git reset --hard, git rebase on shared branches, rm, destructive migration, dropping a table, paid API call, external email, deployment, multi-file rewrite (> 5 files), or any refactor that would produce a review-bottleneck diff — ask. The checkpoint is a confirmation, not a fork, but still uses AskUserQuestion so the user can say "hold, let me look first." Run the VS-gated protocol at the high-risk tier; a binary yes/hold question may surface "hold and verify X first" as a candidate.
+8. Present every option in this shape: <Label: structural or taste framing> (jargon-in-parens, first mention only) then <Description: what it means for the outcome, with the trade-off>. One option carries (Recommended) in its label with a less-than-one-sentence why. Reframe jargon to structure (e.g., "Use ACID transactions" → "Keep the data in one place"; "Implement eventual consistency" → "Cache and accept some staleness").
+9. Batch by default: per-axis single-select, up to 4 questions in one fire, one user round-trip. Never use multiSelect for axis-with-default override semantics — that is satisfied by N per-axis single-selects with (Recommended) first; never collapse N axes into one multi-pick checklist. Reserve multiSelect for additive picks only (feature toggles, optional sub-tasks, any list where ticking multiple items is the natural shape). Previews require single-select, which the default already satisfies. Never batch across a dependency: if Q2's viable options depend on Q1's answer, split into separate fires; if mid-batch Q2's answer invalidates Q1, re-ask only the affected decision.
+10. Honor the AskUserQuestion contract. Per fire: a questions array of 1-4 rendered as one batched UI, one user round-trip. Per question: question (full sentence ending in ?), header (chip label ≤ 12 characters), multiSelect (bool, default false — false is single-pick mutually exclusive, true is additive subset), options (2-4). Per option: label (1-5 words; append (Recommended) to the recommended choice and place it first), description (one-sentence trade-off/consequence rationale), preview (optional rendered content, single-select only — use for visual comparisons, skip when the difference is purely conceptual). Free-text "Other" is auto-provided on every question — never add an explicit "Other" option; free-text notes go in the annotations response field. Use this tool only to clarify requirements or choose between approaches during planning — not "Is the plan ready?" or "Should I proceed?" (that is what an exit-plan-mode action is for). The shape — per-axis single-select with one Recommended — is what the protocol depends on; where a harness exposes only single-question prompts, fire them sequentially in the dependency order above, and map (Recommended) and multiSelect to that harness's equivalent conventions.
+11. On disengagement, return to default autonomy but retain all picks made during duet as load-bearing architectural decisions.
 
-One option carries `(Recommended)` in its label with a < 1-sentence why.
+## Failure and recovery
+- Rubber-stamping (user accepts (Recommended) twice in a row without engaging): coarsen — ask fewer, bigger-stakes questions and raise the fork threshold so only picks costing more than 10 minutes to unwind surface.
+- Answer fatigue (too many batches in a row): batch related forks into one fire (up to 4 single-select questions) and raise the fork threshold to more than 10 minutes to unwind.
+- Intra-batch conflict (Q2's answer invalidates Q1): detect before executing and re-ask only the affected decision.
+- "You decide" as a blanket response: take the (Recommended) option and state explicitly in the next response what was picked and why, so the user can still course-correct.
+- Long refactor (50+ files): checkpoint per module, not per file; bundle fork decisions at module boundaries; show a running tree-diff so the review debt stays visible.
+- Repo-conventioned choice disguised as a fork: if the repo has one obvious convention, follow it silently; only surface if deviating would be defensible.
+- Mode drift across a long session: at each Phase 3 checkpoint, briefly re-anchor ("Still in duet. Next up: X, Y, Z. Any of these want more input?").
+- Non-mutation rule: duet does not mutate. Never generate a giant diff and then ask the user to approve — that is the review-bottleneck; if a change would produce one, pause, split, and surface forks before writing. If consent is missing for an irreversible action, stop and ask rather than proceed.
+- Partial-result rule: picks made so far are retained; an unanswered checkpoint leaves that action unperformed.
+- Blocked result: if the user disengages mid-fork without picking, execute the (Recommended) path under default autonomy only after stating the pick and why; if no defensible recommendation exists, leave the fork unresolved and report it.
 
-**Example: good**
-> **Keep the data in one place** (single source of truth, strong consistency) *(Recommended: simpler, fewer edge cases)*
-> Everything lives in the main DB. Writes are slower under load, but you never see stale reads.
->
-> **Cache and accept some staleness** (eventual consistency via Redis)
-> Reads are faster. You'll occasionally see data a few seconds behind reality; fine for dashboards, not for balances.
+## Output
+A sequence of consented fork picks and checkpoint confirmations emitted as AskUserQuestion batches in chat, with no review-bottleneck diff produced. On disengagement, the retained set of picks constitutes the agreed architecture. Each fork ends in one terminal classification: consented-pick, executed-silently (single survivor or non-fork), or blocked (irreversible action lacking consent).
 
-**Example: bad (reframe from jargon to structure)**
-> ~~"Use ACID transactions"~~ → "Keep the data in one place"
-> ~~"Implement eventual consistency"~~ → "Cache and accept some staleness"
+## Provenance
 
-## Batching rules
-
-- **Default: per-axis single-select, batched.** Each orthogonal axis is its own `multiSelect: false` question; bundle up to 4 questions in one `AskUserQuestion` fire. The user picks one concrete option per axis, sees them all in one round-trip, and the agent's `(Recommended)` carries each axis's recommendation explicitly.
-- Reserve `multiSelect` for **additive picks only**: feature toggles, optional sub-tasks, or any list where ticking multiple items is the natural shape (e.g., "which checks should run before commit?").
-- Previews require `multiSelect: false`; the per-axis single-select default already satisfies the tool constraint, so attach previews freely when comparison is visual.
-- **Never batch across a dependency**: if Q2's viable options depend on Q1's answer, split them into separate fires.
-- If you detect mid-batch that Q2's answer invalidates Q1, re-ask only the affected decision; don't re-ask the whole batch.
-
-## Failure modes and antidotes
-
-| Failure | Antidote |
-|---|---|
-| **Rubber-stamping**: user accepts `(Recommended)` twice in a row without engaging | Coarsen: ask fewer, bigger-stakes questions; raise the fork threshold so only > 10-min-to-unwind picks surface. The auto-provided `Other` free-text escape remains for users who want to override silently. |
-| **Answer fatigue**: too many batches in a row | Batch related forks into one `AskUserQuestion` fire (up to 4 single-select questions). Raise the fork threshold: only surface if a wrong pick would cost > 10 minutes to unwind. |
-| **Intra-batch conflict**: Q2's answer invalidates Q1 | Detect before executing; re-ask only affected decisions. |
-| **"You decide"** as a blanket response | Take the `(Recommended)` option, state *explicitly* in the next response what was picked and why, so the user can still course-correct. |
-| **Long refactor (50+ files)** | Checkpoint **per module**, not per file. Bundle fork decisions at module boundaries. Show a running tree-diff so the review debt stays visible. |
-| **Repo-conventioned choice disguised as a fork** | If the repo has one obvious convention, follow it silently. Only surface if deviating would be defensible. |
-| **Mode drift across long session** | At each Phase 3 checkpoint, briefly re-anchor: "Still in duet. Next up: X, Y, Z. Any of these want more input?" |
-
-## Anti-patterns (do not do)
-
-- **Do not** generate a giant diff and then ask the user to approve. That *is* the review-bottleneck. If a change would produce one, pause, split, and surface forks before writing.
-
-## `AskUserQuestion` tool contract (Claude Code reference)
-
-This protocol assumes a single "ask user" tool with the contract in `references/askuserquestion-contract.md`. Other agent harnesses (Codex, Gemini CLI, Aider, OpenAI Assistants, ...) should map their equivalent question/prompt tool to this surface. Field names and numeric limits there are Claude Code's `AskUserQuestion`; the **shape** is what the protocol depends on, and the **`(Recommended)` convention** is what the per-axis pick semantics rest on.
-
-Read `references/askuserquestion-contract.md` when running in Claude Code — it has the exact field-by-field contract (per-fire limits, per-question fields, per-option fields, built-in escapes, the plan-mode caveat). Other harnesses need only the mapping below, not the field-level schema.
-
-**Mapping for other harnesses:**
-- If the harness exposes only single-question prompts, fire them sequentially in the dependency order this protocol prescribes. The *shape* (per-axis single-select with one Recommended) is what matters; batching is an optimization.
-- Map `(Recommended)` to whatever default-marker convention the harness uses; the rationale belongs in the description body either way.
-- Map `multiSelect: true` to whatever multi-pick mechanism the harness exposes; if none, decompose additive picks into N independent single-selects.
-
-## Disengagement
-
-The user leaves duet by saying "go ahead on your own", "full autonomy", "you drive from here", "/duet off", or similar. When disengaged, the agent returns to default autonomy but **retains all picks made during duet**; those are now load-bearing architectural decisions.
+Origin: odin-1.x current skill at skills/duet/SKILL.md (revision untracked; no third-party license — project-owned). Adaptation: folded the references/askuserquestion-contract.md support contract and the cross-skill VS+falsifier deltas into a self-contained procedure; removed motivational prose and all pointers to other skills, support files, and rule files; preserved the collaboration posture, VS-gated question protocol, three-phase loop, fork taxonomy, presentation and batching rules, AskUserQuestion field contract, failure antidotes, and pick-retention on disengage.

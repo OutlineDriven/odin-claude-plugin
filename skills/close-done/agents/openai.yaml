@@ -1,0 +1,3 @@
+interface:
+  display_name: "Close Done"
+  short_description: "Batch-close resolved or outdated tracker items after approval"

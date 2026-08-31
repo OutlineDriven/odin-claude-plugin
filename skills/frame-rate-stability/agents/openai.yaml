@@ -1,0 +1,3 @@
+interface:
+  display_name: "Frame Rate Stability"
+  short_description: "Multi-metric frame-rate stability"

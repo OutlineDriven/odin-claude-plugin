@@ -1,0 +1,3 @@
+interface:
+  display_name: "Deployment Setup"
+  short_description: "Configure and verify a project deployment pipeline"

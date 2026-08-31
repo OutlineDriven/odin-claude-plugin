@@ -1,8 +1,8 @@
-# API Documentation
+# API documentation
 
 For public APIs (REST, GraphQL, library interfaces):
 
-## Inline with Types (Preferred for TypeScript)
+## Inline with types (preferred for TypeScript)
 
 ```typescript
 /**

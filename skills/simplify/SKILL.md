@@ -1,84 +1,88 @@
 ---
 name: simplify
-description: Use when the user says "simplify this diff", or asks for a compression pass over a change-set.
-metadata:
-  short-description: Three-axis compress pass on a diff
+description: 'Use when the user says "simplify this diff", or asks for a compression pass over a change-set. Decomposes the diff into reuse, quality, and efficiency axes; applies validated findings as atomic issue-class commits; auto-reverts any that regress. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Simplify: axis-decomposed compression pass on a diff
 
-A deliberate simplification pass invoked on a specific change-set. Decompose simplification into three axes that fail independently and so can be reviewed independently: **reuse** (what already exists), **quality** (shape of the new code), **efficiency** (cost of the new code). Three parallel read-only review agents, one per axis, emit findings against the same diff; the orchestrator composes, audits, and applies fixes one issue-class per atomic commit.
+## Contract
 
-**Reuse axis** detects new code written where a utility already exists. **Quality axis** detects unnecessary surface (params, state, comments-of-what) and structure without functional cause (wrappers, ladders, copy-paste variants). **Efficiency axis** detects work that need not happen and structure that bloats hot paths. Behavior is preserved, entropy is reduced.
+| Field | Bound contract |
+|---|---|
+| Trigger | User asks to simplify a diff, PR, or branch: "simplify this diff", "tighten up", or "compress a change-set" |
+| Authority | reversible-local: write only named local artifacts (working-tree and VCS commits); rollback via `git revert HEAD --no-edit` |
+| Side effect | Applies simplification survivors as atomic issue-class commits to the working change-set; auto-reverts any commit that regresses |
+| Done | Exit 0: simplification landed as issue-class commits, every fix commit is green, and no new bloat was introduced |
 
-**Axis prompts (verbatim, copy-pasteable):**
-- `references/reuse.md`: Agent 1 prompt, four rules, Graft focus
-- `references/quality.md`: Agent 2 prompt, nine patterns, Excess + Sprawl
-- `references/efficiency.md`: Agent 3 prompt, seven patterns, Excess + Sprawl
-- `references/orchestration.md`: single-message dispatch recipe, composition, Reviewer audit, fix-sequencing
+## Inputs
 
-## Mandates, not suggestions
+Must be supplied:
+- An explicit diff scope or a base ref resolvable from HEAD
 
-1. **Decompose by axis, never by file.** All three agents see the same diff and bring different lenses. Splitting the diff by file across agents defeats the design.
+Optional:
+- User-named files when no git context exists (unborn HEAD or no `.git/`)
 
-## When to Apply
+Derived from the diff:
+- Three parallel read-only review agents (reuse / quality / efficiency), each scoped to the diff
 
-- The user says "simplify this diff / PR / branch", "tighten up", "compress these changes", or asks for an axis-decomposed pass over a change-set.
-- A diff exists and exceeds the trivial threshold (>30 LOC or >2 files): enough surface area for axis decomposition to pay rent.
-- The change just landed and is being compressed before merge.
+## Procedure
 
-## When NOT to Apply
-
-- **Empty diff** after all fallbacks: exit 11, pass-through.
-- **Single file <50 LOC** with an obvious shape problem: just edit directly.
-- **Read-only assessment, no fix authorization**: use `review`.
-- **Fix driven by an external verifier failure or findings file**: use `fix`. `simplify` is self-sourcing.
-
-## Workflow
-
-1. **Phase 1: Detect diff scope.** The diff must capture **all branch state under review**: every commit since the branch diverged from its base, plus staged, plus unstaged. The orchestrator does not guess the base; it resolves an explicit anchor, or errors. Resolve via the first base ref that exists, then run `git diff <base>` (no `..HEAD`, so working-tree changes are included):
+1. **Phase 1: Detect diff scope.** Capture every commit since the branch diverged from its base, plus staged, plus unstaged. Do not guess the base. Resolve via the first base ref that exists, then run `git diff <base>`:
    1. `git merge-base HEAD origin/main`
    2. `git merge-base HEAD origin/master`
    3. `git merge-base HEAD main`
    4. `git merge-base HEAD master`
-   5. `@{upstream}` (the branch's configured upstream tracking ref, full divergence)
+   5. `@{upstream}`
 
-   If none of the five resolve, gate the working-tree-only fallback on **two ordered checks**: first that HEAD exists as a commit at all, then that it has no parent:
-   - **Check A:** `git rev-parse --verify HEAD 2>/dev/null`. If it **fails**, HEAD is unborn (fresh `git init`, no commits yet). Skip `git diff` entirely and fall through to the user-named-files / no-git-context path below. Do not run `git diff HEAD` on an unborn HEAD; it errors and would mask the unborn state.
-   - **Check B:** only if Check A succeeded, run `git rev-parse --verify HEAD^ 2>/dev/null`. If it **fails**, HEAD is the repo's root commit (real commit, no parent), so there is no committed history that could be silently dropped. The entire scope IS the working tree. Use `git diff HEAD`. Surface a one-line note: "scope: working-tree only, on root commit".
-   - **Otherwise:** both checks succeeded, so committed history exists but no base ref resolves to anchor it. **Error explicitly**: print "committed history exists but no base ref resolves (none of origin/main, origin/master, main, master, @{upstream} found); re-invoke with explicit base: `simplify against <ref>`" and abort. Do **not** fall back to `git diff HEAD`. On a local-only `main`/`master`/`trunk`/`develop` with committed work, that would silently drop the committed work, and the scope contract requires capturing every commit since branch divergence plus staged plus unstaged.
+   If none of the five resolve, gate on two ordered checks:
+   - **Check A:** `git rev-parse --verify HEAD 2>/dev/null`. If it fails, HEAD is unborn. Skip `git diff`; fall through to user-named files or no-git-context path.
+   - **Check B:** only if Check A succeeded, `git rev-parse --verify HEAD^ 2>/dev/null`. If it fails, HEAD is the root commit. Use `git diff HEAD`. Surface: "scope: working-tree only, on root commit".
+   - **Otherwise:** committed history exists but no base ref resolves. Print an explicit error and abort. Do not fall back to `git diff HEAD`; that would silently drop committed work.
 
-   If there is no git context at all (no `.git/`), or HEAD is unborn per Check A, fall back to user-named files supplied in the invocation. Empty after all valid resolutions → exit 11. See `references/orchestration.md` for the exact resolution shell snippet and the explicit-base override syntax.
-2. **Phase 2: Dispatch three review agents in one message.** Single tool-call message containing three Agent invocations. Each agent receives `<axis-prompt from references/> + "\n\n---\n\nDIFF:\n" + <captured diff>`. Agents are read-only; no edits, disjoint axes, independence asserted in the spawn message. See `references/orchestration.md` for the concrete dispatch shape.
-3. **Phase 3: Audit, then apply.** Wait for all three. Aggregate findings by `{axis, file, line, issue-class}`; dedupe identical cross-axis findings. Dispatch a Reviewer agent to audit the composed list against completeness / consistency / accuracy / scope; the Reviewer's output is the **validated survivor set**. The orchestrator applies the survivors directly, one issue-class per atomic commit, and drops non-survivors without comment. No re-adjudication in either direction. Re-run repo-native tests after each commit; on red, auto-revert via `git revert HEAD --no-edit`.
+   If no git context or HEAD is unborn, use user-named files supplied in the invocation. Empty after all valid resolutions → exit 11.
 
-## Constitutional Rules (Non-Negotiable)
+   **Explicit-base override:** `simplify against <ref>` bypasses the resolution above and runs `git --no-pager diff "<ref>"` directly.
 
-1. **Behavior preservation is a gate, not a guideline.** A test regression between pre- and post-simplify is an automatic `git revert HEAD --no-edit`. No suppressing the type checker or disabling guards to make tests pass.
-2. **The Reviewer audit is the single adjudication authority.** Review agents emit findings; the Reviewer validates them and returns the survivor set; the orchestrator applies the survivors and drops non-survivors without re-litigation in either direction. Arguing with the Reviewer's survivor set in prose is Excess.
-3. **Three agents in one tool-call message.** The reuse / quality / efficiency agents are independent by construction: same diff, disjoint issue-class subsets, read-only. Sequential dispatch is rejected at the validation gate.
-4. **One issue-class per atomic commit.** Excess-surface fixes, duplication fixes, and structure fixes ride in separate commits per `~/.claude/claude/system-prompt-baseline.md` `<git>` charter "one concern per commit" rule. Mixed-class commits trip exit 15.
-5. **A simplify patch that introduces new bloat is a regression.** Post-commit, audit the patch itself for unneeded surface, duplicated logic, structure without cause, or a broken consumer contract. Any hit → revert and re-plan. If any rule here conflicts with `~/.claude/claude/system-prompt-baseline.md`, the baseline wins.
+2. **Phase 2: Dispatch three review agents in one message.** Issue one tool-call message containing three Agent invocations, never three sequential messages. Each agent receives `<axis-prompt from references/> + "\n\n---\n\nDIFF:\n" + <captured diff>`. All three agents are read-only; disjoint axes; independence asserted in the spawn message:
+   > "Three agents dispatched in parallel. Axes are disjoint by construction: reuse-axis owns Graft (existing-utility detection), quality-axis owns Excess + Sprawl on code shape, efficiency-axis owns Excess + Sprawl on execution cost. All three agents are read-only; none edits files; none reads or writes shared mutable state."
 
-## Validation Gates
+   Agent type: `Explore` (read-only).
 
-| Gate | Pass Criteria | Blocking |
+   Axes:
+   - **reuse** (Agent 1): four rules (REPLACE, DUPLICATE, INLINE-COULD-USE-UTILITY, STDLIB-REIMPLEMENT). Detects new code written where a utility already exists.
+   - **quality** (Agent 2): nine patterns (redundant-state, parameter-sprawl, copy-paste-variation, leaky-abstractions, stringly-typed, redundant-structural-nesting, nested-conditionals, unnecessary-comments, dead-code-unused-imports-exports). Detects unnecessary surface and structure without functional cause.
+   - **efficiency** (Agent 3): seven patterns (unnecessary-work, missed-concurrency, hot-path-bloat, recurring-no-op-updates, unnecessary-existence-checks, memory-listener-leaks, overly-broad-operations). Detects work that need not happen and structure that bloats hot paths.
+
+   See `references/orchestration.md` for the concrete dispatch shape and shell snippet.
+
+3. **Phase 3: Audit, then apply.** Wait for all three. Aggregate findings by `{axis, file, line, issue-class}`; dedupe identical cross-axis findings (keep once, attribute to first reporter, note second axis as co-signer). Dispatch a Reviewer agent (also `Explore`-typed, read-only) to audit the composed list against completeness / consistency / accuracy / scope. The Reviewer's output is the **validated survivor set**. Orchestrator applies survivors directly, one issue-class per atomic commit; drops non-survivors without comment. No re-adjudication. After each commit, run repo-native tests; on red, auto-revert via `git revert HEAD --no-edit` and stop that class's run.
+
+   Commit sequencing by class:
+   1. Duplicate commit: reuse-axis survivors + any other axis flagged `issue-class: duplicate`
+   2. Excess-surface commit: quality-axis + efficiency-axis survivors flagged `issue-class: excess-surface`
+   3. Structure commit: quality-axis + efficiency-axis survivors flagged `issue-class: structure`
+
+   Commit message format: capitalized imperative subject, ≤50 chars target, ≤72 hard, no trailing period.
+
+   After the final commit: audit the simplify patch itself for unneeded surface, duplicated logic, structure without cause, or broken consumer contract. Any hit → revert the entire simplify chain via `git revert <first-simplify-commit>..HEAD --no-edit` and exit 14.
+
+## Failure and recovery
+| Exit code | Trigger | Recovery |
 |---|---|---|
-| Diff scope detected | `git diff` (or staged / user-named fallback) produced a non-empty change-set | Yes; exit 11 if empty |
-| Single-message dispatch | All three review agents launched in one tool-call message | Yes |
-| Independence asserted | Spawn message documents the independence argument (disjoint axes, read-only) | Yes |
-| Reviewer audit | Composed findings passed completeness / consistency / accuracy / scope check before fixes begin | Yes |
-| Behavior preserved | Repo-native tests green after every fix commit | Yes; auto-revert on red, exit 13 |
-| No new bloat | Post-fix audit shows no unneeded surface, duplicated logic, structure-without-cause, or broken contract introduced by the simplify patch | Yes; exit 14 |
-| Atomic per class | Each commit contains exactly one issue-class (excess-surface OR duplicate OR structure) | Yes; exit 15 if mixed |
+| 0 | Clean | — |
+| 11 | Empty diff after all fallbacks | Pass-through, no work to do |
+| 12 | Findings emitted but survivor set empty after Reviewer audit | Report attached, no patch applied |
+| 13 | Behavior regression on a fix commit | Offending commit auto-reverted; stop simplify run for that class; already-landed commits remain |
+| 14 | Post-fix audit caught new bloat in the simplify patch | Entire simplify chain reverted; orchestrator may re-plan and re-invoke |
+| 15 | Mixed-concern commit (bundles more than one issue-class) | Must split before merging |
 
-## Exit Codes
+Partial-result rule: commits already landed before a failure remain. A rollback does not revert previously successful class commits.
 
-| Code | Meaning |
-|---|---|
-| 0 | Clean: simplification landed, all fix commits green, no new bloat introduced |
-| 11 | No changes detected: diff empty after all fallbacks; pass-through, no work to do |
-| 12 | False-positive-only findings: agents emitted findings but none survived the Reviewer audit; report attached, no patch needed |
-| 13 | Behavior regression on a fix: tests went red; offending commit auto-reverted via `git revert HEAD --no-edit` |
-| 14 | New bloat introduced: post-fix audit caught unneeded surface / duplicated logic / structure-without-cause / broken contract in the simplify patch; reverted, re-plan required |
-| 15 | Mixed-concern commit: a fix commit bundled more than one issue-class; must split before merging |
+Non-mutation rule: sequential dispatch (not one tool-call message with three agents) is rejected at the validation gate before any agent runs.
+
+## Output
+Terminal classification with an exit code. On exit 0: the change-set is compressed along reuse / quality / efficiency axes with one atomic commit per issue class, every fix commit green, and no new bloat introduced.
+
+## Provenance
+
+Origin: current-odin-skill-tree / skills/simplify/SKILL.md. Revision: null. License: project-owned. Adaptation: canonical ODIN 2.0 section order and frontmatter contract applied; no third-party expression copied.

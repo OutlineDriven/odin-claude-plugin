@@ -1,62 +1,62 @@
 ---
 name: unlazy
-description: 'Gate-file discipline over a task decomposition: prove done instead of claiming it. Use on explicit invocation ("unlazy", "depth tree", "gates", "do not stop until it is done"), on laziness symptoms (work delivered half done, a premature done claim, suspected stubs or silently narrowed scope), or proactively when a build decomposes three or more layers deep.'
+description: 'Use when asked to gate-file discipline over a task decomposition: prove done instead of claiming it. Use on explicit invocation ("unlazy", "depth tree", "gates", "do not stop until it is done"), on laziness symptoms (work delivered half done, a premature done claim, suspected stubs or silently narrowed scope), or proactively when a build decomposes three or more layers deep. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Unlazy
 
-The failure this skill kills is output that is technically responsive but quietly incomplete: the done report at 80 percent, the silently narrowed scope, the confident wrong number in a final summary. Prose instructions cannot catch these failures; the ones that survive instructions are exactly wrong self-reported numbers and stalls that feel like completion. So enforcement lives in files and runnable checks, not in goodwill. You do not promise you are done. You prove it against a ledger.
+## Contract
 
-This skill governs gate discipline on a decomposition; it composes with `work`, `incremental`, and `subagent-driven` rather than replacing them.
+| Field | Bound contract |
+|---|---|
+| Trigger | User invokes 'unlazy', 'depth tree', 'gates', or 'do not stop until it is done'; laziness symptoms appear (half-done work, premature done claims, stubs, silently narrowed scope); or a build decomposes three or more layers deep. |
+| Authority | Reversible-local: writes only named local gate files and evidence; rollback is file deletion of the created .outline/ tree. |
+| Side effect | Creates .outline/GATES.md and per-leaf gate files; executes gate_check.py; flips checkboxes; records EVIDENCE. No remote mutation. |
+| Done | gate_check.py exits 0; every leaf box is checked and EVIDENCE is non-pending; no stubs, placeholders, or follow-up remain; final report emitted only after proof. |
 
-## Rule zero: gates before work
+## Inputs
 
-Before real work starts, write the acceptance gates to a file: `.outline/GATES.md` in the working directory, using [templates/gates.md](templates/gates.md). One checkbox per outcome the task requires. Wherever an outcome is command-checkable, give it a `CHECK:` line (the runnable command) and an `EXPECT:` line (the output that decides it), so the check is a subprocess rather than an opinion.
+Required: task decomposition and intended outcome. Optional: depth hint (tree N) and any work already in progress. The skill directory is found by locating scripts/gate_check.py relative to the working directory.
 
-Why a file: intentions do not survive a long context, files do. A checklist written at minute 2 is exactly as sharp at minute 90, when the pull toward wrapping up is strongest.
+## Gate format
 
-The gate contract, in Hoare's register: `CHECK` is the test, `EXPECT` is the postcondition, `EVIDENCE:` is the recorded proof. A checked box is a claim; evidence is the proof. A checked box whose evidence still reads `pending` counts as worse than unchecked, because checked-without-evidence is the exact failure this system exists to catch.
+Each item in the gates file is a checkbox with a unique ID, an observable outcome statement, and either an automated CHECK/EXPECT pair or a manual EVIDENCE field. CHECK is the shell command; EXPECT is the substring or /regex/ the output must contain. A checked box with EVIDENCE still reading pending counts as UNMET. Template files live in assets/gates.md under the skill directory.
 
-If a gate becomes genuinely impossible, do not quietly drop it. Add `ABANDON: <gate id> <reason>` to the gates file and say so in your report. Visible surrender is honest; silent scope-narrowing is not. The tooling treats an ABANDON line as a resolved exit, not a failure.
+- Box format: `- [ ] <id>: <observable outcome>`
+- Automated gate: `  CHECK: <command>` / `  EXPECT: <substring or /regex/>` / `  EVIDENCE: pending`
+- Manual gate: `  EVIDENCE: pending`
+- Abandoned gate: `ABANDON: <id> <reason>` — reported, not deleted
+- Leaf IDs: G1, G2, … inside a leaf gates file
+- Branch/root IDs: N1, N2, … inside a branch gates file
 
-## Enforcement
+Templates: plan contract, leaf gates, and branch gates in assets/gates.md.
 
-Run the bundled checker to execute CHECK commands, flip boxes, and record evidence:
+## Procedure
 
-```
-python3 <this-skill-dir>/scripts/gate_check.py .outline/GATES.md
-```
+1. Locate the skill directory by finding scripts/gate_check.py relative to the working directory.
+2. If .outline/GATES.md does not exist, create it from the templates. Decompose the task into a depth tree: Layer 1 is the task; leaves are the only places real work happens. Depth guidance: tree 2-3 for a feature, bug hunt, or document (solo); tree 4-5 for a subsystem or serious refactor; tree 6-7 for an entire project built to a high bar, orchestrated with leaves on disjoint work units.
+3. Before real work starts, write the acceptance gates to .outline/GATES.md (solo) or .outline/gates/leaf-*.md (orchestrated), using the templates. One checkbox per observable outcome the task requires. For command-checkable outcomes, add CHECK (runnable command) and EXPECT (required output). The Hoare contract: CHECK is the test, EXPECT is the postcondition, EVIDENCE is the recorded proof.
+4. Work each leaf in four passes: implement completely without placeholders, reread as a domain expert, hunt defects, then polish at zero cost.
+5. During and after work, run gate_check.py:
+   ```
+   python3 <skill-dir>/scripts/gate_check.py [.outline/GATES.md ...]
+   ```
+   It runs each CHECK command, compares output against EXPECT (substring by default, or /regex/ with flags), flips a box from `[ ]` to `[x]` when the gate is met, and records EVIDENCE with the actual command output. --status reports without changing anything.
+6. Before reporting done, run gate_check.py again. If any gate is still unchecked or has pending evidence, stop and do that work instead. The done state is the gates file, not the feeling of done.
+7. If a gate becomes genuinely impossible, add ABANDON: <id> <reason> to the gates file and surface it in the report. Visible surrender is honest; silent scope-narrowing is not.
+8. Report the gates ledger: paste the file with its count, N of N checked, all EVIDENCE lines with actual output, and every ABANDON line surfaced.
 
-It flips a box only when the command's output matches EXPECT (substring, or `/regex/`). `--status` reports without changing anything; exit 0 means every gate is met or honestly abandoned. Manual gates (no CHECK possible) are checked by hand, but only with the `EVIDENCE:` line replaced by actual proof: a measurement, a quote of output, a `file:line`. Upstream unlazy also ships a Claude Code Stop hook that blocks ending the turn on unmet gates; this port does not carry it.
+## Failure and recovery
+- Missing gates file: create it from templates and run step 3 before continuing.
+- Checker non-zero: count unmet boxes; stop and do the remaining work.
+- Unchecked box with pending EVIDENCE: counts as UNMET; do not report done.
+- Box is checked but evidence still pending: counts as UNMET; do not report done.
+- Gate becomes impossible: add ABANDON: <id> <reason>; report it; do not silently drop.
+- Stop when gates are unmet rather than narrowing scope or claiming done.
 
-## The depth tree
+## Output
+Gates ledger: every box with its EVIDENCE line showing actual command output. Summary line: N of N checked, M abandoned with reasons surfaced. Final report emitted only after all gates are checked and evidence is recorded.
 
-Decompose at natural joints, N layers deep. Layer 1 is the task; leaves are the only places real work happens. A leaf is a real unit of work: ten or more minutes of focused effort, one coherent deliverable, one gates file. Smaller leaves mean you went one layer too deep; back off. Contracts (interfaces, file ownership, naming) are fixed in the plan before any fan-out, and every internal node gets its own integration gates, because thirty-two finished leaves can still be a broken product.
+## Provenance
 
-Depth guidance: tree 2-3 for a feature, bug hunt, or document (solo); tree 4-5 for a subsystem or serious refactor; tree 6-7 for an entire project built to a high bar, orchestrated with leaves on disjoint work units.
-
-Effort per leaf comes from its gates, never from N. A leaf is finished when its gates are fully met with evidence AND a full improvement pass finds nothing, whichever is later. Construction and orchestration details: [references/method.md](references/method.md); gate format and writing guide: [references/gates.md](references/gates.md).
-
-## Work each leaf in passes
-
-1. Implement completely. No placeholders, no TODO, no "rest as exercise".
-2. Re-read as a domain expert; name the cheap version of each part and replace it with the good one.
-3. Hunt defects: edge cases, correctness, performance, the tells that something is fake. Fix what you find.
-4. Polish that costs nothing; tuned constants beat new features.
-
-## Report audit
-
-The most reproducible laziness failure is a report whose numbers are wrong while its substance is right: "34 stat rows" where 17 exist, stated from memory. At report time, re-measure every number you are about to state, or label it unverified. Paste the gates ledger with its count, N of N checked, every ABANDON line surfaced. A report is a set of claims backed by a ledger, never a vibe of completion.
-
-## Behavioral rules
-
-- No report until the ledger is full. Composing a status summary while boxes are unchecked is the laziness reflex firing; open the gates file and pick the next unchecked box instead.
-- When you feel finished, check instead of concluding: run gate-check, then re-read one passed gate adversarially and try to refute its evidence.
-- Finish one line of attack. Before switching approach, state what the current one still has to give and why switching wins; if you cannot, keep going.
-- Do not simulate work you can do. If an action is cheap and reversible, take it and observe.
-- Ignore resource anxiety. Never compress, stub, or summarize because the end feels near; if a real limit approaches, write the remaining work into the gates file and hand over with ABANDON lines and reasons.
-- Full files, full lists, full sweeps. If the task says all 80 files, the count opened is 80 and you state that count; sampling is only acceptable when declared.
-
-## What this skill is not
-
-Conversational replies, trivial edits, and factual questions get normal effort. No gates file for a one-line fix. The discipline is for work the user wants done well, and it exists to make "done well" the only kind of done you produce.
+Clean-room adaptation of Leonxlnx/unlazy (MIT License, pinned commit ed9e8d2b5919698cf2c54bda270d507e10b69617, https://github.com/Leonxlnx/unlazy). Preserves CHECK/EXPECT/EVIDENCE gate mechanism and depth-tree decomposition contract. Rule-zero concept reframed as procedure steps with explicit Hoare register; gate_check.py re-implemented in Python 3.10+ with zero third-party dependencies.

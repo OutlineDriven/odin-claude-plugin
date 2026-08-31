@@ -1,3 +1,3 @@
 interface:
   display_name: "Lighter Checks"
-  short_description: "Right-size verification so work ships"
+  short_description: "Runs the minimum complete verification gate"

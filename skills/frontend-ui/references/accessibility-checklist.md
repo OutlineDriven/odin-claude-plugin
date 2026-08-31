@@ -1,18 +1,18 @@
-# Accessibility Checklist
+# Accessibility checklist
 
 WCAG 2.1 AA compliance reference. Pairs with the `frontend-ui` skill. Markup examples are HTML — they apply to server-rendered templates and JavaScript frameworks alike (React uses `htmlFor`/`onClick` where plain HTML uses `for`/`onclick`).
 
-## Table of Contents
+## Table of contents
 
-- [Essential Checks](#essential-checks)
-- [Common HTML Patterns](#common-html-patterns)
-- [Testing Tools](#testing-tools)
-- [Quick Reference: ARIA Live Regions](#quick-reference-aria-live-regions)
-- [Common Anti-Patterns](#common-anti-patterns)
+- [Essential checks](#essential-checks)
+- [Common HTML patterns](#common-html-patterns)
+- [Testing tools](#testing-tools)
+- [Quick reference: ARIA live regions](#quick-reference-aria-live-regions)
+- [Common anti-patterns](#common-anti-patterns)
 
-## Essential Checks
+## Essential checks
 
-### Keyboard Navigation
+### Keyboard navigation
 - [ ] All interactive elements focusable via Tab key
 - [ ] Focus order follows visual/logical order
 - [ ] Focus is visible (outline/ring on focused elements)
@@ -21,7 +21,7 @@ WCAG 2.1 AA compliance reference. Pairs with the `frontend-ui` skill. Markup exa
 - [ ] Skip-to-content link at top of page - visible (at least) on keyboard focus
 - [ ] Modals trap focus while open, return focus on close
 
-### Screen Readers
+### Screen readers
 - [ ] All images have `alt` text (or `alt=""` for decorative images)
 - [ ] All form inputs have associated labels (`<label>` or `aria-label`)
 - [ ] Buttons and links have descriptive text (not "Click here")
@@ -52,11 +52,11 @@ WCAG 2.1 AA compliance reference. Pairs with the `frontend-ui` skill. Markup exa
 - [ ] Touch targets ≥ 44x44px on mobile
 - [ ] Meaningful empty states (not blank screens)
 
-## Common HTML Patterns
+## Common HTML patterns
 
 These hold in any stack. React substitutes `htmlFor` for `for` and `onClick={fn}` for `onclick="fn()"`; the element and ARIA semantics are unchanged.
 
-### Buttons vs. Links
+### Buttons vs. links
 
 ```html
 <!-- Use <button> for actions -->
@@ -69,8 +69,7 @@ These hold in any stack. React substitutes `htmlFor` for `for` and `onClick={fn}
 <div onclick="handleDelete()">Delete</div>  <!-- BAD: not focusable, no keyboard support -->
 ```
 
-### Form Labels
-
+### Form labels
 ```html
 <!-- Explicit label association (React: htmlFor) -->
 <label for="email">Email address</label>
@@ -86,7 +85,7 @@ These hold in any stack. React substitutes `htmlFor` for `for` and `onClick={fn}
 <input type="search" aria-label="Search tasks" />
 ```
 
-### ARIA Roles
+### ARIA roles
 
 ```html
 <!-- Navigation -->
@@ -111,7 +110,7 @@ These hold in any stack. React substitutes `htmlFor` for `for` and `onClick={fn}
 </div>
 ```
 
-### Accessible Lists
+### Accessible lists
 
 ```html
 <ul role="list" aria-label="Tasks">
@@ -122,7 +121,7 @@ These hold in any stack. React substitutes `htmlFor` for `for` and `onClick={fn}
 </ul>
 ```
 
-## Testing Tools
+## Testing tools
 
 ```bash
 # Automated audit
@@ -139,7 +138,7 @@ npx pa11y             # CLI accessibility checker
 # Linux: Orca
 ```
 
-## Quick Reference: ARIA Live Regions
+## Quick reference: ARIA live regions
 
 | Value | Behavior | Use For |
 |-------|----------|---------|
@@ -148,7 +147,7 @@ npx pa11y             # CLI accessibility checker
 | `role="status"` | Same as `polite` | Status messages |
 | `role="alert"` | Same as `assertive` | Error messages |
 
-## Common Anti-Patterns
+## Common anti-patterns
 
 | Anti-Pattern | Problem | Fix |
 |---|---|---|

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Open Source License Selection"
+  short_description: "Choose open-source licenses and keep metadata consistent"

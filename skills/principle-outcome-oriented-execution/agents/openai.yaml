@@ -1,0 +1,3 @@
+interface:
+  display_name: "Principle Outcome Oriented Execution"
+  short_description: "Execute planned migrations and rewrites using target-state"

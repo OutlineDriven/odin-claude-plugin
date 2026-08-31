@@ -1,0 +1,3 @@
+interface:
+  display_name: "Agentic Actions Injection Audit"
+  short_description: "Audit AI-agent CI workflows for injection and sandbox flaws."

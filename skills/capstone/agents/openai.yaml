@@ -1,3 +1,3 @@
 interface:
-  display_name: "Capstone"
-  short_description: "Scope a real project and judge the result"
+  display_name: "Capstone Scope Evaluation"
+  short_description: "Scope a capstone and judge finished work item by item"

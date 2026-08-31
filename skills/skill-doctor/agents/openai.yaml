@@ -1,0 +1,3 @@
+interface:
+  display_name: "Skill Doctor"
+  short_description: "Grades agent setup from conversation history"

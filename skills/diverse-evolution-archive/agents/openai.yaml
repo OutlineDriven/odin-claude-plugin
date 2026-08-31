@@ -1,0 +1,3 @@
+interface:
+  display_name: "Diverse Evolution Archive"
+  short_description: "Diversity-preserving MAP-Elites evolution archive"

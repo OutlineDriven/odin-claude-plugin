@@ -1,115 +1,81 @@
 ---
 name: strategy
-description: Use when defining product strategy, setting a north star, starting or redirecting a product, or an existing STRATEGY.md has gone stale.
-metadata:
-  short-description: Interview-driven STRATEGY.md product anchor at the operating repo root
+description: 'Use when the user wants product strategy, is starting or redirecting a product, or an existing STRATEGY.md has gone stale. Interviews the user with pushback, then writes and stages one STRATEGY.md at the repository root. Don''t use for project plans, roadmaps, scheduling, or any task that needs no user interview.'
+disable-model-invocation: true
 ---
 
 # Strategy: interview-driven product anchor, honest by construction
 
-`strategy` runs a sharp interview and writes one durable anchor: the operating repo's `STRATEGY.md` (peer of `README.md`). It pins intent with a VS preamble, pushes back on weak answers instead of transcribing them, and resumes in place when the file already exists. It writes exactly **one** surface: `STRATEGY.md` at the operating repo root.
+## Contract
 
-`Op:` of every run is `extend`: the anchor is a load-bearing capability added or sharpened, never a refactor of existing prose.
+| Field | Bound contract |
+|---|---|
+| Trigger | User wants product strategy, is starting or redirecting a product, or an existing STRATEGY.md has gone stale |
+| Authority | Reversible local write: STRATEGY.md at the operating repository root; git stage only that file |
+| Side effect | Writes and stages exactly `$root/STRATEGY.md` where `$root = git rev-parse --show-toplevel`; nothing else staged |
+| Done | Required sections cleared the reject-by-default gate; file written and read back; exactly one STRATEGY.md staged |
 
-## Auto-invoke
+## Inputs
 
-<auto_invoke>
-<trigger_phrases>
-- "what's our north star"
-- "define the strategy"
-- "set our product strategy"
-- "what are we actually building"
-</trigger_phrases>
-Fire automatically on a trigger phrase or when the user starts or redirects a product. The reject-by-default gate below decides whether a doc is actually written. Auto-firing is permission to evaluate, not permission to fabricate a strategy the user did not provide.
-<manual_override>`/strategy [section]` runs immediately without waiting for a trigger phrase; an argument names a section to revisit (`approach`, `metrics`, `tracks`).</manual_override>
-</auto_invoke>
+- **Required:** User present and available to answer interview questions and receive pushback. No fabrication substitute.
+- **Optional input to skill:** Named section argument on invocation (e.g. `/strategy approach`) targets a specific section for update.
+- **On-demand reads (loaded at the step that needs them):**
+  - `assets/strategy-template.md`: locked section skeleton and post-write checklist. Read when assembling the draft.
 
-## When to Apply
+## Procedure
 
-- Starting or redirecting a product: no `STRATEGY.md` exists and the same framing keeps getting relitigated.
-- An existing `STRATEGY.md` has gone stale, or a section reads as a slogan.
-- A planning or ideation effort needs upstream grounding and finds no anchor.
+### Phase 0: pin intent, then route by file state
 
-## When NOT to Apply
-
-- The ask is a feature spec, backlog priority, or schedule. Those live in the tracker, not the anchor.
-- No human is available to answer and be pushed back on. An interview with no interviewee produces fabrication. Exit.
-
-## Reject-by-default gate
-
-A section earns its place in `STRATEGY.md` only if it clears, in order:
-
-1. **Specific, not vague.** Names a concrete situation or choice, and is falsifiable. Reject "better tools for X" and "be the market leader". They survive any product.
-2. **Connected.** Approach answers the target problem; tracks serve the approach; metrics could plausibly regress. A disconnected section is a slogan, not strategy.
-3. **The user's, not yours.** Captured in the user's own language after pushback, not auto-completed by the agent. A fabricated strategy is worse than none.
-
-Push back at most twice per section; then capture what the user gave and mark the section worth revisiting. **If the required sections (target problem, approach, persona, metrics, tracks) can't clear the gate, write nothing, commit nothing, and say so in one line.** A clean "not enough to anchor yet" is a valid result.
-
-## Support files: read on demand
-
-Read each at the step that needs it.
-
-- `references/interview.md`: the question bank, per-section quality bar, and pushback rules for all eight sections. Load before any interview turn; improvising the pushback from memory degrades into transcription.
-- `assets/strategy-template.md`: the locked section skeleton and post-write checklist. Read when assembling the draft.
-
-## Workflow
-
-### Phase 0: Pin intent, then route by file state
-
-1. **VS preamble.** Before the interview, run a short Verbalized Sampling preamble (the `askme` skill) to surface the distinct things the user could mean by "strategy" here, and pin one. Skip only when the user already stated a single unambiguous intent. Pinning the wrong frame wastes the whole interview.
-2. **Route by file state.** Resolve the operating repo root once with `git rev-parse --show-toplevel`; the anchor is exactly `$root/STRATEGY.md` and nothing nested or recursively discovered. Read that one path with the native file-read tool. A not-found result is the existence signal:
+1. **VS preamble.** Before the interview, run a Verbalized Sampling preamble to surface the distinct things the user could mean by "strategy" here, and pin one. Skip only when the user already stated a single unambiguous intent. Pinning the wrong frame wastes the whole interview.
+2. **Route by file state.** Resolve the operating repo root once with `git rev-parse --show-toplevel`; the anchor is exactly `$root/STRATEGY.md`. Read that path.
    - **Absent** → first run. Announce "No STRATEGY.md. Let's write it." Go to Phase 1.
    - **Present, argument names a section** → targeted update. Go to Phase 2.
    - **Present, no argument** → ask which section(s) to revisit, then Phase 2.
 
 ### Phase 1: First-run interview
 
-Read `references/interview.md`. Run the eight sections in document order: target problem, approach, persona, metrics, tracks, then optional milestones, non-goals, marketing. For each: ask the opening question, apply the reject-by-default gate, push back at most twice on a weak answer, then capture it in the user's own words. Required sections are 1 to 5; optional sections default to skip. Never invent them.
+For each of the eight sections in document order (target problem, approach, persona, metrics, tracks, then optional milestones, non-goals, marketing): ask the opening question, apply the reject-by-default gate, push back at most twice on a weak answer, then capture it in the user's own words. Required sections are 1–5; optional sections default to skip. Never invent them.
+
+The reject-by-default gate runs in order:
+
+1. **Specific, not vague.** Names a concrete situation or choice, and is falsifiable. Reject "better tools for X" and "be the market leader." They survive any product.
+2. **Connected.** Approach answers the target problem; tracks serve the approach; metrics could plausibly regress. A disconnected section is a slogan.
+3. **The user's strategy, not the agent's.** Captured in the user's own language after pushback, not auto-completed. A fabricated strategy is worse than none.
+
+Push back at most twice per section; then capture what the user gave and mark the section worth revisiting.
 
 ### Phase 2: Resume-in-place update
 
-Read the existing `STRATEGY.md` in full. Summarize current state in 3 to 5 lines so the user sees what's on file. Re-interview only the targeted or stale sections with full pushback. Do not rubber-stamp existing weak content because it's already written. **Preserve every untouched section byte-for-byte.** Update, don't clobber.
+Read the existing `STRATEGY.md` in full. Summarize current state in 3 to 5 lines. Re-interview only the targeted or stale sections with full pushback. Do not rubber-stamp existing weak content. **Preserve every untouched section byte-for-byte.** Update, don't clobber.
 
-### Phase 3: Write, read back, commit
+### Phase 3: write, read back, commit
 
 1. **Gate check.** Required sections cleared → proceed. Not cleared → write nothing, commit nothing, say so in one line, exit.
 2. Read `assets/strategy-template.md`; fill it with captured answers in the user's language. Delete unused optional sections. No empty headers. Set `last_updated` to today's ISO date.
 3. Present the full draft in chat; offer one edit round.
 4. Write `$root/STRATEGY.md` (the path resolved in Phase 0).
 5. **Read the file back** to confirm it landed as intended.
-6. **Commit.** Stage only the resolved anchor: `git -C "$root" add STRATEGY.md`. Never `git add -A`. Publish by the operating repo's normal flow.
+6. **Commit.** Stage only the resolved anchor: `git -C "$root" add STRATEGY.md`. Never `git add -A`.
 7. Note in one line that downstream planning reads it as optional grounding on the next run.
 
-## Constitutional Rules (Non-Negotiable)
+## Failure and recovery
+| Failure class | Result |
+|---|---|
+| Required section fails the reject-by-default gate | Write nothing, commit nothing, say so in one line. Exit. |
+| No human available to interview | Exit. Fabrication is worse than no strategy. |
+| File write or read-back mismatch | Report the mismatch. Do not claim done. |
+| Intent cannot be pinned via VS preamble | Announce the ambiguity. Ask the user to state intent explicitly before proceeding. |
 
-1. **Anchor, not plan.** Strategy is what the product is and why. Features → `ideate`; schedules → the tracker. Reject creep.
-2. **Rigor in the questions, not the headings.** Headers stay plain English; the interview carries the discipline.
-3. **Pushback is the skill.** Transcribing a weak answer is the failure mode. Reject vague answers, quote the user back, cap at two rounds.
-4. **Short is a feature.** The template is locked. Adding a section costs more than it looks. Don't.
-5. **No interviewee, no doc.** The gate fails closed: a trigger grants evaluation, never fabrication. Gate fails → no write, no commit.
+**Partial-result rule:** If Phase 2 resumes an existing doc and the targeted section(s) cannot clear the gate, the untouched sections remain intact. No clobber.
 
-## Validation Gates
+**Non-mutation rule:** Only `$root/STRATEGY.md` is written or staged. The working tree is otherwise untouched. `git add -A` is the failure mode, not an option.
 
-| Gate | Pass criteria | Blocking |
-|------|---------------|----------|
-| Intent pinned | A single intent fixed via VS preamble, or stated unambiguously | Yes |
-| Required sections | Target problem, approach, persona, metrics, tracks each clear the reject-by-default gate | Yes. No write on failure |
-| Connection | Approach answers the problem; tracks serve the approach; metrics can regress | Yes |
-| Read-back | Written `STRATEGY.md` re-read and matches intent | Yes |
-| Staging | `git -C "$root" add STRATEGY.md` only; working tree otherwise untouched | Yes |
+## Output
+One `STRATEGY.md` written to the operating repository root, read back to confirm, and staged. A clean "not enough to anchor yet" is a valid terminal output when required sections cannot clear the gate.
 
-## Commits
+## Provenance
 
-One anchor per commit.
-
-## Anti-patterns
-
-- **Transcribing weak answers.** Capturing "we want to be the market leader" verbatim. The gate exists to reject it.
-- **Fabricating to look productive.** Auto-firing on a trigger and inventing a strategy the user never gave.
-- **`git add -A`.** Sweeping unrelated dirty files into the strategy commit. Stage `STRATEGY.md` alone.
-- **Clobbering on resume.** Regenerating the whole doc when one section was stale. Update in place.
-- **Section creep.** Adding headings the template lacks because a section "felt thin." Push the rigor into the question instead.
-
-## Intellectual grounding
-
-The "Target problem / Our approach / Tracks" structure follows Richard Rumelt's *Good Strategy Bad Strategy* -- his kernel of diagnosis, guiding policy, and coherent action. The interview questions are designed to push past the patterns Rumelt calls "bad strategy": fluff, goals dressed up as strategy, and feature lists in place of a guiding choice. The book is the recommended follow-up reading when the distinction between a slogan and a strategy is not yet sharp.
+- Origin: current-odin-skill-tree
+- Source: `skills/strategy/SKILL.md`
+- License: project-owned
+- Adaptation: restructured per skill-foundry-literal-authoring-contract section order; intellectual grounding from Richard Rumelt's *Good Strategy Bad Strategy* retained as framing note; constitutional rules embedded as operational imperatives in Procedure.

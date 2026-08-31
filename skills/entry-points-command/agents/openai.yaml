@@ -1,0 +1,3 @@
+interface:
+  display_name: "Entry Points Command"
+  short_description: "Resolve a directory and list its state-changing entry points."

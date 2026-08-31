@@ -1,0 +1,49 @@
+---
+name: what-did-i-get-done
+description: 'Use when a user asks what was completed in a named date or commit range, read git log and return a concise dated status report. No file, credential, remote, or deployment mutation. Don''t use for tasks that require source or remote-system changes.'
+---
+
+# What did I get done
+
+## Contract
+
+| Field | Bound contract |
+|---|---|
+| Trigger | User explicitly asks to summarize completed work in a named range |
+| Authority | Read-only: read git log only; no file write, credential use, remote mutation, or deployment change |
+| Side effect | Chat output only; no file, VCS, credential, paid, published, or remote mutation |
+| Done | Concise dated status update returned as chat text |
+
+## Inputs
+
+- **Range identifier** (required): a date range, commit range, branch name, or label the user specifies.
+- **Session git root** (derived): `git -C <session_cwd> rev-parse --show-toplevel` to locate the repo root. Required; abort if git is not inside a repository.
+- All other inputs are derived from the range and repo root.
+
+## Procedure
+
+1. Locate the repository root using `git -C <session_cwd> rev-parse --show-toplevel`. Abort if the command fails.
+2. Run `git -C <repo_root> log --oneline --date=short --format="%h %ad %s" <range>` where `<range>` is the user's range identifier. If the range is empty or unrecognized by git, report the empty result and stop.
+3. Run `git -C <repo_root> shortlog -sne <range>` to capture author and commit counts. Omit if the command fails.
+4. Produce a concise status report that includes: the date or range label, the number of commits, each commit on its own line as `<short-hash> <date> <subject>`, and author counts from shortlog if available.
+5. Return the report as chat text only. Do not write any file.
+
+## Failure and recovery
+| Failure class | Result |
+|---|---|
+| Not a git repository | Abort: report "Not a git repository." |
+| Git range not recognized | Report empty result for that range; stop. |
+| Git command fails | Abort: report the git error verbatim. |
+| No commits in range | Report "No commits found in range." |
+
+Partial-result rule: if some steps succeed, return what was gathered; stop on the first failure. Rollback: none needed. No mutation occurs.
+
+## Output
+Chat text containing a concise dated status update: the range label, commit count, per-commit lines (`<hash> <date> <subject>`), and author summary if available.
+
+## Provenance
+
+- **Origin**: `cursor/plugins` — `cursor-team-kit/skills/what-did-i-get-done/SKILL.md`
+- **Source revision**: `68836ddaf5697224520f1847d90cdb90ca8babaa`
+- **License**: MIT — declared by the `cursor/plugins` root README and the candidate plugin manifest
+- **Adaptation**: Clean-room adaptation for ODIN 2.0 `odin-research` module; authority narrowed to read-only; output bounded to chat text only; no external dependency on cursor/plugins code.

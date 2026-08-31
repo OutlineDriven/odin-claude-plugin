@@ -1,0 +1,3 @@
+interface:
+  display_name: "Validate Changes Match Specs"
+  short_description: "Validate specs against implementation and resolve mismatches"

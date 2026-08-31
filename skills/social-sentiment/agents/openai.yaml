@@ -1,0 +1,3 @@
+interface:
+  display_name: "Social Sentiment"
+  short_description: "Weekly sentiment score, volume, and deltas published as a PR"

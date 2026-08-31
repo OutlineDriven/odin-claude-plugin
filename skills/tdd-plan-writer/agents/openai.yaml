@@ -1,0 +1,3 @@
+interface:
+  display_name: "TDD Plan Writer"
+  short_description: "Produces a TDD plan from spec requirements"

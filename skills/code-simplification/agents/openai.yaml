@@ -1,0 +1,3 @@
+interface:
+  display_name: "Code Simplification"
+  short_description: "Simplify a code artifact while keeping tests green."

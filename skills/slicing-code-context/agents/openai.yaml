@@ -1,0 +1,3 @@
+interface:
+  display_name: "Slicing Code Context"
+  short_description: "Build bounded source packets for focused code analysis"

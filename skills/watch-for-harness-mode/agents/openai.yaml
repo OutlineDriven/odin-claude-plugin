@@ -1,0 +1,3 @@
+interface:
+  display_name: "Watch For Harness Mode"
+  short_description: "Turn a proven watch pattern into a reusable harness artifact."

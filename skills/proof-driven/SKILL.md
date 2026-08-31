@@ -1,143 +1,44 @@
 ---
 name: proof-driven
-description: Use when using property-based testing, theorem proving, or formal proof tactics with a zero-unproven-property policy.
+description: 'Use when property-based testing, theorem proving, or formal proof tactics require zero unproven properties. Produce passing proofs and tests, sufficient coverage, and regression tests for every counterexample. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
-# Proof-driven development
+# Proof driven
 
-Prove properties from requirements before writing code. Proofs guide implementation, not the reverse.
+## Contract
 
-**Modern insight (2025)**: PBT + example tests pairing is the standard -- properties discover edge cases, example tests prevent regressions and serve as documentation. AI-assisted PBT (Anthropic 2025) can generate properties from docstrings, but human judgment for property selection remains essential.
+| Field | Bound contract |
+|---|---|
+| Trigger | Use when explicitly asked to apply property-based testing, theorem proving, or formal proof tactics under a zero-unproven-property policy. |
+| Authority | Write only the named local property tests, proof artifacts, regression tests, and implementation remediation within the agreed target; all changes must be reversible by restoring those files from version control or their pre-run copies. |
+| Side effect | Creates or updates the bounded local proof/test artifacts and only the implementation code required to remediate demonstrated failures; it does not mutate credentials, remote state, deployments, or unrelated files. |
+| Done | Every planned property passes, no property is skipped or pending, line coverage is at least 80%, every discovered counterexample has a permanent regression test, and every definition covered by the proof is total. |
 
-See [frameworks](references/frameworks.md) for language-specific PBT and stateful testing tools.
-See [examples](references/examples.md) for brief property test patterns per language.
-See [formal-tools](references/formal-tools.md) for theorem provers and bounded model checkers.
+## Inputs
 
----
+Required: the target implementation and its test command; requirements or contracts from which properties can be derived; the exact writable file scope; and a line-coverage command capable of measuring the target. A reference model is required for model-based testing when one is claimed. Optional inputs are existing example tests, generators, invariants, formal specifications, and a configured property-testing or theorem-proving framework. Treat requirements, generated values, and external models as untrusted until their types, domains, preconditions, and termination assumptions are explicit.
 
-## Property Categories
+## Procedure
 
-| Category | Description | Example |
-|----------|-------------|---------|
-| **Postcondition** | Output satisfies contract | `sorted(sort(xs))` |
-| **Invariant** | Property preserved by operation | `len(xs) == len(sort(xs))` |
-| **Idempotence** | `f(f(x)) == f(x)` | `deduplicate(deduplicate(xs))` |
-| **Inverse / Round-trip** | `g(f(x)) == x` | `decode(encode(x)) == x` |
-| **Model-based** | Implementation matches reference | `my_sort(xs) == stdlib_sort(xs)` |
-| **Commutativity** | Order doesn't matter | `a + b == b + a` |
-| **Metamorphic** | Relationship between outputs | `sin(-x) == -sin(x)` |
+1. Bound the writable scope to the supplied target, property/proof files, regression-test files, and remediation files. Record the commands that will run the properties and measure line coverage; stop if any required command or framework is unavailable.
+2. Derive properties from the requirements before changing implementation. Enumerate correctness, safety, invariant, and termination obligations, then arrange them as a main property with supporting properties and edge cases so no assumption remains implicit.
+3. Select the simplest independent oracle for each obligation: postcondition, invariant, idempotence, inverse or round trip, model equivalence, commutativity, or metamorphic relation. For stateful code, define commands, a reference-state model, transition preconditions, and invariants across command sequences. Do not restate the implementation as its own oracle.
+4. Choose a proof strategy that matches each property: simplification, constructor or boundary case analysis, induction for recursive or sequential behavior, contradiction, construction, model checking, or empirical property exploration when a formal proof is not available. Verify numeric bounds and complexity arithmetic mechanically with available project tooling rather than unsupported mental calculation.
+5. Create all planned property tests or formal proof obligations before the first verification run, one concern per property. Generate domain-valid normal, boundary, empty, zero, negative, maximum, overflow, and invalid cases where the contract permits them. Keep known example tests alongside properties because examples document fixed behavior while generated cases explore the input space.
+6. Run every property and proof obligation. Reject vacuous properties, framework self-tests, discarded-input rates that prevent meaningful exploration, nonterminating definitions, and skipped or pending obligations. For each failure, use the framework's invariant-preserving shrinker when available and retain the smallest reproducible counterexample.
+7. Convert every minimal counterexample into a deterministic regression test before remediation. Fix the demonstrated implementation defect within the bounded scope, rerun the regression test and affected property, and iterate without deleting, weakening, skipping, or broadening a failing obligation merely to obtain a pass.
+8. Run the complete property/proof set, the retained example and regression tests, and line coverage. Finish only when all pass, skipped and pending counts are zero, coverage is at least 80%, every counterexample is represented by a regression test, the target corresponds to the proven model, and termination obligations hold.
 
-**Most effective** (OOPSLA 2025): Model-based properties (~80% bug detection), postconditions (~65%). Least effective: properties that reimplement the logic under test.
+## Failure and recovery
+- **Framework unavailable (exit 11):** make no implementation change; report the missing executable, package, configuration, or prover and the attempted command.
+- **No properties created (exit 12):** make no success claim; report the requirement or oracle information that is missing.
+- **Property failure or incomplete proof (exit 13):** preserve the minimized counterexample and any valid passing artifacts, but classify the run as non-converged. Revert remediation that introduces regressions by restoring only the bounded files, then report the failing property, seed or proof goal, smallest counterexample, and last verified state.
+- **Coverage or property gap (exit 14):** report the uncovered requirement and measured coverage; do not mark an obligation proven from execution that did not reach it.
+- **Out-of-scope remediation:** stop before writing it and return a blocked result naming the required file or authority expansion. Never invent a proof, suppress an error, discard a counterexample, or report the done predicate from partial results.
 
----
+## Output
+On success, return exit 0 with the created or changed property/proof files, deterministic regression tests for all counterexamples, bounded remediation files, commands run, passing property and proof counts, zero skipped/pending counts, line-coverage percentage, and the requirement-to-property hierarchy. Otherwise return exit 11, 12, 13, or 14 with the exact blocked or non-converged evidence described above and the bounded files that remain modified.
 
-## When to Apply
+## Provenance
 
-- Critical algorithms (sort, search, crypto, compression)
-- Financial calculations (rounding, currency conversion)
-- Consensus/distributed protocols (invariants across nodes)
-- Safety-critical systems (medical, automotive, aerospace)
-- Data structure invariants (balanced tree, heap property)
-- Serialization round-trip (encode/decode fidelity)
-- Stateful systems (databases, queues, caches) -- via stateful PBT
-
-## Reasoning approach
-
-Before attempting a proof, reason through the property: SHORT-form KEYWORDS for internal scratchwork, break down the property into hypothesis and assumptions, critically review which proof strategy fits (induction, case analysis, contradiction, construction), validate each strategy against the property structure. Work through the proof step-by-step, verifying each step against the axioms. If a step fails, diagnose why before revising the strategy. For numeric calculation arising in the proof (e.g., bound arithmetic, complexity sums), invoke `fend` per the baseline rule; never self-calculate. Symbolic reasoning, case enumeration, and induction structure are in-head. They are not arithmetic.
-
-## When NOT to Apply
-
-- UI rendering, visual layout
-- Simple CRUD endpoints
-- Configuration management
-- Non-critical utility code
-- Rapidly changing requirements (properties are expensive to maintain)
-
----
-
-## Anti-patterns
-
-- **Happy-path-only properties**: Properties must cover edge cases -- that's their primary value
-- **Skipping stateful testing for stateful systems**: Use model-based stateful PBT (Hypothesis RuleBasedStateMachine, jqwik stateful)
-- **Properties that test the framework**: `assert fast_check works` is not `assert my_code works`
-- **Conflating PBT with unit testing**: PBT explores input space; unit tests verify known examples. Use both.
-- **Not using shrinking**: If counterexample is 500-line input, it's useless. Shrinking finds minimal failing case.
-- **Reimplementing logic in properties**: Property should be simpler than the code. If property is as complex as implementation, it adds no confidence.
-
----
-
-## Shrinking
-
-Shrinking transforms a failing complex input into the minimal input that still fails. This is the most valuable feature of PBT frameworks.
-
-- **Integrated shrinking** (Hypothesis, Hedgehog): Generates shrink tree during generation. Preserves generator invariants. Superior approach.
-- **Type-based shrinking** (QuickCheck): Separate shrinker functions. Can violate generator constraints.
-- **Always investigate shrunk counterexamples**: They reveal the essential failure, stripped of noise.
-
-## PBT vs Fuzzing (decision guidance)
-
-| Aspect | PBT | Fuzzing |
-|--------|-----|---------|
-| Input generation | Guided by properties | Guided by code coverage |
-| Oracle | User-written property assertions | Crashes/exceptions/timeouts |
-| Best for | Correctness, algorithms, contracts | Security, memory safety, crash detection |
-| **Convergence (2025)** | Hybrid tools (Bolero, Antithesis) combine both approaches |
-
----
-
-## Proof Strategies
-
-- **Simplification**: Reduce by known rules, use shrinking to find minimal counterexamples
-- **Arithmetic**: Generate numeric edge cases (0, 1, MAX, negative, overflow boundaries)
-- **Case analysis**: Split on constructors/variants, test each branch independently
-- **Induction**: Recursive/sequential properties via stateful testing
-- **Fuzzing**: Empirical exploration when properties are hard to specify formally
-- **Metamorphic relations**: When oracle is unknown, test relationships between outputs
-
-## Theorem Hierarchy
-
-```
-Main Property (Goal)
-|-- Supporting Property 1
-|   +-- Helper Property 1a
-|-- Supporting Property 2
-+-- Edge Case Property 3
-```
-
----
-
-## Workflow (language-neutral)
-
-1. **PLAN** -- Identify correctness, safety, invariant, and termination properties. Design hierarchy. Choose property categories.
-2. **CREATE** -- Write property test files. One property per concern. Tag by category (postcondition, invariant, inverse, etc.).
-3. **VERIFY** -- Run all properties. Count unproven (skipped/pending). Analyze counterexamples via shrinking.
-4. **REMEDIATE** -- Fill in each skipped property using proof strategies. Convert every counterexample to a permanent regression test.
-
----
-
-## Constitutional Rules (Non-Negotiable)
-
-1. **CREATE First**: Generate all property test artifacts from plan design before verification
-2. **Complete All Proofs**: Zero skipped/pending properties in final code
-3. **Totality Required**: All definitions must terminate
-4. **Target Mirrors Model**: Implementation structure corresponds to proven model
-5. **Iterative Remediation**: Fix proof failures, don't abandon verification
-
-## Validation Gates
-
-| Gate | Pass Criteria | Blocking |
-|------|---------------|----------|
-| Framework | PBT framework available and configured | Yes |
-| Properties | All property tests pass | Yes |
-| Unproven | Zero skipped/pending properties | Yes |
-| Coverage | >= 80% line coverage | If present |
-
-## Exit Codes
-
-| Code | Meaning |
-|------|---------|
-| 0 | All properties pass, zero unproven/skipped |
-| 11 | Property testing framework not available |
-| 12 | No property tests created |
-| 13 | Property tests failed or proofs incomplete |
-| 14 | Coverage gaps (properties missing) |
+Adapted from project-owned ODIN source `skills/proof-driven/SKILL.md`, candidate `current:current-c:current:proof-driven`. No pinned revision or external license identifier was supplied. This self-contained adaptation retains requirements-first property design, property categories and hierarchy, example-test pairing, model-based stateful testing, shrinking, formal proof strategies, totality, iterative remediation, blocking gates, counterexample regression, and exit classifications without depending on external reference files.

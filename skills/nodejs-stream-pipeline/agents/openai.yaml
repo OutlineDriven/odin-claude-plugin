@@ -1,0 +1,3 @@
+interface:
+  display_name: "Nodejs Stream Pipeline"
+  short_description: "Compose pipeline() streams with backpressure and caching"

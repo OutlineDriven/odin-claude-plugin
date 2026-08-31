@@ -1,0 +1,3 @@
+interface:
+  display_name: "Shower Contents Handoff"
+  short_description: "Blind-read artifact via context-free sub-session before handoff"

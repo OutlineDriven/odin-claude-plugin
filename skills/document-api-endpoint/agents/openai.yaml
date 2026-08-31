@@ -1,0 +1,3 @@
+interface:
+  display_name: "Document API Endpoint"
+  short_description: "Add @extend_schema and TypedDict responses to a Sentry endpoint"

@@ -1,4 +1,4 @@
-# Contract Libraries by Language
+# Contract libraries by language
 
 **Grounded: 2026-08-26**
 

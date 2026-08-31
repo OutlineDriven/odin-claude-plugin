@@ -1,0 +1,3 @@
+interface:
+  display_name: "Web Performance Audit"
+  short_description: "Quantified CWV metrics and prioritized performance"

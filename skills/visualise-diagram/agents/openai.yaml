@@ -1,0 +1,3 @@
+interface:
+  display_name: "Visualise Diagram"
+  short_description: "Generate SVG diagrams from natural language"

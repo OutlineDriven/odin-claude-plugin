@@ -1,0 +1,3 @@
+interface:
+  display_name: "Visual Plan Review"
+  short_description: "Audit a plan and return per-item accuracy verdicts"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Thumbnail Accuracy Scorecard"
+  short_description: "Accuracy-gated thumbnail scorecard"

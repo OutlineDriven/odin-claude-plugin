@@ -1,0 +1,3 @@
+interface:
+  display_name: "Semgrep Rule Variant Creator"
+  short_description: "Port a Semgrep rule to new languages with applicability analysis"

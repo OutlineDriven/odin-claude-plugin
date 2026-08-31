@@ -1,84 +1,87 @@
 ---
 name: unslop
-description: Cut AI tells and restore human voice. Fires when drafting or editing prose, reviewing text for AI tells, or when the user asks to remove AI patterns or add voice. Also handles portability cleanup where incidental stack nouns make prose stale across stacks.
+description: 'Use when prose is being drafted or edited, text is under review for AI tells, or the user asks to remove AI patterns, humanize, or add voice. Rewrites the file so all 20 checks pass and meaning is preserved. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Unslop
 
-Edit text to remove AI patterns and add human voice.
+## Contract
 
-## Process
+| Field | Bound contract |
+|---|---|
+| Trigger | Prose is being drafted or edited, text is under review for AI tells, or the user asks to remove AI patterns, humanize, or add voice. |
+| Authority | Reversible local write. Edit only the named prose file; the original is recoverable from version control or the user's undo. |
+| Side effect | Rewrites user-facing or internal prose files; may remove incidental framework and tool nouns. |
+| Done | All 20 checks applied: no canned phrases, fake quotes, em-dash habit, meta-process, or filler; meaning preserved. |
 
-1. Scan for the patterns below.
-2. Rewrite. Preserve meaning, match intended tone.
-3. Add soul (see next section).
-4. Self-audit: "What makes this obviously AI generated?" Fix remaining tells.
+## Inputs
 
-## Adding soul
+- **Prose file** (required): the file or text block to edit.
+- **Tone guidance** (optional): intended register or audience; defaults to the file's existing voice.
 
-Removing patterns is half the job. Sterile, voiceless writing is just as obvious.
+## Procedure
 
-- **Have opinions.** React to facts instead of neutrally listing pros and cons.
-- **Vary rhythm.** Short sentences. Then longer ones that take their time. Mix it up.
-- **Acknowledge complexity.** "Impressive but also kind of unsettling" beats "impressive."
-- **Use "I" when it fits.** First person isn't unprofessional.
-- **Let some mess in.** Perfect structure looks machine-made.
-- **Be specific.** Not "this is concerning" but "there's something unsettling about agents churning away at 3am."
+1. Read the prose file end to end. If the file is empty or missing, stop and report the failure.
+2. Scan every paragraph against these 20 checks:
 
-## Patterns to detect and fix
+   **Content**
+   1. Puffery and promotional language: "pivotal moment", "testament to", "evolving landscape", "nestled", "vibrant", "breathtaking", "groundbreaking". Cut; state what happened.
+   2. Name-dropping and vague attributions: listing media outlets without context, "Experts believe", "Industry reports suggest". Name the source or delete.
+   3. Superficial -ing phrases and formulaic challenges: "highlighting...", "ensuring...", "Despite challenges... continues to thrive". Delete or replace with specific facts.
 
-### Content
+   **Language**
+   4. AI vocabulary: additionally, crucial, delve, enduring, enhance, fostering, garner, interplay, intricate, landscape (abstract), pivotal, showcase, tapestry (abstract), testament, underscore, vibrant. Replace with plain words.
+   5. Fancy copulas and forced structures: "serves as", "stands as", "Not just X, but Y", rule of three, synonym cycling, false ranges. Say it directly with the natural number of points.
 
-1. **Puffery.** "pivotal moment", "testament to", "evolving landscape", "setting the stage for", "indelible mark", "deeply rooted". Cut puffery, state what happened.
-2. **Name-dropping.** Listing media outlets without context. Pick one, say what was said.
-3. **Superficial -ing phrases.** "highlighting...", "ensuring...", "reflecting...", "showcasing...", "fostering...". Delete or expand with real sources.
-4. **Promotional language.** "nestled", "vibrant", "breathtaking", "groundbreaking", "renowned", "stunning", "must-visit". Use neutral descriptions.
-5. **Vague attributions.** "Experts believe", "Industry reports suggest", "Some critics argue". Name the source or delete.
-6. **Formulaic challenges.** "Despite challenges... continues to thrive." Replace with specific facts.
+   **Style**
+   6. Em-dash overuse: do not stack several in one paragraph; replace each with the punctuation that spot needs (period, comma, colon, parentheses, or nothing). Count look-alikes (en dash, double hyphen, minus sign, horizontal bar); judge each on its own.
+   7. Colon overuse, boldface overuse, inline-header lists, title-case headings, decorative emojis, curly quotes: colons only before lists or examples; bold only when earned; convert restating bold-label-colon lines to prose; use sentence case for headings; remove decorative emojis; replace curly quotes with straight quotes.
 
-### Language
+   **Communication artifacts**
+   8. Chatbot phrases, cutoff disclaimers, sycophantic tone: "I hope this helps!", "Let me know if...", "Of course!", "While specific details are limited...", "Great question!" Remove; respond directly.
 
-7. **AI vocabulary.** Additionally, crucial, delve, enduring, enhance, fostering, garner, interplay, intricate, landscape (abstract), pivotal, showcase, tapestry (abstract), testament, underscore, vibrant. Replace with plain words.
-8. **Fancy ways to say "is".** "serves as", "stands as", "boasts", "features". Just say "is" or "has".
-9. **"Not just X, but Y."** State the point directly instead.
-10. **Rule of three.** Forcing ideas into groups of three. Use the natural number.
-11. **Synonym cycling.** Protagonist, main character, central figure, hero all in one paragraph. Pick one, repeat it.
-12. **False ranges.** "from X to Y" where X and Y aren't on a meaningful scale. List topics directly.
+   **Filler**
+   9. Filler phrases, excessive hedging, generic conclusions: "In order to" becomes "To"; "Due to the fact that" becomes "Because"; delete "It is important to note that"; collapse "could potentially possibly be argued that it might" to "may"; replace "The future looks bright" with specific facts.
 
-### Style
+   **Jargon**
+   10. Abstract metaphor nouns: substrate, wedge, vector, locus, vantage, nexus, bedrock, modality, paradigm, ratchet, evacuate (for moving code), endgame, north star, flywheel. Replace with the concrete word: "substrate" becomes "base", "wedge" becomes "add", "vector" becomes "way", "ratchet" becomes the mechanism's real name or "a limit that only tightens", "evacuate" becomes "move out", "endgame" becomes "the last phase". Ban a word only when a plainer concrete word says the same thing.
 
-13. **Em dash overuse.** Don't stack several em dashes in one paragraph, and don't reach for one where a period or comma is the cleaner break. Em dash overuse is an AI tell, and swapping em dashes for parentheses just trades one tell for another. If a thought needs separation, end the sentence or use a comma. When replacing, count the look-alikes with the em dash (en dash, double hyphen, minus sign, horizontal bar), judge each occurrence on its own, and replace it with the punctuation that spot needs, which may be a period, a comma, a colon, parentheses, or nothing. A blanket sweep is what makes the fix read as machine-made.
-14. **Colon overuse.** Colons are fine before a list or example. Not as mid-sentence connectors. "If you're coming from traditional automation: instead of registering event handlers, you describe conditions" adds nothing with the colon. Rewrite to let the point stand on its own without comparison framing. "Describing when the scheduler should fire works best as plain English." Same meaning, no crutch punctuation.
-15. **Boldface overuse.** Don't bold every proper noun or acronym.
-16. **Inline-header lists.** The tell is a bold label and colon that restates the line: "**Performance:** Performance improved...". Convert those to prose. A bold lead-in that ends in a period, names the item, and is followed by genuinely new detail ("**Schema in TypeScript.** Tables live in one file.") is fine, not a tell.
-17. **Title case headings.** Use sentence case.
-18. **Decorative emojis.** Remove from headings and bullets.
-19. **Curly quotes.** Replace with straight quotes.
+   **Plain speech**
+   11. Name the mechanism, not the feeling: "the database stays close at hand" becomes "`.toSQL()` returns the exact string sent to the database". If the sentence could appear unchanged in another project's docs, cut it.
+   12. Dense sentences: if the reader has to backtrack, break the sentence in two. One idea per sentence.
+   13. Active voice: catch "is/are/was/were + past participle" and name the actor. Passive is fine only when the actor is unknown or genuinely doesn't matter.
+   14. Adverbs and weak verbs: "runs quickly" becomes "is fast" or the measured delta. An adverb propping up a weak verb means the verb is wrong.
+   15. Plain word preference: "utilize" becomes "use", "leverage" becomes "use", "facilitate" becomes "help", "numerous" becomes "many", "in the event that" becomes "if".
 
-### Communication artifacts
+   **Portability**
+   16. Incidental stack nouns: in content meant to travel (skills, rule docs, library READMEs), a tool or vendor name that is not the subject goes stale when the stack changes. "Run `pnpm test`" in a document about testing discipline means "run the project's test command". Judge each noun: load-bearing when the document is about that tool, incidental when it stands in for a mechanism. Replace incidental ones with the mechanism they mean; leave load-bearing ones alone.
 
-20. **Chatbot phrases.** "I hope this helps!", "Let me know if...", "Of course!", "Certainly!", "Found the smoking gun!" Remove.
-21. **Cutoff disclaimers.** "While specific details are limited..." Find sources or remove.
-22. **Sycophantic tone.** "Great question! You're absolutely right!" Respond directly.
+   **Trust and structure**
+   17. Fabricated voice or quotation: never invent a quote, testimonial, consensus, or attributed reaction. Quote only supplied or cited text; otherwise write the claim without quotation marks and name its evidence.
+   18. Previous-pointing prose: replace "as discussed above", "previously noted", and similar navigation with the fact the reader needs at that point. Keep a cross-reference only when the target is the literal source of truth the reader must inspect.
+   19. Mechanical symmetry: break repeated paragraph templates, forced three-part lists, and identical sentence openings. Keep repetition only when it carries a real comparison or invariant.
+   20. Meta-process narration: remove descriptions of drafting, analysis, response structure, and the writer's own effort unless the process is the subject. State the result, evidence, or required action directly.
 
-### Filler
+3. Rewrite the file. Preserve meaning; match intended tone.
+4. Add voice:
+   - Have opinions. React to facts instead of neutrally listing pros and cons.
+   - Vary rhythm. Short sentences. Then longer ones that take their time.
+   - Acknowledge complexity. "Impressive but also kind of unsettling" beats "impressive."
+   - Use "I" when it fits. First person isn't unprofessional.
+   - Let some mess in. Perfect structure looks machine-made.
+   - Be specific. Not "this is concerning" but the concrete thing that is concerning.
+5. Self-audit: "What makes this obviously AI-generated?" Fix remaining tells.
+6. Verify meaning is preserved. If any edit changes the factual content or logical claim, revert that edit and rephrase.
 
-23. **Filler phrases.** "In order to" becomes "To". "Due to the fact that" becomes "Because". "It is important to note that" gets deleted.
-24. **Excessive hedging.** "could potentially possibly be argued that it might" becomes "may".
-25. **Generic conclusions.** "The future looks bright." State specific plans or facts.
+## Failure and recovery
+- **Missing or empty source**: stop; report "source file missing or empty". Do not create a file.
+- **Meaning drift**: if an edit changes the factual content or logical claim, revert that edit and rephrase. If no rephrase preserves both meaning and the check, keep the original and flag the conflict.
+- **Pattern introduction**: if the rewrite introduces a new pattern from the checklist, re-run step 5 on the affected paragraph.
+- **Non-converged**: if three rewrite passes still leave checklist violations, stop and report the remaining violations with their locations.
 
-### Jargon
+## Output
+The rewritten prose file with all 20 checks passing and original meaning preserved.
 
-26. **Abstract metaphor nouns.** Substrate, wedge, vector, locus, vantage, nexus, bedrock, modality, paradigm, ratchet, evacuate (for moving code), endgame, north star, flywheel. These read as technical but usually have a plainer concrete word. "Substrate" becomes "base". "Wedge in" becomes "add". "Vector" becomes "way" or "method". "Ratchet" becomes the mechanism's real name or "a limit that only tightens". "Evacuate" becomes "move out". "Endgame" becomes "the last phase". Ban a word when a plainer concrete word says the same thing, not because it sounds technical. Pick the concrete word.
+## Provenance
 
-### Plain speech
-
-27. **Say what it does, not how it feels.** "the database stays close at hand", "SQL you can read", "types that follow your schema" name a feeling. The fix names the mechanism or a number: "`.toSQL()` returns the exact string sent to the database", "a column rename fails the build". Ask what the sentence tells the reader to do or know, then write that. If you can't restate it as a concrete instruction, fact, or number, cut it. One more check: if the sentence could appear unchanged in another project's docs, it says nothing about this one. Cut it.
-28. **Shorten or split dense sentences.** If the reader has to backtrack to parse a sentence, break it in two or drop clauses. One idea per sentence.
-29. **Active voice.** Prefer it. Catch "is/are/was/were + past participle" and name the actor: "queries are validated" becomes "the compiler validates queries", "the file is parsed by the loader" becomes "the loader parses the file". Passive is fine only when the actor is unknown or genuinely doesn't matter.
-30. **Cut adverbs, or use a stronger verb.** "runs quickly" becomes "is fast" or the number. "significantly improves" becomes the measured delta. An adverb propping up a weak verb means the verb is wrong.
-31. **Prefer the plain word.** "utilize" becomes "use", "leverage" becomes "use", "facilitate" becomes "help", "numerous" becomes "many", "in the event that" becomes "if". The fancier synonym is rarely clearer.
-
-### Portability
-
-32. **Incidental stack nouns.** In content meant to travel, such as a skill, a rule document, or a library README, a tool or vendor name that is not the subject goes stale the moment the stack changes. "Run `pnpm test`" in a document about testing discipline means "run the project's test command". Judge each noun: load-bearing when the document is about that tool, incidental when it stands in for a mechanism. Replace the incidental ones with the mechanism they mean and leave the load-bearing ones alone.
+Origin: current-odin-skill-tree. Paths: skills/unslop/SKILL.md. Pinned revision: none. License: project-owned. Adaptation: clean-room rewrite of the unslop skill for the odin-create module.

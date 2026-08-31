@@ -1,0 +1,3 @@
+interface:
+  display_name: "Goal Prompt Drafting"
+  short_description: "Drafts /goal commands with grounded proof and stop clauses."

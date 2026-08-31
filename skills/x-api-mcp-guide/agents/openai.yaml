@@ -1,0 +1,3 @@
+interface:
+  display_name: "X API MCP Guide"
+  short_description: "Define X MCP routing, failures, costs, and quota guardrails"

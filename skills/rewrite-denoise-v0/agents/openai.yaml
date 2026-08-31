@@ -1,0 +1,3 @@
+interface:
+  display_name: "Rewrite Denoise V0"
+  short_description: "Rewrites iterated artifacts as a clean v0 with no patch traces"

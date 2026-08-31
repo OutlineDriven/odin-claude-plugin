@@ -1,0 +1,3 @@
+interface:
+  display_name: "Claude Settings Audit"
+  short_description: "Emit read-only Claude Code settings.json for the detected stack"

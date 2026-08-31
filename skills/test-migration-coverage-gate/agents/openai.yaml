@@ -1,0 +1,3 @@
+interface:
+  display_name: "Test Migration Coverage Gate"
+  short_description: "Per-assertion coverage proof before test deletion"

@@ -1,51 +1,45 @@
 ---
 name: map-corpus
-description: 'Use when the user points at a folder of their own study material and wants it made teachable: inventory the sources, name the concepts they cover, and order those concepts by what has to come first. For learning a topic with no material of your own, use teach.'
-argument-hint: "Which folder holds the material?"
+description: 'Use when the user points to a folder of their study material and wants it made teachable. Produce a source inventory and a prerequisite-ordered concept map in CORPUS.md. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
-This skill reads a folder and writes one file. Nothing under the corpus root changes.
+# Map corpus
 
-## What you do
+## Contract
 
-1. **Resolve the folder.** Take it from the argument; ask once when missing. Expand `~`, resolve the absolute path, and confirm it exists and is a directory. Read every file under it, recursing into subfolders. Done when every file is either inventoried or listed as unreadable.
-2. **Inventory.** One table row per readable file: path relative to the corpus root, kind, and the headings worth citing. Done when the row count equals the readable-file count.
-3. **Name the concepts.** For each concept the corpus teaches: the term, one sentence of what it is, and the citation anchor where it is taught. Prefer the term the source uses. Done when every inventoried file contributes a concept or is marked `reference only` in its row.
-4. **Order them.** Each concept names what it needs first in its `Needs:` field. Emit a flat numbered list where nothing appears before its prerequisites. Two concepts needing each other: keep the one the corpus introduces first and note the cycle on the other's line. Done when no concept lists a prerequisite appearing later.
+| Field | Bound contract |
+|---|---|
+| Trigger | The user explicitly points to a folder of their study material and asks to make that material teachable. |
+| Authority | Read the supplied corpus recursively and reversibly write only `CORPUS.md` at the workspace root. Do not change files under the corpus root or any other local or remote state. |
+| Side effect | Create or wholly replace the workspace-root `CORPUS.md`; rollback is deletion of a newly created file or restoration of the prior file. |
+| Done | `CORPUS.md` inventories every readable file, marks every unreadable file, names the concepts taught, cites their source locations, and orders concepts so no prerequisite appears later than its dependent. |
 
-## CORPUS.md
+## Inputs
 
-Write this file at the workspace root, beside `PROGRESS.md` when it exists. It is the only output. One fenced block shapes it:
+- Required: the corpus folder path and the workspace root where `CORPUS.md` will be written. If the corpus path is missing, request it once and stop as blocked if it remains unavailable.
+- Optional: an existing `CORPUS.md`, which may be replaced only after the new map is complete. No other prior artifact is required.
 
-```md
-# Corpus: {name}
+## Procedure
 
-corpus_root: {absolute path}
-mapped: {YYYY-MM-DD}
+1. Expand `~`, resolve the corpus folder to an absolute path, and verify that it exists and is a directory. Fix the corpus root and workspace-root output path before reading or writing.
+2. Recursively enumerate every file under the corpus root. Attempt to read each without converting it or modifying it. Classify each file as readable or unreadable and retain the reason for every unreadable result.
+3. For every readable file, record one source row containing its path relative to the corpus root, its material kind, and either the headings worth citing or `reference only`. The number of source rows must equal the number of readable files.
+4. Derive the concepts the readable corpus teaches. For each concept, use the source's term where available and record a one-sentence definition, its prerequisites, and at least one citation anchor. Every readable file must contribute a concept or be marked `reference only` in its source row.
+5. Form heading citations as `<path-relative-to-corpus-root>#<heading-slug>`. When a source has no headings, use `<path-relative-to-corpus-root>:<start>-<end>`. Do not place absolute paths in source rows or citations.
+6. Order the concepts as one flat numbered list. Put every prerequisite before its dependents. If two concepts depend on each other, place first the one introduced first by the corpus and disclose the cycle on the other concept's line. Merge concepts that the corpus always teaches together when the list would otherwise exceed roughly forty entries.
+7. Build `CORPUS.md` with, in order: `# Corpus: <name>`; `corpus_root: <absolute path>`; `mapped: <YYYY-MM-DD>`; a `## Sources` table with `File`, `Kind`, and `Cite from` columns; a `## Concepts` numbered list whose entries contain the term, definition, `Needs:`, and `Source:`; and a `## Unreadable` list containing each unreadable relative path and reason. Use `Needs: none` for concepts without prerequisites and state `None` when there are no unreadable files.
+8. Verify file accounting, concept coverage, citation form, and prerequisite order against the enumerated corpus. Only then write the completed content by wholly replacing workspace-root `CORPUS.md`; never write inside the corpus root.
 
-## Sources
+## Failure and recovery
+- **Invalid corpus:** If the path is missing, does not exist, or is not a directory, do not write anything; return `blocked` with the failed validation.
+- **Unreadable members:** List each unreadable file and its observed reason, make no conversion attempt or converter recommendation, and complete the map from readable files. This is a valid partial corpus map only when every unreadable file is disclosed.
+- **Unsafe output boundary:** If the resolved output is not exactly workspace-root `CORPUS.md`, or writing it would modify the corpus root, do not write and return `blocked` with both resolved paths.
+- **Unprovable map:** If source accounting, concept coverage, citation anchors, or prerequisite ordering cannot be established from the material, preserve any existing `CORPUS.md`, write no partial replacement, and return `blocked` naming the unmet condition without inventing evidence.
+- **Write failure:** Report the write error and do not claim completion. If replacement began but did not complete, restore the prior `CORPUS.md` when available; otherwise remove the incomplete new file.
 
-| File | Kind | Cite from |
-|---|---|---|
-| ch03-locks.md | textbook | #mutual-exclusion, #deadlock |
-| notes/standup.md | work document | reference only |
+## Output
+On success, return the path to workspace-root `CORPUS.md` and counts for readable sources, unreadable sources, and concepts. The file is the sole artifact and contains the complete source inventory, citation anchors, prerequisite-ordered concept spine, and unreadable-file disclosures.
 
-## Concepts
+## Provenance
 
-1. **Mutual exclusion** — only one thread holds the resource at a time. Needs: none. Source: `ch03-locks.md#mutual-exclusion`
-2. **Deadlock** — a cycle of threads each holding what the next one waits for. Needs: mutual exclusion. Source: `ch03-locks.md#deadlock`
-
-## Unreadable
-
-- `scan.pdf` — no text layer. Convert it and re-run this skill.
-```
-
-## Rules
-
-- Read the corpus and write one file, `CORPUS.md`, at the workspace root. Files under the corpus root stay exactly as they are.
-- **Citation anchor form**, used here and by every skill citing the corpus: `<path-relative-to-corpus-root>#<heading-slug>`, falling back to `<path>:<start>-<end>` when the source carries no headings.
-- Name unreadable files, say what each is, and finish the map for the rest. Converting them is the user's call; this skill recommends no converter and runs none.
-- The concept list is a spine, not an index. Past roughly forty concepts, merge the ones always taught together.
-- Re-running rewrites `CORPUS.md` whole. It holds no state worth preserving; `PROGRESS.md` does. See [CORPUS-FORMAT.md](references/CORPUS-FORMAT.md) for the row and anchor contracts.
-- Keep paths in `CORPUS.md` relative to the corpus root, not to the workspace. An absolute path in the Sources table ties the map to one machine.
-
+Adapted from the project-owned ODIN current skill `skills/map-corpus/SKILL.md`, candidate `current:current-c:current:map-corpus`. No source revision or license identifier was supplied. This version preserves the recursive inventory, row accounting, concept coverage, citation-anchor, prerequisite-ordering, cycle-disclosure, unreadable-file, and whole-file rewrite mechanisms while expressing them as a self-contained procedure.

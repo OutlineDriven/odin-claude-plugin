@@ -1,3 +1,3 @@
 interface:
-  display_name: "Atomic Issues and PRs"
-  short_description: "Split changes into atomic GitHub issues and PRs"
+  display_name: "Atomic Issues PRs"
+  short_description: "Publish one issue or PR per logical change on GitHub"

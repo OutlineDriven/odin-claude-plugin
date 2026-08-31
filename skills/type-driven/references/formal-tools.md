@@ -1,4 +1,4 @@
-# Dependent Type Systems and Verification Tools
+# Dependent type systems and verification tools
 
 | Tool | Strength | Status |
 |------|----------|--------|
@@ -7,7 +7,7 @@
 | Agda | Dependently typed, cubical type theory | Academic |
 | Refined (Haskell) | Compile-time refinement predicates | Production-ready |
 
-## Practical Guidance
+## Practical guidance
 
 - **Idris 2**: Best learning path for dependent types. Totality checker ensures all functions handle all inputs. Proof terms enable machine-checked correctness.
 - **F\***: Used to verify real cryptographic code (HACL*, EverCrypt). Refinement types add predicates to existing types without full dependent type overhead.

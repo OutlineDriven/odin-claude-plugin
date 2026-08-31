@@ -22,7 +22,7 @@ When the user gives no depth, pick the smallest N whose leaves match the task's 
 
 The stall-at-80-percent failure is an end-of-long-context disease. Attention, not time, is the scarce resource, and a fresh subagent per leaf resets it. That is the honest version of "every leaf gets the full budget".
 
-Orchestrate at tree depth 4+, or any build clearly beyond one sitting — roughly half an hour of real work and above. Below that, stay solo: subagent overhead (context re-establishment per leaf) costs more than it buys, and one `.outline/GATES.md` in one session gives you most of the discipline at a fraction of the cost. Checks-as-commands do the economizing everywhere: every CHECK line converts model re-reading into a free subprocess, and evidence stays capped at the deciding lines, never a log.
+Orchestrate at tree depth 4+, or any build clearly beyond one sitting, roughly half an hour of real work and above. Below that, stay solo: subagent overhead (context re-establishment per leaf) costs more than it buys, and one `.outline/GATES.md` in one session gives you most of the discipline at a fraction of the cost. Checks-as-commands do the economizing everywhere: every CHECK line converts model re-reading into a free subprocess, and evidence stays capped at the deciding lines, never a log.
 
 ## The driver loop
 

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Release Promotion"
+  short_description: "Draft launch and promotion copy for shipped features."

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Recorded Decision Convergence"
+  short_description: "Collapse an open decision field to one recorded decision"

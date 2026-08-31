@@ -1,0 +1,3 @@
+interface:
+  display_name: "Negotiate Run Budget"
+  short_description: "Request one bounded run-budget extension or mark waiting"

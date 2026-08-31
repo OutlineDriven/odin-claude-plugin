@@ -1,0 +1,3 @@
+interface:
+  display_name: "Keep Why Maintenance"
+  short_description: "Resolve knowledge conflicts without deleting history"

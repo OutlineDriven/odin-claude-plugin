@@ -2,7 +2,7 @@
 
 ADRs capture the reasoning behind significant technical decisions. They're the highest-value documentation you can write.
 
-## When to Write an ADR
+## When to write an ADR
 
 Write an ADR only when all three conditions hold:
 
@@ -82,7 +82,7 @@ Use PostgreSQL with Prisma ORM.
 - Hosting on managed service (Supabase, Neon, or RDS)
 ```
 
-## ADR Lifecycle
+## ADR lifecycle
 
 ```
 PROPOSED → ACCEPTED → (SUPERSEDED or DEPRECATED)

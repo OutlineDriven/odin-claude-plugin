@@ -1,0 +1,3 @@
+interface:
+  display_name: "Production Data Cleanup"
+  short_description: "Policy-conformant production dataset with a corrected classifier"

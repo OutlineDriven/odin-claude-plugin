@@ -46,4 +46,4 @@ Box flips are earned, not written: `gate_check.py` flips a box only when the CHE
 
 ## Numbers rule
 
-Any number that will appear in a final report deserves its own gate with a CHECK that measures it. The most reproducible laziness failure is a report whose only false claims are numbers stated from memory. If a number matters enough to report, it matters enough to measure at report time — re-measure every number you are about to state, or label it unverified.
+Any number that will appear in a final report deserves its own gate with a CHECK that measures it. The most reproducible laziness failure is a report whose only false claims are numbers stated from memory. If a number matters enough to report, it matters enough to measure at report time: re-measure every number you are about to state, or label it unverified.

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Journey Trace Wizard"
+  short_description: "Author shell wizard for human provisioning steps"

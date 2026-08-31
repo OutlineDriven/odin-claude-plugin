@@ -1,0 +1,3 @@
+interface:
+  display_name: "Humaniseur Fr"
+  short_description: "Naturalize AI French text; remove tells, preserve register"

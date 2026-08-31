@@ -1,0 +1,3 @@
+interface:
+  display_name: "Scaffold Next.js"
+  short_description: "Scaffolds a local Next.js turborepo with TypeScript 7"

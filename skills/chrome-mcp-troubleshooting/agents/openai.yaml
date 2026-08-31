@@ -1,0 +1,3 @@
+interface:
+  display_name: "Chrome MCP Troubleshooting"
+  short_description: "Resolve macOS Claude-in-Chrome native-host conflicts"

@@ -1,36 +1,28 @@
 ---
 name: sync-docs
-description: Detect docs-vs-code drift from a diff. Use when the user says "sync docs" or "update changelog". For whether plans and roadmaps still match the code, use drift-detect.
-metadata:
-  short-description: Diff-driven docs drift correction
+description: 'Detect docs-vs-code drift from a diff and correct safe issues. Use when the user says sync docs or update changelog after a behavioral change. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
-# Sync Docs: correct documentation against code reality
+# Sync docs
 
-`sync-docs` restores the invariant that public docs, examples, versions, and changelog entries describe the current code.
+## Contract
 
-Safe means text substitution with a mechanically known target: **version-number bump** and **CHANGELOG `## [Unreleased]` entry**. Everything else is flag-only until a human or implementer verifies the intended prose change.
-
-## When to Apply / NOT
-
-Apply when a branch changes public APIs, imports, CLI flags, config names, package versions, exported symbols, examples, or user-visible behavior and docs may lag.
-
-NOT apply for generated documentation refreshes, mass prose rewrites, API design review, release-note authorship from scratch, or docs whose source of truth is intentionally external. For those, report drift signals but do not edit.
-
-When the diff added a document or a whole section, the tree order may have gone stale — run the hierarchy reorder from `purge-slop-docs`; `sync-docs` does not carry the reorder itself.
+| Field | Bound contract |
+|---|---|
+| Trigger | User says 'sync docs' or 'update changelog' after a behavioral change. |
+| Authority | Reversible local writes only. Edit named local doc files and write a fix ledger. Rollback reverts the edited files to their pre-edit content. |
+| Side effect | Applies only safe fixes (version bump plus CHANGELOG Unreleased entry) and writes a fix ledger with before/after evidence. |
+| Done | Safe fixes are applied or explicitly unavailable, and all residual drift is flagged with file:line evidence and reasons. |
 
 ## Inputs
 
 - **Mode**: `report` (default) or `apply`. `apply` still edits only safe-fix issues.
-- **Scope**:
-  - `recent`: changed files from the current branch or last few commits.
-  - `before-pr`: branch diff against the PR base; use before publishing.
-  - `all`: scan all tracked code and docs; slower, useful after migrations.
-- **Base**: explicit base ref is preferred. If absent, resolve the default branch, then fall back to `HEAD~5` for `recent`.
+- **Scope**: `recent` (changed files from current branch or last few commits), `before-pr` (branch diff against PR base), or `all` (all tracked code and docs).
+- **Base**: explicit base ref preferred. If absent, resolve the default branch, then fall back to `HEAD~5` for `recent`.
 
-## Workflow
+## Procedure
 
-1. **Pick scope and base.** Refuse ambiguous review scope when the user expects PR readiness. Use these commands as the runnable recipe:
+1. **Pick scope and base.** Refuse ambiguous review scope when the user expects PR readiness.
 
    ```bash
    # before-pr: whole branch against the remote default branch
@@ -38,30 +30,29 @@ When the diff added a document or a whole section, the tree order may have gone 
    base=${remote_head#origin/}
    git diff --name-status "origin/$base"...HEAD
 
-   # recent: if the default-branch diff fails, run the fallback explicitly
+   # recent: fallback when default-branch diff fails
    git diff --name-status HEAD~5..HEAD
 
-   # all: tracked docs and code inventory, not a behavioral diff
+   # all: tracked docs and code inventory
    git ls-files
    ```
 
-   In ODIN tool mode, use `bash` only for the `git` commands; use `find`, `search`, `read`, `lsp`, `ast_grep`, and `edit` for everything else.
+   In ODIN tool mode, use `bash` only for git commands; use `find`, `search`, `read`, `lsp`, `ast_grep`, and `edit` for everything else.
 
 2. **Compute changed code.** Keep only source/config/package files that can change docs. Exclude pure docs, vendored/generated paths, lockfiles unless version docs mention package manager output, and deleted files that were never public.
 
-   Output shape:
+   Output shape per file:
 
    ```json
    {"status":"M|A|D|R","oldPath":"src/old.ts","path":"src/new.ts","basename":"client","modulePath":"src/new","kind":"source|manifest|config|cli"}
    ```
 
-3. **Extract coupling terms.** For each changed code file, derive:
+3. **Extract coupling terms.** For each changed code file derive:
 
-   - filename stem: `client`, `auth-server`.
-   - full path and path without extension: `src/auth/client.ts`, `src/auth/client`.
-   - import strings from the diff: `from "pkg/auth"`, `require("pkg/auth")`, dynamic imports.
-   - exported/public symbols from `codegraph_search` / `codegraph_explore` when indexed.
-   - fallback symbols from language syntax:
+   - Filename stem: `client`, `auth-server`.
+   - Full path and path without extension: `src/auth/client.ts`, `src/auth/client`.
+   - Import strings from the diff: `from "pkg/auth"`, `require("pkg/auth")`, dynamic imports.
+   - Exported/public symbols via codegraph when indexed, or via language syntax fallback:
 
      ```bash
      ast-grep --pattern 'export function $NAME($$$)' --lang ts <file>
@@ -70,31 +61,31 @@ When the diff added a document or a whole section, the tree order may have gone 
      git grep -nE '^(export |pub |def |class |func )' -- <file>
      ```
 
-4. **Discover related docs.** Search only live doc surfaces first: `README.md`, `CHANGELOG.md`, `docs/**/*.md`, `*.md` at repo root. For each coupling term, search docs and record `doc`, `line`, `term`, `referenceType` (`filename`, `full-path`, `import`, `symbol`, `url-path`, `version`). Default ignore list lives in `references/doc-issues.md`.
-
-   Runnable fallback:
+4. **Discover related docs.** Search live doc surfaces: `README.md`, `CHANGELOG.md`, `docs/**/*.md`, `*.md` at repo root. For each coupling term search docs and record `doc`, `line`, `term`, `referenceType` (`filename`, `full-path`, `import`, `symbol`, `url-path`, `version`).
 
    ```bash
    git grep -n -- '*.md' README.md CHANGELOG.md docs/ -- '<term>'
    git grep -nE 'from ["'"''][^"'"'']+["'"'']|require\(["'"''][^"'"'']+["'"'']\)' -- '*.md'
    ```
 
-   ODIN tool equivalent: `search` each escaped term across `README.md`, `CHANGELOG.md`, `docs/**/*.md`, then `read` the surrounding lines.
+   ODIN tool equivalent: `search` each escaped term across `README.md`, `CHANGELOG.md`, `docs/**/*.md`, then `read` surrounding lines.
 
-5. **Classify issues.** Use the taxonomy in `references/doc-issues.md`. Preserve certainty:
+5. **Classify issues.** Severity taxonomy:
 
    - **HIGH**: manifest version mismatch with exact current version; deleted/renamed public export still documented with symbol proof; changed import path in fenced example where the old path no longer resolves.
    - **MEDIUM**: stale code example that mentions a changed file/symbol but needs semantic review; undocumented public export after entry-point/internal filtering; docs describing codegraph-reported dead code.
    - **LOW**: doc-drift from zero code-coupling or weak filename-only coupling; broad stale prose suspicion.
 
-6. **Apply safe fixes only.** In `apply` mode:
+   Ignore patterns: generated docs unless explicitly in scope, vendored docs, changelog append-only entries (intentionally low code coupling), versioned snapshots unless in scope.
 
-   - **Version bump**: replace stale semver strings in docs with the manifest version when the line clearly labels a version (`version`, package badge, install snippet with `@x.y.z`). Avoid broad numeric replacement.
-   - **CHANGELOG `## [Unreleased]` entry**: insert a minimal bullet under the existing section, or create the section at the top if absent. Use commit messages or changed-file summaries; do not invent product claims.
+6. **Apply safe fixes only** (in `apply` mode):
 
-   Do not auto-edit removed exports, import paths, examples, undocumented exports, dead-code docs, or doc-drift prose. Those require intent.
+   - **Version bump**: replace stale semver strings in docs with the manifest version when the line clearly labels a version (`version`, package badge, install snippet with `@x.y.z`). Avoid broad numeric replacement. Replacement value must come from the manifest; matched line must be version-labeled.
+   - **CHANGELOG `## [Unreleased]` entry**: insert a minimal bullet under the existing section, or create the section at the top if absent. Use commit messages or changed-file summaries; do not invent product claims. Entry must cite commit/file evidence and land under `## [Unreleased]`.
 
-7. **Flag the rest.** Emit a compact report sorted by severity, then file path:
+   Do not auto-edit removed exports, import paths, examples, undocumented exports, dead-code docs, or doc-drift prose. Those require human intent.
+
+7. **Flag the rest.** Emit a compact report sorted by severity then file path:
 
    ```text
    HIGH docs/api.md:42 removed-export `createClient` no current public symbol; changed in src/client.ts
@@ -102,11 +93,9 @@ When the diff added a document or a whole section, the tree order may have gone 
    LOW docs/legacy.md:? doc-drift zero code-coupling; no live filename/import/symbol references
    ```
 
-8. **Return fix ledger.** For every edit, record `file`, `line`, `type`, `before`, `after`, and evidence source. For every flag-only item, record `reasonFlagOnly`.
+8. **Return fix ledger.** For every edit record `file`, `line`, `type`, `before`, `after`, and evidence source. For every flag-only item record `reasonFlagOnly`.
 
-## Native Detection Recipes
-
-### Code graph first
+### Detection recipes
 
 When the repo is indexed, use the codegraph MCP for symbol truth:
 
@@ -123,13 +112,17 @@ ast-grep --pattern 'import $X from $Y' --lang ts src
 ast-grep --pattern 'from $M import $$$N' --lang python .
 ```
 
-Per-ecosystem manifest version fields and changelog evidence commands live in
-`references/detection-recipes.md`. Read it when the change touches a manifest
-and docs mention a version, or when gathering changelog evidence in `apply`
-mode (step 6), for the specific language and tooling the target repo actually
-uses.
+Per-ecosystem manifest version fields and changelog evidence commands:
 
-## Anti-patterns
+- **Node/npm**: `node -p 'require("./package.json").version'`; changelog at `CHANGELOG.md`.
+- **Python**: `python -c 'import tomllib; print(tomllib.load(open("pyproject.toml","rb"))["project"]["version"])'`; or `__version__` in `__init__.py`.
+- **Rust/Cargo**: `cargo metadata --no-deps --format-version 1 | jq '.packages[0].version'`; changelog at `CHANGELOG.md`.
+- **Go**: `grep -m1 'version' go.mod` or module path version suffix.
+- **Ruby**: `grep VERSION lib/*/version.rb`.
+
+Read the relevant recipe when the change touches a manifest and docs mention a version, or when gathering changelog evidence in `apply` mode.
+
+### Anti-patterns
 
 - **Regex-only confidence on public API removal**: require codegraph, LSP, ast-grep, or exact diff evidence before HIGH.
 - **Mass replacing version-looking numbers**: examples, ports, years, protocol versions, and dates are not package versions.
@@ -137,22 +130,20 @@ uses.
 - **Treating CHANGELOG as drift**: append-only history has intentionally low code coupling.
 - **Reporting generated/versioned docs as stale**: they are snapshots unless explicitly in scope.
 
-## Validation Gates
+## Failure and recovery
+| Failure class | Response |
+|---|---|
+| No diff or empty scope | Stop. Report the resolved base and scope; do not fabricate drift. |
+| Ambiguous base ref | Stop. List candidate refs and ask the user. |
+| Manifest parse failure | Skip the version-bump safe fix for that manifest; flag the file as MEDIUM with reason. |
+| Post-edit read mismatch | Revert the edit; reclassify the issue as flag-only with `reasonFlagOnly`. |
+| Codegraph unavailable | Use syntax fallback; downgrade confidence to MEDIUM for symbol-dependent claims. |
 
-| Gate | Pass Criteria | Blocking |
-|---|---|---|
-| Scope resolved | Base ref, scope, changed files, and ignored paths are listed | Stop with exact missing base or empty diff |
-| Evidence attached | Every issue has `file:line` when a line exists, plus the changed code source | Do not report line-specific claims without a read/search hit |
-| Safe-fix boundary | Only version bump and CHANGELOG Unreleased entry are in `fixes` | Reclassify everything else as flag-only |
-| Version fix exactness | Replacement value comes from manifest; matched line is version-labeled | Do not edit |
-| Changelog restraint | Entry cites commit/file evidence and lands under `## [Unreleased]` | Do not edit |
-| Post-edit check | Re-read edited ranges; no unrelated prose changed | Revert the edit and report flag-only |
-| Residual flags | All non-safe issues remain in the report with reason | Completion blocked until listed |
+Partial results rule: if some coupling terms resolve and others do not, report resolved issues and flag unresolved terms. Never widen scope to compensate for missing evidence.
 
-## Output Contract
+Rollback: revert any edited file to its pre-edit content. The fix ledger records before/after for every edit.
 
-Return both machine-readable and human-readable surfaces when possible:
-
+## Output
 ```json
 {
   "opCell": "correct",
@@ -165,4 +156,8 @@ Return both machine-readable and human-readable surfaces when possible:
 }
 ```
 
-Completion means the safe fixes are applied or explicitly unavailable, and all remaining drift is flagged. A clean report with no edits is valid only after the diff-to-doc mapping and taxonomy pass ran.
+Completion means safe fixes are applied or explicitly unavailable, and all remaining drift is flagged. A clean report with no edits is valid only after the diff-to-doc mapping and taxonomy pass ran.
+
+## Provenance
+
+Origin: current ODIN skill tree, candidate `current:current-d:current:sync-docs`. No pinned revision; adapted from the existing `skills/sync-docs/SKILL.md` body. Project-owned; no third-party expression copied. License: project-owned.

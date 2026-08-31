@@ -1,17 +1,40 @@
 ---
 name: wait-what
-description: Stop — that last message did not land. Re-pitch it. Use when the user says "wait, what", "I don't follow", "say that again", or otherwise signals that an explanation missed.
-disable-model-invocation: true
+description: 'Use when the user says "wait, what", "the explanation is unclear", or "say that again", re-pitch the previous explanation with the missing frame supplied, in plain English and the project''s ubiquitous language. Don''t use for tasks that require source or remote-system changes.'
 ---
 
 # Wait, what
 
-That last message did not land. Do not repeat it louder, and do not apologize — restate it.
+## Contract
 
-Re-pitch it:
+| Field | Bound contract |
+|---|---|
+| Trigger | User says 'wait, what', 'I don''t follow', or 'say that again'. |
+| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Side effect | Restates the same claim without softening; nothing touches disk. |
+| Done | The claim is re-pitched with the missing frame supplied, in plain English and the project''s ubiquitous language. |
 
-- **Lead with the context** the explanation assumed. One or two sentences on where we are and what the message was answering. The gap is usually a missing frame, not a missing word.
-- **Write it in ISO 24495-1 English.** Short sentences, active voice, direct address, and a common word wherever jargon appeared. This is conversation with the user, so ISO 24495-1 governs it — not the ASD-STE100 register that maintainer docs use.
-- **Use the project's ubiquitous language.** Read `CONTEXT.md` at the repository root (or the per-context `CONTEXT.md` beside the relevant source, when the project keeps a `CONTEXT-MAP.md`) and name domain things the way the project names them. If no glossary exists, use the names already in the code.
+## Inputs
 
-Re-pitch the same claim. Softening it, hedging it, or swapping it for an easier one answers a question nobody asked.
+The trigger identifies which explanation failed. No external files are required. Read `CONTEXT.md` at the repository root (or the per-context `CONTEXT.md` beside the relevant source when the project keeps a `CONTEXT-MAP.md`) to use the project''s ubiquitous language. If no glossary exists, use the names already in the code.
+
+## Procedure
+
+1. Identify the explanation that did not land: the last assistant message immediately before the trigger.
+2. Restate the same claim, preserving its substance and conclusions. Do not soften, hedge, or replace it with an easier version.
+3. Re-pitch it:
+   - Lead with the context the explanation assumed: one or two sentences on where the conversation is and what the message was answering. The gap is a missing frame, not a missing word.
+   - Write in ISO 24495-1 English: short sentences, active voice, direct address, common words replacing jargon.
+   - Use the project''s ubiquitous language.
+
+## Failure and recovery
+**Non-converged:** the user signals they do not understand after one re-pitch.
+
+Stop. Do not elaborate, restate a third time, or widen scope. The user is the authority on whether the explanation landed. Report `non-converged`.
+
+## Output
+A single re-pitched message in the conversation, in plain English with the missing context supplied.
+
+## Provenance
+
+Origin: current-odin-skill-tree. License: project-owned. Adaptation: restructured to ODIN 2.0 SKILL.md section format; content and mechanism preserved from `skills/wait-what/SKILL.md`.

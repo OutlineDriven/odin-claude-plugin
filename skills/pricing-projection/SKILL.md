@@ -1,0 +1,64 @@
+---
+name: pricing-projection
+description: 'Use when a user asks to project cost, estimate BYO cost, estimate spend, how much will this cost, or size a deal. Projection delivered with pricing model, run-rate, scenario comparison, conversion assumption, and sensitivity grid. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+---
+
+# Pricing projection
+
+## Contract
+
+| Field | Bound contract |
+|---|---|
+| Trigger | User asks to project cost, estimate BYO cost, estimate spend, how much will this cost, or size a deal. |
+| Authority | Reversible local: read usage data and write one report to reports/pricing/. No remote mutation. |
+| Side effect | Generates and runs a projection script that prints or saves a cost projection brief to reports/pricing/. |
+| Done | Projection delivered with pricing model, run-rate, scenario comparison, conversion assumption, and sensitivity grid. |
+
+## Inputs
+
+Required:
+- `usage_records`: structured usage log in CSV or JSON (date, model, input_tokens, output_tokens).
+- `pricing_table`: pricing table in CSV or JSON with validated schema: `provider`, `model`, `input_cost_per_million`, `output_cost_per_million`. Reject if any required column is absent; list missing columns in the error.
+- `scenario_params`: JSON with three named scenarios (e.g. `low`, `mid`, `high`) each carrying `requests_per_day`, `avg_input_tokens`, `avg_output_tokens`. Defaults to `{"low":{"requests_per_day":100,"avg_input_tokens":1000,"avg_output_tokens":500},"mid":{"requests_per_day":1000,"avg_input_tokens":1000,"avg_output_tokens":500},"high":{"requests_per_day":10000,"avg_input_tokens":1000,"avg_output_tokens":500}}` when absent.
+- `conversion_ratio`: numeric ratio (credits-per-dollar or reverse) applied in the projection. Defaults to `1.0` when absent.
+
+Optional:
+- `output_path`: destination directory. Defaults to `reports/pricing/`.
+
+## Procedure
+
+1. Confirm all four required inputs are present. If `pricing_table` is absent or its validated schema lacks `provider`, `model`, `input_cost_per_million`, or `output_cost_per_million`, abort and name the missing columns.
+2. If `scenario_params` is absent, use the default scenario map. If `conversion_ratio` is absent, set it to `1.0`.
+3. Validate the pricing table schema: each required column must be present in every row. Reject rows with missing required fields.
+4. Generate `/tmp/project_credits.py` as a Python script that loads the usage records and pricing table; computes each model cost as `input_tokens * input_cost_per_million / 1_000_000 + output_tokens * output_cost_per_million / 1_000_000`; applies the conversion ratio; computes daily, weekly, and monthly mid-scenario run-rate; compares all three scenarios; and builds a sensitivity grid across token volume and model choice. Run it with `--usage <usage_records>`, `--pricing <pricing_table>`, `--scenarios <scenario_params>`, `--conversion <conversion_ratio>`, and `--output <output_path>`.
+5. Pipe script stdout to the terminal.
+6. If the script exits non-zero, capture stderr, report the error verbatim, and return with status `blocked` and the five required output elements absent.
+7. If the script exits zero and output exists, confirm it contains the five required elements: pricing model, run-rate, scenario comparison table, conversion assumption, and sensitivity grid.
+8. Return the completed projection brief with all five elements present.
+
+## Failure and recovery
+| Failure class | Response |
+|---|---|
+| Missing required input | Abort; name the absent input. |
+| Invalid pricing table schema | Abort; list missing required columns. |
+| Projection script exits non-zero | Report error verbatim; return status `blocked`; do not claim done. |
+| Empty or partial projection | Return the partial result with a `warning` note; do not suppress the missing elements. |
+
+Partial-result rule: if the script produces output but omits one or more of the five required elements, return what was produced and name the absent elements. Do not fabricate or infer missing elements.
+
+## Output
+A cost projection brief containing:
+1. **Pricing model**: per-model cost breakdown from the pricing table.
+2. **Run-rate**: computed daily/weekly/monthly cost at the mid scenario.
+3. **Scenario comparison**: side-by-side cost table across all three scenarios.
+4. **Conversion assumption**: the conversion ratio applied and its effect on the projected cost.
+5. **Sensitivity grid**: tabular sensitivity of cost to changes in token volume and model selection.
+
+Report format: plain text or Markdown printed to terminal and saved to `reports/pricing/`.
+
+## Provenance
+
+- Origin: warpdotdev/competitive-intelligence-agent-oss
+- Revision: 9e0363e810a14405ef876fb354562735002797fb
+- License: MIT — MIT notice retained; mechanism adapted
+- Adaptation: Based on `.warp/skills/answer_pricing/SKILL.md` and supporting scripts. Table/column names moved from inline literals to a validated schema config per the adaptation note. Conversion-ratio caveat and projection-script mechanism preserved.

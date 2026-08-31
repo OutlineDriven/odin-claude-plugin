@@ -1,0 +1,3 @@
+interface:
+  display_name: "Complexity Grill"
+  short_description: "Rank true complexity sources qualitatively before any metric."

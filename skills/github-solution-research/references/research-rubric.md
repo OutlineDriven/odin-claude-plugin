@@ -1,8 +1,8 @@
-# Problem and Project Evidence Rubric
+# Problem and project evidence rubric
 
 Use this rubric when ranking GitHub evidence for a concrete engineering problem or a repository-level solution. The score is a decision aid, not a replacement for judgment.
 
-## Default Score: 100 points
+## Default score: 100 points
 
 | Category | Points | What to Check |
 | --- | ---: | --- |
@@ -12,7 +12,7 @@ Use this rubric when ranking GitHub evidence for a concrete engineering problem 
 | Actionability and adaptation cost | 15 | Provides a concrete patch, config change, version pin/upgrade, API usage, reusable workflow, test, reproduction, or operational step with minimal local adaptation. |
 | Project maturity signals | 10 | Stars, forks, recent activity, non-archived status, clear license, docs/examples, maintainer responsiveness, and production use signals. |
 
-## Evidence Priority
+## Evidence priority
 
 - Highest: merged PRs, release notes, maintainer-confirmed issues, official examples, and source/tests showing the exact behavior.
 - Strong: resolved issues with matching versions, code examples in active projects, reproducible fixes confirmed by multiple users.
@@ -22,7 +22,7 @@ Use this rubric when ranking GitHub evidence for a concrete engineering problem 
 
 High Stars can put a repository near the top of the inspection list and break ties among similarly fitting projects. Stars must not override a clearly better problem match, official maintainer guidance, or exact same-version evidence.
 
-## Search Surface Handling
+## Search surface handling
 
 - Use GitHub CLI first. Prefer `gh search repos`, `gh search issues`, `gh search prs`, `gh search code`, `gh repo view`, `gh issue view`, `gh pr view`, and `gh api` before browser scraping or custom scripts.
 - Search issues and PRs first for errors, regressions, dependency upgrades, framework behavior, and integration failures.
@@ -31,13 +31,13 @@ High Stars can put a repository near the top of the inspection list and break ti
 - For repository candidates, start with high-Star active projects, then lower the Star threshold when high-Star projects are too broad or miss the exact need.
 - Use Stars and forks as maturity context and tie-breakers. They should not outweigh exact problem evidence.
 
-## Subagent Handling
+## Subagent handling
 
 Subagents are conditional. Use them when the problem spans independent ecosystems, query families, repositories, versions, or evidence surfaces. Skip them when the task has one obvious repository or API surface, when local context must be understood first, or when authorization, private repositories, secrets, sensitive logs, or production data would make delegation risky.
 
 When subagents are used, rank only after merging and deduplicating repeated reports of the same repo, issue, PR, discussion, code path, or release. The controller must directly verify the strongest claims before presenting them as evidence.
 
-## Output Fields
+## Output fields
 
 For each shortlisted repository candidate, capture:
 

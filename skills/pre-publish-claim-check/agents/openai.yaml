@@ -1,0 +1,3 @@
+interface:
+  display_name: "Pre Publish Claim Check"
+  short_description: "Whole-draft claim-to-source publication gate"

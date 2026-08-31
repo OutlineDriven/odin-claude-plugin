@@ -1,0 +1,3 @@
+interface:
+  display_name: "Culture Individual Interpretation"
+  short_description: "Interpret one CI profile into traits, archetype, and actions"

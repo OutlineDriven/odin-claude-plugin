@@ -1,0 +1,3 @@
+interface:
+  display_name: "Reproduce Bug Report"
+  short_description: "Reproduce a reported bug locally and write evidence"

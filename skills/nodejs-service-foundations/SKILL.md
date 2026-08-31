@@ -1,0 +1,66 @@
+---
+name: nodejs-service-foundations
+description: 'Use when asked to set up or harden Node.js service foundations: env/secrets configuration, structured logging, error taxonomy, module system, native TypeScript (type stripping). Service starts with validated config, emits redacted structured logs, throws typed coded errors, and runs under type stripping or tsc with no errors. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+---
+
+# Node.js service foundations
+
+## Contract
+
+| Field | Bound contract |
+|---|---|
+| Trigger | Setting up or hardening Node.js service foundations: env/secrets configuration, structured logging, error taxonomy, module system, native TypeScript (type stripping). |
+| Authority | Reversible-local: write only named local artifacts (env schema, logger, error classes, tsconfig, package scripts); state the rollback path before each write. |
+| Side effect | Writes service scaffolding files (env schema, logger module, error class definitions, tsconfig.json, package.json scripts). |
+| Done | Service starts with validated env (invalid config fails fast), emits structured logs with secret redaction, throws typed coded errors, and runs under type stripping or tsc with no errors. |
+
+## Inputs
+
+- **Project root** (required): the directory containing or to receive `package.json`.
+- **Env schema definition** (required): list of environment variable names, types, and whether each is required or optional with a default.
+- **Secret field names** (required): list of env keys whose values must be redacted in log output.
+- **Error code catalogue** (required): list of `{ code, message, httpStatus }` tuples for the service's domain errors.
+
+## Procedure
+
+1. **Bound scope.** Confirm the project root exists and contains or will contain a `package.json`. Record every file this procedure will create or overwrite. State the rollback path: `git checkout -- <files>` if the project is tracked, or delete the listed files if untracked.
+
+2. **Validate environment at startup.** Create an env schema module (e.g. `src/env.ts`) that reads `process.env` at import time. For each declared variable: parse the value against its type (string, number, boolean, URL); if required and missing or malformed, throw a descriptive error and exit with code 1 before any server binding. Export the frozen validated config object. Do not allow the service to start with invalid or missing configuration.
+
+3. **Configure structured logging.** Create a logger module (e.g. `src/logger.ts`) using a structured JSON logger (pino or equivalent). Configure: log level from env, ISO-8601 timestamps, request-id correlation field. Implement a redaction serializer that replaces values of secret field names with `[REDACTED]` at every log level. Export a singleton logger instance.
+
+4. **Define typed error classes.** Create an error module (e.g. `src/errors.ts`) exporting a base `ServiceError` class with fields `code: string`, `message: string`, `httpStatus: number`, and `cause?: Error`. For each entry in the error code catalogue, export a named subclass or factory. Ensure `instanceof ServiceError` works for error-handling middleware to map codes to HTTP responses.
+
+5. **Configure module system.** In `package.json`, set `"type": "module"` for ESM. If the project requires CJS interop, add an explicit `"exports"` field mapping entry points. Ensure `"engines"` declares the minimum Node.js version (>= 22.12 for native type stripping or >= 23.6 for `--experimental-strip-types`). Remove any `"type": "commonjs"` or ambiguous dual-package fields.
+
+6. **Set up native TypeScript type stripping.** Create `tsconfig.json` with `"compilerOptions": { "erasableSyntaxOnly": true, "verbatimModuleSyntax": true, "strict": true, "module": "nodenext", "moduleResolution": "nodenext", "target": "es2024" }`. Add `"scripts"` to `package.json`: `"start": "node --experimental-strip-types src/index.ts"`, `"build": "tsc"`, `"typecheck": "tsc --noEmit"`. This allows running `.ts` files directly without a build step while keeping `tsc` available for CI type checking.
+
+7. **Enforce async patterns.** Every async entry point must have a top-level `try/catch` that logs the error via the structured logger and exits with code 1. Never allow unhandled promise rejections. Use `AbortController` for graceful shutdown: listen for `SIGTERM`/`SIGINT`, call `controller.abort()`, drain in-flight requests, then exit.
+
+8. **Write package scripts.** Ensure `package.json` contains: `"start"` (run with type stripping), `"build"` (tsc compile), `"typecheck"` (tsc --noEmit), `"lint"` (Biome), `"test"` (node --test or vitest). Verify each script runs without error.
+
+9. **Verify end state.** Run `node --experimental-strip-types src/index.ts` with valid env and confirm: server binds, startup log emits as structured JSON with secrets redacted. Run with a missing required env var and confirm: process exits with code 1 and a descriptive error before any server binding. Run `tsc --noEmit` and confirm: zero type errors.
+
+## Failure and recovery
+| Failure class | Detection | Recovery |
+|---|---|---|
+| Invalid or missing env var | Env schema validation throws at import time | Process exits code 1 with descriptive message listing the missing/invalid vars. Do not start the server. |
+| Logger redaction miss | Secret value appears unredacted in log output | Halt: the redaction serializer is misconfigured. Fix the field-name list before proceeding. |
+| Type error on `tsc --noEmit` | Compiler emits diagnostics | Fix the type errors. Do not suppress with `@ts-ignore` or `any`. |
+| Unhandled promise rejection | Node emits `unhandledRejection` event | Add the missing `try/catch` or `.catch()` at the identified call site. |
+| Partial write on rollback | Some files written, others not | Use the recorded rollback path: `git checkout -- <written files>` or delete the listed untracked files. |
+
+If any verification step in Procedure step 9 fails, do not declare done. Fix the failure class, re-run verification.
+
+## Output
+- `src/env.ts` -- validated environment schema with fail-fast startup.
+- `src/logger.ts` -- structured JSON logger with secret redaction.
+- `src/errors.ts` -- typed `ServiceError` base class and domain-specific subclasses.
+- `tsconfig.json` -- strict TypeScript config for native type stripping.
+- `package.json` -- updated with `"type": "module"`, `"engines"`, and scripts (`start`, `build`, `typecheck`, `lint`, `test`).
+
+All files are local, named, and reversible via the stated rollback path.
+
+## Provenance
+
+Adapted from `mcollina/skills` (commit `856efd268ae85482d882f3d0bed869fd020b5c06`) under the MIT license. Source files: `skills/node/SKILL.md`, `skills/node/rules/environment.md`, `skills/node/rules/logging.md`, `skills/node/rules/error-handling.md`, `skills/node/rules/modules.md`, `skills/node/rules/async-patterns.md`, `skills/node/rules/typescript.md`, `skills/node/rules/node-modules-exploration.md`, `skills/fastify/rules/configuration.md`. MIT notice retained; mechanism adapted for ODIN 2.0 module `odin-code`.

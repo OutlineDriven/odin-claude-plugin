@@ -1,0 +1,3 @@
+interface:
+  display_name: "Changelog Updates"
+  short_description: "Draft release notes for a since-tag window without publishing"

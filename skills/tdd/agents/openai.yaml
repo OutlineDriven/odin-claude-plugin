@@ -1,0 +1,3 @@
+interface:
+  display_name: "TDD Red Green Proof"
+  short_description: "Write a failing test, implement to pass, prove both runs."

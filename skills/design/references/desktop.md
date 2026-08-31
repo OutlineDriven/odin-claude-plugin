@@ -20,7 +20,7 @@ Tauri 2.0 stable shipped on **October 2 2024**. The 2.x mobile track — iOS and
 - **File dialogs** — `tauri-plugin-dialog`.
 - **Notifications** — `tauri-plugin-notification`.
 
-The trade is a small binary (typically <10 MB vs Electron's ~150 MB baseline) and a fast cold-start, at the cost of webview drift across platforms. Treat the webview as a minimum-baseline target, not a uniform substrate.
+The trade is a small binary (typically <10 MB vs Electron's ~150 MB baseline) and a fast cold-start, at the cost of webview drift across platforms. Treat the webview as a minimum-baseline target, not a uniform base.
 
 IPC pattern — frontend invokes a named Rust command, awaits a JSON-serializable result:
 

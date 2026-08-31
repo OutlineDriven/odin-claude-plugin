@@ -1,0 +1,3 @@
+interface:
+  display_name: "Changed Route Browser Testing"
+  short_description: "Browser-test affected routes and report Pass, Fail, or Skip."

@@ -1,8 +1,8 @@
-# `simplify` — orchestration recipe
+# `simplify`: orchestration recipe
 
 Dispatch shape, composition rule, Reviewer audit contract, fix sequencing, and behavior gate for the `simplify` skill. Read alongside `SKILL.md` Phase 1 / 2 / 3.
 
-## Phase 1 — diff scope resolution (shell snippet)
+## Phase 1: diff scope resolution (shell snippet)
 
 ```bash
 # Resolve a base ref. Print "" and exit 1 if none resolves.
@@ -44,11 +44,11 @@ fi
 [ -z "$diff" ] && exit 11
 ```
 
-**Explicit-base override** — when the user invokes `simplify against <ref>`, the orchestrator bypasses `resolve_base` and runs `git --no-pager diff "<ref>"` directly. The `<ref>` is any revision spec git accepts (`HEAD~5`, a SHA, a branch name, a tag).
+**Explicit-base override**: when the user invokes `simplify against <ref>`, the orchestrator bypasses `resolve_base` and runs `git --no-pager diff "<ref>"` directly. The `<ref>` is any revision spec git accepts (`HEAD~5`, a SHA, a branch name, a tag).
 
-## Phase 2 — single-message dispatch shape
+## Phase 2: single-message dispatch shape
 
-The orchestrator issues **one** tool-call message containing three Agent invocations — never three sequential messages. Each invocation receives a prompt built as:
+The orchestrator issues **one** tool-call message containing three Agent invocations, never three sequential messages. Each invocation receives a prompt built as:
 
 ```
 <axis prompt from references/<axis>.md, verbatim>
@@ -65,7 +65,7 @@ Independence argument the orchestrator must include in the spawn message:
 
 Agent type for each invocation: `Explore` (read-only).
 
-## Phase 3 — composition, audit, fix
+## Phase 3: composition, audit, fix
 
 ### Composition
 
@@ -78,23 +78,23 @@ Dispatch a Reviewer agent (also `Explore`-typed, read-only) with:
 - the original diff,
 - the axis prompts from `references/{reuse,quality,efficiency}.md`.
 
-Reviewer audit charter — four checks:
-1. **Completeness** — did the three axes between them cover every diff hunk that warrants attention? Flag systematic blind spots.
-2. **Consistency** — do any findings contradict each other (e.g., "extract this into a helper" vs "inline this helper")? Flag and resolve.
-3. **Accuracy** — for each finding, verify the citation. Discard findings whose `path:line` does not match the diff or whose `existing-utility` does not exist.
-4. **Scope** — flag findings that propose changes outside the diff's blast radius. Discard.
+Reviewer audit charter (four checks):
+1. **Completeness**: did the three axes between them cover every diff hunk that warrants attention? Flag systematic blind spots.
+2. **Consistency**: do any findings contradict each other (e.g., "extract this into a helper" vs "inline this helper")? Flag and resolve.
+3. **Accuracy**: for each finding, verify the citation. Discard findings whose `path:line` does not match the diff or whose `existing-utility` does not exist.
+4. **Scope**: flag findings that propose changes outside the diff's blast radius. Discard.
 
-The Reviewer's output is the **validated survivor set**. The orchestrator applies survivors and drops non-survivors — no re-litigation in either direction.
+The Reviewer's output is the **validated survivor set**. The orchestrator applies survivors and drops non-survivors; no re-litigation in either direction.
 
 If the survivor set is empty after a non-empty raw findings list, exit 12.
 
 ### Fix sequencing
 
-Group survivors by `issue-class`. Apply in this order — one atomic commit per class:
+Group survivors by `issue-class`. Apply in this order, one atomic commit per class:
 
-1. **Duplicate commit** — apply all reuse-axis survivors (and any other axis survivors flagged `issue-class: duplicate`).
-2. **Excess-surface commit** — apply all quality-axis + efficiency-axis survivors flagged `issue-class: excess-surface`.
-3. **Structure commit** — apply all quality-axis + efficiency-axis survivors flagged `issue-class: structure`.
+1. **Duplicate commit**: apply all reuse-axis survivors (and any other axis survivors flagged `issue-class: duplicate`).
+2. **Excess-surface commit**: apply all quality-axis + efficiency-axis survivors flagged `issue-class: excess-surface`.
+3. **Structure commit**: apply all quality-axis + efficiency-axis survivors flagged `issue-class: structure`.
 
 Commit message format follows the baseline `<git>` charter (capitalized imperative subject, 50 chars target and 72 hard, no trailing period); recommended:
 
@@ -129,6 +129,6 @@ After the final commit, audit the simplify patch itself for unneeded surface, du
 | 0 | Survivors applied, behavior gate green, no new bloat |
 | 11 | Empty diff after all Phase 1 resolutions |
 | 12 | Survivor set empty after Reviewer audit |
-| 13 | Behavior gate red on a fix commit — that commit reverted |
-| 14 | Post-fix audit caught new bloat — chain reverted |
-| 15 | Mixed-class commit detected — split required before merge |
+| 13 | Behavior gate red on a fix commit; that commit reverted |
+| 14 | Post-fix audit caught new bloat; chain reverted |
+| 15 | Mixed-class commit detected; split required before merge |

@@ -1,3 +1,3 @@
 interface:
   display_name: "Fan Out Fresh Reads"
-  short_description: "Repeat a read for divergence"
+  short_description: "Report fresh zero-context read divergences before agreements"

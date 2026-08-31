@@ -1,0 +1,3 @@
+interface:
+  display_name: "Browser Cookie Store"
+  short_description: "Populate the session cookie store from installed browsers."

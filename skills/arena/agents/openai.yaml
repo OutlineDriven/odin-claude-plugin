@@ -1,0 +1,3 @@
+interface:
+  display_name: "Implementation Synthesis Arena"
+  short_description: "Judge competing implementations and graft one synthesis"

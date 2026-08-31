@@ -1,0 +1,3 @@
+interface:
+  display_name: "Visual Plan"
+  short_description: "Builds a nine-section visual HTML implementation plan"

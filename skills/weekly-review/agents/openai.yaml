@@ -1,0 +1,3 @@
+interface:
+  display_name: "Weekly Review"
+  short_description: "Executive summary and work classification from the last week."

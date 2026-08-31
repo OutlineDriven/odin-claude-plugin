@@ -1,4 +1,4 @@
-# TDD Cycle Patterns by Language
+# TDD cycle patterns by language
 
 Brief RED-GREEN-REFACTOR patterns. One example test + one property test per language.
 

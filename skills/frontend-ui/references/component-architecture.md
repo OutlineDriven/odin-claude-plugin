@@ -1,6 +1,6 @@
-# Component Architecture
+# Component architecture
 
-## File Structure
+## File structure
 
 Colocate everything that changes together with the component. The principle is stack-independent:
 
@@ -23,7 +23,7 @@ app/components/task_list/
   task_list.css         # Component-local styles
 ```
 
-## Component Patterns
+## Component patterns
 
 **Prefer composition over configuration.** Expose regions as slots/children, not a wall of props.
 

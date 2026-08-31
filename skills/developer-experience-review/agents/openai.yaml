@@ -1,0 +1,3 @@
+interface:
+  display_name: "Developer Experience Review"
+  short_description: "Eight-dimension DX scorecard with measured time to hello world."

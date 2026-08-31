@@ -1,0 +1,3 @@
+interface:
+  display_name: "Goal Init"
+  short_description: "Scaffold an approved checkable success predicate ready to bind"

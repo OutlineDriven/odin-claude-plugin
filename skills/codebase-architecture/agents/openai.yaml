@@ -1,0 +1,3 @@
+interface:
+  display_name: "Codebase Architecture"
+  short_description: "Design module seams, interfaces, and guardrails for target code."

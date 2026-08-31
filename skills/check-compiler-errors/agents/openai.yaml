@@ -1,0 +1,3 @@
+interface:
+  display_name: "Check Compiler Errors"
+  short_description: "Run the failing check, fix each error locally, re-run to clean."

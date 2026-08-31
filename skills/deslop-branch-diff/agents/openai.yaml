@@ -1,0 +1,3 @@
+interface:
+  display_name: "Deslop Branch Diff"
+  short_description: "Focused branch diff matching local style"

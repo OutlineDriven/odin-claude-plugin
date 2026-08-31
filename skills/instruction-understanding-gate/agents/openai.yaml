@@ -1,0 +1,3 @@
+interface:
+  display_name: "Instruction Understanding Check"
+  short_description: "Verify understanding before spending non-trivial work"

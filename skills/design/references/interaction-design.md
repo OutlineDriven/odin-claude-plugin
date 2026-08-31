@@ -113,7 +113,7 @@ For tooltips, dropdowns, and non-modal overlays, use native popovers.
 
 A dropdown rendered with `position: absolute` inside a container that has `overflow: hidden` or `overflow: auto` will be clipped. This is the single most common dropdown bug in generated code.
 
-### CSS Anchor Positioning
+### CSS anchor positioning
 
 Modern solution — tether an overlay to its trigger without JavaScript.
 

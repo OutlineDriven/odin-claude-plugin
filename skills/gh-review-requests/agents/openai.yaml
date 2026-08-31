@@ -1,0 +1,3 @@
+interface:
+  display_name: "GH Review Requests"
+  short_description: "List open PRs needing your review with URLs."

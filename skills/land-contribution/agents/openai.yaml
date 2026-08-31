@@ -1,0 +1,3 @@
+interface:
+  display_name: "Land Contribution"
+  short_description: "Review and land external pull requests with credit"

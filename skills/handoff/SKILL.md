@@ -1,97 +1,57 @@
 ---
 name: handoff
-description: Snapshot the current session into a resumable handoff artifact so a cold session, agent, or person continues without replaying context. Use when the user says "write a handoff", "hand off", "snapshot this session", "I'm running low on context", "pause and pack this up for the next session", or "resume this later".
-argument-hint: "[what the next session will focus on]"
-metadata:
-  short-description: Snapshot the current session into a resumable handoff artifact
+description: 'Use when the user explicitly asks to continue current work in a different agent or session, package the live context into a bounded typed brief a receiving agent can resume. The brief uses handles and a source receipt, warns when the work is over seven days old, refuses excluded projects, and contains no raw transcript. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
-# Handoff: resumable session snapshot
+# History handoff
 
-Write one artifact that lets a cold session — the same person tomorrow, a fresh agent, or a
-colleague — resume this work without replaying the conversation. Chat is ephemeral; this file is the
-persistence layer for a single hand-off point.
+## Contract
 
-`handoff` writes exactly one surface: `.outline/handoffs/<slug>-<ts>.md`. It does not commit, does
-not delegate, and does not open a PR.
+| Field | Bound contract |
+|---|---|
+| Trigger | User explicitly asks to continue current work in a different agent or session. |
+| Authority | Reversible local write: produce one bounded handoff file or stdout only. Launching the target agent is a separate explicit human action and is never performed here. |
+| Side effect | Writes at most one handoff file under the current project, or emits the brief to stdout. No remote, credential, VCS, or deployed mutation. |
+| Done | A <=6KB typed brief uses handles and shows a source receipt, a staleness warning after seven days, exclusion refusal, and wrong-project visibility; no raw transcript appears. |
 
-## When to apply / NOT
+## Inputs
 
-Apply:
-- Context is running low and the task is unfinished.
-- End of a work block, or pausing mid-task.
-- Switching agents (Claude → agy/codex/grok) and the next one needs the state, not the transcript.
+Required: the current conversation or session context being handed off — its problem statements, the conclusions reached, and where the work stopped.
 
-Do NOT:
-- Delegate a task to another AI — `antigravity`, `codex`, and `grok` own that.
-- Package a branch for review — `commit-push-pr` and `pr-review` own that.
+Optional: an explicit session or project handle to package when the user names one; otherwise package the current work in scope. An exclude list of project patterns the user has declared private, used only to refuse.
 
-Choosing between a handoff and the four other moves at a phase boundary — continuing, discarding the context, delegating, or compressing in place — is its own decision. The ordered tree is in [references/phase-boundaries.md](references/phase-boundaries.md); read it when the choice is live, not when you already know you are handing off.
+## Procedure
 
-## Write procedure
+1. Resolve what is being handed off. If the user named a session or project handle, use it; otherwise use the current work in scope. Apply strict project scope so a directory-name match does not package a different project's work. If more than one distinct session matches the current scope, pick the newest and state that an explicit handle would choose otherwise.
 
-1. Resolve the workspace and self-ignore it:
-   ```bash
-   root=$(git rev-parse --show-toplevel 2>/dev/null || pwd)   # cwd fallback outside a repo
-   mkdir -p "$root/.outline/handoffs"
-   printf '*\n' > "$root/.outline/handoffs/.gitignore"          # `*` also ignores the .gitignore itself
-   ```
-   The handoff stays **local and gitignored** — it never enters `git status` or a commit. To hand
-   off to a colleague on another machine, copy the file out (paste it, or attach it to a PR/issue).
+2. Print a source receipt before producing the brief: the session or harness kind, the project name, a short handle for the session id, and the age of the work. The user must always see what is being handed off so a wrong-project or stale handoff is obvious before it lands.
 
-2. Name it. `slug` = kebab-case of the task title; `ts=$(date +%Y%m%d-%H%M%S)` (seconds included so
-   two runs in the same minute can't collide). Write `$root/.outline/handoffs/<slug>-<ts>.md`. Runs
-   leave a **trail** of timestamped files rather than overwriting one. Stale snapshots are yours to prune.
+3. If the work is older than seven days, emit a staleness warning naming the age and suggesting the user pass an explicit handle for newer work. Treat a timestamp ahead of the clock as unknown age rather than a number that cannot be true.
 
-3. Fill the format below. Omit any section that is empty — an empty heading is noise. Echo the
-   **absolute** path of the written file to chat (relative paths are not clickable in most terminals).
-   If arguments were passed, tailor `## Goal` and `## Next` to that focus. Redact secrets, API
-   keys, and PII because the handoff may be copied off-machine. Reference specs, plans, ADRs,
-   commits, and diffs by path or URL; never paste their content.
+4. Refuse to hand off context from a project the exclude list covers. An index built before the pattern was added can still hold the session, so refusal is the privacy control; tell the user to rebuild without the pattern or remove the pattern to hand it off.
 
-## To resume
+5. If newer work in the same project is withheld by a trust or visibility policy, say so and state that the packaged session is the newest the policy allows.
 
-The recency-discovery command for finding the active handoff lives in `references/resume.md` — read it when resuming (a session that only needs to write a new handoff never reaches it).
+6. Build the brief within a 6KB budget. Spend three quarters of the budget on the packaged body and reserve the rest for the tail. The body opens with a framing header using handles — session kind, project, date — then noise-filtered user problem statements and key conclusions. Drop raw transcript: filter out tool output, command dumps, JSON and CLI walls, system reminders, and passages with long unbroken token runs; keep only prose a person or agent wrote. Select conclusions as the assistant lines that carry a decision marker plus the final outcome line, in transcript order. When a passage is cut to fit the budget, end it with a cut marker and write nothing after the marker; never leave a section header standing with nothing under it.
 
-## Format
+7. Append a "Where it stopped" tail: the last few substantive exchanges, verbatim and noise-filtered, so the receiving agent sees the live state and not only conclusions. The tail is paid out of the reserved budget.
 
-Purpose-built for cold resume. Terse `field: value` header, then only the sections that carry
-signal:
+8. End the brief by telling the receiving agent this is a compact slice and that it should continue from the packaged context instead of re-deriving what is already done.
 
-```
-# Handoff: <one-line task title>
-branch: <name @ short-sha> (<clean | dirty: N files>)
+9. Emit the brief to stdout or write it to one handoff file under the current project. Do not launch any target agent. State that launching is a separate explicit human action.
 
-## Goal
-<1-2 lines: what we're achieving and why>
+## Failure and recovery
+- Wrong-project match: stop and report which project the match came from; do not package it. Recovery is an explicit handle from the user.
+- Excluded project: refuse and name the project; do not produce a brief. Recovery is rebuilding without the pattern or removing the pattern.
+- Stale work: produce the brief with the staleness warning; do not silently hand over older work when newer work is withheld.
+- Budget overflow: cut with a marker and stop the block; never write past a cut marker or let a section header stand empty.
+- Ambiguous handle: report the ambiguity and stop; do not pick silently among distinct sessions.
+- No session in scope: stop and ask for an explicit handle; do not invent a session.
+- Partial result: a brief that fails the done predicate is not emitted as complete; report what failed and stop. Never swallow an error or pretend the done predicate holds.
 
-## Done
-- <completed step + evidence: commit sha / passing check>
+## Output
+One <=6KB typed handoff brief, to stdout or a single file under the current project. The brief contains a handle-bearing framing header, noise-filtered problem statements, key conclusions, and a "Where it stopped" tail; a source receipt is printed before it; and the applicable staleness warning, exclusion refusal, or wrong-project notice is shown. No raw transcript appears. No target agent is launched.
 
-## In flight
-- <the half-built thing: file:line, what's written, what's still missing>
+## Provenance
 
-## Next
-1. <the single next concrete action>
-
-## Key files
-- path:line — why it matters
-
-## Decisions & constraints
-- <decision + the why, so the next session does not relitigate it>
-
-## Blockers / open questions
-- <what is stuck; what needs a human or an answer>
-
-## Suggested skills
-- `<skill-name>`: <why it should run next>
-
-## Verify
-<exact command(s) to confirm state; last known result>
-```
-
-## Edge cases
-
-- **No git repo** — `$root` falls back to cwd; `branch:` reads `(no repo)`.
-- **Detached HEAD / dirty tree** — that is the state worth capturing; record it in `branch:`.
-- **Nothing in flight** — omit the section. A thin handoff (Goal + Next) is still a valid handoff.
+Adapted from the `deja handoff` command and `internal/digest` package of deja-vu (https://github.com/vshulcz/deja-vu, revision 6f766fd4716edcaf24662c794368e420e5058f47), MIT license, Copyright (c) 2026 Vladislav Shulcz. The 6KB digest budget with its three-quarter body reserve, the handle-based framing header, the source receipt, the seven-day staleness warning with unknown-age handling for clock skew, the exclusion refusal, the strict wrong-project scope with withheld-newer-work notice, the noise-filtered lossy slice with cut markers, and the reserved "where it stopped" tail are preserved; the launch-the-target step is removed and left to explicit human confirmation. Mechanisms are rewritten in ODIN style; no third-party expression is copied.

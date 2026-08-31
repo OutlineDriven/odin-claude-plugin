@@ -1,0 +1,3 @@
+interface:
+  display_name: "Perspective Complete Review"
+  short_description: "Run one viewpoint's review-fix cycles until quiet."

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Workflow Evidence Mining"
+  short_description: "Contradiction-tested workflow mined from authorized history"

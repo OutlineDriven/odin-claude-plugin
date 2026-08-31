@@ -1,0 +1,3 @@
+interface:
+  display_name: "From Human Perspective"
+  short_description: "Answer only from the human seat, no blending."

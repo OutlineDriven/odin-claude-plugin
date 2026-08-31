@@ -1,0 +1,3 @@
+interface:
+  display_name: "Skills Visibility"
+  short_description: "Publish an integrity-protected skill catalog"

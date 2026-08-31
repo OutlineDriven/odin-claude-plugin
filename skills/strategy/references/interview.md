@@ -1,4 +1,4 @@
-# Strategy interview — question bank and pushback flow
+# Strategy interview: question bank and pushback flow
 
 Load before any interview turn (Phase 1 first-run, Phase 2 per-section). The pushback rules, anti-pattern examples, and per-section quality bar live here; improvising them from memory produces a passive transcription instead of a strategy.
 
@@ -13,8 +13,8 @@ The orchestrator runs a short Verbalized Sampling preamble (the `askme` skill) f
 1. **Ask, don't prescribe.** Free-form answers for the substantive sections (problem, approach, persona). Reserve single-select for routing (which section to revisit).
 2. **Push back once, maybe twice.** First weak answer → name the specific issue, ask a sharper question. Second still weak → capture what's given, mark the section worth revisiting. Don't spiral.
 3. **Quote the user back.** Challenge with the user's own words verbatim. Paraphrase softens the challenge and is easy to dismiss.
-4. **1–3 sentences per answer.** A paragraph is usually hiding something vague — ask for the one sentence that matters.
-5. **Don't leak the anti-pattern names.** Don't say "that's a vanity metric" — just ask the sharper question.
+4. **1–3 sentences per answer.** A paragraph is usually hiding something vague; ask for the one sentence that matters.
+5. **Don't leak the anti-pattern names.** Don't say "that's a vanity metric"; just ask the sharper question.
 
 ---
 

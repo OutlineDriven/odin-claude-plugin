@@ -1,8 +1,8 @@
-# Diff Scope Rules
+# Diff scope rules
 
 These rules apply to every reviewer. They define what is "your code to review" versus pre-existing context.
 
-## Scope Discovery
+## Scope discovery
 
 Determine the diff to review using this priority order:
 
@@ -12,7 +12,7 @@ Determine the diff to review using this priority order:
 
 The scope step in the SKILL.md handles discovery and passes you the resolved diff.
 
-## Finding Classification Tiers
+## Finding classification tiers
 
 Every finding you report falls into one of three tiers based on its relationship to the diff:
 
@@ -22,7 +22,7 @@ Lines added or modified in the diff. This is your main focus. Report findings ag
 
 ### Secondary (immediately surrounding code)
 
-Unchanged code within the same function, method, or block as a changed line. If a change introduces a bug that's only visible by reading the surrounding context, report it -- but note that the issue exists in the interaction between new and existing code.
+Unchanged code within the same function, method, or block as a changed line. If a change introduces a bug that's only visible by reading the surrounding context, report it, but note that the issue exists in the interaction between new and existing code.
 
 ### Pre-existing (unrelated to this diff)
 

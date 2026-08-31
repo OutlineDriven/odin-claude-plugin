@@ -1,0 +1,3 @@
+interface:
+  display_name: "dbt Model Index"
+  short_description: "Resolve data questions to correct BigQuery dbt model SQL"

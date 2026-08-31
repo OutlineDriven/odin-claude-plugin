@@ -1,3 +1,3 @@
 interface:
   display_name: "Ground Latest"
-  short_description: "Check current versions before choosing a stack"
+  short_description: "Ground pinned versions in today's release-channel data"

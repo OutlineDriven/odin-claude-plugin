@@ -1,4 +1,4 @@
-# Document Review Sub-agent Prompt Template
+# Document review sub-agent prompt template
 
 This template is used by the doc-review orchestrator to spawn each reviewer sub-agent. Variable substitution slots are filled at dispatch time.
 

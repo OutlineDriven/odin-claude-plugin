@@ -1,0 +1,3 @@
+interface:
+  display_name: "Narration Analysis Pipeline"
+  short_description: "Transcribe captured speech locally with timestamps and language"

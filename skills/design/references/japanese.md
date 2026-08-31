@@ -4,7 +4,7 @@ Japanese-locale production reference for product UI. Loaded via `cjk.md` routing
 
 **Grounded: 2026-08-26**
 
-Two halves with different review cadences. **Stable spec layer** (§1 on-screen rules, §3 vertical/ruby reality, §4 BudouX, §6 form patterns, §9 anti-slop tells) tracks W3C / OpenType / library APIs — review on spec or library bumps only. **Drift layer** (§2 fonts, §5 DS landscape, §7 studios, §8 trends) — snapshot 2026-04-29; review semi-annually.
+Two halves with different review cadences. **Stable spec layer** (§1 on-screen rules, §3 vertical/ruby reality, §4 BudouX, §6 form patterns, §9 anti-slop tells) tracks W3C / OpenType / library APIs — review on spec or library bumps only. **Drift layer** (§2 fonts, §5 DS market, §7 studios, §8 trends) — snapshot 2026-04-29; review semi-annually.
 
 ## 1. Japanese on screen
 
@@ -69,9 +69,9 @@ BudouX output wraps phrases in `<wbr>` tags or zero-width-space (ZWSP) character
 
 kuromoji.js remains the JP morphological analyzer (different job — full MeCab-style tokenization for IME / search / NLP, not line-breaking). Do not substitute. Cite (github.com/google/budoux), (gigazine.net/gsc_news/en/20231001-budoux).
 
-## 5. JP DS landscape 2026
+## 5. JP DS market 2026
 
-JP product DS landscape clusters around enterprise SaaS (HR, accounting, marketplace) and frames AI integration as the 2025-2026 axis.
+JP product DS market clusters around enterprise SaaS (HR, accounting, marketplace) and frames AI integration as the 2025-2026 axis.
 
 | DS | Status | Signature |
 |---|---|---|

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Flaky Test Stabilization"
+  short_description: "Flake-free test stabilization"

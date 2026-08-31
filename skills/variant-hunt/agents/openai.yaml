@@ -1,0 +1,3 @@
+interface:
+  display_name: "Variant Hunt"
+  short_description: "Find every instance of a confirmed bug across the codebase"

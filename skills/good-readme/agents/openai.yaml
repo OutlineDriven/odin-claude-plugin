@@ -1,0 +1,3 @@
+interface:
+  display_name: "Good Readme"
+  short_description: "Author a sourced, skimmable open-source README."

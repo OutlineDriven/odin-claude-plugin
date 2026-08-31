@@ -1,0 +1,3 @@
+interface:
+  display_name: "UI Animation"
+  short_description: "Build spring, easing, and choreographed animations"

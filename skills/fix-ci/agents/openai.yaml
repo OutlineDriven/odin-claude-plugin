@@ -1,0 +1,3 @@
+interface:
+  display_name: "Fix CI"
+  short_description: "Repair failing PR CI and push minimal fixes to green."

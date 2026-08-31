@@ -1,0 +1,3 @@
+interface:
+  display_name: "Apple Design Review"
+  short_description: "Audit iOS app visuals against HIG, score each screen 0-10."

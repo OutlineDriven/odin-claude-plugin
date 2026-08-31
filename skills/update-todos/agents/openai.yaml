@@ -1,3 +1,0 @@
-interface:
-  display_name: "Update Todos"
-  short_description: "Re-sync a stale task list with the real code"

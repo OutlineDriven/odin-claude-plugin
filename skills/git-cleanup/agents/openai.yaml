@@ -1,0 +1,3 @@
+interface:
+  display_name: "Git Cleanup"
+  short_description: "Categorize local branches and delete only human-confirmed ones."

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Triage PRs"
+  short_description: "Grouped PR and issue triage with approved actions."

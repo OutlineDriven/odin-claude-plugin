@@ -1,0 +1,3 @@
+interface:
+  display_name: "Audit Punishing Practices"
+  short_description: "Name punishing practices in a workflow or diff with evidence."

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Doc Coauthoring"
+  short_description: "Co-author docs, specs, and RFCs to pass fresh-reader testing"

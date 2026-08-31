@@ -1,0 +1,3 @@
+interface:
+  display_name: "Orchestration Patterns"
+  short_description: "Select and execute bounded subagent orchestration"

@@ -2,7 +2,7 @@
 
 Sync-lineage note: `skills/autolearn/references/concepts.md` is the sibling file — autolearn's own, independent entry-schema and reconciliation model for the same `CONCEPTS.md` surface, not a copy of this one. Don't merge them.
 
-`CONCEPTS.md` defines the words that mean something specific in this codebase — substrate that `docs/solutions/` and AGENTS.md can cite without redefinition. Lives at the repo root. Terms enter two ways — accretion and seeding (below) — and the file is created the first time either path produces a qualifying entry.
+`CONCEPTS.md` defines the words that mean something specific in this codebase — a shared reference that `docs/solutions/` and AGENTS.md can cite without redefinition. Lives at the repo root. Terms enter two ways — accretion and seeding (below) — and the file is created the first time either path produces a qualifying entry.
 
 ## How terms enter: accretion and seeding
 

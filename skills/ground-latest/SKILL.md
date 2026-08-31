@@ -1,27 +1,43 @@
 ---
 name: ground-latest
-description: 'Ground every version, stack, and best-practice choice in what is current today, read from the release channel rather than from recall. Use when starting a new codebase or service, scaffolding a project, migrating or refactoring an existing one, picking a language edition, runtime, framework, or dependency, or when the user asks for the latest, current, LTS, or modern way.'
+description: 'Use when starting a new codebase or service, scaffolding, migrating or refactoring, or picking a language edition, runtime, framework, or dependency, or when the user asks for the latest, current, LTS, or modern way. Produces a dated grounded set of pinned versions with release-channel links and LTS-vs-latest decisions, dropping pre-release and deprecated choices with named replacements. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
-# Ground Latest
+# Ground latest
 
-Training data ages. Every version, stack, and practice this change pins gets read from the release channel today, not recalled.
+## Contract
 
-This skill decides **what to pin**. `source-driven` decides how to use what is already pinned; `deps-upgrade` runs an upgrade campaign over dependencies already chosen.
+| Field | Bound contract |
+|---|---|
+| Trigger | Starting a new codebase or service, scaffolding, migrating or refactoring, picking a language edition, runtime, framework, or dependency, or the user asks for the latest, current, LTS, or modern way |
+| Authority | reversible-local: write a dated grounded set into the change (plan, ADR, or PR body); no VCS, credential, paid, published, deployed, or remote mutation |
+| Side effect | local write of a dated grounded set of pinned versions with release-channel links and LTS-vs-latest decisions; drops pre-release and deprecated choices with named replacements |
+| Done | every pinned choice has a release-channel version plus link; LTS-vs-latest decided per project; grounded set written and dated |
 
-## Do this
+## Inputs
+
+- The change being grounded (plan, ADR, or PR body) and the list of choices it pins: language edition, runtime, each framework and dependency, build and test tooling, and the platform baseline. That list is the grounding set.
+- Optional: existing repo pins or version floors that may override a pick.
+
+## Procedure
 
 1. List every choice this change pins: language edition, runtime, each framework and dependency, build and test tooling, and the platform baseline. That list is the grounding set.
 2. Look each one up at its own release channel today: the project release page, changelog, or registry metadata. For support windows and LTS tracks, query `https://endoflife.date/api/v1/products/<product>/`. Recall is not a source.
 3. Record per entry: current stable, current LTS if the project runs an LTS track, release date, and end-of-support date.
 4. Pin the latest stable LTS where the project offers one, otherwise the latest stable. An existing repo pin or version floor wins over the pick; name which one applied.
-5. Drop pre-release, deprecated, and unmaintained choices (no release or security fix in 12 months), and name the maintained replacement you pinned instead.
+5. Drop pre-release, deprecated, and unmaintained choices (no release or security fix in 12 months), and name the maintained replacement pinned instead.
 6. Read the chosen version's current recommended pattern before writing against it. Renamed APIs and replaced defaults are where recalled code breaks.
 7. Leave the grounded set in the change (plan, ADR, or PR body) with versions, dates, and links, so the next reader sees when it was grounded.
 
-## Verify
+## Failure and recovery
+- No release channel reachable for an entry: mark the entry ungrounded; do not pin from recall. Stop and report which entry blocked and which channel was tried.
+- LTS-versus-latest conflict with no project policy: record both with dates and defer the decision to the human; do not silently pick.
+- A choice is pre-release, deprecated, or unmaintained and no maintained replacement is found: mark it dropped-without-replacement and name the gap; do not retain the dropped version.
+- Partial result: write only the entries grounded from a release channel today; list ungrounded entries as blocked, never filled from recall.
 
-- [ ] Every pinned choice has a version read from its release channel today, with a link.
-- [ ] LTS versus latest-stable was decided per project, and any repo floor that overrode the pick is named.
-- [ ] No pre-release, deprecated, or unmaintained choice survived; each replacement is named.
-- [ ] The grounded set is written into the change, dated.
+## Output
+A dated grounded set written into the change (plan, ADR, or PR body). Per entry: pinned version, release date, end-of-support date, release-channel link, LTS-vs-latest decision, and any repo floor that overrode the pick. Dropped choices are listed with their named replacement or marked dropped-without-replacement.
+
+## Provenance
+
+Origin: odin-1.x `ground-latest` skill. Revision: none pinned. License: project-owned. Adaptation: restated as a self-contained version-grounding procedure; peer-skill pointers removed and the verified-checklist folded into the done predicate.

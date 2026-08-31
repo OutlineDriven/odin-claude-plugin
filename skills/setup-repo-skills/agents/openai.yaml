@@ -1,0 +1,3 @@
+interface:
+  display_name: "Setup Repo Skills"
+  short_description: "Configure tracker, labels, and domain docs for one repo"

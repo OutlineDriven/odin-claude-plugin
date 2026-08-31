@@ -1,6 +1,6 @@
-# Parse, Don't Validate -- Patterns by Language
+# Parse, don't validate: patterns by language
 
-Brief constructor-validation patterns. The type IS the proof of validity.
+Brief constructor-validation patterns. The type is the proof of validity.
 
 ## Rust
 

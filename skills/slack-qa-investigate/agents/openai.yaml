@@ -1,0 +1,3 @@
+interface:
+  display_name: "Slack QA Investigate"
+  short_description: "Sourced answers from codebase investigation, read-only"

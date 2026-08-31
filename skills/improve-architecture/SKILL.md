@@ -1,84 +1,55 @@
 ---
 name: improve-architecture
-description: Surface deepening refactors that turn shallow modules into deep ones, raising testability and agent-navigability.
-disable-model-invocation: true
+description: 'Use when improving modular design, testability, or agent navigability, or when surfacing deepening refactors. Produce one resolved deep-module design with replacement tests and updated domain artifacts. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
-Iteration loop: explore for friction, present deepening candidates, grill the chosen one, update domain artifacts inline. Vocabulary is load-bearing. See `codebase-design`.
+# Improve architecture
 
-## Vocabulary [LOAD-BEARING]
+## Contract
 
-Use these terms exactly. Do not substitute "component," "service," "API," or "boundary." Full definitions in `codebase-design`.
+| Field | Bound contract |
+|---|---|
+| Trigger | The user asks to improve modular design, testability, or agent navigability, or to surface deepening refactors. |
+| Authority | Read the scoped local codebase and write only the chosen refactor and its tests, `CONTEXT.md` entries for newly established domain terms, and an optional local ADR that the user accepts. All writes must be reversible by restoring the pre-change file contents. Do not mutate credentials, paid services, published or deployed state, or remote state. |
+| Side effect | Reversibly change only the files named in the accepted candidate; update `CONTEXT.md` inline when a domain term is established; optionally add or amend an ADR after acceptance; optionally dispatch two parallel read-only interface-design passes for the chosen candidate. |
+| Done | One chosen deepening candidate is grilled to resolution, its shallow path is replaced rather than layered, tests exercise the resulting interface, obsolete shallow tests and code are removed, and established domain terms and accepted decisions are recorded locally. |
 
-- **Module**: anything with an interface and an implementation (function, class, package, slice). Scale-agnostic.
-- **Interface**: every fact a caller must know: types, invariants, ordering, error modes, config, performance shape. Not just signature.
-- **Depth**: leverage at the interface. Deep = much behaviour behind a small interface. Shallow = interface as complex as implementation.
-- **Seam** (Feathers): where an interface lives; a place behaviour can be altered without editing in place. Use this, not "boundary."
-- **Adapter**: a concrete thing satisfying an interface at a seam. Role, not substance.
-- **Leverage**: capability callers gain per unit of interface learned.
-- **Locality**: concentration of change, bug, and knowledge at one site for maintainers.
+## Inputs
 
-## Principles
+Required: a local codebase and either a user-named direction or permission to identify candidates in actively changing code. Before writing, require the user to select one candidate and resolve its design decisions. Optional inputs are existing `CONTEXT.md` or context-map files, local ADRs, and a user request for alternative interface designs. Absence of domain or ADR files is not an error.
 
-- **Deletion test:** imagine deleting the module. If complexity vanishes, it was a pass-through. If complexity reappears across N callers, it was earning its keep.
-- **Interface = test surface.** Tests cross the same seam callers cross. Wanting to test past the interface = wrong shape.
-- **One adapter = hypothetical seam. Two adapters = real seam.** No port without two real implementations (production + test).
+Use this vocabulary when assessing the code:
 
-## Process
+- A **module** is any unit with an interface and implementation, at any scale.
+- An **interface** is every fact a caller must know, including types, invariants, ordering, errors, configuration, and performance shape.
+- **Depth** is behavior hidden per unit of interface learned; a deep module provides high leverage through a small interface.
+- A **seam** is a place where behavior can be changed without editing that behavior in place.
+- An **adapter** is a concrete implementation used at a seam.
+- **Leverage** is capability gained per unit of interface learned.
+- **Locality** is concentrating a change, bug, or required knowledge at one maintenance site.
 
-### 1. Explore
+## Procedure
 
-First tool call MUST be Explore-agent dispatch, not direct reads.
+1. Make the first execution action a read-only explorer dispatch. Put the scope in its brief. If the user named a direction, inspect that direction; otherwise inspect recent local change history first and bias the walk toward actively developed paths. Read applicable context files and local ADRs when present, then walk only the selected paths.
+2. Classify concrete friction with three tests. Apply the deletion test: if deleting a module removes complexity, it is likely pass-through; if the complexity spreads into callers, the module earns its place. Treat the public interface as the test surface. Introduce a seam only for two real implementations, normally production and test; do not create a port for a hypothetical second adapter.
+3. Present a numbered candidate list. For each candidate, name the files, the concrete problem and deletion-test result, a plain-language solution without an interface proposal, and expected locality, leverage, and testability changes. Surface an ADR conflict only when the observed friction supplies a specific reason to reopen it. Do not bundle unrelated refactors. Ask the user to select one candidate before writing or proposing its interface.
+4. Grill the selected candidate adversarially. Resolve one dependent design decision at a time and recommend one answer. Bound the changed-file set before mutation. If a new domain term becomes established, update or lazily create `CONTEXT.md` immediately. If the user rejects a design for a reason future maintainers need, offer a local ADR and write it only after acceptance.
+5. If the user requests interface alternatives, dispatch exactly two parallel read-only design passes over the selected candidate. Require each pass to minimize caller knowledge and state invariants, errors, ordering, configuration, and performance shape. Compare the two designs against leverage, locality, and test-surface quality; resolve their differences with the user before implementation.
+6. Choose the dependency treatment by observed class. Merge pure or in-memory behavior behind the new interface without an adapter. For a local substitutable dependency, run the real stand-in in tests and keep its seam internal. For a remote owned service, use a port with its production protocol adapter and an in-memory test adapter. For a true external service, inject a port with production and mock adapters.
+7. Implement only the accepted design. Validate external and serialized inputs at the new interface. Migrate every scoped caller, delete the replaced shallow path, and delete shallow-module tests after equivalent interface tests exist; do not layer the new design over the old one or leave compatibility paths.
+8. Exercise the changed behavior through the same interface callers use. Confirm the accepted invariants, error modes, and relevant dependency implementation. Review the final changed-file set against the bound scope and verify that domain terms and accepted architectural decisions are recorded where required. Stop rather than widening scope or inventing evidence.
 
-Put scope selection in the Explore-agent brief so dispatch remains the first tool call. Scope exploration to where change is actively landing instead of scanning the repo evenly: a deepening opportunity in code nobody touches is a refactor that never gets cashed in.
+## Failure and recovery
+- **No defensible candidate:** return `no-candidate` with the inspected scope and observed friction; make no changes.
+- **No selection or unresolved decision:** return `blocked` with the candidate list or exact unresolved decision; preserve any completed read-only analysis and make no implementation change.
+- **ADR conflict without a load-bearing reopening reason:** preserve the ADR and return `blocked-by-decision`; do not re-litigate or bypass it.
+- **Missing required implementation fact or unavailable behavioral check:** return `blocked` with the missing fact or check and the files already changed. Do not claim the done predicate.
+- **Failed implementation or verification:** restore every modified named file to its captured pre-change contents, remove only newly created artifacts from this run, and return `failed-rolled-back` with the failing observation. If exact restoration cannot be proved, stop with `recovery-required`, listing each affected file and its pre-change source.
+- **Partial result:** analysis, candidate lists, and resolved decisions may be reported, but partially migrated code is never a successful output and must be rolled back.
 
-- If the user names a direction, tell the agent to take it.
-- Otherwise, tell the agent to run `git --no-pager log --oneline -20` via `bash` before its direct reads and bias exploration toward actively developed paths.
+## Output
+Return the selected candidate and resolved interface contract; the exact files changed; the replacement and deletion performed; the interface-level checks and observed results; any `CONTEXT.md` or accepted ADR update; and one terminal classification: `done`, `no-candidate`, `blocked`, `blocked-by-decision`, `failed-rolled-back`, or `recovery-required`.
 
-The agent's brief:
+## Provenance
 
-- Read `CONTEXT.md` (or `CONTEXT-MAP.md` + per-context `CONTEXT.md`) and any `docs/adr/`. If absent, proceed silently.
-- Walk the scoped paths organically; classify friction:
-
-### 2. Present candidates
-
-Numbered list. Each candidate: **Files**, **Problem** (concrete friction; cite deletion test), **Solution** (plain-English description; no interface yet), **Benefits** (locality, leverage, testability deltas).
-
-ADR conflicts: surface only when friction warrants reopening; mark explicitly: _"contradicts ADR-0007: worth reopening because…"_.
-
-Ask: "Which candidate to explore?" Do not propose interfaces yet.
-
-### 3. Grilling loop
-
-Once user picks, drop into adversarial interview. Walk the design tree, resolve dependencies one decision at a time, recommend an answer per question. Side effects happen inline:
-
-- New domain term emerging? Update `CONTEXT.md` immediately (lazy create).
-- User rejects with a load-bearing reason that future explorers would need? Offer ADR.
-- User wants alternative interfaces for the chosen candidate? Pivot to `references/INTERFACE-DESIGN.md` for parallel sub-agent design twice (Ousterhout).
-
-## Deepening categories (testing strategy per dependency class)
-
-Full treatment in `references/DEEPENING.md`. Summary:
-
-| Class | Deepenable? | Test strategy |
-|---|---|---|
-| In-process (pure / in-memory) | Always | Merge modules; test through new interface directly. No adapter. |
-| Local-substitutable (PGLite, in-memory FS) | Yes if stand-in exists | Stand-in runs in tests; seam stays internal. |
-| Remote but owned (microservices) | Yes via Ports & Adapters | Port at seam; HTTP/gRPC adapter prod, in-memory adapter test. |
-| True external (Stripe, Twilio) | Yes | Injected port; mock adapter for tests. |
-
-Replace, don't layer: delete shallow-module tests once interface tests exist.
-
-## Language-neutral examples
-
-**Rust**: shallow `validate_address` + `format_address` + `geocode_address` separately called by a `Shipment` aggregator. Deletion test: removing `format_address` concentrates string-handling at one call site → was a pass-through. Deepen into `address::Resolver` with `resolve(raw) -> Result<Resolved, AddressError>`; tests cross the new interface; in-memory `Geocoder` adapter for tests, HTTP adapter for production.
-
-**Python**: module exposes `parse_invoice`, `apply_tax`, `round_total` as separate top-level functions; every caller chains all three. Deepen into `billing.Invoice.finalize(raw) -> Invoice`. Internal seams (tax tables, rounding rules) stay private; the test surface is `Invoice.finalize`.
-
-## Reference docs
-
-- `codebase-design`: full vocabulary, principles, rejected framings.
-- `references/DEEPENING.md`: dependency taxonomy, seam discipline, replace-don't-layer testing.
-- `references/INTERFACE-DESIGN.md`: parallel sub-agent "Design It Twice" workflow when the chosen candidate's interface needs alternatives.
-
-Forbidden: proposing interfaces in step 2 (premature commitment), bundling unrelated refactors, re-litigating ADRs without a load-bearing reason.
+Adapted from the project-owned ODIN 1.x `improve-architecture` skill at `skills/improve-architecture/SKILL.md`. No source revision or license identifier was supplied. This self-contained adaptation retains scoped exploration, the deletion test, interface-as-test-surface and two-adapter seam discipline, candidate selection before interface design, adversarial grilling, optional design-twice comparison, dependency-class testing, replace-don't-layer migration, and inline domain-decision updates without depending on external skill or reference text.

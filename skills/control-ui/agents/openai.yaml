@@ -1,0 +1,3 @@
+interface:
+  display_name: "Control UI"
+  short_description: "Verify browser or Electron UI behavior with before/after proof."

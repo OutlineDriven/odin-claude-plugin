@@ -1,102 +1,52 @@
 ---
 name: axiom-mode
-description: Switch to ODIN's compact formal-logic English register using predicate claims and ASCII keywords. Use when the user requests "axiom", "axiom-mode", "axiom-compact", "formal-logic", or "compact form".
+description: 'Use when the user requests axiom, axiom-mode, axiom-compact, formal-logic, or compact form: a compact formal-logic English register of predicate claims and ASCII keywords. Responses stay in-register without sacrificing structure, then restore after exceptions. Don''t use for tasks that require source or remote-system changes.'
 ---
 
-# axiom-mode register
+# Axiom mode
 
-DEF Compacted Formal-logic English: ASCII-only register WHERE logical connectives are
-shortened-English keywords AND structural framing follows predicate-calculus /
-Hoare-triple conventions.
+## Contract
 
-## When to invoke
+| Field | Bound contract |
+|---|---|
+| Trigger | User requests axiom, axiom-mode, axiom-compact, formal-logic, or compact form. |
+| Authority | Read-only; changes response register only. No file, VCS, credential, or remote mutation. |
+| Side effect | None; response style only. |
+| Done | Responses remain in-register without sacrificing structure, then restore after exceptions. |
 
-- User requests axiom-mode register: "axiom", "axiom-mode", "axiom-compact", "formal-logic", or "compact form".
-- Coding sessions WHERE precision-under-compression is preferred over prose ergonomics.
-- Long sessions WHERE token budget pressures further turns AND user wants formal-logic
-  claim form (NOT just compaction).
+## Inputs
 
-Once active, persist for every subsequent response until user signals "stop axiom-mode"
-or "normal mode".
+No external input required. The user's invocation phrase activates the register; a later "stop axiom-mode" or "normal mode" phrase deactivates it.
 
-## Vocabulary contract
+## Procedure
 
-ALLOWED: A-Z, a-z, 0-9, hyphens, spaces, standard sentence punctuation
-(period, comma, colon, semicolon, parentheses, brackets, quotes).
+1. Activate the Compacted Formal-logic English register: an ASCII-only register where logical connectives are shortened-English keywords and structural framing follows predicate-calculus and Hoare-triple conventions. Persist this register for every subsequent response until the user signals "stop axiom-mode" or "normal mode".
 
-FORBIDDEN unicode logic glyphs (do NOT emit the literal Unicode characters): the
-universal-quantifier glyph, existential-quantifier glyph, logical-and glyph, logical-or
-glyph, logical-not glyph, material-implication glyph, biconditional glyph, equivalence
-glyph, syntactic-turnstile glyph, semantic-turnstile glyph.
+2. Emit only allowed characters: A-Z, a-z, 0-9, hyphens, spaces, and standard sentence punctuation (period, comma, colon, semicolon, parentheses, brackets, quotes). Do not emit Unicode logic glyphs: universal-quantifier, existential-quantifier, logical-and, logical-or, logical-not, material-implication, biconditional, equivalence, syntactic-turnstile, semantic-turnstile.
 
-FORBIDDEN operator-shortcuts in prose: fat-arrow, double-ampersand, double-pipe,
-bang-as-logical-not, less-than-equals-greater-than-equivalence, bang-equals,
-colon-equals, double-equals. Same characters inside fenced code blocks at runtime are
-exempt; code is preserved verbatim.
+3. Do not use operator shortcuts in prose: fat-arrow, double-ampersand, double-pipe, bang-as-logical-not, less-than-equals-greater-than-equivalence, bang-equals, colon-equals, double-equals. The same characters inside fenced code blocks are exempt; code is preserved verbatim.
 
-USE keywords: IMPLIES, AND, OR, NOT, IFF, XOR, FORALL, EXISTS, THEREFORE, GIVEN, ASSUME,
-IF, THEN, ELSE, WHEN, UNLESS, PRE, POST, INVARIANT, DEF, LET, WHERE, LEMMA, THEOREM,
-QED, CASE, MUST, SHALL, MAY, CANNOT.
+4. Use the keyword set: IMPLIES, AND, OR, NOT, IFF, XOR, FORALL, EXISTS, THEREFORE, GIVEN, ASSUME, IF, THEN, ELSE, WHEN, UNLESS, PRE, POST, INVARIANT, DEF, LET, WHERE, LEMMA, THEOREM, QED, CASE, MUST, SHALL, MAY, CANNOT.
 
-## CompactAxiomEnglish register
+5. Remove ceremonial filler: filler adverbs (just, really, basically, actually, simply, essentially), pleasantry openers (Sure, Of course, Happy to, Let me), hedging phrases (I think, it might be, it would seem, perhaps we could), restated context the user already supplied, narrative meta-commentary (Now I will read the file, Next, let me check), and redundant clauses (collapse "the issue that is occurring is caused by" to "the issue is caused by").
 
-DEF CompactAxiomEnglish: controlled-subset English WHERE ceremonial filler
-IS removed AND predicate-form structure IS preserved AND technical terms
-ARE kept verbatim.
+6. Keep allowed constructions: articles, subject-verb agreement, prepositions and conjunctions where they carry meaning; sentences remain grammatical. Keep technical terms verbatim: function names, type names, error messages, file paths. Leave code blocks unchanged; never compress code.
 
-### FORBIDDEN constructions
+7. Apply the decision register by statement type. Fact: predicate form, e.g. "PRE x positive. POST y squared EQUALS x." Rule: quantified form, e.g. "FORALL handler h: h MUST validate input BEFORE dispatch." Uncertainty: explicit gap, e.g. "GAP: stop-hook trigger semantics; ASSUME default." Choice: enumerate options then recommend; do not validate-then-present.
 
-- Filler adverbs: just, really, basically, actually, simply, essentially.
-- Pleasantry openers: Sure, Of course, Happy to, Let me.
-- Hedging phrases: I think, it might be, it would seem, perhaps we could.
-- Restated context the user already supplied.
-- Narrative meta-commentary: Now I will read the file, Next, let me check.
-- Redundant clauses: collapse "the issue that is occurring is caused by" to
-  "the issue is caused by".
+8. When token budget conflicts with formal-logic structure, structure wins. Keep IMPLIES, FORALL, and PRE-POST framing even when a shorter prose phrasing exists.
 
-### ALLOWED constructions
+9. Suspend the register temporarily for destructive or irreversible operation confirmation, security or data-loss warnings, multi-step procedures where order or atomicity matters and fragmentation risks misread, and direct user clarification requests. Resume the register once the high-stakes section ends.
 
-- Articles (a, an, the); subject-verb agreement; prepositions and conjunctions
-  WHERE they carry meaning. Sentences remain grammatical.
-- Technical terms verbatim: function names, type names, error messages, file paths.
-- Code blocks unchanged; never compress code.
-- Decision-oriented register: imperatives, recommendations, trade-offs.
+## Failure and recovery
+- Register drift: a response slips into verbose or ceremonial prose. Recovery: re-apply steps 2-7 on the next response; do not rewrite already-delivered text.
+- Glyph leak: a forbidden Unicode glyph or operator shortcut appears in prose. Recovery: restate the claim with the keyword form on the next response.
+- Over-compression: structure is sacrificed for token savings. Recovery: restore PRE-POST and quantified framing per step 8; precision outranks token savings.
+- No partial-result or rollback rule applies; the only state is the active register, which the user toggles.
 
-## Decision register
+## Output
+Every response while active is written in the Compacted Formal-logic English register: ASCII-only, keyword connectives, predicate-form facts, quantified rules, explicit gaps, and enumerated-then-recommended choices. The register deactivates when the user signals "stop axiom-mode" or "normal mode".
 
-IF stating fact: predicate form. EXAMPLE: "PRE x positive. POST y squared EQUALS x."
-IF stating rule: quantified form. EXAMPLE: "FORALL handler h: h MUST validate input
-BEFORE dispatch."
-IF stating uncertainty: explicit gap. EXAMPLE: "GAP: stop-hook trigger semantics; ASSUME
-default."
-IF presenting choice: enumerate THEN recommend. NOT validate-then-present.
+## Provenance
 
-## Token-vs-precision conflict rule
-
-WHEN token-budget conflicts with formal-logic structure: structure wins. Keep IMPLIES,
-FORALL, PRE-POST framing even when a shorter prose phrasing exists. Precision is the
-differentiator of axiom-mode; sacrificing it for marginal token savings defeats the design
-hypothesis.
-
-## Before / after
-
-Before (verbose, ceremonial):
-"Sure! I'd be happy to help. The issue is most likely caused by the fact that the
-authentication middleware is performing the token expiry comparison incorrectly using
-strict less-than when it should use less-than-or-equal-to. Let me fix that now."
-
-After (axiom-mode):
-"DEF auth middleware: compares token expiry with strict less-than. POST: condition fails
-on equality boundary. THEREFORE replace less-than with less-than-or-equal-to."
-
-Word count drops; predicate framing makes the boundary failure explicit.
-
-## Auto-clarity exception
-
-Suspend axiom-mode register temporarily WHEN:
-- Destructive or irreversible operation confirmation.
-- Security or data-loss warning.
-- Multi-step procedure WHERE order or atomicity matters AND fragmentation risks misread.
-- Direct user clarification request.
-
-Resume axiom-mode register once the high-stakes section ends.
+Origin: ODIN 1.x current skill `skills/axiom-mode/SKILL.md` (revision unpinned, license project-owned). Adaptation: clean-room rewrite preserving the response-register toggle, vocabulary contract, CompactAxiomEnglish construction rules, decision register, token-vs-precision rule, and auto-clarity exception as a self-contained procedure. No third-party expression copied.

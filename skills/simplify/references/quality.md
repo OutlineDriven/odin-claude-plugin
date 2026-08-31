@@ -1,8 +1,8 @@
-# `simplify` — quality axis agent prompt
+# `simplify`: quality axis agent prompt
 
 Verbatim prompt for the quality-axis review agent. The orchestrator dispatches this prompt with the captured diff appended after the `DIFF:` marker.
 
-## Table of Contents
+## Table of contents
 
 - Nine patterns: redundant state · parameter sprawl · copy-paste variation ·
   leaky abstractions · stringly-typed code · redundant structural nesting ·

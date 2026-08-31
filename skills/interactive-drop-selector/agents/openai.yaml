@@ -1,0 +1,3 @@
+interface:
+  display_name: "Interactive Drop Selector"
+  short_description: "Interactively select and close tracker items"

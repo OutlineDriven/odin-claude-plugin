@@ -1,0 +1,3 @@
+interface:
+  display_name: "Review Plugin Submission"
+  short_description: "Read-only marketplace-readiness audit of an agent plugin"

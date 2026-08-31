@@ -1,0 +1,3 @@
+interface:
+  display_name: "Commit Push Current"
+  short_description: "Commit and push to the currently checked-out branch on origin."

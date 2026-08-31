@@ -1,0 +1,3 @@
+interface:
+  display_name: "npm Release Shipping"
+  short_description: "Ship an npm release end to end and verify it on the registry."

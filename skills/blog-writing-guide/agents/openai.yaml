@@ -1,0 +1,3 @@
+interface:
+  display_name: "Blog Writing Guide"
+  short_description: "Draft and review Sentry engineering blog posts"

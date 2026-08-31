@@ -1,0 +1,3 @@
+interface:
+  display_name: "Automate Me"
+  short_description: "Author a personal mode skill and open a reviewable PR."

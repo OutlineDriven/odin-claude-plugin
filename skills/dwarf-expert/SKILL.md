@@ -1,0 +1,53 @@
+---
+name: dwarf-expert
+description: 'Use when inspecting, searching, verifying, explaining, or programmatically parsing DWARF debug information, DIEs, DW_TAG_/DW_AT_ entries, .debug_* sections, line tables, or llvm-dwarfdump/readelf output. Returns the requested DIE/address/name query, integrity verification, standard explanation, or parser implementation with tool and platform identified. Don''t use for mutating input binaries, object files, or dSYM bundles, or for writes other than a verifier summary or an explicitly requested parser.'
+---
+
+# DWARF expert
+
+## Contract
+
+| Field | Bound contract |
+|---|---|
+| Trigger | The user asks to inspect, search, verify, explain, or programmatically parse DWARF debug information, DIEs, DW_TAG_/DW_AT_ entries, .debug_* sections, line tables, or llvm-dwarfdump/readelf output. |
+| Authority | Reversible local: inspect binaries and print query or integrity results; write only a verifier summary via `--verify-json` or code the user explicitly requests as a parser. Input binaries, object files, and dSYM bundles remain unchanged. |
+| Side effect | Default operations read binaries and print to the terminal; `--verify-json` may write a machine-readable verifier summary, and an explicit parser-development request may create code. No mutation of input binaries, object files, or dSYM bundles. |
+| Done | The requested DIE/address/name query, integrity verification, standard explanation, or parser implementation is complete; tool implementation and platform/container format are identified; searches escalate from accelerator lookup to exhaustive search to structured parsing; optional attributes, abstract-origin/specification indirection, and wrapped type chains are handled; and any written parser or JSON output matches the requested surface. |
+
+## Inputs
+
+- A binary, object file, or dSYM bundle to inspect (required for query, search, and verification work; not required for pure standard-explanation questions).
+- The query surface: a DIE name or address to look up, an attribute or type predicate to filter, a structural query, an integrity-verification request, a DWARF-standard question, or a parser-development request.
+- Optional: target DWARF version, compiler, or optimization level when relevant to verification or quality comparison.
+
+## Procedure
+
+1. Identify the tool implementation and platform before running anything. Run `dwarfdump --version` first: a bare `dwarfdump` may be libdwarf's or LLVM's, and the options below are LLVM's. On macOS, linked Mach-O executables do not carry DWARF; it stays in `.o` files until `dsymutil` collects it into a `.dSYM` bundle; point the tool at the dSYM or object files, not the executable. `pyelftools` is ELF-only, so for Mach-O scripted work stay with the LLVM tools.
+2. Prefer `dwarfdump` over `readelf` for DWARF-specific work. Use `readelf --debug-dump=<section>` (with `--dwarf-depth=<n>` / `--dwarf-start=<n>` to limit depth or start offset) only for general ELF structure or when `dwarfdump` is unavailable.
+3. For a name or address match, escalate: try `--find=<name>` (accelerator-table exact lookup, fast but not exhaustive) first, fall back to `--name=<pattern>` (`--ignore-case`, `--regex` available) for exhaustive DIE-name search, and use `--lookup=<address>` to find the DIE covering a program address.
+4. For an attribute or type query (e.g. all parameters of type `float *`), dump and filter: `grep -B` pulls in the header line carrying each DIE's offset, then print each DIE at its offset with `--debug-info=<offset> --show-children` (`--lookup` takes a program address, not a DIE offset). Use `--show-children` / `--show-parents` (with `--recurse-depth` / `--parent-recurse-depth`) to include child or parent DIEs, and `--show-form` when attribute encoding details matter.
+5. For a multi-attribute or structural query where grep pipelines turn brittle, write a Python script using `pyelftools` instead of continuing to grep.
+6. For integrity verification, run `llvm-dwarfdump --verify <binary>` for structural checks (unit chains, DIE relationships, address ranges); control detail with `--error-display=<quiet|summary|details|full>`, write a machine-readable summary with `--verify-json=<path>`, and use `--quiet` for exit-code-only checks. Run `llvm-dwarfdump --statistics <binary>` for debug-info quality metrics as JSON to compare across compiler versions or optimization levels. Verify after producing DWARF (compilers, binary rewriters), when a debugger misbehaves on a binary, and when developing DWARF tooling against known-good files.
+7. When a current-generation compiler emitted an old DWARF version, the build explicitly passed `-gdwarf-N`; modern gcc and clang default to v4/v5, so check the build system rather than assuming a toolchain default. GCC embeds its flags in `DW_AT_producer` (the pin is often readable there); clang's producer string carries no flags. Old versions read the same way apart from surface forms: in v2 output, member offsets appear as location expressions (`DW_OP_plus_uconst`) and linkage names as `DW_AT_MIPS_linkage_name`.
+8. For a DWARF-standard question where precision matters, look the detail up instead of answering from memory, escalating through authoritative sources: dwarfstd.org (the official specification; web-search specific sections), LLVM's `llvm/lib/DebugInfo/DWARF/` (`DWARFDie.cpp`, `DWARFUnit.cpp`, `DWARFDebugLine.cpp`, `DWARFVerifier.cpp` as a reference implementation), and libdwarf at github.com/davea42/libdwarf-code (the reference C implementation).
+9. For an explicitly requested parser, prefer an existing library over parsing by hand: `libdwarf` (C/C++, low-level, used to implement `dwarfdump`), `pyelftools` (Python, also parses ELF), `gimli` paired with `object` (Rust, to load container files), `debug/dwarf` (Go standard library), or `LibObjectFile` (.NET, also handles ELF/PE). Default to Python with `pyelftools` for one-off scripts unless the task dictates otherwise.
+10. In every search, verification, and parser, handle the DWARF-specific pitfalls: attributes are optional (a DIE may omit `DW_AT_name`, `DW_AT_type`, ranges); attribute indirection resolves through `DW_AT_abstract_origin` (inlined instances) and `DW_AT_specification` (out-of-line definitions) before concluding data is absent; and type chains walk `DW_AT_type` links through qualifiers and modifiers (`DW_TAG_const_type`, `DW_TAG_pointer_type`, ...) to reach the base type.
+
+## Failure and recovery
+- **Ambiguous tool implementation**: if `dwarfdump --version` does not identify LLVM's `llvm-dwarfdump`, do not assume LLVM option semantics; fall back to `readelf --debug-dump` or locate `llvm-dwarfdump` explicitly. Stop and report rather than running flags the tool does not support.
+- **Missing DWARF on macOS executable**: if `dwarfdump` finds no DWARF on a linked Mach-O executable, locate the `.dSYM` bundle or `.o` files and re-run against those; do not conclude the binary lacks debug info.
+- **`--find` miss**: accelerator-table lookup is fast but not exhaustive; a miss escalates to `--name`, then to dump-and-filter, then to a `pyelftools` script; never report "not found" from `--find` alone.
+- **Apparent missing attribute**: before reporting an attribute absent, resolve `DW_AT_abstract_origin` / `DW_AT_specification` indirection and walk the `DW_AT_type` chain; the data may live on a referenced DIE.
+- **Verification failure**: report the `--verify` exit code and the `--error-display` / `--verify-json` detail verbatim; do not summarize a structural failure as "looks fine." If a verifier summary file was written, name its path.
+- **Partial-result rule**: a query that resolves some DIEs but not others returns the resolved set with each unresolved item named and the reason; it never silently drops failures.
+- **Non-mutation rule**: input binaries, object files, and dSYM bundles are never modified. The only writes permitted are a `--verify-json` summary path or parser code the user explicitly requested; if no such write was requested, nothing is written.
+
+## Output
+- A terminal query result: the matched DIE tree (with children/parents/forms as requested), the DIE covering an address, or the filtered attribute/type set, each with its offset and tool/platform identified.
+- An integrity report: the `--verify` exit code, error detail at the requested `--error-display` level, and the path of any `--verify-json` summary; plus `--statistics` JSON when quality comparison was requested.
+- A standard explanation grounded in dwarfstd.org, LLVM's `lib/DebugInfo/DWARF/`, or libdwarf, citing which source answered the question.
+- A parser implementation, when explicitly requested, using one of the named libraries and handling optional attributes, abstract-origin/specification indirection, and wrapped type chains.
+
+## Provenance
+
+Origin: https://github.com/trailofbits/skills, revision d1f1575cff97816e5cc08af66cd2506099c681d3, source path /plugins/dwarf-expert/skills/dwarf-expert/SKILL.md. License CC-BY-SA-4.0: preserve Trail of Bits attribution and the source link, mark modifications, license adaptations ShareAlike, claim no trademark rights, and never reuse trail-of-bits-mark.svg as branding. Adapted into the ODIN 2.0 contract format, preserving the source mechanisms (tool and platform identification, search-escalation ladder, authoritative-source ladder, verification workflows, library recommendations, and DWARF pitfalls) with modifications marked.

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Diagnose CI Failures"
+  short_description: "Triage PR CI failures and produce a reviewable fix plan."

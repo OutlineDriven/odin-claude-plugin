@@ -1,0 +1,3 @@
+interface:
+  display_name: "Skill Plan First Builder"
+  short_description: "Build agent skills from approved analysis plans using token"

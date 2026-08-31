@@ -1,6 +1,6 @@
-# State Machine Approaches by Language
+# State machine approaches by language
 
-| Language | Mechanism | Invariant Enforcement |
+| Language | Mechanism | Invariant enforcement |
 |----------|-----------|----------------------|
 | Rust | enum + match (exhaustive), typestate via PhantomData | Compile-time via types + exhaustive patterns |
 | TypeScript | Discriminated unions, XState v5 | Guards + Zod validation at transitions |

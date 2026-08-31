@@ -1,0 +1,3 @@
+interface:
+  display_name: "Review Reception Protocol"
+  short_description: "Draft review clarifications and local fixes without remote"

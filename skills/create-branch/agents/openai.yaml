@@ -1,0 +1,3 @@
+interface:
+  display_name: "Create Branch"
+  short_description: "Create a local git branch on the correct base with no collisions"

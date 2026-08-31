@@ -1,0 +1,3 @@
+interface:
+  display_name: "Dimensional Analysis"
+  short_description: "Annotate codebase units and detect dimensional arithmetic bugs."

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Sequence Diagram"
+  short_description: "Typed sequence JSON spec and self-contained HTML diagram"

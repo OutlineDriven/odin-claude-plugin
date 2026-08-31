@@ -1,0 +1,3 @@
+interface:
+  display_name: "Zeroize Audit"
+  short_description: "Audit secrets code for missing or eliminated zeroization"

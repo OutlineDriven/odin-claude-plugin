@@ -1,6 +1,6 @@
 # Targeted Mode
 
-Read this reference when Mode Detection (in SKILL.md) routes to **Targeted Mode** — a specific comment or thread URL was provided. Targeted mode addresses only that thread.
+Read this reference when Mode Detection (in SKILL.md) routes to **Targeted Mode**: a specific comment or thread URL was provided. Targeted mode addresses only that thread.
 
 ## 1. Extract Thread Context
 

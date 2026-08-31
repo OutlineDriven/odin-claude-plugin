@@ -1,8 +1,8 @@
-# GitHub Actions Configuration
+# GitHub Actions configuration
 
 **Grounded: 2026-08-26**
 
-## Basic CI Pipeline
+## Basic CI pipeline
 
 ```yaml
 # .github/workflows/ci.yml
@@ -44,7 +44,7 @@ jobs:
         run: npm audit --audit-level=high
 ```
 
-## With Database Integration Tests
+## With database integration tests
 
 ```yaml
   integration:
@@ -81,9 +81,9 @@ jobs:
           DATABASE_URL: postgresql://ci_user:${{ secrets.CI_DB_PASSWORD }}@localhost:5432/testdb
 ```
 
-> **Note:** Even for CI-only test databases, use GitHub Secrets for credentials rather than hardcoding values. This builds good habits and prevents accidental reuse of test credentials in other contexts.
+> **Note:** Even for CI-only test databases, use GitHub Secrets for credentials rather than hardcoding values; hardcoded test credentials get reused in other contexts.
 
-## E2E Tests
+## E2E tests
 
 ```yaml
   e2e:

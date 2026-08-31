@@ -1,0 +1,3 @@
+interface:
+  display_name: "Architecture Delta"
+  short_description: "Compare two architecture snapshots and render the delta"

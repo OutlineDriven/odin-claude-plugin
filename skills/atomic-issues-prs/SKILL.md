@@ -1,102 +1,53 @@
 ---
 name: atomic-issues-prs
-description: Publish a change-set as atomic GitHub issues or PRs. Use when the user says "atomic PRs" or wants one issue/PR per logical change.
-metadata:
-  short-description: Atomic one-PR-per-change publisher with fork fallback
+description: 'Use when the user says "atomic PRs" or requests one issue or PR per logical change. Don''t use for single-change pushes or uncommitted change-sets.'
+disable-model-invocation: true
 ---
 
-# Atomic Issues and PRs
+# Atomic issues and PRs
 
-Publish a change-set as atomic GitHub objects: one issue/PR per logical change, never bundled.
-The layer above `commit-push`. It opens the PRs (and optionally issues) that skill never touches.
+## Contract
 
-## Phase 0 - Preflight & canonical-repo resolution
+| Field | Bound contract |
+|---|---|
+| Trigger | User says "atomic PRs" or requests one issue/PR per logical change. |
+| Authority | Human-only. Requires explicit human invocation. Preview the target repo and consequence before creating branches, commits, issues, and pull requests on a remote repository. |
+| Side effect | Creates branches, commits, issues, and pull requests on a remote GitHub repository. Never force-pushes or pushes to protected branches without explicit user authorization. |
+| Done | One issue or PR per logical change on the correct base/head, links appended, URLs reported. |
 
-Run `gh auth status`. If unauthenticated, stop and ask the user to run `gh auth login`.
+## Inputs
 
-Resolve the canonical (upstream) slug **explicitly before any permission check**. `gh repo view`'s
-default inspects the *current* repo, which is the fork in a fork clone.
+Required: a working tree containing the change-set to publish, and a `gh`-authenticated GitHub account.
+Optional: per-unit routing overrides (issue+PR vs PR-only) stated by the user; dependency order among units.
 
-- Read remotes: `git remote -v`. Pick the contribution target: `upstream` if present, else `origin`.
-- Detect a fork relationship: `gh repo view <slug> --json nameWithOwner,parent,defaultBranchRef`.
-  A non-null `parent` means `<slug>` is itself a fork, so the canonical slug is `parent.nameWithOwner`.
-- **Ambiguity → ask.** Prompt the user for the target repo only when there is no clear single
-  upstream (no `upstream` remote and ≥2 plausible non-origin candidates, or `gh`'s detected
-  `parent` disagrees with the `upstream` remote) **or** `origin` has genuinely diverged from
-  upstream (no common merge-base, or `origin` was re-created/renamed/renewed). Plain fork-behind,
-  where `origin` is merely behind `upstream` with a shared merge-base, is not ambiguity and must never
-  prompt.
-- Query permission on the canonical slug: `gh repo view <canonical-slug> --json viewerPermission`.
-  `viewerPermission` ∈ {ADMIN, MAINTAIN, WRITE} ⇒ **direct mode**; otherwise ⇒ **fork mode**.
-- Record the canonical default base branch from `defaultBranchRef`.
+## Procedure
 
-## Phase 1 - Decompose & commit atomically
+1. Run `gh auth status`. If unauthenticated, stop and ask the user to run `gh auth login`.
+2. Resolve the canonical (upstream) slug before any permission check. Read remotes with `git remote -v`; pick the contribution target as `upstream` if present, else `origin`. Detect a fork relationship with `gh repo view <slug> --json nameWithOwner,parent,defaultBranchRef`; a non-null `parent` means the canonical slug is `parent.nameWithOwner`. If there is no clear single upstream (no `upstream` remote and ≥2 plausible non-origin candidates, or `gh`'s detected `parent` disagrees with the `upstream` remote) or `origin` has genuinely diverged from upstream (no common merge-base, or `origin` was re-created/renamed/renewed), prompt the user for the target repo. Plain fork-behind, where `origin` is merely behind `upstream` with a shared merge-base, is not ambiguity and must never prompt.
+3. Query permission on the canonical slug: `gh repo view <canonical-slug> --json viewerPermission`. `viewerPermission` ∈ {ADMIN, MAINTAIN, WRITE} ⇒ direct mode; otherwise ⇒ fork mode. Record the canonical default base branch from `defaultBranchRef`.
+4. Group working-tree changes into atomic units by mechanism/file boundary: one concern per unit. Never bundle unrelated changes. Commit the whole set into N atomic commits first, running the repo-native type-checker and linter before each commit. Each unit becomes one self-contained commit so per-unit branches come from cherry-pick. Never re-stage a dirty tree, which would let later units swallow earlier diffs. Present the unit→commit list to the user, then proceed.
+5. Route each unit by whether it changes observable behavior: behavior-affecting → Issue + linked PR, because a tracking issue gives the change a changelog/discussion anchor; mechanical → PR-only, because a self-explanatory change needs no separate tracking. Honor an explicit per-unit override if the user states one; otherwise route silently.
+6. Resolve the push URL once, by URL not remote name, to avoid undefined targets and remote-name collisions. Direct mode: push URL = `https://github.com/<canonical-slug>`. Fork mode: fork owner = `gh api user --jq .login`; fork slug = `<login>/<repo>`. If `origin` already points to a prior personal fork whose owner ≠ canonical owner and ≠ the authenticated login, print a non-blocking warning noting the account mismatch; do not stop the run. If the fork does not exist, create it with `gh repo fork <canonical-slug> --clone=false` and note the fork slug in the output. Push URL = `https://github.com/<fork-slug>`.
+7. For each unit, in dependency order:
+   1. Create the branch and cherry-pick the unit commit. Independent unit: `git branch <branch> <canonical-default-base>` then `git cherry-pick <unit-commit>`; PR bases on `<default>`. Dependent unit in direct mode: parent-ref = the prerequisite unit's already-pushed branch; PR bases on that branch (a stacked PR); cherry-pick only this unit's commit so no prerequisite is lost. Dependent unit in fork mode: cross-fork stacking cannot be expressed (a fork PR's base must be a branch in the canonical repo), so flatten onto `<canonical-default-base>` and prefix the PR body with a warning line naming the prerequisite unit and noting the dependency was flattened; the compromise is never silent.
+   2. `git push <push-url> <branch>:refs/heads/<branch>` (same form both modes; only the URL differs).
+   3. `gh pr create --repo <canonical-slug> --body-file <tmp>`. Direct mode: `--base <parent-ref> --head <branch>`; fork mode: `--base <default> --head <fork-owner>:<branch>`; capture PR `#M`.
+   4. If the unit routed to Issue + linked PR: `gh issue create --repo <canonical-slug> --title "<summary>" --body-file <tmp>` with a body that references PR `#M`; capture `#N`.
+   5. Amend the PR body by appending `Closes #N` to the PR's existing body. Reuse the body-file from step 3 (append the line, re-write) or fetch the current body first with `gh pr view <M> --json body`; then write it with `gh pr edit <M> --repo <canonical-slug> --body-file <amended-tmp>`. `gh pr edit --body-file` replaces the whole body, so never write a bare `Closes #N` as the entirety of it.
+   6. Emit the issue/PR URLs; move to the next unit.
+8. For PR-only routed units (no issue filed in step 4), skip the issue-create and body-amend steps entirely; no dangling `Closes`.
 
-Group working-tree changes into atomic units by mechanism/file boundary: one concern per unit.
-Never bundle unrelated changes.
+## Failure and recovery
+- **Unauthenticated**: stop before any mutation; ask the user to run `gh auth login`. No partial result.
+- **Ambiguous upstream**: stop and ask the user for the target repo; do not guess. No mutation performed.
+- **Insufficient permission with no fork path**: stop; report the canonical slug and the missing permission. No push or object created.
+- **Push rejected**: report the rejection and the branch/URL; do not force-push. Leave prior successfully published units in place.
+- **Partial publish failure mid-loop**: already-published units remain; report each unit's status (published URL or failed) so the user can retry the failed units. Never swallow the error or pretend the done predicate holds.
+- **Non-converged**: if any unit could not be published, the terminal result names the failed units and the reason; the run is not done.
 
-Commit the **whole** set into N atomic commits first, running the repo-native type-checker and linter
-before each commit. This is the patch-isolation mechanism: each unit becomes one self-contained commit,
-so per-unit branches come from **cherry-pick**. Never re-stage a dirty tree, which would let
-later units swallow earlier diffs. Present the unit→commit list to the user for visibility, then proceed
-immediately.
+## Output
+A run report listing, per unit: the routing (Issue+PR or PR-only), the branch, the push URL, the PR number and URL, and (when filed) the issue number and URL. The terminal classification is done only when one issue or PR per logical change exists on the correct base/head with links appended and URLs reported.
 
-## Phase 2 - Route objects per unit
+## Provenance
 
-Auto-route each unit by whether it changes observable behavior:
-
-- **Behavior-affecting** → **Issue + linked PR**; a tracking issue gives the change a
-  changelog/discussion anchor. The PR files first; the issue body then references the PR
-  `#number`; once the issue exists, the PR body is amended with `Closes #N` (see Phase 4).
-- **Mechanical** → **PR-only**; a self-explanatory change needs no separate tracking.
-
-Honor an explicit per-unit override if the user states one; otherwise route silently.
-
-## Phase 3 - Resolve push URL (once)
-
-Push by **URL**, never by remote name. This avoids undefined targets (a canonical slug from `parent`
-has no local remote) and remote-name collisions / local-config mutation. With `gh` authenticated, the
-git credential helper authorizes HTTPS pushes.
-
-- **Direct mode**: push URL = `https://github.com/<canonical-slug>`.
-- **Fork mode**: fork owner = authenticated login (`gh api user --jq .login`); fork slug = `<login>/<repo>`.
-  If `origin` already points to a prior personal fork of the canonical repo (its owner ≠ canonical owner)
-  and that owner ≠ the authenticated login, print a non-blocking warning noting the account mismatch.
-  Don't stop the run over it; legitimate cases exist (team forks, renamed accounts, shared machines).
-  If the fork does not exist, create it (`gh repo fork <canonical-slug> --clone=false`) automatically,
-  noting the fork slug in the run's output. Push URL = `https://github.com/<fork-slug>`.
-
-## Phase 4 - Per-unit publish loop
-
-Default contract: **units are independent**. Each branches off the canonical base and merges alone.
-Determine dependency order in Phase 1; if no unit depends on another, every PR bases on `<default>`.
-For each unit, in dependency order:
-
-1. `git branch <branch> <parent-ref>` then `git cherry-pick <unit-commit>` onto it.
-   - **Independent unit**: `<parent-ref>` = `<canonical-default-base>`; PR bases on `<default>`.
-   - **Dependent unit (direct mode only)**: `<parent-ref>` = the prerequisite unit's already-pushed
-     branch; PR bases on that branch (a stacked PR). Cherry-pick only this unit's commit. The
-     prerequisite is already present via the parent branch, so no prerequisite is lost.
-   - **Dependent unit in fork mode**: cross-fork stacking can't be expressed (a fork PR's base must be a
-     branch in the canonical repo, not the fork). Flatten it onto `<canonical-default-base>` instead of
-     the prerequisite branch, and prefix the PR body with a warning line naming the prerequisite unit and
-     noting the dependency was flattened. No blocking ask, but the compromise is never silent.
-2. `git push <push-url> <branch>:refs/heads/<branch>` (same form both modes; only the URL differs).
-3. `gh pr create --repo <canonical-slug> --body-file <tmp>`. Direct mode: `--base <parent-ref> --head
-   <branch>`; fork mode: `--base <default> --head <fork-owner>:<branch>` → capture PR `#M`.
-4. If this unit routed to Issue + linked PR (Phase 2): `gh issue create --repo <canonical-slug> --title
-   "<summary>" --body-file <tmp>` with a body that references PR `#M` → capture `#N`.
-5. Amend the PR body: append `Closes #N` to the PR's **existing** body. Reuse the body-file already
-   written for step 3 (append the line, re-write) or fetch the current body first (`gh pr view <M>
-   --json body`). Then write it with `gh pr edit <M> --repo <canonical-slug> --body-file <amended-tmp>`.
-   `gh pr edit --body-file` replaces the whole body, so never write a bare `Closes #N` as the entirety
-   of it.
-6. Emit the issue/PR URLs; move to the next unit.
-
-For PR-only routed units (no issue filed in step 4), skip steps 4-5 entirely. No dangling `Closes`.
-
-## Constraints (hard)
-
-- Never `--force` or `--force-with-lease` without explicit user authorization.
-- Never push directly to protected branches (`main`, `master`, `release/*`). Branches only.
-- One GitHub object per logical change; bundling is refused.
+Origin: ODIN 1.x current skill `skills/atomic-issues-prs/SKILL.md` (project-owned, no pinned revision, no third-party license). Adaptation: restructured into the ODIN 2.0 contract section order, added `disable-model-invocation: true` for human-only authority, and restated every safety and execution rule self-contained without peer-skill references.

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Visual Diff Review"
+  short_description: "Review a diff, produce a 7-section cited report"

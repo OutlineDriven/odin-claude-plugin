@@ -1,158 +1,43 @@
 ---
 name: source-driven
-description: Use when writing code against a specific framework or library version, building boilerplate, implementing a framework's recommended pattern (auth, routing, forms, data fetching, state), verifying an API signature before writing framework-specific code from memory, or the user asks for a documented, verified, or "correct" implementation.
+description: 'Use when writing or verifying framework-specific code, boilerplate, or a documented, correct implementation. Every framework-specific decision is backed by a cited official source and unverified patterns are explicitly flagged. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
-# Source-Driven Development
+# Source-driven development
 
-## Three principles
+## Contract
 
-1. **Memory is not evidence.** Training data ages — APIs deprecate and recommended patterns shift between versions. Code written from recall can look correct and break against the installed version. Assume your pre-existing internal understanding of every dependency, library, framework, tool, and underlying implementation is outdated — universally, not just for external API integrations.
-2. **Detect the version, fetch the primary source, implement what it documents, cite it.** Every framework-specific pattern traces to an authoritative source the user can open and check for themselves.
-3. **Flag what you couldn't verify.** Honesty about the gap beats a confident guess dressed as a fact.
-
-## Overview
-
-Back every framework-specific decision with official documentation. Verify the pattern, cite the source, and leave the user a link they can open.
-
-## When to Use
-
-- The user wants code that follows current best practices for a given framework
-- Building boilerplate, starter code, or patterns that get copied across a project
-- The user explicitly asks for documented, verified, or "correct" implementation
-- Implementing features where the framework's recommended approach matters (forms, routing, data fetching, state management, auth)
-- Reviewing or improving code that uses framework-specific patterns
-- Any time you are about to write framework-specific code from memory
-
-**When NOT to use:**
-
-- Correctness does not depend on a specific version (renaming variables, fixing typos, moving files)
-- Pure logic that behaves the same across all versions (loops, conditionals, data structures)
-- The user explicitly wants speed over verification ("just do it quickly")
-
-## The Process
-
-```
-DETECT ──→ FETCH ──→ IMPLEMENT ──→ CITE
-  │          │           │            │
-  ▼          ▼           ▼            ▼
- What       Get the    Follow the   Show your
- stack?     relevant   documented   sources
-            docs       patterns
-```
-
-### Step 1: Detect Stack and Versions
-
-Read the project's dependency file and pin the exact versions:
-
-```
-package.json    → Node/React/Vue/Angular/Svelte
-composer.json   → PHP/Symfony/Laravel
-requirements.txt / pyproject.toml → Python/Django/Flask
-go.mod          → Go
-Cargo.toml      → Rust
-Gemfile         → Ruby/Rails
-```
-
-State the result before writing anything. The procedure is language-agnostic; the report shape is the same across families:
-
-Worked STACK DETECTED examples (React/Vite, Django/Python) live in `references/stack-examples.md` — two illustrations of the one report shape; read either and follow that shape for whatever stack you detected.
-
-If versions are missing or ambiguous, **ask the user**. Do not guess: the version selects which patterns are correct.
-
-Then resolve what is current, every run, without being asked: for each dependency you are about to write code against, read the latest stable release straight from the release channel (registry, releases page, official download page) and compare it to the pinned version. Recall is not a release channel, and "it is probably still current" is the guess this step exists to remove. One lookup per touched dependency, not the whole tree. Report both — pinned and latest — and name the gap when they differ, so the user sees whether the documented pattern for the pinned version is still the recommended one.
-
-### Step 2: Fetch Official Documentation
-
-Fetch the documentation page for the exact feature you are implementing (the page that covers the pattern, not the homepage or the full docs tree).
-
-**Source hierarchy (in order of authority):**
-
-| Priority | Source | Example |
-|----------|--------|---------|
-| 1 | Official documentation | react.dev, docs.djangoproject.com, symfony.com/doc |
-| 2 | Official blog / changelog | react.dev/blog, nextjs.org/blog |
-| 3 | Web standards references | MDN, web.dev, html.spec.whatwg.org |
-| 4 | Browser/runtime compatibility | caniuse.com, node.green |
-
-**Not authoritative (never cite as a primary source):**
-
-- Stack Overflow answers
-- Blog posts or tutorials (even popular ones)
-- AI-generated documentation or summaries
-- Your own training data (verifying it is the entire point)
-
-**Fetch precisely:**
-
-Worked BAD/GOOD fetch examples (React, Django) live in `references/stack-examples.md` — two illustrations of the one fetch-precisely shape; read either and apply it to your stack's docs.
-
-After fetching, extract the patterns that apply and record any deprecation warnings or migration guidance on the page.
-
-When official sources contradict each other (a migration guide against the API reference, for instance), surface the discrepancy to the user and verify which pattern actually holds against the detected version.
-
-### Step 3: Implement Following Documented Patterns
-
-Write code that matches what the documentation shows:
-
-- Use the API signatures from the docs, not from memory
-- If the docs show a newer approach, use the newest one the pinned version supports — the latest release you reported is upgrade data, not a licence to write against a version the project does not have installed
-- If the docs deprecate a pattern, do not use the deprecated form
-- If the docs do not cover something, flag it as unverified
-
-**When the docs conflict with existing project code:**
-
-Worked CONFLICT DETECTED dialogues (React useState/useActionState, Django sync_to_async/async ORM) live in `references/stack-examples.md` — read either; both illustrate the same conflict shape, which applies in any stack.
-
-Surface the conflict. Do not silently pick one.
-
-### Step 4: Cite Your Sources
-
-Every framework-specific pattern gets a citation. The user must be able to verify each decision. Citations carry across languages:
-
-Worked citation examples (TypeScript code-comment, Go code-comment, and an in-conversation citation) live in `references/stack-examples.md` — read whichever matches your citation context; the two code-comment examples illustrate one format, not a per-language partition.
-
-**Citation rules:**
-
-- Full URLs, not shortened
-- Prefer deep links with anchors (`/useActionState#usage` over `/useActionState`); anchors survive doc restructuring better than top-level pages
-- Quote the relevant passage when it supports a non-obvious decision
-- Include browser/runtime support data when recommending platform features
-- If you cannot find documentation for a pattern, say so:
-
-```
-UNVERIFIED: I could not find official documentation for this
-pattern. This is based on training data and may be outdated.
-Verify before using in production.
-```
-
-Honesty about what you could not verify beats false confidence.
-
-## Common Rationalizations
-
-| Rationalization | Reality |
+| Field | Bound contract |
 |---|---|
-| "I'm confident about this API" | Confidence is not evidence. Training data carries outdated patterns that look correct and break against current versions. Verify. |
-| "Fetching docs wastes tokens" | Hallucinating an API wastes more. The user debugs for an hour, then finds the signature changed. One fetch prevents the rework. |
-| "The docs won't have what I need" | If the docs do not cover it, that is a signal: the pattern may not be officially recommended. |
-| "I'll just mention it might be outdated" | A disclaimer does not help. Either verify and cite, or flag it as unverified. Hedging is the worst option. |
-| "This is a simple task, no need to check" | Simple tasks with wrong patterns become templates. The user copies a deprecated handler into ten call sites before the modern approach surfaces. |
+| Trigger | The current task is writing or verifying framework-specific code, boilerplate, or a documented, correct implementation. |
+| Authority | Reversible-local: writes framework-specific code plus full-URL citations; rollback to last VCS commit on failure. |
+| Side effect | Local writes with explicit UNVERIFIED flags for unverifiable patterns. |
+| Done | Every framework-specific decision is backed by a cited official source and unverified patterns are explicitly flagged. |
 
-## Red Flags
+## Inputs
 
-- Writing framework-specific code without checking the docs for that version
-- Saying "I believe" or "I think" about an API instead of citing the source
-- Implementing a pattern without knowing which version it applies to
-- Using deprecated APIs because they appear in training data
-- Not reading `package.json` / the dependency file before implementing
-- Fetching an entire docs site when one page is relevant
+User provides: framework, language, or library context; project dependency file (package.json, requirements.txt, go.mod, Cargo.toml, Gemfile, composer.json, pyproject.toml). Optional stack examples may be supplied by the caller; this skill has no bundled stack-reference dependency.
 
-## Verification
+## Procedure
 
-After implementing with source-driven development:
+1. Read the project's dependency file and state the exact pinned versions.
+2. For each dependency about to be written against, read the latest stable release from the release channel (registry, releases page, official download page). Report pinned and latest versions side by side. Name the gap when they differ.
+3. Fetch the official documentation page for the exact feature being implemented. Use the source hierarchy: (1) official docs, (2) official blog/changelog, (3) web standards references (MDN, web.dev), (4) runtime compatibility references. Never use Stack Overflow, blog posts, tutorials, or training data as primary sources.
+4. Extract the implementation patterns shown in the fetched docs. Use those exact API signatures. If the docs show a newer approach, use the newest one the pinned version supports. Do not use deprecated forms.
+5. When official sources contradict each other, surface the discrepancy to the user without silently choosing one.
+6. Write code that follows the documented patterns. Every non-obvious decision gets a full-URL citation in a code comment. Quote the relevant passage when it supports a non-obvious decision.
+7. Flag any pattern that could not be verified against official documentation with an explicit UNVERIFIED marker rather than a hedged disclaimer or confident guess.
 
-- [ ] All sources are official documentation, not blog posts or training data
-- [ ] Latest stable release read from the release channel for every touched dependency, and reported beside the pinned version
-- [ ] Code follows the patterns shown in the current version's documentation
-- [ ] Non-trivial decisions include source citations with full URLs
-- [ ] No deprecated APIs are used (checked against migration guides)
-- [ ] Anything that could not be verified is explicitly flagged as unverified
+## Failure and recovery
+- UNSPECIFIED_FRAMEWORK: user did not provide framework, language, or library context; stop and ask.
+- UNVERIFIABLE_DEPENDENCY: a dependency version cannot be determined and the user has not supplied it; stop and ask.
+- UNVERIFIABLE_PATTERN: no official documentation found for a required pattern; emit UNVERIFIED flag, do not write unverified code as confirmed.
+- SOURCE_CONFLICT: official sources contradict each other or contradict existing project code; surface the conflict without picking a side.
+- Non-converged: procedure cannot complete; write nothing, do not claim the done predicate holds.
+
+## Output
+Verified framework-specific code with full-URL citations to official documentation in code comments. Explicit UNVERIFIED flags for any pattern that could not be verified. A STACK DETECTED block listing pinned versions, latest versions, and version gaps. CONFLICT DETECTED blocks for any source contradictions surfaced.
+
+## Provenance
+
+Two sources. (1) `current:current-d:current:source-driven` — existing odin-code skill, origin `current-odin-skill-tree`, no external license, adapted for ODIN 2.0 authoring format and authority contract. (2) `source:source-addy:addy-source-driven-development` — MIT-licensed skill from addyosmani/agent-skills (Copyright (c) 2025 Addy Osmani; SPDX: MIT; pinned revision d2c37ef6225dd8726cdd369a8030307f48592d26; obligation: retain copyright notice and MIT permission text in derived distributions; otherwise unrestricted use); exact four-field duplicate of current:source-driven, absorbed into that survivor with no surviving alias.

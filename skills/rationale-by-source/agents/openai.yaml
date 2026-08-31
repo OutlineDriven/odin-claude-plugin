@@ -1,0 +1,3 @@
+interface:
+  display_name: "Rationale By Source"
+  short_description: "Investigate rationale via source playbooks with cited confidence"

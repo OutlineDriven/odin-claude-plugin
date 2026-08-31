@@ -1,0 +1,3 @@
+interface:
+  display_name: "Unlazy Dispatch Gates"
+  short_description: "Enforce completion discipline with acceptance gates"

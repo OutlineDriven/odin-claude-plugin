@@ -1,87 +1,118 @@
 ---
 name: setup-gitignore
-description: Use when the user says "set up gitignore", "fix gitignore", or untracked files keep appearing in git status.
+description: 'Use when the user says "set up gitignore", "fix gitignore", or untracked files keep appearing in git status. Writes or merges .gitignore with stable section anchors; re-running the same composition produces no diff. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
-Initialize or idempotently revise the current repo's `.gitignore`, never the global excludesfile.
+# Setup gitignore
 
-## Scope
+## Contract
 
-Per-repo only. Never read or write `~/.gitignore`, `~/.config/git/ignore`, or run `git config --global`. The user's global excludesfile handles cross-machine noise; this skill handles language/tool specifics for the current repo.
+| Field | Bound contract |
+|---|---|
+| Trigger | set up gitignore / fix gitignore / untracked files keep appearing |
+| Authority | Reversible-local: write only the repository `.gitignore`, with a snapshot before merging an existing file; never read or write a global excludes file. |
+| Side effect | Writes or edits `.gitignore`; never `~/.gitignore`, `~/.config/git/ignore`, or `git config --global`. |
+| Done | `.gitignore` has stable section anchors, composing it again with the same inputs produces identical bytes, and before/after untracked counts are reported. |
 
-## Sources composed (in order)
+## Inputs
 
-1. **gitignore.io**: templates keyed by detected language/framework (requires network)
-2. **AI tooling**: bundled patterns from `references/AI-TOOLING.md`
-3. **IDE / editor**: bundled patterns from `references/IDE-EDITOR.md`
-4. **Empirical**: untracked paths from `git status`, confirmed interactively
+No required user input. Operate on the current Git repository.
 
-## Workflow
+Optional input is a set of empirical ignore patterns explicitly confirmed by the user after reviewing current untracked-path clusters. Never infer confirmation and never add an empirical pattern silently.
 
-### 1. Detect repo root
+## Procedure
 
-```sh
-git rev-parse --show-toplevel
-```
+1. **Locate the repository.** Run `git rev-parse --show-toplevel`, change the working directory used by this procedure to that exact root, and stop with `not-a-repository` if it fails. Do not inspect global Git ignore configuration.
 
-Abort with a clear error if not inside a git repo.
+2. **Detect template keys at depth two.** Enumerate regular files at repository-relative depth 0, 1, or 2, excluding `.git/`. Apply every matching row, deduplicate keys, and sort keys lexicographically before joining them with commas:
 
-### 2. Detect languages
+   | Evidence filename | gitignore.io key(s) |
+   |---|---|
+   | `tsconfig.json`, `tsconfig.*.json` | `node,typescript` |
+   | `package.json` | `node` |
+   | `pyproject.toml`, `requirements.txt`, `setup.py`, `setup.cfg`, `Pipfile` | `python` |
+   | `Cargo.toml` | `rust` |
+   | `go.mod` | `go` |
+   | `dune-project`, `dune`, `*.opam` | `ocaml` |
+   | `pom.xml`, `build.gradle`, `build.gradle.kts` | `java` |
+   | `settings.gradle.kts` with Kotlin source files | `java,kotlin` |
+   | `CMakeLists.txt` | `cmake,c++` |
+   | `Gemfile`, `*.gemspec` | `ruby` |
+   | `composer.json` | `php` |
 
-Read `references/LANGUAGE-DETECTION.md` for the manifest → gitignore.io key table. Scan manifests:
+   A filename may contribute several keys; an empty result is valid and means no network template is requested.
 
-```sh
-fd --max-depth 2 -t f
-```
+3. **Capture current state.** Count and retain the exact list from `git status --short --untracked-files=all` entries beginning `?? `, excluding `.gitignore`. If `.gitignore` exists, read its exact bytes and copy it to `/tmp/gitignore-snapshot-<UTC-YYYYMMDDTHHMMSSZ>.bak` before modifying it. If snapshot creation fails, stop without writing.
 
-Match filenames against the detection table; build a comma-separated key list (e.g., `rust,node,typescript`). If no manifests detected, use an empty key list (bundled blocks still apply).
+4. **Confirm empirical patterns.** Group untracked paths first by top-level directory; group root files by lowercase extension, with extensionless root files as `(no extension)`. Show every path in each group. Ask the user which exact directory (`name/`) or extension (`*.ext`) patterns to add. Normalize confirmed patterns to repository-relative slash form, reject `..`, absolute paths, and patterns matching `.gitignore`, then sort and deduplicate them. Declining empirical additions means an empty empirical block, not cancellation of the language and local-baseline composition.
 
-### 3. Snapshot existing .gitignore
+5. **Fetch the language block.** If the sorted key list is non-empty, run `scripts/compose-gitignore.sh <comma-separated-keys>`. Use its stdout verbatim after normalizing line endings to LF and removing trailing blank lines. If the script fails, stop with `template-fetch-failed` and leave `.gitignore` unchanged; there is no silent fallback. If the key list is empty, the language block is empty and the script is not run.
 
-If `.gitignore` exists, snapshot it before any modification:
+6. **Use these exact local baselines.** They are inline data, not support-file placeholders:
 
-```sh
-cp .gitignore /tmp/gitignore-snapshot-$(date +%s).bak
-```
+   ```gitignore
+   # === AI TOOLING ===
+   .claude/settings.local.json
+   .cursor/
+   .windsurf/
+   .aider.chat.history.md
+   .aider.input.history
 
-### 4. Surface empirical noise
+   # === IDE / EDITOR ===
+   .idea/
+   .vscode/*
+   !.vscode/extensions.json
+   !.vscode/settings.json
+   !.vscode/tasks.json
+   !.vscode/launch.json
+   *.swp
+   *.swo
+   *~
+   .DS_Store
+   Thumbs.db
+   ```
 
-```sh
-git status -s -uall | rg '^\?\?' | rg -v '^\?\? \.gitignore'
-```
+7. **Build managed sections.** Produce these four anchors in this exact order, each followed by its normalized body and one blank line except the final block:
 
-Cluster untracked paths by top-level directory or extension. **Present clusters to the user and wait for explicit confirmation.** Do not add any empirical pattern without confirmation.
+   ```text
+   # === LANGUAGE TEMPLATES ===
+   <successful API body, or empty>
 
-### 5. Compose
+   # === AI TOOLING ===
+   <the five AI patterns above>
 
-Run `scripts/compose-gitignore.sh <csv>` to fetch and merge gitignore.io templates. If the network call fails, tell the user and ask whether to continue with bundled-only mode.
+   # === IDE / EDITOR ===
+   <the ten IDE/editor patterns above>
 
-Append the bundled blocks after the API output in order:
+   # === EMPIRICAL ===
+   <confirmed patterns, one per line>
+   ```
 
-```
-# === AI TOOLING ===
-<contents of references/AI-TOOLING.md>
+   Treat a non-comment, non-blank pattern line as a duplicate when its exact trimmed text has already appeared earlier in unmanaged user content or an earlier managed section; first occurrence wins. Preserve comment lines supplied by the API. Do not introduce angle-bracket text into the actual file.
 
-# === IDE / EDITOR ===
-<contents of references/IDE-EDITOR.md>
+8. **Merge deterministically.** If no `.gitignore` exists, the candidate is the four managed sections. If one exists, require each managed anchor to occur zero or one time. Duplicate or out-of-order managed anchors are `invalid-managed-sections`. Preserve all bytes before the first managed anchor and after/between managed regions that are not part of a managed block. Replace each existing managed block from its anchor through the line before the next managed anchor; append missing managed blocks in canonical order. Normalize only generated managed blocks to LF; do not rewrite preserved user content. Ensure exactly one terminal newline.
 
-# === EMPIRICAL ===
-<user-confirmed patterns, one per line>
-```
+9. **Obtain write approval.** Show the complete before/candidate diff using any available local diff renderer; do not require `difft`. If the user declines, leave `.gitignore` unchanged. If approved, write the candidate to `.gitignore` atomically in the repository root.
 
-### 6. Merge or init
+10. **Prove idempotence and report.** Run steps 2, 5, 7, and 8 in memory against the newly written bytes with the same confirmed empirical inputs. Require the second candidate to be byte-identical; otherwise restore the snapshot (or remove a newly created `.gitignore`) and report `idempotence-failed`. Recount untracked entries with the same command as step 3 and report both counts plus every remaining untracked path.
 
-- **No existing `.gitignore`**: write the composed output directly.
-- **Existing `.gitignore`**: merge each `# === SECTION ===` block idempotently. Patterns already present in the file are deduplicated (first occurrence wins). Preserve all user content outside section headers. Show the full diff via `difft`; write only after user confirms.
+## Failure and recovery
 
-### 7. Verify
+| Failure class | Recovery |
+|---|---|
+| `not-a-repository` | Stop; no file is written. |
+| `snapshot-failed` | Stop before modifying `.gitignore`. |
+| `template-fetch-failed` | Report keys and network error; leave `.gitignore` unchanged. Retry only on an explicit new run. |
+| `invalid-empirical-pattern` | Show the rejected pattern and ask for a repository-relative replacement; do not write meanwhile. |
+| `invalid-managed-sections` | Report duplicate or out-of-order anchors; leave the original file unchanged for manual repair. |
+| `write-declined` | Leave the original file unchanged. |
+| `write-failed` | Restore the snapshot, or remove a partially created new file. |
+| `idempotence-failed` | Restore the snapshot, or remove the new file; report the second-pass diff. |
 
-```sh
-git status -s -uall | rg '^\?\?' | wc -l
-```
+## Output
 
-Report untracked count before and after. List any paths still untracked so the user can decide whether to add further patterns.
+The repository-root `.gitignore`, created or updated with `LANGUAGE TEMPLATES`, `AI TOOLING`, `IDE / EDITOR`, and `EMPIRICAL` anchors. The response reports before/after untracked counts, remaining paths, and the snapshot path when an existing file was merged.
 
-## Idempotence contract
+## Provenance
 
-Re-running the skill on a repo where the skill already ran produces no diff. Section headers act as stable merge anchors. User content outside sections is never modified.
+Origin: `odin-current` (`current:current-c:current:setup-gitignore`). Revision and license: unspecified by the source. Adaptation: ODIN 2.0 self-contained restatement preserving per-repository scope, snapshot-before-merge, network template composition, local baseline blocks, empirical confirmation, and byte-idempotent anchored merging.

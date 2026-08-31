@@ -1,0 +1,3 @@
+interface:
+  display_name: "Diataxis Docs Authoring"
+  short_description: "Structure docs into Diataxis types with per-type validation."
