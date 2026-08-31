@@ -32,16 +32,16 @@ The chain begins only when an approved plan exists: one the user approved throug
 
 ## Per-phase gate definitions
 
-Gate id equals phase number — there is one numbering system, not two. Phase 4 (`fix`) is G3's autofix arm and Phase 6 (Report) is terminal; both are gateless, so **there is no G4 and no G6**. The absence is the signal that those phases are not independently gated.
+Gate id equals phase number — there is one numbering system, not two. Phase 4 (`strike-the-root`) is G3's autofix arm and Phase 6 (Report) is terminal; both are gateless, so **there is no G4 and no G6**. The absence is the signal that those phases are not independently gated.
 
 | Gate | Phase / skill | Pass criteria (exact) | Autofix arm A(P) | On RECHECK still-fail |
 |------|---------------|-----------------------|------------------|-----------------------|
-| G1 | Phase 1 Execute / `work` (Orchestrated) | `work` runs in its Orchestrated caller mode — implementation and local verification only, returning a structured summary; the plan's steps are implemented and the repo-native verifier (build / type-check / test, as the repo defines) exits clean. It must not run simplify/review/PR/CI; autopilot owns those. | `fix` once, in findings/verifier-failure mode, on the failing verifier output | HALT → hand off the verifier failure and the diff so far |
+| G1 | Phase 1 Execute / `work` (Orchestrated) | `work` runs in its Orchestrated caller mode — implementation and local verification only, returning a structured summary; the plan's steps are implemented and the repo-native verifier (build / type-check / test, as the repo defines) exits clean. It must not run simplify/review/PR/CI; autopilot owns those. | `strike-the-root` once, in findings/verifier-failure mode, on the failing verifier output | HALT → hand off the verifier failure and the diff so far |
 | G2 | Phase 2 Simplify / `simplify` | `simplify` exits `0`, `11` (empty diff), or `12` (false-positive-only); behavior preserved. | none distinct — `simplify` self-reverts a behavior regression (its exit `13`) internally | HALT on exit `14` (new bloat) or `15` (mixed-concern commit) — these need a human re-plan |
-| G3 | Phase 3 Review / `review` (autofix = Phase 4 `fix`) | After at most one `fix` pass and a re-review of the changed files, no critical or high finding remains. | `fix` once on the review's critical/high findings, then re-review changed files only | HALT → hand off residual critical/high findings |
+| G3 | Phase 3 Review / `review` (autofix = Phase 4 `strike-the-root`) | After at most one `strike-the-root` pass and a re-review of the changed files, no critical or high finding remains. | `strike-the-root` once on the review's critical/high findings, then re-review changed files only | HALT → hand off residual critical/high findings |
 | G5 | Phase 5 Finalize / `review-and-ship` | `review-and-ship` report returned: checks green and PR created/updated (full mode), or commits made and push skipped (local-only). The report carries review findings, check results, publication classification, and PR URL or local-only status. | none — a finalizer refusal (push refused, checks blocked) is a deliberate safety stop, not a defect to patch | HALT → hand off the finalizer's blocked report and the unpushed commits |
 
-Phase 4 (`fix`) and Phase 6 (Report) have no gate; Report always runs.
+Phase 4 (`strike-the-root`) and Phase 6 (Report) have no gate; Report always runs.
 
 ## Local-only detection
 
@@ -70,7 +70,7 @@ next:          <the single action that unblocks — e.g. "return to plan mode fo
 autopilot report
 mode:          <full | local-only> [+ headless]
 task:          <one line>
-phases:        1 Execute ✓  2 Simplify ✓  3 Review ✓  4 Fix <ran once | skipped, G3 clean>  5 Finalize <✓ | local-only>
+phases:        1 Execute ✓  2 Simplify ✓  3 Review ✓  4 Strike-the-root <ran once | skipped, G3 clean>  5 Finalize <✓ | local-only>
 gates:         <G1 G2 G3 G5 pass/fail, with the autofix arm noted where it fired>
 commits:       <sha + subject per commit>
 remote:        <pushed branch / PR url | local-only, not pushed>

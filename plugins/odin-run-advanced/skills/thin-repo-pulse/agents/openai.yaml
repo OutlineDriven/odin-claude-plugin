@@ -1,3 +1,3 @@
 interface:
   display_name: "Thin Repo Pulse"
-  short_description: "Snapshot external job or tracker state into a local artifact on"
+  short_description: "Use when a scheduled or watcher tick fires and a lightweight"
