@@ -1,18 +1,18 @@
 ---
 name: cross-run-playbook
-description: 'Use when a long agentic project must compound progress as learning rather than accumulated code. Produces a cycle memo with lessons, a keep/iterate/restart decision, and version labels only on quality-cleared artifacts.'
+description: 'Use when a long agentic project needs each cycle to produce a learning memo with lessons, a keep/iterate/restart decision, and version labels only on quality-cleared artifacts. Drives each slice through the real surface and captures evidence before iterating. Not for single-pass builds.'
 ---
 
-# Learning cycle
+# Cross-run playbook
 
 ## Contract
 
 | Field | Bound contract |
 |---|---|
-| Trigger | Long agentic project where progress must compound as learning rather than accumulated code |
-| Authority | Reversible local: write only named local artifacts; state the rollback path for each write |
-| Side effect | Builds vertical slices, runs real-surface drives, produces memos and gates; versions only quality-cleared templates/modules |
-| Done | Real surface driven with evidence captured; memo names at least one lesson/anti-pattern/gate affecting the next pass; keep/iterate/restart decision explicit; version labels only on quality-cleared artifacts |
+| Trigger | A long agentic project where each cycle must produce a learning memo before the next pass begins. |
+| Authority | Reversible local: write only named local artifacts; state the rollback path for each write. |
+| Side effect | Builds vertical slices, runs real-surface drives, produces memos and gates; versions only quality-cleared templates or modules. |
+| Done | Real surface driven with evidence captured; memo names at least one lesson, anti-pattern, or gate affecting the next pass; keep/iterate/restart decision explicit; version labels only on quality-cleared artifacts. |
 
 ## Inputs
 

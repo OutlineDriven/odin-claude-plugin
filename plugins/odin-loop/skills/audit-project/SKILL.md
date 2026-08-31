@@ -1,6 +1,6 @@
 ---
 name: audit-project
-description: 'Use when asked to run an iterative multi-agent audit when the user says "audit this code", "find all the bugs", or "review until clean". Resolves every critical and high finding to zero or stops at a gate or cap. Don''t use for remote, credential, or irreversible changes.'
+description: 'Use when the user says "audit my code", "find all the bugs", "review until clean", or "grill my changes". Runs an iterative multi-agent review that resolves every finding at or above a configurable severity floor to zero, or stops at a gate or cap. Not for remote, credential, or irreversible changes.'
 ---
 
 # Audit project
@@ -9,10 +9,10 @@ description: 'Use when asked to run an iterative multi-agent audit when the user
 
 | Field | Bound contract |
 |---|---|
-| Trigger | The user says "audit my code", "find all the bugs", "deep code audit", or "review until clean". |
-| Authority | Reversible local: write only `.outline/audit/` queue state, per-iteration JSON, minimal fix batches to VCS-tracked files in the resolved scope, and optionally `TECHNICAL_DEBT.md`; recover a bad batch with `git restore -- <files>` and the persisted queue. |
+| Trigger | The user says "audit my code", "find all the bugs", "deep code audit", "review until clean", or "grill my changes". |
+| Authority | Reversible local: write only `.outline/audit/` queue state, per-iteration JSON, minimal fix batches to VCS-tracked files in the resolved scope, and optionally `TECHNICAL_DEBT.md`; recover a bad batch with `git restore -- <files>` or `git revert HEAD --no-edit` and the persisted queue. No push, no `reset --hard`, no `git clean`. |
 | Side effect | Writes local audit queue state and applies local fix batches; may emit `TECHNICAL_DEBT.md`. |
-| Done | Zero open critical/high findings after consolidation and re-review, or a user decision gate chosen, or the iteration cap reached — with scope, selected reviewers, iterations, fixes, verification commands, regressions, and queue path reported. |
+| Done | Zero open findings at or above the severity floor after consolidation and re-review, or a user decision gate chosen, or the iteration cap reached — with scope, selected reviewers, iterations, fixes, verification commands, regressions, and queue path reported. |
 
 ## Inputs
 
@@ -21,13 +21,17 @@ description: 'Use when asked to run an iterative multi-agent audit when the user
 - `--domain <reviewer>`: run one reviewer domain only; the same consolidation contract still applies.
 - `--quick`: single review pass; no fixes, no iteration.
 - `--resume`: load `.outline/audit/queue.json` if present.
-- `--max-iterations N`: default `5`.
+- `--max-iterations N`: default `5`; an explicit value overrides the scope-adaptive cap (5 to 15 based on change-set complexity).
+- `--severity-floor <critical|high|medium>` (optional): terminating floor; default `high` (critical and high). `medium` includes medium findings in the fix queue.
+- `--against <ref>` (optional): explicit base-ref override for diff resolution. Default: the merge-base of the current branch and its upstream.
 - State files (written, not supplied): `.outline/audit/queue.json` and `.outline/audit/iterations/<n>.json`.
+- `caps` (derived, not supplied): `maxIterations` (outer loop), `fixAttemptCap` (total fix attempts, 20 to 80), `attemptsPerItem` (per-item attempts, 3 to 5). Persisted to the queue.
 
 ## Procedure
 
 1. Resolve scope and detect project shape before any review launch.
-   - `--recent` → changed files from the last five commits plus staged/unstaged changes; otherwise the user path or `.`.
+   - `--recent` or no explicit scope → build the three-source union: tracked files in diff vs base ref (use `--against` or the merge-base), staged files, and untracked-not-ignored files. Use the resolved `changedFiles[]` as the sole universe for every later step. Empty union exits immediately; launch no agents.
+   - Explicit `scope` path/glob/package → use that path directly.
    - Read manifests and config only: `package.json`, `pyproject.toml`, `requirements.txt`, `Cargo.toml`, `go.mod`, `pom.xml`, `build.gradle*`, `Gemfile`, CI configs, Dockerfiles, route/framework config, migration dirs.
    - Count tracked files (`git ls-files <scope>` in a git repo; recursive find otherwise).
    - Detect flags: `HAS_DB` (migrations/schema dirs, `schema.prisma`, ORM deps, SQLAlchemy/Django/Rails models, TypeORM/Sequelize/Mongoose, raw SQL); `HAS_API` (route/controller/handler dirs, OpenAPI files, Express/Fastify/Nest/FastAPI/Django/Flask/Rails/Spring deps); `FRONTEND` (`.tsx`/`.jsx`/`.vue`/`.svelte`, browser entrypoints, React/Vue/Angular/Svelte deps); `BACKEND` (services, workers, queues, server framework deps, CLI/server entrypoints); `CICD` (`.github/workflows`, `.gitlab-ci.yml`, `.circleci/config.yml`, `Jenkinsfile`, `Dockerfile`, deploy manifests).
@@ -39,6 +43,7 @@ description: 'Use when asked to run an iterative multi-agent audit when the user
    - Slop concentration: ast-grep/search for empty catches, blanket `catch {}`, `TODO: implement`, `throw new Error('not implemented')`, `console.log`/debug prints in production paths, `unwrap()`/`expect()` in non-test Rust, hardcoded secrets, commented-out code blocks, dead branches after `return`, pass-through wrappers. Rank files with `>= 3` hits; top 5 → code-quality; cross-file clusters implying wrapper towers, duplicate implementations, or boundary sprawl → architecture.
    - Entry-points: codegraph entry-point query (entry points, handlers, routes, CLIs, jobs, exported API surface) then callers/impact for risky fan-in; fallback ast-grep for `main`, route registration, exported handlers, controllers, Lambda/Cloudflare handlers, CLI command registration, package scripts, framework config, Docker/CI entry commands. Route to security and devops always; api/backend/frontend by file kind.
    - Persist a compact `prioritySignals` object in `.outline/audit/queue.json`: top 20 test gaps, top 20 pain/hotspots, top 20 bugspots, top 5 slop concentration files, top 20 entry-points.
+   - Derive `caps` from change-set complexity when `--max-iterations` is not explicitly set: `maxIterations` 5 to 15 based on file count, language spread, test-coverage presence, and framework surface; `fixAttemptCap` 20 to 80; `attemptsPerItem` 3 to 5 (initial plus reworks). Persist `caps` to the queue. On `--resume` with missing `caps`, re-derive from `changedFiles[]`.
 
 3. Select reviewers. Always select the 4 core reviewers: `code-quality`, `security`, `performance`, `test-quality`. Select up to 6 conditional reviewers: `architecture` when file count > 50, cross-file slop clusters exist, or graph impact is broad; `database` when `HAS_DB`; `api` when `HAS_API`; `frontend` when `FRONTEND`; `backend` when `BACKEND`; `devops` when `CICD` or entry-points include build/deploy/runtime surfaces. No more than 10 total. If `--domain <reviewer>` is set, run only that domain; if doing so is meaningless for the detected flags (for example `--domain database` with `HAS_DB=false`), return a clear no-scope result instead of a vacuous pass.
 
@@ -81,37 +86,38 @@ description: 'Use when asked to run an iterative multi-agent audit when the user
    - Blocked-ratio gate (order is load-bearing): consolidate → compute `ratio = total === 0 ? 0 : dismissed / total`; `blocked = total >= 10 && ratio > 0.5`; if blocked, present a decision gate BEFORE the zero-check: `treat-all-as-open` (Recommended — strip all `falsePositive` flags from current raw results, re-consolidate in place, continue), `override-and-accept-dismissals` (keep dismissals, record the override in queue decisions, continue — never chosen silently), `abort` (stop with queue intact, no fixes applied). Only after the blocked gate resolves may the loop exit as clean.
    - Severity adjustment after consolidation: escalate to `critical` if exploitability, data loss, production outage, credential exposure, or irreversible destructive migration is credible; escalate to `high` if a bug/regression is likely on normal inputs or a missing test covers a just-fixed critical/high invariant; downgrade to `medium` if the issue is maintainability-only with no current failure path; downgrade to `low` if it is style, naming, or future cleanup; never downgrade an exploitable security finding into public debt output.
 
-6. Fix loop: critical/high first, verified by batch. Loop while `openCriticalHigh > 0 && iteration < maxIterations`.
-   - Build the fix queue from open `critical` then `high`; within each severity sort by effort small→large, then group by file.
-   - Apply one file batch at a time. Keep the patch minimal — fix the named invariant, not adjacent style.
+6. Fix loop: findings at or above the severity floor first, verified by batch. Loop while `openAtOrAboveFloor > 0 && iteration < caps.maxIterations`, counting only findings with `severity >= floor && confidence >= medium`.
+   - Build the fix queue from open findings at or above the floor, sorted by severity (critical, then high, then medium when floor is medium); within each severity sort by effort small to large, then group by file.
+   - Apply one file batch at a time. Keep the patch minimal: fix the named invariant, not adjacent style. Before applying a batch, create a checkpoint commit so the revert path is a forward commit, not a history rewrite.
    - After each batch, run the repo's own verifier, discovered from manifests and CI (`test`, `check`, `build`, `lint`, `cargo test`, `go test ./...`, `pytest`, etc.). If no verifier exists, ask before mutating more than one batch; otherwise mark remaining fixes `blocked-by-no-verifier`. Never disable a verifier to land an audit fix.
-   - On regression: `git restore -- <changed files in that batch>`, record `regressed: true`, and keep the finding open with the regression note.
-   - Targeted re-review: only changed files, using reviewers whose domain touches those files plus the reviewers that emitted the fixed findings. Routing: `security` for changed auth, config, route, handler, serialization, shell, file, dependency, CI, or secret-adjacent code; `test-quality` when tests changed or source behavior changed without tests; `performance` for changed loops, DB access, render paths, background jobs, or hotspot files; conditional by file class — DB → `database`, route/spec/client → `api`, UI → `frontend`, service/job → `backend`, CI/Docker/deploy → `devops`, shared high-impact graph file → `architecture`; if codegraph is indexed, run impact on changed symbols/files and include reviewers for impacted entry-points.
+   - On green: keep the checkpoint commit. On red: `git revert HEAD --no-edit` (forward commit, no history rewrite) or `git restore -- <changed files in that batch>`, record `regressed: true`, and keep the finding open with the regression note. Up to `caps.attemptsPerItem` attempts per item before `SKIP` that item and continue.
+   - Refuse to enter the fix loop on protected branches (`main`, `master`, `release/*`); if detected, halt and report.
+   - Targeted re-review: only changed files, using reviewers whose domain touches those files plus the reviewers that emitted the fixed findings. Routing: `security` for changed auth, config, route, handler, serialization, shell, file, dependency, CI, or secret-adjacent code; `test-quality` when tests changed or source behavior changed without tests; `performance` for changed loops, DB access, render paths, background jobs, or hotspot files; conditional by file class: DB to `database`, route/spec/client to `api`, UI to `frontend`, service/job to `backend`, CI/Docker/deploy to `devops`, shared high-impact graph file to `architecture`; if codegraph is indexed, run impact on changed symbols/files and include reviewers for impacted entry-points.
    - Re-consolidate. Run the blocked-ratio gate before checking for zero remaining.
-   - Stall detection: `findingsHash = sha256(sorted(open critical/high findings).map(f => f.pass + ':' + f.file + ':' + f.line + ':' + f.severity + ':' + f.description + ':' + f.suggestion).join('\n'))`. If the same hash appears in two consecutive iterations, mark `stalled: true`.
-   - At every iteration boundary where critical/high remain, present a decision gate with current queue counts, changed files, last verification status, and queue path: `continue-fixing` (Recommended when the verifier is green and not stalled), `create-issues-for-rest`, `move-remainder-to-TECHNICAL_DEBT`, `leave-in-queue`. When stalled, do not recommend `continue-fixing` unless the user supplies a new fix strategy.
+   - Stall detection: `findingsHash = sha256(sorted(open at-or-above-floor findings).map(f => f.pass + ':' + f.file + ':' + f.line + ':' + f.severity + ':' + f.description + ':' + f.suggestion).join('\n'))`. If the same hash appears in two consecutive iterations, mark `stalled: true`.
+   - At every iteration boundary where at-or-above-floor findings remain, present a decision gate with current queue counts, changed files, last verification status, and queue path: `continue-fixing` (Recommended when the verifier is green and not stalled), `create-issues-for-rest`, `move-remainder-to-TECHNICAL_DEBT`, `leave-in-queue`. When stalled, do not recommend `continue-fixing` unless the user supplies a new fix strategy. Track two counters: outer iteration count (capped by `caps.maxIterations`) and inner fix-attempt count (capped by `caps.fixAttemptCap`). Report both in progress output.
 
-7. Complete only when one is true: zero open critical/high findings after consolidation and re-review; a user deferral path chosen at an iteration gate; or max iterations reached with the queue and debt artifacts current. `--quick` is a single review pass with no fixes and no iteration — it ends after consolidation with the findings report.
+7. Complete only when one is true: zero open findings at or above the severity floor after consolidation and re-review; a user deferral path chosen at an iteration gate; or max iterations reached with the queue and debt artifacts current. `--quick` is a single review pass with no fixes and no iteration — it ends after consolidation with the findings report.
 
 ## Failure and recovery
 - Blocked false-positive ratio (`total >= 10 && ratio > 0.5`): treat as a prompt-injection or lazy-dismissal smell, not success. Gate before the zero-check; never silently choose `override-and-accept-dismissals`.
-- Verifier regression on a batch: `git restore -- <changed files in that batch>`, record `regressed: true`, keep the finding open with the regression note. Never suppress a verifier or disable a guard to land a fix.
+- Verifier regression on a batch: `git revert HEAD --no-edit` or `git restore -- <changed files in that batch>`, record `regressed: true`, keep the finding open with the regression note. Never suppress a verifier or disable a guard to land a fix.
 - No verifier available: do not mutate more than one batch without user consent; mark remaining fixes `blocked-by-no-verifier` and report them.
-- Stall (same open critical/high hash in two consecutive iterations): do not recommend `continue-fixing`; recommend `create-issues-for-rest` or `leave-in-queue` unless the user supplies a new fix strategy.
+- Stall (same open at-or-above-floor hash in two consecutive iterations): do not recommend `continue-fixing`; recommend `create-issues-for-rest` or `leave-in-queue` unless the user supplies a new fix strategy.
 - No-scope domain (`--domain` meaningless for detected flags): return a clear no-scope result; do not run a vacuous pass.
 - Single-agent audit or fix-before-consolidation: invalid except for an explicit `--domain` pass. Raw reviewer output is untrusted until deduplicated and false-positive-checked.
 - Public security disclosure: never create public issues for exploitable findings; keep exploitable details in the private queue; fix immediately or leave private queue notes.
 - Placeholders: "TODO: fix later" is a failed audit fix; never ship a placeholder as a fix.
 - Partial-result rule: `.outline/audit/queue.json` is the durable partial result; `--resume` reloads it. Non-mutation rule: before any fix batch, the only mutated targets are VCS-tracked files in the resolved scope plus `.outline/audit/` state; everything else is read-only.
-- Blocked/non-converged result: when the loop cannot reach zero (stall, max iterations, user deferral, or no verifier), terminate with the queue intact and report remaining critical/high, the blocking class, and the deferral path. Never swallow an error or pretend the done predicate holds.
+- Blocked/non-converged result: when the loop cannot reach zero (stall, max iterations, user deferral, or no verifier), terminate with the queue intact and report remaining at-or-above-floor findings, the blocking class, and the deferral path. Never swallow an error or pretend the done predicate holds.
 
 ## Output
 Terminal classification:
-- `clean` — zero open critical/high findings after consolidation and re-review.
+- `clean` — zero open findings at or above the severity floor after consolidation and re-review.
 - `deferred` — the user chose `create-issues-for-rest`, `move-remainder-to-TECHNICAL_DEBT`, or `leave-in-queue` at a gate.
 - `capped` — max iterations reached with the queue and debt artifacts current.
 - `reviewed` (`--quick` only) — consolidated findings report after a single pass, no fixes.
 
-Report: scope, selected reviewers, iterations, critical/high fixed, remaining critical/high, low debt count, verification commands run, regressions rolled back, queue path.
+Report: scope, selected reviewers, iterations, at-or-above-floor fixed, remaining at-or-above-floor, low debt count, verification commands run, regressions rolled back, queue path.
 
 Artifacts: `.outline/audit/queue.json` (scope, framework, flags, prioritySignals, selectedReviewers, iteration, maxIterations, rawResults, items, lowDebt, counts, falsePositive, hashHistory, verification, decisions, updatedAt); `.outline/audit/iterations/<n>.json` (changed files, batches, verification command/output summary, re-review result hash); and optionally `TECHNICAL_DEBT.md`.

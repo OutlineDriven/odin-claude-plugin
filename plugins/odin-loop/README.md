@@ -2,7 +2,7 @@
 
 ODIN workflows for bounded iteration with explicit completion checks.
 
-24 skills, category Coding.
+21 skills, category Coding.
 
 ## Install
 
@@ -26,7 +26,6 @@ codex plugin add odin-loop@odin-marketplace
 - feedback-pattern-sweep
 - first-load-byte-reduction
 - fixed-view-visual-benchmark
-- flaky-test-stabilization
 - frame-rate-stability
 - frontend-fidelity-rebuild
 - full-product-evaluation
@@ -34,11 +33,9 @@ codex plugin add odin-loop@odin-marketplace
 - meaningful-test-coverage
 - multi-agent-tournament-scorecard
 - perspective-complete-review
-- review-fix-grill-loop
 - skill-improver
 - strike-the-root
 - test-suite-acceleration
 - thumbnail-accuracy-scorecard
-- ticket-to-review-ready-patch
 - watch-and-repair-pr
 - workflow-evidence-mining

@@ -1,6 +1,6 @@
 ---
 name: genealogical-proof
-description: 'Use when a genealogical identity or relationship needs correlation, conflict, and negative-search proof. Classifies the identity proposition as proved, disproved, likely, or possible. Stops at declared success, non-success, or bound.'
+description: 'Use when a genealogical identity or relationship needs correlation, conflict analysis, and negative-search proof. Applies the Genealogical Proof Standard to classify the proposition as proved, disproved, likely, or possible. Not for non-genealogical identity proof.'
 ---
 
 # Genealogical proof
@@ -9,31 +9,37 @@ description: 'Use when a genealogical identity or relationship needs correlation
 
 | Field | Bound contract |
 |---|---|
-| Trigger | A genealogical identity or relationship needs correlation, conflict, and negative-search proof. |
-| Authority | READ_ONLY_WITH_PAID_OR_LIVING_DATA_ASK; approval: A1 for paid access or living-person data One harness ask/question call before the run starts; prose consent, invocation consent, prior-run consent, and post-start discovery do not approve an effect. |
-| Side effect | Genealogical proof finding. |
+| Trigger | A genealogical identity or relationship needs correlation, conflict analysis, and negative-search proof. |
+| Authority | Read-only genealogical source evaluation. Paid access or living-person data requires start approval: one harness ask/question call before the run starts. |
+| Side effect | Genealogical proof note with correlation, conflict resolution, and classification. |
 | Done | The identity proposition is classified proved, disproved, likely, or possible with a proof note. |
-| Stop | conflicting; unresolved; blocked. Bound: One proof question, approved repositories, date range, and pass cap. Receipt terminal classes: success, capped, stalled, blocked, exhausted, pending. Budget exhaustion is never success unless it is the predeclared success predicate. |
+| Stop | Unresolved conflicts; blocked access; insufficient evidence. Bound: one proof question, approved repositories, date range, pass cap. |
 
-## Not for
+## Inputs
 
-- Non-genealogical identity proof — the domain is genealogical records and relationships.
-- Evaluation without a proof question — stop and request one.
+- **Identity or relationship proposition** (required): the specific genealogical question to prove or disprove (for example, "John Smith born 1820 in Yorkshire is the son of William Smith and Mary Jones").
+- **Available source evidence** (required): the records, documents, and transcripts provided for analysis.
+- **Constraints** (required): date range bounding the search, repository bounds naming which archives or databases are in scope.
 
 ## Procedure
 
-1. Bind the declared bound and freeze it before mutation. Done when: the bound is frozen and no further scope drift is accepted.
-2. If authority.approval is not null, collect start approval with the harness question tool once using the A1 sealed_fields list; end the run on scope drift. Done when: approval is collected or confirmed absent.
-3. Execute the genealogical proof finding inside the bound. Done when: the identity proposition is classified proved, disproved, likely, or possible with a proof note, or a terminal class applies.
-4. Stop at outcome.success, any outcome.non_success, or outcome.bound. Done when: a terminal class is reached and recorded.
-5. Persist per profiles.persistence.P1 (durable_location .outline/loops/<slug>/<run_id>/ when durable; emit receipt.json before return). Done when: receipt.json is emitted with every K11 field and outcome.success holds or a named non_success/bound terminal applies.
+1. Extract and correlate identity markers from the provided sources. For each source, record the identity markers it carries: names (including variants and spellings), dates (birth, baptism, marriage, death, burial), places (birthplace, residence, event location), and relationships (parent-child, spouse, sibling). Correlate markers across sources: which sources agree, which differ, which are silent. Done when: every source's markers are extracted and the correlation matrix is recorded.
+2. Rank sources by originality and proximity to the event. Primary sources (created at or near the time of the event by someone with direct knowledge) rank above derivative sources (transcriptions, indexes, compiled genealogies). Within primary sources, those created closest to the event date rank higher. Record the rank order with the justification for each source. Done when: every source is ranked with its originality class and proximity rationale.
+3. Resolve conflicting evidence. Where sources disagree on a marker, weigh the conflict by source reliability: a primary record close to the event outweighs a derivative compiled decades later. Identify merging errors: records for two different people combined into one identity, or one person split into two. State the resolution for each conflict and the evidence that supports it. If a conflict cannot be resolved, name it as unresolved. Done when: every conflict is resolved or explicitly named as unresolved.
+4. Perform negative-search proof. For each identity marker that the proposition depends on, confirm that expected records where the marker should appear have been searched and the marker is absent where it would contradict the proposition. Record which repositories were searched, which record types were checked, and what was found or not found. A negative search that was not performed is a gap, not proof. Done when: negative-search coverage is recorded for every load-bearing marker.
+5. Classify the proposition against defined evidentiary thresholds:
+   - **Proved**: all markers correlate, conflicts are resolved, negative-search confirms, and the evidence is sufficient to warrant no reasonable alternative.
+   - **Disproved**: the evidence directly contradicts the proposition with a primary source.
+   - **Likely**: the weight of evidence supports the proposition but one element remains unresolved or the negative search is incomplete.
+   - **Possible**: the proposition is consistent with the evidence but the evidence is thin or largely derivative.
+   Done when: the classification is assigned with its evidentiary justification.
 
 ## Failure and recovery
 
-- **Conflicting evidence**: emit a conflicting receipt naming the conflict; do not force a classification.
-- **Unresolved**: emit an unresolved receipt naming the missing evidence; do not guess.
-- **Blocked**: a repository or data source is inaccessible; emit a blocked receipt naming the missing access.
+- **Unresolved conflicts:** conflicting evidence prevents a clear resolution. Terminal `stalled`; name the conflict and the sources involved. Do not force a classification.
+- **Blocked access:** a required repository is inaccessible. Terminal `blocked`; name the repository and the marker it would confirm or refute.
+- **Insufficient evidence:** the available sources do not support any classification above `possible`. Terminal `stalled`; report what evidence is missing and which classification it would enable.
 
 ## Output
 
-An immutable K11 receipt with every K11 field, recording the terminal class (success, capped, stalled, blocked, exhausted, or pending) and the proof classification (proved, disproved, likely, or possible) with its proof note.
+A proof note detailing the source correlation, source ranking, conflict resolution, negative-search coverage, and the final classification (proved, disproved, likely, or possible) with its evidentiary justification. Terminal classification: `success` (proved or disproved), `stalled` (likely or possible with unresolved elements), or `blocked` (repository access denied).

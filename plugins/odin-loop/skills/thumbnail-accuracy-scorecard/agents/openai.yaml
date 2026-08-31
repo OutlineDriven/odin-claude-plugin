@@ -1,3 +1,3 @@
 interface:
   display_name: "Thumbnail Accuracy Scorecard"
-  short_description: "Score thumbnail concepts with real-size, accuracy-first"
+  short_description: "Use when thumbnail concepts need real-size, accuracy-first"

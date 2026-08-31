@@ -1,3 +1,0 @@
-interface:
-  display_name: "Flaky Test Stabilization"
-  short_description: "Use when a confirmed flaky test needs root-cause repair and"
