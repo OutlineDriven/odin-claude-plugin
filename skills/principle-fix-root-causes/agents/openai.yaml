@@ -1,3 +1,0 @@
-interface:
-  display_name: "Principle Fix Root Causes"
-  short_description: "Reproduce the defect, fix the root cause, remove the pattern."

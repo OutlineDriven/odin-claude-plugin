@@ -1,3 +1,0 @@
-interface:
-  display_name: "Principle Make Operations Idempotent"
-  short_description: "Design operations that converge safely on retry"

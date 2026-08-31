@@ -1,3 +1,0 @@
-interface:
-  display_name: "Principle Type System Discipline"
-  short_description: "Design types where the compiler detects every invalid state."

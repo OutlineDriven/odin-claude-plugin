@@ -1,3 +1,0 @@
-interface:
-  display_name: "Principle Laziness Protocol"
-  short_description: "Apply deletion-first smallest-change discipline to minimize code"

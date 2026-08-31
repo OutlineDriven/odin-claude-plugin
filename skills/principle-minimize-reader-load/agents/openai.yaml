@@ -1,3 +1,0 @@
-interface:
-  display_name: "Principle Minimize Reader Load"
-  short_description: "Collapse pass-throughs and narrow scopes for fast tracing."

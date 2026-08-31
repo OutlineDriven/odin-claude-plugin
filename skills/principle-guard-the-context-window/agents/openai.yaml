@@ -1,3 +1,0 @@
-interface:
-  display_name: "Principle Guard The Context Window"
-  short_description: "Delegate heavy reading to keep main context on decisions"

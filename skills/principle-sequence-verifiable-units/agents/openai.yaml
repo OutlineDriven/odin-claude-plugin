@@ -1,3 +1,0 @@
-interface:
-  display_name: "Principle Sequence Verifiable Units"
-  short_description: "Per-unit verification before committing sequence"
