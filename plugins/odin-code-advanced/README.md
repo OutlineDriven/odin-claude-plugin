@@ -2,7 +2,7 @@
 
 Advanced ODIN workflows for complex code changes and technical audits.
 
-52 skills, category Coding.
+51 skills, category Coding.
 
 ## Install
 
@@ -29,7 +29,6 @@ codex plugin add odin-code-advanced@odin-marketplace
 - complexity-grill
 - control-cli
 - control-ui
-- create-verification-skill
 - deprecate-and-migrate
 - design-it-twice
 - dimensional-analysis
@@ -42,7 +41,6 @@ codex plugin add odin-code-advanced@odin-marketplace
 - grill-with-docs
 - guillotine
 - leave-only-first-principle
-- maintain-verification-skill
 - make-bot-ui
 - model-challenge
 - model-retuning
@@ -70,3 +68,4 @@ codex plugin add odin-code-advanced@odin-marketplace
 - to-greenfield
 - unleak-abstraction
 - validation-first-driven
+- verification-skill
