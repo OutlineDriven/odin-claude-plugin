@@ -61,19 +61,21 @@ function parseFrontmatterYaml(text) {
       stack.push({ indent, pathPrefix: path });
       continue;
     }
-    let value, quoted = false;
+    // Quoted scalars may carry a trailing inline comment after the closing
+    // quote; record which quote character closed the value ('\'', '"', null).
+    let value, quote = null;
     const v = rawVal.trim();
-    if (v.startsWith("'") && v.endsWith("'") && v.length >= 2) {
-      value = v.slice(1, -1).replace(/''/g, "'");
-      quoted = true;
-    } else if (v.startsWith('"') && v.endsWith('"') && v.length >= 2) {
-      value = v.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, "\\");
-      quoted = true;
+    let qm = /^'((?:[^']|'')*)'(?:\s+#.*)?$/.exec(v);
+    if (qm) {
+      value = qm[1].replace(/''/g, "'");
+      quote = "'";
+    } else if ((qm = /^"((?:[^"\\]|\\.)*)"(?:\s+#.*)?$/.exec(v))) {
+      value = qm[1].replace(/\\"/g, '"').replace(/\\\\/g, "\\");
+      quote = '"';
     } else {
       value = v;
-      quoted = false;
     }
-    entries.push({ path, key, value, quoted, raw: rawVal });
+    entries.push({ path, key, value, quote, raw: rawVal });
   }
   return { entries, error: null };
 }
@@ -123,14 +125,20 @@ for (const slug of slugs) {
   if (!fm || fm.error) continue;
   for (const entry of fm.entries) {
     if (!entry.raw.includes(": ")) continue;
-    // Quoted (single or double) scalars are safe; only plain scalars misparse on ': '.
-    if (!entry.quoted)
+    // Contract (AGENTS.md): ': ' values must be single-quoted. Plain scalars
+    // misparse on ': '; double quotes drift from the contract.
+    if (entry.quote === "'") continue;
+    if (entry.quote === '"')
+      badQuote.push(
+        `${slug}: double-quoted ': ' value; contract requires single quotes (${entry.path})`,
+      );
+    else
       badQuote.push(`${slug}: unquoted frontmatter value contains ': ' (${entry.path})`);
   }
 }
 if (badQuote.length)
   errors.push(
-    `unquoted ': ' frontmatter values: ${badQuote.slice(0, 5).join("; ")} (${badQuote.length} total)`,
+    `': ' frontmatter values not single-quoted: ${badQuote.slice(0, 5).join("; ")} (${badQuote.length} total)`,
   );
 
 // --- (a) registry as count authority ---
