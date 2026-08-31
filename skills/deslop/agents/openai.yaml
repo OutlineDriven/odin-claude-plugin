@@ -1,3 +1,3 @@
 interface:
-  display_name: "Rollback-Safe Slop Cleanup"
-  short_description: "Certainty-graded slop cleanup with rollback"
+  display_name: "Deslop"
+  short_description: "Use when the user says deslop, debloat, tidy, simplify, or"

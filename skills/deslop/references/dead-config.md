@@ -1,8 +1,8 @@
 # Dead config: flags, env vars, branches
 
-Configuration ages worse than code. A feature flag introduced for a migration becomes permanent the moment everyone forgets it exists. An environment variable for a debug mode no one uses ships in production for years. A `if env.staging` branch full of stale logic stays untouched because no one wants to be the person who broke staging.
+Configuration ages worse than code. A feature flag introduced for a migration becomes permanent the moment everyone forgets it exists. An environment variable for a debug mode no one uses ships in production for years. An `if env.staging` branch full of stale logic stays untouched because no one wants to be the person who broke staging.
 
-The fix: while you are in nearby config code, audit. Delete what is dead. The hardest part is *proving* dead: config consumers can be implicit (read by tools, dashboards, infra-as-code, deployment scripts) and grepping the source tree alone is not enough.
+The fix: while you are in nearby config code, audit. Delete what is dead. The hardest part is proving it dead: config consumers can be implicit (read by tools, dashboards, infra-as-code, deployment scripts) and grepping the source tree alone is not enough.
 
 ## Table of contents
 

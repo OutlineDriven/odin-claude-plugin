@@ -1,3 +1,0 @@
-interface:
-  display_name: "Lossless Binding Compression"
-  short_description: "Compress a padded binding artifact in place, keeping every rule."

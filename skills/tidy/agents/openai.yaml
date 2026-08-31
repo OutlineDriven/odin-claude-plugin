@@ -1,3 +1,0 @@
-interface:
-  display_name: "Dead Code Tidying"
-  short_description: "Simplify code by removing dead and redundant constructs"

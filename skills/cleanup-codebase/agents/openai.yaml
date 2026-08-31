@@ -1,3 +1,0 @@
-interface:
-  display_name: "Cleanup Codebase"
-  short_description: "Remove proven-dead code and inline redundant wrappers."
