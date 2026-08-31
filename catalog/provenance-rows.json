@@ -6703,7 +6703,7 @@
       "slug": "replace-unsafe-typescript-assertions",
       "module": "odin-typescript",
       "strategy": "R",
-      "adaptation": "rename-only",
+      "adaptation": "structured-merge-rewrite",
       "target": "skills/replace-unsafe-typescript-assertions/",
       "origin": "Adapted from `mattpocock/skills` at revision `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76`, paths `skills/misc/migrate-to-shoehorn/SKILL.md` and `skills/misc/migrate-to-shoehorn/agents/openai.yaml`. License: MIT. Copyright (c) 2026 Matt Pocock. The root `PROVENANCE.md` retains the full permission notice and source record. This adaptation preserves the source's test-only boundary and the `fromPartial`, `fromAny`, and `fromExact` decision while removing package-manager and typecheck assumptions from the executable contract.",
       "input_candidates": ""
@@ -6766,7 +6766,7 @@
       "slug": "changed-route-browser-testing",
       "module": "odin-web",
       "strategy": "R",
-      "adaptation": "rename-only",
+      "adaptation": "structured-merge-rewrite",
       "target": "skills/changed-route-browser-testing/",
       "origin": "Origin: https://github.com/EveryInc/compound-engineering-plugin, revision a1f601f17137f648be439965f8fdd9123303de5d, file skills/ce-test-browser/SKILL.md. License: MIT (Copyright (c) 2025 Every). Mechanisms extracted and rewritten in ODIN style, not copied verbatim; the obligation reduces to preserving attribution in the root provenance ledger.",
       "input_candidates": ""
@@ -6784,7 +6784,7 @@
       "slug": "diff-scoped-browser-qa",
       "module": "odin-web",
       "strategy": "R",
-      "adaptation": "rename-only",
+      "adaptation": "structured-merge-rewrite",
       "target": "skills/diff-scoped-browser-qa/",
       "origin": "- Origin: https://github.com/EveryInc/compound-engineering-plugin, `skills/ce-dogfood/SKILL.md`. - Pinned revision: `a1f601f17137f648be439965f8fdd9123303de5d`. - License: MIT (Copyright (c) 2025 Every). Mechanisms extracted and rewritten in ODIN style, not copied verbatim; attribution is preserved in the root provenance ledger. - Adaptation: the phase, matrix, report-template, isolation, and fix-loop mechanics that the source delegated to reference files and peer CE skills are inlined here so the skill is self-contained with no runtime peer dependency.",
       "input_candidates": ""

@@ -437,7 +437,7 @@ The keyed loopback URL, retained session/screen/state dirs, current screen and g
 
 ## Provenance
 
-- Roster: module `odin-create-advanced`, slug `visual-brainstorm-companion`, candidate `source:source-superpowers:superpowers-008`, invocation policy `model+human`.
+- Roster: module `odin-design-advanced`, slug `visual-brainstorm-companion`, candidate `source:source-superpowers:superpowers-008`, invocation policy `model+human`.
 - Origin: `https://github.com/obra/superpowers`, revision `b36e0829c6d0140e93cfef2ca599b1b07d4a7797`, MIT.
 - Source paths: `skills/brainstorming/visual-companion.md`, `skills/brainstorming/scripts/server.cjs`, `skills/brainstorming/scripts/start-server.sh`, `skills/brainstorming/scripts/stop-server.sh`, `skills/brainstorming/scripts/helper.js`, `skills/brainstorming/scripts/frame-template.html`.
 - Adaptation: preserves the local visual question, browser push, and click-event return mechanism while replacing source process and filesystem handling with a self-contained, fail-closed Bun 1.4.0 design. It has no ODIN peer skill or module dependency.
