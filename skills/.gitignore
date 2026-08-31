@@ -2,4 +2,5 @@
 **/iteration-*/
 evals.json
 *-workspace/
+!sourced-learning-workspace/
 __pycache__/
