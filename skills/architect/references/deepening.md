@@ -1,6 +1,6 @@
 # Deepening
 
-How to deepen a cluster of shallow modules safely, given its dependencies. Assumes the vocabulary in `codebase-design` — **module**, **interface**, **seam**, **adapter**.
+How to deepen a cluster of shallow modules safely, given its dependencies. Assumes the vocabulary in the survivor SKILL.md — module, interface, seam, adapter.
 
 ## Dependency categories
 
@@ -22,13 +22,11 @@ _Examples_: a Go data-access module fronting Postgres tested with `pgx` against 
 
 Owned services across a network boundary (microservices, internal APIs). Define a **port** (interface) at the seam. The deep module owns the logic; the transport is injected as an **adapter**. Tests use an in-memory adapter. Production uses an HTTP/gRPC/queue adapter.
 
-Recommendation shape: *"Define a port at the seam, implement an HTTP adapter for production and an in-memory adapter for testing, so the logic sits in one deep module even though it is deployed across a network."*
-
 _Examples_: a Kotlin service calling an internal pricing microservice via a `PricingPort` interface — gRPC adapter in production, in-memory adapter in tests; a Rust client wrapping an internal queue with a `JobQueue` trait — RabbitMQ adapter in production, channel-backed adapter in tests.
 
 ### 4. True external (Mock)
 
-Third-party services (Stripe, Twilio, GitHub, Auth0, etc.) the team does not control. The deepened module takes the external dependency as an injected port; tests provide a mock adapter.
+Third-party services (Stripe, Twilio, GitHub, Auth0) the team does not control. The deepened module takes the external dependency as an injected port; tests provide a mock adapter.
 
 _Examples_: a Python billing module that takes a `PaymentGateway` protocol — `StripePaymentGateway` in production, a `pytest`/`hypothesis` mock in tests; a Go SMS dispatcher with a `Notifier` interface — Twilio adapter in production, recording fake in tests.
 

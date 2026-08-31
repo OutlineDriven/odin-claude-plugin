@@ -1,3 +1,0 @@
-interface:
-  display_name: "Improve Codebase Architecture"
-  short_description: "Survey for shallow modules, rank candidates by effort and gain"
