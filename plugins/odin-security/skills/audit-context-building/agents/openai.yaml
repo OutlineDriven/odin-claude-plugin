@@ -1,3 +1,0 @@
-interface:
-  display_name: "Audit Context Building"
-  short_description: "Use when starting an audit, threat model, or architecture"

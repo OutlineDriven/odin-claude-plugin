@@ -8,7 +8,7 @@ stays in SKILL.md; this file carries what changes per target domain.
 
 The entry point is an external or public function. Actors are caller, owner,
 relayer, oracle, and other protocols. Persistent state is storage slots. A
-black box is an address whose code is not in the project — record calldata
+black box is an address whose code is not in the project. Record calldata
 sent and outcomes not excluded (revert, hostile return value, re-entry before
 state writes land). Watch for `unchecked` blocks and assembly that suspend
 guarantees.
@@ -20,7 +20,7 @@ ownership and lifetime. Note which calls are behind `#ifdef`.
 
 ## Decompiled binaries or firmware
 
-Function boundaries are themselves a finding — say which entry points were
+Function boundaries are themselves a finding. Say which entry points were
 identified, how, and what was left unattributed. Go top-down from task entry
 points. Most callees are black boxes and that is normal.
 

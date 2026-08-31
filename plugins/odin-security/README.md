@@ -2,7 +2,7 @@
 
 ODIN workflows for security reviews and defensive implementation.
 
-18 skills, category Security.
+16 skills, category Security.
 
 ## Install
 
@@ -18,8 +18,6 @@ codex plugin add odin-security@odin-marketplace
 
 ## Skills
 
-- agentic-actions-injection-audit
-- audit-context-building
 - c-security-review
 - codeql-security-analysis
 - confirmed-security-review
