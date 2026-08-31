@@ -1,3 +1,0 @@
-interface:
-  display_name: "Resolving Merge Conflicts"
-  short_description: "Complete a merge or rebase by resolving every conflict"

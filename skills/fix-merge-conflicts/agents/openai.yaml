@@ -1,3 +1,0 @@
-interface:
-  display_name: "Fix Merge Conflicts"
-  short_description: "Resolve merge conflicts and verify the build with scoped checks."
