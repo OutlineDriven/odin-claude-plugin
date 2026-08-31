@@ -1,3 +1,3 @@
 interface:
   display_name: "Architecture Diagram"
-  short_description: "Schema-validated architecture spec and self-contained HTML"
+  short_description: "Use when the user asks to visualize an architecture as a"
