@@ -1,6 +1,6 @@
 # Establish the frame before grounding
 
-Load this when the frame isn't clear from the prompt — a bare link, a bare topic, or a warm invocation with no stated question (SKILL.md Phase 0). The job is to figure out what POV the user actually wants *before* spending the scout fan-out, by orienting on what they gave you and proposing — **never guessing**.
+Load this when the frame isn't clear from the prompt — a bare link, a bare topic, or a warm invocation with no stated question (SKILL.md stage 1). The job is to figure out what POV the user actually wants *before* spending the scout fan-out, by orienting on what they gave you and proposing — **never guessing**.
 
 ## Why this gate exists
 

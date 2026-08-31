@@ -1,6 +1,6 @@
 # Boundaries and routing
 
-Load this when the input's fit for `pov` is in doubt, or to route a Hold (SKILL.md Phase 0).
+Load this when the input's fit for `pov` is in doubt, or to route a Hold (SKILL.md stage 1).
 
 ## The discriminator
 

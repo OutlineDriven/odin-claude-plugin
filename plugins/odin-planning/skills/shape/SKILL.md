@@ -1,6 +1,6 @@
 ---
 name: shape
-description: 'Shape work in the Basecamp Shape Up sense: appetite, breadboard, rabbit holes, no-gos. Use when the user says shape this, pitch this, gut check the shape, or does the result match the bet. Shapes bets on work, not prose. Not for tasks requiring source or remote-system changes.'
+description: 'Shape work into a fat-marker pitch with five ingredients: problem, appetite, solution, rabbit holes, no-gos. Use when the user says shape this, pitch this, gut check the shape, fix this pitch, or does the result match the bet. Shapes bets on work, not prose. Not for tasks requiring source or remote-system changes.'
 ---
 
 # Shape
@@ -38,16 +38,17 @@ Explicit override always wins over auto-detection.
 
 ### build-shape
 
-1. **Set the appetite.** Choose small batch or big batch. The appetite bounds the solution; a solution that exceeds it gets cut, the appetite stands. **Done when:** the appetite is chosen and stated.
-2. **Rough the solution.** Draw a breadboard (places, affordances, connections). Use the notation below. Draw one sketch per idea; a sketch that needs a legend is over-drawn. **Done when:** the breadboard is drawn with places, affordances, and connections.
+1. **State the problem.** Name the core problem being solved in one or two sentences. The problem frames everything that follows: the appetite, the solution, the no-gos. **Done when:** the problem is stated in the user's terms.
+2. **Set the appetite.** Choose small batch or big batch. The appetite bounds the solution; a solution that exceeds it gets cut, the appetite stands. **Done when:** the appetite is chosen and stated.
+3. **Rough the solution.** Draw a breadboard (places, affordances, connections). Use the notation below. Draw one sketch per idea; a sketch that needs a legend is over-drawn. **Done when:** the breadboard is drawn with places, affordances, and connections.
 
    **Breadboard notation** (three elements only):
 
-   - **Places** — screens, dialogs, states a user can navigate to. Written as underlined names.
-   - **Affordances** — buttons, links, fields, controls. Written as bracketed names.
-   - **Connections** — arrows showing flow between places.
+   - Places: screens, dialogs, states a user can navigate to. Written as underlined names.
+   - Affordances: buttons, links, fields, controls. Written as bracketed names.
+   - Connections: arrows showing flow between places.
 
-   Worked example — "invoice autopay" bet:
+   Worked example, "invoice autopay" bet:
 
    ```
      Invoice page                Set up autopay             Confirmation
@@ -65,24 +66,24 @@ Explicit override always wins over auto-detection.
 
    Right altitude: a builder could start tomorrow and still owns every design decision inside the lines.
 
-3. **Hunt rabbit holes.** Walk the solution end to end; each hole is declared solved-in-principle (state how) or patched out with a stated decision. **Done when:** every rabbit hole is resolved or patched.
-4. **Write no-gos.** Name what this bet deliberately excludes. **Done when:** the no-gos are listed.
+4. **Hunt rabbit holes.** Walk the solution end to end; each hole is declared solved-in-principle (state how) or patched out with a stated decision. **Done when:** every rabbit hole is resolved or patched.
+5. **Write no-gos.** Name what this bet deliberately excludes. **Done when:** the no-gos are listed.
 
 ### shape-check
 
 Conduct an interactive gut check with the user via the AskUserQuestion tool. Ask one single-select question per axis, and keep the axes separate. Put the `(Recommended)` option first; it carries the default, and choosing it accepts that default. Ask at most 4 questions per fire. If more axes remain, send sequential batches in dependency order. Use `multiSelect` only for additive picks (optional sub-scopes), never for axis-with-default semantics.
 
-Axes: appetite right-sized? which scope cuts? each unresolved rabbit hole — patch or re-shape? no-go boundaries holding?
+Axes: appetite right-sized? which scope cuts? each unresolved rabbit hole, patch or re-shape? no-go boundaries holding?
 
 **Done when:** every axis is answered or the remaining axes are listed as open bets.
 
 ### to-good-shape
 
-Diagnose the pitch in one line:
+Diagnose the pitch in one line, then act:
 
-- **Over-shaped** — design already done (wireframes, field lists, task tickets). Raise the altitude: redraw as a breadboard, discard the pixel decisions.
-- **Under-shaped** — words without a walkthrough, unbounded appetite. Force an appetite and walk one concrete path through the solution.
-- **Missing ingredients** — add the absent ones; the other four constrain what the new one can say.
+- Over-shaped (design already done: wireframes, field lists, task tickets): raise the altitude, redraw as a breadboard, discard the pixel decisions.
+- Under-shaped (words without a walkthrough, unbounded appetite): force an appetite and walk one concrete path through the solution.
+- Missing ingredients: add the absent ones; the other four constrain what the new one can say.
 
 Then rewrite the pitch. **Done when:** the pitch is rewritten with all five ingredients at fat-marker altitude.
 
@@ -100,9 +101,9 @@ Emit exactly one verdict: `shipped-the-bet | scope-crept | under-delivered | dif
 
 ## Failure and recovery
 
-- **Malformed pitch** — if the user provides something that cannot be parsed into a pitch, state the failure and ask for clarification. Do not fabricate ingredients.
-- **No axes for shape-check** — if a pitch has no resolvable axes (empty rabbit holes, no appetite), state that and fall back to build-shape to fill the gaps.
-- **Non-converged feel-shape** — if evidence for any ingredient is ambiguous, mark it `unknown` and state it. The verdict must still be emitted.
+- Malformed pitch: if the user provides something that cannot be parsed into a pitch, state the failure and ask for clarification. Do not fabricate ingredients.
+- No axes for shape-check: if a pitch has no resolvable axes (empty rabbit holes, no appetite), state that and fall back to build-shape to fill the gaps.
+- Non-converged feel-shape: if evidence for any ingredient is ambiguous, mark it `unknown` and state it. The verdict must still be emitted.
 - No rollback needed: no files written, no state mutated.
 
 ## Output

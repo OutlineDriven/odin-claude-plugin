@@ -1,6 +1,6 @@
 # Invocation contexts
 
-Load this for a **warm** invocation (SKILL.md Phase 0). The method is one method; warm is a modifier on *where the question comes from* and *how much ceremony is warranted*, not a second workflow.
+Load this for a **warm** invocation (SKILL.md stage 1). The method is one method; warm is a modifier on *where the question comes from* and *how much ceremony is warranted*, not a second workflow.
 
 ## Cold vs warm
 
