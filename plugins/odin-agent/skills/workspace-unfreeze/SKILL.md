@@ -1,6 +1,6 @@
 ---
 name: workspace-unfreeze
-description: 'Use when the user runs /workspace-unfreeze on a frozen path to remove the freeze lock marker so the path is editable again. Don''t use for automated or unattended runs; the deletion requires explicit human invocation and a preview of the consequence.'
+description: 'Use when the user runs /workspace-unfreeze on a frozen path to remove the freeze lock marker so the path is editable again. Resolves the marker from an explicit path or the freeze convention, previews the consequence, and deletes only that marker. Not for automated or unattended runs; requires explicit human invocation.'
 disable-model-invocation: true
 ---
 
@@ -22,7 +22,7 @@ disable-model-invocation: true
 ## Procedure
 
 1. Receive the path argument from the explicit /workspace-unfreeze invocation. Do not act on any model-generated or inferred path. Done when: the path argument is confirmed as human-supplied.
-2. Locate the freeze lock marker file associated with the named path. If no marker exists, the path is already editable; report that and stop. Done when: the marker file path is known or the path is confirmed already editable.
+2. Resolve the marker path from the invocation: accept an explicit marker path from the human, or derive it from the stated freeze convention (e.g. `<path>.freeze-lock` beside the frozen path). Verify the resolved file exists and names the target path. If it does not, treat as Marker not found. Never glob or scan for candidate markers. Done when: the marker file path is resolved and verified, or the path is confirmed already editable.
 3. Before deleting, preview the marker file path and state the consequence: the freeze guardrail on that path will be removed and the path will become editable. Done when: the human has seen the preview and the consequence.
 4. Delete only that single marker file. Do not delete any other file, do not edit the protected path's contents, and do not touch any other freeze marker. Done when: the single marker file is deleted.
 5. Confirm the marker file is gone and the named path is editable again. Done when: the marker file is absent and the path is editable.

@@ -1,3 +1,0 @@
-interface:
-  display_name: "Snyk Agent Scan Compliance"
-  short_description: "Use when snyk-agent-scan reports W001, W011, or W012 on a"

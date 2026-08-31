@@ -1,6 +1,6 @@
 ---
 name: humansense2system
-description: 'Use when the user wants to compile taste and signals into machine-consumable tokens, rules, forbidden combinations, and examples. A structured rule/pattern document is written to the project. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user wants to compile taste and "this feels wrong" signals into machine-consumable tokens, rules, forbidden combinations, and examples. Elicits concrete cases, classifies each into one of four buckets, and writes a structured rule/pattern document. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Humansense → system
@@ -12,7 +12,7 @@ description: 'Use when the user wants to compile taste and signals into machine-
 | Trigger | User wants to compile taste and "this feels wrong" into tokens, rules, forbidden combinations, and examples |
 | Authority | reversible-local: write only the named local artifact; state the rollback path |
 | Side effect | One structured rule/pattern document written to the project shared docs or agent-rule folder |
-| Done | Machine-consumable tokens, rules, forbidden combinations, and examples exist in the artifact |
+| Done | At least one classified entry exists across any section (Forbidden, Tokens, Examples, or Rules) and the user has validated the artifact |
 
 ## Inputs
 

@@ -1,3 +1,0 @@
-interface:
-  display_name: "Upgrade Catalog"
-  short_description: "Use when a user asks to update or converge their installed ODIN"

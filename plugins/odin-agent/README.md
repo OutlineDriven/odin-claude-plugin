@@ -2,7 +2,7 @@
 
 ODIN workflows for designing and improving AI agents.
 
-51 skills, category Productivity.
+48 skills, category Productivity.
 
 ## Install
 
@@ -30,7 +30,6 @@ codex plugin add odin-agent@odin-marketplace
 - claude-settings-audit
 - cli-for-agents
 - create-plugin-scaffold
-- cursor-sdk
 - dedup-skills
 - factory-mcp-bootstrap
 - generate-my-taste
@@ -60,10 +59,8 @@ codex plugin add odin-agent@odin-marketplace
 - skill-scanner
 - skill-writer
 - skills-visibility
-- snyk-agent-scan-compliance
 - testing-handbook-generator
 - toolchain-health
-- upgrade-catalog
 - validation-self-audit
 - watch-for-harness-mode
 - workspace-unfreeze
