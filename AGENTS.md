@@ -56,6 +56,7 @@ Treat these as generator-owned and never hand-edit them:
 - `plugins/*/plugin.json`, `plugins/*/.claude-plugin/plugin.json`, `plugins/*/README.md`, `plugins/*/LICENSE`, `plugins/*/NOTICE`
 - `.claude-plugin/marketplace.json`, `.agents/plugins/marketplace.json`, `.cursor-plugin/marketplace.json`
 - `plugins/*/skills/*/agents/openai.yaml`
+- the plugin table under `## Plugins` in the root `README.md`, and nothing else in that file
 
 To change one, change its generator or `catalog/plugins.json`, run `just render`, and commit input and output together.
 
