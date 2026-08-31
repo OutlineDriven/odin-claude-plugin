@@ -1,6 +1,6 @@
 ---
 name: copywriting-cta
-description: 'Use when a user asks to design or review a bottom-of-article CTA. Not for general copywriting — use copywriting; not for hooks/ledes — use copywriting-hooks.'
+description: 'Use when a user asks to design or review a bottom-of-article call-to-action. Maps article context, audience, and funnel stage to a CTA archetype with copy, form, mechanism, A/B test plan, and accessibility check. For general copywriting use copywriting; for hooks or ledes use copywriting-hooks.'
 ---
 
 # End-of-article CTA designer
@@ -42,7 +42,7 @@ Optional: free-text constraints the user volunteers (length limit, brand voice, 
    ├── objective = engagement              → E: Specific reply prompt
    └── objective = product / demo          → FLAG. Valid only where the author IS
        the product (consultants, solo founders, indie devs). Frame as "if you hit
-       this, here's how I help" — never "Book a Demo" verbatim.
+       this, here's how I help", never "Book a Demo" verbatim.
 
    context = NEWSLETTER PUBLICATION
    ├── objective = growth / subs           → F: Share/restack + native widget
@@ -56,7 +56,7 @@ Optional: free-text constraints the user volunteers (length limit, brand voice, 
    ├── stage = TOFU                        → I: Transitional asset (lead magnet)
    ├── stage = MOFU                        → J: Direct + transitional pair
    ├── stage = BOFU                        → K: Direct CTA + risk reversal
-   ├── objective = community               → D
+   ├── stage = Not applicable              → L: Value-statement subscribe (fallback)
    └── objective = engagement              → E (rarely right here)
    ```
 
@@ -85,8 +85,7 @@ Optional: free-text constraints the user volunteers (length limit, brand voice, 
    ### A/B test plan
    - **First test:** [single variable]
    - **Why this one first:** [1 sentence]
-   - **Sample size needed:** [rough estimate, or "skip A/B — traffic too low" with alternative]
-   - **Next 2 tests to queue:** [in priority order]
+   - **Sample size consideration:** [qualitative volume check, or skip A/B - traffic too low]
 
    ### Accessibility check
    - **Color contrast:** [target ratio + concrete pairing if colors known]

@@ -2,7 +2,7 @@
 
 ODIN workflows for clear, useful technical writing.
 
-13 skills, category Writing.
+12 skills, category Writing.
 
 ## Install
 
@@ -20,7 +20,6 @@ codex plugin add odin-writing@odin-marketplace
 
 - articulate
 - brand-authority
-- brand-guidelines
 - copywriting
 - copywriting-cta
 - copywriting-hooks

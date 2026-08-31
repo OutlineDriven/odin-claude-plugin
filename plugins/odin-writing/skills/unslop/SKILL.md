@@ -1,6 +1,6 @@
 ---
 name: unslop
-description: 'Use when prose is drafted or edited, reviewed for AI tells, or the user asks to remove AI patterns, humanize, or add voice. Also handles em-dash purge by grammatical role and tool-name neutralization in portable artifacts. Not for code debris — use deslop.'
+description: 'Use when prose is drafted or edited, reviewed for AI tells, or the user asks to remove AI patterns, humanize, or add voice. Runs 20 pattern-replacement checks across prose files; dedash mode purges em-dashes by grammatical role; detool mode neutralizes incidental tool names in portable artifacts. For code debris use deslop.'
 ---
 
 # Unslop
@@ -24,7 +24,7 @@ description: 'Use when prose is drafted or edited, reviewed for AI tells, or the
 ## Inputs
 
 - **Prose file, scope, or inline text** (required): the file, text block, directory, glob, or pasted text to edit. When the user supplies text inline rather than a path, edit that text directly and return the result.
-- **Mode** (optional): `full` (default — all 20 checks), `dedash` (em-dash purge by grammatical role), `detool` (incidental tool-name neutralization in portable artifacts).
+- **Mode** (optional): `full` (default: all 20 checks), `dedash` (em-dash purge by grammatical role), `detool` (incidental tool-name neutralization in portable artifacts).
 - **Tone guidance** (optional): intended register or audience; defaults to the file's existing voice.
 - **Strictness** (optional, dedash only): `default` replaces clear-cut cases; `strict` surfaces every occurrence as a judgment call.
 
@@ -114,5 +114,5 @@ Triggered when a durable artifact claims portability or tool-neutrality while ca
 
 ## Output
 
-The rewritten prose file with all checks passing and original meaning preserved; dedash and detool modes append a per-occurrence or per-hit report.
+The rewritten prose file with original meaning preserved. Full mode: all 20 checks passing, or if non-converged after three passes, the remaining violations reported with their locations. Dedash and detool modes append a per-occurrence or per-hit report.
 
