@@ -16,10 +16,10 @@ description: 'Use when asked to create an MCP server to integrate an API or serv
 
 ## Inputs
 
-- **API or service specification** (required): endpoint list, auth method, request/response shapes, or OpenAPI/GraphQL schema describing the service to integrate.
-- **Language** (required): `python` or `typescript`.
-- **Project directory** (required): target path for the new MCP server project.
-- **Tool design intent** (optional): which operations to expose as MCP tools and any annotation hints (readOnlyHint, destructiveHint, idempotentHint, openWorldHint).
+- API or service specification (required): endpoint list, auth method, request/response shapes, or OpenAPI/GraphQL schema describing the service to integrate.
+- Language (required): `python` or `typescript`.
+- Project directory (required): target path for the new MCP server project.
+- Tool design intent (optional): which operations to expose as MCP tools and any annotation hints (readOnlyHint, destructiveHint, idempotentHint, openWorldHint).
 
 ## Procedure
 

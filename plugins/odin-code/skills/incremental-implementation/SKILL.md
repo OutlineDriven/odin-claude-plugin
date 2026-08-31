@@ -16,9 +16,9 @@ description: 'Use when implementing a multi-file change, building a feature from
 
 ## Inputs
 
-- **Plan or breakdown** (required): ordered list of atomic changes that together deliver the feature or refactor. Each item must name the files it touches and the observable behavior it adds or changes.
-- **Existing test suite** (required): the project's current test runner and passing baseline.
-- **Feature flag mechanism** (optional): if the project uses feature flags, the flag name and gating surface for the new behavior.
+- Plan or breakdown (required): ordered list of atomic changes that together deliver the feature or refactor. Each item must name the files it touches and the observable behavior it adds or changes.
+- Existing test suite (required): the project's current test runner and passing baseline.
+- Feature flag mechanism (optional): if the project uses feature flags, the flag name and gating surface for the new behavior.
 
 ## Procedure
 
@@ -34,11 +34,11 @@ description: 'Use when implementing a multi-file change, building a feature from
 5. If a feature flag was used, confirm the flag-on and flag-off paths both pass. Leave the flag in place unless the plan explicitly calls for its removal in a later slice.
 
 ## Failure and recovery
-- **Slice fails tests**: stop. Fix the current slice before starting the next. Do not skip ahead or commit a broken state.
-- **Build breaks on a slice**: stop. Revert the last commit if the fix is not immediate. Re-implement the slice with the narrower scope that keeps the build green.
-- **Cross-slice regression detected in step 3**: bisect by reverting the most recent slice commit and re-running. Identify the conflicting slice and reconcile before re-committing.
+- Slice fails tests: stop. Fix the current slice before starting the next. Do not skip ahead or commit a broken state.
+- Build breaks on a slice: stop. Revert the last commit if the fix is not immediate. Re-implement the slice with the narrower scope that keeps the build green.
+- Cross-slice regression detected in step 3: bisect by reverting the most recent slice commit and re-running. Identify the conflicting slice and reconcile before re-committing.
 - **Plan item cannot be split into a testable slice**: mark it blocked. Do not proceed to dependent items. Report the blocker and the minimum prerequisite needed.
-- **Partial result rule**: committed slices that passed their own tests are retained. Only the failing or conflicting slice is reverted or reworked.
+- Partial result rule: committed slices that passed their own tests are retained. Only the failing or conflicting slice is reverted or reworked.
 
 ## Output
 - A sequence of commits, each passing its own tests and the build.

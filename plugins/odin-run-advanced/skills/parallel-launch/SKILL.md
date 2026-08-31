@@ -29,11 +29,11 @@ Required: the request, its acceptance criteria, and enough source context for ea
 7. Return the composition only when review passes. If an agent or review fails, preserve usable results and return the exact gap plus one targeted follow-up that would close it; do not widen scope or invent missing evidence. Done when: the composition is returned on review pass, or the gap and follow-up are returned on failure.
 
 ## Failure and recovery
-- **Invalid partition:** Shared mutable targets or hidden ordering make a batch unsafe. Do not launch that batch; repartition it into sequential work, or return `blocked` with the conflicting targets or dependency.
-- **Agent failure or incomplete result:** Keep independently usable results unchanged and return `blocked` with the failed concern, observed error, missing acceptance criterion, and targeted follow-up.
-- **Conflicting results:** Reconcile only from supplied evidence. If evidence cannot resolve the conflict, return `non-converged` with both positions, the unresolved fact, and the targeted check needed.
-- **Review failure:** Do not present the composition as complete. Return `non-converged` with failed review criteria, usable partial results, and a targeted follow-up.
-- **Unauthorized or partial mutation:** Stop further dispatch. Restore every changed local target from its captured prior content or exact undo operation, then report restoration status and any target that could not be restored. Never conceal an error or claim the done predicate holds.
+- Invalid partition: Shared mutable targets or hidden ordering make a batch unsafe. Do not launch that batch; repartition it into sequential work, or return `blocked` with the conflicting targets or dependency.
+- Agent failure or incomplete result: Keep independently usable results unchanged and return `blocked` with the failed concern, observed error, missing acceptance criterion, and targeted follow-up.
+- Conflicting results: Reconcile only from supplied evidence. If evidence cannot resolve the conflict, return `non-converged` with both positions, the unresolved fact, and the targeted check needed.
+- Review failure: Do not present the composition as complete. Return `non-converged` with failed review criteria, usable partial results, and a targeted follow-up.
+- Unauthorized or partial mutation: Stop further dispatch. Restore every changed local target from its captured prior content or exact undo operation, then report restoration status and any target that could not be restored. Never conceal an error or claim the done predicate holds.
 
 ## Output
 One reviewed composition mapping each concern to its result with review passage recorded — or, on failure, usable partial results, terminal classification (`blocked` or `non-converged`), exact gap, observed error or conflict, restoration status, and one targeted follow-up.

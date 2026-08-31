@@ -34,9 +34,9 @@ The subject to analyze must be supplied by the user. Optional: the specific ques
 
 ## Failure and recovery
 
-- **Blending failure**: if the answer begins to mix seats, restart from step 2 and keep only rent-seeking reasoning.
-- **Missing subject**: if no subject is supplied, ask for one and stop; emit no partial analysis.
-- **Non-mutation**: this skill never mutates anything, so no rollback is needed. A blocked result is an explicit "subject required" message, never a fabricated analysis.
+- Blending failure: if the answer begins to mix seats, restart from step 2 and keep only rent-seeking reasoning.
+- Missing subject: if no subject is supplied, ask for one and stop; emit no partial analysis.
+- Non-mutation: this skill never mutates anything, so no rollback is needed. A blocked result is an explicit "subject required" message, never a fabricated analysis.
 
 ## Output
 

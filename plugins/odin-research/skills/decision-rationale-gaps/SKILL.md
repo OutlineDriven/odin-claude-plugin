@@ -16,7 +16,7 @@ description: 'Use when a current decision needs pressure-testing until the ratio
 
 ## Inputs
 
-- **Decision text**: The decision statement to press. Required. Must be the decision that was made, not the reasoning behind it.
+- Decision text: The decision statement to press. Required. Must be the decision that was made, not the reasoning behind it.
 - **Context** (optional): Any surrounding context about what options were considered and which was picked.
 
 ## Procedure
@@ -35,9 +35,9 @@ description: 'Use when a current decision needs pressure-testing until the ratio
 8. **Flag unresolved gaps**: Name the specific assumption behind each gap that remains unexplained. Do not force a resolution or let the user paper over it. Flag the decision for re-review — not a verdict it was wrong, only that it is not yet earned. Done when: each open gap names its unexplained assumption and is flagged for re-review.
 
 ## Failure and recovery
-- **Unexplained gap**: A gap that survives the narrowing rounds is a valid stopping state. Name the specific assumption without asserting that the decision was wrong.
-- **Rejected answer**: Return the narrowest form of the vague part; do not repeat the question.
-- **Empty or unparseable critic response**: State that pressing could not proceed and name the decision as having an unresolved-critic-response gap.
+- Unexplained gap: A gap that survives the narrowing rounds is a valid stopping state. Name the specific assumption without asserting that the decision was wrong.
+- Rejected answer: Return the narrowest form of the vague part; do not repeat the question.
+- Empty or unparseable critic response: State that pressing could not proceed and name the decision as having an unresolved-critic-response gap.
 
 ## Output
 A decision-press report with sections in order: neutral restatement, per-gap state (closed with user explanation or open with unexplained assumption), gap counts, re-review flags for open gaps.

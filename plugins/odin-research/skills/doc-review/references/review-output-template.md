@@ -2,9 +2,9 @@
 
 Use this **exact format** when presenting synthesized review findings in Interactive mode. Findings are grouped by severity, not by reviewer.
 
-**IMPORTANT:** Use pipe-delimited markdown tables (`| col | col |`). Do NOT use ASCII box-drawing characters.
+IMPORTANT: Use pipe-delimited markdown tables (`| col | col |`). Do NOT use ASCII box-drawing characters.
 
-**IMPORTANT:** Escape literal pipe characters in table cells. Any `|` that appears inside a finding's section reference, issue description, code snippet, regex pattern, or delimited-string example must be written as `\|` so column boundaries are determined only by unescaped pipes.
+IMPORTANT: Escape literal pipe characters in table cells. Any `|` that appears inside a finding's section reference, issue description, code snippet, regex pattern, or delimited-string example must be written as `\|` so column boundaries are determined only by unescaped pipes.
 
 This template describes the Phase 4 interactive presentation -- what the user sees before the routing question (`references/walkthrough.md`) fires. The headless-mode envelope is documented in `references/synthesis-and-presentation.md` (Phase 4 "Route Remaining Findings" section) and is separate from this template.
 
@@ -104,14 +104,14 @@ Restated: 2 (residual/deferred items suppressed as duplicates of actionable find
 
 ## Section rules
 
-- **Summary line**: Always present after the reviewer list. Format: "Accepted N recommendations. K items need attention (X errors, Y omissions). Z FYI observations." Omit any zero clause except the FYI clause when zero (it's informative that none surfaced).
-- **Accepted recommendations**: List all findings that were accepted as recommendations (`safe_auto` tier). Include enough detail per recommendation to convey the substance. Omit section if none.
-- **P0-P3 sections**: Only include sections that have actionable findings (`gated_auto` or `manual`). Omit empty severity levels. Within each severity, separate into **Errors** and **Omissions** sub-headers. Omit a sub-header if that severity has none of that type. The `Tier` column surfaces whether a finding is `gated_auto` or `manual`.
-- **FYI Observations**: Findings at confidence anchor `50` regardless of `autofix_class`. Surface here for transparency; these are not actionable and do not enter the walk-through. Omit section if none.
-- **Residual Concerns**: Residual concerns noted by personas that did not make it above the confidence gate. Listed for transparency; not promoted into the review surface. Omit section if none.
-- **Deferred Questions**: Questions for later workflow stages. Omit if none.
-- **Compact rendering for FYI / Residual / Deferred (high-count mode)**: When the combined count across these three sections is **5 or more**, collapse each section to a one-line summary followed by the items as a tight bullet list (no table, no per-item `Why` elaboration). A P0/P1/P2 actionable finding stays fully rendered regardless.
-- **Coverage**: Always include. All counts are **post-synthesis**. **Findings** must equal Auto + Proposed + Decisions + FYI exactly. **Residual** = count of `residual_risks` from this persona's raw output. The `Auto` column counts `safe_auto` findings at anchor `100`, `Proposed` counts `gated_auto` findings at anchor `75` or `100`, `Decisions` counts `manual` findings at anchor `75` or `100`, and `FYI` counts findings at anchor `50` regardless of `autofix_class`. Findings at anchors `0` or `25` were dropped by synthesis and do not appear in any column.
+- Summary line: Always present after the reviewer list. Format: "Accepted N recommendations. K items need attention (X errors, Y omissions). Z FYI observations." Omit any zero clause except the FYI clause when zero (it's informative that none surfaced).
+- Accepted recommendations: List all findings that were accepted as recommendations (`safe_auto` tier). Include enough detail per recommendation to convey the substance. Omit section if none.
+- P0-P3 sections: Only include sections that have actionable findings (`gated_auto` or `manual`). Omit empty severity levels. Within each severity, separate into **Errors** and **Omissions** sub-headers. Omit a sub-header if that severity has none of that type. The `Tier` column surfaces whether a finding is `gated_auto` or `manual`.
+- FYI Observations: Findings at confidence anchor `50` regardless of `autofix_class`. Surface here for transparency; these are not actionable and do not enter the walk-through. Omit section if none.
+- Residual Concerns: Residual concerns noted by personas that did not make it above the confidence gate. Listed for transparency; not promoted into the review surface. Omit section if none.
+- Deferred Questions: Questions for later workflow stages. Omit if none.
+- Compact rendering for FYI / Residual / Deferred (high-count mode): When the combined count across these three sections is **5 or more**, collapse each section to a one-line summary followed by the items as a tight bullet list (no table, no per-item `Why` elaboration). A P0/P1/P2 actionable finding stays fully rendered regardless.
+- Coverage: Always include. All counts are **post-synthesis**. **Findings** must equal Auto + Proposed + Decisions + FYI exactly. **Residual** = count of `residual_risks` from this persona's raw output. The `Auto` column counts `safe_auto` findings at anchor `100`, `Proposed` counts `gated_auto` findings at anchor `75` or `100`, `Decisions` counts `manual` findings at anchor `75` or `100`, and `FYI` counts findings at anchor `50` regardless of `autofix_class`. Findings at anchors `0` or `25` were dropped by synthesis and do not appear in any column.
 - **Coverage footnote lines** (optional, appear below the table when non-zero): `Dropped: N (anchors 0/25 suppressed)` when synthesis 3.2 dropped any findings. `Chains: N root(s) with M dependents` when premise-dependency chains exist. `Restated: N (residual/deferred items suppressed as duplicates of actionable findings)` when synthesis 3.9 suppressed any restatements. Order: `Dropped:`, then `Chains:`, then `Restated:`, each on its own line. Omit any footnote whose count is zero.
 
 ## Chain-rendering rules

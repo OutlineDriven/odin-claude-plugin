@@ -16,8 +16,8 @@ description: 'Use when asked to teach a subsystem or change. Returns a plain pac
 
 ## Inputs
 
-- **Target** (required): the subsystem, module, pattern, or change to explain. Supplied as an argument, a file path, or the current conversation context.
-- **Depth** (optional): explicit depth ceiling or focus area. Absent means begin at plain layer and offer deeper.
+- Target (required): the subsystem, module, pattern, or change to explain. Supplied as an argument, a file path, or the current conversation context.
+- Depth (optional): explicit depth ceiling or focus area. Absent means begin at plain layer and offer deeper.
 
 ## Procedure
 
@@ -34,9 +34,9 @@ description: 'Use when asked to teach a subsystem or change. Returns a plain pac
 
 ## Failure and recovery
 
-- **Unresolvable target:** the target cannot be identified from argument, path, or conversation context. Stop. Ask one question naming what to explain. Do not invent a target.
-- **Partial code context:** the target resolves to a partial view of the codebase. Explain what is visible. Mark where the picture is incomplete. Do not claim the explanation is complete when it is not.
-- **No rollback required:** this skill is read-only. No file, state, or remote resource is modified.
+- Unresolvable target: the target cannot be identified from argument, path, or conversation context. Stop. Ask one question naming what to explain. Do not invent a target.
+- Partial code context: the target resolves to a partial view of the codebase. Explain what is visible. Mark where the picture is incomplete. Do not claim the explanation is complete when it is not.
+- No rollback required: this skill is read-only. No file, state, or remote resource is modified.
 
 ## Output
 

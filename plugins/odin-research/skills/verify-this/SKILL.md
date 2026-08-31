@@ -16,10 +16,10 @@ description: 'Use when a measurable claim needs before/after proof. Runs control
 
 ## Inputs
 
-- **Claim** (required): A specific, measurable assertion to test. Must be restatable as a falsifiable hypothesis with a pass/fail threshold.
-- **Target** (required): The file, command, function, URL, or system under test.
-- **Baseline definition** (optional): What constitutes the control state. If omitted, derive from the claim's negation or the current default state.
-- **Evidence directory** (optional): Where to save probe artifacts. Defaults to a temporary directory.
+- Claim (required): A specific, measurable assertion to test. Must be restatable as a falsifiable hypothesis with a pass/fail threshold.
+- Target (required): The file, command, function, URL, or system under test.
+- Baseline definition (optional): What constitutes the control state. If omitted, derive from the claim's negation or the current default state.
+- Evidence directory (optional): Where to save probe artifacts. Defaults to a temporary directory.
 
 ## Procedure
 
@@ -33,12 +33,12 @@ description: 'Use when a measurable claim needs before/after proof. Runs control
 8. **Report.** Return the classification, the measured deltas, the evidence file paths, and the rollback path for any local artifacts written. **Done when:** the report contains classification, deltas, evidence paths, and rollback path.
 
 ## Failure and recovery
-- **Unmeasurable claim**: Stop at step 1. Return the restated claim and explain what measurement is missing. Do not proceed to probes.
-- **Probe failure**: If a baseline or treatment probe errors, classify as INCONCLUSIVE. Report the error output. Do not widen scope or invent alternative evidence.
-- **Authority boundary**: If the treatment requires mutation beyond local writes, stop. Report what mutation is needed and why it exceeds the declared authority.
-- **Confounding factors**: If the probe environment is contaminated or the baseline cannot be isolated, classify as INCONCLUSIVE. Report the confound.
-- **Partial results**: If baseline succeeds but treatment fails, report the baseline measurement and classify as INCONCLUSIVE. Do not discard the baseline evidence.
-- **Rollback**: All written evidence artifacts are temporary. State their paths so the caller can delete them. No VCS, credential, published, deployed, or remote state is touched.
+- Unmeasurable claim: Stop at step 1. Return the restated claim and explain what measurement is missing. Do not proceed to probes.
+- Probe failure: If a baseline or treatment probe errors, classify as INCONCLUSIVE. Report the error output. Do not widen scope or invent alternative evidence.
+- Authority boundary: If the treatment requires mutation beyond local writes, stop. Report what mutation is needed and why it exceeds the declared authority.
+- Confounding factors: If the probe environment is contaminated or the baseline cannot be isolated, classify as INCONCLUSIVE. Report the confound.
+- Partial results: If baseline succeeds but treatment fails, report the baseline measurement and classify as INCONCLUSIVE. Do not discard the baseline evidence.
+- Rollback: All written evidence artifacts are temporary. State their paths so the caller can delete them. No VCS, credential, published, deployed, or remote state is touched.
 
 ## Output
 A terminal classification (VERIFIED, NOT VERIFIED, or INCONCLUSIVE) with the hypothesis, baseline and treatment measurements, computed delta, evidence paths, and rollback path.

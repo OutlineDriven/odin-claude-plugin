@@ -16,9 +16,9 @@ description: 'Use when agent strategies need a reproducible finite tournament un
 
 ## Inputs
 
-- **Matchup matrix** (required): the explicit finite set of agent pairings and rounds, frozen before the tournament begins.
-- **Evaluation protocol** (required): the frozen rules that govern each matchup — move validation, scoring, and identity disclosure.
-- **Agent strategies** (required): the strategies under test, each identified and version-pinned.
+- Matchup matrix (required): the explicit finite set of agent pairings and rounds, frozen before the tournament begins.
+- Evaluation protocol (required): the frozen rules that govern each matchup — move validation, scoring, and identity disclosure.
+- Agent strategies (required): the strategies under test, each identified and version-pinned.
 
 ## Procedure
 
@@ -30,10 +30,10 @@ description: 'Use when agent strategies need a reproducible finite tournament un
 
 ## Failure and recovery
 
-- **Incomplete matchup**: a matchup in the matrix did not finish. Terminal `incomplete`. Name the matchup and the stopping reason.
-- **Invalid run**: the evaluation protocol was violated during a matchup. Terminal `invalid`. Name the violation and the affected matchup.
-- **Budget exhausted before matrix completes**: terminal `exhausted`. Report the matchups completed and the remainder. Do not claim success.
-- **Hidden-identity mismatch**: an identity assignment is inconsistent or leaked. Terminal `blocked`. Name the mismatch; do not publish the scorecard.
+- Incomplete matchup: a matchup in the matrix did not finish. Terminal `incomplete`. Name the matchup and the stopping reason.
+- Invalid run: the evaluation protocol was violated during a matchup. Terminal `invalid`. Name the violation and the affected matchup.
+- Budget exhausted before matrix completes: terminal `exhausted`. Report the matchups completed and the remainder. Do not claim success.
+- Hidden-identity mismatch: an identity assignment is inconsistent or leaked. Terminal `blocked`. Name the mismatch; do not publish the scorecard.
 
 ## Output
 

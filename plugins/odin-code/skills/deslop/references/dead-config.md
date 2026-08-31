@@ -105,15 +105,15 @@ These are config too, and the same audit applies: if no consumer reads it, it do
 1. **List all config keys**: `grep`/`ast-grep` over the config file(s) to enumerate every setting.
 2. **For each key, find consumers**: search source code, but also: deployment scripts, dashboards (links and queries), runbooks (search the wiki), IaC, monitoring/alerting rules, CI configs.
 3. **Classify**:
-   - **Live**: read in production code; conditional value drives real behavior
-   - **Dead-on**: value is always-true across every environment, branch always taken; flag is dead
-   - **Dead-off**: value is always-false across every environment, branch never taken; flag and the gated branch are dead
-   - **Unknown**: ambiguous; investigate further or leave alone
+   - Live: read in production code; conditional value drives real behavior
+   - Dead-on: value is always-true across every environment, branch always taken; flag is dead
+   - Dead-off: value is always-false across every environment, branch never taken; flag and the gated branch are dead
+   - Unknown: ambiguous; investigate further or leave alone
 4. **Delete dead**: atomic commit per concern (one flag = one commit), grep for ghost references afterward.
 
 ## Caveats
 
-- **Implicit consumers**: dashboards, alerts, support runbooks, third-party integrations may read a config key without it appearing in the source tree. The audit must extend beyond the repo.
-- **Migration in progress**: a flag that *will be* dead next quarter is still live now. Coordinate with whoever owns the migration before deleting.
-- **Time-bounded enable/disable**: flags that flip on at a specific date (e.g., GDPR rollout, holiday rate limits) are not dead even when currently off. Look for date-based logic.
-- **External-facing config**: anything customers, partners, or downstream services configure is a public API. Removing it is a compat-breaking change, not cleanup.
+- Implicit consumers: dashboards, alerts, support runbooks, third-party integrations may read a config key without it appearing in the source tree. The audit must extend beyond the repo.
+- Migration in progress: a flag that *will be* dead next quarter is still live now. Coordinate with whoever owns the migration before deleting.
+- Time-bounded enable/disable: flags that flip on at a specific date (e.g., GDPR rollout, holiday rate limits) are not dead even when currently off. Look for date-based logic.
+- External-facing config: anything customers, partners, or downstream services configure is a public API. Removing it is a compat-breaking change, not cleanup.

@@ -17,9 +17,9 @@ description: 'Use when a visual needs repeatable fixed-view rendering and indepe
 
 ## Inputs
 
-- **Fixed view rig** (required): camera position and orientation, scene definition, render settings (resolution, samples, lighting, post-processing). All parameters that affect the rendered output must be named and frozen.
-- **Frozen rubric threshold** (required): the minimum aggregate score that defines a passing render, plus the rubric dimensions and their weights.
-- **Render budget** (required): the maximum render attempts or time allowed, declared before work begins.
+- Fixed view rig (required): camera position and orientation, scene definition, render settings (resolution, samples, lighting, post-processing). All parameters that affect the rendered output must be named and frozen.
+- Frozen rubric threshold (required): the minimum aggregate score that defines a passing render, plus the rubric dimensions and their weights.
+- Render budget (required): the maximum render attempts or time allowed, declared before work begins.
 
 ## Procedure
 
@@ -31,11 +31,11 @@ description: 'Use when a visual needs repeatable fixed-view rendering and indepe
 
 ## Failure and recovery
 
-- **Stagnation:** repeated renders do not improve the score. Terminal `stalled`; report the score plateau and the renders attempted.
-- **Render blocked:** the rig cannot produce a render through the specified interface. Terminal `blocked`; report the blocking condition.
-- **Budget exhausted:** the render budget is spent before the threshold is cleared. Terminal `capped`; report the best score achieved. Budget exhaustion is never success unless it is the predeclared success predicate.
-- **Non-deterministic output without declared seed:** if repeated renders with the same parameters produce different scores and no seed or averaging strategy was declared, the renders are not comparable. Declare the strategy before scoring; do not compare incomparable renders.
-- **Partial result:** emit the best render and score obtained; never present a sub-threshold render as clearing the rubric.
+- Stagnation: repeated renders do not improve the score. Terminal `stalled`; report the score plateau and the renders attempted.
+- Render blocked: the rig cannot produce a render through the specified interface. Terminal `blocked`; report the blocking condition.
+- Budget exhausted: the render budget is spent before the threshold is cleared. Terminal `capped`; report the best score achieved. Budget exhaustion is never success unless it is the predeclared success predicate.
+- Non-deterministic output without declared seed: if repeated renders with the same parameters produce different scores and no seed or averaging strategy was declared, the renders are not comparable. Declare the strategy before scoring; do not compare incomparable renders.
+- Partial result: emit the best render and score obtained; never present a sub-threshold render as clearing the rubric.
 
 ## Output
 

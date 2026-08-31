@@ -45,10 +45,10 @@ description: 'Use when TypeScript tests use unsafe any or as assertions for part
 
 ## Failure and recovery
 
-- **Missing package dependency:** the coercion package is absent from the installed dependency tree. Make no edits and report the missing dependency. Do not modify manifests or lockfiles.
-- **Unresolvable intent:** an assertion's intent is ambiguous. Leave it unchanged and report the exact site.
-- **Typecheck failed:** if typecheck still fails after restoring an ineligible replacement, restore all edits made by this run and report the original error output.
-- **Tests failed:** if the test suite fails after the replacements, a coercion function changed runtime behavior for an intentionally invalid fixture. Restore that replacement, record it as skipped, and rerun the test suite.
+- Missing package dependency: the coercion package is absent from the installed dependency tree. Make no edits and report the missing dependency. Do not modify manifests or lockfiles.
+- Unresolvable intent: an assertion's intent is ambiguous. Leave it unchanged and report the exact site.
+- Typecheck failed: if typecheck still fails after restoring an ineligible replacement, restore all edits made by this run and report the original error output.
+- Tests failed: if the test suite fails after the replacements, a coercion function changed runtime behavior for an intentionally invalid fixture. Restore that replacement, record it as skipped, and rerun the test suite.
 - Preserve unrelated working-tree changes. Never restore a whole directory or file that contained pre-existing edits without first isolating this run's patch.
 
 ## Output

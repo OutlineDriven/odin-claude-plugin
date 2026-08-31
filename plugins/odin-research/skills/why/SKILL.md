@@ -28,12 +28,12 @@ Availability means a read-only tool or authenticated MCP can actually query the 
 
 Use this epistemic vocabulary throughout:
 
-- **Direct finding:** the cited source explicitly states the claim, or the cited primary artifact directly records the event or measurement.
-- **Inference:** the claim follows from cited findings but is not explicitly stated by a source. Show the reasoning bridge.
-- **Hypothesis:** a plausible explanation that the evidence does not establish. State what evidence would confirm or falsify it.
-- **High confidence:** explicit primary evidence or multiple independent, mutually consistent sources directly support the claim.
-- **Medium confidence:** one credible direct source or several consistent indirect sources support the claim, with a material gap remaining.
-- **Low confidence:** the claim rests on circumstantial evidence, an ambiguous recollection, or a single indirect source.
+- Direct finding: the cited source explicitly states the claim, or the cited primary artifact directly records the event or measurement.
+- Inference: the claim follows from cited findings but is not explicitly stated by a source. Show the reasoning bridge.
+- Hypothesis: a plausible explanation that the evidence does not establish. State what evidence would confirm or falsify it.
+- High confidence: explicit primary evidence or multiple independent, mutually consistent sources directly support the claim.
+- Medium confidence: one credible direct source or several consistent indirect sources support the claim, with a material gap remaining.
+- Low confidence: the claim rests on circumstantial evidence, an ambiguous recollection, or a single indirect source.
 
 Confidence qualifies support, not importance. Chronology alone does not establish causation. Separate what happened from why it happened, distinguish contemporaneous evidence from hindsight, and prefer source-proximate records over later summaries while retaining material contradictions.
 
@@ -48,14 +48,14 @@ Confidence qualifies support, not importance. Chronology alone does not establis
 
 ## Failure and recovery
 
-- **No read access for a category:** mark it `unavailable` with the reason and continue the single batch with the remaining available categories. Never request credentials or mutate configuration.
-- **Available scout returns no evidence:** retain `available but no relevant evidence` as a meaningful null. Do not convert it into support for or against the explanation.
-- **A read fails:** record `failed read`, the attempted scope, and the observed failure. Continue with other category results; do not launch a replacement scout that would violate the one-scout-per-available-category batch.
-- **Evidence conflicts:** present each supported account with its date, provenance, and confidence. Prefer neither recency nor seniority by default; explain which primary evidence would resolve the conflict.
-- **Citation is missing or unstable:** downgrade the statement to an explicitly unsupported hypothesis or omit it. Do not present an uncited recollection as a direct finding.
-- **The synthesizer drops labels, citations, null accounting, or the handoff:** rerun the read-only synthesis over the same evidence packet with the missing output field named. Do not repeat source collection or invent evidence.
-- **No category yields relevant evidence:** return an insufficient-evidence narrative with all seven null/gap entries and the most useful next read-only evidence to locate. Do not manufacture a rationale.
-- **A source contains secrets or unnecessary personal data:** omit or minimally redact that material while retaining a stable citation and enough non-sensitive context to support the claim.
+- No read access for a category: mark it `unavailable` with the reason and continue the single batch with the remaining available categories. Never request credentials or mutate configuration.
+- Available scout returns no evidence: retain `available but no relevant evidence` as a meaningful null. Do not convert it into support for or against the explanation.
+- A read fails: record `failed read`, the attempted scope, and the observed failure. Continue with other category results; do not launch a replacement scout that would violate the one-scout-per-available-category batch.
+- Evidence conflicts: present each supported account with its date, provenance, and confidence. Prefer neither recency nor seniority by default; explain which primary evidence would resolve the conflict.
+- Citation is missing or unstable: downgrade the statement to an explicitly unsupported hypothesis or omit it. Do not present an uncited recollection as a direct finding.
+- The synthesizer drops labels, citations, null accounting, or the handoff: rerun the read-only synthesis over the same evidence packet with the missing output field named. Do not repeat source collection or invent evidence.
+- No category yields relevant evidence: return an insufficient-evidence narrative with all seven null/gap entries and the most useful next read-only evidence to locate. Do not manufacture a rationale.
+- A source contains secrets or unnecessary personal data: omit or minimally redact that material while retaining a stable citation and enough non-sensitive context to support the claim.
 
 ## Output
 A cited narrative in chat with sections in order: Answer (best-supported rationale with overall High/Medium/Low confidence), What the evidence says (Direct findings, then Inferences, then Hypotheses, each with confidence and citations), Decision chronology and alternatives, Source coverage and gaps (all seven categories with status), Handoff (Preserve/Change/Avoid/Risk tied to cited evidence or marked as inference), and Sources (deduplicated stable links with category and date).

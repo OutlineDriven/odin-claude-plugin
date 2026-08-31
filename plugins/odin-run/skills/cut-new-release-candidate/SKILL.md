@@ -99,11 +99,11 @@ If `INTERNAL_REPO` or `NOTIFICATION_TOKEN` is unset, stop and ask before running
 
 ## Failure and recovery
 
-- Non-release branch: the prefix check in step 1 exits — stop before any remote call, report `Not a release branch: $BRANCH_NAME`, and ask for a release branch. Nothing was mutated.
-- Missing repo context: `REPO_DIR` is unset or missing and the user supplies no checkout path — stop; nothing was mutated.
-- Branch absent on origin: `git ls-remote --exit-code` exits non-zero — do not dispatch; report the branch was not found on `origin`, ask the user to confirm the exact branch name, and re-run step 4.
-- `gh` authentication failure: the dispatch or run query fails with an auth error — direct the user to `gh auth status` and `gh auth login`, and retry the failed step after they authenticate.
-- Dispatched but no run URL: the run query returns nothing or a null `url` — never re-dispatch, because a second dispatch cuts a duplicate release candidate; report the workflow name, branch, and missing URL, and classify blocked for manual inspection.
+- Non-release branch: the prefix check in step 1 exits, stop before any remote call, report `Not a release branch: $BRANCH_NAME`, and ask for a release branch. Nothing was mutated.
+- Missing repo context: `REPO_DIR` is unset or missing and the user supplies no checkout path, stop; nothing was mutated.
+- Branch absent on origin: `git ls-remote --exit-code` exits non-zero, do not dispatch; report the branch was not found on `origin`, ask the user to confirm the exact branch name, and re-run step 4.
+- `gh` authentication failure: the dispatch or run query fails with an auth error, direct the user to `gh auth status` and `gh auth login`, and retry the failed step after they authenticate.
+- Dispatched but no run URL: the run query returns nothing or a null `url`, never re-dispatch, because a second dispatch cuts a duplicate release candidate; report the workflow name, branch, and missing URL, and classify blocked for manual inspection.
 - Notification post fails: the dispatch and run URL still stand; report the partial result, fix the destination or `NOTIFICATION_TOKEN`, and repost. Done is not claimed until the post succeeds.
 
 Report partial results exactly: name which of dispatch, run URL, and notification post landed. Never swallow an error or claim done while any of the three is missing.

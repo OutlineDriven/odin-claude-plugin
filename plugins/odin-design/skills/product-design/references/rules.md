@@ -6,12 +6,12 @@ Loaded in every mode. Cite these IDs for every finding and non-mechanical decisi
 
 The brief is required before any UI is proposed in shape, spec, and harden modes. Its fields:
 
-- **Job**: the progress the user is trying to make, stated as a verb and object.
-- **Desired outcome**: the observable end state that satisfies the job.
-- **Consequence**: what changes for the user when the outcome holds, and what breaks if it fails.
-- **Object**: the thing each action in scope affects.
-- **Action scope**: what each action does and does not touch.
-- **Permissions**: who may trigger each action and who may see its results.
+- Job: the progress the user is trying to make, stated as a verb and object.
+- Desired outcome: the observable end state that satisfies the job.
+- Consequence: what changes for the user when the outcome holds, and what breaks if it fails.
+- Object: the thing each action in scope affects.
+- Action scope: what each action does and does not touch.
+- Permissions: who may trigger each action and who may see its results.
 
 If job, desired outcome, or consequence cannot be filled, stop and ask. Do not propose UI.
 

@@ -16,9 +16,9 @@ description: 'Use when a non-trivial decision sits under uncertainty and correct
 
 ## Inputs
 
-- **Artifact** (required): the unit under scrutiny: a code diff, function, decision proposal, or assertion plus its supporting evidence.
-- **Contract** (required): the constraint the artifact must satisfy.
-- **External reviewer CLI** (optional): Gemini or Codex, named by the user; invoked only after explicit per-call authorization.
+- Artifact (required): the unit under scrutiny: a code diff, function, decision proposal, or assertion plus its supporting evidence.
+- Contract (required): the constraint the artifact must satisfy.
+- External reviewer CLI (optional): Gemini or Codex, named by the user; invoked only after explicit per-call authorization.
 
 ## Procedure
 
@@ -54,15 +54,15 @@ description: 'Use when a non-trivial decision sits under uncertainty and correct
 **Doubt theater.** Across 2 or more cycles where the reviewer surfaced substantive findings, zero findings classified as actionable means the reviewer is validating, not doubting. Stop and escalate.
 
 ## Failure and recovery
-- **CLAIM not writable:** the decision is still a vibe; return to Step 1, do not proceed to review.
-- **Reviewer received the CLAIM or reasoning:** biased review; re-spawn passing ARTIFACT + CONTRACT only.
-- **External CLI invoked without explicit per-call authorization:** safety violation; abort and surface to the user.
-- **External CLI unavailable or fails:** surface the failure explicitly; offer manual retry, a different tool, or skip; never silently fall back to single-model.
-- **Nested subagent blocks fresh-context spawn:** surface to the user; use the degraded self-questioning fallback only as a last resort and flag the result degraded.
-- **Doubt theater (2+ substantive cycles, zero actionable classifications):** stop and escalate to the user.
-- **3 unresolved cycles:** surface that the artifact may not be ready; do not grind a fourth alone.
-- **Partial-result rule:** a stopped cycle with every finding classified is a valid partial result; unclassified or rubber-stamped findings are not.
-- **Non-mutation rule:** read-only; no file, VCS, credential, paid, published, deployed, or remote mutation. Re-loop changes are recommendations in chat output, not applied edits.
+- CLAIM not writable: the decision is still a vibe; return to Step 1, do not proceed to review.
+- Reviewer received the CLAIM or reasoning: biased review; re-spawn passing ARTIFACT + CONTRACT only.
+- External CLI invoked without explicit per-call authorization: safety violation; abort and surface to the user.
+- External CLI unavailable or fails: surface the failure explicitly; offer manual retry, a different tool, or skip; never silently fall back to single-model.
+- Nested subagent blocks fresh-context spawn: surface to the user; use the degraded self-questioning fallback only as a last resort and flag the result degraded.
+- Doubt theater (2+ substantive cycles, zero actionable classifications): stop and escalate to the user.
+- 3 unresolved cycles: surface that the artifact may not be ready; do not grind a fourth alone.
+- Partial-result rule: a stopped cycle with every finding classified is a valid partial result; unclassified or rubber-stamped findings are not.
+- Non-mutation rule: read-only; no file, VCS, credential, paid, published, deployed, or remote mutation. Re-loop changes are recommendations in chat output, not applied edits.
 
 ## Output
 A report listing each CLAIM, the fresh-context review findings, the classification of each finding (contract misread / valid + actionable / valid trade-off / noise), the stop condition met, and the cross-model disposition — with actionable findings carrying a recommended artifact change stated as a recommendation, not an applied edit.

@@ -28,9 +28,9 @@ description: 'Use when a user, especially a new hire, asks for mentoring, guidan
 
 ## Failure and recovery
 
-- **Outside scope:** the topic is not about infrastructure or engineering practices. State this directly. Do not invent content.
-- **Information unavailable:** sufficient information cannot be found. Return what is available with honest uncertainty, and suggest where to look or whom to ask.
-- **Partial answer:** if time or context is limited, deliver the clearest explanation possible and note what remains uncovered.
+- Outside scope: the topic is not about infrastructure or engineering practices. State this directly. Do not invent content.
+- Information unavailable: sufficient information cannot be found. Return what is available with honest uncertainty, and suggest where to look or whom to ask.
+- Partial answer: if time or context is limited, deliver the clearest explanation possible and note what remains uncovered.
 
 ## Output
 

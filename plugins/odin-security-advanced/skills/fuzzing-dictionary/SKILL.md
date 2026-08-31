@@ -36,12 +36,12 @@ Optional: an existing corpus, known boundary values, and the target's `-max_len`
 
 ## Failure and recovery
 
-- **Dictionary parse error**: the fuzzer reports a syntax or path error. Fix unescaped quotes, invalid `\xXX` escapes, or the file path; re-run the load check.
-- **Tokens do not correspond to target gates**: re-extract from the target source or binary rather than guessing; replace irrelevant entries.
-- **Oversized dictionary**: an excessive number of entries slows the fuzzer and dilutes useful tokens. Prune to the most relevant entries.
-- **Entries ignored**: a token exceeds `-max_len`. Shorten the entry or raise the limit.
-- **Partial result**: keep only entries that load and correspond to a gate; discard the rest.
-- **Non-mutation rule**: on any failure, delete the dictionary file and revert the configuration flag before retrying; never leave a broken dictionary wired into the campaign.
+- Dictionary parse error: the fuzzer reports a syntax or path error. Fix unescaped quotes, invalid `\xXX` escapes, or the file path; re-run the load check.
+- Tokens do not correspond to target gates: re-extract from the target source or binary rather than guessing; replace irrelevant entries.
+- Oversized dictionary: an excessive number of entries slows the fuzzer and dilutes useful tokens. Prune to the most relevant entries.
+- Entries ignored: a token exceeds `-max_len`. Shorten the entry or raise the limit.
+- Partial result: keep only entries that load and correspond to a gate; discard the rest.
+- Non-mutation rule: on any failure, delete the dictionary file and revert the configuration flag before retrying; never leave a broken dictionary wired into the campaign.
 
 ## Output
 

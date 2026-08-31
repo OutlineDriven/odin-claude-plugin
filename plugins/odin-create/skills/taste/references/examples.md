@@ -4,10 +4,10 @@ Three terse examples: prose, code, and decision. Each follows artifact → per-a
 
 ## Example 1 — Prose (corporate-blog opener)
 
-**Artifact**:
+Artifact:
 > Sure! In this post, we'll explore some really fascinating considerations around the topic of API design, which is, basically, a really important topic in modern software development. There are many factors to consider, and the best approach often depends on your specific use case.
 
-**Audit**:
+Audit:
 
 | Anchor | Verdict | Citation | Fix |
 |---|---|---|---|
@@ -20,14 +20,14 @@ Three terse examples: prose, code, and decision. Each follows artifact → per-a
 | Honesty | fail | Side A: "depends on your use case" | Name the position; if there is none, do not write the post |
 | One-strong-moment | fail | Side A: 50/50 hedge | Pick one design rule; argue it |
 
-**Top-3 fixes**: 1. Open with the position. 2. Cut every "really", "basically", "fascinating". 3. If there is no position, kill the post.
+Top-3 fixes: 1. Open with the position. 2. Cut every "really", "basically", "fascinating". 3. If there is no position, kill the post.
 
-**Revised**:
+Revised:
 > Most APIs are too configurable. Default to one path; let callers pay for the second one only when they need it.
 
 ## Example 2 — Code (defensive nil + abstraction tower)
 
-**Artifact**:
+Artifact:
 ```ts
 class UserServiceFactoryBuilder {
   build(): UserServiceFactory {
@@ -47,7 +47,7 @@ class UserService {
 }
 ```
 
-**Audit**:
+Audit:
 
 | Anchor | Verdict | Citation | Fix |
 |---|---|---|---|
@@ -60,9 +60,9 @@ class UserService {
 | Honesty | fail | Side B: "Factory" performs architecture | Name the function for what it does |
 | One-strong-moment | fail | — | Nothing in 12 lines justifies its weight |
 
-**Top-3 fixes**: 1. Collapse 3 classes to 1 function. 2. Drop the nil-checks; lean on the type. 3. Throw with the id instead of returning null.
+Top-3 fixes: 1. Collapse 3 classes to 1 function. 2. Drop the nil-checks; lean on the type. 3. Throw with the id instead of returning null.
 
-**Revised**:
+Revised:
 ```ts
 function getUser(id: NonEmptyString): User {
   return repo.find(id) ?? (() => { throw new Error(`user not found: ${id}`); })();
@@ -71,11 +71,11 @@ function getUser(id: NonEmptyString): User {
 
 ## Example 3 — Decision (ADR with weighted matrix)
 
-**Artifact**:
+Artifact:
 > ## Decision: Postgres vs MySQL
 > Both Postgres and MySQL have merit. Postgres scores 8.2/10 on our weighted matrix (correctness 9, ecosystem 8, ops 7, cost 8, team familiarity 9); MySQL scores 7.8/10 (correctness 7, ecosystem 9, ops 8, cost 9, team familiarity 6). The recommendation depends on which factors you weight most heavily.
 
-**Audit**:
+Audit:
 
 | Anchor | Verdict | Citation | Fix |
 |---|---|---|---|
@@ -88,8 +88,8 @@ function getUser(id: NonEmptyString): User {
 | Honesty | fail | Side B: scoring performs rigor | Name the real reason (likely "team knows Postgres") |
 | One-strong-moment | fail | Side A: 50/50 hedge | The decision is the moment; it is missing |
 
-**Top-3 fixes**: 1. First line names the pick. 2. Drop the scoring matrix entirely. 3. Two reasons (one for, one against), not five weighted axes.
+Top-3 fixes: 1. First line names the pick. 2. Drop the scoring matrix entirely. 3. Two reasons (one for, one against), not five weighted axes.
 
-**Revised**:
+Revised:
 > ## Decision: Postgres
 > We pick Postgres. The team has 5 years of operational experience with it; switching to MySQL costs 6+ months of unfamiliar incident response. The trade-off: MySQL's ecosystem is broader for our planned analytics path, and we accept that cost.

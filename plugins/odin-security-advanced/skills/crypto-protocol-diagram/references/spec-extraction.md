@@ -4,15 +4,15 @@ Apply the branch matching the classified specification.
 
 ## RFC
 
-Locate the handshake, key-exchange, or message-flow section. Extract parties from the introduction or Notation section and capitalize lowercase role names. Read arrow patterns (`A → B: msg`) and “A sends B …” or “upon receiving X, B MUST …” sentences in order. Treat `MUST` and `SHALL` as required steps and `MAY` and `SHOULD` as optional. Find cryptographic operations in Cryptographic Computations or Key Schedule sections. Use ABNF grammars to populate arrow labels. Normative prose wins when an embedded ASCII diagram conflicts with it.
+Locate the handshake, key-exchange, or message-flow section. Extract parties from the introduction or Notation section and capitalize lowercase role names. Read arrow patterns (`A → B: msg`) and "A sends B …" or "upon receiving X, B MUST …" sentences in order. Treat `MUST` and `SHALL` as required steps and `MAY` and `SHOULD` as optional. Find cryptographic operations in Cryptographic Computations or Key Schedule sections. Use ABNF grammars to populate arrow labels. Normative prose wins when an embedded ASCII diagram conflicts with it.
 
 ## Academic paper or pseudocode
 
-Prefer the pseudocode box over informal description. Read two-column layouts left-to-right for the left party and right-to-left for the right party. Map numbered steps to rounds: “X sends Y to Z” becomes an arrow and “X computes …” becomes a local note. Map `←` to assignment, `←$` to random sampling, `{m}_k` to encryption, `[m]_sk` to signature, `H(m)` to hash, and `⊥` to abort.
+Prefer the pseudocode box over informal description. Read two-column layouts left-to-right for the left party and right-to-left for the right party. Map numbered steps to rounds: "X sends Y to Z" becomes an arrow and "X computes …" becomes a local note. Map `←` to assignment, `←$` to random sampling, `{m}_k` to encryption, `[m]_sk` to signature, `H(m)` to hash, and `⊥` to abort.
 
 ## Informal prose
 
-Find the first paragraph naming participants. Map “A sends/transmits/forwards msg to B” to `A->>B`, “B responds with msg” to `B-->>A`, and “A computes/derives/generates” to a local note. Map conditional actions to `alt` and optional actions to `opt`. Annotate underspecified cryptography with `⚠️ scheme not specified`.
+Find the first paragraph naming participants. Map "A sends/transmits/forwards msg to B" to `A->>B`, "B responds with msg" to `B-->>A`, and "A computes/derives/generates" to a local note. Map conditional actions to `alt` and optional actions to `opt`. Annotate underspecified cryptography with `⚠️ scheme not specified`.
 
 ## ProVerif
 

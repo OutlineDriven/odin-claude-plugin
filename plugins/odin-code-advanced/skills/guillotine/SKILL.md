@@ -21,14 +21,14 @@ Remove weight the product does not use. Interior cleanup needs proof, not sentim
 1. Name the subsystem and its observable boundary. List the commands, public routes, generated outputs, or user scenarios that must remain unchanged. If no boundary can prove the cut, stop before editing.
 2. Build a candidate ledger. For each code path, document, test, dependency, configuration entry, workflow, or generated file, record its claimed job, live callers or readers, source of truth, and evidence that it is dead, duplicate, superseded, or reproducible.
 3. Classify every candidate:
-   - **dead**: no live caller, route, import, loader, build step, or documented consumer;
-   - **duplicate**: another artifact owns the same fact or operation and all consumers can move to it;
-   - **superseded**: the active path covers the required contract and no supported path selects the old one;
-   - **generated residue**: the repository generator reproduces the required output and does not select this copy;
-   - **keep**: evidence still names a live job, even when the artifact looks ugly.
+   - dead: no live caller, route, import, loader, build step, or documented consumer;
+   - duplicate: another artifact owns the same fact or operation and all consumers can move to it;
+   - superseded: the active path covers the required contract and no supported path selects the old one;
+   - generated residue: the repository generator reproduces the required output and does not select this copy;
+   - keep: evidence still names a live job, even when the artifact looks ugly.
 4. Prove the cut from both directions. Search from each candidate to its consumers, then from each required consumer back to its owner. Run a focused behavioral, mutation, build, or generation probe when static references cannot prove necessity.
 5. Stop for approval if the proposed cut reaches an observable API, user command, stored data, history, remote state, untracked file, credential, or critical target. Show the exact consequence and a recoverable alternative. Interior VCS-tracked debt with a proven unchanged boundary does not need a second approval.
-6. Cut one dependency-closed slice at a time. Move live consumers to the single surviving owner, then delete the obsolete implementation, tests that protect only obsolete behavior, dependency entries, configuration, workflow steps, and generated copies. Do not leave aliases, shims, dual paths, tombstones, or “deprecated” wrappers.
+6. Cut one dependency-closed slice at a time. Move live consumers to the single surviving owner, then delete the obsolete implementation, tests that protect only obsolete behavior, dependency entries, configuration, workflow steps, and generated copies. Do not leave aliases, shims, dual paths, tombstones, or "deprecated" wrappers.
 7. Regenerate every repository-owned surface affected by the cut. Reject a generator that recreates the removed residue; fix its source selection instead of deleting its output again.
 8. Exercise the observable boundary and run the repository-native gate. If behavior changes, restore the smallest failed slice from VCS, correct its ledger classification, and continue with the remaining proven cuts.
 9. Re-run route, import, registration, and source-of-truth searches. The old path must be absent, and every required consumer must resolve to one live owner.

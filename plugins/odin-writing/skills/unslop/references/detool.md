@@ -22,9 +22,9 @@ Classify the whole artifact, or each section if mixed, before any edit.
 
 ## Protection rules
 
-- **Provenance and operational content**: build records, capsules, benchmark logs, install guides, runbooks, tool-targeted how-tos, command transcripts, and exact reproduction steps keep the stack name.
-- **Comparative and tool-subject claims**: if the sentence is about a named tool, vendor, model, bug, prior-art source, or measured limit, the name is the subject, not incidental coupling.
-- **Neutral wording loses the mechanism**: keep the concrete detail as an example of the mechanism instead of pretending it generalizes. Note the decision in the report.
+- Provenance and operational content: build records, capsules, benchmark logs, install guides, runbooks, tool-targeted how-tos, command transcripts, and exact reproduction steps keep the stack name.
+- Comparative and tool-subject claims: if the sentence is about a named tool, vendor, model, bug, prior-art source, or measured limit, the name is the subject, not incidental coupling.
+- Neutral wording loses the mechanism: keep the concrete detail as an example of the mechanism instead of pretending it generalizes. Note the decision in the report.
 
 ## Verification
 

@@ -135,10 +135,10 @@ description: 'Use when asked to audit typography across a codebase. Produces a f
 8. **spacing-subhead-proximity**: Check that subheadings are closer to the text they introduce than to the text that precedes them (proximity principle). Flag subheadings with equal or greater margin-top than margin-bottom.
 
 4. Classify each finding by severity:
-   - **Critical**: Breaks readability, fails WCAG contrast, or uses an unauthorized font.
-   - **High**: Violates a core typographic principle (wrong scale, missing fallback, broken hierarchy).
-   - **Medium**: Degrades quality but does not break readability (suboptimal tracking, missing opentype features).
-   - **Low**: Polish-level improvement (hair spaces, hanging punctuation, swash usage).
+   - Critical: Breaks readability, fails WCAG contrast, or uses an unauthorized font.
+   - High: Violates a core typographic principle (wrong scale, missing fallback, broken hierarchy).
+   - Medium: Degrades quality but does not break readability (suboptimal tracking, missing opentype features).
+   - Low: Polish-level improvement (hair spaces, hanging punctuation, swash usage).
    A not-verifiable-from-source finding carries no severity; it records a measurement gap, not a violation. **Done when:** every verified finding has one severity and every not-verifiable-from-source finding is recorded without one.
 5. Sort findings by severity (critical first), then by category order. **Done when:** the ordering is deterministic.
 6. For each finding, produce a concrete fix:
@@ -150,12 +150,12 @@ description: 'Use when asked to audit typography across a codebase. Produces a f
 8. If the user requests fixes to be applied, generate the minimal CSS patch or HTML edit for each finding. Apply only the requested fixes; do not widen scope. **Done when:** requested fixes are applied or the read-only report is complete.
 
 ## Failure and recovery
-- **No files found**: Return a message stating no CSS/HTML/JSX files exist in scope. Do not fabricate findings.
-- **Rendered-metric rule cannot be decided from source**: record not-verifiable-from-source with the metric that would decide it. Never fabricate a file:line violation to complete a category.
-- **No violations found**: Return a clean report stating all 10 categories passed with zero findings.
-- **Partial scan**: If some files are unreadable (binary, encoding errors), list them as skipped and continue with remaining files. Report the skip count.
-- **Scope exceeded**: If the user requests fixes beyond the audit findings, decline and state the audit boundary.
-- **Non-convergent fix**: If applying a fix introduces a new violation in the same category, stop that fix, report the conflict, and continue with other findings.
+- No files found: Return a message stating no CSS/HTML/JSX files exist in scope. Do not fabricate findings.
+- Rendered-metric rule cannot be decided from source: record not-verifiable-from-source with the metric that would decide it. Never fabricate a file:line violation to complete a category.
+- No violations found: Return a clean report stating all 10 categories passed with zero findings.
+- Partial scan: If some files are unreadable (binary, encoding errors), list them as skipped and continue with remaining files. Report the skip count.
+- Scope exceeded: If the user requests fixes beyond the audit findings, decline and state the audit boundary.
+- Non-convergent fix: If applying a fix introduces a new violation in the same category, stop that fix, report the conflict, and continue with other findings.
 
 ## Output
 A report with sections in order: summary, per-category findings table (File, Line, Rule, Severity, Description, Fix), severity-ordered fix list, and a not-verifiable-from-source list naming each undecidable rule and the rendered metric it needs, plus an optional consolidated CSS patch when fixes were requested.

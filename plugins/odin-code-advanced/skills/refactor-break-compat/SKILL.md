@@ -17,15 +17,15 @@ disable-model-invocation: true
 
 ## Refusals
 
-- **Additive refactors that keep the old path**: rejected. This skill demolishes the old path. Use a regular refactor if the old path must survive.
-- **Shipping the intermediate state (half old, half new)**: rejected. Finish or revert to the version-control baseline.
-- **Widening scope beyond the demolition manifest**: rejected. Do not widen scope to resolve a finding.
+- Additive refactors that keep the old path: rejected. This skill demolishes the old path. Use a regular refactor if the old path must survive.
+- Shipping the intermediate state (half old, half new): rejected. Finish or revert to the version-control baseline.
+- Widening scope beyond the demolition manifest: rejected. Do not widen scope to resolve a finding.
 
 ## Inputs
 
-- **Old API surface** (required): the compat shims, legacy adapters, feature flags, version gates, and backward-compatible interfaces to demolish.
-- **New API surface** (required): the target contract every caller must adopt.
-- **Scope** (optional): file or module boundaries; when omitted, the blast-radius map determines scope.
+- Old API surface (required): the compat shims, legacy adapters, feature flags, version gates, and backward-compatible interfaces to demolish.
+- New API surface (required): the target contract every caller must adopt.
+- Scope (optional): file or module boundaries; when omitted, the blast-radius map determines scope.
 
 ## Procedure
 
@@ -39,9 +39,9 @@ disable-model-invocation: true
 
 ## Failure and recovery
 
-- **Residue remains**: old references survive in code, tests, docs, or config after step 7. Return to step 3; do not widen scope beyond the demolition manifest.
-- **Build or tests broken**: migration incomplete, callers or assertions not yet on the new shape. Fix forward if within scope; if scope is exhausted, report the exact blockers and stop.
-- **Migration stalled**: codebase is half old, half new. Finish or revert to version-control baseline; never ship the intermediate state.
+- Residue remains: old references survive in code, tests, docs, or config after step 7. Return to step 3; do not widen scope beyond the demolition manifest.
+- Build or tests broken: migration incomplete, callers or assertions not yet on the new shape. Fix forward if within scope; if scope is exhausted, report the exact blockers and stop.
+- Migration stalled: codebase is half old, half new. Finish or revert to version-control baseline; never ship the intermediate state.
 
 Partial results are never reported as success. If any failure class triggers, the done predicate does not hold.
 

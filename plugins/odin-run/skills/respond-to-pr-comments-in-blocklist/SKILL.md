@@ -143,13 +143,13 @@ Optional:
 13. **Summarize.** Report: comments addressed, files changed, validation results, whether changes were committed and pushed, replies posted, threads resolved, anything remaining.
 
 ## Failure and recovery
-- **Missing PR context**: report and stop.
-- **Missing comments**: report which comment IDs could not be fetched; stop before posting.
-- **No actionable comments**: report and stop without calling any GitHub mutation.
-- **Code fix failure**: stop before posting any GitHub replies; report what failed.
-- **Post failure**: stop immediately; report what was posted and what failed; do not call resolve for unresolved-approval threads.
-- **Commit or push failure**: stop before posting any GitHub replies; report the failure.
-- **User rejects final preview**: stop; report the rejection.
+- Missing PR context: report and stop.
+- Missing comments: report which comment IDs could not be fetched; stop before posting.
+- No actionable comments: report and stop without calling any GitHub mutation.
+- Code fix failure: stop before posting any GitHub replies; report what failed.
+- Post failure: stop immediately; report what was posted and what failed; do not call resolve for unresolved-approval threads.
+- Commit or push failure: stop before posting any GitHub replies; report the failure.
+- User rejects final preview: stop; report the rejection.
 - Partial-result rule: never post a subset of approved replies. Stop on the first failure.
 
 ## Output

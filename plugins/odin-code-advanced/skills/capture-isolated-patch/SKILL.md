@@ -32,10 +32,10 @@ description: 'Use when a candidate change must be produced without touching the 
 
 ## Failure and recovery
 - **Bad input** (non-repo path or unresolvable `base-ref`): stop before creating any worktree; report the exact check that failed. No mutation occurs; the original working tree is unchanged.
-- **Worktree creation failure:** no worktree exists; report the git error. Original tree unchanged.
-- **Command non-zero exit:** still extract the patch from whatever changes the command made and return the non-zero exit code alongside the patch. A non-zero command exit is not a skill failure.
-- **Extraction failure:** preserve the worktree for inspection; return its path and the failure reason instead of a patch. Do not delete the worktree.
-- **Rollback:** the original working tree is never written to. On success, cleanup is `git worktree remove <tmp-path>`. On extraction failure the worktree is intentionally retained for inspection.
+- Worktree creation failure: no worktree exists; report the git error. Original tree unchanged.
+- Command non-zero exit: still extract the patch from whatever changes the command made and return the non-zero exit code alongside the patch. A non-zero command exit is not a skill failure.
+- Extraction failure: preserve the worktree for inspection; return its path and the failure reason instead of a patch. Do not delete the worktree.
+- Rollback: the original working tree is never written to. On success, cleanup is `git worktree remove <tmp-path>`. On extraction failure the worktree is intentionally retained for inspection.
 
 ## Output
 On success, a binary-safe patch file path, the command's exit code, and captured stdout/stderr; on extraction failure, the preserved worktree path, the command's exit code, and the failure reason; the original working tree is unchanged in every case.

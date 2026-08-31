@@ -21,21 +21,21 @@ description: 'Use for adversarial security audits of auth, input parsing, depend
 
 ## Inputs
 
-- **Change set**: diff, commit range, or file list under audit. Required.
-- **Ecosystem context**: language family, framework, dependency manager. Optional; inferred from repo if absent.
-- **Scope hint**: specific concern (auth, crypto, injection, supply-chain). Optional; full STRIDE/OWASP walk when absent.
+- Change set: diff, commit range, or file list under audit. Required.
+- Ecosystem context: language family, framework, dependency manager. Optional; inferred from repo if absent.
+- Scope hint: specific concern (auth, crypto, injection, supply-chain). Optional; full STRIDE/OWASP walk when absent.
 
 ## Procedure
 
 1. **Bound scope.** Identify every file in the change set. Map each to a trust boundary (external input, internal service, data store, credential surface). **Done when:** every file is mapped to a trust boundary.
 2. **STRIDE walk.** For each component touching a trust boundary, apply the six-question template:
-   - **Spoofing**: Who is the principal? How is identity proven? Can the credential be forged, replayed, or stolen? Is MFA/mutual-auth enforced?
-   - **Tampering**: What inputs cross the trust boundary? Are they validated against an explicit schema? Are messages integrity-protected?
-   - **Repudiation**: Are security-relevant actions logged with actor + timestamp + outcome? Are logs append-only/tamper-evident?
-   - **Information Disclosure**: What data is returned in error paths, logs, telemetry? Are PII/secrets ever serialized? Are timing side-channels addressed?
-   - **Denial of Service**: Are inputs bounded (size, count, depth)? Is parsing resource-limited? Are external calls rate-limited?
-   - **Elevation of Privilege**: What privilege does the new code execute under? Is least privilege honored? Can input alter privilege?
-   **Done when:** every trust-boundary component has all six STRIDE questions answered.
+   - Spoofing: Who is the principal? How is identity proven? Can the credential be forged, replayed, or stolen? Is MFA/mutual-auth enforced?
+   - Tampering: What inputs cross the trust boundary? Are they validated against an explicit schema? Are messages integrity-protected?
+   - Repudiation: Are security-relevant actions logged with actor + timestamp + outcome? Are logs append-only/tamper-evident?
+   - Information Disclosure: What data is returned in error paths, logs, telemetry? Are PII/secrets ever serialized? Are timing side-channels addressed?
+   - Denial of Service: Are inputs bounded (size, count, depth)? Is parsing resource-limited? Are external calls rate-limited?
+   - Elevation of Privilege: What privilege does the new code execute under? Is least privilege honored? Can input alter privilege?
+   Done when: every trust-boundary component has all six STRIDE questions answered.
 3. **OWASP Top 10 walkthrough.** Trace authorization policy (Broken Access Control); grep for weak primitives MD5, SHA1, DES, Math.random (Cryptographic Failures); check unparameterized queries, shell concat, template eval (Injection); cross-check STRIDE findings (Insecure Design); check TLS, CORS, CSP, cookie flags, debug toggles (Security Misconfiguration); run ecosystem CVE scanner (Vulnerable Components); check token TTL, refresh, session fixation, MFA (Auth Failures); check lockfile pinned, signature-verified artifacts (Integrity Failures); check audit log coverage, alert on auth-fail (Logging Failures); check egress allowlist, SSRF guard on URL inputs (SSRF). **Done when:** every OWASP category has a pass/fail verdict.
 4. **Supply-chain scan.** Run per-ecosystem CVE scanner and secrets/history scanner from the dep-audit-tooling matrix. **Done when:** CVE count, secrets found, and SBOM status are recorded.
 5. **Severity grading.** Assign each finding Critical/High/Medium/Low/Informational. Critical and high block merge. **Done when:** every finding has a severity.
@@ -43,10 +43,10 @@ description: 'Use for adversarial security audits of auth, input parsing, depend
 
 ## Failure and recovery
 
-- **Incomplete change set:** report what was audited and what was skipped; do not widen scope.
-- **Tool unavailable:** note the missing scanner; proceed with manual review; flag as gap in report.
-- **Ambiguous trust boundary:** document the ambiguity; flag for human review; do not assume safety.
-- **Scope creep:** stop at the declared boundary; file separate findings for out-of-scope concerns.
+- Incomplete change set: report what was audited and what was skipped; do not widen scope.
+- Tool unavailable: note the missing scanner; proceed with manual review; flag as gap in report.
+- Ambiguous trust boundary: document the ambiguity; flag for human review; do not assume safety.
+- Scope creep: stop at the declared boundary; file separate findings for out-of-scope concerns.
 
 ## Output
 

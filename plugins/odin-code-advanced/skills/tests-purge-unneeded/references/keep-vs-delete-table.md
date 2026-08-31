@@ -9,29 +9,29 @@ Always ask: **what real bug, in the production code, would this test catch?** If
 | Test pattern | Static-typed lang (Rust/TS-strict/Kotlin/Java/C++/OCaml) | Dynamic lang (Python/JS/Ruby) |
 |---|---|---|
 | Constructor that *only* assigns parameters to fields, no logic | **Delete** — compiler proves the assignment shape; if no validation/transform/default, no behavior to test | **Keep** — boundary shape test, runtime can drift silently |
-| Constructor that validates, normalizes, defaults, or transforms | **Keep** — testing the *logic*, not the shape | **Keep** |
+| Constructor that validates, normalizes, defaults, or transforms | **Keep** : testing the *logic*, not the shape | **Keep** |
 | Identity passthrough (`f(x) == x` for `f` claimed identity, no transform) | **Delete** — function is dead code or test describes signature | **Delete** — same reason; test the transform if `f` transforms |
-| Function returns the type its signature claims (no logic) | **Delete** — compiler enforces | **Keep at I/O boundaries**; otherwise consider `mypy`/`pyright` strict mode |
-| Mock returns fixture, assert returns fixture | **Delete** — testing the mock | **Delete** — same |
+| Function returns the type its signature claims (no logic) | **Delete** : compiler enforces | **Keep at I/O boundaries**; otherwise consider `mypy`/`pyright` strict mode |
+| Mock returns fixture, assert returns fixture | **Delete** : testing the mock | **Delete** — same |
 | `#[derive(Default)]` / generated default behavior | **Delete** — derived code is compiler-tested | N/A |
-| **Hand-written** custom `Default` / factory with non-obvious logic | **Keep** — testing the logic | **Keep** |
-| Direct field-copy assembly (`Foo { id: src.id, name: src.name }`) with no logic | **Delete** — compiler proves layout | **Keep if dynamic field manipulation is plausible** |
-| Assembly with logic — mapping, filtering, defaulting fields | **Keep** — testing the logic | **Keep** |
+| **Hand-written** custom `Default` / factory with non-obvious logic | **Keep** : testing the logic | **Keep** |
+| Direct field-copy assembly (`Foo { id: src.id, name: src.name }`) with no logic | **Delete** : compiler proves layout | **Keep if dynamic field manipulation is plausible** |
+| Assembly with logic : mapping, filtering, defaulting fields | **Keep** : testing the logic | **Keep** |
 | Deserialization / parsing — `from_str`, `serde`, `Zod`, `pydantic` | **Keep** — runtime boundary, type system does not check input | **Keep** |
-| Re-export forwarding (`pub use foo::bar`) | **Delete** — module system enforces | **Delete** — typically trivial |
+| Re-export forwarding (`pub use foo::bar`) | **Delete** : module system enforces | **Delete** : typically trivial |
 | ─── boundary contracts ─── | | |
-| Parser/deserializer rejects malformed input | **Keep** — runtime boundary | **Keep** |
-| Error-variant semantics (which input produces which error) | **Keep** — semantic, not structural | **Keep** |
-| HTTP status codes / response shape | **Keep** — protocol contract | **Keep** |
+| Parser/deserializer rejects malformed input | **Keep** : runtime boundary | **Keep** |
+| Error-variant semantics (which input produces which error) | **Keep** : semantic, not structural | **Keep** |
+| HTTP status codes / response shape | **Keep** : protocol contract | **Keep** |
 | Authz/authn enforcement (401/403 paths) | **Keep — security invariant** | **Keep — security invariant** |
-| Input validation (length, format, range) | **Keep** — boundary | **Keep** |
+| Input validation (length, format, range) | **Keep** : boundary | **Keep** |
 | Rate limiting / throttling | **Keep** | **Keep** |
-| Real DB transaction commit + rollback | **Keep** — real-I/O integration | **Keep** |
-| File I/O — paths, permissions, atomic writes | **Keep** — real-I/O integration | **Keep** |
+| Real DB transaction commit + rollback | **Keep** : real-I/O integration | **Keep** |
+| File I/O : paths, permissions, atomic writes | **Keep** — real-I/O integration | **Keep** |
 | Network call retries, timeouts, partial failures | **Keep** — error semantics | **Keep** |
-| Concurrency — channel close, deadlock, race | **Keep** — type system does not prove semantics | **Keep** |
-| `unsafe` block contract | **Keep — proudly** — exactly where compiler stops helping | N/A |
-| Property-based test (random inputs validate invariant) | **Keep — high signal** | **Keep — high signal** |
+| Concurrency : channel close, deadlock, race | **Keep** : type system does not prove semantics | **Keep** |
+| `unsafe` block contract | **Keep : proudly** : exactly where compiler stops helping | N/A |
+| Property-based test (random inputs validate invariant) | **Keep : high signal** | **Keep : high signal** |
 | Mutation-testing-validated test (kills mutants) | **Keep — proven load-bearing** | **Keep — proven load-bearing** |
 
 ## Tiebreakers
@@ -47,6 +47,6 @@ When the table is ambiguous:
 
 - **Tautology tests** — `assert isinstance(x, MyClass)` immediately after `x = MyClass()`
 - **Implementation tests** — asserting which private methods got called, not what the public behavior produced
-- **Coverage-driven tests** — written to hit a coverage line, not to catch a bug
+- **Coverage-driven tests** ; written to hit a coverage line, not to catch a bug
 - **Snapshot tests of trivial output** — approval tests of `str(obj)` or rendered HTML where any deliberate change requires updating the snapshot anyway
 - **"Just in case" tests** — written without a named failure mode they would catch

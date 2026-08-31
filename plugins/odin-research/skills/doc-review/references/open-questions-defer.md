@@ -50,9 +50,9 @@ Deferred findings appear in the completion report under the `Deferred` action bu
 
 If recording fails (e.g., in-memory state lost due to session interruption), surface the failure to the user:
 
-**Stem:** `Couldn't record the deferral. What should the agent do?`
+Stem: `Couldn't record the deferral. What should the agent do?`
 
-**Options (exactly two; fixed order):**
+Options (exactly two; fixed order):
 
 ```
 A. Retry the recording

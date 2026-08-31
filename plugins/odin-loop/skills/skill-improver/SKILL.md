@@ -25,13 +25,13 @@ description: 'Use when a user asks to iteratively improve a skill, fix skill-qua
 1. **Resolve target.** Locate the `SKILL.md` file. If the path does not exist or does not contain a valid skill frontmatter block, report `invalid-target` and stop. Record the resolved path in `.code-improver/run-<timestamp>/target.txt`. Done when: the target is resolved and recorded, or `invalid-target` is reported.
 2. **Bound scope.** The improvement scope is the single resolved skill directory. No file outside that directory or the `.code-improver/` artifact tree may be read or written. Done when: the scope boundary is established.
 3. **Initial review.** Read the full `SKILL.md` and any `agents/openai.yaml` in the skill directory. Evaluate against these quality dimensions:
-   - **Trigger clarity**: does the frontmatter description and trigger predicate route precisely?
-   - **Authority fidelity**: does the body restatement match the declared authority without expansion?
-   - **Procedure completeness**: are steps numbered, executable, and free of ambiguity or missing branches?
-   - **Semantic minimum**: does every line earn its place by changing routing, authority, reads/writes, procedure, proof, failure handling, or license?
-   - **Failure coverage**: are named failure classes present with partial-result rules, rollback rules, and exact blocked-terminal output?
-   - **Self-containment**: does the body avoid pointers to other skills, AGENTS.md, system prompts, or rule files?
-   - **Provenance**: is origin, revision, license, and adaptation statement present?
+   - Trigger clarity: does the frontmatter description and trigger predicate route precisely?
+   - Authority fidelity: does the body restatement match the declared authority without expansion?
+   - Procedure completeness: are steps numbered, executable, and free of ambiguity or missing branches?
+   - Semantic minimum: does every line earn its place by changing routing, authority, reads/writes, procedure, proof, failure handling, or license?
+   - Failure coverage: are named failure classes present with partial-result rules, rollback rules, and exact blocked-terminal output?
+   - Self-containment: does the body avoid pointers to other skills, AGENTS.md, system prompts, or rule files?
+   - Provenance: is origin, revision, license, and adaptation statement present?
    Classify each finding as `critical`, `major`, or `minor`. Write findings to `.code-improver/run-<timestamp>/review-<N>.json`. Done when: findings are classified and written.
 4. **Gate check.** If zero critical and zero major findings exist, proceed to step 7 (finalization). If the iteration count equals max iterations, proceed to step 6 (non-converged terminal). Done when: the gate decision is made.
 5. **Fix cycle.** For each critical and major finding, in severity-then-file-order:

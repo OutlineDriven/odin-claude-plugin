@@ -33,31 +33,31 @@ description: 'Use when the user asks for onboarding, orientation, a repository t
    - If a read-only whole-repository digest facility is available, use it only to corroborate stack, module boundaries, and naming conventions. Its absence or failure does not block the orientation.
    Done when: bounded evidence collection is attempted across all applicable classes.
 3. Synthesize a concise orientation using these sections in this exact order:
-   1. **What it does** — one or two plain-language sentences supported by the README and manifests.
-   2. **Tech stack + CI** — observed languages, frameworks, package managers, build and test tools, and CI jobs.
-   3. **Where execution starts** — observed binaries and CLIs, application or server bootstrap, framework-loaded configuration, library exports, and test or benchmark entry points, grouped by kind.
-   4. **Project structure, annotated** — important directories, their evidenced purpose, and unusual layout details; do not paste an exhaustive tree.
-   5. **Active development: hotspots + owners** — recent high-churn files and contributors when Git evidence exists.
-   6. **Code health** — only evidenced drift, debris, or test gaps, graded `HIGH` for direct tool evidence, `MEDIUM` for repeated independent signals, or `LOW` for an explicitly marked inference.
-   7. **Getting started: exact runnable commands** — commands copied from manifests, CI, build files, or the README. Omit rather than invent an ungrounded command.
+   1. **What it does**: one or two plain-language sentences supported by the README and manifests.
+   2. **Tech stack + CI**: observed languages, frameworks, package managers, build and test tools, and CI jobs.
+   3. **Where execution starts**: observed binaries and CLIs, application or server bootstrap, framework-loaded configuration, library exports, and test or benchmark entry points, grouped by kind.
+   4. **Project structure, annotated**: important directories, their evidenced purpose, and unusual layout details; do not paste an exhaustive tree.
+   5. **Active development: hotspots + owners**: recent high-churn files and contributors when Git evidence exists.
+   6. **Code health**: only evidenced drift, debris, or test gaps, graded `HIGH` for direct tool evidence, `MEDIUM` for repeated independent signals, or `LOW` for an explicitly marked inference.
+   7. **Getting started: exact runnable commands**: commands copied from manifests, CI, build files, or the README. Omit rather than invent an ungrounded command.
    Done when: all seven sections are synthesized in order with evidence grounding.
 4. Attempt every applicable collection class. If evidence for a section is unavailable, state the reason once in that section rather than fabricating content or repeating the limitation. Done when: every section either has evidence or states its degradation once.
 5. Deep-read two or three real files after forming the map: the primary structural entry point, a central file in the largest observed module, and one representative test, in that order. If fewer exist, read every available category and state the degradation. Connect the files through observed imports, calls, exports, or test targets; label any remaining inference `[INFERENCE]`. Done when: two or three real files are deep-read with connections and inference labels.
 6. End by asking the user to select exactly one next move, marking **Explore an area** as recommended for first-time onboarding:
-   - **Explore an area** — choose a directory or package and inspect its central exports and most-connected implementation file.
-   - **Trace a feature** — request the feature name, locate its entry point, trace its call or import flow, and identify two or three key files.
-   - **Make a first change** — request the desired change, map risk from hotspots, ownership, and tests, and identify files to inspect before editing.
-   - **Where can I help?** — derive file-level opportunities from hotspots, test gaps, stale documentation, low-ownership areas, and bounded cleanup candidates.
+   - Explore an area: choose a directory or package and inspect its central exports and most-connected implementation file.
+   - Trace a feature: request the feature name, locate its entry point, trace its call or import flow, and identify two or three key files.
+   - Make a first change: request the desired change, map risk from hotspots, ownership, and tests, and identify files to inspect before editing.
+   - Where can I help?: derive file-level opportunities from hotspots, test gaps, stale documentation, low-ownership areas, and bounded cleanup candidates.
    Use an available single-select interaction; otherwise present the four numbered options and stop after the question. Done when: the next-move question is presented with Explore an area marked as recommended.
 
 ## Failure and recovery
 
-- **Invalid input:** If the root does not exist or depth is outside the closed set, return the rejected value and required correction; do not inspect a substitute path.
-- **Unreadable or missing evidence:** Continue with independently available evidence, identify the affected section once, and lower certainty. A manifest, README, Git metadata, CI configuration, structural index, or digest may be absent without invalidating observed results.
-- **Insufficient source:** If no real source file can be read, return the seven-section partial orientation but classify the result as blocked because the deep-read predicate is unmet. If only one or two qualifying files exist, read them and report that exact degradation.
-- **Conflicting evidence:** Present the conflict with file paths or metadata sources and do not choose a claim without support.
-- **Partial-result rule:** Preserve useful observed findings, clearly separate unavailable evidence and `[INFERENCE]`, and never claim the done predicate when a blocking gate failed.
-- **Recovery:** Retry only with a narrower read or an available read-only search method. Never recover by widening beyond the repository root, mutating state, running paid operations, or inventing evidence.
+- Invalid input: If the root does not exist or depth is outside the closed set, return the rejected value and required correction; do not inspect a substitute path.
+- Unreadable or missing evidence: Continue with independently available evidence, identify the affected section once, and lower certainty. A manifest, README, Git metadata, CI configuration, structural index, or digest may be absent without invalidating observed results.
+- Insufficient source: If no real source file can be read, return the seven-section partial orientation but classify the result as blocked because the deep-read predicate is unmet. If only one or two qualifying files exist, read them and report that exact degradation.
+- Conflicting evidence: Present the conflict with file paths or metadata sources and do not choose a claim without support.
+- Partial-result rule: Preserve useful observed findings, clearly separate unavailable evidence and `[INFERENCE]`, and never claim the done predicate when a blocking gate failed.
+- Recovery: Retry only with a narrower read or an available read-only search method. Never recover by widening beyond the repository root, mutating state, running paid operations, or inventing evidence.
 
 ## Output
 

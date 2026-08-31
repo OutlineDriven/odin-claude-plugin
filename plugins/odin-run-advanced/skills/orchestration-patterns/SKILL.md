@@ -16,16 +16,16 @@ description: 'Use when work decomposes across subagents or role panels: select a
 
 ## Inputs
 
-- **Task decomposition** — required. A named list of subagent tasks, each with a role label and a concrete goal.
-- **Role definitions** — required. Each role's instructions and tool permissions.
-- **Pattern selection criteria** — optional. The coupling characteristics of the decomposition: independent, ordered, or adversarial. Infer them from the decomposition when omitted.
+- Task decomposition: required. A named list of subagent tasks, each with a role label and a concrete goal.
+- Role definitions: required. Each role's instructions and tool permissions.
+- Pattern selection criteria: optional. The coupling characteristics of the decomposition: independent, ordered, or adversarial. Infer them from the decomposition when omitted.
 
 ## Procedure
 
 1. **Assess coupling.** Classify each task:
-   - **Independent** — no ordering constraint or shared mutable state, and the task benefits from an isolated context.
-   - **Ordered** — the task requires a prior task's output.
-   - **Adversarial** — another role must challenge its evidence or conclusion.
+   - Independent: no ordering constraint or shared mutable state, and the task benefits from an isolated context.
+   - Ordered: the task requires a prior task's output.
+   - Adversarial: another role must challenge its evidence or conclusion.
    Done when: every task is classified as independent, ordered, or adversarial.
 
 2. **Choose one bounded mechanism.** Apply the first matching row; the action in the second column is the complete mechanism, not a pointer to another skill or command.
@@ -60,12 +60,12 @@ description: 'Use when work decomposes across subagents or role panels: select a
 
 ## Failure and recovery
 
-- **Subagent non-convergence:** a subagent loops, returns no artifact, exceeds its bounded assignment, or produces an artifact that fails owner verification. Stop dependent work, name the failed unit and failed criterion, and do not write a synthesis.
-- **Partial landing:** at least one spawned unit verifies and at least one does not. Report both sets and preserve verified artifacts as evidence, but do not merge or present a partial synthesis as complete.
-- **Contention collision:** two assignments target the same mutable artifact. Cancel the colliding parallel plan before accepting either write, restore the named local target to its pre-run state, then rerun the units one at a time with separate artifacts.
-- **Disagreement without evidence:** artifacts conflict and their citations do not resolve the conflict. Return the conflicting claims and missing evidence; do not invent a deciding fact.
-- **Context overflow risk:** verified artifacts will not fit for owner-side reconciliation. Replace each unstarted large-input unit with the bounded digest mechanism from Step 2; if already-returned artifacts still cannot be reconciled, stop without synthesis and report the unprocessed set.
-- **Rollback:** if synthesis began before all artifacts verified and received dispositions, remove that partial synthesis, retain the verified source artifacts, and resume at Step 6.
+- Subagent non-convergence: a subagent loops, returns no artifact, exceeds its bounded assignment, or produces an artifact that fails owner verification. Stop dependent work, name the failed unit and failed criterion, and do not write a synthesis.
+- Partial landing: at least one spawned unit verifies and at least one does not. Report both sets and preserve verified artifacts as evidence, but do not merge or present a partial synthesis as complete.
+- Contention collision: two assignments target the same mutable artifact. Cancel the colliding parallel plan before accepting either write, restore the named local target to its pre-run state, then rerun the units one at a time with separate artifacts.
+- Disagreement without evidence: artifacts conflict and their citations do not resolve the conflict. Return the conflicting claims and missing evidence; do not invent a deciding fact.
+- Context overflow risk: verified artifacts will not fit for owner-side reconciliation. Replace each unstarted large-input unit with the bounded digest mechanism from Step 2; if already-returned artifacts still cannot be reconciled, stop without synthesis and report the unprocessed set.
+- Rollback: if synthesis began before all artifacts verified and received dispositions, remove that partial synthesis, retain the verified source artifacts, and resume at Step 6.
 
 ## Output
 

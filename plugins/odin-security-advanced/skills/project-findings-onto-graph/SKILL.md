@@ -18,8 +18,8 @@ External findings land as flat lists: a SARIF file, a reviewer's annotation expo
 
 ## Inputs
 
-- **Required**: A program graph already built for the target repository (build one with build-program-graph if none exists), plus at least one finding export the graph tool can import. SARIF 2.1.0 results files are the standard import; reviewer annotation files and other tool exports count when the graph tool documents an importer or the format carries file-and-line anchors.
-- **Optional**: Precomputed preanalysis evidence (blast radius, taint, privilege boundaries) for cross-referencing. Additional export files for multi-source import.
+- Required: A program graph already built for the target repository (build one with build-program-graph if none exists), plus at least one finding export the graph tool can import. SARIF 2.1.0 results files are the standard import; reviewer annotation files and other tool exports count when the graph tool documents an importer or the format carries file-and-line anchors.
+- Optional: Precomputed preanalysis evidence (blast radius, taint, privilege boundaries) for cross-referencing. Additional export files for multi-source import.
 
 ## Refusals
 

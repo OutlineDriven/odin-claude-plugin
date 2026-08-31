@@ -26,9 +26,9 @@ Required: a diff context such as a PR/MR URL, a commit range, a branch compariso
 4. Present the summary in chat so the human can absorb the shape in one read before opening the diff.
 
 ## Failure and recovery
-- **No-diff-context**: the skill cannot locate the diff source. Returns "no diff context found"; does not fabricate a summary.
-- **Empty-diff**: the diff exists but has no changes. Returns "diff is empty"; does not pretend a summary exists.
-- **Retrieval-failure**: the diff cannot be fetched (network, auth, or permissions). Returns the failure message; does not retry or widen scope.
+- No-diff-context: the skill cannot locate the diff source. Returns "no diff context found"; does not fabricate a summary.
+- Empty-diff: the diff exists but has no changes. Returns "diff is empty"; does not pretend a summary exists.
+- Retrieval-failure: the diff cannot be fetched (network, auth, or permissions). Returns the failure message; does not retry or widen scope.
 
 Partial-result rule: if retrieval succeeds for a subset of files, render what was retrieved and label it "partial" if the full set is not available.
 

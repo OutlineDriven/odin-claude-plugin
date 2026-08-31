@@ -16,9 +16,9 @@ description: 'Use when asked to receive code review feedback: clarify every item
 
 ## Inputs
 
-- **Feedback**: the raw code review comment(s), PR thread, or inline suggestion. Required.
-- **Code under review**: the relevant source files. Required.
-- **PR or issue thread**: the full review context. Optional; use when available.
+- Feedback: the raw code review comment(s), PR thread, or inline suggestion. Required.
+- Code under review: the relevant source files. Required.
+- PR or issue thread: the full review context. Optional; use when available.
 
 ## Procedure
 
@@ -35,12 +35,12 @@ description: 'Use when asked to receive code review feedback: clarify every item
 6. **Stop**. Do not post any GitHub reply, open any issue, trigger any CI pipeline, or otherwise mutate any remote system.
 
 ## Failure and recovery
-- **Unresolvable feedback**: stop and report which item cannot be clarified to a concrete statement. Do not implement it.
-- **User rejects accepted item**: skip that item; continue with the remaining items.
-- **Implementation blocked**: report the specific technical obstacle; do not widen scope.
-- **Test fails**: fix the implementation, not the test. If the test is wrong, report it and stop.
-- **Remote mutation attempted**: refuse; log the blocked action.
-- **Non-converged result**: any failure that is not resolved produces a report listing unresolved items and blocked actions. The done predicate does not hold.
+- Unresolvable feedback: stop and report which item cannot be clarified to a concrete statement. Do not implement it.
+- User rejects accepted item: skip that item; continue with the remaining items.
+- Implementation blocked: report the specific technical obstacle; do not widen scope.
+- Test fails: fix the implementation, not the test. If the test is wrong, report it and stop.
+- Remote mutation attempted: refuse; log the blocked action.
+- Non-converged result: any failure that is not resolved produces a report listing unresolved items and blocked actions. The done predicate does not hold.
 
 ## Output
 A local report listing every feedback item, its classification (accepted or questionable), the actions taken for each accepted item, and the location of any drafted pushback. No remote state is changed.

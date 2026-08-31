@@ -45,10 +45,10 @@ Every finding, in either mode, must cite specific code locations, line ranges, o
 4. **Read changed regions with context.** Read each changed region and the immediate callers and surrounding state needed to reason about its behavior. Do not read unrelated code. Done when: every changed region is read with its callers and surrounding state.
 5. **Categorize findings.** Assign each finding to one of: Correctness, Security, Performance, Maintainability, Robustness, Logic, or API Usage. Done when: every finding is categorized.
 6. **Grade severity.** Assign one severity level to each finding:
-   - **Critical**: exploitable bug, data loss, or security vulnerability with no workaround
-   - **High**: significant bug, regression risk, or breach of contract without mitigation
-   - **Medium**: correctness concern, degraded performance, or maintainability debt
-   - **Low**: minor issue, cosmetic concern, or opportunity for improvement
+   - Critical: exploitable bug, data loss, or security vulnerability with no workaround
+   - High: significant bug, regression risk, or breach of contract without mitigation
+   - Medium: correctness concern, degraded performance, or maintainability debt
+   - Low: minor issue, cosmetic concern, or opportunity for improvement
    Done when: every finding is graded.
 7. **Validate findings.** Apply the shared evidence bar: each finding cites specific code locations as evidence; evidence-less candidates are discarded; no invented issues. Done when: every surviving finding has concrete evidence.
 8. **Reject style-only findings.** Do not report formatting, naming conventions, or cosmetic preferences unless they cause a correctness or security issue. Done when: no style-only finding remains.
@@ -93,8 +93,8 @@ Partial-result rule: always return what was produced. Never claim the done predi
 
 **Standard mode.** A structured review report returned as chat output. One section per severity level (Critical, High, Medium, Low), each containing:
 - **Severity** and **Category**
-- **Finding**: the specific issue with code location and evidence
-- **Recommended Fix**: concrete, actionable correction
+- Finding: the specific issue with code location and evidence
+- Recommended Fix: concrete, actionable correction
 
 Unsuitable scope is reported as a named failure. An empty diff or inaccessible PR is reported as a named failure. The report must not contain findings without cited evidence.
 

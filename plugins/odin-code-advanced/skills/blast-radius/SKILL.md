@@ -35,10 +35,10 @@ A diff, branch, or set of changed files to analyze. The change must be readable 
 7. Delete the proof script after capturing its output. Done when: the proof script is deleted and no artifact remains.
 
 ## Failure and recovery
-- **Unprovable fact**: If the one safety fact cannot reach certainty-ladder step 4 within one script, mark it unproven and return the report with that fact exposed. Do not assert safety.
-- **No single fact found**: If no single load-bearing fact exists, treat every risk as independent and prove or mark each one. Do not collapse to a guess.
-- **Proof script fails**: The failure is evidence. Report what it broke, at which step, and what that implies for the change.
-- **Scope widening**: If the change is too large for one proof, return a partial report covering the facts that could be checked and name what remains. Do not widen scope or run multiple proofs.
+- Unprovable fact: If the one safety fact cannot reach certainty-ladder step 4 within one script, mark it unproven and return the report with that fact exposed. Do not assert safety.
+- No single fact found: If no single load-bearing fact exists, treat every risk as independent and prove or mark each one. Do not collapse to a guess.
+- Proof script fails: The failure is evidence. Report what it broke, at which step, and what that implies for the change.
+- Scope widening: If the change is too large for one proof, return a partial report covering the facts that could be checked and name what remains. Do not widen scope or run multiple proofs.
 - Rollback: delete the proof script. No other artifact is created.
 
 ## Output

@@ -34,11 +34,11 @@ disable-model-invocation: true
 8. Report the set of opened PRs and the set of channels stopped on conflict. **Done when:** every requested channel is reported as opened-with-PR or stopped-on-conflict.
 
 ## Failure and recovery
-- **Conflict on cherry-pick:** stop that channel with the conflicted files and base branch named; do not commit, push, or open a PR for it. The user resolves the conflict and re-invokes.
-- **Missing or ambiguous reference:** stop and request the exact commit SHA(s); do not guess.
-- **Missing release branch or on-call reviewer:** stop and request the missing input; do not invent a branch or reviewer.
-- **Push or PR-open failure:** leave the local cherrypick branch intact, report the remote error, and stop; do not retry silently or force-push.
-- **Partial result:** branches already pushed and PRs already opened remain; stopped channels are reported, not silently dropped. The done predicate holds only for channels that reached an opened, assigned PR.
+- Conflict on cherry-pick: stop that channel with the conflicted files and base branch named; do not commit, push, or open a PR for it. The user resolves the conflict and re-invokes.
+- Missing or ambiguous reference: stop and request the exact commit SHA(s); do not guess.
+- Missing release branch or on-call reviewer: stop and request the missing input; do not invent a branch or reviewer.
+- Push or PR-open failure: leave the local cherrypick branch intact, report the remote error, and stop; do not retry silently or force-push.
+- Partial result: branches already pushed and PRs already opened remain; stopped channels are reported, not silently dropped. The done predicate holds only for channels that reached an opened, assigned PR.
 
 ## Output
 A report listing, per requested release channel, the cherrypick branch, the PR URL and title with the on-call reviewer assigned, or the conflict that stopped that channel; terminal classification `done` when every requested channel has an opened, correctly titled, reviewer-assigned PR, otherwise `blocked` with the stopped channels named.

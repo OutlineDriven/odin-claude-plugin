@@ -39,19 +39,19 @@ description: 'Use when a user wants agent setup graded from conversation history
 
 3. **Score efficiency (0-10).**
    Evaluate the agent's task-completion efficiency against these criteria:
-   - **Task completion** (0-3): Did the agent accomplish the stated goal? 3 = fully complete, 2 = mostly complete with minor gaps, 1 = partial progress, 0 = no progress.
-   - **Unnecessary exploration** (0-3, inverted): Did the agent read or explore files unrelated to the task? 0 = extensive off-topic exploration, 1 = moderate, 2 = minimal, 3 = only task-relevant files touched.
-   - **Retry waste** (0-2, inverted): How many failed attempts or redundant retries occurred? 2 = none, 1 = one retry, 0 = multiple retries.
-   - **Turn economy** (0-2, inverted): Was the turn count reasonable for the task complexity? 2 = concise, 1 = slightly verbose, 0 = significantly excessive turns.
+   - Task completion (0-3): Did the agent accomplish the stated goal? 3 = fully complete, 2 = mostly complete with minor gaps, 1 = partial progress, 0 = no progress.
+   - Unnecessary exploration (0-3, inverted): Did the agent read or explore files unrelated to the task? 0 = extensive off-topic exploration, 1 = moderate, 2 = minimal, 3 = only task-relevant files touched.
+   - Retry waste (0-2, inverted): How many failed attempts or redundant retries occurred? 2 = none, 1 = one retry, 0 = multiple retries.
+   - Turn economy (0-2, inverted): Was the turn count reasonable for the task complexity? 2 = concise, 1 = slightly verbose, 0 = significantly excessive turns.
    - Sum sub-scores for the raw efficiency score (0-10).
    Done when: the efficiency score (0-10) is computed.
 
 4. **Score code quality (0-10).**
    Evaluate the agent's code changes against these criteria:
-   - **Correct file identification** (0-3): Did the agent modify the right files and symbols? 3 = all correct, 2 = one wrong file, 1 = multiple wrong files, 0 = entirely wrong targets.
-   - **Minimal diff** (0-3): Were changes precise and minimal? 3 = surgical edits, 2 = minor unnecessary changes, 1 = moderate bloat, 0 = large unnecessary rewrites.
-   - **Pattern adherence** (0-2): Did changes follow existing codebase conventions? 2 = fully consistent, 1 = minor style deviations, 0 = ignores existing patterns.
-   - **Regression avoidance** (0-2): Did changes avoid introducing bugs, dead code, or broken imports? 2 = clean, 1 = minor issues, 0 = introduced regressions.
+   - Correct file identification (0-3): Did the agent modify the right files and symbols? 3 = all correct, 2 = one wrong file, 1 = multiple wrong files, 0 = entirely wrong targets.
+   - Minimal diff (0-3): Were changes precise and minimal? 3 = surgical edits, 2 = minor unnecessary changes, 1 = moderate bloat, 0 = large unnecessary rewrites.
+   - Pattern adherence (0-2): Did changes follow existing codebase conventions? 2 = fully consistent, 1 = minor style deviations, 0 = ignores existing patterns.
+   - Regression avoidance (0-2): Did changes avoid introducing bugs, dead code, or broken imports? 2 = clean, 1 = minor issues, 0 = introduced regressions.
    - Sum sub-scores for the raw code quality score (0-10).
    - If the session contains no code changes, set code quality to N/A and note this in findings.
    Done when: the code quality score (0-10 or N/A) is computed.

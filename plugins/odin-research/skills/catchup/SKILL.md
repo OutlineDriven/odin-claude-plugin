@@ -32,11 +32,11 @@ The project working directory, inferred from the current repository when not sup
 6. Cold-read the briefing for pre-gap memory dependence or unglossed coined terms; confirm each needs-you item is actionable without opening another file; confirm every claim has a checkable source (file, commit, or artifact path). **Done when:** the cold-read passes with no pre-gap memory dependence, no unglossed terms, actionable needs-you items, and sourced claims.
 
 ## Failure and recovery
-- **No live state found:** if the working directory has no readable git history, plan docs, or task artifacts, report that the project state is unreadable and name what was checked. Do not fabricate a briefing from memory.
-- **Last touch point unidentifiable:** if the human's last message, judgment, or commit cannot be determined, state the assumption used (e.g., most recent commit) and proceed. Do not guess silently.
-- **Claim without source:** if a claim cannot be traced to a file, commit, or artifact, drop it or mark it explicitly as unverified. Never present an ungrounded claim as fact.
-- **Briefing exceeds a screen:** trim to the needs-you items and one-line summaries of the changed and new-words sections; offer drill-down for the rest. Do not deliver the full expansion by default.
-- **Partial result:** a briefing covering only some sections is still useful if every included claim is source-grounded; state which sections were omitted and why.
+- No live state found: if the working directory has no readable git history, plan docs, or task artifacts, report that the project state is unreadable and name what was checked. Do not fabricate a briefing from memory.
+- Last touch point unidentifiable: if the human's last message, judgment, or commit cannot be determined, state the assumption used (e.g., most recent commit) and proceed. Do not guess silently.
+- Claim without source: if a claim cannot be traced to a file, commit, or artifact, drop it or mark it explicitly as unverified. Never present an ungrounded claim as fact.
+- Briefing exceeds a screen: trim to the needs-you items and one-line summaries of the changed and new-words sections; offer drill-down for the rest. Do not deliver the full expansion by default.
+- Partial result: a briefing covering only some sections is still useful if every included claim is source-grounded; state which sections were omitted and why.
 
 ## Output
 A screen-length briefing with three sections in decision order (Needs you, Changed while you were away, New words), every claim tracing to a file, commit, or artifact path, every project-specific term glossed at first use, and drill-down offers per section; the briefing requires no pre-gap memory to parse.

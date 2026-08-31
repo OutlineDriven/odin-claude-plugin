@@ -45,12 +45,12 @@ Prerequisites: Burp Suite Professional with the `burpsuite-project-file-parser` 
 6. Stream the JSON output (one object per line) from the parser to stdout. Do not parse, filter, or mutate the output inside this command. Done when: the parser's JSON output is streamed to stdout unchanged.
 
 ## Failure and recovery
-- **Project file not found**: Print an error naming the missing path and stop. No parser invocation occurs.
-- **Unsupported platform**: When `uname -s` is neither Darwin nor Linux and no `BURP_JAVA`/`BURP_JAR` overrides are set, print a warning naming the platform and stop. The user must set both environment variables.
-- **Java or JAR not found**: Print an error naming the missing path and the environment variable to set, then stop. No parser invocation occurs.
-- **No operation supplied**: Print usage and stop. No parser invocation occurs.
-- **Parser runtime error**: Surface the parser's stderr and exit code unchanged. Do not swallow errors or fabricate results. The done predicate does not hold; report the failure as the terminal result.
-- **Non-mutation rule**: This command never writes to or modifies the `.burp` project file. No rollback is needed; a failed run leaves the project file untouched.
+- Project file not found: Print an error naming the missing path and stop. No parser invocation occurs.
+- Unsupported platform: When `uname -s` is neither Darwin nor Linux and no `BURP_JAVA`/`BURP_JAR` overrides are set, print a warning naming the platform and stop. The user must set both environment variables.
+- Java or JAR not found: Print an error naming the missing path and the environment variable to set, then stop. No parser invocation occurs.
+- No operation supplied: Print usage and stop. No parser invocation occurs.
+- Parser runtime error: Surface the parser's stderr and exit code unchanged. Do not swallow errors or fabricate results. The done predicate does not hold; report the failure as the terminal result.
+- Non-mutation rule: This command never writes to or modifies the `.burp` project file. No rollback is needed; a failed run leaves the project file untouched.
 
 ## Output
 JSON objects (one per line, streamed to stdout) shaped by operation: `auditItems` — name/severity/confidence/host/port/protocol/url; `proxyHistory`/`siteMap` — complete request/response data narrowed by any sub-component filter; `responseHeader`/`responseBody` regex — url plus matching header or body content.

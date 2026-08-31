@@ -17,10 +17,10 @@ disable-model-invocation: true
 
 ## Refusals
 
-- **Remote or irreversible mutation without explicit human confirmation**: rejected. Every commit, tag, push, and PR creation waits for confirmation.
-- **In-branch test failures**: stop. The developer must fix their own broken tests before shipping.
-- **Redaction HIGH finding in the PR body or title**: block (exit 3). Rotate the credential and redact before creating or editing the PR; no skip.
-- **Running workflow-owned steps by hand**: rejected when the request touches steps owned by the CI/CD workflow, deployment pipeline, or publishing platform.
+- Remote or irreversible mutation without explicit human confirmation: rejected. Every commit, tag, push, and PR creation waits for confirmation.
+- In-branch test failures: stop. The developer must fix their own broken tests before shipping.
+- Redaction HIGH finding in the PR body or title: block (exit 3). Rotate the credential and redact before creating or editing the PR; no skip.
+- Running workflow-owned steps by hand: rejected when the request touches steps owned by the CI/CD workflow, deployment pipeline, or publishing platform.
 
 ## Inputs
 
@@ -48,13 +48,13 @@ disable-model-invocation: true
 16. **Create the redaction-gated PR.** Compose the PR body from this run's fresh results: Summary, Test Coverage, Pre-Landing Review, Design Review, Eval Results, Greptile Review, Scope Drift, Plan Completion, Linked Spec, Verification Results, TODOS, Documentation, and a checked Test plan. The PR title must start with `v<NEW_VERSION>`. Write the body to a temp file and scan it at the sink with the redaction engine before sending: a HIGH credential finding blocks (exit 3, no skip, rotate and redact first); MEDIUM findings require per-finding confirmation, sterner on a public repo. **Done when**: the PR is created with a redaction-gated body or a HIGH finding blocks.
 ## Failure and recovery
 
-- **In-branch test failure**: stop. The developer fixes their own broken tests before shipping; do not proceed.
-- **Complex merge conflict**: stop and show the conflicts; do not auto-resolve ambiguous hunks.
-- **DRIFT_UNEXPECTED version state**: stop for manual reconciliation; a manual edit bypassed the pipeline.
-- **Redaction HIGH finding in the PR body or title**: block (exit 3). Rotate the credential and redact before creating or editing the PR; no skip.
-- **Subagent failure (coverage audit, documentation sync, plan completion)**: fall back to running the step inline or proceed without its section; partial results are better than none. Never block the ship on a subagent failure. A plan-completion audit that cannot run is surfaced explicitly, never silently passed.
-- **Verification gate without fresh evidence**: no done claim. Re-run the affected lane to produce a fresh record.
-- **Partial-result rule**: every step that completes leaves its evidence in the ledger or PR body; a later step that fails does not erase earlier evidence. Rollback is non-mutation: stop before the next irreversible step rather than undoing a published commit or tag. Never swallow an error or pretend the done predicate holds. The blocked result names the failing step, the verbatim error, and the exact human action that unblocks it.
+- In-branch test failure: stop. The developer fixes their own broken tests before shipping; do not proceed.
+- Complex merge conflict: stop and show the conflicts; do not auto-resolve ambiguous hunks.
+- DRIFT_UNEXPECTED version state: stop for manual reconciliation; a manual edit bypassed the pipeline.
+- Redaction HIGH finding in the PR body or title: block (exit 3). Rotate the credential and redact before creating or editing the PR; no skip.
+- Subagent failure (coverage audit, documentation sync, plan completion): fall back to running the step inline or proceed without its section; partial results are better than none. Never block the ship on a subagent failure. A plan-completion audit that cannot run is surfaced explicitly, never silently passed.
+- Verification gate without fresh evidence: no done claim. Re-run the affected lane to produce a fresh record.
+- Partial-result rule: every step that completes leaves its evidence in the ledger or PR body; a later step that fails does not erase earlier evidence. Rollback is non-mutation: stop before the next irreversible step rather than undoing a published commit or tag. Never swallow an error or pretend the done predicate holds. The blocked result names the failing step, the verbatim error, and the exact human action that unblocks it.
 
 ## Output
 

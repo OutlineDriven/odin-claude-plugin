@@ -16,9 +16,9 @@ description: 'Use when auditing C, C++, or Rust secret-handling code to verify z
 
 ## Inputs
 
-- **Target repository path** (required): root of the codebase to audit.
-- **Build context** (required): path to `compile_commands.json` for C/C++ or `Cargo.toml` for Rust.
-- **Scope** (optional): specific files or directories to limit the audit; defaults to the full repository.
+- Target repository path (required): root of the codebase to audit.
+- Build context (required): path to `compile_commands.json` for C/C++ or `Cargo.toml` for Rust.
+- Scope (optional): specific files or directories to limit the audit; defaults to the full repository.
 
 ## Procedure
 
@@ -41,12 +41,12 @@ description: 'Use when auditing C, C++, or Rust secret-handling code to verify z
 
 ## Failure and recovery
 
-- **Missing build context**: halt immediately. Report the missing prerequisite (`compile_commands.json` or `Cargo.toml`) and do not proceed.
-- **Compilation failure for specific translation units**: record the compiler error as a coverage gap. Continue with compilable units. Do not modify the target repository to fix compilation.
-- **PoC compilation failure**: mark the finding's PoC status as `unsupported` with the compiler error. The finding retains source and IR evidence but confidence is downgraded.
-- **PoC runtime failure**: mark PoC status as `failure` with the runtime error. Confidence is downgraded.
-- **PoC requires undefined behavior to demonstrate the issue**: do not construct the PoC. Mark PoC status as `unsupported` with reason `requires-undefined-behavior`. Rely on compiler-artifact evidence instead.
-- **Ambiguous zeroization presence**: report as uncertain with the specific evidence that is ambiguous. Do not assert presence or absence.
+- Missing build context: halt immediately. Report the missing prerequisite (`compile_commands.json` or `Cargo.toml`) and do not proceed.
+- Compilation failure for specific translation units: record the compiler error as a coverage gap. Continue with compilable units. Do not modify the target repository to fix compilation.
+- PoC compilation failure: mark the finding's PoC status as `unsupported` with the compiler error. The finding retains source and IR evidence but confidence is downgraded.
+- PoC runtime failure: mark PoC status as `failure` with the runtime error. Confidence is downgraded.
+- PoC requires undefined behavior to demonstrate the issue: do not construct the PoC. Mark PoC status as `unsupported` with reason `requires-undefined-behavior`. Rely on compiler-artifact evidence instead.
+- Ambiguous zeroization presence: report as uncertain with the specific evidence that is ambiguous. Do not assert presence or absence.
 
 Partial results are valid when each finding carries its evidence class and confidence gate. The target repository is never modified; rollback is deletion of the temporary audit directory.
 

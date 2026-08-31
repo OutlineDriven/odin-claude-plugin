@@ -17,19 +17,19 @@ description: 'Use when thumbnail concepts need real-size, accuracy-first scoring
 
 ## Inputs
 
-- **Bound** (required): platform (YouTube, Twitter/X, LinkedIn, etc.), audience, rubric definition, assets to score, and round cap.
-- **Fixed rubric definition** (required): the accuracy dimensions, their weights, the per-dimension scale, the aggregate threshold, and the tie-breaking rule. Frozen before any scoring.
-- **Platform dimensions** (required): the exact pixel dimensions at which thumbnails are rendered for the target platform (for example, 1280x720 for YouTube). Sourced from the platform's published thumbnail specification, not guessed.
+- Bound (required): platform (YouTube, Twitter/X, LinkedIn, etc.), audience, rubric definition, assets to score, and round cap.
+- Fixed rubric definition (required): the accuracy dimensions, their weights, the per-dimension scale, the aggregate threshold, and the tie-breaking rule. Frozen before any scoring.
+- Platform dimensions (required): the exact pixel dimensions at which thumbnails are rendered for the target platform (for example, 1280x720 for YouTube). Sourced from the platform's published thumbnail specification, not guessed.
 
 ## Fixed rubric
 
-The rubric defines these accuracy dimensions, each scored on a 0 to 10 scale:
-
-- **Claim accuracy** (weight 0.30): the thumbnail text and imagery accurately represent the content. No exaggerated claims, misleading titles, or false implications.
-- **Visual clarity** (weight 0.25): the subject is recognizable at the target platform's display size. Text is legible at thumbnail dimensions, not just at full resolution.
-- **Composition fidelity** (weight 0.20): the layout matches the platform's safe-zone constraints. No critical elements are cropped or obscured by platform UI overlays.
-- **Color and contrast** (weight 0.15): the color palette and contrast are appropriate for the platform and do not mislead about the content tone.
-- **Brand consistency** (weight 0.10): the thumbnail aligns with the creator or product brand identity.
+| Dimension | Weight | Criterion (0 to 10 scale) |
+|---|---|---|
+| Claim accuracy | 0.30 | The thumbnail text and imagery accurately represent the content. No exaggerated claims, misleading titles, or false implications. |
+| Visual clarity | 0.25 | The subject is recognizable at the target platform's display size. Text is legible at thumbnail dimensions, not just at full resolution. |
+| Composition fidelity | 0.20 | The layout matches the platform's safe-zone constraints. No critical elements are cropped or obscured by platform UI overlays. |
+| Color and contrast | 0.15 | The color palette and contrast are appropriate for the platform and do not mislead about the content tone. |
+| Brand consistency | 0.10 | The thumbnail aligns with the creator or product brand identity. |
 
 The aggregate score is the weighted sum. The threshold is 7.0. A thumbnail that scores below 5.0 on claim accuracy cannot pass regardless of aggregate, because misleading claims are disqualifying.
 
@@ -46,10 +46,10 @@ Tie-breaking: if two thumbnails tie on aggregate, the higher claim-accuracy scor
 
 ## Failure and recovery
 
-- **No accurate winner:** no thumbnail clears the threshold or all remaining thumbnails are disqualified on claim accuracy. Terminal `no_accurate_winner`; report the best scores and the disqualification reasons.
-- **Approval blocked:** asset approval is denied or not collected. Terminal `approval_blocked`; report what approval is missing.
-- **Budget exhausted:** the round cap or budget is reached before a winner is selected. Terminal `budget_exhausted`; report the best scores obtained. Budget exhaustion is never success unless it is the predeclared success predicate.
-- **Platform dimensions unavailable:** the platform's published thumbnail specification cannot be found. Stop; do not guess dimensions. Report the missing specification.
+- No accurate winner: no thumbnail clears the threshold or all remaining thumbnails are disqualified on claim accuracy. Terminal `no_accurate_winner`; report the best scores and the disqualification reasons.
+- Approval blocked: asset approval is denied or not collected. Terminal `approval_blocked`; report what approval is missing.
+- Budget exhausted: the round cap or budget is reached before a winner is selected. Terminal `budget_exhausted`; report the best scores obtained. Budget exhaustion is never success unless it is the predeclared success predicate.
+- Platform dimensions unavailable: the platform's published thumbnail specification cannot be found. Stop; do not guess dimensions. Report the missing specification.
 
 ## Output
 

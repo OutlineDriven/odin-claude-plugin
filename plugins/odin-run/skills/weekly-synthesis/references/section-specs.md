@@ -18,32 +18,32 @@ Under 300 words, zero opinions. A 1-2 sentence strategic frame connecting the we
 
 ## Section 2: Customer feedback
 
-- **Critical issues**: bold title, linked issue numbers, comment count, one-line description, open or closed status.
-- **Trending themes**: the specific issues, NPS responses, or email threads forming each theme.
-- **NPS signals**: what promoters and detractors cite, with verbatim quotes and feedback IDs, never the NPS score itself.
-- **Enterprise signals**: customer names and direct quotes; report what was said, never inferred intent.
-- **Churn risks**: only explicit cancellations or competitive defections with cited evidence.
-- **Social sentiment**: sentiment score and mention volume with week-over-week deltas, top positive and negative themes, overlap with other feedback channels, representative mention links, 1-2 standout testimonials.
+- Critical issues: bold title, linked issue numbers, comment count, one-line description, open or closed status.
+- Trending themes: the specific issues, NPS responses, or email threads forming each theme.
+- NPS signals: what promoters and detractors cite, with verbatim quotes and feedback IDs, never the NPS score itself.
+- Enterprise signals: customer names and direct quotes; report what was said, never inferred intent.
+- Churn risks: only explicit cancellations or competitive defections with cited evidence.
+- Social sentiment: sentiment score and mention volume with week-over-week deltas, top positive and negative themes, overlap with other feedback channels, representative mention links, 1-2 standout testimonials.
 - Cross-reference engineering work and competitive moves with section links.
 
 ## Section 3: Engineering investments
 
 What was built and changed only, no individual names, author summaries, or contributor credits.
 
-- **What shipped**: merged features grouped by theme, citing PRs or commit ranges.
-- **What is in progress**: branch names with latest commit dates.
-- **Focus areas**: effort by commit count and area.
-- **Alignment with stated priorities**: map each theme to a planning item from the supplied planning context and state its recorded status; flag engineering effort with no planning item and high-priority items with no visible activity, as facts. Omit when no planning context was supplied and record the omission in section 5.
-- **Overlap with customer feedback**: per top issue, corresponding branch, merged PR, or no visible activity, with linked issue numbers.
-- **Cleanup and tech debt**: notable refactoring, citing PRs.
+- What shipped: merged features grouped by theme, citing PRs or commit ranges.
+- What is in progress: branch names with latest commit dates.
+- Focus areas: effort by commit count and area.
+- Alignment with stated priorities: map each theme to a planning item from the supplied planning context and state its recorded status; flag engineering effort with no planning item and high-priority items with no visible activity, as facts. Omit when no planning context was supplied and record the omission in section 5.
+- Overlap with customer feedback: per top issue, corresponding branch, merged PR, or no visible activity, with linked issue numbers.
+- Cleanup and tech debt: notable refactoring, citing PRs.
 
 ## Section 4: Competitive landscape
 
-- **Key competitor moves**: the 3-5 most notable ships, each with an italicized own-product comparison such as *[Your product] supports X but does not support Y*.
-- **Industry themes**: patterns with counts and named competitors.
+- Key competitor moves: the 3-5 most notable ships, each with an italicized own-product comparison such as *[Your product] supports X but does not support Y*.
+- Industry themes: patterns with counts and named competitors.
 - **Where your product has parity or leads**.
-- **Where competitors have shipped ahead**: feature-to-feature evidence.
-- **Notable gaps**: nothing shipped by any tracked competitor including your product; cite the evidence.
+- Where competitors have shipped ahead: feature-to-feature evidence.
+- Notable gaps: nothing shipped by any tracked competitor including your product; cite the evidence.
 
 ## Section 5: Open questions
 

@@ -111,14 +111,14 @@ A behavior change with no test that fails without it is minor where the repo has
 
 ## Failure and recovery
 
-- **`blocking` finding**: post one PR review via `gh pr review <n> --comment --body-file -` carrying every blocking finding, hold the PR, continue the queue. Do not merge.
+- `blocking` finding: post one PR review via `gh pr review <n> --comment --body-file -` carrying every blocking finding, hold the PR, continue the queue. Do not merge.
 - **`mergeable: "UNKNOWN"`**: re-read once; still unknown is blocking.
-- **Pending check**: `gh pr checks <n> --watch --fail-fast`, then re-read; never merge on a non-`COMPLETED` status.
-- **Conflict**: resolve on the PR head branch, push, re-gate; never bury a resolution in the merge commit.
-- **Push refused by `maintainerCanModify: false`**: deliver the fix as a comment carrying the patch; do not attempt a second push flow.
-- **Race on merge**: `--match-head-commit` refuses if the head moved; re-read `headRefOid` and re-merge.
-- **Gate override**: requires the user to name the gate and the PR; a blanket skip is refused.
-- **Partial result**: the queue is serial and per-PR independent; a held or failed PR does not block later PRs unless a later PR's base is the held PR's head. In that case stop and report the stack stall.
+- Pending check: `gh pr checks <n> --watch --fail-fast`, then re-read; never merge on a non-`COMPLETED` status.
+- Conflict: resolve on the PR head branch, push, re-gate; never bury a resolution in the merge commit.
+- Push refused by `maintainerCanModify: false`: deliver the fix as a comment carrying the patch; do not attempt a second push flow.
+- Race on merge: `--match-head-commit` refuses if the head moved; re-read `headRefOid` and re-merge.
+- Gate override: requires the user to name the gate and the PR; a blanket skip is refused.
+- Partial result: the queue is serial and per-PR independent; a held or failed PR does not block later PRs unless a later PR's base is the held PR's head. In that case stop and report the stack stall.
 - Never swallow an error or pretend the done predicate holds.
 
 ## Output

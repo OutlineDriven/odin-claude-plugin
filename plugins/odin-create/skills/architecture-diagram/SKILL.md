@@ -9,8 +9,8 @@ description: 'Use when the user asks to visualize an architecture as a self-cont
 
 Two render modes, discriminated by input count:
 
-- **Single** (default): one architecture question or scope → schema-validated specification + interactive HTML artifact + evidence receipt.
-- **Delta**: two already-authored architecture snapshots → classify every comparable element as added, removed, changed, or unchanged; render a Before/Delta/After HTML artifact + machine-readable sidecar receipt.
+- Single (default): one architecture question or scope → schema-validated specification + interactive HTML artifact + evidence receipt.
+- Delta: two already-authored architecture snapshots → classify every comparable element as added, removed, changed, or unchanged; render a Before/Delta/After HTML artifact + machine-readable sidecar receipt.
 
 Pick delta when the user supplies both a before and an after snapshot and asks what changed. Otherwise single.
 

@@ -146,20 +146,20 @@ disable-model-invocation: true
    Done when: the workspace is cleaned up (worktree removed or left in place per the rules above), or untracked files are resolved via the user's commit/move/delete choice.
 
 ## Failure and recovery
-- **Tests fail on the tree to integrate:** report the failures and stop. Do not present the menu; a green run only proves the tree it ran on.
-- **Merged-result tests fail:** stop and investigate. Leave the worktree and branch in place; the merge is local and recoverable because nothing has been pushed. Do not clean up to mask the failure.
-- **Worktree removal refused (modified or untracked files):** never `--force` on the agent's own initiative. Show the file list and let the user choose commit, move, or delete; carry out the choice, then remove.
-- **Push rejected (the remote moved):** investigate; force-push only on the user's explicit request.
-- **Discard requested without the typed word `discard`:** do not delete. Re-present the consequence and wait for the exact confirmation.
-- **Partial-result rule:** no option is half-executed. The merge is verified green before any removal; a failed merged result leaves the branch and worktree intact, so there is nothing to roll back locally.
-- **Blocked or non-converged result:** stop with the current tree state and the failing check named. Do not widen scope, invent evidence, or clean up to hide the failure.
+- Tests fail on the tree to integrate: report the failures and stop. Do not present the menu; a green run only proves the tree it ran on.
+- Merged-result tests fail: stop and investigate. Leave the worktree and branch in place; the merge is local and recoverable because nothing has been pushed. Do not clean up to mask the failure.
+- Worktree removal refused (modified or untracked files): never `--force` on the agent's own initiative. Show the file list and let the user choose commit, move, or delete; carry out the choice, then remove.
+- Push rejected (the remote moved): investigate; force-push only on the user's explicit request.
+- Discard requested without the typed word `discard`: do not delete. Re-present the consequence and wait for the exact confirmation.
+- Partial-result rule: no option is half-executed. The merge is verified green before any removal; a failed merged result leaves the branch and worktree intact, so there is nothing to roll back locally.
+- Blocked or non-converged result: stop with the current tree state and the failing check named. Do not widen scope, invent evidence, or clean up to hide the failure.
 
 ## Output
 The chosen integration outcome executed on a green suite, plus a report of the resulting state: the merged branch deleted, the PR URL, or the preserved branch and worktree path. The tree state matches the provenance table:
 
 | Option | Merge | Push | Keep Worktree | Cleanup Branch |
 |---|---|---|---|---|
-| Merge locally | yes | — | — | yes |
-| Create PR | — | yes | yes | — |
-| Keep as-is | — | — | yes | — |
-| Discard (explicit request only) | — | — | — | yes (force) |
+| Merge locally | yes | - | - | yes |
+| Create PR | - | yes | yes | - |
+| Keep as-is | - | - | yes | - |
+| Discard (explicit request only) | - | - | - | yes (force) |

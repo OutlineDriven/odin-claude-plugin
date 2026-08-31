@@ -17,11 +17,11 @@ description: 'Use when a user provides a founder story or result and asks for a 
 ## Inputs
 
 Required:
-- **Founder story or result:** the raw material to convert. The user must supply it in the same conversation. Accepts a story, a metric, a milestone, a lesson, or any combination of these.
+- Founder story or result: the raw material to convert. The user must supply it in the same conversation. Accepts a story, a metric, a milestone, a lesson, or any combination of these.
 
 Optional:
-- **Preferred hook style:** if the user names a framework (e.g., contrast hook, question hook, data hook) or references a past post they liked, honour it.
-- **Target audience:** if the user names a persona (e.g., other founders, engineers, enterprise buyers), tailor the voice and examples accordingly.
+- Preferred hook style: if the user names a framework (e.g., contrast hook, question hook, data hook) or references a past post they liked, honour it.
+- Target audience: if the user names a persona (e.g., other founders, engineers, enterprise buyers), tailor the voice and examples accordingly.
 
 ## Procedure
 

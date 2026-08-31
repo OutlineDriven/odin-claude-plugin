@@ -33,13 +33,13 @@ The artifact to review is required. The user may optionally supply review lenses
 
 ## Failure and recovery
 
-- **Missing or unreadable artifact:** stop and return `blocked`, naming the artifact or access needed; do not substitute a guessed artifact.
-- **Framing cannot be stripped:** if the bare question still carries the session's loaded terms and no neutral restatement exists, report that the framing cannot be separated and stop. Do not fan out a still-loaded question.
-- **Lens collapse:** if fewer than two genuinely distinct failure modes remain after merging duplicates, return `blocked: independent lenses unavailable` and explain why a multi-lens verdict would be false precision.
-- **Insufficient evidence:** use `unclear` for the affected lens and name the missing evidence; do not convert uncertainty into pass or fail.
-- **Read refuses or returns empty:** report the refusal as a divergence lead rather than retrying with re-primed prompts.
-- **Partial result:** return every read obtained with its classification. Never fabricate a read, invent a classification, or upgrade convergence to proof.
-- **Unresolved disagreement:** return the conflicting verdicts and the single resolving question as a valid partial result; do not claim convergence.
+- Missing or unreadable artifact: stop and return `blocked`, naming the artifact or access needed; do not substitute a guessed artifact.
+- Framing cannot be stripped: if the bare question still carries the session's loaded terms and no neutral restatement exists, report that the framing cannot be separated and stop. Do not fan out a still-loaded question.
+- Lens collapse: if fewer than two genuinely distinct failure modes remain after merging duplicates, return `blocked: independent lenses unavailable` and explain why a multi-lens verdict would be false precision.
+- Insufficient evidence: use `unclear` for the affected lens and name the missing evidence; do not convert uncertainty into pass or fail.
+- Read refuses or returns empty: report the refusal as a divergence lead rather than retrying with re-primed prompts.
+- Partial result: return every read obtained with its classification. Never fabricate a read, invent a classification, or upgrade convergence to proof.
+- Unresolved disagreement: return the conflicting verdicts and the single resolving question as a valid partial result; do not claim convergence.
 
 All failures preserve the read-only boundary: there is no mutation to roll back.
 

@@ -16,9 +16,9 @@ description: 'Use when a user wants to design an abstraction boundary that colla
 
 ## Inputs
 
-- **Target problem** (required): the concrete complexity, repetition, or leak the abstraction must address.
-- **Raw form** (required): the current unabstracted surface the user works with directly.
-- **Identified failure modes** (required): the ways the raw form breaks, surprises, or requires expert knowledge.
+- Target problem (required): the concrete complexity, repetition, or leak the abstraction must address.
+- Raw form (required): the current unabstracted surface the user works with directly.
+- Identified failure modes (required): the ways the raw form breaks, surprises, or requires expert knowledge.
 
 ## Procedure
 

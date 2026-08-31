@@ -34,11 +34,11 @@ Optional: an existing server route to extend, UI constraints, the local or remot
 
 ## Failure and recovery
 
-- **Missing or invalid input**: do not mutate. Return `blocked` with the missing webhook contract, target, approved secret source, or host/exposure decision named exactly.
-- **Authorization not established**: do not perform the credential, data-at-rest, host installation, deployment, remote, paid, or irreversible action. Return `blocked` with the unapproved preview item.
-- **Secret exposure**: stop the probe, remove the secret from browser-delivered and browser-visible surfaces, invalidate or rotate it through the human's approved credential process if it may have escaped the local boundary, then repeat the complete probe. Never print the secret in the result.
-- **Implementation, installation, network, or webhook failure**: preserve the original error without credential material. Revert files changed by this execution to their pre-execution contents and undo only host or Tailscale changes made by this execution when that rollback is safe and was included in the preview; otherwise stop and identify the exact manual recovery action.
-- **Partial result**: a rendered UI, a running server, or a successful isolated webhook call is not success without the end-to-end probe and clean browser-side secret inspection. Return `blocked` with completed changes, remaining state, rollback performed, and the failing observation.
+- Missing or invalid input: do not mutate. Return `blocked` with the missing webhook contract, target, approved secret source, or host/exposure decision named exactly.
+- Authorization not established: do not perform the credential, data-at-rest, host installation, deployment, remote, paid, or irreversible action. Return `blocked` with the unapproved preview item.
+- Secret exposure: stop the probe, remove the secret from browser-delivered and browser-visible surfaces, invalidate or rotate it through the human's approved credential process if it may have escaped the local boundary, then repeat the complete probe. Never print the secret in the result.
+- Implementation, installation, network, or webhook failure: preserve the original error without credential material. Revert files changed by this execution to their pre-execution contents and undo only host or Tailscale changes made by this execution when that rollback is safe and was included in the preview; otherwise stop and identify the exact manual recovery action.
+- Partial result: a rendered UI, a running server, or a successful isolated webhook call is not success without the end-to-end probe and clean browser-side secret inspection. Return `blocked` with completed changes, remaining state, rollback performed, and the failing observation.
 
 ## Output
 

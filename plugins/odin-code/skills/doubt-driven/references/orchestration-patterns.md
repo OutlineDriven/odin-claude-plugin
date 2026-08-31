@@ -16,7 +16,7 @@ One role, one perspective, one artifact. The default and the cheapest option.
 user → review role → report → user
 ```
 
-**Use when:** the work is one perspective on one artifact and you can describe it in one sentence.
+Use when: the work is one perspective on one artifact and you can describe it in one sentence.
 
 **Examples:**
 - "Review this PR" → a review role
@@ -35,9 +35,9 @@ A command that wraps one role with the project's standard skills, so the user do
 review command → review role (with standard skills) → report
 ```
 
-**Use when:** the same single-role invocation repeats with the same setup.
+Use when: the same single-role invocation repeats with the same setup.
 
-**Cost:** same as direct invocation. The command is a saved prompt.
+Cost: same as direct invocation. The command is a saved prompt.
 
 **Anti-signal:** if the command's body is mostly "decide which role to call," delete it and let the user call the role directly.
 
@@ -59,7 +59,7 @@ release gate → fan out ┼─→ security-audit role  ─┤→ merge → go/n
 - The merge step is small enough to stay in the orchestrator's context
 - Wall-clock latency matters
 
-**Cost:** N parallel subagent contexts + one merge turn. Higher than direct invocation, but faster wall-clock, and each subagent stays focused on its single perspective.
+Cost: N parallel subagent contexts + one merge turn. Higher than direct invocation, but faster wall-clock, and each subagent stays focused on its single perspective.
 
 **Validation checklist before adopting this pattern:**
 - [ ] Can I run all subagents at the same time without ordering issues?
@@ -79,9 +79,9 @@ The user runs commands in a defined order, carrying context (or commit history) 
 user runs:  spec  →  plan  →  build  →  verify  →  review  →  ship
 ```
 
-**Use when:** the workflow has dependencies (each step needs the previous step's output) and human judgment between steps adds value.
+Use when: the workflow has dependencies (each step needs the previous step's output) and human judgment between steps adds value.
 
-**Cost:** one subagent context per step. Free for the orchestration layer, because there is no orchestrator agent.
+Cost: one subagent context per step. Free for the orchestration layer, because there is no orchestrator agent.
 
 **Why not automate it:** a lifecycle-orchestrator agent would (a) lose nuance between steps by summarizing for hand-off, (b) skip the human checkpoints that catch wrong-direction work early, and (c) double the token cost via paraphrasing turns.
 
@@ -100,7 +100,7 @@ orchestrator → research subagent (reads 50 files) → digest → orchestrator 
 - The investigation result is much smaller than the input it consumes
 - Decision quality benefits from the orchestrator having room to think after
 
-**Examples:** "Find every call site of this deprecated API across the monorepo," "Summarize what these 30 ADRs say about caching."
+Examples: "Find every call site of this deprecated API across the monorepo," "Summarize what these 30 ADRs say about caching."
 
 **Cost:** one isolated subagent context. Worth it any time the alternative is loading hundreds of files into the main context.
 

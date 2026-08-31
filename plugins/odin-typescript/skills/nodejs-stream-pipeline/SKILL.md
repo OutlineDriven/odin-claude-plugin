@@ -50,11 +50,11 @@ description: 'Use when asked to build Node.js stream ETL pipelines for large-fil
 
 ## Failure and recovery
 
-- **Stream read error:** `pipeline()` rejects with the source error. All streams are destroyed; no partial output is written because `pipeline()` destroys the chain on first error. Report the source error.
-- **Transform exception:** `pipeline()` destroys the chain. The destination receives only chunks written before the error. Report the failing record index and error.
-- **Destination write failure:** `pipeline()` rejects and destroys all streams. Report the write error.
-- **Out-of-memory boundary breach:** peak RSS exceeds the configured bound during the benchmark. The cache may be growing without eviction, or the source is not truly streaming. Guard with a max-size check on the cache; reject the run if the cache exceeds the configured bound. If the source is buffered, switch to a streaming source.
-- **Non-convergent enrichment:** a lookup returns different results for the same key across calls (flaky upstream). The cache serves stale data. Log a warning; do not retry indefinitely.
+- Stream read error: `pipeline()` rejects with the source error. All streams are destroyed; no partial output is written because `pipeline()` destroys the chain on first error. Report the source error.
+- Transform exception: `pipeline()` destroys the chain. The destination receives only chunks written before the error. Report the failing record index and error.
+- Destination write failure: `pipeline()` rejects and destroys all streams. Report the write error.
+- Out-of-memory boundary breach: peak RSS exceeds the configured bound during the benchmark. The cache may be growing without eviction, or the source is not truly streaming. Guard with a max-size check on the cache; reject the run if the cache exceeds the configured bound. If the source is buffered, switch to a streaming source.
+- Non-convergent enrichment: a lookup returns different results for the same key across calls (flaky upstream). The cache serves stale data. Log a warning; do not retry indefinitely.
 
 ## Output
 

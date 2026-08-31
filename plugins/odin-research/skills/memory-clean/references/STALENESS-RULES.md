@@ -58,9 +58,9 @@ STALE: feedback_foo.md
 
 ## Project memory staleness
 
-**Default rule:** any `YYYY-MM-DD` date found in a project memory body that is earlier than today is a staleness candidate. This catches commitment phrasing in any wording without relying on a narrow phrase whitelist.
+Default rule: any `YYYY-MM-DD` date found in a project memory body that is earlier than today is a staleness candidate. This catches commitment phrasing in any wording without relying on a narrow phrase whitelist.
 
-**Suppression (historical-anchor phrases):** if a past date is immediately preceded (within 5 tokens) by one of these historical-anchor words, it is a historical evidence date — suppress the flag:
+Suppression (historical-anchor phrases): if a past date is immediately preceded (within 5 tokens) by one of these historical-anchor words, it is a historical evidence date — suppress the flag:
 
 > `as of`, `since`, `starting`, `started`, `decided on`, `decided`, `created`, `effective`, `from`, `began`
 

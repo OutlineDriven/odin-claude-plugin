@@ -16,11 +16,11 @@ description: 'Use when asked to set, list, pause, update, or delete a personal r
 
 ## Inputs
 
-- **Action** (required): the reminder message or the exact command to run.
-- **Schedule** (required): an absolute time, a relative delay, or a recurrence pattern.
+- Action (required): the reminder message or the exact command to run.
+- Schedule (required): an absolute time, a relative delay, or a recurrence pattern.
 - **Delivery method** (required before install, asked when unspecified): notification, terminal output, or background command execution.
-- **Timezone** (optional): defaults to the user's local timezone.
-- **Name** (optional): defaults to a generated kebab-case name.
+- Timezone (optional): defaults to the user's local timezone.
+- Name (optional): defaults to a generated kebab-case name.
 
 ## Procedure
 
@@ -36,11 +36,11 @@ description: 'Use when asked to set, list, pause, update, or delete a personal r
 
 ## Failure and recovery
 
-- **Ambiguous input:** ask the one blocking question and stop. Nothing is scheduled.
-- **Mechanism unavailable or outside authority:** state the limitation and the nearest local alternative. Wait for the user's decision. No install.
-- **Backend install failure:** remove any partially created entry and its metadata record. Report the failure. Never claim the item is scheduled.
-- **Destructive action:** refuse under authority. Do not install. Ask the user to confirm the exact action if they want to proceed, but do not schedule it.
-- **Rollback for every mutation:** delete the OS scheduler entry and its metadata record under `~/.odin/scheduler/`. Any failure before install leaves the system unchanged.
+- Ambiguous input: ask the one blocking question and stop. Nothing is scheduled.
+- Mechanism unavailable or outside authority: state the limitation and the nearest local alternative. Wait for the user's decision. No install.
+- Backend install failure: remove any partially created entry and its metadata record. Report the failure. Never claim the item is scheduled.
+- Destructive action: refuse under authority. Do not install. Ask the user to confirm the exact action if they want to proceed, but do not schedule it.
+- Rollback for every mutation: delete the OS scheduler entry and its metadata record under `~/.odin/scheduler/`. Any failure before install leaves the system unchanged.
 
 ## Output
 

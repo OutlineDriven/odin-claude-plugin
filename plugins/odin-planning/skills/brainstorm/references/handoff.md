@@ -6,8 +6,8 @@ This content is loaded when Phase 4 begins — after the requirements-only plan 
 
 The Phase 4 menu's visible option count varies by state: no plan artifact hides the review option, `OUTPUT_FORMAT=html` also hides the review option (`/doc-review` is markdown-only), unresolved `Resolve Before Planning` hides both `Create the implementation plan` and `Ship it autonomously`, and the ship option is hidden for non-software brainstorms (`execution` other than `code`). Count the visible options and choose the rendering mode:
 
-- **Visible count fits the current platform's option cap:** use the platform's blocking question tool (`AskUserQuestion` in Claude Code — call `ToolSearch` with `select:AskUserQuestion` first if its schema is not loaded; `request_user_input` in Codex; `ask_question` in Antigravity CLI (`agy`); `ask_user` in Pi).
-- **Visible count exceeds the current platform's option cap:** render as a numbered list in chat. Include a hint that free-form input is accepted ("Pick a number or describe what you want.") so the numbered list retains the blocking tool's open-endedness.
+- Visible count fits the current platform's option cap: use the platform's blocking question tool (`AskUserQuestion` in Claude Code — call `ToolSearch` with `select:AskUserQuestion` first if its schema is not loaded; `request_user_input` in Codex; `ask_question` in Antigravity CLI (`agy`); `ask_user` in Pi).
+- Visible count exceeds the current platform's option cap: render as a numbered list in chat. Include a hint that free-form input is accepted ("Pick a number or describe what you want.") so the numbered list retains the blocking tool's open-endedness.
 
 Never silently skip the question.
 
@@ -17,9 +17,9 @@ If `Resolve Before Planning` contains any items:
 - If the user chooses to pause instead, present the handoff as paused or blocked rather than complete.
 - Do not offer `Create the implementation plan` or `Ship it autonomously` while `Resolve Before Planning` remains non-empty.
 
-**Path format:** Use absolute paths for chat-output file references — relative paths are not auto-linked as clickable in most terminals.
+Path format: Use absolute paths for chat-output file references — relative paths are not auto-linked as clickable in most terminals.
 
-**Preamble when no blocking questions remain:**
+Preamble when no blocking questions remain:
 
 ```
 Brainstorm complete.

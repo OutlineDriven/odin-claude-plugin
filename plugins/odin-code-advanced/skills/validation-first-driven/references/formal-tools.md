@@ -11,7 +11,7 @@
 
 ## Practical guidance
 
-- **Quint**: Modern syntax (TypeScript-like), same verification power as TLA+. Preferred for teams new to formal methods.
-- **TLA+**: Standard for distributed systems verification (AWS, Azure). Steep learning curve, but the strongest option for temporal properties.
-- **Alloy 6**: Best for domain modeling and constraint satisfaction. Lightweight: specs can be written in hours, not weeks.
-- **XState v5**: Not formal verification, but provides visual state machine editing + runtime guards. Actor model enables concurrent state management. Integrates with React, Vue, Svelte.
+- Quint: Modern syntax (TypeScript-like), same verification power as TLA+. Preferred for teams new to formal methods.
+- TLA+: Standard for distributed systems verification (AWS, Azure). Steep learning curve, but the strongest option for temporal properties.
+- Alloy 6: Best for domain modeling and constraint satisfaction. Lightweight: specs can be written in hours, not weeks.
+- XState v5: Not formal verification, but provides visual state machine editing + runtime guards. Actor model enables concurrent state management. Integrates with React, Vue, Svelte.

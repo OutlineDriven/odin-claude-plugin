@@ -1,28 +1,28 @@
 # Synthesis Summary
 
-**Synthesis ≠ plan artifact.** The synthesis is NOT a preview, draft, or substitute for the requirements-only plan — it is the scope checkpoint that doc-write consumes as input. The ODIN spec outline itself is written in Phase 3 from the confirmed synthesis. Both stay scope-only — implementation detail is downstream, in later technical planning.
+**Synthesis ≠ plan artifact.** The synthesis is NOT a preview, draft, or substitute for the requirements-only plan: it is the scope checkpoint that doc-write consumes as input. The ODIN spec outline itself is written in Phase 3 from the confirmed synthesis. Both stay scope-only, implementation detail is downstream, in later technical planning.
 
-**Two-stage shape: internal draft, then chat-time scoping synthesis.** Stage 1 is an internal three-bucket draft (Stated / Inferred / Out of scope) the agent uses to think through scope. Stage 2 is the scoping synthesis presented to the user — shaped like what two product collaborators would confirm before writing a PRD. The user only sees Stage 2.
+**Two-stage shape: internal draft, then chat-time scoping synthesis.** Stage 1 is an internal three-bucket draft (Stated / Inferred / Out of scope) the agent uses to think through scope. Stage 2 is the scoping synthesis presented to the user: shaped like what two product collaborators would confirm before writing a PRD. The user only sees Stage 2.
 
 The internal draft still informs the doc body via the routing below; it does not reach the user verbatim.
 
 **Discipline: an internal-draft item may enter the ODIN spec outline only if it is represented in Stage 2.** If an Inferred or Out-of-scope item would change the doc but does not survive the Stage 2 keep tests, it is not yet user-confirmed scope. Either surface it in Stage 2 (as a trade-off, deferred item, or call-out) or leave it out of the doc until a later dialogue confirms it.
 
-This content is loaded when Phase 2.5 fires — after Phase 2 (approaches chosen) and before Phase 3 (write the plan). The synthesis is the user's last opportunity to correct the agent's interpretation before the artifact lands.
+This content is loaded when Phase 2.5 fires, after Phase 2 (approaches chosen) and before Phase 3 (write the plan). The synthesis is the user's last opportunity to correct the agent's interpretation before the artifact lands.
 
 Fires for **all tiers** including Lightweight. Skip Phase 2.5 entirely on the Phase 0.1b non-software (universal-brainstorming) route.
 
-The skill is interactive by design — brainstorming requires dialogue. There is no non-interactive mode; if an automated workflow needs a plan without dialogue, write the artifact from context directly rather than invoking `/brainstorm`.
+The skill is interactive by design, brainstorming requires dialogue. There is no non-interactive mode; if an automated workflow needs a plan without dialogue, write the artifact from context directly rather than invoking `/brainstorm`.
 
 ---
 
 ## Stage 1: internal three-bucket draft
 
-The internal draft is structured in three labeled buckets. Items may appear in two buckets when meaningfully both — flag the inclusion-then-exclusion as Inferred.
+The internal draft is structured in three labeled buckets. Items may appear in two buckets when meaningfully both, flag the inclusion-then-exclusion as Inferred.
 
-- **Stated** — what the user said directly. Items here have explicit user-language anchors.
-- **Inferred** — what the agent assumed to fill gaps. Scope boundaries the user never named, success criteria extrapolated from intent, technical assumptions. The Inferred bucket is the most actionable surface for correction.
-- **Out of scope** — deliberately excluded items. Adjacent work the agent considered but decided not to include.
+- Stated: what the user said directly. Items here have explicit user-language anchors.
+- Inferred: what the agent assumed to fill gaps. Scope boundaries the user never named, success criteria extrapolated from intent, technical assumptions. The Inferred bucket is the most actionable surface for correction.
+- Out of scope: deliberately excluded items. Adjacent work the agent considered but decided not to include.
 
 This draft is internal. Do not paste it verbatim into chat.
 
@@ -30,29 +30,29 @@ This draft is internal. Do not paste it verbatim into chat.
 
 ## Stage 2: the chat-time scoping synthesis
 
-The scoping synthesis is what the user actually sees. It reflects the dialogue's substance back so the user can pattern-match — long enough to serve a multi-turn conversation, short enough to be high-impact only.
+The scoping synthesis is what the user actually sees. It reflects the dialogue's substance back so the user can pattern-match, long enough to serve a multi-turn conversation, short enough to be high-impact only.
 
 The scoping synthesis has up to four named sections, each **render-conditional** on having something to say. Empty sections are omitted.
 
-1. **What we're building** (always present) — 1-3 sentences. The shape that emerged, forward-looking, plain words.
-2. **Key trade-offs** (conditional) — 1-3 bullets, each with a brief why.
-3. **What's not in scope** (conditional) — 1-3 bullets, or fold into a single sentence.
-4. **Call outs** (conditional) — 0-3 bullets. Residual forks: post-dialogue consequences, silent agent inferences, or scope bets the user is seeing for the first time in pre-loaded contexts. **Not questions the agent could have asked during Phase 1.3 but didn't.**
+1. **What we're building** (always present), 1-3 sentences. The shape that emerged, forward-looking, plain words.
+2. **Key trade-offs** (conditional), 1-3 bullets, each with a brief why.
+3. **What's not in scope** (conditional), 1-3 bullets, or fold into a single sentence.
+4. **Call outs** (conditional), 0-3 bullets. Residual forks: post-dialogue consequences, silent agent inferences, or scope bets the user is seeing for the first time in pre-loaded contexts. **Not questions the agent could have asked during Phase 1.3 but didn't.**
 
 Then the confirmation: *"Confirm and I'll write the requirements-only plan next, drawing on our dialogue and this synthesis. Or tell me what to change."*
 
 ### Path A vs Path B: the gate that fires the confirmation question
 
-- **Path A** — no blocking questions fired AND tier is Lightweight: announce-mode. Emit "What we're building" prose only, then proceed to Phase 3 in the same turn.
-- **Path B** — at least one blocking question fired, OR tier is Standard / Deep: full tier-aware scoping synthesis with confirmation gate.
+- Path A: no blocking questions fired AND tier is Lightweight: announce-mode. Emit "What we're building" prose only, then proceed to Phase 3 in the same turn.
+- Path B: at least one blocking question fired, OR tier is Standard / Deep: full tier-aware scoping synthesis with confirmation gate.
 
 **Why the tier guard exists.** Phase 0.2's fast path serves both tight one-liners and richly pre-loaded openings. Without the guard, a pre-loaded Standard/Deep opening would get a 1-sentence checkpoint for what may be 20+ items of scope.
 
 ### Keep tests per section
 
-- **Trade-offs keep test:** would the user be surprised if this acknowledgment were absent?
-- **Deferred keep test:** is a reasonable downstream reader likely to ask "why isn't X here?"
-- **Call-outs keep test (affirmability test):** would the user need to read code to evaluate this? If yes, cut. If no, one of these must be true:
+- Trade-offs keep test: would the user be surprised if this acknowledgment were absent?
+- Deferred keep test: is a reasonable downstream reader likely to ask "why isn't X here?"
+- Call-outs keep test (affirmability test): would the user need to read code to evaluate this? If yes, cut. If no, one of these must be true:
   - Real scope fork
   - Non-obvious scope inclusion
   - Non-obvious scope exclusion
@@ -69,8 +69,8 @@ The cap is heuristic. Typical bounds by tier, counting bullets across Trade-offs
 |---|---|---|
 | Lightweight | 0-1 | 2 |
 | Standard | 2-4 | 5 |
-| Deep — feature | 3-5 | 7 |
-| Deep — product | 4-7 | 9 |
+| Deep, feature | 3-5 | 7 |
+| Deep, product | 4-7 | 9 |
 
 **Above the hard ceiling, re-cut at a higher level of abstraction.** A useful test: read the bullets aloud. If two or more sound like "and also" extensions of the same idea, they belong as one.
 
@@ -130,7 +130,7 @@ Track which scoping synthesis items the user touched per round. The soft-cut blo
 When the soft-cut fires, use the blocking question tool with two options:
 
 - `Proceed and write the requirements-only plan`
-- `Hold off — keep discussing before the doc`
+- `Hold off: keep discussing before the doc`
 
 Fall back to a numbered list in chat only when no blocking tool exists or the call errors.
 
@@ -157,4 +157,4 @@ After confirmation, Phase 3 writes the plan. The internal draft does NOT carry i
 
 Internal-draft items that never surfaced in Stage 2 do not silently become doc sections.
 
-No italic capture-context note. The doc's `### Summary` and `### Problem Frame` serve distinct purposes — see `references/brainstorm-sections.md`.
+No italic capture-context note. The doc's `### Summary` and `### Problem Frame` serve distinct purposes, see `references/brainstorm-sections.md`.

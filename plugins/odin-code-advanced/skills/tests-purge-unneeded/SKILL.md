@@ -16,9 +16,9 @@ description: 'Use when a legacy, slow, or duplicate test suite is being cleaned 
 
 ## Inputs
 
-- **Test suite root** (required): directory or glob identifying the test files to audit.
-- **Language or framework** (optional): if omitted, detect from project config files (package.json, Cargo.toml, pyproject.toml, go.mod, pom.xml, build.gradle).
-- **Scope constraint** (optional): limit audit to specific directories, file patterns, or changed-files-only mode.
+- Test suite root (required): directory or glob identifying the test files to audit.
+- Language or framework (optional): if omitted, detect from project config files (package.json, Cargo.toml, pyproject.toml, go.mod, pom.xml, build.gradle).
+- Scope constraint (optional): limit audit to specific directories, file patterns, or changed-files-only mode.
 
 ## Refusals
 

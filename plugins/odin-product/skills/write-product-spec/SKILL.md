@@ -16,10 +16,10 @@ description: 'Use when a user asks for a product spec with numbered behavioral i
 
 ## Inputs
 
-- **Feature identifier** (required): a short kebab-case name for the feature (e.g. `vertical-tabs-hover-sidecar`). If the user has a ticket or issue number, use that as the identifier. Ask the user for a name if none is provided.
-- **Feature summary** (required): 1–3 sentences describing what the feature does and the desired outcome. Gather via dialogue if not supplied upfront.
-- **Target consumers** (optional): who consumes the surface being designed. Defaults to the end user. For a data model, the consumer is the code that reads and writes it. For an API or library, the consumer is the callers. For a CLI, the consumer is the developer invoking it.
-- **Key behaviors and edge cases** (optional): gather via dialogue. Do not guess; ask.
+- Feature identifier (required): a short kebab-case name for the feature (e.g. `vertical-tabs-hover-sidecar`). If the user has a ticket or issue number, use that as the identifier. Ask the user for a name if none is provided.
+- Feature summary (required): 1–3 sentences describing what the feature does and the desired outcome. Gather via dialogue if not supplied upfront.
+- Target consumers (optional): who consumes the surface being designed. Defaults to the end user. For a data model, the consumer is the code that reads and writes it. For an API or library, the consumer is the callers. For a CLI, the consumer is the developer invoking it.
+- Key behaviors and edge cases (optional): gather via dialogue. Do not guess; ask.
 
 ## Procedure
 
@@ -47,11 +47,7 @@ description: 'Use when a user asks for a product spec with numbered behavioral i
 7. Confirm the file was written and present the Summary and a count of Behavior invariants to the user. Done when: the Summary and Behavior invariant count are presented.
 
 ## Failure and recovery
-- **Missing context**: if the user cannot provide a feature name or summary after clarification, stop. Do not fabricate a spec from assumptions.
-- **Ambiguous behavior**: if a behavior remains unclear after clarification, write it as an explicit `**Open question:** …` inline in the Behavior section rather than guessing.
-- **Write failure**: if the file cannot be written (permissions, disk), report the error and the intended path. Do not silently discard the spec content.
-- **Partial result rule**: if the procedure stops partway, no file is written. Do not save a partial spec.
-- **Rollback**: delete the written `specs/<id>/PRODUCT.md` file (and its directory if empty) to reverse the side effect.
+If the user cannot provide a feature name or summary after clarification, stop; do not fabricate a spec from assumptions. If a behavior remains unclear after clarification, write it as an explicit `**Open question:** …` inline in the Behavior section rather than guessing. If the file cannot be written (permissions, disk), report the error and the intended path; do not silently discard the spec content. If the procedure stops partway, no file is written; do not save a partial spec. To reverse the side effect, delete the written `specs/<id>/PRODUCT.md` file (and its directory if empty).
 
 ## Output
 `specs/<id>/PRODUCT.md` — sections in order: Summary, Behavior (numbered invariants), optional Problem, optional Goals/Non-goals, optional Open questions; no Validation, Success criteria, or Testing sections.

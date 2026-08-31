@@ -6,12 +6,12 @@ Use this table as the classification contract for `sync-docs`. The safe-fix set 
 
 Exclude these paths from doc-drift / zero-coupling checks unless the user explicitly scopes them:
 
-- `versioned_docs/` — snapshot docs; low coupling is expected.
-- `fixtures/` and `tests/fixtures/` — examples used as test data.
-- `generated/`, `dist/`, `build/`, `coverage/`, `vendor/` — produced artifacts.
-- `node_modules/` — dependency content.
-- `CHANGELOG.md` — append-only release history; do not classify as doc-drift. Still inspect it for missing `## [Unreleased]` and safe changelog insertion.
-- `.git/`, `.cache/`, `.turbo/`, `.next/`, `.venv/` — workspace/internal state.
+- `versioned_docs/`: snapshot docs; low coupling is expected.
+- `fixtures/` and `tests/fixtures/`: examples used as test data.
+- `generated/`, `dist/`, `build/`, `coverage/`, `vendor/`: produced artifacts.
+- `node_modules/`: dependency content.
+- `CHANGELOG.md`: append-only release history; do not classify as doc-drift. Still inspect it for missing `## [Unreleased]` and safe changelog insertion.
+- `.git/`, `.cache/`, `.turbo/`, `.next/`, `.venv/`: workspace/internal state.
 
 For related-doc discovery, start with `README.md`, root `*.md`, and `docs/**/*.md`; include ignored paths only on direct user request.
 
@@ -176,12 +176,12 @@ If a fix is not in the safe-fix set, it must have `safeFix: false` and a non-emp
 
 Severity describes user impact; certainty describes evidence quality.
 
-- **HIGH severity**: docs point to removed public API, wrong install version, or changelog lacks required release surface.
-- **MEDIUM severity**: examples/import paths/symbols probably stale but need semantic rewrite.
-- **LOW severity**: weak coupling, missing mention, or maintenance suggestion.
+- HIGH severity: docs point to removed public API, wrong install version, or changelog lacks required release surface.
+- MEDIUM severity: examples/import paths/symbols probably stale but need semantic rewrite.
+- LOW severity: weak coupling, missing mention, or maintenance suggestion.
 
-- **HIGH certainty**: codegraph/LSP/AST/diff proves mismatch and doc line is exact.
-- **MEDIUM certainty**: syntax-aware or manifest evidence exists, but intent remains ambiguous.
-- **LOW certainty**: heuristic coupling only.
+- HIGH certainty: codegraph/LSP/AST/diff proves mismatch and doc line is exact.
+- MEDIUM certainty: syntax-aware or manifest evidence exists, but intent remains ambiguous.
+- LOW certainty: heuristic coupling only.
 
 Never auto-fix based on LOW certainty. Never auto-fix flag-only categories even at HIGH certainty.

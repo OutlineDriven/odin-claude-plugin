@@ -16,9 +16,9 @@ description: 'Use when researching a named library, framework, SDK, API, or serv
 
 ## Refusals
 
-- **Codebase-internal research**: use `scout`. This skill researches external libraries, frameworks, and services.
-- **Assertions derived solely from training data without a `[Speculative]` label**: rejected. Every factual claim must cite at least one primary source URL or doc path.
-- **Returning without writing the artifact**: rejected. Do not return without writing the artifact.
+- Codebase-internal research: use `scout`. This skill researches external libraries, frameworks, and services.
+- Assertions derived solely from training data without a `[Speculative]` label: rejected. Every factual claim must cite at least one primary source URL or doc path.
+- Returning without writing the artifact: rejected. Do not return without writing the artifact.
 
 ## Inputs
 
@@ -51,11 +51,11 @@ When the task needs primary-source reading, restrict the ladder to its strictest
 
 ## Failure and recovery
 
-- **`ladder-exhausted`**: no authoritative source found after Tier 5; surface all attempted tiers and any partial findings.
-- **`invalid-output`**: artifact missing required fields, unparseable, or not written to the target path.
-- **`task-dispatch-failed`**: background subagent could not start or returned no result.
-- **Partial-result rule**: when the background subagent partially succeeds (artifact written but claims sparse), return the artifact path and list the specific gaps.
-- **Blocked/non-converged result**: if no artifact can be written, return `BLOCKED: <named failure class>` with the specific blocking reason. Do not pretend the done predicate holds.
+- `ladder-exhausted`: no authoritative source found after Tier 5; surface all attempted tiers and any partial findings.
+- `invalid-output`: artifact missing required fields, unparseable, or not written to the target path.
+- `task-dispatch-failed`: background subagent could not start or returned no result.
+- Partial-result rule: when the background subagent partially succeeds (artifact written but claims sparse), return the artifact path and list the specific gaps.
+- Blocked/non-converged result: if no artifact can be written, return `BLOCKED: <named failure class>` with the specific blocking reason. Do not pretend the done predicate holds.
 
 ## Output
 

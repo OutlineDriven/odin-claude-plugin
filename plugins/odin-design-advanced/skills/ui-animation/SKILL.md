@@ -16,9 +16,9 @@ description: 'Use when asked to build spring, easing, gesture, and choreographed
 
 ## Inputs
 
-- **Required**: a UI element or component to animate, or an explicit request to build an animation from scratch.
-- **Optional**: reference recording (screen capture or video), target framework or library (CSS, React, SwiftUI, Compose, etc.), existing design tokens or motion constants.
-- **Blocked**: anything requiring network calls, authentication, or non-local execution beyond the project directory.
+- Required: a UI element or component to animate, or an explicit request to build an animation from scratch.
+- Optional: reference recording (screen capture or video), target framework or library (CSS, React, SwiftUI, Compose, etc.), existing design tokens or motion constants.
+- Blocked: anything requiring network calls, authentication, or non-local execution beyond the project directory.
 
 ## Procedure
 
@@ -38,11 +38,11 @@ description: 'Use when asked to build spring, easing, gesture, and choreographed
 9. **Validate the output.** Confirm every animation block has a defined curve, duration, and target. Confirm reduced-motion is handled. If a Python script was run to extract motion, note the script name and what it produced. **Done when:** all blocks pass the validation checks.
 
 ## Failure and recovery
-- **Scope violation**: the request targets a non-local or credential-protected resource. Stop immediately. Return the classification that was blocked and the reason.
-- **Framework unknown**: the target framework is not stated and cannot be inferred from the project. Stop at Procedure step 1. Ask the user to name a framework.
-- **No functional purpose**: the animation serves no feedback, transition, continuity, or guidance purpose. Stop at Procedure step 3. State the rejection reason.
-- **Partial result**: if a Python script fails mid-run, discard any partial output. Report the script name, the failure point, and the last valid output before the failure. Do not claim the animation is complete.
-- **Non-converged**: animation quality cannot be judged algorithmically. Present the output for user review. Mark the skill complete only when the user confirms the animation meets the done predicate.
+- Scope violation: the request targets a non-local or credential-protected resource. Stop immediately. Return the classification that was blocked and the reason.
+- Framework unknown: the target framework is not stated and cannot be inferred from the project. Stop at Procedure step 1. Ask the user to name a framework.
+- No functional purpose: the animation serves no feedback, transition, continuity, or guidance purpose. Stop at Procedure step 3. State the rejection reason.
+- Partial result: if a Python script fails mid-run, discard any partial output. Report the script name, the failure point, and the last valid output before the failure. Do not claim the animation is complete.
+- Non-converged: animation quality cannot be judged algorithmically. Present the output for user review. Mark the skill complete only when the user confirms the animation meets the done predicate.
 
 ## Output
 A code artifact with named animations/curves/spring parameters per element, duration and easing per transition, a reduced-motion substitution flag if applied, and fitted parameters plus script name if curve fitting was performed.

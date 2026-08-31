@@ -17,8 +17,8 @@ disable-model-invocation: true
 
 ## Inputs
 
-- **Reply text** (required): the exact reply text to post. Do not synthesize or extend beyond what the user supplied.
-- **Thread identifier** (required): a thread permalink, or a channel ID and thread timestamp (`channel_id`, `thread_ts`).
+- Reply text (required): the exact reply text to post. Do not synthesize or extend beyond what the user supplied.
+- Thread identifier (required): a thread permalink, or a channel ID and thread timestamp (`channel_id`, `thread_ts`).
 
 Credentials (`SLACK_BOT_TOKEN`, channel configuration) are ambient operator-managed capabilities. Do not ask the user to supply, paste, reveal, or log a token or secret.
 

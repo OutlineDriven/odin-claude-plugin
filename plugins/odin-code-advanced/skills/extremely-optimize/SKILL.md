@@ -38,7 +38,7 @@ description: 'Use when asked to run a performance campaign against a measured fl
 
 8. **Grill the cold paths.** Cold code is off the clock; buying speed with complexity is a loss. Hunt waste that costs something other than time on this workload: complexity that bites at a larger N, allocations and retained memory, redundant IO and repeated round-trips, startup and build cost, artifact size and dependency weight. Every unit on the cold list takes one verdict: **fixed** (naming the cost that fell), **at floor**, or **left** (with the reason). A cold fix that adds a branch, a cache, or a configuration knob to buy microseconds is rejected. Done when: every cold unit has a verdict (fixed, at-floor, or left with reason).
 
-Work one target at a time. Half-rebuilt is the forbidden state: finish a target or revert it. Scope equals the ask — never escalate a named target into a repo-wide campaign.
+Work one target at a time. Half-rebuilt is the forbidden state: finish a target or revert it. Scope equals the ask; never escalate a named target into a repo-wide campaign.
 
 ## Failure and recovery
 | Code | Class and recovery |
@@ -47,7 +47,7 @@ Work one target at a time. Half-rebuilt is the forbidden state: finish a target 
 | 11 | Baseline too noisy — stddev exceeded 20 % of median and could not be cleared. Blocked: clear the noise or stop. |
 | 12 | No headroom — every hot unit already sits within 2× of its floor. Terminal: nothing to rebuild. |
 | 13 | No win — the replacement failed to beat the baseline by 1.05×. Recovery: revert the replacement, keep the original. |
-| 14 | Divergence unclassified — old behavior neither folded in as essential nor cut as residue. Blocked: complete the step 5 walk. |
+| 14 | Divergence unclassified: old behavior neither folded in as essential nor cut as residue. Blocked: complete the step 5 walk. |
 | 15 | Boundary cut without an answer — a published surface was destroyed on silence or after a no. Recovery: restore it and settle the question. |
 | 16 | Campaign stalled mid-target — a target is half old, half new. Recovery: finish it or revert it; never ship it. |
 | 17 | Scope exceeded — a repo-wide sweep ran off a named target. Recovery: revert the untargeted work. |

@@ -16,10 +16,10 @@ description: 'Use when two refs or source snapshots need security-relevant struc
 
 ## Inputs
 
-- **before_ref** (required): git ref, commit, tag, or directory path for the earlier snapshot.
-- **after_ref** (required): git ref, commit, tag, or directory path for the later snapshot.
-- **language** (optional, default `auto`): the language set to parse. Override with a single name (`rust`, `solidity`) or comma-separated list (`python,rust`) when `auto` fails or misselects.
-- **trailmark** (prerequisite tool): must be installed. If `uv run trailmark` fails, run `uv tool install trailmark`. Do not fall back to manual source reading as a substitute.
+- before_ref (required): git ref, commit, tag, or directory path for the earlier snapshot.
+- after_ref (required): git ref, commit, tag, or directory path for the later snapshot.
+- language (optional, default `auto`): the language set to parse. Override with a single name (`rust`, `solidity`) or comma-separated list (`python,rust`) when `auto` fails or misselects.
+- trailmark (prerequisite tool): must be installed. If `uv run trailmark` fails, run `uv tool install trailmark`. Do not fall back to manual source reading as a substitute.
 
 ## Procedure
 
@@ -53,13 +53,13 @@ description: 'Use when two refs or source snapshots need security-relevant struc
 10. **Clean up worktrees.** After the report is written, remove temporary worktrees: `git worktree remove "$BEFORE_DIR"` and `git worktree remove "$AFTER_DIR"`. Account for their removal in the report methodology section. Done when: the stated action, evidence, and guard all hold.
 
 ## Failure and recovery
-- **trailmark not installed:** Run `uv tool install trailmark`. If installation fails, report the error. Do not fall back to manual source reading or text-diff comparison as a substitute — manual comparison misses what graph analysis catches.
-- **Empty native diff:** An all-empty `nodes`, `edges`, and `entrypoints` diff means either nothing changed structurally or both snapshots parsed to near-empty graphs. Decide which using the Phase 3 summaries: if either snapshot's node count is zero or implausibly small, the parse missed the code — name the language set explicitly and re-run. Healthy node counts on both snapshots plus an empty diff is genuine structural stability.
-- **Language misselection:** `trailmark diff` defaults `--language` to `python` and exits 0 with empty arrays on any other target. Always pass `--language` explicitly. `auto` detects and merges every supported language found; it fails loudly with `No supported languages detected under <path>` when a snapshot holds nothing parseable, which is the desired outcome. Confirm the language first; only then can an empty diff count as evidence that nothing changed.
-- **Diff command fails or writes empty JSON:** Stop and report the error. Do not continue to report generation.
-- **Pre-analysis skipped:** Without pre-analysis, taint changes, blast radius growth, and privilege boundary shifts are invisible. Always run `engine.preanalysis()` on both snapshots.
-- **Partial-result rule:** If one snapshot builds but the other fails, report which failed and why. Do not generate a report from a single snapshot — single-snapshot analysis cannot detect evolution.
-- **Rollback:** All writes are to temporary directories and the report file. Worktrees are removed in step 10. If any step fails before cleanup, remove worktrees manually and report the incomplete state.
+- trailmark not installed: Run `uv tool install trailmark`. If installation fails, report the error. Do not fall back to manual source reading or text-diff comparison as a substitute — manual comparison misses what graph analysis catches.
+- Empty native diff: An all-empty `nodes`, `edges`, and `entrypoints` diff means either nothing changed structurally or both snapshots parsed to near-empty graphs. Decide which using the Phase 3 summaries: if either snapshot's node count is zero or implausibly small, the parse missed the code — name the language set explicitly and re-run. Healthy node counts on both snapshots plus an empty diff is genuine structural stability.
+- Language misselection: `trailmark diff` defaults `--language` to `python` and exits 0 with empty arrays on any other target. Always pass `--language` explicitly. `auto` detects and merges every supported language found; it fails loudly with `No supported languages detected under <path>` when a snapshot holds nothing parseable, which is the desired outcome. Confirm the language first; only then can an empty diff count as evidence that nothing changed.
+- Diff command fails or writes empty JSON: Stop and report the error. Do not continue to report generation.
+- Pre-analysis skipped: Without pre-analysis, taint changes, blast radius growth, and privilege boundary shifts are invisible. Always run `engine.preanalysis()` on both snapshots.
+- Partial-result rule: If one snapshot builds but the other fails, report which failed and why. Do not generate a report from a single snapshot — single-snapshot analysis cannot detect evolution.
+- Rollback: All writes are to temporary directories and the report file. Worktrees are removed in step 10. If any step fails before cleanup, remove worktrees manually and report the incomplete state.
 
 ## Output
 A `GRAPH_EVOLUTION_{project}_{before_ref}_{after_ref}.md` report containing: a summary metric table; critical structural changes with severity, evidence, and recommendations; attack surface evolution; complexity evolution; taint propagation changes; blast radius shifts; privilege boundary changes; added and removed nodes and edges; and a methodology section with honest limitations. Temporary worktrees are removed and their removal is accounted for in the report.

@@ -33,11 +33,11 @@ description: 'Use when asked to migrate a JavaScript or TypeScript project from 
 
 ## Failure and recovery
 
-- **Migration command rejects the legacy config:** stop before deletion. Report the config path and diagnostic; translate only rules whose behavior is documented by the installed tools.
-- **Unsupported rule protects an observable invariant:** keep the migration blocked until Biome or another current project-native check covers that invariant. Do not retain ESLint as a silent second linter.
-- **Finding count changes:** compare finding identities and covered files. Counts alone neither prove nor disprove coverage.
-- **Downstream check fails:** restore the pre-migration files and lockfile, report the first failing command, and keep the recorded coverage map.
-- **Mixed configuration remains:** the done predicate fails. Remove the superseded path only after its patterns and rules have a disposition.
+- Migration command rejects the legacy config: stop before deletion. Report the config path and diagnostic; translate only rules whose behavior is documented by the installed tools.
+- Unsupported rule protects an observable invariant: keep the migration blocked until Biome or another current project-native check covers that invariant. Do not retain ESLint as a silent second linter.
+- Finding count changes: compare finding identities and covered files. Counts alone neither prove nor disprove coverage.
+- Downstream check fails: restore the pre-migration files and lockfile, report the first failing command, and keep the recorded coverage map.
+- Mixed configuration remains: the done predicate fails. Remove the superseded path only after its patterns and rules have a disposition.
 
 ## Output
 One `biome.json` or `biome.jsonc`, updated package scripts/hooks/CI/dependencies/lockfile, a coverage map for legacy rules and file scopes with every unsupported invariant, and a terminal classification of `migrated` or `blocked` with exact command evidence.

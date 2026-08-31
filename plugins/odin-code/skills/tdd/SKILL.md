@@ -18,9 +18,9 @@ Classic agent TDD rots in a known way: the red test is written as a polite speci
 
 ## Inputs
 
-- **Target and requirement** (required): the behavior to build or fix, and the public seam where it is observed. A seam is confirmed with the user before any test exists at it.
-- **Contract source** (required): spec, caller evidence, or known-good literals — the independent truth attacks are derived from. Never the implementation's own logic.
-- **Test framework** (optional if discoverable): the project's runner. Stop and report if absent and not discoverable; never install one unasked.
+- Target and requirement (required): the behavior to build or fix, and the public seam where it is observed. A seam is confirmed with the user before any test exists at it.
+- Contract source (required): spec, caller evidence, or known-good literals — the independent truth attacks are derived from. Never the implementation's own logic.
+- Test framework (optional if discoverable): the project's runner. Stop and report if absent and not discoverable; never install one unasked.
 
 ## Refusals
 

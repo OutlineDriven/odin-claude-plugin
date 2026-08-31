@@ -17,7 +17,7 @@ description: 'Use when a scheduled or watcher tick requests a repository-health 
 ## Refusals
 
 - **Unapproved source, label, merge, or close mutation**: rejected. No mutation without explicit approval.
-- **Numeric score as a reason to act**: rejected. Any score is informational only and must not be cited as a reason to act.
+- Numeric score as a reason to act: rejected. Any score is informational only and must not be cited as a reason to act.
 - **Scope widening into signal classes not requested or into mutation territory**: rejected. Stop immediately and report the boundary violation.
 
 ## Inputs
@@ -41,10 +41,10 @@ description: 'Use when a scheduled or watcher tick requests a repository-health 
 
 ## Failure and recovery
 
-- **Access failure**: repository or API unreachable. Report the failure class and stop. No partial report is emitted.
-- **Partial enumeration**: one signal class fails mid-inspection (rate limit, transient error). Classify the remaining signals, note the failed class in the report header with the error, and proceed. The report is valid for the inspected classes only.
-- **Run-log write failure**: the report is still valid and returned; the run-log append is skipped with a note in the output.
-- **Scope widening detected**: stop immediately and report the boundary violation. No partial mutations are committed.
+- Access failure: repository or API unreachable. Report the failure class and stop. No partial report is emitted.
+- Partial enumeration: one signal class fails mid-inspection (rate limit, transient error). Classify the remaining signals, note the failed class in the report header with the error, and proceed. The report is valid for the inspected classes only.
+- Run-log write failure: the report is still valid and returned; the run-log append is skipped with a note in the output.
+- Scope widening detected: stop immediately and report the boundary violation. No partial mutations are committed.
 
 ## Output
 

@@ -33,9 +33,9 @@ The question or subject to analyze from the impact seat (required). Optional: th
 
 ## Failure and recovery
 
-- **Blended answer**: if the draft folds in another perspective, re-separate and re-emit from the impact seat only.
-- **No observable impact**: if nothing actually moves, state that explicitly rather than inventing impact.
-- **Blocked**: if the subject is too underspecified to identify movers, return a blocked result naming the missing input; do not widen scope or guess.
+- Blended answer: if the draft folds in another perspective, re-separate and re-emit from the impact seat only.
+- No observable impact: if nothing actually moves, state that explicitly rather than inventing impact.
+- Blocked: if the subject is too underspecified to identify movers, return a blocked result naming the missing input; do not widen scope or guess.
 
 ## Output
 

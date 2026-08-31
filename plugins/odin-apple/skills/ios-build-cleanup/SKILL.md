@@ -31,10 +31,10 @@ disable-model-invocation: true
 7. Verify each target no longer exists on disk.
 
 ## Failure and recovery
-- **Target not found**: If a DerivedData or build-artifact path does not exist, skip it and report it as already-clean. Do not treat absence as an error.
-- **Permission denied**: If deletion fails for a target, stop, report the failing path and error, and leave all remaining targets untouched. Do not retry with elevated privileges.
-- **Partial deletion**: If some targets were deleted and a later target fails, report which targets were deleted and which remain. The clean build state is not achieved; the user must resolve the blocker and re-run.
-- **No human confirmation**: If the user does not confirm, delete nothing and report that the operation was cancelled.
+- Target not found: If a DerivedData or build-artifact path does not exist, skip it and report it as already-clean. Do not treat absence as an error.
+- Permission denied: If deletion fails for a target, stop, report the failing path and error, and leave all remaining targets untouched. Do not retry with elevated privileges.
+- Partial deletion: If some targets were deleted and a later target fails, report which targets were deleted and which remain. The clean build state is not achieved; the user must resolve the blocker and re-run.
+- No human confirmation: If the user does not confirm, delete nothing and report that the operation was cancelled.
 
 ## Output
 A report listing every target deleted, every target skipped as already-clean, and any target that failed deletion. The terminal classification is `clean` when all targets are removed or were already absent, or `blocked` when any target could not be deleted.

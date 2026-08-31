@@ -36,10 +36,10 @@ Supply the evaluation or benchmark design and the available artifacts that estab
 5. If no pattern fires after all applicable tests, return a pass that says no leak was found and separately lists unknowns that prevented any pattern from being tested; do not convert missing evidence into either a finding or proof of independence. Done when: a terminal classification of leak found, no leak found, or blocked is returned.
 
 ## Failure and recovery
-- **Missing design evidence:** if roles, data lineage, scoring lineage, or label provenance needed for a test are absent, mark that test `blocked` and name the exact missing evidence. Return supported findings as partial results, but do not claim the audit passed.
-- **Conflicting evidence:** identify the conflict and mark affected tests `blocked`; do not choose an account without evidence.
-- **Out-of-scope access or mutation required:** stop at the boundary and state what read-only evidence would resolve the test. Make no changes, so rollback is unnecessary.
-- **Non-converged classification:** if the available evidence supports incompatible leakage classifications that cannot be resolved, return `non-converged` for the affected pattern with both evidence chains. Never suppress the conflict or claim the done predicate.
+- Missing design evidence: if roles, data lineage, scoring lineage, or label provenance needed for a test are absent, mark that test `blocked` and name the exact missing evidence. Return supported findings as partial results, but do not claim the audit passed.
+- Conflicting evidence: identify the conflict and mark affected tests `blocked`; do not choose an account without evidence.
+- Out-of-scope access or mutation required: stop at the boundary and state what read-only evidence would resolve the test. Make no changes, so rollback is unnecessary.
+- Non-converged classification: if the available evidence supports incompatible leakage classifications that cannot be resolved, return `non-converged` for the affected pattern with both evidence chains. Never suppress the conflict or claim the done predicate.
 
 ## Output
 A chat report with the audited scope and component map, verified independent ground-truth entry points, detected patterns with evidence and fix, blocked or non-converged tests with required evidence, and a terminal classification of `leak found`, `no leak found`, or `blocked`.

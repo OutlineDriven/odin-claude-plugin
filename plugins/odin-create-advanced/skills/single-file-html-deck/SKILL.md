@@ -16,11 +16,11 @@ description: 'Use when an explicit request asks to create a Sentry presentation,
 
 ## Inputs
 
-- **Topic or subject** (required): the presentation's central theme or argument.
-- **Audience** (required): who will view the deck; drives tone, depth, and vocabulary.
-- **Slide count** (optional): target number of slides. Defaults to 8–12.
-- **Source material** (optional): existing notes, data, or documents to incorporate.
-- **Chart data** (optional): real datasets to visualize. If omitted, omit charts rather than fabricate placeholder data.
+- Topic or subject (required): the presentation's central theme or argument.
+- Audience (required): who will view the deck; drives tone, depth, and vocabulary.
+- Slide count (optional): target number of slides. Defaults to 8–12.
+- Source material (optional): existing notes, data, or documents to incorporate.
+- Chart data (optional): real datasets to visualize. If omitted, omit charts rather than fabricate placeholder data.
 
 ## Procedure
 

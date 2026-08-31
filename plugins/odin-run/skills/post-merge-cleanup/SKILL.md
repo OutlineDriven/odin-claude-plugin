@@ -16,10 +16,10 @@ description: 'Use when a landed merge, release, or completed change needs its cl
 
 ## Inputs
 
-- **Merge reference** (required): merge commit SHA, merged PR number, or release tag that just landed.
-- **Working branch** (optional): a named branch to stage proposed fixes. Defaults to `cleanup/<merge-sha>`.
-- **Size budget** (optional): maximum files and lines changed. Defaults to 5 files and 100 lines total. A single unified budget applies to every candidate.
-- **State file** (optional): a `post-merge-state.md` tracking completed, pending, and deferred items. Created on first run if absent, updated on subsequent runs.
+- Merge reference (required): merge commit SHA, merged PR number, or release tag that just landed.
+- Working branch (optional): a named branch to stage proposed fixes. Defaults to `cleanup/<merge-sha>`.
+- Size budget (optional): maximum files and lines changed. Defaults to 5 files and 100 lines total. A single unified budget applies to every candidate.
+- State file (optional): a `post-merge-state.md` tracking completed, pending, and deferred items. Created on first run if absent, updated on subsequent runs.
 
 ## Procedure
 

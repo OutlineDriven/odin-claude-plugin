@@ -16,9 +16,9 @@ description: 'Use when asked to start feature work that needs isolation, or befo
 
 ## Inputs
 
-- **Branch name** (required): the feature branch to create or attach.
-- **Base branch** (optional): defaults to the current HEAD branch.
-- **Setup command** (optional): project-specific setup to run inside the worktree (e.g. `pnpm install --frozen-lockfile`, `make setup`). If omitted, no setup step runs.
+- Branch name (required): the feature branch to create or attach.
+- Base branch (optional): defaults to the current HEAD branch.
+- Setup command (optional): project-specific setup to run inside the worktree (e.g. `pnpm install --frozen-lockfile`, `make setup`). If omitted, no setup step runs.
 
 ## Procedure
 
@@ -48,6 +48,6 @@ description: 'Use when asked to start feature work that needs isolation, or befo
 Partial results are never silently accepted. Each failure class has a specific stop-or-continue rule. No step is skipped without a reported reason.
 
 ## Output
-- **On success**: the isolated workspace absolute path, the branch name, and confirmation that the baseline test suite is green.
-- **On in-place fallback**: the current working directory, the branch name, the fallback reason, and test suite status.
-- **On test failure**: the workspace path, the branch name, and the test failure summary with a proceed-or-investigate question.
+- On success: the isolated workspace absolute path, the branch name, and confirmation that the baseline test suite is green.
+- On in-place fallback: the current working directory, the branch name, the fallback reason, and test suite status.
+- On test failure: the workspace path, the branch name, and the test failure summary with a proceed-or-investigate question.

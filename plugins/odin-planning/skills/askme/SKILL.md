@@ -52,12 +52,12 @@ description: 'Explore intent with Verbalized Sampling before planning when the t
 11. **Stop.** Terminate when every clarifying question is answered or discharged and intent is confirmed. Do not proceed on non-trivial changes without visible VS (exhaustive) or completed fork resolution (adversarial).
 
 ## Failure and recovery
-- **Unresolved fork / blocking unknown (adversarial):** stop; report the blocking unknown and the unresolved fork. Do not assume an answer or descend into children.
-- **No clear leader after broadened sampling (exhaustive):** broaden sampling further or surface the decision point with concrete options and trade-offs. Do not silently pick.
-- **User refuses to answer or signals non-convergence:** record the discharged questions and the open ambiguity. Do not pretend intent is confirmed.
-- **Ask-user tool unavailable:** fall back to sequential single-question chat prompts in dependency order; if no question tool exists at all, emit the question set as chat text and await replies.
-- **Partial-result rule:** a partially answered batch is not done; re-fire only the unanswered axes, not the whole batch.
-- **Non-mutation rule:** nothing is written to disk, VCS, credentials, or remote state at any point. Recovery is re-asking, never rollback. The blocked/non-converged result is an explicit list of open ambiguities and discharged questions, not a fabricated confirmation.
+- Unresolved fork / blocking unknown (adversarial): stop; report the blocking unknown and the unresolved fork. Do not assume an answer or descend into children.
+- No clear leader after broadened sampling (exhaustive): broaden sampling further or surface the decision point with concrete options and trade-offs. Do not silently pick.
+- User refuses to answer or signals non-convergence: record the discharged questions and the open ambiguity. Do not pretend intent is confirmed.
+- Ask-user tool unavailable: fall back to sequential single-question chat prompts in dependency order; if no question tool exists at all, emit the question set as chat text and await replies.
+- Partial-result rule: a partially answered batch is not done; re-fire only the unanswered axes, not the whole batch.
+- Non-mutation rule: nothing is written to disk, VCS, credentials, or remote state at any point. Recovery is re-asking, never rollback. The blocked/non-converged result is an explicit list of open ambiguities and discharged questions, not a fabricated confirmation.
 
 ## Output
 Chat output only: the VS block (exhaustive, or once at the start of adversarial), the batched question sets, and a terminal intent summary stating the consolidated direction, assumptions, and discharged questions. No file, persisted artifact, or state transition is produced.

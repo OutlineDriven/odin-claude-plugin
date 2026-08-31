@@ -34,10 +34,10 @@ The question, design, or artifact to analyze. The lens is fixed to the innovatio
 
 ## Failure and recovery
 
-- **Missing subject**: ask for the subject and stop; emit no analysis.
-- **Lens drift**: if the answer begins to reason from another seat, discard the drifted passage and re-anchor on original technique, talent, or culture.
-- **Unsubstantiated claim**: if a point cannot be grounded in the innovation seat, omit it; do not substitute evidence from another lens.
-- **Non-mutation**: no mutation occurs on any failure; the only output is the chat analysis or a request for the missing subject.
+- Missing subject: ask for the subject and stop; emit no analysis.
+- Lens drift: if the answer begins to reason from another seat, discard the drifted passage and re-anchor on original technique, talent, or culture.
+- Unsubstantiated claim: if a point cannot be grounded in the innovation seat, omit it; do not substitute evidence from another lens.
+- Non-mutation: no mutation occurs on any failure; the only output is the chat analysis or a request for the missing subject.
 
 ## Output
 

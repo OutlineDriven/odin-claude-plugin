@@ -16,11 +16,11 @@ description: 'Use when a user starts a new work session and asks to split human 
 
 ## Inputs
 
-- **Approved brief** (required): human-authored statement of work goal and constraints. State what is optional and what must be supplied.
-- **Session id** (required): caller-supplied, filesystem-safe, unique under `run/`. Reject if missing, not filesystem-safe, or collides with an existing directory.
-- **Spawn command or agent target** (required): the command or agent to launch, what it may read, what outputs it must produce, and what it must not change.
-- **Review criteria** (required): the standard the work is checked against.
-- **Context** (optional): current directory, project layout, open issues, or prior session artifacts.
+- Approved brief (required): human-authored statement of work goal and constraints. State what is optional and what must be supplied.
+- Session id (required): caller-supplied, filesystem-safe, unique under `run/`. Reject if missing, not filesystem-safe, or collides with an existing directory.
+- Spawn command or agent target (required): the command or agent to launch, what it may read, what outputs it must produce, and what it must not change.
+- Review criteria (required): the standard the work is checked against.
+- Context (optional): current directory, project layout, open issues, or prior session artifacts.
 
 ## Procedure
 
@@ -33,12 +33,12 @@ description: 'Use when a user starts a new work session and asks to split human 
 
 ## Failure and recovery
 
-- **Missing or colliding session id:** stop. Ask the user for a filesystem-safe, unique session id before proceeding.
-- **Unapproved brief:** stop. Ask the user for a concrete work goal. Do not invent scope.
-- **Spawn failure:** attempt one retry with a corrected spawn definition. Record the failure and retry count in `spawn.md`. Stop if the second attempt fails.
-- **Review incomplete:** present the divergence to the user. Do not proceed until the user resolves or approves.
-- **Human gate withheld:** the session is not done. Record the last state and stop.
-- **Partial-result rule:** if any phase halts midstream, all durable artifacts written up to that point remain. No automatic rollback.
+- Missing or colliding session id: stop. Ask the user for a filesystem-safe, unique session id before proceeding.
+- Unapproved brief: stop. Ask the user for a concrete work goal. Do not invent scope.
+- Spawn failure: attempt one retry with a corrected spawn definition. Record the failure and retry count in `spawn.md`. Stop if the second attempt fails.
+- Review incomplete: present the divergence to the user. Do not proceed until the user resolves or approves.
+- Human gate withheld: the session is not done. Record the last state and stop.
+- Partial-result rule: if any phase halts midstream, all durable artifacts written up to that point remain. No automatic rollback.
 
 ## Output
 

@@ -18,19 +18,19 @@ description: 'Use when a user asks to write or announce a press release for any 
 
 Required (ask for any missing before proceeding):
 
-- **The news facts**: what happened, what changed, why now.
-- **Release type**: product launch, funding, partnership, crisis, M&A, earnings, event, award, executive hire, open source milestone, or other.
-- **Target region/market**: determines style guide, dateline, send timing, and cultural conventions.
-- **Target media format**: print, digital/wire, broadcast, social, or all.
-- **Company info**: name, what it does, HQ, key figures.
+- The news facts: what happened, what changed, why now.
+- Release type: product launch, funding, partnership, crisis, M&A, earnings, event, award, executive hire, open source milestone, or other.
+- Target region/market: determines style guide, dateline, send timing, and cultural conventions.
+- Target media format: print, digital/wire, broadcast, social, or all.
+- Company info: name, what it does, HQ, key figures.
 
 Ask if available but proceed without:
 
-- **Target audience**: which journalists or outlets, trade press or general.
-- **Spokesperson(s)**: name, title, quote message.
-- **Supporting data**: numbers, statistics, proof points.
-- **Embargo**: date, time, timezone if applicable.
-- **Language**: target language; defaults to English.
+- Target audience: which journalists or outlets, trade press or general.
+- Spokesperson(s): name, title, quote message.
+- Supporting data: numbers, statistics, proof points.
+- Embargo: date, time, timezone if applicable.
+- Language: target language; defaults to English.
 - **Boilerplate, press contact, multimedia assets, distribution plan**: supply if available.
 
 ## Procedure
@@ -72,16 +72,16 @@ Lead constraint: the lead paragraph must answer who, what, when, where, why, and
 
 Type-specific mandatory elements:
 
-- **Product launch**: product name, one-sentence value prop, specific pricing/availability (date, regions, channels), problem it solves (quantified), 3-5 key differentiators, customer or beta quote if available.
-- **Funding**: amount, round type, lead investor, use of funds, all in first paragraph. Investor quote, total funding to date, key metrics (ARR, users, growth), specific hiring or expansion targets.
-- **Partnership**: both partners in headline, what it delivers to end users, scope (exclusive/geographic/time-limited), double dateline, quotes from both organizations. Verify mutual approval with user.
-- **Crisis**: care-control-commitment framework. Lead with empathy: first sentence after dateline must express concern for those affected. Then factual description, then actions taken, then next steps with timeline. Never speculate or assign blame. Never use "no comment." Include dedicated media contact.
-- **Executive hire**: name, title, start date, reporting line, 2-3 most relevant prior roles, strategic mandate, CEO quote, new executive quote.
-- **M&A**: acquiring and target company, transaction value (or "undisclosed" with deal structure context), strategic rationale, impact on customers/employees/products, expected closing timeline.
-- **Earnings**: revenue, net income/loss, EPS (current + YoY), GAAP first with non-GAAP reconciliation, guidance/outlook, key business metrics. Timing: before market open or after close, never during trading hours.
-- **Event**: event name, date(s), location (physical address or virtual platform), registration/ticket info with link and pricing, key speakers, target audience, agenda highlights.
-- **Award**: award name, granting organization, criteria/category, why significant (selectivity/prestige). Only newsworthy if from a credible third party.
-- **Open source milestone**: project name, version, what changed, adoption metrics (stars, downloads, contributors, dependents), key technical improvements with benchmarks, community acknowledgment by name/handle, link to changelog and migration guide. Zero marketing language.
+- Product launch: product name, one-sentence value prop, specific pricing/availability (date, regions, channels), problem it solves (quantified), 3-5 key differentiators, customer or beta quote if available.
+- Funding: amount, round type, lead investor, use of funds, all in first paragraph. Investor quote, total funding to date, key metrics (ARR, users, growth), specific hiring or expansion targets.
+- Partnership: both partners in headline, what it delivers to end users, scope (exclusive/geographic/time-limited), double dateline, quotes from both organizations. Verify mutual approval with user.
+- Crisis: care-control-commitment framework. Lead with empathy: first sentence after dateline must express concern for those affected. Then factual description, then actions taken, then next steps with timeline. Never speculate or assign blame. Never use "no comment." Include dedicated media contact.
+- Executive hire: name, title, start date, reporting line, 2-3 most relevant prior roles, strategic mandate, CEO quote, new executive quote.
+- M&A: acquiring and target company, transaction value (or "undisclosed" with deal structure context), strategic rationale, impact on customers/employees/products, expected closing timeline.
+- Earnings: revenue, net income/loss, EPS (current + YoY), GAAP first with non-GAAP reconciliation, guidance/outlook, key business metrics. Timing: before market open or after close, never during trading hours.
+- Event: event name, date(s), location (physical address or virtual platform), registration/ticket info with link and pricing, key speakers, target audience, agenda highlights.
+- Award: award name, granting organization, criteria/category, why significant (selectivity/prestige). Only newsworthy if from a credible third party.
+- Open source milestone: project name, version, what changed, adoption metrics (stars, downloads, contributors, dependents), key technical improvements with benchmarks, community acknowledgment by name/handle, link to changelog and migration guide. Zero marketing language.
 
 Region conventions:
 
@@ -107,11 +107,11 @@ Region conventions:
 
 Media format adaptations:
 
-- **Print**: AP/AFP/PA style. High-res images with typed captions. Plan lead times: monthly magazines 4-6 months, weeklies 2-8 weeks, dailies 1-3 days.
-- **Digital/wire**: headlines under 100 chars (65 ideal for Google SERP). 300-500 words. Include ticker symbol for public companies. Max 3 hyperlinks with descriptive anchor text. Add NewsArticle schema markup if publishing on own newsroom.
-- **Broadcast**: write for the ear. Sentences 8-12 words max. Always use contractions. Attribution first ("The CEO said..." not "..., the CEO said"). Spell out abbreviations. Write out numerals. Present tense preferred. Round numbers. 150-160 words/minute; 30 seconds is about 75 words.
-- **Social/SMPR**: modular structure. Bulleted core facts under 400 words. Each quote as standalone, tweetable passage. Pre-write 3-5 tweet variations under 280 chars. Include pre-composed social posts with suggested hashtags.
-- **Trade press**: technical jargon expected and signals credibility. Depth over breadth. 500-700 words acceptable. Include technical specs, benchmarks, methodology. Reference industry standards and certifications.
+- Print: AP/AFP/PA style. High-res images with typed captions. Plan lead times: monthly magazines 4-6 months, weeklies 2-8 weeks, dailies 1-3 days.
+- Digital/wire: headlines under 100 chars (65 ideal for Google SERP). 300-500 words. Include ticker symbol for public companies. Max 3 hyperlinks with descriptive anchor text. Add NewsArticle schema markup if publishing on own newsroom.
+- Broadcast: write for the ear. Sentences 8-12 words max. Always use contractions. Attribution first ("The CEO said..." not "..., the CEO said"). Spell out abbreviations. Write out numerals. Present tense preferred. Round numbers. 150-160 words/minute; 30 seconds is about 75 words.
+- Social/SMPR: modular structure. Bulleted core facts under 400 words. Each quote as standalone, tweetable passage. Pre-write 3-5 tweet variations under 280 chars. Include pre-composed social posts with suggested hashtags.
+- Trade press: technical jargon expected and signals credibility. Depth over breadth. 500-700 words acceptable. Include technical specs, benchmarks, methodology. Reference industry standards and certifications.
 
 Quality checks: every release must pass all of the following before delivery.
 
@@ -121,7 +121,7 @@ Quality checks: every release must pass all of the following before delivery.
 - [ ] Third person throughout (no "we"/"our" outside quotes)
 - [ ] Active voice dominant
 - [ ] No unsupported superlatives
-- [ ] No banned phrases: "thrilled," "excited to announce," "proud to," "innovative," "cutting-edge," "world-class," "best-in-class," "synergy," "disruptive," "game-changing," "revolutionary," "paradigm shift," "next-generation," "competitive pricing"
+- [ ] No banned phrases: "thrilled," "excited to announce," "proud to," "innovative," "cutting-edge," "world-class," "best-in-class," `synergy`, "disruptive," "game-changing," "revolutionary," "paradigm shift," "next-generation," "competitive pricing"
 - [ ] Attribution verb is "said" (not "stated," "commented," "shared," "expressed," "noted")
 - [ ] Full name + title on first reference; last name only on subsequent
 - [ ] At least one concrete number or data point

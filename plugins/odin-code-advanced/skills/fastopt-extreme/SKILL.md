@@ -29,11 +29,11 @@ The target code region or module to analyze. Optional: known call frequencies, p
 7. Emit all hypotheses, benchmark designs, simplification proposals, and refusals as chat output. Do not mutate any file. Done when: the chat report is emitted with no file mutation.
 
 ## Failure and recovery
-- **No code supplied**: request the target region; do not guess or analyze from memory.
-- **Path unclassifiable**: if a path cannot be classified as hot or cold from available evidence, label it unclassified and exclude it from optimization proposals.
-- **Complexity theater detected**: refuse the proposal; record the complexity cost and the claimed gain. Do not emit it as a valid optimization.
-- **Partial result**: emit the hypotheses and designs obtained; mark every unclassified or refused item explicitly so the done predicate is not falsely satisfied.
-- **Non-mutation**: no file, VCS, or remote change is made. Rollback is not applicable.
+- No code supplied: request the target region; do not guess or analyze from memory.
+- Path unclassifiable: if a path cannot be classified as hot or cold from available evidence, label it unclassified and exclude it from optimization proposals.
+- Complexity theater detected: refuse the proposal; record the complexity cost and the claimed gain. Do not emit it as a valid optimization.
+- Partial result: emit the hypotheses and designs obtained; mark every unclassified or refused item explicitly so the done predicate is not falsely satisfied.
+- Non-mutation: no file, VCS, or remote change is made. Rollback is not applicable.
 
 ## Output
 A report containing: hot-path hypotheses (each labeled as a hypothesis with a benchmark design specifying metric, baseline, and falsification condition), complexity-neutral cold-path simplification proposals (each with the specific simplification and complexity justification), and explicit refusals of complexity theater (each with the complexity cost and claimed gain stated).

@@ -17,9 +17,9 @@ description: 'Use when a complete product, rather than one component, needs prod
 
 ## Inputs
 
-- **Capability inventory** (required): the complete list of product capabilities to evaluate, each with its acceptance criteria. Named before the run starts.
-- **Documented acceptance criteria** (required): per-capability pass conditions that are observable and testable, not aspirational.
-- **Production-like environment** (required): the environment where the evaluation runs, matching production configuration closely enough that results transfer.
+- Capability inventory (required): the complete list of product capabilities to evaluate, each with its acceptance criteria. Named before the run starts.
+- Documented acceptance criteria (required): per-capability pass conditions that are observable and testable, not aspirational.
+- Production-like environment (required): the environment where the evaluation runs, matching production configuration closely enough that results transfer.
 
 ## Procedure
 
@@ -32,10 +32,10 @@ description: 'Use when a complete product, rather than one component, needs prod
 
 ## Failure and recovery
 
-- **Blocked handoff:** a dependency or precondition is missing. Emit a blocked receipt naming the missing item and the capabilities it blocks.
-- **Budget exhausted:** emit an exhausted receipt; budget exhaustion is never success unless it is the predeclared success predicate.
-- **Non-success:** one or more capabilities fail their criteria. Emit a non-success receipt naming the failed capabilities, their failed criteria, and the observed evidence. Do not present a failed capability as passing.
-- **Dependency failure isolation:** when a capability fails because its dependency failed, mark it `blocked-by-dependency` rather than `failed`. Report the blocking capability and the chain.
+- Blocked handoff: a dependency or precondition is missing. Emit a blocked receipt naming the missing item and the capabilities it blocks.
+- Budget exhausted: emit an exhausted receipt; budget exhaustion is never success unless it is the predeclared success predicate.
+- Non-success: one or more capabilities fail their criteria. Emit a non-success receipt naming the failed capabilities, their failed criteria, and the observed evidence. Do not present a failed capability as passing.
+- Dependency failure isolation: when a capability fails because its dependency failed, mark it `blocked-by-dependency` rather than `failed`. Report the blocking capability and the chain.
 
 ## Output
 

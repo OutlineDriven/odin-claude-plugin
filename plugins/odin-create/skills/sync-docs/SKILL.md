@@ -16,9 +16,9 @@ description: 'Use when a behavioral diff may have left docs or CHANGELOG stale. 
 
 ## Inputs
 
-- **Mode**: `report` (default) or `apply`. `apply` still edits only safe-fix issues.
-- **Scope**: `recent` (changed files from current branch or last few commits), `before-pr` (branch diff against PR base), or `all` (all tracked code and docs).
-- **Base**: explicit base ref preferred. If absent, resolve the default branch, then fall back to `HEAD~5` for `recent`.
+- Mode: `report` (default) or `apply`. `apply` still edits only safe-fix issues.
+- Scope: `recent` (changed files from current branch or last few commits), `before-pr` (branch diff against PR base), or `all` (all tracked code and docs).
+- Base: explicit base ref preferred. If absent, resolve the default branch, then fall back to `HEAD~5` for `recent`.
 
 ## Refusal
 

@@ -15,25 +15,25 @@ Reuse the review output already in hand:
 
 If `status` is `failed`, stop shipping and surface `reason`. If `degraded`, note partial reviewer coverage before applying anything.
 
-### Fallback — invoke review only for cold callers
+### Fallback: invoke review only for cold callers
 
 Only when the caller reached this file **without** already running review (no review output in hand): invoke `/review` once, then proceed to apply. Do not invoke when the caller already ran review (e.g., `/work` shipping step 3a).
 
-Invoke the skill explicitly — do not treat a casual "review my changes" prompt as a substitute unless the harness routed it to `/review`.
+Invoke the skill explicitly; do not treat a casual "review my changes" prompt as a substitute unless the harness routed it to `/review`.
 
 ```
 /review mode:agent plan:<plan-path> base:<merge-base-or-ref>
 ```
 
-- `mode:agent` — JSON output (`review.json` + primary JSON response) for programmatic parsing; same review pipeline as default.
-- `plan:` — when Phase 1 used a plan file (requirements completeness).
-- `base:` — when the diff base is already resolved on the current checkout; omit when reviewing a PR number/URL or standalone current branch.
+- `mode:agent`: JSON output (`review.json` + primary JSON response) for programmatic parsing; same review pipeline as default.
+- `plan:`: when Phase 1 used a plan file (requirements completeness).
+- `base:`: when the diff base is already resolved on the current checkout; omit when reviewing a PR number/URL or standalone current branch.
 
 ## Inputs for apply
 
 - `actionable_findings` from JSON, or the Actionable Findings section from markdown.
 - Full finding detail when needed: `review.json` / artifact `findings`, or `{reviewer}.json` for `why_it_matters` and `evidence`.
-- Stable finding `#` — reuse in residual sinks and subagent prompts.
+- Stable finding `#`: reuse in residual sinks and subagent prompts.
 
 ## What to apply
 
@@ -59,9 +59,9 @@ Surface what was deferred and why; never silently drop.
 
 The orchestrator **does not investigate findings** (no pre-read of cited files to judge complexity or inline vs subagent). That would spend the context window you are trying to protect.
 
-**Orchestrator owns:** parse review output → **eligibility filter on JSON fields only** → build batches → dispatch fix subagents → review diffs → tests → Residual Work Gate. Do not commit; the finalizer owns commit packaging.
+Orchestrator owns: parse review output → **eligibility filter on JSON fields only** → build batches → dispatch fix subagents → review diffs → tests → Residual Work Gate. Do not commit; the finalizer owns commit packaging.
 
-**Fix subagents own:** read `file:line`, confirm evidence still matches, apply or skip with reason, return summary.
+Fix subagents own: read `file:line`, confirm evidence still matches, apply or skip with reason, return summary.
 
 ### Default: batched fix subagents
 

@@ -16,9 +16,9 @@ description: 'Use when asked to configure pstack role-to-model choices so every 
 
 ## Inputs
 
-- **Role–model mappings** (required): one or more `role: model` pairs to write. Each role name must be non-empty. Each model name must be non-empty.
-- **Rule file path** (required): absolute path to the user-level pstack rule file.
-- **Existing rule file content** (optional): current file contents if it already exists, used to detect drift.
+- Role–model mappings (required): one or more `role: model` pairs to write. Each role name must be non-empty. Each model name must be non-empty.
+- Rule file path (required): absolute path to the user-level pstack rule file.
+- Existing rule file content (optional): current file contents if it already exists, used to detect drift.
 
 ## Procedure
 
@@ -32,11 +32,11 @@ description: 'Use when asked to configure pstack role-to-model choices so every 
 
 ## Failure and recovery
 
-- **Invalid input:** stop with `invalid-input`; no file is written.
-- **Malformed existing file:** stop with `invalid-existing-file`; do not overwrite.
-- **Write failure:** stop with `write-failure`; do not report done.
-- **Done-check failure:** stop with `non-converged`; do not report done.
-- **Rollback:** on any failure after step 4, restore the original file content if it existed. If the file did not exist, remove it. If rollback itself fails, halt. The partial state is now the artifact.
+- Invalid input: stop with `invalid-input`; no file is written.
+- Malformed existing file: stop with `invalid-existing-file`; do not overwrite.
+- Write failure: stop with `write-failure`; do not report done.
+- Done-check failure: stop with `non-converged`; do not report done.
+- Rollback: on any failure after step 4, restore the original file content if it existed. If the file did not exist, remove it. If rollback itself fails, halt. The partial state is now the artifact.
 
 ## Output
 

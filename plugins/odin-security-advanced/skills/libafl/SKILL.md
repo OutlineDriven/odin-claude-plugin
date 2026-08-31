@@ -16,10 +16,10 @@ description: 'Use when a custom LibAFL fuzzer needs an executor, observer, feedb
 
 ## Inputs
 
-- **Target**: the function, binary, or harness to fuzz. Required.
-- **Components**: which LibAFL modules to compose — at minimum an executor, observer, feedback, and mutator. Optional; defaults to a coverage-guided in-process fuzzer with `StdScheduledMutator` and `HitcountsMapObserver`.
-- **Objective**: the stopping condition or crash classification (e.g., timeout, crash, custom `ExitKind`). Optional; defaults to crash detection.
-- **Output directory**: where corpus and findings persist. Optional; defaults to `./fuzz_out`.
+- Target: the function, binary, or harness to fuzz. Required.
+- Components: which LibAFL modules to compose — at minimum an executor, observer, feedback, and mutator. Optional; defaults to a coverage-guided in-process fuzzer with `StdScheduledMutator` and `HitcountsMapObserver`.
+- Objective: the stopping condition or crash classification (e.g., timeout, crash, custom `ExitKind`). Optional; defaults to crash detection.
+- Output directory: where corpus and findings persist. Optional; defaults to `./fuzz_out`.
 
 ## Procedure
 
@@ -48,11 +48,11 @@ description: 'Use when a custom LibAFL fuzzer needs an executor, observer, feedb
 12. **Verify findings.** After the run, inspect the output directory for crash/timeout artifacts. Replay each finding against the target to confirm reproducibility. Done when: every finding artifact is inspected and replayed against the target.
 
 ## Failure and recovery
-- **Compilation failure**: LibAFL API changes between versions. Pin the `libafl` crate version in `Cargo.toml`. If compilation fails, check the LibAFL changelog for breaking API changes and adjust component wiring.
-- **No coverage observed**: the observer map may not be linked to the target. Verify the `CoverageMap` is shared with the executor (e.g., via `OwnedMutRawPtr` or forkserver shared memory). Fix the map linkage before re-running.
-- **Target crash before fuzzing starts**: the harness panics or aborts on initialization. Wrap the target in `catch_unwind` or fix the harness. Do not widen scope to debug the target itself.
-- **Empty corpus**: no seed inputs loaded. Provide at least one valid input in the corpus directory or inline. The fuzzer cannot make progress without seeds.
-- **Non-convergent mutation**: the mutator produces only invalid inputs that the target rejects immediately. Add a `MapFeedback` or custom `IsInteresting` feedback to guide toward valid input regions, or switch to a structured mutator.
+- Compilation failure: LibAFL API changes between versions. Pin the `libafl` crate version in `Cargo.toml`. If compilation fails, check the LibAFL changelog for breaking API changes and adjust component wiring.
+- No coverage observed: the observer map may not be linked to the target. Verify the `CoverageMap` is shared with the executor (e.g., via `OwnedMutRawPtr` or forkserver shared memory). Fix the map linkage before re-running.
+- Target crash before fuzzing starts: the harness panics or aborts on initialization. Wrap the target in `catch_unwind` or fix the harness. Do not widen scope to debug the target itself.
+- Empty corpus: no seed inputs loaded. Provide at least one valid input in the corpus directory or inline. The fuzzer cannot make progress without seeds.
+- Non-convergent mutation: the mutator produces only invalid inputs that the target rejects immediately. Add a `MapFeedback` or custom `IsInteresting` feedback to guide toward valid input regions, or switch to a structured mutator.
 
 ## Output
 

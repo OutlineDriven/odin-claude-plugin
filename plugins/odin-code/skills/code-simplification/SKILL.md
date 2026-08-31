@@ -18,10 +18,10 @@ Two modes share one authority: reversible local edits to a named target, no new 
 
 ## Inputs
 
-- **Target** (required): the file, module, function, or range to simplify. Named by the user.
-- **Test command** (required for measured mode): the command that runs the test suite proving behavior preservation.
-- **Bloat signal** (optional, measured mode): a review-flagged duplication hotspot or branch-complexity concern to prioritize. If absent, measure duplication and branch complexity on the target.
-- **Constraints** (optional, clarity mode): behavior that must stay identical (public signatures, outputs, side effects, ordering). Infer these from the code when omitted.
+- Target (required): the file, module, function, or range to simplify. Named by the user.
+- Test command (required for measured mode): the command that runs the test suite proving behavior preservation.
+- Bloat signal (optional, measured mode): a review-flagged duplication hotspot or branch-complexity concern to prioritize. If absent, measure duplication and branch complexity on the target.
+- Constraints (optional, clarity mode): behavior that must stay identical (public signatures, outputs, side effects, ordering). Infer these from the code when omitted.
 
 ## Mode selection
 
@@ -53,14 +53,14 @@ When the user names a test command or a bloat signal, use measured mode. When th
 
 ## Failure and recovery
 
-- **Red baseline** (measured): the test suite is not green before any edit. Stop; do not simplify on an unproven baseline. Report the failing tests.
-- **Test regression after an edit** (measured): revert that edit immediately. Record the edit and the failing test. Continue with other candidates only if the baseline stays green.
-- **No measurable reduction** (measured): if no candidate lowers the bloat signal while keeping tests green, report that the artifact is already at its simplification floor. Do not force cosmetic changes.
-- **Behavior drift** (clarity): if a change alters any recorded behavior, revert that change and do not re-attempt it. Report which behavior drifted.
-- **Ambiguous target** (clarity): if the user did not name concrete code or the behavior to preserve cannot be determined from the code, stop and ask for the missing input. Do not guess scope.
-- **Scope creep**: if a candidate requires editing outside the target or adding public surface, discard it. Report the candidate and the boundary it crossed.
-- **Non-converged**: if simplification cycles or each candidate is rejected for behavior drift, stop and report the code as non-converged with the attempted changes listed.
-- **Partial result**: keep applied changes that preserve behavior; report any rejected change and the reason. Never claim the done predicate holds when behavior is unverified.
+- Red baseline (measured): the test suite is not green before any edit. Stop; do not simplify on an unproven baseline. Report the failing tests.
+- Test regression after an edit (measured): revert that edit immediately. Record the edit and the failing test. Continue with other candidates only if the baseline stays green.
+- No measurable reduction (measured): if no candidate lowers the bloat signal while keeping tests green, report that the artifact is already at its simplification floor. Do not force cosmetic changes.
+- Behavior drift (clarity): if a change alters any recorded behavior, revert that change and do not re-attempt it. Report which behavior drifted.
+- Ambiguous target (clarity): if the user did not name concrete code or the behavior to preserve cannot be determined from the code, stop and ask for the missing input. Do not guess scope.
+- Scope creep: if a candidate requires editing outside the target or adding public surface, discard it. Report the candidate and the boundary it crossed.
+- Non-converged: if simplification cycles or each candidate is rejected for behavior drift, stop and report the code as non-converged with the attempted changes listed.
+- Partial result: keep applied changes that preserve behavior; report any rejected change and the reason. Never claim the done predicate holds when behavior is unverified.
 
 ## Output
 

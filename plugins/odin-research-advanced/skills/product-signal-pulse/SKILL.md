@@ -16,10 +16,10 @@ description: 'Use when invoking /product-signal-pulse with an optional lookback 
 
 ## Inputs
 
-- **Lookback window** (optional): trailing time range for the pulse, e.g. `24h`, `7d`, `1h`. Defaults to `pulse_lookback_default` from config, then `24h`.
-- **Argument keywords** (optional): `setup`, `reconfigure`, or `edit config` force the first-run interview; `daily`, `hourly`, `weekly` are schedule hints for Phase 3.
-- **Config files** (read): `.odin/config.local.yaml` then `.odin/config.yaml` at the repo root (`git rev-parse --show-toplevel`). Missing files are skipped.
-- **Strategy doc** (read, optional): `STRATEGY.md`, else the first of `VISION.md`, `PRODUCT.md` that exists. Seeds product name and key metrics.
+- Lookback window (optional): trailing time range for the pulse, e.g. `24h`, `7d`, `1h`. Defaults to `pulse_lookback_default` from config, then `24h`.
+- Argument keywords (optional): `setup`, `reconfigure`, or `edit config` force the first-run interview; `daily`, `hourly`, `weekly` are schedule hints for Phase 3.
+- Config files (read): `.odin/config.local.yaml` then `.odin/config.yaml` at the repo root (`git rev-parse --show-toplevel`). Missing files are skipped.
+- Strategy doc (read, optional): `STRATEGY.md`, else the first of `VISION.md`, `PRODUCT.md` that exists. Seeds product name and key metrics.
 
 ## Config keys
 
@@ -101,16 +101,16 @@ For every source, construct the query from the configured event name and the res
 
 ## Failure and recovery
 
-- **Unparseable lookback window:** ask the user to clarify; do not guess.
-- **Unconfigured product (pulse_product_name unset):** route to Stage 2 interview; do not run queries with no config.
-- **Read-write database offered:** refuse; offer read-only replica or skip DB. Do not capture a read-write connection under any framing.
-- **Data source query fails or returns no value:** include the metric in the report marked `no data`; do not invent a number. Note the failure reason inline.
-- **Source tool unavailable (no MCP server, no CLI, unreachable HTTP):** mark the source `no data (tool unavailable)` in the report. Note which method was tried.
-- **DB query too expensive:** skip it and note "DB query skipped (estimated cost too high)" in the report.
-- **No tracing tool configured:** omit the System performance section; the report stays Headlines / Usage / Followups.
-- **No strategy doc:** note it in chat; run from scratch without seeded metrics.
-- **Partial results:** write the report with available data; mark missing sections `no data`. Never pad or fabricate.
-- **Rollback:** the only mutations are the report file and config.local.yaml. Delete the report file to discard a run; revert config.local.yaml to its prior state to undo settings. No external system is mutated.
+- Unparseable lookback window: ask the user to clarify; do not guess.
+- Unconfigured product (pulse_product_name unset): route to Stage 2 interview; do not run queries with no config.
+- Read-write database offered: refuse; offer read-only replica or skip DB. Do not capture a read-write connection under any framing.
+- Data source query fails or returns no value: include the metric in the report marked `no data`; do not invent a number. Note the failure reason inline.
+- Source tool unavailable (no MCP server, no CLI, unreachable HTTP): mark the source `no data (tool unavailable)` in the report. Note which method was tried.
+- DB query too expensive: skip it and note "DB query skipped (estimated cost too high)" in the report.
+- No tracing tool configured: omit the System performance section; the report stays Headlines / Usage / Followups.
+- No strategy doc: note it in chat; run from scratch without seeded metrics.
+- Partial results: write the report with available data; mark missing sections `no data`. Never pad or fabricate.
+- Rollback: the only mutations are the report file and config.local.yaml. Delete the report file to discard a run; revert config.local.yaml to its prior state to undo settings. No external system is mutated.
 
 ## Output
 

@@ -31,11 +31,11 @@ description: 'Use when the learner is ready to apply cleared concepts in a real 
 7. Name every concept the work does not demonstrate as not cleared and give that list to the learner as practice items. Record nothing: this skill writes no progress lines, and ownership of any progress record stays outside it. **Done when:** the not-cleared concepts are named and handed to the learner as practice items.
 
 ## Failure and recovery
-- **Cannot scope:** no cleared concepts and no usable answer to the one question about what the learner can do. Stop and report that a capstone cannot be sized; write nothing and invent no syllabus.
-- **Tutorial cutoff:** scoping needs two or more unfamiliar concepts. Stop, report the cutoff, and propose a smaller project or classify the request as an exercise; do not write a tutorial brief.
-- **Unusable deliverable:** the returned work cannot be run, read, or used. Report the done test as failed per item; do not pass it or soften the verdict.
-- **Partial judgment:** if review stops partway through the item list, keep the per-item verdicts already reached and report exactly those; never report the whole work passed or failed without per-item evidence.
-- **Rollback:** delete `capstone-<slug>.md`. If scoping or bounding failed after the brief was written, delete it rather than leave a brief that violates the bounds.
+- Cannot scope: no cleared concepts and no usable answer to the one question about what the learner can do. Stop and report that a capstone cannot be sized; write nothing and invent no syllabus.
+- Tutorial cutoff: scoping needs two or more unfamiliar concepts. Stop, report the cutoff, and propose a smaller project or classify the request as an exercise; do not write a tutorial brief.
+- Unusable deliverable: the returned work cannot be run, read, or used. Report the done test as failed per item; do not pass it or soften the verdict.
+- Partial judgment: if review stops partway through the item list, keep the per-item verdicts already reached and report exactly those; never report the whole work passed or failed without per-item evidence.
+- Rollback: delete `capstone-<slug>.md`. If scoping or bounding failed after the brief was written, delete it rather than leave a brief that violates the bounds.
 
 ## Output
 `capstone-<slug>.md` at the workspace root with the concepts exercised, working milestones, and an observable done test; then, on the review visit, a per-item verdict against that done test and concept list and the named not-cleared concepts handed to the learner as practice items. No progress record is written by this skill.

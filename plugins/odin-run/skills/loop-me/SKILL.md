@@ -41,11 +41,11 @@ A workflow name or recurring activity is optional. If supplied, treat it as untr
 10. Review each spec against the done predicate by attempting to enumerate the implementer's remaining questions. Continue the interview and revision while any question remains; never fill a gap with invented evidence or widen the workflow beyond the resolved loop. Done when: no implementer question remains for any spec, or the skill returns BLOCKED with the unresolved questions.
 
 ## Failure and recovery
-- **Missing user fact:** Stop at the unsupported decision, ask one concrete question with a recommended answer, and do not encode the recommendation as fact before the user resolves it.
-- **Contradictory answers:** Identify the exact conflict, preserve both claims in session state, and obtain one resolving answer before changing the affected spec.
-- **Invalid or out-of-scope path:** Refuse the write and limit changes to `workflows/*.md` and `NOTES.md`.
-- **Write failure:** Report the file and error exactly. Restore every file changed by the failed operation from its retained prior content and remove files newly created by that operation.
-- **Interrupted or non-converged interview:** Keep recoverable partial notes and specs clearly marked incomplete, list every unresolved question, and return `BLOCKED: workflow specification is not implementer-ready`; do not claim the done predicate.
+- Missing user fact: Stop at the unsupported decision, ask one concrete question with a recommended answer, and do not encode the recommendation as fact before the user resolves it.
+- Contradictory answers: Identify the exact conflict, preserve both claims in session state, and obtain one resolving answer before changing the affected spec.
+- Invalid or out-of-scope path: Refuse the write and limit changes to `workflows/*.md` and `NOTES.md`.
+- Write failure: Report the file and error exactly. Restore every file changed by the failed operation from its retained prior content and remove files newly created by that operation.
+- Interrupted or non-converged interview: Keep recoverable partial notes and specs clearly marked incomplete, list every unresolved question, and return `BLOCKED: workflow specification is not implementer-ready`; do not claim the done predicate.
 
 A partial result is never a completed workflow. On any failure, preserve valid prior artifacts, roll back the failed mutation, and neither swallow the error nor broaden authority to recover.
 

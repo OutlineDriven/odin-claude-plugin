@@ -17,9 +17,9 @@ description: 'Use when recent resolved feedback may reveal a broader recurring d
 
 ## Inputs
 
-- **Feedback window** (required): which resolved items to sweep, bounded by date range or item list.
-- **Project surface** (required): the path or glob set to search for recurrence.
-- **Budget** (required): the effort or time limit, declared before work begins.
+- Feedback window (required): which resolved items to sweep, bounded by date range or item list.
+- Project surface (required): the path or glob set to search for recurrence.
+- Budget (required): the effort or time limit, declared before work begins.
 
 ## Procedure
 
@@ -33,11 +33,11 @@ description: 'Use when recent resolved feedback may reveal a broader recurring d
 
 ## Failure and recovery
 
-- **Access blocked:** a source or surface in the bound cannot be read. Stop; report the blocked source and what was swept before the block. Terminal class: `blocked`.
-- **Ambiguous feedback:** an item cannot be classified by root cause. Mark it isolated; do not force a cluster.
-- **Budget exhausted before every root cause is checked:** terminal `capped`; report which roots were checked and which remain. Budget exhaustion is never success unless it is the predeclared success predicate.
-- **Stalled:** a root-cause pattern is identified but the recurrence cannot be addressed inside the budget. Terminal `stalled`; report the pattern and the blocking condition.
-- **Partial result:** emit every root cause and recurrence result obtained; never present an unchecked root as addressed.
+- Access blocked: a source or surface in the bound cannot be read. Stop; report the blocked source and what was swept before the block. Terminal class: `blocked`.
+- Ambiguous feedback: an item cannot be classified by root cause. Mark it isolated; do not force a cluster.
+- Budget exhausted before every root cause is checked: terminal `capped`; report which roots were checked and which remain. Budget exhaustion is never success unless it is the predeclared success predicate.
+- Stalled: a root-cause pattern is identified but the recurrence cannot be addressed inside the budget. Terminal `stalled`; report the pattern and the blocking condition.
+- Partial result: emit every root cause and recurrence result obtained; never present an unchecked root as addressed.
 
 ## Output
 

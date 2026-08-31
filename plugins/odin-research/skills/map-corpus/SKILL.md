@@ -32,11 +32,11 @@ description: 'Use when the user points to a folder of their study material and w
 
 ## Failure and recovery
 
-- **Invalid corpus**: if the path is missing, does not exist, or is not a directory, do not write anything; return `blocked` with the failed validation.
-- **Unreadable members**: list each unreadable file and its observed reason, make no conversion attempt or converter recommendation, and complete the map from readable files. This is a valid partial corpus map only when every unreadable file is disclosed.
-- **Unsafe output boundary**: if the resolved output is not exactly workspace-root `CORPUS.md`, or writing it would modify the corpus root, do not write and return `blocked` with both resolved paths.
-- **Unprovable map**: if source accounting, concept coverage, citation anchors, or prerequisite ordering cannot be established from the material, preserve any existing `CORPUS.md`, write no partial replacement, and return `blocked` naming the unmet condition without inventing evidence.
-- **Write failure**: report the write error and do not claim completion. If replacement began but did not complete, restore the prior `CORPUS.md` when available; otherwise remove the incomplete new file.
+- Invalid corpus: if the path is missing, does not exist, or is not a directory, do not write anything; return `blocked` with the failed validation.
+- Unreadable members: list each unreadable file and its observed reason, make no conversion attempt or converter recommendation, and complete the map from readable files. This is a valid partial corpus map only when every unreadable file is disclosed.
+- Unsafe output boundary: if the resolved output is not exactly workspace-root `CORPUS.md`, or writing it would modify the corpus root, do not write and return `blocked` with both resolved paths.
+- Unprovable map: if source accounting, concept coverage, citation anchors, or prerequisite ordering cannot be established from the material, preserve any existing `CORPUS.md`, write no partial replacement, and return `blocked` naming the unmet condition without inventing evidence.
+- Write failure: report the write error and do not claim completion. If replacement began but did not complete, restore the prior `CORPUS.md` when available; otherwise remove the incomplete new file.
 
 ## Output
 

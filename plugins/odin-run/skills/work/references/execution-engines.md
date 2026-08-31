@@ -38,12 +38,12 @@ Follow the dispatch strategy in `SKILL.md` Phase 1 Step 4 (inline, serial subage
 
 ### Goal-mode and dynamic-workflow
 
-**With a callable goal tool (Codex `create_goal`):** call `create_goal` with the objective — the content of the copyable prompt below, minus the leading `/goal`. This activates the objective and the **current session** works toward it; there is no separate worker and no envelope to await, so the session continues to its tail. The skill does not call `update_goal`; the working session does that. Use `create_goal` only in standalone use, never when the caller owns the tail.
+With a callable goal tool (Codex `create_goal`): call `create_goal` with the objective — the content of the copyable prompt below, minus the leading `/goal`. This activates the objective and the **current session** works toward it; there is no separate worker and no envelope to await, so the session continues to its tail. The skill does not call `update_goal`; the working session does that. Use `create_goal` only in standalone use, never when the caller owns the tail.
 
-**No callable goal tool, or dynamic-workflow (Claude Code today):** do **not** attempt to invoke them. Instead:
+No callable goal tool, or dynamic-workflow (Claude Code today): do **not** attempt to invoke them. Instead:
 
-- **Standalone interactive use:** print a copyable prompt block for the user to paste, then continue inline/subagents if the user does not paste it. Do not stall waiting for a paste.
-- **Orchestrated use (another caller owns the tail):** do **not** emit a copyable prompt — a manual paste step strands the caller. Run inline/subagents instead, or return a blocker if the plan genuinely requires an unavailable engine.
+- Standalone interactive use: print a copyable prompt block for the user to paste, then continue inline/subagents if the user does not paste it. Do not stall waiting for a paste.
+- Orchestrated use (another caller owns the tail): do **not** emit a copyable prompt — a manual paste step strands the caller. Run inline/subagents instead, or return a blocker if the plan genuinely requires an unavailable engine.
 
 Whichever path, the goal/workflow must not open a PR, finalize the session, or bypass the owning workflow's gates.
 

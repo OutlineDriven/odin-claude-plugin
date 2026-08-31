@@ -33,10 +33,10 @@ Required inputs are the claims to prove, the changed files or explicitly bounded
 6. If every required action is green, stop immediately and return the evidence with a deliver decision. Do not perform any further check after the first complete green gate. Done when: the deliver decision is returned on the first green gate, or a failure is reported.
 
 ## Failure and recovery
-- **Missing boundary or command:** Return `blocked` with the missing changed surface, language, or project command; do not substitute a guessed command or widen scope.
-- **Failed check:** Return `red` with the exact command, scope, and failure output. Make no repair under read-only authority. After a correction is supplied, re-run only the failed action unless the correction changed another action's covered surface.
-- **Unavailable or inconclusive check:** Return `blocked` and identify the unproved claim; partial green results remain evidence only for the claims they directly cover.
-- **Mutation required or observed:** Stop before mutation, or stop immediately if a command reports one, and return `blocked` with the affected target. Never report delivery while any required claim is failed, unavailable, inconclusive, or unproved.
+- Missing boundary or command: Return `blocked` with the missing changed surface, language, or project command; do not substitute a guessed command or widen scope.
+- Failed check: Return `red` with the exact command, scope, and failure output. Make no repair under read-only authority. After a correction is supplied, re-run only the failed action unless the correction changed another action's covered surface.
+- Unavailable or inconclusive check: Return `blocked` and identify the unproved claim; partial green results remain evidence only for the claims they directly cover.
+- Mutation required or observed: Stop before mutation, or stop immediately if a command reports one, and return `blocked` with the affected target. Never report delivery while any required claim is failed, unavailable, inconclusive, or unproved.
 
 ## Output
 

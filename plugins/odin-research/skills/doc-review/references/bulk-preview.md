@@ -60,9 +60,9 @@ Skipping (2):
 
 ## Scope summary wording by path
 
-- **Routing option B (top-level best-judgment):** header reads `Auto-resolve plan -- N findings:`.
-- **Routing option C (top-level defer-in-report):** header reads `Defer plan -- N findings to report:`. Every finding lands in the `Deferring (N):` bucket.
-- **Walk-through `Auto-resolve with best judgment on the rest`:** header reads `Auto-resolve plan -- N remaining findings (K already decided):`. Already-decided findings from the walk-through are not included in the preview or in the bucket counts.
+- Routing option B (top-level best-judgment): header reads `Auto-resolve plan -- N findings:`.
+- Routing option C (top-level defer-in-report): header reads `Defer plan -- N findings to report:`. Every finding lands in the `Deferring (N):` bucket.
+- Walk-through `Auto-resolve with best judgment on the rest`: header reads `Auto-resolve plan -- N remaining findings (K already decided):`. Already-decided findings from the walk-through are not included in the preview or in the bucket counts.
 
 ---
 
@@ -70,8 +70,8 @@ Skipping (2):
 
 Each line uses a compressed form of the framing-quality guidance from the subagent template (observable-consequence-first, no internal section numbering unless needed to locate). The one-line summary is drawn from the persona-produced `why_it_matters` by taking the first sentence (and, when the first sentence is too long for the preview width, paraphrasing it tightly to fit).
 
-- **Shape:** `[<severity>] <section> -- <one-line summary>`
-- **Width target:** keep lines near 80 columns so the preview renders cleanly in narrow terminals. Truncate with ellipsis when necessary.
+- Shape: `[<severity>] <section> -- <one-line summary>`
+- Width target: keep lines near 80 columns so the preview renders cleanly in narrow terminals. Truncate with ellipsis when necessary.
 - **No section numbering** unless the reader needs it to locate the issue.
 
 When no `why_it_matters` is available for a finding (rare -- only if persona output was malformed), fall back to the finding's title directly.
@@ -97,9 +97,9 @@ Options (exactly two, in all three cases):
 
 ## Cancel semantics
 
-- **From routing option B Cancel:** return the user to the routing question (the four-option menu). Do not record any state.
-- **From routing option C Cancel:** same -- return to the routing question, no side effects.
-- **From walk-through `Auto-resolve with best judgment on the rest` Cancel:** return the user to the current finding's per-finding question (not to the routing question). The walk-through continues from where it was, with prior decisions intact.
+- From routing option B Cancel: return the user to the routing question (the four-option menu). Do not record any state.
+- From routing option C Cancel: same -- return to the routing question, no side effects.
+- From walk-through `Auto-resolve with best judgment on the rest` Cancel: return the user to the current finding's per-finding question (not to the routing question). The walk-through continues from where it was, with prior decisions intact.
 
 In every case, `Cancel` changes no in-memory state.
 
@@ -109,9 +109,9 @@ In every case, `Cancel` changes no in-memory state.
 
 When the user picks `Proceed`:
 
-- **Routing option B (top-level best-judgment):** for each finding in the plan, record the recommended decision. Accept findings go into the Accepted set for the completion report. Defer findings route through `references/open-questions-defer.md` for report recording. Skip findings are recorded as no-action. After all decisions are recorded, emit the unified completion report (see `walkthrough.md`).
-- **Routing option C (top-level defer-in-report):** every finding routes through `references/open-questions-defer.md` for report recording as deferred. After all recordings complete, emit the unified completion report.
-- **Walk-through `Auto-resolve with best judgment on the rest`:** same as routing option B, but scoped to the findings the user hadn't decided on. Accepted findings join the in-memory set with the ones the user already picked during the walk-through.
+- Routing option B (top-level best-judgment): for each finding in the plan, record the recommended decision. Accept findings go into the Accepted set for the completion report. Defer findings route through `references/open-questions-defer.md` for report recording. Skip findings are recorded as no-action. After all decisions are recorded, emit the unified completion report (see `walkthrough.md`).
+- Routing option C (top-level defer-in-report): every finding routes through `references/open-questions-defer.md` for report recording as deferred. After all recordings complete, emit the unified completion report.
+- Walk-through `Auto-resolve with best judgment on the rest`: same as routing option B, but scoped to the findings the user hadn't decided on. Accepted findings join the in-memory set with the ones the user already picked during the walk-through.
 
 Failure during `Proceed` follows the failure path defined in `references/open-questions-defer.md` -- surface the failure inline with Retry / Convert to Skip, continue with the rest of the plan, and capture the failure in the completion report's failure section.
 
@@ -119,7 +119,7 @@ Failure during `Proceed` follows the failure path defined in `references/open-qu
 
 ## Edge cases
 
-- **Zero findings in a bucket:** omit the bucket header. A preview with only Accept and Skip does not show an empty `Deferring (0):` line.
-- **All findings in one bucket:** preview still shows the bucket header; Proceed / Cancel still offered.
-- **N=1 preview (only one finding in scope):** the preview still uses the grouped format, just with a single-line bucket. `Proceed` / `Cancel` still apply.
-- **Walk-through `Auto-resolve with best judgment on the rest` with zero remaining findings:** the walk-through's own logic suppresses this option when N=1 and otherwise, so the preview should never be invoked with zero remaining findings. If it is, render `Auto-resolve plan -- 0 remaining findings` and fall through to Proceed with no-op.
+- Zero findings in a bucket: omit the bucket header. A preview with only Accept and Skip does not show an empty `Deferring (0):` line.
+- All findings in one bucket: preview still shows the bucket header; Proceed / Cancel still offered.
+- N=1 preview (only one finding in scope): the preview still uses the grouped format, just with a single-line bucket. `Proceed` / `Cancel` still apply.
+- Walk-through `Auto-resolve with best judgment on the rest` with zero remaining findings: the walk-through's own logic suppresses this option when N=1 and otherwise, so the preview should never be invoked with zero remaining findings. If it is, render `Auto-resolve plan -- 0 remaining findings` and fall through to Proceed with no-op.

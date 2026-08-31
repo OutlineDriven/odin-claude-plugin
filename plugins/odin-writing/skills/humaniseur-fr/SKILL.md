@@ -31,9 +31,9 @@ Naturalize French text that reads as AI-generated.
 Apply **one pass only**. Do not iterate or re-apply.
 
 **Rule 1 — Register preservation.** Before rewriting, determine the register from the source text:
-- **soutenu**: formal vocabulary, subjunctive mood, complex syntax, passive constructions, literary forms
-- **courant**: neutral formal, standard written French, the default register for professional prose
-- **familier**: informal vocabulary, colloquialisms, first-person constructions
+- soutenu: formal vocabulary, subjunctive mood, complex syntax, passive constructions, literary forms
+- courant: neutral formal, standard written French, the default register for professional prose
+- familier: informal vocabulary, colloquialisms, first-person constructions
 
 Preserve the detected register throughout. Do not downgrade or upgrade.
 

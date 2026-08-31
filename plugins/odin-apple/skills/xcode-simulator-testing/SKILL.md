@@ -33,8 +33,8 @@ description: 'Use when asked to run /xcode-simulator-testing with a scheme name 
 9. Stop the log capture started by this run. Leave a simulator that was already booted as found; a simulator booted only for this run may be shut down after evidence is saved. Done when: log capture is stopped and simulator state is handled.
 
 ## Failure and recovery
-- **Setup blocker**: any failure before the app launches with log capture running stops later stages. Report an actionable setup blocker with its evidence.
-- **Failed screen or flow**: preserve its screenshot, relevant logs, and reproduction steps. Ask whether to investigate now or continue testing the remaining scope without investigation; that routing choice does not change the observed `FAIL`.
+- Setup blocker: any failure before the app launches with log capture running stops later stages. Report an actionable setup blocker with its evidence.
+- Failed screen or flow: preserve its screenshot, relevant logs, and reproduction steps. Ask whether to investigate now or continue testing the remaining scope without investigation; that routing choice does not change the observed `FAIL`.
   - Investigate now: pause this run and hand the failure evidence and simulator reproduction context back. Any diagnosis or fix proceeds under separate authority narrowed to no commit, push, or PR. Only an applied fix triggers rebuild and retest; derive any replacement status from the completed retest evidence, and until that evidence exists retain `FAIL` and continue the remaining scoped checks.
   - Continue without investigation: retain `FAIL`, preserve the observed failure evidence, and proceed with the rest of the scoped checks.
 - **Non-mutation**: this skill does not modify project source, commit, push, or open a PR. Simulator state it creates is reversible by shutting the simulator and uninstalling the app.

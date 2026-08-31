@@ -30,10 +30,10 @@ Supply the requested behavior and the local code surface to change. Supply expli
 
 ## Failure and recovery
 
-- **Missing contract**: if required behavior or acceptance criteria remain unknowable from the request and local evidence, make no speculative edit and return `blocked: missing contract` with the exact missing fact.
-- **No safe minimal form**: if deletion, reuse, or modification cannot satisfy the ask without breaking required behavior, retain the smallest necessary addition and identify the constraint that requires it; if that constraint cannot be established, return `blocked: necessity unproven`.
-- **Verification failure**: if the changed behavior fails its narrow check, restore the files changed by this procedure to their pre-edit contents or leave the failing edits clearly identified as a partial result, and return `non-converged: verification failed` with the failed check and observed result.
-- **Scope expansion**: if completion would require unrelated files, remote mutation, credentials, publishing, deployment, or a dependency not authorized by the ask, do not perform that work and return `blocked: scope expansion required` with the exact boundary.
+- Missing contract: if required behavior or acceptance criteria remain unknowable from the request and local evidence, make no speculative edit and return `blocked: missing contract` with the exact missing fact.
+- No safe minimal form: if deletion, reuse, or modification cannot satisfy the ask without breaking required behavior, retain the smallest necessary addition and identify the constraint that requires it; if that constraint cannot be established, return `blocked: necessity unproven`.
+- Verification failure: if the changed behavior fails its narrow check, restore the files changed by this procedure to their pre-edit contents or leave the failing edits clearly identified as a partial result, and return `non-converged: verification failed` with the failed check and observed result.
+- Scope expansion: if completion would require unrelated files, remote mutation, credentials, publishing, deployment, or a dependency not authorized by the ask, do not perform that work and return `blocked: scope expansion required` with the exact boundary.
 
 Never report the done predicate while a required check fails or evidence is missing.
 

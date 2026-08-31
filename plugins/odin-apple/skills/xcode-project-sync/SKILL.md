@@ -39,14 +39,14 @@ description: 'Use when /xcode-project-sync must regenerate an Xcode project from
 
 ## Failure and recovery
 
-- **BLOCKED missing project.yml**: stop. The user must create or restore `project.yml` in the app root.
-- **BLOCKED missing or invalid gstack root**: stop. Name the checked path. The user must install gstack or set `GSTACK_ROOT` to the correct location.
-- **BLOCKED regenerator not found**: stop. List the checked paths. The user must install the gstack project-sync tool or verify the executable name.
-- **BLOCKED invalid manifest entry**: the regenerator rejected an entry in `project.yml`. Fix the entry to use a supported type or remove it, then rerun. Do not edit the generated xcodeproj by hand to work around the rejection.
-- **BLOCKED build failure after regeneration**: revert via `git restore` of the xcodeproj. Surface the compile error. Do not proceed with a broken project.
-- **BLOCKED handwritten Swift modified**: revert via `git restore` of the xcodeproj. The regenerator should not touch handwritten Swift; report the affected files.
-- **xcodeproj unchanged after a project.yml edit**: the composite-hash cache matched. Confirm `project.yml` was saved and the cache marker is not stale before rerunning.
-- **Partial-result rule**: if any step fails, the xcodeproj may be in a partially regenerated state. Revert via `git restore` and return BLOCKED with the failing step and what was attempted.
+- BLOCKED missing project.yml: stop. The user must create or restore `project.yml` in the app root.
+- BLOCKED missing or invalid gstack root: stop. Name the checked path. The user must install gstack or set `GSTACK_ROOT` to the correct location.
+- BLOCKED regenerator not found: stop. List the checked paths. The user must install the gstack project-sync tool or verify the executable name.
+- BLOCKED invalid manifest entry: the regenerator rejected an entry in `project.yml`. Fix the entry to use a supported type or remove it, then rerun. Do not edit the generated xcodeproj by hand to work around the rejection.
+- BLOCKED build failure after regeneration: revert via `git restore` of the xcodeproj. Surface the compile error. Do not proceed with a broken project.
+- BLOCKED handwritten Swift modified: revert via `git restore` of the xcodeproj. The regenerator should not touch handwritten Swift; report the affected files.
+- xcodeproj unchanged after a project.yml edit: the composite-hash cache matched. Confirm `project.yml` was saved and the cache marker is not stale before rerunning.
+- Partial-result rule: if any step fails, the xcodeproj may be in a partially regenerated state. Revert via `git restore` and return BLOCKED with the failing step and what was attempted.
 
 ## Output
 

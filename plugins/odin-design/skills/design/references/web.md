@@ -1,4 +1,4 @@
-# web.md — vanilla CSS 2026 baseline
+# web.md, vanilla CSS 2026 baseline
 
 Surface reference for HTML and vanilla CSS. Companion to `references/anti-slop.md` for slop tells specific to web (uniform `rounded-lg`, `transition: all`, default Tailwind ramp, etc.).
 
@@ -6,7 +6,7 @@ Surface reference for HTML and vanilla CSS. Companion to `references/anti-slop.m
 
 ## 1. Posture
 
-Vanilla CSS 2026 carries surfaces React used to need a framework for. Container queries, `:has()`, nesting, `color-mix()`, OKLCH, `popover`, View Transitions, and (as of March 15 2026) subgrid are all Widely Available or Newly Available in Baseline — the gap that made build-tooling indispensable around 2020 has closed.
+Vanilla CSS 2026 carries surfaces React used to need a framework for. Container queries, `:has()`, nesting, `color-mix()`, OKLCH, `popover`, View Transitions, and (as of March 15 2026) subgrid are all Widely Available or Newly Available in Baseline, the gap that made build-tooling indispensable around 2020 has closed.
 
 Reach for vanilla first; React only when state crosses surface boundaries (see `references/react.md` §1). Pulling in React for what `:has()` and `@container` already do is ceremony, and ceremony is the first slop tell on `references/anti-slop.md`.
 
@@ -16,7 +16,7 @@ Each feature lists Baseline status, one concrete example, and the anti-pattern r
 
 ## 2A. Use by default
 
-Widely Available as of this grounding — no feature query needed in evergreen-browser projects. Re-verify on web.dev/baseline before adopting in browser-conservative environments.
+Widely Available as of this grounding, no feature query needed in evergreen-browser projects. Re-verify on web.dev/baseline before adopting in browser-conservative environments.
 
 ### Container queries (`@container`)
 
@@ -27,7 +27,7 @@ Baseline Newly Available 2023-02-14, Widely Available 2025-08-14.
   .card__body { display: grid; grid-template-columns: 12rem 1fr; }
 }
 ```
-Anti-pattern: viewport media queries on component-scoped layout — the component cannot be reused inside a sidebar without rewriting the breakpoints.
+Anti-pattern: viewport media queries on component-scoped layout, the component cannot be reused inside a sidebar without rewriting the breakpoints.
 
 ### `:has()` selector
 
@@ -66,7 +66,7 @@ Baseline Newly Available 2023-05-09, Widely Available 2025-11-09.
 --color-accent: oklch(0.62 0.18 256);
 --color-accent-strong: oklch(0.52 0.18 256);
 ```
-Anti-pattern: HSL for design tokens. HSL lightness is not perceptual — `hsl(60, 100%, 50%)` and `hsl(240, 100%, 50%)` differ by ~70 in perceptual lightness despite identical L. OKLCH is the only modern token-color choice.
+Anti-pattern: HSL for design tokens. HSL lightness is not perceptual, `hsl(60, 100%, 50%)` and `hsl(240, 100%, 50%)` differ by ~70 in perceptual lightness despite identical L. OKLCH is the only modern token-color choice.
 
 ### CSS subgrid
 
@@ -97,7 +97,7 @@ Newly Available with a forward-dated Widely Available milestone, or Chromium-onl
 
 ### `popover` attribute and `<dialog>`
 
-`<dialog>` is Widely Available (2024-09-14). `popover` is Baseline Newly Available (2025-01-27) and is Newly, not Widely — keep the fallback.
+`<dialog>` is Widely Available (2024-09-14). `popover` is Baseline Newly Available (2025-01-27) and is Newly, not Widely, keep the fallback.
 ```html
 <button popovertarget="menu">Open</button>
 <div id="menu" popover>...</div>
@@ -128,7 +128,7 @@ Chrome and Edge 115+, Safari 26+; no Firefox support. Not Baseline, so keep the 
   .progress { animation: grow linear; animation-timeline: scroll(root); }
 }
 ```
-Anti-pattern: a `scroll` listener with `requestAnimationFrame`. Where the platform ships it, the listener is dead weight; where it does not, the listener is what to fall back to — but gate explicitly.
+Anti-pattern: a `scroll` listener with `requestAnimationFrame`. Where the platform ships it, the listener is dead weight; where it does not, the listener is what to fall back to, but gate explicitly.
 
 ## 3. Token shape
 
@@ -168,13 +168,13 @@ Vanilla custom properties under `:root`. One concrete example:
 
 Time scales are perceptual, not arbitrary. Five bands cover production motion needs:
 
-- **~80ms** — perceptual "instant" threshold. Below this, the user does not register a transition; above, motion becomes communication.
-- **100-150ms** — instant feedback (button press, hover state, focus ring).
-- **200-300ms** — state changes (panel open, input focus expansion, tab switch).
-- **300-500ms** — layout changes (modal entrance, card flip, drawer slide).
-- **500-800ms** — page entrance, first paint, hero reveal.
+- ~80ms: perceptual "instant" threshold. Below this, the user does not register a transition; above, motion becomes communication.
+- 100-150ms: instant feedback (button press, hover state, focus ring).
+- 200-300ms: state changes (panel open, input focus expansion, tab switch).
+- 300-500ms: layout changes (modal entrance, card flip, drawer slide).
+- 500-800ms: page entrance, first paint, hero reveal.
 
-Exit durations run ~75% of entrance — quick to leave, deliberate to arrive. Named easing curves only; no bounce, no elastic (these read as 2015-trendy on production surfaces in 2026):
+Exit durations run ~75% of entrance, quick to leave, deliberate to arrive. Named easing curves only; no bounce, no elastic (these read as 2015-trendy on production surfaces in 2026):
 
 ```css
 :root {
@@ -186,7 +186,7 @@ Exit durations run ~75% of entrance — quick to leave, deliberate to arrive. Na
 
 ## 3.6 OKLCH thresholds
 
-Tinted neutrals carry chroma 0.005-0.015 toward the brand hue — pure greys (`oklch(L 0 H)`) read as institutional, not designed. Reduce chroma as lightness approaches 0 or 100; saturated extremes look garish at the boundaries of the lightness range and clip outside common gamuts.
+Tinted neutrals carry chroma 0.005-0.015 toward the brand hue, pure greys (`oklch(L 0 H)`) read as institutional, not designed. Reduce chroma as lightness approaches 0 or 100; saturated extremes look garish at the boundaries of the lightness range and clip outside common gamuts.
 
 Dark-mode surface scale uses three steps at lightness 15% / 20% / 25%, sharing the same hue and chroma so the steps read as elevation, not as separate colors. Light-on-dark text needs optical compensation: bump line-height by +0.05-0.1, and step weight up one notch (regular → medium, medium → semibold). The same string of body copy that reads at 16px/regular on light backgrounds needs 16px/medium with looser leading on dark to match perceived density.
 
@@ -194,17 +194,17 @@ Dark-mode surface scale uses three steps at lightness 15% / 20% / 25%, sharing t
 
 Within text blocks, line-height is the base unit for vertical spacing between consecutive lines, paragraphs, and adjacent headings. Body line-height 1.5 on 16px = 24px, so paragraph spacing inside prose composes from 24px increments and adjacent-element gaps inside long-form content snap to that grid. Vertical alignment between adjacent text blocks emerges for free.
 
-For component layout, padding, and inter-section spacing, defer to the `--space-*` tokens declared in §3 (4 / 8 / 12 / 16 / 24 / 32 / 48 / 64). The line-height rhythm and the spacing scale serve different roles — text rhythm is dense and prose-local; layout spacing is coarse and structural. Conflating them produces either airless prose or chunky layouts.
+For component layout, padding, and inter-section spacing, defer to the `--space-*` tokens declared in §3 (4 / 8 / 12 / 16 / 24 / 32 / 48 / 64). The line-height rhythm and the spacing scale serve different roles, text rhythm is dense and prose-local; layout spacing is coarse and structural. Conflating them produces either airless prose or chunky layouts.
 
-Type size scale: five steps (xs / sm / base / lg / xl) with a single ratio — 1.25 (gentle), 1.333 (default), or 1.5 (loud). Pick one ratio at the start and commit; mid-build ratio swaps cascade through every component and re-break alignment.
+Type size scale: five steps (xs / sm / base / lg / xl) with a single ratio, 1.25 (gentle), 1.333 (default), or 1.5 (loud). Pick one ratio at the start and commit; mid-build ratio swaps cascade through every component and re-break alignment.
 
 ## 4. Layout patterns
 
 **Container queries over breakpoints.** Component CSS sizes itself by container, not viewport. A card placed in a 280px sidebar collapses to single-column without the parent caring; placed in a 960px main column it expands. Reusability follows.
 
-**Subgrid for nested grids.** Subgrid is Widely Available as of March 15 2026 — preserves alignment of grandchild grids against the root column tracks without re-declaring template columns. Use whenever a grandchild's columns must align to the grandparent's.
+**Subgrid for nested grids.** Subgrid is Widely Available as of March 15 2026: preserves alignment of grandchild grids against the root column tracks without re-declaring template columns. Use whenever a grandchild's columns must align to the grandparent's.
 
-**`:has()` for parent-state styling.** `.card:has(:focus-visible)`, `.form:has(:invalid)`, `.row:has([aria-current])` — declarative parent reactions that previously required JS state mirroring. Fewer event handlers, fewer race conditions, fewer tests.
+**`:has()` for parent-state styling.** `.card:has(:focus-visible)`, `.form:has(:invalid)`, `.row:has([aria-current])`: declarative parent reactions that previously required JS state mirroring. Fewer event handlers, fewer race conditions, fewer tests.
 
 **`text-wrap: balance` for headlines.** Automatic visual balance on text blocks of ≤6 lines. Apply globally to `h1`, `h2`, and `.lede`-class blockquotes; do not apply to body paragraphs (browsers cap balanced blocks for performance and the cost on a long article is real).
 
@@ -216,29 +216,29 @@ Type size scale: five steps (xs / sm / base / lg / xl) with a single ratio — 1
 
 Inputs need `autocomplete` and `name` for autofill engines; semantic `type` and `inputmode` drive the right mobile keyboard. Labels are clickable via `<label for>` association. Submit buttons stay enabled until the request fires (disabling pre-submit blocks debugging); swap the label for a spinner during loading. Inline errors render under the offending field; focus moves to the first invalid input on submit failure.
 
-Placeholders end with `…` when they show a pattern (`Search by name…`, `123-45-6789…`); never substitute placeholders for labels. `autocomplete="off"` belongs on non-auth fields only (one-time codes, captchas); never on passwords or addresses. Warn before navigation with unsaved changes (`beforeunload` or framework equivalent). Never prevent paste — paste-blocking on password fields pushes users toward weaker passwords. Disable spellcheck (`spellcheck="false"`) on usernames, URLs, and code identifiers. Checkboxes and radios are a single hit target — whole label clickable, not just the box.
+Placeholders end with `…` when they show a pattern (`Search by name…`, `123-45-6789…`); never substitute placeholders for labels. `autocomplete="off"` belongs on non-auth fields only (one-time codes, captchas); never on passwords or addresses. Warn before navigation with unsaved changes (`beforeunload` or framework equivalent). Never prevent paste, paste-blocking on password fields pushes users toward weaker passwords. Disable spellcheck (`spellcheck="false"`) on usernames, URLs, and code identifiers. Checkboxes and radios are a single hit target, whole label clickable, not just the box.
 
 ## 4.6 Touch interaction
 
-`touch-action: manipulation` on tappable elements eliminates the 300ms double-tap-zoom delay on iOS. Set `-webkit-tap-highlight-color` intentionally (token color or `transparent`); default-blue is a Safari default, not a design choice. `overscroll-behavior: contain` on modals and drawers stops scroll-chaining into the page beneath. During drag, disable text selection (`user-select: none`) and apply `inert` to background content so screen readers don't pick up irrelevant nodes. `autoFocus` is desktop-only — on mobile it summons the keyboard and shifts the viewport before the user has read the form.
+`touch-action: manipulation` on tappable elements eliminates the 300ms double-tap-zoom delay on iOS. Set `-webkit-tap-highlight-color` intentionally (token color or `transparent`); default-blue is a Safari default, not a design choice. `overscroll-behavior: contain` on modals and drawers stops scroll-chaining into the page beneath. During drag, disable text selection (`user-select: none`) and apply `inert` to background content so screen readers don't pick up irrelevant nodes. `autoFocus` is desktop-only, on mobile it summons the keyboard and shifts the viewport before the user has read the form.
 
 ## 4.7 Safe areas + viewport
 
-`env(safe-area-inset-*)` for notch / dynamic-island / home-indicator padding on iOS and Android. The `env()` values resolve to non-zero only when the viewport meta opts into edge-to-edge layout — pair with `<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">`. Without `viewport-fit=cover`, the browser keeps content inside the safe area itself and `env()` returns `0`. `overflow-x: hidden` on full-bleed containers prevents accidental horizontal scrollbars from long unbreakable strings or transformed elements. `font-variant-numeric: tabular-nums` on numeric columns aligns digit widths so totals, timestamps, and prices stack cleanly.
+`env(safe-area-inset-*)` for notch / dynamic-island / home-indicator padding on iOS and Android. The `env()` values resolve to non-zero only when the viewport meta opts into edge-to-edge layout, pair with `<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">`. Without `viewport-fit=cover`, the browser keeps content inside the safe area itself and `env()` returns `0`. `overflow-x: hidden` on full-bleed containers prevents accidental horizontal scrollbars from long unbreakable strings or transformed elements. `font-variant-numeric: tabular-nums` on numeric columns aligns digit widths so totals, timestamps, and prices stack cleanly.
 
 ## 4.8 Dark mode native fixes
 
-`color-scheme: dark` on `<html>` fixes default scrollbar color and native form-input rendering on Windows in one property. Match `<meta name="theme-color">` to the page background per theme — the browser chrome adopts this color on iOS Safari and Android Chrome, and a mismatch reads as a flicker between page and frame. Native `<select>` needs explicit `background-color` and `color` in dark mode on Windows; the OS otherwise picks white-on-white.
+`color-scheme: dark` on `<html>` fixes default scrollbar color and native form-input rendering on Windows in one property. Match `<meta name="theme-color">` to the page background per theme, the browser chrome adopts this color on iOS Safari and Android Chrome, and a mismatch reads as a flicker between page and frame. Native `<select>` needs explicit `background-color` and `color` in dark mode on Windows; the OS otherwise picks white-on-white.
 
 ## 4.9 i18n + locale
 
-Use `Intl.DateTimeFormat` and `Intl.NumberFormat` for all dates, times, and numbers — never hardcode `MM/DD/YYYY`, `1,000.00`, or currency symbols. Detect locale via `Accept-Language` (server) or `navigator.languages` (client); never IP-based geolocation, which conflates location with language preference (a French speaker in Tokyo wants French, not Japanese). `translate="no"` on brand names, code identifiers, monospace tokens, and proper nouns — Google Translate will otherwise render `Stripe` as `Bande` in French; apply per-element, not site-wide.
+Use `Intl.DateTimeFormat` and `Intl.NumberFormat` for all dates, times, and numbers, never hardcode `MM/DD/YYYY`, `1,000.00`, or currency symbols. Detect locale via `Accept-Language` (server) or `navigator.languages` (client); never IP-based geolocation, which conflates location with language preference (a French speaker in Tokyo wants French, not Japanese). `translate="no"` on brand names, code identifiers, monospace tokens, and proper nouns, Google Translate will otherwise render `Stripe` as `Bande` in French; apply per-element, not site-wide.
 
 Text-expansion budget per locale: German +30%, French +20%, Finnish +30-40%, Chinese -30%. Buttons, labels, and table headers must accommodate the swing without wrapping or truncating; design at the longest expected length and let other locales breathe.
 
 ## 4.10 Input method, breakpoints, responsive images
 
-**Detect input method, not just screen size.** A laptop with a touchscreen and a tablet with a keyboard expose the gap between viewport width and pointer fidelity. Pointer + hover queries gate per-input affordances. Two axes matter: `pointer` / `hover` describe the *primary* input; `any-pointer` / `any-hover` describe whether *any* attached input has that capability — the hybrid-device case. Treat hover as strictly additive (a decoration *added* when supported), never a replacement for functionality.
+**Detect input method, not just screen size.** A laptop with a touchscreen and a tablet with a keyboard expose the gap between viewport width and pointer fidelity. Pointer + hover queries gate per-input affordances. Two axes matter: `pointer` / `hover` describe the *primary* input; `any-pointer` / `any-hover` describe whether *any* attached input has that capability: the hybrid-device case. Treat hover as strictly additive (a decoration *added* when supported), never a replacement for functionality.
 
 ```css
 /* Size touch targets up when any input is coarse — covers a laptop
@@ -263,9 +263,9 @@ Text-expansion budget per locale: German +30%, French +20%, Finnish +30-40%, Chi
 }
 ```
 
-`pointer: coarse` alone misses the touchscreen laptop (primary input is the trackpad, secondary is touch). `any-pointer: coarse` catches it. The same applies to hover — a tablet with a paired Bluetooth mouse has `hover: none` (primary is touch) but `any-hover: hover` (the mouse can hover). Always treat hover as additive: the surface must work without it.
+`pointer: coarse` alone misses the touchscreen laptop (primary input is the trackpad, secondary is touch). `any-pointer: coarse` catches it. The same applies to hover, a tablet with a paired Bluetooth mouse has `hover: none` (primary is touch) but `any-hover: hover` (the mouse can hover). Always treat hover as additive: the surface must work without it.
 
-**Mobile-first, content-driven breakpoints.** Start with base styles for the smallest target, layer with `min-width`. Desktop-first (`max-width`) sends mobile devices the desktop styles first and overrides them — wrong direction. Three breakpoints typically suffice: 640 / 768 / 1024 px. Add a fourth only when content forces it. Do not chase device sizes; let the design tell you where it breaks. Use `clamp()` for fluid values that do not need a hard breakpoint.
+**Mobile-first, content-driven breakpoints.** Start with base styles for the smallest target, layer with `min-width`. Desktop-first (`max-width`) sends mobile devices the desktop styles first and overrides them: wrong direction. Three breakpoints typically suffice: 640 / 768 / 1024 px. Add a fourth only when content forces it. Do not chase device sizes; let the design tell you where it breaks. Use `clamp()` for fluid values that do not need a hard breakpoint.
 
 **Responsive images.** Use `srcset` with width descriptors when the image only changes in resolution; use `<picture>` with `<source media>` when crops or compositions differ.
 
@@ -291,9 +291,9 @@ The browser combines `srcset` widths with the device-pixel-ratio to pick the rig
 
 ## 4.11 Optical adjustments + touch targets
 
-(For breakpoint-free grids see §4 "Breakpoint-free responsive grid" — `repeat(auto-fit, minmax())` is already the canonical pattern; this section adds optical-tuning and touch-target patterns that depend on it.)
+(For breakpoint-free grids see §4 "Breakpoint-free responsive grid", `repeat(auto-fit, minmax())` is already the canonical pattern; this section adds optical-tuning and touch-target patterns that depend on it.)
 
-**Optical adjustments.** Geometric alignment and optical alignment diverge on certain glyphs and shapes — `margin: 0` produces visually-indented text, and a centered play icon looks shifted off-center. Define dedicated optical-nudge tokens in your token file so the values are named, not magic.
+**Optical adjustments.** Geometric alignment and optical alignment diverge on certain glyphs and shapes: `margin: 0` produces visually-indented text, and a centered play icon looks shifted off-center. Define dedicated optical-nudge tokens in your token file so the values are named, not magic.
 
 ```css
 :root {
@@ -311,7 +311,7 @@ The browser combines `srcset` widths with the device-pixel-ratio to pick the rig
 .play-icon { transform: translateX(var(--optical-nudge-icon)); }
 ```
 
-The values are illustrative defaults; tune per-typeface and per-icon-set. The point of the named tokens is to make optical adjustments *intentional* — a magic `1px` in component CSS reads as a leftover hack; `var(--optical-nudge-icon)` reads as a deliberate optical correction with a system home.
+The values are illustrative defaults; tune per-typeface and per-icon-set. The point of the named tokens is to make optical adjustments *intentional*, a magic `1px` in component CSS reads as a leftover hack; `var(--optical-nudge-icon)` reads as a deliberate optical correction with a system home.
 
 **Touch-target pseudo-element.** Icon buttons can stay visually small while still meeting the 44×44px minimum tap target, via an invisible `::before` that expands the hit area without affecting layout.
 
@@ -336,11 +336,11 @@ The pseudo-element is invisible but receives pointer / touch events because the 
 - **HSL or RGB for design-token color.** OKLCH-only. HSL lightness is not perceptual and produces uneven ramps across hues.
 - **JS scroll listeners for parallax or progress.** Use `animation-timeline: scroll()` where supported, `IntersectionObserver` otherwise. A `scroll` event handler running every frame is a battery and jank tax.
 - **Layout-driven media queries on component-scoped content.** Container queries are the right axis once a component can appear in multiple containers.
-- **`transition: all`.** Already banned in SKILL.md §4 charter. Restated here because it is the single most common slop tell on web — animates layout, color, and transform together; jank and unintended re-layouts guaranteed. Name the properties.
+- **`transition: all`.** Already banned in SKILL.md §4 charter. Restated here because it is the single most common slop tell on web: animates layout, color, and transform together; jank and unintended re-layouts guaranteed. Name the properties.
 - **`*-system-ui` font stacks as the type system.** Already banned. A direction with no committed family is no direction; system-ui delegates the type pair to whatever the OS shipped.
 - **Default Tailwind `gray-50…900` ramp imported wholesale.** RLHF and template defaults converge on it; the surface reads as preset before the eye finishes scanning.
 - **Hardcoded hex or px values in component CSS.** Tokens precede components; components reference tokens. A `git grep '#[0-9a-f]\{3,8\}'` against component files should be empty.
 
 ## 6. Cite-and-defer
 
-Citations: caniuse.com, web.dev/baseline, MDN. This is starter density — cross-check Baseline status on web.dev/baseline and the canonical spec surface on MDN before relying on any feature in production. The date a feature crosses Newly to Widely Available shifts as Safari, Firefox, and Chrome stable releases land.
+Citations: caniuse.com, web.dev/baseline, MDN. This is starter density, cross-check Baseline status on web.dev/baseline and the canonical spec surface on MDN before relying on any feature in production. The date a feature crosses Newly to Widely Available shifts as Safari, Firefox, and Chrome stable releases land.

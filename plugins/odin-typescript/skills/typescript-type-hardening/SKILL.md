@@ -48,11 +48,11 @@ description: 'Use when existing TypeScript code has concrete type errors, any, f
 
 ## Failure and recovery
 
-- **Mechanism fails:** revert the failing edit. Report the exact error, the mechanism attempted, and why it did not resolve. Do not widen the type to suppress the error.
-- **Call-site breakage beyond scope:** revert the change. Report which call sites broke and what contract change they require. Await scope expansion approval.
-- **Instantiation-depth exceeded:** simplify the recursive type. Use a depth-limited recursion pattern with a counter generic. If the structure genuinely requires deep recursion, report the limit and propose a runtime fallback.
-- **Dirty baseline:** the baseline already has errors unrelated to the target. Scoped check is the defined mode; Done is relative to the scoped baseline, not the full project. Report pre-existing errors separately.
-- **No tsconfig.json found:** block. Report the missing prerequisite. Do not create a `tsconfig.json`; that is the job of typescript-best-practices or the project setup.
+- Mechanism fails: revert the failing edit. Report the exact error, the mechanism attempted, and why it did not resolve. Do not widen the type to suppress the error.
+- Call-site breakage beyond scope: revert the change. Report which call sites broke and what contract change they require. Await scope expansion approval.
+- Instantiation-depth exceeded: simplify the recursive type. Use a depth-limited recursion pattern with a counter generic. If the structure genuinely requires deep recursion, report the limit and propose a runtime fallback.
+- Dirty baseline: the baseline already has errors unrelated to the target. Scoped check is the defined mode; Done is relative to the scoped baseline, not the full project. Report pre-existing errors separately.
+- No tsconfig.json found: block. Report the missing prerequisite. Do not create a `tsconfig.json`; that is the job of typescript-best-practices or the project setup.
 
 ## Output
 

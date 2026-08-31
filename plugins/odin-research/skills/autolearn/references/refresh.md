@@ -2,7 +2,7 @@
 
 Read this for `autolearn mode:refresh [scope]`. It maintains existing learnings as the code evolves, both their individual accuracy and the design of the set as a whole. Create mode writes one new doc; refresh mode keeps existing docs accurate.
 
-## Maintenance model — five outcomes
+## Maintenance model: five outcomes
 
 Classify every candidate doc into exactly one:
 
@@ -33,20 +33,20 @@ Pick the lightest interaction path:
 
 | Scope | When | Style |
 |-------|------|-------|
-| **Focused** | 1–2 files, or a named doc | Investigate, then recommend |
+| **Focused** | 1-2 files, or a named doc | Investigate, then recommend |
 | **Batch** | up to ~8 mostly-independent docs | Investigate, then grouped recommendations |
 | **Broad** | 9+, ambiguous, or repo-wide sweep | Triage first (inventory frontmatter, cluster by area, spot-check whether referenced files still exist), then investigate in batches |
 
-## Phase 1 — investigate each doc
+## Phase 1: investigate each doc
 
 Read it, cross-reference claims against the current codebase, form a recommendation. Per doc, check:
 
-- **References** — file paths, symbols, modules: still exist or moved?
-- **Solution** — does the fix still match how the code works today?
-- **Code examples** — do snippets reflect the current implementation?
-- **Related docs** — cross-referenced learnings still present and consistent?
-- **Auto memory** (if an auto-memory block is injected) — entries in the same domain? Tag memory-sourced signals `(auto memory [claude])`.
-- **Overlap** — another in-scope doc covering the same domain? Record both paths, which dimensions overlap, which is broader/more current.
+- References: file paths, symbols, modules: still exist or moved?
+- Solution: does the fix still match how the code works today?
+- Code examples: do snippets reflect the current implementation?
+- Related docs: cross-referenced learnings still present and consistent?
+- Auto memory (if an auto-memory block is injected): entries in the same domain? Tag memory-sourced signals `(auto memory [claude])`.
+- Overlap: another in-scope doc covering the same domain? Record both paths, which dimensions overlap, which is broader/more current.
 
 **Update vs Replace boundary:** references moved but the approach is still correct → Update. The recommended solution conflicts with current code, or the architecture changed → Replace. **If you're rewriting the Solution section, it's Replace, not Update.**
 
@@ -54,16 +54,16 @@ Judgment: contradiction with current code is a strong Replace signal. Age alone 
 
 Subagents here are **read-only** investigators: return file path, evidence, recommended action, confidence, open questions. Run in parallel only for genuinely independent docs. These investigation subagents never write. Deletes, commits, and frontmatter metadata stay with the orchestrator. The one writing subagent is the Replace successor-drafter below — and even there the orchestrator validates the result, deletes the old file, and commits.
 
-## Phase 1.5 — document-set analysis
+## Phase 1.5: document-set analysis
 
 Step back and judge the set as a whole:
 
-- **Overlap** — for docs sharing module/component/tags/domain, compare problem statement, solution shape, referenced files, prevention rules, root cause. High overlap across 3+ dimensions → strong Consolidate signal.
-- **Supersession** — older narrow precursor vs newer canonical doc → the older is a consolidation candidate.
-- **Retrieval-value test** — before keeping two docs separate: "six months from now, does having these separate help discoverability, or just create drift risk?" Separate docs earn their keep only for genuinely different sub-problems someone would search independently.
-- **Cross-doc conflict** — outright contradictions between docs actively confuse readers; more urgent than individual staleness. Flag for immediate resolution.
+- Overlap: for docs sharing module/component/tags/domain, compare problem statement, solution shape, referenced files, prevention rules, root cause. High overlap across 3+ dimensions → strong Consolidate signal.
+- Supersession: older narrow precursor vs newer canonical doc → the older is a consolidation candidate.
+- Retrieval-value test: before keeping two docs separate: "six months from now, does having these separate help discoverability, or just create drift risk?" Separate docs earn their keep only for genuinely different sub-problems someone would search independently.
+- Cross-doc conflict: outright contradictions between docs actively confuse readers; more urgent than individual staleness. Flag for immediate resolution.
 
-## Phase 2 — execute per action
+## Phase 2: execute per action
 
 ### Keep
 No edit. Summarize why it remains trustworthy.

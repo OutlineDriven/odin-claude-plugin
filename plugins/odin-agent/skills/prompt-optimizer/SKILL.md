@@ -43,11 +43,11 @@ Optional:
 8. **Return the result.** Output the optimized prompt, target, success criteria (rule list), external context (adapter notes), and residual risks as a structured response. Done when: the structured response is returned with all five elements.
 
 ## Failure and recovery
-- **Ambiguous target:** Stop and ask the user to name one goal. Do not optimize for two goals.
-- **No observable rule:** Stop if step 3 produces zero behavior rules. A prompt with no constraints is not an optimized prompt.
-- **Holdout validation fails:** Return the failing case and the specific contradictory output. Do not declare the prompt done.
-- **Owner gap:** If step 6 finds a rule with no observable trace, add it explicitly to the success criteria and revise the prompt.
-- **Partial result:** If the user interrupts, return what is complete through step 4. Label it partial.
+- Ambiguous target: Stop and ask the user to name one goal. Do not optimize for two goals.
+- No observable rule: Stop if step 3 produces zero behavior rules. A prompt with no constraints is not an optimized prompt.
+- Holdout validation fails: Return the failing case and the specific contradictory output. Do not declare the prompt done.
+- Owner gap: If step 6 finds a rule with no observable trace, add it explicitly to the success criteria and revise the prompt.
+- Partial result: If the user interrupts, return what is complete through step 4. Label it partial.
 
 ## Output
 A structured response with optimized prompt text, target statement, success criteria, external context, residual risks, and holdout validation summary, in that order.

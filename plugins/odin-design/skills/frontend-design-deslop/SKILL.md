@@ -45,10 +45,10 @@ Optional: brand palette, typeface preferences, existing token files, and a targe
 
 ## Failure and recovery
 
-- **WCAG 2.2 AA gate fails**: do not record a pass. Fix the failing criterion in tokens or component CSS and re-run the gate. If a criterion cannot be met within the supplied inputs, stop and report the unmet criterion and the input gap.
-- **Slop audit finds a violation**: fix it in the interface or tokens and re-audit. A partial pass is not a done state; record the outstanding violations and continue only on them.
-- **Token system conflicts with existing styles**: prefer the new token system and update component CSS to reference it; do not leave hard-coded overrides. If a caller-supplied constraint makes the token system incoherent, stop and report the conflict rather than shipping inconsistent tokens.
-- **Rollback**: revert DESIGN.md, token files, and component CSS via version control. No other files were written, so no further recovery is needed.
+- WCAG 2.2 AA gate fails: do not record a pass. Fix the failing criterion in tokens or component CSS and re-run the gate. If a criterion cannot be met within the supplied inputs, stop and report the unmet criterion and the input gap.
+- Slop audit finds a violation: fix it in the interface or tokens and re-audit. A partial pass is not a done state; record the outstanding violations and continue only on them.
+- Token system conflicts with existing styles: prefer the new token system and update component CSS to reference it; do not leave hard-coded overrides. If a caller-supplied constraint makes the token system incoherent, stop and report the conflict rather than shipping inconsistent tokens.
+- Rollback: revert DESIGN.md, token files, and component CSS via version control. No other files were written, so no further recovery is needed.
 
 ## Output
 

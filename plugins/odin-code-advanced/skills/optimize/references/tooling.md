@@ -32,7 +32,7 @@ Delete it after the skill run unless the user asks to keep it as a regression gu
 
 **Harness placement — toolchain-native vs portable:**
 
-- **Python, TypeScript, OCaml** — toolchain-agnostic runners discover files by path argument;
+- **Python, TypeScript, OCaml** ; toolchain-agnostic runners discover files by path argument;
   write the harness directly to `.outline/optimize/<target>/` and invoke it from there.
 - **Rust (`cargo bench`)** — `cargo` discovers benches only under the project's `benches/`
   directory (registered in `Cargo.toml` or auto-discovered by convention). Write the harness to
@@ -103,7 +103,7 @@ func Benchmark<HotFunction>(b *testing.B) {
 Run: `go test -bench=Benchmark<HotFunction> -benchmem -count=10 .`
 Diff: `benchstat before.txt after.txt`
 
-### Java / Kotlin — JMH
+### Java / Kotlin ; JMH
 
 ```java
 // src/jmh/java/BenchHotPath.java  (Gradle) or src/test/java/ with @Fork (Maven)
@@ -125,7 +125,7 @@ public class BenchHotPath {
 
 Run: `./gradlew jmh` or `mvn jmh:benchmark`
 
-### JavaScript / TypeScript — tinybench
+### JavaScript / TypeScript ; tinybench
 
 ```typescript
 // .outline/optimize/<target>/bench.<target>.ts

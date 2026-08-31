@@ -83,11 +83,11 @@ Remove constructs that do not earn their keep from code in the working tree, the
 2. **Read end to end.** Understand what each function, type, and module in scope must do or convey. Note the behavioral contract each piece serves. Done when: the scope's contracts are mapped.
 
 3. **Classify candidates.** For each construct in scope:
-   - **Dead code**: unreachable paths, unused imports, unexported helpers with zero callers, commented-out blocks, stale feature-flag branches that are always-on or always-off.
-   - **Redundant construct**: duplicated logic, a wrapper that only forwards, a variable assigned once and immediately consumed, a conditional whose guard is always true or false in context, a type alias that adds no clarity.
-   - **Special case**: a branch that handles one input shape identically to the general case, a guard that duplicates the default, a fallback that cannot trigger.
-   - **Ceremony**: a factory/builder/adapter with one real implementation, a generic parameter with one concrete use, an abstraction layer with no real boundary behind it.
-   - **Not a candidate**: live behavior, public API contracts, real boundary seams (process, network, untrusted input, FFI, async/sync, test/production where mocks substitute), code that is verbose but not wrong. A swappable-implementation contract counts only when more than one real implementation ships today.
+   - Dead code: unreachable paths, unused imports, unexported helpers with zero callers, commented-out blocks, stale feature-flag branches that are always-on or always-off.
+   - Redundant construct: duplicated logic, a wrapper that only forwards, a variable assigned once and immediately consumed, a conditional whose guard is always true or false in context, a type alias that adds no clarity.
+   - Special case: a branch that handles one input shape identically to the general case, a guard that duplicates the default, a fallback that cannot trigger.
+   - Ceremony: a factory/builder/adapter with one real implementation, a generic parameter with one concrete use, an abstraction layer with no real boundary behind it.
+   - Not a candidate: live behavior, public API contracts, real boundary seams (process, network, untrusted input, FFI, async/sync, test/production where mocks substitute), code that is verbose but not wrong. A swappable-implementation contract counts only when more than one real implementation ships today.
 
    Indirection earns its keep only at a real boundary: public API surfaces, process or network seams, untrusted-input boundaries, async/sync seams, runtime FFI seams, or test/production seams where mocks substitute. Internal modules in the same package, same-file helpers, and cross-module calls without a co-change constraint are not boundaries. Done when: every construct in scope is classified.
 

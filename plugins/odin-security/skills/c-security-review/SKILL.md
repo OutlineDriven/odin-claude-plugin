@@ -50,11 +50,11 @@ Bound scope first: create `.c-review-results/<stamp>/` (UTC timestamp) and clear
 
 ## Failure and recovery
 
-- **Empty scope:** no source files found in `scope_subpath`. Stop and report which path was searched. Do not write a report.
-- **Parsing failure:** a source file cannot be read. Record the file and error in `findings.json` under `unreadable_files`, continue with the rest, and disclose the gap in REPORT.md.
-- **Missing artifacts:** if REPORT.md or REPORT.sarif cannot be written, report which artifact failed and what findings were collected. Do not claim success.
-- **Partial result:** a failed pass is uncovered ground, not a rounding error. Report it next to the findings. Name the files and line ranges that were not reviewed.
-- **Non-mutation:** a source edit under a running review invalidates the findings. Do not modify the reviewed tree. Roll back by deleting the run directory.
+- Empty scope: no source files found in `scope_subpath`. Stop and report which path was searched. Do not write a report.
+- Parsing failure: a source file cannot be read. Record the file and error in `findings.json` under `unreadable_files`, continue with the rest, and disclose the gap in REPORT.md.
+- Missing artifacts: if REPORT.md or REPORT.sarif cannot be written, report which artifact failed and what findings were collected. Do not claim success.
+- Partial result: a failed pass is uncovered ground, not a rounding error. Report it next to the findings. Name the files and line ranges that were not reviewed.
+- Non-mutation: a source edit under a running review invalidates the findings. Do not modify the reviewed tree. Roll back by deleting the run directory.
 
 ## Output
 

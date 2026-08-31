@@ -79,14 +79,14 @@ When asked to continue, resume, or pick up a saga:
 5. **Keep the contract.** Do not silently re-scope. If the spec is wrong, update the relevant spec file and note it in `PROGRESS.md` under Decisions & Deviations; escalate to the user if agreed behavior or exit criteria change.
 
 ## Failure and recovery
-- **Spec gap:** ambiguity unresolved in Phase 1 blocks delegation. Escalate to user via `ask_user_question` with options; do not proceed until resolved.
-- **Worker blocked:** collect the report, update `PROGRESS.md`, re-delegate with retained context or adjust the task spec; escalate to user if the blocker is not resolvable from the spec.
-- **Milestone validation failure:** revert to pre-integration state (branches and commits are preserved in git history); re-delegate affected tasks.
-- **Phase 3 rejection:** capture reported issues as new tasks; run a focused Phase 2 mini-loop; re-present.
-- **Unachievable validation:** if a criterion cannot be checked with available tools, update the spec and note the finding; escalate to the user.
-- **Partial-result rule:** never remove a worktree while validated or useful partial work is still inside it.
-- **Non-rollback rule:** once a durable handoff exists (commit pushed, draft PR opened, patch returned), the work is preserved regardless of subsequent failures.
-- **Non-converged result:** if a task cannot be completed despite re-delegation and spec adjustment, record the blocker in `PROGRESS.md` and escalate to the user. Do not silently declare done.
+- Spec gap: ambiguity unresolved in Phase 1 blocks delegation. Escalate to user via `ask_user_question` with options; do not proceed until resolved.
+- Worker blocked: collect the report, update `PROGRESS.md`, re-delegate with retained context or adjust the task spec; escalate to user if the blocker is not resolvable from the spec.
+- Milestone validation failure: revert to pre-integration state (branches and commits are preserved in git history); re-delegate affected tasks.
+- Phase 3 rejection: capture reported issues as new tasks; run a focused Phase 2 mini-loop; re-present.
+- Unachievable validation: if a criterion cannot be checked with available tools, update the spec and note the finding; escalate to the user.
+- Partial-result rule: never remove a worktree while validated or useful partial work is still inside it.
+- Non-rollback rule: once a durable handoff exists (commit pushed, draft PR opened, patch returned), the work is preserved regardless of subsequent failures.
+- Non-converged result: if a task cannot be completed despite re-delegation and spec adjustment, record the blocker in `PROGRESS.md` and escalate to the user. Do not silently declare done.
 
 ## Output
 A completed feature meeting all saga exit criteria. A completion report listing what was built, how each criterion was validated, and exact steps for manual verification. Terminal state is user acceptance.

@@ -30,9 +30,9 @@ Convert evidence into a normalized signal:
 
 Mark signal strength:
 
-- **Strong:** repeated across source classes or repeated with corrections.
-- **Medium:** appears once in durable memory or project instruction.
-- **Weak:** appears once in a transcript without correction or recurrence.
+- Strong: repeated across source classes or repeated with corrections.
+- Medium: appears once in durable memory or project instruction.
+- Weak: appears once in a transcript without correction or recurrence.
 
 Weak signals can support but should not select an anchor alone.
 
@@ -69,8 +69,8 @@ Bad concept shapes:
 
 For every anchor, derive both sides:
 
-- **Side A:** What default, vague, timid, under-committed version violates the concept?
-- **Side B:** What excessive, compensatory, ornate, over-abstracted version violates the concept?
+- Side A: What default, vague, timid, under-committed version violates the concept?
+- Side B: What excessive, compensatory, ornate, over-abstracted version violates the concept?
 
 Both sides must be concrete enough to audit. If one side cannot be named, the anchor is not ready.
 

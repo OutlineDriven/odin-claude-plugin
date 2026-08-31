@@ -16,8 +16,8 @@ description: 'Use when the user asks "how does X work" and wants an architecture
 
 ## Inputs
 
-- **Target**: the specific code path, function, module, class, or subsystem the user names. Required.
-- **User question**: the full natural-language phrasing of the how request. Required.
+- Target: the specific code path, function, module, class, or subsystem the user names. Required.
+- User question: the full natural-language phrasing of the how request. Required.
 
 ## Procedure
 
@@ -30,9 +30,9 @@ description: 'Use when the user asks "how does X work" and wants an architecture
 7. Return a structured chat report containing the walkthrough and gotchas.
 
 ## Failure and recovery
-- **Target not found**: the named path, symbol, or module does not exist in the codebase. Return `no-evidence` and state exactly which target was not found. Do not guess or infer the target's location.
-- **Ambiguous target**: the name matches multiple distinct locations. Ask the user to specify which one they mean. Do not proceed on multiple targets simultaneously.
-- **Insufficient evidence**: the target exists but its implementation is behind an opaque boundary (binary blob, generated code without source, external service). State that the evidence is unavailable and end with `inconclusive`.
+- Target not found: the named path, symbol, or module does not exist in the codebase. Return `no-evidence` and state exactly which target was not found. Do not guess or infer the target's location.
+- Ambiguous target: the name matches multiple distinct locations. Ask the user to specify which one they mean. Do not proceed on multiple targets simultaneously.
+- Insufficient evidence: the target exists but its implementation is behind an opaque boundary (binary blob, generated code without source, external service). State that the evidence is unavailable and end with `inconclusive`.
 
 ## Output
 A grounded architecture walkthrough describing:

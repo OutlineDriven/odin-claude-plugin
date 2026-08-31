@@ -16,9 +16,9 @@ description: 'Use when a user wants a looser conceptual graph for exploratory wo
 
 ## Inputs
 
-- **Exploratory topic or problem statement** (required): the subject area to map. May be a question, a half-formed idea, a domain, or a set of related concerns.
-- **Existing notes or fragments** (optional): prior concepts, questions, or connections the graph should incorporate.
-- **Output path** (optional): where to write the graph artifact. Defaults to a file in the working directory.
+- Exploratory topic or problem statement (required): the subject area to map. May be a question, a half-formed idea, a domain, or a set of related concerns.
+- Existing notes or fragments (optional): prior concepts, questions, or connections the graph should incorporate.
+- Output path (optional): where to write the graph artifact. Defaults to a file in the working directory.
 
 ## Procedure
 
@@ -31,11 +31,11 @@ description: 'Use when a user wants a looser conceptual graph for exploratory wo
 7. Review the graph against the original topic. Check that it surfaces the key unknowns without imposing a false dependency order. If a region is sparse or missing, add nodes and edges rather than leaving gaps. Done when: the graph surfaces key unknowns and has no false dependency order or sparse gaps.
 
 ## Failure and recovery
-- **Topic too vague to extract nodes**: ask the human for one concrete anchor (a question, a constraint, or a stakeholder concern), then proceed from that anchor. Do not fabricate concepts to fill the graph.
-- **Graph collapses into a linear chain or strict DAG**: the procedure drifted toward execution planning. Restart at step 3 and deliberately use non-dependency relationship types (tensions, unknowns, contradictions) to break the chain.
-- **Graph too dense to read**: collapse low-confidence peripheral nodes into a summary node and keep the high-value bridges visible. Preserve the full node list in an appendix section.
-- **Partial result**: if the procedure stops before step 7, deliver the graph as-is with an explicit note on which review step was not completed. Do not claim the done predicate holds.
-- **Rollback**: the artifact is a single local file. Delete or overwrite it to revert. No other state is mutated.
+- Topic too vague to extract nodes: ask the human for one concrete anchor (a question, a constraint, or a stakeholder concern), then proceed from that anchor. Do not fabricate concepts to fill the graph.
+- Graph collapses into a linear chain or strict DAG: the procedure drifted toward execution planning. Restart at step 3 and deliberately use non-dependency relationship types (tensions, unknowns, contradictions) to break the chain.
+- Graph too dense to read: collapse low-confidence peripheral nodes into a summary node and keep the high-value bridges visible. Preserve the full node list in an appendix section.
+- Partial result: if the procedure stops before step 7, deliver the graph as-is with an explicit note on which review step was not completed. Do not claim the done predicate holds.
+- Rollback: the artifact is a single local file. Delete or overwrite it to revert. No other state is mutated.
 
 ## Output
 A single freeform conceptual graph artifact ordered: node list (with confidence markers), labeled edge list (allowing cycles), provisional cluster summary, high-value bridge targets, open-questions list — human-readable, revisable without tooling.

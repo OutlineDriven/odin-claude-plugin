@@ -55,12 +55,7 @@ description: 'Use when asked to diagnose Node.js tests that hang after the runne
 
 ## Failure and recovery
 
-- **External or dependency leak**: The hang is in a dependency or native addon. Return partial findings with the handle type and the code that creates it; do not widen scope to unrelated code or edit node_modules.
-- **Cannot reproduce**: If the hang does not reproduce in three isolation runs, report the reproduction attempts and the clean exit; do not invent a cause.
-- **Partial-result rule**: If the root cause cannot be fixed, return the diagnostic report up to the last confirmed finding.
-- **Revert rule**: If an edit worsens the result, revert all edits before returning.
-- **Non-mutation rule**: Do not edit production source code outside the test file unless the user explicitly confirms in the same session.
-- **Blocked result**: Terminal classification `blocked` naming the missing tool and the evidence that was gathered; the done predicate does not hold.
+If the hang is in a dependency or native addon, return partial findings with the handle type and the code that creates it; do not widen scope to unrelated code or edit node_modules. If the hang does not reproduce in three isolation runs, report the reproduction attempts and the clean exit; do not invent a cause. If the root cause cannot be fixed, return the diagnostic report up to the last confirmed finding. If an edit worsens the result, revert all edits before returning. Do not edit production source code outside the test file unless the user explicitly confirms in the same session. A blocked result is a terminal classification naming the missing tool and the evidence that was gathered; the done predicate does not hold.
 
 ## Output
 

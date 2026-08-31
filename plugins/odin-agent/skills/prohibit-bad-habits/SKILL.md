@@ -16,9 +16,9 @@ description: 'Use when a user wants to define patterns the agent should not do; 
 
 ## Inputs
 
-- **Prohibited patterns**: required. For each pattern, the human supplies a short name, a concrete description of the behavior to avoid, the negative consequence of that behavior, and optionally a category and a workaround or alternative. If the human cannot supply a concrete description, stop rather than invent one.
-- **Target location**: optional. The human may specify the exact file path. Default: `docs/prohibited-habits.md` for shared project docs; `agent-rules/prohibited-habits.yaml` for agent-rule locations.
-- **Authority confirmation**: the human confirms or revises the target path before the write occurs.
+- Prohibited patterns: required. For each pattern, the human supplies a short name, a concrete description of the behavior to avoid, the negative consequence of that behavior, and optionally a category and a workaround or alternative. If the human cannot supply a concrete description, stop rather than invent one.
+- Target location: optional. The human may specify the exact file path. Default: `docs/prohibited-habits.md` for shared project docs; `agent-rules/prohibited-habits.yaml` for agent-rule locations.
+- Authority confirmation: the human confirms or revises the target path before the write occurs.
 
 ## Procedure
 
@@ -27,7 +27,7 @@ description: 'Use when a user wants to define patterns the agent should not do; 
 3. **Choose format.** Use Markdown (`*.md`) if the target is under `docs/` or the human requests it. Use YAML (`*.yaml`) if the target is under `agent-rules/` or multiple agent-rule files already exist in the project. Otherwise default to Markdown. Done when: the stated outcome holds.
 4. **Draft file content.** Write the following structure to the confirmed path: Done when: the stated outcome holds.
 
-   - **Markdown format:**
+   - Markdown format:
      ```markdown
      # Prohibited Habits
 
@@ -37,7 +37,7 @@ description: 'Use when a user wants to define patterns the agent should not do; 
      **When it happens:** <negative consequence of the behavior>
      **Workaround:** <alternative or mitigation, if provided>
      ```
-   - **YAML format:**
+   - YAML format:
      ```yaml
      prohibited_habits:
        - name: <short name>
@@ -51,10 +51,10 @@ description: 'Use when a user wants to define patterns the agent should not do; 
 6. **Present to the human.** Show the written file path and content. The human confirms acceptance or requests revision. If the human declines to review, report the partial result and stop without claiming done. Done when: the stated outcome holds.
 
 ## Failure and recovery
-- **Non-concrete input:** if the human cannot describe a pattern concretely, stop and return `blocked: non-concrete-description`. Do not substitute a generic warning.
-- **Unreviewed pre-existing file conflict:** if the target file exists with unreviewed content, stop and return `blocked: unreviewed-file-exists`. Do not overwrite.
-- **Human declines review:** return `partial: file-written` with the file path. The done predicate does not hold until the human confirms acceptance.
-- **Rollback:** delete the written file only if (a) the file did not exist before this session and (b) the human has not confirmed the content. If the file existed before, restore it from the original content if possible. Rollback does not apply after human confirmation.
+- Non-concrete input: if the human cannot describe a pattern concretely, stop and return `blocked: non-concrete-description`. Do not substitute a generic warning.
+- Unreviewed pre-existing file conflict: if the target file exists with unreviewed content, stop and return `blocked: unreviewed-file-exists`. Do not overwrite.
+- Human declines review: return `partial: file-written` with the file path. The done predicate does not hold until the human confirms acceptance.
+- Rollback: delete the written file only if (a) the file did not exist before this session and (b) the human has not confirmed the content. If the file existed before, restore it from the original content if possible. Rollback does not apply after human confirmation.
 
 ## Output
 - `done: prohibited-habits-documented` with the file path. The human confirmed the written artifact. - `partial: file-written` with the file path. The file was written but the human declined to review. - `blocked: non-concrete-description`: the human could not describe a prohibited pattern concretely. - `blocked: unreviewed-file-exists`: a pre-existing file at the target path was not reviewed in this session.

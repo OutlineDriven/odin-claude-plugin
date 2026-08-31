@@ -16,8 +16,7 @@ description: 'Use when asked to design, write, review, refactor, lint, or perfor
 
 ## Inputs
 
-- **Required**: Lean 4 project with a working `lakefile.lean` and toolchain (`lean-toolchain`). Target theorem statements, definitions to formalize, or proof obligations to discharge.
-- **Optional**: Project-specific linter configuration, axiom policy (default: `[propext, Classical.choice, Quot.sound]`), `maxHeartbeats` budget, Mathlib dependency.
+A Lean 4 project with a working `lakefile.lean` and toolchain (`lean-toolchain`) is required, along with target theorem statements, definitions to formalize, or proof obligations to discharge. Optional inputs include project-specific linter configuration, axiom policy (default: `[propext, Classical.choice, Quot.sound]`), `maxHeartbeats` budget, and Mathlib dependency.
 
 ## Procedure
 
@@ -31,12 +30,7 @@ description: 'Use when asked to design, write, review, refactor, lint, or perfor
 8. **Diagnose performance.** Measure per-declaration cost with `#count_heartbeats` before adjusting `maxHeartbeats`. Every `maxHeartbeats` override is an unproven claim. Conditional simp lemma fires shallow but not deep → raise `maxDischargeDepth` (default 2). Re-derive every `simp only` list with `simp?` at its own site. Done when: performance is measured and every `maxHeartbeats` override is justified by measurement.
 
 ## Failure and recovery
-- **Compilation failure**: fix the source error and rebuild. Do not widen scope.
-- **Sorry leakage**: replace with structured proof or gate with `collectAxioms`/`#print axioms`. A build that exits 0 with sorries present is not done.
-- **Linter violation**: fix the code or suppress with explicit justification. No blanket `#nolint`.
-- **Performance regression**: measure with `#count_heartbeats`, restructure definition or decompose goal. Do not raise `maxHeartbeats` without measurement.
-- **Scope violation**: stop and roll back to the last clean state. Do not widen authority.
-- **Non-convergent proof**: report the stuck goal, the tactics tried, and the hypotheses. Do not invent evidence or weaken the statement.
+On compilation failure, fix the source error and rebuild; do not widen scope. On sorry leakage, replace with structured proof or gate with `collectAxioms`/`#print axioms`; a build that exits 0 with sorries present is not done. On a linter violation, fix the code or suppress with explicit justification; no blanket `#nolint`. On a performance regression, measure with `#count_heartbeats`, restructure the definition or decompose the goal; do not raise `maxHeartbeats` without measurement. On a scope violation, stop and roll back to the last clean state; do not widen authority. On a non-convergent proof, report the stuck goal, the tactics tried, and the hypotheses; do not invent evidence or weaken the statement.
 
 ## Output
 Lean source files with stable declarations, structured proofs, and no ungated `sorry`; axiom footprint matching the declared policy; linter output clean under the selected profile; for custom tactics, failure-surface tests and structured tracing.

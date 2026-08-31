@@ -26,8 +26,8 @@ The subject to analyze (a decision, design, change, or situation). Optional: the
 4. Stop when the breaking-seat analysis is complete. Do not recommend a decision or reconcile with other lenses; that is a later comparison step outside this skill. Done when: the analysis is complete with no recommendation or cross-lens reconciliation.
 
 ## Failure and recovery
-- **Blended answer**: if the output mixes another lens, restart from step 2 and remove the non-breaking content. The done predicate requires no blending.
-- **Missing subject**: if no subject is supplied, ask for one. Do not invent a subject.
+- Blended answer: if the output mixes another lens, restart from step 2 and remove the non-breaking content. The done predicate requires no blending.
+- Missing subject: if no subject is supplied, ask for one. Do not invent a subject.
 - **No destructive pressure named and none derivable**: apply the full breaking seat by default; this is not a failure.
 
 ## Output

@@ -22,10 +22,10 @@ description: 'Use when the user explicitly names snipgrapher and wants code rend
 
 ## Inputs
 
-- **Source code** (required): the code snippet to render, supplied as a file path or inline code block.
-- **Output path** (required): explicit path with a .png, .svg, or .webp extension.
-- **Profile** (optional): a snipgrapher profile name. If omitted, snipgrapher uses its default.
-- **Language** (optional): a language hint for syntax highlighting. If omitted, snipgrapher infers from the file extension or content.
+- Source code (required): the code snippet to render, supplied as a file path or inline code block.
+- Output path (required): explicit path with a .png, .svg, or .webp extension.
+- Profile (optional): a snipgrapher profile name. If omitted, snipgrapher uses its default.
+- Language (optional): a language hint for syntax highlighting. If omitted, snipgrapher infers from the file extension or content.
 
 ## Procedure
 

@@ -1,6 +1,6 @@
 # Resume or fresh
 
-Treat `.handoff/continuity/notes.md`, `graph.md`, and `death-point.md` as one continuity set. There is no per-session child directory and no “newest filename” selection.
+Treat `.handoff/continuity/notes.md`, `graph.md`, and `death-point.md` as one continuity set. There is no per-session child directory and no "newest filename" selection.
 
 Resume the set only when all of these conditions hold:
 

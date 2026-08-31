@@ -25,16 +25,16 @@ Work like a careful, cautious, precise investigator. Don't produce a narrative; 
 
 ## The code anchor
 
-**Target files:** {FILES_WITH_LINE_RANGES}
+Target files: {FILES_WITH_LINE_RANGES}
 
-**Key symbols:** {SYMBOLS}
+Key symbols: {SYMBOLS}
 
-**Initial commits touching this code (most recent first):**
+Initial commits touching this code (most recent first):
 {COMMIT_LIST}
 
-**PR numbers extracted from commit messages:** {PR_NUMBERS}
+PR numbers extracted from commit messages: {PR_NUMBERS}
 
-**Ticket IDs mentioned in commits or PR bodies (if any):** {TICKET_IDS}
+Ticket IDs mentioned in commits or PR bodies (if any): {TICKET_IDS}
 
 ## Your assigned source
 
@@ -74,17 +74,17 @@ The queries you ran, the items you opened, the places you looked. Be specific. T
 
 ### Direct evidence found
 For each piece that explicitly addresses the question:
-- **What it says**: verbatim quote or accurate paraphrase
-- **Where it's from**: PR #123, ticket ID, doc URL, chat permalink, commit hash, or file:line
+- What it says: verbatim quote or accurate paraphrase
+- Where it's from: PR #123, ticket ID, doc URL, chat permalink, commit hash, or file:line
 - **Author and date** (if available)
 - **Relevance**: one sentence on how it bears on the question
 
 ### Indirect / circumstantial evidence
 Items that don't explicitly answer the question but bear on it. For each:
-- **What it is**: brief description
-- **Where it's from**: location
-- **What it suggests**: what a careful reader might infer, and why. Name the inference chain.
-- **Alternative readings**: if the same evidence could support a different interpretation, note it
+- What it is: brief description
+- Where it's from: location
+- What it suggests: what a careful reader might infer, and why. Name the inference chain.
+- Alternative readings: if the same evidence could support a different interpretation, note it
 
 ### Contradictions
 Two items that disagree with each other, with both citations.

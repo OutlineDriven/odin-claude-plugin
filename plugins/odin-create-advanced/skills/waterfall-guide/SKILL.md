@@ -30,11 +30,11 @@ description: 'Use when a user wants to lock greenfield architecture and interfac
 6. Present the architecture document to the human for review. Incorporate requested changes. Once the human confirms, lock the document and distribute it to all execution teams. Done when: document is locked and distributed.
 
 ## Failure and recovery
-- **Incomplete brief**: the human provides no product name or core capability. Stop at step 1 and request the missing information. Do not infer or fabricate scope.
-- **Contradictory constraints**: the brief or constraints name incompatible technologies or impossible deadlines. Surface the contradiction in the open questions section and ask the human to resolve it before proceeding.
-- **Ambiguous interface**: two modules could own the same data or responsibility. List the ambiguity in open questions as a blocking item. Do not assign ownership arbitrarily.
-- **Partial completion**: any step fails after earlier steps produced artifacts. Discard partial outputs. The locked architecture is all-or-nothing; partial results are not distributed.
-- **Non-convergence**: the human requests changes that contradict the existing architecture without withdrawing the contradiction. Stop and state the conflict explicitly. Do not silently overwrite prior decisions.
+- Incomplete brief: the human provides no product name or core capability. Stop at step 1 and request the missing information. Do not infer or fabricate scope.
+- Contradictory constraints: the brief or constraints name incompatible technologies or impossible deadlines. Surface the contradiction in the open questions section and ask the human to resolve it before proceeding.
+- Ambiguous interface: two modules could own the same data or responsibility. List the ambiguity in open questions as a blocking item. Do not assign ownership arbitrarily.
+- Partial completion: any step fails after earlier steps produced artifacts. Discard partial outputs. The locked architecture is all-or-nothing; partial results are not distributed.
+- Non-convergence: the human requests changes that contradict the existing architecture without withdrawing the contradiction. Stop and state the conflict explicitly. Do not silently overwrite prior decisions.
 
 ## Output
 A locked architecture document with sections in order: system overview, module inventory, interface contracts, cross-cutting ownership, open questions. Distributed to all execution teams as the coordination contract for parallel work.

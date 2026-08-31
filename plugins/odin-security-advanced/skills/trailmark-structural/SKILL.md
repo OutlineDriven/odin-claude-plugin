@@ -16,8 +16,8 @@ description: 'Use when a target needs a detailed single-snapshot structural anal
 
 ## Inputs
 
-- **Required**: Target directory path, passed via the `args` parameter.
-- **Required**: Trailmark installed in the environment; the user must install it themselves.
+- Required: Target directory path, passed via the `args` parameter.
+- Required: Trailmark installed in the environment; the user must install it themselves.
 
 ## Refusals
 
@@ -115,12 +115,12 @@ description: 'Use when a target needs a detailed single-snapshot structural anal
 4. Verify the output. The payload must include `languages`, `summary`, `preanalysis`, `hotspots` (possibly empty), `proxy_nodes` (empty on v0.2.x or when there are no unresolved calls; on 0.5.0+ may include `proxy.external:*` entries declared in `.trailmark/links.toml`), and `subgraphs` with counts and sample IDs. On Trailmark 0.5.0+, `attack_surface` entries may carry an `attributes` object; pass it through unchanged. Some subgraphs may have zero nodes; this is normal. Return the full JSON payload regardless. **Done when:** every required field is present and empty sections remain explicit.
 
 ## Failure and recovery
-- **Trailmark not installed**: Report "trailmark is not installed" and return. Do not install, upgrade, or clone anything.
-- **No supported languages detected**: Report "Trailmark found no supported languages under target" and return.
-- **Import fails under both python3 and uv run**: Report the import error and return. Do not attempt manual analysis as a substitute; manual analysis misses what tooling catches.
-- **Empty pass output**: Some passes produce no data for some codebases (e.g., no privilege boundaries). Return the full output regardless; empty is not failure.
-- **v0.4-only method absent**: Users may have Trailmark 0.2.x installed. Probe with `hasattr()` before querying version-gated methods. Never assume a v0.4 field is always present.
-- **Partial-result rule**: Return whatever the engine produced up to the failure point. Do not fabricate missing sections. Never swallow errors or pretend the done predicate holds.
+- Trailmark not installed: Report "trailmark is not installed" and return. Do not install, upgrade, or clone anything.
+- No supported languages detected: Report "Trailmark found no supported languages under target" and return.
+- Import fails under both python3 and uv run: Report the import error and return. Do not attempt manual analysis as a substitute; manual analysis misses what tooling catches.
+- Empty pass output: Some passes produce no data for some codebases (e.g., no privilege boundaries). Return the full output regardless; empty is not failure.
+- v0.4-only method absent: Users may have Trailmark 0.2.x installed. Probe with `hasattr()` before querying version-gated methods. Never assume a v0.4 field is always present.
+- Partial-result rule: Return whatever the engine produced up to the failure point. Do not fabricate missing sections. Never swallow errors or pretend the done predicate holds.
 
 ## Output
 

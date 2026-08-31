@@ -16,20 +16,20 @@ description: 'Use when directing, building, or auditing React/Next.js UI in Tail
 
 ## Inputs
 
-- **Required**: a UI target (either an existing built frontend to audit, or a request to build or direct a new surface) plus the project's existing framework, component patterns, and design tokens.
-- **Optional**: reference screenshot, Figma export, mockup, or wireframe for scaffold mode; a screen recording for motion-adjacent checks; existing brand direction or design system.
-- **Blocked**: requests targeting non-local, credential-protected, or deployed resources; non-UI code review; deep typography or motion passes; copywriting-only tasks.
+- Required: a UI target (either an existing built frontend to audit, or a request to build or direct a new surface) plus the project's existing framework, component patterns, and design tokens.
+- Optional: reference screenshot, Figma export, mockup, or wireframe for scaffold mode; a screen recording for motion-adjacent checks; existing brand direction or design system.
+- Blocked: requests targeting non-local, credential-protected, or deployed resources; non-UI code review; deep typography or motion passes; copywriting-only tasks.
 
 ## Procedure
 
 1. **Resolve the mode.** Pick exactly one before acting:
-   - **Direction**: the user asks for visual direction, palettes, fonts, tokens, a brand kit, or "pick a style"; deliverable is a spec, not code.
-   - **Build**: the target does not exist yet: "build a landing page", "create a dashboard", "add a pricing section".
-   - **Audit**: the target exists and no change was named: "audit this component", "is this accessible", "design QA this page", "is this ready to ship". Deslop scope activates on "remove AI slop", "looks vibe coded", "simplify this UI".
-   - **Options**: variants to compare: "show me 3 hero layouts".
-   - **Scaffold**: semantic, unstyled markup from a screenshot, Figma export, mockup, or wireframe.
-   - **Retrofit**: one dimension added to existing UI: "add dark mode", "make this responsive", "fix this on mobile".
-   - **Componentize**: extracting components or cleaning up classes: "componentize this page", "clean up the Tailwind".
+   - Direction: the user asks for visual direction, palettes, fonts, tokens, a brand kit, or "pick a style"; deliverable is a spec, not code.
+   - Build: the target does not exist yet: "build a landing page", "create a dashboard", "add a pricing section".
+   - Audit: the target exists and no change was named: "audit this component", "is this accessible", "design QA this page", "is this ready to ship". Deslop scope activates on "remove AI slop", "looks vibe coded", "simplify this UI".
+   - Options: variants to compare: "show me 3 hero layouts".
+   - Scaffold: semantic, unstyled markup from a screenshot, Figma export, mockup, or wireframe.
+   - Retrofit: one dimension added to existing UI: "add dark mode", "make this responsive", "fix this on mobile".
+   - Componentize: extracting components or cleaning up classes: "componentize this page", "clean up the Tailwind".
    - If no mode is named: Build if the target does not exist. Audit if it does and no change was requested. Resolving "look at this page" to Build silently skips the audit, which is the most expensive mistake this step prevents.
    **Done when:** exactly one mode is selected by the stated discriminator.
 
@@ -92,12 +92,12 @@ description: 'Use when directing, building, or auditing React/Next.js UI in Tail
    **Done when:** desktop/mobile renders, required states, console/network health, sticky chrome, and text fit pass.
 
 ## Failure and recovery
-- **Mode unresolved**: the request is ambiguous between Build and Audit. Default to Audit if the target exists and no change was named; Build if it does not exist. State the resolution and proceed.
-- **Scope violation**: the request targets a non-local, credential-protected, or deployed resource. Stop immediately. Return the classification that was blocked and the reason.
-- **Audit load-contract breach**: loading design guidance during an audit turns findings into redesign proposals. If the Verify step's file list shows guidance was loaded, the pass is a redesign, not an audit. Report it as a failure.
-- **Fix does not clear its finding**: revert the fix and report it as `remaining`. Do not claim the finding is resolved.
-- **Partial result**: if a build or fix is interrupted, discard partial output. Report what was completed and what remains. Do not claim the done predicate holds.
-- **Non-converged**: UI quality cannot be fully judged algorithmically. Present the output for user review. Mark the skill complete only when the user confirms the UI meets the done predicate.
+- Mode unresolved: the request is ambiguous between Build and Audit. Default to Audit if the target exists and no change was named; Build if it does not exist. State the resolution and proceed.
+- Scope violation: the request targets a non-local, credential-protected, or deployed resource. Stop immediately. Return the classification that was blocked and the reason.
+- Audit load-contract breach: loading design guidance during an audit turns findings into redesign proposals. If the Verify step's file list shows guidance was loaded, the pass is a redesign, not an audit. Report it as a failure.
+- Fix does not clear its finding: revert the fix and report it as `remaining`. Do not claim the finding is resolved.
+- Partial result: if a build or fix is interrupted, discard partial output. Report what was completed and what remains. Do not claim the done predicate holds.
+- Non-converged: UI quality cannot be fully judged algorithmically. Present the output for user review. Mark the skill complete only when the user confirms the UI meets the done predicate.
 
 ## Output
 Return the selected mode's artifact: Direction decision set, Build code, Audit JSON findings and ship verdict, divergent Options, semantic Scaffold, applied Retrofit, or extracted Componentize result.

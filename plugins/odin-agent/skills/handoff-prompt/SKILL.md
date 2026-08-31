@@ -66,11 +66,11 @@ Output:
 8. Final reply: a terse confirmation with the task title. Do not paste the full prompt unless the user asks. Done when: the stated action, evidence, and guard all hold.
 
 ## Failure and recovery
-- **Missing task**: the user gave no task and none is inferable from nearby context. Stop and ask for the task; emit no prompt.
-- **Path leakage**: a drafted line contains a filesystem path. Rewrite it as a portable anchor before copying. If a path cannot be rewritten without losing meaning and the user did not explicitly request it, drop the line and note the omission in the confirmation.
-- **Invented facts**: a drafted claim was not checked against the repo, issue/PR, or docs. Remove or mark it unverified; never present an unchecked claim as reviewed fact.
-- **Clipboard unavailable**: no platform clipboard tool exists. Print the prompt and report that clipboard copy was unavailable; the done predicate is not met for the clipboard portion, so state this explicitly.
-- **Partial result**: never copy a prompt that fails the path-free or no-invented-facts rules. Rollback is non-mutation — nothing outside the assembled text and clipboard is touched, so a failed attempt leaves no side effect beyond the confirmation message.
+- Missing task: the user gave no task and none is inferable from nearby context. Stop and ask for the task; emit no prompt.
+- Path leakage: a drafted line contains a filesystem path. Rewrite it as a portable anchor before copying. If a path cannot be rewritten without losing meaning and the user did not explicitly request it, drop the line and note the omission in the confirmation.
+- Invented facts: a drafted claim was not checked against the repo, issue/PR, or docs. Remove or mark it unverified; never present an unchecked claim as reviewed fact.
+- Clipboard unavailable: no platform clipboard tool exists. Print the prompt and report that clipboard copy was unavailable; the done predicate is not met for the clipboard portion, so state this explicitly.
+- Partial result: never copy a prompt that fails the path-free or no-invented-facts rules. Rollback is non-mutation — nothing outside the assembled text and clipboard is touched, so a failed attempt leaves no side effect beyond the confirmation message.
 
 ## Output
 A standalone, path-free prompt on the clipboard, plus a terse confirmation naming the task title. The prompt orients a fresh receiving agent and opens with a review/assess instruction rather than a command-only work order.

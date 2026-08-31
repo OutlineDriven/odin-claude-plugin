@@ -60,13 +60,13 @@ EOF
      ```
 
 ## Failure and recovery
-- **Detached HEAD:** No branch ref exists to push. Stop; report the state. Do not create a branch.
-- **Verification gate failure for a group:** that group is not staged or committed. Groups already committed remain; the blocked result names the failed group and the gate output.
-- **Unconfirmed or failed hunk split:** leave that group uncommitted and report it; never fall back to `git add -A` or `git add .` to force it through.
-- **No `origin` remote:** Stop without pushing. Never add, invent, or guess a remote.
-- **Push rejected (diverged remote branch):** Report the rejection with divergence counts from `git rev-list --left-right --count origin/<current-branch>...HEAD`. Leave resolution to the user. Never `--force`, `--force-with-lease`, or any force variant without explicit user authorization.
-- **Partial result:** Groups already committed are real commits and remain; the blocked result names the uncommitted groups. If the commit succeeds but the push fails, the local commits remain; report both the committed state and the push failure; do not undo the commit.
-- **Non-convergence:** A rejected push is reported as-is; this skill does not retry, rebase, or merge to resolve divergence. Never swallow a git error or claim done when `git status` does not confirm the commits.
+- Detached HEAD: No branch ref exists to push. Stop; report the state. Do not create a branch.
+- Verification gate failure for a group: that group is not staged or committed. Groups already committed remain; the blocked result names the failed group and the gate output.
+- Unconfirmed or failed hunk split: leave that group uncommitted and report it; never fall back to `git add -A` or `git add .` to force it through.
+- No `origin` remote: Stop without pushing. Never add, invent, or guess a remote.
+- Push rejected (diverged remote branch): Report the rejection with divergence counts from `git rev-list --left-right --count origin/<current-branch>...HEAD`. Leave resolution to the user. Never `--force`, `--force-with-lease`, or any force variant without explicit user authorization.
+- Partial result: Groups already committed are real commits and remain; the blocked result names the uncommitted groups. If the commit succeeds but the push fails, the local commits remain; report both the committed state and the push failure; do not undo the commit.
+- Non-convergence: A rejected push is reported as-is; this skill does not retry, rebase, or merge to resolve divergence. Never swallow a git error or claim done when `git status` does not confirm the commits.
 
 ## Output
 The current branch carries one commit per logical concern, each proven by `git status` and reported with its hash and subject line, pushed to `origin/<current-branch>`; or a terminal state is reported: detached HEAD, nothing to do, no origin remote, or push rejected with divergence counts.

@@ -17,11 +17,11 @@ disable-model-invocation: true
 
 ## Inputs
 
-- **Work summary** (required): a document that contains one or more project descriptions or entries.
-- **Project template** (required): the page template to apply to each child project summary. May be embedded, referenced by ID, or provided inline.
-- **Target parent ID** (required): the identifier of the parent document under which child pages are created.
-- **Eligibility criteria** (required): explicit list of criteria used to classify a project as eligible. No defaults are applied; every criterion must be supplied.
-- **API credentials** (required): valid credentials with create permissions on the target parent document.
+- Work summary (required): a document that contains one or more project descriptions or entries.
+- Project template (required): the page template to apply to each child project summary. May be embedded, referenced by ID, or provided inline.
+- Target parent ID (required): the identifier of the parent document under which child pages are created.
+- Eligibility criteria (required): explicit list of criteria used to classify a project as eligible. No defaults are applied; every criterion must be supplied.
+- API credentials (required): valid credentials with create permissions on the target parent document.
 
 ## Procedure
 
@@ -34,13 +34,13 @@ disable-model-invocation: true
 
 ## Failure and recovery
 
-- **Missing input**: stop. Name the missing field. Do not proceed.
-- **Zero projects found in work summary**: stop. Report zero projects. Create no documents.
-- **Zero eligible projects identified**: stop. Report zero eligible. Create no documents.
-- **Human authority withheld**: stop immediately. No API calls.
-- **Individual child document creation fails**: record failure by project name. Continue remaining projects. Include failures in report.
-- **Partial result**: if some documents succeed and others fail, report the successes and the failures. Do not claim done if any confirmed eligible project lacks a child document.
-- **Non-rollback**: already-created documents are not deleted on failure.
+- Missing input: stop. Name the missing field. Do not proceed.
+- Zero projects found in work summary: stop. Report zero projects. Create no documents.
+- Zero eligible projects identified: stop. Report zero eligible. Create no documents.
+- Human authority withheld: stop immediately. No API calls.
+- Individual child document creation fails: record failure by project name. Continue remaining projects. Include failures in report.
+- Partial result: if some documents succeed and others fail, report the successes and the failures. Do not claim done if any confirmed eligible project lacks a child document.
+- Non-rollback: already-created documents are not deleted on failure.
 
 ## Output
 

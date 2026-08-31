@@ -46,11 +46,11 @@ description: 'Use when asked to evaluate a proposed commit, merge, or auto-merge
 
 ## Failure and recovery
 
-- **Invalid action**: stop; return the invalid value and the accepted set. No evaluation runs.
-- **Config not found or unparseable YAML**: stop; return the file and parse error. No evaluation runs.
+- Invalid action: stop; return the invalid value and the accepted set. No evaluation runs.
+- Config not found or unparseable YAML: stop; return the file and parse error. No evaluation runs.
 - **Config schema invalid** (wrong version, non-string-array denylist, non-number `maxFiles`, non-string-array `autoMergeAllowlist`): stop; return the field and the constraint. No evaluation runs.
-- **Empty paths list**: no denylist hit, `0 <= maxFiles`, and zero paths trivially satisfy the allowlist; result is allow with trigger `ok`. Do not invent paths.
-- **Partial-result rule**: evaluation is all-or-nothing per condition; a deny on an earlier condition short-circuits all later conditions. The gate never mutates state, so there is no rollback; a failed validation leaves nothing to undo.
+- Empty paths list: no denylist hit, `0 <= maxFiles`, and zero paths trivially satisfy the allowlist; result is allow with trigger `ok`. Do not invent paths.
+- Partial-result rule: evaluation is all-or-nothing per condition; a deny on an earlier condition short-circuits all later conditions. The gate never mutates state, so there is no rollback; a failed validation leaves nothing to undo.
 - The blocked/non-converged result is a deny verdict or a validation error, never a silent allow.
 
 ## Output

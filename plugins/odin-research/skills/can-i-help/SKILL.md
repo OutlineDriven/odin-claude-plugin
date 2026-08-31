@@ -31,12 +31,12 @@ description: 'Use when the user asks "where to help", "contribution opportunitie
    - Build/test commands: derive from manifest scripts, Makefile targets, CI config, or existing docs; mark certainty MEDIUM unless a command is explicitly declared. **Done when:** the project shape and active local modifications are recorded.
 
 3. **Collect contribution signals with native recipes.** Prefer indexed codegraph when available; otherwise use `ast-grep`, `rg`, `fd`, and git history. Keep every signal as `{kind, file, line?, metric, confidence, evidence}`. Missing `kind`, `file` for file-backed work, or `evidence` downgrades the candidate to LOW. **Done when:** every collected signal has kind, file where applicable, evidence, and confidence.
-   - **Good-first areas**: low blast radius, clear adjacent patterns, nearby tests, recent maintainer activity, low bug density. Fallback: count importers with `rg -n 'from .*/<module>|require\(.*/<module>|use .*<module>|import .*<module>'` and prefer files with few dependents plus visible neighboring tests.
-   - **Test gaps**: hot source files with no co-changing test file. `git --no-pager log --since='180 days ago' --name-only --format='commit:%H' -- <src-paths>`; rank source files by touches, then subtract files whose commits include a matching `test|tests|spec|__tests__` path. HIGH when source churn ≥5 and zero matching test co-change; MEDIUM when no test root exists but naming conventions are unclear.
-   - **Doc drift**: docs with zero or weak code coupling, stale inline identifiers, or examples importing paths that no longer exist. `git --no-pager log --since='365 days ago' --name-only --format='commit:%H' -- docs README* CONTRIBUTING*`; compute doc commits with no source files. Extract backticked identifiers/import paths from docs, check via codegraph search, else `rg -n '<identifier-or-path>' <repo>`. HIGH for broken import/path; MEDIUM for zero code coupling over the window.
-   - **Bugspots**: files repeatedly touched by fix commits. `git --no-pager log --since='365 days ago' --regexp-ignore-case --grep='fix|bug|regression|crash|panic|race|leak|broken' --name-only --format='commit:%H' -- <repo>`; bug-fix rate = `fix_touches / max(total_touches, 1)`. HIGH when fix_touches ≥3 and rate ≥0.25; MEDIUM when only one threshold holds.
-   - **Open issues**: `gh issue list --state open --limit 15 --json number,title,labels`. Route labels: `bug`/`regression`/`crash` → bugs; `good first issue`/`help wanted` → newcomer; `documentation`/`docs` → docs; `test`/`testing`/`coverage` → tests; `cleanup`/`refactor`/`chore` → cleanup only after repo verification. If `gh` fails, mark issue signal unavailable and continue.
-   - **Slop-deletion candidates**: commented-out code, orphan exports, passthrough wrappers, and always-true/always-false conditions. Use AST where possible; never promise zero-behavior cleanup until the slop verification gate (step 7) passes.
+   - Good-first areas: low blast radius, clear adjacent patterns, nearby tests, recent maintainer activity, low bug density. Fallback: count importers with `rg -n 'from .*/<module>|require\(.*/<module>|use .*<module>|import .*<module>'` and prefer files with few dependents plus visible neighboring tests.
+   - Test gaps: hot source files with no co-changing test file. `git --no-pager log --since='180 days ago' --name-only --format='commit:%H' -- <src-paths>`; rank source files by touches, then subtract files whose commits include a matching `test|tests|spec|__tests__` path. HIGH when source churn ≥5 and zero matching test co-change; MEDIUM when no test root exists but naming conventions are unclear.
+   - Doc drift: docs with zero or weak code coupling, stale inline identifiers, or examples importing paths that no longer exist. `git --no-pager log --since='365 days ago' --name-only --format='commit:%H' -- docs README* CONTRIBUTING*`; compute doc commits with no source files. Extract backticked identifiers/import paths from docs, check via codegraph search, else `rg -n '<identifier-or-path>' <repo>`. HIGH for broken import/path; MEDIUM for zero code coupling over the window.
+   - Bugspots: files repeatedly touched by fix commits. `git --no-pager log --since='365 days ago' --regexp-ignore-case --grep='fix|bug|regression|crash|panic|race|leak|broken' --name-only --format='commit:%H' -- <repo>`; bug-fix rate = `fix_touches / max(total_touches, 1)`. HIGH when fix_touches ≥3 and rate ≥0.25; MEDIUM when only one threshold holds.
+   - Open issues: `gh issue list --state open --limit 15 --json number,title,labels`. Route labels: `bug`/`regression`/`crash` → bugs; `good first issue`/`help wanted` → newcomer; `documentation`/`docs` → docs; `test`/`testing`/`coverage` → tests; `cleanup`/`refactor`/`chore` → cleanup only after repo verification. If `gh` fails, mark issue signal unavailable and continue.
+   - Slop-deletion candidates: commented-out code, orphan exports, passthrough wrappers, and always-true/always-false conditions. Use AST where possible; never promise zero-behavior cleanup until the slop verification gate (step 7) passes.
 
 4. **Ask the developer's interest — mandatory and first, before recommendations.** Present a single-select with exactly one Recommended option. Do this even if signals already look obvious. **Done when:** the developer selects one interest.
    Prompt: `What kind of contribution do you want to make?`
@@ -70,26 +70,26 @@ description: 'Use when the user asks "where to help", "contribution opportunitie
    - If any entry-reachability doubt remains, phrase as "cleanup candidate" and make the first step verification, not removal. **Done when:** each zero-behavior cleanup claim is verified or downgraded to a candidate with verification first.
 
 9. **Emit 2 to 5 recommendations.** Each MUST use the four-field shape:
-   - **What**: exact file and line/range, function, issue number, or doc section. If issue-backed, include `#<number>` and still name the file once known.
-   - **Why**: data-backed metric — bug-fix rate, test-gap touch count, zero doc coupling, broken symbol lookup, issue label, confidence score.
-   - **How**: 2 to 3 sentences based on reading the file. Explain the local pattern, what would change, and why this is a bounded contribution. For tests, name the branch/case to cover. For docs, name the stale claim and the current code truth. For cleanup, state whether it is pure deletion, contained refactor, or bug investigation.
-   - **First step**: exact command or action. Prefer `bat -P -p -n <file>`, `rg -n '<symbol>' <paths>`, `gh issue view <number>`, or a concrete edit after verification. If line numbers are unavailable, the First step must produce them.
+   - What: exact file and line/range, function, issue number, or doc section. If issue-backed, include `#<number>` and still name the file once known.
+   - Why: data-backed metric — bug-fix rate, test-gap touch count, zero doc coupling, broken symbol lookup, issue label, confidence score.
+   - How: 2 to 3 sentences based on reading the file. Explain the local pattern, what would change, and why this is a bounded contribution. For tests, name the branch/case to cover. For docs, name the stale claim and the current code truth. For cleanup, state whether it is pure deletion, contained refactor, or bug investigation.
+   - First step: exact command or action. Prefer `bat -P -p -n <file>`, `rg -n '<symbol>' <paths>`, `gh issue view <number>`, or a concrete edit after verification. If line numbers are unavailable, the First step must produce them.
    Do not include a recommendation that cannot fill all four fields. **Done when:** two to five recommendations fill all four fields and carry certainty labels.
 
 10. **Offer the next depth step.** Close with: `Want me to walk you through one of these? I can read the target code, outline the exact diff, or draft the PR description.` **Done when:** the depth-step offer is delivered.
 
 ## Failure and recovery
-- **Not a git repo**: history-backed signals (bugspots, test gaps, doc drift) are unavailable. Use file structure, tests/docs presence, and open issues if available. Do not fabricate git history.
-- **`gh` unavailable or unauthenticated**: open issues signal unavailable. Continue with local bugspots, test gaps, doc drift, and cleanup signals.
-- **No manifests found**: mark stack certainty LOW. Infer from extensions only after reading representative files.
-- **No test root found**: do not claim absent tests globally. Treat test-gap confidence as MEDIUM until conventions are known.
-- **Churn history too shallow**: avoid bug-fix-rate percentages. Use current issue labels and code reads.
-- **Developer picks interest with no signal**: name the empty signal explicitly. Pivot to the nearest adjacent interest with non-empty evidence.
+- Not a git repo: history-backed signals (bugspots, test gaps, doc drift) are unavailable. Use file structure, tests/docs presence, and open issues if available. Do not fabricate git history.
+- `gh` unavailable or unauthenticated: open issues signal unavailable. Continue with local bugspots, test gaps, doc drift, and cleanup signals.
+- No manifests found: mark stack certainty LOW. Infer from extensions only after reading representative files.
+- No test root found: do not claim absent tests globally. Treat test-gap confidence as MEDIUM until conventions are known.
+- Churn history too shallow: avoid bug-fix-rate percentages. Use current issue labels and code reads.
+- Developer picks interest with no signal: name the empty signal explicitly. Pivot to the nearest adjacent interest with non-empty evidence.
 - **Cleanup candidate touches public/exported surface**: downgrade safety claim. Make caller/reachability verification the First step.
-- **Only LOW-certainty candidates exist**: present at most two with LOW label. Ask whether to inspect deeper before editing.
-- **No contribution opportunities survive**: report that no safe, data-backed recommendation was found. Offer to broaden scope to issues, docs, or tests after more context.
-- **Partial results**: return whatever non-empty signals survived with their certainty labels. Never present LOW as fact or suppress a failed signal silently.
-- **Non-mutation**: this skill performs no file, VCS, or remote mutation. No rollback is needed; the only recovery is to report what is missing and continue with available signals.
+- Only LOW-certainty candidates exist: present at most two with LOW label. Ask whether to inspect deeper before editing.
+- No contribution opportunities survive: report that no safe, data-backed recommendation was found. Offer to broaden scope to issues, docs, or tests after more context.
+- Partial results: return whatever non-empty signals survived with their certainty labels. Never present LOW as fact or suppress a failed signal silently.
+- Non-mutation: this skill performs no file, VCS, or remote mutation. No rollback is needed; the only recovery is to report what is missing and continue with available signals.
 
 ## Output
 A ranked list of 2 to 5 recommendations, each in the four-field shape (What / Why / How / First step), preceded by the developer's chosen interest and the signals that routed to it. Each recommendation carries a certainty label (HIGH, MEDIUM, or LOW). The list closes with an offer to walk through one recommendation in depth. If no safe recommendation survives, a terminal report stating that no data-backed contribution opportunity was found, naming the signals checked and the reason each was empty.

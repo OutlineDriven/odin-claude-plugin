@@ -27,11 +27,11 @@ The user's message may contain ambiguous references: names or descriptions witho
 5. Stop once every ambiguous reference has a stable handle and any reached anti-pattern has been named. Do not widen scope or invent handles the user did not supply. Done when: every reference has a handle and reached anti-patterns are named.
 
 ## Failure and recovery
-- **Unresolved reference**: the user cannot supply a stable handle. Report the reference as unresolved; do not guess a URL or symbol. The done predicate is not met for that reference.
-- **Non-stable handle**: the user supplies a bare repo name or a chat paraphrase instead of a locator. Ask once for the permalink or file:line form; if still absent, mark the reference unresolved.
-- **No reference and no gap**: the skill does not route; return nothing.
-- **Partial result**: report which references resolved and which remain unresolved; never claim all resolved when any is not.
-- **Non-mutation**: this skill writes nothing; recovery is re-asking or stopping, never editing files or state.
+- Unresolved reference: the user cannot supply a stable handle. Report the reference as unresolved; do not guess a URL or symbol. The done predicate is not met for that reference.
+- Non-stable handle: the user supplies a bare repo name or a chat paraphrase instead of a locator. Ask once for the permalink or file:line form; if still absent, mark the reference unresolved.
+- No reference and no gap: the skill does not route; return nothing.
+- Partial result: report which references resolved and which remain unresolved; never claim all resolved when any is not.
+- Non-mutation: this skill writes nothing; recovery is re-asking or stopping, never editing files or state.
 
 ## Output
 A reply that, for each ambiguous reference, states the stable handle the user supplied or marks it unresolved, plus any anti-pattern surfaced when reached. No file, state transition, or external mutation.

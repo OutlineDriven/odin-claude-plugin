@@ -16,9 +16,9 @@ description: 'Use when the user runs /release-landing-report to summarize landed
 
 ## Refusals
 
-- **Repository mutation**: rejected. Do not stage, commit, push, amend, reset, or otherwise mutate the repository, working tree, remotes, or credentials.
-- **Fabricating changes**: rejected. If no changes landed in the window, state that the window is empty.
-- **Partial summary as complete**: rejected. A landing summary is returned only when the full window was inspected.
+- Repository mutation: rejected. Do not stage, commit, push, amend, reset, or otherwise mutate the repository, working tree, remotes, or credentials.
+- Fabricating changes: rejected. If no changes landed in the window, state that the window is empty.
+- Partial summary as complete: rejected. A landing summary is returned only when the full window was inspected.
 
 ## Inputs
 
@@ -35,9 +35,9 @@ description: 'Use when the user runs /release-landing-report to summarize landed
 
 ## Failure and recovery
 
-- **No landed changes in window**: return a landing summary stating the window is empty; do not fabricate changes.
-- **Repository or history unreadable**: stop and report the exact read failure; make no mutation and emit no partial landing summary.
-- **Ambiguous or unbounded window**: stop and request the missing bound (since-ref, branch, or count) rather than widening scope or guessing.
+- No landed changes in window: return a landing summary stating the window is empty; do not fabricate changes.
+- Repository or history unreadable: stop and report the exact read failure; make no mutation and emit no partial landing summary.
+- Ambiguous or unbounded window: stop and request the missing bound (since-ref, branch, or count) rather than widening scope or guessing.
 
 ## Output
 

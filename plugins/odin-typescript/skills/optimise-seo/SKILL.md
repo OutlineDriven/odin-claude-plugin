@@ -46,12 +46,12 @@ With neither a repo nor an origin URL, stop without running.
 
 ## Failure and recovery
 
-- **Build failure after an edit:** restore that file's recorded prior content; never leave the production build red. Rollback is restoring the recorded prior content or the VCS state of the touched files.
-- **Missing deployed origin for audit-only:** the origin URL is required for audit-only mode. If it is missing or unreachable, mark the audit-only checks as blocked with the exact reason.
-- **External search gates unreachable:** Rich Results Test and Search Console require browser access or post-deploy verification. Mark these as blocked with the exact reason; do not claim Done while pretending they passed.
-- **Findings conflict:** apply the indexing policy, `noindex` plus removal from the sitemap, and record the decision; do not widen into rewriting content or redesigning pages.
-- **A live hreflang set is not reciprocal:** fix reciprocity before shipping; search engines ignore non-mutual sets, so a partial set must not ship.
-- **Blockers remain:** the terminal result is a blocker list with exact URLs and owner or action per item; Done is never declared with failing or missing evidence.
+- Build failure after an edit: restore that file's recorded prior content; never leave the production build red. Rollback is restoring the recorded prior content or the VCS state of the touched files.
+- Missing deployed origin for audit-only: the origin URL is required for audit-only mode. If it is missing or unreachable, mark the audit-only checks as blocked with the exact reason.
+- External search gates unreachable: Rich Results Test and Search Console require browser access or post-deploy verification. Mark these as blocked with the exact reason; do not claim Done while pretending they passed.
+- Findings conflict: apply the indexing policy, `noindex` plus removal from the sitemap, and record the decision; do not widen into rewriting content or redesigning pages.
+- A live hreflang set is not reciprocal: fix reciprocity before shipping; search engines ignore non-mutual sets, so a partial set must not ship.
+- Blockers remain: the terminal result is a blocker list with exact URLs and owner or action per item; Done is never declared with failing or missing evidence.
 
 ## Output
 

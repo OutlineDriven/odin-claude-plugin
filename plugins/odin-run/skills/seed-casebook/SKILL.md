@@ -16,9 +16,9 @@ description: 'Use when a user opens a new build cycle in a repo with an establis
 
 ## Inputs
 
-- **Iteration path prefix and naming scheme** (required): inferred from existing casebook directories, VCS history, or project docs. Not hard-coded.
-- **Cycle name** (required): the workname for this iteration.
-- **Weight context** (optional): whether the cycle is a fix, hardening pass, or new direction. Defaults to lightweight when uncertain.
+- Iteration path prefix and naming scheme (required): inferred from existing casebook directories, VCS history, or project docs. Not hard-coded.
+- Cycle name (required): the workname for this iteration.
+- Weight context (optional): whether the cycle is a fix, hardening pass, or new direction. Defaults to lightweight when uncertain.
 
 ## Procedure
 
@@ -33,11 +33,11 @@ description: 'Use when a user opens a new build cycle in a repo with an establis
 
 ## Failure and recovery
 
-- **Already-exists:** the casebook directory already exists for this cycle. Stop. Do not overwrite existing content or write a parallel directory. Report the conflict.
-- **Creation failure:** any write or rename fails. Remove the temporary directory. Report the filesystem error. No partial directory remains at the final path.
-- **Empty-write:** a required file would be written empty. Stop. Never create a placeholder. Remove the temporary directory.
-- **Wrong-path discovered mid-cycle:** if the chosen weight path proves wrong, the casebook is retired by a release or retirement workflow, not overwritten or migrated by this skill.
-- **Version provisional:** the casebook directory's version token is tentative until any open fork in the cycle resolves. Do not finalize the bump label until forks close.
+- Already-exists: the casebook directory already exists for this cycle. Stop. Do not overwrite existing content or write a parallel directory. Report the conflict.
+- Creation failure: any write or rename fails. Remove the temporary directory. Report the filesystem error. No partial directory remains at the final path.
+- Empty-write: a required file would be written empty. Stop. Never create a placeholder. Remove the temporary directory.
+- Wrong-path discovered mid-cycle: if the chosen weight path proves wrong, the casebook is retired by a release or retirement workflow, not overwritten or migrated by this skill.
+- Version provisional: the casebook directory's version token is tentative until any open fork in the cycle resolves. Do not finalize the bump label until forks close.
 
 ## Output
 

@@ -48,9 +48,9 @@ Worktree-root only — do not fall through to a main checkout.
 
 **DESIGN.md is a partial override, not all-or-nothing.** Take the brand's scale-independent identity literally, own the scale-dependent layout values yourself, and skip decoration.
 
-- **Take literally (scale-independent identity):** color palette (under the contrast rule), font *weight* and *style*, OpenType features, radius *character* (sharp vs rounded).
-- **Own it yourself (scale-dependent layout):** type size scale and spacing magnitudes. DESIGN.md values are almost always product/marketing-scaled; read them only as hierarchy, then set doc-appropriate values (body ~14-16px, headings ~1.2-1.6× body).
-- **Skip decoration:** gradient orbs, full-bleed hero photography, motion. Take the palette and feel; do not reproduce the decoration.
+- Take literally (scale-independent identity): color palette (under the contrast rule), font *weight* and *style*, OpenType features, radius *character* (sharp vs rounded).
+- Own it yourself (scale-dependent layout): type size scale and spacing magnitudes. DESIGN.md values are almost always product/marketing-scaled; read them only as hierarchy, then set doc-appropriate values (body ~14-16px, headings ~1.2-1.6× body).
+- Skip decoration: gradient orbs, full-bleed hero photography, motion. Take the palette and feel; do not reproduce the decoration.
 
 Specific cases:
 

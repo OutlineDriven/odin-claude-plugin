@@ -16,9 +16,9 @@ description: 'Use when technical prose needs writing or reviewing with real symb
 
 ## Inputs
 
-- **Draft or existing document** (required): the prose to write or review.
-- **Task context** (required): what the prose must accomplish, its audience, and its document type.
-- **Style guide or audience definition** (optional): project-specific conventions, terminology, or tone constraints.
+- Draft or existing document (required): the prose to write or review.
+- Task context (required): what the prose must accomplish, its audience, and its document type.
+- Style guide or audience definition (optional): project-specific conventions, terminology, or tone constraints.
 
 ## Refusals
 

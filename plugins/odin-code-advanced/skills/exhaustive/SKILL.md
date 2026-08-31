@@ -24,9 +24,9 @@ description: 'Prove a decision, state, requirement, or behavior space is fully c
 
 1. Choose and name the enumeration that fits the target; restate the choice in the output so the reader knows which space was covered:
    - **State space** — code with lifecycle, state machines, or error paths: the State × Event × Outcome Cartesian matrix.
-   - **Decision space** — a design with open forks: the dependency-respecting set of decision axes.
-   - **Requirement space** — a spec or feature: the requirement-to-symbol map, each acceptance criterion traced to a code or test symbol.
-   - **Behavior surface** — a refactor or deletion: every exported symbol and reachable path in scope.
+   - Decision space — a design with open forks: the dependency-respecting set of decision axes.
+   - Requirement space — a spec or feature: the requirement-to-symbol map, each acceptance criterion traced to a code or test symbol.
+   - Behavior surface — a refactor or deletion: every exported symbol and reachable path in scope.
 
    Enumeration is algorithmic and single-pass; it is not round-based questioning or hypothesis sampling. Done when: the enumeration type is chosen, named, and restated.
 
@@ -43,12 +43,12 @@ description: 'Prove a decision, state, requirement, or behavior space is fully c
 7. After any fix the user applies to a `gap`, re-enumerate once; stop when a re-enumeration adds no new unclassified cell. Done when: a re-enumeration adds no new unclassified cell.
 
 ## Failure and recovery
-- **Unbounded space**: stop after one read, ask exactly one bounding question, and mutate nothing; if it remains unbounded, return blocked naming the missing boundary and emit no manifest as done.
-- **Unverifiable universe**: if discovery tooling fails or returns nothing for a region, classify the affected cells `gap` with the tool failure as the reason; if the universe itself cannot be enumerated, return blocked. Never claim zero unclassified cells over an unverified universe.
-- **Failed catch-all assertion**: each wildcard catch-all over the enumerated constructors is a `gap` covering its unexplored arms; the done predicate does not hold until the assertion passes.
-- **Partial-result rule**: `gap` and `deferred` cells are expected outputs, not failures — emit the manifest with them classified.
-- **Non-mutation rule**: the run is read-only on source; the sole possible artifact is the manifest file, so recovery from any mistake is deleting that file (or discarding the chat output) and re-running.
-- **Non-converged result**: if re-enumerations keep adding unclassified cells, stop and return the last manifest with its tally and the open `gap` list; never swallow a check failure or pretend the done predicate holds.
+- Unbounded space: stop after one read, ask exactly one bounding question, and mutate nothing; if it remains unbounded, return blocked naming the missing boundary and emit no manifest as done.
+- Unverifiable universe: if discovery tooling fails or returns nothing for a region, classify the affected cells `gap` with the tool failure as the reason; if the universe itself cannot be enumerated, return blocked. Never claim zero unclassified cells over an unverified universe.
+- Failed catch-all assertion: each wildcard catch-all over the enumerated constructors is a `gap` covering its unexplored arms; the done predicate does not hold until the assertion passes.
+- Partial-result rule: `gap` and `deferred` cells are expected outputs, not failures — emit the manifest with them classified.
+- Non-mutation rule: the run is read-only on source; the sole possible artifact is the manifest file, so recovery from any mistake is deleting that file (or discarding the chat output) and re-running.
+- Non-converged result: if re-enumerations keep adding unclassified cells, stop and return the last manifest with its tally and the open `gap` list; never swallow a check failure or pretend the done predicate holds.
 
 ## Output
 The coverage manifest: every cell with id, description, classification, reason, and executed check, the tally line, the named target space, the wildcard-catch-all assertion for code state spaces, and the dependency-ordered gap list, emitted as human-readable or `exhaustive-manifest/v1` YAML on request.

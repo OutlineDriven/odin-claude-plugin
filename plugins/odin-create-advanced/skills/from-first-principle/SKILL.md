@@ -36,10 +36,10 @@ Required: the target to rebuild (a design, an organization, or an API) and acces
 
 ## Failure and recovery
 
-- **Primitives not enumerable**: stop and report that the target cannot be reduced to stated primitives, naming the missing concept. Do not invent primitives.
-- **Element with no primitive basis**: record it as an open assumption; never present an underived element as primitive-forced.
-- **Partial result**: emit the artifact with derived sections complete and open assumptions listed; never fill a gap with a plausible but underived element.
-- **Non-mutation**: the existing target is read-only throughout. Rollback is deleting the written artifact; no other state is touched.
+- Primitives not enumerable: stop and report that the target cannot be reduced to stated primitives, naming the missing concept. Do not invent primitives.
+- Element with no primitive basis: record it as an open assumption; never present an underived element as primitive-forced.
+- Partial result: emit the artifact with derived sections complete and open assumptions listed; never fill a gap with a plausible but underived element.
+- Non-mutation: the existing target is read-only throughout. Rollback is deleting the written artifact; no other state is touched.
 
 ## Output
 

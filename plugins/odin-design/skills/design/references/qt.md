@@ -1,19 +1,19 @@
-# qt.md — Qt-specific desktop surface
+# qt.md, Qt-specific desktop surface
 
-Surface reference for Qt — the most mature cross-platform native UI toolkit.
+Surface reference for Qt, the most mature cross-platform native UI toolkit.
 
 **Grounded: 2026-08-26.** Re-verify versions and capability tables before relying on them in production.
 
 ## 1. Posture
 
-Qt is the most mature cross-platform native UI toolkit, with a generation of production deployments behind it. QML plus Quick Controls 2 is the recommended target for new code; Widgets remains supported for legacy and rich-desktop apps where the immediate-mode QML retained-tree shape is the wrong fit. Do not fight Qt's idioms — use QML, property bindings, and the singleton-as-theme-provider pattern. Bypassing the binding graph is the single most common source of Qt-specific slop.
+Qt is the most mature cross-platform native UI toolkit, with a generation of production deployments behind it. QML plus Quick Controls 2 is the recommended target for new code; Widgets remains supported for legacy and rich-desktop apps where the immediate-mode QML retained-tree shape is the wrong fit. Do not fight Qt's idioms, use QML, property bindings, and the singleton-as-theme-provider pattern. Bypassing the binding graph is the single most common source of Qt-specific slop.
 
 ## 2. Qt versions
 
-- **Qt 6.5 LTS** — standard support ended **April 3 2026** (commercial extended support continues for paying customers). Open-source projects on 6.5 should plan a migration to 6.8 LTS.
-- **Qt 6.8 LTS** — current LTS line and the production target for new work; latest point release 6.8.3.
-- **Qt 6.11** — the current feature line, at 6.11.x. Lottie and SVG rendering moved out of tech preview; Quick Controls now ships `DoubleSpinBox` (a long-requested gap); hardware-accelerated 2D graphics improvements via the RHI backend.
-- **Qt 7** — roadmap not yet published as of this grounding.
+- Qt 6.5 LTS: standard support ended **April 3 2026** (commercial extended support continues for paying customers). Open-source projects on 6.5 should plan a migration to 6.8 LTS.
+- Qt 6.8 LTS: current LTS line and the production target for new work; latest point release 6.8.3.
+- Qt 6.11: the current feature line, at 6.11.x. Lottie and SVG rendering moved out of tech preview; Quick Controls now ships `DoubleSpinBox` (a long-requested gap); hardware-accelerated 2D graphics improvements via the RHI backend.
+- Qt 7: roadmap not yet published as of this grounding.
 
 Recommendation: target **Qt 6.8 LTS** for production releases; track 6.11 for new features. Pin the major.minor in build manifests; Qt point releases are well-behaved, but minor-version drift across a team produces avoidable rebuild cycles.
 
@@ -23,15 +23,15 @@ Recommendation: target **Qt 6.8 LTS** for production releases; track 6.11 for ne
 cxx-qt = "0.10"  # bindings against system Qt; align with installed 6.8 LTS
 ```
 
-The Qt licensing model still bifurcates LGPL/GPL open source vs commercial — confirm the license shape against the deployment target before pinning a version.
+The Qt licensing model still bifurcates LGPL/GPL open source vs commercial, confirm the license shape against the deployment target before pinning a version.
 
 ## 3. QML + Quick Controls 2
 
 QML is declarative, with property bindings and signal handlers; Quick Controls 2 is the modern control library, distinct from the legacy `QtQuick.Controls` 1 (deprecated since Qt 5.x). Three style families ship in-box:
 
-- **Material** — Material Design 3 in QML; Google ecosystem fit.
-- **Universal** — Microsoft Fluent / Windows visual language.
-- **Imagine** — fully customizable via NinePatch images; the right pick when the brand demands a non-platform look.
+- Material: Material Design 3 in QML; Google ecosystem fit.
+- Universal: Microsoft Fluent / Windows visual language.
+- Imagine: fully customizable via NinePatch images; the right pick when the brand demands a non-platform look.
 
 Pick a style via the `QT_QUICK_CONTROLS_STYLE` env var or via a `qtquickcontrols2.conf` file shipped with the binary:
 
@@ -49,7 +49,7 @@ Accent=Orange
 QT_QUICK_CONTROLS_STYLE=Material ./myapp
 ```
 
-A concrete `.qml` button with explicit Material style — the binding fires on click, the style is resolved at component instantiation:
+A concrete `.qml` button with explicit Material style, the binding fires on click, the style is resolved at component instantiation:
 
 ```qml
 import QtQuick
@@ -69,11 +69,11 @@ ApplicationWindow {
 }
 ```
 
-Mixing styles within a single window is supported but rarely correct — pick one per app and commit. Cross-style compositing reads as a Qt-specific anti-slop tell on par with the cross-platform color slop in `references/anti-slop.md` §1.
+Mixing styles within a single window is supported but rarely correct, pick one per app and commit. Cross-style compositing reads as a Qt-specific anti-slop tell on par with the cross-platform color slop in `references/anti-slop.md` §1.
 
 ## 4. Theming via singletons
 
-Define a single `ThemeProvider` singleton (QML or C++) that exposes design tokens as properties; bind UI to those properties. When tokens change, every bound UI updates automatically through Qt's binding graph — no manual fan-out. The pattern beats per-component palette overrides every time.
+Define a single `ThemeProvider` singleton (QML or C++) that exposes design tokens as properties; bind UI to those properties. When tokens change, every bound UI updates automatically through Qt's binding graph, no manual fan-out. The pattern beats per-component palette overrides every time.
 
 ```qml
 // Theme.qml
@@ -107,11 +107,11 @@ Rectangle {
 }
 ```
 
-The C++ alternative — register a `QObject` subclass with `qmlRegisterSingletonType` — applies when tokens are sourced from native config (settings store, keychain, or system theme detection). The contract is the same: properties exposed, bindings driven by them.
+The C++ alternative, register a `QObject` subclass with `qmlRegisterSingletonType`, applies when tokens are sourced from native config (settings store, keychain, or system theme detection). The contract is the same: properties exposed, bindings driven by them.
 
 ## 5. Layouts beat anchors
 
-`RowLayout`, `ColumnLayout`, and `GridLayout` from `QtQuick.Layouts` handle responsive hierarchies — resize, content-driven sizing, alignment, stretch ratios — automatically. Anchors are the right tool only for absolute positioning or simple-edge alignment within a fixed-size region; reach for them sparingly. Layouts compose; nested anchored components do not.
+`RowLayout`, `ColumnLayout`, and `GridLayout` from `QtQuick.Layouts` handle responsive hierarchies, resize, content-driven sizing, alignment, stretch ratios, automatically. Anchors are the right tool only for absolute positioning or simple-edge alignment within a fixed-size region; reach for them sparingly. Layouts compose; nested anchored components do not.
 
 ```qml
 import QtQuick
@@ -136,11 +136,11 @@ The diagnostic for anchors-versus-layouts: if a component needs to grow with ava
 
 ## 6. Forbidden
 
-- **Hardcoded color values** — always palette- or theme-driven. A literal `"#0078D4"` in a `.qml` file means the singleton has been bypassed.
-- **Heavy custom rendering for routine widgets** — `paintEvent` / `QPainter` for buttons and text fields bypasses the native style baseline and the binding graph; reserve custom paint for canvases, plots, and bespoke surfaces.
-- **`Component.onCompleted` JavaScript for state** — imperative initialization defeats the binding graph. Express initial state through property bindings, not procedural assignments.
-- **Mixing Quick Controls 2 styles within a window** — one style per app, committed at build.
+- Hardcoded color values: always palette- or theme-driven. A literal `"#0078D4"` in a `.qml` file means the singleton has been bypassed.
+- Heavy custom rendering for routine widgets: `paintEvent` / `QPainter` for buttons and text fields bypasses the native style baseline and the binding graph; reserve custom paint for canvases, plots, and bespoke surfaces.
+- `Component.onCompleted` JavaScript for state: imperative initialization defeats the binding graph. Express initial state through property bindings, not procedural assignments.
+- **Mixing Quick Controls 2 styles within a window**: one style per app, committed at build.
 
 ## 7. Cite-and-defer
 
-Citations: doc.qt.io, qt.io/blog. Qt 6.8 LTS for production; defer to release notes for 6.11 features and the 6.11 → next-LTS migration window. The Qt commercial / open-source licensing split shifts independently of the version cadence — confirm against current terms before pinning.
+Citations: doc.qt.io, qt.io/blog. Qt 6.8 LTS for production; defer to release notes for 6.11 features and the 6.11 → next-LTS migration window. The Qt commercial / open-source licensing split shifts independently of the version cadence, confirm against current terms before pinning.

@@ -16,8 +16,8 @@ description: 'Use when asked to render a PR review in Cursor Canvas. Produces a 
 
 ## Inputs
 
-- **PR diff** (required): The unified diff of the pull request to review. Supplied as a file path or piped content.
-- **PR metadata** (optional): PR title, description, and linked issue text. Improves hunk risk classification when available.
+- PR diff (required): The unified diff of the pull request to review. Supplied as a file path or piped content.
+- PR metadata (optional): PR title, description, and linked issue text. Improves hunk risk classification when available.
 
 ## Procedure
 

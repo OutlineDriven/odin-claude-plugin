@@ -50,8 +50,8 @@ disable-model-invocation: true
 
 10. Run local verification: execute the project's test suite and lint check for the changed surface. Fix failures immediately. Never suppress a check or widen scope to unrelated code. Done when: tests and lint pass for the changed surface.
 11. Mode split.
-    - **Orchestrated mode**: stop. Return a structured result containing the implementation summary (units completed), verification results (tests, lint), diff summary (files changed), working-tree state (branch, HEAD), and any residuals or blockers. Do not review, commit, push, or create a PR.
-    - **Standalone mode**: delegate finalization to review-and-ship. Pass explicit delegated shipping authority (`authority: delegated`), the implementation context (branch, diff summary, verification results), and any residuals. review-and-ship owns review, commit packaging, publication classification, checks, push, and PR. Do not ship directly.
+    - Orchestrated mode: stop. Return a structured result containing the implementation summary (units completed), verification results (tests, lint), diff summary (files changed), working-tree state (branch, HEAD), and any residuals or blockers. Do not review, commit, push, or create a PR.
+    - Standalone mode: delegate finalization to review-and-ship. Pass explicit delegated shipping authority (`authority: delegated`), the implementation context (branch, diff summary, verification results), and any residuals. review-and-ship owns review, commit packaging, publication classification, checks, push, and PR. Do not ship directly.
 
 ## Single-ticket mode
 
@@ -80,8 +80,8 @@ Never reopen or redesign the plan during single-ticket execution. If the plan is
 Partial-result rule: report what is implemented and verified. Never claim done when tests fail. In orchestrated mode, name residuals in the structured result. In standalone mode, pass residuals to review-and-ship.
 
 ## Output
-- **Orchestrated mode**: a structured result: implementation summary, verification results, diff summary, working-tree state, and residuals or blockers.
-- **Standalone mode**: implementation and local verification complete; finalization delegated to review-and-ship. The final report comes from review-and-ship.
-- **Blocked**: a terminal yield naming the blocker and what was tried.
+- Orchestrated mode: a structured result: implementation summary, verification results, diff summary, working-tree state, and residuals or blockers.
+- Standalone mode: implementation and local verification complete; finalization delegated to review-and-ship. The final report comes from review-and-ship.
+- Blocked: a terminal yield naming the blocker and what was tried.
 
 Zero commits, pushes, or PRs are attributable to this skill in either mode.

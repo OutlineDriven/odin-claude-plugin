@@ -16,8 +16,8 @@ description: 'Use when a user asks to clean up, sync, dedupe, de-noise, or rewri
 
 ## Inputs
 
-- **Target artifact** (required): the file path to rewrite.
-- **Scope hint** (optional): user-supplied boundary or focus area within the artifact.
+- Target artifact (required): the file path to rewrite.
+- Scope hint (optional): user-supplied boundary or focus area within the artifact.
 
 ## Procedure
 
@@ -38,10 +38,10 @@ description: 'Use when a user asks to clean up, sync, dedupe, de-noise, or rewri
 10. If the user asked for new files (e.g., a diff or summary), produce those as well.
 
 ## Failure and recovery
-- **Target missing**: the artifact does not exist at the given path. Stop immediately. Report `MISS`. Do not create a new file.
-- **Rewrite drifts from contract**: the rewritten content introduces claims, structure, or scope not present in the original. Discard the rewrite. Restore from the rollback snapshot. Report what drifted.
-- **Verification fails**: the result does not read as a clean v0: patch traces, changelog scars, or source noise remain. Do not write. Iterate the rewrite or restore from snapshot.
-- **Partial result**: if the rewrite is interrupted after step 9, the artifact is in an unknown state. Restore from the rollback snapshot and restart.
+- Target missing: the artifact does not exist at the given path. Stop immediately. Report `MISS`. Do not create a new file.
+- Rewrite drifts from contract: the rewritten content introduces claims, structure, or scope not present in the original. Discard the rewrite. Restore from the rollback snapshot. Report what drifted.
+- Verification fails: the result does not read as a clean v0: patch traces, changelog scars, or source noise remain. Do not write. Iterate the rewrite or restore from snapshot.
+- Partial result: if the rewrite is interrupted after step 9, the artifact is in an unknown state. Restore from the rollback snapshot and restart.
 
 ## Output
 The target artifact rewritten in place as a clean v0. Optionally, additional files if the user requested them.

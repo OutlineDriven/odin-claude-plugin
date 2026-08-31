@@ -33,11 +33,11 @@ Optional: a target base URL for load/profiling checks (defaults to a local insta
 
 ## Failure and recovery
 
-- **Missing plugin:** stop and report which plugin is unavailable; do not substitute an unverified alternative. Roll back by reverting config to the prior VCS revision.
-- **Baseline missed or stalled:** the load check cannot reach the target or stalls before producing numbers. Record the config changes as applied but mark the baseline as not-measured; Done does not hold until a baseline is recorded.
-- **Redaction check leaked a secret:** treat as a blocking defect; do not declare done. Revert the logger change and re-derive the redact paths from the actual secret fields.
-- **Proxy test failed:** the proxy path does not forward correctly or leaks redacted headers upstream. Fix the proxy configuration and re-run; do not ship a proxy that forwards redacted headers.
-- **Partial result:** applied config changes are reversible via VCS revert; never report done when any of the five stages is missing or unverified.
+- Missing plugin: stop and report which plugin is unavailable; do not substitute an unverified alternative. Roll back by reverting config to the prior VCS revision.
+- Baseline missed or stalled: the load check cannot reach the target or stalls before producing numbers. Record the config changes as applied but mark the baseline as not-measured; Done does not hold until a baseline is recorded.
+- Redaction check leaked a secret: treat as a blocking defect; do not declare done. Revert the logger change and re-derive the redact paths from the actual secret fields.
+- Proxy test failed: the proxy path does not forward correctly or leaks redacted headers upstream. Fix the proxy configuration and re-run; do not ship a proxy that forwards redacted headers.
+- Partial result: applied config changes are reversible via VCS revert; never report done when any of the five stages is missing or unverified.
 
 ## Output
 

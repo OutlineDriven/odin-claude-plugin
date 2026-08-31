@@ -31,11 +31,11 @@ description: 'Use when a user wants to choose and execute a bounded positioning 
 6. Write the artifact to the named local file. Report the file path, the chosen surface, the jargon term(s) used, and the boundary where the jargon stops. **Done when:** the artifact is written and the report is delivered.
 
 ## Failure and recovery
-- **Truth-substitution detected:** a factual claim depends on the jargon. Rewrite the claim to stand without the jargon, or remove it. Do not ship an artifact where trend stands in for truth.
-- **No factual claims supplied and none can be grounded:** stop and report the blocker rather than inventing claims.
-- **Jargon wave not named:** stop and ask the user for the specific term(s). Do not guess a wave.
-- **Partial result:** if the artifact is drafted but the trend-truth check fails on one or more claims, keep the passing claims, report the failing ones, and do not write the final artifact until every claim is re-grounded or removed.
-- **Rollback:** delete or revert the written artifact file. No external publication occurs, so no external rollback is needed.
+- Truth-substitution detected: a factual claim depends on the jargon. Rewrite the claim to stand without the jargon, or remove it. Do not ship an artifact where trend stands in for truth.
+- No factual claims supplied and none can be grounded: stop and report the blocker rather than inventing claims.
+- Jargon wave not named: stop and ask the user for the specific term(s). Do not guess a wave.
+- Partial result: if the artifact is drafted but the trend-truth check fails on one or more claims, keep the passing claims, report the failing ones, and do not write the final artifact until every claim is re-grounded or removed.
+- Rollback: delete or revert the written artifact file. No external publication occurs, so no external rollback is needed.
 
 ## Output
 A written local positioning artifact (copy, landing, or messaging) that rides the named jargon wave, plus a report naming the file path, the chosen surface, the jargon term(s), the boundary where the jargon stops, and the list of factual claims confirmed to stand without the jargon.

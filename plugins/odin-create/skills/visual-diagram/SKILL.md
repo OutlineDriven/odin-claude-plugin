@@ -17,12 +17,12 @@ description: 'Use when the user asks to diagram, draw, map out, walk through, or
 ## Inputs
 
 Required:
-- **Diagram request**: the concept, system, process, or structure the user wants visualised, and optionally the diagram family (flowchart, structural, illustrative). If no family is stated, infer from context.
-- **Output modality**: HTML artifact (durable file) or inline SVG (ephemeral chat). Infer from the request; see Procedure step 1.
+- Diagram request: the concept, system, process, or structure the user wants visualised, and optionally the diagram family (flowchart, structural, illustrative). If no family is stated, infer from context.
+- Output modality: HTML artifact (durable file) or inline SVG (ephemeral chat). Infer from the request; see Procedure step 1.
 
 Optional:
-- **Style direction**: preferred color palette, font, or layout hint from the user (HTML mode).
-- **Surrounding context**: code, architecture, or conversation context that informs the diagram content.
+- Style direction: preferred color palette, font, or layout hint from the user (HTML mode).
+- Surrounding context: code, architecture, or conversation context that informs the diagram content.
 
 ## Procedure
 
@@ -30,7 +30,7 @@ Optional:
 2. **Classify the diagram family** from the request and context. Classify as flowchart (sequential steps, decision points, process walkthrough), structural (components, relationships, containment, data flow), or illustrative (conceptual explanation, not strictly sequential or structural). This classification applies to both modalities. If ambiguous, ask the user to clarify before generating. **Done when:** family is classified or clarification is requested.
 3. **Extract entities and relationships** from the request and any supplied context: nodes (components, steps, concepts), edges (connections, transitions, data flows), and labels or annotations. Do not invent entities not grounded in the request or context. **Done when:** entities and relationships are extracted from grounded sources.
 4. **Compose the diagram** per the chosen modality, applying the per-family composition rules in `references/svg-families.md` to both modalities:
-   - **HTML mode**: write a self-contained HTML file using the template rules:
+   - HTML mode: write a self-contained HTML file using the template rules:
      - Embed all CSS inline in a `<style>` block.
      - Embed all JavaScript inline in a `<script>` block.
      - If using Mermaid, include the Mermaid CDN script or embed the Mermaid library.
@@ -39,7 +39,7 @@ Optional:
      - Label every Mermaid edge with a descriptive text annotation.
      - Add a `<figcaption>` or equivalent caption to each figure that states the claim it illustrates.
      - Derive the filename from the topic: convert to lowercase, replace spaces with hyphens, append `.html`. Resolve the output directory from the user diagrams directory if known, else derive from session context or use a standard `diagrams/` folder under the project root. Create the directory if it does not exist.
-   - **SVG mode**: compose the SVG following the shared rules and the per-family composition rules in `references/svg-families.md`:
+   - SVG mode: compose the SVG following the shared rules and the per-family composition rules in `references/svg-families.md`:
      - Set `xmlns="http://www.w3.org/2000/svg"` and a `viewBox` that fits content with padding.
      - Use `<g>` groups for logical clusters.
      - Use `<rect>`, `<circle>`, `<ellipse>`, `<polygon>`, `<path>`, `<line>`, and `<text>` for nodes and edges.
@@ -49,13 +49,13 @@ Optional:
      - No external resources (no `href` to external files, no `<image>`, no CSS `url()` to external assets, inline all styles).
    **Done when:** the diagram is composed with all family-specific rules applied for the chosen modality.
 5. **Validate the output** per the chosen modality:
-   - **HTML mode**: validate against the final checklist:
+   - HTML mode: validate against the final checklist:
      - Open the file in a headless browser or use an equivalent DOM check to confirm zero console errors.
      - Confirm that no element exceeds the viewport width (no horizontal overflow).
      - Confirm a dual theme or a documented, deliberate single theme.
      - Confirm that every Mermaid edge has a label.
      - Confirm that every figure has a caption stating a claim.
-   - **SVG mode**: validate the SVG:
+   - SVG mode: validate the SVG:
      - Root element is `<svg>` with correct `xmlns`.
      - Every opening tag has a matching closing tag or is self-closing.
      - All `id` references resolve to defined elements.
@@ -63,8 +63,8 @@ Optional:
      - Text elements have content and positioning attributes.
    **Done when:** every validation check for the chosen modality passes.
 6. **Deliver the result** per the chosen modality:
-   - **HTML mode**: open the HTML file in the default browser and report its path. If opening is not possible, report the file path and ask the user to open it.
-   - **SVG mode**: wrap the SVG in a fenced code block tagged for the client's visualizer renderer. The fence must contain exactly one `<svg>` root element and nothing else outside it. Do not modify any file, repository, or external resource. Do not offer to save, export, or deploy the diagram.
+   - HTML mode: open the HTML file in the default browser and report its path. If opening is not possible, report the file path and ask the user to open it.
+   - SVG mode: wrap the SVG in a fenced code block tagged for the client's visualizer renderer. The fence must contain exactly one `<svg>` root element and nothing else outside it. Do not modify any file, repository, or external resource. Do not offer to save, export, or deploy the diagram.
    **Done when:** the file is opened or its path reported (HTML mode), or the fenced SVG is the sole chat output (SVG mode).
 
 ## Failure and recovery
@@ -87,6 +87,6 @@ No failure class swallows an error or pretends the done predicate holds when it 
 
 Stated by output mode.
 
-**HTML mode**: one self-contained HTML file at `<user diagrams directory>/<derived-filename>.html`, opened in the browser or its path reported. The file contains inline CSS/JS, dual-theme support, labeled Mermaid edges, and figcaption claims.
+HTML mode: one self-contained HTML file at `<user diagrams directory>/<derived-filename>.html`, opened in the browser or its path reported. The file contains inline CSS/JS, dual-theme support, labeled Mermaid edges, and figcaption claims.
 
-**SVG mode**: a single SVG diagram wrapped in a visualizer fence, declaring `xmlns`, with a `viewBox` containing all content, `<text>` elements for all labels, arrow markers in `<defs>` where directional edges exist, no external resource references, and logical grouping via `<g>` elements.
+SVG mode: a single SVG diagram wrapped in a visualizer fence, declaring `xmlns`, with a `viewBox` containing all content, `<text>` elements for all labels, arrow markers in `<defs>` where directional edges exist, no external resource references, and logical grouping via `<g>` elements.

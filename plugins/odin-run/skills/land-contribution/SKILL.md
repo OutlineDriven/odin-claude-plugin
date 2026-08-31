@@ -48,13 +48,13 @@ Required: repository identity, pull-request number, authenticated maintainer or 
 13. Read back the remote branch, review, landing, closure, and comment state. Report success only when every applicable Done predicate is directly confirmed. Done when: every applicable Done predicate is confirmed by remote read-back.
 
 ## Failure and recovery
-- **Authority or identity failure:** Make no remote mutation when repository, pull request, contributor, credentials, or maintainer authority cannot be established; return `blocked` with the missing fact.
-- **Head drift:** Make no approval or landing mutation after the reviewed head changes; retain all branches and return `blocked` with the reviewed and current revisions.
-- **Evidence failure:** Preserve any landing branch, withhold approval and landing, and return `blocked` with each failed or unavailable required check and any usable partial review findings.
-- **Authorship risk:** Stop before any squash, amendment, re-authoring, or history rewrite; retain the contributor and landing branches and return `blocked` naming the threatened commits.
-- **Remote partial failure:** Do not repeat an operation until its remote state has been read back. Keep confirmed operations, report the exact unconfirmed operation, and resume only from the first absent state; never claim the Done predicate from a local response alone.
-- **Approval unavailable:** If the platform forbids the acting maintainer from approving or rejects the review, do not close or land the accepted pull request; return `blocked` with the platform response.
-- **Decline:** Return `declined` only after thesis-tied reasons and contributor credit are visible and the contributor branch is confirmed retained. A decline is a terminal classification, not a failed landing.
+- Authority or identity failure: Make no remote mutation when repository, pull request, contributor, credentials, or maintainer authority cannot be established; return `blocked` with the missing fact.
+- Head drift: Make no approval or landing mutation after the reviewed head changes; retain all branches and return `blocked` with the reviewed and current revisions.
+- Evidence failure: Preserve any landing branch, withhold approval and landing, and return `blocked` with each failed or unavailable required check and any usable partial review findings.
+- Authorship risk: Stop before any squash, amendment, re-authoring, or history rewrite; retain the contributor and landing branches and return `blocked` naming the threatened commits.
+- Remote partial failure: Do not repeat an operation until its remote state has been read back. Keep confirmed operations, report the exact unconfirmed operation, and resume only from the first absent state; never claim the Done predicate from a local response alone.
+- Approval unavailable: If the platform forbids the acting maintainer from approving or rejects the review, do not close or land the accepted pull request; return `blocked` with the platform response.
+- Decline: Return `declined` only after thesis-tied reasons and contributor credit are visible and the contributor branch is confirmed retained. A decline is a terminal classification, not a failed landing.
 
 No failure permits deleting the contributor branch, rewriting contributor commits, silently renaming the pull request, widening the contribution's thesis, swallowing a remote error, or reporting an unconfirmed operation as complete.
 

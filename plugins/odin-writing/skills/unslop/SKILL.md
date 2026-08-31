@@ -16,17 +16,17 @@ description: 'Use when prose is drafted or edited, reviewed for AI tells, or the
 
 ## Refusals
 
-- **Code debris and dead code**: use `deslop`. Unslop edits prose; deslop cuts code.
-- **Korean or other non-English humanization**: unslop applies the same full-mode checks; where a check's example list is English-specific, judge the underlying pattern (puffery, filler, passive voice, meta-narration) in the target language rather than the literal words.
-- **The routing verdict**: use `deslop` for code debris and `purge-slop-docs` for stale doc trees; use unslop when the answer is prose editing.
-- **Already clean**: if the text contains no AI tell patterns, return it unchanged and report the text is already clean.
+- Code debris and dead code: use `deslop`. Unslop edits prose; deslop cuts code.
+- Korean or other non-English humanization: unslop applies the same full-mode checks; where a check's example list is English-specific, judge the underlying pattern (puffery, filler, passive voice, meta-narration) in the target language rather than the literal words.
+- The routing verdict: use `deslop` for code debris and `purge-slop-docs` for stale doc trees; use unslop when the answer is prose editing.
+- Already clean: if the text contains no AI tell patterns, return it unchanged and report the text is already clean.
 
 ## Inputs
 
-- **Prose file, scope, or inline text** (required): the file, text block, directory, glob, or pasted text to edit. When the user supplies text inline rather than a path, edit that text directly and return the result.
-- **Mode** (optional): `full` (default: all 20 checks), `dedash` (em-dash purge by grammatical role), `detool` (incidental tool-name neutralization in portable artifacts).
-- **Tone guidance** (optional): intended register or audience; defaults to the file's existing voice.
-- **Strictness** (optional, dedash only): `default` replaces clear-cut cases; `strict` surfaces every occurrence as a judgment call.
+- Prose file, scope, or inline text (required): the file, text block, directory, glob, or pasted text to edit. When the user supplies text inline rather than a path, edit that text directly and return the result.
+- Mode (optional): `full` (default: all 20 checks), `dedash` (em-dash purge by grammatical role), `detool` (incidental tool-name neutralization in portable artifacts).
+- Tone guidance (optional): intended register or audience; defaults to the file's existing voice.
+- Strictness (optional, dedash only): `default` replaces clear-cut cases; `strict` surfaces every occurrence as a judgment call.
 
 ## Procedure
 
@@ -66,7 +66,7 @@ Triggered when a durable artifact claims portability or tool-neutrality while ca
 3. Superficial -ing phrases and formulaic challenges: "highlighting...", "ensuring...", "Despite challenges... continues to thrive". Delete or replace with specific facts.
 
 **Language**
-4. AI vocabulary: additionally, crucial, delve, enduring, enhance, fostering, garner, interplay, intricate, landscape (abstract), pivotal, showcase, tapestry (abstract), testament, underscore, vibrant. Replace with plain words.
+4. AI vocabulary: additionally, crucial, `delve`, enduring, enhance, fostering, garner, interplay, intricate, landscape (abstract), pivotal, showcase, tapestry (abstract), testament, underscore, vibrant. Replace with plain words.
 5. Fancy copulas and forced structures: "serves as", "stands as", "boasts", "features", "Not just X, but Y", rule of three, synonym cycling, false ranges. Say it directly with the natural number of points.
 
 **Style**
@@ -100,17 +100,17 @@ Triggered when a durable artifact claims portability or tool-neutrality while ca
 
 ## Failure and recovery
 
-- **Missing or empty source** (full mode): stop; report "source file missing or empty". Do not create a file.
-- **scope-empty** (dedash mode): no files matched the scope. Report; perform no writes.
-- **Artifact not found or unreadable** (detool mode): stop immediately; report the miss. Do not fabricate content.
-- **Meaning drift**: if an edit changes the factual content or logical claim, revert that edit and rephrase. If no rephrase preserves both meaning and the check, keep the original and flag the conflict.
-- **ambiguous-role** (dedash mode): an occurrence fits neither a clear replacement class nor a leave-alone class. Surface it as a judgment call with the surrounding sentence. Do not guess.
-- **Ambiguous role classification** (detool mode): default to durable content and flag the judgment call in the report.
-- **Neutral wording loses the mechanism** (detool mode): keep the concrete detail as an example; note the decision in the report.
-- **Pattern introduction**: if the rewrite introduces a new pattern from the checklist, re-run self-audit on the affected paragraph.
-- **Non-converged**: if three rewrite passes still leave checklist violations, stop and report the remaining violations with their locations.
-- **partial-completion** (dedash mode): if a file write fails mid-batch, stop processing that file, report the partial state, and continue with remaining files.
-- **Edit alters the mechanism or evidence** (detool mode): abort that edit; report the conflict.
+- Missing or empty source (full mode): stop; report "source file missing or empty". Do not create a file.
+- scope-empty (dedash mode): no files matched the scope. Report; perform no writes.
+- Artifact not found or unreadable (detool mode): stop immediately; report the miss. Do not fabricate content.
+- Meaning drift: if an edit changes the factual content or logical claim, revert that edit and rephrase. If no rephrase preserves both meaning and the check, keep the original and flag the conflict.
+- ambiguous-role (dedash mode): an occurrence fits neither a clear replacement class nor a leave-alone class. Surface it as a judgment call with the surrounding sentence. Do not guess.
+- Ambiguous role classification (detool mode): default to durable content and flag the judgment call in the report.
+- Neutral wording loses the mechanism (detool mode): keep the concrete detail as an example; note the decision in the report.
+- Pattern introduction: if the rewrite introduces a new pattern from the checklist, re-run self-audit on the affected paragraph.
+- Non-converged: if three rewrite passes still leave checklist violations, stop and report the remaining violations with their locations.
+- partial-completion (dedash mode): if a file write fails mid-batch, stop processing that file, report the partial state, and continue with remaining files.
+- Edit alters the mechanism or evidence (detool mode): abort that edit; report the conflict.
 
 ## Output
 

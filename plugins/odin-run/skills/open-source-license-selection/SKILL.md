@@ -16,10 +16,10 @@ description: 'Use when the user asks to choose, reconcile, or apply an open-sour
 
 ## Inputs
 
-- **Distribution intent** (required): how the artifact will be distributed.
-- **Reciprocity goal** (required): permissive, weak-copyleft, or strong-copyleft.
-- **Existing license** (optional): current LICENSE file or declared license in package metadata.
-- **Dependency licenses** (optional): third-party dependency licenses from lockfiles or the dependency graph.
+- Distribution intent (required): how the artifact will be distributed.
+- Reciprocity goal (required): permissive, weak-copyleft, or strong-copyleft.
+- Existing license (optional): current LICENSE file or declared license in package metadata.
+- Dependency licenses (optional): third-party dependency licenses from lockfiles or the dependency graph.
 
 ## Procedure
 
@@ -39,11 +39,11 @@ description: 'Use when the user asks to choose, reconcile, or apply an open-sour
 
 ## Failure and recovery
 
-- **Unresolvable dependency license conflict:** return the recommendation with the conflict named. Do not write files.
-- **Unretrievable license text:** return the full recommendation with manual application steps. Do not write files.
-- **Invalid SPDX expression or unrecognized license identifier:** stop. Name the invalid expression. Do not write files.
-- **Partial write:** if any file fails to write during application, revert all files written so far and report the failure. Never leave LICENSE, package metadata, and README in an inconsistent state.
-- **Incompatible existing declaration:** surface the contradiction. Do not write files that would conflict.
+- Unresolvable dependency license conflict: return the recommendation with the conflict named. Do not write files.
+- Unretrievable license text: return the full recommendation with manual application steps. Do not write files.
+- Invalid SPDX expression or unrecognized license identifier: stop. Name the invalid expression. Do not write files.
+- Partial write: if any file fails to write during application, revert all files written so far and report the failure. Never leave LICENSE, package metadata, and README in an inconsistent state.
+- Incompatible existing declaration: surface the contradiction. Do not write files that would conflict.
 
 ## Output
 

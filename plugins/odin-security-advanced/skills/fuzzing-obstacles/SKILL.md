@@ -41,10 +41,10 @@ Optional:
 
 ## Failure and recovery
 
-- **No coverage gain after patching**: the patched check was not the real blocker. Revert the conditional block and re-run coverage analysis to find the next obstacle. Do not stack unverified patches.
-- **High false-positive rate**: skipping the check introduced impossible states. Replace the skip with safe-default fallbacks (step 4) or narrow the bypass to a cheaper sub-check. Re-assess risk before continuing.
-- **Production behavior changed**: the build flag leaked into a production build path. Stop. The flag must be defined only in the fuzzing build configuration. Roll back the conditional block and fix the build configuration so the flag is absent from production builds.
-- **Non-converged**: if coverage does not improve and risk cannot be reduced below acceptable, return the obstacle as unresolved with the evidence gathered; do not declare the done predicate holds.
+- No coverage gain after patching: the patched check was not the real blocker. Revert the conditional block and re-run coverage analysis to find the next obstacle. Do not stack unverified patches.
+- High false-positive rate: skipping the check introduced impossible states. Replace the skip with safe-default fallbacks (step 4) or narrow the bypass to a cheaper sub-check. Re-assess risk before continuing.
+- Production behavior changed: the build flag leaked into a production build path. Stop. The flag must be defined only in the fuzzing build configuration. Roll back the conditional block and fix the build configuration so the flag is absent from production builds.
+- Non-converged: if coverage does not improve and risk cannot be reduced below acceptable, return the obstacle as unresolved with the evidence gathered; do not declare the done predicate holds.
 
 Rollback: delete the conditional compilation block (or remove the fuzz build configuration defining the flag). Because production code is guarded by the negated flag, removing the fuzz branch restores the original behavior with no production-side change.
 

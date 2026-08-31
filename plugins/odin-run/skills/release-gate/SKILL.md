@@ -17,17 +17,17 @@ disable-model-invocation: true
 
 ## Refusals
 
-- **Running workflow-owned steps by hand**: rejected. The user must run that step through the workflow.
-- **Releases without confirmation at each irreversible step**: rejected. Q1 and Q2 are both required.
-- **Overwriting an existing version**: rejected. Stop and report the conflict.
+- Running workflow-owned steps by hand: rejected. The user must run that step through the workflow.
+- Releases without confirmation at each irreversible step: rejected. Q1 and Q2 are both required.
+- Overwriting an existing version: rejected. Stop and report the conflict.
 
 ## Inputs
 
-- **Version target** (required): the semver or calendar version to release.
-- **Changelog or commit range** (required): the set of changes since the last release.
-- **Workflow identifier** (optional): CI/CD workflow name or dispatch trigger if the repo uses one.
-- **Contributor list** (optional): names or handles to credit in release notes.
-- **Iteration folder path** (optional): working directory to retire after release.
+- Version target (required): the semver or calendar version to release.
+- Changelog or commit range (required): the set of changes since the last release.
+- Workflow identifier (optional): CI/CD workflow name or dispatch trigger if the repo uses one.
+- Contributor list (optional): names or handles to credit in release notes.
+- Iteration folder path (optional): working directory to retire after release.
 
 ## Procedure
 
@@ -45,10 +45,10 @@ disable-model-invocation: true
 
 ## Failure and recovery
 
-- **User declines Q1 or Q2**: stop immediately. No version bump, commit, tag, or push occurs. Report the declined confirmation and leave all state unchanged.
-- **Version already exists**: stop. Report the conflict. Do not overwrite.
-- **Commit or tag push fails**: stop after the failed push. Report the error and the partial state (e.g., local commit exists but tag was not pushed). The user decides whether to retry or revert locally.
-- **Workflow fails or times out**: report the failure. Do not mark the release as succeeded. The user decides next action.
+- User declines Q1 or Q2: stop immediately. No version bump, commit, tag, or push occurs. Report the declined confirmation and leave all state unchanged.
+- Version already exists: stop. Report the conflict. Do not overwrite.
+- Commit or tag push fails: stop after the failed push. Report the error and the partial state (e.g., local commit exists but tag was not pushed). The user decides whether to retry or revert locally.
+- Workflow fails or times out: report the failure. Do not mark the release as succeeded. The user decides next action.
 - **Scope creep detected** (request touches steps owned by the CI/CD workflow, deployment pipeline, or publishing platform): refuse. Report which step is workflow-owned. The user must run that step through the workflow.
 
 Partial results are never reported as success. If any step after Q1 fails, the release is incomplete and the output states exactly which steps succeeded and which did not.

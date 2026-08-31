@@ -52,11 +52,11 @@ Required: the repository root, supplied by the current working directory or the 
 12. **Stop at the visibility switch.** Do not alter repository visibility, external hosting settings, remote branch protection, DNS, CDN, or any other external state. Report that the visibility action remains and requires explicit human authorization. Done when: the stated outcome holds.
 
 ## Failure and recovery
-- **Secrets found in history:** stop immediately after step 3 and return a blocked result naming the finding. Do not proceed to publication steps. Report the fresh-repository recommendation. The done predicate does not hold.
-- **Build or test failure during final review:** report the failure verbatim and do not claim the done predicate holds. The outsider's build experience is the proof of success.
-- **Organizational policy conflict:** stop and report the conflict. Do not override an organizational policy.
-- **Remote or external state error (CI, package index, hosting):** report the error, do not retry against a different target, and return a blocked result.
-- **Readiness gaps:** report the gaps as discussion prompts. Do not block publication for a research prototype that does not need production readiness signals.
+- Secrets found in history: stop immediately after step 3 and return a blocked result naming the finding. Do not proceed to publication steps. Report the fresh-repository recommendation. The done predicate does not hold.
+- Build or test failure during final review: report the failure verbatim and do not claim the done predicate holds. The outsider's build experience is the proof of success.
+- Organizational policy conflict: stop and report the conflict. Do not override an organizational policy.
+- Remote or external state error (CI, package index, hosting): report the error, do not retry against a different target, and return a blocked result.
+- Readiness gaps: report the gaps as discussion prompts. Do not block publication for a research prototype that does not need production readiness signals.
 
 A blocked result names the failure class, the finding or gap, and the exact action not completed.
 

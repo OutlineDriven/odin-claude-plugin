@@ -27,10 +27,10 @@ Optional:
 1. **Elicit raw taste signals.** Ask the user for concrete cases where the outcome felt wrong, off, or missing, rather than abstract preferences. Record each as a named signal with the observable behavior, not the inferred cause. Stop when the user says they have listed what they can.
 
 2. **Classify each signal.** For every named signal, ask the user to place it into one bucket:
-   - **FORBIDDEN**: must never happen
-   - **TOKEN**: a named flag or category the agent can recognize and route on
-   - **EXAMPLE**: a concrete input-output pair that defines what is acceptable
-   - **RULE**: a conditional statement (if-then) that captures the boundary
+   - FORBIDDEN: must never happen
+   - TOKEN: a named flag or category the agent can recognize and route on
+   - EXAMPLE: a concrete input-output pair that defines what is acceptable
+   - RULE: a conditional statement (if-then) that captures the boundary
 
    If the user cannot classify a signal, discard it rather than guess.
 

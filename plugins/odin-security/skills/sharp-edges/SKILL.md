@@ -20,8 +20,8 @@ description: 'Use when asked to audit a code surface for security-relevant edge 
 
 ## Inputs
 
-- **Code surface**: the code, API surface, configuration schema, cryptographic interface, or library design under review. Required.
-- **Target specification**: the element or surface within the code that the user wants audited. Required.
+- Code surface: the code, API surface, configuration schema, cryptographic interface, or library design under review. Required.
+- Target specification: the element or surface within the code that the user wants audited. Required.
 
 ## Procedure
 
@@ -35,9 +35,9 @@ description: 'Use when asked to audit a code surface for security-relevant edge 
 
 ## Failure and recovery
 
-- **No target provided:** stop without findings and state that the target was not specified.
-- **No security-relevant edge cases:** return an empty findings report stating that no sharp edges were found.
-- **Missing source code:** if the referenced code cannot be located, stop and state which target could not be examined.
+- No target provided: stop without findings and state that the target was not specified.
+- No security-relevant edge cases: return an empty findings report stating that no sharp edges were found.
+- Missing source code: if the referenced code cannot be located, stop and state which target could not be examined.
 
 ## Output
 

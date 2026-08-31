@@ -32,11 +32,7 @@ Must be supplied: a working title (the human's intent or the opening prompt). Op
 10. When the conversation circles a recurring idea, push the human to coin one leading word that names the concept; that word is load-bearing for all later structure. Done when: the human coins a leading word or declines.
 
 ## Failure and recovery
-- **No working title**: the skill cannot route. Return blocked with the reason.
-- **File write fails**: return write-failed with the file path and error class. Do not append or guess.
-- **User deletes or rewrites the file between turns**: the next write resumes from the file's current disk state; no rollback of user edits occurs.
-- **Append collision**: re-read and retry once; if the file changed again, return non-converged.
-- Partial-result rule: fragments written before the failure remain on disk; the skill ends and reports what was written.
+If no working title is provided, the skill cannot route; return blocked with the reason. If the file write fails, return write-failed with the file path and error class; do not append or guess. If the user deletes or rewrites the file between turns, the next write resumes from the file's current disk state; no rollback of user edits occurs. On an append collision, re-read and retry once; if the file changed again, return non-converged. Fragments written before a failure remain on disk; the skill ends and reports what was written.
 
 ## Output
 A markdown file — first line `# Working title`, remaining content fragments separated by `---`; no heading inside the body, no tags, no metadata.

@@ -36,11 +36,11 @@ description: 'Use when the user says "clarify", "what is ambiguous here", or whe
 9. List any project-specific term the user settled during clarification as a CONCEPTS.md candidate in the report. Record the candidate; write no files. **Done when:** settled terms are recorded as CONCEPTS.md candidates.
 
 ## Failure and recovery
-- **No identifiable target after one read of the context:** stop and ask exactly one question naming what to scan. Classify nothing and emit no report; scanning nothing is a failure, not an empty result.
-- **A fact lookup fails or is inconclusive:** the ambiguity is not `auto`; it falls to normal tiering (usually `manual`). Never guess a fact to avoid asking.
-- **Partial scan (a span is unreadable or unreachable):** emit the findings found so far, name the span excluded, and do not claim done.
-- **Manual questions left unanswered:** the open `manual` findings remain; state that clarification is incomplete and list their ids. The done predicate does not hold.
-- **Nothing is ever written, so there is no rollback:** recovery is re-running the scan. Never swallow a lookup error or present an incomplete pass as done.
+- No identifiable target after one read of the context: stop and ask exactly one question naming what to scan. Classify nothing and emit no report; scanning nothing is a failure, not an empty result.
+- A fact lookup fails or is inconclusive: the ambiguity is not `auto`; it falls to normal tiering (usually `manual`). Never guess a fact to avoid asking.
+- Partial scan (a span is unreadable or unreachable): emit the findings found so far, name the span excluded, and do not claim done.
+- Manual questions left unanswered: the open `manual` findings remain; state that clarification is incomplete and list their ids. The done predicate does not hold.
+- Nothing is ever written, so there is no rollback: recovery is re-running the scan. Never swallow a lookup error or present an incomplete pass as done.
 
 ## Output
 A findings report grouped by tier with `manual` last, one block per finding with fields `id`, `quote` (the exact ambiguous span), `tier`, `recommendation` (`—` for `fyi`), and `basis` (the fact or convention supporting it); `gated` recommendations marked locked-unless-overridden, `manual` ones non-locking, `auto` resolutions appearing compactly with their basis; the manual questions fired (at most four per fire) and the CONCEPTS.md candidates recorded from settled terms; on explicit request for structured output, one fenced `clarify-findings/v1` block containing a YAML list of the per-finding fields.

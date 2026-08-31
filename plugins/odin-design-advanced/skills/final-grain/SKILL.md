@@ -16,8 +16,8 @@ description: 'Use when asked to push an already-working artifact to finished com
 
 ## Inputs
 
-- **Artifact**: the working file or set of files to be polished. Required; user provides the path.
-- **Polish targets**: the specific structure, grain, or feel dimensions the human wants refined. Optional; if absent, the agent proposes three targets and the human confirms before proceeding.
+- Artifact: the working file or set of files to be polished. Required; user provides the path.
+- Polish targets: the specific structure, grain, or feel dimensions the human wants refined. Optional; if absent, the agent proposes three targets and the human confirms before proceeding.
 
 ## Procedure
 
@@ -31,8 +31,8 @@ description: 'Use when asked to push an already-working artifact to finished com
 8. Replace the original artifact with the polished version. Done when: the polished version replaces the original at the named path.
 
 ## Failure and recovery
-- **Polish broke the artifact**: restore the named artifact from its VCS version or the human-supplied recovery source. Return `rollback` and a report of what broke.
-- **Human withheld or withdrew confirmation**: stop without mutation. Return `blocked`.
+- Polish broke the artifact: restore the named artifact from its VCS version or the human-supplied recovery source. Return `rollback` and a report of what broke.
+- Human withheld or withdrew confirmation: stop without mutation. Return `blocked`.
 - **Polish oscillates or degrades without progress**: stop after three refinement cycles. Return `non-converged`. Do not produce an artifact under this outcome.
 
 ## Output

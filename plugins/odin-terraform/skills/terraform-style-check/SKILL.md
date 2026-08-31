@@ -16,9 +16,9 @@ description: 'Use when writing, reviewing, or generating Terraform HCL that must
 
 ## Inputs
 
-- **Target directory or files** (required): the Terraform root module or specific `.tf` files to check. Must exist on disk.
-- **Terraform CLI** (required): `terraform` must be available on PATH.
-- **Style overrides** (optional): project-specific naming prefixes or security exceptions. If absent, apply defaults below.
+- Target directory or files (required): the Terraform root module or specific `.tf` files to check. Must exist on disk.
+- Terraform CLI (required): `terraform` must be available on PATH.
+- Style overrides (optional): project-specific naming prefixes or security exceptions. If absent, apply defaults below.
 
 ## Refusals
 

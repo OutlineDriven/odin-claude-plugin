@@ -6,19 +6,19 @@ Every persona dispatch is `<this file> + "\n\n---\n\n" + <persona prompt> + "\n\
 
 Assign by the impact that is observed or *reachable*, not by how subtle the bug is.
 
-- **P0**: reachable now by ordinary or untrusted input: data loss/corruption, security breach, crash on a normal path, regression in a shipped contract. Ship-blocker.
-- **P1**: wrong output or failure on a plausible (non-adversarial) input; resource exhaustion under expected load; a contract break behind a flag/edge. Fix before merge.
-- **P2**: degraded behavior on an uncommon path; a changed branch with no test that can break silently; maintainability debt with a named future-defect path. Fix or file.
-- **P3**: no behavioral impact: style, naming, micro-optimization with no measured win. Advisory.
+- P0: reachable now by ordinary or untrusted input: data loss/corruption, security breach, crash on a normal path, regression in a shipped contract. Ship-blocker.
+- P1: wrong output or failure on a plausible (non-adversarial) input; resource exhaustion under expected load; a contract break behind a flag/edge. Fix before merge.
+- P2: degraded behavior on an uncommon path; a changed branch with no test that can break silently; maintainability debt with a named future-defect path. Fix or file.
+- P3: no behavioral impact: style, naming, micro-optimization with no measured win. Advisory.
 
 A finding with no nameable reachable impact is P3. "Looks wrong" is not P0.
 
 ## Action class: routing advice (no fix is applied here)
 
-- **safe**: mechanical, behavior-preserving, single-site, unambiguous fix → apply directly (unattended).
-- **gated**: clear fix but touches a contract or multiple sites → route `audit-project`.
-- **manual**: needs a human design decision; no single correct fix → surface as a question, route `none`.
-- **advisory**: opinion/nit; recording it is the action → route `none`.
+- safe: mechanical, behavior-preserving, single-site, unambiguous fix → apply directly (unattended).
+- gated: clear fix but touches a contract or multiple sites → route `audit-project`.
+- manual: needs a human design decision; no single correct fix → surface as a question, route `none`.
+- advisory: opinion/nit; recording it is the action → route `none`.
 
 ## Confidence
 

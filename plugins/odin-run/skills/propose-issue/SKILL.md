@@ -30,13 +30,13 @@ The reported symptom or suspected defect is required. An explicit target reposit
 7. Only when all six criteria pass, run `gh issue create --repo <target> --title <title> --body <body>` once. Accept success only when the command confirms creation with an issue URL; do not retry a result that may have created the issue until the tracker has been checked for that exact title and body. Done when: the issue is created and confirmed with a URL, or an ambiguous result is checked before retry.
 
 ## Failure and recovery
-- **Unresolved target or unavailable source:** make no remote change; return the draft material available, the missing input, and the criterion that cannot be established.
-- **Unsupported defect or failed reproduction:** preserve unsupported observations as explicitly attributed, unconfirmed reports, make no remote change, and return the draft with the failed evidence or mechanism criterion.
-- **Duplicate found:** make no remote change and return the matching issue instead of a new draft as though filing succeeded.
-- **Gate failure:** make no remote change; return the draft, all six pass/fail marks, and every failing criterion.
-- **Tracker search failure:** do not infer `no match`; make no remote change and return the command failure as a blocked duplicate criterion.
-- **Create failure with confirmed no issue created:** make no further remote change and return the error with the retained final draft.
-- **Ambiguous create result:** search the target for the exact title and body before any retry. If exactly one matching issue exists, report its URL; if none or more than one exists, do not retry and return a blocked result naming the ambiguity.
+- Unresolved target or unavailable source: make no remote change; return the draft material available, the missing input, and the criterion that cannot be established.
+- Unsupported defect or failed reproduction: preserve unsupported observations as explicitly attributed, unconfirmed reports, make no remote change, and return the draft with the failed evidence or mechanism criterion.
+- Duplicate found: make no remote change and return the matching issue instead of a new draft as though filing succeeded.
+- Gate failure: make no remote change; return the draft, all six pass/fail marks, and every failing criterion.
+- Tracker search failure: do not infer `no match`; make no remote change and return the command failure as a blocked duplicate criterion.
+- Create failure with confirmed no issue created: make no further remote change and return the error with the retained final draft.
+- Ambiguous create result: search the target for the exact title and body before any retry. If exactly one matching issue exists, report its URL; if none or more than one exists, do not retry and return a blocked result naming the ambiguity.
 
 No failure path may claim completion. Partial evidence and drafts may be returned, but the terminal result remains an abort until the issue URL is confirmed.
 

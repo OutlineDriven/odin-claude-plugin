@@ -16,8 +16,8 @@ description: 'Use when a plan must be stress-tested, iteratively improved, and s
 
 ## Inputs
 
-- **Feature description or existing plan text** (required): supplied by the user or session context.
-- **Scope, appetite, or constraint signals** (optional): any constraints the user supplies.
+- Feature description or existing plan text (required): supplied by the user or session context.
+- Scope, appetite, or constraint signals (optional): any constraints the user supplies.
 
 ## Procedure
 

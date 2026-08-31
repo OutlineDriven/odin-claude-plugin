@@ -17,8 +17,8 @@ description: 'Use when environment-dependent code, templates, or deployment conf
 
 ## Inputs
 
-- **Declared surfaces** (required): the code, templates, runtime config files, and deployment config to audit. Named by the user or inferred from the change diff.
-- **Supply sources** (required): env files, CI secret definitions, deployment manifests, and any other location that provides variable values.
+- Declared surfaces (required): the code, templates, runtime config files, and deployment config to audit. Named by the user or inferred from the change diff.
+- Supply sources (required): env files, CI secret definitions, deployment manifests, and any other location that provides variable values.
 
 ## Procedure
 
@@ -29,8 +29,8 @@ description: 'Use when environment-dependent code, templates, or deployment conf
 
 ## Failure and recovery
 
-- **Exact blocker:** a variable's supply or consumption cannot be determined from the declared surfaces. Stop and report the blocker; do not guess a resolution.
-- **Unsafe exposure:** a secret or credential would be placed in a public scope or a location that leaks it. Stop before the exposure; report the risk and the correct secret scope.
+- Exact blocker: a variable's supply or consumption cannot be determined from the declared surfaces. Stop and report the blocker; do not guess a resolution.
+- Unsafe exposure: a secret or credential would be placed in a public scope or a location that leaks it. Stop before the exposure; report the risk and the correct secret scope.
 
 ## Output
 

@@ -45,11 +45,11 @@ Optional:
 
 ## Failure and recovery
 
-- **Target API unreachable from the harness**: stop and report the missing entry point; do not invent a wrapper that bypasses it.
-- **Non-deterministic execution**: stop, identify the nondeterminism source (RNG, clock, shared global state), and pin it in the harness; never mask it by retrying.
+- Target API unreachable from the harness: stop and report the missing entry point; do not invent a wrapper that bypasses it.
+- Non-deterministic execution: stop, identify the nondeterminism source (RNG, clock, shared global state), and pin it in the harness; never mask it by retrying.
 - **Harness-side crash** (crash in adapter or harness code, not the target): fix the harness, not the target; re-run the corpus.
-- **Reproducible target crash**: preserve the crashing input, stack trace, and environment verbatim; report it as a finding, do not suppress or fix it in the harness.
-- **Partial result**: emit the harness and corpus that pass steps 1 through 5 for the reachable subset, and list the inputs or API paths that could not be covered with the reason. Roll back by deleting added harness, adapter, corpus, and artifact files; the target under test is never mutated.
+- Reproducible target crash: preserve the crashing input, stack trace, and environment verbatim; report it as a finding, do not suppress or fix it in the harness.
+- Partial result: emit the harness and corpus that pass steps 1 through 5 for the reachable subset, and list the inputs or API paths that could not be covered with the reason. Roll back by deleting added harness, adapter, corpus, and artifact files; the target under test is never mutated.
 
 ## Output
 

@@ -16,11 +16,11 @@ description: 'Use when a user asks to execute or investigate a PromQL expression
 
 ## Inputs
 
-- **PromQL query** (required): the PromQL expression to evaluate.
-- **Prometheus server URL** (required): the base endpoint to query against, e.g. `http://prometheus:9090`.
-- **Time range** (optional): start and end timestamps or duration for range queries. Instant queries omit this.
-- **Output format** (optional): table, csv, json, or graph. Defaults to table.
-- **Step interval** (optional): resolution for range queries, e.g. `15s`, `1m`.
+- PromQL query (required): the PromQL expression to evaluate.
+- Prometheus server URL (required): the base endpoint to query against, e.g. `http://prometheus:9090`.
+- Time range (optional): start and end timestamps or duration for range queries. Instant queries omit this.
+- Output format (optional): table, csv, json, or graph. Defaults to table.
+- Step interval (optional): resolution for range queries, e.g. `15s`, `1m`.
 
 ## Procedure
 
@@ -31,12 +31,7 @@ description: 'Use when a user asks to execute or investigate a PromQL expression
 
 ## Failure and recovery
 
-- **Connection failure**: the server is unreachable or DNS resolution fails. Report the URL and the connection error. Do not retry silently.
-- **Query syntax error**: the Prometheus API returns `status: "error"` with `errorType: "bad_data"`. Report the `error` field verbatim. Do not attempt to rewrite the query.
-- **Empty result set**: the query executed successfully but returned no series. Report the empty result and suggest checking label selectors or the time range.
-- **Timeout**: the request exceeded the 30-second client timeout or the server returned a timeout error. Report the timeout and suggest narrowing the time range or adding label filters.
-- **Authentication failure**: the server returned 401 or 403. Report that credentials are required or invalid. Do not retry with different credentials.
-- **Server error**: the server returned 5xx. Report the status code and response body. Suggest retrying after the server recovers.
+On connection failure, the server is unreachable or DNS resolution fails; report the URL and the connection error, and do not retry silently. On a query syntax error, the Prometheus API returns `status: "error"` with `errorType: "bad_data"`; report the `error` field verbatim and do not attempt to rewrite the query. On an empty result set, the query executed successfully but returned no series; report the empty result and suggest checking label selectors or the time range. On timeout, the request exceeded the 30-second client timeout or the server returned a timeout error; report the timeout and suggest narrowing the time range or adding label filters. On authentication failure, the server returned 401 or 403; report that credentials are required or invalid, and do not retry with different credentials. On a server error, the server returned 5xx; report the status code and response body, and suggest retrying after the server recovers.
 
 No partial results are returned on failure. No files are written.
 

@@ -39,9 +39,9 @@ Gate findings by their `confidence` anchor value. Anchors are discrete integers 
 | `75`   | Double-checked, will hit in practice, directly impacts correctness | Enter actionable tier (classify by `autofix_class`) |
 | `100`  | Evidence directly confirms; will happen frequently | Enter actionable tier (classify by `autofix_class`) |
 
-- **Dropped silently** (anchors `0` and `25`): these stay suppressed across every output bucket -- findings, FYI observations, and residual concerns alike. Record the total drop count as a Coverage footnote line when non-zero: `Dropped: N (anchors 0/25 suppressed)`. The footnote appears below the Coverage table, alongside the `Chains:` footnote when both apply. Omit the footnote when N is zero.
-- **FYI-subsection** (anchor `50`): stays in the working set through 3.3 dedup and 3.4 cross-persona promotion. If promoted to `75` by corroboration, enters the actionable tier; if not promoted, routes to the FYI subsection regardless of `autofix_class`. These bypass the walk-through and any bulk action -- observational value without forcing a decision. Advisory observations ("nothing breaks, but...") naturally land here.
-- **Actionable** (anchors `75` and `100`): enter the classification pipeline. Route by `autofix_class` (see 3.10).
+- Dropped silently (anchors `0` and `25`): these stay suppressed across every output bucket -- findings, FYI observations, and residual concerns alike. Record the total drop count as a Coverage footnote line when non-zero: `Dropped: N (anchors 0/25 suppressed)`. The footnote appears below the Coverage table, alongside the `Chains:` footnote when both apply. Omit the footnote when N is zero.
+- FYI-subsection (anchor `50`): stays in the working set through 3.3 dedup and 3.4 cross-persona promotion. If promoted to `75` by corroboration, enters the actionable tier; if not promoted, routes to the FYI subsection regardless of `autofix_class`. These bypass the walk-through and any bulk action -- observational value without forcing a decision. Advisory observations ("nothing breaks, but...") naturally land here.
+- Actionable (anchors `75` and `100`): enter the classification pipeline. Route by `autofix_class` (see 3.10).
 
 **Why this threshold, not a higher one:** Document review has opposite economics from code review. There is no linter backstop -- the review IS the backstop. Premise-level concerns (product, adversarial) naturally cap at anchors 50-75 because "is the motivation valid?" cannot be verified against ground truth. The routing menu already makes dismissal cheap (Skip, Append to Open Questions), so surfaced-and-skipped is a low-cost outcome while missed-and-shipped derails downstream implementation. Filter low (`>= 50`) and let the routing menu handle volume.
 
@@ -236,11 +236,11 @@ Include the Coverage table, accepted recommendations, FYI observations (as a dis
 
 ## Phase 5: Next action -- terminal question
 
-**Headless mode:** Return "Review complete" immediately, without asking questions.
+Headless mode: Return "Review complete" immediately, without asking questions.
 
-**Interactive mode:** fire the terminal question using the platform's blocking question tool.
+Interactive mode: fire the terminal question using the platform's blocking question tool.
 
-**Stem:** `Record decisions and what next?`
+Stem: `Record decisions and what next?`
 
 When `decisions_recorded_count > 0`:
 

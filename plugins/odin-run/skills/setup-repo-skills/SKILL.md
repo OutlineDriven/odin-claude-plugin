@@ -21,8 +21,8 @@ disable-model-invocation: true
 
 ## Inputs
 
-- **Required**: a repository working tree and a human present to confirm one section at a time.
-- **Optional**: prior output under `docs/agents/` (updated in place); an existing steering file (`CLAUDE.md` or `AGENTS.md`); monorepo signals (they decide whether the multi-context domain layout is offered).
+- Required: a repository working tree and a human present to confirm one section at a time.
+- Optional: prior output under `docs/agents/` (updated in place); an existing steering file (`CLAUDE.md` or `AGENTS.md`); monorepo signals (they decide whether the multi-context domain layout is offered).
 
 ## Procedure
 
@@ -144,10 +144,10 @@ disable-model-invocation: true
 
 ## Failure and recovery
 
-- **Section unanswered or declined:** stop at that section and write nothing for it. Files approved and written earlier remain as a partial result; report them as partial and do not claim done.
-- **No git remote:** never guess a hosted tracker; the GitHub and GitLab seeds are unusable without their host. Offer local markdown or a freeform tracker and continue only on a confirmed answer.
-- **Steering-file ambiguity:** neither file exists — ask, never choose. A block already exists — update it in place, preserve every surrounding user edit, and report the exact change.
-- **Write fails mid-batch:** report exactly which files landed. Recover by reverting the steering-file edit and deleting only the `docs/agents/` files this run wrote; all four writes are reversible local writes.
+- Section unanswered or declined: stop at that section and write nothing for it. Files approved and written earlier remain as a partial result; report them as partial and do not claim done.
+- No git remote: never guess a hosted tracker; the GitHub and GitLab seeds are unusable without their host. Offer local markdown or a freeform tracker and continue only on a confirmed answer.
+- Steering-file ambiguity: neither file exists — ask, never choose. A block already exists — update it in place, preserve every surrounding user edit, and report the exact change.
+- Write fails mid-batch: report exactly which files landed. Recover by reverting the steering-file edit and deleting only the `docs/agents/` files this run wrote; all four writes are reversible local writes.
 - Errors are surfaced, never swallowed, and done is never claimed while a confirmed file is missing.
 
 ## Output

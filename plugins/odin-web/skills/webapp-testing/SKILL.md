@@ -16,11 +16,11 @@ description: 'Use when asked to verify frontend functionality, debug UI behavior
 
 ## Inputs
 
-- **URL** — required. The web application URL to test.
-- **Assertions** — required. Concrete UI or behavioral assertions the test must verify.
-- **Evidence types** — required. Evidence to capture: `screenshot`, `console log`, or both.
-- **Script path** — optional. Override the default location for the generated Playwright script. Defaults to `playwright_test_<timestamp>.py`.
-- **Server command** — optional. Command to start the local dev server. If absent, the human must start the server before the skill runs Playwright.
+- URL: required. The web application URL to test.
+- Assertions: required. Concrete UI or behavioral assertions the test must verify.
+- Evidence types: required. Evidence to capture: `screenshot`, `console log`, or both.
+- Script path: optional. Override the default location for the generated Playwright script. Defaults to `playwright_test_<timestamp>.py`.
+- Server command: optional. Command to start the local dev server. If absent, the human must start the server before the skill runs Playwright.
 
 ## Procedure
 

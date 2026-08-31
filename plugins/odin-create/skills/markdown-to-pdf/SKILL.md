@@ -33,15 +33,15 @@ description: 'Use when the user runs /markdown-to-pdf on Markdown to render a pu
 
 ## Failure and recovery
 
-- **Binary not found**: no executable `$P` at any checked path. Stop; tell the user to run `./setup` in the gstack repo to build it, then retry. Do not proceed without the renderer.
-- **Setup failure**: `$P setup` reports a missing component (Chromium, browse daemon, or `pdftotext`). Stop; report the missing component and the setup output. Do not attempt to render.
-- **Emoji gate red**: emoji render as empty boxes. The color-emoji font is missing. Stop and tell the user to install `fonts-noto-color-emoji` (or the platform equivalent), then retry. Do not claim the gate is green and do not install fonts yourself.
-- **Diagram gate red**: a mermaid or excalidraw fence renders as raw code, or a broken fence produces no diagnostic. Check the fence is at column 0 (not indented), check the vendored diagram bundle is present, and re-render. A broken fence that silently shows raw code is a renderer defect: report it, do not work around it.
-- **Landscape gate red**: a wide diagram does not get a landscape page. Add an explicit `{page=landscape}` directive and re-render; if it still fails, report the renderer defect.
-- **Combined gate red**: the full document fails to render or copy-paste text is fragmented. For a Paged.js timeout, drop `--toc` (likely no headings). For blank output, check the browse daemon status. For fragmented copy-paste, remove fenced code blocks and regenerate. Re-run after the fix; do not claim success on a partial render.
-- **Exit codes**: 0 success / 1 bad args / 2 render error / 3 Paged.js timeout / 4 browse unavailable. Map each non-zero exit to the failure class above. Never swallow a non-zero exit or pretend the done predicate holds.
-- **Partial-result rule**: if the render succeeds but a gate is red, the PDF is a partial result. Report the gate that failed and the evidence; do not present the PDF as done.
-- **Non-mutation rule**: on any failure, no source Markdown or input file is modified. Only the output PDF and intermediate artifacts are written; delete the partial PDF if a gate is red and the user did not ask to keep it.
+- Binary not found: no executable `$P` at any checked path. Stop; tell the user to run `./setup` in the gstack repo to build it, then retry. Do not proceed without the renderer.
+- Setup failure: `$P setup` reports a missing component (Chromium, browse daemon, or `pdftotext`). Stop; report the missing component and the setup output. Do not attempt to render.
+- Emoji gate red: emoji render as empty boxes. The color-emoji font is missing. Stop and tell the user to install `fonts-noto-color-emoji` (or the platform equivalent), then retry. Do not claim the gate is green and do not install fonts yourself.
+- Diagram gate red: a mermaid or excalidraw fence renders as raw code, or a broken fence produces no diagnostic. Check the fence is at column 0 (not indented), check the vendored diagram bundle is present, and re-render. A broken fence that silently shows raw code is a renderer defect: report it, do not work around it.
+- Landscape gate red: a wide diagram does not get a landscape page. Add an explicit `{page=landscape}` directive and re-render; if it still fails, report the renderer defect.
+- Combined gate red: the full document fails to render or copy-paste text is fragmented. For a Paged.js timeout, drop `--toc` (likely no headings). For blank output, check the browse daemon status. For fragmented copy-paste, remove fenced code blocks and regenerate. Re-run after the fix; do not claim success on a partial render.
+- Exit codes: 0 success / 1 bad args / 2 render error / 3 Paged.js timeout / 4 browse unavailable. Map each non-zero exit to the failure class above. Never swallow a non-zero exit or pretend the done predicate holds.
+- Partial-result rule: if the render succeeds but a gate is red, the PDF is a partial result. Report the gate that failed and the evidence; do not present the PDF as done.
+- Non-mutation rule: on any failure, no source Markdown or input file is modified. Only the output PDF and intermediate artifacts are written; delete the partial PDF if a gate is red and the user did not ask to keep it.
 
 ## Output
 

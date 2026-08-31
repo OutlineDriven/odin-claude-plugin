@@ -35,9 +35,9 @@ description: 'Use when the user wants an answer only from the moat seat: buildin
 
 ## Failure and recovery
 
-- **Blending failure**: the answer folds in another lens's logic. Recovery: restate the step-3 boundary and rewrite the affected passage from the moat seat only.
-- **Missing subject**: no analyzable subject was supplied. Stop and ask for the subject; do not fabricate one or widen to a general essay.
-- **Thin evidence**: a claimed moat has no supporting mechanism. State the gap explicitly; never assert defensibility the subject does not support.
+- Blending failure: the answer folds in another lens's logic. Recovery: restate the step-3 boundary and rewrite the affected passage from the moat seat only.
+- Missing subject: no analyzable subject was supplied. Stop and ask for the subject; do not fabricate one or widen to a general essay.
+- Thin evidence: a claimed moat has no supporting mechanism. State the gap explicitly; never assert defensibility the subject does not support.
 - **No partial artifact is written**; the only output is the chat answer, so a failed pass leaves nothing to roll back.
 
 ## Output

@@ -78,13 +78,13 @@ If the response is not valid JSON, or the `url` field is absent or not a valid H
 
 ## Failure and recovery
 
-- **Ambiguous or model-initiated request:** stop, do not upload, ask for explicit human confirmation.
-- **Missing credentials:** stop before any upload; report that endpoint credentials are not configured; no payload is sent.
-- **Human rejects preview:** no upload occurs. The run stops. Report that the user declined.
-- **Payload exceeds 5 MB after dropping non-essential messages:** report a blocked result with the measured size; do not upload an oversized payload.
-- **Upload failure (network timeout, DNS failure, TLS error):** report the exact error and the blocked result; no URL is returned. Do not retry blindly.
-- **HTTP error (4xx or 5xx):** report the status code and a short response body excerpt; no URL is returned. Do not retry blindly.
-- **Response lacks valid URL:** report the response status and body excerpt; no URL is returned.
+- Ambiguous or model-initiated request: stop, do not upload, ask for explicit human confirmation.
+- Missing credentials: stop before any upload; report that endpoint credentials are not configured; no payload is sent.
+- Human rejects preview: no upload occurs. The run stops. Report that the user declined.
+- Payload exceeds 5 MB after dropping non-essential messages: report a blocked result with the measured size; do not upload an oversized payload.
+- Upload failure (network timeout, DNS failure, TLS error): report the exact error and the blocked result; no URL is returned. Do not retry blindly.
+- HTTP error (4xx or 5xx): report the status code and a short response body excerpt; no URL is returned. Do not retry blindly.
+- Response lacks valid URL: report the response status and body excerpt; no URL is returned.
 - **Redaction leak detected (reasoning, credentials, or raw JSONL present in the payload):** abort before upload; report the leak; do not publish.
 - **Non-mutation rule:** publishing is irreversible once the URL is returned; the only protection is to never upload a payload that fails the redaction contract.
 

@@ -16,8 +16,8 @@ description: 'Use when a user asks to scan, audit, or validate a skill for secur
 
 ## Inputs
 
-- **skill_path** (required): path to the skill directory containing `SKILL.md` and any associated files.
-- **risk_threshold** (optional): minimum severity to report: one of `low`, `medium`, `high`, `critical`. Defaults to `low`.
+- skill_path (required): path to the skill directory containing `SKILL.md` and any associated files.
+- risk_threshold (optional): minimum severity to report: one of `low`, `medium`, `high`, `critical`. Defaults to `low`.
 
 ## Procedure
 
@@ -36,7 +36,7 @@ description: 'Use when a user asks to scan, audit, or validate a skill for secur
    i. **Dependency risk**: scan for undeclared external package imports, pinned versions with known vulnerability patterns, and network dependencies that may be unavailable. Review URLs: trusted domains (GitHub, PyPI, official docs) are normal; untrusted domains (unknown domains, personal sites, URL shorteners) are flagged; remote instruction loading (URLs that fetch content to be executed as instructions) is high risk; dependency downloads that execute binaries or code at runtime are flagged.
    j. **Permission analysis**: evaluate least privilege: are all declared tools actually used in the skill instructions? Rate the permission profile: read-only tools (Read, Grep, Glob) are low risk; adding Bash is medium risk requiring justification; near-full access (Read, Grep, Glob, Bash, Write, Edit, WebFetch, Task) is high risk.
    k. **Self-containment**: verify the skill does not reference other skills or modules as required dependencies, does not require `AGENTS.md` or `CLAUDE.md`, and has no hidden file dependencies outside its directory.
-   **Done when:** every file has been analyzed or its failure recorded.
+   Done when: every file has been analyzed or its failure recorded.
 5. For each finding, record: category, severity (`low`/`medium`/`high`/`critical`), file path, line range, matched pattern, and the surrounding context (two lines before and after). **Done when:** every finding has a complete record.
 6. Filter false positives:
    a. Patterns inside fenced code blocks or examples that are illustrative, not executable instructions.
@@ -44,16 +44,16 @@ description: 'Use when a user asks to scan, audit, or validate a skill for secur
    c. Dangerous patterns guarded by explicit conditionals that prevent execution in the skill's declared authority.
    d. Credential references that are documentation about environment variables the skill does not access.
    e. Security skills that reference injection or attack patterns in their references are documenting threats, not attacking. Only flag patterns that would execute against the agent running the skill.
-   **Done when:** the filter count and retained findings are set.
+   Done when: the filter count and retained findings are set.
 7. Classify overall risk level as the maximum severity across all retained findings. If no findings remain after filtering, classify as `LOW`. **Done when:** the risk level is assigned with evidence.
 8. Compile the report. **Done when:** the report matches the Output contract.
 
 ## Failure and recovery
 
-- **Missing or inaccessible skill directory:** report `blocked`, state the path that was not found, and stop. Do not guess contents.
-- **Malformed `SKILL.md`:** note the parse error, continue scanning remaining files, and flag the malformed frontmatter as a `medium` finding.
-- **Partial scan failure:** if analysis of a specific file fails, record the failure as a finding with severity `low`, continue with remaining files, and note the incomplete coverage in the report.
-- **No findings after filtering:** return `LOW` risk with zero findings and a positive install recommendation. Do not inflate risk to appear thorough.
+- Missing or inaccessible skill directory: report `blocked`, state the path that was not found, and stop. Do not guess contents.
+- Malformed `SKILL.md`: note the parse error, continue scanning remaining files, and flag the malformed frontmatter as a `medium` finding.
+- Partial scan failure: if analysis of a specific file fails, record the failure as a finding with severity `low`, continue with remaining files, and note the incomplete coverage in the report.
+- No findings after filtering: return `LOW` risk with zero findings and a positive install recommendation. Do not inflate risk to appear thorough.
 - Never downgrade a risk level due to an error. Never widen scope beyond the skill directory. Never pretend the done predicate holds if the scan could not complete.
 
 ## Output

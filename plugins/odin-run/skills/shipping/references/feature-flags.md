@@ -15,7 +15,7 @@ if (flags.taskSharing) {
 return null;
 ```
 
-**Feature flag lifecycle:**
+Feature flag lifecycle:
 
 ```
 1. DEPLOY with flag OFF     → Code is in production but inactive
@@ -25,7 +25,7 @@ return null;
 5. CLEAN UP                 → Remove flag and dead code path after full rollout
 ```
 
-**Rules:**
+Rules:
 - Every feature flag has an owner and an expiration date
 - Clean up flags within 2 weeks of full rollout
 - Don't nest feature flags (creates exponential combinations)

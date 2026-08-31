@@ -33,10 +33,10 @@ Sanitize a memory directory so it is safe to share externally.
 
 ## Failure and recovery
 
-- **Invalid source or destination**: stop before sanitization. Report the rejected path and reason; choose a new timestamp only for a destination collision.
-- **Tier-1 credential detected in source**: stop before generating copies. Report the affected source files and credential classes. Require manual remediation of the originals before a new run. Never approve or publish copies when a credential is present in the source.
-- **Sanitizer execution failure**: return `blocked: sanitization or proof incomplete`, including the command failure and any generated paths. Do not infer missing results or claim done.
-- **Nested Markdown**: report that nested files were skipped and classify the result as partial rather than claiming the directory was fully sanitized.
+- Invalid source or destination: stop before sanitization. Report the rejected path and reason; choose a new timestamp only for a destination collision.
+- Tier-1 credential detected in source: stop before generating copies. Report the affected source files and credential classes. Require manual remediation of the originals before a new run. Never approve or publish copies when a credential is present in the source.
+- Sanitizer execution failure: return `blocked: sanitization or proof incomplete`, including the command failure and any generated paths. Do not infer missing results or claim done.
+- Nested Markdown: report that nested files were skipped and classify the result as partial rather than claiming the directory was fully sanitized.
 - Originals require no rollback because they are never written. To roll back local output, delete only the named generated `/tmp/memory-sanitized-<timestamp>` directory after preserving any report the user needs.
 
 ## Output

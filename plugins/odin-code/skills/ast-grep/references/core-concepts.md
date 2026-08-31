@@ -4,23 +4,23 @@ A few concepts from the underlying Tree-sitter parser explain how ast-grep match
 
 ## AST vs CST
 
-- **CST (Concrete Syntax Tree)**: Includes all details of the source code, including punctuation, parentheses, and whitespace.
-- **AST (Abstract Syntax Tree)**: A simplified tree that keeps only "named" nodes, omitting trivial details.
+- CST (Concrete Syntax Tree): Includes all details of the source code, including punctuation, parentheses, and whitespace.
+- AST (Abstract Syntax Tree): A simplified tree that keeps only "named" nodes, omitting trivial details.
 
 ast-grep uses **CST** for matching by default (via the `smart` algorithm) but can be configured to use AST-level matching.
 
 ## Named vs unnamed nodes
 
 Tree-sitter distinguishes between:
-- **Named Nodes**: Have a specific `kind` (e.g., `identifier`, `function_declaration`). Usually important.
-- **Unnamed Nodes**: Anonymous tokens like `+`, `(`, `;`. Usually trivial.
+- Named Nodes: Have a specific `kind` (e.g., `identifier`, `function_declaration`). Usually important.
+- Unnamed Nodes: Anonymous tokens like `+`, `(`, `;`. Usually trivial.
 
-**Note**: Meta-variables (e.g., `$VAR`) match **only named nodes** by default. Use double-dollar `$$VAR` to match unnamed nodes as well.
+Note: Meta-variables (e.g., `$VAR`) match **only named nodes** by default. Use double-dollar `$$VAR` to match unnamed nodes as well.
 
 ## Kind vs field
 
-- **Kind**: The type of the node itself (e.g., `binary_expression`, `string_literal`).
-- **Field**: The role of a node relative to its parent (e.g., `lhs`, `rhs` in a binary expression, or `key`, `value` in a pair).
+- Kind: The type of the node itself (e.g., `binary_expression`, `string_literal`).
+- Field: The role of a node relative to its parent (e.g., `lhs`, `rhs` in a binary expression, or `key`, `value` in a pair).
 
 In YAML rules:
 ```yaml
@@ -45,12 +45,12 @@ ast-grep offers different "strictness" levels for matching patterns.
 
 ### Configuring strictness
 
-**CLI**:
+CLI:
 ```bash
 ast-grep run -p '$A' --strictness ast
 ```
 
-**YAML**:
+YAML:
 ```yaml
 rule:
   pattern:

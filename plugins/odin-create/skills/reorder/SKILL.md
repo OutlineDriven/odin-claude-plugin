@@ -16,8 +16,8 @@ description: 'Use when asked to reorder a drifted listing under one stated princ
 
 ## Refusals
 
-- **Listings with intentionally ranked items**: use `reorder-respect-deliberate`. This skill does not preserve explicit ranks.
-- **Rewording, adding, or removing content**: rejected. Items are moved only.
+- Listings with intentionally ranked items: use `reorder-respect-deliberate`. This skill does not preserve explicit ranks.
+- Rewording, adding, or removing content: rejected. Items are moved only.
 - **Remote, credential, publish, deploy, or irreversible changes**: rejected.
 
 ## Inputs
@@ -35,10 +35,10 @@ Only the listing and a stated principle. The listing is either supplied or ident
 
 ## Failure and recovery
 
-- **Ambiguous scope**: the listing boundaries or item set are unclear. Stop and ask the user to identify or supply the exact target.
-- **Mixed item types**: the set contains items that do not share a common ordering principle. Stop and ask which subset to reorder, or which principle to apply.
-- **Principle unknown**: surface the best guess and wait for explicit confirmation before proceeding.
-- **Partial fit**: if the stated principle fits some items but not all, sequence the compatible subset and note the remainder as out-of-scope.
+- Ambiguous scope: the listing boundaries or item set are unclear. Stop and ask the user to identify or supply the exact target.
+- Mixed item types: the set contains items that do not share a common ordering principle. Stop and ask which subset to reorder, or which principle to apply.
+- Principle unknown: surface the best guess and wait for explicit confirmation before proceeding.
+- Partial fit: if the stated principle fits some items but not all, sequence the compatible subset and note the remainder as out-of-scope.
 
 Rollback: if a reposition corrupts or loses content, restore from VCS. This authority is reversible-local; the working tree is the only mutation surface.
 

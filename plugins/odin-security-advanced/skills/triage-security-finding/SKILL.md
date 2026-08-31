@@ -18,8 +18,8 @@ One finding, one verdict. This skill takes a single anchored finding and produce
 
 ## Inputs
 
-- **Required**: One finding with a bindable source anchor: a SARIF result, reviewer annotation, suspicious function name, or report excerpt that resolves to a file and line range in the working tree.
-- **Optional**: Existing graph annotations on the target function or file; graph evidence from prior runs.
+- Required: One finding with a bindable source anchor: a SARIF result, reviewer annotation, suspicious function name, or report excerpt that resolves to a file and line range in the working tree.
+- Optional: Existing graph annotations on the target function or file; graph evidence from prior runs.
 
 ## Refusals
 

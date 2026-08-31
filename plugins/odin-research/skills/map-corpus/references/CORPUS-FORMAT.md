@@ -21,17 +21,17 @@ mapped: {YYYY-MM-DD}
 
 ## Kind values
 
-- **textbook** — structured chapter/section exposition.
-- **paper** — peer-reviewed publication or preprint that makes claims suitable for a research venue.
-- **practitioner book** — field guide, handbook, or how-to.
-- **work document** — notes, memos, onboarding docs authored on the job.
-- **notes** — the learner's own capture; may be fragmentary.
+- textbook: structured chapter/section exposition.
+- paper: peer-reviewed publication or preprint that makes claims suitable for a research venue.
+- practitioner book: field guide, handbook, or how-to.
+- work document: notes, memos, onboarding docs authored on the job.
+- notes: the learner's own capture; may be fragmentary.
 - Mark a file `reference only` in the Sources row when it orients but teaches no distinct concept.
 
 ## Citation anchors
 
-- Preferred: `<path-relative-to-corpus-root>#<heading-slug>` — for example `ch03-locks.md#deadlock`.
-- Fallback when the source has no headings: `<path>:<start>-<end>` — for example `notes/raw.md:12-34`.
+- Preferred: `<path-relative-to-corpus-root>#<heading-slug>`, for example `ch03-locks.md#deadlock`.
+- Fallback when the source has no headings: `<path>:<start>-<end>`, for example `notes/raw.md:12-34`.
 - Every concept line carries exactly one anchor; a concept taught in two places cites the earlier introduction.
 
 ## Rules

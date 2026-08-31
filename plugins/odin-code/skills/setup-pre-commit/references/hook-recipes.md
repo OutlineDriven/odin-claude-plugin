@@ -2,7 +2,7 @@
 
 **Grounded: 2026-08-31**
 
-**Node ecosystems**: write `.husky/pre-commit`:
+Node ecosystems: write `.husky/pre-commit`:
 
 ```
 npx lint-staged
@@ -18,7 +18,7 @@ Drop missing scripts and tell the user. Write `.lintstagedrc`:
 
 Formatter policy is **out of scope** for this skill. Do not auto-create `.prettierrc`. If no Prettier config exists, surface that fact and ask the user.
 
-**Python**: write `.pre-commit-config.yaml`:
+Python: write `.pre-commit-config.yaml`:
 
 ```yaml
 repos:
@@ -42,7 +42,7 @@ repos:
         stages: [pre-commit]
 ```
 
-**Go**: write `lefthook.yml`:
+Go: write `lefthook.yml`:
 
 ```yaml
 pre-commit:
@@ -53,14 +53,14 @@ pre-commit:
     test:   { run: go test -race ./... }
 ```
 
-**Rust**: `Cargo.toml`:
+Rust: `Cargo.toml`:
 
 ```toml
 [dev-dependencies]
 cargo-husky = { version = "1", default-features = false, features = ["precommit-hook", "run-cargo-test", "run-cargo-clippy", "run-cargo-fmt"] }
 ```
 
-**OCaml**: `.pre-commit-config.yaml`:
+OCaml: `.pre-commit-config.yaml`:
 
 ```yaml
 repos:

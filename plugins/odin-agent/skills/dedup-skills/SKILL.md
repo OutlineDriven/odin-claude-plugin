@@ -35,11 +35,11 @@ description: 'Use when asked to deduplicate skills or prompt directories, find r
 5. **Ledger.** Write the ledger: totals per classification, repeat findings grouped into families with per-copy locations and shorten-in-place proposals, conflicts with both sides quoted, discharge reasons for everything else, and the verification performed (spot-checked cluster count, conflict-pass falsifiability). Deliver it without editing the tree. Apply is a separate, later pass gated on per-row or per-family user approval. Done when: the ledger is delivered with totals, families, conflicts, discharge reasons, and verification, and the tree is untouched.
 
 ## Failure and recovery
-- **Empty or missing target tree:** stop before scanning; report that no files were scanned. Do not emit an empty ledger as a clean result.
-- **Dead conflict detector:** if the fixture opposing pair is not flagged, the conflict pass is unreliable. Report detector-failure and do not emit a zero-candidate live result as real.
-- **Unclassified finding remains:** the done predicate is not met. Report blocked with the unclassified cell and its evidence; do not deliver a ledger claiming completeness.
-- **Partial results:** never deliver a partial ledger. If any step fails, report the failure class and which set is incomplete.
-- **Non-mutation rule:** the tree is untouched throughout; no rollback is needed because no edit ever lands. Edits happen only in a separate, later, user-approved pass.
+- Empty or missing target tree: stop before scanning; report that no files were scanned. Do not emit an empty ledger as a clean result.
+- Dead conflict detector: if the fixture opposing pair is not flagged, the conflict pass is unreliable. Report detector-failure and do not emit a zero-candidate live result as real.
+- Unclassified finding remains: the done predicate is not met. Report blocked with the unclassified cell and its evidence; do not deliver a ledger claiming completeness.
+- Partial results: never deliver a partial ledger. If any step fails, report the failure class and which set is incomplete.
+- Non-mutation rule: the tree is untouched throughout; no rollback is needed because no edit ever lands. Edits happen only in a separate, later, user-approved pass.
 
 ## Output
 A ledger in chat: totals per classification; repeat findings grouped into families with per-copy file:line locations and shorten-in-place proposals; conflicts with both sides quoted verbatim; one-line discharge reasons for every intentional-keep and not-a-finding; and the verification performed (spot-checked cluster count, conflict-pass falsifiability). The scanned tree is untouched. Apply is a separate, later pass gated on per-row or per-family user approval.

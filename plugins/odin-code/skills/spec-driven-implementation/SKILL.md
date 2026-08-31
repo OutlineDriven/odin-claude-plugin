@@ -16,9 +16,9 @@ description: 'Use when a significant feature begins or specs are checked in: aut
 
 ## Inputs
 
-- **Feature brief** (required): natural-language description of the feature to implement.
-- **Existing specs** (optional): any spec files already present in the project. If absent, the skill treats the feature as greenfield.
-- **Scope anchor** (required): the module, package, or directory boundary the feature affects.
+- Feature brief (required): natural-language description of the feature to implement.
+- Existing specs (optional): any spec files already present in the project. If absent, the skill treats the feature as greenfield.
+- Scope anchor (required): the module, package, or directory boundary the feature affects.
 
 ## Refusal
 

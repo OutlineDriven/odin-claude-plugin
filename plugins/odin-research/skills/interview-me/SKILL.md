@@ -16,8 +16,8 @@ description: 'Use when a user asks to define requirements or choose between opti
 
 ## Inputs
 
-- **User's stated goal or problem**: Required on invocation. The user supplies the initial intent, decision question, or ambiguity they want explored.
-- **Assumptions not yet stated**: Collected by the agent during the dialogue. Each turn surfaces one assumption for explicit user confirmation or correction.
+- User's stated goal or problem: Required on invocation. The user supplies the initial intent, decision question, or ambiguity they want explored.
+- Assumptions not yet stated: Collected by the agent during the dialogue. Each turn surfaces one assumption for explicit user confirmation or correction.
 - **No source files required** to begin the interview.
 
 ## Procedure

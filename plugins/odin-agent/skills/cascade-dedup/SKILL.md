@@ -35,26 +35,26 @@ disable-model-invocation: true
    - Jaccard >= 0.45 plus opposing modal verbs (must/never, always/must-not) -> **conflict**: the baseline wins; delete or rewrite the prefix line.
    - Persona voice (identity, tone, register) is not a directive: keep.
    - Unique directives (persona-specific rules with no baseline pair): keep.
-   **Done when:** every prefix sentence is classified and every strip cites its baseline pair.
+   Done when: every prefix sentence is classified and every strip cites its baseline pair.
 4. **Harness embeds.** Per external file (`~/.omp/agent/AGENTS.md`, `~/.codex/AGENTS.md`):
    - Internal duplication within the file, same thresholds as step 3.
    - Directive-level comparison against the baseline. Classify each divergence: `harness-adaptation` (names that harness's tools or commands: keep), `accidental drift` (same rule, mutated wording: align to baseline wording), `conflict` (baseline wins, unless the divergence fits harness-specific tooling).
-   **Done when:** a divergence ledger with exactly one classification per divergence is produced, none unclassified.
+   Done when: a divergence ledger with exactly one classification per divergence is produced, none unclassified.
 5. **Apply, verify, then commit.**
    - Apply all repo edits: strips, conflict resolutions, tail repairs, and the `releaseVersion` bump if strips or conflict resolutions occurred. Let the package-surfaces generator (`scripts/render-package-surfaces.mjs`) re-render every package surface (`packages/<id>/package.json` and `.claude-plugin/plugin.json`) from that one literal. A run that only re-syncs an embedded baseline with zero strips is a pure sync change -> no bump. Any `benchmark.md` change (tail repair included) ships only with explicit user authorization recorded in this run.
    - Run verification before committing: re-run the step 2 invariant diffs (all six tails must be byte-identical 6/6) and run `prek run --all-files`. If either fails, do not commit; report the failing diff or check and the file responsible.
    - Only after verification passes, commit all repo files in one atomic commit (edits plus regenerated surfaces).
    - External files: edit in place, never commit; end the report with an explicit warning listing every externally edited path for user review.
    - Output styles load at session start — smoke-test doctrine effects in a fresh session.
-   **Done when:** the final report contains strips per file with citations, conflicts resolved with the winner named, kept harness-adaptations, externally edited paths, the `prek` result, and the invariant re-verified 6/6, with the atomic commit created only after verification passed.
+   Done when: the final report contains strips per file with citations, conflicts resolved with the winner named, kept harness-adaptations, externally edited paths, the `prek` result, and the invariant re-verified 6/6, with the atomic commit created only after verification passed.
 
 ## Failure and recovery
-- **Invariant-zone drift detected:** a sync bug, not duplication. Repair by replacing the entire tail as one block; never edit inside the invariant zone. If the canonical itself is suspect, stop and surface the discrepancy rather than rewriting the canonical.
-- **benchmark.md repair without authorization:** do not touch `benchmark.md` (tail or preamble) until explicit user authorization is recorded in the run. Without it, leave the file unchanged and report the needed authorization.
-- **Ambiguous classification (Jaccard in the 0.45-0.65 band without opposing modals):** do not strip; classify as `unique-directive` and report it for human review.
-- **prek failure or invariant not 6/6 after edit:** the done predicate does not hold. Do not commit; report the failing diff or check and the file responsible.
-- **Partial-result rule:** a run that completes classification but fails final verification produces no commit. The divergence ledger and classification record are still reported as the partial result; the invariant must be re-verified before any commit.
-- **Rollback:** verification runs before the atomic commit, so a failed verification produces no commit to revert. Uncommitted repo edits are discarded with `git checkout -- <files>`. External file edits are not VCS-tracked — record the original content before editing and restore from that record on failure.
+- Invariant-zone drift detected: a sync bug, not duplication. Repair by replacing the entire tail as one block; never edit inside the invariant zone. If the canonical itself is suspect, stop and surface the discrepancy rather than rewriting the canonical.
+- benchmark.md repair without authorization: do not touch `benchmark.md` (tail or preamble) until explicit user authorization is recorded in the run. Without it, leave the file unchanged and report the needed authorization.
+- Ambiguous classification (Jaccard in the 0.45-0.65 band without opposing modals): do not strip; classify as `unique-directive` and report it for human review.
+- prek failure or invariant not 6/6 after edit: the done predicate does not hold. Do not commit; report the failing diff or check and the file responsible.
+- Partial-result rule: a run that completes classification but fails final verification produces no commit. The divergence ledger and classification record are still reported as the partial result; the invariant must be re-verified before any commit.
+- Rollback: verification runs before the atomic commit, so a failed verification produces no commit to revert. Uncommitted repo edits are discarded with `git checkout -- <files>`. External file edits are not VCS-tracked — record the original content before editing and restore from that record on failure.
 
 ## Output
 A final report containing the 6/6 invariant re-verification diff results, strips per file with baseline-pair citations, conflicts resolved with the winner named, kept harness-adaptations, the complete divergence ledger (one classification per divergence), every externally edited path flagged for user review, the `prek run --all-files` result, and the `releaseVersion` bump decision (bumped literal plus regenerated surfaces, or no-bump rationale); repo changes land as one atomic commit, external edits land in place and are never committed.

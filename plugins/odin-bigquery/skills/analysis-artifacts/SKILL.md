@@ -16,12 +16,12 @@ description: 'Use when the user requests a deep dive, exploratory analysis, or d
 
 ## Inputs
 
-- **Analysis request** (required): the question or hypothesis to explore against BigQuery data.
-- **BigQuery project and dataset** (required): the warehouse target for read queries.
-- **Date** (required): a calendar date in YYYY-MM-DD format used to construct the analysis directory path.
-- **Analysis name** (required): a short slug used for the directory name under analyses/.
-- **Cohort definitions** (derived): population filters expressed as SQL predicates and stated explicitly in the README before any query runs.
-- **Existing analyses tree** (optional): prior artifacts that may need to be overwritten.
+- Analysis request (required): the question or hypothesis to explore against BigQuery data.
+- BigQuery project and dataset (required): the warehouse target for read queries.
+- Date (required): a calendar date in YYYY-MM-DD format used to construct the analysis directory path.
+- Analysis name (required): a short slug used for the directory name under analyses/.
+- Cohort definitions (derived): population filters expressed as SQL predicates and stated explicitly in the README before any query runs.
+- Existing analyses tree (optional): prior artifacts that may need to be overwritten.
 
 ## Procedure
 
@@ -34,11 +34,7 @@ description: 'Use when the user requests a deep dive, exploratory analysis, or d
 7. If analyses/<date>-<name>/ already contains stale artifacts, overwrite the affected files in place so the directory matches the current approved plan. Do not leave mixed old and new versions of the same artifact. Done when: the directory matches the current approved plan with no mixed versions.
 
 ## Failure and recovery
-- **Plan not approved**: stop before any warehouse read or file write. Do not create a directory. Return the draft plan and ask for approval.
-- **Query execution failure**: record the failing query path and the BigQuery error in a Failures section of the README. Do not write a partial visualization for a failed query. Leave the SQL file in place so the user can correct and re-run it.
-- **Visualization generation failure**: record the failure in the README. Keep the SQL file and result; only the visualization is missing. Re-run visualization generation after fixing the cause.
-- **Stale artifact conflict**: if overwriting would destroy an artifact outside the current approved plan, stop and surface the conflict to the user before overwriting.
-- **Partial-result rule**: a run in which some queries succeed and others fail is not done. The README must mark which sections succeeded and which failed. Never claim the done predicate holds while an approved query or visualization is missing.
+If the plan is not approved, stop before any warehouse read or file write; do not create a directory, and return the draft plan and ask for approval. If query execution fails, record the failing query path and the BigQuery error in a Failures section of the README; do not write a partial visualization for a failed query, and leave the SQL file in place so the user can correct and re-run it. If visualization generation fails, record the failure in the README; keep the SQL file and result, as only the visualization is missing, and re-run visualization generation after fixing the cause. If overwriting would destroy an artifact outside the current approved plan, stop and surface the conflict to the user before overwriting. A run in which some queries succeed and others fail is not done: the README must mark which sections succeeded and which failed, and never claim the done predicate holds while an approved query or visualization is missing.
 
 ## Output
 A dated analyses/<date>-<name>/ directory containing README.md with the approved plan, explicit cohort definitions, linked SQL and visualization files, a TLDR, key takeaways, and documented source_paths; assets/queries/*.sql files; and assets/visualizations/*.{png,svg,html} files. The directory is the single artifact; no external state is modified.

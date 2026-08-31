@@ -27,9 +27,9 @@ description: 'Use when material arrives without a fully formed ask or the ask is
 5. If two intents are plausible, propose the likelier and name the other in a clause. One intent per turn.
 
 ## Failure and recovery
-- **Data too thin to propose from**: say so and stop. Do not fall back to asking.
-- **Proposal without reading**: this is a guess; re-read the data before proposing.
-- **User composes the ask from scratch**: the proposal was wrong or a question in disguise; redo the proposal grounded in the data.
+- Data too thin to propose from: say so and stop. Do not fall back to asking.
+- Proposal without reading: this is a guess; re-read the data before proposing.
+- User composes the ask from scratch: the proposal was wrong or a question in disguise; redo the proposal grounded in the data.
 - No mutation occurs on any path; rollback is trivial: nothing was changed.
 
 ## Output

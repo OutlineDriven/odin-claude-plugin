@@ -17,9 +17,9 @@ description: 'Use when a first screen needs lower transfer bytes without visual 
 
 ## Inputs
 
-- **Fixed screens** (required): the exact pages or routes to reduce, named before any mutation.
-- **Target environment** (required): the browser, device, or network condition that defines the measurement context.
-- **Byte budget** (required): the target compressed byte count or percentage reduction, declared before work begins.
+- Fixed screens (required): the exact pages or routes to reduce, named before any mutation.
+- Target environment (required): the browser, device, or network condition that defines the measurement context.
+- Byte budget (required): the target compressed byte count or percentage reduction, declared before work begins.
 
 ## Procedure
 
@@ -32,10 +32,10 @@ description: 'Use when a first screen needs lower transfer bytes without visual 
 
 ## Failure and recovery
 
-- **No safe reduction:** no byte reduction preserves pixel identity. Terminal `stalled`; report what was attempted and why identity broke.
-- **Blocked:** the environment or pipeline cannot be exercised. Terminal `blocked`; report the blocking condition.
-- **Budget exhausted:** the declared budget is spent before the byte target is met. Terminal `capped`; report the best reduction achieved. Budget exhaustion is never success unless it is the predeclared success predicate.
-- **Partial result:** emit the best reduction obtained; never present a screen that lost pixel identity or failed tests as done.
+- No safe reduction: no byte reduction preserves pixel identity. Terminal `stalled`; report what was attempted and why identity broke.
+- Blocked: the environment or pipeline cannot be exercised. Terminal `blocked`; report the blocking condition.
+- Budget exhausted: the declared budget is spent before the byte target is met. Terminal `capped`; report the best reduction achieved. Budget exhaustion is never success unless it is the predeclared success predicate.
+- Partial result: emit the best reduction obtained; never present a screen that lost pixel identity or failed tests as done.
 
 ## Output
 

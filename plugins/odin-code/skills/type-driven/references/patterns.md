@@ -32,8 +32,8 @@ All commands use the `$CHECK_CMD` variable; override with the project-specific b
 
 ## Notes
 
-- **Rust**: PhantomData enables zero-cost typestate. Newtypes with private fields enforce validation at construction.
-- **TypeScript**: Branded types (`string & { readonly [Brand]: typeof Brand }`) provide nominal-like safety in a structural system. Zod v4 bridges runtime validation to static types.
-- **Python**: `NewType` is lightweight but encapsulation-dependent. `Annotated[int, Gt(0)]` with beartype provides runtime-checked refinements.
-- **Kotlin**: `@JvmInline value class` wraps primitives at zero allocation cost. Sealed hierarchies enforce exhaustive matching.
-- **Scala 3**: Opaque types are true zero-cost abstractions (unlike newtype wrappers in Scala 2).
+- Rust: PhantomData enables zero-cost typestate. Newtypes with private fields enforce validation at construction.
+- TypeScript: Branded types (`string & { readonly [Brand]: typeof Brand }`) provide nominal-like safety in a structural system. Zod v4 bridges runtime validation to static types.
+- Python: `NewType` is lightweight but encapsulation-dependent. `Annotated[int, Gt(0)]` with beartype provides runtime-checked refinements.
+- Kotlin: `@JvmInline value class` wraps primitives at zero allocation cost. Sealed hierarchies enforce exhaustive matching.
+- Scala 3: Opaque types are true zero-cost abstractions (unlike newtype wrappers in Scala 2).

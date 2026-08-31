@@ -20,9 +20,9 @@ description: 'Use when a specialist agent must analyze APIs, configurations, or 
 
 ## Inputs
 
-- **Target scope** (required): the APIs, configuration files, or interfaces to analyze. Scope is bounded by what the caller names; the skill refuses to expand it.
-- **Language context** (optional): the programming language(s) in scope. Defaults to inferring from file extensions.
-- **Severity floor** (optional): minimum severity to report. Defaults to all findings.
+- Target scope (required): the APIs, configuration files, or interfaces to analyze. Scope is bounded by what the caller names; the skill refuses to expand it.
+- Language context (optional): the programming language(s) in scope. Defaults to inferring from file extensions.
+- Severity floor (optional): minimum severity to report. Defaults to all findings.
 
 The caller provides the scope explicitly; the skill does not discover additional files or symbols.
 
@@ -35,7 +35,7 @@ The caller provides the scope explicitly; the skill does not discover additional
    - Cryptographic API misuse (predictable random sources, weak cipher or hash selection, ECB mode on block ciphers, missing authenticated encryption, hardcoded keys or IVs, incorrect key length, lack of salt for password hashing).
    - Configuration anti-patterns (excessive privileges, debug mode in production, disabled security controls, default credentials in config, credential leakage in logs or environment, insecure protocol or port defaults).
    - Interface contract violations (missing null-checks on returned objects, unchecked array or buffer bounds, unvalidated external input passed to dangerous sinks, missing error handling on security-critical calls).
-   **Done when:** every misuse category is scanned across the named scope.
+   Done when: every misuse category is scanned across the named scope.
 
 3. **Phase 2 — Severity assignment.** Assign each surfaced misuse to one of: Critical, High, Medium, Low, Info. Assign Critical only when a single misuse instance can be exploited without prerequisite conditions or additional context. **Done when:** every surfaced misuse has a severity.
 
@@ -49,11 +49,11 @@ The caller provides the scope explicitly; the skill does not discover additional
 
 ## Failure and recovery
 
-- **Unbounded scope:** if the caller names a directory or glob, stop and ask for an explicit file list. Do not auto-expand.
-- **Unreadable target:** if a named file cannot be read (permissions, encoding, binary), record it as "Unreadable — [filename]" in the report and continue with remaining targets.
-- **Empty scope:** if no targets are provided, return `error: no-targets` and stop.
-- **No findings:** if Phase 1 surfaces zero misuses, return the empty report with the header row and a "No misuse patterns detected in the named scope." note.
-- **Partial report:** if the analysis cannot complete all four phases for a target, report what was found up to the failure point and annotate the incomplete finding with "Phase N incomplete: [reason]."
+- Unbounded scope: if the caller names a directory or glob, stop and ask for an explicit file list. Do not auto-expand.
+- Unreadable target: if a named file cannot be read (permissions, encoding, binary), record it as "Unreadable — [filename]" in the report and continue with remaining targets.
+- Empty scope: if no targets are provided, return `error: no-targets` and stop.
+- No findings: if Phase 1 surfaces zero misuses, return the empty report with the header row and a "No misuse patterns detected in the named scope." note.
+- Partial report: if the analysis cannot complete all four phases for a target, report what was found up to the failure point and annotate the incomplete finding with "Phase N incomplete: [reason]."
 
 No rollback is required for read-only operations. No state is written that requires cleanup.
 

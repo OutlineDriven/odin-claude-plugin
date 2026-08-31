@@ -31,10 +31,10 @@ The user's problem or design space to explore, stated in the conversation or inf
 9. The session is done when the frontier is empty: every branch of the design tree visited, nothing left silently assumed. Do not act on the result until the user confirms a shared understanding has been reached. Done when: the frontier is empty and the user confirms shared understanding.
 
 ## Failure and recovery
-- **User answer contradicts a falsifier**: update the survivor set, adjust the design-tree roots, and recompute the frontier. Do not discard already-settled answers.
-- **Environmental fact lookup fails or is ambiguous**: mark that prerequisite unsettled, continue asking the rest of the frontier, and retry or reframe the lookup. Never ask the user for a fact that can be looked up directly.
-- **User declines to answer or says stop**: record the unresolved frontier, stop, and report what remains open. Do not act on a partial understanding.
-- **Non-mutation**: this skill changes only conversation state. No rollback is needed; the design tree is rebuilt from recorded answers at any point.
+- User answer contradicts a falsifier: update the survivor set, adjust the design-tree roots, and recompute the frontier. Do not discard already-settled answers.
+- Environmental fact lookup fails or is ambiguous: mark that prerequisite unsettled, continue asking the rest of the frontier, and retry or reframe the lookup. Never ask the user for a fact that can be looked up directly.
+- User declines to answer or says stop: record the unresolved frontier, stop, and report what remains open. Do not act on a partial understanding.
+- Non-mutation: this skill changes only conversation state. No rollback is needed; the design tree is rebuilt from recorded answers at any point.
 
 ## Output
 A confirmed shared understanding of the design space: every branch of the decision tree visited, the frontier empty, and the user's confirmation recorded — no file, state, or external mutation occurs.

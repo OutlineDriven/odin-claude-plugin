@@ -32,11 +32,11 @@ A named topic is optional when the current task or contested claims identify the
 
 ## Failure and recovery
 
-- **Unresolved scope**: return `blocked — scope not selected` with the proposed scopes; inspect nothing beyond evidence needed to propose them.
-- **Missing or inaccessible evidence**: retain the claim under Open assumptions with its owner and the exact unavailable source; never convert absence of evidence into a fact.
-- **Disputed evidence**: preserve both the evidenced claim and the dissent under Open assumptions; do not widen the search or force agreement.
-- **Corrections do not converge**: after each correction, recheck only affected claims. If the same dispute repeats without new evidence, return `non-converged — shared context not confirmed` with the latest complete ledger.
-- **Read-only boundary risk**: stop before any mutation and return `blocked — requested action exceeds read-only authority`, identifying the proposed target and action.
+- Unresolved scope: return `blocked — scope not selected` with the proposed scopes; inspect nothing beyond evidence needed to propose them.
+- Missing or inaccessible evidence: retain the claim under Open assumptions with its owner and the exact unavailable source; never convert absence of evidence into a fact.
+- Disputed evidence: preserve both the evidenced claim and the dissent under Open assumptions; do not widen the search or force agreement.
+- Corrections do not converge: after each correction, recheck only affected claims. If the same dispute repeats without new evidence, return `non-converged — shared context not confirmed` with the latest complete ledger.
+- Read-only boundary risk: stop before any mutation and return `blocked — requested action exceeds read-only authority`, identifying the proposed target and action.
 
 A partial or unconfirmed ledger is diagnostic output only and does not satisfy Done. No rollback is needed because this procedure makes no mutation.
 

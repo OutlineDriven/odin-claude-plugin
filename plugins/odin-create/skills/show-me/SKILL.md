@@ -1,6 +1,6 @@
 ---
 name: show-me
-description: 'Use when the user says show this or diagram this about the current topic. Emits one ephemeral chat visual and nothing on disk. Not for an auditable decision log — use show-me-your-work.'
+description: 'Use when the user says show this or diagram this about the current topic. Emits one ephemeral chat visual and nothing on disk. Not for an auditable decision log: use show-me-your-work.'
 ---
 
 # Show me
@@ -16,12 +16,12 @@ description: 'Use when the user says show this or diagram this about the current
 
 ## Not for
 
-- An auditable decision trail for unattended work — use show-me-your-work.
-- A committed diagram in a document — use embed-diagram.
-- An interactive clickable sketch — use prototype-logic.
-- Teaching a concept with explanation and examples — use explain-concept.
-- A visual walk of review findings one at a time — use show-review.
-- A guided multi-turn exploration — use walk-with-me.
+- An auditable decision trail for unattended work: use show-me-your-work.
+- A committed diagram in a document: use embed-diagram.
+- An interactive clickable sketch: use prototype-logic.
+- Teaching a concept with explanation and examples: use explain-concept.
+- A visual walk of review findings one at a time: use show-review.
+- A guided multi-turn exploration: use walk-with-me.
 
 ## Inputs
 
@@ -48,8 +48,8 @@ The current topic from the user prompt. The skill picks the minimal view type th
 
 ## Failure and recovery
 
-- **Rendering impossible in text format:** return the concept in prose instead of a visual.
-- **Topic too broad for one visual:** ask the user to narrow the scope before generating more than two views.
+- Rendering impossible in text format: return the concept in prose instead of a visual.
+- Topic too broad for one visual: ask the user to narrow the scope before generating more than two views.
 - **Request requires a committed diagram, interactive sketch, concept teaching, review walk, or multi-turn exploration:** stop and name the skill that handles it (see Not for).
 
 ## Output

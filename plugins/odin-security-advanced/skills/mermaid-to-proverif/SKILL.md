@@ -16,9 +16,9 @@ description: 'Use when a cryptographic Mermaid sequenceDiagram is supplied and t
 
 ## Inputs
 
-- **Required**: a Mermaid `sequenceDiagram` block or file containing at least two named participants and at least one message between them.
-- **Optional**: a list of security properties to verify, one or more of `secrecy`, `authentication`, `replay`, `forward_secrecy`. Defaults to all four if not specified.
-- **Optional**: a ProVerif output filename (`.pv`). Defaults to `<diagram-name>.pv`.
+- Required: a Mermaid `sequenceDiagram` block or file containing at least two named participants and at least one message between them.
+- Optional: a list of security properties to verify, one or more of `secrecy`, `authentication`, `replay`, `forward_secrecy`. Defaults to all four if not specified.
+- Optional: a ProVerif output filename (`.pv`). Defaults to `<diagram-name>.pv`.
 
 ## Procedure
 
@@ -100,13 +100,13 @@ Done when: ProVerif executes, the output is validated, and the report is written
 
 ## Failure and recovery
 
-- **Type-check failure**: ProVerif reports a syntax or type error. Report the error verbatim, stop. Do not trust any query result. No partial model is produced.
-- **Participant mismatch**: the number of senders or receivers in the ProVerif output does not match the diagram participants. Report the mismatch and stop. The model is not trustworthy.
+- Type-check failure: ProVerif reports a syntax or type error. Report the error verbatim, stop. Do not trust any query result. No partial model is produced.
+- Participant mismatch: the number of senders or receivers in the ProVerif output does not match the diagram participants. Report the mismatch and stop. The model is not trustworthy.
 - **Security query passes without prior reachability proof**: treat the security result as `RESULT i: noninterference_interpreted_as_secrecy_not_proved` or equivalent indeterminate. Do not report it as proved.
-- **Reachability failure**: a required event is unreachable. Report which query cannot be evaluated because its precondition is unreachable. Do not claim the security property holds.
-- **Unsupported cryptographic construct**: a Mermaid label uses an operation with no standard Dolev-Yao primitive. Stop and report the unsupported construct; do not invent constructors, destructors, or event semantics.
-- **Partial-result rule**: if ProVerif produces a partial output (crash, timeout, unparsable result), report `verification_inconclusive` and the concrete reason. Do not claim success.
-- **Rollback**: if the model file was created and verification failed, delete the uncommitted file before reporting.
+- Reachability failure: a required event is unreachable. Report which query cannot be evaluated because its precondition is unreachable. Do not claim the security property holds.
+- Unsupported cryptographic construct: a Mermaid label uses an operation with no standard Dolev-Yao primitive. Stop and report the unsupported construct; do not invent constructors, destructors, or event semantics.
+- Partial-result rule: if ProVerif produces a partial output (crash, timeout, unparsable result), report `verification_inconclusive` and the concrete reason. Do not claim success.
+- Rollback: if the model file was created and verification failed, delete the uncommitted file before reporting.
 
 ## Output
 

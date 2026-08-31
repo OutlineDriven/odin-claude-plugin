@@ -21,9 +21,9 @@ description: 'Use when an orchestrator or user requests deep audit-context analy
 
 ## Inputs
 
-**Single-function mode.** Required: the target function (name and file path with line range) and the per-function analysis path to write. Optional: the source tree root for reading callees. When a callee's source is not available, treat it as a black box per the procedure.
+Single-function mode. Required: the target function (name and file path with line range) and the per-function analysis path to write. Optional: the source tree root for reading callees. When a callee's source is not available, treat it as a black box per the procedure.
 
-**Multi-function mode.** Required: a target path (codebase root, or a set of functions or files to analyze). The target must span more than one function; a single function uses single-function mode. Optional: domain or language hints (smart contract, C/C++, decompiled firmware, web service) to decide what counts as a call whose interior cannot be seen. Optional: prior findings or orienting notes, carried forward as context only; this skill produces no verdicts.
+Multi-function mode. Required: a target path (codebase root, or a set of functions or files to analyze). The target must span more than one function; a single function uses single-function mode. Optional: domain or language hints (smart contract, C/C++, decompiled firmware, web service) to decide what counts as a call whose interior cannot be seen. Optional: prior findings or orienting notes, carried forward as context only; this skill produces no verdicts.
 
 No vulnerability names, fixes, proofs-of-concept, or severity ratings are inputs or outputs. Those belong to the hunting phase that runs after this one.
 

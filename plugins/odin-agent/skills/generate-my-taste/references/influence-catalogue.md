@@ -1,4 +1,4 @@
-# influence-catalogue.md — candidate influence pool
+# influence-catalogue.md: candidate influence pool
 
 Use this catalogue to map evidence into operational taste anchors. The catalogue is not fandom. A candidate earns inclusion only when it satisfies all five criteria below.
 
@@ -6,11 +6,11 @@ Use this catalogue to map evidence into operational taste anchors. The catalogue
 
 An influence may become an anchor only when it has:
 
-1. **Portable principle across at least two domains** — the principle can shape prose, code, design, decisions, or adjacent work, not only the original medium.
-2. **Recognizable Side A and Side B failure modes** — it can diagnose both slop/default convergence and overkill/compensatory excess.
-3. **Concrete exemplar** — a specific work, method, artifact, paper, object, or practice can be cited.
-4. **Contrast value** — it adds a distinct diagnostic lens not already covered by a stronger candidate.
-5. **Non-fandom operational framing** — the anchor names a usable discipline; admiration alone is not evidence.
+1. **Portable principle across at least two domains**: the principle can shape prose, code, design, decisions, or adjacent work, not only the original medium.
+2. **Recognizable Side A and Side B failure modes**: it can diagnose both slop/default convergence and overkill/compensatory excess.
+3. **Concrete exemplar**: a specific work, method, artifact, paper, object, or practice can be cited.
+4. **Contrast value**: it adds a distinct diagnostic lens not already covered by a stronger candidate.
+5. **Non-fandom operational framing**: the anchor names a usable discipline; admiration alone is not evidence.
 
 Obey these criteria before selecting anchors. If evidence names a beloved figure but lacks operational signal, do not include that figure. Map the signal to a better-supported candidate or ask for confirmation.
 

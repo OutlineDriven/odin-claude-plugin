@@ -16,8 +16,8 @@ description: 'Use when a completed session needs an agent-environment retrospect
 
 ## Inputs
 
-- **Session artifact** (required): the completed session transcript or state record. Must contain observable agent-environment interaction.
-- **Environment context** (optional): the agent's working environment at session time. Use only if supplied; do not infer it.
+- Session artifact (required): the completed session transcript or state record. Must contain observable agent-environment interaction.
+- Environment context (optional): the agent's working environment at session time. Use only if supplied; do not infer it.
 
 ## Procedure
 
@@ -29,9 +29,9 @@ description: 'Use when a completed session needs an agent-environment retrospect
 6. **Return report.** Output the severity-ranked candidate report.
 
 ## Failure and recovery
-- **No session artifact**: return an empty report stating "No session artifact supplied."
-- **No friction observed**: return a report stating "No environment friction detected." with zero candidates. Do not fabricate candidates.
-- **Ambiguous evidence**: downgrade the candidate to unconfirmed severity rather than guess. Include the ambiguity in the evidence field.
+- No session artifact: return an empty report stating "No session artifact supplied."
+- No friction observed: return a report stating "No environment friction detected." with zero candidates. Do not fabricate candidates.
+- Ambiguous evidence: downgrade the candidate to unconfirmed severity rather than guess. Include the ambiguity in the evidence field.
 
 ## Output
 A severity-ranked markdown report. Each candidate entry contains:

@@ -18,8 +18,8 @@ Can a new reader understand the artifact without the context that produced it?
 
 ## Inputs
 
-- **Artifact** (required): The file, document, or text to cold-read. Supplied inline as content, not as a repo path.
-- **Intent note** (required): A one-line private note on what the artifact is meant to be and who it is for. The reviewer never sees this.
+- Artifact (required): The file, document, or text to cold-read. Supplied inline as content, not as a repo path.
+- Intent note (required): A one-line private note on what the artifact is meant to be and who it is for. The reviewer never sees this.
 
 ## Procedure
 
@@ -36,10 +36,10 @@ Can a new reader understand the artifact without the context that produced it?
 
 ## Failure and recovery
 
-- **Context leaked**: Abort the affected sub-session. Re-dispatch with explicit instruction to read only the inline artifact and no surrounding files.
-- **Empty artifact**: If the artifact contents are empty or missing, stop and return `blocked` with reason `empty-artifact`. No sub-session is spawned.
-- **Sub-session cannot determine artifact type**: Report this as a defect (the artifact fails to declare its own purpose). Continue with the cold read.
-- **No defects found**: Return the verdict 'stands on its own' with an empty fix list. Do not invent defects to fill the report.
+- Context leaked: Abort the affected sub-session. Re-dispatch with explicit instruction to read only the inline artifact and no surrounding files.
+- Empty artifact: If the artifact contents are empty or missing, stop and return `blocked` with reason `empty-artifact`. No sub-session is spawned.
+- Sub-session cannot determine artifact type: Report this as a defect (the artifact fails to declare its own purpose). Continue with the cold read.
+- No defects found: Return the verdict 'stands on its own' with an empty fix list. Do not invent defects to fill the report.
 
 ## Output
 

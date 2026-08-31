@@ -37,22 +37,22 @@ description: 'Use when writing, reviewing, optimizing, validating, or migrating 
    | Common path (C:\\Windows\\, cmd.exe) | Ubiquitous | Find malware-specific paths |
    | Appears in other malware families | Not identifying this family | Combine with a family-specific marker |
 
-   **String type selection:** exact ASCII/Unicode text for known strings (`ascii wide` only with confirmed encoding evidence); hex bytes for fixed sequences; hex wildcards (`??`) for variable bytes; bounded regex for structured patterns (URLs, paths); XOR modifier for unknown encoding. Never use `nocase` or `wide` speculatively: `nocase` doubles atom generation, `wide` doubles string matching. Prefer hex over regex where bytes are fixed.
+   String type selection: exact ASCII/Unicode text for known strings (`ascii wide` only with confirmed encoding evidence); hex bytes for fixed sequences; hex wildcards (`??`) for variable bytes; bounded regex for structured patterns (URLs, paths); XOR modifier for unknown encoding. Never use `nocase` or `wide` speculatively: `nocase` doubles atom generation, `wide` doubles string matching. Prefer hex over regex where bytes are fixed.
 
-   **Value ranking:** mutex names are gold, C2 paths silver, error messages bronze. Stack strings are almost always unique. If more than 6 strings are needed, the rule is over-fitting.
+   Value ranking: mutex names are gold, C2 paths silver, error messages bronze. Stack strings are almost always unique. If more than 6 strings are needed, the rule is over-fitting.
 
    Done when: every candidate string passes all tests or is rejected, and the surviving set is ranked.
 4. **Write the rule with metadata and short-circuiting condition.**
 
-   **Naming:** `{CATEGORY}_{PLATFORM}_{FAMILY}_{VARIANT}_{DATE}` (e.g., `MAL_Win_Emotet_Loader_Jan25`). Categories: `MAL_`, `HKTL_`, `WEBSHELL_`, `EXPL_`, `SUSP_`, `GEN_`. Platforms: `Win_`, `Lnx_`, `Mac_`, `Android_`, `CRX_`.
+   Naming: `{CATEGORY}_{PLATFORM}_{FAMILY}_{VARIANT}_{DATE}` (e.g., `MAL_Win_Emotet_Loader_Jan25`). Categories: `MAL_`, `HKTL_`, `WEBSHELL_`, `EXPL_`, `SUSP_`, `GEN_`. Platforms: `Win_`, `Lnx_`, `Mac_`, `Android_`, `CRX_`.
 
-   **Required metadata:** `description` (starting with "Detects"), `author`, `reference`, `date`.
+   Required metadata: `description` (starting with "Detects"), `author`, `reference`, `date`.
 
-   **Condition ordering for short-circuit:** `filesize <` (instant), magic bytes (nearly instant), strings (cheap), modules (expensive). If the condition exceeds 5 lines, split into multiple rules.
+   Condition ordering for short-circuit: `filesize <` (instant), magic bytes (nearly instant), strings (cheap), modules (expensive). If the condition exceeds 5 lines, split into multiple rules.
 
-   **Magic-byte endianness:** `uintNN()` reads little-endian: write the constant as bytes reversed, or use `uintNNbe()` and write in file order. A ZIP/OOXML file starts with bytes `50 4B 03 04`, so `uint32(0) == 0x04034B50` is correct; `uint32(0) == 0x504B0304` compiles but never matches. Mach-O universal binaries on disk are `CA FE BA BE`, so `uint32(0) == 0xCAFEBABE` is dead; write `uint32be(0) == 0xCAFEBABE`. Verify every magic-byte check with `yr scan` against one known-good sample.
+   Magic-byte endianness: `uintNN()` reads little-endian: write the constant as bytes reversed, or use `uintNNbe()` and write in file order. A ZIP/OOXML file starts with bytes `50 4B 03 04`, so `uint32(0) == 0x04034B50` is correct; `uint32(0) == 0x504B0304` compiles but never matches. Mach-O universal binaries on disk are `CA FE BA BE`, so `uint32(0) == 0xCAFEBABE` is dead; write `uint32be(0) == 0xCAFEBABE`. Verify every magic-byte check with `yr scan` against one known-good sample.
 
-   **Platform-specific patterns:**
+   Platform-specific patterns:
 
    | Platform | Magic bytes | Prefer | Avoid |
    |---|---|---|---|
@@ -64,17 +64,17 @@ description: 'Use when writing, reviewing, optimizing, validating, or migrating 
    | Android apps | Use `dex` module | Obfuscated classes, suspicious permissions, DexClassLoader reflection | Standard DEX structure |
    | Office docs | `uint32(0) == 0x04034B50` | Macro auto-exec, encoded payloads | VBA keywords |
 
-   **Condition grouping by confidence:** Group strings by prefix for graduated requirements. Example: `$a*` for library indicators, `$b*` for behavioral, `$c*` for C2: require evidence from multiple categories (`any of ($a*) and any of ($b*)`). Use `any of them` only when each string is individually unique to the malware. Use `all of them` when strings are common but the combination is suspicious.
+   Condition grouping by confidence: Group strings by prefix for graduated requirements. Example: `$a*` for library indicators, `$b*` for behavioral, `$c*` for C2: require evidence from multiple categories (`any of ($a*) and any of ($b*)`). Use `any of them` only when each string is individually unique to the malware. Use `all of them` when strings are common but the combination is suspicious.
 
-   **Module vs byte checks:** Use `uint16`/`uint32` for magic bytes and simple offsets (faster, no module overhead). Use PE module for imphash, rich header, authenticode, section names. Use `crx` module for Chrome extension permissions. Use `lnk` module for LNK target paths. If `uint32()` can do the job, do not load a module.
+   Module vs byte checks: Use `uint16`/`uint32` for magic bytes and simple offsets (faster, no module overhead). Use PE module for imphash, rich header, authenticode, section names. Use `crx` module for Chrome extension permissions. Use `lnk` module for LNK target paths. If `uint32()` can do the job, do not load a module.
 
-   **Performance rules:**
+   Performance rules:
    - Anchor every regex to a 4+ byte literal prefix. Without anchoring, regex evaluates at every file offset.
    - Bound every regex quantifier: `.{0,30}`, never `.*`. Unbounded regex can consume excessive time and memory.
    - Bound loops by filesize: `filesize < 100KB and for all i in (1..#a) : ...`. Unbounded `#a` can reach thousands.
    - Prefer hex over regex where bytes are fixed.
 
-   **YARA-X version-gated features:** `private $helper = "pattern"` matches but stays out of output (v1.3.0+); `// suppress: slow_pattern` silences a specific warning inline (v1.4.0+); `filesize < 10_000_000` numeric underscores (v1.5.0+); `$_unused` suppresses unused-string warnings.
+   YARA-X version-gated features: `private $helper = "pattern"` matches but stays out of output (v1.3.0+); `// suppress: slow_pattern` silences a specific warning inline (v1.4.0+); `filesize < 10_000_000` numeric underscore syntax (v1.5.0+); `$_unused` suppresses unused-string warnings.
 
    Done when: the rule is written with correct naming, required metadata, short-circuiting condition, correct endianness, platform-specific patterns, confidence grouping, and bounded performance.
 5. **Run syntax and format validation.**

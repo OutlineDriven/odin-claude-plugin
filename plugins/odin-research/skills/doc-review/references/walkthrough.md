@@ -134,9 +134,9 @@ For each finding's answer:
 
 This fires only after the user picks Accept on a finding whose merged record has no `suggested_fix`.
 
-**Stem:** `Accept isn't executable for this finding -- the review surfaced the issue without a concrete fix. How should the agent proceed?`
+Stem: `Accept isn't executable for this finding -- the review surfaced the issue without a concrete fix. How should the agent proceed?`
 
-**Options (fixed order):**
+Options (fixed order):
 
 ```
 A. Defer for later resolution  (recommended)
@@ -188,8 +188,8 @@ Every terminal path of Interactive mode emits the same completion report structu
 
 ### Minimum required fields
 
-- **Per-finding entries:** title, severity, action taken (Accepted / Deferred / Skipped / Acknowledged). Reason is optional -- when available, drawn from the finding's `why_it_matters` or the user's provided rationale; when not, omitted.
-- **Summary counts by action:** totals per bucket. Include an `acknowledged` count when any entries land in that bucket; omit when zero.
+- Per-finding entries: title, severity, action taken (Accepted / Deferred / Skipped / Acknowledged). Reason is optional -- when available, drawn from the finding's `why_it_matters` or the user's provided rationale; when not, omitted.
+- Summary counts by action: totals per bucket. Include an `acknowledged` count when any entries land in that bucket; omit when zero.
 - **End-of-review verdict.**
 
 ### Report ordering

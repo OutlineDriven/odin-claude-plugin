@@ -32,9 +32,9 @@ disable-model-invocation: true
 2. Parse the briefing for sections starting with `#### P0:`. For each P0, extract the title (text after `#### P0:`), GitHub issue numbers (`#NNNN` patterns), the problem description paragraph(s), and any engineering-alignment notes. Done when: every P0 section is parsed with title, issue numbers, description, and alignment notes.
 3. When a P0 includes issue numbers, fetch the GitHub issue details (`gh issue view <issue_number> --repo <org>/<repo>`). Then search the codebase using keywords from the issue. Document relevant file paths, related code or tests, and dependencies. Done when: every P0 with issue numbers has its issue fetched and codebase searched.
 4. Triage each P0 into one category and record the decision:
-   - **Inactionable Complaint**: no specific description, reproduction steps, or fix indication. Skip; note in the report.
-   - **Bug Fix**: clearly scoped, has reproduction steps or a clear error, narrow scope, identifiable root cause. Decision: Spawn Agent.
-   - **Feature Request**: assess scope (Small 1-2 files, Medium 3-10 files, Large 10+ files or architectural), complexity, and confidence 1-5. Confidence 5 or 4 → Spawn Agent (4 with caveats); 3 or lower → Skip and note.
+   - Inactionable Complaint: no specific description, reproduction steps, or fix indication. Skip; note in the report.
+   - Bug Fix: clearly scoped, has reproduction steps or a clear error, narrow scope, identifiable root cause. Decision: Spawn Agent.
+   - Feature Request: assess scope (Small 1-2 files, Medium 3-10 files, Large 10+ files or architectural), complexity, and confidence 1-5. Confidence 5 or 4 → Spawn Agent (4 with caveats); 3 or lower → Skip and note.
    Skip any P0 the briefing notes is already being addressed on an active branch. Do not spawn more than 3 agents at once. Done when: every P0 has a category and decision recorded.
 5. For each P0 marked Spawn Agent, construct a prompt containing the issue number and title, problem description, fetched issue details, relevant file paths, and task (investigate, implement fix, add or update tests, create a PR with a clear description). Present the full spawn plan to the user, including P0 titles, issue numbers, categories, confidence, decisions, and constructed prompts. Obtain explicit confirmation before proceeding. Do not spawn any agent without confirmation. Done when: the spawn plan is presented and explicit confirmation is obtained or refused.
 6. For each confirmed P0, spawn an ODIN cloud coding agent:
@@ -47,10 +47,10 @@ disable-model-invocation: true
 7. Record each spawned agent's run ID and emit the report described in Output. Done when: every spawned agent's run ID is recorded and the report is emitted.
 
 ## Failure and recovery
-- **No briefing found**: stop and report that no weekly product briefing exists under `reports/weekly_product_briefings/`; do not spawn agents.
-- **`odin` unavailable**: stop and report the error; do not substitute another binary or spawn method.
-- **GitHub issue fetch fails**: continue with briefing-only context for that P0; note the fetch failure in the report.
-- **User declines confirmation**: do not spawn any agent; report the declined plan as the terminal result.
+- No briefing found: stop and report that no weekly product briefing exists under `reports/weekly_product_briefings/`; do not spawn agents.
+- `odin` unavailable: stop and report the error; do not substitute another binary or spawn method.
+- GitHub issue fetch fails: continue with briefing-only context for that P0; note the fetch failure in the report.
+- User declines confirmation: do not spawn any agent; report the declined plan as the terminal result.
 - Partial-result rule: agents already spawned remain spawned; report their run IDs. No rollback of remote runs is performed by this skill.
 
 ## Output

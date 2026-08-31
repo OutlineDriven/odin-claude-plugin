@@ -32,11 +32,11 @@ description: 'Use when a release or a since-tag window needs user-facing release
 7. Report the draft path, the window covered, the change count per category, and that publishing is a separate human action. **Done when:** the report is delivered with draft path, window, counts, and publishing notice.
 
 ## Failure and recovery
-- **Missing or ambiguous since-tag marker:** stop before any write. Report the missing boundary. Do not guess a window or advance a marker that cannot be identified.
-- **Empty window (head equals marker):** stop without writing. Report that there is nothing to draft since the last boundary.
-- **Conflicting or duplicate draft content for the same window:** do not overwrite silently. Report the conflict and leave both the draft and marker unchanged.
-- **Partial draft written before a failure:** leave the partial draft in place and do not advance the marker. Report the partial state and the unadvanced marker so the next run re-covers the full window.
-- **Swallowed error:** never report the done predicate as satisfied when the marker did not advance or the window is incomplete.
+- Missing or ambiguous since-tag marker: stop before any write. Report the missing boundary. Do not guess a window or advance a marker that cannot be identified.
+- Empty window (head equals marker): stop without writing. Report that there is nothing to draft since the last boundary.
+- Conflicting or duplicate draft content for the same window: do not overwrite silently. Report the conflict and leave both the draft and marker unchanged.
+- Partial draft written before a failure: leave the partial draft in place and do not advance the marker. Report the partial state and the unadvanced marker so the next run re-covers the full window.
+- Swallowed error: never report the done predicate as satisfied when the marker did not advance or the window is incomplete.
 
 ## Output
 One draft release note file covering exactly the since-tag window organized by change category, the since-tag state marker advanced once to the current head, and a report listing the draft path, the window covered, the change count per category, and an explicit statement that publishing remains a separate human action.

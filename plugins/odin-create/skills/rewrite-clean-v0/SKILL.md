@@ -28,9 +28,9 @@ description: 'Use when a document or file has been edited piecemeal and reads as
 6. **Cut again.** Re-read the result cold and tighten what remains.
 
 ## Failure and recovery
-- **Cannot pin target**: stop; return blocked.
-- **Nothing to improve**: change nothing; return unchanged.
-- **External reference unreachable**: stop; do not continue with an unverified pointer.
+- Cannot pin target: stop; return blocked.
+- Nothing to improve: change nothing; return unchanged.
+- External reference unreachable: stop; do not continue with an unverified pointer.
 
 Partial-result rule: if rewrite is interrupted, the on-disk artifact is left in whatever state the last completed step left it. Version-control history is the rollback path.
 

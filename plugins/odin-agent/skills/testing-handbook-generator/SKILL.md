@@ -25,7 +25,7 @@ Invocation policy is model+human: the model executes discovery, classification, 
 ## Refusals
 
 - Will not proceed to generation without explicit user approval of the plan.
-- Will not deliver a file over 500 lines — split into sibling files.
+- Will not deliver a file over 500 lines: split into sibling files.
 - Will not claim the done predicate holds when validation has not passed for a generated skill.
 - Will not mutate the handbook source, other plugins, or remote state.
 
@@ -33,7 +33,7 @@ Invocation policy is model+human: the model executes discovery, classification, 
 
 1. **Locate the handbook.** Check `./testing-handbook`, `../testing-handbook`, `~/testing-handbook` for a `content/docs/` directory. If not found, ask the user for the path. If the user does not know, offer to clone `https://github.com/trailofbits/testing-handbook` with depth 1. Stop if the handbook cannot be located or `content/docs/` is missing. **Done when:** the handbook is located with a `content/docs/` directory.
 2. **Scan directory structure.** Walk `{handbook_path}/content/docs/` and enumerate every directory. For each markdown file, parse YAML frontmatter for `title`, `summary`, `weight`, `bookCollapseSection`, and `draft`. **Done when:** every directory and markdown file is enumerated with its frontmatter.
-3. **Classify candidates.** For each directory, apply the first matching rule: `/static-analysis/[name]/` with numbered files (00-, 10-) — tool skill; `/fuzzing/[lang]/[name]/` with `index.md` or numbered files — fuzzer skill; `/fuzzing/techniques/[name]/` with any `.md` files — technique skill; `/crypto/[name]/` with any `.md` files — domain skill; `/web/[name]/` with numbered files or `_index.md` — tool skill (check exclusions first); `_index.md` with `bookCollapseSection: true` — container, scan children, create no skill for the container; any other directory with only `_index.md` — skip (insufficient content). Most specific (deepest) path wins. When multiple types match, prefer Tool > Fuzzer > Technique > Domain. **Done when:** every directory is classified or skipped.
+3. **Classify candidates.** For each directory, apply the first matching rule: `/static-analysis/[name]/` with numbered files (00-, 10-): tool skill; `/fuzzing/[lang]/[name]/` with `index.md` or numbered files: fuzzer skill; `/fuzzing/techniques/[name]/` with any `.md` files: technique skill; `/crypto/[name]/` with any `.md` files: domain skill; `/web/[name]/` with numbered files or `_index.md`: tool skill (check exclusions first); `_index.md` with `bookCollapseSection: true`: container, scan children, create no skill for the container; any other directory with only `_index.md`: skip (insufficient content). Most specific (deepest) path wins. When multiple types match, prefer Tool > Fuzzer > Technique > Domain. **Done when:** every directory is classified or skipped.
 4. **Apply exclusions.** Skip a section if: `draft: true` appears in frontmatter, the directory is empty, the file is a template or placeholder, or the tool is GUI-only (e.g., `web/burp/`: Burp Suite requires visual interaction and cannot be operated headlessly). **Done when:** exclusions are applied and skipped sections are recorded.
 5. **Build candidate list.** For each candidate, record: name (slugified from `title`), type, source section path, summary from frontmatter, weight, whether a resources file (`99-resources.md` or `91-resources.md`) exists, and related sections. **Done when:** the candidate list is built with all fields.
 6. **Prioritize candidates.** Order by weight field (lower first), then content depth (more numbered files first), then presence of resources file, then core section status (fuzzing, static-analysis first). **Done when:** the candidate list is ordered.
@@ -62,4 +62,4 @@ Rollback: delete the generated skill directories for the current run. No handboo
 
 ## Output
 
-Generated skill directories under the configured output path (each containing a SKILL.md with type-appropriate sections, cross-references, and passing validation), an updated README table and cross-reference graph, and a per-skill generation report (line count, split status, populated sections, gaps, warnings, references) — ordering: skills, README, graph, reports.
+Generated skill directories under the configured output path (each containing a SKILL.md with type-appropriate sections, cross-references, and passing validation), an updated README table and cross-reference graph, and a per-skill generation report (line count, split status, populated sections, gaps, warnings, references): ordering: skills, README, graph, reports.

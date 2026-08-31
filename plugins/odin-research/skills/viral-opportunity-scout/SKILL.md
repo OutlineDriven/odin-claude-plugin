@@ -44,9 +44,9 @@ description: 'Use when asked to find distribution opportunities for a template, 
 
 ## Failure and recovery
 
-- **No artifact supplied:** stop. Report the failure and do not produce a partial report.
-- **No viable channels found:** return a non-converged result with the artifact classification and a statement that no matching channels were validated. The done predicate is not satisfied.
-- **Partial validation:** include only validated channels in the report. Do not infer or fabricate unvalidated opportunities. Flag any channel family where validation was skipped.
+- No artifact supplied: stop. Report the failure and do not produce a partial report.
+- No viable channels found: return a non-converged result with the artifact classification and a statement that no matching channels were validated. The done predicate is not satisfied.
+- Partial validation: include only validated channels in the report. Do not infer or fabricate unvalidated opportunities. Flag any channel family where validation was skipped.
 
 ## Output
 

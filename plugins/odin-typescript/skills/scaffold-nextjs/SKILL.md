@@ -58,10 +58,10 @@ Ask only for what is missing. Do not infer values. Do not install product-specif
 
 ## Failure and recovery
 
-- **Generation or network failure:** `create-next-app` fails or the network is unavailable. Report the error verbatim. Do not retry with different flags unless the failure message explicitly requests it. Do not scaffold by hand. Roll back via the git boundary: `git reset --hard` to the initial commit, or delete the directory.
-- **Any verification gate failure:** stop. Report the observed failure. Do not proceed on a partial result. Leave the tree for the user or roll back via the git boundary.
-- **Partial stop:** the tree is always behind the git boundary (the initial commit), so rollback is one command: `git reset --hard` to the initial commit, or delete the directory.
-- **TypeScript 7 install fails or tsc reports errors:** report the first diagnostic. A type error in a file `next build` used to skip now blocks the build; fixing it is the user's responsibility before continuing.
+- Generation or network failure: `create-next-app` fails or the network is unavailable. Report the error verbatim. Do not retry with different flags unless the failure message explicitly requests it. Do not scaffold by hand. Roll back via the git boundary: `git reset --hard` to the initial commit, or delete the directory.
+- Any verification gate failure: stop. Report the observed failure. Do not proceed on a partial result. Leave the tree for the user or roll back via the git boundary.
+- Partial stop: the tree is always behind the git boundary (the initial commit), so rollback is one command: `git reset --hard` to the initial commit, or delete the directory.
+- TypeScript 7 install fails or tsc reports errors: report the first diagnostic. A type error in a file `next build` used to skip now blocks the build; fixing it is the user's responsibility before continuing.
 
 ## Output
 

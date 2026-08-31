@@ -37,9 +37,9 @@ description: 'Use when a user wants an answer only from the skeptic seat: cold r
 
 ## Failure and recovery
 
-- **Insufficient evidence**: state explicitly that the evidence does not support a conclusion rather than filling the gap with speculation.
-- **Drift toward another perspective**: stop, re-anchor on the skeptic seat, and re-emit from that seat only.
-- **Ambiguous target**: ask the user to restate the claim before answering; do not guess the target.
+- Insufficient evidence: state explicitly that the evidence does not support a conclusion rather than filling the gap with speculation.
+- Drift toward another perspective: stop, re-anchor on the skeptic seat, and re-emit from that seat only.
+- Ambiguous target: ask the user to restate the claim before answering; do not guess the target.
 
 ## Output
 

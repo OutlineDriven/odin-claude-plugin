@@ -9,7 +9,7 @@
 
 ## Practical guidance
 
-- **Idris 2**: Best learning path for dependent types. Totality checker ensures all functions handle all inputs. Proof terms enable machine-checked correctness.
+- Idris 2: Best learning path for dependent types. Totality checker ensures all functions handle all inputs. Proof terms enable machine-checked correctness.
 - **F\***: Used to verify real cryptographic code (HACL*, EverCrypt). Refinement types add predicates to existing types without full dependent type overhead.
-- **Agda**: Strongest theoretical foundation (cubical type theory). Primarily academic but influences practical language design.
-- **Refined (Haskell)**: Pragmatic compile-time predicates. `Refined Positive Int` ensures positive at compile time via Template Haskell.
+- Agda: Strongest theoretical foundation (cubical type theory). Primarily academic but influences practical language design.
+- Refined (Haskell): Pragmatic compile-time predicates. `Refined Positive Int` ensures positive at compile time via Template Haskell.

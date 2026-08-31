@@ -22,14 +22,14 @@ Not for architecture diagrams — use architecture-diagram. Not for deploy, remo
 
 Use these terms consistently in every recommendation and design sketch:
 
-- **Module**: any unit with an interface and implementation, at any scale.
-- **Interface**: every fact a caller must know — types, invariants, ordering, errors, configuration, performance shape.
-- **Implementation**: what the interface hides.
-- **Depth**: behavior hidden per unit of interface learned; a deep module provides high leverage through a small interface. Shallow modules expose a broad surface with little hidden.
-- **Seam**: a point where behavior can be substituted or tested in isolation without editing that behavior in place.
-- **Adapter**: a concrete implementation used at a seam.
-- **Leverage**: capability gained per unit of interface learned.
-- **Locality**: concentrating a change, bug, or required knowledge at one maintenance site.
+- Module: any unit with an interface and implementation, at any scale.
+- Interface: every fact a caller must know — types, invariants, ordering, errors, configuration, performance shape.
+- Implementation: what the interface hides.
+- Depth: behavior hidden per unit of interface learned; a deep module provides high leverage through a small interface. Shallow modules expose a broad surface with little hidden.
+- Seam: a point where behavior can be substituted or tested in isolation without editing that behavior in place.
+- Adapter: a concrete implementation used at a seam.
+- Leverage: capability gained per unit of interface learned.
+- Locality: concentrating a change, bug, or required knowledge at one maintenance site.
 
 ## Procedure
 
@@ -74,19 +74,19 @@ Use these terms consistently in every recommendation and design sketch:
 
 ## Failure and recovery
 
-- **Trivial or fully specified request (greenfield):** stop, report no design needed, mutate nothing.
-- **No coherent sketch after the redesign threshold (greenfield):** report blocked with the red-flag record; do not implement.
-- **Target code unreadable or absent (brownfield):** report what is missing and stop. Do not infer structure from names alone.
-- **Ambiguous design question (brownfield):** ask which sub-branch applies before proceeding. Do not guess and do not run all sub-branches.
-- **No defensible candidate (brownfield deepen):** return `no-candidate` with the inspected scope and observed friction; make no changes.
-- **No selection or unresolved decision (brownfield deepen):** return `blocked` with the candidate list or exact unresolved decision; preserve completed read-only analysis; make no implementation change.
-- **ADR conflict without a load-bearing reopening reason:** preserve the ADR and return `blocked-by-decision`; do not re-litigate or bypass it.
-- **Conflicting constraints:** surface the conflict and the tradeoff explicitly. Do not silently pick one side.
-- **Missing required implementation fact or unavailable behavioral check:** return `blocked` with the missing fact or check and the files already changed. Do not claim the done predicate.
-- **Failed implementation or verification:** restore every modified named file to its captured pre-change contents, remove only newly created artifacts from this run, and return `failed-rolled-back` with the failing observation. If exact restoration cannot be proved, stop with `recovery-required`, listing each affected file and its pre-change source.
-- **Partial result:** analysis, candidate lists, and resolved decisions may be reported, but partially migrated code is never a successful output and must be rolled back. Ungrounded recommendations are marked as inference.
-- **Scope drift:** stop, report the widening, mutate nothing outside the named artifacts.
-- **Rollback:** delete or revert the named local design artifacts. No VCS, credential, or remote mutation is permitted.
+- Trivial or fully specified request (greenfield): stop, report no design needed, mutate nothing.
+- No coherent sketch after the redesign threshold (greenfield): report blocked with the red-flag record; do not implement.
+- Target code unreadable or absent (brownfield): report what is missing and stop. Do not infer structure from names alone.
+- Ambiguous design question (brownfield): ask which sub-branch applies before proceeding. Do not guess and do not run all sub-branches.
+- No defensible candidate (brownfield deepen): return `no-candidate` with the inspected scope and observed friction; make no changes.
+- No selection or unresolved decision (brownfield deepen): return `blocked` with the candidate list or exact unresolved decision; preserve completed read-only analysis; make no implementation change.
+- ADR conflict without a load-bearing reopening reason: preserve the ADR and return `blocked-by-decision`; do not re-litigate or bypass it.
+- Conflicting constraints: surface the conflict and the tradeoff explicitly. Do not silently pick one side.
+- Missing required implementation fact or unavailable behavioral check: return `blocked` with the missing fact or check and the files already changed. Do not claim the done predicate.
+- Failed implementation or verification: restore every modified named file to its captured pre-change contents, remove only newly created artifacts from this run, and return `failed-rolled-back` with the failing observation. If exact restoration cannot be proved, stop with `recovery-required`, listing each affected file and its pre-change source.
+- Partial result: analysis, candidate lists, and resolved decisions may be reported, but partially migrated code is never a successful output and must be rolled back. Ungrounded recommendations are marked as inference.
+- Scope drift: stop, report the widening, mutate nothing outside the named artifacts.
+- Rollback: delete or revert the named local design artifacts. No VCS, credential, or remote mutation is permitted.
 
 ## Output
 

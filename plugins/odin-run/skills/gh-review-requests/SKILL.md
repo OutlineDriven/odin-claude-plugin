@@ -38,10 +38,10 @@ description: 'Use when the user asks to find PRs to review or check the team rev
 
 ## Failure and recovery
 
-- **Auth failure**: `gh auth status` reports no authenticated account. Stop; report the failure and that no notifications were fetched. Do not write or modify credentials.
-- **API rate limit**: `gh api` returns a rate-limit error. Stop; report the limit and the partial result already collected, if any. Do not retry past the documented reset.
-- **Partial results**: if pagination is interrupted, return the rows collected so far labeled as partial, and report the interruption. Do not silently drop the partial set.
-- **Non-mutation**: no step writes files, commits, comments, updates notifications, or changes repository state. Recovery is re-running the skill; there is nothing to roll back.
+- Auth failure: `gh auth status` reports no authenticated account. Stop; report the failure and that no notifications were fetched. Do not write or modify credentials.
+- API rate limit: `gh api` returns a rate-limit error. Stop; report the limit and the partial result already collected, if any. Do not retry past the documented reset.
+- Partial results: if pagination is interrupted, return the rows collected so far labeled as partial, and report the interruption. Do not silently drop the partial set.
+- Non-mutation: no step writes files, commits, comments, updates notifications, or changes repository state. Recovery is re-running the skill; there is nothing to roll back.
 
 ## Output
 

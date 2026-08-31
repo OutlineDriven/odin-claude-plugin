@@ -17,8 +17,8 @@ description: 'Use when a rendering path needs stable frame-time, CPU, GPU, and m
 
 ## Inputs
 
-- **Fixed hardware, build, scene, settings, and budget** (required): all parameters that affect rendering performance, named and frozen before any mutation.
-- **Target values** (required): fixed numeric thresholds for each metric: frame-time (ms or FPS), CPU (ms or %), GPU (ms or %), and memory (MB or GB). Every target must be a concrete number, not a directional goal like "lower" or "faster".
+- Fixed hardware, build, scene, settings, and budget (required): all parameters that affect rendering performance, named and frozen before any mutation.
+- Target values (required): fixed numeric thresholds for each metric: frame-time (ms or FPS), CPU (ms or %), GPU (ms or %), and memory (MB or GB). Every target must be a concrete number, not a directional goal like "lower" or "faster".
 
 ## Procedure
 
@@ -31,11 +31,11 @@ description: 'Use when a rendering path needs stable frame-time, CPU, GPU, and m
 
 ## Failure and recovery
 
-- **No safe gain:** no stabilization preserves the targets without a visual or behavioral regression. Terminal `stalled`; report what was attempted and why the gain was unsafe.
-- **Blocked:** the hardware, build, or scene cannot be exercised. Terminal `blocked`; report the blocking condition.
-- **Budget exhausted:** the declared budget is spent before every target holds for two consecutive runs. Terminal `capped`; report which targets held and which remain. Budget exhaustion is never success unless it is the predeclared success predicate.
-- **Incomparable runs:** if the second run uses different inputs, sampling window, or measurement tool than the first, the runs are not comparable. Re-run with identical conditions; do not compare incomparable runs.
-- **Partial result:** emit the evidence and target results obtained; never present a single-run pass as two-consecutive-run proof.
+- No safe gain: no stabilization preserves the targets without a visual or behavioral regression. Terminal `stalled`; report what was attempted and why the gain was unsafe.
+- Blocked: the hardware, build, or scene cannot be exercised. Terminal `blocked`; report the blocking condition.
+- Budget exhausted: the declared budget is spent before every target holds for two consecutive runs. Terminal `capped`; report which targets held and which remain. Budget exhaustion is never success unless it is the predeclared success predicate.
+- Incomparable runs: if the second run uses different inputs, sampling window, or measurement tool than the first, the runs are not comparable. Re-run with identical conditions; do not compare incomparable runs.
+- Partial result: emit the evidence and target results obtained; never present a single-run pass as two-consecutive-run proof.
 
 ## Output
 

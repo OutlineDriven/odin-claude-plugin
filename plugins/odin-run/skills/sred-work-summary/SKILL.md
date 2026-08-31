@@ -17,12 +17,12 @@ disable-model-invocation: true
 
 ## Inputs
 
-- **Date range** (required): the period to gather records for.
-- **Source system credentials and API keys** (required): credentials for each configured source system. Missing or refused credentials stop the skill without partial action.
-- **Grouping approach** (required): how records are organized: by project, by team, by area, or another explicit scheme.
-- **Target document parent ID** (required): the identifier of the parent document under which the summary is created.
-- **Target system API credentials** (required): valid credentials with create permissions on the target parent.
-- **Specific repositories or sources to include or exclude** (optional): human specifies.
+- Date range (required): the period to gather records for.
+- Source system credentials and API keys (required): credentials for each configured source system. Missing or refused credentials stop the skill without partial action.
+- Grouping approach (required): how records are organized: by project, by team, by area, or another explicit scheme.
+- Target document parent ID (required): the identifier of the parent document under which the summary is created.
+- Target system API credentials (required): valid credentials with create permissions on the target parent.
+- Specific repositories or sources to include or exclude (optional): human specifies.
 
 ## Procedure
 
@@ -35,11 +35,11 @@ disable-model-invocation: true
 
 ## Failure and recovery
 
-- **Missing credentials**: stop before any network call. Return the credential name that is absent or unconfirmed.
-- **Source API failure during gather**: stop gather for that source. Report what was gathered and what source failed. Do not proceed to publish with partial data.
-- **Empty results**: stop. Report zero records. Do not fabricate content.
-- **Publish partial or truncated**: treat as failure. Report the last successfully written group. Do not claim done.
-- **Human revokes confirmation mid-flow**: stop immediately. No rollback needed if the write has not occurred.
+- Missing credentials: stop before any network call. Return the credential name that is absent or unconfirmed.
+- Source API failure during gather: stop gather for that source. Report what was gathered and what source failed. Do not proceed to publish with partial data.
+- Empty results: stop. Report zero records. Do not fabricate content.
+- Publish partial or truncated: treat as failure. Report the last successfully written group. Do not claim done.
+- Human revokes confirmation mid-flow: stop immediately. No rollback needed if the write has not occurred.
 
 ## Output
 

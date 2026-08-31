@@ -82,7 +82,7 @@ Concrete trap: bare `foo($X)` in C parses as `macro_type_specifier`, not a call 
 
 ## §6 — Meta-variable naming
 
-Meta-variable names must match `[A-Z_][A-Z_0-9]*`: start with an uppercase letter or underscore, then uppercase letters, digits, or underscores.
+Meta-variable names must match `[A-Z_][A-Z_0-9]*`: start with an uppercase letter or underscore, then uppercase letters, digits, or the underscore character.
 
 - Lowercase names like `$foo` **silently fail to match**. No error; just zero results.
 - Digit-start names like `$123` are invalid: the name must begin with `[A-Z_]`, not a digit.

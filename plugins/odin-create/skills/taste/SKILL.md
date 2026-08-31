@@ -58,7 +58,7 @@ Resume the register once the high-stakes section ends.
 
 **Side A — slop** (centroid-AI default convergence): generic openers ("Sure!", "Of course"), hedge-stacks ("perhaps it might be"), validation phrases ("you're absolutely right"), AI-flat prose with no rhythm, default palettes, defensive nil-checks where impossible, 50/50 decision hedges that pick nothing.
 
-**Side B — overkill** (decoration covering thin ideas): gradient stacks on every section, thesaurus-soup prose ("orchestrate the holistic synthesis of"), abstraction towers (4 layers where 1 suffices), complexity-flex masking absent conviction, ceremony that performs depth without delivering it.
+**Side B — overkill** (decoration covering thin ideas): gradient stacks on every section, thesaurus-soup prose ("orchestrate the comprehensive synthesis of"), abstraction towers (4 layers where 1 suffices), complexity-flex masking absent conviction, ceremony that performs depth without delivering it.
 
 | Domain   | Side A (slop)                            | Side B (overkill)                        |
 |----------|------------------------------------------|------------------------------------------|
@@ -71,17 +71,19 @@ Resume the register once the high-stakes section ends.
 
 Eleven anchors apply across prose, code, design, and decisions:
 
-- **Clarity**: the artifact says what it means; reader does not have to decode.
-- **Hierarchy**: important looks important; secondary supports.
-- **Intent**: every choice is committed; nothing reads as "I let the default decide."
-- **Coherence**: parts agree; tension only where deliberately staged.
-- **Restraint**: default posture; compress before adding.
-- **Generosity**: gives more than required at the right moment.
-- **Honesty**: no decoration covering missing depth; no slop covering missing POV. Care finishes the unseen.
-- **One strong moment**: exactly one commitment carries the lift; the rest supports.
-- **Invariants**: the artifact names what must hold; preconditions, postconditions, and invariants are explicit.
-- **Audience**: the artifact enters through the reader's frame, not the author's.
-- **Emptiness**: the artifact leaves space the user completes; the least assertion.
+| Anchor | Directive |
+|---|---|
+| Clarity | The artifact says what it means; reader does not have to decode. |
+| Hierarchy | Important looks important; secondary supports. |
+| Intent | Every choice is committed; nothing reads as "I let the default decide." |
+| Coherence | Parts agree; tension only where deliberately staged. |
+| Restraint | Default posture; compress before adding. |
+| Generosity | Gives more than required at the right moment. |
+| Honesty | No decoration covering missing depth; no slop covering missing POV. Care finishes the unseen. |
+| One strong moment | Exactly one commitment carries the lift; the rest supports. |
+| Invariants | The artifact names what must hold; preconditions, postconditions, and invariants are explicit. |
+| Audience | The artifact enters through the reader's frame, not the author's. |
+| Emptiness | The artifact leaves space the user completes; the least assertion. |
 
 ## Failure and recovery
 | Failure class | Response |
@@ -94,7 +96,7 @@ Eleven anchors apply across prose, code, design, and decisions:
 No partial-result fabrication. If fewer than eleven anchors can be judged, return only the judged anchors and name the blocker.
 
 ## Output
-**Audit mode**: a per-anchor verdict table (Anchor | Verdict | Citation | Fix) followed by ranked top-3 fixes.
+### Audit mode
 
 ```
 Anchor             | Verdict | Citation              | Fix
@@ -113,4 +115,4 @@ Top-3 fixes: 1. Pick one direction (Intent + One-strong-moment).
              3. Cut the framing paragraph (Restraint).
 ```
 
-**Anchor mode**: a register-load confirmation listing the eleven anchors, the Side A and Side B block patterns, and the persistence caveat.
+### Anchor mode

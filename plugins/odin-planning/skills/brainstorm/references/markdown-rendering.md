@@ -1,6 +1,6 @@
 # Markdown Rendering
 
-This is a format-rendering reference — it describes how to render any artifact in markdown, independent of which skill is producing it.
+This is a format-rendering reference, it describes how to render any artifact in markdown, independent of which skill is producing it.
 
 It is paired with a section contract (`brainstorm-sections.md`, etc.) that describes *what* the artifact contains. This reference describes *how* markdown specifically presents it. The same content rendered by different skills shares the same markdown principles.
 
@@ -8,13 +8,13 @@ It is paired with a section contract (`brainstorm-sections.md`, etc.) that descr
 
 These hold regardless of which skill produced the artifact.
 
-- **YAML frontmatter at the top of the file.** Standard `---` delimited block containing the artifact's stable metadata (title, date, type, etc. — exact fields are per-skill, defined in the section contract).
+- **YAML frontmatter at the top of the file.** Standard `---` delimited block containing the artifact's stable metadata (title, date, type, etc.: exact fields are per-skill, defined in the section contract).
 - **ASCII identifiers in anchors.** Markdown headings auto-generate anchors from the heading text. Keep headings ASCII so anchors are predictable (`#implementation-units`, not `#implementación-units`).
-- **Repo-relative paths for file references.** Always. Never absolute paths — they break portability across machines, worktrees, teammates.
+- **Repo-relative paths for file references.** Always. Never absolute paths: they break portability across machines, worktrees, teammates.
 - **No HTML mixed in.** Keep the markdown pure. No `<div>`, no `<details>`, no inline `<style>`. If a layout idea only works as HTML, defer it to the HTML rendering. Markdown stays markdown.
 - **No fixed-width line wrapping.** Do not hard-wrap prose to a column (e.g. 80 chars). Write one sentence per line, or let each paragraph flow as a single line. The artifact is read rendered and shared, where fixed wraps add nothing and only produce noisy mid-sentence diffs; markdown joins soft line breaks within a paragraph, so wrapping never changes the rendered output.
 - **ODIN plan sections use stable headings.** For plan artifacts, render the required sections with exact ASCII headings so agents can find them by heading scan: `## Goal Capsule`, `## ODIN spec outline`, `## Planning Outline`, `## Implementation Units`, `## Verification Contract`, `## Definition of Done`, and optional `## Appendix`. Requirements-only artifacts omit the plan-only sections rather than emitting empty placeholders. These stable headings are the wayfinding contract.
-- **Goal Capsule is top-loaded.** It appears before ODIN spec outline and long appendices for fast orientation — not a hidden machine copy.
+- **Goal Capsule is top-loaded.** It appears before ODIN spec outline and long appendices for fast orientation: not a hidden machine copy.
 
 ## Format principles
 
@@ -22,7 +22,7 @@ These shape what "good" markdown looks like; the agent applies them per artifact
 
 ### ID prefix format
 
-Stable IDs (R, U, A, F, AE, KTD) appear as plain prefixes at the start of the bullet or heading — do NOT bold the prefix. The prefix is visually distinctive on its own; bolding it inflates visual noise.
+Stable IDs (R, U, A, F, AE, KTD) appear as plain prefixes at the start of the bullet or heading, do NOT bold the prefix. The prefix is visually distinctive on its own; bolding it inflates visual noise.
 
 ```markdown
 - R1. The plan returns paginated sessions.   ← right
@@ -43,7 +43,7 @@ The test: which shape would a reader scan fastest for this content? If items hav
 
 ### Bold leader labels within bullets
 
-When a bullet has substructure that benefits from named fields (Key Flows with Trigger / Actors / Steps / Outcome, Acceptance Examples with Covers / Given / When / Then), use bold leader labels at the start of nested bullets — not deeper heading levels.
+When a bullet has substructure that benefits from named fields (Key Flows with Trigger / Actors / Steps / Outcome, Acceptance Examples with Covers / Given / When / Then), use bold leader labels at the start of nested bullets, not deeper heading levels.
 
 ```markdown
 - F1. Anonymous capture
@@ -61,22 +61,22 @@ For substantial artifacts, use horizontal rules (`---`) between top-level H2 sec
 
 ### Tables for genuinely comparative info only
 
-Use tables for the uniform-shape case in "Content shape" above. Don't use tables to render content lists that are really bullets — markdown tables are noisier in raw form and worse for diffs.
+Use tables for the uniform-shape case in "Content shape" above. Don't use tables to render content lists that are really bullets, markdown tables are noisier in raw form and worse for diffs.
 
 ## Section anatomy
 
-How section types commonly render in markdown. These are patterns, not contracts — the agent picks the shape that fits the content.
+How section types commonly render in markdown. These are patterns, not contracts, the agent picks the shape that fits the content.
 
-- **Goal Capsule** — bullets or a small table for objective, authority, execution profile, stop conditions, and tail ownership.
-- **ODIN spec outline** — H2 section containing Summary, Problem Frame, Requirements, and product-scope subsections. Put Requirements under `### Requirements` so review tools can distinguish Product Requirements from implementation detail.
-- **Planning Outline** — H2 section for KTDs, high-level technical design, assumptions, and sequencing.
-- **Summary / Problem Frame** — prose paragraphs.
-- **Requirements** — bullets with `R<N>.` prefix. When requirements span more than one concern, grouping under bold inline headers is the default shape, not optional polish (group by capability, not by discussion order); render a flat list only when every requirement is about the same thing. When requirements have status, traceability, or severity that warrant additional columns, escalate to a table.
-- **Implementation Units** — H3 heading per unit with `U<N>.` prefix. Fields (Goal, Files, Patterns, Test Scenarios, Verification) render as bullets with bold leader labels, or as sub-headings if the field has multi-paragraph content.
-- **Verification Contract / Definition of Done** — use tables when commands, applicability, unit IDs, and done signals share a uniform shape. Name concrete repo commands such as `bun test` rather than generic "run tests" when the repo has known commands.
-- **Key Technical Decisions** — bullets with bold decision name + prose rationale, or numbered KTD-N pattern when traceability matters.
-- **Key Flows / Acceptance Examples** — bullets with bold leader labels (Trigger / Actors / Steps / Outcome / Covers / Given-When-Then).
-- **Scope Boundaries** — bullets, optionally split into "Deferred for later" / "Outside this product's identity" sub-headings when the positioning distinction matters.
+- Goal Capsule: bullets or a small table for objective, authority, execution profile, stop conditions, and tail ownership.
+- ODIN spec outline: H2 section containing Summary, Problem Frame, Requirements, and product-scope subsections. Put Requirements under `### Requirements` so review tools can distinguish Product Requirements from implementation detail.
+- Planning Outline: H2 section for KTDs, high-level technical design, assumptions, and sequencing.
+- Summary / Problem Frame: prose paragraphs.
+- Requirements: bullets with `R<N>.` prefix. When requirements span more than one concern, grouping under bold inline headers is the default shape, not optional polish (group by capability, not by discussion order); render a flat list only when every requirement is about the same thing. When requirements have status, traceability, or severity that warrant additional columns, escalate to a table.
+- Implementation Units: H3 heading per unit with `U<N>.` prefix. Fields (Goal, Files, Patterns, Test Scenarios, Verification) render as bullets with bold leader labels, or as sub-headings if the field has multi-paragraph content.
+- Verification Contract / Definition of Done: use tables when commands, applicability, unit IDs, and done signals share a uniform shape. Name concrete repo commands such as `bun test` rather than generic "run tests" when the repo has known commands.
+- Key Technical Decisions: bullets with bold decision name + prose rationale, or numbered KTD-N pattern when traceability matters.
+- Key Flows / Acceptance Examples: bullets with bold leader labels (Trigger / Actors / Steps / Outcome / Covers / Given-When-Then).
+- Scope Boundaries: bullets, optionally split into "Deferred for later" / "Outside this product's identity" sub-headings when the positioning distinction matters.
 
 The agent picks more elaborate or simpler shapes based on what each specific artifact's content needs.
 
@@ -92,9 +92,9 @@ When the section contract calls for a diagram (architecture, sequence, flowchart
 
 The source that produced it lives at `assets/approval-path.noml` and is committed with the SVG.
 
-Markdown's diagram affordances are limited compared to HTML. For quantitative comparisons (bar charts, scatter plots) markdown has no native equivalent — use a table with the data and let prose or caption carry the interpretation. The richer visualization happens in the HTML rendering.
+Markdown's diagram affordances are limited compared to HTML. For quantitative comparisons (bar charts, scatter plots) markdown has no native equivalent, use a table with the data and let prose or caption carry the interpretation. The richer visualization happens in the HTML rendering.
 
-For a **UI/layout shape** that would be a wireframe in HTML, markdown has no inline-SVG wireframe affordance. Render the region composition as a nomnoml layout diagram (or describe it in prose) — never hand-draw a box-drawing/ASCII wireframe; it violates the no-box-drawing-characters rule and reads poorly. The wireframe proper is an HTML-only affordance.
+For a **UI/layout shape** that would be a wireframe in HTML, markdown has no inline-SVG wireframe affordance. Render the region composition as a nomnoml layout diagram (or describe it in prose), never hand-draw a box-drawing/ASCII wireframe; it violates the no-box-drawing-characters rule and reads poorly. The wireframe proper is an HTML-only affordance.
 
 ## Inline code and code blocks
 
@@ -118,7 +118,7 @@ Engineering process metadata stays out of the artifact:
 - No italic provenance lines ("*Brainstorm completed 2026-05-13*")
 - No engineering-flow shepherding ("Now read this file:", "Next, run that command:")
 
-This information belongs in commit messages, tool output, and agent transcripts — not in the artifact a reader returns to weeks later.
+This information belongs in commit messages, tool output, and agent transcripts, not in the artifact a reader returns to weeks later.
 
 ## Frontmatter shape
 
@@ -126,8 +126,8 @@ Per-skill frontmatter fields are defined in each skill's section contract (`brai
 
 - YAML at the top of the file, delimited by `---` on its own line above and below.
 - Field names in lowercase snake_case (`created_at`, `topic`, not `CreatedAt`, `Topic`).
-- **No status / lifecycle field.** Artifacts are point-in-time records, not tracked work items. Do not introduce a mutable `status` field or an `active → completed` lifecycle — whether the work shipped is derived from git, not stored in the doc.
-- Stable across artifact revisions — never rename or repurpose a field.
+- **No status / lifecycle field.** Artifacts are point-in-time records, not tracked work items. Do not introduce a mutable `status` field or an `active → completed` lifecycle: whether the work shipped is derived from git, not stored in the doc.
+- Stable across artifact revisions: never rename or repurpose a field.
 
 ## Post-write audit
 

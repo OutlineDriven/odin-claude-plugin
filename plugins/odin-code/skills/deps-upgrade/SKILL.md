@@ -65,15 +65,15 @@ Must be supplied: a working repository with VCS history; toolchains for each in-
 
 ## Failure and recovery
 
-- **Gate refusal** (step 1): no mutation; report the tripped gate and stop.
-- **Red baseline** (inputs validation): no mutation; report the pre-existing failures and stop; upgrade results would not be attributable.
-- **Test failure in the patch or minor batch**: restore the last green state (`git revert` the batch commit if committed, otherwise `git restore` the touched paths), then re-run the batch one package at a time to isolate the offender, or drop that package and record it. Never leave a partial bin failing or uncommitted.
-- **Major bump failure**: revert the major's commit and record the blocked package with its migration blockers. A missing upstream migration guide or a failing codemod is the same outcome: revert and record; do not improvise an unreviewed migration.
-- **Major bump without explicit approval**: do not apply; defer it with a recorded reason.
-- **Missing tooling**: a family without its scan or upgrade tool is excluded and reported; a missing CVE scanner is fatal: the done predicate requires the final scan, so the run is blocked, never done with the scan skipped.
+- Gate refusal (step 1): no mutation; report the tripped gate and stop.
+- Red baseline (inputs validation): no mutation; report the pre-existing failures and stop; upgrade results would not be attributable.
+- Test failure in the patch or minor batch: restore the last green state (`git revert` the batch commit if committed, otherwise `git restore` the touched paths), then re-run the batch one package at a time to isolate the offender, or drop that package and record it. Never leave a partial bin failing or uncommitted.
+- Major bump failure: revert the major's commit and record the blocked package with its migration blockers. A missing upstream migration guide or a failing codemod is the same outcome: revert and record; do not improvise an unreviewed migration.
+- Major bump without explicit approval: do not apply; defer it with a recorded reason.
+- Missing tooling: a family without its scan or upgrade tool is excluded and reported; a missing CVE scanner is fatal: the done predicate requires the final scan, so the run is blocked, never done with the scan skipped.
 - **Unavailable checks** (test suite cannot run): defer every unverified update as non-converged with a recorded reason; do not claim the done predicate holds.
-- **Partial-result rule**: every committed bin is a green, self-consistent state, so recovery always lands on a bin boundary; operator work outside campaign commits is never discarded. Applied and verified updates stand; failed and deferred updates are recorded.
-- **Blocked result**: report blocked with the failing gate, the SHA reverted to, and the remaining unprocessed candidates.
+- Partial-result rule: every committed bin is a green, self-consistent state, so recovery always lands on a bin boundary; operator work outside campaign commits is never discarded. Applied and verified updates stand; failed and deferred updates are recorded.
+- Blocked result: report blocked with the failing gate, the SHA reverted to, and the remaining unprocessed candidates.
 
 ## Output
 

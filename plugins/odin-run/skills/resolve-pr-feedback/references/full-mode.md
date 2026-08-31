@@ -45,9 +45,9 @@ gh api repos/{owner}/{repo}/pulls/PR_NUMBER/comments
 
 Before processing, classify each piece of feedback as **new** or **already handled**.
 
-**Review threads**: Read the thread's comments. If there's a substantive reply that acknowledges the concern but defers action (e.g., "need to align on this", "going to think through this", or a reply that presents options without resolving), it's a **pending decision** -- don't re-process. If there's only the original reviewer comment(s) with no substantive response, it's **new**.
+Review threads: Read the thread's comments. If there's a substantive reply that acknowledges the concern but defers action (e.g., "need to align on this", "going to think through this", or a reply that presents options without resolving), it's a **pending decision** -- don't re-process. If there's only the original reviewer comment(s) with no substantive response, it's **new**.
 
-**PR comments and review bodies**: These have no resolve mechanism, so they reappear on every run. Apply two filters in order:
+PR comments and review bodies: These have no resolve mechanism, so they reappear on every run. Apply two filters in order:
 
 1. **Actionability**: Skip items that contain no actionable feedback or questions to answer. Examples: review wrapper text ("Here are some automated review suggestions..."), approvals ("this looks great!"), status badges ("Validated"), CI summaries with no follow-up asks. If there's nothing to fix, answer, or decide, it's not actionable -- drop it from the count entirely.
 2. **Already replied**: For actionable items, check the PR conversation for an existing reply that quotes and addresses the feedback. If a reply already exists, skip. If not, it's new.
@@ -98,21 +98,21 @@ For `pr_comment` / `review_body` fix-list items (no file/line), the fixer identi
 
 ### Fixer return format
 
-- **verdict**: `fixed`, `fixed-differently`, or `blocked`
+- verdict: `fixed`, `fixed-differently`, or `blocked`
 - **feedback_id**, **feedback_type**
-- **reply_text**: markdown reply to post (quoting the relevant feedback), omit for `blocked`
-- **files_changed**: list of files modified (empty for `blocked`)
-- **reason**: what was done, or the concrete contradiction for `blocked`
+- reply_text: markdown reply to post (quoting the relevant feedback), omit for `blocked`
+- files_changed: list of files modified (empty for `blocked`)
+- reason: what was done, or the concrete contradiction for `blocked`
 
 **Handling `blocked`.** A fixer returns `blocked` only when implementing surfaced a concrete contradiction its narrower view exposed (the change breaks a caller/test it can see, or the code isn't what the finding described). Re-evaluate it yourself with that evidence: either re-dispatch with a corrected instruction, or move it to the reply-list (`not-addressing`/`declined`) or human-list. Don't silently drop it.
 
 ### Batching and conflict avoidance
 
-**Batching**: If the fix-list has 1-4 items, dispatch all in parallel. For 5+, batch in groups of 4.
+Batching: If the fix-list has 1-4 items, dispatch all in parallel. For 5+, batch in groups of 4.
 
-**Conflict avoidance**: No two fixers that touch the same file run in parallel. You already know the target files from step 3: serialize fixers that share a file (dispatch one, wait, then the next); non-overlapping items run in parallel. When one fixer handles multiple threads on the same file, it addresses them sequentially.
+Conflict avoidance: No two fixers that touch the same file run in parallel. You already know the target files from step 3: serialize fixers that share a file (dispatch one, wait, then the next); non-overlapping items run in parallel. When one fixer handles multiple threads on the same file, it addresses them sequentially.
 
-**Sequential fallback**: Platforms that do not support parallel dispatch run fixers sequentially.
+Sequential fallback: Platforms that do not support parallel dispatch run fixers sequentially.
 
 Fixes can occasionally expand beyond their referenced file (e.g., renaming a method updates callers elsewhere). This is rare but can cause parallel fixers to collide. Step 5 (combined validation) catches test breakage; step 8 (verify) catches unresolved threads. If either surfaces inconsistent changes, re-run the affected fixers sequentially.
 
@@ -229,7 +229,7 @@ The `review_threads` array should be empty (except `needs-human` items).
 
 **If new threads remain**, check the iteration count for this run:
 
-- **First or second fix-verify cycle**: Repeat from step 2 for the remaining threads.
+- First or second fix-verify cycle: Repeat from step 2 for the remaining threads.
 
 - **After the second fix-verify cycle** (3rd pass would begin): Stop looping. Surface remaining issues to the user with context about the recurring pattern: "Multiple rounds of feedback on [area/theme] suggest a deeper issue. Here's what we've fixed so far and what keeps appearing." Use the same `needs-human` escalation pattern -- leave threads open and present the pattern for the user to decide.
 

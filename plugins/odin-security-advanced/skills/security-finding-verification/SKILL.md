@@ -40,15 +40,15 @@ Optional:
 4. **Run class-specific checks.** Apply the OWASP Top 10 and relevant CWE checks for the alleged vulnerability class. For each check, record whether the finding passes or fails it. Compare the observation with known false-positive shapes for that vulnerability class. Record the exact shape and why it does or does not apply. **Done when:** every class-specific check is recorded with pass/fail and false-positive shape comparison.
 
    Class-specific checks by vulnerability type:
-   - **Injection (SQL, command, XSS, LDAP, XML, Xpath, SMTP header, OS command):** Confirm unsanitized user-controlled input reaches a sensitive sink without context-appropriate escaping or validation.
-   - **Path traversal:** Confirm user-controlled input reaches a filesystem operation without path sanitization or canonicalization.
-   - **Authentication/authorization bypass:** Confirm a protection mechanism is absent or bypassed at the named call site.
-   - **Sensitive data exposure:** Confirm secrets, keys, tokens, or credentials appear in plaintext in source code, logs, or network payloads.
-   - **Cryptographic failure:** Confirm weak, broken, or misused crypto primitives at the named call site.
-   - **Insecure design:** Confirm a missing architectural guard such as rate limiting, CSRF tokens, or session invalidation.
-   - **Security misconfiguration:** Confirm a default, outdated, or permissive configuration at the named component.
-   - **Integrity failure:** Confirm code or data is used without a cryptographic integrity check.
-   - **Logging and monitoring failure:** Confirm an attack sequence reaches the named step without triggering an observable log event.
+   - Injection (SQL, command, XSS, LDAP, XML, Xpath, SMTP header, OS command): Confirm unsanitized user-controlled input reaches a sensitive sink without context-appropriate escaping or validation.
+   - Path traversal: Confirm user-controlled input reaches a filesystem operation without path sanitization or canonicalization.
+   - Authentication/authorization bypass: Confirm a protection mechanism is absent or bypassed at the named call site.
+   - Sensitive data exposure: Confirm secrets, keys, tokens, or credentials appear in plaintext in source code, logs, or network payloads.
+   - Cryptographic failure: Confirm weak, broken, or misused crypto primitives at the named call site.
+   - Insecure design: Confirm a missing architectural guard such as rate limiting, CSRF tokens, or session invalidation.
+   - Security misconfiguration: Confirm a default, outdated, or permissive configuration at the named component.
+   - Integrity failure: Confirm code or data is used without a cryptographic integrity check.
+   - Logging and monitoring failure: Confirm an attack sequence reaches the named step without triggering an observable log event.
    - Any other class: define the relevant class-specific check explicitly before running it.
 
 5. **Assess exploitability.** Determine whether the finding is: (a) reachable from the named attacker position, (b) sufficient to cause harm given the threat model, and (c) reproducible in the available environment. If all three hold and safe to demonstrate, construct a proof of concept. If not safe or not reproducible, provide structured reasoning instead of a live exploit. **Done when:** exploitability is determined with all three sub-conditions addressed.
@@ -59,13 +59,13 @@ Optional:
 
 ## Failure and recovery
 
-- **Finding claim insufficient:** stop and return `inconclusive` with the specific missing element.
-- **Missing source code:** stop and return `inconclusive — source code not available` for the affected component.
-- **Unresolved data flow step:** mark the step `unresolved` and return `inconclusive — unresolved data flow step` blocking the verdict.
-- **Vulnerability class mismatch:** return `out of scope — vulnerability class does not match the supplied finding`.
-- **Insufficient evidence at any gate:** stop, name the gate, and return the specific evidence gap.
-- **Partial-result rule:** if multiple findings are supplied and some cannot be resolved, issue a verdict only for the findings with complete evidence; name the inconclusive findings explicitly.
-- **No file mutation:** this skill produces chat output only. No rollback is needed.
+- Finding claim insufficient: stop and return `inconclusive` with the specific missing element.
+- Missing source code: stop and return `inconclusive — source code not available` for the affected component.
+- Unresolved data flow step: mark the step `unresolved` and return `inconclusive — unresolved data flow step` blocking the verdict.
+- Vulnerability class mismatch: return `out of scope — vulnerability class does not match the supplied finding`.
+- Insufficient evidence at any gate: stop, name the gate, and return the specific evidence gap.
+- Partial-result rule: if multiple findings are supplied and some cannot be resolved, issue a verdict only for the findings with complete evidence; name the inconclusive findings explicitly.
+- No file mutation: this skill produces chat output only. No rollback is needed.
 
 ## Output
 

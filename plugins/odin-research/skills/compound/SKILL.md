@@ -16,8 +16,8 @@ description: 'Use when the user explicitly asks to save, curate, or consolidate 
 
 ## Inputs
 
-- **Session transcript** (required): the accumulated context of the current session, from which learnings are extracted.
-- **docs/knowledge/ directory** (required): the existing knowledge record store; must exist and be readable.
+- Session transcript (required): the accumulated context of the current session, from which learnings are extracted.
+- docs/knowledge/ directory (required): the existing knowledge record store; must exist and be readable.
 
 ## Procedure
 

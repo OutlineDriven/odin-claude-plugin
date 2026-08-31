@@ -23,11 +23,11 @@ Both caller modes run local verification. The mode split determines what happens
 
 Stop after local verification. Return a structured result containing:
 
-- **Implementation summary**: units completed, files changed.
-- **Verification results**: test and lint outcomes.
-- **Diff summary**: files changed and line count.
-- **Working-tree state**: branch, HEAD SHA.
-- **Residuals or blockers**: any unfinished work, unresolved issues, or named residuals.
+- Implementation summary: units completed, files changed.
+- Verification results: test and lint outcomes.
+- Diff summary: files changed and line count.
+- Working-tree state: branch, HEAD SHA.
+- Residuals or blockers: any unfinished work, unresolved issues, or named residuals.
 
 Do not review, commit, push, or create a PR. The orchestrator owns finalization.
 
@@ -45,7 +45,7 @@ review-and-ship owns review, commit packaging, publication classification, check
 
 review-and-ship is the only direct finalizer for an existing diff. It accepts:
 
-- **Direct human shipping authority**: the human invoked review-and-ship directly.
-- **Explicit delegated authority**: work passed `authority: delegated`. This signal must be explicit; it cannot arise from a bare route name or invocation context.
+- Direct human shipping authority: the human invoked review-and-ship directly.
+- Explicit delegated authority: work passed `authority: delegated`. This signal must be explicit; it cannot arise from a bare route name or invocation context.
 
 review-and-ship preserves: no-force push, publication classification, local checks, atomic commit packaging, push, PR update or creation, and a structured report. It does not require redundant confirmation when authority is already established.

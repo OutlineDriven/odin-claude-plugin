@@ -18,9 +18,9 @@ Determine if a repository is ready for public release via a read-only gap assess
 
 ## Inputs
 
-- **Repository path** (required): the local checkout to audit.
-- **GitHub repository URL** (optional): when supplied, remote checks (branch protection, release history) are performed. When omitted, remote checks are skipped.
-- **Language or ecosystem hint** (optional): skip detection from marker files if supplied.
+- Repository path (required): the local checkout to audit.
+- GitHub repository URL (optional): when supplied, remote checks (branch protection, release history) are performed. When omitted, remote checks are skipped.
+- Language or ecosystem hint (optional): skip detection from marker files if supplied.
 
 ## Procedure
 
@@ -35,18 +35,18 @@ Determine if a repository is ready for public release via a read-only gap assess
 5. **Remote checks (only if a GitHub URL was supplied).** Query repository settings: check for branch protection on the default branch (no force pushes, PRs required), required status checks, and Dependabot or Renovate for dependency updates. Check release history for semver tags and CI-driven releases. If no GitHub URL was supplied, skip these checks and note them as explicitly skipped in the report. Done when: remote checks are performed or noted as skipped.
 
 6. **Compile the report.** Organize findings by severity:
-   - **Critical**: secrets in history, missing license.
-   - **High**: missing SECURITY.md, no CI, no branch protection (when remote was checked), no test suite.
-   - **Medium**: missing CONTRIBUTING, no coverage gate, unpinned actions, no `.editorconfig`.
-   - **Low**: missing code of conduct, no label conventions, no API docs.
+   - Critical: secrets in history, missing license.
+   - High: missing SECURITY.md, no CI, no branch protection (when remote was checked), no test suite.
+   - Medium: missing CONTRIBUTING, no coverage gate, unpinned actions, no `.editorconfig`.
+   - Low: missing code of conduct, no label conventions, no API docs.
    Mark each gap as blocker, recommended, or deliberate omission. State which omissions are intentional choices for this project's scope. Note which remote or execution-dependent checks were explicitly skipped. Done when: the report is compiled with every finding classified by severity and intentionality, and skipped checks are named.
 
 ## Failure and recovery
 
-- **Repository inaccessible**: stop immediately, report the path error, do not proceed with other checks.
-- **Secret scanning tools unavailable**: note the limitation, recommend manual review or tool installation, continue with remaining checks.
+- Repository inaccessible: stop immediately, report the path error, do not proceed with other checks.
+- Secret scanning tools unavailable: note the limitation, recommend manual review or tool installation, continue with remaining checks.
 - **Check cannot be completed** (missing access, missing tooling, ambiguous state): mark as "not verified" rather than assuming pass or fail.
-- **Partial results**: always return the report with whatever was completed; never suppress findings because other checks are incomplete.
+- Partial results: always return the report with whatever was completed; never suppress findings because other checks are incomplete.
 
 ## Output
 

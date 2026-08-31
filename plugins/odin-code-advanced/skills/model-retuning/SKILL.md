@@ -35,11 +35,11 @@ Cross-cutting rules for every fan-out: pass large context by path plus a short g
 
 ## Failure and recovery
 
-- **Missing measurement substrate**: any of the gate's three requirements absent. Stop and name what to build. Do not substitute a static audit.
-- **No independent agent contexts for the audit**: the host cannot run proposal and defense as separate agents. Report as a blocker and stop the audit; do not collapse both sides into one context.
-- **Shared-asset parity break**: a per-unit agent edited its own copy of a byte-identical file. Recover by assigning all copies to one owner and propagating in one pass; a parity test failure surfacing in a different pass is attributed to the wrong change until ownership is fixed.
-- **Over-cut**: a removed mandate handed a required decision to the model. Recover by naming the new decider and restoring the gate if the decider is not allowed to decide it.
-- **Non-convergence**: the bar does not clear after the affordable passes. Partial results stand as a ranked hypothesis list with measured numbers; do not pretend the done predicate holds. Report the specific claim the run could not support and the paths still unmeasured.
+- Missing measurement substrate: any of the gate's three requirements absent. Stop and name what to build. Do not substitute a static audit.
+- No independent agent contexts for the audit: the host cannot run proposal and defense as separate agents. Report as a blocker and stop the audit; do not collapse both sides into one context.
+- Shared-asset parity break: a per-unit agent edited its own copy of a byte-identical file. Recover by assigning all copies to one owner and propagating in one pass; a parity test failure surfacing in a different pass is attributed to the wrong change until ownership is fixed.
+- Over-cut: a removed mandate handed a required decision to the model. Recover by naming the new decider and restoring the gate if the decider is not allowed to decide it.
+- Non-convergence: the bar does not clear after the affordable passes. Partial results stand as a ranked hypothesis list with measured numbers; do not pretend the done predicate holds. Report the specific claim the run could not support and the paths still unmeasured.
 - Rollback is `git revert` of the per-pass commits; each pass is one commit, so any pass is independently reversible.
 
 ## Output

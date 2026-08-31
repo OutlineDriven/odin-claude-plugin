@@ -13,33 +13,33 @@ Canonical schema for learning docs written by `autolearn`. Read this when classi
 
 ## Required fields (both tracks)
 
-- **title** — clear problem/topic title (string).
-- **date** — `YYYY-MM-DD`.
-- **category** — the `docs/solutions/` subdirectory (see Category map).
-- **module** — module or area affected (string).
-- **problem_type** — one enum value from the tracks table; determines the track.
-- **component** — component or subsystem involved (free-form string, e.g. `parser`, `auth`, `ci`, `cli`). Keep it consistent within a repo so frontmatter search works.
-- **severity** — one of `critical`, `high`, `medium`, `low`.
+- title: clear problem/topic title (string).
+- date: `YYYY-MM-DD`.
+- category: the `docs/solutions/` subdirectory (see Category map).
+- module: module or area affected (string).
+- problem_type: one enum value from the tracks table; determines the track.
+- component: component or subsystem involved (free-form string, e.g. `parser`, `auth`, `ci`, `cli`). Keep it consistent within a repo so frontmatter search works.
+- severity: one of `critical`, `high`, `medium`, `low`.
 
 ## Bug-track required fields
 
-- **symptoms** — array, 1–5 observable symptoms (errors, broken behavior).
-- **root_cause** — one of: `missing_association`, `missing_include`, `missing_index`, `wrong_api`, `scope_issue`, `thread_violation`, `async_timing`, `memory_leak`, `config_error`, `logic_error`, `test_isolation`, `missing_validation`, `missing_permission`, `missing_workflow_step`, `inadequate_documentation`, `missing_tooling`, `incomplete_setup`.
-- **resolution_type** — one of: `code_fix`, `migration`, `config_change`, `test_fix`, `dependency_update`, `environment_setup`, `workflow_improvement`, `documentation_update`, `tooling_addition`, `seed_data_update`.
+- symptoms: array, 1-5 observable symptoms (errors, broken behavior).
+- root_cause: one of: `missing_association`, `missing_include`, `missing_index`, `wrong_api`, `scope_issue`, `thread_violation`, `async_timing`, `memory_leak`, `config_error`, `logic_error`, `test_isolation`, `missing_validation`, `missing_permission`, `missing_workflow_step`, `inadequate_documentation`, `missing_tooling`, `incomplete_setup`.
+- resolution_type: one of: `code_fix`, `migration`, `config_change`, `test_fix`, `dependency_update`, `environment_setup`, `workflow_improvement`, `documentation_update`, `tooling_addition`, `seed_data_update`.
 
 ## Knowledge-track fields
 
 No required fields beyond the shared core. All optional:
 
-- **applies_when** — array (≤5), conditions where the guidance applies.
-- **symptoms** — array (≤5), the gap or friction that prompted the guidance.
-- **root_cause** — from the bug-track enum, if there is a specific one.
-- **resolution_type** — from the bug-track enum, if a change was applied.
+- applies_when: array (≤5), conditions where the guidance applies.
+- symptoms: array (≤5), the gap or friction that prompted the guidance.
+- root_cause: from the bug-track enum, if there is a specific one.
+- resolution_type: from the bug-track enum, if a change was applied.
 
 ## Optional fields (both tracks)
 
-- **related_components** — array of other components involved.
-- **tags** — array (≤8) of search keywords, lowercase and hyphen-separated.
+- related_components: array of other components involved.
+- tags: array (≤8) of search keywords, lowercase and hyphen-separated.
 
 ## Category map (problem_type → directory)
 

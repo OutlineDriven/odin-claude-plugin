@@ -42,11 +42,11 @@ Supply any existing local commands, endpoints, logs, metrics queries, schemas, t
 7. Confirm that no iteration path still waits for an implicit click, visual check, copy-paste, secret, or unrecorded verdict. Report the autonomous completion assertion or the exact outer-loop approvals and handoffs that remain. Done when: no implicit human wait remains in any iteration path and the terminal classification is reported.
 
 ## Failure and recovery
-- **Invalid or unavailable interface:** If a required command, endpoint, query, path, schema, or completion criterion cannot be validated, do not substitute a guessed interface. Leave that gate unchanged and return `blocked` with the missing fact and the gate it prevents removing.
-- **Forbidden side effect:** If closing the gate would require credentials, payment, publishing, deployment, remote mutation, data-at-rest mutation, or an irreversible action, do not perform it. Restore any local files changed for that attempted mechanism and return a discrete human handoff.
-- **Failed iteration:** Preserve the command, structured output, measured values, and failed assertion. Revert only the local change that caused the failure, using the recorded prior file state, and return `non-converged` with the failing gate and evidence.
-- **Partial restructuring:** Retain independently verified local gate removals only when each still works without the failed change and each has its own rollback path. Report every retained file and every unresolved gate; never claim the done predicate.
-- **Scope pressure:** Stop with `blocked` rather than edit unlisted workflow areas, redesign the system, or invent proof.
+- Invalid or unavailable interface: If a required command, endpoint, query, path, schema, or completion criterion cannot be validated, do not substitute a guessed interface. Leave that gate unchanged and return `blocked` with the missing fact and the gate it prevents removing.
+- Forbidden side effect: If closing the gate would require credentials, payment, publishing, deployment, remote mutation, data-at-rest mutation, or an irreversible action, do not perform it. Restore any local files changed for that attempted mechanism and return a discrete human handoff.
+- Failed iteration: Preserve the command, structured output, measured values, and failed assertion. Revert only the local change that caused the failure, using the recorded prior file state, and return `non-converged` with the failing gate and evidence.
+- Partial restructuring: Retain independently verified local gate removals only when each still works without the failed change and each has its own rollback path. Report every retained file and every unresolved gate; never claim the done predicate.
+- Scope pressure: Stop with `blocked` rather than edit unlisted workflow areas, redesign the system, or invent proof.
 
 ## Output
 

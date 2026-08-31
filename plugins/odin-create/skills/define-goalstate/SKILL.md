@@ -20,9 +20,9 @@ The user must supply the intended finished system: what it must do (behavior) an
 
 ## State classification
 
-- **Allowed state**: a concrete, observable system configuration that the finished system may legitimately occupy while honoring the contract.
-- **Forbidden state**: a concrete, observable configuration that violates the contract. Every forbidden state must be paired with an explicit terminal failure behavior (halt, rollback, retry-with-limit, degrade-to-safe-mode, etc.).
-- **Impossible state**: a configuration that cannot be reached because the design, protocol, or environment structurally excludes it. Each impossible state must name the structural invariant or boundary that makes it unreachable. If no such invariant can be named, reclassify the state as forbidden or allowed.
+- Allowed state: a concrete, observable system configuration that the finished system may legitimately occupy while honoring the contract.
+- Forbidden state: a concrete, observable configuration that violates the contract. Every forbidden state must be paired with an explicit terminal failure behavior (halt, rollback, retry-with-limit, degrade-to-safe-mode, etc.).
+- Impossible state: a configuration that cannot be reached because the design, protocol, or environment structurally excludes it. Each impossible state must name the structural invariant or boundary that makes it unreachable. If no such invariant can be named, reclassify the state as forbidden or allowed.
 
 ## Procedure
 
@@ -38,11 +38,11 @@ The user must supply the intended finished system: what it must do (behavior) an
 
 ## Failure and recovery
 
-- **Unfalsifiable success predicate**: if the predicate is not concrete, not checkable, or cannot be shown to return true for at least one allowed state and false for at least one forbidden state, stop and ask the user to sharpen it. Do not write a contract whose predicate cannot distinguish allowed from forbidden.
-- **Incomplete state classification**: if any of allowed, forbidden, or impossible states is missing, vague, or not justified, stop and elicit the missing class or invariant. Do not guess states the user did not name, and do not accept "impossible" without a structural invariant or boundary.
-- **Unclassified forbidden-state failure**: if a forbidden state lacks a named terminal failure behavior, stop and elicit one. Do not assume "raise an error" is sufficient.
-- **Rejected draft**: revise per feedback and re-present. Do not persist a rejected draft.
-- **Rollback**: the only mutation is the local contract document; delete or overwrite it to revert to the prior state.
+- Unfalsifiable success predicate: if the predicate is not concrete, not checkable, or cannot be shown to return true for at least one allowed state and false for at least one forbidden state, stop and ask the user to sharpen it. Do not write a contract whose predicate cannot distinguish allowed from forbidden.
+- Incomplete state classification: if any of allowed, forbidden, or impossible states is missing, vague, or not justified, stop and elicit the missing class or invariant. Do not guess states the user did not name, and do not accept "impossible" without a structural invariant or boundary.
+- Unclassified forbidden-state failure: if a forbidden state lacks a named terminal failure behavior, stop and elicit one. Do not assume "raise an error" is sufficient.
+- Rejected draft: revise per feedback and re-present. Do not persist a rejected draft.
+- Rollback: the only mutation is the local contract document; delete or overwrite it to revert to the prior state.
 
 ## Output
 

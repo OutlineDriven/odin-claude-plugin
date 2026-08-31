@@ -16,10 +16,10 @@ description: 'Use when asked to partition non-overlapping scopes across subagent
 
 ## Inputs
 
-- **Scopes (required):** Named, non-overlapping work units with explicit boundaries. Supplied by the user or derived from a map the user provides.
-- **Scope assignment (required):** Which subagent owns which scope. Stated explicitly by the user or inferred from a DAG/map the user approves.
-- **Review duty (required):** Each scope requires a fresh reviewer subagent after the implementer subagent completes. The reviewer is not the implementer.
-- **Compiled map (optional):** A DAG, war map, or state machine providing deterministic skeleton routing. Provide it if the user supplied one; otherwise derive from the stated scopes.
+- Scopes (required): Named, non-overlapping work units with explicit boundaries. Supplied by the user or derived from a map the user provides.
+- Scope assignment (required): Which subagent owns which scope. Stated explicitly by the user or inferred from a DAG/map the user approves.
+- Review duty (required): Each scope requires a fresh reviewer subagent after the implementer subagent completes. The reviewer is not the implementer.
+- Compiled map (optional): A DAG, war map, or state machine providing deterministic skeleton routing. Provide it if the user supplied one; otherwise derive from the stated scopes.
 
 ## Procedure
 
@@ -33,11 +33,11 @@ description: 'Use when asked to partition non-overlapping scopes across subagent
 8. **Converge.** Once all scopes have terminal verdicts and all review reports are filed, the skill is done. Done when: all scopes have terminal verdicts and review reports are filed.
 
 ## Failure and recovery
-- **Scope overlap detected:** Stop before dispatch. Return the conflicting scopes and ask the user to clarify boundaries.
-- **Subagent reports BLOCKED:** Record BLOCKED in the actual-work map for that scope. Continue with other scopes. Report the full blocked list after all convergent scopes finish.
-- **Reviewer escalation:** A reviewer finding that requires cross-scope knowledge returns to the controller, not to the implementer. Record the escalation in the actual-work map and resolve it before marking that scope done.
-- **Subagent crash:** Re-dispatch the same brief to a fresh implementer subagent for that scope. Do not carry forward partial state from the crashed run.
-- **Non-converged result:** If any scope remains BLOCKED after one re-dispatch, record the exhaustion and stop. Do not loop indefinitely.
+- Scope overlap detected: Stop before dispatch. Return the conflicting scopes and ask the user to clarify boundaries.
+- Subagent reports BLOCKED: Record BLOCKED in the actual-work map for that scope. Continue with other scopes. Report the full blocked list after all convergent scopes finish.
+- Reviewer escalation: A reviewer finding that requires cross-scope knowledge returns to the controller, not to the implementer. Record the escalation in the actual-work map and resolve it before marking that scope done.
+- Subagent crash: Re-dispatch the same brief to a fresh implementer subagent for that scope. Do not carry forward partial state from the crashed run.
+- Non-converged result: If any scope remains BLOCKED after one re-dispatch, record the exhaustion and stop. Do not loop indefinitely.
 
 ## Output
 One `actual-work-map.md` listing every scope with terminal status (done, blocked, or failed), reviewer verdict, and fix count — plus one review report per scope, one fix report per scope that required fixes, and one brief file per scope.

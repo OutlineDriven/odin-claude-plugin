@@ -52,14 +52,14 @@ disable-model-invocation: true
 
 ## Failure and recovery
 
-- **Judge unavailable or rate-limited (skill-quality):** stop scoring, report which skills were scored and which were not, write a partial report, and return BLOCKED with the judge error.
-- **No baseline and not `--baseline` (skill-quality):** report absolute scores only. State that regression detection requires a prior baseline and recommend running `--baseline` on a clean branch.
-- **Empty skill set (skill-quality):** return BLOCKED stating no skills matched the selection criteria.
-- **Partial judge failure (skill-quality):** include scored skills in the report, mark unscored skills as ERROR, and never fabricate scores.
-- **Model call fails or is unavailable (model-comparison):** record the failure for that model/task/run, mark the cell as failed, and continue the remaining runs. Do not retry past the fixed run count without human confirmation.
-- **Spend exceeds the budget cap (model-comparison):** stop immediately, return the partial table with completed rows and a `non-converged` marker, and issue no further paid calls.
-- **No success criterion for a task (model-comparison):** stop scoring that task and ask the human for a criterion. Do not invent one.
-- **Partial results (model-comparison):** present a partial table with failed or unrun cells clearly marked as such. Never present them as scores.
+- Judge unavailable or rate-limited (skill-quality): stop scoring, report which skills were scored and which were not, write a partial report, and return BLOCKED with the judge error.
+- No baseline and not `--baseline` (skill-quality): report absolute scores only. State that regression detection requires a prior baseline and recommend running `--baseline` on a clean branch.
+- Empty skill set (skill-quality): return BLOCKED stating no skills matched the selection criteria.
+- Partial judge failure (skill-quality): include scored skills in the report, mark unscored skills as ERROR, and never fabricate scores.
+- Model call fails or is unavailable (model-comparison): record the failure for that model/task/run, mark the cell as failed, and continue the remaining runs. Do not retry past the fixed run count without human confirmation.
+- Spend exceeds the budget cap (model-comparison): stop immediately, return the partial table with completed rows and a `non-converged` marker, and issue no further paid calls.
+- No success criterion for a task (model-comparison): stop scoring that task and ask the human for a criterion. Do not invent one.
+- Partial results (model-comparison): present a partial table with failed or unrun cells clearly marked as such. Never present them as scores.
 - Non-mutation rule: no skill, source, or configuration file is modified. The only writes are to `.gstack/benchmark-reports/`.
 
 ## Output

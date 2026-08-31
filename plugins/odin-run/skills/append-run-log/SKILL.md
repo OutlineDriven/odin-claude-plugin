@@ -16,12 +16,12 @@ description: 'Use when a completed agent run must be recorded as durable, querya
 
 ## Inputs
 
-- `run_id` — must be supplied, non-empty, and unique within the log.
-- `started_at` and `ended_at` — must be supplied as ISO 8601 UTC timestamps (`YYYY-MM-DDTHH:mm:ssZ`). The entry date guard is derived from `ended_at`.
-- `metrics` — must be supplied as a JSON object of run measurements (for example, duration, token count, model, outcome). Aggregates are computed from these fields alone.
-- `log_path` — must be supplied; path to the append-only JSONL run log.
-- `last_run_pointer_path` — must be supplied; path to the last-run pointer file.
-- `retention_window` — optional; an ISO 8601 duration or day count. When omitted, no pruning is performed.
+- `run_id`: must be supplied, non-empty, and unique within the log.
+- `started_at` and `ended_at`: must be supplied as ISO 8601 UTC timestamps (`YYYY-MM-DDTHH:mm:ssZ`). The entry date guard is derived from `ended_at`.
+- `metrics`: must be supplied as a JSON object of run measurements (for example, duration, token count, model, outcome). Aggregates are computed from these fields alone.
+- `log_path`: must be supplied; path to the append-only JSONL run log.
+- `last_run_pointer_path`: must be supplied; path to the last-run pointer file.
+- `retention_window`: optional; an ISO 8601 duration or day count. When omitted, no pruning is performed.
 
 ## Procedure
 
@@ -33,10 +33,10 @@ description: 'Use when a completed agent run must be recorded as durable, querya
 6. Update the last-run pointer at `last_run_pointer_path` to an object containing the new `run_id` and `ended_at`. Done when: the pointer contains the new `run_id` and `ended_at`.
 
 ## Failure and recovery
-- `rejected-invalid-input` — a required input is missing, a timestamp is not ISO-only, or `metrics` is not a JSON object. No mutation occurs. Report the rejected field and stop.
-- `rejected-duplicate` — a line with the same `run_id` already exists. No mutation occurs. Report the existing entry and stop; never append a second entry for one run.
-- `malformed-existing-line` — a prior line fails to parse as JSON or lacks required fields. Ignore it for aggregation and duplicate checks; never rewrite or delete it unless it is pruned by the retention window. It must not corrupt the log.
-- `partial-write` — if an interrupted append leaves a line that fails the parse check, treat it as a malformed line (ignored), do not rewrite it, and re-append the intended entry only if no line with this `run_id` parses correctly.
+- `rejected-invalid-input`: a required input is missing, a timestamp is not ISO-only, or `metrics` is not a JSON object. No mutation occurs. Report the rejected field and stop.
+- `rejected-duplicate`: a line with the same `run_id` already exists. No mutation occurs. Report the existing entry and stop; never append a second entry for one run.
+- `malformed-existing-line`: a prior line fails to parse as JSON or lacks required fields. Ignore it for aggregation and duplicate checks; never rewrite or delete it unless it is pruned by the retention window. It must not corrupt the log.
+- `partial-write`: if an interrupted append leaves a line that fails the parse check, treat it as a malformed line (ignored), do not rewrite it, and re-append the intended entry only if no line with this `run_id` parses correctly.
 - Rollback rule: append-only. Validation failures before step 4 leave the log untouched. After a successful append, prior entries are never rolled back; only retention pruning may delete expired lines.
 - Blocked result: if the done predicate cannot hold because the log is unwritable or the pointer path is unwritable, report `blocked` with the failing path and the unrecorded entry; do not claim the run is recorded.
 

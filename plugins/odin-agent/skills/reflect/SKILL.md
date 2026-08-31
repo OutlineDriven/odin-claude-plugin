@@ -17,8 +17,8 @@ disable-model-invocation: true
 
 ## Refusals
 
-- **Edits without explicit human approval**: rejected. Every "apply now" or "apply on approval" proposal requires explicit human sign-off before any file change.
-- **Analysis beyond the named skills**: rejected. Do not widen the analysis beyond the invoked skills the human supplied.
+- Edits without explicit human approval: rejected. Every "apply now" or "apply on approval" proposal requires explicit human sign-off before any file change.
+- Analysis beyond the named skills: rejected. Do not widen the analysis beyond the invoked skills the human supplied.
 - **Remote, credential, publish, deploy, or irreversible changes**: rejected.
 
 ## Inputs
@@ -39,10 +39,10 @@ Optional: evidence of failure patterns, specific lines or sections to target, or
 
 ## Failure and recovery
 
-- **Analysis failure**: if the skill files cannot be read or the task context is insufficient, stop and report the reason.
-- **No improvement found**: state that finding and end without mutation.
-- **Approval withheld**: record the reason and continue with remaining proposals.
-- **Application failure**: if an approved edit cannot be applied after human sign-off, attempt to roll back any partial change and report the blocked state. Do not declare success when the done predicate does not hold.
+- Analysis failure: if the skill files cannot be read or the task context is insufficient, stop and report the reason.
+- No improvement found: state that finding and end without mutation.
+- Approval withheld: record the reason and continue with remaining proposals.
+- Application failure: if an approved edit cannot be applied after human sign-off, attempt to roll back any partial change and report the blocked state. Do not declare success when the done predicate does not hold.
 
 ## Output
 

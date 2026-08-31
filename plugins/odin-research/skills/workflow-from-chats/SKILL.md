@@ -31,10 +31,10 @@ description: 'Use when a user asks to mine recent chats for workflow preferences
 
 ## Failure and recovery
 
-- **No chat source**: report failure with a specific error. Do not proceed.
-- **No extractable signals**: return a report stating zero preferences found. Do not fabricate patterns.
-- **Partial synthesis**: return the partial result with explicit gaps listed. Do not fill gaps.
-- **Proposal failure**: return the preference profile without proposed artifacts. Do not invent artifacts.
+- No chat source: report failure with a specific error. Do not proceed.
+- No extractable signals: return a report stating zero preferences found. Do not fabricate patterns.
+- Partial synthesis: return the partial result with explicit gaps listed. Do not fill gaps.
+- Proposal failure: return the preference profile without proposed artifacts. Do not invent artifacts.
 
 ## Output
 A structured report with sections in order: extracted preference signals with source citations, synthesized preference profile with confidence ratings, and proposed workflow artifacts with trigger, inputs, steps, and done criterion.

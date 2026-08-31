@@ -39,10 +39,10 @@ description: 'Use when the automatic trigger applies: after editing a durable ar
 5. If a pass finds no genuine improvement, leave the artifact unchanged for that route. **Done when:** each route is confirmed as applied, deferred, or no-op.
 
 ## Failure and recovery
-- **No applicable route:** state that no hygiene route earned a run and leave the artifact unchanged; this is not an error.
-- **Routed pass unavailable in session:** skip it with a stated reason and continue the remaining routes; the partial result is the set of routes that ran.
-- **Routed pass reports a finding that cannot be safely applied:** defer it with a stated reason rather than widen scope or invent a fix.
-- **Non-mutation rule:** never edit files outside the just-changed artifact; recovery is the prior on-disk content of that artifact.
+- No applicable route: state that no hygiene route earned a run and leave the artifact unchanged; this is not an error.
+- Routed pass unavailable in session: skip it with a stated reason and continue the remaining routes; the partial result is the set of routes that ran.
+- Routed pass reports a finding that cannot be safely applied: defer it with a stated reason rather than widen scope or invent a fix.
+- Non-mutation rule: never edit files outside the just-changed artifact; recovery is the prior on-disk content of that artifact.
 
 ## Output
 The revised artifact with findings applied, plus a per-route record stating whether each route ran, was skipped (with reason), or was deferred (with reason); if a pass finds no genuine improvement, it changes nothing.

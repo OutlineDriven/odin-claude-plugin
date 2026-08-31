@@ -40,13 +40,13 @@ disable-model-invocation: true
 15. To publish, only on explicit human invocation, package the extension by zipping the built output. Then submit it through the Chrome Web Store developer dashboard using human-supplied credentials and listing assets. The model never enters credentials or triggers the upload autonomously. **Done when:** the extension is packaged and submitted with human-supplied credentials, or the run stops for lack of explicit invocation.
 
 ## Failure and recovery
-- **MV2 requested:** stop; MV2 is not produced. Ask the human to confirm MV3.
-- **Permission over-broad:** narrow to the minimal set before proceeding; do not ship broad grants to satisfy a quick test.
-- **Remote-code or CSP violation:** stop; MV3 bans remote scripts. Package the script locally.
-- **Service-worker state loss:** do not rely on in-memory state; move durable state to `chrome.storage` and re-read on the next event.
-- **Store submission blocked:** if the human has not explicitly invoked publishing, do not attempt it. If submission fails (authentication, listing rejection), report the store error verbatim and stop; never retry with inferred credentials.
-- **Partial result:** a loadable unpacked extension that fails a surface is reported with the failing surface named; do not claim the done predicate holds.
-- **Non-mutation:** never delete or overwrite existing project files outside the extension directory without explicit human confirmation.
+- MV2 requested: stop; MV2 is not produced. Ask the human to confirm MV3.
+- Permission over-broad: narrow to the minimal set before proceeding; do not ship broad grants to satisfy a quick test.
+- Remote-code or CSP violation: stop; MV3 bans remote scripts. Package the script locally.
+- Service-worker state loss: do not rely on in-memory state; move durable state to `chrome.storage` and re-read on the next event.
+- Store submission blocked: if the human has not explicitly invoked publishing, do not attempt it. If submission fails (authentication, listing rejection), report the store error verbatim and stop; never retry with inferred credentials.
+- Partial result: a loadable unpacked extension that fails a surface is reported with the failing surface named; do not claim the done predicate holds.
+- Non-mutation: never delete or overwrite existing project files outside the extension directory without explicit human confirmation.
 
 ## Output
 A loadable MV3 extension under the working directory (manifest, service worker, content scripts, UI surfaces, and build config as needed), or, when publishing is explicitly invoked, a store submission initiated with human-supplied credentials, plus a report listing the surfaces built, the permissions requested, and any failing surface.

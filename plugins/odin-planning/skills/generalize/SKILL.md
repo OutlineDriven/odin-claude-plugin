@@ -39,14 +39,14 @@ description: 'Use when asked to derive the general rule a request carries when i
 
 ## Failure and recovery
 
-- **Overfit**: the example's incidental details are treated as requirements, so the change would land on one instance and stop. Recovery: step 3 marks incidental attributes, and the rule must rest only on candidate-invariant attributes.
-- **Overgeneralize**: too much is stripped, so the change would land where it was never wanted. Recovery: step 4 requires every candidate to exclude every negative; a candidate that fails a negative is dropped and the killing case is named.
-- **Single candidate written from the start**: one hypothesis is a guess wearing a method. Recovery: step 4 requires 2 to 4 rival rules, or an explicit showing that the filter reduced them to one.
-- **Boundary phrased as "and similar cases"**: this defers the decision this skill exists to make. Recovery: step 6 requires a concrete nearest excluded neighbour.
-- **Asking a probe the material answers**: recovery: step 5 resolves from evidence first, every time; the single-select question is only for evidence the material cannot settle.
-- **Applying the rule here**: the rule is the deliverable; acting on it belongs downstream. Recovery: step 7 emits the contract and stops.
-- **Partial-result rule**: if the probe cannot be resolved from evidence and the user does not answer, emit the surviving candidate(s) with the open probe marked unresolved and the done predicate not satisfied. Never swallow the open probe or pretend the rule is settled.
-- **Non-mutation rule**: this skill edits nothing. On any failure it leaves all source material unchanged and returns the partial contract above.
+- Overfit: the example's incidental details are treated as requirements, so the change would land on one instance and stop. Recovery: step 3 marks incidental attributes, and the rule must rest only on candidate-invariant attributes.
+- Overgeneralize: too much is stripped, so the change would land where it was never wanted. Recovery: step 4 requires every candidate to exclude every negative; a candidate that fails a negative is dropped and the killing case is named.
+- Single candidate written from the start: one hypothesis is a guess wearing a method. Recovery: step 4 requires 2 to 4 rival rules, or an explicit showing that the filter reduced them to one.
+- Boundary phrased as "and similar cases": this defers the decision this skill exists to make. Recovery: step 6 requires a concrete nearest excluded neighbour.
+- Asking a probe the material answers: recovery: step 5 resolves from evidence first, every time; the single-select question is only for evidence the material cannot settle.
+- Applying the rule here: the rule is the deliverable; acting on it belongs downstream. Recovery: step 7 emits the contract and stops.
+- Partial-result rule: if the probe cannot be resolved from evidence and the user does not answer, emit the surviving candidate(s) with the open probe marked unresolved and the done predicate not satisfied. Never swallow the open probe or pretend the rule is settled.
+- Non-mutation rule: this skill edits nothing. On any failure it leaves all source material unchanged and returns the partial contract above.
 
 ## Output
 

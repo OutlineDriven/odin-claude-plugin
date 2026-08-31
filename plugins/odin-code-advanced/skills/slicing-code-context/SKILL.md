@@ -22,12 +22,12 @@ description: 'Use when an exact symbol, path, entrypoint, or line range can boun
 
 ## Inputs
 
-- **Target source tree root** (required): canonical directory containing the source to slice.
-- **Anchor** (required): one repository-relative `FILE:START-END` line range, one exact path, one fully qualified symbol, or one exact entrypoint.
-- **Worker task** (required): concrete question or patch proposal whose answer can be checked from source.
-- **Mode and depth** (optional): `neighborhood` depth 1 by default; `upstream` or `downstream` depth 2–4; `path` or `entrypoint` depth 10–20.
-- **Peer anchor** (required only for `path`): exact second symbol or line range.
-- **Budget** (optional): positive integer estimated-token limit, default 8192.
+- Target source tree root (required): canonical directory containing the source to slice.
+- Anchor (required): one repository-relative `FILE:START-END` line range, one exact path, one fully qualified symbol, or one exact entrypoint.
+- Worker task (required): concrete question or patch proposal whose answer can be checked from source.
+- Mode and depth (optional): `neighborhood` depth 1 by default; `upstream` or `downstream` depth 2–4; `path` or `entrypoint` depth 10–20.
+- Peer anchor (required only for `path`): exact second symbol or line range.
+- Budget (optional): positive integer estimated-token limit, default 8192.
 
 ## Procedure
 

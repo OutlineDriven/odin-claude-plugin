@@ -18,17 +18,17 @@ Produce a readable, shareable HTML document of findings.
 
 ## Refusals
 
-- **Overwriting an existing readout**: rejected. Stop; never overwrite `~/.readouts/<output_name>.html`.
-- **External resources in the HTML**: rejected. A template override referring to an external stylesheet, script, image, font, or network resource is `non-self-contained-template`.
-- **Interpreting brief or source text as HTML**: rejected. All inserted text is escaped.
+- Overwriting an existing readout: rejected. Stop; never overwrite `~/.readouts/<output_name>.html`.
+- External resources in the HTML: rejected. A template override referring to an external stylesheet, script, image, font, or network resource is `non-self-contained-template`.
+- Interpreting brief or source text as HTML: rejected. All inserted text is escaped.
 
 ## Inputs
 
-- **brief** (required): a non-empty string or non-empty ordered list of findings. A string is rendered as paragraphs split on blank lines; a list is rendered as one section per item in input order.
-- **output_name** (required): a filename stem without an extension or path separator.
-- **title** (optional): the displayed document title; defaults to `output_name` with `-` and `_` replaced by spaces.
-- **sources** (optional): an ordered list of readable source-file paths to embed. Preserve the supplied order; reject duplicate normalized paths.
-- **template_override** (optional): a complete HTML document supplied by the user. It must contain at least one `{{TITLE}}`, `{{TIMESTAMP}}`, `{{BRIEF}}`, and `{{SOURCES}}` marker. Multiple occurrences of any marker are permitted and all are replaced. If absent, use the inline shell in Procedure step 3.
+- brief (required): a non-empty string or non-empty ordered list of findings. A string is rendered as paragraphs split on blank lines; a list is rendered as one section per item in input order.
+- output_name (required): a filename stem without an extension or path separator.
+- title (optional): the displayed document title; defaults to `output_name` with `-` and `_` replaced by spaces.
+- sources (optional): an ordered list of readable source-file paths to embed. Preserve the supplied order; reject duplicate normalized paths.
+- template_override (optional): a complete HTML document supplied by the user. It must contain at least one `{{TITLE}}`, `{{TIMESTAMP}}`, `{{BRIEF}}`, and `{{SOURCES}}` marker. Multiple occurrences of any marker are permitted and all are replaced. If absent, use the inline shell in Procedure step 3.
 
 ## Procedure
 
@@ -61,15 +61,15 @@ Produce a readable, shareable HTML document of findings.
 
 ## Failure and recovery
 
-- **`empty-brief`**: stop before writing.
-- **`invalid-output-name`**: stop before writing.
-- **`output-exists`**: stop; never overwrite.
-- **`source-read-failed`**: stop before writing.
-- **`invalid-template`**: stop before writing.
-- **`non-self-contained-template`**: stop before writing.
-- **`write-failed`**: delete the partial target.
-- **`index-refresh-failed`**: restore the prior index if replacement occurred; delete the new readout and temporary file.
-- **`done-predicate-failed`**: re-read the new readout and index. Require the readout to be non-empty, contain the escaped title, brief rendering, UTC timestamp, and every supplied source path and exact escaped source text. Require the index to contain exactly one link to every current readout and no link to `index.html`. On any mismatch, restore the prior index bytes (or remove the new index if none existed), delete the new readout, and report `done-predicate-failed`.
+- `empty-brief`: stop before writing.
+- `invalid-output-name`: stop before writing.
+- `output-exists`: stop; never overwrite.
+- `source-read-failed`: stop before writing.
+- `invalid-template`: stop before writing.
+- `non-self-contained-template`: stop before writing.
+- `write-failed`: delete the partial target.
+- `index-refresh-failed`: restore the prior index if replacement occurred; delete the new readout and temporary file.
+- `done-predicate-failed`: re-read the new readout and index. Require the readout to be non-empty, contain the escaped title, brief rendering, UTC timestamp, and every supplied source path and exact escaped source text. Require the index to contain exactly one link to every current readout and no link to `index.html`. On any mismatch, restore the prior index bytes (or remove the new index if none existed), delete the new readout, and report `done-predicate-failed`.
 
 No index failure is a successful partial result because the done predicate requires the index to be refreshed.
 

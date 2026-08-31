@@ -35,13 +35,13 @@ description: 'Use when a requested sweep monitors CI failures over a bounded att
 9. If the circuit breaker trips (repeated non-convergence, repeated flakes, or budget exhaustion), stop the sweep and hand off with the accumulated evidence. **Done when:** the sweep stops with a handoff and accumulated evidence.
 
 ## Failure and recovery
-- **Flake:** the failure does not reproduce locally. Classify non-actionable, hand off, and do not patch.
-- **Ambiguity:** the root cause cannot be isolated to one minimal change. Hand off with evidence and do not patch.
-- **Budget exhaustion:** the attempt cap is reached or the verifier time budget is exceeded. Stop, hand off, and do not start a new repair.
-- **Breaker trip:** repeated non-convergence or repeated flakes. Stop the sweep and hand off.
-- **Partial result:** a worktree repair is never merged. A partial patch is returned as a proposal with its verification state, never as a completed fix.
-- **Non-mutation:** no push, merge, publish, credential change, or main-branch mutation. The worktree is the only writable surface and may be discarded.
-- **Blocked result:** when any failure class above fires, return the terminal classification, the attempt count, and the accumulated evidence; do not swallow the error or claim the done predicate holds.
+- Flake: the failure does not reproduce locally. Classify non-actionable, hand off, and do not patch.
+- Ambiguity: the root cause cannot be isolated to one minimal change. Hand off with evidence and do not patch.
+- Budget exhaustion: the attempt cap is reached or the verifier time budget is exceeded. Stop, hand off, and do not start a new repair.
+- Breaker trip: repeated non-convergence or repeated flakes. Stop the sweep and hand off.
+- Partial result: a worktree repair is never merged. A partial patch is returned as a proposal with its verification state, never as a completed fix.
+- Non-mutation: no push, merge, publish, credential change, or main-branch mutation. The worktree is the only writable surface and may be discarded.
+- Blocked result: when any failure class above fires, return the terminal classification, the attempt count, and the accumulated evidence; do not swallow the error or claim the done predicate holds.
 
 ## Output
 A terminal classification per swept check (reproduced root cause, non-actionable, or blocked) with, for a reproduced root cause, a minimal verified patch returned as a proposal with verifier evidence and the attempt count; for blocked or non-actionable, a handoff record with the accumulated evidence and the stopping reason.

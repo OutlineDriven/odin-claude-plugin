@@ -12,9 +12,9 @@ You are answering a "why" question about a piece of code by synthesizing finding
 
 ## The code anchor
 
-**Target files:** {FILES_WITH_LINE_RANGES}
+Target files: {FILES_WITH_LINE_RANGES}
 
-**Key symbols:** {SYMBOLS}
+Key symbols: {SYMBOLS}
 
 ## Investigator findings
 
@@ -62,8 +62,8 @@ File paths, line ranges, key symbols. Two or three lines to orient a reader who 
 
 **Claims with direct evidence**, one per bullet. Quote or paraphrase the source and cite precisely. Format each finding like:
 
-- **[Direct]** {Claim}. Source: [PR #123](url) / ticket ID / file:line. {Brief quote or paraphrase.}
-- **[Supported]** {Claim}. Evidence: {list of items and what each contributes}.
+- [Direct] {Claim}. Source: [PR #123](url) / ticket ID / file:line. {Brief quote or paraphrase.}
+- [Supported] {Claim}. Evidence: {list of items and what each contributes}.
 
 Use `[Direct]` for single-source, explicit evidence. Use `[Supported]` when multiple indirect items converge on a conclusion.
 
@@ -71,7 +71,7 @@ Use `[Direct]` for single-source, explicit evidence. Use `[Supported]` when mult
 
 **Claims that aren't explicitly stated anywhere but are well-supported by indirect evidence.** Make the inference chain visible: "Given A and B, it's likely that C." Use hedged language ("appears to", "likely", "suggests", "is consistent with"). Format:
 
-- **[Inferred]** {Hedged claim}. Reasoning: {the specific evidence and the inference step}.
+- [Inferred] {Hedged claim}. Reasoning: {the specific evidence and the inference step}.
 
 If there's nothing to infer, skip this section.
 
@@ -79,9 +79,9 @@ If there's nothing to infer, skip this section.
 
 **If the evidence fits multiple stories, present them.** Don't force a winner when the record doesn't support one. For each hypothesis:
 
-- **Hypothesis:** {one-sentence statement}
-- **Evidence for:** {specific items}
-- **Evidence against or missing:** {what would need to be true but isn't, or what counter-signals exist}
+- Hypothesis: {one-sentence statement}
+- Evidence for: {specific items}
+- Evidence against or missing: {what would need to be true but isn't, or what counter-signals exist}
 
 Skip this section if there's a single clear answer.
 
@@ -100,13 +100,13 @@ Be specific. "We searched the issue tracker for [query1], [query2], [query3] and
 
 Bulleted list of what was actually searched, so the user can judge coverage and redirect. Format:
 
-- **Source control history**: {file paths}, {number of commits reviewed}, PRs #{numbers}, and code comments searched. Or "Not searched. This should not happen because git and `gh` are always expected."
-- **Issue / ticket tracker**: {ticket IDs and keyword searches}. Or "Not searched. No matching MCP available in this environment."
-- **Long-form documents**: {page titles and search queries}. Or "Not searched. No matching MCP available in this environment."
-- **Real-time team chat**: {channels searched, date ranges, queries}. Or "Not searched. No matching MCP available in this environment."
-- **Infrastructure observability**: {dashboards, monitors, metrics, logs, traces, or incidents searched}. Or "Not searched. No matching MCP available in this environment."
-- **Error / exception tracking**: {issues, events, or releases searched}. Or "Not searched. No matching MCP available in this environment."
-- **Product analytics warehouse**: {fully-qualified tables queried, the time windows, and the numeric summaries (counts, percentiles, first/last-seen timestamps) that bore on the question}. Or "Not searched. No matching MCP available in this environment."
+- Source control history: {file paths}, {number of commits reviewed}, PRs #{numbers}, and code comments searched. Or "Not searched. This should not happen because git and `gh` are always expected."
+- Issue / ticket tracker: {ticket IDs and keyword searches}. Or "Not searched. No matching MCP available in this environment."
+- Long-form documents: {page titles and search queries}. Or "Not searched. No matching MCP available in this environment."
+- Real-time team chat: {channels searched, date ranges, queries}. Or "Not searched. No matching MCP available in this environment."
+- Infrastructure observability: {dashboards, monitors, metrics, logs, traces, or incidents searched}. Or "Not searched. No matching MCP available in this environment."
+- Error / exception tracking: {issues, events, or releases searched}. Or "Not searched. No matching MCP available in this environment."
+- Product analytics warehouse: {fully-qualified tables queried, the time windows, and the numeric summaries (counts, percentiles, first/last-seen timestamps) that bore on the question}. Or "Not searched. No matching MCP available in this environment."
 
 ### Confidence summary
 

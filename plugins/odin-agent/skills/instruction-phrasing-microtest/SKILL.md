@@ -27,10 +27,10 @@ description: 'Use when changing the wording of a rule in a skill, prompt templat
 ## Procedure
 
 1. **Classify the instruction.** Determine which category the current rule falls into:
-   - **Tripwire**: phrase-level self-check on concrete tokens (e.g., "if your output contains 'do not flag' … stop").
-   - **Recognition table**: red-flags or rationalization table read at decision time.
-   - **Discrete-directive prohibition**: "Do not ask X to do Y" where the model has no competing incentive to do Y.
-   - **Composition prohibition**: a prohibition on how to compose output where the model has its own agenda for the output (e.g., restating specs feels like helpful curation).
+   - Tripwire: phrase-level self-check on concrete tokens (e.g., "if your output contains 'do not flag' … stop").
+   - Recognition table: red-flags or rationalization table read at decision time.
+   - Discrete-directive prohibition: "Do not ask X to do Y" where the model has no competing incentive to do Y.
+   - Composition prohibition: a prohibition on how to compose output where the model has its own agenda for the output (e.g., restating specs feels like helpful curation).
    This classification determines which phrasing strategies are worth testing. Composition prohibitions are the category most likely to backfire; tripwires and recognition tables are the most reliable.
 
 2. **Build the sample matrix.** For each variant plus the control, prepare N identical API calls where:
@@ -55,11 +55,11 @@ description: 'Use when changing the wording of a rule in a skill, prompt templat
 8. **Write results table.** Produce a table with columns: Variant, Marker 1 (mean ± variance), Marker 2, …, Target metric delta, Verdict (adopt / drop / inconclusive). Include the manual-inspection notes for any match that was reclassified.
 
 ## Failure and recovery
-- **Insufficient samples**: if fewer than 5 samples per variant complete, the run is invalid. Re-run with the same parameters.
-- **All variants tie with control**: report "unmeasurable" — the instruction change has no detectable effect at this sample size. Do not adopt.
-- **Variant regresses a non-target metric**: report the regression and drop the variant. Do not adopt a phrasing that trades one improvement for one regression.
+- Insufficient samples: if fewer than 5 samples per variant complete, the run is invalid. Re-run with the same parameters.
+- All variants tie with control: report "unmeasurable" — the instruction change has no detectable effect at this sample size. Do not adopt.
+- Variant regresses a non-target metric: report the regression and drop the variant. Do not adopt a phrasing that trades one improvement for one regression.
 - **Scoring markers produce zero hits across all variants including control**: the markers are wrong, not the instructions. Halt, redefine markers, re-run.
-- **Model API failure mid-run**: discard partial results for the failed variant. Re-run only the failed variant's remaining samples.
+- Model API failure mid-run: discard partial results for the failed variant. Re-run only the failed variant's remaining samples.
 - **False-positive rate above 20% after manual inspection**: the markers are too noisy to produce a verdict. Halt and redefine markers.
 
 No rollback is needed because no repository files are modified. The results table is the only artifact.

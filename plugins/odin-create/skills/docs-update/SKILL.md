@@ -17,10 +17,10 @@ disable-model-invocation: true
 
 ## Inputs
 
-- **Delivery:** `local commit` or `reviewable PR`. If the request does not select one, ask before mutation.
-- **Source change set:** a user-supplied commit or time range; otherwise commits ahead of the base branch when present, falling back to the last 24 hours.
-- **Repositories:** the source repository and, when documentation lives separately, the documentation repository and its remote target.
-- **Documentation:** discovered project documentation, including README, ARCHITECTURE, CONTRIBUTING, CLAUDE.md, CHANGELOG, VERSION, and TODOS files when present.
+- Delivery: `local commit` or `reviewable PR`. If the request does not select one, ask before mutation.
+- Source change set: a user-supplied commit or time range; otherwise commits ahead of the base branch when present, falling back to the last 24 hours.
+- Repositories: the source repository and, when documentation lives separately, the documentation repository and its remote target.
+- Documentation: discovered project documentation, including README, ARCHITECTURE, CONTRIBUTING, CLAUDE.md, CHANGELOG, VERSION, and TODOS files when present.
 
 ## Procedure
 
@@ -29,8 +29,8 @@ disable-model-invocation: true
 3. **Detect platform and style.** Discover all relevant documentation while excluding dependency, VCS, and build directories. Detect Mintlify, Docusaurus, GitBook, Fumadocs, or generic Markdown from configuration and structure. Read the project style guide and representative files to capture voice, terminology, heading structure, frontmatter, components, and code-example conventions. Use standard Markdown only when no platform signal exists. Done when: the documentation set, platform, and local style are known.
 4. **Build the coverage map.** Extract each changed public surface from the kept diffs. Map its current coverage across Diataxis reference, how-to, tutorial, and explanation; mark zero-coverage and reference-only gaps. Inspect ASCII, Mermaid, and other maintained diagrams for renamed, moved, split, or removed entities and edges. Map each gap or drift item to a specific documentation change. Done when: every public-surface item has a coverage result and every affected diagram has a drift result.
 5. **Audit and classify.** Check every discovered document against the kept diffs and its purpose. Include setup, examples, troubleshooting, commands, project structure, workflows, component descriptions, cross-references, and navigation. Classify each needed edit:
-   - **Auto-update:** a bounded factual correction directly proved by the diff, such as a path, count, table item, command, flag, structure tree, or stale link.
-   - **Ask:** positioning or narrative, design rationale, security model, a section removal, a new section, a rewrite over roughly ten lines in one section, or any ambiguous claim.
+   - Auto-update: a bounded factual correction directly proved by the diff, such as a path, count, table item, command, flag, structure tree, or stale link.
+   - Ask: positioning or narrative, design rationale, security model, a section removal, a new section, a rewrite over roughly ten lines in one section, or any ambiguous claim.
    Present each ask with one recommendation and a skip option. Apply only the approved choice; leave skipped text unchanged. Done when: every needed edit is auto-update, approved, or explicitly skipped.
 6. **Apply synchronized edits.** Match the detected platform and style, preserve accurate content, and update diagrams with their surrounding claims. Keep terminology, examples, navigation, and repeated facts consistent across documents. Report a one-line factual summary for each changed file. Done when: all approved edits are applied and no changed claim conflicts with another document.
 7. **Protect CHANGELOG.** If the selected diff does not require a CHANGELOG edit, leave it unchanged. Otherwise read the whole file before editing. Score affected entries from 0 to 3: changed fact, user impact, and usage command/flag/link. Reword entries below 2 toward user impact, and separate contributor-only details when the existing structure permits it. Preserve every existing entry and its order; use narrow exact-match edits, never regenerate or overwrite the file. Ask when an entry appears incorrect or incomplete. Done when: required wording is clear without deleting, reordering, replacing, or regenerating entries.
@@ -39,21 +39,21 @@ disable-model-invocation: true
 10. **Scan before delivery.** Scan every modified documentation file for API keys, tokens, passwords, private URLs, internal hostnames, and PII, including email addresses outside legitimate attribution context. Remove or mask findings without retaining secret-shaped placeholders. If redaction would distort the documentation, leave that file uncommitted and ask. Done when: every file selected for delivery passes the secret and PII scan.
 11. **Prepare commits.** If no documentation changed, report that the documentation is current and stop. Otherwise stage modified documentation files by explicit path and create descriptive documentation commit(s). In a multi-repository setup, commit only files belonging to each repository and retain links from every documentation update to the triggering source commit URL or repository-qualified commit. Done when: each repository has a scoped commit and every update is traceable to source.
 12. **Deliver at the only fork.**
-   - **Local commit:** leave the scoped commit(s) in their repositories. Do not push, publish, or create or update a PR/MR.
-   - **Reviewable PR:** preview the documentation repository, remote, base branch, head branch, files, commit summary, source-commit links, and the consequence that the branch will be pushed and a PR opened. After explicit approval of that preview, create or use the proposed head branch, push it, and open one reviewable PR per documentation repository. Request human review; do not merge.
+   - Local commit: leave the scoped commit(s) in their repositories. Do not push, publish, or create or update a PR/MR.
+   - Reviewable PR: preview the documentation repository, remote, base branch, head branch, files, commit summary, source-commit links, and the consequence that the branch will be pushed and a PR opened. After explicit approval of that preview, create or use the proposed head branch, push it, and open one reviewable PR per documentation repository. Request human review; do not merge.
    Done when: the selected local commit(s) exist without remote effects, or the approved PR target(s) are open and link every update to its source commits.
 
 ## Failure
 
-- **Delivery missing:** ask the user to choose local commit or reviewable PR; do not mutate.
-- **Local mode on the base branch:** abort before mutation and name the required feature branch.
-- **Missing or mismatched documentation repository:** report the expected repository or path; do not guess or edit another repository.
-- **No significant user-facing change:** report the excluded commits and stop without a commit or PR.
-- **Ambiguous or narrative edit:** leave it unchanged until the user approves a choice; skipping is valid.
-- **CHANGELOG clobber risk:** stop that edit and preserve the existing entries and order.
-- **Secret or PII remains:** exclude the affected file from delivery and identify the required redaction decision.
-- **PR preview not approved:** keep work local and create no remote effect.
-- **Partial result:** deliver only files that passed audit, approval, consistency, clobber protection, and redaction; list every unchanged or blocked file.
+- Delivery missing: ask the user to choose local commit or reviewable PR; do not mutate.
+- Local mode on the base branch: abort before mutation and name the required feature branch.
+- Missing or mismatched documentation repository: report the expected repository or path; do not guess or edit another repository.
+- No significant user-facing change: report the excluded commits and stop without a commit or PR.
+- Ambiguous or narrative edit: leave it unchanged until the user approves a choice; skipping is valid.
+- CHANGELOG clobber risk: stop that edit and preserve the existing entries and order.
+- Secret or PII remains: exclude the affected file from delivery and identify the required redaction decision.
+- PR preview not approved: keep work local and create no remote effect.
+- Partial result: deliver only files that passed audit, approval, consistency, clobber protection, and redaction; list every unchanged or blocked file.
 
 ## Output
 

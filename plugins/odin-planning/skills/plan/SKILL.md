@@ -16,8 +16,8 @@ description: 'Use when a user commits to a direction and asks to plan, brief, re
 
 ## Inputs
 
-- **Required**: user commitment to a direction and a descriptive name for the plan.
-- **Optional**: stated type/tier preference; any pinned evidence or references the user supplies.
+- Required: user commitment to a direction and a descriptive name for the plan.
+- Optional: stated type/tier preference; any pinned evidence or references the user supplies.
 
 ## Procedure
 

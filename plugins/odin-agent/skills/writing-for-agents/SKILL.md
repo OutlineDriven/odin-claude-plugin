@@ -22,9 +22,9 @@ Must be supplied: the target document path and the agent-consumed document type 
 
 1. Read the target document fully. Identify whether it contains steps (ordered actions), reference (definitions, rules, facts), or both. Done when: the document is read and its content type (steps, reference, or both) is identified.
 2. Apply the information hierarchy: rank material by how immediately the agent needs it:
-   - **In-file step**: the primary tier, what the agent does, in order.
-   - **In-file reference**: consulted on demand. A flat peer-set of rules on one rung is fine.
-   - **Disclosed reference**: pushed to a separate file, reached by a context pointer, loaded only when the pointer fires.
+   - In-file step: the primary tier, what the agent does, in order.
+   - In-file reference: consulted on demand. A flat peer-set of rules on one rung is fine.
+   - Disclosed reference: pushed to a separate file, reached by a context pointer, loaded only when the pointer fires.
    Done when: every piece of material is placed on the hierarchy.
 3. For each context pointer (a reference naming out-of-context material with a trigger condition):
    - Front-load the leading word: the pointer's wording decides when the agent reaches the material.
@@ -48,12 +48,12 @@ Must be supplied: the target document path and the agent-consumed document type 
 9. Verify the final document is self-contained: it restates every safety, authority, execution, and proof rule the workflow needs. It contains no pointer to AGENTS.md, a system prompt, a rule file, another skill, or an optional peer step. Done when: the document is self-contained with no external runtime pointers.
 
 ## Failure and recovery
-- **Pointer failure**: a pointer's wording does not reliably trigger reaching the target. Recovery: sharpen the wording first; inline the material only if sharpening fails.
-- **Premature completion**: agent ends a step before it is genuinely done. Recovery: sharpen the completion criterion; if irreducibly fuzzy, split the sequence across a real context boundary.
-- **Sprawl**: document too long even when every line is live. Recovery: disclose reference behind pointers, split by branch or sequence so each path carries only what it needs.
-- **Duplication**: same meaning in more than one place. Recovery: collapse to a single source of truth.
-- **No-op retention**: instruction the model already obeys by default. Recovery: delete the whole sentence.
-- **Stale pointer**: a pointer's target no longer exists or has moved. Recovery: update or remove the pointer; never leave a dangling reference.
+- Pointer failure: a pointer's wording does not reliably trigger reaching the target. Recovery: sharpen the wording first; inline the material only if sharpening fails.
+- Premature completion: agent ends a step before it is genuinely done. Recovery: sharpen the completion criterion; if irreducibly fuzzy, split the sequence across a real context boundary.
+- Sprawl: document too long even when every line is live. Recovery: disclose reference behind pointers, split by branch or sequence so each path carries only what it needs.
+- Duplication: same meaning in more than one place. Recovery: collapse to a single source of truth.
+- No-op retention: instruction the model already obeys by default. Recovery: delete the whole sentence.
+- Stale pointer: a pointer's target no longer exists or has moved. Recovery: update or remove the pointer; never leave a dangling reference.
 
 ## Output
 The target document, edited or restructured — every line earning its place by changing routing, authority, reads/writes, procedure, success proof, failure handling, or attribution; no stale duplication, no unreachable pointers, no peer-skill runtime routing, all necessary mechanics inlined.

@@ -23,8 +23,8 @@ Not for people-mediation or team-interpersonal conflicts — use **culture-confl
 The repository root and the set of conflicting files are supplied by the in-progress git state. `git status` and `git diff --name-only --diff-filter=U` are authoritative for the conflict list.
 
 Optional context:
-- **Ancestor / theirs / yours**: `git show :1:<file>`, `git show :2:<file>`, `git show :3:<file>`.
-- **Validation command**: any command the human specifies; otherwise discover the project's own type checker, tests, and formatter.
+- Ancestor / theirs / yours: `git show :1:<file>`, `git show :2:<file>`, `git show :3:<file>`.
+- Validation command: any command the human specifies; otherwise discover the project's own type checker, tests, and formatter.
 
 ## Procedure
 
@@ -50,10 +50,10 @@ Optional context:
    *Done when: scoped checks pass, or pre-existing failures are reported without suppression.*
 
 8. **Finish the integration.** Complete the in-progress operation:
-   - **Merge**: commit the merge with a message that names both sides' intents and the resolution rationale, including any discarded intent recorded in Step 4.
-   - **Rebase**: `git rebase --continue` until every commit is replayed and no conflict remains.
-   - **Cherry-pick**: `git cherry-pick --continue` (or commit, then continue if multiple commits remain).
-   - **Stash pop**: the stash is applied after resolution; `git stash drop` if the stash entry was not auto-dropped.
+   - Merge: commit the merge with a message that names both sides' intents and the resolution rationale, including any discarded intent recorded in Step 4.
+   - Rebase: `git rebase --continue` until every commit is replayed and no conflict remains.
+   - Cherry-pick: `git cherry-pick --continue` (or commit, then continue if multiple commits remain).
+   - Stash pop: the stash is applied after resolution; `git stash drop` if the stash entry was not auto-dropped.
    *Done when: `git status` shows no conflicts and the integration is complete.*
 
 ## Failure and recovery
@@ -69,9 +69,9 @@ Optional context:
 | Scope creep | Resolving one conflict reveals additional unrelated conflicts or issues | Stop at the current merge/rebase/cherry-pick/stash scope; do not refactor, clean up, or fix code outside the conflicted hunks |
 | Non-convergence | Two resolution attempts produce the same check failure | Stop; report the conflict pair, both attempted resolutions, and the failure output |
 
-**Partial-result rule:** If fewer than all conflicted files are resolved, the run is incomplete. Do not commit, do not claim success. Report every unresolved hunk by file and line range.
+Partial-result rule: If fewer than all conflicted files are resolved, the run is incomplete. Do not commit, do not claim success. Report every unresolved hunk by file and line range.
 
-**Rollback (user-requested only):** `git merge --abort`, `git rebase --abort`, `git cherry-pick --abort` restore the pre-conflict VCS state at any point before a commit is made. `git checkout -- <file>` discards a staged-but-uncommitted resolution for a single file. A hard `git reset --hard` is never offered as a recovery path; it is the user's own action if they choose it.
+Rollback (user-requested only): `git merge --abort`, `git rebase --abort`, `git cherry-pick --abort` restore the pre-conflict VCS state at any point before a commit is made. `git checkout -- <file>` discards a staged-but-uncommitted resolution for a single file. A hard `git reset --hard` is never offered as a recovery path; it is the user's own action if they choose it.
 
 ## Output
 

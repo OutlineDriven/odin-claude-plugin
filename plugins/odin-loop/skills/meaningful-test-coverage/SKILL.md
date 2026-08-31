@@ -17,12 +17,12 @@ description: 'Use when a test surface needs coverage raised to a configured targ
 
 ## Inputs
 
-- **Test surface** (required): the module, package, or path whose coverage is being raised.
-- **Coverage target** (required): the percentage or count that defines success, expressed as a metric: line, branch, or function coverage. Name the metric explicitly.
-- **Coverage tool** (required): the tool that measures the declared metric (for example, `pytest --cov`, `jest --coverage`, `cargo tarpaulin`, `go test -cover`). Named before work begins.
-- **Mutation tool and kill threshold** (required, or waiver): the tool that generates mutants and the kill-rate percentage that defines meaningful coverage (for example, `cargo-mutants`, `mutmut`, `Stryker`). If the user explicitly waives mutation testing, the waiver downgrades to a documented assertion-review checklist that the user signs off on.
-- **Test budget** (required): the maximum effort or time allowed, declared before work begins.
-- **Scope** (required): the files that may be edited, frozen before mutation.
+- Test surface (required): the module, package, or path whose coverage is being raised.
+- Coverage target (required): the percentage or count that defines success, expressed as a metric: line, branch, or function coverage. Name the metric explicitly.
+- Coverage tool (required): the tool that measures the declared metric (for example, `pytest --cov`, `jest --coverage`, `cargo tarpaulin`, `go test -cover`). Named before work begins.
+- Mutation tool and kill threshold (required, or waiver): the tool that generates mutants and the kill-rate percentage that defines meaningful coverage (for example, `cargo-mutants`, `mutmut`, `Stryker`). If the user explicitly waives mutation testing, the waiver downgrades to a documented assertion-review checklist that the user signs off on.
+- Test budget (required): the maximum effort or time allowed, declared before work begins.
+- Scope (required): the files that may be edited, frozen before mutation.
 
 ## Procedure
 
@@ -35,11 +35,11 @@ description: 'Use when a test surface needs coverage raised to a configured targ
 
 ## Failure and recovery
 
-- **Blocked:** the coverage tool or mutation tool is unavailable and no waiver was declared. Terminal `blocked`; name the missing tool. If the scope cannot be covered inside the bound, name the blocking file or dependency. Do not widen scope.
-- **Stalled:** the coverage gap cannot be closed inside the budget, or mutations survive and the assertions cannot be revised to kill them. Terminal `stalled`; report the coverage reached, the mutation kill rate, and the gap.
-- **Exhausted:** the budget is consumed before both gates pass. Terminal `exhausted`; report the coverage reached and the gap. Do not claim success.
-- **Tests pass but mutations survive:** the coverage is not meaningful. Revise the assertions to guard the mutated behavior, or classify as `stalled` if the gap cannot be closed inside the budget.
-- **Justified exclusion:** a target path is excluded for a stated reason (generated code, third-party, unreachable). Record the exclusion with its reason; do not count it against the target.
+- Blocked: the coverage tool or mutation tool is unavailable and no waiver was declared. Terminal `blocked`; name the missing tool. If the scope cannot be covered inside the bound, name the blocking file or dependency. Do not widen scope.
+- Stalled: the coverage gap cannot be closed inside the budget, or mutations survive and the assertions cannot be revised to kill them. Terminal `stalled`; report the coverage reached, the mutation kill rate, and the gap.
+- Exhausted: the budget is consumed before both gates pass. Terminal `exhausted`; report the coverage reached and the gap. Do not claim success.
+- Tests pass but mutations survive: the coverage is not meaningful. Revise the assertions to guard the mutated behavior, or classify as `stalled` if the gap cannot be closed inside the budget.
+- Justified exclusion: a target path is excluded for a stated reason (generated code, third-party, unreachable). Record the exclusion with its reason; do not count it against the target.
 
 ## Output
 

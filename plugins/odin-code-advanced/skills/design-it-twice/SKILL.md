@@ -27,7 +27,7 @@ Use these terms exactly. Do not substitute "component," "service," "API," or "bo
 - **Module** — anything with an interface and an implementation: a function, class, package, crate, or tier-spanning slice.
 - **Interface** — everything a caller must know to use the module correctly: type signature, invariants, ordering constraints, error modes, required configuration, and performance characteristics.
 - **Implementation** — the body of code inside a module.
-- **Depth** — leverage at the interface: the amount of behaviour a caller can exercise per unit of interface they must learn. Deep = much behaviour behind a small interface; shallow = interface nearly as complex as implementation.
+- **Depth** — power at the interface: the amount of behaviour a caller can exercise per unit of interface they must learn. Deep = much behaviour behind a small interface; shallow = interface nearly as complex as implementation.
 - **Seam** — a place where behaviour can be altered without editing in that place. The location at which a module's interface lives; choosing where to put the seam is a design decision separate from the implementation.
 - **Adapter** — a concrete thing that satisfies an interface at a seam; describes role, not substance.
 - **Leverage** — what callers get from depth: more capability per unit of interface learned.
@@ -52,7 +52,7 @@ Seam discipline: one adapter means a hypothetical seam; two adapters mean a real
 
    Each design outputs: (a) the interface — types, methods, params, invariants, ordering, error modes, expressed in the codebase's language; (b) a usage example showing how callers use it; (c) what the implementation hides behind the seam; (d) dependency strategy and adapters; (e) trade-offs — where leverage is high, where it is thin. **Done when:** three or more designs are produced, each radically different and carrying all five output fields.
 
-3. **Present and compare.** Present the designs sequentially so the user can absorb each one, then compare them in prose. Contrast by depth (leverage at the interface), locality (where change concentrates), and seam placement. **Done when:** designs are presented sequentially and compared by depth, locality, and seam placement.
+3. **Present and compare.** Present the designs sequentially so the user can absorb each one, then compare them in prose. Contrast by depth (power at the interface), locality (where change concentrates), and seam placement. **Done when:** designs are presented sequentially and compared by depth, locality, and seam placement.
 
 4. **Recommend.** Give an opinionated recommendation that names the strongest design and explains why. If elements from different designs would combine well, propose a hybrid. Be decisive: deliver a strong read, not a menu. **Done when:** one recommendation names the strongest design or a hybrid with its reason.
 

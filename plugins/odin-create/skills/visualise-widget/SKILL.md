@@ -16,8 +16,8 @@ description: 'Use when a user requests a comparison table, data record, metric c
 
 ## Inputs
 
-- **Required:** Natural-language description of the comparison, data record, metric, process, or mockup to visualise.
-- **Optional:** Specific data values, labels, or layout preferences. When absent, the model generates representative placeholder content that matches the requested pattern.
+- Required: Natural-language description of the comparison, data record, metric, process, or mockup to visualise.
+- Optional: Specific data values, labels, or layout preferences. When absent, the model generates representative placeholder content that matches the requested pattern.
 
 ## Procedure
 
@@ -29,10 +29,10 @@ description: 'Use when a user requests a comparison table, data record, metric c
 6. Return the fragment inside a visualizer fence. No surrounding commentary, explanation, or alternative versions. Done when: fenced fragment is the sole output.
 
 ## Failure and recovery
-- **Unsupported pattern:** the user request does not map to any of the five patterns. Return a single sentence naming the supported patterns and ask the user to rephrase. Do not guess or generate a closest-match widget.
-- **Malformed HTML:** the generated fragment fails well-formedness validation. Regenerate once from the same pattern specification. If the second attempt still fails, return an error message naming the specific structural issue. Do not return partial or broken HTML.
-- **Scope violation:** the procedure would require writing a file, making a network call, invoking a tool, or modifying repository state. Stop immediately and return a refusal naming the violated authority boundary. No partial result.
-- **Non-converged:** after two regeneration attempts the result is blocked. Return the error; do not widen scope or substitute a different pattern.
+- Unsupported pattern: the user request does not map to any of the five patterns. Return a single sentence naming the supported patterns and ask the user to rephrase. Do not guess or generate a closest-match widget.
+- Malformed HTML: the generated fragment fails well-formedness validation. Regenerate once from the same pattern specification. If the second attempt still fails, return an error message naming the specific structural issue. Do not return partial or broken HTML.
+- Scope violation: the procedure would require writing a file, making a network call, invoking a tool, or modifying repository state. Stop immediately and return a refusal naming the violated authority boundary. No partial result.
+- Non-converged: after two regeneration attempts the result is blocked. Return the error; do not widen scope or substitute a different pattern.
 
 ## Output
 A visualizer fence containing one valid, self-contained HTML fragment that renders the requested widget pattern in a sandboxed iframe.

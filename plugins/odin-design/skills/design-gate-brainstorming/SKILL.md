@@ -26,10 +26,10 @@ description: 'Use when creative work is requested and no approved design exists,
 1. On any creative-work request with no approved design already in context, stop implementation and route. Confirm at the trust boundary that the request is creative work and that no approved design exists; if an approved design is present, do not route. Done when: the request is confirmed as creative work with no approved design, or the skill stands down because an approved design exists.
 
 2. Classify the request into exactly one path:
-   - **Idea**: the input is a raw idea or a repository to develop into a design; no change to existing work is named. Produce a saved design document.
-   - **Spike**: the question is exploratory or the design space is unknown. Build nothing durable; any code produced is labeled throwaway. Produce a recommendation only.
-   - **Bounded**: the change fits one component or a small, well-understood surface. Produce the design in chat: goal, constraints, key decisions, open questions.
-   - **Architectural**: the change crosses module boundaries, alters a contract, or has durable blast radius. Write a spec document to a local file under the project covering problem, constraints, design, alternatives considered, and risks.
+   - Idea: the input is a raw idea or a repository to develop into a design; no change to existing work is named. Produce a saved design document.
+   - Spike: the question is exploratory or the design space is unknown. Build nothing durable; any code produced is labeled throwaway. Produce a recommendation only.
+   - Bounded: the change fits one component or a small, well-understood surface. Produce the design in chat: goal, constraints, key decisions, open questions.
+   - Architectural: the change crosses module boundaries, alters a contract, or has durable blast radius. Write a spec document to a local file under the project covering problem, constraints, design, alternatives considered, and risks.
 
    Done when: exactly one path is chosen and named.
 
@@ -45,15 +45,15 @@ description: 'Use when creative work is requested and no approved design exists,
 
 ## Failure and recovery
 
-- **Missing idea or repository on the idea path**: stop and request the input; write no file.
-- **Redaction check finds a secret**: stop saving the unredacted draft, redact or request human removal, and re-run the check; never save a secret.
-- **Repository unreadable or a URL open fails**: record the gap, proceed with the available context, and mark the confidence tier down.
-- **Ambiguous path**: if the request does not clearly fit idea, spike, bounded, or architectural, ask the user to pick the path before proceeding; do not default silently.
-- **User rejects or requests changes**: record the rejection or change request, revise the design or recommendation, and re-ask; never begin implementation on a rejection.
-- **Spec self-review not clean**: keep revising; if the spec cannot reach a self-review-clean state, stop and report the blocking issue rather than handing off a dirty spec.
-- **Spec-reviewer subagent unavailable**: the architectural path proceeds on self-review alone; note the missing review in the handoff.
-- **Partial result**: no path produces a partial implementation. On the idea path, save only the completed sections, mark the incomplete sections explicitly, and never fabricate missing content. Spike code is throwaway and never committed as durable work.
-- **Rollback**: delete the written design document, builder profile, analytics records, or spec file to revert to the pre-skill state.
+- Missing idea or repository on the idea path: stop and request the input; write no file.
+- Redaction check finds a secret: stop saving the unredacted draft, redact or request human removal, and re-run the check; never save a secret.
+- Repository unreadable or a URL open fails: record the gap, proceed with the available context, and mark the confidence tier down.
+- Ambiguous path: if the request does not clearly fit idea, spike, bounded, or architectural, ask the user to pick the path before proceeding; do not default silently.
+- User rejects or requests changes: record the rejection or change request, revise the design or recommendation, and re-ask; never begin implementation on a rejection.
+- Spec self-review not clean: keep revising; if the spec cannot reach a self-review-clean state, stop and report the blocking issue rather than handing off a dirty spec.
+- Spec-reviewer subagent unavailable: the architectural path proceeds on self-review alone; note the missing review in the handoff.
+- Partial result: no path produces a partial implementation. On the idea path, save only the completed sections, mark the incomplete sections explicitly, and never fabricate missing content. Spike code is throwaway and never committed as durable work.
+- Rollback: delete the written design document, builder profile, analytics records, or spec file to revert to the pre-skill state.
 
 ## Output
 

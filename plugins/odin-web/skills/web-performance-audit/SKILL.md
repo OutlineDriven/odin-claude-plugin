@@ -16,9 +16,9 @@ description: 'Use when asked to audit, profile, or debug page load performance, 
 
 ## Inputs
 
-- **Target URL** (required): Page or application URL to audit. It must be reachable from the agent environment.
-- **Viewport and throttling** (optional): Device profile and network conditions. Defaults to mobile Moto G Power with slow 4G throttling.
-- **Focus area** (optional): Narrow the audit to a specific concern such as LCP, CLS, FID, bundle size, or accessibility. When omitted, all areas are audited.
+- Target URL (required): Page or application URL to audit. It must be reachable from the agent environment.
+- Viewport and throttling (optional): Device profile and network conditions. Defaults to mobile Moto G Power with slow 4G throttling.
+- Focus area (optional): Narrow the audit to a specific concern such as LCP, CLS, FID, bundle size, or accessibility. When omitted, all areas are audited.
 
 ## Procedure
 
@@ -32,11 +32,11 @@ description: 'Use when asked to audit, profile, or debug page load performance, 
 8. Assemble report. Compile the sections in the output format. Done when: report is assembled with all sections.
 
 ## Failure and recovery
-- **Target unreachable**: report the HTTP error or timeout. Do not retry with a different URL. Return partial report with the failure class.
-- **DevTools MCP unavailable**: report that Chrome DevTools MCP is not connected. Return partial report with the failure class. Do not substitute shell-based alternatives.
-- **Navigation timeout**: report the timeout. If at least one successful navigation completed, use available data. If zero navigations succeeded, return partial report with the failure class.
-- **Framework not detected**: record confidence as unknown. Continue the audit with generic recommendations. Do not invent a framework.
-- **Partial results**: if any audit step fails after step 1, include all successfully collected data in the report with a note on which steps failed and why. Never claim the done predicate holds when CWV metrics are absent.
+- Target unreachable: report the HTTP error or timeout. Do not retry with a different URL. Return partial report with the failure class.
+- DevTools MCP unavailable: report that Chrome DevTools MCP is not connected. Return partial report with the failure class. Do not substitute shell-based alternatives.
+- Navigation timeout: report the timeout. If at least one successful navigation completed, use available data. If zero navigations succeeded, return partial report with the failure class.
+- Framework not detected: record confidence as unknown. Continue the audit with generic recommendations. Do not invent a framework.
+- Partial results: if any audit step fails after step 1, include all successfully collected data in the report with a note on which steps failed and why. Never claim the done predicate holds when CWV metrics are absent.
 
 ## Output
 A structured performance audit report with sections in order: Summary (framework/bundler, overall grade, top three issues), Core Web Vitals (LCP/CLS/INP/FCP/TTFB with median, spread, pass/fail against Google thresholds), Network analysis (transfer size, request count, largest assets, render-blocking resources), Accessibility snapshot, JavaScript execution (long tasks, blocking time, third-party contribution), Prioritized issues (ranked with affected metric, estimated impact, recommendation), and Framework-specific guidance.

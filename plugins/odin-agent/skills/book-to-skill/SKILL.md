@@ -28,7 +28,7 @@ description: 'Use when the user names one book, course, paper, or source documen
 4. **Name it.** Kebab-case matching `^[a-z0-9]+(-[a-z0-9]+)*$`, at most 64 characters, identical to the directory name. Done when: the name matches the directory to be written to.
 5. **Write the frontmatter.** `description` at most 1024 characters, front-loaded, one trigger per genuinely distinct branch, phrased positively. Redirect rather than forbid: "for X, use skill Z" rather than "do not use for X". Done when: the `description` parses as single-quoted YAML and is within the limit.
 6. **Write the body in the shape its classification selects.** Include one attribution line naming title, author, and year. Paraphrase throughout; quote only a coined term or named law where the exact phrasing is the idea. The two shapes:
-   - **Procedure shape:**
+   - Procedure shape:
      ```
      # {Skill name}
      {One-paragraph attribution: title, author, year.}
@@ -40,7 +40,7 @@ description: 'Use when the user names one book, course, paper, or source documen
      ## Rules
      - {Constraint or guardrail}
      ```
-   - **Reference shape:**
+   - Reference shape:
      ```
      # {Skill name}
      {One-paragraph attribution: title, author, year.}

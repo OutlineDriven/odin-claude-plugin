@@ -123,7 +123,7 @@ Gate order is load-bearing:
 
 1. Consolidate.
 2. Compute blocked ratio.
-3. If blocked, trigger `ask` before checking “zero remaining”.
+3. If blocked, trigger `ask` before checking "zero remaining".
 4. Only after the blocked gate is resolved may the loop exit as clean.
 
 `ask` escalation options:

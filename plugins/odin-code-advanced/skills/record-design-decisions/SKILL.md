@@ -16,16 +16,16 @@ description: 'Use when codebase terminology or a durable technical decision chan
 
 ## Refusals
 
-- **No recordable content**: if no terminology change or qualifying decision is present, do not write anything. Stop.
-- **Invalid target**: if the target path is outside the repository root, or the ADR directory does not exist and cannot be created, stop rather than write.
-- **Untrusted input in records**: rejected. Validate each write at its trust boundary.
+- No recordable content: if no terminology change or qualifying decision is present, do not write anything. Stop.
+- Invalid target: if the target path is outside the repository root, or the ADR directory does not exist and cannot be created, stop rather than write.
+- Untrusted input in records: rejected. Validate each write at its trust boundary.
 
 ## Inputs
 
-- **Changed term or decision** (required): the term or decision that triggered invocation.
-- **Resolution context** (required): what was agreed, chosen, or ruled out.
-- **Rejected alternatives** (optional, but required for a qualifying decision): alternatives considered and why they were rejected.
-- **ADR triple** (required for a qualifying decision): three affirmative answers confirming that the decision is hard to reverse, surprising without context, and carries a real trade-off.
+- Changed term or decision (required): the term or decision that triggered invocation.
+- Resolution context (required): what was agreed, chosen, or ruled out.
+- Rejected alternatives (optional, but required for a qualifying decision): alternatives considered and why they were rejected.
+- ADR triple (required for a qualifying decision): three affirmative answers confirming that the decision is hard to reverse, surprising without context, and carries a real trade-off.
 
 ## Procedure
 

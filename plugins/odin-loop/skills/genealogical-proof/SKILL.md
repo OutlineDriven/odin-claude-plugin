@@ -17,9 +17,9 @@ description: 'Use when a genealogical identity or relationship needs correlation
 
 ## Inputs
 
-- **Identity or relationship proposition** (required): the specific genealogical question to prove or disprove (for example, "John Smith born 1820 in Yorkshire is the son of William Smith and Mary Jones").
-- **Available source evidence** (required): the records, documents, and transcripts provided for analysis.
-- **Constraints** (required): date range bounding the search, repository bounds naming which archives or databases are in scope.
+- Identity or relationship proposition (required): the specific genealogical question to prove or disprove (for example, "John Smith born 1820 in Yorkshire is the son of William Smith and Mary Jones").
+- Available source evidence (required): the records, documents, and transcripts provided for analysis.
+- Constraints (required): date range bounding the search, repository bounds naming which archives or databases are in scope.
 
 ## Procedure
 
@@ -28,17 +28,17 @@ description: 'Use when a genealogical identity or relationship needs correlation
 3. Resolve conflicting evidence. Where sources disagree on a marker, weigh the conflict by source reliability: a primary record close to the event outweighs a derivative compiled decades later. Identify merging errors: records for two different people combined into one identity, or one person split into two. State the resolution for each conflict and the evidence that supports it. If a conflict cannot be resolved, name it as unresolved. Done when: every conflict is resolved or explicitly named as unresolved.
 4. Perform negative-search proof. For each identity marker that the proposition depends on, confirm that expected records where the marker should appear have been searched and the marker is absent where it would contradict the proposition. Record which repositories were searched, which record types were checked, and what was found or not found. A negative search that was not performed is a gap, not proof. Done when: negative-search coverage is recorded for every load-bearing marker.
 5. Classify the proposition against defined evidentiary thresholds:
-   - **Proved**: all markers correlate, conflicts are resolved, negative-search confirms, and the evidence is sufficient to warrant no reasonable alternative.
-   - **Disproved**: the evidence directly contradicts the proposition with a primary source.
-   - **Likely**: the weight of evidence supports the proposition but one element remains unresolved or the negative search is incomplete.
-   - **Possible**: the proposition is consistent with the evidence but the evidence is thin or largely derivative.
+   - Proved: all markers correlate, conflicts are resolved, negative-search confirms, and the evidence is sufficient to warrant no reasonable alternative.
+   - Disproved: the evidence directly contradicts the proposition with a primary source.
+   - Likely: the weight of evidence supports the proposition but one element remains unresolved or the negative search is incomplete.
+   - Possible: the proposition is consistent with the evidence but the evidence is thin or largely derivative.
    Done when: the classification is assigned with its evidentiary justification.
 
 ## Failure and recovery
 
-- **Unresolved conflicts:** conflicting evidence prevents a clear resolution. Terminal `stalled`; name the conflict and the sources involved. Do not force a classification.
-- **Blocked access:** a required repository is inaccessible. Terminal `blocked`; name the repository and the marker it would confirm or refute.
-- **Insufficient evidence:** the available sources do not support any classification above `possible`. Terminal `stalled`; report what evidence is missing and which classification it would enable.
+- Unresolved conflicts: conflicting evidence prevents a clear resolution. Terminal `stalled`; name the conflict and the sources involved. Do not force a classification.
+- Blocked access: a required repository is inaccessible. Terminal `blocked`; name the repository and the marker it would confirm or refute.
+- Insufficient evidence: the available sources do not support any classification above `possible`. Terminal `stalled`; report what evidence is missing and which classification it would enable.
 
 ## Output
 

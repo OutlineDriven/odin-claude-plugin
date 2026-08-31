@@ -37,7 +37,7 @@ Direction precedes tokens; tokens precede code. The picked direction is the cont
 
 6. **Implement against the runtime.** Apply the cross-surface invariants regardless of runtime. Audit the result against the anti-slop charter. **Done when:** implementation references the committed tokens and the audit flags no Side A or Side B tell and no invariant violation.
 
-**Cross-surface invariants (apply on every runtime):**
+Cross-surface invariants (apply on every runtime):
 
 - Color as input, never as default: custom OKLCH palette derived from the picked direction; never the default Tailwind, Material, or Bootstrap ramp.
 - Spacing scale is 4/8/12/16/24/32/48/64. Pick a subset matching the density target; commit and stick. A new value mid-build is a smell.
@@ -45,7 +45,7 @@ Direction precedes tokens; tokens precede code. The picked direction is the cont
 - Motion is budgeted in milliseconds. One easing curve per surface. `transition: all` is forbidden. Name the properties (`transition: opacity 120ms ease, transform 120ms ease`) so layout and paint do not animate together.
 - Semantic structure precedes class names: `<nav>` / `<main>` / `<article>` first; utility classes second. Class soup over weak structure is slop.
 
-**Anti-slop charter (audit both sides):**
+Anti-slop charter (audit both sides):
 
 Side A: slop tells (the AI-generic look):
 
@@ -70,11 +70,11 @@ Side B: overkill compensation (slop's louder cousin):
 - Decorative noise compensating for a thin idea: when the surface earns its weight, restraint amplifies it.
 
 ## Failure and recovery
-- **Converged directions:** if two or more directions read alike, do not pick from a thin field. Re-dispatch with sharpened, opposing constraints until contrast is real.
-- **Missing runtime:** if the runtime is not identified before step 5, stop and ask; do not implement against an assumed runtime.
-- **Token drift mid-build:** a new spacing value, third type family, or hardcoded color appearing mid-build is a smell. Revert to the committed token set; do not patch around it.
-- **Audit failure:** if the result triggers any Side A or Side B tell, or violates a cross-surface invariant, the done predicate does not hold. Fix the tell at its source; do not compensate with more decoration.
-- **Partial result:** never present an unaudited or half-implemented direction as done. State which steps are complete and which remain.
+- Converged directions: if two or more directions read alike, do not pick from a thin field. Re-dispatch with sharpened, opposing constraints until contrast is real.
+- Missing runtime: if the runtime is not identified before step 5, stop and ask; do not implement against an assumed runtime.
+- Token drift mid-build: a new spacing value, third type family, or hardcoded color appearing mid-build is a smell. Revert to the committed token set; do not patch around it.
+- Audit failure: if the result triggers any Side A or Side B tell, or violates a cross-surface invariant, the done predicate does not hold. Fix the tell at its source; do not compensate with more decoration.
+- Partial result: never present an unaudited or half-implemented direction as done. State which steps are complete and which remain.
 
 ## Output
 One picked direction plus a committed token set (color, type, space, radius, shadow, motion) in the runtime's native token system and implementation artifacts that reference those tokens, ordered frame → direction → tokens → implementation, passing the anti-slop charter and cross-surface invariants.

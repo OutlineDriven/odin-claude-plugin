@@ -13,22 +13,22 @@ CWE anchors are optional cross-walk metadata for tools that key on them (Semgrep
 | Debug output | 11 | CWE-489 Active Debug Code; CWE-215 Sensitive Info in Debugging Code |
 | Placeholder or unimplemented body | 19 | CWE-1071 Empty Code Block; CWE-546 Suspicious Comment (TODO-marked only) |
 | Swallowed failure | 14 | CWE-1069 Empty Exception Block; CWE-390 Error Condition Without Action; CWE-391 Unchecked Error Condition; CWE-396 Catch of Generic Exception |
-| Crash-on-failure shortcut | 5 | — (no CWE anchor; this category is ours) |
-| Stub return value | 6 | — |
+| Crash-on-failure shortcut | 5 | - (no CWE anchor; this category is ours) |
+| Stub return value | 6 | - |
 | Hardcoded credential | 7 | CWE-798 Hard-coded Credentials; CWE-259 Password; CWE-321 Cryptographic Key |
-| Placeholder text | 1 | — |
-| Whitespace artifact | 2 | — |
-| Mutable global state | 2 | — |
-| Missing safety justification | 1 | — |
-| Suppression escape | 1 | — |
-| Privilege and supply-chain hazard | 2 | — |
+| Placeholder text | 1 | - |
+| Whitespace artifact | 2 | - |
+| Mutable global state | 2 | - |
+| Missing safety justification | 1 | - |
+| Suppression escape | 1 | - |
+| Privilege and supply-chain hazard | 2 | - |
 | Dead or unreachable code | 2 | CWE-561 Dead Code (parent CWE-1164 Irrelevant Code) |
-| Commented-out code | 1 | — (CWE-546 covers TODO-style comments, not commented-out code) |
-| Comment bloat | 4 | — |
-| Over-engineering | 1 | — |
-| Unsubstantiated capability claim | 1 | — |
-| Infrastructure without implementation | 1 | — |
-| Residual: external tool signals | 6 | — |
+| Commented-out code | 1 | - (CWE-546 covers TODO-style comments, not commented-out code) |
+| Comment bloat | 4 | - |
+| Over-engineering | 1 | - |
+| Unsubstantiated capability claim | 1 | - |
+| Infrastructure without implementation | 1 | - |
+| Residual: external tool signals | 6 | - |
 
 Supporting sections: [Global exclusions](#global-exclusions) · [Certainty rules](#certainty-rules) · [Slop categories](#slop-categories) · [Autofix strategy semantics](#autofix-strategy-semantics) · [Report shape](#report-shape).
 

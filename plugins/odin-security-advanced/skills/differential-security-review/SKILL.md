@@ -16,9 +16,9 @@ description: 'Use when given a PR, commit, diff, or baseline and asked for secur
 
 ## Inputs
 
-- **Target** (required): PR URL, commit SHA, or diff path.
-- **Baseline** (optional): `--baseline <ref>` comparison reference; defaults to the merge base or parent commit.
-- **Depth** (optional): an explicit quick-triage request from the user narrows scope and the user accepts the residual risk; otherwise full depth applies.
+- Target (required): PR URL, commit SHA, or diff path.
+- Baseline (optional): `--baseline <ref>` comparison reference; defaults to the merge base or parent commit.
+- Depth (optional): an explicit quick-triage request from the user narrows scope and the user accepts the residual risk; otherwise full depth applies.
 
 ## Procedure
 
@@ -107,13 +107,13 @@ These require adversarial analysis regardless of requested depth.
 - The user explicitly requests a quick summary only and accepts the risk — then use the Quick Reference (size strategy, risk triggers, red flags) and skip the detailed phases, but still apply the red-flag escalations.
 
 ## Failure and recovery
-- **Missing baseline or unreadable diff**: stop; report the exact target/baseline that could not be resolved. Do not invent a baseline.
-- **No Git history available**: cannot complete regression or historical-context analysis; record this as a limitation and lower confidence. Do not fabricate blame output.
-- **Scope exceeds declared depth**: analyze the HIGH RISK subset at full depth, surface-scan MEDIUM, and exclude LOW; record the coverage percentage and confidence. Never claim full analysis when scope-limited.
-- **Delegated adversarial phase does not converge**: keep the findings that reached concrete impact, mark the rest as non-converged with the blocker, and do not inflate severity.
-- **Evidence-less finding**: discard it. Every finding must cite specific line numbers and commits; vague warnings are not findings.
-- **Partial-result rule**: the report always states what was analyzed, what was excluded, and the confidence level. The done predicate holds only for the in-scope subset actually analyzed.
-- **Non-mutation rule**: repository code and Git history are read only; the only artifact is the report file. No rollback is needed beyond discarding the report.
+- Missing baseline or unreadable diff: stop; report the exact target/baseline that could not be resolved. Do not invent a baseline.
+- No Git history available: cannot complete regression or historical-context analysis; record this as a limitation and lower confidence. Do not fabricate blame output.
+- Scope exceeds declared depth: analyze the HIGH RISK subset at full depth, surface-scan MEDIUM, and exclude LOW; record the coverage percentage and confidence. Never claim full analysis when scope-limited.
+- Delegated adversarial phase does not converge: keep the findings that reached concrete impact, mark the rest as non-converged with the blocker, and do not inflate severity.
+- Evidence-less finding: discard it. Every finding must cite specific line numbers and commits; vague warnings are not findings.
+- Partial-result rule: the report always states what was analyzed, what was excluded, and the confidence level. The done predicate holds only for the in-scope subset actually analyzed.
+- Non-mutation rule: repository code and Git history are read only; the only artifact is the report file. No rollback is needed beyond discarding the report.
 
 ## Output
 A markdown report file with sections in this order: Executive Summary (severity distribution, overall risk, recommendation, key metrics), What Changed (commit range, per-file table), Critical Findings (per HIGH/CRITICAL issue with file:line, blast radius, historical context, attack scenario, fix), Test Coverage Analysis, Blast Radius Analysis, Historical Context, Recommendations (immediate / before production / technical debt), Analysis Methodology (strategy, coverage, limitations, confidence), Appendices, ordered intake → baseline → test-coverage → blast-radius → deep-context → adversarial → report, with status indicators ✅ ⚠️ ❌ and severity indicators 🔴 🟠 🟡 🟢.

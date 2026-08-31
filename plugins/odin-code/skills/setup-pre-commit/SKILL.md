@@ -39,12 +39,12 @@ description: 'Use when installing or repairing one repository-local pre-commit h
 
 ## Failure and recovery
 
-- **No repository-native gates:** stop before installation and report which format, lint, type, or test command is missing.
-- **Competing hook managers:** do not guess. Report every firing path and the smallest clean cutover; removal requires the user's approval when it changes an observable workflow.
-- **Install failure:** restore the manifest, lockfile, hook config, and `.git/hooks/pre-commit` from the captured baseline.
-- **Probe does not trip:** the hook is not load-bearing. Fix its file matching or command and repeat; a green normal run alone does not satisfy done.
-- **Probe residue:** restore the scratch path and confirm the worktree matches the pre-probe baseline before returning.
-- **Probe failure is hook-wiring, not check-content:** when the probe fails, distinguish between hook-wiring failures (the hook did not fire, fired the wrong command, or missed the file) and check-content failures (the check itself reported a real issue). Fix hook-wiring failures here; report check-content failures to the user without modifying check logic.
+- No repository-native gates: stop before installation and report which format, lint, type, or test command is missing.
+- Competing hook managers: do not guess. Report every firing path and the smallest clean cutover; removal requires the user's approval when it changes an observable workflow.
+- Install failure: restore the manifest, lockfile, hook config, and `.git/hooks/pre-commit` from the captured baseline.
+- Probe does not trip: the hook is not load-bearing. Fix its file matching or command and repeat; a green normal run alone does not satisfy done.
+- Probe residue: restore the scratch path and confirm the worktree matches the pre-probe baseline before returning.
+- Probe failure is hook-wiring, not check-content: when the probe fails, distinguish between hook-wiring failures (the hook did not fire, fired the wrong command, or missed the file) and check-content failures (the check itself reported a real issue). Fix hook-wiring failures here; report check-content failures to the user without modifying check logic.
 
 ## Output
 

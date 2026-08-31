@@ -35,8 +35,8 @@ OCaml's strict surface lives in dune flags, ocamlformat config, and the `.mli`-f
 
 Flag breakdown:
 - `-strict-sequence` — sequenced expressions must have type `unit`.
-- `-strict-formats` — reject loose printf formats.
-- `-short-paths` — error messages use shortest valid type path.
+- `-strict-formats` : reject loose printf formats.
+- `-short-paths` : error messages use shortest valid type path.
 - `-principal` — force principal type checking; rejects code that depends on type-inference accidents.
 - `-w +a` — enable all warnings, then disable a curated noise set; 4 (fragile match), 29 (line break in string literal), 30 (duplicated definitions in different modules) are commonly silenced for pragmatic reasons.
 

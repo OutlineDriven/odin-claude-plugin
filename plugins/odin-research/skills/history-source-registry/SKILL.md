@@ -16,12 +16,12 @@ description: 'Use when a coding-agent session store is added or its format drift
 
 ## Inputs
 
-- **Session store path** (required): filesystem path to the session store directory or file to register or re-verify.
-- **Store identifier** (required): unique slug for the store in the registry.
-- **Existing registry path** (required): path to the registry JSON file.
-- **Documentation root** (required): path to the directory holding per-source documentation pages.
-- **Fixture root** (required): path to the directory holding credential-free conformance fixtures.
-- **Test file path** (required): path to the loader test file.
+- Session store path (required): filesystem path to the session store directory or file to register or re-verify.
+- Store identifier (required): unique slug for the store in the registry.
+- Existing registry path (required): path to the registry JSON file.
+- Documentation root (required): path to the directory holding per-source documentation pages.
+- Fixture root (required): path to the directory holding credential-free conformance fixtures.
+- Test file path (required): path to the loader test file.
 
 ## Procedure
 

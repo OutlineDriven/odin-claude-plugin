@@ -35,12 +35,12 @@ description: 'Use when a concept needs practising: the user asks for an exercise
 10. Record every attempt in `PROGRESS.md` with this line shape: `- <YYYY-MM-DD> · <move>[/<rung>] · <cleared|missed>, hints <none|1|1-2|1-3>[, <misconception>]`. A concept is **cleared** when its `practice/independent` line reads `cleared, hints none`. Missed concepts are not cleared. Use the words **rung** and **cleared** and no synonyms. Done when: every attempt is recorded in `PROGRESS.md` with the correct line shape.
 
 ## Failure and recovery
-- **No `PROGRESS.md` and no `CORPUS.md`**: say once that nothing is being recorded, ask which concept to work on, and run in-session. Do not create files for a `probe` that needs `CORPUS.md`.
-- **`probe` without `CORPUS.md`**: blocked. Report the missing file; do not invent gaps or rank an empty list.
-- **`recall` with no cleared concepts**: nothing is due. Report that and stop; do not fabricate a due set.
-- **Rung not cleared**: do not advance. Record the miss with its misconception; do not rewrite `PROGRESS.md` (append only).
-- **Hints used on an independent rung**: that concept is not cleared; record `hints 1` through `1-3` as used.
-- **Rollback**: `PROGRESS.md` is append-only; recovery is deleting the lines this run appended. Never swallow a miss or mark cleared when hints were used.
+- No `PROGRESS.md` and no `CORPUS.md`: say once that nothing is being recorded, ask which concept to work on, and run in-session. Do not create files for a `probe` that needs `CORPUS.md`.
+- `probe` without `CORPUS.md`: blocked. Report the missing file; do not invent gaps or rank an empty list.
+- `recall` with no cleared concepts: nothing is due. Report that and stop; do not fabricate a due set.
+- Rung not cleared: do not advance. Record the miss with its misconception; do not rewrite `PROGRESS.md` (append only).
+- Hints used on an independent rung: that concept is not cleared; record `hints 1` through `1-3` as used.
+- Rollback: `PROGRESS.md` is append-only; recovery is deleting the lines this run appended. Never swallow a miss or mark cleared when hints were used.
 
 ## Output
 One completed move plus one appended `PROGRESS.md` line per attempt (or in-session only when no files exist), with the rung outcome for `practice`, graded items for `quiz`, due concepts retrieved for `recall`, or a ranked gap list for `probe`.

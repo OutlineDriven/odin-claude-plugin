@@ -217,7 +217,7 @@ Notes:
 - `git submit` **force-updates** existing remote feature branches by design.
   That is expected for stacks under review; it is **not** allowed for main.
 - If submit is denied (protection on the feature branch), fall back to stock
-  `git push -u origin feature/<name>` — still no force flags.
+  `git push -u origin feature/<name>`, still no force flags.
 
 ### Path M — Land main (gated only; stock push, never submit)
 
@@ -251,7 +251,7 @@ If local `main` is missing: `git switch -c main @` then `git push -u origin main
 Divergent remote push reject: report left-right counts, re-sync / `git move`,
 plain push again. Never force.
 
-### Post-land / post-merge hygiene (“gc alike”)
+### Post-land / post-merge hygiene ("gc alike")
 
 Always after a successful land **or** after a PR merge reaches remote main:
 

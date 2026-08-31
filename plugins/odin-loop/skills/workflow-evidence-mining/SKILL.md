@@ -17,8 +17,8 @@ description: 'Use when authorized workflow history may contain a repeated proces
 
 ## Inputs
 
-- **Authorized corpus** (required): the workflow history to mine, bounded to sources the user is authorized to read.
-- **Pass cap** (required): the maximum number of extraction-replay cycles before declaring insufficient evidence.
+- Authorized corpus (required): the workflow history to mine, bounded to sources the user is authorized to read.
+- Pass cap (required): the maximum number of extraction-replay cycles before declaring insufficient evidence.
 
 ## Procedure
 
@@ -30,9 +30,9 @@ description: 'Use when authorized workflow history may contain a repeated proces
 
 ## Failure and recovery
 
-- **Contradicted:** the workflow is contradicted by corpus evidence that cannot be reconciled. Stop. Terminal class: `contradicted`.
-- **Insufficient evidence:** the authorized history does not contain three independent high-confidence success instances of any candidate. Stop. Terminal class: `insufficient`.
-- **Blocked:** the pass cap is reached before a surviving workflow is confirmed. Stop. Terminal class: `blocked`.
+- Contradicted: the workflow is contradicted by corpus evidence that cannot be reconciled. Stop. Terminal class: `contradicted`.
+- Insufficient evidence: the authorized history does not contain three independent high-confidence success instances of any candidate. Stop. Terminal class: `insufficient`.
+- Blocked: the pass cap is reached before a surviving workflow is confirmed. Stop. Terminal class: `blocked`.
 
 ## Output
 

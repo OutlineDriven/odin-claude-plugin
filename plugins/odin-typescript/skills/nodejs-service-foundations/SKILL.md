@@ -16,11 +16,11 @@ description: 'Use when asked to set up or harden Node.js service foundations: en
 
 ## Inputs
 
-- **Project root** (required): the directory containing or to receive `package.json`.
-- **Environment variables** (required): list of env variable names and types, and whether each is required or optional with a default.
-- **Secret field names** (required): list of env keys whose values must be redacted in log output.
-- **Error catalogue** (required): list of `{ code, message, httpStatus }` tuples for the service's domain errors.
-- **Logger dependency** (required): the structured logger the service uses or will use (e.g., pino). Stated as an input, not discovered mid-procedure.
+- Project root (required): the directory containing or to receive `package.json`.
+- Environment variables (required): list of env variable names and types, and whether each is required or optional with a default.
+- Secret field names (required): list of env keys whose values must be redacted in log output.
+- Error catalogue (required): list of `{ code, message, httpStatus }` tuples for the service's domain errors.
+- Logger dependency (required): the structured logger the service uses or will use (e.g., pino). Stated as an input, not discovered mid-procedure.
 
 ## Procedure
 

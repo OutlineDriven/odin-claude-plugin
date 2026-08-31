@@ -16,8 +16,8 @@ description: 'Use when a user asks what was completed in a named date or commit 
 
 ## Inputs
 
-- **Range identifier** (required): a date range, commit range, branch name, or label the user specifies.
-- **Session git root** (derived): `git -C <session_cwd> rev-parse --show-toplevel` to locate the repo root. Required; abort if git is not inside a repository.
+- Range identifier (required): a date range, commit range, branch name, or label the user specifies.
+- Session git root (derived): `git -C <session_cwd> rev-parse --show-toplevel` to locate the repo root. Required; abort if git is not inside a repository.
 - All other inputs are derived from the range and repo root.
 
 ## Procedure

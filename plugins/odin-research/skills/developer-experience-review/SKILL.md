@@ -31,14 +31,14 @@ description: 'Use when dogfooding a developer-facing product or workflow to prod
 4. Repeat steps 2-3 for each benchmark product, using the same first-meaningful-output definition, and record each measured time. **Done when:** every benchmark is dogfooded with its time recorded, or dropped with a reason.
 
 5. Score the target on eight dimensions, each 1-5, with one sentence of measured evidence per score:
-   - Time to hello world — the measured value from step 3, ranked against benchmarks when present.
-   - Documentation clarity — whether the first path was completable from docs alone without guessing.
-   - Error message quality — whether failures named the cause and the next action.
-   - Onboarding friction — count of unexplained steps, manual config, or external prerequisites.
-   - Tooling and CLI ergonomics — command discoverability, output readability, and sensible defaults.
-   - API or SDK design — whether the first call was obvious from the interface, not from prose.
-   - Feedback loop speed — time from a change to observing its effect during dogfooding.
-   - Developer support surface — whether help, examples, and status were reachable without leaving the flow.
+   - Time to hello world: the measured value from step 3, ranked against benchmarks when present.
+   - Documentation clarity: whether the first path was completable from docs alone without guessing.
+   - Error message quality: whether failures named the cause and the next action.
+   - Onboarding friction: count of unexplained steps, manual config, or external prerequisites.
+   - Tooling and CLI ergonomics: command discoverability, output readability, and sensible defaults.
+   - API or SDK design: whether the first call was obvious from the interface, not from prose.
+   - Feedback loop speed: time from a change to observing its effect during dogfooding.
+   - Developer support surface: whether help, examples, and status were reachable without leaving the flow.
 
    **Done when:** all eight dimensions carry a 1-5 score with one measured-evidence sentence.
 

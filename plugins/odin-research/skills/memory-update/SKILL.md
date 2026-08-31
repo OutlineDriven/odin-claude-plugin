@@ -33,11 +33,11 @@ A memory type must be `feedback`, `project`, `user`, or `reference`. Its filenam
 
 ## Failure and recovery
 
-- **Resolution or scan failure**: make no changes and return `blocked` with the failing key or command and its diagnostic.
-- **Missing or contradictory evidence**: omit that proposal; if no grounded proposal remains, make no changes and return `blocked: no evidence-backed memory candidate`.
-- **Invalid draft or unsafe target**: make no changes for that proposal and return `blocked` with the violated constraint; do not widen the target or repair content by invention.
-- **Missing confirmation or unresolved duplicate**: leave that proposal unwritten and return `blocked: confirmation required` or `blocked: duplicate choice required`.
-- **Partial write or failed read-back**: stop further writes, restore each file changed by this invocation to its captured pre-write content, remove only a newly created target from this invocation, and return `blocked` naming the failed file and whether rollback succeeded. Never report done while rollback or verification is incomplete.
+- Resolution or scan failure: make no changes and return `blocked` with the failing key or command and its diagnostic.
+- Missing or contradictory evidence: omit that proposal; if no grounded proposal remains, make no changes and return `blocked: no evidence-backed memory candidate`.
+- Invalid draft or unsafe target: make no changes for that proposal and return `blocked` with the violated constraint; do not widen the target or repair content by invention.
+- Missing confirmation or unresolved duplicate: leave that proposal unwritten and return `blocked: confirmation required` or `blocked: duplicate choice required`.
+- Partial write or failed read-back: stop further writes, restore each file changed by this invocation to its captured pre-write content, remove only a newly created target from this invocation, and return `blocked` naming the failed file and whether rollback succeeded. Never report done while rollback or verification is incomplete.
 
 ## Output
 

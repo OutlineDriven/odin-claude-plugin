@@ -42,12 +42,12 @@ Use `.handoff/continuity/` for `notes.md`, `graph.md`, and `death-point.md`. Use
 
 ## Failure
 
-- **Unusable prior state:** preserve it, name `corrupt`, `stale`, `incomplete`, `completed`, or `wrong project`, and start fresh.
-- **Unverified ignore rule:** stop before writing continuity state and name the failed ignore check.
-- **Ambiguous or absent handoff source:** stop packaging and request an exact handle; keep maintaining current continuity state.
-- **Excluded source:** name the matched project or path and emit no brief.
-- **Budget failure:** emit no complete brief until its UTF-8 byte count is at most 6,144 and every required section is nonempty.
-- **Partial write:** preserve every complete artifact and report the failed file. A complete minimal `death-point.md` is an emergency recovery marker: the next session starts fresh from its available goal and timestamp, then rebuilds notes and graph from current evidence. Any other partial set is not a usable resume point.
+- Unusable prior state: preserve it, name `corrupt`, `stale`, `incomplete`, `completed`, or `wrong project`, and start fresh.
+- Unverified ignore rule: stop before writing continuity state and name the failed ignore check.
+- Ambiguous or absent handoff source: stop packaging and request an exact handle; keep maintaining current continuity state.
+- Excluded source: name the matched project or path and emit no brief.
+- Budget failure: emit no complete brief until its UTF-8 byte count is at most 6,144 and every required section is nonempty.
+- Partial write: preserve every complete artifact and report the failed file. A complete minimal `death-point.md` is an emergency recovery marker: the next session starts fresh from its available goal and timestamp, then rebuilds notes and graph from current evidence. Any other partial set is not a usable resume point.
 
 ## Output
 

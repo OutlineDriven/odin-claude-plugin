@@ -16,9 +16,9 @@ description: 'Use when departing knowledge must enter project topic files throug
 
 ## Inputs
 
-- **Required**: A human subject (departing maintainer or domain expert), a location for topic-file entries (project memory/knowledge file or directory), and the interview's topic scope.
-- **Optional**: Existing topic file(s) to append to or extend.
-- **Required**: The interview must be a live conversation; the model facilitates and captures synthesized knowledge in real time.
+- Required: A human subject (departing maintainer or domain expert), a location for topic-file entries (project memory/knowledge file or directory), and the interview's topic scope.
+- Optional: Existing topic file(s) to append to or extend.
+- Required: The interview must be a live conversation; the model facilitates and captures synthesized knowledge in real time.
 
 ## Procedure
 
@@ -45,11 +45,11 @@ description: 'Use when departing knowledge must enter project topic files throug
 
 5. **Synthesize into topic-file entries.**
    Write each captured topic as a structured entry with these fields:
-   - **Topic**: the subject name
-   - **Why**: the decision rationale or context (not implementation)
-   - **Alternatives considered**: what was rejected and why, or OPEN if unknown
-   - **Open gaps**: any unresolved questions, explicitly marked OPEN
-   - **Source**: `interview`
+   - Topic: the subject name
+   - Why: the decision rationale or context (not implementation)
+   - Alternatives considered: what was rejected and why, or OPEN if unknown
+   - Open gaps: any unresolved questions, explicitly marked OPEN
+   - Source: `interview`
    Each entry must be self-contained: a reader 12 months from now must understand the decision without access to the interview subject. Done when: every captured topic is a structured entry with all fields.
 
 6. **Apply the privacy filter.**
@@ -66,11 +66,11 @@ description: 'Use when departing knowledge must enter project topic files throug
    If the interview ends before all topics are closed, record which topics remain open. Do not claim a gap is closed when it was not answered. Do not discard partial results. Done when: open topics are recorded and partial results are retained.
 
 ## Failure and recovery
-- **Gaps remain open**: explicitly mark each with OPEN; do not fabricate rationale.
-- **No topic file or writable location**: stop and report; do not write to ad-hoc locations.
-- **Privacy filter breach**: discard the breached content and re-synthesize without personal details.
-- **Interview ends mid-session**: retain synthesized entries written so far; surface open topics; do not claim completeness.
-- **No rollback needed**: entries are additive; deleting a newly written entry is the rollback action.
+- Gaps remain open: explicitly mark each with OPEN; do not fabricate rationale.
+- No topic file or writable location: stop and report; do not write to ad-hoc locations.
+- Privacy filter breach: discard the breached content and re-synthesize without personal details.
+- Interview ends mid-session: retain synthesized entries written so far; surface open topics; do not claim completeness.
+- No rollback needed: entries are additive; deleting a newly written entry is the rollback action.
 
 ## Output
 

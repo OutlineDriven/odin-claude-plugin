@@ -85,11 +85,11 @@ If a profile is missing the arrow position, stop and request it. Never substitut
 9. **Check for anti-patterns** before returning. Change the environment rather than expecting the person to change. Do not project the coach's own motivators onto them, use one-size-fits-all one-on-ones, ignore EU signals (low utilization predicts disengagement and flight risk), treat gaps as problems rather than complementary strengths, or forget that the coach's own profile biases how the person is perceived. Done when: no anti-pattern remains — environment-not-person, no projected motivators, no one-size-fits-all, EU signals addressed, gaps framed as complementary.
 
 ## Failure and recovery
-- **Missing arrow position:** A profile lacks the red-arrow reference for A, B, C, D. Stop. Request the arrow position. Do not fall back to raw absolute values or visual estimation; both produce 20-30% error and invalidate the gap calculation.
-- **Incomplete profile:** Only one profile supplied, or a trait position is absent. Return the partial analysis for the available traits and state exactly which trait gaps, communication adjustments, or energy checks could not be produced. Do not fabricate the missing profile.
-- **No EU data:** Survey or Job EU is unavailable. Skip the energy step and report that energy status could not be assessed, rather than inventing a utilization figure.
-- **Non-converged result:** If major trait gaps lack a concrete adjustment, cadence/format is not tailored, or energy risks are unaddressed when EU data exists, the done predicate is not met. Return the blocked guide with the specific missing elements named.
-- **Rollback:** This skill is read-only and mutates nothing. Recovery is re-running with corrected or completed inputs.
+- Missing arrow position: A profile lacks the red-arrow reference for A, B, C, D. Stop. Request the arrow position. Do not fall back to raw absolute values or visual estimation; both produce 20-30% error and invalidate the gap calculation.
+- Incomplete profile: Only one profile supplied, or a trait position is absent. Return the partial analysis for the available traits and state exactly which trait gaps, communication adjustments, or energy checks could not be produced. Do not fabricate the missing profile.
+- No EU data: Survey or Job EU is unavailable. Skip the energy step and report that energy status could not be assessed, rather than inventing a utilization figure.
+- Non-converged result: If major trait gaps lack a concrete adjustment, cadence/format is not tailored, or energy risks are unaddressed when EU data exists, the done predicate is not met. Return the blocked guide with the specific missing elements named.
+- Rollback: This skill is read-only and mutates nothing. Recovery is re-running with corrected or completed inputs.
 
 ## Output
 A coaching guide in chat text with sections in procedure order: trait-gap map, communication adjustments, one-on-one design, motivators, energy status, watch areas, avoidances.

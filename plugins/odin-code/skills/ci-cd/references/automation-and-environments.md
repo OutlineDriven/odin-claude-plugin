@@ -29,7 +29,7 @@ updates:
 
 ### PR checks
 
-- **Required reviews:** At least 1 approval before merge
-- **Required status checks:** CI must pass before merge
-- **Branch protection:** No force-pushes to main
-- **Auto-merge:** If all checks pass and approved, merge automatically
+- Required reviews: At least 1 approval before merge
+- Required status checks: CI must pass before merge
+- Branch protection: No force-pushes to main
+- Auto-merge: If all checks pass and approved, merge automatically

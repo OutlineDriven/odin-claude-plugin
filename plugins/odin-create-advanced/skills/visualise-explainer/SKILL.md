@@ -16,9 +16,9 @@ description: 'Use when asked to create an interactive HTML concept explainer wit
 
 ## Inputs
 
-- **Concept** (required): the topic, system, algorithm, or process to explain. Extracted from the user message.
-- **Interaction model** (optional): spatial layout, sequential steps, state machine, or parameter sweep. Inferred from the concept structure when not supplied.
-- **Depth** (optional): introductory, intermediate, or detailed. Defaults to introductory.
+- Concept (required): the topic, system, algorithm, or process to explain. Extracted from the user message.
+- Interaction model (optional): spatial layout, sequential steps, state machine, or parameter sweep. Inferred from the concept structure when not supplied.
+- Depth (optional): introductory, intermediate, or detailed. Defaults to introductory.
 
 ## Procedure
 

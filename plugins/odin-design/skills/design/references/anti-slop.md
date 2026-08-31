@@ -1,4 +1,4 @@
-# anti-slop.md — taste anchors and ban-lists
+# anti-slop.md, taste anchors and ban-lists
 
 Depth for the SKILL.md §4 charter. Restraint anchored on production exemplars is the antidote to both flavors of slop.
 
@@ -47,7 +47,7 @@ Radius without hierarchy is decoration, not signal.
 ```css
 .button, .card, .modal, .input { border-radius: 0.5rem; } /* slop */
 ```
-Counter: tier radius by element role — input 4px, card 8px, modal 16px — and commit the tiers.
+Counter: tier radius by element role, input 4px, card 8px, modal 16px, and commit the tiers.
 
 ### `shadow-md` uniform across the surface
 
@@ -63,7 +63,7 @@ Animates layout, color, and transform together; jank guaranteed.
 ```css
 .button { transition: all 200ms ease; } /* slop */
 ```
-Counter: name the properties — `transition: opacity 120ms ease, transform 120ms ease`.
+Counter: name the properties, `transition: opacity 120ms ease, transform 120ms ease`.
 
 ### `font-family: system-ui`
 
@@ -103,7 +103,7 @@ Three meta-checks applied after the slop tell catalogue: two register-specific t
 
 ### Brand register slop test
 
-If someone could look at this and say "AI made that" without hesitation, it's failed. The bar is distinctiveness — a visitor should ask "how was this made?", not "which AI made this?"
+If someone could look at this and say "AI made that" without hesitation, it's failed. The bar is distinctiveness, a visitor should ask "how was this made?", not "which AI made this?"
 
 ### Product register slop test
 
@@ -111,7 +111,7 @@ Would a user fluent in category's best tools (Linear, Figma, Notion, Raycast, St
 
 ### Category-reflex check
 
-If someone could guess the theme and palette from the category name alone — "observability → dark blue", "healthcare → white + teal", "finance → navy + gold", "crypto → neon on black" — it's the training-data reflex. Rework the scene sentence (see `references/soul.md` §1.6) and color strategy until the answer is no longer obvious from the domain.
+If someone could guess the theme and palette from the category name alone, "observability → dark blue", "healthcare → white + teal", "finance → navy + gold", "crypto → neon on black", it's the training-data reflex. Rework the scene sentence (see `references/soul.md` §1.6) and color strategy until the answer is no longer obvious from the domain.
 
 ## 1.6 Absolute bans (rewrite-or-die)
 
@@ -147,24 +147,24 @@ Surface-level summary for Chinese / Japanese / Korean content. Full treatment in
 
 **Technical tells (defaults that betray no thought):**
 
-- Synthetic italic on CJK — CJK has no traditional italic style; emphasize via `text-emphasis` (傍点) or weight.
-- Latin letter-spacing applied to CJK — degrades em-grid composition; reach for OpenType `palt` / `halt` instead.
-- Wrong-locale font — JP build on SC content (and the inverse) surfaces immediately to native readers via 边 / 邊 / 辺 and 直 / 骨 / 黄 glyph differences; tag `lang` and let `locl` pick the regional form.
-- Default Tailwind / `system-ui` font stack with no CJK fallback — Tailwind v4 ships zero CJK fonts; add Pretendard / PingFang / Hiragino / Yu Gothic / Noto Sans CJK explicitly.
-- Auto-hyphenation enabled — does nothing for CJK; "didn't think about it" tell.
-- Pretendard before `-apple-system` in fallback chain — defeats Pretendard's own system-matching rationale on Apple OSes.
+- Synthetic italic on CJK: CJK has no traditional italic style; emphasize via `text-emphasis` (傍点) or weight.
+- Latin letter-spacing applied to CJK: degrades em-grid composition; reach for OpenType `palt` / `halt` instead.
+- Wrong-locale font: JP build on SC content (and the inverse) surfaces immediately to native readers via 边 / 邊 / 辺 and 直 / 骨 / 黄 glyph differences; tag `lang` and let `locl` pick the regional form.
+- Default Tailwind / `system-ui` font stack with no CJK fallback: Tailwind v4 ships zero CJK fonts; add Pretendard / PingFang / Hiragino / Yu Gothic / Noto Sans CJK explicitly.
+- Auto-hyphenation enabled: does nothing for CJK; "didn't think about it" tell.
+- Pretendard before `-apple-system` in fallback chain: defeats Pretendard's own system-matching rationale on Apple OSes.
 
 **Cliché tells (pattern-matching "Asian" without shipping anything):**
 
-- JP — sakura petals as decoration; washi paper textures as background; hinomaru-red as primary brand colour (absent from every major JP product DS).
-- CN — red+gold "Lunar New Year palette" as PRIMARY brand colour; calligraphy fonts as body text; ink-wash backgrounds as decoration; dragon / phoenix iconography as branding.
-- KR — K-pop pastel + serif Hangul as "K-design" (Pinterest cliché — does NOT match shipping Korean tech production); 단청 (dancheong) festival palette as primary brand.
+- JP: sakura petals as decoration; washi paper textures as background; hinomaru-red as primary brand colour (absent from every major JP product DS).
+- CN: red+gold "Lunar New Year palette" as PRIMARY brand colour; calligraphy fonts as body text; ink-wash backgrounds as decoration; dragon / phoenix iconography as branding.
+- KR: K-pop pastel + serif Hangul as "K-design" (Pinterest cliché, does NOT match shipping Korean tech production); 단청 (dancheong) festival palette as primary brand.
 
 → See `cjk.md §8` for cross-CJK summary; `korean.md §8` / `japanese.md §9` / `chinese.md §10` for language-specific deep treatment.
 
 ## 2. Overkill compensation catalogue
 
-Slop in a different flavor — overkill is what happens when the model thinks "less" looks AI and overcorrects to "more".
+Slop in a different flavor, overkill is what happens when the model thinks "less" looks AI and overcorrects to "more".
 
 ### Sprites overdose
 
@@ -220,11 +220,11 @@ Counter: cut decoration; sharpen the headline; ship the surface or kill it.
    | `rounded-lg` uniform | `rounded-xl` uniform, `rounded-2xl` uniform |
    | Glassmorphism global | Neumorphism global, mesh-gradient global |
 
-   **Font reflex-reject list** (snapshot 2026-04-28 from impeccable/brand.md; review yearly when font fashion clearly shifts; treat as second-order reflex-reject — banned by default; pick anyway when the surface has a defensible historical / homage rationale): Fraunces, Newsreader, Lora, Crimson, Crimson Pro, Crimson Text, Playfair Display, Cormorant, Cormorant Garamond, Syne, IBM Plex Mono, IBM Plex Sans, IBM Plex Serif, Space Mono, Space Grotesk, Inter, DM Sans, DM Serif Display, DM Serif Text, Outfit, Plus Jakarta Sans, Instrument Sans, Instrument Serif.
+   **Font reflex-reject list** (snapshot 2026-04-28 from impeccable/brand.md; review yearly when font fashion clearly shifts; treat as second-order reflex-reject: banned by default; pick anyway when the surface has a defensible historical / homage rationale): Fraunces, Newsreader, Lora, Crimson, Crimson Pro, Crimson Text, Playfair Display, Cormorant, Cormorant Garamond, Syne, IBM Plex Mono, IBM Plex Sans, IBM Plex Serif, Space Mono, Space Grotesk, Inter, DM Sans, DM Serif Display, DM Serif Text, Outfit, Plus Jakarta Sans, Instrument Sans, Instrument Serif.
 
 2. **Style anchoring on production exemplars.** Every direction names 1-2 taste anchors from §4 below; vague references ("clean", "modern") underspecify and the model defaults to slop.
 3. **Density commitment (2-3x default LLM output).** Vertical rhythm, line-height, and information density tighten 2-3x relative to the model's default. Default LLM output is sparse and air-padded; the sparseness itself reads as slop.
-4. **Asymmetric grid (one optical-alignment override per page).** A single deliberate asymmetry — a hero left-aligned where the rest is centered, a sidebar that breaks the column rhythm — prevents the surface from reading as preset.
+4. **Asymmetric grid (one optical-alignment override per page).** A single deliberate asymmetry, a hero left-aligned where the rest is centered, a sidebar that breaks the column rhythm, prevents the surface from reading as preset.
 5. **OKLCH custom palette derivation.** Never the default Tailwind / Material ramp. Derive 4-6 swatches from a chosen accent in OKLCH space, with named lightness steps that match the direction's mood. Lightness ramps in OKLCH are perceptually uniform; HSL ramps are not.
 6. **Code-level constraints.** Surface the bans in CSS via property-level lints (`stylelint-no-restricted-syntax`) or DTCG token validators. If a banned value enters tokens, every component inherits the slop.
 
@@ -235,7 +235,7 @@ Nine exemplars. OKLCH values use `oklch(L C H)` triples; hex companion noted in 
 | Exemplar | Primary OKLCH | Accent OKLCH | Heading Type | Body Type | Mono Type | Spacing Base | Signature Trait | Source URL |
 |---|---|---|---|---|---|---|---|---|
 | Linear | `oklch(0.139 0.003 246)` | `oklch(0.567 0.159 275)` | Inter Display | Inter Text | system mono | 4px | Velocity-driven density; indigo `#5E6AD2` carries interactive states; mono cells defer to terminal-default monospace (no branded webfont) | https://linear.app |
-| Stripe | `oklch(1 0 0)` | `oklch(0.578 0.235 278)` | Tiempos Headline | Söhne | Source Code Pro | 8px | Editorial type on transactional UI; Stripe Purple `#533AFD`; mono is Source Code Pro (Adobe SIL OFL, hosted by Stripe) — observed in docs.stripe.com code samples | https://stripe.com |
+| Stripe | `oklch(1 0 0)` | `oklch(0.578 0.235 278)` | Tiempos Headline | Söhne | Source Code Pro | 8px | Editorial type on transactional UI; Stripe Purple `#533AFD`; mono is Source Code Pro (Adobe SIL OFL, hosted by Stripe), observed in docs.stripe.com code samples | https://stripe.com |
 | Vercel | `oklch(0 0 0)` | `oklch(0.569 0.235 254)` | Geist Sans | Geist Sans Text | Geist Mono | 4px | Monochrome black surface; Geist Blue `#0070F3` as restrained accent | https://vercel.com |
 | Anthropic | `oklch(0.982 0.005 95)` | `oklch(0.66 0.13 38)` | Tiempos Headline | DM Sans | DM Mono | 8px | "Stewardship" register; cream `#FAF9F5` + clay `#D97757` + near-black `#141413`; spacing observed at ~16-24px rhythm consistent with an 8px base | https://www.anthropic.com |
 | Things 3 | `oklch(0.95 0 0)` | `oklch(0.865 0.177 90)` | SF Pro Display | SF Pro Text | SF Mono | 8px | Inherits macOS AppKit materials; primary is light-mode `windowBackgroundColor` (~`oklch(0.95 0 0)`); dark mode applies Desktop Tinting (~`oklch(0.18 0 0)`); accent is `systemYellow` `#FFCC00` | https://culturedcode.com/things |

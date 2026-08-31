@@ -16,12 +16,12 @@ description: 'Use when a proven watch pattern should become a reusable harness a
 
 ## Inputs
 
-- **Watch transcript** (required): the proven watch pattern: a session transcript, run log, artifact, or notes that document the watch's target, interval, evaluation logic, completion predicate, and observed success.
-- **Harness name** (required): a slug for the harness artifact file.
-- **Harness description** (optional): a one-sentence description of what the harness checks and when it succeeds. Defaults to "Reusable harness derived from a proven watch pattern."
-- **Default poll interval** (optional): the polling interval in seconds. Defaults to the interval observed in the watch transcript, or 60 if unspecified.
-- **Default deadline** (optional): the maximum polling duration in seconds. Defaults to the deadline observed in the watch transcript, or 300 if unspecified.
-- **Adoption confirmation** (required): the user explicitly confirms or declines to adopt the harness artifact.
+- Watch transcript (required): the proven watch pattern: a session transcript, run log, artifact, or notes that document the watch's target, interval, evaluation logic, completion predicate, and observed success.
+- Harness name (required): a slug for the harness artifact file.
+- Harness description (optional): a one-sentence description of what the harness checks and when it succeeds. Defaults to "Reusable harness derived from a proven watch pattern."
+- Default poll interval (optional): the polling interval in seconds. Defaults to the interval observed in the watch transcript, or 60 if unspecified.
+- Default deadline (optional): the maximum polling duration in seconds. Defaults to the deadline observed in the watch transcript, or 300 if unspecified.
+- Adoption confirmation (required): the user explicitly confirms or declines to adopt the harness artifact.
 
 ## Procedure
 
@@ -33,11 +33,11 @@ description: 'Use when a proven watch pattern should become a reusable harness a
 6. Confirm or withdraw. If the user confirms: mark the harness as adopted and report success. If the user declines: delete the harness artifact and report withdrawal. If the user requests modifications: record the requested changes and stop. This skill produces an initial draft, not an iterative editor. Done when: adoption is confirmed, withdrawal is completed, or modification request is recorded and the step has stopped.
 
 ## Failure and recovery
-- **Missing watch mechanism:** the watch transcript does not contain a target, completion predicate, or evaluation logic. Partial extraction is not sufficient. Stop without writing an artifact.
-- **Harness name collision:** a file with the harness name already exists in the working directory. Stop without overwriting. Report the collision and the conflicting path.
-- **User declines:** the user explicitly declines to adopt the harness artifact. Delete the artifact. Report withdrawal as the terminal result. Do not retry, re-prompt, or represent this as a failure.
-- **User requests modifications:** the user asks for changes to the harness artifact after seeing it. Stop without modifying. The initial draft is the contract of this skill.
-- **Non-converged watch:** the watch transcript documents a failed or non-converged watch. Stop. Report that the watch pattern was not proven and a harness cannot be derived from it. Do not produce a harness from a non-converged watch.
+- Missing watch mechanism: the watch transcript does not contain a target, completion predicate, or evaluation logic. Partial extraction is not sufficient. Stop without writing an artifact.
+- Harness name collision: a file with the harness name already exists in the working directory. Stop without overwriting. Report the collision and the conflicting path.
+- User declines: the user explicitly declines to adopt the harness artifact. Delete the artifact. Report withdrawal as the terminal result. Do not retry, re-prompt, or represent this as a failure.
+- User requests modifications: the user asks for changes to the harness artifact after seeing it. Stop without modifying. The initial draft is the contract of this skill.
+- Non-converged watch: the watch transcript documents a failed or non-converged watch. Stop. Report that the watch pattern was not proven and a harness cannot be derived from it. Do not produce a harness from a non-converged watch.
 
 ## Output
 One terminal result: adopted (harness artifact exists and user confirmed, with name and path), withdrawn (user declined, artifact deleted, no harness exists), or blocked (input validation failed or watch transcript insufficient, with the blocking reason).

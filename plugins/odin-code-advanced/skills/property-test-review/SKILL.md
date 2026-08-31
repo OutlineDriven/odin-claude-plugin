@@ -16,9 +16,9 @@ description: 'Use when reviewing existing property tests for coverage and defect
 
 ## Inputs
 
-- **Test files**: Property test source files (required). The user names them or the skill discovers them via framework-specific search patterns.
-- **Production contracts**: The code under test—function signatures, type annotations, docstrings, or specifications (required). Needed to compare asserted properties against the code's algebraic shape.
-- **Property catalog reference**: The property catalog below (included). Used to identify the strongest unasserted property.
+- Test files: Property test source files (required). The user names them or the skill discovers them via framework-specific search patterns.
+- Production contracts: The code under test—function signatures, type annotations, docstrings, or specifications (required). Needed to compare asserted properties against the code's algebraic shape.
+- Property catalog reference: The property catalog below (included). Used to identify the strongest unasserted property.
 
 ## Procedure
 

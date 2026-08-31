@@ -16,9 +16,9 @@ description: 'Requires fresh, actually-run evidence before any claim that a task
 
 ## Inputs
 
-- **Fires on:** Explicit invocation, or a user utterance that contains a completion claim.
-- **Must supply:** The specific claim being made; what would prove it; whether it has been run; the output of the check.
-- **Optional:** The exact command or scenario run; the raw output read; any partial results.
+- Fires on: Explicit invocation, or a user utterance that contains a completion claim.
+- Must supply: The specific claim being made; what would prove it; whether it has been run; the output of the check.
+- Optional: The exact command or scenario run; the raw output read; any partial results.
 
 ## Procedure
 
@@ -30,17 +30,17 @@ description: 'Requires fresh, actually-run evidence before any claim that a task
 6. **Report.** State the classification, the action that was run, what it showed, and the exact claim wording it does or does not support. Do not hedge; do not round up a partial result to "done." **Done when:** the report states the classification, action, output, and claim wording.
 
 ## Failure and recovery
-**unrun-check:** The check was not executed. Report UNVERIFIED. Do not substitute a hedge or a confidence statement.
+unrun-check: The check was not executed. Report UNVERIFIED. Do not substitute a hedge or a confidence statement.
 
-**contradicted-claim:** The output shows failure, error, or unexpected state. Report FAILED with the exact output. Do not suppress it, qualify it, or claim success despite the output.
+contradicted-claim: The output shows failure, error, or unexpected state. Report FAILED with the exact output. Do not suppress it, qualify it, or claim success despite the output.
 
-**timeout:** The proving action did not complete. Report TIMEOUT with the partial output present. Do not treat a partial run as a pass.
+timeout: The proving action did not complete. Report TIMEOUT with the partial output present. Do not treat a partial run as a pass.
 
-**stale-check:** A check was run, but the code changed after it. Treat as UNVERIFIED; re-run before the claim can be made.
+stale-check: A check was run, but the code changed after it. Treat as UNVERIFIED; re-run before the claim can be made.
 
-**Partial-result rule:** A partial result is reported as partial. It is not rounded up. No retry is attempted unless the user explicitly requests one; this skill does not perform that action itself.
+Partial-result rule: A partial result is reported as partial. It is not rounded up. No retry is attempted unless the user explicitly requests one; this skill does not perform that action itself.
 
-**Non-mutation rule:** This skill reads and classifies. It does not write, commit, open PRs, move tickets, or change any state outside its own output.
+Non-mutation rule: This skill reads and classifies. It does not write, commit, open PRs, move tickets, or change any state outside its own output.
 
 ## Output
 One terminal classification (VERIFIED, PARTIAL, UNVERIFIED, FAILED, or TIMEOUT) with the action run, what it showed, and the claim wording it supports or contradicts; non-VERIFIED classifications followed by one sentence stating the reason.

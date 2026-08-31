@@ -36,10 +36,10 @@ Investigate rather than pattern-match. Every codebase enforces authorization dif
 
 6. **Fixes must enforce, not document.** A suggested fix must include actual code that validates permission before proceeding and raises an exception or returns an error on unauthorized access — making unauthorized access impossible, not discouraged. A comment or docstring is never an acceptable fix. If the right enforcement mechanism cannot be determined, state that explicitly rather than substituting documentation. **Done when:** every suggested fix enforces permission in code or states why no mechanism can be chosen.
 ## Failure and recovery
-- **Authorization model not determinable:** if the codebase's permission or scoping mechanism cannot be understood from source, stop. Report which components could not be modeled and do not fabricate findings for them.
-- **Unconfirmed check:** a check that may exist but cannot be traced is MEDIUM, not HIGH. Never report an unconfirmed gap as confirmed.
-- **Scope not covered:** list endpoints or flows not reviewed under "Areas Not Reviewed" rather than implying full coverage.
-- **Non-mutation:** this skill reads source only. If investigation requires running code or mutating state, stop and report the blocker; do not widen authority.
+- Authorization model not determinable: if the codebase's permission or scoping mechanism cannot be understood from source, stop. Report which components could not be modeled and do not fabricate findings for them.
+- Unconfirmed check: a check that may exist but cannot be traced is MEDIUM, not HIGH. Never report an unconfirmed gap as confirmed.
+- Scope not covered: list endpoints or flows not reviewed under "Areas Not Reviewed" rather than implying full coverage.
+- Non-mutation: this skill reads source only. If investigation requires running code or mutating state, stop and report the blocker; do not widen authority.
 
 ## Output
 A markdown report with: a brief description of the codebase's authorization model; findings each tagged with an ID, severity, confidence, location, the question investigated, traced steps, evidence snippet, impact, and an enforcing suggested fix; a "Needs Manual Verification" section for MEDIUM items; and an "Areas Not Reviewed" section listing uncovered endpoints or flows.

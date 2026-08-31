@@ -38,20 +38,20 @@ Optional:
 3. **Bound the scope before mutation.** If the requested task would modify credential provisioning, user account management, or token storage in a live database, refuse. Only auth implementation code and its associated server-side token storage are in scope. Done when: scope is confirmed within auth implementation boundaries or refused.
 
 4. **Generate or repair the implementation.** For the chosen flow:
-   - **authorization_code + PKCE**: generate `code_verifier` and `code_challenge` (S256 method), authorization URL construction, token exchange request, CSRF state handling, and server-side session binding. Include refresh token rotation with one-time use validation.
-   - **client_credentials**: generate a token request using the client credentials grant, with no user context.
-   - **device_authorization**: generate a device code polling loop with expiration handling and user-code display instructions.
-   - **refresh_rotation**: generate a refresh token exchange that immediately invalidates the used refresh token and issues a new pair.
+   - authorization_code + PKCE: generate `code_verifier` and `code_challenge` (S256 method), authorization URL construction, token exchange request, CSRF state handling, and server-side session binding. Include refresh token rotation with one-time use validation.
+   - client_credentials: generate a token request using the client credentials grant, with no user context.
+   - device_authorization: generate a device code polling loop with expiration handling and user-code display instructions.
+   - refresh_rotation: generate a refresh token exchange that immediately invalidates the used refresh token and issues a new pair.
    - Do not add an implicit flow, a `response_type=token` branch, or client-side token storage.
    Done when: the implementation for the chosen flow is generated or repaired with no implicit flow or client-side token storage.
 
 5. **Implement secret redaction.** Add explicit redaction to every log statement, console output, and error message that could expose a raw access token, refresh token, authorization code, or client secret. Redact by replacing the sensitive value with a fixed marker, not by omitting the log line. Done when: no raw token or secret can appear in any log or console output from the generated code.
 
 6. **Test end-to-end token exchange against the real authorization server.** Execute the implementation against the actual authorization server to verify the full flow:
-   - **authorization_code + PKCE**: complete the authorization request, receive the code, exchange it for tokens, and validate the returned access token.
-   - **client_credentials**: request and receive a token using client credentials.
-   - **device_authorization**: initiate the device flow, poll the token endpoint, and receive a token (or confirm the polling loop handles pending and expired states correctly).
-   - **refresh_rotation**: exchange a refresh token for a new pair and confirm the old refresh token is invalidated.
+   - authorization_code + PKCE: complete the authorization request, receive the code, exchange it for tokens, and validate the returned access token.
+   - client_credentials: request and receive a token using client credentials.
+   - device_authorization: initiate the device flow, poll the token endpoint, and receive a token (or confirm the polling loop handles pending and expired states correctly).
+   - refresh_rotation: exchange a refresh token for a new pair and confirm the old refresh token is invalidated.
    If the server does not support the requested flow, if client credentials are invalid, or if the token exchange fails, halt with the specific error from the server response. Done when: a successful end-to-end token exchange or rotation completes against the real authorization server.
 
 7. **Verify security requirements.** For every generated artifact, confirm:
@@ -66,11 +66,11 @@ Optional:
 ## Failure and recovery
 
 - **Auth server does not support the requested flow**: halt. Return the metadata field that excludes the flow and the recommended alternative (for example, switching from implicit to authorization_code+PKCE).
-- **Invalid client credentials**: halt. Return the server's error response. Do not retry with guessed credentials.
-- **Token exchange failure**: halt. Return the HTTP status, error code, and error description from the server response. If debugging an existing implementation, identify the specific request field or header that caused the rejection.
-- **Security checklist row fails**: halt. Name the failing row and the generated artifact that caused it. Do not mark the task done.
-- **Dependency unavailable**: block. Return the missing dependency and the package or endpoint required. Do not substitute a stub that passes without the real dependency.
-- **Partial result**: if halted mid-procedure, leave changes uncommitted. Do not partially merge with working auth code that bypasses the failing check.
+- Invalid client credentials: halt. Return the server's error response. Do not retry with guessed credentials.
+- Token exchange failure: halt. Return the HTTP status, error code, and error description from the server response. If debugging an existing implementation, identify the specific request field or header that caused the rejection.
+- Security checklist row fails: halt. Name the failing row and the generated artifact that caused it. Do not mark the task done.
+- Dependency unavailable: block. Return the missing dependency and the package or endpoint required. Do not substitute a stub that passes without the real dependency.
+- Partial result: if halted mid-procedure, leave changes uncommitted. Do not partially merge with working auth code that bypasses the failing check.
 
 ## Output
 

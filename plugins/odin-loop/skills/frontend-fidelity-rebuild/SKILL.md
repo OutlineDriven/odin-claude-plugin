@@ -17,11 +17,11 @@ description: 'Use when an authorized reference surface needs a clean-room fronte
 
 ## Inputs
 
-- **IP authorization** (required): start approval confirming the reconstruction is authorized.
-- **Reference surface** (required): the URL, file, or design artifact to reconstruct from.
-- **Viewport set** (required): the screen sizes at which fidelity is measured (for example, 375px mobile, 768px tablet, 1440px desktop). Named before any reconstruction.
-- **Timeline set** (required): the animation or interaction sequences to measure for motion fidelity (for example, page load, hover transitions, scroll effects). Named before any reconstruction.
-- **Comparison tolerances** (required): the per-gate thresholds that define a pass. Static: pixel difference percentage or visual regression threshold. Motion: timing deviation in ms and property delta. Responsive: layout shift at each viewport breakpoint.
+- IP authorization (required): start approval confirming the reconstruction is authorized.
+- Reference surface (required): the URL, file, or design artifact to reconstruct from.
+- Viewport set (required): the screen sizes at which fidelity is measured (for example, 375px mobile, 768px tablet, 1440px desktop). Named before any reconstruction.
+- Timeline set (required): the animation or interaction sequences to measure for motion fidelity (for example, page load, hover transitions, scroll effects). Named before any reconstruction.
+- Comparison tolerances (required): the per-gate thresholds that define a pass. Static: pixel difference percentage or visual regression threshold. Motion: timing deviation in ms and property delta. Responsive: layout shift at each viewport breakpoint.
 
 ## Procedure
 
@@ -35,11 +35,11 @@ description: 'Use when an authorized reference surface needs a clean-room fronte
 
 ## Failure and recovery
 
-- **Authorization absent:** stop before any effect; emit a blocked receipt naming the missing approval.
-- **Capture blocked:** the reference surface cannot be captured at a declared viewport or timeline. Terminal `blocked`; report which capture failed and why.
-- **Stagnation:** repeated reconstruction attempts do not improve fidelity scores. Terminal `stalled`; report the score plateau and the attempts.
-- **Scope drift after binding:** end the run; emit a stalled or blocked receipt.
-- **Budget exhausted:** emit an exhausted receipt; budget exhaustion is never success unless it is the predeclared success predicate.
+- Authorization absent: stop before any effect; emit a blocked receipt naming the missing approval.
+- Capture blocked: the reference surface cannot be captured at a declared viewport or timeline. Terminal `blocked`; report which capture failed and why.
+- Stagnation: repeated reconstruction attempts do not improve fidelity scores. Terminal `stalled`; report the score plateau and the attempts.
+- Scope drift after binding: end the run; emit a stalled or blocked receipt.
+- Budget exhausted: emit an exhausted receipt; budget exhaustion is never success unless it is the predeclared success predicate.
 
 ## Output
 

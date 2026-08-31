@@ -36,10 +36,10 @@ description: 'Use when asked to summarize feedback on the active PR. Returns sev
 ## Failure and recovery
 
 - **No open PR on the current branch and no PR supplied**: report blocked; do not mutate anything.
-- **`gh` not authenticated or no GitHub remote**: report blocked; do not attempt login or credential creation.
-- **API rate limit or network error**: report blocked with the error; do not emit a partial report that omits unseen comments.
-- **Thread limit reached (100 inline threads or 100 comments per thread)**: the GraphQL query caps at 100 threads and 100 comments per thread. If the PR has more, label the report `truncated: more than 100 threads or comments exist — not all feedback is shown`. Return the partial report with the truncation label; this satisfies the done predicate.
-- **Empty comment set**: return an empty report stating no feedback was found; this satisfies the done predicate.
+- `gh` not authenticated or no GitHub remote: report blocked; do not attempt login or credential creation.
+- API rate limit or network error: report blocked with the error; do not emit a partial report that omits unseen comments.
+- Thread limit reached (100 inline threads or 100 comments per thread): the GraphQL query caps at 100 threads and 100 comments per thread. If the PR has more, label the report `truncated: more than 100 threads or comments exist — not all feedback is shown`. Return the partial report with the truncation label; this satisfies the done predicate.
+- Empty comment set: return an empty report stating no feedback was found; this satisfies the done predicate.
 
 ## Output
 

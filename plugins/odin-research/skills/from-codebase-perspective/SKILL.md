@@ -34,10 +34,10 @@ The question or proposal to analyze from the codebase seat. The codebase under a
 
 ## Failure and recovery
 
-- **Unreachable codebase**: stop. Report that the codebase seat has no evidence and emit no analysis.
-- **Question outside the codebase seat**: stop. Name the seat the question belongs to and emit no codebase answer.
-- **Pressure to blend lenses mid-answer**: refuse. The non-blending rule is load-bearing; comparison happens only after independent outputs.
-- **Partial evidence**: emit only the portion grounded in read code and label the rest as unverified. Never present inference as observed code behavior.
+- Unreachable codebase: stop. Report that the codebase seat has no evidence and emit no analysis.
+- Question outside the codebase seat: stop. Name the seat the question belongs to and emit no codebase answer.
+- Pressure to blend lenses mid-answer: refuse. The non-blending rule is load-bearing; comparison happens only after independent outputs.
+- Partial evidence: emit only the portion grounded in read code and label the rest as unverified. Never present inference as observed code behavior.
 
 ## Output
 

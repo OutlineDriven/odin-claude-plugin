@@ -16,11 +16,11 @@ description: 'Use when creating or hardening an npm release with Trusted or Stag
 
 ## Inputs
 
-- **Root `package.json`** (required): read first to determine monorepo shape, package manager, build script, and repository URL.
-- **GitHub owner/repo** (required): parsed from the `repository` field, normalized from `git+https://github.com/owner/repo.git`, `github:owner/repo`, or `git remote get-url origin`. Ask the user if none resolves.
-- **Package-manager identity** (required): from `packageManager` field or lockfiles.
-- **Per-package published state** (required): `npm view <name> version` per public package. E404 means not yet published.
-- **Existing workflows** (required): read every `.github/workflows/*.yml` to detect existing release workflows and `secrets.NPM_TOKEN` usage.
+- Root `package.json` (required): read first to determine monorepo shape, package manager, build script, and repository URL.
+- GitHub owner/repo (required): parsed from the `repository` field, normalized from `git+https://github.com/owner/repo.git`, `github:owner/repo`, or `git remote get-url origin`. Ask the user if none resolves.
+- Package-manager identity (required): from `packageManager` field or lockfiles.
+- Per-package published state (required): `npm view <name> version` per public package. E404 means not yet published.
+- Existing workflows (required): read every `.github/workflows/*.yml` to detect existing release workflows and `secrets.NPM_TOKEN` usage.
 
 ## Procedure
 

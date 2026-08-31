@@ -16,9 +16,9 @@ description: 'Use when writing or verifying framework-specific code, boilerplate
 
 ## Inputs
 
-- **Framework context** (required): the framework, language, or library.
-- **Dependency file** (required): `package.json`, `requirements.txt`, `go.mod`, `Cargo.toml`, `Gemfile`, `composer.json`, or `pyproject.toml`.
-- **Stack examples** (optional): examples supplied by the caller. This skill has no bundled stack-reference dependency.
+- Framework context (required): the framework, language, or library.
+- Dependency file (required): `package.json`, `requirements.txt`, `go.mod`, `Cargo.toml`, `Gemfile`, `composer.json`, or `pyproject.toml`.
+- Stack examples (optional): examples supplied by the caller. This skill has no bundled stack-reference dependency.
 
 ## Procedure
 

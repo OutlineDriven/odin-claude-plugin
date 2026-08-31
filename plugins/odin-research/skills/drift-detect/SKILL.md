@@ -54,11 +54,11 @@ description: 'Use when roadmap, plans, or docs may have drifted from code, or wh
    ```
 
    Native drift signals to collect:
-   - **doc-drift with zero coupling**: doc files whose recent changes do not co-change with related source. Docs with repeated doc-only commits and no matching source commits for referenced terms are MEDIUM; exact removed symbol references are HIGH.
-   - **at-risk areas**: directories with high bug-fix churn and stale/low ownership. Mark HIGH when a planned feature maps to an area with high bug-fix density and no recent owner activity.
-   - **stale docs**: docs older than 180 days describing active or changed code paths.
-   - **orphan exports / dead starts**: exported symbols or public endpoints not called/imported. Orphan + documented feature = HIGH drift; orphan without docs = LOW cleanup signal.
-   - **test gap**: implementation exists for documented critical behavior but no matching test file, no test script, or CI never runs tests.
+   - doc-drift with zero coupling: doc files whose recent changes do not co-change with related source. Docs with repeated doc-only commits and no matching source commits for referenced terms are MEDIUM; exact removed symbol references are HIGH.
+   - at-risk areas: directories with high bug-fix churn and stale/low ownership. Mark HIGH when a planned feature maps to an area with high bug-fix density and no recent owner activity.
+   - stale docs: docs older than 180 days describing active or changed code paths.
+   - orphan exports / dead starts: exported symbols or public endpoints not called/imported. Orphan + documented feature = HIGH drift; orphan without docs = LOW cleanup signal.
+   - test gap: implementation exists for documented critical behavior but no matching test file, no test script, or CI never runs tests.
 
    Done when: code reality is collected with framework sniff, symbol/dependency reality, and native drift signals.
 
@@ -86,13 +86,13 @@ description: 'Use when roadmap, plans, or docs may have drifted from code, or wh
 8. **Emit the Reality Check Report** using the report template in `references/drift-taxonomy.md`. Done when: the report is emitted with executive summary, drift analysis, gap analysis, cross-reference table, prioritized reconstruction plan, quick wins, and unknowns.
 
 ## Failure and recovery
-- **gh unavailable or unauthenticated**: mark GitHub `unavailable`, continue with docs/code. Never invent issue state.
-- **No docs exist**: classify as documentation gap, not drift. Continue with GitHub/code.
-- **Codegraph not indexed**: fall back to `ast-grep` and `git grep`. Mark code evidence certainty as MEDIUM or LOW.
-- **Shallow clone**: git history signals are unreliable; mark native signals as LOW certainty and list under Unknowns.
-- **All sources unavailable**: stop and report which sources failed and why. Do not emit a report with fabricated evidence.
-- **Synthesis produces a finding without evidence**: reject the finding. Every drift/gap/plan item must cite concrete evidence or it does not appear in the report.
-- **No mutation during scan**: if any step would mutate docs, issues, PRs, or code, stop that step. The scan is read-only except for the optional `.outline/drift-detect/` artifact. Rollback: delete `.outline/drift-detect/`.
+- gh unavailable or unauthenticated: mark GitHub `unavailable`, continue with docs/code. Never invent issue state.
+- No docs exist: classify as documentation gap, not drift. Continue with GitHub/code.
+- Codegraph not indexed: fall back to `ast-grep` and `git grep`. Mark code evidence certainty as MEDIUM or LOW.
+- Shallow clone: git history signals are unreliable; mark native signals as LOW certainty and list under Unknowns.
+- All sources unavailable: stop and report which sources failed and why. Do not emit a report with fabricated evidence.
+- Synthesis produces a finding without evidence: reject the finding. Every drift/gap/plan item must cite concrete evidence or it does not appear in the report.
+- No mutation during scan: if any step would mutate docs, issues, PRs, or code, stop that step. The scan is read-only except for the optional `.outline/drift-detect/` artifact. Rollback: delete `.outline/drift-detect/`.
 
 ## Output
 A Reality Check Report with executive summary, drift analysis, gap analysis, cross-reference table, prioritized reconstruction plan, quick wins, and unknowns, every item evidence-cited, optionally written to `.outline/drift-detect/reality-check-YYYYMMDD-HHMM.md` when too long for chat.

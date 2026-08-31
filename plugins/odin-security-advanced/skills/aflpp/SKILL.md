@@ -164,16 +164,16 @@ Done when: the corpus is minimized and all campaign processes are stopped.
 
 ## Failure and recovery
 
-- **Build failure (LTO link error):** fall back to LLVM mode (`afl-clang-fast`); if the project requires GCC, use `afl-gcc-fast` or `afl-g++-fast`. Do not proceed with an uninstrumented binary — it produces no coverage data.
-- **GCC plugin version mismatch:** ensure the system GCC matches the AFL++ plugin build; install `gcc-<version>-plugin-dev`. Do not patch around the mismatch.
-- **Low stability (<85%):** the target is non-deterministic. Switch from a `LLVMFuzzerTestOneInput` harness to stdin or file-input fuzzing, or fix the non-determinism in the target. Do not report done with low stability.
-- **Low execs/sec (<1k):** switch to a persistent-mode (`LLVMFuzzerTestOneInput`) harness for 10–20x speedup, or set `AFL_TMPDIR=/dev/shm`.
-- **No crashes found:** recompile with `AFL_USE_ASAN=1` or `AFL_USE_UBSAN=1`; memory corruption often does not crash without a sanitizer.
-- **Memory limit exceeded with ASan:** remove the `-m` flag; ASan reserves 20 TB virtual memory and is incompatible with `-m`.
-- **Backgrounded job shows "Stopped":** the `</dev/null` redirect is missing; restart the job with it to avoid `SIGTTIN`.
-- **Docker "input device is not a TTY":** omit `-t` for non-interactive runs. For the interactive UI, run in host mode in a terminal.
-- **Partial result rule:** if the campaign stops early, the `state/` or `out/` directory still contains valid queue, crashes, and `fuzzer_stats`; report what was captured rather than discarding it.
-- **Rollback:** kill all fuzzers (`kill $(jobs -p)`), remove `out/`, `state/`, log files, and the compiled `fuzz` binary. Source under test is unchanged beyond compilation. Do not attempt to reverse `afl-system-config` or `afl-persistent-config` on a shared system — reboot the dedicated VM instead.
+- Build failure (LTO link error): fall back to LLVM mode (`afl-clang-fast`); if the project requires GCC, use `afl-gcc-fast` or `afl-g++-fast`. Do not proceed with an uninstrumented binary — it produces no coverage data.
+- GCC plugin version mismatch: ensure the system GCC matches the AFL++ plugin build; install `gcc-<version>-plugin-dev`. Do not patch around the mismatch.
+- Low stability (<85%): the target is non-deterministic. Switch from a `LLVMFuzzerTestOneInput` harness to stdin or file-input fuzzing, or fix the non-determinism in the target. Do not report done with low stability.
+- Low execs/sec (<1k): switch to a persistent-mode (`LLVMFuzzerTestOneInput`) harness for 10–20x speedup, or set `AFL_TMPDIR=/dev/shm`.
+- No crashes found: recompile with `AFL_USE_ASAN=1` or `AFL_USE_UBSAN=1`; memory corruption often does not crash without a sanitizer.
+- Memory limit exceeded with ASan: remove the `-m` flag; ASan reserves 20 TB virtual memory and is incompatible with `-m`.
+- Backgrounded job shows "Stopped": the `</dev/null` redirect is missing; restart the job with it to avoid `SIGTTIN`.
+- Docker "input device is not a TTY": omit `-t` for non-interactive runs. For the interactive UI, run in host mode in a terminal.
+- Partial result rule: if the campaign stops early, the `state/` or `out/` directory still contains valid queue, crashes, and `fuzzer_stats`; report what was captured rather than discarding it.
+- Rollback: kill all fuzzers (`kill $(jobs -p)`), remove `out/`, `state/`, log files, and the compiled `fuzz` binary. Source under test is unchanged beyond compilation. Do not attempt to reverse `afl-system-config` or `afl-persistent-config` on a shared system — reboot the dedicated VM instead.
 
 ## Output
 

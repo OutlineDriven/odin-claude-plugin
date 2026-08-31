@@ -16,8 +16,8 @@ description: 'Use when asked to review a plugin for marketplace readiness throug
 
 ## Inputs
 
-- **plugin_root** (required): Absolute path to the plugin directory to audit.
-- **gate_rules_path** (required): Absolute path to the plugin-quality-gates.mdc rule file defining pass/fail criteria.
+- plugin_root (required): Absolute path to the plugin directory to audit.
+- gate_rules_path (required): Absolute path to the plugin-quality-gates.mdc rule file defining pass/fail criteria.
 
 ## Procedure
 
@@ -29,18 +29,18 @@ description: 'Use when asked to review a plugin for marketplace readiness throug
    b. Apply each applicable gate to the file's contents.
 5. Evaluate each named gate across all examined files. A gate fails if any file violates its condition; a gate passes only when every file that is in-scope for that gate satisfies it.
 6. Assemble a report with:
-   - **Summary**: one line naming every failing gate and the overall recommendation (APPROVE, APPROVE WITH WARNINGS, or REJECT).
-   - **Gate results**: for each named gate, the status (PASS / FAIL) and a one-line evidence summary.
-   - **Warnings**: for each file that triggered a gate but is on an allowlist path, the path and the allowlist entry.
-   - **Recommendation**: APPROVE (all gates pass), APPROVE WITH WARNINGS (all gates pass and allowlist triggered), or REJECT (one or more gates fail).
+   - Summary: one line naming every failing gate and the overall recommendation (APPROVE, APPROVE WITH WARNINGS, or REJECT).
+   - Gate results: for each named gate, the status (PASS / FAIL) and a one-line evidence summary.
+   - Warnings: for each file that triggered a gate but is on an allowlist path, the path and the allowlist entry.
+   - Recommendation: APPROVE (all gates pass), APPROVE WITH WARNINGS (all gates pass and allowlist triggered), or REJECT (one or more gates fail).
 
 ## Failure and recovery
-- **Missing manifest** (`plugin_root/package.json` absent): report the absence as REJECT; stop.
-- **Incomplete manifest** (missing required fields): report the missing fields as REJECT; stop.
-- **Parse error** (unreadable or syntactically invalid file): report the file path and parse error; do not halt; continue evaluating remaining files.
-- **Gate violation** (any file fails an applicable gate): mark that gate FAIL; do not halt; continue evaluating remaining gates.
-- **Partial-result rule**: always produce a report. A report with any FAIL gate is a valid terminal output; do not fabricate a passing result.
-- **Non-mutation rule**: no file write, no VCS change, no credential use, no remote call beyond reads needed for the audit.
+- Missing manifest (`plugin_root/package.json` absent): report the absence as REJECT; stop.
+- Incomplete manifest (missing required fields): report the missing fields as REJECT; stop.
+- Parse error (unreadable or syntactically invalid file): report the file path and parse error; do not halt; continue evaluating remaining files.
+- Gate violation (any file fails an applicable gate): mark that gate FAIL; do not halt; continue evaluating remaining gates.
+- Partial-result rule: always produce a report. A report with any FAIL gate is a valid terminal output; do not fabricate a passing result.
+- Non-mutation rule: no file write, no VCS change, no credential use, no remote call beyond reads needed for the audit.
 
 ## Output
 A chat message containing the complete sectioned report. No file is written. The report is the sole artifact.

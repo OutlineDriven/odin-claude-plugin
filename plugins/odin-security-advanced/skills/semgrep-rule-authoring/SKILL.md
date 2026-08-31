@@ -47,11 +47,11 @@ Required: a description of the vulnerability, bug, or code pattern to detect, an
 
 ## Failure and recovery
 
-- **Missing pattern or language:** stop before any write; the exact result is a request for the missing input.
-- **Semgrep missing or the language unsupported:** blocked; report the missing binary or unsupported language; no files written.
-- **`--validate` fails or `--dump-ast` cannot parse the construct:** fix the rule or reduce the snippet to the minimal reproducing form; if the language version itself fails to parse, report blocked citing the parse error.
-- **Tests cannot be made green (persistent missed or incorrect results after bounded retries):** roll back by deleting the rule directory and report the failing expectation class; a rule with any failing expectation is never reported as done.
-- **Final scan shows an uninterpolated metavariable:** treat as a failing done-check; fix message or pattern and rerun the test gate; do not ship the rule with the defect.
+- Missing pattern or language: stop before any write; the exact result is a request for the missing input.
+- Semgrep missing or the language unsupported: blocked; report the missing binary or unsupported language; no files written.
+- `--validate` fails or `--dump-ast` cannot parse the construct: fix the rule or reduce the snippet to the minimal reproducing form; if the language version itself fails to parse, report blocked citing the parse error.
+- Tests cannot be made green (persistent missed or incorrect results after bounded retries): roll back by deleting the rule directory and report the failing expectation class; a rule with any failing expectation is never reported as done.
+- Final scan shows an uninterpolated metavariable: treat as a failing done-check; fix message or pattern and rerun the test gate; do not ship the rule with the defect.
 
 Partial results are never reported as success. The rollback path is deleting the rule directory, which restores the pre-run state because the run writes nothing else.
 

@@ -33,12 +33,12 @@ A named path or identified target must be supplied or named in the request and d
 6. **Cut the residue and land it.** Delete the old implementation and every surface reachable only from it. Do not write an adapter from the new shape back to the old — that resurrects the demolished structure under a new name. Run the repo's existing test suite, and cover every behavior step 4 classified essential that had no test. Commit this target atomically before starting the next. A search for every symbol classified residue must return nothing; no unused imports, deps, types, or files survive. Surfaces kept essential or refused at the boundary gate keep their identifiers — they are the contract, not leftovers. Half-demolished is the forbidden state: finish a target or revert it, never ship the middle. Done when: the target is committed atomically with residue deleted, essential behaviors tested, and the verifier green.
 
 ## Failure and recovery
-- **Residue remains (exit 1):** symbols, imports, config keys, or doc references classified residue still resolve. Delete them; do not ship until the search is empty.
-- **Verifier red (exit 2):** the repo's own tests or build fail against the replacement. Fix the replacement or revert the target; never ship red.
-- **Campaign stalled mid-target (exit 3):** a target is half old, half new. Finish it or revert it via version control to the last green commit; never ship the middle.
-- **Divergence unclassified (exit 4):** old behavior neither folded in as essential nor cut as residue. Complete the walk before proceeding.
-- **Boundary cut without an answer (exit 5):** a published surface was destroyed on silence or after a no. Restore it from version control and settle the question.
-- **Scope exceeded (exit 6):** a repo-wide sweep ran off a named target. Revert the untargeted work.
+- Residue remains (exit 1): symbols, imports, config keys, or doc references classified residue still resolve. Delete them; do not ship until the search is empty.
+- Verifier red (exit 2): the repo's own tests or build fail against the replacement. Fix the replacement or revert the target; never ship red.
+- Campaign stalled mid-target (exit 3): a target is half old, half new. Finish it or revert it via version control to the last green commit; never ship the middle.
+- Divergence unclassified (exit 4): old behavior neither folded in as essential nor cut as residue. Complete the walk before proceeding.
+- Boundary cut without an answer (exit 5): a published surface was destroyed on silence or after a no. Restore it from version control and settle the question.
+- Scope exceeded (exit 6): a repo-wide sweep ran off a named target. Revert the untargeted work.
 - Partial-result rule: a half-demolished target is never left in the tree. Revert to the last green commit rather than widen scope or invent evidence. Never swallow a verifier failure or pretend the done predicate holds.
 
 ## Output

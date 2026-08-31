@@ -16,12 +16,12 @@ description: 'Use when a user needs coverage-guided fuzzing for Python code or a
 
 ## Inputs
 
-- **Target**: the Python function or module to fuzz, or the Python C extension to fuzz. Required.
-- **Target kind**: pure Python, or native C extension. Required; it selects the instrumentation and build path.
-- **Expected exceptions**: the exception types the target legitimately raises on bad input, so the harness catches them instead of crashing. Optional but recommended.
-- **Seed corpus**: initial input files for `corpus/`. Optional; Atheris can start empty.
-- **Time/length budget**: `-max_total_time` and `-max_len` values. Optional; defaults are libFuzzer defaults.
-- **Sanitizers**: whether AddressSanitizer and/or UndefinedBehaviorSanitizer are enabled. Optional; ASan is the default for native extensions.
+- Target: the Python function or module to fuzz, or the Python C extension to fuzz. Required.
+- Target kind: pure Python, or native C extension. Required; it selects the instrumentation and build path.
+- Expected exceptions: the exception types the target legitimately raises on bad input, so the harness catches them instead of crashing. Optional but recommended.
+- Seed corpus: initial input files for `corpus/`. Optional; Atheris can start empty.
+- Time/length budget: `-max_total_time` and `-max_len` values. Optional; defaults are libFuzzer defaults.
+- Sanitizers: whether AddressSanitizer and/or UndefinedBehaviorSanitizer are enabled. Optional; ASan is the default for native extensions.
 
 ## Procedure
 
@@ -61,14 +61,14 @@ description: 'Use when a user needs coverage-guided fuzzing for Python code or a
 9. **Reproduce failures.** A crash artifact (named `crash-*` or `leak-*`) is written next to the harness. Replay it deterministically with `uv run python fuzz.py <artifact>` and confirm the same failure recurs. Done when: each saved artifact reproduces the same failure or is classified as nondeterministic.
 
 ## Failure and recovery
-- **No coverage increase.** Cause: poor seed corpus or target not instrumented. Recovery: add representative seeds; confirm `instrument_imports()` wraps the target imports and `@atheris.instrument_func` wraps the entry point. Do not declare success on a stall.
-- **Import errors / modules imported before instrumentation.** Recovery: move the target imports inside the `atheris.instrument_imports()` context manager, before `atheris.Setup()`.
-- **Segfault with no ASan output.** Cause: `LD_PRELOAD` not set for a native extension. Recovery: export `LD_PRELOAD` to `asan_with_fuzzer.so` and rerun.
-- **Build failures for a native extension.** Cause: wrong compiler or missing flags. Recovery: verify `CC`, `CXX`, `CFLAGS`, `CXXFLAGS`, and the clang version; reinstall the extension from source with `--no-binary-package`.
-- **Memory-allocation or leak noise.** Recovery: set `ASAN_OPTIONS=allocator_may_return_null=1,detect_leaks=0`.
-- **Crash artifact does not reproduce.** Cause: nondeterminism in the harness (randomness, time, unordered iteration over mutable state). Recovery: remove the nondeterminism so `TestOneInput` is a pure function of `data`, then rerun. A non-reproducing crash is not a confirmed defect.
-- **Partial-result rule.** A campaign that finds no crash is a partial result (coverage gained, no defect proven), not proof of absence. Report coverage and corpus growth; do not claim the target is bug-free.
-- **Rollback.** Delete the harness file and the `corpus/` directory. Restore `pyproject.toml` and `uv.lock` to their pre-run state, or if they were created by this skill, remove the added atheris entry and `no-binary-package` configuration. The source under test is never modified by this skill.
+- No coverage increase. Cause: poor seed corpus or target not instrumented. Recovery: add representative seeds; confirm `instrument_imports()` wraps the target imports and `@atheris.instrument_func` wraps the entry point. Do not declare success on a stall.
+- Import errors / modules imported before instrumentation. Recovery: move the target imports inside the `atheris.instrument_imports()` context manager, before `atheris.Setup()`.
+- Segfault with no ASan output. Cause: `LD_PRELOAD` not set for a native extension. Recovery: export `LD_PRELOAD` to `asan_with_fuzzer.so` and rerun.
+- Build failures for a native extension. Cause: wrong compiler or missing flags. Recovery: verify `CC`, `CXX`, `CFLAGS`, `CXXFLAGS`, and the clang version; reinstall the extension from source with `--no-binary-package`.
+- Memory-allocation or leak noise. Recovery: set `ASAN_OPTIONS=allocator_may_return_null=1,detect_leaks=0`.
+- Crash artifact does not reproduce. Cause: nondeterminism in the harness (randomness, time, unordered iteration over mutable state). Recovery: remove the nondeterminism so `TestOneInput` is a pure function of `data`, then rerun. A non-reproducing crash is not a confirmed defect.
+- Partial-result rule. A campaign that finds no crash is a partial result (coverage gained, no defect proven), not proof of absence. Report coverage and corpus growth; do not claim the target is bug-free.
+- Rollback. Delete the harness file and the `corpus/` directory. Restore `pyproject.toml` and `uv.lock` to their pre-run state, or if they were created by this skill, remove the added atheris entry and `no-binary-package` configuration. The source under test is never modified by this skill.
 
 ## Output
 - A deterministic, instrumented Atheris harness file.

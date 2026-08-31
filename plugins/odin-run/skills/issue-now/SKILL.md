@@ -35,12 +35,12 @@ disable-model-invocation: true
 9. Read the issue again from the tracker and compare its resulting state and content with the approved preview. Report success only when this fresh read confirms the match. Done when: the fresh read confirms the issue state and content match the approved preview.
 
 ## Failure and recovery
-- **Invalid or ambiguous target:** make no mutation and return `blocked` with the missing or conflicting identifier.
-- **Insufficient evidence:** make no mutation and return `indeterminate`, listing the unresolved completion claims and evidence needed.
-- **Approval absent or mismatched:** make no mutation and return `awaiting-approval` with the exact preview that remains unapproved.
-- **Access or tracker failure before mutation:** make no mutation and return `blocked` with the failed operation and tracker error, excluding secrets.
-- **Mutation rejected:** return `failed`; retain the confirmed pre-mutation state and report the tracker error without retrying a broader or different change.
-- **Mutation accepted but confirmation unavailable or mismatched:** return `unconfirmed` with the approved change, the last confirmed state, and the observed mismatch or read failure. Do not claim the done predicate holds and do not attempt a compensating mutation without a new preview and explicit human approval.
+- Invalid or ambiguous target: make no mutation and return `blocked` with the missing or conflicting identifier.
+- Insufficient evidence: make no mutation and return `indeterminate`, listing the unresolved completion claims and evidence needed.
+- Approval absent or mismatched: make no mutation and return `awaiting-approval` with the exact preview that remains unapproved.
+- Access or tracker failure before mutation: make no mutation and return `blocked` with the failed operation and tracker error, excluding secrets.
+- Mutation rejected: return `failed`; retain the confirmed pre-mutation state and report the tracker error without retrying a broader or different change.
+- Mutation accepted but confirmation unavailable or mismatched: return `unconfirmed` with the approved change, the last confirmed state, and the observed mismatch or read failure. Do not claim the done predicate holds and do not attempt a compensating mutation without a new preview and explicit human approval.
 - A read-only comparison and preview are valid partial results. No remote state change counts as complete until the post-mutation read confirms it.
 
 ## Output

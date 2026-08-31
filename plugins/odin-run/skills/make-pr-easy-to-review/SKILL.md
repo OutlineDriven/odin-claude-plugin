@@ -33,12 +33,12 @@ Required: the pull request or local branch, its base ref, and the human's reques
 
 ## Failure and recovery
 
-- **Invalid target**: if the branch, base, merge-base, or commit range cannot be resolved unambiguously, make no mutation and return `blocked` with the unresolved input.
-- **Dirty worktree**: if unrelated or uncommitted changes could contaminate the operation, make no mutation and return `blocked` with the affected paths.
-- **Consent absent or changed**: if explicit consent does not cover the exact previewed rewrite, do not rewrite history; return the annotation-only result and classify the rewrite as `not-authorized`.
-- **Rewrite failure**: if the rewrite stops partway, restore the original branch tip from the recovery ref. Return `blocked` with the failed operation and recovery state; do not present a partial sequence as complete.
-- **Tree mismatch**: if the post-rewrite tree identifier differs from the recorded tree identifier, restore the original branch tip and return `tree-mismatch` with both identifiers.
-- **Evidence gap**: mark unsupported risk or verification claims as unverified. Never infer that the done predicate holds from a successful command alone.
+- Invalid target: if the branch, base, merge-base, or commit range cannot be resolved unambiguously, make no mutation and return `blocked` with the unresolved input.
+- Dirty worktree: if unrelated or uncommitted changes could contaminate the operation, make no mutation and return `blocked` with the affected paths.
+- Consent absent or changed: if explicit consent does not cover the exact previewed rewrite, do not rewrite history; return the annotation-only result and classify the rewrite as `not-authorized`.
+- Rewrite failure: if the rewrite stops partway, restore the original branch tip from the recovery ref. Return `blocked` with the failed operation and recovery state; do not present a partial sequence as complete.
+- Tree mismatch: if the post-rewrite tree identifier differs from the recorded tree identifier, restore the original branch tip and return `tree-mismatch` with both identifiers.
+- Evidence gap: mark unsupported risk or verification claims as unverified. Never infer that the done predicate holds from a successful command alone.
 
 ## Output
 

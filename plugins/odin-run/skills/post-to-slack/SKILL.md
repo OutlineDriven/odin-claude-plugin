@@ -31,10 +31,10 @@ disable-model-invocation: true
 6. Report the confirmed post. If confirmation is absent, stop with the applicable failure result and do not claim that the message was posted. Done when: the post is reported as confirmed or the failure result is returned.
 
 ## Failure and recovery
-- **Missing authority or input:** do not access the credential or send a request; report `blocked` and name the missing explicit request, message, or webhook configuration.
-- **Invalid webhook boundary:** do not send a request; report `blocked` with the failed URL requirement while redacting the full URL and secret path.
-- **Transport, redirect, HTTP, or Slack rejection:** do not retry; report `failed`, the safe status or error, and whether the server may have received the request. Redact credentials and response details that reproduce the webhook URL.
-- **Ambiguous result:** if the request may have reached Slack but the exact success response was not observed, report `unknown`; do not resend because that could duplicate the message.
+- Missing authority or input: do not access the credential or send a request; report `blocked` and name the missing explicit request, message, or webhook configuration.
+- Invalid webhook boundary: do not send a request; report `blocked` with the failed URL requirement while redacting the full URL and secret path.
+- Transport, redirect, HTTP, or Slack rejection: do not retry; report `failed`, the safe status or error, and whether the server may have received the request. Redact credentials and response details that reproduce the webhook URL.
+- Ambiguous result: if the request may have reached Slack but the exact success response was not observed, report `unknown`; do not resend because that could duplicate the message.
 - A confirmed post has no rollback in this procedure. State that removal, if needed, requires an authorized human action in Slack rather than pretending the mutation was reversed.
 
 ## Output

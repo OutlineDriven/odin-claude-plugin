@@ -16,9 +16,9 @@ description: 'Use when hardening error handling, validating boundary behavior, o
 
 ## Inputs
 
-- **Code under test** (required): source files, modules, or functions to harden.
-- **Language runtime and sanitizer toolchain** (required): compiler, test runner, and available sanitizers (ASan, TSan, MSan, Miri, `-race`, or equivalent).
-- **Existing test suite** (optional): prior tests to avoid duplication and to identify gaps.
+- Code under test (required): source files, modules, or functions to harden.
+- Language runtime and sanitizer toolchain (required): compiler, test runner, and available sanitizers (ASan, TSan, MSan, Miri, `-race`, or equivalent).
+- Existing test suite (optional): prior tests to avoid duplication and to identify gaps.
 
 ## Refusals
 

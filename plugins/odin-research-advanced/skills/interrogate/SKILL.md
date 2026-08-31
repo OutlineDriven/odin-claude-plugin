@@ -60,8 +60,8 @@ description: 'Use when asked to "interrogate" or run an adversarial multi-model 
 ## Output
 A structured review report containing:
 
-- **Verdict**: The act / consider / note / dismiss determination for each rubric criterion.
-- **Agreement map**: Per-criterion model positions — agreement, dissent, and substance.
-- **Lead synthesis**: The lead model's synthesis and final recommendation, if produced.
-- **Failure log**: Any model that failed to return, with the criterion or scope it was assigned.
-- **Disposition recommendation**: A final actionable next step derived from the aggregate verdict.
+- Verdict: The act / consider / note / dismiss determination for each rubric criterion.
+- Agreement map: Per-criterion model positions — agreement, dissent, and substance.
+- Lead synthesis: The lead model's synthesis and final recommendation, if produced.
+- Failure log: Any model that failed to return, with the criterion or scope it was assigned.
+- Disposition recommendation: A final actionable next step derived from the aggregate verdict.

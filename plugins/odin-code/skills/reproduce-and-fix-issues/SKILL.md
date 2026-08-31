@@ -17,14 +17,14 @@ disable-model-invocation: true
 
 ## Refusals
 
-- **Untrusted reports**: rejected. The report must name the affected feature, the environment, and the expected versus actual behavior.
-- **Scope beyond the named feature**: rejected. Do not extend the fix to adjacent features or infrastructure without an explicit new report.
+- Untrusted reports: rejected. The report must name the affected feature, the environment, and the expected versus actual behavior.
+- Scope beyond the named feature: rejected. Do not extend the fix to adjacent features or infrastructure without an explicit new report.
 - **Assuming a race condition without at least two independent reproduction attempts**: rejected. Fail the reproduction step instead.
 
 ## Inputs
 
-- **Required**: a trusted bug or performance report describing the symptom or regression. The report must name the affected feature, the environment or context, and the expected versus actual behavior.
-- **Optional**: reproduction steps, a stack trace, a performance profile, or any supplemental diagnostic from the report.
+- Required: a trusted bug or performance report describing the symptom or regression. The report must name the affected feature, the environment or context, and the expected versus actual behavior.
+- Optional: reproduction steps, a stack trace, a performance profile, or any supplemental diagnostic from the report.
 
 ## Procedure
 
@@ -41,8 +41,8 @@ disable-model-invocation: true
 - **`no-repro`**: the symptom cannot be reproduced after at least two attempts. Stop. Return the evidence of the reproduction attempts and a blocked result.
 - **`non-converged`**: the fix is implemented but the symptom persists after verification. Do not widen scope. Return the non-converged result with the last verified state.
 - **`scope-widening-blocked`**: a root cause lies outside the named feature. Stop. Do not extend the fix without an explicit new report.
-- **Rollback**: if the fix introduces a regression, revert to the last known-good state using version control. Do not commit the regression.
-- **Partial-result rule**: if any step stops for a named failure class, return the result at that step with the evidence collected so far. Do not fabricate or assume subsequent steps succeeded.
+- Rollback: if the fix introduces a regression, revert to the last known-good state using version control. Do not commit the regression.
+- Partial-result rule: if any step stops for a named failure class, return the result at that step with the evidence collected so far. Do not fabricate or assume subsequent steps succeeded.
 
 ## Output
 

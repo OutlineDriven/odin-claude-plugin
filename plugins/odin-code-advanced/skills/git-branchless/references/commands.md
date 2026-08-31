@@ -59,11 +59,11 @@ Programmatic revset evaluation.
 
 Move HEAD forward / backward in the stack.
 
-- `[N]` — number of commits to skip.
+- `[N]` : number of commits to skip.
 - `-i` / `--interactive` — choose between ambiguous targets.
 - `-o` / `--oldest`, `-n` / `--newest` — disambiguate without prompting.
-- `-a` / `--all` — jump to first/last commit in the stack.
-- `-b` / `--branch` — navigate by branches instead of commits.
+- `-a` / `--all` : jump to first/last commit in the stack.
+- `-b` / `--branch` : navigate by branches instead of commits.
 
 ### `git switch -i [query]` / `git sw -i [query]`
 
@@ -79,24 +79,24 @@ Interactive commit selector (Skim-powered) for checking out arbitrary commits in
 
 Replacement for `git add` + `git commit`. Captures unstaged changes by default.
 
-- `-m, --message <msg>` — commit message (CLI).
-- `-i, --interactive` — TUI for hunk selection.
+- `-m, --message <msg>` : commit message (CLI).
+- `-i, --interactive` : TUI for hunk selection.
 - `-c, --create <name>` — create + checkout new branch and commit to it.
 - `-d, --detach` — start a new stack on a detached HEAD.
-- `-I, --insert` — insert commit between current HEAD and its children (rebases descendants).
-- `--fixup <commit>` — record a `fixup!`-style commit pointing at `<commit>`.
+- `-I, --insert` : insert commit between current HEAD and its children (rebases descendants).
+- `--fixup <commit>` : record a `fixup!`-style commit pointing at `<commit>`.
 
 ### `git amend [--reparent]`
 
-Amend HEAD's contents and auto-restack descendants. **Does not edit the message** — use `git reword` for that.
+Amend HEAD's contents and auto-restack descendants. **Does not edit the message** ; use `git reword` for that.
 
-- `--reparent` (v0.7.0+) — amend without rebasing children; children keep their original tree state.
+- `--reparent` (v0.7.0+) : amend without rebasing children; children keep their original tree state.
 
 ### `git reword [<commit>...] [-m <msg>]`
 
 Edit commit messages without checking out.
 
-- `git reword` (no args) — edit HEAD's message.
+- `git reword` (no args) : edit HEAD's message.
 - `git reword <revset>` — edit one or many commits; supports `stack()` for batch.
 - `-m '<msg>'` — replace message non-interactively.
 
@@ -181,8 +181,8 @@ Push a stack of branches to a remote forge.
 - Default revset: `stack()`. Common forms: `git submit @` (branches at HEAD), `git submit 'draft()'`.
 - `-c, --create` — push branches that do not yet exist on the remote. The branch must already exist locally (`git branch <name> <commit>`). First feature publish: `git submit -c @`.
 - `--forge phabricator` — Phabricator integration (well tested).
-- `--forge github` — GitHub integration. **Still flagged unsuitable for general use upstream**; landing/reordering a stack may lose PR ancestry. Prefer the default `branch` forge (or stock push fallback) for GitHub today.
-- `--dry-run`, `--jobs N` — preview / parallelism.
+- `--forge github` : GitHub integration. **Still flagged unsuitable for general use upstream**; landing/reordering a stack may lose PR ancestry. Prefer the default `branch` forge (or stock push fallback) for GitHub today.
+- `--dry-run`, `--jobs N` : preview / parallelism.
 
 **Safety caveat — force-push:** `git submit` rewrites the remote history of every existing branch in the stack. Use only on feature branches no other collaborator is actively building on. **Never** `git submit` targeting `main` / `master` / `release/*` — gated main land uses stock `git push` (Recipe 9 Path M). On repos with branch protection that denies force-push, `git submit` will fail; fall back to plain `git push -u origin <feature>` for that branch. Never combine `git submit` with `--no-verify` or with branches that are someone else's review checkout. Full scenarios: Recipe 9.
 
@@ -198,12 +198,12 @@ cached by `(command, tree-id)`.
 
 - `-x, --exec '<cmd>'` — command to run. (`-x` here is short for `--exec`, not a revset selector.)
 - `-c, --command <name>` — pre-aliased command from config (`branchless.test.alias.<name>`).
-- `-S, --search linear|reverse|binary` — search strategy when looking for the first failing commit.
-- `-b, --bisect` — shorthand for `--search binary`.
-- `-j, --jobs N` — parallel execution (`0` = autodetect).
-- `-s, --strategy working-copy|worktree` — execution environment.
-- `--no-cache` — skip cached results.
-- `-i, --interactive`, `-v, --verbose`, `-vv` — manual / verbose modes.
+- `-S, --search linear|reverse|binary` : search strategy when looking for the first failing commit.
+- `-b, --bisect` : shorthand for `--search binary`.
+- `-j, --jobs N` : parallel execution (`0` = autodetect).
+- `-s, --strategy working-copy|worktree` : execution environment.
+- `--no-cache` : skip cached results.
+- `-i, --interactive`, `-v, --verbose`, `-vv` : manual / verbose modes.
 
 Environment available to the command:
 
@@ -224,7 +224,7 @@ Display or evict cached test outcomes.
 
 Full treatment lives in `references/recovery.md`. Quick reference:
 
-- `git undo` / `git undo -i` — revert any operation tracked by the event log.
+- `git undo` / `git undo -i` : revert any operation tracked by the event log.
 - `git snapshot create` / `git snapshot restore` — working-copy snapshots.
 - `git bug-report` — collect repo state for filing issues.
 

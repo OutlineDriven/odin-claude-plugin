@@ -16,9 +16,9 @@ description: 'Use when asked to run smoke tests or verify a local build. Applies
 
 ## Inputs
 
-- **Required:** working directory containing a runnable build and test suite.
-- **Optional:** named smoke-test command or target (defaults to the project's conventional smoke target).
-- **Required:** network access if the build or tests retrieve remote artifacts.
+- Required: working directory containing a runnable build and test suite.
+- Optional: named smoke-test command or target (defaults to the project's conventional smoke target).
+- Required: network access if the build or tests retrieve remote artifacts.
 
 ## Procedure
 

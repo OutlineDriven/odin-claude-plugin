@@ -16,9 +16,9 @@ description: 'Use when contradictions, revisit conditions, or duplicates appear 
 
 ## Inputs
 
-- **Topic file** (required): the knowledge file containing the entry or entries that triggered maintenance.
-- **Triggering condition** (required): which of the four trigger classes fired — contradiction, revisit-when, duplicate/conflict, or oversized file.
-- **Entry or entries** (required): the specific entry or pair of entries involved.
+- Topic file (required): the knowledge file containing the entry or entries that triggered maintenance.
+- Triggering condition (required): which of the four trigger classes fired — contradiction, revisit-when, duplicate/conflict, or oversized file.
+- Entry or entries (required): the specific entry or pair of entries involved.
 
 ## Procedure
 

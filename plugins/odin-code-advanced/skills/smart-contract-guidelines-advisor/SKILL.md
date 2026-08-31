@@ -22,9 +22,9 @@ description: 'Use when a smart-contract project needs architecture, implementati
 
 ## Inputs
 
-- **Codebase access** (required): the smart-contract source tree, including contract files, test files, configuration, and dependency manifests.
-- **Project context** (optional): README, specifications, deployment plans, or documentation that clarifies goals and constraints.
-- **Platform identification** (required): the target blockchain platform (Solidity/EVM, Rust/Solana, Cairo/StarkNet, TON, Algorand, Cosmos, Substrate, or other).
+- Codebase access (required): the smart-contract source tree, including contract files, test files, configuration, and dependency manifests.
+- Project context (optional): README, specifications, deployment plans, or documentation that clarifies goals and constraints.
+- Platform identification (required): the target blockchain platform (Solidity/EVM, Rust/Solana, Cairo/StarkNet, TON, Algorand, Cosmos, Substrate, or other).
 
 ## Procedure
 

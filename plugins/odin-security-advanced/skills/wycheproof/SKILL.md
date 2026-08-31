@@ -17,10 +17,10 @@ description: 'Use when validating a cryptographic implementation against Project
 ## Inputs
 
 Required:
-- **Algorithm target**: the cryptographic construction under test (AES-GCM, AES-EAX, ChaCha20-Poly1305, ECDSA, ECDH, EdDSA, RSA-PKCS1, RSA-PSS, HMAC, HKDF, X25519, X448).
-- **Implementation under test**: the crypto library or module to validate, with its parameter constraints (key size, curve, hash).
-- **Test framework**: pytest (Python), mocha or jest (JavaScript), or equivalent parameterized test runner.
-- **Vector-acquisition policy**: one of (a) existing local Wycheproof submodule at `wycheproof/`, (b) a fetched JSON snapshot from `https://raw.githubusercontent.com/C2SP/wycheproof/master/testvectors_v1/`, or (c) pre-existing local JSON files, confirmed by the human up front.
+- Algorithm target: the cryptographic construction under test (AES-GCM, AES-EAX, ChaCha20-Poly1305, ECDSA, ECDH, EdDSA, RSA-PKCS1, RSA-PSS, HMAC, HKDF, X25519, X448).
+- Implementation under test: the crypto library or module to validate, with its parameter constraints (key size, curve, hash).
+- Test framework: pytest (Python), mocha or jest (JavaScript), or equivalent parameterized test runner.
+- Vector-acquisition policy: one of (a) existing local Wycheproof submodule at `wycheproof/`, (b) a fetched JSON snapshot from `https://raw.githubusercontent.com/C2SP/wycheproof/master/testvectors_v1/`, or (c) pre-existing local JSON files, confirmed by the human up front.
 
 ## Procedure
 
@@ -59,17 +59,17 @@ Required:
    This stage also serves the explain-a-disagreement trigger: when the user asks why an implementation disagrees with a vector, the answer is the classification plus the comment, flags, and notes that explain the vector's intent. Done when: the suite is executed and every failure is classified as implementation bug or parameter mismatch with comment, flags, and notes recorded.
 
 5. **Assemble the per-category pass/fail/warn summary.** Summarize results by category:
-   - **valid**: count passed, count failed.
-   - **invalid**: count passed (correctly rejected), count failed (incorrectly accepted).
-   - **acceptable**: count succeeded, count failed, all logged as warnings.
+   - valid: count passed, count failed.
+   - invalid: count passed (correctly rejected), count failed (incorrectly accepted).
+   - acceptable: count succeeded, count failed, all logged as warnings.
    For each failed case, include the `tcId`, `comment`, `flags`, and the classification (implementation bug or parameter mismatch). Done when: the per-category summary is assembled with counts and per-failure detail.
 
 ## Failure and recovery
 
-- **BLOCKED: missing vector file**: the JSON file is absent under the confirmed acquisition policy. Report the expected path. Do not generate synthetic vectors or acquire vectors outside the confirmed policy.
-- **BLOCKED: no matching test groups**: all groups were excluded by the implementation's constraint filters. Report which filters excluded all groups and ask the human to verify parameters.
-- **PARTIAL: interrupted run**: report which `tcId` ranges completed and which did not. Never claim Done for untested vectors.
-- **Acceptable-vector disagreements**: log as warnings only. Never fail a test on an acceptable result alone.
+- BLOCKED: missing vector file: the JSON file is absent under the confirmed acquisition policy. Report the expected path. Do not generate synthetic vectors or acquire vectors outside the confirmed policy.
+- BLOCKED: no matching test groups: all groups were excluded by the implementation's constraint filters. Report which filters excluded all groups and ask the human to verify parameters.
+- PARTIAL: interrupted run: report which `tcId` ranges completed and which did not. Never claim Done for untested vectors.
+- Acceptable-vector disagreements: log as warnings only. Never fail a test on an acceptable result alone.
 
 ## Output
 

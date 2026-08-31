@@ -30,12 +30,12 @@ description: 'Use when a new isolated worktree or branch is requested, or an exi
 6. Report the worktree's absolute path and current branch, and confirm the harness can see it (native tool) or that it lives under the tracked `.worktrees/` convention (git fallback). Done when: the path, branch, mode, and creation method are reported.
 
 ## Failure and recovery
-- **Already in an isolated worktree**: do not create another. Report the existing path and proceed in place (new-work) or check out the named ref there (isolate-existing-ref).
-- **Ref already checked out elsewhere**: report the existing checkout path; never create a second worktree for the same branch. Let the caller work in place or create a detached worktree at the same commit.
-- **"Worktree already exists"**: switch to it (`cd .worktrees/<branch>`) or remove it (`git worktree remove .worktrees/<branch>`) before recreating.
-- **"Cannot remove worktree: it is the current worktree"**: `cd` out first, then remove.
-- **Sandbox or permission error on `git worktree add`**: report the failure and ask the user for a blocking decision (work in the current checkout vs stop). Work in the current checkout only on explicit confirmation.
-- **Non-converged**: if isolation cannot be established and no fallback is confirmed, return the blocked result with the exact error and the paths inspected. Never claim the done predicate holds.
+- Already in an isolated worktree: do not create another. Report the existing path and proceed in place (new-work) or check out the named ref there (isolate-existing-ref).
+- Ref already checked out elsewhere: report the existing checkout path; never create a second worktree for the same branch. Let the caller work in place or create a detached worktree at the same commit.
+- "Worktree already exists": switch to it (`cd .worktrees/<branch>`) or remove it (`git worktree remove .worktrees/<branch>`) before recreating.
+- "Cannot remove worktree: it is the current worktree": `cd` out first, then remove.
+- Sandbox or permission error on `git worktree add`: report the failure and ask the user for a blocking decision (work in the current checkout vs stop). Work in the current checkout only on explicit confirmation.
+- Non-converged: if isolation cannot be established and no fallback is confirmed, return the blocked result with the exact error and the paths inspected. Never claim the done predicate holds.
 
 ## Output
 The isolated worktree's absolute path, current branch, mode used (new-work or isolate-existing-ref), and creation method (native tool or git fallback); or the existing worktree path and branch if already isolated.

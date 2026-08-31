@@ -17,7 +17,7 @@ description: 'Use when a user asks to fix a listing whose order has gone arbitra
 ## Refusals
 
 - **Freely reorderable listings with no intentionally ranked items**: use `reorder`. This skill adds the respect-deliberate constraint, which is unnecessary when no ranks exist.
-- **Adding, removing, or rewriting item text**: rejected. Items are moved only.
+- Adding, removing, or rewriting item text: rejected. Items are moved only.
 - **Imposing an arbitrary order when no principle is detectable**: rejected. Report MISS and stop.
 
 ## Inputs
@@ -37,8 +37,8 @@ description: 'Use when a user asks to fix a listing whose order has gone arbitra
 
 ## Failure and recovery
 
-- **MISS (no ordering principle detectable)**: report "Could not detect an ordering principle from item content." Leave the listing unchanged. Do not impose an arbitrary order.
-- **PARSE**: if the listing cannot be parsed into structured items, report "Could not parse the listing format." Leave the file unchanged.
+- MISS (no ordering principle detectable): report "Could not detect an ordering principle from item content." Leave the listing unchanged. Do not impose an arbitrary order.
+- PARSE: if the listing cannot be parsed into structured items, report "Could not parse the listing format." Leave the file unchanged.
 - **ENTANGLED (respect-deliberate constraint unsatisfiable)**: if preserving intentionally ordered items and the inferred principle produce a conflict, report "Respect-deliberate constraint unsatisfiable: the ordering principle and the stated ranks cannot both hold." Leave the listing unchanged.
 
 If a lockstep mirror write partially fails (e.g., one of several mirrors is read-only), report the failure for that mirror and write the successfully writable mirrors. Do not consider the operation complete unless every mirror is updated. If any write operation fails, do not modify the original listing. Do not produce a partially reordered file.

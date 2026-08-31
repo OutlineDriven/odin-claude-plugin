@@ -36,12 +36,12 @@ Invariants: validate before searching; dry-run before applying; single-quote pat
 For complex tasks, ast-grep supports YAML rule files (`sgconfig.yml`, `ast-grep new project`) with `rule`, `fix`, `inside`, `any`, and `matches` fields; invoke `ast-grep scan`/`run`/`test` directly for these.
 
 ## Failure and recovery
-- **Malformed pattern**: `validate` exits 2 and prints the pattern debug tree with the ERROR node. No files touched. Fix the pattern and re-validate.
-- **Wrong blast radius**: the dry-run diff or match count is not as expected. Do not `--apply`. Refine the pattern and re-run the dry-run. No files touched.
-- **Zero matches unexpectedly**: run the 0-matches ladder in order: (1) validate the pattern; (2) check `--lang` (`tsx` is not `ts`; the wrong dialect silently matches nothing); (3) `ast-grep run -p '<pattern>' -l <L> --debug-query=pattern` and look for `ERROR`; (4) inspect the target's actual tree with `--debug-query=ast` on a known-matching snippet; (5) reproduce in the online playground. No files touched until a correct match is confirmed.
-- **ast-grep binary absent**: `validate` skips the parse check (regex-smell only) and warns; `replace` exits 2 without running. Install ast-grep before proceeding.
-- **Apply pass failure**: the helper reports the ast-grep error and returns non-zero. Revert the partially-written VCS-tracked targets via version control and re-run the full dry-run/apply sequence.
-- **Partial-result rule**: a failed apply pass leaves whatever ast-grep wrote; never report done. Recover via version control and re-run from the dry-run.
+- Malformed pattern: `validate` exits 2 and prints the pattern debug tree with the ERROR node. No files touched. Fix the pattern and re-validate.
+- Wrong blast radius: the dry-run diff or match count is not as expected. Do not `--apply`. Refine the pattern and re-run the dry-run. No files touched.
+- Zero matches unexpectedly: run the 0-matches ladder in order: (1) validate the pattern; (2) check `--lang` (`tsx` is not `ts`; the wrong dialect silently matches nothing); (3) `ast-grep run -p '<pattern>' -l <L> --debug-query=pattern` and look for `ERROR`; (4) inspect the target's actual tree with `--debug-query=ast` on a known-matching snippet; (5) reproduce in the online playground. No files touched until a correct match is confirmed.
+- ast-grep binary absent: `validate` skips the parse check (regex-smell only) and warns; `replace` exits 2 without running. Install ast-grep before proceeding.
+- Apply pass failure: the helper reports the ast-grep error and returns non-zero. Revert the partially-written VCS-tracked targets via version control and re-run the full dry-run/apply sequence.
+- Partial-result rule: a failed apply pass leaves whatever ast-grep wrote; never report done. Recover via version control and re-run from the dry-run.
 
 ## Output
 - `validate`: exit 0 (valid) or 2 (malformed, with the pattern debug tree); advisory regex-smell hints on stderr.

@@ -17,10 +17,10 @@ description: 'Use when product copy needs buyer-objection evidence collected thr
 
 ## Inputs
 
-- **Approved recipients** (required): the exact list of buyers to contact, named before any outreach.
-- **Interview cap** (required): the total number of interviews allowed across all batches.
-- **Batch size** (required): the maximum recipients per batch.
-- **Approved channels** (required): the communication channels permitted for outreach (email, phone, scheduled video call). Named before any contact.
+- Approved recipients (required): the exact list of buyers to contact, named before any outreach.
+- Interview cap (required): the total number of interviews allowed across all batches.
+- Batch size (required): the maximum recipients per batch.
+- Approved channels (required): the communication channels permitted for outreach (email, phone, scheduled video call). Named before any contact.
 
 ## Procedure
 
@@ -38,12 +38,12 @@ description: 'Use when product copy needs buyer-objection evidence collected thr
 
 ## Failure and recovery
 
-- **Scope drift after approval:** end the run; the approval covered the original scope only. Terminal class: `blocked`.
-- **Access blocked:** a recipient cannot be reached or a channel is denied. Report what blocked access and stop. Terminal class: `blocked`.
-- **Interview cap reached with sufficient evidence:** if the collected objections support a recommendation despite the cap, classify as `supported`, not `capped`. The cap limits outreach, not the analysis.
-- **Interview cap reached without sufficient evidence:** stop at the cap without extending it. Terminal class: `capped`.
-- **Inconclusive evidence:** the collected objections do not support a recommendation. Terminal class: `inconclusive`.
-- **Consent refused:** a recipient declines recording or participation. Mark that recipient as unreachable; do not infer objections from refusal.
+- Scope drift after approval: end the run; the approval covered the original scope only. Terminal class: `blocked`.
+- Access blocked: a recipient cannot be reached or a channel is denied. Report what blocked access and stop. Terminal class: `blocked`.
+- Interview cap reached with sufficient evidence: if the collected objections support a recommendation despite the cap, classify as `supported`, not `capped`. The cap limits outreach, not the analysis.
+- Interview cap reached without sufficient evidence: stop at the cap without extending it. Terminal class: `capped`.
+- Inconclusive evidence: the collected objections do not support a recommendation. Terminal class: `inconclusive`.
+- Consent refused: a recipient declines recording or participation. Mark that recipient as unreachable; do not infer objections from refusal.
 
 ## Output
 

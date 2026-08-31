@@ -17,7 +17,7 @@ description: 'Use when asked to write or fix product/marketing copy, landing pag
 ## Inputs
 
 - **Copy to fix (Mode B), or a page type and goal (Mode A).** Select Mode B when copy exists or the user pasted it. Select Mode A when nothing is written yet. For a genuinely ambiguous request ("improve this" with no copy in scope), ask one question, then commit.
-- **Optional inputs, settled before writing:** page purpose, audience, product, traffic source, and any voice file (`VOICE.md`, `BRAND.md`, `docs/voice.md`). If an input is missing, infer it and name the inference so the user can correct it against real copy.
+- Optional inputs, settled before writing: page purpose, audience, product, traffic source, and any voice file (`VOICE.md`, `BRAND.md`, `docs/voice.md`). If an input is missing, infer it and name the inference so the user can correct it against real copy.
 
 ## Procedure
 
@@ -51,11 +51,11 @@ Auto-detect one of two modes. Do not ask which mode; infer it from whether copy 
 
    The nine frameworks: **Why/How/What** (lead with Why, not What; order Why → How → What), **PAS** (name the pain, amplify the cost, present the solution), **AIDA** (Attention → Interest → Desire → Action for cold traffic), **StoryBrand** (customer is hero, product is guide; never make the product the hero), **BAB** (Before → After → Bridge; warmer and aspirational vs PAS confrontational), **Show Don't Tell** (replace adjectives with a specific fact, number, or scenario), **Benefit Not Feature** (lead with the outcome for the user; mention the mechanism only after the benefit is clear), **Sentence Economy** (every sentence earns its space; cut openers like "In order to", "It is important to note that"), **CTA Clarity** (action verb + what they get + qualifier; never two CTAs with the same verb on one screen). For a known page type, apply its norms:
 
-   - **Homepage:** establish what the product is and who it is for; pick the highest-value segment and write for them. Sections in order: hero (lead with Why), social proof above fold, problem/pain, solution/benefits (one benefit per point), how it works, testimonials, final CTA. Do not add a secondary CTA that dilutes the primary action.
-   - **Landing page:** drive one action; message must match what brought the reader. Headline mirrors the ad or email promise. PAS for problem-aware traffic, AIDA for cold. One CTA only; strip navigation and footer links.
-   - **Pricing page:** help visitors choose. Name plans by buyer type, not tier ("Solo / Team / Company" beats "Basic / Pro / Enterprise"). Sections: value restatement, plan comparison (2-4 plans), feature differentiators, FAQ, social proof by tier, risk reversal near the CTA.
-   - **Feature page:** connect a feature to an outcome for visitors already evaluating. Feature → Benefit → Outcome chain. Skip broad setup; go straight to the specific outcome with a number or example.
-   - **About page:** build trust; every element passes the "so what does this mean for me?" test. Mission as a customer benefit, origin story tied to the customer's frustration, human team, 3-5 customer-relevant values, a CTA pointing to the product.
+   - Homepage: establish what the product is and who it is for; pick the highest-value segment and write for them. Sections in order: hero (lead with Why), social proof above fold, problem/pain, solution/benefits (one benefit per point), how it works, testimonials, final CTA. Do not add a secondary CTA that dilutes the primary action.
+   - Landing page: drive one action; message must match what brought the reader. Headline mirrors the ad or email promise. PAS for problem-aware traffic, AIDA for cold. One CTA only; strip navigation and footer links.
+   - Pricing page: help visitors choose. Name plans by buyer type, not tier ("Solo / Team / Company" beats "Basic / Pro / Enterprise"). Sections: value restatement, plan comparison (2-4 plans), feature differentiators, FAQ, social proof by tier, risk reversal near the CTA.
+   - Feature page: connect a feature to an outcome for visitors already evaluating. Feature → Benefit → Outcome chain. Skip broad setup; go straight to the specific outcome with a number or example.
+   - About page: build trust; every element passes the "so what does this mean for me?" test. Mission as a customer benefit, origin story tied to the customer's frustration, human team, 3-5 customer-relevant values, a CTA pointing to the product.
 
 5. **Write 2-3 alternatives.** Label them Option A, B, C. Three for a page, hero, or campaign; two for a single string like a CTA or subject line. Each applies the chosen framework visibly, leads with Why, uses no banned word, includes a headline, subhead, and at least one CTA, and is structurally different, not the same idea with new adjectives. Done when: 2-3 labeled alternatives are written, each structurally different with no banned words.
 6. **Recommend and explain.** Pick one; state which and why in one sentence. For each unpicked option, give one specific edit note. Done when: one option is recommended with a one-sentence reason and one edit note per unpicked option.
@@ -76,15 +76,15 @@ Set the edit posture first. **Point edit:** the user named one line, word, or se
 
 ### UI state copy rules (for product-state strings and the `[STATE-COPY]` label)
 
-- **Destructive CTAs (`rule/destructive-names-action`, `rule/no-confirm-ok-labels`):** Verb plus Noun naming the exact object ("Delete project", not "Confirm" or "OK"). Never label a consequential action Confirm, OK, Yes, or a bare verb.
-- **Canonical verbs (`rule/canonical-verb`):** one verb per operation, used consistently; pick the verb whose consequence matches (Delete = permanent, Remove = detach without destroying, Archive = reversibly hide, Discard = drop unsaved edits, Cancel = abandon an in-progress action).
-- **Error (`rule/error-states-recovery`):** state what happened, why when known, and the recovery action; never raw exceptions or a bare "Something went wrong". Separate field-level from surface-level errors; preserve everything the user typed.
-- **Success (`rule/success-state-specific`):** confirm in past tense what happened to which object, proportional to the action.
-- **Empty (`rule/empty-state-action`):** name the object and offer the first action; no dead ends. Three types: never-had-any (guide the first step), filtered-to-zero (clear the filter), user-cleared (confirm completion; the one empty state that needs no CTA).
-- **Loading (`rule/loading-state-specific`):** say what loads and, for long operations, roughly how long; keep the triggering control's label stable.
-- **Permission (`rule/permission-benefit-first`):** state the user benefit before the permission ask; ask in context when the feature is first used.
-- **Copy without the screen (`rule/reads-without-seeing`):** copy must work when heard; field errors read sensibly after their label; link and button text names the destination or action; no directional words ("above", "below", "here").
-- **Length budgets (size for the tightest surface first; leave 30-40% headroom for translation):** button or CTA 2-4 words; title 3-6 words; error message 12-18 words including the recovery step; any sentence the user must act on 14 words (8 reads at full comprehension).
+- Destructive CTAs (`rule/destructive-names-action`, `rule/no-confirm-ok-labels`): Verb plus Noun naming the exact object ("Delete project", not "Confirm" or "OK"). Never label a consequential action Confirm, OK, Yes, or a bare verb.
+- Canonical verbs (`rule/canonical-verb`): one verb per operation, used consistently; pick the verb whose consequence matches (Delete = permanent, Remove = detach without destroying, Archive = reversibly hide, Discard = drop unsaved edits, Cancel = abandon an in-progress action).
+- Error (`rule/error-states-recovery`): state what happened, why when known, and the recovery action; never raw exceptions or a bare "Something went wrong". Separate field-level from surface-level errors; preserve everything the user typed.
+- Success (`rule/success-state-specific`): confirm in past tense what happened to which object, proportional to the action.
+- Empty (`rule/empty-state-action`): name the object and offer the first action; no dead ends. Three types: never-had-any (guide the first step), filtered-to-zero (clear the filter), user-cleared (confirm completion; the one empty state that needs no CTA).
+- Loading (`rule/loading-state-specific`): say what loads and, for long operations, roughly how long; keep the triggering control's label stable.
+- Permission (`rule/permission-benefit-first`): state the user benefit before the permission ask; ask in context when the feature is first used.
+- Copy without the screen (`rule/reads-without-seeing`): copy must work when heard; field errors read sensibly after their label; link and button text names the destination or action; no directional words ("above", "below", "here").
+- Length budgets (size for the tightest surface first; leave 30-40% headroom for translation): button or CTA 2-4 words; title 3-6 words; error message 12-18 words including the recovery step; any sentence the user must act on 14 words (8 reads at full comprehension).
 
 ### Banned words
 

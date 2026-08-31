@@ -16,9 +16,9 @@ description: 'Use when asked to review learning progress after a milestone. Prod
 
 ## Inputs
 
-- **Milestone or learning plan** (required): the goal, topic, or checkpoint under review.
-- **Evidence of progress** (required): completed exercises, notes, project artifacts, or session records that demonstrate what was attempted and what was produced.
-- **Current plan or curriculum** (optional): the existing learning plan, if one exists, to be adjusted.
+- Milestone or learning plan (required): the goal, topic, or checkpoint under review.
+- Evidence of progress (required): completed exercises, notes, project artifacts, or session records that demonstrate what was attempted and what was produced.
+- Current plan or curriculum (optional): the existing learning plan, if one exists, to be adjusted.
 
 ## Procedure
 
@@ -32,10 +32,10 @@ description: 'Use when asked to review learning progress after a milestone. Prod
 8. Assemble the learning-retrospective report per the Output section.
 
 ## Failure and recovery
-- **Insufficient evidence**: report which criteria cannot be evaluated and why. Do not fill gaps with assumptions. Ask the learner to supply missing artifacts before proceeding.
-- **No existing plan**: proceed with the learning retrospective using the milestone and evidence alone. Propose an initial plan as part of the adjusted plan output.
-- **Conflicting evidence**: surface the conflict, state both interpretations, and ask the learner to clarify before finalizing the learning retrospective.
-- **Scope creep detected**: if the review expands beyond the stated milestone, stop and report that the scope has widened. Recommend a separate learning-retrospective for the additional scope.
+- Insufficient evidence: report which criteria cannot be evaluated and why. Do not fill gaps with assumptions. Ask the learner to supply missing artifacts before proceeding.
+- No existing plan: proceed with the learning retrospective using the milestone and evidence alone. Propose an initial plan as part of the adjusted plan output.
+- Conflicting evidence: surface the conflict, state both interpretations, and ask the learner to clarify before finalizing the learning retrospective.
+- Scope creep detected: if the review expands beyond the stated milestone, stop and report that the scope has widened. Recommend a separate learning-retrospective for the additional scope.
 
 ## Output
 A learning-retrospective report containing:

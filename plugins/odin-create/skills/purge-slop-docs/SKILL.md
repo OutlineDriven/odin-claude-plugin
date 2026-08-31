@@ -17,10 +17,10 @@ disable-model-invocation: true
 
 ## Refusals
 
-- **Code debris and dead code**: use `deslop`. This skill edits Markdown prose only.
-- **Unbounded or uncertain scope**: no changes. Return `BLOCKED` naming the unresolved boundary or authorship question.
+- Code debris and dead code: use `deslop`. This skill edits Markdown prose only.
+- Unbounded or uncertain scope: no changes. Return `BLOCKED` naming the unresolved boundary or authorship question.
 - **Vendored, dependency, generated, or do-not-modify content**: excluded. If authorship, generation status, or scope cannot be established, do not mutate the uncertain target.
-- **Deletion without separate approval**: the file is left unchanged. Never combine deletion approvals.
+- Deletion without separate approval: the file is left unchanged. Never combine deletion approvals.
 
 ## Inputs
 
@@ -39,10 +39,10 @@ Required: the repository or directory that bounds the Markdown tree and an expli
 
 ## Failure and recovery
 
-- **Missing deterministic evidence**: leave the candidate unchanged, downgrade to MEDIUM or LOW, include it only in the report.
-- **Broken pointer or failed verification**: restore the affected operation when possible and report `BLOCKED` with the unresolved pointer. Preserve unrelated, already verified edits as an explicit partial result.
-- **Interrupted mutation**: report exactly which files changed, moved, deleted, or remained pending. Never infer approval, hide an error, or claim the done predicate passed.
-- **Non-convergence**: if verified cleanup repeatedly creates new broken references or conflicting ownership, stop, leave the last verified state intact, and return `NON-CONVERGED` with the remaining findings.
+- Missing deterministic evidence: leave the candidate unchanged, downgrade to MEDIUM or LOW, include it only in the report.
+- Broken pointer or failed verification: restore the affected operation when possible and report `BLOCKED` with the unresolved pointer. Preserve unrelated, already verified edits as an explicit partial result.
+- Interrupted mutation: report exactly which files changed, moved, deleted, or remained pending. Never infer approval, hide an error, or claim the done predicate passed.
+- Non-convergence: if verified cleanup repeatedly creates new broken references or conflicting ownership, stop, leave the last verified state intact, and return `NON-CONVERGED` with the remaining findings.
 
 ## Output
 

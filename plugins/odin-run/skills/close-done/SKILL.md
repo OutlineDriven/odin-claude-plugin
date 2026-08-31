@@ -25,8 +25,8 @@ disable-model-invocation: true
 
 An item qualifies for the batch only when it meets one of these evidence-backed criteria:
 
-- **Resolved**: the item's tracker state is closed-done or merged, or the item references a merged pull request, commit, or deployment that addresses it. Evidence: the tracker state field, a linked PR/commit with a merged status, or a resolution comment from the assignee.
-- **Outdated**: the item has had no activity for a period the user defines (default 90 days), and no open PR or branch references it. Evidence: the last-activity timestamp and the absence of linked open work.
+- Resolved: the item's tracker state is closed-done or merged, or the item references a merged pull request, commit, or deployment that addresses it. Evidence: the tracker state field, a linked PR/commit with a merged status, or a resolution comment from the assignee.
+- Outdated: the item has had no activity for a period the user defines (default 90 days), and no open PR or branch references it. Evidence: the last-activity timestamp and the absence of linked open work.
 
 Items that do not meet either criterion are excluded. List each excluded item with the reason it failed the criteria.
 

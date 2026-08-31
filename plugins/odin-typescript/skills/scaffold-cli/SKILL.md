@@ -47,10 +47,10 @@ description: 'Use when asked to create a complete Node.js 24 TypeScript 7 comman
 
 ## Failure and recovery
 
-- **Target exists:** stop without writing.
-- **Wrong runtime or package-manager major:** stop before creating the directory and report both observed versions.
-- **Install or verification fails:** keep the target for diagnosis and report the first failing command. Rollback is deletion of this new Git-initialized directory only after the user requests it.
-- **Generated command is not executable:** fix the shebang, bin mapping, or file mode and repeat the built-command test through the bin path; do not claim success from compilation alone.
+- Target exists: stop without writing.
+- Wrong runtime or package-manager major: stop before creating the directory and report both observed versions.
+- Install or verification fails: keep the target for diagnosis and report the first failing command. Rollback is deletion of this new Git-initialized directory only after the user requests it.
+- Generated command is not executable: fix the shebang, bin mapping, or file mode and repeat the built-command test through the bin path; do not claim success from compilation alone.
 
 ## Output
 

@@ -35,9 +35,9 @@ Derived from the diff:
    5. `@{upstream}`
 
    If none of the five resolve, gate on two ordered checks:
-   - **Check A:** `git rev-parse --verify HEAD 2>/dev/null`. If it fails, HEAD is unborn. Skip `git diff`; fall through to user-named files or no-git-context path.
-   - **Check B:** only if Check A succeeded, `git rev-parse --verify HEAD^ 2>/dev/null`. If it fails, HEAD is the root commit. Use `git diff HEAD`. Surface: "scope: working-tree only, on root commit".
-   - **Otherwise:** committed history exists but no base ref resolves. Print an explicit error and abort. Do not fall back to `git diff HEAD`; that would silently drop committed work.
+   - Check A: `git rev-parse --verify HEAD 2>/dev/null`. If it fails, HEAD is unborn. Skip `git diff`; fall through to user-named files or no-git-context path.
+   - Check B: only if Check A succeeded, `git rev-parse --verify HEAD^ 2>/dev/null`. If it fails, HEAD is the root commit. Use `git diff HEAD`. Surface: "scope: working-tree only, on root commit".
+   - Otherwise: committed history exists but no base ref resolves. Print an explicit error and abort. Do not fall back to `git diff HEAD`; that would silently drop committed work.
 
    If no git context or HEAD is unborn, use user-named files supplied in the invocation. Empty after all valid resolutions → exit 11.
 
@@ -51,9 +51,9 @@ Derived from the diff:
    Agent type: `Explore` (read-only).
 
    Axes:
-   - **reuse** (Agent 1): four rules (REPLACE, DUPLICATE, INLINE-COULD-USE-UTILITY, STDLIB-REIMPLEMENT). Detects new code written where a utility already exists.
-   - **quality** (Agent 2): nine patterns (redundant-state, parameter-sprawl, copy-paste-variation, leaky-abstractions, stringly-typed, redundant-structural-nesting, nested-conditionals, unnecessary-comments, dead-code-unused-imports-exports). Detects unnecessary surface and structure without functional cause.
-   - **efficiency** (Agent 3): seven patterns (unnecessary-work, missed-concurrency, hot-path-bloat, recurring-no-op-updates, unnecessary-existence-checks, memory-listener-leaks, overly-broad-operations). Detects work that need not happen and structure that bloats hot paths.
+   - reuse (Agent 1): four rules (REPLACE, DUPLICATE, INLINE-COULD-USE-UTILITY, STDLIB-REIMPLEMENT). Detects new code written where a utility already exists.
+   - quality (Agent 2): nine patterns (redundant-state, parameter-sprawl, copy-paste-variation, leaky-abstractions, stringly-typed, redundant-structural-nesting, nested-conditionals, unnecessary-comments, dead-code-unused-imports-exports). Detects unnecessary surface and structure without functional cause.
+   - efficiency (Agent 3): seven patterns (unnecessary-work, missed-concurrency, hot-path-bloat, recurring-no-op-updates, unnecessary-existence-checks, memory-listener-leaks, overly-broad-operations). Detects work that need not happen and structure that bloats hot paths.
 
    See `references/orchestration.md` for the concrete dispatch shape and shell snippet.
 

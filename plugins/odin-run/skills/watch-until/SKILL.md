@@ -16,10 +16,10 @@ description: 'Use when asked to poll a named changing job, log, or artifact unti
 
 ## Inputs
 
-- **Target** (required): the path, handle, or identifier of the changing job, log, or artifact to poll.
-- **Completion predicate** (required): a falsifiable condition evaluated against the current observed state of the target each poll.
-- **Poll interval** (optional): time between reads. If absent, use a sensible default for the target type.
-- **Deadline or maximum poll count** (required): bounds the watch. The watch stops at whichever comes first. Without a bound, the watch cannot start.
+- Target (required): the path, handle, or identifier of the changing job, log, or artifact to poll.
+- Completion predicate (required): a falsifiable condition evaluated against the current observed state of the target each poll.
+- Poll interval (optional): time between reads. If absent, use a sensible default for the target type.
+- Deadline or maximum poll count (required): bounds the watch. The watch stops at whichever comes first. Without a bound, the watch cannot start.
 
 ## Procedure
 
@@ -31,10 +31,10 @@ description: 'Use when asked to poll a named changing job, log, or artifact unti
 6. Stop and report the terminal classification if any failure class in the next section is reached. Done when: the failure class is named and the terminal classification is emitted.
 
 ## Failure and recovery
-- **Target unreadable or disappeared**: stop. Report `blocked` with the read failure and the last known state. Do not restart or recreate the target.
-- **Predicate unparseable or ambiguous**: stop. Report `blocked` with the ambiguity. Do not infer a different predicate.
-- **Deadline or maximum poll count reached**: stop. Report `non-converged` with the last observed state and the number of polls performed.
-- **Target state oscillates without satisfying the predicate**: stop. Report `non-converged` with the oscillation pattern, the last observed state, and the oscillation count. Oscillation is detected when the same two or more distinct states repeat in a cycle of 3 consecutive polls without the predicate holding.
+- Target unreadable or disappeared: stop. Report `blocked` with the read failure and the last known state. Do not restart or recreate the target.
+- Predicate unparseable or ambiguous: stop. Report `blocked` with the ambiguity. Do not infer a different predicate.
+- Deadline or maximum poll count reached: stop. Report `non-converged` with the last observed state and the number of polls performed.
+- Target state oscillates without satisfying the predicate: stop. Report `non-converged` with the oscillation pattern, the last observed state, and the oscillation count. Oscillation is detected when the same two or more distinct states repeat in a cycle of 3 consecutive polls without the predicate holding.
 - No partial result is ever reported as success. The done predicate either holds or it does not.
 
 ## Output

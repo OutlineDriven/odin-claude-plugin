@@ -16,18 +16,18 @@ description: 'Use when the user invokes it to append a structured decision recor
 
 ## Not for
 
-- An ephemeral chat visual — use show-me.
+- An ephemeral chat visual: use show-me.
 
 ## Inputs
 
 Required:
-- `log_path` — path to the append-only TSV decision log. Required; no default.
-- `session` — current session identifier. Required.
-- `task` — the current task description. Required.
+- `log_path`: path to the append-only TSV decision log. Required; no default.
+- `session`: current session identifier. Required.
+- `task`: the current task description. Required.
 
 Optional:
-- `context` — additional framing or constraints. Optional.
-- `reviewer` — reviewer identifier for the Attention section. Optional; omit if not yet known.
+- `context`: additional framing or constraints. Optional.
+- `reviewer`: reviewer identifier for the Attention section. Optional; omit if not yet known.
 
 ## Procedure
 
@@ -45,10 +45,10 @@ Optional:
 
 ## Failure and recovery
 
-- **Missing log file:** if `log_path` does not exist, create it with headers before step 5. This is automatic recovery; proceed.
-- **Malformed row:** if any TSV field contains an unescaped tab or newline, raise `malformed-input` and stop. Do not append.
-- **Append failure:** raise `log-write-failed` and stop. The evidence trail is incomplete; the done predicate does not hold.
-- **Empty required field:** raise `validation-failed` and stop. Do not append an incomplete row.
+- Missing log file: if `log_path` does not exist, create it with headers before step 5. This is automatic recovery; proceed.
+- Malformed row: if any TSV field contains an unescaped tab or newline, raise `malformed-input` and stop. Do not append.
+- Append failure: raise `log-write-failed` and stop. The evidence trail is incomplete; the done predicate does not hold.
+- Empty required field: raise `validation-failed` and stop. Do not append an incomplete row.
 
 ## Output
 

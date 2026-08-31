@@ -69,11 +69,11 @@ description: 'Use when the user runs /polished-web-prototype or asks to turn an 
 
 ## Failure and recovery
 
-- **No design source and the user supplies none**: stop and ask for a freeform description or PNG path; do not invent content.
-- **Pretext bundle missing and CDN unreachable**: the artifact cannot compute layout. State the blocker, write the HTML with the CDN import and a comment marking the blocked fallback, and tell the user the layout will not compute until Pretext loads.
+- No design source and the user supplies none: stop and ask for a freeform description or PNG path; do not invent content.
+- Pretext bundle missing and CDN unreachable: the artifact cannot compute layout. State the blocker, write the HTML with the CDN import and a comment marking the blocked fallback, and tell the user the layout will not compute until Pretext loads.
 - **Refinement loop exhausts 10 iterations without acceptance**: ask the user whether to continue or finalize; never silently declare done.
-- **A surgical edit breaks the layout**: revert that edit and re-apply a corrected one; never regenerate the whole file over the user's manual edits.
-- **Partial result rule**: the artifact file is the single deliverable; if generation stops mid-file, the file is incomplete and not done. Rollback is deleting the incomplete artifact and metadata files and reverting any manifest and lockfile edit.
+- A surgical edit breaks the layout: revert that edit and re-apply a corrected one; never regenerate the whole file over the user's manual edits.
+- Partial result rule: the artifact file is the single deliverable; if generation stops mid-file, the file is incomplete and not done. Rollback is deleting the incomplete artifact and metadata files and reverting any manifest and lockfile edit.
 
 ## Output
 

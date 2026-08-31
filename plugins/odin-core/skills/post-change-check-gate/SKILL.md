@@ -28,9 +28,9 @@ description: 'Use when an artifact or skill has just changed and is about to be 
 5. **Verify the check set passes.** Re-run checks until all relevant checks pass or every skip is documented. If a check cannot be made to pass, stop and leave the artifact in a documented deferred state; do not commit or hand off a dirty artifact. Done when: all relevant checks pass or every skip is documented and the artifact is in a clean or documented-deferred state.
 
 ## Failure and recovery
-- **Check fails and fix fails or is unavailable:** Report the failure class and the specific finding. Stop. The artifact is not done, committed, or handed off.
-- **Check cannot be run (tool unavailable, missing dependency):** Skip it with an explicit reason in the check log. The skill is not failed; the skip is recorded.
-- **Artifact reverts:** If an edit corrupts the artifact, revert to the pre-check version. This is the rollback path for the reversible-local authority.
+- Check fails and fix fails or is unavailable: Report the failure class and the specific finding. Stop. The artifact is not done, committed, or handed off.
+- Check cannot be run (tool unavailable, missing dependency): Skip it with an explicit reason in the check log. The skill is not failed; the skip is recorded.
+- Artifact reverts: If an edit corrupts the artifact, revert to the pre-check version. This is the rollback path for the reversible-local authority.
 - Partial-result rule: if any check fails and cannot be resolved, the done predicate is not met regardless of other passing checks.
 
 ## Output

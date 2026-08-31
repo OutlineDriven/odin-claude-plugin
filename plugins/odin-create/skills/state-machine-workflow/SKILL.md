@@ -16,8 +16,8 @@ description: 'Use when work has distinct modes and the user wants states, events
 
 ## Inputs
 
-- **Required:** a description of the domain, process, or system whose states are being modeled.
-- **Optional:** an existing list of states or transitions to refine, or an existing state-machine file to extend.
+- Required: a description of the domain, process, or system whose states are being modeled.
+- Optional: an existing list of states or transitions to refine, or an existing state-machine file to extend.
 
 ## Refusal
 

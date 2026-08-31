@@ -70,8 +70,8 @@ This ranked list doubles as the index the user references when choosing an idea 
 
 ### 4.3 Present it
 
-- **HTML (`format:html`):** best-effort open the file in the browser (`open` on macOS, `xdg-open` on Linux); always print the absolute path. Skip auto-open in headless / pipeline runs.
-- **Markdown (default):** print the path.
+- HTML (`format:html`): best-effort open the file in the browser (`open` on macOS, `xdg-open` on Linux); always print the absolute path. Skip auto-open in headless / pipeline runs.
+- Markdown (default): print the path.
 
 ## Phase 5: Next steps — `askme` handoff
 

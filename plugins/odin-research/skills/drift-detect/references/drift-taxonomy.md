@@ -63,7 +63,7 @@ Buckets: Immediate (critical OR score >= 15, max 5), Short-term (high OR score >
 
 ## Fuzzy cross-reference matching
 
-Normalize before matching: lowercase; remove punctuation, hyphen, underscore, spaces; singularize trailing s; strip adjectives (robust, seamless, production-ready, comprehensive, scalable); map synonyms (auth=login=session=identity; api=route=endpoint=handler=controller; db=database=model=schema=migration).
+Normalize before matching: lowercase; remove punctuation, hyphen, underscore, spaces; singularize trailing s; strip adjectives (robust, integrated, production-ready, comprehensive, scalable); map synonyms (auth=login=session=identity; api=route=endpoint=handler=controller; db=database=model=schema=migration).
 
 Match status: aligned (doc and code match semantically; tests/docs adequate), partial (code covers some but not all), documented-only (doc/issue/milestone promises; no code evidence), implemented-only (code exposes behavior; no doc/issue/plan), stale/obsolete (refers to removed/dropped behavior), unknown (evidence insufficient).
 

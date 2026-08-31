@@ -31,9 +31,9 @@ Strip flag tokens from the arguments; use the remaining token as the document pa
 Resolve the document. Prefer an explicit path. With none given (interactive), list `.md` candidates from likely homes and ask the user which one. One match → confirm and proceed. Several → present and let the user choose. Empty or missing → say so in one line and exit; launch no agents. Headless with no path → output `Review failed: headless mode requires a document path.` and exit.
 
 Classify by **content shape, not path** (path is a tie-breaker only):
-- **requirements** (what-to-build): `R#`/`A#`/`F#`/`AE#` IDs, `Actors`/`Key Flows`/`Acceptance Examples`/`Outstanding Questions` headings, problem/scope/success framing, no implementation units.
-- **plan** (how-to-build): `U#` IDs, `Implementation Units`/`Key Technical Decisions`/`Risks & Dependencies` headings, per-unit `Goal`/`Files`/`Approach`/`Test scenarios`, repo-relative paths.
-- **spec / prd**: a contract document with normative `MUST`/`SHALL`, interface/API definitions, invariants. Review as the closer of the two shapes above (interface-heavy → plan-grade feasibility; behavior/scope-heavy → requirements-grade).
+- requirements (what-to-build): `R#`/`A#`/`F#`/`AE#` IDs, `Actors`/`Key Flows`/`Acceptance Examples`/`Outstanding Questions` headings, problem/scope/success framing, no implementation units.
+- plan (how-to-build): `U#` IDs, `Implementation Units`/`Key Technical Decisions`/`Risks & Dependencies` headings, per-unit `Goal`/`Files`/`Approach`/`Test scenarios`, repo-relative paths.
+- spec / prd: a contract document with normative `MUST`/`SHALL`, interface/API definitions, invariants. Review as the closer of the two shapes above (interface-heavy → plan-grade feasibility; behavior/scope-heavy → requirements-grade).
 
 When shape is genuinely ambiguous, default to `requirements` (the conservative classification that activates fewer plan-grade feasibility checks). Extract the `origin:` frontmatter value once (or `none`). Pass classification + origin to every reviewer; reviewers adapt on them and do not re-classify.
 
@@ -189,7 +189,7 @@ Pass the **full document**; never split into sections. An empty findings list is
 
 **Error handling.** If a subagent fails or times out, proceed with findings from subagents that completed; note the failed reviewer in the Coverage section. Do not block the entire review on a single reviewer failure.
 
-**Decision primer.** Round 1: `{decision_primer}` is an empty block. Round 2+: accumulate prior-round decisions (Applied, Skipped, Deferred, Acknowledged) with evidence snippets so synthesis can suppress re-raised rejected findings (R29) and verify fixes landed (R30). Cross-session persistence is out of scope; a new invocation starts fresh.
+Decision primer. Round 1: `{decision_primer}` is an empty block. Round 2+: accumulate prior-round decisions (Applied, Skipped, Deferred, Acknowledged) with evidence snippets so synthesis can suppress re-raised rejected findings (R29) and verify fixes landed (R30). Cross-session persistence is out of scope; a new invocation starts fresh.
 
 5. **Synthesize findings.** **Done when:** findings complete the ordered synthesis pipeline.
 
@@ -240,11 +240,11 @@ Run all returned findings through this pipeline. Order matters; re-evaluate stat
 
 6. **Present and route.** **Done when:** surviving findings are presented and routed.
 
-**User-facing vocabulary rule:** internal enum values (`safe_auto`, `gated_auto`, `manual`, `FYI`) stay inside the schema and synthesis prose. Every user-visible word uses plain language — "accepted recommendations", "proposed fixes", "decisions", "FYI observations" — except the `Tier` column in rendered tables, which names the internal enum. All tables are pipe-delimited markdown; escape literal `|` in cells as `\|`; never use ASCII box-drawing characters.
+User-facing vocabulary rule: internal enum values (`safe_auto`, `gated_auto`, `manual`, `FYI`) stay inside the schema and synthesis prose. Every user-visible word uses plain language — "accepted recommendations", "proposed fixes", "decisions", "FYI observations" — except the `Tier` column in rendered tables, which names the internal enum. All tables are pipe-delimited markdown; escape literal `|` in cells as `\|`; never use ASCII box-drawing characters.
 
-**Headless mode:** output a structured text envelope (accepted recommendations, proposed fixes, decisions with dependents nested under roots, FYI observations, residual concerns, deferred questions — omit any empty section), end with `Review complete`, and stop. When the combined count of FYI/residual/deferred is ≥5, collapse each to a one-line count plus a tight bullet list; actionable buckets stay fully rendered.
+Headless mode: output a structured text envelope (accepted recommendations, proposed fixes, decisions with dependents nested under roots, FYI observations, residual concerns, deferred questions — omit any empty section), end with `Review complete`, and stop. When the combined count of FYI/residual/deferred is ≥5, collapse each to a one-line count plus a tight bullet list; actionable buckets stay fully rendered.
 
-**Interactive mode:** present findings grouped by severity (P0→P3), errors before omissions within each severity, with a summary line `Accepted N recommendations. K items need attention (X errors, Y omissions). Z FYI observations.`, the Coverage table, accepted recommendations, FYI observations (distinct subsection), residual concerns, and deferred questions. Coverage counts are post-synthesis: Findings = Auto + Proposed + Decisions + FYI exactly; Auto counts safe_auto@100, Proposed counts gated_auto@75/100, Decisions counts manual@75/100, FYI counts anchor-50 regardless of class. Footnotes below the table when non-zero, in order: `Dropped:`, `Chains:`, `Restated:`. Dependents render only nested under their root, never at their own severity position.
+Interactive mode: present findings grouped by severity (P0→P3), errors before omissions within each severity, with a summary line `Accepted N recommendations. K items need attention (X errors, Y omissions). Z FYI observations.`, the Coverage table, accepted recommendations, FYI observations (distinct subsection), residual concerns, and deferred questions. Coverage counts are post-synthesis: Findings = Auto + Proposed + Decisions + FYI exactly; Auto counts safe_auto@100, Proposed counts gated_auto@75/100, Decisions counts manual@75/100, FYI counts anchor-50 regardless of class. Footnotes below the table when non-zero, in order: `Dropped:`, `Chains:`, `Restated:`. Dependents render only nested under their root, never at their own severity position.
 
 Then route:
 - Only FYI observations remain (no gated_auto or manual at anchor 75/100) → skip the routing question; flow to Phase 6.
@@ -258,12 +258,12 @@ D. Report only — take no further action
 ```
 Option C is suppressed when all findings are already FYI-only.
 
-**Walk-through (option A):** per-finding loop over actionable findings (anchor 75/100, gated_auto/manual), root-first iteration order. Each finding: print an explanation block, then a yes/no question stem with the recommended action marked `(recommended)` (only A/B/C can carry it; D never). Four options per finding: Accept the recommendation / Defer / Skip / Auto-resolve with best judgment on the rest. After each answer emit a one-line confirmation (`-> Accepted.`, `-> Deferred.`, `-> Skipped.`). N=1 omits the `Finding N of M` heading and suppresses option D.
-- **Accept:** add to the in-memory Accepted set. No-fix guard: if the merged finding has no suggested_fix, Accept is not executable — ask `Accept isn't executable for this finding — the review surfaced the issue without a concrete fix. How should the agent proceed?` with options `A. Defer` / `B. Skip`.
-- **Defer:** record the finding + rationale in the completion report's deferred section (never mutate the reviewed document). Entry: title, section, severity, reviewer, confidence, why_it_matters, reason (user-provided or `Deferred for later resolution`), timestamp. Compound-key dedup on `normalize(section)+normalize(title)+why_fingerprint`; on collision record a no-op in Coverage. If recording fails, ask `Couldn't record the deferral. What should the agent do?` → `A. Retry` / `B. Convert to Skip`; on no response default to Skip.
-- **Skip:** record as no-action.
-- **Auto-resolve the rest:** route through the bulk preview.
-- **Cascading root decisions:** Skip/Defer on a finding with dependents → announce the cascade (`Skipping/Deferring this root will auto-resolve N dependent finding(s): {titles}. Continue?`); Accept on a root does NOT cascade (each dependent needs its own decision). An orphaned dependent whose root was rejected and suppressed (R29) is treated as standalone.
+Walk-through (option A): per-finding loop over actionable findings (anchor 75/100, gated_auto/manual), root-first iteration order. Each finding: print an explanation block, then a yes/no question stem with the recommended action marked `(recommended)` (only A/B/C can carry it; D never). Four options per finding: Accept the recommendation / Defer / Skip / Auto-resolve with best judgment on the rest. After each answer emit a one-line confirmation (`-> Accepted.`, `-> Deferred.`, `-> Skipped.`). N=1 omits the `Finding N of M` heading and suppresses option D.
+- Accept: add to the in-memory Accepted set. No-fix guard: if the merged finding has no suggested_fix, Accept is not executable — ask `Accept isn't executable for this finding — the review surfaced the issue without a concrete fix. How should the agent proceed?` with options `A. Defer` / `B. Skip`.
+- Defer: record the finding + rationale in the completion report's deferred section (never mutate the reviewed document). Entry: title, section, severity, reviewer, confidence, why_it_matters, reason (user-provided or `Deferred for later resolution`), timestamp. Compound-key dedup on `normalize(section)+normalize(title)+why_fingerprint`; on collision record a no-op in Coverage. If recording fails, ask `Couldn't record the deferral. What should the agent do?` → `A. Retry` / `B. Convert to Skip`; on no response default to Skip.
+- Skip: record as no-action.
+- Auto-resolve the rest: route through the bulk preview.
+- Cascading root decisions: Skip/Defer on a finding with dependents → announce the cascade (`Skipping/Deferring this root will auto-resolve N dependent finding(s): {titles}. Continue?`); Accept on a root does NOT cascade (each dependent needs its own decision). An orphaned dependent whose root was rejected and suppressed (R29) is treated as standalone.
 - Override rule: no inline freeform custom-fix authoring; a user wanting a variant picks Skip and edits outside the flow.
 - Walk-through state is in-memory only; an interrupted walk-through discards all state; no document changes occur at any point.
 
@@ -283,15 +283,15 @@ git add docs/reviews/<doc-slug>-review.md
 ```
 Never `git add -A` / `git add .`. Never stage the reviewed document. Commit by the repo's normal flow.
 ## Failure and recovery
-- **Document not resolvable:** empty/missing candidate set → say so in one line and exit; launch no agents. Headless with no path → `Review failed: headless mode requires a document path.` and exit.
-- **Subagent failure or timeout:** proceed with findings from subagents that completed; note the failed reviewer in Coverage. Never block the entire review on a single reviewer failure.
-- **Schema-validation failure (3.1):** drop the offending finding, note the agent in Coverage; do not abort synthesis.
-- **Deferral recording failure:** surface inline with Retry / Convert to Skip; on no response default to Skip so in-memory state stays consistent.
-- **Bulk-preview failure during Proceed:** surface inline with Retry / Convert to Skip, continue with the rest of the plan, capture the failure in the report's failure section.
-- **Partial-result rule:** a review with some reviewers failed and some findings dropped at validation is still a valid, complete review as long as every survivor is routed to a tier and the terminal signal is emitted.
-- **Non-mutation rule:** no failure path edits, writes, or commits the reviewed document. The only writable surface is the single review-record file on `--record`; rollback is deleting that one file. An interrupted walk-through discards all in-memory state with no document changes.
-- **Nothing above the floor:** if no finding clears the evidence-quote and confidence-anchor floor, say so in one line and emit `Review complete`. A clean result is valid and correct; never invent findings to look thorough.
-- **Blocked/non-converged result:** if the document cannot be classified even after the user is asked, or no reviewers return usable output, output `Review failed: <reason>` and stop without writing any file.
+- Document not resolvable: empty/missing candidate set → say so in one line and exit; launch no agents. Headless with no path → `Review failed: headless mode requires a document path.` and exit.
+- Subagent failure or timeout: proceed with findings from subagents that completed; note the failed reviewer in Coverage. Never block the entire review on a single reviewer failure.
+- Schema-validation failure (3.1): drop the offending finding, note the agent in Coverage; do not abort synthesis.
+- Deferral recording failure: surface inline with Retry / Convert to Skip; on no response default to Skip so in-memory state stays consistent.
+- Bulk-preview failure during Proceed: surface inline with Retry / Convert to Skip, continue with the rest of the plan, capture the failure in the report's failure section.
+- Partial-result rule: a review with some reviewers failed and some findings dropped at validation is still a valid, complete review as long as every survivor is routed to a tier and the terminal signal is emitted.
+- Non-mutation rule: no failure path edits, writes, or commits the reviewed document. The only writable surface is the single review-record file on `--record`; rollback is deleting that one file. An interrupted walk-through discards all in-memory state with no document changes.
+- Nothing above the floor: if no finding clears the evidence-quote and confidence-anchor floor, say so in one line and emit `Review complete`. A clean result is valid and correct; never invent findings to look thorough.
+- Blocked/non-converged result: if the document cannot be classified even after the user is asked, or no reviewers return usable output, output `Review failed: <reason>` and stop without writing any file.
 
 ## Output
 A tiered findings report: every survivor labeled safe-auto / gated-auto / manual / FYI, each carrying a verbatim document quote and an anchored confidence value. Interactive mode adds a routing decision per actionable finding and a unified completion report. On `--record`, additionally one file `docs/reviews/<doc-slug>-review.md`. The reviewed document is never modified. The run terminates with the literal signal `Review complete` (or `Review failed: <reason>` on a blocked path).

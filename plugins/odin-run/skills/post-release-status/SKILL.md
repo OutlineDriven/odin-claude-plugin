@@ -17,11 +17,11 @@ disable-model-invocation: true
 
 ## Inputs
 
-- **Release identifier** (required): the release name, tag, or version that groups the tracked PRs.
-- **PR-source read credentials** (required): independent credentials granting read access to the pull-request source. These are separate from Slack credentials.
-- **Slack write credentials** (required): integration credentials with permission to post or update a message in the target destination.
-- **Slack destination** (required): the workspace and channel where the status board lives.
-- **Manual status overrides** (optional): a set of manually verified statuses. Each entry must identify its pull request and verified status unambiguously.
+- Release identifier (required): the release name, tag, or version that groups the tracked PRs.
+- PR-source read credentials (required): independent credentials granting read access to the pull-request source. These are separate from Slack credentials.
+- Slack write credentials (required): integration credentials with permission to post or update a message in the target destination.
+- Slack destination (required): the workspace and channel where the status board lives.
+- Manual status overrides (optional): a set of manually verified statuses. Each entry must identify its pull request and verified status unambiguously.
 - **Existing message permalink or timestamp** (required for update, omitted for new post): identifies the message to update.
 
 ## Procedure
@@ -34,13 +34,13 @@ disable-model-invocation: true
 
 ## Failure and recovery
 
-- **Invalid or ambiguous identifiers:** abort before any read. Perform no Slack write. Return `blocked` with the unresolved release, repository, destination, message, or verified-status identity.
-- **Missing PR-source read credentials or permissions:** abort before any read. Perform no Slack write. Return `blocked` naming the missing credential. Do not conflate Slack write permission with PR-source read permission.
-- **Missing Slack write credentials or permissions:** abort before any Slack write. Return `blocked` naming the missing credential.
-- **Missing PR read evidence:** return `blocked` without updating Slack. Name the pull requests or fields that could not be established.
-- **Slack create or update failure:** do not attempt a different channel, message, or additional post. Return `blocked` with whether no write was observed or the remote result is unknown.
-- **Post-write verification failure:** do not claim completion or overwrite manually verified data. Return `blocked` with the message identifier, observed partial result, and fields that failed verification.
-- **Permalink retrieval failure:** treat the operation as incomplete even if a write may have occurred. Return `blocked` with the message identifier and known remote state.
+- Invalid or ambiguous identifiers: abort before any read. Perform no Slack write. Return `blocked` with the unresolved release, repository, destination, message, or verified-status identity.
+- Missing PR-source read credentials or permissions: abort before any read. Perform no Slack write. Return `blocked` naming the missing credential. Do not conflate Slack write permission with PR-source read permission.
+- Missing Slack write credentials or permissions: abort before any Slack write. Return `blocked` naming the missing credential.
+- Missing PR read evidence: return `blocked` without updating Slack. Name the pull requests or fields that could not be established.
+- Slack create or update failure: do not attempt a different channel, message, or additional post. Return `blocked` with whether no write was observed or the remote result is unknown.
+- Post-write verification failure: do not claim completion or overwrite manually verified data. Return `blocked` with the message identifier, observed partial result, and fields that failed verification.
+- Permalink retrieval failure: treat the operation as incomplete even if a write may have occurred. Return `blocked` with the message identifier and known remote state.
 
 ## Output
 

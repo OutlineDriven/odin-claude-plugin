@@ -32,10 +32,10 @@ The user supplies review comments — the text of each comment and any associate
 4. Stop before proposing solutions for any comment classified NOT AN ISSUE or NEEDS CLARIFICATION.
 
 ## Failure and recovery
-- **Empty input**: return "No comments supplied" and stop.
-- **Inaccessible code**: if the referenced location cannot be read, classify the comment NEEDS CLARIFICATION with the specific access failure as the missing context.
-- **Unresolvable ambiguity**: classify NEEDS CLARIFICATION; do not guess intent or invent a fix.
-- **Partial-result rule**: if one comment cannot be processed, continue with the remaining comments and report the failure for the unprocessed one. Do not claim the whole batch succeeded.
+- Empty input: return "No comments supplied" and stop.
+- Inaccessible code: if the referenced location cannot be read, classify the comment NEEDS CLARIFICATION with the specific access failure as the missing context.
+- Unresolvable ambiguity: classify NEEDS CLARIFICATION; do not guess intent or invent a fix.
+- Partial-result rule: if one comment cannot be processed, continue with the remaining comments and report the failure for the unprocessed one. Do not claim the whole batch succeeded.
 - Non-mutation rule: no edit, write, commit, push, deployment, credential use, or remote call is ever performed.
 
 ## Output

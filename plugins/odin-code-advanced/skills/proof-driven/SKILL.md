@@ -30,11 +30,11 @@ Required: the target implementation and its test command; requirements or contra
 8. Run the complete property/proof set, the retained example and regression tests, and line coverage. Finish only when all pass, skipped and pending counts are zero, coverage is at least 80%, every counterexample is represented by a regression test, the target corresponds to the proven model, and termination obligations hold. Done when: all pass, zero skipped/pending, coverage >= 80%, every counterexample has a regression test, and termination obligations hold.
 
 ## Failure and recovery
-- **Framework unavailable (exit 11):** make no implementation change; report the missing executable, package, configuration, or prover and the attempted command.
-- **No properties created (exit 12):** make no success claim; report the requirement or oracle information that is missing.
-- **Property failure or incomplete proof (exit 13):** preserve the minimized counterexample and any valid passing artifacts, but classify the run as non-converged. Revert remediation that introduces regressions by restoring only the bounded files, then report the failing property, seed or proof goal, smallest counterexample, and last verified state.
-- **Coverage or property gap (exit 14):** report the uncovered requirement and measured coverage; do not mark an obligation proven from execution that did not reach it.
-- **Out-of-scope remediation:** stop before writing it and return a blocked result naming the required file or authority expansion. Never invent a proof, suppress an error, discard a counterexample, or report the done predicate from partial results.
+- Framework unavailable (exit 11): make no implementation change; report the missing executable, package, configuration, or prover and the attempted command.
+- No properties created (exit 12): make no success claim; report the requirement or oracle information that is missing.
+- Property failure or incomplete proof (exit 13): preserve the minimized counterexample and any valid passing artifacts, but classify the run as non-converged. Revert remediation that introduces regressions by restoring only the bounded files, then report the failing property, seed or proof goal, smallest counterexample, and last verified state.
+- Coverage or property gap (exit 14): report the uncovered requirement and measured coverage; do not mark an obligation proven from execution that did not reach it.
+- Out-of-scope remediation: stop before writing it and return a blocked result naming the required file or authority expansion. Never invent a proof, suppress an error, discard a counterexample, or report the done predicate from partial results.
 
 ## Output
 On success, return exit 0 with the created or changed property/proof files, deterministic regression tests for all counterexamples, bounded remediation files, commands run, passing property and proof counts, zero skipped/pending counts, line-coverage percentage, and the requirement-to-property hierarchy. Otherwise return exit 11, 12, 13, or 14 with the exact blocked or non-converged evidence described above and the bounded files that remain modified.

@@ -16,9 +16,9 @@ description: 'Use when asked to improve SEO, optimize for search, fix meta tags,
 
 ## Inputs
 
-- **URL(s)** (required): The target page or site URL(s) to audit.
-- **Focus area** (optional): Narrow the audit to one or more of: `technical`, `page`, `structured-data`, `aeo`. Default: all four.
-- **JSON-LD template** (optional): A caller-supplied local template used to validate structured-data recommendations.
+- URL(s) (required): The target page or site URL(s) to audit.
+- Focus area (optional): Narrow the audit to one or more of: `technical`, `page`, `structured-data`, `aeo`. Default: all four.
+- JSON-LD template (optional): A caller-supplied local template used to validate structured-data recommendations.
 
 ## Procedure
 
@@ -33,12 +33,12 @@ description: 'Use when asked to improve SEO, optimize for search, fix meta tags,
 
 ## Failure and recovery
 
-- **No URL provided:** stop. Return `"error": "url_required"` with the message "Audit requires a target URL."
-- **Page unreachable:** stop. Return `"error": "page_unreachable"` with the URL and the response code or error text.
-- **Script execution failure:** catch the error. Return `"error": "tool_execution_failed"` with the script name and error output.
-- **Malformed JSON-LD detected:** flag as a critical finding in the report. Include the raw block and the parsing error. Do not halt the audit.
-- **Zero findings in a category:** state "No issues detected in this category" explicitly in the report rather than omitting the section.
-- **Partial tool results:** include whatever data the tool returned. Mark any missing fields as `"status": "unavailable"` in the tool output block.
+- No URL provided: stop. Return `"error": "url_required"` with the message "Audit requires a target URL."
+- Page unreachable: stop. Return `"error": "page_unreachable"` with the URL and the response code or error text.
+- Script execution failure: catch the error. Return `"error": "tool_execution_failed"` with the script name and error output.
+- Malformed JSON-LD detected: flag as a critical finding in the report. Include the raw block and the parsing error. Do not halt the audit.
+- Zero findings in a category: state "No issues detected in this category" explicitly in the report rather than omitting the section.
+- Partial tool results: include whatever data the tool returned. Mark any missing fields as `"status": "unavailable"` in the tool output block.
 
 ## Output
 

@@ -16,11 +16,11 @@ description: 'Use when a generated or shrunk counterexample from a property-base
 
 ## Inputs
 
-- **Required**: the failing counterexample value (original or shrunk). If the user supplies a shrunk counterexample, also supply the original generated value when available.
-- **Required**: the property-based test that produced the failure, accessible for reading.
-- **Required**: the implementation code the property tests.
-- **Optional**: the test framework and shrinker name.
-- **Optional**: the specification or requirements document, when one exists.
+- Required: the failing counterexample value (original or shrunk). If the user supplies a shrunk counterexample, also supply the original generated value when available.
+- Required: the property-based test that produced the failure, accessible for reading.
+- Required: the implementation code the property tests.
+- Optional: the test framework and shrinker name.
+- Optional: the specification or requirements document, when one exists.
 
 ## Procedure
 

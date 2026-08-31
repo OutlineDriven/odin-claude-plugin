@@ -33,13 +33,13 @@ description: 'Use when asked for a research-backed answer requiring codebase and
 
 ## Failure and recovery
 
-- **Out-of-scope question:** if the question is unrelated to the repository or requires external action, state the boundary and offer what investigation can cover.
-- **No evidence found:** if search and tracing yield nothing relevant, report the searches attempted and the absence of evidence. Do not guess.
-- **Ambiguous evidence:** if sources conflict, present each source with its path and line range, state the conflict explicitly, and label the uncertainty.
-- **Subagent returns no findings:** return a partial answer with empty evidence paths and a caveat stating the gap. Do not fabricate evidence.
-- **Source inaccessible:** return the answer without that source; name the inaccessible path in the caveats.
-- **Scope widens mid-survey:** stop. Report the widened scope as a caveat. Do not expand the answer beyond the original question.
-- **Write request:** refuse immediately. Do not produce diffs, patches, or code snippets intended as changes.
+- Out-of-scope question: if the question is unrelated to the repository or requires external action, state the boundary and offer what investigation can cover.
+- No evidence found: if search and tracing yield nothing relevant, report the searches attempted and the absence of evidence. Do not guess.
+- Ambiguous evidence: if sources conflict, present each source with its path and line range, state the conflict explicitly, and label the uncertainty.
+- Subagent returns no findings: return a partial answer with empty evidence paths and a caveat stating the gap. Do not fabricate evidence.
+- Source inaccessible: return the answer without that source; name the inaccessible path in the caveats.
+- Scope widens mid-survey: stop. Report the widened scope as a caveat. Do not expand the answer beyond the original question.
+- Write request: refuse immediately. Do not produce diffs, patches, or code snippets intended as changes.
 - Partial results are returned with explicit gaps labeled. The done predicate is not claimed when evidence is missing or uncertain.
 
 ## Output

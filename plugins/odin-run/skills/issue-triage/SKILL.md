@@ -17,23 +17,23 @@ disable-model-invocation: true
 
 ## Inputs
 
-- `slack_report_url` — required. The URL of the new configured Slack issue report to triage.
-- `slack_token` — required at runtime. Slack bot token scoped to post thread replies.
-- `tracker_token` — optional at runtime. Tracker API token for issue creation. Required only if the triage verdict calls for a tracker issue.
-- `tracker_base_url` — required at runtime if `tracker_token` is supplied. The tracker instance base URL.
-- `slack_channel_id` — derived from `slack_report_url`. The Slack channel ID containing the report.
-- `slack_thread_ts` — derived from `slack_report_url`. The thread timestamp of the report message.
+- `slack_report_url`: required. The URL of the new configured Slack issue report to triage.
+- `slack_token`: required at runtime. Slack bot token scoped to post thread replies.
+- `tracker_token`: optional at runtime. Tracker API token for issue creation. Required only if the triage verdict calls for a tracker issue.
+- `tracker_base_url`: required at runtime if `tracker_token` is supplied. The tracker instance base URL.
+- `slack_channel_id`: derived from `slack_report_url`. The Slack channel ID containing the report.
+- `slack_thread_ts`: derived from `slack_report_url`. The thread timestamp of the report message.
 
 ## Procedure
 
 1. **Validate invocation.** Confirm human invoked this skill. Stop if the call is not human-originated. Done when: human origin is confirmed.
 2. **Fetch the Slack report.** Retrieve the target Slack message using `slack_report_url`. Validate the channel and thread exist. Stop if the message cannot be fetched. Done when: the report message content is in hand.
 3. **Classify the report.** Parse the message content. Apply triage classification to the report content. Accepted verdicts and their criteria:
-   - `ack` — valid report needing no action. The report describes a known, already-tracked condition with no new information. Cite the existing tracker reference or known-status evidence.
-   - `defer` — valid but consciously postponed. The report is actionable but lower priority than current work. Cite the prioritization reason.
-   - `escalate` — urgent or beyond this tracker's scope. The report indicates a security incident, data loss, service outage, or a problem requiring a human outside this tracker's workflow. Cite the urgency signal or scope boundary.
-   - `close` — invalid, already resolved, or not actionable. The report duplicates a resolved issue, describes expected behavior, or lacks reproducible information. Cite the resolution, expected-behavior reference, or the missing-information gap.
-   - `track` — actionable work that must persist, warranting a tracker issue. The report describes a reproducible problem that is not yet tracked. Cite the reproduction evidence.
+   - `ack`: valid report needing no action. The report describes a known, already-tracked condition with no new information. Cite the existing tracker reference or known-status evidence.
+   - `defer`: valid but consciously postponed. The report is actionable but lower priority than current work. Cite the prioritization reason.
+   - `escalate`: urgent or beyond this tracker's scope. The report indicates a security incident, data loss, service outage, or a problem requiring a human outside this tracker's workflow. Cite the urgency signal or scope boundary.
+   - `close`: invalid, already resolved, or not actionable. The report duplicates a resolved issue, describes expected behavior, or lacks reproducible information. Cite the resolution, expected-behavior reference, or the missing-information gap.
+   - `track`: actionable work that must persist, warranting a tracker issue. The report describes a reproducible problem that is not yet tracked. Cite the reproduction evidence.
    The produced verdict must cite the report evidence satisfying its criterion. Produce a single classified verdict. Done when: one verdict from the accepted set is selected with its evidence citation.
 4. **Check for duplicates.** Query the tracker for any existing issues that reference this Slack report. If a duplicate issue exists and the verdict is `track`, skip creation and mark the existing issue as the target. Done when: the duplicate check is complete and the target issue is identified or confirmed absent.
 5. **Post the verdict to Slack.** Post exactly one thread reply containing the classified verdict and its evidence citation. Stop on failure. Do not post a second reply. Done when: one Slack reply is posted and its timestamp is captured.

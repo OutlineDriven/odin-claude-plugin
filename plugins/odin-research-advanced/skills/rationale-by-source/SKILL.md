@@ -16,8 +16,8 @@ description: 'Use when asked to investigate design rationale, regression causes,
 
 ## Refusals
 
-- **Source or remote-system changes**: rejected. This skill is read-only throughout.
-- **Filling gaps with inference or speculation**: rejected. Unknowns stay unknown.
+- Source or remote-system changes: rejected. This skill is read-only throughout.
+- Filling gaps with inference or speculation: rejected. Unknowns stay unknown.
 - **Resolving contradictions by majority vote or speculation**: rejected. Contradictions are presented with each position cited.
 
 ## Inputs
@@ -36,10 +36,10 @@ description: 'Use when asked to investigate design rationale, regression causes,
 
 ## Failure and recovery
 
-- **Source inaccessible**: note the gap in the source coverage summary. Continue with the remaining sources. Do not widen scope to substitute.
-- **Citation mismatch**: downgrade the claim to the unsupported tier. Do not reinterpret the citation to force a match.
-- **Scope creep**: stop at the original scope boundary. Report partial results with the boundary stated.
-- **No convergent answer**: present the contradiction in the narrative with each position cited.
+- Source inaccessible: note the gap in the source coverage summary. Continue with the remaining sources. Do not widen scope to substitute.
+- Citation mismatch: downgrade the claim to the unsupported tier. Do not reinterpret the citation to force a match.
+- Scope creep: stop at the original scope boundary. Report partial results with the boundary stated.
+- No convergent answer: present the contradiction in the narrative with each position cited.
 
 ## Output
 

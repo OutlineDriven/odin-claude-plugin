@@ -30,10 +30,10 @@ Required: the repository root and explicit human invocation. If the intended `AG
 8. Report the target path, evidence files read, applied additions or changes, and removals. The rollback path is restoration of the target's pre-write contents, or removal of the newly created target when none existed.
 
 ## Failure and recovery
-- **Invalid or ambiguous target:** Make no mutation and return `blocked` with the unresolved repository root or target path.
-- **Insufficient evidence:** Omit the unsupported candidate. If no instruction survives, leave an existing target unchanged, do not create an empty target, and return `blocked: no grounded, non-derivable rules`.
-- **Unsafe scope expansion:** Stop before changing any file other than the resolved target and return `blocked` with the out-of-scope change required.
-- **Write or verification failure:** Restore the pre-write target contents when possible and return `blocked` with the failed operation and whether rollback succeeded. If rollback fails, report the exact partial state; never claim the done predicate.
+- Invalid or ambiguous target: Make no mutation and return `blocked` with the unresolved repository root or target path.
+- Insufficient evidence: Omit the unsupported candidate. If no instruction survives, leave an existing target unchanged, do not create an empty target, and return `blocked: no grounded, non-derivable rules`.
+- Unsafe scope expansion: Stop before changing any file other than the resolved target and return `blocked` with the out-of-scope change required.
+- Write or verification failure: Restore the pre-write target contents when possible and return `blocked` with the failed operation and whether rollback succeeded. If rollback fails, report the exact partial state; never claim the done predicate.
 
 A partial draft is not success. Return it only as a partial result with unsupported candidates and unapplied removals identified.
 

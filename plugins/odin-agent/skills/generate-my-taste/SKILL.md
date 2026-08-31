@@ -1,6 +1,6 @@
 ---
 name: generate-my-taste
-description: 'Use when asked to generate a personal taste skill from local evidence. Produces a <name>-taste skill with 5 evidence-derived anchors and a two-sided charter. Not for applying an existing taste register — use spine. Local writes only.'
+description: 'Use when asked to generate a personal taste skill from local evidence. Produces a <name>-taste skill with 5 evidence-derived anchors and a two-sided charter. Not for applying an existing taste register: use spine. Local writes only.'
 ---
 
 # Generate my taste
@@ -16,16 +16,16 @@ description: 'Use when asked to generate a personal taste skill from local evide
 
 ## Not for
 
-- Applying an existing taste register — use spine.
-- Generating a skill that is not a taste skill — this generator produces `<name>-taste` skills only.
+- Applying an existing taste register: use spine.
+- Generating a skill that is not a taste skill: this generator produces `<name>-taste` skills only.
 - Remote, credential, publish, deploy, or irreversible changes.
 
 ## Inputs
 
-- Target skill name — optional; defaults to `<user-or-handle>-taste`; asked only if ambiguous.
-- Evidence scope — optional; defaults to indexed recall first, local files as fallback.
-- Domain set — optional; defaults to Prose + Code + Design + Decision.
-- Anchor picks — optional; defaults to the top 5 evidence-ranked candidates.
+- Target skill name: optional; defaults to `<user-or-handle>-taste`; asked only if ambiguous.
+- Evidence scope: optional; defaults to indexed recall first, local files as fallback.
+- Domain set: optional; defaults to Prose + Code + Design + Decision.
+- Anchor picks: optional; defaults to the top 5 evidence-ranked candidates.
 - Local evidence sources, all optional: indexed ICM or memory-search tools exposed by the current harness, indexed session-history tools exposed by the current harness, local memory files under `~/.claude/projects/**/memory/*.md` plus `~/.claude/CLAUDE.md` and `~/.claude/CLAUDE.local.md`, and local transcript stores for Claude Code, Codex, Gemini CLI, OpenCode, Amp, Pi, and Cursor.
 
 ## Procedure
@@ -45,13 +45,13 @@ description: 'Use when asked to generate a personal taste skill from local evide
 
 ## Failure and recovery
 
-- **Missing evidence source**: record as `not present` or `not readable`; do not block; proceed with available evidence.
-- **Ambiguous name or anchor count not equal to 5**: ask one correction question; do not guess.
-- **Preview not confirmed**: on `Abort` write nothing; on `Revise preview` apply corrections and re-gate; never write before confirmation.
-- **Collision without update-in-place selected**: write to the draft path; never overwrite.
+- Missing evidence source: record as `not present` or `not readable`; do not block; proceed with available evidence.
+- Ambiguous name or anchor count not equal to 5: ask one correction question; do not guess.
+- Preview not confirmed: on `Abort` write nothing; on `Revise preview` apply corrections and re-gate; never write before confirmation.
+- Collision without update-in-place selected: write to the draft path; never overwrite.
 - **Off-catalogue influence failing the five criteria**: map to the nearest qualifying influence and cite the mapping; do not invent an anchor.
-- **Insufficient evidence**: if fewer than 5 qualifying anchors can be derived from available evidence, stop and report the gap rather than emit slot markers or fabricated anchors. Partial results are not written; the only non-converged result is a report naming the missing evidence and the blocked anchor count.
+- Insufficient evidence: if fewer than 5 qualifying anchors can be derived from available evidence, stop and report the gap rather than emit slot markers or fabricated anchors. Partial results are not written; the only non-converged result is a report naming the missing evidence and the blocked anchor count.
 
 ## Output
 
-Three written files at the target or draft path — `references/anchors.md`, `references/charter.md`, generated `SKILL.md` last — plus a report listing written paths and verification notes: evidence source classes scanned, question shapes, generated SKILL.md order, anti-slop search results, compact frontmatter description, and write-safety confirmation.
+Three written files at the target or draft path: `references/anchors.md`, `references/charter.md`, generated `SKILL.md` last: plus a report listing written paths and verification notes: evidence source classes scanned, question shapes, generated SKILL.md order, anti-slop search results, compact frontmatter description, and write-safety confirmation.

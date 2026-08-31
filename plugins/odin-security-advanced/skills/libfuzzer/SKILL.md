@@ -16,12 +16,12 @@ description: 'Use when asked to build, run, and triage Clang libFuzzer campaigns
 
 ## Inputs
 
-- **Required:** Clang compiler (`clang++`) with libFuzzer runtime present.
-- **Required:** One `LLVMFuzzerTestOneInput` harness function visible to the linker.
-- **Required:** Source or object files for the code under test.
-- **Optional:** Seed corpus directory. It may be empty; when omitted, create `./corpus/`.
-- **Optional:** Fuzzing dictionary file (see Dictionary format below).
-- **Optional:** Clang build flags: `-fsanitize=address`, `-fsanitize=undefined`, `-g`, `-O2`, `-max_len`, `-dict`, `-timeout`, `-close_fd_mask`, `-fork`, `-ignore_crashes`.
+- Required: Clang compiler (`clang++`) with libFuzzer runtime present.
+- Required: One `LLVMFuzzerTestOneInput` harness function visible to the linker.
+- Required: Source or object files for the code under test.
+- Optional: Seed corpus directory. It may be empty; when omitted, create `./corpus/`.
+- Optional: Fuzzing dictionary file (see Dictionary format below).
+- Optional: Clang build flags: `-fsanitize=address`, `-fsanitize=undefined`, `-g`, `-O2`, `-max_len`, `-dict`, `-timeout`, `-close_fd_mask`, `-fork`, `-ignore_crashes`.
 
 ## Procedure
 

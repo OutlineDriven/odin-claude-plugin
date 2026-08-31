@@ -36,11 +36,11 @@ Optional:
 4. **Rank by topology dimensions.** Score each candidate across at least three distinct graph topology dimensions: degree centrality, clustering coefficient, path length from the seed node, and structural similarity to the seed. Each score is a float in [0, 1]. Combine scores using the user's weighting preference or equal weights by default. Sort candidates by combined score descending. Done when: each candidate has scores from at least three dimensions and the list is sorted.
 
 5. **Write the ranked seed list to a local file.** Write `variant-neighborhood-seed.md` with the following ordered sections:
-   - **Seed Node**: the node id, kind, and the issue that binds to it.
-   - **Candidate Rank Table**: rank, node-id, primary-dimension-score, label (`review-target`).
-   - **Inclusion Reasons**: per candidate, one concrete reason from the graph evidence stating which dimension drove the ranking, what structural property was observed, and why the candidate is in scope.
-   - **Exclusions**: every node considered and excluded, with the concrete reason. If none were excluded, state that explicitly.
-   - **Search Guidance**: for each of the top 10 candidates, at least one concrete search-guidance line (a Semgrep rule pattern, a CodeQL query fragment, or a precise manual-review instruction) referencing the candidate's symbol or text content.
+   - Seed Node: the node id, kind, and the issue that binds to it.
+   - Candidate Rank Table: rank, node-id, primary-dimension-score, label (`review-target`).
+   - Inclusion Reasons: per candidate, one concrete reason from the graph evidence stating which dimension drove the ranking, what structural property was observed, and why the candidate is in scope.
+   - Exclusions: every node considered and excluded, with the concrete reason. If none were excluded, state that explicitly.
+   - Search Guidance: for each of the top 10 candidates, at least one concrete search-guidance line (a Semgrep rule pattern, a CodeQL query fragment, or a precise manual-review instruction) referencing the candidate's symbol or text content.
    The artifact must be self-contained and require no external reference to interpret. Done when: the file is written with all five ordered sections.
 
 ## Failure and recovery

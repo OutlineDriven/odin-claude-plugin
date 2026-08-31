@@ -18,8 +18,8 @@ A program graph turns a source tree into nodes (functions, methods, types, modul
 
 ## Inputs
 
-- **Required**: A target directory containing source code to parse.
-- **Optional**: An explicit language list when the target is known polyglot or single-language; otherwise use the tool's auto-detection. An existing declared-links file for cross-boundary edges. An external binary-analysis graph export for augmentation where the tool supports it.
+- Required: A target directory containing source code to parse.
+- Optional: An explicit language list when the target is known polyglot or single-language; otherwise use the tool's auto-detection. An existing declared-links file for cross-boundary edges. An external binary-analysis graph export for augmentation where the tool supports it.
 
 ## Refusals
 
@@ -34,10 +34,10 @@ A program graph turns a source tree into nodes (functions, methods, types, modul
 2. **Detect languages.** Ask the installed build what it supports (supported-language query) and what exists under the tree (detection query over the target directory). Treat any documented parser list as documentation, not a source of truth; the installed build answers for itself. If detection returns nothing parseable, report the gap and stop. **Done when:** detected and supported languages are recorded.
 3. **Build the full graph.** Construct the engine over the target directory with auto-detected languages, or an explicit list when the user supplied one. Build the full graph; do not sample: sampling misses cross-module attack paths. Use subgraph queries to focus after the full graph is built. **Done when:** the full graph is built for the selected languages.
 4. **Run preanalysis.** Run the preanalysis pass before any query that depends on blast radius, entrypoints, privilege boundaries, or taint. The passes, under their usual names:
-   - **Blast radius estimation**: counts downstream and upstream nodes per function, annotates every node, and creates a `high_blast_radius` subgraph (commonly nodes with 10 or more downstream descendants).
-   - **Entry point enumeration**: maps entrypoints by trust level and creates `entrypoints`, `entrypoint_reachable`, and per-trust-level subgraphs (`untrusted_external`, `semi_trusted_external`, `trusted_internal`).
-   - **Privilege boundary detection**: finds call edges whose source and target are reachable from entrypoints at different trust levels, annotates the boundary nodes, and creates a `privilege_boundary` subgraph.
-   - **Taint propagation**: propagates taint from untrusted and semi-trusted entrypoints along call edges; trusted entrypoints generate none; annotates tainted nodes and creates a `tainted` subgraph.
+   - Blast radius estimation: counts downstream and upstream nodes per function, annotates every node, and creates a `high_blast_radius` subgraph (commonly nodes with 10 or more downstream descendants).
+   - Entry point enumeration: maps entrypoints by trust level and creates `entrypoints`, `entrypoint_reachable`, and per-trust-level subgraphs (`untrusted_external`, `semi_trusted_external`, `trusted_internal`).
+   - Privilege boundary detection: finds call edges whose source and target are reachable from entrypoints at different trust levels, annotates the boundary nodes, and creates a `privilege_boundary` subgraph.
+   - Taint propagation: propagates taint from untrusted and semi-trusted entrypoints along call edges; trusted entrypoints generate none; annotates tainted nodes and creates a `tainted` subgraph.
    **Done when:** all four passes complete.
 5. **Execute requested queries.** Use the version-safe baseline unless a capability probe proves the richer method exists. The standard vocabulary:
    - Direct neighbors: callers and callees of a function.
@@ -71,13 +71,13 @@ A program graph turns a source tree into nodes (functions, methods, types, modul
 
 ## Failure and recovery
 
-- **Tool missing or failing to install**: report the gap and stop. No manual-analysis fallback.
-- **Import error in snippets**: run snippets with the tool's isolated runner (for example `uv run --with <tool> python -`) rather than relying on a bare tool install; this is a resolution step, not a fallback.
-- **Version-gated method unavailable**: probe before calling; fall back to the baseline alternative and say so in the report.
-- **Language detection failure**: report the finding; do not invent a language list.
-- **Preanalysis not run**: blast radius, taint, and privilege data exist only after preanalysis; run it before retrying any dependent query. Never claim preanalysis results without running it.
-- **Overstated reachability**: if any claim presents reachability or taint-subgraph membership as data-flow or vulnerability proof, correct the claim.
-- **Rollback**: delete the written files (exports, declared-links file). In-memory annotations vanish when the engine is disposed.
+- Tool missing or failing to install: report the gap and stop. No manual-analysis fallback.
+- Import error in snippets: run snippets with the tool's isolated runner (for example `uv run --with <tool> python -`) rather than relying on a bare tool install; this is a resolution step, not a fallback.
+- Version-gated method unavailable: probe before calling; fall back to the baseline alternative and say so in the report.
+- Language detection failure: report the finding; do not invent a language list.
+- Preanalysis not run: blast radius, taint, and privilege data exist only after preanalysis; run it before retrying any dependent query. Never claim preanalysis results without running it.
+- Overstated reachability: if any claim presents reachability or taint-subgraph membership as data-flow or vulnerability proof, correct the claim.
+- Rollback: delete the written files (exports, declared-links file). In-memory annotations vanish when the engine is disposed.
 
 ## Output
 

@@ -17,10 +17,10 @@ disable-model-invocation: true
 
 ## Inputs
 
-- **Required**: The target PR, chosen by the invocation argument: blank (the current branch's PR), a PR number, or a comment/thread URL (targeted mode: that thread only).
-- **Required**: An authenticated `gh` CLI and this skill's four scripts: `scripts/get-pr-comments`, `scripts/get-thread-for-comment`, `scripts/reply-to-pr-thread`, `scripts/resolve-pr-thread`.
-- **Optional**: A checkout of the PR branch to read code and apply fixes.
-- **Optional**: Project test or check commands to validate fixes before commit.
+- Required: The target PR, chosen by the invocation argument: blank (the current branch's PR), a PR number, or a comment/thread URL (targeted mode: that thread only).
+- Required: An authenticated `gh` CLI and this skill's four scripts: `scripts/get-pr-comments`, `scripts/get-thread-for-comment`, `scripts/reply-to-pr-thread`, `scripts/resolve-pr-thread`.
+- Optional: A checkout of the PR branch to read code and apply fixes.
+- Optional: Project test or check commands to validate fixes before commit.
 
 ## Procedure
 

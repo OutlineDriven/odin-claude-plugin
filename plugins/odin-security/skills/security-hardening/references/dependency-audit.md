@@ -29,7 +29,7 @@ When you defer a fix, document the reason and set a review date.
 
 A vulnerability audit catches known CVEs; it will not catch a malicious or typosquatted package. Also:
 
-- **Commit the lockfile and install reproducibly in CI**: `npm ci`, `pip install --require-hashes`, `cargo build --locked`, or the equivalent for your toolchain. No silent version drift.
-- **Review new dependencies before adding them**: maintenance, download counts, and whether they earn their place. Every dependency is attack surface (OWASP **A06: Vulnerable Components**, **LLM03: Supply Chain**).
-- **Be wary of install-time scripts** in unfamiliar packages (`postinstall`, `setup.py`, `build.rs`): they run arbitrary code at install time.
-- **Watch for typosquats**: `cross-env` vs `crossenv`, `requests` vs `request`, `python-dateutil` vs `dateutil`.
+- Commit the lockfile and install reproducibly in CI: `npm ci`, `pip install --require-hashes`, `cargo build --locked`, or the equivalent for your toolchain. No silent version drift.
+- Review new dependencies before adding them: maintenance, download counts, and whether they earn their place. Every dependency is attack surface (OWASP **A06: Vulnerable Components**, **LLM03: Supply Chain**).
+- Be wary of install-time scripts in unfamiliar packages (`postinstall`, `setup.py`, `build.rs`): they run arbitrary code at install time.
+- Watch for typosquats: `cross-env` vs `crossenv`, `requests` vs `request`, `python-dateutil` vs `dateutil`.

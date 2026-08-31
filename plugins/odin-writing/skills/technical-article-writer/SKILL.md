@@ -16,18 +16,18 @@ description: 'Use when a user asks to write a technical article or blog post inc
 
 ## Inputs
 
-- **Topic** (required): subject of the article.
-- **Target audience** (required): who will read it.
-- **Reference URLs or text** (required): links, quotes, or prior art to incorporate and cite.
-- **Key points or outline** (optional): specific arguments, data, or examples to include.
-- **Tone** (optional): defaults to authoritative and conversational.
+- Topic (required): subject of the article.
+- Target audience (required): who will read it.
+- Reference URLs or text (required): links, quotes, or prior art to incorporate and cite.
+- Key points or outline (optional): specific arguments, data, or examples to include.
+- Tone (optional): defaults to authoritative and conversational.
 
 ## Failure terminal states
 
-- **idea_quality_failed**: the topic fails one of the three idea-quality gates (non-obvious, useful, specific). Report which gate failed and why. Ask the user for a revised angle. Do not draft until the idea passes.
-- **reference_fetch_failed**: a reference URL is unreachable or returns content irrelevant to the topic. Report the specific URL and what went wrong. Ask the user for an alternative source or permission to proceed without it. Do not silently drop a reference.
-- **scope_conflict**: the topic spans multiple objectives. Report the conflict and ask the user to choose one objective. Do not merge objectives.
-- **insufficient_input**: no topic or audience after one clarification round. Report the blocker and stop. Do not fabricate audience assumptions.
+- idea_quality_failed: the topic fails one of the three idea-quality gates (non-obvious, useful, specific). Report which gate failed and why. Ask the user for a revised angle. Do not draft until the idea passes.
+- reference_fetch_failed: a reference URL is unreachable or returns content irrelevant to the topic. Report the specific URL and what went wrong. Ask the user for an alternative source or permission to proceed without it. Do not silently drop a reference.
+- scope_conflict: the topic spans multiple objectives. Report the conflict and ask the user to choose one objective. Do not merge objectives.
+- insufficient_input: no topic or audience after one clarification round. Report the blocker and stop. Do not fabricate audience assumptions.
 
 ## Procedure
 

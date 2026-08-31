@@ -34,11 +34,11 @@ For a push, require a destination authorized to receive a static JSONL batch. Fo
 9. Confirm exported, imported, duplicate, excluded, redacted, and failed counts; the old and new watermark; preserved alias spelling; and absence of any live or writable remote database. Report success only when every Done condition is observed.
 
 ## Failure and recovery
-- **Peer or authority failure:** unknown, ambiguous, unauthorized, or request-mismatched peer or direction stops before credentials and mutation. Return `blocked` with the rejected input and no widened target.
-- **Selection or policy failure:** unreadable watermark, unavailable redaction or exclusion policy, or inability to distinguish imported records stops before batch creation. Return `blocked`; never export an uncertain or unredacted set.
-- **Batch or boundary failure:** serialization, transfer, malformed JSONL, schema, origin, redaction, or exclusion failure rejects the affected batch before import. Do not fall back to database transfer or weaker validation.
-- **Import failure:** roll back the import transaction when available. If atomic rollback is unavailable, stop immediately, preserve the batch, report exact successful, duplicate, and failed record identities and counts, and do not advance the watermark past the greatest contiguous confirmed boundary.
-- **Confirmation failure:** if remote import or watermark state cannot be confirmed, return `partial` with the last confirmed boundary and make no success claim. Recovery is an idempotent retry of the same redacted static batch; deduplication must leave already imported records unchanged.
+- Peer or authority failure: unknown, ambiguous, unauthorized, or request-mismatched peer or direction stops before credentials and mutation. Return `blocked` with the rejected input and no widened target.
+- Selection or policy failure: unreadable watermark, unavailable redaction or exclusion policy, or inability to distinguish imported records stops before batch creation. Return `blocked`; never export an uncertain or unredacted set.
+- Batch or boundary failure: serialization, transfer, malformed JSONL, schema, origin, redaction, or exclusion failure rejects the affected batch before import. Do not fall back to database transfer or weaker validation.
+- Import failure: roll back the import transaction when available. If atomic rollback is unavailable, stop immediately, preserve the batch, report exact successful, duplicate, and failed record identities and counts, and do not advance the watermark past the greatest contiguous confirmed boundary.
+- Confirmation failure: if remote import or watermark state cannot be confirmed, return `partial` with the last confirmed boundary and make no success claim. Recovery is an idempotent retry of the same redacted static batch; deduplication must leave already imported records unchanged.
 
 The terminal result is exactly one of `synced`, `empty`, `partial`, or `blocked`. Errors remain visible, and neither `partial` nor `blocked` satisfies the Done predicate.
 

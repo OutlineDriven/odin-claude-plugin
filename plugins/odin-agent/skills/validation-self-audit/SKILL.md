@@ -31,11 +31,11 @@ description: 'Use when asked to audit validation that looks too clean or self-co
 7. Stop with a blocked result when evidence needed to distinguish firing from non-firing patterns is unavailable; do not widen scope or infer clean validation from missing evidence. **Done when:** the blocked result names the exact missing artifact and unclassifiable patterns.
 
 ## Failure and recovery
-- **Missing evidence**: Return `blocked` with the exact missing artifact or fact and the patterns that cannot be classified.
-- **Entangled auditor**: Return `non-independent audit`, name which of patterns 3–5 fired, and require a blinded auditor, preregistered criteria, or fixed stopping rule before trusting the audit.
-- **No external ground truth**: State that the validation is self-referential and require an independent outcome measure; do not convert internal agreement into proof.
-- **Multiple plausible roots**: Return the minimum distinguishing evidence needed; do not produce an unranked laundry list.
-- **Partial result**: Preserve supported classifications and mark every unresolved pattern unknown. Never claim the done predicate while the root failure remains unresolved.
+- Missing evidence: Return `blocked` with the exact missing artifact or fact and the patterns that cannot be classified.
+- Entangled auditor: Return `non-independent audit`, name which of patterns 3–5 fired, and require a blinded auditor, preregistered criteria, or fixed stopping rule before trusting the audit.
+- No external ground truth: State that the validation is self-referential and require an independent outcome measure; do not convert internal agreement into proof.
+- Multiple plausible roots: Return the minimum distinguishing evidence needed; do not produce an unranked laundry list.
+- Partial result: Preserve supported classifications and mark every unresolved pattern unknown. Never claim the done predicate while the root failure remains unresolved.
 
 ## Output
 A read-only report with the bounded claim, each firing pattern by name with evidence and fix, the patterns 3–5 self-audit, the optional N=1 auditor comparison, one root independence failure, and a terminal verdict of `independent`, `not independent`, or `blocked`.

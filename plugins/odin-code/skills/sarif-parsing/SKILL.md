@@ -16,8 +16,8 @@ description: 'Use when a user supplies existing SARIF to inspect, filter, aggreg
 
 ## Inputs
 
-- **Required**: SARIF content: a file path to a local `.sarif` or `.json` file, or raw SARIF JSON pasted directly.
-- **Optional, context-dependent**:
+- Required: SARIF content: a file path to a local `.sarif` or `.json` file, or raw SARIF JSON pasted directly.
+- Optional, context-dependent:
   - Target format for conversion (CSV, HTML, or a SARIF variant such as a specific schema version).
   - Filter criteria for inspection (e.g., rule ID pattern, file path glob, severity threshold).
   - Aggregation strategy (count by rule, by file, by severity, by tool).
@@ -31,12 +31,12 @@ description: 'Use when a user supplies existing SARIF to inspect, filter, aggreg
 2. Validate the top-level structure of the SARIF object (must contain `runs` as an array). If the structure is invalid, stop with `invalid-sarif`.
 3. Resolve inherited severity for every result that omits an explicit `level`: walk the `rules`/`ruleDescriptors` lookup table in the same `run` object, then fall back to the tool default (`warning`).
 4. Apply the user request:
-   - **Inspect / Filter**: apply the stated filter criteria to `runs[].results[]`, keeping every result that matches.
-   - **Deduplicate**: within each run, group results by the deduplication scope (exact, or relaxed) and retain one representative per group.
-   - **Aggregate / Summarize**: compute the requested aggregation over the full run set and emit the summary table.
-   - **Diff**: align results from two SARIF inputs by normalized file path plus rule ID; report added results (in B not A) and removed results (in A not B). Normalize file URIs to filesystem paths before comparison.
-   - **Convert**: transform the SARIF into the requested format (CSV, HTML summary, or SARIF variant) preserving the results, rules, and tool metadata.
-   - **Gate**: evaluate each result against the stated threshold or rule list; report pass/fail per rule and overall.
+   - Inspect / Filter: apply the stated filter criteria to `runs[].results[]`, keeping every result that matches.
+   - Deduplicate: within each run, group results by the deduplication scope (exact, or relaxed) and retain one representative per group.
+   - Aggregate / Summarize: compute the requested aggregation over the full run set and emit the summary table.
+   - Diff: align results from two SARIF inputs by normalized file path plus rule ID; report added results (in B not A) and removed results (in A not B). Normalize file URIs to filesystem paths before comparison.
+   - Convert: transform the SARIF into the requested format (CSV, HTML summary, or SARIF variant) preserving the results, rules, and tool metadata.
+   - Gate: evaluate each result against the stated threshold or rule list; report pass/fail per rule and overall.
    - Any other request: stop with `unsupported-request`.
 5. If the requested artifact must be written to a local file, write it to the stated path. Roll back by deleting the file if a subsequent step fails.
 6. Return the produced findings or derived artifact inline or confirm the written path.

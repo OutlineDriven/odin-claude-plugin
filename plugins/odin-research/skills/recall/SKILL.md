@@ -16,15 +16,15 @@ description: 'Use when asked to recover prior work and current status before res
 
 ## Refusals
 
-- **Fabricating state**: rejected. If no session file is found, return `session-not-found`. Do not invent artifacts or actions.
-- **Suppressing divergences**: rejected. Verified records with divergence flags are returned; divergences are not hidden to satisfy the done predicate.
-- **Source or remote-system changes**: rejected. This skill is read-only throughout.
+- Fabricating state: rejected. If no session file is found, return `session-not-found`. Do not invent artifacts or actions.
+- Suppressing divergences: rejected. Verified records with divergence flags are returned; divergences are not hidden to satisfy the done predicate.
+- Source or remote-system changes: rejected. This skill is read-only throughout.
 
 ## Inputs
 
-- **Session identifier** (required): the active session ID or session directory path to recover.
-- **Current working directory** (required): the directory the agent was operating in when the session ended.
-- **Optional scope hint**: a specific file, module, or task tag to narrow recovery. Omit to recover the full capsule.
+- Session identifier (required): the active session ID or session directory path to recover.
+- Current working directory (required): the directory the agent was operating in when the session ended.
+- Optional scope hint: a specific file, module, or task tag to narrow recovery. Omit to recover the full capsule.
 
 ## Procedure
 
@@ -38,9 +38,9 @@ description: 'Use when asked to recover prior work and current status before res
 
 ## Failure and recovery
 
-- **`session-not-found`**: return with the identifier. Do not fabricate state.
-- **`transcript-parse-failure`**: return with the parse error. Do not continue with partial data.
-- **`no-recoverable-state`**: return when the transcript contains no identifiable work records. Do not invent artifacts or actions.
+- `session-not-found`: return with the identifier. Do not fabricate state.
+- `transcript-parse-failure`: return with the parse error. Do not continue with partial data.
+- `no-recoverable-state`: return when the transcript contains no identifiable work records. Do not invent artifacts or actions.
 
 If some records verify and others diverge, return the verified records with divergence flags. This skill performs no mutations; no rollback is required.
 

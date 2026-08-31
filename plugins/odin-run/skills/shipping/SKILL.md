@@ -17,12 +17,12 @@ disable-model-invocation: true
 
 ## Inputs
 
-- **Deployment target** (required): the environment, host, or platform being deployed to.
-- **Change scope** (required): the artifact, commit, image, or changeset being shipped.
-- **Rollback plan** (required): the documented procedure to revert the change. Must be executable without external tooling that may be unavailable during an incident.
-- **Health signal metrics** (required): the metrics and alert thresholds active during rollout. Each metric must have a healthy band and an unhealthy threshold.
-- **Mode** (required): plan-only or execute-rollout.
-- **Rollout strategy** (optional): the staged rollout percentage or canary schedule. In plan mode, this is part of the plan output.
+- Deployment target (required): the environment, host, or platform being deployed to.
+- Change scope (required): the artifact, commit, image, or changeset being shipped.
+- Rollback plan (required): the documented procedure to revert the change. Must be executable without external tooling that may be unavailable during an incident.
+- Health signal metrics (required): the metrics and alert thresholds active during rollout. Each metric must have a healthy band and an unhealthy threshold.
+- Mode (required): plan-only or execute-rollout.
+- Rollout strategy (optional): the staged rollout percentage or canary schedule. In plan mode, this is part of the plan output.
 
 ## Procedure
 
@@ -36,13 +36,13 @@ disable-model-invocation: true
 
 ## Failure and recovery
 
-- **Rollback plan invalid**: stop. Do not deploy. Return "rollback plan not confirmed" with the specific defect.
-- **Artifact missing**: stop. Return "artifact not available" with the target identifier.
-- **Human rejects preview**: stop. No deployment action occurs. Return "preview rejected".
-- **Health signal degradation during rollout**: stop rollout. Do not advance. Return "rollout stopped: unhealthy signal" with the signal name and value. Execute rollback if the human requests it.
-- **Indeterminate metrics at window end** (canary): do not promote. Record the indeterminate classification and evidence. Require a human decision before promote or rollback.
-- **Metric source unavailable during watch window**: do not promote on absent data. Roll back to the previous stable revision and record that the decision was forced by unavailable checks.
-- **Partial result**: never report done when rollout is incomplete or rollback is not confirmed.
+- Rollback plan invalid: stop. Do not deploy. Return "rollback plan not confirmed" with the specific defect.
+- Artifact missing: stop. Return "artifact not available" with the target identifier.
+- Human rejects preview: stop. No deployment action occurs. Return "preview rejected".
+- Health signal degradation during rollout: stop rollout. Do not advance. Return "rollout stopped: unhealthy signal" with the signal name and value. Execute rollback if the human requests it.
+- Indeterminate metrics at window end (canary): do not promote. Record the indeterminate classification and evidence. Require a human decision before promote or rollback.
+- Metric source unavailable during watch window: do not promote on absent data. Roll back to the previous stable revision and record that the decision was forced by unavailable checks.
+- Partial result: never report done when rollout is incomplete or rollback is not confirmed.
 
 ## Output
 

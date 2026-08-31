@@ -21,8 +21,8 @@ disable-model-invocation: true
 
 ## Inputs
 
-- **Required**: None. The user initiates by naming the integration or by running the skill without arguments.
-- **Optional**: Desired integration names (e.g. `GITHUB_TOKEN`, `OPENAI_API_KEY`). If absent, the skill lists all recognized integrations and asks which to configure.
+- Required: None. The user initiates by naming the integration or by running the skill without arguments.
+- Optional: Desired integration names (e.g. `GITHUB_TOKEN`, `OPENAI_API_KEY`). If absent, the skill lists all recognized integrations and asks which to configure.
 
 ## Procedure
 

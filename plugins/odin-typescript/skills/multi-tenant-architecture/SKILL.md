@@ -16,11 +16,11 @@ description: 'Use when a request concerns multi-tenant app scaffolding, tenant i
 
 ## Inputs
 
-- **Project directory** (required): target path for scaffolded output.
-- **Tenant isolation strategy** (optional): `shared-db`, `schema-per-tenant`, or `database-per-tenant`. Defaults to `shared-db`.
-- **Platform target** (optional): `cloudflare`, `vercel`, or `both`. Defaults to `both`.
-- **Custom domain support** (optional): boolean. Defaults to `true`.
-- **Tenant identifier style** (optional): `subdomain`, `path`, or `header`. Defaults to `subdomain`.
+- Project directory (required): target path for scaffolded output.
+- Tenant isolation strategy (optional): `shared-db`, `schema-per-tenant`, or `database-per-tenant`. Defaults to `shared-db`.
+- Platform target (optional): `cloudflare`, `vercel`, or `both`. Defaults to `both`.
+- Custom domain support (optional): boolean. Defaults to `true`.
+- Tenant identifier style (optional): `subdomain`, `path`, or `header`. Defaults to `subdomain`.
 
 ## Procedure
 

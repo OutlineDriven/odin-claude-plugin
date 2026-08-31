@@ -16,9 +16,9 @@ description: 'Use when asked to analyze a screen recording, voice capture, or me
 
 ## Refusals
 
-- **Remote, credential, publish, deploy, or irreversible changes**: rejected.
-- **Fabricating evidence**: rejected. If the recording is missing or unreadable, report what was found and stop.
-- **Substituting a partial artifact set for a complete one**: rejected. If a step fails, report the failure and stop rather than emitting incomplete output and claiming the done predicate holds.
+- Remote, credential, publish, deploy, or irreversible changes: rejected.
+- Fabricating evidence: rejected. If the recording is missing or unreadable, report what was found and stop.
+- Substituting a partial artifact set for a complete one: rejected. If a step fails, report the failure and stop rather than emitting incomplete output and claiming the done predicate holds.
 
 ## Inputs
 
@@ -38,13 +38,13 @@ description: 'Use when asked to analyze a screen recording, voice capture, or me
 
 ## Failure and recovery
 
-- **Missing input**: no recording artifact supplied for a non-setup path. Report the missing input and stop; do not fabricate evidence.
-- **Unreadable recording**: the file is corrupt, the media format is unsupported, or expected metadata is missing. Report what was found and what was expected, and stop that path.
-- **Ambiguous route**: a recording arrived without context and length/event inspection does not resolve it. Ask the user which path applies before running analysis.
-- **Quick-to-extensive escalation**: the quick path discovers multiple distinct issues, requirements, or a workflow walkthrough. Stop, tell the user, and re-run with a non-temp output directory per the extensive path.
-- **No source mapping possible**: the workspace is not the product source or no grounded mapping is found. Keep the problem and mark the source mapping as Unknown; do not force a speculative mapping.
-- **Partial-result rule**: never substitute a partial artifact set for a complete one. If a step fails, report the failure and stop.
-- **Rollback**: temp directories are discarded by the OS. Written evidence artifacts are local files the user can delete; no VCS or remote mutation occurs unless the user explicitly commits. `raw/` and `frames/` directories are never committed unless the user explicitly asks and privacy is acceptable.
+- Missing input: no recording artifact supplied for a non-setup path. Report the missing input and stop; do not fabricate evidence.
+- Unreadable recording: the file is corrupt, the media format is unsupported, or expected metadata is missing. Report what was found and what was expected, and stop that path.
+- Ambiguous route: a recording arrived without context and length/event inspection does not resolve it. Ask the user which path applies before running analysis.
+- Quick-to-extensive escalation: the quick path discovers multiple distinct issues, requirements, or a workflow walkthrough. Stop, tell the user, and re-run with a non-temp output directory per the extensive path.
+- No source mapping possible: the workspace is not the product source or no grounded mapping is found. Keep the problem and mark the source mapping as Unknown; do not force a speculative mapping.
+- Partial-result rule: never substitute a partial artifact set for a complete one. If a step fails, report the failure and stop.
+- Rollback: temp directories are discarded by the OS. Written evidence artifacts are local files the user can delete; no VCS or remote mutation occurs unless the user explicitly commits. `raw/` and `frames/` directories are never committed unless the user explicitly asks and privacy is acceptable.
 
 ## Output
 

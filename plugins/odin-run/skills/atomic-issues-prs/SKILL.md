@@ -38,12 +38,12 @@ Optional: per-unit routing overrides (issue+PR vs PR-only) stated by the user; d
 8. For PR-only routed units (no issue filed in step 4), skip the issue-create and body-amend steps entirely; no dangling `Closes`. Done when: every logical unit has the correct issue/PR routing, base and head, links, and reported URLs.
 
 ## Failure and recovery
-- **Unauthenticated**: stop before any mutation; ask the user to run `gh auth login`. No partial result.
-- **Ambiguous upstream**: stop and ask the user for the target repo; do not guess. No mutation performed.
-- **Insufficient permission with no fork path**: stop; report the canonical slug and the missing permission. No push or object created.
-- **Push rejected**: report the rejection and the branch/URL; do not force-push. Leave prior successfully published units in place.
-- **Partial publish failure mid-loop**: already-published units remain; report each unit's status (published URL or failed) so the user can retry the failed units. Never swallow the error or pretend the done predicate holds.
-- **Non-converged**: if any unit could not be published, the terminal result names the failed units and the reason; the run is not done.
+- Unauthenticated: stop before any mutation; ask the user to run `gh auth login`. No partial result.
+- Ambiguous upstream: stop and ask the user for the target repo; do not guess. No mutation performed.
+- Insufficient permission with no fork path: stop; report the canonical slug and the missing permission. No push or object created.
+- Push rejected: report the rejection and the branch/URL; do not force-push. Leave prior successfully published units in place.
+- Partial publish failure mid-loop: already-published units remain; report each unit's status (published URL or failed) so the user can retry the failed units. Never swallow the error or pretend the done predicate holds.
+- Non-converged: if any unit could not be published, the terminal result names the failed units and the reason; the run is not done.
 
 ## Output
 A run report listing, per unit: the routing (Issue+PR or PR-only), the branch, the push URL, the PR number and URL, and (when filed) the issue number and URL. Classify the run as done only when one issue or PR per logical change exists on the correct base/head, links are appended, and URLs are reported.

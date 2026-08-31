@@ -16,11 +16,11 @@ description: 'Use when adding or improving property tests for invariants, oracle
 
 ## Inputs
 
-- **Target code**: the function, module, or contract under test. Required.
-- **Property type**: roundtrip, inverse, oracle, idempotence, invariant, commutativity, associativity, identity, or determinism. Inferred from the code's algebraic shape when not stated.
-- **Test framework**: the project's existing property-based testing library (Hypothesis, fast-check, proptest, jqwik, rapid, Echidna, Medusa, or equivalent). Required.
-- **Existing tests**: any current property or example tests for the target. Optional.
-- **Known edge cases**: domain-specific boundary values. Optional.
+- Target code: the function, module, or contract under test. Required.
+- Property type: roundtrip, inverse, oracle, idempotence, invariant, commutativity, associativity, identity, or determinism. Inferred from the code's algebraic shape when not stated.
+- Test framework: the project's existing property-based testing library (Hypothesis, fast-check, proptest, jqwik, rapid, Echidna, Medusa, or equivalent). Required.
+- Existing tests: any current property or example tests for the target. Optional.
+- Known edge cases: domain-specific boundary values. Optional.
 
 ## Procedure
 
@@ -66,11 +66,11 @@ description: 'Use when adding or improving property tests for invariants, oracle
 
 ## Failure and recovery
 
-- **No algebraic shape**: report that the code is a poor property-test candidate and recommend example tests. Do not force a weak property.
-- **Generator cannot produce valid inputs**: move constraints into the strategy; if the framework still cannot express the domain, report the limitation with the specific constraint that blocks generation.
-- **Tautological or vacuous test**: strengthen the property or fix the generator before declaring done. Never ship a test that cannot fail on a real bug.
-- **User rejects new dependency**: work within the existing framework or report what is possible without it. Do not add a dependency without explicit approval.
-- **Partial result**: if only some properties are encodable, write those and report which properties could not be encoded and why.
+- No algebraic shape: report that the code is a poor property-test candidate and recommend example tests. Do not force a weak property.
+- Generator cannot produce valid inputs: move constraints into the strategy; if the framework still cannot express the domain, report the limitation with the specific constraint that blocks generation.
+- Tautological or vacuous test: strengthen the property or fix the generator before declaring done. Never ship a test that cannot fail on a real bug.
+- User rejects new dependency: work within the existing framework or report what is possible without it. Do not add a dependency without explicit approval.
+- Partial result: if only some properties are encodable, write those and report which properties could not be encoded and why.
 
 ## Output
 A property test file in the project's existing framework containing: the strongest grounded property for the target code, domain-aware generators with constraints in the strategy, pinned edge cases for known boundaries, and a passing test run. If the code lacks an algebraic shape, the output is a written recommendation for example tests with the specific reason no property applies.

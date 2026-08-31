@@ -46,10 +46,10 @@ Current entry-format version: **4**.
 | 4 | Repeated `Type:` lines are allowed | Keep one `Type:` line per distinct kind; merge duplicate identical `Type:` lines into one. Do not collapse distinct kinds into one line. |
 
 ## Failure and recovery
-- **F1 — missing or unparseable schema record:** write nothing, report the exact file and field problem, stop. The store is not modified and no schema value is initialized here.
-- **F2 — unmigratable entry:** leave that entry untouched, keep the schema value unchanged, and list the entry in the report; the store stays behind and the next session re-compares. Because the schema field moves last, a partial migration can never read as caught up.
-- **F3 — consent missing or refused at the prompt:** treat as `defer`; no writes.
-- **F4 — write error mid-migration:** stop immediately, restore every already-rewritten entry from the rollback path (version-control restore or the backup copy), leave the schema value at its old setting, and report which entries were rewritten before the failure. Re-running later re-offers `migrate now`.
+- F1 — missing or unparseable schema record: write nothing, report the exact file and field problem, stop. The store is not modified and no schema value is initialized here.
+- F2 — unmigratable entry: leave that entry untouched, keep the schema value unchanged, and list the entry in the report; the store stays behind and the next session re-compares. Because the schema field moves last, a partial migration can never read as caught up.
+- F3 — consent missing or refused at the prompt: treat as `defer`; no writes.
+- F4 — write error mid-migration: stop immediately, restore every already-rewritten entry from the rollback path (version-control restore or the backup copy), leave the schema value at its old setting, and report which entries were rewritten before the failure. Re-running later re-offers `migrate now`.
 - Never swallow an error and never report `current` or `migrated` unless steps 2, 9, and 10 actually completed as written.
 
 ## Output

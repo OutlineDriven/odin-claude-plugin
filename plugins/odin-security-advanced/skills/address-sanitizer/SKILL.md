@@ -37,12 +37,12 @@ Optional: a preferred sanitizer combination, or a fuzzer in use (libFuzzer, AFL+
 9. To combine with undefined-behavior detection, add `,undefined` to the `-fsanitize` value (`-fsanitize=address,undefined`). Done when: `-fsanitize=address,undefined` is set if UBSan is requested.
 
 ## Failure and recovery
-- **ASan runtime not initialized**: `-fsanitize=address` was missing from the link step. Re-link with the flag and rerun.
-- **Fuzzer kills the process immediately**: memory limit is below ASan's 20 TB virtual mapping. Set `-rss_limit_mb=0` or `-m none` and rerun.
-- **LeakSanitizer output obscures crash reports**: set `ASAN_OPTIONS=detect_leaks=0` during fuzzing; review leak reports separately at the end of a campaign.
-- **ASan prints no startup info**: the binary was not instrumented. Rebuild with the flag and confirm `verbosity=1` prints ASan initialization.
-- **Partial result rule**: a run that reports one memory error stops at that error; do not claim the target is clean. Report the error and its location; further runs may surface additional errors.
-- **Rollback**: delete the instrumented binary and rebuild without `-fsanitize=address`. No source change is required for instrumentation-only builds.
+- ASan runtime not initialized: `-fsanitize=address` was missing from the link step. Re-link with the flag and rerun.
+- Fuzzer kills the process immediately: memory limit is below ASan's 20 TB virtual mapping. Set `-rss_limit_mb=0` or `-m none` and rerun.
+- LeakSanitizer output obscures crash reports: set `ASAN_OPTIONS=detect_leaks=0` during fuzzing; review leak reports separately at the end of a campaign.
+- ASan prints no startup info: the binary was not instrumented. Rebuild with the flag and confirm `verbosity=1` prints ASan initialization.
+- Partial result rule: a run that reports one memory error stops at that error; do not claim the target is clean. Report the error and its location; further runs may surface additional errors.
+- Rollback: delete the instrumented binary and rebuild without `-fsanitize=address`. No source change is required for instrumentation-only builds.
 
 ## Output
 When building or running: an instrumented binary or fuzz target, the exercise run result, and for any detected memory error a statement of the error type, the faulting source location, and the allocation/deallocation locations — sufficient to reproduce the failure. When interpreting a report: a statement of the error type, the faulting source location, and the allocation/deallocation locations extracted from the supplied report, with the root cause mapped to source where available.

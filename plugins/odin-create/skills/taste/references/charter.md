@@ -23,7 +23,7 @@ Overkill is what an author emits to perform depth they have not delivered. The d
 
 | Ban | Why | Where it shows |
 |---|---|---|
-| Thesaurus-soup prose ("orchestrate the holistic synthesis of...") | Long Latin words doing the work of short Saxon ones. Volume substitutes for content. | Prose. Marketing copy. |
+| Thesaurus-soup prose ("orchestrate the comprehensive synthesis of...") | Long Latin words doing the work of short Saxon ones. Volume substitutes for content. | Prose. Marketing copy. |
 | Abstraction towers (4 layers where 1 suffices) | `Factory<Builder<Strategy<T>>>` for a single call site. Performs architectural sophistication; signals "I did not know what was actually needed." | Code. |
 | Gradient stacks on every section | Ten gradients, no hierarchy. Decoration becomes the design. | Design. |
 | 12-criterion weighted scoring matrix | Spreadsheet for a 2-option decision. The math is the alibi for not committing. | Decision docs. RFCs. |

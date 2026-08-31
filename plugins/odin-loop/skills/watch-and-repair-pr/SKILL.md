@@ -30,11 +30,11 @@ Required: the open pull request, its repository and candidate branch, access to 
 7. End the cycle with exactly one terminal classification: `mergeable` when all required checks and protection conditions pass, no blocking thread or conflict remains, and no required owner action is outstanding; `blocked-with-owner` when a named obstacle and responsible owner remain; or `handed-off` when responsibility has been explicitly transferred with the current tape and remaining actions identified. Done when: one terminal classification is emitted.
 
 ## Failure and recovery
-- **Incomplete or stale tape:** do not mutate or claim mergeability; return `blocked-with-owner` naming the unavailable evidence and its owner.
-- **Invalid target or authority:** if the candidate branch cannot be identified, the proposed action exceeds the bounded findings, or the remote preview lacks explicit human authorization, make no remote change and return `blocked-with-owner` naming the required human decision.
-- **Verification or push failure:** stop, preserve the verified local result without claiming it is remote, and return `blocked-with-owner` with the failed check or push, the unchanged remote state if known, and the owner able to recover. Never retry by force-pushing.
-- **Conflict, protection, or external wait:** do not bypass it; name the exact blocker and responsible owner in `blocked-with-owner`, or use `handed-off` only after explicit transfer.
-- **Partial result:** report completed observations and any successfully published commit identifiers separately from unperformed work; never represent a partial tape or partial push as satisfying the done predicate.
+- Incomplete or stale tape: do not mutate or claim mergeability; return `blocked-with-owner` naming the unavailable evidence and its owner.
+- Invalid target or authority: if the candidate branch cannot be identified, the proposed action exceeds the bounded findings, or the remote preview lacks explicit human authorization, make no remote change and return `blocked-with-owner` naming the required human decision.
+- Verification or push failure: stop, preserve the verified local result without claiming it is remote, and return `blocked-with-owner` with the failed check or push, the unchanged remote state if known, and the owner able to recover. Never retry by force-pushing.
+- Conflict, protection, or external wait: do not bypass it; name the exact blocker and responsible owner in `blocked-with-owner`, or use `handed-off` only after explicit transfer.
+- Partial result: report completed observations and any successfully published commit identifiers separately from unperformed work; never represent a partial tape or partial push as satisfying the done predicate.
 
 ## Output
 One cycle report containing the pull request and candidate branch, the review-tape snapshot read in that cycle, bounded findings and their dispositions, verification evidence for each pushed fix, any published commit or report identifiers, remaining blockers with owners, and exactly one terminal classification: `mergeable`, `blocked-with-owner`, or `handed-off`.

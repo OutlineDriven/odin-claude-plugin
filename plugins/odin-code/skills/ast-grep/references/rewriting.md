@@ -14,8 +14,8 @@ rule:
 fix: logger.info($MSG)
 ```
 
-- **Meta-variables**: Preserved from pattern match.
-- **Indentation**: Automatically adjusted to match context.
+- Meta-variables: Preserved from pattern match.
+- Indentation: Automatically adjusted to match context.
 
 ## Range expansion (`fix` object)
 
@@ -40,15 +40,15 @@ transform:
 ```
 
 ### Supported transformations
-- **substring**: Extract part of string.
-- **replace**: Regex replacement.
+- substring: Extract part of string.
+- replace: Regex replacement.
   ```yaml
   replace:
     source: $VAR
     replace: 'regex'
     by: 'replacement'
   ```
-- **convert**: Case conversion (`camelCase`, `snake_case`, `PascalCase`, `kebab-case`, `UPPER_CASE`).
+- convert: Case conversion (`camelCase`, `snake_case`, `PascalCase`, `kebab-case`, `UPPER_CASE`).
 
 ## Rewriters
 

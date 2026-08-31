@@ -16,8 +16,8 @@ description: 'Use when a user wants to enumerate plausible designs, configuratio
 
 ## Inputs
 
-- **Decision subject**: the design, system, or problem whose solution space is being stormed.
-- **Enumeration dimensions**: designs, configurations, scenarios, implementation paths, or a subset.
+- Decision subject: the design, system, or problem whose solution space is being stormed.
+- Enumeration dimensions: designs, configurations, scenarios, implementation paths, or a subset.
 - **Bounds** (optional): constraints, known invariants, or excluded paths.
 
 ## Procedure
@@ -30,10 +30,10 @@ description: 'Use when a user wants to enumerate plausible designs, configuratio
 6. Present the diagrammed field to the user without choosing. The user selects from the enumerated, diagrammed field. Done when: the field is presented without choosing.
 
 ## Failure and recovery
-- **Incomplete enumeration**: if you cannot enumerate a dimension without inventing evidence, stop work on that dimension, mark it incomplete with the specific gap, and continue with the others. Do not fabricate options to fill the gap.
-- **Diagram does not match the field**: if the diagram omits an enumerated option or shows an option that was not enumerated, rebuild it from the enumerated list before presenting it.
-- **Scope drift**: if the user asks you to choose or implement during enumeration, stop and restate the contract: the skill enumerates and diagrams; it does not choose. Resume only after the user confirms the enumeration-and-diagram scope.
-- **Partial result**: a partial field with incomplete dimensions is deliverable only when every incomplete dimension is explicitly marked. Never present a partial field as exhaustive.
+- Incomplete enumeration: if you cannot enumerate a dimension without inventing evidence, stop work on that dimension, mark it incomplete with the specific gap, and continue with the others. Do not fabricate options to fill the gap.
+- Diagram does not match the field: if the diagram omits an enumerated option or shows an option that was not enumerated, rebuild it from the enumerated list before presenting it.
+- Scope drift: if the user asks you to choose or implement during enumeration, stop and restate the contract: the skill enumerates and diagrams; it does not choose. Resume only after the user confirms the enumeration-and-diagram scope.
+- Partial result: a partial field with incomplete dimensions is deliverable only when every incomplete dimension is explicitly marked. Never present a partial field as exhaustive.
 
 ## Output
 A local artifact containing the exhaustive enumerated field (one-line descriptions and tradeoffs per option, cross-references across dimensions) and a diagram of the full field. No recommendation or chosen path is produced.

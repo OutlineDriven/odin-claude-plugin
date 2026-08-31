@@ -16,8 +16,8 @@ description: 'Use when a bug report or UI-visible defect exists. Spawns repro ag
 
 ## Refusals
 
-- **Fixing the bug**: use `reproduce-and-fix-issues`. This skill reproduces and captures evidence only.
-- **Inferring or hallucinating a bug**: rejected. If the report cannot be parsed, return `blocked: no valid bug description`.
+- Fixing the bug: use `reproduce-and-fix-issues`. This skill reproduces and captures evidence only.
+- Inferring or hallucinating a bug: rejected. If the report cannot be parsed, return `blocked: no valid bug description`.
 - **Mutating VCS-tracked files, remote resources, credentials, or data at rest**: rejected.
 
 ## Inputs
@@ -44,11 +44,11 @@ Optional:
 
 ## Failure and recovery
 
-- **Cannot parse the bug report**: return `blocked: no valid bug description`. Do not infer or hallucinate a bug.
-- **Reproduction environment unavailable**: return `blocked: environment unavailable` with the specific constraint that failed.
-- **Reproduction times out**: return `blocked: repro timed out` with the last logged state and partial evidence if any exists.
-- **Partial-result rule**: if evidence was captured before failure, write it to the artifact directory and return it with the blocked status rather than discarding it.
-- **Non-converged**: if the repro produces conflicting evidence and cannot reach a verdict, return `non-converged` with the conflicting evidence listed.
+- Cannot parse the bug report: return `blocked: no valid bug description`. Do not infer or hallucinate a bug.
+- Reproduction environment unavailable: return `blocked: environment unavailable` with the specific constraint that failed.
+- Reproduction times out: return `blocked: repro timed out` with the last logged state and partial evidence if any exists.
+- Partial-result rule: if evidence was captured before failure, write it to the artifact directory and return it with the blocked status rather than discarding it.
+- Non-converged: if the repro produces conflicting evidence and cannot reach a verdict, return `non-converged` with the conflicting evidence listed.
 
 No rollback is needed if the only write is the artifact directory itself.
 

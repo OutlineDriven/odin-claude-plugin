@@ -21,7 +21,7 @@ Every interactive element needs all eight designed.
 | **Error** | Invalid state | Red border, icon, message |
 | **Success** | Completed | Green check, confirmation |
 
-**The common miss:** designing hover without focus, or vice versa. They are different. Keyboard users never see hover states; touch users never see hover states either (touch fires hover *and* active simultaneously).
+The common miss: designing hover without focus, or vice versa. They are different. Keyboard users never see hover states; touch users never see hover states either (touch fires hover *and* active simultaneously).
 
 ---
 
@@ -40,7 +40,7 @@ button:focus-visible {
 }
 ```
 
-**Focus ring design:**
+Focus ring design:
 - High contrast (3:1 minimum against adjacent colors)
 - 2–3px thick
 - Offset from the element (not inside it)
@@ -52,7 +52,7 @@ button:focus-visible {
 
 **Placeholders are not labels.** They disappear on input. Always use a visible `<label>` element.
 
-**Validate on blur, not on every keystroke.** Exception: password strength meters.
+Validate on blur, not on every keystroke. Exception: password strength meters.
 
 **Place errors below fields**, with `aria-describedby` connecting the error message to the input.
 
@@ -103,9 +103,9 @@ For tooltips, dropdowns, and non-modal overlays, use native popovers.
 </div>
 ```
 
-**What the API gives you for free:** top-layer placement (escapes z-index and overflow), light-dismiss on outside click, automatic focus restoration when the popover closes, no portal needed.
+What the API gives you for free: top-layer placement (escapes z-index and overflow), light-dismiss on outside click, automatic focus restoration when the popover closes, no portal needed.
 
-**What you still must wire yourself:** proper ARIA roles for interactive content (`role="menu"` + `role="menuitem"` for menus, `role="listbox"` + `role="option"` for selectors), keyboard navigation between items (arrow keys, Home / End, type-ahead), and `aria-haspopup` / `aria-expanded` on the trigger. The Popover API is infrastructure, not a complete accessible component.
+What you still must wire yourself: proper ARIA roles for interactive content (`role="menu"` + `role="menuitem"` for menus, `role="listbox"` + `role="option"` for selectors), keyboard navigation between items (arrow keys, Home / End, type-ahead), and `aria-haspopup` / `aria-expanded` on the trigger. The Popover API is infrastructure, not a complete accessible component.
 
 ---
 
@@ -145,9 +145,9 @@ Combining the Popover API with anchor positioning gives stacking, light-dismiss,
 
 In component frameworks, render the dropdown at the document root and position it with JavaScript.
 
-- **React:** `createPortal(dropdown, document.body)`
-- **Vue:** `<Teleport to="body">`
-- **Svelte:** mount to `document.body` via portal library
+- React: `createPortal(dropdown, document.body)`
+- Vue: `<Teleport to="body">`
+- Svelte: mount to `document.body` via portal library
 
 Calculate position from the trigger's `getBoundingClientRect()`, apply `position: fixed` with `top` / `left`. Recalculate on scroll and resize.
 
@@ -167,7 +167,7 @@ Check viewport boundaries before rendering. If the dropdown would overflow the b
 ### Anti-patterns
 
 - **`position: absolute` inside `overflow: hidden`** — the dropdown will be clipped. Use `position: fixed` or the top layer instead.
-- **Arbitrary z-index** like `z-index: 9999`. Use a semantic scale: `dropdown (100) → sticky (200) → modal-backdrop (300) → modal (400) → toast (500) → tooltip (600)`.
+- Arbitrary z-index like `z-index: 9999`. Use a semantic scale: `dropdown (100) → sticky (200) → modal-backdrop (300) → modal (400) → toast (500) → tooltip (600)`.
 - **Inline dropdown markup** without an escape hatch from the parent's stacking context. Use `popover` (top layer), a portal, or `position: fixed`.
 
 ---
@@ -214,6 +214,6 @@ Never rely on gestures as the only way to perform an action.
 
 ---
 
-**Avoid:** removing focus indicators without alternatives; using placeholder text as labels; touch targets <44×44px; generic error messages; custom controls without ARIA / keyboard support.
+Avoid: removing focus indicators without alternatives; using placeholder text as labels; touch targets <44×44px; generic error messages; custom controls without ARIA / keyboard support.
 
 **Cross-refs.** See `web.md` for HTML/CSS interaction primitives; `react.md` for React-specific state-management patterns; `motion.md` for state transitions; `anti-slop.md §1.6` for the modal / hero-metric / card-grid bans this reference assumes.

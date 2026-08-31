@@ -27,6 +27,6 @@ cd "$(git rev-parse --show-toplevel)"
 
 # Troubleshooting
 
-**"Worktree already exists"**: switch to it (`cd .worktrees/<branch>`) or remove it (`git worktree remove .worktrees/<branch>`) before recreating.
+If git reports "Worktree already exists", switch to it (`cd .worktrees/<branch>`) or remove it (`git worktree remove .worktrees/<branch>`) before recreating.
 
-**"Cannot remove worktree: it is the current worktree"**: `cd` out first, then remove.
+If git reports "Cannot remove worktree: it is the current worktree", `cd` out first, then remove.

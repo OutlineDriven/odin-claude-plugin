@@ -35,13 +35,13 @@ disable-model-invocation: true
 
 ## Failure and recovery
 
-- **Invalid or missing path**: stop before snapshot or mutation and return `blocked` with the resolver diagnostic.
-- **Snapshot failure**: stop without mutation and return `blocked` with the failed snapshot target.
-- **Audit failure or malformed report**: retain any valid partial report, make no repairs, and return `blocked` with the diagnostic; never infer omitted findings.
-- **Missing staleness evidence**: complete structural checks, mark session-based staleness unavailable, and return `blocked` rather than treating absence of evidence as freshness.
-- **Confirmation absent or ambiguous**: leave that repair group unchanged and report it as unconfirmed.
-- **Partial repair failure**: stop, restore that group's touched files from the recorded snapshot, and report the attempted changes and restoration result. If restoration fails, return `blocked` and identify every potentially changed file.
-- **Critical findings after re-audit**: return `non-converged` with the remaining critical findings and residual warnings or information; do not widen scope or invent a fix.
+- Invalid or missing path: stop before snapshot or mutation and return `blocked` with the resolver diagnostic.
+- Snapshot failure: stop without mutation and return `blocked` with the failed snapshot target.
+- Audit failure or malformed report: retain any valid partial report, make no repairs, and return `blocked` with the diagnostic; never infer omitted findings.
+- Missing staleness evidence: complete structural checks, mark session-based staleness unavailable, and return `blocked` rather than treating absence of evidence as freshness.
+- Confirmation absent or ambiguous: leave that repair group unchanged and report it as unconfirmed.
+- Partial repair failure: stop, restore that group's touched files from the recorded snapshot, and report the attempted changes and restoration result. If restoration fails, return `blocked` and identify every potentially changed file.
+- Critical findings after re-audit: return `non-converged` with the remaining critical findings and residual warnings or information; do not widen scope or invent a fix.
 
 ## Output
 

@@ -35,11 +35,11 @@ description: 'Use when a user wants an answer only from the human seat: what a p
 
 ## Failure and recovery
 
-- **Wrong-seat request**: if the user asked for a different perspective, stop and report the requested seat; do not substitute the human seat.
-- **Blending drift**: if the draft starts importing another seat's concerns, discard the blended portion and re-answer from the human seat only.
-- **Insufficient input**: if the question or artifact is missing, stop and request it; do not fabricate a human-perspective read.
-- **Non-convergence**: if no human-seat answer can be formed from the given input, return that explicitly rather than emitting a blended or generic answer.
-- **No mutation**: nothing is written, committed, paid, published, deployed, or remotely changed; recovery is to re-issue the chat answer.
+- Wrong-seat request: if the user asked for a different perspective, stop and report the requested seat; do not substitute the human seat.
+- Blending drift: if the draft starts importing another seat's concerns, discard the blended portion and re-answer from the human seat only.
+- Insufficient input: if the question or artifact is missing, stop and request it; do not fabricate a human-perspective read.
+- Non-convergence: if no human-seat answer can be formed from the given input, return that explicitly rather than emitting a blended or generic answer.
+- No mutation: nothing is written, committed, paid, published, deployed, or remotely changed; recovery is to re-issue the chat answer.
 
 ## Output
 

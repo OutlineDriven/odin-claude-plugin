@@ -16,22 +16,22 @@ description: 'Use when an agreement-seeking interaction arises, including mid-co
 
 ## Inputs
 
-- **Situation description** (required): what is being negotiated, who the parties are, and the current state of the interaction.
-- **Counterparty profile** (optional): known interests, constraints, communication style, power position, and relationship history.
-- **The negotiator's position** (optional): BATNA, reservation point, target outcome, and constraints. If absent, the skill infers a reasonable starting position from the situation description.
-- **Interaction transcript or notes** (optional): for mid-conversation moments or retrospective debriefs, the actual exchange so far.
-- **Mode** (optional): one of `prepare`, `live`, or `debrief`. If absent, the skill selects based on whether an interaction is upcoming, in progress, or concluded.
+- Situation description (required): what is being negotiated, who the parties are, and the current state of the interaction.
+- Counterparty profile (optional): known interests, constraints, communication style, power position, and relationship history.
+- The negotiator's position (optional): BATNA, reservation point, target outcome, and constraints. If absent, the skill infers a reasonable starting position from the situation description.
+- Interaction transcript or notes (optional): for mid-conversation moments or retrospective debriefs, the actual exchange so far.
+- Mode (optional): one of `prepare`, `live`, or `debrief`. If absent, the skill selects based on whether an interaction is upcoming, in progress, or concluded.
 
 ## Procedure
 
 1. **Classify mode.** If the user supplies a transcript or describes an active exchange, set mode to `live`. If the user describes a concluded interaction, set mode to `debrief`. Otherwise set mode to `prepare`.
 
 2. **Map the Mandascan five points.** For every party, identify and record:
-   - **Interests**: underlying needs, not stated positions.
-   - **Alternatives**: best alternative to negotiated agreement (BATNA) and walk-away threshold.
-   - **Legitimacy**: objective criteria, precedent, or norms each side can cite.
-   - **Commitment**: what each party can credibly promise and enforce.
-   - **Communication**: channel, tone, and relationship quality between parties.
+   - Interests: underlying needs, not stated positions.
+   - Alternatives: best alternative to negotiated agreement (BATNA) and walk-away threshold.
+   - Legitimacy: objective criteria, precedent, or norms each side can cite.
+   - Commitment: what each party can credibly promise and enforce.
+   - Communication: channel, tone, and relationship quality between parties.
    If evidence is missing for a point, mark it as unknown rather than inventing it.
 
 3. **Identify the axis of agreement.** Determine the single dimension along which the parties' interests most overlap or where the largest joint gain exists. State it explicitly.
@@ -66,16 +66,16 @@ description: 'Use when an agreement-seeking interaction arises, including mid-co
 7. **Dispatch research if needed.** If a counterparty profile, organizational context, or domain fact is material but missing, dispatch a read-only web research sub-agent to gather it. Integrate findings into the Mandascan map. If research returns nothing useful, proceed with what is available and note the gap.
 
 ## Failure and recovery
-- **Insufficient information**: if the situation description is too vague to map even one Mandascan point, ask the user for clarification on the specific missing points rather than proceeding with an empty map.
-- **Mode ambiguity**: if the interaction state is unclear (upcoming but with partial transcript), default to `prepare` and note that live scripts can be requested when the interaction begins.
-- **Research failure**: if web research sub-agents return no useful results, proceed with available information and explicitly flag which Mandascan points lack external grounding.
-- **Manipulation boundary**: if the user requests a tactic that fails the influence-not-manipulation test, decline the specific tactic, explain why it crosses the line, and offer a transparent alternative that achieves the same objective.
-- **Non-convergence**: if the parties' positions are irreconcilable based on the Mandascan analysis, state that no agreement zone exists and recommend strengthening the BATNA instead.
+- Insufficient information: if the situation description is too vague to map even one Mandascan point, ask the user for clarification on the specific missing points rather than proceeding with an empty map.
+- Mode ambiguity: if the interaction state is unclear (upcoming but with partial transcript), default to `prepare` and note that live scripts can be requested when the interaction begins.
+- Research failure: if web research sub-agents return no useful results, proceed with available information and explicitly flag which Mandascan points lack external grounding.
+- Manipulation boundary: if the user requests a tactic that fails the influence-not-manipulation test, decline the specific tactic, explain why it crosses the line, and offer a transparent alternative that achieves the same objective.
+- Non-convergence: if the parties' positions are irreconcilable based on the Mandascan analysis, state that no agreement zone exists and recommend strengthening the BATNA instead.
 - Authority is read-only throughout. No failure class permits writing files, making commitments on the user's behalf, or contacting counterparties.
 
 ## Output
 One of three artifacts, determined by mode:
 
-- **prepare**: A structured report containing the Mandascan five-point map for all parties, the identified axis of agreement, the mandate (opening/target/reservation), the MAP with package trades, the opening statement script, and the top-three objection responses.
-- **live**: A response script for the latest counterparty move, with move classification, implicit concession flags, and a recommendation on next action (close, package-trade, or pause).
-- **debrief**: A retrospective report with the negotiation timeline, Mandascan assessment accuracy scores, identified pathologies with moment-level attribution, cost analysis per pathology, and transferable lessons.
+- prepare: A structured report containing the Mandascan five-point map for all parties, the identified axis of agreement, the mandate (opening/target/reservation), the MAP with package trades, the opening statement script, and the top-three objection responses.
+- live: A response script for the latest counterparty move, with move classification, implicit concession flags, and a recommendation on next action (close, package-trade, or pause).
+- debrief: A retrospective report with the negotiation timeline, Mandascan assessment accuracy scores, identified pathologies with moment-level attribution, cost analysis per pathology, and transferable lessons.

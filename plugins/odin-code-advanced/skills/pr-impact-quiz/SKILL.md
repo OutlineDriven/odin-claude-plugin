@@ -19,9 +19,9 @@ disable-model-invocation: true
 
 The skill requires:
 
-- **PR description**: The authored description of the change, including motivation, scope, and expected behavior. Required.
-- **Diff or change summary**: The diff or a structured summary of what changed. Required.
-- **Codebase context**: The language, primary modules, and key patterns in the affected area. Required.
+- PR description: The authored description of the change, including motivation, scope, and expected behavior. Required.
+- Diff or change summary: The diff or a structured summary of what changed. Required.
+- Codebase context: The language, primary modules, and key patterns in the affected area. Required.
 
 ## Procedure
 

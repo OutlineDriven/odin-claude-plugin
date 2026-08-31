@@ -29,10 +29,10 @@ Supply the request and the available evidence of its current state. Include any 
 
 ## Failure and recovery
 
-- **Unresolved ambiguity**: bind the smallest interpretation consistent with stated intent, identify the ambiguity in the output, and do not widen the contract.
-- **Missing necessity source**: reject the candidate and name the absent request, environmental limit, authoritative policy, or measured evidence; do not invent support for it.
-- **Insufficient available evidence**: return `blocked` with the exact unproven part of the contract and the missing evidence; do not claim completion or perform a new check under this read-only authority.
-- **Accidental scope admission**: remove any candidate that does not fail the delete test and recompute the minimum set. Because this procedure makes no mutations, rollback is not required.
+- Unresolved ambiguity: bind the smallest interpretation consistent with stated intent, identify the ambiguity in the output, and do not widen the contract.
+- Missing necessity source: reject the candidate and name the absent request, environmental limit, authoritative policy, or measured evidence; do not invent support for it.
+- Insufficient available evidence: return `blocked` with the exact unproven part of the contract and the missing evidence; do not claim completion or perform a new check under this read-only authority.
+- Accidental scope admission: remove any candidate that does not fail the delete test and recompute the minimum set. Because this procedure makes no mutations, rollback is not required.
 
 A partial classification may be returned only with unresolved items named; it is not a successful result unless the done predicate holds.
 

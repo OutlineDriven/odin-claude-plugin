@@ -304,9 +304,9 @@ Evaluate top-to-bottom. Report degradation in the affected section, then continu
 
 ## Certainty grading
 
-- **HIGH**: directly observed in file content, tool output, manifest fields, CI files, or git history.
-- **MEDIUM**: supported by two or more weak signals, such as dependency + directory pattern, or repeated naming/import conventions.
-- **LOW**: plausible inference from limited data. Label inline as `[INFERENCE]` and keep it out of commands.
+- HIGH: directly observed in file content, tool output, manifest fields, CI files, or git history.
+- MEDIUM: supported by two or more weak signals, such as dependency + directory pattern, or repeated naming/import conventions.
+- LOW: plausible inference from limited data. Label inline as `[INFERENCE]` and keep it out of commands.
 
 ## Output quality rules
 

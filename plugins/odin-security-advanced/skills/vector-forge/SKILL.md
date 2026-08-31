@@ -32,12 +32,12 @@ Optional:
 2. **Run baseline mutation testing.** Select the mutation testing framework by language: cargo-mutants (Rust), gremlins (Go), mutmut or pytest-gremlins (Python), Stryker (JavaScript/TypeScript, C#), PITest (Java), Mull (C/C++), mutant (Ruby), Infection (PHP), MuCheck (Haskell). If the mutation framework is not installed, halt with failure state `mutation-framework-absent`. For each implementation, capture the full mutation log as JSON: total mutants, killed, survived, not covered, timed out, and efficacy percentage (Killed / (Killed + Survived)). Resolve timed-out mutants before comparing baselines. Done when: each implementation has a complete baseline mutation log with recorded metrics.
 
 3. **Classify escaped mutants.** For each survived mutant, map it to its function and classify by the defect it escapes:
-   - **Missing Vector**: reachable from public API, cyclomatic complexity at or below 10. Design a targeted vector.
-   - **Fuzzing Target**: reachable from public API, complexity above 10. Both vector and fuzz harness.
-   - **Negative Vector**: validation or error-handling path. Craft invalid input that triggers the path.
-   - **Edge-Case Vector**: optimization path (GLV, SIMD, batch). Input that triggers the threshold.
-   - **False Positive**: no callers, only test callers, logging/display/formatting, or behavior unchanged by mutation. Skip.
-   - **Equivalent Mutant**: mutation produces semantically equivalent code (e.g., `|` to `^` after left shift where bit 0 is always 0). Skip.
+   - Missing Vector: reachable from public API, cyclomatic complexity at or below 10. Design a targeted vector.
+   - Fuzzing Target: reachable from public API, complexity above 10. Both vector and fuzz harness.
+   - Negative Vector: validation or error-handling path. Craft invalid input that triggers the path.
+   - Edge-Case Vector: optimization path (GLV, SIMD, batch). Input that triggers the threshold.
+   - False Positive: no callers, only test callers, logging/display/formatting, or behavior unchanged by mutation. Skip.
+   - Equivalent Mutant: mutation produces semantically equivalent code (e.g., `|` to `^` after left shift where bit 0 is always 0). Skip.
    Prioritize by security impact: P0 (weakens validation, equality, or authentication), P1 (deserialization flag parsing), P2 (field arithmetic internals), P3 (optimization path). Group escaped mutants by vector strategy. Done when: every escaped mutant is classified, prioritized, and grouped.
 
 4. **Generate new vectors isolating defects.** For each escaped code path group, design test vectors targeting that path. Categories: point deserialization (malformed points, wrong length, invalid field elements, off-curve, wrong subgroup, identity point), signature verification (valid signature plus single-bit corruptions of signature, public key, and message), hash-to-curve (edge-case inputs: empty, single byte, maximum length), aggregate operations (1 signer, many signers, duplicate signers, mixed valid/invalid), error handling (one vector per error path), arithmetic edge cases (zero, one, field modulus minus one, points at infinity), serialization flags (every valid and invalid flag combination). Design each negative vector with exactly one defect, keeping everything else valid, to isolate the specific validation check. Verify every new vector against at least two independent implementations before adding it to the suite. If implementations disagree, investigate: one implementation has a bug. Done when: each new vector isolates one path and passes cross-implementation verification.

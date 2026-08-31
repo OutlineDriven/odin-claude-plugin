@@ -28,10 +28,10 @@ disable-model-invocation: true
 5. Confirm the marker file is gone and the named path is editable again. Done when: the marker file is absent and the path is editable.
 
 ## Failure and recovery
-- **Marker not found**: the path is already unfrozen. Report this state; do not delete anything. Done predicate holds.
-- **Path argument missing**: stop and request the path. Do not guess or scan for frozen paths.
+- Marker not found: the path is already unfrozen. Report this state; do not delete anything. Done predicate holds.
+- Path argument missing: stop and request the path. Do not guess or scan for frozen paths.
 - **Deletion fails** (permission, missing parent, I/O error): report the exact error, leave all markers in place, and return blocked. Do not widen scope or attempt partial deletion.
-- **Marker exists for a different path**: do not delete it; report the mismatch and stop.
+- Marker exists for a different path: do not delete it; report the mismatch and stop.
 
 ## Output
 Terminal report naming the unfrozen path (or stating it was already editable) and confirming the freeze lock marker is absent.

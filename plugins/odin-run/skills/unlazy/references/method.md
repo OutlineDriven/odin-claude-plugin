@@ -12,9 +12,9 @@ The tree is a decomposition tool, not an effort multiplier. Measured runs show m
 
 ## Choosing N
 
-- **Tree 2-3**: a feature, a bug hunt, a document. Solo mode, one gates file, 2-4 leaves worked in sequence in one session.
-- **Tree 4-5**: a subsystem, a refactor, a serious review. Consider orchestrated mode; 8-16 leaves is past what one context holds well.
-- **Tree 6-7**: an entire project built to a high bar. Orchestrated mode, leaves mapped onto disjoint work units, parallelized where the harness allows, branch gates at every merge point.
+- Tree 2-3: a feature, a bug hunt, a document. Solo mode, one gates file, 2-4 leaves worked in sequence in one session.
+- Tree 4-5: a subsystem, a refactor, a serious review. Consider orchestrated mode; 8-16 leaves is past what one context holds well.
+- Tree 6-7: an entire project built to a high bar. Orchestrated mode, leaves mapped onto disjoint work units, parallelized where the harness allows, branch gates at every merge point.
 
 When the user gives no depth, pick the smallest N whose leaves match the task's natural parts. Go one deeper only when a leaf would clearly hide multiple deliverables inside it.
 
