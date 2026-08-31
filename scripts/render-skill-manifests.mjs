@@ -106,12 +106,13 @@ function firstSentence(desc) {
 }
 
 // Hard limit 64 chars; cut at the last space at or before 64 to avoid mid-word
-// breaks, then strip dangling punctuation the cut exposes (e.g. "feedback,").
+// breaks, then strip dangling whitespace and punctuation in one pass so a cut
+// that exposes " — " or "feedback," leaves no residue.
 function truncate64(s) {
   if (s.length <= 64) return s;
   const cut = s.slice(0, 64);
   const sp = cut.lastIndexOf(" ");
-  return (sp > 0 ? cut.slice(0, sp) : cut).trim().replace(/[,;:\u2014\u2013-]+$/, "");
+  return (sp > 0 ? cut.slice(0, sp) : cut).replace(/[\s,;:\u2014\u2013-]+$/u, "");
 }
 
 function renderManifest(slug) {
