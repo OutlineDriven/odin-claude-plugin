@@ -57,7 +57,7 @@ Optional:
 
    If the file already exists (the "Existing patterns" input was set or the file is present), do not write a second top-level heading. Append only the section blocks this run produced (`## Forbidden`, `## Tokens`, `## Examples`, `## Rules`) under the file's existing top-level heading, and merge each new block into its matching existing section when one already exists rather than duplicating the section header. Preserve existing content; do not delete or overwrite sections that are not being updated.
 
-   **Done when:** a new file has exactly one top-level `# Agent Taste Guide` heading and all produced sections, or an existing file still has exactly one top-level heading with the produced sections merged into it.
+   **Done when:** at least one classified entry from step 2 is written, and a new file has exactly one top-level `# Agent Taste Guide` heading with all produced sections, or an existing file still has exactly one top-level heading with the produced sections merged into it. This gates step 3 only; the skill is done when step 4's validation passes, which the Contract `Done` row states.
 
 4. **Validate with the user.** Read the artifact back. Ask: "Does this match what you meant?" Accept additions or corrections before declaring done.
 
