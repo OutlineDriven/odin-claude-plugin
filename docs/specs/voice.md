@@ -80,22 +80,27 @@ fixing anything.
 
 ## Scope
 
-The bare run gates every markdown file in the repository, authored and generated alike. A
-finding in generated output, such as a plugin README, names the generator as the defect site,
-not the file it wrote. Only `.git/` and `.outline/` are excluded, the latter being ignored
-scratch. Passing explicit file arguments overrides the default list and gates only those files.
+The bare run gates every markdown file git tracks, authored and generated alike, plus two named
+external carriers. Scope comes from the index, so a file is gated because it is tracked, not
+because it exists: untracked and ignored content is out of scope by construction rather than by
+exclusion. That distinction is the whole reason for the mechanism. The gate used to walk the
+directory with a two-name exclusion list, and the same script then reported clean in one checkout
+and 3725 findings across 3918 files in another, because a retired npm staging tree sat untracked
+inside the repository. An exclusion list is a hole that regenerates, and this rule has been
+repaired three times by closing one, so the list is gone rather than extended. A finding in
+generated output, such as a plugin README, still names the generator as the defect site, not the
+file it wrote. Passing explicit file arguments overrides the default list and gates only those
+files.
 
 Two harness carriers live outside the repo, at `~/.omp/agent/AGENTS.md` and `~/.codex/AGENTS.md`.
-They are machine-local, so each is gated only under a condition, and neither condition can turn a
-clean clone red. An absent carrier is skipped silently: a fresh clone on another machine has
-neither, and there is nothing there to repair. A carrier that exists but cannot be written is
-skipped with a notice on stderr naming the path and the reason. The distinction matters because a
-carrier can sit behind a Landlock jail that reports the file permission bits as writable while
-denying the open, so writability is settled by attempting the open rather than by asking
-`os.access`. Skipping is visible rather than silent because a dropped carrier is exactly how drift
-hides, and reaching outside the repo was the way to stop that. The notice never changes the exit
-code, and the reason for the skip is the reason for the rule: a gate that reports a finding no one
-can repair is not a gate, it is a blocked commit.
+Git cannot enumerate them, so they stay named additions. They are machine-local, and the two ways
+one can be unusable are kept apart. An absent carrier is skipped with a notice, because a fresh
+clone on another machine has neither and there is nothing there to repair. A carrier that exists
+but cannot be written is still gated when it is clean, and fails the run outright when it carries
+findings, because those findings cannot be repaired here and a notice anyone can scroll past is
+how an unsatisfiable gate stops being a gate. Writability is settled by attempting the open rather
+than by asking `os.access`, because a Landlock jail reports the permission bits as writable while
+denying the open.
 
 ## What a bold run finding means
 
@@ -130,12 +135,14 @@ cases that decide whether the rule works, each naming the kind it must classify 
 labels with and without an internal colon, the alternating five that the two-walk design let
 through, one label plus four leads, two labels plus one lead, four leads alone, blank lines not
 breaking a run, fenced blocks, mid-sentence emphasis at any density, a bulleted pair of labels, and
-runs whose spans run past 120 characters. The rule has been silently wrong three times, once for a
-colon inside the label and once for the split walk and once for a span bound, and an evadable rule
-is worse than no rule because it reports clean. The cases are inline string literals rather than
-fixture files because every markdown file in this repository is gated, so a fixture that carries a
-finding by design would need its own exclusion, and an excluded directory is the same escape hatch
-the rule keeps closing.
+runs whose spans run past 120 characters. Four more cases pin the scope: a tracked file is a
+target, a file that exists but is not tracked is not, an ignored file is not, and both carriers are
+when present. The rule has been silently wrong four times, once for a colon inside the label, once
+for the split walk, once for a span bound, and once for an interposed-text cap that made membership
+and classification disagree, and an evadable rule is worse than no rule because it reports clean.
+The cases are inline string literals rather than fixture files because
+every tracked markdown file is gated, so a fixture that carries a finding by design would have to
+be ignored, and an ignored directory the gate can see is the escape hatch the scope rule removes.
 
 ## Known limits
 

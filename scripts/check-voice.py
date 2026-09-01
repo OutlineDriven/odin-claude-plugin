@@ -19,10 +19,18 @@ slop; that judgment needs the spine audit and does not belong in a script.
 
 import os
 import re
+import shutil
+import subprocess
 import sys
+import tempfile
+
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+# Harness carriers live outside the repository, so git cannot enumerate them and they are named
+# here instead. Both are machine-local, which is why absence is a notice rather than a failure.
+CARRIERS = (Path("/home/alpha/.omp/agent/AGENTS.md"),
+            Path("/home/alpha/.codex/AGENTS.md"))
 
 # The doctrine bans delve, leverage, seamless, and underscore. Two of the four have legitimate
 # senses in this tree, so the pattern targets only the filler sense:
@@ -59,12 +67,16 @@ BAN_LIST_SUBJECTS = frozenset(
 # has no colon after the closing asterisks and so matches neither branch. The label text itself may
 # contain a colon ("**Security (OWASP Top 10:2025, CWE Top 25 2025):**"), so the second branch no
 # longer forbids one inside the label; the earlier [^*\n:] class let such a label slip past the
-# gate, making the rule evadable by putting a colon in it. No upper bound on the label span: the
-# [^*\n] class already stops at the closing asterisks, so a cap only moved the hole. A table row
-# never matches, because no colon follows its closing asterisks.
+# gate, making the rule evadable by putting a colon in it. No upper bound anywhere: neither the
+# label span nor the interposed text carries one, because [^*\n] already stops at the closing
+# asterisks and a cap only moved the hole. The interposed region used to be capped at 30
+# characters, which let "**Label** long interposed clause: value" match BOLD_LEAD but not
+# BOLD_LABEL, so a pair of those counted as zero labels, classified as a lead run of two, and
+# passed under the lead threshold. A table row never matches, because no colon follows its closing
+# asterisks.
 BOLD_LABEL = re.compile(
     r"^\s*(?:[-*+]\s*)?\*\*"
-    r"(?:[^*\n]{2,}\*\*[^:\n]{0,30}:"
+    r"(?:[^*\n]{2,}\*\*[^*\n]*:"
     r"|[^*\n]{2,}:\s*\*\*)"
 )
 # Title case capitalizes the minor word AND the word after it, which is what separates
@@ -115,30 +127,69 @@ def writable(path):
     return True
 
 
-def default_targets():
-    """Every markdown file in the repository plus the two harness carriers.
+def git_tracked(pathspecs):
+    """Repository-relative paths the index tracks, matched against these pathspecs.
 
-    The repository walk covers authored and generated surfaces alike; a finding in
-    generated output points at the generator as the defect site. The two harness
-    carriers live outside the repo and are machine-local. An absent carrier is skipped
-    silently so a fresh clone on another machine, which has neither, stays green. A
-    carrier that exists but cannot be written is skipped with a visible notice: its
-    findings cannot be repaired here, and a gate that reports an unsatisfiable finding
-    blocks every commit. The notice goes to stderr and never changes the exit code.
+    The index is the scope. Untracked and ignored content is invisible to it, so no exclusion
+    list is needed and a new scratch directory cannot widen the gate by accident. Passing an
+    explicit pathspec list queries the index without touching the filesystem, which is what lets
+    the self-test assert that an ignored path is dropped without writing a fixture file.
     """
-    targets = sorted(p for p in ROOT.rglob("*.md")
-                     if ".git" not in p.relative_to(ROOT).parts
-                     and ".outline" not in p.relative_to(ROOT).parts)
-    for carrier in (Path("/home/alpha/.omp/agent/AGENTS.md"),
-                    Path("/home/alpha/.codex/AGENTS.md")):
+    try:
+        result = subprocess.run(
+            ["git", "ls-files", "-z", "--", *pathspecs],
+            cwd=ROOT, capture_output=True, text=True, check=True)
+    except FileNotFoundError:
+        sys.exit("check-voice: git is not installed, and the gate's scope comes from the index. "
+                 "Refusing to fall back to a directory walk, which would silently change scope.")
+    except subprocess.CalledProcessError as exc:
+        sys.exit(f"check-voice: git cannot report the tracked files for {ROOT} "
+                 f"({exc.stderr.strip().rstrip('.')}). This path is not a work tree, or its index "
+                 "is unreadable. Refusing to fall back to a directory walk, which would silently "
+                 "change scope.")
+    return [path for path in result.stdout.split("\0") if path]
+
+
+def carrier_targets(carriers):
+    """The harness carriers to gate, with absent and unfixable kept apart.
+
+    An absent carrier is skipped with a notice, because a fresh clone on another machine has
+    neither and there is nothing there to repair. A carrier that exists but cannot be written is
+    still gated: if it is clean, nothing is lost by checking it, and dropping it would hide the
+    drift that reaching outside the repository exists to catch. If it carries findings, the run
+    fails outright and says why, because those findings cannot be repaired here and a notice
+    anyone can scroll past is how an unsatisfiable gate stops being a gate. The Landlock jail that
+    made a skip necessary is gone, so an unwritable carrier is now an environment defect worth
+    stopping on rather than working around.
+    """
+    present = []
+    for carrier in carriers:
         if not carrier.is_file():
+            print(f"check-voice: skipping {carrier} (absent on this machine)", file=sys.stderr)
             continue
-        if writable(carrier):
-            targets.append(carrier)
-        else:
-            print(f"check-voice: skipping {carrier} (exists but not writable; "
-                  "cannot be repaired here)", file=sys.stderr)
-    return targets
+        if not writable(carrier):
+            blocking = audit(carrier)
+            if blocking:
+                sys.exit(f"check-voice: {carrier} cannot be written and carries "
+                         f"{len(blocking)} finding(s); repair its permissions or remove it, "
+                         "because they cannot be fixed here")
+        present.append(carrier)
+    return present
+
+
+def default_targets():
+    """Every tracked markdown file plus the two harness carriers.
+
+    Scope comes from the git index rather than a directory walk. The same script reported clean
+    in this worktree and 3725 findings across 3918 files in the source checkout, because an
+    untracked npm staging tree sat inside the repository. An exclusion list would have to grow
+    with every scratch directory that appears, and the three defects this rule has already shipped
+    were all exclusions.
+
+    The harness carriers live outside the repository, so git cannot enumerate them and they stay
+    explicit named additions.
+    """
+    return sorted(ROOT / path for path in git_tracked(["*.md"])) + carrier_targets(CARRIERS)
 
 
 def prose_only(text):
@@ -211,14 +262,21 @@ def classify_run(labels):
 
 
 def bold_findings(prose):
-    """One finding per tripping bold run, reported at the run's first line."""
+    """One finding per tripping bold run, reported at the run's first line.
+
+    The label message names both numbers, because a mixed run is not all labels. Reporting the
+    run length as the label count told an author with three labels and two lead-ins to fix five
+    label lines, which is the wrong instruction; the run length is what tripped the threshold and
+    the label count is what makes it a pseudo-list rather than a density of emphasis.
+    """
     found = []
     for start, length, labels in bold_runs(prose):
         kind, threshold = classify_run(labels)
         if length < threshold:
             continue
         if kind == "label":
-            found.append((start, f"{length} consecutive bold label lines; use a list or table"))
+            found.append((start, f"{length} consecutive bold lines, {labels} with labels; "
+                                 "use a list or table"))
         else:
             found.append((start, f"{length} consecutive bold lead-ins; "
                                  "use a list, a table, or plain text"))
@@ -261,12 +319,16 @@ def audit(path):
     return found
 
 
-# The bold rule has been silently wrong twice: first it could not see a label whose text held a
-# colon, then two separate walks each excluding the other's lines let a run that alternated the
-# two forms score one in each walk and pass clean. An evadable rule is worse than no rule, because
-# it reports clean. These cases are inline literals rather than fixture files on purpose: markdown
-# files inside the repository are gated, so a fixture that carries a finding by design would need
-# an exclusion, and an excluded directory is the same escape hatch the rule keeps closing.
+# The bold rule has been silently wrong four times: first it could not see a label whose text held
+# a colon, then two separate walks each excluding the other's lines let a run that alternated the
+# two forms score one in each walk and pass clean, then an 80-character span bound exempted a
+# label whose parenthesized version list ran past it, then a 30-character cap on interposed text
+# made membership count zero labels where classification saw a lead run, so a pair of long
+# colon-bearing labels passed under the lead threshold. An evadable rule is worse than no rule,
+# because it reports clean. These cases are inline literals rather than fixture files on purpose:
+# markdown files inside the repository are gated, so a fixture that carries a finding by design
+# would need an exclusion, and an excluded directory is the same escape hatch the rule keeps
+# closing.
 #
 # Each case names the kind it must classify as when caught, because the two thresholds are
 # different and a run that trips the wrong one passes for the wrong reason. expect is
@@ -335,8 +397,98 @@ def run_verdict(prose):
             return True, kind
     return False, None
 
+
+# Scope cases, driven against git_tracked with a fixture pathspec list so they create nothing on
+# disk. Creating an ignored fixture would mean writing into an ignored directory, and an ignored
+# directory the gate can see is the escape hatch this scope removes. Each case asserts its own
+# witness exists, so a witness that disappears fails the case rather than passing for nothing.
+#   AGENTS.md      tracked, so it is a target
+#   .git/config    on disk, not tracked; a directory walk claims it and the index does not
+#   ignored files  discovered live, since which ones exist is not something to hardcode
+def ignored_witness():
+    """An ignored file that exists in the tree, or None on a clean clone.
+
+    The ignored case needs a file that is both present and ignored, and creating one would mean
+    writing into an ignored directory, which is the escape hatch this scope removes. So the case
+    borrows whatever the tree already has. It prefers a witness outside the names the old
+    exclusion list spelled, because only such a witness separates the index from a walk that kept
+    that list; on a tree with neither, it falls back to any ignored file it can find.
+    """
+    result = subprocess.run(
+        ["git", "ls-files", "-z", "--others", "--ignored", "--exclude-standard"],
+        cwd=ROOT, capture_output=True, text=True, check=True)
+    found = [p for p in result.stdout.split("\0") if p and (ROOT / p).is_file()]
+    for path in found:
+        if not path.startswith((".git/", ".outline/")):
+            return path
+    return found[0] if found else None
+
+
+def ignored_case(got):
+    """The index must return nothing for a path that exists but is ignored.
+
+    With a real ignored file the case is strong: the file is on disk and the index still drops it.
+    With none, as on a fresh clone, it falls back to a hypothetical path under an ignored
+    directory, which proves the rule is not suffix-based but is weaker, so it says so.
+    """
+    witness = ignored_witness()
+    return got == [] and (witness is None or Path(witness).is_file())
+
+def untracked_witness_probe():
+    """Gate an untracked, non-ignored markdown file that carries a finding by construction.
+
+    Created transiently inside the repository and removed in a finally block. This is the exact
+    class of file that caused the regression the scope rule removed: a retired npm staging tree
+    sat untracked and unignored inside the repository, and the directory walk gated it, so the
+    same script reported clean in one checkout and thousands of findings in another. A permanent
+    fixture cannot stand in for it: committing it makes it tracked, which is the thing under test,
+    and ignoring it makes the old walk blind to it too.
+
+    Returns whether the witness was picked up, the target count with and without it on disk, and
+    whether the witness really does carry a finding, so the case cannot pass by quietly testing a
+    file the rule would not flag anyway.
+    """
+    without = len(default_targets())
+    dir_ = tempfile.mkdtemp(dir=ROOT)
+    try:
+        witness = Path(dir_) / "witness.md"
+        witness.write_text("**Scope:** a.\n**Domain:** b.\n", encoding="utf-8")
+        targets = default_targets()
+        return (witness in targets, len(targets), without, bool(audit(witness)))
+    finally:
+        shutil.rmtree(dir_, ignore_errors=True)
+
+
+def untracked_witness_case(probe):
+    picked_up, with_count, without_count, carries = probe
+    return not picked_up and with_count == without_count and carries
+
+
+TARGET_CASES = (
+    ("a tracked markdown file is a target",
+     lambda: git_tracked(["AGENTS.md"]),
+     lambda got: "AGENTS.md" in got),
+    # `.git` is the one path guaranteed to exist and guaranteed never to be tracked. Naming
+    # `.git/config` instead would pass only where `.git` is a directory: a linked worktree
+    # stores a gitlink file there, so the case's own precondition would fail and report a
+    # defect in the gate where there is none.
+    ("a path that exists but is not tracked is not a target",
+     lambda: git_tracked(["AGENTS.md", ".git"]),
+     lambda got: Path(".git").exists() and ".git" not in got),
+    ("an ignored file inside the repository is not a target",
+     lambda: git_tracked([ignored_witness() or ".outline/whatever.md"]),
+     ignored_case),
+    ("both harness carriers are targets when present",
+     lambda: [str(c) for c in carrier_targets(CARRIERS)],
+     lambda got: all(str(c) in got for c in CARRIERS if c.is_file())),
+    ("an untracked non-ignored markdown file is not a target",
+     untracked_witness_probe,
+     untracked_witness_case),
+)
+
+
 def self_test():
-    """Run every bold case against the compiled rule; return the exit code."""
+    """Run every bold and scope case against the compiled rule; return the exit code."""
     failed = 0
     for name, text, (want_caught, want_kind) in SELF_TEST:
         caught, kind = run_verdict(prose_only(text))
@@ -345,7 +497,13 @@ def self_test():
         detail = f"kind={kind}" if caught else "not caught"
         want = f"{want_kind} at its threshold" if want_caught else "clean"
         print(f"{'PASS' if ok else 'FAIL'}: {name} ({detail}, expected {want})")
-    print(f"check-voice self-test: {len(SELF_TEST) - failed}/{len(SELF_TEST)} passed",
+    for name, select, holds in TARGET_CASES:
+        got = select()
+        ok = holds(got)
+        failed += not ok
+        print(f"{'PASS' if ok else 'FAIL'}: {name} ({len(got)} path(s) selected)")
+    total = len(SELF_TEST) + len(TARGET_CASES)
+    print(f"check-voice self-test: {total - failed}/{total} passed",
           file=sys.stderr if failed else sys.stdout)
     return 1 if failed else 0
 
