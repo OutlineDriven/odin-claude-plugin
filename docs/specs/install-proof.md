@@ -107,12 +107,16 @@ Fetching plugins from github.com/OutlineDriven/odin-claude-plugin...
 EACCES: permission denied, mkdir '/home/alpha/.cursor/plugins'
 ```
 
-Two things are therefore still unproven, and neither is a property of this branch. Cursor's plugin
-cache is unwritable under the sandbox this session runs in. Cursor also indexes a repository rather
-than a ref, so the `.cursor-plugin/marketplace.json` it would read is the one on the default branch,
-not the one on this feature branch. The registry itself is generated to the documented schema with
-repository-relative sources and is asserted by `check-plugin-surfaces`; what remains untested is
-Cursor's parse of it, and that test needs a merge plus a writable cache.
+One half of this is now settled and the other is not. Cursor indexes a repository rather than a ref,
+so the `.cursor-plugin/marketplace.json` it reads is the one on the default branch; that registry
+reached the default branch at `31d7c15c`, so the merge this paragraph once waited on has happened.
+The registry is generated to the documented schema with repository-relative sources and is asserted
+by `check-plugin-surfaces`. What remains untested is Cursor's own parse of it, because this machine's
+plugin cache still holds the entry it indexed from the feature branch, at
+`7f996aac4a86a8d8378d73c1bd6afa541d134447`. That SHA is reachable from the default branch, since the
+merge was a fast-forward, so the pin is stale rather than broken. Re-indexing is one command,
+`cursor-agent plugin marketplace update odin-marketplace`, and it belongs to whoever owns the
+machine: it mutates a consumer cache outside this repository, so no gate here runs it.
 
 ## Manifest name parity
 
