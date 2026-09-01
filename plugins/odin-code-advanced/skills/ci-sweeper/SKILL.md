@@ -37,7 +37,7 @@ description: 'Use when a requested sweep monitors CI failures over a bounded att
 ## Failure and recovery
 - Flake: the failure does not reproduce locally. Classify non-actionable, hand off, and do not patch.
 - Ambiguity: the root cause cannot be isolated to one minimal change. Hand off with evidence and do not patch.
-- Budget exhaustion: the attempt cap is reached or the verifier time budget is exceeded. Stop, hand off, and do not start a new repair.
+- Budget exhaustion: the attempt cap is reached. Stop, hand off, and do not start a new repair.
 - Breaker trip: repeated non-convergence or repeated flakes. Stop the sweep and hand off.
 - Partial result: a worktree repair is never merged. A partial patch is returned as a proposal with its verification state, never as a completed fix.
 - Non-mutation: no push, merge, publish, credential change, or main-branch mutation. The worktree is the only writable surface and may be discarded.

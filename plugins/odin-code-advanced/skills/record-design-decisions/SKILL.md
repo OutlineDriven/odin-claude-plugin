@@ -42,8 +42,8 @@ description: 'Use when codebase terminology or a durable technical decision chan
 - **`blocked:no-recordable-content`**: no terminology change or qualifying decision is present. Do not write anything. Stop.
 - **`blocked:invalid-target`**: the target path is outside the repository root, or the ADR directory does not exist and cannot be created. Stop rather than write.
 - **`partial-record`**: some records were written successfully but others failed. Roll back successful writes. Return blocked with the failing class.
-- **`non-converged`**: a qualifying decision is present but the ADR triple cannot be satisfied. Record the terminology change if present; skip the ADR. Return partial-record.
+- **`non-converged`**: a qualifying decision is present but the ADR triple cannot be satisfied. Record the terminology change if present; skip the ADR. The terminology entry is kept and the ADR is intentionally skipped, so this is not a rollback. Return `non-converged`.
 
 ## Output
 
-Each written record: a CONTEXT.md entry (term, definition, avoid, recorded_at) and/or an ADR file path in `docs/decisions/`, or on block a classification with reason, ordered: terminology, decision.
+Each written record: a CONTEXT.md entry (term, definition, avoid, recorded_at) and/or an ADR file path in `docs/decisions/`; otherwise a classification with reason — `blocked:no-recordable-content`, `blocked:invalid-target`, `partial-record`, or `non-converged` — ordered: terminology, decision.

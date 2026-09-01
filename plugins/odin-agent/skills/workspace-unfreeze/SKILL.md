@@ -12,7 +12,7 @@ disable-model-invocation: true
 |---|---|
 | Trigger | The user runs /workspace-unfreeze on a frozen path |
 | Authority | Human-only. Requires explicit human invocation; the model must not run this on its own. Preview the target marker file and the deletion consequence before acting |
-| Side effect | Deletes the freeze lock marker file for the named path. The deletion is unrecoverable, but the marker is re-creatable by re-applying the freeze guardrail |
+| Side effect | Deletes the freeze lock marker file for the named path. The deletion is unrecoverable, but the marker is re-creatable by re-creating the `<path>.freeze-lock` file beside the path with content naming the target path |
 | Done | The named path is editable again (no freeze lock marker present for it) |
 
 ## Inputs
@@ -22,8 +22,8 @@ disable-model-invocation: true
 ## Procedure
 
 1. Receive the path argument from the explicit /workspace-unfreeze invocation. Do not act on any model-generated or inferred path. Done when: the path argument is confirmed as human-supplied.
-2. Resolve the marker path from the invocation: accept an explicit marker path from the human, or derive it from the stated freeze convention (e.g. `<path>.freeze-lock` beside the frozen path). Verify the resolved file exists and names the target path. If it does not, treat as Marker not found. Never glob or scan for candidate markers. Done when: the marker file path is resolved and verified, or the path is confirmed already editable.
-3. Before deleting, preview the marker file path and state the consequence: the freeze guardrail on that path will be removed and the path will become editable. Done when: the human has seen the preview and the consequence.
+2. Resolve the marker path from the invocation: accept an explicit marker path from the human, or derive it from the freeze convention: a marker file named `<path>.freeze-lock` beside the frozen path, whose content names the target path. Verify the resolved file exists and names the target path. If it does not, treat as Marker not found. Never glob or scan for candidate markers. Done when: the marker file path is resolved and verified, or the path is confirmed already editable.
+3. Before deleting, preview the marker file path and state the consequence: the `<path>.freeze-lock` marker on that path will be removed and the path will become editable. Done when: the human has seen the preview and the consequence.
 4. Delete only that single marker file. Do not delete any other file, do not edit the protected path's contents, and do not touch any other freeze marker. Done when: the single marker file is deleted.
 5. Confirm the marker file is gone and the named path is editable again. Done when: the marker file is absent and the path is editable.
 

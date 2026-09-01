@@ -13,7 +13,7 @@ render:
     node scripts/render-skill-manifests.mjs
     node scripts/render-plugin-surfaces.mjs
 
-# Run every gate. This is what CI and the pre-commit hooks run.
+# Run every gate. This is what the pre-commit hooks run.
 check:
     node scripts/render-skill-manifests.mjs --check
     node scripts/render-plugin-surfaces.mjs --check

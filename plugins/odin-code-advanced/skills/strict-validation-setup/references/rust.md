@@ -66,3 +66,4 @@ pub enum RequestError {
 ## Notes
 
 - Test-side strict config (no-ignored-tests, deny-warnings under `#[cfg(test)]`) defers to whatever test runner the project uses (cargo-nextest is the 2026 default for parallel test execution).
+- The failing-test pattern in `SKILL.md` step 6 writes `panic!("SC-NN unmet: criterion")`, which `clippy::panic` flags once deny-warnings is on. Exempt test targets with `#[cfg_attr(test, allow(clippy::panic, clippy::unwrap_used, clippy::expect_used))]` so the strict config does not reject the very failing tests this skill installs.

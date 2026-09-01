@@ -133,7 +133,7 @@ Atomic rules (match a single node):
 - `nthChild`: position among siblings.
 - `range`: a source line/column range.
 
-**Relational rules** (match by neighbor relationship): `inside`, `has`, `precedes`, `follows`. Each takes a sub-rule and a `stopBy`:
+Relational rules (match by neighbor relationship): `inside`, `has`, `precedes`, `follows`. Each takes a sub-rule and a `stopBy`:
 - `stopBy: neighbor`: **DEFAULT**: only the direct parent/child/sibling (one hop).
 - `stopBy: end`: search to any depth/distance.
 

@@ -12,7 +12,7 @@ description: 'Use when a user names an abstraction leak and wants it sealed as a
 | Trigger | User names an abstraction leak and wants it sealed as a module seam, configuration option, or explicit override, or deliberately exposed as a named boundary. |
 | Authority | Reversible-local: write only named local artifacts; state the rollback path before mutating. |
 | Side effect | Refactored code that seals or deliberately exposes the named leak. A wrapper is rejected if it adds more than half the measured complexity of what it hides. |
-| Done | The abstraction leak is sealed or deliberately exposed; wrapper complexity is less than half the hidden complexity, confirmed by post-change re-measurement. |
+| Done | The abstraction leak is sealed or deliberately exposed; the complexity gate holds (wrapper complexity is less than half the hidden complexity, or both are zero as the zero-complexity case from step 5), confirmed by post-change re-measurement. |
 
 ## Inputs
 
@@ -37,7 +37,7 @@ Complexity is measured as branching decisions: the count of `if`, `else if`, `el
 5. Measure the wrapper complexity. Count the branching decisions in the proposed wrapper or seam code. Record the count as `wrapper_complexity`. Compute the ratio `wrapper_complexity / hidden_complexity`. If `hidden_complexity` is 0, any wrapper with branching decisions is rejected; a zero-complexity wrapper (a pure pass-through or direct exposure) is admitted. Done when: the ratio is computed and the proposal is admitted (ratio < 0.5) or rejected (ratio >= 0.5).
 6. If the proposal is rejected, report the measured ratio and stop. Do not apply. Done when: the rejection is reported.
 7. Apply the change. If applying requires deleting or relocating code, record the original text for rollback. Done when: the change is applied and original text is recorded for rollback.
-8. Re-measure the wrapper complexity after the change lands. Confirm the ratio still holds: `wrapper_complexity / hidden_complexity < 0.5`. Done when: the post-change ratio confirms the gate holds.
+8. Re-measure the wrapper complexity after the change lands. Confirm the gate still holds: if `hidden_complexity` is 0, the wrapper must still have zero branching decisions (the zero-complexity case from step 5); otherwise confirm `wrapper_complexity / hidden_complexity < 0.5`. Done when: the post-change measurement confirms the gate holds.
 9. Roll back if the done predicate cannot be satisfied; report the rollback and stop. Done when: the rollback is complete or the done predicate is confirmed.
 
 ## Failure and recovery

@@ -40,4 +40,4 @@ description: 'Use when asked to prune an existing design or codebase until only 
 
 ## Output
 
-A tree or structured list file `<target-name>-primitives.md` containing every component classified, each composite decomposed into its primitive leaves, and a `non-converged` marker if any section was not fully resolved.
+A tree or structured list file `<target-name>-primitives.md` containing every component classified, each composite decomposed into its primitive leaves, a `non-converged` marker if any section was not fully resolved, and a `loop-detected` marker naming the contested section when the decomposition circled without reaching primitives.

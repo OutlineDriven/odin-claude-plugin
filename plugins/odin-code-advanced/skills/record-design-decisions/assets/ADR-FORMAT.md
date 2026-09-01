@@ -9,4 +9,4 @@ Write one architecture decision record per qualifying decision to `docs/decision
 - `## Alternatives considered`: each rejected alternative with the specific reason it lost.
 - `## Consequences`: what becomes easier, harder, or impossible because of the decision.
 
-Before writing, confirm the ADR triple: the decision is hard to reverse, surprising without context, and carries a real trade-off. If any leg fails, record it as a terminology entry instead.
+Before writing, confirm the ADR triple: the decision is hard to reverse, surprising without context, and carries a real trade-off. If any leg fails, skip the ADR; record the terminology change if one is present, but a non-qualifying decision is not itself a terminology entry.

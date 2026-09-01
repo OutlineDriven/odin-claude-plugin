@@ -30,8 +30,7 @@ Each step names its lever and its completion criterion. The levers themselves li
 
 1. Identify the document type: a skill, an AGENTS.md/CLAUDE.md, or a pointer-reached doc. Done
    when: the type is named, because step 8 fires only for a skill.
-2. Shape every context pointer against the four pointer rules. Done when: every pointer meets all
-   four.
+2. Shape every context pointer against the pointer rules in `references/authoring-levers.md`: state what the material is and the branches that trigger reaching it, front-load the leading word, give one trigger per branch and collapse synonyms that rename a single branch, and cut identity the body already carries. Done when: every pointer meets all of those rules.
 3. Assign every document and pointer to a load budget. Done when: each assignment is explicit and
    its trade-off is stated.
 4. Place each piece on the information hierarchy. Done when: every piece sits at one level, and

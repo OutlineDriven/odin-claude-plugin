@@ -35,7 +35,7 @@ description: 'Use when a human explicitly asks for a full repository agent-compa
 ## Failure and recovery
 
 - Missing repository path: stop and report the blocked input; do not guess a path or widen scope.
-- Missing required runtime blocking startup: record the missing runtime as a startup-readiness failure with score 0 for that dimension; continue evaluating the other dimensions. The composite excludes the blocked dimension.
+- Missing required runtime blocking startup: record the missing runtime as a startup-readiness failure that could not be evaluated; continue evaluating the other dimensions. The blocked dimension contributes no score and does not lower the composite.
 - Review pass error: stop that dimension, record which dimension failed, and continue the remaining dimensions. The returned report marks the failed dimension rather than pretending it passed.
 - No mutation occurs on any failure. Because the pass is read-only, there are no changes to roll back.
 

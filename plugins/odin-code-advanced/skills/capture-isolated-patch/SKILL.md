@@ -10,7 +10,7 @@ description: 'Use when a candidate change must be produced without touching the 
 | Field | Bound contract |
 |---|---|
 | Trigger | A candidate change must be produced without touching the working tree. |
-| Authority | Reversible local writes only: write to an ephemeral worktree and a temporary patch file under the repository's worktree metadata; never write to the original working tree. Rollback is `git worktree remove <path>`. |
+| Authority | Reversible local writes only: write to an ephemeral worktree and a temporary patch file under the worktree's parent temporary directory; never write to the original working tree. Rollback is `git worktree remove <path>`. |
 | Side effect | Creates an ephemeral worktree, runs the declared command inside it, and returns the exit code plus a binary-safe patch path. No commit, no push, no merge. The worktree is preserved on extraction failure. |
 | Done | Patch bytes are returned, or the failure is preserved for inspection; the original working tree is unchanged either way. |
 
@@ -23,10 +23,10 @@ description: 'Use when a candidate change must be produced without touching the 
 ## Procedure
 
 1. Require `command`. Accept optional `base-ref` (default: current `HEAD`) and optional `repo-path` (default: current working directory). **Done when:** the command is present and optional inputs are resolved to defaults or supplied values.
-2. Verify `repo-path` is a git work tree and `base-ref` resolves with `git rev-parse --verify <base-ref>`. Stop and report the exact failing check before creating any worktree if either check fails. **Done when:** both checks pass, or the failing check is named and the run stops.
-3. Create an ephemeral worktree at a fresh temporary path with `git worktree add --detach <tmp-path> <base-ref>`. Record `<tmp-path>` as the worktree path. **Done when:** the worktree is created and its path is recorded, or the git error is reported.
+2. Verify `repo-path` is a git work tree and `base-ref` resolves, both scoped to `repo-path`: `git -C <repo-path> rev-parse --is-inside-work-tree` and `git -C <repo-path> rev-parse --verify <base-ref>`. Stop and report the exact failing check before creating any worktree if either check fails. **Done when:** both checks pass, or the failing check is named and the run stops.
+3. Create an ephemeral worktree at a fresh temporary path with `git -C <repo-path> worktree add --detach <tmp-path> <base-ref>`. Record `<tmp-path>` as the worktree path. **Done when:** the worktree is created and its path is recorded, or the git error is reported.
 4. Run `command` inside the worktree with the worktree as its working directory. Capture stdout, stderr, and the exit code. Do not commit, push, or merge. **Done when:** the command returns with stdout, stderr, and exit code captured.
-5. After the command returns, compute the worktree diff against `base-ref` with `git -C <tmp-path> diff --binary <base-ref>` so binary file changes are representable. Write the diff to a patch file under the worktree's parent temporary directory. **Done when:** the binary-safe diff is written to a patch file, or the extraction failure is captured.
+5. After the command returns, stage untracked files so a newly created file is captured: run `git -C <tmp-path> add -N .` to mark them intent-to-add. Then compute the worktree diff against `base-ref` with `git -C <tmp-path> diff --binary <base-ref>` so binary file changes are representable. Write the diff to a patch file under the worktree's parent temporary directory. **Done when:** the binary-safe diff is written to a patch file, or the extraction failure is captured.
 6. If extraction succeeds, remove the ephemeral worktree with `git worktree remove <tmp-path>` and return the patch file path, the command exit code, and captured stdout/stderr. **Done when:** the worktree is removed and the patch path, exit code, and output are returned.
 7. If extraction fails, preserve the worktree in place and return the worktree path, the command exit code, and the failure reason. Do not delete the worktree. **Done when:** the worktree is preserved and its path, exit code, and failure reason are returned.
 

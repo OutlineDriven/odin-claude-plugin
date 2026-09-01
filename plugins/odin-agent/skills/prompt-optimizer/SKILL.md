@@ -30,7 +30,7 @@ Optional:
 1. **Capture the source.** Record the exact prompt text or document. Note any quoted variable slots, numbered steps, conditional branches, or formatting constraints present in the original. Done when: the source prompt is recorded with all structural features noted.
 2. **Identify the target.** Confirm the single goal the optimized prompt must serve. Reject scope that would require two different outputs or two disjoint audiences. Done when: a single goal is confirmed or scope is rejected.
 3. **Extract behavior rules.** Enumerate every requirement the prompt must satisfy: output format, tone, constraints, handling of edge cases. Assign one named owner per rule. Collapse rules that overlap. Done when: behavior rules are enumerated with one named owner per rule and overlaps collapsed.
-4. **Write the optimized prompt.** Apply these transformations: Done when: the stated outcome holds.
+4. **Write the optimized prompt.** Apply these transformations:
    - Remove every sentence that does not change a routing, format, or constraint decision
    - Replace vague verbs with concrete imperatives
    - Flatten nested conditionals into numbered choices
@@ -40,7 +40,7 @@ Optional:
 5. **Build holdout cases.** Write three cases on which the original prompt failed or would fail: one at each boundary (minimum valid input, maximum valid input, empty or malformed input). Verify the optimized prompt handles all three without contradictory outputs. Done when: three holdout cases are written and verified against the optimized prompt.
 6. **Validate one owner per rule.** Confirm each behavior rule from step 3 is observable in the optimized prompt or in the holdout cases. Flag any rule that appears nowhere. Done when: every behavior rule is observable in the prompt or holdout cases, or unobservable rules are flagged.
 7. **Annotate adapter notes.** Record model-family-specific adjustments (token budget, instruction hierarchy, chat-template constraints) that would affect reliability if changed. Done when: adapter notes are recorded for each model family.
-8. **Return the result.** Output the optimized prompt, target, success criteria (rule list), external context (adapter notes), and residual risks as a structured response. Done when: the structured response is returned with all five elements.
+8. **Return the result.** Output the optimized prompt, target, success criteria (rule list), external context (adapter notes), residual risks, and holdout validation summary as a structured response. Done when: the structured response is returned with all six elements.
 
 ## Failure and recovery
 - Ambiguous target: Stop and ask the user to name one goal. Do not optimize for two goals.

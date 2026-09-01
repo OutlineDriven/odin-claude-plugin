@@ -64,7 +64,7 @@ Optional:
 | No signals supplied | Declare partial-result: artifact is empty; do not claim done |
 | User cannot classify a signal | Drop that signal; do not invent a bucket |
 | File write fails | Roll back to the pre-write state; report the failure |
-| User rejects the artifact | Return to Step 2 for the rejected section only |
+| User rejects the artifact | Return to Step 3 for the rejected section only |
 | Artifact does not exist after Step 3 | The done predicate is false; do not close the skill as done |
 
 ## Output

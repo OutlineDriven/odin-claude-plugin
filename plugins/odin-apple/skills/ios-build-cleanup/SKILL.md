@@ -23,11 +23,11 @@ disable-model-invocation: true
 ## Procedure
 
 1. Resolve the DerivedData directory. Default to `~/Library/Developer/Xcode/DerivedData`. If the user supplies a path, use it.
-2. Resolve project build artifacts within the project root: `.build`, `build/`, and `*.xcodeproj`/`*.xcworkspace` build outputs.
+2. Resolve the deletion targets. Within the project root, resolve project build artifacts: `.build`, `build/`, and `*.xcodeproj`/`*.xcworkspace` build outputs. Under the DerivedData directory, identify this project's entries: directories whose name begins with the project's module cache prefix (the project name followed by a hash, e.g. `ProjectName-abcdef`). When the DerivedData path is the shared default, match only this project's entries; when the user supplies a project-specific path, the whole directory is the target.
 3. Enumerate every target directory and file that will be deleted. Compute the total size.
 4. Present the full target list and total size to the user. State the consequence: deletion is irreversible and the artifacts are untracked, but a rebuild regenerates them.
 5. Wait for explicit human confirmation. Do not proceed without it.
-6. On confirmation, delete each enumerated target. Remove DerivedData directories matching the project's module cache prefix first, then project-local build artifacts.
+6. On confirmation, delete each enumerated target, applying no filter that was not part of the enumeration.
 7. Verify each target no longer exists on disk.
 
 ## Failure and recovery

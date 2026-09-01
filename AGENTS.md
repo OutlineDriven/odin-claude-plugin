@@ -101,6 +101,6 @@ The spine itself is user-private, at `~/.claude/skills/spine/`. Read it when aut
 edit it from this repository, and never vendor a copy into this tree. `docs/specs/voice.md`
 carries what an editor needs without loading it.
 
-Passing the gate is not passing the register. The script sees formatting tells, not absent
-conviction; whether a section earns its place is the spine audit's judgment, not a regular
-expression's.
+Passing `scripts/check-voice.py` is not passing the register. That script sees formatting
+tells, not absent conviction; whether a section earns its place is the spine audit's
+judgment, not a regular expression's.

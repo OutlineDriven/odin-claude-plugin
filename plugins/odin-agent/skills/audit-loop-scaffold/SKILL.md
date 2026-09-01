@@ -69,7 +69,15 @@ On any failure, the result reports exactly what was attempted, what succeeded, a
       "hash": "<hex>"
     }
   ],
-  "auto_fix_failures": [],
+  "failure": "<failure class or null>",
+  "failing_files": ["<file name>"],
+  "action_log": [
+    {
+      "file": "STATE.md" | "gate.yaml" | "loop-budget.md" | "loop-run-log.md",
+      "before_hash": "<hex or null>",
+      "after_hash": "<hex or null>"
+    }
+  ],
   "converged": true | false
 }
 ```
