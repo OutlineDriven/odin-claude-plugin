@@ -5,6 +5,43 @@ All notable changes to the ODIN Claude Plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2026-09-01
+
+The repository becomes a multi-plugin marketplace. Skills move out of one flat
+directory into the plugin that owns them, npm distribution is retired, and the
+gate set becomes unconditional.
+
+### Added
+
+- 28 plugins, each carrying its own skills, `plugin.json`, `README.md`, `LICENSE`,
+  and `NOTICE`, generated from `catalog/plugins.json` as the single source of
+  plugin identity.
+- Three marketplace registries generated from that catalog: `.claude-plugin`,
+  `.agents/plugins`, and `.cursor-plugin`.
+- `docs/specs/graph.yaml`, the structural backbone as a compiled graph, and
+  `docs/specs/skill-lifecycle.md`, the skill lifecycle as a state machine.
+- `scripts/check-voice.py` and `scripts/check-skill-frontmatter.py`, each carrying
+  its own fixtures, plus surface and route checkers. Every gate is
+  dependency-free Node ESM or standard-library Python.
+
+### Changed
+
+- Skills move from a flat `skills/<slug>/` root to `plugins/<plugin>/skills/<slug>/`.
+  The directory now states which plugin owns a skill; no membership registry
+  records it.
+- 148 skills become 613, re-derived against a bound contract: each states its
+  trigger, authority, side effect, and done condition, and each procedure step
+  carries a criterion an agent can check.
+- Attribution consolidates into `licenses/NOTICE` with a per-plugin `NOTICE`
+  generated beside each plugin.
+- Every whole-tree gate runs unconditionally. A `files:` selector on a gate that
+  audits the whole tree was a second model of its own dependencies, and it drifted.
+
+### Removed
+
+- `catalog/skill-membership.json` and the flat `skills/` tree it indexed. The
+  directory a skill lives in is now the only record of which plugin owns it.
+
 ## [1.15.49] - 2026-06-14
 
 ### Removed
@@ -23,7 +60,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-**15 skills ported from the `agent-sh` plugin marketplace**: re-homed as native, self-contained ODIN skills. All external dependencies (the `agent-analyzer` binary, `repo-intel.json` cache, editor shims, bespoke JS `lib/`, and opus/sonnet/haiku model routing) are replaced by native tooling: codegraph MCP, `git`/`ast-grep`/`git grep` recipes, repomix, generic ODIN agents, and the `ask` tool.
+**15 skills ported from the `agent-sh` plugin marketplace**: re-homed as native, self-contained ODIN skills. All external dependencies (the `agent-analyzer` binary, `repo-intel.json` cache, editor shims, bespoke JS `lib/`, and opus/sonnet/haiku model routing) are replaced by native tooling: codegraph MCP, `git`/`ast-grep`/`git grep` recipes, repomix, generic ODIN agents, and the `ask` tool. Attribution in `skills/LICENSES.md`.
 
 - `repo-intel`: native repository intelligence (hotspots, coupling, bus factor, bugspots, ownership, entry points) from git history + codegraph; no cache, every signal recomputed on demand.
 - `agnix`: native agent-config lint pass (skill frontmatter, CLAUDE.md/AGENTS.md, hooks, MCP, plugin manifests, agent files) graded HIGH/MEDIUM/LOW.
