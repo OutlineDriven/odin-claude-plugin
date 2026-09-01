@@ -39,9 +39,9 @@ Invoke the skill explicitly; do not treat a casual "review my changes" prompt as
 
 Default to applying every actionable finding. Applying is a reversible edit to a tracked tree; diffs are reviewed before handoff and tests run after — so leaving a clear, reversible fix unapplied "to be safe" is the failure mode, not the safe choice. Bias to act:
 
-- **Apply** any finding with a concrete `suggested_fix` that is a clear improvement. `confidence` and `autofix_class` tell you what to prioritize and what to flag, not whether you may apply: `autofix_class` is signal, **never permission**.
-- **Push back** — keep the finding, don't apply — when the reviewer is wrong; note why.
-- **High-risk surfaces require a verification plan before apply.** Auth/authz, public or cross-service contracts/schema, and concurrency findings need a written plan that names: (1) the specific trust-boundary cases or compatibility checks that will exercise the change, (2) the rollback step if a check fails, and (3) any residual risk that remains unverified. If the review output does not supply this, do not apply the finding; record it as residual and surface it to the user. Lower-risk findings keep the bias-to-apply rule.
+- Apply any finding with a concrete `suggested_fix` that is a clear improvement. `confidence` and `autofix_class` tell you what to prioritize and what to flag, not whether you may apply: `autofix_class` is signal, **never permission**.
+- Push back — keep the finding, don't apply — when the reviewer is wrong; note why.
+- High-risk surfaces require a verification plan before apply. Auth/authz, public or cross-service contracts/schema, and concurrency findings need a written plan that names: (1) the specific trust-boundary cases or compatibility checks that will exercise the change, (2) the rollback step if a check fails, and (3) any residual risk that remains unverified. If the review output does not supply this, do not apply the finding; record it as residual and surface it to the user. Lower-risk findings keep the bias-to-apply rule.
 
 There is no precondition safety checklist for lower-risk fixes — a code-review fix is a reversible edit, so downside is controlled after the fact (diff review + tests), not by gating the apply.
 

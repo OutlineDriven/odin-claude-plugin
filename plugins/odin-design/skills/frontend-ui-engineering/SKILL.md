@@ -48,8 +48,8 @@ Optional:
 
 ## Failure and recovery
 
-- **Missing design system** (no tokens, spacing scale, or color tokens available): stop and request it. Do not invent a palette, spacing values, or typography. No file is written.
-- **Accessibility check fails** (keyboard trap, missing focus target, contrast below 4.5:1 for normal text or 3:1 for large text, color used as the sole state indicator): fix the failing element before proceeding. Never suppress the warning or special-case the input.
+- Missing design system (no tokens, spacing scale, or color tokens available): stop and request it. Do not invent a palette, spacing values, or typography. No file is written.
+- Accessibility check fails (keyboard trap, missing focus target, contrast below 4.5:1 for normal text or 3:1 for large text, color used as the sole state indicator): fix the failing element before proceeding. Never suppress the warning or special-case the input.
 - Component exceeds roughly 200 lines or mixes data fetching with presentation: split it before continuing.
 - Off-scale spacing, raw hex color, or AI-aesthetic pattern detected: replace with the design-system token or remove the pattern.
 - Console errors or accessibility warnings remain: the done predicate does not hold. Report blocked with the exact failing check and the file; do not claim success.

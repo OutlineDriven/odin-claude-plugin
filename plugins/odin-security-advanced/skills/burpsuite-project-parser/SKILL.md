@@ -58,8 +58,8 @@ description: 'Use when asked to search or analyze a Burp Suite .burp project to 
 
 ## Failure and recovery
 
-- **Missing prerequisite** (Burp Suite Professional, extension, Java, JAR, or jq not found): stop and report which prerequisite is missing. Do not attempt to parse `.burp` files directly.
-- **Result set too large** (lines over 1000 or bytes over 1 MB after size check): do not retrieve. Report the size, apply sub-component filters or narrower regex, and re-check size before retrieving.
+- Missing prerequisite (Burp Suite Professional, extension, Java, JAR, or jq not found): stop and report which prerequisite is missing. Do not attempt to parse `.burp` files directly.
+- Result set too large (lines over 1000 or bytes over 1 MB after size check): do not retrieve. Report the size, apply sub-component filters or narrower regex, and re-check size before retrieving.
 - Regex silently fails on encoded responses: response bodies may be gzip-compressed, chunked, or non-UTF8. If a body search returns fewer results than expected, search headers first, try broader patterns, or direct the user to inspect the raw response in Burp's UI.
 - Partial results from size cap: if `head -c 50000` truncates output mid-stream, report that results are incomplete and the user should narrow the search or inspect remaining records in Burp's UI.
 - Non-mutation: no rollback is needed; the skill only reads the project file through Burp Suite Professional and never modifies it.

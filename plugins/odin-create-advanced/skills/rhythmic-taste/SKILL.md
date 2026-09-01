@@ -20,9 +20,9 @@ Two modes: **document mode** (default) derives a rhythm constraint from the docu
 
 ## Inputs
 
-- **The document or section list** (required in document mode): the sections, layers, or structural units to vary, supplied directly or read from the artifact in scope.
-- **Random seed** (optional, required only for seeded constraint mode): a number, word, or phrase the user discloses openly.
-- **Random inputs** (optional, required only for seeded constraint mode): titles, words, or items the user supplies or fetches from a random source. Any count the user chooses; no fixed minimum.
+- The document or section list (required in document mode): the sections, layers, or structural units to vary, supplied directly or read from the artifact in scope.
+- Random seed (optional, required only for seeded constraint mode): a number, word, or phrase the user discloses openly.
+- Random inputs (optional, required only for seeded constraint mode): titles, words, or items the user supplies or fetches from a random source. Any count the user chooses; no fixed minimum.
 
 ## Procedure — document mode (default)
 

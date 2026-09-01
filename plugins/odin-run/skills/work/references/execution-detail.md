@@ -29,9 +29,9 @@ Branch-specific reference for `work`. Contains the Phase 0 input triage rules, e
 2. Find existing test files for those areas (Test Discovery).
 3. Note local patterns and conventions.
 4. Assess complexity:
-   - **Trivial** (1–2 files, no behavioral change): proceed to Phase 1 step 2, then implement directly with no task list and no execution loop. Apply Test Discovery if behavior-bearing code is touched.
-   - **Small / Medium** (clear scope, under ~10 files): build a task list from discovery. Proceed to Phase 1 step 2.
-   - **Large** (cross-cutting, 10+ files, touches auth/payments/migrations): inform the user this would benefit from a planning pass in plan mode. Honor their choice. If proceeding, build a task list and continue.
+   - Trivial (1–2 files, no behavioral change): proceed to Phase 1 step 2, then implement directly with no task list and no execution loop. Apply Test Discovery if behavior-bearing code is touched.
+   - Small / Medium (clear scope, under ~10 files): build a task list from discovery. Proceed to Phase 1 step 2.
+   - Large (cross-cutting, 10+ files, touches auth/payments/migrations): inform the user this would benefit from a planning pass in plan mode. Honor their choice. If proceeding, build a task list and continue.
 
 ## Execution engine selection
 

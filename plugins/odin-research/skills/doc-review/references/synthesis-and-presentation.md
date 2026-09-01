@@ -70,9 +70,9 @@ If the contributing personas are all silent on action (e.g., a merged `manual` f
 
 This gate holds for every branch of the tie-break: if the winning action is `Apply` but the merged finding has no `suggested_fix` after 3.9 (Promote) and 3.10 (Route) have run, downgrade to `Defer`. The walk-through still lets the user pick any of the four options; this rule only governs the agent's default recommendation so the best-judgment path and bulk-preview schedule only executable Apply actions.
 
-**Conflict-context surface.** When the tie-break fires (contributing personas implied different actions), record a one-line conflict-context string on the merged finding. The walk-through renders this on the conflict-context line. Example: `Coherence recommends Apply; scope-guardian recommends Skip. Agent's recommendation: Skip.`
+Conflict-context surface. When the tie-break fires (contributing personas implied different actions), record a one-line conflict-context string on the merged finding. The walk-through renders this on the conflict-context line. Example: `Coherence recommends Apply; scope-guardian recommends Skip. Agent's recommendation: Skip.`
 
-**Downstream invariant.** The walk-through and bulk-preview read `recommended_action` as authoritative and render `(recommended)` on the matching option. Best-judgment-the-rest and routing option B execute the `recommended_action` across the scoped finding set in bulk. This keeps best-judgment outcomes reproducible and auditable: the same review artifact always produces the same bulk plan.
+Downstream invariant. The walk-through and bulk-preview read `recommended_action` as authoritative and render `(recommended)` on the matching option. Best-judgment-the-rest and routing option B execute the `recommended_action` across the scoped finding set in bulk. This keeps best-judgment outcomes reproducible and auditable: the same review artifact always produces the same bulk plan.
 
 ### 3.5c Premise-dependency chain linking
 

@@ -42,8 +42,8 @@ The human-invoked `entry-points` command is a supported entry: pass an optional 
 9. Generate the report in the Output format, including the summary count table, per-category tables, the Files Analyzed list with per-file entry-point counts, and any Analysis Warnings. Done when: the report is generated with all sections.
 
 ## Failure and recovery
-- **Unparsable file**: note the file under an Analysis Warnings section of the report, continue with the remaining files, and recommend manual review for the unparsable file. Do not abort the whole analysis.
-- **Slither failure** (compilation errors or unsupported features): fall back to manual analysis for Solidity and note the fallback in the report.
+- Unparsable file: note the file under an Analysis Warnings section of the report, continue with the remaining files, and recommend manual review for the unparsable file. Do not abort the whole analysis.
+- Slither failure (compilation errors or unsupported features): fall back to manual analysis for Solidity and note the fallback in the report.
 - Ambiguous access control: classify as Restricted (Review Required) with the pattern recorded; never assign a confident category without tracing the restriction's implementation.
 - Partial-result rule: the report is returned with whatever entry points were successfully analyzed plus explicit warnings for what could not be parsed; the done predicate holds only when every in-scope file was either analyzed or warned.
 - Non-mutation rule: no source file, configuration, or repository state is changed; recovery never edits the codebase.

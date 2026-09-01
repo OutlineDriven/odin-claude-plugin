@@ -102,9 +102,9 @@ orchestrator → research subagent (reads 50 files) → digest → orchestrator 
 
 Examples: "Find every call site of this deprecated API across the monorepo," "Summarize what these 30 ADRs say about caching."
 
-**Cost:** one isolated subagent context. Worth it any time the alternative is loading hundreds of files into the main context.
+Cost: one isolated subagent context. Worth it any time the alternative is loading hundreds of files into the main context.
 
-**Prefer a built-in read-only exploration subagent** over a custom research role where the harness ships one: they run on a cheap model, are denied write/edit tools, and are purpose-built for this pattern. Define a custom research subagent only when the built-in does not fit (e.g. you need a domain-specific system prompt the model would not infer).
+Prefer a built-in read-only exploration subagent over a custom research role where the harness ships one: they run on a cheap model, are denied write/edit tools, and are purpose-built for this pattern. Define a custom research subagent only when the built-in does not fit (e.g. you need a domain-specific system prompt the model would not infer).
 
 ---
 

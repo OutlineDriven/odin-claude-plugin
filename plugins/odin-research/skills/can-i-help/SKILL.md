@@ -16,8 +16,8 @@ description: 'Use when the user asks "where to help", "contribution opportunitie
 
 ## Inputs
 
-- **Target repository** (optional): defaults to the current working directory. If the user supplies a path, use it.
-- **Developer interest** (collected during execution, not supplied upfront): a single-select choice that routes signal ranking.
+- Target repository (optional): defaults to the current working directory. If the user supplies a path, use it.
+- Developer interest (collected during execution, not supplied upfront): a single-select choice that routes signal ranking.
 
 ## Procedure
 

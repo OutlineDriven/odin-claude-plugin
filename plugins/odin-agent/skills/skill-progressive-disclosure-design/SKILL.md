@@ -38,9 +38,9 @@ description: 'Use when the model is creating or refactoring a skill, faces a SKI
    **Done when:** the default is stated and the specific conditions that would override it are recorded.
 
 3. **Select split axis if splitting is justified.** Three axes that work:
-   - **Variant branch.** User intent selects exactly one path. `SKILL.md` holds decision logic and shared workflow. Each `references/<variant>.md` holds path-specific detail. Clean variants: cloud provider, database engine, framework choice, output format, language. Fails when variants share >60% content.
-   - **Workflow vs. reference data.** `SKILL.md` holds the procedure (verbs, sequence, decisions). `references/` holds lookup material queried by key: schemas, error code tables, API surface listings, configuration matrices. Fails when the workflow must weave reference data inline rather than at discrete lookup points.
-   - **Depth tier.** `SKILL.md` covers the 80% common path. `references/edge-cases.md` covers the rest. The pointer must name the observable signal: "When X, Y, or Z appear, stop and read `references/edge-cases.md` before continuing." Fails when the load condition is not sharp and observable from user input.
+   - Variant branch. User intent selects exactly one path. `SKILL.md` holds decision logic and shared workflow. Each `references/<variant>.md` holds path-specific detail. Clean variants: cloud provider, database engine, framework choice, output format, language. Fails when variants share >60% content.
+   - Workflow vs. reference data. `SKILL.md` holds the procedure (verbs, sequence, decisions). `references/` holds lookup material queried by key: schemas, error code tables, API surface listings, configuration matrices. Fails when the workflow must weave reference data inline rather than at discrete lookup points.
+   - Depth tier. `SKILL.md` covers the 80% common path. `references/edge-cases.md` covers the rest. The pointer must name the observable signal: "When X, Y, or Z appear, stop and read `references/edge-cases.md` before continuing." Fails when the load condition is not sharp and observable from user input.
    **Done when:** the chosen axis is named and the conditions under which it fails are stated.
 
 4. **Reject anti-pattern splits.** Do not split on these patterns:
@@ -48,6 +48,7 @@ description: 'Use when the model is creating or refactoring a skill, faces a SKI
    - Splitting to hit a line target without a branching condition. Without a branching condition, references load in parallel or always, providing no savings.
    - Rare-but-critical content in references. References are optional by design; the model may skip them. If content is critical, it must be in `SKILL.md`. "Rare" and "critical" together usually means the skill is doing two jobs.
    - Cosmetic splits (examples, notes, tips files). No load condition; either always loaded or never loaded.
+   **Done when:** every proposed split is classified as valid or rejected with a reason.
 
 5. **Apply pointer hygiene to every reference.**
    - Name the user-visible signal that triggers the load. "If the user mentions snapshot tests" not "for testing concerns".

@@ -10,10 +10,10 @@ Read `Document type:` and `Origin:` from your prompt; trust them, don't re-class
 
 ## What you hunt
 
-- **Contradictions between sections** — scope says X is out but a requirement includes it; overview says "stateless" but a later section adds server state. When two passages can't both be true, that's a finding.
-- **Terminology drift** — one concept under two names ("pipeline"/"workflow"), or one term meaning two things. Test: could a reader be confused, not whether wording is identical.
-- **Structural breaks** — forward references to undefined things, phases depending on deliverables earlier phases never name, broken internal references ("see Section X" where X doesn't exist or says otherwise).
-- **Genuine ambiguity** — statements two careful readers would implement differently: unbounded quantifiers, non-exhaustive conditionals, passive voice hiding the actor, temporal vagueness ("after the migration" — starts? completes?).
+- Contradictions between sections — scope says X is out but a requirement includes it; overview says "stateless" but a later section adds server state. When two passages can't both be true, that's a finding.
+- Terminology drift — one concept under two names ("pipeline"/"workflow"), or one term meaning two things. Test: could a reader be confused, not whether wording is identical.
+- Structural breaks — forward references to undefined things, phases depending on deliverables earlier phases never name, broken internal references ("see Section X" where X doesn't exist or says otherwise).
+- Genuine ambiguity — statements two careful readers would implement differently: unbounded quantifiers, non-exhaustive conditionals, passive voice hiding the actor, temporal vagueness ("after the migration" — starts? completes?).
 
 ## Safe-auto candidates you own (confidence 100)
 

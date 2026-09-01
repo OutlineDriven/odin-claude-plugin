@@ -45,9 +45,9 @@ The matrix is a starting point, not a verdict, read it against the surface goal 
 
 ## Post-minimalism
 
-**When to use.** Default direction per the SKILL.md `<design>` charter. Tools, dashboards, dev-platform surfaces, B2B SaaS where the user is paying a per-pixel attention tax across a long workday. The mood is competent, fast, and unceremonious: restraint with one accent doing the load-bearing signal work. Appropriate when the user has come to *do* something, not to be impressed.
+When to use. Default direction per the SKILL.md `<design>` charter. Tools, dashboards, dev-platform surfaces, B2B SaaS where the user is paying a per-pixel attention tax across a long workday. The mood is competent, fast, and unceremonious: restraint with one accent doing the load-bearing signal work. Appropriate when the user has come to *do* something, not to be impressed.
 
-**Failure mode.** Naive minimalism: restraint without intent reads as unfinished. A grey-on-grey grid with a thin sans body and no accent is not post-minimalism; it is abdication. The discipline requires conviction (one defended accent, one type-pair commitment, one density tier), without conviction the surface looks like a `create-next-app` default that nobody touched.
+Failure mode. Naive minimalism: restraint without intent reads as unfinished. A grey-on-grey grid with a thin sans body and no accent is not post-minimalism; it is abdication. The discipline requires conviction (one defended accent, one type-pair commitment, one density tier), without conviction the surface looks like a `create-next-app` default that nobody touched.
 
 The diagnostic: if every removed element makes the surface lighter without making it sharper, the surface was already underweight. Restraint compounds only when there is something underneath worth surfacing.
 
@@ -69,9 +69,9 @@ Motion signature. 120: 200ms, ease-out, on `opacity` and `transform` only. No `t
 
 ## Neo-brutalism
 
-**When to use.** Direct-to-consumer surfaces with a register that has earned coarseness: creator tools, indie launches, anti-corporate platforms. Coarse type, harsh borders, raw color blocks read as conviction when the audience expects a personality, not a frictionless funnel. The mood is loud, opinionated, and willing to be ugly in service of being remembered.
+When to use. Direct-to-consumer surfaces with a register that has earned coarseness: creator tools, indie launches, anti-corporate platforms. Coarse type, harsh borders, raw color blocks read as conviction when the audience expects a personality, not a frictionless funnel. The mood is loud, opinionated, and willing to be ugly in service of being remembered.
 
-**Failure mode.** B2B SaaS context: clients read coarse type as "this is unfinished" rather than "this is intentional". The same 4px black border that signals deliberate craft on Gumroad signals broken stylesheet on an enterprise procurement portal.
+Failure mode. B2B SaaS context: clients read coarse type as "this is unfinished" rather than "this is intentional". The same 4px black border that signals deliberate craft on Gumroad signals broken stylesheet on an enterprise procurement portal.
 
 Lift the look without inheriting the audience and the brutalism becomes costume, a hostile aesthetic adopted by an institution whose every other signal is conformist.
 
@@ -88,15 +88,15 @@ Type pair. Display: a coarse grotesque or geometric mono (e.g. Space Mono, Depar
 
 Motion signature. Minimal: 100ms or less, no easing curves (`linear` or no transition). Motion is anathema to the static-poster register; movement breaks the illusion that the page is print, and print is the metaphor neo-brutalism is leaning on.
 
-**Density signature.** Spacing subset 16 / 24 / 48; 2: 4px borders; line-height 1.3,1.5. Content-to-chrome ratio is medium-tight, generous block padding inside harsh borders, not cramped.
+Density signature. Spacing subset 16 / 24 / 48; 2: 4px borders; line-height 1.3,1.5. Content-to-chrome ratio is medium-tight, generous block padding inside harsh borders, not cramped.
 
-**Taste anchors.** Read.cv (anti-LinkedIn; acquired by Perplexity 2025 and shut down 2025-05-16: historical anchor). Gumroad (creator-economy register). Vercel's old blog era (pre-2023 grotesque-display moment).
+Taste anchors. Read.cv (anti-LinkedIn; acquired by Perplexity 2025 and shut down 2025-05-16: historical anchor). Gumroad (creator-economy register). Vercel's old blog era (pre-2023 grotesque-display moment).
 
 ## Glassmorphism
 
-**When to use.** Sparingly: only as background-layering decoration on top of an opaque host paradigm. Translucence is a depth signal; it works when one floating surface sits over a strongly-colored or photographic ground. Native OS shells (visionOS, Big Sur Notification Center) earn it because the desktop wallpaper underneath provides the contrast. Glass is a guest paradigm, never a host.
+When to use. Sparingly: only as background-layering decoration on top of an opaque host paradigm. Translucence is a depth signal; it works when one floating surface sits over a strongly-colored or photographic ground. Native OS shells (visionOS, Big Sur Notification Center) earn it because the desktop wallpaper underneath provides the contrast. Glass is a guest paradigm, never a host.
 
-**Failure mode.** Glassmorphism on every surface (see `references/anti-slop.md` §1 row 4): translucence loses meaning when nothing behind it is opaque. A glass card on a glass page on a glass nav reads as fog, not depth.
+Failure mode. Glassmorphism on every surface (see `references/anti-slop.md` §1 row 4): translucence loses meaning when nothing behind it is opaque. A glass card on a glass page on a glass nav reads as fog, not depth.
 
 The decoration only signals when used once; the second instance dilutes the first, and by the third the surface has lost the vocabulary it was reaching for.
 
@@ -118,13 +118,13 @@ Density signature. As host paradigm: glass is decoration on top of structure, no
 
 ## Material 3 Expressive
 
-**When to use.** Android / Compose surfaces and Google-ecosystem apps, Compose support is not yet stable: stable `androidx.compose.material3` is 1.4.x, with the Expressive APIs in a 1.5.0 alpha behind `@ExperimentalMaterial3ExpressiveApi`. The register is consumer, expressive, motion-rich: gestures matter, theming matters, accessibility is enforced by the system. Appropriate when the user expects platform-native feel, not bespoke branding, and when dynamic color from system wallpaper is a feature rather than a leak.
+When to use. Android / Compose surfaces and Google-ecosystem apps, Compose support is not yet stable: stable `androidx.compose.material3` is 1.4.x, with the Expressive APIs in a 1.5.0 alpha behind `@ExperimentalMaterial3ExpressiveApi`. The register is consumer, expressive, motion-rich: gestures matter, theming matters, accessibility is enforced by the system. Appropriate when the user expects platform-native feel, not bespoke branding, and when dynamic color from system wallpaper is a feature rather than a leak.
 
-**Failure mode.** M3-default: using the stock palette and component shapes reads as "I used the framework defaults" (the framework-default slop tell, see `references/anti-slop.md` §1 row 9, generalized from Tailwind to Material).
+Failure mode. M3-default: using the stock palette and component shapes reads as "I used the framework defaults" (the framework-default slop tell, see `references/anti-slop.md` §1 row 9, generalized from Tailwind to Material).
 
 The dynamic-color system is permissive; without an opinionated seed color and a committed shape scale, the result is indistinguishable from every other Compose template, and Compose templates are what the model has been trained to produce.
 
-- OKLCH palette starter.
+**OKLCH palette starter.**
 ```css
 --md-sys-primary:    oklch(0.65 0.20 38);       /* warm clay primary */
 --md-sys-secondary:  oklch(0.70 0.15 90);       /* warm gold — non-purple/blue */
@@ -133,21 +133,21 @@ The dynamic-color system is permissive; without an opinionated seed color and a 
 --md-sys-on-surface: oklch(0.10 0.004 280);     /* dark text, slight cool undertone */
 ```
 
-- Type pair. Display: Roboto Flex or a custom variable Google Font keyed to a committed Display Large size. Body: Roboto Flex Body or Google Sans Text. The pairing leans on variable-axis commitment: Material 3 Expressive rewards optical-size discipline over family contrast.
+Type pair. Display: Roboto Flex or a custom variable Google Font keyed to a committed Display Large size. Body: Roboto Flex Body or Google Sans Text. The pairing leans on variable-axis commitment: Material 3 Expressive rewards optical-size discipline over family contrast.
 
-- Motion signature. Emphasized easing curves at 200: 300ms, e.g. `cubic-bezier(0.05, 0.7, 0.1, 1.0)`. Container transforms and shared-element transitions do the heavy narrative work; motion is a first-class material, not a flourish.
+Motion signature. Emphasized easing curves at 200: 300ms, e.g. `cubic-bezier(0.05, 0.7, 0.1, 1.0)`. Container transforms and shared-element transitions do the heavy narrative work; motion is a first-class material, not a flourish.
 
-- Density signature. Spacing subset 4 / 8 / 16 / 24 (Material's standard); line-height 1.5; content-to-chrome ratio matches platform conventions: touch targets 48dp minimum, generous padding around primary actions.
+**Density signature.** Spacing subset 4 / 8 / 16 / 24 (Material's standard); line-height 1.5; content-to-chrome ratio matches platform conventions: touch targets 48dp minimum, generous padding around primary actions.
 
-- Taste anchors. Pixel UI (system-canonical M3E reference). Google Workspace 2026 redesign (M3E applied to long-form productivity).
+**Taste anchors.** Pixel UI (system-canonical M3E reference). Google Workspace 2026 redesign (M3E applied to long-form productivity).
 
 ## Fluent 2
 
-- When to use. Microsoft-ecosystem surfaces: Office 2026, Teams, Windows 11 first-party apps. Luminosity-aware shadows and backplate-driven elevation read as native to the platform. Cross-pollination note: Liquid Glass, shipped in iOS 26 in September 2025, borrows the luminosity-aware-shadow concept, so the technique is migrating beyond Microsoft, but the *register* (Segoe UI, Fluent acrylics, Office iconography) remains Microsoft-coded.
+When to use. Microsoft-ecosystem surfaces: Office 2026, Teams, Windows 11 first-party apps. Luminosity-aware shadows and backplate-driven elevation read as native to the platform. Cross-pollination note: Liquid Glass, shipped in iOS 26 in September 2025, borrows the luminosity-aware-shadow concept, so the technique is migrating beyond Microsoft, but the *register* (Segoe UI, Fluent acrylics, Office iconography) remains Microsoft-coded.
 
-- Failure mode. Pasting Fluent shadows onto non-Microsoft contexts reads as "Office in the browser". The luminosity-aware shadow only earns its complexity when the surrounding chrome is Fluent: backplates, acrylics, Segoe glyphs. Stripped of context, the technique looks like Bootstrap with extra steps, and the implementation cost (per-elevation luminosity sampling) buys nothing the surface needed.
+Failure mode. Pasting Fluent shadows onto non-Microsoft contexts reads as "Office in the browser". The luminosity-aware shadow only earns its complexity when the surrounding chrome is Fluent: backplates, acrylics, Segoe glyphs. Stripped of context, the technique looks like Bootstrap with extra steps, and the implementation cost (per-elevation luminosity sampling) buys nothing the surface needed.
 
-- OKLCH palette starter.
+**OKLCH palette starter.**
 ```css
 --fluent-bg:        oklch(1 0 0);               /* white background, light theme */
 --fluent-fg:        oklch(0.10 0.002 280);      /* near-black text */
@@ -156,13 +156,13 @@ The dynamic-color system is permissive; without an opinionated seed color and a 
 --fluent-stroke:    oklch(0.88 0.002 0);        /* hairline stroke / border */
 ```
 
-- Type pair. Display: Segoe UI Variable Display. Body: Segoe UI Variable Text. Mono: Cascadia Code. The pairing is platform-inherited: the Variable axes (size, weight, optical) carry the typographic load, and substituting a non-Segoe family breaks the Microsoft-native register the rest of the system depends on.
+Type pair. Display: Segoe UI Variable Display. Body: Segoe UI Variable Text. Mono: Cascadia Code. The pairing is platform-inherited: the Variable axes (size, weight, optical) carry the typographic load, and substituting a non-Segoe family breaks the Microsoft-native register the rest of the system depends on.
 
-- Motion signature. 167ms standard easing as Fluent's published default. Connected Animations pattern for cross-surface continuity: element identity carries across navigation, so the user reads the transition as the same object moving rather than two objects swapping.
+Motion signature. 167ms standard easing as Fluent's published default. Connected Animations pattern for cross-surface continuity: element identity carries across navigation, so the user reads the transition as the same object moving rather than two objects swapping.
 
-- Density signature. Spacing subset 4 / 8 / 16; line-height 1.5; generous backplate padding (12: 16px) inside elevation tiers. Content-to-chrome ratio leans toward chrome, Fluent earns its weight from honest backplates, not from raw density.
+**Density signature.** Spacing subset 4 / 8 / 16; line-height 1.5; generous backplate padding (12: 16px) inside elevation tiers. Content-to-chrome ratio leans toward chrome, Fluent earns its weight from honest backplates, not from raw density.
 
-- Taste anchors. Office 2026 (Fluent 2 at scale across productivity surfaces). Teams (real-time collaboration with Fluent acrylics carrying focus state).
+**Taste anchors.** Office 2026 (Fluent 2 at scale across productivity surfaces). Teams (real-time collaboration with Fluent acrylics carrying focus state).
 
 ## Mixing the paradigms
 

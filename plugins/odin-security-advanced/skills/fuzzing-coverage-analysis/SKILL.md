@@ -46,8 +46,8 @@ Optional:
 
 ## Failure and recovery
 
-- **Missing toolchain** (`llvm-cov`, `llvm-profdata`, `gcovr`, or nightly Rust not installed): stop and name the missing tool. Do not substitute the fuzzer's reported coverage for a dedicated-tool measurement.
-- **`error: no profile data available` or `Failed to load coverage`**: the profile was not generated or the binary used for the report is not the instrumented binary. Rebuild the instrumented binary with the same flags used during execution and re-run; do not fabricate a report from a mismatched binary.
+- Missing toolchain (`llvm-cov`, `llvm-profdata`, `gcovr`, or nightly Rust not installed): stop and name the missing tool. Do not substitute the fuzzer's reported coverage for a dedicated-tool measurement.
+- `error: no profile data available` or `Failed to load coverage`: the profile was not generated or the binary used for the report is not the instrumented binary. Rebuild the instrumented binary with the same flags used during execution and re-run; do not fabricate a report from a mismatched binary.
 - **`incompatible instrumentation`**: LLVM and GCC coverage were mixed in one profile. Rebuild the whole target with one toolchain.
 - Crashing input prevents coverage generation: fork-isolate the crashing input or remove it before profiling; do not swallow the crash or pretend coverage was generated.
 - Empty corpus or coverage infrastructure not yet set up: this is a blocked result, not a zero-coverage report. Return blocked with the missing prerequisite named.

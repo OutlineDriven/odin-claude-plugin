@@ -37,12 +37,12 @@ The surviving candidates, ranked. Each idea carries:
 - confidence: 0-100%.
 - complexity: Low / Medium / High.
 
-**Keep idea cards expanded.** Unlike plan Implementation Units, ideation idea cards are meant to be read in full to choose a direction: do not hide their substance behind collapsed sections. When the section is long, add a within-section jump-list of ranked titles at the top.
+Keep idea cards expanded. Unlike plan Implementation Units, ideation idea cards are meant to be read in full to choose a direction: do not hide their substance behind collapsed sections. When the section is long, add a within-section jump-list of ranked titles at the top.
 
-**Illustrative visuals: decide on the idea's shape, not on how clear the prose reads.** A well-placed visual can make a direction land faster for a human scanning a set of candidates. Decide per survivor: none, a few, or most may warrant one; there is no quota and no cap. The question is what the idea *hinges on*, and whether that has a shape a picture carries faster than a sentence.
+Illustrative visuals: decide on the idea's shape, not on how clear the prose reads. A well-placed visual can make a direction land faster for a human scanning a set of candidates. Decide per survivor: none, a few, or most may warrant one; there is no quota and no cap. The question is what the idea *hinges on*, and whether that has a shape a picture carries faster than a sentence.
 
-- **Hinges on a structure → lean toward a visual.** A relationship between parts, a flow or sequence, a before/after contrast, an analogy mapping. A picture lands these faster than a sentence even when the prose is perfectly clear: and it should show the *basis* or the *why-it-matters*, not restate the title.
-- **A single point with nothing structural to show → no visual.** A renamed thing, a copy change, a drop-in library swap: there is no shape a diagram would add.
+- Hinges on a structure → lean toward a visual. A relationship between parts, a flow or sequence, a before/after contrast, an analogy mapping. A picture lands these faster than a sentence even when the prose is perfectly clear: and it should show the *basis* or the *why-it-matters*, not restate the title.
+- A single point with nothing structural to show → no visual. A renamed thing, a copy change, a drop-in library swap: there is no shape a diagram would add.
 
 Decoration: a visual with no shape to show, or one that just restates the title: is the failure mode. A visual that genuinely shows the idea's shape is never decoration, however many ideas warrant one. Keep the prose standing alone: a reader who ignores the visual still gets the complete idea and its basis.
 

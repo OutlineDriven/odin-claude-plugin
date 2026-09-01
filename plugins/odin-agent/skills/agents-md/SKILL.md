@@ -148,8 +148,8 @@ AGENTS.md files are execution contracts, not knowledge bases. Every line must he
 - Do not rewrite a whole file when targeted diffs would pass; full rewrites destroy battle-tested wording and inflate review burden.
 
 ## Failure and recovery
-- **No agent instruction files found and user did not request setup**: report the empty state and ask whether to proceed with setup. Do not create files without confirmation.
-- **Commands cannot be smoke-run** (environment lacks the toolchain): verify the script exists in the manifest, note the limitation in the report, and mark the check as unverified rather than passing it.
+- No agent instruction files found and user did not request setup: report the empty state and ask whether to proceed with setup. Do not create files without confirmation.
+- Commands cannot be smoke-run (environment lacks the toolchain): verify the script exists in the manifest, note the limitation in the report, and mark the check as unverified rather than passing it.
 - Contradictory rules found across levels: flag each contradiction, state which level should win, and propose a diff that resolves it. Do not apply until the user confirms the precedence decision.
 - Quick audit fails or is borderline (8–9): escalate to the full 49-check audit. Report both scores.
 - **Refactor removes a constraint that was actually a safety rule**: re-check the deletion log for anything tagged `generic` that was a safety, migration, release, or incident rule. Restore it immediately.

@@ -42,10 +42,10 @@ description: 'Use when designing or improving a module interface, locating a sea
 10. **Deliver, then edit.** Emit the recommendation in the fixed vocabulary; when restructuring is in scope, apply local edits confined to the bounded module while every caller and test keeps crossing the same seam. Done when: the recommendation is delivered and any local edits are applied within the bounded module.
 
 ## Failure and recovery
-- **Unbounded target.** The module cannot be isolated, its source is unreadable, or judging depth needs callers outside the scope: stop before any edit, report which evidence is missing, and ask for a narrower target. Do not widen scope or invent structure.
-- **Pass-through verdict.** The deletion test shows the module hides nothing: report it as shallow and name the callers that would absorb its complexity. This is a valid finding, not a silent rewrite.
-- **Breaking or failed edit.** An edit does not apply or breaks a caller or test: revert the uncommitted edits to the touched files (version-control checkout or manual revert) so no partial restructuring remains; recommendations already delivered stand.
-- **Non-converged interface.** The interface cannot be narrowed without changing caller-visible behaviour beyond the bounded scope: report the blocked state and the specific conflict. Never claim done while the done predicate fails to hold and never swallow the error.
+- Unbounded target. The module cannot be isolated, its source is unreadable, or judging depth needs callers outside the scope: stop before any edit, report which evidence is missing, and ask for a narrower target. Do not widen scope or invent structure.
+- Pass-through verdict. The deletion test shows the module hides nothing: report it as shallow and name the callers that would absorb its complexity. This is a valid finding, not a silent rewrite.
+- Breaking or failed edit. An edit does not apply or breaks a caller or test: revert the uncommitted edits to the touched files (version-control checkout or manual revert) so no partial restructuring remains; recommendations already delivered stand.
+- Non-converged interface. The interface cannot be narrowed without changing caller-visible behaviour beyond the bounded scope: report the blocked state and the specific conflict. Never claim done while the done predicate fails to hold and never swallow the error.
 
 ## Output
 Design recommendation in the fixed vocabulary: interface and implementation → external and internal seams → deep/shallow verdict with deletion-test result → interface-narrowing steps → seam placement → testability restructure → applied local edits with rollback point.

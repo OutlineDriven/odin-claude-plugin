@@ -151,7 +151,7 @@ Slot values: `{persona_file}` = the selected persona's lens description (see the
 
 Pass the **full document**; never split into sections. An empty findings list is a valid return.
 
-**Findings schema** (each subagent returns JSON conforming to this):
+Findings schema (each subagent returns JSON conforming to this):
 
 ```json
 {
@@ -185,9 +185,9 @@ Pass the **full document**; never split into sections. An empty findings list is
 }
 ```
 
-**Model tiering** (when the platform exposes model overrides; otherwise inherit the parent model): coherence → cheapest capable tier; security, scope-guardian → platform mid-tier; feasibility, product, adversarial → inherit the parent model.
+Model tiering (when the platform exposes model overrides; otherwise inherit the parent model): coherence → cheapest capable tier; security, scope-guardian → platform mid-tier; feasibility, product, adversarial → inherit the parent model.
 
-**Error handling.** If a subagent fails or times out, proceed with findings from subagents that completed; note the failed reviewer in the Coverage section. Do not block the entire review on a single reviewer failure.
+Error handling. If a subagent fails or times out, proceed with findings from subagents that completed; note the failed reviewer in the Coverage section. Do not block the entire review on a single reviewer failure.
 
 Decision primer. Round 1: `{decision_primer}` is an empty block. Round 2+: accumulate prior-round decisions (Applied, Skipped, Deferred, Acknowledged) with evidence snippets so synthesis can suppress re-raised rejected findings (R29) and verify fixes landed (R30). Cross-session persistence is out of scope; a new invocation starts fresh.
 

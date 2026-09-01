@@ -16,9 +16,9 @@ description: 'Use when a load-bearing claim is unverified, a plausible statement
 
 ## Inputs
 
-- **Claims or artifact.** Standalone-claim mode: the claim(s) supplied by the user; if no specific claim is named, self-scope to the most recent substantive assertion in the session. Artifact mode: the artifact under review — a file, a passage, or the sentence about to be written that may carry reality-grounded assertions; optional specific claim to check; when no specific claim is supplied, scan the whole supplied artifact including any sentence about to be written that is not yet on the page. Required.
-- **Source access.** web_search and read tools. Required.
-- **Direction.** Each claim is tested in two directions: (A) "Could the absurd-sounding claim be real?" and (B) "Could the obvious-sounding claim be false?" Required.
+- Claims or artifact. Standalone-claim mode: the claim(s) supplied by the user; if no specific claim is named, self-scope to the most recent substantive assertion in the session. Artifact mode: the artifact under review — a file, a passage, or the sentence about to be written that may carry reality-grounded assertions; optional specific claim to check; when no specific claim is supplied, scan the whole supplied artifact including any sentence about to be written that is not yet on the page. Required.
+- Source access. web_search and read tools. Required.
+- Direction. Each claim is tested in two directions: (A) "Could the absurd-sounding claim be real?" and (B) "Could the obvious-sounding claim be false?" Required.
 
 ## Procedure
 

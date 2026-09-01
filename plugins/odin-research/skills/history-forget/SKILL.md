@@ -18,9 +18,9 @@ Reversibly remove a memory or session from recall and export.
 
 ## Inputs
 
-- **Target identifier** (required for forget and unforget): the session or note identifier to forget, unforget, or inspect. Must be human-confirmed.
-- **Operation mode** (required): one of `forget`, `unforget`, or `list`. `list` takes no target.
-- **Explicit human confirmation** (required for forget and unforget): the user must confirm the exact target identifier before any write.
+- Target identifier (required for forget and unforget): the session or note identifier to forget, unforget, or inspect. Must be human-confirmed.
+- Operation mode (required): one of `forget`, `unforget`, or `list`. `list` takes no target.
+- Explicit human confirmation (required for forget and unforget): the user must confirm the exact target identifier before any write.
 
 ## Overlay schema
 

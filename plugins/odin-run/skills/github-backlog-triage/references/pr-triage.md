@@ -37,8 +37,8 @@
 
 Beyond merge and review, offer per-item write actions grouped by PR state. Propose every applicable action, then wait for the user to approve, modify, or reject each one before executing anything. Execute only the approved actions, one command per action so a single failure does not block the rest.
 
-- **Stale** (no activity for 14 days, measured from `updatedAt`): offer to post a staleness comment or close the PR. Comment: `gh pr comment <N> -R "$REPO" --body "Stale: no activity in 14 days. Close or update?"`. Close: `gh pr close <N> -R "$REPO"`.
-- **Needs review** (never-reviewed, non-bot, not draft): offer to request reviewers or post a status comment pinging the team. Request reviewers: `gh pr edit <N> -R "$REPO" --add-reviewer <user>`. Status comment: `gh pr comment <N> -R "$REPO" --body "<text>"`.
-- **Labeling**: offer to apply a label that matches the PR's evident category (`bug`, `enhancement`, `dependencies`, etc.) only when the repository already defines that label. `gh pr edit <N> -R "$REPO" --add-label <label>`. Never invent a label the repository does not have.
+- Stale (no activity for 14 days, measured from `updatedAt`): offer to post a staleness comment or close the PR. Comment: `gh pr comment <N> -R "$REPO" --body "Stale: no activity in 14 days. Close or update?"`. Close: `gh pr close <N> -R "$REPO"`.
+- Needs review (never-reviewed, non-bot, not draft): offer to request reviewers or post a status comment pinging the team. Request reviewers: `gh pr edit <N> -R "$REPO" --add-reviewer <user>`. Status comment: `gh pr comment <N> -R "$REPO" --body "<text>"`.
+- Labeling: offer to apply a label that matches the PR's evident category (`bug`, `enhancement`, `dependencies`, etc.) only when the repository already defines that label. `gh pr edit <N> -R "$REPO" --add-label <label>`. Never invent a label the repository does not have.
 
 Present the proposed per-item actions as a single list (PR number, proposed action, exact command). Iterate if the user revises. After execution, report each action's outcome and every item that remains pending or failed. Never force-push, never apply an action the user did not approve per item, and never roll back a successful action when another fails.

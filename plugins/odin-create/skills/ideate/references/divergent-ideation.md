@@ -6,8 +6,8 @@ Read this file at the start of Phase 2: after Phase 1 grounding completes and be
 
 Dispatch parallel ideation sub-agents per ODIN's standard subagent dispatch. The default fleet is **5 agents covering all six frames**:
 
-- **3 agents**, one per evidence-driven frame (Pain and friction; Inversion, removal, or automation; Advantage and compounding). These frames live on evidence: the grounding summary does the heavy lifting.
-- **2 agents** for the reasoning-heavy frames, where strong reasoning is the product: one takes Cross-domain analogy; the other takes Assumption-breaking and reframing **plus** Constraint-flipping (cousins: both invert givens; one agent holds both as starting biases).
+- 3 agents, one per evidence-driven frame (Pain and friction; Inversion, removal, or automation; Advantage and compounding). These frames live on evidence: the grounding summary does the heavy lifting.
+- 2 agents for the reasoning-heavy frames, where strong reasoning is the product: one takes Cross-domain analogy; the other takes Assumption-breaking and reframing **plus** Constraint-flipping (cousins: both invert givens; one agent holds both as starting biases).
 
 Each frame targets ~6-8 ideas (a two-frame agent targets that per frame), yielding ~36-48 raw ideas; roughly 25-30 survive dedupe. Adjust per-frame targets when volume overrides apply (e.g., "100 ideas" raises it, "top 3" may lower the survivor count instead).
 

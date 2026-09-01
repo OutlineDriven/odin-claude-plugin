@@ -53,9 +53,9 @@ Write the file every run — do not wait for the user to ask.
 2. **Choose the file path:** `docs/ideation/<slug>.md` where `<slug>` is the sanitized subject. Markdown is the canonical surface, always written.
 3. **Load the section contract:** read `references/ideation-sections.md` for the section structure (metadata, Grounding Context, Topic Axes, Ranked Ideas with per-idea fields, Rejection Summary).
 4. **Write the document** per the section contract. If `format:html` is active, also read `references/html-rendering.md` and render `docs/ideation/<slug>.html` as a self-contained view derived from the markdown; read it back and verify content parity.
-   - **On write failure** (no writable path, permissions): announce the failure and offer a custom path (validate writable; create parent dirs). Never lose the survivors silently.
+   - On write failure (no writable path, permissions): announce the failure and offer a custom path (validate writable; create parent dirs). Never lose the survivors silently.
 
-**Resume:** update the existing file in place, in its existing format; carry the prior ideas and rejection summary forward, adding to them rather than overwriting.
+On a resume run, update the existing file in place, in its existing format; carry the prior ideas and rejection summary forward, adding to them rather than overwriting.
 
 ### 4.2 Present a concise summary (not the full deliverable)
 
