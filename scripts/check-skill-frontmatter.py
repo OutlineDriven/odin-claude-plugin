@@ -226,21 +226,33 @@ CASES = [
 # the difference, because feature_version does not downgrade the f-string tokenizer,
 # so this looks for the pattern in the source text instead.
 MIN_PYTHON = (3, 9)
-FSTRING_FIELD = re.compile(r"""(?:f|rf|fr|F)(['"])(.*?)\1""", re.S)
 
 
 def source_backslash_in_fstring():
-    """Return the offending line numbers, or an empty list when the source is clean."""
+    """Return the offending line numbers, or an empty list when the source is clean.
+
+    Walks the parsed tree rather than the text: a regex over the source misses a
+    mixed-case prefix, a triple-quoted f-string, and a nested replacement field,
+    and a scan that cannot see those reports a false pass.
+    """
     text = Path(__file__).read_text("utf-8")
-    bad = []
-    for m in FSTRING_FIELD.finditer(text):
-        for field in re.findall(r"\{([^{}]*)\}", m.group(2)):
-            if "\\" in field:
-                bad.append(text.count("\n", 0, m.start() + m.group(2).find(field)) + 1)
     try:
-        ast.parse(text, feature_version=MIN_PYTHON)
+        tree = ast.parse(text)
     except SyntaxError as e:
-        bad.append(e.lineno or 0)
+        # An interpreter older than 3.12 rejects the pattern outright, which is the
+        # failure this check exists to prevent reaching.
+        return [e.lineno or 0]
+    bad = []
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.JoinedStr):
+            continue
+        for part in node.values:
+            if not isinstance(part, ast.FormattedValue):
+                continue
+            for inner in ast.walk(part):
+                segment = ast.get_source_segment(text, inner)
+                if segment and "\\" in segment:
+                    bad.append(getattr(inner, "lineno", node.lineno))
     return sorted(set(bad))
 
 
