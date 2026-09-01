@@ -75,11 +75,18 @@ repos:
         pass_filenames: false
         always_run: true
 
-      # The voice gate has shipped a wrong rule once, so it carries its own
-      # fixtures and proves itself on every run.
+      # Both gates below have shipped a wrong rule at least once, so each carries
+      # its own fixtures and proves itself on every run.
       - id: check-voice-self-test
         name: check the voice gate against its own fixtures
         entry: python3 scripts/check-voice.py --self-test
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      - id: check-skill-frontmatter-self-test
+        name: check the frontmatter gate against its own fixtures
+        entry: python3 scripts/check-skill-frontmatter.py --self-test
         language: system
         pass_filenames: false
         always_run: true
