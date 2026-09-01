@@ -63,9 +63,9 @@ The diagnostic: if every removed element makes the surface lighter without makin
 Type pair. Display: Inter Display or Geist Sans (committed weight, tight tracking). Body: Inter Text or Geist Sans Text. Mono: Geist Mono or JetBrains Mono. The pairing collapses display and body into one family at different optical sizes: appropriate because post-minimalism stakes restraint, not editorial contrast.
 Motion signature. 120: 200ms, ease-out, on `opacity` and `transform` only. No `transition: all`. Layout, color, and shadow do not animate. The motion budget is small on purpose, every frame the user spends watching a transition is a frame they are not reading the content the surface exists to communicate.
 
-**Density signature.** Spacing subset 4 / 8 / 16; line-height 1.4: 1.5; content-to-chrome ratio 2,3× the LLM default. Vertical rhythm tightens until information lands per scroll.
+Density signature. Spacing subset 4 / 8 / 16; line-height 1.4: 1.5; content-to-chrome ratio 2,3× the LLM default. Vertical rhythm tightens until information lands per scroll.
 
-**Taste anchors.** Linear (velocity-driven density). Vercel (monochrome with mono accents). Stripe docs (editorial type accent on transactional UI).
+Taste anchors. Linear (velocity-driven density). Vercel (monochrome with mono accents). Stripe docs (editorial type accent on transactional UI).
 
 ## Neo-brutalism
 
@@ -108,13 +108,13 @@ The decoration only signals when used once; the second instance dilutes the firs
 --accent:       oklch(0.66 0.13 38);            /* warm clay — non-purple/blue accent */
 ```
 
-**Type pair.** Inherit from the host paradigm; glass does not impose its own type system. Pairing typically defers to the platform: SF Pro on Apple surfaces, Segoe UI Variable on Microsoft. Imposing a custom display family on top of glass overloads the surface.
+Type pair. Inherit from the host paradigm; glass does not impose its own type system. Pairing typically defers to the platform: SF Pro on Apple surfaces, Segoe UI Variable on Microsoft. Imposing a custom display family on top of glass overloads the surface.
 
 Motion signature. 300: 400ms ease-in-out, longer than other paradigms because GPU blur cost is real and short transitions look broken under filter compositing. Animate `opacity` and `backdrop-filter` blur radius; never animate transform on a glass surface.
 
 Density signature. As host paradigm: glass is decoration on top of structure, not a structural choice. Padding inside the glass surface is generous (1.5,2× host) so the translucence has room to read.
 
-**Taste anchors.** Apple visionOS (native depth-as-affordance). macOS Big Sur+ Notification Center (sidebar floats over wallpaper). Windows 11 Mica (the restrained variant: tinted, not blurred).
+Taste anchors. Apple visionOS (native depth-as-affordance). macOS Big Sur+ Notification Center (sidebar floats over wallpaper). Windows 11 Mica (the restrained variant: tinted, not blurred).
 
 ## Material 3 Expressive
 
@@ -137,9 +137,9 @@ Type pair. Display: Roboto Flex or a custom variable Google Font keyed to a comm
 
 Motion signature. Emphasized easing curves at 200: 300ms, e.g. `cubic-bezier(0.05, 0.7, 0.1, 1.0)`. Container transforms and shared-element transitions do the heavy narrative work; motion is a first-class material, not a flourish.
 
-**Density signature.** Spacing subset 4 / 8 / 16 / 24 (Material's standard); line-height 1.5; content-to-chrome ratio matches platform conventions: touch targets 48dp minimum, generous padding around primary actions.
+Density signature. Spacing subset 4 / 8 / 16 / 24 (Material's standard); line-height 1.5; content-to-chrome ratio matches platform conventions: touch targets 48dp minimum, generous padding around primary actions.
 
-**Taste anchors.** Pixel UI (system-canonical M3E reference). Google Workspace 2026 redesign (M3E applied to long-form productivity).
+Taste anchors. Pixel UI (system-canonical M3E reference). Google Workspace 2026 redesign (M3E applied to long-form productivity).
 
 ## Fluent 2
 
@@ -160,9 +160,9 @@ Type pair. Display: Segoe UI Variable Display. Body: Segoe UI Variable Text. Mon
 
 Motion signature. 167ms standard easing as Fluent's published default. Connected Animations pattern for cross-surface continuity: element identity carries across navigation, so the user reads the transition as the same object moving rather than two objects swapping.
 
-**Density signature.** Spacing subset 4 / 8 / 16; line-height 1.5; generous backplate padding (12: 16px) inside elevation tiers. Content-to-chrome ratio leans toward chrome, Fluent earns its weight from honest backplates, not from raw density.
+Density signature. Spacing subset 4 / 8 / 16; line-height 1.5; generous backplate padding (12: 16px) inside elevation tiers. Content-to-chrome ratio leans toward chrome, Fluent earns its weight from honest backplates, not from raw density.
 
-**Taste anchors.** Office 2026 (Fluent 2 at scale across productivity surfaces). Teams (real-time collaboration with Fluent acrylics carrying focus state).
+Taste anchors. Office 2026 (Fluent 2 at scale across productivity surfaces). Teams (real-time collaboration with Fluent acrylics carrying focus state).
 
 ## Mixing the paradigms
 
