@@ -222,9 +222,9 @@ CASES = [
 # `language: system` runs whichever python3 the machine has, so this gate must parse
 # on the oldest interpreter a contributor might carry. PEP 701 allowed a backslash
 # inside an f-string replacement field only from 3.12; before that it is a
-# SyntaxError, and it shipped here once. `ast.parse(feature_version=...)` cannot see
-# the difference, because feature_version does not downgrade the f-string tokenizer,
-# so this looks for the pattern in the source text instead.
+# SyntaxError, and it shipped here once. `ast.parse(feature_version=...)` catches
+# grammar that is too new but cannot see this case, because feature_version does not
+# downgrade the f-string tokenizer, so the two halves below cover different gaps.
 MIN_PYTHON = (3, 9)
 
 
