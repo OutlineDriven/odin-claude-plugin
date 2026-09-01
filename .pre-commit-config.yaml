@@ -84,3 +84,10 @@ repos:
         language: system
         files: ^(plugins/.*/skills/.*/SKILL\.md|plugins/.*/skills/.*/agents/openai\.yaml|scripts/render-skill-manifests\.mjs)$
         pass_filenames: false
+
+      - id: check-skill-frontmatter
+        name: check SKILL.md frontmatter parses as strict YAML
+        entry: python3 scripts/check-skill-frontmatter.py
+        language: system
+        files: ^(plugins/.*/skills/.*/SKILL\.md|catalog/plugins\.json|scripts/check-skill-frontmatter\.py)$
+        pass_filenames: false

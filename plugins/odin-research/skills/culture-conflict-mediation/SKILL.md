@@ -1,6 +1,6 @@
 ---
 name: culture-conflict-mediation
-description: 'Use when two colleagues' working friction needs trait-based explanation, accommodations, process changes, and escalation boundaries. Also handles manager-report friction when both profiles exist. Not for performance adjudication — use the organization's formal process.'
+description: 'Use when two colleagues'' working friction needs trait-based explanation, accommodations, process changes, and escalation boundaries. Also handles manager-report friction when both profiles exist. Not for performance adjudication — use the organization''s formal process.'
 ---
 
 # Culture conflict mediation
