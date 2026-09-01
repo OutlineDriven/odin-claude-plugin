@@ -11,11 +11,13 @@ The markdown is the source of truth. The `askme` handoff and the repo's decision
 
 ## Hard invariants
 
-- **Derived, never authored.** Render from the just-written markdown. If the two disagree, the markdown is right: regenerate the HTML; never hand-patch content into the HTML that isn't in the markdown.
-- **Single self-contained HTML5 file.** No companion `.css` / `.js` / `.svg`. CSS lives in `<style>`; any SVG is inline. The one permitted external link is a CDN webfont `<link rel="stylesheet">`, paired with an offline fallback font stack so the doc reads when the CDN is unreachable.
-- **All content as visible text: one source of truth.** Subject, grounding cites, survivors, the rejected table, and the next step render as visible HTML. No hidden machine-readable mirror: no `<script type="application/json">` block, no `data-*` value mirror, no `<meta name="…">` duplicating the visible header.
-- **ASCII identifiers.** Class names and element IDs are ASCII-only.
-- **Composition footer.** A visible footer names the render timestamp and the source markdown path: e.g. `<footer>Rendered 2026-06-26 from docs/ideation/<slug>.md</footer>`: so a reader can tell how stale the view is.
+| Invariant | What it requires |
+|---|---|
+| Derived, never authored | Render from the just-written markdown. If the two disagree, the markdown is right: regenerate the HTML; never hand-patch content into the HTML that isn't in the markdown. |
+| Single self-contained HTML5 file | No companion `.css` / `.js` / `.svg`. CSS lives in `<style>`; any SVG is inline. The one permitted external link is a CDN webfont `<link rel="stylesheet">`, paired with an offline fallback font stack so the doc reads when the CDN is unreachable. |
+| All content as visible text: one source of truth | Subject, grounding cites, survivors, the rejected table, and the next step render as visible HTML. No hidden machine-readable mirror: no `<script type="application/json">` block, no `data-*` value mirror, no `<meta name="…">` duplicating the visible header. |
+| ASCII identifiers | Class names and element IDs are ASCII-only. |
+| Composition footer | A visible footer names the render timestamp and the source markdown path: e.g. `<footer>Rendered 2026-06-26 from docs/ideation/<slug>.md</footer>`: so a reader can tell how stale the view is. |
 
 ## Section anatomy: maps 1:1 to the markdown
 

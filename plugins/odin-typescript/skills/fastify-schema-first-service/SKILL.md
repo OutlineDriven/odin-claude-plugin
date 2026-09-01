@@ -43,12 +43,16 @@ Optional: existing route/plugin/schema files to modify, database adapter choice,
 10. **Verify boot.** Call `await app.ready()` (or `await app.listen(...)`) and confirm plugins resolve in dependency order, decorators exist where routes expect them, and a schema-violating request returns the shaped 400 error. Done when: `app.ready()` resolves, plugins are in dependency order, decorators exist, and a schema-violating request returns the shaped 400.
 
 ## Failure and recovery
-- **Encapsulation leak.** A decorator or hook is `undefined` in a route outside the registering plugin. Recovery: wrap the plugin in `fastify-plugin` (`fp`) so it propagates to the parent, or move the route inside the plugin's `register` scope.
-- **Plugin load-order error.** A plugin throws because a dependency decorator is missing. Recovery: declare `dependencies: ['<name>']` in `fp` metadata and register the dependency first, or chain with `.after()`.
-- **Validation error shape mismatch.** A route returns an unstructured error instead of the schema-shaped 400. Recovery: confirm `app.setErrorHandler` checks `error.validation` and that the route's `response` block includes the error status code schema.
-- **Silent multipart truncation.** An upload over the size limit is silently truncated. Recovery: set `throwFileSizeLimit: true` and explicit `limits` on `@fastify/multipart`.
-- **Serialization strips fields.** Response fields are missing from output. Recovery: add the field to the `response` schema; `fast-json-stringify` only emits properties declared in the schema.
-- **Partial-result rule.** If a step cannot complete, stop and report the failing step and the files changed so far. Do not widen scope or invent schema fields, plugin names, or decorator shapes not supplied as input. Roll back only by reverting the local files written; no remote or deployed state is touched.
+
+| Failure class | Detection | Recovery |
+|---|---|---|
+| Encapsulation leak | A decorator or hook is `undefined` in a route outside the registering plugin | Wrap the plugin in `fastify-plugin` (`fp`) so it propagates to the parent, or move the route inside the plugin's `register` scope. |
+| Plugin load-order error | A plugin throws because a dependency decorator is missing | Declare `dependencies: ['<name>']` in `fp` metadata and register the dependency first, or chain with `.after()`. |
+| Validation error shape mismatch | A route returns an unstructured error instead of the schema-shaped 400 | Confirm `app.setErrorHandler` checks `error.validation` and that the route's `response` block includes the error status code schema. |
+| Silent multipart truncation | An upload over the size limit is silently truncated | Set `throwFileSizeLimit: true` and explicit `limits` on `@fastify/multipart`. |
+| Serialization strips fields | Response fields are missing from output | Add the field to the `response` schema; `fast-json-stringify` only emits properties declared in the schema. |
+
+Partial-result rule: if a step cannot complete, stop and report the failing step and the files changed so far. Do not widen scope or invent schema fields, plugin names, or decorator shapes not supplied as input. Roll back only by reverting the local files written; no remote or deployed state is touched.
 
 ## Output
 Fastify application code: schema-bearing routes, encapsulated plugins in dependency order, lifecycle hooks at the correct stage, typed decorators with declaration-merged types, shaped validation and error handlers, configured content-type parsers, and database wiring via official adapters. The application boots with `app.ready()` and a schema-violating request returns a shaped 400.

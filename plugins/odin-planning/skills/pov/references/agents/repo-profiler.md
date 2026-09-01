@@ -8,11 +8,11 @@ Read efficiently — manifests, lockfiles, the license, root instruction/doc fil
 
 Produce the profile by inspecting:
 
-- **Stack & versions** — detected languages and major frameworks *with versions* (from manifests/lockfiles **and** runtime version selectors like `.nvmrc`/`.node-version`/`.python-version`/`.ruby-version`/`.tool-versions`/`mise.toml`), build/test tooling and commands.
-- **Dependency surface** — manifest + lockfile paths present, top-level (direct) dependency list, project license, dependency licenses where readily available.
-- **Topology** — monorepo? workspace/service map (name + primary language each), deployment model (monolith / multi-service / serverless), API styles (REST/gRPC/GraphQL/none), data stores and migration/ORM locations, module/internal-boundary layout.
-- **Conventions & instruction files** — paths and a short digest of the *root* `AGENTS.md`/`CLAUDE.md`/`GEMINI.md`/`ARCHITECTURE.md`/`README.md`/`CONTRIBUTING.md`/`STRATEGY.md`, and any project-wide Cursor rules (`.cursor/rules/*.mdc` or a root `.cursorrules`): coding standards, testing conventions, review process, and (from `STRATEGY.md`) target problem/approach/active tracks.
-- **Vocabulary** — from `CONCEPTS.md` if present, canonical domain terms/processes/status concepts.
+- Stack & versions — detected languages and major frameworks *with versions* (from manifests/lockfiles **and** runtime version selectors like `.nvmrc`/`.node-version`/`.python-version`/`.ruby-version`/`.tool-versions`/`mise.toml`), build/test tooling and commands.
+- Dependency surface — manifest + lockfile paths present, top-level (direct) dependency list, project license, dependency licenses where readily available.
+- Topology — monorepo? workspace/service map (name + primary language each), deployment model (monolith / multi-service / serverless), API styles (REST/gRPC/GraphQL/none), data stores and migration/ORM locations, module/internal-boundary layout.
+- Conventions & instruction files — paths and a short digest of the *root* `AGENTS.md`/`CLAUDE.md`/`GEMINI.md`/`ARCHITECTURE.md`/`README.md`/`CONTRIBUTING.md`/`STRATEGY.md`, and any project-wide Cursor rules (`.cursor/rules/*.mdc` or a root `.cursorrules`): coding standards, testing conventions, review process, and (from `STRATEGY.md`) target problem/approach/active tracks.
+- Vocabulary — from `CONCEPTS.md` if present, canonical domain terms/processes/status concepts.
 
 Do NOT include the `docs/solutions/` enumeration or subdirectory-scoped instruction files — consumers re-glob those fresh.
 

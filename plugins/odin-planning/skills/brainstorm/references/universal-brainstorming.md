@@ -23,16 +23,16 @@ Drop the blocking tool only when (a) the answer is inherently narrative, (b) opt
 
 ## How to start
 
-**Assess scope first.** Not every brainstorm needs deep exploration:
-- **Quick** — user has a clear goal, just needs a sounding board: 2-3 exchanges.
-- **Standard** — some unknowns, needs to explore options: 4-6 exchanges.
-- **Full** — vague goal, lots of uncertainty, or high-stakes decision: deep exploration, many exchanges.
+Assess scope first. Not every brainstorm needs deep exploration:
+- Quick — user has a clear goal, just needs a sounding board: 2-3 exchanges.
+- Standard — some unknowns, needs to explore options: 4-6 exchanges.
+- Full — vague goal, lots of uncertainty, or high-stakes decision: deep exploration, many exchanges.
 
-**Ask what they are already thinking.** Before offering ideas, find out what the user has considered, tried, or rejected.
+Ask what they are already thinking. Before offering ideas, find out what the user has considered, tried, or rejected.
 
-**When the user represents a group** — surface whose preferences are in play and where they diverge. Ask about each person's priorities.
+When the user represents a group — surface whose preferences are in play and where they diverge. Ask about each person's priorities.
 
-**Understand before generating.** Spend time on the problem before jumping to solutions.
+Understand before generating. Spend time on the problem before jumping to solutions.
 
 ## How to explore and generate
 
@@ -54,14 +54,14 @@ When the conversation has enough material to narrow — reflect back what you ha
 
 ## When to wrap up
 
-**Always synthesize a summary in the chat.** Before offering next steps, reflect back what emerged: key decisions, direction chosen, open threads, and assumptions.
+Always synthesize a summary in the chat. Before offering next steps, reflect back what emerged: key decisions, direction chosen, open threads, and assumptions.
 
-**Then offer next steps** using the blocking question tool:
+Then offer next steps using the blocking question tool:
 
-**Question:** "Brainstorm wrapped. What would you like to do next?"
+Question: "Brainstorm wrapped. What would you like to do next?"
 
-- **Create a plan** → draft the plan directly in this conversation from the decided goal and constraints, choosing the universal or knowledge-work artifact shape that fits.
-- **Save summary to disk** → write the summary as a markdown file in the current working directory.
-- **Done** → the conversation was the value, no artifact needed.
+- Create a plan → draft the plan directly in this conversation from the decided goal and constraints, choosing the universal or knowledge-work artifact shape that fits.
+- Save summary to disk → write the summary as a markdown file in the current working directory.
+- Done → the conversation was the value, no artifact needed.
 
 Fall back to numbered options in chat only when no blocking tool exists or the call errors.

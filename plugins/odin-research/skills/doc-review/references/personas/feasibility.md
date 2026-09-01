@@ -18,13 +18,13 @@ Do NOT, on requirements: trace shadow paths, check "could an engineer code tomor
 
 ## What you check (plan-grade)
 
-- **What already exists?** Does the plan acknowledge existing code/services/infra, or assume greenfield in a brownfield reality? Requires reading the codebase alongside the doc.
-- **Architecture reality** Do proposed approaches conflict with the framework/stack? Does it assume capabilities the infra lacks? A new pattern: does it address coexistence with existing ones?
-- **Shadow path tracing** for each new data flow, trace four paths: happy, nil (input missing), empty (zero-length), error (upstream fails). A path the plan ignores is a finding. Plans that describe only the happy path only work on demo day.
-- **Dependencies** — external ones identified? Implicit ones unacknowledged?
-- **Performance feasibility** — do stated targets match the architecture (back-of-envelope is enough)? Latency-sensitive work with no target → flag the gap.
-- **Migration safety** — concrete path, or hand-waving at "migrate the data"? Backward-compat, rollback, data volume, ordering addressed?
-- **Implementability** — file paths, interfaces, error handling specific enough to start, or must the implementer make decisions the plan should have made?
+- What already exists? Does the plan acknowledge existing code/services/infra, or assume greenfield in a brownfield reality? Requires reading the codebase alongside the doc.
+- Architecture reality: Do proposed approaches conflict with the framework/stack? Does it assume capabilities the infra lacks? A new pattern: does it address coexistence with existing ones?
+- Shadow path tracing: for each new data flow, trace four paths: happy, nil (input missing), empty (zero-length), error (upstream fails). A path the plan ignores is a finding. Plans that describe only the happy path only work on demo day.
+- Dependencies — external ones identified? Implicit ones unacknowledged?
+- Performance feasibility — do stated targets match the architecture (back-of-envelope is enough)? Latency-sensitive work with no target → flag the gap.
+- Migration safety — concrete path, or hand-waving at "migrate the data"? Backward-compat, rollback, data volume, ordering addressed?
+- Implementability — file paths, interfaces, error handling specific enough to start, or must the implementer make decisions the plan should have made?
 
 Apply each check only when relevant. Silence is a finding only when the gap would block implementation.
 

@@ -31,11 +31,11 @@ description: 'Use when asked to explore the codebase to map structure, symbols, 
 7. **Recursion guard.** Do not re-enter a router or orchestrator skill from within this leaf skill. Done when: no router or orchestrator skill is re-entered.
 
 ## Failure and recovery
-- **Scope too large (> 50 files).** Apply the heavy-codebase escape hatch; if no packing tool is available, narrow scope, state the narrowing, and proceed with the reduced scope.
-- **Empty or missing source.** For each affected section, state that it does not apply and explain why rather than fabricating content.
-- **Dispatch failure.** Return a partial result containing the sections that could be filled; never claim the done predicate holds when required sections are missing.
-- **Banned mutating tool attempted.** Stop immediately, do not perform the mutation, and report the attempt. No rollback is needed because no mutation occurs.
-- **Blocked / non-converged result.** Terminal classification stating which sections could not be filled and the concrete reason.
+- Scope too large (> 50 files). Apply the heavy-codebase escape hatch; if no packing tool is available, narrow scope, state the narrowing, and proceed with the reduced scope.
+- Empty or missing source. For each affected section, state that it does not apply and explain why rather than fabricating content.
+- Dispatch failure. Return a partial result containing the sections that could be filled; never claim the done predicate holds when required sections are missing.
+- Banned mutating tool attempted. Stop immediately, do not perform the mutation, and report the attempt. No rollback is needed because no mutation occurs.
+- Blocked / non-converged result. Terminal classification stating which sections could not be filled and the concrete reason.
 
 ## Output
 A structured orientation report with 8 sections in order: task understanding, architecture context, pattern context, tooling context, dependency map, critical files summary, constraints and considerations, and recommended next steps, omitting a section only when not applicable with a stated reason.

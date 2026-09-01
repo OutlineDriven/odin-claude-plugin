@@ -33,16 +33,16 @@ description: 'Use when a task carries guardrail-adjacent material — stealth, s
 
 ## Failure and recovery
 
-- **Gray-zone item unanswered.** Do not begin the run while a gray-zone item that shapes the carved prompt still awaits an answer. Hold and surface the question. Bright-line exclusions are never negotiable, so never stall on those alone.
-- **Disputed bright-line item.** Never negotiate the exclusion; re-evaluate the abstract description in a fresh context and record the appeal either way. If it is confirmed bright-line, the task proceeds without it or the user redirects.
-- **Carve declined.** Dispatch nothing, write nothing, and report that the task was not run.
-- **No safe remainder.** If the carve leaves nothing reversible to build, stop and report that; do not dispatch a hollow run.
-- **Risky material surfaces mid-run.** The subagent must not improvise. Route the discovery back through Carve, class and ledger it, and re-issue a re-carved prompt before continuing.
-- **Shared-state leak.** If the run can reach decision logs, notes, or transcript search over state this session wrote, the carve is incomplete. Re-issue the carved prompt with the shared-state prohibition baked in before running.
-- **Re-sweep gap.** If the independent N=1 re-sweep finds a missed risk or an over-broad exclusion, fold it back into the ledger and re-carve; do not report done with a known gap.
-- **Archive written early.** If an archive entry was written before the run closed, delete it and rewrite after close; an early record undoes the isolation.
-- **Interruption before closure.** The ledger and archive do not exist yet by design; report the window as open and the deliverable as unverified. Nothing outside the named ledger and archive is ever written, so no other mutation is created to roll back.
-- **Non-converged.** If a gap cannot be folded back within one re-carve, report the blocked result with the partial ledger and the unresolved item — never claim the done predicate holds.
+- Gray-zone item unanswered. Do not begin the run while a gray-zone item that shapes the carved prompt still awaits an answer. Hold and surface the question. Bright-line exclusions are never negotiable, so never stall on those alone.
+- Disputed bright-line item. Never negotiate the exclusion; re-evaluate the abstract description in a fresh context and record the appeal either way. If it is confirmed bright-line, the task proceeds without it or the user redirects.
+- Carve declined. Dispatch nothing, write nothing, and report that the task was not run.
+- No safe remainder. If the carve leaves nothing reversible to build, stop and report that; do not dispatch a hollow run.
+- Risky material surfaces mid-run. The subagent must not improvise. Route the discovery back through Carve, class and ledger it, and re-issue a re-carved prompt before continuing.
+- Shared-state leak. If the run can reach decision logs, notes, or transcript search over state this session wrote, the carve is incomplete. Re-issue the carved prompt with the shared-state prohibition baked in before running.
+- Re-sweep gap. If the independent N=1 re-sweep finds a missed risk or an over-broad exclusion, fold it back into the ledger and re-carve; do not report done with a known gap.
+- Archive written early. If an archive entry was written before the run closed, delete it and rewrite after close; an early record undoes the isolation.
+- Interruption before closure. The ledger and archive do not exist yet by design; report the window as open and the deliverable as unverified. Nothing outside the named ledger and archive is ever written, so no other mutation is created to roll back.
+- Non-converged. If a gap cannot be folded back within one re-carve, report the blocked result with the partial ledger and the unresolved item — never claim the done predicate holds.
 
 ## Output
 

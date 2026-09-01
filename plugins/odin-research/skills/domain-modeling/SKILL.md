@@ -29,12 +29,12 @@ Required: the term, conflict, or fuzzy usage to resolve from the current design 
 7. **Keep the glossary pure.** Entries contain definitions and rejected synonyms only. Refuse implementation details, specification content, and scratch notes in glossary files; put them in their own artifacts or drop them. Done when: every glossary entry contains only definitions and rejected synonyms.
 
 ## Failure and recovery
-- **Unresolvable conflict.** Neither the design conversation, the human ruling, nor the code settles which meaning owns the rule: record nothing, leave the glossary unchanged, and report the term as unresolved. Do not pick a winner to force closure.
-- **Implementation unavailable.** Step 5 cannot run: record the term only if the design conversation resolved it, mark its code cross-check as not performed, and say so in the report. Never claim code agreement that was not observed.
-- **Purity pressure.** A resolution only makes sense together with implementation detail or specification content: write the glossary entry without that content and route it to its own artifact.
-- **Partial results.** A session may resolve some terms and not others; only resolved terms are written, and unresolved terms stay out of the files.
-- **Rollback.** Revert the glossary edit; delete a lazily created file that ended the session with no surviving entry.
-- **Blocked result.** The terminal failure output names each unresolved or unrecorded term with its reason. Never present Done while a resolved term lacks its entry or its rejected synonyms.
+- Unresolvable conflict. Neither the design conversation, the human ruling, nor the code settles which meaning owns the rule: record nothing, leave the glossary unchanged, and report the term as unresolved. Do not pick a winner to force closure.
+- Implementation unavailable. Step 5 cannot run: record the term only if the design conversation resolved it, mark its code cross-check as not performed, and say so in the report. Never claim code agreement that was not observed.
+- Purity pressure. A resolution only makes sense together with implementation detail or specification content: write the glossary entry without that content and route it to its own artifact.
+- Partial results. A session may resolve some terms and not others; only resolved terms are written, and unresolved terms stay out of the files.
+- Rollback. Revert the glossary edit; delete a lazily created file that ended the session with no surviving entry.
+- Blocked result. The terminal failure output names each unresolved or unrecorded term with its reason. Never present Done while a resolved term lacks its entry or its rejected synonyms.
 
 ## Output
 Updated or newly created glossary files in the layout chosen at step 1, with every resolved term appearing once with a one-line definition and its rejected synonyms, plus a terminal report listing terms resolved and recorded, conflicts surfaced, model-versus-code contradictions with the ruling, entries whose code cross-check was not performed, and terms left unresolved with reasons.

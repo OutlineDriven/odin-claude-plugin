@@ -16,9 +16,9 @@ Nothing clears the gate → write nothing. A clean "no durable term here" is cor
 
 ## Per entry — the shape
 
-- **Definition is one sentence:** what the term means in this domain and what distinguishes it from its neighbors. Not a tutorial.
-- **Second paragraph only for non-obvious behavioral rules** — lifecycle, ownership invariants, cancellation/transition semantics. Never to elaborate the definition itself.
-- **Retired synonyms → an aliases line** directly under the definition: `*Avoid:* OldName, otherword`. When the team uses several words for one concept, pick the best and retire the rest — the glossary is the agreed vocabulary, not a record of every word ever used.
+- Definition is one sentence: what the term means in this domain and what distinguishes it from its neighbors. Not a tutorial.
+- Second paragraph only for non-obvious behavioral rules — lifecycle, ownership invariants, cancellation/transition semantics. Never to elaborate the definition itself.
+- Retired synonyms → an aliases line directly under the definition: `*Avoid:* OldName, otherword`. When the team uses several words for one concept, pick the best and retire the rest — the glossary is the agreed vocabulary, not a record of every word ever used.
 
 ## The file stands on its own
 

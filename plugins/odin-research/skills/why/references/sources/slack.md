@@ -37,11 +37,11 @@ Slack MCP tools vary. Check which Slack MCP is available and inspect its tool sc
 
 ## Common pitfalls
 
-- **Channel archaeology limits.** Very old messages may be gone due to retention policies. If you can't find anything before a certain date, note the retention cliff.
-- **Unsearched DMs.** Many decisions happen in DMs that aren't searchable. You'll miss them; that's a known limitation.
-- **Speculative jokes as "decisions."** Slack is casual. "Lol just do the thing" isn't a decision, even if it preceded the commit. Look for considered discussion.
-- **Context collapse in single messages.** Without the thread, a single message often reads differently than in context. Always fetch threads.
-- **Auth failures.** If the MCP isn't authenticated, stop. Don't make up findings. Report that Slack wasn't searchable.
+- Channel archaeology limits. Very old messages may be gone due to retention policies. If you can't find anything before a certain date, note the retention cliff.
+- Unsearched DMs. Many decisions happen in DMs that aren't searchable. You'll miss them; that's a known limitation.
+- Speculative jokes as "decisions." Slack is casual. "Lol just do the thing" isn't a decision, even if it preceded the commit. Look for considered discussion.
+- Context collapse in single messages. Without the thread, a single message often reads differently than in context. Always fetch threads.
+- Auth failures. If the MCP isn't authenticated, stop. Don't make up findings. Report that Slack wasn't searchable.
 
 ## What to return
 

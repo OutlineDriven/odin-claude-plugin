@@ -112,11 +112,11 @@ Tokyo studio cohort 2026, agency-side AI-tooling pivot is the dominant 2025-2026
 
 Snapshot 2026-04-29; review semi-annually.
 
-- **"Design × AI" pivot.** Tokyo agencies frame AI integration as the 2025-2026 axis, not a side topic. Goodpatch's monthly trends pieces consistently lead with AI tooling; freee's "cutter" pipeline and Mercari's Server-Driven UI both encode AI-as-platform assumptions.
-- **JP product design reads closer to American restraint than Korean Toss.** SmartHR / freee / Money Forward ship neutral cyan / blue primaries, system fonts (Yu Gothic / Hiragino), dense forms. The register diverges from Toss's photographic-warmth "premium product" thesis: JP enterprise SaaS accepts higher information density as honesty, not as failure.
-- **"Text avalanche" density still defended.** Yahoo! Japan and JP product UIs in 2025-2026 maintain the dense-link homepage pattern. Users expect transparency through detail; the Western minimalist hero-with-three-cards reads as evasive in JP context.
-- **System-font register over webfont register.** SmartHR (smarthr.design) and Mercari (engineering.mercari.com/en/blog/entry/20250624) document explicit choices for system-installed JP fonts over webfont CDN delivery: the rationale is performance + reliability, not aesthetics. Webfont-only JP type signals the developer optimized for visual control over loading cost.
-- **Open-source DS as employer-brand artifact.** SmartHR (kufu/smarthr-design-system), LINE (designsystem.line.me), and Goodpatch's Sparkle (goodpatch.com/blog/2025-12-reflection) ship public DS sites that double as recruiting surfaces. The pattern is documented as deliberate at Cybozu (zenn.dev/cybozu_frontend/articles/css-day-2025).
+- "Design × AI" pivot. Tokyo agencies frame AI integration as the 2025-2026 axis, not a side topic. Goodpatch's monthly trends pieces consistently lead with AI tooling; freee's "cutter" pipeline and Mercari's Server-Driven UI both encode AI-as-platform assumptions.
+- JP product design reads closer to American restraint than Korean Toss. SmartHR / freee / Money Forward ship neutral cyan / blue primaries, system fonts (Yu Gothic / Hiragino), dense forms. The register diverges from Toss's photographic-warmth "premium product" thesis: JP enterprise SaaS accepts higher information density as honesty, not as failure.
+- "Text avalanche" density still defended. Yahoo! Japan and JP product UIs in 2025-2026 maintain the dense-link homepage pattern. Users expect transparency through detail; the Western minimalist hero-with-three-cards reads as evasive in JP context.
+- System-font register over webfont register. SmartHR (smarthr.design) and Mercari (engineering.mercari.com/en/blog/entry/20250624) document explicit choices for system-installed JP fonts over webfont CDN delivery: the rationale is performance + reliability, not aesthetics. Webfont-only JP type signals the developer optimized for visual control over loading cost.
+- Open-source DS as employer-brand artifact. SmartHR (kufu/smarthr-design-system), LINE (designsystem.line.me), and Goodpatch's Sparkle (goodpatch.com/blog/2025-12-reflection) ship public DS sites that double as recruiting surfaces. The pattern is documented as deliberate at Cybozu (zenn.dev/cybozu_frontend/articles/css-day-2025).
 
 Cite (goodpatch.com/blog/2025-12-reflection), (icrossborderjapan.com/en/blog/website-design/japanese-web-design-trends), (smarthr.design), (engineering.mercari.com/en/blog/entry/20250624), (designsystem.line.me), (zenn.dev/cybozu_frontend/articles/css-day-2025).
 
@@ -124,14 +124,14 @@ Cite (goodpatch.com/blog/2025-12-reflection), (icrossborderjapan.com/en/blog/web
 
 Every tell below is verified absent from at least one of the major JP product DS rosters in §5.
 
-- **Sakura petals as decoration.** Sakura / momiji as palette names is fine: SmartHR uses both as named extended-palette steps, but as a decorative element on the hero is the slop. Verified absent from SmartHR / freee / Mercari / Cybozu / Money Forward / LINE shipping product surfaces.
-- **Washi paper textures as background.** Editorial cosplay; absent from every major JP product DS.
-- **Hinomaru-red as primary brand.** Absent from every major JP product DS verified. Mercari ships red `#FF0211` but as accent on a neutral surface, not as Hinomaru patriotic register.
-- **Wrong-locale font.** SC font on JP content is measurable through 直 / 骨 / 黄 glyph forms: JP shinjitai diverges from PRC-style simplified at identical Unicode codepoints. Use `lang="ja"` + Source Han Sans JP (or Noto Sans JP), never SC build on JP content.
-- **Synthetic italic on CJK.** jlreq emphasizes square character frames as a fundamental design principle; CSS `font-style: italic` slants the glyph grid and breaks the kanji silhouette. Use `text-emphasis` or weight contrast for emphasis instead.
-- **Auto-hyphenation enabled on JP content.** `hyphens: auto` does nothing for JP: the engine has no hyphenation dictionary for kanji-kana. Shipping it signals the developer copied a Latin-default config without inspection.
-- **Letter-spacing applied to CJK.** JP composes on the em grid; `letter-spacing` degrades the compose; reach for OpenType `palt` / `halt` (proportional-alternate / half-width) to tighten Latin-style instead.
-- **`<br>`-inserted line breaks for "looking pretty".** Brittle, breaks on viewport changes. Use BudouX (§4) or accept the engine's natural break: never hand-place `<br>` in JP body copy.
+- Sakura petals as decoration. Sakura / momiji as palette names is fine: SmartHR uses both as named extended-palette steps, but as a decorative element on the hero is the slop. Verified absent from SmartHR / freee / Mercari / Cybozu / Money Forward / LINE shipping product surfaces.
+- Washi paper textures as background. Editorial cosplay; absent from every major JP product DS.
+- Hinomaru-red as primary brand. Absent from every major JP product DS verified. Mercari ships red `#FF0211` but as accent on a neutral surface, not as Hinomaru patriotic register.
+- Wrong-locale font. SC font on JP content is measurable through 直 / 骨 / 黄 glyph forms: JP shinjitai diverges from PRC-style simplified at identical Unicode codepoints. Use `lang="ja"` + Source Han Sans JP (or Noto Sans JP), never SC build on JP content.
+- Synthetic italic on CJK. jlreq emphasizes square character frames as a fundamental design principle; CSS `font-style: italic` slants the glyph grid and breaks the kanji silhouette. Use `text-emphasis` or weight contrast for emphasis instead.
+- Auto-hyphenation enabled on JP content. `hyphens: auto` does nothing for JP: the engine has no hyphenation dictionary for kanji-kana. Shipping it signals the developer copied a Latin-default config without inspection.
+- Letter-spacing applied to CJK. JP composes on the em grid; `letter-spacing` degrades the compose; reach for OpenType `palt` / `halt` (proportional-alternate / half-width) to tighten Latin-style instead.
+- `<br>`-inserted line breaks for "looking pretty". Brittle, breaks on viewport changes. Use BudouX (§4) or accept the engine's natural break: never hand-place `<br>` in JP body copy.
 
 ## 10. Citations
 

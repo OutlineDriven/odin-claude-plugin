@@ -42,13 +42,13 @@ description: 'Use when contradictions, revisit conditions, or duplicates appear 
 7. **Human approval.** Present the complete diff for approval before committing. Include mechanical flips and judgmental rewrites so the human can review the full change set. Done when: the human approves the complete diff.
 
 ## Failure and recovery
-- **Contradiction unresolvable.** If two entries contradict and no resolution is clear, stop. Flag both entries with `> Needs resolution: <brief description>` and present them to the human. Do not pick a side.
-- **Revisit-when unclear.** If a revisit-when condition fires but the required action is ambiguous, stop. Flag the entry and request human guidance.
-- **Duplicate with divergent reasoning.** If two entries duplicate but carry different reasoning that cannot be cleanly merged, present both entries and ask the human to choose the merge strategy.
-- **Oversized file with no clean split boundary.** If no logical sub-topic boundary exists, flag the file as needing human-guided restructuring. Do not force a split.
-- **Unexpected diff.** If the diff contains changes beyond the planned maintenance edits, halt. Present the unexpected changes and request confirmation before proceeding.
-- **Partial result rule.** If any step fails, retain all completed mechanical flips but revert any uncommitted judgmental rewrites. The topic file stays in a consistent state.
-- **Rollback.** All changes are local and VCS-tracked. Revert via version control if the maintenance outcome is rejected.
+- Contradiction unresolvable. If two entries contradict and no resolution is clear, stop. Flag both entries with `> Needs resolution: <brief description>` and present them to the human. Do not pick a side.
+- Revisit-when unclear. If a revisit-when condition fires but the required action is ambiguous, stop. Flag the entry and request human guidance.
+- Duplicate with divergent reasoning. If two entries duplicate but carry different reasoning that cannot be cleanly merged, present both entries and ask the human to choose the merge strategy.
+- Oversized file with no clean split boundary. If no logical sub-topic boundary exists, flag the file as needing human-guided restructuring. Do not force a split.
+- Unexpected diff. If the diff contains changes beyond the planned maintenance edits, halt. Present the unexpected changes and request confirmation before proceeding.
+- Partial result rule. If any step fails, retain all completed mechanical flips but revert any uncommitted judgmental rewrites. The topic file stays in a consistent state.
+- Rollback. All changes are local and VCS-tracked. Revert via version control if the maintenance outcome is rejected.
 
 ## Output
 

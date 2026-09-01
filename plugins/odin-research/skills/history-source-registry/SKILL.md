@@ -44,11 +44,11 @@ description: 'Use when a coding-agent session store is added or its format drift
 9. **Verify drift detection.** If re-verifying an existing store whose format drifted, confirm the registry entry, documentation page, and fixture all reflect the new format. The drift report names only the changed fields using the smallest redacted record.
 
 ## Failure and recovery
-- **Store not found at path.** Report the missing path. Do not create placeholder entries. Halt.
-- **Unparseable transcript format.** Report the parse error with file path and first failing byte offset. Do not guess the format. Halt.
-- **Fixture fails conformance test.** Report the failing assertion. Fix the fixture or loader within bounded scope of this store. If the fix requires loader code changes outside the test file, report the required change and halt for human review.
-- **Registry-page date mismatch.** Correct the date before proceeding. This is a local write; revert by reverting the working tree.
-- **Real transcript leaked into fixture or docs.** Delete the contaminated artifact. Rebuild from the synthetic redacted record. This is the only case where a step re-executes from scratch.
+- Store not found at path. Report the missing path. Do not create placeholder entries. Halt.
+- Unparseable transcript format. Report the parse error with file path and first failing byte offset. Do not guess the format. Halt.
+- Fixture fails conformance test. Report the failing assertion. Fix the fixture or loader within bounded scope of this store. If the fix requires loader code changes outside the test file, report the required change and halt for human review.
+- Registry-page date mismatch. Correct the date before proceeding. This is a local write; revert by reverting the working tree.
+- Real transcript leaked into fixture or docs. Delete the contaminated artifact. Rebuild from the synthetic redacted record. This is the only case where a step re-executes from scratch.
 
 ## Output
 - Updated registry JSON with the new or revised entry.

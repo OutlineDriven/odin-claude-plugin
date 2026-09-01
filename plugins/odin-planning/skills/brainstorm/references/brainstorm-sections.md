@@ -50,17 +50,17 @@ When a doc IS warranted, depth matches what the dialogue produced. A brainstorm 
 
 Hold every kept section to these rules:
 
-- **Lead with the decision or outcome.** Put the conclusion first, then the reason, then background.
-- **One idea per sentence.** If a sentence needs a second parenthetical to stay true, split it.
-- **A requirement is one sentence of intent plus at most one qualifier.** When a requirement would specify two outcomes, state the intent and send the fork to Outstanding Questions.
-- **Cut hedges and intensifiers.** "Critically", "deliberately", "explicitly", "genuinely", "actually", "simply" carry nothing a downstream agent acts on.
-- **Prefer the verb to the nominalization.** "Demote the grid", not "the demotion of the grid is the deliberate change."
+- Lead with the decision or outcome. Put the conclusion first, then the reason, then background.
+- One idea per sentence. If a sentence needs a second parenthetical to stay true, split it.
+- A requirement is one sentence of intent plus at most one qualifier. When a requirement would specify two outcomes, state the intent and send the fork to Outstanding Questions.
+- Cut hedges and intensifiers. "Critically", "deliberately", "explicitly", "genuinely", "actually", "simply" carry nothing a downstream agent acts on.
+- Prefer the verb to the nominalization. "Demote the grid", not "the demotion of the grid is the deliberate change."
 
 Precision is not padding: keep IDs, dates, actor names, domain terms, conditionals, and exact thresholds verbatim.
 
-**Resolve in place; do not stratify.** When a later decision answers a parked question or supersedes earlier text, rewrite or remove the original entry: do not append a separate "resolutions" layer.
+Resolve in place; do not stratify. When a later decision answers a parked question or supersedes earlier text, rewrite or remove the original entry: do not append a separate "resolutions" layer.
 
-**Named test, run before the doc is declared written:** could a reader find a contradiction in each section in one pass?
+Named test, run before the doc is declared written: could a reader find a contradiction in each section in one pass?
 
 ## ODIN spec outline hard floor
 
@@ -116,12 +116,12 @@ Field names are stable across brainstorm revisions, never rename or repurpose a 
 
 ## ID and content rules
 
-- **Stable IDs.** R-IDs (Requirements), A-IDs (Actors), F-IDs (Flows), AE-IDs (Acceptance Examples). No other ID namespaces.
-- **Plain prefix.** `R1.`, `A1.`, `F1.`, `AE1.` as bullet prefixes. Do not bold.
-- **Bold leader labels** inside Flows and Acceptance Examples (`**Trigger:**`, `**Covers R4, R8.**`).
-- **Repo-relative paths.** Always. Never absolute paths.
-- **No process exhaust.** No "captured at Phase X" notes, no `## Next Steps` pointing to downstream planning, no italic provenance lines.
-- **No implementation details by default.** Libraries, schemas, endpoints, file layouts, code structure stay out unless the brainstorm is itself inherently technical or architectural.
+- Stable IDs. R-IDs (Requirements), A-IDs (Actors), F-IDs (Flows), AE-IDs (Acceptance Examples). No other ID namespaces.
+- Plain prefix. `R1.`, `A1.`, `F1.`, `AE1.` as bullet prefixes. Do not bold.
+- Bold leader labels inside Flows and Acceptance Examples (`**Trigger:**`, `**Covers R4, R8.**`).
+- Repo-relative paths. Always. Never absolute paths.
+- No process exhaust. No "captured at Phase X" notes, no `## Next Steps` pointing to downstream planning, no italic provenance lines.
+- No implementation details by default. Libraries, schemas, endpoints, file layouts, code structure stay out unless the brainstorm is itself inherently technical or architectural.
 
 ## Discipline: Summary vs Problem Frame
 

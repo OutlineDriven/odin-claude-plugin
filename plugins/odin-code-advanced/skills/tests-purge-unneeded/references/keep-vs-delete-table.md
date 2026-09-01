@@ -45,8 +45,10 @@ When the table is ambiguous:
 
 ## Anti-patterns to recognize and delete
 
-- **Tautology tests** — `assert isinstance(x, MyClass)` immediately after `x = MyClass()`
-- **Implementation tests** — asserting which private methods got called, not what the public behavior produced
-- **Coverage-driven tests** ; written to hit a coverage line, not to catch a bug
-- **Snapshot tests of trivial output** — approval tests of `str(obj)` or rendered HTML where any deliberate change requires updating the snapshot anyway
-- **"Just in case" tests** — written without a named failure mode they would catch
+| Anti-pattern | Why it is worthless |
+|---|---|
+| Tautology tests | `assert isinstance(x, MyClass)` immediately after `x = MyClass()` |
+| Implementation tests | Asserting which private methods got called, not what the public behavior produced |
+| Coverage-driven tests | Written to hit a coverage line, not to catch a bug |
+| Snapshot tests of trivial output | Approval tests of `str(obj)` or rendered HTML where any deliberate change requires updating the snapshot anyway |
+| "Just in case" tests | Written without a named failure mode they would catch |

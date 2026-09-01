@@ -16,10 +16,10 @@ description: 'Use when writing, reviewing, optimizing, validating, or migrating 
 
 ## Inputs
 
-- **Rule source or specification** (required): existing rule to review/optimize/migrate, samples to write against, or IOC/threat-intel to convert.
-- **Sample corpus** (optional but required for done): positive samples the rule must match.
-- **Goodware corpus** (optional but required for done): clean files to verify zero false positives.
-- **Target platform** (optional): Windows PE, macOS Mach-O, JavaScript/npm, Chrome extension, Android DEX, Office document. Defaults to PE if not stated.
+- Rule source or specification (required): existing rule to review/optimize/migrate, samples to write against, or IOC/threat-intel to convert.
+- Sample corpus (optional but required for done): positive samples the rule must match.
+- Goodware corpus (optional but required for done): clean files to verify zero false positives.
+- Target platform (optional): Windows PE, macOS Mach-O, JavaScript/npm, Chrome extension, Android DEX, Office document. Defaults to PE if not stated.
 - Scope boundary: static analysis requiring disassembly, dynamic sandbox analysis, network IDS rules, memory forensics, and plain hash-list detection are out of scope.
 
 ## Procedure

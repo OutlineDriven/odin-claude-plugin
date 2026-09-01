@@ -32,11 +32,11 @@ Use the Linear MCP.
 
 ## Common pitfalls
 
-- **Scope drift.** The ticket the PR references may have been closed and reopened with a different scope. Read the whole history.
-- **Mechanical templates.** Some teams require "Why" sections but fill them with boilerplate. Generic text ("improve user experience") is probably not a real answer.
-- **Stale tickets.** Old tickets often reflect a version of the plan that changed. Check dates and cross-reference with the code's ship date.
-- **Closed-as-duplicate chains.** Follow the duplicate-of relationships back to the canonical ticket.
-- **Private workspace content.** If you can't access an issue, note that as a gap rather than guessing.
+- Scope drift. The ticket the PR references may have been closed and reopened with a different scope. Read the whole history.
+- Mechanical templates. Some teams require "Why" sections but fill them with boilerplate. Generic text ("improve user experience") is probably not a real answer.
+- Stale tickets. Old tickets often reflect a version of the plan that changed. Check dates and cross-reference with the code's ship date.
+- Closed-as-duplicate chains. Follow the duplicate-of relationships back to the canonical ticket.
+- Private workspace content. If you can't access an issue, note that as a gap rather than guessing.
 
 ## What to return
 

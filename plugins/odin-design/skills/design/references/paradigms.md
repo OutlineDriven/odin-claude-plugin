@@ -124,7 +124,7 @@ Density signature. As host paradigm: glass is decoration on top of structure, no
 
 The dynamic-color system is permissive; without an opinionated seed color and a committed shape scale, the result is indistinguishable from every other Compose template, and Compose templates are what the model has been trained to produce.
 
-**OKLCH palette starter.**
+- OKLCH palette starter.
 ```css
 --md-sys-primary:    oklch(0.65 0.20 38);       /* warm clay primary */
 --md-sys-secondary:  oklch(0.70 0.15 90);       /* warm gold — non-purple/blue */
@@ -133,21 +133,21 @@ The dynamic-color system is permissive; without an opinionated seed color and a 
 --md-sys-on-surface: oklch(0.10 0.004 280);     /* dark text, slight cool undertone */
 ```
 
-**Type pair.** Display: Roboto Flex or a custom variable Google Font keyed to a committed Display Large size. Body: Roboto Flex Body or Google Sans Text. The pairing leans on variable-axis commitment: Material 3 Expressive rewards optical-size discipline over family contrast.
+- Type pair. Display: Roboto Flex or a custom variable Google Font keyed to a committed Display Large size. Body: Roboto Flex Body or Google Sans Text. The pairing leans on variable-axis commitment: Material 3 Expressive rewards optical-size discipline over family contrast.
 
-**Motion signature.** Emphasized easing curves at 200: 300ms, e.g. `cubic-bezier(0.05, 0.7, 0.1, 1.0)`. Container transforms and shared-element transitions do the heavy narrative work; motion is a first-class material, not a flourish.
+- Motion signature. Emphasized easing curves at 200: 300ms, e.g. `cubic-bezier(0.05, 0.7, 0.1, 1.0)`. Container transforms and shared-element transitions do the heavy narrative work; motion is a first-class material, not a flourish.
 
-**Density signature.** Spacing subset 4 / 8 / 16 / 24 (Material's standard); line-height 1.5; content-to-chrome ratio matches platform conventions: touch targets 48dp minimum, generous padding around primary actions.
+- Density signature. Spacing subset 4 / 8 / 16 / 24 (Material's standard); line-height 1.5; content-to-chrome ratio matches platform conventions: touch targets 48dp minimum, generous padding around primary actions.
 
-**Taste anchors.** Pixel UI (system-canonical M3E reference). Google Workspace 2026 redesign (M3E applied to long-form productivity).
+- Taste anchors. Pixel UI (system-canonical M3E reference). Google Workspace 2026 redesign (M3E applied to long-form productivity).
 
 ## Fluent 2
 
-**When to use.** Microsoft-ecosystem surfaces: Office 2026, Teams, Windows 11 first-party apps. Luminosity-aware shadows and backplate-driven elevation read as native to the platform. Cross-pollination note: Liquid Glass, shipped in iOS 26 in September 2025, borrows the luminosity-aware-shadow concept, so the technique is migrating beyond Microsoft, but the *register* (Segoe UI, Fluent acrylics, Office iconography) remains Microsoft-coded.
+- When to use. Microsoft-ecosystem surfaces: Office 2026, Teams, Windows 11 first-party apps. Luminosity-aware shadows and backplate-driven elevation read as native to the platform. Cross-pollination note: Liquid Glass, shipped in iOS 26 in September 2025, borrows the luminosity-aware-shadow concept, so the technique is migrating beyond Microsoft, but the *register* (Segoe UI, Fluent acrylics, Office iconography) remains Microsoft-coded.
 
-**Failure mode.** Pasting Fluent shadows onto non-Microsoft contexts reads as "Office in the browser". The luminosity-aware shadow only earns its complexity when the surrounding chrome is Fluent: backplates, acrylics, Segoe glyphs. Stripped of context, the technique looks like Bootstrap with extra steps, and the implementation cost (per-elevation luminosity sampling) buys nothing the surface needed.
+- Failure mode. Pasting Fluent shadows onto non-Microsoft contexts reads as "Office in the browser". The luminosity-aware shadow only earns its complexity when the surrounding chrome is Fluent: backplates, acrylics, Segoe glyphs. Stripped of context, the technique looks like Bootstrap with extra steps, and the implementation cost (per-elevation luminosity sampling) buys nothing the surface needed.
 
-**OKLCH palette starter.**
+- OKLCH palette starter.
 ```css
 --fluent-bg:        oklch(1 0 0);               /* white background, light theme */
 --fluent-fg:        oklch(0.10 0.002 280);      /* near-black text */
@@ -156,13 +156,13 @@ The dynamic-color system is permissive; without an opinionated seed color and a 
 --fluent-stroke:    oklch(0.88 0.002 0);        /* hairline stroke / border */
 ```
 
-**Type pair.** Display: Segoe UI Variable Display. Body: Segoe UI Variable Text. Mono: Cascadia Code. The pairing is platform-inherited: the Variable axes (size, weight, optical) carry the typographic load, and substituting a non-Segoe family breaks the Microsoft-native register the rest of the system depends on.
+- Type pair. Display: Segoe UI Variable Display. Body: Segoe UI Variable Text. Mono: Cascadia Code. The pairing is platform-inherited: the Variable axes (size, weight, optical) carry the typographic load, and substituting a non-Segoe family breaks the Microsoft-native register the rest of the system depends on.
 
-**Motion signature.** 167ms standard easing as Fluent's published default. Connected Animations pattern for cross-surface continuity: element identity carries across navigation, so the user reads the transition as the same object moving rather than two objects swapping.
+- Motion signature. 167ms standard easing as Fluent's published default. Connected Animations pattern for cross-surface continuity: element identity carries across navigation, so the user reads the transition as the same object moving rather than two objects swapping.
 
-**Density signature.** Spacing subset 4 / 8 / 16; line-height 1.5; generous backplate padding (12: 16px) inside elevation tiers. Content-to-chrome ratio leans toward chrome, Fluent earns its weight from honest backplates, not from raw density.
+- Density signature. Spacing subset 4 / 8 / 16; line-height 1.5; generous backplate padding (12: 16px) inside elevation tiers. Content-to-chrome ratio leans toward chrome, Fluent earns its weight from honest backplates, not from raw density.
 
-**Taste anchors.** Office 2026 (Fluent 2 at scale across productivity surfaces). Teams (real-time collaboration with Fluent acrylics carrying focus state).
+- Taste anchors. Office 2026 (Fluent 2 at scale across productivity surfaces). Teams (real-time collaboration with Fluent acrylics carrying focus state).
 
 ## Mixing the paradigms
 

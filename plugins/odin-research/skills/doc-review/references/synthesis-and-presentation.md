@@ -125,11 +125,11 @@ Preserve each finding's class, route, and confidence anchor in this step. Linkin
 
 Scan `manual` findings for promotion to `safe_auto` or `gated_auto`. Promote when the finding meets one of the consolidated auto-promotion patterns:
 
-- **Codebase-pattern-resolved.** `why_it_matters` cites a specific existing codebase pattern, and `suggested_fix` follows that pattern. Promote to `gated_auto`.
-- **Factually incorrect behavior.** The document describes behavior that is factually wrong, and the correct behavior is derivable from context or the codebase. Promote to `gated_auto`.
-- **Missing standard security/reliability controls.** The omission is clearly a gap, and the fix follows established practice. Promote to `gated_auto`.
-- **Framework-native-API substitutions.** A hand-rolled implementation duplicates first-class framework behavior. Promote to `gated_auto`.
-- **Mechanically-implied completeness additions.** The missing content follows mechanically from the document's own explicit, concrete decisions. Promote to `safe_auto` when there is genuinely one correct addition; `gated_auto` when the addition is substantive.
+- Codebase-pattern-resolved. `why_it_matters` cites a specific existing codebase pattern, and `suggested_fix` follows that pattern. Promote to `gated_auto`.
+- Factually incorrect behavior. The document describes behavior that is factually wrong, and the correct behavior is derivable from context or the codebase. Promote to `gated_auto`.
+- Missing standard security/reliability controls. The omission is clearly a gap, and the fix follows established practice. Promote to `gated_auto`.
+- Framework-native-API substitutions. A hand-rolled implementation duplicates first-class framework behavior. Promote to `gated_auto`.
+- Mechanically-implied completeness additions. The missing content follows mechanically from the document's own explicit, concrete decisions. Promote to `safe_auto` when there is genuinely one correct addition; `gated_auto` when the addition is substantive.
 
 Keep such findings at `manual` when they involve scope or priority changes where the author may have weighed tradeoffs invisible to the reviewer.
 

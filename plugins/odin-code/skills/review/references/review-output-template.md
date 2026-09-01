@@ -77,18 +77,18 @@ Use this **canonical skeleton** for deep-mode review output. Copy the section st
 
 ## Formatting rules
 
-- **ASCII-safe only** -- never box-drawing characters or per-item horizontal-rule separators between entries, no Unicode arrows or middot; use `->`.
-- **Escape literal `|` in table cells** -- any `|` inside a finding title, issue description, code snippet, or example must be written as `\|`.
-- **Severity-grouped sections** -- `### P0 -- Critical`, `### P1 -- High`, `### P2 -- Moderate`, `### P3 -- Low`. Omit empty severity levels.
-- **Stable sequential finding numbers** -- assign finding numbers once after sorting, continue them across severity sections, and reuse those same numbers when findings are repeated in Actionable Findings.
-- **Always include file:line location** for code review issues.
-- **Persona column** shows which persona(s) flagged the issue. Multiple personas = cross-persona agreement.
-- **Confidence column** shows `high`, `med`, or `low`.
-- **No Route column in per-severity tables** -- the route appears only in the Actionable Findings table.
-- **Detail line (per finding, as needed)** -- keep the scannable line short; put the why-it-matters + fix in a per-finding detail line keyed by stable `#`: `- **#N** -- <why it matters + what response it needs>`.
-- **Actionable Findings section** -- include when the actionable queue is non-empty.
-- **Pre-existing section** -- separate table, no confidence column.
-- **Coverage section** -- suppressed count, residual risks, testing gaps.
-- **Summary uses blockquotes** for verdict, reasoning, and fix order.
-- **Horizontal rule** (`---`) separates findings from verdict.
-- **`###` headers** for each section.
+- ASCII-safe only -- never box-drawing characters or per-item horizontal-rule separators between entries, no Unicode arrows or middot; use `->`.
+- Escape literal `|` in table cells -- any `|` inside a finding title, issue description, code snippet, or example must be written as `\|`.
+- Severity-grouped sections -- `### P0 -- Critical`, `### P1 -- High`, `### P2 -- Moderate`, `### P3 -- Low`. Omit empty severity levels.
+- Stable sequential finding numbers -- assign finding numbers once after sorting, continue them across severity sections, and reuse those same numbers when findings are repeated in Actionable Findings.
+- Always include file:line location for code review issues.
+- Persona column shows which persona(s) flagged the issue. Multiple personas = cross-persona agreement.
+- Confidence column shows `high`, `med`, or `low`.
+- No Route column in per-severity tables -- the route appears only in the Actionable Findings table.
+- Detail line (per finding, as needed) -- keep the scannable line short; put the why-it-matters + fix in a per-finding detail line keyed by stable `#`: `- **#N** -- <why it matters + what response it needs>`.
+- Actionable Findings section -- include when the actionable queue is non-empty.
+- Pre-existing section -- separate table, no confidence column.
+- Coverage section -- suppressed count, residual risks, testing gaps.
+- Summary uses blockquotes for verdict, reasoning, and fix order.
+- Horizontal rule (`---`) separates findings from verdict.
+- `###` headers for each section.

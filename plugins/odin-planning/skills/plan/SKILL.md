@@ -34,11 +34,11 @@ description: 'Use when a user commits to a direction and asks to plan, brief, re
 11. **Declare done.** Report the written file path and confirm that type, tier, research checks, acknowledgment, leading answer, and sourced references are all present. Done when: the file path is reported and all checks confirmed present.
 
 ## Failure and recovery
-- **No direction or name supplied.** Skill stops. No plan is written.
-- **Research read failure.** Log the failure. Continue with remaining research streams. If all streams fail, write the plan with an explicit "unverified" section listing every failed check.
-- **File write failure.** Do not write a partial file. Report the error and the rollback: no artifact is left behind.
-- **User withholds acknowledgment.** Skill stops. No file is written. Report the blocked state.
-- **No research findings.** Write the plan with a "Sparse" marker and an explicit list of what was checked and found empty.
+- No direction or name supplied. Skill stops. No plan is written.
+- Research read failure. Log the failure. Continue with remaining research streams. If all streams fail, write the plan with an explicit "unverified" section listing every failed check.
+- File write failure. Do not write a partial file. Report the error and the rollback: no artifact is left behind.
+- User withholds acknowledgment. Skill stops. No file is written. Report the blocked state.
+- No research findings. Write the plan with a "Sparse" marker and an explicit list of what was checked and found empty.
 
 ## Output
 A file at `plans/{type}-{descriptive-name}.md` (or `-{date}.md` on collision) containing the type-correct answer first, then classified type and tier, sourced metrics, open questions, and references — not done until the user acknowledges the context brief.

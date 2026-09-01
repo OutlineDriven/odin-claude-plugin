@@ -48,12 +48,12 @@ Optional, supplied by the user when known: a human-readable project name (otherw
 9. **Present startup instructions.** Tell the user how to start: open the repository in VS Code and select "Reopen in Container", or run `devcontainer up --workspace-folder .`, or run `.devcontainer/install.sh self-install` to add the `devc` CLI helper to PATH. Do not claim the container was built or launched unless a build or launch was actually performed. **Done when:** VS Code and CLI startup instructions are delivered with no false build/launch claim.
 
 ## Failure and recovery
-- **Existing devcontainer.** If `.devcontainer/` already exists, stop without writing. Report that this skill only adds a new devcontainer and that existing configuration should be edited directly.
-- **No language detected.** If none of Python, Node/TypeScript, Rust, or Go is detected, stop without writing. Report which manifests were checked and ask the user which language to target.
-- **Unresolvable placeholder.** If a project name cannot be inferred from any manifest and the user did not supply one, stop before writing files that would still contain `{{PROJECT_NAME}}` or `{{PROJECT_SLUG}}`. Ask for the name; do not emit unresolved placeholders.
-- **Invalid generated JSON.** If `devcontainer.json` fails validation after merging, do not present it. Re-derive the merged configuration from the per-language segments and re-validate before presenting.
-- **Partial-result rule.** Either all five files are written with all placeholders resolved and validation passing, or no file is written. Never leave a partial `.devcontainer/` tree.
-- **Rollback.** Because the side effect is local file creation under `.devcontainer/`, recovery from any failure is removing the partially written `.devcontainer/` directory and re-running from step 1.
+- Existing devcontainer. If `.devcontainer/` already exists, stop without writing. Report that this skill only adds a new devcontainer and that existing configuration should be edited directly.
+- No language detected. If none of Python, Node/TypeScript, Rust, or Go is detected, stop without writing. Report which manifests were checked and ask the user which language to target.
+- Unresolvable placeholder. If a project name cannot be inferred from any manifest and the user did not supply one, stop before writing files that would still contain `{{PROJECT_NAME}}` or `{{PROJECT_SLUG}}`. Ask for the name; do not emit unresolved placeholders.
+- Invalid generated JSON. If `devcontainer.json` fails validation after merging, do not present it. Re-derive the merged configuration from the per-language segments and re-validate before presenting.
+- Partial-result rule. Either all five files are written with all placeholders resolved and validation passing, or no file is written. Never leave a partial `.devcontainer/` tree.
+- Rollback. Because the side effect is local file creation under `.devcontainer/`, recovery from any failure is removing the partially written `.devcontainer/` directory and re-running from step 1.
 
 ## Output
 Five files under the repository's `.devcontainer/` (Dockerfile, devcontainer.json, post_install.py, .zshrc, install.sh) with all placeholders resolved, all detected languages represented without duplicate configuration, a composed postCreateCommand, explicit security mounts and token forwarding, and re-grounded toolchain versions and reviewed privileges, plus a short report of detected languages, chosen versions and privilege set, and VS Code and CLI startup instructions, ordered detect → infer → generate → re-ground → merge → compose → validate → present, with no false build/launch claim.

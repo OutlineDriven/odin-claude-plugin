@@ -87,12 +87,12 @@ hypothesis_backlog:      # remaining hypotheses
 
 Evaluate before each new experiment. Stop on the first that trips:
 
-- **Target reached.** Primary metric meets the defined target.
-- **Max iterations.** Total experiments >= configured cap.
-- **Max wall-hours.** Wall-clock since `started_at` exceeds the cap.
-- **Plateau.** No improvement for N consecutive experiments (N configurable, default 5).
-- **Judge budget exhausted.** Cumulative judge spend >= cap (when using judge mode).
-- **Empty backlog.** No hypotheses remain and no new ones can be generated.
+- Target reached. Primary metric meets the defined target.
+- Max iterations. Total experiments >= configured cap.
+- Max wall-hours. Wall-clock since `started_at` exceeds the cap.
+- Plateau. No improvement for N consecutive experiments (N configurable, default 5).
+- Judge budget exhausted. Cumulative judge spend >= cap (when using judge mode).
+- Empty backlog. No hypotheses remain and no new ones can be generated.
 
 ## Judge rubric (for qualitative metrics)
 

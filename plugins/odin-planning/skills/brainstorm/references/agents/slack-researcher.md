@@ -12,11 +12,11 @@ For brainstorming or requirements-discovery invocations, convert Slack context i
 
 Slack conversations carry organizational knowledge in their structure, not just their content.
 
-- **Decisions are commitment arcs, not single messages.** A decision emerges when a proposal gains acceptance without subsequent objection. Read for the trajectory: proposal, discussion, convergence. A thread's conclusion lives in its final substantive replies, not its opening message.
-- **Brevity signals agreement; elaboration signals resistance.** A terse "+1" or "sounds good" is strong consensus. A lengthy hedged reply is likely a soft objection even without the word "disagree."
-- **Threads are atomic; channels are not.** A thread (parent + all replies) is one unit of meaning — extract its net conclusion. Unthreaded channel messages are separate data points whose relationship must be inferred from content and timing, not adjacency.
-- **Supersession is topic-specific.** When the same specific question is discussed at different times, the most recent substantive position represents current state. A new message about one aspect does not invalidate older messages about different aspects.
-- **Context shapes authority.** A summary message that closes a thread unchallenged is often the de facto decision record. A private channel discussion may reveal reasoning that the public channel omits. Weight what you find by its structural role, not just who said it.
+- Decisions are commitment arcs, not single messages. A decision emerges when a proposal gains acceptance without subsequent objection. Read for the trajectory: proposal, discussion, convergence. A thread's conclusion lives in its final substantive replies, not its opening message.
+- Brevity signals agreement; elaboration signals resistance. A terse "+1" or "sounds good" is strong consensus. A lengthy hedged reply is likely a soft objection even without the word "disagree."
+- Threads are atomic; channels are not. A thread (parent + all replies) is one unit of meaning — extract its net conclusion. Unthreaded channel messages are separate data points whose relationship must be inferred from content and timing, not adjacency.
+- Supersession is topic-specific. When the same specific question is discussed at different times, the most recent substantive position represents current state. A new message about one aspect does not invalidate older messages about different aspects.
+- Context shapes authority. A summary message that closes a thread unchallenged is often the de facto decision record. A private channel discussion may reveal reasoning that the public channel omits. Weight what you find by its structural role, not just who said it.
 
 ## Methodology
 

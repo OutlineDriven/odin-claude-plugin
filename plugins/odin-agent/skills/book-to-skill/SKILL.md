@@ -59,12 +59,12 @@ description: 'Use when the user names one book, course, paper, or source documen
 One skill per run; another source is another run. Paraphrase the source; do not paste it. The skill, not the book, is the source of truth when the skill runs — keep it runnable without the source in context.
 
 ## Failure and recovery
-- **Source unopenable.** A file the agent cannot open stops the run; name the file. This skill owns no converter and does not invent content for a source it cannot read.
-- **Fewer than three ordered actions.** Not a failure — classify as reference and proceed with the reference shape.
-- **Validation check fails.** Fix the offending field or link and re-run step 8. Do not claim done while any check is red.
-- **Probe lands wrong.** Adjust the `description` and re-probe. Never mark done with a misrouting probe; a wrong negative probe is as blocking as a wrong positive one.
-- **Partial result.** If the run stops mid-procedure, the written files are incomplete. Either complete the procedure or delete the target directory as rollback. Do not leave a half-written skill that parses as valid.
-- **Rollback.** Delete the target skill directory. No artifact outside that directory is touched, so deletion is a complete recovery.
+- Source unopenable. A file the agent cannot open stops the run; name the file. This skill owns no converter and does not invent content for a source it cannot read.
+- Fewer than three ordered actions. Not a failure — classify as reference and proceed with the reference shape.
+- Validation check fails. Fix the offending field or link and re-run step 8. Do not claim done while any check is red.
+- Probe lands wrong. Adjust the `description` and re-probe. Never mark done with a misrouting probe; a wrong negative probe is as blocking as a wrong positive one.
+- Partial result. If the run stops mid-procedure, the written files are incomplete. Either complete the procedure or delete the target directory as rollback. Do not leave a half-written skill that parses as valid.
+- Rollback. Delete the target skill directory. No artifact outside that directory is touched, so deletion is a complete recovery.
 
 ## Output
 A self-contained `SKILL.md` (and optional `references/<topic>.md`) under the chosen target directory, carrying an attribution line and passing all four validation checks and the probe set — the report states the classification, chosen name, target path, validation results, and probe results (positive and negative).

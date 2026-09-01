@@ -200,17 +200,12 @@ Type size scale: five steps (xs / sm / base / lg / xl) with a single ratio, 1.25
 
 ## 4. Layout patterns
 
-**Container queries over breakpoints.** Component CSS sizes itself by container, not viewport. A card placed in a 280px sidebar collapses to single-column without the parent caring; placed in a 960px main column it expands. Reusability follows.
-
-**Subgrid for nested grids.** Subgrid is Widely Available as of March 15 2026: preserves alignment of grandchild grids against the root column tracks without re-declaring template columns. Use whenever a grandchild's columns must align to the grandparent's.
-
-**`:has()` for parent-state styling.** `.card:has(:focus-visible)`, `.form:has(:invalid)`, `.row:has([aria-current])`: declarative parent reactions that previously required JS state mirroring. Fewer event handlers, fewer race conditions, fewer tests.
-
-**`text-wrap: balance` for headlines.** Automatic visual balance on text blocks of ≤6 lines. Apply globally to `h1`, `h2`, and `.lede`-class blockquotes; do not apply to body paragraphs (browsers cap balanced blocks for performance and the cost on a long article is real).
-
-**`color-mix()` for state variants.** Hover, pressed, disabled, focus-ring tints all compose from the base accent via `color-mix(in oklch, ...)`. The token surface stays small; the variants stay perceptually consistent.
-
-**Breakpoint-free responsive grid.** `grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))` produces card layouts that reflow without media queries. The card decides its own minimum width; the grid decides how many fit. Pair with `gap` for spacing instead of margins.
+- Container queries over breakpoints. Component CSS sizes itself by container, not viewport. A card placed in a 280px sidebar collapses to single-column without the parent caring; placed in a 960px main column it expands. Reusability follows.
+- Subgrid for nested grids. Subgrid is Widely Available as of March 15 2026: preserves alignment of grandchild grids against the root column tracks without re-declaring template columns. Use whenever a grandchild's columns must align to the grandparent's.
+- `:has()` for parent-state styling. `.card:has(:focus-visible)`, `.form:has(:invalid)`, `.row:has([aria-current])`: declarative parent reactions that previously required JS state mirroring. Fewer event handlers, fewer race conditions, fewer tests.
+- `text-wrap: balance` for headlines. Automatic visual balance on text blocks of ≤6 lines. Apply globally to `h1`, `h2`, and `.lede`-class blockquotes; do not apply to body paragraphs (browsers cap balanced blocks for performance and the cost on a long article is real).
+- `color-mix()` for state variants. Hover, pressed, disabled, focus-ring tints all compose from the base accent via `color-mix(in oklch, ...)`. The token surface stays small; the variants stay perceptually consistent.
+- Breakpoint-free responsive grid. `grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))` produces card layouts that reflow without media queries. The card decides its own minimum width; the grid decides how many fit. Pair with `gap` for spacing instead of margins.
 
 ## 4.5 Forms patterns
 

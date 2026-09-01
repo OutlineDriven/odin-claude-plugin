@@ -34,9 +34,9 @@ The subject under analysis (a design, change, system, or decision) must be suppl
 
 ## Failure and recovery
 
-- **Missing subject**: stop and request the subject; never fabricate one.
-- **Seat drift** (another perspective blended mid-answer): re-anchor to the stability seat and remove the blended content. If the user wants a blended answer, this skill is the wrong one.
-- **Non-converged analysis**: return the partial stability findings with the unresolved point named. Never claim the done predicate holds when blending occurred.
+- Missing subject: stop and request the subject; never fabricate one.
+- Seat drift (another perspective blended mid-answer): re-anchor to the stability seat and remove the blended content. If the user wants a blended answer, this skill is the wrong one.
+- Non-converged analysis: return the partial stability findings with the unresolved point named. Never claim the done predicate holds when blending occurred.
 
 ## Output
 

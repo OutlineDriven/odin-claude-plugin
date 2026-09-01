@@ -24,11 +24,11 @@ Rejection criteria:
 - too expensive relative to likely value
 - already covered by existing workflows or docs
 - interesting but better handled separately, not as a product improvement
-- **unjustified — no articulated basis** (subagent failed to provide `direct:`, `external:`, or `reasoned:` justification, or the stated basis does not actually support the claimed move)
-- **basis refuted by verification** (the verifier found a cited quote absent, prior art mischaracterized, or a reasoned argument unsound — and the orchestrator concurs)
-- **below ambition floor** (fails the meeting-test: would not warrant team discussion — except when tactical focus signals detected, in which case this criterion is waived)
-- **subject-replacement** (abandons or replaces the subject of ideation rather than operating on it)
-- **scope overrun** (expands beyond the asked scope rather than ideating within it). Allowed only when the basis explicitly justifies the expansion; default is reject or downgrade.
+- unjustified, no articulated basis (subagent failed to provide `direct:`, `external:`, or `reasoned:` justification, or the stated basis does not actually support the claimed move)
+- basis refuted by verification (the verifier found a cited quote absent, prior art mischaracterized, or a reasoned argument unsound, and the orchestrator concurs)
+- below ambition floor (fails the meeting-test: would not warrant team discussion, except when tactical focus signals detected, in which case this criterion is waived)
+- subject-replacement (abandons or replaces the subject of ideation rather than operating on it)
+- scope overrun (expands beyond the asked scope rather than ideating within it). Allowed only when the basis explicitly justifies the expansion; default is reject or downgrade.
 
 Score survivors using a consistent rubric weighing: groundedness in stated context, **basis strength** (`direct:` > `external:` > `reasoned:`; none excluded, but direct-evidence ideas score higher all else equal), expected value, novelty, pragmatism, leverage on future work, implementation burden, overlap with stronger ideas, and **axis spread** (when Phase 1.5 produced an axis list) — survivor sets that cover the topic's surface outscore sets that cluster on one axis, all else equal.
 

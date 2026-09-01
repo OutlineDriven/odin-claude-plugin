@@ -238,11 +238,11 @@ No shared module state for request-scoped data. A Node module's top-level `let` 
 
 ## 8. State management
 
-- **Zustand** (module-first) — preferred for cross-component shared state. Selectors are scoped, re-renders are surgical. The default for non-trivial client state.
-- **Jotai** (atom-first) — preferred when state is granular and read-mostly. One atom per cell of state; consumers subscribe atom-by-atom.
-- **TanStack Query** — server-state cache; the default for any fetched data. Pair with Server Actions for mutations.
-- **Avoid Redux** unless team-size and complexity demand it. The boilerplate-to-value ratio is wrong for most surfaces under a Zustand store.
-- **Avoid Context for high-frequency updates.** Context re-renders all consumers on every value change; Zustand selectors and Jotai atoms scope the re-render to the actual reader.
+- Zustand (module-first) — preferred for cross-component shared state. Selectors are scoped, re-renders are surgical. The default for non-trivial client state.
+- Jotai (atom-first) — preferred when state is granular and read-mostly. One atom per cell of state; consumers subscribe atom-by-atom.
+- TanStack Query — server-state cache; the default for any fetched data. Pair with Server Actions for mutations.
+- Avoid Redux unless team-size and complexity demand it. The boilerplate-to-value ratio is wrong for most surfaces under a Zustand store.
+- Avoid Context for high-frequency updates. Context re-renders all consumers on every value change; Zustand selectors and Jotai atoms scope the re-render to the actual reader.
 
 ```tsx
 // Zustand store — module-first, selector-scoped.
@@ -256,15 +256,15 @@ const count = useStore((s) => s.count); // re-renders only when count changes
 
 ## 9. Forbidden patterns
 
-- **Redux for simple state.** Over-engineering by default; the action-reducer-thunk surface costs more than it earns under a single store. Reach for Zustand or Jotai first.
-- **Manual `useMemo` / `useCallback` with React Compiler enabled.** The compiler does this. Manual memoization is dead code that obscures the actual call graph and adds noise to diffs.
-- **`useEffect` data-fetch in RSC apps.** Use Server Actions or RSC fetch. `useEffect` for fetching is a 2020-era pattern and shows up as a slop tell on every "AI-built React app" anti-pattern catalogue.
-- **`'use client'` on the root layout or page.** Defeats RSC streaming; ships every leaf to the browser. The directive is leaf-level — push it as deep as possible.
-- **Hardcoded hex / RGB values in component code.** Tokens only. A `git grep '#[0-9a-f]\{3,8\}' src/components/` should return zero matches.
-- **Default Tailwind palette utilities (`bg-blue-500`, `text-gray-700`).** The default ramp is the slop tell. Reference the `@theme` tokens by name (`bg-accent`, `text-default`) so a direction change rolls through the whole surface.
-- **Mixing Tailwind v3 JS config with v4 CSS-first config.** Pick one; the bridge is more confusing than either pure path.
-- **`transition: all` in component CSS.** Animates layout, color, and transform together; jank guaranteed. Name the properties — `transition: opacity 120ms ease, transform 120ms ease`.
-- **Layout reads in render** (`getBoundingClientRect`, `offsetHeight`, `offsetWidth`, `scrollTop` called during a render or commit phase). Forces synchronous layout and breaks concurrent rendering. Read inside `useLayoutEffect` or after `requestAnimationFrame`.
+- Redux for simple state. Over-engineering by default; the action-reducer-thunk surface costs more than it earns under a single store. Reach for Zustand or Jotai first.
+- Manual `useMemo` / `useCallback` with React Compiler enabled. The compiler does this. Manual memoization is dead code that obscures the actual call graph and adds noise to diffs.
+- `useEffect` data-fetch in RSC apps. Use Server Actions or RSC fetch. `useEffect` for fetching is a 2020-era pattern and shows up as a slop tell on every "AI-built React app" anti-pattern catalogue.
+- `'use client'` on the root layout or page. Defeats RSC streaming; ships every leaf to the browser. The directive is leaf-level — push it as deep as possible.
+- Hardcoded hex / RGB values in component code. Tokens only. A `git grep '#[0-9a-f]\{3,8\}' src/components/` should return zero matches.
+- Default Tailwind palette utilities (`bg-blue-500`, `text-gray-700`). The default ramp is the slop tell. Reference the `@theme` tokens by name (`bg-accent`, `text-default`) so a direction change rolls through the whole surface.
+- Mixing Tailwind v3 JS config with v4 CSS-first config. Pick one; the bridge is more confusing than either pure path.
+- `transition: all` in component CSS. Animates layout, color, and transform together; jank guaranteed. Name the properties — `transition: opacity 120ms ease, transform 120ms ease`.
+- Layout reads in render (`getBoundingClientRect`, `offsetHeight`, `offsetWidth`, `scrollTop` called during a render or commit phase). Forces synchronous layout and breaks concurrent rendering. Read inside `useLayoutEffect` or after `requestAnimationFrame`.
 
 ## 10. Cite-and-defer
 

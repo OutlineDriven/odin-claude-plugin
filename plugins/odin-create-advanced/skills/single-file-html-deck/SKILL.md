@@ -87,11 +87,12 @@ description: 'Use when an explicit request asks to create a Sentry presentation,
 10. **Deliver output.** Copy or move the built single HTML file to the requested location. Report the file path, slide count, and QA pass results. Done when: the file is at the requested location and the report is returned.
 
 ## Failure and recovery
-- **Missing required inputs.** Stop immediately. Report which inputs are missing. Do not proceed with defaults or invented content.
-- **No real data for charts.** If the user requests charts but provides no data, produce text-only slides. Do not fabricate placeholder datasets.
-- **Build fails.** Diagnose the error. If it is a dependency issue, retry with `pnpm install --frozen-lockfile`. If it is a code error, fix and rebuild. Report persistent failures.
-- **QA finds blocking issues.** Report each issue. Do not deliver the deck as done. Deliver it as partial with blockers listed, or wait for user resolution.
-- **Partial result rule.** A deck with keyboard navigation, Sentry branding, and unresolved QA blockers is a partial result, not a successful delivery. Label it explicitly.
+
+- Missing required inputs: stop immediately. Report which inputs are missing. Do not proceed with defaults or invented content.
+- No real data for charts: if the user requests charts but provides no data, produce text-only slides. Do not fabricate placeholder datasets.
+- Build fails: diagnose the error. If it is a dependency issue, retry with `pnpm install --frozen-lockfile`. If it is a code error, fix and rebuild. Report persistent failures.
+- QA finds blocking issues: report each issue. Do not deliver the deck as done. Deliver it as partial with blockers listed, or wait for user resolution.
+- Partial result rule: a deck with keyboard navigation, Sentry branding, and unresolved QA blockers is a partial result, not a successful delivery. Label it explicitly.
 
 ## Output
 A single self-contained HTML file: full slide deck with keyboard navigation, Recharts visualizations using only real data (if provided), Sentry branding (colors, typography, logo), no external runtime dependencies, and QA pass results listing any issues and their resolution status.

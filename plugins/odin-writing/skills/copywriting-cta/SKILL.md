@@ -99,23 +99,23 @@ Optional: free-text constraints the user volunteers (length limit, brand voice, 
 4. **Anti-pattern warnings.** After the recommendation, list 2-3 anti-patterns the user is at risk of given their inputs, as a contrarian check. Failure modes to call out by name: multiple competing CTAs, generic "Subscribe for more" / "Learn More", mechanism mismatch (urgency/scarcity where none exists), SaaS landing-page voice on a personal essay, proofless ask, "Book a Demo" on TOFU content, open-ended reply questions on social. Done when: 2-3 anti-patterns are listed as a contrarian check.
 
 5. **Enforce operating principles during composition:** Done when: operating principles are enforced during composition.
-   - **One primary CTA per post.** Multiple competing CTAs is the dominant failure mode.
-   - **Match the voice of the publication.** A personal-essay footer that reads like a SaaS landing page collapses credibility.
-   - **Specificity beats cleverness.** "Get one essay a week on indie filmmaking" beats "Subscribe to our awesome newsletter." The "I want to ___" completion test is the cleanest filter for button copy.
-   - **Proof co-located with the ask.** Place the honest signal (subscriber count, testimonial, logos, star count) inside or adjacent to the CTA block.
-   - **Mechanisms are tools, not garnish.** Add urgency, scarcity, FOMO, or discount only when the context genuinely supports them; theatrical mechanisms erode trust.
-   - **Push back on bad asks.** If the user wants a CTA that will fail (e.g., "Book a Demo" at the bottom of a beginner tutorial for first-time visitors), say so, propose the alternative, explain why, then deliver the original only with the failure mode flagged.
+   - One primary CTA per post. Multiple competing CTAs is the dominant failure mode.
+   - Match the voice of the publication. A personal-essay footer that reads like a SaaS landing page collapses credibility.
+   - Specificity beats cleverness. "Get one essay a week on indie filmmaking" beats "Subscribe to our awesome newsletter." The "I want to ___" completion test is the cleanest filter for button copy.
+   - Proof co-located with the ask. Place the honest signal (subscriber count, testimonial, logos, star count) inside or adjacent to the CTA block.
+   - Mechanisms are tools, not garnish. Add urgency, scarcity, FOMO, or discount only when the context genuinely supports them; theatrical mechanisms erode trust.
+   - Push back on bad asks. If the user wants a CTA that will fail (e.g., "Book a Demo" at the bottom of a beginner tutorial for first-time visitors), say so, propose the alternative, explain why, then deliver the original only with the failure mode flagged.
 
 6. **Language and style.** Adapt copy to the user's stated brand voice, the article's language (never default to English), the publication's existing cadence, and the reader's expertise level. Honor formality cues (tu/vous, du/Sie) and flag the choice. If non-English, translate the content section but keep structure headings in English. Done when: copy is adapted to brand voice, language, cadence, and expertise level with formality cues flagged.
 
 7. **Offer next moves.** Suggest 2-3 follow-ups: steelman the opposite CTA, variant for a different audience or platform, or end-to-end article review for CTA-supporting signals. Done when: 2-3 follow-ups are suggested.
 
 ## Failure and recovery
-- **Missing inputs.** If any of the five required inputs cannot be obtained, stop and report which input is missing rather than guessing. A CTA designed on assumed inputs produces the universal failure mode (generic "Subscribe for more").
-- **Multiple primary objectives.** If the user insists on more than one primary objective after pushback, flag it as a failure mode, deliver the strongest single-primary recommendation, and note the competing objectives as anti-patterns.
-- **No valid archetype.** If the input combination maps to no archetype (e.g., product/demo on a personal blog where the author is not the product), report the conflict and propose the closest valid alternative. Do not fabricate an archetype.
-- **Partial-result rule.** No partial recommendation is returned. Either the full structure is composed or the blocked result is returned naming the missing input.
-- **Non-mutation.** This skill writes nothing outside the conversation. There is no rollback; recovery is re-running the interview with corrected inputs.
+- Missing inputs. If any of the five required inputs cannot be obtained, stop and report which input is missing rather than guessing. A CTA designed on assumed inputs produces the universal failure mode (generic "Subscribe for more").
+- Multiple primary objectives. If the user insists on more than one primary objective after pushback, flag it as a failure mode, deliver the strongest single-primary recommendation, and note the competing objectives as anti-patterns.
+- No valid archetype. If the input combination maps to no archetype (e.g., product/demo on a personal blog where the author is not the product), report the conflict and propose the closest valid alternative. Do not fabricate an archetype.
+- Partial-result rule. No partial recommendation is returned. Either the full structure is composed or the blocked result is returned naming the missing input.
+- Non-mutation. This skill writes nothing outside the conversation. There is no rollback; recovery is re-running the interview with corrected inputs.
 
 ## Output
 A single in-conversation recommendation containing: archetype selection with rationale, copy (headline, body, button, risk reversal), form (placement, visual weight, layout, proof), mechanism, A/B test plan, WCAG 2.2 accessibility check, 2-3 anti-pattern warnings, and 2-3 suggested next moves.

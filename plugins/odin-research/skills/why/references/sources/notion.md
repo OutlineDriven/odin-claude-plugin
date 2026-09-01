@@ -38,12 +38,12 @@ Use the Notion MCP.
 
 ## Common pitfalls
 
-- **Outdated docs.** Specs are often written before implementation and not updated; the doc may describe a plan that changed. Cross-check against the actual PR.
-- **Doc vs. reality drift.** A spec may say "we'll do X" but the code actually does Y. Flag the divergence; the synthesizer will surface the contradiction.
-- **Boilerplate templates.** Some orgs require a "Why" section that gets filled with fluff. Look for specificity.
-- **Unlinked docs.** The most relevant doc may not be linked from anywhere. Broad keyword searches help.
-- **Multiple drafts.** If a topic has multiple docs, find the one that was finalized or most recently updated. Check dates.
-- **Access-restricted pages.** If you can't access a page, note it as a gap.
+- Outdated docs. Specs are often written before implementation and not updated; the doc may describe a plan that changed. Cross-check against the actual PR.
+- Doc vs. reality drift. A spec may say "we'll do X" but the code actually does Y. Flag the divergence; the synthesizer will surface the contradiction.
+- Boilerplate templates. Some orgs require a "Why" section that gets filled with fluff. Look for specificity.
+- Unlinked docs. The most relevant doc may not be linked from anywhere. Broad keyword searches help.
+- Multiple drafts. If a topic has multiple docs, find the one that was finalized or most recently updated. Check dates.
+- Access-restricted pages. If you can't access a page, note it as a gap.
 
 ## What to return
 

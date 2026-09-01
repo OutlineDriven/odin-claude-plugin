@@ -24,14 +24,14 @@ description: 'Use when asked to design a module interface, seam, or testable bou
 
 Use these terms exactly. Do not substitute "component," "service," "API," or "boundary."
 
-- **Module** — anything with an interface and an implementation: a function, class, package, crate, or tier-spanning slice.
-- **Interface** — everything a caller must know to use the module correctly: type signature, invariants, ordering constraints, error modes, required configuration, and performance characteristics.
-- **Implementation** — the body of code inside a module.
-- **Depth** — power at the interface: the amount of behaviour a caller can exercise per unit of interface they must learn. Deep = much behaviour behind a small interface; shallow = interface nearly as complex as implementation.
-- **Seam** — a place where behaviour can be altered without editing in that place. The location at which a module's interface lives; choosing where to put the seam is a design decision separate from the implementation.
-- **Adapter** — a concrete thing that satisfies an interface at a seam; describes role, not substance.
-- **Leverage** — what callers get from depth: more capability per unit of interface learned.
-- **Locality** — what maintainers get from depth: change, bugs, and verification concentrate in one place rather than spreading across callers.
+- Module -- anything with an interface and an implementation: a function, class, package, crate, or tier-spanning slice.
+- Interface -- everything a caller must know to use the module correctly: type signature, invariants, ordering constraints, error modes, required configuration, and performance characteristics.
+- Implementation -- the body of code inside a module.
+- Depth -- power at the interface: the amount of behaviour a caller can exercise per unit of interface they must learn. Deep = much behaviour behind a small interface; shallow = interface nearly as complex as implementation.
+- Seam -- a place where behaviour can be altered without editing in that place. The location at which a module's interface lives; choosing where to put the seam is a design decision separate from the implementation.
+- Adapter -- a concrete thing that satisfies an interface at a seam; describes role, not substance.
+- Leverage -- what callers get from depth: more capability per unit of interface learned.
+- Locality -- what maintainers get from depth: change, bugs, and verification concentrate in one place rather than spreading across callers.
 
 Before designing, classify the target's dependencies. The category determines how the deepened module is tested across its seam.
 

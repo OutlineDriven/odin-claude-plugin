@@ -30,12 +30,12 @@ description: 'Use when a load-bearing claim is unverified, a plausible statement
 6. **Return the report.** For each claim, include the claim text, verdict, source citation or flag reason, and the direction(s) it passed or failed. In artifact mode, applied fixes appear as corrected text with their source; flagged claims appear with the reason and any competing readings. **Done when:** the report contains every claim with its verdict and sources.
 
 ## Failure and recovery
-- **No source reachable.** Produce `flagged-no-source` for that direction. Do not assert the claim true or false.
-- **Ambiguous result.** Produce `flagged-judgment-call` with the competing readings. Do not resolve it.
-- **Claim is mechanically wrong.** In artifact mode, apply `corrected` with a cited fix to the local artifact; in standalone-claim mode, return the cited correction as a chat-only suggestion. A fix that cannot be backed by a cited source is not applied — the original text stands and the claim is flagged.
-- **Ambiguous fiction-vs-assertion.** Flag rather than fix; the hardest call is left to the human.
-- **Non-converged.** If any claim cannot be given a verdict in both directions, return the partial report with every unresolved claim listed as `incomplete`; never present an unchecked claim as verified.
-- **No assertions found.** A scan that finds no reality-grounded assertions changes nothing and reports that fact.
+- No source reachable. Produce `flagged-no-source` for that direction. Do not assert the claim true or false.
+- Ambiguous result. Produce `flagged-judgment-call` with the competing readings. Do not resolve it.
+- Claim is mechanically wrong. In artifact mode, apply `corrected` with a cited fix to the local artifact; in standalone-claim mode, return the cited correction as a chat-only suggestion. A fix that cannot be backed by a cited source is not applied — the original text stands and the claim is flagged.
+- Ambiguous fiction-vs-assertion. Flag rather than fix; the hardest call is left to the human.
+- Non-converged. If any claim cannot be given a verdict in both directions, return the partial report with every unresolved claim listed as `incomplete`; never present an unchecked claim as verified.
+- No assertions found. A scan that finds no reality-grounded assertions changes nothing and reports that fact.
 
 ## Output
 A per-claim report with claim text, verdict, source or flag reason, direction-a and direction-b pass/fail/flagged status, and correction if applicable. In artifact mode, the report reads as fixes versus flags: applied fixes appear as corrected text with their source, flagged claims appear with the reason and competing readings. A scan that found no reality-grounded assertions returns that fact and changes nothing. When every claim is `confirmed` and no corrections apply, return a single `all-verified` summary.

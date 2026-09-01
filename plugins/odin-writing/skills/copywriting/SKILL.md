@@ -95,13 +95,13 @@ The never-write set, absolute unless a voice file names one as a signature: delv
 Three to five concepts. Each concept has three parts: (1) a brand principle, one word or short phrase; (2) two or three adjectives naming how it shows up in writing; (3) a Do and Don't pair of real interface or page strings. The Don't side is the useful half: make it the plausible near-miss the team actually ships, not a strawman. Start from shipped copy, not brand values. Record locale and spelling convention, house spellings, and any word the brand uses deliberately that a generic list would flag. Name what the voice is not ("Confident, not boastful").
 
 ## Failure and recovery
-- **Invented audience or goal.** Copy written without a goal and value proposition reads well and solves the wrong problem. If a context field cannot be settled from files or the user, infer it and name the inference; never present an inference as a fact. Stop and ask only when a wrong guess makes the work useless or unsafe.
-- **Invented proof.** Never fabricate a number, testimonial, or statistic. Use `[PLACEHOLDER: add proof: ...]` and let the user supply it.
-- **Locale or voice regression.** A US-spelling rewrite on an en-AU product ships as a regression across every string it touches. Check existing copy and the voice file before switching spelling or tone; a discovered voice outranks the word lists.
-- **Point-edit scope creep.** Do not turn a named point edit into a page audit; change only the target plus minimum connective tissue.
-- **Restoration over-reach.** Do not rebalance the argument or replace a clear lead with a cleverer one; fix named failures only.
-- **AI-ism reintroduced or specific dropped.** A rewrite that reintroduces an AI tell, or quietly drops a fact, number, or link from the original, is a regression; restore and rewrite again.
-- **Non-convergent result.** If the value proposition cannot be stated in one sentence, the copy is unfixable until it is clarified; report this blocked state with the unresolved value proposition rather than shipping copy that does not serve one.
+- Invented audience or goal. Copy written without a goal and value proposition reads well and solves the wrong problem. If a context field cannot be settled from files or the user, infer it and name the inference; never present an inference as a fact. Stop and ask only when a wrong guess makes the work useless or unsafe.
+- Invented proof. Never fabricate a number, testimonial, or statistic. Use `[PLACEHOLDER: add proof: ...]` and let the user supply it.
+- Locale or voice regression. A US-spelling rewrite on an en-AU product ships as a regression across every string it touches. Check existing copy and the voice file before switching spelling or tone; a discovered voice outranks the word lists.
+- Point-edit scope creep. Do not turn a named point edit into a page audit; change only the target plus minimum connective tissue.
+- Restoration over-reach. Do not rebalance the argument or replace a clear lead with a cleverer one; fix named failures only.
+- AI-ism reintroduced or specific dropped. A rewrite that reintroduces an AI tell, or quietly drops a fact, number, or link from the original, is a regression; restore and rewrite again.
+- Non-convergent result. If the value proposition cannot be stated in one sentence, the copy is unfixable until it is clarified; report this blocked state with the unresolved value proposition rather than shipping copy that does not serve one.
 - Partial results are never presented as done. The done predicate (free of AI-isms, matches the voice, fits the page type) must hold for every line handed back; lines that fail it are rewritten or withheld.
 
 ## Output

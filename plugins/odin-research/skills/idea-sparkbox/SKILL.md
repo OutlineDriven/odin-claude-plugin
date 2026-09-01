@@ -45,11 +45,11 @@ Park ideas and inspiration in short project cards. Organize them in a later pass
 6. **Report** per Output. Done when: the report is produced per the Output contract.
 
 ## Failure and recovery
-- **Not a project directory.** If the working directory or supplied root is not a project, cards stored there would not be project knowledge. Write nothing and report why.
-- **Unwritable target.** If `idea-sparkbox/` cannot be created or a card cannot be written, stop the pass. Cards already written remain; each card is independently valid. Report exactly which landed and which failed. Rollback: delete the card files this pass added; revert them via the project's version control if already committed.
-- **Untraceable item.** Drop and report an item that cannot be traced to the session or a user statement. Never store it as invented content.
-- **Rejected class.** Report any code, backlog, or divergence-class material that was rejected, with the reason. Never store it as a card.
-- **Nothing qualifies.** Report zero cards stored. Do not write placeholder cards to make the done predicate look satisfied.
+- Not a project directory. If the working directory or supplied root is not a project, cards stored there would not be project knowledge. Write nothing and report why.
+- Unwritable target. If `idea-sparkbox/` cannot be created or a card cannot be written, stop the pass. Cards already written remain; each card is independently valid. Report exactly which landed and which failed. Rollback: delete the card files this pass added; revert them via the project's version control if already committed.
+- Untraceable item. Drop and report an item that cannot be traced to the session or a user statement. Never store it as invented content.
+- Rejected class. Report any code, backlog, or divergence-class material that was rejected, with the reason. Never store it as a card.
+- Nothing qualifies. Report zero cards stored. Do not write placeholder cards to make the done predicate look satisfied.
 
 ## Output
 

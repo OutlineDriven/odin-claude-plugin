@@ -8,13 +8,13 @@ It is paired with a section contract (`brainstorm-sections.md`, etc.) that descr
 
 These hold regardless of which skill produced the artifact.
 
-- **YAML frontmatter at the top of the file.** Standard `---` delimited block containing the artifact's stable metadata (title, date, type, etc.: exact fields are per-skill, defined in the section contract).
-- **ASCII identifiers in anchors.** Markdown headings auto-generate anchors from the heading text. Keep headings ASCII so anchors are predictable (`#implementation-units`, not `#implementación-units`).
-- **Repo-relative paths for file references.** Always. Never absolute paths: they break portability across machines, worktrees, teammates.
-- **No HTML mixed in.** Keep the markdown pure. No `<div>`, no `<details>`, no inline `<style>`. If a layout idea only works as HTML, defer it to the HTML rendering. Markdown stays markdown.
-- **No fixed-width line wrapping.** Do not hard-wrap prose to a column (e.g. 80 chars). Write one sentence per line, or let each paragraph flow as a single line. The artifact is read rendered and shared, where fixed wraps add nothing and only produce noisy mid-sentence diffs; markdown joins soft line breaks within a paragraph, so wrapping never changes the rendered output.
-- **ODIN plan sections use stable headings.** For plan artifacts, render the required sections with exact ASCII headings so agents can find them by heading scan: `## Goal Capsule`, `## ODIN spec outline`, `## Planning Outline`, `## Implementation Units`, `## Verification Contract`, `## Definition of Done`, and optional `## Appendix`. Requirements-only artifacts omit the plan-only sections rather than emitting empty placeholders. These stable headings are the wayfinding contract.
-- **Goal Capsule is top-loaded.** It appears before ODIN spec outline and long appendices for fast orientation: not a hidden machine copy.
+- YAML frontmatter at the top of the file. Standard `---` delimited block containing the artifact's stable metadata (title, date, type, etc.: exact fields are per-skill, defined in the section contract).
+- ASCII identifiers in anchors. Markdown headings auto-generate anchors from the heading text. Keep headings ASCII so anchors are predictable (`#implementation-units`, not `#implementación-units`).
+- Repo-relative paths for file references. Always. Never absolute paths: they break portability across machines, worktrees, teammates.
+- No HTML mixed in. Keep the markdown pure. No `<div>`, no `<details>`, no inline `<style>`. If a layout idea only works as HTML, defer it to the HTML rendering. Markdown stays markdown.
+- No fixed-width line wrapping. Do not hard-wrap prose to a column (e.g. 80 chars). Write one sentence per line, or let each paragraph flow as a single line. The artifact is read rendered and shared, where fixed wraps add nothing and only produce noisy mid-sentence diffs; markdown joins soft line breaks within a paragraph, so wrapping never changes the rendered output.
+- ODIN plan sections use stable headings. For plan artifacts, render the required sections with exact ASCII headings so agents can find them by heading scan: `## Goal Capsule`, `## ODIN spec outline`, `## Planning Outline`, `## Implementation Units`, `## Verification Contract`, `## Definition of Done`, and optional `## Appendix`. Requirements-only artifacts omit the plan-only sections rather than emitting empty placeholders. These stable headings are the wayfinding contract.
+- Goal Capsule is top-loaded. It appears before ODIN spec outline and long appendices for fast orientation: not a hidden machine copy.
 
 ## Format principles
 

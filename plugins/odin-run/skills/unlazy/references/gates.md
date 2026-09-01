@@ -38,11 +38,13 @@ Box flips are earned, not written: `gate_check.py` flips a box only when the CHE
 
 ## Writing good gates
 
-- **State outcomes, not activities.** "All 8 planets clickable" is checkable. "Work on planet interaction" is not.
-- **Prefer runnable gates.** Every CHECK you write converts model-tokens of self-assessment into a free shell command. If you cannot think of a CHECK, ask whether the outcome is observable at all; if it is not, sharpen it.
-- **Make EXPECT decisive.** Match the line that can only appear on success (`8/8 passed`), not one that appears either way (`done`).
-- **Cap evidence.** gate-check records the deciding tail of output. When filling manual evidence by hand, quote the deciding lines or cite `file:line`, never paste a log. A gates file should stay readable in one screen per leaf, because it gets re-read often.
-- **Five to twelve gates per leaf** is the useful range. Two gates means the leaf is under-specified; twenty means the leaf should have been two leaves.
+| Rule | Guidance |
+|---|---|
+| State outcomes, not activities | "All 8 planets clickable" is checkable. "Work on planet interaction" is not. |
+| Prefer runnable gates | Every CHECK you write converts model-tokens of self-assessment into a free shell command. If you cannot think of a CHECK, ask whether the outcome is observable at all; if it is not, sharpen it. |
+| Make EXPECT decisive | Match the line that can only appear on success (`8/8 passed`), not one that appears either way (`done`). |
+| Cap evidence | gate-check records the deciding tail of output. When filling manual evidence by hand, quote the deciding lines or cite `file:line`, never paste a log. A gates file should stay readable in one screen per leaf, because it gets re-read often. |
+| Five to twelve gates per leaf | The useful range. Two gates means the leaf is under-specified; twenty means the leaf should have been two leaves. |
 
 ## Numbers rule
 

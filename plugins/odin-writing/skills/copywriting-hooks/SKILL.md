@@ -97,12 +97,12 @@ A hook's only job is to make the reader want sentence 2. It does that through on
 **Language handling.** If the audience is French, write in French and apply the _attaque journalistique_ register: concrete scene-setting, restrained tone, dated anchors, formal "vous" or restrained tutoiement. Do not translate American hype tropes literally ("You'll never believe..." becomes "Vous n'allez pas en croire vos yeux", which reads as scam in French); French marketing-skepticism is higher and high promises trigger _réactance_ faster. If English, default to direct-response register for marketing or tutorial content and longform register for essays and reported pieces. If bilingual, produce hooks in both languages and label clearly.
 
 ## Failure and recovery
-- **Missing brief.** If topic, audience, language, length, or publication venue is unclear and material, stop and ask before generating. Do not invent a brief.
-- **Anti-pattern match.** If a candidate matches the cull list, rewrite it before presenting. Never present a matched candidate.
-- **No genuine choice.** If the 3-4 options collapse to flavors of one technique, regenerate across different levers per the diversification rule before presenting.
-- **User says "more" or "none".** Produce 3 different hooks (different techniques), not new candidates for the same hooks.
-- **User says "blend 1A and 2B".** Write one combined hook and check in again before proceeding.
-- **Unverifiable statistic or quote.** If a candidate leans on a number or quote that cannot be cited accurately, replace it with a verifiable detail or cut the claim. Do not present an unsupported authority hook.
+- Missing brief. If topic, audience, language, length, or publication venue is unclear and material, stop and ask before generating. Do not invent a brief.
+- Anti-pattern match. If a candidate matches the cull list, rewrite it before presenting. Never present a matched candidate.
+- No genuine choice. If the 3-4 options collapse to flavors of one technique, regenerate across different levers per the diversification rule before presenting.
+- User says "more" or "none". Produce 3 different hooks (different techniques), not new candidates for the same hooks.
+- User says "blend 1A and 2B". Write one combined hook and check in again before proceeding.
+- Unverifiable statistic or quote. If a candidate leans on a number or quote that cannot be cited accurately, replace it with a verifiable detail or cut the claim. Do not present an unsupported authority hook.
 - Partial-result rule: never present fewer than 3 distinct options. If 3 distinct, non-anti-pattern hooks cannot be produced from the catalog, stop and report the blocker rather than presenting a narrowed set.
 - Non-mutation rule: nothing is written to disk or any external system; recovery is always regenerate-in-conversation.
 

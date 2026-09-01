@@ -59,14 +59,17 @@ When the user names a hot path and a benchmark, use full mode. When the user nam
 
 ## Failure and recovery
 
-**Full mode.** Exit 11 means no measurable or resolvable hotspot; exit 12 means no candidate or integrated result cleared 1.05x; exit 13 means all candidates changed behavior or repository checks failed; exit 14 means an approximation was not confirmed; exit 15 means the proposed commit mixes optimization concerns and must be split before retrying; exit 16 means a stopping limit ended promotion before a gate-cleared winner. Before commit, recover by restoring only the named target and removing only run-created candidate worktrees; retain append-only evidence and never revert an unrelated commit. A partial run is not success: append the exact terminal classification, commit nothing, and report the best measured result and blocking evidence. Resume only through the fingerprint match and fresh-baseline agreement in step 4.
+### Full mode
 
-**Quick mode.**
-- **Baseline unavailable.** Measurement tools are unavailable or the codebase cannot be profiled. Result: blocked. Do not proceed without baseline evidence.
-- **No bottleneck found.** Profiling reveals no measurable code-level bottleneck. Result: report uncertainty and whether environmental or statistical noise is suspected.
-- **Fix produces no measurable gain.** Improvement is within noise range of the baseline. Result: revert. Never keep a neutral change.
-- **Correctness regression.** Tests fail or behavior changes after the fix. Result: revert immediately. Correctness gates the metric.
-- **Fix exceeds available authority.** The bottleneck requires unavailable credentials, remote mutation, or infrastructure changes outside local write scope. Result: document the requirement for a future attempt. Do not widen scope.
+Exit 11 means no measurable or resolvable hotspot; exit 12 means no candidate or integrated result cleared 1.05x; exit 13 means all candidates changed behavior or repository checks failed; exit 14 means an approximation was not confirmed; exit 15 means the proposed commit mixes optimization concerns and must be split before retrying; exit 16 means a stopping limit ended promotion before a gate-cleared winner. Before commit, recover by restoring only the named target and removing only run-created candidate worktrees; retain append-only evidence and never revert an unrelated commit. A partial run is not success: append the exact terminal classification, commit nothing, and report the best measured result and blocking evidence. Resume only throug…
+
+### Quick mode
+
+- Baseline unavailable. Measurement tools are unavailable or the codebase cannot be profiled. Result: blocked. Do not proceed without baseline evidence.
+- No bottleneck found. Profiling reveals no measurable code-level bottleneck. Result: report uncertainty and whether environmental or statistical noise is suspected.
+- Fix produces no measurable gain. Improvement is within noise range of the baseline. Result: revert. Never keep a neutral change.
+- Correctness regression. Tests fail or behavior changes after the fix. Result: revert immediately. Correctness gates the metric.
+- Fix exceeds available authority. The bottleneck requires unavailable credentials, remote mutation, or infrastructure changes outside local write scope. Result: document the requirement for a future attempt. Do not widen scope.
 
 Partial-result rule (quick mode): reverted code leaves no trace. Keep a ledger entry (baseline, fix applied, before/after measurement, verdict) so discarded ideas are not re-profiled.
 

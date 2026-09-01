@@ -44,11 +44,10 @@ description: 'Use when the model is creating or refactoring a skill, faces a SKI
    **Done when:** the chosen axis is named and the conditions under which it fails are stated.
 
 4. **Reject anti-pattern splits.** Do not split on these patterns:
-   - **Topic-based splits where invocations do not cluster by topic.** Real tasks span 2-3 topics, forcing multiple loads. Savings are theoretical.
-   - **Splitting to hit a line target without a branching condition.** Without a branching condition, references load in parallel or always, providing no savings.
-   - **Rare-but-critical content in references.** References are optional by design; the model may skip them. If content is critical, it must be in `SKILL.md`. "Rare" and "critical" together usually means the skill is doing two jobs.
-   - **Cosmetic splits (examples, notes, tips files).** No load condition; either always loaded or never loaded.
-   **Done when:** every proposed split is classified as valid or rejected with a reason.
+   - Topic-based splits where invocations do not cluster by topic. Real tasks span 2-3 topics, forcing multiple loads. Savings are theoretical.
+   - Splitting to hit a line target without a branching condition. Without a branching condition, references load in parallel or always, providing no savings.
+   - Rare-but-critical content in references. References are optional by design; the model may skip them. If content is critical, it must be in `SKILL.md`. "Rare" and "critical" together usually means the skill is doing two jobs.
+   - Cosmetic splits (examples, notes, tips files). No load condition; either always loaded or never loaded.
 
 5. **Apply pointer hygiene to every reference.**
    - Name the user-visible signal that triggers the load. "If the user mentions snapshot tests" not "for testing concerns".
@@ -105,11 +104,11 @@ description: 'Use when the model is creating or refactoring a skill, faces a SKI
 
 ## Failure and recovery
 
-- **Triggering-disclosure conflation.** If the diagnosis conflates triggering with disclosure, surface the confusion as the first finding before recommending any structural change. Do not proceed with splitting until the distinction is clear.
-- **No sharp load condition.** If a proposed reference has no observable signal from user input that would trigger its load, keep the content inline in `SKILL.md`. Do not create references that always-load or never-load.
-- **Metrics unavailable.** If empirical eval data is not available, recommend instrumentation (design queries, run evals, collect metrics) before committing to a split. Do not split on intuition alone when the cost profile is unknown.
-- **Split increases total tokens.** If router prose added to `SKILL.md` outweighs the savings from splitting, revert to monolithic. Record the measured overhead as evidence for the monolith decision.
-- **Non-convergent architecture.** If repeated eval cycles show no stable architecture outperforming the monolith, stop and deliver the monolith with the eval evidence explaining why.
+- Triggering-disclosure conflation. If the diagnosis conflates triggering with disclosure, surface the confusion as the first finding before recommending any structural change. Do not proceed with splitting until the distinction is clear.
+- No sharp load condition. If a proposed reference has no observable signal from user input that would trigger its load, keep the content inline in `SKILL.md`. Do not create references that always-load or never-load.
+- Metrics unavailable. If empirical eval data is not available, recommend instrumentation (design queries, run evals, collect metrics) before committing to a split. Do not split on intuition alone when the cost profile is unknown.
+- Split increases total tokens. If router prose added to `SKILL.md` outweighs the savings from splitting, revert to monolithic. Record the measured overhead as evidence for the monolith decision.
+- Non-convergent architecture. If repeated eval cycles show no stable architecture outperforming the monolith, stop and deliver the monolith with the eval evidence explaining why.
 
 ## Output
 

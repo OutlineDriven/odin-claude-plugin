@@ -44,10 +44,13 @@ Enter only when the user supplies a seed and asks for random variation. Run docu
 
 ## Failure and recovery
 
-- **No document or sections supplied and none derivable**: request the document or section list before proceeding. Do not invent sections.
-- **Derivation produces no usable constraint** (e.g., all sections collapse to identical structure and no variation is possible): report the collision, present the raw measurements, and ask the user to supply replacement sections or a different target pattern.
-- **Seeded mode missing seed or random inputs**: request the missing input before proceeding. Do not substitute or generate defaults.
-- No partial results are accepted; a complete rhythm constraint is the minimum deliverable.
+| Failure | Recovery |
+|---|---|
+| No document or sections supplied and none derivable | Request the document or section list before proceeding. Do not invent sections. |
+| Derivation produces no usable constraint (e.g., all sections collapse to identical structure and no variation is possible) | Report the collision, present the raw measurements, and ask the user to supply replacement sections or a different target pattern. |
+| Seeded mode missing seed or random inputs | Request the missing input before proceeding. Do not substitute or generate defaults. |
+
+No partial results are accepted; a complete rhythm constraint is the minimum deliverable.
 
 ## Output
 
