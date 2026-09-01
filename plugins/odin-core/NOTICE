@@ -9,9 +9,12 @@ EveryInc/compound-engineering-plugin
 Source: https://github.com/EveryInc/compound-engineering-plugin/tree/a1f601f17137f648be439965f8fdd9123303de5d
 License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2025 Every
-Local adaptations: changed-route-browser-testing, diff-scoped-browser-qa, document-collaboration,
-  explainer-artifact, feedback-sweep, model-retuning, product-signal-pulse,
-  recorded-feedback-analysis, release-promotion, xcode-simulator-testing
+Local adaptations: autolearn, autopilot, brainstorm,
+  changed-route-browser-testing, commit, compound, diff-scoped-browser-qa,
+  doc-review, document-collaboration, explainer-artifact, feedback-sweep,
+  ideate, model-retuning, optimize, plan, pov, product-signal-pulse,
+  recorded-feedback-analysis, release-promotion, resolve-pr-feedback, review,
+  simplify, strategy, subagent-driven, work, worktree, xcode-simulator-testing
 
 EveryInc/compound-knowledge-plugin
 Source: https://github.com/EveryInc/compound-knowledge-plugin/tree/766942e9eaee5204adbfe180f1d0651ffecf2575/plugins/compound-knowledge
@@ -19,24 +22,56 @@ License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2026 Every, Inc.
 Local adaptations: knowledge-refresh, plan, readiness-assessment
 
+Jia-Ethan/github-solution-research
+Source: https://github.com/Jia-Ethan/github-solution-research
+License: MIT (https://opensource.org/licenses/MIT)
+Copyright: Copyright (c) 2026 Jia-Ethan
+Local adaptations: github-solution-research
+
+Leonxlnx/unlazy
+Source: https://github.com/Leonxlnx/unlazy/tree/ed9e8d2b5919698cf2c54bda270d507e10b69617
+License: MIT (https://opensource.org/licenses/MIT)
+Copyright: Copyright (c) 2026 Leonxlnx
+Local adaptations: unlazy
+
 LilMGenius/paperthin
 Source: https://github.com/LilMGenius/paperthin/tree/3bca079a51bcfff5dafb53d1d7f9f523d66ee317
 License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2026 LilMGenius
-Local adaptations: catchup, commit-economy, cross-lens-converge, cross-run-playbook, cycle-memo,
-  debloat-respect-richness, decision-rationale-gaps, framing-divergence-fanout, guardrail-carve-run,
-  instruction-understanding-gate, intent-proposal, land-contribution, next-best-action,
-  post-change-check-gate, release-gate, reorder-respect-deliberate, rewrite-denoise-v0,
-  seed-casebook, ssotize-audit-fold, upgrade-catalog, validation-self-audit, verify-both-ways
+Local adaptations: autolearn, catchup, clarify, clean-and-true, commit-economy,
+  cross-lens-converge, cross-run-playbook, cycle-memo,
+  debloat-respect-richness, decision-rationale-gaps, deslop,
+  evaluation-leakage-audit, framing-divergence-fanout, fresh-reader-review,
+  generalize, guardrail-carve-run, instruction-understanding-gate,
+  intent-proposal, land-contribution, mutual-sync, next-best-action,
+  post-change-check-gate, prism, release-gate, reorder,
+  reorder-respect-deliberate, restart-keeping-lessons, rewrite-clean-v0,
+  rewrite-denoise-v0, seed-casebook, size-the-run, ssotize-audit-fold,
+  todos-update, unslop, upgrade-catalog, validation-self-audit,
+  verify-both-ways
+
+WhatIfWeDigDeeper/agent-skills
+Source: https://github.com/WhatIfWeDigDeeper/agent-skills
+License: MIT (https://opensource.org/licenses/MIT)
+Copyright: Copyright (c) 2026 What If We Dig Deeper
+Local adaptations: autolearn
 
 addyosmani/agent-skills
 Source: https://github.com/addyosmani/agent-skills/tree/d2c37ef6225dd8726cdd369a8030307f48592d26
 License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2025 Addy Osmani
-Local adaptations: api-and-interface-design, code-simplification, constraint-driven-development,
-  context-engineering, frontend-ui-engineering, git-workflow-and-versioning,
-  incremental-implementation, interview-me, orchestration-patterns, planning-and-task-breakdown,
-  skill-gap-finder
+Local adaptations: api-and-interface-design, browser-testing, ci-cd,
+  code-simplification, constraint-driven-development, context-engineering,
+  deprecate-and-migrate, docs-and-adrs, doubt-driven, frontend-ui-engineering,
+  git-workflow-and-versioning, incremental-implementation, interview-me,
+  observability, orchestration-patterns, planning-and-task-breakdown,
+  security-hardening, shipping, skill-gap-finder, source-driven, spec-driven
+
+agent-sh
+Source: https://github.com/agent-sh
+License: MIT (https://opensource.org/licenses/MIT)
+Copyright: Copyright (c) 2026 Avi Fenesh
+Local adaptations: audit-project, can-i-help, deslop, drift-detect, onboard, sync-docs
 
 bentossell/visualise
 Source: https://github.com/bentossell/visualise/tree/35cd185b58af5db2f9d0fe13d9872b544a467483
@@ -76,6 +111,12 @@ Copyright: Copyright (c) 2026 Evil Martians
 Local adaptations: good-readme, llms-visibility, secure-npm-package, skills-visibility,
   tailwind-best-practices
 
+cursor/plugins (pstack port)
+Source: https://github.com/cursor/plugins/tree/63d938c2e4a165a0fec1bd0f61a8e325f0cb751e/pstack
+License: MIT (pstack/LICENSE; repository root has no LICENSE file) (https://opensource.org/licenses/MIT)
+Copyright: Copyright (c) 2026 Lauren Tan
+Local adaptations: unslop, why
+
 garrytan/gstack
 Source: https://github.com/garrytan/gstack/tree/07b59e396c6be5a86619a43151cb9ed62a15ae69
 License: MIT (https://opensource.org/licenses/MIT)
@@ -87,16 +128,27 @@ Local adaptations: autoplan, browse, browser-cookie-store, browser-qa, canary-de
   plan-review-tune, polished-web-prototype, publish-release-pr, release-landing-report, scrape,
   skill-benchmark, toolchain-health, web-design-review, workspace-unfreeze, xcode-project-sync
 
+humanlayer/skills
+Source: https://github.com/humanlayer/skills
+License: MIT (https://opensource.org/licenses/MIT)
+Copyright: Copyright (c) 2026 HumanLayer
+Local adaptations: show-me
+
 mattpocock/skills
 Source: https://github.com/mattpocock/skills/tree/6654f6b60cd9d5be8b54c6fafe44346dabeb3b76
 License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2026 Matt Pocock
-Local adaptations: agent-environment-retrospective, answer-stub-questionnaire, design-it-twice,
-  grill-with-docs, implement-spec, journey-trace-wizard, mutation-proven-boundaries,
-  package-native-pre-commit, prototype, record-design-decisions,
-  replace-unsafe-typescript-assertions, scaffold-exercises, setup-repo-skills,
-  sourced-learning-workspace, to-spec, writing-beats, writing-for-agents, writing-fragments,
-  writing-shape
+Local adaptations: agent-environment-retrospective, answer-stub-questionnaire,
+  architect, batch-ask-me, codebase-design, design-it-twice, docs-and-adrs,
+  domain-modeling, git-guardrails, grill-with-docs, handoff, implement-spec,
+  journey-trace-wizard, loop-me, mutation-proven-boundaries,
+  package-native-pre-commit, prototype, prototype-logic,
+  record-design-decisions, replace-unsafe-typescript-assertions, research,
+  resolve-merge-conflicts, review, scaffold-exercises, setup-pre-commit,
+  setup-repo-skills, setup-ts-deep-modules, sourced-learning-workspace,
+  spec-driven, teach, to-questionnaire, to-spec, to-tickets, wait-what,
+  wayfinder, wizard, writing-beats, writing-for-agents, writing-fragments,
+  writing-shape, writing-skills
 
 mblode/agent-skills
 Source: https://github.com/mblode/agent-skills/tree/e97a3b383f5944f90d41eb92b24b4fb3b917a7f9
@@ -129,9 +181,10 @@ obra/superpowers
 Source: https://github.com/obra/superpowers/tree/b36e0829c6d0140e93cfef2ca599b1b07d4a7797
 License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2025 Jesse Vincent
-Local adaptations: cost-reduction, design-gate-brainstorming, finish-branch-menu,
-  harness-port-guide, instruction-phrasing-microtest, isolate-workspace-gate,
-  review-reception-protocol, test-migration-coverage-gate, visual-brainstorm-companion
+Local adaptations: cost-reduction, design-gate-brainstorming,
+  finish-branch-menu, harness-port-guide, instruction-phrasing-microtest,
+  isolate-workspace-gate, review-reception-protocol, subagent-driven,
+  test-migration-coverage-gate, visual-brainstorm-companion
 
 oliver-zehentleitner/keep-the-why
 Source: https://github.com/oliver-zehentleitner/keep-the-why/tree/c01597a506efa24652d7ecb9e18b6a8ccc97b175
