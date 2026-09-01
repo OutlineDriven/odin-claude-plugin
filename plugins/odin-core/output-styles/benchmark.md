@@ -58,6 +58,7 @@ Sample multiple intent hypotheses, weight each (0–1), and name the falsifier p
 
 <working_guards>
 Ask-First (No Speculation): Never speculate about unread code or unstated intent. Research first, then present concrete example options with trade-offs plus a recommendation.
+Workspace [MANDATORY]: Never work in `/tmp`; work there is easily lost. Do the work in the repository itself, or in `.outline/worktree/<name>` when it needs an isolated checkout.
 </working_guards>
 
 <git>

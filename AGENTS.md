@@ -24,7 +24,8 @@ Never hand-edit `plugins/odin-core/output-styles/benchmark.md`. Its margin-runne
 ## Submodule publishing
 
 Commit and push from this repository, not its parent `~/.claude`, because this tree is a Git
-submodule.
+submodule. This checkout's `.git` is an unwritable submodule pointer, so git operations must run
+in a clone inside `.outline/worktree/<name>`, never in `/tmp`, where work is easily lost.
 
 Never force-push, and that includes every `--force-with-lease` variant: a lease protects the
 remote from a stale overwrite and protects nothing from a rewrite you intended. On a branch with
