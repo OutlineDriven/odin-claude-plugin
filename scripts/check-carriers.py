@@ -187,6 +187,16 @@ def self_test():
         ),
         ("the loader does not translate line endings", loader_preserves_crlf()),
         (
+            "the exemption set is exactly the four tool-surface sections",
+            TOOL_LAYER == {"git", "directives", "code_tools", "thinking"},
+        ),
+        (
+            "a divergent <directives> body is tolerated deliberately, not by accident",
+            not audit(baseline_text, carrier_with(**{
+                "directives": f"<directives>{canonical['directives']}\na harness-specific rule\n</directives>"
+            }))[1],
+        ),
+        (
             f"two identical <{victim}> blocks are rejected as a malformed shape",
             bool(audit(baseline_text, carrier_with(**{
                 victim: f"<{victim}>{body}</{victim}>\n<{victim}>{body}</{victim}>"
