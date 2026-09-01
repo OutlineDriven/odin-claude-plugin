@@ -1,5 +1,5 @@
 ---
-title: 'Package surfaces are generator-owned: fix the generator, then mirror'
+title: 'Plugin surfaces are generator-owned: fix the generator, then re-render'
 date: 2026-08-31
 category: workflow-issues
 module: packaging
@@ -7,43 +7,77 @@ problem_type: convention
 component: tooling
 severity: medium
 applies_when:
-  - "Editing root package.json, packages/*/README.md, packages/*/NOTICE, or packages/*/.claude-plugin/plugin.json"
+  - "Editing plugins/*/README.md, plugins/*/NOTICE, plugins/*/plugin.json, or any marketplace registry"
   - "A review finding names a defect inside one of those files"
-tags: [generated-surfaces, package-surfaces, check-hooks, render-scripts]
+tags: [generated-surfaces, plugin-surfaces, check-hooks, render-scripts]
 ---
 
-# Package surfaces are generator-owned: fix the generator, then mirror
+# Plugin surfaces are generator-owned: fix the generator, then re-render
 
 ## Context
 
-A PR review reported phantom npm-script references in root `package.json` (`check:claude` pointing at `scripts/validate-claude-surfaces.mjs`, which does not exist). Editing `package.json` directly fails: `scripts/package-surfaces.mjs` generates that file's script block, and `scripts/check-package-surfaces.mjs` (wired as a pre-commit hook) diffs the committed file against generator output. A hand edit passes locally and fails the hook, or the next render silently reverts it. Three workers hit this trap in one session.
+The lesson was learned against the retired npm generation: a review reported a phantom
+npm-script reference in root `package.json` (`check:claude` pointing at
+`scripts/validate-claude-surfaces.mjs`, which did not exist), and a hand edit of the file
+kept failing because `scripts/package-surfaces.mjs` baked that block and
+`scripts/check-package-surfaces.mjs` diffed the file against generator output. Three
+workers hit that trap in one session. The npm surfaces were retired the next day by
+commit ebafe05d and are now gated dead (`check-plugin-surfaces.mjs` fails the commit if
+`package.json`, `catalog/packages.json`, `catalog/skill-membership.json`, `packages/`, or
+the old `scripts/package-surfaces.mjs` family reappear), but the ownership rule carried
+over unchanged to the `plugin-surfaces` generators that replaced them.
 
 ## Guidance
 
 The generator family owns these committed surfaces:
 
-- root `package.json` (script block baked in by `scripts/package-surfaces.mjs`)
-- `packages/*/package.json`, `packages/*/.claude-plugin/plugin.json` (same generator)
-- `packages/*/README.md` (`renderPackageReadme()` in the same generator)
-- `packages/*/NOTICE` (generated copies from authored `licenses/NOTICE`)
+- the three registries `.claude-plugin/marketplace.json`, `.agents/plugins/marketplace.json`,
+  `.cursor-plugin/marketplace.json` (`surfacePlan()` in `scripts/plugin-surfaces.mjs`)
+- `plugins/<plugin>/plugin.json` and `plugins/<plugin>/.claude-plugin/plugin.json`
+  (same function)
+- `plugins/<plugin>/LICENSE` and `plugins/<plugin>/NOTICE` (byte copies of root `LICENSE`
+  and authored `licenses/NOTICE`)
+- `plugins/<plugin>/README.md` (`renderPluginReadme()`)
+- the plugin table inside root `README.md` (`renderRootReadme()`; surrounding prose is
+  authored and preserved across renders)
+- `plugins/<plugin>/skills/<slug>/agents/openai.yaml`, derived from SKILL.md frontmatter by
+  `scripts/render-skill-manifests.mjs`
 
-To change any of them: edit the generator (or its inputs, `catalog/packages.json`, `catalog/skill-membership.json`, `licenses/NOTICE`), run `node scripts/render-package-surfaces.mjs`, and commit generator plus regenerated output together. When removing a package, delete the obsolete generated package root (`packages/<pkg>/`) manually because `render-package-surfaces.mjs` writes active package surfaces but does not prune removed package trees. Check scripts verify synchronization; a defect present in both generator and output is self-consistent and invisible to them.
+The inputs are `catalog/plugins.json` (the one identity ledger), `LICENSE`,
+`licenses/NOTICE`, and the skill tree itself (each entry's skills are read from its
+`plugins/<plugin>/skills/` listing).
+
+To change any of them: edit the generator or one of those inputs, run `just render` (or
+`node scripts/render-skill-manifests.mjs` plus `node scripts/render-plugin-surfaces.mjs`),
+and commit generator plus regenerated output together. Removing a plugin: delete its
+`catalog/plugins.json` entry and re-render; `render-plugin-surfaces.mjs` does not prune a
+dropped plugin's directory tree, so remove `plugins/<plugin>/` in the same change.
+`check-plugin-surfaces.mjs` fails the commit when a `plugins/` directory has no catalog
+entry, so a forgotten prune is caught rather than silently shipped. Check scripts verify
+synchronization, not correctness: a defect present in both generator and output is
+self-consistent and invisible to them.
 
 ## Why This Matters
 
-Check hooks prove committed output matches the generator, not that either is correct. The phantom-script defect lived in the generator, so every check passed while `npm run check` failed on a clean checkout. Reviews flagging the output file are actually flagging the generator.
+Check hooks prove committed output matches the generator, not that either is correct. The
+phantom-script defect lived in the generator, so every check passed while `npm run check`
+failed on a clean checkout. Reviews flagging the output file are actually flagging the
+generator.
 
 ## When to Apply
 
-- Any edit request or review finding that lands on one of the four surfaces above.
-- Adding a package: update `catalog/packages.json` and run the generator.
-- Removing a package: remove the entry from `catalog/packages.json`, delete the obsolete generated package root (`packages/<pkg>/`) manually because `render-package-surfaces.mjs` does not prune stale roots, then re-render remaining package surfaces.
+- Any edit request or review finding that lands on one of the generated surfaces above.
+- Adding a plugin: append its `catalog/plugins.json` entry and run `just render`.
+- Removing a plugin: delete the entry, delete `plugins/<plugin>/`, re-render.
 
 ## Examples
 
-Wrong: delete the `check:claude` line from `package.json`. The next `render-package-surfaces.mjs` run restores it, and `check-package-surfaces.mjs` flags the interim mismatch.
+Wrong: delete a stale line from `plugins/odin-code/README.md` by hand. The next
+`just render` restores it, and `node scripts/render-plugin-surfaces.mjs --check` flags the
+interim mismatch.
 
-Right: remove the entry from the script block in `scripts/package-surfaces.mjs`, run `node scripts/render-package-surfaces.mjs`, commit both.
+Right: fix `renderPluginReadme()` (or the catalog entry feeding it) in
+`scripts/plugin-surfaces.mjs`, run `just render`, commit both.
 
 ## Related
 

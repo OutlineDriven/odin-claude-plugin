@@ -2,8 +2,11 @@
 
 Status: historical ideation, not the current skill roster. Later approved
 consolidation rounds changed several survivors, including `ci-fix` and
-`strike-the-root`. The current roster lives in
-`catalog/skill-membership.json`.
+`strike-the-root`. This document seeded the restructure that retired the flat
+`skills/` tree and `catalog/skill-membership.json`. The current roster is the
+per-plugin skill directories `plugins/<plugin>/skills/<slug>/SKILL.md`;
+`catalog/plugins.json` is the plugin identity ledger and lists plugins, not
+skills.
 
 Six councils (Merge, Hierarchy, Interface, Voice, Experience, Infra) produced 48 candidates.
 A reject-by-default critic passed 29; a deep adjudicator audited all 48 verdicts, overturned 7,
@@ -46,6 +49,16 @@ enumerated in the sections below (Survivors by axis, Rejected).
 - Checklists group by failure mode with opinionated framing, not flat numbered lists.
 
 ### Infrastructure (gates that make reduction safe)
+Note: the bullets below keep the names from when they were written. What
+shipped: the "package-surfaces generator" became the `plugin-surfaces` family
+(`scripts/plugin-surfaces.mjs` rendered by `scripts/render-plugin-surfaces.mjs`);
+"Generate packages/*/NOTICE copies" shipped as generated
+`plugins/<plugin>/NOTICE` from authored `licenses/NOTICE`; the "Skill-count
+invariant" and membership-source bullets lost their subject when the restructure
+retired `catalog/skill-membership.json` and the flat `skills/` tree, and the
+count is now derived from the per-plugin directories by
+`scripts/check-plugin-surfaces.mjs`.
+
 - Derive agents/openai.yaml from SKILL.md frontmatter via generator; delete hand-authored manifests.
 - Wire check-skill-routes.mjs into the prek pre-commit gate.
 - Skill-count invariant: catalog/skill-membership.json count == skills/ directory count.
