@@ -26,19 +26,19 @@ description: 'Use when a generated or shrunk counterexample from a property-base
 
 1. Confirm the failing counterexample is non-empty and represents a concrete execution trace. If the counterexample is absent or is only a framework-generated failure with no concrete input, return `failure-input-missing`. Done when: the counterexample is confirmed as a concrete execution trace or `failure-input-missing` is returned.
 2. Identify the property-based test framework and shrinker in use from the test file or build configuration. If the test file cannot be read, return `test-file-unreadable`. Done when: the framework and shrinker are identified or `test-file-unreadable` is returned.
-3. Read the complete property function and its surrounding test scaffold. Extract: Done when: the stated outcome holds.
+3. Read the complete property function and its surrounding test scaffold. Extract:
    - the property statement (the predicate that evaluated to false);
    - the generators or data sources used to produce the counterexample;
    - any custom shrink configuration.
    If the property cannot be extracted, return `property-unreadable`. Done when: the property statement, generators, and shrink configuration are extracted or `property-unreadable` is returned.
 4. Read the implementation code under test. Build a minimal reproduction of the failure by substituting the counterexample into the code path the property exercises. If the implementation cannot be read, return `implementation-unreadable`. Done when: a minimal reproduction is built or `implementation-unreadable` is returned.
-5. Classify the failure using the following mutually exclusive categories, in precedence order: Done when: the stated outcome holds.
+5. Classify the failure using the following mutually exclusive categories, in precedence order:
    a. **Code Bug** — the implementation produces an incorrect result or side effect for the counterexample, and the property statement correctly describes the intended behavior. The minimal repair is a code change to the implementation.
    b. **Over-broad Property** — the property predicate rejects a value that the implementation is permitted to produce under the current specification. The minimal repair is to narrow the property to the set of values the implementation actually guarantees.
    c. **Incorrect Property** — the property predicate describes behavior the implementation does not claim to guarantee, or the predicate is logically wrong independent of the implementation. The minimal repair is to correct or remove the property.
    d. **Unsettled Specification** — neither the implementation nor the property can be declared wrong because the requirement itself is ambiguous, absent, or contested. The minimal repair is to resolve the specification with the maintainer before touching code or property.
    Done when: the failure is classified into exactly one category with cited evidence.
-6. Cite the specific evidence for each category: Done when: the stated outcome holds.
+6. Cite the specific evidence for each category:
    - For Code Bug: quote the exact implementation behavior for the counterexample, quote the property predicate, and state which implementation branch or operation produces the incorrect result.
    - For Over-broad Property: quote the relevant specification clause or implementation comment that permits the counterexample outcome.
    - For Incorrect Property: quote the property predicate and demonstrate the logical inconsistency with the implementation's documented contract.
@@ -46,6 +46,7 @@ description: 'Use when a generated or shrunk counterexample from a property-base
    Done when: the specific evidence for the chosen category is cited.
 7. State the minimal repair action in one concrete imperative sentence. Do not add extra refactorings, style changes, or tests beyond the minimum required to make the property pass or correctly fail. Done when: the minimal repair is stated as one concrete imperative sentence.
 8. If evidence supports more than one category, report the ambiguity explicitly with the competing classifications and let the maintainer decide. Do not pick one classification to force a resolution. Done when: ambiguity is reported with competing classifications or no ambiguity exists.
+
 ## Failure and recovery
 
 | Failure class | Condition | Result |
