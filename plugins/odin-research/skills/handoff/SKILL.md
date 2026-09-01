@@ -5,13 +5,14 @@ description: 'Use when substantive work reaches a session boundary, resumes afte
 
 # Session continuity and handoff
 
-## Trigger
+## Contract
 
-Use this procedure when substantive work starts, reaches a significant boundary, resumes after interruption, completes, or must move to another session, agent, harness, directory, repository, or person. An explicit handoff request selects the packaging branch.
-
-## Authority
-
-The trigger authorizes reversible writes to ignored repository-local continuity files and, on explicit handoff, one portable brief or stdout. It does not authorize receiver launch, receiver work, remote mutation, credentials, paid actions, publication, deployment, data-at-rest changes outside these artifacts, bulk mutation, or irreversible effects.
+| Field | Bound contract |
+|---|---|
+| Trigger | Substantive work starts, reaches a significant boundary, resumes after interruption, completes, or must move to another session, agent, harness, directory, repository, or person. An explicit handoff request selects the packaging branch. |
+| Authority | Reversible writes to ignored repository-local continuity files and, on explicit handoff, one portable brief or stdout. No receiver launch, remote mutation, credentials, paid actions, publication, deployment, data-at-rest changes outside these artifacts, bulk mutation, or irreversible effects. |
+| Side effect | Continuity files under `.handoff/continuity/` and portable briefs under `.handoff/handoffs/` written to disk. |
+| Done | Continuity status (`fresh`, `resumed`, `interrupted`, or `completed`) with the death-point path. On explicit handoff, one compliant brief path or stdout result. |
 
 ## Inputs
 
@@ -40,7 +41,7 @@ Use `.handoff/continuity/` for `notes.md`, `graph.md`, and `death-point.md`. Use
 
 8. **Emit and stop.** Write the brief under `.handoff/handoffs/` or emit it to stdout. End with: `Continue from this compact context; do not re-derive completed work.` Report the path or stdout result and current continuity status. Never launch or instruct tooling to launch the receiver.
 
-## Failure
+## Failure and recovery
 
 - Unusable prior state: preserve it, name `corrupt`, `stale`, `incomplete`, `completed`, or `wrong project`, and start fresh.
 - Unverified ignore rule: stop before writing continuity state and name the failed ignore check.

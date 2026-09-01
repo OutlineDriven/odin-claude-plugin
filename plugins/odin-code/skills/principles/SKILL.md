@@ -1,6 +1,6 @@
 ---
 name: principles
-description: 'Anchor register of 21 working principles. Use when a request names a law (subtract before you add, idempotent operations, never block on the human) or asks which principle governs a decision. Law and bite point only; not for running a repair, use fix.'
+description: 'Use when a request names a working principle (subtract before you add, idempotent operations, never block on the human) or asks which principle governs a decision. Returns the law and its bite point; routes to the owning skill for execution. Not for running a repair — use fix.'
 ---
 
 # Principles
@@ -8,6 +8,15 @@ description: 'Anchor register of 21 working principles. Use when a request names
 Indexed anchor register: 21 named principles, each a law plus the moment it bites. Read the index, jump to the anchor, apply the law. Principles governs judgment only and never executes or mutates. When an anchor requires mutation or execution, route the user to the owning skill (`fix`, `debug`, `architect`, `deslop`, `commit`, `ci-cd`) instead of instructing execution. Come here to decide, not to run a repair.
 
 Five anchors carry procedure-dense references (linked inline); the rest are complete at anchor length.
+
+## Contract
+
+| Field | Bound contract |
+|---|---|
+| Trigger | A request names a working principle by name or example, or asks which principle governs a decision. |
+| Authority | Read-only. Names the owning skill for execution; never mutates files, VCS, credentials, or remote state. |
+| Side effect | Guidance in chat output only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Done | The governing principle is named with its law and bite point, and the owning skill is named when the anchor requires execution. |
 
 ## Index
 
