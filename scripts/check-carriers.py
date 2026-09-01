@@ -106,10 +106,14 @@ def audit(baseline_text, carrier_text, label="carrier"):
                 failures.append(f"{label}: <{tag}> appears {len(found)} times, at most one overlay is allowed")
             else:
                 matched += 1
-        elif all(body == canonical[tag] for body in found):
-            matched += 1
         elif len(found) > 1:
-            failures.append(f"{label}: <{tag}> appears {len(found)} times and not every copy matches")
+            # A repeated section is malformed whatever the copies contain. Even when
+            # they match today, the shape is one edit away from the divergent-duplicate
+            # case above, and a consumer has no rule for which copy wins. Only the
+            # overlay tags handled above may appear more than once.
+            failures.append(f"{label}: section <{tag}> appears {len(found)} times")
+        elif found[0] == canonical[tag]:
+            matched += 1
         else:
             failures.append(f"{label}: section <{tag}> diverges from the baseline")
     return matched, failures
@@ -182,6 +186,12 @@ def self_test():
             matched_all == len(shared),
         ),
         ("the loader does not translate line endings", loader_preserves_crlf()),
+        (
+            f"two identical <{victim}> blocks are rejected as a malformed shape",
+            bool(audit(baseline_text, carrier_with(**{
+                victim: f"<{victim}>{body}</{victim}>\n<{victim}>{body}</{victim}>"
+            }))[1]),
+        ),
         (
             "a baseline that repeats a section refuses to be an authority",
             bool(audit(
