@@ -104,3 +104,17 @@ repos:
         language: system
         pass_filenames: false
         always_run: true
+
+      - id: check-carriers
+        name: check external harness carriers hold the canonical doctrine
+        entry: python3 scripts/check-carriers.py
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      - id: check-carriers-self-test
+        name: check the carrier gate's own fixtures still catch a planted divergence
+        entry: python3 scripts/check-carriers.py --self-test
+        language: system
+        pass_filenames: false
+        always_run: true
