@@ -67,7 +67,7 @@ known limits below are part of the contract.
 
 | Gate | Threshold | Rationale |
 |---|---|---|
-| Bold pseudo-list | Two or more consecutive bold label lines, with the colon inside, against, or behind interposed text after the closing asterisks | A real bullet list or table carries labels |
+| Bold run | One walk over every line that opens with a bold span, bulleted or not, classified by what the finished run holds: two colon-bearing labels in the run trips at 2, five lines otherwise trips at 5 | Repeated line-start bold is fake structure, so the remedy is a real list or table whose labels are plain text. A `- ` prefix does not exempt a line, because the pattern allows one: `- **Name:** value` repeated still fails, and `- Name: value` passes. Two label-and-value lines read as a disguised definition list, while colon-less lead-ins are ordinary emphasis until five stack up |
 | Dash run | Five or more em or en dashes within 600 characters | A single parenthetical pair is fine; a dense run is the tell |
 | Title-case heading | A minor word capitalized past the first position, followed by another capitalized word | Sentence case, proper nouns only |
 | Banned words | The filler senses of `delve`, `leverage`, `seamless`, `underscore`, plus `holistic` and `synergy` | Named in the doctrine as AI-marker vocabulary |
@@ -97,23 +97,45 @@ hides, and reaching outside the repo was the way to stop that. The notice never 
 code, and the reason for the skip is the reason for the rule: a gate that reports a finding no one
 can repair is not a gate, it is a blocked commit.
 
-## What a bold-label finding means
+## What a bold run finding means
 
-A run of plain `- Label: text` bullets is not a defect, and the gate does not flag one. The
-doctrine bans the bold-header pseudo-list specifically, and bans plain bullet lists only where
-prose would be clearer, which is a judgment no regex makes. So dropping the asterisks and keeping
-the bullets is a valid fix when the items are genuinely parallel. Use a table for label-and-value
-pairs and prose for conditions or cases. Do not reshape a list that already reads as a list.
+One walk covers every line that opens with a bold span, blank lines included, and reports at most
+one finding per run, at the run's first line. The finished run is then judged by its content. Two
+or more colon-bearing labels make it a label pseudo-list, a defect at two lines. Below that the
+run is a density of colon-less lead-ins, which are ordinary emphasis until five of them stack up.
+Span length is not a criterion and carries no upper bound: the character class stops at the closing
+asterisks, so a cap would exempt long lines without protecting anything, which is how the earlier
+80-character bound then exempted a label whose parenthesized version list ran past it.
 
-The bold-label pattern carries a self-test, run with `python3 scripts/check-voice.py --self-test`.
-It pins the four cases that decide whether the rule works: a label whose text contains a colon is
-caught, a label without one is caught, mid-sentence emphasis is not caught, and a label inside a
-fenced block is not caught. The pattern has already been silently wrong once, when a colon inside
-the label text made it blind and four doctrine lines passed the gate wearing the markup the gate
-exists to remove. An evadable rule is worse than no rule, because it reports clean. The cases are
-inline string literals rather than fixture files because every markdown file in this repository is
-gated, so a fixture that carries a finding by design would need its own exclusion, and an excluded
-directory is the same escape hatch the pattern just closed.
+Building these as two walks, each excluding the other's lines, was the mistake that led here. A run
+of five lines alternating label and lead scored one in each walk, cleared both thresholds, and the
+gate reported clean — so mixing the two forms became easier to slip past than either form alone,
+and the exclusion written to stop double-reporting is what split the run. A line belongs to exactly
+one run instead, which gets the same no-double-counting property without the hole. One colon
+inside a five-line run is incidental emphasis, not a list of one, so that run is caught at the lead
+threshold: adding a colon to a line can no longer drop a run below every threshold.
+
+The fix is to drop the bold, not to restructure the list. A bullet prefix does not exempt a line:
+both patterns allow a leading `- `, so `- **Name:** value` repeated is a run and fails, while
+`- Name: value` passes. A run of plain `- Label: text` bullets is not a defect and the gate does
+not flag one, because the doctrine bans the bold-header pseudo-list specifically and bans plain
+bullet lists only where prose would be clearer, which is a judgment no regex makes. The sweep this
+phase ran confirms which of the two is the real remedy: the content of every cleared item was
+already a genuine list, so the asterisks came off and the bullets, the colons, and the wording
+stayed put. Use a table for label-and-value pairs and prose for conditions or cases. Do not reshape
+a list that already reads as a list.
+
+The rule carries a self-test, run with `python3 scripts/check-voice.py --self-test`. It pins the
+cases that decide whether the rule works, each naming the kind it must classify as when caught:
+labels with and without an internal colon, the alternating five that the two-walk design let
+through, one label plus four leads, two labels plus one lead, four leads alone, blank lines not
+breaking a run, fenced blocks, mid-sentence emphasis at any density, a bulleted pair of labels, and
+runs whose spans run past 120 characters. The rule has been silently wrong three times, once for a
+colon inside the label and once for the split walk and once for a span bound, and an evadable rule
+is worse than no rule because it reports clean. The cases are inline string literals rather than
+fixture files because every markdown file in this repository is gated, so a fixture that carries a
+finding by design would need its own exclusion, and an excluded directory is the same escape hatch
+the rule keeps closing.
 
 ## Known limits
 

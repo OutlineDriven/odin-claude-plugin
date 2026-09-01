@@ -3,7 +3,7 @@
 
 Five gates, each density-based, because one instance is usually fine and a run is the defect:
 
-  (a) two or more consecutive bold label-and-colon lines, where a list or table belongs
+  (a) a run of lines opening with a bold span: two or more colon-bearing labels, or five lead-ins
   (b) five or more em or en dashes inside 600 characters
   (c) a heading capitalizing a minor word past the first position
   (d) AI-marker vocabulary
@@ -59,13 +59,13 @@ BAN_LIST_SUBJECTS = frozenset(
 # has no colon after the closing asterisks and so matches neither branch. The label text itself may
 # contain a colon ("**Security (OWASP Top 10:2025, CWE Top 25 2025):**"), so the second branch no
 # longer forbids one inside the label; the earlier [^*\n:] class let such a label slip past the
-# gate, making the rule evadable by putting a colon in it. The cap runs to 120 characters because
-# doctrine labels carrying parenthesized version lists exceed the old 80. A table row never matches,
-# because no colon follows its closing asterisks.
+# gate, making the rule evadable by putting a colon in it. No upper bound on the label span: the
+# [^*\n] class already stops at the closing asterisks, so a cap only moved the hole. A table row
+# never matches, because no colon follows its closing asterisks.
 BOLD_LABEL = re.compile(
     r"^\s*(?:[-*+]\s*)?\*\*"
-    r"(?:[^*\n]{2,120}\*\*[^:\n]{0,30}:"
-    r"|[^*\n]{2,120}:\s*\*\*)"
+    r"(?:[^*\n]{2,}\*\*[^:\n]{0,30}:"
+    r"|[^*\n]{2,}:\s*\*\*)"
 )
 # Title case capitalizes the minor word AND the word after it, which is what separates
 # "Fixing The Bug" from sentence case ("1. The wall of options") and from a single-letter
@@ -80,6 +80,25 @@ DASH = re.compile(r"[\u2014\u2013]")
 DASH_WINDOW = 600
 DASH_RUN = 5
 BOLD_RUN = 2
+# A line that opens with a bold span is either a colon-bearing label ("**Scope:** text") or a
+# colon-less lead-in ("**Latency** is measured first"). Both are fake structure when they run, at
+# different densities: two labels in a row are a disguised definition list, while two lead-ins are
+# ordinary emphasis and only five in a row stop reading as prose.
+#
+# The two shapes are therefore one walk over their union, classified by what the finished run
+# contains. They were first built as two walks, each excluding the other's lines, and that split
+# was itself the evasion: five lines alternating label and lead scored one in each walk and the
+# gate reported clean, so mixing the forms became easier to slip past than either form alone. A
+# line belongs to exactly one run, and a run yields at most one finding, so nothing is counted
+# twice without anything being split.
+# No upper bound on the span: [^*\n] already stops at the closing asterisks and at the line end,
+# so a length cap was never doing work the character class does not already do. It only moved the
+# hole, exactly as the old 80-character label cap did before it was raised to 120. Both patterns
+# carry the same bound on purpose: if the union walk accepted a longer span than the label test
+# did, a pair of long colon-bearing labels would count as zero labels, get classified as a lead run
+# of two, and pass under the lead threshold. Membership and classification have to agree.
+BOLD_LEAD = re.compile(r"^\s*(?:[-*+]\s*)?\*\*[^*\n]{2,}\*\*")
+BOLD_LEAD_RUN = 5
 
 
 def writable(path):
@@ -151,23 +170,59 @@ def dash_run(prose):
     return worst, where
 
 
-def bold_run(prose):
-    """Longest run of consecutive bold label lines, blank lines not breaking the run."""
-    run = 0
-    worst = 0
+def bold_runs(prose):
+    """Every maximal run of lines opening with a bold span, as (first line, length, label count).
+
+    Blank lines do not break a run. A non-blank line that does not open with a bold span does.
+    Fenced blocks and inline spans are already gone by the time this sees the text.
+    """
+    runs = []
     start = 0
-    where = 0
+    length = 0
+    labels = 0
     for number, line in enumerate(prose.split("\n"), start=1):
-        if BOLD_LABEL.match(line):
-            if run == 0:
+        if BOLD_LEAD.match(line):
+            if length == 0:
                 start = number
-            run += 1
-            if run > worst:
-                worst = run
-                where = start
+            length += 1
+            labels += bool(BOLD_LABEL.match(line))
         elif line.strip():
-            run = 0
-    return worst, where
+            if length:
+                runs.append((start, length, labels))
+                length = 0
+                labels = 0
+    if length:
+        runs.append((start, length, labels))
+    return runs
+
+
+def classify_run(labels):
+    """(kind, threshold) for a finished run, decided by what the run contains.
+
+    Two or more colon-bearing labels make it a label pseudo-list, which is a defect at two. Below
+    that the run is a density of lead-ins and needs five. A single colon inside a five-line run is
+    incidental emphasis, not a list of one, so such a run is caught at the lead threshold rather
+    than escaping between the two: adding a colon to one line can no longer drop a run below every
+    threshold.
+    """
+    if labels >= 2:
+        return "label", BOLD_RUN
+    return "lead", BOLD_LEAD_RUN
+
+
+def bold_findings(prose):
+    """One finding per tripping bold run, reported at the run's first line."""
+    found = []
+    for start, length, labels in bold_runs(prose):
+        kind, threshold = classify_run(labels)
+        if length < threshold:
+            continue
+        if kind == "label":
+            found.append((start, f"{length} consecutive bold label lines; use a list or table"))
+        else:
+            found.append((start, f"{length} consecutive bold lead-ins; "
+                                 "use a list, a table, or plain text"))
+    return found
 
 
 def label(path):
@@ -183,9 +238,8 @@ def audit(path):
     rel = label(path)
     found = []
 
-    worst, line = bold_run(prose)
-    if worst >= BOLD_RUN:
-        found.append(f"{rel}:{line}: {worst} consecutive bold label lines; use a list or table")
+    for line, message in bold_findings(prose):
+        found.append(f"{rel}:{line}: {message}")
 
     worst, line = dash_run(prose)
     if worst >= DASH_RUN:
@@ -207,43 +261,90 @@ def audit(path):
     return found
 
 
-# The bold-label pattern has already been silently wrong once: it could not see a label whose
-# text contains a colon, so four doctrine lines passed the gate while still wearing the banned
-# pseudo-list markup. An evadable rule is worse than no rule, because it reports clean. These
-# cases are inline literals rather than fixture files on purpose: markdown files inside the
-# repository are gated, so a fixture that carries a finding by design would need an exclusion,
-# and an exclusion directory is the same escape hatch the pattern just closed.
+# The bold rule has been silently wrong twice: first it could not see a label whose text held a
+# colon, then two separate walks each excluding the other's lines let a run that alternated the
+# two forms score one in each walk and pass clean. An evadable rule is worse than no rule, because
+# it reports clean. These cases are inline literals rather than fixture files on purpose: markdown
+# files inside the repository are gated, so a fixture that carries a finding by design would need
+# an exclusion, and an excluded directory is the same escape hatch the rule keeps closing.
+#
+# Each case names the kind it must classify as when caught, because the two thresholds are
+# different and a run that trips the wrong one passes for the wrong reason. expect is
+# (caught, kind); kind is None when the run must not be caught at all.
+L1 = "**Latency** is the first thing to measure.\n"
+L2 = "**Throughput** follows from it.\n"
+L3 = "**Allocation** decides both.\n"
+L4 = "**Locality** then sets the ceiling.\n"
+L5 = "**Occupancy** is what is left to tune.\n"
+D1 = "**Discipline (defend at boundaries, trust interior, fail fast; ban slop, keep craft):**\n"
+D2 = "**Security (OWASP Top 10:2025, CWE Top 25 2025):**\n"
+S1 = "**Scope**: what this covers.\n"
+S2 = "**Response language:** All English.\n"
+
 SELF_TEST = (
-    ("bold label with an internal colon is caught",
-     "**Discipline (defend at boundaries, trust interior, fail fast; ban slop, keep craft):**\n"
-     "**Security (OWASP Top 10:2025, CWE Top 25 2025):**\n",
-     True),
-    ("bold label without an internal colon is caught",
-     "**Scope**: what this covers.\n"
-     "**Response language:** All English.\n",
-     True),
+    ("colon-bearing label with an internal colon is caught", D1 + D2, (True, "label")),
+    ("colon-bearing label without an internal colon is caught", S1 + S2, (True, "label")),
     ("mid-sentence emphasis is not caught",
      "You **MUST** use the gate, and you **SHOULD NOT** skip it.\n"
-     "This line carries **bold emphasis** but no label colon.\n",
-     False),
-    ("bold label inside a fenced block is not caught",
-     "```\n"
-     "**Discipline (defend at boundaries, trust interior, fail fast; ban slop, keep craft):**\n"
-     "**Security (OWASP Top 10:2025, CWE Top 25 2025):**\n"
-     "```\n",
-     False),
+     "This line carries **bold emphasis** but no label colon.\n", (False, None)),
+    ("bold label inside a fenced block is not caught", "```\n" + D1 + D2 + "```\n", (False, None)),
+    ("run of five colon-less lead-ins is caught", L1 + L2 + L3 + L4 + L5, (True, "lead")),
+    ("run of four colon-less lead-ins is not caught", L1 + L2 + L3 + L4, (False, None)),
+    ("blank lines do not break a lead run",
+     "\n".join((L1, L2, L3, L4, L5)) + "\n", (True, "lead")),
+    ("lead-ins inside a fenced block are not caught", "```\n" + L1 + L2 + L3 + L4 + L5 + "```\n",
+     (False, None)),
+    ("mid-sentence emphasis is not caught at any density",
+     "Measure **latency** before anything else.\nThen weigh **throughput** against it.\n"
+     "Watch **allocation**, which decides both.\nMind **locality**, which sets the ceiling.\n"
+     "Tune **occupancy** last, if at all.\nReport **variance**, never a single run.\n",
+     (False, None)),
+    # regression: the alternating run that the two-walk design let pass clean
+    ("alternating label and lead run of five is caught",
+     S1 + L1 + S2 + L2 + "**Allocation:** decides both.\n", (True, "label")),
+    # a lone colon inside a five-line run is incidental; the run is fake structure at five
+    ("one label plus four leads is caught as a lead run",
+     S1 + L1 + L2 + L3 + L4, (True, "lead")),
+    ("two labels plus one lead is caught at the label threshold",
+     S1 + S2 + L1, (True, "label")),
+    ("one label plus three leads is not caught", S1 + L1 + L2 + L3, (False, None)),
+    # the remedy is a plain-labelled list, not a bulleted bold one: both patterns allow a leading
+    # "- ", so a bulleted pair is still a label run
+    ("bulleted colon-bearing labels are caught", "- **Scope:** a.\n- **Domain:** b.\n",
+     (True, "label")),
+    ("bulleted plain labels are not caught", "- Scope: a.\n- Domain: b.\n", (False, None)),
+    # the case a {2,120} span bound silently exempted: five long lead-ins, each over 120 characters
+    ("run of five over-long lead-ins is caught",
+     "".join(f"**{w} {'padding ' * 18}** opens a long line {i}.\n"
+             for i, w in enumerate(("Latency", "Throughput", "Allocation", "Locality",
+                                    "Occupancy"))),
+     (True, "lead")),
+    # and its label twin: two long colon-bearing labels must classify as a label run, not fall
+    # through to a lead run of two, which is what a bound on one pattern but not the other gives
+    ("two over-long colon-bearing labels are caught as a label run",
+     "".join(f"**{w} {'padding ' * 18}:** value {i}.\n" for i, w in enumerate(("Scope", "Domain"))),
+     (True, "label")),
 )
 
 
+def run_verdict(prose):
+    """(caught, kind) for the first bold run that trips its threshold."""
+    for _, length, labels in bold_runs(prose):
+        kind, threshold = classify_run(labels)
+        if length >= threshold:
+            return True, kind
+    return False, None
+
 def self_test():
-    """Run the bold-label cases against the compiled pattern; return the exit code."""
+    """Run every bold case against the compiled rule; return the exit code."""
     failed = 0
-    for name, text, expect in SELF_TEST:
-        worst, _ = bold_run(prose_only(text))
-        caught = worst >= BOLD_RUN
-        ok = caught == expect
+    for name, text, (want_caught, want_kind) in SELF_TEST:
+        caught, kind = run_verdict(prose_only(text))
+        ok = caught == want_caught and (not caught or kind == want_kind)
         failed += not ok
-        print(f"{'PASS' if ok else 'FAIL'}: {name} (caught={caught}, expected={expect})")
+        detail = f"kind={kind}" if caught else "not caught"
+        want = f"{want_kind} at its threshold" if want_caught else "clean"
+        print(f"{'PASS' if ok else 'FAIL'}: {name} ({detail}, expected {want})")
     print(f"check-voice self-test: {len(SELF_TEST) - failed}/{len(SELF_TEST)} passed",
           file=sys.stderr if failed else sys.stdout)
     return 1 if failed else 0
