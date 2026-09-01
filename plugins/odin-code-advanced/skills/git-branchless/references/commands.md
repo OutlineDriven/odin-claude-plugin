@@ -88,7 +88,7 @@ Replacement for `git add` + `git commit`. Captures unstaged changes by default.
 
 ### `git amend [--reparent]`
 
-Amend HEAD's contents and auto-restack descendants. **Does not edit the message** ; use `git reword` for that.
+Amend HEAD's contents and auto-restack descendants. **Does not edit the message**; use `git reword` for that.
 
 - `--reparent` (v0.7.0+) : amend without rebasing children; children keep their original tree state.
 
