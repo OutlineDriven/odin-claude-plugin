@@ -43,13 +43,13 @@ nodes:
     label: "Every claimed write is verified by reading it back, never by a tool's success code"
   - id: sfc-skill-body
     type: Surface
-    label: "614 authored skill bodies, the only human-written skill artifact"
+    label: "613 authored skill bodies, the only human-written skill artifact"
   - id: sfc-plugin-manifest
     type: Surface
     label: "28 plugin.json manifests under the closed Agent Plugins schema"
   - id: sfc-skill-manifest
     type: Surface
-    label: "614 agents/openai.yaml skill manifests for the Codex surface"
+    label: "613 agents/openai.yaml skill manifests for the Codex surface"
   - id: sfc-claude-marketplace
     type: Surface
     label: ".claude-plugin/marketplace.json, the Claude Code registry"
