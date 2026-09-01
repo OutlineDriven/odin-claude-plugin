@@ -27,10 +27,11 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-# Harness carriers live outside the repository, so git cannot enumerate them and they are named
-# here instead. Both are machine-local, which is why absence is a notice rather than a failure.
-CARRIERS = (Path("/home/alpha/.omp/agent/AGENTS.md"),
-            Path("/home/alpha/.codex/AGENTS.md"))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+# Harness carriers live outside the repository, so git cannot enumerate them. The list is
+# defined once in carriers.py: a second hand-maintained copy here hardcoded an absolute
+# path with a username and resolved to nothing on any other machine.
+from carriers import CARRIERS
 
 # The doctrine bans delve, leverage, seamless, and underscore. Two of the four have legitimate
 # senses in this tree, so the pattern targets only the filler sense:
