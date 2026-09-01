@@ -18,14 +18,16 @@ Show this to the user, then immediately proceed to Step 2. The user reads and th
 
 ### 2. Spawn sub-agents
 
-Spawn 3+ sub-agents in parallel. Each must produce a **radically different** interface for the deepened module.
+Spawn two or more sub-agents in parallel. Two is the floor, because the technique is design
+it twice; `SKILL.md` step 3 asks for at least two competing sketches and sets no ceiling.
+Each must produce a **radically different** interface for the deepened module.
 
 Prompt each sub-agent with a separate technical brief (file paths, coupling details, dependency category from [deepening.md](deepening.md), what sits behind the seam). The brief is independent of the user-facing problem-space explanation in Step 1. Give each agent a different design constraint:
 
 - Agent 1: "Minimize the interface — aim for 1-3 entry points max. Maximize leverage per entry point."
 - Agent 2: "Maximize flexibility — support many use cases and extension."
 - Agent 3: "Optimize for the most common caller — make the default case trivial."
-- Agent 4 (if applicable): "Design around ports & adapters for cross-seam dependencies."
+- Agent 4, where cross-seam dependencies exist: "Design around ports and adapters."
 
 Each sub-agent outputs:
 
