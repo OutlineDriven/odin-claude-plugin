@@ -5,6 +5,12 @@ AGENTS.md fixes the rule this enforces: every harness-independent section must m
 `system-prompt-baseline.md` byte for byte, while each carrier keeps its own tool layer.
 So the four tool-surface sections may diverge in content and the rest may not.
 
+The claim is therefore bounded, and the gate prints its own bound. Content inside the
+four exempt sections is never compared, and `directives` is one of them, so doctrine
+written there is outside what a green run asserts. Whether the carriers should be allowed
+to hold rules the baseline does not is a live question rather than a settled one, tracked
+as an open gate; this gate refuses to imply an answer by staying silent about its scope.
+
 A style check cannot stand in for this. Running the voice gate over a carrier passes for
 any style-clean file, whatever doctrine it carries, which is the defect class this
 replaces.
@@ -138,10 +144,13 @@ def main():
         total += matched
         failures += found
         state = "ok" if not found else f"{len(found)} problem(s)"
-        print(f"check-carriers: {carrier} {matched}/{len(shared)} shared sections match, {state}")
+        print(f"check-carriers: {carrier} {matched}/{len(shared)} compared sections match, {state}")
     for line in failures:
         print(f"check-carriers: {line}", file=sys.stderr)
-    print(f"check-carriers: {total}/{len(shared) * len(present)} shared section comparisons matched")
+    print(f"check-carriers: {total}/{len(shared) * len(present)} section comparisons matched")
+    print(f"check-carriers: not compared, licensed as a harness tool layer: "
+          f"{', '.join(sorted(TOOL_LAYER))}. Presence is required, content is not, so doctrine inside "
+          f"these is outside this gate's claim.")
     return 1 if failures else 0
 
 
