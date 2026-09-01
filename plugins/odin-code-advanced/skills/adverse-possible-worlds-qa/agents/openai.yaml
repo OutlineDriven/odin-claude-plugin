@@ -1,3 +1,0 @@
-interface:
-  display_name: "Adverse Possible Worlds QA"
-  short_description: "Use when the user wants to test extreme worlds to raise product completeness rather than collect green checks."

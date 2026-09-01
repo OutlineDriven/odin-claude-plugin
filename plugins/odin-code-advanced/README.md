@@ -2,7 +2,7 @@
 
 Advanced ODIN workflows for complex code changes and technical audits.
 
-51 skills, category Coding.
+50 skills, category Coding.
 
 ## Install
 
@@ -18,7 +18,6 @@ codex plugin add odin-code-advanced@odin-marketplace
 
 ## Skills
 
-- adverse-possible-worlds-qa
 - architect
 - behavior-validator
 - blast-radius
@@ -47,8 +46,8 @@ codex plugin add odin-code-advanced@odin-marketplace
 - mutation-campaign-configuration
 - mutation-triage-genotoxic
 - no-hide
-- offensive-possible-worlds-qa
 - optimize
+- possible-worlds-qa
 - pr-impact-quiz
 - proof-driven
 - property-test-authoring
