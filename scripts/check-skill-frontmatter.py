@@ -24,6 +24,7 @@ checker rather than passing silently.
 Run `--self-test` to check the checker against its own fixtures.
 """
 import json
+import string
 import sys
 from pathlib import Path
 
@@ -32,7 +33,14 @@ ALLOWED_KEYS = {"name", "description", "disable-model-invocation", "argument-hin
 REQUIRED_KEYS = ("name", "description")
 # A plain scalar starting with one of these is an indicator character in YAML and
 # means something other than the text it appears to be.
-PLAIN_INDICATORS = "[]{}&*!|>%@`\"'#,?:"
+PLAIN_INDICATORS = "[]{}&*!|>%@`\"'#,"
+# `-`, `?`, and `:` are indicators only when a space or the end of the scalar follows.
+PLAIN_INDICATORS_BEFORE_SPACE = "-?:"
+# YAML 1.2 section 5.7. Anything else after a backslash is an unknown escape and a
+# strict parser rejects the scalar.
+DOUBLE_QUOTED_ESCAPES = set('0abtnvfre "/\\N_LP\t') | set("xuU")
+# \x takes two hex digits, \u four, \U eight (YAML 1.2 section 5.7).
+HEX_ESCAPES = {"x": 2, "u": 4, "U": 8}
 
 
 def scan_single_quoted(value):
@@ -59,6 +67,18 @@ def scan_double_quoted(value):
     while i < len(value):
         c = value[i]
         if c == "\\":
+            nxt = value[i + 1 : i + 2]
+            if not nxt:
+                return "double-quoted scalar ends on a backslash"
+            if nxt not in DOUBLE_QUOTED_ESCAPES:
+                return f"unknown escape {'\\' + nxt!r} in a double-quoted scalar"
+            if nxt in HEX_ESCAPES:
+                want = HEX_ESCAPES[nxt]
+                digits = value[i + 2 : i + 2 + want]
+                if len(digits) < want or any(d not in string.hexdigits for d in digits):
+                    return f"escape {'\\' + nxt!r} needs {want} hex digits, got {digits!r}"
+                i += 2 + want
+                continue
             i += 2
             continue
         if c == '"':
@@ -74,6 +94,8 @@ def scan_plain(value):
     """Validate a plain (unquoted) scalar. Return None when valid, else the reason."""
     if value[0] in PLAIN_INDICATORS:
         return f"plain scalar starts with the indicator character {value[0]!r}"
+    if value[0] in PLAIN_INDICATORS_BEFORE_SPACE and (len(value) == 1 or value[1].isspace()):
+        return f"plain scalar starts with the indicator character {value[0]!r} followed by a space"
     if ": " in value or value.endswith(":"):
         return "plain scalar contains ': ', which a parser reads as a nested mapping"
     if " #" in value:
@@ -100,6 +122,11 @@ def check_frontmatter(text):
         key, sep, raw = line.partition(":")
         if not sep or not key or not all(c.isalnum() or c in "_-" for c in key):
             reasons.append(f"line {lineno}: not a 'key: value' pair")
+            continue
+        # YAML needs a space or a line end after the colon; `key:value` is one plain
+        # scalar, not a mapping entry.
+        if raw and not raw[0].isspace():
+            reasons.append(f"line {lineno}: key {key!r} has no space after its colon")
             continue
         seen.append(key)
         if key not in ALLOWED_KEYS:
@@ -166,6 +193,22 @@ CASES = [
      '---\nname: x\ndescription: "Use when \\"quoted\\" text appears."\n---\n', True),
     ("an empty value is caught",
      "---\nname: x\ndescription:\n---\n", False),
+    ("a colon with no space after it is caught",
+     "---\nname:x\ndescription: 'y'\n---\n", False),
+    ("a plain scalar opening a sequence entry is caught",
+     "---\nname: x\ndescription: 'y'\ndisable-model-invocation: - true\n---\n", False),
+    ("a negative number is still a clean plain scalar",
+     "---\nname: -1\ndescription: 'y'\n---\n", True),
+    ("a short hex escape is caught",
+     '---\nname: x\ndescription: "Use when \\x2 appears."\n---\n', False),
+    ("a non-hex digit in a hex escape is caught",
+     '---\nname: x\ndescription: "Use when \\xZZ appears."\n---\n', False),
+    ("a well-formed hex escape is clean",
+     '---\nname: x\ndescription: "Use when \\x41 appears."\n---\n', True),
+    ("an unknown double-quoted escape is caught",
+     '---\nname: x\ndescription: "Use when \\q appears."\n---\n', False),
+    ("a double-quoted scalar ending on a backslash is caught",
+     '---\nname: x\ndescription: "Use when needed.\\\n---\n', False),
 ]
 
 
