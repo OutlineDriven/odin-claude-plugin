@@ -17,7 +17,8 @@ description: 'Use when codebase terminology or a durable technical decision chan
 ## Refusals
 
 - No recordable content: if no terminology change or qualifying decision is present, do not write anything. Stop.
-- Invalid target: if the target path is outside the repository root, or the ADR directory does not exist and cannot be created, stop rather than write.
+- Invalid target: if the target path is outside the repository root, stop rather than write. A path outside the repository root is a trust violation and halts the whole skill.
+- Unavailable ADR directory: if the ADR directory does not exist and cannot be created, do not halt the whole skill. Record the terminology change if present, skip the ADR, and return `non-converged` (see Failure and recovery).
 - Untrusted input in records: rejected. Validate each write at its trust boundary.
 
 ## Inputs
@@ -40,9 +41,9 @@ description: 'Use when codebase terminology or a durable technical decision chan
 ## Failure and recovery
 
 - **`blocked:no-recordable-content`**: no terminology change or qualifying decision is present. Do not write anything. Stop.
-- **`blocked:invalid-target`**: the target path is outside the repository root, or the ADR directory does not exist and cannot be created. Stop rather than write.
+- **`blocked:invalid-target`**: the target path is outside the repository root. Stop rather than write.
 - **`partial-record`**: some records were written successfully but others failed. Roll back successful writes. Return blocked with the failing class.
-- **`non-converged`**: a qualifying decision is present but the ADR triple cannot be satisfied. Record the terminology change if present; skip the ADR. The terminology entry is kept and the ADR is intentionally skipped, so this is not a rollback. Return `non-converged`.
+- **`non-converged`**: a qualifying decision is present but the ADR cannot be produced, either because the ADR triple cannot be satisfied or because the ADR directory does not exist and cannot be created. Record the terminology change if present; skip the ADR. The terminology entry is kept and the ADR is intentionally skipped, so this is not a rollback. Return `non-converged`.
 
 ## Output
 

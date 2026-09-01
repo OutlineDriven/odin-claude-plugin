@@ -34,7 +34,7 @@ Optional:
 
    If the user cannot classify a signal, discard it rather than guess.
 
-3. **Write the artifact.** Create or append to the target file using this structure:
+3. **Write the artifact.** If the target file does not yet exist, create it with the full template, including the top-level `# Agent Taste Guide — [project name]` heading:
 
    ```
    # Agent Taste Guide — [project name]
@@ -54,7 +54,10 @@ Optional:
    ## Rules
    - [if condition, then behavior]
    ```
-   Preserve existing content. Do not delete or overwrite sections that are not being updated.
+
+   If the file already exists (the "Existing patterns" input was set or the file is present), do not write a second top-level heading. Append only the section blocks this run produced (`## Forbidden`, `## Tokens`, `## Examples`, `## Rules`) under the file's existing top-level heading, and merge each new block into its matching existing section when one already exists rather than duplicating the section header. Preserve existing content; do not delete or overwrite sections that are not being updated.
+
+   **Done when:** a new file has exactly one top-level `# Agent Taste Guide` heading and all produced sections, or an existing file still has exactly one top-level heading with the produced sections merged into it.
 
 4. **Validate with the user.** Read the artifact back. Ask: "Does this match what you meant?" Accept additions or corrections before declaring done.
 
