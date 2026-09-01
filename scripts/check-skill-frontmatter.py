@@ -23,7 +23,9 @@ checker rather than passing silently.
 
 Run `--self-test` to check the checker against its own fixtures.
 """
+import ast
 import json
+import re
 import string
 import sys
 from pathlib import Path
@@ -38,7 +40,7 @@ PLAIN_INDICATORS = "[]{}&*!|>%@`\"'#,"
 PLAIN_INDICATORS_BEFORE_SPACE = "-?:"
 # YAML 1.2 section 5.7. Anything else after a backslash is an unknown escape and a
 # strict parser rejects the scalar.
-DOUBLE_QUOTED_ESCAPES = set('0abtnvfre "/\\N_LP\t') | set("xuU")
+DOUBLE_QUOTED_ESCAPES = set('0abtnvfre "/\\N_LP') | set("xuU")
 # \x takes two hex digits, \u four, \U eight (YAML 1.2 section 5.7).
 HEX_ESCAPES = {"x": 2, "u": 4, "U": 8}
 
@@ -70,13 +72,14 @@ def scan_double_quoted(value):
             nxt = value[i + 1 : i + 2]
             if not nxt:
                 return "double-quoted scalar ends on a backslash"
+            shown = "\\" + nxt
             if nxt not in DOUBLE_QUOTED_ESCAPES:
-                return f"unknown escape {'\\' + nxt!r} in a double-quoted scalar"
+                return f"unknown escape {shown!r} in a double-quoted scalar"
             if nxt in HEX_ESCAPES:
                 want = HEX_ESCAPES[nxt]
                 digits = value[i + 2 : i + 2 + want]
                 if len(digits) < want or any(d not in string.hexdigits for d in digits):
-                    return f"escape {'\\' + nxt!r} needs {want} hex digits, got {digits!r}"
+                    return f"escape {shown!r} needs {want} hex digits, got {digits!r}"
                 i += 2 + want
                 continue
             i += 2
@@ -125,7 +128,7 @@ def check_frontmatter(text):
             continue
         # YAML needs a space or a line end after the colon; `key:value` is one plain
         # scalar, not a mapping entry.
-        if raw and not raw[0].isspace():
+        if raw and raw[0] not in " \t":
             reasons.append(f"line {lineno}: key {key!r} has no space after its colon")
             continue
         seen.append(key)
@@ -193,6 +196,10 @@ CASES = [
      '---\nname: x\ndescription: "Use when \\"quoted\\" text appears."\n---\n', True),
     ("an empty value is caught",
      "---\nname: x\ndescription:\n---\n", False),
+    ("a backslash before a literal tab is caught",
+     '---\nname: x\ndescription: "a \\\tb"\n---\n', False),
+    ("a non-breaking space after the colon is caught",
+     "---\nname:\u00a0x\ndescription: 'y'\n---\n", False),
     ("a colon with no space after it is caught",
      "---\nname:x\ndescription: 'y'\n---\n", False),
     ("a plain scalar opening a sequence entry is caught",
@@ -212,8 +219,41 @@ CASES = [
 ]
 
 
+# `language: system` runs whichever python3 the machine has, so this gate must parse
+# on the oldest interpreter a contributor might carry. PEP 701 allowed a backslash
+# inside an f-string replacement field only from 3.12; before that it is a
+# SyntaxError, and it shipped here once. `ast.parse(feature_version=...)` cannot see
+# the difference, because feature_version does not downgrade the f-string tokenizer,
+# so this looks for the pattern in the source text instead.
+MIN_PYTHON = (3, 9)
+FSTRING_FIELD = re.compile(r"""(?:f|rf|fr|F)(['"])(.*?)\1""", re.S)
+
+
+def source_backslash_in_fstring():
+    """Return the offending line numbers, or an empty list when the source is clean."""
+    text = Path(__file__).read_text("utf-8")
+    bad = []
+    for m in FSTRING_FIELD.finditer(text):
+        for field in re.findall(r"\{([^{}]*)\}", m.group(2)):
+            if "\\" in field:
+                bad.append(text.count("\n", 0, m.start() + m.group(2).find(field)) + 1)
+    try:
+        ast.parse(text, feature_version=MIN_PYTHON)
+    except SyntaxError as e:
+        bad.append(e.lineno or 0)
+    return sorted(set(bad))
+
+
 def self_test():
     passed = 0
+    total = len(CASES) + 1
+    bad = source_backslash_in_fstring()
+    label = f"this gate parses on python {MIN_PYTHON[0]}.{MIN_PYTHON[1]}"
+    if bad:
+        print(f"FAIL: {label} (line(s) {bad})", file=sys.stderr)
+    else:
+        passed += 1
+        print(f"PASS: {label}")
     for label, text, want_clean in CASES:
         reasons = check_frontmatter(text)
         got_clean = not reasons
@@ -224,8 +264,8 @@ def self_test():
                   f"got {reasons or 'clean'})", file=sys.stderr)
         else:
             print(f"PASS: {label}")
-    print(f"check-skill-frontmatter self-test: {passed}/{len(CASES)} passed")
-    sys.exit(0 if passed == len(CASES) else 1)
+    print(f"check-skill-frontmatter self-test: {passed}/{total} passed")
+    sys.exit(0 if passed == total else 1)
 
 
 def main():
