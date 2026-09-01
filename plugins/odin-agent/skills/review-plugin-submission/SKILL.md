@@ -22,8 +22,8 @@ description: 'Use when asked to review a plugin for marketplace readiness throug
 ## Procedure
 
 1. Read the gate rules file at `gate_rules_path`. When it is omitted, audit with the built-in default gates instead: manifest-present (step 2), manifest-complete (step 3), and file-valid (step 4a); these defaults define no allowlist entries. Parse every named gate (check, rule, or criterion block). Record each gate's pass condition and the exact failure message for its fail path. Also parse the rules file's allowlist section when present: each entry is a path prefix, and a file is allowlisted when its path relative to `plugin_root` starts with that prefix.
-2. Reject with a failure report if `plugin_root/package.json` does not exist.
-3. Reject with a failure report if `plugin_root/package.json` lacks `name`, `version`, and `description` fields.
+2. Reject with a failure report if `plugin_root/plugin.json` does not exist.
+3. Reject with a failure report if `plugin_root/plugin.json` lacks `name`, `version`, and `description` fields.
 4. Read every file under `plugin_root` that is reachable by traversing directories and following symlinks that resolve inside `plugin_root`, excluding binary blobs, node_modules, and hidden paths. Skip any symlink whose resolved target is outside `plugin_root`. For each file:
    a. Verify the file is syntactically valid for its declared format.
    b. Apply each applicable gate to the file's contents.
@@ -35,7 +35,7 @@ description: 'Use when asked to review a plugin for marketplace readiness throug
    - Recommendation: APPROVE (all gates pass), APPROVE WITH WARNINGS (all gates pass and allowlist triggered), or REJECT (one or more gates fail).
 
 ## Failure and recovery
-- Missing manifest (`plugin_root/package.json` absent): report the absence as REJECT; stop.
+- Missing manifest (`plugin_root/plugin.json` absent): report the absence as REJECT; stop.
 - Incomplete manifest (missing required fields): report the missing fields as REJECT; stop.
 - Parse error (unreadable or syntactically invalid file): report the file path and parse error; do not halt; continue evaluating remaining files.
 - Gate violation (any file fails an applicable gate): mark that gate FAIL; do not halt; continue evaluating remaining gates.

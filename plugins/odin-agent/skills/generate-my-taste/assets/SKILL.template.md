@@ -26,7 +26,7 @@ Two modes share the auto-clarity exception.
 
 Auto-detect from the invocation phrasing, with a slash-arg override:
 
-- "is this slop?", "overkill?", "taste-test", "audit this", "review for taste", "what's wrong with this" -> **audit**.
+- "{trigger_phrase}", "is this slop?", "overkill?", "taste-test", "audit this", "review for taste", "what's wrong with this" -> **audit**.
 - "shape this before writing", "load taste", "anchor mode", "before I write" -> **anchor**.
 - Anything else -> **audit** by default.
 - Explicit override: `/{skill_name} audit`, `/{skill_name} anchor`. Override always wins.
