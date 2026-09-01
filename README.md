@@ -49,15 +49,29 @@ plugins/odin-core/
   output-styles/               Claude output styles, odin-core only
 ```
 
+
+`odin-core` carries the six output styles and the planning skills; `odin-code` carries the
+day-to-day engineering skills. Install the rest by working domain.
+
 ## Install
 
-Four surfaces are supported, and no others. Each installs from this repository.
+Five install surfaces are supported; Each installs from this repository.
 
 ### Claude Code
 
 ```shell
-/plugin marketplace add OutlineDriven/odin-claude-plugin
-/plugin install odin-core@odin-marketplace
+claude plugin marketplace add OutlineDriven/odin-claude-plugin
+claude plugin install odin-core@odin-marketplace
+
+# Your selected plugin modules; Keep it lean, only for you.
+claude plugin install odin-code@odin-marketplace
+claude plugin install odin-run@odin-marketplace
+claude plugin install odin-create@odin-marketplace
+claude plugin install odin-planning@odin-marketplace
+claude plugin install odin-research@odin-marketplace
+claude plugin install odin-loop@odin-marketplace
+
+# More ...
 ```
 
 ### Codex
@@ -72,13 +86,7 @@ codex plugin add odin-core@odin-marketplace
 Add the marketplace, then `/plugin install odin-core`. Cursor reads the Agent Plugins manifest at
 each plugin root.
 
-### Agent Plugins standard
-
-Any client implementing [Agent Plugins 1.0.0](https://github.com/agentplugins/agent-plugins-spec)
-can consume a plugin directory as it stands: the manifest is `plugins/<plugin>/plugin.json`, skills are
-at `skills/<slug>/SKILL.md`, and MCP servers are at `mcp.json`.
-
-### One skill at a time
+### Individual (gh skill)
 
 `gh skill` installs a single skill for any of its supported agents. Passing the exact path skips a
 full tree traversal, which matters at this repository's size.
@@ -88,22 +96,11 @@ gh skill install OutlineDriven/odin-claude-plugin plugins/odin-core/skills/askme
   --agent claude-code --scope user
 ```
 
-`just validate-skills` runs `gh skill publish --dry-run`, which validates every skill against the
-Agent Skills specification.
+### Agent Plugins standard
 
-## Quick start
-
-```shell
-/plugin marketplace add OutlineDriven/odin-claude-plugin
-/plugin install odin-core@odin-marketplace
-/plugin install odin-code@odin-marketplace
-/commit
-
-# /commit reads your staged diff and writes one conventional commit per concern.
-```
-
-`odin-core` carries the six output styles and the planning skills; `odin-code` carries the
-day-to-day engineering skills. Install the rest by working domain.
+Any client implementing [Agent Plugins 1.0.0](https://github.com/agentplugins/agent-plugins-spec)
+can consume a plugin directory as it stands: the manifest is `plugins/<plugin>/plugin.json`, skills are
+at `skills/<slug>/SKILL.md`, and MCP servers are at `mcp.json`.
 
 ## Choose your plugins
 
@@ -161,10 +158,7 @@ and tags, and every manifest and registry is generated from it.
 4. One logical change per commit.
 5. Show the code, not a description of the code.
 
-Before any non-trivial implementation, five diagrams: architecture, data flow, concurrency,
-memory, and optimization.
-
-## Output styles
+## Output styles (Claude-code Specific)
 
 Output styles shape how the agent communicates. Switch through Claude Code's `/config` or by
 setting `outputStyle` in `settings.json`. They ship in `odin-core`.
@@ -193,26 +187,6 @@ just verify       # every gate plus Agent Skills validation
 
 `.pre-commit-config.yaml` is the gate list. Every gate below audits the whole tree and runs
 unconditionally, so none of them can be skipped by touching the wrong file:
-
-| Gate | What it proves |
-|---|---|
-| `sync-baseline` | every output style carries the canonical doctrine, and resyncs it when not |
-| `check-plugin-surfaces` | retired surfaces stay dead, no plugin ships without skills, no manifest relocates a fixed component |
-| `render-plugin-surfaces --check` | every manifest and registry matches `catalog/plugins.json` |
-| `check-skill-routes` | frontmatter name equals the directory, descriptions state a trigger, display names are unique |
-| `render-skill-manifests --check` | every `agents/openai.yaml` matches its SKILL.md frontmatter |
-| `check-skill-frontmatter` | every frontmatter is a flat mapping whose scalars a strict parser accepts |
-| `check-voice` | authored prose meets the voice contract |
-| `check-voice --self-test` | the voice gate's own rules still catch what they claim |
-| `check-skill-frontmatter --self-test` | the frontmatter gate's own rules still catch what they claim |
-| `check-carriers` | the external harness carriers hold the canonical doctrine |
-| `check-carriers --self-test` | the carrier gate still catches a planted divergence |
-
-Trailing whitespace, line endings, byte-order marks, JSON syntax, and TOML formatting are handled
-by upstream hooks in the same run.
-
-`docs/specs/distribution-surfaces.md` records the specification for each surface, with citations
-and the date each version was read.
 
 ## License
 
