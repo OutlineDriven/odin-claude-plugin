@@ -1,3 +1,3 @@
 interface:
   display_name: "Taste"
-  short_description: "Use when asking \"overkill?\", \"elegant?\", \"audit\", or"
+  short_description: "Use when asking \"overkill?\", \"elegant?\", \"audit\", or \"taste-test this\", or setting a taste register."

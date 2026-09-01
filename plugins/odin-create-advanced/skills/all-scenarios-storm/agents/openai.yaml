@@ -1,3 +1,3 @@
 interface:
   display_name: "All Scenarios Storm"
-  short_description: "Use when a user wants to enumerate plausible designs"
+  short_description: "Use when a user wants to enumerate plausible designs, configurations, scenarios, and paths and diagram the field before choosing."

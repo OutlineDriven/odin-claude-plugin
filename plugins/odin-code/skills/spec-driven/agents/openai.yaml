@@ -1,3 +1,3 @@
 interface:
   display_name: "Spec Driven"
-  short_description: "Use when starting a project or feature, requirements are"
+  short_description: "Use when starting a project or feature, requirements are unclear, or a change crosses modules."

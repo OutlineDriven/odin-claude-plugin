@@ -1,3 +1,3 @@
 interface:
   display_name: "Mutation Campaign Configuration"
-  short_description: "Use when the user mentions mewt, muton, or mutation testing and"
+  short_description: "Use when the user mentions mewt, muton, or mutation testing and asks to initialize, scope, estimate, configure, validate, or optimize a campaign before execution."

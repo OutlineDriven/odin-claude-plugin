@@ -1,3 +1,3 @@
 interface:
   display_name: "MCP Builder"
-  short_description: "Use when asked to create an MCP server to integrate an API or"
+  short_description: "Use when asked to create an MCP server to integrate an API or service in Python or TypeScript."

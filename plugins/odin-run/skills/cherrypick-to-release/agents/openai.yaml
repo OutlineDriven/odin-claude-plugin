@@ -1,3 +1,3 @@
 interface:
   display_name: "Cherrypick To Release"
-  short_description: "Use when the user asks to cherry-pick, backport, or apply a"
+  short_description: "Use when the user asks to cherry-pick, backport, or apply a hotfix to a release branch."

@@ -1,3 +1,3 @@
 interface:
   display_name: "Social Sentiment"
-  short_description: "Use when the user asks for a weekly sentiment report, weekly"
+  short_description: "Use when the user asks for a weekly sentiment report, weekly social summary, or how mentions looked this week."

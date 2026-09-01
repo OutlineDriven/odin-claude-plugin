@@ -1,3 +1,3 @@
 interface:
   display_name: "Doubt Driven"
-  short_description: "Use when a non-trivial decision sits under uncertainty and"
+  short_description: "Use when a non-trivial decision sits under uncertainty and correctness matters more than speed."

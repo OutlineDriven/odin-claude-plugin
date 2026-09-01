@@ -1,3 +1,3 @@
 interface:
   display_name: "Domain Modeling"
-  short_description: "Use when pinning down domain terminology, maintaining the"
+  short_description: "Use when pinning down domain terminology, maintaining the domain model, or when a term conflicts or needs sharpening."

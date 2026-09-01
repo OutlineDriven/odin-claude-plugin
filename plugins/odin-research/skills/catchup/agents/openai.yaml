@@ -1,3 +1,3 @@
 interface:
   display_name: "Catchup"
-  short_description: "Use when the human returns after a gap, cannot follow the"
+  short_description: "Use when the human returns after a gap, cannot follow the project, or asks what happened."

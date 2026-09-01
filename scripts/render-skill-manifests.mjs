@@ -1,7 +1,15 @@
 #!/usr/bin/env node
 // Derive every plugins/<plugin>/skills/<slug>/agents/openai.yaml from SKILL.md:
 //   display_name      = title-cased frontmatter name with an in-script acronym table
-//   short_description = first sentence of description, hard-truncated at 64 chars
+//   short_description = first sentence of the description, emitted whole so it reads
+//                       as a complete phrase ending in terminal punctuation.
+// The 64-char ceiling the generator once imposed is a local choice, not an Agent Plugins
+// requirement: the Codex skill parser (codex-rs/skills/src/interface.rs) resolves
+// interface.short_description against MAX_DESCRIPTION_LEN = 1024 and only warns above
+// that, and the upstream openai.yaml reference calls 25-64 chars a soft "for quick
+// scanning" guideline, not an enforced limit. Cutting a sentence at 64 chars left
+// dangling conjunctions, articles, prepositions, and mid-clause fragments on the
+// user-facing Agent Plugins surface, so the first sentence is now emitted in full.
 // A short_description under 25 chars is a generation ERROR (listed, nonzero exit).
 // Default mode writes files; --check diffs generated vs on-disk and exits 1 on drift.
 // --only <slug>[,<slug>...] limits scope (fixture verification while the tree mutates).
@@ -103,14 +111,29 @@ function firstSentence(desc) {
   return m ? m[1] : desc;
 }
 
-// Hard limit 64 chars; cut at the last space at or before 64 to avoid mid-word
-// breaks, then strip dangling whitespace and punctuation in one pass so a cut
-// that exposes " — " or "feedback," leaves no residue.
-function truncate64(s) {
-  if (s.length <= 64) return s;
-  const cut = s.slice(0, 64);
-  const sp = cut.lastIndexOf(" ");
-  return (sp > 0 ? cut.slice(0, sp) : cut).replace(/[\s,;:\u2014\u2013-]+$/u, "");
+// The short_description is the description's first sentence, emitted whole. The
+// Codex skill parser accepts interface.short_description up to MAX_DESCRIPTION_LEN
+// (1024) and only warns above it, so a complete sentence is always valid; emitting
+// it intact (rather than cutting at a fixed width) leaves no dangling conjunction,
+// article, preposition, or mid-clause fragment, and the first sentence is where the
+// skill states the trigger a model routes on. A defensive 1024 cap guards against a
+// future description whose first sentence exceeds the parser limit: it cuts at the
+// last clause boundary (",", ";", ":", " — ") at or before 1024 and strips the
+// trailing punctuation, falling back to the last space. No current first sentence
+// approaches 1024 (max observed 342), so this branch is unreachable on this tree.
+const SHORT_DESC_MAX = 1024;
+function shortDescriptionFrom(desc) {
+  const sentence = firstSentence(desc);
+  if (sentence.length <= SHORT_DESC_MAX) return sentence;
+  const cut = sentence.slice(0, SHORT_DESC_MAX);
+  const boundary = Math.max(
+    cut.lastIndexOf(", "),
+    cut.lastIndexOf("; "),
+    cut.lastIndexOf(": "),
+    cut.lastIndexOf(" \u2014 "),
+    cut.lastIndexOf(" "),
+  );
+  return (boundary > 0 ? cut.slice(0, boundary) : cut).replace(/[\s,;:\u2014\u2013-]+$/u, "");
 }
 
 function renderManifest(slug) {
@@ -121,9 +144,8 @@ function renderManifest(slug) {
   const fm = parseFrontmatter(readFileSync(skillPath, "utf8"));
   if (!fm) throw new Error(`${slug}: missing/invalid frontmatter`);
   if (!fm.name) throw new Error(`${slug}: frontmatter has no name`);
-  if (!fm.description) throw new Error(`${slug}: frontmatter has no description`);
   const display_name = titleCaseName(fm.name);
-  const short_description = truncate64(firstSentence(fm.description));
+  const short_description = shortDescriptionFrom(fm.description);
   const yaml =
     `interface:\n` +
     `  display_name: ${JSON.stringify(display_name)}\n` +

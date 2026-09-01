@@ -1,3 +1,3 @@
 interface:
   display_name: "Testing Handbook Generator"
-  short_description: "Use when the user asks to discover, generate, refresh, or"
+  short_description: "Use when the user asks to discover, generate, refresh, or validate skills from the Trail of Bits Testing Handbook or appsec.guide."

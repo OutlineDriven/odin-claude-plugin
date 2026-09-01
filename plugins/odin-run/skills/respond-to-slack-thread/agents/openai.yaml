@@ -1,3 +1,3 @@
 interface:
   display_name: "Respond To Slack Thread"
-  short_description: "Use when the user asks to reply to or follow up on a specific"
+  short_description: "Use when the user asks to reply to or follow up on a specific Slack thread."

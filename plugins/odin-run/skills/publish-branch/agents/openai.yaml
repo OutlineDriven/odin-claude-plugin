@@ -1,3 +1,3 @@
 interface:
   display_name: "Publish Branch"
-  short_description: "Use when asked to commit and push to the currently checked-out"
+  short_description: "Use when asked to commit and push to the currently checked-out branch, including the default branch."

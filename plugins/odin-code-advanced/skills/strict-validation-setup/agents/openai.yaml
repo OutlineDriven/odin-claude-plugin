@@ -1,3 +1,3 @@
 interface:
   display_name: "Strict Validation Setup"
-  short_description: "Use when a user invokes a strict-mode validation or"
+  short_description: "Use when a user invokes a strict-mode validation or verifiable-goals loop setup."

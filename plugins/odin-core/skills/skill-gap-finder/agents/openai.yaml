@@ -1,3 +1,3 @@
 interface:
   display_name: "Skill Gap Finder"
-  short_description: "Use when the user suspects no installed skill covers a task and"
+  short_description: "Use when the user suspects no installed skill covers a task and wants proof."

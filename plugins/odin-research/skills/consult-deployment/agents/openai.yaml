@@ -1,3 +1,3 @@
 interface:
   display_name: "Consult Deployment"
-  short_description: "Use when the user asks to rank deployment platforms and stacks"
+  short_description: "Use when the user asks to rank deployment platforms and stacks against their product with quantitative trade-offs."

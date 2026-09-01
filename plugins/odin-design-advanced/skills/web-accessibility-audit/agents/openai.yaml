@@ -1,3 +1,3 @@
 interface:
   display_name: "Web Accessibility Audit"
-  short_description: "Use when the user requests an accessibility audit, a11y check"
+  short_description: "Use when the user requests an accessibility audit, a11y check, or WCAG compliance review."

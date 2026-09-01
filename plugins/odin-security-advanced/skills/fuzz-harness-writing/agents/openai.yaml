@@ -1,3 +1,3 @@
 interface:
   display_name: "Fuzz Harness Writing"
-  short_description: "Use when a user needs to create or improve a deterministic"
+  short_description: "Use when a user needs to create or improve a deterministic, engine-agnostic fuzz harness for raw or structured target inputs."

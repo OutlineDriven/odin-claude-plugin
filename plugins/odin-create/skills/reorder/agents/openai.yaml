@@ -1,3 +1,3 @@
 interface:
   display_name: "Reorder"
-  short_description: "Use when asked to reorder a drifted listing under one stated"
+  short_description: "Use when asked to reorder a drifted listing under one stated principle, moving items only and rewording nothing."

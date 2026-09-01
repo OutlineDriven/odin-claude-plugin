@@ -1,3 +1,3 @@
 interface:
   display_name: "Askme"
-  short_description: "Explore intent with Verbalized Sampling before planning when"
+  short_description: "Explore intent with Verbalized Sampling before planning when the task is ambiguous, max clarification needed, or the user requests exhaustive, collaborative, or adversarial askme."

@@ -1,3 +1,3 @@
 interface:
   display_name: "Docs Canvas"
-  short_description: "Use when asked to render documentation as an interactive"
+  short_description: "Use when asked to render documentation as an interactive, navigable HTML canvas."

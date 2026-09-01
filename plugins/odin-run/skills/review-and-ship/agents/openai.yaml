@@ -1,3 +1,3 @@
 interface:
   display_name: "Review And Ship"
-  short_description: "Reviews an existing diff, fixes release-blocking findings"
+  short_description: "Reviews an existing diff, fixes release-blocking findings, verifies it, packages atomic commits, and opens or updates its pull request."

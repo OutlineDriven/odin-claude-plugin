@@ -1,3 +1,3 @@
 interface:
   display_name: "Git Cleanup"
-  short_description: "Use when the user explicitly invokes branch or worktree cleanup"
+  short_description: "Use when the user explicitly invokes branch or worktree cleanup for a repo with accumulated local branches."

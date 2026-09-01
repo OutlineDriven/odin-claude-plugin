@@ -1,3 +1,3 @@
 interface:
   display_name: "Atomic Issues and PRs"
-  short_description: "Use when the user says \"atomic PRs\" or requests one issue or PR"
+  short_description: "Use when the user says \"atomic PRs\" or requests one issue or PR per logical change."

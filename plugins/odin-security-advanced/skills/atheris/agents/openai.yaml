@@ -1,3 +1,3 @@
 interface:
   display_name: "Atheris"
-  short_description: "Use when a user needs coverage-guided fuzzing for Python code"
+  short_description: "Use when a user needs coverage-guided fuzzing for Python code or a Python native extension using Atheris."

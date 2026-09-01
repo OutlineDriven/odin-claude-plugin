@@ -1,3 +1,3 @@
 interface:
   display_name: "Model Challenge"
-  short_description: "Use when a user requests an independent Codex or Gemini review"
+  short_description: "Use when a user requests an independent Codex or Gemini review of uncommitted code, a branch diff, or a specific commit."

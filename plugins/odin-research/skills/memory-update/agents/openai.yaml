@@ -1,3 +1,3 @@
 interface:
   display_name: "Memory Update"
-  short_description: "Use when the user explicitly says to save something to memory"
+  short_description: "Use when the user explicitly says to save something to memory or scan this session for memories."

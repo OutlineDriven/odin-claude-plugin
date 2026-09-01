@@ -1,3 +1,3 @@
 interface:
   display_name: "Dbt Model Index"
-  short_description: "Use when a human-curated dbt model index must guide BigQuery"
+  short_description: "Use when a human-curated dbt model index must guide BigQuery SQL for a warehouse question."

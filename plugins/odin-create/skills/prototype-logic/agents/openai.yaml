@@ -1,3 +1,3 @@
 interface:
   display_name: "Prototype Logic"
-  short_description: "Use when someone needs to press buttons and watch state change"
+  short_description: "Use when someone needs to press buttons and watch state change to check a state-model, logic, or data-shape question."

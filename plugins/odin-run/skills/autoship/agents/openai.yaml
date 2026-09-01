@@ -1,3 +1,3 @@
 interface:
   display_name: "Autoship"
-  short_description: "Use when the user says release this, publish this package, or"
+  short_description: "Use when the user says release this, publish this package, or cut a release for a changesets-based npm package."

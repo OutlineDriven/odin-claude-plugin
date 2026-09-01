@@ -1,3 +1,3 @@
 interface:
   display_name: "Keep Why Schema Migration"
-  short_description: "Use when a project context-schema differs from the installed"
+  short_description: "Use when a project context-schema differs from the installed entry format."

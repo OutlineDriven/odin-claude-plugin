@@ -1,3 +1,3 @@
 interface:
   display_name: "Session Share"
-  short_description: "Use when the user asks to beam, publish, or share the current"
+  short_description: "Use when the user asks to beam, publish, or share the current local coding session to an authenticated remote receiver."

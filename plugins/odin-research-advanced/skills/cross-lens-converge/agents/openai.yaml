@@ -1,3 +1,3 @@
 interface:
   display_name: "Cross Lens Converge"
-  short_description: "Use when one reviewer is not enough because failure modes are"
+  short_description: "Use when one reviewer is not enough because failure modes are heterogeneous, or a claim needs cross-lens pressure before it ships."

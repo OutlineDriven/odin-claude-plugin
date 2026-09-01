@@ -1,3 +1,3 @@
 interface:
   display_name: "No Comments"
-  short_description: "Use when asked to audit comments in code files and propose"
+  short_description: "Use when asked to audit comments in code files and propose structural replacements or deletions with per-candidate approval."

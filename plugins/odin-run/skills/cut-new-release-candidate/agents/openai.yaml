@@ -1,3 +1,3 @@
 interface:
   display_name: "Cut New Release Candidate"
-  short_description: "Use when the user asks to cut, trigger, or start a release"
+  short_description: "Use when the user asks to cut, trigger, or start a release candidate for a release branch."

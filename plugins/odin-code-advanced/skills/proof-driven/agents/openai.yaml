@@ -1,3 +1,3 @@
 interface:
   display_name: "Proof Driven"
-  short_description: "Use when property-based testing, theorem proving, or formal"
+  short_description: "Use when property-based testing, theorem proving, or formal proof tactics require zero unproven properties."

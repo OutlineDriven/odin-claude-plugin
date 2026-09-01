@@ -1,3 +1,3 @@
 interface:
   display_name: "Show Me"
-  short_description: "Use when the user says show this or diagram this about the"
+  short_description: "Use when the user says show this or diagram this about the current topic."

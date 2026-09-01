@@ -1,3 +1,3 @@
 interface:
   display_name: "Semgrep Security Scan"
-  short_description: "Use when a user asks for a Semgrep security scan or fast"
+  short_description: "Use when a user asks for a Semgrep security scan or fast pattern-based scan of a codebase."

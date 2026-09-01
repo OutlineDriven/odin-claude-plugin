@@ -1,3 +1,3 @@
 interface:
   display_name: "Environment Contract Audit"
-  short_description: "Use when environment-dependent code, templates, or deployment"
+  short_description: "Use when environment-dependent code, templates, or deployment configuration changes, or when runtime configuration is missing."

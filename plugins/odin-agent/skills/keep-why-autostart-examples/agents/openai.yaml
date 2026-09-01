@@ -1,3 +1,3 @@
 interface:
   display_name: "Keep Why Autostart Examples"
-  short_description: "Use when skill or knowledge activation is unreliable, or setup"
+  short_description: "Use when skill or knowledge activation is unreliable, or setup reaches activation reliability."

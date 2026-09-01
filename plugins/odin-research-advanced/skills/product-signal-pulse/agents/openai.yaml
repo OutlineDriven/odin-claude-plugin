@@ -1,3 +1,3 @@
 interface:
   display_name: "Product Signal Pulse"
-  short_description: "Use when invoking /product-signal-pulse with an optional"
+  short_description: "Use when invoking /product-signal-pulse with an optional lookback window to query configured product signals."

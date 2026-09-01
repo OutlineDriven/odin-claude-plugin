@@ -1,3 +1,3 @@
 interface:
   display_name: "Readiness Assessment"
-  short_description: "Use when a user asks for a gut-check on a decision or action"
+  short_description: "Use when a user asks for a gut-check on a decision or action, or asks whether enough is known to proceed."

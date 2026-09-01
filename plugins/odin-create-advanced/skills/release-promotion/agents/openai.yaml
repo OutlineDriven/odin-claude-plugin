@@ -1,3 +1,3 @@
 interface:
   display_name: "Release Promotion"
-  short_description: "Use when asked to draft launch or promotion copy for a shipped"
+  short_description: "Use when asked to draft launch or promotion copy for a shipped feature across channels via /release-promotion."

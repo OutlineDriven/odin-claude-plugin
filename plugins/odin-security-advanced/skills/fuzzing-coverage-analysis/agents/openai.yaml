@@ -1,3 +1,3 @@
 interface:
   display_name: "Fuzzing Coverage Analysis"
-  short_description: "Use when a user needs to measure fuzz corpus coverage, explain"
+  short_description: "Use when a user needs to measure fuzz corpus coverage, explain a coverage plateau, or turn uncovered regions into campaign work."

@@ -1,3 +1,3 @@
 interface:
   display_name: "Writing For Agents"
-  short_description: "Use when asked to author or restructure any agent-consumed"
+  short_description: "Use when asked to author or restructure any agent-consumed document so the agent routes and executes predictably."

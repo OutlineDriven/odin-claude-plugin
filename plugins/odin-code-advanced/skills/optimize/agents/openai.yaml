@@ -1,3 +1,3 @@
 interface:
   display_name: "Optimize"
-  short_description: "Use when asked to optimize code, speed up a path, reduce"
+  short_description: "Use when asked to optimize code, speed up a path, reduce allocations, repair a regression, or profile a target."

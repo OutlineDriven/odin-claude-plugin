@@ -1,3 +1,3 @@
 interface:
   display_name: "From Codebase Perspective"
-  short_description: "Use when asked to answer only from the codebase seat: what"
+  short_description: "Use when asked to answer only from the codebase seat: what existing code tolerates or punishes."

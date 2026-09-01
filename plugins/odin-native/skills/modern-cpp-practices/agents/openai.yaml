@@ -1,3 +1,3 @@
 interface:
   display_name: "Modern Cpp Practices"
-  short_description: "Use when C++ code is being written or reviewed and the compiler"
+  short_description: "Use when C++ code is being written or reviewed and the compiler supports modern safe idioms."

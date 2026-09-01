@@ -1,3 +1,3 @@
 interface:
   display_name: "Tdd"
-  short_description: "Offensive-first TDD: write tests that attack the contract"
+  short_description: "Offensive-first TDD: write tests that attack the contract before any green."

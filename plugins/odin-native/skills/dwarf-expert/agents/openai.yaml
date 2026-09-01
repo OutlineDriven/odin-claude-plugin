@@ -1,3 +1,3 @@
 interface:
   display_name: "Dwarf Expert"
-  short_description: "Use when inspecting, searching, verifying, or parsing DWARF"
+  short_description: "Use when inspecting, searching, verifying, or parsing DWARF debug info: DIEs, DW_TAG_/DW_AT_ entries, .debug_* sections, line tables, or llvm-dwarfdump/readelf output."

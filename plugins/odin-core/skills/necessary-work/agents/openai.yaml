@@ -1,3 +1,3 @@
 interface:
   display_name: "Necessary Work"
-  short_description: "Use when work is about to grow past the ask, the task may"
+  short_description: "Use when work is about to grow past the ask, the task may already be done, or the user requests only the minimum."
