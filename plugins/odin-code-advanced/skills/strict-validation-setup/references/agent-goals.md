@@ -53,6 +53,6 @@ The skill's three-mode shape (interactive / template-driven / hybrid) maps to wh
 
 ## Anti-patterns
 
-- **AGENTS.md drift** — task-specific goals creeping into AGENTS.md across sessions. Detect via `git log AGENTS.md` showing per-task entries; if present, factor out to per-task GOALS.md.
-- **Stale GOALS.md** — task merged but the file lingers. Cleanup is part of the merge, not a follow-up.
-- **Prose-only goals** — writing the criterion in prose without a test makes the loop unverifiable. Always include the test column.
+- AGENTS.md drift — task-specific goals creeping into AGENTS.md across sessions. Detect via `git log AGENTS.md` showing per-task entries; if present, factor out to per-task GOALS.md.
+- Stale GOALS.md — task merged but the file lingers. Cleanup is part of the merge, not a follow-up.
+- Prose-only goals — writing the criterion in prose without a test makes the loop unverifiable. Always include the test column.

@@ -30,25 +30,25 @@ Use these when Phase 3 finds no existing benchmark harness for the hot path. It 
 instrument** — its only purpose is to measure `HOT_PATH` in isolation with realistic inputs.
 Delete it after the skill run unless the user asks to keep it as a regression guard.
 
-### Harness placement: toolchain-native against portable
+### Harness placement
 
 - **Python, TypeScript, OCaml**: toolchain-agnostic runners discover files by path argument;
   write the harness directly to `.outline/optimize/<target>/` and invoke it from there.
-- **Rust (`cargo bench`)** — `cargo` discovers benches only under the project's `benches/`
+- **Rust (`cargo bench`)**: `cargo` discovers benches only under the project's `benches/`
   directory (registered in `Cargo.toml` or auto-discovered by convention). Write the harness to
   `<project-root>/benches/bench_<target>.rs`. Run from `<project-root>` as shown. Remove after
   the skill run.
-- **Go (`go test -bench`)** — `go test` runs only within the package directory. Write the
+- **Go (`go test -bench`)**: `go test` runs only within the package directory. Write the
   `_test.go` harness alongside the source file being benchmarked (same package directory). Run
   from that directory. Remove after the skill run.
-- **JMH (Java/Kotlin)** — JMH requires the benchmark to live in the standard JMH source layout
+- **JMH (Java/Kotlin)**: JMH requires the benchmark to live in the standard JMH source layout
   (`src/jmh/java/` for Gradle, `src/test/java/` annotated appropriately for Maven). Write to
   that location; run the build task (`./gradlew jmh` or `mvn jmh:benchmark`) from the project
   root. Remove after the skill run.
 
 The `BENCH_CMD` passed to lens agents must reflect the actual invocation path after placement.
 
-### Rust — criterion
+### Rust: criterion
 
 ```rust
 // <project-root>/benches/bench_<target>.rs  (toolchain-native; registered in Cargo.toml)
@@ -67,7 +67,7 @@ criterion_main!(benches);
 
 Run: `cargo bench --bench bench_<target> -- --save-baseline before`
 
-### Python — pytest-benchmark
+### Python: pytest-benchmark
 
 ```python
 # .outline/optimize/<target>/bench_<target>.py
@@ -144,7 +144,7 @@ console.table(bench.table());
 Run: `npx tsx .outline/optimize/<target>/bench.<target>.ts`
 Or via `hyperfine 'npx tsx bench.<target>.ts'` for wall-clock comparison.
 
-### OCaml — bechamel
+### OCaml: bechamel
 
 ```ocaml
 (* .outline/optimize/<target>/bench_<target>.ml *)
@@ -168,7 +168,7 @@ let () =
 
 ## Measurement discipline
 
-- **stddev > 20 % of median** — stop and fix measurement noise before proceeding.
+- **stddev > 20 % of median**: stop and fix measurement noise before proceeding.
   Causes: CPU frequency scaling, background load, cold cache, OS jitter.
   Fixes: `cpupower frequency-set -g performance`, `nice -n -20`, warm-up runs, pin to a core
   (`taskset 0x1`), disable turbo boost (`echo 1 > /sys/devices/.../no_turbo`).
