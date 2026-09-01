@@ -45,14 +45,14 @@ repos:
         name: check plugin tree, manifests, and registries
         entry: node scripts/check-plugin-surfaces.mjs
         language: system
-        files: ^(catalog/plugins\.json|plugins/.*|licenses/NOTICE|scripts/(plugin-surfaces|render-plugin-surfaces|check-plugin-surfaces)\.mjs|LICENSE)$
+        files: ^(catalog/plugins\.json|plugins/.*|licenses/NOTICE|scripts/(plugin-surfaces|render-plugin-surfaces|check-plugin-surfaces)\.mjs|LICENSE|\.claude-plugin/marketplace\.json|\.agents/plugins/marketplace\.json|\.cursor-plugin/marketplace\.json)$
         pass_filenames: false
 
       - id: render-plugin-surfaces
         name: check generated plugin surfaces match the catalog
         entry: node scripts/render-plugin-surfaces.mjs --check
         language: system
-        files: ^(catalog/plugins\.json|plugins/.*|licenses/NOTICE|scripts/(plugin-surfaces|render-plugin-surfaces)\.mjs|LICENSE)$
+        files: ^(catalog/plugins\.json|plugins/.*|licenses/NOTICE|scripts/(plugin-surfaces|render-plugin-surfaces)\.mjs|LICENSE|\.claude-plugin/marketplace\.json|\.agents/plugins/marketplace\.json|\.cursor-plugin/marketplace\.json)$
         pass_filenames: false
 
       - id: check-skill-routes
