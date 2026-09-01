@@ -24,16 +24,15 @@ Never hand-edit `plugins/odin-core/output-styles/benchmark.md`. Its margin-runne
 ## Submodule publishing
 
 Commit and push from this repository, not its parent `~/.claude`, because this tree is a Git
-submodule. From this repository's root, use plain `git push origin main`.
+submodule.
 
-Plain `git push` only. Force-push is denied: `git push -f`, `--force`, and every
-`--force-with-lease*` variant are blocked at the Claude permissions layer. The denial covers the
-lease variants too, because a lease protects the remote from a stale overwrite and protects nothing
-from a rewrite you intended. On a branch with an open pull request, rewriting history strands every
-inline review comment on commits that no longer exist.
+Never force-push, and that includes every `--force-with-lease` variant: a lease protects the
+remote from a stale overwrite and protects nothing from a rewrite you intended. On a branch with
+an open pull request, rewriting history strands every inline review comment on commits that no
+longer exist, and no permission error tells you that.
 
-A push that only adds commits needs no flag. If a push is rejected as non-fast-forward, the answer
-is to fetch and rebase or to ask, never to reach for a force variant.
+If a push is rejected as non-fast-forward, the answer is to fetch and rebase or to ask, never to
+reach for a force variant.
 
 ## The skill tree
 
@@ -43,11 +42,11 @@ Adding a skill means creating `plugins/<plugin>/skills/<slug>/SKILL.md` and runn
 
 Moving a skill between plugins means moving its directory. Nothing else records membership.
 
-Agent Plugins fixes components at the plugin root, so a skill nested deeper than `skills/<slug>/` never loads. `check-plugin-surfaces` fails on a nested `SKILL.md` for that reason.
+Agent Plugins fixes components at the plugin root, so a skill nested deeper than `skills/<slug>/` never loads.
 
 ## Distribution surfaces
 
-Four surfaces are supported, and no others: the Agent Plugins standard, the Claude Code marketplace, the Codex marketplace, and the Cursor marketplace. Nothing is published to a package registry, and no npm artifact belongs in this tree. `check-plugin-surfaces` fails if one returns.
+Four surfaces are supported, and no others: the Agent Plugins standard, the Claude Code marketplace, the Codex marketplace, and the Cursor marketplace. Nothing is published to a package registry, and no npm artifact belongs in this tree.
 
 `catalog/plugins.json` owns plugin identity: name, description, category, tags, and directory. Every manifest and registry is generated from it. Keep every plugin and marketplace version at the single `releaseVersion` literal `2.0.0`; never bump only some manifests.
 
@@ -60,28 +59,19 @@ Treat these as generator-owned and never hand-edit them:
 
 To change one, change its generator or `catalog/plugins.json`, run `just render`, and commit input and output together.
 
-The Agent Plugins manifest schema is closed and forbids declaring component locations. Do not add `skills`, `mcpServers`, `commands`, `agents`, `hooks`, or `paths` to a root `plugin.json`; the specification fixes those locations and the gate rejects them.
+The Agent Plugins manifest schema is closed and forbids declaring component locations. Do not add `skills`, `mcpServers`, `commands`, `agents`, `hooks`, or `paths` to a root `plugin.json`; the specification fixes those locations.
 
 Do not change `releaseVersion` for tooling-only changes such as pre-commit hooks or formatter configuration, or for edits to this file. Do not add or backfill `CHANGELOG.md` entries for routine version work.
 
 ## Skill metadata
 
-Frontmatter carries `name` and `description` and little else. `name` must equal the directory name, or `gh skill install` drops the skill. `description` must state a trigger a model can route on, and `check-skill-routes` fails a description that states none.
+Frontmatter carries `name` and `description` and little else. `name` must equal the directory name, or `gh skill install` drops the skill. `description` must state a trigger a model can route on.
 
-Single-quote every frontmatter value containing `: `. Strict YAML parsers reject an unquoted colon-space even though Claude Code's loader accepts it, so it ships silently broken. `check-skill-routes` treats it as an error, not a normalization.
+Single-quote every frontmatter value containing `: `. Strict YAML parsers reject an unquoted colon-space even though Claude Code's loader accepts it, so it ships silently broken.
 
 Do not add a `license` field to a skill. This tree has mixed provenance and attribution lives in `licenses/NOTICE`; a uniform value would misstate the provenance of adapted skills.
 
-`scripts/render-skill-manifests.mjs` derives each `agents/openai.yaml` from frontmatter: `interface.display_name` is the title-cased name with an in-script acronym table, and `interface.short_description` is the first sentence of the description, truncated at 64 characters and failed, never padded, under 25.
-
 ## Verification
-
-```shell
-just check     # all five gates
-just verify    # gates, prek hooks, and Agent Skills validation
-```
-
-`just validate-skills` runs `gh skill publish --dry-run`, which validates every skill against the Agent Skills specification: strict naming, name matching its directory, required frontmatter, `allowed-tools` as a string, and no leftover install metadata.
 
 Do not invent language test commands or add CI without an explicit request; this repository has no build, no unit-test suite, and no GitHub Actions workflow.
 
@@ -104,19 +94,11 @@ Prefer a short repeated rule to a decorative inter-file pointer. Use a cross-ref
 ## Voice
 
 Every skill in this tree is authored in one register, set by the ODIN doctrine in
-`system-prompt-baseline.md` and the spine taste anchors. `docs/specs/voice.md` is the contract:
-the ten anchors, the two-sided ban list covering slop and overkill, and the thresholds a script
-can measure.
+`system-prompt-baseline.md` and the spine taste anchors. `docs/specs/voice.md` is the contract.
 
 The spine itself is user-private, at `~/.claude/skills/spine/`. Read it when authoring; never
 edit it from this repository, and never vendor a copy into this tree. `docs/specs/voice.md`
 carries what an editor needs without loading it.
-
-`scripts/check-voice.py` enforces the measurable half over every `SKILL.md`, skill reference,
-`docs/` page, and this file. It fails on two or more consecutive `**Label**:` lines where a list
-or table belongs, five or more em or en dashes inside 600 characters, a heading capitalizing a
-minor word past the first position, AI-marker vocabulary, and curly quotes. It strips fenced
-blocks and inline spans first, so a shell flag or code sample never trips it.
 
 Passing the gate is not passing the register. The script sees formatting tells, not absent
 conviction; whether a section earns its place is the spine audit's judgment, not a regular
