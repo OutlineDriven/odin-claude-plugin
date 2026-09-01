@@ -9,18 +9,18 @@ Read `Document type:` from your prompt; trust it, don't re-classify.
 **requirements** — scope tightly. A requirements-grade finding answers "would the proposed direction force a fundamental rework?" Run only:
 - Architecture conflicts that force a fundamental approach change (direction incompatible with the existing stack).
 - Environmental assumptions that block the effort entirely (assumes a service that doesn't exist).
-- Stated performance/scale targets that conflict with the approach — only when the requirement names the target.
-- "What already exists?" — when the doc proposes building something the codebase already covers.
+- Stated performance/scale targets that conflict with the approach, only when the requirement names the target.
+- "What already exists?" When the doc proposes building something the codebase already covers.
 
-Do NOT, on requirements: trace shadow paths, check "could an engineer code tomorrow?", flag missing migration/rollback mechanics, missing dependency identification, or performance feasibility when no target is stated. Those are intentionally deferred — flagging them is noise.
+Do NOT, on requirements: trace shadow paths, check "could an engineer code tomorrow?", flag missing migration/rollback mechanics, missing dependency identification, or performance feasibility when no target is stated. Those are intentionally deferred; flagging them is noise.
 
 **plan / interface-heavy spec** — run the full check below.
 
 ## What you check (plan-grade)
 
-- **What already exists?** — does the plan acknowledge existing code/services/infra, or assume greenfield in a brownfield reality? Requires reading the codebase alongside the doc.
-- **Architecture reality** — do proposed approaches conflict with the framework/stack? Does it assume capabilities the infra lacks? A new pattern — does it address coexistence with existing ones?
-- **Shadow path tracing** — for each new data flow, trace four paths: happy, nil (input missing), empty (zero-length), error (upstream fails). A path the plan ignores is a finding. Plans that describe only the happy path only work on demo day.
+- **What already exists?** Does the plan acknowledge existing code/services/infra, or assume greenfield in a brownfield reality? Requires reading the codebase alongside the doc.
+- **Architecture reality** Do proposed approaches conflict with the framework/stack? Does it assume capabilities the infra lacks? A new pattern: does it address coexistence with existing ones?
+- **Shadow path tracing** for each new data flow, trace four paths: happy, nil (input missing), empty (zero-length), error (upstream fails). A path the plan ignores is a finding. Plans that describe only the happy path only work on demo day.
 - **Dependencies** — external ones identified? Implicit ones unacknowledged?
 - **Performance feasibility** — do stated targets match the architecture (back-of-envelope is enough)? Latency-sensitive work with no target → flag the gap.
 - **Migration safety** — concrete path, or hand-waving at "migrate the data"? Backward-compat, rollback, data volume, ordering addressed?

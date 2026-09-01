@@ -10,9 +10,9 @@ Interactive mode only.
 
 After synthesis produces the remaining finding set, the orchestrator asks a four-option routing question before any walk-through or bulk action runs.
 
-**Stem:** `What should the agent do with the remaining N findings?`
+Stem: `What should the agent do with the remaining N findings?`
 
-**Options (fixed order; no option is labeled `(recommended)` -- the routing choice is user-intent):**
+Options (fixed order; no option is labeled `(recommended)` -- the routing choice is user-intent):
 
 ```
 A. Review each finding one by one -- accept the recommendation or choose another action

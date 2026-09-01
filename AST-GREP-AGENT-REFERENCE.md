@@ -25,9 +25,9 @@ For real regular expressions, use the YAML `regex:` field (ideally narrowed with
 | `$$_`      | one or more nodes                 | no     | Anonymous multi; requires at least one node. |
 | `$$$`      | zero or more nodes                | no     | Anonymous multi (bare). |
 
-- **Names**: metavariable names use UPPERCASE letters, digits, and `_` only (e.g. `$ERR`, `$ARG1`, `$MY_VAR`). Lowercase names are not valid metavariables.
-- **Same name must match identical text**: if a name appears more than once, every occurrence must capture byte-identical text. `$X === $X` matches `a === a` but NOT `a === b`.
-- **`$$$` is greedy, commits, and does not backtrack**: once it has consumed a run of nodes it will not give them back to satisfy a later part of the pattern. It also matches zero nodes, so `f($$$ARGS)` matches `f()`.
+- Names: metavariable names use UPPERCASE letters, digits, and `_` only (e.g. `$ERR`, `$ARG1`, `$MY_VAR`). Lowercase names are not valid metavariables.
+- Same name must match identical text: if a name appears more than once, every occurrence must capture byte-identical text. `$X === $X` matches `a === a` but NOT `a === b`.
+- `$$$` is greedy, commits, and does not backtrack: once it has consumed a run of nodes it will not give them back to satisfy a later part of the pattern. It also matches zero nodes, so `f($$$ARGS)` matches `f()`.
 
 ---
 
@@ -126,7 +126,7 @@ If the dumped tree contains an `ERROR` node, the pattern does not parse. Fix it 
 
 A rule file requires three top-level keys: `id`, `language`, and `rule`. The `rule` is composed from three categories:
 
-**Atomic rules** (match a single node):
+Atomic rules (match a single node):
 - `pattern`: a code pattern (string or `{context, selector}` object).
 - `kind`: the tree-sitter node kind (e.g. `function_declaration`).
 - `regex`: a regular expression over the node's text.
@@ -139,9 +139,9 @@ A rule file requires three top-level keys: `id`, `language`, and `rule`. The `ru
 
 So `has:` with no `stopBy` checks only direct children; add `stopBy: end` to find a descendant at any depth.
 
-**Composite rules** (combine sub-rules): `all`, `any`, `not`, `matches` (reference a named util rule).
+Composite rules (combine sub-rules): `all`, `any`, `not`, `matches` (reference a named util rule).
 
-**Other rule fields**:
+Other rule fields:
 - `constraints`: additional predicates on captured metavars (e.g. restrict `$METHOD` by regex).
 - `transform`: derive new metavars from captured ones for use in `fix`.
 - `fix`: the rewrite template.

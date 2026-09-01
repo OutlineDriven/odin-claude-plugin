@@ -13,11 +13,11 @@ Read `Document type:` and `Origin:` from your prompt; trust them. Security appli
 Skip areas outside the document's scope.
 
 - **Attack-surface inventory** — new endpoints (who can access?), new data stores (sensitivity? access control?), new integrations (what crosses the trust boundary?), new user inputs (validation mentioned?). One finding per element with no security consideration.
-- **Auth/authz gaps** — does each endpoint/feature carry an explicit access-control decision? Watch for functionality with no named actor ("the system allows editing settings" — who?). New roles/permission changes need defined boundaries.
-- **Data exposure** — sensitive data (PII, credentials, financial) identified? Protection addressed in transit, at rest, in logs, and for retention/deletion?
-- **Third-party trust boundaries** — trust assumptions explicit? Credential storage/rotation defined? Failure modes (compromise, malicious data, unavailability) addressed? Minimum-necessary data shared?
-- **Secrets** — management strategy (storage, rotation, access)? Risk of hardcoding, source-control commit, or logging? Environment separation?
-- **Plan-level threat model** — not a full model. Name the top 3 exploits if shipped with no further security thinking: most likely, highest impact, most subtle. One sentence each plus the needed mitigation.
+- **Auth/authz gaps** Does each endpoint/feature carry an explicit access-control decision? Watch for functionality with no named actor: "the system allows editing settings" (who?). New roles/permission changes need defined boundaries.
+- **Data exposure** Sensitive data (PII, credentials, financial) identified? Protection addressed in transit, at rest, in logs, and for retention/deletion?
+- **Third-party trust boundaries** Trust assumptions explicit? Credential storage/rotation defined? Failure modes (compromise, malicious data, unavailability) addressed? Minimum-necessary data shared?
+- **Secrets** Management strategy (storage, rotation, access)? Risk of hardcoding, source-control commit, or logging? Environment separation?
+- **Plan-level threat model** Not a full model. Name the top 3 exploits if shipped with no further security thinking: most likely, highest impact, most subtle. One sentence each plus the needed mitigation.
 
 ## Confidence anchors
 

@@ -81,19 +81,19 @@ Open the digest with a workspace identifier and a one-line research value assess
 ```
 
 Research value levels:
-- **high** — Decisions, constraints, or substantial context directly relevant to the task.
-- **moderate** — Useful background context but no direct decisions or constraints found.
-- **low** — Only tangential mentions; unlikely to change the caller's approach.
+- high: Decisions, constraints, or substantial context directly relevant to the task.
+- moderate: Useful background context but no direct decisions or constraints found.
+- low: Only tangential mentions; unlikely to change the caller's approach.
 
-Treat each thread as one atomic unit of meaning — extract the net conclusion, not individual messages. Unthreaded messages are separate data points; reason about how they relate in the cross-cutting analysis.
+Treat each thread as one atomic unit of meaning: extract the net conclusion, not individual messages. Unthreaded messages are separate data points; reason about how they relate in the cross-cutting analysis.
 
 Return findings organized by topic or theme. For each finding:
 
-- **Topic** — what the discussion was about
-- **Summary** — the decision, constraint, or key context in 1-3 sentences. Be direct: "The team decided X because Y."
-- **Source** — #channel-name, ~date
+- Topic: what the discussion was about
+- Summary: the decision, constraint, or key context in 1-3 sentences. Be direct: "The team decided X because Y."
+- Source: #channel-name, ~date
 
-After individual findings, write a short **Cross-cutting analysis** that reasons across the full set — patterns, evolving positions, contradictions, or convergence. Skip when findings are sparse or all from a single thread.
+After individual findings, write a short **Cross-cutting analysis** that reasons across the full set: patterns, evolving positions, contradictions, or convergence. Skip when findings are sparse or all from a single thread.
 
 **Token budget:** Target ~500 tokens for sparse results (1-2 findings), ~1000 for typical (3-5 findings), and cap at ~1500 even for rich results.
 

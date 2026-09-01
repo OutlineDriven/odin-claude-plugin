@@ -41,9 +41,9 @@ Load the 5 anchors and two-sided charter as imperatives for subsequent responses
 
 ## Two-sided charter
 
-**Side A — slop:** {side_a_summary}
+Side A — slop: {side_a_summary}
 
-**Side B — overkill:** {side_b_summary}
+Side B — overkill: {side_b_summary}
 
 See `references/charter.md` for the full charter.
 

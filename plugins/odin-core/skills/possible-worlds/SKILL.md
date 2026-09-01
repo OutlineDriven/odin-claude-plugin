@@ -30,8 +30,8 @@ Supply a design dispute containing at least two live interpretations. Include an
 
 ## Failure and recovery
 
-- **Fewer than two live interpretations**: stop before emitting anything. Report that the dispute does not meet the two-interpretation threshold. Emit no paragraph.
-- **Dispute cannot support internally consistent alternative worlds without invented premises**: return `blocked: dispute cannot support internally consistent alternative worlds without invented premises`. Recovery requires the caller to supply a corrected dispute or the missing premises, after which the procedure starts again.
+- Fewer than two live interpretations: stop before emitting anything. Report that the dispute does not meet the two-interpretation threshold. Emit no paragraph.
+- Dispute cannot support internally consistent alternative worlds without invented premises: return `blocked: dispute cannot support internally consistent alternative worlds without invented premises`. Recovery requires the caller to supply a corrected dispute or the missing premises, after which the procedure starts again.
 - Ambiguous or missing dispute statement: stop and ask the user to state the dispute. Do not invent interpretations.
 - No single recommendation reachable: stop and report that no one recommendation follows. Do not force a selection.
 - Partial-result rule: the output is atomic. Never emit a partial paragraph.

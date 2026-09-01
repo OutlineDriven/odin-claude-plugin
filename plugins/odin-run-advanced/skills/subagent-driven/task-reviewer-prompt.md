@@ -2,7 +2,7 @@
 
 Fill this template when dispatching a task reviewer. Use a fresh, self-contained subagent for each task. It sees only what you put here; it does not inherit your session, the plan file, or prior workers' context. The reviewer reads the task's diff once and returns two verdicts: spec compliance and code quality. Those verdicts gate the loop.
 
-**Purpose:** verify that one task's implementation matches its requirements (nothing more, nothing less) and is well-built.
+Purpose: verify that one task's implementation matches its requirements (nothing more, nothing less) and is well-built.
 
 ```
 Subagent:
@@ -147,20 +147,20 @@ Subagent:
     **Reasoning:** [1-2 sentence technical assessment]
 ```
 
-**Placeholders:**
-- `[MODEL]` — REQUIRED: reviewer model per SKILL.md Model Selection.
-- `[BRIEF_FILE]` — REQUIRED: the task brief (`scripts/task-brief PLAN N` prints
+Placeholders:
+- `[MODEL]`: REQUIRED: reviewer model per SKILL.md Model Selection.
+- `[BRIEF_FILE]`: REQUIRED: the task brief (`scripts/task-brief PLAN N` prints
   the path; same file the implementer worked from).
-- `[GLOBAL_CONSTRAINTS]` — binding requirements copied verbatim from the plan's
+- `[GLOBAL_CONSTRAINTS]`: binding requirements copied verbatim from the plan's
   Global Constraints or the spec: exact values, formats, and stated
-  relationships between components (not process rules — those are in this template).
-- `[REPORT_FILE]` — REQUIRED: the file the implementer wrote its detailed report to.
-- `[BASE_SHA]` — commit before this task.
-- `[HEAD_SHA]` — current commit.
-- `[DIFF_FILE]` — REQUIRED: the path `scripts/review-package BASE HEAD` printed;
+  relationships between components (not process rules: those are in this template).
+- `[REPORT_FILE]`: REQUIRED: the file the implementer wrote its detailed report to.
+- `[BASE_SHA]`: commit before this task.
+- `[HEAD_SHA]`: current commit.
+- `[DIFF_FILE]`: REQUIRED: the path `scripts/review-package BASE HEAD` printed;
   the package never enters the controller's context.
 
-**Reviewer returns:** Spec Compliance verdict (✅/❌/⚠️), Code Quality verdict
+Reviewer returns: Spec Compliance verdict (✅/❌/⚠️), Code Quality verdict
 (✅/❌), Strengths, Issues (Critical/Important/Minor), Task quality verdict.
 
 A fix dispatch can address spec gaps and quality findings together; re-review

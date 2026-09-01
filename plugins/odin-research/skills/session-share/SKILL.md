@@ -85,8 +85,8 @@ If the response is not valid JSON, or the `url` field is absent or not a valid H
 - Upload failure (network timeout, DNS failure, TLS error): report the exact error and the blocked result; no URL is returned. Do not retry blindly.
 - HTTP error (4xx or 5xx): report the status code and a short response body excerpt; no URL is returned. Do not retry blindly.
 - Response lacks valid URL: report the response status and body excerpt; no URL is returned.
-- **Redaction leak detected (reasoning, credentials, or raw JSONL present in the payload):** abort before upload; report the leak; do not publish.
-- **Non-mutation rule:** publishing is irreversible once the URL is returned; the only protection is to never upload a payload that fails the redaction contract.
+- Redaction leak detected (reasoning, credentials, or raw JSONL present in the payload): abort before upload; report the leak; do not publish.
+- Non-mutation rule: publishing is irreversible once the URL is returned; the only protection is to never upload a payload that fails the redaction contract.
 
 ## Output
 

@@ -77,9 +77,9 @@ Only use arbitrary values like `[45px]` when:
 - No Tailwind default is close enough (within 2-4px)
 
 Common Tailwind values to prefer:
-- **Spacing**: `gap-2` (8px), `gap-4` (16px), `gap-6` (24px), `gap-8` (32px), `gap-10` (40px)
-- **Text**: `text-sm` (14px), `text-base` (16px), `text-lg` (18px), `text-xl` (20px), `text-2xl` (24px), `text-3xl` (30px)
-- **Width/Height**: `w-10` (40px), `w-14` (56px), `w-16` (64px)
+- Spacing: `gap-2` (8px), `gap-4` (16px), `gap-6` (24px), `gap-8` (32px), `gap-10` (40px)
+- Text: `text-sm` (14px), `text-base` (16px), `text-lg` (18px), `text-xl` (20px), `text-2xl` (24px), `text-3xl` (30px)
+- Width/Height: `w-10` (40px), `w-14` (56px), `w-16` (64px)
 
 ### Responsive layout pattern
 
@@ -137,21 +137,21 @@ Prefer Tailwind defaults:
 
 ## Quality standards
 
-- **Precision**: Use exact values from Figma (e.g., "16px" not "about 15-17px"), but prefer Tailwind defaults when close enough.
-- **Completeness**: Document all differences; fix only those that are clear, safe, and in scope.
-- **Code quality**: Follow the project's frontend conventions from the project instructions already in context, or its root agent-instruction file if they are not loaded.
-- **Communication**: State what changed and why.
-- **Iteration readiness**: Structure fixes so another verification pass can follow.
-- **Responsive first**: Always implement mobile-first responsive designs with appropriate breakpoints.
+- Precision: Use exact values from Figma (e.g., "16px" not "about 15-17px"), but prefer Tailwind defaults when close enough.
+- Completeness: Document all differences; fix only those that are clear, safe, and in scope.
+- Code quality: Follow the project's frontend conventions from the project instructions already in context, or its root agent-instruction file if they are not loaded.
+- Communication: State what changed and why.
+- Iteration readiness: Structure fixes so another verification pass can follow.
+- Responsive first: Always implement mobile-first responsive designs with appropriate breakpoints.
 
 ## Edge cases
 
-- **Missing Figma URL**: Request the Figma URL and node ID from the user.
-- **Missing web URL**: Request the local or deployed URL to compare.
-- **MCP access issues**: Report any connection problems with Figma or Playwright MCPs clearly.
-- **Ambiguous differences**: When a difference could be intentional, note it and ask for clarification.
-- **Breaking changes**: If a fix would require significant refactoring, document the issue and propose the safest approach.
-- **Multiple iterations**: After each run, suggest whether another iteration is needed based on remaining differences.
+- Missing Figma URL: Request the Figma URL and node ID from the user.
+- Missing web URL: Request the local or deployed URL to compare.
+- MCP access issues: Report any connection problems with Figma or Playwright MCPs clearly.
+- Ambiguous differences: When a difference could be intentional, note it and ask for clarification.
+- Breaking changes: If a fix would require significant refactoring, document the issue and propose the safest approach.
+- Multiple iterations: After each run, suggest whether another iteration is needed based on remaining differences.
 
 ## Success criteria
 
