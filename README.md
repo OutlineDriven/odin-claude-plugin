@@ -49,9 +49,16 @@ plugins/odin-core/
   output-styles/               Claude output styles, odin-core only
 ```
 
+> `odin-core` carries the six output styles and the planning skills; `odin-code` carries the day-to-day engineering skills. Install the rest by working domain.
 
-`odin-core` carries the six output styles and the planning skills; `odin-code` carries the
-day-to-day engineering skills. Install the rest by working domain.
+
+## Core philosophy
+
+> 1. Investigate before acting. Never speculate about code you have not read.
+> 2. Draw the structure before building it.
+> 3. Match rigor to risk.
+> 4. One logical change per commit.
+> 5. Show the code, not a description of the code.
 
 ## Install
 
@@ -79,12 +86,36 @@ claude plugin install odin-loop@odin-marketplace
 ```shell
 codex plugin marketplace add OutlineDriven/odin-claude-plugin
 codex plugin add odin-core@odin-marketplace
+
+# Your selected plugin modules; Keep it lean, only for you.
+codex plugin add odin-code@odin-marketplace
+codex plugin add odin-run@odin-marketplace
+codex plugin add odin-create@odin-marketplace
+codex plugin add odin-planning@odin-marketplace
+codex plugin add odin-research@odin-marketplace
+codex plugin add odin-loop@odin-marketplace
+
+# More ...
 ```
 
 ### Cursor
 
 Add the marketplace, then `/plugin install odin-core`. Cursor reads the Agent Plugins manifest at
 each plugin root.
+
+```
+/plugin install odin-core
+
+# Your selected plugin modules; Keep it lean, only for you.
+/plugin install odin-code
+/plugin install odin-run
+/plugin install odin-create
+/plugin install odin-planning
+/plugin install odin-research
+/plugin install odin-loop
+
+# More ...
+```
 
 ### Individual (gh skill)
 
@@ -149,14 +180,6 @@ Install one skill instead of a whole plugin with `gh skill install`, shown under
 
 `catalog/plugins.json` is the identity ledger: it holds each plugin's name, description, category,
 and tags, and every manifest and registry is generated from it.
-
-## Core philosophy
-
-1. Investigate before acting. Never speculate about code you have not read.
-2. Draw the structure before building it.
-3. Match rigor to risk.
-4. One logical change per commit.
-5. Show the code, not a description of the code.
 
 ## Output styles (Claude-code Specific)
 
