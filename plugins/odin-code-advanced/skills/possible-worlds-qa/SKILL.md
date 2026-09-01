@@ -17,14 +17,14 @@ fails to cover or proves it can be broken.
 | Authority | Write only named local test cases and report artifacts, and state the rollback path before the first write. No source, version control, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Test-case files and one report written to the local working tree. Deleting them reverses the run. |
 | Done (completeness) | Every enumerated world is classified covered, gap, or untestable against a stated criterion, and the report names the world, observed behaviour, violated criterion or blocker, and test-case path for each. |
-| Done (break) | Every enumerated world is attempted with an expected break signal named, each survived world is escalated to exhaustion or break, and the report carries the world catalogue, break log, survived log, and summary. |
+| Done (break) | Every enumerated world is broken with an attached artifact, escalated until exhausted, or recorded untestable with its blocker, and the report carries the world catalogue, break log, survived log, and summary. |
 
 ## Mode selection
 
 | Mode | Select when | Verdict it produces |
 |---|---|---|
 | Completeness | The caller wants to know what the surface fails to handle, measured against criteria it claims to meet. | Each world is covered, a gap, or untestable. |
-| Break | The caller wants proof the surface can be made to fail. | Each world breaks the surface, or survives and is escalated until exhausted. |
+| Break | The caller wants proof the surface can be made to fail. | Each world breaks the surface, survives and is escalated until exhausted, or is untestable with a named blocker. |
 
 Ask when the request names neither. The modes share steps 1 through 4 and diverge at step 5.
 
