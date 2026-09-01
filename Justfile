@@ -13,23 +13,21 @@ render:
     node scripts/render-skill-manifests.mjs
     node scripts/render-plugin-surfaces.mjs
 
-# Run every gate. This is what the pre-commit hooks run.
+# Run every gate over the whole tree.
+#
+# This delegates rather than re-enumerating. The gate set lives in
+# .pre-commit-config.yaml, and a second copy here drifted: it was missing both
+# frontmatter gates while claiming to be what the hooks run, so `just check`
+# passed on the defect those gates exist to catch. One list, no drift.
+#
+# The doctrine hook resyncs the output-style cascade when it has drifted, so this
+# can leave the tree modified. `git status` shows what it repaired.
 check:
-    node scripts/render-skill-manifests.mjs --check
-    node scripts/render-plugin-surfaces.mjs --check
-    node scripts/check-plugin-surfaces.mjs
-    node scripts/check-skill-routes.mjs
-    python3 scripts/sync-baseline.py --check
-    python3 scripts/check-voice.py --self-test
-    python3 scripts/check-voice.py
+    prek run --all-files
 
 # Validate every skill against the Agent Skills specification with the GitHub CLI.
 validate-skills:
     gh skill publish --dry-run
 
-# Run the formatting and lint hooks over the whole tree.
-hooks:
-    prek run --all-files
-
 # Everything a change must pass before it is committed.
-verify: check hooks validate-skills
+verify: check validate-skills

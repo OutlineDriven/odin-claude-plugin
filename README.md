@@ -127,18 +127,26 @@ Python.
 just              # list tasks
 just render       # regenerate skill manifests, plugin manifests, and registries
 just check        # every gate
-just verify       # gates, hooks, and Agent Skills validation
+just verify       # every gate plus Agent Skills validation
 ```
 
-Gates, in the order `just check` runs them:
+`.pre-commit-config.yaml` is the gate list. Every gate below audits the whole tree and runs
+unconditionally, so none of them can be skipped by touching the wrong file:
 
 | Gate | What it proves |
 |---|---|
-| `render-skill-manifests --check` | every `agents/openai.yaml` matches its SKILL.md frontmatter |
-| `render-plugin-surfaces --check` | every manifest and registry matches `catalog/plugins.json` |
+| `sync-baseline` | every output style carries the canonical doctrine, and resyncs it when not |
 | `check-plugin-surfaces` | retired surfaces stay dead, no plugin ships without skills, no manifest relocates a fixed component |
+| `render-plugin-surfaces --check` | every manifest and registry matches `catalog/plugins.json` |
 | `check-skill-routes` | frontmatter name equals the directory, descriptions state a trigger, display names are unique |
-| `sync-baseline --check` | every output style carries the canonical doctrine |
+| `render-skill-manifests --check` | every `agents/openai.yaml` matches its SKILL.md frontmatter |
+| `check-skill-frontmatter` | every frontmatter is a flat mapping whose scalars a strict parser accepts |
+| `check-voice` | authored prose meets the voice contract |
+| `check-voice --self-test` | the voice gate's own rules still catch what they claim |
+| `check-skill-frontmatter --self-test` | the frontmatter gate's own rules still catch what they claim |
+
+Trailing whitespace, line endings, byte-order marks, JSON syntax, and TOML formatting are handled
+by upstream hooks in the same run.
 
 `docs/specs/distribution-surfaces.md` records the specification for each surface, with citations
 and the date each version was read.
