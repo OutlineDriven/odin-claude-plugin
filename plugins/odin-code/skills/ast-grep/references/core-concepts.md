@@ -7,7 +7,7 @@ A few concepts from the underlying Tree-sitter parser explain how ast-grep match
 - CST (Concrete Syntax Tree): Includes all details of the source code, including punctuation, parentheses, and whitespace.
 - AST (Abstract Syntax Tree): A simplified tree that keeps only "named" nodes, omitting trivial details.
 
-ast-grep uses **CST** for matching by default (via the `smart` algorithm) but can be configured to use AST-level matching.
+ast-grep parses code into a CST, but the default `smart` algorithm skips unnamed nodes in the target that are absent from the pattern, so a concise pattern still matches verbose source. Use `cst` strictness to require every node — including unnamed trivia — to match.
 
 ## Named vs unnamed nodes
 
@@ -15,7 +15,7 @@ Tree-sitter distinguishes between:
 - Named Nodes: Have a specific `kind` (e.g., `identifier`, `function_declaration`). Usually important.
 - Unnamed Nodes: Anonymous tokens like `+`, `(`, `;`. Usually trivial.
 
-Note: Meta-variables (e.g., `$VAR`) match **only named nodes** by default. Use double-dollar `$$VAR` to match unnamed nodes as well.
+Note: Meta-variables match nodes in the pattern: `$VAR` matches any single **named** node (expression, statement, identifier, etc.); `$$VAR` also matches **unnamed** nodes (e.g., `;`, `+`), useful when you need to capture trivia; `$$$VAR` matches **zero or more** nodes (e.g., `foo($$$ARGS)` matches `foo()`, `foo(1)`, `foo(1, 2)`).
 
 ## Kind vs field
 
@@ -57,3 +57,5 @@ rule:
     context: $A
     strictness: ast
 ```
+
+`strictness` is a field of the **pattern object**, not the rule level. Placing it as a sibling of `rule` is silently ignored on ast-grep 0.45.x.

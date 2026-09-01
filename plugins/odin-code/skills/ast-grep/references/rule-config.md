@@ -35,8 +35,33 @@ Match nodes based on their relationship to other nodes.
   has:
     pattern: return $VAL
   ```
-- follows: Target is after match.
-- precedes: Target is before match.
+- follows: Target must **follow** (come after) a sibling node matching the sub-rule. The target and the surrounding node must be **siblings** (same parent). `stopBy: neighbor` (default) checks only the direct preceding sibling; `stopBy: end` searches all preceding siblings.
+  ```yaml
+  # Matches baz(2) only because it follows bar(1) as a sibling statement.
+  # In Python, top-level calls are wrapped in expression_statement, so the
+  # target and sub-rule must match at the statement level.
+  rule:
+    kind: expression_statement
+    has:
+      pattern: baz($A)
+    follows:
+      kind: expression_statement
+      has:
+        pattern: bar($B)
+      stopBy: end
+  ```
+- precedes: Target must **precede** (come before) a sibling node matching the sub-rule. Same sibling constraint and `stopBy` options as `follows`.
+  ```yaml
+  # Matches bar(1) because it precedes baz(2) as a sibling statement.
+  rule:
+    kind: expression_statement
+    has:
+      pattern: bar($A)
+    precedes:
+      kind: expression_statement
+      has:
+        pattern: baz($B)
+  ```
 
 ### 3. Composite rules
 Combine multiple rules.

@@ -30,7 +30,7 @@ ruleDirs:
   - rules
 
 # List of directories containing utility rules
-utilsDirs:
+utilDirs:
   - utils
 
 # Configuration for tests

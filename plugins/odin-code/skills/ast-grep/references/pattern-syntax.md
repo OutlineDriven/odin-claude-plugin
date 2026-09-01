@@ -22,9 +22,11 @@ Matches nodes but does not bind them to a named variable (optimization).
 - Syntax: `$_` or `$_NAME`.
 - Example: `$_FUNC($_ARGS)` matches function calls without saving the function name or arguments.
 
-### Anonymous match (`$$`)
-Matches list of nodes without capturing.
+### Unnamed-node match (`$$VAR`)
+Matches a single node the way `$VAR` does, but also matches unnamed nodes, which
+`$VAR` skips. It is not a list form: `foo($$A)` matches `foo(a)` and not `foo(a, b)`.
 - Syntax: `$$` or `$$NAME`.
+- Source: [Capture Unnamed Nodes](https://ast-grep.github.io/guide/pattern-syntax.html), read 2026-09-01.
 
 ## Capturing behavior
 
