@@ -1,6 +1,6 @@
 ---
 name: paced-explanation
-description: 'Use when asked to teach a subsystem or change. Returns a plain paced explanation with deeper layers on request. Not for tasks that require source or remote-system changes.'
+description: 'Use when asked to explain or teach a subsystem, module, pattern, or change in progressive layers from purpose to code depth. Grounds each layer in concrete file paths, line ranges, and symbols. Not for design rationale — use why. Not for source or remote-system changes.'
 ---
 
 # Paced explanation
@@ -9,10 +9,10 @@ description: 'Use when asked to teach a subsystem or change. Returns a plain pac
 
 | Field | Bound contract |
 |---|---|
-| Trigger | Teach a subsystem or change. |
-| Authority | No file, VCS, credential, paid, published, deployed, or remote mutation. |
-| Side effect | Chat output. May render diagrams. |
-| Done | Plain paced explanation with deeper layers on request. |
+| Trigger | User asks to teach or explain a subsystem, module, pattern, or change. |
+| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Side effect | Chat output only; inline diagrams on request. |
+| Done | Four layers delivered in sequence (purpose, structure, behavior, code), each grounded in concrete file paths, line ranges, or symbols from the resolved target; the explanation progresses purpose → structure → behavior → code without skipping a layer; deeper layers offered after each. |
 
 ## Inputs
 
@@ -29,7 +29,7 @@ description: 'Use when asked to teach a subsystem or change. Returns a plain pac
    - Layer 3 — Behavior: how the components interact and what the key inputs and outputs are.
    - Layer 4 — Code: the key symbols, line ranges, and the logic they encode.
    Done when: all four layers are delivered in sequence from purpose to code.
-4. **Offer deeper layers.** After each layer, invite the user to request more depth. Accept a focus area or continue layer by layer. Stop when the user stops. Done when: the user is invited to request deeper layers after each layer.
+4. **Offer deeper layers.** After each layer, invite the user to request more depth. Accept a focus area or continue layer by layer. Stop when the user stops. Done when: an explicit invitation to go deeper follows each delivered layer, and no layer is delivered without the offer that follows it.
 5. **Render diagrams on request.** If the user asks for a diagram, render an inline diagram (ASCII, Mermaid, or HTML) showing the structure or flow. No external diagram tool required. Done when: the requested diagram is rendered inline.
 
 ## Failure and recovery

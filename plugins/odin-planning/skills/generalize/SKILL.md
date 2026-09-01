@@ -17,7 +17,7 @@ description: 'Use when asked to derive the general rule a request carries when i
 ## Not for
 
 - Ambiguity resolution inside a stated request — use clarify.
-- Intent exploration with no examples on the table — use askme.
+- Intent exploration with no examples on the table — use askme, which explores ambiguous intent through verbalized sampling and clarifying questions; generalize derives a rule from supplied cases. The split is: examples present → generalize; no examples, just ambiguity → askme.
 - Applying the rule — the deliverable is the stated rule; acting on it belongs downstream.
 
 ## Inputs
