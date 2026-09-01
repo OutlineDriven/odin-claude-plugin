@@ -1,6 +1,6 @@
 ---
 name: tdd
-description: 'Offensive-first TDD: write tests that attack the contract before any green. Use when asked to develop test-first, plan a TDD build, or work red-to-green slices. Attacks precede implementation; tests never bend to code. Not for hardening existing code without a change — use tests-adversarial.'
+description: 'Use when asked to develop a fix or feature test-first, plan a multi-step TDD build, or work red-to-green in slices. Writes attacks before implementation, probes the suite with mutations, and advances one vertical slice at a time. Not for hardening existing code without a change; use tests-adversarial. Not for deleting weak tests; use tests-purge-unneeded.'
 ---
 
 # Offensive-first TDD

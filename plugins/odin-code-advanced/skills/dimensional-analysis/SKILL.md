@@ -1,6 +1,6 @@
 ---
 name: dimensional-analysis
-description: 'Use to annotate arithmetic files in financial, scientific, DeFi, blockchain, or off-chain code with dimensional unit comments and validate consistency. Produces comment-only annotations, units vocabulary, scope manifest, and findings report. No remote or irreversible changes.'
+description: 'Use when code mixes units, fixed-point precisions, scaling factors, rates, prices, shares, or conversions and needs dimensional consistency validated. Annotates every in-scope file with unit comments, derives a units vocabulary, and reports confirmed and refuted mismatches. Not for type-level unit modeling — use type-driven.'
 ---
 
 # Dimensional analysis

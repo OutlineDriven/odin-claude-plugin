@@ -1,3 +1,3 @@
 interface:
   display_name: "Why"
-  short_description: "Use for 'why does X work this way', design rationale, regressions, postmortems, or data-backed thresholds."
+  short_description: "Use when the user asks \"why does X work this way\", requests design rationale, a postmortem, or a data-backed threshold."

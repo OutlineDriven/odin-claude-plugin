@@ -1,6 +1,6 @@
 ---
 name: shape
-description: 'Shape work into a fat-marker pitch with five ingredients: problem, appetite, solution, rabbit holes, no-gos. Use when the user says shape this, pitch this, gut check the shape, fix this pitch, or does the result match the bet. Shapes bets on work, not prose. Not for tasks requiring source or remote-system changes.'
+description: 'Use when the user says "shape this", "pitch this", "gut check the shape", "fix this pitch", or asks whether a result matches the bet. Shapes work into a fat-marker pitch with five ingredients: problem, appetite, solution, rabbit holes, no-gos. Not for tasks requiring source or remote-system changes; not for detailed implementation plans — use plan.'
 ---
 
 # Shape

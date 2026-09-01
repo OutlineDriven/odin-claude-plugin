@@ -1,6 +1,6 @@
 ---
 name: offense
-description: 'Radical codebase overhaul, human-invoked only. Use when the user says ''overhaul'', ''rebuild this subsystem'', or ''rewrite it from scratch''. Demolish-and-re-derive from contracts, delete rather than deprecate, collapse special cases, migrate every caller in one change. Not for thin-slice features — use incremental-implementation.'
+description: 'Use when a human says "overhaul", "rebuild this subsystem", or "rewrite it from scratch" and the broken structure must be demolished and re-derived from its contracts. Deletes rather than deprecates, collapses special cases into the general case, and migrates every caller in one change. Not for thin-slice features — use incremental-implementation; not for root-cause bug repair — use strike-the-root.'
 ---
 
 # Offense

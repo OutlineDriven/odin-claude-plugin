@@ -1,6 +1,6 @@
 ---
 name: diagnose-loop-health
-description: 'Diagnose a configured loop that misbehaves or whose setup soundness is questioned. Classify its health as healthy, warning, or blocked with at most three prioritized actions. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when a configured loop misbehaves, produces unexpected results, or its setup soundness is questioned. Reads the charter, state, gate, and budget files, classifies health as healthy, warning, or blocked, and emits at most three prioritized actions. Not for tasks that require source or remote-system changes; not for loop design — use harness-engineering.'
 ---
 
 # Diagnose loop health

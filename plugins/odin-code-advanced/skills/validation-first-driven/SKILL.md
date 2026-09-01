@@ -1,6 +1,6 @@
 ---
 name: validation-first-driven
-description: 'Defines state machines, invariants, and temporal properties. Use when building protocols, workflows, concurrent systems, or lifecycle-heavy state. High-risk designs (distributed consensus, lock-free concurrency, protocols with liveness or safety guarantees) trigger a TLA+ or Alloy model-checker branch. Not for encoding domain models in types or design-by-contract: use type-driven or contract-driven.'
+description: 'Use when building protocols, workflows, concurrent systems, or lifecycle-heavy state that needs explicit states, transitions, and temporal properties. Defines the state machine, encodes invariants in types, and for high-risk designs runs a TLA+ or Alloy model checker. Not for encoding domain models in types — use type-driven; not for design-by-contract — use contract-driven.'
 ---
 
 # Validation-first development

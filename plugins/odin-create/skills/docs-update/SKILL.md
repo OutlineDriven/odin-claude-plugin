@@ -1,6 +1,6 @@
 ---
 name: docs-update
-description: 'Synchronize user-facing documentation with code changes, then deliver the result as a local commit or a reviewable PR. Use for release documentation audits, recent-commit documentation updates, and multi-repository documentation work. Not for ADRs or architectural rationale — use docs-and-adrs; not for writing an isolated document from a settled brief — use docs-writing.'
+description: 'Use when documentation has drifted from code changes and the user asks to synchronize them, selecting a local commit or reviewable PR. Filters user-facing commits, maps coverage gaps across Diataxis categories, protects CHANGELOG, and delivers scoped commits or PRs. Not for ADRs or architectural rationale — use docs-and-adrs; not for writing an isolated document from a settled brief — use docs-writing.'
 disable-model-invocation: true
 ---
 
@@ -43,7 +43,7 @@ disable-model-invocation: true
    - Reviewable PR: preview the documentation repository, remote, base branch, head branch, files, commit summary, source-commit links, and the consequence that the branch will be pushed and a PR opened. After explicit approval of that preview, create or use the proposed head branch, push it, and open one reviewable PR per documentation repository. Request human review; do not merge.
    Done when: the selected local commit(s) exist without remote effects, or the approved PR target(s) are open and link every update to its source commits.
 
-## Failure
+## Failure and recovery
 
 - Delivery missing: ask the user to choose local commit or reviewable PR; do not mutate.
 - Local mode on the base branch: abort before mutation and name the required feature branch.

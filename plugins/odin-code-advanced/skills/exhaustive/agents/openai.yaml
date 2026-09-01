@@ -1,3 +1,3 @@
 interface:
   display_name: "Exhaustive"
-  short_description: "Prove a decision, state, requirement, or behavior space is fully covered by enumerating every cell as covered, gap, or deferred with an executed check."
+  short_description: "Use when asked to prove coverage, find missing cases, or enumerate a state, decision, requirement, or behavior space."

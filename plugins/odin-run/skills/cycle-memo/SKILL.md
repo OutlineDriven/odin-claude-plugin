@@ -1,6 +1,6 @@
 ---
 name: cycle-memo
-description: 'Use after a build, QA pass, demo, complaint, or abandoned attempt when the next pass needs lessons rather than code. Writes an evidence-backed local memo and next-cycle plan so a fresh agent can preserve working assets, reject failed patterns, and test the right gates first.'
+description: 'Use after a build, QA pass, demo, user complaint, or abandoned attempt when the next pass needs lessons rather than code. Writes an evidence-backed memo and next-cycle plan so a fresh agent can preserve working assets, reject failed patterns, and test the right gates first. Not for changelog extraction; not for session handoff — use handoff.'
 ---
 
 # Cycle memo

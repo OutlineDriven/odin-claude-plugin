@@ -1,6 +1,6 @@
 ---
 name: why
-description: 'Use for ''why does X work this way'', design rationale, regressions, postmortems, or data-backed thresholds. Queries each evidence category in parallel and returns a confidence-weighted cited narrative. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when the user asks "why does X work this way", requests design rationale, a postmortem, or a data-backed threshold. Dispatches parallel read-only investigators across seven evidence categories and returns a confidence-weighted cited narrative. Not for tasks that require source or remote-system changes; not for current runtime behavior — use how.'
 ---
 
 # Why

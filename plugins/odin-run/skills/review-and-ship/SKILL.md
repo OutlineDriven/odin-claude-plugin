@@ -1,6 +1,6 @@
 ---
 name: review-and-ship
-description: 'Reviews an existing diff, fixes release-blocking findings, verifies it, packages atomic commits, and opens or updates its pull request. Use on direct human request or explicit delegated shipping authority. Not for merging pull requests, force pushes, history rewrites, or deployment.'
+description: 'Use when a human directly requests review and publication of an existing diff, or work passes the explicit signal authority: delegated. Reviews the diff, fixes release-blocking findings, verifies with native checks, packages atomic commits, and opens or updates a pull request. Not for merging pull requests, force pushes, history rewrites, or deployment.'
 disable-model-invocation: true
 ---
 

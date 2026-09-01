@@ -1,6 +1,6 @@
 ---
 name: to-tickets
-description: 'Publish a settled plan as blocker-linked implementation tickets, vertical path first, with the executable frontier identified. Also handles expand-migrate-contract sequencing when refactors cannot land green. Use when a human invokes publication of a settled plan. Not for implementation, use work; not for unsupervised publication.'
+description: 'Use when a settled plan needs implementation tickets published as blocker-linked slices, tracer bullets, or expand-contract sequencing, and a human invokes the publication. Publishes GitHub issues or local ticket files and writes their URLs back into the plan. Not for implementation — use work; not for unsupervised publication.'
 disable-model-invocation: true
 ---
 

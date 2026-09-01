@@ -1,6 +1,6 @@
 ---
 name: articulate
-description: 'Turn a vague intended thought into a faithful, audience-ready statement. Use when the user knows what they mean but cannot express it. Preserve scope and identity; surface unsupported choices; invent no goals or facts. Don''t use for discovery, ideation, or style-only editing.'
+description: 'Use when the user knows what they mean but cannot express it completely or clearly. Turns a vague intended thought into a faithful, audience-ready statement, preserving scope and identity, surfacing unsupported choices, and inventing no goals or facts. Not for discovery, ideation, or style-only editing — use unslop for style.'
 ---
 
 # Articulate
@@ -27,6 +27,13 @@ description: 'Turn a vague intended thought into a faithful, audience-ready stat
 3. Mark unsupported choices as a blank, a short alternative set, or the minimum clarifying question needed to continue. Done when: every unsupported choice is marked as a blank, alternative set, or clarifying question.
 4. Write the smallest complete audience-ready form that preserves the original scope, identity, confidence, and intent. Done when: the form preserves original scope, identity, confidence, and intent.
 5. Compare every sentence with the supplied material. Remove invented goals, requirements, rationale, facts, or certainty. Done when: no invented goals, rationale, facts, or certainty remains.
+
+## Failure and recovery
+
+- No invariant core can be stated: the thought is too fragmentary to articulate. Ask the user for one more sentence of context; do not invent the core.
+- Invented goal or fact detected: remove it and mark the gap as a blank. Do not substitute a plausible-sounding rationale.
+- Scope drifted during expression: restate the original scope, discard the drift, and recheck every sentence against the supplied material.
+- Unsupported choice hidden as certainty: downgrade to an explicit blank or alternative set. Do not present an unsupported choice as settled.
 
 ## Output
 

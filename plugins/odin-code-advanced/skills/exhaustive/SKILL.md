@@ -1,6 +1,6 @@
 ---
 name: exhaustive
-description: 'Prove a decision, state, requirement, or behavior space is fully covered by enumerating every cell as covered, gap, or deferred with an executed check. Use when asked to prove coverage, find missing cases, or enumerate the state space.'
+description: 'Use when asked to prove coverage, find missing cases, or enumerate a state, decision, requirement, or behavior space. Enumerates every cell as covered, gap, or deferred with an executed check per cell, and emits a coverage manifest with a tally. Not for round-based questioning — use askme; not for testing one property — use property-test-authoring.'
 ---
 
 # Exhaustive

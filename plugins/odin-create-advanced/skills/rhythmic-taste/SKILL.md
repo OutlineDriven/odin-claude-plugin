@@ -1,6 +1,6 @@
 ---
 name: rhythmic-taste
-description: 'Vary structural rhythm across a document''s sections. Use when the user says ''give this rhythm'', ''vary the structure'', or ''the sections all read the same''. Derive a rhythm constraint from the document''s own sections; an optional seeded constraint mode adds random variation. Not for judging an artifact''s taste — use taste.'
+description: 'Use when the user says "give this rhythm", "vary the structure", or "the sections all read the same". Derives a rhythm constraint from the document''s own sections or from a disclosed seed with random inputs. Not for judging an artifact''s overall taste — use taste.'
 ---
 
 # Rhythmic taste

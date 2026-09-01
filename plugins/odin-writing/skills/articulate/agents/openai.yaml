@@ -1,3 +1,3 @@
 interface:
   display_name: "Articulate"
-  short_description: "Turn a vague intended thought into a faithful, audience-ready statement."
+  short_description: "Use when the user knows what they mean but cannot express it completely or clearly."

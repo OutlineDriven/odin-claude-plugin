@@ -1,6 +1,6 @@
 ---
 name: verification-before-completion
-description: 'Requires fresh, actually-run evidence before any claim that a task is complete. Use when about to report a task, feature, or fix as done, complete, finished, working, or ready. Not for fact-checking assertions or testing measurable claims — use verify-both-ways or verify-this.'
+description: 'Use when about to report a task, feature, or fix as done, complete, finished, working, or ready, or before a commit, PR, or next-task move. Runs the narrow proving action and classifies the claim VERIFIED, PARTIAL, UNVERIFIED, FAILED, or TIMEOUT. Not for fact-checking assertions — use verify-both-ways; not for measuring a claim — use verify-this.'
 ---
 
 # Verification before completion

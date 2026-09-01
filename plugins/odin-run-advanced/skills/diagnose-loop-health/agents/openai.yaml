@@ -1,3 +1,3 @@
 interface:
   display_name: "Diagnose Loop Health"
-  short_description: "Diagnose a configured loop that misbehaves or whose setup soundness is questioned."
+  short_description: "Use when a configured loop misbehaves, produces unexpected results, or its setup soundness is questioned."
