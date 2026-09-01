@@ -78,6 +78,25 @@ code sample never trips a gate. That exemption is why the ban list writes its ow
 backticks, and why hiding prose in backticks to silence a finding is gaming the gate rather than
 fixing anything.
 
+## Scope
+
+The bare run gates every markdown file in the repository, authored and generated alike. A
+finding in generated output, such as a plugin README, names the generator as the defect site,
+not the file it wrote. Only `.git/` and `.outline/` are excluded, the latter being ignored
+scratch. Passing explicit file arguments overrides the default list and gates only those files.
+
+Two harness carriers live outside the repo, at `~/.omp/agent/AGENTS.md` and `~/.codex/AGENTS.md`.
+They are machine-local, so each is gated only under a condition, and neither condition can turn a
+clean clone red. An absent carrier is skipped silently: a fresh clone on another machine has
+neither, and there is nothing there to repair. A carrier that exists but cannot be written is
+skipped with a notice on stderr naming the path and the reason. The distinction matters because a
+carrier can sit behind a Landlock jail that reports the file permission bits as writable while
+denying the open, so writability is settled by attempting the open rather than by asking
+`os.access`. Skipping is visible rather than silent because a dropped carrier is exactly how drift
+hides, and reaching outside the repo was the way to stop that. The notice never changes the exit
+code, and the reason for the skip is the reason for the rule: a gate that reports a finding no one
+can repair is not a gate, it is a blocked commit.
+
 ## What a bold-label finding means
 
 A run of plain `- Label: text` bullets is not a defect, and the gate does not flag one. The
@@ -85,6 +104,16 @@ doctrine bans the bold-header pseudo-list specifically, and bans plain bullet li
 prose would be clearer, which is a judgment no regex makes. So dropping the asterisks and keeping
 the bullets is a valid fix when the items are genuinely parallel. Use a table for label-and-value
 pairs and prose for conditions or cases. Do not reshape a list that already reads as a list.
+
+The bold-label pattern carries a self-test, run with `python3 scripts/check-voice.py --self-test`.
+It pins the four cases that decide whether the rule works: a label whose text contains a colon is
+caught, a label without one is caught, mid-sentence emphasis is not caught, and a label inside a
+fenced block is not caught. The pattern has already been silently wrong once, when a colon inside
+the label text made it blind and four doctrine lines passed the gate wearing the markup the gate
+exists to remove. An evadable rule is worse than no rule, because it reports clean. The cases are
+inline string literals rather than fixture files because every markdown file in this repository is
+gated, so a fixture that carries a finding by design would need its own exclusion, and an excluded
+directory is the same escape hatch the pattern just closed.
 
 ## Known limits
 

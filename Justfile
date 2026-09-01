@@ -20,6 +20,7 @@ check:
     node scripts/check-plugin-surfaces.mjs
     node scripts/check-skill-routes.mjs
     python3 scripts/sync-baseline.py --check
+    python3 scripts/check-voice.py --self-test
     python3 scripts/check-voice.py
 
 # Validate every skill against the Agent Skills specification with the GitHub CLI.

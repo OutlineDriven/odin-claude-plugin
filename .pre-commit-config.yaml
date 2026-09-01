@@ -69,6 +69,15 @@ repos:
         files: ^(plugins/.*/skills/.*\.md|docs/.*\.md|AGENTS\.md|scripts/check-voice\.py)$
         pass_filenames: false
 
+      # The voice gate's own pattern has been silently wrong once, so it carries a
+      # self-test that runs whenever the gate itself changes.
+      - id: check-voice-self-test
+        name: check the voice gate against its own fixtures
+        entry: python3 scripts/check-voice.py --self-test
+        language: system
+        files: ^scripts/check-voice\.py$
+        pass_filenames: false
+
       - id: render-skill-manifests
         name: check skill manifests match SKILL.md frontmatter
         entry: node scripts/render-skill-manifests.mjs --check

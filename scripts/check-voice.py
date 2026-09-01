@@ -17,6 +17,7 @@ The gates catch formatting tells, not absent conviction. A file passing all five
 slop; that judgment needs the spine audit and does not belong in a script.
 """
 
+import os
 import re
 import sys
 from pathlib import Path
@@ -52,13 +53,19 @@ BAN_LIST_SUBJECTS = frozenset(
 )
 # Three shapes are the same pseudo-list, so the pattern covers all three. The colon may sit
 # against the closing asterisks ("**Scope**:"), behind interposed text ("**Scope** (required):"),
-# or inside them ("**Scope:**"). The label cap runs to 80 characters. The earlier adjacent-colon
-# 45-character pattern let the second and third escape, and a table row never matches, because
-# no colon follows its closing asterisks.
+# or inside them ("**Scope:**"). A label is bold markup at line start whose closing asterisks are
+# followed by a colon, or whose label text ends in a colon just before them; that line-start-plus-
+# colon shape is what separates a label from mid-sentence emphasis like "you **MUST** use", which
+# has no colon after the closing asterisks and so matches neither branch. The label text itself may
+# contain a colon ("**Security (OWASP Top 10:2025, CWE Top 25 2025):**"), so the second branch no
+# longer forbids one inside the label; the earlier [^*\n:] class let such a label slip past the
+# gate, making the rule evadable by putting a colon in it. The cap runs to 120 characters because
+# doctrine labels carrying parenthesized version lists exceed the old 80. A table row never matches,
+# because no colon follows its closing asterisks.
 BOLD_LABEL = re.compile(
     r"^\s*(?:[-*+]\s*)?\*\*"
-    r"(?:[^*\n]{2,80}\*\*[^:\n]{0,30}:"
-    r"|[^*\n:]{2,80}:\s*\*\*)"
+    r"(?:[^*\n]{2,120}\*\*[^:\n]{0,30}:"
+    r"|[^*\n]{2,120}:\s*\*\*)"
 )
 # Title case capitalizes the minor word AND the word after it, which is what separates
 # "Fixing The Bug" from sentence case ("1. The wall of options") and from a single-letter
@@ -73,6 +80,46 @@ DASH = re.compile(r"[\u2014\u2013]")
 DASH_WINDOW = 600
 DASH_RUN = 5
 BOLD_RUN = 2
+
+
+def writable(path):
+    """Whether a real write open succeeds, which is what Landlock actually gates.
+
+    os.access(path, os.W_OK) reports the file's permission bits and returns True for a
+    Landlock-jailed carrier, so it cannot be trusted here; only attempting the open sees the
+    denial. A write-only open on the existing file touches nothing and is closed immediately.
+    """
+    try:
+        os.close(os.open(path, os.O_WRONLY))
+    except OSError:
+        return False
+    return True
+
+
+def default_targets():
+    """Every markdown file in the repository plus the two harness carriers.
+
+    The repository walk covers authored and generated surfaces alike; a finding in
+    generated output points at the generator as the defect site. The two harness
+    carriers live outside the repo and are machine-local. An absent carrier is skipped
+    silently so a fresh clone on another machine, which has neither, stays green. A
+    carrier that exists but cannot be written is skipped with a visible notice: its
+    findings cannot be repaired here, and a gate that reports an unsatisfiable finding
+    blocks every commit. The notice goes to stderr and never changes the exit code.
+    """
+    targets = sorted(p for p in ROOT.rglob("*.md")
+                     if ".git" not in p.relative_to(ROOT).parts
+                     and ".outline" not in p.relative_to(ROOT).parts)
+    for carrier in (Path("/home/alpha/.omp/agent/AGENTS.md"),
+                    Path("/home/alpha/.codex/AGENTS.md")):
+        if not carrier.is_file():
+            continue
+        if writable(carrier):
+            targets.append(carrier)
+        else:
+            print(f"check-voice: skipping {carrier} (exists but not writable; "
+                  "cannot be repaired here)", file=sys.stderr)
+    return targets
 
 
 def prose_only(text):
@@ -160,14 +207,55 @@ def audit(path):
     return found
 
 
+# The bold-label pattern has already been silently wrong once: it could not see a label whose
+# text contains a colon, so four doctrine lines passed the gate while still wearing the banned
+# pseudo-list markup. An evadable rule is worse than no rule, because it reports clean. These
+# cases are inline literals rather than fixture files on purpose: markdown files inside the
+# repository are gated, so a fixture that carries a finding by design would need an exclusion,
+# and an exclusion directory is the same escape hatch the pattern just closed.
+SELF_TEST = (
+    ("bold label with an internal colon is caught",
+     "**Discipline (defend at boundaries, trust interior, fail fast; ban slop, keep craft):**\n"
+     "**Security (OWASP Top 10:2025, CWE Top 25 2025):**\n",
+     True),
+    ("bold label without an internal colon is caught",
+     "**Scope**: what this covers.\n"
+     "**Response language:** All English.\n",
+     True),
+    ("mid-sentence emphasis is not caught",
+     "You **MUST** use the gate, and you **SHOULD NOT** skip it.\n"
+     "This line carries **bold emphasis** but no label colon.\n",
+     False),
+    ("bold label inside a fenced block is not caught",
+     "```\n"
+     "**Discipline (defend at boundaries, trust interior, fail fast; ban slop, keep craft):**\n"
+     "**Security (OWASP Top 10:2025, CWE Top 25 2025):**\n"
+     "```\n",
+     False),
+)
+
+
+def self_test():
+    """Run the bold-label cases against the compiled pattern; return the exit code."""
+    failed = 0
+    for name, text, expect in SELF_TEST:
+        worst, _ = bold_run(prose_only(text))
+        caught = worst >= BOLD_RUN
+        ok = caught == expect
+        failed += not ok
+        print(f"{'PASS' if ok else 'FAIL'}: {name} (caught={caught}, expected={expect})")
+    print(f"check-voice self-test: {len(SELF_TEST) - failed}/{len(SELF_TEST)} passed",
+          file=sys.stderr if failed else sys.stdout)
+    return 1 if failed else 0
+
+
 def main(argv):
+    if argv == ["--self-test"]:
+        return self_test()
     if argv:
         targets = [Path(a).resolve() for a in argv]
     else:
-        targets = sorted(ROOT.glob("plugins/*/skills/*/SKILL.md"))
-        targets += sorted(ROOT.glob("plugins/*/skills/*/references/*.md"))
-        targets += sorted(ROOT.glob("docs/**/*.md"))
-        targets.append(ROOT / "AGENTS.md")
+        targets = default_targets()
 
     findings = []
     checked = 0
