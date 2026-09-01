@@ -20,13 +20,13 @@ A human-supplied goal description stating the desired end state in operational t
 
 ## Procedure
 
-1. Receive the human-supplied goal description. Bound scope before any mutation: this skill writes only scaffold artifacts, performs no implementation work, and binds no effort. Done when: the stated action, evidence, and guard all hold.
-2. Validate the goal at its trust boundary. Confirm the human states exactly one checkable success predicate. A predicate is checkable when a verifier can return pass or fail without human judgment of the outcome. If zero or more than one predicate is present, or the predicate is not checkable, stop and report without writing. Done when: the stated action, evidence, and guard all hold.
-3. Write the goal statement artifact recording the approved success predicate. Done when: the stated action, evidence, and guard all hold.
-4. Write the verifier artifact recording how the predicate is checked, such that the check returns pass or fail. Done when: the stated action, evidence, and guard all hold.
-5. Write the budget artifact recording the effort ceiling (time, token, or step limit). If the human supplied none, record an explicit unbounded marker and flag it for human approval. Done when: the stated action, evidence, and guard all hold.
-6. Write the run-log artifact as an empty log ready for an effort to append execution records. Done when: the stated action, evidence, and guard all hold.
-7. Confirm the done predicate: exactly one approved success predicate exists with its verifier and budget recorded. Done when: the stated action, evidence, and guard all hold.
+1. Receive the human-supplied goal description. Bound scope before any mutation: this skill writes only scaffold artifacts, performs no implementation work, and binds no effort. Done when: the goal description is received, and scope is bounded to scaffold artifacts only — no implementation work and no effort binding.
+2. Validate the goal at its trust boundary. Confirm the human states exactly one checkable success predicate. A predicate is checkable when a verifier can return pass or fail without human judgment of the outcome. If zero or more than one predicate is present, or the predicate is not checkable, stop and report without writing. Done when: exactly one checkable success predicate is confirmed (a verifier can return pass or fail without human judgment), or the run stops with a stated count or checkability failure and no write.
+3. Write the goal statement artifact recording the approved success predicate. Done when: the goal statement artifact exists on disk and records the approved success predicate.
+4. Write the verifier artifact recording how the predicate is checked, such that the check returns pass or fail. Done when: the verifier artifact exists on disk and records the check method that returns pass or fail.
+5. Write the budget artifact recording the effort ceiling (time, token, or step limit). If the human supplied none, record an explicit unbounded marker and flag it for human approval. Done when: the budget artifact exists on disk recording the effort ceiling, or an explicit unbounded marker with a human-approval flag.
+6. Write the run-log artifact as an empty log ready for an effort to append execution records. Done when: the run-log artifact exists on disk as an empty log ready for execution records.
+7. Confirm the done predicate: exactly one approved success predicate exists with its verifier and budget recorded. Done when: the scaffold directory contains exactly four artifacts (goal statement, verifier, budget, run log), and exactly one approved checkable success predicate is recorded across them.
 
 ## Failure and recovery
 - Uncheckable predicate: stop, write nothing, report that the predicate cannot be verified.

@@ -21,12 +21,12 @@ description: 'Use when a user resumes work and needs an orientation card without
 
 ## Procedure
 
-1. Bound scope to read-only inspection of the current workspace directory and any session or handoff notes the user supplies. Do not open files outside that scope. Done when: the stated action, evidence, and guard all hold.
-2. List the workspace tree depth-limited and read the most recently modified files, any plan/todo/handoff notes, and reachable session context to recover what work was in flight. Done when: the stated action, evidence, and guard all hold.
-3. Derive the shape: name the active work unit, its current state, and the next intended action. Done when: the stated action, evidence, and guard all hold.
-4. Derive the invariants: list constraints, contracts, or rules the work must not violate. Done when: the stated action, evidence, and guard all hold.
-5. Derive the smell locations: point at files or areas where decay, drift, risk, or unfinished work is concentrated. Done when: the stated action, evidence, and guard all hold.
-6. Assemble the orientation card from steps 3-5 only. Mark any field that could not be recovered as unknown rather than guessing. Done when: the stated action, evidence, and guard all hold.
+1. Bound scope to read-only inspection of the current workspace directory and any session or handoff notes the user supplies. Do not open files outside that scope. Done when: scope is bounded to the supplied workspace directory and user-named notes, and no file outside that scope is opened.
+2. List the workspace tree depth-limited and read the most recently modified files, any plan/todo/handoff notes, and reachable session context to recover what work was in flight. Done when: the workspace tree is listed depth-limited, the most recently modified files are read, and any plan/todo/handoff notes and session context are read or confirmed absent.
+3. Derive the shape: name the active work unit, its current state, and the next intended action. Done when: the shape names the active work unit, its current state, and the next intended action, each sourced from workspace reads or marked unknown.
+4. Derive the invariants: list constraints, contracts, or rules the work must not violate. Done when: the invariants list names every constraint, contract, or rule the work must not violate, each sourced from workspace reads or marked unknown.
+5. Derive the smell locations: point at files or areas where decay, drift, risk, or unfinished work is concentrated. Done when: the smell locations point at specific files or areas where decay, drift, risk, or unfinished work is concentrated, each sourced from workspace reads or marked unknown.
+6. Assemble the orientation card from steps 3-5 only. Mark any field that could not be recovered as unknown rather than guessing. Done when: the orientation card is assembled from the shape, invariants, and smell locations only, and every field that could not be recovered is marked unknown rather than guessed.
 
 ## Failure and recovery
 - Empty or unreadable workspace: return a card stating the workspace yielded no recoverable state; do not fabricate shape, invariants, or smells.

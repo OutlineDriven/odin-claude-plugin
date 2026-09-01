@@ -25,7 +25,7 @@ description: 'Use when a repository needs a safety net against force-push, force
 1. Ask the user to choose project or global scope. Mutate nothing before the choice. Done when: the user has chosen project or global scope, with no mutation made.
 2. Copy `scripts/block-dangerous-git.py` to the chosen location — project: `.claude/hooks/block-dangerous-git.py`; global: `~/.claude/hooks/block-dangerous-git.py` — and run `chmod +x` on the copy. Leave the skill's source copy untouched. Done when: the hook copy exists at the chosen path, is executable, and the source copy is unchanged.
 3. Show the default blocked operations — forced pushes and forced refspecs; `reset --hard`; forced `clean`; forced branch deletion; `checkout .` and `restore .`; `stash drop` and `stash clear`; `reflog expire`; `gc --prune=now` — and ask whether to add or remove a rule. On approval, edit only the installed copy. When a rule is added or removed, add or remove the corresponding test case in the Step 4 verification matrix so the gate covers the modified policy. Done when: the blocked-operations list is shown, any approved rule change is applied to the installed copy only, and the verification matrix is updated to match.
-4. Verify before registration. For each payload below, run: Done when: the stated action, evidence, and guard all hold.
+4. Verify before registration. For each payload below, run:
 
    ```bash
    printf '%s\n' '<payload>' | <path-to-hook>
