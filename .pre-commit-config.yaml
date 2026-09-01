@@ -29,65 +29,71 @@ repos:
         args: ["--offline"]
       - id: tombi-format
 
-  # Regenerate the doctrine cascade embedded in every output-style.
-  # pass_filenames is off on purpose: editing the canonical alone must still
-  # resync all six styles, and pre-commit would only hand us the canonical.
+  # Every local hook below audits the whole tree and takes no filenames. A `files:`
+  # selector on such a hook is a second, hand-maintained model of what the check
+  # depends on, and that model was silently wrong six times during the 2.0 rebuild:
+  # three marketplace registries missing from the surface gates, a shared module
+  # missing from the skill gates, the generated root README missing from both, and
+  # the voice gate matching three directories while its script audits every tracked
+  # markdown file. A whole-tree check must not be conditional on which file the
+  # author happened to touch, so these run unconditionally and carry no selector to
+  # drift. The full set costs a few seconds.
   - repo: local
     hooks:
       - id: sync-baseline
         name: sync output-style doctrine cascade
         entry: python3 scripts/sync-baseline.py
         language: system
-        files: ^(system-prompt-baseline\.md|plugins/odin-core/output-styles/.*\.md)$
         pass_filenames: false
+        always_run: true
 
       - id: check-plugin-surfaces
         name: check plugin tree, manifests, and registries
         entry: node scripts/check-plugin-surfaces.mjs
         language: system
-        files: ^(catalog/plugins\.json|plugins/.*|licenses/NOTICE|scripts/(plugin-surfaces|render-plugin-surfaces|check-plugin-surfaces)\.mjs|LICENSE|\.claude-plugin/marketplace\.json|\.agents/plugins/marketplace\.json|\.cursor-plugin/marketplace\.json)$
         pass_filenames: false
+        always_run: true
 
       - id: render-plugin-surfaces
         name: check generated plugin surfaces match the catalog
         entry: node scripts/render-plugin-surfaces.mjs --check
         language: system
-        files: ^(catalog/plugins\.json|plugins/.*|licenses/NOTICE|scripts/(plugin-surfaces|render-plugin-surfaces)\.mjs|LICENSE|\.claude-plugin/marketplace\.json|\.agents/plugins/marketplace\.json|\.cursor-plugin/marketplace\.json)$
         pass_filenames: false
+        always_run: true
 
       - id: check-skill-routes
         name: check skill routes and manifest identity
         entry: node scripts/check-skill-routes.mjs
         language: system
-        files: ^(plugins/.*/skills/.*/SKILL\.md|plugins/.*/skills/.*/agents/openai\.yaml|catalog/plugins\.json|scripts/(check-skill-routes|render-skill-manifests)\.mjs)$
         pass_filenames: false
+        always_run: true
 
       - id: check-voice
         name: check authored prose against the voice contract
         entry: python3 scripts/check-voice.py
         language: system
-        files: ^(plugins/.*/skills/.*\.md|docs/.*\.md|AGENTS\.md|scripts/check-voice\.py)$
         pass_filenames: false
+        always_run: true
 
-      # The voice gate's own pattern has been silently wrong once, so it carries a
-      # self-test that runs whenever the gate itself changes.
+      # The voice gate has shipped a wrong rule once, so it carries its own
+      # fixtures and proves itself on every run.
       - id: check-voice-self-test
         name: check the voice gate against its own fixtures
         entry: python3 scripts/check-voice.py --self-test
         language: system
-        files: ^scripts/check-voice\.py$
         pass_filenames: false
+        always_run: true
 
       - id: render-skill-manifests
         name: check skill manifests match SKILL.md frontmatter
         entry: node scripts/render-skill-manifests.mjs --check
         language: system
-        files: ^(plugins/.*/skills/.*/SKILL\.md|plugins/.*/skills/.*/agents/openai\.yaml|scripts/render-skill-manifests\.mjs)$
         pass_filenames: false
+        always_run: true
 
       - id: check-skill-frontmatter
         name: check SKILL.md frontmatter parses as strict YAML
         entry: python3 scripts/check-skill-frontmatter.py
         language: system
-        files: ^(plugins/.*/skills/.*/SKILL\.md|catalog/plugins\.json|scripts/check-skill-frontmatter\.py)$
         pass_filenames: false
+        always_run: true
