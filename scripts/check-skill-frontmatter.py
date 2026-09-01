@@ -228,37 +228,65 @@ CASES = [
 MIN_PYTHON = (3, 9)
 
 
-def source_backslash_in_fstring():
+def source_backslash_in_fstring(text=None):
     """Return the offending line numbers, or an empty list when the source is clean.
 
-    Walks the parsed tree rather than the text: a regex over the source misses a
-    mixed-case prefix, a triple-quoted f-string, and a nested replacement field,
-    and a scan that cannot see those reports a false pass.
+    Measured on 3.9.25 and 3.14.7, thirteen cases each, zero wrong verdicts. Two
+    earlier attempts were wrong in opposite directions: slicing the source by node
+    position invents false positives below 3.12, where f-string node positions are
+    unreliable and the slice picks up the enclosing literal, where a backslash is
+    legal. Unparsing the field instead re-emits the code, so a line continuation
+    inside a field vanishes and the check reports a false pass on a new runner.
     """
-    text = Path(__file__).read_text("utf-8")
+    text = Path(__file__).read_text("utf-8") if text is None else text
     try:
-        tree = ast.parse(text)
+        tree = ast.parse(text, feature_version=MIN_PYTHON)
     except SyntaxError as e:
-        # An interpreter older than 3.12 rejects the pattern outright, which is the
-        # failure this check exists to prevent reaching.
+        # Below 3.12 the interpreter rejects a backslash in a replacement field
+        # itself, so this branch is the authoritative answer for f-string internals
+        # as well as for grammar newer than MIN_PYTHON.
         return [e.lineno or 0]
-    bad = []
-    for node in ast.walk(tree):
-        if not isinstance(node, ast.JoinedStr):
-            continue
-        for part in node.values:
-            if not isinstance(part, ast.FormattedValue):
-                continue
-            for inner in ast.walk(part):
-                segment = ast.get_source_segment(text, inner)
-                if segment and "\\" in segment:
-                    bad.append(getattr(inner, "lineno", node.lineno))
-    return sorted(set(bad))
+    if sys.version_info < (3, 12):
+        # f-string node positions are unreliable here, and the parse above already
+        # spoke for every construct this check guards. Slicing would only invent
+        # false positives from escapes in the literal part.
+        return []
+    return sorted(
+        {
+            node.lineno
+            for node in ast.walk(tree)
+            if isinstance(node, ast.FormattedValue)
+            and "\\" in (ast.get_source_segment(text, node) or "")
+        }
+    )
+
+
+BS = chr(92)
+NL = chr(10)
+Q = chr(39)
+T3 = Q * 3
+
+COMPAT_CASES = [
+    # label, source, want_detected
+    ("legal escape in literal part", 'x = f"a' + BS + 'nb{value}"', False),
+    ("legal tab literal, two fields", 'x = f"' + BS + 't{a}-{b}"', False),
+    ("legal escape, no f-string", 'x = "a' + BS + 'nb"', False),
+    ("legal plain field", 'x = f"{value}"', False),
+    ("legal nested quotes, no backslash", 'x = f"{d[' + Q + "k" + Q + ']}"', False),
+    ("backslash inside field", 'x = f"{ ' + Q + BS + 'n' + Q + '.join(v) }"', True),
+    ("mixed-case Rf prefix", 'x = Rf"{ ' + Q + BS + 't' + Q + '.join(v) }"', True),
+    ("triple-quoted f-string", 'x = f' + T3 + '{ ' + Q + BS + 'n' + Q + '.join(v) }' + T3, True),
+    ("line continuation in field", 'x = f"{x ' + BS + NL + ' + y}"', True),
+    ("string constant escape in field", 'x = f"{' + Q + 'x' + BS + 'n' + Q + '}"', True),
+    ("match statement (3.10 grammar)", "match x:" + NL + "    case 1: pass" + NL, True),
+    ("type param list (3.12 grammar)", "def f[T](x: T) -> T: return x" + NL, True),
+    ("walrus (3.8, legal)", "if (n := 1): pass" + NL, False),
+]
 
 
 def self_test():
     passed = 0
-    total = len(CASES) + 1
+    total = len(CASES) + len(COMPAT_CASES) + 1
     bad = source_backslash_in_fstring()
     label = f"this gate parses on python {MIN_PYTHON[0]}.{MIN_PYTHON[1]}"
     if bad:
@@ -266,6 +294,13 @@ def self_test():
     else:
         passed += 1
         print(f"PASS: {label}")
+    for label, snippet, want_detected in COMPAT_CASES:
+        got_detected = bool(source_backslash_in_fstring(snippet))
+        if got_detected == want_detected:
+            passed += 1
+            print(f"PASS: compat case, {label}")
+        else:
+            print(f"FAIL: compat case, {label}", file=sys.stderr)
     for label, text, want_clean in CASES:
         reasons = check_frontmatter(text)
         got_clean = not reasons
