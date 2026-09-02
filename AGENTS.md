@@ -47,7 +47,7 @@ Agent Plugins fixes components at the plugin root, so a skill nested deeper than
 
 ## Distribution surfaces
 
-Four surfaces are supported, and no others: the Agent Plugins standard, the Claude Code marketplace, the Codex marketplace, and the Cursor marketplace. Nothing is published to a package registry, and no npm artifact belongs in this tree.
+Four surfaces are supported, and no others: the Agent Plugins standard, the Claude Code marketplace, the Codex marketplace, and the Cursor marketplace. Nothing is published to a package registry, and no npm artifact belongs in this tree. A flat Devin mirror of these same skills is exported to the outline repository, which publishes nothing and installs nothing.
 
 `catalog/plugins.json` owns plugin identity: name, description, category, tags, and directory. Every manifest and registry is generated from it. Keep every plugin and marketplace version at the single `releaseVersion` literal `2.0.0`; never bump only some manifests.
 
@@ -63,6 +63,26 @@ To change one, change its generator or `catalog/plugins.json`, run `just render`
 The Agent Plugins manifest schema is closed and forbids declaring component locations. Do not add `skills`, `mcpServers`, `commands`, `agents`, `hooks`, or `paths` to a root `plugin.json`; the specification fixes those locations.
 
 Do not change `releaseVersion` for tooling-only changes such as pre-commit hooks or formatter configuration, or for edits to this file. Do not add or backfill `CHANGELOG.md` entries for routine version work.
+
+## Devin skill mirror
+
+The outline repository carries a flat copy of every skill at `.devin/skills/<slug>/`, the
+project-scope path Devin reads. `scripts/sync-outline-skills.mjs` generates it from this tree, so
+it is an export of the same skills rather than a fifth distribution surface.
+
+Regenerate it with `just sync-outline`. The default target is the sibling checkout
+`../outline-driven-development`; pass `--target <path>` for a clone elsewhere. The script mirrors
+exactly the files git tracks under each skill directory, prunes anything under `.devin/skills/`
+that the plugin tree no longer carries, and refuses a target that does not hold both
+`manifest.json` and `.git`.
+
+Never hand-edit the mirror. Edit the skill under `plugins/<plugin>/skills/<slug>/` and resync,
+because the next run reverts an edit made in the mirror.
+
+A skill whose `SKILL.md` is untracked is a sync error, not a skip. Add the file to git first.
+
+The mirror lives in another repository with its own history, so commit it there, in its own
+commit, and never from this repository.
 
 ## Skill metadata
 

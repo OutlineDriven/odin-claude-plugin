@@ -118,3 +118,10 @@ repos:
         language: system
         pass_filenames: false
         always_run: true
+
+      - id: sync-outline-skills
+        name: check the flat Devin skill mirror matches the plugin tree
+        entry: node scripts/sync-outline-skills.mjs --check
+        language: system
+        pass_filenames: false
+        always_run: true

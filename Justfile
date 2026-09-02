@@ -13,6 +13,13 @@ render:
     node scripts/render-skill-manifests.mjs
     node scripts/render-plugin-surfaces.mjs
 
+# Mirror every skill into the outline repository as a flat Devin skill tree.
+#
+# Deliberately not part of `render`: this writes into a sibling checkout rather than
+# this tree, and a generator that reaches outside the repository has to be asked for.
+sync-outline:
+    node scripts/sync-outline-skills.mjs
+
 # Run every gate over the whole tree.
 #
 # This delegates rather than re-enumerating. The gate set lives in
