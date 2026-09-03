@@ -1,7 +1,7 @@
 {
   "name": "odin-web",
   "version": "2.0.4",
-  "description": "ODIN workflows for building and refining web applications.",
+  "description": "ODIN workflows for browser testing, web performance, SEO, and extensions.",
   "keywords": [
     "odin",
     "outlinedriven",
@@ -14,7 +14,7 @@
   },
   "interface": {
     "displayName": "ODIN Web",
-    "shortDescription": "ODIN workflows for building and refining web applications.",
+    "shortDescription": "ODIN workflows for browser testing, web performance, SEO, and extensions.",
     "category": "Coding"
   }
 }

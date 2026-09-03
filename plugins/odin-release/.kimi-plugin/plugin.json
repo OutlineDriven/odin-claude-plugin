@@ -1,0 +1,21 @@
+{
+  "name": "odin-release",
+  "version": "2.0.4",
+  "description": "ODIN workflows for cutting, gating, publishing, and announcing releases.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "release"
+  ],
+  "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "license": "SEE LICENSE IN LICENSE",
+  "author": {
+    "name": "OutlineDriven"
+  },
+  "skills": "./skills",
+  "interface": {
+    "displayName": "ODIN Release",
+    "shortDescription": "ODIN workflows for cutting, gating, publishing, and announcing releases."
+  }
+}

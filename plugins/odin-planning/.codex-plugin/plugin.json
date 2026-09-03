@@ -1,7 +1,7 @@
 {
   "name": "odin-planning",
   "version": "2.0.4",
-  "description": "ODIN workflows for shaping requirements and implementation plans.",
+  "description": "ODIN workflows for shaping intent into approved plans, specs, and task lists.",
   "keywords": [
     "odin",
     "outlinedriven",
@@ -14,7 +14,7 @@
   },
   "interface": {
     "displayName": "ODIN Planning",
-    "shortDescription": "ODIN workflows for shaping requirements and implementation plans.",
+    "shortDescription": "ODIN workflows for shaping intent into approved plans, specs, and task lists.",
     "category": "Productivity"
   }
 }

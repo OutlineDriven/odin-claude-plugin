@@ -1,0 +1,3 @@
+interface:
+  display_name: "Lockstep Version Guard"
+  short_description: "Use when a human invokes the release gate to prove every ODIN plugin shares one canonical version."

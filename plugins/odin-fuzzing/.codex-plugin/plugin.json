@@ -1,0 +1,20 @@
+{
+  "name": "odin-fuzzing",
+  "version": "2.0.4",
+  "description": "ODIN workflows for fuzz harnesses, fuzzer setup, sanitizers, and coverage analysis.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "fuzzing"
+  ],
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "interface": {
+    "displayName": "ODIN Fuzzing",
+    "shortDescription": "ODIN workflows for fuzz harnesses, fuzzer setup, sanitizers, and coverage analysis.",
+    "category": "Security"
+  }
+}

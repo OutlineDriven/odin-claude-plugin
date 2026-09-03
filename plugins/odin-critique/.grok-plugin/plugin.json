@@ -1,0 +1,18 @@
+{
+  "name": "odin-critique",
+  "version": "2.0.4",
+  "description": "ODIN workflows for pressure-testing a decision from independent seats and lenses.",
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "repository": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "license": "SEE LICENSE IN LICENSE",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "critique"
+  ]
+}

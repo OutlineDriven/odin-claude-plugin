@@ -1,8 +1,8 @@
 # ODIN Core
 
-Core ODIN workflows for planning, executing, and checking changes.
+Core ODIN gates every session runs: intent, scope, verification, and hand-off checks.
 
-16 skills, category Coding.
+8 skills, category Coding.
 
 ## Install
 
@@ -20,17 +20,9 @@ codex plugin add odin-core@odin-marketplace
 
 - ai-collab-protocols
 - axiom-mode
-- cybernetic-loop
-- diamond-task
 - enforce-workflow-constraints
-- entropy-assisted-planning
-- graph-backbone
 - instruction-understanding-gate
-- intent-proposal
-- keep-why-repo-trust-boundary
-- minimap
 - necessary-work
-- possible-worlds
 - post-change-check-gate
 - skill-gap-finder
 - verification-before-completion

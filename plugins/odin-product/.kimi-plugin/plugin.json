@@ -1,7 +1,7 @@
 {
   "name": "odin-product",
   "version": "2.0.4",
-  "description": "ODIN workflows for product strategy and developer adoption.",
+  "description": "ODIN workflows for product strategy, market signals, and developer adoption.",
   "keywords": [
     "odin",
     "outlinedriven",
@@ -16,6 +16,6 @@
   "skills": "./skills",
   "interface": {
     "displayName": "ODIN Product",
-    "shortDescription": "ODIN workflows for product strategy and developer adoption."
+    "shortDescription": "ODIN workflows for product strategy, market signals, and developer adoption."
   }
 }

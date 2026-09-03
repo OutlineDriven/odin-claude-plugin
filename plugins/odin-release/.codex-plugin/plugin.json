@@ -1,0 +1,20 @@
+{
+  "name": "odin-release",
+  "version": "2.0.4",
+  "description": "ODIN workflows for cutting, gating, publishing, and announcing releases.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "release"
+  ],
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "interface": {
+    "displayName": "ODIN Release",
+    "shortDescription": "ODIN workflows for cutting, gating, publishing, and announcing releases.",
+    "category": "Coding"
+  }
+}

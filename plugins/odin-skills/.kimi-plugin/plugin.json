@@ -1,0 +1,21 @@
+{
+  "name": "odin-skills",
+  "version": "2.0.4",
+  "description": "ODIN workflows for authoring, auditing, benchmarking, and publishing agent skills.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "skills"
+  ],
+  "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "license": "SEE LICENSE IN LICENSE",
+  "author": {
+    "name": "OutlineDriven"
+  },
+  "skills": "./skills",
+  "interface": {
+    "displayName": "ODIN Skills",
+    "shortDescription": "ODIN workflows for authoring, auditing, benchmarking, and publishing agent skills."
+  }
+}

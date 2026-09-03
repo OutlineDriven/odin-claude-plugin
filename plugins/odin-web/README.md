@@ -1,8 +1,8 @@
 # ODIN Web
 
-ODIN workflows for building and refining web applications.
+ODIN workflows for browser testing, web performance, SEO, and extensions.
 
-8 skills, category Coding.
+13 skills, category Coding.
 
 ## Install
 
@@ -18,10 +18,15 @@ codex plugin add odin-web@odin-marketplace
 
 ## Skills
 
+- browser-cookie-store
 - browser-testing
 - chrome-extension
 - diff-scoped-browser-qa
+- first-load-byte-reduction
+- headed-browser-takeover
 - llms-visibility
+- native-messaging-host-conflicts
+- optimise-seo
 - seo-aeo-audit
 - site-launch-checklist
 - web-performance-audit

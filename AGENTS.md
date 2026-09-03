@@ -57,12 +57,15 @@ Treat these as generator-owned and never hand-edit them:
 - `.claude-plugin/marketplace.json`, `.codex-plugin/marketplace.json`, `.cursor-plugin/marketplace.json`, `.grok-plugin/marketplace.json`, `.kimi-plugin/marketplace.json`
 - `plugins/*/skills/*/agents/openai.yaml`
 - the plugin table under `## Plugins` in the root `README.md`, and nothing else in that file
+- `docs/specs/skill-index.md`
 
 To change one, change its generator or `catalog/plugins.json`, run `just render`, and commit input and output together.
 
 Each harness dotdir manifest declares only what its own defaults do not already resolve: Kimi needs `skills`, and Codex and Grok need `mcpServers` where a plugin ships the dotless `mcp.json`. Do not add component declarations a harness resolves by convention.
 
 Bump `releaseVersion` by one patch (`+0.0.1`) for every change that ships a skill, output style, manifest, or attribution; bump the minor version only on explicit request. Three authored copies carry the literal, and the bump commit updates all three: `catalog/plugins.json`, the literal in this file, and the sentence under the skill count in the root `README.md`. Run `just render` and commit the catalog with its generated output. Do not change `releaseVersion` for tooling-only changes such as pre-commit hooks or formatter configuration, or for edits to this file alone. Do not add or backfill `CHANGELOG.md` entries for routine version work; a bump that ships a skill or behavior change gets one entry.
+
+A plugin id names a job someone is doing or a stack they are working in. A tier suffix such as `-advanced` is not a job, and a grab-bag id that collects whatever fits is not one either; split by job instead.
 
 ## Devin skill mirror
 

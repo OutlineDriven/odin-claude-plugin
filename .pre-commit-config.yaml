@@ -98,6 +98,13 @@ repos:
         pass_filenames: false
         always_run: true
 
+      - id: render-skill-index
+        name: check generated skill index matches the tree
+        entry: node scripts/render-skill-index.mjs --check
+        language: system
+        pass_filenames: false
+        always_run: true
+
       - id: check-skill-frontmatter
         name: check SKILL.md frontmatter parses as strict YAML
         entry: python3 scripts/check-skill-frontmatter.py

@@ -1,7 +1,7 @@
 {
   "name": "odin-agent",
   "version": "2.0.4",
-  "description": "ODIN workflows for designing and improving AI agents.",
+  "description": "ODIN workflows for configuring agent harnesses, MCP servers, and repository agent surfaces.",
   "author": {
     "name": "OutlineDriven",
     "url": "https://github.com/OutlineDriven"

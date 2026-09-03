@@ -13,7 +13,7 @@
       "index": 1,
       "id": "odin-core",
       "display_name": "ODIN Core",
-      "description": "Core ODIN workflows for planning, executing, and checking changes.",
+      "description": "Core ODIN gates every session runs: intent, scope, verification, and hand-off checks.",
       "category": "Coding",
       "tags": [
         "odin",
@@ -26,271 +26,9 @@
     },
     {
       "index": 2,
-      "id": "odin-code",
-      "display_name": "ODIN Code",
-      "description": "ODIN workflows for writing, reviewing, and maintaining code.",
-      "category": "Coding",
-      "tags": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "code"
-      ],
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "directory": "plugins/odin-code"
-    },
-    {
-      "index": 3,
-      "id": "odin-code-advanced",
-      "display_name": "ODIN Code Advanced",
-      "description": "Advanced ODIN workflows for complex code changes and technical audits.",
-      "category": "Coding",
-      "tags": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "code",
-        "advanced"
-      ],
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "directory": "plugins/odin-code-advanced"
-    },
-    {
-      "index": 4,
-      "id": "odin-create",
-      "display_name": "ODIN Create",
-      "description": "ODIN workflows for turning ideas into working artifacts.",
-      "category": "Productivity",
-      "tags": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "create"
-      ],
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "directory": "plugins/odin-create"
-    },
-    {
-      "index": 5,
-      "id": "odin-create-advanced",
-      "display_name": "ODIN Create Advanced",
-      "description": "Advanced ODIN workflows for ambitious, multi-part creative work.",
-      "category": "Productivity",
-      "tags": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "create",
-        "advanced"
-      ],
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "directory": "plugins/odin-create-advanced"
-    },
-    {
-      "index": 6,
-      "id": "odin-research",
-      "display_name": "ODIN Research",
-      "description": "ODIN workflows for focused research and source-backed findings.",
-      "category": "Research",
-      "tags": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "research"
-      ],
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "directory": "plugins/odin-research"
-    },
-    {
-      "index": 7,
-      "id": "odin-research-advanced",
-      "display_name": "ODIN Research Advanced",
-      "description": "Advanced ODIN workflows for deep research and evidence synthesis.",
-      "category": "Research",
-      "tags": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "research",
-        "advanced"
-      ],
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "directory": "plugins/odin-research-advanced"
-    },
-    {
-      "index": 8,
-      "id": "odin-run",
-      "display_name": "ODIN Run",
-      "description": "ODIN workflows for executing plans and shipping finished changes.",
-      "category": "Coding",
-      "tags": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "run"
-      ],
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "directory": "plugins/odin-run"
-    },
-    {
-      "index": 9,
-      "id": "odin-run-advanced",
-      "display_name": "ODIN Run Advanced",
-      "description": "Advanced ODIN workflows for complex execution and delivery.",
-      "category": "Coding",
-      "tags": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "run",
-        "advanced"
-      ],
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "directory": "plugins/odin-run-advanced"
-    },
-    {
-      "index": 10,
-      "id": "odin-agent",
-      "display_name": "ODIN Agent",
-      "description": "ODIN workflows for designing and improving AI agents.",
-      "category": "Productivity",
-      "tags": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "agent"
-      ],
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "directory": "plugins/odin-agent"
-    },
-    {
-      "index": 11,
-      "id": "odin-security",
-      "display_name": "ODIN Security",
-      "description": "ODIN workflows for security reviews and defensive implementation.",
-      "category": "Security",
-      "tags": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "security"
-      ],
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "directory": "plugins/odin-security"
-    },
-    {
-      "index": 12,
-      "id": "odin-security-advanced",
-      "display_name": "ODIN Security Advanced",
-      "description": "Advanced ODIN workflows for threat analysis and security hardening.",
-      "category": "Security",
-      "tags": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "security",
-        "advanced"
-      ],
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "directory": "plugins/odin-security-advanced"
-    },
-    {
-      "index": 13,
-      "id": "odin-design",
-      "display_name": "ODIN Design",
-      "description": "ODIN workflows for practical interface and visual design.",
-      "category": "Design",
-      "tags": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "design"
-      ],
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "directory": "plugins/odin-design"
-    },
-    {
-      "index": 14,
-      "id": "odin-design-advanced",
-      "display_name": "ODIN Design Advanced",
-      "description": "Advanced ODIN workflows for polished interfaces and design systems.",
-      "category": "Design",
-      "tags": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "design",
-        "advanced"
-      ],
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "directory": "plugins/odin-design-advanced"
-    },
-    {
-      "index": 15,
-      "id": "odin-writing",
-      "display_name": "ODIN Writing",
-      "description": "ODIN workflows for clear, useful technical writing.",
-      "category": "Writing",
-      "tags": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "writing"
-      ],
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "directory": "plugins/odin-writing"
-    },
-    {
-      "index": 16,
-      "id": "odin-writing-advanced",
-      "display_name": "ODIN Writing Advanced",
-      "description": "Advanced ODIN workflows for substantial writing and editorial work.",
-      "category": "Writing",
-      "tags": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "writing",
-        "advanced"
-      ],
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "directory": "plugins/odin-writing-advanced"
-    },
-    {
-      "index": 17,
-      "id": "odin-product",
-      "display_name": "ODIN Product",
-      "description": "ODIN workflows for product strategy and developer adoption.",
-      "category": "Productivity",
-      "tags": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "product"
-      ],
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "directory": "plugins/odin-product"
-    },
-    {
-      "index": 18,
-      "id": "odin-loop",
-      "display_name": "ODIN Loop",
-      "description": "ODIN workflows for bounded iteration with explicit completion checks.",
-      "category": "Coding",
-      "tags": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "loop"
-      ],
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "directory": "plugins/odin-loop"
-    },
-    {
-      "index": 19,
       "id": "odin-planning",
       "display_name": "ODIN Planning",
-      "description": "ODIN workflows for shaping requirements and implementation plans.",
+      "description": "ODIN workflows for shaping intent into approved plans, specs, and task lists.",
       "category": "Productivity",
       "tags": [
         "odin",
@@ -302,22 +40,322 @@
       "directory": "plugins/odin-planning"
     },
     {
-      "index": 20,
-      "id": "odin-python",
-      "display_name": "ODIN Python",
-      "description": "ODIN workflows for modern Python development.",
+      "index": 3,
+      "id": "odin-critique",
+      "display_name": "ODIN Critique",
+      "description": "ODIN workflows for pressure-testing a decision from independent seats and lenses.",
+      "category": "Productivity",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "critique"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "directory": "plugins/odin-critique"
+    },
+    {
+      "index": 4,
+      "id": "odin-product",
+      "display_name": "ODIN Product",
+      "description": "ODIN workflows for product strategy, market signals, and developer adoption.",
+      "category": "Productivity",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "product"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "directory": "plugins/odin-product"
+    },
+    {
+      "index": 5,
+      "id": "odin-code",
+      "display_name": "ODIN Code",
+      "description": "ODIN workflows for writing, changing, and simplifying code.",
       "category": "Coding",
       "tags": [
         "odin",
         "outlinedriven",
         "agent-skills",
-        "python"
+        "code"
       ],
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "directory": "plugins/odin-python"
+      "directory": "plugins/odin-code"
+    },
+    {
+      "index": 6,
+      "id": "odin-review",
+      "display_name": "ODIN Review",
+      "description": "ODIN workflows for reviewing diffs, branches, and implementations against their specs.",
+      "category": "Coding",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "review"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "directory": "plugins/odin-review"
+    },
+    {
+      "index": 7,
+      "id": "odin-testing",
+      "display_name": "ODIN Testing",
+      "description": "ODIN workflows for tests, properties, mutation, and behavioral verification.",
+      "category": "Coding",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "testing"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "directory": "plugins/odin-testing"
+    },
+    {
+      "index": 8,
+      "id": "odin-git",
+      "display_name": "ODIN Git",
+      "description": "ODIN workflows for commits, branches, pull requests, review feedback, and issue tracking.",
+      "category": "Coding",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "git"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "directory": "plugins/odin-git"
+    },
+    {
+      "index": 9,
+      "id": "odin-release",
+      "display_name": "ODIN Release",
+      "description": "ODIN workflows for cutting, gating, publishing, and announcing releases.",
+      "category": "Coding",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "release"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "directory": "plugins/odin-release"
+    },
+    {
+      "index": 10,
+      "id": "odin-run",
+      "display_name": "ODIN Run",
+      "description": "ODIN workflows for executing plans, orchestrating subagents, and bounded autonomous loops.",
+      "category": "Coding",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "run"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "directory": "plugins/odin-run"
+    },
+    {
+      "index": 11,
+      "id": "odin-infra",
+      "display_name": "ODIN Infra",
+      "description": "ODIN workflows for CI, deployment, observability, cost, and infrastructure tooling.",
+      "category": "Infrastructure",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "infra"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "directory": "plugins/odin-infra"
+    },
+    {
+      "index": 12,
+      "id": "odin-security",
+      "display_name": "ODIN Security",
+      "description": "ODIN workflows for security review, vulnerability triage, and defensive implementation.",
+      "category": "Security",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "security"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "directory": "plugins/odin-security"
+    },
+    {
+      "index": 13,
+      "id": "odin-fuzzing",
+      "display_name": "ODIN Fuzzing",
+      "description": "ODIN workflows for fuzz harnesses, fuzzer setup, sanitizers, and coverage analysis.",
+      "category": "Security",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "fuzzing"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "directory": "plugins/odin-fuzzing"
+    },
+    {
+      "index": 14,
+      "id": "odin-research",
+      "display_name": "ODIN Research",
+      "description": "ODIN workflows for source-backed investigation, verification, and design rationale.",
+      "category": "Research",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "research"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "directory": "plugins/odin-research"
+    },
+    {
+      "index": 15,
+      "id": "odin-knowledge",
+      "display_name": "ODIN Knowledge",
+      "description": "ODIN workflows for memory, session continuity, decision records, and retrospectives.",
+      "category": "Productivity",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "knowledge"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "directory": "plugins/odin-knowledge"
+    },
+    {
+      "index": 16,
+      "id": "odin-learn",
+      "display_name": "ODIN Learn",
+      "description": "ODIN workflows for teaching, explaining, drilling, and onboarding.",
+      "category": "Productivity",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "learn"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "directory": "plugins/odin-learn"
+    },
+    {
+      "index": 17,
+      "id": "odin-people",
+      "display_name": "ODIN People",
+      "description": "ODIN workflows for team dynamics, culture profiles, and negotiation.",
+      "category": "Productivity",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "people"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "directory": "plugins/odin-people"
+    },
+    {
+      "index": 18,
+      "id": "odin-agent",
+      "display_name": "ODIN Agent",
+      "description": "ODIN workflows for configuring agent harnesses, MCP servers, and repository agent surfaces.",
+      "category": "Productivity",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "agent"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "directory": "plugins/odin-agent"
+    },
+    {
+      "index": 19,
+      "id": "odin-skills",
+      "display_name": "ODIN Skills",
+      "description": "ODIN workflows for authoring, auditing, benchmarking, and publishing agent skills.",
+      "category": "Productivity",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "skills"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "directory": "plugins/odin-skills"
+    },
+    {
+      "index": 20,
+      "id": "odin-writing",
+      "display_name": "ODIN Writing",
+      "description": "ODIN workflows for documentation, editorial prose, and copy.",
+      "category": "Writing",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "writing"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "directory": "plugins/odin-writing"
     },
     {
       "index": 21,
+      "id": "odin-visual",
+      "display_name": "ODIN Visual",
+      "description": "ODIN workflows for diagrams, decks, canvases, and visual explainers.",
+      "category": "Design",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "visual"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "directory": "plugins/odin-visual"
+    },
+    {
+      "index": 22,
+      "id": "odin-design",
+      "display_name": "ODIN Design",
+      "description": "ODIN workflows for interface design, prototypes, and visual fidelity.",
+      "category": "Design",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "design"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "directory": "plugins/odin-design"
+    },
+    {
+      "index": 23,
+      "id": "odin-web",
+      "display_name": "ODIN Web",
+      "description": "ODIN workflows for browser testing, web performance, SEO, and extensions.",
+      "category": "Coding",
+      "tags": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "web"
+      ],
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "directory": "plugins/odin-web"
+    },
+    {
+      "index": 24,
       "id": "odin-typescript",
       "display_name": "ODIN TypeScript",
       "description": "ODIN workflows for modern TypeScript development.",
@@ -332,22 +370,22 @@
       "directory": "plugins/odin-typescript"
     },
     {
-      "index": 22,
-      "id": "odin-web",
-      "display_name": "ODIN Web",
-      "description": "ODIN workflows for building and refining web applications.",
+      "index": 25,
+      "id": "odin-python",
+      "display_name": "ODIN Python",
+      "description": "ODIN workflows for modern Python development.",
       "category": "Coding",
       "tags": [
         "odin",
         "outlinedriven",
         "agent-skills",
-        "web"
+        "python"
       ],
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "directory": "plugins/odin-web"
+      "directory": "plugins/odin-python"
     },
     {
-      "index": 23,
+      "index": 26,
       "id": "odin-native",
       "display_name": "ODIN Native",
       "description": "ODIN workflows for native systems, toolchains, and performance.",
@@ -362,7 +400,7 @@
       "directory": "plugins/odin-native"
     },
     {
-      "index": 24,
+      "index": 27,
       "id": "odin-apple",
       "display_name": "ODIN Apple",
       "description": "ODIN workflows for software on Apple platforms.",
@@ -377,7 +415,7 @@
       "directory": "plugins/odin-apple"
     },
     {
-      "index": 25,
+      "index": 28,
       "id": "odin-lean",
       "display_name": "ODIN Lean",
       "description": "ODIN workflows for Lean proofs and formal verification.",
@@ -390,51 +428,6 @@
       ],
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "directory": "plugins/odin-lean"
-    },
-    {
-      "index": 26,
-      "id": "odin-terraform",
-      "display_name": "ODIN Terraform",
-      "description": "ODIN workflows for safe Terraform infrastructure changes.",
-      "category": "Infrastructure",
-      "tags": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "terraform"
-      ],
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "directory": "plugins/odin-terraform"
-    },
-    {
-      "index": 27,
-      "id": "odin-bigquery",
-      "display_name": "ODIN BigQuery",
-      "description": "ODIN workflows for BigQuery data work and cost-aware queries.",
-      "category": "Data",
-      "tags": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "bigquery"
-      ],
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "directory": "plugins/odin-bigquery"
-    },
-    {
-      "index": 28,
-      "id": "odin-prometheus",
-      "display_name": "ODIN Prometheus",
-      "description": "ODIN workflows for Prometheus metrics and monitoring.",
-      "category": "Infrastructure",
-      "tags": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "prometheus"
-      ],
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "directory": "plugins/odin-prometheus"
     }
   ]
 }

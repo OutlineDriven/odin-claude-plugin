@@ -1,0 +1,18 @@
+{
+  "name": "odin-git",
+  "version": "2.0.4",
+  "description": "ODIN workflows for commits, branches, pull requests, review feedback, and issue tracking.",
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "repository": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "license": "SEE LICENSE IN LICENSE",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "git"
+  ]
+}

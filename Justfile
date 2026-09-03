@@ -12,6 +12,7 @@ default:
 render:
     node scripts/render-skill-manifests.mjs
     node scripts/render-plugin-surfaces.mjs
+    node scripts/render-skill-index.mjs
 
 # Mirror every skill into the outline repository as a flat Devin skill tree.
 #
