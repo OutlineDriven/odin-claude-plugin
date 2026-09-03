@@ -10,7 +10,7 @@ description: 'Use when a parser, protocol, or file format fuzzer stalls at fixed
 | Field | Bound contract |
 |---|---|
 | Trigger | User needs a focused dictionary for a parser, protocol, or file format whose coverage stalls at fixed tokens. |
-| Authority | Write only the named local dictionary file and fuzzer campaign configuration; rollback is deleting the dictionary file and reverting the configuration flag. |
+| Authority | Reversible local: writes only the named local dictionary file and fuzzer campaign configuration; rollback is deleting the dictionary file and reverting the configuration flag. No remote mutation. |
 | Side effect | Fuzzer dictionary file and campaign configuration. |
 | Done | The dictionary parses in the selected fuzzer and its tokens correspond to target validation or parsing gates. |
 

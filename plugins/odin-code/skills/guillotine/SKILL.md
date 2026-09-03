@@ -12,7 +12,7 @@ Remove weight the product does not use. Interior cleanup needs proof, not sentim
 | Field | Bound contract |
 |---|---|
 | Trigger | A repository or subsystem needs dead, duplicate, superseded, or generated residue removed across more than one artifact class. |
-| Authority | Reversible local edits and deletion of VCS-tracked interior artifacts. No remote mutation, history rewrite, data migration, credential change, or deletion of untracked or critical data. |
+| Authority | Reversible local: writes only VCS-tracked interior artifacts (edits and deletion); rollback is version control. No remote mutation. No history rewrite, data migration, credential change, or deletion of untracked or critical data. |
 | Side effect | VCS-tracked artifacts are deleted or consolidated; live consumers are migrated to the surviving owner; generated surfaces are regenerated. The observable boundary is unchanged. |
 | Done | Every removed artifact has a proof of non-necessity, no live route to the old path remains, the observable boundary passes, and the repository gate is green. |
 

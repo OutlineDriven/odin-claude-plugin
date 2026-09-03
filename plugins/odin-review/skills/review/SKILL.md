@@ -12,7 +12,7 @@ Two modes share one authority (read-only) and one evidence bar: every finding ci
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to review a pull request, examine code changes, find bugs, run a security review, audit code on the current branch, or run combined bug/security and code-quality branch audits. |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Chat output: a review report with findings (standard) or a unified audit report (depth). |
 | Done | Standard: validated findings with severity, evidence, and concrete fixes; no style-only or invented findings. Depth: a single deduplicated prioritized synthesis as a unified verdict ordered by severity. |
 

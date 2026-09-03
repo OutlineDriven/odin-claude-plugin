@@ -10,7 +10,7 @@ description: 'Use when a scheduled or watcher tick requests a repository-health 
 | Field | Bound contract |
 |---|---|
 | Trigger | A scheduled or explicitly requested repository-health pass spanning CI, pull requests, issues, commits, discussions, and durable run state. |
-| Authority | Reversible-local: write only the bounded report file, one append-only run-log entry, and at most one isolated-fix proposal; no source, label, merge, or close mutation without explicit approval. |
+| Authority | Reversible local: writes only the bounded report file, one append-only run-log entry, and at most one isolated-fix proposal; rollback is deleting those files. No remote mutation. No source, label, merge, or close mutation without explicit approval. |
 | Side effect | Local-write to a bounded High/Watch/Noise report plus one append-only run-log entry and at most one isolated-fix proposal; no unapproved source, label, merge, or close mutation. |
 | Done | Every inspected signal lands in High, Watch, or Noise with an evidence line; the report is persisted or returned and any score stays informational, never a reason to act. |
 

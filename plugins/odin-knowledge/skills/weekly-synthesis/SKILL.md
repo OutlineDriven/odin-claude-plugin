@@ -10,7 +10,7 @@ description: 'Use when the user asks to compile a weekly synthesis, a weekly rep
 | Field | Bound contract |
 |---|---|
 | Trigger | The user needs the period's scattered reports synthesized into one evidence-grounded weekly digest. |
-| Authority | Reversible-local: writes one markdown file under `reports/weekly-synthesis/`; delete the file to roll back. |
+| Authority | Reversible local: writes only one markdown file under `reports/weekly-synthesis/`; rollback is undo. No remote mutation. |
 | Side effect | Exactly one local file: `reports/weekly-synthesis/synthesis_YYYY-MM-DD.md`. No network calls, no credentials, no publishing. |
 | Done | The synthesis file exists with sections 1 through 5 strictly factual, section 6 labeled agent-generated recommendations, and the self-review checklist passed. |
 

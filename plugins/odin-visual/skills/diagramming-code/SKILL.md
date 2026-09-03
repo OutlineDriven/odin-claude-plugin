@@ -10,7 +10,7 @@ description: 'Use when the user asks for a call graph, class hierarchy, module d
 | Field | Bound contract |
 |---|---|
 | Trigger | The user asks for a call graph, class hierarchy, module dependency map, containment view, complexity heatmap, or attack-surface/data-flow view derived from code. |
-| Authority | Write only generated Mermaid graph text or an embedded Mermaid diagram to the local response or a named local file. No source, VCS, credential, paid, published, deployed, or remote mutation. Roll back by deleting the emitted artifact. |
+| Authority | Reversible local: writes only generated Mermaid graph text or an embedded Mermaid diagram to the local response or a named local file; rollback is deleting the emitted artifact. No remote mutation. No source mutation. |
 | Side effect | Generated Mermaid graph text or an embedded Mermaid diagram in the local response or a named local file. |
 | Done | The requested graph type is non-empty or honestly explains why no matching edges exist, is scoped to a readable size, and uses valid Mermaid syntax. |
 

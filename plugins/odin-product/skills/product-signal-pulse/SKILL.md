@@ -10,7 +10,7 @@ description: 'Use when invoking /product-signal-pulse with an optional lookback 
 | Field | Bound contract |
 |---|---|
 | Trigger | /product-signal-pulse [lookback window, default 24h] |
-| Authority | Read-only queries to configured analytics, tracing, and payment sources; write only the pulse report file and pulse settings in config.local.yaml. No read-write database access; read-only replica only when explicitly enabled. |
+| Authority | Reversible local: writes only the pulse report file and pulse settings in config.local.yaml; rollback is undo. No remote mutation. No read-write database access; read-only replica only when explicitly enabled. |
 | Side effect | Writes a pulse report under docs/pulse-reports; settings writes go only to config.local.yaml |
 | Done | A 30-40 line report exists at the dated path, with headlines and the top followup surfaced in chat |
 

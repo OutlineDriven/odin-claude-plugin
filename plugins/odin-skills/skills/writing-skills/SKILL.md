@@ -14,7 +14,7 @@ doc; the writing does not.
 | Field | Bound contract |
 |---|---|
 | Trigger | A SKILL.md or AGENTS.md/CLAUDE.md is being authored, refactored, ported, or upgraded, or the user asks to write a skill, improve one, or fix unreliable skill firing |
-| Authority | Reversible local writes to the target document and the skill directory it belongs to, plus the repository-owned registration or attribution surfaces those artifacts require. Never publishes, installs, commits, or mutates remote state |
+| Authority | Reversible local: writes only the target document, its skill directory, and the repository-owned registration or attribution surfaces those artifacts require; rollback is version control or undo. No remote mutation. Never publishes, installs, or commits. |
 | Side effect | The target document changes on disk when the request is to author or refactor one. Guidance alone when the request is a review |
 | Done | The document is predictable, and the repository's own gate passes on every changed file |
 

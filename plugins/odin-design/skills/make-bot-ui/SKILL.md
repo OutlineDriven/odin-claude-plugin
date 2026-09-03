@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | A human explicitly invokes this skill to build a webhook UI that wakes a bot. |
-| Authority | Require explicit human invocation, then preview the exact files, server endpoint, credential storage, network exposure, and any host-level Tailscale installation before changing them. Do not perform an unpreviewed credential, data-at-rest, deployment, remote, paid, or irreversible action. |
+| Authority | Human-gated: asks for explicit human invocation and previews the exact files, server endpoint, credential storage, network exposure, and any host-level Tailscale installation before changing them; otherwise reversible local: writes only the previewed webhook server and browser UI; rollback is version control. Do not perform an unpreviewed credential, data-at-rest, deployment, remote, paid, or irreversible action. |
 | Side effect | Create or modify only the previewed webhook server and browser UI; optionally install and configure Tailscale node support only when the human explicitly requests that installation after seeing its host and network consequences. |
 | Done | The UI is working and has been exercised through the real server-to-webhook path, the bot wake request succeeds, and neither browser-delivered code nor browser-visible traffic contains the webhook secret. |
 

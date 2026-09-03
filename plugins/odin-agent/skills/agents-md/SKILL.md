@@ -10,7 +10,7 @@ description: 'Use when setting up a repo for agents, adding AGENTS.md, auditing 
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to set up a repo for agents, add AGENTS.md, audit CLAUDE.md, make a repo agent-friendly, score agent instructions, prune long/generic/stale instructions, or produce a lean pointer-only AGENTS.md |
-| Authority | Reversible local write: audit and refactor AGENTS.md, CLAUDE.md, CLAUDE.local.md, and supporting instruction files; apply diffs only after user confirms. Roll back by restoring the pre-edit snapshot taken before any write |
+| Authority | Reversible local: writes only AGENTS.md, CLAUDE.md, CLAUDE.local.md, and supporting instruction files after user confirmation; rollback is restoring the pre-edit snapshot. No remote mutation. |
 | Side effect | Local write to agent instruction files in the repo; no remote, credential, paid, published, deployed, or VCS mutation |
 | Done | Repo has working, scored, non-contradictory AGENTS.md and CLAUDE.md for Claude, Codex, and Cursor; every surviving line passes the three-check admission gate (non-discoverable, operationally significant, actionable); lean variants stay under 100 lines with pointer-only sections |
 

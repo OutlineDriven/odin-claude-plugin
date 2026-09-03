@@ -10,7 +10,7 @@ description: 'Use when asked to draft launch or promotion copy for a shipped fea
 | Field | Bound contract |
 |---|---|
 | Trigger | /release-promotion [what shipped and/or channels] |
-| Authority | Read-only; drafts copy only. It never posts, publishes, schedules, commits, or opens PRs. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Drafts copy only; never posts, publishes, schedules, commits, or opens PRs. |
 | Side effect | None. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Done | Every drafted channel is presented as a labeled copy-pasteable block and the user is offered a revision. |
 

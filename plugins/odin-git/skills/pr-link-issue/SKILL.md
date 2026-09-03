@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | A human explicitly asks to link a GitHub issue and Linear ticket to a pull request, or to add those issue references. |
-| Authority | Perform this remote mutation only after explicit human invocation; preview the pull request, exact appended block, and remote consequence before using authenticated access. |
+| Authority | Remote: appends one `#### Issues` block to the named pull request body on GitHub; requires explicit human invocation. Preview the pull request, exact appended block, and remote consequence before using authenticated access. |
 | Side effect | Append only one `#### Issues` block containing the supplied GitHub issue and Linear key to the named pull request body; preserve all existing body content. |
 | Done | A fresh remote read shows the pull request body contains both supplied references in one non-duplicate `#### Issues` block. |
 

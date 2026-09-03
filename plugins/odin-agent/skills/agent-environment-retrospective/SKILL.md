@@ -10,7 +10,7 @@ description: 'Use when a completed session needs an agent-environment retrospect
 | Field | Bound contract |
 |---|---|
 | Trigger | A completed session needs an agent-environment retrospective. |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Chat output: severity-ranked environment improvement candidates. |
 | Done | Every candidate names evidence and the friction it removes. |
 

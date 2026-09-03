@@ -10,7 +10,7 @@ description: 'Use when the user asks to clean up a finished commit message or br
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to clean up a finished commit's message, or a commit message needs handoff-ready form. |
-| Authority | Rewrite only VCS-tracked commit messages. Show the exact commit set before mutation. Use the original refs and reflog as recovery. Never create or suggest a new commit. |
+| Authority | Reversible local: writes only VCS-tracked commit messages; rollback is the original refs and reflog. No remote mutation. Show the exact commit set before mutation. Never create or suggest a new commit. |
 | Side effect | Rewrites commit messages only; the tree stays byte-identical; each rewritten commit is re-signed with its dates preserved by position. Local history only. |
 | Done | `git diff old..new` is empty; each rewritten commit is signed with the intended dates; `git log` alone carries the handoff with the diff hidden. |
 

@@ -10,7 +10,7 @@ description: 'Use when asked to determine what a change could break before it sh
 | Field | Bound contract |
 |---|---|
 | Trigger | Determine what a change could break. |
-| Authority | Write only one local proof script or test; delete it after the report. No VCS, credential, published, or remote mutation. |
+| Authority | Reversible local: writes only one local proof script or test; rollback is deleting it after the report. No remote mutation. No VCS, credential, or published mutation. |
 | Side effect | May write and run one proof. |
 | Done | Confirmed risks, cleared items, and cheapest pre-merge test. |
 

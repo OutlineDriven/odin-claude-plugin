@@ -10,7 +10,7 @@ description: 'Use when a design dispute has at least two live interpretations an
 | Field | Bound contract |
 |---|---|
 | Trigger | A design dispute has at least two live interpretations and the caller wants the alternative worlds made explicit, or wants a plain-language paragraph ending in one recommendation. |
-| Authority | Read supplied dispute material only. Do not mutate files, version control, credentials, paid services, publications, deployments, or remote state; do not select or record a decision or authorize downstream mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Does not select or record a decision or authorize downstream mutation. |
 | Side effect | Emit one paragraph only; make no mutation, decision record, design selection, or downstream authorization. |
 | Done | One paragraph at a five-year-old abstraction level lays out the live interpretations and ends with exactly one recommendation while the dispute remains open. |
 

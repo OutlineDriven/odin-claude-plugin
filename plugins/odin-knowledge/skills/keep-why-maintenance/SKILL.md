@@ -10,7 +10,7 @@ description: 'Use when contradictions, revisit conditions, or duplicates appear 
 | Field | Bound contract |
 |---|---|
 | Trigger | Contradiction found between entries, an entry's Revisit-when condition fires, entries conflict or duplicate, or a topic file grows too large. |
-| Authority | Reversible-local: write only named topic files; every edit is VCS-recoverable. |
+| Authority | Reversible local: writes only named topic files; rollback is version control. No remote mutation. |
 | Side effect | Status flips, superseded markers ('> Superseded <date>: see below') instead of deletion, duplicate merge, file split proposal. |
 | Done | No silent historical overwrite; superseded content retained with marker; splits proposed rather than unbounded growth; maintenance changes get the same scrutiny as new entries. |
 

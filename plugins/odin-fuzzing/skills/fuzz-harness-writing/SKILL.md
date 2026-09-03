@@ -10,7 +10,7 @@ description: 'Use when a user needs to create or improve a deterministic, engine
 | Field | Bound contract |
 |---|---|
 | Trigger | User needs to create or improve a deterministic fuzz harness for raw or structured target inputs. |
-| Authority | Reversible local writes to the fuzz harness, target adapter code, corpus entries, and crash artifacts under the project tree; no VCS commit required. Revert by deleting the added harness, adapter, corpus, and artifact files. |
+| Authority | Reversible local: writes only the fuzz harness, target adapter code, corpus entries, and crash artifacts under the project tree; rollback is deleting the added harness, adapter, corpus, and artifact files. No remote mutation. No VCS commit required. |
 | Side effect | Local writes to fuzz harness, target adapter code, corpus, and crash artifacts. |
 | Done | The harness executes representative and boundary inputs deterministically, reaches the intended API, and preserves reproducible crashes. |
 

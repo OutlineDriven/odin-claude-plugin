@@ -10,7 +10,7 @@ description: 'Use when a workflow, plan, diff, or completed work cycle must be c
 | Field | Bound contract |
 |---|---|
 | Trigger | A workflow, plan, diff, or completed work cycle must be checked for practices that punish the project later. |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Chat output naming each detected practice with evidence and a cheaper alternative, or a clean verdict. |
 | Done | Every detected practice is named with an evidence line and a cheaper alternative (or explicit absence), or the artifact is reported clean with scan coverage stated. The report changes nothing. |
 

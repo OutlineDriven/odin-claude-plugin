@@ -10,7 +10,7 @@ description: 'Use when states, waits, retries, decisions, transitions, and termi
 | Field | Bound contract |
 |---|---|
 | Trigger | The user asks to visualize states, statuses, retries, waiting conditions, decisions, success or failure terminals, or an entity or process lifecycle. |
-| Authority | Reversible-local: write only the artifacts named under Side effect, into the output directory fixed in step 1; rollback is deleting exactly the paths written this run; no other mutation. |
+| Authority | Reversible local: writes only the artifacts named under Side effect into the output directory fixed in step 1; rollback is deleting exactly the paths written this run. No remote mutation. |
 | Side effect | One typed lifecycle JSON specification and one self-contained interactive HTML artifact, plus at most two visual-evidence image sidecars actually captured this run. |
 | Done | Every requested legal transition and terminal state is represented in the topology without using cards or prose as a substitute, the specification validates fail-closed, delivery passes all checks, and the receipt and visual-review status are truthful. |
 

@@ -10,7 +10,7 @@ description: 'Use when the user asks to visualize an architecture as a self-cont
 | Field | Bound contract |
 |---|---|
 | Trigger | The user asks to visualize an architecture as a self-contained HTML artifact with a hash-bound receipt, or supplies two architecture snapshots for delta comparison. |
-| Authority | Reversible local writes to the HTML artifact and JSON receipt or sidecar. No remote, credential, publish, deploy, or irreversible mutation. |
+| Authority | Reversible local: writes only the HTML artifact and JSON receipt or sidecar; rollback is deleting those files. No remote mutation. |
 | Side effect | One HTML artifact and one JSON receipt or sidecar written to disk. |
 | Done | Single: frozen schema-validated specification, self-contained interactive HTML artifact, and evidence receipt with all showcase checks passing. Delta: every comparable element classified into exactly one category, self-contained Before/Delta/After HTML artifact, and sidecar receipt written. |
 

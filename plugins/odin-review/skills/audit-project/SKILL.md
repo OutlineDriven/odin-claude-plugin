@@ -10,7 +10,7 @@ description: 'Use when the user says "audit my code", "find all the bugs", "revi
 | Field | Bound contract |
 |---|---|
 | Trigger | The user says "audit my code", "find all the bugs", "deep code audit", "review until clean", or "grill my changes". |
-| Authority | Reversible local: write only `.outline/audit/` queue state, per-iteration JSON, minimal fix batches to VCS-tracked files in the resolved scope, and optionally `TECHNICAL_DEBT.md`; recover a bad batch with `git restore -- <files>` or `git revert HEAD --no-edit` and the persisted queue. No push, no `reset --hard`, no `git clean`. |
+| Authority | Reversible local: writes only `.outline/audit/` queue state, per-iteration JSON, minimal fix batches to VCS-tracked files in the resolved scope, and optionally `TECHNICAL_DEBT.md`; rollback is version control (`git restore -- <files>` or `git revert HEAD --no-edit` with the persisted queue). No remote mutation. No push, no `reset --hard`, no `git clean`. |
 | Side effect | Writes local audit queue state and applies local fix batches; may emit `TECHNICAL_DEBT.md`. |
 | Done | Zero open findings at or above the severity floor after consolidation and re-review, or a user decision gate chosen, or the iteration cap reached, with scope, selected reviewers, iterations, fixes, verification commands, regressions, and queue path reported. |
 

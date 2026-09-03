@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to classify projects against eligibility rules and create hierarchical child documents from a work summary. |
-| Authority | Read-only for classification and preview. Requires explicit human confirmation before creating any child document. |
+| Authority | Human-gated: requires explicit human confirmation before creating any child document; otherwise reversible local as above. |
 | Side effect | Creates one child document per eligible project under the specified parent, using the provided template. |
 | Done | Child documents created per eligible project and partial failures reported. |
 

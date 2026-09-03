@@ -10,7 +10,7 @@ description: 'Use when code mixes units, fixed-point precisions, scaling factors
 | Field | Bound contract |
 |---|---|
 | Trigger | A financial, scientific, DeFi, blockchain, or off-chain codebase contains mixed units, fixed-point precisions, scaling factors, rates, prices, shares, or conversions and needs full annotation plus validation. |
-| Authority | Reversible local writes only: comment-only dimensional annotations in in-scope source files plus DIMENSIONAL_SCOPE.json, DIMENSIONAL_UNITS.md, and a findings report in the project root. Recover by reverting comments through version control and deleting the three generated artifacts. |
+| Authority | Reversible local: writes only comment-only dimensional annotations in in-scope source files plus DIMENSIONAL_SCOPE.json, DIMENSIONAL_UNITS.md, and a findings report in the project root; rollback is version control (revert comments) or undo (delete the three generated artifacts). No remote mutation. |
 | Side effect | Comment-only annotations in all in-scope source files; DIMENSIONAL_SCOPE.json, DIMENSIONAL_UNITS.md, and a final findings/coverage report in the project root. No executable code, types, or logic are changed. |
 | Done | Every in-scope file has terminal annotation, propagation, and validation status; no PENDING entries remain; blocked files reconcile exactly; only comments changed; confirmed and refuted mismatches are separated. |
 

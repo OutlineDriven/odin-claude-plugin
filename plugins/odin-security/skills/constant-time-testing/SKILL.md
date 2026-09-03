@@ -10,7 +10,7 @@ description: 'Use when a cryptographic implementation must be checked at runtime
 | Field | Bound contract |
 |---|---|
 | Trigger | User needs runtime or statistical evidence that a cryptographic implementation leaks timing information. |
-| Authority | Reversible local: write only a timing-test harness, its compiled binary, and measured sample files under a scratch directory. The implementation under test is read and compiled into the harness but never edited. Roll back by deleting the scratch directory and compiled artifacts. |
+| Authority | Reversible local: writes only a timing-test harness, its compiled binary, and measured sample files under a scratch directory; rollback is deleting the scratch directory and compiled artifacts. No remote mutation. The implementation under test is read and compiled into the harness but never edited. |
 | Side effect | Local write to the timing-test harness and measured runtime samples. |
 | Done | A runtime test reports calibrated evidence of leakage or a bounded inconclusive result, with the exercised configuration named. |
 

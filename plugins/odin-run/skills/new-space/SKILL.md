@@ -10,7 +10,7 @@ description: 'Use when a user starts a new work session and asks to split human 
 | Field | Bound contract |
 |---|---|
 | Trigger | User starts a new work session and asks to split human decisions from agent execution. |
-| Authority | Write only under `run/<session-id>/` and execute only the approved spawn target. Human sign-off remains external to this skill. |
+| Authority | Reversible local: writes only under `run/<session-id>/` and executes only the approved spawn target; rollback is deleting that directory. No remote mutation. Human sign-off remains external to this skill. |
 | Side effect | Five artifacts under `run/<session-id>/`: brief, spawn evidence, work record, review artifact, and human-gate record. |
 | Done | All five artifacts exist under `run/<session-id>/`: the brief is approved, spawn output is captured with exit status, the work record reflects actual execution, the review artifact states conformance and verification items, and the human-gate record carries the decision, timestamp, and conditions. |
 

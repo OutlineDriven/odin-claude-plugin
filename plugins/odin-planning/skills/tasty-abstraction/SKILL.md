@@ -10,7 +10,7 @@ description: 'Use when a user wants to design an abstraction boundary that colla
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants to design an abstraction boundary that collapses a complex implementation into a simpler interface |
-| Authority | Read-only analysis and design. Stops before implementation. No file, code, or dependency changes. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Stops before implementation. |
 | Side effect | Chat output: one abstraction specification document |
 | Done | A standalone specification exists detailing the abstraction boundary, leak surface, and usage constraints |
 

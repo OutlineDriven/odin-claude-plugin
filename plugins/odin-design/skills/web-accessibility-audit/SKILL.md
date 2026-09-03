@@ -10,7 +10,7 @@ description: 'Use when the user requests an accessibility audit, a11y check, or 
 | Field | Bound contract |
 |---|---|
 | Trigger | Accessibility audit, a11y check, or WCAG compliance review |
-| Authority | Read-only: read project files and run only analysis tools already installed in the project; create, modify, or delete no file; no VCS, credential, paid, publishing, deployment, or remote mutation; install no package |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Reads project files and runs only analysis tools already installed in the project; installs no package. |
 | Side effect | None: the only artifact is the accessibility report returned in the conversation |
 | Done | Report contains prioritized WCAG findings with file/line locations, before/after code, and manual testing recommendations |
 

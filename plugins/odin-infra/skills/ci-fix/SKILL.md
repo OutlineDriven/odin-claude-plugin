@@ -12,7 +12,7 @@ Repair failing CI on a PR or branch. Two modes: interactive (default, reversible
 | Field | Bound contract |
 |---|---|
 | Trigger | Interactive: user asks to diagnose or repair failing CI on a PR or branch. Autonomous: user explicitly asks for the fix to be pushed. |
-| Authority | Interactive: reversible local: write only named source files after plan approval; no remote mutation. Autonomous: the only remote mutation is creating or updating `ci-fix/<original-branch>` on the same remote; never opens a PR. |
+| Authority | Human-gated: interactive mode writes only named source files after plan approval; rollback is version control. Autonomous mode pushes a fix branch, never opens a PR, and is a remote mutation that requires explicit human invocation. |
 | Side effect | Interactive: local source files are edited and a local-equivalent check passes; remote CI is unchanged. Autonomous: a fix branch is pushed with the approved change set and a new CI run is observed. |
 | Done | Interactive: failing checks identified, the approved local fix is applied, and every local equivalent passes; return `local-fix-ready` because remote CI is unchanged. Autonomous: a new run on `ci-fix/<original-branch>` is green and the ordered root-cause record is delivered. `checks-pass` is claimed only after a green remote run is observed. |
 

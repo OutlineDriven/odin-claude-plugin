@@ -10,7 +10,7 @@ description: 'Use when technical prose needs writing or reviewing with real symb
 | Field | Bound contract |
 |---|---|
 | Trigger | Write or review technical prose. |
-| Authority | Reversible-local: edit named prose files; rollback via version control. |
+| Authority | Reversible local: edit named prose files; rollback via version control. |
 | Side effect | Edits prose. |
 | Done | Unambiguous task-fit prose using real symbols. |
 

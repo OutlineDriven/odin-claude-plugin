@@ -10,7 +10,7 @@ description: 'Use when the user asks to view, export, or inspect a session trans
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to view, export, inspect, or share a Codex, Claude Code, OpenClaw, or Pi session transcript in a browser. |
-| Authority | Reversible local write. Create only the single HTML viewer file and one disposable generator script in the system temp directory; never modify the session file, never touch the network, never publish or upload. Rollback is deleting the generated HTML; the scratch script is deleted after the run. |
+| Authority | Reversible local: writes only the single HTML viewer file and one disposable generator script in the system temp directory; rollback is undo. No remote mutation. Never modifies the session file. |
 | Side effect | A single-file searchable HTML viewer embedding the (optionally raw) session JSONL is produced; it is opened in a browser only when the user asked to view it or passed `--open`. |
 | Done | HTML file is generated; session is correctly detected and normalized; tool output is searchable; private/credential content is not exposed. The file opens in a browser only when the user passed `--open` or explicitly asked to view it. |
 

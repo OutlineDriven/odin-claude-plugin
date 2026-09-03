@@ -10,7 +10,7 @@ description: 'Use when a task carries guardrail-adjacent material (stealth, scra
 | Field | Bound contract |
 |---|---|
 | Trigger | Task includes guardrail-adjacent material (stealth, scraping, privacy, IP, policy, security), or mixes reversible work with irreversible, credential, data-at-rest, migration, or deletion work, or the user says "autobahn this", or the agent notices itself about to hedge, soften, or silently skip. |
-| Authority | Reversible local writes only: spawn a context-clean subagent given only the carved prompt, write a descope ledger, and write archive entries after the run closes. |
+| Authority | Reversible local: writes only the descope ledger and archive entries, and spawns a context-clean subagent given only the carved prompt; rollback is version control. No remote mutation. |
 | Side effect | A context-clean subagent spawned with only the carved prompt; a local descope ledger; post-run archive entries. |
 | Done | Carve covers every guardrail-adjacent item with class, verdict, alternative, and archive destination; the runner saw only the carved prompt and its guard held both directions; an independent N=1 re-sweep was diffed against the ledger; the ledger is reported; the archive is written only after the run closed. |
 

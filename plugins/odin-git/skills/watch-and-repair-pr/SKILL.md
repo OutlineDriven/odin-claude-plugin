@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | A human explicitly invokes a watcher cycle for an open pull request that must be watched until it is mergeable or blocked. |
-| Authority | Human-only for remote mutation: preview the exact pull request, candidate branch, proposed commits or status report, and remote consequence before using credentials or changing the remote; proceed only within the invoked cycle. |
+| Authority | Remote: pushes commits to the candidate pull request's own branch and may publish a status report; requires explicit human invocation. Preview the exact pull request, candidate branch, proposed commits or status report, and remote consequence before using credentials. |
 | Side effect | May publish a status report and push commits that address bounded review findings only to the candidate pull request's own branch; never merge or force-push. |
 | Done | The cycle has re-read checks, review threads, conflicts, and branch protection, then classified the pull request as mergeable, blocked-with-owner, or handed-off. |
 

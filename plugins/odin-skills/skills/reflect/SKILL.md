@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | Reflect on a completed task to improve invoked skills. |
-| Authority | Human-only: explicit invocation required before any mutation. |
+| Authority | Human-gated: explicit invocation required before any mutation; otherwise reversible local as above. |
 | Side effect | Edits approved skills and may file backlog items. |
 | Done | Approved improvements applied and rejections explained. |
 

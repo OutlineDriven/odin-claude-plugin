@@ -10,7 +10,7 @@ description: 'Use when asked to review a plugin for marketplace readiness throug
 | Field | Bound contract |
 |---|---|
 | Trigger | Final marketplace-readiness review of an agent plugin. |
-| Authority | No file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Chat output only; no file writes, no credential use, no remote calls beyond reads needed for the audit. |
 | Done | Sectioned pass/fail report and submission recommendation returned in chat. |
 

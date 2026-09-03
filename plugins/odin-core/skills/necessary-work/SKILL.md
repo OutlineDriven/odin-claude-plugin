@@ -10,7 +10,7 @@ description: 'Use when work is about to grow past the ask, the task may already 
 | Field | Bound contract |
 |---|---|
 | Trigger | Work is about to grow past the ask, the task may already be done, or the user requests the minimum, only what is needed, or a stop once it works. |
-| Authority | Read and assess available request, environment, policy, and evidence only; do not mutate files, version control, credentials, paid services, publications, deployments, or remote state. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Reads and assesses request, environment, policy, and evidence only. |
 | Side effect | Narrow the scope of work by classification only; produce no operational side effect. |
 | Done | The contract is written before work, every admitted action fails the delete test, and classification stops once the minimum proof is identified. |
 

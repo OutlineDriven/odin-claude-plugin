@@ -10,7 +10,7 @@ description: 'Use when writing, reviewing, or generating Terraform HCL that must
 | Field | Bound contract |
 |---|---|
 | Trigger | Writing, reviewing, or generating Terraform configurations. |
-| Authority | Reversible local: write only to named local HCL files; rollback via version control revert of the working tree. |
+| Authority | Reversible local: writes only named local HCL files; rollback is version control. No remote mutation. |
 | Side effect | Local HCL files are formatted, validated, and may have resource blocks, provider constraints, and security attributes rewritten in place. |
 | Done | HCL follows file organization, naming, version pinning, and security best practices and passes terraform fmt and validate. |
 

@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to discover, group, and summarize work records across multiple systems for a given period or project. |
-| Authority | Read-only discovery and draft generation. Requires human review of the draft before publishing the final summary. |
+| Authority | Remote: creates one summary document via the target system API; requires explicit human invocation, and human review of the draft precedes publishing. |
 | Side effect | Creates one summary document via the target system API after human review of the draft. |
 | Done | A published summary document with grouped cross-source records and no content truncation. |
 

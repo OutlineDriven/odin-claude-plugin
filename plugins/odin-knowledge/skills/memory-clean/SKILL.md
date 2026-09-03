@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | A human explicitly asks to audit memory or find stale or duplicate memories. |
-| Authority | Human-only for external or irreversible effects: inspect the named memory store, but preview each target and consequence and obtain explicit confirmation for each repair group before changing data at rest. |
+| Authority | Human-gated: previews each target and consequence and obtains explicit confirmation for each repair group before changing data at rest; otherwise reversible local as above. |
 | Side effect | Create one snapshot copy, then make only confirmed edits, merges, archives, or deletions inside `$MEMORY_DIR`, which is outside version control. |
 | Done | A fresh deterministic audit reports zero critical findings, and every residual warning or informational finding is reported. |
 

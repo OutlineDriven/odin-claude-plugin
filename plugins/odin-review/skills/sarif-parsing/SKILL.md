@@ -10,7 +10,7 @@ description: 'Use when a user supplies existing SARIF to inspect, filter, aggreg
 | Field | Bound contract |
 |---|---|
 | Trigger | User supplies existing SARIF and asks to inspect, filter, aggregate, deduplicate, diff, convert, or gate findings without running a scanner. |
-| Authority | Reversible-local: write only named local artifacts derived from the provided SARIF; no scanner execution, no credential access, no remote mutation. |
+| Authority | Reversible local: writes only named local artifacts derived from the provided SARIF; rollback is deleting the written file. No remote mutation. No scanner execution, no credential access. |
 | Side effect | Reads provided SARIF and may emit requested derived summaries or transformed SARIF/CSV/HTML artifacts. Does not run source scanners. |
 | Done | Requested findings or derived artifacts are produced with optional fields handled, paths normalized where comparison requires it, inherited severity resolved correctly, and aggregation metadata retained. |
 

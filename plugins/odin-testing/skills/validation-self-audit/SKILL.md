@@ -10,7 +10,7 @@ description: 'Use when asked to audit validation that looks too clean or self-co
 | Field | Bound contract |
 |---|---|
 | Trigger | Before trusting a validation plan or result meant to show whether something worked, such as an A/B test, holdout, or score, or when its result looks too clean or self-confirming. |
-| Authority | Read-only: inspect supplied validation design and evidence without changing files, VCS, credentials, paid services, published material, deployments, or remote state. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Inspects supplied validation design and evidence. |
 | Side effect | None; names only the independence failures that fire and the corresponding fixes. |
 | Done | Every firing pattern is named with an independence fix, patterns 3–5 are applied to the audit itself, and one root failure is identified instead of returning a laundry list. |
 

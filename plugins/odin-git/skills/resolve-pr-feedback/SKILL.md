@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | On a GitHub PR when addressing review comments or resolving review threads. |
-| Authority | Human-only external/irreversible: runs only on explicit human invocation; before any remote mutation, state the target PR and the exact planned mutations (commit, push, replies, resolutions). |
+| Authority | Remote: commits and pushes fixes, posts replies, and resolves threads on a GitHub PR; requires explicit human invocation. State the target PR and the exact planned mutations before any remote mutation. |
 | Side effect | Commits and pushes valid fixes, posts replies with quoted context, and resolves threads via GraphQL across every unresolved thread. |
 | Done | All unresolved threads evaluated, valid fixes committed and pushed, threads replied and resolved (except needs-human). |
 

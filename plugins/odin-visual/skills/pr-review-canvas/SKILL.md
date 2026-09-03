@@ -10,7 +10,7 @@ description: 'Use when asked to render a PR review in Cursor Canvas. Produces a 
 | Field | Bound contract |
 |---|---|
 | Trigger | Render a PR review in Cursor Canvas. |
-| Authority | Reversible local write only. Creates one canvas artifact in the working directory. No remote, VCS, credential, paid, published, or deployed mutation. |
+| Authority | Reversible local: writes only one canvas artifact in the working directory; rollback is deleting that file. No remote mutation. |
 | Side effect | Creates a local `.canvas` artifact file. Overwrites any prior canvas for the same PR. |
 | Done | Review canvas artifact exists with risky hunks foregrounded above safe hunks. |
 

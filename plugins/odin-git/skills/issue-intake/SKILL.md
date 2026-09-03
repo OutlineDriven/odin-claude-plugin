@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | the user runs /issue-intake with a task idea |
-| Authority | human-only; require explicit human invocation and preview the filing target and consequence before any remote publication |
+| Authority | Remote: files one GitHub issue; requires explicit human invocation. Preview the filing target and consequence before publication. |
 | Side effect | a filed GitHub issue plus a local spec archive and an optional worktree implementer |
 | Done | the spec is filed and archived with frontmatter, with any requested implementer spawned |
 

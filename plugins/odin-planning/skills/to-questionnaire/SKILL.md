@@ -10,7 +10,7 @@ description: 'Use when the user wants an async questionnaire for someone else, a
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants an async questionnaire for someone else, a discovery questionnaire, or a knowledge gap needs answers from outside the repository. |
-| Authority | Reversible-local: model identifies recipient and needed answers, drafts the questionnaire, and writes the file. User delivers the document and follows up. |
+| Authority | Reversible local: writes only the questionnaire file; rollback is deleting that file. No remote mutation. |
 | Side effect | Writes exactly one to-questionnaire-<slug>.md beside the current work; no issue filing and no sending. |
 | Done | A minimum-answerable-question questionnaire with a return route exists for the named recipient and no repo-answerable question remains in it. |
 

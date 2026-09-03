@@ -10,7 +10,7 @@ description: 'Use when work splits into independent sub-tasks or cross-domain re
 | Field | Bound contract |
 |---|---|
 | Trigger | The request has multiple independent sub-tasks, cross-domain research, or parallelizable work. |
-| Authority | Write only local targets explicitly named in the request or agent assignments; capture each target's prior state or exact undo operation before changing it. Do not mutate credentials, paid services, deployments, publications, or remote state. |
+| Authority | Reversible local: writes only local targets explicitly named in the request or agent assignments; rollback is the captured prior state or exact undo operation. No remote mutation. |
 | Side effect | Execute concurrent subagents and report composed output in chat. This orchestration creates no durable file of its own; delegated local changes remain confined to their named targets. |
 | Done | Return composed output after completeness, consistency, accuracy, and scope review passes, or return each usable partial result with the exact gap and a targeted follow-up when an agent or review fails. |
 

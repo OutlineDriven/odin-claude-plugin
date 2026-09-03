@@ -10,7 +10,7 @@ description: 'Use when asked to design a bespoke execution workflow when no play
 | Field | Bound contract |
 |---|---|
 | Trigger | Design a bespoke execution workflow when no playbook fits. |
-| Authority | Write only named local artifacts built for this task; state the rollback path before writing each one. |
+| Authority | Reversible local: writes only named local artifacts built for this task; rollback is version control or undo. No remote mutation. State the rollback path before writing each one. |
 | Side effect | Builds and runs task-specific levers; changes limited to local artifacts named in the workflow. |
 | Done | Predicate verified on real product with reviewable trail. |
 

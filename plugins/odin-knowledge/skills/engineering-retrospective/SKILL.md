@@ -10,7 +10,7 @@ description: 'Use when the user requests an engineering retrospective for a name
 | Field | Bound contract |
 |---|---|
 | Trigger | The user requests an engineering retrospective for a named period. |
-| Authority | Reversible local: write only the single report file at `reports/engineering-retrospective-<period-slug>.md`; delete that file to roll back. No VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Reversible local: writes only the single report file at `reports/engineering-retrospective-<period-slug>.md`; rollback is undo. No remote mutation. |
 | Side effect | One local write to the authorized report file built from telemetry and review logs. |
 | Done | A report file exists at the authorized path containing the period, team breakdowns, evidence-backed habits, and gap accounting. |
 

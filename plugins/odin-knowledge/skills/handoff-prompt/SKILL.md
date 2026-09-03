@@ -10,7 +10,7 @@ description: 'Use when the user asks for a handoff, delegation, or clipboard-rea
 | Field | Bound contract |
 |---|---|
 | Trigger | User says handoff <task>, write a handoff, delegate this, or wants a clipboard-ready prompt for another agent |
-| Authority | Write only the assembled prompt text and the local clipboard; no repository, VCS, credential, paid, published, or remote mutation |
+| Authority | Reversible local: writes only the assembled prompt text and the local clipboard; rollback is undo. No remote mutation. |
 | Side effect | A standalone, path-free prompt is copied to the clipboard and the user gets a terse confirmation |
 | Done | Prompt is on the clipboard, contains no filesystem paths, no invented facts, and gives the receiving agent enough context to orient and decide whether to proceed |
 

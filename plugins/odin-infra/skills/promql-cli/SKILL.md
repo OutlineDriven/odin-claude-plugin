@@ -10,7 +10,7 @@ description: 'Use when a user asks to execute or investigate a PromQL expression
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to execute or investigate PromQL, or to debug latency, error, or saturation signals against a Prometheus server. |
-| Authority | Read-only HTTP GET queries to the Prometheus HTTP API. No file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. HTTP GET queries to the Prometheus HTTP API only. |
 | Side effect | Evaluates PromQL queries through the Prometheus HTTP API. Reads metrics, writes nothing. |
 | Done | Query results in the requested format, or a classified failure diagnosis, are returned to the user. |
 

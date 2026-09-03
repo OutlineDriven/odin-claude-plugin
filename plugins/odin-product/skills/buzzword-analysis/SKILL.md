@@ -10,7 +10,7 @@ description: 'Use when the user wants the current jargon weather of a domain des
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants a description of the current jargon weather without advocacy. |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. Web searches and public-source reads are the only outward operations. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Web searches and public-source reads are the only outward operations. |
 | Side effect | A jargon-weather report returned as chat output, taking no side. |
 | Done | The current jargon landscape is described from verifiable external sources, each term has a weather state or an explicit unclear label, and the report takes no side. |
 

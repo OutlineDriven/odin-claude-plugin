@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants to batch-close resolved or outdated tracker items. |
-| Authority | Read-only preparation. The agent fetches, classifies, and presents the batch. The user performs every remote closure. The agent never executes a close call on the tracker. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. The agent fetches, classifies, and presents the batch; the user performs every remote closure. |
 | Side effect | A prepared batch list presented to the user. No tracker item is mutated by this skill. |
 | Done | A prepared batch list is presented to the user for manual closure, with each item classified as resolved or outdated and backed by evidence. |
 

@@ -10,7 +10,7 @@ description: 'Use when validating a cryptographic implementation against Project
 | Field | Bound contract |
 |---|---|
 | Trigger | The user needs to prove a cryptographic implementation accepts or rejects Project Wycheproof vectors correctly, or needs to explain why an implementation disagrees with a vector. |
-| Authority | Reversible-local writes limited to named vector-loader and test files, recovered via version control. Vector acquisition (submodule add or network fetch) and any CI or scheduling change are separate, explicitly confirmed steps outside the core path. |
+| Authority | Reversible local: writes only named vector-loader and test files; rollback is version control. No remote mutation. Vector acquisition (submodule add or network fetch) and any CI or scheduling change are separate, explicitly confirmed steps outside the core path. |
 | Side effect | Cryptographic vector loader and parameterized test files written to the project. |
 | Done | The parameterized test file(s) with stable tcId identifiers exist, the suite has been executed, and a per-result-category pass/fail/warn summary is assembled. |
 

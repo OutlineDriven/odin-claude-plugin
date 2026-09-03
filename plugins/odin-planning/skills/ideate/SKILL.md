@@ -10,7 +10,7 @@ description: 'Use when a human asks to brainstorm, asks what to build, requests 
 | Field | Bound contract |
 |---|---|
 | Trigger | A human says "let's brainstorm", asks "what should we build" or "any ideas for", or invokes `/ideate` on a divergent subject. |
-| Authority | Read the repository and write only the named local ideation artifact files. Stage and commit only files written by this run. All delegated exploration, generation, critique, and review is read-only. No source modification, no remote mutation, no push. |
+| Authority | Reversible local: writes only the named local ideation artifact files and commits only files written by this run; rollback is version control. No remote mutation. |
 | Side effect | Writes `docs/ideation/<slug>.md`; with `format:html`, also writes `docs/ideation/<slug>.html`. Stages and commits only files written by this run. |
 | Done | The canonical Markdown records grounded survivors and a reason for every rejected candidate; every candidate cites its basis; one Reviewer has adjudicated the complete pool; each output has been read back; only the run's outputs are in one staged-scope commit; the result ends at intent clarification rather than planning or implementation. |
 

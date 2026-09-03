@@ -10,7 +10,7 @@ description: 'Use when a user needs to measure fuzz corpus coverage, explain a c
 | Field | Bound contract |
 |---|---|
 | Trigger | User needs to measure a fuzz corpus, explain a coverage plateau, or turn uncovered regions into campaign work. |
-| Authority | Reversible local: write coverage profiles, reports, and temporary instrumented binaries under a single named target directory for one fuzz target. No VCS, credential, paid, published, deployed, or remote mutation. Roll back by deleting the generated profiles, report directory, and temporary binaries. |
+| Authority | Reversible local: writes only coverage profiles, reports, and temporary instrumented binaries under a single named target directory for one fuzz target; rollback is deleting the generated profiles, report directory, and temporary binaries. No remote mutation. No VCS mutation. |
 | Side effect | Coverage profiles (`.profraw`, `.profdata`, `.gcda`) and a coverage report (text and HTML) written under the target directory for the named fuzz target. |
 | Done | A reproducible coverage report excludes harness noise and identifies concrete reachable or blocked regions. |
 

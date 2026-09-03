@@ -10,7 +10,7 @@ description: 'Use when independent proposals on a contested decision need struct
 | Field | Bound contract |
 |---|---|
 | Trigger | Multiple independent proposals on a contested decision exist (round-one proposals are on the table). |
-| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation; the synthesis is conversational output. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. The synthesis is conversational output. |
 | Side effect | Read-only second round reusing existing subagents; no repo mutation. |
 | Done | Synthesis notes convergence, strongest objections, and surviving option. |
 

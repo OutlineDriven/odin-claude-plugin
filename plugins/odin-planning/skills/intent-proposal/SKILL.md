@@ -10,7 +10,7 @@ description: 'Use when material arrives without a fully formed ask or the ask is
 | Field | Bound contract |
 |---|---|
 | Trigger | Material arrives without a fully-formed ask, or the ask reads thinner than the data suggests |
-| Authority | Read-only; no file, VCS, credential, paid, published, deployed, or remote mutation |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | None; emits a one-line intent proposal plus next-step sketch for confirmation |
 | Done | User's reply is short: yes, correction, or adjust; if they had to compose the ask from scratch, the skill failed |
 

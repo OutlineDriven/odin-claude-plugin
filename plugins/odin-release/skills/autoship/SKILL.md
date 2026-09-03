@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | release this, publish this package, autoship, cut a release, npm release flow |
-| Authority | Human-only. Invoking autoship is standing consent for the full release flow; gate risky steps on objective preconditions instead of pausing mid-flow. Force-push, history rewrites, and destructive git operations require explicit confirmation. |
+| Authority | Remote: pushes commits, merges the Version Packages PR, and publishes to npm; requires explicit human invocation. Invoking autoship is standing consent for the full release flow; gate risky steps on objective preconditions instead of pausing mid-flow. Force-push, history rewrites, and destructive git operations require explicit confirmation. |
 | Side effect | Writes a changeset file, runs quality-gate fixers, commits and pushes, merges the bot-opened Version Packages PR, and publishes to npm. Restricted to VCS-tracked targets and the npm registry. |
 | Done | New version is published on npm and confirmed by `npm view <package> version` matching the merged `package.json`. |
 

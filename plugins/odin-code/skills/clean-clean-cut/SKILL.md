@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User runs /clean-clean-cut to cut accumulated records and residue under an explicit destructive gate. |
-| Authority | Delete only VCS-tracked targets inside an enumerated set; show the exact set before cutting; use version control as recovery. |
+| Authority | Reversible local: deletes only VCS-tracked targets inside an enumerated set (show the exact set before cutting); rollback is version control. No remote mutation. |
 | Side effect | Remove accumulated records, residue, and dependent code elements within the enumerated target set. |
 | Done | Purge checklist is confirmed and the enumerated targets are removed; the cut is recoverable through VCS. |
 

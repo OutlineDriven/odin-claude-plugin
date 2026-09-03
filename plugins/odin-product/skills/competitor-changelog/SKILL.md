@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to summarize competitor changelogs or analyze recent competitor releases. |
-| Authority | Human-only. Runs only on explicit human invocation. Publishing is bounded: before any branch commit or PR creation, preview the report, branch name, and PR target, and proceed only on explicit human confirmation. |
+| Authority | Remote: creates one branch, commits the report, and opens one PR; requires explicit human invocation. Before any branch commit or PR creation, preview the report, branch name, and PR target, and proceed only on explicit human confirmation. |
 | Side effect | Writes one report to `reports/competitor_changelog_reports/` after deduplicating against previous reports there, then creates one PR containing that report. Changes no other files. |
 | Done | Report saved with TL;DR, competitor entries, common themes, product comparison, and risks. |
 

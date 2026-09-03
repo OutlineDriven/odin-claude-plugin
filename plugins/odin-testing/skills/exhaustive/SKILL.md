@@ -10,7 +10,7 @@ description: 'Use when asked to prove coverage, find missing cases, or enumerate
 | Field | Bound contract |
 |---|---|
 | Trigger | The user says "exhaustive", "prove coverage", "did I miss any case", "enumerate the state space", or asks for a completeness audit before done. |
-| Authority | Reversible-local: read-only on the target source; the only write is the coverage manifest artifact, whose rollback is discarding or deleting that file. |
+| Authority | Reversible local: writes only the coverage manifest artifact; rollback is deleting that file. No remote mutation. Read-only on the target source. |
 | Side effect | Writes one classified coverage manifest (human-readable or `exhaustive-manifest/v1` YAML) with gaps prepared in dependency order; no source, VCS, config, or remote mutation. |
 | Done | The manifest has zero unclassified cells and a one-line tally; for code state spaces the wildcard-catch-all assertion holds. |
 

@@ -10,7 +10,7 @@ description: 'Use when a user asks to clean up, sync, dedupe, de-noise, or rewri
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to clean up/sync/dedupe/de-noise/rewrite an iterated artifact, or nearby artifacts may have drifted |
-| Authority | Reversible-local: write only the named target artifact; restore from backup on failure |
+| Authority | Reversible local: write only the named target artifact; restore from backup on failure |
 | Side effect | Rewrites the target artifact in place; no new files unless explicitly asked |
 | Done | Result reads as a clean v0 to fresh eyes: lighter, current, accurate; no patch traces, no changelog scars |
 

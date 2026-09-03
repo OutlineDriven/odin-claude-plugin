@@ -10,7 +10,7 @@ description: 'Use when asked to run /ios-build-fix to fix a failing iOS build or
 | Field | Bound contract |
 |---|---|
 | Trigger | the user runs /ios-build-fix |
-| Authority | reversible local edits to the iOS project's Swift source, applied and verified through the iOS debug bridge; the user picks among competing root-cause hypotheses |
+| Authority | Reversible local: writes only the iOS project's Swift source, applied and verified through the iOS debug bridge; rollback is version control. No remote mutation. The user picks among competing root-cause fixes. |
 | Side effect | project code changes made through the debug bridge, plus snapshot and screenshot fixtures and a regression test written under test/fixtures/ios-fix/ |
 | Done | the failing iOS behavior is fixed and verified on a device or simulator, with a reproducing snapshot and a regression test committed alongside the fix |
 

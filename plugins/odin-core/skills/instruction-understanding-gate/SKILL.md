@@ -12,7 +12,7 @@ Verify understanding before acting.
 | Field | Bound contract |
 |---|---|
 | Trigger | Long/bundled/high-stakes/hard-to-undo instruction, or ambiguous scope/referents (this, that, it, whatever is cleaner) |
-| Authority | reversible-local: no file, VCS, credential, paid, published, deployed, or remote mutation before the gate passes |
+| Authority | Reversible local: writes only one durable understood-as log line after the gate decision; rollback is undo. No remote mutation. No file, VCS, credential, paid, published, or deployed mutation before the gate passes. |
 | Side effect | None before the gate passes; at most one clarifying question and one durable understood-as log line for substantial work |
 | Done | Restatement is a paraphrase; every surfaced fork is genuinely unresolved by available context; no substantial work starts otherwise |
 

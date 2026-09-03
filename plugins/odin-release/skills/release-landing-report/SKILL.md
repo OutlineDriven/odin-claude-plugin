@@ -10,7 +10,7 @@ description: 'Use when the user runs /release-landing-report to summarize landed
 | Field | Bound contract |
 |---|---|
 | Trigger | The user runs /release-landing-report. |
-| Authority | Read-only: inspect version-control history and landed changes; no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Inspect version-control history and landed changes. |
 | Side effect | A landing summary in chat output; no state change. |
 | Done | A landing summary report is returned. |
 

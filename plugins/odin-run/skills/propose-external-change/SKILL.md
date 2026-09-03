@@ -10,7 +10,7 @@ description: 'Use when asked to change state in an external system, propose the 
 | Field | Bound contract |
 |---|---|
 | Trigger | Work must change state in an external system such as a tracker, chat workspace, or remote repository rather than local files. |
-| Authority | Reversible-local: write only named local artifacts. Rollback path is deletion of the persisted proposal file. |
+| Authority | Reversible local: writes only named local artifacts (the persisted proposal); rollback is deletion of the proposal file. No remote mutation. |
 | Side effect | Uses a least-privilege read connector for discovery, emits one signed and minimized write proposal, persists it, and stops at the human gate; no direct external mutation. |
 | Done | The proposal is persisted and the run halts awaiting a human decision; no external write occurred without that decision. |
 

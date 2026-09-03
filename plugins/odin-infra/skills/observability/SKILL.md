@@ -10,7 +10,7 @@ description: 'Use when adding telemetry, composing a durable observability surfa
 | Field | Bound contract |
 |---|---|
 | Trigger | Adding telemetry, composing the smallest observability surface the system will keep, reviewing alerting rules, shipping a production feature, or diagnosing an opaque production issue. |
-| Authority | Reversible local writes: instrumentation code and local telemetry configuration in the working tree. No credentials, paid services, publishing, deployment, or remote mutation. Every change is rolled back by discarding the edits. |
+| Authority | Reversible local: writes only instrumentation code and local telemetry configuration in the working tree; rollback is discarding the edits. No remote mutation. |
 | Side effect | Adds instrumentation: structured log calls, metric instruments, tracer setup, alert definitions, and dashboard panels to the target code. |
 | Done | Structured logs carry a correlation ID, RED metrics exist with bounded labels, one request traces end-to-end with minimum spans and no broken spans, every dashboard panel maps to a failure mode, no duplicate or unowned surface remains, the surface compiles, loads, and emits locally, symptom-based alerts are defined, and local telemetry emission is verified. |
 

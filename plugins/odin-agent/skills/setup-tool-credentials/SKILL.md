@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | The user asks to set up, configure, or verify credentials and environment for tools they name. |
-| Authority | Human-only: explicit invocation required. Preview the target and consequence before credentials, data-at-rest changes, or remote access verification. |
+| Authority | Human-gated: asks before writing credentials to `.env` or verifying remote access; otherwise reversible local as above. |
 | Side effect | Creates but never overwrites `.env`, gathers non-secret credentials at prompts, validates format, appends safely, and verifies repository and tool access. |
 | Done | All selected prerequisites pass, `.env` is present and loadable, and the user is told which workflows are ready. |
 

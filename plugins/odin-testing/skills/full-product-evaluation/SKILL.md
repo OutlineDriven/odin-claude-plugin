@@ -10,7 +10,7 @@ description: 'Use when a complete product, rather than one component, needs prod
 | Field | Bound contract |
 |---|---|
 | Trigger | A complete product needs production-like acceptance evidence against documented acceptance criteria. |
-| Authority | Reversible local with production ask: approval required for production action. One harness ask/question call before the run starts; prose consent, invocation consent, prior-run consent, and post-start discovery do not approve an effect. |
+| Authority | Human-gated: asks approval before any production action; otherwise reversible local, writing only evaluation evidence artifacts with VCS rollback. No remote mutation. One harness ask/question call before the run starts; prose consent, invocation consent, prior-run consent, and post-start discovery do not approve an effect. |
 | Side effect | Full-product acceptance evaluation. |
 | Done | Every in-scope capability meets its documented acceptance criteria. |
 | Stop | Blocked handoff; budget exhausted; non-success. Bound: documented capability inventory and pass cap. |

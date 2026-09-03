@@ -14,7 +14,7 @@ fails to cover or proves it can be broken.
 | Field | Bound contract |
 |---|---|
 | Trigger | A named product surface must be tested against extreme or hostile worlds rather than a green-check suite. |
-| Authority | Write only named local test cases and report artifacts, and state the rollback path before the first write. No source, version control, credential, paid, published, deployed, or remote mutation. |
+| Authority | Reversible local: writes only named local test cases and report artifacts; rollback is deleting them. No remote mutation. No source or VCS mutation; states the rollback path before the first write. |
 | Side effect | Test-case files and one report written to the local working tree. Deleting them reverses the run. |
 | Done (completeness) | Every enumerated world is classified covered, gap, or untestable against a stated criterion, and the report names the world, observed behaviour, violated criterion or blocker, and test-case path for each. |
 | Done (break) | Every enumerated world is broken with an attached artifact, escalated until exhausted, or recorded untestable with its blocker, and the report carries the world catalogue, break log, survived log, and summary. |

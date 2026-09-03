@@ -10,7 +10,7 @@ description: 'Use when asked to run a performance campaign against a measured fl
 | Field | Bound contract |
 |---|---|
 | Trigger | Subsystem or repo-wide performance campaign against a measured floor; the user says "make this as fast as possible", "extremely optimize", or "grill every inefficiency" |
-| Authority | VCS-reversible destructive: changes restricted to VCS-tracked source targets, the exact set shown before mutation, version control used as recovery |
+| Authority | Reversible local: writes only VCS-tracked source targets (destructive; the exact set shown before mutation); rollback is version control. No remote mutation. |
 | Side effect | Hot-path source targets rewritten as atomic commits; non-wins reverted; boundary surfaces gated before any touch |
 | Done | Hot units rebuilt with an even win, cold units graded fixed/at-floor/left, residue gone, verifier green, target landed atomically |
 

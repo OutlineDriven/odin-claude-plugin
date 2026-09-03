@@ -10,7 +10,7 @@ description: 'Use when a visual needs repeatable fixed-view rendering and indepe
 | Field | Bound contract |
 |---|---|
 | Trigger | A visual needs repeatable fixed-view rendering and independent rubric scoring. |
-| Authority | Reversible local with capture consent: write only named local artifacts; capture consent required before rendering. |
+| Authority | Human-gated: asks for capture consent before rendering; otherwise reversible local: writes only named local artifacts; rollback is undo. No remote mutation. |
 | Side effect | Fixed-view visual benchmark: renders and scores the fixed view against the frozen rubric. |
 | Done | The saved render clears the frozen rubric threshold. |
 | Stop | Stalled; render blocked; budget exhausted. Bound: fixed view rig, rubric threshold, render budget. |

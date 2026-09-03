@@ -10,7 +10,7 @@ description: 'Use when a user explicitly invokes this skill to apply an invarian
 | Field | Bound contract |
 |---|---|
 | Trigger | User explicitly requests an invariant-first, fail-fast, special-case-eliminating baseline for a named implementation. |
-| Authority | reversible-local: write only the named local artifact; rollback path is VCS restore or file deletion. |
+| Authority | Reversible local: writes only the named local artifact; rollback is version control (restore) or undo (file deletion). No remote mutation. |
 | Side effect | Replace the target local file with its invariant-first, fail-fast, special-case-eliminating refinement. |
 | Done | All named invariant checks pass and no unresolved special-case artifacts remain. |
 

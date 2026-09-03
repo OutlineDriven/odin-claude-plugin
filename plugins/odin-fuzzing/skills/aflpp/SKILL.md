@@ -10,7 +10,7 @@ description: 'Use when the user needs to set up and run an AFL++ fuzzing campaig
 | Field | Bound contract |
 |---|---|
 | Trigger | User needs AFL++ setup, multi-core campaign operation, corpus handling, or AFL++ crash triage for a C/C++ target. |
-| Authority | Reversible local execution of AFL++ binaries and writes to build artifacts, corpora, logs, and output directories under the working directory. The skill must request explicit user approval before any system-level change: package installation, Docker image pull, kernel tuning, GRUB mutation, or reboot. Roll back by killing campaign processes and removing the output and state directories. |
+| Authority | Human-gated: requests explicit user approval before any system-level change (package installation, Docker image pull, kernel tuning, GRUB mutation, or reboot); otherwise reversible local: writes only build artifacts, corpora, logs, and output directories under the working directory; rollback is killing campaign processes and removing the output and state directories. No remote mutation. |
 | Side effect | Local writes to compiled artifacts, seed and output corpora, log files, and short-lived Docker containers. No mutation of source under test beyond compilation. |
 | Done | AFL++ target runs against a seed corpus with the intended instrumentation and produces interpretable campaign output. |
 

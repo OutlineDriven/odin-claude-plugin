@@ -10,7 +10,7 @@ description: 'Use when a task is ambiguous, maximum clarification is needed befo
 | Field | Bound contract |
 |---|---|
 | Trigger | Ambiguous task, maximum clarification needed, or explicit exhaustive/collaborative/adversarial askme mode. |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. Emits chat output only. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Emits chat output only. |
 | Side effect | Verbalized Sampling output and batched question sets written to chat; nothing persisted. |
 | Done | Every clarifying question is answered or discharged and intent is confirmed. |
 

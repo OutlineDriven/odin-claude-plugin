@@ -10,7 +10,7 @@ description: 'Use when asked to park an undecided idea without representing it a
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants to park an undecided idea without representing it as decided or active work. |
-| Authority | Reversible local write only: create or update one backlog entry file. No VCS commit, no remote call, no credential use, no published artifact. |
+| Authority | Reversible local: writes only one backlog entry file; rollback is deleting or reverting that file. No remote mutation. |
 | Side effect | One backlog entry as a reversible local state change with recorded evidence. |
 | Done | The idea is parked in the backlog and ready to be promoted when it meets the readiness threshold. |
 

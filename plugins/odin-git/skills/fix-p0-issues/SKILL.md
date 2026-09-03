@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to fix P0s, address critical issues, or work on priorities from the weekly product briefing. |
-| Authority | Human-only. No agent is spawned without explicit user confirmation. Remote mutation is limited to spawning ODIN cloud coding agents for triaged, actionable P0s. |
+| Authority | Remote: spawns ODIN cloud coding agents for triaged, actionable P0s; requires explicit human invocation. No agent is spawned without explicit user confirmation. |
 | Side effect | Triages P0s, spawns high-confidence agents, and reports run IDs and monitoring commands. |
 | Done | Actionable P0s have run IDs; skipped items are documented; no agent runs without user confirmation. |
 

@@ -10,7 +10,7 @@ description: 'Use when asked to /feedback-sweep [setup|reconfigure] [mode:non-in
 | Field | Bound contract |
 |---|---|
 | Trigger | /feedback-sweep [setup|reconfigure] [mode:non-interactive] |
-| Authority | Reversible local writes: the repo-internal sweep state file, the feedback-sweep plan, source acknowledgements and close-outs on approved sources, commits and shared-branch pushes when `sweep_shared_branch: true`, and setup writes to `.odin/config.local.yaml` during first-run configuration. Roll back by reverting local paths and, for source-side writes, by reversing the ack or close-out action where the source supports it. No source-side write ever reaches a source whose config entry has `approved: false`. |
+| Authority | Remote: acknowledges and closes out items on config-approved sources and, when `sweep_shared_branch: true`, pushes commits to the shared branch; requires explicit human invocation. Also writes locally: the repo-internal sweep state file, the feedback-sweep plan, and setup config in `.odin/config.local.yaml`; rollback is reverting local paths and, for source-side writes, reversing the ack or close-out action where the source supports it. No source-side write ever reaches a source whose config entry has `approved: false`. |
 | Side effect | Reads configured feedback sources, acknowledges approved items at source, analyzes media under a private scratch directory, writes repo-internal sweep state and the plan, and emits an autopilot-ready handoff. Raw media is never committed. |
 | Done | The run is recorded, the lease is released, and the summary is printed with the plan path and handoff invocation. |
 

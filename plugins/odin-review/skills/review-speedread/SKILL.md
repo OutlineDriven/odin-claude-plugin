@@ -10,7 +10,7 @@ description: 'Use when a human asks for the change shape before reading a diff. 
 | Field | Bound contract |
 |---|---|
 | Trigger | The user asks to see the change shape of a diff before reading the diff itself. |
-| Authority | Read-only: no file mutation, no VCS write, no credential use, no remote or deployed resource touched. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Chat output only: one compact visual or textual summary of the change shape. |
 | Done | A change-shape summary is rendered in the chat and the human can proceed to read the diff. |
 

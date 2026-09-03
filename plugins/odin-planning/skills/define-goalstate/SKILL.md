@@ -10,7 +10,7 @@ description: 'Use when the user wants the finished-system contract for a piece o
 | Field | Bound contract |
 |---|---|
 | Trigger | The user wants to write the finished-system contract for a piece of work. |
-| Authority | Write only the named local contract document; revert by deleting or overwriting it. |
+| Authority | Reversible local: writes only the named local contract document; rollback is deleting or overwriting it. No remote mutation. |
 | Side effect | A finished-system contract document describing behavior, protocols, a concrete state-space proof, allowed states, forbidden states, impossible states with their structural invariants, a falsifiable success predicate, and terminal failure behavior. No other file, credential, or remote target is touched. |
 | Done | An approved success-predicate document exists, naming behavior, protocols, allowed states, forbidden states, impossible states, falsifiable success predicate, state-space proof, and terminal failure behavior, structured for consumption by downstream wayfinding. |
 

@@ -10,7 +10,7 @@ description: 'Use when a user wants to choose and execute a bounded positioning 
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants to choose and execute a bounded positioning move that rides a jargon wave without confusing trend with truth. |
-| Authority | Write only the named local positioning artifact (copy, landing, or messaging). Rollback: delete or revert the written artifact; no external channel is touched. |
+| Authority | Reversible local: writes only the named local positioning artifact (copy, landing, or messaging); rollback is undo (delete or revert the written artifact). No remote mutation. |
 | Side effect | A bounded positioning move/artifact is written to a local file. No publish, deploy, or remote mutation. |
 | Done | A bounded positioning move is executed and the artifact is written without confusing trend with truth. |
 

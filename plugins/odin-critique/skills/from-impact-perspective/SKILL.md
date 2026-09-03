@@ -10,7 +10,7 @@ description: 'Use when asked to answer only from the impact seat: who and what a
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants an answer only from the impact seat (who and what actually moves). |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Returns an impact-perspective analysis in chat; no other surface is touched. |
 | Done | Returns an impact-perspective answer without blending. |
 

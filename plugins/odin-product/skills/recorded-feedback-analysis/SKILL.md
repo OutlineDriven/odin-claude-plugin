@@ -10,7 +10,7 @@ description: 'Use when asked to analyze a screen recording, voice capture, or me
 | Field | Bound contract |
 |---|---|
 | Trigger | User supplies a screen recording, voice capture, or meeting-notes artifact and asks for feedback analysis, or asks how to capture and share recorded feedback. |
-| Authority | Reversible local: write only named local evidence artifacts; raw media stays local unless the user explicitly asks otherwise. Temp output is discarded when the path completes; written artifacts are local files the user can delete. No VCS or remote mutation unless the user explicitly commits. |
+| Authority | Reversible local: writes only named local evidence artifacts; rollback is undo (delete the written artifacts). No remote mutation. Raw media stays local unless the user explicitly asks otherwise; temp output is discarded when the path completes. No VCS mutation unless the user explicitly commits. |
 | Side effect | Analyzes recorded feedback locally and may write evidence artifacts; raw media stays local unless the user asks otherwise. |
 | Done | Setup ends with a capture path, quick analysis with one evidence-backed bug report, or extensive analysis with the evidence set and brainstorm handoff. |
 

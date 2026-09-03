@@ -10,7 +10,7 @@ description: 'Use when asked to run /artifact-arena to generate and judge compet
 | Field | Bound contract |
 |---|---|
 | Trigger | User runs /artifact-arena to generate and judge competing artifact implementations. |
-| Authority | Write only local candidate worktrees and the synthesis artifact. Roll back by discarding candidate worktrees and deleting the synthesis note. |
+| Authority | Reversible local: writes only local candidate worktrees and the synthesis artifact; rollback is discarding candidate worktrees and deleting the synthesis note. No remote mutation. |
 | Side effect | Spawns isolated candidate workers, each writing to its own local path. No remote, credential, VCS, or published mutation. |
 | Done | One verified synthesis with provenance and rejection reasons. |
 

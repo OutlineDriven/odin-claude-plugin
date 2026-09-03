@@ -10,7 +10,7 @@ description: 'Use when the user runs /scrape with a URL to extract page data and
 | Field | Bound contract |
 |---|---|
 | Trigger | The user runs /scrape with a URL. |
-| Authority | Reversible-local: write only the named download directory and its manifest; delete both to roll back. |
+| Authority | Reversible local: writes only the named download directory and its manifest; rollback is undo. No remote mutation. |
 | Side effect | Downloaded assets and a manifest saved under a local directory. |
 | Done | Scraped assets and their manifest are saved. |
 

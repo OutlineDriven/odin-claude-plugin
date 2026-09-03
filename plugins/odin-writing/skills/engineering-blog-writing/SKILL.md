@@ -10,7 +10,7 @@ description: 'Use when asked to write, review, or improve an engineering blog po
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to write, review, or improve an engineering blog post, technical deep dive, product launch, postmortem, data study, or technical tutorial. |
-| Authority | Reversible local write: create or edit a local markdown blog draft. Roll back by discarding the draft or reverting the file. |
+| Authority | Reversible local: writes only a local markdown blog draft; rollback is discarding the draft or reverting the file. No remote mutation. |
 | Side effect | Writes or updates a local markdown file. No external publishing, deployment, credential modification, or remote mutations. |
 | Done | A complete technical blog post with a named author byline, verified performance metrics, tested code examples, labeled architecture diagrams where needed, informative headings, and an actionable conclusion. |
 

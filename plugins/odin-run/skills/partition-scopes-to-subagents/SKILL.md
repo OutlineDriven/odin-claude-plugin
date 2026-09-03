@@ -10,7 +10,7 @@ description: 'Use when asked to partition non-overlapping scopes across subagent
 | Field | Bound contract |
 |---|---|
 | Trigger | User names work that decomposes into non-overlapping scopes and asks to partition and execute them with subagents. |
-| Authority | reversible-local: writes scoped to each subagent's assigned files, per-scope artifacts, and a coordination map; no VCS, credential, paid, published, or deployed mutation. |
+| Authority | Reversible local: writes only each subagent's assigned files, per-scope artifacts, and a coordination map; rollback is version control or undo. No remote mutation. |
 | Side effect | Subagent briefs, per-scope work artifacts, review reports, fix reports, and an actual-work map written to local files only. |
 | Done | All scopes return a review report and a fix report; an actual-work map lists every scope and its terminal status. |
 

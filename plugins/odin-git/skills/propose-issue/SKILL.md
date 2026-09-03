@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | A human explicitly asks to propose an issue, file or open a bug report, or turn a reported defect into a tracked issue. |
-| Authority | Human-only. Preview the repository, proposed title, body, and consequence before using authenticated GitHub access; the explicit invocation authorizes creation of at most one issue in that previewed repository, and no other remote mutation. |
+| Authority | Remote: creates at most one GitHub issue in the previewed repository; requires explicit human invocation. Preview the repository, proposed title, body, and consequence before using authenticated access. |
 | Side effect | Create one GitHub issue with `gh` only after the evidence, duplicate, and six-criterion self-review gates all pass. |
 | Done | Report the created issue URL, or abort and name the failing criterion; never report both. |
 

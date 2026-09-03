@@ -10,7 +10,7 @@ description: 'Use when a publisher wants a discoverable, integrity-protected age
 | Field | Bound contract |
 |---|---|
 | Trigger | Publisher wants to build, distribute, or self-host a discoverable integrity-protected agent-skill catalog |
-| Authority | Reversible local write only: build artifacts and index in the output tree. The publisher deploys; the skill never pushes or mutates remotes |
+| Authority | Reversible local: writes only build artifacts and index in the output tree; rollback is deleting the output tree. No remote mutation. The publisher deploys; the skill never pushes or mutates remotes. |
 | Side effect | Produces `SKILL.md` files or flat `.tar.gz` archives and `.well-known/agent-skills/index.json` with SHA-256 digests and install commands. No remote mutation, no credential access, no VCS operation |
 | Done | A complete publishable local tree (schema-valid index, flat deterministic archives, digests matching the produced bytes) plus a per-skill report of shape, digest, and install commands, with post-deploy verification results recorded when run |
 

@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks about recent engineering work, what the team is working on, or planning or roadmap preparation. |
-| Authority | Human-only. Reads git history from the target repository and writes a report under reports/git_history_analysis/. The optional Slack post is a human-gated branch that requires explicit confirmation before any remote mutation. No force-push, PR creation, or other remote mutation runs without explicit human invocation. |
+| Authority | Human-gated: previews the Slack destination and posting consequence before the optional remote Slack post; otherwise reversible local: writes only a report under reports/git_history_analysis/; rollback is deleting the report. No remote mutation. No force-push or PR creation. |
 | Side effect | Writes a categorized commit-breakdown report to reports/git_history_analysis/. Optionally posts a summary to Slack only on explicit human confirmation. |
 | Done | Report saved with commit breakdown, active branches, key insights, risks, and follow-up questions. |
 

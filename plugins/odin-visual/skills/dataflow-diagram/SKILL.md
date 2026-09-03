@@ -10,7 +10,7 @@ description: 'Use when asked to visualize data movement, ETL or ELT, lineage, tr
 | Field | Bound contract |
 |---|---|
 | Trigger | The user asks to visualize data movement, ETL or ELT, lineage, transformation stages, custody, governance, stores, sources, or consumers. |
-| Authority | Reversible local: write only the named local artifacts below and delete them to roll back. No file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Reversible local: writes only the named local artifacts below; rollback is deleting them. No remote mutation. |
 | Side effect | Writes a typed dataflow JSON specification and one self-contained interactive HTML artifact, with optional bounded visual-evidence sidecars. |
 | Done | The diagram represents the requested movement and custody facts without inferred causality, validates against both schemas, passes all showcase and atomic-delivery checks, and has a hash-bound receipt plus truthful visual-review status. |
 

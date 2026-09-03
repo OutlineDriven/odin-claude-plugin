@@ -10,7 +10,7 @@ description: 'Use when the user wants an answer only from the moat seat: buildin
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants an answer only from the moat seat (building, keeping, thickening defensibility). |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | A moat-perspective analysis emitted to chat; no artifact is written. |
 | Done | A moat-perspective answer is emitted without blending other lenses. |
 

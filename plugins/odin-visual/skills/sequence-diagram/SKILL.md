@@ -10,7 +10,7 @@ description: 'Use when a user asks to visualize a time-ordered interaction. Auth
 | Field | Bound contract |
 |---|---|
 | Trigger | The user asks to visualize an API call chain, request lifecycle, asynchronous exchange, cache miss, return path, or another time-ordered interaction. |
-| Authority | Reversible-local: write only the two named artifacts (`<name>.sequence.json` and `<name>.sequence.html`) and explicitly requested sidecars. Rollback deletes any partial write. |
+| Authority | Reversible local: writes only the two named artifacts (`<name>.sequence.json` and `<name>.sequence.html`) and explicitly requested sidecars; rollback is deleting any partial write. No remote mutation. |
 | Side effect | Writes a typed sequence JSON specification and one self-contained interactive HTML artifact, with optional bounded visual-evidence sidecars. No other file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Done | Every participant and authored message is represented in source order, the specification validates fail-closed, the artifact passes the showcase and delivery gates, and the receipt records truthful status. |
 

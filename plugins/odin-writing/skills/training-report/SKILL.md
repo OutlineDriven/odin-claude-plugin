@@ -10,7 +10,7 @@ description: 'Use when a trainer wants a training session documented as a compte
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to document a training session or workshop (compte rendu) |
-| Authority | Reversible-local: write only the named .md draft and the final .docx in the chosen output directory. Rollback: delete the .md and .docx files; no other artifact is created. |
+| Authority | Reversible local: write only the named .md draft and the final .docx in the chosen output directory. Rollback: delete the .md and .docx files; no other artifact is created. |
 | Side effect | Writes the Markdown draft first, then the .docx once, after explicit content confirmation. No other file is written. |
 | Done | Both .md and .docx files delivered after explicit content confirmation, with a terminal classification distinguishing complete from partial. |
 

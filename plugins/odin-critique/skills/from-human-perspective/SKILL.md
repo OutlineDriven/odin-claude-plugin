@@ -10,7 +10,7 @@ description: 'Use when a user wants an answer only from the human seat: what a p
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants an answer only from the human seat (what a person can love, trust, and tolerate). |
-| Authority | Read-only; no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Returns a human-perspective analysis in chat; no other surface is touched. |
 | Done | Returns a human-perspective answer without blending. |
 

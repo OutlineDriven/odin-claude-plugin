@@ -10,7 +10,7 @@ description: 'Use when someone needs to press buttons and watch state change to 
 | Field | Bound contract |
 |---|---|
 | Trigger | A human wants to check one state-model, logic, or data-shape question by pressing buttons and observing state changes, including when the driver is a non-developer. |
-| Authority | Create or update only the named throwaway local HTML artifact and, after the human validates the logic, the named real-code target; commit only on a throwaway branch based on the supplied main branch. Do not push, delete existing work, or change production rendering. |
+| Authority | Reversible local: writes only the named throwaway local HTML artifact and, after the human validates the logic, the named real-code target on a throwaway branch; rollback is version control. No remote mutation. Do not push, delete existing work, or change production rendering. |
 | Side effect | Write one self-contained throwaway HTML file, then fold only its validated pure logic module into the named real-code target. All changes remain locally recoverable by abandoning the throwaway branch or restoring its commits. |
 | Done | The human-driven demo answers the stated question, the verdict and question are recorded in the throwaway-branch commit, and any validated logic module has been folded into the real code without shipping the HTML shell. |
 

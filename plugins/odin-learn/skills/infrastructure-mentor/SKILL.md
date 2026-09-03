@@ -10,7 +10,7 @@ description: 'Use when a user, especially a new hire, asks for mentoring, guidan
 | Field | Bound contract |
 |---|---|
 | Trigger | User, especially a new hire, asks for mentoring, guidance, or explanation of infrastructure or engineering practices. |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Researches the topic and delivers a clear, sourced explanation with references and concrete next steps. |
 | Done | User understands the concept enough to explain it and has concrete next learning steps. |
 

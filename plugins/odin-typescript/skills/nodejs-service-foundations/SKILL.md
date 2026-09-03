@@ -10,7 +10,7 @@ description: 'Use when asked to set up or harden Node.js service foundations: en
 | Field | Bound contract |
 |---|---|
 | Trigger | Setting up or hardening Node.js service foundations: env or secrets configuration, structured logging with redaction, typed error taxonomy, module system, native TypeScript type stripping. |
-| Authority | Reversible local edits: write only named local artifacts (env schema, logger, error classes, tsconfig, package scripts); may install dependencies the service requires. State the rollback path before each write. |
+| Authority | Reversible local: writes only named local artifacts (env schema, logger, error classes, tsconfig, package scripts) and may install the dependencies they need; rollback is version control. No remote mutation. |
 | Side effect | Writes service scaffolding files and installs declared dependencies. |
 | Done | The service validates startup env (invalid config fails fast), emits structured logs with secret redaction, throws typed coded errors with working instanceof checks and HTTP status mapping, and runs under type stripping or tsc with no errors. |
 

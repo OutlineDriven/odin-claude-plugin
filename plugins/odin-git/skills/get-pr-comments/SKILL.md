@@ -10,7 +10,7 @@ description: 'Use when asked to summarize feedback on the active PR. Returns sev
 | Field | Bound contract |
 |---|---|
 | Trigger | Summarize feedback on the active PR. |
-| Authority | Read-only GitHub access; no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Chat output only; reads GitHub through an authenticated read-only API. |
 | Done | Severity-grouped feedback and action list returned. |
 

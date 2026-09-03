@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | A human explicitly invokes the guard at a release gate. |
-| Authority | Read-only: inspect local release metadata without changing files, version control, credentials, paid services, published artifacts, deployments, or remote state. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Inspects local release metadata. |
 | Side effect | None; the check writes no project state. |
 | Done | Exit 0 when every checked version equals the canonical version; otherwise exit 1 with a per-file listing. |
 

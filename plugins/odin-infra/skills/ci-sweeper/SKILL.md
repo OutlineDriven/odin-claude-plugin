@@ -10,7 +10,7 @@ description: 'Use when a requested sweep monitors CI failures over a bounded att
 | Field | Bound contract |
 |---|---|
 | Trigger | A recurring or requested sweep monitors CI failures over a bounded attempt window. |
-| Authority | Reversible local writes only: observe CI checks, propose or implement one minimal isolated repair in a worktree, and run the verifier. Never push, merge, publish, deploy, or mutate credentials. |
+| Authority | Reversible local: writes only one minimal isolated repair in a worktree; rollback is version control. No remote mutation. |
 | Side effect | One minimal isolated repair in a worktree plus one independent verifier run; hands off on flake, ambiguity, budget exhaustion, or circuit-breaker trip. |
 | Done | Root cause reproduced or classified non-actionable; any patch is minimal, independently verified, and returned as a proposal; retries stop at the configured cap without symptom patching. |
 

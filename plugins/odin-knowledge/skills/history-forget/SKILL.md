@@ -12,7 +12,7 @@ Reversibly remove a memory or session from recall and export.
 | Field | Bound contract |
 |---|---|
 | Trigger | User explicitly and human-confirmedly asks to remove a session or note from recall, or asks to list or reverse a prior forget. |
-| Authority | Reversible local writes to a defined history index overlay; rollback by removing the marker. No deletion of source records. |
+| Authority | Reversible local: writes only a defined history index overlay; rollback is undo. No remote mutation. No deletion of source records. |
 | Side effect | Writes tombstone or exclusion markers to the local index overlay and atomically rebuilds the index before the effect takes hold. |
 | Done | The target record no longer appears in recall; exclusions also block export; the atomic rebuild is confirmed; stale exclusions are narrated during list. |
 

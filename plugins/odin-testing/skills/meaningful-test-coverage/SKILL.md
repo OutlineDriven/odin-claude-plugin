@@ -10,7 +10,7 @@ description: 'Use when a test surface needs coverage raised to a configured targ
 | Field | Bound contract |
 |---|---|
 | Trigger | A test surface needs coverage raised to a configured target with assertions that survive mutation. |
-| Authority | Reversible local: write only test files inside the declared scope; rollback by reverting those files. |
+| Authority | Reversible local: writes only test files inside the declared scope; rollback is reverting those files. No remote mutation. |
 | Side effect | New or revised tests that raise meaningful coverage to the configured target. |
 | Done | The coverage target is met and the mutation kill threshold is met (or the waived checklist is applied), with justified exclusions recorded. |
 | Stop | Blocked; stalled; exhausted. Bound: target, metric, tools, threshold, budget, scope. |

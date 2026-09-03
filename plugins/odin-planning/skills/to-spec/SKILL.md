@@ -10,7 +10,7 @@ description: 'Use when settled conversation decisions need synthesis into an age
 | Field | Bound contract |
 |---|---|
 | Trigger | Settled decisions need synthesis into an implementation spec. |
-| Authority | Reversible local: write only a named local spec file; the rollback path is deleting that file. |
+| Authority | Reversible local: writes only a named local spec file; rollback is deleting that file. No remote mutation. |
 | Side effect | Writes an agent-ready specification file locally and stops before publishing or distributing it; a human performs any publication. |
 | Done | Problem, solution, stories, decisions, tests, and exclusions are agent-ready in a verified local specification file; publication remains an unexecuted human handoff. |
 

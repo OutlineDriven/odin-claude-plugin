@@ -10,7 +10,7 @@ description: 'Use when a user asks for a zoomable PR map or graph-canvas orienta
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants a zoomable PR map or graph-canvas orientation. |
-| Authority | Reversible local write only. Write the output HTML site and any scratch files under the working directory. Delete or overwrite prior output on re-run. No VCS, credential, published, deployed, or remote mutation. |
+| Authority | Reversible local: writes only the output HTML site and scratch files under the working directory; rollback is deleting or overwriting prior output. No remote mutation. |
 | Side effect | Writes a self-contained static HTML site to the output directory. |
 | Done | Four D3 views (file dependency graph, commit timeline, change heatmap, review thread flow) each with a guided tour, in a single HTML file with all assets bundled locally and no external network dependency. |
 

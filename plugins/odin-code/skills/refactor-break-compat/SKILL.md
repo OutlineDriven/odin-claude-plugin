@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | Modernizing APIs, removing compat shims, killing feature flags, rewriting a subsystem cleanly. |
-| Authority | Human-only-external-or-irreversible: require explicit human invocation; preview target and consequence before any irreversible deletion. |
+| Authority | Human-gated: requires explicit human invocation, previewing target and consequence before any irreversible deletion; otherwise reversible local: writes only VCS-tracked refactor targets; rollback is version control. No remote mutation. |
 | Side effect | Deletes compat/adapter/flag code and rewrites every caller and test wholesale; local-delete-unrecoverable. |
 | Done | Zero-residue grep, all callers on new contract, tests green on new behavior (exit 0). |
 

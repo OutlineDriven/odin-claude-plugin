@@ -10,7 +10,7 @@ description: 'Use when two colleagues'' working friction needs trait-based expla
 | Field | Bound contract |
 |---|---|
 | Trigger | Two colleagues' working friction needs trait-based explanation, accommodations, process changes, and escalation boundaries. |
-| Authority | Read-only. Produces chat output only; no file, VCS, credential, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Produces chat output only. |
 | Side effect | A trait-gap map, reciprocal perspectives, person-specific accommodations, process changes, conversation guide, and escalation criteria returned in chat. |
 | Done | The primary trait-based friction is grounded, both parties receive concrete accommodations, hardwired differences are respected, and non-trait conflicts are excluded or escalated. |
 

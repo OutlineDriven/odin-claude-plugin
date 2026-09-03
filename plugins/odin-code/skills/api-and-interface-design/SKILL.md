@@ -10,7 +10,7 @@ description: 'Use when asked to design or change a public API, route, CLI flag, 
 | Field | Bound contract |
 |---|---|
 | Trigger | Designing or changing a public API, route, CLI flag, or module boundary. |
-| Authority | Write only named local interface definitions and contract docs before implementation; rollback by discarding the uncommitted draft. |
+| Authority | Reversible local: writes only named local interface definitions and contract docs; rollback is undo (discard the uncommitted draft). No remote mutation. |
 | Side effect | Interface definitions and contract docs written before implementation; consumer files edited onto the new contract and legacy paths (old signatures, aliases, re-exports, deprecated entry points) deleted during cutover; no build, publish, or remote mutation. |
 | Done | Contract is documented with semantics and errors, every consumer is migrated, and no legacy path remains. |
 

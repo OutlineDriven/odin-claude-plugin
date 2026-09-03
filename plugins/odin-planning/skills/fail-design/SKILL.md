@@ -10,7 +10,7 @@ description: 'Use when a user wants to define failure states, recovery actions, 
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants to define failure states, recovery, bypasses, and degraded modes at design time for a component. |
-| Authority | Reversible local writes only: produce a failure-state design document and degraded-mode specifications. No code, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Reversible local: writes only a failure-state design document and degraded-mode specifications; rollback is deleting those artifacts. No remote mutation. |
 | Side effect | Local write of a failure-state design document. |
 | Done | A local failure-state design document exists, mapping every bounded failure state to a recovery action, bypass, or degraded mode. |
 

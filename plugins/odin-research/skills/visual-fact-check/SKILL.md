@@ -10,7 +10,7 @@ description: 'Use when invoked as visual-fact-check with a document path. Verifi
 | Field | Bound contract |
 |---|---|
 | Trigger | A document path, defaulting to the most recently modified HTML in the diagrams directory |
-| Authority | Reversible, local mutations only. No remote resources mutated. |
+| Authority | Reversible local: writes only the document under review; rollback is version control or undo. No remote mutation. |
 | Side effect | Corrects factual errors in the target document in place; appends a verification summary of what was checked and changed |
 | Done | Every verifiable claim classified verified, corrected, unsupported, or unverifiable; document structure preserved |
 

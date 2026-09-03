@@ -12,7 +12,7 @@ Sanitize a memory directory so it is safe to share externally.
 | Field | Bound contract |
 |---|---|
 | Trigger | The user asks to sanitize memory for sharing, redact PII, or scan memory for credentials. |
-| Authority | Read-only on the source directory; write only to a fresh `/tmp/memory-sanitized-<timestamp>` directory. Never modify originals. |
+| Authority | Reversible local: writes only a fresh `/tmp/memory-sanitized-<timestamp>` directory; rollback is undo. No remote mutation. Never modifies originals. |
 | Side effect | Create redacted copies of top-level Markdown memory files under a new temporary directory. Rollback is deletion of that directory. |
 | Done | A temporary directory containing redacted copies, a JSON report of redactions, and a user-facing diff review. If any Tier-1 credential is found in a source file, stop before generating copies and report the affected files. |
 

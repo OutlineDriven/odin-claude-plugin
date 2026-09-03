@@ -10,7 +10,7 @@ description: 'Use when verification is looping, would re-run untouched code, or 
 | Field | Bound contract |
 |---|---|
 | Trigger | Checking has started to loop, a check would re-run against untouched code, a second tool would prove what the first proved, or the user asks to stop over-checking and ship. |
-| Authority | Read commands and emit a delivery decision only; do not mutate files, version control, credentials, paid services, publications, deployments, or remote state. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Emits a delivery decision only. |
 | Side effect | Run scoped typecheck, lint, and test verification once per touched language, trim redundant verification, and report whether delivery may proceed. |
 | Done | One proving action has run per claim, no action was repeated for reassurance, each touched language's complete project gate ran once, and the result is delivered on the first green gate. |
 

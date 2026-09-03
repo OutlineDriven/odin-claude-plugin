@@ -10,7 +10,7 @@ description: 'Use when the user wants to expand a decision field with additional
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants to expand a decision field. |
-| Authority | Read-only; no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Chat output: an expanded decision field. |
 | Done | The decision field is expanded with additional options and dimensions. |
 

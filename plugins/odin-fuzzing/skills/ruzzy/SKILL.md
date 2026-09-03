@@ -10,7 +10,7 @@ description: 'Use when asked to set up and run coverage-guided fuzzing of Ruby c
 | Field | Bound contract |
 |---|---|
 | Trigger | User needs Ruzzy to run coverage-guided fuzzing on Ruby code or a Ruby native extension. |
-| Authority | reversible-local: write only harness, tracer, sanitizer preload, and corpus files to the working directory. State rollback as file deletion. |
+| Authority | Reversible local: writes only harness, tracer, sanitizer preload, and corpus files to the working directory; rollback is file deletion. No remote mutation. |
 | Side effect | Write Ruzzy harness scripts, tracer scripts, sanitizer LD_PRELOAD paths, and corpus files, local working directory only. |
 | Done | Ruzzy executes the intended Ruby target with the correct tracer or extension setup and reproduces saved failures. |
 

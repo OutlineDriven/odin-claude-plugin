@@ -10,7 +10,7 @@ description: 'Use when a user commits to a direction and asks to plan, brief, re
 | Field | Bound contract |
 |---|---|
 | Trigger | User commits to a direction and asks to plan, brief, structure, research, or operationalize it. |
-| Authority | Reversible local: write only named local plan artifacts; state the rollback path. |
+| Authority | Reversible local: writes only named local plan artifacts; rollback is deleting or reverting those artifacts. No remote mutation. |
 | Side effect | Runs read-only parallel research and writes plans/{type}-{descriptive-name}.md, adding a date on collision. |
 | Done | Type and tier are classified; prior work, knowledge, live data, external facts when needed, and origin tensions are checked; user acknowledges the context brief; the file leads with the type-correct answer and includes sourced metrics, questions, and references. |
 

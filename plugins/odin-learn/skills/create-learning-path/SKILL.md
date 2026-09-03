@@ -10,7 +10,7 @@ description: 'Use when asked to create a multi-session learning plan. Returns a 
 | Field | Bound contract |
 |---|---|
 | Trigger | Create a multi-session learning plan. |
-| Authority | Read-only; author a plan as a conversation artifact. No file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Conversation artifact only. |
 | Done | Milestoned plan, practice, and review rubric returned. |
 

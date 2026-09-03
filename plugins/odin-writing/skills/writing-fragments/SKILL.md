@@ -10,7 +10,7 @@ description: 'Use when exploration needs heterogeneous noticings captured before
 | Field | Bound contract |
 |---|---|
 | Trigger | Exploration needs heterogeneous noticings captured before structure. |
-| Authority | reversible-local: write only the named fragment file; rollback is undoing the last append. |
+| Authority | Reversible local: write only the named fragment file; rollback is undoing the last append. |
 | Side effect | Fragments appended under one working title; no other file touched. |
 | Done | Useful noticings preserved without premature synthesis. |
 

@@ -10,7 +10,7 @@ description: 'Use when the user asks to audit a file, subtree, or repository for
 | Field | Bound contract |
 |---|---|
 | Trigger | The user asks to audit a file, subtree, or repository for fallback secrets, usable default credentials, fail-open controls, weak security primitives, permissive access, or exposed debug behavior. |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. Application code and configuration are never altered. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Application code and configuration are never altered. |
 | Side effect | Chat output only: scoped read-only discovery plus refuting verification of every candidate, reported without touching the target. |
 | Done | Every category records corpus access and coverage; each reported finding traces an active insecure value to a production security decision; refuted candidates and incomplete coverage remain visible. |
 

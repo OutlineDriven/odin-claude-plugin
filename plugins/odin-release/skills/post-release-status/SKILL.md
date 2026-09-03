@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | A user explicitly asks to post, update, or check cherry-pick status for a release. |
-| Authority | Read-only against the PR source. Reversible write-only for exactly one Slack message: one post or one update, never both in the same run. |
+| Authority | Remote: posts or updates exactly one Slack message; requires explicit human invocation. Read-only against the PR source; one post or one update, never both in the same run. |
 | Side effect | Lists pull requests for the named release and creates or updates exactly one Slack Block Kit status board. Does not mutate pull requests or any other Slack message. |
 | Done | The resulting Slack message has a permalink, accurately reflects the current pull-request state with manually verified statuses preserved, and the permalink resolves to the intended message. |
 

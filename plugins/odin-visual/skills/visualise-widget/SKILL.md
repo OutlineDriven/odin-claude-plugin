@@ -10,7 +10,7 @@ description: 'Use when a user requests a comparison table, data record, metric c
 | Field | Bound contract |
 |---|---|
 | Trigger | comparison (compare X vs Y), data record (card/profile), metric card, stepper (cyclic process), mockup (mobile/chat/modal), also widget/card |
-| Authority | read-only: no file, VCS, credential, paid, published, deployed, or remote mutation |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | chat-output only: visualizer fence containing an HTML fragment, rendered by the client in a sandboxed iframe |
 | Done | valid HTML widget of the requested pattern in the sandboxed iframe |
 

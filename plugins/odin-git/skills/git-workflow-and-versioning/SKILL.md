@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks for release, version bump, changelog, or branch workflow beyond a single commit. |
-| Authority | Human-only. Require explicit human invocation. Preview the exact target and consequence before any commit, tag, changelog edit, push, protected-branch action, or force-push; require explicit consent for protected branches and force-pushes. |
+| Authority | Human-gated: previews the exact target and consequence before any push, protected-branch action, or force-push, with explicit consent required for protected branches and force-pushes; otherwise reversible local: writes only local commits, tags, and changelog edits; rollback is version control. No remote mutation without the gate. |
 | Side effect | Git commits, tags, and changelog edits; protected branches and force-pushes only with explicit consent. |
 | Done | History expresses logical change-sets, tags and changelog match shipped contract changes, and no unauthorized protected-branch action occurred. |
 

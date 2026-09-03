@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User explicitly invokes this skill and intends replies posted or threads resolved on GitHub. |
-| Authority | Human-only: every remote mutation requires explicit human approval before the call is issued. The model proposes, filters, walks, and previews; the user approves or edits each reply and the final batch before any `gh api` command runs. |
+| Authority | Remote: posts approved replies and resolves threads on GitHub; requires explicit human invocation. The user approves or edits each reply and the final batch before any `gh api` command runs. |
 | Side effect | Remote mutation: posts approved replies and resolves threads on GitHub. No other remote targets. |
 | Done | Every posted reply matches an approved draft. Every resolved thread appears in the approval set. Any partial post failure stops and reports. |
 

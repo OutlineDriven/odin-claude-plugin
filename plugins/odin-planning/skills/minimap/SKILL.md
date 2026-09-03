@@ -10,7 +10,7 @@ description: 'Use when a compact current-work view is needed from Git state, rec
 | Field | Bound contract |
 |---|---|
 | Trigger | Use on an explicit model or human request for a compact view of current work state, including at an SDD phase boundary. |
-| Authority | Read-only: inspect local Git state, recorded test evidence, and root graph.yaml only; never mutate files, VCS, credentials, paid services, publications, deployments, or remote state. Never run tests. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Never run tests. |
 | Side effect | Emit one compact view and write nothing. |
 | Done | Every reported claim has exactly one class (conquered, disputed, or fog) and a concise justification from the evidence join, with absent graph knowledge represented as fog. |
 

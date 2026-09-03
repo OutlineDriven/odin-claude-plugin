@@ -10,7 +10,7 @@ description: 'Use when the user wants a cybernetic flow design document for an i
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants a cybernetic flow design document specifying sensors, actuators, feedback paths, delays, and oscillation risk for an interactive system. |
-| Authority | Write only the single named local design document; delete or overwrite that file to roll back. Do not implement, deploy, or mutate source code. |
+| Authority | Reversible local: writes only the single named local design document; rollback is deleting or overwriting that file. No remote mutation. |
 | Side effect | A cybernetic flow design document at the named local path. No source code, runtime, or remote mutation. |
 | Done | A design document with sections for sensors, actuators, feedback, delay, oscillation, a wiring diagram, and a dynamic-routing note, written to the named local file. |
 

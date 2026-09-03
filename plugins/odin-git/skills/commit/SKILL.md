@@ -10,7 +10,7 @@ description: 'Use when a user asks to commit or save staged or unstaged changes,
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to commit or save staged or unstaged changes, create a typed branch, or format history for changelog generation. |
-| Authority | Reversible local writes only: stage selected local files, create a local feature branch, and create local commits. Never push, publish, or mutate a remote. |
+| Authority | Reversible local: writes only the local index, a local feature branch, and local commits; rollback is version control. No remote mutation. |
 | Side effect | Local working tree, local index, local branch refs, and local commit objects. Rollback: `git reset --hard <prior-HEAD>` discards new commits; `git branch -D <created-branch>` removes a branch this skill created. |
 | Done | Each logical concern is committed with a value-communicating message; `git status` confirms success; commit hashes and subjects are reported. History is parseable and auto-generates changelogs, SemVer bumps, and issue closes. |
 

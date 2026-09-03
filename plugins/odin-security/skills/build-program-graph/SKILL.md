@@ -12,7 +12,7 @@ A program graph turns a source tree into nodes (functions, methods, types, modul
 | Field | Bound contract |
 |---|---|
 | Trigger | The user needs a multi-language source graph for call paths, attack surface, entrypoints, blast radius, coarse taint reachability, boundaries, types, proxies, or declared cross-system links. |
-| Authority | Reversible local writes only: graph exports, preanalysis subgraphs and annotations, and an optional declared-links file. State the rollback path before writing. The graph tool must already be installed; this skill never installs or upgrades tooling. |
+| Authority | Reversible local: writes only graph exports, preanalysis subgraphs and annotations, and an optional declared-links file; rollback is deleting the written files. No remote mutation. The graph tool must already be installed; this skill never installs or upgrades tooling. |
 | Side effect | Graph export files, preanalysis subgraphs and annotations (in-memory), and an optional declared-links file at the analysis root. Rollback: delete the written files; in-memory annotations vanish when the engine is disposed. |
 | Done | The correct languages are parsed, preanalysis has run, requested queries return evidence with the version and parser limits stated, and no reachability result is presented as data-flow or vulnerability proof. |
 

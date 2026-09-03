@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User needs to install a third-party automation pack or template repository safely and deterministically |
-| Authority | Reversible local write (hash-guarded rollback). Explicit human invocation starts the install; preview every target and consequence before writing |
+| Authority | Reversible local: writes only the target directory and a managed-state manifest; rollback is restoring the prior managed state via the saved applied manifest. No remote mutation. Explicit human invocation starts the install; preview every target and consequence before writing. |
 | Side effect | Fetches the source archive to a scratch location, verifies all files against expected hashes, applies placeholder transformations, and atomically moves files to the target directory |
 | Done | The pack is installed in the target directory and passes safety checks |
 

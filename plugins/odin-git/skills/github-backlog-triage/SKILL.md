@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | The user explicitly invokes backlog triage for a GitHub repository's open pull requests and issues. |
-| Authority | Human-only. Preview every proposed GitHub write and its consequence before executing. No write runs until the user approves the final set. Never triage proactively. |
+| Authority | Remote: merges selected pull requests, closes evidenced resolved issues, and posts missing cross-links on GitHub; requires explicit human invocation. No write runs until the user approves the final set. Never triage proactively. |
 | Side effect | After a complete approval gate, optionally merge selected ready pull requests, close evidenced resolved issues, post missing cross-links, and write local review or triage reports. Priority and size estimates are local-only and never posted to GitHub. |
 | Done | All open items are classified; only the user-approved GitHub writes execute with per-action safety checks; unresolved items retain local-only priority and size estimates; and any requested local reports are saved. |
 

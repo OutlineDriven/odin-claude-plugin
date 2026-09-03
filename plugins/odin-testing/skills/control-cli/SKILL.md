@@ -10,7 +10,7 @@ description: 'Use when asked to reproduce, profile, or verify CLI/TUI behavior. 
 | Field | Bound contract |
 |---|---|
 | Trigger | Reproduce, profile, or verify CLI/TUI behavior. |
-| Authority | May spawn local terminal sessions under a PTY and write only temporary transcript or profile artifacts under a system temp directory. No source, VCS, credential, paid, published, deployed, or remote mutation. Rollback: terminate the PTY process and remove its runtime scratch. |
+| Authority | Reversible local: writes only temporary transcript or profile artifacts under a system temp directory and may spawn local PTY sessions; rollback is terminating the PTY process and removing its runtime scratch. No remote mutation. No source or VCS mutation. |
 | Side effect | Runs temporary terminal sessions and captures evidence. |
 | Done | A deterministic transcript or profile proof artifact exists and the live PTY session is terminated with its runtime scratch removed. |
 

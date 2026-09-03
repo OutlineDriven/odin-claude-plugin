@@ -10,7 +10,7 @@ description: 'Use when the user asks to update the todos, resync the task list, 
 | Field | Bound contract |
 |---|---|
 | Trigger | User says 'update the todos', asks to resync the task list or what to do next, or the plan and the tree have drifted apart. |
-| Authority | Reversible local write: edits the task list through the todo tool only; no implementation, no file mutation outside the todo state. |
+| Authority | Reversible local: writes only the task list through the todo tool; rollback is undo. No remote mutation. |
 | Side effect | Edits the task list or todo state; performs no implementation. |
 | Done | The delta report lists Completed, Still open, Overtaken, Blocked, and New; every completion carries proof and the stale count is zero. |
 

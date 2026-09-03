@@ -10,7 +10,7 @@ description: 'Use when a user runs saga or asks to autonomously build a sizable 
 | Field | Bound contract |
 |---|---|
 | Trigger | User runs saga or asks to autonomously build a sizable feature. |
-| Authority | Orchestrator writes specs to disk, delegates to workers via run_agents, and validates each task to its criteria before integration and user acceptance gate. All local writes happen in git worktrees (VCS-reversible). Milestone-level validation gates progression. User acceptance is the terminal gate before any VCS commit. |
+| Authority | Reversible local: writes only specs and worker artifacts in git worktrees; rollback is version control. No remote mutation. Milestone-level validation gates progression; user acceptance is the terminal gate before any VCS commit. |
 | Side effect | Creates a saga directory outside the repo and spawns workers in isolated git worktrees. |
 | Done | All tasks meet validation, milestones pass, user accepts. |
 

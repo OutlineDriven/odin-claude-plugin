@@ -10,7 +10,7 @@ description: 'Use when asked to render documentation as an interactive, navigabl
 | Field | Bound contract |
 |---|---|
 | Trigger | Render a set of documentation (file, directory, or URL) as an interactive, navigable HTML canvas artifact. |
-| Authority | Reversible local writes for the single output HTML artifact in the working directory. Read-only access to local files or network fetch for URLs. |
+| Authority | Reversible local: writes only the single output HTML artifact in the working directory; rollback is deleting that file. No remote mutation. Read-only access to local files or network fetch for URLs. |
 | Side effect | Creates one self-contained HTML canvas artifact under the working directory. |
 | Done | One self-contained, navigable HTML file at the stated path containing the structured overview, rendered sections, and a combined sources index. |
 

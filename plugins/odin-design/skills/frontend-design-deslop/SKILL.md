@@ -10,7 +10,7 @@ description: 'Use when a user builds or styles a web frontend or asks to make it
 | Field | Bound contract |
 |---|---|
 | Trigger | User builds or styles a web frontend or asks to make it not look AI-generated. |
-| Authority | Reversible local writes only to DESIGN.md, design token files, and component CSS in the working project. Roll back by reverting those files via version control; no other files are touched. |
+| Authority | Reversible local: writes only DESIGN.md, design token files, and component CSS in the working project; rollback is version control. No remote mutation. No other files are touched. |
 | Side effect | Writes DESIGN.md, design tokens, and component CSS. |
 | Done | A committed token system and a crafted interface with a recorded slop-audit pass and a WCAG 2.2 AA pass/fail gate that passes. |
 

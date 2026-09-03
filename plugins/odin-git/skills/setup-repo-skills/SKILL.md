@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | One-time repository setup for tracker and domain conventions. |
-| Authority | Explicit human invocation only. Before writing any file, preview the complete write set and its consequences, then get separate confirmation for each configuration section. |
+| Authority | Human-gated: previews the complete write set and its consequences, getting separate confirmation for each configuration section; otherwise reversible local: writes only `docs/agents/` config files and one steering-file edit; rollback is version control. No remote mutation. |
 | Side effect | Tracker, domain, label, and single steering-file configuration. Exactly four write targets: `docs/agents/issue-tracker.md`, `docs/agents/triage-labels.md`, `docs/agents/domain.md`, and one steering-file edit. Nothing else is created or modified. |
 | Done | Dependent workflows can read complete repository-local configuration: every confirmed `docs/agents/` file exists with the chosen conventions, and the steering file carries the `## Agent skills` block naming them. |
 

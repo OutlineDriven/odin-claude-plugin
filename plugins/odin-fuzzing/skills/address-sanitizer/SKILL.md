@@ -10,7 +10,7 @@ description: 'Use when building or running native code under AddressSanitizer, o
 | Field | Bound contract |
 |---|---|
 | Trigger | User needs to build or run native code with ASan, interpret an ASan report, or debug a memory-corruption failure. |
-| Authority | Reversible local: write only the instrumented build artifacts and test invocations named by the user; discard the instrumented binary and rebuild without `-fsanitize=address` to roll back. |
+| Authority | Reversible local: writes only the instrumented build artifacts and test invocations named by the user; rollback is discarding the instrumented binary and rebuilding without `-fsanitize=address`. No remote mutation. |
 | Side effect | Instrumented native build and test process under the target project directory. |
 | Done | When building or running: the target is instrumented, exercised, and any reported memory error is explained with a reproducible location. When interpreting an existing report: the error type, faulting source location, and allocation/deallocation sites are extracted from the report and mapped to a root cause, without requiring a fresh instrumented run. |
 

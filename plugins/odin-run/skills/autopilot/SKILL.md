@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | A human explicitly invokes `/autopilot` with a feature description and an approved execution plan. |
-| Authority | The invocation authorizes the described campaign. Preview the exact target and consequence before credentials, paid actions, data-at-rest changes, publication, deployment, remote bulk mutation, or irreversible deletion. Continue only when the invocation covers that consequence. Pass authorized push and PR targets to `review-and-ship`; do not publish directly. |
+| Authority | Human-gated: previews the exact target and consequence before credentials, paid actions, data-at-rest changes, publication, deployment, remote bulk mutation, or irreversible deletion, continuing only when the invocation covers that consequence; otherwise reversible local as above. Pass authorized push and PR targets to `review-and-ship`; do not publish directly. |
 | Side effect | Delegates implementation, simplification, review, and finalization to their respective skills; local artifacts are written by `work`, commits and PR are created by `review-and-ship`. No mutation is performed by autopilot itself. |
 | Done | Return `DONE` only after the requested close-out state is observed. Otherwise return `BLOCKED` with a resumable handoff. |
 

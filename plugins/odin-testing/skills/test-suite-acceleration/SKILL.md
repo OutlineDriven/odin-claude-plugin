@@ -10,7 +10,7 @@ description: 'Use when a test suite is too slow and must be accelerated without 
 | Field | Bound contract |
 |---|---|
 | Trigger | A test suite is too slow and must be accelerated without weakening it. |
-| Authority | Reversible local: edit test files and configuration; rollback via VCS. |
+| Authority | Reversible local: writes only test files and configuration; rollback is version control. No remote mutation. |
 | Side effect | Test-suite acceleration under unchanged behavior and coverage. |
 | Done | The fixed-baseline suite is faster without reliability, behavior, or coverage regression. |
 | Stop | No safe gain; blocked; budget exhausted. Bound: baseline environment and optimization budget. Receipt terminal classes: success, capped, stalled, blocked, exhausted, pending. Budget exhaustion is never success unless it is the predeclared success predicate. |

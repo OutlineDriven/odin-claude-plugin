@@ -10,7 +10,7 @@ description: 'Use when a user asks to write a technical article or blog post inc
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to write a blog post or technical article that incorporates external reference material. |
-| Authority | Read-only for external sources. Write-only for the article draft, delivered in chat. No file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. External sources are read; the article draft is delivered in chat. |
 | Side effect | Chat output only. Delivers the drafted article text; no writes beyond the conversation. |
 | Done | Complete article with chosen title, hook, evidence-based body with explicit citations, CTA block, and humanization pass preserving engineered lines. |
 

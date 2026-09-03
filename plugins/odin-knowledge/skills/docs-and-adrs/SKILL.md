@@ -10,7 +10,7 @@ description: 'Use when making an architectural decision, changing a public API, 
 | Field | Bound contract |
 |---|---|
 | Trigger | Making an architectural decision, changing a public API, shipping a user-facing feature, or capturing context for future engineers and agents |
-| Authority | Reversible-local: create or edit only the documentation artifacts listed under Side effect, inside the current project working tree; nothing is committed, staged, published, or pushed |
+| Authority | Reversible local: writes only the documentation artifacts listed under Side effect, inside the current project working tree; rollback is version control. No remote mutation. Nothing is committed, staged, published, or pushed. |
 | Side effect | ADR, README, API/JSDoc/OpenAPI docs, inline comments, changelog and agent-rules files; deletions are limited to commented-out code |
 | Done | ADR exists for each significant decision, README/API/inline gotchas accurate, no commented-out code, agent rules current |
 

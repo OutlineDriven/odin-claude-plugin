@@ -10,7 +10,7 @@ description: 'Use when a run needs its own branch and checkout to avoid collisio
 | Field | Bound contract |
 |---|---|
 | Trigger | A run needs its own branch and checkout so concurrent work cannot collide. |
-| Authority | vcs-reversible-destructive. Destructive operations touch only VCS-recoverable state, git branches and git-registered worktrees. Show the exact branch-and-path set before any removal and treat git as the recovery path. Never pass `--force` to `git worktree remove`. The manifest, mutex, and worktree files under the gitignored `.loop-worktrees/` are local bookkeeping, not deliverables. |
+| Authority | Reversible local: writes only git branches, git-registered worktrees, and local bookkeeping files under `.loop-worktrees/`; rollback is git. No remote mutation. Show the exact branch-and-path set before any removal. Never pass `--force` to `git worktree remove`. |
 | Side effect | Creates branch `loop/<runId>` plus worktree `.loop-worktrees/<runId>`, transitions its manifest status (active, rejected, escalated, merged, stale) via atomic manifest writes, and removes only terminal-status worktrees without `--force`; git refusals are surfaced instead of forced. |
 | Done | Every worktree is registered in the manifest with a legal status, cleanup never sweeps an active worktree, and no removal used `--force`. |
 

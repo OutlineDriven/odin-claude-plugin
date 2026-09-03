@@ -10,7 +10,7 @@ description: 'Use when a merge, rebase, cherry-pick, or stash pop stops on confl
 | Field | Bound contract |
 |---|---|
 | Trigger | A merge, rebase, cherry-pick, or stash pop stops on conflicts: `git` exits with unmerged paths. |
-| Authority | Reversible local writes: edits to conflicted files, `git add` of resolved hunks, package lock regeneration, scoped check execution, and integration continuation (committing a merge, `git rebase --continue`, `git cherry-pick --continue`, `git stash drop`). No push, no tag, no force-push. Rollback: `git merge --abort`, `git rebase --abort`, `git cherry-pick --abort`, or `git checkout -- <file>` before staging. |
+| Authority | Reversible local: writes only conflicted-file edits, staged resolutions, regenerated lockfiles, and integration continuation; rollback is `git merge --abort`, `git rebase --abort`, `git cherry-pick --abort`, or `git checkout -- <file>`. No remote mutation. No push, no tag, no force-push. |
 | Side effect | Edits conflicted files, stages resolutions, regenerates lockfiles with package manager tooling, runs scoped checks, completes the in-progress integration. |
 | Done | No unmerged paths, no conflict markers in any tracked file, scoped checks pass, integration is committed and complete. |
 

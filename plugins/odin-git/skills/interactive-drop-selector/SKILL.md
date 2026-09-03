@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | The user explicitly asks to choose which issues or pull requests to abandon interactively. |
-| Authority | Human-only external mutation: inspect tracker items, but do not close any item until the user has selected exact targets and explicitly approved the final preview. |
+| Authority | Remote: closes approved issues or pull requests in the named tracker scope; requires explicit human invocation. Do not close any item until the user has selected exact targets and explicitly approved the final preview. |
 | Side effect | Close only the approved issues or pull requests in the named tracker scope; do not mutate unselected items or any other remote state. |
 | Done | Every approved target is confirmed closed remotely, and every failure or skipped target is reported without claiming success for it. |
 

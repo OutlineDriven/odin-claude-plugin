@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | Drafting or revising a PR description. |
-| Authority | Human-only. Preview the description and get explicit approval before writing to the remote PR. No autonomous writes. |
+| Authority | Remote: writes or rewrites the PR body on GitHub; requires explicit human invocation. Preview the description and get explicit approval before the remote mutation. |
 | Side effect | Writes or rewrites the PR body only. Remote target: the GitHub PR body. |
 | Done | Description gives the reviewer context the diff cannot, with no inflated claims. |
 

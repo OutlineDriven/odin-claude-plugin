@@ -10,7 +10,7 @@ description: 'Use when an implementation has accumulated more workarounds than s
 | Field | Bound contract |
 |---|---|
 | Trigger | The implementation accumulated more workarounds than structure and another patch will not pay, or the human says "start over", "scrap it and rebuild", or "restart from scratch". |
-| Authority | Reversible-local: write only the failed-branch evidence archive and the new v0 skeleton inside the named restart scope. No branch deletion, no force push, no history rewrite, no remote mutation, no deletion or rewrite of original code. Rollback: delete the written skeleton files and archive entries; original code is never deleted, so this restores the prior state exactly. |
+| Authority | Reversible local: writes only the failed-branch evidence archive and the new v0 skeleton inside the named restart scope; rollback is undo (delete the written skeleton files and archive entries; original code is never deleted). No remote mutation. No branch deletion, no force push, no history rewrite, no deletion or rewrite of original code. |
 | Side effect | Archives failed branches and dead code as evidence, and writes a new v0 skeleton with one vertical loop. Nothing outside the restart scope is written. |
 | Done | Three schema-conformant artifacts exist in the restart scope and the v0 loop clears its named first gate. |
 

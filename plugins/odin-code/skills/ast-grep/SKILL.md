@@ -10,7 +10,7 @@ description: 'Use when asked to run AST-based structural search, lint, or rewrit
 | Field | Bound contract |
 |---|---|
 | Trigger | AST-based modification, structural search, lint, or replacement too fragile for regex. |
-| Authority | Reversible local writes to VCS-tracked source files only. Search is read-only; rewrites apply only through the helper after dry-run review. Roll back via version control. |
+| Authority | Reversible local: writes only VCS-tracked source files (search is read-only; rewrites apply only through the helper after dry-run review); rollback is version control. No remote mutation. |
 | Side effect | Local file writes through the helper two-pass validate/dry-run/apply flow; no remote, credential, or published mutation. |
 | Done | Pattern validated, blast radius reviewed, and rewrite landed at the correct scope. |
 

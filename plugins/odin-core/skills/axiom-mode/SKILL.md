@@ -10,7 +10,7 @@ description: 'Use when the user requests axiom, axiom-mode, axiom-compact, forma
 | Field | Bound contract |
 |---|---|
 | Trigger | User requests axiom, axiom-mode, axiom-compact, formal-logic, or compact form. |
-| Authority | Read-only; changes response register only. No file, VCS, credential, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Changes response register only. |
 | Side effect | None; response style only. |
 | Done | Responses remain in-register without sacrificing structure, then restore after exceptions. |
 

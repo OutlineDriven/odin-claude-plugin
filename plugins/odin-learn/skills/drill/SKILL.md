@@ -10,7 +10,7 @@ description: 'Use when a concept needs practising: the user asks for an exercise
 | Field | Bound contract |
 |---|---|
 | Trigger | give me an exercise, quiz me, keep it fresh, what am I missing / where are my gaps, or explicit practice/quiz/recall/probe |
-| Authority | Write only `PROGRESS.md` at the workspace root and read `CORPUS.md` there. Rollback is deleting the lines this run appended; the file is append-only, never rewritten. |
+| Authority | Reversible local: writes only `PROGRESS.md` at the workspace root; rollback is deleting the lines this run appended. No remote mutation. The file is append-only, never rewritten. |
 | Side effect | Appends one line per attempt to `PROGRESS.md` at the workspace root; drives spaced recall and probes gaps. |
 | Done | The named move completed; every attempt recorded; cleared concepts marked no-hints-independent. |
 

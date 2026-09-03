@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | The user explicitly asks to create, update, query, or archive Notion pages, databases, or blocks. |
-| Authority | Act only on explicit human invocation; preview the exact Notion target and consequence before using an authenticated connection or making a remote mutation, and require confirmation before an archive or any update that removes or overwrites content. |
+| Authority | Remote: writes to the named Notion target through an authenticated connection; requires explicit human invocation and a preview of the exact target and consequence. An archive, or any update that removes or overwrites content, needs a separate confirmation. |
 | Side effect | Read only the requested Notion objects and perform only the requested create, update, query, or archive operation; do not widen the workspace, object set, or operation. |
 | Done | The requested Notion operation is confirmed by the service response, and the resulting object metadata is returned. |
 

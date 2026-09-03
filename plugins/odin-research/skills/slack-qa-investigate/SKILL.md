@@ -10,7 +10,7 @@ description: 'Use when asked for a research-backed answer requiring codebase and
 | Field | Bound contract |
 |---|---|
 | Trigger | Research-backed answer requiring codebase and documentation investigation without making file changes, or answering requires reading many files or a wide survey. |
-| Authority | Read-only: no file creation, editing, deletion, VCS mutation, install, or any state-changing command. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | May spawn local research subagents for wide surveys. Deliverable is a sourced answer only; no file changes. |
 | Done | Answer cites specific files/lines, distinguishes code/docs/inference, acknowledges uncertainty, and refuses write requests. |
 

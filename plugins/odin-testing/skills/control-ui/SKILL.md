@@ -10,7 +10,7 @@ description: 'Use when asked to verify or reproduce browser or Electron UI behav
 | Field | Bound contract |
 |---|---|
 | Trigger | Verify or reproduce browser/Electron UI behavior. |
-| Authority | Write only named local evidence artifacts under the working directory and discard spawned processes on exit. Rollback: delete the evidence directory and kill any spawned process. |
+| Authority | Reversible local: writes only named local evidence artifacts under the working directory; rollback is deleting the evidence directory and killing any spawned process. No remote mutation. |
 | Side effect | Runs the app or a browser locally and captures screenshots, console logs, and DOM state into one named evidence directory. |
 | Done | Before/after UI evidence exists in the named directory and no spawned app or browser process remains. |
 

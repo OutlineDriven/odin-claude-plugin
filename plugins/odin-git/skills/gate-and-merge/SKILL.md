@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | A set of open PRs needs landing together; the user says "land these PRs", "merge the stack", "clear the PR queue", or names a merge train. |
-| Authority | Human-only. The human authorizes the queue once before the first merge, authorizes every push to a branch they do not own, and says yes once to the previewed close set. Preview the target and consequence before any remote bulk mutation. |
+| Authority | Remote: merges, repairs, pushes to, and closes pull requests on GitHub; requires explicit human invocation. The human authorizes the queue once before the first merge, authorizes every push to a branch they do not own, and says yes once to the previewed close set. |
 | Side effect | Root-cause repair commits pushed to PR head branches, review-thread replies and resolutions, PR review comments for unresolved findings, PR closures carrying a rationale comment, and stack merges on GitHub. No merge on a pending or pre-fix head. |
 | Done | Every PR reached one of `merge`, `repair`, `hold`, or `close`; one line per PR; no merge on a pending or pre-fix oid. |
 

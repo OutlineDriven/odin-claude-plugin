@@ -10,7 +10,7 @@ description: 'Use when a user provides a founder story or result and asks for a 
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to turn a founder story or result into a LinkedIn post. |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Delivers drafted hook and post text; no writes beyond the conversation. |
 | Done | Chosen hook plus post body, humanized with the hook preserved. |
 

@@ -10,7 +10,7 @@ description: 'Use when work has distinct modes and the user wants states, events
 | Field | Bound contract |
 |---|---|
 | Trigger | Work has distinct modes and the user wants states, events, guards, outcomes, and illegal transitions instead of a prose todo list. |
-| Authority | Reversible local write. The specification file is the only artifact created; deleting it fully reverses the side effect. |
+| Authority | Reversible local: writes only the specification file; rollback is deleting it. No remote mutation. |
 | Side effect | Writes one state-machine specification file to the project. |
 | Done | A runnable/codable state-machine specification exists with all states, events, guards, outcomes, and illegal transitions defined. |
 

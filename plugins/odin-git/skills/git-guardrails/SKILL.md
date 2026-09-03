@@ -10,7 +10,7 @@ description: 'Use when a repository needs a safety net against force-push, force
 | Field | Bound contract |
 |---|---|
 | Trigger | A repository needs a tool-time safety net against force-push/reset/clean/branch-delete/discard. |
-| Authority | Reversible-local: write only the hook copy under the chosen `.claude/hooks/` or `~/.claude/hooks/` directory and one merged `hooks.PreToolUse` entry in the matching `.claude/settings.json` or `~/.claude/settings.json`. No VCS, remote, credential, or other file change. Rollback: delete the copied script and remove the registered entry. |
+| Authority | Reversible local: writes only the hook copy under `.claude/hooks/` or `~/.claude/hooks/` and one merged `hooks.PreToolUse` entry in the matching settings file; rollback is deleting the copied script and removing the registered entry. No remote mutation. No VCS, credential, or other file change. |
 | Side effect | Copies `block-dangerous-git.py` and registers it in the chosen settings file `PreToolUse`; net effect removes destructive capability. |
 | Done | All 16 verification payloads exit as expected, the hook is registered, and plain `git push` still exits 0. |
 

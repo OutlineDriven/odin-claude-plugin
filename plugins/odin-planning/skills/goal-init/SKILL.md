@@ -10,7 +10,7 @@ description: 'Use when a durable effort needs an approved, checkable success pre
 | Field | Bound contract |
 |---|---|
 | Trigger | A durable effort needs an approved, checkable success predicate before work starts. |
-| Authority | Reversible-local: write only the named goal scaffold artifacts under the goal directory. Rollback is deleting that directory before any effort binds. |
+| Authority | Reversible local: writes only the named goal scaffold artifacts under the goal directory; rollback is deleting that directory before any effort binds. No remote mutation. |
 | Side effect | Writes the goal scaffold artifacts (goal statement, budget, run log, verifier); performs no implementation work and binds no effort. |
 | Done | Exactly one approved success predicate exists with its verifier and budget recorded, ready for an effort to bind it. |
 

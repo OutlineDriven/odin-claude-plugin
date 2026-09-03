@@ -10,7 +10,7 @@ description: 'Use when the user says ship it now, no phases, or finish it now, o
 | Field | Bound contract |
 |---|---|
 | Trigger | The user says ship it now, no phases, or finish it now, or the work would otherwise be split into phases, staged rollouts, follow-up PRs, or TODO-later remainders. |
-| Authority | Reversible-local: write only the named local implementation artifacts that the ask puts in scope. Rollback is reverting this single change. |
+| Authority | Reversible local: write only the named local implementation artifacts that the ask puts in scope. Rollback is reverting this single change. |
 | Side effect | All in-scope implementation paths are written in one change. The change produces no TODO, stub, placeholder, NotImplemented, or follow-up remainder. |
 | Done | Every in-scope path is implemented in one change, and anything dropped is named in one line with its reason. |
 

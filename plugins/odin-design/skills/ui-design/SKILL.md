@@ -10,7 +10,7 @@ description: 'Use when directing, building, or auditing React/Next.js UI in Tail
 | Field | Bound contract |
 |---|---|
 | Trigger | visual direction, Tailwind build, screenshot to markup, dark mode, responsive, UX audit, design QA, deslop UI |
-| Authority | reversible-local: write files under the project directory only; no VCS, credential, paid, published, or deployed mutation |
+| Authority | Reversible local: writes only files under the project directory; rollback is version control. No remote mutation. |
 | Side effect | Builds, audits, or provides direction for React/Next.js UI; may edit files |
 | Done | UI has a track, loaded references, built or audited with ship-readiness, and no AI slop |
 

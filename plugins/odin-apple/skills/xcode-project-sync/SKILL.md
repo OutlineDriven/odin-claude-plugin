@@ -10,7 +10,7 @@ description: 'Use when /xcode-project-sync must regenerate an Xcode project from
 | Field | Bound contract |
 |---|---|
 | Trigger | The user runs /xcode-project-sync after project edits to regenerate the Xcode project from its declarative manifest. |
-| Authority | Reversible-local: write only the regenerated xcodeproj built from project.yml; roll back via `git restore` of the xcodeproj. Never edit handwritten Swift or hand-patch generated files. |
+| Authority | Reversible local: write only the regenerated xcodeproj built from project.yml; roll back via `git restore` of the xcodeproj. Never edit handwritten Swift or hand-patch generated files. |
 | Side effect | Regenerates the xcodeproj from project.yml without modifying handwritten Swift files. |
 | Done | The regenerated project builds: `swift build` and `xcodebuild -scheme <SchemeName>` both succeed. |
 

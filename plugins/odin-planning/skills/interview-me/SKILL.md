@@ -10,7 +10,7 @@ description: 'Use when a user asks to define requirements or choose between opti
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to define requirements or choose between competing options, or says "interview me" before non-trivial work. |
-| Authority | Write only named local artifacts; state the rollback path. |
+| Authority | Reversible local: writes only named local artifacts; rollback is deleting or reverting those artifacts. No remote mutation. |
 | Side effect | User-confirmed requirements/decision record written after the interview; nothing written during it. |
 | Done | Every originally unstated assumption is confirmed or corrected and the user approves the resulting decision log before any file changes. |
 

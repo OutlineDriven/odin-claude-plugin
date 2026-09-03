@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User requests an independent Codex or Gemini review of uncommitted code, a branch diff, or a specific commit, optionally focused on security, performance, or error handling. |
-| Authority | Human-only, external, irreversible. Requires explicit user invocation. Preview the target and consequence before credentials, data-at-rest changes, paid actions, publishing, deployment, remote bulk mutation, or irreversible deletion. |
+| Authority | Remote: sends the selected code diff and project guidance to Codex and/or Gemini (paid API); requires explicit human invocation. Previews the target and consequence before credentials, data-at-rest changes, paid actions, publishing, deployment, remote bulk mutation, or irreversible deletion. |
 | Side effect | Sends the selected code diff and optional project guidance to Codex and/or Gemini. Codex is read-only sandboxed. Gemini headless invocation may auto-approve extension tool calls and therefore requires explicit user-authorized invocation. |
 | Done | The chosen external reviewer runs on the complete selected diff or is explicitly reported unavailable. Findings include exact locations and confidence where supported. Multiple-reviewer agreements and disagreements are summarized. Empty or oversized scopes are handled before invocation. |
 

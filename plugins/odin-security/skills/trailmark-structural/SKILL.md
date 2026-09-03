@@ -10,7 +10,7 @@ description: 'Use when a target needs a detailed single-snapshot structural anal
 | Field | Bound contract |
 |---|---|
 | Trigger | A target needs detailed single-snapshot hotspots, entrypoints, coarse taint, blast radius, privilege boundaries, proxies, subgraphs, and available type references. |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. Never install, upgrade, or clone trailmark or any dependency. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Never install, upgrade, or clone trailmark or any dependency. |
 | Side effect | Reads the target source tree and emits a full JSON structural-analysis payload. |
 | Done | Languages, summary, attack surface, hotspots, proxies, all named subgraph counts, available edge/type details, and empty-pass results are returned without fabrication. |
 

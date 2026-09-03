@@ -12,7 +12,7 @@ Shaped work is concrete enough to walk through and abstract enough to leave room
 | Field | Bound contract |
 |---|---|
 | Trigger | Explicit human says "shape this work" / "what is the appetite" / "pitch this" / "gut check the shape" / "fix this pitch" / "does the result match the bet". |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Chat output only; draws a pitch, gut-check, reshapes, or results-shape-check in chat; creates no files. |
 | Done | Shaped pitch returned with five ingredients at fat-marker altitude, or a single verdict on an existing bet. |
 

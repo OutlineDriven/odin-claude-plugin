@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | A human directly requests review and publication, or `work` passes the explicit signal `authority: delegated`. |
-| Authority | Direct or explicitly delegated shipping authority. A route name or surrounding context never implies delegation. Preview any credential, paid, data-at-rest, remote bulk, or irreversible consequence not already covered by that authority. |
+| Authority | Remote: pushes one branch and opens or updates one pull request; requires explicit human invocation. A route name or surrounding context never implies delegation; preview any credential, paid, data-at-rest, remote bulk, or irreversible consequence not already covered by that authority. |
 | Side effect | Repairs the reviewed diff, creates local commits, pushes one branch without force, and opens or updates one pull request. |
 | Done | No release-blocking finding remains, native checks pass, every intended commit is on the remote branch, and a confirmed pull-request URL is returned. |
 

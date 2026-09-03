@@ -10,7 +10,7 @@ description: 'Use when a non-trivial decision sits under uncertainty and correct
 | Field | Bound contract |
 |---|---|
 | Trigger | Non-trivial decision under uncertainty; correctness matters more than speed; a claim not checkable by the type system or compiler; before committing non-trivial code |
-| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Chat output: fresh-context adversarial review findings and reconciliation |
 | Done | Every non-trivial decision named as a CLAIM and fresh-context reviewed; findings classified; a stop condition met |
 

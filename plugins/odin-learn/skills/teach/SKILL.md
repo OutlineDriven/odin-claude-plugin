@@ -10,7 +10,7 @@ description: 'Use when the user wants ongoing teaching across sessions in a pers
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants a course, a learning workspace, or ongoing teaching across sessions rather than a one-off explanation. Includes source-required lessons with retention gates. |
-| Authority | Reversible-local: writes only named local artifacts inside the teaching workspace at the working directory. |
+| Authority | Reversible local: writes only named local artifacts inside the teaching workspace at the working directory; rollback is version control. No remote mutation. |
 | Side effect | Creates MISSION.md, RESOURCES.md, learning records, ./lessons, ./assets, ./reference, GLOSSARY.md, and NOTES.md inside the persistent teaching workspace. |
 | Done | A grounded mission, a lesson authored to the learner's zone of proximal development with a cited trusted source, and curated resources exist in the workspace. |
 

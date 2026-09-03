@@ -10,7 +10,7 @@ description: 'Use when the user asks "how does X work" and wants an architecture
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to explain how a code path or subsystem works |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Chat output only; read-only investigation |
 | Done | Grounded architecture walkthrough and gotchas returned |
 

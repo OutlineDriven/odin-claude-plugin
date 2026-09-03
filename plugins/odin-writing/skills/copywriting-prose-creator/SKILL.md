@@ -10,7 +10,7 @@ description: 'Use when asked to codify, audit, or port measurable prose style ru
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to codify, audit, or port a brand's measurable prose style rules (syntax, rhythm, mechanics) apart from its emotional tone. |
-| Authority | Reversible local write restricted strictly to PROSE.md or PROSE-<channel>.md. Rollback is deleting or reverting that file; no other file is touched. |
+| Authority | Reversible local: writes only PROSE.md or PROSE-<channel>.md; rollback is deleting or reverting that file. No remote mutation. |
 | Side effect | Writes PROSE.md or PROSE-<channel>.md. May spawn at most 5 read-only audit sub-agents that read corpus files and report metrics but write nothing. |
 | Done | A versioned PROSE.md or PROSE-<channel>.md that an editor can apply line by line, with a semver footer, owner, date, and changelog stub. |
 

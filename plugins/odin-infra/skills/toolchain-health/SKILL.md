@@ -10,7 +10,7 @@ description: 'Use when the user runs /toolchain-health and wants a trustworthy g
 | Field | Bound contract |
 |---|---|
 | Trigger | The user runs /toolchain-health |
-| Authority | Strictly read-only: run the project's own diagnostic tools, capture output, report; never fix, write config, persist history, or mutate any file, VCS state, credential, or remote |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Runs the project's own diagnostic tools, captures output, and reports; never fixes, writes config, or persists history. |
 | Side effect | A green, yellow, or red health report in chat; no state change |
 | Done | A green/yellow/red verdict, a per-category dashboard, top issues for categories below threshold, and ranked repairs are returned with no state change |
 

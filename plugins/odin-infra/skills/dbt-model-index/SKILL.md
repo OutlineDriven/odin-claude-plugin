@@ -10,7 +10,7 @@ description: 'Use when a human-curated dbt model index must guide BigQuery SQL f
 | Field | Bound contract |
 |---|---|
 | Trigger | The user needs to query data in a dbt-powered data warehouse or resolve a data question. |
-| Authority | Read-only advisory; no file, VCS, credential, paid, published, deployed, or remote mutation. Consults the curated model index and emits SQL without executing it |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Consults the curated model index and emits SQL without executing it. |
 | Side effect | Produces a BigQuery SQL query that references the correct model; no warehouse mutation |
 | Done | Query uses the correct fully-qualified model name, respects documented standard filters, partition fields, grain, and cost controls |
 

@@ -10,7 +10,7 @@ description: 'Use when the user says remember this or settles one durable fact, 
 | Field | Bound contract |
 |---|---|
 | Trigger | User says remember this or settles one durable fact. |
-| Authority | Reversible local write to the named append-only note store only; rollback is to delete the just-appended line. |
+| Authority | Reversible local: writes only to the named append-only note store; rollback is undo. No remote mutation. |
 | Side effect | Appends one schema-validated, redacted note to the local JSONL store; no other file, VCS, credential, or remote mutation. |
 | Done | One bounded self-contained fact is strict UTF-8 JSONL with RFC3339 time, project, and optional tags; it is redacted, indexed, and recallable; transcript and code-obvious content is rejected. |
 

@@ -10,7 +10,7 @@ description: 'Use when a measured cost surface needs one-change-at-a-time reduct
 | Field | Bound contract |
 |---|---|
 | Trigger | A measured cost surface needs one-change-at-a-time reduction under frozen guardrails. |
-| Authority | Reversible local: runs pre-registered gate batteries and appends to an append-only experiment log. For production billing/infra mutation, make one harness ask/question call before the run starts; prose consent, invocation consent, prior-run consent, and post-start discovery do not approve an effect. End the run on scope drift. |
+| Authority | Human-gated: makes one harness ask/question call before any production billing/infra mutation; otherwise reversible local: writes only to an append-only experiment log; rollback is version control. No remote mutation. Prose consent, invocation consent, prior-run consent, and post-start discovery do not approve an effect; end the run on scope drift. |
 | Side effect | Guardrail-safe measured cost reduction. Each proposed change is adopted with N=5 gate evidence or recorded dead with the measurement that killed it. |
 | Done | The fixed budget target is reached without any guardrail regression, or every proposed change is resolved as adopted or dead. |
 | Stop | no safe saving; no progress; blocked. Bound: exact approved billing/infra scope, budget target, guardrails, and pass cap. |

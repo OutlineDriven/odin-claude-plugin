@@ -10,7 +10,7 @@ description: 'Use when a brainstorming question is genuinely clearer shown than 
 | Field | Bound contract |
 |---|---|
 | Trigger | During brainstorming, only when a question is genuinely clearer shown than told: a real mockup, layout, or diagram; offered once unless the user raises it |
-| Authority | reversible-local: create only missing project-local `.superpowers` and `.superpowers/brainstorm` container directories, then write the fresh named session directory beneath them. Managed stop terminates only the named managed process; it intentionally retains project-local state and never claims to restore pre-invocation filesystem state. |
+| Authority | Reversible local: writes only missing project-local `.superpowers` and `.superpowers/brainstorm` container directories and the fresh named session directory beneath them; rollback is undo. No remote mutation. Managed stop terminates only the named managed process; it intentionally retains project-local state and never claims to restore pre-invocation filesystem state. |
 | Side effect | Starts a local key-gated HTTP and WebSocket server with an idle timeout, writes HTML fragments under a session screen directory, and reads click-event JSONL from the session state. |
 | Done | The visual question is resolved: the user saw options in the browser, selection events merged with the terminal reply, and the server is stopped or left to its idle timeout. |
 

@@ -10,7 +10,7 @@ description: 'Use when asked to write or fix product/marketing copy, landing pag
 | Field | Bound contract |
 |---|---|
 | Trigger | Write product copy, marketing copy, remove AI-isms, landing page copy, brand voice, changelog |
-| Authority | Reversible local write; produces or edits user-facing copy and brand voice outputs in the working tree |
+| Authority | Reversible local: writes only user-facing copy and brand voice outputs in the working tree; rollback is version control. No remote mutation. |
 | Side effect | Creates or edits copy files and brand voice outputs; no publish, deploy, credential, or remote mutation |
 | Done | Copy is free of AI-isms, matches the voice chart, and fits the page type |
 

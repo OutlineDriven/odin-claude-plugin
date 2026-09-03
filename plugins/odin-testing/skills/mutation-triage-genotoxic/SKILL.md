@@ -10,7 +10,7 @@ description: 'Use when a mutation campaign has produced surviving mutants that n
 | Field | Bound contract |
 |---|---|
 | Trigger | A mutation campaign has produced surviving mutants and the user needs triage. |
-| Authority | Reversible-local: write only the classification ledger and test-change proposals. Does not mutate tests or source directly. Rollback by deleting the ledger. |
+| Authority | Reversible local: writes only the classification ledger and test-change proposals; rollback is deleting the ledger. No remote mutation. Does not mutate tests or source directly. |
 | Side effect | A classification ledger with one label per mutant and proposed test changes. |
 | Done | Every surviving mutant has exactly one classification (false-positive, missing-test, genotoxic, or removable) with coverage-map evidence, and the ledger has no unprocessed remainder. |
 

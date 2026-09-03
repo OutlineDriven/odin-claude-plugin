@@ -10,7 +10,7 @@ description: 'Use when a user requests the reasoning behind one matched session 
 | Field | Bound contract |
 |---|---|
 | Trigger | User explicitly requests the reasoning behind one matched session by query or opaque handle. |
-| Authority | Read-only. Reads the local session index and transcripts only; no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Reads the local session index and transcripts only. |
 | Side effect | None. |
 | Done | One capped typed record reports problem category, decisions, outcome, touched-file handles, lifecycle, spawn edges, and message-count buckets plus an opaque handle; no prose digest or raw text. |
 

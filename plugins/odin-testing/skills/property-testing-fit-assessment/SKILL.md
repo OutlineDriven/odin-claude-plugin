@@ -10,7 +10,7 @@ description: 'Use when deciding whether PBT fits a code path, which property and
 | Field | Bound contract |
 |---|---|
 | Trigger | The user asks whether property-based testing fits a code path, which property and library to choose, or whether an existing design exposes a meaningful property. |
-| Authority | Read-only: inspect source, tests, and manifests. Never edit files, change VCS state, install dependencies, or perform package-manager or network mutations. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Inspects source, tests, and manifests; never installs dependencies or performs package-manager or network mutations. |
 | Side effect | Chat output only: one fit assessment. Dependency adoption and any production refactor remain the user's decisions; offer them at most once and never carry them out. |
 | Done | The response names a grounded property, domain, strategy seam, and existing-or-proposed library with consent boundaries, or explains why example tests are the better method. |
 

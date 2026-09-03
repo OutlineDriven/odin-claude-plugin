@@ -10,7 +10,7 @@ description: 'Use when the user suspects no installed skill covers a task and wa
 | Field | Bound contract |
 |---|---|
 | Trigger | The user suspects no installed skill covers a task, or wants exhaustive proof that a task is a skill gap before requesting a new skill. |
-| Authority | Read-only. Consult the installed skill catalog; do not modify any skill, file, or configuration. Never invoke or route to the matched skill. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Consults the installed skill catalog; never invokes or routes to the matched skill. |
 | Side effect | None. Catalog lookup only; no persistent writes. |
 | Done | Either an owning skill is named with its trigger sentence (without invocation), or a missing-skill brief is produced proving no installed skill covers the task. |
 

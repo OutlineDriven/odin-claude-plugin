@@ -10,7 +10,7 @@ description: 'Use when the user wants an answer only from the innovation seat: o
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants an answer only from the innovation seat (original technique, talent, culture). |
-| Authority | Read-only; no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | A chat-output innovation-perspective analysis; no other lens is blended mid-answer. |
 | Done | An innovation-perspective answer is emitted without blending. |
 

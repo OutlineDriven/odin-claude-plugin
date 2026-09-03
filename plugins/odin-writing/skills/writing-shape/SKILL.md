@@ -10,7 +10,7 @@ description: 'Use when shaping a source document paragraph by paragraph without 
 | Field | Bound contract |
 |---|---|
 | Trigger | A read-only pile needs paragraph-by-paragraph shaping. |
-| Authority | Reversible local write to `<source_path>.shaped.md` only. Rollback: delete that file; version control applies only if the artifact was already tracked. |
+| Authority | Reversible local: writes only `<source_path>.shaped.md`; rollback is deleting that file, or version control when the artifact was already tracked. No remote mutation. |
 | Side effect | Agreed paragraphs accumulated from the single in-memory read of the read-only pile; human approves each before it enters the output document. The source file is never modified. |
 | Done | Coherent grounded document with explicit format choices and named gaps. |
 

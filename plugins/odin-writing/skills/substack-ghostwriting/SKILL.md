@@ -10,7 +10,7 @@ description: 'Use when asked to ghostwrite Substack newsletters and web posts fr
 | Field | Bound contract |
 |---|---|
 | Trigger | User brings a Substack or newsletter content task. |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. May fetch public web references. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. May fetch public web references. |
 | Side effect | Fetches public references when supplied and returns drafted issue or post text in chat. |
 | Done | A formatted issue or web post includes its subject or SEO fields, body, Notes teaser, and any requested distribution posts. |
 

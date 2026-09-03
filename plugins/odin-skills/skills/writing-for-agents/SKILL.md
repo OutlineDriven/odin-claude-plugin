@@ -10,7 +10,7 @@ description: 'Use when asked to author or restructure any agent-consumed documen
 | Field | Bound contract |
 |---|---|
 | Trigger | Author or restructure any agent-consumed document. |
-| Authority | Reversible-local: write only the named target document; rollback is undo or version-control restore. No remote mutation. |
+| Authority | Reversible local: writes only the named target document; rollback is version control or undo. No remote mutation. |
 | Side effect | Target document edited, split, or pruned. No other file touched. |
 | Done | Cold agent routes and executes predictably with no stale duplication. |
 

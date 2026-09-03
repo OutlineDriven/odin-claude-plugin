@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | Implementation starts from a plan or spec path or a clear build request (not an open-ended bug). |
-| Authority | Write named local artifacts only. Never commit, push, or open a PR. Rollback path is VCS. Finalization belongs to a separate finalizer reachable only in standalone mode. |
+| Authority | Reversible local: writes only named local artifacts; never commits, pushes, or opens a PR; rollback is version control. No remote mutation. Finalization belongs to a separate finalizer. |
 | Caller mode | Orchestrated or standalone, set by the caller. Orchestrated: a supervisor passes an explicit orchestrated signal. Standalone: invoked directly by a human. The mode governs where execution stops. |
 | Side effect (orchestrated) | Implements plan units, runs local verification, returns a structured result. No review, commit, push, or PR. |
 | Side effect (standalone) | Implements plan units, runs local verification, then delegates finalization to review-and-ship with explicit delegated authority. |

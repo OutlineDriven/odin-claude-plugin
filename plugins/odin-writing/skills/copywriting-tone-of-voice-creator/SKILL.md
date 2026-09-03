@@ -10,7 +10,7 @@ description: 'Use when a user asks to create, refresh, or port a brand tone of v
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to create, refresh, or port a brand tone of voice guide. |
-| Authority | Reversible local write restricted strictly to TONE.md or TONE-<channel>.md. Rollback is deleting or reverting that file; no other file is touched. |
+| Authority | Reversible local: writes only TONE.md or TONE-<channel>.md; rollback is deleting or reverting that file. No remote mutation. |
 | Side effect | Writes TONE.md or TONE-<channel>.md. No other files, VCS, credentials, paid actions, publishing, or remote mutation. |
 | Done | A versioned TONE.md with validated voice attributes, a tone modulation matrix, a lexicon, mechanics, and one channel section per channel in scope. |
 

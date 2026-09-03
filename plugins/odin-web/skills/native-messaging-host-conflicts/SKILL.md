@@ -10,7 +10,7 @@ description: 'Use when a browser extension that talks to a native messaging host
 | Field | Bound contract |
 |---|---|
 | Trigger | A browser extension's native messaging fails: disconnected extension, tool timeouts, or the wrong host answers after two clients for the same host name were installed or switched between. |
-| Authority | Reversible local writes: rename competing native-messaging manifests, rewrite the host wrapper, kill stale host processes, and remove stale sockets. Rollback is renaming the `.disabled` manifest back and restoring the backed-up wrapper. |
+| Authority | Reversible local: mutates only native-messaging manifests, the host wrapper, stale host processes, and sockets; rollback is renaming the `.disabled` manifest back and restoring the backed-up wrapper. No remote mutation. |
 | Side effect | Native-messaging manifest selection, host wrapper, host process, and socket state. |
 | Done | Exactly one intended host is active, its expected socket exists, and a freshly restarted client connects through the extension. |
 

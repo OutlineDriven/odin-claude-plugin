@@ -10,7 +10,7 @@ description: 'Use when a user needs coverage-guided fuzzing for Python code or a
 | Field | Bound contract |
 |---|---|
 | Trigger | User needs coverage-guided fuzzing for Python code or a Python native extension using Atheris. |
-| Authority | Write the Atheris harness file, a corpus directory, the local fuzzing process, and when required for dependency management, create or modify `pyproject.toml` and `uv.lock` in the harness directory. Roll back by deleting the harness file and corpus directory and restoring `pyproject.toml` and `uv.lock` to their pre-run state; no source under test is mutated. |
+| Authority | Reversible local: writes only the Atheris harness file, a corpus directory, and when required for dependency management `pyproject.toml` and `uv.lock` in the harness directory; rollback is deleting the harness file and corpus directory and restoring `pyproject.toml` and `uv.lock` to their pre-run state. No remote mutation. No source under test is mutated. |
 | Side effect | Local writes: a `fuzz.py` (or named) harness, a `corpus/` directory of seed and crash artifacts, and a transient fuzzing process. |
 | Done | Atheris executes an instrumented target through a deterministic `TestOneInput` harness, reports coverage, and any saved crash artifact reproduces the same failure when replayed. |
 

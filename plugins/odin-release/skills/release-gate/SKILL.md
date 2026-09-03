@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User decides to ship a release. |
-| Authority | Human-only. Preview target and consequence before every publishing, credential, data-at-rest, deployment, or irreversible action. Require explicit confirmation before each. |
+| Authority | Remote: pushes a commit and a signed tag and triggers the release workflow; requires explicit human invocation. Preview target and consequence before every publishing, credential, data-at-rest, deployment, or irreversible action; require explicit confirmation before each. |
 | Side effect | Bumps version, commits after explicit confirmation, writes local release notes, creates and pushes a signed tag after a second confirmation. Never runs workflow-owned steps by hand. |
 | Done | Version matches tag; commit message reads clean without the diff; release notes house-style; triggered workflow confirmed succeeded (not assumed); no workflow step run by hand; contributions closed with credit; iteration folder retired. |
 

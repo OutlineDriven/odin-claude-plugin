@@ -10,7 +10,7 @@ description: 'Use when facing a bug, integration failure, dependency issue, uncl
 | Field | Bound contract |
 |---|---|
 | Trigger | Facing a bug, integration failure, dependency issue, unclear API usage, implementation blocker, or tool capability need. |
-| Authority | Read-only: runs `gh` searches and optional read-only research subagents; reads local code, logs, and config; no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Runs `gh` searches and optional read-only research subagents; reads local code, logs, and config. |
 | Side effect | Chat output only: a recommendation with reuse/adapt/avoid, a verification command, and a confidence label when evidence is weak. |
 | Done | A report containing a local problem profile, the search path, key evidence with links, a recommended reuse/adapt/avoid, a verification command, and a confidence label when evidence is weak. |
 

@@ -10,7 +10,7 @@ description: 'Use when asked to build spring, easing, gesture, and choreographed
 | Field | Bound contract |
 |---|---|
 | Trigger | spring animation, gesture, easing, screen recording, animate this, curve fitting, choreography |
-| Authority | reversible-local: write files under the project directory only; no VCS, credential, paid, published, or deployed mutation |
+| Authority | Reversible local: writes only files under the project directory; rollback is version control. No remote mutation. |
 | Side effect | Produces animation code/curves; may run Python scripts to extract motion |
 | Done | Animation uses correct springs, curves, choreography, and respects reduced motion |
 

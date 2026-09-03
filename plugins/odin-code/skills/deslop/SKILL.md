@@ -12,7 +12,7 @@ Four modes share one spine: bound scope, verify with the repo's own command, rol
 | Field | Bound contract |
 |---|---|
 | Trigger | The user says deslop, debloat, tidy, simplify, clean up this diff, deslop a branch diff, remove dead code, find placeholders or stubs, remove dead fields, redundant wrappers, or stale config, or the slop skill routes code findings here |
-| Authority | Reversible local writes to production source files or prose artifacts; may run the repo verifier and `git restore` on regression |
+| Authority | Reversible local: writes only production source files or prose artifacts (may run the repo verifier and `git restore` on regression); rollback is version control or undo. No remote mutation. |
 | Side effect | Local writes to production source files or prose artifacts; no edits to tests, fixtures, mocks, examples, generated, vendored, or lockfile/build artifacts |
 | Done | Mode-specific done predicate holds; verifier green or rollback confirmed |
 

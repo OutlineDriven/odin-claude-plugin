@@ -10,7 +10,7 @@ description: 'Use when auditing C, C++, or Rust secret-handling code to verify z
 | Field | Bound contract |
 |---|---|
 | Trigger | The user asks to audit C, C++, or Rust code that handles keys, passwords, tokens, PII, or other secrets for missing, partial, path-dependent, copied, retained, register-spilled, or compiler-eliminated zeroization, and a compile_commands.json or Cargo.toml build context is available. |
-| Authority | Read-only on the target repository. Writes audit artifacts and reports to a temporary directory only. Rollback by deleting the temporary directory. |
+| Authority | Reversible local: writes only audit artifacts and reports to a temporary directory; rollback is deleting the temporary directory. No remote mutation. The target repository is read-only. |
 | Side effect | Reads the target repository without modifying it. Executes captured compilation, cargo, and LLVM/MIR/assembly emission commands. Writes intermediate evidence, generated PoCs, findings.json, and final-report.md under a dedicated temporary audit directory. |
 | Done | findings.json and final-report.md exist in the temporary directory, every finding carries its source and compiler-artifact evidence with a confidence level, and all source/compiler phases and known coverage gaps are accounted for. |
 

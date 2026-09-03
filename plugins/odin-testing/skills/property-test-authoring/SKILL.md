@@ -10,7 +10,7 @@ description: 'Use when adding or improving property tests for invariants, oracle
 | Field | Bound contract |
 |---|---|
 | Trigger | The user asks to add or improve generated property tests for an inverse, invariant, oracle, idempotence rule, parser, normalizer, algorithm, data structure, or smart-contract state machine. |
-| Authority | Reversible-local: write property tests to local files tracked by version control. Roll back with `git revert` or `git checkout` of the test file. |
+| Authority | Reversible local: writes only property tests to local files tracked by version control; rollback is `git revert` or `git checkout` of the test file. No remote mutation. |
 | Side effect | Write property tests in the existing framework. Add a new testing dependency or production-code seam only with user approval. |
 | Done | The strongest grounded property is encoded with domain-aware generators and pinned edge cases, avoids tautology and vacuity, and the targeted test run passes while a plausible contract violation would fail it. |
 

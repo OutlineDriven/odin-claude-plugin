@@ -10,7 +10,7 @@ description: 'Use when the user says set up gitignore, fix gitignore, or untrack
 | Field | Bound contract |
 |---|---|
 | Trigger | set up gitignore / fix gitignore / untracked files keep appearing |
-| Authority | Reversible-local: write only the repository `.gitignore`, with a snapshot before merging an existing file; never read or write a global excludes file. |
+| Authority | Reversible local: writes only the repository `.gitignore`; rollback is the pre-merge snapshot or version control. No remote mutation. Never read or write a global excludes file. |
 | Side effect | Writes or edits `.gitignore`; never `~/.gitignore`, `~/.config/git/ignore`, or `git config --global`. |
 | Done | `.gitignore` has stable section anchors, composing it again with the same inputs produces identical bytes, and before/after untracked counts are reported. |
 

@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to cut, trigger, or start a release candidate for a release branch. |
-| Authority | Explicit human invocation only. Preview the target and consequence before each remote mutation; mutate only the one workflow dispatch on the branch the user named and the one status notification. |
+| Authority | Remote: dispatches the release workflow on the named branch and posts one status notification; requires explicit human invocation. Preview the target and consequence before each remote mutation; mutate only the one workflow dispatch on the branch the user named and the one status notification. |
 | Side effect | Runs the configured release workflow on the release branch, obtains its run URL, and posts one status notification. Nothing else changes. |
 | Done | The workflow dispatch exits zero, the run query returns a non-null run URL, and the status notification is posted. |
 

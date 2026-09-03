@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | A human explicitly runs /cloud-task-orchestrator for a large task across cloud agents. |
-| Authority | Act only under that explicit invocation; preview every remote target and consequence before using credentials, spawning agents or branches, writing orchestration state, or coordinating merges. |
+| Authority | Remote: creates or changes only the previewed remote agents, branches, and merges needed for the bounded task graph; requires explicit human invocation. Preview every remote target and consequence before using credentials, spawning agents or branches, writing orchestration state, or coordinating merges. |
 | Side effect | Write only the approved orchestration state and create or change only the previewed remote agents, branches, and merges needed for the bounded task graph. |
 | Done | The task graph is drained: every node has a verified handoff and a recorded terminal state, with approved merges coordinated or a truthful blocked or failed terminal result. |
 

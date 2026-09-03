@@ -10,7 +10,7 @@ description: 'Use when existing cryptographic implementations and a vector-consu
 | Field | Bound contract |
 |---|---|
 | Trigger | Existing cryptographic implementations and a vector-consuming harness need mutation-driven, cross-implementation test vector expansion. |
-| Authority | Local write of test vectors, reports, and mutation artifacts in the working directory. No remote mutation, no credential mutation, no VCS mutation. |
+| Authority | Reversible local: writes only test vectors, reports, and mutation artifacts in the working directory; rollback is deleting those artifacts. No remote mutation. |
 | Side effect | Local writes only: mutation logs, new test vectors in JSON, harness files colocated with each implementation, and a kill-rate report. |
 | Done | Escaped mutants are classified by fault class, each new vector isolates one defect, vectors are cross-verified against two or more independent implementations, and a before/after kill-rate delta is reported. |
 

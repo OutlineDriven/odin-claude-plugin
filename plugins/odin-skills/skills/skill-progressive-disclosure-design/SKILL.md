@@ -10,7 +10,7 @@ description: 'Use when the model is creating or refactoring a skill, faces a SKI
 | Field | Bound contract |
 |---|---|
 | Trigger | the model is creating or refactoring a skill, faces a SKILL.md over 300-400 lines, or confuses triggering with disclosure |
-| Authority | reversible-local: write only named local skill files; rollback by restoring prior file contents |
+| Authority | Reversible local: writes only named local skill files; rollback is restoring prior file contents. No remote mutation. |
 | Side effect | restructures the skill's files (split or monolith with reference pointers), limited to the target skill directory |
 | Done | justified split-or-monolith decision with pointer hygiene and an architecture-eval plan |
 

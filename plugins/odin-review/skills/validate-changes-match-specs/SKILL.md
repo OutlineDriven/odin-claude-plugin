@@ -10,7 +10,7 @@ description: 'Use when asked to compare implementation against repository specs,
 | Field | Bound contract |
 |---|---|
 | Trigger | Resolving mismatches between specs and implementation. |
-| Authority | Reversible local writes to named files only. Roll back any edit that diverges from a user-approved decision. |
+| Authority | Reversible local: writes only named files; rollback is undo. No remote mutation. Roll back any edit that diverges from a user-approved decision. |
 | Side effect | Walks through mismatches and edits code or specs per user decisions. |
 | Done | Summary states specs checked, mismatches resolved, files changed, validation run. |
 

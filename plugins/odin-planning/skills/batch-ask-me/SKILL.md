@@ -10,7 +10,7 @@ description: 'Use when the user faces multi-fork decisions or unresolved prerequ
 | Field | Bound contract |
 |---|---|
 | Trigger | The user faces multi-fork decisions, unresolved prerequisites, or explicitly says "batch ask me" or "clarify the design space". |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Conversation-only question batches and decision-tree state. |
 | Done | Frontier empty, all branches of the design tree visited, and shared understanding confirmed by the user. |
 

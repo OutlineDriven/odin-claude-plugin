@@ -10,7 +10,7 @@ description: 'Use when the user asks to enforce package boundaries, set up deep 
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to enforce package boundaries, set up deep modules, stop deep imports, import only entry points, or mutation-prove that boundary rules catch forbidden imports. |
-| Authority | Reversible-local: writes `.dependency-cruiser.cjs`, `package.json`, package scripts, and an optional example package and README; refuses to overwrite existing config or touch tsconfig. |
+| Authority | Reversible local: writes only `.dependency-cruiser.cjs`, `package.json`, package scripts, and an optional example package and README; rollback is version control. No remote mutation. Refuses to overwrite existing config or touch tsconfig. |
 | Side effect | Installs dependency-cruiser as a devDependency; writes `.dependency-cruiser.cjs`, `lint:boundaries` script, example package, packages README, and AGENTS.md or CLAUDE.md pointer. |
 | Done | `lint:boundaries` passes on the clean example, fails on an injected deep import, and passes after the deep import is reverted. |
 

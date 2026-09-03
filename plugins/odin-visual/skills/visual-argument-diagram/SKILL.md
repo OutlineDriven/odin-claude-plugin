@@ -10,7 +10,7 @@ description: 'Use when a user wants to create a conceptual, workflow, architectu
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants to create a conceptual, workflow, architecture, or protocol diagram, or repair an existing diagram's visual layout. |
-| Authority | Reversible local: writes only named artifacts; rolls back on failure or quality non-convergence. |
+| Authority | Reversible local: writes only named artifacts; rollback is deleting those files on failure or quality non-convergence. No remote mutation. |
 | Side effect | Writes one `.excalidraw.json` file and one `.png` render to the project directory. First run may bootstrap pinned Playwright/Chromium. |
 | Done | JSON and PNG exist; rendered vision and defect checks pass for conceptual structure, evidence, eye flow, dominance, clipping, overlap, arrow routing, spacing, balance, and export readability; fewer than 30% of text elements are container-bound. |
 

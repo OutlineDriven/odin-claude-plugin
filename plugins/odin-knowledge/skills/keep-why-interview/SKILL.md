@@ -10,7 +10,7 @@ description: 'Use when departing knowledge must enter project topic files throug
 | Field | Bound contract |
 |---|---|
 | Trigger | Maintainer knowledge is about to become unavailable (leaving, retiring, team change) or user requests a knowledge-transfer interview. |
-| Authority | Reversible local: write only synthesized topic-file entries; no session narrative, no personal details, no verbatim transcription of raw material. |
+| Authority | Reversible local: writes only synthesized topic-file entries; rollback is version control. No remote mutation. No session narrative, no personal details, no verbatim transcription of raw material. |
 | Side effect | Synthesized topic-file entries written to local project knowledge file(s) with Source = interview; entries are self-contained without private context. |
 | Done | All code-unexplainable gaps either answered or explicitly marked OPEN; tacit-knowledge subjects get narration-first flow; entries self-contained without private context; no invented rationale. |
 

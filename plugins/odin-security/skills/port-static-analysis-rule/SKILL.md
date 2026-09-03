@@ -12,7 +12,7 @@ Porting takes a rule that detects a defect class in one language and rebuilds it
 | Field | Bound contract |
 |---|---|
 | Trigger | The user has an existing static-analysis rule and wants independently validated ports for one or more target languages or analyzers. |
-| Authority | Reversible-local: write only to the user-specified output directory. No remote mutation, no credential use, no changes outside the named output tree, and the skill never installs tooling. Roll back by deleting the output directory created by this run. |
+| Authority | Reversible local: writes only to the user-specified output directory; rollback is deleting the output directory created by this run. No remote mutation. No credential use, no changes outside the named output tree, and the skill never installs tooling. |
 | Side effect | Per-language subdirectories, each containing one translated rule file and one annotated test file. The source rule is never modified. |
 | Done | Every requested language has an explicit applicability verdict, and every applicable port passes its graded vulnerable/safe/edge matrix under the analyzer version pinned at the start of the run. |
 

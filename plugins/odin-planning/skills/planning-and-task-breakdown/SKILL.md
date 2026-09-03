@@ -10,7 +10,7 @@ description: 'Use when multi-step work must be broken into dependency-ordered ta
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to break down a high-level goal into actionable, dependency-ordered tasks before implementation. |
-| Authority | Read-only regarding the filesystem; the plan is returned in chat, not written to files. No file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. The plan is returned in chat, not written to files. |
 | Side effect | Plan or task list returned in chat; no repo mutation. |
 | Done | Every task carries a checkable acceptance criterion and dependency order, the plan fits its complexity budget, and the user explicitly approves or requests revision. |
 

@@ -10,7 +10,7 @@ description: 'Use when a developer returns to a project or loses context. Produc
 | Field | Bound contract |
 |---|---|
 | Trigger | Context switch or a request to rebuild the mental model of a project |
-| Authority | Reversible local write: write the 8-section recap page to the diagrams directory; open it. Roll back by deleting the file. |
+| Authority | Reversible local: writes only the 8-section recap page to the diagrams directory; rollback is undo. No remote mutation. |
 | Side effect | Writes the 8-section recap page to the diagrams directory; opens it |
 | Done | A returning developer can rebuild the mental model; next steps derive only from evidence |
 

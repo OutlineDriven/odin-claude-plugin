@@ -10,7 +10,7 @@ description: 'Use when agent strategies need a reproducible finite tournament un
 | Field | Bound contract |
 |---|---|
 | Trigger | Agent strategies need a reproducible finite tournament under a frozen evaluation protocol. |
-| Authority | Read-only evaluation: run the frozen protocol and record results; do not mutate source, remote state, or credentials. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | A reproducible tournament scorecard persisted as a run record. |
 | Done | The fixed matrix completes with saved move records, scores, and hidden-identity validation. |
 

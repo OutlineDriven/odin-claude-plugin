@@ -10,7 +10,7 @@ description: 'Use when a user supplies an existing .excalidraw file and asks for
 | Field | Bound contract |
 |---|---|
 | Trigger | User supplies an existing .excalidraw file and asks for PNG rendering, preview, verification, or export. |
-| Authority | Reversible local write of a single PNG. Network access to fetch the Excalidraw rendering library from esm.sh. Source JSON remains read-only. Rollback is deleting the PNG. |
+| Authority | Reversible local: writes only a single PNG; rollback is deleting the PNG. No remote mutation. Network access limited to fetching the Excalidraw rendering library from esm.sh; source JSON remains read-only. |
 | Side effect | Writes one PNG to the local filesystem. Source JSON is never modified. |
 | Done | The PNG file exists on disk and represents the source diagram at the requested scale. |
 

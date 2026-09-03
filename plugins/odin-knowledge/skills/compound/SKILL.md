@@ -10,7 +10,7 @@ description: 'Use when the user explicitly asks to save, curate, or consolidate 
 | Field | Bound contract |
 |---|---|
 | Trigger | User explicitly asks to save, curate, or consolidate what was learned, or closes a meaningful knowledge-work session. |
-| Authority | Reversible local write: may append or update docs/knowledge/{slug}.md records; never silently delete stale entries. |
+| Authority | Reversible local: writes only docs/knowledge/{slug}.md records; rollback is version control. No remote mutation. Never silently deletes stale entries. |
 | Side effect | Writes typed docs/knowledge/{slug}.md records and may update, but never silently delete, stale entries. |
 | Done | At most three specific typed learnings or an honest none are proposed; duplicates and contradictions are checked; the user approves; saved records carry type, retrieval tags, confidence, date, source, Context, and Implication; confirmation names retrieval tags. |
 

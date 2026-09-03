@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | Create or refresh a personal mode skill. |
-| Authority | Human-only. Require explicit human invocation; preview the target file, skill content, and PR consequence before any write, push, or remote publish. |
+| Authority | Remote: pushes a branch and opens a reviewable PR; requires explicit human invocation. Previews the target file, skill content, and PR consequence before any write. |
 | Side effect | Creates or edits one personal mode skill file in a local working copy on a new branch, commits it, pushes the branch, and opens a reviewable PR. No files beyond that skill file and no remote state beyond that branch and PR are touched; no credentials are read or written. |
 | Done | Evidence-backed personal mode skill in a reviewable PR. |
 

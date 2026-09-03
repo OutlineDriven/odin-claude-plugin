@@ -10,7 +10,7 @@ description: 'Use when the user says "clarify", "what is ambiguous here", or whe
 | Field | Bound contract |
 |---|---|
 | Trigger | 'Clarify', 'what is ambiguous', 'find gaps in this spec', or an underspecified request. |
-| Authority | Read-only analysis: no file, VCS, credential, paid, published, deployed, or remote mutation. Everything the skill produces is chat text. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Everything the skill produces is chat text. |
 | Side effect | Chat output only: findings, recommended defaults, and questions. |
 | Done | No open manual ambiguity remains, each is answered or discharged as a non-issue with a one-line reason, the finding set is MECE, and the restatement matched the target or its mismatch was surfaced as the first finding. |
 

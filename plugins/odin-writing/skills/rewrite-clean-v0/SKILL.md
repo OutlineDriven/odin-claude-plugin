@@ -10,7 +10,7 @@ description: 'Use when a document or file has been edited piecemeal and reads as
 | Field | Bound contract |
 |---|---|
 | Trigger | artifact edited piecemeal and reads as sediment / rewrite properly / start it over / re0 this |
-| Authority | write only named local artifacts; version-control is the rollback path |
+| Authority | Reversible local: writes only named local artifacts; version-control is the rollback path |
 | Side effect | rewrites the target artifact in place; version-control recoverable, no file removal |
 | Done | artifact reads as a clean v0 to fresh eyes, with removed/kept reported |
 

@@ -10,7 +10,7 @@ description: 'Use when asked to improve SEO, optimize for search, fix meta tags,
 | Field | Bound contract |
 |---|---|
 | Trigger | Improve SEO, optimize for search, fix meta tags, add structured data, or improve AEO visibility. |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | None: audit report only; no files are written, no services are modified. |
 | Done | Report lists critical/high/medium issues, includes validated JSON-LD recommendations, and provides re-verification steps using Lighthouse, PageSpeed, and Search Console. |
 

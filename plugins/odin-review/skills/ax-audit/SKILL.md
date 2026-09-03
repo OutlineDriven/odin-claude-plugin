@@ -10,7 +10,7 @@ description: 'Use when asked to audit an agent or AI feature for agentic-experie
 | Field | Bound contract |
 |---|---|
 | Trigger | Human asks for an agentic experience audit, an AX review, whether something is agent-native, a critique of an AI feature, or whether it earns user trust |
-| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Chat output only: a read-only severity-tiered report with a ship-readiness verdict and an AX Relationship Summary |
 | Done | Delivered findings with locators (file:line for source, logical bounds for described behavior), an AX Relationship Summary, and a PASS/FAIL/INCOMPLETE verdict |
 

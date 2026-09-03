@@ -10,7 +10,7 @@ description: 'Use when asked to design a module interface, seam, or testable bou
 | Field | Bound contract |
 |---|---|
 | Trigger | Design a module interface, seam, or testable boundary. |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. Design guidance only. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Design guidance only. |
 | Side effect | None. No artifacts are written; output is a design comparison and recommendation in chat. |
 | Done | The design uses explicit deep-module vocabulary and deliberately placed seams. |
 

@@ -10,7 +10,7 @@ description: 'Use when any bounded workflow starts or reaches an action, path, p
 | Field | Bound contract |
 |---|---|
 | Trigger | Any bounded workflow starts, or reaches an action, path, proposal, or merge boundary |
-| Authority | Read-only; no file, VCS, credential, paid, published, deployed, or remote mutation. Permits, narrows, or refuses the pending action in chat output and records the refusal reason; never proceeds on an unread constraint set |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Permits, narrows, or refuses the pending action in chat output and records the refusal reason; never proceeds on an unread constraint set. |
 | Side effect | Chat output only; permits, narrows, or refuses the pending action and records the refusal reason. Never mutates files, state, or remote targets |
 | Done | Constraints were loaded before the first action and re-evaluated at every boundary; an unreadable constraint set produced refusal, not default-allow |
 

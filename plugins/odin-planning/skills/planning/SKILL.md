@@ -10,7 +10,7 @@ description: 'Use when a plan must be stress-tested, iteratively improved, and s
 | Field | Bound contract |
 |---|---|
 | Trigger | The user says stress-test this plan, get this plan to 5/5, review and score my plan, or asks to iteratively improve a plan against a quality bar. |
-| Authority | Reversible-local: write only the named plan file and review report. Rollback by discarding uncommitted files. |
+| Authority | Reversible local: writes only the named plan file and review report; rollback is discarding uncommitted files. No remote mutation. |
 | Side effect | Writes a plan file and a review report. May ask clarifying questions before the first draft. |
 | Done | The plan scores 5/5 on all six dimensions (completeness, feasibility, scope, testability, risk, assumptions) with checkable claims, or a named blocker is recorded that the plan cannot resolve. |
 

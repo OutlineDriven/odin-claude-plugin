@@ -10,7 +10,7 @@ description: 'Use when the user explicitly requests a slide deck by command, fla
 | Field | Bound contract |
 |---|---|
 | Trigger | Explicit slide-deck request via command, flag, or natural language; never auto-selected |
-| Authority | Reversible local: write only the named HTML file to the diagrams directory; delete the file to roll back |
+| Authority | Reversible local: writes only the named HTML file to the diagrams directory; rollback is deleting the file. No remote mutation. |
 | Side effect | Writes one self-contained HTML slide deck to the diagrams directory |
 | Done | Every source item mapped to a slide; the deck fits within a 16:9 short-landscape viewport without horizontal scroll under prefers-reduced-motion; no external resource dependencies at runtime |
 

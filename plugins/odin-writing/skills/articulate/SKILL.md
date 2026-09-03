@@ -10,7 +10,7 @@ description: 'Use when the user knows what they mean but cannot express it compl
 | Field | Bound contract |
 |---|---|
 | Trigger | The user has an intended thought but cannot yet express it completely or clearly. |
-| Authority | Read-only. Use only supplied material and confirmed conversation context. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Uses only supplied material and confirmed conversation context. |
 | Side effect | Chat output by default. Replace a supplied draft only when the user explicitly asks for an edit. |
 | Done | The statement is audience-ready, every sentence is supported, the user's scope and identity are unchanged, and unresolved forks remain visible. |
 

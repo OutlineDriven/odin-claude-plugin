@@ -12,7 +12,7 @@ Classic agent TDD rots in a known way: the red test is written as a polite speci
 | Field | Bound contract |
 |---|---|
 | Trigger | Develop a fix or feature test-first, plan a multi-step TDD build from a spec, or work behaviour red-to-green in slices. |
-| Authority | Reversible-local: write only named test and source files; rollback via VCS revert of the implementation commit. Tests and implementation never change in the same repair step. |
+| Authority | Reversible local: writes only named test and source files; rollback is VCS revert of the implementation commit. No remote mutation. Tests and implementation never change in the same repair step. |
 | Side effect | Adds an attack suite and the minimal implementation that survives it, one vertical slice at a time; multi-step work also writes a plan document. |
 | Done | Per slice: every contract clause has an attack that failed red for the right reason and passes green unweakened, plus one mutation probe the suite caught. Named evidence: test paths, failing output, passing output, probe output. |
 

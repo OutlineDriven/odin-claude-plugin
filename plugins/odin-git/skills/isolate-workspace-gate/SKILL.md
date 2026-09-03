@@ -10,7 +10,7 @@ description: 'Use when asked to start feature work that needs isolation, or befo
 | Field | Bound contract |
 |---|---|
 | Trigger | Starting feature work that needs isolation, or before executing an implementation plan. |
-| Authority | Reversible-local: may create a git worktree, add and commit a gitignore entry, symlink hooks, and run setup. Roll back via `git worktree remove` or revert the gitignore commit. |
+| Authority | Reversible local: writes only a git worktree, a gitignore entry commit, symlinked hooks, and setup output; rollback is `git worktree remove` or reverting the gitignore commit. No remote mutation. |
 | Side effect | May create a git worktree with the native harness tool preferred, add and commit a gitignore entry if the target directory is not already ignored, symlink the parent hooks directory, and run project setup. |
 | Done | An isolated workspace path plus branch is reported, or in-place work is reported; setup has run; and the baseline test suite is green, or failures are surfaced with a proceed-or-investigate question. |
 

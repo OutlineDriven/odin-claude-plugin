@@ -10,7 +10,7 @@ description: 'Use when the user asks to visualise data as a chart. Returns a sel
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to chart, plot, graph, or visualise numeric or series data. |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Chat output only: a visualizer fence containing an HTML fragment with an inline SVG or Canvas chart. |
 | Done | A valid chart is present in the visualizer fence. |
 

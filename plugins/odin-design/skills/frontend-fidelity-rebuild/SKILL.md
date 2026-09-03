@@ -10,7 +10,7 @@ description: 'Use when an authorized reference surface needs a clean-room fronte
 | Field | Bound contract |
 |---|---|
 | Trigger | An authorized reference surface needs a clean-room frontend reconstruction across static, motion, and responsive fidelity. |
-| Authority | IP authorization start approval required. One harness ask/question call before the run starts; prose consent, invocation consent, prior-run consent, and post-start discovery do not approve an effect. |
+| Authority | Human-gated: asks for IP authorization approval via one harness ask/question call before the run starts; otherwise reversible local: writes only named local reconstruction artifacts; rollback is version control. No remote mutation. Prose consent, invocation consent, prior-run consent, and post-start discovery do not approve an effect. |
 | Side effect | Authorized frontend reconstruction across static, motion, and responsive fidelity. |
 | Done | The clean-room reconstruction passes all three fidelity gates with comparison evidence. |
 | Stop | Authorization absent; capture blocked; stagnation. Bound: approved reference, viewports, timelines, tolerances, round cap. |

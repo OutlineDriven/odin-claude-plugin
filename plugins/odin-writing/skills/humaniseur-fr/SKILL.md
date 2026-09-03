@@ -12,7 +12,7 @@ Naturalize French text that reads as AI-generated.
 | Field | Bound contract |
 |---|---|
 | Trigger | User supplies French text and asks to naturalize, dérobotiser, rendre naturel, or similar |
-| Authority | Read-only; no file, VCS, credential, paid, published, or remote mutation |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Returns rewritten French text in the same turn; no durable writes |
 | Done | Text is in the preserved register with no three AI signals co-occurring |
 

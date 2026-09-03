@@ -10,7 +10,7 @@ description: 'Use when a user wants to define patterns the agent should not do; 
 | Field | Bound contract |
 |---|---|
 | Trigger | Human requests that specific agent behavior patterns be documented as prohibited in a structured project document or agent-rule file rather than in AGENTS.md. |
-| Authority | reversible-local: write only the named local artifact; rollback by deleting the written file only if it did not exist before and the human has not confirmed it. No remote, credential, paid, or irreversible mutations. |
+| Authority | Reversible local: writes only the named local artifact; rollback is deleting the written file if it did not exist before and the human has not confirmed it. No remote mutation. |
 | Side effect | Local file write: creates or updates one structured project document or agent-rule file that enumerates prohibited agent behavior patterns. |
 | Done | A structured artifact exists at the agreed target path and contains at least one prohibited-habit entry with a non-empty name and description, verified by the human. |
 

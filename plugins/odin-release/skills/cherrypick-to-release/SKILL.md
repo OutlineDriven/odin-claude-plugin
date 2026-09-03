@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to cherry-pick, backport, or apply a hotfix to a release branch, providing a PR number, commit SHA, or issue reference. |
-| Authority | Human-only. Require explicit human invocation. Preview the target release channel(s), the commit(s) to apply, and the PR/assignment consequence before creating branches, pushing, or opening PRs. |
+| Authority | Remote: creates cherrypick branches, pushes them, opens one PR per channel, and assigns the on-call reviewer; requires explicit human invocation. Preview the target release channel(s), the commit(s) to apply, and the PR/assignment consequence before creating branches, pushing, or opening PRs. |
 | Side effect | Creates one cherrypick branch per release channel, cherry-picks and pushes the commit(s), opens one PR per channel, and assigns the on-call reviewer. No force-push, no deletion, no merge. |
 | Done | A correctly titled PR with the on-call reviewer assigned exists for every requested release channel; conflicts stop for user resolution. |
 

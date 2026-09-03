@@ -10,7 +10,7 @@ description: 'Use when a user asks to visualize a process, approval flow, runboo
 | Field | Bound contract |
 |---|---|
 | Trigger | The user asks to visualize a process, approval flow, runbook, CI/CD path, responsibility lanes, tool calls, or another ordered workflow. |
-| Authority | Reversible local writes only: a typed workflow JSON specification, one self-contained interactive HTML artifact, and optionally bounded visual-check screenshots, a contact sheet, and a JSON evidence receipt. Roll back by deleting the written files; no VCS, credential, paid, published, deployed, or remote mutation occurs. |
+| Authority | Reversible local: writes only a typed workflow JSON specification, one self-contained interactive HTML artifact, and optionally bounded visual-check screenshots, a contact sheet, and a JSON evidence receipt; rollback is deleting the written files. No remote mutation. |
 | Side effect | Writes only the named local artifacts above. No network access is required at render time. |
 | Done | The workflow validates fail-closed, preserves one obvious main path and truthful relationship labels, passes all nine showcase artifact checks with no warnings or composition failures, and is delivered with hash-bound receipts and truthful visual-review status. |
 

@@ -10,7 +10,7 @@ description: 'Use when a confirmed root cause must be searched across a codebase
 | Field | Bound contract |
 |---|---|
 | Trigger | A specific vulnerability, logic bug, or bad pattern has already been confirmed and the user asks where else the same root cause occurs or asks to generalize it into a search rule. |
-| Authority | `reversible-local`: write only named local artifacts, the variant report and any CI-ready regression rule, to the working directory. Delete or edit by hand to reverse. |
+| Authority | Reversible local: writes only named local artifacts (the variant report and any CI-ready regression rule) to the working directory; rollback is deleting or editing those artifacts by hand. No remote mutation. |
 | Side effect | Searches the full codebase, may execute ripgrep, Semgrep, or CodeQL, and may write a variant report and CI-ready regression rule. No other repository file is modified. |
 | Done | The exact pattern hits the known bug, abstraction changes are calibrated one at a time, and every candidate is triaged. Confirmed variants and false positives are reported with evidence, and a reproducible final pattern and regression guard are supplied. |
 

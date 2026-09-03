@@ -10,7 +10,7 @@ description: 'Use when the user invokes /ios-visual-review to audit an iOS app''
 | Field | Bound contract |
 |---|---|
 | Trigger | The user runs `/ios-visual-review`. |
-| Authority | Reversible-local: write only the named review-report artifact; delete or overwrite it to roll back. |
+| Authority | Reversible local: writes only the named review-report artifact; rollback is undo. No remote mutation. |
 | Side effect | Local-write to iOS screen visual-review findings (one Markdown report file). |
 | Done | An iOS visual-review report is produced. |
 

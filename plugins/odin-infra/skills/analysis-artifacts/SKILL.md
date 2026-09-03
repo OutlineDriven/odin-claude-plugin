@@ -10,7 +10,7 @@ description: 'Use when the user requests a deep dive, exploratory analysis, or d
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks for a deep dive, exploratory analysis, or data analysis on BigQuery data |
-| Authority | Reversible local writes to a dated analyses tree; warehouse reads proceed only after the user approves the analysis plan |
+| Authority | Human-gated: presents the analysis plan and waits for explicit user approval before any warehouse read; otherwise reversible local: writes only a dated analyses tree; rollback is version control. No remote mutation. |
 | Side effect | Creates a dated analyses/<date>-<name>/ directory containing README.md, assets/queries/*.sql, and assets/visualizations/*.{png,svg,html}; overwrites stale artifacts in the same directory consistently |
 | Done | README contains the approved plan, explicit cohort definitions, links to every SQL and visualization file, a TLDR, and key takeaways; source_paths are documented |
 

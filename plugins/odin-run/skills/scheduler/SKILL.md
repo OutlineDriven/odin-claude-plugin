@@ -10,7 +10,7 @@ description: 'Use when asked to set, list, pause, update, or delete a personal r
 | Field | Bound contract |
 |---|---|
 | Trigger | The user asks to set a personal reminder or run a lightweight local task at a specific time or interval, or to list, pause, update, or delete an existing scheduled item. |
-| Authority | Reversible-local, user-level scheduling only. A scheduled action that is itself destructive or irreversible is refused outright, not installed after confirmation. No admin elevation, no credentials, no remote mutation. Every mutation has a stated rollback path: remove the entry and its metadata record. |
+| Authority | Reversible local: user-level scheduling only. A scheduled action that is itself destructive or irreversible is refused outright, not installed after confirmation. No admin elevation, no credentials, no remote mutation. Every mutation has a stated rollback path: remove the entry and its metadata record. |
 | Side effect | Creates, pauses, unpauses, deletes, or updates one named local scheduled item per confirmed request. Never modifies unrelated system schedules. |
 | Done | Every item exists in both the backend and the metadata record, and the user received a confirmation with name, action, human-readable time, and delivery method. |
 

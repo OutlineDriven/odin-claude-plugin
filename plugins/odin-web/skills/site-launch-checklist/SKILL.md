@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User says a site or app is ready to ship, or asks for checks before go-live. |
-| Authority | Read-and-report by default: run curl, dig, and Lighthouse, record pass/fail. Live mutations (DNS, headers, analytics, backups) happen only after an explicit per-phase yes from the user, and are recorded as performed-by-user or performed-with-consent, never silently. |
+| Authority | Human-gated: asks before live DNS, header, analytics, or backup configuration changes; otherwise read-only. No file, VCS, credential, paid, published, deployed, or remote mutation without explicit per-phase consent. Live mutations are recorded as performed-by-user or performed-with-consent, never silently. |
 | Side effect | Runs read-only diagnostic commands. On explicit user consent per phase, may guide or perform live DNS, header, analytics, or backup configuration changes. |
 | Done | Every phase is pass, fail, skipped, or indeterminate. Three ordered fix queues exist (blockers, recommended, optional). No failed check is reported as passed and no skipped phase as complete. |
 

@@ -10,7 +10,7 @@ description: 'Use when changes touch auth, input parsing, dependencies, network 
 | Field | Bound contract |
 |---|---|
 | Trigger | Changes touch auth, input parsing, dependencies, network I/O, or pre-release of public-facing service. |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Produces a security-audit report with findings; no code edits; secret scanning reads and never mutates credentials. |
 | Done | Audit report with STRIDE findings, OWASP walkthrough, severity contract (critical/high block merge). |
 

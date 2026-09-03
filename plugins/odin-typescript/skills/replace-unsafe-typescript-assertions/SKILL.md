@@ -10,7 +10,7 @@ description: 'Use when TypeScript tests use unsafe any or as assertions for part
 | Field | Bound contract |
 |---|---|
 | Trigger | TypeScript tests use unsafe assertions (`value as Type`, `value as unknown as Type`) for partial or intentionally invalid fixtures. |
-| Authority | Reversible local edits to the named test files and their import lines. Does not modify production files, package manifests, or lockfiles. |
+| Authority | Reversible local: writes only the named test files and their import lines; rollback is version control. Does not modify production files, package manifests, or lockfiles. No remote mutation. |
 | Side effect | Eligible assertions are replaced and required imports are added. |
 | Done | Every eligible assertion uses the intent-matching coercion function and the project typecheck and test suite both pass. |
 

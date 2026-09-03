@@ -10,7 +10,7 @@ description: 'Use when a user asks for a tech spec or architecture doc. Produces
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks for a tech spec or architecture doc. |
-| Authority | Reversible-local: write only TECH.md in the working directory; rollback by deleting the file. |
+| Authority | Reversible local: writes only TECH.md in the working directory; rollback is deleting the file. No remote mutation. |
 | Side effect | Writes TECH.md. |
 | Done | Spec translates intent into an executable implementation plan. |
 

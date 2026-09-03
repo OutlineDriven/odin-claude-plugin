@@ -10,7 +10,7 @@ description: 'Use when the user wants to compile taste and "this feels wrong" si
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants to compile taste and "this feels wrong" into tokens, rules, forbidden combinations, and examples |
-| Authority | reversible-local: write only the named local artifact; state the rollback path |
+| Authority | Reversible local: writes only the named local artifact; rollback is version control or undo. No remote mutation. |
 | Side effect | One structured rule/pattern document written to the project shared docs or agent-rule folder |
 | Done | At least one classified entry exists across any section (Forbidden, Tokens, Examples, or Rules) and the user has validated the artifact |
 

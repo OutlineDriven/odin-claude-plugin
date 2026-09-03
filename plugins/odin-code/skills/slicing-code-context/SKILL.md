@@ -16,7 +16,7 @@ description: 'Use when an exact symbol, path, entrypoint, or line range can boun
 | Field | Bound contract |
 |---|---|
 | Trigger | A focused code question or patch proposal can be delegated using an exact symbol, path, entrypoint, or line-range anchor under a fixed source budget. |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | A deterministic slice packet and one constrained worker response, with at most one coordinator-built replacement packet. |
 | Done | Packet budget and boundaries validate, every worker claim and proposed edit cites included ranges, uncertain edges remain hypotheses, and consequential conclusions are independently checked by the coordinator. |
 

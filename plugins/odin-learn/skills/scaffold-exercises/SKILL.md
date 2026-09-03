@@ -10,7 +10,7 @@ description: 'Use when a course needs numbered problem, solution, and explainer 
 | Field | Bound contract |
 |---|---|
 | Trigger | A course needs numbered problem, solution, and explainer scaffolds. |
-| Authority | Write only to tracked section and exercise files/directories in the working directory. Revert with standard VCS. |
+| Authority | Reversible local: writes only tracked section and exercise files/directories in the working directory; rollback is version control. No remote mutation. |
 | Side effect | Creates or updates numbered section and exercise files and directories. |
 | Done | A JSON object naming scaffolded paths and linter status, with no unvalidated scaffold left on disk. |
 

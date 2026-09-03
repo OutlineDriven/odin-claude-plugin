@@ -10,7 +10,7 @@ description: 'Use when recent resolved feedback may reveal a broader recurring d
 | Field | Bound contract |
 |---|---|
 | Trigger | Recent resolved feedback may reveal a broader recurring defect pattern. |
-| Authority | Reversible local: write only named local artifacts; state and follow the rollback path before mutating. |
+| Authority | Reversible local: writes only named local artifacts; rollback is version control or undo. No remote mutation. State and follow the rollback path before mutating. |
 | Side effect | Root-cause pattern sweep over recent resolved feedback; local writes limited to the declared bound. |
 | Done | All root-cause clusters checked, every confirmed recurrence addressed, and a fresh search finds no generalized recurrence. |
 | Stop | Stalled; blocked; exhausted; capped. Bound: declared feedback window and project surface. |

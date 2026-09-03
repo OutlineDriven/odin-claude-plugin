@@ -10,7 +10,7 @@ description: 'Use when asked to verify frontend functionality, debug UI behavior
 | Field | Bound contract |
 |---|---|
 | Trigger | Verify frontend functionality, debug UI behavior, capture browser screenshots, or inspect browser logs |
-| Authority | Write only to named local artifacts: Playwright scripts, screenshots, console logs, and verification results. Rollback any persistent state the skill introduced. |
+| Authority | Reversible local: writes only named local artifacts (Playwright scripts, screenshots, console logs, and verification results); rollback is undo. No remote mutation. |
 | Side effect | Local file writes of test scripts, screenshots, console logs, and structured results. No remote or credential mutation. |
 | Done | The generated Playwright script exits zero; screenshots and console logs are captured evidence, never an alternative pass oracle. |
 

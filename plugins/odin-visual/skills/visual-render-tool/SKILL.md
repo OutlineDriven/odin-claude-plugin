@@ -10,7 +10,7 @@ description: 'Use when a model-invoked tool renders visual explanations of plans
 | Field | Bound contract |
 |---|---|
 | Trigger | Model-invoked tool call after a plan, architecture, diff, or implementation would benefit from visual explanation; ask first unless the user requested visual output. Also triggers on the literal `--quick` flag passed on diagram, diff-review, plan-review, or project-recap outcomes to render a validated spec to HTML. |
-| Authority | Reversible local: write only named local HTML artifacts; delete the file to roll back. |
+| Authority | Reversible local: writes only named local HTML artifacts; rollback is deleting the file. No remote mutation. |
 | Side effect | Writes rendered HTML into the output jail; optionally opens browser or Glimpse viewer. |
 | Done | File written under the jail and open status reported; complete-document assertion and normalization applied. For quick-spec renders, the validated HTML exists on disk or a loud validation failure is reported. |
 

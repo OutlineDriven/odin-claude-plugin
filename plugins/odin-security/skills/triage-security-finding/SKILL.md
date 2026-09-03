@@ -12,7 +12,7 @@ One finding, one verdict. This skill takes a single anchored finding and produce
 | Field | Bound contract |
 |---|---|
 | Trigger | Exactly one concrete finding, SARIF result, reviewer annotation, suspicious function, or report excerpt has a bindable source anchor and needs prioritization before PoC work. |
-| Authority | Reversible local writes only; state the rollback path before writing. |
+| Authority | Reversible local: writes only a single-candidate evidence packet file and optional graph annotations on the target; rollback is deleting those artifacts. No remote mutation. |
 | Side effect | A single-candidate evidence packet file and optional graph annotations on the target. |
 | Done | One Promote, Needs manual review, Deprioritize, or Blocked verdict is emitted with binding, reachability, boundaries, blast radius, manual review targets, and limitations. |
 

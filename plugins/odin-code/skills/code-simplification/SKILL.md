@@ -12,7 +12,7 @@ Two modes share one authority: reversible local edits to a named target, no new 
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to simplify, clean, refactor, or improve the readability of code, or review flags bloat beyond the current diff. |
-| Authority | Reversible local edits to the named target only. May refactor, extract, inline, and collapse conditionals; may not add new public surface or edit files outside the target. |
+| Authority | Reversible local: writes only the named target (may refactor, extract, inline, and collapse conditionals; may not add new public surface or edit files outside the target); rollback is version control or undo. No remote mutation. |
 | Side effect | Refactoring edits to the named target only; no new public surface. |
 | Done | Mode-specific done predicate holds (see each mode); behavior is preserved by tests (measured) or by recorded-contract reasoning (clarity). |
 

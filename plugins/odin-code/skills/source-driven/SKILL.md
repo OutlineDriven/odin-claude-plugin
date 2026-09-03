@@ -10,7 +10,7 @@ description: 'Use when writing or verifying framework-specific code, boilerplate
 | Field | Bound contract |
 |---|---|
 | Trigger | The current task is writing or verifying framework-specific code, boilerplate, or a documented, correct implementation. |
-| Authority | Reversible-local: writes framework-specific code plus full-URL citations; rollback to last VCS commit on failure. |
+| Authority | Reversible local: writes only framework-specific code plus full-URL citations; rollback is version control (revert to last commit on failure). No remote mutation. |
 | Side effect | Local writes with explicit UNVERIFIED flags for unverifiable patterns. |
 | Done | Every framework-specific decision is backed by a cited official source and unverified patterns are explicitly flagged. |
 

@@ -10,7 +10,7 @@ description: 'Use when asked to explain or teach a subsystem, module, pattern, o
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to teach or explain a subsystem, module, pattern, or change. |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Chat output only; inline diagrams on request. |
 | Done | Four layers delivered in sequence (purpose, structure, behavior, code), each grounded in concrete file paths, line ranges, or symbols from the resolved target; the explanation progresses purpose → structure → behavior → code without skipping a layer; deeper layers offered after each. |
 

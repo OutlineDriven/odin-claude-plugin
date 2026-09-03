@@ -10,7 +10,7 @@ description: 'Use when asked to create a presentation, pitch deck, or web deck f
 | Field | Bound contract |
 |---|---|
 | Trigger | Create a complete presentation including narrative, slides, and speaker notes from a topic and audience. |
-| Authority | Reversible local write for the generated deck and supporting files. |
+| Authority | Reversible local: writes only the generated deck and supporting files; rollback is deleting those files. No remote mutation. |
 | Side effect | Local write: produces a deck as markdown or web-deck HTML, plus supporting files in the working directory. |
 | Done | A completed presentation file at a deterministic path in the requested format, passing editorial QA with no blocking issues. |
 

@@ -10,7 +10,7 @@ description: 'Use when reviewing a prose plan, spec, PRD, requirements doc, desi
 | Field | Bound contract |
 |---|---|
 | Trigger | The user asks to review or critique a prose planning document (plan, spec, PRD, requirements, design doc, brainstorm) or invokes `/doc-review [path]`. |
-| Authority | Reversible-local. The orchestrator may write at most one review-record file `docs/reviews/<doc-slug>-review.md`, and only when `--record` is requested. Dispatched reviewer subagents are read-only (no Write, no Edit, no files). The reviewed document is never edited, written, or committed. |
+| Authority | Reversible local: writes at most one review-record file `docs/reviews/<doc-slug>-review.md`, and only when `--record` is requested; rollback is deleting that file. No remote mutation. Dispatched reviewer subagents are read-only; the reviewed document is never edited, written, or committed. |
 | Side effect | At most one local review-record file, only on `--record`; read-only subagent dispatch. No mutation of the reviewed document or any other tree path. Rollback: delete the single record file; nothing else was touched. |
 | Done | Findings routed to safe-auto / gated-auto / manual / FYI tiers with verbatim evidence, zero writes to the reviewed document, and the terminal signal `Review complete`. |
 

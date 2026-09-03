@@ -10,7 +10,7 @@ description: 'Use when asked to save a named source as a .md file with frontmatt
 | Field | Bound contract |
 |---|---|
 | Trigger | User says save this, save this article, convert this, keep this source, or get the markdown for a named URL, file, or pasted text. |
-| Authority | Reversible-local: write only the named .md file. Rollback is deleting the file. |
+| Authority | Reversible local: write only the named .md file. Rollback is deleting the file. |
 | Side effect | Writes one .md file to the working directory from a named source; no other artifact mutated. |
 | Done | A .md file exists with YAML frontmatter and the source body preserved, not summarized. |
 

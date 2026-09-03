@@ -10,7 +10,7 @@ description: 'Use when the user asks "why does X work this way", requests design
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks why something works this way or why an option was picked, or requests design rationale, a postmortem, or a data-backed threshold. |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. Parallel investigator subagents and a synthesizer run read-only. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Parallel investigator subagents and a synthesizer run read-only. |
 | Side effect | Parallel investigator subagents and a synthesizer run read-only; the only output is the cited narrative in chat. |
 | Done | Return a confidence-weighted cited narrative with direct findings, inferences, hypotheses, gaps, and sources. |
 | Invocation | Model or human. Requests concerned only with current runtime behavior, rather than motivation or rationale, are outside this trigger. |

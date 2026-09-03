@@ -10,7 +10,7 @@ description: 'Use when asked to configure pstack role-to-model choices so every 
 | Field | Bound contract |
 |---|---|
 | Trigger | Configure pstack role-to-model choices. |
-| Authority | Write only to the named local pstack rule file; rollback path is removal or revert. |
+| Authority | Reversible local: writes only the named local pstack rule file; rollback is removal or revert. No remote mutation. |
 | Side effect | Writes one user-level pstack model rule file. |
 | Done | Every pstack role maps to a model in the available-models set. |
 

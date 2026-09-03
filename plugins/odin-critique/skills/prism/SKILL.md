@@ -10,7 +10,7 @@ description: 'Use when one reviewer angle is insufficient or the user asks to pr
 | Field | Bound contract |
 |---|---|
 | Trigger | One reviewer angle is insufficient, the user asks to "prism this" or "review this from different angles," or one read may be an artifact of how the question was framed. |
-| Authority | Read only the supplied artifact and relevant supplied context; do not mutate files, version control, credentials, paid services, publications, deployments, or remote state. Spawns fresh zero-context reads only. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Spawns fresh zero-context reads only. |
 | Side effect | Produce a divergence-first report in chat only; create or change no files. |
 | Done | The reader can see which perspectives diverged or converged, divergences sharing a root are collapsed to that root, convergence is labeled reassurance rather than proof, and the single decisive resolving question is stated. |
 

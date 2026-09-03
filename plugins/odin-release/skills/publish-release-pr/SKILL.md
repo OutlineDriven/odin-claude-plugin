@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | The user runs /publish-release-pr on a branch. |
-| Authority | Human-only. The model executes read-only verification steps directly. Every commit, tag, push, and PR creation is proposed and waits for explicit human confirmation before it runs. No remote or irreversible mutation happens without it. |
+| Authority | Remote: commits, tags, pushes the branch, and creates the PR; requires explicit human invocation. The model executes read-only verification steps directly; every commit, tag, push, and PR creation waits for explicit human confirmation before it runs. |
 | Side effect | Versioned commits, a tag, and a redaction-gated PR carrying a complete evidence body, published to the remote. |
 | Done | A versioned PR exists on the remote with its complete evidence body. |
 

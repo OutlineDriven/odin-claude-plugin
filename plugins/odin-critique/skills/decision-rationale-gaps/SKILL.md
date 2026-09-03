@@ -10,7 +10,7 @@ description: 'Use when a current decision needs pressure-testing until the ratio
 | Field | Bound contract |
 |---|---|
 | Trigger | Right after a decision was made, especially one laid out without argument |
-| Authority | Advisory, read-only: no file, VCS, credential, paid, published, deployed, or remote mutation |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | None (advisory); flags the decision for re-review on an unexplained gap |
 | Done | Every closed gap traces to the user's own explanation; open gaps named specifically and carried forward as flags; rationale never supplied by the skill |
 

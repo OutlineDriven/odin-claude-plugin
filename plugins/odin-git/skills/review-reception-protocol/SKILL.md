@@ -10,7 +10,7 @@ description: 'Use when asked to receive code review feedback: clarify every item
 | Field | Bound contract |
 |---|---|
 | Trigger | Receiving code review comment, suggestion, or objection, before acting on any of it |
-| Authority | reversible-local: write only local files (source files, test files, drafts); do not post GitHub replies, trigger CI, open issues, or otherwise mutate any remote system |
+| Authority | Reversible local: writes only local source files, test files, and drafts; rollback is version control or undo. No remote mutation. Do not post GitHub replies, trigger CI, or open issues. |
 | Side effect | Clarify every feedback item. Implement accepted items locally, one at a time, each with its own test. Draft factual technical pushback for questionable items. Stop before posting any GitHub reply or performing any remote mutation |
 | Done | Every feedback item is classified: clarified or implemented locally with its own test, or answered by a drafted pushback; no GitHub reply or remote mutation is posted |
 

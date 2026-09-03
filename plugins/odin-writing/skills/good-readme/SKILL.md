@@ -10,7 +10,7 @@ description: 'Use when the user asks to create, rewrite, review, or polish an op
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to create, rewrite, review, or polish an open-source README. |
-| Authority | Reversible local write to README.md only; recover by restoring the prior README.md from version control or the editor undo history. |
+| Authority | Reversible local: writes only README.md; rollback is version control or the editor undo history. No remote mutation. |
 | Side effect | Edits README.md into a progressively disclosed, evidence-grounded project introduction, example, and getting-started guide. |
 | Done | Claims are sourced, the opening explains benefit and difference, the 4–10-line example is self-explanatory, clean-machine setup works, and headings alone tell the story. |
 

@@ -10,7 +10,7 @@ description: 'Use when starting UI work, defining palettes or design tokens, or 
 | Field | Bound contract |
 |---|---|
 | Trigger | Starting UI work, defining palettes or design tokens, or correcting AI-generic, vibe-coded, or default-framework design. |
-| Authority | Reversible local: creates or revises local UI direction, token, and implementation artifacts appropriate to the chosen runtime. Roll back by reverting the touched files. |
+| Authority | Reversible local: writes only local UI direction, token, and implementation artifacts; rollback is version control. No remote mutation. Artifacts are appropriate to the chosen runtime. |
 | Side effect | Local write to UI direction, token, and implementation artifacts only. No VCS, credential, paid, published, deployed, or remote mutation. |
 | Done | One defensible direction is implemented consistently across palette, typography, spacing, density, and motion; runtime and cross-surface checks pass without AI-generic or compensatory overkill tells. |
 

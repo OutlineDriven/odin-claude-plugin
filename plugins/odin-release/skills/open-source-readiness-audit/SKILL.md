@@ -12,7 +12,7 @@ Determine if a repository is ready for public release via a read-only gap assess
 | Field | Bound contract |
 |---|---|
 | Trigger | The user asks whether a repository is ready for public release or wants a gap assessment without yet asking the agent to prepare or publish it. |
-| Authority | Read-only local file and VCS inspection; optional read-only remote API queries when a GitHub URL is supplied. No file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Optional read-only remote API queries when a GitHub URL is supplied. |
 | Side effect | Inspect local history, files, CI, documentation, licensing, and packaging; optionally query remote repository settings. Return a prioritized readiness report. |
 | Done | The report records secret-history risk, documentation completeness, license consistency, CI and packaging posture, and which remote or execution-dependent checks were explicitly skipped. |
 

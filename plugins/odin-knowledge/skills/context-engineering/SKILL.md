@@ -10,7 +10,7 @@ description: 'Use when a long session has accumulated stale or conflicting conte
 | Field | Bound contract |
 |---|---|
 | Trigger | Long session has accumulated stale or conflicting context, or the user asks to refresh or recheck context before continuing. |
-| Authority | Reversible local: may write an optional scratch state note only; no project file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Reversible local: writes only an optional scratch state note; rollback is undo. No remote mutation. |
 | Side effect | Optional scratch state note only; no project files touched. |
 | Done | Acting context is provably current and minimal; stale items are dropped with the user informed. |
 

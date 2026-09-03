@@ -10,7 +10,7 @@ description: 'Use when the user asks to rank deployment platforms and stacks aga
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to rank deployment platforms and stacks against the product with quantitative trade-offs. |
-| Authority | Read-only advisory research. No file, VCS, credential, paid, published, deployed, or remote mutation. No deployment action is taken. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Advisory research only; no deployment action is taken. |
 | Side effect | A ranked list of deployment platforms and stacks with quantitative trade-offs is written to chat output only. |
 | Done | A ranked deployment list with per-axis normalized scores, applied weights, and a summary trade-off statement is returned. |
 

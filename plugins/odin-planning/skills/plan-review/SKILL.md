@@ -10,7 +10,7 @@ description: 'Use when a plan path or text is supplied. Audits every item in the
 | Field | Bound contract |
 |---|---|
 | Trigger | A plan path or plan text supplied for audit against the current codebase. |
-| Authority | Reversible-local: write only the verdict page to the `diagrams/` directory; rollback is VCS restore of any unintended side-effect file. |
+| Authority | Reversible local: writes only the verdict page to the `diagrams/` directory; rollback is version control. No remote mutation. |
 | Side effect | Writes the verdict page to `diagrams/` and opens it. |
 | Done | Per-item accuracy verdict (correct, stale, risky, unsupported, missing) plus a final approve, revise, or reject decision with rationale. |
 

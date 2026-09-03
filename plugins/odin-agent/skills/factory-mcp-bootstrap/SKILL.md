@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | Someone outside Warp wants a third-party coding agent to reach a Warp Factory: "set up Factory MCP in Claude Code / Codex / Cursor", "add the factory MCP server", "connect my agent to Warp Factory" |
-| Authority | Human-only. Mints a 30-day API credential and writes a bearer-token MCP registration; both are credential and data-at-rest mutations requiring explicit human invocation |
+| Authority | Remote: mints a 30-day API credential via oz and writes a bearer-token MCP registration in the target harness; requires explicit human invocation. |
 | Side effect | Confirms the oz CLI, runs oz login, mints a 30-day API key exported as WARP_API_KEY, writes a harness-specific MCP registration carrying an Authorization: Bearer header, reloads the harness, and performs read-only protocol verification calls |
 | Done | The MCP endpoint `{server_root}/api/v1/mcp/factory` is registered with a valid bearer token; `tools/list` shows the ten Factory tools; `list_factories` returns any non-auth-error response (empty allowed); the endpoint serves its factory setup document through both `resources/list` and `resources/read` without an auth error; the user is told setup is done and the agent hands off and stops |
 

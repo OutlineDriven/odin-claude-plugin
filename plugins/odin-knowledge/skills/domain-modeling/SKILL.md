@@ -10,7 +10,7 @@ description: 'Use when pinning down domain terminology, maintaining the domain m
 | Field | Bound contract |
 |---|---|
 | Trigger | Pinning down domain terminology, maintaining the domain model, or a term conflict/sharpening need |
-| Authority | Reversible-local: write only the named glossary artifacts, `CONTEXT.md` at the repository root, `CONTEXT-MAP.md`, and per-context `CONTEXT.md` files beside their context source. Rollback is reverting the glossary edit or deleting a lazily created file. |
+| Authority | Reversible local: writes only the named glossary artifacts, `CONTEXT.md` at the repository root, `CONTEXT-MAP.md`, and per-context `CONTEXT.md` files beside their context source; rollback is version control or undo. No remote mutation. |
 | Side effect | Lazily creates or updates `CONTEXT.md` / `CONTEXT-MAP.md` glossaries and per-context `CONTEXT.md` files; no other file, VCS, credential, or remote change. |
 | Done | Each resolved term recorded in `CONTEXT.md` with rejected synonyms; glossary stays canonical and implementation-free. |
 

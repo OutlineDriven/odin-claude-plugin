@@ -12,7 +12,7 @@ Assess whether enough is known to proceed on a decision or action.
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks for a gut-check on a decision or action, or asks whether enough is known to proceed. |
-| Authority | Read-only observation of workspace context; no remote mutation or persistent side effects unless explicitly requested. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Normally none. If the user explicitly requests an output file, write only a named local artifact; otherwise produce no persistent state. |
 | Done | A prose-only assessment names concrete knowns and unknowns, classifies each gap as Executable or Blocked, and returns one terminal recommendation: Proceed, Proceed with caveat, Pause, or Blocked. |
 

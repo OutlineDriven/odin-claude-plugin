@@ -10,7 +10,7 @@ description: 'Use when property-based testing, theorem proving, or formal proof 
 | Field | Bound contract |
 |---|---|
 | Trigger | Use when explicitly asked to apply property-based testing, theorem proving, or formal proof tactics under a zero-unproven-property policy. |
-| Authority | Write only the named local property tests, proof artifacts, regression tests, and implementation remediation within the agreed target; all changes must be reversible by restoring those files from version control or their pre-run copies. |
+| Authority | Reversible local: writes only named local property tests, proof artifacts, regression tests, and implementation remediation within the agreed target; rollback is restoring those files from version control or their pre-run copies. No remote mutation. |
 | Side effect | Creates or updates the bounded local proof/test artifacts and only the implementation code required to remediate demonstrated failures; it does not mutate credentials, remote state, deployments, or unrelated files. |
 | Done | Every planned property passes, no property is skipped or pending, line coverage is at least 80%, every discovered counterexample has a permanent regression test, and every definition covered by the proof is total. |
 

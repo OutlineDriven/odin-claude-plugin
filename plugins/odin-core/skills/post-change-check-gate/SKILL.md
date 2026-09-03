@@ -10,7 +10,7 @@ description: 'Use when an artifact or skill has just changed and is about to be 
 | Field | Bound contract |
 |---|---|
 | Trigger | Right after creating or changing an artifact/skill, before calling it done, committing, or handing off |
-| Authority | Make reversible local changes only to the named artifact; rollback path: revert the artifact to its pre-check state |
+| Authority | Reversible local: writes only the named artifact; rollback is revert to pre-check state. No remote mutation. |
 | Side effect | Applies findings to the artifact, or defers each with a stated reason; never touches git |
 | Done | Relevant checks actually ran (not eyeballed); artifact changed or every skipped check has a stated reason |
 

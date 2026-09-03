@@ -10,7 +10,7 @@ description: 'Use when creating or hardening an npm release with Trusted or Stag
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants to create, publish, or harden an npm package release using Trusted or Staged Publishing. |
-| Authority | Reversible-local: writes only named workflow drafts, project config files, and the handoff document. No remote mutation, credential removal, tag creation, or publish. |
+| Authority | Reversible local: writes only named workflow drafts, project config files, and the handoff document; rollback is version control. No remote mutation, credential removal, tag creation, or publish. |
 | Side effect | Writes hardened `publish.yaml` and `check-workflows.yaml` drafts, configures cooldown and postinstall-disablement in project config files, and lists every manual setting change in a human handoff. |
 | Done | Both workflow drafts exist, cooldown and postinstall settings are written and read back, the handoff lists every human action with exact values, and no remote state changed. |
 

@@ -10,7 +10,7 @@ description: 'Use when the user runs /ios-device-qa to drive a real iPhone over 
 | Field | Bound contract |
 |---|---|
 | Trigger | the user runs /ios-device-qa on an iOS app |
-| Authority | reversible-local: wire a Debug-only SPM bridge into the app build, deploy to a USB-connected iPhone, capture screenshots and session logs; remove the wiring before a Release build |
+| Authority | Reversible local: writes only a Debug-only SPM bridge wired into the app build, deploys to a USB-connected iPhone, and captures screenshots and session logs; rollback is removing the bridge wiring before a Release build. No remote mutation. |
 | Side effect | debug-bridge wiring in the app build plus screenshots and session logs under ~/.gstack/ |
 | Done | a device QA report with verified interactions is produced |
 

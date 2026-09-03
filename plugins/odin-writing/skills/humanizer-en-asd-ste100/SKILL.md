@@ -10,7 +10,7 @@ description: 'Use when asked to rewrite technical English for STE compliance, st
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks for technical English rewrite, STE compliance, controlled-language rewrite, disambiguation, or de-slopping of a manual or document |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Returns the rewritten document to chat output; no durable writes |
 | Done | STE-compliant document with residuals flagged, in rewrite or write mode |
 

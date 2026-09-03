@@ -10,7 +10,7 @@ description: 'Use when reconciling an API endpoint''s generated OpenAPI schema a
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to document, type, or fix OpenAPI schema for an endpoint whose generated spec drifts from its runtime response. |
-| Authority | Reversible local writes to the endpoint class and API documentation files for that one path; all changes are VCS-tracked, revert to recover. |
+| Authority | Reversible local: writes only the endpoint class and API documentation files for that one path; rollback is version control (revert to recover). No remote mutation. |
 | Side effect | Updates or adds OpenAPI schema annotations and response types for one endpoint path. |
 | Done | Endpoint has accurate schema annotations, typed responses matching runtime, and passing local schema validation. |
 

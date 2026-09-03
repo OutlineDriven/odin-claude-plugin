@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | The user runs /browser-cookie-store to populate the session cookie store from installed browsers. |
-| Authority | Human-only local extraction. Every browser-cookie read and store write happens on the local machine. No credential is transmitted off the host. |
+| Authority | Reversible local: writes only the session cookie store from locally installed browser profiles; rollback is undo. No remote mutation; no credential is transmitted off the host. |
 | Side effect | The session cookie store, populated from locally installed browser profiles. No remote, paid, published, or deployed mutation. |
 | Done | The destination store holds extracted session cookies conforming to its schema and authenticated browsing is ready. |
 

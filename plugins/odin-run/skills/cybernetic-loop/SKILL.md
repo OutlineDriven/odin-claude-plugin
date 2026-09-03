@@ -10,7 +10,7 @@ description: 'Use when the caller supplies one falsifiable out-of-happy-path inv
 | Field | Bound contract |
 |---|---|
 | Trigger | Use only when the caller names one falsifiable invariant outside the prior happy path, such as reorganization, peer-to-peer behavior, or index recovery, together with one finite patch budget. Do not use this workflow for normal feature delivery or as a universal retry loop. |
-| Authority | May apply only budgeted candidate patches within the bounded local working-tree scope recorded before mutation. A pre-run checkpoint must restore that scope byte-for-byte, including any pre-existing state; remote mutation is outside this authority. |
+| Authority | Reversible local: writes only budgeted candidate patches within the bounded local working-tree scope recorded before mutation; rollback is restoring the pre-run checkpoint byte-for-byte, including any pre-existing state. No remote mutation. |
 | Side effect | Mutates the working tree only through candidate patches applied after the checkpoint. Keep a candidate only when the full frozen check set shows that at least one failing check now passes and no previously passing check fails; otherwise revert that candidate. On non-convergence, revert every retained candidate to the checkpoint. |
 | Done | Return exactly one terminal status: `already-holds` when the full frozen check set passes before mutation; `restored` when all frozen checks pass together in one run within budget; or `non-converged` after restoring the checkpoint and returning the run transcript. |
 

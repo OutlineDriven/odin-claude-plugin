@@ -10,7 +10,7 @@ description: 'Use when the human returns after a gap, cannot follow the project,
 | Field | Bound contract |
 |---|---|
 | Trigger | The human returns after a gap, says they can't follow the project, asks what happened or what a term means, or before deciding what to do next when their mental model is stale |
-| Authority | Read-only; reads live project state and briefs, does not fix, rename, decide, or mutate anything |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Does not fix, rename, or decide anything. |
 | Side effect | None (read-only briefing); it briefs, it does not act |
 | Done | Cold-read of the briefing requires no pre-gap memory or unglossed coined term to parse; needs-you items are each actionable without opening another file; every claim has a checkable source; fits on a screen with expansion offered rather than delivered |
 

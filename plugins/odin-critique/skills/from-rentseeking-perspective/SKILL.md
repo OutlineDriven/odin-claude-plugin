@@ -10,7 +10,7 @@ description: 'Use when the user wants an answer only from the rent-seeking seat:
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants an answer only from the rent-seeking seat (extraction without building). |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | A rent-seeking-perspective analysis emitted as chat output only. |
 | Done | A rent-seeking-perspective answer is emitted without blending. |
 

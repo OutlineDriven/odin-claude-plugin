@@ -10,7 +10,7 @@ description: 'Use when a custom LibAFL fuzzer needs an executor, observer, feedb
 | Field | Bound contract |
 |---|---|
 | Trigger | User needs a custom LibAFL fuzzer, observer, feedback, mutator, scheduler, or executor composition. |
-| Authority | Reversible-local: write only named local Rust source artifacts; rollback by deleting the generated crate or reverting VCS changes. |
+| Authority | Reversible local: writes only named local Rust source artifacts; rollback is deleting the generated crate or reverting VCS changes. No remote mutation. |
 | Side effect | Local-write: creates or modifies Rust source files implementing the composed fuzzing engine and target integration. |
 | Done | The composed LibAFL fuzzer compiles, runs the target, records coverage feedback, and persists objective findings to disk. |
 

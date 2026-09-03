@@ -10,7 +10,7 @@ description: 'Use when asked to prepare a repository for public launch: audit fo
 | Field | Bound contract |
 |---|---|
 | Trigger | The user asks to open source a project, prepare a repository for public launch, make an existing public project official, or establish release automation for that launch. |
-| Authority | Reversible local: write only named local artifacts (repository files, CI configs, documentation, packaging, release automation). Do not alter external visibility, remote state, credentials, or data-at-rest outside the repository. |
+| Authority | Reversible local: writes only named local artifacts (repository files, CI configs, documentation, packaging, release automation); rollback is version control. No remote mutation. Do not alter external visibility, remote state, credentials, or data-at-rest outside the repository. |
 | Side effect | Prepare repository files, CI, documentation, packaging, and release automation; perform history and secret checks; stop before the external repository-visibility switch unless the human explicitly performs or authorizes it. |
 | Done | A clean outsider clone can build, test, use, and contribute; secrets and confidential history are cleared through an appropriate fresh-repository decision; licensing and package metadata agree; CI and release automation are hardened; only the human-controlled visibility action remains. |
 

@@ -10,7 +10,7 @@ description: 'Use when a behavioral diff may have left docs or CHANGELOG stale. 
 | Field | Bound contract |
 |---|---|
 | Trigger | User says 'sync docs' or 'update changelog' after a behavioral change. |
-| Authority | Reversible local writes only. Edit named local doc files and write a fix ledger. Rollback reverts the edited files to their pre-edit content. |
+| Authority | Reversible local: writes only named local doc files and a fix ledger; rollback reverts the edited files. No remote mutation. |
 | Side effect | Applies only safe fixes (version bump plus CHANGELOG Unreleased entry) and writes a fix ledger with before/after evidence. |
 | Done | Safe fixes are applied or explicitly unavailable, and all residual drift is flagged with file:line evidence and reasons. |
 

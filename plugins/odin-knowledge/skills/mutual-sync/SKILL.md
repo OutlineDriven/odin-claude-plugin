@@ -10,7 +10,7 @@ description: 'Use when the user and agent may hold different pictures of current
 | Field | Bound contract |
 |---|---|
 | Trigger | The user asks for a mutual sync, sync-up, shared-context check, or catch-up, or the conversation exposes a stale user claim or refuted agent assumption. |
-| Authority | Read-only: inspect only topic-relevant conversation, files, search results, version-control status, and recent history; do not mutate files, version control, credentials, paid services, publications, deployments, or remote state. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Inspects only topic-relevant conversation, files, search results, version-control status, and recent history. |
 | Side effect | Write only an in-chat shared-context ledger and, after confirmation, offer a separate persistence action without performing it here. |
 | Done | The user confirms a ledger containing Agreed facts, Corrected beliefs, and Open assumptions. |
 

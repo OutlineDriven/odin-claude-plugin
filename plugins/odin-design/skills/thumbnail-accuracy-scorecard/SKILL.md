@@ -10,7 +10,7 @@ description: 'Use when thumbnail concepts need real-size, accuracy-first scoring
 | Field | Bound contract |
 |---|---|
 | Trigger | Thumbnail concepts need real-size, accuracy-first scoring without misleading claims. |
-| Authority | Reversible local with asset approval: write only named local artifacts; asset approval required before rendering approved assets. |
+| Authority | Human-gated: asks for asset approval before rendering approved assets; otherwise reversible local: writes only named local artifacts; rollback is undo. No remote mutation. |
 | Side effect | Accuracy-gated thumbnail scorecard with per-dimension scores and an immutable receipt. |
 | Done | One accurate winner and two accurate runners-up clear the fixed rubric threshold. |
 | Stop | No accurate winner; approval blocked; budget exhausted. Bound: platform, audience, rubric, assets, round cap. |

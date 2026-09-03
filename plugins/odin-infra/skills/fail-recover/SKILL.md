@@ -10,7 +10,7 @@ description: 'Use when the user needs to restore service from a specific known f
 | Field | Bound contract |
 |---|---|
 | Trigger | User needs to restore service from a specific known failure using a prescribed recovery operation. |
-| Authority | Reversible local writes only. State and follow the rollback path before mutating. Write only the named local target. |
+| Authority | Reversible local: writes only the named local target; rollback is undo via the recorded rollback path. No remote mutation. State and follow the rollback path before mutating. |
 | Side effect | The single prescribed recovery operation applied to the local configuration target. No scope widening, no retry with a different action. |
 | Done | The recovery operation is applied to the target artifact and the health signal confirms service restoration. |
 

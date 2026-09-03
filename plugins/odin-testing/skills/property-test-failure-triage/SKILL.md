@@ -10,7 +10,7 @@ description: 'Use when a generated or shrunk counterexample from a property-base
 | Field | Bound contract |
 |---|---|
 | Trigger | A generated or shrunk counterexample exists and the user asks whether it reveals a code bug, an over-broad strategy, an incorrect property, or an unsettled specification. |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | In chat, investigate the failing input and contract, classify the failure, and recommend the minimal code, strategy, property, or specification action. |
 | Done | The counterexample is classified with cited evidence and a concrete next action; any ambiguity is left for the maintainer rather than mislabeled as a defect. |
 

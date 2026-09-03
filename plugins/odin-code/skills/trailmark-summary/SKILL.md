@@ -10,7 +10,7 @@ description: 'Use when a quick structural overview of a target directory is need
 | Field | Bound contract |
 |---|---|
 | Trigger | The user or another workflow needs a quick structural overview before deeper codebase analysis. |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. Never install, upgrade, or clone trailmark or any dependency. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Never install, upgrade, or clone trailmark or any dependency. |
 | Side effect | Reads the target source tree and emits the language list and summary output; writes nothing. |
 | Done | Detected languages, Entrypoints, and Dependencies are all present in the returned report, or an installation or language gap is reported. |
 

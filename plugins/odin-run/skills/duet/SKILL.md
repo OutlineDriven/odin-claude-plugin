@@ -10,7 +10,7 @@ description: 'Use when the user invokes /duet, says pair on this, or faces aesth
 | Field | Bound contract |
 |---|---|
 | Trigger | /duet, "pair with me", or facing aesthetic, architectural, or irreversible decisions |
-| Authority | Read-only. Emits ask-user batches and fork picks in chat only; does not itself mutate files, VCS, credentials, paid actions, or remote state. Consent obtained through duet gates the agent's separate execution; irreversible actions are asked, not taken. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Emits ask-user batches and fork picks in chat only; consent is obtained through those picks. Irreversible actions are asked, not taken. |
 | Side effect | ask-user batches and fork picks in chat; asks before irreversible actions; retains agreed architecture on disengage |
 | Done | Every real fork consented before execution, no review-bottleneck diff produced, irreversible checkpoints asked, picks retained on disengagement |
 

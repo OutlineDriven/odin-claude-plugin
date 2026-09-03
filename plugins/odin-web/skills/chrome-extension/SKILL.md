@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User works on a Chrome extension: manifest, service worker, content scripts, messaging, or publishing. |
-| Authority | Human only. The model may write extension project files (local, reversible). Store submission or publication is irreversible and external, so it requires explicit human invocation and is never initiated autonomously. |
+| Authority | Human-gated: asks before store submission or publication; otherwise reversible local: writes only extension project files under the working directory; rollback is version control. Store submission requires explicit human invocation and human-supplied credentials; never initiated autonomously. |
 | Side effect | Writes extension project files under the working directory. Only on explicit human invocation, may submit or publish the extension to a browser store. |
 | Done | A loadable MV3 extension exists with manifest, service worker, content scripts, messaging, storage, permissions, CSP, and UI surfaces verified, or a store submission is initiated with human-supplied credentials. |
 

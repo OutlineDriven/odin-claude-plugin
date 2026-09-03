@@ -14,7 +14,7 @@ A bug is evidence about the design that produced it. When the design is wrong, b
 | Field | Bound contract |
 |---|---|
 | Trigger | A bug, failure, flake, regression, slowness, review finding, or ticket needs root-shape repair, not the nearest patch. |
-| Authority | Write only named local artifacts: an evidence ledger, tagged instrumentation, the fix, and a regression test. Roll back by reverting those local writes. Never remote, credential, publish, deploy, or irreversible changes. |
+| Authority | Reversible local: writes only named local artifacts (an evidence ledger, tagged instrumentation, the fix, and a regression test); rollback is undo (revert those local writes). No remote mutation. |
 | Side effect | A confirmed root cause, a root-shape fix, a passing regression test, and a clean tree with all instrumentation removed. |
 | Done | The fault class named at the core can no longer produce the reported bug family; the full project check set passes with no monkey patch, shim, special-cased input, or suppressed symptom left in the diff; every review comment on the touched surface carries an explicit verdict. |
 

@@ -10,7 +10,7 @@ description: 'Use when the user says "simplify this diff" or asks for a compress
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to simplify a diff, PR, or branch: "simplify this diff", "tighten up", or "compress a change-set" |
-| Authority | reversible-local: write only named local artifacts (working-tree and VCS commits); rollback via `git revert HEAD --no-edit` |
+| Authority | Reversible local: writes only named local artifacts (working-tree and VCS commits); rollback is version control (`git revert HEAD --no-edit`). No remote mutation. |
 | Side effect | Applies simplification survivors as atomic issue-class commits to the working change-set; auto-reverts any commit that regresses |
 | Done | Exit 0: simplification landed as issue-class commits, every fix commit is green, and no new bloat was introduced |
 

@@ -10,7 +10,7 @@ description: 'Use when adding a new devcontainer or isolated Claude Code dev env
 | Field | Bound contract |
 |---|---|
 | Trigger | The user asks to add a new devcontainer or isolated Claude Code development environment to a repository that does not already have one, for Python, Node/TypeScript, Rust, Go, or a supported combination. |
-| Authority | Reversible local writes confined to the repository's `.devcontainer/` directory. No container is built, launched, published, or pushed. |
+| Authority | Reversible local: writes only the repository's `.devcontainer/` directory; rollback is version control. No remote mutation. No container is built, launched, published, or pushed. |
 | Side effect | Creates or replaces the five generated files under `.devcontainer` (Dockerfile, devcontainer.json, post_install.py, .zshrc, and install.sh) with project substitutions and merged language-specific features, settings, extensions, commands, and persistent-volume declarations. |
 | Done | All template placeholders are resolved; devcontainer.json is valid; every detected language is represented without duplicate configuration; postCreateCommand composes all required setup commands; the security mounts and token-forwarding contract are explicit; and the user receives both VS Code and CLI startup instructions without claiming the container was built or launched unless it was. |
 

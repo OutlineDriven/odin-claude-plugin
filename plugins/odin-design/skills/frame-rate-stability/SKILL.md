@@ -10,7 +10,7 @@ description: 'Use when a rendering path needs stable frame-time, CPU, GPU, and m
 | Field | Bound contract |
 |---|---|
 | Trigger | A rendering path needs stable multi-metric performance against fixed targets. |
-| Authority | Reversible local: write only named local artifacts; state and follow the rollback path before mutating. |
+| Authority | Reversible local: writes only named local artifacts; rollback is version control. No remote mutation. State and follow the rollback path before mutating. |
 | Side effect | Multi-metric frame-rate stabilization: local writes to the rendering path and its configuration. |
 | Done | Every fixed target holds for two consecutive comparable runs. |
 | Stop | Stalled; blocked; capped. Bound: fixed hardware, build, scene, settings, budget, and target values. |

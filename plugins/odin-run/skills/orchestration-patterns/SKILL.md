@@ -10,7 +10,7 @@ description: 'Use when work decomposes across subagents or role panels: select a
 | Field | Bound contract |
 |---|---|
 | Trigger | Work decomposes across subagents or role panels: parallel research, review waves, or staged handoffs. |
-| Authority | reversible-local: spawn subagents and write synthesis to named local artifacts only; no VCS mutation, no credentials, no remote mutation; rollback any unintended write. |
+| Authority | Reversible local: writes only synthesis to named local artifacts; rollback is undo. No remote mutation. Spawns subagents. |
 | Side effect | Subagent runs spawned; only the reconciled synthesis is written. |
 | Done | Every spawned subagent artifact landed and was verified by the owner; no partial output left unmerged. |
 

@@ -10,7 +10,7 @@ description: 'Use when reviewing an evaluation, benchmark, or scoring harness fo
 | Field | Bound contract |
 |---|---|
 | Trigger | Building or reviewing an evaluation, benchmark, or scoring harness, or an explicit request to check it for leakage or contamination. |
-| Authority | Read-only: inspect supplied evidence and report in chat; do not mutate files, version control, credentials, paid resources, publications, deployments, or remote state. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Inspects supplied evidence and reports in chat. |
 | Side effect | Return only a leakage audit naming where independent ground truth enters and where it does not, with an independence fix for each detected pattern. |
 | Done | Every applicable pattern below has been tested; only detected patterns are reported; each finding has evidence and an independence fix; if none fire, the report says no leak was found. |
 

@@ -10,7 +10,7 @@ description: 'Use when the user describes an AI workflow gap or uses an ambiguou
 | Field | Bound contract |
 |---|---|
 | Trigger | User describes an AI workflow gap or uses an ambiguous cross-session reference such as 'the PR Bob mentioned' or 'that bug from last week'. |
-| Authority | Read-only: reply content only; no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Reply content only. |
 | Side effect | None; reply content only. |
 | Done | Every ambiguous reference resolves to a stable handle; anti-patterns surface when reached. |
 

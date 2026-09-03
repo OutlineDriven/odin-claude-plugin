@@ -10,7 +10,7 @@ description: 'Use when asked to drive decomposable work as a deterministic multi
 | Field | Bound contract |
 |---|---|
 | Trigger | The work is an audit, a migration, a broad research or review sweep, or scale that one context cannot hold. |
-| Authority | reversible-local: write only named local evidence artifacts; rollback is a no-op because all mutable state is scoped to per-task evidence files owned exclusively by one worker. |
+| Authority | Reversible local: writes only named local evidence artifacts; rollback is a no-op because all mutable state is scoped to per-task evidence files owned exclusively by one worker. No remote mutation. |
 | Side effect | Phased fan-out of subagent tasks under per-task contracts writes evidence files in disjoint scopes; adversarial and consistency critics verify. |
 | Done | All workflow phases complete, the parent's shared proof run passes, and circuit breakers were honored. |
 

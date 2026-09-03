@@ -10,7 +10,7 @@ description: 'Use when asked to build, run, and triage Clang libFuzzer campaigns
 | Field | Bound contract |
 |---|---|
 | Trigger | User needs to build, run, tune, or triage a Clang libFuzzer campaign or LLVMFuzzerTestOneInput harness. |
-| Authority | Reversible-local: write only to named fuzzing artifacts (binary, corpus dir, crash files); rollback by deleting them. |
+| Authority | Reversible local: writes only named fuzzing artifacts (binary, corpus dir, crash files); rollback is deleting them. No remote mutation. |
 | Side effect | Local write to a compiled fuzzing binary, its corpus directory, and any crash artifacts written by the target. |
 | Done | The instrumented binary runs against its corpus and any crash artifact reproduces in the same target with identical sanitizer output. |
 

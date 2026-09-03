@@ -10,7 +10,7 @@ description: 'Use when an orchestrator or user requests deep audit-context analy
 | Field | Bound contract |
 |---|---|
 | Trigger | An orchestrator or user requests deep audit-context analysis of exactly one function, or begins an audit, threat model, or architecture review of unfamiliar code spanning multiple functions before vulnerability hunting. |
-| Authority | Write only the caller-specified analysis path (single function) or beneath `audit-context/` (multi-function). Roll back by deleting those files; no other file, VCS, credential, or remote target is touched. |
+| Authority | Reversible local: writes only the caller-specified analysis path (single function) or beneath `audit-context/` (multi-function); rollback is deleting those files. No remote mutation. |
 | Side effect | One local file at the caller-specified path (single function), or `audit-context/DOSSIER.md` plus per-function files under `audit-context/functions/` (multi-function). |
 | Done | The prose follows the fixed format, every structural claim cites source lines or is an open question, every assumption names what establishes it or says nothing found, and the compact record or dossier indexes the result. |
 

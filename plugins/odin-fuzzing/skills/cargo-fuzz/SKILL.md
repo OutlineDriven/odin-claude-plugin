@@ -10,7 +10,7 @@ description: 'Use when initializing, running, measuring coverage, or triaging a 
 | Field | Bound contract |
 |---|---|
 | Trigger | User needs to initialize, run, measure, or triage a cargo-fuzz target in a Rust crate. |
-| Authority | Reversible local writes to the `fuzz/` workspace, corpus, artifact, and coverage output directories under the target crate, plus `src/` edits needed to expose a library target (e.g., moving code from `src/main.rs` to `src/lib.rs`) and nightly toolchain and cargo-fuzz installation via `rustup` and `cargo install`. Rollback by removing `fuzz/`, reverting `src/` edits, and uninstalling the added toolchain or tool. |
+| Authority | Reversible local: writes only the `fuzz/` workspace, corpus, artifact, and coverage output directories under the target crate, plus `src/` edits needed to expose a library target (e.g., moving code from `src/main.rs` to `src/lib.rs`) and nightly toolchain and cargo-fuzz installation via `rustup` and `cargo install`; rollback is removing `fuzz/`, reverting `src/` edits, and uninstalling the added toolchain or tool. No remote mutation. |
 | Side effect | Creates and mutates Rust fuzz targets, corpus files, crash artifacts, coverage reports, and `src/` layout on the local filesystem. Installs nightly Rust and cargo-fuzz if absent. No remote, credential, or VCS mutation. |
 | Done | The named cargo-fuzz target runs under the intended sanitizer and reproduces any selected artifact. |
 

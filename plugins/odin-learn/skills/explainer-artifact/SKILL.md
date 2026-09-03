@@ -10,7 +10,7 @@ description: 'Use when asked to create a durable local explainer document for a 
 | Field | Bound contract |
 |---|---|
 | Trigger | The user asks for an explainer document for a concept, diff reference, idea, or work recap window, or invokes the skill bare. |
-| Authority | Reversible local: write only to an isolated scratch run directory under `/tmp/odin-$(id -u)/explainer-artifact/`; rollback is deleting the run directory. No publishing, remote relocation, credential, or VCS mutation. |
+| Authority | Reversible local: writes only to an isolated scratch run directory under `/tmp/odin-$(id -u)/explainer-artifact/`; rollback is deleting the run directory. No remote mutation. |
 | Side effect | Creates and structurally verifies a durable local explainer artifact under the scratch run directory, presents it to the user, and stops before publishing or remotely relocating it; a human performs any publication or remote relocation. |
 | Done | A structurally verified explainer artifact exists in the scratch directory and is presented to the user; any publication or remote relocation remains an unexecuted human handoff. A run that correctly ends without an artifact, an operational question answered in chat, an empty recap window, a bare invocation the user did not answer, is equally done. |
 

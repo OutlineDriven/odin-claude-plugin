@@ -10,7 +10,7 @@ description: 'Use when crossing a public API boundary, guarding complex invarian
 | Field | Bound contract |
 |---|---|
 | Trigger | Crossing a public API boundary, guarding complex invariants, or hardening untrusted input or integration seams. |
-| Authority | Write only named local types, assertions, validators, and tests at contract boundaries; rollback is deleting the added local code or reverting the boundary change. |
+| Authority | Reversible local: writes only named local types, assertions, validators, and tests at contract boundaries; rollback is undo (delete the added code or revert the boundary change). No remote mutation. |
 | Side effect | Adds or refines local types, assertions, validators, and tests at contract boundaries. |
 | Done | Every planned contract is implemented at the appropriate static/test/debug/runtime layer and violations fail explicitly at the boundary. |
 

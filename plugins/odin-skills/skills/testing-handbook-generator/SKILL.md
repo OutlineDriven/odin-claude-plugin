@@ -10,7 +10,7 @@ description: 'Use when the user asks to discover, generate, refresh, or validate
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants to discover, generate, refresh, or validate skills from the Trail of Bits Testing Handbook or appsec.guide. |
-| Authority | Reversible-local: write only to generated skill directories and their cross-references under the configured output path. Rollback by deleting generated directories; no other state is affected. |
+| Authority | Reversible local: writes only generated skill directories and their cross-references under the configured output path; rollback is deleting generated directories. No remote mutation. No other state is affected. |
 | Side effect | Local write: generated skill directories (each containing SKILL.md) and cross-reference links between them. No mutation of the handbook source, other plugins, or remote state. |
 | Done | Approved handbook sections produce type-appropriate skills whose references resolve and whose activation and validation checks pass. |
 

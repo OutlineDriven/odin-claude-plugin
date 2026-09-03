@@ -10,7 +10,7 @@ description: 'Use when a smart-contract codebase needs an evidence-based maturit
 | Field | Bound contract |
 |---|---|
 | Trigger | A smart-contract codebase needs an evidence-based maturity scorecard and prioritized improvement roadmap. |
-| Authority | Read-only: no file write, VCS mutation, credential write, paid service mutation, published content mutation, deployed state change, or remote resource mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | One structured chat output containing a nine-category maturity scorecard, per-category evidence, identified risks, and an ordered remediation roadmap. |
 | Done | Every rubric category has an evidence-backed rating or an explicit evidence-unavailable marker, the aggregate score is computed from rated categories, and every consequential rating traces to evidence or an explicit gap. |
 

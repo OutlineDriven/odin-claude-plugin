@@ -10,7 +10,7 @@ description: 'Use when asked to prune an existing design or codebase until only 
 | Field | Bound contract |
 |---|---|
 | Trigger | User names a design artifact or codebase to reduce to its primitives before a rewrite or codebase lesson |
-| Authority | Write only the named pruning map artifact; no other file, VCS, credential, paid, published, deployed, or remote mutation |
+| Authority | Reversible local: writes only the named pruning map artifact; rollback is deleting that artifact. No remote mutation. |
 | Side effect | A local file holding the pruned first-principles decomposition; recoverable by deletion |
 | Done | Every leaf in the map is a language primitive, stdlib call, or proven irreducible primitive; no composite element remains |
 

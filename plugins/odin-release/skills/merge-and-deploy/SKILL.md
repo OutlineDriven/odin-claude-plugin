@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | The user runs /merge-and-deploy |
-| Authority | Human only. PR merge and deployment are irreversible remote effects. Every merge, deploy trigger, and revert requires explicit human confirmation at a named gate. The model never auto-merges, auto-deploys, or auto-reverts without a confirmed decision. |
+| Authority | Remote: merges the PR, triggers or verifies deployment, and reverts on request; requires explicit human invocation. Every merge, deploy trigger, and revert requires explicit human confirmation at a named gate. The model never auto-merges, auto-deploys, or auto-reverts without a confirmed decision. |
 | Side effect | Merges the PR into the base branch, deletes the feature branch, and triggers or verifies the deployment path. A revert creates a new commit on the base branch. |
 | Done | Changes are landed and deployment is initiated or verified, reported in a final report |
 

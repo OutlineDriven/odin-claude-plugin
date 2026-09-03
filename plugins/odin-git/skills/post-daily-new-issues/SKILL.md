@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | A human explicitly requests the daily on-call issue digest; a scheduled invocation may prepare the run but must not use credentials or post without explicit human authorization for that run. |
-| Authority | Preview the bounded Sentry query, destination Slack channel, release URL, and posting consequence, then require explicit human authorization before using credentials or making the remote mutation. |
+| Authority | Remote: posts one Slack message in the configured channel; requires explicit human invocation. Preview the bounded Sentry query, destination channel, release URL, and posting consequence before using credentials. |
 | Side effect | Read only the stated UTC window from the stated Sentry scope and, only when it contains issues, create one Slack message in the configured channel containing the total and at most three issue bullets. |
 | Done | If the window contains no issues, make no Slack mutation; otherwise, prove that the configured channel received one message containing the release URL, total issue count, and top three issue counts. |
 

@@ -10,7 +10,7 @@ description: 'Use when asked to remove old code, migrate consumers, or decide wh
 | Field | Bound contract |
 |---|---|
 | Trigger | Removing old code, migrating users to a replacement, or deciding whether to maintain or sunset a system. |
-| Authority | VCS-reversible-destructive: changes are restricted to VCS-tracked code, config, and docs; the exact changed set is shown before any mutation; version control is the recovery path. |
+| Authority | Reversible local: writes only VCS-tracked code, config, and docs (destructive; the exact changed set is shown before any mutation); rollback is version control. No remote mutation. |
 | Side effect | Builds or verifies a replacement, updates consumers and docs, and removes obsolete VCS-tracked code/config/docs only after migration evidence clears. |
 | Done | All consumers use the production-proven replacement, old usage is zero, obsolete code/config/docs are removed, and rollback/monitoring evidence is recorded. |
 

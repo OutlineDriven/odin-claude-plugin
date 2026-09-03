@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | The user wants to replace a greenfield attempt with a clean pad carrying only proven requirements. |
-| Authority | Restrict changes to VCS-tracked targets, show the exact set before mutation, and use version control as the recovery path. Human-only: act only on explicit human invocation. |
+| Authority | Human-gated: requires explicit human invocation before acting; otherwise reversible local: writes only VCS-tracked targets (show the exact set before mutation); rollback is version control. No remote mutation. |
 | Side effect | A new greenfield attempt on a clean pad; the old attempt remains recoverable through VCS. |
 | Done | A new greenfield attempt exists carrying only verified requirement statements, and the old attempt is reachable in VCS history. |
 

@@ -10,7 +10,7 @@ description: 'Use when a knowledge artifact needs review before sharing or execu
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to review or validate a knowledge artifact before sharing or executing it. |
-| Authority | Read-only review: no file, VCS, credential, paid, published, deployed, or remote mutation during the review. Any fix is a separate, explicitly user-authorized edit performed after the review completes. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Any fix is a separate, explicitly user-authorized edit performed after the review completes. |
 | Side effect | Reads the target and references and emits merged findings. No write occurs during the review. A fix, if the user explicitly authorizes one after the review, is a separate edit outside the review's authority. |
 | Done | Strategic and data reviewers run in parallel; findings merge into P1/P2/P3 plus Clean; external content gets an editorial check; every P1 blocks ordinary shipping and receives explicit next choices. |
 

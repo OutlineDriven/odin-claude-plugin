@@ -10,7 +10,7 @@ description: 'Use when asked to build Node.js stream ETL pipelines for large-fil
 | Field | Bound contract |
 |---|---|
 | Trigger | Large-file or continuous stream ETL, CSV processing, ingestion, backpressure, repeated-lookup enrichment, deduplication of concurrent async calls. |
-| Authority | Reversible local writes: write pipeline and transform code only to the local working tree; make no remote mutations. |
+| Authority | Reversible local: writes only pipeline and transform code in the local working tree; rollback is version control. No remote mutation. |
 | Side effect | Writes pipeline and transform code to the local tree and may execute it on real data. |
 | Done | The pipeline uses `stream.promises.pipeline()` with at least one typed async-generator transform, backpressure coordinated solely through `pipeline()`, caching applied only when the transform performs remote or expensive lookups, and a benchmark or test run demonstrates bounded memory. |
 

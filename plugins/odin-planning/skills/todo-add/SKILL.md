@@ -10,7 +10,7 @@ description: 'Use when a message contains `TODO ADD: <requirement>`, adding it t
 | Field | Bound contract |
 |---|---|
 | Trigger | A message contains `TODO ADD: <requirement>`. |
-| Authority | Reversible local update to one durable requirement source and one native todo item. |
+| Authority | Reversible local: writes only one durable requirement source and one native todo item; rollback is version control or undo. No remote mutation. |
 | Side effect | Native todo is written first; the same requirement is then written to its durable source. |
 | Done | Both representations contain the same requirement in the same turn, or a classified duplicate/conflict/artifact-failure result is reported exactly as defined below. |
 

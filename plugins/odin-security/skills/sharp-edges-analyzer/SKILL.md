@@ -10,7 +10,7 @@ description: 'Use when a specialist agent must analyze APIs, configurations, or 
 | Field | Bound contract |
 |---|---|
 | Trigger | A user or orchestrator explicitly delegates an isolated, dedicated misuse-resistance analysis of APIs, configurations, or interfaces to a specialist agent. |
-| Authority | Read-only. No file creation, VCS mutation, credential issuance, paid action, published artifact mutation, deployment change, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | A specialist-agent sharp-edge findings report returned to the caller via chat output. No other system state is changed. |
 | Done | The four analysis phases complete and every finding includes category, severity, source location, minimal misuse, exploitability validation, and recommendation. |
 

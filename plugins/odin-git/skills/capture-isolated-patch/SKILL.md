@@ -10,7 +10,7 @@ description: 'Use when a candidate change must be produced without touching the 
 | Field | Bound contract |
 |---|---|
 | Trigger | A candidate change must be produced without touching the working tree. |
-| Authority | Reversible local writes only: write to an ephemeral worktree and a temporary patch file under the worktree's parent temporary directory; never write to the original working tree. Rollback is `git worktree remove --force <path>`. |
+| Authority | Reversible local: writes only an ephemeral worktree and a temporary patch file under the worktree's parent temporary directory; rollback is `git worktree remove --force <path>`. No remote mutation. Never write to the original working tree. |
 | Side effect | Creates an ephemeral worktree, runs the declared command inside it, and returns the exit code plus a binary-safe patch path. No commit, no push, no merge. The worktree is preserved on extraction failure. |
 | Done | Patch bytes are returned, or the failure is preserved for inspection; the original working tree is unchanged either way. |
 

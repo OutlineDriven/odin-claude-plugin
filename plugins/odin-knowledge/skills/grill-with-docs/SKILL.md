@@ -10,7 +10,7 @@ description: 'Use when a repository decision needs an interview plus durable ter
 | Field | Bound contract |
 |---|---|
 | Trigger | A repository decision needs an interview plus durable terminology and decision records. |
-| Authority | Write only to CONTEXT.md and ADR files in the working repository; reversible by deleting or reverting those local artifacts. |
+| Authority | Reversible local: writes only CONTEXT.md and ADR files in the working repository; rollback is version control or undo. No remote mutation. |
 | Side effect | CONTEXT and ADR updates during the interview. |
 | Done | Frontier empty and no resolved term left unwritten. |
 

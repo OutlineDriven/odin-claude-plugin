@@ -10,7 +10,7 @@ description: 'Use when asked to run /model-retuning [target model or symptom] [c
 | Field | Bound contract |
 |---|---|
 | Trigger | /model-retuning [target model or symptom] [corpus path] [bar:<n> consecutive clean runs] |
-| Authority | Reversible-local: write only named local corpus files and measurement artifacts; recover by reverting the per-pass commits. |
+| Authority | Reversible local: writes only named local corpus files and measurement artifacts; rollback is reverting the per-pass commits. No remote mutation. |
 | Side effect | Runs measurement passes and edits corpus files in surgical, measured passes; one problem class per pass over disjoint file ownership. |
 | Done | The pre-registered bar clears, or the run reports the specific claim it could not support. |
 

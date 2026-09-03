@@ -10,7 +10,7 @@ description: 'Use when a token implementation or integration needs standards, pr
 | Field | Bound contract |
 |---|---|
 | Trigger | A token implementation or integration needs standards, privilege, nonstandard-behavior, and defensive-integration analysis. |
-| Authority | No file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Chat output: token conformity, privilege, weird-behavior, integration-safety, and prioritized remediation report. |
 | Done | Every applicable token category is evaluated and unsafe assumptions are tied to concrete defensive changes. |
 

@@ -10,7 +10,7 @@ description: 'Use when a user invokes this skill to harden a chosen but tentativ
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants to harden a chosen but tentative artifact into one durable result. |
-| Authority | Reversible local write only. No VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Reversible local: writes only the hardened artifact at its existing path; rollback is version control. No remote mutation. |
 | Side effect | Writes the hardened artifact to its existing path via atomic rename. Does not create, move, or delete other files. |
 | Done | The chosen artifact is hardened and its stable end state is verified. |
 

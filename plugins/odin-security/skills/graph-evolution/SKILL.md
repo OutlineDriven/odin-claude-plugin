@@ -10,7 +10,7 @@ description: 'Use when two refs or source snapshots need security-relevant struc
 | Field | Bound contract |
 |---|---|
 | Trigger | The user provides two refs or source snapshots and needs security-relevant structural changes that a line diff may miss. |
-| Authority | Reversible local writes only: temporary snapshot worktrees, graph export JSON, structural diff JSON, and a GRAPH_EVOLUTION report. Worktrees are removed after the report is written. |
+| Authority | Reversible local: writes only temporary snapshot worktrees, graph export JSON, structural diff JSON, and a GRAPH_EVOLUTION report; rollback is deleting those artifacts. No remote mutation. Worktrees are removed after the report is written. |
 | Side effect | Temporary snapshot worktrees and graph exports, structural diff JSON, and a GRAPH_EVOLUTION report; temporary worktrees are removed afterward. |
 | Done | Both snapshots have healthy graph summaries, all node/edge/entrypoint/subgraph changes are classified with limitations, and temporary worktrees are accounted for. |
 

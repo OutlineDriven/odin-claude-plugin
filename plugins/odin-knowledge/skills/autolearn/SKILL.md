@@ -10,7 +10,7 @@ description: 'Use when a verified non-trivial fix lands. Automatically captures 
 | Field | Bound contract |
 |---|---|
 | Trigger | A non-trivial fix has been verified (observed working, not hoped working), or explicit autolearn or refresh invocation. |
-| Authority | Reversible-local: write only the operating repo's docs/solutions/ and repo-root CONCEPTS.md. Rollback via git revert or file restore from history. No VCS push, credential, paid, published, deployed, or remote mutation. |
+| Authority | Reversible local: writes only the operating repo's docs/solutions/ and repo-root CONCEPTS.md; rollback is version control. No remote mutation. |
 | Side effect | Writes or refreshes docs/solutions/ learning docs and CONCEPTS.md; stages only the surfaces this skill wrote or edited. |
 | Done | A validated learning or concept entry exists, or an explicit determination that nothing qualifies. |
 

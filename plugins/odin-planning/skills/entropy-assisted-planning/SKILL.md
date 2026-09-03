@@ -10,7 +10,7 @@ description: 'Use when the user explicitly requests a Tarot draw or casually del
 | Field | Bound contract |
 |---|---|
 | Trigger | The user explicitly requests a Tarot draw or casually delegates an ambiguous choice among multiple valid approaches. |
-| Authority | Run a local cryptographically random draw and record the chosen direction in chat. No file, VCS, credential, paid, published, deployed, or remote mutation. Rollback is to discard the reading or redraw; no persistent state requires recovery. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Rollback is to discard the reading or redraw; no persistent state requires recovery. |
 | Side effect | Chat output only: a 12-house draw and its interpreted direction. The draw command touches no repository or remote state. |
 | Done | A complete 12-house reading yields a stated direction or verdict, and any security or correctness implication remains subject to ordinary evidence. |
 

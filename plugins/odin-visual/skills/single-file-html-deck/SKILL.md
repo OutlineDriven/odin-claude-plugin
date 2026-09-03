@@ -10,7 +10,7 @@ description: 'Use when an explicit request asks to create a Sentry presentation,
 | Field | Bound contract |
 |---|---|
 | Trigger | Explicit human invocation: user asks to create a presentation, build slides, make a deck, or build a Sentry presentation |
-| Authority | Reversible-local: write only named local artifacts; rollback by deleting generated files or reverting to prior version |
+| Authority | Reversible local: writes only named local artifacts; rollback is deleting generated files or reverting to prior version. No remote mutation. |
 | Side effect | Local write: scaffolds a Sentry-branded slide deck as a single self-contained HTML file |
 | Done | Keyboard-navigable slide deck exists as a single HTML file with real-data charts only, Sentry branding applied, and a successful build |
 

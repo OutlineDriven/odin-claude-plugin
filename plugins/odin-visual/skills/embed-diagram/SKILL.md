@@ -10,7 +10,7 @@ description: 'Use when the user runs /embed-diagram to render a Mermaid diagram 
 | Field | Bound contract |
 |---|---|
 | Trigger | The user runs `/embed-diagram` or asks to render a Mermaid diagram offline and embed it into a document. |
-| Authority | Reversible local writes: create or overwrite Mermaid source, SVG, PNG, and Excalidraw files in the output directory and edit the target document to embed the render. No remote, credential, VCS, or published mutation. |
+| Authority | Reversible local: writes only Mermaid source, SVG, PNG, and Excalidraw files in the output directory and edits the target document to embed the render; rollback is deleting the written files and reverting the target document edit. No remote mutation. |
 | Side effect | Local SVG or PNG diagram renders written to the output directory and embedded into the target document. |
 | Done | A rendered diagram is embedded in the target document. |
 

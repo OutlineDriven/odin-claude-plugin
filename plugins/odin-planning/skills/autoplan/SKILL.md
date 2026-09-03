@@ -10,7 +10,7 @@ description: 'Use when the user runs /autoplan on a plan or idea. Runs CEO, desi
 | Field | Bound contract |
 |---|---|
 | Trigger | The user runs `/autoplan` on a plan or idea. |
-| Authority | Reversible local write: write only the amended plan, the task JSONL ledger at `tasks/autoplan-ledger.jsonl`, and TODO updates. Recover by discarding those local artifacts. |
+| Authority | Reversible local: writes only the amended plan, the task JSONL ledger at `tasks/autoplan-ledger.jsonl`, and TODO updates; rollback is discarding those local artifacts. No remote mutation. |
 | Side effect | Writes the amended plan, appends tasks to `tasks/autoplan-ledger.jsonl`, and updates TODOs. |
 | Done | The final approval gate presents an amended plan and aggregated implementation tasks with stable IDs. |
 

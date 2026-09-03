@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User explicitly asks to beam, publish, or share the current local coding session with an authenticated remote receiver. |
-| Authority | Human-only. Require explicit human invocation; preview the payload size and destination before sending. No model-autonomous invocation. |
+| Authority | Remote: uploads a redacted, size-bounded JSON payload to a configured endpoint over HTTPS with authentication; requires explicit human invocation. Previews the payload size and destination before sending. No model-autonomous invocation. |
 | Side effect | A redacted, size-bounded JSON payload is uploaded to a configured endpoint over HTTPS with authentication; a shareable URL is returned. No raw JSONL, reasoning traces, or credentials are sent. |
 | Done | The returned URL is valid and the payload contains only visible user/assistant messages and aggregate tool counts. |
 

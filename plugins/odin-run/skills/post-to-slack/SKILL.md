@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | The user explicitly asks to share a message on Slack; a suggestion to post is advisory and does not supply authority. |
-| Authority | Human-only: require an explicit request for this Slack post, then preview the destination and consequence before using the webhook credential. |
+| Authority | Remote: posts one Slack message through the webhook credential; requires explicit human invocation and a preview of the destination and consequence. |
 | Side effect | Send one JSON message payload to the supplied Slack incoming webhook; do not modify any other remote resource. |
 | Done | Slack accepts the request, and the posted-message result is reported without exposing the webhook URL. |
 

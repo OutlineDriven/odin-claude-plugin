@@ -10,7 +10,7 @@ description: 'Use when /design-consultation proposes a design system with mockup
 | Field | Bound contract |
 |---|---|
 | Trigger | The user runs /design-consultation |
-| Authority | Write only the named local artifacts: DESIGN.md, CLAUDE.md pointers, and design artifacts (mockups or an HTML preview). No remote, VCS, credential, paid, published, or deployed mutation. Roll back by reverting those files. |
+| Authority | Reversible local: writes only DESIGN.md, CLAUDE.md pointers, and design artifacts (mockups or an HTML preview); rollback is version control. No remote mutation. |
 | Side effect | Local writes to DESIGN.md, CLAUDE.md pointers, and design artifacts, bounded to the current project directory. |
 | Done | An approved design system is persisted in DESIGN.md. |
 

@@ -10,7 +10,7 @@ description: 'Use when a long agentic project needs each cycle to produce a lear
 | Field | Bound contract |
 |---|---|
 | Trigger | A long agentic project where each cycle must produce a learning memo before the next pass begins. |
-| Authority | Reversible local: write only named local artifacts; state the rollback path for each write. |
+| Authority | Reversible local: writes only named local artifacts; rollback is version control or undo. No remote mutation. State the rollback path for each write. |
 | Side effect | Builds vertical slices, runs real-surface drives, produces memos and gates; versions only quality-cleared templates or modules. |
 | Done | Real surface driven with evidence captured; memo names at least one lesson, anti-pattern, or gate affecting the next pass; keep/iterate/restart decision explicit; version labels only on quality-cleared artifacts. |
 

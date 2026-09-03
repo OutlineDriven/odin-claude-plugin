@@ -10,7 +10,7 @@ description: 'Use when a project is between phases, the author asks what to do n
 | Field | Bound contract |
 |---|---|
 | Trigger | A project is between phases, the author asks what to do next, too many valid threads are open, or the work needs re-entry into frame, build, drive, memo, assumption testing, restart, or ship |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | None: returns one action recommendation |
 | Done | The recommendation cites the state it read; there is exactly one next action; the action has a clear done-when observable; a reader can tell why this action beats the other visible options |
 

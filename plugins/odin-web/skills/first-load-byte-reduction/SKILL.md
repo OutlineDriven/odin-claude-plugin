@@ -10,7 +10,7 @@ description: 'Use when a first screen needs lower transfer bytes without visual 
 | Field | Bound contract |
 |---|---|
 | Trigger | A first screen needs lower transfer bytes without visual or behavioral change. |
-| Authority | Reversible local with dependency ask: write only named local artifacts; ask before adding or upgrading a dependency. |
+| Authority | Reversible local: writes only named local artifacts; rollback is version control. No remote mutation. Asks before adding or upgrading a dependency. |
 | Side effect | Pixel-identical first-load byte reduction: local writes to the fixed screens and their asset pipeline. |
 | Done | The fixed first screen transfers fewer compressed bytes with pixel identity and passing tests. |
 | Stop | No safe reduction; blocked; budget exhausted. Bound: fixed screens, target environment, byte budget. |

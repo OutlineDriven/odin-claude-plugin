@@ -10,7 +10,7 @@ description: 'Use when reviewing Django or DRF access control, IDOR, authorizati
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to review Django access control, IDOR, authorization, permissions, or tenant isolation |
-| Authority | Read-only: no file, VCS, credential, or remote mutation. Investigate source via read/grep/glob only |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Investigate source via read/grep/glob only. |
 | Side effect | Reports access-control vulnerabilities as chat output; changes nothing |
 | Done | Validated IDOR/authz findings with evidence, impact, and fix suggestions returned |
 

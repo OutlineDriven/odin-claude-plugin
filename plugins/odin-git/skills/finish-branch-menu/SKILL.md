@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | Implementation is complete and the full test suite is green; an integration decision is needed for a development branch or worktree. |
-| Authority | Human-only. Every remote or destructive effect, push and PR, branch delete, worktree removal, discard, sits behind the user's explicit per-run menu selection; discard also requires the typed word `discard`. Preview the target and consequence before any remote mutation or irreversible deletion. |
+| Authority | Remote: pushes one branch and opens or updates one pull request; requires explicit human invocation. Every destructive effect (branch delete, worktree removal, discard) sits behind the user's explicit per-run menu selection; discard also requires the typed word `discard`. |
 | Side effect | Merge with branch delete, or push plus PR with the worktree preserved, or keep as-is. Worktree removal only for framework-owned worktrees; a refused removal hands the user a commit, move, or delete choice for untracked files. |
 | Done | The chosen option executed on a green suite, with tests re-run on the merged result for the merge option; on failure, stop and investigate rather than clean up; the tree state matches the provenance table. |
 

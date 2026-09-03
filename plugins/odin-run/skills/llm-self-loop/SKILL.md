@@ -10,7 +10,7 @@ description: 'Use when a button click, dashboard check, or human verdict sits in
 | Field | Bound contract |
 |---|---|
 | Trigger | A human explicitly invokes this skill for a task whose iteration loop depends on a button click, dashboard check, terminal or web interaction, screenshot inspection, copy-paste, secret entry, or human verdict. |
-| Authority | Inspect the named workflow and make only reversible changes to its named local harness artifacts. Do not change credentials, paid services, published or deployed state, remote data, or external systems. |
+| Authority | Reversible local: writes only named local harness artifacts; rollback is undo. No remote mutation. |
 | Side effect | Replace inner-loop human gates with local CLI triggers, file outputs, structured logs, or contract assertions, limited to the workflow and local artifacts named by the human. |
 | Done | The loop reaches its asserted completion condition without an inner-loop human action, or every step that cannot be automated is removed from the inner loop and represented as one outer-loop approval or a discrete human handoff. |
 

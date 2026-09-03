@@ -10,7 +10,7 @@ description: 'Use when a project context-schema differs from the installed entry
 | Field | Bound contract |
 |---|---|
 | Trigger | The project context store records a `context-schema` value that is behind this skill's entry-format version (applicable entry-format changes exist) or ahead of it (older skill on newer project). |
-| Authority | Reversible local write, consent-gated: rewrites only entry files and the `context-schema` field inside the named project context store, after an explicit operator answer. A backup or version control provides the rollback path. Nothing is written outside the store, and nothing is migrated silently. |
+| Authority | Human-gated: asks for an explicit operator answer before rewriting entry files and the `context-schema` field inside the named project context store; otherwise reversible local as above. Nothing is written outside the store, and nothing is migrated silently. |
 | Side effect | Rewrites existing entries per the migration catalog below, marking missing info `undefined` with a reason (never guessed); updates the `context-schema` field only after every entry is caught up. |
 | Done | The schema comparison runs every session before the store is written; migrations happen only with explicit consent; a per-developer decline changes nothing in the project store; in the ahead state no entry writes happen until the installed skill is updated. |
 

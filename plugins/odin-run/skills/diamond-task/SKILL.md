@@ -10,7 +10,7 @@ description: 'Use when one issue or PR is too large for a worker and partitions 
 | Field | Bound contract |
 |---|---|
 | Trigger | Use when one issue or pull request is too large or too entangled for one worker and its complete writable surface can be partitioned into disjoint write sets. |
-| Authority | Reversibly write only the named local run artifacts and declared target write sets. Preserve a pre-run checkpoint and restore it on terminal failure. This is the sole production task-DAG generator. |
+| Authority | Reversible local: writes only the named local run artifacts and declared target write sets; rollback is restoring the pre-run checkpoint. No remote mutation. This is the sole production task-DAG generator. |
 | Side effect | Run isolated workers and apply their returned diffs by mechanical union within their declared write sets; the composer authors no content and changes nothing outside those sets. |
 | Done | Produce one result that reproduces every worker diff byte-for-byte within disjoint declared write sets and has approval from a fresh isolated reviewer who was neither a worker nor the composer, or stop with no partial composition and identify the falsified worker node or split. |
 

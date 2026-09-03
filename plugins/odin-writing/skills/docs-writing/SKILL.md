@@ -10,7 +10,7 @@ description: 'Use when asked to write, restructure, or audit documentation using
 | Field | Bound contract |
 |---|---|
 | Trigger | Write docs, audit docs, restructure documentation, draft a feature docs page, draft documentation or diagram source, Diataxis, API reference, tutorial, how-to guide |
-| Authority | Reversible local writes to documentation files or diagram sources in the named target set only. Reject paths outside the working repository or protected files. No VCS, credential, published, deployed, or remote mutation. |
+| Authority | Reversible local: writes only documentation files or diagram sources in the named target set inside the working repository, rejecting paths outside it or protected files; rollback is version control. No remote mutation. |
 | Side effect | Drafts, audits, and writes or restructures docs or diagram sources in the target directory. Presents the draft to the human for review before writing. |
 | Done | Docs follow Diataxis types, pass the rule-based audit with no unmet criteria, are reviewed by the human, and are saved at the target path. |
 

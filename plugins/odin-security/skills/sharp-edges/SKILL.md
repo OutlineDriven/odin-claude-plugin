@@ -10,7 +10,7 @@ description: 'Use when asked to audit a code surface for security-relevant edge 
 | Field | Bound contract |
 |---|---|
 | Trigger | A user asks whether an API, configuration schema, cryptographic interface, authentication surface, or library design is misuse-resistant, secure by default, or contains footguns. |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | A structured sharp-edge findings report in the conversation. |
 | Done | Security-relevant choice points are checked across zero, empty, null, negative, default, type-confusion, and failure cases; each reported edge has category, severity, location, reproducible misuse, and a misuse-resistant recommendation. |
 

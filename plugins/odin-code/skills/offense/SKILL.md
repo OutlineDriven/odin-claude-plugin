@@ -12,7 +12,7 @@ Radical codebase overhaul, invoked by a human only. Demolish-and-re-derive: rewr
 | Field | Bound contract |
 |---|---|
 | Trigger | A human invokes an overhaul: "overhaul", "rebuild this subsystem", "rewrite it from scratch", or equivalent. Never self-initiated. |
-| Authority | Modify only the invoked scope, an exact disclosed set of repository paths governed by version control. Create atomic commits and use version control to recover from an invalid increment. Stop and ask before removing any observable surface consumers depend on. |
+| Authority | Human-gated: asks before removing any observable surface consumers depend on; otherwise reversible local: writes only the invoked scope (an exact disclosed set of repository paths); rollback is version control (atomic commits). No remote mutation. |
 | Side effect | Atomic compilable commits that demolish the old structure and re-derive it from its contracts; the general case absorbs every special case; every caller migrates in the same change; no shim, alias, deprecated path, or feature flag survives the cutover. |
 | Done | The invoked scope is rebuilt from its contracts, every caller is migrated, no special-case branch or deprecated path remains, the feature works end to end, and the applicable verifier is green. |
 

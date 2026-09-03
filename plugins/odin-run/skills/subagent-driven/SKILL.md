@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User says 'execute with subagents' or hands over an ordered multi-task plan. |
-| Authority | Reversible local: no file, VCS, credential, paid, published, deployed, or remote mutation outside the skill's designated workspace. |
+| Authority | Remote: publishes the branch via git-branchless `submit`; requires explicit human invocation. Also writes locally within the skill's designated workspace (commits, briefs, reports, ledger); rollback is version control. |
 | Side effect | Lands atomic commits, writes implementer briefs, reviewer reports, and diff packages as files, maintains the durable progress ledger, and ends in one final atomic ship. |
 | Done | Every task is audit-clean and verifier-green, the ledger is complete, and the whole-branch review has been dispatched and resolved. |
 

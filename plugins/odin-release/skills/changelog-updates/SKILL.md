@@ -10,7 +10,7 @@ description: 'Use when a release or a since-tag window needs user-facing release
 | Field | Bound contract |
 |---|---|
 | Trigger | A release or a since-tag window needs user-facing release communication drafted |
-| Authority | Reversible local writes only: create or update a draft release note and advance the file-based since-tag marker; no git tag, no publish, no release, no remote mutation |
+| Authority | Reversible local: writes only a draft release note and the file-based since-tag marker; rollback is version control. No remote mutation, no git tag, no publish, no release. |
 | Side effect | Writes or updates one draft release note file and advances the since-tag state marker exactly once |
 | Done | The draft covers exactly the since-tag window and the marker advanced once; publishing remains a separate human action |
 

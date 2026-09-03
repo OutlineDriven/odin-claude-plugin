@@ -10,7 +10,7 @@ description: 'Use when asked to generate an interactive bash wizard that walks a
 | Field | Bound contract |
 |---|---|
 | Trigger | User needs provisioning, credentials, dashboard, or migration steps that only a human can perform. |
-| Authority | Reversible-local: write only the wizard script to the named target path; delete the file to roll back. |
+| Authority | Reversible local: write only the wizard script to the named target path; delete the file to roll back. |
 | Side effect | Writes the wizard script to the target path and makes it executable; verification is static only: the script is never executed. |
 | Done | The wizard script exists at the target path, is executable, passes static verification, and every collected value is traced to its destination. |
 

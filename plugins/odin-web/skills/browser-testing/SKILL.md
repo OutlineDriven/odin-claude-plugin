@@ -10,7 +10,7 @@ description: 'Use when building, debugging, or verifying browser-rendered code, 
 | Field | Bound contract |
 |---|---|
 | Trigger | Browser UI implementation, debugging, or runtime verification; or a PR number, branch name, or `current` to test pages affected by a diff. |
-| Authority | Read-only. Drives an attached browser to inspect runtime state. No source, VCS, credential, paid, published, deployed, or remote mutation. Fixes are requested from the user, never applied. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Fixes are requested from the user, never applied. |
 | Side effect | Drives an attached browser or a selected browser driver against the local dev server. Writes only local evidence artifacts (screenshots, console logs, test reports). |
 | Done | Interactive: the changed runtime surface is exercised with clean console/network and correct visual, accessibility, or performance evidence. Diff-scoped: the summary reports every affected route as Pass, Fail, or Skip with reasons, or reports the preflight blocker and what would clear it. |
 

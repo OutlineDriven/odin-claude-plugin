@@ -10,7 +10,7 @@ description: 'Use when asked to run branch-diff browser QA against a PR or branc
 | Field | Bound contract |
 |---|---|
 | Trigger | /diff-scoped-browser-qa [PR number, branch name, or blank for current branch] [--port PORT] |
-| Authority | reversible-local, write only the dogfood report under the resolved artifact root, auto-fix commits on the target branch, and transient artifacts in OS temp; recover via git for commits and the on-disk report checkpoint for the report |
+| Authority | Reversible local: writes only the dogfood report under the resolved artifact root, auto-fix commits on the target branch, and transient artifacts in OS temp; rollback is version control for commits and the on-disk report checkpoint for the report. No remote mutation. |
 | Side effect | Drives a real browser, may autonomously fix small breakages with regression tests and commit them, and writes a dogfood report |
 | Done | Every matrix scenario is Pass, Fixed, Skipped, or terminal Blocked; the automated suite result is recorded and the report is finalized |
 

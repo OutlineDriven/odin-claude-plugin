@@ -10,7 +10,7 @@ description: 'Use when a vulnerability or code pattern and a target language nee
 | Field | Bound contract |
 |---|---|
 | Trigger | The user supplies a vulnerability, bug, or code pattern and target language and asks for a new custom Semgrep detection. |
-| Authority | Reversible-local: write only the single new rule directory and the two files inside it; run only local Semgrep commands; roll back by deleting the rule directory. |
+| Authority | Reversible local: writes only the single new rule directory and the two files inside it; rollback is deleting the rule directory. No remote mutation. Runs only local Semgrep commands. |
 | Side effect | Exactly one rule directory containing one YAML rule and one annotated language test file; executes Semgrep validation, tests, AST dump, and final scan. |
 | Done | The rule is specific, uses taint mode when data flow warrants it, all vulnerable/safe/edge/nested tests pass before and after optimization, YAML validates, and final output has no uninterpolated metavariables. |
 

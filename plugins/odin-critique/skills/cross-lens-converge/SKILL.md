@@ -10,7 +10,7 @@ description: 'Use when one reviewer is not enough because failure modes are hete
 | Field | Bound contract |
 |---|---|
 | Trigger | One reviewer isn't enough because the failure modes are heterogeneous, or a claim looks strong to its author and needs cross-lens pressure before it ships |
-| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | None (read-only analysis); returns a convergence picture and the single resolving question |
 | Done | The result reads as a picture not a checklist: a reader sees which lenses agreed, which disagreed, and the one question that matters, and can act on it without re-running the analysis |
 

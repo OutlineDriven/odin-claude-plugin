@@ -10,7 +10,7 @@ description: 'Use when a user asks to tighten verbose-but-correct prose without 
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to tighten verbose-but-correct prose without a full rewrite |
-| Authority | Reversible local edits: cuts words in place on the named artifact; moves nothing to other artifacts |
+| Authority | Reversible local: writes only the named artifact, cutting words in place; rollback is version control. No remote mutation. |
 | Side effect | Local write to the target artifact only; no re-derivation, no move to another home |
 | Done | Every load-bearing claim present before remains after; the result reads as intentionally terse, not amputated; genuine duplication or drift is handed off instead of force-compressed |
 

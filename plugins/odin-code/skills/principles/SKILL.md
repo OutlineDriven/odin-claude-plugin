@@ -14,7 +14,7 @@ Five anchors carry procedure-dense references (linked inline); the rest are comp
 | Field | Bound contract |
 |---|---|
 | Trigger | A request names a working principle by name or example, or asks which principle governs a decision. |
-| Authority | Read-only. Names the owning skill for execution; never mutates files, VCS, credentials, or remote state. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Names the owning skill for execution. |
 | Side effect | Guidance in chat output only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Done | The governing principle is named with its law and bite point, and the owning skill is named when the anchor requires execution. |
 

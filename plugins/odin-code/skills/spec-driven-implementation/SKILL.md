@@ -10,7 +10,7 @@ description: 'Use when a significant feature begins or specs are checked in: aut
 | Field | Bound contract |
 |---|---|
 | Trigger | Starting a significant feature or when specs are checked in. |
-| Authority | Reversible local writes only; rollback via VCS if commit is not yet pushed. |
+| Authority | Reversible local: writes only checked-in spec files and implementation; rollback is version control (if commit is not yet pushed). No remote mutation. |
 | Side effect | Creates or updates checked-in spec files within the project. |
 | Done | Specs exist, are behavioral, and stay current with what ships. |
 

@@ -10,7 +10,7 @@ description: 'Use when asked to create an MCP server to integrate an API or serv
 | Field | Bound contract |
 |---|---|
 | Trigger | Creating an MCP server to integrate an API or service in Python or TypeScript. |
-| Authority | Reversible local: write only named project files; delete the project directory to roll back. |
+| Authority | Reversible local: writes only named project files; rollback is deleting the project directory. No remote mutation. |
 | Side effect | A new MCP server project with typed tools, tests, and a read-only evaluation suite. |
 | Done | Server builds, registers tools with correct Zod/Pydantic schemas and annotations, passes MCP inspector, and has 16 stable read-only evaluations with verified answers. |
 

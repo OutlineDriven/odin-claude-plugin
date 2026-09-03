@@ -10,7 +10,7 @@ description: 'Use when handling untrusted input, auth/authz, data storage, or ex
 | Field | Bound contract |
 |---|---|
 | Trigger | Handling untrusted input, auth/authz, data storage, external integrations, files/uploads/payment. |
-| Authority | Reversible-local: adds security controls to code during construction; rollback restores prior state. |
+| Authority | Reversible local: writes only security controls added to code during construction; rollback is version control. No remote mutation. |
 | Side effect | Local-write: changes to code files only; no credential, deployment, or remote mutation. |
 | Done | Security-relevant code passes the always-do checks and verification checklist. |
 

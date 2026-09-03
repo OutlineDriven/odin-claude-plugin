@@ -10,7 +10,7 @@ description: 'Use when asked to enroll a project in OSS-Fuzz or run its helper w
 | Field | Bound contract |
 |---|---|
 | Trigger | User needs to enroll an open-source project in OSS-Fuzz, run its helper workflow locally, or reproduce an OSS-Fuzz report. |
-| Authority | Write only named local artifacts (oss-fuzz clone, Docker images, project enrollment files); rollback path is `docker rmi` for images and filesystem deletion for the clone. |
+| Authority | Reversible local: writes only named local artifacts (oss-fuzz clone, Docker images, project enrollment files); rollback is `docker rmi` for images and filesystem deletion for the clone. No remote mutation. |
 | Side effect | OSS-Fuzz project integration files, Docker image builds, and local fuzzing campaign artifacts written to the oss-fuzz working directory. |
 | Done | The project Docker image builds, fuzzers compile with AddressSanitizer, the named harness executes, and `projects/<name>/project.yaml`, `Dockerfile`, and `build.sh` are present and structurally valid. |
 

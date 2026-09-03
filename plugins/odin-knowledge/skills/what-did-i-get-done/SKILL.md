@@ -10,7 +10,7 @@ description: 'Use when a user asks what was completed in a named date or commit 
 | Field | Bound contract |
 |---|---|
 | Trigger | User explicitly asks to summarize completed work in a named range |
-| Authority | Read-only: read git log only; no file write, credential use, remote mutation, or deployment change |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Reads git log only. |
 | Side effect | Chat output only; no file, VCS, credential, paid, published, or remote mutation |
 | Done | Concise dated status update returned as chat text |
 

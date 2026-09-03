@@ -10,7 +10,7 @@ description: 'Use when the user asks to detect clever-concealment patterns that 
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants to find clever concealment that obscures real structure. |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | A report identifying concealment that obscures real structure. |
 | Done | Every applicable concealment form has been applied to every file in scope, every confirmed instance is reported with file, line, form, and severity, or an explicit none-found statement is emitted. |
 

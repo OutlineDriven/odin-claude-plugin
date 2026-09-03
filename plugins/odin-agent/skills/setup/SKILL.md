@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to set up or configure the agent from a fresh or existing clone. |
-| Authority | Human-only authority; may perform external or irreversible mutations only after explicit human confirmation at each step. |
+| Authority | Human-gated: asks before each credential write, `.venv` creation, or placeholder replacement in skill scripts; otherwise reversible local as above. |
 | Side effect | Creates or updates .env, token.json, a uv-managed `.venv`, and replaces placeholders in skill scripts; reports a ready/not-ready checklist. |
 | Done | Selected integrations are configured, remaining placeholders are documented, and example prompts are reported. |
 

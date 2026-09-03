@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | A human explicitly asks to ship work through a clean branch and pull request. |
-| Authority | Create a local branch and commit only for this request; before pushing or opening the pull request, preview the remote, base, head branch, included changes, and publishing consequence. |
+| Authority | Remote: pushes one branch and opens one pull request; requires explicit human invocation. Creates a local branch and commits first; preview the remote, base, head branch, included changes, and publishing consequence before the remote mutation. |
 | Side effect | Creates one focused branch, commits its intended changes, pushes that branch, and opens one pull request without mutating unrelated work or other remote branches. |
 | Done | The intended changes are committed on the focused branch and the remote operation is confirmed by a pull-request URL. |
 

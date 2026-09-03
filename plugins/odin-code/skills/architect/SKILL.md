@@ -10,7 +10,7 @@ description: 'Use when non-trivial code needs designing before implementation, o
 | Field | Bound contract |
 |---|---|
 | Trigger | Design non-trivial code before implementation (greenfield), or improve an existing codebase's architecture (brownfield): survey for shallow modules, locate a seam, deepen a structure, harden with guardrails, or make code testable. |
-| Authority | Write named local design artifacts and, when the request permits, implement the selected design in the working tree. All writes reversible by deleting or reverting them. No VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Reversible local: writes only named local design artifacts and, when the request permits, the selected design in the working tree; rollback is version control or undo (delete or revert). No remote mutation. |
 | Side effect | A local design package; in implement mode, the accepted refactor, its tests, inline `CONTEXT.md` entries for established domain terms, and an optional local ADR the user accepts. |
 | Done | An explicit design choice with tradeoffs and a coherent implementation shape are recorded. In brownfield implement mode: one chosen deepening candidate is grilled to resolution, its shallow path is replaced rather than layered, tests exercise the resulting interface, obsolete shallow tests and code are removed, and established domain terms and accepted decisions are recorded locally. |
 

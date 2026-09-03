@@ -10,7 +10,7 @@ description: 'Use when a user wants an answer only from the skeptic seat: cold r
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants an answer only from the skeptic seat (cold reasoning without project loyalty). |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | A skeptic-perspective analysis emitted as chat output. |
 | Done | A skeptic-perspective answer is emitted without blending. |
 

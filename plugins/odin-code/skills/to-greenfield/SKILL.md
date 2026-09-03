@@ -10,7 +10,7 @@ description: 'Use when the user says greenfield this or rescue this codebase, or
 | Field | Bound contract |
 |---|---|
 | Trigger | User says 'greenfield this' or 'rescue this codebase', or names a field. |
-| Authority | Reversible-local: read-only diagnosis, then exactly one bounded first corrective action limited to named local artifacts and the smallest edits that action requires; the rollback path is stated before any mutation. |
+| Authority | Reversible local: writes only named local artifacts for exactly one bounded first corrective action (read-only diagnosis first); rollback is stated before any mutation (version control or undo). No remote mutation. |
 | Side effect | Field diagnosis and the first corrective action are reported in chat; durable effects are limited to the single bounded action this skill executes under its own authority. |
 | Done | The field (dark, red, brown, or blue) is named with its one-fact evidence and the first corrective action has been executed. |
 

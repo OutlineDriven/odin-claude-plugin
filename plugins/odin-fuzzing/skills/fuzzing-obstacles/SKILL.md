@@ -10,7 +10,7 @@ description: 'Use when asked to identify and bypass checksums, nondeterminism, o
 | Field | Bound contract |
 |---|---|
 | Trigger | User needs to identify and safely bypass checksums, nondeterminism, or validation barriers that block fuzzing coverage. |
-| Authority | Reversible local write: modify only the System Under Test source behind an explicit fuzzing build flag so production behavior is unchanged. Rollback by deleting the conditional block or the fuzz build configuration; production code path is never altered. |
+| Authority | Reversible local: writes only the System Under Test source behind an explicit fuzzing build flag so production behavior is unchanged; rollback is deleting the conditional block or the fuzz build configuration. No remote mutation. Production code path is never altered. |
 | Side effect | Fuzz-only target behavior behind explicit build controls. No production binary, credential, remote, or published artifact is touched. |
 | Done | The specific obstacle is bypassed only in fuzz builds, coverage improves over the unpatched baseline, and false-positive risk is assessed. |
 

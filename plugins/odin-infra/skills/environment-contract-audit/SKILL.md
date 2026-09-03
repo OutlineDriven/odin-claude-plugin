@@ -10,7 +10,7 @@ description: 'Use when environment-dependent code, templates, or deployment conf
 | Field | Bound contract |
 |---|---|
 | Trigger | Environment-dependent code, templates, or deployment configuration changes, or runtime configuration is missing. |
-| Authority | Read-only local inspection. Approval required only for production secret, credential, or remote configuration mutation: make one harness ask/question call before the run starts; prose consent, invocation consent, prior-run consent, and post-start discovery do not approve an effect. |
+| Authority | Human-gated: makes one harness ask/question call before any production secret, credential, or remote configuration mutation; otherwise read-only. No file, VCS, credential, paid, published, deployed, or remote mutation without that approval. Prose consent, invocation consent, prior-run consent, and post-start discovery do not approve an effect. |
 | Side effect | Bidirectionally reconciled environment-variable contract. |
 | Done | Every referenced variable is supplied and documented at the correct required/optional and public/secret scope. |
 | Stop | exact blocker; unsafe exposure. Bound: declared code, templates, runtime config, and deployment-config surfaces. |

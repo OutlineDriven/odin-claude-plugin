@@ -10,7 +10,7 @@ description: 'Use when the user says the tasks are too vague or asks to sophisti
 | Field | Bound contract |
 |---|---|
 | Trigger | User says 'sophisticate the todos', says the tasks are too vague, or the list reads as headings rather than executable work. |
-| Authority | Reversible local file edits only; no VCS, deployment, or remote mutation. |
+| Authority | Reversible local: writes only todo-list file edits; rollback is version control. No remote mutation. |
 | Side effect | Rewrites the task list with compound items split, dependency order applied, and one acceptance criterion pinned per task. |
 | Done | Zero unclassified, vague, or unverifiable items remain and every task carries exactly one observable acceptance criterion. |
 

@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | A greenfield project or a large feature build will not fit in a single agent session. |
-| Authority | Human-only. Require explicit human invocation; preview the target and consequence before creating remote issues, local map files, or firing research subagents. |
+| Authority | Human-gated: previews target and consequence before creating remote issues, local map files, or firing research subagents; otherwise reversible local, writing only local map files. No remote mutation without approval. |
 | Side effect | Creates the map and decision tickets on the supported remote tracker or in .outline/wayfinder locally, and fires research subagents. |
 | Done | The route is clear: no decision remains before someone builds: the map is complete at the handoff edge with decision tickets on the frontier. |
 

@@ -10,7 +10,7 @@ description: 'Use when the user asks for onboarding, orientation, a repository t
 | Field | Bound contract |
 |---|---|
 | Trigger | The user invites onboarding, orientation, a tour, or guidance on where to start in a repository. |
-| Authority | Read-only: inspect local repository content and metadata, but do not mutate files, version control, credentials, paid services, publications, deployments, or remote state. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Return an in-chat repository orientation and next-move question; make no repository changes. |
 | Done | Return the applicable seven sections in order, grounded in observed evidence; deep-read two or three real files when available; and ask the user to choose the next move. |
 

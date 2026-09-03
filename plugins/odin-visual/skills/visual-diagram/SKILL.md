@@ -10,7 +10,7 @@ description: 'Use when the user asks to diagram, draw, map out, walk through, or
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to diagram, draw, map out, walk through, illustrate, or visually explain a topic, system, process, or architecture |
-| Authority | Stated by output mode. HTML mode: reversible-local; write only one named local HTML artifact; state the rollback path. SVG mode: read-only; no file, VCS, credential, paid, published, deployed, or remote mutation |
+| Authority | Reversible local: HTML mode writes only one named local HTML artifact; rollback is deleting that file. No remote mutation. SVG mode is read-only with no file mutation. |
 | Side effect | Stated by output mode. HTML mode: writes one self-contained HTML file under the user diagrams directory; opens the page in a browser or reports the path. SVG mode: chat output only; a visualizer fence containing an SVG fragment, rendered by the client in a sandboxed iframe |
 | Done | Stated by output mode. HTML mode: complete document passing the final checklist: no console errors, no horizontal overflow, dual-theme or deliberate single theme, labeled Mermaid edges, figure captions with claims. SVG mode: a valid SVG diagram of the requested family is present in the visualizer fence |
 

@@ -10,7 +10,7 @@ description: 'Use when a concept needs making clear rather than practising: expl
 | Field | Bound contract |
 |---|---|
 | Trigger | A concept needs making clear not practising; explain simply, why does this exist, draw it, what is the difference, or simplify for a beginner (ELI5). |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. Reading files, one web citation search for the origin angle, and a transient diagram render that leaves no artifact are the only outward operations. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Reading files, one web citation search for the origin angle, and a transient diagram render that leaves no artifact are the only outward operations. |
 | Side effect | Chat output only: a one-screen explanation for the chosen angle, one authored diagram for the picture angle, one citation search for the origin angle. Nothing is written to any file or repository. |
 | Done | A single-angle explanation is presented in chat, grounded in sources or with unanchored claims marked, and the user is prompted to restate or verify where the angle requires it. |
 

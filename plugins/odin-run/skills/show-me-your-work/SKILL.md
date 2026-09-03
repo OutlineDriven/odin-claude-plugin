@@ -10,7 +10,7 @@ description: 'Use when the user invokes it to append a structured decision recor
 | Field | Bound contract |
 |---|---|
 | Trigger | Keep an auditable decision trail for unattended work. |
-| Authority | Write only named local artifacts; append-only TSV with manual revert possible. |
+| Authority | Reversible local: writes only named local artifacts; append-only TSV with manual revert possible. |
 | Side effect | Writes decision log and invokes reviewer. |
 | Done | Resolvable evidence trail ending in Attention section. |
 

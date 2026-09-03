@@ -10,7 +10,7 @@ description: 'Use when an existing repository needs its unexplained rationale re
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to document an existing/legacy repository or recover why-knowledge the code cannot explain. |
-| Authority | Reversible-local: create or update rationale topic files inside the target repository only. Never stage, commit, push, or publish. Rollback is deleting created files and restoring updated tracked files (`git restore <path>`). |
+| Authority | Reversible local: writes only rationale topic files inside the target repository; rollback is version control or undo. No remote mutation. Never stages, commits, pushes, or publishes. |
 | Side effect | Creates/updates topic files with reconstructed rationale, explicit Evidence levels, open-question statuses, and unknown markers for unrecoverable items. |
 | Done | Every code-unexplainable area in scope is enumerated; each entry carries an evidence classification; what could not be recovered is stated as unknown, never guessed; conflicts between code and docs/maintainers are flagged open. |
 

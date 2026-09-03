@@ -10,7 +10,7 @@ description: 'Use when the user says show this or diagram this about the current
 | Field | Bound contract |
 |---|---|
 | Trigger | The user says show me or diagram this about the current topic. |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Emits an ephemeral visual in chat; no files on disk. |
 | Done | One (or at most two) smallest views carrying the point, beside its short supporting text. |
 

@@ -10,7 +10,7 @@ description: 'Use when authorized workflow history may contain a repeated proces
 | Field | Bound contract |
 |---|---|
 | Trigger | Authorized workflow history may contain a repeated process worth extracting and replay-testing. |
-| Authority | AUTHORIZED_PRIVATE_SOURCE_READ: read-only access to the authorized corpus. No file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Access is limited to the authorized corpus. |
 | Side effect | Produces a contradiction-tested workflow mined from authorized history. |
 | Done | The workflow survives at least three independent high-confidence successes and a fresh replay. |
 | Stop | contradicted; insufficient evidence; blocked. Bound: authorized corpus and pass cap. |

@@ -10,7 +10,7 @@ description: 'Use when a user asks to fix a listing whose order has gone arbitra
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to fix a listing whose order has gone arbitrary (list, table, catalog, sections, enum). |
-| Authority | May move items within the target listing only; may not add, remove, or rewrite item text. |
+| Authority | Reversible local: writes only the target listing, moving items without adding, removing, or rewriting item text; rollback is version control. No remote mutation. |
 | Side effect | Moves items only; reword/add/remove nothing. |
 | Done | A reader can name the ordering principle from the result alone; item set unchanged; kin adjacent; mirrored copies in lockstep. |
 

@@ -10,7 +10,7 @@ description: 'Use when a grounded piece needs user-selected beat-by-beat assembl
 | Field | Bound contract |
 |---|---|
 | Trigger | A grounded piece needs user-selected beat-by-beat assembly. |
-| Authority | Reversible local write. Rollback path: delete the target piece file if partial write fails. No remote mutation. |
+| Authority | Reversible local: writes only the target piece file; rollback is deleting it after a partial write. No remote mutation. |
 | Side effect | Selected beats appended to the target piece after re-reading each from its source file. No other content written. |
 | Done | Only the selected grounded beats form the piece; no unselected content present. |
 

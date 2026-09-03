@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User needs to safely deploy a change to production or plan its release safeguards. |
-| Authority | Human-only: require explicit human invocation and confirmation before any irreversible deployment action. |
+| Authority | Remote: drives the production deployment and rollout; requires explicit human invocation. Require confirmation before any irreversible deployment action. |
 | Side effect | Drives the deployment or rollout sequence and verification; no durable files of its own. |
 | Done | Plan mode: a verified deployment plan is produced. Execute mode: a completed rollout with all thresholds green, or a stopped and rolled-back deployment. |
 

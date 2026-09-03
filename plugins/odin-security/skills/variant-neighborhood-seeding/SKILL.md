@@ -10,7 +10,7 @@ description: 'Use when a confirmed or plausible issue maps to a graph node and t
 | Field | Bound contract |
 |---|---|
 | Trigger | One confirmed or plausible issue binds to a graph node and the user needs graph-derived review targets to seed variant analysis, Semgrep, CodeQL, or manual review. |
-| Authority | Read-only graph search. Local write of one neighborhood seed document in the current working directory. Delete or edit by hand to reverse. |
+| Authority | Reversible local: writes only one neighborhood seed document in the current working directory; rollback is deleting or editing that file by hand. No remote mutation. Graph search is read-only. |
 | Side effect | Writes one local markdown file containing a ranked candidate list, inclusion reasons, explicit exclusions, and search guidance. No other file is modified. |
 | Done | Candidates are bounded, ranked across distinct graph dimensions, labeled as review targets (not vulnerabilities), and exclusions plus handoff guidance are explicit in the artifact. |
 

@@ -10,7 +10,7 @@ description: 'Use when defining, revising, or gate-replanning the project struct
 | Field | Bound contract |
 |---|---|
 | Trigger | Define, revise, or replan the project structural backbone in project-root `graph.yaml`. |
-| Authority | Reversibly write only project-root `graph.yaml`; checkpoint its prior bytes and restore them on failure. Do not execute graph nodes, change code, mutate VCS, or cause external effects. |
+| Authority | Reversible local: writes only project-root `graph.yaml`; rollback is restoring the checkpointed prior bytes. No remote mutation. |
 | Side effect | Create `graph.yaml`, append a topology revision, or change only gate-authorized focus nodes within the current revision. No other repository file may change. |
 | Done | `graph.yaml` uses schema `odin.graph/v1`; contains only valid declared node and edge types; retains immutable topology within each revision and untouched additive metadata; and limits every focus replan to its authorizing gate. |
 

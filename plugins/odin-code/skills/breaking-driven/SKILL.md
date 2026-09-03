@@ -10,7 +10,7 @@ description: 'Use when bloated code needs clean re-derivation, or the user says 
 | Field | Bound contract |
 |---|---|
 | Trigger | The user says "this module is bloated", "rewrite this properly", or "break it and rebuild". |
-| Authority | Destructive changes restricted to VCS-tracked targets; show the exact set before mutation and use version control as recovery. |
+| Authority | Reversible local: writes only VCS-tracked targets (destructive changes; show the exact set before mutation); rollback is version control. No remote mutation. |
 | Side effect | Deletes obsolete implementation and residue, writes the replacement, and adds essential-behavior tests. |
 | Done | Consumer contract preserved, every divergence classified, residue absent, and verifier green. |
 

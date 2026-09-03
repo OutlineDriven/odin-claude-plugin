@@ -10,7 +10,7 @@ description: 'Use when dogfooding a developer-facing product or workflow to prod
 | Field | Bound contract |
 |---|---|
 | Trigger | The user runs /developer-experience-review to dogfood a developer-facing product or workflow |
-| Authority | Reversible local: write a review log and an optional plan-review section; browser and CLI interactions are reads that change no remote, credential, paid, published, or deployed state |
+| Authority | Reversible local: writes only a review log and an optional plan-review section; rollback is undo. No remote mutation. Browser and CLI interactions are reads that change no remote, credential, paid, published, or deployed state. |
 | Side effect | A review log and an optional plan-review section under the working directory |
 | Done | An evidence-backed eight-dimension scorecard reports measured time to hello world and prioritized DX fixes |
 

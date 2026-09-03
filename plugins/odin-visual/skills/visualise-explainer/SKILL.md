@@ -10,7 +10,7 @@ description: 'Use when asked to create an interactive HTML concept explainer wit
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks for an interactive explainer, how does X work (with controls), slider, live state, or interactive model |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Chat output: visualizer fence containing a self-contained HTML interactive explainer with controls and live state, rendered by the client in a sandboxed iframe |
 | Done | Visualizer fence containing a functional interactive explainer with working controls and live-updating state, validated via local DOM trace |
 

@@ -10,7 +10,7 @@ description: 'Use when skill or knowledge activation is unreliable, or setup rea
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to make skill/knowledge activation more reliable in their agent tool, or first-run wizard reaches the activation-reliability question. |
-| Authority | reversible-local: write only named local hook configuration artifacts; rollback by removing the hook config and its marker. |
+| Authority | Reversible local: writes only named local hook configuration artifacts; rollback is undo. No remote mutation. |
 | Side effect | Project-scoped activation hook configured. Reference implementation: Claude Code SessionStart hook that injects a reminder only when a `keep-the-why:config` marker is present, measured 0/10 to 10/10 on affected eval cases. |
 | Done | Activation measured improved via before/after eval on affected cases; hook scoped by config-marker presence (not unconditional); honest limits stated for tools without a hook mechanism. |
 

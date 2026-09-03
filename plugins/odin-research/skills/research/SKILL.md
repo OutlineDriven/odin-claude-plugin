@@ -10,7 +10,7 @@ description: 'Use when researching a named library, framework, SDK, API, or serv
 | Field | Bound contract |
 |---|---|
 | Trigger | Researching a named library/framework/SDK/API/service or finding a migration guide. |
-| Authority | Reversible-local: write only named local artifacts; state the rollback path. |
+| Authority | Reversible local: writes only named local artifacts; rollback is version control or undo. No remote mutation. |
 | Side effect | Writes a cited Markdown artifact to `docs/research/` or `.outline/research/`; no remote mutation and no paid action. |
 | Done | Cited artifact written to disk with subject id, source-cited claims, confidence labels, open questions. |
 

@@ -10,7 +10,7 @@ description: 'Use when asked to run smoke tests or verify a local build. Applies
 | Field | Bound contract |
 |---|---|
 | Trigger | Explicit human request to run end-to-end smoke verification |
-| Authority | Reversible local changes only: write only named local artifacts; state the rollback path before mutating |
+| Authority | Reversible local: writes only named local artifacts; rollback is deleting them. No remote mutation. States the rollback path before mutating. |
 | Side effect | Builds, runs tests, and may apply minimal fixes to local files only |
 | Done | Check set passes: stable smoke result with honest flake risk classification |
 

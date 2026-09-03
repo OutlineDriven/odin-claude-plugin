@@ -10,7 +10,7 @@ description: 'Use when the learner is ready to apply cleared concepts in a real 
 | Field | Bound contract |
 |---|---|
 | Trigger | The learner is ready to apply cleared concepts in a real project and invokes this skill. |
-| Authority | Reversible local write of exactly one named artifact, `capstone-<slug>.md` at the workspace root; `PROGRESS.md` is read-only input. No other file, VCS, credential, remote, paid, or published mutation. Rollback is deleting the brief file. |
+| Authority | Reversible local: writes only `capstone-<slug>.md` at the workspace root; rollback is deleting the brief file. No remote mutation. |
 | Side effect | Creates or updates `capstone-<slug>.md` at the workspace root and nothing else; never writes progress lines or edits any progress record. |
 | Done | The brief exists at `capstone-<slug>.md` and follows the format; after the learner returns, the work is judged per item against the brief; concepts the work does not demonstrate are named for practice. |
 

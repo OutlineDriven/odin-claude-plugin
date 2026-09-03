@@ -10,7 +10,7 @@ description: 'Use when the user asks to choose, reconcile, or apply an open-sour
 | Field | Bound contract |
 |---|---|
 | Trigger | The user asks to choose, reconcile, or apply an open-source license and associated package metadata for a repository or non-code artifact. |
-| Authority | Reversible local: write only LICENSE, package manager metadata, and README. Rollback is a VCS revert or user file restoration. |
+| Authority | Reversible local: writes only LICENSE, package manager metadata, and README; rollback is version control or user file restoration. No remote mutation. |
 | Side effect | Recommend a license with tradeoffs and, when requested, update LICENSE, package metadata, and README consistently in a single atomic pass. |
 | Done | The selected license fits the stated distribution and reciprocity goals, rights and third-party constraints are surfaced, and LICENSE, package metadata, and README agree under the chosen SPDX ID. |
 

@@ -12,7 +12,7 @@ External findings land as flat lists: a SARIF file, a reviewer's annotation expo
 | Field | Bound contract |
 |---|---|
 | Trigger | A supported finding export must be projected onto an existing program graph and cross-referenced with preanalysis evidence. |
-| Authority | Reversible local writes only; state the rollback path before writing. |
+| Authority | Reversible local: writes only graph annotations, severity or tool-specific subgraphs, and an optional augmented graph export; rollback is deleting the augmented export or removing annotations by source tag. No remote mutation. |
 | Side effect | Graph annotations and severity or tool-specific subgraphs derived from the imports; optionally an augmented graph export. Roll back by deleting the augmented export or removing annotations by source tag. |
 | Done | All supported inputs are imported, matched and unmatched counts are reported, and graph context is attached without promoting imported findings beyond their source status. |
 

@@ -10,7 +10,7 @@ description: 'Use when asked to push an already-working artifact to finished com
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants to push an already working artifact to finished composition, texture, and feel. Not for hygiene routing: use clean-and-true. |
-| Authority | Reversible local writes to the named artifact only. Use its current VCS version as the rollback source. If it is not tracked, require a human-supplied recovery source before mutation. |
+| Authority | Reversible local: writes only the named artifact; rollback is version control. No remote mutation. If the artifact is not VCS-tracked, require a human-supplied recovery source before mutation. |
 | Side effect | Produce a polished local artifact at the named path. No VCS, remote, credential, or paid mutation. |
 | Done | The artifact exists at the named path with visible polish applied and original functionality confirmed intact. |
 

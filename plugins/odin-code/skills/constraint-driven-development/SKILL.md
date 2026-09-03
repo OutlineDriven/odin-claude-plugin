@@ -10,7 +10,7 @@ description: 'Use when asked to implement under explicit non-negotiable constrai
 | Field | Bound contract |
 |---|---|
 | Trigger | Implementing under explicit non-negotiable constraints such as performance budgets, platform limits, or legal or API rules. |
-| Authority | Reversible local writes to the constraints record and the constrained code changes in the working tree. Roll back by reverting those writes; never mutate VCS history, credentials, or remote state. |
+| Authority | Reversible local: writes only the constraints record and constrained code changes in the working tree; rollback is undo (revert those writes). No remote mutation. |
 | Side effect | A constraints record and the code changes that satisfy it, both local and revertible. |
 | Done | All stated constraints verifiably pass in the delivered change and no unrelated behavior regressed, recorded in the constraints artifact. |
 

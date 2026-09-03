@@ -10,7 +10,7 @@ description: 'Use when the user wants to collapse an open decision field to one 
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants to collapse an open decision field to one decision and record its rationale. |
-| Authority | Reversible local write to exactly one named local decision record file. No code, VCS, credential, paid, published, deployed, or remote mutation. Rollback is deleting or reverting that record file. |
+| Authority | Reversible local: writes only one named local decision record file; rollback is deleting or reverting that file. No remote mutation. |
 | Side effect | A decision and rationale written to one local decision record file; the open field is marked collapsed. |
 | Done | The decision field is collapsed to one decision with a distinguishing rationale recorded in the local decision file. |
 

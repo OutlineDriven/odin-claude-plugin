@@ -10,7 +10,7 @@ description: 'Use when the user wants an answer only from the stability seat: pr
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants an answer only from the stability seat (preservation of the working machine). |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | A stability-perspective analysis emitted as chat output only. |
 | Done | A stability-perspective answer is emitted without blending other seats. |
 

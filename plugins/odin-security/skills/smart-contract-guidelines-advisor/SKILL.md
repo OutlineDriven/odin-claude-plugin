@@ -16,7 +16,7 @@ description: 'Use when a smart-contract project needs architecture, implementati
 | Field | Bound contract |
 |---|---|
 | Trigger | A smart-contract project needs architecture, implementation, dependency, upgradeability, documentation, or testing guidance. |
-| Authority | Read-only: no file write, VCS mutation, credential write, paid service mutation, published content mutation, deployed state change, or remote resource mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | One structured chat output containing an evidence-backed secure-development assessment and concrete deliverables. |
 | Done | All applicable assessment areas are covered and every recommendation is mapped to explicit project evidence and deliverables. |
 

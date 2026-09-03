@@ -10,7 +10,7 @@ description: 'Use when the user asks to create a new branch or start work on one
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to create a new branch or start work on a new branch. |
-| Authority | Reversible local write: creates and checks out one local git branch only; no remote, force, or history mutation. |
+| Authority | Reversible local: writes only one local git branch and checks it out; rollback is version control. No remote mutation. No force or history mutation. |
 | Side effect | Creates a local git branch and moves HEAD onto it; rollback is `git switch -` plus `git branch -d <branch>` when the branch has no commits beyond its base. |
 | Done | A branch named `<type>/<short-description>` exists on the correct base with no collisions and HEAD points at it. |
 

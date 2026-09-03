@@ -10,7 +10,7 @@ description: 'Use when the user runs /markdown-to-pdf on Markdown to render a pu
 | Field | Bound contract |
 |---|---|
 | Trigger | The user runs /markdown-to-pdf on a Markdown file. |
-| Authority | Reversible local writes to the rendered PDF and intermediate artifacts only. |
+| Authority | Reversible local: writes only the rendered PDF and intermediate artifacts; rollback is deleting them. No remote mutation. |
 | Side effect | Writes the output PDF and intermediate HTML/artifacts to the local filesystem; no remote, VCS, credential, or published mutation. |
 | Done | A PDF is produced with the emoji, diagram, landscape, and combined gates green. |
 

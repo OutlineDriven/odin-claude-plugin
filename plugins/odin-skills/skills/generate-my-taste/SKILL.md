@@ -10,7 +10,7 @@ description: 'Use when asked to generate a personal taste skill from local evide
 | Field | Bound contract |
 |---|---|
 | Trigger | Generate a personal taste skill from local evidence; `/generate-my-taste` |
-| Authority | Reversible local write: exactly `SKILL.md`, `references/anchors.md`, `references/charter.md` for a `<name>-taste` skill (draft path on collision); may update `spine/*-taste` in place only if selected |
+| Authority | Reversible local: writes only `SKILL.md`, `references/anchors.md`, `references/charter.md` for a `<name>-taste` skill (draft path on collision); rollback is undo. No remote mutation. May update `spine/*-taste` in place only if selected. |
 | Side effect | Local write to those three generated files, preview-gated; no overwrite unless update-in-place was explicitly selected |
 | Done | Generated skill with 5 evidence-derived anchors, two-sided charter, preview-gated write, references written before `SKILL.md`, no slot markers left in output |
 

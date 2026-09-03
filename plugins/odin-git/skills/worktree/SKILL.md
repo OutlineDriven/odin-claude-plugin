@@ -10,7 +10,7 @@ description: 'Use when a new isolated worktree or branch is requested, or an exi
 | Field | Bound contract |
 |---|---|
 | Trigger | A new isolated worktree or branch is requested, or an existing ref or PR needs isolation. |
-| Authority | reversible-local: write only the worktree directory and a `.worktrees/` gitignore entry; rollback by removing the worktree and reverting that entry. |
+| Authority | Reversible local: writes only the worktree directory and a `.worktrees/` gitignore entry; rollback is removing the worktree and reverting that entry. No remote mutation. |
 | Side effect | Local write: creates or attaches an isolated git worktree and reports its exact path and status. |
 | Done | An isolated workspace exists that the harness can see and manage, with no phantom state. |
 

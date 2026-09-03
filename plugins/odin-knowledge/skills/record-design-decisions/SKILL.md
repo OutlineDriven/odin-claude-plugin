@@ -10,7 +10,7 @@ description: 'Use when codebase terminology or a durable technical decision chan
 | Field | Bound contract |
 |---|---|
 | Trigger | Codebase terminology or a durable technical decision changes. |
-| Authority | Reversible local writes only; no remote, credential, paid, or deployed mutation. |
+| Authority | Reversible local: writes only glossary (CONTEXT) and ADR files to the repository; rollback is version control. No remote mutation. |
 | Side effect | Immediate glossary (CONTEXT) and ADR writes to the repository. |
 | Done | Every resolved term and qualifying decision is recorded. |
 

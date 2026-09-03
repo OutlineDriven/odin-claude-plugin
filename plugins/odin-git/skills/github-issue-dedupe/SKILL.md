@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | Find duplicates or check for similar issues against a target GitHub issue. |
-| Authority | Human-only. Requires explicit human invocation. Preview the target issue and the comment consequence before posting any remote mutation. No credentials, data-at-rest changes, paid actions, publishing, deployment, remote bulk mutation, or irreversible deletion beyond the single optional comment. |
+| Authority | Remote: posts at most one comment on the target issue listing duplicates; requires explicit human invocation. No credentials, data-at-rest changes, paid actions, publishing, deployment, remote bulk mutation, or irreversible deletion beyond that comment. |
 | Side effect | Optionally posts one comment on the target issue listing the duplicates, only when the human confirms. Duplicate issues themselves are never modified, closed, labeled, or deleted. |
 | Done | A duplicates classification is returned: a high-confidence duplicates list, or a no-duplicates classification for negative results. |
 

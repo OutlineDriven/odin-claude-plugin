@@ -10,7 +10,7 @@ description: 'Use when the work is modeling a domain, encoding a state machine, 
 | Field | Bound contract |
 |---|---|
 | Trigger | The work is modeling a domain, encoding a state machine, hardening an API boundary, making invalid states unrepresentable, or parsing instead of validating. |
-| Authority | Reversible local. No file, VCS, credential, paid, published, or remote mutation. |
+| Authority | Reversible local: writes only domain types, public signatures, and affected callers and tests; rollback is version control or undo. No remote mutation. |
 | Side effect | Rewrites domain types, public signatures, and affected callers and tests to the new algebraic model. |
 | Done | Invalid states are unconstructible, matches are exhaustive, boundaries parse, and no scattered post-hoc validation remains. |
 

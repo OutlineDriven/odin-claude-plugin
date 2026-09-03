@@ -10,7 +10,7 @@ description: 'Use when given a PR, commit, diff, or baseline and asked for secur
 | Field | Bound contract |
 |---|---|
 | Trigger | The user supplies a pull request, commit, diff, or baseline comparison and asks for security regressions, blast radius, changed-code test gaps, or adversarial review. |
-| Authority | Reversible-local: read changed and baseline code plus Git history, optionally delegate high-risk attacker modeling to a subagent, and write one differential review report. No VCS mutation, credential, paid, published, deployed, or remote mutation. |
+| Authority | Reversible local: writes only one differential review report; rollback is deleting that report. No remote mutation. Reads changed and baseline code plus Git history, and optionally delegates high-risk attacker modeling to a subagent. |
 | Side effect | A local markdown report file; repository code and Git history are read only. |
 | Done | Every in-scope change is risk-classified at the declared depth and the report records evidence-backed findings, test gaps, blast radius, historical context, concrete exploit paths where warranted, limitations, and a recommendation. |
 

@@ -10,7 +10,7 @@ description: 'Use when a user wants to rebuild a design, organization, or API fr
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants to rebuild a design, organization, or API from primitives. |
-| Authority | Write one named local rebuild specification artifact; read the existing target as read-only. Rollback is deleting the artifact. |
+| Authority | Reversible local: writes only one named local rebuild specification artifact; rollback is deleting the artifact. No remote mutation. |
 | Side effect | Writes a first-principles rebuild specification of the design, organization, or API to a local file. |
 | Done | Produces a rebuilt first-principles specification naming primitives, derived structure, and open assumptions. |
 

@@ -12,7 +12,7 @@ Park ideas and inspiration in short project cards. Organize them in a later pass
 | Field | Bound contract |
 |---|---|
 | Trigger | The user wants to keep short project cards for ideas or inspiration, to organize later. |
-| Authority | Reversible-local: create files only under `<project>/idea-sparkbox/`. No VCS commands, no writes outside `idea-sparkbox/`, no remote, paid, published, or deployed mutation. |
+| Authority | Reversible local: writes only files under `<project>/idea-sparkbox/`; rollback is deleting those files. No remote mutation. |
 | Side effect | New card files under `idea-sparkbox/` only; nothing else in the project is modified or deleted. |
 | Done | Every accepted item exists as a short card file under `idea-sparkbox/` inside the project tree, stored as tracked project knowledge awaiting later organization. |
 

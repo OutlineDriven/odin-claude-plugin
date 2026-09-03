@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | Before shipping any skill change; diagnosing weak skill activation, regressions, or context cost; setting release gates for skill packs |
-| Authority | Read and evaluate the skill; write only gate logs and issue artifacts; do not ship the change |
+| Authority | Reversible local: writes only gate logs and issue artifacts; rollback is version control. No remote mutation. Does not ship the change. |
 | Side effect | Runs evaluation loops; writes run-log entries; opens follow-up issues on GitHub or equivalent tracker |
 | Done | A reproducible PASS or FAIL record with case results, deltas, context cost, and failure issues |
 

@@ -10,7 +10,7 @@ description: 'Use when the user begins knowledge work with notes, a transcript, 
 | Field | Bound contract |
 |---|---|
 | Trigger | User begins nontrivial knowledge work with notes, a transcript, a brain dump, or a problem to think through. |
-| Authority | Reversible-local: every search is read-only; the only mutation is one new local file, `plans/brainstorm-{descriptive-name}.md`. Rollback: delete that file. |
+| Authority | Reversible local: writes only one new local file, `plans/brainstorm-{descriptive-name}.md`; rollback is deleting that file. No remote mutation. |
 | Side effect | Reads prior knowledge in `docs/knowledge/`, `plans/`, and `docs/solutions/`; before save or planning, writes `plans/brainstorm-{descriptive-name}.md`. No other file, VCS, credential, paid, published, or remote change. |
 | Done | The user's language is structurally captured; relevant prior context or an honest absence is shown; tensions and gaps are identified; at most three load-bearing questions are resolved; a reasoned direction is offered; the origin file is written before planning. |
 

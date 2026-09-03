@@ -10,7 +10,7 @@ description: 'Use when asked to review a diff and produce a 7-section visual pag
 | Field | Bound contract |
 |---|---|
 | Trigger | Diff review of a branch, commit, range, PR, or working tree against main or master by default |
-| Authority | Write only named local artifacts; rollback path stated before mutation |
+| Authority | Reversible local: writes only named local artifacts; rollback is undo. No remote mutation. State the rollback path before mutation. |
 | Side effect | Writes the 7-section review page to the diagrams directory; opens it |
 | Done | Scope, before/after behavior, risk, coupling, and a merge recommendation all cited from evidence |
 

@@ -10,7 +10,7 @@ description: 'Use when about to report a task, feature, or fix as done, complete
 | Field | Bound contract |
 |---|---|
 | Trigger | A done, fixed, passes, complete, or ready claim is imminent; a commit, PR, or next-task move is about to happen; or satisfaction is about to be expressed. |
-| Authority | No file, VCS, credential, paid, published, deployed, or remote mutation. Reads only what is required to classify the claim. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Reads only what is required to classify the claim. |
 | Side effect | Runs the narrow proving command or scenario; edits nothing; blocks the completion claim when the output contradicts it. |
 | Done | Each claim carries fresh output from exactly one proving action, the claim wording matches the output, and failures are reported honestly. |
 

@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants to elicit refused directions, generalize and concretize them, and close matching tracker items as not planned. |
-| Authority | Explicit human invocation only. Before any mutation the exact target set and its consequence are previewed and approved; the same approval gates the optional docs record. No credentials, paid actions, publishing, or deployment occur. |
+| Authority | Remote: closes matching tracker items as not planned; requires explicit human invocation. The same approval gates the optional local docs record. No credential, paid, publishing, or deployment mutation occurs. |
 | Side effect | Matching tracker items closed as not planned; optional refusal preserved in docs. |
 | Done | Refused directions are documented and matching items are closed as not planned after user approval. |
 

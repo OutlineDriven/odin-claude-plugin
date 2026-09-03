@@ -10,7 +10,7 @@ description: 'Use when setting up or modifying CI/CD pipelines, quality gates, t
 | Field | Bound contract |
 |---|---|
 | Trigger | Setting up or modifying CI/CD pipelines, quality gates, test runners, deployment strategy, or configuring a deployment pipeline through workflow files. |
-| Authority | Reversible local writes: may write CI workflow and deployment configuration files in the local repository. Does not execute deployments, publish, configure branch protection, place secrets in a remote manager, or make any remote mutation. |
+| Authority | Reversible local: writes only CI workflow and deployment configuration files in the local repository; rollback is version control. No remote mutation. |
 | Side effect | Writes CI workflow and deployment configuration files locally; no deployment, publishing, credential, or remote mutation. |
 | Done | Blocking gates in a fixed order, secret references via provider environment variables, a deployment stage with a rollback mechanism, and local schema validation are present. |
 

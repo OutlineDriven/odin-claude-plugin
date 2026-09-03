@@ -10,7 +10,7 @@ description: 'Use when asked to deduplicate skills or prompt directories, find r
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to deduplicate skills/prompts, find repeated rules, or check a skill tree for contradictions. |
-| Authority | Read-only: scans a markdown skill/prompt tree and emits a chat ledger. No file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Scans a markdown skill/prompt tree and emits a chat ledger. |
 | Side effect | Produces a repetition/conflict ledger in chat; leaves the scanned tree untouched. |
 | Done | Every repetition cluster and conflict candidate is classified repeat/conflict/intentional-keep/not-a-finding, with totals, evidence, and zero unclassified cells. |
 

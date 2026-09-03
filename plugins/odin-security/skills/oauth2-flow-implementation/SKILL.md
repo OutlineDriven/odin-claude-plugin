@@ -10,7 +10,7 @@ description: 'Use when asked to implement, debug, or validate an OAuth 2.0/2.1 f
 | Field | Bound contract |
 |---|---|
 | Trigger | Implementing, debugging, or validating an OAuth 2.0/2.1 flow (authorization code+PKCE, client credentials, device flow, refresh rotation), token validation, or RFC compliance. Also fires when explaining why a token exchange fails or a flow rejects a request. |
-| Authority | Local code implementation for auth flows, secret handling, and test-driven token exchange. Writes only inside the target project's authentication implementation directory. Rollback uses VCS. |
+| Authority | Reversible local: writes only inside the target project's authentication implementation directory; rollback is version control. No remote mutation. Covers auth flows, secret handling, and test-driven token exchange. |
 | Side effect | Writes authentication code, routes, and test files. Stores tokens server-side. No credential provisioning, user account mutation, or infrastructure changes outside the auth implementation. |
 | Done | Authentication code written and verified through a successful end-to-end token exchange or rotation against the real authorization server, with all secrets redacted and no implicit flow or response_type=token. |
 

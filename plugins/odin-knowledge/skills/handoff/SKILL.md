@@ -10,7 +10,7 @@ description: 'Use when substantive work reaches a session boundary, resumes afte
 | Field | Bound contract |
 |---|---|
 | Trigger | Substantive work starts, reaches a significant boundary, resumes after interruption, completes, or must move to another session, agent, harness, directory, repository, or person. An explicit handoff request selects the packaging branch. |
-| Authority | Reversible writes to ignored repository-local continuity files and, on explicit handoff, one portable brief or stdout. No receiver launch, remote mutation, credentials, paid actions, publication, deployment, data-at-rest changes outside these artifacts, bulk mutation, or irreversible effects. |
+| Authority | Reversible local: writes only ignored repository-local continuity files and, on explicit handoff, one portable brief or stdout; rollback is version control or undo. No remote mutation, receiver launch, data-at-rest changes outside these artifacts, bulk mutation, or irreversible effects. |
 | Side effect | Continuity files under `.handoff/continuity/` and portable briefs under `.handoff/handoffs/` written to disk. |
 | Done | Continuity status (`fresh`, `resumed`, `interrupted`, or `completed`) with the death-point path. On explicit handoff, one compliant brief path or stdout result. |
 

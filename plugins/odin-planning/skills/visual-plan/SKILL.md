@@ -10,7 +10,7 @@ description: 'Use when the user wants an implementation plan built and visualize
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants an implementation plan built and visualized for a goal |
-| Authority | Reversible local write only: the single plan page in the diagrams directory; rollback is deleting that page |
+| Authority | Reversible local: writes only the single plan page in the diagrams directory; rollback is deleting that page. No remote mutation. |
 | Side effect | Writes the plan page to the diagrams directory; opens it in a browser |
 | Done | Nine mandated sections present, ending in an observable acceptance checklist |
 

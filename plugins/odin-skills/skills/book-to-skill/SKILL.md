@@ -10,7 +10,7 @@ description: 'Use when the user names one book, course, paper, or source documen
 | Field | Bound contract |
 |---|---|
 | Trigger | The user names one book, course, paper, or comparable single source document and asks to distill it into a reusable skill. |
-| Authority | Reversible local write. Writes only the chosen target skill directory (SKILL.md and optional references/). Rollback is deleting that directory. No source file is mutated or copied wholesale. |
+| Authority | Reversible local: writes only the chosen target skill directory (SKILL.md and optional references/); rollback is deleting that directory. No remote mutation. No source file is mutated or copied wholesale. |
 | Side effect | Creates files under the chosen target directory only; never copies the source document into the skill. |
 | Done | A SKILL.md that parses as YAML, carries an attribution line, passes four validation checks, and routes correctly on at least two positive and two negative probe prompts. |
 
