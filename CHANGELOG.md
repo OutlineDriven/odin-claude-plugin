@@ -5,6 +5,34 @@ All notable changes to the ODIN Claude Plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.1] - 2026-09-03
+
+The Agent Plugins surface is retired; four native harness surfaces join the three
+existing ones. Every harness now gets its own registry and per-plugin manifest,
+all generated from the catalog.
+
+### Added
+
+- Per-plugin manifests for Codex (`.codex-plugin/plugin.json`), Cursor
+  (`.cursor-plugin/plugin.json`), Grok (`.grok-plugin/plugin.json`), and Kimi
+  (`.kimi-plugin/plugin.json`).
+- Registries `.codex-plugin/marketplace.json`, `.grok-plugin/marketplace.json`,
+  and `.kimi-plugin/marketplace.json`.
+
+### Removed
+
+- The Agent Plugins surface: `.agents/plugins/marketplace.json` and the 28 root
+  `plugins/<id>/plugin.json` manifests.
+
+### Changed
+
+- Codex now loads plugins in Legacy format from `.codex-plugin/plugin.json`;
+  `mcpServers` is declared explicitly because the Legacy default filename is
+  `.mcp.json` with a dot.
+- `policy` is added to `.claude-plugin/marketplace.json` entries so Codex, which
+  parses that file, keeps first-use authentication instead of prompting at
+  install time.
+
 ## [2.0.0] - 2026-09-01
 
 The repository becomes a multi-plugin marketplace. Skills move out of one flat

@@ -1,17 +1,18 @@
 # Distribution surfaces
 
-Verified 2026-09-01 against vendor specifications, vendor source code, vendor documentation, and the tools installed on this machine. Re-verify any row older than one release cycle.
+Verified 2026-09-01 against vendor specifications, vendor source code, vendor documentation, and the tools installed on this machine; the Codex manifest, Grok, and Kimi rows were verified 2026-09-03. Re-verify any row older than one release cycle.
 
 ## Purpose
 
-This repository dropped npm distribution. It now ships one skill tree through exactly four surfaces, plus per-skill install:
+This repository dropped npm distribution. It now ships one skill tree through exactly five harness surfaces, plus per-skill install:
 
-1. Agent Plugins 1.0.0, the vendor-neutral standard
-2. The Claude Code plugin marketplace
-3. The OpenAI Codex plugin marketplace
-4. The Cursor plugin marketplace
+1. The Claude Code plugin marketplace
+2. The OpenAI Codex plugin marketplace
+3. The Cursor plugin marketplace
+4. The Grok plugin marketplace
+5. The Kimi Code plugin marketplace
 
-This document records what each surface requires, the repository layout that satisfies all four at once, and the toolchain versions the gates run on.
+The Agent Plugins standard surface was retired on 2026-09-03; no root `plugins/<id>/plugin.json` ships anymore. This document records what each surface requires, the repository layout that satisfies all five at once, and the toolchain versions the gates run on.
 
 ## How to read the evidence
 
@@ -32,34 +33,7 @@ Corrections applied to earlier findings:
 - The Cursor skills reference moved. `cursor.com/docs/reference/skills` no longer serves; the live page is `cursor.com/docs/skills`.
 - "Repository doctrine pins the Node LTS" could not be confirmed. The tree pins no Node version. See the toolchain section.
 
-## Agent Plugins 1.0.0
-
-The specification repository is `github.com/agentplugins/agent-plugins-spec` (Tier 1, source: https://github.com/agentplugins/agent-plugins-spec, verified). Its README states: "Agent Plugins Specification 1.0.0 is the current published release. Agent Plugins Specification 1.1.0 is a working draft" (Tier 1, source: README.md lines 7-9 in that repository, verified).
-
-### Manifest
-
-The manifest is `plugin.json` at the plugin root (Tier 1, source: spec/1.0.0.md sections 4 and 5, verified).
-
-The 1.0.0 schema is closed. Its `$id` is `https://agent-plugins.org/schemas/1.0.0/plugin.schema.json`, it sets `additionalProperties: false` at the top level and inside `author`, and `required` is `["$schema", "name"]` (Tier 1, source: schemas/1.0.0/plugin.schema.json in the spec repository, verified).
-
-Permitted top-level fields, and no others: `$schema`, `name`, `version`, `description`, `author`, `homepage`, `repository`, `license`, `keywords`, `extensions` (Tier 1, source: schemas/1.0.0/plugin.schema.json, verified).
-
-- `$schema` is required and is a `const` of the 1.0.0 URI (Tier 1, source: plugin.schema.json, verified).
-- `author` MAY contain only `name`, `email`, `url`, each a string (Tier 1, source: spec/1.0.0.md section 5.4, verified).
-
-The `name` constraints: 1 to 64 characters; lowercase alphanumerics, periods, and hyphens only; must start and end alphanumeric; no consecutive `--` or `..`. The schema pattern is `^(?!.*(?:--|\.\.))[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?$` (Tier 1, source: spec/1.0.0.md section 5.5 and plugin.schema.json, verified).
-
-The `extensions` field holds client-specific data keyed by reverse-domain namespace. Agent Plugins assigns no semantics to namespace contents (Tier 1, source: spec/1.0.0.md sections 5.6 and 8, verified).
-
-### Component locations
-
-Component locations are fixed. The specification says: "`plugin.json` cannot override these locations or contain inline component configuration." Skills live at `skills/`, MCP servers at `mcp.json` (Tier 1, source: spec/1.0.0.md section 6.1, verified). MCP config "MUST NOT be declared inline in `plugin.json` or loaded from any alternative core path" (Tier 1, source: spec/1.0.0.md section 7.2, verified).
-
-### Skill discovery
-
-Discovery reads only the immediate children of `skills/`: "Each immediate child directory containing a path named exactly `SKILL.md` ... is treated as one skill. Clients MUST NOT recursively search deeper descendants for additional skills" (Tier 1, source: spec/1.0.0.md section 7.1, verified).
-
-### SKILL.md format
+## SKILL.md format
 
 Skill files follow the Agent Skills specification (Tier 1, source: https://agentskills.io/specification, verified):
 
@@ -73,6 +47,8 @@ Skill files follow the Agent Skills specification (Tier 1, source: https://agent
 ## Codex marketplace
 
 Codex reads repo marketplaces from the first of, in order: `.agents/plugins/marketplace.json`, `.agents/plugins/api_marketplace.json`, `.claude-plugin/marketplace.json`, `.cursor-plugin/marketplace.json`. The constant is `MARKETPLACE_MANIFEST_RELATIVE_PATHS` (Tier 1, source: openai/codex `codex-rs/core-plugins/src/marketplace.rs` lines 20-25, verified). The vendor docs describe `$REPO_ROOT/.agents/plugins/marketplace.json` as the repo-scoped list and call the `.claude-plugin/` layout "legacy-compatible" (Tier 2, source: https://developers.openai.com/plugins/build/plugins.md, verified).
+
+This tree ships no `.agents/` directory, so Codex resolves `.claude-plugin/marketplace.json`. `.codex-plugin/marketplace.json` is not in the candidate list; it is generated as forward-compat and is inert today (Tier 1, source: repository files and `scripts/plugin-surfaces.mjs`, verified 2026-09-03).
 
 ### Marketplace entry
 
@@ -90,16 +66,21 @@ Entry fields, from the serde struct `RawMarketplaceManifestPlugin`: `name` (requ
 
 Per-plugin resolution order, from `find_plugin_manifest_path`:
 
-1. Root `plugin.json`, when its `$schema` is an Agent Plugins URI (supported or recognized-but-unsupported).
+1. Root `plugin.json`, when its `$schema` is an Agent Plugins URI. This tree ships no root manifests, so this step never fires here.
 2. Otherwise the first existing file among `DISCOVERABLE_PLUGIN_MANIFEST_PATHS`: `.codex-plugin/plugin.json`, `.claude-plugin/plugin.json`, `.cursor-plugin/plugin.json`.
 
 (Tier 1, source: `codex-rs/utils/plugins/src/plugin_namespace.rs` and `codex-rs/exec-server-protocol/src/protocol.rs` lines 46-50, verified.)
 
-### Agent Plugins manifests in Codex
+With no root manifests, every plugin resolves through `.codex-plugin/plugin.json`, first in the list. That flips Codex from the AgentPlugin format to the Legacy format: the MCP default filename becomes `.mcp.json` with a dot, so a plugin shipping the dotless `mcp.json` must declare `mcpServers` explicitly or its MCP silently stops loading (Tier 1, source: `codex-rs/core-plugins/src/manifest.rs` and `DEFAULT_SKILLS_DIR_NAME` in `codex-rs/core-plugins/src/loader.rs` line 68, verified 2026-09-03).
 
-When Codex parses a root Agent Plugins manifest, it hardcodes `skills: "./skills"` and `mcpServers: "./mcp.json"`, and derives a default interface: displayName from `name`, shortDescription and longDescription from `description`, developerName from `author.name`, category `"Other"`, websiteUrl from `homepage` (Tier 1, source: `parse_agent_plugin_manifest_uri` in `codex-rs/core-plugins/src/agent_plugin_manifest.rs`, verified).
+### Legacy manifests in Codex
 
-`extensions["com.openai"]` is parsed as a legacy Codex manifest by `apply_codex_agent_plugin_extension`. It supplies `paths.apps` and `paths.hooks`, and when it carries an `interface`, that interface replaces the derived one (`if extension.interface.is_some() { resolved.interface = extension.interface; }`). Interface field names are camelCase (`rename_all = "camelCase"`): displayName, shortDescription, longDescription, developerName, category, websiteUrl (Tier 1, source: agent_plugin_manifest.rs, verified).
+The Legacy deserializer is `RawPluginManifest` (`codex-rs/core-plugins/src/manifest.rs` lines 45-74): `rename_all = "camelCase"`, every field `#[serde(default)]`, no `deny_unknown_fields`, so unknown keys are ignored and every field is optional to the parser (Tier 1, source: manifest.rs, verified 2026-09-03).
+
+- Skills default to `skills/` (`DEFAULT_SKILLS_DIR_NAME`, `codex-rs/core-plugins/src/loader.rs` line 68), so the generated manifests leave `skills` unset (Tier 1, verified 2026-09-03).
+- `resolve_manifest_path` (manifest.rs lines 597-655) strips a leading `./` and warns-and-drops any `mcpServers` value without it, which is why the generated value is exactly `./mcp.json` (Tier 1, verified 2026-09-03).
+
+Divergence worth recording: the published schemastore schema at `https://www.schemastore.org/codex-plugin-manifest.json` sets `additionalProperties: false` and does not list `$schema`, so a manifest carrying `$schema` invalidates its own file under that schema; it also requires `author`, `interface.longDescription`, `interface.developerName`, `interface.capabilities`, and `interface.defaultPrompt`, none of which the Rust deserializer requires. The generated manifests satisfy the deserializer, not that schema (Tier 1, source: the fetched schema and manifest.rs, verified 2026-09-03).
 
 ### Install commands
 
@@ -138,16 +119,8 @@ Claude Code reads plugin MCP configuration from `.mcp.json` at the plugin root b
 
 The manifest `mcpServers` field accepts a path: type `string|array|object`, described as "MCP config paths or inline config", example `"./my-extra-mcp-config.json"` (Tier 2, source: plugins-reference, "Component path fields" table, verified).
 
-Shared-file claim, stated precisely: one shared file serves Claude Code and Agent Plugins clients,
-but only through an explicit `mcpServers` entry, because the two surfaces fix different default
-filenames. Agent Plugins requires `mcp.json`; Claude Code defaults to `.mcp.json`. Without the
-manifest entry, Claude Code does not load `mcp.json`. Mechanism verified at Tier 2.
-
-Repository state as read 2026-09-01: `plugins/odin-core/.claude-plugin/plugin.json` declares
-`"mcpServers": "./mcp.json"`, so Claude Code loads the same file the Agent Plugins clients read.
-No `plugins/*/plugin.json` declares `mcpServers`, which is correct: the Agent Plugins schema
-forbids it. `renderClaudePluginManifest` adds the entry whenever a plugin ships an `mcp.json`
-(Tier 1, source: repository files and `scripts/plugin-surfaces.mjs`, verified).
+Shared-file claim, stated precisely: one shared `mcp.json` serves Claude Code, Codex, and Grok, but only through an explicit `mcpServers` entry, because all three default to the dotted `.mcp.json`. Without the manifest entry, none of the three loads the dotless file. Kimi takes the servers inline instead: its `mcpServers` is a server map, not a path, so the generator reads `mcp.json` and inlines its `mcpServers` value verbatim. Mechanism verified at Tier 2 for Claude Code and Tier 1 for Codex and Grok.
+Repository state as read 2026-09-03: `plugins/odin-core/.claude-plugin/plugin.json`, `plugins/odin-core/.codex-plugin/plugin.json`, and `plugins/odin-core/.grok-plugin/plugin.json` all declare `"mcpServers": "./mcp.json"`, and `plugins/odin-core/.kimi-plugin/plugin.json` carries the inlined server map. No other plugin ships `mcp.json`, so the other 27 manifests omit the key. The renderers add the entry whenever a plugin ships an `mcp.json` (Tier 1, source: repository files and `scripts/plugin-surfaces.mjs`, verified 2026-09-03).
 
 ### Skill discovery
 
@@ -169,14 +142,71 @@ The registry is one combined `.cursor-plugin/marketplace.json` at the repository
 
 Cursor loads both formats, identified by manifest location (Tier 2, source: https://cursor.com/docs/reference/plugins, "Supported plugin formats" table, verified):
 
-- Agent Plugins: root `plugin.json`, components skills and MCP servers.
+- Agent Plugins: root `plugin.json`, components skills and MCP servers. This tree ships no root manifests, so this format never fires here.
 - Cursor Plugins: `.cursor-plugin/plugin.json`, components skills, MCP servers, rules, agents, commands, hooks, variables.
+
+This tree ships the Cursor Plugins format only: `.cursor-plugin/plugin.json` declares identity alone and lets Cursor's defaults resolve `skills/` and the dotless `mcp.json` (Tier 1, source: repository files and `scripts/plugin-surfaces.mjs`, verified 2026-09-03).
 
 Entry `source` is a relative path string or an object with `path` and options (Tier 2, source: "Plugin entry fields" table, verified). The submission checklist requires "All paths in manifest are relative and valid (no `..`, no absolute paths)" (Tier 2, source: same page, verified). Whether a bare `.` (the marketplace root itself) is rejected is not settled by the docs; see open questions.
 
 ### Skill discovery
 
 Cursor walks a skills root recursively: "Cursor walks the skills root recursively and picks up any `SKILL.md` it finds" (Tier 2, source: https://cursor.com/docs/skills, "Nested skill directories", verified). This differs from the Claude Code documented shape, which names one level.
+
+## Grok marketplace
+
+Grok Build v1.0.13, released 2026-08-28 (Tier 1, source: the `xai-org/grok-build` repository main branch, verified 2026-09-03).
+
+### Registry file
+
+The registry is `.grok-plugin/marketplace.json` at the repository root. Grok probes the marketplace file first, then `.grok-plugin/plugin.json` as the second marketplace-index candidate, so that filename must never appear at the repository root (Tier 1, source: `crates/codegen/xai-grok-agent/src/plugins/index.rs`, verified 2026-09-03). This tree carries it only under `plugins/<id>/`, so there is no collision.
+
+The local source discriminator is `type`, not `source`: the documented example is `{"type": "local", "path": "./plugins/gdrive"}` (Tier 2, source: `09-plugins.md` lines 191-205, verified 2026-09-03). The parser normalizes a `source`-tagged object too (`index.rs` lines 121-138), but the generated entries use the documented `type` spelling (Tier 1, verified 2026-09-03). A local `path` resolves against the marketplace root and rejects `..` and absolute paths (Tier 1, source: `types.rs` lines 40-89, verified 2026-09-03).
+
+### Per-plugin manifest
+
+`PluginManifest` (`crates/codegen/xai-grok-agent/src/plugins/manifest.rs` lines 119-155, `rename_all = "camelCase"`) requires `name` only; unknown fields are silently ignored (Tier 1, verified 2026-09-03).
+
+- Skills default to the convention directory `skills/`, so the generated manifests leave `skills` unset.
+- The MCP default filename is the dotted `.mcp.json` (Tier 1, source: `manifest.rs` lines 187-193, verified 2026-09-03), so a plugin shipping the dotless `mcp.json` must declare `mcpServers` explicitly; the gate asserts this.
+- The name grammar rejects periods (Tier 1, source: `manifest.rs` lines 19-36, verified 2026-09-03): one of the two harnesses that forced the catalog id intersection.
+- `owner` is `IndexOwner` `{name, email?}` with no `url` field, so the registry carries name only.
+- Catalog tags map to `keywords`, not `tags`: Grok's `tags` are request matchers, while this catalog's tags are descriptive.
+
+### Install commands
+
+- `grok plugin marketplace add owner/repo` (Tier 2, source: vendor plugin docs, verified 2026-09-03).
+- `grok plugin install owner/repo#subdir` selects one plugin subdirectory and combines with `@ref` (Tier 2, source: `09-plugins.md` line 74, verified 2026-09-03).
+
+## Kimi marketplace
+
+Kimi Code CLI `@moonshot-ai/kimi-code` 0.40.1, released 2026-09-02 (Tier 1, source: the npm package and its repository, verified 2026-09-03).
+
+### Registry file
+
+The registry is `.kimi-plugin/marketplace.json`, carrying `version: "2"` as in the vendor's documented example (Tier 2, source: vendor plugin docs, verified 2026-09-03). `resolveEntrySource` (`marketplace.ts` lines 236-249) resolves a relative source against the registry's own directory, which is `.kimi-plugin/`, so the generated sources read `../plugins/<id>` (Tier 1, verified 2026-09-03).
+
+Served over https, the same relative source resolves to a raw URL that `parseGithubRepo` rejects because it requires exactly two path segments (`marketplace.ts` lines 292-304). Kimi therefore consumes this registry from a local clone: `/plugins marketplace <clone>/.kimi-plugin/marketplace.json` (Tier 1, verified 2026-09-03).
+
+### No subdirectory installs
+
+`/tree/<ref>` consumes its entire tail as a git ref (`packages/agent-core-v2/src/app/plugin/source.ts` lines 44-98), and codeload returns the whole-repo archive, so a GitHub URL cannot target one plugin directory (Tier 1, verified 2026-09-03). The Kimi lane is a local clone with absolute paths: `source.ts` lines 30-36 throw "Plugin root must be an absolute path" on a relative one (Tier 1, verified 2026-09-03).
+
+### Per-plugin manifest
+
+The name must match `^[a-z0-9][a-z0-9_-]{0,63}$` (`PLUGIN_NAME_REGEX`, `types.ts` line 196): periods rejected, the second harness behind the catalog id intersection (Tier 1, verified 2026-09-03).
+
+- `skills` is mandatory. With `skills` absent Kimi does not fall back to `skills/`; it looks for a root `SKILL.md` and sets `rootSkillFallback` (Tier 1, source: `manifest.ts` lines 100-108, verified 2026-09-03), yielding zero skills. The gate asserts the key.
+- `mcpServers` is an inline server map keyed by server name, not a path. The generator reads the shared `mcp.json` and inlines its `mcpServers` value; Kimi's zod schema strips the non-standard `alwaysLoad` key rather than erroring (Tier 1, verified 2026-09-03).
+- `author` is read by `readAuthor` (`manifest.ts` lines 511-518) as `string | {name?, email?}`: no `url` field, so the generated value carries name only.
+- `interface` accepts `displayName`, `shortDescription`, `longDescription`, `developerName`, `websiteURL`; the generated manifests emit the first two.
+
+### Install commands
+
+From a local clone (Tier 1, sources: `source.ts` and `marketplace.ts`, verified 2026-09-03):
+
+- `/plugins marketplace <abs-clone>/.kimi-plugin/marketplace.json`
+- `/plugins install <abs-clone>/plugins/<plugin>`
 
 ## Per-skill install with gh skill
 
@@ -203,7 +233,7 @@ Validation checks, from the help text (Tier 1, source: `gh skill publish --help`
 - `allowed-tools` is a string, not an array.
 - Install metadata `metadata.github-*` is stripped.
 
-### Dry-run result, this machine, 2026-09-01
+Historical run, recorded 2026-09-01 against releaseVersion 2.0.0, when the tree held 657 skills. Output below is verbatim from that run; the current gate reports 28 plugins and 613 skills.
 
 Command: `gh skill publish --dry-run` from the repository root (Tier 1, source: local execution, verified).
 
@@ -226,16 +256,22 @@ The 657 warnings are advisory and do not fail the run.
 
 ## Repository layout
 
-The current layout satisfies all four surfaces from one tree (Tier 1, source: repository files, verified):
+The current layout satisfies all five surfaces from one tree (Tier 1, source: repository files, verified 2026-09-03):
 
 ```
 .
-├── .agents/plugins/marketplace.json     # Codex: 28 entries, local source objects
 ├── .claude-plugin/marketplace.json      # Claude Code: 28 entries, ./plugins/<module>
+├── .codex-plugin/marketplace.json       # Codex format, forward-compat (Codex reads .claude-plugin/)
 ├── .cursor-plugin/marketplace.json      # Cursor: 28 entries, ./plugins/<module>
+├── .grok-plugin/marketplace.json        # Grok: 28 entries, {type: local, path}
+├── .kimi-plugin/marketplace.json        # Kimi: 28 entries, ../plugins/<module>
 ├── plugins/
 │   └── <module>/                        # 28 modules
-│       ├── plugin.json                  # Agent Plugins 1.0.0 root manifest
+│       ├── .claude-plugin/plugin.json   # Claude Code manifest
+│       ├── .codex-plugin/plugin.json    # Codex Legacy manifest
+│       ├── .cursor-plugin/plugin.json   # Cursor manifest, identity only
+│       ├── .grok-plugin/plugin.json     # Grok manifest
+│       ├── .kimi-plugin/plugin.json     # Kimi manifest, skills declared
 │       ├── mcp.json                     # optional; only odin-core ships one
 │       └── skills/<slug>/SKILL.md       # 613 skills total
 ├── catalog/                             # registry and membership data
@@ -246,23 +282,24 @@ The current layout satisfies all four surfaces from one tree (Tier 1, source: re
 
 Why this shape works for each surface:
 
-- Agent Plugins clients read each `plugins/<module>/plugin.json` (all 28 carry the 1.0.0 `$schema`), then the fixed `skills/` and `mcp.json` locations.
 - Claude Code reads `.claude-plugin/marketplace.json`; each `./plugins/<module>` source resolves from the repository root; skills are discovered one level deep.
-- Codex reads `.agents/plugins/marketplace.json` first. Entries use `{"source": "local", "path": "./plugins/<module>"}` with `policy` and `category`, which the parser resolves against the repository root. The root `plugin.json` wins manifest precedence.
+- Codex reads `.claude-plugin/marketplace.json` (its candidate list holds no `.codex-plugin/` entry); entries use `{"source": "local", "path": "./plugins/<module>"}` with `policy` and `category`. Each plugin resolves through `.codex-plugin/plugin.json` in Legacy format, first in `DISCOVERABLE_PLUGIN_MANIFEST_PATHS`.
 - Cursor reads `.cursor-plugin/marketplace.json` with the same relative sources, and would walk each `skills/` root recursively if nested skills ever appear.
+- Grok reads `.grok-plugin/marketplace.json` with `{"type": "local", "path": "./plugins/<module>"}` sources resolving against the marketplace root.
+- Kimi reads `.kimi-plugin/marketplace.json` from a local clone; each `../plugins/<module>` source resolves against the registry's own directory.
 - `gh skill` discovers the fourth convention `plugins/{scope}/skills/*/SKILL.md`, so per-skill install works without any manifest.
 
 ## Toolchain set
 
-All versions read 2026-09-01.
+All versions read 2026-09-03. Harness-surface rows re-verified that day; the remaining rows below are unchanged since 2026-09-01.
 
 | Tool | Pin or line | Current | Released | End of support | Source and tier |
 |---|---|---|---|---|---|
 | Node.js | LTS line 24 is the project line | 24.20.0 | 2026-08-26 | 2028-04-30 | (Tier 3, source: https://endoflife.date/api/v1/products/nodejs/, probable) |
-| Node.js, this machine | none | v26.7.0, Current, not LTS; line 26 becomes LTS 2026-10-28 | | | (Tier 1, source: `node --version`; Tier 3, source: endoflife.date, probable) |
+| Node.js, this machine | none | v26.8.1, Current, not LTS; line 26 becomes LTS 2026-10-28 | | | (Tier 1, source: `node --version`, verified 2026-09-03; Tier 3, source: endoflife.date, probable) |
 | Python | 3.14 is the project line | 3.14.7 | 2026-08-05 | 2030-10-31 | (Tier 3, source: https://endoflife.date/api/v1/products/python/, probable) |
 | Python, this machine | | 3.14.7, equals current | | | (Tier 1, source: `python3 --version`, verified) |
-| prek | gate runner | 0.5.0 | 2026-08-27 | | (Tier 2, source: https://github.com/j178/prek/releases, verified) |
+| prek | gate runner | 0.5.1 | | | (Tier 1, source: `prek --version`, verified 2026-09-03; release notes not re-read) |
 | pre-commit/pre-commit-hooks | pinned v6.0.0 | v6.0.0, equals latest | 2025-08-09 | | (Tier 2, source: https://github.com/pre-commit/pre-commit-hooks/releases, verified) |
 | tombi-toml/tombi-pre-commit | pinned v1.1.3, raising to v1.5.0 | v1.5.0, not a prerelease | 2026-08-29 | | (Tier 2, source: https://github.com/tombi-toml/tombi-pre-commit/releases, verified) |
 
@@ -279,11 +316,12 @@ Notes:
 ## Open questions
 
 1. Cursor marketplace entry `source`: does the parser reject a bare `.` (the marketplace root itself)? The docs reject `..` and absolute paths but say nothing about `.`. Attempted at Tier 2 (full plugins reference, plugin-template README) and web search. Cursor's parser is not public, so this needs a live probe against Cursor 2.5 or later.
-2. Claude Code and the Agent Plugins root manifest: the absence of support rests on vendor docs and binary string counts (Tier 2). A vendor announcement adopting the standard should trigger a re-check; if Claude Code ever reads root `plugin.json`, the `.claude-plugin/marketplace.json` could shrink.
+2. Claude Code and an unknown `policy` entry field: `policy` in `.claude-plugin/marketplace.json` entries is schema-valid and honored by Codex's path-agnostic parser, but not verified against Claude Code's runtime loader, which may warn. If it warns, drop the key from `renderClaudeMarketplace` and accept Codex's `ON_INSTALL` default.
 3. Cursor marketplace load. `cursor-agent plugin marketplace add` accepts a git repository URL
    only, and rejects a local path, so the Cursor surface cannot be exercised until this branch
    reaches the remote. `docs/specs/install-proof.md` records the rejection verbatim. The registry
    itself is generated to the documented schema and gated by `check-plugin-surfaces`.
+4. Cursor's MCP file shape: the docs name `mcp.json` as the default MCP path but do not state whether the `mcpServers` wrapper object or a bare server map is expected. Needs a live probe against Cursor 2.5 or later. Fallback if it fails: declare `"mcpServers": "./mcp.json"` in the Cursor manifest for plugins shipping `mcp.json`.
 
 Two questions from the first draft are now closed against the tree rather than left open. Node
 carries no pin and no enforcement point, which the toolchain section states outright. Claude Code

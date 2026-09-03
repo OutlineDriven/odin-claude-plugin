@@ -8,7 +8,7 @@
 # and open decisions name the hazard that blocks them.
 
 schema: odin.graph/v1
-revision: r1-foundry-2.0
+revision: r2-harness-surfaces
 
 nodes:
   - id: inv-baseline-cascade
@@ -22,10 +22,10 @@ nodes:
     label: "A skill is authored once at plugins/<plugin>/skills/<slug>/SKILL.md and nests no deeper"
   - id: inv-generator-owned
     type: Invariant
-    label: "All 144 generated surfaces derive from the catalog and are never hand-edited"
+    label: "All 145 generated surfaces derive from the catalog and are never hand-edited"
   - id: inv-lockstep-version
     type: Invariant
-    label: "All 28 plugins and 3 registries carry one canonical releaseVersion"
+    label: "All 28 plugins and 5 registries carry one canonical releaseVersion"
   - id: inv-strict-yaml
     type: Invariant
     label: "Every SKILL.md frontmatter parses under a strict YAML parser, not only a lenient loader"
@@ -46,19 +46,25 @@ nodes:
     label: "613 authored skill bodies, the only human-written skill artifact"
   - id: sfc-plugin-manifest
     type: Surface
-    label: "28 plugin.json manifests under the closed Agent Plugins schema"
+    label: "140 per-plugin manifests across five harness dotdirs"
   - id: sfc-skill-manifest
     type: Surface
     label: "613 agents/openai.yaml skill manifests for the Codex surface"
   - id: sfc-claude-marketplace
     type: Surface
     label: ".claude-plugin/marketplace.json, the Claude Code registry"
-  - id: sfc-agents-marketplace
-    type: Surface
-    label: ".agents/plugins/marketplace.json, the Agent Plugins registry"
   - id: sfc-cursor-marketplace
     type: Surface
     label: ".cursor-plugin/marketplace.json, the Cursor registry"
+  - id: sfc-codex-marketplace
+    type: Surface
+    label: ".codex-plugin/marketplace.json, the Codex registry (forward-compat; Codex reads .claude-plugin/ today)"
+  - id: sfc-grok-marketplace
+    type: Surface
+    label: ".grok-plugin/marketplace.json, the Grok registry"
+  - id: sfc-kimi-marketplace
+    type: Surface
+    label: ".kimi-plugin/marketplace.json, the Kimi registry"
   - id: sfc-output-styles
     type: Surface
     label: "6 output styles, each embedding the full canonical baseline at its tail"
@@ -101,9 +107,9 @@ nodes:
   - id: haz-attribution-loss
     type: Hazard
     label: "Consolidation keeps the derived work and drops the notice that licenses it"
-  - id: dec-four-surfaces
+  - id: dec-five-surfaces
     type: Decision
-    label: "Four distribution surfaces and no package registry; npm was retired, not mirrored"
+    label: "Five harness surfaces and no package registry; the Agent Plugins standard was retired, not mirrored"
     status: closed
   - id: dec-28-plugins
     type: Decision
@@ -186,7 +192,13 @@ edges:
     to: sfc-claude-marketplace
     type: constrains
   - from: inv-generator-owned
-    to: sfc-agents-marketplace
+    to: sfc-codex-marketplace
+    type: constrains
+  - from: inv-generator-owned
+    to: sfc-grok-marketplace
+    type: constrains
+  - from: inv-generator-owned
+    to: sfc-kimi-marketplace
     type: constrains
   - from: inv-generator-owned
     to: sfc-cursor-marketplace
@@ -203,16 +215,22 @@ edges:
   - from: inv-evidence-observed
     to: str-gates
     type: constrains
-  - from: dec-four-surfaces
+  - from: dec-five-surfaces
     to: sfc-claude-marketplace
     type: constrains
-  - from: dec-four-surfaces
-    to: sfc-agents-marketplace
+  - from: dec-five-surfaces
+    to: sfc-codex-marketplace
     type: constrains
-  - from: dec-four-surfaces
+  - from: dec-five-surfaces
     to: sfc-cursor-marketplace
     type: constrains
-  - from: dec-four-surfaces
+  - from: dec-five-surfaces
+    to: sfc-grok-marketplace
+    type: constrains
+  - from: dec-five-surfaces
+    to: sfc-kimi-marketplace
+    type: constrains
+  - from: dec-five-surfaces
     to: sfc-plugin-manifest
     type: constrains
   - from: dec-28-plugins
@@ -243,7 +261,13 @@ edges:
     to: sfc-claude-marketplace
     type: writes
   - from: sfc-generator
-    to: sfc-agents-marketplace
+    to: sfc-codex-marketplace
+    type: writes
+  - from: sfc-generator
+    to: sfc-grok-marketplace
+    type: writes
+  - from: sfc-generator
+    to: sfc-kimi-marketplace
     type: writes
   - from: sfc-generator
     to: sfc-cursor-marketplace
@@ -267,7 +291,13 @@ edges:
     to: sfc-claude-marketplace
     type: reads
   - from: sfc-gate-suite
-    to: sfc-agents-marketplace
+    to: sfc-codex-marketplace
+    type: reads
+  - from: sfc-gate-suite
+    to: sfc-grok-marketplace
+    type: reads
+  - from: sfc-gate-suite
+    to: sfc-kimi-marketplace
     type: reads
   - from: sfc-gate-suite
     to: sfc-cursor-marketplace
@@ -346,3 +376,6 @@ transitions:
   - revision: r1-foundry-2.0
     from: null
     note: "Initial backbone compiled from the Foundry 2.0 campaign. Invariants are the properties a gate can prove; surfaces are what a consumer or gate touches; stores hold identity and record; hazards are defects that fired during the campaign, not hypotheses; decisions carry closed rivals or the authority they wait on."
+  - revision: r2-harness-surfaces
+    from: r1-foundry-2.0
+    note: "Agent Plugins surface retired; four native harness registries (Codex forward-compat, Grok, Kimi) join Claude Code and Cursor. Per-plugin manifests move to five harness dotdirs; inv-generator-owned now counts 145 surfaces and inv-lockstep-version 5 registries."

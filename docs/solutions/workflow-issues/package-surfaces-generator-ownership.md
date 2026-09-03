@@ -7,7 +7,7 @@ problem_type: convention
 component: tooling
 severity: medium
 applies_when:
-  - "Editing plugins/*/README.md, plugins/*/NOTICE, plugins/*/plugin.json, or any marketplace registry"
+  - "Editing plugins/*/README.md, plugins/*/NOTICE, plugins/*/.<harness>-plugin/plugin.json, or any marketplace registry"
   - "A review finding names a defect inside one of those files"
 tags: [generated-surfaces, plugin-surfaces, check-hooks, render-scripts]
 ---
@@ -31,10 +31,12 @@ over unchanged to the `plugin-surfaces` generators that replaced them.
 
 The generator family owns these committed surfaces:
 
-- the three registries `.claude-plugin/marketplace.json`, `.agents/plugins/marketplace.json`,
-  `.cursor-plugin/marketplace.json` (`surfacePlan()` in `scripts/plugin-surfaces.mjs`)
-- `plugins/<plugin>/plugin.json` and `plugins/<plugin>/.claude-plugin/plugin.json`
-  (same function)
+- the five registries `.claude-plugin/marketplace.json`, `.codex-plugin/marketplace.json`,
+  `.cursor-plugin/marketplace.json`, `.grok-plugin/marketplace.json`,
+  `.kimi-plugin/marketplace.json` (`surfacePlan()` in `scripts/plugin-surfaces.mjs`)
+- `plugins/<plugin>/.claude-plugin/plugin.json`, `plugins/<plugin>/.codex-plugin/plugin.json`,
+  `plugins/<plugin>/.cursor-plugin/plugin.json`, `plugins/<plugin>/.grok-plugin/plugin.json`,
+  and `plugins/<plugin>/.kimi-plugin/plugin.json` (same function)
 - `plugins/<plugin>/LICENSE` and `plugins/<plugin>/NOTICE` (byte copies of root `LICENSE`
   and authored `licenses/NOTICE`)
 - `plugins/<plugin>/README.md` (`renderPluginReadme()`)

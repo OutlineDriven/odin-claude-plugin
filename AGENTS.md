@@ -43,24 +43,24 @@ Adding a skill means creating `plugins/<plugin>/skills/<slug>/SKILL.md` and runn
 
 Moving a skill between plugins means moving its directory. Nothing else records membership.
 
-Agent Plugins fixes components at the plugin root, so a skill nested deeper than `skills/<slug>/` never loads.
+Each harness reads the immediate children of `skills/`, so a skill nested deeper than `skills/<slug>/` never loads.
 
 ## Distribution surfaces
 
-Four surfaces are supported, and no others: the Agent Plugins standard, the Claude Code marketplace, the Codex marketplace, and the Cursor marketplace. Nothing is published to a package registry, and no npm artifact belongs in this tree. A flat Devin mirror of these same skills is exported to the outline repository, which publishes nothing and installs nothing.
+Five harness surfaces are supported, and no others: Claude Code, Codex, Cursor, Grok, and Kimi. Nothing is published to a package registry, and no npm artifact belongs in this tree. A flat Devin mirror of these same skills is exported to the outline repository, which publishes nothing and installs nothing.
 
-`catalog/plugins.json` owns plugin identity: name, description, category, tags, and directory. Every manifest and registry is generated from it. Keep every plugin and marketplace version at the single `releaseVersion` literal `2.0.0`; never bump only some manifests.
+`catalog/plugins.json` owns plugin identity: name, description, category, tags, and directory. Every manifest and registry is generated from it. Keep every plugin and marketplace version at the single `releaseVersion` literal `2.0.1`; never bump only some manifests.
 
 Treat these as generator-owned and never hand-edit them:
 
-- `plugins/*/plugin.json`, `plugins/*/.claude-plugin/plugin.json`, `plugins/*/README.md`, `plugins/*/LICENSE`, `plugins/*/NOTICE`
-- `.claude-plugin/marketplace.json`, `.agents/plugins/marketplace.json`, `.cursor-plugin/marketplace.json`
+- `plugins/*/.claude-plugin/plugin.json`, `plugins/*/.codex-plugin/plugin.json`, `plugins/*/.cursor-plugin/plugin.json`, `plugins/*/.grok-plugin/plugin.json`, `plugins/*/.kimi-plugin/plugin.json`, `plugins/*/README.md`, `plugins/*/LICENSE`, `plugins/*/NOTICE`
+- `.claude-plugin/marketplace.json`, `.codex-plugin/marketplace.json`, `.cursor-plugin/marketplace.json`, `.grok-plugin/marketplace.json`, `.kimi-plugin/marketplace.json`
 - `plugins/*/skills/*/agents/openai.yaml`
 - the plugin table under `## Plugins` in the root `README.md`, and nothing else in that file
 
 To change one, change its generator or `catalog/plugins.json`, run `just render`, and commit input and output together.
 
-The Agent Plugins manifest schema is closed and forbids declaring component locations. Do not add `skills`, `mcpServers`, `commands`, `agents`, `hooks`, or `paths` to a root `plugin.json`; the specification fixes those locations.
+Each harness dotdir manifest declares only what its own defaults do not already resolve: Kimi needs `skills`, and Codex and Grok need `mcpServers` where a plugin ships the dotless `mcp.json`. Do not add component declarations a harness resolves by convention.
 
 Do not change `releaseVersion` for tooling-only changes such as pre-commit hooks or formatter configuration, or for edits to this file. Do not add or backfill `CHANGELOG.md` entries for routine version work.
 
@@ -68,7 +68,7 @@ Do not change `releaseVersion` for tooling-only changes such as pre-commit hooks
 
 The outline repository carries a flat copy of every skill at `.devin/skills/<slug>/`, the
 project-scope path Devin reads. `scripts/sync-outline-skills.mjs` generates it from this tree, so
-it is an export of the same skills rather than a fifth distribution surface.
+it is an export of the same skills rather than a sixth distribution surface.
 
 Regenerate it with `just sync-outline`. The default target is the sibling checkout
 `../outline-driven-development`; pass `--target <path>` for a clone elsewhere. The script mirrors

@@ -11,7 +11,7 @@ Methodology: [outline-driven-development](https://github.com/OutlineDriven/outli
 · Site: [outlinedriven.github.io](https://outlinedriven.github.io)
 
 - 613 skills in 28 plugins, each authored once at `plugins/<plugin>/skills/<slug>/SKILL.md`
-- Four surfaces from one tree: Claude Code, Codex, Cursor, and the Agent Plugins standard
+- Five harness surfaces from one tree: Claude Code, Codex, Cursor, Grok, and Kimi
 - No package manager for the tooling; every script is dependency-free Node ESM or standard-library Python
 - Six output styles in odin-core, each embedding the canonical doctrine byte-identically
 - Pre-commit gates that audit the whole tree on every commit, listed in `.pre-commit-config.yaml`
@@ -33,16 +33,19 @@ Methodology: [outline-driven-development](https://github.com/OutlineDriven/outli
 613 skills in 28 plugins. A skill is authored once, at
 `plugins/<plugin>/skills/<slug>/SKILL.md`, and that path is its only home. The directory states
 which plugin owns the skill, so no registry has to answer that question. Every plugin and
-marketplace ships at one `releaseVersion`, currently 2.0.0, held in `catalog/plugins.json`.
+marketplace ships at one `releaseVersion`, currently 2.0.1, held in `catalog/plugins.json`.
 
-The Agent Plugins specification fixes components at the plugin root, so this layout is also the one
-every supported client already discovers. Nothing is copied at publish time, and nothing is
+Each harness resolves components from fixed conventions at the plugin root, so this layout is the
+one every supported client already discovers. Nothing is copied at publish time, and nothing is
 published to a package registry.
 
 ```
 plugins/odin-core/
-  plugin.json                  Agent Plugins 1.0.0 manifest
   .claude-plugin/plugin.json   Claude Code manifest
+  .codex-plugin/plugin.json    Codex manifest
+  .cursor-plugin/plugin.json   Cursor manifest
+  .grok-plugin/plugin.json     Grok manifest
+  .kimi-plugin/plugin.json     Kimi manifest
   skills/askme/SKILL.md        authored skill
   skills/askme/agents/openai.yaml   generated from the frontmatter
   mcp.json                     MCP servers, odin-core only
@@ -62,7 +65,7 @@ plugins/odin-core/
 
 ## Install
 
-Five install surfaces are supported; Each installs from this repository.
+Six install surfaces are supported; each installs from this repository.
 
 ### Claude Code
 
@@ -100,8 +103,8 @@ codex plugin add odin-loop@odin-marketplace
 
 ### Cursor
 
-Add the marketplace, then `/plugin install odin-core`. Cursor reads the Agent Plugins manifest at
-each plugin root.
+Add the marketplace, then `/plugin install odin-core`. Cursor reads the
+`.cursor-plugin/plugin.json` manifest at each plugin root.
 
 ```
 /plugin install odin-core
@@ -127,11 +130,25 @@ gh skill install OutlineDriven/odin-claude-plugin plugins/odin-core/skills/askme
   --agent claude-code --scope user
 ```
 
-### Agent Plugins standard
+### Grok
 
-Any client implementing [Agent Plugins 1.0.0](https://github.com/agentplugins/agent-plugins-spec)
-can consume a plugin directory as it stands: the manifest is `plugins/<plugin>/plugin.json`, skills are
-at `skills/<slug>/SKILL.md`, and MCP servers are at `mcp.json`.
+```shell
+grok plugin marketplace add OutlineDriven/odin-claude-plugin
+grok plugin install OutlineDriven/odin-claude-plugin#plugins/odin-core
+```
+
+The `#plugins/<plugin>` suffix selects one plugin subdirectory from the repository.
+
+### Kimi
+
+From a local clone; Kimi cannot install a subdirectory of a GitHub repository.
+
+```shell
+/plugins marketplace /path/to/odin-claude-plugin/.kimi-plugin/marketplace.json
+/plugins install /path/to/odin-claude-plugin/plugins/odin-core
+```
+
+Both paths are absolute: Kimi rejects a relative plugin root.
 
 ## Choose your plugins
 

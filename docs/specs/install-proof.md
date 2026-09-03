@@ -6,10 +6,9 @@ Each supported surface, exercised against this tree rather than read from a docu
 `docs/specs/distribution-surfaces.md` carries the specifications and their citations. This file
 carries only what was executed and what it returned.
 
-## Agent Plugins standard
+## Agent Skills validation
 
-The GitHub CLI validates every skill against the Agent Skills specification, which the Agent
-Plugins specification adopts for skill format.
+The GitHub CLI validates every skill against the Agent Skills specification. (The retired Agent Plugins specification adopted the same skill format; the skill tree is unchanged by the surface retirement.)
 
 ```shell
 $ gh skill publish --dry-run
@@ -38,7 +37,7 @@ gh skill install OutlineDriven/odin-claude-plugin plugins/odin-core/skills/askme
 
 ## Codex marketplace
 
-Run against an isolated `CODEX_HOME` so no user configuration changed. codex-cli 0.151.0.
+Historical run, recorded 2026-09-01 against releaseVersion 2.0.0. Output below is verbatim from that run.
 
 ```shell
 $ codex plugin marketplace add /tmp/odin-ship-v2
@@ -56,7 +55,7 @@ $ codex plugin add odin-core@odin-marketplace --json
 ```
 
 All 16 `odin-core` skills materialized under the install cache, which proves Codex resolved the
-fixed `skills/` location from the Agent Plugins manifest without the manifest declaring it.
+fixed `skills/` location from the root manifest without the manifest declaring it. (Run recorded 2026-09-01, before the Agent Plugins surface was retired; no root manifest ships anymore, and the same default now resolves through `.codex-plugin/plugin.json` in Legacy format.)
 `codex plugin list --json` then reported the plugin installed and enabled, with
 `installPolicy: AVAILABLE` and `source.path: /tmp/odin-ship-v2/plugins/odin-core`.
 
@@ -67,6 +66,8 @@ listing behavior rather than a manifest defect.
 ## Claude Code marketplace
 
 Run against an isolated `CLAUDE_CONFIG_DIR`. No user configuration changed.
+
+Historical run, recorded 2026-09-01 against releaseVersion 2.0.0. Output below is verbatim from that run.
 
 ```shell
 $ claude plugin marketplace add /tmp/odin-ship-v2
@@ -120,11 +121,12 @@ machine: it mutates a consumer cache outside this repository, so no gate here ru
 
 ## Manifest name parity
 
-Codex resolves a plugin's manifest from the root `plugin.json` but resolves its namespace from the
-dotdir list only, never the root file. If `plugin.json` and `.claude-plugin/plugin.json` carry
-different names, Codex namespaces the plugin under one name and loads its components under
-another.
+Codex resolves a plugin's namespace from the dotdir manifest list only, never from a root file. If the five dotdir manifests under one plugin carry different names, Codex namespaces the plugin under one name and loads its components under another. With no root manifests, every plugin resolves through `.codex-plugin/plugin.json`, first in `DISCOVERABLE_PLUGIN_MANIFEST_PATHS`, in Legacy format.
 
 `check-plugin-surfaces` asserts the parity. The assertion is mutation-verified: changing one
 plugin's `.claude-plugin/plugin.json` name produced exactly one `name differs` error, and
 regenerating restored a clean run.
+
+## Grok and Kimi lanes
+
+Unproven on this machine, matching how this file already treats the unexercised Cursor parse. The Grok registry is generated to the documented `{"type": "local", "path"}` shape and the Kimi registry to a local-clone `../plugins/<id>` shape; both are asserted by `check-plugin-surfaces`. Grok's `owner/repo#subdir` install and Kimi's absolute-path local-clone install need a live probe against Grok Build v1.0.13 or later and Kimi Code CLI 0.40.1 or later.
