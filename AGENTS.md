@@ -98,6 +98,12 @@ Do not invent language test commands or add CI without an explicit request; this
 
 Test persona or doctrine changes in a fresh Claude Code session. The canonical baseline and output styles load only at session start, so the current session cannot verify them.
 
+## Prompt audit
+
+Run the `prompt-optimizer` skill in audit mode when a prompt, skill, output style, or tool description changes behavior, and again at each model release. Publish its report and proposed diff. Apply only high- and medium-confidence hunks with explicit consent, and leave low-confidence and flagged items in the report.
+
+Ground every prompting claim in a current vendor guide. Re-fetch the guides in `plugins/odin-agent/skills/prompt-optimizer/references/prompt-guides.md` before an audit run, at each model release, and whenever a row is older than one release cycle. Update the index in the same change: stamp each re-read row `Verified <ISO date>`, move a superseded guide to the legacy-avoid rows and name its successor, and add the new model's guide as a current row. A claim whose row is stale is unverified: report it and keep it out of any applied diff.
+
 ## External harness carriers
 
 Propagate every shared doctrine change to `~/.codex/AGENTS.md` and `~/.omp/agent/AGENTS.md`. The baseline generator does not update these external harness carriers.
