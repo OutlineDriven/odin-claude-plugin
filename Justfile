@@ -38,3 +38,11 @@ validate-skills:
 
 # Everything a change must pass before it is committed.
 verify: check validate-skills
+
+# Manual carrier sync, never a hook: a hook that rewrites home-directory files
+# on every commit would fire on machines with no carriers to repair.
+sync-carriers:
+    python3 scripts/sync-carriers.py
+
+sync-carriers-check:
+    python3 scripts/sync-carriers.py --check
