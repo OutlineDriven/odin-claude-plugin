@@ -37,7 +37,7 @@ gh skill install OutlineDriven/odin-claude-plugin plugins/odin-core/skills/askme
 
 ## Codex marketplace
 
-Historical run, recorded 2026-09-01 against releaseVersion 2.0.0. Output below is verbatim from that run.
+Run against an isolated `CODEX_HOME` so no user configuration changed. codex-cli 0.151.0. Historical run, recorded 2026-09-01 against releaseVersion 2.0.0; output below is verbatim from that run.
 
 ```shell
 $ codex plugin marketplace add /tmp/odin-ship-v2

@@ -120,6 +120,7 @@ Claude Code reads plugin MCP configuration from `.mcp.json` at the plugin root b
 The manifest `mcpServers` field accepts a path: type `string|array|object`, described as "MCP config paths or inline config", example `"./my-extra-mcp-config.json"` (Tier 2, source: plugins-reference, "Component path fields" table, verified).
 
 Shared-file claim, stated precisely: one shared `mcp.json` serves Claude Code, Codex, and Grok, but only through an explicit `mcpServers` entry, because all three default to the dotted `.mcp.json`. Without the manifest entry, none of the three loads the dotless file. Kimi takes the servers inline instead: its `mcpServers` is a server map, not a path, so the generator reads `mcp.json` and inlines its `mcpServers` value verbatim. Mechanism verified at Tier 2 for Claude Code and Tier 1 for Codex and Grok.
+
 Repository state as read 2026-09-03: `plugins/odin-core/.claude-plugin/plugin.json`, `plugins/odin-core/.codex-plugin/plugin.json`, and `plugins/odin-core/.grok-plugin/plugin.json` all declare `"mcpServers": "./mcp.json"`, and `plugins/odin-core/.kimi-plugin/plugin.json` carries the inlined server map. No other plugin ships `mcp.json`, so the other 27 manifests omit the key. The renderers add the entry whenever a plugin ships an `mcp.json` (Tier 1, source: repository files and `scripts/plugin-surfaces.mjs`, verified 2026-09-03).
 
 ### Skill discovery
@@ -232,6 +233,8 @@ Validation checks, from the help text (Tier 1, source: `gh skill publish --help`
 - Required frontmatter fields `name` and `description` are present.
 - `allowed-tools` is a string, not an array.
 - Install metadata `metadata.github-*` is stripped.
+
+### Dry-run result, historical, 2026-09-01
 
 Historical run, recorded 2026-09-01 against releaseVersion 2.0.0, when the tree held 657 skills. Output below is verbatim from that run; the current gate reports 28 plugins and 613 skills.
 
