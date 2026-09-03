@@ -35,7 +35,7 @@ Do not review, commit, push, or create a PR. The orchestrator owns finalization.
 
 Delegate finalization to **review-and-ship** with explicit delegated shipping authority. Pass:
 
-- `authority: delegated` — the explicit authority signal. This cannot arise from a bare route name or invocation context; it must be passed explicitly.
+- `authority: delegated`: the explicit authority signal. This cannot arise from a bare route name or invocation context; it must be passed explicitly.
 - Implementation context: branch, diff summary, verification results.
 - Any residuals or blockers from execution.
 

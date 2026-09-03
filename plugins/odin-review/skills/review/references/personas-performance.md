@@ -12,4 +12,4 @@ HUNT (cite `path:line` for each):
 4. Blocking I/O on a latency-sensitive path; sync work in an async context.
 5. Unbounded growth: caches/maps/queues with no eviction.
 
-SEVERITY ANCHORS: resource exhaustion under expected load is P1; a micro-optimization with no measured win is P3 advisory. State the input-size assumption with any cost claim. Apply `_contract.md`.
+SEVERITY ANCHORS: resource exhaustion under expected load is P1; a micro-optimization with no measured win is P3 advisory. State the input-size assumption with any cost claim. Apply `personas-_contract.md`.

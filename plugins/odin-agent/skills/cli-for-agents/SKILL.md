@@ -1,6 +1,6 @@
 ---
 name: cli-for-agents
-description: 'Use when asked to build or review a CLI intended for coding agents and return flag-driven, pipeline-safe, idempotent design advice. Not for running or profiling a CLI — use control-cli.'
+description: 'Use when asked to build or review a CLI intended for coding agents and return flag-driven, pipeline-safe, idempotent design advice. Not for running or profiling a CLI: use control-cli.'
 ---
 
 # CLI for agents

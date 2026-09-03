@@ -4,11 +4,11 @@
 
 Three elements, nothing else:
 
-- **Places** — screens, dialogs, states a user can navigate to. Written as underlined names.
-- **Affordances** — things a user can act on: buttons, fields, links, and copy the user reads before deciding. Listed under their place.
-- **Connection lines** — an affordance wired to the place it leads to.
+- Places: screens, dialogs, states a user can navigate to. Written as underlined names.
+- Affordances: things a user can act on: buttons, fields, links, and copy the user reads before deciding. Listed under their place.
+- Connection lines: an affordance wired to the place it leads to.
 
-Worked example — "invoice autopay" bet:
+Worked example, "invoice autopay" bet:
 
 ```
   Invoice page                Set up autopay             Confirmation
@@ -26,13 +26,13 @@ Sketch with a marker too thick for detail. If the tool lets you draw a table's c
 
 ## Altitude tests
 
-Too concrete (over-shaped) — any of these signals means raise the altitude:
+Too concrete (over-shaped): any of these signals means raise the altitude:
 
 - Pixel positions, spacing values, exact copy.
 - Field lists or column enumerations.
 - Task tickets or a work breakdown.
 
-Too abstract (under-shaped) — any of these means walk a concrete path:
+Too abstract (under-shaped): any of these means walk a concrete path:
 
 - No nouns a builder could start from.
 - A goal statement with no places or affordances.

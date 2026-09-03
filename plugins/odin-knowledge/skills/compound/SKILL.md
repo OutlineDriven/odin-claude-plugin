@@ -55,9 +55,9 @@ Canonical frontmatter contract for `docs/knowledge/{slug}.md` records. All seven
 | `tags` | array[string] | Retrieval keywords, lowercase and hyphen-separated. Used for duplicate and contradiction detection. |
 | `confidence` | enum | `high`, `medium`, or `low`. |
 | `date` | string | ISO 8601 date (`YYYY-MM-DD`). |
-| `source` | string | Where the learning originated — session context, PR, issue, or codebase area. |
-| `Context` | string | What triggered the learning — the situation or problem that produced it. |
-| `Implication` | string | What changes as a result — the actionable consequence of the learning. |
+| `source` | string | Where the learning originated: session context, PR, issue, or codebase area. |
+| `Context` | string | What triggered the learning: the situation or problem that produced it. |
+| `Implication` | string | What changes as a result: the actionable consequence of the learning. |
 
 ### Body
 
@@ -65,16 +65,16 @@ Prose body derived from the session, expanding on Context and Implication with t
 
 ### Filename
 
-`{slug}.md` — a sanitized, descriptive slug derived from the learning's core idea. No date suffix (the `date` field carries that).
+`{slug}.md`: a sanitized, descriptive slug derived from the learning's core idea. No date suffix (the `date` field carries that).
 
 ### YAML safety
 
-Wrap array items in double quotes when a value starts with any of: `` ` `` `[` `]` `{` `}` `,` `*` `&` `!` `|` `>` `%` `@` `?`. Also quote when a value contains `": "`. Scalar fields have a separate failure mode — an unquoted ` #` truncates at the comment, an unquoted `: ` reframes as a mapping.
+Wrap array items in double quotes when a value starts with any of: `` ` `` `[` `]` `{` `}` `,` `*` `&` `!` `|` `>` `%` `@` `?`. Also quote when a value contains `": "`. Scalar fields have a separate failure mode: an unquoted ` #` truncates at the comment, an unquoted `: ` reframes as a mapping.
 
 ### Consolidation
 
 When a new record supersedes or contradicts an existing entry (flagged in step 2), the user may approve a consolidation: merge the new record into the existing file, preserve the original as a history line, and update the frontmatter `date` and `Context`/`Implication` to reflect the consolidated state. Never silently delete the superseded entry.
 
-## Vocabulary capture — CONCEPTS.md (optional)
+## Vocabulary capture: CONCEPTS.md (optional)
 
 When a durable project term with a precise local meaning surfaces during curation, reconcile CONCEPTS.md per `references/concepts.md`. The glossary is a shared surface; follow the one-definition-per-concept discipline. This is optional and never blocks the primary curation flow.

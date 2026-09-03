@@ -59,8 +59,8 @@ No partial config-only or GOALS-only result satisfies the contract.
    - [ ] SC-02: <observable criterion, if any>
 
    ## Verification
-   - SC-01: `.agent-tasks/<task-id>/tests/sc-01.<language extension>` — `<existing targeted test command>`
-   - SC-02: `.agent-tasks/<task-id>/tests/sc-02.<language extension>` — `<existing targeted test command>`
+   - SC-01: `.agent-tasks/<task-id>/tests/sc-01.<language extension>`, `<existing targeted test command>`
+   - SC-02: `.agent-tasks/<task-id>/tests/sc-02.<language extension>`, `<existing targeted test command>`
 
    ## Boundaries
    - Project-stable rules remain in project configuration.

@@ -1,6 +1,6 @@
 ---
 name: corroborate-by-independent-reruns
-description: 'Use when a candidate patch or answer needs independent corroboration before it is trusted. Run N isolated sandboxed attempts and return the strict-majority byte-identical patch with its agreement count, or report no consensus. Not for multi-stance investigation — use council.'
+description: 'Use when a candidate patch or answer needs independent corroboration before it is trusted. Run N isolated sandboxed attempts and return the strict-majority byte-identical patch with its agreement count, or report no consensus. Not for multi-stance investigation: use council.'
 ---
 
 # Corroborate by independent reruns

@@ -12,4 +12,4 @@ HUNT (cite `path:line` or a one-line repro for each):
 4. Implicit assumptions stated as invariants but never enforced; cite the unguarded assumption.
 5. Resource exhaustion and pathological inputs that turn O(n) into a denial of service.
 
-SEVERITY ANCHORS: a reachable hostile-input crash or corruption is P0; an assumption that holds today but is unenforced is P2 with a named future-defect path. Apply `_contract.md`.
+SEVERITY ANCHORS: a reachable hostile-input crash or corruption is P0; an assumption that holds today but is unenforced is P2 with a named future-defect path. Apply `personas-_contract.md`.

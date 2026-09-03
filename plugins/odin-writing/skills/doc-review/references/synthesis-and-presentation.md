@@ -2,28 +2,28 @@
 
 ## Phase 3: Synthesize findings
 
-Process findings from all agents through this pipeline. Order matters -- each step depends on the previous. The pipeline implements the finding-lifecycle state machine: **Raised -> (Confidence Gate | FYI-eligible | Dropped) -> Deduplicated -> Classified -> SafeAuto | GatedAuto | Manual | FYI**. Re-evaluate state at each step boundary; derive each step's state from the current finding set rather than carrying forward earlier-step assumptions as prose-level shortcuts.
+Process findings from all agents through this pipeline. Order matters; each step depends on the previous. The pipeline implements the finding-lifecycle state machine: **Raised -> (Confidence Gate | FYI-eligible | Dropped) -> Deduplicated -> Classified -> SafeAuto | GatedAuto | Manual | FYI**. Re-evaluate state at each step boundary; derive each step's state from the current finding set rather than carrying forward earlier-step assumptions as prose-level shortcuts.
 
 ### Routing decision table
 
 | Phase | Condition | Action |
 |-------|-----------|--------|
-| **3.1** Validate | Agent's returned JSON checked against the findings schema. | Drop findings missing a required field or with invalid enum values; note the offending agent in Coverage. Restrict schema/validation diagnostics to a Coverage-row annotation (e.g. fewer findings, or a `malformed` marker) -- the only user-visible trace. |
-| **3.2** Confidence Gate (Anchor-Based) | Finding's `confidence` anchor (`0`/`25`/`50`/`75`/`100`). | See "3.2 Confidence Gate" below -- full anchor table, drop/FYI/actionable routing, and the threshold rationale. |
+| **3.1** Validate | Agent's returned JSON checked against the findings schema. | Drop findings missing a required field or with invalid enum values; note the offending agent in Coverage. Restrict schema/validation diagnostics to a Coverage-row annotation (e.g. fewer findings, or a `malformed` marker); the only user-visible trace. |
+| **3.2** Confidence Gate (Anchor-Based) | Finding's `confidence` anchor (`0`/`25`/`50`/`75`/`100`). | See "3.2 Confidence Gate" below; full anchor table, drop/FYI/actionable routing, and the threshold rationale. |
 | **3.3** Deduplicate | Fingerprint (`normalize(section)+normalize(title)`) matches across personas. | Opposing recommended actions (one says cut, one says keep) -> keep both, unresolved until 3.5. Otherwise merge: highest severity, highest confidence anchor (tie -> first in document order), union all evidence, list all agreeing reviewers. **Coverage attribution:** merged finding attributed to the persona with the highest anchor (tie -> first in document order); the losing persona's Findings count and route bucket are decremented so totals stay exact. |
-| **3.3b** Same-Persona Premise Redundancy Collapse | One persona has 3+ surviving findings sharing the same `finding_type`, substantially overlapping `why_it_matters` phrasing, and fixes all obviated by the same upstream decision. | Keep the single strongest finding (highest anchor, else most concrete evidence); demote the other N-1 to FYI-subsection status (anchor `50`) regardless of original anchor; annotate the kept finding's Reviewer column with the variant count (e.g. `product (+4 related variants demoted to FYI)`). Runs per-persona, before 3.4. Demoted variants remain at FYI-subsection status through cross-persona promotion. This step collapses only within a single persona -- independent personas surfacing the same concern is exactly the signal 3.4 rewards. |
+| **3.3b** Same-Persona Premise Redundancy Collapse | One persona has 3+ surviving findings sharing the same `finding_type`, substantially overlapping `why_it_matters` phrasing, and fixes all obviated by the same upstream decision. | Keep the single strongest finding (highest anchor, else most concrete evidence); demote the other N-1 to FYI-subsection status (anchor `50`) regardless of original anchor; annotate the kept finding's Reviewer column with the variant count (e.g. `product (+4 related variants demoted to FYI)`). Runs per-persona, before 3.4. Demoted variants remain at FYI-subsection status through cross-persona promotion. This step collapses only within a single persona; independent personas surfacing the same concern is exactly the signal 3.4 rewards. |
 | **3.4** Cross-Persona Agreement Promotion | 2+ independent personas flagged the same merged (3.3) finding. | Promote the merged finding's anchor by one step: `50 -> 75`, `75 -> 100` (`100` does not promote further; anchors `0`/`25` are already dropped at 3.2 and absent from this step). Note the promotion in the Reviewer column (e.g. `coherence, feasibility (+1 anchor)`). |
 | **3.5** Resolve Contradictions | Personas disagree on the same section (opposing recommendations, not mere agreement). | Create one combined finding: `autofix_class: manual`, `finding_type: error`, framed as a tradeoff, not a verdict. E.g. coherence "keep for consistency" + scope-guardian "cut for simplicity" -> combined finding, let user decide; feasibility "impossible" + product "essential" -> P1 tradeoff finding. Same-direction multi-persona agreement is handled by 3.3's merge, not here. |
-| **3.5b** Deterministic Recommended-Action Tie-Break | Merged finding's contributing personas implied different actions (Apply/Defer/Skip). | See "3.5b Deterministic Recommended-Action Tie-Break" below -- `Skip > Defer > Apply` precedence, persona-to-action mapping, the no-`suggested_fix` default and downgrade, and the conflict-context string. |
-| **3.5c** Premise-Dependency Chain Linking | A P0/P1 `manual` finding challenges a foundational premise on a framing-level section or named component (candidate root), and other findings' concerns would dissolve if that root is rejected (dependents). | See "3.5c Premise-Dependency Chain Linking" below -- root/dependent identification, peer-vs-nested and independence-safeguard rules, `depends_on`/`dependents` annotation (capped at 6), and the Chains coverage line. |
+| **3.5b** Deterministic Recommended-Action Tie-Break | Merged finding's contributing personas implied different actions (Apply/Defer/Skip). | See "3.5b Deterministic Recommended-Action Tie-Break" below; `Skip > Defer > Apply` precedence, persona-to-action mapping, the no-`suggested_fix` default and downgrade, and the conflict-context string. |
+| **3.5c** Premise-Dependency Chain Linking | A P0/P1 `manual` finding challenges a foundational premise on a framing-level section or named component (candidate root), and other findings' concerns would dissolve if that root is rejected (dependents). | See "3.5c Premise-Dependency Chain Linking" below; root/dependent identification, peer-vs-nested and independence-safeguard rules, `depends_on`/`dependents` annotation (capped at 6), and the Chains coverage line. |
 | **3.6** R29 Rejected-Finding Suppression (Round 2+) | Round 2+; current-round finding's fingerprint plus evidence-substring overlap (>50%) matches a prior-round Skipped/Deferred/Acknowledged finding from the decision primer. | Drop the current-round finding; record "previously rejected, re-raised this round" in Coverage. **Exception:** if the section was edited since the prior round and the evidence quote no longer appears in the current text, treat the finding as new. Runs before 3.9/3.10. |
 | **3.7** R30 Fix-Landed Matching Predicate | Round 2+; current-round finding's fingerprint matches a prior-round Accepted finding. | Evidence overlap >50% -> flag "fix did not land" regression instead of surfacing as new. Overlap <=50% -> if the current item is a pure non-actionable verification observation, suppress it and record `Verified: round-N '{title}' landed correctly`; otherwise treat as new. A section rename between rounds counts as a different location (treated as new). No fingerprint match -> not a verification candidate, flows through normally. |
-| **3.8** Protected Artifacts | Finding recommends deleting or removing files under `docs/brainstorms/`, `docs/plans/`, or `docs/solutions/`. | Discard the finding -- these are pipeline artifacts and must not be flagged for removal. |
+| **3.8** Protected Artifacts | Finding recommends deleting or removing files under `docs/brainstorms/`, `docs/plans/`, or `docs/solutions/`. | Discard the finding; these are pipeline artifacts and must not be flagged for removal. |
 | **3.8b** Chain Pruning | After 3.6-3.8 drop findings, a chain annotation from 3.5c (`depends_on`/`dependents`) may reference a now-dropped entry. | Remove dropped ids from surviving roots' `dependents` arrays (clear the field if it becomes empty, leave the root intact). If a root itself was dropped, clear `depends_on` on every dependent that pointed to it (they become standalone). Recompute the `Chains: N root(s) with M total dependents` coverage line from the post-pruning surviving roots/dependents; `M` = findings with `depends_on` set after pruning. |
-| **3.9** Promote Auto-Eligible Findings | `manual` finding matches one of five consolidated auto-promotion patterns. | See "3.9 Promote Auto-Eligible Findings" below -- codebase-pattern-resolved / factually-incorrect-behavior / missing-standard-controls / framework-native-substitution / mechanically-implied-completeness patterns, their promotion targets, the scope/priority exclusion, and the strawman-downgrade safeguard. |
-| **3.10** Route by Autofix Class | Anchor (`100`/`75`/`50`) x `autofix_class` (`safe_auto`/`gated_auto`/`manual`). | See "3.10 Route by Autofix Class" below -- full anchor x autofix_class routing table (accepted-recommendation recording, walk-through entry with Accept marked, user-judgment framing, demotion rules, and the anchor-`50` FYI catch-all). |
+| **3.9** Promote Auto-Eligible Findings | `manual` finding matches one of five consolidated auto-promotion patterns. | See "3.9 Promote Auto-Eligible Findings" below; codebase-pattern-resolved / factually-incorrect-behavior / missing-standard-controls / framework-native-substitution / mechanically-implied-completeness patterns, their promotion targets, the scope/priority exclusion, and the strawman-downgrade safeguard. |
+| **3.10** Route by Autofix Class | Anchor (`100`/`75`/`50`) x `autofix_class` (`safe_auto`/`gated_auto`/`manual`). | See "3.10 Route by Autofix Class" below; full anchor x autofix_class routing table (accepted-recommendation recording, walk-through entry with Accept marked, user-judgment framing, demotion rules, and the anchor-`50` FYI catch-all). |
 | **3.11** Sort | Finalized finding set, ready for presentation. | Sort `P0 -> P1 -> P2 -> P3`, then by finding type (errors before omissions), then by confidence anchor descending (`100`, then `75`, then `50`), then by document order (section position) as the deterministic final tiebreak. |
-| **3.12** Suppress Restatements in Residual Concerns and Deferred Questions | A `residual_risk`/`deferred_question` (checked after 3.10 routing) fuzzy-matches an actionable finding's section+substance, or is a question directly answered/obviated by one. | Drop the item; keep it when in doubt or when it introduces genuinely new signal. Record `Restated: N (residual/deferred items suppressed as duplicates of actionable findings)` in Coverage when non-zero. Footnote order below the Coverage table: `Dropped:`, `Chains:`, `Restated:` -- omit any footnote whose count is zero. |
+| **3.12** Suppress Restatements in Residual Concerns and Deferred Questions | A `residual_risk`/`deferred_question` (checked after 3.10 routing) fuzzy-matches an actionable finding's section+substance, or is a question directly answered/obviated by one. | Drop the item; keep it when in doubt or when it introduces genuinely new signal. Record `Restated: N (residual/deferred items suppressed as duplicates of actionable findings)` in Coverage when non-zero. Footnote order below the Coverage table: `Dropped:`, `Chains:`, `Restated:`; omit any footnote whose count is zero. |
 
 Five phases carry branching, multi-step procedures too dense for a single table cell; their full logic is preserved as prose below, unchanged from the pre-table version.
 
@@ -39,11 +39,11 @@ Gate findings by their `confidence` anchor value. Anchors are discrete integers 
 | `75`   | Double-checked, will hit in practice, directly impacts correctness | Enter actionable tier (classify by `autofix_class`) |
 | `100`  | Evidence directly confirms; will happen frequently | Enter actionable tier (classify by `autofix_class`) |
 
-- Dropped silently (anchors `0` and `25`): these stay suppressed across every output bucket -- findings, FYI observations, and residual concerns alike. Record the total drop count as a Coverage footnote line when non-zero: `Dropped: N (anchors 0/25 suppressed)`. The footnote appears below the Coverage table, alongside the `Chains:` footnote when both apply. Omit the footnote when N is zero.
-- FYI-subsection (anchor `50`): stays in the working set through 3.3 dedup and 3.4 cross-persona promotion. If promoted to `75` by corroboration, enters the actionable tier; if not promoted, routes to the FYI subsection regardless of `autofix_class`. These bypass the walk-through and any bulk action -- observational value without forcing a decision. Advisory observations ("nothing breaks, but...") naturally land here.
+- Dropped silently (anchors `0` and `25`): these stay suppressed across every output bucket; findings, FYI observations, and residual concerns alike. Record the total drop count as a Coverage footnote line when non-zero: `Dropped: N (anchors 0/25 suppressed)`. The footnote appears below the Coverage table, alongside the `Chains:` footnote when both apply. Omit the footnote when N is zero.
+- FYI-subsection (anchor `50`): stays in the working set through 3.3 dedup and 3.4 cross-persona promotion. If promoted to `75` by corroboration, enters the actionable tier; if not promoted, routes to the FYI subsection regardless of `autofix_class`. These bypass the walk-through and any bulk action; observational value without forcing a decision. Advisory observations ("nothing breaks, but...") naturally land here.
 - Actionable (anchors `75` and `100`): enter the classification pipeline. Route by `autofix_class` (see 3.10).
 
-**Why this threshold, not a higher one:** Document review has opposite economics from code review. There is no linter backstop -- the review IS the backstop. Premise-level concerns (product, adversarial) naturally cap at anchors 50-75 because "is the motivation valid?" cannot be verified against ground truth. The routing menu already makes dismissal cheap (Skip, Append to Open Questions), so surfaced-and-skipped is a low-cost outcome while missed-and-shipped derails downstream implementation. Filter low (`>= 50`) and let the routing menu handle volume.
+**Why this threshold, not a higher one:** Document review has opposite economics from code review. There is no linter backstop; the review IS the backstop. Premise-level concerns (product, adversarial) naturally cap at anchors 50-75 because "is the motivation valid?" cannot be verified against ground truth. The routing menu already makes dismissal cheap (Skip, Append to Open Questions), so surfaced-and-skipped is a low-cost outcome while missed-and-shipped derails downstream implementation. Filter low (`>= 50`) and let the routing menu handle volume.
 
 ### 3.5b Deterministic recommended-action tie-break
 
@@ -83,19 +83,19 @@ Run this step after 3.5b (recommended_action normalized) and before 3.9 (auto-pr
 **Step 1: Identify roots.** A finding is a candidate root when ALL of the following hold:
 
 - Severity is `P0` or `P1` (premise-level issues carry high priority by nature)
-- `autofix_class` is `manual` (the root itself requires judgment -- a safe/gated root is acted on, not cascaded)
+- `autofix_class` is `manual` (the root itself requires judgment; a safe/gated root is acted on, not cascaded)
 - `why_it_matters` or `title` challenges a foundational premise, not a detail. Signal phrases (shape, not vocabulary): "premise unsupported", "justification missing", "do-nothing baseline not evaluated", "is X justified", "unsupported by evidence", "is the proposed solution the right approach"
 - The finding's `section` is framing-level (Problem Frame, Summary, Overview, Why, Motivation, Goals) OR the finding explicitly questions whether a named component should exist
 
 If multiple candidates match the criteria, elevate ALL of them. The criteria above are restrictive enough that this list will be short for any well-formed document; rely on the criteria alone to bound the list size. Picking only one root when two valid roots exist leaves the second root's natural dependents stranded as independent manual findings.
 
-**Peer vs nested test.** Two candidate roots are peers when accepting root A's proposed fix would not resolve root B's concern (and vice versa). They are nested when one root's fix would moot the other -- in which case the subsumed candidate becomes a dependent of the surviving root, not a peer root.
+**Peer vs nested test.** Two candidate roots are peers when accepting root A's proposed fix would not resolve root B's concern (and vice versa). They are nested when one root's fix would moot the other; in which case the subsumed candidate becomes a dependent of the surviving root, not a peer root.
 
-**Surviving-root selection under asymmetric subsumption.** When nested, the surviving root is the one whose fix moots the other -- not the one with higher confidence. The subsumption direction determines scope (broader premise wins); confidence determines strength, not scope.
+**Surviving-root selection under asymmetric subsumption.** When nested, the surviving root is the one whose fix moots the other; not the one with higher confidence. The subsumption direction determines scope (broader premise wins); confidence determines strength, not scope.
 
 **Sanity diagnostic.** If more than 3 candidates match, reconsider whether the criteria are being applied correctly. Either confirm each one independently meets the criteria, or tighten the application; every candidate must be explicitly resolved.
 
-If none match, skip the rest of this step -- no chains exist.
+If none match, skip the rest of this step; no chains exist.
 
 **Step 2: Identify dependents.** For each candidate root, scan the remaining findings for dependents. A finding is a dependent of a root when:
 
@@ -103,13 +103,13 @@ If none match, skip the rest of this step -- no chains exist.
 - The candidate's `suggested_fix` modifies, adds detail to, or constrains that same component
 - The candidate's concern would dissolve if the root's premise is rejected
 
-Test with the substitution check: "If the user rejects the root (Skip/Defer), does the dependent's finding still describe an actionable concern?" If no -- the dependent's premise dissolves alongside the root's -- it is a dependent.
+Test with the substitution check: "If the user rejects the root (Skip/Defer), does the dependent's finding still describe an actionable concern?" If no, the dependent's premise dissolves alongside the root's; it is a dependent.
 
 **Step 3: Independence safeguard.** Even when a finding's target component is addressed by the root, keep the finding standalone when:
 
 - The dependent identifies a problem that would exist regardless of the root's resolution (operational obligations that persist when the premise changes)
 - The dependent's `why_it_matters` cites evidence that stands on its own, not conditioned on the premise
-- The dependent is `safe_auto` -- it has one clear correct fix and should apply regardless
+- The dependent is `safe_auto`; it has one clear correct fix and should apply regardless
 
 When uncertain, default to NOT linking. A mis-linked chain hides a real issue; leaving a finding unlinked only costs one extra decision.
 
@@ -148,7 +148,7 @@ Findings reaching 3.10 have already been gated to anchors `50`, `75`, or `100` b
 | `100`  | `safe_auto`   | Record as accepted recommendation in report. Requires `suggested_fix`. Demote to `gated_auto` if missing. |
 | `100`  | `gated_auto`  | Enter the per-finding walk-through with Accept marked (recommended). Requires `suggested_fix`. Demote to `manual` if missing. |
 | `100`  | `manual`      | Enter the per-finding walk-through with user-judgment framing. `suggested_fix` is optional. |
-| `75`   | `safe_auto`   | Demote to `gated_auto` before routing -- accepted recommendations are reserved for anchor `100` findings. Enter the walk-through with Accept marked (recommended). |
+| `75`   | `safe_auto`   | Demote to `gated_auto` before routing; accepted recommendations are reserved for anchor `100` findings. Enter the walk-through with Accept marked (recommended). |
 | `75`   | `gated_auto`  | Enter the per-finding walk-through with Accept marked (recommended). Requires `suggested_fix`. Demote to `manual` if missing. |
 | `75`   | `manual`      | Enter the per-finding walk-through with user-judgment framing. `suggested_fix` is optional. |
 | `50`   | any           | Surface in the FYI subsection regardless of `autofix_class`, skipping the walk-through and any bulk action. |
@@ -156,7 +156,7 @@ Findings reaching 3.10 have already been gated to anchors `50`, `75`, or `100` b
 
 ## Phase 4: Present findings
 
-**User-facing vocabulary rule (applies to ALL user-visible output in Phase 4).** Internal enum values -- `safe_auto`, `gated_auto`, `manual`, `FYI` -- stay inside the schema and synthesis prose. Every word the user sees in Phase 4 output MUST use user-facing vocabulary: "accepted recommendations" (for `safe_auto`), "proposed fixes" (for `gated_auto`), "decisions" (for `manual` findings at anchor `75` or `100`), "FYI observations" (for any finding at anchor `50`). The only exception is the `Tier` column in rendered tables, which names the internal enum for transparency.
+**User-facing vocabulary rule (applies to ALL user-visible output in Phase 4).** Internal enum values, `safe_auto`, `gated_auto`, `manual`, `FYI`; stay inside the schema and synthesis prose. Every word the user sees in Phase 4 output MUST use user-facing vocabulary: "accepted recommendations" (for `safe_auto`), "proposed fixes" (for `gated_auto`), "decisions" (for `manual` findings at anchor `75` or `100`), "FYI observations" (for any finding at anchor `50`). The only exception is the `Tier` column in rendered tables, which names the internal enum for transparency.
 
 ### Record safe_auto findings as accepted recommendations
 
@@ -225,8 +225,8 @@ Omit any section with zero items. End with "Review complete" as the terminal sig
 
 Present findings using the review output template (read `references/review-output-template.md`). Within each severity level, separate findings by type:
 
-- Errors first -- these need resolution
-- Omissions second -- these need additions
+- Errors first; these need resolution
+- Omissions second; these need additions
 
 Brief summary at the top: "Accepted N recommendations. K items need attention (X errors, Y omissions). Z FYI observations."
 
@@ -234,7 +234,7 @@ Include the Coverage table, accepted recommendations, FYI observations (as a dis
 
 **All tables MUST be pipe-delimited markdown (`| col | col |`). Do NOT use ASCII box-drawing characters under any circumstances.**
 
-## Phase 5: Next action -- terminal question
+## Phase 5: Next action: terminal question
 
 Headless mode: Return "Review complete" immediately, without asking questions.
 
@@ -261,7 +261,7 @@ B. Exit without persisting
 
 ### Iteration limit
 
-After 2 refinement passes, recommend completion -- diminishing returns are likely. But if the user wants to continue, allow it; the primer carries all prior-round decisions so later rounds suppress repeat findings cleanly.
+After 2 refinement passes, recommend completion; diminishing returns are likely. But if the user wants to continue, allow it; the primer carries all prior-round decisions so later rounds suppress repeat findings cleanly.
 
 Return "Review complete" as the terminal signal for callers, regardless of which option the user picked.
 

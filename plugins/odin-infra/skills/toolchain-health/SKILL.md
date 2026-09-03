@@ -67,4 +67,4 @@ description: 'Use when the user runs /toolchain-health and wants a trustworthy g
 
 ## Output
 
-A green, yellow, or red health verdict plus a per-category dashboard (tool, score, status, duration, detail counts), the top issues for any category below 7, and a repairs list ranked by `weight x (10 - score)` descending — no file, history, or project state is changed.
+A green, yellow, or red health verdict plus a per-category dashboard (tool, score, status, duration, detail counts), the top issues for any category below 7, and a repairs list ranked by `weight x (10 - score)` descending: no file, history, or project state is changed.

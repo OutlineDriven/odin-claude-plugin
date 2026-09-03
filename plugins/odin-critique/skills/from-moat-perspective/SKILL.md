@@ -1,6 +1,6 @@
 ---
 name: from-moat-perspective
-description: 'Use when the user wants an answer only from the moat seat: building, keeping, and thickening defensibility. Emits a moat-perspective analysis without blending. Not for rebuilding from primitives — use from-first-principle. Read-only; no source or remote mutation.'
+description: 'Use when the user wants an answer only from the moat seat: building, keeping, and thickening defensibility. Emits a moat-perspective analysis without blending. Not for rebuilding from primitives: use from-first-principle. Read-only; no source or remote mutation.'
 ---
 
 # From moat perspective
@@ -16,9 +16,9 @@ description: 'Use when the user wants an answer only from the moat seat: buildin
 
 ## Not for
 
-- Rebuilding a design from primitives — use from-first-principle.
-- Blended multi-seat analysis — run each from-*-perspective seat independently and compare after.
-- Source or remote mutation — this skill is read-only.
+- Rebuilding a design from primitives: use from-first-principle.
+- Blended multi-seat analysis: run each from-*-perspective seat independently and compare after.
+- Source or remote mutation: this skill is read-only.
 
 ## Inputs
 
@@ -28,7 +28,7 @@ description: 'Use when the user wants an answer only from the moat seat: buildin
 ## Procedure
 
 1. Restate the subject in one line so the moat seat is unambiguous. Done when: the subject is restated.
-2. Answer only from the moat seat: what builds, keeps, or thickens defensibility — switching costs, network effects, scale, data, brand, IP, lock-in, compounding advantage, and erosion risks to each. Done when: every claim ties to a defensibility mechanism or its absence.
+2. Answer only from the moat seat: what builds, keeps, or thickens defensibility, switching costs, network effects, scale, data, brand, IP, lock-in, compounding advantage, and erosion risks to each. Done when: every claim ties to a defensibility mechanism or its absence.
 3. Do not blend mid-answer. Exclude money-and-timing, codebase-tolerance, impact, career, breaking, rent-seeking, innovation, stability, human-trust, and skeptic reasoning from the body. If another seat is relevant, name it once as a pointer at the end; never fold its logic into the answer. Done when: no other seat's reasoning appears in the body.
 4. Keep the output self-contained from this seat: every claim ties to a defensibility mechanism or its absence. Where evidence is thin, state the gap rather than inventing a moat. Done when: thin-evidence gaps are stated, not filled.
 5. Stop when the moat-perspective answer is complete. Comparison or synthesis across lenses happens outside this skill, after independent outputs exist. Done when: the answer is complete and no cross-lens synthesis is included.
@@ -42,4 +42,4 @@ description: 'Use when the user wants an answer only from the moat seat: buildin
 
 ## Output
 
-A moat-perspective analysis in chat: the defensibility mechanisms at work, where they are absent or eroding, and the moat-seat verdict on the subject — ending with an optional one-line pointer to other seats worth consulting, without blending them.
+A moat-perspective analysis in chat: the defensibility mechanisms at work, where they are absent or eroding, and the moat-seat verdict on the subject, ending with an optional one-line pointer to other seats worth consulting, without blending them.

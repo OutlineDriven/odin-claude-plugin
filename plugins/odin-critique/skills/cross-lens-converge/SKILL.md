@@ -1,6 +1,6 @@
 ---
 name: cross-lens-converge
-description: 'Use when one reviewer is not enough because failure modes are heterogeneous, or a claim needs cross-lens pressure before it ships. Returns a convergence picture with per-lens verdicts and the single resolving question. Not for collapsing a decision field — use converge.'
+description: 'Use when one reviewer is not enough because failure modes are heterogeneous, or a claim needs cross-lens pressure before it ships. Returns a convergence picture with per-lens verdicts and the single resolving question. Not for collapsing a decision field: use converge.'
 ---
 
 # Cross lens converge

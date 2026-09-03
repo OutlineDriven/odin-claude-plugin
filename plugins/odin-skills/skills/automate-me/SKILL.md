@@ -41,4 +41,4 @@ disable-model-invocation: true
 - Partial result rule: if the file is written and committed but the PR cannot be opened, report the local commit as the partial result and the blocking error; the done predicate is not met until a PR URL exists.
 
 ## Output
-A reviewable PR URL, the skill file path, and a one-line summary of the encoded personal workflow backed by the history evidence or description used — classified done only when the PR URL exists, otherwise blocked with the failure class named.
+A reviewable PR URL, the skill file path, and a one-line summary of the encoded personal workflow backed by the history evidence or description used, classified done only when the PR URL exists, otherwise blocked with the failure class named.

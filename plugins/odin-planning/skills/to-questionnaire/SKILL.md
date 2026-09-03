@@ -22,7 +22,7 @@ Required: the topic or context of the knowledge gap. Optional: the recipient's r
 
 - Will not write a questionnaire before the recipient is identified.
 - Will not write a questionnaire before the needed answers are identified.
-- Will not send, file an issue, or deliver the questionnaire — the user does that.
+- Will not send, file an issue, or deliver the questionnaire: the user does that.
 - Will not include a question the repository itself can answer.
 
 ## Procedure
@@ -82,4 +82,4 @@ A closing catch-all: anything we did not ask that we should know?
 
 ## Output
 
-A standalone Markdown discovery questionnaire file at `to-questionnaire-<slug>.md` in the current working directory, with per-theme grouped questions ordered by importance, a return route, and a closing catch-all — the user delivers the file and acts on responses.
+A standalone Markdown discovery questionnaire file at `to-questionnaire-<slug>.md` in the current working directory, with per-theme grouped questions ordered by importance, a return route, and a closing catch-all: the user delivers the file and acts on responses.

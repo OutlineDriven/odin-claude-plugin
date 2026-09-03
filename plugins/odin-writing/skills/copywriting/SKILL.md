@@ -1,6 +1,6 @@
 ---
 name: copywriting
-description: 'Use when asked to write or fix product/marketing copy, landing pages, CTAs, UI strings, brand voice, or remove AI writing tells. Not for end-of-article CTA design — use copywriting-cta; not for hooks — use copywriting-hooks.'
+description: 'Use when asked to write or fix product/marketing copy, landing pages, CTAs, UI strings, brand voice, or remove AI writing tells. Not for end-of-article CTA design: use copywriting-cta; not for hooks: use copywriting-hooks.'
 ---
 
 # Copywriting

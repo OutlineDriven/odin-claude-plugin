@@ -2,7 +2,7 @@
 
 The two-sided ban list. Side A is the centroid-AI default. Side B is decoration covering thin ideas. Both come from refusing to commit, and `/taste` rejects them equally.
 
-## Side A — slop (centroid-AI default convergence)
+## Side A: slop (centroid-AI default convergence)
 
 Slop is what an under-trained model emits when it has no point of view. It hedges, it averages, it picks the medians and presents them as choices.
 
@@ -17,7 +17,7 @@ Slop is what an under-trained model emits when it has no point of view. It hedge
 | Defensive nil-checks where impossible | `if (x !== null)` after a constructor that cannot return null. Performs caution; signals "I do not know what is invariant." | Code. |
 | Bullet-point lists where prose would be clearer | Disguises absent reasoning as structured thought. | Prose. Slides. |
 
-## Side B — overkill (decoration covering thin ideas)
+## Side B: overkill (decoration covering thin ideas)
 
 Overkill is what an author emits to perform depth they have not delivered. The decoration is the tell.
 
@@ -38,7 +38,7 @@ Slop and overkill are not opposites. They are often paired:
 
 - Both refuse to commit. Slop refuses by averaging into the default; overkill refuses by piling decoration on top of nothing.
 - The fix in both cases is identical: pick one direction and let it carry the work.
-- An artifact can fail BOTH at once — slop framing wrapped around an overkill core, or vice versa.
+- An artifact can fail BOTH at once: slop framing wrapped around an overkill core, or vice versa.
 
 ## Closing
 

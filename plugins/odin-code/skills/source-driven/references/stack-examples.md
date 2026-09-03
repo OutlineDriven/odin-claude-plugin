@@ -41,8 +41,8 @@ but React 19 docs recommend useActionState for this pattern.
 (Source: react.dev/reference/react/useActionState)
 
 Options:
-A) Use the modern pattern (useActionState) — matches current docs
-B) Match existing code (useState) — matches the codebase
+A) Use the modern pattern (useActionState): matches current docs
+B) Match existing code (useState): matches the codebase
 → Which do you prefer?
 ```
 
@@ -55,8 +55,8 @@ documents native async ORM methods (aget, acreate) for this path.
 (Source: docs.djangoproject.com/en/5.2/topics/db/queries/#async-queries)
 
 Options:
-A) Use the documented pattern (native async ORM) — matches current docs
-B) Match existing code (sync_to_async wrappers) — matches the codebase
+A) Use the documented pattern (native async ORM): matches current docs
+B) Match existing code (sync_to_async wrappers): matches the codebase
 → Which do you prefer?
 ```
 

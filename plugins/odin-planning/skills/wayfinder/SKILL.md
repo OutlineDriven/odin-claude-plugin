@@ -13,7 +13,7 @@ disable-model-invocation: true
 | Trigger | A greenfield project or a large feature build will not fit in a single agent session. |
 | Authority | Human-only. Require explicit human invocation; preview the target and consequence before creating remote issues, local map files, or firing research subagents. |
 | Side effect | Creates the map and decision tickets on the supported remote tracker or in .outline/wayfinder locally, and fires research subagents. |
-| Done | The route is clear: no decision remains before someone builds — the map is complete at the handoff edge with decision tickets on the frontier. |
+| Done | The route is clear: no decision remains before someone builds: the map is complete at the handoff edge with decision tickets on the frontier. |
 
 ## Inputs
 
@@ -33,11 +33,11 @@ disable-model-invocation: true
 4. Map the frontier. Conduct a breadth-first interview to surface open decisions and immediate first steps. Record every question that can be phrased precisely right now as a candidate ticket. Record questions that cannot yet be phrased precisely as fog items. Done when: all currently specifiable questions are recorded as candidate tickets and unspecifiable ones as fog items.
 5. Create the map. Determine tracker storage automatically based on repository context: GitHub repository with a remote → create a single GitHub issue labeled wayfinder:map; otherwise → create .outline/wayfinder/map.md. Fill in ## Destination (what reaching the end looks like) and ## Notes (domain and preferences). Leave ## Decisions so far empty. Sketch the fog in ## Not yet specified. Record out-of-scope items in ## Out of scope. Done when: map is created with all sections populated.
 6. Create tickets. For each candidate ticket from step 4, create a child issue (GitHub) or local ticket file (.outline/wayfinder/tickets/<id>.md). Each ticket contains: ## Question (the decision or investigation this ticket resolves), ## Blocked by (tickets that must close before this ticket is on the frontier), a wayfinder:<type> label (GitHub) or local type field (valid types: research, prototype, grilling, task). Local tickets prepend YAML frontmatter: type, claimed_by: null, status: open. Wire blocking edges in a second pass once ticket IDs exist. Done when: all candidate tickets are created with blocking edges wired.
-7. Fire research subagents. For every research ticket created, launch a parallel subagent to resolve it immediately. Research tickets are the one exception to the single-ticket-per-session rule. Stop — initial charting completes the session. Done when: all research subagents are dispatched and initial charting is complete.
+7. Fire research subagents. For every research ticket created, launch a parallel subagent to resolve it immediately. Research tickets are the one exception to the single-ticket-per-session rule. Stop; initial charting completes the session. Done when: all research subagents are dispatched and initial charting is complete.
 
 ### Work through the map
 
-8. Load the map. Read the map body to review the destination, notes, and decisions so far. Query the tracker for open tickets dynamically — open tickets are not listed in the map body. Done when: map is loaded and open tickets are queried.
+8. Load the map. Read the map body to review the destination, notes, and decisions so far. Query the tracker for open tickets dynamically; open tickets are not listed in the map body. Done when: map is loaded and open tickets are queried.
 9. Select and claim a ticket. Choose a ticket from the frontier (all open, unblocked, unclaimed tickets) or take the ticket specified by the human. Claim it by assigning the GitHub issue to the driver, or setting the local claimed_by field. Never resolve more than one ticket per session except research tickets. Done when: one ticket is selected and claimed.
 10. Resolve the decision. Access closed ticket details as needed. For grilling tickets, conduct batched single-select interview rounds. For prototype tickets, build a rough concrete artifact and link it as an asset. For task tickets, complete prerequisites sized to unblock a decision, not to build the destination. Done when: decision is resolved with evidence or artifact linked.
 11. Record and close. Record the resolution as a GitHub comment or local closing entry, linking any created assets. Close the issue on GitHub; locally, set status: closed and clear claimed_by. Append a one-line summary with link to ## Decisions so far in the map body. Done when: resolution is recorded and ticket is closed.
@@ -47,7 +47,7 @@ disable-model-invocation: true
 
 - **Refer by name.** In all user-facing prose, refer to tickets by title, never by bare issue numbers, IDs, or slugs. The link wraps the name (e.g. [Define authentication schema](#12)).
 - **Planning by default.** Each ticket resolves a decision. The map is done when nothing remains to decide before someone builds. The pull to implement signals that the map has reached its edge and it is time to hand off. An effort's Notes section can override this rule and carry execution into the map itself. Without that instruction, produce decisions, not deliverables.
-- **Fog of war.** The map is deliberately incomplete. Beyond the live tickets lies the fog — decisions that are clearly approaching but cannot yet be specified because they depend on open questions. Resolving a ticket clears the fog ahead, graduating newly specifiable items into fresh tickets. Test whether a question can be phrased precisely right now: ticket when it can, fog when it cannot.
+- **Fog of war.** The map is deliberately incomplete. Beyond the live tickets lies the fog, decisions that are clearly approaching but cannot yet be specified because they depend on open questions. Resolving a ticket clears the fog ahead, graduating newly specifiable items into fresh tickets. Test whether a question can be phrased precisely right now: ticket when it can, fog when it cannot.
 
 ## Failure and recovery
 - No tracker available: if no GitHub remote exists and the local filesystem is not writable, stop and report the blocker. Do not create a partial map.

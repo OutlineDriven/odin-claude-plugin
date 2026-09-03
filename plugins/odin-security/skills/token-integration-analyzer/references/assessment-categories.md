@@ -1,4 +1,4 @@
-# Token integration analyzer — assessment categories
+# Token integration analyzer: assessment categories
 
 Branch detail for the 10 assessment categories referenced by SKILL.md step 3.
 For each applicable category, evaluate every checklist item against the codebase

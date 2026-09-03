@@ -1,7 +1,7 @@
 # Git-branchless recipes + decision rubric
 
 Concrete command sequences for the workflows enforced by this skill. Each
-recipe is verbatim — copy-paste, then adapt the placeholders. All examples
+recipe is verbatim: copy-paste, then adapt the placeholders. All examples
 target `git-branchless 0.11.x`.
 
 **Grounded: 2026-08-26**
@@ -41,7 +41,7 @@ git move -s HEAD -d <hash-of-B> --fixup
 
 Descendants of B are auto-restacked. No interactive rebase needed. Faster
 alternative when you don't know which commit to target: install `git-absorb`
-and run `git absorb` — it heuristically routes hunks to ancestors.
+and run `git absorb`; it heuristically routes hunks to ancestors.
 
 ---
 
@@ -76,7 +76,7 @@ git sync --pull
 ```
 
 Fetches `origin/main`, then rebases every local stack in-memory. Stacks with
-conflicts are skipped — read the summary line for any `skipped` entries.
+conflicts are skipped; read the summary line for any `skipped` entries.
 
 To resolve skipped stacks:
 
@@ -100,7 +100,7 @@ botched rebases, deleted branches, hidden commits, and amended commits.
 What `git undo` cannot recover:
 
 - Untracked files that were never committed and never snapshotted.
-- The middle of an in-progress merge conflict — abort the merge first.
+- The middle of an in-progress merge conflict: abort the merge first.
 
 If `branchless.undo.createSnapshots=false` was set, working-copy state is
 not preserved. Verify the config before relying on undo for uncommitted work.
@@ -173,8 +173,8 @@ Wiki: <https://github.com/arxanas/git-branchless/wiki/Command:-git-submit>,
 
 | Condition | Path |
 |-----------|------|
-| User requested push/ship to **main**, **or** HEAD is on local `main`/`master` | **Path M — Land main** |
-| Otherwise (detached / feature / no main ask) | **Path F — Feature stack** |
+| User requested push/ship to **main**, **or** HEAD is on local `main`/`master` | **Path M: Land main** |
+| Otherwise (detached / feature / no main ask) | **Path F: Feature stack** |
 
 **Never**
 
@@ -192,7 +192,7 @@ git sl
 #   or git move -b 'stack()' -d origin/main --merge
 ```
 
-### Path F — Feature stack (default; prefer `git submit`)
+### Path F: Feature stack (default; prefer `git submit`)
 
 Name the tip first (branch = publishing artifact), then submit the revset `@`
 (branches pointing at the current commit). Official forms: `git submit @`,
@@ -219,7 +219,7 @@ Notes:
 - If submit is denied (protection on the feature branch), fall back to stock
   `git push -u origin feature/<name>`, still no force flags.
 
-### Path M — Land main (gated only; stock push, never submit)
+### Path M: Land main (gated only; stock push, never submit)
 
 **Main-path proof** (after shared preflight):
 
@@ -229,13 +229,13 @@ git merge-base --is-ancestor origin/main @
 # and stop. Do not force.
 ```
 
-**M1 — Already on `main` / `master`**
+**M1: Already on `main` / `master`**
 
 ```
 git push -u origin main    # or master; never --force*
 ```
 
-**M2 — Detached, main authorized**
+**M2: Detached, main authorized**
 
 Attach local main only via FF; never `-C` / `-f`:
 
@@ -246,7 +246,7 @@ git push -u origin main
 ```
 
 If local `main` is missing: `git switch -c main @` then `git push -u origin main`
-(create only). If local `main` is not an ancestor of `@`, stop — do not rewrite.
+(create only). If local `main` is not an ancestor of `@`, stop; do not rewrite.
 
 Divergent remote push reject: report left-right counts, re-sync / `git move`,
 plain push again. Never force.
@@ -282,7 +282,7 @@ Branchless retains unhidden orphans; hide first, then stock GC may reclaim.
 
 The wiki documents three patterns; pick by trade-off.
 
-### Approach A — direct amend + restack
+### Approach A: direct amend + restack
 
 ```
 git switch --detach <hash-of-target>
@@ -294,7 +294,7 @@ git amend
 Cheapest. Children are temporarily abandoned during `amend`; `git amend`
 reparents them automatically. Build artifacts may be invalidated.
 
-### Approach B — fixup-then-squash
+### Approach B: fixup-then-squash
 
 ```
 git switch --detach <hash-of-tip>
@@ -306,7 +306,7 @@ git move -s HEAD -d <hash-of-target> --fixup
 Lets you test the fix at HEAD before committing it into the older commit.
 Two operations instead of one.
 
-### Approach C — commute upward
+### Approach C: commute upward
 
 ```
 git switch --detach <hash-of-tip>
@@ -316,7 +316,7 @@ git move -s HEAD -d <hash-after-target> --insert
 git move -s <hash-of-tentative> -d <hash-of-target> --fixup
 ```
 
-Preserves the working-copy state of intermediate commits — useful when
+Preserves the working-copy state of intermediate commits, useful when
 build artifacts are expensive and you want to keep the upper part of the
 stack stable.
 

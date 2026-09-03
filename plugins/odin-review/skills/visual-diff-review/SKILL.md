@@ -1,6 +1,6 @@
 ---
 name: visual-diff-review
-description: 'Use when asked to review a diff and produce a 7-section visual page: scope, before/after, risk, coupling, and merge recommendation, each cited from evidence. Not for interactive review walks or PR-specific review — use show-review or pr-review.'
+description: 'Use when asked to review a diff and produce a 7-section visual page: scope, before/after, risk, coupling, and merge recommendation, each cited from evidence. Not for interactive review walks or PR-specific review: use show-review or pr-review.'
 ---
 
 # Visual diff review
@@ -37,4 +37,4 @@ The diff target must be supplied: a branch name, commit hash or range, PR identi
 Partial results are acceptable only when each incomplete section is explicitly labeled. Silence is not a partial result.
 
 ## Output
-A self-contained `diagrams/visual-diff-review.html` with seven sections in order: Overview, Before State, After State, Risk Assessment, Coupling Analysis, Merge Recommendation, Evidence Log — every section citing evidence or marked `INSUFFICIENT EVIDENCE`.
+A self-contained `diagrams/visual-diff-review.html` with seven sections in order: Overview, Before State, After State, Risk Assessment, Coupling Analysis, Merge Recommendation, Evidence Log: every section citing evidence or marked `INSUFFICIENT EVIDENCE`.

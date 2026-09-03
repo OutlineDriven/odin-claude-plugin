@@ -12,4 +12,4 @@ HUNT (cite `path:line` for each):
 4. Tight coupling to volatile detail; an abstraction leaking across a module seam.
 5. Comments explaining *what* instead of *why*; stale comments contradicting the code.
 
-SEVERITY ANCHORS: maintainability is P2 at most unless it names a concrete future-defect path; pure style is P3 advisory. Apply `_contract.md`.
+SEVERITY ANCHORS: maintainability is P2 at most unless it names a concrete future-defect path; pure style is P3 advisory. Apply `personas-_contract.md`.

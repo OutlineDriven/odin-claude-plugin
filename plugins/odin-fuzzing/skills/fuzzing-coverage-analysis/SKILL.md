@@ -1,6 +1,6 @@
 ---
 name: fuzzing-coverage-analysis
-description: 'Use when a user needs to measure fuzz corpus coverage, explain a coverage plateau, or turn uncovered regions into campaign work. Builds an instrumented binary, runs it over a post-campaign corpus, and produces a reproducible coverage report excluding harness noise. Not for harness creation — use fuzz-harness-writing.'
+description: 'Use when a user needs to measure fuzz corpus coverage, explain a coverage plateau, or turn uncovered regions into campaign work. Builds an instrumented binary, runs it over a post-campaign corpus, and produces a reproducible coverage report excluding harness noise. Not for harness creation: use fuzz-harness-writing.'
 ---
 
 # Fuzzing coverage analysis
@@ -16,8 +16,8 @@ description: 'Use when a user needs to measure fuzz corpus coverage, explain a c
 
 ## Not for
 
-- Harness creation or improvement — use fuzz-harness-writing.
-- Patching the system under test to bypass obstacles — use fuzzing-obstacles.
+- Harness creation or improvement: use fuzz-harness-writing.
+- Patching the system under test to bypass obstacles: use fuzzing-obstacles.
 - Remote, credential, publish, deploy, or irreversible changes.
 
 ## Inputs
@@ -56,4 +56,4 @@ Optional:
 
 ## Output
 
-A coverage report (text summary plus HTML detail) and a region classification written under the target directory — each uncovered region listed as reachable-uncovered, blocked-by-magic-value, or dead, paired with a concrete campaign-work item (dictionary entry, seed input, or harness change); when a baseline was supplied, coverage gained or lost versus that baseline.
+A coverage report (text summary plus HTML detail) and a region classification written under the target directory: each uncovered region listed as reachable-uncovered, blocked-by-magic-value, or dead, paired with a concrete campaign-work item (dictionary entry, seed input, or harness change); when a baseline was supplied, coverage gained or lost versus that baseline.

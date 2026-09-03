@@ -17,7 +17,7 @@ description: 'Use when a custom LibAFL fuzzer needs an executor, observer, feedb
 ## Inputs
 
 - Target: the function, binary, or harness to fuzz. Required.
-- Components: which LibAFL modules to compose — at minimum an executor, observer, feedback, and mutator. Optional; defaults to a coverage-guided in-process fuzzer with `StdScheduledMutator` and `HitcountsMapObserver`.
+- Components: which LibAFL modules to compose, at minimum an executor, observer, feedback, and mutator. Optional; defaults to a coverage-guided in-process fuzzer with `StdScheduledMutator` and `HitcountsMapObserver`.
 - Objective: the stopping condition or crash classification (e.g., timeout, crash, custom `ExitKind`). Optional; defaults to crash detection.
 - Output directory: where corpus and findings persist. Optional; defaults to `./fuzz_out`.
 

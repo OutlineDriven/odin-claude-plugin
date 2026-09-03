@@ -1,6 +1,6 @@
 ---
 name: from-skeptic-perspective
-description: 'Use when a user wants an answer only from the skeptic seat: cold reasoning without project loyalty. Emits a skeptic-perspective analysis without blending. Not for rebuilding from primitives — use from-first-principle. Read-only; no source or remote mutation.'
+description: 'Use when a user wants an answer only from the skeptic seat: cold reasoning without project loyalty. Emits a skeptic-perspective analysis without blending. Not for rebuilding from primitives: use from-first-principle. Read-only; no source or remote mutation.'
 ---
 
 # From skeptic perspective
@@ -16,9 +16,9 @@ description: 'Use when a user wants an answer only from the skeptic seat: cold r
 
 ## Not for
 
-- Rebuilding a design from primitives — use from-first-principle.
-- Blended multi-seat analysis — run each from-*-perspective seat independently and compare after.
-- Source or remote mutation — this skill is read-only.
+- Rebuilding a design from primitives: use from-first-principle.
+- Blended multi-seat analysis: run each from-*-perspective seat independently and compare after.
+- Source or remote mutation: this skill is read-only.
 
 ## Inputs
 
@@ -43,4 +43,4 @@ description: 'Use when a user wants an answer only from the skeptic seat: cold r
 
 ## Output
 
-A skeptic-perspective analysis: the restated claim, load-bearing assumptions with support status, the skeptic conclusion or insufficiency statement, and the strongest counterargument — no file or state mutation.
+A skeptic-perspective analysis: the restated claim, load-bearing assumptions with support status, the skeptic conclusion or insufficiency statement, and the strongest counterargument, no file or state mutation.

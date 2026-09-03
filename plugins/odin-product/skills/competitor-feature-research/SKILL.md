@@ -1,6 +1,6 @@
 ---
 name: competitor-feature-research
-description: 'Use when the user asks to research a specific feature across competitor products and publish a cited report. Not for summarizing changelogs — use competitor-changelog.'
+description: 'Use when the user asks to research a specific feature across competitor products and publish a cited report. Not for summarizing changelogs: use competitor-changelog.'
 disable-model-invocation: true
 ---
 

@@ -23,8 +23,8 @@ description: 'Use when a repository needs a safety net against force-push, force
 ## Procedure
 
 1. Ask the user to choose project or global scope. Mutate nothing before the choice. Done when: the user has chosen project or global scope, with no mutation made.
-2. Copy `scripts/block-dangerous-git.py` to the chosen location — project: `.claude/hooks/block-dangerous-git.py`; global: `~/.claude/hooks/block-dangerous-git.py` — and run `chmod +x` on the copy. Leave the skill's source copy untouched. Done when: the hook copy exists at the chosen path, is executable, and the source copy is unchanged.
-3. Show the default blocked operations — forced pushes and forced refspecs; `reset --hard`; forced `clean`; forced branch deletion; `checkout .` and `restore .`; `stash drop` and `stash clear`; `reflog expire`; `gc --prune=now` — and ask whether to add or remove a rule. On approval, edit only the installed copy. When a rule is added or removed, add or remove the corresponding test case in the Step 4 verification matrix so the gate covers the modified policy. Done when: the blocked-operations list is shown, any approved rule change is applied to the installed copy only, and the verification matrix is updated to match.
+2. Copy `scripts/block-dangerous-git.py` to the chosen location, project: `.claude/hooks/block-dangerous-git.py`; global: `~/.claude/hooks/block-dangerous-git.py`, and run `chmod +x` on the copy. Leave the skill's source copy untouched. Done when: the hook copy exists at the chosen path, is executable, and the source copy is unchanged.
+3. Show the default blocked operations, forced pushes and forced refspecs; `reset --hard`; forced `clean`; forced branch deletion; `checkout .` and `restore .`; `stash drop` and `stash clear`; `reflog expire`; `gc --prune=now`, and ask whether to add or remove a rule. On approval, edit only the installed copy. When a rule is added or removed, add or remove the corresponding test case in the Step 4 verification matrix so the gate covers the modified policy. Done when: the blocked-operations list is shown, any approved rule change is applied to the installed copy only, and the verification matrix is updated to match.
 4. Verify before registration. For each payload below, run:
 
    ```bash
@@ -59,7 +59,7 @@ description: 'Use when a repository needs a safety net against force-push, force
    ```text
    BLOCKED: '<command>' matches dangerous pattern '<pattern>'. The user has prevented you from doing this.
    ```
-   Done when: all sixteen payloads exit as expected — the thirteen dangerous commands exit 2 and the three safe ones exit 0 — and the BLOCKED stderr message is confirmed.
+   Done when: all sixteen payloads exit as expected, the thirteen dangerous commands exit 2 and the three safe ones exit 0, and the BLOCKED stderr message is confirmed.
 
 5. After all sixteen cases pass, merge the entry into the existing `hooks.PreToolUse` array of the chosen settings file. Never overwrite the settings file or discard existing hooks. Done when: the entry is merged into the existing `hooks.PreToolUse` array with all prior hooks preserved.
 

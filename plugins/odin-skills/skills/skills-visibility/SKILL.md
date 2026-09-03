@@ -1,6 +1,6 @@
 ---
 name: skills-visibility
-description: 'Use when a publisher wants a discoverable, integrity-protected agent-skill catalog served from a domain they control. Builds the discovery index with SHA-256 digests, deterministic flat archives, and verified install commands, then hands the publisher a post-deploy verification checklist. Not for remote mutation or deployment — the publisher deploys the output tree.'
+description: 'Use when a publisher wants a discoverable, integrity-protected agent-skill catalog served from a domain they control. Builds the discovery index with SHA-256 digests, deterministic flat archives, and verified install commands, then hands the publisher a post-deploy verification checklist. Not for remote mutation or deployment, the publisher deploys the output tree.'
 ---
 
 # Skills visibility

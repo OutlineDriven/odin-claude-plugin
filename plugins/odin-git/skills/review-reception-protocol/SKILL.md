@@ -1,6 +1,6 @@
 ---
 name: review-reception-protocol
-description: 'Use when asked to receive code review feedback: clarify every item, implement accepted items locally with tests, draft technical pushback for questionable items, and stop before any GitHub reply or remote mutation. Not for posting replies — use resolve-pr-feedback.'
+description: 'Use when asked to receive code review feedback: clarify every item, implement accepted items locally with tests, draft technical pushback for questionable items, and stop before any GitHub reply or remote mutation. Not for posting replies: use resolve-pr-feedback.'
 ---
 
 # Review reception protocol

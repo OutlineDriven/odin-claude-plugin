@@ -25,7 +25,7 @@ description: 'Use when departing knowledge must enter project topic files throug
 1. **Open the interview.**
    Explain the purpose: capture tacit knowledge and decision rationale for future maintainers. Confirm the scope and topic boundaries with the human subject. Done when: scope and topic boundaries are confirmed by the subject.
 
-2. **Phase 1 — Narration-first elicitation.**
+2. **Phase 1: Narration-first elicitation.**
    Ask open-ended questions that surface why rather than what:
    - What decisions are you most concerned will not survive your departure?
    - What have you chosen not to do, and why?
@@ -33,12 +33,12 @@ description: 'Use when departing knowledge must enter project topic files throug
    - What would you do differently if you were starting today?
    Let the subject narrate before moving to specifics. Do not accept implementation details as answers to why questions. Done when: the subject has narrated across the scope and why-questions are answered or gaps are identified for Phase 2.
 
-3. **Phase 2 — Targeted gap closure.**
+3. **Phase 2: Targeted gap closure.**
    For each knowledge gap the narration did not close, ask a precise closing question:
    - What is the reason for this decision?
    - What alternatives were considered and rejected?
    - What is the risk if this is changed?
-   If a subject cannot articulate a reason, explicitly mark the entry as OPEN — do not fabricate a rationale. Done when: every narration gap has been asked or marked OPEN.
+   If a subject cannot articulate a reason, explicitly mark the entry as OPEN; do not fabricate a rationale. Done when: every narration gap has been asked or marked OPEN.
 
 4. **Handle tacit knowledge.**
    If a topic resists direct articulation, use an analogy, example, or counterfactual to close it. Do not infer a rationale from code inspection alone. Done when: every tacit-knowledge topic is closed via analogy/example or marked OPEN.
@@ -56,7 +56,7 @@ description: 'Use when departing knowledge must enter project topic files throug
    - Omit session narrative, anecdotes, and personal context.
    - Do not include the subject's name, role, emotional state, or identifying details.
    - Do not verbatim-transcribe raw answers; synthesize into third-person knowledge statements.
-   - Do not record what was not said — mark gaps as OPEN.
+   - Do not record what was not said; mark gaps as OPEN.
    Done when: every entry is free of personal details, session narrative, and verbatim transcription.
 
 7. **Write to the local topic file.**
@@ -74,4 +74,4 @@ description: 'Use when departing knowledge must enter project topic files throug
 
 ## Output
 
-Synthesized topic-file entries appended to the project's local knowledge file(s), each containing Topic, Why, Alternatives considered (or OPEN), Open gaps (or absent), and Source: interview — no session narrative, no personal details, no verbatim transcription.
+Synthesized topic-file entries appended to the project's local knowledge file(s), each containing Topic, Why, Alternatives considered (or OPEN), Open gaps (or absent), and Source: interview; no session narrative, no personal details, no verbatim transcription.

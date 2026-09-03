@@ -9,7 +9,7 @@ For each `feedback` memory: does the session corpus contain evidence that the us
 ## Input
 
 - Memory file body (the rule text)
-- `SESSION_HISTORY_GLOB` — JSONL files for recent sessions
+- `SESSION_HISTORY_GLOB`: JSONL files for recent sessions
 - Session JSONL format: each line is `{ type, uuid, timestamp, message: { role, content } }`
 
 ## Algorithm
@@ -60,7 +60,7 @@ STALE: feedback_foo.md
 
 Default rule: any `YYYY-MM-DD` date found in a project memory body that is earlier than today is a staleness candidate. This catches commitment phrasing in any wording without relying on a narrow phrase whitelist.
 
-Suppression (historical-anchor phrases): if a past date is immediately preceded (within 5 tokens) by one of these historical-anchor words, it is a historical evidence date — suppress the flag:
+Suppression (historical-anchor phrases): if a past date is immediately preceded (within 5 tokens) by one of these historical-anchor words, it is a historical evidence date; suppress the flag:
 
 > `as of`, `since`, `starting`, `started`, `decided on`, `decided`, `created`, `effective`, `from`, `began`
 
@@ -74,14 +74,14 @@ Examples:
 - "we decided on 2025-09-20 to …" → suppressed (`decided on`) → **skip**
 - "started 2025-09-01" → suppressed (`started`) → **skip**
 
-Severity: `warn`. Show the flagged sentence to the user with: "This project memory contains a past date that may be expired — verify whether it is still relevant."
+Severity: `warn`. Show the flagged sentence to the user with: "This project memory contains a past date that may be expired; verify whether it is still relevant."
 
 ## Reference memory staleness
 
-A `reference` memory is stale when the target resource no longer exists. Heuristic path extraction from free-form body text is unreliable (false positives from code snippets, config examples, etc.) — use explicit field detection only.
+A `reference` memory is stale when the target resource no longer exists. Heuristic path extraction from free-form body text is unreliable (false positives from code snippets, config examples, etc.): use explicit field detection only.
 
 **Explicit check:** if the memory body contains a line starting with `path:` or `url:`, extract that value and check existence:
 - `path: /absolute/path` → `stat` the path; flag if missing
 - `url: https://...` → do NOT check (HTTP requests are out of scope); annotate as "URL not verified"
 
-**No check** when no explicit `path:` / `url:` line is present. In that case, surface the memory body to the user with a note: "This reference memory has no structured target — verify manually that the resource still exists." Severity: info.
+**No check** when no explicit `path:` / `url:` line is present. In that case, surface the memory body to the user with a note: "This reference memory has no structured target; verify manually that the resource still exists." Severity: info.

@@ -1,6 +1,6 @@
 ---
 name: buzzword-analysis
-description: 'Use when the user wants the current jargon weather of a domain described without advocacy. Surveys circulating terms, their signaling freight, and their usage trajectory from verifiable external sources. Not for choosing a positioning move — use buzzword-hijack.'
+description: 'Use when the user wants the current jargon weather of a domain described without advocacy. Surveys circulating terms, their signaling freight, and their usage trajectory from verifiable external sources. Not for choosing a positioning move; use buzzword-hijack.'
 ---
 
 # Buzzword analysis
@@ -41,4 +41,4 @@ description: 'Use when the user wants the current jargon weather of a domain des
 
 ## Output
 
-A jargon-weather report in chat — a list of current terms, each with its descriptive meaning, its signaling or marketing freight, its weather state (rising, peak, fading, residual, or unclear), any drift from technical origin, and the source and date of the evidence — taking no side on adoption.
+A jargon-weather report in chat, a list of current terms, each with its descriptive meaning, its signaling or marketing freight, its weather state (rising, peak, fading, residual, or unclear), any drift from technical origin, and the source and date of the evidence, taking no side on adoption.

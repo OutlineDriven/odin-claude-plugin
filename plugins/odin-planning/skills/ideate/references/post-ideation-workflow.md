@@ -4,11 +4,11 @@ Read this file after Phase 2 ideation agents return and the orchestrator has mer
 
 ## Phase 3: Adversarial filtering
 
-Review every candidate idea critically. Critique runs in two layers — a fresh-context verifier first, then orchestrator arbitration. Fresh-context verification outperforms self-critique: the orchestrator synthesized some of these candidates itself and carries the full generation history, so it is anchored in ways a verifier that never saw the generation is not.
+Review every candidate idea critically. Critique runs in two layers: a fresh-context verifier first, then orchestrator arbitration. Fresh-context verification outperforms self-critique: the orchestrator synthesized some of these candidates itself and carries the full generation history, so it is anchored in ways a verifier that never saw the generation is not.
 
-1. **Basis verification (one sub-agent).** Dispatch a verifier whose payload is only the consolidated grounding summary (including the evidence gists and dossier file paths — it reads dossier files itself as needed) and the merged candidate list — none of the generation history. Prompt it to refute: for each candidate, check that the stated basis actually supports the claimed move, that `direct:` quotes exist where cited (spot-check by reading the file), that `external:` prior art is real and relevantly analogous, that `reasoned:` arguments hold, and that the idea genuinely passes the meeting-test. It returns a per-candidate verdict (sound / weak / refuted) with a one-line reason. The verifier did not write the ideas, so its meeting-test judgment supersedes the generators' self-attestation.
+1. **Basis verification (one sub-agent).** Dispatch a verifier whose payload is only the consolidated grounding summary (including the evidence gists and dossier file paths, it reads dossier files itself as needed) and the merged candidate list, none of the generation history. Prompt it to refute: for each candidate, check that the stated basis actually supports the claimed move, that `direct:` quotes exist where cited (spot-check by reading the file), that `external:` prior art is real and relevantly analogous, that `reasoned:` arguments hold, and that the idea genuinely passes the meeting-test. It returns a per-candidate verdict (sound / weak / refuted) with a one-line reason. The verifier did not write the ideas, so its meeting-test judgment supersedes the generators' self-attestation.
 
-2. **Orchestrator arbitration.** The orchestrator makes the final cut, weighing verifier verdicts without being bound by them — overrule a verdict when evidence in context contradicts it, and say so in the rejection reason.
+2. **Orchestrator arbitration.** The orchestrator makes the final cut, weighing verifier verdicts without being bound by them; overrule a verdict when evidence in context contradicts it, and say so in the rejection reason.
 
 If verifier dispatch fails (platform limits, errors), fall back to orchestrator-only filtering and note the degradation in the rejection summary.
 
@@ -30,7 +30,7 @@ Rejection criteria:
 - subject-replacement (abandons or replaces the subject of ideation rather than operating on it)
 - scope overrun (expands beyond the asked scope rather than ideating within it). Allowed only when the basis explicitly justifies the expansion; default is reject or downgrade.
 
-Score survivors using a consistent rubric weighing: groundedness in stated context, **basis strength** (`direct:` > `external:` > `reasoned:`; none excluded, but direct-evidence ideas score higher all else equal), expected value, novelty, pragmatism, leverage on future work, implementation burden, overlap with stronger ideas, and **axis spread** (when Phase 1.5 produced an axis list) — survivor sets that cover the topic's surface outscore sets that cluster on one axis, all else equal.
+Score survivors using a consistent rubric weighing: groundedness in stated context, **basis strength** (`direct:` > `external:` > `reasoned:`; none excluded, but direct-evidence ideas score higher all else equal), expected value, novelty, pragmatism, leverage on future work, implementation burden, overlap with stronger ideas, and **axis spread** (when Phase 1.5 produced an axis list): survivor sets that cover the topic's surface outscore sets that cluster on one axis, all else equal.
 
 **Axis coverage as a list-level concern.** When axes were defined, axis spread is evaluated across the survivor set, not per-idea. After per-idea filtering, check the survivor set: if axis coverage is uneven and stronger candidates exist on under-represented axes, prefer the spread when promoting borderline candidates. Phase 2's recovery dispatch should already have surfaced candidates for empty axes; this is a polish step on the survivor selection. If an axis ends up with zero survivors despite recovery (or because recovery hit the 2-axis cap), note it in the rejection summary as a deliberate gap rather than an oversight.
 
@@ -41,13 +41,13 @@ Target output:
 
 ## Phase 4: Write and present the deliverable
 
-The ideation artifact is produced **automatically** — persistence is not opt-in. After filtering, write the deliverable and show a concise summary. The full content lives in the file; the session shows only an orienting summary.
+The ideation artifact is produced **automatically**: persistence is not opt-in. After filtering, write the deliverable and show a concise summary. The full content lives in the file; the session shows only an orienting summary.
 
 **Checkpoint B.** Before writing the deliverable, write `/tmp/odin-ideate/<run-id>/survivors.md` containing the survivor list plus key context (focus hint, grounding summary, rejection summary). Best-effort: if the write fails, log a warning and proceed; the checkpoint is not load-bearing.
 
 ### 4.1 Write the deliverable (automatic)
 
-Write the file every run — do not wait for the user to ask.
+Write the file every run: do not wait for the user to ask.
 
 1. **Resolve the target directory.** Ensure `docs/ideation/` exists (create if absent).
 2. **Choose the file path:** `docs/ideation/<slug>.md` where `<slug>` is the sanitized subject. Markdown is the canonical surface, always written.
@@ -59,7 +59,7 @@ On a resume run, update the existing file in place, in its existing format; carr
 
 ### 4.2 Present a concise summary (not the full deliverable)
 
-The full cards, rationale, downsides, and the rejection table live in the file. Do **not** reproduce them in the session — reprinting the whole deliverable as chat text defeats the rich format. Show a tight orientation instead:
+The full cards, rationale, downsides, and the rejection table live in the file. Do **not** reproduce them in the session; reprinting the whole deliverable as chat text defeats the rich format. Show a tight orientation instead:
 
 - One line with counts and the path: e.g. `Wrote 7 ranked ideas (36 raw, 13 cut) across 5 axes -> <absolute path>`.
 - A ranked list, **one line per survivor**: `1. <Title> . <axis> . Conf <High/Med/Low> . Cx <S/M/L>`.
@@ -73,7 +73,7 @@ This ranked list doubles as the index the user references when choosing an idea 
 - HTML (`format:html`): best-effort open the file in the browser (`open` on macOS, `xdg-open` on Linux); always print the absolute path. Skip auto-open in headless / pipeline runs.
 - Markdown (default): print the path.
 
-## Phase 5: Next steps — `askme` handoff
+## Phase 5: Next steps, `askme` handoff
 
 Hand the survivors to `askme` to clarify intent on the chosen direction(s) before any planning. The deliverable already exists (Phase 4), so the handoff is purely *what next*.
 
@@ -81,10 +81,10 @@ Hand the survivors to `askme` to clarify intent on the chosen direction(s) befor
 
 Offer four options:
 
-1. **Open in browser** (if HTML) / **View markdown** (if markdown) — open or print the deliverable.
-2. **Choose a direction** — pick a survivor and hand off to `askme` for intent-clarification before planning. Asks which idea first.
-3. **Discuss or refine the ideas first** — stay here to think across the set before committing: adjust or interrogate one idea, compare several, or combine/merge them. Asks what you want to work on.
-4. **Done — keep the file and stop.**
+1. **Open in browser** (if HTML) / **View markdown** (if markdown): open or print the deliverable.
+2. **Choose a direction**: pick a survivor and hand off to `askme` for intent-clarification before planning. Asks which idea first.
+3. **Discuss or refine the ideas first**: stay here to think across the set before committing: adjust or interrogate one idea, compare several, or combine/merge them. Asks what you want to work on.
+4. **Done: keep the file and stop.**
 
 **Adjacent nudge:** "Don't want it kept? Say 'discard' and the agent deletes the file." Handled via free text; it is create-only and never deletes a resumed or pre-existing doc.
 
@@ -92,49 +92,49 @@ If the user already named what they want to work on inline (e.g., "brainstorm th
 
 ### 5.1 Discuss or refine the ideas first
 
-This stays in ideate — no skill handoff. It is the "think across the set before committing" step, and it is a normal, expected outcome of ideation: seeing several strong candidates and wanting to deliberate is more common than instantly committing one. The orchestrator still holds the full grounding and generation context, so it can reason across every survivor — this is where that context pays off. The work here is either **single-idea** (sharpen or interrogate one) or **cross-idea** (compare, combine, or merge several); do not force the user to name a single idea before they can engage.
+This stays in ideate, no skill handoff. It is the "think across the set before committing" step, and it is a normal, expected outcome of ideation: seeing several strong candidates and wanting to deliberate is more common than instantly committing one. The orchestrator still holds the full grounding and generation context, so it can reason across every survivor, this is where that context pays off. The work here is either **single-idea** (sharpen or interrogate one) or **cross-idea** (compare, combine, or merge several); do not force the user to name a single idea before they can engage.
 
 1. **Establish what the user wants to work on and how.** Infer from their phrasing when given; otherwise ask one open question ("What do you want to work on?") rather than assuming a single idea. The scope may be one idea, a subset, or the whole set.
 2. **Route by intent:**
-   - **Ask / compare** ("why High confidence?", "how does this compare to X?", "which of these overlap?") — answer in conversation, grounded in the ideas' bases and the Phase 1 grounding. Spans one idea or many. **No file rewrite** unless the discussion yields a change the user wants captured.
-   - **Adjust** ("smaller scope", "drop the paste-import part", "reframe around X") — revise that idea's framing, scope, or basis as discussed, then **rewrite the saved file** so the deliverable stays current.
-   - **Deepen** ("expand the second-order effects") — extend an idea's analysis; capture into the file only if the user wants it kept.
-   - **Combine / merge** ("merge the table and highlighter ideas", "fold 2 into 5") — synthesize the named ideas into one: write a unified title, description, and basis that draws from each source idea (carry the strongest basis forward; union their evidence). On a file rewrite, **replace the merged source entries with the single combined entry** — do not leave the originals alongside the merge — and renumber the ranked list. Re-evaluate the combined idea's axis and confidence rather than copying one source's. Note the merge in the rejection summary if a source idea effectively drops out.
-3. **Rewrite only on change.** The file is rewritten only when idea content actually changes (adjust, deepen-and-keep, or merge) — Q&A and comparison alone do not churn it.
-4. **Return to the Phase 5 menu.** Typically the user next discusses more, opens it, or finishes. When the user is ready to commit a direction, route to `askme` for intent-clarification before planning.
+   - Ask / compare ("why High confidence?", "how does this compare to X?", "which of these overlap?"): answer in conversation, grounded in the ideas' bases and the Phase 1 grounding. Spans one idea or many. **No file rewrite** unless the discussion yields a change the user wants captured.
+   - Adjust ("smaller scope", "drop the paste-import part", "reframe around X"), revise that idea's framing, scope, or basis as discussed, then **rewrite the saved file** so the deliverable stays current.
+   - Deepen ("expand the second-order effects"): extend an idea's analysis; capture into the file only if the user wants it kept.
+   - Combine / merge ("merge the table and highlighter ideas", "fold 2 into 5"): synthesize the named ideas into one: write a unified title, description, and basis that draws from each source idea (carry the strongest basis forward; union their evidence). On a file rewrite, **replace the merged source entries with the single combined entry**; do not leave the originals alongside the merge: and renumber the ranked list. Re-evaluate the combined idea's axis and confidence rather than copying one source's. Note the merge in the rejection summary if a source idea effectively drops out.
+3. Rewrite only on change. The file is rewritten only when idea content actually changes (adjust, deepen-and-keep, or merge); Q&A and comparison alone do not churn it.
+4. Return to the Phase 5 menu. Typically the user next discusses more, opens it, or finishes. When the user is ready to commit a direction, route to `askme` for intent-clarification before planning.
 
 ### 5.2 Choose a direction
 
 1. **Identify the idea** by number or name (skip if the user already named it). Match against the ranked list from Phase 4.2.
-2. **Build a focused seed** from the idea's substance already in the orchestrator's context. Do **not** pass the whole file — wasteful and noisy. The seed is feature-description-shaped:
+2. **Build a focused seed** from the idea's substance already in the orchestrator's context. Do **not** pass the whole file, wasteful and noisy. The seed is feature-description-shaped:
 
    > `<title> — <description>. Basis: <basis/evidence>. Why it matters: <rationale>. Known tradeoffs: <downsides>.`
 
-   Append a one-line provenance pointer: `(Seeded from ideate: <path>, idea "<title>")` — it records origin and lets the downstream skill pull adjacent detail if it wants, without being forced to read anything.
-3. **Load the `askme` skill** with that seed. The saved file is already the record — no extra write step.
+   Append a one-line provenance pointer: `(Seeded from ideate: <path>, idea "<title>")`; it records origin and lets the downstream skill pull adjacent detail if it wants, without being forced to read anything.
+3. **Load the `askme` skill** with that seed. The saved file is already the record; no extra write step.
 
-Do **not** skip intent-clarification and go straight to further technical planning — further technical planning wants a clarified direction. Ideation is a legitimate terminal state; intent-clarification via `askme` is the bridge to planning, not a required next step.
+Do **not** skip intent-clarification and go straight to further technical planning; further technical planning wants a clarified direction. Ideation is a legitimate terminal state; intent-clarification via `askme` is the bridge to planning, not a required next step.
 
 ### 5.3 Discard (free text)
 
-Only when the file was **created fresh this run**: delete it, confirm the deletion, and end. On a **resume** run (a pre-existing file was updated in place), do **not** delete — tell the user the existing doc at `<path>` remains and offer no destructive action. Discard is never a default; it fires only on an explicit request.
+Only when the file was **created fresh this run**: delete it, confirm the deletion, and end. On a **resume** run (a pre-existing file was updated in place), do **not** delete; tell the user the existing doc at `<path>` remains and offer no destructive action. Discard is never a default; it fires only on an explicit request.
 
-Do not delete the run's scratch directory (`/tmp/odin-ideate/<run-id>`) on completion — it holds the web research cache, checkpoint files, and grounding artifacts. OS handles eventual cleanup.
+Do not delete the run's scratch directory (`/tmp/odin-ideate/<run-id>`) on completion; it holds the web research cache, checkpoint files, and grounding artifacts. OS handles eventual cleanup.
 
 ## Quality bar
 
 Before finishing, check:
 
 - the idea set is grounded in the stated context
-- **every surviving idea has an articulated basis** (`direct:`, `external:`, or `reasoned:`) that actually supports the claimed move — speculation dressed as ambition was rejected, with reasons
-- load-bearing `direct:` bases were verified against the repo — by the generating agent's verification reads or the Phase 3 verifier — not taken on faith
+- **every surviving idea has an articulated basis** (`direct:`, `external:`, or `reasoned:`) that actually supports the claimed move; speculation dressed as ambition was rejected, with reasons
+- load-bearing `direct:` bases were verified against the repo, by the generating agent's verification reads or the Phase 3 verifier, not taken on faith
 - **every surviving idea passes the meeting-test**
 - **no surviving idea replaces the subject** rather than operating on it
-- when Phase 1.5 produced an axis list, the survivor set spreads across axes rather than clustering on one — and any axis with zero survivors is noted as a deliberate gap in the rejection summary, not silently absent
+- when Phase 1.5 produced an axis list, the survivor set spreads across axes rather than clustering on one; and any axis with zero survivors is noted as a deliberate gap in the rejection summary, not silently absent
 - the candidate list was generated before filtering
 - the original many-ideas -> critique -> survivors mechanism was preserved
 - every rejected idea has a reason
 - survivors are materially better than a naive "give me ideas" list
-- the deliverable was written automatically (Phase 4) — to `docs/ideation/`
+- the deliverable was written automatically (Phase 4): to `docs/ideation/`
 - the session showed a concise summary, not a reproduction of the full deliverable
 - acting on an idea routes to `askme`, not directly to implementation

@@ -20,7 +20,7 @@ Required: the work item. Optional: any existing evidence ledger at the artifact 
 
 ## Procedure
 
-1. Route. If the work is a quick lookup, a single edit, an ordered plan with per-task review gates, or a flat split with no phase structure, do that work inline and stop. Only proceed when the work decomposes into parallel slices, needs independent adversarial checks, or exceeds one context window. Done when: routing decision is made — inline work is done, or the workflow proceeds.
+1. Route. If the work is a quick lookup, a single edit, an ordered plan with per-task review gates, or a flat split with no phase structure, do that work inline and stop. Only proceed when the work decomposes into parallel slices, needs independent adversarial checks, or exceeds one context window. Done when: routing decision is made; inline work is done, or the workflow proceeds.
 2. Scout. Scout inline until the full work list can be named. List the files, scope the diff, find the call sites. Do not spawn workers while scouting. Done when: full work list is named.
 3. Order phases. Order the workflow as phases. A phase is one wave of parallel tasks plus a barrier. Later phases consume earlier phases' evidence. Name each phase explicitly. Done when: phases are ordered and named.
 4. Batch context. Carry the shared contract for the whole wave in the batch context: `# Goal` (what the wave accomplishes), `# Constraints` (rules, non-goals, permissions, verification limits), `# Contract` (shared interfaces, output shape, coordination rules). Done when: batch context is composed.

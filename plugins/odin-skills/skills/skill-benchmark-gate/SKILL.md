@@ -1,6 +1,6 @@
 ---
 name: skill-benchmark-gate
-description: 'Use when a skill change is about to ship and must pass a release gate. Validates gate inputs fail-closed, runs activation and regression cases against an explicit baseline, measures context cost against an explicit ceiling, and emits PASS or FAIL with one issue per failure. Not for scoring without gating — use skill-benchmark.'
+description: 'Use when a skill change is about to ship and must pass a release gate. Validates gate inputs fail-closed, runs activation and regression cases against an explicit baseline, measures context cost against an explicit ceiling, and emits PASS or FAIL with one issue per failure. Not for scoring without gating, use skill-benchmark.'
 disable-model-invocation: true
 ---
 

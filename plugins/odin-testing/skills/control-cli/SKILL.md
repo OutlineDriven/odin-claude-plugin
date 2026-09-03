@@ -1,6 +1,6 @@
 ---
 name: control-cli
-description: 'Use when asked to reproduce, profile, or verify CLI/TUI behavior. Produces a deterministic transcript or profile proof with session cleanup. Not for CLI design advice — use cli-for-agents.'
+description: 'Use when asked to reproduce, profile, or verify CLI/TUI behavior. Produces a deterministic transcript or profile proof with session cleanup. Not for CLI design advice, use cli-for-agents.'
 ---
 
 # Control CLI

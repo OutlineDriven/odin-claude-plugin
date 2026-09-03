@@ -8,7 +8,7 @@ CSV="${1:-}"
 API="https://www.toptal.com/developers/gitignore/api"
 
 if [[ -z "$CSV" ]]; then
-  # No keys detected — output nothing (bundled blocks still apply)
+  # No keys detected: output nothing (bundled blocks still apply)
   exit 0
 fi
 

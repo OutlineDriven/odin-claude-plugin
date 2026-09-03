@@ -1,6 +1,6 @@
 # Deepening
 
-How to deepen a cluster of shallow modules safely, given its dependencies. Assumes the vocabulary in `skills/architect/SKILL.md` — module, interface, seam, adapter.
+How to deepen a cluster of shallow modules safely, given its dependencies. Assumes the vocabulary in `skills/architect/SKILL.md`: module, interface, seam, adapter.
 
 ## Dependency categories
 
@@ -8,7 +8,7 @@ When assessing a candidate for deepening, classify its dependencies. The categor
 
 ### 1. In-process
 
-Pure computation, in-memory state, no I/O. Always deepenable — merge the modules and test through the new interface directly. No adapter needed.
+Pure computation, in-memory state, no I/O. Always deepenable: merge the modules and test through the new interface directly. No adapter needed.
 
 _Examples_: a Rust parser combinator chain consolidated into one `parse(input) -> Result<Ast, ParseError>`; a Python pipeline `parse_invoice` + `apply_tax` + `round_total` collapsed into `Invoice.finalize(raw) -> Invoice`.
 
@@ -22,13 +22,13 @@ _Examples_: a Go data-access module fronting Postgres tested with `pgx` against 
 
 Owned services across a network boundary (microservices, internal APIs). Define a **port** (interface) at the seam. The deep module owns the logic; the transport is injected as an **adapter**. Tests use an in-memory adapter. Production uses an HTTP/gRPC/queue adapter.
 
-_Examples_: a Kotlin service calling an internal pricing microservice via a `PricingPort` interface — gRPC adapter in production, in-memory adapter in tests; a Rust client wrapping an internal queue with a `JobQueue` trait — RabbitMQ adapter in production, channel-backed adapter in tests.
+_Examples_: a Kotlin service calling an internal pricing microservice via a `PricingPort` interface, gRPC adapter in production, in-memory adapter in tests; a Rust client wrapping an internal queue with a `JobQueue` trait, RabbitMQ adapter in production, channel-backed adapter in tests.
 
 ### 4. True external (Mock)
 
 Third-party services (Stripe, Twilio, GitHub, Auth0) the team does not control. The deepened module takes the external dependency as an injected port; tests provide a mock adapter.
 
-_Examples_: a Python billing module that takes a `PaymentGateway` protocol — `StripePaymentGateway` in production, a `pytest`/`hypothesis` mock in tests; a Go SMS dispatcher with a `Notifier` interface — Twilio adapter in production, recording fake in tests.
+_Examples_: a Python billing module that takes a `PaymentGateway` protocol, `StripePaymentGateway` in production, a `pytest`/`hypothesis` mock in tests; a Go SMS dispatcher with a `Notifier` interface, Twilio adapter in production, recording fake in tests.
 
 ## Seam discipline
 
@@ -37,7 +37,7 @@ _Examples_: a Python billing module that takes a `PaymentGateway` protocol — `
 
 ## Testing strategy: replace, do not layer
 
-- Old unit tests on shallow modules become waste once tests at the deepened module's interface exist — delete them.
+- Old unit tests on shallow modules become waste once tests at the deepened module's interface exist: delete them.
 - Write new tests at the deepened module's interface. The **interface is the test surface**.
 - Tests assert on observable outcomes through the interface, not internal state.
-- Tests should survive internal refactors — they describe behaviour, not implementation. If a test has to change when the implementation changes, it is testing past the interface.
+- Tests should survive internal refactors: they describe behaviour, not implementation. If a test has to change when the implementation changes, it is testing past the interface.

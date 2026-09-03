@@ -1,4 +1,4 @@
-# react.md — React 19.2 + Tailwind v4 + shadcn v4
+# react.md: React 19.2 + Tailwind v4 + shadcn v4
 
 Surface reference for React applications. Companion to `references/web.md` for the vanilla CSS baseline; reach for vanilla first, React only when state crosses surface boundaries.
 
@@ -8,15 +8,15 @@ Surface reference for React applications. Companion to `references/web.md` for t
 
 React for state crossing surface boundaries; vanilla CSS for everything else (see `references/web.md` §1). RSC is the default; client components are the exception, opted into explicitly with `'use client'`.
 
-The 2020-era assumption that "React + Tailwind + a UI kit" is the default web surface no longer holds — `:has()`, `@container`, `popover`, and View Transitions cover most of what hooks were once needed for. React earns its weight when shared mutable state crosses two or more surfaces; below that bar, vanilla CSS is shorter and faster. See `references/anti-slop.md` for the slop tell of "reaching for React because it is what the model knows."
+The 2020-era assumption that "React + Tailwind + a UI kit" is the default web surface no longer holds; `:has()`, `@container`, `popover`, and View Transitions cover most of what hooks were once needed for. React earns its weight when shared mutable state crosses two or more surfaces; below that bar, vanilla CSS is shorter and faster. See `references/anti-slop.md` for the slop tell of "reaching for React because it is what the model knows."
 
 ## 2. React 19-era surface (as of 19.2)
 
-React 19.2 was released October 1 2025; React Compiler 1.0 stable shipped October 7 2025; the current line is 19.2.x. The six APIs below are the modern surface a designer needs to know — most landed with React 19 GA and are stable through the 19.2.x line.
+React 19.2 was released October 1 2025; React Compiler 1.0 stable shipped October 7 2025; the current line is 19.2.x. The six APIs below are the modern surface a designer needs to know; most landed with React 19 GA and are stable through the 19.2.x line.
 
 ### RSC default
 
-Server components are the default; client components opt in via `'use client'` at the top of the file. Component code that does not need browser APIs, event handlers, or state stays on the server — zero JS shipped to the client for that subtree.
+Server components are the default; client components opt in via `'use client'` at the top of the file. Component code that does not need browser APIs, event handlers, or state stays on the server; zero JS shipped to the client for that subtree.
 ```tsx
 // app/page.tsx — RSC by default, no directive needed
 export default async function Page() {
@@ -82,7 +82,7 @@ Anti-pattern: still calling it `useFormState`. The rename is real and the migrat
 
 ### React Compiler stable
 
-React Compiler 1.0 stable (October 7 2025) auto-memoizes — manual `useMemo` and `useCallback` are now anti-patterns unless the React DevTools profiler shows the compiler missed a hot path. Per current react.dev guidance, the default project enables the compiler and removes existing memoization rather than adding more.
+React Compiler 1.0 stable (October 7 2025) auto-memoizes; manual `useMemo` and `useCallback` are now anti-patterns unless the React DevTools profiler shows the compiler missed a hot path. Per current react.dev guidance, the default project enables the compiler and removes existing memoization rather than adding more.
 ```tsx
 // Before — manual memoization, now redundant under the compiler.
 const sorted = useMemo(() => items.sort(byName), [items]);
@@ -119,18 +119,18 @@ Anti-pattern: keeping `tailwind.config.js` on a v4 install. The JS config is a v
 
 ## 4. shadcn/ui v4
 
-shadcn/ui v4 with full Tailwind v4 + React 19 support reached stable February 2026. The CLI is on the 4.19.x line. shadcn is a starting point, not a finish line — every component is yours to mold to the picked direction. Use the CLI to install, then derive token-driven variants per the picked paradigm (`references/paradigms.md`).
+shadcn/ui v4 with full Tailwind v4 + React 19 support reached stable February 2026. The CLI is on the 4.19.x line. shadcn is a starting point, not a finish line; every component is yours to mold to the picked direction. Use the CLI to install, then derive token-driven variants per the picked paradigm (`references/paradigms.md`).
 ```bash
 pnpm dlx shadcn@latest init
 pnpm dlx shadcn@latest add button dialog
 ```
 Once a component is added, treat it as project source. Edit it. Replace its hardcoded colors with `var(--color-accent)` and friends. Re-tier its radius and shadow tokens per the direction. Cite the v4 release notes at https://ui.shadcn.com/docs/changelog when documenting which version is installed.
 
-Anti-pattern: leaving the default shadcn `bg-primary` and `rounded-md` on every primitive. The result is the shadcn-landing-page silhouette listed in `references/anti-slop.md` — readable as preset before the eye finishes scanning.
+Anti-pattern: leaving the default shadcn `bg-primary` and `rounded-md` on every primitive. The result is the shadcn-landing-page silhouette listed in `references/anti-slop.md`, readable as preset before the eye finishes scanning.
 
 ## 5. Composition patterns
 
-Avoid boolean-prop proliferation. A `<Composer>` that grows `isThread`, `isChannel`, `isReply`, `withAttachments`, `withMentions` is a single component pretending to be a family. Decompose into a compound component with a shared context — `<ComposerProvider>` wraps the surface, and `<Composer.Frame>`, `<Composer.Input>`, `<Composer.Submit>`, `<Composer.AttachmentList>` slot in independently. Each consumer surface picks the slots it needs; new variants compose without touching the base contract.
+Avoid boolean-prop proliferation. A `<Composer>` that grows `isThread`, `isChannel`, `isReply`, `withAttachments`, `withMentions` is a single component pretending to be a family. Decompose into a compound component with a shared context: `<ComposerProvider>` wraps the surface, and `<Composer.Frame>`, `<Composer.Input>`, `<Composer.Submit>`, `<Composer.AttachmentList>` slot in independently. Each consumer surface picks the slots it needs; new variants compose without touching the base contract.
 
 ```tsx
 // Compound component with shared context (React 19).
@@ -151,13 +151,13 @@ Composer.Submit = function Submit() { /* ... */ };
 
 Children-over-render-props for slot composition. `<Modal><Modal.Body>...</Modal.Body></Modal>` reads as HTML; `<Modal renderBody={() => ...} renderFooter={() => ...} />` reads as a config object. JSX trees communicate structure better than flat props.
 
-React 19: `ref` is a regular prop — drop `forwardRef` from new components. `useContext()` still works but `use(Context)` is the ergonomic default; it composes with conditional reads where `useContext()` cannot.
+React 19: `ref` is a regular prop; drop `forwardRef` from new components. `useContext()` still works but `use(Context)` is the ergonomic default; it composes with conditional reads where `useContext()` cannot.
 
 Generic context shape: `{ state, actions, meta }` is the boring-correct triple. State is the reactive value, actions are imperative escapes (`open()`, `close()`, `submit()`), meta is static metadata (config, ids, computed selectors). Drop a slot only when it is genuinely empty.
 
 ## 6. View Transitions
 
-`<ViewTransition>` and `addTransitionType()` are React-side wrappers around the browser View Transitions API. As of this grounding they ship in React's Experimental / Canary channel — they have NOT been promoted to stable in 19.2. Treat them as preview APIs subject to surface changes; the browser primitive is the stable foundation.
+`<ViewTransition>` and `addTransitionType()` are React-side wrappers around the browser View Transitions API. As of this grounding they ship in React's Experimental / Canary channel; they have NOT been promoted to stable in 19.2. Treat them as preview APIs subject to surface changes; the browser primitive is the stable foundation.
 
 `<ViewTransition>` wraps the content that should animate, NOT a sibling of it. The element directly inside the wrapper participates; siblings do not. Common error: putting `<ViewTransition>` next to the changing element instead of around it.
 
@@ -180,7 +180,7 @@ Generic context shape: `{ state, actions, meta }` is the boring-correct triple. 
 
 Reserve `name` for shared element transitions (the same element appearing on both sides of the transition under the same name). For non-shared enter / exit, omit `name`.
 
-`addTransitionType()` stacks types onto a transition so CSS can branch via the spec-defined `:active-view-transition-type()` pseudo-class — a list reorder gets type `reorder`, a route change gets `navigate`, a Suspense reveal gets `reveal`. CSS rules target the active type, not arbitrary `html` data attributes:
+`addTransitionType()` stacks types onto a transition so CSS can branch via the spec-defined `:active-view-transition-type()` pseudo-class: a list reorder gets type `reorder`, a route change gets `navigate`, a Suspense reveal gets `reveal`. CSS rules target the active type, not arbitrary `html` data attributes:
 
 ```css
 /* Default fade — applies to every transition. */
@@ -205,7 +205,7 @@ const animations = {
   reorder:  { enter: 'fade-in', exit: 'fade-out', share: 'flip' },
 };
 ```
-The `default` key is required — an unmapped transition falls through to default rather than rendering no animation.
+The `default` key is required; an unmapped transition falls through to default rather than rendering no animation.
 
 Motion-budget priority (highest first; spend attention on the top):
 
@@ -222,7 +222,7 @@ Browser support of the underlying View Transitions API (distinct from React's wr
 
 ## 7. Hydration safety
 
-Theme-wrapper script-tag pattern — read theme from `localStorage` and apply `data-theme` to `<html>` BEFORE React hydrates. The script runs synchronously inline in `<head>`; without it, the page flashes the default theme for the duration of hydration.
+Theme-wrapper script-tag pattern: read theme from `localStorage` and apply `data-theme` to `<html>` BEFORE React hydrates. The script runs synchronously inline in `<head>`; without it, the page flashes the default theme for the duration of hydration.
 
 ```html
 <!-- In document <head>, before any React. -->
@@ -232,15 +232,15 @@ Theme-wrapper script-tag pattern — read theme from `localStorage` and apply `d
 </script>
 ```
 
-Minimize serialization at RSC boundaries — the more state crosses Server-to-Client, the more JSON ships in the initial payload and the more hydration cost the client pays. Push the boundary deeper rather than serializing larger objects.
+Minimize serialization at RSC boundaries; the more state crosses Server-to-Client, the more JSON ships in the initial payload and the more hydration cost the client pays. Push the boundary deeper rather than serializing larger objects.
 
-No shared module state for request-scoped data. A Node module's top-level `let` is shared across requests; user A's session leaks into user B's response. Use AsyncLocalStorage, framework request context, or per-request factories — never `let cachedUser`.
+No shared module state for request-scoped data. A Node module's top-level `let` is shared across requests; user A's session leaks into user B's response. Use AsyncLocalStorage, framework request context, or per-request factories; never `let cachedUser`.
 
 ## 8. State management
 
-- Zustand (module-first) — preferred for cross-component shared state. Selectors are scoped, re-renders are surgical. The default for non-trivial client state.
-- Jotai (atom-first) — preferred when state is granular and read-mostly. One atom per cell of state; consumers subscribe atom-by-atom.
-- TanStack Query — server-state cache; the default for any fetched data. Pair with Server Actions for mutations.
+- Zustand (module-first): preferred for cross-component shared state. Selectors are scoped, re-renders are surgical. The default for non-trivial client state.
+- Jotai (atom-first): preferred when state is granular and read-mostly. One atom per cell of state; consumers subscribe atom-by-atom.
+- TanStack Query: server-state cache; the default for any fetched data. Pair with Server Actions for mutations.
 - Avoid Redux unless team-size and complexity demand it. The boilerplate-to-value ratio is wrong for most surfaces under a Zustand store.
 - Avoid Context for high-frequency updates. Context re-renders all consumers on every value change; Zustand selectors and Jotai atoms scope the re-render to the actual reader.
 
@@ -259,13 +259,13 @@ const count = useStore((s) => s.count); // re-renders only when count changes
 - Redux for simple state. Over-engineering by default; the action-reducer-thunk surface costs more than it earns under a single store. Reach for Zustand or Jotai first.
 - Manual `useMemo` / `useCallback` with React Compiler enabled. The compiler does this. Manual memoization is dead code that obscures the actual call graph and adds noise to diffs.
 - `useEffect` data-fetch in RSC apps. Use Server Actions or RSC fetch. `useEffect` for fetching is a 2020-era pattern and shows up as a slop tell on every "AI-built React app" anti-pattern catalogue.
-- `'use client'` on the root layout or page. Defeats RSC streaming; ships every leaf to the browser. The directive is leaf-level — push it as deep as possible.
+- `'use client'` on the root layout or page. Defeats RSC streaming; ships every leaf to the browser. The directive is leaf-level; push it as deep as possible.
 - Hardcoded hex / RGB values in component code. Tokens only. A `git grep '#[0-9a-f]\{3,8\}' src/components/` should return zero matches.
 - Default Tailwind palette utilities (`bg-blue-500`, `text-gray-700`). The default ramp is the slop tell. Reference the `@theme` tokens by name (`bg-accent`, `text-default`) so a direction change rolls through the whole surface.
 - Mixing Tailwind v3 JS config with v4 CSS-first config. Pick one; the bridge is more confusing than either pure path.
-- `transition: all` in component CSS. Animates layout, color, and transform together; jank guaranteed. Name the properties — `transition: opacity 120ms ease, transform 120ms ease`.
+- `transition: all` in component CSS. Animates layout, color, and transform together; jank guaranteed. Name the properties: `transition: opacity 120ms ease, transform 120ms ease`.
 - Layout reads in render (`getBoundingClientRect`, `offsetHeight`, `offsetWidth`, `scrollTop` called during a render or commit phase). Forces synchronous layout and breaks concurrent rendering. Read inside `useLayoutEffect` or after `requestAnimationFrame`.
 
 ## 10. Cite-and-defer
 
-Citations: react.dev (19.2.x), tailwindcss.com (4.3.x), ui.shadcn.com (shadcn 4.19.x). This is starter density — defer to react.dev/learn for the current API surface, tailwindcss.com/docs for v4 directives, and ui.shadcn.com/docs/changelog for component versions before relying on any hook, directive, or component in production.
+Citations: react.dev (19.2.x), tailwindcss.com (4.3.x), ui.shadcn.com (shadcn 4.19.x). This is starter density; defer to react.dev/learn for the current API surface, tailwindcss.com/docs for v4 directives, and ui.shadcn.com/docs/changelog for component versions before relying on any hook, directive, or component in production.

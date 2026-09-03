@@ -1,6 +1,6 @@
 ---
 name: copywriting-tone-of-voice-creator
-description: 'Use when a user asks to create, refresh, or port a brand tone of voice guide with channel-specific modulation. Not for prose style guides — use copywriting-prose-creator; not for general copywriting — use copywriting.'
+description: 'Use when a user asks to create, refresh, or port a brand tone of voice guide with channel-specific modulation. Not for prose style guides: use copywriting-prose-creator; not for general copywriting: use copywriting.'
 ---
 
 # Copywriting tone of voice creator

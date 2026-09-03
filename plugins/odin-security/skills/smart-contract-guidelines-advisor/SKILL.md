@@ -1,6 +1,6 @@
 ---
 name: smart-contract-guidelines-advisor
-description: 'Use when a smart-contract project needs architecture, implementation, dependency, or testing guidance. Produces an evidence-backed assessment with recommendations. Not for maturity — use smart-contract-code-maturity-assessor; not for audit prep — use smart-contract-audit-prep.'
+description: 'Use when a smart-contract project needs architecture, implementation, dependency, or testing guidance. Produces an evidence-backed assessment with recommendations. Not for maturity: use smart-contract-code-maturity-assessor; not for audit prep: use smart-contract-audit-prep.'
 ---
 
 # Smart contract guidelines advisor

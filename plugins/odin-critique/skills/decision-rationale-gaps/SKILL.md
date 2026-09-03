@@ -32,7 +32,7 @@ description: 'Use when a current decision needs pressure-testing until the ratio
    Done when: the answer is judged as resolving or not resolving the gap.
 6. **Narrow, don't repeat**: After a rejected answer, identify the exact part that remained vague and ask about it. Narrow further each round; never widen back to a generic question. Done when: the question is narrowed to the exact vague part, not repeated.
 7. **Stop**: Either every gap is explained or one is not. Both are valid endings. Done when: every gap is closed or at least one remains open.
-8. **Flag unresolved gaps**: Name the specific assumption behind each gap that remains unexplained. Do not force a resolution or let the user paper over it. Flag the decision for re-review — not a verdict it was wrong, only that it is not yet earned. Done when: each open gap names its unexplained assumption and is flagged for re-review.
+8. **Flag unresolved gaps**: Name the specific assumption behind each gap that remains unexplained. Do not force a resolution or let the user paper over it. Flag the decision for re-review: not a verdict it was wrong, only that it is not yet earned. Done when: each open gap names its unexplained assumption and is flagged for re-review.
 
 ## Failure and recovery
 - Unexplained gap: A gap that survives the narrowing rounds is a valid stopping state. Name the specific assumption without asserting that the decision was wrong.

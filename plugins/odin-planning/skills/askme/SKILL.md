@@ -1,6 +1,6 @@
 ---
 name: askme
-description: 'Use when a task is ambiguous, maximum clarification is needed before planning, or the user requests exhaustive, collaborative, or adversarial askme mode. Runs Verbalized Sampling, fires batched clarifying questions, and confirms intent before planning proceeds. Not for source or remote-system changes; not for a single fork — use decide.'
+description: 'Use when a task is ambiguous, maximum clarification is needed before planning, or the user requests exhaustive, collaborative, or adversarial askme mode. Runs Verbalized Sampling, fires batched clarifying questions, and confirms intent before planning proceeds. Not for source or remote-system changes; not for a single fork: use decide.'
 ---
 
 # Ask me
@@ -24,7 +24,7 @@ description: 'Use when a task is ambiguous, maximum clarification is needed befo
 
 1. **Select mode.** Auto-detect from invoking phrasing: `help me refine`, `walk through with me`, `let's brainstorm`, `share tips` → collaborative; `poke holes`, `stress-test`, `grill`, `find weaknesses` → adversarial; anything else or no qualifier → exhaustive. An explicit mode argument always wins over auto-detection.
 
-2. **exhaustive mode — Verbalized Sampling (VS).** Sample multiple intent hypotheses; assign each a probability weight on a 0–1 scale; state the falsifier (the specific observation or scenario that would invalidate it) per hypothesis. Expand hypothesis depth as ambiguity, risk, or architectural surface grows; keep it concise when scope is truly narrow. Render the VS block in this format before the first question fire:
+2. **exhaustive mode, Verbalized Sampling (VS).** Sample multiple intent hypotheses; assign each a probability weight on a 0–1 scale; state the falsifier (the specific observation or scenario that would invalidate it) per hypothesis. Expand hypothesis depth as ambiguity, risk, or architectural surface grows; keep it concise when scope is truly narrow. Render the VS block in this format before the first question fire:
 ```
 1. [Weight: 0.42] hypothesis here
    - Falsifier: [observation or scenario that would invalidate this]
@@ -33,7 +33,7 @@ description: 'Use when a task is ambiguous, maximum clarification is needed befo
    - Falsifier: [observation or scenario that would invalidate this]
 ```
 
-3. **exhaustive mode — exploration.** Deliberately seek unconventional, underexplored, and edge-case possibilities relating to the user's objective, drawing on context and plausible but non-obvious requirements. Include at least 3 edge cases (at least 5 if architectural); stop expanding once additional cases no longer change decisions. Broaden sampling if no clear leader emerges. Synthesize surviving hypotheses into one consolidated direction before responding.
+3. **exhaustive mode: exploration.** Deliberately seek unconventional, underexplored, and edge-case possibilities relating to the user's objective, drawing on context and plausible but non-obvious requirements. Include at least 3 edge cases (at least 5 if architectural); stop expanding once additional cases no longer change decisions. Broaden sampling if no clear leader emerges. Synthesize surviving hypotheses into one consolidated direction before responding.
 
 4. **collaborative mode.** Do not run VS. Two-way tip-sharing dialogue: surface one of the agent's own observations or tips back to the user as a counter-tip per round; let depth emerge through exchange. No scoring, no ranked sample. Stop when the user signals convergence.
 
@@ -41,13 +41,13 @@ description: 'Use when a task is ambiguous, maximum clarification is needed befo
 
 6. **Escalation (collaborative → adversarial).** Promote mid-session when any of these fire: (a) ambiguity cardinality ≥ 2 valid architectural decisions surface from a single user message; (b) the user references "the function" / "that file" without a concrete path; (c) the user describes a goal without a verifiable done signal. These signal patterns are guidance, not a hard rule; the user can always override mode via argument.
 
-7. **Fire clarifying questions via the ask-user tool.** The "maximum possible number" is bounded by the tool's per-fire cap (4); for larger sets fire multiple sequential batches ordered by dependency. Per question: a full sentence ending in `?`; a `header` chip ≤ 12 characters; `multiSelect` false for single-pick mutually-exclusive axes, true only for additive subset picks (feature toggles, optional sub-tasks). Per option: a 1–5 word `label` with `(Recommended)` appended to and placed first for the recommended choice; a one-sentence trade-off `description`; an optional `preview` (markdown or monospace box) for visual comparisons, single-select only, skipped when the difference is purely conceptual. Never add an explicit "Other" option — free-text "Other" is auto-provided on every question, and free-text notes go in the `annotations` response field. Use this tool only to clarify requirements or choose between approaches during planning, not to ask "is the plan ready?".
+7. **Fire clarifying questions via the ask-user tool.** The "maximum possible number" is bounded by the tool's per-fire cap (4); for larger sets fire multiple sequential batches ordered by dependency. Per question: a full sentence ending in `?`; a `header` chip ≤ 12 characters; `multiSelect` false for single-pick mutually-exclusive axes, true only for additive subset picks (feature toggles, optional sub-tasks). Per option: a 1–5 word `label` with `(Recommended)` appended to and placed first for the recommended choice; a one-sentence trade-off `description`; an optional `preview` (markdown or monospace box) for visual comparisons, single-select only, skipped when the difference is purely conceptual. Never add an explicit "Other" option; free-text "Other" is auto-provided on every question, and free-text notes go in the `annotations` response field. Use this tool only to clarify requirements or choose between approaches during planning, not to ask "is the plan ready?".
 
-8. **Antipattern — never generate an override-checklist.** Never emit a single `multiSelect: true` checklist where unticked means "default stands"; it collapses independent axes into one list. When the brief calls for the user to rarely have to type, route the intent into N per-axis single-select questions (≤ 4 per fire), each axis's `(Recommended)` option carrying the default. Reserve `multiSelect` strictly for additive picks.
+8. **Antipattern: never generate an override-checklist.** Never emit a single `multiSelect: true` checklist where unticked means "default stands"; it collapses independent axes into one list. When the brief calls for the user to rarely have to type, route the intent into N per-axis single-select questions (≤ 4 per fire), each axis's `(Recommended)` option carrying the default. Reserve `multiSelect` strictly for additive picks.
 
 9. **VS render timing.** Render the VS block immediately before the first question fire of a planning session; subsequent intra-session fires need not repeat the VS preamble unless the survivor set materially changed.
 
-10. **Harness mapping.** If the harness exposes only single-question prompts, fire them sequentially in dependency order — the shape (clarifying questions with one Recommended each) is what matters, and batching is an optimization. Map `(Recommended)` to whatever default-marker convention the harness uses; the rationale belongs in the description body either way. If no multi-pick mechanism exists, decompose additive picks into N independent single-selects.
+10. **Harness mapping.** If the harness exposes only single-question prompts, fire them sequentially in dependency order; the shape (clarifying questions with one Recommended each) is what matters, and batching is an optimization. Map `(Recommended)` to whatever default-marker convention the harness uses; the rationale belongs in the description body either way. If no multi-pick mechanism exists, decompose additive picks into N independent single-selects.
 
 11. **Stop.** Terminate when every clarifying question is answered or discharged and intent is confirmed. Do not proceed on non-trivial changes without visible VS (exhaustive) or completed fork resolution (adversarial).
 

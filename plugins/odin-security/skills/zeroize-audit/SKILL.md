@@ -1,6 +1,6 @@
 ---
 name: zeroize-audit
-description: 'Use when auditing C, C++, or Rust secret-handling code to verify zeroization survives compiler optimization (dead-store elimination, register spills). Produces findings JSON and a Markdown report correlating source lines with optimization-level evidence. Not for test vectors — use wycheproof.'
+description: 'Use when auditing C, C++, or Rust secret-handling code to verify zeroization survives compiler optimization (dead-store elimination, register spills). Produces findings JSON and a Markdown report correlating source lines with optimization-level evidence. Not for test vectors: use wycheproof.'
 ---
 
 # Zeroize audit

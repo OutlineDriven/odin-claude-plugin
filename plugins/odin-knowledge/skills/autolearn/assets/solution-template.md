@@ -41,7 +41,7 @@ tags: [keyword-one, keyword-two]
 [The fix that worked, with code snippets when they carry weight]
 
 ## Why This Works
-[Root cause, and why the fix addresses it — the WHY, not a restatement of the diff]
+[Root cause, and why the fix addresses it, the WHY, not a restatement of the diff]
 
 ## Prevention
 - [Concrete practice, test, or guardrail that stops a recurrence]
@@ -81,7 +81,7 @@ tags: [keyword-one, keyword-two]
 [The practice or recommendation, with code examples when useful]
 
 ## Why This Matters
-[Rationale and impact of following — or not following — this]
+[Rationale and impact of following, or not following, this]
 
 ## When to Apply
 - [Conditions or situations where this applies]

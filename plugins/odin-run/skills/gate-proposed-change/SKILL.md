@@ -1,6 +1,6 @@
 ---
 name: gate-proposed-change
-description: 'Use when asked to evaluate a proposed commit, merge, or auto-merge against a version-1 gate config. Returns an allow or deny verdict naming matched paths; performs no merge. Not for landing PRs — use gate-and-merge. Read-only.'
+description: 'Use when asked to evaluate a proposed commit, merge, or auto-merge against a version-1 gate config. Returns an allow or deny verdict naming matched paths; performs no merge. Not for landing PRs: use gate-and-merge. Read-only.'
 ---
 
 # Gate proposed change
@@ -16,9 +16,9 @@ description: 'Use when asked to evaluate a proposed commit, merge, or auto-merge
 
 ## Not for
 
-- Landing PRs — use gate-and-merge.
-- Merging, committing, or pushing — this gate evaluates policy and returns a verdict only.
-- Source or remote mutation — this skill is read-only.
+- Landing PRs: use gate-and-merge.
+- Merging, committing, or pushing, this gate evaluates policy and returns a verdict only.
+- Source or remote mutation: this skill is read-only.
 
 ## Inputs
 
@@ -55,4 +55,4 @@ description: 'Use when asked to evaluate a proposed commit, merge, or auto-merge
 
 ## Output
 
-A verdict record: `allowed` (boolean), `trigger` (one of `ok`, `denylist`, `file-count`, `not-allowlisted`), `reason` (human-readable), and `matchedPaths` (the exact paths responsible; empty when `ok`) — the gate emits this record only; it performs no merge, commit, or write.
+A verdict record: `allowed` (boolean), `trigger` (one of `ok`, `denylist`, `file-count`, `not-allowlisted`), `reason` (human-readable), and `matchedPaths` (the exact paths responsible; empty when `ok`); the gate emits this record only; it performs no merge, commit, or write.

@@ -14,7 +14,7 @@ Do **not** run any of the code-shipping machinery:
 ## Execute the production plan
 
 1. **Read the plan fully.** It is a decision artifact describing *how* the deliverable gets made: which sources to read, how to mine each, how they combine, the shape of the deliverable, and any forks the user already confirmed. Honor those decisions.
-2. **Read the sources the plan names** — the actual inputs (PDFs, transcripts, docs, links). Treat user-named resources as authoritative; read them rather than working from memory. If a named source is missing, say so plainly rather than substituting.
+2. **Read the sources the plan names**: the actual inputs (PDFs, transcripts, docs, links). Treat user-named resources as authoritative; read them rather than working from memory. If a named source is missing, say so plainly rather than substituting.
 3. **Synthesize and produce the deliverable** following the plan's intended shape and the confirmed forks. This is the work the approach-plan deliberately deferred.
 4. **Save and report.** Write the deliverable to a durable, repo-tracked location, default to a sensible `docs/` subpath (or a path the user named at the checkpoint), and report its absolute path so the user can find it. Whether to git-commit vs. leave it written is the user's call; offer, don't force.
 

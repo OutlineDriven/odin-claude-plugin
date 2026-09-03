@@ -1,6 +1,6 @@
 ---
 name: writing-for-agents
-description: 'Use when asked to author or restructure any agent-consumed document so the agent routes and executes predictably. Produces a self-contained document with no stale duplication or unreachable pointers. Not for skill-specific mechanics like invocation choice — use writing-skills.'
+description: 'Use when asked to author or restructure any agent-consumed document so the agent routes and executes predictably. Produces a self-contained document with no stale duplication or unreachable pointers. Not for skill-specific mechanics like invocation choice, use writing-skills.'
 ---
 
 # Writing for agents
@@ -56,4 +56,4 @@ Must be supplied: the target document path and the agent-consumed document type 
 - Stale pointer: a pointer's target no longer exists or has moved. Recovery: update or remove the pointer; never leave a dangling reference.
 
 ## Output
-The target document, edited or restructured — every line earning its place by changing routing, authority, reads/writes, procedure, success proof, failure handling, or attribution; no stale duplication, no unreachable pointers, no peer-skill runtime routing, all necessary mechanics inlined.
+The target document, edited or restructured, every line earning its place by changing routing, authority, reads/writes, procedure, success proof, failure handling, or attribution; no stale duplication, no unreachable pointers, no peer-skill runtime routing, all necessary mechanics inlined.

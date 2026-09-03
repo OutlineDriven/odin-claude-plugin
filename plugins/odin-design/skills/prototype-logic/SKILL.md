@@ -1,6 +1,6 @@
 ---
 name: prototype-logic
-description: 'Use when someone needs to press buttons and watch state change to check a state-model, logic, or data-shape question. Produces a throwaway HTML demo whose isolated logic answers the question and folds into real code after validation. Not for visual design — use prototype.'
+description: 'Use when someone needs to press buttons and watch state change to check a state-model, logic, or data-shape question. Produces a throwaway HTML demo whose isolated logic answers the question and folds into real code after validation. Not for visual design: use prototype.'
 ---
 
 # Prototype logic
@@ -29,7 +29,7 @@ Supply one state-model, logic, or data-shape question; the relevant state, actio
 7. Keep state in memory unless persistence is the question. If persistence is under examination, use only a separately named scratch target that explicitly says it must be wiped, and include that target in the bounded local scope before writing it. Done when: state is kept in memory or persistence uses a named scratch target in scope.
 8. Open the standalone file, exercise free play and all three scenario classes, and confirm that every action visibly produces the modeled state transition, including rejection or handling of the illegal action. Repair only defects that prevent the demo from answering the stated question. Done when: free play and all three scenario classes produce the modeled transitions.
 9. Hand the runnable file to the human to drive. Add actions or scenarios only when that feedback requests them; do not infer broader scope. Done when: the human is handed the runnable file.
-10. After the human settles the question, record the exact question and verdict in the commit that adds the demo on a throwaway branch based on the supplied main branch. Do not push. If the verdict validates the module, fold that module—not the HTML shell—into the supplied real-code target and verify the same settled transitions there. Done when: the question and verdict are recorded in a throwaway-branch commit, and validated logic is folded into the real-code target.
+10. After the human settles the question, record the exact question and verdict in the commit that adds the demo on a throwaway branch based on the supplied main branch. Do not push. If the verdict validates the module, fold that module, not the HTML shell, into the supplied real-code target and verify the same settled transitions there. Done when: the question and verdict are recorded in a throwaway-branch commit, and validated logic is folded into the real-code target.
 
 ## Failure and recovery
 - Invalid or incomplete model: If state, actions, legal transitions, or the question remain ambiguous, make no speculative transition and return `blocked` with the missing rule.

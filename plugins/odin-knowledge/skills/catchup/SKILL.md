@@ -1,6 +1,6 @@
 ---
 name: catchup
-description: 'Use when the human returns after a gap, cannot follow the project, or asks what happened. Returns a screen-length briefing grounded in live state. Also handles pre-decision orientation when the mental model is stale. Not for initial onboarding — use onboard.'
+description: 'Use when the human returns after a gap, cannot follow the project, or asks what happened. Returns a screen-length briefing grounded in live state. Also handles pre-decision orientation when the mental model is stale. Not for initial onboarding: use onboard.'
 ---
 
 # Catchup
@@ -23,10 +23,10 @@ The project working directory, inferred from the current repository when not sup
 1. Read only live state: recent file mtimes, git log and diffs, plan and state docs, task boards, and re0-memo notes. Never brief from conversation memory alone; that memory may have drifted. **Done when:** live state is read from the project, not from conversation memory.
 2. Anchor on the human's last touch (their last message, judgment, or commit). Everything after that point is the delta; everything before it is assumed known and stays out. **Done when:** the last touch point is identified and the delta boundary is set.
 3. Compose in decision order, not chronological order:
-   - **Needs you** — decisions, judgments, or inputs only the human can give, each self-contained enough to act on without opening another file.
-   - **Changed while you were away** — outcomes, not process. Prefer "The plan's scoring rule was replaced" to "I ran three analysis passes."
-   - **New words** — every term coined or repurposed since their last touch, one line each, with where it lives. Skip terms they already used themselves.
-   **Done when:** the three sections are composed in decision order.
+   - Needs you: decisions, judgments, or inputs only the human can give, each self-contained enough to act on without opening another file.
+   - Changed while you were away: outcomes, not process. Prefer "The plan's scoring rule was replaced" to "I ran three analysis passes."
+   - New words: every term coined or repurposed since their last touch, one line each, with where it lives. Skip terms they already used themselves.
+   Done when: the three sections are composed in decision order.
 4. Gloss on first use: any project-specific term appearing in the briefing gets an inline plain-language aside at its first occurrence, even if a glossary section follows. **Done when:** every project-specific term is glossed at first use.
 5. Keep the default short (a screen or less). End with drill-down offers per section, not with everything expanded. **Done when:** the briefing fits on a screen with drill-down offers, not full expansion.
 6. Cold-read the briefing for pre-gap memory dependence or unglossed coined terms; confirm each needs-you item is actionable without opening another file; confirm every claim has a checkable source (file, commit, or artifact path). **Done when:** the cold-read passes with no pre-gap memory dependence, no unglossed terms, actionable needs-you items, and sourced claims.

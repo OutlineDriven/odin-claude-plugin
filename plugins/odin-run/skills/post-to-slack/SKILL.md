@@ -38,4 +38,4 @@ disable-model-invocation: true
 - A confirmed post has no rollback in this procedure. State that removal, if needed, requires an authorized human action in Slack rather than pretending the mutation was reversed.
 
 ## Output
-The destination label when supplied, a safe message summary or the exact message when appropriate, and one terminal classification: `posted` for confirmed HTTP 200 `ok`, `blocked` before mutation, `failed` for a confirmed rejection or pre-delivery transport failure, or `unknown` when delivery cannot be determined — never including the webhook URL or secret path.
+The destination label when supplied, a safe message summary or the exact message when appropriate, and one terminal classification: `posted` for confirmed HTTP 200 `ok`, `blocked` before mutation, `failed` for a confirmed rejection or pre-delivery transport failure, or `unknown` when delivery cannot be determined, never including the webhook URL or secret path.

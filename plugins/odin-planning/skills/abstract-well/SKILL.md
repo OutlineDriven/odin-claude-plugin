@@ -25,9 +25,9 @@ description: 'Use when the user wants to classify abstractions as useful, bad, o
 1. Enumerate the abstractions in scope. If the user named them, use that list. If the user gave a scope, list every named wrapper, helper, interface, layer, or adapter inside it. Do not invent abstractions that the input does not name or contain. Done when: every abstraction in scope is listed.
 2. For each abstraction, write two concrete forms at the same caller task: the raw form, the code the caller writes without the abstraction, and the cooked form, the code the caller writes with it. Keep both at the same task and the same caller. Done when: raw and cooked forms exist for every abstraction.
 3. Classify each abstraction by comparing cooked form to raw form for that caller:
-   - useful: the cooked form is easier than the raw form — fewer concepts, less ceremony, fewer places to get wrong.
-   - bad: the cooked form is harder than the raw form — more indirection, more concepts, or more ceremony than the inline path.
-   - busy: the cooked form is neither easier nor harder — it relocates complexity to another place without reducing total difficulty for the caller.
+   - useful: the cooked form is easier than the raw form: fewer concepts, less ceremony, fewer places to get wrong.
+   - bad: the cooked form is harder than the raw form: more indirection, more concepts, or more ceremony than the inline path.
+   - busy: the cooked form is neither easier nor harder: it relocates complexity to another place without reducing total difficulty for the caller.
    - unclassified: the raw form cannot be written concretely because the underlying operation is unknown.
    Done when: every abstraction is classified as useful, bad, busy, or unclassified.
 4. Select one shallow level to keep: the single useful abstraction whose cooked-form advantage over its raw form is largest. If no abstraction is useful, select none and state that explicitly. Done when: one useful abstraction is selected or an explicit statement that none exists.

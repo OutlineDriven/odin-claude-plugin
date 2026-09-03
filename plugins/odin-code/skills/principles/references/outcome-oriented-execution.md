@@ -1,4 +1,4 @@
-# Outcome-oriented execution — procedure
+# Outcome-oriented execution: procedure
 
 The rollback-anchor lifecycle and per-step verification behind the anchor.
 

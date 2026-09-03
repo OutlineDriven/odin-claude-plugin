@@ -19,7 +19,7 @@ Wiki source of truth: <https://github.com/arxanas/git-branchless/wiki>
 | `git branchless install-man-pages <path>` | Install man pages to a chosen directory. | Optional. |
 | `git branchless repair` | Reconcile event log with on-disk Git state. | Run if smartlog shows phantom commits or refs. |
 
-Detection signal — confirm branchless is initialized for the current repo:
+Detection signal: confirm branchless is initialized for the current repo:
 
 ```
 test -d "$(git rev-parse --git-common-dir)/branchless" && git config --get branchless.core.mainBranch
@@ -52,16 +52,16 @@ Tree view of in-progress work. Renders draft commits, hidden ancestors, and bran
 
 Programmatic revset evaluation.
 
-- `-r` / `--raw` — emit one hash per line (topologically sorted, ancestors first). Use this for scripting.
-- `--branches` — return branches attached to matched commits instead of commits.
+- `-r` / `--raw`: emit one hash per line (topologically sorted, ancestors first). Use this for scripting.
+- `--branches`: return branches attached to matched commits instead of commits.
 
 ### `git next [N]` / `git prev [N]`
 
 Move HEAD forward / backward in the stack.
 
 - `[N]` : number of commits to skip.
-- `-i` / `--interactive` — choose between ambiguous targets.
-- `-o` / `--oldest`, `-n` / `--newest` — disambiguate without prompting.
+- `-i` / `--interactive`: choose between ambiguous targets.
+- `-o` / `--oldest`, `-n` / `--newest`: disambiguate without prompting.
 - `-a` / `--all` : jump to first/last commit in the stack.
 - `-b` / `--branch` : navigate by branches instead of commits.
 
@@ -81,8 +81,8 @@ Replacement for `git add` + `git commit`. Captures unstaged changes by default.
 
 - `-m, --message <msg>` : commit message (CLI).
 - `-i, --interactive` : TUI for hunk selection.
-- `-c, --create <name>` — create + checkout new branch and commit to it.
-- `-d, --detach` — start a new stack on a detached HEAD.
+- `-c, --create <name>`: create + checkout new branch and commit to it.
+- `-d, --detach`: start a new stack on a detached HEAD.
 - `-I, --insert` : insert commit between current HEAD and its children (rebases descendants).
 - `--fixup <commit>` : record a `fixup!`-style commit pointing at `<commit>`.
 
@@ -97,8 +97,8 @@ Amend HEAD's contents and auto-restack descendants. **Does not edit the message*
 Edit commit messages without checking out.
 
 - `git reword` (no args) : edit HEAD's message.
-- `git reword <revset>` — edit one or many commits; supports `stack()` for batch.
-- `-m '<msg>'` — replace message non-interactively.
+- `git reword <revset>`: edit one or many commits; supports `stack()` for batch.
+- `-m '<msg>'`: replace message non-interactively.
 
 ---
 
@@ -135,10 +135,10 @@ Restriction: cannot create cycles (move a commit atop its own descendant).
 
 ### `git restack [<commit>...]`
 
-Repair abandoned commits — descendants of rewritten parents that were never re-parented. In-memory by default.
+Repair abandoned commits: descendants of rewritten parents that were never re-parented. In-memory by default.
 
 - Default revset: `draft()` (all draft commits; no-op if nothing is abandoned).
-- `--merge` — prompt for conflict resolution.
+- `--merge`: prompt for conflict resolution.
 - Config: `branchless.restack.warnAbandoned` (default `true`); `branchless.restack.preserveTimestamps` (default `false`).
 
 ### `git split <commit> [--detach | --discard | --before]`
@@ -156,7 +156,7 @@ Extract changes from a commit interactively; auto-rebase descendants.
 
 Soft-delete commits from smartlog. Event log is preserved; `git undo` and `git unhide` recover them.
 
-- `-r` / `--recursive` — apply to subtree.
+- `-r` / `--recursive`: apply to subtree.
 - Default: `git hide` also deletes branches pointing at the hidden commit. Use `--no-delete-branches` to keep the branches.
 
 ---
@@ -167,11 +167,11 @@ Soft-delete commits from smartlog. Event log is preserved; `git undo` and `git u
 
 Rebase all local stacks onto the main branch via speculative in-memory merges. The canonical "stay current with main" command.
 
-- `--pull` — fetch from remote first (mirrors `git pull`).
-- `--merge` — resolve conflicts interactively for stacks that would otherwise be skipped.
+- `--pull`: fetch from remote first (mirrors `git pull`).
+- `--merge`: resolve conflicts interactively for stacks that would otherwise be skipped.
 - Behavior: stacks with conflicts are silently skipped unless `--merge` is passed; check the summary for skip lines.
 - Without a revset, syncs all draft commits.
-- Publish/land preflight and post-merge cleanup both start here — see Recipe 9 in `references/recipes.md`.
+- Publish/land preflight and post-merge cleanup both start here; see Recipe 9 in `references/recipes.md`.
 
 ### `git submit [<revset>] [OPTIONS]`
 
@@ -179,12 +179,12 @@ Push a stack of branches to a remote forge.
 
 - Default behavior: **force-pushes** all branches in the current stack that already exist on the remote. This rewrites remote history.
 - Default revset: `stack()`. Common forms: `git submit @` (branches at HEAD), `git submit 'draft()'`.
-- `-c, --create` — push branches that do not yet exist on the remote. The branch must already exist locally (`git branch <name> <commit>`). First feature publish: `git submit -c @`.
-- `--forge phabricator` — Phabricator integration (well tested).
+- `-c, --create`: push branches that do not yet exist on the remote. The branch must already exist locally (`git branch <name> <commit>`). First feature publish: `git submit -c @`.
+- `--forge phabricator`: Phabricator integration (well tested).
 - `--forge github` : GitHub integration. **Still flagged unsuitable for general use upstream**; landing/reordering a stack may lose PR ancestry. Prefer the default `branch` forge (or stock push fallback) for GitHub today.
 - `--dry-run`, `--jobs N` : preview / parallelism.
 
-**Safety caveat — force-push:** `git submit` rewrites the remote history of every existing branch in the stack. Use only on feature branches no other collaborator is actively building on. **Never** `git submit` targeting `main` / `master` / `release/*` — gated main land uses stock `git push` (Recipe 9 Path M). On repos with branch protection that denies force-push, `git submit` will fail; fall back to plain `git push -u origin <feature>` for that branch. Never combine `git submit` with `--no-verify` or with branches that are someone else's review checkout. Full scenarios: Recipe 9.
+**Safety caveat: force-push:** `git submit` rewrites the remote history of every existing branch in the stack. Use only on feature branches no other collaborator is actively building on. **Never** `git submit` targeting `main` / `master` / `release/*`, gated main land uses stock `git push` (Recipe 9 Path M). On repos with branch protection that denies force-push, `git submit` will fail; fall back to plain `git push -u origin <feature>` for that branch. Never combine `git submit` with `--no-verify` or with branches that are someone else's review checkout. Full scenarios: Recipe 9.
 
 ---
 
@@ -196,8 +196,8 @@ Run a shell command on each commit in a revset. The revset is the **positional**
 argument (default: `"stack() | @"`); flags configure execution. Results are
 cached by `(command, tree-id)`.
 
-- `-x, --exec '<cmd>'` — command to run. (`-x` here is short for `--exec`, not a revset selector.)
-- `-c, --command <name>` — pre-aliased command from config (`branchless.test.alias.<name>`).
+- `-x, --exec '<cmd>'`: command to run. (`-x` here is short for `--exec`, not a revset selector.)
+- `-c, --command <name>`: pre-aliased command from config (`branchless.test.alias.<name>`).
 - `-S, --search linear|reverse|binary` : search strategy when looking for the first failing commit.
 - `-b, --bisect` : shorthand for `--search binary`.
 - `-j, --jobs N` : parallel execution (`0` = autodetect).
@@ -207,8 +207,8 @@ cached by `(command, tree-id)`.
 
 Environment available to the command:
 
-- `BRANCHLESS_TEST_COMMIT` — hash of the commit being tested.
-- `BRANCHLESS_TEST_COMMAND` — the command string itself.
+- `BRANCHLESS_TEST_COMMIT`: hash of the commit being tested.
+- `BRANCHLESS_TEST_COMMAND`: the command string itself.
 
 ### `git test fix --exec '<cmd>'`
 
@@ -225,8 +225,8 @@ Display or evict cached test outcomes.
 Full treatment lives in `references/recovery.md`. Quick reference:
 
 - `git undo` / `git undo -i` : revert any operation tracked by the event log.
-- `git snapshot create` / `git snapshot restore` — working-copy snapshots.
-- `git bug-report` — collect repo state for filing issues.
+- `git snapshot create` / `git snapshot restore`: working-copy snapshots.
+- `git bug-report`: collect repo state for filing issues.
 
 ---
 
@@ -257,7 +257,7 @@ Revsets are commit selectors. Names resolve via `git rev-parse` (so `.` is HEAD,
 
 ### Operators
 
-- Set: `\|` / `or` / `+` (union), `&` / `and` (intersection), `-` (difference), `%` (only — ancestors of left excluding ancestors of right).
+- Set: `\|` / `or` / `+` (union), `&` / `and` (intersection), `-` (difference), `%` (only: ancestors of left excluding ancestors of right).
 - Range: `:`, `::` (Mercurial-style).
 
 ### Pattern types (for `branches()`, `message()`, `paths.changed()` etc.)

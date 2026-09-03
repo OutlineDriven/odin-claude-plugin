@@ -17,10 +17,10 @@ description: 'Use when the user wants to compile taste and "this feels wrong" si
 ## Inputs
 
 Must be supplied:
-- **Target artifact path** — a file under the project shared docs or an agent-rule folder that stores the human's agent-facing patterns
+- **Target artifact path**, a file under the project shared docs or an agent-rule folder that stores the human's agent-facing patterns
 
 Optional:
-- **Existing patterns** — any prior rule/pattern document at the same path; the procedure merges into it
+- **Existing patterns**, any prior rule/pattern document at the same path; the procedure merges into it
 
 ## Procedure
 

@@ -17,10 +17,10 @@ disable-model-invocation: true
 
 ## Inputs
 
-1. Code diff or commit reference (required) — uncommitted changes, a branch diff, or a specific commit SHA.
-2. Reviewer selection (required) — Codex, Gemini, or both.
-3. Focus area (optional) — security, performance, error handling, or general.
-4. Project guidance (optional) — context about the codebase or review priorities to include in the reviewer prompt.
+1. Code diff or commit reference (required): uncommitted changes, a branch diff, or a specific commit SHA.
+2. Reviewer selection (required): Codex, Gemini, or both.
+3. Focus area (optional): security, performance, error handling, or general.
+4. Project guidance (optional): context about the codebase or review priorities to include in the reviewer prompt.
 
 ## Procedure
 

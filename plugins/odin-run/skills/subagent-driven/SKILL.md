@@ -21,7 +21,7 @@ Required: an ordered multi-task plan file. The plan defines task boundaries, fil
 
 ## Refusal
 
-- Blocked implementer (BLOCKED): diagnose and act — context problem adds context and re-dispatches; reasoning problem escalates model capability; size problem splits the task; plan error escalates to the user. If the worker says it is stuck, something must change before retry.
+- Blocked implementer (BLOCKED): diagnose and act; context problem adds context and re-dispatches; reasoning problem escalates model capability; size problem splits the task; plan error escalates to the user. If the worker says it is stuck, something must change before retry.
 - Reviewer Cannot Verify from Diff items: requirements living in unchanged code or spanning tasks. Do not block on them; resolve each centrally before marking the task complete. A confirmed gap is a failed spec review; return to the implementer, then re-review.
 - Audit cannot be cleared: abort the chain rather than build on it. Do not squash or force through.
 

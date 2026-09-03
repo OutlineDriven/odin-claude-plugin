@@ -9,7 +9,7 @@ description: 'Use when a user asks to iteratively improve a skill, fix skill-qua
 
 | Field | Bound contract |
 |---|---|
-| Trigger | A user asks to iteratively improve a Claude Code skill, fix skill-quality findings, resolve scanner alerts on a skill, or resume a previously escalated skill-improvement run. |
+| Trigger | A user asks to iteratively improve a harness skill, fix skill-quality findings, resolve scanner alerts on a skill, or resume a previously escalated skill-improvement run. |
 | Authority | Reversible local writes only. Edit files within the resolved skill directory and the `.code-improver/` run-artifact directory. No remote mutation, credential change, paid action, publishing, or deployment. Roll back any edit by restoring the prior file content from the run artifact or version control. |
 | Side effect | Resolved skill/plugin scope plus `.code-improver` run artifacts and metrics. |
 | Done | A final skill review contains no critical or major findings and finalization edits pass scope and regression checks, or a non-success terminal status is reported without being presented as convergence. In scanner mode, a clean scan with information preserved and the pre-authoring checklist passed. |

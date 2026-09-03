@@ -1,6 +1,6 @@
 ---
 name: gate-and-merge
-description: 'Land a queue of open PRs: gate each PR, sweep its review feedback to root cause, then merge, repair, hold, or close it. Human-only.'
+description: 'Use when landing a queue of open PRs: gate each PR, sweep its review feedback to root cause, then merge, repair, hold, or close it. Human-only.'
 disable-model-invocation: true
 ---
 

@@ -38,4 +38,4 @@ description: 'Use when a user wants a looser conceptual graph for exploratory wo
 - Rollback: the artifact is a single local file. Delete or overwrite it to revert. No other state is mutated.
 
 ## Output
-A single freeform conceptual graph artifact ordered: node list (with confidence markers), labeled edge list (allowing cycles), provisional cluster summary, high-value bridge targets, open-questions list — human-readable, revisable without tooling.
+A single freeform conceptual graph artifact ordered: node list (with confidence markers), labeled edge list (allowing cycles), provisional cluster summary, high-value bridge targets, open-questions list, human-readable, revisable without tooling.

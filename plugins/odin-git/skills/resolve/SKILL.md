@@ -1,6 +1,6 @@
 ---
 name: resolve
-description: 'Use when addressing review feedback or analyzing whether a comment is valid. Classifies each comment VALID ISSUE / NOT AN ISSUE / NEEDS CLARIFICATION with evidence and a recommended solution. Not for GitHub PR review threads — use resolve-pr-feedback.'
+description: 'Use when addressing review feedback or analyzing whether a comment is valid. Classifies each comment VALID ISSUE / NOT AN ISSUE / NEEDS CLARIFICATION with evidence and a recommended solution. Not for GitHub PR review threads: use resolve-pr-feedback.'
 ---
 
 # Resolve
@@ -16,7 +16,7 @@ description: 'Use when addressing review feedback or analyzing whether a comment
 
 ## Inputs
 
-The user supplies review comments — the text of each comment and any associated code context. The user also supplies the location in the codebase under review, or the model reads it directly using only read-only tools.
+The user supplies review comments: the text of each comment and any associated code context. The user also supplies the location in the codebase under review, or the model reads it directly using only read-only tools.
 
 ## Procedure
 
@@ -25,9 +25,9 @@ The user supplies review comments — the text of each comment and any associate
 2. For each comment, explore the referenced code location using only read-only tools: `grep`, `read`, `glob`, or shell equivalents (`eza`, `rg`, `fd`, `head`, `tail`). Never invoke `bash` with write operations (`mkdir`, `touch`, `rm`, `cp`, `mv`, `git add`, `git commit`, `npm install`, redirect operators `>`, `>>`, or heredocs that create files). Do not use `ast-grep` or any tool with write, rename, delete, or staging arguments.
 
 3. Classify each comment:
-   - **VALID ISSUE** — the concern is confirmed by the code. Propose three distinct solutions with trade-offs and name the recommended one with justification.
-   - **NOT AN ISSUE** — the concern is not supported by the code or contradicts project patterns. Supply evidence from the code.
-   - **NEEDS CLARIFICATION** — the comment cannot be assessed without additional context. State exactly what is missing.
+   - VALID ISSUE: the concern is confirmed by the code. Propose three distinct solutions with trade-offs and name the recommended one with justification.
+   - NOT AN ISSUE: the concern is not supported by the code or contradicts project patterns. Supply evidence from the code.
+   - NEEDS CLARIFICATION: the comment cannot be assessed without additional context. State exactly what is missing.
 
 4. Stop before proposing solutions for any comment classified NOT AN ISSUE or NEEDS CLARIFICATION.
 
@@ -39,4 +39,4 @@ The user supplies review comments — the text of each comment and any associate
 - Non-mutation rule: no edit, write, commit, push, deployment, credential use, or remote call is ever performed.
 
 ## Output
-Per comment, in order: Comment, Status (VALID ISSUE | NOT AN ISSUE | NEEDS CLARIFICATION), then the status-specific block — for VALID ISSUE three numbered Solutions with trade-offs and the Recommended pick; for NOT AN ISSUE the Reason and Evidence; for NEEDS CLARIFICATION the exact Missing information. Stop after the last comment; emit no summary or overall-PR content.
+Per comment, in order: Comment, Status (VALID ISSUE | NOT AN ISSUE | NEEDS CLARIFICATION), then the status-specific block, for VALID ISSUE three numbered Solutions with trade-offs and the Recommended pick; for NOT AN ISSUE the Reason and Evidence; for NEEDS CLARIFICATION the exact Missing information. Stop after the last comment; emit no summary or overall-PR content.

@@ -25,7 +25,7 @@ Both are required. If the catalog is unavailable, stop and report the blocker.
 
 1. Extract the core action and domain from the task description. **Done when:** the core action and domain are identified.
 2. Search the installed skill catalog exhaustively for skills whose trigger predicate could match the extracted action and domain. Test broad and narrow phrasings of the task to avoid false gaps. **Done when:** the matching set is enumerated with the search strategy recorded.
-3. If one or more skills match, name the best-matching skill and quote its trigger sentence. Report the selection rationale. Do not invoke the skill or route the user to it — naming the owner is the terminal output. **Done when:** the owning skill is named with its trigger sentence and rationale, without invocation.
+3. If one or more skills match, name the best-matching skill and quote its trigger sentence. Report the selection rationale. Do not invoke the skill or route the user to it: naming the owner is the terminal output. **Done when:** the owning skill is named with its trigger sentence and rationale, without invocation.
 4. If no skill matches, produce a missing-skill brief containing: the task description, the exhaustive search strategy used and why it found no match, and the trigger predicate a new skill would need. **Done when:** the brief contains all three elements.
 5. Never invent behavior, fork a near-duplicate, or widen scope. **Done when:** no invention, fork, or scope widening occurred.
 

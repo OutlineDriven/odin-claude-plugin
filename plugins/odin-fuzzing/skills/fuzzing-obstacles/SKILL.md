@@ -1,6 +1,6 @@
 ---
 name: fuzzing-obstacles
-description: 'Use when asked to identify and bypass checksums, nondeterminism, or validation barriers that block fuzzing coverage. Patches the SUT behind an explicit fuzzing build flag with false-positive risk assessed. Not for dictionary creation — use fuzzing-dictionary. Local writes only.'
+description: 'Use when asked to identify and bypass checksums, nondeterminism, or validation barriers that block fuzzing coverage. Patches the SUT behind an explicit fuzzing build flag with false-positive risk assessed. Not for dictionary creation: use fuzzing-dictionary. Local writes only.'
 ---
 
 # Fuzzing obstacles
@@ -16,8 +16,8 @@ description: 'Use when asked to identify and bypass checksums, nondeterminism, o
 
 ## Not for
 
-- Dictionary creation for fixed-token gates — use fuzzing-dictionary.
-- Coverage measurement or plateau analysis — use fuzzing-coverage-analysis.
+- Dictionary creation for fixed-token gates: use fuzzing-dictionary.
+- Coverage measurement or plateau analysis: use fuzzing-coverage-analysis.
 - Remote, credential, publish, deploy, or irreversible changes.
 
 ## Inputs
@@ -50,4 +50,4 @@ Rollback: delete the conditional compilation block (or remove the fuzz build con
 
 ## Output
 
-Conditional-compilation patches in the System Under Test (each gated on the fuzzing build flag and documented), a coverage delta showing improved reachability over the unpatched baseline, and a per-patch false-positive risk classification (LOW / MEDIUM / MITIGATED) with rationale — unresolved obstacles reported as such with evidence rather than marked done.
+Conditional-compilation patches in the System Under Test (each gated on the fuzzing build flag and documented), a coverage delta showing improved reachability over the unpatched baseline, and a per-patch false-positive risk classification (LOW / MEDIUM / MITIGATED) with rationale, unresolved obstacles reported as such with evidence rather than marked done.

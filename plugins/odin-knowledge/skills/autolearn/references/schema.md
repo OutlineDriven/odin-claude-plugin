@@ -1,4 +1,4 @@
-# Frontmatter contract — `docs/solutions/`
+# Frontmatter contract: `docs/solutions/`
 
 Canonical schema for learning docs written by `autolearn`. Read this when classifying a track, assembling frontmatter, or validating. The validator (`scripts/validate-frontmatter.py`) catches only silent YAML corruption; you must still enforce the field and enum rules below.
 
@@ -63,7 +63,7 @@ No required fields beyond the shared core. All optional:
 | `tooling_decision` | `docs/solutions/tooling-decisions/` |
 | `convention` | `docs/solutions/conventions/` |
 
-Filename: `[sanitized-problem-slug].md` — no date suffix (the `date` field carries that).
+Filename: `[sanitized-problem-slug].md`: no date suffix (the `date` field carries that).
 
 ## Validation rules
 
@@ -85,7 +85,7 @@ Strict YAML parsers (`yq`, `js-yaml` strict, PyYAML) misread array items that *s
 
 `` ` ``  `[`  `]`  `{`  `}`  `,`  `*`  `&`  `!`  `|`  `>`  `%`  `@`  `?`
 
-Also quote when the value contains `": "` — that punctuation confuses flow-style parsers. The list above is the set that actually shows up at the front of solution-doc values, not an exhaustive YAML indicator catalogue; when unsure, just quote, and let a real YAML parse be the backstop.
+Also quote when the value contains `": "`: that punctuation confuses flow-style parsers. The list above is the set that actually shows up at the front of solution-doc values, not an exhaustive YAML indicator catalogue; when unsure, just quote, and let a real YAML parse be the backstop.
 
 Before (breaks strict YAML):
 
@@ -101,4 +101,4 @@ symptoms:
   - "`flush-cache` does not restore in-container mDNS"
 ```
 
-Scalar fields (`title:`, `module:`) have a separate failure mode — an unquoted ` #` truncates at the comment, an unquoted `: ` reframes as a mapping. `scripts/validate-frontmatter.py` catches those; quote and re-run until it exits 0.
+Scalar fields (`title:`, `module:`) have a separate failure mode, an unquoted ` #` truncates at the comment, an unquoted `: ` reframes as a mapping. `scripts/validate-frontmatter.py` catches those; quote and re-run until it exits 0.

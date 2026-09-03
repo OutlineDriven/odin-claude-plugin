@@ -34,4 +34,4 @@ description: 'Use when an artifact or skill has just changed and is about to be 
 - Partial-result rule: if any check fails and cannot be resolved, the done predicate is not met regardless of other passing checks.
 
 ## Output
-The artifact with all check findings applied, or the check log recording every skip with its reason — plus a concrete check-run report naming artifact path, checks invoked, results per check, and any deferred items with stated reasons.
+The artifact with all check findings applied, or the check log recording every skip with its reason, plus a concrete check-run report naming artifact path, checks invoked, results per check, and any deferred items with stated reasons.

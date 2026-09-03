@@ -60,4 +60,4 @@ disable-model-invocation: true
 
 ## Output
 
-A report at `reports/git_history_analysis/git_analysis_YYYY-MM-DD.md` ordered: title and period header, TL;DR, active features in progress, recently completed (merged to the default branch), commit breakdown by type, most active areas, key insights, risks and observations, follow-up questions. Evidence-driven — cite specific commits, branches, or metrics; separate facts from interpretations; note incomplete data. No author attribution.
+A report at `reports/git_history_analysis/git_analysis_YYYY-MM-DD.md` ordered: title and period header, TL;DR, active features in progress, recently completed (merged to the default branch), commit breakdown by type, most active areas, key insights, risks and observations, follow-up questions. Evidence-driven: cite specific commits, branches, or metrics; separate facts from interpretations; note incomplete data. No author attribution.

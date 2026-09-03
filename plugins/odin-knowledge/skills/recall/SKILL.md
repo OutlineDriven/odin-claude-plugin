@@ -1,6 +1,6 @@
 ---
 name: recall
-description: 'Use when asked to recover prior work and current status before resuming. Returns a status-tagged capsule and one concrete next move. Not for handoff snapshots — use handoff. Not for tasks that require source or remote-system changes.'
+description: 'Use when asked to recover prior work and current status before resuming. Returns a status-tagged capsule and one concrete next move. Not for handoff snapshots: use handoff. Not for tasks that require source or remote-system changes.'
 ---
 
 # Recall

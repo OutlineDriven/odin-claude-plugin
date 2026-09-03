@@ -2,7 +2,7 @@
 
 Read this when a search returns 0 matches unexpectedly, or before running a rewrite. ast-grep matches *AST shape*, not text. Most "0 matches" surprises trace to one of the sections below.
 
-## §1 — ast-grep is not regex
+## §1: ast-grep is not regex
 
 A pattern is parsed as code, then matched structurally. Regex metacharacters are not interpreted: they either parse to literal code with the wrong meaning, or fail to parse and produce an `(ERROR ...)` node that silently matches nothing.
 
@@ -22,7 +22,7 @@ The only wildcards are meta-variables:
 
 Note: the helper's `validate` catches the `\w` / `\d` / `\s` / `.*` class as a hint, but its authoritative check is whether the pattern parses to a clean CST (no `(ERROR` nodes). A clean parse with the wrong intent, like `foo|bar`, passes validation yet still matches the wrong thing.
 
-## §2 — Patterns must be valid code
+## §2: Patterns must be valid code
 
 The pattern is fed to the language's parser before matching. If the fragment is syntactically incomplete, it produces an ERROR node and matches nothing.
 
@@ -37,7 +37,7 @@ ast-grep run -p '<pattern>' -l <lang> --debug-query=cst
 
 If the output shows `(ERROR ...)` anywhere, the pattern is malformed; fix it before trusting the (empty) result.
 
-## §3 — `--json` and `--update-all` conflict; preview and apply are separate passes
+## §3: `--json` and `--update-all` conflict; preview and apply are separate passes
 
 `--update-all` conflicts with `--json` (see `-U` in `ast-grep run --help`: "It conflicts with both the `--interactive`, `--json` ... flags"). You cannot get a JSON preview and a mutation from one invocation: combine them and files stay untouched while JSON still prints, so a script that expects the write to land silently never applies it.
 
@@ -50,7 +50,7 @@ ast-grep run -p P -r R -l L --update-all .     # pass 2: apply
 
 The skill's `scripts/ast_grep_helper.py replace` does this automatically: dry-run (preview) by default, and `--apply` triggers the second pass that actually writes.
 
-## §4 — Named vs unnamed nodes
+## §4: Named vs unnamed nodes
 
 `$VAR` captures **named** nodes: identifiers, expressions, statements. Operators, punctuation, and keywords are **unnamed** in the grammar; `$VAR` will not bind to them. Capture unnamed nodes with `$$`.
 
@@ -62,7 +62,7 @@ This bites on punctuation-heavy syntax:
 
 If a pattern aimed at an operator returns nothing, the operator is almost certainly an unnamed node; reach for `$$`.
 
-## §5 — Contextual patterns for ambiguous grammars
+## §5: Contextual patterns for ambiguous grammars
 
 A bare fragment can parse as the wrong node type because the parser picks whatever production fits a standalone snippet. The match then never fires against real code where the fragment is a different kind of node.
 
@@ -80,7 +80,7 @@ Common offenders that need a context wrapper:
 
 Concrete trap: bare `foo($X)` in C parses as `macro_type_specifier`, not a call expression, so it silently misses every real call.
 
-## §6 — Meta-variable naming
+## §6: Meta-variable naming
 
 Meta-variable names must match `[A-Z_][A-Z_0-9]*`: start with an uppercase letter or underscore, then uppercase letters, digits, or the underscore character.
 
@@ -91,13 +91,13 @@ Meta-variable names must match `[A-Z_][A-Z_0-9]*`: start with an uppercase lette
 
 If a pattern with a lowercase meta-variable returns nothing, rename it to uppercase first.
 
-## §7 — stdin needs `--lang`; tsx ≠ ts; single-pass rewriting
+## §7: stdin needs `--lang`; tsx ≠ ts; single-pass rewriting
 
 - **stdin has no extension to infer from.** For file arguments, `run` / `scan` infer the language from the file extension. For `--stdin`, `--lang` is **required**; there is nothing to infer, and omitting it errors or mis-parses.
 - **`tsx` ≠ `ts`.** Use `--lang tsx` for any file containing JSX. `--lang ts` mis-parses JSX (the `<Tag>` syntax collides with type assertions / generics), so JSX patterns silently miss.
 - **Rewrites are single-pass.** `fix:` / `-r` rewrites only the **outermost** matching node. Nested transforms (e.g. rewriting `Optional[Union[...]]` where both the outer and inner type need changing) require a `rewriters` array to recurse into the captured sub-nodes.
 
-## §8 — `sg` ↔ `setgroups` collision (Linux)
+## §8: `sg` ↔ `setgroups` collision (Linux)
 
 The short binary name `sg` collides with shadow-utils' `sg` (the `setgroups` / run-a-command-with-group binary) on Linux. Invoking `sg` may run the wrong program.
 

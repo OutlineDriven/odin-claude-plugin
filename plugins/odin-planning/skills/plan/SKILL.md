@@ -1,6 +1,6 @@
 ---
 name: plan
-description: 'Use when a user commits to a direction and asks to plan, brief, research, or operationalize it. Classifies type and tier, researches read-only, and writes to plans/ after acknowledgment. Not for scoring — use planning; not for codebase audit — use plan-review.'
+description: 'Use when a user commits to a direction and asks to plan, brief, research, or operationalize it. Classifies type and tier, researches read-only, and writes to plans/ after acknowledgment. Not for scoring, use planning; not for codebase audit, use plan-review.'
 ---
 
 # Knowledge plan
@@ -41,4 +41,4 @@ description: 'Use when a user commits to a direction and asks to plan, brief, re
 - No research findings. Write the plan with a "Sparse" marker and an explicit list of what was checked and found empty.
 
 ## Output
-A file at `plans/{type}-{descriptive-name}.md` (or `-{date}.md` on collision) containing the type-correct answer first, then classified type and tier, sourced metrics, open questions, and references — not done until the user acknowledges the context brief.
+A file at `plans/{type}-{descriptive-name}.md` (or `-{date}.md` on collision) containing the type-correct answer first, then classified type and tier, sourced metrics, open questions, and references, not done until the user acknowledges the context brief.

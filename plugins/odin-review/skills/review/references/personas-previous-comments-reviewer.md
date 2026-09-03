@@ -11,6 +11,6 @@ HUNT (cite `path:line` for each):
 3. A change made to address a previous comment has been reverted or overwritten by subsequent commits.
 4. A regression of a prior fix: code that was corrected in earlier review rounds is broken again.
 
-SEVERITY ANCHORS: an unaddressed P0-class prior comment is P0; a dropped test request or edge-case fix is P1; a nit the author chose not to take is not flagged. Apply `_contract.md`.
+SEVERITY ANCHORS: an unaddressed P0-class prior comment is P0; a dropped test request or edge-case fix is P1; a nit the author chose not to take is not flagged. Apply `personas-_contract.md`.
 
 NOTE: return an empty findings array immediately if no PR context or prior review comments are available. Do not invent findings.

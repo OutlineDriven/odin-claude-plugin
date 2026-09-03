@@ -1,6 +1,6 @@
-# TypeScript — jest/vitest deletion patterns
+# TypeScript, jest/vitest deletion patterns
 
-TypeScript with `strict: true` is a static-guarantee language. The compiler proves that interfaces have the fields they declare, that functions return their declared types (modulo `any`/`unknown`/casts), and that exhaustive matches handle every case. **Tests that assert these properties catch no bug the compiler does not** — delete them.
+TypeScript with `strict: true` is a static-guarantee language. The compiler proves that interfaces have the fields they declare, that functions return their declared types (modulo `any`/`unknown`/casts), and that exhaustive matches handle every case. **Tests that assert these properties catch no bug the compiler does not**; delete them.
 
 The carve-out: if the codebase uses `any`, `unknown`, or unchecked JSON parses, the static guarantee leaks and shape tests at the leak boundary become real-bug tests. Use Zod or io-ts at the boundary instead, then delete the shape tests.
 
@@ -37,7 +37,7 @@ it("constructor stores repo and logger", () => {
 });
 ```
 
-`public` parameter properties are a TS feature — the compiler proves the assignment. Delete.
+`public` parameter properties are a TS feature, the compiler proves the assignment. Delete.
 
 ### Identity passthrough / re-export
 
@@ -47,7 +47,7 @@ it("getUser returns the input id wrapped", () => {
 });
 ```
 
-If `wrapId` does no validation or transformation worth testing, the test describes the type signature `(n: number) => { id: number }` — which the compiler already enforces.
+If `wrapId` does no validation or transformation worth testing, the test describes the type signature `(n: number) => { id: number }`, which the compiler already enforces.
 
 ### Mocked-everything test
 
@@ -73,7 +73,7 @@ it("parseUserPayload rejects malformed JSON shape", () => {
 });
 ```
 
-`JSON.parse` returns `any` — the compiler cannot help here. The test verifies the runtime guard at the boundary. Keep.
+`JSON.parse` returns `any`, the compiler cannot help here. The test verifies the runtime guard at the boundary. Keep.
 
 ### HTTP contract
 
@@ -84,13 +84,13 @@ it("POST /users returns 400 on missing email", async () => {
 });
 ```
 
-Protocol contract — the type system does not check HTTP semantics. Keep.
+Protocol contract, the type system does not check HTTP semantics. Keep.
 
 ### Discriminated-union exhaustiveness (when relying on runtime check)
 
 ```ts
 it("handlePayment returns error for unknown method", () => {
-  // @ts-expect-error — runtime check, not compile-time
+  // @ts-expect-error, runtime check, not compile-time
   expect(handlePayment({ method: "crypto" })).toEqual({ ok: false });
 });
 ```

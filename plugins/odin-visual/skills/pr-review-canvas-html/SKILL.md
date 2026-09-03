@@ -1,6 +1,6 @@
 ---
 name: pr-review-canvas-html
-description: 'Use when asked to render a GitHub PR as a standalone review HTML page. Fetches PR data via gh API, renders diffs with move detection, and serves the artifact on a local port. Not for Cursor Canvas output — use pr-review-canvas.'
+description: 'Use when asked to render a GitHub PR as a standalone review HTML page. Fetches PR data via gh API, renders diffs with move detection, and serves the artifact on a local port. Not for Cursor Canvas output: use pr-review-canvas.'
 ---
 
 # PR review canvas HTML

@@ -1,6 +1,6 @@
 ---
 name: differential-security-review
-description: 'Use when given a PR, commit, diff, or baseline and asked for security regressions, blast radius, test gaps, or adversarial review. Risk-classifies changes and writes an evidence-backed report. Not for whole-codebase audit — use security-review. No remote or irreversible changes.'
+description: 'Use when given a PR, commit, diff, or baseline and asked for security regressions, blast radius, test gaps, or adversarial review. Risk-classifies changes and writes an evidence-backed report. Not for whole-codebase audit: use security-review. No remote or irreversible changes.'
 ---
 
 # Differential security review
@@ -76,11 +76,11 @@ Prioritize risk and use evidence. Focus on auth, crypto, external calls, value t
 
 ### 5. Adversarial analysis (HIGH RISK only)
 
-15. For each HIGH RISK change, run the 5-step adversarial methodology — perform it inline or delegate it to a subagent:
+15. For each HIGH RISK change, run the 5-step adversarial methodology; perform it inline or delegate it to a subagent:
     1. **Attacker model**: WHO (unauthenticated external user, authenticated user, malicious admin, compromised upstream service or contract, front-runner/MEV bot), WHAT access/privileges, WHERE they interact (HTTP endpoints, contract functions, RPCs).
-    2. **Concrete attack vectors**: ENTRY POINT, ATTACK SEQUENCE (specific call with parameters → how it reaches the vulnerable code → what happens → impact), PROOF OF ACCESSIBILITY (function is public/external, attacker holds required permissions, path is reachable — verify with Grep/Read, never assume).
+    2. **Concrete attack vectors**: ENTRY POINT, ATTACK SEQUENCE (specific call with parameters → how it reaches the vulnerable code → what happens → impact), PROOF OF ACCESSIBILITY (function is public/external, attacker holds required permissions, path is reachable; verify with Grep/Read, never assume).
     3. **Exploitability rating**: EASY (single call, public interface, no special state), MEDIUM (multiple steps, specific timing, elevated but obtainable privileges), HARD (admin access, rare conditions, significant resources).
-    4. **Complete exploit scenario**: attacker starting position, step-by-step exploitation with exact commands/parameters and file:line references, concrete measurable impact (exact data/funds/privileges, quantified scope) — never "could cause issues".
+     4. **Complete exploit scenario**: attacker starting position, step-by-step exploitation with exact commands/parameters and file:line references, concrete measurable impact (exact data/funds/privileges, quantified scope), never "could cause issues".
     5. **Baseline cross-reference**: does it violate a system-wide invariant, break a trust boundary, bypass a validation pattern, or regress a previous fix (check git blame/log).
 
     **Done when:** every HIGH RISK change has all five adversarial steps completed with proof of accessibility verified.
@@ -104,7 +104,7 @@ These require adversarial analysis regardless of requested depth.
 - Greenfield code with no baseline to compare.
 - Documentation-only changes (no security impact).
 - Formatting or linting changes (cosmetic).
-- The user explicitly requests a quick summary only and accepts the risk — then use the Quick Reference (size strategy, risk triggers, red flags) and skip the detailed phases, but still apply the red-flag escalations.
+- The user explicitly requests a quick summary only and accepts the risk; then use the Quick Reference (size strategy, risk triggers, red flags) and skip the detailed phases, but still apply the red-flag escalations.
 
 ## Failure and recovery
 - Missing baseline or unreadable diff: stop; report the exact target/baseline that could not be resolved. Do not invent a baseline.

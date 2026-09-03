@@ -17,13 +17,13 @@ description: 'Use when asked to validate a web app, CLI, API, or generated artif
 ## Inputs
 
 - A behavior contract: a list of clauses, each with an identifier, a stimulus, and an expected observable outcome. Must be supplied.
-- A target descriptor: how to reach the subject — a URL, a CLI invocation, an API endpoint, or an artifact path. Must be supplied.
+- A target descriptor: how to reach the subject, a URL, a CLI invocation, an API endpoint, or an artifact path. Must be supplied.
 - Optional: authentication material (tokens, headers), environment variables, seed data, or a run budget.
 - Source code, repository state, and build internals are never inputs and must not be read.
 
 ## Procedure
 
-1. Parse the contract into clauses. Reject any clause whose expected outcome references source structure (file names, function names, internal types, line numbers) — mark it out-of-scope, because source-blind validation cannot observe implementation structure. Done when: all clauses are parsed and source-referencing clauses are marked out-of-scope.
+1. Parse the contract into clauses. Reject any clause whose expected outcome references source structure (file names, function names, internal types, line numbers), mark it out-of-scope, because source-blind validation cannot observe implementation structure. Done when: all clauses are parsed and source-referencing clauses are marked out-of-scope.
 2. Establish source-blind isolation for the whole run: do not read, list, grep, or otherwise inspect source files, repository state, or build internals. Operate only against the target's runtime surface. Done when: source-blind isolation is established and maintained.
 3. For each in-scope clause, construct a probe from its stimulus: an HTTP request, a CLI invocation, an API call, or an artifact inspection limited to observable output. Done when: every in-scope clause has a constructed probe.
 4. Apply anti-cheat probes per clause: re-run the stimulus with perturbed and edge inputs (empty, oversized, malformed, reordered, boundary values) to distinguish genuine behavior from hardcoded or coincidental outputs. Record whether the outcome is stable across the perturbations. Done when: every clause has its anti-cheat stability flag recorded.
@@ -41,4 +41,4 @@ description: 'Use when asked to validate a web app, CLI, API, or generated artif
 - The blocked/non-converged result is a report whose summary shows one or more blocked clauses and zero inferred results.
 
 ## Output
-A structured behavior validation report ordered: per-clause results (identifier, classification pass/fail/blocked/out-of-scope, redacted evidence excerpt, anti-cheat stability flag), summary count of each classification — the report contains no source references.
+A structured behavior validation report ordered: per-clause results (identifier, classification pass/fail/blocked/out-of-scope, redacted evidence excerpt, anti-cheat stability flag), summary count of each classification: the report contains no source references.

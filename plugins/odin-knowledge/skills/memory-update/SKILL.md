@@ -1,6 +1,6 @@
 ---
 name: memory-update
-description: 'Use when the user explicitly says to save something to memory or scan this session for memories. Derives evidence-backed proposals, confirms each with the user, and writes validated memory files with read-back. Not for auditing memory — use memory-clean.'
+description: 'Use when the user explicitly says to save something to memory or scan this session for memories. Derives evidence-backed proposals, confirms each with the user, and writes validated memory files with read-back. Not for auditing memory: use memory-clean.'
 disable-model-invocation: true
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: culture-interview-debrief
-description: 'Use when a predicted Culture Index profile needs comparison with role requirements, team composition, and manager profile to inform a hiring decision. Maps trait matches and confidence to numeric scores, produces a recommendation on a defined ladder, and names verification areas. Not for transcript prediction — use culture-interview-profile-prediction.'
+description: 'Use when a predicted Culture Index profile needs comparison with role requirements, team composition, and manager profile to inform a hiring decision. Maps trait matches and confidence to numeric scores, produces a recommendation on a defined ladder, and names verification areas. Not for transcript prediction: use culture-interview-profile-prediction.'
 ---
 
 # Culture interview debrief
@@ -43,10 +43,10 @@ Predictions are preliminary; the actual Culture Index survey is administered aft
 7. Calculate the weighted dimension score. Map each trait's match classification to a numeric value: Y -> 3, ~ -> 2, N -> 0. Map each trait's confidence to a weight: High -> 1.0, Medium -> 0.67, Low -> 0.33. For each dimension (role fit, team fit, red-flag impact, manager fit), compute the dimension score as the average of (match_value x confidence_weight) across the traits in that dimension, yielding a 0-3 scale. For red-flag impact, invert: no hit -> 3, Low-severity hit -> 2, Medium-severity hit -> 1, High-severity hit -> 0, weighted by the trait confidence the hit rests on. Omit any dimension lacking its input rather than scoring it as zero. Compute the overall score as the average of the available dimension scores. Done when: every available dimension has a 0-3 numeric score and the overall score is computed.
 
 8. Map the overall score to a recommendation on this ladder:
-   - Overall >= 2.5 and no High-severity red-flag hit: Proceed — extend offer, plan for survey verification.
-   - Overall >= 2.0 and < 2.5, or overall >= 2.5 with a High-severity red-flag hit: Proceed with awareness — extend offer, prepare onboarding adjustments, flag the red-flag area for survey verification.
-   - Overall >= 1.5 and < 2.0: Discuss — review concerns with the hiring team before deciding.
-   - Overall < 1.5: Pause — additional interviews or reconsider the candidate.
+   - Overall >= 2.5 and no High-severity red-flag hit: Proceed. Extend offer, plan for survey verification.
+   - Overall >= 2.0 and < 2.5, or overall >= 2.5 with a High-severity red-flag hit: Proceed with awareness. Extend offer, prepare onboarding adjustments, flag the red-flag area for survey verification.
+   - Overall >= 1.5 and < 2.0: Discuss. Review concerns with the hiring team before deciding.
+   - Overall < 1.5: Pause. Additional interviews or reconsider the candidate.
    Any High-severity red-flag hit caps the recommendation at Proceed with awareness regardless of score. Done when: a recommendation is assigned with the triggering threshold cited.
 
 9. Compile the debrief. Include predicted profile summary with confidence; fit assessment for each available dimension with its numeric score; red flags with hit count and severity; the overall score and the recommendation with a one-to-two sentence rationale; areas to verify with the actual survey (lower-confidence traits, role-critical traits, borderline predictions); onboarding considerations if hired; and caveats: predictions are not facts, interview behavior may differ from natural behavior, the actual survey follows offer acceptance, predictions should inform not determine hiring, Culture Index predicts drives not capabilities, and technical skills, experience, and cultural interview still matter. Done when: the debrief is compiled with all sections.

@@ -56,9 +56,9 @@ Resume the register once the high-stakes section ends.
 
 ### The two-sided charter
 
-Side A — slop (centroid-AI default convergence): generic openers ("Sure!", "Of course"), hedge-stacks ("perhaps it might be"), validation phrases ("you're absolutely right"), AI-flat prose with no rhythm, default palettes, defensive nil-checks where impossible, 50/50 decision hedges that pick nothing.
+Side A: slop (centroid-AI default convergence): generic openers ("Sure!", "Of course"), hedge-stacks ("perhaps it might be"), validation phrases ("you're absolutely right"), AI-flat prose with no rhythm, default palettes, defensive nil-checks where impossible, 50/50 decision hedges that pick nothing.
 
-Side B — overkill (decoration covering thin ideas): gradient stacks on every section, thesaurus-soup prose ("orchestrate the comprehensive synthesis of"), abstraction towers (4 layers where 1 suffices), complexity-flex masking absent conviction, ceremony that performs depth without delivering it.
+Side B: overkill (decoration covering thin ideas): gradient stacks on every section, thesaurus-soup prose ("orchestrate the comprehensive synthesis of"), abstraction towers (4 layers where 1 suffices), complexity-flex masking absent conviction, ceremony that performs depth without delivering it.
 
 | Domain   | Side A (slop)                            | Side B (overkill)                        |
 |----------|------------------------------------------|------------------------------------------|

@@ -46,7 +46,7 @@ description: 'Use when a run could be over- or under-powered, before dispatching
 - No rollback applies: this skill is read-only and advisory.
 
 ## Output
-A report naming exactly one capability tier (`fast`/`standard`/`frontier`), one effort level (`glance`/`measured`/`thorough`/`exhaustive`), a shared rationale, move-up and move-down triggers per dial, and the proof surface — no routing, vendor, or orchestration claim.
+A report naming exactly one capability tier (`fast`/`standard`/`frontier`), one effort level (`glance`/`measured`/`thorough`/`exhaustive`), a shared rationale, move-up and move-down triggers per dial, and the proof surface, no routing, vendor, or orchestration claim.
 
 Machine-readable block:
 

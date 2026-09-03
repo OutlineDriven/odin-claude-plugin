@@ -1,6 +1,6 @@
 ---
 name: clean-clean-cut
-description: 'Use when asked to run /clean-clean-cut to cut accumulated records and residue under an explicit destructive gate with version-control recovery. Don''t use for untracked targets, changes without a version-control rollback, or git branch/worktree cleanup — use git-cleanup.'
+description: 'Use when asked to run /clean-clean-cut to cut accumulated records and residue under an explicit destructive gate with version-control recovery. Don''t use for untracked targets, changes without a version-control rollback, or git branch/worktree cleanup: use git-cleanup.'
 disable-model-invocation: true
 ---
 

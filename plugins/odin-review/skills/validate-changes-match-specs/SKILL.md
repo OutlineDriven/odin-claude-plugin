@@ -1,6 +1,6 @@
 ---
 name: validate-changes-match-specs
-description: 'Use when asked to compare implementation against repository specs, report material mismatches, and resolve each one by the user''s decision. Also handles acknowledged PR-review commitments when the branch has review history. Not for general fact-checking — use verify-both-ways.'
+description: 'Use when asked to compare implementation against repository specs, report material mismatches, and resolve each one by the user''s decision. Also handles acknowledged PR-review commitments when the branch has review history. Not for general fact-checking: use verify-both-ways.'
 ---
 
 # Validate changes match specs

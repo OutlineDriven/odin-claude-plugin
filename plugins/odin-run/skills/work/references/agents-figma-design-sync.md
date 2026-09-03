@@ -87,7 +87,7 @@ Common Tailwind values to prefer:
 - Use `gap-10 lg:gap-[100px]` for responsive gaps.
 - Use `w-full lg:w-auto lg:flex-1` to make sections responsive.
 - Don't use `flex-shrink-0` unless absolutely necessary.
-- Remove `overflow-hidden` from components — handle overflow at wrapper level if needed.
+- Remove `overflow-hidden` from components; handle overflow at wrapper level if needed.
 
 ### Example of good component structure
 

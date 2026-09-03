@@ -40,21 +40,21 @@ description: 'Use when an agreement-seeking interaction arises, including mid-co
 
 5. **Execute mode-specific procedure:**
 
-   **prepare** — Build a mandate and mutual-gains agenda:
+   **prepare**. Build a mandate and mutual-gains agenda:
    a. Draft the mandate: the opening position, target outcome, reservation point, and the objective criteria supporting each.
    b. Construct the MAP (Mutual-gains Agenda Protocol): a list of issues ordered by joint-gain potential, with proposed trades and package deals.
    c. Script the opening statement: a concise framing that names shared interests and invites collaborative problem-solving.
    d. Anticipate the top three objections or moves the counterparty is likely to make. For each, prepare a response that reframes toward joint value.
    e. If the situation involves multiple parties or internal team dynamics, note coalition structure and team roles.
 
-   **live** — Provide real-time response scripts:
+   **live**. Provide real-time response scripts:
    a. Analyze the latest counterparty statement for its underlying interest, implicit concession, or anchoring move.
    b. Classify the move: anchor, concession signal, objection, reframing, stalling, or power play.
    c. Draft a response script (2-4 sentences) that addresses the move, advances the position, and maintains the influence-not-manipulation line.
    d. Flag any moment where the counterparty has implicitly conceded or revealed a new interest. Name it explicitly.
    e. If the exchange has reached a decision point, state whether to close, package-trade, or pause.
 
-   **debrief** — Conduct a retrospective with pathology analysis:
+   **debrief**. Conduct a retrospective with pathology analysis:
    a. Reconstruct the negotiation timeline: key moves, turning points, and final outcome.
    b. Score each Mandascan point: was it accurately assessed beforehand? Where was the assessment wrong?
    c. Identify pathologies: anchoring bias, reactive devaluation, escalating commitment, mythical fixed pie, premature closure, or loss of face.

@@ -1,4 +1,4 @@
-# Testing handbook generator — type templates
+# Testing handbook generator: type templates
 
 Branch detail for the 4 skill type section structures and Hugo shortcode
 conversion rules referenced by SKILL.md step 9 (Pass 1) and step 10 (Pass 2).

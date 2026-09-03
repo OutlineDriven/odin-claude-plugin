@@ -75,14 +75,14 @@ If a profile is missing the arrow position, stop and request it. Never substitut
    Done when: each trait position has a named motivator with implementation.
 
 7. **Flag energy concerns.** When both Survey and Job EU are available, compute utilization = Job EU / Survey EU × 100%:
-   - 70-130%: Healthy — maintain current approach.
-   - Below 70%: Frustration — address mismatch, discuss role engagement.
-   - Above 130%: Stress — the direct report is overextending.
+   - 70-130%: Healthy. Maintain current approach.
+   - Below 70%: Frustration. Address mismatch, discuss role engagement.
+   - Above 130%: Stress. The direct report is overextending.
    Survey traits are hardwired (top graph); Job behaviors are adaptive (bottom graph). A large Survey-vs-Job difference means behavior modification that drains energy and predicts burnout if sustained 3-6+ months. Done when: EU utilization is computed and classified, or energy is marked unassessable.
 
 8. **Compile the coaching guide** with these sections: key trait gaps (trait, gap, adjustment needed); communication style adjustments; one-on-one recommendations (frequency, duration, format, opening, feedback); primary motivators with implementation; watch areas; energy status (EU utilization, status, action); things to avoid. Done when: the guide contains all eight sections in order.
 
-9. **Check for anti-patterns** before returning. Change the environment rather than expecting the person to change. Do not project the coach's own motivators onto them, use one-size-fits-all one-on-ones, ignore EU signals (low utilization predicts disengagement and flight risk), treat gaps as problems rather than complementary strengths, or forget that the coach's own profile biases how the person is perceived. Done when: no anti-pattern remains — environment-not-person, no projected motivators, no one-size-fits-all, EU signals addressed, gaps framed as complementary.
+9. **Check for anti-patterns** before returning. Change the environment rather than expecting the person to change. Do not project the coach's own motivators onto them, use one-size-fits-all one-on-ones, ignore EU signals (low utilization predicts disengagement and flight risk), treat gaps as problems rather than complementary strengths, or forget that the coach's own profile biases how the person is perceived. Done when: no anti-pattern remains. Environment-not-person, no projected motivators, no one-size-fits-all, EU signals addressed, gaps framed as complementary.
 
 ## Failure and recovery
 - Missing arrow position: A profile lacks the red-arrow reference for A, B, C, D. Stop. Request the arrow position. Do not fall back to raw absolute values or visual estimation; both produce 20-30% error and invalidate the gap calculation.

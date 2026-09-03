@@ -1,4 +1,4 @@
-# Defer action — report recording
+# Defer action: report recording
 
 This reference defines the Defer action's recording mechanic. When the user chooses Defer on a finding (from the walk-through or from the bulk-preview defer-in-report path), the finding and its rationale are recorded in the completion report's deferred section. The reviewed document is never mutated.
 
@@ -12,14 +12,14 @@ Interactive mode only. Invoked by `references/walkthrough.md` (per-finding Defer
 
 Per deferred finding, record a structured entry in the in-memory deferred-findings list. Each entry carries:
 
-- `{title}` -- the finding's title field
-- `{section}` -- the finding's section field, unmodified
-- `{severity}` -- P0 / P1 / P2 / P3
-- `{reviewer}` -- the persona that produced the finding (after dedup, the persona with the highest confidence anchor; surface all co-flagging personas if multiple)
-- `{confidence}` -- the integer anchor (`50`, `75`, or `100`)
-- `{why_it_matters}` -- the full why_it_matters text
-- `{reason}` -- the user-provided reason for deferring (if any), or the default rationale: "Deferred for later resolution"
-- `{timestamp}` -- ISO 8601 datetime of the deferral decision
+- `{title}`: the finding's title field
+- `{section}`: the finding's section field, unmodified
+- `{severity}`: P0 / P1 / P2 / P3
+- `{reviewer}`: the persona that produced the finding (after dedup, the persona with the highest confidence anchor; surface all co-flagging personas if multiple)
+- `{confidence}`: the integer anchor (`50`, `75`, or `100`)
+- `{why_it_matters}`: the full why_it_matters text
+- `{reason}`: the user-provided reason for deferring (if any), or the default rationale: "Deferred for later resolution"
+- `{timestamp}`: ISO 8601 datetime of the deferral decision
 
 Do not include `suggested_fix` or the full `evidence` array in the deferred entry. The entry is a concern summary for the reader, not a full decision packet.
 
@@ -59,8 +59,8 @@ A. Retry the recording
 B. Convert this finding to Skip
 ```
 
-- **A Retry** -- attempt recording again. On repeated failure, loop back to the same sub-question.
-- **B Convert to Skip** -- record the finding as Skip with an explanatory reason ("deferral recording failed"). The finding is treated as no-action for the remainder of the session.
+- A Retry: attempt recording again. On repeated failure, loop back to the same sub-question.
+- B Convert to Skip: record the finding as Skip with an explanatory reason ("deferral recording failed"). The finding is treated as no-action for the remainder of the session.
 
 If the user does not respond (session ends, terminal disconnects), default to Skip so the in-memory decision state stays consistent.
 

@@ -1,6 +1,6 @@
 ---
 name: shape
-description: 'Use when the user says "shape this", "pitch this", "gut check the shape", "fix this pitch", or asks whether a result matches the bet. Shapes work into a fat-marker pitch with five ingredients: problem, appetite, solution, rabbit holes, no-gos. Not for tasks requiring source or remote-system changes; not for detailed implementation plans — use plan.'
+description: 'Use when the user says "shape this", "pitch this", "gut check the shape", "fix this pitch", or asks whether a result matches the bet. Shapes work into a fat-marker pitch with five ingredients: problem, appetite, solution, rabbit holes, no-gos. Not for tasks requiring source or remote-system changes, not for detailed implementation plans: use plan.'
 ---
 
 # Shape
@@ -71,7 +71,7 @@ Explicit override always wins over auto-detection.
 
 ### shape-check
 
-Conduct an interactive gut check with the user via the AskUserQuestion tool. Ask one single-select question per axis, and keep the axes separate. Put the `(Recommended)` option first; it carries the default, and choosing it accepts that default. Ask at most 4 questions per fire. If more axes remain, send sequential batches in dependency order. Use `multiSelect` only for additive picks (optional sub-scopes), never for axis-with-default semantics.
+Conduct an interactive gut check with the user via the ask-user tool. Ask one single-select question per axis, and keep the axes separate. Put the `(Recommended)` option first; it carries the default, and choosing it accepts that default. Ask at most 4 questions per fire. If more axes remain, send sequential batches in dependency order. Use `multiSelect` only for additive picks (optional sub-scopes), never for axis-with-default semantics.
 
 Axes: appetite right-sized? which scope cuts? each unresolved rabbit hole, patch or re-shape? no-go boundaries holding?
 

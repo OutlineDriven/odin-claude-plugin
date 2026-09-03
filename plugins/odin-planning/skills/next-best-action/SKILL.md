@@ -11,12 +11,12 @@ description: 'Use when a project is between phases, the author asks what to do n
 |---|---|
 | Trigger | A project is between phases, the author asks what to do next, too many valid threads are open, or the work needs re-entry into frame, build, drive, memo, assumption testing, restart, or ship |
 | Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation |
-| Side effect | None — returns one action recommendation |
+| Side effect | None: returns one action recommendation |
 | Done | The recommendation cites the state it read; there is exactly one next action; the action has a clear done-when observable; a reader can tell why this action beats the other visible options |
 
 ## Inputs
 
-- Project state description from the author: where the project is, what is blocked, what the goal is. **Required — absent required state blocks the skill; it does not proceed with caveats.**
+- Project state description from the author: where the project is, what is blocked, what the goal is. **Required: absent required state blocks the skill; it does not proceed with caveats.**
 - Current supplied context: any plan files, task lists, or recent task outputs present in the conversation's current context. Optional.
 - Explicit redacted evidence: any named artifact the author explicitly supplies as redacted evidence for this invocation. Optional.
 - Named current task/plan artifacts: any plan, brief, or task file reachable as a named artifact in the current session. Optional.
@@ -34,7 +34,7 @@ description: 'Use when a project is between phases, the author asks what to do n
 
 | Failure class | Condition | Result |
 |---|---|---|
-| insufficient-state | No author-supplied state description and no current supplied context reachable as a named artifact | Block: return "blocked: insufficient state — supply a project state description or make a plan/task artifact available in the current context" |
+| insufficient-state | No author-supplied state description and no current supplied context reachable as a named artifact | Block: return "blocked: insufficient state, supply a project state description or make a plan/task artifact available in the current context" |
 | missing-required-evidence | Author-supplied state description is absent | Block: do not proceed; return "blocked: required project state description missing" |
 | ambiguous-priority | Multiple actions tie for highest priority | Pick one based on the author's stated goal; note the tie in the recommendation |
 | no-clear-done-when | Selected action has no observable completion condition | Do not return it; state "no clear next action" and stop |
@@ -44,4 +44,4 @@ Non-mutation rule: authority is read-only; return no changes to any file, variab
 
 ## Output
 
-One prioritized action recommendation: next action, evidence citation, done-when observable, reason it beats one alternative — in that order, plain text, exactly one action.
+One prioritized action recommendation: next action, evidence citation, done-when observable, reason it beats one alternative, in that order, plain text, exactly one action.

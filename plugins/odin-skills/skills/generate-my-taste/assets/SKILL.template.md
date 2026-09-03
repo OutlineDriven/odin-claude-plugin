@@ -1,11 +1,11 @@
 ---
 name: "{skill_name}"
 description: >-
-  Personal taste skill — 5 evidence-derived anchors ({anchor_names}) for prose,
+  Personal taste skill, 5 evidence-derived anchors ({anchor_names}) for prose,
   code, design, and decisions. Two modes: audit judges an artifact against the
   two-sided charter; anchor loads the taste register before producing. Trigger
   with "{trigger_phrase}", "taste-test", "is this slop?", or "overkill?".
-# auto-invoke: explicitly permitted — generated taste skills auto-invoke like the generic taste skill
+# auto-invoke: explicitly permitted, generated taste skills auto-invoke like the generic taste skill
 ---
 
 # {skill_name}
@@ -41,9 +41,9 @@ Load the 5 anchors and two-sided charter as imperatives for subsequent responses
 
 ## Two-sided charter
 
-Side A — slop: {side_a_summary}
+Side A, slop: {side_a_summary}
 
-Side B — overkill: {side_b_summary}
+Side B, overkill: {side_b_summary}
 
 See `references/charter.md` for the full charter.
 

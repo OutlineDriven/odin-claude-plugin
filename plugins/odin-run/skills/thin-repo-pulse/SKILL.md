@@ -25,7 +25,7 @@ description: 'Use when a scheduled or watcher tick fires and a lightweight pulse
 
 - Will not trigger downstream workflows, open issues, update labels, or mutate the source.
 - Will not write to an alternate path if the primary write fails.
-- Will not retry a failed source query — record the failure in the run marker and stop.
+- Will not retry a failed source query; record the failure in the run marker and stop.
 
 ## Procedure
 
@@ -48,4 +48,4 @@ description: 'Use when a scheduled or watcher tick fires and a lightweight pulse
 
 ## Output
 
-Two artifacts in the configured output directory: `snapshot.json` (captured external state, empty when the source returned no matching state) and `.last-run.json` (run metadata: run_id, timestamp, source, status, snapshot_bytes, and reason when status is error) — ordering: snapshot first, then marker.
+Two artifacts in the configured output directory: `snapshot.json` (captured external state, empty when the source returned no matching state) and `.last-run.json` (run metadata: run_id, timestamp, source, status, snapshot_bytes, and reason when status is error), ordering: snapshot first, then marker.

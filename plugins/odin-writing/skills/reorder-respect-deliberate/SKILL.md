@@ -1,6 +1,6 @@
 ---
 name: reorder-respect-deliberate
-description: 'Use when a user asks to fix a listing whose order has gone arbitrary while preserving intentionally ranked items. Reorders by a named principle without adding, removing, or rewording any item. Not for freely reorderable listings — use reorder.'
+description: 'Use when a user asks to fix a listing whose order has gone arbitrary while preserving intentionally ranked items. Reorders by a named principle without adding, removing, or rewording any item. Not for freely reorderable listings: use reorder.'
 ---
 
 # Reorder respect deliberate

@@ -1,6 +1,6 @@
 ---
 name: memory-sanitize
-description: 'Use when the user asks to sanitize memory for sharing, redact PII, or scan memory for credentials. Scans for Tier-1 credentials first and stops before generating any copy if found; otherwise produces redacted copies with a diff for human review. Not for auditing memory — use memory-clean.'
+description: 'Use when the user asks to sanitize memory for sharing, redact PII, or scan memory for credentials. Scans for Tier-1 credentials first and stops before generating any copy if found; otherwise produces redacted copies with a diff for human review. Not for auditing memory; use memory-clean.'
 ---
 
 # Memory sanitize

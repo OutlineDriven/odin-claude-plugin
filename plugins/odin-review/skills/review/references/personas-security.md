@@ -14,4 +14,4 @@ HUNT (cite `path:line` for each):
 4. Sensitive data leaked in errors, logs, or responses.
 5. Weak crypto, missing TLS verification, or predictable randomness used for security.
 
-SEVERITY ANCHORS: a boundary reachable by untrusted input is P0; a defense-in-depth gap behind another control is P1/P2. Apply `_contract.md`.
+SEVERITY ANCHORS: a boundary reachable by untrusted input is P0; a defense-in-depth gap behind another control is P1/P2. Apply `personas-_contract.md`.

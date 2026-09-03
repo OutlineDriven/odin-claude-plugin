@@ -7,7 +7,7 @@ A few concepts from the underlying Tree-sitter parser explain how ast-grep match
 - CST (Concrete Syntax Tree): Includes all details of the source code, including punctuation, parentheses, and whitespace.
 - AST (Abstract Syntax Tree): A simplified tree that keeps only "named" nodes, omitting trivial details.
 
-ast-grep parses code into a CST, but the default `smart` algorithm skips unnamed nodes in the target that are absent from the pattern, so a concise pattern still matches verbose source. Use `cst` strictness to require every node — including unnamed trivia — to match.
+ast-grep parses code into a CST, but the default `smart` algorithm skips unnamed nodes in the target that are absent from the pattern, so a concise pattern still matches verbose source. Use `cst` strictness to require every node, including unnamed trivia, to match.
 
 ## Named vs unnamed nodes
 

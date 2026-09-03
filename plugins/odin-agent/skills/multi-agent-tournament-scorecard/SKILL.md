@@ -1,6 +1,6 @@
 ---
 name: multi-agent-tournament-scorecard
-description: 'Use when agent strategies need a reproducible finite tournament under a frozen evaluation protocol. Produces a scorecard with move records, scores, and hidden-identity validation. Not for open-ended or infinite matchups — use a continuous benchmark for those.'
+description: 'Use when agent strategies need a reproducible finite tournament under a frozen evaluation protocol. Produces a scorecard with move records, scores, and hidden-identity validation. Not for open-ended or infinite matchups; use a continuous benchmark for those.'
 ---
 
 # Multi-agent tournament scorecard
@@ -17,7 +17,7 @@ description: 'Use when agent strategies need a reproducible finite tournament un
 ## Inputs
 
 - Matchup matrix (required): the explicit finite set of agent pairings and rounds, frozen before the tournament begins.
-- Evaluation protocol (required): the frozen rules that govern each matchup — move validation, scoring, and identity disclosure.
+- Evaluation protocol (required): the frozen rules that govern each matchup: move validation, scoring, and identity disclosure.
 - Agent strategies (required): the strategies under test, each identified and version-pinned.
 
 ## Procedure
@@ -37,4 +37,4 @@ description: 'Use when agent strategies need a reproducible finite tournament un
 
 ## Output
 
-A tournament scorecard: terminal class (success, capped, stalled, blocked, exhausted, pending), completed matchups, move records, scores, identity validation, and the receipt path — ordered by the procedure steps that produced them.
+A tournament scorecard: terminal class (success, capped, stalled, blocked, exhausted, pending), completed matchups, move records, scores, identity validation, and the receipt path, ordered by the procedure steps that produced them.

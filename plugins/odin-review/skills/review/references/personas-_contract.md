@@ -27,7 +27,7 @@ A finding with no nameable reachable impact is P3. "Looks wrong" is not P0.
 ## Tool order (ODIN fd-First [MANDATORY])
 
 1. `fd -e <ext> -E <noise>` to discover candidate files (keep the set under ~50; narrow with `-E node_modules -E vendor -E dist`).
-2. `ast-grep run -p '<pattern>' -l <lang> -C 3` for structural matches — signatures, call sites.
+2. `ast-grep run -p '<pattern>' -l <lang> -C 3` for structural matches: signatures, call sites.
 3. `git --no-pager grep -n -F 'literal'` or `rg -nF 'literal'` for literal text.
 4. `bat -P -p -n <file>` to read a span with line numbers. Cite the exact `path:line`.
 

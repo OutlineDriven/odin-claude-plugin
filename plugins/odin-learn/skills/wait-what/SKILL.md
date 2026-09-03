@@ -20,7 +20,7 @@ The trigger identifies which explanation failed. No external files are required.
 
 ## Entry phrasings
 
-One skill, three entry phrasings, one mechanism — re-pitch the same claim with the missing frame supplied in plain language:
+One skill, three entry phrasings, one mechanism: re-pitch the same claim with the missing frame supplied in plain language:
 
 - "wait, what" or "say that again": the explanation did not land. Re-pitch the same claim, preserving its substance and conclusions, and lead with the context the explanation assumed.
 - "the explanation is unclear" or "context was omitted": the prior explanation skipped background, definitions, assumptions, causal links, or prerequisite steps. Re-pitch from scratch in plain language, embedding the missing context at the point where the original jumped ahead.
@@ -32,7 +32,7 @@ All three produce one plain-language re-pitch in chat. None touches disk.
 
 1. Identify the explanation that did not land: the last assistant message immediately before the trigger. Done when: the failed explanation is identified.
 2. Restate the same claim, preserving its substance and conclusions. Do not soften, hedge, or replace it with an easier version. Done when: the claim is restated with substance and conclusions intact.
-3. Re-pitch it: lead with the context the explanation assumed (one or two sentences on where the conversation is and what the message was answering — the gap is a missing frame, not a missing word); write in ISO 24495-1 English (short sentences, active voice, direct address, common words replacing jargon); use the project''s ubiquitous language. Done when: the claim is re-pitched with the missing frame supplied in plain English and ubiquitous language.
+3. Re-pitch it: lead with the context the explanation assumed (one or two sentences on where the conversation is and what the message was answering: the gap is a missing frame, not a missing word); write in ISO 24495-1 English (short sentences, active voice, direct address, common words replacing jargon); use the project''s ubiquitous language. Done when: the claim is re-pitched with the missing frame supplied in plain English and ubiquitous language.
 
 ## Failure and recovery
 Non-converged: the user signals they do not understand after one re-pitch. Stop. Do not elaborate, restate a third time, or widen scope. The user is the authority on whether the explanation landed. Report `non-converged`.

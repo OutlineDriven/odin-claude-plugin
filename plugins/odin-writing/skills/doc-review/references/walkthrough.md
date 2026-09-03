@@ -1,6 +1,6 @@
 # Per-finding walk-through
 
-This reference defines Interactive mode's per-finding walk-through -- the path the user enters by picking option A from the routing question, plus the unified completion report that every terminal path emits. The walk-through is fully read-only: decisions are recorded in the completion report, never applied to the reviewed document.
+This reference defines Interactive mode's per-finding walk-through, the path the user enters by picking option A from the routing question, plus the unified completion report that every terminal path emits. The walk-through is fully read-only: decisions are recorded in the completion report, never applied to the reviewed document.
 
 Interactive mode only.
 
@@ -12,7 +12,7 @@ After synthesis produces the remaining finding set, the orchestrator asks a four
 
 Stem: `What should the agent do with the remaining N findings?`
 
-Options (fixed order; no option is labeled `(recommended)` -- the routing choice is user-intent):
+Options (fixed order; no option is labeled `(recommended)`; the routing choice is user-intent):
 
 ```
 A. Review each finding one by one -- accept the recommendation or choose another action
@@ -25,10 +25,10 @@ If all remaining findings are FYI-subsection-only (no `gated_auto` or `manual` f
 
 **Dispatch by selection:**
 
-- **A** -- load this walk-through (per-finding loop). Accepted decisions accumulate in memory; Defer decisions are recorded via `references/open-questions-defer.md`; Skip decisions are recorded as no-action; `Auto-resolve with best judgment on the rest` routes through `references/bulk-preview.md`.
-- **B** -- load `references/bulk-preview.md` scoped to every pending `gated_auto` / `manual` finding. On Proceed, record the decisions. On Cancel, return to the routing question.
-- **C** -- load `references/bulk-preview.md` with every pending finding in the defer bucket. On Proceed, record all as deferred. On Cancel, return to the routing question.
-- **D** -- do not enter any dispatch phase. Emit the completion report and flow to Phase 5 terminal question.
+- **A**: load this walk-through (per-finding loop). Accepted decisions accumulate in memory; Defer decisions are recorded via `references/open-questions-defer.md`; Skip decisions are recorded as no-action; `Auto-resolve with best judgment on the rest` routes through `references/bulk-preview.md`.
+- **B**: load `references/bulk-preview.md` scoped to every pending `gated_auto` / `manual` finding. On Proceed, record the decisions. On Cancel, return to the routing question.
+- **C**: load `references/bulk-preview.md` with every pending finding in the defer bucket. On Proceed, record all as deferred. On Cancel, return to the routing question.
+- **D**: do not enter any dispatch phase. Emit the completion report and flow to Phase 5 terminal question.
 
 ---
 
@@ -36,10 +36,10 @@ If all remaining findings are FYI-subsection-only (no `gated_auto` or `manual` f
 
 The walk-through receives, from the orchestrator:
 
-- The merged findings list in severity order (P0 -> P1 -> P2 -> P3), filtered to actionable findings (confidence anchor `75` or `100` with `autofix_class` `gated_auto` or `manual`). FYI-subsection findings (anchor `50`) are not included -- they surface in the final report only.
+- The merged findings list in severity order (P0 -> P1 -> P2 -> P3), filtered to actionable findings (confidence anchor `75` or `100` with `autofix_class` `gated_auto` or `manual`). FYI-subsection findings (anchor `50`) are not included; they surface in the final report only.
 - Premise-dependency chain annotations from synthesis step 3.5c: each finding may carry `depends_on: <root_id>` or `dependents: [<ids>]`.
 
-Each finding's recommended action has already been normalized by synthesis step 3.5b -- the walk-through surfaces that recommendation and does not recompute it.
+Each finding's recommended action has already been normalized by synthesis step 3.5b; the walk-through surfaces that recommendation and does not recompute it.
 
 **Root-first iteration order.** When a finding has `dependents`, iterate it before any of its dependents regardless of severity order within the chain.
 
@@ -48,9 +48,9 @@ Each finding's recommended action has already been normalized by synthesis step 
 1. Announce the cascade: "Skipping/Deferring this root will auto-resolve N dependent finding(s): {titles}. Continue?"
 2. Offer two options: `Cascade -- apply same action to all dependents` (recommended) and `Decide each dependent individually`.
 3. On Cascade: record the root's action for every dependent and skip those findings' walk-through entries.
-4. On Individual: proceed normally -- dependents each get their own walk-through entry.
+4. On Individual: proceed normally; dependents each get their own walk-through entry.
 
-When the user picks Accept on a root, do NOT cascade -- the premise held, so dependents each need their own decision.
+When the user picks Accept on a root, do NOT cascade; the premise held, so dependents each need their own decision.
 
 **Orphaned dependents.** If a dependent's root was rejected in a prior round and the root is suppressed this round (per R29), treat the dependent as a standalone finding.
 
@@ -84,12 +84,12 @@ Section: {section}
 
 Substitutions:
 
-- **`{plain-English title}`** -- a 3-8 word summary. Derived from the merged finding's `title` field but rephrased as observable consequence.
-- **`{section}`** -- from the finding's `section` field.
-- **`why_it_matters`** -- rendered as-is.
-- **`suggested_fix`** -- render as prose describing intent. At most 2 inline backtick spans per sentence. No diff blocks.
-- **`Why it works`** -- grounded reasoning. One to three sentences.
-- **`{Conflict-context line}`** -- when contributing personas implied different actions and synthesis broke the tie.
+- **`{plain-English title}`**: a 3-8 word summary. Derived from the merged finding's `title` field but rephrased as observable consequence.
+- **`{section}`**: from the finding's `section` field.
+- **`why_it_matters`**: rendered as-is.
+- **`suggested_fix`**: render as prose describing intent. At most 2 inline backtick spans per sentence. No diff blocks.
+- **`Why it works`**: grounded reasoning. One to three sentences.
+- **`{Conflict-context line}`**: when contributing personas implied different actions and synthesis broke the tie.
 
 ### Question stem (short, decision-focused)
 
@@ -117,7 +117,7 @@ D. Auto-resolve with best judgment on the rest
 
 ### Adaptations
 
-- **N=1:** the heading omits `Finding N of M`. Option D is suppressed -- the menu shows three options: Accept / Defer / Skip.
+- **N=1:** the heading omits `Finding N of M`. Option D is suppressed; the menu shows three options: Accept / Defer / Skip.
 
 ---
 
@@ -125,10 +125,10 @@ D. Auto-resolve with best judgment on the rest
 
 For each finding's answer:
 
-- **Accept the recommendation** -- add the finding's id to an in-memory Accepted set. **No-fix guard:** if the merged finding has no `suggested_fix`, Accept is not executable for a concrete fix. Surface the no-fix sub-question below.
-- **Defer** -- record the finding as deferred via `references/open-questions-defer.md`. Advance.
-- **Skip** -- record in decision list. Advance. No side effects.
-- **Auto-resolve with best judgment on the rest** -- exit the walk-through loop. Dispatch `references/bulk-preview.md`, scoped to the current finding and everything not yet decided.
+- Accept the recommendation: add the finding's id to an in-memory Accepted set. **No-fix guard:** if the merged finding has no `suggested_fix`, Accept is not executable for a concrete fix. Surface the no-fix sub-question below.
+- Defer: record the finding as deferred via `references/open-questions-defer.md`. Advance.
+- Skip: record in decision list. Advance. No side effects.
+- Auto-resolve with best judgment on the rest: exit the walk-through loop. Dispatch `references/bulk-preview.md`, scoped to the current finding and everything not yet decided.
 
 ### No-fix sub-question (Accept picked on a finding with no `suggested_fix`)
 
@@ -144,17 +144,17 @@ B. Skip -- don't record
 C. Acknowledge -- record the decision, no concrete fix applied
 ```
 
-**Routing:**
+Routing:
 
-- **A. Defer** -- record as deferred via `references/open-questions-defer.md`.
-- **B. Skip** -- record Skip. Advance. No side effects.
-- **C. Acknowledge** -- record as `acknowledged`. Advance. The completion report surfaces Acknowledged as its own dedicated bucket.
+- A. Defer: record as deferred via `references/open-questions-defer.md`.
+- B. Skip: record Skip. Advance. No side effects.
+- C. Acknowledge: record as `acknowledged`. Advance. The completion report surfaces Acknowledged as its own dedicated bucket.
 
 ---
 
 ## Override rule
 
-"Override" means the user picks a different preset action. No inline freeform custom-fix authoring -- the walk-through is a decision loop, not a pair-editing surface. A user who wants a variant picks Skip and edits outside the flow.
+"Override" means the user picks a different preset action. No inline freeform custom-fix authoring; the walk-through is a decision loop, not a pair-editing surface. A user who wants a variant picks Skip and edits outside the flow.
 
 ---
 
@@ -172,7 +172,7 @@ Nothing is written to disk per-decision. An interrupted walk-through discards al
 
 ## End-of-walk-through recording
 
-After the loop terminates, emit the unified completion report containing all recorded decisions. No document edits are dispatched -- the walk-through is a decision-recording loop, not a mutation surface.
+After the loop terminates, emit the unified completion report containing all recorded decisions. No document edits are dispatched; the walk-through is a decision-recording loop, not a mutation surface.
 
 1. **Accepted set:** findings where the user accepted the recommendation. Recorded in the report as accepted.
 2. **Defer set:** findings deferred by the user. Recorded in the report's deferred section via `references/open-questions-defer.md`.
@@ -188,7 +188,7 @@ Every terminal path of Interactive mode emits the same completion report structu
 
 ### Minimum required fields
 
-- Per-finding entries: title, severity, action taken (Accepted / Deferred / Skipped / Acknowledged). Reason is optional -- when available, drawn from the finding's `why_it_matters` or the user's provided rationale; when not, omitted.
+- Per-finding entries: title, severity, action taken (Accepted / Deferred / Skipped / Acknowledged). Reason is optional; when available, drawn from the finding's `why_it_matters` or the user's provided rationale; when not, omitted.
 - Summary counts by action: totals per bucket. Include an `acknowledged` count when any entries land in that bucket; omit when zero.
 - **End-of-review verdict.**
 

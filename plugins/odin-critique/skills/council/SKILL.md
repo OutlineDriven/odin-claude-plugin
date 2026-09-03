@@ -1,6 +1,6 @@
 ---
 name: council
-description: 'Use when the user asks for a council, second opinions, or parallel investigation. Spawns parallel subagents from distinct stances, returns a decision memo. Not for cross-examination of existing proposals — use cross-critique.'
+description: 'Use when the user asks for a council, second opinions, or parallel investigation. Spawns parallel subagents from distinct stances, returns a decision memo. Not for cross-examination of existing proposals: use cross-critique.'
 ---
 
 # Council

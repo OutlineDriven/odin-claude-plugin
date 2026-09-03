@@ -2,7 +2,7 @@
 
 3. **Triage open pull requests (optional, before issues).** If there are no open PRs, skip. Otherwise summarize them and ask whether to handle PRs now or skip to issues. Handling PRs first means later issue-close detection sees work these merges just landed. Classify each open PR from its review, CI, and merge state using the exact `gh pr ... --json` field shapes: Done when: the stated action, evidence, and guard all hold.
    - Ready to merge = `mergeable == "MERGEABLE"` AND `mergeStateStatus == "CLEAN"` AND CI not blocking. Any other `mergeStateStatus` (`BEHIND`, `UNSTABLE`, `BLOCKED`, `DIRTY`, `DRAFT`, ...) is not ready. Treat `mergeable == "UNKNOWN"` as not ready (GitHub recomputes lazily); re-poll briefly or skip, never merge on it.
-   - CI not blocking — scan `statusCheckRollup` keyed on `__typename`. Reject only on a hard failure (`CheckRun.conclusion` of `FAILURE`/`CANCELLED`/`TIMED_OUT`/`ACTION_REQUIRED`/`STARTUP_FAILURE`/`STALE`, or `StatusContext.state` of `FAILURE`/`ERROR`) or anything still running (`CheckRun.status` of `QUEUED`/`IN_PROGRESS`/`WAITING`/`PENDING`, or `StatusContext.state` of `PENDING`/`EXPECTED` — wait, do not merge). `SUCCESS`, `NEUTRAL`, and `SKIPPED` are fine and must not block. An empty rollup is no CI — a distinct state, never treated as ready. `CLEAN` already reflects required-check status; use the rollup to catch failing/pending non-required checks.
+   - CI not blocking: scan `statusCheckRollup` keyed on `__typename`. Reject only on a hard failure (`CheckRun.conclusion` of `FAILURE`/`CANCELLED`/`TIMED_OUT`/`ACTION_REQUIRED`/`STARTUP_FAILURE`/`STALE`, or `StatusContext.state` of `FAILURE`/`ERROR`) or anything still running (`CheckRun.status` of `QUEUED`/`IN_PROGRESS`/`WAITING`/`PENDING`, or `StatusContext.state` of `PENDING`/`EXPECTED`, wait, do not merge). `SUCCESS`, `NEUTRAL`, and `SKIPPED` are fine and must not block. An empty rollup is no CI, a distinct state, never treated as ready. `CLEAN` already reflects required-check status; use the rollup to catch failing/pending non-required checks.
    - Bot/automated = `author.is_bot == true`. Match the auto-merge allowlist against `author.login` after normalizing away a leading `app/` and a trailing `[bot]` (Dependabot renders as either `app/dependabot` or `dependabot[bot]`; normalize both to `dependabot`). Default allowlist: `dependabot`, `renovate`, plus any user-named. A passing PR from a non-allowlisted bot is reported, never offered for merge.
    - Maintainer-approved = `latestReviews` has an entry with `state == "APPROVED"` whose `authorAssociation` is `OWNER`/`MEMBER`/`COLLABORATOR` and whose `author.login` is not the PR author. Do not use `reviewDecision == "APPROVED"` alone: it is branch-protection-driven, `null` on repos with no required-review rule, so it both over-trusts and misses genuine approvals.
    - Never reviewed = `latestReviews` has no `APPROVED`/`CHANGES_REQUESTED` entry from anyone other than the PR author (a fork "review disabled" bot comment is not review).
@@ -12,7 +12,7 @@
    | Mergeable bot PR | allowlisted bot + ready + not draft | Offer incremental, in-order merge |
    | Approved & ready | maintainer-approved + ready + not draft | Prompt to merge |
    | Never reviewed | non-bot + only the author has reviewed (or no reviews) + not draft | Offer to spawn a review subagent |
-   | Needs work | draft, hard CI failure, pending CI, conflicts, behind, changes requested, or a bot PR that is not ready | Report only — no action offered |
+   | Needs work | draft, hard CI failure, pending CI, conflicts, behind, changes requested, or a bot PR that is not ready | Report only: no action offered |
 
    Present the categorized PRs and offer the applicable actions.
 
@@ -20,7 +20,7 @@
    ```bash
    gh repo view "$REPO" --json mergeCommitAllowed,squashMergeAllowed,rebaseMergeAllowed
    ```
-   Merge one at a time, oldest first. Before each merge, re-verify immediately (state drifts after each merge — a landed PR can leave the next `BEHIND`, conflicting, or recomputing), merge synchronously, then confirm it landed before advancing:
+   Merge one at a time, oldest first. Before each merge, re-verify immediately (state drifts after each merge, a landed PR can leave the next `BEHIND`, conflicting, or recomputing), merge synchronously, then confirm it landed before advancing:
    ```bash
    gh pr view <N> -R "$REPO" --json isDraft,reviewDecision,mergeable,mergeStateStatus,statusCheckRollup
    # proceed only if still ready: not draft, mergeable == MERGEABLE, mergeStateStatus == CLEAN, CI not blocking

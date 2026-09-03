@@ -54,7 +54,7 @@ Every recommendation uses this exact shape.
 ```markdown
 ### <N>. <imperative contribution title>
 
-**What**: `<file>:<line-range>` — <symbol/section/issue>. If issue-backed, include `#<number>` and still name the file once known.
+**What**: `<file>:<line-range>`: <symbol/section/issue>. If issue-backed, include `#<number>` and still name the file once known.
 
 **Why**: <data-backed evidence>. Examples: `bug-fix rate 38% (5 fix commits / 13 touches)`, `test gap: 11 source touches, zero co-changing test file`, `0.75 orphan-export confidence plus zero references`, `zero doc coupling across 365 days`, `open issue #42 labelled bug + touches src/auth.ts`.
 

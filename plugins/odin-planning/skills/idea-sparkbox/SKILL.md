@@ -23,7 +23,7 @@ Park ideas and inspiration in short project cards. Organize them in a later pass
 
 ## Procedure
 
-1. **Collect candidates.** Sweep the current exchange for two classes: ideas (concepts or approaches worth parking for later) and inspiration (things that sparked thinking but are not yet concrete ideas). Only items actually present in the session or named by the user qualify; never invent a card to fill an empty class. Reject code snippets, backlog items, and divergence-class material (possible worlds, weighed options, opinions, doubts, assumptions) — those belong elsewhere. Done when: every idea or inspiration item present in the session or named by the user is collected, and rejected material is set aside with a stated reason.
+1. **Collect candidates.** Sweep the current exchange for two classes: ideas (concepts or approaches worth parking for later) and inspiration (things that sparked thinking but are not yet concrete ideas). Only items actually present in the session or named by the user qualify; never invent a card to fill an empty class. Reject code snippets, backlog items, and divergence-class material (possible worlds, weighed options, opinions, doubts, assumptions); those belong elsewhere. Done when: every idea or inspiration item present in the session or named by the user is collected, and rejected material is set aside with a stated reason.
 
 2. **Bound each card.** Store one item per card in a few lines at most: class, one-line statement, who it is from (`human` or `agent`), capture date. Drop material that needs more than a few lines from this pass and say so. Done when: every collected item is bounded to a few lines or dropped with a stated reason.
 

@@ -12,4 +12,4 @@ HUNT (cite `path:line` for each):
 4. No rollback plan for irreversible changes, or a rollback plan that is untested.
 5. Missing post-deploy monitoring: no alert conditions, no dashboard references, no spot-check queries.
 
-SEVERITY ANCHORS: a data migration with no rollback plan and no verification queries is P1; missing monitoring for a risky transform is P2; a trivial additive migration with no data interaction needs no checklist. Apply `_contract.md`.
+SEVERITY ANCHORS: a data migration with no rollback plan and no verification queries is P1; missing monitoring for a risky transform is P2; a trivial additive migration with no data interaction needs no checklist. Apply `personas-_contract.md`.

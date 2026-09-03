@@ -1,6 +1,6 @@
 ---
 name: xcode-simulator-testing
-description: 'Use when asked to run /xcode-simulator-testing with a scheme name or current to build and launch an iOS app in a simulator and capture per-surface evidence. Not for project regeneration — use xcode-project-sync.'
+description: 'Use when asked to run /xcode-simulator-testing with a scheme name or current to build and launch an iOS app in a simulator and capture per-surface evidence. Not for project regeneration: use xcode-project-sync.'
 ---
 
 # Xcode simulator test
@@ -41,4 +41,4 @@ description: 'Use when asked to run /xcode-simulator-testing with a scheme name 
 - Never swallow errors or pretend the done predicate holds. The blocked or non-converged result is the summary with residual `FAIL` or `SKIP` preserved.
 
 ## Output
-Xcode test report — fields in order: project or workspace, scheme, simulator, build result, screens tested, per-surface PASS/FAIL/SKIP evidence, console errors, human verifications, residual failures, overall PASS/FAIL/PARTIAL result.
+Xcode test report: fields in order: project or workspace, scheme, simulator, build result, screens tested, per-surface PASS/FAIL/SKIP evidence, console errors, human verifications, residual failures, overall PASS/FAIL/PARTIAL result.

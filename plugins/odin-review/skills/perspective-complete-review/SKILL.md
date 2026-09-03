@@ -41,4 +41,4 @@ description: 'Use when one named review viewpoint must run fix cycles until a fr
 - No failure is swallowed: every error, revert, and unresolved finding appears in the report, and the terminal classification reflects the state that actually held at stop time.
 
 ## Output
-One review report next to the reviewed artifact (`<artifact-basename>.<viewpoint>-review.md` or user-supplied path) containing the viewpoint charter, per-cycle log with model family, every applied fix patch with check result, human-owned questions, unresolved findings, and terminal classification — plus artifact state with check-verified fixes applied or baseline restored on rejection.
+One review report next to the reviewed artifact (`<artifact-basename>.<viewpoint>-review.md` or user-supplied path) containing the viewpoint charter, per-cycle log with model family, every applied fix patch with check result, human-owned questions, unresolved findings, and terminal classification, plus artifact state with check-verified fixes applied or baseline restored on rejection.

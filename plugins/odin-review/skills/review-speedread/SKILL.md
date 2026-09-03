@@ -1,6 +1,6 @@
 ---
 name: review-speedread
-description: 'Use when a human asks for the change shape before reading a diff. Renders a compact summary of added/removed files, line counts, and change type so the human can decide where to dive in. Not for a full findings report — use review; for an interactive walk — use show-review.'
+description: 'Use when a human asks for the change shape before reading a diff. Renders a compact summary of added/removed files, line counts, and change type so the human can decide where to dive in. Not for a full findings report: use review; for an interactive walk: use show-review.'
 ---
 
 # Review speedread

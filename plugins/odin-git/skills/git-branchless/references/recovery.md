@@ -1,7 +1,7 @@
 # Recovery, undo, and safety semantics
 
 The recovery story is what makes branchless safe to use aggressively. Most
-"history mistakes" reachable via plain Git are reversible here — provided
+"history mistakes" reachable via plain Git are reversible here, provided
 you reach for the right command.
 
 **Grounded: 2026-08-26**
@@ -21,7 +21,7 @@ repo state delta rather than a single ref move.
 | `git reflog` | One ref at a time (HEAD, branches). Lost when a branch is deleted. | Single-ref walk only. |
 | `.git/branchless/` event log | Whole-repo state per transaction. Survives branch deletion. | `git undo`, `git unhide`, smartlog history. |
 
-The event log is **local to the repository** — clones do not transfer it.
+The event log is **local to the repository**; clones do not transfer it.
 A fresh clone has no undo history for old commits.
 
 Hidden commits are eligible for Git GC after the standard expiry, even
@@ -50,7 +50,7 @@ What `git undo` reverts:
 
 What `git undo` cannot revert:
 
-- The middle of an in-progress merge — `git merge --abort` first, then undo.
+- The middle of an in-progress merge: `git merge --abort` first, then undo.
 - Untracked files that were never tracked and never snapshotted.
 - Operations that happened in a different repository (the event log is local).
 
@@ -152,7 +152,7 @@ git snapshot restore    # restore from the most recent snapshot (interactive sel
 Branchless takes snapshots automatically before destructive ops when
 `branchless.undo.createSnapshots=true` (default). Take one manually before
 any operation outside the branchless command set whose effects you are
-unsure about — it is cheap insurance.
+unsure about: it is cheap insurance.
 
 ---
 
@@ -164,7 +164,7 @@ git bug-report
 
 Collects repo metadata, branchless config, recent event log entries, and
 relevant Git version info into a paste-ready report. Use it when filing
-issues against arxanas/git-branchless. Inspect before pasting — the
+issues against arxanas/git-branchless. Inspect before pasting: the
 report can include local branch names and commit messages. It does not
 include diffs or file contents by default.
 
@@ -178,7 +178,7 @@ remain subject to standard `gc.reflogExpire` policy.
 
 Implications:
 
-- A draft commit you have not branched is safe — it is visible in the
+- A draft commit you have not branched is safe; it is visible in the
   smartlog and pinned by the hook.
 - A commit you `git hide`-d will eventually GC; recover via `git undo` or
   `git unhide` before the expiry window passes.
@@ -196,9 +196,9 @@ the branchless equivalent instead.
 
 | Reflexive plain-Git | Why it loses information | Branchless equivalent |
 |---------------------|--------------------------|-----------------------|
-| `git reset --hard <SHA>` against committed history | Discards commits without recording the state transition. | `git undo -i` — pick the prior state. |
+| `git reset --hard <SHA>` against committed history | Discards commits without recording the state transition. | `git undo -i`: pick the prior state. |
 | `git rebase --abort` mid-conflict, then redo | Loses the partial progress; often re-hits the same conflict. | Resolve in-place with `git move -m` (the `-m` flag is `--merge`), or restart with `git move -b HEAD -d <dest> -m`. The `-b HEAD` is the implicit default; making it explicit avoids surprises when other operations have shifted HEAD. |
-| `git push --force` to fix history mistakes | Mixes "fix the mistake" with "publish" — easy to clobber other peoples' work. | `git undo` first to confirm clean local state, then plain `git push` (or `git submit` for forge-aware stacks). |
+| `git push --force` to fix history mistakes | Mixes "fix the mistake" with "publish"; easy to clobber other peoples' work. | `git undo` first to confirm clean local state, then plain `git push` (or `git submit` for forge-aware stacks). |
 | `git branch -D feature` to discard work | Loses the ref and the reachability cue; the work is still in the event log but you have to walk `git undo -i` to find it. | `git hide -r <tip>` keeps the work explicitly recoverable via `git unhide`. |
 | `git checkout .` / `git restore .` to wipe edits | Cannot be undone if no snapshot exists. | `git snapshot create` first; recover via `git snapshot restore` or `git undo`. |
 | `git stash drop` after stashing too eagerly | Stash is unrecoverable past expiry. | Commit on a detached HEAD (the work is in the smartlog) and `git hide` if you want it out of the way. |
@@ -209,11 +209,11 @@ the branchless equivalent instead.
 ## Section 10: Triage checklist when something has gone wrong
 
 1. **Don't run anything destructive yet.** Stop and inspect.
-2. `git sl` — look at the current smartlog. Is the work visible? Hidden? Abandoned?
-3. `git undo -i` — browse recent repo states. Most "I lost X" recovers here.
+2. `git sl`: look at the current smartlog. Is the work visible? Hidden? Abandoned?
+3. `git undo -i`: browse recent repo states. Most "I lost X" recovers here.
 4. If `git sl` shows abandoned subtrees (`✕` ancestors), run `git restack`.
 5. If a `git sync` or `git move` reported skipped stacks, re-run with `--merge`.
-6. If the smartlog is missing a commit you know existed, check `git reflog` —
+6. If the smartlog is missing a commit you know existed, check `git reflog`:
    the event log can lag if the operation crashed.
 7. Last resort: `git bug-report` and file an issue with the output.
 

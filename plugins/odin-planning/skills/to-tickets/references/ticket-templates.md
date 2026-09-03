@@ -1,4 +1,4 @@
-# To tickets — storage templates
+# To tickets: storage templates
 
 Use the branch matching the repository's resolved storage.
 

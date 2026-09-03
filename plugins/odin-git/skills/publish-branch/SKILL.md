@@ -57,7 +57,7 @@ EOF
 Done when: every group is committed with its hash and subject recorded, `git status` confirms each commit, and no `git add -A` or `git add .` was used, or a verification gate failure stopped the group and the failing group is named.
 
 6. Detect remote and push. Run `git remote`.
-   - No `origin` remote (empty output, or other remotes present but none named `origin`): do not push, and do not add, invent, or guess a remote. Report "local-only, no remote — commits only" (or "no `origin` remote configured" if other remotes exist) and stop.
+   - No `origin` remote (empty output, or other remotes present but none named `origin`): do not push, and do not add, invent, or guess a remote. Report "local-only, no remote: commits only" (or "no `origin` remote configured" if other remotes exist) and stop.
    - `origin` present: push with one unconditional form, always targeting `origin` even if the branch's configured upstream points elsewhere, setting upstream if missing:
      ```bash
      git push -u origin HEAD

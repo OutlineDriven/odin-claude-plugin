@@ -1,6 +1,6 @@
 ---
 name: intent-proposal
-description: 'Use when material arrives without a fully formed ask or the ask is thinner than the data suggests. Proposes the intent as a confirmation-ready proposal with a next-step sketch. Not for an interview — use interview-me.'
+description: 'Use when material arrives without a fully formed ask or the ask is thinner than the data suggests. Proposes the intent as a confirmation-ready proposal with a next-step sketch. Not for an interview: use interview-me.'
 ---
 
 # Intent proposal

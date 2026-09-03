@@ -25,7 +25,7 @@ expect_used = "warn"
 panic       = "warn"
 ```
 
-Clippy's only deny-by-default level is `correctness`. The configuration above keeps that, then promotes `unwrap_used` to deny (matches the user's "fail-fast typed errors" stance) and pulls in `pedantic` at warn so style drift surfaces without blocking. `unsafe_code = "forbid"` is the crate-level stance — strictest available; cannot be relaxed by inner attributes. If a crate genuinely needs unsafe code, that crate is the wrong consumer of this skill: factor the unsafe surface into a separate crate that itself omits `forbid`, and consume it from the strict crate as a normal dependency.
+Clippy's only deny-by-default level is `correctness`. The configuration above keeps that, then promotes `unwrap_used` to deny (matches the user's "fail-fast typed errors" stance) and pulls in `pedantic` at warn so style drift surfaces without blocking. `unsafe_code = "forbid"` is the crate-level stance, strictest available; cannot be relaxed by inner attributes. If a crate genuinely needs unsafe code, that crate is the wrong consumer of this skill: factor the unsafe surface into a separate crate that itself omits `forbid`, and consume it from the strict crate as a normal dependency.
 
 ## clippy.toml
 
@@ -71,7 +71,7 @@ pub enum RequestError {
 }
 ```
 
-`#[serde(deny_unknown_fields)]` is the Rust analogue of zod `.strict()` / pydantic `extra="forbid"` — extra fields fail the parse rather than silently dropping.
+`#[serde(deny_unknown_fields)]` is the Rust analogue of zod `.strict()` / pydantic `extra="forbid"`, extra fields fail the parse rather than silently dropping.
 
 ## Notes
 

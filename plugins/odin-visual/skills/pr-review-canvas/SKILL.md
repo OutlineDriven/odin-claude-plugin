@@ -1,6 +1,6 @@
 ---
 name: pr-review-canvas
-description: 'Use when asked to render a PR review in Cursor Canvas. Produces a local canvas artifact with risky hunks foregrounded. Not for standalone HTML rendering — use pr-review-canvas-html.'
+description: 'Use when asked to render a PR review in Cursor Canvas. Produces a local canvas artifact with risky hunks foregrounded. Not for standalone HTML rendering: use pr-review-canvas-html.'
 ---
 
 # PR review canvas
@@ -39,4 +39,4 @@ description: 'Use when asked to render a PR review in Cursor Canvas. Produces a 
 The procedure never writes a partial artifact. If it stops before step 6, it does not create or overwrite a canvas file.
 
 ## Output
-A single `.canvas` file named after the PR identifier, with a header section (PR title, description, file count), risky hunk sections (path, range, diff, annotation), then safe hunk sections in the same format — local only, never published or pushed.
+A single `.canvas` file named after the PR identifier, with a header section (PR title, description, file count), risky hunk sections (path, range, diff, annotation), then safe hunk sections in the same format, local only, never published or pushed.

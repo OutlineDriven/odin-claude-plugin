@@ -1,6 +1,6 @@
 ---
 name: write-product-spec
-description: 'Use when a user asks for a product spec with numbered behavioral invariants. Writes PRODUCT.md with unambiguous, implementable behavior. Not for evidence-backed PRDs and PR creation — use write-prd; not for implementation plans — use write-tech-spec.'
+description: 'Use when a user asks for a product spec with numbered behavioral invariants. Writes PRODUCT.md with unambiguous, implementable behavior. Not for evidence-backed PRDs and PR creation: use write-prd. Not for implementation plans: use write-tech-spec.'
 ---
 
 # Write product spec
@@ -50,4 +50,4 @@ description: 'Use when a user asks for a product spec with numbered behavioral i
 If the user cannot provide a feature name or summary after clarification, stop; do not fabricate a spec from assumptions. If a behavior remains unclear after clarification, write it as an explicit `**Open question:** …` inline in the Behavior section rather than guessing. If the file cannot be written (permissions, disk), report the error and the intended path; do not silently discard the spec content. If the procedure stops partway, no file is written; do not save a partial spec. To reverse the side effect, delete the written `specs/<id>/PRODUCT.md` file (and its directory if empty).
 
 ## Output
-`specs/<id>/PRODUCT.md` — sections in order: Summary, Behavior (numbered invariants), optional Problem, optional Goals/Non-goals, optional Open questions; no Validation, Success criteria, or Testing sections.
+`specs/<id>/PRODUCT.md`: sections in order: Summary, Behavior (numbered invariants), optional Problem, optional Goals/Non-goals, optional Open questions; no Validation, Success criteria, or Testing sections.

@@ -36,7 +36,7 @@ If `INTERNAL_REPO` or `NOTIFICATION_TOKEN` is unset, stop and ask before running
 
 ## Procedure
 
-1. Validate the branch at the trust boundary — set the requested branch, strip the `origin/` prefix, and reject any branch that does not start with a configured channel prefix:
+1. Validate the branch at the trust boundary: set the requested branch, strip the `origin/` prefix, and reject any branch that does not start with a configured channel prefix:
 
    ```bash
    BRANCH_NAME="<release_branch>"
@@ -53,7 +53,7 @@ If `INTERNAL_REPO` or `NOTIFICATION_TOKEN` is unset, stop and ask before running
 
    Done when: the branch passes the channel-prefix check or the run stops with `Not a release branch`.
 
-2. Preview the mutation: state `INTERNAL_REPO`, `$RC_WORKFLOW_NAME`, `$BRANCH_NAME`, and the consequence — a release-candidate build starts on that branch and one status notification is posted. Proceed only on the user's explicit invocation. Done when: the mutation preview is stated and the user explicitly invokes the run.
+2. Preview the mutation: state `INTERNAL_REPO`, `$RC_WORKFLOW_NAME`, `$BRANCH_NAME`, and the consequence, a release-candidate build starts on that branch and one status notification is posted. Proceed only on the user's explicit invocation. Done when: the mutation preview is stated and the user explicitly invokes the run.
 3. Enter the repo context: `cd "$REPO_DIR"`. If `REPO_DIR` is unset or the path does not exist, ask the user for the local path to the release repo checkout and `cd` there; stop if none is given. Done when: the working directory is inside the release repo checkout.
 4. Confirm the branch exists on origin before dispatching:
 

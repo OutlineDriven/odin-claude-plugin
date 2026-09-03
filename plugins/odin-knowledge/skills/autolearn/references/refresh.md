@@ -1,4 +1,4 @@
-# Refresh — maintain `docs/solutions/` against the current code
+# Refresh: maintain `docs/solutions/` against the current code
 
 Read this for `autolearn mode:refresh [scope]`. It maintains existing learnings as the code evolves, both their individual accuracy and the design of the set as a whole. Create mode writes one new doc; refresh mode keeps existing docs accurate.
 
@@ -27,7 +27,7 @@ Classify every candidate doc into exactly one:
 
 Find every `.md` under `docs/solutions/`, excluding `README.md` and anything under `_archived/`.
 
-A `[scope]` hint narrows it — try in order, stop at first hit: (1) subdirectory name, (2) frontmatter `module`/`component`/`tags` match, (3) filename partial match, (4) content keyword. No match → report the miss and exit (don't widen to everything). No scope hint → process everything. No candidate docs at all → report it and point the user at create mode.
+A `[scope]` hint narrows it: try in order, stop at first hit: (1) subdirectory name, (2) frontmatter `module`/`component`/`tags` match, (3) filename partial match, (4) content keyword. No match → report the miss and exit (don't widen to everything). No scope hint → process everything. No candidate docs at all → report it and point the user at create mode.
 
 Pick the lightest interaction path:
 
@@ -50,9 +50,9 @@ Read it, cross-reference claims against the current codebase, form a recommendat
 
 **Update vs Replace boundary:** references moved but the approach is still correct → Update. The recommended solution conflicts with current code, or the architecture changed → Replace. **If you're rewriting the Solution section, it's Replace, not Update.**
 
-Judgment: contradiction with current code is a strong Replace signal. Age alone is not a stale signal — a 2-year-old doc that still matches code is fine. Check for a successor before deleting.
+Judgment: contradiction with current code is a strong Replace signal. Age alone is not a stale signal; a 2-year-old doc that still matches code is fine. Check for a successor before deleting.
 
-Subagents here are **read-only** investigators: return file path, evidence, recommended action, confidence, open questions. Run in parallel only for genuinely independent docs. These investigation subagents never write. Deletes, commits, and frontmatter metadata stay with the orchestrator. The one writing subagent is the Replace successor-drafter below — and even there the orchestrator validates the result, deletes the old file, and commits.
+Subagents here are **read-only** investigators: return file path, evidence, recommended action, confidence, open questions. Run in parallel only for genuinely independent docs. These investigation subagents never write. Deletes, commits, and frontmatter metadata stay with the orchestrator. The one writing subagent is the Replace successor-drafter below; and even there the orchestrator validates the result, deletes the old file, and commits.
 
 ## Phase 1.5: document-set analysis
 
@@ -69,13 +69,13 @@ Step back and judge the set as a whole:
 No edit. Summarize why it remains trustworthy.
 
 ### Update
-In-place edits only when the solution is still substantively correct: rename a moved path/symbol, fix stale links, refresh implementation notes after a directory move, correct drifted frontmatter values. **Not** Update territory: typo/style-only edits, or cases where the old fix is now an anti-pattern or the troubleshooting path materially changed — those are Replace.
+In-place edits only when the solution is still substantively correct: rename a moved path/symbol, fix stale links, refresh implementation notes after a directory move, correct drifted frontmatter values. **Not** Update territory: typo/style-only edits, or cases where the old fix is now an anti-pattern or the troubleshooting path materially changed: those are Replace.
 
 ### Consolidate
 Orchestrator handles it directly (docs are already read). Per cluster: confirm the canonical doc (broader, more current); extract unique content from the subsumed doc(s) (edge cases, extra prevention rules, alternative debugging paths); merge it into the canonical doc where it logically belongs (inline a bullet, or add a labeled section for a substantial sub-topic); repoint any cross-references to the canonical doc; delete the subsumed doc. 3+ overlapping docs → process pairwise. Reverse case also counts: a doc that grew to cover several genuinely independent problems can be recommended for a split.
 
 ### Replace
-Process one at a time. Each successor is written by a subagent to protect the main context. Pass the subagent the old doc's full content, an investigation-evidence summary (what changed, what the code does now, why the old guidance misleads), the target path + category, and the contents of `references/schema.md` + `assets/solution-template.md` (don't let it invent fields, enums, or section order from memory). Then run `python3 scripts/validate-frontmatter.py <new-path>` until exit 0. After it completes, the orchestrator deletes the old file. `supersedes: [old-filename]` in the successor's frontmatter is optional — git history and the commit already record it.
+Process one at a time. Each successor is written by a subagent to protect the main context. Pass the subagent the old doc's full content, an investigation-evidence summary (what changed, what the code does now, why the old guidance misleads), the target path + category, and the contents of `references/schema.md` + `assets/solution-template.md` (don't let it invent fields, enums, or section order from memory). Then run `python3 scripts/validate-frontmatter.py <new-path>` until exit 0. After it completes, the orchestrator deletes the old file. `supersedes: [old-filename]` in the successor's frontmatter is optional; git history and the commit already record it.
 
 **Evidence insufficient to write a trustworthy successor** → mark stale in place instead: add `status: stale`, `stale_reason: [what you found]`, `stale_date: YYYY-MM-DD`. Report what's missing.
 

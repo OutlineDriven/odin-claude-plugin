@@ -1,6 +1,6 @@
 ---
 name: history-source-registry
-description: 'Use when a coding-agent session store is added or its format drifts, to document its layout, roles, time handling, and quirks in the registry with a passing conformance fixture. Not for recalling a session — use history-recall; not for peer transfer — use history-sync.'
+description: 'Use when a coding-agent session store is added or its format drifts, to document its layout, roles, time handling, and quirks in the registry with a passing conformance fixture. Not for recalling a session: use history-recall; not for peer transfer: use history-sync.'
 ---
 
 # History source registry

@@ -1,6 +1,6 @@
 ---
 name: book-to-skill
-description: 'Use when the user names one book, course, paper, or source document and asks to distill it into a reusable skill. Classifies the source as procedure or reference, writes an attributed SKILL.md, and proves its routing. Not for a folder of sources — use map-corpus.'
+description: 'Use when the user names one book, course, paper, or source document and asks to distill it into a reusable skill. Classifies the source as procedure or reference, writes an attributed SKILL.md, and proves its routing. Not for a folder of sources, use map-corpus.'
 ---
 
 # Book to skill
@@ -54,17 +54,17 @@ description: 'Use when the user names one book, course, paper, or source documen
    - A source with both gets the procedure shape with judgment material in `references/`. Every step ends on a checkable done condition; a reference shape carries no steps. The frontmatter `description` is the only place the trigger is worded for dispatch; the body restates the when as prose but does not re-word the trigger for dispatch. Done when: the body follows its shape and carries the attribution.
 7. **Disclose.** Material only some branches reach moves to `references/<topic>.md`, linked one level deep from the body. Keep the body under 500 lines. Done when: branch-specific material lives behind a pointer and the body line count is under the cap.
 8. **Validate.** Check four conditions: `name` equals the directory name; the frontmatter parses as YAML; `description` is within 1024 characters; every relative link resolves on disk. Run `yaml.safe_load` on the frontmatter and `test -f` on each link target. Done when: all four pass.
-9. **Probe and place.** Author three to five probe prompts — at least two that must fire the skill and at least two out-of-scope prompts that must not — and run each in a subagent. Adjust the `description` until every probe lands correctly. Then ask for the write target, defaulting to `.claude/skills/<name>/`, and re-run step 8 there. Done when: probe results are reported and the checks are green at the target.
+9. **Probe and place.** Author three to five probe prompts, at least two that must fire the skill and at least two out-of-scope prompts that must not, and run each in a subagent. Adjust the `description` until every probe lands correctly. Then ask for the write target, defaulting to `.claude/skills/<name>/`, and re-run step 8 there. Done when: probe results are reported and the checks are green at the target.
 
-One skill per run; another source is another run. Paraphrase the source; do not paste it. The skill, not the book, is the source of truth when the skill runs — keep it runnable without the source in context.
+One skill per run; another source is another run. Paraphrase the source; do not paste it. The skill, not the book, is the source of truth when the skill runs; keep it runnable without the source in context.
 
 ## Failure and recovery
 - Source unopenable. A file the agent cannot open stops the run; name the file. This skill owns no converter and does not invent content for a source it cannot read.
-- Fewer than three ordered actions. Not a failure — classify as reference and proceed with the reference shape.
+- Fewer than three ordered actions. Not a failure: classify as reference and proceed with the reference shape.
 - Validation check fails. Fix the offending field or link and re-run step 8. Do not claim done while any check is red.
 - Probe lands wrong. Adjust the `description` and re-probe. Never mark done with a misrouting probe; a wrong negative probe is as blocking as a wrong positive one.
 - Partial result. If the run stops mid-procedure, the written files are incomplete. Either complete the procedure or delete the target directory as rollback. Do not leave a half-written skill that parses as valid.
 - Rollback. Delete the target skill directory. No artifact outside that directory is touched, so deletion is a complete recovery.
 
 ## Output
-A self-contained `SKILL.md` (and optional `references/<topic>.md`) under the chosen target directory, carrying an attribution line and passing all four validation checks and the probe set — the report states the classification, chosen name, target path, validation results, and probe results (positive and negative).
+A self-contained `SKILL.md` (and optional `references/<topic>.md`) under the chosen target directory, carrying an attribution line and passing all four validation checks and the probe set: the report states the classification, chosen name, target path, validation results, and probe results (positive and negative).

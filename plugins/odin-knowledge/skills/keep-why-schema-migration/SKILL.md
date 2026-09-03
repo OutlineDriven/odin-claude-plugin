@@ -16,7 +16,7 @@ description: 'Use when a project context-schema differs from the installed entry
 
 ## Inputs
 
-- Required: path to the project context store — the directory holding the project's entry files and its config file, which records `context-schema: <version>`.
+- Required: path to the project context store: the directory holding the project's entry files and its config file, which records `context-schema: <version>`.
 - Supplied by this file: the current entry-format version (4) and the migration catalog. No other version source exists.
 - Optional: the operator consent answer (`migrate now` / `defer` / `decline`). No answer means `defer`.
 - Checked, not assumed: whether the store is under version control, which decides the rollback mechanism.
@@ -25,14 +25,14 @@ description: 'Use when a project context-schema differs from the installed entry
 
 1. Perform this comparison before any other write to the store in the session. Read `context-schema` from the store config. If the value is absent or unparseable, stop with failure F1 and write nothing. Done when: the `context-schema` value is read and parseable, or F1 is reported and nothing is written.
 2. Compare the recorded value with the current entry-format version 4 and classify: `current` (equal), `behind` (lower), `ahead` (higher). Done when: the store is classified as current, behind, or ahead.
-3. **Ahead** — state once that the store is newer than the installed skill, recommend updating the installed skill to the store format, make no writes, and tell the session not to rewrite existing entries until the skill is updated. Terminal: `ahead-blocked`. Done when: the ahead state is stated, no writes are made, and the terminal is `ahead-blocked`.
-4. **Current** — report `current` and make no writes. Terminal: `current`. Done when: `current` is reported and no writes are made.
-5. **Behind** — list which catalog versions between the recorded value and 4 changed what, then offer exactly one of: `migrate now`, `defer to next session`, `decline for this developer`. Done when: the catalog changes are listed and one consent option is offered.
-6. `defer` — no writes; the comparison repeats next session. Terminal: `deferred`. Done when: no writes are made and the terminal is `deferred`.
-7. `decline` — record the decline personally for that developer, in this conversation or their own notes, never in the shared project store. The project schema stays unchanged and later sessions re-offer. Terminal: `declined`. Done when: the decline is recorded personally, the project schema is unchanged, and the terminal is `declined`.
-8. `migrate now` — bound scope first: enumerate the store's entry files; then secure rollback: if the store is version-controlled, record the current commit as the restore point; otherwise copy every affected entry file to `<store>/migration-backup/schema-<recorded-version>/`. Done when: all entry files are enumerated and the rollback path is secured.
+3. **Ahead**: state once that the store is newer than the installed skill, recommend updating the installed skill to the store format, make no writes, and tell the session not to rewrite existing entries until the skill is updated. Terminal: `ahead-blocked`. Done when: the ahead state is stated, no writes are made, and the terminal is `ahead-blocked`.
+4. **Current**: report `current` and make no writes. Terminal: `current`. Done when: `current` is reported and no writes are made.
+5. **Behind**: list which catalog versions between the recorded value and 4 changed what, then offer exactly one of: `migrate now`, `defer to next session`, `decline for this developer`. Done when: the catalog changes are listed and one consent option is offered.
+6. `defer`: no writes; the comparison repeats next session. Terminal: `deferred`. Done when: no writes are made and the terminal is `deferred`.
+7. `decline`: record the decline personally for that developer, in this conversation or their own notes, never in the shared project store. The project schema stays unchanged and later sessions re-offer. Terminal: `declined`. Done when: the decline is recorded personally, the project schema is unchanged, and the terminal is `declined`.
+8. `migrate now`: bound scope first: enumerate the store's entry files; then secure rollback: if the store is version-controlled, record the current commit as the restore point; otherwise copy every affected entry file to `<store>/migration-backup/schema-<recorded-version>/`. Done when: all entry files are enumerated and the rollback path is secured.
 9. Apply the catalog rules for every version from recorded+1 through 4, in order, to each entry. A value that is missing or not determinable from the entry itself is written as `undefined: <reason>`; never fabricate or infer a value beyond what the entry states. An entry whose structure no rule can parse is left untouched and listed as unmigrated. Done when: every entry is rewritten per catalog rules or listed as unmigrated, and no value is fabricated.
-10. After every entry is rewritten or confirmed caught up, set `context-schema` to 4 — including when some intermediate versions had nothing to apply; a no-op version still advances (nothing-to-migrate does not mean do-not-advance). If any entry is unmigrated, leave the schema value unchanged and report the store as still behind. Done when: `context-schema` is set to 4 (all entries caught up) or left unchanged (unmigrated entries exist).
+10. After every entry is rewritten or confirmed caught up, set `context-schema` to 4: including when some intermediate versions had nothing to apply; a no-op version still advances (nothing-to-migrate does not mean do-not-advance). If any entry is unmigrated, leave the schema value unchanged and report the store as still behind. Done when: `context-schema` is set to 4 (all entries caught up) or left unchanged (unmigrated entries exist).
 11. Report per-entry results, the final schema value or the reason it is unchanged, and the rollback path. Done when: the report names every rewritten entry, every `undefined` value with its reason, any unmigrated entry, the final schema value, and the rollback path.
 
 ### Migration catalog
@@ -46,10 +46,10 @@ Current entry-format version: **4**.
 | 4 | Repeated `Type:` lines are allowed | Keep one `Type:` line per distinct kind; merge duplicate identical `Type:` lines into one. Do not collapse distinct kinds into one line. |
 
 ## Failure and recovery
-- F1 — missing or unparseable schema record: write nothing, report the exact file and field problem, stop. The store is not modified and no schema value is initialized here.
-- F2 — unmigratable entry: leave that entry untouched, keep the schema value unchanged, and list the entry in the report; the store stays behind and the next session re-compares. Because the schema field moves last, a partial migration can never read as caught up.
-- F3 — consent missing or refused at the prompt: treat as `defer`; no writes.
-- F4 — write error mid-migration: stop immediately, restore every already-rewritten entry from the rollback path (version-control restore or the backup copy), leave the schema value at its old setting, and report which entries were rewritten before the failure. Re-running later re-offers `migrate now`.
+- F1: missing or unparseable schema record: write nothing, report the exact file and field problem, stop. The store is not modified and no schema value is initialized here.
+- F2: unmigratable entry: leave that entry untouched, keep the schema value unchanged, and list the entry in the report; the store stays behind and the next session re-compares. Because the schema field moves last, a partial migration can never read as caught up.
+- F3: consent missing or refused at the prompt: treat as `defer`; no writes.
+- F4: write error mid-migration: stop immediately, restore every already-rewritten entry from the rollback path (version-control restore or the backup copy), leave the schema value at its old setting, and report which entries were rewritten before the failure. Re-running later re-offers `migrate now`.
 - Never swallow an error and never report `current` or `migrated` unless steps 2, 9, and 10 actually completed as written.
 
 ## Output

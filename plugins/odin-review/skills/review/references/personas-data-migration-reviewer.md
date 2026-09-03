@@ -15,4 +15,4 @@ HUNT (cite `path:line` for each):
 7. Silent data loss: `text` to `varchar(n)` truncation, float to integer precision loss.
 8. Missing verification queries or rollback plan for non-trivial data transforms.
 
-SEVERITY ANCHORS: a dropped column without backup is P0; a missing backfill on a non-nullable column is P1; missing post-deploy verification queries on a risky transform is P2; a nullable column addition is P3 at most. Apply `_contract.md`.
+SEVERITY ANCHORS: a dropped column without backup is P0; a missing backfill on a non-nullable column is P1; missing post-deploy verification queries on a risky transform is P2; a nullable column addition is P3 at most. Apply `personas-_contract.md`.

@@ -1,6 +1,6 @@
 ---
 name: agent-environment-retrospective
-description: 'Use when a completed session needs an agent-environment retrospective: a severity-ranked list of environment improvement candidates, each backed by session evidence. Not for an engineering retrospective from telemetry — use engineering-retrospective.'
+description: 'Use when a completed session needs an agent-environment retrospective: a severity-ranked list of environment improvement candidates, each backed by session evidence. Not for an engineering retrospective from telemetry: use engineering-retrospective.'
 ---
 
 # Agent-environment retrospective

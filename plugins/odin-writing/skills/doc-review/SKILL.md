@@ -1,6 +1,6 @@
 ---
 name: doc-review
-description: 'Use when reviewing a prose plan, spec, PRD, requirements doc, design doc, or brainstorm, or invoking /doc-review. Returns tiered findings with verbatim evidence without editing the document. Not for collaborative drafting — use doc-coauthoring. No remote or irreversible changes.'
+description: 'Use when reviewing a prose plan, spec, PRD, requirements doc, design doc, or brainstorm, or invoking /doc-review. Returns tiered findings with verbatim evidence without editing the document. Not for collaborative drafting: use doc-coauthoring. No remote or irreversible changes.'
 ---
 
 # Doc review
@@ -37,7 +37,7 @@ Classify by **content shape, not path** (path is a tie-breaker only):
 
 When shape is genuinely ambiguous, default to `requirements` (the conservative classification that activates fewer plan-grade feasibility checks). Extract the `origin:` frontmatter value once (or `none`). Pass classification + origin to every reviewer; reviewers adapt on them and do not re-classify.
 
-This skill reviews prose planning documents only. If the target is a diff or code file, stop — it is out of scope.
+This skill reviews prose planning documents only. If the target is a diff or code file, stop; it is out of scope.
 
 3. **Select personas by signal.** **Done when:** the persona roster is justified by document signals.
 
@@ -54,7 +54,7 @@ Always dispatch **coherence** + **feasibility**. Add a conditional lens only whe
 
 4. **Dispatch in parallel (read-only).** **Done when:** all selected personas are dispatched in one read-only parallel batch.
 
-Launch every selected persona in **one parallel tool-call message**. Sequential dispatch breaks the single-batch concurrency contract. Each subagent is read-only: no Write, no Edit, no files; it returns findings JSON only (it may use non-mutating tools — read, glob, grep, git log — to gather codebase context).
+Launch every selected persona in **one parallel tool-call message**. Sequential dispatch breaks the single-batch concurrency contract. Each subagent is read-only: no Write, no Edit, no files; it returns findings JSON only (it may use non-mutating tools, read, glob, grep, git log, to gather codebase context).
 
 Each subagent receives this dispatch prompt with the slots filled:
 
@@ -240,9 +240,9 @@ Run all returned findings through this pipeline. Order matters; re-evaluate stat
 
 6. **Present and route.** **Done when:** surviving findings are presented and routed.
 
-User-facing vocabulary rule: internal enum values (`safe_auto`, `gated_auto`, `manual`, `FYI`) stay inside the schema and synthesis prose. Every user-visible word uses plain language — "accepted recommendations", "proposed fixes", "decisions", "FYI observations" — except the `Tier` column in rendered tables, which names the internal enum. All tables are pipe-delimited markdown; escape literal `|` in cells as `\|`; never use ASCII box-drawing characters.
+User-facing vocabulary rule: internal enum values (`safe_auto`, `gated_auto`, `manual`, `FYI`) stay inside the schema and synthesis prose. Every user-visible word uses plain language ("accepted recommendations", "proposed fixes", "decisions", "FYI observations") except the `Tier` column in rendered tables, which names the internal enum. All tables are pipe-delimited markdown; escape literal `|` in cells as `\|`; never use ASCII box-drawing characters.
 
-Headless mode: output a structured text envelope (accepted recommendations, proposed fixes, decisions with dependents nested under roots, FYI observations, residual concerns, deferred questions — omit any empty section), end with `Review complete`, and stop. When the combined count of FYI/residual/deferred is ≥5, collapse each to a one-line count plus a tight bullet list; actionable buckets stay fully rendered.
+Headless mode: output a structured text envelope (accepted recommendations, proposed fixes, decisions with dependents nested under roots, FYI observations, residual concerns, deferred questions, omit any empty section), end with `Review complete`, and stop. When the combined count of FYI/residual/deferred is ≥5, collapse each to a one-line count plus a tight bullet list; actionable buckets stay fully rendered.
 
 Interactive mode: present findings grouped by severity (P0→P3), errors before omissions within each severity, with a summary line `Accepted N recommendations. K items need attention (X errors, Y omissions). Z FYI observations.`, the Coverage table, accepted recommendations, FYI observations (distinct subsection), residual concerns, and deferred questions. Coverage counts are post-synthesis: Findings = Auto + Proposed + Decisions + FYI exactly; Auto counts safe_auto@100, Proposed counts gated_auto@75/100, Decisions counts manual@75/100, FYI counts anchor-50 regardless of class. Footnotes below the table when non-zero, in order: `Dropped:`, `Chains:`, `Restated:`. Dependents render only nested under their root, never at their own severity position.
 
@@ -259,7 +259,7 @@ D. Report only — take no further action
 Option C is suppressed when all findings are already FYI-only.
 
 Walk-through (option A): per-finding loop over actionable findings (anchor 75/100, gated_auto/manual), root-first iteration order. Each finding: print an explanation block, then a yes/no question stem with the recommended action marked `(recommended)` (only A/B/C can carry it; D never). Four options per finding: Accept the recommendation / Defer / Skip / Auto-resolve with best judgment on the rest. After each answer emit a one-line confirmation (`-> Accepted.`, `-> Deferred.`, `-> Skipped.`). N=1 omits the `Finding N of M` heading and suppresses option D.
-- Accept: add to the in-memory Accepted set. No-fix guard: if the merged finding has no suggested_fix, Accept is not executable — ask `Accept isn't executable for this finding — the review surfaced the issue without a concrete fix. How should the agent proceed?` with options `A. Defer` / `B. Skip`.
+- Accept: add to the in-memory Accepted set. No-fix guard: if the merged finding has no suggested_fix, Accept is not executable; ask `Accept isn't executable for this finding — the review surfaced the issue without a concrete fix. How should the agent proceed?` with options `A. Defer` / `B. Skip`.
 - Defer: record the finding + rationale in the completion report's deferred section (never mutate the reviewed document). Entry: title, section, severity, reviewer, confidence, why_it_matters, reason (user-provided or `Deferred for later resolution`), timestamp. Compound-key dedup on `normalize(section)+normalize(title)+why_fingerprint`; on collision record a no-op in Coverage. If recording fails, ask `Couldn't record the deferral. What should the agent do?` → `A. Retry` / `B. Convert to Skip`; on no response default to Skip.
 - Skip: record as no-action.
 - Auto-resolve the rest: route through the bulk preview.

@@ -1,6 +1,6 @@
 ---
 name: plan-review-tune
-description: 'Use when plan-mode enforcement hooks intercept a plan review or the user runs /plan-review-tune to tune which plan-review questions fire. Persists the tuned question flow to a local question-registry and hook configuration. Not for auditing a plan against code — use plan-review.'
+description: 'Use when plan-mode enforcement hooks intercept a plan review or the user runs /plan-review-tune to tune which plan-review questions fire. Persists the tuned question flow to a local question-registry and hook configuration. Not for auditing a plan against code: use plan-review.'
 ---
 
 # Plan review tune
@@ -36,4 +36,4 @@ description: 'Use when plan-mode enforcement hooks intercept a plan review or th
 - Write or rename failure: leave the prior configuration intact, report the error, and do not claim the done predicate holds.
 
 ## Output
-The persisted question-registry and hook configuration plus a one-line confirmation naming the changed question id or flag and its new value — or, for an inspect request, the rendered dual-track profile and preference map.
+The persisted question-registry and hook configuration plus a one-line confirmation naming the changed question id or flag and its new value, or, for an inspect request, the rendered dual-track profile and preference map.

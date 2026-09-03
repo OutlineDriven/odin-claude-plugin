@@ -1,6 +1,6 @@
 ---
 name: saga
-description: 'Use when a user runs saga or asks to autonomously build a sizable feature. Produces a spec tree, delegates to worker subagents in isolated worktrees, validates at each milestone, and gates user acceptance before VCS commit. Not for executing a given plan — use subagent-driven.'
+description: 'Use when a user runs saga or asks to autonomously build a sizable feature. Produces a spec tree, delegates to worker subagents in isolated worktrees, validates at each milestone, and gates user acceptance before VCS commit. Not for executing a given plan; use subagent-driven.'
 ---
 
 # Saga
@@ -23,14 +23,14 @@ description: 'Use when a user runs saga or asks to autonomously build a sizable 
 
 ## Procedure
 
-### Phase 1 — planning (orchestrator + user)
+### Phase 1: planning (orchestrator + user)
 
 1. **Intake.** Restate the request as a one-paragraph problem statement and the rough shape of the feature. Identify major unknowns. Pick a saga directory name under `~/.sagas/` from a feature slug plus timestamp (e.g. `~/.sagas/dark-mode-20260609-0028/`). Confirm the path with the user before creating anything.
 
 2. **Discover environment.** By inspecting the repo first, determine:
    - Program type (web app, native GUI, TUI, CLI/library, backend service).
    - Whether computer use is available (local, remote only, or not available).
-   - Test runner, build, lint, and typecheck commands — confirm they run.
+   - Test runner, build, lint, and typecheck commands: confirm they run.
    - How the program is launched for manual or interactive verification.
    Record findings in `SAGA.md` under the environment section.
 
@@ -42,7 +42,7 @@ description: 'Use when a user runs saga or asks to autonomously build a sizable 
 
 6. **Get approval.** Present the full spec tree to the user via `ask_user_question`. Do not begin Phase 2 until approved.
 
-### Phase 2 — implementation (worker fleet)
+### Phase 2: implementation (worker fleet)
 
 1. **Launch workers.** Use `run_agents` to delegate tasks. The orchestrator never implements feature code. Immediately record each worker's agent/run ID, task, branch, and worktree in `PROGRESS.md`.
 
@@ -54,13 +54,13 @@ description: 'Use when a user runs saga or asks to autonomously build a sizable 
 
 3. **Per-worker contract.** Instruct each worker to: implement only its assigned task; self-validate against the task's criteria using the prescribed method (computer use, interactive CLI, or tests) in a fix→validate loop; create a durable handoff (commit to the task branch for local workers; pushed branch, draft PR, or patch for remote workers); remove the worktree only after the durable handoff exists (`git worktree remove <path> --force`); report branch name, commit hash, changed files, validation evidence, and pass/blocked status.
 
-4. **Collect and act on reports.** Update `PROGRESS.md` with per-task status and evidence. Handle blocked tasks: re-delegate with retained context, adjust the task spec, or escalate to the user via `ask_user_question` with options — only if the blocker is a genuine spec gap or external decision.
+4. **Collect and act on reports.** Update `PROGRESS.md` with per-task status and evidence. Handle blocked tasks: re-delegate with retained context, adjust the task spec, or escalate to the user via `ask_user_question` with options, only if the blocker is a genuine spec gap or external decision.
 
 5. **Integrate each milestone.** Merge the milestone's branches into an integration branch, resolve conflicts, run milestone-level validation, and remove any worktrees left behind before proceeding.
 
 6. **Maintain state.** Update `PROGRESS.md` continuously. Re-read specs and `PROGRESS.md` from disk rather than holding state in context.
 
-### Phase 3 — final validation
+### Phase 3: final validation
 
 1. **Run exit criteria.** Execute all saga-level exit criteria using the strongest available method. Summarize evidence against each criterion.
 

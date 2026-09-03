@@ -1,6 +1,6 @@
 ---
 name: ruzzy
-description: 'Use when asked to set up and run coverage-guided fuzzing of Ruby code or C extensions with Ruzzy, producing crash reports or clean campaign summaries. Not for C/C++ fuzzing — use fuzzing.'
+description: 'Use when asked to set up and run coverage-guided fuzzing of Ruby code or C extensions with Ruzzy, producing crash reports or clean campaign summaries. Not for C/C++ fuzzing: use fuzzing.'
 ---
 
 # Ruzzy fuzzing campaign
@@ -11,7 +11,7 @@ description: 'Use when asked to set up and run coverage-guided fuzzing of Ruby c
 |---|---|
 | Trigger | User needs Ruzzy to run coverage-guided fuzzing on Ruby code or a Ruby native extension. |
 | Authority | reversible-local: write only harness, tracer, sanitizer preload, and corpus files to the working directory. State rollback as file deletion. |
-| Side effect | Write Ruzzy harness scripts, tracer scripts, sanitizer LD_PRELOAD paths, and corpus files — local working directory only. |
+| Side effect | Write Ruzzy harness scripts, tracer scripts, sanitizer LD_PRELOAD paths, and corpus files, local working directory only. |
 | Done | Ruzzy executes the intended Ruby target with the correct tracer or extension setup and reproduces saved failures. |
 
 ## Inputs
@@ -29,7 +29,7 @@ Optional: corpus directory path, libFuzzer arguments (e.g., `-max_len=1024`), cr
 5. Set `ASAN_OPTIONS=allocator_may_return_null=1:detect_leaks=0:use_sigaltstack=0`. Do not export `LD_PRELOAD`; use it inline with the ruby command.
 6. Install the gem with clang and sanitizer flags: `CC`, `CXX`, `LDSHARED`, `LDSHAREDXX` pointing to clang; `CFLAGS` and `CXXFLAGS` containing `-fsanitize=address,fuzzer-no-link -fno-omit-frame-pointer -fno-common -fPIC -g`.
 7. Run: `LD_PRELOAD=$(ruby -e 'require "ruzzy"; print Ruzzy::<SAN>_PATH') ruby <harness-or-tracer>.rb [corpus] [libfuzzer-options]`.
-8. On `ERROR: AddressSanitizer:` or `ERROR: UndefinedBehaviorSanitizer:` — capture the crash file path, Base64 content, and reproducer command. Write `crash-*` files to the working directory.
+8. On `ERROR: AddressSanitizer:` or `ERROR: UndefinedBehaviorSanitizer:`, capture the crash file path, Base64 content, and reproducer command. Write `crash-*` files to the working directory.
 9. To reproduce a saved failure, run the same command passing the crash file path as the final argument.
 
 ## Failure and recovery

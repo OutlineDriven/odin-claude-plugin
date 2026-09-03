@@ -1,6 +1,6 @@
 ---
 name: explain-concept
-description: 'Use when a concept needs making clear rather than practising: explain it simply, why does this exist, draw it, what is the difference, or simplify it for a beginner. Delivers a one-screen explanation from one chosen angle, grounded in sources. Not for scaffolded practice — use drill.'
+description: 'Use when a concept needs making clear rather than practising: explain it simply, why does this exist, draw it, what is the difference, or simplify it for a beginner. Delivers a one-screen explanation from one chosen angle, grounded in sources. Not for scaffolded practice: use drill.'
 ---
 
 # Explain concept
@@ -38,12 +38,12 @@ The concept to explain must be supplied. An explicit angle argument (`intuition`
 3. For intuition and motivation angles, ask the learner to explain a step before revealing the reason. The subject of the ask is the next step in the explanation, not the concept as a whole: pose "why do you think the next step is done this way?" and wait for the learner's answer before continuing. Done when: the learner is asked to explain the next step before the reason is revealed.
 
 4. Run exactly the chosen angle:
-   - intuition — one analogy drawn from something the learner already owns, the smallest example showing the behaviour, and the one sentence that survives when they forget the rest. Then stop and ask them to restate it in their own words. One screen.
-   - motivation — what people did before this existed, where that broke, what this buys, what it costs. Leave history to the origin angle. One screen.
-   - origin — who, when, what it displaced, one citation the learner can go read. Follow `references/ORIGIN-SEARCH.md` for the search query, candidate table, and acceptance rules. Nothing is written until the user accepts a candidate. Fifteen lines.
-   - picture — one diagram: nomnoml for structure and flow, D2 for architecture, house palette. Render it, require the render to exit zero, and place the SVG in the reply with alt text and a caption. A concept with no structure, flow, or architecture worth drawing gets one line saying so instead.
-   - contrast — a table whose rows are the properties where the items differ, plus one line per item saying when to reach for it. Every row separates rather than shares and at least one row is a difference with a consequence the learner can act on.
-   - simplify — one gist sentence stating what the concept is, using only words a beginner would know. One analogy connecting the concept to an everyday object or experience. Lead with the next action the reader should take, then the gist, then the analogy. Strip hedging, motivational framing, list ceremony, and filler connectives; keep only sentences that carry meaning. One screen.
+   - intuition: one analogy drawn from something the learner already owns, the smallest example showing the behaviour, and the one sentence that survives when they forget the rest. Then stop and ask them to restate it in their own words. One screen.
+   - motivation: what people did before this existed, where that broke, what this buys, what it costs. Leave history to the origin angle. One screen.
+   - origin: who, when, what it displaced, one citation the learner can go read. Follow `references/ORIGIN-SEARCH.md` for the search query, candidate table, and acceptance rules. Nothing is written until the user accepts a candidate. Fifteen lines.
+   - picture: one diagram: nomnoml for structure and flow, D2 for architecture, house palette. Render it, require the render to exit zero, and place the SVG in the reply with alt text and a caption. A concept with no structure, flow, or architecture worth drawing gets one line saying so instead.
+   - contrast: a table whose rows are the properties where the items differ, plus one line per item saying when to reach for it. Every row separates rather than shares and at least one row is a difference with a consequence the learner can act on.
+   - simplify: one gist sentence stating what the concept is, using only words a beginner would know. One analogy connecting the concept to an everyday object or experience. Lead with the next action the reader should take, then the gist, then the analogy. Strip hedging, motivational framing, list ceremony, and filler connectives; keep only sentences that carry meaning. One screen.
 
    Done when: the chosen angle's output is produced in the format above.
 

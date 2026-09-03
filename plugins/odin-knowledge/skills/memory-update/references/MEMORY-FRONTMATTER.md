@@ -5,7 +5,7 @@ Every memory file must start with YAML frontmatter between `---` delimiters.
 ```yaml
 ---
 name: short human-readable title
-description: one-line summary used to decide relevance in future conversations — be specific
+description: one-line summary used to decide relevance in future conversations, be specific
 type: user | feedback | project | reference
 originSessionId: <uuid of the session where this was saved>
 ---
@@ -16,13 +16,13 @@ originSessionId: <uuid of the session where this was saved>
 | type | Stores | Required extra sections |
 |---|---|---|
 | `user` | Who the user is, their role, goals, domain knowledge | None |
-| `feedback` | Rules about how to approach work — corrections AND confirmations | `**Why:**` and `**How to apply:**` |
+| `feedback` | Rules about how to approach work: corrections AND confirmations | `**Why:**` and `**How to apply:**` |
 | `project` | Ongoing work context, decisions, deadlines (absolute dates only) | `**Why:**` and `**How to apply:**` |
 | `reference` | Pointers to external systems and their purpose | None |
 
 ## Filename convention
 
-`<type>_<slug>.md` — slug is lowercase, hyphens only, ≤ 40 chars.
+`<type>_<slug>.md`: slug is lowercase, hyphens only, ≤ 40 chars.
 
 Examples:
 - `feedback_no-html-comments.md`
@@ -35,7 +35,7 @@ Examples:
 ### feedback
 
 ```markdown
-Rule text — lead with the rule itself, imperative voice.
+Rule text: lead with the rule itself, imperative voice.
 
 **Why:** The reason the user gave (prior incident, strong preference).
 **How to apply:** When and where this guidance kicks in; edge cases.
@@ -44,7 +44,7 @@ Rule text — lead with the rule itself, imperative voice.
 ### project
 
 ```markdown
-Fact or decision — lead with the concrete thing that is true.
+Fact or decision: lead with the concrete thing that is true.
 
 **Why:** The motivation (constraint, deadline, stakeholder ask).
 **How to apply:** How this should shape future suggestions.
@@ -59,7 +59,7 @@ Free-form prose. One short paragraph is usually enough.
 One line per memory file, ≤ 150 chars:
 
 ```
-- [Title](filename.md) — one-sentence hook that distinguishes this from similar entries
+- [Title](filename.md): one-sentence hook that distinguishes this from similar entries
 ```
 
 ## Anti-patterns (never save these)
@@ -69,4 +69,4 @@ One line per memory file, ≤ 150 chars:
 - Git history or activity summaries (use `git log`)
 - Ephemeral task state or in-progress work from the current session
 - Path-pinned rules that break if a file is renamed (e.g., "in auth.go, always X")
-- Relative dates — convert to absolute dates (YYYY-MM-DD) before saving project memories
+- Relative dates: convert to absolute dates (YYYY-MM-DD) before saving project memories

@@ -1,6 +1,6 @@
 ---
 name: constant-time-testing
-description: 'Use when a cryptographic implementation must be checked at runtime for timing side-channel leakage. Runs dudect statistical testing and Timecop dynamic tracing, applies a Welch t-test threshold, and reports leakage or a bounded inconclusive result. Not for static assembly inspection — use constant-time-analysis.'
+description: 'Use when a cryptographic implementation must be checked at runtime for timing side-channel leakage. Runs dudect statistical testing and Timecop dynamic tracing, applies a Welch t-test threshold, and reports leakage or a bounded inconclusive result. Not for static assembly inspection: use constant-time-analysis.'
 ---
 
 # Constant-time testing

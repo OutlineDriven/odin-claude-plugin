@@ -1,6 +1,6 @@
 ---
 name: variant-hunt
-description: 'Use when a confirmed root cause must be searched across a codebase or turned into a search rule. Returns triaged variants, false positives, and a CI-ready regression rule. Not for graph-neighborhood seeding — use variant-neighborhood-seeding.'
+description: 'Use when a confirmed root cause must be searched across a codebase or turned into a search rule. Returns triaged variants, false positives, and a CI-ready regression rule. Not for graph-neighborhood seeding: use variant-neighborhood-seeding.'
 ---
 
 # Variant hunt

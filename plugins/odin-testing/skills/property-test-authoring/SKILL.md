@@ -1,6 +1,6 @@
 ---
 name: property-test-authoring
-description: 'Use when adding or improving property tests for invariants, oracles, parsers, algorithms, data structures, or smart-contract state machines. Encodes the strongest grounded property with domain-aware generators and pinned edge cases. Not for review — use property-test-review.'
+description: 'Use when adding or improving property tests for invariants, oracles, parsers, algorithms, data structures, or smart-contract state machines. Encodes the strongest grounded property with domain-aware generators and pinned edge cases. Not for review, use property-test-review.'
 ---
 
 # Property test authoring
@@ -43,7 +43,7 @@ description: 'Use when adding or improving property tests for invariants, oracle
 
    Assert the strongest property the code supports. If "no crash" is all that can be found, explore whether a small rearrangement exposes something stronger before settling. Done when: one property is chosen from the catalog as the strongest the code supports, and the choice is justified by the shape identified in step 1.
 
-3. Design the generator. Put constraints in the strategy, not in `assume()`. `assume()` discards inputs after generation, so a filter that rejects most candidates wastes the budget and trips the exhausted-filter guard. Build compound inputs with the framework's composition primitives (e.g. `st.builds`, `st.composite`, `.flatmap`) rather than generating independently and filtering. Reserve `assume()` for conditions that genuinely cannot be expressed as a generator — a relationship between two already-generated values. Done when: the generator produces valid inputs directly from the strategy, and `assume()` appears only for inter-value relationships no strategy can express.
+3. Design the generator. Put constraints in the strategy, not in `assume()`. `assume()` discards inputs after generation, so a filter that rejects most candidates wastes the budget and trips the exhausted-filter guard. Build compound inputs with the framework's composition primitives (e.g. `st.builds`, `st.composite`, `.flatmap`) rather than generating independently and filtering. Reserve `assume()` for conditions that genuinely cannot be expressed as a generator, a relationship between two already-generated values. Done when: the generator produces valid inputs directly from the strategy, and `assume()` appears only for inter-value relationships no strategy can express.
 
 4. Pin the edge cases the domain already reveals. Empty, single-element, all-duplicates, zero, negative, and the maximum representable value recur across domains. Use the framework's example-pin mechanism (e.g. `@example`) so these run on every execution and document that the boundary was considered. Done when: the framework's example-pin mechanism lists each domain boundary, and every pinned case is one the domain actually exposes rather than a generic placeholder.
 
@@ -58,7 +58,7 @@ description: 'Use when adding or improving property tests for invariants, oracle
 
 7. Test the error path. For decoders and parsers, the contract is usually "raises the documented exception or succeeds, never an unexpected exception, never hangs." Catch only the documented exception and let everything else fail the test. Done when: the error-path test catches only the documented exception type, and an unexpected exception or hang would fail the test rather than being swallowed.
 
-8. Verify the test by running it against the target. Confirm it passes. Then confirm a plausible contract violation would fail it — if the test passes regardless of implementation correctness, it is tautological or vacuous and must be strengthened. Done when: the test passes against the correct implementation and fails when the property is violated by a planted mutation, proving the test can detect a real bug.
+8. Verify the test by running it against the target. Confirm it passes. Then confirm a plausible contract violation would fail it, if the test passes regardless of implementation correctness, it is tautological or vacuous and must be strengthened. Done when: the test passes against the correct implementation and fails when the property is violated by a planted mutation, proving the test can detect a real bug.
 
 9. Guard against tautology and vacuity:
    - Tautology: `assert add(a, b) == a + b` restates the implementation. Pick a property that constrains the function without recomputing it. Exception: `f(x) == f(x)` is a genuine determinism property when `f` is not obviously pure.

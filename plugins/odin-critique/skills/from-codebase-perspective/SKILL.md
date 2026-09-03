@@ -1,6 +1,6 @@
 ---
 name: from-codebase-perspective
-description: 'Use when asked to answer only from the codebase seat: what existing code tolerates or punishes. Emits a single-perspective analysis without blending. Not for rebuilding from primitives — use from-first-principle. Read-only; no source or remote mutation.'
+description: 'Use when asked to answer only from the codebase seat: what existing code tolerates or punishes. Emits a single-perspective analysis without blending. Not for rebuilding from primitives: use from-first-principle. Read-only; no source or remote mutation.'
 ---
 
 # From codebase perspective
@@ -16,9 +16,9 @@ description: 'Use when asked to answer only from the codebase seat: what existin
 
 ## Not for
 
-- Rebuilding a design from primitives — use from-first-principle.
-- Blended multi-seat analysis — run each from-*-perspective seat independently and compare after.
-- Source or remote mutation — this skill is read-only.
+- Rebuilding a design from primitives: use from-first-principle.
+- Blended multi-seat analysis: run each from-*-perspective seat independently and compare after.
+- Source or remote mutation: this skill is read-only.
 
 ## Inputs
 
@@ -41,4 +41,4 @@ The question or proposal to analyze from the codebase seat. The codebase under a
 
 ## Output
 
-One codebase-perspective analysis in chat: what the existing code tolerates, what it punishes, and the code evidence for each — no decision selected or recorded; comparison with other lenses happens after their independent outputs.
+One codebase-perspective analysis in chat: what the existing code tolerates, what it punishes, and the code evidence for each, no decision selected or recorded; comparison with other lenses happens after their independent outputs.

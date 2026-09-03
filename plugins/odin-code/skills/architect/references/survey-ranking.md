@@ -1,6 +1,6 @@
 # Survey and ranking
 
-Depth indicators and two-axis scoring for the brownfield survey sub-branch. Assumes the vocabulary in the survivor SKILL.md — module, interface, depth, seam, adapter, leverage, locality.
+Depth indicators and two-axis scoring for the brownfield survey sub-branch. Assumes the vocabulary in the survivor SKILL.md: module, interface, depth, seam, adapter, leverage, locality.
 
 ## Depth indicators
 

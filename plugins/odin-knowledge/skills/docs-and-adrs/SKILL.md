@@ -1,6 +1,6 @@
 ---
 name: docs-and-adrs
-description: 'Use when making an architectural decision, changing a public API, or shipping a feature needing rationale. Produces ADRs, inline gotchas, README/API docs, and changelog entries. Not for structured doc authoring — use docs-writing; not for PR-based doc sync — use docs-update.'
+description: 'Use when making an architectural decision, changing a public API, or shipping a feature needing rationale. Produces ADRs, inline gotchas, README/API docs, and changelog entries. Not for structured doc authoring: use docs-writing, not for PR-based doc sync: use docs-update.'
 ---
 
 # Docs and ADRs

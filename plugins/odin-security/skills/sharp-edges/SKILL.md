@@ -1,6 +1,6 @@
 ---
 name: sharp-edges
-description: 'Use when asked to audit a code surface for security-relevant edge cases. Returns a structured findings report. Not for delegated specialist analysis — use sharp-edges-analyzer.'
+description: 'Use when asked to audit a code surface for security-relevant edge cases. Returns a structured findings report. Not for delegated specialist analysis: use sharp-edges-analyzer.'
 ---
 
 # Sharp edges
@@ -16,7 +16,7 @@ description: 'Use when asked to audit a code surface for security-relevant edge 
 
 ## Not for
 
-- Delegated specialist-agent analysis with exploitability validation — use sharp-edges-analyzer.
+- Delegated specialist-agent analysis with exploitability validation: use sharp-edges-analyzer.
 
 ## Inputs
 

@@ -1,6 +1,6 @@
 ---
 name: resolve-merge-conflicts
-description: 'Use when a merge, rebase, cherry-pick, or stash pop stops on conflicts. Read both intents from primary sources, resolve every hunk, verify with scoped checks, and finish the integration. Not for people-mediation conflicts — use culture-conflict-mediation.'
+description: 'Use when a merge, rebase, cherry-pick, or stash pop stops on conflicts. Read both intents from primary sources, resolve every hunk, verify with scoped checks, and finish the integration. Not for people-mediation conflicts: use culture-conflict-mediation.'
 ---
 
 # Resolve merge conflicts
@@ -16,7 +16,7 @@ description: 'Use when a merge, rebase, cherry-pick, or stash pop stops on confl
 
 ## Refusal
 
-Not for people-mediation or team-interpersonal conflicts — use **culture-conflict-mediation**, which addresses working friction between colleagues using Culture Index trait profiles; resolve-merge-conflicts handles text conflicts in tracked files where git stops on unmerged paths. The shared word "conflict" is the only overlap. Not for remote, credential, publish, deploy, or other irreversible changes.
+Not for people-mediation or team-interpersonal conflicts; use **culture-conflict-mediation**, which addresses working friction between colleagues using Culture Index trait profiles; resolve-merge-conflicts handles text conflicts in tracked files where git stops on unmerged paths. The shared word "conflict" is the only overlap. Not for remote, credential, publish, deploy, or other irreversible changes.
 
 ## Inputs
 

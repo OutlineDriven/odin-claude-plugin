@@ -49,4 +49,4 @@ description: 'Use when a workflow, plan, diff, or completed work cycle must be c
 
 ## Output
 
-A chat-only report — per detected practice, class name, exact evidence line, one cheaper alternative (or explicit statement that none was found); if nothing matched, a clean verdict naming the five classes scanned and the artifact scope covered. The report changes no file, branch, credential, or remote state.
+A chat-only report: per detected practice, class name, exact evidence line, one cheaper alternative (or explicit statement that none was found); if nothing matched, a clean verdict naming the five classes scanned and the artifact scope covered. The report changes no file, branch, credential, or remote state.

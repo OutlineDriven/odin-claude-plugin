@@ -20,7 +20,7 @@ A human-supplied goal description stating the desired end state in operational t
 
 ## Procedure
 
-1. Receive the human-supplied goal description. Bound scope before any mutation: this skill writes only scaffold artifacts, performs no implementation work, and binds no effort. Done when: the goal description is received, and scope is bounded to scaffold artifacts only — no implementation work and no effort binding.
+1. Receive the human-supplied goal description. Bound scope before any mutation: this skill writes only scaffold artifacts, performs no implementation work, and binds no effort. Done when: the goal description is received, and scope is bounded to scaffold artifacts only, no implementation work and no effort binding.
 2. Validate the goal at its trust boundary. Confirm the human states exactly one checkable success predicate. A predicate is checkable when a verifier can return pass or fail without human judgment of the outcome. If zero or more than one predicate is present, or the predicate is not checkable, stop and report without writing. Done when: exactly one checkable success predicate is confirmed (a verifier can return pass or fail without human judgment), or the run stops with a stated count or checkability failure and no write.
 3. Write the goal statement artifact recording the approved success predicate. Done when: the goal statement artifact exists on disk and records the approved success predicate.
 4. Write the verifier artifact recording how the predicate is checked, such that the check returns pass or fail. Done when: the verifier artifact exists on disk and records the check method that returns pass or fail.

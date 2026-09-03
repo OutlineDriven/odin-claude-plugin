@@ -67,7 +67,7 @@ No decoration covering missing depth. No slop covering missing POV. Care finishe
 - Code: TODO comments name what is undone. Stub functions signal stub-ness; they do not pretend to be complete. The error path, the internal names, the log message are finished to the standard of the public API.
 - Decision: trade-offs are stated, not buried. The cost of the recommendation is named.
 
-Failure mode: confident-sounding hedges. "Best practice" with no citation. "Industry standard" doing the citation's job. **Also fails when**: unfinished interiors — polished where seen and abandoned where not. The error path no caller reads, the transition the skimmer glides over, the default no one sets.
+Failure mode: confident-sounding hedges. "Best practice" with no citation. "Industry standard" doing the citation's job. **Also fails when**: unfinished interiors, polished where seen and abandoned where not. The error path no caller reads, the transition the skimmer glides over, the default no one sets.
 
 ## One strong moment
 

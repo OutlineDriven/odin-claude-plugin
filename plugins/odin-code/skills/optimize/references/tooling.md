@@ -27,7 +27,7 @@ This matrix pairs profiling and location tools with benchmark harness templates 
 ## Minimal harness templates
 
 Use these when Phase 3 finds no existing benchmark harness for the hot path. It is a **throwaway
-instrument** — its only purpose is to measure `HOT_PATH` in isolation with realistic inputs.
+instrument**: its only purpose is to measure `HOT_PATH` in isolation with realistic inputs.
 Delete it after the skill run unless the user asks to keep it as a regression guard.
 
 ### Harness placement

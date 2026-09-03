@@ -1,6 +1,6 @@
 ---
 name: agent-surface-forge
-description: 'Use when the user asks to audit or repair agent surfaces — plugin configs, agent definitions, skills, CLAUDE.md/AGENTS.md, docs, prompts, commands, or hooks. Produces a certainty-graded breadth report and applies only HIGH auto-fixable findings with --apply. Not for deep one-skill improvement — use skill-improver.'
+description: 'Use when the user asks to audit or repair agent surfaces, plugin configs, agent definitions, skills, CLAUDE.md/AGENTS.md, docs, prompts, commands, or hooks. Produces a certainty-graded breadth report and applies only HIGH auto-fixable findings with --apply. Not for deep one-skill improvement, use skill-improver.'
 ---
 
 # Agent surface forge
@@ -9,7 +9,7 @@ description: 'Use when the user asks to audit or repair agent surfaces — plugi
 
 | Field | Bound contract |
 |---|---|
-| Trigger | User asks to audit or repair agent surfaces — plugin configs, agent definitions, skills, CLAUDE.md/AGENTS.md, docs, prompts, commands, or hooks. Not for deep one-skill improvement — use skill-improver. |
+| Trigger | User asks to audit or repair agent surfaces, plugin configs, agent definitions, skills, CLAUDE.md/AGENTS.md, docs, prompts, commands, or hooks. Not for deep one-skill improvement, use skill-improver. |
 | Authority | Reversible local writes, only with --apply, only to HIGH-certainty autoFix:yes findings on the named plugin/agent/skill/docs/prompt/claudemd/hooks surfaces. Rollback: revert any applied edit whose re-analysis introduces a new HIGH finding. |
 | Side effect | Local file edits to HIGH + autoFix:yes items only under --apply; re-verifies after each edit. No suppression state, no model routing, no external analyzer binary. |
 | Done | Surface audit report produced with all HIGH findings complete in default output, MEDIUM/LOW shown only under --verbose, and under --apply each HIGH finding removed without new HIGH issues. |

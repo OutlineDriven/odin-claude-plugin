@@ -12,4 +12,4 @@ HUNT (cite `path:line` for each):
 4. Boundary returns: empty collection, zero, max, overflow/underflow, integer truncation.
 5. Concurrency only when obvious from the diff (shared mutable state without a guard); deep race-hunting belongs to the adversarial persona.
 
-SEVERITY ANCHORS: a wrong result on an ordinary input is P0/P1 by the rubric; a wrong result only on an exotic path is P2. Apply `_contract.md`.
+SEVERITY ANCHORS: a wrong result on an ordinary input is P0/P1 by the rubric; a wrong result only on an exotic path is P2. Apply `personas-_contract.md`.

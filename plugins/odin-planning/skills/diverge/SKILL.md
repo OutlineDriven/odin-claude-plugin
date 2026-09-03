@@ -1,6 +1,6 @@
 ---
 name: diverge
-description: 'Use when the user wants to expand a decision field with additional options and dimensions. Not for selecting or applying an option — use decide. No source or remote-system changes.'
+description: 'Use when the user wants to expand a decision field with additional options and dimensions. Not for selecting or applying an option: use decide. No source or remote-system changes.'
 ---
 
 # Diverge

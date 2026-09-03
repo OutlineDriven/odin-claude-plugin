@@ -1,6 +1,6 @@
 ---
 name: prototype
-description: 'Use when asked to prototype one design question through a cheap logic or UI experiment. Builds a throwaway artifact, records the one-line verdict, and folds the decision into real work without polluting main. Not for interactive state-model demos — use prototype-logic.'
+description: 'Use when asked to prototype one design question through a cheap logic or UI experiment. Builds a throwaway artifact, records the one-line verdict, and folds the decision into real work without polluting main. Not for interactive state-model demos: use prototype-logic.'
 ---
 
 # Prototype
@@ -26,8 +26,8 @@ description: 'Use when asked to prototype one design question through a cheap lo
 Route before writing because LOGIC and UI variants require different artifact structures.
 
 1. Classify the question:
-   - Logic — state machine, edge case, data shape, reducer, API contract, or "does this feel right" → use the LOGIC procedure below.
-   - UI — what something should look like, layout, information hierarchy, or "what should this look like" → use the UI procedure below.
+   - Logic: state machine, edge case, data shape, reducer, API contract, or "does this feel right" → use the LOGIC procedure below.
+   - UI: what something should look like, layout, information hierarchy, or "what should this look like" → use the UI procedure below.
 2. If ambiguous and the user is not reachable, default: backend module → LOGIC; page or component → UI. State the assumption at the top of the artifact. Done when: the question is classified as LOGIC or UI, or the ambiguity default is stated and recorded on the artifact.
 
 ### LOGIC procedure
@@ -36,10 +36,10 @@ Route before writing because LOGIC and UI variants require different artifact st
 
 1. State the question. Write one paragraph at the top of the demo stating the exact question and the state model being tested. This checkpoint prevents the prototype from answering the wrong question. Done when: the artifact's top paragraph names the exact question and the state model, and a reader can tell what the prototype will answer without reading the code.
 2. Isolate the logic. Put the answerable logic in a single `<script>` block as a small pure module. Pick the shape that fits the question:
-   - Pure reducer: `(state, action) => state` — for discrete events and a single state value.
-   - State machine: explicit states and transitions — when legality of actions depends on current state.
-   - Pure functions over a plain data type — when there is no implicit current state.
-   - Class or module with a clear method surface — when logic genuinely owns ongoing internal state.
+   - Pure reducer: `(state, action) => state`, for discrete events and a single state value.
+   - State machine: explicit states and transitions, when legality of actions depends on current state.
+   - Pure functions over a plain data type, when there is no implicit current state.
+   - Class or module with a clear method surface, when logic genuinely owns ongoing internal state.
    Keep it pure: no DOM, no `document`, no button handlers reaching inside it. This module must be liftable into the real codebase after the question is answered. Done when: the logic sits in one pure module with no DOM or event-handler coupling, and the module's shape matches the question type from the list above.
 3. Build the shareable HTML file. One file, plain HTML/CSS/JS, everything inline, opens by double-click. No framework, no bundler, no server. Layout, top to bottom:
    - Title and one-line explanation of the question.

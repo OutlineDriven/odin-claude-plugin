@@ -1,6 +1,6 @@
 ---
 name: instruction-understanding-gate
-description: 'Use when a request is long, bundled, high-stakes, or has ambiguous referents. Verifies understanding before non-trivial work: restates, cross-checks context, proceeds silently, surfaces a surviving fork. Not for tiered scans — use clarify; not for interviews — use interview-me.'
+description: 'Use when a request is long, bundled, high-stakes, or has ambiguous referents. Verifies understanding before non-trivial work: restates, cross-checks context, proceeds silently, surfaces a surviving fork. Not for tiered scans: use clarify; not for interviews: use interview-me.'
 ---
 
 # Instruction understanding gate

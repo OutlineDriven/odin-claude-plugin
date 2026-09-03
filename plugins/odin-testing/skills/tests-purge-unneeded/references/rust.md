@@ -1,4 +1,4 @@
-# Rust — cargo test deletion patterns
+# Rust, cargo test deletion patterns
 
 Rust checks ownership and lifetimes, requires exhaustive matching, and has no implicit conversions or null. **A test that asserts a struct has the fields the compiler proved it has catches nothing.** The compiler is the test for structure; `cargo test` is for behavior at boundaries.
 
@@ -36,21 +36,21 @@ fn wrap_returns_input() {
 }
 ```
 
-If `wrap` is genuinely identity, it is dead code — `let n = n;` should be inlined and the function deleted. The test then deletes itself.
+If `wrap` is genuinely identity, it is dead code, `let n = n;` should be inlined and the function deleted. The test then deletes itself.
 
 ### Pure type-check tests (no runtime work, no panic surface)
 
 ```rust
 #[test]
 fn http_client_typestate_compiles() {
-    // Only declarations — no method calls that could panic, no I/O, no Result-bearing work
+    // Only declarations, no method calls that could panic, no I/O, no Result-bearing work
     let _: PhantomData<HttpClient<Configured>> = PhantomData;
 }
 ```
 
-Delete this kind of test only when the test's *sole* purpose is type-checking AND it has no meaningful runtime behavior — no method calls that could panic, no `unwrap`/`expect`, no I/O, no fallible operations. Such tests should live in `trybuild` UI tests rather than the regular test runner.
+Delete this kind of test only when the test's *sole* purpose is type-checking AND it has no meaningful runtime behavior, no method calls that could panic, no `unwrap`/`expect`, no I/O, no fallible operations. Such tests should live in `trybuild` UI tests rather than the regular test runner.
 
-**Keep no-assert smoke tests** — a `#[test]` with no `assert!` still fails the suite if any code it executes panics, returns an unhandled `Err`, or aborts. A test like:
+**Keep no-assert smoke tests**, a `#[test]` with no `assert!` still fails the suite if any code it executes panics, returns an unhandled `Err`, or aborts. A test like:
 
 ```rust
 #[test]
@@ -61,7 +61,7 @@ fn parser_does_not_panic_on_empty_input() {
 
 is a real smoke test against the panic-free contract. Keep.
 
-**Important caveat**: a runtime assertion (`assert_eq!(get_id(&item), 7)`) tests the *behavior* of `get_id` / `HasId for Foo`, not just the type. That is a real-bug test (a refactor could swap fields, change the impl, etc.) — see the **Keep** section below.
+**Important caveat**: a runtime assertion (`assert_eq!(get_id(&item), 7)`) tests the *behavior* of `get_id` / `HasId for Foo`, not just the type. That is a real-bug test (a refactor could swap fields, change the impl, etc.), see the **Keep** section below.
 
 ### Default::default trivial assertion
 
@@ -95,7 +95,7 @@ fn deserialize_rejects_missing_required_field() {
 }
 ```
 
-JSON parsing is a runtime boundary — the type system does not check JSON shape. Real-bug surface. Keep.
+JSON parsing is a runtime boundary, the type system does not check JSON shape. Real-bug surface. Keep.
 
 ### Error-type variants
 
@@ -125,7 +125,7 @@ fn user_repo_persists_to_real_postgres() {
 }
 ```
 
-Real DB, real transaction — catches schema mismatches, query bugs, sqlx type-mapping errors. Keep.
+Real DB, real transaction, catches schema mismatches, query bugs, sqlx type-mapping errors. Keep.
 
 ### Unsafe invariant
 
@@ -144,7 +144,7 @@ Tests the contract of `unsafe` code at its boundary, exactly where the compiler 
 ```rust
 #[test]
 fn channel_drops_remaining_messages_on_close() {
-    // tests the actual concurrency contract — compiler cannot prove this
+    // tests the actual concurrency contract, compiler cannot prove this
 }
 ```
 

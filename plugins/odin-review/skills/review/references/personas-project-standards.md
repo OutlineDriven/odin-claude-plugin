@@ -13,6 +13,6 @@ HUNT (cite `path:line` for each):
 5. Writing style violations: second person where imperative is required, hedge words in instructions.
 6. Protected artifact violations: changes to paths the standards designate as protected.
 
-SEVERITY ANCHORS: a mechanical standards violation with a quotable rule is P1; a judgment-call application of a rule is P2; a style preference not codified in standards is not flagged. Apply `_contract.md`.
+SEVERITY ANCHORS: a mechanical standards violation with a quotable rule is P1; a judgment-call application of a rule is P2; a style preference not codified in standards is not flagged. Apply `personas-_contract.md`.
 
 NOTE: every finding must cite the exact rule from the standards file and the specific line in the diff. Generic best practices not in any standards file are not findings.

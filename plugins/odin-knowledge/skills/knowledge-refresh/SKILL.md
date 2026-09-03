@@ -72,7 +72,7 @@ If the input is ambiguous, ask the user to supply a file path or paste the conte
 
 5. **Present findings.** Present a grouped review report with P1 (blocks shipping, most critical first), P2 (should fix), P3 (nice to have), and Clean (what passed) sections. Each finding is specific: "Revenue cited as $X but [source] shows $Y as of [date]" rather than "Revenue might be wrong." Done when: the grouped report is presented with specific findings in severity order.
 
-6. **Offer next steps.** Ask: "Review complete. [N] findings ([P1 count] critical, [P2 count] important). What next?" Options: (1) Fix P1/P2 issues now — address findings inline, then re-review; (2) Ship as-is — acknowledge findings and proceed without fixing. Done when: the user is offered the two next-step options.
+6. **Offer next steps.** Ask: "Review complete. [N] findings ([P1 count] critical, [P2 count] important). What next?" Options: (1) Fix P1/P2 issues now: address findings inline, then re-review; (2) Ship as-is: acknowledge findings and proceed without fixing. Done when: the user is offered the two next-step options.
 
 7. **Execute the chosen action only after the review completes.**
    - If the user chooses to fix: the review is complete. The fix is a separate, explicitly user-authorized edit. Make targeted edits, then re-run the review as a new invocation.

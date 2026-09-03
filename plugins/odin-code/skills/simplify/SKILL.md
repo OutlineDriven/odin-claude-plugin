@@ -1,6 +1,6 @@
 ---
 name: simplify
-description: 'Use when the user says "simplify this diff" or asks for a compression pass over a change-set. Decomposes the diff into reuse, quality, and efficiency axes; applies validated findings as atomic issue-class commits; auto-reverts regressions. Not for dead-code sweeps — use deslop.'
+description: 'Use when the user says "simplify this diff" or asks for a compression pass over a change-set. Decomposes the diff into reuse, quality, and efficiency axes; applies validated findings as atomic issue-class commits; auto-reverts regressions. Not for dead-code sweeps: use deslop.'
 ---
 
 # Simplify: axis-decomposed compression pass on a diff
@@ -75,7 +75,7 @@ Derived from the diff:
 ## Failure and recovery
 | Exit code | Trigger | Recovery |
 |---|---|---|
-| 0 | Clean | — |
+| 0 | Clean | none |
 | 11 | Empty diff after all fallbacks | Pass-through, no work to do |
 | 12 | Findings emitted but survivor set empty after Reviewer audit | Report attached, no patch applied |
 | 13 | Behavior regression on a fix commit | Offending commit auto-reverted; stop simplify run for that class; already-landed commits remain |

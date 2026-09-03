@@ -11,7 +11,7 @@ description: 'Use when skill or knowledge activation is unreliable, or setup rea
 |---|---|
 | Trigger | User asks to make skill/knowledge activation more reliable in their agent tool, or first-run wizard reaches the activation-reliability question. |
 | Authority | reversible-local: write only named local hook configuration artifacts; rollback by removing the hook config and its marker. |
-| Side effect | Project-scoped activation hook configured. Reference implementation: Claude Code SessionStart hook that injects a reminder only when a `keep-the-why:config` marker is present — measured 0/10 to 10/10 on affected eval cases. |
+| Side effect | Project-scoped activation hook configured. Reference implementation: Claude Code SessionStart hook that injects a reminder only when a `keep-the-why:config` marker is present, measured 0/10 to 10/10 on affected eval cases. |
 | Done | Activation measured improved via before/after eval on affected cases; hook scoped by config-marker presence (not unconditional); honest limits stated for tools without a hook mechanism. |
 
 ## Inputs
@@ -22,7 +22,7 @@ description: 'Use when skill or knowledge activation is unreliable, or setup rea
 
 ## Procedure
 
-1. Identify the agent platform's native hook or session-start mechanism. If the platform exposes no hook mechanism, state this limitation explicitly and stop — do not invent a workaround. Done when: the platform's hook mechanism is identified or the limitation is declared and the skill stops.
+1. Identify the agent platform's native hook or session-start mechanism. If the platform exposes no hook mechanism, state this limitation explicitly and stop: do not invent a workaround. Done when: the platform's hook mechanism is identified or the limitation is declared and the skill stops.
 2. Inventory the target skills/knowledge items and confirm each has at least one eval case that tests whether it activates when expected. Done when: every target item has at least one eval case.
 3. Run the eval set once without any hook to record the before-metric (expected: near 0/n on affected cases where activation was unreliable). Done when: the before-metric is recorded.
 4. Design a config marker (e.g., `keep-the-why:config`) that scopes the hook to fire only when present in the project configuration. The marker must be a project-local artifact, not a global or user-wide setting. Done when: one config marker is designed and is project-local.
@@ -34,7 +34,7 @@ description: 'Use when skill or knowledge activation is unreliable, or setup rea
 ## Failure and recovery
 | Failure class | Detection | Response |
 |---|---|---|
-| Platform has no hook mechanism | No session-start, hook, or lifecycle event API found | Document the limitation. Report the platform name and what was checked. Stop — do not claim the hook was configured. |
+| Platform has no hook mechanism | No session-start, hook, or lifecycle event API found | Document the limitation. Report the platform name and what was checked. Stop: do not claim the hook was configured. |
 | Hook fires unconditionally | Hook activates on projects without the config marker | Fix the scoping logic before measuring. An unconditional hook is a scope violation. |
 | Eval shows no improvement | After-metric equals before-metric | Report the actual numbers. Do not claim success. Adjust the hook content or scoping and re-measure, or report non-convergence after two attempts. |
 

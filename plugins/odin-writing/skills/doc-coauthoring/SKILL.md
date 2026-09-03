@@ -1,6 +1,6 @@
 ---
 name: doc-coauthoring
-description: 'Use when drafting a doc, proposal, spec, RFC, design doc, decision doc, or PRD in chat. Produces a structured document that passes fresh-reader testing and meets its impact goal. Not for reviewing an existing plan — use doc-review. No source or remote-system changes.'
+description: 'Use when drafting a doc, proposal, spec, RFC, design doc, decision doc, or PRD in chat. Produces a structured document that passes fresh-reader testing and meets its impact goal. Not for reviewing an existing plan: use doc-review. No source or remote-system changes.'
 ---
 
 # Doc coauthoring
@@ -32,14 +32,14 @@ The user may supply context in shorthand, as an unstructured context dump, or by
 
 1. Offer the three-stage workflow: Context Gathering, Refinement & Structure, and Reader Testing. If the user declines, work freeform and stop this procedure. **Done when:** the user accepts the three-stage workflow or the skill stands down.
 
-2. Stage 1 — Context Gathering. **Done when:** context gaps are closed and the user clears the move to drafting.
+2. Stage 1: Context Gathering. **Done when:** context gaps are closed and the user clears the move to drafting.
    1. Ask for meta-context: document type, primary audience, desired impact, template/format, and constraints.
    2. If the user names a template or existing draft, ask them to share or paste it; read what is provided.
    3. Ask for an unstructured dump of all relevant context (background, alternatives rejected, organizational context, timeline, architecture, stakeholder concerns).
    4. Once the initial dump is done, ask 5-10 clarifying questions targeting gaps. The user may answer in shorthand.
    5. Exit Stage 1 when questions reach edge cases and trade-offs without needing basics explained. Ask whether the user wants to add more context before moving on.
 
-3. Stage 2 — Refinement & Structure. **Done when:** the section structure and every section are refined.
+3. Stage 2: Refinement & Structure. **Done when:** the section structure and every section are refined.
    1. Agree on the section structure. If unknown, suggest 3-5 sections appropriate to the document type. Start with the section that has the most unknowns (usually the core proposal or technical approach); leave summary sections for last.
    2. For each section, in order:
       1. Announce the section and ask 5-10 clarifying questions about what it should contain.
@@ -50,7 +50,7 @@ The user may supply context in shorthand, as an unstructured context dump, or by
       6. Refine through surgical edits indicated by the user. After three consecutive iterations with no substantial change, ask whether anything can be removed without losing important information. Confirm the section is complete before moving on.
    3. When 80% or more of sections are drafted, re-read the whole draft and report flow problems, redundancy, contradictions, and generic filler.
 
-4. Stage 3 — Reader Testing. **Done when:** fresh-reader questions are answered correctly with no new gaps.
+4. Stage 3: Reader Testing. **Done when:** fresh-reader questions are answered correctly with no new gaps.
    1. Predict 5-10 questions a fresh reader would realistically ask to discover or use this document.
    2. Test each question with a fresh-context reader that has no conversation history: use a sub-agent if available; otherwise instruct the user to paste the draft into a fresh conversation and ask the questions. For each question, capture whether the reader answered correctly, found anything ambiguous, and what prior knowledge the doc assumed.
    3. Run additional checks for ambiguity, false assumptions, and internal contradictions.

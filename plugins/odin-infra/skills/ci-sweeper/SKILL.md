@@ -1,6 +1,6 @@
 ---
 name: ci-sweeper
-description: 'Use when a requested sweep monitors CI failures over a bounded attempt window. Returns each root cause reproduced or classified non-actionable with any minimal verified patch as a proposal. Not for classifying one failure without patching — use classify-ci-failure.'
+description: 'Use when a requested sweep monitors CI failures over a bounded attempt window. Returns each root cause reproduced or classified non-actionable with any minimal verified patch as a proposal. Not for classifying one failure without patching: use classify-ci-failure.'
 ---
 
 # CI sweeper

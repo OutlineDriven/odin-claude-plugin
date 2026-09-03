@@ -1,6 +1,6 @@
 ---
 name: skill-doctor
-description: 'Use when a user wants agent setup graded from conversation history. Produces an HTML report with 0-10 scores, evidence-cited findings, and ranked suggestions. Not for skill fixing — use skill-improver; not for security scanning — use skill-scanner.'
+description: 'Use when a user wants agent setup graded from conversation history. Produces an HTML report with 0-10 scores, evidence-cited findings, and ranked suggestions. Not for skill fixing: use skill-improver; not for security scanning: use skill-scanner.'
 ---
 
 # Skill doctor

@@ -1,6 +1,6 @@
 ---
 name: get-pr-comments
-description: 'Use when asked to summarize feedback on the active PR. Returns severity-grouped feedback and an action list. Not for finding PRs to review — use gh-review-requests. Not for resolving feedback — use resolve-pr-feedback. Read-only.'
+description: 'Use when asked to summarize feedback on the active PR. Returns severity-grouped feedback and an action list. Not for finding PRs to review: use gh-review-requests. Not for resolving feedback: use resolve-pr-feedback. Read-only.'
 ---
 
 # Get PR comments
@@ -16,9 +16,9 @@ description: 'Use when asked to summarize feedback on the active PR. Returns sev
 
 ## Not for
 
-- Finding PRs to review — use gh-review-requests.
-- Resolving review feedback — use resolve-pr-feedback.
-- Source or remote mutation — this skill is read-only.
+- Finding PRs to review, use gh-review-requests.
+- Resolving review feedback: use resolve-pr-feedback.
+- Source or remote mutation: this skill is read-only.
 
 ## Inputs
 
@@ -43,4 +43,4 @@ description: 'Use when asked to summarize feedback on the active PR. Returns sev
 
 ## Output
 
-A chat report with feedback grouped by severity tier (blocking, suggestion, nit, question) and an ordered action list — each action traceable to its source comment.
+A chat report with feedback grouped by severity tier (blocking, suggestion, nit, question) and an ordered action list, each action traceable to its source comment.

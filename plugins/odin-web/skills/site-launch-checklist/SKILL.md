@@ -1,6 +1,6 @@
 ---
 name: site-launch-checklist
-description: 'Use when a user says a site or app is ready to ship and wants a decision-gated pre-launch readiness pass. Runs infrastructure, security, content, discovery, and quality checks with pass/fail accounting and an ordered fix queue. Not for deployment execution — use shipping.'
+description: 'Use when a user says a site or app is ready to ship and wants a decision-gated pre-launch readiness pass. Runs infrastructure, security, content, discovery, and quality checks with pass/fail accounting and an ordered fix queue. Not for deployment execution: use shipping.'
 disable-model-invocation: true
 ---
 

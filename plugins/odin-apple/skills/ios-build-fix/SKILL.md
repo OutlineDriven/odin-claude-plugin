@@ -1,6 +1,6 @@
 ---
 name: ios-build-fix
-description: 'Use when asked to run /ios-build-fix to fix a failing iOS build or UI behavior through the debug bridge. Not for a clean rebuild — use ios-build-cleanup.'
+description: 'Use when asked to run /ios-build-fix to fix a failing iOS build or UI behavior through the debug bridge. Not for a clean rebuild: use ios-build-cleanup.'
 ---
 
 # iOS build fix

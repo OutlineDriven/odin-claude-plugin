@@ -1,6 +1,6 @@
 ---
 name: visual-fact-check
-description: 'Use when invoked as visual-fact-check with a document path. Verifies every factual claim against its cited sources, corrects errors in place, and appends a verification summary. Not for both-ways fact-checking of assertions — use verify-both-ways.'
+description: 'Use when invoked as visual-fact-check with a document path. Verifies every factual claim against its cited sources, corrects errors in place, and appends a verification summary. Not for both-ways fact-checking of assertions: use verify-both-ways.'
 ---
 
 # Visual fact check
@@ -16,8 +16,8 @@ description: 'Use when invoked as visual-fact-check with a document path. Verifi
 
 ## Inputs
 
-- **Document path** — an explicit document path or, when omitted, the most recently modified HTML file inside a `diagrams` directory below the working directory.
-- **Cited sources** — the links, references, and source notes already attached to claims in the document.
+- Document path: an explicit document path or, when omitted, the most recently modified HTML file inside a `diagrams` directory below the working directory.
+- Cited sources: the links, references, and source notes already attached to claims in the document.
 
 ## Procedure
 
@@ -32,10 +32,10 @@ description: 'Use when invoked as visual-fact-check with a document path. Verifi
 
 ## Failure and recovery
 
-- **document-not-found** — return blocked without creating or guessing a path.
-- **source-unavailable** — classify only the affected claim as `unverifiable`; continue with independent claims.
-- **structure-corrupted** — restore the exact pre-mutation document bytes and report the failed structural assertion.
-- **partial result** — finish every claim whose cited evidence is available and list the remaining claims as unsupported or unverifiable. Never report them as verified.
+- document-not-found: return blocked without creating or guessing a path.
+- source-unavailable: classify only the affected claim as `unverifiable`; continue with independent claims.
+- structure-corrupted: restore the exact pre-mutation document bytes and report the failed structural assertion.
+- partial result: finish every claim whose cited evidence is available and list the remaining claims as unsupported or unverifiable. Never report them as verified.
 
 ## Output
 The target document with evidence-backed corrections and one appended verification summary; the returned report lists each claim, citation, classification, before/after text when corrected, and the structural-integrity result.

@@ -1,6 +1,6 @@
 ---
 name: design-consultation
-description: 'Use when /design-consultation proposes a design system with mockups or HTML and persists the approved system in DESIGN.md. Not for in-chat direction picking — use design. No remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when /design-consultation proposes a design system with mockups or HTML and persists the approved system in DESIGN.md. Not for in-chat direction picking: use design. No remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Design consultation
@@ -41,4 +41,4 @@ description: 'Use when /design-consultation proposes a design system with mockup
 - Partial result: artifacts may exist, but the done predicate is not met; report the session as blocked awaiting approval, not as done.
 
 ## Output
-DESIGN.md with the approved design system (tokens, primitives, application rules), CLAUDE.md pointers naming DESIGN.md as source of truth, and design artifacts alongside — ordered read-context → propose → preview → present → persist → keep-artifacts, gated on user approval before any persistence.
+DESIGN.md with the approved design system (tokens, primitives, application rules), CLAUDE.md pointers naming DESIGN.md as source of truth, and design artifacts alongside, ordered read-context → propose → preview → present → persist → keep-artifacts, gated on user approval before any persistence.

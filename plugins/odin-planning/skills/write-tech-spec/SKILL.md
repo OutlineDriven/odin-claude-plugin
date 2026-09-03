@@ -1,6 +1,6 @@
 ---
 name: write-tech-spec
-description: 'Use when a user asks for a tech spec or architecture doc. Produces a self-contained TECH.md that translates intent into an executable implementation plan. Not for PRDs — use write-prd; not for product specs with behavioral invariants — use write-product-spec.'
+description: 'Use when a user asks for a tech spec or architecture doc. Produces a self-contained TECH.md that translates intent into an executable implementation plan. Not for PRDs, use write-prd; not for product specs with behavioral invariants, use write-product-spec.'
 ---
 
 # Write tech spec
@@ -40,4 +40,4 @@ Partial result: if the spec is partially drafted when a failure is detected, do 
 Rollback: delete `TECH.md` to undo the side effect.
 
 ## Output
-`TECH.md` in the working directory — sections in order: Objective, Background, Design, Implementation plan, Risks and mitigations, Open questions; no placeholders, TODOs, or deferred sections.
+`TECH.md` in the working directory: sections in order: Objective, Background, Design, Implementation plan, Risks and mitigations, Open questions; no placeholders, TODOs, or deferred sections.

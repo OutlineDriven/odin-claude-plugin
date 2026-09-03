@@ -1,6 +1,6 @@
 ---
 name: writing-shape
-description: 'Use when shaping a source document paragraph by paragraph without modifying it. Produces an approved, grounded document with named gaps for rejected paragraphs. Not for selected-beat assembly — use writing-beats; not for fragment capture — use writing-fragments.'
+description: 'Use when shaping a source document paragraph by paragraph without modifying it. Produces an approved, grounded document with named gaps for rejected paragraphs. Not for selected-beat assembly: use writing-beats, not for fragment capture: use writing-fragments.'
 ---
 
 # Writing shape
@@ -41,4 +41,4 @@ Rollback: delete `<source_path>.shaped.md`. Version control applies only if the 
 
 ## Output
 
-`<source_path>.shaped.md` — approved paragraphs in original order with rejected paragraphs marked as named gaps; original source file unmodified.
+`<source_path>.shaped.md`, approved paragraphs in original order with rejected paragraphs marked as named gaps; original source file unmodified.

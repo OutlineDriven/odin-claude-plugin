@@ -38,4 +38,4 @@ description: 'Use when the user requests an accessibility audit, a11y check, or 
 - Non-mutation: nothing is written at any point, so there is nothing to roll back; if a step could only proceed by writing a file, skip that step and say so in the report.
 
 ## Output
-A report returned in the conversation (no files created) with sections in order: Summary (scope, WCAG level, issue counts by severity, automated coverage, failed checks), Findings (in severity order: Critical, Serious, Moderate, Minor — each with WCAG criterion, `path:line` locations, before/after code, and fix rationale), Manual testing recommendations, and Next steps.
+A report returned in the conversation (no files created) with sections in order: Summary (scope, WCAG level, issue counts by severity, automated coverage, failed checks), Findings (in severity order: Critical, Serious, Moderate, Minor, each with WCAG criterion, `path:line` locations, before/after code, and fix rationale), Manual testing recommendations, and Next steps.

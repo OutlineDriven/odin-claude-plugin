@@ -1,6 +1,6 @@
 ---
 name: parallel-launch
-description: 'Use when work splits into independent sub-tasks or cross-domain research. Runs concurrent agents and returns one reviewed composition or an exact gap. Not for durable scope ownership with per-scope review — use partition-scopes-to-subagents.'
+description: 'Use when work splits into independent sub-tasks or cross-domain research. Runs concurrent agents and returns one reviewed composition or an exact gap. Not for durable scope ownership with per-scope review: use partition-scopes-to-subagents.'
 ---
 
 # Parallel launch
@@ -36,4 +36,4 @@ Required: the request, its acceptance criteria, and enough source context for ea
 - Unauthorized or partial mutation: Stop further dispatch. Restore every changed local target from its captured prior content or exact undo operation, then report restoration status and any target that could not be restored. Never conceal an error or claim the done predicate holds.
 
 ## Output
-One reviewed composition mapping each concern to its result with review passage recorded — or, on failure, usable partial results, terminal classification (`blocked` or `non-converged`), exact gap, observed error or conflict, restoration status, and one targeted follow-up.
+One reviewed composition mapping each concern to its result with review passage recorded, or, on failure, usable partial results, terminal classification (`blocked` or `non-converged`), exact gap, observed error or conflict, restoration status, and one targeted follow-up.

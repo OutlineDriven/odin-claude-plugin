@@ -1,6 +1,6 @@
 ---
 name: gut-sync
-description: 'Use when a user resumes work and needs an orientation card without full human recall; returns a small card of shape, invariants, and smell locations. Not for packaging context for another agent or session — use handoff; never source or remote-system changes.'
+description: 'Use when a user resumes work and needs an orientation card without full human recall; returns a small card of shape, invariants, and smell locations. Not for packaging context for another agent or session: use handoff; never source or remote-system changes.'
 ---
 
 # Gut sync

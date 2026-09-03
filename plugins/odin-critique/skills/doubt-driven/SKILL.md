@@ -1,6 +1,6 @@
 ---
 name: doubt-driven
-description: 'Use when a non-trivial decision sits under uncertainty and correctness matters more than speed. Returns fresh-context adversarial findings with classified reconciliation and a stop condition. Not for patch review — use review; not for plan attacks — use advocate.'
+description: 'Use when a non-trivial decision sits under uncertainty and correctness matters more than speed. Returns fresh-context adversarial findings with classified reconciliation and a stop condition. Not for patch review: use review; not for plan attacks: use advocate.'
 ---
 
 # Doubt-driven development
@@ -61,4 +61,4 @@ description: 'Use when a non-trivial decision sits under uncertainty and correct
 - Non-mutation rule: read-only; no file, VCS, credential, paid, published, deployed, or remote mutation. Re-loop changes are recommendations in chat output, not applied edits.
 
 ## Output
-A report listing each CLAIM, the fresh-context review findings, the classification of each finding (contract misread / valid + actionable / valid trade-off / noise), and the stop condition met — with actionable findings carrying a recommended artifact change stated as a recommendation, not an applied edit.
+A report listing each CLAIM, the fresh-context review findings, the classification of each finding (contract misread / valid + actionable / valid trade-off / noise), and the stop condition met, with actionable findings carrying a recommended artifact change stated as a recommendation, not an applied edit.

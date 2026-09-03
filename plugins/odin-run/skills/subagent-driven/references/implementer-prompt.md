@@ -2,7 +2,7 @@
 
 Fill this template when dispatching an implementer. Use a fresh, self-contained subagent for each task. It sees only what you put here; it does not inherit your session, the plan file, or prior workers' context. Provide the task brief path, relevant context from earlier tasks, and every decision or interface the implementer must respect.
 
-**Purpose:** implement one task precisely, producing tested code that matches the brief exactly — nothing more, nothing less.
+**Purpose:** implement one task precisely, producing tested code that matches the brief exactly, nothing more, nothing less.
 
 ```
 Subagent:

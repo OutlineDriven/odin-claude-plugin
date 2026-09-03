@@ -8,8 +8,8 @@ Sync-lineage note: `skills/autolearn/references/concepts.md` is the sibling file
 
 Two paths populate the file, and they cover different gaps:
 
-- **Accretion** — a learning surfaces a term whose meaning wasn't obvious, so it gets defined. This reliably catches *peripheral* terms, because friction is what surfaces them.
-- **Seeding** — a run proactively defines the **core domain nouns** of the area it is working in. This catches the *stable-central* terms accretion never reaches: the nouns a system is built around rarely break, so they rarely appear in a learning, yet they are exactly what a reader needs to orient. Without seeding, the file fills with peripheral mechanics and never names what the project is about.
+- Accretion: a learning surfaces a term whose meaning wasn't obvious, so it gets defined. This reliably catches *peripheral* terms, because friction is what surfaces them.
+- Seeding: a run proactively defines the **core domain nouns** of the area it is working in. This catches the *stable-central* terms accretion never reaches: the nouns a system is built around rarely break, so they rarely appear in a learning, yet they are exactly what a reader needs to orient. Without seeding, the file fills with peripheral mechanics and never names what the project is about.
 
 ### Seed goal
 
@@ -22,7 +22,7 @@ Define the core domain nouns the area's **declared domain model** exposes that m
 
 ## Be opinionated
 
-When the team uses several words for the same concept, pick the best one and retire the rest. Record retired synonyms as aliases on the entry (see "Per entry"). Settled distinctions go to the Flagged ambiguities tail. The glossary is not a record of all words the team has ever used — it is the team's agreed-upon vocabulary.
+When the team uses several words for the same concept, pick the best one and retire the rest. Record retired synonyms as aliases on the entry (see "Per entry"). Settled distinctions go to the Flagged ambiguities tail. The glossary is not a record of all words the team has ever used; it is the team's agreed-upon vocabulary.
 
 ## The file stands on its own
 
@@ -30,11 +30,11 @@ Each entry must teach its concept to a reader who has no access to the codebase,
 
 - Implementation specifics (file paths, class names, function signatures, table names, library calls)
 - Status fields, dates, owners on the entries
-- Examples or current-config values drawn from the code — specific thresholds, counts, or enum values that will change. State the behavior, not the number: "each skill sets its own actionable threshold" rather than "surfaces at 50, fixes at 75."
+- Examples or current-config values drawn from the code: specific thresholds, counts, or enum values that will change. State the behavior, not the number: "each skill sets its own actionable threshold" rather than "surfaces at 50, fixes at 75."
 - Links to PRs, issues, channels, or roadmap milestones
 - Version-specific claims ("currently uses X; migrating to Y")
 
-Cross-references between entries within `CONCEPTS.md` are fine — they resolve internally. General programming vocabulary (caches, queues, jobs, sessions) and everyday domain English need no redefinition either. But if an entry leans on another *project-specific* term to make sense, that term must be defined here too — an undefined project-specific sibling is itself a candidate to add.
+Cross-references between entries within `CONCEPTS.md` are fine; they resolve internally. General programming vocabulary (caches, queues, jobs, sessions) and everyday domain English need no redefinition either. But if an entry leans on another *project-specific* term to make sense, that term must be defined here too; an undefined project-specific sibling is itself a candidate to add.
 
 ## What earns a slot
 
@@ -52,11 +52,11 @@ When relationships between entries carry load-bearing meaning (ownership, cardin
 
 ## Organization
 
-Cluster concepts by domain relationship — entities with their states, processes with their stages — so readers can see the structure. A flat list works when the file is small. Reshape it as the file grows.
+Cluster concepts by domain relationship, entities with their states, processes with their stages, so readers can see the structure. A flat list works when the file is small. Reshape it as the file grows.
 
 ## Flagged ambiguities (tail of file)
 
-When two terms were used interchangeably and the team settled on a distinction, record the resolution as a one-line note: *"'account' had been used for both Customer and User — these are distinct."* This section is the audit trail for opinions the team has formed.
+When two terms were used interchangeably and the team settled on a distinction, record the resolution as a one-line note: *"'account' had been used for both Customer and User; these are distinct."* This section is the audit trail for opinions the team has formed.
 
 ## One illustrative entry: shape, not template
 
@@ -67,13 +67,13 @@ When two terms were used interchangeably and the team settled on a distinction, 
 A future commitment to seat a Party at a specified date and time.
 *Avoid:* Booking, appointment
 
-A Reservation owns its Party but does not own a Table — Tables are acquired only when the Party arrives, through a Seating. Lifecycle: Booked, Seated, Completed, No-Show. Cancellation before a Seating is non-destructive; cancellation after a Seating is recorded as a No-Show.
+A Reservation owns its Party but does not own a Table, Tables are acquired only when the Party arrives, through a Seating. Lifecycle: Booked, Seated, Completed, No-Show. Cancellation before a Seating is non-destructive; cancellation after a Seating is recorded as a No-Show.
 
 ### Party
 The guests committed to a Reservation. Each Reservation has exactly one Party. Party size is the count promised at booking, not the count who arrive.
 
 ### Table
-A physical seating unit with fixed capacity. Tables are shared resources — they do not belong to Reservations and are allocated only on the day-of through Seatings.
+A physical seating unit with fixed capacity. Tables are shared resources, they do not belong to Reservations and are allocated only on the day-of through Seatings.
 
 ### Seating
 The act of placing a Party at a Table once the Party arrives. A Reservation has at most one Seating; a Table accumulates many Seatings across its lifetime.

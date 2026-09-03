@@ -1,6 +1,6 @@
 ---
 name: smart-contract-audit-prep
-description: 'Use when a smart-contract project must become review-ready before an audit. Produces a handoff package with frozen commit, build checks, and readiness checklist. Not for workflow — use smart-contract-secure-workflow; not for guidelines — use smart-contract-guidelines-advisor.'
+description: 'Use when a smart-contract project must become review-ready before an audit. Produces a handoff package with frozen commit, build checks, and readiness checklist. Not for workflow: use smart-contract-secure-workflow; not for guidelines: use smart-contract-guidelines-advisor.'
 ---
 
 # Smart contract audit prep
@@ -63,4 +63,4 @@ description: 'Use when a smart-contract project must become review-ready before 
 
 ## Output
 
-**Output contract:** Return `audit/goals.md`, `audit/build-and-test.md`, `audit/known-issues.md`, `audit/architecture.md`, and `audit/readiness-checklist.md`, then the local freeze branch and tag, then READY only if every checklist row passes—otherwise NOT READY with named gaps and evidence pointers.
+**Output contract:** Return `audit/goals.md`, `audit/build-and-test.md`, `audit/known-issues.md`, `audit/architecture.md`, and `audit/readiness-checklist.md`, then the local freeze branch and tag, then READY only if every checklist row passes, otherwise NOT READY with named gaps and evidence pointers.

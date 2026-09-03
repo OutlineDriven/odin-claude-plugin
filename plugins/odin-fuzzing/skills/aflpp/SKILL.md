@@ -1,6 +1,6 @@
 ---
 name: aflpp
-description: 'Use when the user needs to set up and run an AFL++ fuzzing campaign for a C/C++ target. Compiles with LTO, LLVM, or GCC instrumentation, runs single or multi-core campaigns, triages crashes, and minimizes the corpus. Requests explicit approval before system-level changes. Not for libFuzzer harness campaigns — use libfuzzer.'
+description: 'Use when the user needs to set up and run an AFL++ fuzzing campaign for a C/C++ target. Compiles with LTO, LLVM, or GCC instrumentation, runs single or multi-core campaigns, triages crashes, and minimizes the corpus. Requests explicit approval before system-level changes. Not for libFuzzer harness campaigns: use libfuzzer.'
 ---
 
 # AFL++
@@ -42,7 +42,7 @@ apt install afl++ lld-<clang-version>
 
 Verify the binary: `afl-fuzz --version` (host) or `docker run --rm aflplusplus/aflplusplus:stable afl-fuzz --version` (Docker).
 
-Kernel tuning (`afl-system-config`) gives up to 15% more executions per second but disables OS security features. Request explicit approval before running it, and only on a dedicated VM. For maximum performance, `afl-persistent-config` plus `update-grub` and reboot are required — these are irreversible system changes that need approval. Do not run kernel tuning on production or development systems.
+Kernel tuning (`afl-system-config`) gives up to 15% more executions per second but disables OS security features. Request explicit approval before running it, and only on a dedicated VM. For maximum performance, `afl-persistent-config` plus `update-grub` and reboot are required; these are irreversible system changes that need approval. Do not run kernel tuning on production or development systems.
 
 Done when: AFL++ is verified and any system-level changes were approved by the user.
 
@@ -60,7 +60,7 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
 }
 ```
 
-Reset global state between runs, keep the harness deterministic, free allocated memory, and return 0. For programs reading stdin or files, no harness is needed — compile the program directly and fuzz via stdin or the `@@` file placeholder.
+Reset global state between runs, keep the harness deterministic, free allocated memory, and return 0. For programs reading stdin or files, no harness is needed: compile the program directly and fuzz via stdin or the `@@` file placeholder.
 
 Compile with the chosen instrumentation mode. Try LTO first for best performance; fall back to LLVM mode if LTO fails to link; use the GCC plugin only when the project requires GCC:
 
@@ -164,7 +164,7 @@ Done when: the corpus is minimized and all campaign processes are stopped.
 
 ## Failure and recovery
 
-- Build failure (LTO link error): fall back to LLVM mode (`afl-clang-fast`); if the project requires GCC, use `afl-gcc-fast` or `afl-g++-fast`. Do not proceed with an uninstrumented binary — it produces no coverage data.
+- Build failure (LTO link error): fall back to LLVM mode (`afl-clang-fast`); if the project requires GCC, use `afl-gcc-fast` or `afl-g++-fast`. Do not proceed with an uninstrumented binary; it produces no coverage data.
 - GCC plugin version mismatch: ensure the system GCC matches the AFL++ plugin build; install `gcc-<version>-plugin-dev`. Do not patch around the mismatch.
 - Low stability (<85%): the target is non-deterministic. Switch from a `LLVMFuzzerTestOneInput` harness to stdin or file-input fuzzing, or fix the non-determinism in the target. Do not report done with low stability.
 - Low execs/sec (<1k): switch to a persistent-mode (`LLVMFuzzerTestOneInput`) harness for 10–20x speedup, or set `AFL_TMPDIR=/dev/shm`.
@@ -173,7 +173,7 @@ Done when: the corpus is minimized and all campaign processes are stopped.
 - Backgrounded job shows "Stopped": the `</dev/null` redirect is missing; restart the job with it to avoid `SIGTTIN`.
 - Docker "input device is not a TTY": omit `-t` for non-interactive runs. For the interactive UI, run in host mode in a terminal.
 - Partial result rule: if the campaign stops early, the `state/` or `out/` directory still contains valid queue, crashes, and `fuzzer_stats`; report what was captured rather than discarding it.
-- Rollback: kill all fuzzers (`kill $(jobs -p)`), remove `out/`, `state/`, log files, and the compiled `fuzz` binary. Source under test is unchanged beyond compilation. Do not attempt to reverse `afl-system-config` or `afl-persistent-config` on a shared system — reboot the dedicated VM instead.
+- Rollback: kill all fuzzers (`kill $(jobs -p)`), remove `out/`, `state/`, log files, and the compiled `fuzz` binary. Source under test is unchanged beyond compilation. Do not attempt to reverse `afl-system-config` or `afl-persistent-config` on a shared system; reboot the dedicated VM instead.
 
 ## Output
 

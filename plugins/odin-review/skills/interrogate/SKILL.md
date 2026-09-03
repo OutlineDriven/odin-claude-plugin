@@ -51,9 +51,9 @@ description: 'Use when asked to "interrogate" or run an adversarial multi-model 
 ## Failure and recovery
 | Failure class | Partial-result rule | Blocked result |
 |---|---|---|
-| Artifact missing or unreadable | — | Halt; report `blocked: artifact missing or unreadable`. |
-| Rubric missing or invalid | — | Halt; report `blocked: rubric missing or invalid`. |
-| Fewer than two models available | — | Halt; report `blocked: insufficient model pool`. |
+| Artifact missing or unreadable | none | Halt; report `blocked: artifact missing or unreadable`. |
+| Rubric missing or invalid | none | Halt; report `blocked: rubric missing or invalid`. |
+| Fewer than two models available | none | Halt; report `blocked: insufficient model pool`. |
 | One or more model reviews fail | Return available reviews; record missing models in failure log. | Never report full success when reviews are missing; always disclose the gap. |
 | Lead synthesis fails | Skip synthesis; return all individual reviews and agreement map. | Do not block or report non-convergence on synthesis failure alone. |
 
@@ -61,7 +61,7 @@ description: 'Use when asked to "interrogate" or run an adversarial multi-model 
 A structured review report containing:
 
 - Verdict: The act / consider / note / dismiss determination for each rubric criterion.
-- Agreement map: Per-criterion model positions — agreement, dissent, and substance.
+- Agreement map: Per-criterion model positions: agreement, dissent, and substance.
 - Lead synthesis: The lead model's synthesis and final recommendation, if produced.
 - Failure log: Any model that failed to return, with the criterion or scope it was assigned.
 - Disposition recommendation: A final actionable next step derived from the aggregate verdict.

@@ -1,6 +1,6 @@
 ---
 name: codebase-design
-description: 'Use when designing or improving a module interface, locating a seam, or increasing testability; the chosen module ends up with a small interface that hides complexity and is testable through seams. Not for system-level architecture decisions — use architect.'
+description: 'Use when designing or improving a module interface, locating a seam, or increasing testability; the chosen module ends up with a small interface that hides complexity and is testable through seams. Not for system-level architecture decisions: use architect.'
 ---
 
 # Codebase design

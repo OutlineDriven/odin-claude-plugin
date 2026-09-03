@@ -1,6 +1,6 @@
 ---
 name: security-review
-description: 'Use when changes touch auth, input parsing, dependencies, network I/O, or pre-release of a public-facing service. Runs a STRIDE walk, OWASP Top 10 walkthrough, and supply-chain scan, and blocks merge on critical or high findings. Not for adding security controls during construction — use security-hardening; not for verifying one named finding — use security-finding-verification.'
+description: 'Use when changes touch auth, input parsing, dependencies, network I/O, or pre-release of a public-facing service. Runs a STRIDE walk, OWASP Top 10 walkthrough, and supply-chain scan, and blocks merge on critical or high findings. Not for adding security controls during construction: use security-hardening; not for verifying one named finding: use security-finding-verification.'
 ---
 
 # Security review
@@ -16,8 +16,8 @@ description: 'Use when changes touch auth, input parsing, dependencies, network 
 
 ## Not for
 
-- Adding security controls during construction — use security-hardening.
-- Verifying a named security allegation as true or false positive — use security-finding-verification.
+- Adding security controls during construction: use security-hardening.
+- Verifying a named security allegation as true or false positive: use security-finding-verification.
 
 ## Inputs
 

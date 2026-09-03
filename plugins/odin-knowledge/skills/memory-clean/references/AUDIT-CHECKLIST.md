@@ -5,9 +5,9 @@ The audit covers 13 structural transforms and staleness detection.
 
 ## Severity levels
 
-- **critical** — data loss risk, security risk, or index/file inconsistency that corrupts future reads
-- **warn** — quality issue that degrades memory usefulness
-- **info** — cosmetic or maintenance issue
+- critical: data loss risk, security risk, or index/file inconsistency that corrupts future reads
+- warn: quality issue that degrades memory usefulness
+- info: cosmetic or maintenance issue
 
 ---
 

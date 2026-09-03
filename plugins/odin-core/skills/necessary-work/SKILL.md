@@ -1,6 +1,6 @@
 ---
 name: necessary-work
-description: 'Use when work is about to grow past the ask, the task may already be done, or the user requests only the minimum. Produce a bounded contract whose every admitted action is necessary, then stop at proof. Not for executing the work — use the appropriate build or fix skill.'
+description: 'Use when work is about to grow past the ask, the task may already be done, or the user requests only the minimum. Produce a bounded contract whose every admitted action is necessary, then stop at proof. Not for executing the work: use the appropriate build or fix skill.'
 ---
 
 # Necessary work
@@ -38,4 +38,4 @@ A partial classification may be returned only with unresolved items named; it is
 
 ## Output
 
-A scope decision: outcome, minimum proof, admitted actions (each with its contract gap), rejected candidates (each with its delete-test result), and status (`sufficient`, `already done`, or `blocked`) — ordered by the procedure steps that produced them.
+A scope decision: outcome, minimum proof, admitted actions (each with its contract gap), rejected candidates (each with its delete-test result), and status (`sufficient`, `already done`, or `blocked`), ordered by the procedure steps that produced them.

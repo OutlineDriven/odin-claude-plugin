@@ -1,8 +1,8 @@
 # Experiment mode: metric-driven optimization for broad search spaces
 
 An optional extension to the primary hot-path optimization loop. Use when the target has
-a measurable metric but the search space is broad -- parameter tuning, prompt optimization,
-threshold finding, configuration search -- rather than a single hot-path transform.
+a measurable metric but the search space is broad, parameter tuning, prompt optimization,
+threshold finding, configuration search, rather than a single hot-path transform.
 
 The primary optimize loop (five-lens fan-out, benchmark, gate, commit) remains the default.
 Experiment mode applies only when the conditions below are met.
@@ -13,7 +13,7 @@ Experiment mode applies only when the conditions below are met.
   no single obvious hot-path transform addresses it.
 - The search space is combinatorial: configuration parameters, prompt variants, threshold
   values, feature toggles, preprocessing pipelines.
-- Hard metrics alone may be gameable -- LLM-as-judge can catch degenerate solutions that
+- Hard metrics alone may be gameable: LLM-as-judge can catch degenerate solutions that
   optimize the metric without improving the real objective.
 - NOT for single hot-path transforms. That is the main optimize loop's job.
 
@@ -24,7 +24,7 @@ proves productive.
 ## Benchmark loop discipline
 
 1. **Define the measurement harness before generating hypotheses.** The harness is the
-   contract -- it specifies what is measured, how, and with what parameters. No harness, no
+   contract: it specifies what is measured, how, and with what parameters. No harness, no
    experiments.
 2. **Run baseline measurement with variance check.** stddev must be < 20% of median. Fix
    noise before proceeding (pin CPU, isolate process, widen sample count).
@@ -34,19 +34,19 @@ proves productive.
 5. **Crash-recovery markers.** In worktrees, mark each experiment's state so an interrupted
    run can resume without re-running completed work.
 6. **Strategy digest after each batch.** Compress learnings into a short summary after every
-   batch of experiments -- what worked, what failed, what to try next. This keeps context
+   batch of experiments: what worked, what failed, what to try next. This keeps context
    bounded across long runs.
 
 ## Experiment-log schema
 
 Run state lives at `.outline/optimize/<target>/experiment-log.yaml`.
 
-**Persistence model:** `experiments` is append-only -- each experiment record is written
+**Persistence model:** `experiments` is append-only: each experiment record is written
 the moment it completes and never rewritten. The `best` and `hypothesis_backlog` fields
 are mutable checkpoint state: rewritten after each batch evaluation, once the batch
 results are verified on disk. On crash recovery, replay `experiments` to reconstruct
 `best`. The `hypothesis_backlog` cannot be replayed from experiment records (unexecuted
-entries are not recorded) -- recover it from the latest checkpoint; if the checkpoint is
+entries are not recorded); recover it from the latest checkpoint; if the checkpoint is
 missing, regenerate from scratch using the current code state and experiment history.
 
 ```yaml
@@ -77,11 +77,11 @@ hypothesis_backlog:      # remaining hypotheses
 
 ### Outcome state transitions
 
-- `measured` -- raw metrics persisted, awaiting batch evaluation
-- `kept` -- improved primary metric, gates passed
-- `reverted` -- did not improve
-- `degenerate` -- gate failed (metric gamed, output degenerate)
-- `error` / `timeout` -- measurement failure
+- `measured`: raw metrics persisted, awaiting batch evaluation
+- `kept`: improved primary metric, gates passed
+- `reverted`: did not improve
+- `degenerate`: gate failed (metric gamed, output degenerate)
+- `error` / `timeout`: measurement failure
 
 ## Stopping rules
 
@@ -108,7 +108,7 @@ relevance, summarization quality, prompt quality.
    rubric, aggregate. This is what the loop optimizes. Use a 1-5 scale with concrete
    per-level descriptions. Include supplementary diagnostic fields. Make the rubric
    specific enough for inter-judge consistency.
-3. **Diagnostics** (logged, not gated). Distribution stats, counts, timing -- useful for
+3. **Diagnostics** (logged, not gated). Distribution stats, counts, timing, useful for
    understanding why a judge score changed, not for accept/reject decisions.
 
 ### Rubric design

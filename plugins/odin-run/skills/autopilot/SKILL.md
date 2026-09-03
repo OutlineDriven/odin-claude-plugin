@@ -1,6 +1,6 @@
 ---
 name: autopilot
-description: 'Use when a human has an approved delivery plan and wants the full chain run under phase gates. Delegates implementation to work, simplification to simplify, review to review, and finalization to review-and-ship. Not for planning, open-ended debugging, or single-step execution — use work directly.'
+description: 'Use when a human has an approved delivery plan and wants the full chain run under phase gates. Delegates implementation to work, simplification to simplify, review to review, and finalization to review-and-ship. Not for planning, open-ended debugging, or single-step execution: use work directly.'
 disable-model-invocation: true
 ---
 
@@ -23,8 +23,8 @@ Optional: scope limits; assigned executor; target branch, remote, and PR destina
 
 ## Procedure
 
-1. Parse the plan, scope, assignments, acceptance criteria, repository, required proof, shipping destination, and close-out condition. Reject contradictions and unavailable assigned executors. Done when: every required input is parsed and bound to a concrete value, contradictions are rejected with the conflicting pair named, and unavailable executors are reported — or the run stops on the first unresolvable input.
-2. Confirm that the human approved the plan. If not, stop before implementation and route to planning. Done when: an approval record is confirmed — the plan was approved through plan mode or an equivalent written approval — or the run stops and routes to planning with no delegation.
+1. Parse the plan, scope, assignments, acceptance criteria, repository, required proof, shipping destination, and close-out condition. Reject contradictions and unavailable assigned executors. Done when: every required input is parsed and bound to a concrete value, contradictions are rejected with the conflicting pair named, and unavailable executors are reported; or the run stops on the first unresolvable input.
+2. Confirm that the human approved the plan. If not, stop before implementation and route to planning. Done when: an approval record is confirmed; the plan was approved through plan mode or an equivalent written approval; or the run stops and routes to planning with no delegation.
 3. Inspect enough repository evidence to bind the plan to exact artifacts, behavior, verification, and remote targets. Keep the campaign inside the approved scope. Done when: every plan step maps to a named repository artifact (file, directory, or remote target) and the scope boundary is stated with the artifacts inside it and the artifacts excluded from it.
 4. Preview each risky consequence. Stop when authority is absent or the target is ambiguous. Done when: every credential, paid, data-at-rest, publication, deployment, remote bulk, or irreversible consequence is previewed with its exact target, or the run stops naming the absent authority or ambiguous target.
 5. Delegate the bounded plan to `work` in orchestrated mode. Include acceptance criteria, constraints, repository evidence, required verifier, and the required structured return. `work` owns implementation and local verification; autopilot does not reproduce those steps. Apply the gate state machine in `references/pipeline-gates.md`: a failing work verifier gets one `strike-the-root` pass and one recheck; a second failure halts the chain. Done when: `work` returns a structured result with implementation summary and local verification passing, or the gate halts the chain with the verifier failure and diff recorded.

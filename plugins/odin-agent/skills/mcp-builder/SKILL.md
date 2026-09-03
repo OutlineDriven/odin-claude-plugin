@@ -48,4 +48,4 @@ Blocked result: if the API specification is unparseable or the language is unsup
 
 ## Output
 
-A complete MCP server project: server entry point with all tools registered, tool definitions with typed schemas and annotations, test suite with 16 read-only evaluations, and build/inspector/evaluation results — ordered by the procedure steps that produced them.
+A complete MCP server project: server entry point with all tools registered, tool definitions with typed schemas and annotations, test suite with 16 read-only evaluations, and build/inspector/evaluation results, ordered by the procedure steps that produced them.

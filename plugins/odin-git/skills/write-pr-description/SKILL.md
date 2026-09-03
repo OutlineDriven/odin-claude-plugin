@@ -17,15 +17,15 @@ disable-model-invocation: true
 
 ## Inputs
 
-1. **PR number or URL** (required) — identifies the target PR.
-2. **Diff context** (required) — the PR diff and changed-file list. Supplied by the caller or retrieved via `gh pr diff` and `gh pr view --json files`.
-3. **Existing PR body** (optional) — current description, retrieved via `gh pr view --json body` when revising.
+1. **PR number or URL** (required): identifies the target PR.
+2. **Diff context** (required): the PR diff and changed-file list. Supplied by the caller or retrieved via `gh pr diff` and `gh pr view --json files`.
+3. **Existing PR body** (optional): current description, retrieved via `gh pr view --json body` when revising.
 
 ## Procedure
 
 1. Validate the PR exists. Run `gh pr view <number> --json number,title,state`. If the command fails or returns no result, stop and report "PR not found." Done when: the PR is confirmed to exist with its number, title, and state.
 2. Retrieve the diff scope. Run `gh pr diff <number>` and `gh pr view <number> --json files`. Record the changed files and diff summary. Done when: the changed files and diff summary are recorded.
-3. If the diff is empty, stop and report "Empty diff — nothing to describe." Done when: the diff is confirmed non-empty or the empty-diff stop is taken.
+3. If the diff is empty, stop and report "Empty diff: nothing to describe." Done when: the diff is confirmed non-empty or the empty-diff stop is taken.
 4. Read the changed files to understand intent. Identify the problem being solved, the approach taken, and any risks or tradeoffs. Done when: the problem, approach, and risks are identified.
 5. If revising, read the existing PR body via `gh pr view <number> --json body`. Note what to preserve, replace, or remove. Done when: the existing body is read and preservation notes are recorded (or confirmed this is a new draft).
 6. Draft the description using these rules:

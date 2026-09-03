@@ -1,6 +1,6 @@
 ---
 name: writing-beats
-description: 'Use when a grounded piece needs user-selected beat-by-beat assembly. Writes only human-selected verbatim beats to a target file in the chosen order. Not for unstructured capture — use writing-fragments; not for paragraph shaping — use writing-shape.'
+description: 'Use when a grounded piece needs user-selected beat-by-beat assembly. Writes only human-selected verbatim beats to a target file in the chosen order. Not for unstructured capture: use writing-fragments; not for paragraph shaping: use writing-shape.'
 ---
 
 # Writing beats

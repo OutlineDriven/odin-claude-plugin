@@ -1,6 +1,6 @@
 ---
 name: design-variants
-description: 'Use when /design-variants generates distinct design directions and a gallery for selection. Not for one polished artifact — use polished-web-prototype; not for token-system direction picking — use design. No remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when /design-variants generates distinct design directions and a gallery for selection. Not for one polished artifact: use polished-web-prototype; not for token-system direction picking: use design. No remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Design variants
@@ -51,4 +51,4 @@ When optional context is absent, gather it across five dimensions: who the desig
 - Never swallow a generation failure or present a gallery as ready when variants are missing.
 
 ## Output
-A variant gallery inline and side-by-side for selection, then an approved record in the design directory naming the chosen variant, per-variant ratings, comments, overall direction, date, screen, and branch, plus an updated taste record — ordered bound → gather → read-taste → generate → confirm → render → gallery → select → summarize → save.
+A variant gallery inline and side-by-side for selection, then an approved record in the design directory naming the chosen variant, per-variant ratings, comments, overall direction, date, screen, and branch, plus an updated taste record, ordered bound → gather → read-taste → generate → confirm → render → gallery → select → summarize → save.

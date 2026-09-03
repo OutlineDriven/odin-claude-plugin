@@ -39,7 +39,7 @@ linters-settings:
     checks: ["all"]
 ```
 
-`errorlint` enforces `%w` for error wrapping (matches the user's "errors %w typed/sentinel" rule). `exhaustive` with `default-signifies-exhaustive: false` requires every typed-enum `switch` to list each case explicitly — a bare `default` does not silence the lint, so adding a new enum value forces a compile-time review of every switch over it. `staticcheck checks: ["all"]` enables every rule.
+`errorlint` enforces `%w` for error wrapping (matches the user's "errors %w typed/sentinel" rule). `exhaustive` with `default-signifies-exhaustive: false` requires every typed-enum `switch` to list each case explicitly, a bare `default` does not silence the lint, so adding a new enum value forces a compile-time review of every switch over it. `staticcheck checks: ["all"]` enables every rule.
 
 ## Justfile (or Makefile target)
 
@@ -93,6 +93,6 @@ func ParseRequest(r io.Reader) (Request, error) {
 
 ## Notes
 
-- `errcheck` will flag every unchecked error return — including ones in tests. Use `_ =` explicitly when discarding is intentional.
+- `errcheck` will flag every unchecked error return, including ones in tests. Use `_ =` explicitly when discarding is intentional.
 - Generics (Go 1.18+) interact awkwardly with some linters; use `gocritic` rule disables sparingly.
 - Race detector (`-race`) doubles binary size and slows runtime ~2-10×; run it always in CI, optionally locally.

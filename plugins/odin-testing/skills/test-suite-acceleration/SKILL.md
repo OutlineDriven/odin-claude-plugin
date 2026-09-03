@@ -1,6 +1,6 @@
 ---
 name: test-suite-acceleration
-description: 'Use when a test suite is too slow and must be accelerated without weakening behavior or coverage. Also handles CI parallelization when the bottleneck is serial execution. Not for deleting tests — use tests-purge-unneeded; not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a test suite is too slow and must be accelerated without weakening behavior or coverage. Also handles CI parallelization when the bottleneck is serial execution. Not for deleting tests, use tests-purge-unneeded; not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Test suite acceleration
@@ -17,7 +17,7 @@ description: 'Use when a test suite is too slow and must be accelerated without 
 
 ## Refusals
 
-- Will not delete tests to reduce runtime — that is tests-purge-unneeded.
+- Will not delete tests to reduce runtime; that is tests-purge-unneeded.
 - Will not weaken assertions, skip flaky tests, or reduce coverage to hit a speed target.
 - Will not claim success when the budget is exhausted unless exhaustion was the predeclared success predicate.
 
@@ -30,4 +30,4 @@ description: 'Use when a test suite is too slow and must be accelerated without 
 
 ## Output
 
-A receipt.json with the terminal class, bound, and per-step evidence, persisted at .outline/loops/<slug>/<run_id>/ — ordering: bound, execution evidence, terminal verdict, receipt.
+A receipt.json with the terminal class, bound, and per-step evidence, persisted at .outline/loops/<slug>/<run_id>/, ordering: bound, execution evidence, terminal verdict, receipt.

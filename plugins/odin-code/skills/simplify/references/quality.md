@@ -11,7 +11,7 @@ Verbatim prompt for the quality-axis review agent. The orchestrator dispatches t
 - Tool order (fd → ast-grep → grep/rg)
 - Output schema (finding fields, pattern enum)
 - Hard limits
-- Balance — avoid over-simplification
+- Balance: avoid over-simplification
 - Never simplify away a safety check
 
 ---

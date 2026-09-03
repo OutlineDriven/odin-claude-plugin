@@ -1,6 +1,6 @@
 ---
 name: partition-scopes-to-subagents
-description: 'Use when asked to partition non-overlapping scopes across subagents and drive each to completion with fresh review, fix reports, and a glanceable actual-work map. Not for concurrent independent sub-tasks — use parallel-launch.'
+description: 'Use when asked to partition non-overlapping scopes across subagents and drive each to completion with fresh review, fix reports, and a glanceable actual-work map. Not for concurrent independent sub-tasks: use parallel-launch.'
 ---
 
 # Partition scopes to subagents
@@ -40,4 +40,4 @@ description: 'Use when asked to partition non-overlapping scopes across subagent
 - Non-converged result: If any scope remains BLOCKED after one re-dispatch, record the exhaustion and stop. Do not loop indefinitely.
 
 ## Output
-One `actual-work-map.md` listing every scope with terminal status (done, blocked, or failed), reviewer verdict, and fix count — plus one review report per scope, one fix report per scope that required fixes, and one brief file per scope.
+One `actual-work-map.md` listing every scope with terminal status (done, blocked, or failed), reviewer verdict, and fix count, plus one review report per scope, one fix report per scope that required fixes, and one brief file per scope.

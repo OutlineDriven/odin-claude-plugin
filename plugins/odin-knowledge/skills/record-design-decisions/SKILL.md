@@ -1,6 +1,6 @@
 ---
 name: record-design-decisions
-description: 'Use when codebase terminology or a durable technical decision changes. Records resolved terms and qualifying decisions to the project glossary and architecture decision log. Not for shaping domain language — use domain-modeling. Not for remote or irreversible changes.'
+description: 'Use when codebase terminology or a durable technical decision changes. Records resolved terms and qualifying decisions to the project glossary and architecture decision log. Not for shaping domain language: use domain-modeling. Not for remote or irreversible changes.'
 ---
 
 # Record design decisions
@@ -47,4 +47,4 @@ description: 'Use when codebase terminology or a durable technical decision chan
 
 ## Output
 
-Each written record: a CONTEXT.md entry (term, definition, avoid, recorded_at) and/or an ADR file path in `docs/decisions/`; otherwise a classification with reason — `blocked:no-recordable-content`, `blocked:invalid-target`, `partial-record`, or `non-converged` — ordered: terminology, decision.
+Each written record: a CONTEXT.md entry (term, definition, avoid, recorded_at) and/or an ADR file path in `docs/decisions/`; otherwise a classification with reason: `blocked:no-recordable-content`, `blocked:invalid-target`, `partial-record`, or `non-converged`: ordered: terminology, decision.

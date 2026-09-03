@@ -77,5 +77,5 @@ Partial-result rule (quick mode): reverted code leaves no trace. Keep a ledger e
 
 **Full mode.** On success, return exit 0 with the commit identifier, target, selected lens, benchmark command, baseline and integrated statistics, measured speedup, behavior-gate result, repository checks, and durable log path. On failure, return the applicable exit code, unchanged/rolled-back target state, measurements obtained, and the precise blocker; never report a worktree-only result as a landed win.
 
-**Quick mode.** Optimized code with before/after measurements in the commit message, plus a ledger entry per attempt (kept and reverted) documenting the hypothesis, baseline, result, and verdict — the commit message states the metric name, baseline value, result value, and tool used.
+**Quick mode.** Optimized code with before/after measurements in the commit message, plus a ledger entry per attempt (kept and reverted) documenting the hypothesis, baseline, result, and verdict: the commit message states the metric name, baseline value, result value, and tool used.
 

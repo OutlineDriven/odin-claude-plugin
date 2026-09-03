@@ -1,11 +1,11 @@
 ---
 name: rhythmic-taste
-description: 'Use when the user says "give this rhythm", "vary the structure", or "the sections all read the same". Derives a rhythm constraint from the document''s own sections or from a disclosed seed with random inputs. Not for judging an artifact''s overall taste — use taste.'
+description: 'Use when the user says "give this rhythm", "vary the structure", or "the sections all read the same". Derives a rhythm constraint from the document''s own sections or from a disclosed seed with random inputs. Not for judging an artifact''s overall taste: use taste.'
 ---
 
 # Rhythmic taste
 
-Vary structural rhythm and variation across a document's sections. The core is rhythm: the pattern of length, density, pacing, and nesting that keeps a reader moving, and the deliberate variation that keeps them awake. A document whose sections all read the same — same length, same shape, same cadence — flattens attention regardless of how good each section is.
+Vary structural rhythm and variation across a document's sections. The core is rhythm: the pattern of length, density, pacing, and nesting that keeps a reader moving, and the deliberate variation that keeps them awake. A document whose sections all read the same, same length, same shape, same cadence, flattens attention regardless of how good each section is.
 
 Two modes: **document mode** (default) derives a rhythm constraint from the document's own sections, no external inputs required; and **seeded constraint mode** (optional) adds random variation from a disclosed seed and the user's chosen random inputs.
 
@@ -24,16 +24,16 @@ Two modes: **document mode** (default) derives a rhythm constraint from the docu
 - Random seed (optional, required only for seeded constraint mode): a number, word, or phrase the user discloses openly.
 - Random inputs (optional, required only for seeded constraint mode): titles, words, or items the user supplies or fetches from a random source. Any count the user chooses; no fixed minimum.
 
-## Procedure — document mode (default)
+## Procedure: document mode (default)
 
 1. Receive the document or section list. If sections are not supplied, derive them from the artifact's headings, layers, or structural breaks.
 2. Measure each section's structural properties: relative length, sentence or paragraph density, pacing (tight to expansive), and nesting depth.
-3. Diagnose the current rhythm: name the pattern the sections follow (steady pulse, monotone, crescendo, decrescendo, syncopated) and where variation is missing — which sections collapse to the same shape.
+3. Diagnose the current rhythm: name the pattern the sections follow (steady pulse, monotone, crescendo, decrescendo, syncopated) and where variation is missing, which sections collapse to the same shape.
 4. Choose a target rhythm pattern from: alternating long-short, crescendo (short to long), decrescendo (long to short), syncopated (irregular gaps), or steady pulse. Choose the pattern that serves the document's purpose, not the one closest to the current shape.
 5. Map the target pattern to section assignments: set relative length or density per section, set pacing from the chosen pattern, and assign nesting where the content calls for sub-sections. Vary the assignments so no two adjacent sections collapse to identical structure.
 6. Present the derived rhythm constraint as a structured list of section assignments with pacing, density, and nesting instructions, preceded by the diagnosed current rhythm and the chosen target pattern.
 
-## Procedure — seeded constraint mode (optional)
+## Procedure: seeded constraint mode (optional)
 
 Enter only when the user supplies a seed and asks for random variation. Run document mode steps 1–2 first, then:
 

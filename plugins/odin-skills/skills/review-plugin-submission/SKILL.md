@@ -1,6 +1,6 @@
 ---
 name: review-plugin-submission
-description: 'Use when asked to review a plugin for marketplace readiness through a read-only audit of every published quality gate. Returns a sectioned pass/fail report with a submission recommendation. Not for reviewing a PR or code diff — use review.'
+description: 'Use when asked to review a plugin for marketplace readiness through a read-only audit of every published quality gate. Returns a sectioned pass/fail report with a submission recommendation. Not for reviewing a PR or code diff, use review.'
 ---
 
 # Review plugin submission

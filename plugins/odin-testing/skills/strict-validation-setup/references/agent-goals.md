@@ -46,13 +46,13 @@ After merge, delete `.agent-tasks/<id>/` entirely. The git history preserves the
 
 ## When to write tests vs prose first
 
-- Prose first — when the goal is conceptually unclear and the user needs to see it stated before committing to acceptance criteria. Loop structure: prose → discuss → tests stub → loop.
-- Tests first — when the goal is mechanically clear and the only question is "do all the cases pass?" Loop structure: tests stub → run red → loop until green.
+- Prose first, when the goal is conceptually unclear and the user needs to see it stated before committing to acceptance criteria. Loop structure: prose → discuss → tests stub → loop.
+- Tests first, when the goal is mechanically clear and the only question is "do all the cases pass?" Loop structure: tests stub → run red → loop until green.
 
 The skill's three-mode shape (interactive / template-driven / hybrid) maps to which path the user chooses at write time.
 
 ## Anti-patterns
 
-- AGENTS.md drift — task-specific goals creeping into AGENTS.md across sessions. Detect via `git log AGENTS.md` showing per-task entries; if present, factor out to per-task GOALS.md.
-- Stale GOALS.md — task merged but the file lingers. Cleanup is part of the merge, not a follow-up.
-- Prose-only goals — writing the criterion in prose without a test makes the loop unverifiable. Always include the test column.
+- AGENTS.md drift, task-specific goals creeping into AGENTS.md across sessions. Detect via `git log AGENTS.md` showing per-task entries; if present, factor out to per-task GOALS.md.
+- Stale GOALS.md, task merged but the file lingers. Cleanup is part of the merge, not a follow-up.
+- Prose-only goals, writing the criterion in prose without a test makes the loop unverifiable. Always include the test column.

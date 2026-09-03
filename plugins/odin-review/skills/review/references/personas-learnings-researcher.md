@@ -12,4 +12,4 @@ HUNT (cite `path:line` for each):
 4. Missing test coverage for a failure mode that was previously captured in a solutions entry.
 5. Convention violations against team-agreed standards documented in `docs/solutions/conventions/` or similar.
 
-SEVERITY ANCHORS: repeating a known P0-class defect is P0/P1; contradicting a settled design decision without justification is P2; missing a convention that has no behavioral impact is P3. Apply `_contract.md`.
+SEVERITY ANCHORS: repeating a known P0-class defect is P0/P1; contradicting a settled design decision without justification is P2; missing a convention that has no behavioral impact is P3. Apply `personas-_contract.md`.

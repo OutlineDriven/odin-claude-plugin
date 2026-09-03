@@ -1,6 +1,6 @@
 ---
 name: implement-spec
-description: 'Use when a ticket DAG from a complete specification needs parallel execution into a green draft PR. A single approved feature is the degenerate one-ticket DAG. Not for a single settled ticket with no spec — use work; not for ticket decomposition — use to-tickets.'
+description: 'Use when a ticket DAG from a complete specification needs parallel execution into a green draft PR. A single approved feature is the degenerate one-ticket DAG. Not for a single settled ticket with no spec; use work; not for ticket decomposition; use to-tickets.'
 disable-model-invocation: true
 ---
 
@@ -45,7 +45,7 @@ disable-model-invocation: true
 For any partial result, report completed tickets, the remaining frontier, commits, checks, findings, remote state, and retained worktrees. Never discard unintegrated work, swallow an error, or claim the done predicate.
 
 ## Output
-On success, return the ticket-to-commit ledger, empty frontier, integrated commit identifier, passing check evidence, review-clear evidence, draft pull-request URL and head commit, and cleanup result. Otherwise return exactly one terminal classification—`invalid-input`, `blocked`, `ticket-failed`, `integration-conflict`, `check-failed`, `review-blocked`, `non-converged`, `publication-failed`, or `cleanup-blocked`—with the partial-result ledger and the next human-resolvable blocker.
+On success, return the ticket-to-commit ledger, empty frontier, integrated commit identifier, passing check evidence, review-clear evidence, draft pull-request URL and head commit, and cleanup result. Otherwise return exactly one terminal classification, `invalid-input`, `blocked`, `ticket-failed`, `integration-conflict`, `check-failed`, `review-blocked`, `non-converged`, `publication-failed`, or `cleanup-blocked`, with the partial-result ledger and the next human-resolvable blocker.
 
 ## Single-feature case (degenerate DAG)
 

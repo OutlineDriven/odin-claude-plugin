@@ -53,4 +53,4 @@ Prerequisites: Burp Suite Professional with the `burpsuite-project-file-parser` 
 - Non-mutation rule: This command never writes to or modifies the `.burp` project file. No rollback is needed; a failed run leaves the project file untouched.
 
 ## Output
-JSON objects (one per line, streamed to stdout) shaped by operation: `auditItems` — name/severity/confidence/host/port/protocol/url; `proxyHistory`/`siteMap` — complete request/response data narrowed by any sub-component filter; `responseHeader`/`responseBody` regex — url plus matching header or body content.
+JSON objects (one per line, streamed to stdout) shaped by operation: `auditItems`: name/severity/confidence/host/port/protocol/url; `proxyHistory`/`siteMap`: complete request/response data narrowed by any sub-component filter; `responseHeader`/`responseBody` regex: url plus matching header or body content.

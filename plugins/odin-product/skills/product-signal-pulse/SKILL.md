@@ -23,20 +23,20 @@ description: 'Use when invoking /product-signal-pulse with an optional lookback 
 
 ## Config keys
 
-- `pulse_product_name` -- string, report titles. Required: if unset, the skill is unconfigured.
-- `pulse_lookback_default` -- `1h`, `24h`, `7d`, `30d` (default `24h`).
-- `pulse_primary_event` -- string, the engagement event name.
-- `pulse_value_event` -- string, the value-realization event name; may equal primary; omit if not defined.
-- `pulse_completion_events` -- comma-separated, 0-3 event names; omit if none.
-- `pulse_quality_scoring` -- `true` or default `false` (AI products only).
-- `pulse_quality_dimension` -- string scored 1-5 when quality scoring is true; ignored otherwise.
-- `pulse_analytics_source` -- string identifying the analytics provider and how to reach it (e.g. `posthog:mcp`, `mixpanel:mcp`, `custom:http`).
-- `pulse_tracing_source` -- string identifying the tracing provider (e.g. `sentry:mcp`, `datadog:mcp`, `custom:http`); omit if none.
-- `pulse_payments_source` -- string identifying the payments provider (e.g. `stripe:mcp`, `custom:http`); omit if not used.
-- `pulse_db_enabled` -- `true` or default `false`; when true, read-only DB access is part of the pulse.
-- `pulse_metric_sources` -- comma-separated `metric=source` pairs for per-strategy-metric source overrides; metrics not listed fall back to `pulse_analytics_source` and render with a `(default source)` marker.
-- `pulse_pending_metrics` -- comma-separated strategy-doc metric names awaiting instrumentation; render as `no data` until instrumentation lands.
-- `pulse_excluded_metrics` -- comma-separated strategy-doc metric names intentionally excluded from the pulse.
+- `pulse_product_name`: string, report titles. Required: if unset, the skill is unconfigured.
+- `pulse_lookback_default`: `1h`, `24h`, `7d`, `30d` (default `24h`).
+- `pulse_primary_event`: string, the engagement event name.
+- `pulse_value_event`: string, the value-realization event name; may equal primary; omit if not defined.
+- `pulse_completion_events`: comma-separated, 0-3 event names; omit if none.
+- `pulse_quality_scoring`: `true` or default `false` (AI products only).
+- `pulse_quality_dimension`: string scored 1-5 when quality scoring is true; ignored otherwise.
+- `pulse_analytics_source`: string identifying the analytics provider and how to reach it (e.g. `posthog:mcp`, `mixpanel:mcp`, `custom:http`).
+- `pulse_tracing_source`: string identifying the tracing provider (e.g. `sentry:mcp`, `datadog:mcp`, `custom:http`); omit if none.
+- `pulse_payments_source`: string identifying the payments provider (e.g. `stripe:mcp`, `custom:http`); omit if not used.
+- `pulse_db_enabled`: `true` or default `false`; when true, read-only DB access is part of the pulse.
+- `pulse_metric_sources`: comma-separated `metric=source` pairs for per-strategy-metric source overrides; metrics not listed fall back to `pulse_analytics_source` and render with a `(default source)` marker.
+- `pulse_pending_metrics`: comma-separated strategy-doc metric names awaiting instrumentation; render as `no data` until instrumentation lands.
+- `pulse_excluded_metrics`: comma-separated strategy-doc metric names intentionally excluded from the pulse.
 
 ## Connector and query contract
 
@@ -61,12 +61,12 @@ For every source, construct the query from the configured event name and the res
 4. Read the strategy doc (`STRATEGY.md`, else first of `VISION.md`, `PRODUCT.md`). If it exists, extract the product name from the `name` frontmatter key or the H1 title (stripping a trailing ` Strategy`), and the key metrics from `## Key metrics` or the section listing success measures by meaning. When `STRATEGY.md` carries no metrics but points to a legacy sibling doc for content it defers, read the metrics from there. Surface what was extracted and invite correction. If no strategy doc exists, note it and run from scratch. Done when: the strategy doc is read or noted absent.
 5. Ask one question at a time using the host's blocking question tool (match by capability, not host-specific name; fall back to numbered options on the chat surface only when no such tool is available or a call errors). Run the interview in order: Done when: all interview questions are answered.
    1. Product name (confirm or edit the seeded value).
-   2. Primary engagement event -- the single event that fires when a user is actively using the product. Apply the SMART bar: specific (named event), measurable (tool returns a count), actionable (if it moves, the team notices), relevant (ties to the product's job), timely (reads in short windows). Apply the engagement-vs-value test: engagement is earlier (they're in it), value is later (it worked); if the candidate is really value-realization, push back. One round of pushback per section max; if the second answer is not usable, capture it flagged `needs-review` and move on.
-   3. Value-realization event -- the event that fires when the user gets value. May equal the engagement event. If value is a feeling not an event, ask for a proxy (completion, time-to-first-X, return rate, copy/share/export).
-   4. Completions or conversions -- 0-3 events. Push back on vanity metrics: if the number swings and the team does nothing, it does not belong.
-   5. Quality scoring (opt-in, AI products only) -- if opted in, capture the dimension. Apply the reviewability test: could two reviewers agree on the score? If not, push back once; if still unclear, flag `needs-review`.
-   6. Data sources -- for each signal (engagement, value, completions, strategy metrics), ask which tool and what query shape. Record the source as `provider:method` per the connector contract above. Consolidate entries in the same tool. Record per-strategy-metric source overrides in `pulse_metric_sources` as `metric=source` pairs. For dual-source signals, pick one canonical source. For un-instrumented strategy metrics, offer defer (`pulse_pending_metrics`, renders `no data`) or drop (`pulse_excluded_metrics`); never silently skip. Refuse read-write database access. Offer a read-only replica or skip DB entirely. DB is optional.
-   7. System performance -- recommended default: top 5 error signatures by count with one-line context, p50/p95/p99 latency vs prior window. Confirm or customize. If no tracing tool, omit the section.
+   2. Primary engagement event: the single event that fires when a user is actively using the product. Apply the SMART bar: specific (named event), measurable (tool returns a count), actionable (if it moves, the team notices), relevant (ties to the product's job), timely (reads in short windows). Apply the engagement-vs-value test: engagement is earlier (they're in it), value is later (it worked); if the candidate is really value-realization, push back. One round of pushback per section max; if the second answer is not usable, capture it flagged `needs-review` and move on.
+   3. Value-realization event: the event that fires when the user gets value. May equal the engagement event. If value is a feeling not an event, ask for a proxy (completion, time-to-first-X, return rate, copy/share/export).
+   4. Completions or conversions: 0-3 events. Push back on vanity metrics: if the number swings and the team does nothing, it does not belong.
+   5. Quality scoring (opt-in, AI products only): if opted in, capture the dimension. Apply the reviewability test: could two reviewers agree on the score? If not, push back once; if still unclear, flag `needs-review`.
+   6. Data sources: for each signal (engagement, value, completions, strategy metrics), ask which tool and what query shape. Record the source as `provider:method` per the connector contract above. Consolidate entries in the same tool. Record per-strategy-metric source overrides in `pulse_metric_sources` as `metric=source` pairs. For dual-source signals, pick one canonical source. For un-instrumented strategy metrics, offer defer (`pulse_pending_metrics`, renders `no data`) or drop (`pulse_excluded_metrics`); never silently skip. Refuse read-write database access. Offer a read-only replica or skip DB entirely. DB is optional.
+   7. System performance: recommended default: top 5 error signatures by count with one-line context, p50/p95/p99 latency vs prior window. Confirm or customize. If no tracing tool, omit the section.
    8. Default lookback window.
 6. Write the captured config to `.odin/config.local.yaml` as flat `pulse_*` keys. If the file exists, merge preserving non-pulse keys. If the directory or file does not exist, create it. If `config.local.yaml` is not in `.gitignore`, offer to add the entry before writing. Show the resulting pulse block and offer one round of edits. Done when: the config is written.
 7. Offer a scheduling recommendation (daily, weekly, not now, later). If yes, hand off to the host's scheduling primitive; do not schedule inline. Capture the choice. Done when: the scheduling choice is captured.
@@ -85,10 +85,10 @@ For every source, construct the query from the configured event name and the res
 ### Stage 4: assemble report
 
 13. Resolve the strategy doc (same as step 4) and re-read key metrics. For each strategy metric: if in `pulse_excluded_metrics`, omit; if in `pulse_pending_metrics`, render `no data (instrumentation pending)`; otherwise resolve the source from `pulse_metric_sources` or fall back to `pulse_analytics_source` with a `(default source)` marker, query and render with current value and delta. Four sections in order: Done when: the report is assembled.
-    1. **Headlines** -- 2-3 lines summarizing the window. Lead with the most notable item.
-    2. **Usage** -- primary engagement (count, delta vs prior equal-length window), value realization (count, delta, ratio vs engagement), completions (each: count, delta), strategy metrics (value, delta or `no data`), quality sample (distribution) if configured.
-    3. **System performance** -- latency p50/p95/p99 with delta; top 5 errors by count descending with one-line context each. Omit the entire section if no tracing tool is configured.
-    4. **Followups** -- 1-5 specific, actionable items.
+    1. **Headlines**: 2-3 lines summarizing the window. Lead with the most notable item.
+    2. **Usage**: primary engagement (count, delta vs prior equal-length window), value realization (count, delta, ratio vs engagement), completions (each: count, delta), strategy metrics (value, delta or `no data`), quality sample (distribution) if configured.
+    3. **System performance**: latency p50/p95/p99 with delta; top 5 errors by count descending with one-line context each. Omit the entire section if no tracing tool is configured.
+    4. **Followups**: 1-5 specific, actionable items.
 14. Keep the total to 30-40 lines. If a section is thin, leave it thin; do not pad. Use real numbers, not ranges or hedges. Percent deltas compare the current window to the previous equal-length window; if no comparison is possible, omit the delta. No hardcoded thresholds; do not label "high" or "low" or color anything. No PII: no emails, account IDs, or message content. Done when: the report is 30-40 lines and follows the formatting rules.
 
 ### Stage 5: write report file

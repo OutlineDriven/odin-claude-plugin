@@ -45,16 +45,16 @@ gh api repos/{owner}/{repo}/pulls/PR_NUMBER/comments
 
 Before processing, classify each piece of feedback as **new** or **already handled**.
 
-Review threads: Read the thread's comments. If there's a substantive reply that acknowledges the concern but defers action (e.g., "need to align on this", "going to think through this", or a reply that presents options without resolving), it's a **pending decision** -- don't re-process. If there's only the original reviewer comment(s) with no substantive response, it's **new**.
+Review threads: Read the thread's comments. If there's a substantive reply that acknowledges the concern but defers action (e.g., "need to align on this", "going to think through this", or a reply that presents options without resolving), it's a **pending decision**; don't re-process. If there's only the original reviewer comment(s) with no substantive response, it's **new**.
 
 PR comments and review bodies: These have no resolve mechanism, so they reappear on every run. Apply two filters in order:
 
-1. **Actionability**: Skip items that contain no actionable feedback or questions to answer. Examples: review wrapper text ("Here are some automated review suggestions..."), approvals ("this looks great!"), status badges ("Validated"), CI summaries with no follow-up asks. If there's nothing to fix, answer, or decide, it's not actionable -- drop it from the count entirely.
+1. **Actionability**: Skip items that contain no actionable feedback or questions to answer. Examples: review wrapper text ("Here are some automated review suggestions..."), approvals ("this looks great!"), status badges ("Validated"), CI summaries with no follow-up asks. If there's nothing to fix, answer, or decide, it's not actionable; drop it from the count entirely.
 2. **Already replied**: For actionable items, check the PR conversation for an existing reply that quotes and addresses the feedback. If a reply already exists, skip. If not, it's new.
 
-The distinction is about content, not who posted what. A deferral from a teammate, a previous skill run, or a manual reply all count. Similarly, actionability is about content -- bot feedback that requests a specific code change is actionable; a bot's boilerplate header wrapping those requests is not.
+The distinction is about content, not who posted what. A deferral from a teammate, a previous skill run, or a manual reply all count. Similarly, actionability is about content; bot feedback that requests a specific code change is actionable; a bot's boilerplate header wrapping those requests is not.
 
-**Silent drop.** Non-actionable items are dropped without narration. Do not announce, list, or count dropped items in conversation, the task list, or the step 9 summary. Review-bot wrappers from CodeRabbit, Codex, Gemini Code Assist, and Copilot (bodies like "Here are some automated review suggestions...") commonly appear here -- recognize them by their boilerplate content, drop silently. Only CI/status bot summaries (Codecov) are pre-filtered at the script level; everything else relies on this content-aware check so bot format changes cannot silently hide actionable findings.
+**Silent drop.** Non-actionable items are dropped without narration. Do not announce, list, or count dropped items in conversation, the task list, or the step 9 summary. Review-bot wrappers from CodeRabbit, Codex, Gemini Code Assist, and Copilot (bodies like "Here are some automated review suggestions...") commonly appear here; recognize them by their boilerplate content, drop silently. Only CI/status bot summaries (Codecov) are pre-filtered at the script level; everything else relies on this content-aware check so bot format changes cannot silently hide actionable findings.
 
 If there are no new items across all feedback types, skip steps 3-8 and go straight to step 9.
 
@@ -63,15 +63,15 @@ If there are no new items across all feedback types, skip steps 3-8 and go strai
 This is the gate. Judge every **new** item here, in your own context, before any fix is dispatched. Apply the rubric in [references/evaluation-rubric.md](evaluation-rubric.md) (read it now) across the whole batch at once.
 
 Working over the full set lets you do what a per-thread subagent can't:
-- **Dedup reads by file** — read a file once and judge all its threads together.
-- **Cross-item reasoning** — cluster findings by root assumption; a source (often a bot) that's wrong in one place is suspect across its siblings; converging requests from independent reviewers are a strong fix signal.
-- **Selective depth** — clear nits need only the comment plus the diff line; deep-read (callers, invariants, `git blame`/PR rationale for author intent) only where a finding is contestable or the code looks deliberate. That deep read on the contestable minority is what catches a confidently-wrong reviewer.
+- Dedup reads by file: read a file once and judge all its threads together.
+- Cross-item reasoning: cluster findings by root assumption; a source (often a bot) that's wrong in one place is suspect across its siblings; converging requests from independent reviewers are a strong fix signal.
+- Selective depth: clear nits need only the comment plus the diff line; deep-read (callers, invariants, `git blame`/PR rationale for author intent) only where a finding is contestable or the code looks deliberate. That deep read on the contestable minority is what catches a confidently-wrong reviewer.
 
 Produce a verdict per item and sort into three lists:
 
-- **fix-list** — `fixed` / `fixed-differently`. These get dispatched to fixers in step 4. For each, note the file/location (and for outdated threads, the resolved location or anchor) and a one-line "what to change."
-- **reply-list** — `replied` / `not-addressing` / `declined`. No code change. Compose the reply text now per the rubric (you have the evidence) and carry it to step 7.
-- **human-list** — `needs-human`. Compose `decision_context` now; carry to steps 7 and 9.
+- fix-list: `fixed` / `fixed-differently`. These get dispatched to fixers in step 4. For each, note the file/location (and for outdated threads, the resolved location or anchor) and a one-line "what to change."
+- reply-list: `replied` / `not-addressing` / `declined`. No code change. Compose the reply text now per the rubric (you have the evidence) and carry it to step 7.
+- human-list: `needs-human`. Compose `decision_context` now; carry to steps 7 and 9.
 
 Create a task list of all new items (e.g., `TaskCreate` in Claude Code, `update_plan` in Codex) tagged with their verdict, so progress is visible.
 
@@ -85,7 +85,7 @@ Dispatch fixers **only** for fix-list items. Reply-list and human-list items nev
 
 ### Dispatch
 
-Read [references/agents/pr-comment-resolver.md](agents/pr-comment-resolver.md) and spawn a generic subagent seeded with that fixer prompt for each fix-list item. Do not dispatch a standalone agent by type/name. The fixer is a pure executor: the validity judgment is already done, so it implements and returns. It does not re-judge worthwhileness.
+Read [references/agents-pr-comment-resolver.md](agents-pr-comment-resolver.md) and spawn a generic subagent seeded with that fixer prompt for each fix-list item. Do not dispatch a standalone agent by type/name. The fixer is a pure executor: the validity judgment is already done, so it implements and returns. It does not re-judge worthwhileness.
 
 Each fixer receives:
 - The feedback_id (thread ID or comment ID) and feedback type.
@@ -154,7 +154,7 @@ After the push succeeds, post replies and resolve where applicable. Post for eve
 
 ### Reply format
 
-All replies quote the relevant part of the original feedback for continuity: the specific sentence or passage, not the entire comment if it's long. The per-verdict templates are in [references/evaluation-rubric.md](evaluation-rubric.md) (skip verdicts) and [references/agents/pr-comment-resolver.md](agents/pr-comment-resolver.md) (`fixed` / `fixed-differently`).
+All replies quote the relevant part of the original feedback for continuity: the specific sentence or passage, not the entire comment if it's long. The per-verdict templates are in [references/evaluation-rubric.md](evaluation-rubric.md) (skip verdicts) and [references/agents-pr-comment-resolver.md](agents-pr-comment-resolver.md) (`fixed` / `fixed-differently`).
 
 For `needs-human` verdicts, post the natural-sounding reply but do NOT resolve the thread. Leave it open for human input.
 
@@ -231,7 +231,7 @@ The `review_threads` array should be empty (except `needs-human` items).
 
 - First or second fix-verify cycle: Repeat from step 2 for the remaining threads.
 
-- **After the second fix-verify cycle** (3rd pass would begin): Stop looping. Surface remaining issues to the user with context about the recurring pattern: "Multiple rounds of feedback on [area/theme] suggest a deeper issue. Here's what we've fixed so far and what keeps appearing." Use the same `needs-human` escalation pattern -- leave threads open and present the pattern for the user to decide.
+- **After the second fix-verify cycle** (3rd pass would begin): Stop looping. Surface remaining issues to the user with context about the recurring pattern: "Multiple rounds of feedback on [area/theme] suggest a deeper issue. Here's what we've fixed so far and what keeps appearing." Use the same `needs-human` escalation pattern; leave threads open and present the pattern for the user to decide.
 
 PR comments and review bodies have no resolve mechanism, so they will still appear in the output. Verify they were replied to by checking the PR conversation.
 
@@ -255,7 +255,7 @@ Validation: [one line -- e.g., "bun test passed (893/893)" or "bun test passed w
 
 If any item is `needs-human`, append a decisions section. These are rare but high-signal. Each carries a `decision_context` (composed in step 3, or by a fixer's escalation): what the reviewer said, what was investigated, why it needs a decision, concrete options with tradeoffs, and a lean if any.
 
-Present the `decision_context` directly -- it's already structured for the user to decide quickly:
+Present the `decision_context` directly; it's already structured for the user to decide quickly:
 
 ```
 Needs your input (count):

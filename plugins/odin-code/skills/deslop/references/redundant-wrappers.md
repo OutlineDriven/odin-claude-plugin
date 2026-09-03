@@ -15,9 +15,9 @@ The shape to search for: a function or method whose entire body is one call, for
 
 | Language | `ast-grep` seed pattern | Also run |
 |---|---|---|
-| Python | `def $NAME($$$PARAMS) $$$RT: return $INNER($$$ARGS)` | — |
-| TypeScript | `function $NAME($$$PARAMS) $$$RT { return $INNER($$$ARGS); }` | — |
-| Rust | `fn $NAME($$$PARAMS) $$$RT { $INNER($$$ARGS) }` | — |
+| Python | `def $NAME($$$PARAMS) $$$RT: return $INNER($$$ARGS)` | none |
+| TypeScript | `function $NAME($$$PARAMS) $$$RT { return $INNER($$$ARGS); }` | none |
+| Rust | `fn $NAME($$$PARAMS) $$$RT { $INNER($$$ARGS) }` | none |
 | Kotlin | `fun $NAME($$$PARAMS) $$$RT = $INNER($$$ARGS)` | block body: `fun $NAME($$$PARAMS): $RET { return $INNER($$$ARGS) }`, and again without `: $RET` |
 | Go | `func ($$$RECV) $NAME($$$PARAMS) $$$RET { return $INNER($$$ARGS) }` | plain function: drop `($$$RECV)` · void: drop `return` |
 | Java | `$RET $NAME($$$PARAMS) { return $RECV.$INNER($$$ARGS); }` | bare call: `return $INNER($$$ARGS);` · void: drop `return` |

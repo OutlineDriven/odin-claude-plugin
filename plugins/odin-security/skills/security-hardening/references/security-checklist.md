@@ -142,7 +142,7 @@ govulncheck ./...
 
 For any feature that calls an LLM (chatbots, summarizers, agents, RAG):
 
-- [ ] Model output treated as untrusted — never into `eval`/SQL/shell/raw-markup/file paths
+- [ ] Model output treated as untrusted: never into `eval`/SQL/shell/raw-markup/file paths
 - [ ] Prompt injection assumed; permissions enforced in code, not in the system prompt
 - [ ] Secrets, cross-tenant data, and full system prompts kept out of the context window
 - [ ] Tool/agent permissions scoped; destructive or irreversible actions require confirmation

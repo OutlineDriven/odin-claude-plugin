@@ -17,8 +17,8 @@ disable-model-invocation: true
 
 ## Inputs
 
-- The canonical baseline file `system-prompt-baseline.md` — must exist and be the agreed source of truth.
-- The six output-style embeds: `packages/odin-core/output-styles/{axiom-mode,builder,duet,linus,odin,benchmark}.md`.
+- The canonical baseline file `system-prompt-baseline.md`, must exist and be the agreed source of truth.
+- The six output-style embeds: `plugins/odin-core/output-styles/{axiom-mode,builder,duet,linus,odin,benchmark}.md`.
 - The two external harness embeds: `~/.omp/agent/AGENTS.md` and `~/.codex/AGENTS.md`.
 - Explicit user authorization, recorded in the run, before any `benchmark.md` tail repair or authorized external embed edit.
 
@@ -27,7 +27,7 @@ disable-model-invocation: true
 1. **Map the cascade family and zones.** The canonical baseline `system-prompt-baseline.md` is the whole-file source of truth and wins every conflict. For each output-style embed (`axiom-mode`, `builder`, `duet`, `linus`, `odin`, `benchmark`), the persona prefix above the charter `<role>` (the second `<role>` in each file) is the strip zone. The tail from the charter `<role>` to EOF is the byte-identity invariant zone and is never a dedup target. Never touch the `benchmark.md` auto-generated margin-runner preamble. The external harness embeds `~/.omp/agent/AGENTS.md` and `~/.codex/AGENTS.md` are editable in place but never committable; harness-adapted tool sections are legitimate divergence. **Done when:** the cascade family is mapped with strip zones, invariant zones, and external embeds identified.
 2. **Verify the invariant before dedup.** Copy the canonical baseline to a temporary file. For each output style, diff the canonical against the file's tail of equal byte length:
    ```
-   diff -q /tmp/canon.md <(tail -c "$(wc -c < /tmp/canon.md)" packages/odin-core/output-styles/X.md)
+   diff -q /tmp/canon.md <(tail -c "$(wc -c < /tmp/canon.md)" plugins/odin-core/output-styles/X.md)
    ```
    Drift in the invariant zone is a sync bug, not duplication. Repair by replacing the file's entire tail (from its charter `<role>` to EOF) with the canonical content as one block; dedup edits inside the invariant zone stay forbidden. For `benchmark.md`, obtain explicit user authorization before repairing. Record each diff result. **Done when:** all six tails are verified byte-identical (after repair where needed), or `benchmark.md` repair is deferred for lack of authorization.
 3. **Strip-zone scan (persona prefixes).** `benchmark.md` has no eligible strip zone (its persona prefix sits inside the auto-generated block), so scan the five hand-authored styles and skip `benchmark.md`. Classify every sentence of each persona prefix as `voice`, `duplicate`, `conflict`, or `unique-directive`:
@@ -41,11 +41,11 @@ disable-model-invocation: true
    - Directive-level comparison against the baseline. Classify each divergence: `harness-adaptation` (names that harness's tools or commands: keep), `accidental drift` (same rule, mutated wording: align to baseline wording), `conflict` (baseline wins, unless the divergence fits harness-specific tooling).
    Done when: a divergence ledger with exactly one classification per divergence is produced, none unclassified.
 5. **Apply, verify, then commit.**
-   - Apply all repo edits: strips, conflict resolutions, tail repairs, and the `releaseVersion` bump if strips or conflict resolutions occurred. Let the package-surfaces generator (`scripts/render-package-surfaces.mjs`) re-render every package surface (`packages/<id>/package.json` and `.claude-plugin/plugin.json`) from that one literal. A run that only re-syncs an embedded baseline with zero strips is a pure sync change -> no bump. Any `benchmark.md` change (tail repair included) ships only with explicit user authorization recorded in this run.
+   - Apply all repo edits: strips, conflict resolutions, tail repairs, and the `releaseVersion` bump if strips or conflict resolutions occurred. Let the package-surfaces generator (`scripts/render-plugin-surfaces.mjs`) re-render every package surface (`plugins/<id>/plugin.json` and `.claude-plugin/plugin.json`) from that one literal. A run that only re-syncs an embedded baseline with zero strips is a pure sync change -> no bump. Any `benchmark.md` change (tail repair included) ships only with explicit user authorization recorded in this run.
    - Run verification before committing: re-run the step 2 invariant diffs (all six tails must be byte-identical 6/6) and run `prek run --all-files`. If either fails, do not commit; report the failing diff or check and the file responsible.
    - Only after verification passes, commit all repo files in one atomic commit (edits plus regenerated surfaces).
    - External files: edit in place, never commit; end the report with an explicit warning listing every externally edited path for user review.
-   - Output styles load at session start — smoke-test doctrine effects in a fresh session.
+   - Output styles load at session start: smoke-test doctrine effects in a fresh session.
    Done when: the final report contains strips per file with citations, conflicts resolved with the winner named, kept harness-adaptations, externally edited paths, the `prek` result, and the invariant re-verified 6/6, with the atomic commit created only after verification passed.
 
 ## Failure and recovery
@@ -54,7 +54,7 @@ disable-model-invocation: true
 - Ambiguous classification (Jaccard in the 0.45-0.65 band without opposing modals): do not strip; classify as `unique-directive` and report it for human review.
 - prek failure or invariant not 6/6 after edit: the done predicate does not hold. Do not commit; report the failing diff or check and the file responsible.
 - Partial-result rule: a run that completes classification but fails final verification produces no commit. The divergence ledger and classification record are still reported as the partial result; the invariant must be re-verified before any commit.
-- Rollback: verification runs before the atomic commit, so a failed verification produces no commit to revert. Uncommitted repo edits are discarded with `git checkout -- <files>`. External file edits are not VCS-tracked — record the original content before editing and restore from that record on failure.
+- Rollback: verification runs before the atomic commit, so a failed verification produces no commit to revert. Uncommitted repo edits are discarded with `git checkout -- <files>`. External file edits are not VCS-tracked; record the original content before editing and restore from that record on failure.
 
 ## Output
 A final report containing the 6/6 invariant re-verification diff results, strips per file with baseline-pair citations, conflicts resolved with the winner named, kept harness-adaptations, the complete divergence ledger (one classification per divergence), every externally edited path flagged for user review, the `prek run --all-files` result, and the `releaseVersion` bump decision (bumped literal plus regenerated surfaces, or no-bump rationale); repo changes land as one atomic commit, external edits land in place and are never committed.

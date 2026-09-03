@@ -1,6 +1,6 @@
 ---
 name: gh-review-requests
-description: 'Use when the user asks to find PRs to review or check the team review queue. Returns a table of open PRs needing review with URLs and reasons. Not for summarizing PR feedback — use get-pr-comments. Read-only.'
+description: 'Use when the user asks to find PRs to review or check the team review queue. Returns a table of open PRs needing review with URLs and reasons. Not for summarizing PR feedback: use get-pr-comments. Read-only.'
 ---
 
 # Gh review requests
@@ -16,9 +16,9 @@ description: 'Use when the user asks to find PRs to review or check the team rev
 
 ## Not for
 
-- Summarizing feedback on a specific PR — use get-pr-comments.
-- Resolving review feedback — use resolve-pr-feedback.
-- Source or remote mutation — this skill is read-only.
+- Summarizing feedback on a specific PR: use get-pr-comments.
+- Resolving review feedback, use resolve-pr-feedback.
+- Source or remote mutation: this skill is read-only.
 
 ## Inputs
 
@@ -45,4 +45,4 @@ description: 'Use when the user asks to find PRs to review or check the team rev
 
 ## Output
 
-A chat-output table of open PRs needing review, one row per PR, with Repository, PR, Author, URL, and Reason columns; or a no-results report when no unread review requests match the filters — partial results labeled as such.
+A chat-output table of open PRs needing review, one row per PR, with Repository, PR, Author, URL, and Reason columns; or a no-results report when no unread review requests match the filters, partial results labeled as such.

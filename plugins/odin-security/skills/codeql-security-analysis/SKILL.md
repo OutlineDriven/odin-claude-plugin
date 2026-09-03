@@ -1,6 +1,6 @@
 ---
 name: codeql-security-analysis
-description: 'Use when building or reusing a CodeQL database, running CodeQL security analysis, or modeling project-specific sources and sinks. Produces a quality-gated database, nonzero query suite, and final SARIF. Not for manual vulnerability review — use confirmed-security-review.'
+description: 'Use when building or reusing a CodeQL database, running CodeQL security analysis, or modeling project-specific sources and sinks. Produces a quality-gated database, nonzero query suite, and final SARIF. Not for manual vulnerability review: use confirmed-security-review.'
 ---
 
 # CodeQL security analysis

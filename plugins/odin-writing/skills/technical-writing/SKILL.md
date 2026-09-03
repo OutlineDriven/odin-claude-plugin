@@ -1,6 +1,6 @@
 ---
 name: technical-writing
-description: 'Use when technical prose needs writing or reviewing with real symbols and controlled English, including draft editing when generation is unnecessary. Also handles draft editing when generation is unnecessary. Not for general prose deliverables — use writer; not for remote or irreversible changes.'
+description: 'Use when technical prose needs writing or reviewing with real symbols and controlled English, including draft editing when generation is unnecessary. Also handles draft editing when generation is unnecessary. Not for general prose deliverables: use writer, not for remote or irreversible changes.'
 ---
 
 # Technical writing
@@ -22,8 +22,8 @@ description: 'Use when technical prose needs writing or reviewing with real symb
 
 ## Refusals
 
-- Will not invent content when no draft or source material exists — request the source.
-- Will not copy third-party expression — clean-room adaptation only.
+- Will not invent content when no draft or source material exists; request the source.
+- Will not copy third-party expression, clean-room adaptation only.
 - Will not mark done when prose contains unresolved placeholders or ambiguous references.
 
 ## Procedure
@@ -44,7 +44,7 @@ description: 'Use when technical prose needs writing or reviewing with real symb
 | Placeholder or invented symbol | Replace with the real value from context; if none exists, flag the gap explicitly. |
 | License boundary | Refuse to copy third-party expression; produce clean-room adaptation only. |
 | Partial result | If ambiguity remains where task context is insufficient, report the partial result with specific gaps named. Never mark done with unresolved placeholders. |
-| Rollback | Revert the edited file to its prior version via version control. Full revert or full edit stands — no partial rollback. |
+| Rollback | Revert the edited file to its prior version via version control. Full revert or full edit stands, no partial rollback. |
 
 ## Output
 

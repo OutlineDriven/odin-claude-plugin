@@ -16,14 +16,14 @@ description: 'Use when non-trivial code needs designing before implementation, o
 
 ## Refusal
 
-Not for visual architecture diagrams or HTML artifacts — use architecture-diagram, which renders a self-contained visual from a frozen specification; architect designs code structure (modules, interfaces, seams, depth) and produces a design package, not a rendered diagram. Not for deploy, remote, credential, publish, or irreversible changes — use deploy or shipping skills. Not for people-process or organizational architecture.
+Not for visual architecture diagrams or HTML artifacts; use architecture-diagram, which renders a self-contained visual from a frozen specification; architect designs code structure (modules, interfaces, seams, depth) and produces a design package, not a rendered diagram. Not for deploy, remote, credential, publish, or irreversible changes; use deploy or shipping skills. Not for people-process or organizational architecture.
 
 ## Vocabulary
 
 Use these terms consistently in every recommendation and design sketch:
 
 - Module: any unit with an interface and implementation, at any scale.
-- Interface: every fact a caller must know — types, invariants, ordering, errors, configuration, performance shape.
+- Interface: every fact a caller must know: types, invariants, ordering, errors, configuration, performance shape.
 - Implementation: what the interface hides.
 - Depth: behavior hidden per unit of interface learned; a deep module provides high leverage through a small interface. Shallow modules expose a broad surface with little hidden.
 - Seam: a point where behavior can be substituted or tested in isolation without editing that behavior in place.
@@ -33,18 +33,18 @@ Use these terms consistently in every recommendation and design sketch:
 
 ## Procedure
 
-### Greenfield mode — design before implementation
+### Greenfield mode: design before implementation
 
 1. **Bound scope.** Confirm the code unit to design and its trust boundary (inputs, callers, failure paths). Done when: the unit is named and its boundary stated. If the request is trivial or already fully specified, stop and report no design needed.
-2. **Sketch the usage surface first.** Write the public call shape — signatures, call sites, data shapes — before any implementation detail. Done when: the usage surface is recorded as a local artifact.
+2. **Sketch the usage surface first.** Write the public call shape, signatures, call sites, data shapes, before any implementation detail. Done when: the usage surface is recorded as a local artifact.
 3. **Produce at least two competing design sketches** that each satisfy the usage surface and differ in structure or tradeoff. Done when: each sketch is coherent enough to evaluate.
 4. **Evaluate every sketch against red flags:** hidden complexity, leaky abstraction, unbounded scope, premature generality, missing error or edge handling. Done when: each sketch has a red-flag record.
 5. **Apply the redesign threshold.** If every sketch trips a blocking red flag or no sketch is coherent, redesign from the usage surface. Stop redesigning once at least one sketch is coherent and trips no blocking red flag. Done when: at least one coherent, unblocked sketch exists.
 6. **Select the sketch with the best tradeoff record.** State the explicit design choice and the rejected alternatives with their tradeoffs. Done when: the choice and rejections are recorded.
-7. **Derive the coherent implementation shape** — modules, types, control flow, failure paths — from the selected sketch. Done when: the implementation shape is recorded.
+7. **Derive the coherent implementation shape**, modules, types, control flow, failure paths, from the selected sketch. Done when: the implementation shape is recorded.
 8. **Implement only if the human request and authority permit;** otherwise stop at the design package. Done when: either implementation is complete or the design package is delivered.
 
-### Brownfield mode — improve existing architecture
+### Brownfield mode: improve existing architecture
 
 #### Survey (read-only)
 
@@ -61,7 +61,7 @@ Use these terms consistently in every recommendation and design sketch:
 3. **Present a numbered candidate list.** For each: name the files, the concrete problem and deletion-test result, a plain-language solution without an interface proposal, and expected locality, leverage, and testability changes. Ask the user to select one before writing. Done when: the user selects one candidate.
 4. **Grill the selected candidate adversarially.** Resolve one dependent design decision at a time and recommend one answer. Bound the changed-file set before mutation. If a new domain term becomes established, update or lazily create `CONTEXT.md` immediately. If the user rejects a design for a reason future maintainers need, offer a local ADR and write it only after acceptance. Done when: every design decision is resolved.
 5. **If the user requests interface alternatives, dispatch the design-twice parallel passes** described in `references/interface-design.md`. Done when: the designs are compared and differences resolved.
-6. **Choose the dependency treatment by observed class** — see `references/deepening.md` for the four categories and their testing strategies. Done when: the dependency treatment is named.
+6. **Choose the dependency treatment by observed class**: see `references/deepening.md` for the four categories and their testing strategies. Done when: the dependency treatment is named.
 7. **Implement only the accepted design.** Validate external and serialized inputs at the new interface. Migrate every scoped caller, delete the replaced shallow path, and delete shallow-module tests after equivalent interface tests exist. Do not layer the new design over the old. Done when: the shallow path is replaced, not layered.
 8. **Exercise the changed behavior through the same interface callers use.** Confirm the accepted invariants, error modes, and relevant dependency implementation. Review the final changed-file set against the bound scope. Done when: interface-level checks pass and the changed-file set matches the bound scope.
 
@@ -69,7 +69,7 @@ Use these terms consistently in every recommendation and design sketch:
 
 1. **Locate the seam:** identify points where a caller can substitute an alternate implementation or inject a test double. If no seam exists, propose the smallest interface introduction that creates one without widening the public surface. Done when: each seam is named or the smallest creating-interface is proposed.
 2. **Make code testable:** identify the concrete dependencies that block isolated testing, then propose seams (interface extraction or dependency injection) that make those dependencies substitutable. Prefer a seam that does not change production behavior. Done when: each blocking dependency has a proposed seam.
-3. **Harden with guardrails:** recommend tooling that enforces the decisions — type-level constraints that make invalid states unrepresentable, lint or analysis rules that fail on violation, boundary checks, or tests that fail when an invariant breaks. Name the invariant each guardrail protects. Done when: each guardrail is tied to its invariant.
+3. **Harden with guardrails:** recommend tooling that enforces the decisions: type-level constraints that make invalid states unrepresentable, lint or analysis rules that fail on violation, boundary checks, or tests that fail when an invariant breaks. Name the invariant each guardrail protects. Done when: each guardrail is tied to its invariant.
 4. **Stop at recommendations unless the request and authority permit implementation.** Mark any recommendation not grounded in read code as inference. Done when: recommendations are delivered or implementation is complete.
 
 ## Failure and recovery

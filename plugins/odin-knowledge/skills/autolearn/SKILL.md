@@ -42,7 +42,7 @@ Done when: the mode is routed and `mode:` tokens are stripped from arguments.
 
 A doc is earned, not assumed. Verify all three preconditions:
 
-1. The problem is solved, not in progress. An abandoned attempt counts as solved once it is finished (branch dead, decision to stop made); its learning is the anti-pattern — what was tried, the specific reason it failed, and the condition under which it would be worth trying again.
+1. The problem is solved, not in progress. An abandoned attempt counts as solved once it is finished (branch dead, decision to stop made); its learning is the anti-pattern: what was tried, the specific reason it failed, and the condition under which it would be worth trying again.
 2. The solution is verified: observed working, not hoped working.
 3. It was non-trivial, not a typo or obvious one-liner.
 
@@ -93,13 +93,13 @@ Done when: a refresh recommendation is made or explicitly skipped.
 CONCEPTS.md at the operating repo root is the shared-vocabulary glossary. It holds words with a precise meaning in this codebase, with one definition per concept. Other knowledge-capture processes may also write to this shared surface; always follow the one-definition-per-concept discipline.
 
 1. Locate the file: `fd -g 'CONCEPTS.md' --max-depth 2`. Absent and a term clears the gate → create it. Absent and nothing clears → write nothing; never scaffold an empty file. Done when: the file is located or its absence is handled.
-2. Search for the term and its synonyms: `git grep -ni '<term>' CONCEPTS.md`. A hit means the concept exists — refresh on drift, never add a second entry. Done when: the term is searched and existing entries are identified.
+2. Search for the term and its synonyms: `git grep -ni '<term>' CONCEPTS.md`. A hit means the concept exists: refresh on drift, never add a second entry. Done when: the term is searched and existing entries are identified.
 3. New term → add one entry: a one-sentence definition of what it means here and what distinguishes it from neighbors; a second paragraph only for non-obvious behavioral rules. Retire synonyms as an `*Avoid:*` aliases line. No file paths, dates, owners, or version-specific claims. The file stands on its own. Done when: the new entry is written with its definition and alias line.
 4. Read the file back to confirm the merge landed and created no duplicate heading. Done when: the file is read back with no duplicate headings.
 
 ### 6. Refresh: maintain existing docs
 
-Find every `.md` under `docs/solutions/`, excluding `README.md` and anything under `_archived/`. A `[scope]` hint narrows it — try in order, stop at first hit: (1) subdirectory name, (2) frontmatter `module`/`component`/`tags` match, (3) filename partial match, (4) content keyword. No match → report the miss and exit. No scope hint → process everything.
+Find every `.md` under `docs/solutions/`, excluding `README.md` and anything under `_archived/`. A `[scope]` hint narrows it: try in order, stop at first hit: (1) subdirectory name, (2) frontmatter `module`/`component`/`tags` match, (3) filename partial match, (4) content keyword. No match → report the miss and exit. No scope hint → process everything.
 
 Classify every candidate doc into exactly one outcome:
 
@@ -113,7 +113,7 @@ Classify every candidate doc into exactly one outcome:
 
 Core rules: evidence informs judgment, not a mechanical scorecard; prefer no-write Keep; match docs to reality, not the reverse; be decisive; no low-value churn (no typo fixes, prose polish, cosmetic edits); delete, don't archive (no `_archived/`, git history preserves everything).
 
-Investigate each doc: read it, cross-reference claims against current codebase. Check references (file paths, symbols, modules — still exist or moved?), solution (does the fix still match how the code works today?), code examples (do snippets reflect current implementation?), related docs (cross-referenced learnings still present and consistent?), overlap (another in-scope doc covering the same domain?). Update vs Replace boundary: references moved but approach still correct → Update; recommended solution conflicts with current code or architecture changed → Replace; if rewriting the Solution section, it is Replace, not Update. Age alone is not a stale signal. Check for a successor before deleting.
+Investigate each doc: read it, cross-reference claims against current codebase. Check references (file paths, symbols, modules: still exist or moved?), solution (does the fix still match how the code works today?), code examples (do snippets reflect current implementation?), related docs (cross-referenced learnings still present and consistent?), overlap (another in-scope doc covering the same domain?). Update vs Replace boundary: references moved but approach still correct → Update; recommended solution conflicts with current code or architecture changed → Replace; if rewriting the Solution section, it is Replace, not Update. Age alone is not a stale signal. Check for a successor before deleting.
 
 Document-set analysis: step back and judge the set as a whole. High overlap across 3+ dimensions → strong Consolidate signal. Older narrow precursor vs newer canonical doc → consolidation candidate. Retrieval-value test: does keeping these separate help discoverability or just create drift risk? Cross-doc contradictions are more urgent than individual staleness.
 
@@ -156,7 +156,7 @@ Done when: the commit is made with only this skill's surfaces staged, or skipped
 - Rollback: all writes are to local files under version control. Revert the commit or restore the file from git history.
 
 ## Output
-One validated learning doc at `docs/solutions/<category>/<slug>.md` (or updated existing doc), optionally a CONCEPTS.md entry and a memory-handoff candidate, or a one-line "nothing qualifies" determination — in refresh mode, a report classifying every scanned doc into Keep/Update/Consolidate/Replace/Delete/stale with applied and recommended actions.
+One validated learning doc at `docs/solutions/<category>/<slug>.md` (or updated existing doc), optionally a CONCEPTS.md entry and a memory-handoff candidate, or a one-line "nothing qualifies" determination: in refresh mode, a report classifying every scanned doc into Keep/Update/Consolidate/Replace/Delete/stale with applied and recommended actions.
 
 ## Solution schema
 
@@ -223,7 +223,7 @@ No required fields beyond the shared core. All optional:
 | `tooling_decision` | `docs/solutions/tooling-decisions/` |
 | `convention` | `docs/solutions/conventions/` |
 
-Filename: `[sanitized-problem-slug].md` — no date suffix (the `date` field carries that).
+Filename: `[sanitized-problem-slug].md`, no date suffix (the `date` field carries that).
 
 ### Validation rules
 
@@ -237,4 +237,4 @@ Filename: `[sanitized-problem-slug].md` — no date suffix (the `date` field car
 
 ### YAML safety (array items)
 
-Strict YAML parsers misread array items that start with a reserved indicator as unquoted scalars. For any array-of-strings field (`symptoms`, `applies_when`, `tags`, `related_components`), wrap the value in double quotes when it starts with any of: `` ` `` `[` `]` `{` `}` `,` `*` `&` `!` `|` `>` `%` `@` `?`. Also quote when the value contains `": "`. Scalar fields (`title:`, `module:`) have a separate failure mode — an unquoted ` #` truncates at the comment, an unquoted `: ` reframes as a mapping. `scripts/validate-frontmatter.py` catches those; quote and re-run until it exits 0.
+Strict YAML parsers misread array items that start with a reserved indicator as unquoted scalars. For any array-of-strings field (`symptoms`, `applies_when`, `tags`, `related_components`), wrap the value in double quotes when it starts with any of: `` ` `` `[` `]` `{` `}` `,` `*` `&` `!` `|` `>` `%` `@` `?`. Also quote when the value contains `": "`. Scalar fields (`title:`, `module:`) have a separate failure mode: an unquoted ` #` truncates at the comment, an unquoted `: ` reframes as a mapping. `scripts/validate-frontmatter.py` catches those; quote and re-run until it exits 0.

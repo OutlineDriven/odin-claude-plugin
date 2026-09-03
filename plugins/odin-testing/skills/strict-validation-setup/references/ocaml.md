@@ -16,7 +16,7 @@ OCaml's strict surface lives in dune flags, ocamlformat config, and the `.mli`-f
  (enabled_for ocaml dune))
 ```
 
-`implicit_transitive_deps false` forces explicit dependency declarations — every transitive dep used must be a direct dep. This is the 2026 strict default.
+`implicit_transitive_deps false` forces explicit dependency declarations, every transitive dep used must be a direct dep. This is the 2026 strict default.
 
 ## dune (per-library)
 
@@ -67,10 +67,10 @@ val name : t -> string
 
 - Alcotest for unit tests (`dune runtest`).
 - QCheck for property-based tests.
-- Crowbar for fuzzing — defers to `ocaml-dev:fuzz`.
+- Crowbar for fuzzing, defers to `ocaml-dev:fuzz`.
 
 ## Notes
 
 - `dune --release` is a build mode (optimizations + warnings-as-errors), not a strict-mode flag in the typechecker sense.
-- Effects (OCaml 5+) need a separate strictness discipline — `Effect.Deep.try_with` is the safer wrapper than catch-all `try ... with _`.
+- Effects (OCaml 5+) need a separate strictness discipline, `Effect.Deep.try_with` is the safer wrapper than catch-all `try ... with _`.
 - Eio direct-style concurrency interacts with `-principal`; some inferred types degrade. Add explicit annotations on Eio entry points.

@@ -17,7 +17,7 @@ disable-model-invocation: true
 
 ## Inputs
 
-- Target harness: which coding agent to wire — Claude Code, Codex, or Cursor. Must be supplied.
+- Target harness: which coding agent to wire: Claude Code, Codex, or Cursor. Must be supplied.
 - Server root: the Warp Factory API root URL. Must be supplied if not inferable from oz context.
 - Factory creation: optional. Create a factory only when the user explicitly requests it; otherwise skip.
 

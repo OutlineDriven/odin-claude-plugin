@@ -1,6 +1,6 @@
 ---
 name: from-innovation-perspective
-description: 'Use when the user wants an answer only from the innovation seat: original technique, talent, and culture. Emits an innovation-perspective analysis without blending. Not for rebuilding from primitives — use from-first-principle. Read-only; no source or remote mutation.'
+description: 'Use when the user wants an answer only from the innovation seat: original technique, talent, and culture. Emits an innovation-perspective analysis without blending. Not for rebuilding from primitives: use from-first-principle. Read-only; no source or remote mutation.'
 ---
 
 # From innovation perspective
@@ -16,9 +16,9 @@ description: 'Use when the user wants an answer only from the innovation seat: o
 
 ## Not for
 
-- Rebuilding a design from primitives — use from-first-principle.
-- Blended multi-seat analysis — run each from-*-perspective seat independently and compare after.
-- Source or remote mutation — this skill is read-only.
+- Rebuilding a design from primitives: use from-first-principle.
+- Blended multi-seat analysis: run each from-*-perspective seat independently and compare after.
+- Source or remote mutation: this skill is read-only.
 
 ## Inputs
 
@@ -41,4 +41,4 @@ The question, design, or artifact to analyze. The lens is fixed to the innovatio
 
 ## Output
 
-A single innovation-perspective analysis answering the supplied subject from the original-technique, talent, and culture seat only — no blended lenses.
+A single innovation-perspective analysis answering the supplied subject from the original-technique, talent, and culture seat only, no blended lenses.

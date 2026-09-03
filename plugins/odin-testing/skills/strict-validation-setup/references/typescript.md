@@ -24,7 +24,7 @@
 }
 ```
 
-TypeScript 7.0.x is the current stable release, a Go-native port of the compiler; `strict: true` has been the default since 6.0. The additional flags above harden array/index access, optional-property semantics, and override-keyword discipline. `skipLibCheck: false` is intentional — type-check upstream `.d.ts` files to catch upstream regressions.
+TypeScript 7.0.x is the current stable release, a Go-native port of the compiler; `strict: true` has been the default since 6.0. The additional flags above harden array/index access, optional-property semantics, and override-keyword discipline. `skipLibCheck: false` is intentional, type-check upstream `.d.ts` files to catch upstream regressions.
 
 ## biome.json
 
@@ -45,7 +45,7 @@ TypeScript 7.0.x is the current stable release, a Go-native port of the compiler
 }
 ```
 
-Biome replaces ESLint + Prettier in the 2026 idiom for new projects. `noExplicitAny: error` rejects `any` at the lint layer; `unknown` is intentionally still allowed (it is the safe escape hatch for boundary-typed input that is then narrowed) — if a project wants to forbid `unknown` outright it needs a separate ast-grep rule or `tsc` plugin, since neither Biome nor `tsc` ships a built-in `noExplicitUnknown`.
+Biome replaces ESLint + Prettier in the 2026 idiom for new projects. `noExplicitAny: error` rejects `any` at the lint layer; `unknown` is intentionally still allowed (it is the safe escape hatch for boundary-typed input that is then narrowed), if a project wants to forbid `unknown` outright it needs a separate ast-grep rule or `tsc` plugin, since neither Biome nor `tsc` ships a built-in `noExplicitUnknown`.
 
 ## Schema validators at IO boundaries
 
@@ -63,7 +63,7 @@ export const parseRequest = (input: unknown): Request =>
   RequestSchema.parse(input);
 ```
 
-Zod `.strict()` rejects unknown keys at IO boundaries. Use `z.infer` to derive the TypeScript type — single source of truth.
+Zod `.strict()` rejects unknown keys at IO boundaries. Use `z.infer` to derive the TypeScript type, single source of truth.
 
 ## Notes
 

@@ -69,7 +69,7 @@ Agent type for each invocation: `Explore` (read-only).
 
 ### Composition
 
-After all three findings lists return, merge by `{file, line}`. Tag each finding with its axis. When two axes report the same `{file, line}` with structurally identical patterns, deduplicate — keep the finding once, attribute to the first reporter, note the second axis as a co-signer.
+After all three findings lists return, merge by `{file, line}`. Tag each finding with its axis. When two axes report the same `{file, line}` with structurally identical patterns, deduplicate: keep the finding once, attribute to the first reporter, note the second axis as a co-signer.
 
 ### Reviewer audit (single adjudication authority)
 

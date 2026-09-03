@@ -12,4 +12,4 @@ HUNT (cite `path:line` for each):
 4. Deleted assertions, or `skip`/`xfail`/`only` left in the diff.
 5. Tests coupled to implementation detail that break on any refactor (a maintainability cost; class it accordingly).
 
-SEVERITY ANCHORS: an untested changed branch that can break silently is P2; an untested security or money path is P1 or higher. Apply `_contract.md`.
+SEVERITY ANCHORS: an untested changed branch that can break silently is P2; an untested security or money path is P1 or higher. Apply `personas-_contract.md`.

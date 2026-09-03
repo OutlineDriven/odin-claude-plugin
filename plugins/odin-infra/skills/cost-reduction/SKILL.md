@@ -19,7 +19,7 @@ description: 'Use when a measured cost surface needs one-change-at-a-time reduct
 
 - Approved scope (required): the billing or infrastructure surface to reduce, frozen before mutation.
 - Budget target (required): the cost reduction goal.
-- Guardrails (required): quality gates that must not regress — planted-defect catch rate, rejects-extra-features check, end-to-end scenarios, and blind A/B deliverable-parity comparison against the current config.
+- Guardrails (required): quality gates that must not regress: planted-defect catch rate, rejects-extra-features check, end-to-end scenarios, and blind A/B deliverable-parity comparison against the current config.
 - Pass cap (required): the maximum number of rungs to test.
 - Expensive-model baseline (required): the current behavior for every judgment point the workflow contains.
 
@@ -40,7 +40,7 @@ description: 'Use when a measured cost surface needs one-change-at-a-time reduct
 - Quality regression or silently-absorbed judgment: the rung is dead. Record the measurement that killed it and the standing bar; adopt nothing. Terminal class: `dead`.
 - Indeterminate gate result: record as dead. An indeterminate run does not satisfy N=5; it is not a partial pass. Terminal class: `dead`.
 - No safe saving or no progress: stop; do not spend another pass to manufacture movement. Terminal class: `blocked`.
-- Missing prerequisite: a gate cannot be run — missing expensive-model baseline, no planted-defect fixture, no current-config A/B pair. Stop and report the missing prerequisite; do not infer a pass from absence of evidence. Terminal class: `blocked`.
+- Missing prerequisite: a gate cannot be run: missing expensive-model baseline, no planted-defect fixture, no current-config A/B pair. Stop and report the missing prerequisite; do not infer a pass from absence of evidence. Terminal class: `blocked`.
 
 ## Output
 

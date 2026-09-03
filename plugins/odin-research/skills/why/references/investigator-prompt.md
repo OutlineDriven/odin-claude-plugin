@@ -1,6 +1,6 @@
 # Investigator prompt template
 
-Build each investigator's prompt from this template; fill in the placeholders. Append the single category playbook `sources/<source>.md` matching this investigator's evidence category (see `source-playbook.md` for the index). If the target code looks defensive (null checks, retry logic, timeout handling, rate limiting, feature flags, egress guards, OOM handlers), also append `sources/incident-postmortem.md` for the incident-flavored queries to run inside its own source.
+Build each investigator's prompt from this template; fill in the placeholders. Append the single category playbook `sources-<source>.md` matching this investigator's evidence category (see `source-playbook.md` for the index). If the target code looks defensive (null checks, retry logic, timeout handling, rate limiting, feature flags, egress guards, OOM handlers), also append `sources-incident-postmortem.md` for the incident-flavored queries to run inside its own source.
 
 ---
 

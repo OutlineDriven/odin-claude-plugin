@@ -12,4 +12,4 @@ HUNT (use `ast-grep` for signatures, `git grep` for call sites; cite `path:line`
 4. Semantics changed under an unchanged signature: the most dangerous, because the type checker will not catch it.
 5. Versioning or deprecation missing on a breaking change.
 
-SEVERITY ANCHORS: a reachable break in a shipped public contract is P0/P1; an internal-only surface with every caller in-repo and updated is P2. Apply `_contract.md`.
+SEVERITY ANCHORS: a reachable break in a shipped public contract is P0/P1; an internal-only surface with every caller in-repo and updated is P2. Apply `personas-_contract.md`.

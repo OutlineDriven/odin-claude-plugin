@@ -1,6 +1,6 @@
 ---
 name: skill-benchmark
-description: 'Use when the user runs /skill-benchmark to score agent skills via LLM judges with baseline comparison, regression detection, and trend analysis, or to compare candidate models on a shared task set in a ranked table with per-model spend tracking. Not for release gating — use skill-benchmark-gate.'
+description: 'Use when the user runs /skill-benchmark to score agent skills via LLM judges with baseline comparison, regression detection, and trend analysis, or to compare candidate models on a shared task set in a ranked table with per-model spend tracking. Not for release gating, use skill-benchmark-gate.'
 disable-model-invocation: true
 ---
 

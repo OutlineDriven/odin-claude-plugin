@@ -1,6 +1,6 @@
 ---
 name: batch-ask-me
-description: 'Use when the user faces multi-fork decisions or unresolved prerequisites. Maps a decision tree and asks its frontier as batched single-select questions until shared understanding is confirmed. Also handles "batch questions". Not for one-at-a-time interviews — use interview-me.'
+description: 'Use when the user faces multi-fork decisions or unresolved prerequisites. Maps a decision tree and asks its frontier as batched single-select questions until shared understanding is confirmed. Also handles "batch questions". Not for one-at-a-time interviews: use interview-me.'
 ---
 
 # Batch ask me
@@ -21,7 +21,7 @@ The user's problem or design space to explore, stated in the conversation or inf
 ## Procedure
 
 1. Run Verbalized Sampling before round one. Sample multiple intent hypotheses, each with an explicit weight on a 0 to 1 scale and a concrete falsifier. Present the weighted hypotheses and falsifiers visibly, immediately before the first question batch. Seed the design-tree roots and initial frontier from the surviving hypotheses. Done when: the weighted hypotheses and falsifiers are presented and the design-tree roots and frontier are seeded.
-2. Build a design tree where each node is a decision. The frontier is every decision whose prerequisites are already settled — the questions to ask now without guessing at answers not yet heard. Done when: the design tree is built and the frontier is computed.
+2. Build a design tree where each node is a decision. The frontier is every decision whose prerequisites are already settled, the questions to ask now without guessing at answers not yet heard. Done when: the design tree is built and the frontier is computed.
 3. Each round, ask the whole frontier as a batch of single-select questions, each with a recommended answer. Wait for the user's answers, then recompute the frontier and ask the next round. A question whose answer depends on another open question belongs to a later round, not this one. Done when: the frontier batch is asked and answers are collected, or the frontier is empty.
 4. Question shape: one single-select question per axis, mark the recommended option first with "(Recommended)", at most four questions per fire, and never use multiSelect for override semantics. Done when: every question follows the single-select shape with a marked recommendation.
 5. When the frontier contains more than four questions, keep the whole frontier in one round. Route the four highest-impact questions through the question tool; put every remaining question in the same message as numbered Markdown in the form `**Q<n>: <question title>**` followed by the body, choices, and `-> Recommended: <answer>`. Answers from the tool and the Markdown questions settle together in one round-trip. Recompute the frontier once after the full answer set instead of advancing four questions at a time. Done when: the full frontier is asked in one round with tool and Markdown questions settling together.
@@ -37,4 +37,4 @@ The user's problem or design space to explore, stated in the conversation or inf
 - Non-mutation: this skill changes only conversation state. No rollback is needed; the design tree is rebuilt from recorded answers at any point.
 
 ## Output
-A confirmed shared understanding of the design space: every branch of the decision tree visited, the frontier empty, and the user's confirmation recorded — no file, state, or external mutation occurs.
+A confirmed shared understanding of the design space: every branch of the decision tree visited, the frontier empty, and the user's confirmation recorded: no file, state, or external mutation occurs.

@@ -1,6 +1,6 @@
 ---
 name: principles
-description: 'Use when a request names a working principle (subtract before you add, idempotent operations, never block on the human) or asks which principle governs a decision. Returns the law and its bite point; routes to the owning skill for execution. Not for running a repair — use fix.'
+description: 'Use when a request names a working principle (subtract before you add, idempotent operations, never block on the human) or asks which principle governs a decision. Returns the law and its bite point; routes to the owning skill for execution. Not for running a repair: use fix.'
 ---
 
 # Principles

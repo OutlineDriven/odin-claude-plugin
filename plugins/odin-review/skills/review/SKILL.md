@@ -1,6 +1,6 @@
 ---
 name: review
-description: 'Use when asked to review a pull request, examine code changes, find bugs, or audit a branch. Standard mode produces a severity-graded validated-findings report with concrete fixes; depth mode fans out parallel bug/security and quality reviewers and synthesizes a unified verdict. Not for an iterative review-and-fix loop — use audit-project.'
+description: 'Use when asked to review a pull request, examine code changes, find bugs, or audit a branch. Standard mode produces a severity-graded validated-findings report with concrete fixes; depth mode fans out parallel bug/security and quality reviewers and synthesizes a unified verdict. Not for an iterative review-and-fix loop; use audit-project.'
 ---
 
 # Severity-graded review

@@ -1,6 +1,6 @@
 ---
 name: skill-scanner
-description: 'Use when a user asks to scan, audit, or validate a skill for security issues. Runs static analysis on skill files and returns a risk-level assessment with an install recommendation. Not for source-code or infrastructure review—use security-review—or for remote-system changes.'
+description: 'Use when a user asks to scan, audit, or validate a skill for security issues. Runs static analysis on skill files and returns a risk-level assessment with an install recommendation. Not for source-code or infrastructure review, use security-review, or for remote-system changes.'
 ---
 
 # Skill scanner

@@ -13,7 +13,7 @@
 | C++ | rapidcheck | rc::state |
 | C# | FsCheck | FsCheck model |
 | Haskell | QuickCheck / Hedgehog | QuickCheck monadic / Hedgehog state |
-| Elixir | StreamData | — |
+| Elixir | StreamData | none |
 
 ## Notes
 

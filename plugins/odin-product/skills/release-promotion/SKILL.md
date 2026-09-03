@@ -1,6 +1,6 @@
 ---
 name: release-promotion
-description: 'Use when asked to draft launch or promotion copy for a shipped feature across channels via /release-promotion. Returns every drafted channel as a labeled copy-pasteable block with a revision offer. Not for posting, publishing, scheduling, or committing — drafts only.'
+description: 'Use when asked to draft launch or promotion copy for a shipped feature across channels via /release-promotion. Returns every drafted channel as a labeled copy-pasteable block with a revision offer. Not for posting, publishing, scheduling, or committing, drafts only.'
 ---
 
 # Promotion copy

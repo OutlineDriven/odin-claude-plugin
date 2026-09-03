@@ -12,4 +12,4 @@ HUNT (cite `path:line` for each):
 4. Error swallowing: `catch (e) {}`, `.catch(() => {})`, error handlers that log but don't propagate.
 5. Cascading failure paths: failure in A causes aggressive retry of B, which overloads C.
 
-SEVERITY ANCHORS: a missing timeout on a critical-path external call is P0/P1; an infinite retry loop without backoff is P1; a swallowed error that masks data corruption is P1; error message formatting choices are P3. Apply `_contract.md`.
+SEVERITY ANCHORS: a missing timeout on a critical-path external call is P0/P1; an infinite retry loop without backoff is P1; a swallowed error that masks data corruption is P1; error message formatting choices are P3. Apply `personas-_contract.md`.

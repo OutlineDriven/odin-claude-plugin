@@ -1,6 +1,6 @@
 ---
 name: property-test-review
-description: 'Use when reviewing existing property tests for coverage and defects. Reports tautological, vacuous, assertion-free, reimplemented, weak, or over-filtered tests with evidence, severity, and strongest replacement property. Not for generating tests — use property-test-authoring.'
+description: 'Use when reviewing existing property tests for coverage and defects. Reports tautological, vacuous, assertion-free, reimplemented, weak, or over-filtered tests with evidence, severity, and strongest replacement property. Not for generating tests, use property-test-authoring.'
 ---
 
 # Property test review
@@ -17,7 +17,7 @@ description: 'Use when reviewing existing property tests for coverage and defect
 ## Inputs
 
 - Test files: Property test source files (required). The user names them or the skill discovers them via framework-specific search patterns.
-- Production contracts: The code under test — function signatures, type annotations, docstrings, or specifications (required). Needed to compare asserted properties against the code's algebraic shape.
+- Production contracts: The code under test, function signatures, type annotations, docstrings, or specifications (required). Needed to compare asserted properties against the code's algebraic shape.
 - Property catalog reference: The property catalog below (included). Used to identify the strongest unasserted property.
 
 ## Procedure
@@ -30,13 +30,13 @@ description: 'Use when reviewing existing property tests for coverage and defect
    - Solidity/Echidna/Medusa: `rg "function test|echidna_" --type sol`
    Done when: every property test file in scope is read into context, or the search returned no matches and the no-tests-found stop is reported.
 
-2. Read production contracts. For each tested function, read its implementation, type signature, and any specification. Identify the function's algebraic shape — whether it has an inverse, preserves an invariant, is idempotent, commutative, associative, or admits an oracle. Done when: each tested function has a named algebraic shape or is recorded as having none, so the defect classification in step 3 has the ground truth it compares against.
+2. Read production contracts. For each tested function, read its implementation, type signature, and any specification. Identify the function's algebraic shape, whether it has an inverse, preserves an invariant, is idempotent, commutative, associative, or admits an oracle. Done when: each tested function has a named algebraic shape or is recorded as having none, so the defect classification in step 3 has the ground truth it compares against.
 
 3. Classify each test against the defect taxonomy. For every property test, determine which defect class applies:
 
    | Defect | Severity | Detection rule |
    |---|---|---|
-   | Tautological | CRITICAL | Assertion is true regardless of the implementation. `assert result == result` or `assert f(x) == f(x)` where `f` is obviously pure. Exception: `f(x) == f(x)` is a genuine determinism property when `f` is not obviously pure — serializers over dicts or sets, hashing, anything reading the clock. Ask whether a broken implementation could falsify it. |
+   | Tautological | CRITICAL | Assertion is true regardless of the implementation. `assert result == result` or `assert f(x) == f(x)` where `f` is obviously pure. Exception: `f(x) == f(x)` is a genuine determinism property when `f` is not obviously pure, serializers over dicts or sets, hashing, anything reading the clock. Ask whether a broken implementation could falsify it. |
    | Vacuous | CRITICAL | `assume()` filters out nearly every input, or self-contradictory `assume()` passes having run zero cases. `assume(x == 42)` is the subtler version: it runs, it passes, and it is an example test wearing a `@given` decorator. |
    | No assertion | HIGH | Body calls the function and stops. No `assert`, `expect`, or property check. |
    | Reimplementation | HIGH | Assertion recomputes the function's own logic. `assert add(a, b) == a + b` restates the implementation; no bug they share can fail it. |
@@ -60,7 +60,7 @@ description: 'Use when reviewing existing property tests for coverage and defect
    | Associativity | `f(f(a,b), c) == f(a, f(b,c))` | Combining operations |
    | Identity | `f(x, e) == x` | Operations with a neutral element |
 
-   Strength ordering, weakest to strongest: `no crash` then `type preservation` then `invariant` then `idempotence` then `roundtrip / oracle`. Assert the strongest property the code supports. "No crash" alone rarely justifies the dependency — if that is all that can be found, either a small rearrangement exposes something stronger, or the honest report is that this code is a poor PBT candidate.
+   Strength ordering, weakest to strongest: `no crash` then `type preservation` then `invariant` then `idempotence` then `roundtrip / oracle`. Assert the strongest property the code supports. "No crash" alone rarely justifies the dependency, if that is all that can be found, either a small rearrangement exposes something stronger, or the honest report is that this code is a poor PBT candidate.
 
    Done when: each tested function has a named strongest property the code supports, and the gap between the asserted property and that strongest property is stated.
 
@@ -75,11 +75,11 @@ description: 'Use when reviewing existing property tests for coverage and defect
 
 ## Failure and recovery
 
-- No property tests found. Report that the codebase contains no property tests. Do not generate tests — that is a separate skill.
+- No property tests found. Report that the codebase contains no property tests. Do not generate tests; that is a separate skill.
 - No algebraic shape found. If the code under test has no inverse, invariant, oracle, or other assertable property, report that honestly. A small rearrangement may expose something stronger; note this possibility. If not, the code is a poor PBT candidate.
 - Ambiguous tautology. When `f(x) == f(x)` could be either tautological or a genuine determinism property, report the ambiguity and ask whether a broken implementation could falsify it. Do not decide on the author's behalf.
 - Partial results. If some tests are reviewable and others are not (missing source, generated code, external dependencies), report findings for the reviewable subset and name the unreviewable tests with the reason.
 
 ## Output
 
-A structured report containing: 1. Summary: Total tests reviewed, count by severity, overall assessment. 2. Findings: For each defect found — location (file, line, test name), defect class and severity, evidence (the specific assertion, configuration, or pattern), strongest replacement property the code supports. 3. Recommendations: Prioritized list of improvements, ordered by severity. 4. Unreviewable tests: If any, with reasons.
+A structured report containing: 1. Summary: Total tests reviewed, count by severity, overall assessment. 2. Findings: For each defect found, location (file, line, test name), defect class and severity, evidence (the specific assertion, configuration, or pattern), strongest replacement property the code supports. 3. Recommendations: Prioritized list of improvements, ordered by severity. 4. Unreviewable tests: If any, with reasons.

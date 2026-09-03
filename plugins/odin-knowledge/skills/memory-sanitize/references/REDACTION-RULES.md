@@ -1,12 +1,12 @@
 # Redaction rules
 
-Reference document consumed by the `memory-sanitize` SKILL.md workflow. It is **not** scanned by `sanitize-memory.sh`. The script scans the **user's** memory directory (the path resolved by `resolve-paths.sh memory_dir`, typically `~/.claude/projects/<encoded>/memory/*.md`) — never the skill's own `references/` or `scripts/` directories.
+Reference document consumed by the `memory-sanitize` SKILL.md workflow. It is **not** scanned by `sanitize-memory.sh`. The script scans the **user's** memory directory (the path resolved by `resolve-paths.sh memory_dir`, typically `~/.claude/projects/<encoded>/memory/*.md`): never the skill's own `references/` or `scripts/` directories.
 
 This is a pattern-based reference, not a formal DLP tool. Review the diff before sharing. Novel token formats, obfuscated secrets, and context-embedded credentials are outside its scope.
 
 ---
 
-## Tier 1 — critical (block sharing if present in source original)
+## Tier 1: critical (block sharing if present in source original)
 
 | Name | Description | Replacement |
 |------|-------------|-------------|
@@ -21,7 +21,7 @@ When any Tier-1 pattern is found in a **source** file, the skill aborts the shar
 
 ---
 
-## Tier 2 — PII (redacted in copy, warning in report)
+## Tier 2: PII (redacted in copy, warning in report)
 
 | Name | Description | Replacement |
 |------|-------------|-------------|
@@ -32,18 +32,18 @@ When any Tier-1 pattern is found in a **source** file, the skill aborts the shar
 
 ---
 
-## Tier 3 — informational (flagged in report, not redacted by default)
+## Tier 3: informational (flagged in report, not redacted by default)
 
 | Item | Behavior |
 |------|----------|
-| Relative dates (`last week`, `next sprint`) | Flagged; not redacted — content is already vague |
-| Relative paths (`./foo`, `../config`) | Flagged; not redacted — rarely identify a person |
+| Relative dates (`last week`, `next sprint`) | Flagged; not redacted: content is already vague |
+| Relative paths (`./foo`, `../config`) | Flagged; not redacted: rarely identify a person |
 | HTTP/HTTPS URLs | Flagged as "url not verified"; not redacted |
 
 ---
 
 ## Anti-patterns
 
-- Do not treat all high-entropy strings as credentials — entropy heuristics produce too many false positives in notes and prose.
+- Do not treat all high-entropy strings as credentials; entropy heuristics produce too many false positives in notes and prose.
 - Do not over-redact; the goal is share-safety, not rendering the memory useless.
 - This tool is not a substitute for manually reviewing memory files before sharing with a highly trusted party.

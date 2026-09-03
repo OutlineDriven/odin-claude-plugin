@@ -22,7 +22,7 @@ Extract text from content: if content is a list, join `text` fields of `type=tex
 
 ## Positive signals (propose a memory)
 
-### feedback — user correction
+### feedback: user correction
 
 User message text matches any of:
 - `"don't"`, `"stop"`, `"never"`, `"avoid"` followed by an action phrase
@@ -33,7 +33,7 @@ User message text matches any of:
 
 Proposed type: **feedback**
 
-### feedback — user confirmation of non-obvious approach
+### feedback: user confirmation of non-obvious approach
 
 User message text matches:
 - `"yes, exactly"`, `"perfect"`, `"keep doing that"`, `"that's right"`
@@ -43,7 +43,7 @@ Only propose if the assistant's immediately preceding turn contained a decision 
 
 Proposed type: **feedback**
 
-### user — preference or role revealed
+### user: preference or role revealed
 
 User message reveals role, expertise, or preference not already in a user memory:
 - `"I'm a"`, `"I work as"`, `"I've been using X for N years"`
@@ -51,7 +51,7 @@ User message reveals role, expertise, or preference not already in a user memory
 
 Proposed type: **user**
 
-### project — work decision or deadline
+### project: work decision or deadline
 
 User message states a decision or time-bounded context:
 - `"we're doing X because"`, `"the reason we"`, `"we decided to"`
@@ -62,7 +62,7 @@ Convert any relative date to absolute (resolve against the session's timestamp i
 
 Proposed type: **project**
 
-### reference — external system pointer
+### reference: external system pointer
 
 User message points to an external resource by name or URL:
 - `"check"` / `"look at"` / `"tracked in"` followed by a system name (Linear, Jira, Grafana, Slack)
@@ -85,7 +85,7 @@ Proposed type: whatever `<type>` is.
 ## Negative signals (skip; do not propose)
 
 - Turns that are pure code, shell commands, or tool output with no explanatory text
-- Questions from the user (ends with `?`) — these are inquiries, not rules
+- Questions from the user (ends with `?`): these are inquiries, not rules
 - Transient task state: `"now do X"`, `"next step is"`, `"let's also add"`
 - Single-word responses: `"ok"`, `"sure"`, `"thanks"`, `"yes"` without follow-up context
 - Code review or debugging back-and-forth without any stated preference
@@ -93,4 +93,4 @@ Proposed type: whatever `<type>` is.
 
 ## Confidence threshold
 
-Propose only when the signal is clear enough that the user would say "yes, that's right" to the draft without editing more than a sentence. When ambiguous, surface the turn to the user with a note: "I'm less certain about this one — does it deserve a memory?"
+Propose only when the signal is clear enough that the user would say "yes, that's right" to the draft without editing more than a sentence. When ambiguous, surface the turn to the user with a note: "I'm less certain about this one; does it deserve a memory?"

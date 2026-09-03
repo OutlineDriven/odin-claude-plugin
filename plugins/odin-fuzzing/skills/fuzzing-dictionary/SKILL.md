@@ -1,6 +1,6 @@
 ---
 name: fuzzing-dictionary
-description: 'Use when a parser, protocol, or file format fuzzer stalls at fixed-token validation gates. Extracts tokens from target source, headers, or binary, writes a fuzzer-parseable dictionary, and confirms tokens correspond to target parsing gates. Not for patching the SUT — use fuzzing-obstacles.'
+description: 'Use when a parser, protocol, or file format fuzzer stalls at fixed-token validation gates. Extracts tokens from target source, headers, or binary, writes a fuzzer-parseable dictionary, and confirms tokens correspond to target parsing gates. Not for patching the SUT: use fuzzing-obstacles.'
 ---
 
 # Fuzzing dictionary
@@ -16,8 +16,8 @@ description: 'Use when a parser, protocol, or file format fuzzer stalls at fixed
 
 ## Not for
 
-- Patching the system under test to bypass obstacles — use fuzzing-obstacles.
-- Coverage measurement or plateau analysis — use fuzzing-coverage-analysis.
+- Patching the system under test to bypass obstacles: use fuzzing-obstacles.
+- Coverage measurement or plateau analysis: use fuzzing-coverage-analysis.
 - Remote, credential, publish, deploy, or irreversible changes.
 
 ## Inputs

@@ -1,6 +1,6 @@
 ---
 name: wycheproof
-description: 'Use when validating a cryptographic implementation against Project Wycheproof vectors to prove it accepts/rejects them correctly, or when explaining why an implementation disagrees with a vector. Produces parameterized valid, invalid, and acceptable cases with stable tcId identifiers and a per-category pass/fail/warn summary. Not for mutation-driven vector creation — use vector-forge. Not for zeroization auditing — use zeroize-audit.'
+description: 'Use when validating a cryptographic implementation against Project Wycheproof vectors to prove it accepts/rejects them correctly, or when explaining why an implementation disagrees with a vector. Produces parameterized valid, invalid, and acceptable cases with stable tcId identifiers and a per-category pass/fail/warn summary. Not for mutation-driven vector creation: use vector-forge. Not for zeroization auditing: use zeroize-audit.'
 ---
 
 # Wycheproof

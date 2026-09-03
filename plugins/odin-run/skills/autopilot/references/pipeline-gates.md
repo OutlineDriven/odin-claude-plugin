@@ -26,20 +26,20 @@ Invariants the machine enforces:
 - **No red advance.** `ADVANCE` is reachable only from a passing `CHECK`/`RECHECK`. A red gate never enters the next phase.
 - **Report is terminal and unconditional.** Both the success tail (after Phase 5/ADVANCE past the last enabled phase) and every `HALT(P)` route to Phase 6.
 
-## Precondition — before Phase 1
+## Precondition: before Phase 1
 
-The chain begins only when an approved plan exists: one the user approved through Claude Code's built-in plan mode (`ExitPlanMode`), or an equivalent written plan the user has approved. autopilot never produces it — "scope unknown" is not autofixable and has no arm. Fails → do not start; HALT before Phase 1 and hand off to upstream `askme` / `strategy`, where the user must supply an execution-ready task.
+The chain begins only when an approved plan exists: one the user approved through Claude Code's built-in plan mode (`ExitPlanMode`), or an equivalent written plan the user has approved. autopilot never produces it; "scope unknown" is not autofixable and has no arm. Fails → do not start; HALT before Phase 1 and hand off to upstream `askme` / `strategy`, where the user must supply an execution-ready task.
 
 ## Per-phase gate definitions
 
-Gate id equals phase number — there is one numbering system, not two. Phase 4 (`strike-the-root`) is G3's autofix arm and Phase 6 (Report) is terminal; both are gateless, so **there is no G4 and no G6**. The absence is the signal that those phases are not independently gated.
+Gate id equals phase number; there is one numbering system, not two. Phase 4 (`strike-the-root`) is G3's autofix arm and Phase 6 (Report) is terminal; both are gateless, so **there is no G4 and no G6**. The absence is the signal that those phases are not independently gated.
 
 | Gate | Phase / skill | Pass criteria (exact) | Autofix arm A(P) | On RECHECK still-fail |
 |------|---------------|-----------------------|------------------|-----------------------|
-| G1 | Phase 1 Execute / `work` (Orchestrated) | `work` runs in its Orchestrated caller mode — implementation and local verification only, returning a structured summary; the plan's steps are implemented and the repo-native verifier (build / type-check / test, as the repo defines) exits clean. It must not run simplify/review/PR/CI; autopilot owns those. | `strike-the-root` once, in findings/verifier-failure mode, on the failing verifier output | HALT → hand off the verifier failure and the diff so far |
-| G2 | Phase 2 Simplify / `simplify` | `simplify` exits `0`, `11` (empty diff), or `12` (false-positive-only); behavior preserved. | none distinct — `simplify` self-reverts a behavior regression (its exit `13`) internally | HALT on exit `14` (new bloat) or `15` (mixed-concern commit) — these need a human re-plan |
+| G1 | Phase 1 Execute / `work` (Orchestrated) | `work` runs in its Orchestrated caller mode, implementation and local verification only, returning a structured summary; the plan's steps are implemented and the repo-native verifier (build / type-check / test, as the repo defines) exits clean. It must not run simplify/review/PR/CI; autopilot owns those. | `strike-the-root` once, in findings/verifier-failure mode, on the failing verifier output | HALT → hand off the verifier failure and the diff so far |
+| G2 | Phase 2 Simplify / `simplify` | `simplify` exits `0`, `11` (empty diff), or `12` (false-positive-only); behavior preserved. | none distinct, `simplify` self-reverts a behavior regression (its exit `13`) internally | HALT on exit `14` (new bloat) or `15` (mixed-concern commit): these need a human re-plan |
 | G3 | Phase 3 Review / `review` (autofix = Phase 4 `strike-the-root`) | After at most one `strike-the-root` pass and a re-review of the changed files, no critical or high finding remains. | `strike-the-root` once on the review's critical/high findings, then re-review changed files only | HALT → hand off residual critical/high findings |
-| G5 | Phase 5 Finalize / `review-and-ship` | `review-and-ship` report returned: checks green and PR created/updated (full mode), or commits made and push skipped (local-only). The report carries review findings, check results, publication classification, and PR URL or local-only status. | none — a finalizer refusal (push refused, checks blocked) is a deliberate safety stop, not a defect to patch | HALT → hand off the finalizer's blocked report and the unpushed commits |
+| G5 | Phase 5 Finalize / `review-and-ship` | `review-and-ship` report returned: checks green and PR created/updated (full mode), or commits made and push skipped (local-only). The report carries review findings, check results, publication classification, and PR URL or local-only status. | none; a finalizer refusal (push refused, checks blocked) is a deliberate safety stop, not a defect to patch | HALT → hand off the finalizer's blocked report and the unpushed commits |
 
 Phase 4 (`strike-the-root`) and Phase 6 (Report) have no gate; Report always runs.
 
@@ -48,7 +48,7 @@ Phase 4 (`strike-the-root`) and Phase 6 (Report) have no gate; Report always run
 Run `git remote`. Empty output → local-only; also forced by `mode:local`.
 
 Local-only effect:
-- **Phase 5 (G5)** — `review-and-ship` runs the local check suite, makes atomic commits, and skips push and PR creation. No remote is invented. The report states `mode: local-only` with the unpushed commit list.
+- **Phase 5 (G5)**: `review-and-ship` runs the local check suite, makes atomic commits, and skips push and PR creation. No remote is invented. The report states `mode: local-only` with the unpushed commit list.
 - Phase 6 (Report) still runs and the report states `mode: local-only` with the unpushed commit list.
 
 ## Halt handoff format

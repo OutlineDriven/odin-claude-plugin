@@ -1,6 +1,6 @@
 ---
 name: cloud-task-orchestrator
-description: 'Use when a human explicitly runs /cloud-task-orchestrator for a large task across cloud agents to drain a verified task graph. Not for local subagent coordination — use orchestration-patterns.'
+description: 'Use when a human explicitly runs /cloud-task-orchestrator for a large task across cloud agents to drain a verified task graph. Not for local subagent coordination: use orchestration-patterns.'
 disable-model-invocation: true
 ---
 

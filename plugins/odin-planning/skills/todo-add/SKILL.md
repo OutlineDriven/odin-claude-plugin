@@ -1,6 +1,6 @@
 ---
 name: todo-add
-description: 'Use when a message contains `TODO ADD: <requirement>`, adding it to the durable source and the native todo in the same turn. Not for deepening coarse task lists — use todos-enhance; not for re-syncing stale lists — use todos-update; not for retitling, reordering, or completing existing todos.'
+description: 'Use when a message contains `TODO ADD: <requirement>`, adding it to the durable source and the native todo in the same turn. Not for deepening coarse task lists, use todos-enhance; not for re-syncing stale lists, use todos-update; not for retitling, reordering, or completing existing todos.'
 ---
 
 # Todo add
@@ -23,7 +23,7 @@ Use the current durable plan or specification when one clearly owns the work. If
 - Will not accept an empty requirement.
 - Will not touch the durable source if native todo creation fails.
 - Will not silently remove a retained todo on partial failure.
-- Will not write when a conflict exists — ask one clarifying question first.
+- Will not write when a conflict exists: ask one clarifying question first.
 
 ## Procedure
 

@@ -1,6 +1,6 @@
 ---
 name: research
-description: 'Use when researching a named library, framework, SDK, API, or service, or finding a migration guide. Produces a cited Markdown artifact written to disk with source-cited claims, confidence labels, and open questions. A primary-source-only mode restricts the ladder to official docs, API refs, and source code. Not for codebase-internal research — use scout.'
+description: 'Use when researching a named library, framework, SDK, API, or service, or finding a migration guide. Produces a cited Markdown artifact written to disk with source-cited claims, confidence labels, and open questions. A primary-source-only mode restricts the ladder to official docs, API refs, and source code. Not for codebase-internal research: use scout.'
 ---
 
 # Research command
