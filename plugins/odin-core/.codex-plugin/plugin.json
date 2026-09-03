@@ -1,0 +1,21 @@
+{
+  "name": "odin-core",
+  "version": "2.0.1",
+  "description": "Core ODIN workflows for planning, executing, and checking changes.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "core"
+  ],
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "mcpServers": "./mcp.json",
+  "interface": {
+    "displayName": "ODIN Core",
+    "shortDescription": "Core ODIN workflows for planning, executing, and checking changes.",
+    "category": "Coding"
+  }
+}

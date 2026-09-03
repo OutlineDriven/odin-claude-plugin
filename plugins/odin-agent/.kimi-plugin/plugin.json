@@ -1,0 +1,21 @@
+{
+  "name": "odin-agent",
+  "version": "2.0.1",
+  "description": "ODIN workflows for designing and improving AI agents.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "agent"
+  ],
+  "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "license": "SEE LICENSE IN LICENSE",
+  "author": {
+    "name": "OutlineDriven"
+  },
+  "skills": "./skills",
+  "interface": {
+    "displayName": "ODIN Agent",
+    "shortDescription": "ODIN workflows for designing and improving AI agents."
+  }
+}

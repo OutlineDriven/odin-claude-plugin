@@ -1,0 +1,20 @@
+{
+  "name": "odin-typescript",
+  "version": "2.0.1",
+  "description": "ODIN workflows for modern TypeScript development.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "typescript"
+  ],
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "interface": {
+    "displayName": "ODIN TypeScript",
+    "shortDescription": "ODIN workflows for modern TypeScript development.",
+    "category": "Coding"
+  }
+}

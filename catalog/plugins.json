@@ -1,6 +1,6 @@
 {
   "schema": "odin-plugin-catalog/v1",
-  "releaseVersion": "2.0.0",
+  "releaseVersion": "2.0.1",
   "marketplace_name": "odin-marketplace",
   "owner": {
     "name": "OutlineDriven",

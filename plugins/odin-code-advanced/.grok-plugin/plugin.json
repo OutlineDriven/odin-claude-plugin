@@ -1,0 +1,19 @@
+{
+  "name": "odin-code-advanced",
+  "version": "2.0.1",
+  "description": "Advanced ODIN workflows for complex code changes and technical audits.",
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "repository": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "license": "SEE LICENSE IN LICENSE",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "code",
+    "advanced"
+  ]
+}

@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "odin-native",
   "displayName": "ODIN Native",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "ODIN workflows for native systems, toolchains, and performance.",
   "author": {
     "name": "OutlineDriven",

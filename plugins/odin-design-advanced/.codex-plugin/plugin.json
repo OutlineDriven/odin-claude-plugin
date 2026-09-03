@@ -1,0 +1,21 @@
+{
+  "name": "odin-design-advanced",
+  "version": "2.0.1",
+  "description": "Advanced ODIN workflows for polished interfaces and design systems.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "design",
+    "advanced"
+  ],
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "interface": {
+    "displayName": "ODIN Design Advanced",
+    "shortDescription": "Advanced ODIN workflows for polished interfaces and design systems.",
+    "category": "Design"
+  }
+}

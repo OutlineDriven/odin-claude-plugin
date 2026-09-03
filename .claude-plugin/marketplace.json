@@ -10,7 +10,7 @@
       "name": "odin-core",
       "source": "./plugins/odin-core",
       "description": "Core ODIN workflows for planning, executing, and checking changes.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -23,13 +23,17 @@
         "agent-skills",
         "core"
       ],
-      "category": "Coding"
+      "category": "Coding",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
     },
     {
       "name": "odin-code",
       "source": "./plugins/odin-code",
       "description": "ODIN workflows for writing, reviewing, and maintaining code.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -42,13 +46,17 @@
         "agent-skills",
         "code"
       ],
-      "category": "Coding"
+      "category": "Coding",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
     },
     {
       "name": "odin-code-advanced",
       "source": "./plugins/odin-code-advanced",
       "description": "Advanced ODIN workflows for complex code changes and technical audits.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -62,13 +70,17 @@
         "code",
         "advanced"
       ],
-      "category": "Coding"
+      "category": "Coding",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
     },
     {
       "name": "odin-create",
       "source": "./plugins/odin-create",
       "description": "ODIN workflows for turning ideas into working artifacts.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -81,13 +93,17 @@
         "agent-skills",
         "create"
       ],
-      "category": "Productivity"
+      "category": "Productivity",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
     },
     {
       "name": "odin-create-advanced",
       "source": "./plugins/odin-create-advanced",
       "description": "Advanced ODIN workflows for ambitious, multi-part creative work.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -101,13 +117,17 @@
         "create",
         "advanced"
       ],
-      "category": "Productivity"
+      "category": "Productivity",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
     },
     {
       "name": "odin-research",
       "source": "./plugins/odin-research",
       "description": "ODIN workflows for focused research and source-backed findings.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -120,13 +140,17 @@
         "agent-skills",
         "research"
       ],
-      "category": "Research"
+      "category": "Research",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
     },
     {
       "name": "odin-research-advanced",
       "source": "./plugins/odin-research-advanced",
       "description": "Advanced ODIN workflows for deep research and evidence synthesis.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -140,13 +164,17 @@
         "research",
         "advanced"
       ],
-      "category": "Research"
+      "category": "Research",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
     },
     {
       "name": "odin-run",
       "source": "./plugins/odin-run",
       "description": "ODIN workflows for executing plans and shipping finished changes.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -159,13 +187,17 @@
         "agent-skills",
         "run"
       ],
-      "category": "Coding"
+      "category": "Coding",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
     },
     {
       "name": "odin-run-advanced",
       "source": "./plugins/odin-run-advanced",
       "description": "Advanced ODIN workflows for complex execution and delivery.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -179,13 +211,17 @@
         "run",
         "advanced"
       ],
-      "category": "Coding"
+      "category": "Coding",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
     },
     {
       "name": "odin-agent",
       "source": "./plugins/odin-agent",
       "description": "ODIN workflows for designing and improving AI agents.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -198,13 +234,17 @@
         "agent-skills",
         "agent"
       ],
-      "category": "Productivity"
+      "category": "Productivity",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
     },
     {
       "name": "odin-security",
       "source": "./plugins/odin-security",
       "description": "ODIN workflows for security reviews and defensive implementation.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -217,13 +257,17 @@
         "agent-skills",
         "security"
       ],
-      "category": "Security"
+      "category": "Security",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
     },
     {
       "name": "odin-security-advanced",
       "source": "./plugins/odin-security-advanced",
       "description": "Advanced ODIN workflows for threat analysis and security hardening.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -237,13 +281,17 @@
         "security",
         "advanced"
       ],
-      "category": "Security"
+      "category": "Security",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
     },
     {
       "name": "odin-design",
       "source": "./plugins/odin-design",
       "description": "ODIN workflows for practical interface and visual design.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -256,13 +304,17 @@
         "agent-skills",
         "design"
       ],
-      "category": "Design"
+      "category": "Design",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
     },
     {
       "name": "odin-design-advanced",
       "source": "./plugins/odin-design-advanced",
       "description": "Advanced ODIN workflows for polished interfaces and design systems.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -276,13 +328,17 @@
         "design",
         "advanced"
       ],
-      "category": "Design"
+      "category": "Design",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
     },
     {
       "name": "odin-writing",
       "source": "./plugins/odin-writing",
       "description": "ODIN workflows for clear, useful technical writing.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -295,13 +351,17 @@
         "agent-skills",
         "writing"
       ],
-      "category": "Writing"
+      "category": "Writing",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
     },
     {
       "name": "odin-writing-advanced",
       "source": "./plugins/odin-writing-advanced",
       "description": "Advanced ODIN workflows for substantial writing and editorial work.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -315,13 +375,17 @@
         "writing",
         "advanced"
       ],
-      "category": "Writing"
+      "category": "Writing",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
     },
     {
       "name": "odin-product",
       "source": "./plugins/odin-product",
       "description": "ODIN workflows for product strategy and developer adoption.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -334,13 +398,17 @@
         "agent-skills",
         "product"
       ],
-      "category": "Productivity"
+      "category": "Productivity",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
     },
     {
       "name": "odin-loop",
       "source": "./plugins/odin-loop",
       "description": "ODIN workflows for bounded iteration with explicit completion checks.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -353,13 +421,17 @@
         "agent-skills",
         "loop"
       ],
-      "category": "Coding"
+      "category": "Coding",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
     },
     {
       "name": "odin-planning",
       "source": "./plugins/odin-planning",
       "description": "ODIN workflows for shaping requirements and implementation plans.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -372,13 +444,17 @@
         "agent-skills",
         "planning"
       ],
-      "category": "Productivity"
+      "category": "Productivity",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
     },
     {
       "name": "odin-python",
       "source": "./plugins/odin-python",
       "description": "ODIN workflows for modern Python development.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -391,13 +467,17 @@
         "agent-skills",
         "python"
       ],
-      "category": "Coding"
+      "category": "Coding",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
     },
     {
       "name": "odin-typescript",
       "source": "./plugins/odin-typescript",
       "description": "ODIN workflows for modern TypeScript development.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -410,13 +490,17 @@
         "agent-skills",
         "typescript"
       ],
-      "category": "Coding"
+      "category": "Coding",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
     },
     {
       "name": "odin-web",
       "source": "./plugins/odin-web",
       "description": "ODIN workflows for building and refining web applications.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -429,13 +513,17 @@
         "agent-skills",
         "web"
       ],
-      "category": "Coding"
+      "category": "Coding",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
     },
     {
       "name": "odin-native",
       "source": "./plugins/odin-native",
       "description": "ODIN workflows for native systems, toolchains, and performance.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -448,13 +536,17 @@
         "agent-skills",
         "native"
       ],
-      "category": "Coding"
+      "category": "Coding",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
     },
     {
       "name": "odin-apple",
       "source": "./plugins/odin-apple",
       "description": "ODIN workflows for software on Apple platforms.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -467,13 +559,17 @@
         "agent-skills",
         "apple"
       ],
-      "category": "Coding"
+      "category": "Coding",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
     },
     {
       "name": "odin-lean",
       "source": "./plugins/odin-lean",
       "description": "ODIN workflows for Lean proofs and formal verification.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -486,13 +582,17 @@
         "agent-skills",
         "lean"
       ],
-      "category": "Coding"
+      "category": "Coding",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
     },
     {
       "name": "odin-terraform",
       "source": "./plugins/odin-terraform",
       "description": "ODIN workflows for safe Terraform infrastructure changes.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -505,13 +605,17 @@
         "agent-skills",
         "terraform"
       ],
-      "category": "Infrastructure"
+      "category": "Infrastructure",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
     },
     {
       "name": "odin-bigquery",
       "source": "./plugins/odin-bigquery",
       "description": "ODIN workflows for BigQuery data work and cost-aware queries.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -524,13 +628,17 @@
         "agent-skills",
         "bigquery"
       ],
-      "category": "Data"
+      "category": "Data",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
     },
     {
       "name": "odin-prometheus",
       "source": "./plugins/odin-prometheus",
       "description": "ODIN workflows for Prometheus metrics and monitoring.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -543,7 +651,11 @@
         "agent-skills",
         "prometheus"
       ],
-      "category": "Infrastructure"
+      "category": "Infrastructure",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
     }
   ]
 }

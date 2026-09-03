@@ -1,0 +1,21 @@
+{
+  "name": "odin-run",
+  "version": "2.0.1",
+  "description": "ODIN workflows for executing plans and shipping finished changes.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "run"
+  ],
+  "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "license": "SEE LICENSE IN LICENSE",
+  "author": {
+    "name": "OutlineDriven"
+  },
+  "skills": "./skills",
+  "interface": {
+    "displayName": "ODIN Run",
+    "shortDescription": "ODIN workflows for executing plans and shipping finished changes."
+  }
+}

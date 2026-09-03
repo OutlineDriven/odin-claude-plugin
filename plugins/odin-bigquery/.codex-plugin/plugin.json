@@ -1,0 +1,20 @@
+{
+  "name": "odin-bigquery",
+  "version": "2.0.1",
+  "description": "ODIN workflows for BigQuery data work and cost-aware queries.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "bigquery"
+  ],
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "interface": {
+    "displayName": "ODIN BigQuery",
+    "shortDescription": "ODIN workflows for BigQuery data work and cost-aware queries.",
+    "category": "Data"
+  }
+}

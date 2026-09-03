@@ -1,0 +1,20 @@
+{
+  "name": "odin-agent",
+  "version": "2.0.1",
+  "description": "ODIN workflows for designing and improving AI agents.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "agent"
+  ],
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "interface": {
+    "displayName": "ODIN Agent",
+    "shortDescription": "ODIN workflows for designing and improving AI agents.",
+    "category": "Productivity"
+  }
+}

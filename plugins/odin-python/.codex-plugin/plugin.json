@@ -1,0 +1,20 @@
+{
+  "name": "odin-python",
+  "version": "2.0.1",
+  "description": "ODIN workflows for modern Python development.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "python"
+  ],
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "interface": {
+    "displayName": "ODIN Python",
+    "shortDescription": "ODIN workflows for modern Python development.",
+    "category": "Coding"
+  }
+}

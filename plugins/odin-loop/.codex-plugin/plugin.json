@@ -1,0 +1,20 @@
+{
+  "name": "odin-loop",
+  "version": "2.0.1",
+  "description": "ODIN workflows for bounded iteration with explicit completion checks.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "loop"
+  ],
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "interface": {
+    "displayName": "ODIN Loop",
+    "shortDescription": "ODIN workflows for bounded iteration with explicit completion checks.",
+    "category": "Coding"
+  }
+}

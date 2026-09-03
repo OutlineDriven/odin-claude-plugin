@@ -1,0 +1,22 @@
+{
+  "name": "odin-design-advanced",
+  "version": "2.0.1",
+  "description": "Advanced ODIN workflows for polished interfaces and design systems.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "design",
+    "advanced"
+  ],
+  "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "license": "SEE LICENSE IN LICENSE",
+  "author": {
+    "name": "OutlineDriven"
+  },
+  "skills": "./skills",
+  "interface": {
+    "displayName": "ODIN Design Advanced",
+    "shortDescription": "Advanced ODIN workflows for polished interfaces and design systems."
+  }
+}

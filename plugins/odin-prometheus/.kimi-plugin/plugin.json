@@ -1,0 +1,21 @@
+{
+  "name": "odin-prometheus",
+  "version": "2.0.1",
+  "description": "ODIN workflows for Prometheus metrics and monitoring.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "prometheus"
+  ],
+  "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "license": "SEE LICENSE IN LICENSE",
+  "author": {
+    "name": "OutlineDriven"
+  },
+  "skills": "./skills",
+  "interface": {
+    "displayName": "ODIN Prometheus",
+    "shortDescription": "ODIN workflows for Prometheus metrics and monitoring."
+  }
+}

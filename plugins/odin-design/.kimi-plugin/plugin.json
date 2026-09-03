@@ -1,0 +1,21 @@
+{
+  "name": "odin-design",
+  "version": "2.0.1",
+  "description": "ODIN workflows for practical interface and visual design.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "design"
+  ],
+  "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "license": "SEE LICENSE IN LICENSE",
+  "author": {
+    "name": "OutlineDriven"
+  },
+  "skills": "./skills",
+  "interface": {
+    "displayName": "ODIN Design",
+    "shortDescription": "ODIN workflows for practical interface and visual design."
+  }
+}

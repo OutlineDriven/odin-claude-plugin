@@ -1,0 +1,20 @@
+{
+  "name": "odin-web",
+  "version": "2.0.1",
+  "description": "ODIN workflows for building and refining web applications.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "web"
+  ],
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "interface": {
+    "displayName": "ODIN Web",
+    "shortDescription": "ODIN workflows for building and refining web applications.",
+    "category": "Coding"
+  }
+}
