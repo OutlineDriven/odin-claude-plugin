@@ -42,7 +42,7 @@ description: 'Use when asked to create an MCP server to integrate an API or serv
 
 Partial results rule: if the server builds but evaluations fail, keep the project directory and report which evaluations failed. Do not delete partial work.
 
-Rollback: delete the project directory to fully reverse all side effects.
+Rollback: delete the project directory to reverse all side effects.
 
 Blocked result: if the API specification is unparseable or the language is unsupported, stop and report the specific validation failure. Do not proceed with scaffolding.
 

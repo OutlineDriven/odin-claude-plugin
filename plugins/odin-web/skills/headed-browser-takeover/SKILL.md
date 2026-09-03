@@ -14,7 +14,7 @@ description: 'Use when the user asks to open or take over a visible browser sess
 | Side effect | A visible headed browser window attached to the automation server, ready for the user to watch or drive by hand |
 | Done | The user confirms the live control surface is visible and a command round-trip appears in the activity feed; the session is ready for takeover |
 
-The point of headed mode: the user and the agent look at the same window. The agent drives through the automation endpoint; the user can grab the mouse and keyboard at any moment without breaking the session.
+In headed mode, the user and the agent look at the same window. The agent drives through the automation endpoint; the user can grab the mouse and keyboard at any moment without breaking the session.
 
 ## Inputs
 

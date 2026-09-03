@@ -1,4 +1,4 @@
-# Enhance analyzer checks
+# Improve analyzer checks
 
 Every analyzer emits `certainty` as HIGH/MEDIUM/LOW and `autoFix` as yes/no. HIGH means the invariant violation is directly observable from file content or parsed config. MEDIUM means context-dependent but likely useful. LOW means advisory.
 
@@ -130,7 +130,7 @@ Scope: project memory and project instruction files named `CLAUDE.md`, `AGENTS.m
 
 | Check | Certainty | autoFix |
 |---|---|---|
-| Required project memory file absent when user explicitly asked to enhance project memory | HIGH | no |
+| Required project memory file absent when user explicitly asked to improve project memory | HIGH | no |
 | No critical rules / priority rules section | HIGH | no |
 | No architecture, project structure, or where-things-live section | HIGH | no |
 | No commands/scripts section despite package/test/build commands existing | HIGH | no |

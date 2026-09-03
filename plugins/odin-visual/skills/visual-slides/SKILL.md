@@ -17,10 +17,10 @@ description: 'Use when the user explicitly requests a slide deck by command, fla
 ## Inputs
 
 Required:
-- **Source items**: the content to present, one item per slide. Each item is a title, body text, or diagram source.
+- Source items: the content to present, one item per slide. Each item is a title, body text, or diagram source.
 
 Optional:
-- **Style direction**: color palette, font, or layout hint from the user.
+- Style direction: color palette, font, or layout hint from the user.
 
 ## Procedure
 

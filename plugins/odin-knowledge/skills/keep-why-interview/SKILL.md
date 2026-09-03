@@ -18,7 +18,7 @@ description: 'Use when departing knowledge must enter project topic files throug
 
 - Required: A human subject (departing maintainer or domain expert), a location for topic-file entries (project memory/knowledge file or directory), and the interview's topic scope.
 - Optional: Existing topic file(s) to append to or extend.
-- Required: The interview must be a live conversation; the model facilitates and captures synthesized knowledge in real time.
+- Required: The interview must be a live conversation; the model leads the conversation and captures synthesized knowledge in real time.
 
 ## Procedure
 

@@ -12,7 +12,7 @@ disable-model-invocation: true
 |---|---|
 | Trigger | The user asks to set up, configure, or verify credentials and environment for tools they name. |
 | Authority | Human-gated: asks before writing credentials to `.env` or verifying remote access; otherwise reversible local as above. |
-| Side effect | Creates but never overwrites `.env`, gathers non-secret credentials at prompts, validates format, appends safely, and verifies repository and tool access. |
+| Side effect | Creates but never overwrites `.env`, gathers non-secret credentials at prompts, validates format, appends, and verifies repository and tool access. |
 | Done | All selected prerequisites pass, `.env` is present and loadable, and the user is told which workflows are ready. |
 
 ## Not for

@@ -56,7 +56,7 @@ that should be disclosed buries them and turns attending to them into a coin-fli
 Co-location keeps a concept's definition, rules, and caveats under one heading rather than
 scattered.
 
-Sprawl is the failure mode: a document simply too long, even when every line is live and unique.
+Sprawl is the failure mode: a document too long, even when every line is live and unique.
 The cure is the ladder.
 
 ## Completion criteria
@@ -91,7 +91,7 @@ A leading word is a compact concept already living in the model's pretraining th
 with while running the document. Repeated as a token, never as a sentence, it accumulates a
 distributed definition and anchors a whole region of behaviour in the fewest tokens.
 
-Reach for an existing word first. Coining a new one works if it is defined clearly, but a made-up
+Reach for an existing word first. Coining a new one works if the definition is clear, but a made-up
 word recruits no priors.
 
 It anchors twice. In the body it anchors execution: the agent reaches for the same behaviour every

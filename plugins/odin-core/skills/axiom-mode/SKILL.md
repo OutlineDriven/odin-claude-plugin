@@ -45,4 +45,4 @@ No external input required. The user's invocation phrase activates the register;
 - No partial-result or rollback rule applies; the only state is the active register, which the user toggles.
 
 ## Output
-Every response while active is written in the Compacted Formal-logic English register: ASCII-only, keyword connectives, predicate-form facts, quantified rules, explicit gaps, and enumerated-then-recommended choices, the register deactivates when the user signals "stop axiom-mode" or "normal mode".
+Every response while active is written in the Compacted Formal-logic English register: ASCII-only, keyword connectives, predicate-form facts, quantified rules, explicit gaps, and enumerated-then-recommended choices. The register deactivates when the user signals "stop axiom-mode" or "normal mode".

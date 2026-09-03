@@ -12,7 +12,7 @@ description: 'Use when a load-bearing claim is unverified, a plausible statement
 | Trigger | A load-bearing claim is unverified, a plausible statement has never been checked, the user says "fact-check this" or "verify this claim" (standalone-claim mode); or an artifact, passage, or sentence about to be written asserts something as plausible, absurd, novel, or impossible and doubt arises (artifact mode). |
 | Authority | Human-gated: in artifact mode, applies a fix only when a mechanically-clear error is backed by a cited source, writing only the artifact under review with version control or undo as the rollback; otherwise read-only, and standalone-claim corrections are chat-only. No remote mutation. |
 | Side effect | Standalone-claim mode: cited corrections or flagged judgment calls are returned in chat; nothing changes when a passing check finds nothing. Artifact mode: cited fixes are written to the local artifact; judgment calls, source gaps, and deliberate fiction are flagged, not rewritten. |
-| Done | Every checked claim carries a both-ways verdict with a source, and clear errors are corrected or flagged; artifact mode additionally reports fixes versus flags with the failure direction named for each failed claim. |
+| Done | Every checked claim carries a both-ways verdict with a source, and clear errors are corrected or flagged; artifact mode also reports fixes versus flags with the failure direction named for each failed claim. |
 
 ## Inputs
 

@@ -39,4 +39,4 @@ disable-model-invocation: true
 
 ## Output
 
-The pack installed in the target directory with all files passing hash verification and transformations applied, plus a saved applied manifest enabling rollback on future runs.
+The pack installed in the target directory with all files passing hash verification and transformations applied, plus a saved applied manifest for rollback on future runs.

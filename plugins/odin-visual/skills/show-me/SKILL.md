@@ -29,7 +29,7 @@ The current topic from the user prompt. The skill picks the minimal view type th
 
 ## Procedure
 
-1. Identify the single concept the user asks to see. If the topic is too broad for one visual, ask the user to narrow it before producing more than two views. **Done when:** one concept is identified or the user is asked to narrow.
+1. Identify the single concept the user asks to see. If the topic is too broad for one visual, ask the user to narrow it before producing more than two views. Done when: one concept is identified or the user is asked to narrow.
 2. Pick the smallest view that carries the point:
 
    | The point is | View |
@@ -41,10 +41,10 @@ The current topic from the user prompt. The skill picks the minimal view type th
    | Relationships or flow | Diagram (Mermaid or nomnoml) |
    | The code itself | Whole block |
 
-   **Done when:** the view type is chosen.
-3. Render the view using the appropriate shape. **Done when:** the view is rendered in chat.
-4. Shape diffs to match the view they change: a component diff for UI changes, a file-layout diff for file organization, a call-tree diff for call-graph changes, and a pseudocode diff for control-flow changes. **Done when:** the diff matches its view type or no diff is needed.
-5. Place each visual adjacent to the short supporting text, not in its own trailing block. **Done when:** the visual sits beside its context.
+   Done when: the view type is chosen.
+3. Render the view using the appropriate shape. Done when: the view is rendered in chat.
+4. Shape diffs to match the view they change: a component diff for UI changes, a file-layout diff for file organization, a call-tree diff for call-graph changes, and a pseudocode diff for control-flow changes. Done when: the diff matches its view type or no diff is needed.
+5. Place each visual adjacent to the short supporting text, not in its own trailing block. Done when: the visual sits beside its context.
 
 ## Failure and recovery
 

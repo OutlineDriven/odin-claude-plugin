@@ -37,7 +37,7 @@ Optional:
 9. Apply the fix: edit the Swift source, keeping the diff minimal. Rollback path: `git checkout -- <edited files>` reverts this edit.
 10. Rebuild and reinstall: `xcodebuild -scheme <SchemeName> -destination 'platform=iOS,id=<UDID>' build install`. The daemon reconnects the StateServer tunnel after the rebuild; re-deploy through the boot-token rotation flow.
 11. Verify: `POST /state/restore` with the pre-bug snapshot to reproduce the state, then take a fresh `GET /screenshot` and compare it against `test/fixtures/ios-fix/<bug-slug>-pre.png`.
-12. If the bug visibly persists, the fix did not work: revert the Swift edit (rollback path above) and retry from step 9, up to 3 iterations before escalating to the user.
+12. If the bug visibly persists, the fix did not work: revert the Swift edit (`git checkout -- <edited files>`) and retry from step 9, up to 3 iterations before escalating to the user.
 13. If the bug is gone, capture `test/fixtures/ios-fix/<bug-slug>-post.png`.
 14. Add a regression test at `test/fixtures/ios-fix/<bug-slug>.test.ts` that loads the pre-bug snapshot, restores it via `POST /state/restore`, and asserts the post-fix behavior on a real device (gated on a device-available flag).
 15. Commit the snapshot fixture, the pre-fix and post-fix screenshots, and the regression test alongside the Swift fix.

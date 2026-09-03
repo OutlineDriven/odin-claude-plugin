@@ -19,7 +19,7 @@ description: 'Use when the user asks to compile a weekly synthesis, a weekly rep
 - **Report source directories** (at least one report across all of them required): the directories under the repository root holding the period's reports. The synthesis covers only artifacts that already exist; it never collects new data or generates the underlying reports.
 - Synthesis date `YYYY-MM-DD` (optional): the week being synthesized; defaults to today.
 - Previous synthesis (optional): the most recent file in `reports/weekly-synthesis/` enables the trend comparison and follow-up on prior recommendations.
-- Planning context (optional): active planning items and north-star metrics the operator supplies. When absent, sections 1 and 3 omit planning alignment and the omission is recorded in section 5.
+- Planning context (optional): active planning items and primary metrics the operator supplies. When absent, sections 1 and 3 omit planning alignment and the omission is recorded in section 5.
 
 ## Procedure
 

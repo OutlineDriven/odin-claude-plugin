@@ -12,7 +12,7 @@
 
 ## Practical guidance
 
-- Lean 4: Its rapidly growing ecosystem includes mathlib. It is the best entry point for theorem proving. Its tactics-based proof writing is more ergonomic than Rocq.
+- Lean 4: Its growing ecosystem includes mathlib. It is the best entry point for theorem proving. Its tactics-based proof writing is more ergonomic than Rocq.
 - Dafny: The solver handles most of the proof work. DafnyBench (2025) is the largest formal verification benchmark. AI-assisted annotation tools are emerging, including dafny-annotator.
 - Rocq: It is the gold standard for certified code extraction. It was renamed from Coq in 2025; the repository is `rocq-prover/rocq` and the opam package is `rocq-core`, so search under both names for anything older. CompCert (verified C compiler) and FSCQ (verified file system) were built with it under the Coq name.
 - Kani: It integrates directly into Rust projects via `cargo kani`. It proves the absence of panics, overflow, and UB within bounded execution. It has supported loop invariants since 0.66+.

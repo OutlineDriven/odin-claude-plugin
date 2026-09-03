@@ -105,7 +105,7 @@ Depth: {quick|thorough}
 
 ### Executive summary
 
-{2-3 sentences: current alignment state, largest drift vector, biggest unblocker.}
+{2-3 sentences: current alignment state, main drift direction, biggest unblocker.}
 
 **Key Numbers:**
 - Drift Areas: {n}

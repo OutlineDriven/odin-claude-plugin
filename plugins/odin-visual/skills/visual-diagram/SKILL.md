@@ -26,9 +26,9 @@ Optional:
 
 ## Procedure
 
-1. **Choose the output modality** from the user's request. Select HTML mode when the user asks for a file, a page, a browser-opened diagram, or a durable artifact they can revisit. Select SVG mode when the user asks for a quick inline diagram, a fence-rendered diagram, or says "draw"/"illustrate"/"map out" without requesting a file. If the modality is ambiguous, ask the user to clarify before generating. State the chosen mode and its authority. **Done when:** modality is chosen and its authority is stated, or clarification is requested.
-2. **Classify the diagram family** from the request and context. Classify as flowchart (sequential steps, decision points, process walkthrough), structural (components, relationships, containment, data flow), or illustrative (conceptual explanation, not strictly sequential or structural). This classification applies to both modalities. If ambiguous, ask the user to clarify before generating. **Done when:** family is classified or clarification is requested.
-3. **Extract entities and relationships** from the request and any supplied context: nodes (components, steps, concepts), edges (connections, transitions, data flows), and labels or annotations. Do not invent entities not grounded in the request or context. **Done when:** entities and relationships are extracted from grounded sources.
+1. **Choose the output modality** from the user's request. Select HTML mode when the user asks for a file, a page, a browser-opened diagram, or a durable artifact they can revisit. Select SVG mode when the user asks for a quick inline diagram, a fence-rendered diagram, or says "draw"/"illustrate"/"map out" without requesting a file. If the modality is ambiguous, ask the user to clarify before generating. State the chosen mode and its authority. Done when: modality is chosen and its authority is stated, or clarification is requested.
+2. **Classify the diagram family** from the request and context. Classify as flowchart (sequential steps, decision points, process walkthrough), structural (components, relationships, containment, data flow), or illustrative (conceptual explanation, not strictly sequential or structural). This classification applies to both modalities. If ambiguous, ask the user to clarify before generating. Done when: family is classified or clarification is requested.
+3. **Extract entities and relationships** from the request and any supplied context: nodes (components, steps, concepts), edges (connections, transitions, data flows), and labels or annotations. Do not invent entities not grounded in the request or context. Done when: entities and relationships are extracted from grounded sources.
 4. **Compose the diagram** per the chosen modality, applying the per-family composition rules in `references/svg-families.md` to both modalities:
    - HTML mode: write a self-contained HTML file using the template rules:
      - Embed all CSS inline in a `<style>` block.
@@ -47,7 +47,7 @@ Optional:
      - Define arrow markers in `<defs>` with unique `id` values and use `marker-end` on edge paths.
      - Set explicit `width`/`height` or rely on `viewBox` with `preserveAspectRatio="xMidYMid meet"`.
      - No external resources (no `href` to external files, no `<image>`, no CSS `url()` to external assets, inline all styles).
-   **Done when:** the diagram is composed with all family-specific rules applied for the chosen modality.
+   Done when: the diagram is composed with all family-specific rules applied for the chosen modality.
 5. **Validate the output** per the chosen modality:
    - HTML mode: validate against the final checklist:
      - Open the file in a headless browser or use an equivalent DOM check to confirm zero console errors.
@@ -61,11 +61,11 @@ Optional:
      - All `id` references resolve to defined elements.
      - No unclosed paths or malformed polygon points.
      - Text elements have content and positioning attributes.
-   **Done when:** every validation check for the chosen modality passes.
+   Done when: every validation check for the chosen modality passes.
 6. **Deliver the result** per the chosen modality:
    - HTML mode: open the HTML file in the default browser and report its path. If opening is not possible, report the file path and ask the user to open it.
    - SVG mode: wrap the SVG in a fenced code block tagged for the client's visualizer renderer. The fence must contain exactly one `<svg>` root element and nothing else outside it. Do not modify any file, repository, or external resource. Do not offer to save, export, or deploy the diagram.
-   **Done when:** the file is opened or its path reported (HTML mode), or the fenced SVG is the sole chat output (SVG mode).
+   Done when: the file is opened or its path reported (HTML mode), or the fenced SVG is the sole chat output (SVG mode).
 
 ## Failure and recovery
 

@@ -6,7 +6,7 @@ The pattern groups the audit scans against, the keep list that outranks every gr
 
 ### 1a. Pressure language
 
-Say what you mean at normal volume. Older, less steerable models needed forcefulness; current models are highly responsive to the system prompt, so the same text over-applies. This cuts both ways: inflated emphasis causes over-triggering and rigid behavior, while leftover hedges ("try to", "if possible") are read literally as permission to under-deliver.
+Say what you mean at normal volume. Older, less steerable models needed forcefulness; current models are responsive to the system prompt, so the same text over-applies. This cuts both ways: inflated emphasis causes over-triggering and rigid behavior, while leftover hedges ("try to", "if possible") are read literally as permission to under-deliver.
 
 | Before (written for older models) | After (current models) |
 |---|---|
@@ -106,7 +106,7 @@ The rubric for tool descriptions is precision and contract accuracy, not brevity
 | Worked examples, fake dialogue turns, embedded protocols (numbered workflows, heredocs) in the description, in any quantity, even ones that measurably lift the call rate | Misplaced: move | Examples constrain the exploration space and cost tokens on every request; move teaching material to a skill; make parameters expressive, because well-named enums carry intent |
 | Scolding cross-references (`ALWAYS use X, NEVER use Y for this`) and behavior smuggling ("after showing results, always recommend...") | Misplaced: move or delete | A description is a contract about functionality, not a channel for conversational instructions; put a preference for tool X in X's description, not scattered across its rivals |
 | Tool names in the system prompt; prose lists that shadow the real tool list | Duplicated: delete | The system prompt should not name tools, so that enabling or disabling one never leaves a dangling reference; never expose tools that are invalid in the current configuration |
-| Near-duplicate overlapping tools; bloated response payloads; catalogs of thirty or more always-loaded tools | Structural | Fewer, clearly bounded tools with explicit boundaries in both descriptions; high-signal responses; past a few dozen tools, use tool search or deferred loading instead of always loading every schema |
+| Near-duplicate overlapping tools; bloated response payloads; catalogs of thirty or more always-loaded tools | Structural | Fewer tools with explicit boundaries in both descriptions; high-signal responses; past a few dozen tools, use tool search or deferred loading instead of always loading every schema |
 
 One deliberate split: trigger text is not behavioral text. Text whose job is routing (a skill's frontmatter `description`, a trigger block) may legitimately carry calibrated urgency, because skills under-trigger; ideally it is tuned against a trigger eval rather than vibes. Text whose job is behavior should explain rather than shout. These look identical to a grep, so classify by function before flagging.
 

@@ -45,7 +45,7 @@ description: 'Use when the model is creating or refactoring a skill, faces a SKI
 
 4. **Reject anti-pattern splits.** Do not split on these patterns:
    - Topic-based splits where invocations do not cluster by topic. Real tasks span 2-3 topics, forcing multiple loads. Savings are theoretical.
-   - Splitting to hit a line target without a branching condition. Without a branching condition, references load in parallel or always, providing no savings.
+   - Splitting to hit a line target without a branching condition. Without a branching condition, references load in parallel or always, so they save nothing.
    - Rare-but-critical content in references. References are optional by design; the model may skip them. If content is critical, it must be in `SKILL.md`. "Rare" and "critical" together usually means the skill is doing two jobs.
    - Cosmetic splits (examples, notes, tips files). No load condition; either always loaded or never loaded.
    **Done when:** every proposed split is classified as valid or rejected with a reason.
