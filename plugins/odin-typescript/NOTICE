@@ -339,6 +339,11 @@ The following pinned revisions contain no explicit license file. They are acknow
 identity only. This acknowledgement does not grant or imply permission to copy, modify, or
 distribute their material.
 
+anthropics/skills
+Source: https://github.com/anthropics/skills/tree/53048666b05b4799081517d00e09e0a2dd688678/skills/claude-api/shared/prompt-audit.md
+License: NOASSERTION
+Local adaptations: prompt-optimizer
+
 coleam00/excalidraw-diagram-skill
 Source: https://github.com/coleam00/excalidraw-diagram-skill/tree/8646fcc9f74f38539c6cdb4c969723336a96ddcd
 License: NOASSERTION
