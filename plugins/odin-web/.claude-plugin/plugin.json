@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "odin-web",
   "displayName": "ODIN Web",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "ODIN workflows for building and refining web applications.",
   "author": {
     "name": "OutlineDriven",

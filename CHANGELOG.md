@@ -5,6 +5,18 @@ All notable changes to the ODIN Claude Plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.4] - 2026-09-03
+
+### Fixed
+
+- `resolve-pr-feedback`: the entry-point document named five dispositions where
+  the rubric, both mode files, and the fixer prompt name six. It called the fix
+  verdict `fix` where every other file calls it `fixed`, and omitted
+  `fixed-differently`, so an agent reading only `SKILL.md` emitted a verdict the
+  fixer prompt does not accept and had no verdict for the better-repair case the
+  fixer is told to take. The four drifted sites now cite the rubric and carry
+  its six names.
+
 ## [2.0.3] - 2026-09-03
 
 ### Added

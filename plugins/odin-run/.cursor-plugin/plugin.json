@@ -1,6 +1,6 @@
 {
   "name": "odin-run",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "ODIN workflows for executing plans and shipping finished changes.",
   "author": {
     "name": "OutlineDriven",

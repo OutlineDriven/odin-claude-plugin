@@ -9,7 +9,7 @@
       "name": "odin-core",
       "description": "Core ODIN workflows for planning, executing, and checking changes.",
       "category": "Coding",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "keywords": [
         "odin",
@@ -26,7 +26,7 @@
       "name": "odin-code",
       "description": "ODIN workflows for writing, reviewing, and maintaining code.",
       "category": "Coding",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "keywords": [
         "odin",
@@ -43,7 +43,7 @@
       "name": "odin-code-advanced",
       "description": "Advanced ODIN workflows for complex code changes and technical audits.",
       "category": "Coding",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "keywords": [
         "odin",
@@ -61,7 +61,7 @@
       "name": "odin-create",
       "description": "ODIN workflows for turning ideas into working artifacts.",
       "category": "Productivity",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "keywords": [
         "odin",
@@ -78,7 +78,7 @@
       "name": "odin-create-advanced",
       "description": "Advanced ODIN workflows for ambitious, multi-part creative work.",
       "category": "Productivity",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "keywords": [
         "odin",
@@ -96,7 +96,7 @@
       "name": "odin-research",
       "description": "ODIN workflows for focused research and source-backed findings.",
       "category": "Research",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "keywords": [
         "odin",
@@ -113,7 +113,7 @@
       "name": "odin-research-advanced",
       "description": "Advanced ODIN workflows for deep research and evidence synthesis.",
       "category": "Research",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "keywords": [
         "odin",
@@ -131,7 +131,7 @@
       "name": "odin-run",
       "description": "ODIN workflows for executing plans and shipping finished changes.",
       "category": "Coding",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "keywords": [
         "odin",
@@ -148,7 +148,7 @@
       "name": "odin-run-advanced",
       "description": "Advanced ODIN workflows for complex execution and delivery.",
       "category": "Coding",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "keywords": [
         "odin",
@@ -166,7 +166,7 @@
       "name": "odin-agent",
       "description": "ODIN workflows for designing and improving AI agents.",
       "category": "Productivity",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "keywords": [
         "odin",
@@ -183,7 +183,7 @@
       "name": "odin-security",
       "description": "ODIN workflows for security reviews and defensive implementation.",
       "category": "Security",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "keywords": [
         "odin",
@@ -200,7 +200,7 @@
       "name": "odin-security-advanced",
       "description": "Advanced ODIN workflows for threat analysis and security hardening.",
       "category": "Security",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "keywords": [
         "odin",
@@ -218,7 +218,7 @@
       "name": "odin-design",
       "description": "ODIN workflows for practical interface and visual design.",
       "category": "Design",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "keywords": [
         "odin",
@@ -235,7 +235,7 @@
       "name": "odin-design-advanced",
       "description": "Advanced ODIN workflows for polished interfaces and design systems.",
       "category": "Design",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "keywords": [
         "odin",
@@ -253,7 +253,7 @@
       "name": "odin-writing",
       "description": "ODIN workflows for clear, useful technical writing.",
       "category": "Writing",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "keywords": [
         "odin",
@@ -270,7 +270,7 @@
       "name": "odin-writing-advanced",
       "description": "Advanced ODIN workflows for substantial writing and editorial work.",
       "category": "Writing",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "keywords": [
         "odin",
@@ -288,7 +288,7 @@
       "name": "odin-product",
       "description": "ODIN workflows for product strategy and developer adoption.",
       "category": "Productivity",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "keywords": [
         "odin",
@@ -305,7 +305,7 @@
       "name": "odin-loop",
       "description": "ODIN workflows for bounded iteration with explicit completion checks.",
       "category": "Coding",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "keywords": [
         "odin",
@@ -322,7 +322,7 @@
       "name": "odin-planning",
       "description": "ODIN workflows for shaping requirements and implementation plans.",
       "category": "Productivity",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "keywords": [
         "odin",
@@ -339,7 +339,7 @@
       "name": "odin-python",
       "description": "ODIN workflows for modern Python development.",
       "category": "Coding",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "keywords": [
         "odin",
@@ -356,7 +356,7 @@
       "name": "odin-typescript",
       "description": "ODIN workflows for modern TypeScript development.",
       "category": "Coding",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "keywords": [
         "odin",
@@ -373,7 +373,7 @@
       "name": "odin-web",
       "description": "ODIN workflows for building and refining web applications.",
       "category": "Coding",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "keywords": [
         "odin",
@@ -390,7 +390,7 @@
       "name": "odin-native",
       "description": "ODIN workflows for native systems, toolchains, and performance.",
       "category": "Coding",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "keywords": [
         "odin",
@@ -407,7 +407,7 @@
       "name": "odin-apple",
       "description": "ODIN workflows for software on Apple platforms.",
       "category": "Coding",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "keywords": [
         "odin",
@@ -424,7 +424,7 @@
       "name": "odin-lean",
       "description": "ODIN workflows for Lean proofs and formal verification.",
       "category": "Coding",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "keywords": [
         "odin",
@@ -441,7 +441,7 @@
       "name": "odin-terraform",
       "description": "ODIN workflows for safe Terraform infrastructure changes.",
       "category": "Infrastructure",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "keywords": [
         "odin",
@@ -458,7 +458,7 @@
       "name": "odin-bigquery",
       "description": "ODIN workflows for BigQuery data work and cost-aware queries.",
       "category": "Data",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "keywords": [
         "odin",
@@ -475,7 +475,7 @@
       "name": "odin-prometheus",
       "description": "ODIN workflows for Prometheus metrics and monitoring.",
       "category": "Infrastructure",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "keywords": [
         "odin",

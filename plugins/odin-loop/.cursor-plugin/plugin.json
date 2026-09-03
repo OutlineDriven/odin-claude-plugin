@@ -1,6 +1,6 @@
 {
   "name": "odin-loop",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "ODIN workflows for bounded iteration with explicit completion checks.",
   "author": {
     "name": "OutlineDriven",

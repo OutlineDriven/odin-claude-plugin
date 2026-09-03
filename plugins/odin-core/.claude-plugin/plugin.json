@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "odin-core",
   "displayName": "ODIN Core",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Core ODIN workflows for planning, executing, and checking changes.",
   "author": {
     "name": "OutlineDriven",
