@@ -5,6 +5,31 @@ All notable changes to the ODIN Claude Plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.3] - 2026-09-03
+
+### Added
+
+- `gate-and-merge` references: `feedback-sweep.md` carries the sweep procedure
+  and the six verdict names, taken from the `resolve-pr-feedback` rubric rather
+  than coined a second time; `reviewer-subagent.md` carries the subagent
+  assignment and the six diff classes; `gotchas.md` carries the evidence only a
+  failing branch reaches, for the listing 502, `mergeStateStatus`, and the
+  conflict path.
+
+### Changed
+
+- `gate-and-merge`: the one-axis severity table becomes two axes and four
+  terminals. Direction decides `close`, repair bound decides `repair`, `hold`,
+  or `merge`. `minor` had welded harmless to locally fixable, so a reachable
+  defect with a bounded repair was held with a comment instead of fixed and
+  merged. The bound is now three conditions rather than a `--name-only` file
+  allowlist.
+- `gate-and-merge`: `reviewDecision: "CHANGES_REQUESTED"` routes to the new
+  review-feedback gate instead of terminating, which had made a feedback sweep
+  unreachable. The reading gates run in a fresh-context subagent that never
+  sees the merge decision, gate ordinals are gone, and the checks gate runs
+  last against the head that will actually merge.
+
 ## [2.0.2] - 2026-09-03
 
 ### Added

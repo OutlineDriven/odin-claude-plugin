@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "odin-loop",
   "displayName": "ODIN Loop",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "ODIN workflows for bounded iteration with explicit completion checks.",
   "author": {
     "name": "OutlineDriven",

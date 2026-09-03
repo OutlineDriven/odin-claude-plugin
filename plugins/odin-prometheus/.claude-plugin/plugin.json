@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "odin-prometheus",
   "displayName": "ODIN Prometheus",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "ODIN workflows for Prometheus metrics and monitoring.",
   "author": {
     "name": "OutlineDriven",
