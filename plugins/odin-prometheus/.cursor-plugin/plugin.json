@@ -1,6 +1,6 @@
 {
   "name": "odin-prometheus",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "ODIN workflows for Prometheus metrics and monitoring.",
   "author": {
     "name": "OutlineDriven",

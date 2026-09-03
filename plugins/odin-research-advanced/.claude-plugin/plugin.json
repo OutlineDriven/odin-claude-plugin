@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "odin-research-advanced",
   "displayName": "ODIN Research Advanced",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Advanced ODIN workflows for deep research and evidence synthesis.",
   "author": {
     "name": "OutlineDriven",

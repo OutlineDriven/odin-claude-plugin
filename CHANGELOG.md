@@ -5,6 +5,27 @@ All notable changes to the ODIN Claude Plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.2] - 2026-09-03
+
+### Added
+
+- `prompt-optimizer` audit mode: finds dated instructions in prompts, skills,
+  output styles, and tool descriptions; returns a confidence-ordered report and
+  a proposed diff carrying only high- and medium-confidence hunks. Pattern
+  groups and keep list in `references/audit-patterns.md`; per-vendor guide
+  index in `references/prompt-guides.md`.
+- `AGENTS.md` requires the audit on behavior change and at each model release,
+  and states the patch-bump rule for `releaseVersion`.
+
+### Changed
+
+- `generate-my-taste`: the influence catalogue heading drops its caps tag; the
+  criteria below it carry the reason.
+
+### Removed
+
+- Five retired-campaign write-ups under `docs/solutions/` and `docs/ideation/`.
+
 ## [2.0.1] - 2026-09-03
 
 The Agent Plugins surface is retired; four native harness surfaces join the three

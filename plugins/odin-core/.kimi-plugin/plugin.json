@@ -1,6 +1,6 @@
 {
   "name": "odin-core",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Core ODIN workflows for planning, executing, and checking changes.",
   "keywords": [
     "odin",

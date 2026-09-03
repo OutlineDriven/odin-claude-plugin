@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "odin-writing-advanced",
   "displayName": "ODIN Writing Advanced",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Advanced ODIN workflows for substantial writing and editorial work.",
   "author": {
     "name": "OutlineDriven",

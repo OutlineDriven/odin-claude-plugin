@@ -49,7 +49,7 @@ Each harness reads the immediate children of `skills/`, so a skill nested deeper
 
 Five harness surfaces are supported, and no others: Claude Code, Codex, Cursor, Grok, and Kimi. Nothing is published to a package registry, and no npm artifact belongs in this tree. A flat Devin mirror of these same skills is exported to the outline repository, which publishes nothing and installs nothing.
 
-`catalog/plugins.json` owns plugin identity: name, description, category, tags, and directory. Every manifest and registry is generated from it. Keep every plugin and marketplace version at the single `releaseVersion` literal `2.0.1`; never bump only some manifests.
+`catalog/plugins.json` owns plugin identity: name, description, category, tags, and directory. Every manifest and registry is generated from it. Keep every plugin and marketplace version at the single `releaseVersion` literal `2.0.2`; never bump only some manifests.
 
 Treat these as generator-owned and never hand-edit them:
 
@@ -62,7 +62,7 @@ To change one, change its generator or `catalog/plugins.json`, run `just render`
 
 Each harness dotdir manifest declares only what its own defaults do not already resolve: Kimi needs `skills`, and Codex and Grok need `mcpServers` where a plugin ships the dotless `mcp.json`. Do not add component declarations a harness resolves by convention.
 
-Do not change `releaseVersion` for tooling-only changes such as pre-commit hooks or formatter configuration, or for edits to this file. Do not add or backfill `CHANGELOG.md` entries for routine version work.
+Bump `releaseVersion` by one patch (`+0.0.1`) for every change that ships a skill, output style, manifest, or attribution; bump the minor version only on explicit request. Three authored copies carry the literal, and the bump commit updates all three: `catalog/plugins.json`, the literal in this file, and the sentence under the skill count in the root `README.md`. Run `just render` and commit the catalog with its generated output. Do not change `releaseVersion` for tooling-only changes such as pre-commit hooks or formatter configuration, or for edits to this file alone. Do not add or backfill `CHANGELOG.md` entries for routine version work; a bump that ships a skill or behavior change gets one entry.
 
 ## Devin skill mirror
 
