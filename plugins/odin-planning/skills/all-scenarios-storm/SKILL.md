@@ -10,7 +10,7 @@ description: 'Use when a user wants to enumerate plausible designs, configuratio
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants to enumerate plausible designs, configurations, scenarios, and implementation paths and diagram the finished field before choosing. |
-| Authority | Reversible local: writes only the enumerated field and diagram as local artifacts; rollback is deleting those artifacts. No remote mutation. No VCS or credential mutation. |
+| Authority | Chat-only: no local artifacts are written. No remote mutation. No VCS or credential mutation. |
 | Side effect | An exhaustive field of designs/configs/scenarios/paths and a diagram. |
 | Done | An exhaustive field is enumerated and diagrammed before a choice is made. |
 
@@ -36,4 +36,5 @@ description: 'Use when a user wants to enumerate plausible designs, configuratio
 - Partial result: a partial field with incomplete dimensions is deliverable only when every incomplete dimension is explicitly marked. Never present a partial field as exhaustive.
 
 ## Output
-A local artifact containing the exhaustive enumerated field (one-line descriptions and tradeoffs per option, cross-references across dimensions) and a diagram of the full field. No recommendation or chosen path is produced.
+
+An exhaustive enumerated field (one-line descriptions and tradeoffs per option, cross-references across dimensions) and a diagram of the full field, presented in the response. No recommendation or chosen path is produced. No local artifact is created.

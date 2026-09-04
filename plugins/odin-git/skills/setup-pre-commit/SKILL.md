@@ -10,7 +10,7 @@ description: 'Use when installing or repairing one repository-local pre-commit h
 | Field | Bound contract |
 |---|---|
 | Trigger | Install, repair, or standardize local pre-commit checks in an existing repository, including package-manager-native commit-time checks. |
-| Authority | Reversible local: writes only hook configuration, dependency manifests, and lockfiles; rollback is version control or undo. No remote mutation. No credential or release mutation. |
+| Authority | Reversible local: writes only hook configuration, dependency manifests, lockfiles, a temporary probe file, and a staged trivial change; rollback is version control or undo. No remote mutation. No credential or release mutation. |
 | Side effect | Extends the existing hook manager or installs one current manager, writes its config, and installs the local Git hook. |
 | Done | Exactly one hook manager owns pre-commit; its all-files command runs the repository formatter, linter, type checker, and targeted tests successfully; a deliberate failing probe blocks and a passing probe exits zero. |
 

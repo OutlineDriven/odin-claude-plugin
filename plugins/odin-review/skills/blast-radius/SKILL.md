@@ -32,14 +32,14 @@ A diff, branch, or set of changed files to analyze. The change must be readable 
    5. Reproduced in the running application.
    Any safety fact that cannot reach step 4 must be stated as unproven, not written up as settled. Step 4 is usually one small script importing the same library the application ships and calling the exact function in question. Done when: every safety fact has its certainty-ladder step stated, with unproven facts marked.
 6. Write and run one proof script or test that exercises the single load-bearing fact. Run it. Paste the output. If the proof cannot be produced cheaply, mark the fact unproven; do not round up. Done when: the proof script ran and its output is captured, or the fact is marked unproven.
-7. Delete the proof script after capturing its output. Done when: the proof script is deleted and no artifact remains.
+7. Delete the proof script after capturing its output, if one was written. Done when: the script, if one was written, is deleted and no artifact remains.
 
 ## Failure and recovery
 - Unprovable fact: If the one safety fact cannot reach certainty-ladder step 4 within one script, mark it unproven and return the report with that fact exposed. Do not assert safety.
 - No single fact found: If no single load-bearing fact exists, treat every risk as independent and prove or mark each one. Do not collapse to a guess.
 - Proof script fails: The failure is evidence. Report what it broke, at which step, and what that implies for the change.
 - Scope widening: If the change is too large for one proof, return a partial report covering the facts that could be checked and name what remains. Do not widen scope or run multiple proofs.
-- Rollback: delete the proof script. No other artifact is created.
+- Rollback: delete the proof script if one was written. No other artifact is created.
 
 ## Output
 A report ordered: what-it-does, the-one-fact (with certainty-ladder step and proof output), risks (confirmed only, each with file:line/likelihood/cost/check), cleared, before-merging (cheapest test or repro with proof output).

@@ -25,11 +25,13 @@ description: 'Use when asked to investigate design rationale, regression causes,
 1. **Investigation question** (required): the design rationale, regression cause, or threshold to investigate.
 2. **Source categories** (optional): subset of available source playbooks to query. Defaults to all available categories.
 
+Requires the sibling skill `why` in the same plugin; category playbooks live at `../why/references/sources-<category>.md`.
+
 ## Procedure
 
 1. Confirm that the investigation question is concrete enough to direct evidence collection. If ambiguous, state the ambiguity and the assumed interpretation before proceeding. **Done when**: the question is concrete or the ambiguity is stated with an assumed interpretation.
 2. Map the investigation question to relevant source categories from the available playbooks: code-archaeology, linear, notion, slack, datadog, error-tracker, databricks, incident-postmortem. Select categories that can yield evidence for the question. **Done when**: the category selection is made and justified.
-3. For each selected source category, run a per-category investigator in parallel. Each investigator queries its source using the category-specific playbook, collecting evidence with explicit citations (source name, identifier, date, and relevant excerpt or summary). **Done when**: every selected category has returned its evidence or its access failure.
+3. For each selected source category, run a per-category investigator in parallel. Each investigator queries its source using the playbook at `../why/references/sources-<category>.md` from the sibling skill `why`, collecting evidence with explicit citations (source name, identifier, date, and relevant excerpt or summary). **Done when**: every selected category has returned its evidence or its access failure.
 4. Verify that each citation supports its attached claim. Flag mismatches as unsupported. **Done when**: every citation is verified or flagged.
 5. Synthesize all verified evidence into a single narrative organized by confidence tier: **Well-sourced** (multiple independent citations or one strong primary), **Weakly-sourced** (single indirect or secondary citation), **Unsupported** (citations absent, mismatched, or inaccessible), **Unknown** (no source yielded evidence). **Done when**: every claim is placed in a tier.
 6. Present the narrative with unknowns intact. Do not fill gaps with inference or speculation. **Done when**: the narrative is delivered with all tiers and unknowns.

@@ -92,7 +92,7 @@ disable-model-invocation: true
 - Version-gated flag rejected: fall back to the closest documented alternative and tell the user which feature was unavailable. Do not invent an unverified flag.
 - **`git submit --forge github` unsuitable for general use** (upstream arxanas/git-branchless#1184): stack reordering can lose PR ancestry. Prefer the default forge `branch` with `git submit -c @` / `git submit @` for feature stacks; never submit main. Stock `git push -u` is the gated-main path and the submit-denied fallback.
 - Event log is per-repository and per-clone: `git undo` cannot reach state from a different clone or machine. State this when recovery is requested across clones.
-- Speculative-merge skips during  and :c` and `git move`**: silent unless the summary line is read. If a skip is missed, re-run and read the summary before assuming success.
+- Speculative-merge skips during `git sync` and `git move`: silent unless the summary line is read. If a skip is missed, re-run and read the summary before assuming success.
 - Never swallow an error or pretend the done predicate holds. If a command fails, report the exact failure and stop rather than widening scope.
 
 ## Output

@@ -33,7 +33,7 @@ Optional (defaults applied when absent, before the script runs):
 
 2. Apply defaults for optional inputs. If `scenario_params` is absent, use the default scenario map. If `conversion_ratio` is absent, set it to `1.0`. If `output_path` is absent, set it to `reports/pricing/`. Done when: scenario_params, conversion_ratio, and output_path are resolved with defaults applied where absent.
 
-3. Generate `/tmp/project_credits.py` as a Python script that loads the usage records and pricing table; computes each model cost as `input_tokens * input_cost_per_million / 1_000_000 + output_tokens * output_cost_per_million / 1_000_000`; applies the conversion ratio; computes daily, weekly, and monthly mid-scenario run-rate; compares all three scenarios; and builds a sensitivity grid across token volume and model choice. Done when: the projection script is generated.
+3. Generate `reports/pricing/project_credits.py`, creating `reports/pricing/` if it does not exist, as a Python script that loads the usage records and pricing table; computes each model cost as `input_tokens * input_cost_per_million / 1_000_000 + output_tokens * output_cost_per_million / 1_000_000`; applies the conversion ratio; computes daily, weekly, and monthly mid-scenario run-rate; compares all three scenarios; and builds a sensitivity grid across token volume and model choice. Done when: the projection script is generated.
 
 4. Execute the script with `--usage <usage_records>`, `--pricing <pricing_table>`, `--scenarios <scenario_params>`, `--conversion <conversion_ratio>`, and `--output <output_path>`. Pipe stdout to the terminal. Done when: the script is executed with all resolved parameters and stdout is piped to the terminal.
 

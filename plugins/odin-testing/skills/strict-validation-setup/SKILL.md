@@ -10,7 +10,7 @@ description: 'Use when a user invokes a strict-mode validation or verifiable-goa
 | Field | Bound contract |
 |---|---|
 | Trigger | User invokes a strict-mode validation or verifiable-goals loop setup. |
-| Authority | Reversible local: writes only idempotent tooling-config merges, per-task GOALS.md scaffolds, and failing tests; rollback is version control. No remote mutation. No credential or deployed mutation. |
+| Authority | Reversible local: writes only idempotent tooling-config merges, per-task GOALS.md scaffolds, an `AGENTS.md` stable pointer, and failing tests; rollback is version control. No remote mutation. No credential or deployed mutation. |
 | Side effect | Merges strict-mode tooling configs idempotently, ensures AGENTS.md points to per-task GOALS.md, scaffolds `.agent-tasks/<id>/GOALS.md`, and writes failing tests; one-shot bootstrap. |
 | Done | Strict configs are merged idempotently and per-task GOALS.md plus failing tests are in place, with task goals kept out of AGENTS.md. |
 

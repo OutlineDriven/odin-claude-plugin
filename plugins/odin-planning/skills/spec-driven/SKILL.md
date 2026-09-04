@@ -10,7 +10,7 @@ description: 'Use when starting a project or feature, requirements are unclear, 
 | Field | Bound contract |
 |---|---|
 | Trigger | A new project or feature is starting, requirements are unclear, the change touches multiple modules, or the task exceeds roughly 30 minutes. |
-| Authority | Reversible local: writes only files, VCS, and credentials scoped to the current working tree; rollback is version control. No remote mutation, credential exposure, or irreversible action. |
+| Authority | Reversible local: writes only files and VCS scoped to the current working tree; rollback is version control. No remote mutation, credential exposure, or irreversible action. |
 | Side effect | Writes and commits a spec, records human-approved plan and tasks, and implements through offensive-first TDD. All writes are local; no external service calls. |
 | Done | A reviewed, approved spec covering six areas is saved to the repo and the implementation follows it. |
 

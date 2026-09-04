@@ -67,7 +67,6 @@ val name : t -> string
 
 - Alcotest for unit tests (`dune runtest`).
 - QCheck for property-based tests.
-- Crowbar for fuzzing, defers to `ocaml-dev:fuzz`.
 
 ## Notes
 

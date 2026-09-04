@@ -69,4 +69,3 @@ Zod `.strict()` rejects unknown keys at IO boundaries. Use `z.infer` to derive t
 
 - React-specific strict-mode wiring (RSC error boundaries, suspense defaults) is its own framework reference; not bundled in this commit.
 - Nest-specific DTO + class-validator integration is its own framework reference; not bundled in this commit.
-- Vitest test-side strict config (typecheck-on-test, exact-snapshot match) defers to `vitest-testing` skill.

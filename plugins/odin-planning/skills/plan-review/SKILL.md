@@ -11,7 +11,7 @@ description: 'Use when a plan path or text is supplied. Audits every item in the
 |---|---|
 | Trigger | A plan path or plan text supplied for audit against the current codebase. |
 | Authority | Reversible local: writes only the verdict page to the `diagrams/` directory; rollback is version control. No remote mutation. |
-| Side effect | Writes the verdict page to `diagrams/` and opens it. |
+| Side effect | Writes the verdict page to `diagrams/` and displays the path to it. |
 | Done | Per-item accuracy verdict (correct, stale, risky, unsupported, missing) plus a final approve, revise, or reject decision with rationale. |
 
 ## Inputs
@@ -28,7 +28,7 @@ The plan may be a markdown file, a text file, or a structured document. If a pat
 2. Extract all discrete items from the plan: named changes, file targets, decisions, assumptions, constraints, and action items. Identify items by structural markers (headers, list items, numbered steps, fenced blocks). If fewer than one item can be extracted, stop and report that the plan is empty or unparseable. Done when: every extractable item is extracted, including targetless ones, or the plan is reported empty.
 3. Map and audit items. For each item with an explicit target, map it to a codebase file or symbol, read the target, compare the item's described state against the actual content, and classify it: correct (accurately describes current state), stale (codebase diverged), risky (would conflict or break existing code), unsupported (target cannot be verified), or missing (target does not exist). For each targetless item (a decision, assumption, or constraint with no file target), audit it for logical consistency and spec compliance: check that it does not contradict other items or known constraints, and classify it as correct, stale (contradicted by a newer item or external fact), or risky (internally inconsistent or violates a stated constraint). If a target file cannot be read, mark that item unsupported and continue. If no targets can be verified because the entire codebase is unreachable, stop and report a fatal audit error. Done when: every item is classified with supporting evidence.
 4. Synthesize the final decision using deterministic, non-overlapping thresholds. The decision is the worst classification present, evaluated in severity order: correct < stale < risky < unsupported < missing. Approve when every item is correct or stale (stale items must carry an acceptable rationale). Revise when at least one item is risky but no item is unsupported or missing. Reject when at least one item is unsupported or missing. Include a rationale sentence naming the decisive item. Done when: the final decision and rationale are synthesized from the classification distribution.
-5. Write and open the verdict page. Create the `diagrams/` directory if it does not exist. Write `diagrams/plan-review.html` containing the plan title or first line, a table of items with classification and evidence, the final decision and rationale, and a timestamp. If the verdict page cannot be written, stop and report the error. Display the path to the user and present the final decision. Done when: `diagrams/plan-review.html` is written with all required sections and the path is displayed.
+5. Write the verdict page and display its path. Create the `diagrams/` directory if it does not exist. Write `diagrams/plan-review.html` containing the plan title or first line, a table of items with classification and evidence, the final decision and rationale, and a timestamp. If the verdict page cannot be written, stop and report the error. Display the path to the user and present the final decision. Done when: `diagrams/plan-review.html` is written with all required sections and the path is displayed.
 
 ## Failure and recovery
 
@@ -40,4 +40,4 @@ The plan may be a markdown file, a text file, or a structured document. If a pat
 - Rollback: if an unintended file is written, restore it from VCS. The verdict page in `diagrams/` is the only intentional write.
 
 ## Output
-A verdict page at `diagrams/plan-review.html` with per-item accuracy verdicts (correct, stale, risky, unsupported, missing), a final decision (approve, revise, reject) determined by non-overlapping severity thresholds, and rationale, opened and displayed to the user.
+A verdict page at `diagrams/plan-review.html` with per-item accuracy verdicts (correct, stale, risky, unsupported, missing), a final decision (approve, revise, reject) determined by non-overlapping severity thresholds, and rationale, written and its path displayed to the user.

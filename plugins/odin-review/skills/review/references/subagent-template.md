@@ -24,7 +24,7 @@ You produce a compact return to the parent with findings matching the schema:
 
 **Schema conformance — hard constraints (use these exact values):**
 
-- `severity`: one of `P0`, `P1`, `P2`, `P3`.
+- `severity`: one of `P0`, `P1`, `P2`, `P3` — the parent report reads these as critical, high, medium, and low respectively.
 - `confidence`: one of `high`, `med`, `low`.
 - `action-class`: one of `safe`, `gated`, `manual`, `advisory`.
 - `suggested-route`: one of `apply`, `audit-project`, `none`.

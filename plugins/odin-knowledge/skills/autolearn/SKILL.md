@@ -142,7 +142,7 @@ Done when: every in-scope doc is classified and acted on, and the refresh report
 
 ### 7. Commit
 
-One learning per commit. Stage only the surfaces this skill wrote or edited (a solution doc, CONCEPTS.md, or both). Never stage other dirty files. Commit and publish by the operating repo's normal flow. Skip the commit if nothing was modified.
+One learning per commit. Stage only the surfaces this skill wrote or edited (a solution doc, CONCEPTS.md, or both). Never stage other dirty files. Commit locally by the operating repo's normal flow. Skip the commit if nothing was modified.
 
 Done when: the commit is made with only this skill's surfaces staged, or skipped when nothing was modified.
 

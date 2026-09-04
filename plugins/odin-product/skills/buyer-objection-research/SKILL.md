@@ -10,7 +10,7 @@ description: 'Use when product copy needs buyer-objection evidence collected thr
 | Field | Bound contract |
 |---|---|
 | Trigger | Product copy needs buyer-objection evidence collected through approved outreach. |
-| Authority | Human-gated: one harness ask/question call before any contact; otherwise read-only, producing chat output only. Prose consent, invocation consent, prior-run consent, and post-start discovery do not approve an effect. End the run on scope drift. |
+| Authority | Human-gated: one harness ask/question call before any contact approves the outreach (contacting approved recipients through approved channels, bounded batches, capped interviews); before approval, read-only, producing chat output only. Prose consent, invocation consent, prior-run consent, and post-start discovery do not approve an effect. End the run on scope drift. |
 | Side effect | Buyer-objection copy recommendation grounded in anonymized exact language. |
 | Done | The evidence supports a copy recommendation, or the concern disappeared, or a non-success terminal applies. |
 | Stop | Scope drift; access blocked; interview cap reached; inconclusive evidence. Bound: exact approved recipients in bounded batches, with a total interview cap. |

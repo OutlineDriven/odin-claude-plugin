@@ -67,7 +67,7 @@ Every finding, in either mode, must cite specific code locations, line ranges, o
 5. **Synthesize.**
    - Merge findings from both reviewers.
    - Deduplicate and consolidate overlapping findings.
-   - Rank merged findings by severity (critical > high > medium > low > informational).
+   - Rank merged findings by severity (critical > high > medium > low > informational). Map reviewer-reported severities onto this scale: P0 = critical, P1 = high, P2 = medium, P3 = low; informational is for advisory notes with no behavioral impact.
    - Group findings by file or component.
    - Omit findings already resolved or not applicable.
    - Record which reviewer produced each finding for attribution.

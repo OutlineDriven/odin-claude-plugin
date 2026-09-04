@@ -49,8 +49,3 @@ class Request(BaseModel):
 
 `extra="forbid"` rejects unknown keys; `frozen=True` makes instances hashable and immutable; `strict=True` disables coercion (string `"42"` is not `int 42`).
 
-## Notes
-
-- Pytest test-side strict config (xfail-strict, no-skip-without-reason) defers to `pytest-code-review` skill.
-- FastAPI request/response specifics (Annotated dependencies, response_model_exclude_unset) defer to `fastapi-code-review`.
-- SQLAlchemy session strictness (autoflush=False, expire_on_commit=False) defers to `sqlalchemy-code-review`.

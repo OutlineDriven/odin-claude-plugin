@@ -1,6 +1,6 @@
 ---
 name: git-cleanup
-description: 'Use when the user explicitly invokes branch or worktree cleanup for a repo with accumulated local branches. Also handles tidy''s scratch-file cleanup when the user says tidy and the target is scratch artifacts. Don''t use for remote branch deletion or force-push operations.'
+description: 'Use when the user explicitly invokes branch or worktree cleanup for a repo with accumulated local branches. Don''t use for remote branch deletion or force-push operations.'
 disable-model-invocation: true
 ---
 

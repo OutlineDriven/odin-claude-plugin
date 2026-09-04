@@ -11,7 +11,7 @@ description: 'Use when reviewing existing property tests for coverage and defect
 |---|---|
 | Trigger | The user asks to review existing Hypothesis, fast-check, proptest, jqwik, rapid, Echidna, Medusa, or equivalent property tests for meaningful coverage and defects. |
 | Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
-| Side effect | Read existing property tests and production contracts and return findings without changing code unless fixes are separately requested. |
+| Side effect | Read existing property tests and production contracts and return findings without changing code. |
 | Done | The report identifies tautological, vacuous, assertion-free, reimplemented, weak, over-filtered, or misconfigured tests with evidence, severity, and the strongest available replacement property. |
 
 ## Inputs

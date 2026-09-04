@@ -1,6 +1,6 @@
 ---
 name: verification-skill
-description: 'Use when asked to create a project-local executable verification skill, or to repair one whose commands, paths, or assertions have drifted from the project. Writes only inside the verification-skill directory and proves the harness against the live repository. Not for remote or deployed verification, use the project s remote-proof workflow.'
+description: 'Use when asked to create a project-local executable verification skill, or to repair one whose commands, paths, or assertions have drifted from the project. Writes only inside the verification-skill directory and proves the harness against the live repository. Not for remote or deployed verification.'
 ---
 
 # Verification skill
@@ -17,7 +17,7 @@ with the repository, the harness is wrong.
 | Field | Bound contract |
 |---|---|
 | Trigger | Create a project-local executable verification skill, or repair drift in an existing one |
-| Authority | Reversible local: writes only inside the named verification-skill directory; rollback is version control. No remote mutation. Never mutates the source under test, CI config, or credentials. |
+| Authority | Reversible local: writes only inside the named verification-skill directory; one pull request is allowed only after explicit user approval; rollback is version control. No remote mutation without approval. Never mutates the source under test, CI config, or credentials. |
 | Side effect | Writes and runs a verification harness inside the project. Opens at most one pull request, and only on explicit approval |
 | Done | Create: the harness runs and passes against the live repository. Repair: one honest classification of clean, changed, or blocked |
 
@@ -50,9 +50,7 @@ pull request requires explicit approval; without it, edits stay local.
    on its own. Done when: the skill is written and self-contained.
 5. Run the harness live against the repository and capture the actual output. Done when: real output
    is captured, never predicted.
-6. Confirm every assertion holds against that output. When one fails, correct the harness or the run
-   command and re-run. Never edit the source under test to make an assertion pass. Done when: every
-   assertion holds, or the failing assertion is named for correction.
+6. Confirm every assertion holds against that output. When one fails, the verification is blocked; correct the harness or the run command and re-run, or return blocked if the failure cannot be resolved inside the verification-skill directory. Never edit the source under test to make an assertion pass. Done when: every assertion holds. |
 7. Record the proof inside the skill: the exact command, its output, and the pass result. Done when:
    all three are recorded.
 
