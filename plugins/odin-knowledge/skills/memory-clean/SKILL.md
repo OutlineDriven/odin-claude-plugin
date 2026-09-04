@@ -18,12 +18,13 @@ disable-model-invocation: true
 ## Inputs
 
 - Required: the project whose durable memory store is being audited, or an explicit `MEMORY_DIR` override.
-- Optional: `SESSION_HISTORY_GLOB` for session-based staleness evidence and `MEMORY_CLEAN_SKILL_SCRIPTS` when the bundled scripts are installed outside the default skill directory.
+- Requires the sibling skill memory-update in the same plugin; the resolver lives there.
+- Optional: `SESSION_HISTORY_GLOB` for session-based staleness evidence. `MEMORY_CLEAN_SKILL_SCRIPTS` relocates the bundled `audit-memory.sh` only; it never selects the resolver.
 - The path resolver must successfully produce an existing memory directory. Session history may be omitted, but then session-based feedback staleness cannot be assessed and must be reported as unavailable.
 
 ## Procedure
 
-1. Resolve the bundled script directory, then run `resolve-paths.sh memory_dir` and `resolve-paths.sh session_history_glob`. Reject resolver errors, control characters, forbidden shell metacharacters, and unsafe whitespace rather than interpreting them. The resolver refuses a memory directory git would track. Done when: both paths resolve without error or the run stops with a blocked diagnostic.
+1. Resolve paths, then run `../memory-update/scripts/resolve-paths.sh memory_dir` and `../memory-update/scripts/resolve-paths.sh session_history_glob`. If `MEMORY_UPDATE_SKILL_SCRIPTS` is set, run `$MEMORY_UPDATE_SKILL_SCRIPTS/resolve-paths.sh` instead; that variable is memory-update's relocate hook, not a clean-skill hook. Reject resolver errors, control characters, forbidden shell metacharacters, and unsafe whitespace rather than interpreting them. The resolver refuses a memory directory git would track. Done when: both paths resolve without error or the run stops with a blocked diagnostic.
 2. Bound the operation to the resolved `$MEMORY_DIR`; do not create new memories, edit another store, redact suspected credentials, or widen the requested scope. Done when: the scope boundary is stated and no out-of-scope target is queued.
 3. Before any repair, create a timestamped recursive snapshot of `$MEMORY_DIR` in `/tmp` and record its path. Done when: the snapshot directory exists and its path is recorded, or the run stops without changing the store.
 4. Run `audit-memory.sh "$MEMORY_DIR" "$SESSION_HISTORY_GLOB"` and preserve its JSON output. The deterministic audit checks index orphans and dangling links, schema and required sections, index size limits, credential patterns, fix-recipe and path-pinned content, relative dates, body-line Jaccard similarity above 0.70, missing reference targets, past project dates without historical-anchor phrases, and feedback rules contradicted by session evidence. Done when: the JSON report is captured and preserved regardless of exit status.
