@@ -84,8 +84,7 @@ case "$KEY" in
       VAL="$("$SCRIPT_DIR/encode-memory-path.sh")"
     fi
     _validate_value memory_dir "$VAL"
-    # A MEMORY_DIR override is taken as given; only the derived default must already exist.
-    if [[ ! -d "$VAL" && -z "${MEMORY_DIR:-}" ]]; then
+    if [[ ! -d "$VAL" ]]; then
       printf 'ERROR: memory dir does not exist: %s\n' "$VAL" >&2
       printf 'Set MEMORY_DIR env var to override, or ensure Claude Code has initialized this project.\n' >&2
       exit 1
