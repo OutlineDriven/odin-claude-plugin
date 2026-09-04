@@ -1,26 +1,10 @@
 # Security checklist
 
+Owner. shipping and security-hardening each keep a copy. Do not recopy.
+
 Quick reference for web application security.
 
-## Table of contents
-
-- [Threat modeling (start here)](#threat-modeling-start-here)
-- [Pre-commit checks](#pre-commit-checks)
-- [Authentication](#authentication)
-- [Authorization](#authorization)
-- [Input validation](#input-validation)
-- [Security headers](#security-headers)
-- [CORS configuration](#cors-configuration)
-- [Data protection](#data-protection)
-- [Dependency security](#dependency-security)
-- [AI / LLM security](#ai--llm-security)
-- [Error handling](#error-handling)
-- [OWASP Top 10 quick reference](#owasp-top-10-quick-reference)
-- [OWASP Top 10 for LLMs quick reference](#owasp-top-10-for-llms-quick-reference)
-
 ## Threat modeling (start here)
-
-Before reaching for controls, spend five minutes thinking like an attacker:
 
 - [ ] Trust boundaries mapped (requests, uploads, webhooks, third-party APIs, LLM output)
 - [ ] Assets named (credentials, PII, payment data, admin actions, money movement)
@@ -122,8 +106,6 @@ npx npm-check-updates
 
 ## AI / LLM security
 
-For any feature that calls an LLM (chatbots, summarizers, agents, RAG):
-
 - [ ] Model output treated as untrusted, never into `eval`/SQL/shell/`innerHTML`/file paths
 - [ ] Prompt injection assumed; permissions enforced in code, not in the system prompt
 - [ ] Secrets, cross-tenant data, and full system prompts kept out of the context window
@@ -163,7 +145,7 @@ res.status(500).json({
 
 ## OWASP Top 10 for LLMs quick reference
 
-For apps with LLM features. See the [OWASP GenAI Security Project](https://genai.owasp.org/llm-top-10/).
+See the [OWASP GenAI Security Project](https://genai.owasp.org/llm-top-10/).
 
 | ID | Risk | Prevention |
 |---|---|---|
