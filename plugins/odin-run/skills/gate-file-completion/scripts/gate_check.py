@@ -24,7 +24,8 @@ ABANDON_RE = re.compile(r"^ABANDON:\s*(\S+)\s*(.*)$")
 
 # JavaScript regex flags understood by EXPECT bodies; other letters are ignored.
 JS_FLAG_MAP = {"i": re.IGNORECASE, "s": re.DOTALL, "m": re.MULTILINE}
-
+# 'g' is a valid JS flag that means nothing to a one-shot search.
+JS_NEUTRAL_FLAGS = {"g"}
 
 def default_files(cwd):
     found = []
@@ -116,7 +117,7 @@ def expect_matches(expect, output):
     # is a regex. Anything else (a literal path such as /api/v1/health) must
     # fall through to the substring check, or its tail is read as flags and
     # the wrong fragment is searched.
-    if rx and (rx.group(2) == "" or set(rx.group(2)) <= set(JS_FLAG_MAP)):
+    if rx and (rx.group(2) == "" or set(rx.group(2)) <= set(JS_FLAG_MAP) | JS_NEUTRAL_FLAGS):
         flags = 0
         for ch in rx.group(2):
             flags |= JS_FLAG_MAP.get(ch, 0)
