@@ -27,15 +27,25 @@ _has_control_chars() {
   printf '%s' "$1" | LC_ALL=C grep -q '[[:cntrl:]]'
 }
 
-_validate_memory_dir() {
-  local val="$1"
+# Shell-safety rules shared by both keys. A key whose value is expanded as an
+# unquoted glob also rejects whitespace: pass "reject-whitespace" for it.
+_validate_value() {
+  local key="$1" val="$2" ws_rule="${3:-any}"
   case "$val" in
     *'`'* | *'$'* | *'\'*)
-      printf 'ERROR: memory_dir contains forbidden shell-control character: %s\n' "$val" >&2
+      printf 'ERROR: %s contains forbidden shell-control character: %s\n' "$key" "$val" >&2
       exit 1 ;;
   esac
+  if [[ "$ws_rule" == "reject-whitespace" ]]; then
+    case "$val" in
+      *' '* | *'	'*)   # space and literal tab
+        printf 'ERROR: %s contains whitespace — word-splitting unsafe for unquoted glob expansion.\n' "$key" >&2
+        printf 'Tip: symlink the path to a no-space alias and point SESSION_HISTORY_GLOB at the alias.\n' >&2
+        exit 1 ;;
+    esac
+  fi
   if _has_control_chars "$val"; then
-    printf 'ERROR: memory_dir contains control bytes: %s\n' "$val" >&2
+    printf 'ERROR: %s contains control bytes: %s\n' "$key" "$val" >&2
     exit 1
   fi
 }
@@ -52,50 +62,32 @@ _reject_tracked() {
   exit 1
 }
 
-_validate_session_glob() {
-  local val="$1"
-  case "$val" in
-    *'`'* | *'$'* | *'\'*)
-      printf 'ERROR: session_history_glob contains forbidden shell-control character: %s\n' "$val" >&2
-      exit 1 ;;
-    *' '* | *'	'*)   # space and literal tab
-      printf 'ERROR: session_history_glob contains whitespace — word-splitting unsafe for unquoted glob expansion.\n' >&2
-      printf 'Tip: symlink the path to a no-space alias and point SESSION_HISTORY_GLOB at the alias.\n' >&2
-      exit 1 ;;
-  esac
-  if _has_control_chars "$val"; then
-    printf 'ERROR: session_history_glob contains control bytes: %s\n' "$val" >&2
-    exit 1
-  fi
-}
-
 case "$KEY" in
   memory_dir)
     if [[ -n "${MEMORY_DIR:-}" ]]; then
-      _validate_memory_dir "$MEMORY_DIR"
-      _reject_tracked "$MEMORY_DIR"
-      printf '%s\n' "$MEMORY_DIR"
+      VAL="$MEMORY_DIR"
     else
-      ENCODED=$("$SCRIPT_DIR/encode-memory-path.sh")
-      _validate_memory_dir "$ENCODED"
-      if [[ ! -d "$ENCODED" ]]; then
-        printf 'ERROR: memory dir does not exist: %s\n' "$ENCODED" >&2
-        printf 'Set MEMORY_DIR env var to override, or ensure Claude Code has initialized this project.\n' >&2
-        exit 1
-      fi
-      _reject_tracked "$ENCODED"
-      printf '%s\n' "$ENCODED"
+      VAL="$("$SCRIPT_DIR/encode-memory-path.sh")"
     fi
+    _validate_value memory_dir "$VAL"
+    # A MEMORY_DIR override is taken as given; only the derived default must already exist.
+    if [[ ! -d "$VAL" && -z "${MEMORY_DIR:-}" ]]; then
+      printf 'ERROR: memory dir does not exist: %s\n' "$VAL" >&2
+      printf 'Set MEMORY_DIR env var to override, or ensure Claude Code has initialized this project.\n' >&2
+      exit 1
+    fi
+    _reject_tracked "$VAL"
+    printf '%s\n' "$VAL"
     ;;
   session_history_glob)
     if [[ -n "${SESSION_HISTORY_GLOB:-}" ]]; then
-      _validate_session_glob "$SESSION_HISTORY_GLOB"
+      _validate_value session_history_glob "$SESSION_HISTORY_GLOB" reject-whitespace
       printf '%s\n' "$SESSION_HISTORY_GLOB"
     else
       ENCODED=$("$SCRIPT_DIR/encode-memory-path.sh")
       PROJECT_DIR="${ENCODED%/memory}"
       GLOB="$PROJECT_DIR/*.jsonl"
-      _validate_session_glob "$GLOB"
+      _validate_value session_history_glob "$GLOB" reject-whitespace
       printf '%s\n' "$GLOB"
     fi
     ;;
