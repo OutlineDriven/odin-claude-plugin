@@ -1,6 +1,6 @@
 ---
 name: smart-contract-secure-workflow
-description: 'Use when a smart-contract team invokes this before check-in or deployment to run a five-stage security workflow producing a consolidated pass or unresolved-risk report. Not for audit prep: use smart-contract-audit-prep; not for guidelines: use smart-contract-guidelines-advisor.'
+description: 'Use when a smart-contract team invokes this before check-in or deployment. Not for audit prep: use smart-contract-audit-prep. Not for guidelines: use smart-contract-guidelines-advisor.'
 ---
 
 # Smart contract secure workflow

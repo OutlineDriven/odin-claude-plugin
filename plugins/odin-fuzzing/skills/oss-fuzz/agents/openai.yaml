@@ -1,3 +1,3 @@
 interface:
   display_name: "Oss Fuzz"
-  short_description: "Use when asked to enroll a project in OSS-Fuzz or run its helper workflow locally."
+  short_description: "Use when enrolling a project in OSS-Fuzz, running its helper workflow locally, or reproducing an OSS-Fuzz report."

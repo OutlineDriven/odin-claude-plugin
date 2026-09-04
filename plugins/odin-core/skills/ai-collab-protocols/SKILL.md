@@ -1,6 +1,6 @@
 ---
 name: ai-collab-protocols
-description: 'Use when the user describes an AI workflow gap or uses an ambiguous cross-session reference such as ''the PR Bob mentioned''. Resolves each to a stable handle and surfaces collaboration anti-patterns when reached. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when the user describes an AI workflow gap or uses an ambiguous cross-session reference such as ''the PR Bob mentioned''. Not for tasks that require source or remote-system changes.'
 ---
 
 # AI collab protocols

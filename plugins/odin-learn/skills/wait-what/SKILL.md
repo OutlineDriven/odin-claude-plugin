@@ -1,6 +1,6 @@
 ---
 name: wait-what
-description: 'Use when the user says "wait, what", "the explanation is unclear", "say that again", or asks to restate the last response in plain language. Re-pitches the previous explanation with the missing frame supplied, in plain English and the project''s ubiquitous language. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when the user says "wait, what", "the explanation is unclear", "say that again", or asks to restate the last response in plain language. Not for tasks that require source or remote-system changes.'
 ---
 
 # Wait, what

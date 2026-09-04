@@ -1,6 +1,6 @@
 ---
 name: reorder
-description: 'Use when asked to reorder a drifted listing under one stated principle, moving items only and rewording nothing. Handles catalogs, indexes, tables of contents, enums, and menus. Not for listings with intentionally ranked items: use reorder-respect-deliberate.'
+description: 'Use when asked to reorder a drifted listing under one stated principle, moving items only and rewording nothing. Not for deliberately ranked listings: use reorder-respect-deliberate.'
 ---
 
 # Reorder

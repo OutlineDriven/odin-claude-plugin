@@ -1,6 +1,6 @@
 ---
 name: keep-why-maintenance
-description: 'Use when contradictions, revisit conditions, or duplicates appear in knowledge entries to resolve them by flipping statuses, marking superseded content, merging duplicates, or proposing file splits. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when contradictions, revisit conditions, or duplicates appear in knowledge entries. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Keep why maintenance

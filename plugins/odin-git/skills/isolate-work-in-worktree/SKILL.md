@@ -1,6 +1,6 @@
 ---
 name: isolate-work-in-worktree
-description: 'Use when a run needs its own branch and checkout to avoid collisions with concurrent work. Creates an isolated worktree, tracks a five-status lifecycle in a manifest, and removes only terminal worktrees. Not for feature-work isolation: use isolate-workspace-gate.'
+description: 'Use when a run needs its own branch and checkout to avoid collisions with concurrent work. Not for feature-work isolation: use isolate-workspace-gate.'
 ---
 
 # Isolate work in worktree

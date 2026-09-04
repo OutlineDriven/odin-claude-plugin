@@ -1,6 +1,6 @@
 ---
 name: from-career-perspective
-description: 'Use when a user wants an answer only from the career seat (effects on human trajectories). Emits a career-perspective analysis without blending other lenses. Not for any other from-* lens seat or multi-lens synthesis.'
+description: 'Use when a user wants an answer only from the career seat: effects on human trajectories. Not for any other from-* lens seat or multi-lens synthesis.'
 ---
 
 # From career perspective

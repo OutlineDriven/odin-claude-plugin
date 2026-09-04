@@ -1,6 +1,6 @@
 ---
 name: classify-ci-failure
-description: 'Use when a CI check is failed, absent, pending too long, unstable, or reported unexpectedly. Classify it into a deterministic failure class with the next owner, then emit a reviewable fix plan, without patching. Not for sweeping and patching; use ci-sweeper.'
+description: 'Use when a CI check is failed, absent, pending too long, unstable, or reported unexpectedly. Not for sweeping and patching: use ci-sweeper.'
 ---
 
 # Classify CI failure

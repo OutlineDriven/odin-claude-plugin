@@ -1,6 +1,6 @@
 ---
 name: frame-rate-stability
-description: 'Use when a rendering path needs stable frame-time, CPU, GPU, and memory evidence against fixed targets: stabilize the configuration, define a sampling window, and prove every target with two consecutive comparable runs. Not for one-shot profiling or visual quality review.'
+description: 'Use when a rendering path needs stable frame-time, CPU, GPU, and memory evidence against fixed targets. Not for one-shot profiling or visual quality review.'
 ---
 
 # Frame-rate stability

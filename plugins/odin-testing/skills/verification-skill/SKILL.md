@@ -1,6 +1,6 @@
 ---
 name: verification-skill
-description: 'Use when asked to create a project-local executable verification skill, or to repair one whose commands, paths, or assertions have drifted from the project. Writes only inside the verification-skill directory and proves the harness against the live repository. Not for remote or deployed verification.'
+description: 'Use when asked to create a project-local executable verification skill, or repair one whose commands, paths, or assertions drifted. Not for remote or deployed verification.'
 ---
 
 # Verification skill

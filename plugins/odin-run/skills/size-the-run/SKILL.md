@@ -1,6 +1,6 @@
 ---
 name: size-the-run
-description: 'Use when a run could be over- or under-powered, before dispatching a subagent, or when the user asks how hard to think about a task. Recommends one capability tier and one effort level on a neutral two-dial scale, without pinning a vendor model.'
+description: 'Use when a run could be over- or under-powered, before dispatching a subagent, or the user asks how hard to think about a task. Recommends one tier and effort level. Not for executing the sized task.'
 ---
 
 # Size the run

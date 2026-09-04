@@ -1,6 +1,6 @@
 ---
 name: from-business-perspective
-description: 'Use when the user wants an answer only from the business seat, to produce a business-perspective analysis of money, customers, and timing without blending other lenses. Not for any other from-* lens seat or multi-lens synthesis.'
+description: 'Use when the user wants an answer only from the business seat: money, customers, timing. Not for any other from-* lens seat or multi-lens synthesis.'
 ---
 
 # From business perspective

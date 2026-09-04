@@ -1,3 +1,3 @@
 interface:
   display_name: "Mutation Triage Genotoxic"
-  short_description: "Use when a mutation campaign has produced surviving mutants that need triage."
+  short_description: "Use when a mutation campaign leaves surviving mutants needing triage."

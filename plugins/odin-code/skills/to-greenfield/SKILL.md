@@ -1,6 +1,6 @@
 ---
 name: to-greenfield
-description: 'Use when the user says greenfield this or rescue this codebase, or names a field: dark, red, blue, or brown. Also handles per-subsystem diagnosis. Not for writing specs: use to-spec; not for remote or irreversible changes.'
+description: 'Use when the user says greenfield this or rescue this codebase, names a field (dark, red, blue, or brown), or diagnoses a subsystem. Not for specs: use to-spec. Not for remote or irreversible changes.'
 ---
 
 # To greenfield

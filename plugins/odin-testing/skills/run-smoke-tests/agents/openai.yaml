@@ -1,3 +1,3 @@
 interface:
   display_name: "Run Smoke Tests"
-  short_description: "Use when asked to run smoke tests or verify a local build."
+  short_description: "Use when asked to run smoke tests or verify a local build, applying only minimal unblocking fixes."

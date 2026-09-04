@@ -1,3 +1,3 @@
 interface:
   display_name: "Optimise SEO"
-  short_description: "Use when asked to make a Next.js App Router application crawlable, indexable, and structurally optimized for search with green Core Web Vitals."
+  short_description: "Use when asked to make a Next.js App Router app crawlable, indexable, and search-optimized for sitemaps, robots, canonicals, and Core Web Vitals."

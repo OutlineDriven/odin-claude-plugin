@@ -1,6 +1,6 @@
 ---
 name: pricing-projection
-description: 'Use when projecting cost, estimating BYO cost or spend, or sizing a deal. Delivers a projection with pricing model, run-rate, scenario comparison, conversion assumption, and sensitivity grid. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when projecting cost, estimating BYO cost or spend, or sizing a deal. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Pricing projection

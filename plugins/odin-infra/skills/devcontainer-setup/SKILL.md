@@ -1,6 +1,6 @@
 ---
 name: devcontainer-setup
-description: 'Use when adding a new devcontainer or isolated Claude Code dev environment to a repo that lacks one, for Python, Node/TypeScript, Rust, Go, or a combination. Not for editing an existing devcontainer. No remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when adding a devcontainer or isolated dev environment to a repo that lacks one, for Python, Node/TypeScript, Rust, Go, or a combination. Not for editing an existing devcontainer.'
 ---
 
 # Devcontainer setup

@@ -1,6 +1,6 @@
 ---
 name: aflpp
-description: 'Use when the user needs to set up and run an AFL++ fuzzing campaign for a C/C++ target. Compiles with LTO, LLVM, or GCC instrumentation, runs single or multi-core campaigns, triages crashes, and minimizes the corpus. Requests explicit approval before system-level changes. Not for libFuzzer harness campaigns: use libfuzzer.'
+description: 'Use when the user needs to set up and run an AFL++ fuzzing campaign for a C/C++ target. Not for libFuzzer harness campaigns: use libfuzzer.'
 ---
 
 # AFL++

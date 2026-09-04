@@ -1,6 +1,6 @@
 ---
 name: workflows-driven
-description: 'Use when asked to drive decomposable work as a deterministic multi-subagent workflow with phased fan-out and adversarial verification. Also handles audits, migrations, broad research sweeps, or scale one context cannot hold. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when work decomposes across subagents or phases: audits, migrations, research sweeps, or scale one context cannot hold. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Workflows-driven

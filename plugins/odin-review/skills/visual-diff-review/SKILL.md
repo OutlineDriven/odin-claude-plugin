@@ -1,6 +1,6 @@
 ---
 name: visual-diff-review
-description: 'Use when asked to review a diff and produce a 7-section visual page: scope, before/after, risk, coupling, and merge recommendation, each cited from evidence. Not for interactive review walks or PR-specific review: use show-review.'
+description: 'Use when asked to review a diff and produce a 7-section visual page. Not for interactive review walks or PR-specific review: use show-review.'
 ---
 
 # Visual diff review

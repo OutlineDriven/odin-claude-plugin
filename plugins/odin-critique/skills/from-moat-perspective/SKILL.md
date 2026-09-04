@@ -1,6 +1,6 @@
 ---
 name: from-moat-perspective
-description: 'Use when the user wants an answer only from the moat seat: building, keeping, and thickening defensibility. Emits a moat-perspective analysis without blending. Not for rebuilding from primitives: use from-first-principle. Read-only; no source or remote mutation.'
+description: 'Use when the user wants an answer only from the moat seat: building, keeping, and thickening defensibility. Not for rebuilding from primitives: use from-first-principle.'
 ---
 
 # From moat perspective

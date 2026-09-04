@@ -1,6 +1,6 @@
 ---
 name: strike-the-root
-description: 'Use when a bug, failure, flake, regression, review finding, or ticket needs the core fixed so it cannot break the same way again. Reproduces the failure, proves the root cause, repairs at the root, and pins with a regression test. Not for greenfield features: use tdd; not for style-only review or typo-class one-liners.'
+description: 'Use when a bug, failure, flake, regression, review finding, or ticket needs the core fixed so it cannot recur. Not for greenfield features: use tdd. Not for style-only review or typo-class one-liners.'
 ---
 
 # Strike the root

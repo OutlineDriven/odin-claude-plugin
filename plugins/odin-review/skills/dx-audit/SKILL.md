@@ -1,6 +1,6 @@
 ---
 name: dx-audit
-description: 'Use when auditing the developer-facing surface of a CLI, SDK, library, or package: API contracts, errors, CLI behavior, public types, onboarding, and config. Returns bounded, severity-tiered findings with root-cause analysis and committable fixes.'
+description: 'Use when auditing the developer-facing surface of a CLI, SDK, library, or package: API contracts, errors, public types, onboarding, and config.'
 ---
 
 # DX audit

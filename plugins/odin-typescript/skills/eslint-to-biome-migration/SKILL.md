@@ -1,6 +1,6 @@
 ---
 name: eslint-to-biome-migration
-description: 'Use when asked to migrate a JavaScript or TypeScript project from ESLint, Prettier, Standard, or mixed legacy lint configuration to Biome 2.5. Biome owns linting and formatting, legacy configuration and dependencies are removed, and the project CI check passes without auto-fix.'
+description: 'Use when migrating a JavaScript or TypeScript project from ESLint, Prettier, Standard, or mixed legacy lint configuration to Biome 2.5.'
 ---
 
 # ESLint to Biome migration

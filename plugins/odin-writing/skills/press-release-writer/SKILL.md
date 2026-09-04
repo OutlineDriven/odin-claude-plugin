@@ -1,6 +1,6 @@
 ---
 name: press-release-writer
-description: 'Use when a user asks to write or announce a press release for any occasion or region. Delivers a regionally-compliant inverted-pyramid release, angle justification note, journalist pitch email, and social teasers. Adapts to release type, target region, and media format.'
+description: 'Use when a user asks to write or announce a press release for any occasion or region, adapting to release type and media format. Read-only. All output in chat.'
 ---
 
 # Press release writer

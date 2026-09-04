@@ -1,3 +1,3 @@
 interface:
   display_name: "Supply Chain Risk Auditor"
-  short_description: "Use when assessing npm, PyPI, or Go dependency supply-chain risk."
+  short_description: "Use when assessing npm, PyPI, or Go dependency supply-chain risk, with lockfile-absent paths marked unassessable."

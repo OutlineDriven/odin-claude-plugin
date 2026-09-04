@@ -1,3 +1,3 @@
 interface:
   display_name: "Agent Transcript"
-  short_description: "Use when a redacted, trimmed agent transcript must be appended to a GitHub PR or issue body with human approval and preview."
+  short_description: "Use when a redacted, trimmed agent transcript must be appended to a GitHub PR or issue body, with human approval and preview."

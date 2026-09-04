@@ -1,3 +1,3 @@
 interface:
   display_name: "Solidate"
-  short_description: "Use when a user invokes this skill to harden a chosen but tentative artifact into one durable result."
+  short_description: "Use when the user wants to harden a chosen but tentative artifact into one durable result."

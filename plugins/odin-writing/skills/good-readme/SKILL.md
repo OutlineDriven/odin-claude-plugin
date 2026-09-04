@@ -1,6 +1,6 @@
 ---
 name: good-readme
-description: 'Use when the user asks to create, rewrite, review, or polish an open-source README into a progressively disclosed, evidence-grounded guide whose claims are sourced and whose headings alone tell the story. Also produces shop-window READMEs with section templates, badges, and a quality checklist, and enforces a house standard with pre-ship verification gates. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user asks to create, rewrite, review, or polish an open-source README, including shop-window READMEs. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Good README

@@ -1,6 +1,6 @@
 ---
 name: tasty-abstraction
-description: 'Use when a user wants to design an abstraction boundary that collapses a complex implementation into a simpler interface without leaking internal state. Produces a specification with the boundary, leak surface, escape hatches, and usage constraints. Stops before implementation.'
+description: 'Use when a user wants to design an abstraction boundary that collapses a complex implementation into a simpler interface without leaking internal state. Not for implementation.'
 ---
 
 # Tasty abstraction

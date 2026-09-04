@@ -1,6 +1,6 @@
 ---
 name: first-load-byte-reduction
-description: 'Use when a first screen needs lower transfer bytes without visual or behavioral change: measure compressed bytes, reduce assets and bundles to a budget, prove pixel identity, and pass the test suite. Not for visual redesign or behavioral changes.'
+description: 'Use when a first screen needs lower transfer bytes without visual or behavioral change. Not for visual redesign or behavioral changes.'
 ---
 
 # First-load byte reduction

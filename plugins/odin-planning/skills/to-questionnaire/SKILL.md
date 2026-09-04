@@ -1,6 +1,6 @@
 ---
 name: to-questionnaire
-description: 'Use when the user wants an async questionnaire for someone else, a discovery questionnaire, or a knowledge gap needs answers from outside the repository. Produces prioritised one-idea questions with answer stubs and ambiguity rationale. Not for direct conversation elicitation; use askme. Not for agent-driven research; use research. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when user wants an async questionnaire, a discovery questionnaire, or a knowledge gap needs answers outside the repo. Not for direct conversation: use askme. Not for agent research: use research.'
 ---
 
 # To questionnaire

@@ -1,6 +1,6 @@
 ---
 name: node-internals-diagnosis
-description: 'Use when deep diagnostics target Node.js segfaults, addon crashes, native or heap memory leaks, event-loop anomalies, thread-pool saturation, V8 deoptimizations, or binding.gyp failures. Returns a root-cause classification with tool evidence. Not for code edits or service restarts.'
+description: 'Use when Node.js segfaults, addon crashes, leaks, event-loop anomalies, thread-pool saturation, V8 deoptimizations, or binding.gyp failures need diagnosis. Not for code edits or service restarts.'
 ---
 
 # Node internals diagnosis

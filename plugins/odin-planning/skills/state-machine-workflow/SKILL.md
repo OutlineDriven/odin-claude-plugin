@@ -1,6 +1,6 @@
 ---
 name: state-machine-workflow
-description: 'Use when work has distinct modes and the user wants states, events, guards, outcomes, and illegal transitions instead of a prose todo list. Produces a codable state-machine specification. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when work has distinct modes and the user wants states, events, guards, outcomes, illegal transitions, not a prose todo list. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # State machine workflow

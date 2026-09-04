@@ -1,3 +1,3 @@
 interface:
   display_name: "Tdd"
-  short_description: "Use when asked to develop a fix or feature test-first, plan a multi-step TDD build, or work red-to-green in slices."
+  short_description: "Use when developing a fix or feature test-first, plan a TDD build, or work red-to-green in slices."

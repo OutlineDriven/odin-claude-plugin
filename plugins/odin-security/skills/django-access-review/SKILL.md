@@ -1,6 +1,6 @@
 ---
 name: django-access-review
-description: 'Use when reviewing Django or DRF access control, IDOR, authorization, permissions, or tenant isolation. Returns validated findings with evidence, impact, and enforcing fixes. Not for Django query performance: use django-perf-review. No source or remote-system changes.'
+description: 'Use when reviewing Django or DRF access control, IDOR, authorization, permissions, or tenant isolation. Not for Django query performance: use django-perf-review. No source or remote-system changes.'
 ---
 
 # Django access control & IDOR review

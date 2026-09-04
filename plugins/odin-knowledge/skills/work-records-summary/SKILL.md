@@ -1,6 +1,6 @@
 ---
 name: work-records-summary
-description: 'Use when the user asks to discover, group, and summarize work records across multiple systems for a given period or project. Retrieves records from configured source systems, groups them by a supplied approach, generates a draft for human correction, then publishes the final summary. Not for organizing projects into child documents. Not for local-only summaries.'
+description: 'Use when the user asks to discover, group, and summarize work records across multiple systems for a given period or project. Not for organizing projects into child documents or local-only summaries.'
 disable-model-invocation: true
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: automate-me
-description: 'Use when asked to create or refresh a personal mode skill and open a reviewable PR. Mines recent session history for a recurring manual workflow, drafts one self-contained skill file, and opens a PR with evidence. Not for shared repo skills or work that skips human approval.'
+description: 'Use when asked to create or refresh a personal mode skill and open a reviewable PR. Not for shared repo skills or work that skips human approval.'
 disable-model-invocation: true
 ---
 

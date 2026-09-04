@@ -1,6 +1,6 @@
 ---
 name: buzzword-analysis
-description: 'Use when the user wants the current jargon weather of a domain described without advocacy. Surveys circulating terms, their signaling freight, and their usage trajectory from verifiable external sources. Not for choosing a positioning move; use buzzword-hijack.'
+description: 'Use when the user wants the current jargon weather of a domain described without advocacy. Not for choosing a positioning move: use buzzword-hijack.'
 ---
 
 # Buzzword analysis

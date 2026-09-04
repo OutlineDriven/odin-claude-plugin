@@ -1,6 +1,6 @@
 ---
 name: compile-3d-workflow
-description: 'Use when the user asks for direction and a compilable 3D workflow from an interview. Produces a validated local artifact file combining a DAG topology, ontology groups, and closed control loops. No remote, credential, publish, deploy, or irreversible mutation.'
+description: 'Use when the user asks for direction and a compilable 3D workflow from an interview. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Compile 3D workflow

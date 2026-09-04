@@ -1,6 +1,6 @@
 ---
 name: browser-cookie-store
-description: 'Use when the user runs /browser-cookie-store to populate the session cookie store from installed browsers for authenticated browsing. Discovers browser profiles, reads and decrypts local cookie databases, extracts session cookies, and writes them to the destination store. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user runs /browser-cookie-store to populate the session cookie store from installed browsers. Not for remote, credential, publish, deploy, or irreversible changes.'
 disable-model-invocation: true
 ---
 

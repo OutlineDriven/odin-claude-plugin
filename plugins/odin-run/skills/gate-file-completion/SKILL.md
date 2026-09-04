@@ -1,6 +1,6 @@
 ---
 name: gate-file-completion
-description: 'Use when task decomposition needs gate-file proof before a done claim, or when the user says "gate-file-completion", "depth tree", "gates", or "do not stop until it is done". Detects half-done work, premature done claims, stubs, and silently narrowed scope. In orchestrated mode (tree 4+), enforces dispatch-state, human approval binding, and parent reverification before a done claim.'
+description: 'Use when a task needs gate-file proof before a done claim. Also fires on "gate-file-completion", "depth tree", "gates", or "do not stop until it is done".'
 ---
 
 # Gate file completion

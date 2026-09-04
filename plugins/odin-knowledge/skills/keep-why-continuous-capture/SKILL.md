@@ -1,6 +1,6 @@
 ---
 name: keep-why-continuous-capture
-description: 'Use when a non-trivial change lands or is abandoned and the decision, its rejected alternatives, and the reason must be captured in a local topic file. Records Decision, Rejection, Reason, Type, Status, and Evidence with a confirmation gate before writing. Not for remote, credential, publish, deploy, or irreversible changes; not for trivial or corrective changes; those belong in CHANGELOG.'
+description: 'Use when a non-trivial change lands or is abandoned and its decision, rejected alternatives, and reason must be captured. Not for trivial or corrective changes: those belong in CHANGELOG.'
 ---
 
 # Keep why continuous capture

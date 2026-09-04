@@ -1,3 +1,3 @@
 interface:
   display_name: "Grill With Docs"
-  short_description: "Use when a repository decision needs an interview plus durable terminology and decision records; interview the code domain model, then write each resolved term and decision into CONTEXT and ADR files."
+  short_description: "Use when a repository decision needs an interview plus durable terminology and decision records."

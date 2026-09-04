@@ -1,6 +1,6 @@
 ---
 name: seed-casebook
-description: 'Use when a user opens a new build cycle in a repo with an established iteration convention and wants the casebook directory to exist with real content from the first observable moment. Builds the complete seed in a temporary sibling directory and atomically renames it into place. Not for ongoing triage or multi-repo setup.'
+description: 'Use when a user opens a build cycle in a repo with an iteration convention and wants the casebook seeded with real content. Not for ongoing triage or multi-repo setup.'
 ---
 
 # Seed iteration casebook

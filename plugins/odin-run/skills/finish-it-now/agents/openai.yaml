@@ -1,3 +1,3 @@
 interface:
   display_name: "Finish It Now"
-  short_description: "Use when the user says ship it now, no phases, or finish it now, or when in-scope work would otherwise be deferred to phases, rollouts, follow-up PRs, or TODOs."
+  short_description: "Use when the user says ship it now, no phases, or finish it now, or would defer work to phases, rollouts, follow-up PRs, or TODOs."

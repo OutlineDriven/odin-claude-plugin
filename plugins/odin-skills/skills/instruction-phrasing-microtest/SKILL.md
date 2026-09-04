@@ -1,6 +1,6 @@
 ---
 name: instruction-phrasing-microtest
-description: 'Use when changing the wording of a rule in a skill, prompt template, or agent instruction where the change is meant to alter model output. Produces a scored results table comparing each variant against a no-guidance control, with every match hand-verified.'
+description: 'Use when changing the wording of a rule in a skill, prompt template, or agent instruction where the change is meant to alter model output.'
 ---
 
 # Instruction phrasing microtest

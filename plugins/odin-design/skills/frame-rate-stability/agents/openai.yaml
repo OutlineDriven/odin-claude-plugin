@@ -1,3 +1,3 @@
 interface:
   display_name: "Frame Rate Stability"
-  short_description: "Use when a rendering path needs stable frame-time, CPU, GPU, and memory evidence against fixed targets: stabilize the configuration, define a sampling window, and prove every target with two consecutive comparable runs."
+  short_description: "Use when a rendering path needs stable frame-time, CPU, GPU, and memory evidence against fixed targets."

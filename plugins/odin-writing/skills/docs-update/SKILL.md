@@ -1,6 +1,6 @@
 ---
 name: docs-update
-description: 'Use when documentation has drifted from code changes and the user asks to synchronize them, selecting a local commit or reviewable PR. Filters user-facing commits, maps coverage gaps across Diataxis categories, protects CHANGELOG, and delivers scoped commits or PRs. Not for ADRs or architectural rationale: use docs-and-adrs; not for writing an isolated document from a settled brief: use docs-writing.'
+description: 'Use when documentation has drifted from code changes and the user asks to synchronize. Not for ADRs or architectural rationale (docs-and-adrs). Not for writing an isolated document (docs-writing).'
 disable-model-invocation: true
 ---
 

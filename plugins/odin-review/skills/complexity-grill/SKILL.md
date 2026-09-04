@@ -1,6 +1,6 @@
 ---
 name: complexity-grill
-description: 'Use when a user wants to identify the true sources of complexity qualitatively before counting metrics. Returns a ranked complexity-source report with root causes before any metric is counted. Read-only; no source or remote mutation.'
+description: 'Use when a user wants to identify the true sources of complexity qualitatively before counting metrics. Not for source or remote mutation.'
 ---
 
 # Complexity grill

@@ -1,6 +1,6 @@
 ---
 name: multi-agent-tournament-scorecard
-description: 'Use when agent strategies need a reproducible finite tournament under a frozen evaluation protocol. Produces a scorecard with move records, scores, and hidden-identity validation. Not for open-ended or infinite matchups; use a continuous benchmark for those.'
+description: 'Use when agent strategies need a reproducible finite tournament under a frozen evaluation protocol. Not for open-ended or infinite matchups: use a continuous benchmark.'
 ---
 
 # Multi-agent tournament scorecard

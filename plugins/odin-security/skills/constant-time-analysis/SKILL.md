@@ -1,6 +1,6 @@
 ---
 name: constant-time-analysis
-description: 'Use when reviewing cryptographic code for timing side-channels (C, C++, Go, Rust, Swift, Java, Kotlin, C#, PHP, JS, TS, Python, Ruby). Statically inspects assembly or VM bytecode for secret-dependent variable-time ops across an explicit configuration matrix. Not for runtime timing tests: use constant-time-testing.'
+description: 'Use when reviewing cryptographic code for timing side-channels in C/C++, Go, Rust, Swift, Java, Kotlin, C#, PHP, JS, TS, Python, or Ruby. Not for runtime timing tests: use constant-time-testing.'
 ---
 
 # Constant-time analysis

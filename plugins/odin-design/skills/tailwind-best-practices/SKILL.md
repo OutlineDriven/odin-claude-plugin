@@ -1,6 +1,6 @@
 ---
 name: tailwind-best-practices
-description: 'Use when writing, editing, cleaning, or refactoring Tailwind classes, components, or configuration. Reorders and deduplicates classes, replaces arbitrary values with project tokens, and checks component extraction. Not for read-only audits of Tailwind code, or general CSS without Tailwind.'
+description: 'Use when writing, editing, cleaning, or refactoring Tailwind classes, components, or configuration. Not for read-only audits of Tailwind code, or general CSS without Tailwind.'
 ---
 
 # Tailwind best practices

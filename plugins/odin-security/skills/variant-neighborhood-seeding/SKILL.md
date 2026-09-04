@@ -1,6 +1,6 @@
 ---
 name: variant-neighborhood-seeding
-description: 'Use when a confirmed or plausible issue maps to a graph node and the user needs a ranked handoff packet of graph-neighborhood review targets to seed variant analysis. Produces a local markdown file with ranked candidates, exclusion rationale, and search guidance. Not for searching codebase manifestations of a root cause: use variant-hunt.'
+description: 'Use when a graph-mapped issue needs ranked neighborhood review targets to seed variant analysis. Not for searching codebase manifestations of a root cause: use variant-hunt.'
 ---
 
 # Variant neighborhood seeding

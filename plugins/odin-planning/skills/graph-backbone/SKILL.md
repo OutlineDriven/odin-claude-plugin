@@ -1,6 +1,6 @@
 ---
 name: graph-backbone
-description: 'Use when defining, revising, or gate-replanning the project structural backbone in project-root graph.yaml; produces a validated approved revision preserving immutable topology and additive metadata. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when defining, revising, or gate-replanning the project structural backbone in project-root graph.yaml. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Graph backbone

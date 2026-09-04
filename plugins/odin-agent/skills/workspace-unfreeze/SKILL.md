@@ -1,6 +1,6 @@
 ---
 name: workspace-unfreeze
-description: 'Use when the user runs /workspace-unfreeze on a frozen path to remove the freeze lock marker so the path is editable again. Resolves the marker from an explicit path or the freeze convention, previews the consequence, and deletes only that marker. Not for automated or unattended runs; requires explicit human invocation.'
+description: 'Use when the user runs /workspace-unfreeze on a frozen path to make it editable again. Not for automated or unattended runs: requires explicit human invocation.'
 disable-model-invocation: true
 ---
 

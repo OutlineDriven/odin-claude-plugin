@@ -1,6 +1,6 @@
 ---
 name: trailmark-summary
-description: 'Use when a quick structural overview of a target directory is needed before deeper codebase analysis. Runs a read-only Trailmark summary returning detected languages, Entrypoints, and Dependencies. Not for detailed structural analysis: use trailmark-structural, not for full graph queries: use build-program-graph, not for source or remote-system changes.'
+description: 'Use when a quick structural overview is needed before deeper analysis. Not for structure: use trailmark-structural. Not for graph queries: use build-program-graph. Not for source or remote changes.'
 ---
 
 # Trailmark summary

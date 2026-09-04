@@ -1,3 +1,3 @@
 interface:
   display_name: "Gut Sync"
-  short_description: "Use when a user resumes work and needs an orientation card without full human recall; returns a small card of shape, invariants, and smell locations."
+  short_description: "Use when a user resumes work and needs an orientation card without full human recall."

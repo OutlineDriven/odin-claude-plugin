@@ -1,6 +1,6 @@
 ---
 name: autoplan
-description: 'Use when the user runs /autoplan on a plan or idea. Runs CEO, design, DX, and engineering review phases over the idea, amends the plan, derives deterministic task IDs into a task JSONL ledger, and waits at a final human approval gate. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user runs /autoplan on a plan or idea. Reviews, amends, and derives task IDs with a final human approval gate. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Autoplan

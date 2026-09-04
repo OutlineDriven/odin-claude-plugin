@@ -1,6 +1,6 @@
 ---
 name: write-tech-spec
-description: 'Use when a user asks for a tech spec or architecture doc. Produces a self-contained TECH.md that translates intent into an executable implementation plan. Not for PRDs, use write-prd; not for product specs with behavioral invariants, use write-product-spec.'
+description: 'Use when a user asks for a tech spec or architecture doc. Not for PRDs: use write-prd. Not for product specs with behavioral invariants: use write-product-spec.'
 ---
 
 # Write tech spec

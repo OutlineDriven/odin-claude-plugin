@@ -1,6 +1,6 @@
 ---
 name: publish-branch
-description: 'Use when asked to commit and push to the currently checked-out branch, including the default branch. Don''t use for creating branches, opening PRs, force pushes, or pushing any branch other than the current one.'
+description: 'Use when asked to commit and push to the currently checked-out branch, including the default branch. Not for creating branches, PRs, force pushes, or pushing any other branch.'
 disable-model-invocation: true
 ---
 

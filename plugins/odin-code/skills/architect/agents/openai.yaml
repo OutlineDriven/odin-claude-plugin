@@ -1,3 +1,3 @@
 interface:
   display_name: "Architect"
-  short_description: "Use when non-trivial code needs designing before implementation, or an existing codebase needs its architecture improved: surveying for shallow modules, locating a seam, deepening a structure, hardening with guardrails, or making code testable."
+  short_description: "Use when non-trivial code needs a design before implementation, or an existing codebase needs its architecture improved."

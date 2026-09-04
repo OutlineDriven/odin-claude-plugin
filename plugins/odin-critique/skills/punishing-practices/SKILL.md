@@ -1,6 +1,6 @@
 ---
 name: punishing-practices
-description: 'Use when a workflow, plan, diff, or completed work cycle must be checked for practices that punish the project later: symptom patching, infinite retries, weak verification, score chasing, budget burn. Returns a read-only evidence report naming each detected practice with a cheaper alternative. Not for source, remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a workflow, plan, diff, or completed work cycle must be checked for practices that punish the project later. Not for source, remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Punishing practices

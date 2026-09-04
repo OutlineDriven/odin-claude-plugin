@@ -1,6 +1,6 @@
 ---
 name: modern-python
-description: 'Use when creating or migrating a Python project or script to uv, Ruff, ty, and pytest. Handles single-file scripts, multi-file projects, reusable packages, and migrations from legacy tooling. Not for pushing to a remote or publishing: use new-branch-and-pr for that.'
+description: 'Use when creating or migrating a Python project or script to uv, Ruff, ty, and pytest. Not for pushing to a remote or publishing: use new-branch-and-pr for that.'
 ---
 
 # Modern Python

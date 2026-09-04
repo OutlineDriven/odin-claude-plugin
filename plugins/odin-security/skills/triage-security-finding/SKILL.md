@@ -1,6 +1,6 @@
 ---
 name: triage-security-finding
-description: 'Use when exactly one concrete security finding with a bindable source anchor (a SARIF result, reviewer annotation, suspicious function, or report excerpt) needs a Promote, Needs manual review, Deprioritize, or Blocked verdict before PoC work. Not for projecting batches of findings onto a graph; use project-findings-onto-graph.'
+description: 'Use when exactly one concrete security finding with a source anchor needs a verdict before PoC work. Not for projecting batches of findings onto a graph: use project-findings-onto-graph.'
 ---
 
 # Triage a security finding

@@ -1,6 +1,6 @@
 ---
 name: agent-transcript
-description: 'Use when a redacted, trimmed agent transcript must be appended to a GitHub PR or issue body with human approval and preview. Not for automated or model-initiated insertion without explicit human review.'
+description: 'Use when a redacted, trimmed agent transcript must be appended to a GitHub PR or issue body, with human approval and preview. Not for automated or model-initiated insertion.'
 disable-model-invocation: true
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: from-innovation-perspective
-description: 'Use when the user wants an answer only from the innovation seat: original technique, talent, and culture. Emits an innovation-perspective analysis without blending. Not for rebuilding from primitives: use from-first-principle. Read-only; no source or remote mutation.'
+description: 'Use when the user wants an answer only from the innovation seat. Not for rebuilding from primitives: use from-first-principle. Read-only. No source or remote mutation.'
 ---
 
 # From innovation perspective

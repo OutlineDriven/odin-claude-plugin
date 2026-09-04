@@ -1,6 +1,6 @@
 ---
 name: interrogate
-description: 'Use when asked to "interrogate" or run an adversarial multi-model review of a supplied code artifact. Returns an act/consider/note/dismiss verdict with an agreement map. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when asked to "interrogate" or run an adversarial multi-model review of a supplied code artifact. Not for tasks that require source or remote-system changes.'
 ---
 
 # Interrogate

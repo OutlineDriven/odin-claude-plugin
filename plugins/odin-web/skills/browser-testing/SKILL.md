@@ -1,6 +1,6 @@
 ---
 name: browser-testing
-description: 'Use when building, debugging, or verifying browser-rendered code, or when asked to run browser tests for pages affected by a PR or branch. Interactive mode drives an attached browser via Chrome DevTools MCP to inspect runtime state with console, network, accessibility, and performance evidence. Diff-scoped mode derives affected routes from a git diff, exercises each against the local dev server, and reports every route as Pass, Fail, or Skip. Not for source, remote-system, credential, publish, or deploy changes.'
+description: 'Use when building, debugging, or verifying browser-rendered code, or running browser tests for PR- or branch-affected pages. Not for source, remote-system, credential, publish, or deploy changes.'
 ---
 
 # Browser testing

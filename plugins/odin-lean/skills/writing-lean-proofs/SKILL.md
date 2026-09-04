@@ -1,6 +1,6 @@
 ---
 name: writing-lean-proofs
-description: 'Use when asked to design, write, review, refactor, lint, or performance-diagnose Lean 4 proofs, libraries, or tactic extensions under Mathlib conventions. Not for non-Lean code or changes outside Lean source, library API, proof structure, and linter configuration.'
+description: 'Use when asked to design, write, review, refactor, lint, or performance-diagnose Lean 4 proofs, libraries, or tactics. Not for non-Lean code or changes outside source, API, proof, or linter scope.'
 ---
 
 # Writing Lean proofs

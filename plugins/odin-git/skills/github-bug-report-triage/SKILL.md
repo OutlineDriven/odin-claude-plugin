@@ -1,6 +1,6 @@
 ---
 name: github-bug-report-triage
-description: 'Use when evaluating whether a bug issue has sufficient detail and identifying missing information from the reporter. Don''t use for feature requests, questions, non-bug issues, or repo-wide backlog triage: use github-backlog-triage.'
+description: 'Use when evaluating whether a bug issue has sufficient detail and identifying missing reporter information. Not for non-bug issues or backlog triage: use github-backlog-triage.'
 disable-model-invocation: true
 ---
 

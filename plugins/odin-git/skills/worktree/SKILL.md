@@ -1,6 +1,6 @@
 ---
 name: worktree
-description: 'Use when a new isolated worktree or branch is requested, or an existing ref or PR needs isolation. Creates or attaches an isolated git worktree the harness can see and reports its exact path and status. Not for loop-run worktree lifecycle: use isolate-work-in-worktree; this skill is the lightweight create-or-attach. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a new isolated worktree or branch is requested, or an existing ref or PR needs isolation. Not for loop-run worktree lifecycle (isolate-work-in-worktree).'
 ---
 
 # Worktree isolation

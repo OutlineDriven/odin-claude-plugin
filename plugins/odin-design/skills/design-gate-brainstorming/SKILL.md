@@ -1,6 +1,6 @@
 ---
 name: design-gate-brainstorming
-description: 'Use when creative work is requested and no approved design exists, or when a raw idea or repository must be developed into an approved design document. Routes through idea, spike, bounded, or architectural design and fires before any implementation action. Not for work with an approved design already in context. No remote or irreversible changes.'
+description: 'Use when creative work is requested with no approved design, or a raw idea or repository must be developed into an approved design document. Not for work with an approved design in context.'
 ---
 
 # Design gate brainstorming

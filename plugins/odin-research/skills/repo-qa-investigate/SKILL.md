@@ -1,6 +1,6 @@
 ---
 name: repo-qa-investigate
-description: 'Use when asked for a research-backed answer requiring codebase and documentation investigation, or when answering requires reading many files or conducting a wide survey. Investigates repository questions with sourced evidence, spawning parallel research subagents when the scope is wide. Not for file edits, diffs, or patches; use fix. Not for remote-system changes.'
+description: 'Use when a research-backed answer requires codebase and docs investigation, reading many files, or a wide survey. Not for file edits, diffs, or patches, nor remote-system changes.'
 ---
 
 # Repo QA investigate

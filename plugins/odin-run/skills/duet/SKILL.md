@@ -1,6 +1,6 @@
 ---
 name: duet
-description: 'Use when the user invokes /duet, says pair on this, or faces aesthetic, architectural, or irreversible decisions. Surfaces every genuine fork as a user pick at the moment of decision so no review-bottleneck diff is produced. Not for one-shot fork resolution: use decide.'
+description: 'Use when the user invokes /duet, says pair on this, or faces aesthetic, architectural, or irreversible decisions. Not for one-shot fork resolution: use decide.'
 ---
 
 # Duet

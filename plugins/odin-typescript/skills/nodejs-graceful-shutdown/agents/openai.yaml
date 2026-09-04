@@ -1,3 +1,3 @@
 interface:
   display_name: "Nodejs Graceful Shutdown"
-  short_description: "Use when asked to implement or fix service termination handling: SIGTERM or SIGINT, connection draining, health-check shutdown signaling, zero-downtime deploys."
+  short_description: "Use when asked to implement or fix service termination: SIGTERM or SIGINT, connection draining, health-check signaling."

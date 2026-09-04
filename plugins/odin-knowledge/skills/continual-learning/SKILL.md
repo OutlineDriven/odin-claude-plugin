@@ -1,6 +1,6 @@
 ---
 name: continual-learning
-description: 'Use when asked to mine prior chats on a scheduled or watcher tick and maintain project memory. Reads transcripts and the memory index, extracts decisions and conventions, filters against the baseline, and writes deduplicated high-signal updates or reports no update. No remote, credential, publish, deploy, or irreversible mutation.'
+description: 'Use when asked to mine prior chats on a scheduled or watcher tick and maintain project memory. Not for remote, credential, publish, deploy, or irreversible mutation.'
 ---
 
 # Continual learning

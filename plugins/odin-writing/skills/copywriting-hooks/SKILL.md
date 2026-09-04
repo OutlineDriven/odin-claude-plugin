@@ -1,6 +1,6 @@
 ---
 name: copywriting-hooks
-description: 'Use when a user asks for a hook, lede, or accroche for long-form content. Not for CTA design, use copywriting-cta; not for general copywriting, use copywriting.'
+description: 'Use when a user asks for a hook, lede, or accroche for long-form content. Not for CTA design, use copywriting-cta. Not for general copywriting, use copywriting.'
 ---
 
 # Copywriting hooks

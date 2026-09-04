@@ -1,6 +1,6 @@
 ---
 name: gate-proposed-change
-description: 'Use when asked to evaluate a proposed commit, merge, or auto-merge against a version-1 gate config. Returns an allow or deny verdict naming matched paths; performs no merge. Not for landing PRs: use gate-and-merge. Read-only.'
+description: 'Use when asked to evaluate a proposed commit, merge, or auto-merge against a gate config. Not for landing PRs: use gate-and-merge. Read-only.'
 ---
 
 # Gate proposed change

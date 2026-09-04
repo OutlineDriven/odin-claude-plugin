@@ -1,6 +1,6 @@
 ---
 name: differential-security-review
-description: 'Use when given a PR, commit, diff, or baseline and asked for security regressions, blast radius, test gaps, or adversarial review. Risk-classifies changes and writes an evidence-backed report. Not for whole-codebase audit: use security-review. No remote or irreversible changes.'
+description: 'Use when given PR, commit, diff, or baseline for security regressions, blast radius, gaps, or adversarial review. No remote or irreversible changes. Not for whole-codebase audit: use security-review.'
 ---
 
 # Differential security review

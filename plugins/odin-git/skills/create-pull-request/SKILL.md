@@ -1,6 +1,6 @@
 ---
 name: create-pull-request
-description: 'Use when the user asks to create a PR, open or update a draft PR, write or refresh a PR description, or summarize changes for review. Runs the full template-gated flow by default; a quick mode opens a lightweight PR when the user asks for speed. Not for multi-PR stacks or release publishing.'
+description: 'Use when the user asks to create a PR, open or update a draft PR, write a PR description, or summarize changes for review. Not for multi-PR stacks or release publishing.'
 disable-model-invocation: true
 ---
 

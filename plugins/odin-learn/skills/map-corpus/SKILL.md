@@ -1,6 +1,6 @@
 ---
 name: map-corpus
-description: 'Use when the user points to a folder of their study material and wants it made teachable. Produce a source inventory and a prerequisite-ordered concept map in CORPUS.md. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user points to a study-material folder and asks to make it teachable. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Map corpus

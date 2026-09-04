@@ -1,6 +1,6 @@
 ---
 name: possible-worlds
-description: 'Use when a design dispute has at least two live interpretations and the caller wants those worlds made explicit or needs one plain-language paragraph ending in one recommendation. Emits one paragraph at a five-year-old abstraction level with one non-binding recommendation. Not for selecting a design or changing source or remote systems.'
+description: 'Use when a design dispute has at least two live interpretations and the caller wants worlds made explicit or a plain-language recommendation. Not for selecting a design or source/remote changes.'
 ---
 
 # Possible worlds

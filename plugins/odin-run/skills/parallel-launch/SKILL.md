@@ -1,6 +1,6 @@
 ---
 name: parallel-launch
-description: 'Use when work splits into independent sub-tasks or cross-domain research. Runs concurrent agents and returns one reviewed composition or an exact gap. Not for durable scope ownership with per-scope review: use partition-scopes-to-subagents.'
+description: 'Use when work splits into independent sub-tasks or cross-domain research. Not for durable scope ownership with per-scope review: use partition-scopes-to-subagents.'
 ---
 
 # Parallel launch

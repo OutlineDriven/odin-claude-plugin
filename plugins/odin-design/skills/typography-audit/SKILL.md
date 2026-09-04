@@ -1,6 +1,6 @@
 ---
 name: typography-audit
-description: 'Use when asked to audit typography across a codebase. Produces a file:line report with concrete CSS and HTML fixes ordered by impact across 10 categories, and records rules that need rendered metrics as not-verifiable-from-source instead of fabricating violations. Not for building a type system or token scale.'
+description: 'Use when asked to audit typography across a codebase. Produces a file:line report with concrete fixes ordered by impact and flags unverifiable rules. Not for building a type system or token scale.'
 ---
 
 # Typography audit

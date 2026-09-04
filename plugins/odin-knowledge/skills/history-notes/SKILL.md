@@ -1,6 +1,6 @@
 ---
 name: history-notes
-description: 'Use when the user says remember this or settles one durable fact, append one bounded redacted note as strict UTF-8 JSONL with RFC3339 time and project to the local append-only store. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user says remember this or settles one durable fact. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # History note capture

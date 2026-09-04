@@ -1,6 +1,6 @@
 ---
 name: developer-experience-review
-description: 'Use when dogfooding a developer-facing product or workflow to produce an evidence-backed eight-dimension DX scorecard with measured time to hello world and prioritized fixes. Not for visual UI audit: use web-design-review.'
+description: 'Use when dogfooding a developer-facing product or workflow to produce an evidence-backed DX scorecard. Not for visual UI audit: use web-design-review.'
 ---
 
 # Developer experience review

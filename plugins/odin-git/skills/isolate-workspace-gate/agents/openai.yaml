@@ -1,3 +1,3 @@
 interface:
   display_name: "Isolate Workspace Gate"
-  short_description: "Use when asked to start feature work that needs isolation, or before executing an implementation plan."
+  short_description: "Use when starting feature work that needs isolation, or before executing an implementation plan."

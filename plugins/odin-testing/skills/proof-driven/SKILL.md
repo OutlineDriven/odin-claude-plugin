@@ -1,6 +1,6 @@
 ---
 name: proof-driven
-description: 'Use when property-based testing, theorem proving, or formal proof tactics require zero unproven properties. Produces passing proofs and tests, sufficient coverage, and regression tests for every counterexample. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when property-based testing, theorem proving, or formal proof tactics require zero unproven properties. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Proof driven

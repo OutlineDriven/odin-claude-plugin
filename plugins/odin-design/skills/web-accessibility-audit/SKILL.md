@@ -1,6 +1,6 @@
 ---
 name: web-accessibility-audit
-description: 'Use when the user requests an accessibility audit, a11y check, or WCAG compliance review. Returns a prioritized WCAG findings report with file and line locations, before and after code fixes, and manual testing recommendations. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when the user requests an accessibility audit, a11y check, or WCAG compliance review. Don''t use for tasks that require source or remote-system changes.'
 ---
 
 # Web accessibility audit

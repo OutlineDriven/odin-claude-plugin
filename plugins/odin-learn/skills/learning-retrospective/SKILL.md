@@ -1,6 +1,6 @@
 ---
 name: learning-retrospective
-description: 'Use when asked to review learning progress after a milestone. Produces a learning retrospective with an adjusted plan and a measurable next milestone. Not for an engineering retrospective: use engineering-retrospective; for an agent-environment retrospective: use agent-environment-retrospective.'
+description: 'Use when asked to review learning progress after a milestone. Not for engineering retrospectives, use engineering-retrospective. For agent-environment ones, use agent-environment-retrospective.'
 ---
 
 # Learning retrospective

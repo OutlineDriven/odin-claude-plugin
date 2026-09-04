@@ -1,6 +1,6 @@
 ---
 name: feedback-sweep
-description: 'Use when asked to /feedback-sweep [setup|reconfigure] [mode:non-interactive]: sweep configured sources, acknowledge user-approved items, verify fixes merged to default, and emit an autopilot-ready plan. Not for pattern discovery: use feedback-pattern-sweep.'
+description: 'Use when asked to /feedback-sweep [setup|reconfigure] [mode:non-interactive]. Not for pattern discovery: use feedback-pattern-sweep.'
 ---
 
 # Feedback sweep

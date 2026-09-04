@@ -1,6 +1,6 @@
 ---
 name: ssotize-audit-fold
-description: 'Use when asked to find duplication, check consistency, establish or repair SSOT, consolidate scattered facts, or when the user says "consolidate this" or "ssotize this". Audits every occurrence, proposes a reversible plan, then folds unique details into one approved canonical home. Not for remote or irreversible changes.'
+description: 'Use when asked to find duplication, check consistency, establish or repair SSOT, consolidate facts, or when the user says "consolidate this" or "ssotize this". Not for remote or irreversible changes.'
 ---
 
 # SSOTize audit fold

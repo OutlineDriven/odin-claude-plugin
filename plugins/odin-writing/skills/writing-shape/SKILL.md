@@ -1,6 +1,6 @@
 ---
 name: writing-shape
-description: 'Use when shaping a source document paragraph by paragraph without modifying it. Produces an approved, grounded document with named gaps for rejected paragraphs. Not for selected-beat assembly: use writing-beats, not for fragment capture: use writing-fragments.'
+description: 'Use when shaping a source document paragraph by paragraph without modifying it. Not for selected-beat assembly: use writing-beats. Not for fragment capture: use writing-fragments.'
 ---
 
 # Writing shape

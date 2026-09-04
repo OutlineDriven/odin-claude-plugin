@@ -1,6 +1,6 @@
 ---
 name: write-product-spec
-description: 'Use when a user asks for a product spec with numbered behavioral invariants. Writes PRODUCT.md with unambiguous, implementable behavior. Not for evidence-backed PRDs and PR creation: use write-prd. Not for implementation plans: use write-tech-spec.'
+description: 'Use when a user asks for a product spec with numbered behavioral invariants. Not for evidence-backed PRDs or PR creation: use write-prd. Not for implementation plans: use write-tech-spec.'
 ---
 
 # Write product spec

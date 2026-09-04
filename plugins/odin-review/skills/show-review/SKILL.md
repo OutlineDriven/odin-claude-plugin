@@ -1,6 +1,6 @@
 ---
 name: show-review
-description: 'Use when the user wants a per-finding visual walk through a diff or PR: one finding per turn with a Keep/Skip/Discuss choice and a close tally. Not for written review reports: use review; not for codebase tours: use show-me.'
+description: 'Use when the user wants a per-finding visual walk through a diff or PR. Not for written review reports: use review. Not for codebase tours: use show-me.'
 ---
 
 # Show review

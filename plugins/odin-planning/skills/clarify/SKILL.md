@@ -1,6 +1,6 @@
 ---
 name: clarify
-description: 'Use when the user says "clarify", "what is ambiguous here", or when a prompt or spec reads as under-specified before planning. Surfaces ambiguities as a certainty-tiered findings report with recommended defaults. Not for exploring intent with questions: use askme.'
+description: 'Use when the user says "clarify", "what is ambiguous here", or when a prompt or spec reads as under-specified before planning. Not for exploring intent with questions: use askme.'
 ---
 
 # Clarify

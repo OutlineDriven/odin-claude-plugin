@@ -1,6 +1,6 @@
 ---
 name: post-release-status
-description: 'Use when a user explicitly asks to post, update, or check cherry-pick status for a release as a single Slack Block Kit status board. Lists PRs belonging to the release, maps observed evidence to defined cherry-pick statuses, merges manual overrides, and posts or updates exactly one message. Not for mutating pull requests or posting to multiple messages.'
+description: 'Use when a user asks to post, update, or check cherry-pick status for a release as a single Slack Block Kit board. Not for mutating pull requests or posting to multiple messages.'
 disable-model-invocation: true
 ---
 

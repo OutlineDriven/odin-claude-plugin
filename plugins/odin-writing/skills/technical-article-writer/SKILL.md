@@ -1,6 +1,6 @@
 ---
 name: technical-article-writer
-description: 'Use when a user asks to write a technical article or blog post incorporating external references. Fetches and validates reference URLs, applies idea-quality gates, drafts an evidence-based body with explicit citations and a single objective, then runs a humanization pass. Not for source-code changes or landing-page copy.'
+description: 'Use when a user asks to write a technical article or blog post incorporating external references. Not for source-code changes or landing-page copy.'
 ---
 
 # Technical article writer

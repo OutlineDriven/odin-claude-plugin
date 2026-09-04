@@ -1,6 +1,6 @@
 ---
 name: validation-self-audit
-description: 'Use when asked to audit validation that looks too clean or self-confirming. Identify each independence failure that applies, prescribe its fix, and audit the auditor''s own evidence. Not for checking eval leakage, use evaluation-leakage-audit.'
+description: 'Use when asked to audit validation that looks too clean or self-confirming. Audits its own independence too. Not for eval leakage: use evaluation-leakage-audit.'
 ---
 
 # Validation self audit

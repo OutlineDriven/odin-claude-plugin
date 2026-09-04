@@ -1,6 +1,6 @@
 ---
 name: spec-driven-implementation
-description: 'Use when a significant feature begins or specs are checked in: author or update behavioral specs and keep them current with what ships. Not for producing the initial approved spec and plan; use spec-driven. Don''t use for remote or irreversible changes.'
+description: 'Use when a feature begins or specs are checked in: author or update behavioral specs and keep them current with what ships. Not for producing the initial approved spec and plan: use spec-driven.'
 ---
 
 # Spec driven implementation

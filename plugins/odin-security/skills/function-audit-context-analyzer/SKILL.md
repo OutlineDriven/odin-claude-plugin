@@ -1,6 +1,6 @@
 ---
 name: function-audit-context-analyzer
-description: 'Use when an orchestrator or user requests deep audit-context analysis of one function, or needs to build audit context across a codebase before vulnerability hunting. Produces fixed-format per-function prose analysis with cited lines, or a multi-function dossier with entry points, actors, state, and open questions. Not for vulnerability finding or severity rating. Local write only.'
+description: 'Use when asked for audit-context analysis of one function, or to build audit context across codebase before vulnerability hunting. Local write only. Not for vulnerability finding or severity rating.'
 ---
 
 # Function audit context analyzer

@@ -1,6 +1,6 @@
 ---
 name: sync-docs
-description: 'Use when a behavioral diff may have left docs or CHANGELOG stale. Detects docs-vs-code drift and applies only safe fixes. Also handles stale code comments when tidy targets them. Not for roadmap drift: use drift-detect. Don''t use for remote or irreversible changes.'
+description: 'Use when a behavioral diff may have left docs or CHANGELOG stale, or when tidy targets stale code comments. Applies only safe fixes. Not for roadmap drift: use drift-detect.'
 ---
 
 # Sync docs

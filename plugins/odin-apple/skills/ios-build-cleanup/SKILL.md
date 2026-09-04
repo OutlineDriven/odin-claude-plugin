@@ -1,6 +1,6 @@
 ---
 name: ios-build-cleanup
-description: 'Use when the user wants a clean Xcode rebuild by deleting DerivedData and build artifacts. Do not use for diagnosing a specific build error; that is ios-build-fix.'
+description: 'Use when the user wants a clean Xcode rebuild by deleting DerivedData and build artifacts. Do not use for diagnosing a specific build error: use ios-build-fix.'
 disable-model-invocation: true
 ---
 

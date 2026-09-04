@@ -1,3 +1,3 @@
 interface:
   display_name: "Fromzero"
-  short_description: "Use when the user wants to replace a greenfield attempt with a clean pad carrying only verified requirements."
+  short_description: "Use when replacing a greenfield attempt with a clean pad of verified requirements."

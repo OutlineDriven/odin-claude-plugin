@@ -1,3 +1,3 @@
 interface:
   display_name: "Llms Visibility"
-  short_description: "Use when asked to make a public site discoverable and readable by LLM agents using llms.txt, Markdown content negotiation, and alternate link headers."
+  short_description: "Use when asked to make a site discoverable by LLM agents using llms.txt, Markdown content-negotiation, and alternate link headers."

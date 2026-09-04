@@ -1,6 +1,6 @@
 ---
 name: refactor-break-compat
-description: 'Use when modernizing APIs, removing compat shims, killing feature flags, or rewriting a subsystem cleanly. Deletes old paths and rewrites every caller to the new contract with zero legacy residue. Not for additive refactors that must preserve the old path.'
+description: 'Use when modernizing APIs, removing compat shims, killing feature flags, or rewriting a subsystem cleanly. Not for additive refactors that must preserve the old path.'
 disable-model-invocation: true
 ---
 

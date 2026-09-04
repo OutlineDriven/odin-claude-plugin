@@ -1,6 +1,6 @@
 ---
 name: unleak-abstraction
-description: 'Use when a user names an abstraction leak and wants it sealed as a module seam, configuration option, or explicit override, or deliberately exposed as a named boundary. Measures hidden and wrapper complexity as branching decisions and admits the change only if the wrapper adds less than half the hidden complexity. Not for detecting concealment patterns: use no-hide.'
+description: 'Use when an abstraction leak must be sealed as a module seam, configuration option, or explicit override, or exposed as a named boundary. Not for detecting concealment patterns: use no-hide.'
 ---
 
 # Unleak abstraction

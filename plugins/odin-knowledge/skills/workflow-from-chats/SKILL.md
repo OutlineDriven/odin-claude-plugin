@@ -1,6 +1,6 @@
 ---
 name: workflow-from-chats
-description: 'Use when a user asks to mine recent chats for workflow preferences. Reads chat history, extracts recurring patterns, and returns an evidence-backed preference synthesis with proposed workflow artifacts. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when a user asks to mine recent chats for workflow preferences. Don''t use for tasks that require source or remote-system changes.'
 ---
 
 # Workflow from chats

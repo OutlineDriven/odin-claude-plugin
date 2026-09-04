@@ -1,6 +1,6 @@
 ---
 name: guardrail-carve-run
-description: 'Use when a task carries guardrail-adjacent material (stealth, scraping, privacy, IP, policy, security) or mixes reversible work with irreversible, credential, data-at-rest, migration, or deletion work, or the user says "autobahn this", or the moment the agent is about to hedge, soften, or silently skip. Carves risky items into a descope ledger, then runs the safe remainder in a fresh subagent. Not for performing the carved risky work.'
+description: 'Use when guardrail-adjacent material (stealth, scraping, privacy, IP, policy, security) or mixed reversible/irreversible, sensitive work, or the user says "autobahn this". Not for carved risky work.'
 ---
 
 # Guardrail carve run

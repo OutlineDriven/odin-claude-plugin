@@ -1,6 +1,6 @@
 ---
 name: finish-branch-menu
-description: 'Use when implementation is complete and the full test suite is green and an integration decision is needed for a development branch or worktree. Don''t use for branches with failing tests or for starting new work.'
+description: 'Use when implementation is complete, the test suite is green, and an integration decision is needed for a development branch or worktree. Not for failing tests or starting new work.'
 disable-model-invocation: true
 ---
 

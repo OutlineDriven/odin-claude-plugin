@@ -1,6 +1,6 @@
 ---
 name: propose-issue
-description: 'Use when the user asks to propose an issue, file or open a bug report, or turn a reported defect into a tracked issue. Grounds the defect in cited source, gates it, and files one issue. Don''t use for fixing the defect, triaging existing issues, or reviewing PRs.'
+description: 'Use when the user asks to propose an issue, file or open a bug report, or turn a reported defect into a tracked issue. Not for fixing the defect, triaging existing issues, or reviewing PRs.'
 disable-model-invocation: true
 ---
 

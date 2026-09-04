@@ -1,6 +1,6 @@
 ---
 name: dedup-skills
-description: 'Use when asked to deduplicate skills or prompt directories, find repeated rules, or check a skill tree for contradictions. Produces a read-only ledger classifying every repetition cluster and conflict candidate with evidence and zero unclassified cells.'
+description: 'Use when asked to deduplicate skills or prompt directories, find repeated rules, or check a skill tree for contradictions.'
 ---
 
 # Dedup skills

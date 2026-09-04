@@ -1,6 +1,6 @@
 ---
 name: next-best-action
-description: 'Use when a project is between phases, the author asks what to do next, too many threads are open, or work needs re-entry. Returns exactly one next action with an observable done-when and a cited reason it beats other visible options. Not for gating whether one named task may proceed.'
+description: 'Use when a project is between phases, the author asks what to do next, too many threads are open, or work needs re-entry. Not for gating whether one named task may proceed.'
 ---
 
 # Next best action

@@ -1,3 +1,3 @@
 interface:
   display_name: "Docs Update"
-  short_description: "Use when documentation has drifted from code changes and the user asks to synchronize them, selecting a local commit or reviewable PR."
+  short_description: "Use when documentation has drifted from code changes and the user asks to synchronize."

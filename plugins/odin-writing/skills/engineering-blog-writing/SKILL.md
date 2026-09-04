@@ -1,6 +1,6 @@
 ---
 name: engineering-blog-writing
-description: 'Use when asked to write, review, or improve an engineering blog post, technical architecture deep dive, postmortem, or technical launch announcement. Produces evidence-grounded engineering copy with verified metrics, working code, and clear trade-off analysis.'
+description: 'Use when asked to write, review, or improve an engineering blog post, technical architecture deep dive, postmortem, or technical launch announcement.'
 ---
 
 # Engineering blog writing

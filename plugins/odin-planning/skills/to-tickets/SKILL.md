@@ -1,6 +1,6 @@
 ---
 name: to-tickets
-description: 'Use when a settled plan needs implementation tickets published as blocker-linked slices, tracer bullets, or expand-contract sequencing, and a human invokes the publication. Publishes GitHub issues or local ticket files and writes their URLs back into the plan. Not for implementation; use work; not for unsupervised publication.'
+description: 'Use when a settled plan needs implementation tickets published as blocker-linked slices, tracer bullets, or expand-contract sequencing. Not for implementation: use work.'
 disable-model-invocation: true
 ---
 

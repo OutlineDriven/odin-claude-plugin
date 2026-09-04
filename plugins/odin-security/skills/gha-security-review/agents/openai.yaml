@@ -1,3 +1,3 @@
 interface:
   display_name: "Gha Security Review"
-  short_description: "Use when asked to review GitHub Actions workflows for exploitable vulnerabilities, including prompt injection through AI coding actions (Claude Code Action, Gemini CLI, OpenAI Codex)."
+  short_description: "Use when asked to review GitHub Actions for exploitable vulnerabilities, including prompt injection through Claude Code Action, Gemini CLI, or OpenAI Codex."

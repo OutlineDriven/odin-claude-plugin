@@ -1,6 +1,6 @@
 ---
 name: influence-and-negotiation
-description: 'Use when an agreement-seeking interaction arises, including mid-conversation moments the model detects. Produces a prepared mandate with mutual-gains agenda, live response scripts, or a retrospective debrief with pathology analysis.'
+description: 'Use when an agreement-seeking interaction arises, including mid-conversation moments the model detects.'
 ---
 
 # Influence and negotiation

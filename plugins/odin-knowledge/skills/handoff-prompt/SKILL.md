@@ -1,6 +1,6 @@
 ---
 name: handoff-prompt
-description: 'Use when the user asks for a handoff, delegation, or clipboard-ready prompt for another agent: a standalone path-free prompt copied to the clipboard, confirmed by title. Not for session-snapshot briefs: use handoff; never remote, credential, publish, deploy, or irreversible.'
+description: 'Use when the user asks for a handoff, delegation, or clipboard-ready prompt for another agent. Not for session-snapshot briefs: use handoff. Never remote, credential, publish, deploy, or irreversible.'
 ---
 
 # Handoff prompt

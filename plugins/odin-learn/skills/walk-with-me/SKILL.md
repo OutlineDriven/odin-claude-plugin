@@ -1,6 +1,6 @@
 ---
 name: walk-with-me
-description: 'Use when the user wants to be walked through code rather than handed a report: "walk through this", "guided code walk", or "explain this codebase". Renders a visual shape and hands the user the next step each turn. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when the user wants to be walked through code, not handed a report: "walk through this", "guided code walk", or "explain this codebase". Not for tasks that require source or remote-system changes.'
 ---
 
 # Walk with me

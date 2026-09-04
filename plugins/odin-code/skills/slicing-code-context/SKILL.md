@@ -1,6 +1,6 @@
 ---
 name: slicing-code-context
-description: 'Use when an exact symbol, path, entrypoint, or line range can bound a focused code question or patch proposal under a fixed source budget. Builds a deterministic slice packet and validates one constrained delegation. Not for source changes or broad repository exploration.'
+description: 'Use when an exact symbol, path, entrypoint, or line range can bound a focused code question or patch proposal under a fixed source budget. Not for source changes or broad repository exploration.'
 ---
 
 # Slicing code context

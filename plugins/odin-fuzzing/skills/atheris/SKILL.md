@@ -1,6 +1,6 @@
 ---
 name: atheris
-description: 'Use when a user needs coverage-guided fuzzing for Python code or a Python native extension using Atheris. Sets up an instrumented harness, configures sanitizer flags for native extensions, and reproduces saved crash artifacts. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a user needs coverage-guided fuzzing for Python code or a Python native extension using Atheris. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Atheris

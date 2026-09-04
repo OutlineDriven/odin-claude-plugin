@@ -1,6 +1,6 @@
 ---
 name: new-space
-description: 'Use when a user starts a new work session and asks to split human decisions from agent execution. Writes a contract-bound brief under run/<session-id>/ and runs spawn, work, review, and human-gate phases to completion. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a user starts a new work session and asks to split human decisions from agent execution. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # New space

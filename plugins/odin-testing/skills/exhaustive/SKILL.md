@@ -1,6 +1,6 @@
 ---
 name: exhaustive
-description: 'Use when asked to prove coverage, find missing cases, or enumerate a state, decision, requirement, or behavior space. Enumerates every cell as covered, gap, or deferred with an executed check per cell, and emits a coverage manifest with a tally. Not for round-based questioning, use askme; not for testing one property, use property-test-authoring.'
+description: 'Use when asked to prove coverage, find missing cases, or enumerate state, decision, requirement, or behavior space. Not for round-based or single-property tests: use askme, property-test-authoring.'
 ---
 
 # Exhaustive

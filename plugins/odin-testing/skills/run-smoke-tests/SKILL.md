@@ -1,6 +1,6 @@
 ---
 name: run-smoke-tests
-description: 'Use when asked to run smoke tests or verify a local build. Applies minimal fixes that unblock a stable passing result and reports flake risk honestly. Not for iterative bug fixing, use reproduce-and-fix-issues.'
+description: 'Use when asked to run smoke tests or verify a local build, applying only minimal unblocking fixes. Not for iterative bug fixing: use reproduce-and-fix-issues.'
 ---
 
 # Run smoke tests

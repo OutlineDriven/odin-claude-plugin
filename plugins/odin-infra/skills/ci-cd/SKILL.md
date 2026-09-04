@@ -1,6 +1,6 @@
 ---
 name: ci-cd
-description: 'Use when setting up or modifying CI/CD pipelines, quality gates, test runners, or deployment pipeline configuration through workflow files. Authors in-repository pipeline and deployment configuration with blocking gates, secret references, and rollback. Also handles configuring a deployment pipeline through CI or workflow files without triggering a deployment.'
+description: 'Use when setting up or modifying CI/CD pipelines, quality gates, test runners, or deployment pipeline configuration through workflow files. Not for triggering a deployment.'
 ---
 
 # CI/CD and deployment configuration

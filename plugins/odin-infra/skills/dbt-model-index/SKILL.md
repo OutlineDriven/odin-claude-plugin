@@ -1,6 +1,6 @@
 ---
 name: dbt-model-index
-description: 'Use when a human-curated dbt model index must guide BigQuery SQL for a warehouse question. Emits a query with the correct fully-qualified model, grain, standard filters, partition bounds, and cost controls. Not for discovering undocumented models or executing warehouse changes.'
+description: 'Use when a human-curated dbt model index must guide BigQuery SQL for a warehouse question. Not for discovering undocumented models or executing warehouse changes.'
 ---
 
 # dbt model index

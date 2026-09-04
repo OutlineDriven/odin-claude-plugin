@@ -1,6 +1,6 @@
 ---
 name: pr-link-issue
-description: 'Use when a human explicitly asks to link a GitHub issue and Linear ticket to a pull request body. Appends one Issues block with the supplied references. Not for unlinking, searching for issues, or substituting missing identifiers.'
+description: 'Use when a human explicitly asks to link a GitHub issue and Linear ticket to a pull request body. Not for unlinking, searching for issues, or substituting missing identifiers.'
 disable-model-invocation: true
 ---
 

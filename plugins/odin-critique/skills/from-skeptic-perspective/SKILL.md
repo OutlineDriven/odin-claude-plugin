@@ -1,6 +1,6 @@
 ---
 name: from-skeptic-perspective
-description: 'Use when a user wants an answer only from the skeptic seat: cold reasoning without project loyalty. Emits a skeptic-perspective analysis without blending. Not for rebuilding from primitives: use from-first-principle. Read-only; no source or remote mutation.'
+description: 'Use when the user wants an answer only from the skeptic seat: cold reasoning without project loyalty. Not for rebuilding from primitives: use from-first-principle.'
 ---
 
 # From skeptic perspective

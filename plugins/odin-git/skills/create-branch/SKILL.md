@@ -1,6 +1,6 @@
 ---
 name: create-branch
-description: 'Use when the user asks to create a new branch or start work on one. Creates a local git branch named <type>/<short-description> on the correct base with no name collisions. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user asks to create a new branch or start work on one. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Create branch

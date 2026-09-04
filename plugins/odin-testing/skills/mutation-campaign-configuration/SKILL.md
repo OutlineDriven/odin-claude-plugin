@@ -1,6 +1,6 @@
 ---
 name: mutation-campaign-configuration
-description: 'Use when the user mentions mewt, muton, or mutation testing and asks to initialize, scope, estimate, configure, validate, or optimize a campaign before execution. Writes only the TOML config and validates readiness without generating mutants or touching source. Not for running the campaign: use mewt run separately.'
+description: 'Use when asked to initialize, scope, estimate, configure, validate, or optimize a mewt, muton, or mutation testing campaign before execution. Writes the TOML config. Not for running it: use mewt run.'
 ---
 
 # Mutation campaign configuration

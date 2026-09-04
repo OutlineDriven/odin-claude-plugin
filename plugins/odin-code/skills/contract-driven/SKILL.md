@@ -1,6 +1,6 @@
 ---
 name: contract-driven
-description: 'Use when crossing a public API boundary, guarding complex invariants, or hardening untrusted input or integration seams. Implements PRE/POST/INV contracts at the appropriate enforcement layer; violations fail explicitly at the boundary. No remote or irreversible mutation.'
+description: 'Use when crossing a public API boundary, guarding complex invariants, or hardening untrusted input or integration seams. Not for remote or irreversible changes.'
 ---
 
 # Contract-driven

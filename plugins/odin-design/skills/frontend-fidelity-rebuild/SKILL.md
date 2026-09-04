@@ -1,6 +1,6 @@
 ---
 name: frontend-fidelity-rebuild
-description: 'Use when an authorized reference surface needs a clean-room frontend reconstruction across static, motion, and responsive fidelity. Captures the reference at declared viewports and timelines, reconstructs, and measures fidelity against tolerances. Not for styling or component work without a reference surface.'
+description: 'Use when an authorized reference surface needs a clean-room frontend reconstruction across static, motion, and responsive fidelity. Not for styling or component work without a reference surface.'
 ---
 
 # Frontend fidelity rebuild

@@ -1,6 +1,6 @@
 ---
 name: minimap
-description: 'Use when a compact current-work view is needed from Git state, recorded repository test evidence, and optional graph.yaml. Return one read-only view that classifies every claim as conquered, disputed, or fog. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when the user needs a compact read-only current-work view from Git state, recorded test evidence, and optional graph.yaml. Not for tasks that need source or remote-system changes.'
 ---
 
 # Minimap

@@ -1,6 +1,6 @@
 ---
 name: why
-description: 'Use when the user asks "why does X work this way", requests design rationale, a postmortem, or a data-backed threshold. Dispatches parallel read-only investigators across seven evidence categories and returns a confidence-weighted cited narrative. Not for tasks that require source or remote-system changes; not for current runtime behavior: use how.'
+description: 'Use when asked "why does X work this way", for design rationale, a postmortem, or a data-backed threshold. Not for current runtime behavior: use how. Not for source or remote changes.'
 ---
 
 # Why

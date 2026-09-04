@@ -1,6 +1,6 @@
 ---
 name: setup
-description: 'Use when the user asks to set up or configure the agent environment from a fresh or existing clone: credentials and placeholders (gathered into a non-overwriting .env, with repository and tool access verified), a uv-managed virtual environment, a deterministic archive install of a third-party pack, or a role-to-model mapping file. Configures with explicit human confirmation at each step. Not for automated or unattended runs.'
+description: 'Use when the user asks to set up the agent environment. Covers credentials, placeholders, tool access checks, a uv venv, a pack install, or a role-model mapping file. Not for unattended runs.'
 disable-model-invocation: true
 ---
 

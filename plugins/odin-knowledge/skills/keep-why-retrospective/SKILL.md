@@ -1,6 +1,6 @@
 ---
 name: keep-why-retrospective
-description: 'Use when an existing repository needs its unexplained rationale recovered into topic files. Classifies evidence and status, marks unrecoverable items unknown, and leaves source conflicts open. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when an existing repository needs its unexplained rationale recovered into topic files. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Keep why retrospective

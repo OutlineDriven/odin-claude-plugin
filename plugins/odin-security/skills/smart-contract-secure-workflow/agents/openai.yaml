@@ -1,3 +1,3 @@
 interface:
   display_name: "Smart Contract Secure Workflow"
-  short_description: "Use when a smart-contract team invokes this before check-in or deployment to run a five-stage security workflow producing a consolidated pass or unresolved-risk report."
+  short_description: "Use when a smart-contract team invokes this before check-in or deployment."

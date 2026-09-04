@@ -1,6 +1,6 @@
 ---
 name: presentation-creator
-description: 'Use when asked to create a presentation, pitch deck, web deck, slides, or a deck from a topic and audience. Originates the narrative spine, slide content, and speaker notes, then applies design and runs an editorial QA pass. Web decks build as one self-contained, keyboard-navigable HTML file with real-data charts from caller-supplied brand tokens. Not for formatting existing content into slides.'
+description: 'Use when asked to create a presentation, pitch deck, web deck, slides, or a deck from a topic and audience. Not for formatting existing content into slides.'
 ---
 
 # Presentation creator

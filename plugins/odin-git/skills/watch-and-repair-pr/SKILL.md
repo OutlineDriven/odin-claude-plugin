@@ -1,6 +1,6 @@
 ---
 name: watch-and-repair-pr
-description: 'Use when a human explicitly invokes a watcher cycle for an open pull request that must be watched until mergeable or blocked. Classifies the PR and addresses bounded review findings on its own branch. Don''t use for merge, force-push, or work outside the invoked cycle.'
+description: 'Use when a human explicitly invokes a watcher cycle for an open pull request that must be watched until mergeable or blocked. Not for merge, force-push, or work outside the invoked cycle.'
 disable-model-invocation: true
 ---
 

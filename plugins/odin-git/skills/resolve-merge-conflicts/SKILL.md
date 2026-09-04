@@ -1,6 +1,6 @@
 ---
 name: resolve-merge-conflicts
-description: 'Use when a merge, rebase, cherry-pick, or stash pop stops on conflicts. Read both intents from primary sources, resolve every hunk, verify with scoped checks, and finish the integration. Not for people-mediation conflicts: use culture-conflict-mediation.'
+description: 'Use when a merge, rebase, cherry-pick, or stash pop stops on conflicts. Not for people-mediation conflicts: use culture-conflict-mediation.'
 ---
 
 # Resolve merge conflicts

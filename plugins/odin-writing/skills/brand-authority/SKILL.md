@@ -1,6 +1,6 @@
 ---
 name: brand-authority
-description: 'Use when the user asks for branded or style-governed output. Produces a deliverable that follows a fetched brand authority and states the material constraints that shaped it. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user asks for branded or style-governed output. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Brand authority

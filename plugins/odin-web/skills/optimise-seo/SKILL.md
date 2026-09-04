@@ -1,6 +1,6 @@
 ---
 name: optimise-seo
-description: 'Use when asked to make a Next.js App Router application crawlable, indexable, and structurally optimized for search with green Core Web Vitals. Configures sitemaps, robots, metadata, structured data, canonicals, internal linking, and CWV budgets, then validates with build, curl, and Lighthouse evidence. Not for security-header configuration or remote mutations.'
+description: 'Use when asked to make a Next.js App Router app crawlable, indexable, and search-optimized for sitemaps, robots, canonicals, and Core Web Vitals. Not for security headers or remote mutations.'
 ---
 
 # Optimise SEO

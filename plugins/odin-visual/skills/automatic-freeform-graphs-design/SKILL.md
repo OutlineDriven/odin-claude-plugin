@@ -1,6 +1,6 @@
 ---
 name: automatic-freeform-graphs-design
-description: 'Use when a user wants a looser conceptual graph for exploratory work. Generates a freeform conceptual graph that the user can explore. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a user wants a looser conceptual graph for exploratory work. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Automatic freeform graphs design

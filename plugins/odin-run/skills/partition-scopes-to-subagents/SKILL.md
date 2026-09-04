@@ -1,6 +1,6 @@
 ---
 name: partition-scopes-to-subagents
-description: 'Use when asked to partition non-overlapping scopes across subagents and drive each to completion with fresh review, fix reports, and a glanceable actual-work map. Not for concurrent independent sub-tasks: use parallel-launch.'
+description: 'Use when asked to partition non-overlapping scopes across subagents and drive each to completion. Not for concurrent independent sub-tasks: use parallel-launch.'
 ---
 
 # Partition scopes to subagents

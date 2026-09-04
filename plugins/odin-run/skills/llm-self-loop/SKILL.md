@@ -1,6 +1,6 @@
 ---
 name: llm-self-loop
-description: 'Use when a button click, dashboard check, or human verdict sits inside an iteration loop. Replaces it with an autonomous gate or moves non-automatable work outside the loop. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a button click, dashboard check, or human verdict sits inside an iteration loop and needs an autonomous gate. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # LLM self loop

@@ -1,6 +1,6 @@
 ---
 name: github-issue-dedupe
-description: 'Use when finding duplicate GitHub issues or checking for similar issues against a target issue. Runs a multi-strategy search and returns a duplicates classification. Don''t use for closing, labeling, or modifying any duplicate issue.'
+description: 'Use when finding duplicate GitHub issues or checking for similar issues against a target issue. Not for closing, labeling, or modifying any duplicate issue.'
 disable-model-invocation: true
 ---
 

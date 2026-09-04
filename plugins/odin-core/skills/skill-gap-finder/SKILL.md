@@ -1,6 +1,6 @@
 ---
 name: skill-gap-finder
-description: 'Use when the user suspects no installed skill covers a task and wants proof. Searches the installed catalog exhaustively, names the owning skill if one exists without invoking it, or writes a precise missing-skill brief if none does. Never routes or invokes the matched skill.'
+description: 'Use when the user suspects no installed skill covers a task and wants proof. Names the owning skill or writes a missing-skill brief. Never routes or invokes the matched skill.'
 ---
 
 # Skill gap finder

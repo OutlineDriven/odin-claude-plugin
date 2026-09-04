@@ -1,6 +1,6 @@
 ---
 name: meaningful-test-coverage
-description: 'Use when a test surface needs coverage raised to a configured target with behavior-guarding assertions, not vacuous execution-only tests. Binds coverage metric and tool, mutation tool and kill threshold, measures baseline, adds guarding tests, and re-measures. Not for line-coverage inflation without mutation proof.'
+description: 'Use when a test surface needs behavior-guarding coverage raised to a configured target with mutation kill evidence. Not for line-coverage inflation without mutation proof.'
 ---
 
 # Meaningful test coverage

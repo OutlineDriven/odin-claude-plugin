@@ -1,6 +1,6 @@
 ---
 name: token-integration-analyzer
-description: 'Use when a token implementation or integration needs standards, privilege, nonstandard-behavior, and defensive-integration analysis. Returns a prioritized remediation report. Not for tasks that require source or remote-system changes.'
+description: 'Use when a token implementation or integration needs standards, privilege, nonstandard-behavior, and defensive-integration analysis. Not for source or remote-system changes.'
 ---
 
 # Token integration analyzer

@@ -1,3 +1,3 @@
 interface:
   display_name: "Test Migration Coverage Gate"
-  short_description: "Use when about to delete a test on the claim that a new harness, suite, or scenario already covers it."
+  short_description: "Use when about to delete a test that a new harness, suite, or scenario covers."

@@ -1,6 +1,6 @@
 ---
 name: evaluation-leakage-audit
-description: 'Use when reviewing an evaluation, benchmark, or scoring harness for leakage or contamination. Returns a read-only audit naming detected leakage patterns, where independent ground truth enters or fails to enter, and a fix for each finding.'
+description: 'Use when reviewing an evaluation, benchmark, or scoring harness for leakage or contamination.'
 ---
 
 # Evaluation leakage audit

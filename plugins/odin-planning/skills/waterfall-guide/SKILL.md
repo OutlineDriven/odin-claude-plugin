@@ -1,6 +1,6 @@
 ---
 name: waterfall-guide
-description: 'Use when a user wants to lock greenfield architecture and interfaces early for coherent parallel execution. Produces a locked architecture document with module inventory, interface contracts, cross-cutting ownership, and open questions, distributed to execution teams as the coordination contract.'
+description: 'Use when a user wants to lock greenfield architecture and interfaces early for coherent parallel execution.'
 ---
 
 # Waterfall guide

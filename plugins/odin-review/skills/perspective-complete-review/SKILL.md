@@ -1,6 +1,6 @@
 ---
 name: perspective-complete-review
-description: 'Use when one named review viewpoint must run fix cycles until a fresh reviewer finds nothing. Leaves verified machine-owned fixes and a written verdict. Not for multi-viewpoint review or remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when one named review viewpoint must run fix cycles until a fresh reviewer finds nothing. Not for multi-viewpoint review or remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Perspective complete review

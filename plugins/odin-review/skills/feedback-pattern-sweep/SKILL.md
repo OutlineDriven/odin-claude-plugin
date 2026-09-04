@@ -1,6 +1,6 @@
 ---
 name: feedback-pattern-sweep
-description: 'Use when recent resolved feedback may reveal a broader recurring defect pattern: sweep resolved feedback for shared root causes, search the project surface for generalized recurrence, and verify no recurrence remains. Not for source-level feedback collection; use feedback-sweep for that.'
+description: 'Use when recent resolved feedback may reveal a broader recurring defect pattern across the project surface. Not for source-level feedback collection: use feedback-sweep.'
 ---
 
 # Feedback pattern sweep

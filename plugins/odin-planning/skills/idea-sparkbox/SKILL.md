@@ -1,6 +1,6 @@
 ---
 name: idea-sparkbox
-description: 'Use when the user asks to park ideas or inspiration for later. Stores one short project card per qualifying item under idea-sparkbox/ without organizing it. Never stores code, backlog, or divergence-class cards. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user asks to park ideas or inspiration for later. Not for code, backlog, or divergence-class cards, or remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Idea sparkbox

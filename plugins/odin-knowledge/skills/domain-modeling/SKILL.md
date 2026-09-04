@@ -1,6 +1,6 @@
 ---
 name: domain-modeling
-description: 'Use when pinning down domain terminology, maintaining the domain model, or when a term conflicts or needs sharpening. Resolves each term to one canonical owner, records it in CONTEXT.md with rejected synonyms, and keeps the glossary implementation-free.'
+description: 'Use when pinning down domain terminology, maintaining the domain model, or when a term conflicts or needs sharpening.'
 ---
 
 # Domain modeling

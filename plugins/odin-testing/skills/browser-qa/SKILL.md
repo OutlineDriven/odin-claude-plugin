@@ -1,6 +1,6 @@
 ---
 name: browser-qa
-description: 'Use when the user runs /browser-qa to run the QA verification pass and return report-only results without entering a fix loop. Runs configured build, test, and lint checks in order, collects findings, and writes one local report. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user runs /browser-qa for report-only QA results without entering a fix loop. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Browser qa

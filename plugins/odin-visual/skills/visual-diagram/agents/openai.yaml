@@ -1,3 +1,3 @@
 interface:
   display_name: "Visual Diagram"
-  short_description: "Use when the user asks to diagram, draw, map out, walk through, or visually explain a topic, system, process, or architecture."
+  short_description: "Use when asked to diagram, draw, map out, walk through, or visually explain a topic, system, process, or architecture."

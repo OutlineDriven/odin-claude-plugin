@@ -1,6 +1,6 @@
 ---
 name: cybernetic-loop
-description: 'Use when the caller supplies one falsifiable out-of-happy-path invariant and a finite patch budget. Restores it through bounded candidate patches or reverts the run and reports non-convergence. Not for normal feature delivery or universal retries.'
+description: 'Use when the caller supplies a falsifiable out-of-happy-path invariant and a finite budget. Restores via bounded patches or reverts. Not for normal feature delivery or universal retries.'
 ---
 
 # Cybernetic loop

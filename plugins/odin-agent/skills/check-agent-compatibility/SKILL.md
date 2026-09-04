@@ -1,6 +1,6 @@
 ---
 name: check-agent-compatibility
-description: 'Use when a human explicitly asks for a full repository agent-compatibility pass. Validates agent configuration surfaces, runs read-only startup and config loading, and returns a scored compatibility report with prioritized fixes. Not for tasks that require source or remote-system changes.'
+description: 'Use when a human explicitly asks for a full repository agent-compatibility pass returning a scored report with prioritized fixes. Not for tasks that require source or remote-system changes.'
 ---
 
 # Check agent compatibility

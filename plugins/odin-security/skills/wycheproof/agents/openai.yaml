@@ -1,3 +1,3 @@
 interface:
   display_name: "Wycheproof"
-  short_description: "Use when validating a cryptographic implementation against Project Wycheproof vectors to prove it accepts/rejects them correctly, or when explaining why an implementation disagrees with a vector."
+  short_description: "Use when validating crypto against Project Wycheproof vectors, or explaining a disagreement with a vector."

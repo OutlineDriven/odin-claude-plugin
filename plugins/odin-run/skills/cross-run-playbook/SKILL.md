@@ -1,6 +1,6 @@
 ---
 name: cross-run-playbook
-description: 'Use when a long agentic project needs each cycle to produce a learning memo with lessons, a keep/iterate/restart decision, and version labels only on quality-cleared artifacts. Drives each slice through the real surface and captures evidence before iterating. Not for single-pass builds.'
+description: 'Use when a long agentic project needs each cycle to end in a learning memo and a keep/iterate/restart decision. Not for single-pass builds.'
 ---
 
 # Cross-run playbook

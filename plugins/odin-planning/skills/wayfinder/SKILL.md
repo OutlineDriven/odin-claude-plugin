@@ -1,6 +1,6 @@
 ---
 name: wayfinder
-description: 'Use when a greenfield project or large feature build will not fit in a single agent session. Charts a route by naming the destination, mapping the fog, and graduating decision tickets on the frontier. Don''t use for implementation, remote credential changes, or work that fits in one session.'
+description: 'Use when a greenfield project or large feature build will not fit in a single agent session. Don''t use for implementation, remote credential changes, or work that fits in one session.'
 disable-model-invocation: true
 ---
 

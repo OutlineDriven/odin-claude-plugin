@@ -1,6 +1,6 @@
 ---
 name: project-findings-onto-graph
-description: 'Use when SARIF results, reviewer annotations, or a third-party finding export must be projected onto an existing program graph and cross-referenced with precomputed reachability or blast-radius evidence, with every finding left at its source status. Not for building the graph; use build-program-graph. Not for triaging one finding; use triage-security-finding.'
+description: 'Use when SARIF, reviewer annotations, or third-party findings must be projected onto a program graph. Not for building graph: use build-program-graph. Not for triage: use triage-security-finding.'
 ---
 
 # Project findings onto a program graph

@@ -1,6 +1,6 @@
 ---
 name: decide
-description: 'Use when the user has a fork and wants it resolved and applied, not explored: "decide this", "choose the path", or "decide and fix it". Grounds the fork, frames one single-select with a recommended default, takes the pick, and applies it in the same turn.'
+description: 'Use when the user has a fork and wants it resolved and applied, not explored: "decide this", "choose the path", or "decide and fix it".'
 ---
 
 # Decide

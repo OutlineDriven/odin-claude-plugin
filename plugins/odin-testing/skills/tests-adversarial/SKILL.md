@@ -1,6 +1,6 @@
 ---
 name: tests-adversarial
-description: 'Use when hardening error handling, validating boundary behavior, or hunting silent failures. Not for feature development, use tdd (offensive-first); not for test deletion, use tests-purge-unneeded; not for remote or irreversible changes.'
+description: 'Use when hardening error handling, validating boundary behavior, or hunting silent failures. Not for feature development: use tdd. Not for test deletion: use tests-purge-unneeded.'
 ---
 
 # Adversarial test authoring

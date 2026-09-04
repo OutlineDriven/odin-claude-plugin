@@ -1,6 +1,6 @@
 ---
 name: port-static-analysis-rule
-description: 'Use when an existing static-analysis rule must be ported to another language or analyzer, producing an independently validated rule with vulnerable, safe, and edge-case parity tests. Use this for cross-language rule porting, not for authoring a new rule from a vulnerability description (use semgrep-rule-authoring) or for running scans (use semgrep-security-scan).'
+description: 'Use when an existing static-analysis rule must be ported to another language or analyzer. Not for authoring a new rule, use semgrep-rule-authoring. Not for running scans, use semgrep-security-scan.'
 ---
 
 # Port a static-analysis rule

@@ -1,6 +1,6 @@
 ---
 name: scaffold-nextjs
-description: 'Use when asked to scaffold a Next.js turborepo end to end and verify it. Produces a working local turborepo with verified app setup, turbo configuration, and passing root gates. Deployment and launch are deferred to a human. Not for a CLI scaffold; use scaffold-cli; for course exercises; use scaffold-exercises.'
+description: 'Use when asked to scaffold a Next.js turborepo end to end and verify it. Not for a CLI scaffold: use scaffold-cli. Not for course exercises: use scaffold-exercises.'
 ---
 
 # Scaffold Next.js

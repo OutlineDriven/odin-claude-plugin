@@ -1,6 +1,6 @@
 ---
 name: gh-review-requests
-description: 'Use when the user asks to find PRs to review or check the team review queue. Returns a table of open PRs needing review with URLs and reasons. Not for summarizing PR feedback: use get-pr-comments. Read-only.'
+description: 'Use when the user asks to find PRs to review or check the team review queue. Not for summarizing PR feedback: use get-pr-comments. Read-only.'
 ---
 
 # Gh review requests

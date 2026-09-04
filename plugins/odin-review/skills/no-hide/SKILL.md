@@ -1,6 +1,6 @@
 ---
 name: no-hide
-description: 'Use when the user asks to detect clever-concealment patterns that obscure real code structure. Scans every file exhaustively and flags each instance with location and severity. Not for refactoring the concealment away: use unleak-abstraction.'
+description: 'Use when the user asks to detect clever-concealment patterns that obscure real code structure. Not for refactoring the concealment away: use unleak-abstraction.'
 ---
 
 # No hide

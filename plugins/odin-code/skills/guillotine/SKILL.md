@@ -1,6 +1,6 @@
 ---
 name: guillotine
-description: 'Use when a repository or subsystem needs dead, duplicate, superseded, or generated residue removed across more than one artifact class, code, docs, tests, dependencies, config, workflows, generated files, while preserving observable behavior. Evidence-backed cross-surface purge, not a single enumerated set. Not for deleting an already enumerated record set: use clean-clean-cut.'
+description: 'Use when dead, duplicate, superseded, or generated residue must leave more than one artifact class of a repo or subsystem, preserving behavior. Not for one enumerated record set: use clean-clean-cut.'
 ---
 
 # Guillotine

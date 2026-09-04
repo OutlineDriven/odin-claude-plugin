@@ -1,6 +1,6 @@
 ---
 name: interview-me
-description: 'Use when a user asks to define requirements or choose between options. A structured interview surfaces every unstated assumption one question at a time and produces a user-approved decision record before any file change. Not for intent-from-data: use intent-proposal.'
+description: 'Use when a user asks to define requirements or choose between options. A structured interview surfaces every unstated assumption before file changes. Not for intent-from-data: use intent-proposal.'
 ---
 
 # Interview me

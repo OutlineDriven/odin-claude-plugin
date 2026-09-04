@@ -1,6 +1,6 @@
 ---
 name: prism
-description: 'Use when one reviewer angle is insufficient or the user asks to prism an artifact or review it from different angles. Selects independent lenses, strips session framing, fans out fresh zero-context reads, and reports divergences before convergences with one decisive resolving question. Not for source or remote-system changes.'
+description: 'Use when one reviewer angle is insufficient or the user asks to prism an artifact or review it from different angles. Not for source or remote-system changes.'
 ---
 
 # Prism

@@ -1,6 +1,6 @@
 ---
 name: humanizer-en-asd-ste100
-description: 'Use when asked to rewrite technical English for STE compliance, stripping ambiguity and AI-style patterns so non-native readers and downstream agents parse every sentence. Not for French de-AI-ification; use humaniseur-fr.'
+description: 'Use when asked to rewrite technical English for STE compliance, stripping ambiguity and AI-style patterns. Not for French de-AI-ification: use humaniseur-fr.'
 ---
 
 # Humanizer en ASD-STE100

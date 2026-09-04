@@ -1,6 +1,6 @@
 ---
 name: visual-diagram
-description: 'Use when the user asks to diagram, draw, map out, walk through, or visually explain a topic, system, process, or architecture. Produces a durable self-contained HTML file opened in the browser, or an ephemeral inline SVG fragment in a visualizer fence. Not for Excalidraw diagrams or document-embedded diagrams; use visual-argument-diagram or embed-diagram.'
+description: 'Use when asked to diagram, draw, map out, walk through, or visually explain a topic, system, process, or architecture. Not for Excalidraw or docs: use visual-argument-diagram or embed-diagram.'
 ---
 
 # Visual diagram

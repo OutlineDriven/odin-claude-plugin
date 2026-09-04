@@ -1,6 +1,6 @@
 ---
 name: todo-add
-description: 'Use when a message contains `TODO ADD: <requirement>`, adding it to the durable source and the native todo in the same turn. Not for deepening coarse task lists, use todos-enhance; not for re-syncing stale lists, use todos-update; not for retitling, reordering, or completing existing todos.'
+description: 'Use when a message contains `TODO ADD: <requirement>`. Not for deepening coarse lists: use todos-enhance. Not for resyncing lists: use todos-update. Not for retitling/reordering/completing todos.'
 ---
 
 # Todo add

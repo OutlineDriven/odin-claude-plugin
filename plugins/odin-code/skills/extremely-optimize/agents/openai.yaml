@@ -1,3 +1,3 @@
 interface:
   display_name: "Extremely Optimize"
-  short_description: "Use when asked to run a performance campaign against a measured floor: rebuild hot paths from their floor, grade cold paths, and land each target as an atomic commit with a proven win."
+  short_description: "Use when asked to run a performance campaign against a measured floor."

@@ -1,6 +1,6 @@
 ---
 name: fromzero
-description: 'Use when the user wants to replace a greenfield attempt with a clean pad carrying only verified requirements. Preserves the old attempt in VCS history. Not for rebuilding from primitives: use from-first-principle. Requires a committed, VCS-recoverable current attempt.'
+description: 'Use when replacing a greenfield attempt with a clean pad of verified requirements. Not for rebuilding from primitives: use from-first-principle. Requires a committed, VCS-recoverable attempt.'
 disable-model-invocation: true
 ---
 

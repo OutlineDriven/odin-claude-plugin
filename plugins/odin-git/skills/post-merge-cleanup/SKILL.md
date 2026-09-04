@@ -1,6 +1,6 @@
 ---
 name: post-merge-cleanup
-description: 'Use when a landed merge, release, or completed change needs its cleanup surface reconciled. Scans the diff for stale TODOs, satisfied deprecations, unused flags, and documentation gaps; applies bounded local fixes in a worktree and files tickets with assigned ownership for the rest. Not for unrelated refactoring.'
+description: 'Use when a landed merge, release, or completed change needs its cleanup surface reconciled. Scans for stale TODOs, deprecations, unused flags, and doc gaps. Not for unrelated refactoring.'
 ---
 
 # Post-merge cleanup

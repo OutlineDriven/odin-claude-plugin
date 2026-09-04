@@ -1,3 +1,3 @@
 interface:
   display_name: "Humanizer En Asd Ste100"
-  short_description: "Use when asked to rewrite technical English for STE compliance, stripping ambiguity and AI-style patterns so non-native readers and downstream agents parse every sentence."
+  short_description: "Use when asked to rewrite technical English for STE compliance, stripping ambiguity and AI-style patterns."

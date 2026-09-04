@@ -1,6 +1,6 @@
 ---
 name: book-to-skill
-description: 'Use when the user names one book, course, paper, or source document and asks to distill it into a reusable skill. Classifies the source as procedure or reference, writes an attributed SKILL.md, and proves its routing. Not for a folder of sources, use map-corpus.'
+description: 'Use when the user names one book, course, paper, or source document and asks to distill it into a reusable skill. Not for a folder of sources: use map-corpus.'
 ---
 
 # Book to skill

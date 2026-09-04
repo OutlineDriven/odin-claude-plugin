@@ -1,6 +1,6 @@
 ---
 name: embed-diagram
-description: 'Use when the user runs /embed-diagram to render a Mermaid diagram offline and embed the SVG or PNG into a target document. Uses a local CLI renderer, not a remote page. Not for code-derived diagrams. No remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user runs /embed-diagram to render a Mermaid diagram offline and embed it into a document. Not for code-derived diagrams or remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Embed diagram

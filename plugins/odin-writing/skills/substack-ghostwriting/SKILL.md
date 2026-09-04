@@ -1,6 +1,6 @@
 ---
 name: substack-ghostwriting
-description: 'Use when asked to ghostwrite Substack newsletters and web posts from structured intake. Delivers formatted drafts with subject lines, SEO metadata, Notes teasers, and optional social posts. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when asked to ghostwrite Substack newsletters and web posts from structured intake. Not for tasks that require source or remote-system changes.'
 ---
 
 # Substack ghostwriting

@@ -1,6 +1,6 @@
 ---
 name: analysis-artifacts
-description: 'Use when the user requests a deep dive, exploratory analysis, or data analysis on BigQuery. Produces a dated analyses dir with an approved plan, cohorts, linked SQL and visualization artifacts, and TLDR. Read-only BigQuery warehouse queries are within authority; not for credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user requests a deep dive, exploratory analysis, or data analysis on BigQuery. Not for credential, publish, deploy, or irreversible changes.'
 ---
 
 # Analysis artifacts

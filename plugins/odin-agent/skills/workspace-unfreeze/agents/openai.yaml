@@ -1,3 +1,3 @@
 interface:
   display_name: "Workspace Unfreeze"
-  short_description: "Use when the user runs /workspace-unfreeze on a frozen path to remove the freeze lock marker so the path is editable again."
+  short_description: "Use when the user runs /workspace-unfreeze on a frozen path to make it editable again."

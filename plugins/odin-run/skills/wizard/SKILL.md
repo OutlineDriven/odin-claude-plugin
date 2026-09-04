@@ -1,6 +1,6 @@
 ---
 name: wizard
-description: 'Use when asked to generate an interactive bash wizard that walks a human through steps only they can perform (provisioning, credentials, dashboards, migrations, cutovers) and produce a self-contained script with the shared library inlined. Don''t use to perform remote, credential, publish, deploy, or irreversible changes directly; the wizard walks the human through those and the skill only authors the script.'
+description: 'Use when asked to generate a bash wizard for provisioning, credentials, dashboards, migrations, or cutovers a human performs. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Wizard

@@ -1,6 +1,6 @@
 ---
 name: ideate
-description: 'Use when a human asks to brainstorm, asks what to build, requests ideas for a divergent subject, or invokes /ideate. Produces a grounded ideation artifact committed locally with adjudicated survivors and a reason for every rejection.'
+description: 'Use when a human asks to brainstorm, asks what to build, requests ideas for a divergent subject, or invokes /ideate.'
 ---
 
 # Ideate

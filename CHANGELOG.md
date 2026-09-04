@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.1.0] - 2026-09-04
 ### Changed
+- Shortened every skill description to at most 200 characters (median 174, down from 269).
+  Each keeps its trigger phrases and `Not for` pointer and drops mechanism narration;
+  a fresh read-only review of every rewrite restored 95 lost triggers or pointers.
 - Folded `setup-tool-credentials` into `setup`: the credentials mechanism now makes `.env` safe
   before writing, validates credential formats, never overwrites existing keys, and verifies
   repository, tool access, and prerequisites.

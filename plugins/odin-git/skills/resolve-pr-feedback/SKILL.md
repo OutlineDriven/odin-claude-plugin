@@ -1,6 +1,6 @@
 ---
 name: resolve-pr-feedback
-description: 'Use when addressing GitHub PR review comments or resolving review threads. Fixes valid findings, posts quoted replies, and resolves threads via GraphQL. Don''t use for non-GitHub review feedback (use resolve), merging PRs, or branch management.'
+description: 'Use when addressing GitHub PR review comments or resolving review threads. Not for non-GitHub feedback (use resolve), merging PRs, or branch management.'
 disable-model-invocation: true
 ---
 

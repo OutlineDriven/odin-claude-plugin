@@ -1,6 +1,6 @@
 ---
 name: diagramming-code
-description: 'Use when the user asks for a call graph, class hierarchy, module dependency map, containment view, complexity heatmap, or data-flow view derived from code. Emits valid Mermaid from actual structure or explains why no edges exist. Not for embedded rendering: use embed-diagram; not for architecture diagrams: use visual-diagram.'
+description: 'Use when asked for a call graph, class hierarchy, dependency map, containment view, complexity heatmap, or data-flow view. Not for embedding: use embed-diagram. Not for architecture: visual-diagram.'
 ---
 
 # Diagramming code

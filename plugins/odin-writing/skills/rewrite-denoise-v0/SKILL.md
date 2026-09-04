@@ -1,6 +1,6 @@
 ---
 name: rewrite-denoise-v0
-description: 'Use when a user asks to clean up, sync, dedupe, de-noise, or rewrite an iterated artifact. Rewrites it as a clean v0 with no patch traces, changelog scars, or source noise. Not for a sediment rewrite of prose; use rewrite-clean-v0.'
+description: 'Use when a user asks to clean up, sync, dedupe, de-noise, or rewrite an iterated artifact. Not for a sediment rewrite of prose: use rewrite-clean-v0.'
 ---
 
 # Rewrite denoise V0

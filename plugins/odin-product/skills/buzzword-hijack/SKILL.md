@@ -1,6 +1,6 @@
 ---
 name: buzzword-hijack
-description: 'Use when a user wants to choose and execute a bounded positioning move that rides a jargon wave without confusing trend with truth. Produces a written positioning artifact at a named output path. Not for describing the jargon landscape: use buzzword-analysis.'
+description: 'Use when a user wants to choose and execute a bounded positioning move that rides a jargon wave. Not for describing the jargon weather of a domain: use buzzword-analysis.'
 ---
 
 # Buzzword hijack

@@ -1,6 +1,6 @@
 ---
 name: setup-pre-commit
-description: 'Use when installing or repairing one repository-local pre-commit hook using the project''s current gates, or when a repo needs package-manager-native commit-time checks. Extends existing hook tooling instead of duplicating it; JS uses Lefthook and Biome, Python/Rust/OCaml use prek. Not for remote or irreversible changes.'
+description: 'Use when installing or repairing a repo-local pre-commit hook from the project gates, or when a repo needs package-manager-native commit-time checks. Not for remote or irreversible changes.'
 ---
 
 # Setup pre-commit

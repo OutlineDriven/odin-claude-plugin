@@ -1,6 +1,6 @@
 ---
 name: reproduce-and-fix-issues
-description: 'Use when a trusted bug or performance report needs reproduction and fix. Drives the application, captures reproduction evidence, implements the minimal fix, and opens one draft PR with human approval. Not for untrusted reports or scope beyond the named feature.'
+description: 'Use when a trusted bug or performance report needs reproduction and fix. Not for untrusted reports or scope beyond the named feature.'
 disable-model-invocation: true
 ---
 

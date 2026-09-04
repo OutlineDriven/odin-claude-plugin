@@ -1,6 +1,6 @@
 ---
 name: visualise-widget
-description: 'Use when a user requests a comparison table, data record, metric card, stepper, or mockup widget. Returns a self-contained HTML fragment in a visualizer fence for sandboxed iframe rendering. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when a user requests a comparison table, data record, metric card, stepper, or mockup widget. Not for tasks that require source or remote-system changes.'
 ---
 
 # Visualise widget

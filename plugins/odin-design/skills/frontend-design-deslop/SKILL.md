@@ -1,6 +1,6 @@
 ---
 name: frontend-design-deslop
-description: 'Use when a user builds or styles a web frontend or asks to make it not look AI-generated. Commits a token system and crafted interface passing a slop-audit and WCAG 2.2 AA gate. Not for component-level UI work without the token system; use frontend-ui-engineering. Local writes only.'
+description: 'Use when a user builds or styles a web frontend or asks to make it not look AI-generated. Not for component-level UI work without the token system: use frontend-ui-engineering.'
 ---
 
 # Frontend design deslop

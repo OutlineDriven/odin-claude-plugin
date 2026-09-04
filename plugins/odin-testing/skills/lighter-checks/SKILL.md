@@ -1,6 +1,6 @@
 ---
 name: lighter-checks
-description: 'Use when verification is looping, would re-run untouched code, or duplicates an established proof. Runs the minimum complete gate once and delivers on the first green result. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when verification is looping, would re-run untouched code, or duplicates an established proof. Not for tasks that require source or remote-system changes.'
 ---
 
 # Lighter checks

@@ -1,6 +1,6 @@
 ---
 name: training-report
-description: 'Use when a trainer wants a training session documented as a compte rendu. Runs a structured interview, iterates a Markdown draft under user lead, then generates a .docx once after explicit content confirmation via python-docx. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a trainer wants a training session or workshop documented as a compte rendu with a final .docx. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Training report

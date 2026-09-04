@@ -1,6 +1,6 @@
 ---
 name: commit
-description: 'Use when a user asks to commit or save staged or unstaged changes, create a typed branch, or format history for changelog generation. Each logical concern is committed with a conventional-commits message carrying SemVer effect and issue-closing footers. Not for rewriting existing commit messages; use commit-economy.'
+description: 'Use when a user asks to commit or save staged or unstaged changes, create a typed branch, or format history for changelog generation. Not for rewriting existing commit messages: use commit-economy.'
 ---
 
 # Git commit

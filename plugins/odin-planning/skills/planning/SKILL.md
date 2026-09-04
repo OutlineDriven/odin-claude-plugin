@@ -1,6 +1,6 @@
 ---
 name: planning
-description: 'Use when a plan must be stress-tested, iteratively improved, and scored against a 5/5 quality bar across six dimensions. Drafts, scores with a deterministic rubric, and revises up to a fixed iteration limit. Not for a committed-direction brief; use plan. Not for task breakdown; use planning-and-task-breakdown.'
+description: 'Use when a plan must be stress-tested, iteratively improved, and scored against a 5/5 quality bar. Not for a committed-direction brief or task breakdown: use plan or planning-and-task-breakdown.'
 ---
 
 # Planning

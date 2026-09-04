@@ -1,6 +1,6 @@
 ---
 name: history-health
-description: 'Use when a user asks to audit what recall fed agents. Returns a bounded event table of kind, time, session count, bytes, and empty-result flag, or a null object when absent, and refuses digest text replay. Returns an explicit error when the CLI is missing rather than conflating it with an empty log. Not for tasks that require source or remote-system changes.'
+description: 'Use when a user asks to audit what recall fed agents. Not for source or remote-system changes.'
 ---
 
 # History usage audit

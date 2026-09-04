@@ -1,6 +1,6 @@
 ---
 name: watch-until
-description: 'Use when asked to poll a named changing job, log, or artifact until a supplied completion predicate holds. Returns a terminal verdict: predicate-holds, non-converged, or blocked. Not for source or remote-system changes. Not for continuous anomaly monitoring: use watch-for.'
+description: 'Use when asked to poll a named changing job, log, or artifact until a supplied completion predicate holds. Not for source or remote changes. Not for continuous anomaly monitoring: use watch-for.'
 ---
 
 # Watch until

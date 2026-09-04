@@ -1,6 +1,6 @@
 ---
 name: visual-brainstorm-companion
-description: 'Use when a brainstorming question is genuinely clearer shown than told: a real mockup, layout, or diagram. Starts a local key-gated HTTP/WebSocket server, pushes HTML fragments to the browser, and merges click selections back into the terminal reply. Not for text-only idea exploration; use brainstorm or ideate.'
+description: 'Use when a brainstorming question is genuinely clearer shown than told: a real mockup, layout, or diagram. Not for text-only idea exploration: use brainstorm or ideate.'
 ---
 
 # Visual brainstorm companion

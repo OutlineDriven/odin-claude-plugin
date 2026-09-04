@@ -1,6 +1,6 @@
 ---
 name: native-messaging-host-conflicts
-description: 'Use when a browser extension that talks to a native messaging host fails: the extension reports disconnected, tools time out, or the wrong host spawns because two client applications registered manifests for the same host name. Reconciles to exactly one active host with a reachable socket. Not for network, browser-install, or unrelated extension failures.'
+description: 'Use when a browser extension native messaging host fails, times out, or the wrong host spawns. Not for network, browser-install, or unrelated extension failures.'
 ---
 
 # Native messaging host conflicts

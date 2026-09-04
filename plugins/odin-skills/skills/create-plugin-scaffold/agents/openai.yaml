@@ -1,3 +1,3 @@
 interface:
   display_name: "Create Plugin Scaffold"
-  short_description: "Use when asked to create a local agent-plugin directory tree."
+  short_description: "Use when asked to create a local agent-plugin directory tree or marketplace package."

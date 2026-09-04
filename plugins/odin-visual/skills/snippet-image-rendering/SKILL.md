@@ -1,6 +1,6 @@
 ---
 name: snippet-image-rendering
-description: 'Use when the user explicitly names snipgrapher and wants code rendered to a polished PNG, SVG, or WebP at an explicit local path. Probes the installed CLI for supported flags and writes only the named image file. Not for other renderers, publishing, or remote actions.'
+description: 'Use when the user explicitly names snipgrapher and wants code rendered to a polished PNG, SVG, or WebP at an explicit local path. Not for other renderers, publishing, or remote actions.'
 ---
 
 # Snippet image rendering

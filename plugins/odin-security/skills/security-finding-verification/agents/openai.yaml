@@ -1,3 +1,3 @@
 interface:
   display_name: "Security Finding Verification"
-  short_description: "Use when a named security allegation needs a true-positive or false-positive verdict backed by data-flow and exploitability evidence."
+  short_description: "Use when a named security allegation needs a true-positive or false-positive verdict."

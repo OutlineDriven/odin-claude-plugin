@@ -1,6 +1,6 @@
 ---
 name: observability
-description: 'Use when adding telemetry, composing a durable observability surface, reviewing alerting rules, shipping a production feature, or diagnosing an opaque production issue. Instruments code with structured logs, bounded metrics, and critical-path tracing, then verifies local emission. Not for diagnosing a live failure right now, profiling measured slowness, or launch-day runbooks.'
+description: 'Use when adding telemetry, composing an observability surface, reviewing alerts, shipping a production feature, or diagnosing a production issue. Not for live failures, profiling, or launch runbooks.'
 ---
 
 # Observability

@@ -1,6 +1,6 @@
 ---
 name: plan-review
-description: 'Use when a plan path or text is supplied. Audits every item in the plan against the current codebase, including targetless decisions and assumptions, and produces an HTML accuracy verdict page. Not for tuning review questions, use plan-review-tune; not for scoring, use planning.'
+description: 'Use when a plan path or text is supplied for audit against the current codebase. Not for tuning review questions: use plan-review-tune. Not for scoring: use planning.'
 ---
 
 # Plan review

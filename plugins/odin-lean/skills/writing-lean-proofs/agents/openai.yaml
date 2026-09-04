@@ -1,3 +1,3 @@
 interface:
   display_name: "Writing Lean Proofs"
-  short_description: "Use when asked to design, write, review, refactor, lint, or performance-diagnose Lean 4 proofs, libraries, or tactic extensions under Mathlib conventions."
+  short_description: "Use when asked to design, write, review, refactor, lint, or performance-diagnose Lean 4 proofs, libraries, or tactics."

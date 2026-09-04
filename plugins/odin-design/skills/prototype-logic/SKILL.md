@@ -1,6 +1,6 @@
 ---
 name: prototype-logic
-description: 'Use when someone needs to press buttons and watch state change to check a state-model, logic, or data-shape question. Produces a throwaway HTML demo whose isolated logic answers the question and folds into real code after validation. Not for visual design: use prototype.'
+description: 'Use when someone needs to press buttons and watch state change to check a state-model, logic, or data-shape question. Not for visual design: use prototype.'
 ---
 
 # Prototype logic

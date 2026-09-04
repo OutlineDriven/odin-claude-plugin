@@ -1,6 +1,6 @@
 ---
 name: firebase-apk-scanner
-description: 'Use when an authorized user needs to assess mobile-backend exposure from compiled Android APKs. Extracts backend configuration from APK carriers, probes discovered endpoints for misconfiguration under written authorization, and returns a per-APK classification with evidence and verified cleanup. Covers Firebase, custom HTTP backends, and cloud function endpoints. Human-only invocation.'
+description: 'Use when an authorized user needs to assess mobile-backend exposure from compiled Android APKs, covering Firebase, custom HTTP backends, and cloud function endpoints. Human-only invocation.'
 disable-model-invocation: true
 ---
 

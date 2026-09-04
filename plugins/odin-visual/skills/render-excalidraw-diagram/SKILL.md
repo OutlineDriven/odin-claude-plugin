@@ -1,6 +1,6 @@
 ---
 name: render-excalidraw-diagram
-description: 'Use when a user supplies an existing .excalidraw file and asks for PNG rendering. Validates the JSON, renders via headless Chromium using the Excalidraw library fetched from esm.sh, and writes a PNG beside the source or to a specified output path. Not for creating or editing Excalidraw diagrams.'
+description: 'Use when a user supplies an existing .excalidraw file and asks for PNG rendering. Not for creating or editing Excalidraw diagrams.'
 ---
 
 # Render Excalidraw diagram

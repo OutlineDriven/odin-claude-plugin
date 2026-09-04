@@ -1,3 +1,3 @@
 interface:
   display_name: "Visual Diff Review"
-  short_description: "Use when asked to review a diff and produce a 7-section visual page: scope, before/after, risk, coupling, and merge recommendation, each cited from evidence."
+  short_description: "Use when asked to review a diff and produce a 7-section visual page."

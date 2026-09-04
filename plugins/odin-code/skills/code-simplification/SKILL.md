@@ -1,6 +1,6 @@
 ---
 name: code-simplification
-description: 'Use when the user asks to simplify, clean, or refine code. Measured mode cuts duplication or branch complexity under a green test gate; clarity mode refines readability while preserving behavior by reasoning. Not for new abstractions or whole-codebase refactors.'
+description: 'Use when the user asks to simplify, clean, or refine code. Not for new abstractions or whole-codebase refactors.'
 ---
 
 # Code simplification

@@ -1,6 +1,6 @@
 ---
 name: ast-grep
-description: 'Use when asked to run AST-based structural search, lint, or rewrite of code when regex is too fragile. Pattern is validated, blast radius reviewed, and rewrite landed at the correct scope. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to run AST-based structural search, lint, or rewrite of code when regex is too fragile. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # ast-grep

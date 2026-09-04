@@ -1,6 +1,6 @@
 ---
 name: respond-to-pr-comments-in-blocklist
-description: 'Use when the user explicitly wants to walk PR review comments, collect per-comment decisions, and post approved replies or resolve threads on GitHub. Don''t use for analyzing whether a comment is valid (use resolve) or for non-GitHub review feedback.'
+description: 'Use when the user explicitly wants to walk PR review comments and post approved replies or resolve threads on GitHub. Not for validity analysis: use resolve, or non-GitHub feedback.'
 disable-model-invocation: true
 ---
 

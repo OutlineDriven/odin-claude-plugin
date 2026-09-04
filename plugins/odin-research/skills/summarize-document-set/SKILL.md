@@ -1,6 +1,6 @@
 ---
 name: summarize-document-set
-description: 'Use when the user asks to summarize a set of documents, identify recurring themes and conflicting statements across multiple files, or synthesize internal docs. Reads a provided document set, extracts cited themes and conflicts, and writes a report. Not for single-document summaries or non-text sources.'
+description: 'Use when the user asks to summarize a set of documents, identify themes and conflicts across multiple files, or synthesize internal docs. Not for single-document summaries or non-text sources.'
 ---
 
 # Summarize document set

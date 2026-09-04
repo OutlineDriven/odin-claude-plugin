@@ -1,6 +1,6 @@
 ---
 name: taste
-description: 'Use when asking "overkill?", "elegant?", "audit", or "taste-test this", or setting a taste register. Returns a per-anchor verdict table with ranked fixes in audit mode, or loads the judgment register in anchor mode. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when asking "overkill?", "elegant?", "audit", or "taste-test this", or setting a taste register. Not for tasks that require source or remote-system changes.'
 ---
 
 # Taste

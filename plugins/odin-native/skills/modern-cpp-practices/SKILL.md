@@ -1,6 +1,6 @@
 ---
 name: modern-cpp-practices
-description: 'Use when C++ code is being written or reviewed and the compiler supports modern safe idioms. Returns a structured guidance report on supported features, anti-pattern replacements, and compiler-compatible hardening flags. Read-only; no source or remote-system changes.'
+description: 'Use when C++ code is being written or reviewed and the compiler supports modern safe idioms. Read-only. No source or remote-system changes.'
 ---
 
 # Modern C++ practices

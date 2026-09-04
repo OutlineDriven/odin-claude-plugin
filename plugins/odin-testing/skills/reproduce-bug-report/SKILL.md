@@ -1,6 +1,6 @@
 ---
 name: reproduce-bug-report
-description: 'Use when a bug report or UI-visible defect exists. Spawns repro agents to reproduce it locally and writes an artifact directory containing a structured summary with status, steps, environment, evidence, and next step. Not for fixing the bug, use reproduce-and-fix-issues.'
+description: 'Use when a bug report or UI-visible defect exists. Reproduces it locally. Not for fixing the bug: use reproduce-and-fix-issues.'
 ---
 
 # Reproduce bug report

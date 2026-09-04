@@ -1,6 +1,6 @@
 ---
 name: post-change-check-gate
-description: 'Use when an artifact or skill has just changed and is about to be called done, committed, or handed off. Runs the relevant hygiene checks and applies their findings. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when an artifact or skill has just changed and is about to be called done, committed, or handed off. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Post change check gate

@@ -1,6 +1,6 @@
 ---
 name: culture-onboarding-plan
-description: 'Use when a signed new hire''s Culture Index profile and team profiles need a first-90-days plan. Returns buddy choice, friction map, manager briefing, communication preferences, 30/60/90 actions, and success indicators. Not for manager coaching; use culture-manager-coaching.'
+description: 'Use when a signed new hire''s Culture Index profile and team profiles need a first-90-days plan. Not for manager coaching: use culture-manager-coaching.'
 ---
 
 # Culture onboarding plan

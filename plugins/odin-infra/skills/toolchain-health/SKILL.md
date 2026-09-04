@@ -1,6 +1,6 @@
 ---
 name: toolchain-health
-description: 'Use when the user runs /toolchain-health and wants a trustworthy green/yellow/red verdict on the installed toolchain with ranked repairs. Runs the project diagnostic tools read-only under a stated timeout, scores five categories against a threshold table, and presents a weighted composite verdict with a per-category dashboard. Not for tasks that require source or remote-system changes.'
+description: 'Use when the user runs /toolchain-health and wants a trustworthy green/yellow/red verdict on the installed toolchain with ranked repairs. Not for tasks that require source or remote-system changes.'
 ---
 
 # Toolchain health

@@ -1,6 +1,6 @@
 ---
 name: restart-keeping-lessons
-description: 'Use when an implementation has accumulated more workarounds than structure and another patch will not pay. Archives the failed implementation as evidence, carries forward only evidence-earned lessons, and delivers a fresh v0 vertical loop through a predeclared gate. Not for re-deriving a subsystem contract in place: use breaking-driven; not for rewriting one sedimented artifact: use rewrite-clean-v0.'
+description: 'Use when an implementation has more workarounds than structure and another patch will not pay. Not for in-place re-derivation: use breaking-driven. Not for one-artifact rewrites: use rewrite-clean-v0.'
 ---
 
 # Restart keeping lessons

@@ -1,6 +1,6 @@
 ---
 name: autolearn
-description: 'Use when a verified non-trivial fix lands. Automatically captures a durable learning doc to docs/solutions/ or a CONCEPTS.md entry, or determines nothing qualifies. Also handles refresh when solution docs may have drifted. Not for unverified fixes.'
+description: 'Use when a verified non-trivial fix lands or existing solution docs need refresh. Not for unverified fixes.'
 ---
 
 # Autolearn

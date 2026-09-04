@@ -1,6 +1,6 @@
 ---
 name: diamond-task
-description: 'Use when one issue or PR is too large for a worker and partitions into disjoint write sets. Builds a task DAG, composes a reviewed result, or names the falsified node or split. Not for independent parallel tasks: use parallel-launch. No remote or irreversible changes.'
+description: 'Use when one issue or PR is too large for a worker and partitions into disjoint write sets. Not for independent parallel tasks: use parallel-launch. No remote or irreversible changes.'
 ---
 
 # Diamond task

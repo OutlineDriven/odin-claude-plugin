@@ -1,6 +1,6 @@
 ---
 name: knowledge-refresh
-description: 'Use when a knowledge artifact needs review before sharing or execution. Runs strategic and data reviewers in parallel, merges P1/P2/P3/Clean findings, and blocks ordinary shipping on P1. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when a knowledge artifact needs review before sharing or execution. Not for source or remote-system changes.'
 ---
 
 # Knowledge review

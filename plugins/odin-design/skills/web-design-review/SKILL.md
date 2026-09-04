@@ -1,6 +1,6 @@
 ---
 name: web-design-review
-description: 'Use when the user runs /web-design-review with a URL to visually audit a live UI through the browser and fix findings in a screenshot-verified loop. Not for design direction picking; use design. Not for variant galleries; use design-variants.'
+description: 'Use when the user runs /web-design-review with a URL to visually audit and fix a live UI. Not for design direction: use design. Not for variant galleries: use design-variants.'
 ---
 
 # Web design review

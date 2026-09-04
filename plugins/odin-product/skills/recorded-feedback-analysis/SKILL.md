@@ -1,6 +1,6 @@
 ---
 name: recorded-feedback-analysis
-description: 'Use when asked to analyze a screen recording, voice capture, or meeting notes artifact for product feedback. Routes to a quick bug report or extensive analysis with timestamped evidence artifacts and a brainstorm handoff. Not for credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to analyze a screen recording, voice capture, or meeting notes artifact for product feedback. Not for credential, publish, deploy, or irreversible changes.'
 ---
 
 # Recorded feedback analysis

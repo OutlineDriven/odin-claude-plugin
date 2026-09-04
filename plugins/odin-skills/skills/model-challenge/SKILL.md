@@ -1,6 +1,6 @@
 ---
 name: model-challenge
-description: 'Use when a user requests an independent Codex or Gemini review of uncommitted code, a branch diff, or a specific commit. Returns findings with exact locations and confidence. Don''t use for unconfirmed or unattended external review sends, or for local source mutation.'
+description: 'Use when a user requests an independent Codex or Gemini review of uncommitted code, a branch diff, or a specific commit. Don''t use for unconfirmed or unattended review sends, or source mutation.'
 disable-model-invocation: true
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: weekly-synthesis
-description: 'Use when the user asks to compile a weekly synthesis, a weekly report, or a "what you need to know this week" digest from existing team reports: discovers the most recent report per source directory, synthesizes six sections with strict factual and recommendation separation, self-reviews before writing, and produces one local markdown file. Not for generating the underlying reports or ad-hoc summaries.'
+description: 'Use when the user asks for a weekly synthesis, a weekly report, or a "what you need to know this week" digest from team reports. Not for the underlying reports or ad-hoc summaries.'
 ---
 
 # Weekly synthesis

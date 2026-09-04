@@ -1,6 +1,6 @@
 ---
 name: cut-new-release-candidate
-description: 'Use when the user asks to cut, trigger, or start a release candidate for a release branch. Validates the branch against configured channel prefixes, dispatches the release workflow, receives the run URL, and posts a status notification. Don''t use for full releases, hotfixes, or non-release-candidate workflow dispatches.'
+description: 'Use when the user asks to cut, trigger, or start a release candidate for a release branch. Not for full releases, hotfixes, or non-release-candidate workflow dispatches.'
 disable-model-invocation: true
 ---
 

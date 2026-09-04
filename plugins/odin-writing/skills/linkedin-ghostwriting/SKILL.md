@@ -1,6 +1,6 @@
 ---
 name: linkedin-ghostwriting
-description: 'Use when a user provides a founder story or result and asks for a LinkedIn post with a chosen hook and humanized body. No file or credential mutations. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when a user gives a founder story or result and asks for a LinkedIn post with a chosen hook and humanized body. Not for tasks that require source or remote-system changes.'
 ---
 
 # LinkedIn ghostwriting

@@ -1,6 +1,6 @@
 ---
 name: compound
-description: 'Use when the user explicitly asks to save, curate, or consolidate what was learned, or closes a meaningful knowledge-work session. Curates at most three typed, approved knowledge records from existing lessons into docs/knowledge/, checks for duplicates and contradictions, and confirms by naming retrieval tags. No remote, publish, deploy, or irreversible mutation.'
+description: 'Use when the user explicitly asks to save, curate, or consolidate what was learned, or closes a meaningful knowledge-work session. Not for remote, publish, deploy, or irreversible changes.'
 ---
 
 # Knowledge compound

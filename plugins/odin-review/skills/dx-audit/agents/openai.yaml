@@ -1,3 +1,3 @@
 interface:
   display_name: "Dx Audit"
-  short_description: "Use when auditing the developer-facing surface of a CLI, SDK, library, or package: API contracts, errors, CLI behavior, public types, onboarding, and config."
+  short_description: "Use when auditing the developer-facing surface of a CLI, SDK, library, or package: API contracts, errors, public types, onboarding, and config."

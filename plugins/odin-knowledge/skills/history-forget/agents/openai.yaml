@@ -1,3 +1,3 @@
 interface:
   display_name: "History Forget"
-  short_description: "Use when the user human-confirmedly asks to remove a session or note from recall."
+  short_description: "Use when the user asks to remove a session or note from recall, or to unforget or list exclusions."

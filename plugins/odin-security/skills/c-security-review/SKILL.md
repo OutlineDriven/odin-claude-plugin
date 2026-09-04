@@ -1,6 +1,6 @@
 ---
 name: c-security-review
-description: 'Use when the user requests a userspace C or C++ security review with an explicit threat model, severity filter, and model. Runs a partitioned read-only audit and writes report, SARIF, and findings to a .c-review-results run directory. Not for kernel drivers, managed languages, or embedded code.'
+description: 'Use when the user requests a userspace C or C++ security review with an explicit threat model, severity filter, and model. Not for kernel drivers, managed languages, or embedded code.'
 ---
 
 # C security review

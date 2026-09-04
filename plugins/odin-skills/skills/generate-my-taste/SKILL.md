@@ -1,6 +1,6 @@
 ---
 name: generate-my-taste
-description: 'Use when asked to generate a personal taste skill from local evidence. Produces a <name>-taste skill with 5 evidence-derived anchors and a two-sided charter. Not for applying an existing taste register: use spine. Local writes only.'
+description: 'Use when asked to generate a personal taste skill from local evidence. Not for applying an existing taste register: use spine. Local writes only.'
 ---
 
 # Generate my taste

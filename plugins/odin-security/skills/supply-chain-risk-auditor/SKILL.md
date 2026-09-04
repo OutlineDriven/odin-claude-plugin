@@ -1,6 +1,6 @@
 ---
 name: supply-chain-risk-auditor
-description: 'Use when assessing npm, PyPI, or Go dependency supply-chain risk. Produces deterministic findings.json and report.md with lockfile-aware advisories, three-state coverage, and separate remediation guidance. Handles lockfile-absent paths by marking transitive dependencies unassessable. Do not use for remote or irreversible changes.'
+description: 'Use when assessing npm, PyPI, or Go dependency supply-chain risk, with lockfile-absent paths marked unassessable. Not for remote or irreversible changes.'
 ---
 
 # Supply chain risk auditor

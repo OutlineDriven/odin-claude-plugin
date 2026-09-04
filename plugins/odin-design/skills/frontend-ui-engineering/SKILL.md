@@ -1,6 +1,6 @@
 ---
 name: frontend-ui-engineering
-description: 'Use when asked to build or modify user-facing interfaces and pages with production quality: components, layouts, state management, WCAG 2.1 AA accessibility, and real content, with output that looks hand-crafted rather than AI-generated. Not for token-system design with slop-audit gates; use frontend-design-deslop. Local writes only.'
+description: 'Use when asked to build or modify production-quality components, layouts, state, and pages with WCAG 2.1 AA and real content. Not for token-system design: use frontend-design-deslop.'
 ---
 
 # Frontend UI engineering

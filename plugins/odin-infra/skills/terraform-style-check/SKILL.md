@@ -1,6 +1,6 @@
 ---
 name: terraform-style-check
-description: 'Use when writing, reviewing, or generating Terraform HCL that must pass fmt and validate with correct file organization, naming, version pinning, and security defaults. Not for module authoring, state operations, `terraform apply`, or remote state.'
+description: 'Use when writing, reviewing, or generating Terraform HCL that must pass fmt and validate. Not for module authoring, state operations, `terraform apply`, or remote state.'
 ---
 
 # Terraform style check

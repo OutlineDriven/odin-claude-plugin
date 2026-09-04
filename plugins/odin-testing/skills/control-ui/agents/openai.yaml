@@ -1,3 +1,3 @@
 interface:
   display_name: "Control UI"
-  short_description: "Use when asked to verify or reproduce browser or Electron UI behavior by capturing before and after evidence with no leftover processes."
+  short_description: "Use when asked to verify or reproduce browser or Electron UI behavior with before-and-after evidence and no leftover processes."

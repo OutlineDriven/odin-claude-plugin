@@ -1,6 +1,6 @@
 ---
 name: respond-to-slack-thread
-description: 'Use when the user asks to reply to or follow up on a specific Slack thread. Converts a permalink to channel and thread_ts, posts one reply, and returns its permalink. Not for top-level messages, deleting messages, or composing the reply text.'
+description: 'Use when the user asks to reply to or follow up on a specific Slack thread. Not for top-level messages, deleting messages, or composing the reply text.'
 disable-model-invocation: true
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: entropy-assisted-planning
-description: 'Use when the user explicitly requests a Tarot draw or casually delegates an ambiguous choice among multiple valid approaches. Runs a cryptographically random 12-house Tarot draw and interprets the spread to state one planning or investigation direction.'
+description: 'Use when the user explicitly requests a Tarot draw or casually delegates an ambiguous choice among multiple valid approaches.'
 ---
 
 # Entropy assisted planning

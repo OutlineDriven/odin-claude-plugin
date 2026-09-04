@@ -1,6 +1,6 @@
 ---
 name: repo-health-triage
-description: 'Use when a scheduled or watcher tick requests a repository-health pass. Classifies CI, PR, issue, commit, discussion, and run-state signals as High, Watch, or Noise with evidence, then persists a bounded report. Not for source, label, merge, or close mutation.'
+description: 'Use when a scheduled or watcher tick requests a repository-health pass. Not for source, label, merge, or close mutation.'
 ---
 
 # Repo health triage

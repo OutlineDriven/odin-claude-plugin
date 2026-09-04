@@ -1,6 +1,6 @@
 ---
 name: wontfix
-description: 'Use when the user wants to elicit refused directions, generalize them, and close matching tracker items as not planned. Don''t use for closing duplicates, spam, or items closed for other reasons (completed, obsolete).'
+description: 'Use when the user wants to elicit refused directions, generalize them, and close matching tracker items as not planned. Not for duplicates, spam, or items closed as completed or obsolete.'
 disable-model-invocation: true
 ---
 

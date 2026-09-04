@@ -1,3 +1,3 @@
 interface:
   display_name: "Writing Beats"
-  short_description: "Use when a grounded piece needs user-selected beat-by-beat assembly."
+  short_description: "Use when a grounded piece needs user-selected beat-by-beat assembly of verbatim beats."

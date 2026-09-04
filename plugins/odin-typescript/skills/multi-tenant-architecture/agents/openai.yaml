@@ -1,3 +1,3 @@
 interface:
   display_name: "Multi Tenant Architecture"
-  short_description: "Use when a request concerns multi-tenant app scaffolding, tenant isolation, custom domain wiring, or SaaS architecture for Cloudflare or Vercel."
+  short_description: "Use when a request concerns multi-tenant scaffolding, tenant isolation, domain wiring, or SaaS architecture on Cloudflare or Vercel."

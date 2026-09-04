@@ -1,6 +1,6 @@
 ---
 name: llms-visibility
-description: 'Use when asked to make a public site discoverable and readable by LLM agents using llms.txt, Markdown content negotiation, and alternate link headers. Emits standards-grounded artifacts, validates them by fetching each route, and reports per-route verification. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to make a site discoverable by LLM agents using llms.txt, Markdown content-negotiation, and alternate link headers. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # LLMs visibility

@@ -1,6 +1,6 @@
 ---
 name: context-engineering
-description: 'Use when a long session has accumulated stale or conflicting context or when the user asks to refresh it. Rechecks context against source and drops stale items so the acting context is provably current and minimal. No remote, credential, publish, deploy, or irreversible mutation.'
+description: 'Use when a long session has accumulated stale or conflicting context or the user asks to refresh it. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Context engineering

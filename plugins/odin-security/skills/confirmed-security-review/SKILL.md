@@ -1,6 +1,6 @@
 ---
 name: confirmed-security-review
-description: 'Use when the user asks for a security review, vulnerability audit, or review of injection, XSS, auth, or crypto. Returns only HIGH-confidence vulnerabilities with attacker-controlled input confirmed, or a cleared report. Not for CodeQL analysis: use codeql-security-analysis.'
+description: 'Use when the user asks for a security review, vulnerability audit, or review of injection, XSS, auth, or crypto. HIGH-confidence findings only. Not for CodeQL analysis: use codeql-security-analysis.'
 ---
 
 # Confirmed security review

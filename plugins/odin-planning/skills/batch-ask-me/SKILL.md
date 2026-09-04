@@ -1,6 +1,6 @@
 ---
 name: batch-ask-me
-description: 'Use when the user faces multi-fork decisions or unresolved prerequisites. Maps a decision tree and asks its frontier as batched single-select questions until shared understanding is confirmed. Also handles "batch questions". Not for one-at-a-time interviews: use interview-me.'
+description: 'Use when the user faces multi-fork decisions or unresolved prerequisites. Also handles "batch questions". Not for one-at-a-time interviews: use interview-me.'
 ---
 
 # Batch ask me

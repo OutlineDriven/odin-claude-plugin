@@ -1,6 +1,6 @@
 ---
 name: visual-render-tool
-description: 'Use when a model-invoked tool renders visual explanations of plans, architectures, diffs, or implementations into self-contained HTML files under the output jail; opens the browser or Glimpse viewer on demand. Also use when --quick is passed on diagram, diff-review, plan-review, or project-recap outcomes to render a validated spec to HTML. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a tool renders plans, architectures, diffs, or implementations as HTML, or --quick on a diagram or review outcome. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Visual render tool

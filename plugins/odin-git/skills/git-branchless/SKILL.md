@@ -1,6 +1,6 @@
 ---
 name: git-branchless
-description: 'Use when asked for multi-commit stack edits, rebases, fixups, or stacked-PR publishing with branchless git idioms and a publish gate. Not for plain-git workflows in repos without branchless; the skill stays inert there. Human-only.'
+description: 'Use when asked for multi-commit stack edits, rebases, fixups, or stacked-PR publishing with branchless git idioms. Not for plain-git workflows in repos without branchless.'
 disable-model-invocation: true
 ---
 

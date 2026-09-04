@@ -1,6 +1,6 @@
 ---
 name: claude-settings-audit
-description: 'Use when setting up a project, auditing agent command permissions, or asking which read-only bash commands and domains to allow. Inspects repository manifests to detect the tech stack and synthesizes a least-privilege command and domain allowlist that forbids state-modifying commands. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when setting up a project, auditing agent command permissions, or asking which read-only bash commands and domains to allow. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Agent command policy audit

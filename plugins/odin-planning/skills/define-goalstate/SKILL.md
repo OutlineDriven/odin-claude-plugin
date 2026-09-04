@@ -1,6 +1,6 @@
 ---
 name: define-goalstate
-description: 'Use when the user wants the finished-system contract for a piece of work. Authors an approved success-predicate document naming behavior, protocols, allowed states, forbidden states, and impossible states, with a concrete state-space proof and terminal failure behavior.'
+description: 'Use when the user wants the finished-system contract for a piece of work: behavior, protocols, allowed, forbidden, and impossible states with a state-space proof. Not for runtime verification.'
 ---
 
 # Define goalstate

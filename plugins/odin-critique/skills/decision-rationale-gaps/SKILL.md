@@ -1,6 +1,6 @@
 ---
 name: decision-rationale-gaps
-description: 'Use when a current decision needs pressure-testing until the rationale is clear to a skeptic. The result states the decision in plain terms or names the exact gap that prevents a defensible explanation. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when a current decision needs pressure-testing until the rationale is clear to a skeptic. Not for tasks requiring source or remote-system changes.'
 ---
 
 # Press decision

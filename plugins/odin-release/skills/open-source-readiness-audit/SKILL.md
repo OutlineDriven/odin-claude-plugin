@@ -1,6 +1,6 @@
 ---
 name: open-source-readiness-audit
-description: 'Use when the user asks whether a repository is ready for public release or wants a gap assessment. Runs a read-only local audit of secrets, docs, licensing, CI, and packaging; performs optional remote checks only when a GitHub URL is supplied. Not for choosing or applying a license: use open-source-license-selection.'
+description: 'Use when the user asks whether a repository is ready for public release or wants a gap assessment. Not for choosing or applying a license: use open-source-license-selection.'
 ---
 
 # Open source readiness audit

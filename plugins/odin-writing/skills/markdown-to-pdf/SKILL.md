@@ -1,6 +1,6 @@
 ---
 name: markdown-to-pdf
-description: 'Use when the user runs /markdown-to-pdf on Markdown to render a publication-quality PDF with emoji, diagram, landscape, and combined gates green. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user runs /markdown-to-pdf on Markdown to render a publication-quality PDF. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Make PDF from Markdown

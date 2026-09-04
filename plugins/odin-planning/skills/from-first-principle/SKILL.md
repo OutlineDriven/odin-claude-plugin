@@ -1,6 +1,6 @@
 ---
 name: from-first-principle
-description: 'Use when a user wants to rebuild a design, organization, or API from primitives. Produces a first-principles rebuild spec naming primitives, structure, and open assumptions. Not for a perspective take; use from-*-perspective seats. Writes one local spec; no remote mutation.'
+description: 'Use when a user wants to rebuild a design, organization, or API from primitives. Not for a perspective take: use from-*-perspective seats.'
 ---
 
 # From first principle

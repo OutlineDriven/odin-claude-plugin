@@ -1,6 +1,6 @@
 ---
 name: session-share
-description: 'Use when the user asks to beam, publish, or share the current local coding session to an authenticated remote receiver. Builds a redacted, size-bounded JSON payload from visible messages and aggregate tool counts, previews it for human confirmation, then POSTs it to a configured endpoint and returns the shareable URL. Not for viewing a transcript locally; use session-viewer.'
+description: 'Use when the user asks to beam, publish, or share the current local coding session to an authenticated remote receiver. Not for viewing a transcript locally: use session-viewer.'
 disable-model-invocation: true
 ---
 

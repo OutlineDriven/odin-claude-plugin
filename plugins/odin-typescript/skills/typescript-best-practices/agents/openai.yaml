@@ -1,3 +1,3 @@
 interface:
   display_name: "Typescript Best Practices"
-  short_description: "Use when TypeScript source must be shaped proactively toward narrow types, discriminated unions, readonly fields, exhaustive variants, typed trust boundaries, correct module resolution, and the TypeScript 7 strict-flag baseline."
+  short_description: "Use when TypeScript needs shaping toward narrow types, unions, exhaustive variants, and strict flags."

@@ -1,6 +1,6 @@
 ---
 name: mermaid-to-proverif
-description: 'Use when a cryptographic Mermaid sequenceDiagram is supplied and the user requests a ProVerif model with secrecy, authentication, replay, or forward secrecy verification. Parses the diagram, defines Dolev-Yao cryptographic primitives, maps messages to ProVerif processes, and runs verification queries. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a crypto Mermaid sequenceDiagram needs a ProVerif model for secrecy, authentication, replay, or forward-secrecy checks. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Mermaid to ProVerif

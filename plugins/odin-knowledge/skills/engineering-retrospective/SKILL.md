@@ -1,6 +1,6 @@
 ---
 name: engineering-retrospective
-description: 'Use when the user requests an engineering retrospective for a named period. Discovers repository and tracker telemetry, establishes source precedence, derives team breakdowns and evidence-backed habits, and writes a single report file. Not for an agent-environment retrospective: use agent-environment-retrospective; for a learning milestone: use learning-retrospective.'
+description: 'Use when a user requests an engineering retrospective for a period. Not for agent-environment retrospectives: use agent-environment-retrospective. For learning milestones: use learning-retrospective.'
 ---
 
 # Engineering retrospective

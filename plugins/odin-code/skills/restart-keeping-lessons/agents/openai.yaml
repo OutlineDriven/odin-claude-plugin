@@ -1,3 +1,3 @@
 interface:
   display_name: "Restart Keeping Lessons"
-  short_description: "Use when an implementation has accumulated more workarounds than structure and another patch will not pay."
+  short_description: "Use when an implementation has more workarounds than structure and another patch will not pay."

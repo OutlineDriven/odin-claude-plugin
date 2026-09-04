@@ -1,6 +1,6 @@
 ---
 name: docs-canvas
-description: 'Use when asked to render documentation as an interactive, navigable HTML canvas. Fetches files, directories, or URLs, extracts headings and sources, and produces a self-contained HTML artifact with a table of contents. Not for writing or restructuring docs.'
+description: 'Use when asked to render documentation as an interactive, navigable HTML canvas. Not for writing or restructuring docs.'
 ---
 
 # Docs canvas

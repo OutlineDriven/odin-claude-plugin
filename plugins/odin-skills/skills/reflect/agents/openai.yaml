@@ -1,3 +1,3 @@
 interface:
   display_name: "Reflect"
-  short_description: "Use when a completed task needs reflection on the invoked skills to propose and apply approved improvements, with explicit human approval before any edit."
+  short_description: "Use when a completed task needs reflection on invoked skills to propose and apply approved improvements."

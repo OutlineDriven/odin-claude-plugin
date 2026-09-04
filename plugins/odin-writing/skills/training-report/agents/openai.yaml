@@ -1,3 +1,3 @@
 interface:
   display_name: "Training Report"
-  short_description: "Use when a trainer wants a training session documented as a compte rendu."
+  short_description: "Use when a trainer wants a training session or workshop documented as a compte rendu with a final .docx."

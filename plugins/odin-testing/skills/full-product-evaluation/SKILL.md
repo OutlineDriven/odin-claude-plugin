@@ -1,6 +1,6 @@
 ---
 name: full-product-evaluation
-description: 'Use when a complete product, rather than one component, needs production-like acceptance evidence against its documented acceptance criteria. Traverses the capability inventory, records per-capability evidence, and stops at declared success, non-success, or bound. Not for single-component evaluation or evaluation without documented criteria.'
+description: 'Use when a complete product needs production-like acceptance evidence against documented acceptance criteria. Not for single-component evaluation or evaluation without documented criteria.'
 ---
 
 # Full-product evaluation

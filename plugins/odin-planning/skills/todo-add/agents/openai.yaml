@@ -1,3 +1,3 @@
 interface:
   display_name: "Todo Add"
-  short_description: "Use when a message contains `TODO ADD: <requirement>`, adding it to the durable source and the native todo in the same turn."
+  short_description: "Use when a message contains `TODO ADD: <requirement>`."

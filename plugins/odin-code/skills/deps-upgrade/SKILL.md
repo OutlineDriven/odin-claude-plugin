@@ -1,6 +1,6 @@
 ---
 name: deps-upgrade
-description: 'Use when dependency upgrades need tiered batches for CVEs, a major release, forced compatibility, scheduled hygiene, a pre-release lockfile audit, or a cadence-driven or vulnerability-triggered sweep. Classifies each update on a risk ladder, verifies it, or defers it with a reason. Not for PR queue triage; use github-backlog-triage.'
+description: 'Use when dependency upgrades need batching for CVEs, a major release, forced compatibility, a scheduled or vulnerability-triggered sweep. Not for PR queue triage: use github-backlog-triage.'
 ---
 
 # Deps upgrade

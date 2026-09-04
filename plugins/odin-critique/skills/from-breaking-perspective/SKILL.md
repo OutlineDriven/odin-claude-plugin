@@ -1,6 +1,6 @@
 ---
 name: from-breaking-perspective
-description: 'Use when a user wants an answer only from the breaking seat (stakeholders, dependencies, accounting, compatibility under destructive pressure). A breaking-perspective answer is emitted without blending. Not for any other from-* lens seat or multi-lens synthesis.'
+description: 'Use when a user wants an answer only from the breaking seat (stakeholders, dependencies, accounting, compatibility under destructive pressure). Not for any other from-* seat or multi-lens synthesis.'
 ---
 
 # From breaking perspective

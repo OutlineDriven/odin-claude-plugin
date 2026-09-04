@@ -1,6 +1,6 @@
 ---
 name: infrastructure-mentor
-description: 'Use when a user, especially a new hire, asks for mentoring, guidance, or explanation of infrastructure or engineering practices. Returns a clear, sourced explanation with references and concrete next learning steps.'
+description: 'Use when a user, especially a new hire, asks for mentoring, guidance, or explanation of infrastructure or engineering practices. Not for code changes.'
 ---
 
 # Infrastructure mentor

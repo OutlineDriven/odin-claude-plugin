@@ -1,6 +1,6 @@
 ---
 name: architect
-description: 'Use when non-trivial code needs designing before implementation, or an existing codebase needs its architecture improved: surveying for shallow modules, locating a seam, deepening a structure, hardening with guardrails, or making code testable. Not for architecture diagrams, deploy, remote, credential, or irreversible changes.'
+description: 'Use when non-trivial code needs a design before implementation, or an existing codebase needs its architecture improved. Not for architecture diagrams, deploy, remote, or irreversible changes.'
 ---
 
 # Architect

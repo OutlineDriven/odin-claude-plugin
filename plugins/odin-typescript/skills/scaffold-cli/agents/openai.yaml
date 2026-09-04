@@ -1,3 +1,3 @@
 interface:
   display_name: "Scaffold CLI"
-  short_description: "Use when asked to create a complete Node.js 24 TypeScript 7 command-line project with ESM, pnpm 11, tsdown, Biome, Vitest, Changesets, a locked CI workflow, and one observable command test."
+  short_description: "Use when asked to create a complete Node.js 24 TypeScript 7 command-line project."

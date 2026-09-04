@@ -1,6 +1,6 @@
 ---
 name: consult-deployment
-description: 'Use when the user asks to rank deployment platforms and stacks against their product with quantitative trade-offs. Enumerates candidates, gathers raw metrics, normalizes them to a common scale, applies user weighting, and returns a ranked list with per-axis scores. Read-only; no source or remote mutation.'
+description: 'Use when the user asks to rank deployment platforms and stacks against their product with quantitative trade-offs. Not for source or remote mutation.'
 ---
 
 # Consult deployment

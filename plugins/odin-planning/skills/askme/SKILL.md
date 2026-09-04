@@ -1,6 +1,6 @@
 ---
 name: askme
-description: 'Use when a task is ambiguous, maximum clarification is needed before planning, or the user requests exhaustive, collaborative, or adversarial askme mode. Runs Verbalized Sampling, fires batched clarifying questions, and confirms intent before planning proceeds. Not for source or remote-system changes; not for a single fork: use decide.'
+description: 'Use when a task is ambiguous or the user requests exhaustive, collaborative, or adversarial askme mode. Not for source or remote-system changes. Not for a single fork: use decide.'
 ---
 
 # Ask me

@@ -1,6 +1,6 @@
 ---
 name: cascade-dedup
-description: 'Use when prompt-doctrine is duplicated, drifted, or conflicting across output-style embeds and external harness AGENTS files. Strips duplicate directives from persona prefixes, repairs invariant-zone tail drift, classifies harness divergences, and records a divergence ledger before committing. Not for editing the canonical baseline itself.'
+description: 'Use when prompt-doctrine is duplicated, drifted, or conflicting across output-style embeds and external harness AGENTS files. Not for editing the canonical baseline itself.'
 disable-model-invocation: true
 ---
 

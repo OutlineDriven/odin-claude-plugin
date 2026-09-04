@@ -1,6 +1,6 @@
 ---
 name: mutation-triage-genotoxic
-description: 'Use when a mutation campaign has produced surviving mutants that need triage. Classifies each mutant as false-positive, missing-test, genotoxic, or removable using a coverage map, and proposes which tests to write or dead code to remove. Not for configuring or running campaigns: use mutation-campaign-configuration.'
+description: 'Use when a mutation campaign leaves surviving mutants needing triage. Classifies each as false-positive, missing-test, genotoxic, or removable. Not for setup: use mutation-campaign-configuration.'
 ---
 
 # Mutation triage genotoxic

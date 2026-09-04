@@ -1,6 +1,6 @@
 ---
 name: agents-md
-description: 'Use when setting up a repo for agents, adding AGENTS.md, auditing CLAUDE.md, scoring instructions, or pruning long/stale files via a three-check gate. Also handles lean pointer-only AGENTS.md under 100 lines. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when setting up an agent repo, adding AGENTS.md, auditing CLAUDE.md, pruning stale files, or writing a lean AGENTS.md. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Agents MD

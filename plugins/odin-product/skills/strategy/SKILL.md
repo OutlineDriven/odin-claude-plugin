@@ -1,6 +1,6 @@
 ---
 name: strategy
-description: 'Use when defining product strategy, starting or redirecting a product, or repairing stale STRATEGY.md. Interviews the user with reject-by-default pushback against a drafted strategy document, then writes accepted updates back. Not for project plans, roadmaps, scheduling, or work needing no interview.'
+description: 'Use when defining product strategy, starting or redirecting a product, or repairing stale STRATEGY.md. Not for project plans, roadmaps, scheduling, or work needing no interview.'
 disable-model-invocation: true
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: headed-browser-takeover
-description: 'Use when the user asks to open or take over a visible browser session, or needs to intervene in a live browser by hand, for example to solve a CAPTCHA or authenticate. Use for the headed takeover handshake: pre-flight cleanup, headed launch, mode confirmation, and a round-trip proof the user can see. Not for headless scraping or unattended automation.'
+description: 'Use when the user asks to open or take over a visible browser session by hand, for example to solve a CAPTCHA or authenticate. Not for headless scraping or unattended automation.'
 ---
 
 # Headed browser takeover

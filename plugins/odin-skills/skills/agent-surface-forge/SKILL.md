@@ -1,6 +1,6 @@
 ---
 name: agent-surface-forge
-description: 'Use when the user asks to audit or repair agent surfaces, plugin configs, agent definitions, skills, CLAUDE.md/AGENTS.md, docs, prompts, commands, or hooks. Produces a certainty-graded breadth report and applies only HIGH auto-fixable findings with --apply. Not for deep one-skill improvement, use skill-improver.'
+description: 'Use when asked to audit or repair agent surfaces (plugin configs, agent definitions, skills, CLAUDE.md/AGENTS.md, docs, prompts, commands, hooks). Not for one skill at depth: use skill-improver.'
 ---
 
 # Agent surface forge

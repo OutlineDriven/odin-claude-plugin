@@ -1,6 +1,6 @@
 ---
 name: fastify-schema-first-service
-description: 'Use when asked to build or extend a Fastify application: routes, plugins, JSON Schema validation/serialization, hooks/lifecycle, decorators, content types, and database wiring. Not for testing; use fastify-inject-testing; not for hardening; use fastify-production-hardening.'
+description: 'Use when building or extending a Fastify application: routes, plugins, hooks, database wiring. Not for testing: use fastify-inject-testing. Not for hardening: use fastify-production-hardening.'
 ---
 
 # Fastify schema first service

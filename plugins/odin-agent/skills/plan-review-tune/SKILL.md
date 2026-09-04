@@ -1,6 +1,6 @@
 ---
 name: plan-review-tune
-description: 'Use when plan-mode enforcement hooks intercept a plan review or the user runs /plan-review-tune to tune which plan-review questions fire. Persists the tuned question flow to a local question-registry and hook configuration. Not for auditing a plan against code: use plan-review.'
+description: 'Use when plan-mode enforcement hooks intercept a plan review or the user runs /plan-review-tune to tune which plan-review questions fire. Not for auditing a plan against code: use plan-review.'
 ---
 
 # Plan review tune

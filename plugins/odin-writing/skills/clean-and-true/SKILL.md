@@ -1,6 +1,6 @@
 ---
 name: clean-and-true
-description: 'Use when the automatic trigger applies: after editing a durable artifact, or when the user says "clean and true", "run the hygiene pass", or "taste the output". Routes the just-changed artifact through the hygiene passes the change earned and skips the rest.'
+description: 'Use when the user just edited a durable artifact, or says \"clean and true\", \"run the hygiene pass\", or \"taste the output\". Routes the artifact through the hygiene passes it earned.'
 ---
 
 # Clean and true

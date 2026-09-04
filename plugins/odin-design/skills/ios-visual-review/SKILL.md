@@ -1,6 +1,6 @@
 ---
 name: ios-visual-review
-description: 'Use when the user invokes /ios-visual-review to audit an iOS app''s visuals on a real device. Produces a per-screen visual-review report scoring ten dimensions 0-10 with a highest-impact fix for each. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user invokes /ios-visual-review to audit an iOS app''s visuals on a real device. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # iOS visual review

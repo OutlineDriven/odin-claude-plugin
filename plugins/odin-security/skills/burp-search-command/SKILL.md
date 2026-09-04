@@ -1,6 +1,6 @@
 ---
 name: burp-search-command
-description: 'Use when a human invokes the Burp search command with a required .burp project file and optional parser operation. Runs the Burp Suite project parser wrapper and returns JSON search results. Not for source or remote-system changes.'
+description: 'Use when a human invokes the Burp search command with a required .burp project file and optional parser operation. Not for source or remote-system changes.'
 ---
 
 # Burp search command

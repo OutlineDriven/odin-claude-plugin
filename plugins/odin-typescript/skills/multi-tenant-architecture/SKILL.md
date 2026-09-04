@@ -1,6 +1,6 @@
 ---
 name: multi-tenant-architecture
-description: 'Use when a request concerns multi-tenant app scaffolding, tenant isolation, custom domain wiring, or SaaS architecture for Cloudflare or Vercel. Scaffolds tenant routing, domain logic, platform config, and a management surface locally. Not for single-tenant apps; use standard project scaffolding.'
+description: 'Use when a request concerns multi-tenant scaffolding, tenant isolation, domain wiring, or SaaS architecture on Cloudflare or Vercel. Not for single-tenant apps: use standard project scaffolding.'
 ---
 
 # Multi-tenant architecture

@@ -1,6 +1,6 @@
 ---
 name: scrape
-description: 'Use when the user runs /scrape with a URL to extract page data and media through a browser workflow and save assets with a manifest to a local directory. Read-only; not for any mutating page action.'
+description: 'Use when the user runs /scrape with a URL to extract page data and media through a browser and save assets with a manifest locally. Read-only. Not for any mutating page action.'
 ---
 
 # Scrape

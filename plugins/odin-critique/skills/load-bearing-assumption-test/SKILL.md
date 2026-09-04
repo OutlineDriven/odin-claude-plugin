@@ -1,6 +1,6 @@
 ---
 name: load-bearing-assumption-test
-description: 'Use when the user asks why a plan is wrong or says "poke holes in this". Returns one load-bearing objection and the cheapest experiment that would prove whether it matters. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when the user asks why a plan is wrong or says "poke holes in this". Not for tasks that require source or remote-system changes.'
 ---
 
 # Load-bearing assumption test

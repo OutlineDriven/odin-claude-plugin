@@ -1,6 +1,6 @@
 ---
 name: webapp-testing
-description: 'Use when asked to verify frontend functionality, debug UI behavior, or capture browser screenshots and console logs against a local dev server. Generates a Playwright assertion script, executes it, and classifies PASS or FAIL from the exit code. Not for read-only browser inspection (use browser-testing) or remote, credential, publish, or deploy changes.'
+description: 'Use when asked to verify frontend or UI behavior, or capture browser screenshots and console logs. Not for read-only inspection: use browser-testing. Not for remote or deploy changes.'
 ---
 
 # Webapp testing

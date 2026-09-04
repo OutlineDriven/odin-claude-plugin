@@ -1,6 +1,6 @@
 ---
 name: architecture-diagram
-description: 'Use when the user asks to visualize an architecture as a self-contained HTML artifact with a hash-bound receipt. Also handles delta mode: comparing two snapshots, rendering what changed when both are supplied. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user asks to visualize an architecture as a self-contained HTML artifact, or compare two architecture snapshots. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Architecture diagram

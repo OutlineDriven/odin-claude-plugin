@@ -1,6 +1,6 @@
 ---
 name: rust-security-review
-description: 'Use when the user requests a security or correctness audit of a Rust crate, service, library, or subtree, especially unsafe, FFI, concurrency, async, or untrusted-input code. Dispatches cluster-based review workers with dedup and false-positive judging, and writes report.md and findings.sarif. Not for a general security audit. Use security-review.'
+description: 'Use when asked for a Rust security or correctness audit of a crate, service, or library with unsafe, FFI, concurrency, async, or untrusted-input code. Not for general review: use security-review.'
 ---
 
 # Rust security review

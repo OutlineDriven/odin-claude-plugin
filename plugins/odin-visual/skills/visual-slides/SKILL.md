@@ -1,6 +1,6 @@
 ---
 name: visual-slides
-description: 'Use when the user explicitly requests a slide deck by command, flag, or natural language. Generates a self-contained HTML deck in the diagrams directory with embedded CSS, JavaScript, keyboard navigation, and a progress indicator. Not for PowerPoint files.'
+description: 'Use when the user explicitly requests a slide deck by command, flag, or natural language. Not for PowerPoint files.'
 ---
 
 # Visual slides

@@ -1,6 +1,6 @@
 ---
 name: orchestration-patterns
-description: 'Use when work decomposes across subagents or role panels: select a coupling-based orchestration mechanism, spawn bounded subagents, verify every artifact owner-side, and write only the reconciled synthesis. Not for cloud-agent task-graph orchestration: use cloud-task-orchestrator.'
+description: 'Use when work decomposes across subagents or role panels and needs coupling-based orchestration. Not for cloud-agent task-graph orchestration: use cloud-task-orchestrator.'
 ---
 
 # Orchestration patterns

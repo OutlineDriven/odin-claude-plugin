@@ -1,6 +1,6 @@
 ---
 name: property-testing-fit-assessment
-description: 'Use when deciding whether PBT fits a code path, which property and library to choose, or whether a design exposes a meaningful property. Returns a verdict with strongest non-vacuous property, domain, strategy seam, and library, or a decline. Not for writing or reviewing.'
+description: 'Use when deciding whether PBT fits a code path, which property and library to choose, or whether a design exposes a meaningful property. Not for writing or reviewing.'
 ---
 
 # Property testing fit assessment

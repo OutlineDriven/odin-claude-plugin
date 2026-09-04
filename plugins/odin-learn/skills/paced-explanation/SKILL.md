@@ -1,6 +1,6 @@
 ---
 name: paced-explanation
-description: 'Use when asked to explain or teach a subsystem, module, pattern, or change in progressive layers from purpose to code depth. Grounds each layer in concrete file paths, line ranges, and symbols. Not for design rationale: use why. Not for source or remote-system changes.'
+description: 'Use when asked to explain or teach a subsystem, module, pattern, or change in progressive layers from purpose to code depth. Not for design rationale: use why. Not for source or remote-system changes.'
 ---
 
 # Paced explanation

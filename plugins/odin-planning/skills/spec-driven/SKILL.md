@@ -1,6 +1,6 @@
 ---
 name: spec-driven
-description: 'Use when starting a project or feature, requirements are unclear, or a change crosses modules. Produces an approved six-area spec, plan, tasks, and an offensive-first TDD implementation. Not for implementation from existing specs: use spec-driven-implementation.'
+description: 'Use when starting a project or feature, requirements are unclear, or a change crosses modules. Not for implementing from an existing spec: use spec-driven-implementation.'
 ---
 
 # Spec-driven development

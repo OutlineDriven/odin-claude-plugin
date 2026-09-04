@@ -1,6 +1,6 @@
 ---
 name: thumbnail-accuracy-scorecard
-description: 'Use when thumbnail concepts need real-size, accuracy-first scoring without misleading claims. Renders at real platform dimensions, scores against a fixed rubric with weighted accuracy dimensions, and writes an immutable receipt. Not for generating thumbnails or declaring winners that fail the accuracy rubric.'
+description: 'Use when thumbnail concepts need real-size, accuracy-first scoring without misleading claims. Not for generating thumbnails or declaring winners that fail the accuracy rubric.'
 ---
 
 # Thumbnail accuracy scorecard

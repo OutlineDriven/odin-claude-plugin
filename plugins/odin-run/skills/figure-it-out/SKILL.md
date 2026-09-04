@@ -1,6 +1,6 @@
 ---
 name: figure-it-out
-description: 'Use when a non-trivial task should be classified against the 23-playbook index and the matched playbook executed to verified completion on the real surface, or when asked to design a bespoke execution workflow because no playbook fits; verify a falsifiable predicate with a reviewable trail. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when non-trivial work should run a matched playbook to verified real-surface completion, or a bespoke workflow when none fits. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Figure it out

@@ -1,6 +1,6 @@
 ---
 name: swarm
-description: 'Use when asked to run partitioned parallel coverage or races across isolated workers, producing a consolidated evidence table with gaps and dropouts. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to run partitioned parallel coverage or races across isolated workers. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Swarm

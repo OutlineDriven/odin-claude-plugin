@@ -1,6 +1,6 @@
 ---
 name: shipping
-description: 'Use when deploying to production, planning a feature release, setting up launch safeguards, or running a canary release to promote or roll back with evidence. Branches on mode: plan-only produces a verified deployment plan; execute-rollout drives the staged rollout with health-signal gating and automatic halt on degradation. Not for local dev deploys or deploys without a confirmed rollback plan.'
+description: 'Use when deploying to production, planning a feature release, setting up launch safeguards, or running a canary release. Not for local dev deploys or deploys without a confirmed rollback plan.'
 disable-model-invocation: true
 ---
 

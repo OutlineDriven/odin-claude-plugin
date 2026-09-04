@@ -1,3 +1,3 @@
 interface:
   display_name: "Goal Prompt Drafting"
-  short_description: "Use when asked to draft copy-ready /goal objectives for long-running agents; returns one normalized one-line objective with measurable end state, grounded proof, easy-out invariants, a stop clause, and a Missing list."
+  short_description: "Use when asked to draft copy-ready /goal objectives for long-running agents."

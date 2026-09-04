@@ -1,6 +1,6 @@
 ---
 name: deprecate-and-migrate
-description: 'Use when asked to remove old code, migrate consumers, or decide whether to maintain or sunset a system. Produces a proven replacement, migrated consumers, removed obsolete tracked code, and rollback evidence. Not for untracked data or changes without VCS rollback.'
+description: 'Use when asked to remove old code, migrate consumers, or decide whether to maintain or sunset a system. Not for untracked data or changes without VCS rollback.'
 ---
 
 # Deprecate and migrate

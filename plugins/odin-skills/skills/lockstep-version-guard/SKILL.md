@@ -1,6 +1,6 @@
 ---
 name: lockstep-version-guard
-description: 'Use when a human invokes the release gate to prove every ODIN plugin shares one canonical version. Emits a per-file comparison and exits non-zero on mismatch. Don''t use to edit release metadata or for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a human invokes the release gate to prove every ODIN plugin shares one canonical version. Not for editing release metadata or remote, credential, publish, deploy, or irreversible changes.'
 disable-model-invocation: true
 ---
 

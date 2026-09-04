@@ -1,6 +1,6 @@
 ---
 name: reflect
-description: 'Use when a completed task needs reflection on the invoked skills to propose and apply approved improvements, with explicit human approval before any edit. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a completed task needs reflection on invoked skills to propose and apply approved improvements. Not for remote, credential, publish, deploy, or irreversible changes.'
 disable-model-invocation: true
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: design-variants
-description: 'Use when /design-variants generates distinct design directions and a gallery for selection. Not for one polished artifact: use polished-web-prototype; not for token-system direction picking: use design. No remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when /design-variants generates distinct design directions and a gallery for selection. Not for one polished artifact: use polished-web-prototype. Not for token-system picking: use design.'
 ---
 
 # Design variants

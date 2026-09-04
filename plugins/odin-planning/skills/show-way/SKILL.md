@@ -1,6 +1,6 @@
 ---
 name: show-way
-description: 'Use when the user asks for a flattened view of roadmaps and next actions. Returns a dependency-ordered task list with status glyphs and a next-actions frontier as chat output, without taking execution authority. Not for multi-session route planning: use wayfinder.'
+description: 'Use when the user asks for a flattened view of roadmaps and next actions. Not for multi-session route planning: use wayfinder.'
 ---
 
 # Show way

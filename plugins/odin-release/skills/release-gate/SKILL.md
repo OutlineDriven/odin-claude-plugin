@@ -1,6 +1,6 @@
 ---
 name: release-gate
-description: 'Use when the user decides to ship a release. Bumps version, commits, writes release notes, and pushes a signed tag after two explicit human confirmations. Not for running workflow-owned steps by hand: use the CI/CD workflow. Not for PR-based releases: use publish-release-pr.'
+description: 'Use when the user decides to ship a release. Not for running workflow-owned steps by hand: use the CI/CD workflow. Not for PR-based releases: use publish-release-pr.'
 disable-model-invocation: true
 ---
 

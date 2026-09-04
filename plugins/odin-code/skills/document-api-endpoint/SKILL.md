@@ -1,6 +1,6 @@
 ---
 name: document-api-endpoint
-description: 'Use when reconciling an API endpoint''s generated OpenAPI schema and declared response types with its actual runtime response. Adds or fixes schema decorators, reuses canonical types, migrates legacy path definitions, and validates the spec locally. Not for general API documentation: use docs-and-adrs.'
+description: 'Use when reconciling an API endpoint''s generated OpenAPI schema and declared response types with its actual runtime response. Not for general API documentation: use docs-and-adrs.'
 ---
 
 # Document and type an API endpoint

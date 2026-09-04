@@ -1,6 +1,6 @@
 ---
 name: from-codebase-perspective
-description: 'Use when asked to answer only from the codebase seat: what existing code tolerates or punishes. Emits a single-perspective analysis without blending. Not for rebuilding from primitives: use from-first-principle. Read-only; no source or remote mutation.'
+description: 'Use when asked to answer only from the codebase seat: what existing code tolerates or punishes. Not for rebuilding from primitives: use from-first-principle.'
 ---
 
 # From codebase perspective

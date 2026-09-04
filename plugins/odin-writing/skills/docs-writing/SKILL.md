@@ -1,6 +1,6 @@
 ---
 name: docs-writing
-description: 'Use when asked to write, restructure, or audit documentation using Diataxis types and a rule-based audit, to draft a first-pass feature docs page grounded in a specification and codebase, or to draft documentation or diagram source for a named subject and audience. Present the draft for review before writing. Not for ADRs or architectural rationale. No remote or irreversible changes.'
+description: 'Use when asked to write, restructure, or audit documentation with Diataxis types, or to draft a feature docs page or diagram source. Not for ADRs or architectural rationale.'
 ---
 
 # Docs writing

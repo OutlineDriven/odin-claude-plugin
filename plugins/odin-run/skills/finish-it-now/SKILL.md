@@ -1,6 +1,6 @@
 ---
 name: finish-it-now
-description: 'Use when the user says ship it now, no phases, or finish it now, or when in-scope work would otherwise be deferred to phases, rollouts, follow-up PRs, or TODOs. Implements every in-scope path in one change. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user says ship it now, no phases, or finish it now, or would defer work to phases, rollouts, follow-up PRs, or TODOs. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Finish it now

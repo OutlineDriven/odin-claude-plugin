@@ -1,6 +1,6 @@
 ---
 name: oauth2-flow-implementation
-description: 'Use when asked to implement, debug, or validate an OAuth 2.0/2.1 flow (authorization code+PKCE, client credentials, device flow, refresh rotation) or to explain a token exchange failure against RFC 6749/6750/7636/8252/8628. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to implement, debug, validate, or explain an OAuth 2.1 flow: auth code with PKCE, client credentials, device, or refresh. Also for a failing token exchange. Not for irreversible work.'
 ---
 
 # OAuth 2.0 flow implementation

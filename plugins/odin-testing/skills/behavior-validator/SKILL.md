@@ -1,6 +1,6 @@
 ---
 name: behavior-validator
-description: 'Use when asked to validate a web app, CLI, API, or generated artifact against a source-blind behavior contract. Produces a structured pass/fail/blocked/out-of-scope report with anti-cheat probes and redacted evidence. Not for source or remote-system changes.'
+description: 'Use when asked to validate a web app, CLI, API, or generated artifact against a source-blind behavior contract. Not for source or remote-system changes.'
 ---
 
 # Behavior validator

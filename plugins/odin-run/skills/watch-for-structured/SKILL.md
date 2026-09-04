@@ -1,6 +1,6 @@
 ---
 name: watch-for-structured
-description: 'Use when the user wants to classify a surface state and page an on-call API when triggered. Reads one snapshot, classifies severity, looks up routing, sends a page if required, and returns a structured report with severity, routing, and on-call disposition. Not for read-only anomaly watching without paging: use watch-for.'
+description: 'Use when the user wants to classify a surface state and page an on-call API when triggered. Not for read-only anomaly watching without paging: use watch-for.'
 ---
 
 # Single-snapshot alert

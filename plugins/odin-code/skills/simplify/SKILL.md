@@ -1,6 +1,6 @@
 ---
 name: simplify
-description: 'Use when the user says "simplify this diff" or asks for a compression pass over a change-set. Decomposes the diff into reuse, quality, and efficiency axes; applies validated findings as atomic issue-class commits; auto-reverts regressions. Not for dead-code sweeps: use deslop.'
+description: 'Use when the user says "simplify this diff" or asks for a compression pass over a change-set. Not for dead-code sweeps: use deslop.'
 ---
 
 # Simplify: axis-decomposed compression pass on a diff

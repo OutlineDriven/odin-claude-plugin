@@ -1,6 +1,6 @@
 ---
 name: secure-npm-package
-description: 'Use when creating or hardening an npm release with Trusted or Staged Publishing. Writes hardened workflow drafts, configures cooldown and postinstall settings, and produces a human handoff for every remote-only action. Partitions E404 packages so Trusted Publisher setup is sequenced after first publish. Not for remote changes or publishing.'
+description: 'Use when creating or hardening an npm release with Trusted or Staged Publishing, including E404 packages sequenced after first publish. Not for remote changes or publishing.'
 ---
 
 # Secure npm package

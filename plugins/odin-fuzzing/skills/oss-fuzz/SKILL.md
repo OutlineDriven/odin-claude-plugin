@@ -1,6 +1,6 @@
 ---
 name: oss-fuzz
-description: 'Use when asked to enroll a project in OSS-Fuzz or run its helper workflow locally. Builds the project image and fuzzers, runs the named harness, and checks enrollment metadata. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when enrolling a project in OSS-Fuzz, running its helper workflow locally, or reproducing an OSS-Fuzz report. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # OSS-Fuzz

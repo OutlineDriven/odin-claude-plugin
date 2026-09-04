@@ -1,6 +1,6 @@
 ---
 name: from-impact-perspective
-description: 'Use when asked to answer only from the impact seat: who and what actually moves. Returns an impact-perspective analysis without blending. Not for rebuilding from primitives: use from-first-principle. Read-only; no source or remote mutation.'
+description: 'Use when asked to answer only from the impact seat: who and what actually moves. Not for rebuilding from primitives: use from-first-principle.'
 ---
 
 # From impact perspective

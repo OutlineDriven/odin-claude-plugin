@@ -1,6 +1,6 @@
 ---
 name: resolve
-description: 'Use when addressing review feedback or analyzing whether a comment is valid. Classifies each comment VALID ISSUE / NOT AN ISSUE / NEEDS CLARIFICATION with evidence and a recommended solution. Not for GitHub PR review threads: use resolve-pr-feedback.'
+description: 'Use when addressing review feedback or analyzing whether a comment is valid. Not for GitHub PR review threads: use resolve-pr-feedback.'
 ---
 
 # Resolve

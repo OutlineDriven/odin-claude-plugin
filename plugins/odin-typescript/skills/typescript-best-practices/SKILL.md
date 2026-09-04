@@ -1,6 +1,6 @@
 ---
 name: typescript-best-practices
-description: 'Use when TypeScript source must be shaped proactively toward narrow types, discriminated unions, readonly fields, exhaustive variants, typed trust boundaries, correct module resolution, and the TypeScript 7 strict-flag baseline. Not for concrete error repair; use typescript-type-hardening; not for language-agnostic domain modeling; use type-driven.'
+description: 'Use when TypeScript needs shaping toward narrow types, unions, exhaustive variants, and strict flags. Not for error repair: use typescript-type-hardening. Not for non-TS domains: use type-driven.'
 ---
 
 # TypeScript best practices

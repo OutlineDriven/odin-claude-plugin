@@ -1,6 +1,6 @@
 ---
 name: burpsuite-project-parser
-description: 'Use when asked to search or analyze a Burp Suite .burp project to extract audit items, inspect request or response metadata, or search captured traffic. Reads through Burp Suite Professional headless JAR, preflights result size, and returns size-checked JSON with truncated body fields. Findings are indicators requiring validation.'
+description: 'Use when asked to search or analyze a Burp Suite .burp project to extract audit items, inspect request or response metadata, or search captured traffic. Findings need validation.'
 ---
 
 # Burp Suite project parser

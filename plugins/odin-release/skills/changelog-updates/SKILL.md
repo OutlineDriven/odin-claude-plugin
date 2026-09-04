@@ -1,6 +1,6 @@
 ---
 name: changelog-updates
-description: 'Use when a release or a since-tag window needs user-facing release communication drafted. Composes a draft release note covering exactly that window and advances the file-based since-tag marker once without publishing.'
+description: 'Use when a release or a since-tag window needs user-facing release notes drafted. Not for publishing the release.'
 ---
 
 # Changelog updates

@@ -1,6 +1,6 @@
 ---
 name: goal-prompt-drafting
-description: 'Use when asked to draft copy-ready /goal objectives for long-running agents; returns one normalized one-line objective with measurable end state, grounded proof, easy-out invariants, a stop clause, and a Missing list. Not for source or remote-system changes.'
+description: 'Use when asked to draft copy-ready /goal objectives for long-running agents. Not for source or remote-system changes.'
 ---
 
 # Goal prompt drafting

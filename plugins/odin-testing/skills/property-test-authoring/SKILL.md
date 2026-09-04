@@ -1,6 +1,6 @@
 ---
 name: property-test-authoring
-description: 'Use when adding or improving property tests for invariants, oracles, parsers, algorithms, data structures, or smart-contract state machines. Encodes the strongest grounded property with domain-aware generators and pinned edge cases. Not for review, use property-test-review.'
+description: 'Use when adding or improving property tests for invariants, oracles, parsers, algorithms, data structures, or smart-contract state machines. Not for review: use property-test-review.'
 ---
 
 # Property test authoring

@@ -1,6 +1,6 @@
 ---
 name: rationale-by-source
-description: 'Use when asked to investigate design rationale, regression causes, or thresholds via source playbooks. Produces a confidence-tiered cited narrative with unknowns retained. Not for why-style decision rationale from conversation context: use why.'
+description: 'Use when asked to investigate design rationale, regression causes, or thresholds via source playbooks. Not for why-style decision rationale from conversation context: use why.'
 ---
 
 # Rationale by source

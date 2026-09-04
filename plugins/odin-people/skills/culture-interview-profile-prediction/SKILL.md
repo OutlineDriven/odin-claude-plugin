@@ -1,6 +1,6 @@
 ---
 name: culture-interview-profile-prediction
-description: 'Use when asked to predict Culture Index traits from an interview transcript before a survey exists. Also handles uncertain traits when evidence is sparse or contradictory. Not for interpreting completed survey results.'
+description: 'Use when asked to predict Culture Index traits from an interview transcript before a survey exists, including sparse or contradictory evidence. Not for interpreting completed survey results.'
 ---
 
 # Culture interview profile prediction

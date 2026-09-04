@@ -1,6 +1,6 @@
 ---
 name: teach
-description: 'Use when the user wants ongoing teaching across sessions in a persistent workspace, or when multi-session learning needs a sourced workspace where every lesson cites a trusted source and advancement requires demonstrated retention. Builds a mission, resources, lessons, learning records, glossary, and shared assets. Not for one-off explanations; use explain-concept.'
+description: 'Use when the user wants a course, a learning workspace, or ongoing teaching across sessions, with cited lessons and retention-gated advancement. Not for one-off explanations: use explain-concept.'
 ---
 
 # Teach

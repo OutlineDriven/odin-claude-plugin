@@ -1,6 +1,6 @@
 ---
 name: culture-burnout-detection
-description: 'Use when Survey and Job Culture Index profiles need analysis for stress, burnout, disengagement, or flight-risk signals. Calculates energy utilization, trait shifts, and a defined risk level from the paired charts, with nonclinical recommendations. Not for clinical diagnosis: use a qualified clinician.'
+description: 'Use when Survey and Job Culture Index profiles need analysis for stress, burnout, disengagement, or flight-risk signals. Not for clinical diagnosis: use a qualified clinician.'
 ---
 
 # Culture burnout detection

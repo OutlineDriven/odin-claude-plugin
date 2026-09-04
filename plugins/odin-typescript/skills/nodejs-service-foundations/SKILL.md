@@ -1,6 +1,6 @@
 ---
 name: nodejs-service-foundations
-description: 'Use when asked to set up or harden Node.js service foundations: env validation, structured logging with redaction, typed error catalogue with instanceof and HTTP mapping, native TypeScript type stripping, and AbortController shutdown wiring. Not for dedicated shutdown implementation; use nodejs-graceful-shutdown.'
+description: 'Use when asked to set up or harden Node.js service foundations: env validation, logging, typed errors, type stripping, and shutdown wiring. Not for dedicated shutdown: use nodejs-graceful-shutdown.'
 ---
 
 # Node.js service foundations

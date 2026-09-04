@@ -1,6 +1,6 @@
 ---
 name: scheduler
-description: 'Use when asked to set, list, pause, update, or delete a personal reminder or lightweight local task that fires at a confirmed time or interval. Installs through the platform backend with per-platform mechanisms, writes a metadata record, and verifies both. Refuses destructive scheduled actions. Not for remote, credential, publish, or deploy operations.'
+description: 'Use when asked to set, list, pause, update, or delete a reminder or local task that fires at a confirmed time or interval. Not for destructive, remote, credential, publish, or deploy operations.'
 ---
 
 # Scheduler

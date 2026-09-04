@@ -1,6 +1,6 @@
 ---
 name: web-performance-audit
-description: 'Use when asked to audit, profile, or debug page load performance, Lighthouse scores, or site speed. Returns a report with quantified Core Web Vitals, prioritized issues, and specific recommendations. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when asked to audit, profile, or debug page load performance, Lighthouse scores, or site speed. Don''t use for tasks that require source or remote-system changes.'
 ---
 
 # Web performance audit

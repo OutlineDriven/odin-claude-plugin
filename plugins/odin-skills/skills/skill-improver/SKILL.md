@@ -1,6 +1,6 @@
 ---
 name: skill-improver
-description: 'Use when a user asks to iteratively improve a skill, fix skill-quality findings, or resolve scanner alerts (W001, W011, W012) on a skill. Resolves the target, runs structured reviews or scanner-backed remediation, applies fixes with per-edit re-scan, and repeats until clean. Not for agent grading; use skill-doctor for that.'
+description: 'Use when a user asks to iteratively improve a skill, fix skill-quality findings, or resolve scanner alerts (W001, W011, W012). Not for agent grading: use skill-doctor.'
 ---
 
 # Skill improver

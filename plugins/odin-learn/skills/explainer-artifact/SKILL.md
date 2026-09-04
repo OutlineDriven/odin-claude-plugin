@@ -1,6 +1,6 @@
 ---
 name: explainer-artifact
-description: 'Use when asked to create a durable local explainer document for a concept, diff reference, idea, or work recap. Classifies the input, gathers grounding material, offers a quiz, drafts and structurally verifies the artifact in a scratch directory, and presents it. Not for one-screen explanations: use explain-concept.'
+description: 'Use when asked to create an explainer document for a concept, diff, idea, or work recap. Drafts and verifies it in a scratch directory. Not for one-screen explanations: use explain-concept.'
 ---
 
 # Explainer artifact

@@ -1,6 +1,6 @@
 ---
 name: cross-critique
-description: 'Use when independent proposals on a contested decision need structured cross-critique before choosing. Reuses original authors and synthesizes convergence, objections, and the surviving option. Not for parallel multi-stance investigation: use council.'
+description: 'Use when independent proposals on a contested decision need cross-critique before choosing, reusing the original authors. Not for parallel multi-stance investigation: use council.'
 ---
 
 # Cross critique

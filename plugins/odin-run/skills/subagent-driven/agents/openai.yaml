@@ -1,3 +1,3 @@
 interface:
   display_name: "Subagent Driven"
-  short_description: "Use when a user says execute with subagents or hands over an ordered multi-task plan to run a per-task implementer-reviewer loop with an audit gate."
+  short_description: "Use when a user says execute with subagents or hands over an ordered multi-task plan."

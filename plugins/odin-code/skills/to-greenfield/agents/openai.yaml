@@ -1,3 +1,3 @@
 interface:
   display_name: "To Greenfield"
-  short_description: "Use when the user says greenfield this or rescue this codebase, or names a field: dark, red, blue, or brown."
+  short_description: "Use when the user says greenfield this or rescue this codebase, names a field (dark, red, blue, or brown), or diagnoses a subsystem."

@@ -1,6 +1,6 @@
 ---
 name: brainstorm
-description: 'Use when the user begins knowledge work with notes, a transcript, a brain dump, or a problem. Captures original wording, reads prior knowledge, resolves up to three load-bearing questions, and writes a brainstorm file before planning. For divergent option generation, use ideate.'
+description: 'Use when the user begins knowledge work with notes, a transcript, a brain dump, or a problem. Not for divergent option generation: use ideate.'
 ---
 
 # Knowledge brainstorm

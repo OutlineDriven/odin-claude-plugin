@@ -1,6 +1,6 @@
 ---
 name: github-backlog-triage
-description: 'Use when the user explicitly invokes backlog triage for a GitHub repository''s open pull requests and issues. Don''t use for proactive triage, non-GitHub trackers, or single-issue bug triage; use github-bug-report-triage for one bug issue.'
+description: 'Use when the user invokes backlog triage for a GitHub repo''s open issues and PRs. Not for proactive triage, non-GitHub trackers, or single bug issues: use github-bug-report-triage.'
 disable-model-invocation: true
 ---
 

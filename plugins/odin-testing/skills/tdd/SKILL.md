@@ -1,6 +1,6 @@
 ---
 name: tdd
-description: 'Use when asked to develop a fix or feature test-first, plan a multi-step TDD build, or work red-to-green in slices. Writes attacks before implementation, probes the suite with mutations, and advances one vertical slice at a time. Not for hardening existing code without a change; use tests-adversarial. Not for deleting weak tests; use tests-purge-unneeded.'
+description: 'Use when developing a fix or feature test-first, plan a TDD build, or work red-to-green in slices. Not for hardening: use tests-adversarial. Not for deleting weak tests: use tests-purge-unneeded.'
 ---
 
 # Offensive-first TDD

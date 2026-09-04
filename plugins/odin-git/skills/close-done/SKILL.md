@@ -1,6 +1,6 @@
 ---
 name: close-done
-description: 'Use when the user wants to batch-close resolved or outdated tracker items. Fetches item metadata, filters by evidence-backed criteria, and presents a prepared batch for the user to close manually. The agent never closes tracker items itself. Not for individual item closure or items still under active work.'
+description: 'Use when the user wants to batch-close resolved or outdated tracker items. The agent never closes tracker items itself. Not for individual closure or items still under active work.'
 disable-model-invocation: true
 ---
 

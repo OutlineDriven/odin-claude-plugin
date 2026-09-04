@@ -1,6 +1,6 @@
 ---
 name: keep-why-schema-migration
-description: 'Use when a project context-schema differs from the installed entry format. Classifies behind/current/ahead, consent-gates migration, marks missing values undefined, and advances only after every entry catches up. Don''t use for remote, publish, deploy, or irreversible changes.'
+description: 'Use when a project context-schema differs from the installed entry format. Not for remote, publish, deploy, or irreversible changes.'
 ---
 
 # Keep why schema migration

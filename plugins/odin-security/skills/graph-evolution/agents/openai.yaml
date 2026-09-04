@@ -1,3 +1,3 @@
 interface:
   display_name: "Graph Evolution"
-  short_description: "Use when two refs or source snapshots need security-relevant structural comparison a line diff may miss; returns a GRAPH_EVOLUTION report classifying node, edge, entrypoint, and subgraph changes."
+  short_description: "Use when two refs or source snapshots need security-relevant structural comparison a line diff may miss."

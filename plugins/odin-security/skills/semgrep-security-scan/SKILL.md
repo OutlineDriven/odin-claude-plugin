@@ -1,6 +1,6 @@
 ---
 name: semgrep-security-scan
-description: 'Use when a user asks for a Semgrep security scan or fast pattern-based scan of a codebase. Runs Semgrep with --sarif, merges results, and reports every finding with severity, file, and line. Not for authoring or porting rules. Use port-static-analysis-rule.'
+description: 'Use when a user asks for a Semgrep security scan or fast pattern-based scan of a codebase. Not for authoring or porting rules: use port-static-analysis-rule.'
 ---
 
 # Semgrep security scan

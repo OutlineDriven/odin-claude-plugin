@@ -1,3 +1,3 @@
 interface:
   display_name: "Exhaustive"
-  short_description: "Use when asked to prove coverage, find missing cases, or enumerate a state, decision, requirement, or behavior space."
+  short_description: "Use when asked to prove coverage, find missing cases, or enumerate state, decision, requirement, or behavior space."

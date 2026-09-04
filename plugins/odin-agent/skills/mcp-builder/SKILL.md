@@ -1,6 +1,6 @@
 ---
 name: mcp-builder
-description: 'Use when asked to create an MCP server to integrate an API or service in Python or TypeScript. Produces a server with typed tools, tests, and a read-only evaluation suite. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to create an MCP server to integrate an API or service in Python or TypeScript. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # MCP builder

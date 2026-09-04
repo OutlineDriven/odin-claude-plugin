@@ -1,6 +1,6 @@
 ---
 name: humansense2system
-description: 'Use when the user wants to compile taste and "this feels wrong" signals into machine-consumable tokens, rules, forbidden combinations, and examples. Elicits concrete cases, classifies each into one of four buckets, and writes a structured rule/pattern document. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user wants to compile taste and "this feels wrong" signals into machine-consumable tokens, rules, forbidden combinations, and examples. Not for remote or irreversible changes.'
 ---
 
 # Humansense → system

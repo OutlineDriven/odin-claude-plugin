@@ -1,6 +1,6 @@
 ---
 name: pr-walkthrough
-description: 'Use when a user asks for a zoomable PR map or graph-canvas orientation. Produces a fully self-contained static HTML site with four D3 views and guided tours, bundling all assets locally. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a user asks for a zoomable PR map or graph-canvas orientation. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # PR walkthrough

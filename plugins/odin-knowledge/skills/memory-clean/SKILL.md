@@ -1,6 +1,6 @@
 ---
 name: memory-clean
-description: 'Use when a human asks to audit memory or find stale or duplicate memories. Also handles tidy''s ICM-state audit when the user says tidy and the target is stale memory entries. Not for writing new memories; use memory-update.'
+description: 'Use when a human asks to audit memory, find stale or duplicate memories, or needs tidy''s ICM-state audit. Not for writing new memories: use memory-update.'
 disable-model-invocation: true
 ---
 

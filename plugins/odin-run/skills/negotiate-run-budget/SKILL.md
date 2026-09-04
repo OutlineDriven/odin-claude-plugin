@@ -1,6 +1,6 @@
 ---
 name: negotiate-run-budget
-description: 'Use when a high-priority run reaches at least 90% of its budget and requests an extension. Ask its human owner once; on grant record the bounded extension, on decline mark the run WAITING_FOR_BUDGET. Never self-grants. Not for low-priority runs: let those exhaust silently.'
+description: 'Use when a high-priority run reaches at least 90% of its budget and requests an extension. Never self-grants. Not for low-priority runs: let those exhaust silently.'
 ---
 
 # Negotiate run budget

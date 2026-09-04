@@ -1,6 +1,6 @@
 ---
 name: doc-review
-description: 'Use when reviewing a prose plan, spec, PRD, requirements doc, design doc, or brainstorm, or invoking /doc-review. Returns tiered findings with verbatim evidence without editing the document. Not for collaborative drafting: use doc-coauthoring. No remote or irreversible changes.'
+description: 'Use when reviewing a prose plan, spec, PRD, requirements doc, design doc, or brainstorm, or invoking /doc-review. Not for collaborative drafting: use doc-coauthoring.'
 ---
 
 # Doc review

@@ -1,6 +1,6 @@
 ---
 name: eligibility-batch-organizer
-description: 'Use when the user asks to classify a batch of projects against eligibility rules and generate an approval preview before creating hierarchical child documents. Reads a work summary, classifies each project as eligible or not against explicit criteria, presents a preview for human confirmation, then creates one child document per eligible project using a template.'
+description: 'Use when the user asks to classify a batch of projects against eligibility rules and generate an approval preview before creating hierarchical child documents.'
 disable-model-invocation: true
 ---
 

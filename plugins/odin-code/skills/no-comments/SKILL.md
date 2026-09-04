@@ -1,6 +1,6 @@
 ---
 name: no-comments
-description: 'Use when asked to audit comments in code files and propose structural replacements or deletions with per-candidate approval. Enumerates comments in C, JavaScript, TypeScript, HTML, CSS, and shell-style syntax, classifies each as earned or unearned, drafts structural alternatives, and returns a complete accounting ledger. Not for deterministic commented-out-code removal; use deslop.'
+description: 'Use when asked to audit comments in code files and propose structural replacements or deletions with per-candidate approval. Not for deterministic commented-out-code removal: use deslop.'
 ---
 
 # No comments

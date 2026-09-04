@@ -1,6 +1,6 @@
 ---
 name: fuzzing-coverage-analysis
-description: 'Use when a user needs to measure fuzz corpus coverage, explain a coverage plateau, or turn uncovered regions into campaign work. Builds an instrumented binary, runs it over a post-campaign corpus, and produces a reproducible coverage report excluding harness noise. Not for harness creation: use fuzz-harness-writing.'
+description: 'Use when a user needs to measure fuzz corpus coverage, explain a coverage plateau, or turn uncovered regions into campaign work. Not for harness creation: use fuzz-harness-writing.'
 ---
 
 # Fuzzing coverage analysis

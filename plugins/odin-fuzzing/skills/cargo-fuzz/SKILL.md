@@ -1,6 +1,6 @@
 ---
 name: cargo-fuzz
-description: 'Use when initializing, running, measuring coverage, or triaging a cargo-fuzz target in a Rust crate. Installs the nightly toolchain, writes the fuzz_target! harness, runs under the chosen sanitizer, and reproduces crash artifacts. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when initializing, running, measuring coverage, or triaging a cargo-fuzz target in a Rust crate. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # cargo-fuzz

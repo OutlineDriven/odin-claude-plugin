@@ -1,6 +1,6 @@
 ---
 name: commit-economy
-description: 'Use when the user asks to clean up a finished commit message or bring it to handoff-ready form. Rewrites only messages of HEAD or a short unpushed range; the tree stays byte-identical and dates are preserved by position. Not for creating new commits: use commit.'
+description: 'Use when the user asks to clean up a finished commit message or bring it to handoff-ready form. Rewrites only messages of HEAD or a short unpushed range. Not for creating new commits: use commit.'
 ---
 
 # Commit economy

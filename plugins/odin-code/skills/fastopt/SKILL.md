@@ -1,6 +1,6 @@
 ---
 name: fastopt
-description: 'Use when a user wants to optimize suspected hot paths without waiting for benchmarks: label every cost observation as a hypothesis and emit benchmark designs, with no mutation or speed claim. Not for measured-floor rebuild campaigns; use extremely-optimize.'
+description: 'Use when optimizing suspected hot paths without waiting for benchmarks. Not for measured-floor rebuild campaigns: use extremely-optimize.'
 ---
 
 # Fastopt

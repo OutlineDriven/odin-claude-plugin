@@ -1,3 +1,3 @@
 interface:
   display_name: "History Notes"
-  short_description: "Use when the user says remember this or settles one durable fact, append one bounded redacted note as strict UTF-8 JSONL with RFC3339 time and project to the local append-only store."
+  short_description: "Use when the user says remember this or settles one durable fact."

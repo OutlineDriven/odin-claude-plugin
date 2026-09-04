@@ -1,6 +1,6 @@
 ---
 name: planning-and-task-breakdown
-description: 'Use when multi-step work must be broken into dependency-ordered tasks before implementation begins. Gives every task a checkable acceptance criterion and a coherent size bound, then requires explicit user approval. Not for scoring a plan; use planning. Not for a committed-direction brief; use plan.'
+description: 'Use when multi-step work must be broken into dependency-ordered tasks before implementation begins. Not for scoring a plan: use planning. Not for a committed-direction brief: use plan.'
 ---
 
 # Planning and task breakdown

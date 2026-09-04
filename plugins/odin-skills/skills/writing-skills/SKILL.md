@@ -1,6 +1,6 @@
 ---
 name: writing-skills
-description: 'Use when a SKILL.md or AGENTS.md/CLAUDE.md is being authored, refactored, ported, or upgraded, or the user asks to write a skill, improve one, or fix unreliable skill firing. Not for general agent-consumed documents, use writing-for-agents.'
+description: 'Use when authoring, refactoring, porting, or upgrading SKILL.md or AGENTS.md/CLAUDE.md, or when asked to write, improve, or fix a skill. Not for general agent docs: use writing-for-agents.'
 ---
 
 # Writing skills

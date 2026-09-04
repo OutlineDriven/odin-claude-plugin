@@ -1,6 +1,6 @@
 ---
 name: issue-triage
-description: 'Use when a human invokes triage on a new configured Slack issue report. Produces a single classified verdict and posts it to the Slack thread, with deduped tracker state. Don''t use for triaging reports from other channels or posting more than one verdict.'
+description: 'Use when a human invokes triage on a new configured Slack issue report. Not for triaging reports from other channels or posting more than one verdict.'
 disable-model-invocation: true
 ---
 

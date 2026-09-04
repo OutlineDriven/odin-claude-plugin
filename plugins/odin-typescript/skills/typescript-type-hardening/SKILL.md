@@ -1,6 +1,6 @@
 ---
 name: typescript-type-hardening
-description: 'Use when existing TypeScript code has concrete type errors, any, failing inference, or needs advanced type mechanism design (generics, conditional or infer, mapped or template-literal, branded, utility derivation, overloads, builders) repaired against the current project state. Not for strict-flag setup or proactive shaping; use typescript-best-practices.'
+description: 'Use when TypeScript has type errors, failing inference, or needs type mechanism repair (generics, infer, mapped, branded). Not for strict flags or proactive shaping: use typescript-best-practices.'
 ---
 
 # TypeScript type hardening

@@ -1,6 +1,6 @@
 ---
 name: product-signal-pulse
-description: 'Use when invoking /product-signal-pulse with an optional lookback window to query configured product signals. Resolves config, runs a first-run interview if unconfigured, dispatches read-only queries to analytics, tracing, and payment sources, and writes a 30-40 line pulse report under docs/pulse-reports. Not for credential, publish, deploy, or irreversible changes.'
+description: 'Use when invoking /product-signal-pulse with an optional lookback window to query configured product signals. Not for credential, publish, deploy, or irreversible changes.'
 ---
 
 # Product signal pulse

@@ -1,6 +1,6 @@
 ---
 name: plan
-description: 'Use when a user commits to a direction and asks to plan, brief, research, or operationalize it. Classifies type and tier, researches read-only, and writes to plans/ after acknowledgment. Not for scoring, use planning; not for codebase audit, use plan-review.'
+description: 'Use when a user commits to a direction and asks to plan, brief, research, or operationalize it. Not for scoring: use planning. Not for codebase audit: use plan-review.'
 ---
 
 # Knowledge plan

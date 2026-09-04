@@ -1,6 +1,6 @@
 ---
 name: git-history-analysis
-description: 'Use when the user asks about recent engineering work or what the team is working on, or is preparing planning or roadmap material. Also handles an optional Slack summary when the user explicitly requests it. Not for remote mutation or any irreversible change.'
+description: 'Use when the user asks about recent engineering work, what the team is working on, planning or roadmap material, or an explicitly requested Slack summary. Not for remote or irreversible changes.'
 disable-model-invocation: true
 ---
 

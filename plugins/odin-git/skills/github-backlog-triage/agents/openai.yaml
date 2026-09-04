@@ -1,3 +1,3 @@
 interface:
   display_name: "Github Backlog Triage"
-  short_description: "Use when the user explicitly invokes backlog triage for a GitHub repository's open pull requests and issues."
+  short_description: "Use when the user invokes backlog triage for a GitHub repo's open issues and PRs."

@@ -1,3 +1,3 @@
 interface:
   display_name: "Teach"
-  short_description: "Use when the user wants ongoing teaching across sessions in a persistent workspace, or when multi-session learning needs a sourced workspace where every lesson cites a trusted source and advancement requires demonstrated retention."
+  short_description: "Use when the user wants a course, a learning workspace, or ongoing teaching across sessions, with cited lessons and retention-gated advancement."

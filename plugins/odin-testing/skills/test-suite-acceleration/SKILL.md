@@ -1,6 +1,6 @@
 ---
 name: test-suite-acceleration
-description: 'Use when a test suite is too slow and must be accelerated without weakening behavior or coverage. Also handles CI parallelization when the bottleneck is serial execution. Not for deleting tests, use tests-purge-unneeded; not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a test suite is too slow and needs acceleration without weakening behavior or coverage, or CI parallelization must fix serial execution. Not for deleting tests: use tests-purge-unneeded.'
 ---
 
 # Test suite acceleration

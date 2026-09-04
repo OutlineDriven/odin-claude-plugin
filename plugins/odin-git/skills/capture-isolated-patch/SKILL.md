@@ -1,6 +1,6 @@
 ---
 name: capture-isolated-patch
-description: 'Use when a candidate change must be produced without touching the working tree; an ephemeral worktree runs the declared command and returns a binary-safe patch plus its exit code. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a candidate change must be produced without touching the working tree. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Capture isolated patch

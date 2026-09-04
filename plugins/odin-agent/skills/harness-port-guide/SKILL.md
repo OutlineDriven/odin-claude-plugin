@@ -1,6 +1,6 @@
 ---
 name: harness-port-guide
-description: 'Use when the user asks to make the skills framework work in a new harness, IDE, or CLI; the run delivers a port whose bootstrap auto-injects every session and passes the captured acceptance transcript. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user asks to make the skills framework work in a new harness, IDE, or CLI. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Harness port guide

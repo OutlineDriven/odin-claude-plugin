@@ -1,6 +1,6 @@
 ---
 name: prototype
-description: 'Use when asked to prototype one design question through a cheap logic or UI experiment. Builds a throwaway artifact, records the one-line verdict, and folds the decision into real work without polluting main. Not for interactive state-model demos: use prototype-logic.'
+description: 'Use when asked to prototype one design question through a cheap logic or UI experiment. Not for interactive state-model demos: use prototype-logic.'
 ---
 
 # Prototype

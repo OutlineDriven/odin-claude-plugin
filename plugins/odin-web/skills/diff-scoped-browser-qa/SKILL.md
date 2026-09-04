@@ -1,6 +1,6 @@
 ---
 name: diff-scoped-browser-qa
-description: 'Use when asked to run branch-diff browser QA against a PR or branch. Derives a test matrix from the diff, drives each scenario through a real browser, classifies Pass/Fixed/Skipped/Blocked, runs the automated suite, and writes a dogfood report with a ready/not-ready verdict. Not for live-URL visual audit: use web-design-review. No remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to run branch-diff browser QA against a PR or branch. Not for live-URL visual audit: use web-design-review. No remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Diff-scoped browser QA

@@ -1,3 +1,3 @@
 interface:
   display_name: "Tests Purge Unneeded"
-  short_description: "Use when a legacy, slow, or duplicate test suite is being cleaned up, a post-refactor sweep is due, or the type system already covers an asserted contract."
+  short_description: "Use when a legacy, slow, or duplicate test suite needs purging, a post-refactor sweep is due, or types cover a contract."

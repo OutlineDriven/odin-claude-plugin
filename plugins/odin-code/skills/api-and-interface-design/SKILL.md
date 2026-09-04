@@ -1,6 +1,6 @@
 ---
 name: api-and-interface-design
-description: 'Use when asked to design or change a public API, route, CLI flag, or module boundary. It documents the contract with semantics and errors, then migrates every consumer so no legacy path remains. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to design or change a public API, route, CLI flag, or module boundary. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # API and interface design

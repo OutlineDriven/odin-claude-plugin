@@ -1,6 +1,6 @@
 ---
 name: address-sanitizer
-description: 'Use when building or running native code under AddressSanitizer, or when interpreting an existing ASan report. Instruments C/C++ or Rust unsafe/FFI targets, sets ASAN_OPTIONS for fuzzer integration, and classifies each reported error with its faulting and allocation sites. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when building or running native code under AddressSanitizer, interpreting an existing ASan report, or debugging a memory-corruption failure. Not for remote or irreversible changes.'
 ---
 
 # AddressSanitizer

@@ -1,3 +1,3 @@
 interface:
   display_name: "Good Readme"
-  short_description: "Use when the user asks to create, rewrite, review, or polish an open-source README into a progressively disclosed, evidence-grounded guide whose claims are sourced and whose headings alone tell the story."
+  short_description: "Use when the user asks to create, rewrite, review, or polish an open-source README, including shop-window READMEs."

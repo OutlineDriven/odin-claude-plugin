@@ -1,6 +1,6 @@
 ---
 name: competitor-changelog
-description: 'Use when the user asks to summarize competitor changelogs or analyze recent competitor releases into a deduplicated report opened as a PR. Not for researching a specific feature across competitors: use competitor-feature-research.'
+description: 'Use when asked to summarize competitor changelogs or analyze recent competitor releases. Not for researching a specific feature across competitors: use competitor-feature-research.'
 disable-model-invocation: true
 ---
 

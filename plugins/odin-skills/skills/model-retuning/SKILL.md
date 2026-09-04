@@ -1,6 +1,6 @@
 ---
 name: model-retuning
-description: 'Use when asked to run /model-retuning [target model or symptom] [corpus path] [bar:<n> consecutive clean runs] to retune a skill corpus for a new model measurement-first. Not for static audits, use deslop for those.'
+description: 'Use when asked to run /model-retuning to retune a skill corpus for a new model, measurement-first. Not for static audits: use deslop.'
 ---
 
 # Model retuning

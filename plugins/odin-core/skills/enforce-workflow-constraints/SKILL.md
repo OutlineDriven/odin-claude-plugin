@@ -1,6 +1,6 @@
 ---
 name: enforce-workflow-constraints
-description: 'Use when any bounded workflow starts or reaches an action, path, proposal, or merge boundary. Loads constraints before the first action, re-evaluates them at every boundary, and refuses rather than default-allow on an unreadable constraint set.'
+description: 'Use when any bounded workflow starts or reaches an action, path, proposal, or merge boundary. Refuses rather than default-allow on an unreadable constraint set.'
 ---
 
 # Enforce workflow constraints

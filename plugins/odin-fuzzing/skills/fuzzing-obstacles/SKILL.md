@@ -1,6 +1,6 @@
 ---
 name: fuzzing-obstacles
-description: 'Use when asked to identify and bypass checksums, nondeterminism, or validation barriers that block fuzzing coverage. Patches the SUT behind an explicit fuzzing build flag with false-positive risk assessed. Not for dictionary creation: use fuzzing-dictionary. Local writes only.'
+description: 'Use when asked to identify and bypass checksums, nondeterminism, or validation barriers that block fuzzing coverage. Not for dictionary creation: use fuzzing-dictionary. Local writes only.'
 ---
 
 # Fuzzing obstacles

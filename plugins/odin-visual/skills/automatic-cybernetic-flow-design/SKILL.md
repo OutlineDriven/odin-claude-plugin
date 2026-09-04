@@ -1,6 +1,6 @@
 ---
 name: automatic-cybernetic-flow-design
-description: 'Use when the user wants a cybernetic flow design document for an interactive system. Specifies sensors, actuators, feedback paths, delays, and oscillation risk, and writes the design to a named local file. Not for implementing or deploying the system.'
+description: 'Use when the user wants a cybernetic flow design document for an interactive system. Not for implementing or deploying the system.'
 ---
 
 # Automatic cybernetic flow design

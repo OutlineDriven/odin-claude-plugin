@@ -1,6 +1,6 @@
 ---
 name: customer-feedback-report
-description: 'Use when customer feedback, NPS, churn, email feedback, call transcripts, or voice-of-the-customer analysis needs a report over a time window. Produces themes, pain points, competitive mentions, feature demand, exact counts, week-over-week comparison, cited links, and verbatim quotes in a report and PR. Requires human authorization for credentials, publication, and PR creation.'
+description: 'Use when customer feedback, NPS, churn, email feedback, call transcripts, or voice-of-the-customer analysis needs a report over a time window.'
 disable-model-invocation: true
 ---
 

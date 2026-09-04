@@ -1,6 +1,6 @@
 ---
 name: breaking-driven
-description: 'Use when bloated code needs clean re-derivation, or the user says "this module is bloated" or "break it and rebuild". Classifies old behavior as essential or residue, cuts residue, and leaves the verifier green. Not for untracked data or changes without VCS rollback.'
+description: 'Use when bloated code needs clean re-derivation, or the user says "this module is bloated" or "break it and rebuild". Not for untracked data or changes without VCS rollback.'
 ---
 
 # Breaking-driven development

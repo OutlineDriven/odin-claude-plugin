@@ -1,6 +1,6 @@
 ---
 name: readout
-description: 'Use when a user wants a readable, shareable HTML document of findings. Produces a self-contained HTML readout under ~/.readouts, embedding cited source text and refreshing the local index. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a user wants a readable, shareable HTML document of findings. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Readout

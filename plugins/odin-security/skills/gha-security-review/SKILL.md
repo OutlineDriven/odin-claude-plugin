@@ -1,6 +1,6 @@
 ---
 name: gha-security-review
-description: 'Use when asked to review GitHub Actions workflows for exploitable vulnerabilities, including prompt injection through AI coding actions (Claude Code Action, Gemini CLI, OpenAI Codex). Returns HIGH findings each with a five-element exploitation scenario, MEDIUM findings marked needs-verification, or a cleared report. Not for general security review. Read-only.'
+description: 'Use when asked to review GitHub Actions for exploitable vulnerabilities, including prompt injection through Claude Code Action, Gemini CLI, or OpenAI Codex. Read-only. Not for general security review.'
 ---
 
 # GitHub Actions security review

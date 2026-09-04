@@ -1,6 +1,6 @@
 ---
 name: graph-evolution
-description: 'Use when two refs or source snapshots need security-relevant structural comparison a line diff may miss; returns a GRAPH_EVOLUTION report classifying node, edge, entrypoint, and subgraph changes. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when two refs or source snapshots need security-relevant structural comparison a line diff may miss. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Graph evolution

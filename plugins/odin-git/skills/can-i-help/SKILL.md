@@ -1,6 +1,6 @@
 ---
 name: can-i-help
-description: 'Use when the user asks "where to help", "contribution opportunities", or "find a good first issue". Returns two to five data-backed recommendations each naming a file, a reason, and an executable first step.'
+description: 'Use when the user asks "where to help", "contribution opportunities", or "find a good first issue". Returns data-backed first steps. Not for PR review queues: use gh-review-requests.'
 ---
 
 # Can I help

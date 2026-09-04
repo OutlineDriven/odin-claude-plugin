@@ -1,6 +1,6 @@
 ---
 name: writing-fragments
-description: 'Use when exploration needs heterogeneous noticings captured before structure. Useful noticings are preserved without premature synthesis. Not for beat-by-beat assembly from selected sources: use writing-beats; not for paragraph-by-paragraph shaping: use writing-shape.'
+description: 'Use when exploration needs heterogeneous noticings captured before structure. Not for beat-by-beat assembly: use writing-beats. Not for paragraph-by-paragraph shaping: use writing-shape.'
 ---
 
 # Writing fragments

@@ -1,6 +1,6 @@
 ---
 name: typing-exclusion-worker
-description: 'Use when removing modules from pyproject mypy exclusions or running a typing-debt worker batch. Fixes surfaced typing issues in scope and returns a batch summary backed by passing targeted mypy, tests, and pre-commit. Not for cross-team or out-of-scope typing work.'
+description: 'Use when removing modules from pyproject mypy exclusions or running a typing-debt worker batch. Not for cross-team or out-of-scope typing work.'
 ---
 
 # Typing exclusion worker

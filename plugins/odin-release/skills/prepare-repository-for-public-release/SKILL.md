@@ -1,6 +1,6 @@
 ---
 name: prepare-repository-for-public-release
-description: 'Use when asked to prepare a repository for public launch: audit for secrets, harden licensing, documentation, CI, and release automation; stop before the visibility switch. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to prepare a repository for public launch or open source it. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Prepare repository for public release

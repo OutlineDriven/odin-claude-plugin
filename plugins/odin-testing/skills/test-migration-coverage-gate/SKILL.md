@@ -1,6 +1,6 @@
 ---
 name: test-migration-coverage-gate
-description: 'Use when about to delete a test on the claim that a new harness, suite, or scenario already covers it. Requires an independent reviewer to validate the per-assertion coverage table and a tree-wide reference scrub before the deletion commit. Not for tests that catch no real bug: use tests-purge-unneeded; not for untracked data or changes without VCS rollback.'
+description: 'Use when about to delete a test that a new harness, suite, or scenario covers. Not for tests that catch no real bug: use tests-purge-unneeded. Not for untracked data or changes without VCS rollback.'
 ---
 
 # Test migration coverage gate

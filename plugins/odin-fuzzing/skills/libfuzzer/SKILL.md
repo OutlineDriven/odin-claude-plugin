@@ -1,6 +1,6 @@
 ---
 name: libfuzzer
-description: 'Use when asked to build, run, and triage Clang libFuzzer campaigns: harness structure, sanitizer-compiled binary, corpus-driven execution, and crash reproduction. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to build, run, and triage Clang libFuzzer campaigns. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # libFuzzer

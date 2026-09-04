@@ -1,6 +1,6 @@
 ---
 name: cost-reduction
-description: 'Use when a measured cost surface needs one-change-at-a-time reduction under frozen guardrails. Each proposed change is adopted with N=5 gate evidence or recorded dead with the measurement that killed it.'
+description: 'Use when a measured cost surface needs one-change-at-a-time reduction under frozen guardrails. Not for speed-only optimization: use optimize.'
 ---
 
 # Cost reduction

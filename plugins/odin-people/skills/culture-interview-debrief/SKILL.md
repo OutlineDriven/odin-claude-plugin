@@ -1,6 +1,6 @@
 ---
 name: culture-interview-debrief
-description: 'Use when a predicted Culture Index profile needs comparison with role requirements, team composition, and manager profile to inform a hiring decision. Maps trait matches and confidence to numeric scores, produces a recommendation on a defined ladder, and names verification areas. Not for transcript prediction: use culture-interview-profile-prediction.'
+description: 'Use when a Culture Index profile needs comparison with role requirements, team composition, and manager profile for hiring. Not for transcript prediction: use culture-interview-profile-prediction.'
 ---
 
 # Culture interview debrief

@@ -1,6 +1,6 @@
 ---
 name: fail-recover
-description: 'Use when the user needs to restore service from a specific known failure by applying a single prescribed recovery operation. Verifies the symptom, validates the prescription against its authority source, records the rollback path, applies the operation, and confirms restoration via a health signal. Not for design-time failure definition or open-ended debugging.'
+description: 'Use when the user asks to restore service from a known failure with a prescribed recovery operation. Not for design-time failure definition or open-ended debugging.'
 ---
 
 # Fail recover

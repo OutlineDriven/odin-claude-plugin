@@ -1,6 +1,6 @@
 ---
 name: source-driven
-description: 'Use when writing or verifying framework-specific code, boilerplate, or a documented, correct implementation. Backs every framework decision with a cited official source and flags unverified patterns. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when writing or verifying framework-specific code, boilerplate, or a documented, correct implementation. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Source-driven development

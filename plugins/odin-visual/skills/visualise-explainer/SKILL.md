@@ -1,6 +1,6 @@
 ---
 name: visualise-explainer
-description: 'Use when asked to create an interactive HTML concept explainer with controls and live state, returned in a visualizer fence for sandboxed rendering. Validates controls via a local DOM trace, not a mental trace. Not for tasks that require source or remote-system changes.'
+description: 'Use when asked to create an interactive HTML concept explainer with controls and live state, returned in a visualizer fence. Not for tasks requiring source or remote-system changes.'
 ---
 
 # Visualise explainer

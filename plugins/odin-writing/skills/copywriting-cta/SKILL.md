@@ -1,6 +1,6 @@
 ---
 name: copywriting-cta
-description: 'Use when a user asks to design or review a bottom-of-article call-to-action. Maps article context, audience, and funnel stage to a CTA archetype with copy, form, mechanism, A/B test plan, and accessibility check. For general copywriting use copywriting; for hooks or ledes use copywriting-hooks.'
+description: 'Use when a user asks to design or review a bottom-of-article call-to-action. Not for general copywriting, use copywriting. For hooks or ledes: use copywriting-hooks.'
 ---
 
 # End-of-article CTA designer

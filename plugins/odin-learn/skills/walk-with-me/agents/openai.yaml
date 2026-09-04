@@ -1,3 +1,3 @@
 interface:
   display_name: "Walk With Me"
-  short_description: "Use when the user wants to be walked through code rather than handed a report: \"walk through this\", \"guided code walk\", or \"explain this codebase\"."
+  short_description: "Use when the user wants to be walked through code, not handed a report: \"walk through this\", \"guided code walk\", or \"explain this codebase\"."

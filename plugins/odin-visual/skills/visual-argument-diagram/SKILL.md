@@ -1,6 +1,6 @@
 ---
 name: visual-argument-diagram
-description: 'Use when a user wants to create a conceptual, workflow, architecture, or protocol diagram, or repair an existing diagram''s visual layout. Produces a .excalidraw.json and rendered PNG passing quality checks. Not for HTML diagrams or chat visuals: use visual-diagram or show-me.'
+description: 'Use when a user wants a conceptual, workflow, architecture, or protocol diagram, or to repair an existing diagram''s visual layout. Not for HTML diagrams or chat visuals: use visual-diagram or show-me.'
 ---
 
 # Visual argument diagram

@@ -1,6 +1,6 @@
 ---
 name: control-ui
-description: 'Use when asked to verify or reproduce browser or Electron UI behavior by capturing before and after evidence with no leftover processes. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to verify or reproduce browser or Electron UI behavior with before-and-after evidence and no leftover processes. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Control UI

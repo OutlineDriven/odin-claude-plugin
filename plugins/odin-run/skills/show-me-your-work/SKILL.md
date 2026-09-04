@@ -1,6 +1,6 @@
 ---
 name: show-me-your-work
-description: 'Use when the user invokes it to append a structured decision record to an append-only TSV decision log and end with an Attention section for reviewer review. Not for an ephemeral visual: use show-me.'
+description: 'Use when the user invokes it to append a structured decision record to an append-only TSV log, ending with an Attention section for reviewers. Not for an ephemeral visual: use show-me.'
 ---
 
 # Show me your work

@@ -1,6 +1,6 @@
 ---
 name: dwarf-expert
-description: 'Use when inspecting, searching, verifying, or parsing DWARF debug info: DIEs, DW_TAG_/DW_AT_ entries, .debug_* sections, line tables, or llvm-dwarfdump/readelf output. Returns the requested query, verification, explanation, or parser with tool and platform identified.'
+description: 'Use when inspecting, searching, verifying, or parsing DWARF debug info: DIEs, DW_TAG_/DW_AT_ entries, .debug_* sections, line tables, or llvm-dwarfdump/readelf output.'
 ---
 
 # DWARF expert

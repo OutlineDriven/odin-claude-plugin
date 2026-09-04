@@ -1,6 +1,6 @@
 ---
 name: deep-research
-description: 'Use when the user asks to research a topic and produce a thorough sourced report. Produces a prose-first cited Markdown report with key findings, recommendations, and risks. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user asks to research a topic and produce a thorough sourced report. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Deep research

@@ -1,6 +1,6 @@
 ---
 name: pov
-description: 'Use when asked to judge whether this project should adopt, switch to, reject, or revisit a technology, library, pattern, or architecture, or give a mid-session second opinion. Graded verdict clears two evidence floors. Not for scoping, use brainstorm; not for forks, use decide.'
+description: 'Use when asked to judge whether to adopt, switch, reject, or revisit technology, library, pattern, or architecture, or a second opinion. Not for scoping: use brainstorm. Not for forks: use decide.'
 ---
 
 # Pov

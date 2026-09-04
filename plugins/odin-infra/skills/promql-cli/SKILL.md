@@ -1,6 +1,6 @@
 ---
 name: promql-cli
-description: 'Use when a user asks to execute or investigate a PromQL expression against a Prometheus server. Returns query results in the requested format or a classified failure diagnosis. Read-only HTTP queries only; no source or remote-system changes.'
+description: 'Use when asked to execute or investigate a PromQL expression against a Prometheus server. Read-only HTTP queries only. No source or remote-system changes.'
 ---
 
 # PromQL CLI

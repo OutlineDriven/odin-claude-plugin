@@ -1,6 +1,6 @@
 ---
 name: nodejs-graceful-shutdown
-description: 'Use when asked to implement or fix service termination handling: SIGTERM or SIGINT, connection draining, health-check shutdown signaling, zero-downtime deploys. Not for general service scaffolding; use nodejs-service-foundations.'
+description: 'Use when asked to implement or fix service termination: SIGTERM or SIGINT, connection draining, health-check signaling. Not for general service scaffolding: use nodejs-service-foundations.'
 ---
 
 # Node.js graceful shutdown

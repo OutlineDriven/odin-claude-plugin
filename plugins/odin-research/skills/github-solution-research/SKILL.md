@@ -1,6 +1,6 @@
 ---
 name: github-solution-research
-description: 'Use when facing a bug, integration failure, dependency issue, unclear API usage, implementation blocker, or tool capability need and the user wants open-source solutions from GitHub. Searches issues, PRs, code, and repositories via `gh`, ranks by problem fit, and returns a reuse/adapt/avoid recommendation with a verification command. Not for source or remote-system changes.'
+description: 'Use when a bug, integration failure, dependency issue, unclear API usage, implementation blocker, or tool-capability need calls for GitHub solutions. Not for source or remote-system changes.'
 ---
 
 # GitHub solution research

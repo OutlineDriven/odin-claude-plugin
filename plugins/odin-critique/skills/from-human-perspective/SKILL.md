@@ -1,6 +1,6 @@
 ---
 name: from-human-perspective
-description: 'Use when a user wants an answer only from the human seat: what a person can love, trust, and tolerate. Emits a human-perspective analysis without blending. Not for rebuilding from primitives: use from-first-principle. Read-only; no source or remote mutation.'
+description: 'Use when a user wants an answer only from the human seat: what a person can love, trust, and tolerate. Not for rebuilding from primitives: use from-first-principle.'
 ---
 
 # From human perspective

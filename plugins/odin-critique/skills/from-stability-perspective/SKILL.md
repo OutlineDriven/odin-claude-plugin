@@ -1,6 +1,6 @@
 ---
 name: from-stability-perspective
-description: 'Use when the user wants an answer only from the stability seat: preservation of the working machine. Emits a stability-perspective analysis without blending. Not for rebuilding from primitives: use from-first-principle. Read-only; no source or remote mutation.'
+description: 'Use when the user wants an answer only from the stability seat: preservation of the working machine. Not for rebuilding from primitives: use from-first-principle.'
 ---
 
 # From stability perspective

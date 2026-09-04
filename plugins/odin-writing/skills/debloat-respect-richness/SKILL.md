@@ -1,6 +1,6 @@
 ---
 name: debloat-respect-richness
-description: 'Use when a user asks to tighten verbose-but-correct prose without a full rewrite. Cuts words in place to load-bearing density, preserving every load-bearing claim, respecting intended richness, and handing genuine duplication or drift off rather than force-compressing it.'
+description: 'Use when a user asks to tighten verbose-but-correct prose without a full rewrite. Cuts in place to load-bearing density, preserving every load-bearing claim.'
 ---
 
 # Debloat respect richness

@@ -1,6 +1,6 @@
 ---
 name: catchup
-description: 'Use when the human returns after a gap, cannot follow the project, or asks what happened. Returns a screen-length briefing grounded in live state. Also handles pre-decision orientation when the mental model is stale. Not for initial onboarding: use onboard.'
+description: 'Use when the human returns after a gap, cannot follow the project, asks what happened, or needs orientation before a decision. Not for initial onboarding: use onboard.'
 ---
 
 # Catchup

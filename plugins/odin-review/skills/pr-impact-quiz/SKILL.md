@@ -1,6 +1,6 @@
 ---
 name: pr-impact-quiz
-description: 'Use when a user invokes this skill to generate three targeted questions that prove the author understands how the submitted change affects the existing codebase. Not for reviewing the change: use for pre-review author self-check only.'
+description: 'Use when the user invokes this skill to generate targeted questions proving the author understands the change''s codebase effect. Not for reviewing the change: use review.'
 disable-model-invocation: true
 ---
 

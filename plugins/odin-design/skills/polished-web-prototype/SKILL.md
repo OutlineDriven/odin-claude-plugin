@@ -1,6 +1,6 @@
 ---
 name: polished-web-prototype
-description: 'Use when the user runs /polished-web-prototype or asks to turn an approved mockup, design plan, or freeform description into a polished responsive Pretext-native HTML artifact refined through a live preview loop. Writes the artifact and finalized.json under the project design directory. Not for variant galleries; use design-variants. Not for live-URL audits; use web-design-review.'
+description: 'Use when /polished-web-prototype runs or a user builds an artifact from a mockup, design plan, or freeform description. Not for variant galleries or live audits: design-variants, web-design-review.'
 ---
 
 # Polished web prototype

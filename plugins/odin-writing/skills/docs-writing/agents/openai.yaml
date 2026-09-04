@@ -1,3 +1,3 @@
 interface:
   display_name: "Docs Writing"
-  short_description: "Use when asked to write, restructure, or audit documentation using Diataxis types and a rule-based audit, to draft a first-pass feature docs page grounded in a specification and codebase, or to draft documentation or diagram source for a named subject and audience."
+  short_description: "Use when asked to write, restructure, or audit documentation with Diataxis types, or to draft a feature docs page or diagram source."

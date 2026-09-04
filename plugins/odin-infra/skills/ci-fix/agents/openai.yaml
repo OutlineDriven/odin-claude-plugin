@@ -1,3 +1,3 @@
 interface:
   display_name: "CI Fix"
-  short_description: "Use when the user says \"CI is red\", \"fix the checks\", or \"make CI green\" on a PR or branch."
+  short_description: "Use when \"CI is red\", \"fix the checks\", or \"make CI green\" on a PR or branch."

@@ -1,6 +1,6 @@
 ---
 name: abstract-well
-description: 'Use when the user wants to classify abstractions as useful, bad, or busy and keep one shallow level. Classifies each by whether its cooked form is easier than its raw form, and selects one shallow level. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when the user wants to classify abstractions as useful, bad, or busy and keep one shallow level. Not for tasks requiring source or remote-system changes.'
 ---
 
 # Abstract well

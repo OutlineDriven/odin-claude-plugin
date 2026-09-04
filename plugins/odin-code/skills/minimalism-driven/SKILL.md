@@ -1,6 +1,6 @@
 ---
 name: minimalism-driven
-description: 'Use when writing or restructuring code, before adding a helper, wrapper, config key, or dependency, or when the user asks for minimal or DRY code. Produce the smallest complete implementation whose intent is obvious. Not for performance tuning: use the optimize skill.'
+description: 'Use when writing or restructuring code, before adding a helper, wrapper, config key, or dependency, or when the user asks for minimal or DRY code. Not for performance tuning: use optimize.'
 ---
 
 # Minimalism driven

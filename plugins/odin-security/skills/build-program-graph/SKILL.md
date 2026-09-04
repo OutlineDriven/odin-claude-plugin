@@ -1,6 +1,6 @@
 ---
 name: build-program-graph
-description: 'Use when a multi-language program graph is needed for call paths, entrypoints, blast radius, coarse taint reachability, privilege boundaries, or declared cross-system links. Builds the full graph, runs preanalysis, and gates every version-specific query behind a capability probe with bounded security claims. Not for a quick overview; use trailmark-summary. Not for a fixed snapshot payload; use trailmark-structural.'
+description: 'Use when a multi-language program graph is needed for call paths, entrypoints, blast radius, or taint reachability. Not for overview (trailmark-summary) or snapshot (trailmark-structural).'
 ---
 
 # Build a program graph

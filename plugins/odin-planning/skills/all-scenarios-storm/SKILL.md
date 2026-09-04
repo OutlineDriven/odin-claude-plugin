@@ -1,6 +1,6 @@
 ---
 name: all-scenarios-storm
-description: 'Use when a user wants to enumerate plausible designs, configurations, scenarios, and paths and diagram the field before choosing. Produces an exhaustive enumerated field and a diagram before any choice. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a user wants to enumerate plausible designs, configurations, scenarios, and paths and diagram the field before choosing. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # All scenarios storm

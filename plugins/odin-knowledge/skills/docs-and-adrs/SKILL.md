@@ -1,6 +1,6 @@
 ---
 name: docs-and-adrs
-description: 'Use when making an architectural decision, changing a public API, shipping a feature needing rationale, or when codebase terminology or a durable decision resolves. Produces ADRs, glossary entries in CONTEXT.md, inline gotchas, README/API docs, and changelog entries. Not for shaping domain language: use domain-modeling. Not for structured doc authoring: use docs-writing, not for PR-based doc sync: use docs-update.'
+description: 'Use when making an architectural decision, changing a public API, shipping a feature with rationale, or a codebase term resolves. Not for domain language: domain-modeling. Not for docs: docs-writing.'
 ---
 
 # Docs and ADRs

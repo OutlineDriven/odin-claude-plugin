@@ -1,6 +1,6 @@
 ---
 name: replace-unsafe-typescript-assertions
-description: 'Use when TypeScript tests use unsafe any or as assertions for partial or intentionally invalid fixtures. Replaces eligible assertions with intent-matching safe coercion functions and proves the project typecheck and test suite pass. Not for production source or manifest edits; test files only.'
+description: 'Use when TypeScript tests use unsafe any or as assertions for partial or intentionally invalid fixtures. Not for production source or manifest edits. Test files only.'
 ---
 
 # Replace unsafe TypeScript assertions

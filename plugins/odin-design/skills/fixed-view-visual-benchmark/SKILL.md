@@ -1,6 +1,6 @@
 ---
 name: fixed-view-visual-benchmark
-description: 'Use when a visual needs repeatable fixed-view rendering and independent rubric scoring: render the fixed view through a specified interface, score it against a frozen rubric, and prove the saved render clears the threshold. Not for free-form visual review or subjective critique.'
+description: 'Use when a visual needs repeatable fixed-view rendering and independent rubric scoring. Not for free-form visual review or subjective critique.'
 ---
 
 # Fixed-view visual benchmark

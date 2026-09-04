@@ -1,6 +1,6 @@
 ---
 name: prohibit-bad-habits
-description: 'Use when a user wants to define patterns the agent should not do; result is structured project docs or agent-rule files listing each prohibited pattern. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a user wants to define patterns the agent should not do. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Prohibit bad habits

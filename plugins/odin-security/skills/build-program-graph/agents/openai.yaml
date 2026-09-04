@@ -1,3 +1,3 @@
 interface:
   display_name: "Build Program Graph"
-  short_description: "Use when a multi-language program graph is needed for call paths, entrypoints, blast radius, coarse taint reachability, privilege boundaries, or declared cross-system links."
+  short_description: "Use when a multi-language program graph is needed for call paths, entrypoints, blast radius, or taint reachability."

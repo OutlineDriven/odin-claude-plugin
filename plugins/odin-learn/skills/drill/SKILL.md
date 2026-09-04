@@ -1,6 +1,6 @@
 ---
 name: drill
-description: 'Use when a concept needs practising: the user asks for an exercise, quiz, recall, or gap probe. Runs one scaffolded practice move and records every attempt in PROGRESS.md. Not for explanations: use explain-concept.'
+description: 'Use when a concept needs practising: the user asks for an exercise, quiz, recall, or gap probe. Not for explanations: use explain-concept.'
 ---
 
 # Drill

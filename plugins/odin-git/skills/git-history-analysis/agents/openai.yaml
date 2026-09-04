@@ -1,3 +1,3 @@
 interface:
   display_name: "Git History Analysis"
-  short_description: "Use when the user asks about recent engineering work or what the team is working on, or is preparing planning or roadmap material."
+  short_description: "Use when the user asks about recent engineering work, what the team is working on, planning or roadmap material, or an explicitly requested Slack summary."

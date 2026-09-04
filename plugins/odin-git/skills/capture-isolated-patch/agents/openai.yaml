@@ -1,3 +1,3 @@
 interface:
   display_name: "Capture Isolated Patch"
-  short_description: "Use when a candidate change must be produced without touching the working tree; an ephemeral worktree runs the declared command and returns a binary-safe patch plus its exit code."
+  short_description: "Use when a candidate change must be produced without touching the working tree."

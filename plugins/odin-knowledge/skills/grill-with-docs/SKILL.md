@@ -1,6 +1,6 @@
 ---
 name: grill-with-docs
-description: 'Use when a repository decision needs an interview plus durable terminology and decision records; interview the code domain model, then write each resolved term and decision into CONTEXT and ADR files. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a repository decision needs an interview plus durable terminology and decision records. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Grill with docs

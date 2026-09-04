@@ -1,6 +1,6 @@
 ---
 name: design-it-twice
-description: 'Use when asked to design a module interface, seam, or testable boundary. Produce compared alternative interface designs using explicit deep-module vocabulary and deliberately placed seams. Not for UI direction picking: use design. No source or remote-system changes.'
+description: 'Use when asked to design a module interface, seam, or testable boundary. Not for UI direction picking: use design. No source or remote-system changes.'
 ---
 
 # Design it twice

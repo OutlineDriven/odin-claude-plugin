@@ -1,6 +1,6 @@
 ---
 name: save-md
-description: 'Use when asked to save a named source as a .md file with frontmatter. Captures a URL, file, or pasted text as one Markdown artifact with provenance and without summarization. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to save a URL, file, or pasted text as a .md file with frontmatter, without summarizing. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Save source as Markdown

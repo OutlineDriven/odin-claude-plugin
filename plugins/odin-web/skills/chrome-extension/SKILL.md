@@ -1,6 +1,6 @@
 ---
 name: chrome-extension
-description: 'Use when the user explicitly asks to build, modify, or publish a Manifest V3 Chrome extension. Authors manifest.json, service worker, content scripts, messaging, storage, and UI surfaces with minimal permissions and CSP compliance. Store submission requires explicit human invocation and human-supplied credentials.'
+description: 'Use when the user explicitly asks to build, modify, or publish a Manifest V3 Chrome extension. Not for store submission without human-gated credentials.'
 disable-model-invocation: true
 ---
 

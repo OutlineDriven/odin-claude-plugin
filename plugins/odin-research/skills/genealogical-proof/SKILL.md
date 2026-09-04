@@ -1,6 +1,6 @@
 ---
 name: genealogical-proof
-description: 'Use when a genealogical identity or relationship needs correlation, conflict analysis, and negative-search proof. Applies the Genealogical Proof Standard to classify the proposition as proved, disproved, likely, or possible. Not for non-genealogical identity proof.'
+description: 'Use when a genealogical identity or relationship needs correlation, conflict analysis, and negative-search proof. Not for non-genealogical identity proof.'
 ---
 
 # Genealogical proof

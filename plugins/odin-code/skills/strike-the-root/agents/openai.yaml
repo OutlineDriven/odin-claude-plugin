@@ -1,3 +1,3 @@
 interface:
   display_name: "Strike The Root"
-  short_description: "Use when a bug, failure, flake, regression, review finding, or ticket needs the core fixed so it cannot break the same way again."
+  short_description: "Use when a bug, failure, flake, regression, review finding, or ticket needs the core fixed so it cannot recur."

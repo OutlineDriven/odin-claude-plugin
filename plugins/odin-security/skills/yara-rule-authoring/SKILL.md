@@ -1,6 +1,6 @@
 ---
 name: yara-rule-authoring
-description: 'Use when writing, reviewing, optimizing, validating, or migrating YARA or YARA-X malware-detection rules, including CRX or DEX rules. Produces a validated rule with family-specific indicators and separated validation results. Not for network IDS or memory-forensics rules.'
+description: 'Use when writing, reviewing, optimizing, validating, or migrating YARA or YARA-X malware-detection rules, including CRX or DEX rules. Not for network IDS or memory-forensics rules.'
 ---
 
 # YARA-X rule authoring

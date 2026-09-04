@@ -1,6 +1,6 @@
 ---
 name: spec-to-code-compliance
-description: 'Use when implementation must be checked requirement-by-requirement against an authoritative specification, with evidence for each verdict. Handles both standalone spec audits and PR-review spec-drift checks against checked-in spec context. Not for writing or updating specs: use spec-driven-implementation. Not for remote or irreversible changes.'
+description: 'Use when implementation must be checked against an authoritative specification, or during PR review for spec drift against checked-in specs. Not for spec updates: use spec-driven-implementation.'
 ---
 
 # Spec to code compliance

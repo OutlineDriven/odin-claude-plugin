@@ -1,6 +1,6 @@
 ---
 name: leave-only-first-principle
-description: 'Use when asked to prune an existing design or codebase until only primitives remain, producing a reusable first-principles map for rewrite or study. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to prune a design or codebase until only primitives remain, producing a first-principles map. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Leave only first principle

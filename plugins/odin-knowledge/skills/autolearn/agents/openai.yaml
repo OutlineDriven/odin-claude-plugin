@@ -1,3 +1,3 @@
 interface:
   display_name: "Autolearn"
-  short_description: "Use when a verified non-trivial fix lands."
+  short_description: "Use when a verified non-trivial fix lands or existing solution docs need refresh."

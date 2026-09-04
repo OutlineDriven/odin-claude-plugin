@@ -1,6 +1,6 @@
 ---
 name: backlog
-description: 'Use when asked to park an undecided idea without representing it as decided or active work. Creates or updates one reversible local backlog entry with evidence and a readiness threshold. Not for decided or active work: use the project task system.'
+description: 'Use when asked to park an undecided idea without representing it as decided or active work. Not for decided or active work: use the project task system.'
 ---
 
 # Backlog

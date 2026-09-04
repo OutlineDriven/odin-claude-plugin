@@ -1,6 +1,6 @@
 ---
 name: audit-project
-description: 'Use when the user says "audit my code", "find all the bugs", "review until clean", or "grill my changes". Runs an iterative multi-agent review that resolves every finding at or above a configurable severity floor to zero, or stops at a gate or cap. Not for remote, credential, or irreversible changes.'
+description: 'Use when the user says "audit my code", "find all the bugs", "review until clean", or "grill my changes". Not for remote, credential, or irreversible changes.'
 ---
 
 # Audit project

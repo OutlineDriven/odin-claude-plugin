@@ -1,6 +1,6 @@
 ---
 name: history-forget
-description: 'Use when the user human-confirmedly asks to remove a session or note from recall. Writes a concrete exclusion or tombstone marker to a local overlay schema, atomically rebuilds the recall index, and supports unforget and list. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user asks to remove a session or note from recall, or to unforget or list exclusions. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # History forget

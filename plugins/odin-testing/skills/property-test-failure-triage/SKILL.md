@@ -1,6 +1,6 @@
 ---
 name: property-test-failure-triage
-description: 'Use when a generated or shrunk counterexample from a property-based test fails. Classifies whether the defect is in the implementation, the property statement, or the specification, and states the minimal repair action. Not for writing or reviewing tests.'
+description: 'Use when a generated or shrunk counterexample from a property-based test fails. Not for writing or reviewing tests.'
 ---
 
 # Property test failure triage

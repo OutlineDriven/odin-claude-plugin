@@ -1,6 +1,6 @@
 ---
 name: security-hardening
-description: 'Use when handling untrusted input, auth/authz, data storage, or external integrations to add security controls during construction. Not for auditing a change set: use security-review. Not for verifying a named finding: use security-finding-verification.'
+description: 'Use when adding security controls for untrusted input, auth/authz, data storage, or external integrations. Not for audit: use security-review. Not for finding: use security-finding-verification.'
 ---
 
 # Harden code security

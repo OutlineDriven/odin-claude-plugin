@@ -1,6 +1,6 @@
 ---
 name: handoff
-description: 'Use when substantive work reaches a session boundary, resumes after interruption, completes, or must move to another session, agent, harness, directory, or repository. Maintains ignored local continuity state and emits a bounded portable brief without launching its receiver.'
+description: 'Use when substantive work reaches a session boundary, resumes after interruption, completes, or must move to another session, agent, harness, directory, or repository.'
 ---
 
 # Session continuity and handoff

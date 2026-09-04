@@ -1,6 +1,6 @@
 ---
 name: loop-me
-description: 'Use when the user says "loop me" or asks to design a recurring workflow. Produces workflow specs that an implementer can build without another question. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user says "loop me" or asks to design a recurring workflow. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Loop me

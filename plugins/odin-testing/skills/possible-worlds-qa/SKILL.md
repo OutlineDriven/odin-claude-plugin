@@ -1,6 +1,6 @@
 ---
 name: possible-worlds-qa
-description: 'Use when a product surface must be tested against extreme or hostile worlds rather than collect green checks. Completeness mode classifies every world against stated criteria and reports gaps; break mode names an expected break signal per world, captures proof artifacts, and escalates worlds that survive. Not for interpreting a design dispute, use possible-worlds; not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a product surface must be tested against extreme or hostile worlds. Not for design disputes: use possible-worlds. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Possible worlds QA

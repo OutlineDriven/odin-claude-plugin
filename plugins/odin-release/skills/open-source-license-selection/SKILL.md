@@ -1,6 +1,6 @@
 ---
 name: open-source-license-selection
-description: 'Use when the user asks to choose, reconcile, or apply an open-source license and package metadata. Classifies candidates using standard OSI families, checks dependency license compatibility against the reciprocity goal, and when requested applies the chosen license atomically across LICENSE, package metadata, and README. Not for readiness auditing.'
+description: 'Use when the user asks to choose, reconcile, or apply an open-source license and package metadata. Not for readiness auditing.'
 ---
 
 # Open source license selection

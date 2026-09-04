@@ -1,6 +1,6 @@
 ---
 name: goal-init
-description: 'Use when a durable effort needs an approved, checkable success predicate before work starts; writes the goal, verifier, budget, and run-log scaffold. Not for requirement-to-evidence contract ledgers. Never remote, credential, publish, deploy, or irreversible.'
+description: 'Use when a durable effort needs an approved, checkable success predicate before work starts. Not for requirement-to-evidence ledgers. Never remote, credential, publish, deploy, or irreversible.'
 ---
 
 # Goal init

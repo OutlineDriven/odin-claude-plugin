@@ -1,6 +1,6 @@
 ---
 name: fail-design
-description: 'Use when a user wants to define failure states, recovery actions, bypasses, and degraded modes for a component during design. Produces a failure-state design document mapping every bounded failure state to its recovery, bypass, or degraded mode. Not for runtime recovery.'
+description: 'Use when a user wants to define failure states, recovery actions, bypasses, and degraded modes for a component during design. Not for runtime recovery.'
 ---
 
 # Fail design

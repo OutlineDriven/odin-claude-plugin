@@ -1,6 +1,6 @@
 ---
 name: watch-for
-description: 'Use when the user wants to monitor a file, log, endpoint, or stateful artifact for drift, errors, or unexpected changes and receive a per-tick anomaly verdict. Samples at a fixed cadence, compares each sample against a baseline, and emits normal, anomalous, or error judgments until a stop condition is met. Not for tasks that require source or remote-system changes, and not for polling a completion predicate: use watch-until.'
+description: 'Use when monitoring a file, log, endpoint, or stateful artifact for drift, errors, or unexpected changes. Not for source/remote-system changes. Not for completion-predicate polling: use watch-until.'
 ---
 
 # Watch for

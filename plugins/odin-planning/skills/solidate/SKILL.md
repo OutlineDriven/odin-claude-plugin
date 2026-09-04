@@ -1,6 +1,6 @@
 ---
 name: solidate
-description: 'Use when a user invokes this skill to harden a chosen but tentative artifact into one durable result. Resolves assumptions, names invariants, removes temporary choices, and verifies the stable end state. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user wants to harden a chosen but tentative artifact into one durable result. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Solidate

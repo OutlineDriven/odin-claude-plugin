@@ -1,6 +1,6 @@
 ---
 name: todos-enhance
-description: 'Use when the user says the tasks are too vague or asks to sophisticate the todos, or the list reads as headings rather than executable work. Not for stale-list reconciliation, use todos-update; not for adding requirements, use todo-add.'
+description: 'Use when tasks are too vague, read as headings, or the user asks to sophisticate the todos. Not for stale reconciliation: use todos-update. Not for adding requirements: use todo-add.'
 ---
 
 # Sophisticate todos

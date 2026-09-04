@@ -1,6 +1,6 @@
 ---
 name: sharp-edges-analyzer
-description: 'Use when a specialist agent must analyze APIs, configurations, or interfaces for misuse resistance. Returns findings with category, severity, exploitability, and recommendation. Not for a quick inline audit: use sharp-edges.'
+description: 'Use when a specialist agent must analyze APIs, configurations, or interfaces for misuse resistance. Not for a quick inline audit: use sharp-edges.'
 ---
 
 # Sharp edges analyzer

@@ -1,6 +1,6 @@
 ---
 name: generalize
-description: 'Use when asked to derive the general rule a request carries when it arrives as examples instead of a stated rule, then bound that rule. Not for ambiguity resolution inside a stated request: use clarify. Read-only.'
+description: 'Use when asked to derive the general rule a request carries as examples instead of a stated rule, then bound it. Not for ambiguity in a stated request: use clarify. Read-only.'
 ---
 
 # Generalize from cases

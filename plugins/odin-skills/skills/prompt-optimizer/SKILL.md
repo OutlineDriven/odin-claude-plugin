@@ -1,6 +1,6 @@
 ---
 name: prompt-optimizer
-description: 'Use when asked to improve, optimize, rewrite, tune, or port a prompt, skill, or tool description, to build prompt evals, or to audit prompt text for dated instructions. Optimize mode returns a shorter prompt validated on holdout cases; audit mode returns a confidence-ordered findings report and a proposed diff, and applies nothing.'
+description: 'Use when asked to improve, optimize, rewrite, tune, or port a prompt, skill, or tool description. Also for building prompt evals or auditing prompt text for dated instructions.'
 ---
 
 # Prompt optimizer

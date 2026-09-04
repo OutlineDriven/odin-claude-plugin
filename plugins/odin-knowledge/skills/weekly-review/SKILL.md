@@ -1,6 +1,6 @@
 ---
 name: weekly-review
-description: 'Use when asked to summarize authored work from the last week. Reads git history without changing it, then returns an executive summary and work classification. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when asked to summarize authored work from the last week. Don''t use for tasks that require source or remote-system changes.'
 ---
 
 # Weekly review

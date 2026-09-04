@@ -1,6 +1,6 @@
 ---
 name: isolate-workspace-gate
-description: 'Use when asked to start feature work that needs isolation, or before executing an implementation plan. Creates an isolated git worktree with symlinked hooks, runs setup, and gates on a green baseline test suite. Not for loop-run worktree lifecycle: use isolate-work-in-worktree.'
+description: 'Use when starting feature work that needs isolation, or before executing an implementation plan. Not for loop-run worktree lifecycle: use isolate-work-in-worktree.'
 ---
 
 # Isolate workspace gate

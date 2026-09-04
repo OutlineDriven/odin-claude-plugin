@@ -1,6 +1,6 @@
 ---
 name: decision-diary
-description: 'Use when a user wants to record why one world won over the others. The decision and its rationale are recorded in the decision diary. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a user wants to record why one world won over the others, as a decision-diary entry. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Decision diary

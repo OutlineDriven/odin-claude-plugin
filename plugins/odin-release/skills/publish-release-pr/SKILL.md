@@ -1,6 +1,6 @@
 ---
 name: publish-release-pr
-description: 'Use when a human runs /publish-release-pr to ship a versioned, redaction-gated PR with evidence. Not for tag-and-push releases; use release-gate.'
+description: 'Use when a human runs /publish-release-pr to ship a versioned, redaction-gated PR with evidence. Not for tag-and-push releases: use release-gate.'
 disable-model-invocation: true
 ---
 

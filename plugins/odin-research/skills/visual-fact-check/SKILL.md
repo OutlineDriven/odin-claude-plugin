@@ -1,6 +1,6 @@
 ---
 name: visual-fact-check
-description: 'Use when invoked as visual-fact-check with a document path. Verifies every factual claim against its cited sources, corrects errors in place, and appends a verification summary. Not for both-ways fact-checking of assertions: use verify-both-ways.'
+description: 'Use when invoked as visual-fact-check with a document path. Verifies factual claims against cited sources and corrects errors in place. Not for both-ways fact-checking: use verify-both-ways.'
 ---
 
 # Visual fact check

@@ -1,6 +1,6 @@
 ---
 name: doubt-driven
-description: 'Use when a non-trivial decision sits under uncertainty and correctness matters more than speed. Returns fresh-context adversarial findings with classified reconciliation and a stop condition. Not for patch review: use review; not for plan attacks: use load-bearing-assumption-test.'
+description: 'Use when a non-trivial decision sits under uncertainty and correctness matters more than speed. Not for patch review: use review. Not for plan attacks: use load-bearing-assumption-test.'
 ---
 
 # Doubt-driven development

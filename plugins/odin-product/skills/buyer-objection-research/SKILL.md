@@ -1,6 +1,6 @@
 ---
 name: buyer-objection-research
-description: 'Use when product copy needs buyer-objection evidence collected through approved outreach. Conducts structured interviews via approved channels with consent, then synthesizes a copy recommendation grounded in anonymized exact language. Not for unsolicited outreach or survey design.'
+description: 'Use when product copy needs buyer-objection evidence collected through approved, consented outreach. Not for unsolicited outreach or survey design.'
 ---
 
 # Buyer objection research

@@ -1,6 +1,6 @@
 ---
 name: keep-why-repo-structure
-description: 'Use when project documentation needs a layout or a knowledge item needs one home. Proposes a topic-indexed why-layer only where no suitable structure exists. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when project documentation needs a layout or a knowledge item needs one home. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Keep why repo structure

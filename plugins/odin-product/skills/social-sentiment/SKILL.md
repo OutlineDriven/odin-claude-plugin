@@ -1,6 +1,6 @@
 ---
 name: social-sentiment
-description: 'Use when the user asks for a weekly sentiment report, weekly social summary, or how mentions looked this week. Compares the most recent completed week against the prior week: sentiment scores, volume deltas, notable patterns, and product feedback, published as a PR after human approval. Not for continuous monitoring or alerting.'
+description: 'Use when the user asks for a weekly sentiment report, weekly social summary, or how mentions looked this week. Not for continuous monitoring or alerting.'
 disable-model-invocation: true
 ---
 

@@ -1,3 +1,3 @@
 interface:
   display_name: "Markdown To PDF"
-  short_description: "Use when the user runs /markdown-to-pdf on Markdown to render a publication-quality PDF with emoji, diagram, landscape, and combined gates green."
+  short_description: "Use when the user runs /markdown-to-pdf on Markdown to render a publication-quality PDF."

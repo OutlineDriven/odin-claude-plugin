@@ -1,6 +1,6 @@
 ---
 name: get-pr-comments
-description: 'Use when asked to summarize feedback on the active PR. Returns severity-grouped feedback and an action list. Not for finding PRs to review: use gh-review-requests. Not for resolving feedback: use resolve-pr-feedback. Read-only.'
+description: 'Use when asked to summarize feedback on the active PR. Not for finding PRs to review: use gh-review-requests. Not for resolving feedback: use resolve-pr-feedback.'
 ---
 
 # Get PR comments

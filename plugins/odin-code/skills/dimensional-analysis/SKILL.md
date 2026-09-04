@@ -1,6 +1,6 @@
 ---
 name: dimensional-analysis
-description: 'Use when code mixes units, fixed-point precisions, scaling factors, rates, prices, shares, or conversions and needs dimensional consistency validated. Annotates every in-scope file with unit comments, derives a units vocabulary, and reports confirmed and refuted mismatches. Not for type-level unit modeling: use type-driven.'
+description: 'Use when code mixes units, fixed-point precisions, scaling factors, rates, prices, shares, or conversions. Not for type-level unit modeling: use type-driven.'
 ---
 
 # Dimensional analysis

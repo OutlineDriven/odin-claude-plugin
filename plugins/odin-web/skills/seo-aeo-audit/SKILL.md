@@ -1,6 +1,6 @@
 ---
 name: seo-aeo-audit
-description: 'Use when asked to improve SEO, optimize for search, fix meta tags, add structured data, or improve AEO visibility. Runs a full technical, page, structured-data, and AEO audit and returns a prioritized markdown report. Not for tasks requiring source or remote-system changes.'
+description: 'Use when asked to improve SEO, optimize for search, fix meta tags, add structured data, or improve AEO visibility. Not for tasks requiring source or remote-system changes.'
 ---
 
 # SEO / AEO audit

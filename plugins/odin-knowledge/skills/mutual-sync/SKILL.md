@@ -1,6 +1,6 @@
 ---
 name: mutual-sync
-description: 'Use when the user and agent may hold different pictures of current state after a gap, sync request, or exposed stale claim. Produces an evidence-backed ledger of agreed facts, corrected beliefs, and open assumptions. Not for persistence: use memory-update.'
+description: 'Use when the user and agent may hold different pictures of current state after a gap, sync request, or exposed stale claim. Not for persistence: use memory-update.'
 ---
 
 # Mutual sync

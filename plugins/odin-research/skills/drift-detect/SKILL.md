@@ -1,6 +1,6 @@
 ---
 name: drift-detect
-description: 'Use when roadmap, plans, or docs may have drifted from code, or when restarting a stalled project. Returns an evidence-cited Reality Check Report with drift analysis and a prioritized reconstruction plan. Not for PR doc sync: use docs-update.'
+description: 'Use when roadmap, plans, or docs may have drifted from code, or when restarting a stalled project. Not for PR doc sync: use docs-update.'
 ---
 
 # Drift detect

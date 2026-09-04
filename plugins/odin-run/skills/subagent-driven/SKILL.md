@@ -1,6 +1,6 @@
 ---
 name: subagent-driven
-description: 'Use when a user says execute with subagents or hands over an ordered multi-task plan to run a per-task implementer-reviewer loop with an audit gate. Don''t use for credential, paid, or deployment work, or for any mutation outside the skill''s designated workspace.'
+description: 'Use when a user says execute with subagents or hands over an ordered multi-task plan. Not for credential, paid, or deployment work, or any mutation outside the skill''s designated workspace.'
 disable-model-invocation: true
 ---
 

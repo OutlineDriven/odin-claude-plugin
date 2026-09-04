@@ -1,6 +1,6 @@
 ---
 name: fresh-reader-review
-description: 'Use when asked to cold-read an artifact with fresh zero-context eyes and cut whatever a stranger cannot follow. Dispatches blind sub-sessions that read only the inline artifact, compares their understanding against a private intent note, and reports severity-ordered defects. Not for criteria-review of requirements docs: use doc-review.'
+description: 'Use when asked to cold-read an artifact with fresh zero-context eyes and cut whatever a stranger cannot follow. Not for criteria-review of requirements docs: use doc-review.'
 ---
 
 # Fresh reader review

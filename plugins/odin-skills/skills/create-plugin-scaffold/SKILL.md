@@ -1,6 +1,6 @@
 ---
 name: create-plugin-scaffold
-description: 'Use when asked to create a local agent-plugin directory tree. Generates a valid scaffold with a host-specific manifest, entry point exporting the registration API, and standard directory layout, then validates the result. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to create a local agent-plugin directory tree or marketplace package. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Create plugin scaffold

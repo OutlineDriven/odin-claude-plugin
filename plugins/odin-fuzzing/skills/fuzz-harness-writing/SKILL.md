@@ -1,6 +1,6 @@
 ---
 name: fuzz-harness-writing
-description: 'Use when a user needs to create or improve a deterministic, engine-agnostic fuzz harness for raw or structured target inputs. Identifies the API entry point, defines an adapter for structured input, writes a deterministic harness, populates a boundary corpus, and confirms API reachability with preserved crashes. Not for coverage measurement: use fuzzing-coverage-analysis.'
+description: 'Use when a user needs to create or improve a deterministic, engine-agnostic fuzz harness for raw or structured target inputs. Not for coverage measurement: use fuzzing-coverage-analysis.'
 ---
 
 # Fuzz harness writing

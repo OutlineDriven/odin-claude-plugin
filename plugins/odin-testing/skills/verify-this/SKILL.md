@@ -1,6 +1,6 @@
 ---
 name: verify-this
-description: 'Use when a measurable claim needs before/after proof. Runs controlled baseline and treatment probes, then returns VERIFIED, NOT VERIFIED, or INCONCLUSIVE with deltas. Not for fact-checking or done-claim gating, use verify-both-ways or verification-before-completion.'
+description: 'Use when a measurable claim needs before/after proof. Not for fact-checking or done-claim gating: use verify-both-ways or verification-before-completion.'
 ---
 
 # Verify this

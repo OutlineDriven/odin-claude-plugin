@@ -1,3 +1,3 @@
 interface:
   display_name: "Git Branchless"
-  short_description: "Use when asked for multi-commit stack edits, rebases, fixups, or stacked-PR publishing with branchless git idioms and a publish gate."
+  short_description: "Use when asked for multi-commit stack edits, rebases, fixups, or stacked-PR publishing with branchless git idioms."

@@ -1,6 +1,6 @@
 ---
 name: necessary-work
-description: 'Use when work is about to grow past the ask, the task may already be done, or the user requests only the minimum. Produce a bounded contract whose every admitted action is necessary, then stop at proof. Not for executing the work: use tdd to build or strike-the-root to fix.'
+description: 'Use when work is about to grow past the ask, the task may already be done, or the user requests only the minimum. Not for executing the work: use tdd to build or strike-the-root to fix.'
 ---
 
 # Necessary work

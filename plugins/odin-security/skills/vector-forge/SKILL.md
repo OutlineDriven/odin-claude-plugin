@@ -1,6 +1,6 @@
 ---
 name: vector-forge
-description: 'Use when existing cryptographic implementations and a vector-consuming harness need mutation-driven, cross-implementation test vector expansion. Produces targeted test vectors isolating escaped-mutant defects and a measured before/after kill-rate delta. Not for validating against the established Wycheproof corpus: use wycheproof. Not for coverage-guided fuzzing: use fuzz-harness-writing.'
+description: 'Use when crypto implementations and a vector harness need mutation-driven cross-implementation test vector expansion. Not for Wycheproof: use wycheproof. Not for fuzzing: use fuzz-harness-writing.'
 ---
 
 # Vector forge

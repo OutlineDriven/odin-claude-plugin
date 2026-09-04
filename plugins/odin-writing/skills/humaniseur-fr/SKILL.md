@@ -1,6 +1,6 @@
 ---
 name: humaniseur-fr
-description: 'Use when the user supplies French text that reads like AI output and asks to naturalize it. One pass removes AI tells while preserving register; returns the rewritten French text. Not for English STE rewriting; use humanizer-en-asd-ste100.'
+description: 'Use when the user supplies French text that reads like AI output and asks to naturalize it. Not for English STE rewriting: use humanizer-en-asd-ste100.'
 ---
 
 # Humaniseur fr

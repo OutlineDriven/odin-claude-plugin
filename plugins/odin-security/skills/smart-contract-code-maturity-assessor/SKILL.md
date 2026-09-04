@@ -1,6 +1,6 @@
 ---
 name: smart-contract-code-maturity-assessor
-description: 'Use when a smart-contract codebase needs an evidence-based maturity scorecard and prioritized improvement roadmap. Rates nine categories from code and explicit off-chain evidence, computes an aggregate score, and produces a CRITICAL-to-MEDIUM roadmap. Not for vulnerability auditing, source fixes, or claims about inaccessible processes.'
+description: 'Use when a smart-contract codebase needs an evidence-based maturity scorecard and improvement roadmap. Not for vulnerability auditing, source fixes, or claims about inaccessible processes.'
 ---
 
 # Smart contract code maturity assessor

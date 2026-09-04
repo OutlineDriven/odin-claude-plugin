@@ -1,6 +1,6 @@
 ---
 name: axiom-mode
-description: 'Use when the user requests axiom, axiom-mode, axiom-compact, formal-logic, or compact form. Switches responses to compact formal-logic English with predicate claims and ASCII keywords, then restores the register after clarity exceptions. Not for changing code or remote state.'
+description: 'Use when the user requests axiom, axiom-mode, axiom-compact, formal-logic, or compact form. Not for changing code or remote state.'
 ---
 
 # Axiom mode

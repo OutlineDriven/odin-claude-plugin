@@ -1,6 +1,6 @@
 ---
 name: attack-shape
-description: 'Use when a user wants adversarial stress-testing of a proposed architecture, structure, or shape. The agent attacks while the human defends, or the agent proposes while the human attacks, until the shape survives or breaks. Records the surviving shape as a decision. Not for tasks that require source or remote-system changes.'
+description: 'Use when the user wants adversarial stress-testing of a proposed architecture, structure, or shape. Not for tasks that require source or remote-system changes.'
 ---
 
 # Attack shape

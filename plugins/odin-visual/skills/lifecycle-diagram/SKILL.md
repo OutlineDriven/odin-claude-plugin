@@ -1,6 +1,6 @@
 ---
 name: lifecycle-diagram
-description: 'Use when states, waits, retries, decisions, transitions, and terminals need a lifecycle view. Produces a fail-closed lifecycle JSON spec and self-contained interactive HTML topology. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when states, waits, retries, decisions, transitions, and terminals need a lifecycle view. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Lifecycle diagram

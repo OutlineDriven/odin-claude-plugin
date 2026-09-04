@@ -1,6 +1,6 @@
 ---
 name: libafl
-description: 'Use when a custom LibAFL fuzzer needs an executor, observer, feedback, mutator, scheduler, or objective composed around a target. Produces a coverage-guided engine with persisted findings. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a LibAFL fuzzer needs an executor, observer, feedback, mutator, scheduler, or objective composed around a target. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # LibAFL custom fuzzer composition

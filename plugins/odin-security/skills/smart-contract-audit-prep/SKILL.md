@@ -1,6 +1,6 @@
 ---
 name: smart-contract-audit-prep
-description: 'Use when a smart-contract project must become review-ready before an audit. Produces a handoff package with frozen commit, build checks, and readiness checklist. Not for workflow: use smart-contract-secure-workflow; not for guidelines: use smart-contract-guidelines-advisor.'
+description: 'Use when a smart-contract project must become review-ready before an audit. Not for workflow: use smart-contract-secure-workflow. Not for guidelines: use smart-contract-guidelines-advisor.'
 ---
 
 # Smart contract audit prep

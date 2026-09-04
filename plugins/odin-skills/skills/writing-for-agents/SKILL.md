@@ -1,6 +1,6 @@
 ---
 name: writing-for-agents
-description: 'Use when asked to author or restructure any agent-consumed document so the agent routes and executes predictably. Produces a self-contained document with no stale duplication or unreachable pointers. Not for skill-specific mechanics like invocation choice, use writing-skills.'
+description: 'Use when asked to author or restructure any agent-consumed document so an agent routes and executes predictably. Not for skill mechanics like invocation choice: use writing-skills.'
 ---
 
 # Writing for agents

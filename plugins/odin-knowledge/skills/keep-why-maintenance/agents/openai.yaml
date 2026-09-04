@@ -1,3 +1,3 @@
 interface:
   display_name: "Keep Why Maintenance"
-  short_description: "Use when contradictions, revisit conditions, or duplicates appear in knowledge entries to resolve them by flipping statuses, marking superseded content, merging duplicates, or proposing file splits."
+  short_description: "Use when contradictions, revisit conditions, or duplicates appear in knowledge entries."

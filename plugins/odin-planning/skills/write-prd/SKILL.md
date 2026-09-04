@@ -1,6 +1,6 @@
 ---
 name: write-prd
-description: 'Use when a user asks to write a PRD or draft feature requirements. Produces a structured PRD with evidence-driven citations and opens a PR. Not for product specs with behavioral invariants; use write-product-spec. Not for tech specs; use write-tech-spec.'
+description: 'Use when a user asks to write a PRD or draft feature requirements. Not for product specs with behavioral invariants: use write-product-spec. Not for tech specs: use write-tech-spec.'
 disable-model-invocation: true
 ---
 

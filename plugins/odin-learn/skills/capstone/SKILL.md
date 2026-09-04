@@ -1,6 +1,6 @@
 ---
 name: capstone
-description: 'Use when the learner is ready to apply cleared concepts in a real project. Scopes one capstone sized to those concepts, writes capstone-<slug>.md, yields to the learner to build it, then judges the returned work item by item on a later visit. Not for exercises or quizzes; use drill.'
+description: 'Use when the learner is ready to apply cleared concepts in a real project. Not for exercises or quizzes: use drill.'
 ---
 
 # Capstone

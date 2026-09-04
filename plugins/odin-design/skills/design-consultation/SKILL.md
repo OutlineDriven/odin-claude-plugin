@@ -1,6 +1,6 @@
 ---
 name: design-consultation
-description: 'Use when /design-consultation proposes a design system with mockups or HTML and persists the approved system in DESIGN.md. Not for in-chat direction picking: use design. No remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when /design-consultation proposes a design system with mockups or HTML and persists it in DESIGN.md. Not for in-chat direction picking: use design.'
 ---
 
 # Design consultation

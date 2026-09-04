@@ -1,6 +1,6 @@
 ---
 name: implement-spec
-description: 'Use when a ticket DAG from a complete specification needs parallel execution into a green draft PR. A single approved feature is the degenerate one-ticket DAG. Not for a single settled ticket with no spec; use work; not for ticket decomposition; use to-tickets.'
+description: 'Use when a ticket DAG from a complete specification needs parallel execution into a green draft PR. Not for a settled ticket with no spec: use work. Not for ticket decomposition: use to-tickets.'
 disable-model-invocation: true
 ---
 

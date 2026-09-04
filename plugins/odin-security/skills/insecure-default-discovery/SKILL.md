@@ -1,6 +1,6 @@
 ---
 name: insecure-default-discovery
-description: 'Use when the user asks to audit a file, subtree, or repository for fallback secrets, default credentials, fail-open controls, weak primitives, permissive access, or exposed debug behavior. Returns a coverage-aware findings report. Not for exhaustive secret scanning.'
+description: 'Use when the user asks to audit a file, subtree, or repository for fallback secrets, default credentials, fail-open controls, weak primitives, or permissive access. Not for exhaustive secret scanning.'
 ---
 
 # Insecure default discovery

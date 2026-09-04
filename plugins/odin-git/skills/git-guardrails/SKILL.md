@@ -1,6 +1,6 @@
 ---
 name: git-guardrails
-description: 'Use when a repository needs a safety net against force-push, forced refspec, hard reset, forced clean, forced branch deletion, working-tree discard, stash drop/clear, reflog expire, or gc prune; installs a PreToolUse hook exiting 2 on them; plain git push allowed. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a repository needs a guard against force-push, forced reset, clean, branch deletion, working-tree discard, stash drop, reflog expire, or gc prune. Not for remote or irreversible changes.'
 ---
 
 # Set up Git guardrails

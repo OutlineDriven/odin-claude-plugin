@@ -1,6 +1,6 @@
 ---
 name: doc-coauthoring
-description: 'Use when drafting a doc, proposal, spec, RFC, design doc, decision doc, or PRD in chat. Produces a structured document that passes fresh-reader testing and meets its impact goal. Not for reviewing an existing plan: use doc-review. No source or remote-system changes.'
+description: 'Use when drafting a doc, proposal, spec, RFC, design doc, decision doc, or PRD in chat. Not for reviewing an existing plan: use doc-review. No source or remote-system changes.'
 ---
 
 # Doc coauthoring

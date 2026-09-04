@@ -1,3 +1,3 @@
 interface:
   display_name: "Headed Browser Takeover"
-  short_description: "Use when the user asks to open or take over a visible browser session, or needs to intervene in a live browser by hand, for example to solve a CAPTCHA or authenticate."
+  short_description: "Use when the user asks to open or take over a visible browser session by hand, for example to solve a CAPTCHA or authenticate."

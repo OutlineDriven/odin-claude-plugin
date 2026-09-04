@@ -1,6 +1,6 @@
 ---
 name: viral-opportunity-scout
-description: 'Use when asked to find distribution opportunities for a template, tool, or artifact. Classifies the artifact, queries known directories and aggregator platforms, filters for active communities, scores reach and fit, and compiles a ranked report with submission rationales. Not for content creation or campaign management.'
+description: 'Use when asked to find distribution opportunities for a template, tool, or artifact. Not for content creation or campaign management.'
 ---
 
 # Viral opportunity scout

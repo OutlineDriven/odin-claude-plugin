@@ -1,6 +1,6 @@
 ---
 name: audit-loop-scaffold
-description: 'Use when loop scaffold files have drifted from their provenance-pinned templates. Converges exactly four auto-fixable files (STATE.md, gate.yaml, loop-budget.md, loop-run-log.md) to template content with pre-write backup and rollback, and reports other drift. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when loop scaffold files have drifted from their provenance-pinned templates. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Audit loop scaffold

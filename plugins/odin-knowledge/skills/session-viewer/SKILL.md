@@ -1,6 +1,6 @@
 ---
 name: session-viewer
-description: 'Use when the user asks to view, export, or inspect a session transcript in a browser. Produces one local single-file searchable HTML viewer from the session JSONL with credential scrubbing and optional browser launch. Not for sharing a session; use session-share.'
+description: 'Use when the user asks to view, export, or inspect a session transcript in a browser. Not for sharing a session: use session-share.'
 ---
 
 # Session viewer

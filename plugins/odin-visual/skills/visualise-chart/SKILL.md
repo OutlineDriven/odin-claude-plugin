@@ -1,6 +1,6 @@
 ---
 name: visualise-chart
-description: 'Use when the user asks to visualise data as a chart. Returns a self-contained HTML chart fragment using inline SVG or Canvas in a visualizer fence. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when the user asks to visualise data as a chart, rendered as a self-contained HTML fragment. Not for tasks that require source or remote-system changes.'
 ---
 
 # Visualise chart

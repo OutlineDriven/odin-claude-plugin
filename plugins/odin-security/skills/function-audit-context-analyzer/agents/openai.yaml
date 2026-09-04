@@ -1,3 +1,3 @@
 interface:
   display_name: "Function Audit Context Analyzer"
-  short_description: "Use when an orchestrator or user requests deep audit-context analysis of one function, or needs to build audit context across a codebase before vulnerability hunting."
+  short_description: "Use when asked for audit-context analysis of one function, or to build audit context across codebase before vulnerability hunting."

@@ -1,6 +1,6 @@
 ---
 name: optimize
-description: 'Use when asked to optimize code, speed up a path, reduce allocations, repair a regression, or profile a target. Full mode lands one behavior-gated hot-path change proving at least 1.05x speedup; quick mode runs a measure-identify-fix-verify loop with a noise-aware keep/revert and a CI guard. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to optimize code, speed up a path, reduce allocations, repair a regression, or profile a target. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Optimize

@@ -1,6 +1,6 @@
 ---
 name: ax-audit
-description: 'Use when asked to audit an agent or AI feature for agentic-experience quality. Assesses target source or described behavior against Architecture and Agentic-experience rubrics, records findings with locators or logical bounds, and returns a severity-tiered report with a PASS/FAIL/INCOMPLETE verdict. Not for source or remote-system changes.'
+description: 'Use when asked to audit an agent or AI feature for agentic-experience quality (AX review, agent-native critique, trust question). Not for source or remote-system changes.'
 ---
 
 # AX audit

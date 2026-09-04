@@ -1,6 +1,6 @@
 ---
 name: purge-slop-docs
-description: 'Use when a human asks to purge stale docs, clean Markdown, or reorder the documentation hierarchy. Inspects a bounded Markdown tree, cuts four evidence-backed defect classes, and repairs hierarchy with per-deletion approval. Not for code debris: use deslop.'
+description: 'Use when a human asks to purge stale docs, clean Markdown, or reorder the documentation hierarchy. Not for code debris: use deslop.'
 disable-model-invocation: true
 ---
 

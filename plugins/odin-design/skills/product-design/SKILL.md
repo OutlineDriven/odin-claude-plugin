@@ -1,6 +1,6 @@
 ---
 name: product-design
-description: 'Use when deciding what an interface should do before UI is built or audited: interaction consequences, action scope, reachable states, naming, and accessibility of the product decision. Read-only analysis; produces a chat report with findings and routed follow-on work. Not for visual implementation; use prototype.'
+description: 'Use when deciding what an interface should do before UI is built or audited: consequences, action scope, reachable states, naming, and accessibility. Not for visual implementation: use prototype.'
 ---
 
 # Product design

@@ -1,6 +1,6 @@
 ---
 name: watch-for-harness-mode
-description: 'Use when a proven watch pattern should become a reusable harness artifact that replays the proven watch behavior with configurable inputs. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a proven watch pattern should become a reusable harness artifact with configurable inputs. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Watch for harness mode

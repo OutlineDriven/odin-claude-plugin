@@ -1,6 +1,6 @@
 ---
 name: strict-validation-setup
-description: 'Use when a user invokes a strict-mode validation or verifiable-goals loop setup. Bootstraps strict-mode tooling and per-task GOALS.md scaffolding so an agentic loop can self-verify. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a user invokes a strict-mode validation or verifiable-goals loop setup. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Strict validation setup

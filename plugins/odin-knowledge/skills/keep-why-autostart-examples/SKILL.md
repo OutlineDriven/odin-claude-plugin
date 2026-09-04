@@ -1,6 +1,6 @@
 ---
 name: keep-why-autostart-examples
-description: 'Use when skill or knowledge activation is unreliable, or setup reaches activation reliability. Configures a project-scoped, marker-gated hook and measures affected evals before and after. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when skill or knowledge activation is unreliable, or setup reaches activation reliability. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Keep why autostart examples

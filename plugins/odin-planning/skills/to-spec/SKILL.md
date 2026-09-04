@@ -1,6 +1,6 @@
 ---
 name: to-spec
-description: 'Use when settled conversation decisions need synthesis into an agent-ready implementation spec at docs/specs/<feature-slug>-spec.md, stopping before publication. Not for turning plans into tickets: use to-tickets; not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when settled conversation decisions need synthesis into an agent-ready implementation spec, stopping before publication. Not for turning plans into tickets: use to-tickets.'
 ---
 
 # To spec

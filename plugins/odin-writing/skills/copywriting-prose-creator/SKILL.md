@@ -1,6 +1,6 @@
 ---
 name: copywriting-prose-creator
-description: 'Use when asked to codify, audit, or port measurable prose style rules (syntax, rhythm, mechanics) into a versioned PROSE.md, separate from emotional tone. Not for tone-of-voice guides: use copywriting-tone-of-voice-creator; not for general copywriting: use copywriting.'
+description: 'Use when asked to codify, audit, or port prose style rules into PROSE.md. Not for tone-of-voice guides: use copywriting-tone-of-voice-creator. Not for general copywriting: use copywriting.'
 ---
 
 # Copywriting prose creator

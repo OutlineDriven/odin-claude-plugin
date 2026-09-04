@@ -1,6 +1,6 @@
 ---
 name: verify-both-ways
-description: 'Use when a load-bearing claim is unverified, a plausible statement has never been checked, the user says "fact-check this" or "verify this claim", or an artifact or sentence about to be written asserts something as plausible, absurd, novel, or impossible and doubt arises. Tests every claim in both directions (could the absurd be real? could the obvious be false?), cites sources, and returns a verdict per claim. Standalone-claim mode is read-only; artifact mode also corrects mechanically-clear local-artifact errors with a cited source and leaves deliberate fiction alone.'
+description: 'Use when a load-bearing claim is unverified, a plausible statement is unchecked, or the user says "fact-check this" or "verify this claim". Tests each claim both ways and returns a sourced verdict.'
 ---
 
 # Verify both ways

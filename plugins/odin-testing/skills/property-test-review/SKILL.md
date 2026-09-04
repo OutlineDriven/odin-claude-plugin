@@ -1,6 +1,6 @@
 ---
 name: property-test-review
-description: 'Use when reviewing existing property tests for coverage and defects. Reports tautological, vacuous, assertion-free, reimplemented, weak, or over-filtered tests with evidence, severity, and strongest replacement property. Not for generating tests, use property-test-authoring.'
+description: 'Use when reviewing existing property tests for coverage and defects. Not for generating tests: use property-test-authoring.'
 ---
 
 # Property test review

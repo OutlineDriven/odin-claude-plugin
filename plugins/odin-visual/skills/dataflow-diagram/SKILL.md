@@ -1,6 +1,6 @@
 ---
 name: dataflow-diagram
-description: 'Use when asked to visualize data movement, ETL or ELT, lineage, transformations, custody, governance, stores, sources, or consumers. Produces a typed dataflow JSON spec and one self-contained interactive HTML artifact with a hash-bound receipt and truthful visual-review status.'
+description: 'Use when asked to visualize data movement, ETL or ELT, lineage, transformations, custody, governance, stores, sources, or consumers.'
 ---
 
 # Dataflow diagram

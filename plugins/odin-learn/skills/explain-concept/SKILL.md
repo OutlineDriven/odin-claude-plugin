@@ -1,6 +1,6 @@
 ---
 name: explain-concept
-description: 'Use when a concept needs making clear rather than practising: explain it simply, why does this exist, draw it, what is the difference, or simplify it for a beginner. Delivers a one-screen explanation from one chosen angle, grounded in sources. Not for scaffolded practice: use drill.'
+description: 'Use when a concept needs making clear rather than practising: explain simply, why does this exist, draw it, or simplify for a beginner. Not for scaffolded practice: use drill.'
 ---
 
 # Explain concept

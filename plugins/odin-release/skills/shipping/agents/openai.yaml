@@ -1,3 +1,3 @@
 interface:
   display_name: "Shipping"
-  short_description: "Use when deploying to production, planning a feature release, setting up launch safeguards, or running a canary release to promote or roll back with evidence."
+  short_description: "Use when deploying to production, planning a feature release, setting up launch safeguards, or running a canary release."

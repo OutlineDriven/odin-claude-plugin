@@ -1,6 +1,6 @@
 ---
 name: extremely-optimize
-description: 'Use when asked to run a performance campaign against a measured floor: rebuild hot paths from their floor, grade cold paths, and land each target as an atomic commit with a proven win. Not for hypothesis-only analysis without mutation: use fastopt.'
+description: 'Use when asked to run a performance campaign against a measured floor. Not for hypothesis-only analysis without mutation: use fastopt.'
 ---
 
 # Extremely optimize

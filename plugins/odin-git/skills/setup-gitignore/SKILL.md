@@ -1,6 +1,6 @@
 ---
 name: setup-gitignore
-description: 'Use when the user says set up gitignore, fix gitignore, or untracked files keep appearing. Writes or merges .gitignore under stable section anchors and proves reruns produce no diff. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user says set up gitignore, fix gitignore, or untracked files keep appearing. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Setup gitignore

@@ -1,6 +1,6 @@
 ---
 name: design
-description: 'Use when starting UI work, defining palettes or design tokens, or fixing AI-generic, vibe-coded, or default-framework UI. Also handles TUI, CLI, and desktop surfaces when the runtime is named. Not for persisted design systems; use design-consultation. Not for live-URL audits; use web-design-review. No irreversible changes.'
+description: 'Use when starting UI work, defining palettes, tokens, or fixing AI-generic, vibe-coded, or default-framework UI. Not for design systems or live URLs: use design-consultation or web-design-review.'
 ---
 
 # Design

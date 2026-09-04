@@ -1,3 +1,3 @@
 interface:
   display_name: "Culture Interview Profile Prediction"
-  short_description: "Use when asked to predict Culture Index traits from an interview transcript before a survey exists."
+  short_description: "Use when asked to predict Culture Index traits from an interview transcript before a survey exists, including sparse or contradictory evidence."

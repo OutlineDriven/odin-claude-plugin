@@ -1,6 +1,6 @@
 ---
 name: ci-fix
-description: 'Use when the user says "CI is red", "fix the checks", or "make CI green" on a PR or branch. Diagnoses failing GitHub Actions checks, fixes the root cause, and re-verifies to green. Interactive mode applies a local fix; autonomous mode pushes to a fix branch. Not for deploys, credentials, permission-widening, or rerun-as-fix; non-CI bugs use strike-the-root.'
+description: 'Use when "CI is red", "fix the checks", or "make CI green" on a PR or branch. Not for deploys, credentials, permission-widening, or rerun-as-fix. Non-CI bugs: use strike-the-root.'
 ---
 
 # CI fix

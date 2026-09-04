@@ -1,6 +1,6 @@
 ---
 name: constraint-driven-development
-description: 'Use when asked to implement under explicit non-negotiable constraints such as performance budgets, platform limits, or legal or API rules. Extracts constraints into checkable invariants, implements with fast-check loops, and verifies no constraint worsened against a baseline guard. No remote, credential, publish, deploy, or irreversible mutation.'
+description: 'Use when asked to implement under non-negotiable constraints: performance budgets, platform limits, legal or API rules. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Constraint-driven development

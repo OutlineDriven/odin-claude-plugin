@@ -1,6 +1,6 @@
 ---
 name: readiness-assessment
-description: 'Use when a user asks for a gut-check on a decision or action, or asks whether enough is known to proceed. Produces a prose-only assessment with concrete knowns, unknowns, and one verdict: Proceed, Proceed with caveat, Pause, or Blocked. Not for numeric confidence scoring.'
+description: 'Use when a user asks for a gut-check on a decision or action, or asks whether enough is known to proceed. Not for numeric confidence scoring.'
 ---
 
 # Readiness assessment

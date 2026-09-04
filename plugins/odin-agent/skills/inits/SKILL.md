@@ -1,6 +1,6 @@
 ---
 name: inits
-description: 'Use when onboarding to a repository, capturing costly conventions, constraints, or rationale, or improving AGENTS.md. Produce a grounded AGENTS.md containing only prescriptive, non-derivable rules. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when onboarding to a repository, capturing costly conventions, constraints, or rationale, or improving AGENTS.md. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Inits

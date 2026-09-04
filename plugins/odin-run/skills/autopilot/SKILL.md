@@ -1,6 +1,6 @@
 ---
 name: autopilot
-description: 'Use when a human has an approved delivery plan and wants the full chain run under phase gates. Delegates implementation to work, simplification to simplify, review to review, and finalization to review-and-ship. Not for planning, open-ended debugging, or single-step execution: use work directly.'
+description: 'Use when a human has an approved delivery plan and wants the full chain run under phase gates. Not for planning, open-ended debugging, or single-step execution: use work directly.'
 disable-model-invocation: true
 ---
 

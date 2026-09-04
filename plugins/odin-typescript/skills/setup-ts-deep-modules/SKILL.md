@@ -1,6 +1,6 @@
 ---
 name: setup-ts-deep-modules
-description: 'Use when the user asks to enforce package boundaries, set up deep modules, stop deep imports, mutation-prove boundary rules, or ensure packages are reachable only through entry points in a TypeScript repo. Wires dependency-cruiser so each package is a deep module and mutation-verifies the rules bite. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to enforce boundaries, set up deep modules, stop deep imports, mutation-prove rules, or make entry-point packages. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Setup TS deep modules
