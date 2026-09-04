@@ -12,7 +12,7 @@ description: 'Use when addressing review feedback or analyzing whether a comment
 | Trigger | addressing review feedback or analyzing whether a comment is valid; for GitHub PR threads use resolve-pr-feedback |
 | Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | produces analysis and proposed solutions in chat; no code edits and no remote calls |
-| Done | each comment classified VALID ISSUE / NOT AN ISSUE / NEEDS CLARIFICATION with evidence and recommended solution |
+| Done | each comment classified VALID ISSUE / NOT AN ISSUE / NEEDS CLARIFICATION with evidence, and a recommended solution for VALID ISSUE |
 
 ## Inputs
 

@@ -1,6 +1,6 @@
 ---
 name: interactive-drop-selector
-description: 'Use when the user explicitly asks to choose which issues or pull requests to abandon interactively. Don''t use for closing items without per-item selection and explicit approval.'
+description: 'Use when the user explicitly asks to choose which issues or pull requests to close interactively. Don''t use for closing items without per-item selection and explicit approval.'
 disable-model-invocation: true
 ---
 
@@ -10,7 +10,7 @@ disable-model-invocation: true
 
 | Field | Bound contract |
 |---|---|
-| Trigger | The user explicitly asks to choose which issues or pull requests to abandon interactively. |
+| Trigger | The user explicitly asks to choose which issues or pull requests to close interactively. |
 | Authority | Remote: closes approved issues or pull requests in the named tracker scope; requires explicit human invocation. Do not close any item until the user has selected exact targets and explicitly approved the final preview. |
 | Side effect | Close only the approved issues or pull requests in the named tracker scope; do not mutate unselected items or any other remote state. |
 | Done | Every approved target is confirmed closed remotely, and every failure or skipped target is reported without claiming success for it. |
@@ -24,7 +24,7 @@ The user must supply or unambiguously identify the repository or tracker scope. 
 1. Confirm that the request is an explicit human invocation and resolve the tracker scope, candidate source, and any filters. Stop as `blocked` if the scope is ambiguous or authenticated access is unavailable.
 2. Read the candidate items and validate each item's stable identifier, type, title, current state, and tracker scope. Exclude already-closed items from selectable targets and identify them separately.
 3. Present a numbered selection table containing each open candidate's stable identifier, type, title, and current state. Accept only selections that resolve uniquely to entries in this bounded table; reject unknown, duplicate, malformed, or out-of-scope selections.
-4. Show a final preview of the exact selected identifiers, the repository or tracker scope, the consequence that each will be closed or abandoned, and any comment that will be posted. Make no remote mutation yet.
+4. Show a final preview of the exact selected identifiers, the repository or tracker scope, the consequence that each will be closed, and any comment that will be posted. Make no remote mutation yet.
 5. Ask for explicit approval of that exact preview. A selection alone is not approval. If the user declines, changes the selection, or does not clearly approve, return `cancelled` without mutation or regenerate the preview and seek approval again.
 6. Immediately before each close operation, re-read the target and confirm its stable identifier, scope, and open state still match the approved preview. If it changed, skip it and report a conflict; never widen or substitute the target set.
 7. Close each still-valid approved target using the tracker's normal close operation, applying only the approved comment when one exists. Record the remote result for each target. Do not stop reporting after a partial failure, but do not retry an uncertain result until a read confirms whether the close occurred.

@@ -22,7 +22,7 @@ description: 'Use when asked to start feature work that needs isolation, or befo
 
 ## Procedure
 
-1. **Detect environment.** Run `git rev-parse --git-common-dir` and `git rev-parse --git-dir`. If `GIT_COMMON_DIR` differs from `GIT_DIR`, the session is already inside a worktree. If the repo root contains a `.gitmodules` file and the current directory is a submodule, stop and report that isolation must run from the superproject.
+1. **Detect environment.** Run `git rev-parse --git-common-dir` and `git rev-parse --git-dir`. If `GIT_COMMON_DIR` differs from `GIT_DIR`, the session is already inside a worktree. If the current directory is a submodule (`.git` is a file, or `git rev-parse --show-superproject-working-tree` prints a superproject), stop and report that isolation must run from the superproject.
 
 2. **Determine isolation mode.** If already inside a worktree and the user has not requested a new one, report the existing worktree path and branch, then skip to step 6. Otherwise proceed to create a new worktree.
 
@@ -32,7 +32,7 @@ description: 'Use when asked to start feature work that needs isolation, or befo
 
 5. **Symlink hooks.** Locate the parent repository's hooks directory via `git rev-parse --git-common-dir` from the worktree. Symlink the worktree's hooks directory to it so shared hooks apply. If symlink creation fails (permission, cross-filesystem), report the failure and continue without hooks.
 
-6. **Run setup.** If a setup command was supplied, execute it inside the worktree. If it exits non-zero, surface the error and stop.
+6. **Run setup.** If a setup command was supplied, execute it inside the worktree (or in place if creation fell back). If it exits non-zero, surface the error and stop.
 
 7. **Gate on baseline tests.** Run the project's baseline test suite inside the worktree (or in-place if fallback). If all tests pass, report success. If tests fail, surface the failures and ask the user to proceed or investigate.
 

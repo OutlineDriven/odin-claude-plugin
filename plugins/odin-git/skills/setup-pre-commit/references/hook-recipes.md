@@ -10,7 +10,6 @@ These recipes match the SKILL.md manager selection: Lefthook for JavaScript/Type
 
 ```yaml
 pre-commit:
-  parallel: true
   commands:
     biome:
       run: pnpm exec biome check --write --no-errors-on-unmatched .
@@ -18,7 +17,6 @@ pre-commit:
       run: pnpm run typecheck
     test:
       run: pnpm run test
-```
 
 Drop the `typecheck` or `test` command when the repo declares no such script, and tell the user. Biome is the formatter and linter; do not add Prettier or ESLint.
 
@@ -28,13 +26,18 @@ Drop the `typecheck` or `test` command when the repo declares no such script, an
 
 ```yaml
 repos:
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.16.5
-    hooks:
-      - id: ruff-check
-      - id: ruff-format
   - repo: local
     hooks:
+      - id: ruff-check
+        name: ruff check
+        entry: uv run ruff check --fix .
+        language: system
+        pass_filenames: false
+      - id: ruff-format
+        name: ruff format
+        entry: uv run ruff format --check .
+        language: system
+        pass_filenames: false
       - id: pyright
         name: pyright
         entry: uv run pyright
@@ -46,7 +49,6 @@ repos:
         language: system
         pass_filenames: false
         stages: [pre-commit]
-```
 
 Run via `prek run --all-files`. Do not add Black, isort, or mypy; ruff and pyright cover formatting, linting, and typing.
 
@@ -56,15 +58,14 @@ Run via `prek run --all-files`. Do not add Black, isort, or mypy; ruff and pyrig
 
 ```yaml
 pre-commit:
-  parallel: true
   commands:
     fmt:
-      run: gofmt -l -w {staged_files}
+      run: test -z "$(gofmt -l .)"
+      fail_text: gofmt reported unformatted files; run gofmt -w .
     vet:
       run: go vet ./...
     test:
       run: go test -race ./...
-```
 
 ## Rust (prek)
 

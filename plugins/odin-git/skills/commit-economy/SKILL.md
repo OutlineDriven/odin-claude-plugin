@@ -35,7 +35,7 @@ description: 'Use when the user asks to clean up a finished commit message or br
 - Tree drift: if `git diff old..new` is non-empty, the rewrite touched the tree. Abort, discard the rewritten history, and restore the original refs from the reflog or the pre-rewrite backup ref. Report the drift.
 - Date slip: if any rewritten commit's author or committer date does not match the recorded per-position value, abort and restore from the backup ref. Re-signing must preserve dates by position.
 - Non-converged: if verification cannot pass after one corrective pass, stop and report the exact failing check (empty-diff, date-match, or handoff-in-log). Do not pretend the done predicate holds.
-- Rollback: before any rewrite, create a backup ref (`git update-ref refs/rewrite-backup/<range> <original-tip>`). Recovery is `git reset --hard refs/rewrite-backup/<range>` or `git reflog`.
+- Rollback: before any rewrite, create a backup ref (`git update-ref refs/rewrite-backup/commit-economy <original-tip>`). One backup ref holds the latest rewrite; a prior backup is overwritten. Recovery is `git reset --hard refs/rewrite-backup/commit-economy` or `git reflog`.
 
 ## Output
 Rewritten local history over the target range: handoff-ready messages, tree byte-identical to original, each commit re-signed with dates preserved by position. Report naming the commit set, backup ref, and verification results (empty diff, dates matched, log carries handoff).
