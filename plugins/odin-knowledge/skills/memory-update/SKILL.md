@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | The user explicitly says to save something to memory or scan this session for memories. |
-| Authority | Human-gated: requires explicit invocation, shows each proposed target and consequence, and obtains explicit confirmation for each proposal before changing durable memory data in `$MEMORY_DIR`, which is outside version control by default; an override that resolves inside a tracked tree is refused; nothing else is written, and the per-write preview and confirmation are the safeguard. |
+| Authority | Human-gated: requires explicit invocation, shows each proposed target and consequence, and obtains explicit confirmation for each proposal before changing durable memory data in `$MEMORY_DIR`, which is outside version control by default; an override git would track is refused; nothing else is written, and the per-write preview and confirmation are the safeguard. |
 | Side effect | Create or revise only confirmed `<type>_<slug>.md` files and their one-line `MEMORY.md` index entries inside the resolved `$MEMORY_DIR`; do not delete, audit, sanitize, or merge unrelated memories. |
 | Done | Every confirmed memory and index entry is written, read back, and shown to have valid YAML frontmatter; rejected and unconfirmed proposals remain unwritten. |
 
@@ -23,7 +23,7 @@ A memory type must be `feedback`, `project`, `user`, or `reference`. Its filenam
 
 ## Procedure
 
-1. Resolve the scripts directory, then run `resolve-paths.sh memory_dir` and `resolve-paths.sh session_history_glob`. Treat environment values and resolved paths as untrusted: stop on resolver failure, reject paths outside the resolved memory directory, and do not create a missing default memory directory. If `git -C "$MEMORY_DIR" rev-parse --is-inside-work-tree` prints `true`, stop: the memory directory is inside a tracked tree. Done when: both paths resolve safely outside version control, or the run stops with the failing key.
+1. Resolve the scripts directory, then run `resolve-paths.sh memory_dir` and `resolve-paths.sh session_history_glob`. Treat environment values and resolved paths as untrusted: stop on resolver failure, reject paths outside the resolved memory directory, and do not create a missing default memory directory. If `git -C "$MEMORY_DIR" rev-parse --is-inside-work-tree` prints `true` and `git -C "$MEMORY_DIR" check-ignore -q "$MEMORY_DIR"` exits nonzero, stop: git would track writes there. Done when: both paths resolve and git would not track the memory directory, or the run stops with the failing key.
 2. If the invocation states exactly what to remember, derive one proposal from that statement. Otherwise run `scan-session.sh "$SESSION_HISTORY_GLOB"`; use its deterministic `type`, `slug`, `evidence_turn_ids`, `draft_body`, and `draft_index_entry` fields as proposals. Stop if no history matches or the scanner fails. Done when: at least one proposal exists or the run stops with the scan result.
 3. For every proposal, verify the cited turn exists and supports the claim. Exclude code patterns, fix recipes, Git history, ephemeral task state, and any claim not grounded in a cited transcript turn or the user's explicit statement. Never fill scanner placeholders or missing rationale by invention. Done when: every retained proposal is evidence-backed and every rejected proposal has a reason.
 4. Normalize and validate the type, slug, required frontmatter, required body sections, and index-length limit. Preview the evidence, complete draft, exact target path, and exact `MEMORY.md` consequence. Ask the user to accept, reject, or edit each proposal, and make no write until that proposal receives explicit confirmation. Done when: every proposal has a preview and a user decision.
@@ -34,7 +34,7 @@ A memory type must be `feedback`, `project`, `user`, or `reference`. Its filenam
 ## Failure and recovery
 
 - Resolution or scan failure: make no changes and return `blocked` with the failing key or command and its diagnostic.
-- Memory directory inside a git work tree: make no changes and return `blocked: MEMORY_DIR is inside version control`.
+- Memory directory git would track: make no changes and return `blocked: MEMORY_DIR is inside version control`.
 - Missing or contradictory evidence: omit that proposal; if no grounded proposal remains, make no changes and return `blocked: no evidence-backed memory candidate`.
 - Invalid draft or unsafe target: make no changes for that proposal and return `blocked` with the violated constraint; do not widen the target or repair content by invention.
 - Missing confirmation or unresolved duplicate: leave that proposal unwritten and return `blocked: confirmation required` or `blocked: duplicate choice required`.
