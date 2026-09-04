@@ -82,6 +82,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   version control; that is true for the default (gitignored) path and
   false for an override git would track. The resolver refuses a path
   git would track, including a missing directory inside a work tree.
+- `memory-clean` and `memory-sanitize` now call `memory-update`'s
+  `resolve-paths.sh`; the extra copies are gone, so a tracked `MEMORY_DIR`
+  is refused for sanitize too.
+- `pov` now calls `brainstorm`'s repo-profile cache; the extra copies are
+  gone.
 
 ### Added
 

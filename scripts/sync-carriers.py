@@ -91,17 +91,13 @@ def _plan(baseline_text, carrier_text):
     for tag in shared:
         found = [(b[2], b[3], b[1]) for b in carrier_blocks if b[0] == tag]
         if found:
-            if tag in OVERLAY_TAGS:
-                # Replace only the last block; earlier overlays stay.
-                start, end, body = found[-1]
+            # An overlay tag may repeat; replace only the last block, earlier
+            # overlays stay. Every other repeat is rewritten in place.
+            targets = [found[-1]] if tag in OVERLAY_TAGS else found
+            for start, end, body in targets:
                 if body != canonical[tag]:
                     edits.append((start, end, canonical[tag]))
                     changes.append(("rewrite", tag))
-            else:
-                for start, end, body in found:
-                    if body != canonical[tag]:
-                        edits.append((start, end, canonical[tag]))
-                        changes.append(("rewrite", tag))
         else:
             if code_tools_pos is None:
                 return changes, carrier_text, (

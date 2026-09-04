@@ -80,15 +80,13 @@ case "$KEY" in
     ;;
   session_history_glob)
     if [[ -n "${SESSION_HISTORY_GLOB:-}" ]]; then
-      _validate_value session_history_glob "$SESSION_HISTORY_GLOB" reject-whitespace
-      printf '%s\n' "$SESSION_HISTORY_GLOB"
+      VAL="$SESSION_HISTORY_GLOB"
     else
-      ENCODED=$("$SCRIPT_DIR/encode-memory-path.sh")
-      PROJECT_DIR="${ENCODED%/memory}"
-      GLOB="$PROJECT_DIR/*.jsonl"
-      _validate_value session_history_glob "$GLOB" reject-whitespace
-      printf '%s\n' "$GLOB"
+      ENCODED="$("$SCRIPT_DIR/encode-memory-path.sh")"
+      VAL="${ENCODED%/memory}/*.jsonl"
     fi
+    _validate_value session_history_glob "$VAL" reject-whitespace
+    printf '%s\n' "$VAL"
     ;;
   *)
     printf 'ERROR: unknown key %s — must be memory_dir or session_history_glob\n' "$KEY" >&2
