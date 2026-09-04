@@ -38,6 +38,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   per skill: 104 audit findings, 60 applied and the rest recorded in the plugin
   reports, plus 34 skill-improver fixes. A pre-push review then
   restored 46 Authority rows the canon had narrowed or widened.
+- Four slugs that named an upstream vendor rename to their jobs:
+  `sred-project-organizer` to `eligibility-batch-organizer`,
+  `sred-work-summary` to `work-records-summary`, `unlazy` to
+  `gate-file-completion`, and `slack-qa-investigate` to
+  `repo-qa-investigate`.
 
 ### Fixed
 
@@ -104,6 +109,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `poteto-mode`: folded into `figure-it-out`; the 23-playbook contracts now live there.
 - `xcode-project-sync`: folded into `ios-build-fix` as the XcodeGen regeneration mode.
 - `ios-device-qa`: removed; the vendor daemon has no public equivalent.
+- `factory-mcp-bootstrap`: removed; the Warp Factory endpoint is vendor-internal,
+  and `mcp-builder` covers MCP server authoring.
 
 ### Migration
 

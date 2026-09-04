@@ -1,9 +1,9 @@
 ---
-name: slack-qa-investigate
+name: repo-qa-investigate
 description: 'Use when asked for a research-backed answer requiring codebase and documentation investigation, or when answering requires reading many files or conducting a wide survey. Investigates repository questions with sourced evidence, spawning parallel research subagents when the scope is wide. Not for file edits, diffs, or patches; use fix. Not for remote-system changes.'
 ---
 
-# Slack QA investigate
+# Repo QA investigate
 
 ## Contract
 

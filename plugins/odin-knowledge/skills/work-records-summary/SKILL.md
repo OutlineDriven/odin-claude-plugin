@@ -1,10 +1,10 @@
 ---
-name: sred-work-summary
-description: 'Use when the user asks to discover, group, and summarize work records across multiple systems for a given period or project. Retrieves records from configured source systems, groups them by a supplied approach, generates a draft for human correction, then publishes the final summary. Not for organizing projects into child documents: use sred-project-organizer. Not for local-only summaries.'
+name: work-records-summary
+description: 'Use when the user asks to discover, group, and summarize work records across multiple systems for a given period or project. Retrieves records from configured source systems, groups them by a supplied approach, generates a draft for human correction, then publishes the final summary. Not for organizing projects into child documents. Not for local-only summaries.'
 disable-model-invocation: true
 ---
 
-# Work summary
+# Work records summary
 
 ## Contract
 

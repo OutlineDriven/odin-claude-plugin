@@ -1,15 +1,15 @@
 ---
-name: unlazy
-description: 'Use when task decomposition needs gate-file proof before a done claim, or when the user says "unlazy", "depth tree", "gates", or "do not stop until it is done". Detects half-done work, premature done claims, stubs, and silently narrowed scope. In orchestrated mode (tree 4+), enforces dispatch-state, human approval binding, and parent reverification before a done claim.'
+name: gate-file-completion
+description: 'Use when task decomposition needs gate-file proof before a done claim, or when the user says "gate-file-completion", "depth tree", "gates", or "do not stop until it is done". Detects half-done work, premature done claims, stubs, and silently narrowed scope. In orchestrated mode (tree 4+), enforces dispatch-state, human approval binding, and parent reverification before a done claim.'
 ---
 
-# Unlazy
+# Gate file completion
 
 ## Contract
 
 | Field | Bound contract |
 |---|---|
-| Trigger | User invokes 'unlazy', 'depth tree', 'gates', or 'do not stop until it is done'; laziness symptoms appear (half-done work, premature done claims, stubs, silently narrowed scope); or a build decomposes three or more layers deep. |
+| Trigger | User invokes 'gate-file-completion', 'depth tree', 'gates', or 'do not stop until it is done'; laziness symptoms appear (half-done work, premature done claims, stubs, silently narrowed scope); or a build decomposes three or more layers deep. |
 | Authority | Reversible local: writes only named local gate files and evidence; rollback is file deletion of the created .outline/ tree. |
 | Side effect | Creates .outline/GATES.md and per-leaf gate files; executes gate_check.py; flips checkboxes; records EVIDENCE. In orchestrated mode, writes .outline/dispatch.json and approval logs. No remote mutation. |
 | Done | Solo mode: gate_check.py exits 0; every leaf box is checked and EVIDENCE is non-pending; no stubs, placeholders, or follow-up remain. Honestly surfaced abandonment (ABANDON lines with reasons) is accounted in the report but blocks a clean done: the report carries the abandoned count and ids. Orchestrated mode: same gate requirements plus every returned leaf is parent-reverified, dispatch state is valid, and abandoned count is zero: any abandonment produces HANDOFF REQUIRED and blocks done per `references/dispatch-gates.md`. |

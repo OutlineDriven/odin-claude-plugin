@@ -33,6 +33,7 @@ codex plugin add odin-run@odin-marketplace
 - feedback-sweep
 - figure-it-out
 - finish-it-now
+- gate-file-completion
 - gate-proposed-change
 - goal-prompt-drafting
 - guardrail-carve-run
@@ -55,7 +56,6 @@ codex plugin add odin-run@odin-marketplace
 - subagent-driven
 - swarm
 - thin-repo-pulse
-- unlazy
 - watch-for
 - watch-for-harness-mode
 - watch-for-structured

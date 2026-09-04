@@ -32,7 +32,7 @@ Leonxlnx/unlazy
 Source: https://github.com/Leonxlnx/unlazy/tree/ed9e8d2b5919698cf2c54bda270d507e10b69617
 License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2026 Leonxlnx
-Local adaptations: unlazy
+Local adaptations: gate-file-completion
 
 LilMGenius/paperthin
 Source: https://github.com/LilMGenius/paperthin/tree/3bca079a51bcfff5dafb53d1d7f9f523d66ee317
@@ -256,8 +256,8 @@ Source: https://github.com/warpdotdev/oz-skills/tree/6c08c49fc6c51b8f768bf8c53c0
 License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2026 Warp
 Local adaptations: analysis-artifacts, create-pull-request, dbt-model-index, docs-update,
-  github-bug-report-triage, github-issue-dedupe, mcp-builder, scheduler, seo-aeo-audit,
-  slack-qa-investigate, terraform-style-check, web-accessibility-audit, web-performance-audit,
+  github-bug-report-triage, github-issue-dedupe, mcp-builder, repo-qa-investigate, scheduler,
+  seo-aeo-audit, terraform-style-check, web-accessibility-audit, web-performance-audit,
   webapp-testing
 
 The MIT permission text below applies to every work in the preceding section. Each work retains the
@@ -290,9 +290,9 @@ License: Apache-2.0 (https://www.apache.org/licenses/LICENSE-2.0)
 Copyright: Copyright 2025 Functional Software, Inc. dba Sentry
 Local adaptations: agents-md, blog-writing-guide, brand-guidelines, claude-settings-audit,
   confirmed-security-review, create-branch, django-access-review, django-perf-review,
-  doc-coauthoring, document-api-endpoint, gh-review-requests, gha-security-review,
-  infrastructure-mentor, pr-link-issue, prompt-optimizer, publish-pr, single-file-html-deck,
-  skill-scanner, skill-writer, sred-project-organizer, sred-work-summary, typing-exclusion-worker
+  doc-coauthoring, document-api-endpoint, eligibility-batch-organizer, gh-review-requests,
+  gha-security-review, infrastructure-mentor, pr-link-issue, prompt-optimizer, publish-pr,
+  single-file-html-deck, skill-scanner, skill-writer, typing-exclusion-worker, work-records-summary
 
 The Apache License, Version 2.0 applies to the preceding work. The full license is included in this
 distribution as LICENSE and is also available at https://www.apache.org/licenses/LICENSE-2.0.
@@ -347,8 +347,3 @@ coleam00/excalidraw-diagram-skill
 Source: https://github.com/coleam00/excalidraw-diagram-skill/tree/8646fcc9f74f38539c6cdb4c969723336a96ddcd
 License: NOASSERTION
 Local adaptations: render-excalidraw-diagram, visual-argument-diagram
-
-warpdotdev/warp-factories-skills
-Source: https://github.com/warpdotdev/warp-factories-skills/tree/d91db3403d27c85adf2a57bd642047e29e98a51a
-License: NOASSERTION
-Local adaptations: factory-mcp-bootstrap

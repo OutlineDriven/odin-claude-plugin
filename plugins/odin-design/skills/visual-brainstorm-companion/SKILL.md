@@ -10,7 +10,7 @@ description: 'Use when a brainstorming question is genuinely clearer shown than 
 | Field | Bound contract |
 |---|---|
 | Trigger | During brainstorming, only when a question is genuinely clearer shown than told: a real mockup, layout, or diagram; offered once unless the user raises it |
-| Authority | Reversible local: writes only missing project-local `.superpowers` and `.superpowers/brainstorm` container directories and the fresh named session directory beneath them; rollback is undo. No remote mutation. Managed stop terminates only the named managed process; it intentionally retains project-local state and never claims to restore pre-invocation filesystem state. |
+| Authority | Reversible local: writes only missing project-local `.odin` and `.odin/brainstorm` container directories and the fresh named session directory beneath them; rollback is undo. No remote mutation. Managed stop terminates only the named managed process; it intentionally retains project-local state and never claims to restore pre-invocation filesystem state. |
 | Side effect | Starts a local key-gated HTTP and WebSocket server with an idle timeout, writes HTML fragments under a session screen directory, and reads click-event JSONL from the session state. |
 | Done | The visual question is resolved: the user saw options in the browser, selection events merged with the terminal reply, and the server is stopped or left to its idle timeout. |
 
@@ -21,7 +21,7 @@ Invocation policy: `model+human`. Offer the browser once and start it only after
 | Input | Required? | Bound |
 |---|---|---|
 | Visual question content | Required | A real mockup, layout, diagram, visual comparison, or spatial relationship. Keep conceptual choices and requirements in the terminal. |
-| Project directory | Required | Existing project root that will retain one fresh `.superpowers/brainstorm/session-<24-hex>` directory after process stop. |
+| Project directory | Required | Existing project root that will retain one fresh `.odin/brainstorm/session-<24-hex>` directory after process stop. |
 | Idle timeout | Optional | Integer minutes from 1 through 1440; default 240. |
 | Managed-process primitive | Required | The host facility that launches a long-running process under a stable name, reads its output for readiness, reports exit, and stops that same named process. If the host has no such facility, fail explicitly. |
 
@@ -33,7 +33,7 @@ Use Bun exactly `1.4.0`. The runtime files below use no package dependency.
 
 2. **Bind the runtime and process authority.** Require `bun --version` to print exactly `1.4.0`. Require the host managed-process primitive to support launch, output/readiness, exit status, and stop by the same name. A shell background job, `nohup`, PID file, `/proc` inspection, or ad hoc signal is not a substitute. On either prerequisite failure, return `runtime-unavailable` without creating a session.
 
-   Materialize the idle-timeout default, validate it, then use one embedded Bun helper to create a never-reused project-local session. The helper canonicalizes the existing project root before its first write. It creates `.superpowers` and `brainstorm` one component at a time, rejects symlinks and non-directories, verifies each canonical direct-parent relationship, creates the random session exclusively, and returns its canonical path. Any failure aborts before runtime files are written.
+   Materialize the idle-timeout default, validate it, then use one embedded Bun helper to create a never-reused project-local session. The helper canonicalizes the existing project root before its first write. It creates `.odin` and `brainstorm` one component at a time, rejects symlinks and non-directories, verifies each canonical direct-parent relationship, creates the random session exclusively, and returns its canonical path. Any failure aborts before runtime files are written.
 
    ```sh
    IDLE_TIMEOUT_MINUTES="${IDLE_TIMEOUT_MINUTES:-240}"
@@ -76,8 +76,8 @@ Use Bun exactly `1.4.0`. The runtime files below use no package dependency.
        return canonical;
      }
 
-     const superpowersDir = await secureContainer(projectDir, ".superpowers");
-     const brainstormDir = await secureContainer(superpowersDir, "brainstorm");
+    const odinDir = await secureContainer(projectDir, ".odin");
+    const brainstormDir = await secureContainer(odinDir, "brainstorm");
      const sessionName = `session-${sessionId}`;
      const sessionDir = join(brainstormDir, sessionName);
      await mkdir(sessionDir, { mode: 0o700 });

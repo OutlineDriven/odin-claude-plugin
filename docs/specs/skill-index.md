@@ -162,6 +162,7 @@
 | duet | odin-run | Coding |
 | dwarf-expert | odin-native | Coding |
 | dx-audit | odin-review | Coding |
+| eligibility-batch-organizer | odin-knowledge | Productivity |
 | embed-diagram | odin-visual | Design |
 | enforce-workflow-constraints | odin-core | Coding |
 | engineering-blog-writing | odin-writing | Writing |
@@ -176,7 +177,6 @@
 | explainer-artifact | odin-learn | Productivity |
 | explore | odin-code | Coding |
 | extremely-optimize | odin-code | Coding |
-| factory-mcp-bootstrap | odin-agent | Productivity |
 | fail-design | odin-planning | Productivity |
 | fail-recover | odin-infra | Infrastructure |
 | fastify-inject-testing | odin-typescript | Coding |
@@ -220,6 +220,7 @@
 | fuzzing-dictionary | odin-fuzzing | Security |
 | fuzzing-obstacles | odin-fuzzing | Security |
 | gate-and-merge | odin-git | Coding |
+| gate-file-completion | odin-run | Coding |
 | gate-proposed-change | odin-run | Coding |
 | genealogical-proof | odin-research | Research |
 | generalize | odin-planning | Productivity |
@@ -415,6 +416,7 @@
 | reorder-respect-deliberate | odin-writing | Writing |
 | replace-unsafe-typescript-assertions | odin-typescript | Coding |
 | repo-health-triage | odin-git | Coding |
+| repo-qa-investigate | odin-research | Research |
 | reproduce-and-fix-issues | odin-code | Coding |
 | reproduce-bug-report | odin-testing | Coding |
 | research | odin-research | Research |
@@ -481,7 +483,6 @@
 | skill-progressive-disclosure-design | odin-skills | Productivity |
 | skill-scanner | odin-skills | Productivity |
 | skills-visibility | odin-skills | Productivity |
-| slack-qa-investigate | odin-research | Research |
 | slicing-code-context | odin-code | Coding |
 | smart-contract-audit-prep | odin-security | Security |
 | smart-contract-code-maturity-assessor | odin-security | Security |
@@ -494,8 +495,6 @@
 | spec-driven | odin-planning | Productivity |
 | spec-driven-implementation | odin-code | Coding |
 | spec-to-code-compliance | odin-review | Coding |
-| sred-project-organizer | odin-knowledge | Productivity |
-| sred-work-summary | odin-knowledge | Productivity |
 | ssotize-audit-fold | odin-knowledge | Productivity |
 | state-machine-workflow | odin-planning | Productivity |
 | strategy | odin-product | Productivity |
@@ -543,7 +542,6 @@
 | ui-animation | odin-design | Design |
 | ui-design | odin-design | Design |
 | universal-invariant-baseline | odin-code | Coding |
-| unlazy | odin-run | Coding |
 | unleak-abstraction | odin-code | Coding |
 | unslop | odin-writing | Writing |
 | validate-changes-match-specs | odin-review | Coding |
@@ -590,6 +588,7 @@
 | wizard | odin-run | Coding |
 | wontfix | odin-git | Coding |
 | work | odin-run | Coding |
+| work-records-summary | odin-knowledge | Productivity |
 | workflow-diagram | odin-visual | Design |
 | workflow-evidence-mining | odin-knowledge | Productivity |
 | workflow-from-chats | odin-knowledge | Productivity |

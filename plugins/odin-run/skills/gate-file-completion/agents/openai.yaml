@@ -1,0 +1,3 @@
+interface:
+  display_name: "Gate File Completion"
+  short_description: "Use when task decomposition needs gate-file proof before a done claim, or when the user says \"gate-file-completion\", \"depth tree\", \"gates\", or \"do not stop until it is done\"."

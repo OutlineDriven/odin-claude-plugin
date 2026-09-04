@@ -26,9 +26,9 @@ codex plugin add odin-research@odin-marketplace
 - how
 - rationale-by-source
 - readout
+- repo-qa-investigate
 - research
 - scrape
-- slack-qa-investigate
 - summarize-document-set
 - verify-both-ways
 - visual-fact-check

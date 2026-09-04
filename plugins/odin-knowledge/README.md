@@ -26,6 +26,7 @@ codex plugin add odin-knowledge@odin-marketplace
 - decision-diary
 - docs-and-adrs
 - domain-modeling
+- eligibility-batch-organizer
 - engineering-retrospective
 - grill-with-docs
 - gut-sync
@@ -54,12 +55,11 @@ codex plugin add odin-knowledge@odin-marketplace
 - record-design-decisions
 - session-share
 - session-viewer
-- sred-project-organizer
-- sred-work-summary
 - ssotize-audit-fold
 - visual-project-recap
 - weekly-review
 - weekly-synthesis
 - what-did-i-get-done
+- work-records-summary
 - workflow-evidence-mining
 - workflow-from-chats

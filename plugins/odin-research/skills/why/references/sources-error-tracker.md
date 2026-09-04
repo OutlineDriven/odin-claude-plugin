@@ -1,8 +1,18 @@
-# Sentry error history
+# Error tracker history
+
+## Inputs
+
+The caller supplies:
+
+- The error tracker and its read interface (the MCP or API tools available in this environment)
+- The organization and project scope to search
+- A read credential already configured in the environment
+
+If the tracker is unreachable or the credential is missing, mark the category unavailable per the skill contract; do not request new credentials or add an integration.
 
 ## What this source contains
 
-Sentry is the archive of things that went wrong. For defensive, corrective, or error-handling code, it often holds the direct motivation: the specific exceptions, stack traces, and frequencies that pushed someone to add a check, catch, retry, or fallback.
+The error tracker is the archive of things that went wrong. For defensive, corrective, or error-handling code, it often holds the direct motivation: the specific exceptions, stack traces, and frequencies that pushed someone to add a check, catch, retry, or fallback.
 
 - Issues. Grouped errors with counts, first/last seen timestamps, affected releases, and comments
 - Events. Individual error instances within an issue (stack traces, tags, user context)
@@ -11,13 +21,13 @@ Sentry is the archive of things that went wrong. For defensive, corrective, or e
 - Profiles. Performance profiling data (less useful for "why"; more for "how slow")
 - Issue comments & assignments. Sometimes contain engineer notes on root cause
 
-The most valuable thing Sentry provides is **temporal correlation**: "issue X was created 2024-01-02, peaked at 500 events/day, stopped appearing after release v2.14.0 on 2024-01-15, the release that shipped the defensive check."
+The most valuable thing the error tracker provides is **temporal correlation**: "issue X was created 2024-01-02, peaked at 500 events/day, stopped appearing after release v2.14.0 on 2024-01-15, the release that shipped the defensive check."
 
 ## How to search it
 
-Use the Sentry MCP.
+Use the caller-named tracker's read interface.
 
-1. **Orient.** If you don't know the project slug and organization:
+1. **Orient.** If the caller did not pin the organization and project slug:
 
    ```
    find_organizations
@@ -48,7 +58,7 @@ Use the Sentry MCP.
 4. **Pull the full event for context.**
 
    ```
-   get_sentry_resource (pass a Sentry URL or type+ID)
+   get_resource (pass an issue or event URL, or type+ID)
    ```
 
    Does the stack trace pass through the target code? Do the tags and breadcrumbs match the conditions the target defends against?
@@ -61,29 +71,29 @@ Use the Sentry MCP.
 
    Cross-reference release version with the PR's merge date.
 
-6. **Use Seer sparingly.**
+6. **Use automated analysis sparingly.**
 
    ```
-   analyze_issue_with_seer
+   run automated root-cause analysis (if the tracker's interface offers it)
    ```
 
-   Seer produces AI root-cause analyses. Useful as a hypothesis generator, but treat them as inference, not authoritative. The actual events and stack traces are the primary evidence; Seer's narrative is secondary.
+   Some trackers produce automated or AI root-cause analyses. Useful as a hypothesis generator, but treat them as inference, not authoritative. The actual events and stack traces are the primary evidence; the analysis narrative is secondary.
 
 ## What good evidence looks like here
 
 - An issue whose **first seen** is shortly before the target's PR and **last seen** shortly after, suggesting the target addressed this error
 - Stack traces that pass through or land on the target function, showing the exact failure mode being defended against
 - A comment on the issue from the PR author describing the fix
-- The target's PR description or commit message referencing a Sentry issue URL or ID
+- The target's PR description or commit message referencing an error-tracker issue URL or ID
 - An issue with high event counts that stops after the release containing the target
 
 ## Common pitfalls
 
-- Grouping drift. Sentry groups errors by fingerprint. Refactors or renames can track the "same" error under a new issue ID. If an issue ends abruptly, the error may have just been regrouped. Check for new issues immediately after.
+- Grouping drift. The tracker groups errors by fingerprint. Refactors or renames can track the "same" error under a new issue ID. If an issue ends abruptly, the error may have just been regrouped. Check for new issues immediately after.
 - Release correlation is noisy. A release contains many commits. An issue stopping at v2.14.0 doesn't prove the target fixed it; another change in the same release might have. Cross-reference with the target's exact commit.
 - Silent fixes. Sometimes the error stops because upstream changed, not because of the defensive code. The correlation suggests the fix; it doesn't prove authorship.
 - Resolved != fixed. Issues can be marked "resolved" manually without any code change. Treat `resolved` as a human marker, not evidence that code fixed it.
-- Seer hallucinations. Seer can generate confident-sounding explanations that aren't right. Fall back to the actual events, stack traces, and timestamps when making claims.
+- Automated analyses hallucinate. An automated root-cause narrative can be confident and still wrong. Fall back to the actual events, stack traces, and timestamps when making claims.
 - Sampling. Some projects sample events aggressively. A low event count may just mean high sampling, not a rare error. If in doubt, note the gap.
 
 ## What to return

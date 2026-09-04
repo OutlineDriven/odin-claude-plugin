@@ -1,6 +1,6 @@
 ---
 name: single-file-html-deck
-description: 'Use when an explicit request asks to create a Sentry presentation, build slides, or make a deck. Scaffolds one self-contained, keyboard-navigable HTML file with real-data charts and Sentry branding. For general HTML artifacts use html; for PowerPoint use pptx.'
+description: 'Use when an explicit request asks to create a presentation, build slides, or make a deck. Scaffolds one self-contained, keyboard-navigable HTML file with real-data charts styled by caller-supplied brand tokens. For general HTML artifacts use html; for PowerPoint use pptx.'
 ---
 
 # Single-file HTML deck
@@ -9,41 +9,41 @@ description: 'Use when an explicit request asks to create a Sentry presentation,
 
 | Field | Bound contract |
 |---|---|
-| Trigger | Explicit human invocation: user asks to create a presentation, build slides, make a deck, or build a Sentry presentation |
+| Trigger | Explicit human invocation: user asks to create a presentation, build slides, or make a deck |
 | Authority | Reversible local: writes only named local artifacts; rollback is deleting generated files or reverting to prior version. No remote mutation. |
-| Side effect | Local write: scaffolds a Sentry-branded slide deck as a single self-contained HTML file |
-| Done | Keyboard-navigable slide deck exists as a single HTML file with real-data charts only, Sentry branding applied, and a successful build |
+| Side effect | Local write: scaffolds a slide deck as a single self-contained HTML file styled with the supplied brand tokens |
+| Done | Keyboard-navigable slide deck exists as a single HTML file with real-data charts only, the supplied brand tokens applied consistently across all slides, and a successful build |
 
 ## Inputs
 
 - Topic or subject (required): the presentation's central theme or argument.
 - Audience (required): who will view the deck; drives tone, depth, and vocabulary.
+- Brand tokens (required): palette primary and accent colors, a wordmark or logo SVG, and a font stack. All branding is derived from these tokens; none are invented.
 - Slide count (optional): target number of slides. Defaults to 8–12.
 - Source material (optional): existing notes, data, or documents to incorporate.
 - Chart data (optional): real datasets to visualize. If omitted, omit charts rather than fabricate placeholder data.
 
 ## Procedure
 
-1. **Gather inputs.** Confirm topic, audience, and any source material. If topic or audience is missing, stop and request them before proceeding. Done when: topic and audience are confirmed.
+1. **Gather inputs.** Confirm topic, audience, and brand tokens; gather any source material. If topic, audience, or brand tokens are missing, stop and request them before proceeding. Done when: topic, audience, and brand tokens are confirmed.
 
 2. **Scaffold the project.** Create a working directory. Initialize a React + Vite + Recharts project with the following structure:
    - `src/App.jsx`: main slide deck component with keyboard navigation.
    - `src/components/Slide.jsx`: individual slide component.
    - `src/components/Chart.jsx`: Recharts wrapper for data visualizations.
    - `src/data/`: real data files only; never fabricate placeholder data.
-   - `src/styles/`: Sentry-branded styles.
+   - `src/styles/`: styles derived from the supplied brand tokens.
    - `index.html`: entry point.
    - `package.json`: dependencies react, react-dom, vite, recharts.
    Done when: the project directory and all listed files exist.
 
-3. **Apply Sentry branding.** Use the Sentry design system:
-   - Primary color: `#362D59` (deep purple).
-   - Accent color: `#FFC227` (gold).
+3. **Apply the supplied brand tokens.** Use the caller-supplied brand input; do not substitute an invented style:
+   - Primary and accent colors from the supplied palette.
+   - Typography: the supplied font stack.
    - Background: `#FFFFFF` (white) or `#F5F5F5` (light gray).
-   - Typography: system font stack with `-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif`.
-   - Logo: inline SVG of the Sentry glyph (simplified wordmark) in the header or corner of each slide.
+   - Logo: the supplied wordmark or logo SVG in the header or corner of each slide.
    - Consistent spacing: 24px base unit, 16px for compact elements.
-   Done when: branding colors, typography, logo, and spacing are applied.
+   Done when: the supplied brand colors, typography, logo, and spacing are applied.
 
 4. **Build slide content.** For each slide:
    - Write a clear headline that states the slide's single point.
@@ -70,14 +70,14 @@ description: 'Use when an explicit request asks to create a Sentry presentation,
 7. **Build and verify.** Run `pnpm install --frozen-lockfile && pnpm run build`. Confirm:
    - Build succeeds with zero errors.
    - Output is a single `dist/index.html` file (or equivalent single-file output).
-   - Open the file in a browser: slides render, keyboard navigation works, charts display real data, Sentry branding is visible.
+   - Open the file in a browser: slides render, keyboard navigation works, charts display real data, and the supplied brand tokens are applied.
    Done when: the build succeeds and the single HTML file renders correctly in a browser.
 
 8. **Run QA pass.** Check every slide against these criteria:
    - Headline accurately represents content.
    - Keyboard navigation works forward and backward.
    - Charts use only real data; no fabricated or placeholder datasets.
-   - Sentry branding is consistent across all slides.
+   - The supplied brand tokens are applied consistently across all slides.
    - No external resource dependencies at runtime.
    - Text is free of typos and grammatical errors.
    Record any issues found. Done when: every slide passes all QA criteria or issues are recorded.
@@ -92,7 +92,7 @@ description: 'Use when an explicit request asks to create a Sentry presentation,
 - No real data for charts: if the user requests charts but provides no data, produce text-only slides. Do not fabricate placeholder datasets.
 - Build fails: diagnose the error. If it is a dependency issue, retry with `pnpm install --frozen-lockfile`. If it is a code error, fix and rebuild. Report persistent failures.
 - QA finds blocking issues: report each issue. Do not deliver the deck as done. Deliver it as partial with blockers listed, or wait for user resolution.
-- Partial result rule: a deck with keyboard navigation, Sentry branding, and unresolved QA blockers is a partial result, not a successful delivery. Label it explicitly.
+- Partial result rule: a deck with keyboard navigation, the supplied brand tokens applied, and unresolved QA blockers is a partial result, not a successful delivery. Label it explicitly.
 
 ## Output
-A single self-contained HTML file: full slide deck with keyboard navigation, Recharts visualizations using only real data (if provided), Sentry branding (colors, typography, logo), no external runtime dependencies, and QA pass results listing any issues and their resolution status.
+A single self-contained HTML file: full slide deck with keyboard navigation, Recharts visualizations using only real data (if provided), the supplied brand tokens applied (palette, typography, logo), no external runtime dependencies, and QA pass results listing any issues and their resolution status.

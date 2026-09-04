@@ -31,7 +31,7 @@ description: 'Use when invoking /product-signal-pulse with an optional lookback 
 - `pulse_quality_scoring`: `true` or default `false` (AI products only).
 - `pulse_quality_dimension`: string scored 1-5 when quality scoring is true; ignored otherwise.
 - `pulse_analytics_source`: string identifying the analytics provider and how to reach it (e.g. `posthog:mcp`, `mixpanel:mcp`, `custom:http`).
-- `pulse_tracing_source`: string identifying the tracing provider (e.g. `sentry:mcp`, `datadog:mcp`, `custom:http`); omit if none.
+- `pulse_tracing_source`: string identifying the tracing provider (e.g. `datadog:mcp`, `custom:http`); omit if none.
 - `pulse_payments_source`: string identifying the payments provider (e.g. `stripe:mcp`, `custom:http`); omit if not used.
 - `pulse_db_enabled`: `true` or default `false`; when true, read-only DB access is part of the pulse.
 - `pulse_metric_sources`: comma-separated `metric=source` pairs for per-strategy-metric source overrides; metrics not listed fall back to `pulse_analytics_source` and render with a `(default source)` marker.
@@ -44,7 +44,7 @@ Each source value encodes both the provider and the access method as `provider:m
 
 - `mcp`: search the host's MCP registry for a server matching the provider name. If found, call its query tool with the event name and time range. If no MCP server is registered for that provider, mark the source `no data (tool unavailable)`.
 - `http`: construct an HTTP GET request to the provider's API endpoint using the event name and time range as query parameters. Execute read-only. If the endpoint is unreachable or returns an error, mark the source `no data (query failed)`.
-- `cli`: invoke the provider's CLI tool (e.g. `posthog`, `sentry-cli`) with a read-only query command. If the CLI is not on PATH, mark the source `no data (tool unavailable)`.
+- `cli`: invoke the provider's CLI tool (e.g. `posthog`) with a read-only query command. If the CLI is not on PATH, mark the source `no data (tool unavailable)`.
 
 For every source, construct the query from the configured event name and the resolved lookback window. Apply a 15-minute trailing buffer to the upper bound (e.g. for `24h`, query `[now - 24h - 15m, now - 15m]`). If the source's method is unavailable (no MCP server, no CLI, unreachable HTTP), record `no data` with the reason. Do not invent a number.
 
