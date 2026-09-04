@@ -112,7 +112,11 @@ def parse(lines):
 
 def expect_matches(expect, output):
     rx = re.match(r"^/(.+)/([a-z]*)$", expect)
-    if rx:
+    # Only a delimited pattern whose trailing group is empty or valid JS flags
+    # is a regex. Anything else (a literal path such as /api/v1/health) must
+    # fall through to the substring check, or its tail is read as flags and
+    # the wrong fragment is searched.
+    if rx and (rx.group(2) == "" or set(rx.group(2)) <= set(JS_FLAG_MAP)):
         flags = 0
         for ch in rx.group(2):
             flags |= JS_FLAG_MAP.get(ch, 0)
@@ -194,6 +198,22 @@ def main():
                     if gate["evidence_line"] != -1:
                         indent = re.match(r"\s*", lines[gate["evidence_line"]]).group(0)
                         lines[gate["evidence_line"]] = f"{indent}EVIDENCE: {tail(output)}"
+                    else:
+                        # A gate authored without an EVIDENCE line never gained
+                        # one on disk, so the box flipped but the evidence
+                        # stayed pending and every later run re-executed the
+                        # CHECK. Insert the record and shift the gates below.
+                        insert_at = gate["line"] + 1
+                        indent = re.match(r"\s*", lines[gate["line"]]).group(0)
+                        lines.insert(insert_at, f"{indent}  EVIDENCE: {tail(output)}")
+                        for other in gates:
+                            if other is gate:
+                                continue
+                            if other["line"] >= insert_at:
+                                other["line"] += 1
+                            if other["evidence_line"] >= insert_at:
+                                other["evidence_line"] += 1
+                        gate["evidence_line"] = insert_at
                     gate["checked"] = True
                     gate["evidence"] = tail(output)
                     changed = True
