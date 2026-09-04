@@ -218,8 +218,9 @@ just check        # every gate
 just verify       # every gate plus Agent Skills validation
 ```
 
-`.pre-commit-config.yaml` is the gate list. Every gate below audits the whole tree and runs
-unconditionally, so none of them can be skipped by touching the wrong file:
+`.pre-commit-config.yaml` is the gate list. Every gate audits the whole tree and runs
+unconditionally, so none of them can be skipped by touching the wrong file. `docs/specs/gates.md`
+explains what each generator writes, what each gate proves, and how to read a failure.
 
 ## License
 
