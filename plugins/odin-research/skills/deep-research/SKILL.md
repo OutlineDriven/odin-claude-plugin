@@ -10,7 +10,7 @@ description: 'Use when the user asks to research a topic and produce a thorough 
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to research a topic and produce a thorough sourced report. |
-| Authority | Reversible local: writes only ./research/{type}-{topic}-{YYYY-MM-DD}.md and an optional PDF beside it; rollback is version control or undo. No remote mutation. Spawns 3-20 read-only sub-agents. |
+| Authority | Reversible local: writes only ./research/{type}-{topic}-{YYYY-MM-DD}.md (or the optional output-path override) and an optional PDF beside it; rollback is version control or undo. No remote mutation. Spawns 3-20 read-only sub-agents. |
 | Side effect | Writes ./research/{type}-{topic}-{YYYY-MM-DD}.md; optionally exports a PDF beside it. Sub-agents perform read-only web search and page fetch. Output path can be overridden with the optional output-path input. |
 | Done | A prose-first cited Markdown report exists at the output path, containing key findings, strategic recommendations, and risks/uncertainties, with every claim cited. |
 

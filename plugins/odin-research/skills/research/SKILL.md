@@ -40,7 +40,7 @@ Target path (optional): preferred output directory. Defaults to `docs/research/`
    | 4 | Low | Tutorials: tutorial articles, blog posts, vendor how-to guides |
    | 5 | Lowest | Community: repository issues and discussions, forums, Q&A threads |
 
-  **Done when**: all tiers are probed, the first authoritative match is found and recorded (primary-source-only mode), or a hard failure stops the ladder.
+   **Done when**: all tiers are probed, the first authoritative match is found and recorded (primary-source-only mode), or a hard failure stops the ladder.
 
 4. Cite every claim. Every factual claim must cite at least one source URL or doc path. Assertions derived solely from training data must carry `[Speculative — training data only]`. **Done when**: every claim has a citation or speculative label.
 5. Write the artifact. Persist all findings into a single Markdown file at the target location. The file name is a slug of the subject. **Done when**: the artifact is written to disk.
