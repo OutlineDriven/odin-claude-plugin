@@ -17,12 +17,13 @@ description: 'Use when the user runs /markdown-to-pdf on Markdown to render a pu
 ## Inputs
 
 - `input.md` (required): the Markdown source to render.
+- `$MAKE_PDF_BIN` (required): path to the executable PDF renderer binary.
 - `output.pdf` (optional): explicit output path; defaults to `/tmp/<input-basename>.pdf`.
 - Rendering flags (optional): `--cover`, `--toc`, `--watermark <text>`, `--no-confidential`, `--no-chapter-breaks`, `--page-size letter|a4|legal`, `--margins <dim>`, `--strict`, `--allow-network`, `--to pdf`.
 
 ## Procedure
 
-1. Locate the PDF renderer binary (`$P`). Check in order: `$MAKE_PDF_BIN` if set and executable, `<repo-root>/.claude/skills/gstack/make-pdf/dist/pdf`, `$HOME/.claude/skills/gstack/make-pdf/dist/pdf`. If none is executable, stop and tell the user to build it (`./setup` in the gstack repo); do not proceed. Done when: an executable `$P` is found or the run stops with the build instruction.
+1. Locate the PDF renderer binary (`$P`): the only path is `$MAKE_PDF_BIN`, and it is required. If `$MAKE_PDF_BIN` is unset or not executable, stop and tell the user to set `$MAKE_PDF_BIN` to the renderer binary path; do not proceed. Done when: an executable `$P` is found or the run stops naming the missing `$MAKE_PDF_BIN`.
 2. Verify the toolchain: run `$P setup` to confirm headless Chromium, the browse daemon, and `pdftotext` are available and a smoke test passes. Check that `fonts-liberation` (Helvetica/Arial metric-compatible fallback) and a color-emoji font (`fonts-noto-color-emoji` on Linux, Apple Color Emoji on macOS, Segoe UI Emoji on Windows) are installed. If either font is absent, stop and tell the user which package to install (`apt install fonts-liberation fonts-noto-color-emoji` on Debian/Ubuntu, or the platform equivalent); do not proceed and do not install fonts yourself. Done when: `$P setup` passes and both fonts are confirmed present, or the run stops naming the missing component and the install command.
 3. Render the source Markdown to PDF: `$P generate <input.md> [output.pdf]`. Add `--cover --toc --author "..." --title "..."` for publication layout (each top-level H1 starts a new page unless `--no-chapter-breaks`); add `--watermark DRAFT` for a diagonal 10%-opacity watermark; add `--no-confidential` to suppress the default CONFIDENTIAL footer. The renderer uses headless Chromium with Paged.js pagination, 1in margins, Helvetica/Liberation Sans body, curly quotes and em dashes, running header and page numbers. Capture the output path from stdout (one line, the path only). Done when: the output path is captured from stdout.
 4. Run the emoji gate: render a minimal Markdown containing emoji (for example `✅ done 🚀 launch`) and confirm the emoji render as color glyphs, not empty boxes (▯). The print CSS falls back through Apple Color Emoji, Segoe UI Emoji, and Noto Color Emoji. If emoji render as boxes, the color-emoji font is missing: stop and tell the user to install it (`apt install fonts-noto-color-emoji` on Debian/Ubuntu, or the platform equivalent), then retry. Do not install fonts yourself. Done when: emoji appear as color glyphs.
@@ -33,7 +34,7 @@ description: 'Use when the user runs /markdown-to-pdf on Markdown to render a pu
 
 ## Failure and recovery
 
-- Binary not found: no executable `$P` at any checked path. Stop; tell the user to run `./setup` in the gstack repo to build it, then retry. Do not proceed without the renderer.
+- Binary not found: `$MAKE_PDF_BIN` is unset or not executable. Stop; tell the user to set `$MAKE_PDF_BIN` to the renderer binary path, then retry. Do not proceed without the renderer.
 - Setup failure: `$P setup` reports a missing component (Chromium, browse daemon, or `pdftotext`). Stop; report the missing component and the setup output. Do not attempt to render.
 - Emoji gate red: emoji render as empty boxes. The color-emoji font is missing. Stop and tell the user to install `fonts-noto-color-emoji` (or the platform equivalent), then retry. Do not claim the gate is green and do not install fonts yourself.
 - Diagram gate red: a mermaid or excalidraw fence renders as raw code, or a broken fence produces no diagnostic. Check the fence is at column 0 (not indented), check the vendored diagram bundle is present, and re-render. A broken fence that silently shows raw code is a renderer defect: report it, do not work around it.

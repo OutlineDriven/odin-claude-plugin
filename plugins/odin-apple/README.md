@@ -2,7 +2,7 @@
 
 ODIN workflows for software on Apple platforms.
 
-5 skills, category Coding.
+3 skills, category Coding.
 
 ## Install
 
@@ -20,6 +20,4 @@ codex plugin add odin-apple@odin-marketplace
 
 - ios-build-cleanup
 - ios-build-fix
-- ios-device-qa
-- xcode-project-sync
 - xcode-simulator-testing

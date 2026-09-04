@@ -99,6 +99,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `docs/specs/distribution-surfaces.md`, replaced by proofs run against this tree.
 - Duplicate root copies of `implementer-prompt.md` and `task-reviewer-prompt.md`
   under `subagent-driven`; only the `references/` copies were cited.
+- `setup-benny`: folded into `setup`; the archive-install verification now lives there.
+- `setup-pstack`: folded into `setup`; the role-to-model mapping now lives there.
+- `poteto-mode`: folded into `figure-it-out`; the 23-playbook contracts now live there.
+- `xcode-project-sync`: folded into `ios-build-fix` as the XcodeGen regeneration mode.
+- `ios-device-qa`: removed; the vendor daemon has no public equivalent.
 
 ### Migration
 

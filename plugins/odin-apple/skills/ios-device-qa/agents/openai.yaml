@@ -1,3 +1,0 @@
-interface:
-  display_name: "Ios Device QA"
-  short_description: "Use when the user runs /ios-device-qa to drive a real iPhone over USB through a debug-bridge daemon and return a device QA report with verified interactions."

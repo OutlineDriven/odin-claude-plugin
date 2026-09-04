@@ -2,7 +2,7 @@
 
 ODIN workflows for executing plans, orchestrating subagents, and bounded autonomous loops.
 
-46 skills, category Coding.
+45 skills, category Coding.
 
 ## Install
 
@@ -45,7 +45,6 @@ codex plugin add odin-run@odin-marketplace
 - parallel-launch
 - partition-scopes-to-subagents
 - post-to-slack
-- poteto-mode
 - propose-external-change
 - respond-to-slack-thread
 - saga

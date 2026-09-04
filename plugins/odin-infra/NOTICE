@@ -98,11 +98,10 @@ Local adaptations: artifact-arena, automate-me, blast-radius, check-agent-compat
   create-learning-path, create-plugin-scaffold, create-verification-skill, cursor-sdk, docs-canvas,
   figure-it-out, get-pr-comments, how, interrogate, learning-retrospective,
   maintain-verification-skill, make-bot-ui, make-pr-easy-to-review, new-branch-and-pr, no-comments,
-  paced-explanation, poteto-mode, pr-review-canvas, pr-review-canvas-html, principles,
-  rationale-by-source, recall, reflect, reproduce-and-fix-issues, review-and-ship,
-  review-plugin-submission, run-smoke-tests, setup-benny, setup-pstack, show-me-your-work, swarm,
-  technical-writing, typescript-best-practices, verify-this, weekly-review, what-did-i-get-done,
-  workflow-from-chats, x-api-mcp-guide
+  paced-explanation, pr-review-canvas, pr-review-canvas-html, principles, rationale-by-source,
+  recall, reflect, reproduce-and-fix-issues, review-and-ship, review-plugin-submission,
+  run-smoke-tests, show-me-your-work, swarm, technical-writing, typescript-best-practices,
+  verify-this, weekly-review, what-did-i-get-done, workflow-from-chats, x-api-mcp-guide
 
 evilmartians/agent-skills
 Source: https://github.com/evilmartians/agent-skills/tree/a2a83b280a2c5b9a6176c5934298fad0224bbce4
@@ -124,9 +123,9 @@ Copyright: Copyright (c) 2026 Garry Tan
 Local adaptations: autoplan, browse, browser-cookie-store, browser-qa, canary-deploy,
   deployment-setup, design-consultation, design-variants, developer-experience-review, docs-update,
   docs-writing, engineering-retrospective, idea-to-design, ios-build-cleanup, ios-build-fix,
-  ios-device-qa, ios-visual-review, issue-intake, markdown-to-pdf, merge-and-deploy,
-  plan-review-tune, polished-web-prototype, publish-release-pr, release-landing-report, scrape,
-  skill-benchmark, toolchain-health, web-design-review, workspace-unfreeze, xcode-project-sync
+  ios-visual-review, issue-intake, markdown-to-pdf, merge-and-deploy, plan-review-tune,
+  polished-web-prototype, publish-release-pr, release-landing-report, scrape, skill-benchmark,
+  toolchain-health, web-design-review, workspace-unfreeze
 
 humanlayer/skills
 Source: https://github.com/humanlayer/skills

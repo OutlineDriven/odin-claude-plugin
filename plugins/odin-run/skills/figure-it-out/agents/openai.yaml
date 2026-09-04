@@ -1,3 +1,3 @@
 interface:
   display_name: "Figure It Out"
-  short_description: "Use when asked to design a bespoke execution workflow when no playbook fits; verify a falsifiable predicate on the real product with a reviewable trail."
+  short_description: "Use when a non-trivial task should be classified against the 23-playbook index and the matched playbook executed to verified completion on the real surface, or when asked to design a bespoke execution workflow because no playbook fits; verify a falsifiable predicate with a reviewable trail."

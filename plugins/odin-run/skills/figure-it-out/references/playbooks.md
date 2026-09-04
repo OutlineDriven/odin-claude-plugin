@@ -1,4 +1,4 @@
-# Poteto mode: 23-playbook contracts
+# Figure it out: 23-playbook contracts
 
 Each playbook defines required actions and a real-surface done check. The done check is satisfied only by exercising the actual surface the user will use, never by compilation, a worker report, a checked box, or source inspection alone.
 

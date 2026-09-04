@@ -276,7 +276,6 @@
 | interview-me | odin-planning | Productivity |
 | ios-build-cleanup | odin-apple | Coding |
 | ios-build-fix | odin-apple | Coding |
-| ios-device-qa | odin-apple | Coding |
 | ios-visual-review | odin-design | Design |
 | isolate-work-in-worktree | odin-git | Coding |
 | isolate-workspace-gate | odin-git | Coding |
@@ -369,7 +368,6 @@
 | post-merge-cleanup | odin-git | Coding |
 | post-release-status | odin-release | Coding |
 | post-to-slack | odin-run | Coding |
-| poteto-mode | odin-run | Coding |
 | pov | odin-planning | Productivity |
 | pr-impact-quiz | odin-review | Coding |
 | pr-link-issue | odin-git | Coding |
@@ -458,10 +456,8 @@
 | session-share | odin-knowledge | Productivity |
 | session-viewer | odin-knowledge | Productivity |
 | setup | odin-agent | Productivity |
-| setup-benny | odin-agent | Productivity |
 | setup-gitignore | odin-git | Coding |
 | setup-pre-commit | odin-git | Coding |
-| setup-pstack | odin-agent | Productivity |
 | setup-repo-skills | odin-git | Coding |
 | setup-tool-credentials | odin-agent | Productivity |
 | setup-ts-deep-modules | odin-typescript | Coding |
@@ -611,7 +607,6 @@
 | writing-shape | odin-writing | Writing |
 | writing-skills | odin-skills | Productivity |
 | wycheproof | odin-security | Security |
-| xcode-project-sync | odin-apple | Coding |
 | xcode-simulator-testing | odin-apple | Coding |
 | yara-rule-authoring | odin-security | Security |
 | zeroize-audit | odin-security | Security |

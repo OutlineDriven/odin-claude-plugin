@@ -18,7 +18,7 @@ description: 'Use when the user runs /embed-diagram to render a Mermaid diagram 
 
 - A diagram request: an English description of the structure to diagram, or Mermaid source. Required.
 - A target document path. Required. The document must exist and be writable.
-- Output directory. Optional. Default `./diagrams/` when the cwd is a git repo, else `/tmp/gstack-diagrams/`.
+- Output directory. Optional. Default `./diagrams/` when the cwd is a git repo, else `/tmp/odin-diagrams/`.
 - Output slug. Optional. Derived kebab-case from the diagram subject, 40 chars or fewer.
 
 ## Procedure

@@ -1,3 +1,0 @@
-interface:
-  display_name: "Setup Benny"
-  short_description: "Use when installing a third-party automation pack or template repository safely and deterministically."

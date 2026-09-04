@@ -2,7 +2,7 @@
 
 ODIN workflows for configuring agent harnesses, MCP servers, and repository agent surfaces.
 
-18 skills, category Productivity.
+16 skills, category Productivity.
 
 ## Install
 
@@ -31,8 +31,6 @@ codex plugin add odin-agent@odin-marketplace
 - plan-review-tune
 - prohibit-bad-habits
 - setup
-- setup-benny
-- setup-pstack
 - setup-tool-credentials
 - skill-doctor
 - workspace-unfreeze
