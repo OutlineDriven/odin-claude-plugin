@@ -27,17 +27,19 @@ description: 'Use when adding or improving property tests for invariants, oracle
 1. Examine the target code for an algebraic shape. Check whether the shape is missing or merely buried. A calculation wrapped in I/O, a string built by concatenation, or an in-place mutation may have a property but no seam through which to assert it. If the shape is buried, identify the refactoring that exposes it and propose it to the user before proceeding. Done when: the code's algebraic shape is named (inverse, invariant, idempotence, oracle, roundtrip, commutativity, associativity, identity, or determinism), or the shape is absent and the stop recommendation is stated.
 2. Determine which property applies. Use the property catalog and strength ordering:
 
-   | Property | Formula | Where it applies |
-   |---|---|---|
-   | Roundtrip | `decode(encode(x)) == x` | Serialization, conversion pairs |
-   | Inverse | `f(g(x)) == x` | encrypt/decrypt, compress/decompress |
-   | Oracle | `new(x) == reference(x)` | Optimization, refactoring, reimplementation |
-   | Idempotence | `f(f(x)) == f(x)` | Normalization, formatting, sorting |
-   | Invariant | Holds before and after | Any transformation, contract state |
-   | Easy to verify | `is_sorted(sort(x))` | Complex algorithms with cheap checkers |
-   | Commutativity | `f(a, b) == f(b, a)` | Binary and set operations |
-   | Associativity | `f(f(a,b), c) == f(a, f(b,c))` | Combining operations |
-   | Identity | `f(x, e) == x` | Operations with a neutral element |
+   | Property | Formula |
+   |---|---|
+   | Roundtrip | `decode(encode(x)) == x` |
+   | Inverse | `f(g(x)) == x` |
+   | Oracle | `new(x) == reference(x)` |
+   | Idempotence | `f(f(x)) == f(x)` |
+   | Invariant | Holds before and after |
+   | Easy to verify | `is_sorted(sort(x))` |
+   | Commutativity | `f(a, b) == f(b, a)` |
+   | Associativity | `f(f(a,b), c) == f(a, f(b,c))` |
+   | Identity | `f(x, e) == x` |
+
+   Owner of the catalog is this skill's procedure. property-test-review inlines it. Do not recopy.
 
    Strength ordering, weakest to strongest: `no crash` then `type preservation` then `invariant` then `idempotence` then `roundtrip / oracle`.
 

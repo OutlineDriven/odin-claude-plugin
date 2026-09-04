@@ -48,17 +48,19 @@ description: 'Use when reviewing existing property tests for coverage and defect
 
 4. Compare against the property catalog. For each tested function, identify the strongest property the code supports but the suite does not assert:
 
-   | Property | Formula | Where it applies |
-   |---|---|---|
-   | Roundtrip | `decode(encode(x)) == x` | Serialization, conversion pairs |
-   | Inverse | `f(g(x)) == x` | encrypt/decrypt, compress/decompress |
-   | Oracle | `new(x) == reference(x)` | Optimization, refactoring, reimplementation |
-   | Idempotence | `f(f(x)) == f(x)` | Normalization, formatting, sorting |
-   | Invariant | Holds before and after | Any transformation, contract state |
-   | Easy to verify | `is_sorted(sort(x))` | Complex algorithms with cheap checkers |
-   | Commutativity | `f(a, b) == f(b, a)` | Binary and set operations |
-   | Associativity | `f(f(a,b), c) == f(a, f(b,c))` | Combining operations |
-   | Identity | `f(x, e) == x` | Operations with a neutral element |
+   | Property | Formula |
+   |---|---|
+   | Roundtrip | `decode(encode(x)) == x` |
+   | Inverse | `f(g(x)) == x` |
+   | Oracle | `new(x) == reference(x)` |
+   | Idempotence | `f(f(x)) == f(x)` |
+   | Invariant | Holds before and after |
+   | Easy to verify | `is_sorted(sort(x))` |
+   | Commutativity | `f(a, b) == f(b, a)` |
+   | Associativity | `f(f(a,b), c) == f(a, f(b,c))` |
+   | Identity | `f(x, e) == x` |
+
+   Owner. property-test-authoring inlines the same catalog. Do not recopy.
 
    Strength ordering, weakest to strongest: `no crash` then `type preservation` then `invariant` then `idempotence` then `roundtrip / oracle`. Assert the strongest property the code supports. "No crash" alone rarely justifies the dependency, if that is all that can be found, either a small rearrangement exposes something stronger, or the honest report is that this code is a poor PBT candidate.
 
