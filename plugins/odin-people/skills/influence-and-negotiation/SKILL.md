@@ -24,7 +24,7 @@ description: 'Use when an agreement-seeking interaction arises, including mid-co
 
 ## Procedure
 
-1. **Classify mode.** If the user supplies a transcript or describes an active exchange, set mode to `live`. If the user describes a concluded interaction, set mode to `debrief`. Otherwise set mode to `prepare`. Done when: mode is set to `prepare`, `live`, or `debrief` based on the interaction state.
+1. **Classify mode.** If the user supplies a transcript or describes an active exchange, set mode to `live`. If the user describes a concluded interaction, set mode to `debrief`. Otherwise set mode to `prepare`. Done when: the mode and the input feature that selected it (transcript, active exchange, or concluded interaction) are both recorded.
 
 2. **Map the Mandascan five points.** For every party, identify and record:
    - Interests: underlying needs, not stated positions.
@@ -59,7 +59,7 @@ description: 'Use when an agreement-seeking interaction arises, including mid-co
    b. Score each Mandascan point: was it accurately assessed beforehand? Where was the assessment wrong?
    c. Identify pathologies: anchoring bias, reactive devaluation, escalating commitment, mythical fixed pie, premature closure, or loss of face.
    d. For each pathology found, name the moment it occurred, what it cost, and what an alternative response would have been.
-   e. Extract transferable lessons: what to prepare differently, what tactic worked, and what to avoid. Done when: the mode-specific artifact (mandate and MAP, response scripts, or retrospective debrief) is produced following the sub-steps for the selected mode.
+   e. Extract transferable lessons: what to prepare differently, what tactic worked, and what to avoid. Done when: the artifact for the selected mode exists and every one of its sub-steps has a written entry, with missing evidence marked unknown rather than filled in.
 
 6. **Back-brief.** Before delivering the output, verify that every recommendation traces to a Mandascan point or an observed move. Remove any recommendation that cannot be grounded in evidence from the inputs. Done when: every recommendation traces to a Mandascan point or observed move, and ungrounded recommendations are removed.
 

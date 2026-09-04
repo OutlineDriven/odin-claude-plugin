@@ -32,11 +32,11 @@ description: 'Use when skills must move between plugins, or plugins must be crea
 
 5. Rewrite the catalog. Replace the `entries` array with one entry per surviving plugin (id, name, description, category, tags, directory), ordered by the stated principle, and leave `releaseVersion` alone. Done when: the catalog lists exactly the surviving plugins and the ordering principle is written into the change description.
 
-6. Replace retired ids in the authored file set only. Build one regex from the retired ids with the longest ids first, and a negative lookahead after any id that is a prefix of a surviving id, so `odin-create` never matches `odin-create-advanced` or `odin-creative`. Exclude version history and every generated surface. Done when: the regex finds nothing in the authored set and the excluded files are byte-identical.
+6. Replace retired ids in the authored file set only. Build one regex from the retired ids, longest first, with an id-character boundary on both sides (`(?<![a-z0-9-])` before and `(?![a-z0-9-])` after), so a retired id that is a prefix or suffix of a surviving id never matches inside it. Exclude version history and every generated surface. Done when: the regex finds nothing in the authored set and the excluded files are byte-identical.
 
 7. Repair every literal path inside a gate script that names a moved skill, for example an allowlist that holds `plugins/<old>/skills/<slug>/SKILL.md`. Edit only those literals. Done when: each gate script resolves every path it names to a file that exists.
 
-8. Add or confirm the guard: a rule in the root context file stating what a plugin id names (a job or a stack, never a tier), and an assertion in the surface checker that rejects any plugin id carrying a tier suffix. Prove the assertion fires by renaming one plugin to a tier-suffixed id, running the checker, reading its non-zero exit, and reverting. Done when: the guard is proven to fire and the tree is back to its intended state.
+8. Add or confirm the guard: a rule in the root context file stating what a plugin id names (a job or a stack, never a tier), and an assertion in the surface checker that rejects a plugin id carrying the `-advanced` tier suffix (extend its pattern when a new tier word appears). Prove the assertion fires by renaming one plugin to a tier-suffixed id, running the checker, reading its non-zero exit, and reverting. Done when: the guard is proven to fire and the tree is back to its intended state.
 
 9. Regenerate every generator-owned surface with the project's render task, then run its check mode. Done when: the check reports every generated file in sync and `git status` shows no hand edit under a generated path.
 
@@ -50,7 +50,7 @@ description: 'Use when skills must move between plugins, or plugins must be crea
 
 - Missing target directory: a `git mv` into a nonexistent `plugins/<id>/skills/` renames the source directory to that path. Detect it by a SKILL.md count that still matches while a plugin directory is missing its `skills/` child; move the misplaced directory into place and repeat step 3.
 - Emptied plugin still holding an authored file: step 4 found a file outside the generated set. Stop, add the file's skill to the map, and rerun from step 3. Never delete an authored file to make the inventory clean.
-- Id regex matching a longer id: a surviving id that starts with a retired id was rewritten. Restore the affected files from version control, add the lookahead, and rerun step 6.
+- Id regex matching a longer id: a surviving id that contains a retired id was rewritten. Restore the affected files from version control, add the boundaries on both sides, and rerun step 6.
 - Stale allowlist path inside a gate script: a gate that names a moved path now fails or, worse, silently skips the file. Repair the literal in step 7; never widen the allowlist to a glob to make the gate pass.
 - Hand edit to a generated surface: the check in step 9 reports drift. Discard the hand edit, change the generator or the catalog, and regenerate.
 - Non-convergence: if a gate still fails after the repairs above, return the failing gate's output and the exact map row or file that produced it. Do not commit.

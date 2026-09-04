@@ -22,7 +22,7 @@ The user's instruction and all readable context: the current message, session hi
 
 ## Procedure
 
-1. **Check the read signal.** Recognize when the instruction is long, multi-part, ambiguous in scope or referents, deliberately flexible, or high-stakes enough that a wrong read costs real work. If none of these signals are present, stop. Done when: the instruction is classified as gate-worthy or not; if not, stopped.
+1. **Check the read signal.** Recognize when the instruction is long, multi-part, ambiguous in scope or referents, deliberately flexible, or high-stakes enough that a wrong read costs real work. If none of these signals are present, stop. Done when: the matched signals are named, or none is and the gate stops here.
 
 2. **Restate the instruction.** Paraphrase the instruction in the agent's own words. Do not copy the user's wording and treat that as understanding. Done when: the instruction is paraphrased in the agent's own words, not copied from the user.
 
