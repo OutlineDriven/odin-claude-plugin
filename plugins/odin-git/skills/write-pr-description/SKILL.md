@@ -35,7 +35,7 @@ disable-model-invocation: true
    - Use Markdown headings or bullet points when the PR touches multiple concerns. Keep the total length proportional to the change size.
    Done when: the draft description is complete with plain language, review guide, and no inflated claims.
 7. Present the draft description to the user. Show the full text. Wait for explicit approval, revision requests, or rejection. Done when: the user explicitly approves, requests revisions, or rejects.
-8. On approval, write the approved description to a temporary file, then run `gh pr edit <number> --body-file <tmp>` to set the PR body from the file, because the shell interprets quotes, backticks, and `$` in an inline `--body` argument. Confirm the write succeeded. Done when: the PR body is updated and the write is confirmed.
+8. On approval, write the approved description to a temporary file, then run `gh pr edit <number> --body-file <tmp>` to set the PR body from the file, because the shell interprets quotes, backticks, and `$` in an inline `--body` argument. Confirm the write succeeded, then delete the temporary file; on any failure path, delete it as well. Done when: the PR body is updated, the write is confirmed, and the temporary file is gone.
 
 ## Failure and recovery
 - PR not found: stop. Report the error. No write attempted.

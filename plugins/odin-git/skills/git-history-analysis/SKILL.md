@@ -33,9 +33,9 @@ disable-model-invocation: true
 4. Collect active branches (work in progress), filtering out merged branches and dynamically resolving the default branch instead of hardcoding `main`:
    ```bash
    default_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@' || echo main)
-   git --no-pager branch -r --no-merged origin/$default_branch --sort=-committerdate | head -20 | grep -E "<filters>"
+   git --no-pager branch -r --no-merged origin/$default_branch --sort=-committerdate | grep -E "<filters>" | head -20
    ```
-   Omit `-- <filters>` when no path filters are supplied. Done when: active unmerged branches listed, sorted by most recent commit.
+   Apply branch-name filters before `head` so filtering cannot discard branches beyond the first twenty. Path filters are a different concern: collect them with `git log --all --oneline -- <paths>` in their own step, never by grepping branch names. Done when: active unmerged branches listed, sorted by most recent commit.
 5. Collect recent merges to the default branch (completed work), dynamically resolving the default branch and appending `-- <filters>` when path filters are specified:
    ```bash
    default_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@' || echo main)

@@ -10,7 +10,7 @@ description: 'Use when a user wants to enumerate plausible designs, configuratio
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants to enumerate plausible designs, configurations, scenarios, and implementation paths and diagram the finished field before choosing. |
-| Authority | Chat-only: no local artifacts are written. No remote mutation. No VCS or credential mutation. |
+| Authority | Chat-only: no local artifacts are written. No remote, VCS-history, credential, paid, published, or deployed mutation. |
 | Side effect | An exhaustive field of designs/configs/scenarios/paths and a diagram. |
 | Done | An exhaustive field is enumerated and diagrammed before a choice is made. |
 

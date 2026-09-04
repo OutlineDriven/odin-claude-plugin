@@ -10,7 +10,7 @@ description: 'Use when the user asks to make the skills framework work in a new 
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to make the skills framework work in a new harness, IDE, or CLI. |
-| Authority | Reversible local: writes only named harness artifacts (manifest, bootstrap injector, tool-mapping reference, tests, install docs) and edits to other harnesses' sync-exclude files; rollback is deleting those added files and restoring the prior content of any edited sync-exclude files. No remote mutation. Never edit the user's global or personal config, and never edit a skill body to fit the harness. |
+| Authority | Reversible local: writes only named harness artifacts (manifest, bootstrap injector, tool-mapping reference, tests, install docs) and edits to other harnesses' sync-exclude files; rollback is deleting those added files and restoring the prior content of any edited sync-exclude files. No credential, paid, published, deployed, remote, or VCS-history mutation. Never edit the user's global or personal config, and never edit a skill body to fit the harness. |
 | Side effect | Adds a manifest, a bootstrap injector, a tool-mapping reference and tests for the target harness; the version is tracked in the source manifest. |
 | Done | All six done-conditions hold: session-start bootstrap with no per-session opt-in, a tool mapping exists, skills are invocable natively or via a read-the-skill-file fallback, the acceptance test passes with a captured transcript, tests pass, and install works through the harness's own mechanism. |
 

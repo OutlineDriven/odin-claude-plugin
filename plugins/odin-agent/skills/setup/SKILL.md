@@ -64,7 +64,7 @@ One concern: configure the agent environment. Four mechanisms reach it: credenti
 
 ## Pack install
 
-1. **Fetch and extract.** Download the source archive to a scratch location and extract it, rejecting any entry whose resolved path leaves the scratch directory or contains `..` path components (zip-slip). **Done when:** the archive is downloaded and extracted to the scratch location with no traversal entries.
+1. **Fetch and extract.** Download the source archive to a scratch location and extract it, rejecting any entry whose resolved path leaves the scratch directory or contains `..` path components (zip-slip), and rejecting symlink and hardlink entries outright: links are never followed and no link entry is restored. **Done when:** the archive is downloaded and extracted to the scratch location with no traversal or link entries.
 
 2. **Verify every file.** For every file in the extracted tree, compute its SHA-256 hash and compare it against the expected manifest. Fail on any mismatch. **Done when:** every extracted file's hash matches the expected manifest.
 
@@ -74,7 +74,7 @@ One concern: configure the agent environment. Four mechanisms reach it: credenti
 
 5. **Back up prior managed files.** If the target directory exists and contains files that matched the prior managed-state manifest in step 4, copy those files to a `rollback/` subdirectory in the scratch location, separate from the extracted files. The applied manifest alone cannot rebuild prior contents. **Done when:** the prior managed files are copied to the `rollback/` directory, or no prior files are present.
 
-6. **Move atomically and record rollback.** Move only the extracted files from the scratch location to the target directory in one operation, leaving the `rollback/` directory behind. Write the applied manifest (file paths, post-transformation hashes, and the original source URL) beside the target for rollback on future runs. **Done when:** all extracted files are moved to the target and the applied manifest is saved.
+6. **Move atomically and record rollback.** Move only the extracted files from the scratch location to the target directory in one operation, leaving the `rollback/` directory behind. Write the applied manifest (file paths, post-transformation hashes, and the original source archive identifier, needed for rollback verification) beside the target for rollback on future runs. **Done when:** all extracted files are moved to the target and the applied manifest is saved.
 
 ## Role-model mapping
 

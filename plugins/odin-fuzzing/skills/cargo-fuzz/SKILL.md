@@ -48,6 +48,7 @@ description: 'Use when initializing, running, measuring coverage, or triaging a 
      -show-line-counts-or-regions -show-instantiations \
     -format=html -o fuzz_html/ ${SRC_FILTER:+"$SRC_FILTER"}
    ```
+   `SRC_FILTER` is omitted entirely when unset and expands as separate path arguments when several paths are supplied (`${SRC_FILTER[@]+"${SRC_FILTER[@]}"}` under an array); never quoted into one pathname.
    Done when: the HTML coverage report is generated under `fuzz_html/`.
 
 ## Failure and recovery

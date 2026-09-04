@@ -25,7 +25,7 @@ description: 'Use when a custom LibAFL fuzzer needs an executor, observer, feedb
 
 1. **Identify the target boundary.** Determine the function signature or binary entry point to fuzz. Confirm the target accepts byte-slice input (`&[u8]`) or can be wrapped in a `BytesInput` harness. Done when: the target boundary is identified and confirmed compatible with byte-slice input.
 
-2. **Select the executor.** Choose `InProcessExecutor` for in-process fuzzing or `ForkserverExecutor` / `CommandExecutor` for out-of-process. For `InProcessExecutor`, set a signal handler via `InProcessForkExecutor` to catch crashes. Done when: one executor is selected and crash handling is configured.
+2. **Select the executor.** Choose `InProcessExecutor` for in-process fuzzing or `ForkserverExecutor` / `CommandExecutor` for out-of-process. `InProcessExecutor` has no crash isolation in-process; when crash handling is needed, select `InProcessForkExecutor`, which forks per execution and catches crashes in the parent. Done when: one executor is selected and crash handling is configured.
 
 3. **Select the observer.** Create a `HitcountsMapObserver` backed by a `CoverageMap` (typically `AFL-style` shared memory). Wrap in `MultiMapObserver` if tracking multiple maps. Done when: one observer is selected and backed by a coverage map.
 
