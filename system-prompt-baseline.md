@@ -147,7 +147,7 @@ Pin the LTS line where a stack has one, otherwise current stable. Reject pre-rel
 | FastAPI | 0.141 | Annotated dependencies, and blocking work off the loop. |
 | Axum | 0.8 | State over extension, and a graceful serve. |
 | Tauri | 2 | Capabilities deny first. |
-| SQL | — | Bind every value, and index from measured evidence. |
+| SQL | SQL:2023 | Bind every value, and index from measured evidence. |
 | ORM | SQLAlchemy 2.0, Prisma 7, Hibernate 7 | Load relations through the ORM, never by hand. |
 | Rust data access | SQLx 0.9, Diesel 2.3, SeaORM 2.0 | Size the pool to what the database can serve. |
 | Shell | Bash 5, POSIX.1-2024 | Quote every expansion. |
