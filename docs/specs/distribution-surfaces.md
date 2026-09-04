@@ -234,16 +234,17 @@ Validation checks, from the help text (Tier 1, source: `gh skill publish --help`
 - `allowed-tools` is a string, not an array.
 - Install metadata `metadata.github-*` is stripped.
 
-### Dry-run result, historical, 2026-09-01
+### Dry-run result, 2026-09-04
 
-Historical run, recorded 2026-09-01 against releaseVersion 2.0.0, when the tree held 657 skills. Output below is verbatim from that run; the current gate reports 28 plugins and 613 skills.
+Run 2026-09-04 against this tree at `releaseVersion` 2.0.4, when the tree held 614 skills in 28
+plugins. The verbatim output is in `docs/specs/install-proof.md`; the shape:
 
 Command: `gh skill publish --dry-run` from the repository root (Tier 1, source: local execution, verified).
 
 - Exit code: 0.
-- Skills discovered: 657, all under the `[plugins]` label, matching the 657 `plugins/<module>/skills/<slug>/` directories on disk.
-- Warnings: 660 total.
-  - 657 of type `recommended field missing: license`, one per skill.
+- Skills discovered: 614, all under the `[plugins]` label, matching the 614 `plugins/<module>/skills/<slug>/` directories on disk.
+- Warnings: 617 total.
+  - 614 of type `recommended field missing: license`, one per skill.
   - 3 repository-level advisories: secret scanning not enabled, secret scanning push protection not enabled, no active tag protection rulesets.
 - Final line: "Dry run complete. Use without --dry-run to publish."
 
@@ -255,7 +256,7 @@ The tree carries no blanket per-skill `license` frontmatter field, and this is d
 - A uniform value would misstate the provenance of adapted skills.
 - `license` is optional in the Agent Skills specification (Tier 1, source: https://agentskills.io/specification, verified).
 
-The 657 warnings are advisory and do not fail the run.
+The 614 warnings are advisory and do not fail the run.
 
 ## Repository layout
 

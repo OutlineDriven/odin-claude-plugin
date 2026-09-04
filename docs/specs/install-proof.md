@@ -1,7 +1,8 @@
 # Install proof
 
 Each supported surface, exercised against this tree rather than read from a document. Run
-2026-09-01 on branch `feat/skill-foundry-2.0-source`.
+2026-09-04 on branch `feat/prompt-stack-2.1` at `releaseVersion` 2.0.4, the tree of 28 job-named
+plugins and 614 skills.
 
 `docs/specs/distribution-surfaces.md` carries the specifications and their citations. This file
 carries only what was executed and what it returned.
@@ -12,18 +13,28 @@ The GitHub CLI validates every skill against the Agent Skills specification. (Th
 
 ```shell
 $ gh skill publish --dry-run
+warning	[plugins] odin-agent/agent-environment-retrospective	recommended field missing: license
+warning	[plugins] odin-agent/agents-md	recommended field missing: license
+... 612 more lines of the same shape, one per skill ...
+warning		secret scanning is not enabled. Recommended to prevent accidental credential exposure (gh repo edit --enable-secret-scanning)
+warning		secret scanning push protection is not enabled. Blocks pushes containing secrets (gh repo edit --enable-secret-scanning-push-protection)
+warning		no active tag protection rulesets found. Consider protecting tags to ensure immutable releases (Settings > Rules > Rulesets)
+
 Dry run complete. Use without --dry-run to publish.
 $ echo $?
 0
 ```
 
-All 657 skill directories present at the time of the run were discovered under the `[plugins]`
-label, which is the `plugins/{scope}/skills/*/SKILL.md` convention that `gh skill publish --help`
-enumerates. The only per-skill finding was `recommended field missing: license`.
+All 614 skill directories were discovered under the `[plugins]` label, which is the
+`plugins/{scope}/skills/*/SKILL.md` convention that `gh skill publish --help` enumerates. The only
+per-skill finding was `recommended field missing: license`, 614 times.
 
 That warning is accepted, not fixed. `license` is optional in the Agent Skills specification, this
 tree has mixed provenance, and third-party attribution lives in `licenses/NOTICE`. A uniform
 per-skill value would misstate the provenance of an adapted skill.
+
+The three repository-level advisories (secret scanning, push protection, tag protection) name
+GitHub settings, not tree content; they belong to the repository owner.
 
 ## Per-skill install
 
@@ -37,48 +48,55 @@ gh skill install OutlineDriven/odin-claude-plugin plugins/odin-core/skills/askme
 
 ## Codex marketplace
 
-Run against an isolated `CODEX_HOME` so no user configuration changed. codex-cli 0.151.0. Historical run, recorded 2026-09-01 against releaseVersion 2.0.0; output below is verbatim from that run.
+Run against an isolated `CODEX_HOME` so no user configuration changed. codex-cli 0.151.0, run
+2026-09-04 against this tree at `releaseVersion` 2.0.4. Output below is verbatim; the PATH-alias
+warning is Codex refusing to write helper binaries under the temporary `CODEX_HOME`, not a tree
+finding.
 
 ```shell
-$ codex plugin marketplace add /tmp/odin-ship-v2
-Added marketplace `odin-marketplace` from /tmp/odin-ship-v2.
-Installed marketplace root: /tmp/odin-ship-v2
+$ codex plugin marketplace add /home/alpha/.claude/claude/.outline/worktree/prompt-stack
+Added marketplace `odin-marketplace` from /home/alpha/.claude/claude/.outline/worktree/prompt-stack.
+Installed marketplace root: /home/alpha/.claude/claude/.outline/worktree/prompt-stack
 
 $ codex plugin add odin-core@odin-marketplace --json
 {
   "pluginId": "odin-core@odin-marketplace",
   "name": "odin-core",
-  "version": "2.0.0",
-  "installedPath": ".../plugins/cache/odin-marketplace/odin-core/2.0.0",
+  "marketplaceName": "odin-marketplace",
+  "version": "2.0.4",
+  "installedPath": ".../plugins/cache/odin-marketplace/odin-core/2.0.4",
   "authPolicy": "ON_USE"
 }
 ```
 
-All 16 `odin-core` skills materialized under the install cache, which proves Codex resolved the
-fixed `skills/` location from the root manifest without the manifest declaring it. (Run recorded 2026-09-01, before the Agent Plugins surface was retired; no root manifest ships anymore, and the same default now resolves through `.codex-plugin/plugin.json` in Legacy format.)
-`codex plugin list --json` then reported the plugin installed and enabled, with
-`installPolicy: AVAILABLE` and `source.path: /tmp/odin-ship-v2/plugins/odin-core`.
+All 8 `odin-core` skills materialized under the install cache, which proves Codex resolved the
+fixed `skills/` location through `.codex-plugin/plugin.json` in Legacy format without the manifest
+declaring it. `codex plugin list --json` then reported the plugin installed and enabled, with
+`installPolicy: AVAILABLE` and `source.path` pointing at `plugins/odin-core` under the marketplace
+root.
 
-One quirk worth recording: before an install, `codex plugin list` reports `available: []` for a
-freshly added local marketplace. Installing by name from that same marketplace works, so this is a
+One quirk worth recording: `codex plugin list` reports `available: []` for a local marketplace
+both before and after an install. Installing by name from that same marketplace works, so this is a
 listing behavior rather than a manifest defect.
 
 ## Claude Code marketplace
 
-Run against an isolated `CLAUDE_CONFIG_DIR`. No user configuration changed.
-
-Historical run, recorded 2026-09-01 against releaseVersion 2.0.0. Output below is verbatim from that run.
+Run against an isolated `CLAUDE_CONFIG_DIR`. No user configuration changed. Claude Code 2.1.259,
+run 2026-09-04 against this tree at `releaseVersion` 2.0.4. Output below is verbatim.
 
 ```shell
-$ claude plugin marketplace add /tmp/odin-ship-v2
-✔ Successfully added marketplace: odin-marketplace
+$ claude plugin marketplace add /home/alpha/.claude/claude/.outline/worktree/prompt-stack
+✔ Successfully added marketplace: odin-marketplace (declared in user settings)
 
 $ claude plugin install odin-core@odin-marketplace
 ✔ Successfully installed plugin: odin-core@odin-marketplace (scope: user)
 
 $ claude plugin list
+Installed plugins:
+
   ❯ odin-core@odin-marketplace
-    Version: 2.0.0
+    Version: 2.0.4
+    Scope: user
     Status: ✔ enabled
 ```
 
