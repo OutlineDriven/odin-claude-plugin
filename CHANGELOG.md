@@ -35,7 +35,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   the Contract `Authority` row canonized to four leads (`Read-only.`,
   `Reversible local:`, `Human-gated:`, `Remote:`) with each skill's specifics kept,
   a full unslop pass, and a prompt-optimizer audit with one skill-improver cycle
-  per skill (104 findings, 60 applied, 52 left in the reports).
+  per skill: 104 audit findings, 60 applied and the rest recorded in the plugin
+  reports, plus 34 skill-improver fixes. A pre-push review then
+  restored 46 Authority rows the canon had narrowed or widened.
+
+### Fixed
+
+- `lockstep-version-guard` no longer requires exactly 28 catalog entries; the
+  catalog is the member list.
+- Install examples name a skill's real plugin (`askme` lives in `odin-planning`),
+  the README contents list points only at sections that exist, and
+  `docs/specs/skill-lifecycle.md` describes the five dotdir manifests and five
+  registries the tree ships.
+- `AGENTS.md` names the gate commands (`just check`, `just verify`), the carrier
+  generator, the tier-suffix assertion, and the worktree gotcha in the Devin mirror
+  target.
 
 ### Added
 
