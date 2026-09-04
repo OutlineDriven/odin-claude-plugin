@@ -42,7 +42,7 @@ GitHub settings, not tree content; they belong to the repository owner.
 skills that matters.
 
 ```shell
-gh skill install OutlineDriven/odin-claude-plugin plugins/odin-core/skills/askme \
+gh skill install OutlineDriven/odin-claude-plugin plugins/odin-planning/skills/askme \
   --agent claude-code --scope user
 ```
 

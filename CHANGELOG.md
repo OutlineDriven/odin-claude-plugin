@@ -10,11 +10,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Plugins are reorganized by job. Twelve ids that named a tier (`-advanced`) or a
-  grab bag (`odin-create`, `odin-loop`) are retired and their 225 skills, plus 217
-  more from surviving ids, move into twelve new job-named plugins: `odin-critique`,
-  `odin-fuzzing`, `odin-git`, `odin-infra`, `odin-knowledge`, `odin-learn`,
-  `odin-people`, `odin-release`, `odin-review`, `odin-skills`, `odin-testing`, and
-  `odin-visual`. 442 skills moved; every skill keeps its slug and its body. The 28
+  grab bag (`odin-create`, `odin-loop`) are retired, and twelve job-named plugins
+  are created: `odin-critique`, `odin-fuzzing`, `odin-git`, `odin-infra`,
+  `odin-knowledge`, `odin-learn`, `odin-people`, `odin-release`, `odin-review`,
+  `odin-skills`, `odin-testing`, and `odin-visual`. 442 skills moved by `git mv`:
+  225 out of the retired ids and 217 between surviving ids; 275 of them landed
+  in the new plugins and the rest in surviving ones. Every skill keeps its slug, and
+  the move touched no body except one description (`lockstep-version-guard`, which
+  dropped a hardcoded plugin count). The 28
   plugins are ordered in the catalog by workflow with kin adjacent: think, build,
   ship, operate, protect, know, tooling, communicate, stacks. A plugin id now names
   a job or a stack, never a tier; `check-plugin-surfaces` rejects a tier suffix.

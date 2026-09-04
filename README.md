@@ -20,7 +20,6 @@ Methodology: [outline-driven-development](https://github.com/OutlineDriven/outli
 
 - [What is this](#what-is-this)
 - [Install](#install)
-- [Quick start](#quick-start)
 - [Choose your plugins](#choose-your-plugins)
 - [Plugins](#plugins)
 - [Core philosophy](#core-philosophy)
@@ -46,8 +45,8 @@ plugins/odin-core/
   .cursor-plugin/plugin.json   Cursor manifest
   .grok-plugin/plugin.json     Grok manifest
   .kimi-plugin/plugin.json     Kimi manifest
-  skills/askme/SKILL.md        authored skill
-  skills/askme/agents/openai.yaml   generated from the frontmatter
+  skills/necessary-work/SKILL.md        authored skill
+  skills/necessary-work/agents/openai.yaml   generated from the frontmatter
   mcp.json                     MCP servers, odin-core only
   output-styles/               Claude output styles, odin-core only
 ```
@@ -120,7 +119,7 @@ Add the marketplace, then `/plugin install odin-core`. Cursor reads the
 full tree traversal, which matters at this repository's size.
 
 ```shell
-gh skill install OutlineDriven/odin-claude-plugin plugins/odin-core/skills/askme \
+gh skill install OutlineDriven/odin-claude-plugin plugins/odin-planning/skills/askme \
   --agent claude-code --scope user
 ```
 
@@ -146,7 +145,7 @@ Both paths are absolute: Kimi rejects a relative plugin root.
 
 ## Choose your plugins
 
-Nothing here is all-or-nothing. `odin-core` and `odin-code` are the base from Quick start; every
+Nothing here is all-or-nothing. `odin-core` and `odin-code` are the base from Install; every
 row below is what you add on top for that kind of work, and the rest of the 28 stay uninstalled.
 
 | Working on | Add |
@@ -192,7 +191,7 @@ Install one skill instead of a whole plugin with `gh skill install`, shown under
 `catalog/plugins.json` is the identity ledger: it holds each plugin's name, description, category,
 and tags, and every manifest and registry is generated from it.
 
-## Output styles (Claude-code Specific)
+## Output styles
 
 Output styles shape how the agent communicates. Switch through Claude Code's `/config` or by
 setting `outputStyle` in `settings.json`. They ship in `odin-core`.

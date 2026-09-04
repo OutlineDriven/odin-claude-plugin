@@ -8,7 +8,7 @@
 default:
     @just --list
 
-# Regenerate every generated file: skill manifests, plugin manifests, registries.
+# Regenerate every generated file: skill manifests, plugin manifests, registries, skill index.
 render:
     node scripts/render-skill-manifests.mjs
     node scripts/render-plugin-surfaces.mjs

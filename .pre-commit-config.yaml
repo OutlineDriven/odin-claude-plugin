@@ -1,4 +1,4 @@
-# Gates for the skill tree and its four distribution surfaces.
+# Gates for the skill tree and its five distribution surfaces.
 # Run the whole set with: prek run --all-files
 repos:
   # General text cleanup for markdown and JSON files
