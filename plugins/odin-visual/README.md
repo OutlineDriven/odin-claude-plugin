@@ -2,7 +2,7 @@
 
 ODIN workflows for diagrams, decks, canvases, and visual explainers.
 
-26 skills, category Design.
+25 skills, category Design.
 
 ## Install
 
@@ -34,7 +34,6 @@ codex plugin add odin-visual@odin-marketplace
 - render-excalidraw-diagram
 - sequence-diagram
 - show-me
-- single-file-html-deck
 - snippet-image-rendering
 - visual-argument-diagram
 - visual-diagram

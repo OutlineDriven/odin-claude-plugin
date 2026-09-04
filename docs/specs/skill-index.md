@@ -404,7 +404,6 @@
 | readiness-assessment | odin-planning | Productivity |
 | readout | odin-research | Research |
 | recall | odin-knowledge | Productivity |
-| record-design-decisions | odin-knowledge | Productivity |
 | recorded-feedback-analysis | odin-product | Productivity |
 | refactor-break-compat | odin-code | Coding |
 | reflect | odin-skills | Productivity |
@@ -461,7 +460,6 @@
 | setup-gitignore | odin-git | Coding |
 | setup-pre-commit | odin-git | Coding |
 | setup-repo-skills | odin-git | Coding |
-| setup-tool-credentials | odin-agent | Productivity |
 | setup-ts-deep-modules | odin-typescript | Coding |
 | shape | odin-planning | Productivity |
 | sharp-edges | odin-security | Security |
@@ -472,7 +470,6 @@
 | show-review | odin-review | Coding |
 | show-way | odin-planning | Productivity |
 | simplify | odin-code | Coding |
-| single-file-html-deck | odin-visual | Design |
 | site-launch-checklist | odin-web | Coding |
 | size-the-run | odin-run | Coding |
 | skill-benchmark | odin-skills | Productivity |

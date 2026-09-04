@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [2.1.0] - 2026-09-04
+### Changed
+- Folded `setup-tool-credentials` into `setup`: the credentials mechanism now makes `.env` safe
+  before writing, validates credential formats, never overwrites existing keys, and verifies
+  repository, tool access, and prerequisites.
+- Folded `record-design-decisions` into `docs-and-adrs`: resolved codebase terms are recorded to
+  `CONTEXT.md` via the new `references/context-format.md`, and an unavailable ADR directory no
+  longer halts the pass.
+- Folded `single-file-html-deck` into `presentation-creator`: the web-deck format now builds one
+  self-contained, keyboard-navigable HTML file from caller-supplied brand tokens with a frozen
+  pnpm lockfile and browser verification.
 
 ### Changed
 

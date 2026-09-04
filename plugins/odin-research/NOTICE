@@ -142,7 +142,7 @@ Local adaptations: agent-environment-retrospective, answer-stub-questionnaire,
   domain-modeling, git-guardrails, grill-with-docs, handoff, implement-spec,
   journey-trace-wizard, loop-me, mutation-proven-boundaries,
   package-native-pre-commit, prototype, prototype-logic,
-  record-design-decisions, replace-unsafe-typescript-assertions, research,
+  replace-unsafe-typescript-assertions, research,
   resolve-merge-conflicts, review, scaffold-exercises, setup-pre-commit,
   setup-repo-skills, setup-ts-deep-modules, sourced-learning-workspace,
   spec-driven, teach, to-questionnaire, to-spec, to-tickets, wait-what,
@@ -292,7 +292,7 @@ Local adaptations: agents-md, blog-writing-guide, brand-guidelines, claude-setti
   confirmed-security-review, create-branch, django-access-review, django-perf-review,
   doc-coauthoring, document-api-endpoint, eligibility-batch-organizer, gh-review-requests,
   gha-security-review, infrastructure-mentor, pr-link-issue, prompt-optimizer, publish-pr,
-  single-file-html-deck, skill-scanner, skill-writer, typing-exclusion-worker, work-records-summary
+  skill-scanner, skill-writer, typing-exclusion-worker, work-records-summary
 
 The Apache License, Version 2.0 applies to the preceding work. The full license is included in this
 distribution as LICENSE and is also available at https://www.apache.org/licenses/LICENSE-2.0.

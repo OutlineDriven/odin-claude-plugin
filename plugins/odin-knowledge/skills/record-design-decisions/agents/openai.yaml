@@ -1,3 +1,0 @@
-interface:
-  display_name: "Record Design Decisions"
-  short_description: "Use when codebase terminology or a durable technical decision changes."

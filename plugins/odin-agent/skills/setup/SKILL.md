@@ -1,6 +1,6 @@
 ---
 name: setup
-description: 'Use when the user asks to set up or configure the agent environment from a fresh or existing clone: credentials and placeholders, a uv-managed virtual environment, a deterministic archive install of a third-party pack, or a role-to-model mapping file. Configures with explicit human confirmation at each step. Not for automated or unattended runs.'
+description: 'Use when the user asks to set up or configure the agent environment from a fresh or existing clone: credentials and placeholders (gathered into a non-overwriting .env, with repository and tool access verified), a uv-managed virtual environment, a deterministic archive install of a third-party pack, or a role-to-model mapping file. Configures with explicit human confirmation at each step. Not for automated or unattended runs.'
 disable-model-invocation: true
 ---
 
@@ -33,7 +33,7 @@ One concern: configure the agent environment. Four mechanisms reach it: credenti
 
 | User asks | Mechanism |
 |---|---|
-| set up credentials, configure an integration, replace placeholders, token | credentials and placeholders |
+| set up credentials, configure an integration, replace placeholders, token, gather tool credentials into .env, verify repository or tool access | credentials and placeholders |
 | create or check the virtual environment, uv venv | virtual environment |
 | install a pack or template repository from an archive | pack install |
 | write role-to-model choices or a model mapping file | role-model mapping |
@@ -44,17 +44,21 @@ One concern: configure the agent environment. Four mechanisms reach it: credenti
 
 2. **Identify targets.** For each selected integration, locate the corresponding placeholder in skill scripts (search for `{{VARIABLE_NAME}}` patterns or comments naming the integration) and locate or create the corresponding entry in `.env` or `token.json`. **Done when:** every selected integration has a placeholder and credential entry located.
 
-3. **Detect current state.** Check whether a real value already exists in `.env` or `token.json` for each selected integration. Do not overwrite an existing non-empty value without explicit user confirmation. **Done when:** the current state of every selected integration is recorded.
+3. **Detect current state.** Check whether a real value already exists in `.env` or `token.json` for each selected integration. Never overwrite an existing non-empty value: report the key name and that it was skipped, never the value. **Done when:** the current state of every selected integration is recorded.
 
-4. **Ask for each missing value.** Prompt the user to supply the credential or configuration value. Accept the value only via direct user input in the conversation. Do not accept values from another tool or file without user confirmation. **Done when:** every missing value is supplied or the user declines.
+4. **Make `.env` safe before creating or appending.** A path is safe when it is not tracked and it is ignored; do not use `git status` for either check, because an ignored `.env` is omitted from that output. In a git work tree: stop when `git ls-files --error-unmatch -- .env` succeeds (the file is tracked); when `git check-ignore -q -- .env` fails, obtain confirmation and add `.env` to `.gitignore`, creating it when missing; create an empty `.env` only when the path is safe. In a fresh directory with no git work tree: create a `.gitignore` excluding `.env`, then create an empty `.env` when missing. **Done when:** a safe `.env` exists, or the unsafe state is reported and the mechanism stops.
 
-5. **Write credentials.** Write or update `.env` or `token.json` with the supplied values. **Done when:** every supplied value is written to the correct file.
+5. **Ask for each missing value, with format validation.** Prompt the user to supply the credential; accept it only via direct user input in the conversation. Validate basic format: a non-empty string plus the named tool's convention (for example, a Slack bot token starts with `xoxb-`; a Postgres URL contains `://`). Discard a failing value and prompt again. **Done when:** every missing value is supplied and validated, or the user declines.
 
-6. **Replace placeholders.** Scan skill scripts for the matching placeholder and replace it with a reference that reads the value from `.env` or `token.json` at runtime (e.g. an environment-variable lookup or a token-file read), never the literal credential value. Write each modified skill script back to disk. **Done when:** every placeholder is replaced with a runtime reference or reported as not found.
+6. **Write credentials.** Append each validated credential as one `KEY=VALUE` line to `.env`, or write it to `token.json` as the integration requires. Write nothing else to the file. **Done when:** every validated value is written, or skipped with the reason.
 
-7. **Report checklist.** Emit a checklist with two sections: **Configured** (integrations that now have a real value in place) and **Still needs attention** (integrations that were not selected, were skipped, or whose placeholder could not be resolved). **Done when:** the checklist is emitted.
+7. **Verify repository, tool access, and prerequisites.** When a repository is supplied or detected: confirm the remote is reachable (`git ls-remote` or an authenticated HEAD request) and the token grants at least read access; report pass or fail without exposing token values. Run the named tool's prerequisite checks; stop on the first failure and name the tool and the failing check. Confirm `.env` parses (`dotenv` or equivalent) and report its keys. **Done when:** access and every prerequisite pass, or the first failure is reported.
 
-8. **Report example prompts.** For each configured integration, provide one minimal example prompt that exercises the integration. **Done when:** one example prompt per configured integration is reported.
+8. **Replace placeholders.** Scan skill scripts for the matching placeholder and replace it with a reference that reads the value from `.env` or `token.json` at runtime (e.g. an environment-variable lookup or a token-file read), never the literal credential value. Write each modified skill script back to disk. **Done when:** every placeholder is replaced with a runtime reference or reported as not found.
+
+9. **Report checklist.** Emit a checklist with two sections: **Configured** (integrations that now have a real value in place, with prerequisite results) and **Still needs attention** (integrations that were not selected, were skipped, or whose placeholder could not be resolved). **Done when:** the checklist is emitted.
+
+10. **Report example prompts.** For each configured integration, provide one minimal example prompt that exercises the integration, and name the workflows now ready. **Done when:** one example prompt per configured integration is reported.
 
 ## Virtual environment
 
@@ -103,6 +107,8 @@ One concern: configure the agent environment. Four mechanisms reach it: credenti
 | Placeholder not found in any skill script | Skip replacement; mark the integration in the checklist. Report the integration and the fact that no placeholder was found. |
 | Write fails (permission or disk) | Do not continue writing remaining files. Report the failing path and the reason. |
 | No integrations selected | Return an empty checklist and stop. |
+| Unsafe `.env` path (tracked, or ignore coverage declined) | Stop the credentials mechanism. Do not create or append `.env`. |
+| Repository or tool access fails | Name the failing token or URL and stop the verification step. Credentials already written remain. |
 
 Rollback: if a write fails mid-way, already-written credential files are retained as-is; do not attempt to erase or revert partial writes.
 
