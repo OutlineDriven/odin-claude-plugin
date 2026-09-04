@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | Reproduce and fix a trusted bug or performance report. |
-| Authority | Human-gated: asks before credentials, data-at-rest changes, paid actions, publishing, deployment, remote bulk mutation, or irreversible deletion (preview target and consequence); otherwise reversible local: writes only the fix and reproduction evidence; rollback is version control. No remote mutation. |
+| Authority | Human-gated: asks before credentials, data-at-rest changes, paid actions, publishing, deployment, remote bulk mutation, or irreversible deletion (preview target and consequence); otherwise reversible local: writes only the fix and reproduction evidence; rollback is version control. No remote mutation except the human-approved draft PR. |
 | Side effect | Drives the application under test, captures reproduction evidence, and may open one draft PR. No other remote operations. |
 | Done | Verified operational-thread outcome with cleanup. |
 

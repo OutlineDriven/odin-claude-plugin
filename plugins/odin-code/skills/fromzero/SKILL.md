@@ -32,7 +32,7 @@ disable-model-invocation: true
 
 2. Filter requirements to verified only. Carry only requirements that have been verified; discard unproven, speculative, or accumulated scope. Done when: the proven-requirements set is listed and each entry is verified.
 
-3. Branch from the recoverable commit to clear the working surface. The old attempt survives in VCS history while the working surface is cleared on the new branch. Do not use an unspecified reset alternative; the mutation is a branch creation followed by working-surface clearance on that branch. Done when: the working surface is clear on the new branch and the old attempt is reachable in VCS.
+3. Branch from the recoverable commit to clear the working surface. Before any mutation, list the exact set of VCS-tracked targets the clearance will delete (the tracked files of the old attempt) and show that set; the mutation is a branch creation followed by the clearance of exactly those listed targets. The old attempt survives in VCS history while the working surface is cleared on the new branch. Do not use an unspecified reset alternative. Done when: the exact target set was shown before mutating, the working surface is clear on the new branch, and the old attempt is reachable in VCS.
 
 4. Write the requirement list into the new pad. Write only the proven requirements as statements. Do not reintroduce discarded scope. Done when: the new pad contains only verified requirement statements.
 

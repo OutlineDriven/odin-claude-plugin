@@ -26,9 +26,9 @@ description: 'Use when asked to push an already-working artifact to finished com
 3. Propose three polish dimensions (structural coherence, compositional refinement, and presentational polish) unless the human named them. Done when: three polish dimensions are proposed or the human's named targets are adopted.
 4. Obtain explicit human confirmation of the polish targets before mutating any file. Done when: the human confirms the polish targets.
 5. If the artifact is tracked in version control, note its current committed version as the rollback source. If it is not tracked, require the human to supply an existing recovery source before mutation; otherwise stop as blocked. Done when: the rollback source is noted or the run is blocked for lacking one.
-6. Apply polish to the artifact along the confirmed dimensions only. Do not change implementation correctness. Done when: polish is applied along the confirmed dimensions with implementation correctness unchanged.
-7. Verify the polished artifact preserves the original functionality: run a smoke test if applicable. Done when: original functionality is confirmed intact.
-8. Replace the original artifact with the polished version. Done when: the polished version replaces the original at the named path.
+6. Make a copy of the artifact and apply polish to the copy along the confirmed dimensions only. Do not change implementation correctness. Done when: polish is applied to a copy along the confirmed dimensions with implementation correctness unchanged.
+7. Verify the polished copy preserves the original functionality: run a smoke test if applicable. Done when: original functionality is confirmed intact.
+8. Replace the original artifact with the polished copy. Done when: the polished copy replaces the original at the named path.
 
 ## Failure and recovery
 - Polish broke the artifact: restore the named artifact from its VCS version or the human-supplied recovery source. Return `rollback` and a report of what broke.

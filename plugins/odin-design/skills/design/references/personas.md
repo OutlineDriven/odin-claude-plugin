@@ -1,6 +1,6 @@
 # Persona-based testing
 
-A surface should survive five distinct user archetypes. Each persona exposes failure modes that a single design-director perspective would miss. Load this reference when auditing a surface against user archetypes, it is a *testing* framework that runs in parallel with direction-setting, not a substitute for it.
+A surface should survive five distinct user archetypes. Each persona exposes failure modes that a single design-director perspective would miss. Load this reference when auditing a surface against user archetypes; it is a *testing* framework that runs in parallel with direction-setting, not a substitute for it.
 
 **How to use.** Select 2–3 personas most relevant to the surface being critiqued (see the selection matrix below). Walk through the primary user action as each persona. Report specific red flags, not generic concerns.
 

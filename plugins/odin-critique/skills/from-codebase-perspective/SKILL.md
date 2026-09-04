@@ -26,7 +26,7 @@ The question or proposal to analyze from the codebase seat. The codebase under a
 
 ## Procedure
 
-1. Confirm the seat is codebase only. State that money, customers, timing, impact, career, breaking, rent-seeking, innovation, stability, and moat perspectives are out of scope. Done when: the out-of-scope seats are named.
+1. Confirm the seat is codebase only. State that money, customers, timing, impact, career, breaking, rent-seeking, innovation, stability, moat, human, and skeptic perspectives are out of scope. Done when: the out-of-scope seats are named.
 2. Read the existing code, structure, conventions, and constraints that bear on the question. Done when: the relevant code is read and the evidence base is stated.
 3. Determine what the existing code tolerates: patterns, shapes, and directions it already accepts without friction. Done when: tolerates patterns are listed with code evidence.
 4. Determine what the existing code punishes: patterns, shapes, and directions that fight the current structure, require rework, or break invariants. Done when: punishes patterns are listed with code evidence.
