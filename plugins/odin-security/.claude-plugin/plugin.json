@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "odin-security",
   "displayName": "ODIN Security",
-  "version": "2.0.4",
+  "version": "2.1.0",
   "description": "ODIN workflows for security review, vulnerability triage, and defensive implementation.",
   "author": {
     "name": "OutlineDriven",

@@ -1,6 +1,6 @@
 {
   "name": "odin-testing",
-  "version": "2.0.4",
+  "version": "2.1.0",
   "description": "ODIN workflows for tests, properties, mutation, and behavioral verification.",
   "author": {
     "name": "OutlineDriven",

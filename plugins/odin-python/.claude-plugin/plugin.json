@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "odin-python",
   "displayName": "ODIN Python",
-  "version": "2.0.4",
+  "version": "2.1.0",
   "description": "ODIN workflows for modern Python development.",
   "author": {
     "name": "OutlineDriven",

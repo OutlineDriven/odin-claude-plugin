@@ -1,7 +1,7 @@
 # Install proof
 
 Each supported surface, exercised against this tree rather than read from a document. Run
-2026-09-04 on branch `feat/prompt-stack-2.1` at `releaseVersion` 2.0.4, the tree of 28 job-named
+2026-09-04 on branch `feat/prompt-stack-2.1` at `releaseVersion` 2.1.0, the tree of 28 job-named
 plugins and 614 skills.
 
 `docs/specs/distribution-surfaces.md` carries the specifications and their citations. This file
@@ -49,7 +49,7 @@ gh skill install OutlineDriven/odin-claude-plugin plugins/odin-core/skills/askme
 ## Codex marketplace
 
 Run against an isolated `CODEX_HOME` so no user configuration changed. codex-cli 0.151.0, run
-2026-09-04 against this tree at `releaseVersion` 2.0.4. Output below is verbatim; the PATH-alias
+2026-09-04 against this tree at `releaseVersion` 2.1.0. Output below is verbatim; the PATH-alias
 warning is Codex refusing to write helper binaries under the temporary `CODEX_HOME`, not a tree
 finding.
 
@@ -63,8 +63,8 @@ $ codex plugin add odin-core@odin-marketplace --json
   "pluginId": "odin-core@odin-marketplace",
   "name": "odin-core",
   "marketplaceName": "odin-marketplace",
-  "version": "2.0.4",
-  "installedPath": ".../plugins/cache/odin-marketplace/odin-core/2.0.4",
+  "version": "2.1.0",
+  "installedPath": ".../plugins/cache/odin-marketplace/odin-core/2.1.0",
   "authPolicy": "ON_USE"
 }
 ```
@@ -82,7 +82,7 @@ listing behavior rather than a manifest defect.
 ## Claude Code marketplace
 
 Run against an isolated `CLAUDE_CONFIG_DIR`. No user configuration changed. Claude Code 2.1.259,
-run 2026-09-04 against this tree at `releaseVersion` 2.0.4. Output below is verbatim.
+run 2026-09-04 against this tree at `releaseVersion` 2.1.0. Output below is verbatim.
 
 ```shell
 $ claude plugin marketplace add /home/alpha/.claude/claude/.outline/worktree/prompt-stack
@@ -95,7 +95,7 @@ $ claude plugin list
 Installed plugins:
 
   ❯ odin-core@odin-marketplace
-    Version: 2.0.4
+    Version: 2.1.0
     Scope: user
     Status: ✔ enabled
 ```

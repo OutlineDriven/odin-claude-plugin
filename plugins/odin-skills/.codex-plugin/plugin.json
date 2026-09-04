@@ -1,6 +1,6 @@
 {
   "name": "odin-skills",
-  "version": "2.0.4",
+  "version": "2.1.0",
   "description": "ODIN workflows for authoring, auditing, benchmarking, and publishing agent skills.",
   "keywords": [
     "odin",

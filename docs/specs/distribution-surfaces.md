@@ -236,7 +236,7 @@ Validation checks, from the help text (Tier 1, source: `gh skill publish --help`
 
 ### Dry-run result, 2026-09-04
 
-Run 2026-09-04 against this tree at `releaseVersion` 2.0.4, when the tree held 614 skills in 28
+Run 2026-09-04 against this tree at `releaseVersion` 2.1.0, when the tree held 614 skills in 28
 plugins. The verbatim output is in `docs/specs/install-proof.md`; the shape:
 
 Command: `gh skill publish --dry-run` from the repository root (Tier 1, source: local execution, verified).

@@ -1,6 +1,6 @@
 {
   "name": "odin-fuzzing",
-  "version": "2.0.4",
+  "version": "2.1.0",
   "description": "ODIN workflows for fuzz harnesses, fuzzer setup, sanitizers, and coverage analysis.",
   "author": {
     "name": "OutlineDriven",

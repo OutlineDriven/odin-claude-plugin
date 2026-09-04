@@ -43,7 +43,7 @@ Each harness reads the immediate children of `skills/`, so a skill nested deeper
 
 Five harness surfaces are supported, and no others: Claude Code, Codex, Cursor, Grok, and Kimi. Nothing is published to a package registry, and no npm artifact belongs in this tree. A flat Devin mirror of these same skills is exported to the outline repository, which publishes nothing and installs nothing.
 
-`catalog/plugins.json` owns plugin identity: name, description, category, tags, and directory. Every manifest and registry is generated from it. Keep every plugin and marketplace version at the single `releaseVersion` literal `2.0.4`; never bump only some manifests.
+`catalog/plugins.json` owns plugin identity: name, description, category, tags, and directory. Every manifest and registry is generated from it. Keep every plugin and marketplace version at the single `releaseVersion` literal `2.1.0`; never bump only some manifests.
 
 Treat these as generator-owned and never hand-edit them:
 

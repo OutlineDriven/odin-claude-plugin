@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "odin-critique",
   "displayName": "ODIN Critique",
-  "version": "2.0.4",
+  "version": "2.1.0",
   "description": "ODIN workflows for pressure-testing a decision from independent seats and lenses.",
   "author": {
     "name": "OutlineDriven",

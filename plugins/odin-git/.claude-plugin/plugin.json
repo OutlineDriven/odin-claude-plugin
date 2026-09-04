@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "odin-git",
   "displayName": "ODIN Git",
-  "version": "2.0.4",
+  "version": "2.1.0",
   "description": "ODIN workflows for commits, branches, pull requests, review feedback, and issue tracking.",
   "author": {
     "name": "OutlineDriven",
