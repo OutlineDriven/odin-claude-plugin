@@ -50,6 +50,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `AGENTS.md` names the gate commands (`just check`, `just verify`), the carrier
   generator, the tier-suffix assertion, and the worktree gotcha in the Devin mirror
   target.
+- Nine review findings repaired eight skill contracts whose Authority rows
+  contradicted their bodies: memory-clean and memory-update claimed version
+  control as the rollback for data outside version control;
+  github-bug-report-triage, docs-update, saga, and poteto-mode misplaced their
+  write or approval boundaries; resolve-merge-conflicts orders
+  `git stash drop` after the resolution is committed; and
+  influence-and-negotiation permits a conditional sub-step to be skipped with
+  a reason.
+- `watch-for-harness-mode` regains its no-VCS-commit, no-remote-call,
+  no-credential-use, no-published-artifact ban, which the Authority canon had
+  compressed to a weaker no-remote-mutation clause.
 
 ### Added
 
