@@ -2,7 +2,7 @@
 #
 # There is no package manager here: every script is dependency-free Node ESM or
 # standard-library Python, and nothing is published to a package registry.
-# Plugins install straight from this repository through four surfaces.
+# Plugins install straight from this repository through five harness surfaces.
 
 # Show the available tasks.
 default:
