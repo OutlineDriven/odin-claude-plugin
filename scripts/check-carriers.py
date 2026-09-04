@@ -143,7 +143,6 @@ def main():
             present.append(carrier)
         elif carrier.exists():
             failures.append(f"{carrier}: not a file")
-            print(f"check-carriers: {carrier} not a file")
     if not present:
         if failures:
             for line in failures:
