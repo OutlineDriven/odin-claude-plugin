@@ -12,7 +12,7 @@ description: 'Use when the user points to a folder of their study material and w
 | Trigger | The user explicitly points to a folder of their study material and asks to make that material teachable. |
 | Authority | Reversible local: writes only `CORPUS.md` at the workspace root; rollback is restoring the prior file or deleting a newly created one. No remote mutation. Do not change files under the corpus root. |
 | Side effect | Create or wholly replace the workspace-root `CORPUS.md`; rollback is deletion of a newly created file or restoration of the prior file. |
-| Done | `CORPUS.md` inventories every readable file, marks every unreadable file, names the concepts taught, cites their source locations, and orders concepts so no prerequisite appears later than its dependent. |
+| Done | `CORPUS.md` inventories every readable file, marks every unreadable file, names the concepts taught, cites their source locations, and orders concepts so each prerequisite precedes its dependent or any cycle is disclosed on the dependent's line. |
 
 ## Inputs
 

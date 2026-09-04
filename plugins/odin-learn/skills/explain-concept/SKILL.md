@@ -62,4 +62,4 @@ The concept to explain must be supplied. An explicit angle argument (`intuition`
 
 ## Output
 
-The explanation in the chat reply: one screen per angle, fifteen lines for origin, the rendered SVG with alt text and caption for picture, the contrast table with its per-item reach-for lines, the gist-analogy-next-action for simplify, closing with the terminal classification of the chosen angle's done condition met or exactly which condition remains unmet.
+The explanation in the chat reply: one screen per angle, fifteen lines for origin, the rendered SVG with alt text and caption for picture, the contrast table with its per-item reach-for lines, the next-action-gist-analogy for simplify, closing with the terminal classification of the chosen angle's done condition met or exactly which condition remains unmet.

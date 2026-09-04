@@ -109,6 +109,9 @@ Restraint          | warn    | Side B: ceremony      | Cut the framing paragraph
 Generosity         | pass    |                       |
 Honesty            | pass    |                       |
 One-strong-moment  | fail    | Side A: 50/50 hedge   | Commit to one direction
+Invariants         | pass    |                       |
+Audience           | pass    |                       |
+Emptiness          | pass    |                       |
 
 Top-3 fixes: 1. Pick one direction (Intent + One-strong-moment).
              2. Lead with the verdict (Hierarchy).

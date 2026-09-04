@@ -12,7 +12,7 @@ description: 'Use when a user suspects the current direction is tunnel-visioned 
 | Trigger | User invokes a check that the current direction is tunnel-visioned or inherited its framing |
 | Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | None. Bounded fresh sub-sessions used only as inputs to classification. |
-| Done | Bait stripped from the direction statement; every read classified incompatible/compatible/convergent/ambiguous; shared-root clustering complete; ambiguous clusters listed first, then divergent-incompatible, then compatible, then convergent; convergent reads labeled reassurance only; no consensus wording present. |
+| Done | Bait stripped from the direction statement; every read classified incompatible/compatible/convergent/ambiguous; shared-root clustering complete; ambiguous clusters listed first, then incompatible, then compatible, then convergent; convergent reads labeled reassurance only; no consensus wording present. |
 
 ## Inputs
 
@@ -30,7 +30,7 @@ description: 'Use when a user suspects the current direction is tunnel-visioned 
    - Ambiguous: the read cannot be classified as incompatible, compatible, or convergent with confidence; include a one-sentence explanation.
    Done when: every completed read has exactly one classification label.
 4. **Cluster by shared root.** Group reads that share the same underlying assumption, evidence source, or structural concern. Label each cluster by its root. Reads with no shared root form single-member clusters. Done when: every read is assigned to a cluster with its root labeled.
-5. **Order the report.** List ambiguous clusters first, then divergent-incompatible clusters, then compatible clusters, then convergent clusters. Within each cluster, order by relevance to the direction's core claim. Done when: the report is ordered ambiguous first, incompatible second, compatible third, convergent last.
+5. **Order the report.** List ambiguous clusters first, then incompatible clusters, then compatible clusters, then convergent clusters. Within each cluster, order by relevance to the direction's core claim. Done when: the report is ordered ambiguous first, incompatible second, compatible third, convergent last.
 6. **Label convergence as reassurance.** Every convergent read or cluster carries the explicit note: "Convergent = reassurance, not validation. It confirms the framing was inherited, not chosen." Do not use the words consensus, agreement, majority, or weight when describing the reads collectively. Done when: every convergent read carries the reassurance label and no consensus wording is present.
 
 ## Failure and recovery
@@ -44,6 +44,6 @@ A structured report containing:
 1. The stripped direction statement.
 2. Each read with its classification label and a one-sentence summary.
 3. Shared-root cluster map (cluster root → member reads).
-4. Ordered presentation: ambiguous first, then divergent-incompatible, then compatible, then convergent.
+4. Ordered presentation: ambiguous first, then incompatible, then compatible, then convergent.
 5. Convergence-reassurance label on every convergent read.
 6. No consensus, agreement, majority, or weight language anywhere in the report.

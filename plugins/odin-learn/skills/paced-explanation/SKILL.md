@@ -17,7 +17,7 @@ description: 'Use when asked to explain or teach a subsystem, module, pattern, o
 ## Inputs
 
 - Target (required): the subsystem, module, pattern, or change to explain. Supplied as an argument, a file path, or the current conversation context.
-- Depth (optional): explicit depth ceiling or focus area. Absent means begin at plain layer and offer deeper.
+- Depth (optional): explicit depth ceiling or focus area. Absent means begin at the purpose layer (Layer 1) and offer deeper.
 
 ## Procedure
 

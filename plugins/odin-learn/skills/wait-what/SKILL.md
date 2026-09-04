@@ -9,7 +9,7 @@ description: 'Use when the user says "wait, what", "the explanation is unclear",
 
 | Field | Bound contract |
 |---|---|
-| Trigger | User says 'wait, what', 'I don''t follow', or 'say that again'. |
+| Trigger | User says "wait, what", "I don't follow", "say that again", "the explanation is unclear", or "restate in plain language". |
 | Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Restates the same claim without softening; nothing touches disk. |
 | Done | The claim is re-pitched with the missing frame supplied, in plain English and the project''s ubiquitous language. |

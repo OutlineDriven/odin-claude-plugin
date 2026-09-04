@@ -19,6 +19,9 @@ Audit:
 | Generosity | pass | none | (Cannot judge: body absent) |
 | Honesty | fail | Side A: "depends on your use case" | Name the position; if there is none, do not write the post |
 | One-strong-moment | fail | Side A: 50/50 hedge | Pick one design rule; argue it |
+| Invariants | pass | none | (Cannot judge: body absent) |
+| Audience | pass | none | (Cannot judge: body absent) |
+| Emptiness | fail | Side A: AI-flat prose | Open with the claim; let the body earn the reader |
 
 Top-3 fixes: 1. Open with the position. 2. Cut every "really", "basically", "fascinating". 3. If there is no position, kill the post.
 
@@ -59,6 +62,9 @@ Audit:
 | Generosity | fail | Side A: silent null return | Throw with the id when not found |
 | Honesty | fail | Side B: "Factory" performs architecture | Name the function for what it does |
 | One-strong-moment | fail | none | Nothing in 12 lines justifies its weight |
+| Invariants | fail | Side A: defensive nil-checks | Type the contract and throw on missing user |
+| Audience | warn | none | Isolated snippet; name from the call site |
+| Emptiness | fail | Side B: parameterization, Side A: defensive checks | Inline to one function |
 
 Top-3 fixes: 1. Collapse 3 classes to 1 function. 2. Drop the nil-checks; lean on the type. 3. Throw with the id instead of returning null.
 
@@ -87,6 +93,9 @@ Audit:
 | Generosity | fail | none | No cost named for the recommendation |
 | Honesty | fail | Side B: scoring performs rigor | Name the real reason (likely "team knows Postgres") |
 | One-strong-moment | fail | Side A: 50/50 hedge | The decision is the moment; it is missing |
+| Invariants | fail | Side A: 50/50 hedge | State the constraints the chosen option must satisfy |
+| Audience | fail | Side A: "depends" | Name the audience and their actual constraints |
+| Emptiness | fail | Side B: 5-criterion scoring | Two reasons suffice; leave the trade-off for the reader |
 
 Top-3 fixes: 1. First line names the pick. 2. Drop the scoring matrix entirely. 3. Two reasons (one for, one against), not five weighted axes.
 

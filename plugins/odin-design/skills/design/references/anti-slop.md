@@ -1,6 +1,6 @@
 # anti-slop.md, taste anchors and ban-lists
 
-Depth for the SKILL.md §4 charter. Restraint anchored on production exemplars is the antidote to both flavors of slop.
+Depth for the anti-slop charter inlined in `design/SKILL.md` (Procedure step 6).
 
 **Grounded: 2026-08-31**
 

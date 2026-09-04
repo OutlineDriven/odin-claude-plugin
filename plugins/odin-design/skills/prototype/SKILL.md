@@ -10,7 +10,7 @@ description: 'Use when asked to prototype one design question through a cheap lo
 | Field | Bound contract |
 |---|---|
 | Trigger | Explicit model invocation: one design question needs a cheap logic or UI experiment. |
-| Authority | Reversible local: writes only throwaway prototype artifacts and their verdict off the main branch; rollback is deleting them. No VCS mutation of tracked branches, no credentials, no remote mutation. |
+| Authority | Reversible local: writes throwaway prototype artifacts and their verdict off main; may fold the validated decision into the named real-code target on main. No credentials, no remote mutation. |
 | Side effect | Write one throwaway prototype artifact and its verdict off the main branch; that branch is the evidence, not a delivery target. |
 | Done | The question is answered in one line and the decision is folded into the real work. |
 

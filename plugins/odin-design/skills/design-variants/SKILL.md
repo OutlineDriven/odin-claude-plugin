@@ -12,7 +12,7 @@ description: 'Use when /design-variants generates distinct design directions and
 | Trigger | the user runs /design-variants |
 | Authority | Reversible local: writes only design variant pages and files under a per-project design directory; rollback is undo. No remote mutation. |
 | Side effect | local-write to a design directory; no project source, VCS, credential, or remote mutation |
-| Done | a variant gallery is ready for user selection |
+| Done | A variant gallery is ready, an approved record is saved to the design directory, and the taste record is updated |
 
 ## Inputs
 

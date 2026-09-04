@@ -12,7 +12,7 @@ description: 'Use when directing, building, or auditing React/Next.js UI in Tail
 | Trigger | visual direction, Tailwind build, screenshot to markup, dark mode, responsive, UX audit, design QA, deslop UI |
 | Authority | Reversible local: writes only files under the project directory; rollback is version control. No credential, paid, published, deployed, or remote mutation. |
 | Side effect | Builds, audits, or provides direction for React/Next.js UI; may edit files |
-| Done | UI has a track, loaded references, built or audited with ship-readiness, and no AI slop |
+| Done | UI has a track, is built or audited with ship-readiness, and has no AI slop |
 
 ## Inputs
 

@@ -12,7 +12,7 @@ description: 'Use when reviewing a prose plan, spec, PRD, requirements doc, desi
 | Trigger | The user asks to review or critique a prose planning document (plan, spec, PRD, requirements, design doc, brainstorm) or invokes `/doc-review [path]`. |
 | Authority | Reversible local: writes at most one review-record file `docs/reviews/<doc-slug>-review.md`, and only when `--record` is requested; rollback is deleting that file. No remote mutation. Dispatched reviewer subagents are read-only; the reviewed document is never edited, written, or committed. |
 | Side effect | At most one local review-record file, only on `--record`; read-only subagent dispatch. No mutation of the reviewed document or any other tree path. Rollback: delete the single record file; nothing else was touched. |
-| Done | Findings routed to safe-auto / gated-auto / manual / FYI tiers with verbatim evidence, zero writes to the reviewed document, and the terminal signal `Review complete`. |
+| Done | Findings routed to safe_auto / gated_auto / manual / FYI tiers with verbatim evidence, zero writes to the reviewed document, and the terminal signal `Review complete`. |
 
 ## Inputs
 
@@ -294,4 +294,4 @@ Never `git add -A` / `git add .` because staging everything risks committing the
 - Blocked/non-converged result: if the document cannot be classified even after the user is asked, or no reviewers return usable output, output `Review failed: <reason>` and stop without writing any file.
 
 ## Output
-A tiered findings report: every survivor labeled safe-auto / gated-auto / manual / FYI, each carrying a verbatim document quote and an anchored confidence value. Interactive mode adds a routing decision per actionable finding and a unified completion report. On `--record`, additionally one file `docs/reviews/<doc-slug>-review.md`. The reviewed document is never modified. The run terminates with the literal signal `Review complete` (or `Review failed: <reason>` on a blocked path).
+A tiered findings report: every survivor labeled safe_auto / gated_auto / manual / FYI, each carrying a verbatim document quote and an anchored confidence value. Interactive mode adds a routing decision per actionable finding and a unified completion report. On `--record`, additionally one file `docs/reviews/<doc-slug>-review.md`. The reviewed document is never modified. The run terminates with the literal signal `Review complete` (or `Review failed: <reason>` on a blocked path).

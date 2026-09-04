@@ -124,7 +124,7 @@ Confidence flag matters because Bilibili and Xiaohongshu are the two brands most
 - Traditional-Chinese (TC / HK) font on Simplified content: jarring stroke shapes for mainland users.
 - Full-width punctuation `。 ，` mishandled in mixed CJK / Latin lines: PingFang and Source Han ship proper half-width variants via OpenType `halt` / `hwid`; failing to engage them leaves visible gaps after punctuation in mixed runs.
 
-See `cjk.md §8` for the cross-CJK summary and `anti-slop.md §1.9` for the integrated CJK ban-list.
+See `cjk.md §8` for the cross-CJK summary and `anti-slop.md §1.7` for the integrated CJK ban-list.
 
 ## 11. Citations
 

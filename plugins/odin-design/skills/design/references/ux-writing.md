@@ -147,4 +147,4 @@ Show format with placeholders, not instructions. For non-obvious fields, explain
 
 **Avoid.** Jargon without explanation. Blaming users ("You made an error" → "This field is required"). Vague errors ("Something went wrong"). Varying terminology for variety. Humor for errors.
 
-**Cross-refs.** See `interaction-design.md` for confirmation-dialog mechanics and undo patterns; `personas.md` Jordan and Sam for the audiences this guidance most directly serves; `anti-slop.md §1.4` for AI-slop prose smells in product copy.
+**Cross-refs.** See `interaction-design.md` for confirmation-dialog mechanics and undo patterns; `personas.md` Jordan and Sam for the audiences this guidance most directly serves; `anti-slop.md` for AI-slop prose smells in product copy.

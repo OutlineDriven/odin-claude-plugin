@@ -1,4 +1,3 @@
----
 # GLOSSARY.md format
 
 `GLOSSARY.md` defines the canonical language for this teaching workspace. All explainers, exercises, and learning records should use its terminology. Building the glossary is part of learning: a tight definition shows that the user understands the concept.

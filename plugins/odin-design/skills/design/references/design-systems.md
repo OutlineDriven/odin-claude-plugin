@@ -179,7 +179,7 @@ Build a 3-step elevation scale where higher elevations are *lighter* (e.g. L 0.1
 
 Heavy use of `rgba()` / `hsla()` / OKLCH alpha usually means an incomplete palette. Alpha creates unpredictable contrast against whatever surface ends up underneath, performance overhead from per-pixel compositing, and inconsistency when the underlying surface changes.
 
-Define explicit overlay tokens for each context (`--surface-overlay-light`, `--surface-overlay-dark`) instead of leaning on `bg-black/10`. Exceptions where alpha is correct: focus rings (must show through to the underlying focused element), backdrop dims under modals, and translucent paradigm surfaces (glassmorphism, see `paradigms.md §3`, where translucence is the design choice not a workaround).
+Define explicit overlay tokens for each context (`--surface-overlay-light`, `--surface-overlay-dark`) instead of leaning on `bg-black/10`. Exceptions where alpha is correct: focus rings (must show through to the underlying focused element), backdrop dims under modals, and translucent paradigm surfaces (glassmorphism, see the Glassmorphism section of `paradigms.md`, where translucence is the design choice not a workaround).
 
 ## §5. Material 3 Expressive
 

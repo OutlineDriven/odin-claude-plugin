@@ -331,7 +331,7 @@ The pseudo-element is invisible but receives pointer / touch events because the 
 - **HSL or RGB for design-token color.** OKLCH-only. HSL lightness is not perceptual and produces uneven ramps across hues.
 - **JS scroll listeners for parallax or progress.** Use `animation-timeline: scroll()` where supported, `IntersectionObserver` otherwise. A `scroll` event handler running every frame is a battery and jank tax.
 - **Layout-driven media queries on component-scoped content.** Container queries are the right axis once a component can appear in multiple containers.
-- **`transition: all`.** Already banned in SKILL.md §4 charter. Restated here because it is the single most common slop tell on web: animates layout, color, and transform together; jank and unintended re-layouts guaranteed. Name the properties.
+- **`transition: all`.** Already banned in `design/SKILL.md` (Procedure step 6 charter). Restated here because it is the single most common slop tell on web: animates layout, color, and transform together; jank and unintended re-layouts guaranteed. Name the properties.
 - **`*-system-ui` font stacks as the type system.** Already banned. A direction with no committed family is no direction; system-ui delegates the type pair to whatever the OS shipped.
 - **Default Tailwind `gray-50…900` ramp imported wholesale.** RLHF and template defaults converge on it; the surface reads as preset before the eye finishes scanning.
 - **Hardcoded hex or px values in component CSS.** Tokens precede components; components reference tokens. A `git grep '#[0-9a-f]\{3,8\}'` against component files should be empty.
