@@ -47,12 +47,12 @@ Optional:
 
 5. **Implement secret redaction.** Add explicit redaction to every log statement, console output, and error message that could expose a raw access token, refresh token, authorization code, or client secret. Redact by replacing the sensitive value with a fixed marker, not by omitting the log line. Done when: no raw token or secret can appear in any log or console output from the generated code.
 
-6. **Test end-to-end token exchange against the real authorization server.** Execute the implementation against the actual authorization server to verify the full flow:
+6. **Test end-to-end token exchange against the real authorization server.** Preview the authorization server, the chosen flow, and the consequence that a live exchange issues tokens, consumes authorization codes, and invalidates refresh tokens on rotation. After explicit human approval, execute the implementation against the actual authorization server to verify the full flow:
    - authorization_code + PKCE: complete the authorization request, receive the code, exchange it for tokens, and validate the returned access token.
    - client_credentials: request and receive a token using client credentials.
    - device_authorization: initiate the device flow, poll the token endpoint, and receive a token (or confirm the polling loop handles pending and expired states correctly).
    - refresh_rotation: exchange a refresh token for a new pair and confirm the old refresh token is invalidated.
-   If the server does not support the requested flow, if client credentials are invalid, or if the token exchange fails, halt with the specific error from the server response. Done when: a successful end-to-end token exchange or rotation completes against the real authorization server.
+   If approval is withheld, halt without contacting the authorization server. If the server does not support the requested flow, if client credentials are invalid, or if the token exchange fails, halt with the specific error from the server response. Done when: the live test is approved and a successful end-to-end token exchange or rotation completes against the real authorization server.
 
 7. **Verify security requirements.** For every generated artifact, confirm:
    - `code_verifier` is cryptographically random, minimum 43 characters, generated fresh per authorization request.
@@ -68,6 +68,7 @@ Optional:
 - **Auth server does not support the requested flow**: halt. Return the metadata field that excludes the flow and the recommended alternative (for example, switching from implicit to authorization_code+PKCE).
 - Invalid client credentials: halt. Return the server's error response. Do not retry with guessed credentials.
 - Token exchange failure: halt. Return the HTTP status, error code, and error description from the server response. If debugging an existing implementation, identify the specific request field or header that caused the rejection.
+- Live token-exchange test declined: halt. Do not contact the authorization server. Do not mark the task done.
 - Security checklist row fails: halt. Name the failing row and the generated artifact that caused it. Do not mark the task done.
 - Dependency unavailable: block. Return the missing dependency and the package or endpoint required. Do not substitute a stub that passes without the real dependency.
 - Partial result: if halted mid-procedure, leave changes uncommitted. Do not partially merge with working auth code that bypasses the failing check.
