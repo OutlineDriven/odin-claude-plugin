@@ -75,13 +75,14 @@ If `INTERNAL_REPO` or `NOTIFICATION_TOKEN` is unset, stop and ask before running
 6. Fetch the newest run for this workflow on this branch and share its `url`; do not watch or wait for completion:
 
    ```bash
-   gh run list \
+   RUN_URL=$(gh run list \
      --repo "$INTERNAL_REPO" \
      --workflow "$RC_WORKFLOW_NAME" \
      --branch "$BRANCH_NAME" \
      --limit 1 \
      --json url,status,conclusion,createdAt \
-     --jq '.[0]'
+     --jq '.[0].url')
+   echo "$RUN_URL"
    ```
 
    Done when: the newest run URL is fetched and shared.
@@ -89,10 +90,11 @@ If `INTERNAL_REPO` or `NOTIFICATION_TOKEN` is unset, stop and ask before running
 7. Post the status notification carrying the branch name and run URL. Use the destination the user named. If the user gave no destination, stop and ask for one. Send the notification through the configured endpoint:
 
    ```bash
+   JSON=$(jq -n --arg destination "$DESTINATION" --arg text "Triggered $RC_WORKFLOW_NAME for $BRANCH_NAME.\nRun: $RUN_URL" '{destination: $destination, text: $text}')
    curl -s -X POST "$NOTIFICATION_ENDPOINT" \
      -H "Authorization: Bearer $NOTIFICATION_TOKEN" \
      -H "Content-type: application/json; charset=utf-8" \
-     -d '{"destination":"<DESTINATION>","text":"Triggered '"$RC_WORKFLOW_NAME"' for '"$BRANCH_NAME"'.\nRun: <RUN_URL>"}'
+     -d "$JSON"
    ```
 
    Require a success response from the notification API. Done when: the notification post returns success.

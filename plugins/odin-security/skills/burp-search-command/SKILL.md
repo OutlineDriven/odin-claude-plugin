@@ -39,7 +39,7 @@ Prerequisites: Burp Suite Professional with the `burpsuite-project-file-parser` 
 4. If no operation argument is supplied, print usage and stop. Done when: at least one operation argument is present or usage is printed.
 5. Run the parser wrapper by executing the resolved Java binary headless against the resolved JAR, passing `--project-file=<project-file>` followed by every operation argument verbatim:
    ```
-   <java> -jar -Djava.awt.headless=true <burpsuite_pro.jar> --project-file=<project-file> <operation...>
+   <java> -Djava.awt.headless=true -jar <burpsuite_pro.jar> --project-file=<project-file> <operation...>
    ```
    Done when: the parser wrapper is invoked with the correct arguments.
 6. Stream the JSON output (one object per line) from the parser to stdout. Do not parse, filter, or mutate the output inside this command. Done when: the parser's JSON output is streamed to stdout unchanged.

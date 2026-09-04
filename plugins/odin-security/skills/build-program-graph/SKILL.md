@@ -72,7 +72,7 @@ A program graph turns a source tree into nodes (functions, methods, types, modul
 ## Failure and recovery
 
 - Tool missing or failing to install: report the gap and stop. No manual-analysis fallback.
-- Import error in snippets: run snippets with the tool's isolated runner (for example `uv run --with <tool> python -`) rather than relying on a bare tool install; this is a resolution step, not a fallback.
+- Import error in snippets: stop and report the missing tool or import; do not use `uv run --with` or any other install step. The graph analyzer must already be installed.
 - Version-gated method unavailable: probe before calling; fall back to the baseline alternative and say so in the report.
 - Language detection failure: report the finding; do not invent a language list.
 - Preanalysis not run: blast radius, taint, and privilege data exist only after preanalysis; run it before retrying any dependent query. Never claim preanalysis results without running it.

@@ -61,7 +61,7 @@ The release workflow runs twice. First, push a commit carrying a pending `.chang
 ## Failure and recovery
 - Quality gate still failing after 5 iterations: stop, report the gate, remaining error count, and last error output.
 - CI fails after the changeset push: classify flaky or infrastructure (rerun `--failed`, max 3) versus real (fix, push, fresh watch).
-- "Changeset Status" check fails: missing changeset → add one (Step 1); consumed state from a local `changeset version` → revert the version bump and `CHANGELOG.md` edit, re-add the changeset file, and force-push. Rerunning CI cannot fix consumed state.
+- "Changeset Status" check fails: missing changeset → add one (Step 1); consumed state from a local `changeset version` → revert the version bump and `CHANGELOG.md` edit, then force-push only after explicit human confirmation; prefer `git push --force-with-lease origin <branch>`. Rerunning CI cannot fix consumed state.
 - Version Packages PR absent after 10 minutes: check that pending changesets exist on the default branch, the workflow file exists, and the action ran (`gh run list`).
 - Merge precondition fails: stop and report; never override failing checks or resolve conflicts in the bot PR.
 - Publish run fails: never auto-retry; report with logs.

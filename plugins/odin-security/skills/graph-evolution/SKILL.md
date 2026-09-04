@@ -19,11 +19,11 @@ description: 'Use when two refs or source snapshots need security-relevant struc
 - before_ref (required): git ref, commit, tag, or directory path for the earlier snapshot.
 - after_ref (required): git ref, commit, tag, or directory path for the later snapshot.
 - language (optional, default `auto`): the language set to parse. Override with a single name (`rust`, `solidity`) or comma-separated list (`python,rust`) when `auto` fails or misselects.
-- trailmark (prerequisite tool): must be installed. If `uv run trailmark` fails, run `uv tool install trailmark`. Do not fall back to manual source reading as a substitute.
+- trailmark (prerequisite tool): must be installed and on PATH. If `trailmark --help` fails, stop and report that trailmark is not installed. Do not fall back to manual source reading as a substitute.
 
 ## Procedure
 
-1. **Validate inputs.** Confirm both refs resolve or both directory paths exist. Confirm trailmark is installed by running `uv run trailmark --help`. If trailmark is not installed, run `uv tool install trailmark`; if installation fails, stop and report the error. Done when: both refs resolve to commits or both directory paths exist, and uv run trailmark --help exits 0.
+1. **Validate inputs.** Confirm both refs resolve or both directory paths exist. Confirm trailmark is installed by running `trailmark --help`. If trailmark is not installed, stop and report the installation gap; do not install it. Done when: both refs resolve to commits or both directory paths exist, and `trailmark --help` exits 0.
 
 2. **Create snapshots.** If both inputs are git refs, create temporary worktrees from the repo root using `mktemp -d` directories: `git worktree add "$BEFORE_DIR" {before_ref}` and `git worktree add "$AFTER_DIR" {after_ref}`. If both inputs are directory paths, use them directly and skip worktree creation. Done when: two snapshot directories exist, either as worktrees created from the refs or as the supplied directory paths, and both are non-empty.
 
@@ -53,7 +53,7 @@ description: 'Use when two refs or source snapshots need security-relevant struc
 10. **Clean up worktrees.** After the report is written, remove temporary worktrees: `git worktree remove "$BEFORE_DIR"` and `git worktree remove "$AFTER_DIR"`. Account for their removal in the report methodology section. Done when: both temporary worktrees are removed (git worktree list shows neither), and the report methodology section records their removal.
 
 ## Failure and recovery
-- trailmark not installed: Run `uv tool install trailmark`. If installation fails, report the error. Do not fall back to manual source reading or text-diff comparison as a substitute; manual comparison misses what graph analysis catches.
+- trailmark not installed: Report the installation gap and stop. Do not install. Do not fall back to manual source reading or text-diff comparison as a substitute; manual comparison misses what graph analysis catches.
 - Empty native diff: An all-empty `nodes`, `edges`, and `entrypoints` diff means either nothing changed structurally or both snapshots parsed to near-empty graphs. Decide which using the Phase 3 summaries: if either snapshot's node count is zero or implausibly small, the parse missed the code; name the language set explicitly and re-run. Healthy node counts on both snapshots plus an empty diff is genuine structural stability.
 - Language misselection: `trailmark diff` defaults `--language` to `python` and exits 0 with empty arrays on any other target. Always pass `--language` explicitly. `auto` detects and merges every supported language found; it fails loudly with `No supported languages detected under <path>` when a snapshot holds nothing parseable, which is the desired outcome. Confirm the language first; only then can an empty diff count as evidence that nothing changed.
 - Diff command fails or writes empty JSON: Stop and report the error. Do not continue to report generation.

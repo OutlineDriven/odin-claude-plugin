@@ -11,7 +11,7 @@ description: 'Use when the user requests a userspace C or C++ security review wi
 |---|---|
 | Trigger | The user requests a complete userspace C or C++ security review with an explicit threat model, severity filter, and model. |
 | Authority | Reversible local: writes only the `.c-review-results/<stamp>/` run directory under the current working directory; rollback is deleting that directory. No remote mutation. No reviewed source tree, VCS, or credential is mutated. |
-| Side effect | A `.c-review-results/<iso-timestamp>/` directory holding REPORT.md, REPORT.sarif, and findings.json. |
+| Side effect | A `.c-review-results/<stamp>/` directory holding REPORT.md, REPORT.sarif, and findings.json. |
 | Done | Every source file in scope is reviewed or named as uncovered, REPORT.md and REPORT.sarif agree, findings are filtered by severity, and the report discloses that no false-positive review ran. |
 
 ## Inputs

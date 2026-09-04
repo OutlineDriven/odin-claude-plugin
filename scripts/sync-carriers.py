@@ -15,8 +15,10 @@ does not touch a live carrier.
 """
 
 import importlib.util
+import os
 import re
 import sys
+import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -174,7 +176,6 @@ def _evaluate(baseline_text, carrier_text, label="carrier"):
 
 def self_test():
     """Prove the planner preserves an overlay and that --check reuses the audit."""
-    import tempfile
 
     baseline_text = read_exact(BASELINE)
     canonical = dict(sections(baseline_text))
@@ -315,9 +316,26 @@ def main():
             continue
 
         if changes and not check_mode:
+            tmp_path = None
             try:
-                path.write_bytes(new_text.encode("utf-8"))
+                with tempfile.NamedTemporaryFile(
+                    dir=path.parent,
+                    prefix=f".{path.name}.tmp.",
+                    mode="wb",
+                    delete=False,
+                ) as tmp:
+                    tmp.write(new_text.encode("utf-8"))
+                    tmp_path = Path(tmp.name)
+                if path.exists():
+                    os.chmod(tmp_path, path.stat().st_mode)
+                os.replace(tmp_path, path)
             except PermissionError:
+                if tmp_path is not None and tmp_path.exists():
+                    try:
+                        os.unlink(tmp_path)
+                    except OSError:
+                        # Temp cleanup is best-effort; the real error is already reported.
+                        pass
                 # Report and keep going: the other carrier still gets repaired.
                 print(f"sync-carriers: {path}: not writable, skipped", file=sys.stderr)
                 any_error = True

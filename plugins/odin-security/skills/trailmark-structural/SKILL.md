@@ -28,16 +28,16 @@ description: 'Use when a target needs a detailed single-snapshot structural anal
 
 ## Procedure
 
-1. Check that trailmark is available. If both commands fail, report "trailmark is not installed" and return. Do not run `pip install`, `uv pip install`, `git clone`, or any install command. Optionally record the version; do not fail if the version command is missing. Use API feature probes in step 3 instead. **Done when:** Trailmark availability is confirmed or the installation gap is reported.
+1. Check that trailmark is available. Verify the `trailmark` command is on PATH and the `trailmark` Python module is importable. If both checks fail, report "trailmark is not installed" and return. Do not run `pip install`, `uv pip install`, `uv run`, `git clone`, or any install command. Optionally record the version; do not fail if the version command is missing. Use API feature probes in step 3 instead. **Done when:** Trailmark availability is confirmed or the installation gap is reported.
    ```bash
-   trailmark analyze --help 2>/dev/null || \
-     uv run trailmark analyze --help 2>/dev/null
+   command -v trailmark >/dev/null 2>&1 || \
+     python3 -c "import trailmark" 2>/dev/null
    ```
    ```bash
-   trailmark --version 2>/dev/null || uv run trailmark --version 2>/dev/null || true
+   trailmark --version 2>/dev/null || true
    ```
 
-2. Detect languages with Trailmark's parse API. If the import fails, rerun the same snippet with `uv run --with trailmark python - "{args}"`. If the result is `[]`, report "Trailmark found no supported languages under target" and return. **Done when:** supported languages are detected or the language gap is reported.
+2. Detect languages with Trailmark's parse API. Run the snippet below with `python3`. If the import fails, report the exact import failure and return; do not install. If the result is `[]`, report "Trailmark found no supported languages under target" and return. **Done when:** supported languages are detected or the language gap is reported.
    ```bash
    python3 - "{args}" <<'PY'
    import json
@@ -53,7 +53,8 @@ description: 'Use when a target needs a detailed single-snapshot structural anal
    PY
    ```
 
-3. Run the full structural analysis via `QueryEngine`. Run with `python3`; if the import fails, rerun under `uv run --with trailmark python - "{args}"`. The snippet builds a graph, runs `engine.preanalysis()` (all four pre-analysis passes), and assembles the payload with version-gated feature probes. Probe v0.4-only methods with `hasattr()` before querying them. **Done when:** the full JSON payload is assembled or the exact import failure is reported.
+3. Run the full structural analysis via `QueryEngine`. Run with `python3`; if the import fails, report the exact import failure and return; do not install. The snippet builds a graph, runs `engine.preanalysis()` (all four pre-analysis passes), and assembles the payload with version-gated feature probes. Probe v0.4-only methods with `hasattr()` before querying them. **Done when:** the full JSON payload is assembled or the exact import failure is reported.
+
    ```bash
    python3 - "{args}" <<'PY'
    import json
@@ -117,7 +118,7 @@ description: 'Use when a target needs a detailed single-snapshot structural anal
 ## Failure and recovery
 - Trailmark not installed: Report "trailmark is not installed" and return. Do not install, upgrade, or clone anything.
 - No supported languages detected: Report "Trailmark found no supported languages under target" and return.
-- Import fails under both python3 and uv run: Report the import error and return. Do not attempt manual analysis as a substitute; manual analysis misses what tooling catches.
+- Import fails under `python3`: Report the import error and return. Do not attempt manual analysis as a substitute; manual analysis misses what tooling catches.
 - Empty pass output: Some passes produce no data for some codebases (e.g., no privilege boundaries). Return the full output regardless; empty is not failure.
 - v0.4-only method absent: Users may have Trailmark 0.2.x installed. Probe with `hasattr()` before querying version-gated methods. Never assume a v0.4 field is always present.
 - Partial-result rule: Return whatever the engine produced up to the failure point. Do not fabricate missing sections. Never swallow errors or pretend the done predicate holds.
