@@ -12,7 +12,7 @@ description: 'Use when a user asks to visualize a time-ordered interaction. Auth
 | Trigger | The user asks to visualize an API call chain, request lifecycle, asynchronous exchange, cache miss, return path, or another time-ordered interaction. |
 | Authority | Reversible local: writes only the two named artifacts (`<name>.sequence.json` and `<name>.sequence.html`) and explicitly requested sidecars; rollback is deleting any partial write. No remote mutation. |
 | Side effect | Writes a typed sequence JSON specification and one self-contained interactive HTML artifact, with optional bounded visual-evidence sidecars. No other file, VCS, credential, paid, published, deployed, or remote mutation. |
-| Done | Every participant and authored message is represented in source order, the specification validates fail-closed, the artifact passes the showcase and delivery gates, and the receipt records truthful status. |
+| Done | Every participant and authored message is represented in source order, the specification validates fail-closed, the artifact passes the render and delivery gates, and the receipt records truthful status. |
 
 ## Not for
 
@@ -40,14 +40,14 @@ description: 'Use when a user asks to visualize a time-ordered interaction. Auth
 
 4. Author and write the self-contained HTML rendering. Generate interactive HTML that renders all participants on horizontal lanes, messages as labeled arrows in source order, activations as stacked bars, and variants as labeled branches. The artifact must not fetch external resources. Interactive hover or click states are permitted. Write `<name>.sequence.html`. Done when: the HTML file is written to disk.
 
-5. Run the showcase gate and the delivery gate, then emit a truthful receipt. Showcase gate: visually review the HTML artifact via browser tool or render simulation. Verify all named participants are present, all messages appear in the correct source order, arrows are labeled, and the layout is legible. Delivery gate: confirm both the JSON spec file and the HTML artifact file exist on disk and are non-empty. Emit a receipt recording the final paths, spec validation status, showcase gate pass/fail, delivery gate pass/fail, and visual-review status. Do not emit a pass receipt if any gate failed. Roll back any partial writes on gate failure. Done when: both gates are run and the receipt is emitted with truthful status.
+5. Run the render gate and the delivery gate, then emit a truthful receipt. Render gate: visually review the HTML artifact via browser tool or render simulation. Verify all named participants are present, all messages appear in the correct source order, arrows are labeled, and the layout is legible. Delivery gate: confirm both the JSON spec file and the HTML artifact file exist on disk and are non-empty. Emit a receipt recording the final paths, spec validation status, render gate pass/fail, delivery gate pass/fail, and visual-review status. Do not emit a pass receipt if any gate failed. Roll back any partial writes on gate failure. Done when: both gates are run and the receipt is emitted with truthful status.
 
 ## Failure and recovery
 
 | Class | Result |
 |---|---|
 | Schema validation failure | BLOCKED with the exact validation error. No receipt. Partial write deleted. |
-| Showcase gate failure | NON_CONVERGED. Artifact does not represent all participants or messages in source order. Re-author and re-run the gate. |
+| Render gate failure | NON_CONVERGED. Artifact does not represent all participants or messages in source order. Re-author and re-run the gate. |
 | Delivery gate failure | NON_CONVERGED. Spec or artifact file absent or empty. Roll back any partial writes. |
 | HTML render failure | BLOCKED. Stop. Do not emit a pass receipt. |
 | Name collision | BLOCKED. Ask the user to confirm overwrite or supply a different name. |
@@ -56,4 +56,4 @@ Partial-result rule: if any step fails, roll back reversible writes before retur
 
 ## Output
 
-`<name>.sequence.json` (typed sequence JSON specification) and `<name>.sequence.html` (self-contained interactive HTML artifact), plus a receipt with final paths, spec validation status, showcase gate pass/fail, delivery gate pass/fail, and visual-review status.
+`<name>.sequence.json` (typed sequence JSON specification) and `<name>.sequence.html` (self-contained interactive HTML artifact), plus a receipt with final paths, spec validation status, render gate pass/fail, delivery gate pass/fail, and visual-review status.

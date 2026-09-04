@@ -160,8 +160,8 @@ Placeholders:
 - `[DIFF_FILE]`: REQUIRED: the path `scripts/review-package BASE HEAD` printed;
   the package never enters the controller's context.
 
-Reviewer returns: Spec Compliance verdict (✅/❌/⚠️), Code Quality verdict
-(✅/❌), Strengths, Issues (Critical/Important/Minor), Task quality verdict.
+Reviewer returns: Spec Compliance verdict (PASS, FAIL, or WARN), Code Quality verdict
+(PASS or FAIL), Strengths, Issues (Critical/Important/Minor), Task quality verdict.
 
 A fix dispatch can address spec gaps and quality findings together; re-review
 after fixes covers both verdicts.

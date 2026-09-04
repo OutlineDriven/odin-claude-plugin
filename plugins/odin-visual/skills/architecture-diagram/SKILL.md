@@ -12,7 +12,7 @@ description: 'Use when the user asks to visualize an architecture as a self-cont
 | Trigger | The user asks to visualize an architecture as a self-contained HTML artifact with a hash-bound receipt, or supplies two architecture snapshots for delta comparison. |
 | Authority | Reversible local: writes only the HTML artifact and JSON receipt or sidecar; rollback is deleting those files. No remote mutation. |
 | Side effect | One HTML artifact and one JSON receipt or sidecar written to disk. |
-| Done | Single: frozen schema-validated specification, self-contained interactive HTML artifact, and evidence receipt with all showcase checks passing. Delta: every comparable element classified into exactly one category, self-contained Before/Delta/After HTML artifact, and sidecar receipt written. |
+| Done | Single: frozen schema-validated specification, self-contained interactive HTML artifact, and evidence receipt with all render checks passing. Delta: every comparable element classified into exactly one category, self-contained Before/Delta/After HTML artifact, and sidecar receipt written. |
 
 ## Mode
 
@@ -43,7 +43,7 @@ Pick delta when the user supplies both a before and an after snapshot and asks w
 3. Build the typed architecture specification as JSON conforming to the architecture and common schemas. Done when: every component, boundary, relationship, and label is schema-valid.
 4. Freeze the specification and compute its hash. Done when: hash is recorded.
 5. Render one self-contained interactive HTML artifact from the frozen specification, all styles, scripts, and data inline, no external network reference, renders with network access unavailable. Done when: artifact is self-contained.
-6. Run the nine showcase checks: architecture-schema validation, common-schema validation, self-containment, no-network render, component coverage, relationship coverage, zero composition errors, zero composition warnings, receipt binds hashes. Done when: all nine pass.
+6. Run the nine render checks: architecture-schema validation, common-schema validation, self-containment, no-network render, component coverage, relationship coverage, zero composition errors, zero composition warnings, receipt binds hashes. Done when: all nine pass.
 7. If any check fails, stop and report the failing check; do not widen scope or relax a check. Done when: failure is named or all checks pass.
 8. Optionally capture bounded visual-check screenshots and a contact sheet; report visual-review status truthfully. Done when: visual-review status is reported.
 9. Write the JSON evidence receipt binding specification hash, artifact hash, check results, and visual-review status. Done when: receipt is written.
@@ -63,10 +63,10 @@ Pick delta when the user supplies both a before and an after snapshot and asks w
 ## Failure and recovery
 
 - Schema validation failure (either mode): do not emit the artifact; report the offending field and constraint. Roll back by discarding in-progress work and deleting files already written.
-- Composition error or warning (single): re-derive layout from the frozen specification and re-run showcase checks; do not freeze a degraded delivery.
+- Composition error or warning (single): re-derive layout from the frozen specification and re-run render checks; do not freeze a degraded delivery.
 - Unverified repository claim (single): discard the claim or stop and request evidence; never infer or fabricate.
 - Self-containment failure (either): re-inline the resource or stop; never declare self-contained when it is not.
-- Showcase-check failure (single): stop with the blocked result naming the failing check; do not relax checks or widen scope.
+- Render-check failure (single): stop with the blocked result naming the failing check; do not relax checks or widen scope.
 - Incomparable inputs (delta): elements lack stable authored identity or boundary keys cannot pair them. Fail closed; report the incomparable element set. No classification emitted for incomparable elements; proof level is partial only if some elements were comparable, otherwise blocked.
 - Determinism violation (delta): a second run over the same inputs produces a different classification set. Report the divergence; do not emit a result.
 - Atomic commit failure (delta): preserve previously trusted outputs; report the commit error. Artifact and receipt remain on disk but are not marked trusted.
@@ -74,6 +74,6 @@ Pick delta when the user supplies both a before and an after snapshot and asks w
 
 ## Output
 
-Single mode: a frozen schema-validated architecture JSON specification; one self-contained interactive HTML artifact; optionally bounded visual-check screenshots and a contact sheet; a JSON evidence receipt binding specification hash, artifact hash, nine showcase-check results, and truthful visual-review status. Terminal classification: delivered or blocked.
+Single mode: a frozen schema-validated architecture JSON specification; one self-contained interactive HTML artifact; optionally bounded visual-check screenshots and a contact sheet; a JSON evidence receipt binding specification hash, artifact hash, nine render-check results, and truthful visual-review status. Terminal classification: delivered or blocked.
 
 Delta mode: one self-contained Before/Delta/After HTML artifact; one machine-readable sidecar receipt (JSON) recording input identifiers, proof level, per-element classification, and a deterministic classification-set hash. Terminal classification: every comparable element classified, incomparable inputs failed closed, honest proof level stated, no unsupported risk or merge recommendation asserted.
