@@ -1,6 +1,6 @@
 ---
 name: ui-design
-description: 'Use when directing, building, or auditing React/Next.js UI in Tailwind: visual direction, responsive or dark-mode retrofits, UX audits. Not for typography or motion: typography-audit or ui-animation.'
+description: 'Use when directing, building, or auditing React/Next.js Tailwind UI: visual direction, responsive/dark-mode retrofits, UX audits. Not for typography or motion: use typography-audit or ui-animation.'
 ---
 
 # UI design

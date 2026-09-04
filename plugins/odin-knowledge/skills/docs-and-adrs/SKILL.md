@@ -1,6 +1,6 @@
 ---
 name: docs-and-adrs
-description: 'Use when making an architectural decision, changing a public API, shipping a feature with rationale, or a codebase term resolves. Not for domain language: domain-modeling. Not for docs: docs-writing.'
+description: 'Use when making an architectural decision, changing a public API, shipping a feature, or a codebase term resolves. Not for domain language: use domain-modeling. Not for docs: use docs-writing.'
 ---
 
 # Docs and ADRs

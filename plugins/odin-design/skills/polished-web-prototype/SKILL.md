@@ -1,6 +1,6 @@
 ---
 name: polished-web-prototype
-description: 'Use when /polished-web-prototype runs or a user builds an artifact from a mockup, design plan, or freeform description. Not for variant galleries or live audits: design-variants, web-design-review.'
+description: 'Use when /polished-web-prototype runs or a user builds an artifact from a mockup, design plan, or brief. Not for variant galleries: use design-variants. Not for live audits: use web-design-review.'
 ---
 
 # Polished web prototype
