@@ -131,14 +131,24 @@ def main():
         return 1
     baseline_text = read_exact(BASELINE)
     shared = [t for t, _ in sections(baseline_text) if t not in TOOL_LAYER]
-    present = [c for c in CARRIERS if c.exists()]
+    failures, total = [], 0
+    present = []
+    for carrier in CARRIERS:
+        if carrier.is_file():
+            present.append(carrier)
+        elif carrier.exists():
+            failures.append(f"{carrier}: not a file")
+            print(f"check-carriers: {carrier} not a file")
     if not present:
+        if failures:
+            for line in failures:
+                print(f"check-carriers: {line}", file=sys.stderr)
+            return 1
         # The carriers live outside this repository, in the home directory of whoever
         # runs the harness. A contributor who uses neither Codex nor omp has neither,
         # and must not be blocked by their absence.
         print("check-carriers: no external carrier is installed here, nothing to compare")
         return 0
-    failures, total = [], 0
     for carrier in present:
         matched, found = audit(baseline_text, read_exact(carrier), carrier.name)
         total += matched

@@ -12,7 +12,7 @@ disable-model-invocation: true
 |---|---|
 | Trigger | The user asks to set up, configure, or verify credentials and environment for tools they name. |
 | Authority | Human-gated: runs only on explicit invocation and asks before writing credentials to `.env`, changing data at rest, or verifying remote access; every other write is reversible local, with version control as the rollback. |
-| Side effect | Creates but never overwrites `.env`, gathers non-secret credentials at prompts, validates format, appends, and verifies repository and tool access. |
+| Side effect | Creates `.gitignore` coverage for `.env` when missing, creates but never overwrites `.env`, gathers non-secret credentials at prompts, validates format, appends, and verifies repository and tool access. |
 | Done | All selected prerequisites pass, `.env` is present and loadable, and the user is told which workflows are ready. |
 
 ## Not for
@@ -29,7 +29,13 @@ disable-model-invocation: true
 
 1. Confirm which tools the user wants to set up and whether they are working in an existing repository or starting fresh. Done when: the tool set and repository state are confirmed.
 
-2. Identify the target environment. Before creating or appending, verify `.env` is untracked and gitignored. Check that `.gitignore` excludes `.env` and that `git status` shows an existing `.env` as untracked. If `.env` is tracked, not ignored, or `.gitignore` does not exclude it, stop and report that the path is not safe for credentials. If no `.env` exists and it is safe to create, create an empty `.env`. If `.env` exists, do not modify it; report the existing key names (not values) and ask the user whether to add to it. Done when: a safe `.env` exists and the user has confirmed additions, or an unsafe state is reported and the skill stops.
+2. Identify the target environment and make `.env` safe before creating or appending. A path is safe when it is not tracked and it is ignored. Do not use ordinary `git status` for either check: an ignored `.env` is omitted from that output.
+
+   If this is a git work tree: stop when `git ls-files --error-unmatch -- .env` succeeds, because the file is tracked. When `git check-ignore -q -- .env` fails, `.env` is not ignored: obtain confirmation, then create `.gitignore` if it is missing or append `.env` to it. If no `.env` exists and the path is now safe, create an empty `.env`. If `.env` exists, do not modify it; report the existing key names (not values) and ask the user whether to add to it.
+
+   If this is a fresh directory with no git work tree: obtain confirmation, create a `.gitignore` that excludes `.env`, then create an empty `.env` if it is missing.
+
+   Done when: a safe `.env` exists and the user has confirmed additions, or an unsafe state is reported and the skill stops.
 
 3. Present the set of credentials this skill will collect, as named by the user or the tool's documented requirements. For each credential the user supplies, validate basic format: non-empty string, plus any known format rule the tool's convention defines. For example, a Slack bot token starts with `xoxb-` and a Sentry DSN contains `://`. These examples demonstrate the general format-validation mechanism; the skill applies whichever rule the named tool requires. Discard any value that fails format validation and prompt again. Done when: every credential is validated or the user declines.
 
@@ -47,6 +53,7 @@ disable-model-invocation: true
 - Repository access failure: report which token or URL failed and stop. `.env` is not rolled back; credentials already written remain.
 - Prerequisite failure: name the tool and the failing check. Stop. Do not claim the workflow is ready. Do not suggest the failure is minor or temporary.
 - Existing `.env` conflict: if a key already exists, report the key name and that it was skipped; do not echo the value. Do not overwrite.
+- Unsafe `.env` path: the file is tracked, or ignore coverage is missing and the user declines to add it. Stop. Do not create or append `.env`.
 - No rollback rule: once a credential is written to `.env` it is not automatically removed. The user must explicitly request deletion.
 - Partial result: if steps 1 through 4 complete but step 5 fails, report exactly what passed and what did not. Do not claim full success.
 

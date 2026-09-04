@@ -13,10 +13,12 @@ order or their membership, because a second copy of that list drifted twice befo
 
 | Command | What runs |
 |---|---|
-| `just render` | `render-skill-manifests.mjs`, then `render-plugin-surfaces.mjs`, in that order |
+| `just render` | `render-skill-manifests.mjs`, then `render-plugin-surfaces.mjs`, then `render-skill-index.mjs`, in that order |
 | `just check` | `prek run --all-files`: every hook in `.pre-commit-config.yaml` |
 | `just verify` | `just check`, then `gh skill publish --dry-run` |
 | `just sync-outline` | `sync-outline-skills.mjs`, writing into the sibling outline checkout |
+| `just sync-carriers` | `sync-carriers.py`, rewriting each external carrier's shared sections from the baseline |
+| `just sync-carriers-check` | `sync-carriers.py --check`: the planned rewrites plus the `check-carriers` audit |
 
 Every local hook carries `pass_filenames: false` and `always_run: true`, so each gate audits the
 whole tree on every commit no matter which files were touched. Expect the full set to take a few
@@ -42,7 +44,10 @@ and commit again; the second run is clean. `just check` can therefore leave the 
 
 Each generator has a `--check` mode that diffs its output against the tree and exits 1 on drift
 instead of writing. The hooks run the check modes of all but `sync-baseline`, which repairs in
-place; `just render` runs the write modes of the two surface generators.
+place; `just render` runs the write modes of the three in-tree generators. `sync-carriers` is
+manual: a hook that rewrote home-directory files on every commit would fire on machines with no
+carriers to repair. Its `--self-test` is a hook, because the planner has shipped a wrong overlay
+rule and the fixtures catch that without touching a live carrier.
 
 ### render-skill-manifests.mjs
 
@@ -88,6 +93,12 @@ Loading the catalog is itself a check. `loadCatalog` throws, and the process exi
 repeats, when `directory` is not `plugins/<id>`, or when an `id` falls outside the name grammar
 every harness accepts: 1 to 64 characters, lowercase alphanumerics and hyphens, alphanumeric at both
 ends, no `--`, no periods.
+
+### render-skill-index.mjs
+
+Writes `docs/specs/skill-index.md`: one row per skill, sorted by slug, naming its plugin and
+category. `--check` diffs against the file and exits 1 on drift. The hook runs the check mode; `just
+render` writes it.
 
 ### sync-baseline.py
 
@@ -137,6 +148,22 @@ hold both `manifest.json` and `.git`.
 Commit the mirror in the outline repository, in its own commit. Never edit it in place; the next run
 reverts the edit.
 
+### sync-carriers.py
+
+Rewrites each external harness carrier's shared doctrine sections from `system-prompt-baseline.md`
+and leaves the four tool-layer sections alone. The carriers live in the home directory of whoever
+runs the harness, so this is a manual command (`just sync-carriers`), never a rewrite hook.
+
+`--check` reports planned inserts and rewrites, then runs the `check-carriers.py` audit on the
+would-be result. An unknown section, a missing tool-layer tag, a duplicate shared section, or a
+malformed overlay therefore fails even when the shared bodies already match. A missing carrier is
+skipped; an existing path that is not a regular file is an error.
+
+A carrier may hold one `<role>` overlay above the canonical block. If only the overlay is present,
+the planner inserts the canonical block after it rather than rewriting the overlay. `--self-test`
+proves that shape, the audit reuse, and the non-file override, using synthetic fixtures so a machine
+with no carrier still runs it.
+
 ## Checks
 
 ### check-plugin-surfaces.mjs
@@ -160,7 +187,7 @@ The name-parity rule exists because Codex resolves a plugin's namespace from the
 alone. Five manifests with different names load one plugin's components under another's namespace,
 and nothing else reports it.
 
-Passing output: `plugin surfaces ok: 28 plugins, 613 skills`.
+Passing output: `plugin surfaces ok: 28 plugins, 614 skills`.
 
 ### check-skill-routes.mjs
 
@@ -272,8 +299,9 @@ neither harness is not blocked. `--self-test` builds every drift shape synthetic
 baseline and proves each is caught, so it runs identically on a machine with no carrier.
 
 The carriers are edited in place and never committed from this repository. The baseline generator
-does not update them, so a doctrine change means editing `system-prompt-baseline.md`, running
-`sync-baseline.py`, and then editing both carriers by hand until this gate is green.
+does not update them. A doctrine change means editing `system-prompt-baseline.md`, running
+`sync-baseline.py`, then `just sync-carriers` so the two external carriers pick up the shared
+sections. `check-carriers.py` and `just sync-carriers-check` both have to be green.
 
 ## Exit codes
 
@@ -283,6 +311,8 @@ does not update them, so a doctrine change means editing `system-prompt-baseline
 | `render-plugin-surfaces.mjs` | Written, or matched | Drift under `--check`; catalog failed to load | |
 | `sync-baseline.py` | Clean | Drift; also after repairing in write mode | Canonical file or two-`<role>` layout missing |
 | `sync-outline-skills.mjs` | Written, or matched, or target absent under `--check` | Slug collision, untracked `SKILL.md`, or drift | Bad arguments or an unusable target |
+| `render-skill-index.mjs` | Written, or matched under `--check` | Drift | |
+| `sync-carriers.py` | Written, in sync, skipped missing, or self-test passed | Would change, audit failure, not a file, or self-test failure | Bad arguments |
 | `check-plugin-surfaces.mjs` | Clean | Any invariant broken | |
 | `check-skill-routes.mjs` | Clean | Any check failed | |
 | `check-skill-frontmatter.py` | Clean, or self-test passed | Any failure, or a self-test fixture failed | |
@@ -293,8 +323,8 @@ does not update them, so a doctrine change means editing `system-prompt-baseline
 
 Adding a skill: create `plugins/<plugin>/skills/<slug>/SKILL.md` with `name` equal to `<slug>` and a
 `description` whose first sentence states a trigger, run `just render` to generate its
-`agents/openai.yaml` and refresh the plugin README, then `just check`. Nothing else records
-membership; the directory is the registry.
+`agents/openai.yaml`, refresh the plugin README, and refresh the skill index, then `just check`.
+Nothing else records membership; the directory is the registry.
 
 Adding a plugin: append an entry to `catalog/plugins.json` with the next `index`, an `id` in the
 shared name grammar, and `directory` equal to `plugins/<id>`. Create at least one skill under it, run
@@ -302,8 +332,8 @@ shared name grammar, and `directory` equal to `plugins/<id>`. Create at least on
 and the root README table, then `just check`.
 
 Changing doctrine: edit `system-prompt-baseline.md`, run `python3 scripts/sync-baseline.py`, confirm
-with `--check`, and commit the canonical file with all six styles. Then edit the two external
-carriers in place until `check-carriers.py` reports every shared section matched.
+with `--check`, and commit the canonical file with all six styles. Then run `just sync-carriers` and
+confirm with `just sync-carriers-check` and `check-carriers.py`.
 
 Reading a failure: each gate names the file and the rule in its stderr lines and ends with a count.
 A generator's drift message ends with the command that repairs it. A `retired surface present`

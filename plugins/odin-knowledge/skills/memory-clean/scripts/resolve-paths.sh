@@ -20,14 +20,29 @@ _validate_memory_dir() {
 }
 
 _reject_tracked() {
-  local d="$1" probe="$1" root
+  # Refuse a path git would add. check-ignore exits 0 only for an untracked
+  # ignored path; a tracked path and an untracked unignored path both exit 1.
+  # `git ls-files --error-unmatch` would let an unignored untracked dir through.
+  # Evaluate against the caller's path, not a root-relative copy of the same
+  # string: `git -C "$root" check-ignore mem` from repo/sub would test repo/mem.
+  local d="$1" abs probe root parent base
+  case "$d" in
+    /*) abs="$d" ;;
+    *) abs="$(pwd -P)/$d" ;;
+  esac
+  parent="$(dirname -- "$abs")"
+  base="$(basename -- "$abs")"
+  if [[ -d "$parent" ]]; then
+    abs="$(cd -- "$parent" && pwd -P)/$base"
+  fi
+  probe="$abs"
   while [[ ! -e "$probe" && "$probe" != "/" ]]; do
-    probe="$(dirname "$probe")"
+    probe="$(dirname -- "$probe")"
   done
   git -C "$probe" rev-parse --is-inside-work-tree >/dev/null 2>&1 || return 0
   root="$(git -C "$probe" rev-parse --show-toplevel)"
-  git -C "$root" check-ignore -q "$d" && return 0
-  printf 'ERROR: memory dir is tracked by git: %s\n' "$d" >&2
+  git -C "$root" check-ignore -q -- "$abs" && return 0
+  printf 'ERROR: git would track memory dir: %s\n' "$d" >&2
   exit 1
 }
 
