@@ -61,6 +61,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `watch-for-harness-mode` regains its no-VCS-commit, no-remote-call,
   no-credential-use, no-published-artifact ban, which the Authority canon had
   compressed to a weaker no-remote-mutation clause.
+- cubic P1: `refactor-break-compat` now previews the demolition and waits
+  for confirmation before deleting, and deletes only flags used by the old
+  path; `gh-review-requests` drops the invalid `requestedReviewers` field;
+  `setup-tool-credentials` never echoes a colliding `.env` value and
+  refuses to write credentials into a tracked or unignored path.
+- Codex P1: everyday-code install includes `odin-git`; `spec-driven` names
+  `odin-testing` for `tdd`; `model-retuning` restores the first-match
+  outcome classifier; `retaxonomize-plugins` leaves the generated README
+  plugin table to `just render`; tournament failure terminals map onto
+  the cascade set (`stalled`, `blocked`).
 
 ### Added
 
