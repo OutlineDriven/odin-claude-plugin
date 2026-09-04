@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | The user runs /ios-build-cleanup. |
-| Authority | Human-gated: requires explicit human invocation and previews the target and consequence before any irreversible deletion; otherwise reversible local. The model never invokes it autonomously. |
+| Authority | Human-gated: requires explicit human invocation and previews the target and consequence before any irreversible deletion. The model never invokes it autonomously. |
 | Side effect | Local deletion of DerivedData and build artifacts only. These artifacts are untracked and regenerable by a rebuild. No source, VCS, credential, or remote mutation. |
 | Done | A clean build state is restored: DerivedData and project build artifacts are removed and the next build starts from a clean cache. |
 

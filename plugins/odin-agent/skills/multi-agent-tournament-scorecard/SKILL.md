@@ -10,7 +10,7 @@ description: 'Use when agent strategies need a reproducible finite tournament un
 | Field | Bound contract |
 |---|---|
 | Trigger | Agent strategies need a reproducible finite tournament under a frozen evaluation protocol. |
-| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Reversible local writes only. Run records and receipts under `.outline/loops/`; rollback is deletion. No VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | A reproducible tournament scorecard persisted as a run record. |
 | Done | The fixed matrix completes with saved move records, scores, and hidden-identity validation. |
 

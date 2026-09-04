@@ -25,7 +25,7 @@ description: 'Use when a completed session needs an agent-environment retrospect
 2. **Identify friction.** Scan the session artifact for patterns where the agent's environment created friction: tool failures, slow retries, missing context, state loss, repeated navigation, or unclear feedback. Done when: every friction pattern in the artifact is identified or the artifact is confirmed friction-free.
 3. **Classify candidates.** Assign each friction point a type: `tool-failure`, `slow-retry`, `missing-context`, `state-loss`, `navigation-overhead`, or `unclear-feedback`. Done when: every identified friction point has an assigned type.
 4. **Rank by severity.** Order candidates: high (blocks progress) → medium (degrades efficiency) → low (minor friction). When severity ties, prefer candidates with stronger evidence. Done when: candidates are ordered by severity with ties broken by evidence strength.
-5. **Validate evidence.** For each candidate, confirm the named evidence appears in the session artifact. Candidates without traceable evidence are omitted. Done when: every candidate is either confirmed against traceable evidence or omitted.
+5. **Validate evidence.** For each candidate, confirm the named evidence appears in the session artifact. Candidates without traceable evidence are omitted. Done when: every candidate is either confirmed against traceable evidence, omitted, or retained as unconfirmed with its severity downgraded.
 6. **Return report.** Output the severity-ranked candidate report. Done when: the report is emitted with every surviving candidate carrying type, evidence, severity, and friction_removed.
 
 ## Failure and recovery

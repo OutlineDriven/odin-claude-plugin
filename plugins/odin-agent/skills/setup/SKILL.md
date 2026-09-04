@@ -72,7 +72,9 @@ One concern: configure the agent environment. Four mechanisms reach it: credenti
 
 4. **Check the target for conflicts.** If the target directory exists and contains files, compare each existing file's hash against the managed-state manifest from a prior install. Block when existing files differ from managed state, which indicates manual modification. **Done when:** the target directory is confirmed empty or matches prior managed state.
 
-5. **Move atomically and record rollback.** Move all files from the scratch location to the target directory in one operation. Write the applied manifest (file paths, post-transformation hashes, and the original source URL) beside the target for rollback on future runs. **Done when:** all files are moved to the target and the applied manifest is saved.
+5. **Back up prior managed files.** If the target directory exists and contains files that matched the prior managed-state manifest in step 4, copy those files to a `rollback/` subdirectory in the scratch location, separate from the extracted files. The applied manifest alone cannot rebuild prior contents. **Done when:** the prior managed files are copied to the `rollback/` directory, or no prior files are present.
+
+6. **Move atomically and record rollback.** Move only the extracted files from the scratch location to the target directory in one operation, leaving the `rollback/` directory behind. Write the applied manifest (file paths, post-transformation hashes, and the original source URL) beside the target for rollback on future runs. **Done when:** all extracted files are moved to the target and the applied manifest is saved.
 
 ## Role-model mapping
 

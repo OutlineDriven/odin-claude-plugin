@@ -12,7 +12,7 @@ description: 'Use when asked to run /ios-build-fix to fix a failing iOS build, r
 | Field | Bound contract |
 |---|---|
 | Trigger | the user runs /ios-build-fix |
-| Authority | Reversible local: writes only the iOS project's Swift source, applied and verified through the iOS debug bridge; rollback is version control. No remote mutation. The user picks among competing root-cause fixes. |
+| Authority | Reversible local: writes the iOS project's Swift source plus snapshot and screenshot fixtures and the regression test under test/fixtures/ios-fix/, applied and verified through the iOS debug bridge; rollback is version control. No remote mutation. The user picks among competing root-cause fixes. |
 | Side effect | project code changes made through the debug bridge, plus snapshot and screenshot fixtures and a regression test written under test/fixtures/ios-fix/ |
 | Done | the failing iOS behavior is fixed and verified on a device or simulator, with a reproducing snapshot and a regression test committed alongside the fix |
 
@@ -80,7 +80,7 @@ A minimal Swift source fix committed with its reproducing snapshot (`<bug-slug>-
 2. Verify `project.yml` exists in the app root. If absent, return BLOCKED with "missing project.yml".
 3. Check freshness: hash the current `project.yml` content and compare the hash to the value recorded inside the generated xcodeproj bundle. Look for a recorded hash in a known comment or sidecar file within the bundle; if no recorded hash is found, proceed with regeneration. If the hashes match, exit with "already up to date".
 4. Run the resolved generator command against the app root or `project.yml` path. The generator removes obsolete generated files and emits the current xcodeproj. If the generator reports an invalid `project.yml` entry, return BLOCKED with "invalid manifest entry" and the generator's error message.
-5. Review the generated diff under the xcodeproj. Confirm the generator did not modify the app's handwritten Swift files. Canonical template files are regenerated from upstream and should not be hand-edited; keep app-specific wiring in the app target. If handwritten Swift files appear in the diff, revert via `git restore` of the xcodeproj and return BLOCKED with "handwritten Swift modified by regenerator".
+5. Review the generated diff under the xcodeproj. Confirm the generator did not modify the app's handwritten Swift files. Canonical template files are regenerated from upstream and should not be hand-edited; keep app-specific wiring in the app target. If handwritten Swift files appear in the diff, revert via `git restore` of the xcodeproj, restore exactly the touched handwritten Swift files via `git checkout -- <file>`, and return BLOCKED with "handwritten Swift modified by regenerator".
 6. Run `swift build` against the app's package. Run `xcodebuild -scheme <SchemeName>` against the regenerated project. If either fails, revert via `git restore` of the xcodeproj, surface the compile error, and return BLOCKED with "build failure after regeneration" and the failing command's output.
 7. If both builds succeed and the generated diff contains only expected xcodeproj files, commit the regenerated xcodeproj.
 
@@ -91,7 +91,7 @@ A minimal Swift source fix committed with its reproducing snapshot (`<bug-slug>-
 - BLOCKED "missing project.yml": stop. The user must create or restore `project.yml` in the app root.
 - BLOCKED "invalid manifest entry": the generator rejected an entry in `project.yml`. Fix the entry to use a supported type or remove it, then rerun. Do not edit the generated xcodeproj by hand to work around the rejection.
 - BLOCKED "build failure after regeneration": revert via `git restore` of the xcodeproj. Surface the compile error. Do not proceed with a broken project.
-- BLOCKED "handwritten Swift modified": revert via `git restore` of the xcodeproj. The generator should not touch handwritten Swift; report the affected files.
+- BLOCKED "handwritten Swift modified": revert via `git restore` of the xcodeproj and restore exactly the touched handwritten Swift files via `git checkout -- <file>`. The generator should not touch handwritten Swift; report the affected files.
 - xcodeproj unchanged after a `project.yml` edit: the recorded hash matched. Confirm `project.yml` was saved and the recorded hash is not stale before rerunning.
 - Partial-result rule: if any step fails, the xcodeproj may be in a partially regenerated state. Revert via `git restore` and return BLOCKED with the failing step and what was attempted.
 
