@@ -22,7 +22,6 @@ if [[ -z "$KEY" ]]; then
   exit 1
 fi
 
-# Returns 0 (true) if val contains a forbidden shell-control character.
 _has_control_chars() {
   printf '%s' "$1" | LC_ALL=C grep -q '[[:cntrl:]]'
 }

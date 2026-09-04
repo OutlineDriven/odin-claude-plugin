@@ -77,9 +77,10 @@ def _plan(baseline_text, carrier_text):
     carrier text after all edits. error is a string when the carrier cannot be
     fully synced, otherwise None.
     """
-    canonical = dict(sections(baseline_text))
-    shared = [t for t, _ in sections(baseline_text) if t not in TOOL_LAYER]
 
+    base_sections = sections(baseline_text)
+    canonical = dict(base_sections)
+    shared = [t for t, _ in base_sections if t not in TOOL_LAYER]
     carrier_blocks = blocks(carrier_text)
     code_tools_pos = _code_tools_pos(carrier_text)
 
@@ -116,8 +117,7 @@ def _plan(baseline_text, carrier_text):
 
     # Stitch edits and insertions into the original text, sorted by position.
     # Insertions at the same offset stay in baseline order (stable sort).
-    all_edits = [(s, e, r) for s, e, r in edits]
-    all_edits += [(p, p, t) for p, t in insertions]
+    all_edits = list(edits) + [(p, p, t) for p, t in insertions]
     all_edits.sort(key=lambda e: e[0])
 
     parts = []
