@@ -27,7 +27,7 @@ description: 'Use when reviewing existing property tests for coverage and defect
    - TypeScript/fast-check: `rg "fc\.(assert|property)" --type ts --type js`
    - Rust/proptest: `rg "proptest!|#\[quickcheck\]" --type rust`
    - Java/jqwik: `rg "@Property|@ForAll" --type java`
-   - Solidity/Echidna/Medusa: `rg "function test|echidna_" --type sol`
+   - Solidity/Echidna/Medusa: `rg "function test|echidna_" -g '*.sol'`
    Done when: every property test file in scope is read into context, or the search returned no matches and the no-tests-found stop is reported.
 
 2. Read production contracts. For each tested function, read its implementation, type signature, and any specification. Identify the function's algebraic shape, whether it has an inverse, preserves an invariant, is idempotent, commutative, associative, or admits an oracle. Done when: each tested function has a named algebraic shape or is recorded as having none, so the defect classification in step 3 has the ground truth it compares against.
@@ -60,7 +60,7 @@ description: 'Use when reviewing existing property tests for coverage and defect
    | Associativity | `f(f(a,b), c) == f(a, f(b,c))` |
    | Identity | `f(x, e) == x` |
 
-   Owner. property-test-authoring inlines the same catalog. Do not recopy.
+   Owner of the catalog is property-test-authoring. Do not recopy.
 
    Strength ordering, weakest to strongest: `no crash` then `type preservation` then `invariant` then `idempotence` then `roundtrip / oracle`. Assert the strongest property the code supports. "No crash" alone rarely justifies the dependency, if that is all that can be found, either a small rearrangement exposes something stronger, or the honest report is that this code is a poor PBT candidate.
 

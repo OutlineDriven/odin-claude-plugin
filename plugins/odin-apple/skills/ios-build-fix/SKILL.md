@@ -37,7 +37,7 @@ Optional:
 7. Locate the root cause. Read the Swift source and trace the buggy screen back to the view model, data flow, and state mutation. Identify the smallest change that fixes the behavior.
 8. If more than one plausible root cause remains, present them to the user and let the user pick the one to fix before editing.
 9. Apply the fix: edit the Swift source, keeping the diff minimal. Rollback path: `git checkout -- <edited files>` reverts this edit.
-10. Rebuild and reinstall: `xcodebuild -scheme <SchemeName> -destination 'platform=iOS,id=<UDID>' build`, then `xcrun simctl install <UDID> <app-path>` on a simulator or `ios-deploy` on a device. The daemon reconnects the StateServer tunnel after the rebuild; re-deploy through the boot-token rotation flow.
+10. Rebuild and reinstall: `xcodebuild -scheme <SchemeName> -destination <BuildDestination> build`, then `xcrun simctl install <UDID> <app-path>` on a simulator or `ios-deploy --bundle <app-path>` on a device. The daemon reconnects the StateServer tunnel after the rebuild; re-deploy through the boot-token rotation flow.
 11. Verify: `POST /state/restore` with the pre-bug snapshot to reproduce the state, then take a fresh `GET /screenshot` and compare it against `test/fixtures/ios-fix/<bug-slug>-pre.png`.
 12. If the bug visibly persists, the fix did not work: revert the Swift edit (`git checkout -- <edited files>`) and retry from step 9, up to 3 iterations before escalating to the user.
 13. If the bug is gone, capture `test/fixtures/ios-fix/<bug-slug>-post.png`.
@@ -82,7 +82,7 @@ A minimal Swift source fix committed with its reproducing snapshot (`<bug-slug>-
 4. Run the resolved generator command against the app root or `project.yml` path. The generator removes obsolete generated files and emits the current xcodeproj. If the generator reports an invalid `project.yml` entry, return BLOCKED with "invalid manifest entry" and the generator's error message.
 5. Review the generated diff under the xcodeproj. Confirm the generator did not modify the app's handwritten Swift files. Canonical template files are regenerated from upstream and should not be hand-edited; keep app-specific wiring in the app target. If handwritten Swift files appear in the diff, revert via `git restore` of the xcodeproj, restore exactly the touched handwritten Swift files via `git checkout -- <file>`, and return BLOCKED with "handwritten Swift modified by regenerator".
 6. Run `swift build` against the app's package. Run `xcodebuild -scheme <SchemeName>` against the regenerated project. If either fails, revert via `git restore` of the xcodeproj, surface the compile error, and return BLOCKED with "build failure after regeneration" and the failing command's output.
-7. If both builds succeed and the generated diff contains only expected xcodeproj files, commit the regenerated xcodeproj.
+7. If both builds succeed and the generated diff contains only expected xcodeproj files, classify DONE. The regenerated xcodeproj is left uncommitted; the build verification covers it.
 
 ### Failure and recovery
 

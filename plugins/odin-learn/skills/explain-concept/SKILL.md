@@ -35,10 +35,10 @@ The concept to explain must be supplied. An explicit angle argument (`intuition`
 
 2. Ground every claim about the concept. When `CORPUS.md` exists, cite its anchor for each claim; when a claim is not in the corpus, say so in the sentence that makes it. With no `CORPUS.md`, ask once which source to ground in, then proceed and mark unanchored claims the same way in the sentence that makes them. Done when: every claim is grounded or marked unanchored in its own sentence.
 
-3. For intuition and motivation angles, ask the learner to explain a step before revealing the reason. The subject of the ask is the next step in the explanation, not the concept as a whole: pose "why do you think the next step is done this way?" and wait for the learner's answer before continuing. Done when: the learner is asked to explain the next step before the reason is revealed.
+3. For the intuition angle, ask the learner to explain a step before revealing the reason. The subject of the ask is the next step in the explanation, not the concept as a whole: pose "why do you think the next step is done this way?" and wait for the learner's answer before continuing. Done when: the learner is asked to explain the next step before the reason is revealed.
 
 4. Run exactly the chosen angle:
-   - intuition: one analogy drawn from something the learner already owns, the smallest example showing the behaviour, and the one sentence that survives when they forget the rest. Then stop and ask them to restate it in their own words. One screen.
+   - intuition: one analogy drawn from something the learner already owns, the smallest example showing the behaviour, and the one sentence that survives when they forget the rest. One screen.
    - motivation: what people did before this existed, where that broke, what this buys, what it costs. Leave history to the origin angle. One screen.
    - origin: who, when, what it displaced, one citation the learner can go read. Follow `references/ORIGIN-SEARCH.md` for the search query, candidate table, and acceptance rules. Nothing is written until the user accepts a candidate. Fifteen lines.
    - picture: one diagram: nomnoml for structure and flow, D2 for architecture, house palette. Render it, require the render to exit zero, and place the SVG in the reply with alt text and a caption. A concept with no structure, flow, or architecture worth drawing gets one line saying so instead.

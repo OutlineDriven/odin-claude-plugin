@@ -1,6 +1,6 @@
 ---
 name: saga
-description: 'Use when a user runs saga or asks to autonomously build a sizable feature. Produces a spec tree, delegates to worker subagents in isolated worktrees, validates at each milestone, and gates user acceptance before VCS commit. Not for executing a given plan; use subagent-driven.'
+description: 'Use when a user runs saga or asks to autonomously build a sizable feature. Produces a spec tree, delegates to worker subagents in isolated worktrees, validates at each milestone, and gates user acceptance before integration to the target branch. Not for executing a given plan; use subagent-driven.'
 ---
 
 # Saga

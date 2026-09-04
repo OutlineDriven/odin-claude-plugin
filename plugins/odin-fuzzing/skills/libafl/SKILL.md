@@ -37,7 +37,7 @@ description: 'Use when a custom LibAFL fuzzer needs an executor, observer, feedb
 
 7. **Select the scheduler.** Use `QueueScheduler` for corpus cycling, `PowerScheduleScheduler` for power scheduling, or `MinimizerScheduler` wrapping another scheduler for corpus minimization. Done when: one scheduler is selected.
 
-8. **Assemble the fuzzer.** Create a `StdFuzzer` with the chosen scheduler and feedback. Wire the executor, observer, and objective, then call `fuzzer.fuzz_loop(&mut stages, &mut executor, &mut state, &mut mgr)`. Done when: the `StdFuzzer` is assembled with all components wired.
+8. **Assemble the fuzzer.** Create a `StdFuzzer` with the chosen scheduler and feedback. Wire the executor, observer, and objective. Done when: the `StdFuzzer` is assembled with all components wired.
 
 9. **Set up the event manager.** Use `SimpleEventManager` for single-process or `LlmpEventManager` for multi-process. Connect to a `StatsMonitor` (e.g., `MultiMonitor` printing to stdout). Done when: the event manager is set up and connected to a stats monitor.
 

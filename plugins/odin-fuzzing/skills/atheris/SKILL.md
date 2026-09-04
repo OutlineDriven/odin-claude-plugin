@@ -46,7 +46,7 @@ description: 'Use when a user needs coverage-guided fuzzing for Python code or a
    LDSHARED="clang -shared"
    LDSHAREDXX="clang++ -shared"
    ```
-   Install the extension from source so it compiles locally with these flags, not as a prebuilt wheel. For uv-managed projects, set `no-binary-package = ["<pkg>"]` under `[tool.uv]` in `pyproject.toml` and run `uv sync` so the package is built from source; a later `uv sync` can otherwise silently swap in an uninstrumented wheel. Add `undefined` to the sanitizer list (`-fsanitize=address,undefined,fuzzer-no-link`) when UBSan is requested. Done when: the native extension is built from source with sanitizer and fuzzer instrumentation flags.
+   For uv-managed projects, set `no-binary = ["<pkg>"]` under `[tool.uv]` in `pyproject.toml` and run `uv sync --reinstall-package <pkg>` so the package is built from source; a later `uv sync` can otherwise silently swap in an uninstrumented wheel. Add `undefined` to the sanitizer list (`-fsanitize=address,undefined,fuzzer-no-link`) when UBSan is requested. Done when: the native extension is built from source with sanitizer and fuzzer instrumentation flags.
 
 6. **Configure the native-extension runtime.** Set `LD_PRELOAD` to the Atheris sanitizer shared library:
    ```
@@ -64,11 +64,11 @@ description: 'Use when a user needs coverage-guided fuzzing for Python code or a
 - No coverage increase. Cause: poor seed corpus or target not instrumented. Recovery: add representative seeds; confirm `instrument_imports()` wraps the target imports and `@atheris.instrument_func` wraps the entry point. Do not declare success on a stall.
 - Import errors / modules imported before instrumentation. Recovery: move the target imports inside the `atheris.instrument_imports()` context manager, before `atheris.Setup()`.
 - Segfault with no ASan output. Cause: `LD_PRELOAD` not set for a native extension. Recovery: export `LD_PRELOAD` to `asan_with_fuzzer.so` and rerun.
-- Build failures for a native extension. Cause: wrong compiler or missing flags. Recovery: verify `CC`, `CXX`, `CFLAGS`, `CXXFLAGS`, and the clang version; reinstall the extension from source with `--no-binary-package`.
+- Build failures for a native extension. Cause: wrong compiler or missing flags. Recovery: verify `CC`, `CXX`, `CFLAGS`, `CXXFLAGS`, and the clang version; configure `no-binary = ["<pkg>"]` under `[tool.uv]` and run `uv sync --reinstall-package <pkg>`.
 - Memory-allocation or leak noise. Recovery: set `ASAN_OPTIONS=allocator_may_return_null=1,detect_leaks=0`.
 - Crash artifact does not reproduce. Cause: nondeterminism in the harness (randomness, time, unordered iteration over mutable state). Recovery: remove the nondeterminism so `TestOneInput` is a pure function of `data`, then rerun. A non-reproducing crash is not a confirmed defect.
 - Partial-result rule. A campaign that finds no crash is a partial result (coverage gained, no defect proven), not proof of absence. Report coverage and corpus growth; do not claim the target is bug-free.
-- Rollback. Delete the harness file and the `corpus/` directory. Restore `pyproject.toml` and `uv.lock` to their pre-run state, or if they were created by this skill, remove the added atheris entry and `no-binary-package` configuration. The source under test is never modified by this skill.
+- Rollback. Delete the harness file and the `corpus/` directory. Restore `pyproject.toml` and `uv.lock` to their pre-run state, or if they were created by this skill, remove the added atheris entry and `no-binary` configuration. The source under test is never modified by this skill.
 
 ## Output
 - A deterministic, instrumented Atheris harness file.

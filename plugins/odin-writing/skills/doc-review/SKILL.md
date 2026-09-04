@@ -24,7 +24,7 @@ description: 'Use when reviewing a prose plan, spec, PRD, requirements doc, desi
 
 1. **Detect mode.** **Done when:** one mode is fixed for the run.
 
-Strip flag tokens from the arguments; use the remaining token as the document path. If `mode:headless` is present, run headless for the whole workflow: findings return as structured text, no blocking-question prompts, no interactive routing, Phase 5 returns immediately with `Review complete`. Otherwise run interactive mode.
+Strip flag tokens from the arguments; use the remaining token as the document path. If `mode:headless` is present, run headless for the whole workflow: findings return as structured text, no blocking-question prompts, no interactive routing, step 6 returns immediately with `Review complete`. Otherwise run interactive mode.
 
 2. **Locate and classify by shape.** **Done when:** the document is resolved and classified by shape.
 
@@ -45,7 +45,7 @@ Always dispatch **coherence** + **feasibility**. Add a conditional lens only whe
 
 | Persona | Lens | Activate when the document… |
 |---|---|---|
-| coherence | internal-consistency (owns the mechanically-fixable safe-auto candidates) | always |
+| coherence | internal-consistency (owns the mechanically-fixable safe_auto candidates) | always |
 | feasibility | buildability (tightens to fundamental-rework gaps on requirements) | always |
 | product | premise/strategy + design-shape (adoption, cognitive load, workflow fit) | stakes a challengeable claim about what/why to build, ranks priorities, predicts user outcomes, carries strategic weight, OR has UI/UX/flow/accessibility signals |
 | security | plan-level threat surface | touches auth/authz, exposed endpoints, PII/payments/credentials/encryption, or third-party trust boundaries |
@@ -236,7 +236,7 @@ Run all returned findings through this pipeline. Order matters; re-evaluate stat
 | 75 | manual | walk-through, user-judgment framing (suggested_fix optional) |
 | 50 | any | FYI subsection; skip walk-through and any bulk action |
 
-**Four output tiers** (user-facing labels in parentheses): safe-auto (accepted recommendations), gated-auto (proposed fixes), manual (decisions), FYI (FYI observations).
+**Four output tiers** (user-facing labels in parentheses): safe_auto (accepted recommendations), gated_auto (proposed fixes), manual (decisions), FYI (FYI observations).
 
 6. **Present and route.** **Done when:** surviving findings are presented and routed.
 
@@ -247,7 +247,7 @@ Headless mode: output a structured text envelope (accepted recommendations, prop
 Interactive mode: present findings grouped by severity (P0→P3), errors before omissions within each severity, with a summary line `Accepted N recommendations. K items need attention (X errors, Y omissions). Z FYI observations.`, the Coverage table, accepted recommendations, FYI observations (distinct subsection), residual concerns, and deferred questions. Coverage counts are post-synthesis: Findings = Auto + Proposed + Decisions + FYI exactly; Auto counts safe_auto@100, Proposed counts gated_auto@75/100, Decisions counts manual@75/100, FYI counts anchor-50 regardless of class. Footnotes below the table when non-zero, in order: `Dropped:`, `Chains:`, `Restated:`. Dependents render only nested under their root, never at their own severity position.
 
 Then route:
-- Only FYI observations remain (no gated_auto or manual at anchor 75/100) → skip the routing question; flow to Phase 6.
+- Only FYI observations remain (no gated_auto or manual at anchor 75/100) → skip the routing question; flow to step 7.
 - Actionable findings remain → ask the routing question:
 ```
 What should the agent do with the remaining N findings?

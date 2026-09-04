@@ -46,7 +46,7 @@ description: 'Use when initializing, running, measuring coverage, or triaging a 
      "target/$HOST/coverage/$HOST/release/<target>" \
      -instr-profile="fuzz/coverage/<target>/coverage.profdata" \
      -show-line-counts-or-regions -show-instantiations \
-    -format=html -o fuzz_html/ "$SRC_FILTER"
+    -format=html -o fuzz_html/ ${SRC_FILTER:+"$SRC_FILTER"}
    ```
    Done when: the HTML coverage report is generated under `fuzz_html/`.
 

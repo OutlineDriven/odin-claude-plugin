@@ -23,7 +23,7 @@ Optional: corpus directory path, libFuzzer arguments (e.g., `-max_len=1024`), cr
 ## Procedure
 
 1. Confirm target: pure Ruby (requires tracer) or C extension (single harness). Done when: the target kind is confirmed as pure Ruby or C extension.
-2. Confirm sanitizer: ASan (`Ruzzy::ASAN_PATH`) or UBSan (`Ruzzy::UBSAN_PATH`). Done when: the sanitizer is selected and its `Ruzzy::<SAN>_PATH` is confirmed.
+2. Confirm sanitizer: ASan (`Ruzzy::ASAN_PATH`) or UBSan (`Ruzzy::UBSAN_PATH`). Done when: the sanitizer is selected and the selected `Ruzzy::ASAN_PATH` or `Ruzzy::UBSAN_PATH` constant is confirmed.
 3. For pure Ruby targets, write a tracer script calling `Ruzzy.trace('harness.rb')` and a separate harness script calling `Ruzzy.fuzz(test_one_input)`. For C extensions, write one harness script calling `Ruzzy.fuzz(test_one_input)`; no tracer required. Done when: the harness and, for pure Ruby, the tracer script are written.
 4. Write the harness as a lambda named `test_one_input` that accepts data and returns `0`. Catch Ruby exceptions in C extension harnesses; let them propagate in pure Ruby harnesses. Done when: the harness lambda is written with the correct exception handling for the target kind.
 5. Set `ASAN_OPTIONS=allocator_may_return_null=1:detect_leaks=0:use_sigaltstack=0`. Do not export `LD_PRELOAD`; use it inline with the ruby command. Done when: `ASAN_OPTIONS` is set and `LD_PRELOAD` is prepared for inline use.
@@ -36,7 +36,7 @@ Optional: corpus directory path, libFuzzer arguments (e.g., `-max_len=1024`), cr
 | Failure class | Meaning | Recovery |
 |---|---|---|
 | `platform-missing` | Platform is not Linux x86-64/ARM64, clang is unavailable, or Ruby is not installed | Halt; suggest Docker environment |
-| `dependency-missing` | Gem not installed or wrong clang | Install gem with sanitizer flags; verify `Ruzzy::<SAN>_PATH` resolves |
+| `dependency-missing` | Gem not installed or wrong clang | Install gem with sanitizer flags; verify the selected `Ruzzy::ASAN_PATH` or `Ruzzy::UBSAN_PATH` constant resolves |
 | `harness-error` | Ruby exception exits the fuzzer | Adjust exception handling for a C extension harness; a pure Ruby harness must not catch exceptions |
 | `sanitizer-report` | ASan or UBSan error detected | Capture crash file; report class, address, reproducer |
 | `no-crashes-found` | Fuzzer ran without sanitizer violations | Report campaign completed cleanly |

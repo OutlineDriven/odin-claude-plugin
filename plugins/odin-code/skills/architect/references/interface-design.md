@@ -2,7 +2,7 @@
 
 When the user wants to explore alternative interfaces for a chosen deepening candidate, follow this parallel sub-agent pattern. Based on "Design It Twice" (Ousterhout): the first idea is unlikely to be the best.
 
-Uses the vocabulary in the survivor SKILL.md: module, interface, seam, adapter, leverage.
+Uses the vocabulary in ../SKILL.md: module, interface, seam, adapter, leverage.
 
 ## Process
 

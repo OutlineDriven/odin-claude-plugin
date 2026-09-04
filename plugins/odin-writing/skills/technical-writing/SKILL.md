@@ -1,6 +1,6 @@
 ---
 name: technical-writing
-description: 'Use when technical prose needs writing or reviewing with real symbols and controlled English, including draft editing when generation is unnecessary. Also handles draft editing when generation is unnecessary. Not for general prose deliverables: use technical-article-writer, not for remote or irreversible changes.'
+description: 'Use when technical prose needs writing or reviewing with real symbols and controlled English, including draft editing when generation is unnecessary. Not for technical articles or blog posts with external references: use technical-article-writer, not for remote or irreversible changes.'
 ---
 
 # Technical writing

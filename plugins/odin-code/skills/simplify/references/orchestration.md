@@ -1,6 +1,6 @@
 # `simplify`: orchestration recipe
 
-Dispatch shape, composition rule, Reviewer audit contract, fix sequencing, and behavior gate for the `simplify` skill. Read alongside `SKILL.md` Phase 1 / 2 / 3.
+Dispatch shape, composition rule, Reviewer audit contract, fix sequencing, and behavior gate for the `simplify` skill. Read alongside `../SKILL.md` Phase 1 / 2 / 3.
 
 ## Phase 1: diff scope resolution (shell snippet)
 

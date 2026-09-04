@@ -31,7 +31,7 @@ The interface being designed or changed: its name and kind (API endpoint, route,
 - Unmigrated consumer: if a consumer cannot be inspected or updated, stop. Record it as a blocking risk; the change is not complete and the done predicate does not hold.
 - Ambiguous semantics: if a field's semantics cannot be stated concretely, stop and request the missing specification rather than guessing or leaving it implicit.
 - Partial-result rule: a partially migrated change is not shippable. Keep the draft uncommitted and report the remaining consumers and unresolved semantics.
-- Rollback: discard the uncommitted draft. No implementation was mutated, so no source rollback is required.
+- Rollback: discard the uncommitted draft. Consumer edits and legacy-path restores are part of the same draft, so reverting via VCS restores them. No source rollback is required beyond VCS.
 - Blocked result: return the unmigrated-consumer list and the unresolved-semantics list. Do not pretend the done predicate holds.
 
 ## Output

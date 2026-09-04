@@ -25,4 +25,4 @@ At most three rows. Show the table and wait for the user to accept one.
 - Nothing is written until the user accepts a candidate. An auto-picked citation is not a citation.
 - Write the accepted candidate as one paragraph under `## Origin`, with title, author, year, and URL.
 - Paraphrase; quote only a coined term or named law where exact phrasing is the idea.
-- If the user declines every candidate, the angle ends there and the unit is unaffected.
+- If the user declines every candidate, the angle ends there and the explanation is unaffected.

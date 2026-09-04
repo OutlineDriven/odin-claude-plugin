@@ -10,8 +10,8 @@ description: 'Use when invoking /product-signal-pulse with an optional lookback 
 | Field | Bound contract |
 |---|---|
 | Trigger | /product-signal-pulse [lookback window, default 24h] |
-| Authority | Reversible local: writes only the pulse report file and pulse settings in config.local.yaml; rollback is undo. No remote mutation. No read-write database access; read-only replica only when explicitly enabled. |
-| Side effect | Writes a pulse report under docs/pulse-reports; settings writes go only to config.local.yaml |
+| Authority | Reversible local: writes only the pulse report file and pulse settings in `.odin/config.local.yaml`; rollback is undo. No remote mutation. No read-write database access; read-only replica only when explicitly enabled. |
+| Side effect | Writes a pulse report under docs/pulse-reports; settings writes go only to `.odin/config.local.yaml` |
 | Done | A 30-40 line report exists at the dated path, with headlines and the top followup surfaced in chat |
 
 ## Inputs
@@ -53,7 +53,7 @@ For every source, construct the query from the configured event name and the res
 ### Stage 1: resolve config
 
 1. Resolve the repo root with `git rev-parse --show-toplevel`. Done when: the repo root is resolved.
-2. Read `.odin/config.local.yaml`, then `config.yaml`. For each `pulse_*` key, the first active (non-commented) value wins; an invalid value continues to the next layer, then the skill default. For lists and maps, a present key replaces the whole key. Missing files are skipped. Done when: the config cascade is applied.
+2. Read `.odin/config.local.yaml`, then `.odin/config.yaml`. For each `pulse_*` key, the first active (non-commented) value wins; an invalid value continues to the next layer, then the skill default. For lists and maps, a present key replaces the whole key. Missing files are skipped. Done when: the config cascade is applied.
 3. If `pulse_product_name` is unset after cascade, or the repo root cannot be resolved, or the argument was `setup`, `reconfigure`, or `edit config`, run Stage 2 first. Otherwise start at Stage 3. Done when: the config state is classified.
 
 ### Stage 2: first-run interview
@@ -97,7 +97,7 @@ For every source, construct the query from the configured event name and the res
 
 ### Phase 3: scheduling
 
-16. If the argument was a schedule keyword (`daily`, `hourly`, `weekly`), say this run is ad-hoc and point at the host's scheduling primitive. If no schedule is on file and this is the third or later run, mention once that scheduling is available. Do not nag on every run. Never schedule automatically; any handoff to a scheduling primitive requires explicit confirmation. Done when: the scheduling note is emitted.
+16. If the argument was a schedule keyword (`daily`, `hourly`, `weekly`), say this run is ad-hoc and point at the host's scheduling primitive. If no schedule is on file and this is the third or later run, mention once that scheduling is available. Do not nag on every run. Never schedule automatically; any handoff to a scheduling primitive requires explicit confirmation. Done when: the scheduling note is emitted or determined not applicable.
 
 ## Failure and recovery
 
@@ -110,7 +110,7 @@ For every source, construct the query from the configured event name and the res
 - No tracing tool configured: omit the System performance section; the report stays Headlines / Usage / Followups.
 - No strategy doc: note it in chat; run from scratch without seeded metrics.
 - Partial results: write the report with available data; mark missing sections `no data`. Never pad or fabricate.
-- Rollback: the only mutations are the report file and config.local.yaml. Delete the report file to discard a run; revert config.local.yaml to its prior state to undo settings. No external system is mutated.
+- Rollback: the only mutations are the report file and `.odin/config.local.yaml`. Delete the report file to discard a run; revert `.odin/config.local.yaml` to its prior state to undo settings. No external system is mutated.
 
 ## Output
 

@@ -1,6 +1,6 @@
 ---
 name: framing-divergence-fanout
-description: 'Use when a user suspects the current direction is tunnel-visioned or inherited its framing: spawn 2-5 independent reads, classify each, cluster by shared root, and surface divergent-incompatible reads first. Not for framing-bias checks on a question: use prism.'
+description: 'Use when a user suspects the current direction is tunnel-visioned or inherited its framing: spawn 2-5 independent reads, classify each, cluster by shared root, and surface ambiguous and incompatible reads first. Not for framing-bias checks on a question: use prism.'
 ---
 
 # Framing divergence fanout

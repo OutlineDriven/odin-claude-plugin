@@ -15,7 +15,7 @@ One concern: configure the agent environment. Four mechanisms reach it: credenti
 | Trigger | User asks to set up or configure the agent environment from a fresh or existing clone: credentials, placeholders, the virtual environment, a third-party pack install from an archive, or a role-to-model mapping file. |
 | Authority | Human-gated: asks before each credential write, `.venv` creation, placeholder replacement in skill scripts, pack install, and role-model file write; every other write is reversible local, with version control as the rollback. |
 | Side effect | Creates or updates .env and token.json, creates a uv-managed `.venv`, replaces placeholders in skill scripts, installs a pack into a target directory behind hash verification, and writes one role-to-model mapping file. |
-| Done | The selected mechanism reaches its done state: a ready/not-ready checklist with one example prompt per configured integration, a present or created `.venv`, an installed pack with a saved rollback manifest, or a written and re-read role-model file. |
+| Done | The selected mechanism reaches its done state: a ready/not-ready checklist with one example prompt per configured integration, a present or created `.venv`, an installed pack with a saved applied manifest, or a written and re-read role-model file. |
 
 ## Not for
 
@@ -23,7 +23,7 @@ One concern: configure the agent environment. Four mechanisms reach it: credenti
 
 ## Inputs
 
-- Mechanism (required): which of the four to run. When absent, list the mechanisms and ask.
+- Mechanism: which of the four to run. When absent, list the mechanisms and ask.
 - Credentials (optional): desired integration names (e.g. `GITHUB_TOKEN`, `OPENAI_API_KEY`). If absent, the credentials mechanism lists all recognized integrations and asks which to configure.
 - Virtual environment (optional): `.venv` path, defaulting to the project root.
 - Pack install (required for that mechanism): source archive URL, target directory, expected file manifest mapping paths to expected SHA-256 hashes, and required transformations keyed by strict unique anchors.
@@ -60,7 +60,7 @@ One concern: configure the agent environment. Four mechanisms reach it: credenti
 
 1. **Detect state.** Check whether a uv-managed `.venv` exists at the configured path. **Done when:** the current state is recorded.
 
-2. **Create or report.** Create the `.venv` with `uv venv` when absent. Report the existing one when present; do not recreate or upgrade it without explicit user confirmation. **Done when:** the `.venv` exists and its state is reported.
+2. **Create or report.** Create the `.venv` with `uv venv <configured_venv_path>` when absent. Report the existing one when present; do not recreate or upgrade it without explicit user confirmation. **Done when:** the `.venv` exists and its state is reported.
 
 ## Pack install
 
@@ -115,7 +115,7 @@ Rollback: if a write fails mid-way, already-written credential files are retaine
 - Hash mismatch: a file's computed hash does not match the expected manifest. Stop before moving any file to the target. Report the mismatched file, expected hash, and actual hash. The scratch directory is cleaned up.
 - Anchor absent or repeated: a required anchor string is missing from the target file or appears more than once. Stop before moving any file to the target. Report the anchor and the file. The scratch directory is cleaned up.
 - Destination conflict: the target directory contains files whose hashes differ from the prior managed-state manifest, indicating manual modifications. Stop before overwriting. Report the conflicting files and their expected versus actual hashes. Do not overwrite user modifications.
-- Rollback: if any step fails after files have been moved to the target, use the saved applied manifest to restore the pre-install state: remove installed files and restore any prior managed-state files.
+- Rollback: if any step fails after files have been moved to the target, restore the pre-install state: use the saved applied manifest to identify and remove the installed files, and restore any prior managed-state files from the `rollback/` directory the install left in the scratch location.
 
 ### Role-model mapping
 

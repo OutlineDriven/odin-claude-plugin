@@ -74,7 +74,11 @@ Differential (when a baseline profile was supplied):
 ```
 cargo +nightly cov -- show -Xdemangler=rustfilt <target-binary> \
   -instr-profile=<baseline>.profdata \
+  -show-line-counts-or-regions -show-instantiations \
+  -format=html -o <target>/html_baseline/ <src-filter>
+cargo +nightly cov -- show -Xdemangler=rustfilt <target-binary> \
   -instr-profile=<target>.profdata \
   -show-line-counts-or-regions -show-instantiations \
-  -format=html -o <target>/diff_html/ <src-filter>
+  -format=html -o <target>/html_target/ <src-filter>
+diff -r <target>/html_baseline/ <target>/html_target/ > <target>/coverage_diff.txt
 ```

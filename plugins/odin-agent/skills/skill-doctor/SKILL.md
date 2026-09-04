@@ -16,7 +16,7 @@ description: 'Use when a user wants agent setup graded from conversation history
 
 ## Inputs
 
-1. **Conversation history** (required): a session transcript from the current agent harness. Accept one of:
+1. **Conversation history**: a session transcript from the current agent harness. Accept one of:
    - A file path to a transcript log (JSON, JSONL, or plain-text log).
    - A directory of transcript files; process the most recent file.
    - If neither is supplied, attempt to locate the most recent session transcript in the default harness log directory.

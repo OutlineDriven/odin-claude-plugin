@@ -50,7 +50,7 @@ pull request requires explicit approval; without it, edits stay local.
    on its own. Done when: the skill is written and self-contained.
 5. Run the harness live against the repository and capture the actual output. Done when: real output
    is captured, never predicted.
-6. Confirm every assertion holds against that output. When one fails, the verification is blocked; correct the harness or the run command and re-run, or return blocked if the failure cannot be resolved inside the verification-skill directory. Never edit the source under test to make an assertion pass. Done when: every assertion holds. |
+6. Confirm every assertion holds against that output. When one fails, the verification is blocked; correct the harness or the run command and re-run, or return blocked if the failure cannot be resolved inside the verification-skill directory. Never edit the source under test to make an assertion pass. Done when: every assertion holds.
 7. Record the proof inside the skill: the exact command, its output, and the pass result. Done when:
    all three are recorded.
 

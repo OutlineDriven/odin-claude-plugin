@@ -67,7 +67,7 @@ description: 'Use when an explicit request asks to create a presentation, build 
    - No external CDN links, no external image URLs, no runtime fetch calls for assets.
    Done when: the HTML file has no external resource dependencies.
 
-7. **Build and verify.** Run `pnpm install && pnpm run build`. Confirm:
+7. **Build and verify.** On the first build after scaffolding, run `pnpm install` once to generate `pnpm-lock.yaml`; every later build runs `pnpm install --frozen-lockfile && pnpm run build` so dependencies resolve exactly as locked. Confirm:
    - Build succeeds with zero errors.
    - Output is a single `dist/index.html` file (or equivalent single-file output).
    - Open the file in a browser: slides render, keyboard navigation works, charts display real data, and the supplied brand tokens are applied.
@@ -90,7 +90,7 @@ description: 'Use when an explicit request asks to create a presentation, build 
 
 - Missing required inputs: stop immediately. Report which inputs are missing. Do not proceed with defaults or invented content.
 - No real data for charts: if the user requests charts but provides no data, produce text-only slides. Do not fabricate placeholder datasets.
-- Build fails: diagnose the error. If it is a dependency issue, retry with `pnpm install`. If it is a code error, fix and rebuild. Report persistent failures.
+- Build fails: diagnose the error. If it is a dependency issue, retry `pnpm install --frozen-lockfile`; on a corrupted or absent lockfile, regenerate it once with `pnpm install`, then return to the frozen form. If it is a code error, fix and rebuild. Report persistent failures.
 - QA finds blocking issues: report each issue. Do not deliver the deck as done. Deliver it as partial with blockers listed, or wait for user resolution.
 - Partial result rule: a deck with keyboard navigation, the supplied brand tokens applied, and unresolved QA blockers is a partial result, not a successful delivery. Label it explicitly.
 

@@ -32,7 +32,7 @@ description: 'Use when a quick structural overview of a target directory is need
 3. Optionally record the version if the installed build supports it: `trailmark --version 2>/dev/null || uv run trailmark --version 2>/dev/null || true`. Do not fail if the version command is missing; this is the v0.2-safe summary workflow and does not require Trailmark 0.4.0 or newer. **Done when:** the version is recorded or confirmed absent.
 4. Detect languages with Trailmark's parse API. Run the snippet below with `python`; if the `trailmark` module is not installed, rerun the same snippet with `uv run --with trailmark`. If the result is `[]`, report `Trailmark found no supported languages under target` and stop. **Done when:** the detected language list is returned or the language gap is reported.
    ```bash
-python - <<'PY' <target-directory>
+python3 - "<target-directory>" <<'PY'
 import json
 import sys
 

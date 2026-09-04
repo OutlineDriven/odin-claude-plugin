@@ -16,7 +16,7 @@ description: 'Use when the user says "wait, what", "the explanation is unclear",
 
 ## Inputs
 
-The trigger identifies which explanation failed. No external files are required. Read `CONTEXT.md` at the repository root (or the per-context `CONTEXT.md` beside the relevant source when the project keeps a `CONTEXT-MAP.md`) to use the project''s ubiquitous language. If no glossary exists, use the names already in the code.
+The trigger identifies which explanation failed. Read `CONTEXT.md` if it exists; no external file is required when it is absent. Read the per-context `CONTEXT.md` beside the relevant source when the project keeps a `CONTEXT-MAP.md`. If no `CONTEXT.md` or `CONTEXT-MAP.md` exists, use the names already in the code.
 
 ## Entry phrasings
 
@@ -35,7 +35,7 @@ All three produce one plain-language re-pitch in chat. None touches disk.
 3. Re-pitch it: lead with the context the explanation assumed (one or two sentences on where the conversation is and what the message was answering: the gap is a missing frame, not a missing word); write in ISO 24495-1 English (short sentences, active voice, direct address, common words replacing jargon); use the project''s ubiquitous language. Done when: the claim is re-pitched with the missing frame supplied in plain English and ubiquitous language.
 
 ## Failure and recovery
-Non-converged: the user signals they do not understand after one re-pitch. Stop. Do not elaborate, restate a third time, or widen scope. The user is the authority on whether the explanation landed. Report `non-converged`.
+- Non-converged: the user signals they do not understand after one re-pitch. Stop. Do not elaborate, restate a third time, or widen scope. The user is the authority on whether the explanation landed. Report `non-converged`.
 - No prior explanation or response: if no prior assistant message exists to re-pitch or restate, stop and report that there is nothing to restate. Do not invent a prior explanation.
 - Ambiguous confusion signal: if the user's indication is unclear about which part was hard to follow, ask which part of the prior explanation was unclear before re-pitching.
 - Scope creep: if the re-pitch would require teaching an entire prerequisite topic, state the prerequisite boundary and offer to cover it separately. Do not widen into a tutorial.
