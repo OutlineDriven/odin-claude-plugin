@@ -151,12 +151,13 @@ row below is what you add on top for that kind of work, and the rest of the 28 s
 | Working on | Add |
 |---|---|
 | Everyday code changes | `odin-run`, `odin-git` |
+| Tests and verification | `odin-testing` |
 | Large refactors, audits, bounded iteration | `odin-code`, `odin-review` |
 | A specific language | `odin-python`, `odin-typescript`, `odin-native`, `odin-apple`, or `odin-lean` |
 | Web and interface work | `odin-web`, `odin-design` |
 | Security review and hardening | `odin-security`, `odin-fuzzing` |
 | Research and technical writing | `odin-research`, `odin-knowledge`, `odin-writing` |
-| Product, planning, and new artifacts | `odin-planning`, `odin-product`, `odin-visual`, `odin-testing` |
+| Product, planning, and new artifacts | `odin-planning`, `odin-product`, `odin-visual` |
 | Building agents | `odin-agent`, `odin-skills` |
 | Infrastructure and data | `odin-infra` |
 
@@ -213,13 +214,14 @@ Python.
 
 ```shell
 just              # list tasks
-just render       # regenerate skill manifests, plugin manifests, and registries
+just render       # regenerate skill manifests, plugin manifests, registries, and skill index
 just check        # every gate
 just verify       # every gate plus Agent Skills validation
 ```
 
-`.pre-commit-config.yaml` is the gate list. Every gate below audits the whole tree and runs
-unconditionally, so none of them can be skipped by touching the wrong file:
+`.pre-commit-config.yaml` is the gate list. Every gate audits the whole tree and runs
+unconditionally, so none of them can be skipped by touching the wrong file. `docs/specs/gates.md`
+explains what each generator writes, what each gate proves, and how to read a failure.
 
 ## License
 

@@ -3,13 +3,15 @@
 
 The carriers live outside the repository, in the home directory of whoever runs
 the harness. Their shared sections must match `system-prompt-baseline.md` byte
-for byte, while each keeps its own tool layer. This generator does what
-`check-carriers.py` proves: it rewrites every shared section from the baseline
-and leaves the four tool-layer sections alone.
+for byte, while each keeps its own tool layer. `--check` reuses the
+`check-carriers.py` audit, so a structurally broken carrier cannot pass just
+because the shared bodies already match. The four tool-layer sections are never
+modified.
 
-Run it by hand (`just sync-carriers`), never as a hook. A hook that rewrites
-home-directory files on every commit would fire on machines with no carriers
-to repair.
+Run the rewriter by hand (`just sync-carriers`), never as a rewrite hook. A hook
+that rewrites home-directory files on every commit would fire on machines with
+no carriers to repair. `--self-test` is a hook: it uses synthetic fixtures and
+does not touch a live carrier.
 """
 
 import importlib.util
@@ -33,6 +35,7 @@ blocks = _mod.blocks
 TOOL_LAYER = _mod.TOOL_LAYER
 OVERLAY_TAGS = _mod.OVERLAY_TAGS
 read_exact = _mod.read_exact
+audit = _mod.audit
 
 ROOT = Path(__file__).resolve().parent.parent
 BASELINE = ROOT / "system-prompt-baseline.md"
@@ -43,11 +46,14 @@ Usage: sync-carriers.py [options]
 Rewrite each external carrier's shared doctrine sections from the baseline.
 
 Options:
-  --check            Report what would change; exit 1 if anything would,
-                     otherwise print the in-sync count and exit 0.
+  --check            Report what would change; also run the carrier-shape
+                     audit from check-carriers.py. Exit 1 if anything would
+                     change, the audit fails, or a path is not a file.
+  --self-test        Prove the planner on synthetic fixtures and exit.
   --carrier NAME=PATH
                      Override the carrier path for NAME (codex or omp).
                      Repeatable; a missing path is skipped with a notice.
+                     An existing non-file path is an error, not a skip.
   -h, --help         Show this help and exit.
 
 With no arguments, rewrites every carrier that exists. A missing carrier
@@ -90,11 +96,31 @@ def _plan(baseline_text, carrier_text):
 
     for tag in shared:
         found = [(b[2], b[3], b[1]) for b in carrier_blocks if b[0] == tag]
-        if found:
-            # An overlay tag may repeat; replace only the last block, earlier
-            # overlays stay. Every other repeat is rewritten in place.
-            targets = [found[-1]] if tag in OVERLAY_TAGS else found
-            for start, end, body in targets:
+        canonical_block = f"<{tag}>{canonical[tag]}</{tag}>\n"
+        if tag in OVERLAY_TAGS:
+            if not found:
+                if code_tools_pos is None:
+                    return changes, carrier_text, (
+                        f"cannot insert <{tag}>: carrier has no <code_tools> line"
+                    )
+                insertions.append((code_tools_pos, canonical_block))
+                changes.append(("insert", tag))
+            else:
+                start, end, body = found[-1]
+                if body == canonical[tag]:
+                    pass
+                elif len(found) == 1:
+                    # Overlay only: keep it and insert the canonical block after.
+                    close_end = end + len(f"</{tag}>")
+                    if close_end < len(carrier_text) and carrier_text[close_end] == "\n":
+                        close_end += 1
+                    insertions.append((close_end, canonical_block))
+                    changes.append(("insert", tag))
+                else:
+                    edits.append((start, end, canonical[tag]))
+                    changes.append(("rewrite", tag))
+        elif found:
+            for start, end, body in found:
                 if body != canonical[tag]:
                     edits.append((start, end, canonical[tag]))
                     changes.append(("rewrite", tag))
@@ -103,9 +129,7 @@ def _plan(baseline_text, carrier_text):
                 return changes, carrier_text, (
                     f"cannot insert <{tag}>: carrier has no <code_tools> line"
                 )
-            insertions.append(
-                (code_tools_pos, f"<{tag}>{canonical[tag]}</{tag}>\n")
-            )
+            insertions.append((code_tools_pos, canonical_block))
             changes.append(("insert", tag))
 
     if not changes:
@@ -128,6 +152,87 @@ def _plan(baseline_text, carrier_text):
     return changes, new_text, None
 
 
+def _carrier_path_error(path):
+    """Return an error string for an unusable existing path, else None.
+
+    Missing paths are skipped by the caller, not reported here.
+    """
+    if path.exists() and not path.is_file():
+        return "not a file"
+    return None
+
+
+def _evaluate(baseline_text, carrier_text, label="carrier"):
+    """Return (changes, new_text, plan_error, audit_failures) for one carrier."""
+    changes, new_text, error = _plan(baseline_text, carrier_text)
+    if error:
+        return changes, new_text, error, []
+    result = new_text if changes else carrier_text
+    _, failures = audit(baseline_text, result, label)
+    return changes, new_text, None, failures
+
+
+def self_test():
+    """Prove the planner preserves an overlay and that --check reuses the audit."""
+    import tempfile
+
+    baseline_text = read_exact(BASELINE)
+    canonical = dict(sections(baseline_text))
+    overlay_body = "\na carrier persona overlay\n"
+    overlay = f"<role>{overlay_body}</role>"
+    overlay_only = baseline_text.replace(
+        f"<role>{canonical['role']}</role>", overlay, 1
+    )
+
+    checks = []
+
+    changes, new_text, error, failures = _evaluate(baseline_text, overlay_only)
+    overlay_ok = (
+        error is None
+        and ("insert", "role") in changes
+        and overlay in new_text
+        and f"<role>{canonical['role']}</role>" in new_text
+        and overlay_body in new_text
+        and not failures
+    )
+    checks.append(("an overlay-only <role> keeps the overlay and inserts canonical", overlay_ok))
+
+    extra = baseline_text + "\n<policy>\nsmuggled doctrine\n</policy>\n"
+    changes, _, error, failures = _evaluate(baseline_text, extra)
+    checks.append((
+        "an unknown section fails the audit when shared bodies already match",
+        error is None and not changes and bool(failures),
+    ))
+
+    ordered = sections(baseline_text)
+    tool_body = next(body for tag, body in ordered if tag == "code_tools")
+    missing_tool = baseline_text.replace(
+        f"<code_tools>{tool_body}</code_tools>", "", 1
+    )
+    changes, _, error, failures = _evaluate(baseline_text, missing_tool)
+    checks.append((
+        "a missing tool-layer section fails the audit when shared bodies match",
+        error is None and not changes and bool(failures),
+    ))
+
+    with tempfile.TemporaryDirectory() as d:
+        directory = Path(d)
+        msg = _carrier_path_error(directory)
+        checks.append(("an existing directory override is reported as not a file", msg == "not a file"))
+        missing = directory / "absent.md"
+        checks.append(("a missing path is not an error in _carrier_path_error", _carrier_path_error(missing) is None))
+        file_path = directory / "carrier.md"
+        file_path.write_text(baseline_text, encoding="utf-8")
+        checks.append(("a regular file has no path error", _carrier_path_error(file_path) is None))
+
+    passed = 0
+    for label, ok in checks:
+        print(f"{'PASS' if ok else 'FAIL'}: {label}", file=sys.stdout if ok else sys.stderr)
+        passed += bool(ok)
+    print(f"sync-carriers self-test: {passed}/{len(checks)} passed")
+    return 0 if passed == len(checks) else 1
+
+
 def main():
     args = sys.argv[1:]
     check_mode = False
@@ -139,6 +244,8 @@ def main():
         if arg == "--check":
             check_mode = True
             i += 1
+        elif arg == "--self-test":
+            return self_test()
         elif arg == "--carrier":
             i += 1
             if i >= len(args):
@@ -191,23 +298,23 @@ def main():
         if not path.exists():
             print(f"sync-carriers: {path}: not found, skipped")
             continue
+        path_error = _carrier_path_error(path)
+        if path_error:
+            print(f"sync-carriers: {path}: {path_error}", file=sys.stderr)
+            any_error = True
+            continue
 
         carrier_text = read_exact(path)
-        changes, new_text, error = _plan(baseline_text, carrier_text)
+        changes, new_text, error, failures = _evaluate(
+            baseline_text, carrier_text, str(path)
+        )
 
         if error:
             print(f"sync-carriers: {path}: {error}", file=sys.stderr)
             any_error = True
             continue
 
-        if not changes:
-            in_sync += 1
-            if not check_mode:
-                print(f"sync-carriers: {path}: in sync")
-            continue
-
-        any_change = True
-        if not check_mode:
+        if changes and not check_mode:
             try:
                 path.write_bytes(new_text.encode("utf-8"))
             except PermissionError:
@@ -221,6 +328,17 @@ def main():
             else:
                 verb = "would rewrite" if check_mode else "rewrote"
             print(f"sync-carriers: {path}: {verb} <{tag}>")
+
+        for line in failures:
+            print(f"sync-carriers: {line}", file=sys.stderr)
+            any_error = True
+
+        if changes:
+            any_change = True
+        elif not failures:
+            in_sync += 1
+            if not check_mode:
+                print(f"sync-carriers: {path}: in sync")
 
     if check_mode:
         if any_change or any_error:

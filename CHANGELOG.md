@@ -71,7 +71,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   path; `gh-review-requests` drops the invalid `requestedReviewers` field;
   `setup-tool-credentials` never echoes a colliding `.env` value and
   refuses to write credentials into a tracked or unignored path.
-- Codex P1: everyday-code install includes `odin-git`; `spec-driven` names
+- Codex P1: the Everyday code changes install row includes `odin-git`; `spec-driven` names
   `odin-testing` for `tdd`; `model-retuning` restores the first-match
   outcome classifier; `retaxonomize-plugins` leaves the generated README
   plugin table to `just render`; tournament failure terminals map onto
@@ -81,12 +81,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `memory-update` and `memory-clean` claimed `$MEMORY_DIR` is outside
   version control; that is true for the default (gitignored) path and
   false for an override git would track. The resolver refuses a path
-  git would track, including a missing directory inside a work tree.
+  git would track, including a missing directory inside a work tree;
+  it canonicalizes a relative override against the caller's directory
+  rather than the repository root, and it treats a leading hyphen as a
+  pathname.
 - `memory-clean` and `memory-sanitize` now call `memory-update`'s
   `resolve-paths.sh`; the extra copies are gone, so a tracked `MEMORY_DIR`
   is refused for sanitize too.
 - `pov` now calls `brainstorm`'s repo-profile cache; the extra copies are
   gone.
+- `setup-tool-credentials` can start in a directory with no `.gitignore`
+  by creating ignore coverage for `.env` after confirmation, and it
+  checks tracked vs ignored with `git ls-files` and `git check-ignore`
+  rather than ordinary `git status`, which omits ignored files.
+- `retaxonomize-plugins` writes catalog entries with `index`,
+  `display_name`, `homepage`, and `directory`, the fields the generators
+  require.
+- `sync-carriers --check` reuses the `check-carriers` audit, so a carrier
+  with an unknown section, a missing tool layer, or a malformed overlay
+  fails even when shared bodies already match. An overlay-only `<role>`
+  is kept and the canonical block is inserted after it. An existing
+  non-file `--carrier` override is an error, not a traceback.
 
 ### Added
 
