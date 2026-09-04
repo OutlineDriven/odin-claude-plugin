@@ -44,6 +44,6 @@ A structured report containing:
 1. The stripped direction statement.
 2. Each read with its classification label and a one-sentence summary.
 3. Shared-root cluster map (cluster root → member reads).
-4. Ordered presentation: divergent-incompatible first, compatible second, convergent last.
+4. Ordered presentation: ambiguous first, then divergent-incompatible, then compatible, then convergent.
 5. Convergence-reassurance label on every convergent read.
 6. No consensus, agreement, majority, or weight language anywhere in the report.
