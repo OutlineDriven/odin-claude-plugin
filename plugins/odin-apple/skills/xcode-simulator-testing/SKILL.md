@@ -1,6 +1,6 @@
 ---
 name: xcode-simulator-testing
-description: 'Use when asked to run /xcode-simulator-testing with a scheme name or current to build and launch an iOS app in a simulator and capture per-surface evidence. Not for project regeneration: use xcode-project-sync.'
+description: 'Use when asked to run /xcode-simulator-testing with a scheme name or current to build and launch an iOS app in a simulator and capture per-surface evidence. Not for project regeneration: use ios-build-fix.'
 ---
 
 # Xcode simulator test

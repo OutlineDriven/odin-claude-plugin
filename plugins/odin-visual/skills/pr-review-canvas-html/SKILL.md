@@ -10,7 +10,7 @@ description: 'Use when asked to render a GitHub PR as a standalone review HTML p
 | Field | Bound contract |
 |---|---|
 | Trigger | Render a GitHub PR as standalone review HTML. |
-| Authority | Reversible local: writes only the HTML artifact in /tmp; rollback is deleting that file. No remote mutation. |
+| Authority | Reversible local: writes the final HTML artifact, a body scratch file (`/tmp/pr-review-<number>-body.html`), and a patches scratch file (`/tmp/pr-patches-<number>.json`) in `/tmp`; rollback is deleting those files. No remote mutation. |
 | Side effect | Writes one self-contained HTML file to /tmp and serves it on a fixed localhost port. |
 | Done | A self-contained HTML artifact at /tmp/pr-review-<number>.html, served on localhost. |
 

@@ -13,7 +13,7 @@ description: 'Use when asked to run /ios-build-fix to fix a failing iOS build, r
 |---|---|
 | Trigger | the user runs /ios-build-fix |
 | Authority | Reversible local: writes the iOS project's Swift source plus snapshot and screenshot fixtures and the regression test under test/fixtures/ios-fix/, applied and verified through the iOS debug bridge; rollback is version control. No remote mutation. The user picks among competing root-cause fixes. |
-| Side effect | project code changes made through the debug bridge, plus snapshot and screenshot fixtures and a regression test written under test/fixtures/ios-fix/ |
+| Side effect | project code changes edited directly, rebuilt and verified through the debug bridge, plus snapshot and screenshot fixtures and a regression test written under test/fixtures/ios-fix/ |
 | Done | the failing iOS behavior is fixed and verified on a device or simulator, with a reproducing snapshot and a regression test committed alongside the fix |
 
 ### Inputs
@@ -37,7 +37,7 @@ Optional:
 7. Locate the root cause. Read the Swift source and trace the buggy screen back to the view model, data flow, and state mutation. Identify the smallest change that fixes the behavior.
 8. If more than one plausible root cause remains, present them to the user and let the user pick the one to fix before editing.
 9. Apply the fix: edit the Swift source, keeping the diff minimal. Rollback path: `git checkout -- <edited files>` reverts this edit.
-10. Rebuild and reinstall: `xcodebuild -scheme <SchemeName> -destination 'platform=iOS,id=<UDID>' build install`. The daemon reconnects the StateServer tunnel after the rebuild; re-deploy through the boot-token rotation flow.
+10. Rebuild and reinstall: `xcodebuild -scheme <SchemeName> -destination 'platform=iOS,id=<UDID>' build`, then `xcrun simctl install <UDID> <app-path>` on a simulator or `ios-deploy` on a device. The daemon reconnects the StateServer tunnel after the rebuild; re-deploy through the boot-token rotation flow.
 11. Verify: `POST /state/restore` with the pre-bug snapshot to reproduce the state, then take a fresh `GET /screenshot` and compare it against `test/fixtures/ios-fix/<bug-slug>-pre.png`.
 12. If the bug visibly persists, the fix did not work: revert the Swift edit (`git checkout -- <edited files>`) and retry from step 9, up to 3 iterations before escalating to the user.
 13. If the bug is gone, capture `test/fixtures/ios-fix/<bug-slug>-post.png`.
@@ -66,7 +66,7 @@ A minimal Swift source fix committed with its reproducing snapshot (`<bug-slug>-
 | Trigger | the user asks to regenerate an Xcode project from `project.yml` via XcodeGen, or the skill detects that the generated xcodeproj is stale after `project.yml` changed |
 | Authority | Reversible local: write only the regenerated xcodeproj built from `project.yml`; roll back via `git restore` of the xcodeproj. Never edit handwritten Swift or hand-patch generated files. |
 | Side effect | Regenerates the xcodeproj from `project.yml` without modifying handwritten Swift files. |
-| Done | The regenerated project builds: `swift build` and `xcodebuild -scheme <SchemeName>` both succeed. |
+| Done | The regenerated project builds: `swift build` and `xcodebuild -scheme <SchemeName>` both succeed, or the freshness check reports "already up to date" with the freshness result reported; the early exit is DONE in Output. |
 
 ### Inputs
 
@@ -97,4 +97,4 @@ A minimal Swift source fix committed with its reproducing snapshot (`<bug-slug>-
 
 ### Output
 
-The regenerated xcodeproj under the app root, a diff summary of changed files, and a terminal classification: DONE (the project builds) or BLOCKED with the failing step and what was attempted. On "already up to date", no files are changed and the freshness result is reported.
+The regenerated xcodeproj under the app root, a diff summary of changed files, and a terminal classification: DONE (the project builds, or the freshness check reports "already up to date") or BLOCKED with the failing step and what was attempted. On "already up to date", no files are changed and the freshness result is reported.

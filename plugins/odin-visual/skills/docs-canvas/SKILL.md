@@ -28,7 +28,7 @@ Optional: a preferred output filename (default `docs-canvas.html`) and a section
 
 3. Extract source references and build a combined index. Collect every citation, link, and attribution discovered across all documents. Build an index mapping each reference to its source document and location. Done when: the combined sources index is built.
 
-4. Render the content as a single HTML artifact with an interactive table of contents. Produce one section per heading, preserving the source text without paraphrase or invented content. The table of contents links each entry to its section anchor. Done when: every heading has a rendered section and every TOC entry links to its anchor.
+4. Render the content as a single HTML artifact with an interactive table of contents and a combined sources index. Produce one section per heading, preserving the source text without paraphrase or invented content. The table of contents links each entry to its section anchor; the combined sources index links each reference to its source document and location. Done when: every heading has a rendered section, every TOC entry links to its anchor, and the combined sources index is rendered.
 
 5. Save to the working directory with all CSS and JavaScript inlined. The artifact must open without external dependencies. Done when: the HTML file exists at the stated path with inlined CSS and JavaScript, and every TOC link resolves to a rendered section.
 

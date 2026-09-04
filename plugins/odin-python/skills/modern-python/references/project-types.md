@@ -5,7 +5,7 @@ SKILL.md detects the project type and validates the done predicate with per-type
 this file holds the per-type setup steps.
 ## Single-file scripts (PEP 723)
 
-- Add PEP 723 inline metadata header to the script file: `# /// - projdeps`, then `# ///`, then a `[[project]]` or `[project]` table with name, version, requires-python, and dependencies.
+- Add PEP 723 inline metadata header to the script file: start with `# /// script`, list top-level `requires-python = "..."` and `dependencies = [...]`, then close with `# ///`.
 - Confirm the file is runnable with `uv run python <script>`.
 - Add ruff to the inline metadata dev dependencies and run `uv run ruff check <script>` to verify lint passes.
 

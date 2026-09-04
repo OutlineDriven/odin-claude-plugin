@@ -39,4 +39,4 @@ description: 'Use when a first screen needs lower transfer bytes without visual 
 
 ## Output
 
-A terminal classification (`success`, `capped`, `stalled`, `blocked`, `exhausted`, or `pending`) plus the before/after compressed byte counts, per-resource breakdown, pixel-identity confirmation, test result, and the run receipt.
+A terminal classification (`success`, `capped`, `stalled`, `blocked`, or `pending`) plus the before/after compressed byte counts, per-resource breakdown, pixel-identity confirmation, test result, and the run receipt.

@@ -33,7 +33,7 @@ Optional:
    - HTML mode: write a self-contained HTML file using the template rules:
      - Embed all CSS inline in a `<style>` block.
      - Embed all JavaScript inline in a `<script>` block.
-     - If using Mermaid, include the Mermaid CDN script or embed the Mermaid library.
+    - If using Mermaid, embed the Mermaid library inline; do not use a CDN script.
      - Apply a dual-theme strategy (light and dark via `prefers-color-scheme` or a manual toggle) unless the user explicitly requests a single theme.
      - Ensure no horizontal overflow by using responsive layout, flexbox, or CSS grid with overflow containment.
      - Label every Mermaid edge with a descriptive text annotation.

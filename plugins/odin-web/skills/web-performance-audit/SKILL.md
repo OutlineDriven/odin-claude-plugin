@@ -18,7 +18,7 @@ description: 'Use when asked to audit, profile, or debug page load performance, 
 
 - Target URL (required): Page or application URL to audit. It must be reachable from the agent environment.
 - Viewport and throttling (optional): Device profile and network conditions. Defaults to mobile Moto G Power with slow 4G throttling.
-- Focus area (optional): Narrow the audit to a specific concern such as LCP, CLS, FID, bundle size, or accessibility. When omitted, all areas are audited.
+- Focus area (optional): Narrow the audit to a specific concern such as LCP, CLS, bundle size, or accessibility. When omitted, all areas are audited.
 
 ## Procedure
 
