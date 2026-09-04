@@ -1,6 +1,6 @@
 ---
 name: worktree
-description: 'Use when a new isolated worktree or branch is requested, or an existing ref or PR needs isolation. Creates or attaches an isolated git worktree the harness can see and reports its exact path and status. For a full gated workflow with setup and baseline tests, use isolate-work-in-worktree; this skill is the lightweight create-or-attach. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a new isolated worktree or branch is requested, or an existing ref or PR needs isolation. Creates or attaches an isolated git worktree the harness can see and reports its exact path and status. Not for loop-run worktree lifecycle: use isolate-work-in-worktree; this skill is the lightweight create-or-attach. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Worktree isolation
@@ -9,7 +9,7 @@ description: 'Use when a new isolated worktree or branch is requested, or an exi
 
 | Field | Bound contract |
 |---|---|
-| Trigger | A new isolated worktree or branch is requested, or an existing ref or PR needs isolation. |
+| Trigger | A new isolated worktree or branch is requested, or an existing ref or PR needs isolation. Not for loop-run worktree lifecycle: use isolate-work-in-worktree. |
 | Authority | Reversible local: writes only the worktree directory and a `.worktrees/` gitignore entry; rollback is removing the worktree and reverting that entry. No remote mutation. |
 | Side effect | Local write: creates or attaches an isolated git worktree and reports its exact path and status. |
 | Done | An isolated workspace exists that the harness can see and manage, with no phantom state. |
