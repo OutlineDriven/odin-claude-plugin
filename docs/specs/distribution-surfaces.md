@@ -222,7 +222,7 @@ From a local clone (Tier 1, sources: `source.ts` and `marketplace.ts`, verified 
 - `*/SKILL.md` at root level
 - `plugins/{scope}/skills/*/SKILL.md`
 
-`gh skill install --help` states discovery follows the agentskills.io `skills/*/SKILL.md` convention "including when the `skills/` directory is nested under a prefix", and that an exact repository path "avoids a full tree traversal of the repository" (Tier 1, source: `gh skill install --help`, verified). The traversal shortcut matters for a repository with 613 skills.
+`gh skill install --help` states discovery follows the agentskills.io `skills/*/SKILL.md` convention "including when the `skills/` directory is nested under a prefix", and that an exact repository path "avoids a full tree traversal of the repository" (Tier 1, source: `gh skill install --help`, verified). The traversal shortcut matters for a repository with 614 skills.
 
 ### Publish validation
 
@@ -276,7 +276,7 @@ The current layout satisfies all five surfaces from one tree (Tier 1, source: re
 │       ├── .grok-plugin/plugin.json     # Grok manifest
 │       ├── .kimi-plugin/plugin.json     # Kimi manifest, skills declared
 │       ├── mcp.json                     # optional; only odin-core ships one
-│       └── skills/<slug>/SKILL.md       # 613 skills total
+│       └── skills/<slug>/SKILL.md       # 614 skills total
 ├── catalog/                             # registry and membership data
 ├── scripts/                             # dependency-free Node ESM and stdlib Python
 ├── Justfile                             # render, check, validate-skills, verify

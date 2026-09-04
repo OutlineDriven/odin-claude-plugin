@@ -426,6 +426,7 @@
 | respond-to-pr-comments-in-blocklist | odin-git | Coding |
 | respond-to-slack-thread | odin-run | Coding |
 | restart-keeping-lessons | odin-code | Coding |
+| retaxonomize-plugins | odin-skills | Productivity |
 | review | odin-review | Coding |
 | review-and-ship | odin-git | Coding |
 | review-plugin-submission | odin-skills | Productivity |

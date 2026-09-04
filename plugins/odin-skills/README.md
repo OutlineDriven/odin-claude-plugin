@@ -2,7 +2,7 @@
 
 ODIN workflows for authoring, auditing, benchmarking, and publishing agent skills.
 
-24 skills, category Productivity.
+25 skills, category Productivity.
 
 ## Install
 
@@ -32,6 +32,7 @@ codex plugin add odin-skills@odin-marketplace
 - model-retuning
 - prompt-optimizer
 - reflect
+- retaxonomize-plugins
 - review-plugin-submission
 - skill-benchmark
 - skill-benchmark-gate

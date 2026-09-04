@@ -27,7 +27,7 @@ per-skill value would misstate the provenance of an adapted skill.
 
 ## Per-skill install
 
-`gh skill install` accepts an exact repository path, which skips a full tree traversal. At 613
+`gh skill install` accepts an exact repository path, which skips a full tree traversal. At 614
 skills that matters.
 
 ```shell
