@@ -40,6 +40,18 @@ _validate_memory_dir() {
   fi
 }
 
+_reject_tracked() {
+  local d="$1" probe="$1" root
+  while [[ ! -e "$probe" && "$probe" != "/" ]]; do
+    probe="$(dirname "$probe")"
+  done
+  git -C "$probe" rev-parse --is-inside-work-tree >/dev/null 2>&1 || return 0
+  root="$(git -C "$probe" rev-parse --show-toplevel)"
+  git -C "$root" check-ignore -q "$d" && return 0
+  printf 'ERROR: memory dir is tracked by git: %s\n' "$d" >&2
+  exit 1
+}
+
 _validate_session_glob() {
   local val="$1"
   case "$val" in
@@ -61,6 +73,7 @@ case "$KEY" in
   memory_dir)
     if [[ -n "${MEMORY_DIR:-}" ]]; then
       _validate_memory_dir "$MEMORY_DIR"
+      _reject_tracked "$MEMORY_DIR"
       printf '%s\n' "$MEMORY_DIR"
     else
       ENCODED=$("$SCRIPT_DIR/encode-memory-path.sh")
@@ -70,6 +83,7 @@ case "$KEY" in
         printf 'Set MEMORY_DIR env var to override, or ensure Claude Code has initialized this project.\n' >&2
         exit 1
       fi
+      _reject_tracked "$ENCODED"
       printf '%s\n' "$ENCODED"
     fi
     ;;

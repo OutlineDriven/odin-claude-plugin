@@ -73,9 +73,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   the cascade set (`stalled`, `blocked`).
 - Tournament Output listed `capped` and `pending`, terminals no procedure
   step produces. Output now matches the four defined terminals.
-- `memory-update` claimed `$MEMORY_DIR` is outside version control; that
-  is true for the default (gitignored) path and false for an override
-  git would track. An override git would track is refused.
+- `memory-update` and `memory-clean` claimed `$MEMORY_DIR` is outside
+  version control; that is true for the default (gitignored) path and
+  false for an override git would track. The resolver refuses a path
+  git would track, including a missing directory inside a work tree.
 
 ### Added
 

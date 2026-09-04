@@ -19,6 +19,18 @@ _validate_memory_dir() {
   _has_control_chars "$val" && { printf 'ERROR: memory_dir has control byte\n' >&2; exit 1; } || true
 }
 
+_reject_tracked() {
+  local d="$1" probe="$1" root
+  while [[ ! -e "$probe" && "$probe" != "/" ]]; do
+    probe="$(dirname "$probe")"
+  done
+  git -C "$probe" rev-parse --is-inside-work-tree >/dev/null 2>&1 || return 0
+  root="$(git -C "$probe" rev-parse --show-toplevel)"
+  git -C "$root" check-ignore -q "$d" && return 0
+  printf 'ERROR: memory dir is tracked by git: %s\n' "$d" >&2
+  exit 1
+}
+
 _validate_session_glob() {
   local val="$1"
   case "$val" in
@@ -34,11 +46,14 @@ _validate_session_glob() {
 case "$KEY" in
   memory_dir)
     if [[ -n "${MEMORY_DIR:-}" ]]; then
-      _validate_memory_dir "$MEMORY_DIR"; printf '%s\n' "$MEMORY_DIR"
+      _validate_memory_dir "$MEMORY_DIR"
+      _reject_tracked "$MEMORY_DIR"
+      printf '%s\n' "$MEMORY_DIR"
     else
       ENCODED=$("$SCRIPT_DIR/encode-memory-path.sh")
       _validate_memory_dir "$ENCODED"
       [[ -d "$ENCODED" ]] || { printf 'ERROR: memory dir missing: %s\nSet MEMORY_DIR to override.\n' "$ENCODED" >&2; exit 1; }
+      _reject_tracked "$ENCODED"
       printf '%s\n' "$ENCODED"
     fi ;;
   session_history_glob)

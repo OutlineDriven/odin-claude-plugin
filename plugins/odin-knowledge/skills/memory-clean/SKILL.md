@@ -11,8 +11,8 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | A human explicitly asks to audit memory or find stale or duplicate memories. |
-| Authority | Human-gated: previews each target and consequence and obtains explicit confirmation for each repair group before changing data at rest in `$MEMORY_DIR`, which is outside version control; the only other write is the snapshot copy taken first, and rollback restores the store from that snapshot. |
-| Side effect | Create one snapshot copy, then make only confirmed edits, merges, archives, or deletions inside `$MEMORY_DIR`, which is outside version control. |
+| Authority | Human-gated: previews each target and consequence and obtains explicit confirmation for each repair group before changing data at rest in `$MEMORY_DIR`, which is outside version control by default; an override git would track is refused; the only other write is the snapshot copy taken first, and rollback restores the store from that snapshot. |
+| Side effect | Create one snapshot copy, then make only confirmed edits, merges, archives, or deletions inside `$MEMORY_DIR`. |
 | Done | A fresh deterministic audit reports zero critical findings, and every residual warning or informational finding is reported. |
 
 ## Inputs
@@ -23,7 +23,7 @@ disable-model-invocation: true
 
 ## Procedure
 
-1. Resolve the bundled script directory, then run `resolve-paths.sh memory_dir` and `resolve-paths.sh session_history_glob`. Reject resolver errors, control characters, forbidden shell metacharacters, and unsafe whitespace rather than interpreting them. Done when: both paths resolve without error or the run stops with a blocked diagnostic.
+1. Resolve the bundled script directory, then run `resolve-paths.sh memory_dir` and `resolve-paths.sh session_history_glob`. Reject resolver errors, control characters, forbidden shell metacharacters, and unsafe whitespace rather than interpreting them. The resolver refuses a memory directory git would track. Done when: both paths resolve without error or the run stops with a blocked diagnostic.
 2. Bound the operation to the resolved `$MEMORY_DIR`; do not create new memories, edit another store, redact suspected credentials, or widen the requested scope. Done when: the scope boundary is stated and no out-of-scope target is queued.
 3. Before any repair, create a timestamped recursive snapshot of `$MEMORY_DIR` in `/tmp` and record its path. Done when: the snapshot directory exists and its path is recorded, or the run stops without changing the store.
 4. Run `audit-memory.sh "$MEMORY_DIR" "$SESSION_HISTORY_GLOB"` and preserve its JSON output. The deterministic audit checks index orphans and dangling links, schema and required sections, index size limits, credential patterns, fix-recipe and path-pinned content, relative dates, body-line Jaccard similarity above 0.70, missing reference targets, past project dates without historical-anchor phrases, and feedback rules contradicted by session evidence. Done when: the JSON report is captured and preserved regardless of exit status.
@@ -36,6 +36,7 @@ disable-model-invocation: true
 ## Failure and recovery
 
 - Invalid or missing path: stop before snapshot or mutation and return `blocked` with the resolver diagnostic.
+- Memory directory git would track: stop before snapshot or mutation and return `blocked: MEMORY_DIR is inside version control`.
 - Snapshot failure: stop without mutation and return `blocked` with the failed snapshot target.
 - Audit failure or malformed report: retain any valid partial report, make no repairs, and return `blocked` with the diagnostic; never infer omitted findings.
 - Missing staleness evidence: complete structural checks, mark session-based staleness unavailable, and return `blocked` rather than treating absence of evidence as freshness.
