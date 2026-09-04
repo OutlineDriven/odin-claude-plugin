@@ -10,7 +10,7 @@ description: 'Use when a proven watch pattern should become a reusable harness a
 | Field | Bound contract |
 |---|---|
 | Trigger | A watch pattern has proven itself and the user wants to turn it into a reusable harness. |
-| Authority | Reversible local: writes only the named harness artifact file; rollback is deleting or reverting the harness artifact. No remote mutation. |
+| Authority | Reversible local: writes only the named harness artifact file; rollback is deleting or reverting the harness artifact. No remote mutation. No VCS commit, remote call, credential use, or published artifact. |
 | Side effect | One harness artifact as a reversible local state change. |
 | Done | A reusable harness is created from the proven watch. |
 
