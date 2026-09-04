@@ -12,7 +12,7 @@ description: 'Use when onboarding to a repository, capturing costly conventions,
 | Trigger | Explicit human invocation for repository onboarding or for creating or improving `AGENTS.md` to capture conventions, constraints, or rationale. |
 | Authority | Reversible local: writes only the repository's `AGENTS.md`; rollback is restoring the pre-edit content or deleting the file if newly created. No remote mutation. |
 | Side effect | Create or update `AGENTS.md` from repository files actually read, and identify descriptive lines for deletion; never fabricate a rule, constraint, rationale, or source. |
-| Done | `AGENTS.md` exists and every retained instruction is prescriptive, non-derivable from the repository itself, and grounded in evidence that was actually read. |
+| Done | `AGENTS.md` exists and every retained instruction is prescriptive, non-derivable from the repository itself, and grounded in a file actually read or marked human-supplied. |
 
 ## Inputs
 

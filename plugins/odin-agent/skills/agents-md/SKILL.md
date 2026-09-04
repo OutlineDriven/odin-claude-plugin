@@ -10,9 +10,9 @@ description: 'Use when setting up a repo for agents, adding AGENTS.md, auditing 
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to set up a repo for agents, add AGENTS.md, audit CLAUDE.md, make a repo agent-friendly, score agent instructions, prune long/generic/stale instructions, or produce a lean pointer-only AGENTS.md |
-| Authority | Reversible local: writes only AGENTS.md, CLAUDE.md, CLAUDE.local.md, and supporting instruction files after user confirmation; rollback is restoring the pre-edit snapshot. No remote mutation. |
+| Authority | Reversible local: writes only AGENTS.md, CLAUDE.md (or a symlink to AGENTS.md when a target tool reads solely CLAUDE.md), CLAUDE.local.md, `.claude/settings.json`, `.cursor/rules/*.mdc`, Cursor `hooks.json`, and supporting instruction files after user confirmation; rollback is restoring the pre-edit snapshot. No remote mutation. |
 | Side effect | Local write to agent instruction files in the repo; no remote, credential, paid, published, deployed, or VCS mutation |
-| Done | Repo has working, scored, non-contradictory AGENTS.md and CLAUDE.md for Claude, Codex, and Cursor; every surviving line passes the three-check admission gate (non-discoverable, operationally significant, actionable); lean variants stay under 100 lines with pointer-only sections |
+| Done | Repo has working, scored, non-contradictory AGENTS.md for every target tool, plus a CLAUDE.md only when a target tool reads solely CLAUDE.md; every surviving line passes the three-check admission gate (non-discoverable, operationally significant, actionable); lean variants stay under 100 lines with pointer-only sections |
 
 ## Inputs
 

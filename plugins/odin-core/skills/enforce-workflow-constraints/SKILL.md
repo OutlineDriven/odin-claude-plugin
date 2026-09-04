@@ -34,7 +34,7 @@ description: 'Use when any bounded workflow starts or reaches an action, path, p
 - Constraint violation: refuse the action, record the violated constraint, and narrow to a compliant form only if one exists without widening scope.
 - Stale constraint set: reload the constraint set before re-evaluating; never proceed on a set that may have changed since the last load.
 - Partial result: no partial permit is issued. An action is permitted only when every constraint is satisfied; otherwise it is refused or narrowed.
-- Non-convergence: if no narrowing satisfies the constraints, the terminal result is refusal with the reason recorded. The done predicate does not hold for a refused action.
+- Non-convergence: if no narrowing satisfies the constraints, the terminal result is refusal with the reason recorded. The refused action itself does not proceed or complete, so its own done predicate does not hold; this skill's done predicate holds because the refusal was recorded.
 
 ## Output
 For each evaluated boundary, a chat verdict (permit; narrow with the narrowed form stated; or refuse with the reason recorded), with the verdict sequence proving constraints were loaded before the first action, re-evaluated at every boundary, and an unreadable constraint set produced refusal rather than default-allow.

@@ -12,7 +12,7 @@ description: 'Use when plan-mode enforcement hooks intercept a plan review or th
 | Trigger | Plan-mode enforcement hooks intercept a plan review, or the user runs /plan-review-tune |
 | Authority | Reversible local: writes only the plan-review question-registry and hook configuration; rollback is restoring the prior files. No remote mutation. No VCS, credential, or paid mutation. |
 | Side effect | Local question-registry and hook configuration files under the harness config directory |
-| Done | The tuned plan-review question flow is persisted |
+| Done | For a per-question preference or enable/disable request, the tuned plan-review question flow is persisted; for an inspect request, the dual-track profile and preference map are rendered. |
 
 ## Inputs
 

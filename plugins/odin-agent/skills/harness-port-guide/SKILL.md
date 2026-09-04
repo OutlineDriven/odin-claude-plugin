@@ -10,7 +10,7 @@ description: 'Use when the user asks to make the skills framework work in a new 
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to make the skills framework work in a new harness, IDE, or CLI. |
-| Authority | Reversible local: writes only named harness artifacts (manifest, bootstrap injector, tool-mapping reference, tests, install docs); rollback is deleting those added files. No remote mutation. Never edit the user's global or personal config, and never edit a skill body to fit the harness. |
+| Authority | Reversible local: writes only named harness artifacts (manifest, bootstrap injector, tool-mapping reference, tests, install docs) and edits to other harnesses' sync-exclude files; rollback is deleting those added files and restoring the prior content of any edited sync-exclude files. No remote mutation. Never edit the user's global or personal config, and never edit a skill body to fit the harness. |
 | Side effect | Adds a manifest, a bootstrap injector, a tool-mapping reference and tests for the target harness; the version is tracked in the source manifest. |
 | Done | All six done-conditions hold: session-start bootstrap with no per-session opt-in, a tool mapping exists, skills are invocable natively or via a read-the-skill-file fallback, the acceptance test passes with a captured transcript, tests pass, and install works through the harness's own mechanism. |
 
@@ -38,7 +38,7 @@ The target harness name and its install mechanism (plugin, extension, marketplac
 - Include treated as a hint rather than an expansion (Shape C): inline the content rather than include it.
 - Undeclared type import fails under type-check or bundle: confirm the approach with the maintainer rather than quietly adding a runtime dependency.
 - Partial-result rule: a port that satisfies some but not all six done-conditions is non-converged. State exactly which conditions hold and which do not; do not merge and do not claim the done predicate holds.
-- Rollback: delete the added harness artifacts: manifest, bootstrap injector, tool-mapping reference, tests, and install docs. The framework's shared skill bodies were never edited, so no skill rollback is needed.
+- Rollback: delete the added harness artifacts: manifest, bootstrap injector, tool-mapping reference, tests, and install docs; restore any prior edits made to other harnesses' sync-exclude files. The framework's shared skill bodies were never edited, so no skill rollback is needed.
 
 ## Output
 A port for the target harness comprising a manifest or entry point, a bootstrap injector or extension-declared context file, a tool-mapping reference, tests, and install docs, all delivered through the harness's own install mechanism, with the version tracked in the source manifest. A captured acceptance-test transcript showing the relevant skill auto-triggering before any code is written. A terminal classification: done, when all six done-conditions hold, or non-converged, naming which conditions fail.

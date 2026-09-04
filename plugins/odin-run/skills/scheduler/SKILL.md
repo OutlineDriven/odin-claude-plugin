@@ -12,7 +12,7 @@ description: 'Use when asked to set, list, pause, update, or delete a personal r
 | Trigger | The user asks to set a personal reminder or run a lightweight local task at a specific time or interval, or to list, pause, update, or delete an existing scheduled item. |
 | Authority | Reversible local: user-level scheduling only. A scheduled action that is itself destructive or irreversible is refused outright, not installed after confirmation. No admin elevation, no credentials, no remote mutation. Every mutation has a stated rollback path: remove the entry and its metadata record. |
 | Side effect | Creates, pauses, unpauses, deletes, or updates one named local scheduled item per confirmed request. Never modifies unrelated system schedules. |
-| Done | Every item exists in both the backend and the metadata record, and the user received a confirmation with name, action, human-readable time, and delivery method. |
+| Done | For create or update, the item exists in both the backend and the metadata record. For delete, the item is verified absent from both. In all cases, the user receives a confirmation with name, action, human-readable time, and delivery method. |
 
 ## Inputs
 
@@ -32,7 +32,7 @@ description: 'Use when asked to set, list, pause, update, or delete a personal r
    - Linux: write a systemd user timer unit plus service unit to `~/.config/systemd/user/`. Verify with `systemctl --user list-timers`. When systemd is unavailable, fall back to a crontab line installed with `crontab -l | { cat; echo "<line>"; } | crontab -`. Notifications use `notify-send` with terminal output as fallback.
    - Windows: create a Task Scheduler task using `schtasks /create`. Notifications use a PowerShell toast.
    One-shot entries are self-cleaning: after firing, the backend entry and metadata record are removed. Done when: the entry is installed in the backend.
-5. Verify the entry exists in the backend and the metadata record matches. Check the backend listing for the entry. Compare the backend entry's schedule and command against the metadata record. Confirm to the user with name, action, human-readable time, and delivery method. Done when: the backend entry and metadata record are both verified and the confirmation is shown.
+5. Verify the backend and metadata record match the requested action. For create or update, confirm the entry exists in both and the schedule and command match the metadata. For delete, confirm the entry and metadata record are both removed. Confirm to the user with name, action, human-readable time, and delivery method. Done when: the backend and metadata record are both verified against the action and the confirmation is shown.
 
 ## Failure and recovery
 

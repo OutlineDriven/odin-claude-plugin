@@ -1,6 +1,6 @@
 ---
 name: work
-description: 'Use when implementing from a plan or spec path, a clear build request, or a single settled ticket. Single-unit executor with two caller modes: orchestrated (stops after implementation and local verification, returns a structured result) and standalone (delegates finalization to review-and-ship). Never commits, pushes, or opens a PR. Don''t use for open-ended debugging (use debug), exploration, or read-only research.'
+description: 'Use when implementing from a plan or spec path, a clear build request, or a single settled ticket. Single-unit executor with two caller modes: orchestrated (stops after implementation and local verification, returns a structured result) and standalone (delegates finalization to review-and-ship). Never commits, pushes, or opens a PR. Don''t use for open-ended debugging (use figure-it-out), exploration, or read-only research.'
 disable-model-invocation: true
 ---
 

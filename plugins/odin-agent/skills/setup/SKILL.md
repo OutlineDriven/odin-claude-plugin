@@ -64,7 +64,7 @@ One concern: configure the agent environment. Four mechanisms reach it: credenti
 
 ## Pack install
 
-1. **Fetch and extract.** Download the source archive to a scratch location and extract it. **Done when:** the archive is downloaded and extracted to the scratch location.
+1. **Fetch and extract.** Download the source archive to a scratch location and extract it, rejecting any entry whose resolved path leaves the scratch directory or contains `..` path components (zip-slip). **Done when:** the archive is downloaded and extracted to the scratch location with no traversal entries.
 
 2. **Verify every file.** For every file in the extracted tree, compute its SHA-256 hash and compare it against the expected manifest. Fail on any mismatch. **Done when:** every extracted file's hash matches the expected manifest.
 

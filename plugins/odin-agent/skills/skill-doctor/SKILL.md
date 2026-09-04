@@ -12,7 +12,7 @@ description: 'Use when a user wants agent setup graded from conversation history
 | Trigger | User wants agent setup graded from conversation history. |
 | Authority | Reversible local: writes only to a scratch report directory under the current working tree; rollback is deleting that directory. No remote mutation. |
 | Side effect | Creates one scratch report directory containing report.html and supporting assets. Never modifies real skill files, configuration, or conversation history. |
-| Done | report.html exists in the scratch directory and renders normalized 0-10 scores for efficiency and code quality, per-turn findings with evidence citations, and ranked improvement suggestions. |
+| Done | report.html exists in the scratch directory and renders normalized 0-10 scores for efficiency and code quality, per-turn findings with evidence citations (or no findings when all sub-scores are maximum), and ranked improvement suggestions (or none when all sub-scores are maximum). |
 
 ## Inputs
 
@@ -83,7 +83,7 @@ description: 'Use when a user wants agent setup graded from conversation history
 
 8. **Verify report.**
    - Confirm report.html exists in the output directory.
-   - Confirm it contains the score summary, at least one finding, and at least one suggestion (unless the session was too short or had no history, in which case the minimal report satisfies the done predicate).
+   - Confirm it contains the score summary, at least one finding, and at least one suggestion (unless the session was too short or had no history, or all sub-scores are at maximum, in which case the minimal report satisfies the done predicate).
    Done when: report.html exists and contains the required sections.
 
 ## Failure and recovery
