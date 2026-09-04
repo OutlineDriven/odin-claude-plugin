@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to research a specific feature or functionality across competitor products. |
-| Authority | Remote: opens a pull request referencing the report; requires explicit human invocation and approval before publication or PR creation. No model-initiated publish, PR, or remote mutation. |
+| Authority | Remote: opens a pull request referencing the report only after a human approves publication and PR creation; requires explicit human invocation. The model researches and drafts; it never publishes, opens a PR, or mutates remote state on its own. |
 | Side effect | Writes a structured feature analysis report to reports/feature_research/ and opens a pull request referencing it. No other files, credentials, or remote mutation. |
 | Done | Report exists at reports/feature_research/ and includes TL;DR, per-competitor feature lists, a comparison table, gaps, risks, and insights, each non-obvious claim cited with a product-docs URL; a PR is open referencing the report. |
 

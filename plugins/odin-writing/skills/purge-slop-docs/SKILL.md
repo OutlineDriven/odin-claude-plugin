@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | A human explicitly asks to purge the docs, clean up stale Markdown, or reorder the documentation hierarchy. |
-| Authority | Human-gated: previews every whole-file deletion and its consequence and waits for a separate explicit approval before cutting; otherwise reversible local as above, inside the requested documentation tree only. |
+| Authority | Human-gated: previews every whole-file deletion and its consequence and waits for a separate explicit approval before cutting; every other write is reversible local, with version control as the rollback, inside the requested documentation tree only. |
 | Side effect | Edits, moves, and approved deletions within the bounded Markdown tree; do not alter vendored, dependency, generated, or marked auto-generated content. |
 | Done | Report per-class finding counts, edits applied versus findings left untouched, the separate approval for every deletion, and a passing check for every link or path affected by a move or rewrite. |
 

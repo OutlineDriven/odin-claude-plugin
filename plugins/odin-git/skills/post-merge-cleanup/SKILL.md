@@ -10,7 +10,7 @@ description: 'Use when a landed merge, release, or completed change needs its cl
 | Field | Bound contract |
 |---|---|
 | Trigger | A merge, release, or completed change has landed and its cleanup surface must be reconciled. |
-| Authority | Human-gated: previews and gets authorization before creating remote PRs or tickets for out-of-budget or escalated items; otherwise reversible local: writes only source files in a worktree; rollback is version control. No remote mutation without the gate. |
+| Authority | Human-gated: previews and gets authorization before creating remote PRs or tickets for out-of-budget or escalated items; otherwise reversible local: writes only source files in a worktree; rollback is version control. No remote mutation without the gate. States the rollback path before any mutation. |
 | Side effect | Reconciles stale TODOs, deprecation notices, feature flags, and documentation gaps. Makes bounded safe fixes or files tracked tickets with ownership assigned. |
 | Done | Each follow-up is either completed with focused verification or recorded as a ticket with an owner assigned or explicitly tracked. No unrelated refactor was smuggled in. |
 

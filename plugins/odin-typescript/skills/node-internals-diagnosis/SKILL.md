@@ -10,7 +10,7 @@ description: 'Use when deep diagnostics target Node.js segfaults, addon crashes,
 | Field | Bound contract |
 |---|---|
 | Trigger | Diagnosing native segfaults, addon crashes, native or heap memory leaks, event-loop anomalies, thread-pool saturation, unexplained V8 deoptimizations, or binding.gyp failures in Node.js. |
-| Authority | Reversible local: runs diagnostic binaries and writes only a diagnosis report; rollback is deleting the report. Does not modify code or restart services. No remote mutation. |
+| Authority | Reversible local: runs diagnostic binaries and writes only the diagnosis report and any diagnostic artifacts; rollback is deleting them. Does not modify code or restart services. No remote mutation. |
 | Side effect | Runs diagnostic binaries and produces local diagnostic artifacts; no file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Done | A diagnosis report names one root cause per accepted failure class with supporting tool evidence, or returns blocked with the named blocker. |
 

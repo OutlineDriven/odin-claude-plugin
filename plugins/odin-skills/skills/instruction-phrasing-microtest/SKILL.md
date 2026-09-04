@@ -10,7 +10,7 @@ description: 'Use when changing the wording of a rule in a skill, prompt templat
 | Field | Bound contract |
 |---|---|
 | Trigger | About to change the wording of a rule in a skill, prompt template, or agent instruction, where the change is meant to alter what the model produces. |
-| Authority | Reversible local: writes only a local results table file; rollback is deleting the results file. No remote mutation. No repository or VCS mutation. |
+| Authority | Reversible local: writes only a local results table file; rollback is deleting the results file. No remote mutation. No repository, VCS, credential, or paid mutation. |
 | Side effect | Runs a bounded set of cheap single-call model samples against variant system prompts and writes a scored results table. No repository mutation. |
 | Done | A results table exists comparing each variant against the control on programmatic markers, with every match hand-verified, and the adopted phrasing beats the control on the target metric without regressing the others, or the change is dropped as unmeasurable. |
 

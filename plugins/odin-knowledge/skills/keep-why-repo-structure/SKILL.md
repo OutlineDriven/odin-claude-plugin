@@ -10,7 +10,7 @@ description: 'Use when project documentation needs a layout or a knowledge item 
 | Field | Bound contract |
 |---|---|
 | Trigger | Introducing or restructuring a project's documentation layout, or deciding which file a piece of project knowledge belongs in. |
-| Authority | Reversible local: writes only the layout files this skill names, inside the local project; rollback is version control. No remote mutation. Never deletes pre-existing files. Never commits, pushes, or publishes. |
+| Authority | Reversible local: writes only the layout files this skill names, inside the local project; rollback is version control, restoring exactly the files this run touched. No remote mutation. Never deletes pre-existing files. Never commits, pushes, or publishes. |
 | Side effect | Proposes layout only where nothing suitable exists: topic-indexed context files (auth.md, sync.md, by topic, never per-source-file or per-decision), a lean load-bearing index.md, a short landing README.md; entries are flat files with one line per applicable Type, Status, Evidence, Source, Revisit-when, grep-filterable, no rigid frontmatter schema. |
 | Done | No near-duplicate topic files; index stays lean (detail loaded on relevance); every entry carries Status and Evidence at minimum; proportionality respected (sentence-level notes for self-evident choices); existing conventions preserved. |
 

@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | The user runs /workspace-unfreeze on a frozen path |
-| Authority | Human-gated: asks before deleting the freeze lock marker file; otherwise reversible local as above. |
+| Authority | Human-gated: requires explicit human invocation, previews the target marker file and the deletion consequence, and asks before deleting the freeze lock marker file; otherwise reversible local: deletes only the freeze lock marker file; rollback is recreating the marker file. No remote mutation. |
 | Side effect | Deletes the freeze lock marker file for the named path. The deletion is unrecoverable, but the marker is re-creatable by re-creating the `<path>.freeze-lock` file beside the path with content naming the target path |
 | Done | The named path is editable again (no freeze lock marker present for it) |
 

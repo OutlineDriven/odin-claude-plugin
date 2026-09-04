@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | The user explicitly says to save something to memory or scan this session for memories. |
-| Authority | Human-gated: requires explicit invocation, shows each proposed target and consequence, and obtains explicit confirmation for each proposal before changing durable memory data; otherwise reversible local as above. |
+| Authority | Human-gated: requires explicit invocation, shows each proposed target and consequence, and obtains explicit confirmation for each proposal before changing durable memory data; every other write is reversible local, with version control as the rollback. |
 | Side effect | Create or revise only confirmed `<type>_<slug>.md` files and their one-line `MEMORY.md` index entries inside the resolved `$MEMORY_DIR`; do not delete, audit, sanitize, or merge unrelated memories. |
 | Done | Every confirmed memory and index entry is written, read back, and shown to have valid YAML frontmatter; rejected and unconfirmed proposals remain unwritten. |
 

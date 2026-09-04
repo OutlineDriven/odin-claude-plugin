@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | A maintainer or collaborator explicitly asks to review and land one external pull request. |
-| Authority | Remote: merges or declines one external pull request, pushes maintainer commits, and posts approval and credit comments on GitHub; requires explicit human invocation. |
+| Authority | Remote: merges or declines one external pull request, pushes maintainer commits, and posts approval and credit comments on GitHub; requires explicit human invocation. Inspect and preview the exact landing branch, reviews, comments, and close or merge consequences before any credential use or remote mutation. |
 | Side effect | For an accepted contribution, create or update only `land/pr-<n>`, preserve the contributor's commits and authorship, add maintainer changes as separate commits, submit approval, land the result, and post a credit-bearing close comment. For a declined contribution, post thesis-tied reasons and retain the contributor branch. |
 | Done | Remote state confirms preserved authorship, separately attributed maintainer edits, approval before closure, a credit comment on closure, an explanation of any rename to the author, or a decline whose stated reasons are tied to the contribution's thesis and whose branch remains intact. |
 

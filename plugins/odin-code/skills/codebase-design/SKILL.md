@@ -10,7 +10,7 @@ description: 'Use when designing or improving a module interface, locating a sea
 | Field | Bound contract |
 |---|---|
 | Trigger | Designing or improving a module interface, locating a seam, increasing testability, or needing shared deep-module vocabulary. |
-| Authority | Reversible local: writes only the named module's files for local restructuring (recommendations go to chat); rollback is version control or undo (revert uncommitted edits). No remote mutation. |
+| Authority | Reversible local: writes only the named module's files for local restructuring (recommendations go to chat); rollback is version control or undo (revert uncommitted edits). No remote mutation. No credential or paid mutation. |
 | Side effect | Chat design recommendations plus optional local edits confined to the named module; no remote mutation. |
 | Done | The chosen module presents a small coherent interface, hides implementation complexity, concentrates change locally, and is testable through explicit seams. |
 

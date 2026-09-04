@@ -10,7 +10,7 @@ description: 'Use when a genealogical identity or relationship needs correlation
 | Field | Bound contract |
 |---|---|
 | Trigger | A genealogical identity or relationship needs correlation, conflict analysis, and negative-search proof. |
-| Authority | Human-gated: asks before paid access or living-person data; otherwise read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Human-gated: asks for approval before the run starts when paid access or living-person data is required; otherwise read-only with no file, VCS, credential, published, deployed, or remote mutation. |
 | Side effect | Genealogical proof note with correlation, conflict resolution, and classification. |
 | Done | The identity proposition is classified proved, disproved, likely, or possible with a proof note. |
 | Stop | Unresolved conflicts; blocked access; insufficient evidence. Bound: one proof question, approved repositories, date range, pass cap. |

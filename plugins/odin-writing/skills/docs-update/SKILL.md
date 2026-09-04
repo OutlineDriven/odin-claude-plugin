@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | The user asks to synchronize documentation with code changes and selects a local commit or a reviewable PR. |
-| Authority | Human-gated: the requested delivery selects the mode and never approves base-branch commits, version changes, unresolved narrative edits, or remote effects; otherwise reversible local as above. |
+| Authority | Human-gated: the requested delivery selects the mode and never approves base-branch commits, version changes, unresolved narrative edits, or remote effects; every other write is reversible local, with version control as the rollback. |
 | Side effect | Updates documentation from one bounded code-change set, then creates either local commit(s) or reviewable PR(s). |
 | Done | Every selected source commit and changed public surface is accounted for, documentation is internally consistent and redacted, and the requested delivery exists with links to its source commits. |
 

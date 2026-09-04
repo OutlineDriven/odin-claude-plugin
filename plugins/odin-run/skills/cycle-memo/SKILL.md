@@ -10,7 +10,7 @@ description: 'Use when a build, QA pass, demo, user complaint, or abandoned atte
 | Field | Bound contract |
 |---|---|
 | Trigger | After a build, QA pass, demo, user complaint, or abandoned attempt when the useful output is what the next pass must learn rather than the code itself. |
-| Authority | Reversible local: writes only local docs under the project; rollback is version control. No VCS, credential, published, deployed, or remote mutation. |
+| Authority | Reversible local: writes or refreshes only local docs under the project; rollback is restoring or deleting those docs. No VCS, credential, published, deployed, or remote mutation. |
 | Side effect | Writes or refreshes local docs for the cycle: a memo for lessons and a plan for next-cycle contracts, gates, and vocabulary. |
 | Done | Every lesson traces to observed cycle evidence; every anti-pattern names a concrete failure mode and the gate that catches it; no lesson is a single reported case in disguise (each covers a class with specifics as evidence); a fresh agent can tell what to preserve, discard, and test first without reading the whole old session. |
 

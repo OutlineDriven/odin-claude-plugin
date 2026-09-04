@@ -10,7 +10,7 @@ description: 'Use when the automatic trigger applies: after editing a durable ar
 | Field | Bound contract |
 |---|---|
 | Trigger | Fires automatically after editing a durable artifact, or when the user says "clean and true", "run the hygiene pass", or "taste your own output". |
-| Authority | Reversible local: writes only the just-changed durable artifact; rollback is version control. No VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Reversible local: writes only the just-changed durable artifact; rollback is restoring that artifact's prior on-disk content. No VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | May revise the just-changed local artifact through applicable hygiene passes only. |
 | Done | Every applicable hygiene route ran or has a stated skip reason; findings are applied or explicitly deferred; no-op when nothing improves. |
 

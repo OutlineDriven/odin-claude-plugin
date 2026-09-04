@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | Multi-commit work, stack edits, rebases, fixups, stacked-PR publishing, or mention of branchless, smartlog, git move, or git undo. |
-| Authority | Human-gated: previews the target and consequence before publishing or any remote bulk mutation; otherwise reversible local: writes only local git-branchless commits, moves, and restacks; rollback is version control. Never `rebase -i`, `reset --hard`, or force flags. |
+| Authority | Human-gated: previews the target and consequence before publishing, any remote bulk mutation, or any irreversible history change; otherwise reversible local: writes only local git-branchless commits, moves, and restacks; rollback is version control. Never `rebase -i`, `reset --hard`, or force flags. |
 | Side effect | Local git-branchless commits, moves, and restacks; publish paths submit or push remote stack state. Silently inert when branchless is absent. |
 | Done | Branchless idioms applied per the decision rubric with a publish gate, or an explicit not-initialized inert line. |
 

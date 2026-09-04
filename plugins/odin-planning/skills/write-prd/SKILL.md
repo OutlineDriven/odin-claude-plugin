@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to write a PRD, create a product spec, or draft requirements for a feature. |
-| Authority | Human-gated: previews and confirms credentials, paid actions, and remote publishing before execution; otherwise reversible local, writing only the PRD artifact. No remote mutation without approval. |
+| Authority | Human-gated: only runs on explicit invocation; previews and confirms credentials, paid actions, and remote publishing before execution; otherwise reversible local, writing only the PRD artifact. No remote mutation without approval. |
 | Side effect | Saves a PRD to reports/prds/; creates a GitHub PR; optionally exports to Google Docs, Notion, or Slack as separate user-initiated steps. |
 | Done | A PRD file exists at reports/prds/prd_<feature_slug>_YYYY-MM-DD.md containing all ten required sections in the order specified in the procedure. |
 

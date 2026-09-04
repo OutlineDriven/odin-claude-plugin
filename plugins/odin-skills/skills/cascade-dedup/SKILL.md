@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | Prompt-doctrine duplication, drift, or conflict across the cascade family. |
-| Authority | Human-gated: previews the target and consequence before rewriting prompt doctrine at rest, bumping the catalog `releaseVersion`, or editing authorized external harness embeds; otherwise reversible local as above. |
+| Authority | Human-gated: previews the target and consequence before rewriting prompt doctrine at rest, bumping the catalog `releaseVersion`, or editing authorized external harness embeds; every other write is reversible local, with version control as the rollback. |
 | Side effect | Rewrites cascade prefixes/tails, bumps the catalog `releaseVersion` and re-renders package surfaces, and edits authorized external embeds. |
 | Done | All canonical tails match, every strip is evidenced, divergence ledger complete, verification green. |
 

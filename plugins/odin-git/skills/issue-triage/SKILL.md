@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | Human invokes this skill on a new configured Slack issue report. |
-| Authority | Remote: posts at most one Slack thread verdict and creates at most one tracker issue; requires explicit human invocation. |
+| Authority | Remote: posts at most one Slack thread verdict and creates at most one tracker issue; requires explicit human invocation. Previews the target and consequence before any credential use, data-at-rest change, paid action, publishing, or remote mutation. |
 | Side effect | Posts at most one Slack thread verdict. Creates at most one tracker issue. |
 | Done | Exactly one classified verdict exists in the thread and tracker state is deduped. |
 

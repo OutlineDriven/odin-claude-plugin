@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | Authorized user needs to assess mobile-backend exposure from compiled Android APKs by extracting backend configuration and probing discovered endpoints for misconfiguration. |
-| Authority | Remote: mutates discovered backend endpoints (authentication, database, storage, cloud functions, remote config) with one small, uniquely named probe artifact per test that is deleted before reporting; requires explicit human invocation. Do not test any APK or backend project without written authorization for it. |
+| Authority | Remote: mutates discovered backend endpoints (authentication, database, storage, cloud functions, remote config) with one small, uniquely named probe artifact per test that is deleted before reporting; requires explicit human invocation. Before any probe that mutates remote state, presents the target endpoints and the exact probe mutations and gets operator confirmation. Do not test any APK or backend project without written authorization for it. |
 | Side effect | Remote mutation of discovered backend endpoints (authentication, database, storage, cloud functions, remote config) limited to one small, uniquely named probe artifact per test that is deleted before reporting. No bulk writes and no deletion of pre-existing data. |
 | Done | Every APK is classified as tested, failed, or no-config; every created probe artifact is deleted and verified gone; findings include evidence and remediation. |
 

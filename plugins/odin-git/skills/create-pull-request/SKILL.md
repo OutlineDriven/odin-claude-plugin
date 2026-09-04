@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to create a PR, open or update a draft PR, write or refresh a PR description, or summarize changes for review. |
-| Authority | Remote: creates or updates one GitHub PR; requires explicit human invocation. Preview the base branch, commits, title, and body before the remote mutation. |
+| Authority | Remote: creates or updates one GitHub PR; requires explicit human invocation. Preview the base branch, commits, title, body, and remote consequence before the remote mutation. |
 | Side effect | Creates or updates a GitHub PR with a descriptive title, commit title, and body; optionally as a draft. Remote mutation on GitHub, bounded to one PR for the current branch. |
 | Done | PR exists with a proper title, linked issue if any, and body following the project template (full mode) or an accurate title and body (quick mode); all commits are pushed; presubmit status is reported; in full mode the PR is open in the browser. For an update, the remote PR's title, body, draft state, head, and base match the preview. |
 

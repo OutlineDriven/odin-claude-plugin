@@ -12,7 +12,7 @@ Classify a non-trivial task against the 23-playbook index, execute the selected 
 | Field | Bound contract |
 |---|---|
 | Trigger | Apply the pstack rigor mode to non-trivial work: classify the task against the 23-playbook index and execute the matched playbook end-to-end. |
-| Authority | Human-gated: previews and obtains explicit human approval per action before push, PR creation, release, deployment, credential use, or branch or worktree deletion; approval for one does not authorize another; otherwise reversible local as above. |
+| Authority | Human-gated: previews and obtains explicit human approval per action before any remote or irreversible action (push, PR creation, release, deployment, credential use, branch or worktree deletion); approval for one does not authorize another; otherwise reversible local: executes the selected playbook's actions in the working tree, including code edits, test runs, agent dispatch, worktree creation, and PR workflow operations. |
 | Side effect | The selected playbook's actions are executed in the working tree; agents, worktrees, and PR workflow operations are dispatched as the playbook requires. |
 | Done | The selected playbook's required actions are completed per its contract in `references/playbooks.md`, and its real-surface done check passes: the observation the playbook names as its completion proof is made on the surface the user will actually use, not substituted by compilation, a worker report, a checked box, or source inspection. |
 | Invocation policy | model+human |

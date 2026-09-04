@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User says "atomic PRs" or requests one issue/PR per logical change. |
-| Authority | Remote: creates branches, commits, issues, and pull requests on a remote GitHub repository; requires explicit human invocation. |
+| Authority | Remote: creates branches, commits, issues, and pull requests on a remote GitHub repository; requires explicit human invocation. Preview the target repo and consequence before creating them. |
 | Side effect | Creates branches, commits, issues, and pull requests on a remote GitHub repository. Never force-pushes or pushes to protected branches without explicit user authorization. |
 | Done | One issue or PR per logical change on the correct base/head, links appended, URLs reported. |
 

@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | An agent is creating or updating a GitHub PR or issue body and needs local, redacted transcript provenance automatically when the session is hosted on openclaw.ai unless the user explicitly requests it |
-| Authority | Remote: appends to a PR or issue body on GitHub; requires explicit human invocation. Session discovery reads local agent logs only and uses no network. |
+| Authority | Remote: appends to a PR or issue body on GitHub; requires explicit human invocation. Previews the target and consequence before appending. Session discovery reads local agent logs only and uses no network. |
 | Side effect | A redacted, trimmed agent-transcript section is appended to a PR/issue body file or previewed locally; no raw logs, secrets, or unrelated turns are included; user approval is required |
 | Done | The inserted section is session-approved, relevant to the PR/issue, redacted, and wrapped in a collapsed details block; if no safe session is found or the user declines, the body continues with no placeholder |
 

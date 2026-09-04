@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | The user runs /skill-benchmark |
-| Authority | Human-gated: previews the benchmark target, judge or candidate models, rubric or task set, and estimated spend before any LLM call; otherwise reversible local as above. No skill, code, credential, or remote mutation. |
+| Authority | Human-gated: previews the benchmark target, judge or candidate models, rubric or task set, and estimated spend before any LLM call; every other write is reversible local, with version control as the rollback. No skill, code, credential, or remote mutation. |
 | Side effect | Writes benchmark artifacts under .gstack/benchmark-reports/ and incurs LLM inference spend. |
 | Done | A scored skill-quality report or model-comparison table is written and returned to the human. |
 

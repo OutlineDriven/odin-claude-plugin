@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | A human explicitly asks to compare one closed or stale tracker issue with current reality and mark it done or update it. |
-| Authority | Remote: closes, reopens, or updates one tracker issue; requires explicit human invocation. Inspect and propose freely before the gate. |
+| Authority | Remote: closes, reopens, or updates one tracker issue; requires explicit human invocation. Inspect and propose freely; the invoking human's explicit approval of the exact target and consequence precedes any remote mutation. |
 | Side effect | Close, reopen, or update only the single identified tracker issue; do not mutate other issues, pull requests, project fields, milestones, or repository content. |
 | Done | After approval and mutation, a fresh tracker read confirms that the issue state and approved content match current reality. |
 

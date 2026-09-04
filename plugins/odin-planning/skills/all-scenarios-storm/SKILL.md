@@ -10,7 +10,7 @@ description: 'Use when a user wants to enumerate plausible designs, configuratio
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants to enumerate plausible designs, configurations, scenarios, and implementation paths and diagram the finished field before choosing. |
-| Authority | Reversible local: writes only the enumerated field and diagram as local artifacts; rollback is deleting those artifacts. No remote mutation. |
+| Authority | Reversible local: writes only the enumerated field and diagram as local artifacts; rollback is deleting those artifacts. No remote mutation. No VCS or credential mutation. |
 | Side effect | An exhaustive field of designs/configs/scenarios/paths and a diagram. |
 | Done | An exhaustive field is enumerated and diagrammed before a choice is made. |
 

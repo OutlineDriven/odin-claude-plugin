@@ -10,7 +10,7 @@ description: 'Use when asked to judge whether this project should adopt, switch 
 | Field | Bound contract |
 |---|---|
 | Trigger | Explicit invocation to judge a technology, library, pattern, platform, or architecture against the current project, or to give a mid-session second opinion. |
-| Authority | Reversible local: writes only a run-specific scratch directory, the project-profile cache under `/tmp/odin/repo-profile/`, and an optional local report; rollback is deleting those artifacts. No remote mutation. |
+| Authority | Reversible local: writes only a run-specific scratch directory, the project-profile cache under `/tmp/odin/repo-profile/`, and an optional local report at a user-supplied path; rollback is deleting those artifacts. No project-file, VCS, credential, paid, or remote mutation. |
 | Side effect | Cache a question-agnostic repository profile and scout dossiers locally; return the verdict in chat by default. Delete the run scratch directory, any cache entry created by this run, and any optional report to roll back local writes. |
 | Done | A compact graded verdict passes both evidence floors, states its reversibility tier and confidence, cites the decisive evidence, records conditions and a tier-sized reversal trigger (Tier 2/3 only), and gives the computed next action; or an exact Hold result identifies the failed floor. |
 

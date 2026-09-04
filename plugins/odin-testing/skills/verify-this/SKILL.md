@@ -10,7 +10,7 @@ description: 'Use when a measurable claim needs before/after proof. Runs control
 | Field | Bound contract |
 |---|---|
 | Trigger | The user asks to test a measurable claim with before/after proof. |
-| Authority | Reversible local: writes only named local evidence artifacts; rollback is deleting them. No remote mutation. No VCS or credential mutation. States the rollback path before writing. |
+| Authority | Reversible local: writes only named local evidence artifacts; rollback is deleting them. No remote mutation. No VCS, credential, or paid mutation. |
 | Side effect | Runs probes and saves temporary evidence files locally. |
 | Done | VERIFIED, NOT VERIFIED, or INCONCLUSIVE classification with measured deltas between baseline and treatment. |
 

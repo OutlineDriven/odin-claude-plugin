@@ -10,7 +10,7 @@ description: 'Use when the user says "loop me" or asks to design a recurring wor
 | Field | Bound contract |
 |---|---|
 | Trigger | The user explicitly says "loop me," asks to design a workflow or automate a recurring task, or names a repeated routine such as morning or inbox processing. |
-| Authority | Reversible local: writes only `workflows/*.md` and `NOTES.md`; rollback is restoring prior content or removing newly created files. No remote mutation. |
+| Authority | Reversible local: writes only `workflows/*.md` and `NOTES.md`; rollback is restoring prior content or removing newly created files. No remote mutation. No VCS, credential, or paid mutation. |
 | Side effect | Maintain one local Markdown spec per workflow under `workflows/` and record only relevant raw context and canonical terminology in `NOTES.md` as answers resolve the design. |
 | Done | At least one workflow spec exists that an implementer can build without asking a question, and no question about that workflow remains unresolved. |
 

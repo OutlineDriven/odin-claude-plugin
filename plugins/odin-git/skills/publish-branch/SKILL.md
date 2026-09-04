@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to commit and push to the branch currently checked out, including the default branch. |
-| Authority | Remote: pushes local commits to `origin/<current-branch>`; requires explicit human invocation. Invoking on the checked-out branch (including `main`/`master`) is explicit authorization to push to that branch. |
+| Authority | Remote: pushes local commits to `origin/<current-branch>`; requires explicit human invocation. Invoking on the checked-out branch (including `main`/`master`) is explicit authorization to push to that branch. Preview the push target and consequence before pushing. |
 | Side effect | Creates local commits and pushes them to `origin/<current-branch>`. No branch creation, no branch switch, no force push, no PR. |
 | Done | Current branch is committed and pushed, or detached/diverged/no-origin state is reported without unsafe recovery. |
 

@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | A ticket DAG from a complete specification needs parallel execution. |
-| Authority | Human-gated: runs only on explicit human invocation and previews the exact target and consequence, then obtains explicit human approval, before using credentials, publishing commits or a pull request, mutating remote state, or deleting cleanup targets; otherwise reversible local as above. |
+| Authority | Human-gated: runs only on explicit human invocation and previews the exact target and consequence, then obtains explicit human approval, before using credentials, publishing commits or a pull request, mutating remote state, or deleting cleanup targets; every other write is reversible local, with version control as the rollback. |
 | Side effect | Create implementation commits in isolated worktrees, integrate them on the named branch, publish the approved branch and draft pull request, and remove only the previewed temporary worktrees and branches. |
 | Done | Every ticket is complete, the dependency frontier is empty, required checks pass, review has no unresolved actionable finding, and the green draft pull request exists. |
 

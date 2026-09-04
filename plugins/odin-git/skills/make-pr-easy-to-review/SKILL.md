@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | A human explicitly invokes this skill to reshape or annotate one pull request for review. |
-| Authority | Human-gated: previews the exact commits and consequences and receives explicit human consent before rewriting the named local branch history; otherwise reversible local: writes only the named local branch; rollback is version control. No remote mutation. |
+| Authority | Human-gated: previews the exact commits and consequences and receives explicit human consent before rewriting the named local branch history; otherwise reversible local: inspects and annotates the named pull request locally and writes only its local branch; rollback is version control. Never pushes, publishes, alters credentials, or mutates any remote. |
 | Side effect | May rewrite only the named local branch history. Preserve a recovery ref and use version control to restore the original history if recovery is needed. |
 | Done | The review surface accurately emphasizes risk, the revised commit sequence is coherent, and the final tree identity exactly matches the pre-rewrite intended tree. |
 
