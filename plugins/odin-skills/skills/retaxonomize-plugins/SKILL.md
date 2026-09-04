@@ -40,7 +40,7 @@ description: 'Use when skills must move between plugins, or plugins must be crea
 
 9. Regenerate every generator-owned surface with the project's render task, then run its check mode. Done when: the check reports every generated file in sync and `git status` shows no hand edit under a generated path.
 
-10. Rewrite the hand-authored install examples and plugin table in the root README from the catalog, and update every count literal the run changed. Recompute counts from generator output, never by hand. Done when: no retired id and no stale count remains in the authored set.
+10. Rewrite the hand-authored install examples and count prose in the root README, and update every count literal the run changed. Recompute counts from generator output, never by hand. The generated `## Plugins` table is owned by `just render`; do not hand-edit it. Done when: no retired id and no stale count remains in the authored set.
 
 11. Run the tree's gates: frontmatter, routes, manifests, generated surfaces, voice, and the installer's dry run over the whole tree. Done when: every gate exits 0.
 

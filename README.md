@@ -150,13 +150,13 @@ row below is what you add on top for that kind of work, and the rest of the 28 s
 
 | Working on | Add |
 |---|---|
-| Everyday code changes | `odin-run` |
+| Everyday code changes | `odin-run`, `odin-git` |
 | Large refactors, audits, bounded iteration | `odin-code`, `odin-review` |
 | A specific language | `odin-python`, `odin-typescript`, `odin-native`, `odin-apple`, or `odin-lean` |
 | Web and interface work | `odin-web`, `odin-design` |
 | Security review and hardening | `odin-security`, `odin-fuzzing` |
 | Research and technical writing | `odin-research`, `odin-knowledge`, `odin-writing` |
-| Product, planning, and new artifacts | `odin-planning`, `odin-product`, `odin-visual` |
+| Product, planning, and new artifacts | `odin-planning`, `odin-product`, `odin-visual`, `odin-testing` |
 | Building agents | `odin-agent`, `odin-skills` |
 | Infrastructure and data | `odin-infra` |
 
