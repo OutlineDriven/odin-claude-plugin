@@ -6,13 +6,7 @@ Edit `AGENTS.md`, never `CLAUDE.md`. `CLAUDE.md` is a symlink, so replacing it f
 
 ## Canonical baseline
 
-Make every persona or doctrine change in `system-prompt-baseline.md` first. It is the source of truth.
-
-Propagate each canonical change to all six output styles: `axiom-mode.md`, `builder.md`, `duet.md`, `linus.md`, `odin.md`, and `benchmark.md` under `plugins/odin-core/output-styles/`. The Claude Code loader does not resolve references, so each style must embed the full baseline at its tail. Keep the span from the charter `<role>` through EOF byte-identical to `system-prompt-baseline.md` from `<role>` onward.
-
-Perform propagation as one operation with one agent and one diff scope; never divide it by style.
-
-Use the baseline generator; never hand-propagate the cascade:
+Make every persona or doctrine change in `system-prompt-baseline.md`; it is the only source of truth. The Claude Code loader resolves no references, so each of the six output styles under `plugins/odin-core/output-styles/` embeds the full baseline as its tail, byte-identical from its second `<role>` through EOF. The generator owns that tail; never hand-propagate it:
 
 1. Edit `system-prompt-baseline.md` without changing an output style below its charter `<role>`.
 2. Run `python3 scripts/sync-baseline.py`. It replaces each style from its second `<role>` through EOF and preserves the persona preamble above it.
@@ -41,7 +35,7 @@ A skill is authored once, at `plugins/<plugin>/skills/<slug>/SKILL.md`. That pat
 
 Adding a skill means creating `plugins/<plugin>/skills/<slug>/SKILL.md` and running `just render`.
 
-Moving a skill between plugins means moving its directory. Nothing else records membership.
+Moving a skill between plugins means moving its directory. Nothing else records membership. For a batch of moves, or for creating, merging, or retiring a plugin, run the `retaxonomize-plugins` skill; it rewrites `catalog/plugins.json`, replaces retired ids in authored files, regenerates, and proves the gates.
 
 Each harness reads the immediate children of `skills/`, so a skill nested deeper than `skills/<slug>/` never loads.
 
@@ -65,7 +59,7 @@ Each harness dotdir manifest declares only what its own defaults do not already 
 
 Bump `releaseVersion` by one patch (`+0.0.1`) for every change that ships a skill, output style, manifest, or attribution; bump the minor version only on explicit request. Three authored copies carry the literal, and the bump commit updates all three: `catalog/plugins.json`, the literal in this file, and the sentence under the skill count in the root `README.md`. Run `just render` and commit the catalog with its generated output. Do not change `releaseVersion` for tooling-only changes such as pre-commit hooks or formatter configuration, or for edits to this file alone. Do not add or backfill `CHANGELOG.md` entries for routine version work; a bump that ships a skill or behavior change gets one entry.
 
-A plugin id names a job someone is doing or a stack they are working in. A tier suffix such as `-advanced` is not a job, and a grab-bag id that collects whatever fits is not one either; split by job instead.
+A plugin id names a job someone is doing or a stack they are working in. A tier suffix such as `-advanced` is not a job, and a grab-bag id that collects whatever fits is not one either; split by job instead. `scripts/check-plugin-surfaces.mjs` rejects a tier-suffixed id, so the rule fails a commit rather than a review.
 
 ## Devin skill mirror
 
@@ -74,7 +68,9 @@ project-scope path Devin reads. `scripts/sync-outline-skills.mjs` generates it f
 it is an export of the same skills rather than a sixth distribution surface.
 
 Regenerate it with `just sync-outline`. The default target is the sibling checkout
-`../outline-driven-development`; pass `--target <path>` for a clone elsewhere. The script mirrors
+`../outline-driven-development`, resolved from this tree's own parent directory, so from a clone
+under `.outline/worktree/` it points at a directory that does not exist; pass
+`--target <path-of-the-real-outline-checkout>` there. The script mirrors
 exactly the files git tracks under each skill directory, prunes anything under `.devin/skills/`
 that the plugin tree no longer carries, and refuses a target that does not hold both
 `manifest.json` and `.git`.
@@ -89,13 +85,15 @@ commit, and never from this repository.
 
 ## Skill metadata
 
-Frontmatter carries `name` and `description` and little else. `name` must equal the directory name, or `gh skill install` drops the skill. `description` must state a trigger a model can route on.
+Frontmatter carries `name` and `description` and little else. `name` must equal the directory name, or `gh skill install` drops the skill. `description` must open with a trigger a model can route on; `scripts/check-skill-routes.mjs` accepts `Use when ` and its listed variants and rejects `Use when,` or a bare imperative, and its first sentence becomes the generated `short_description`.
 
 Single-quote every frontmatter value containing `: `. Strict YAML parsers reject an unquoted colon-space even though Claude Code's loader accepts it, so it ships silently broken.
 
 Do not add a `license` field to a skill. This tree has mixed provenance and attribution lives in `licenses/NOTICE`; a uniform value would misstate the provenance of adapted skills.
 
 ## Verification
+
+Before a commit, run `just check`; it runs every hook in `.pre-commit-config.yaml` over the whole tree (`prek run --all-files`) and can repair the style cascade, so read `git status` afterwards. `just verify` adds `gh skill publish --dry-run`, which validates all 614 skills against the Agent Skills specification; its `recommended field missing: license` advisories are accepted, not fixed.
 
 Do not invent language test commands or add CI without an explicit request; this repository has no build, no unit-test suite, and no GitHub Actions workflow.
 
@@ -109,15 +107,15 @@ Ground every prompting claim in a current vendor guide. Re-fetch the guides in `
 
 ## External harness carriers
 
-Propagate every shared doctrine change to `~/.codex/AGENTS.md` and `~/.omp/agent/AGENTS.md`. The baseline generator does not update these external harness carriers.
+Propagate every shared doctrine change to `~/.codex/AGENTS.md` and `~/.omp/agent/AGENTS.md` with `just sync-carriers`, and prove it with `just sync-carriers-check` (`scripts/check-carriers.py` is the same gate as a pre-commit hook). The baseline generator does not touch these carriers.
 
-Preserve each carrier's harness-specific `<code_tools>` layer and tool names. Codex shells out through `rtk`; omp and Claude Code provide native file tools. Tool-layer differences are intentional, but shared rules must match `system-prompt-baseline.md`.
+Each carrier holds every shared section of the baseline byte for byte, `<change_discipline>` included. The four tool-layer sections, `<git>`, `<directives>`, `<code_tools>`, and `<thinking>`, differ by design and are compared for presence only: Codex shells out through `rtk`; omp and Claude Code provide native file tools.
 
 Edit both carriers in place. Never commit them from this repository, and never stage `~/.codex/config.toml`; their owning repositories live outside this submodule.
 
 ## Writing style
 
-Write content under this tree so each section is independently actionable. State a needed rule where the reader needs it instead of pointing backward with phrases such as "as discussed earlier", "see above", or "previously noted".
+Write content under this tree so each section is independently actionable: state a needed rule where the reader needs it, and let no sentence send the reader back to an earlier passage for it.
 
 Prefer a short repeated rule to a decorative inter-file pointer. Use a cross-reference only when the target itself is required for correct behavior, such as the byte-identical canonical baseline span.
 
