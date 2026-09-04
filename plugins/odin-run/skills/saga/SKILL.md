@@ -10,7 +10,7 @@ description: 'Use when a user runs saga or asks to autonomously build a sizable 
 | Field | Bound contract |
 |---|---|
 | Trigger | User runs saga or asks to autonomously build a sizable feature. |
-| Authority | Reversible local: writes specs and progress artifacts to the saga directory under `~/.sagas/` (rollback is deleting them) and worker artifacts in isolated git worktrees (rollback is version control). No remote mutation without explicit human approval. Validates each task to its criteria before integration; milestone-level validation gates progression; user acceptance is the terminal gate before integration to the target branch. |
+| Authority | Reversible local: writes specs and progress artifacts to the saga directory under `~/.sagas/` (rollback is deleting them) and worker artifacts in isolated git worktrees (rollback is version control). No remote mutation except a human-approved branch push or draft PR for remote-worker handoff. Validates each task to its criteria before integration; milestone-level validation gates progression; user acceptance is the terminal gate before integration to the target branch. |
 | Side effect | Creates a saga directory outside the repo and spawns workers in isolated git worktrees. |
 | Done | All tasks meet validation, milestones pass, user accepts. |
 
