@@ -4,6 +4,9 @@ Each supported surface, exercised against this tree rather than read from a docu
 2026-09-04 on branch `feat/prompt-stack-2.1` at `releaseVersion` 2.1.0, the tree of 28 job-named
 plugins and 614 skills.
 
+The counts below are the run's own: the tree held 614 skills that day and holds 608
+now; the live gate prints the current count.
+
 `docs/specs/distribution-surfaces.md` carries the specifications and their citations. This file
 carries only what was executed and what it returned.
 
