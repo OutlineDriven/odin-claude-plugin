@@ -100,6 +100,11 @@ If `INTERNAL_REPO` or `NOTIFICATION_TOKEN` is unset, stop and ask before running
 7. Post the status notification carrying the branch name and run URL. Use the destination the user named. If the user gave no destination, stop and ask for one. Send the notification through the configured endpoint:
 
    ```bash
+   if [ -z "$RUN_URL" ] || [ "$RUN_URL" = "null" ]; then
+     printf 'Blocked: no run URL for workflow %s on branch %s after dispatch at %s\n' \
+       "$RC_WORKFLOW_NAME" "$BRANCH_NAME" "$DISPATCH_TS" >&2
+     exit 1
+   fi
    JSON=$(jq -n --arg destination "$DESTINATION" --arg wf "$RC_WORKFLOW_NAME" --arg br "$BRANCH_NAME" --arg url "$RUN_URL" '{destination: $destination, text: ("Triggered " + $wf + " for " + $br + ".\nRun: " + $url)}')
    curl -s -X POST "$NOTIFICATION_ENDPOINT" \
      -H "Authorization: Bearer $NOTIFICATION_TOKEN" \
