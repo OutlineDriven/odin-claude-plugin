@@ -26,27 +26,28 @@ description: 'Use when asked to "interrogate" or run an adversarial multi-model 
 
 ## Procedure
 
-1. Receive and validate the code artifact and review scope. If the artifact is unreadable or absent, halt and report `blocked: artifact missing or unreadable`.
+1. Receive and validate the code artifact and review scope. If the artifact is unreadable or absent, halt and report `blocked: artifact missing or unreadable`. Done when: the artifact and review scope are received and validated, or a blocked result is reported.
 
-2. Load the shared rubric. Confirm it defines concrete evaluation criteria. If the rubric is absent or defines no criteria, halt and report `blocked: rubric missing or invalid`.
+2. Load the shared rubric. Confirm it defines concrete evaluation criteria. If the rubric is absent or defines no criteria, halt and report `blocked: rubric missing or invalid`. Done when: the rubric is loaded and confirmed to define concrete criteria, or a blocked result is reported.
 
-3. Select at least two distinct models from the reviewing model pool. If fewer than two are available, halt and report `blocked: insufficient model pool`.
+3. Select at least two distinct models from the reviewing model pool. If fewer than two are available, halt and report `blocked: insufficient model pool`. Done when: at least two distinct models are selected, or a blocked result is reported.
 
-4. Fan out one review request per model simultaneously. Send each model the same code artifact, review scope, and rubric. Do not share one model's output with another model before all reviews complete.
+4. Fan out one review request per model simultaneously. Send each model the same code artifact, review scope, and rubric. Do not share one model's output with another model before all reviews complete. Done when: one review request is sent to each selected model.
 
-5. Collect all individual reviews. If any review fails to return, proceed with the available reviews and record the missing model in the failure log.
+5. Collect all individual reviews. If any review fails to return, proceed with the available reviews and record the missing model in the failure log. Done when: all returned reviews are collected and missing models are recorded.
 
-6. Build an agreement map: for each evaluation criterion in the rubric, record which models agreed, which dissented, and the substance of each position.
+6. Build an agreement map: for each evaluation criterion in the rubric, record which models agreed, which dissented, and the substance of each position. Done when: the agreement map covers every rubric criterion with per-model positions.
 
 7. Identify the lead judgment model from the pool or default to the first reviewing model. Request a synthesis from that model only. The synthesis must:
    - Acknowledge the full agreement map.
    - State a clear final verdict for each rubric criterion.
    - Mark any criterion where consensus was reached versus where it was not.
    - Recommend one of four actions: **act**, **consider**, **note**, or **dismiss**.
+   Done when: the lead synthesis is requested with all four required elements.
 
-8. If the lead synthesis fails, skip synthesis and return all individual reviews with the agreement map. Do not block on synthesis.
+8. If the lead synthesis fails, skip synthesis and return all individual reviews with the agreement map. Do not block on synthesis. Done when: the lead synthesis is received or skipped with individual reviews and agreement map returned.
 
-9. Assemble the final report: verdict, agreement map, lead synthesis (if available), and any failure log. Return it as the terminal output.
+9. Assemble the final report: verdict, agreement map, lead synthesis (if available), and any failure log. Return it as the terminal output. Done when: the final report is assembled and returned as terminal output.
 
 ## Failure and recovery
 | Failure class | Partial-result rule | Blocked result |

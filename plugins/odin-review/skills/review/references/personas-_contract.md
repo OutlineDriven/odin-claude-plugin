@@ -24,7 +24,7 @@ A finding with no nameable reachable impact is P3. "Looks wrong" is not P0.
 
 `high`: you can cite the failing input or path. `med`: strong structural evidence, no repro. `low`: suspicion only. Do not pad with low-confidence findings; an empty list is valid output.
 
-## Tool order (ODIN fd-First [MANDATORY])
+## Tool order (ODIN fd-First)
 
 1. `fd -e <ext> -E <noise>` to discover candidate files (keep the set under ~50; narrow with `-E node_modules -E vendor -E dist`).
 2. `ast-grep run -p '<pattern>' -l <lang> -C 3` for structural matches: signatures, call sites.

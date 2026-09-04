@@ -116,3 +116,5 @@ Top-3 fixes: 1. Pick one direction (Intent + One-strong-moment).
 ```
 
 ### Anchor mode
+
+The register is loaded; subsequent responses hold the eleven anchors as imperatives. No table is emitted.

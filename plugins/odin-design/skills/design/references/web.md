@@ -6,7 +6,7 @@ Surface reference for HTML and vanilla CSS. Companion to `references/anti-slop.m
 
 ## 1. Posture
 
-Vanilla CSS 2026 carries surfaces React used to need a framework for. Container queries, `:has()`, nesting, `color-mix()`, OKLCH, `popover`, View Transitions, and (as of March 15 2026) subgrid are all Widely Available or Newly Available in Baseline, the gap that made build-tooling indispensable around 2020 has closed.
+Vanilla CSS 2026 carries surfaces without a framework. Container queries, `:has()`, nesting, `color-mix()`, OKLCH, `popover`, View Transitions, and (as of March 15 2026) subgrid are all Widely Available or Newly Available in Baseline.
 
 Reach for vanilla first; React only when state crosses surface boundaries (see `references/react.md` §1). Pulling in React for what `:has()` and `@container` already do is ceremony, and ceremony is the first slop tell on `references/anti-slop.md`.
 

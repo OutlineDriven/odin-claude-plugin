@@ -48,7 +48,7 @@ Your task is to answer three questions:
 
 3. **Is the issue not handled elsewhere?** Look for guards in callers, middleware in the request chain, framework defaults, type system constraints, or parallel handlers that already address the concern. If the issue is functionally prevented by surrounding infrastructure, the finding is invalid.
 
-Return ONLY this output, nothing else:
+Return only this output, nothing else:
 
 ```
 validated: true | false

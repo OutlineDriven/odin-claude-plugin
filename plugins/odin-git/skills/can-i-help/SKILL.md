@@ -69,7 +69,7 @@ description: 'Use when the user asks "where to help", "contribution opportunitie
    - Classify: **Pure deletion HIGH**: commented-out code that re-parses as old code with no live marker, or orphan export with no references and no entry reachability. **Contained refactor MEDIUM**: passthrough wrapper with all call sites visible; first step is call-site inventory, not deletion. **Bug investigation MEDIUM**: always-true/false condition; likely wrong predicate, not cleanup.
    - If any entry-reachability doubt remains, phrase as "cleanup candidate" and make the first step verification, not removal. **Done when:** each zero-behavior cleanup claim is verified or downgraded to a candidate with verification first.
 
-9. **Emit 2 to 5 recommendations.** Each MUST use the four-field shape:
+9. **Emit 2 to 5 recommendations.** Each uses the four-field shape so a contributor can act without re-reading the code:
    - What: exact file and line/range, function, issue number, or doc section. If issue-backed, include `#<number>` and still name the file once known.
    - Why: data-backed metric: bug-fix rate, test-gap touch count, zero doc coupling, broken symbol lookup, issue label, confidence score.
    - How: 2 to 3 sentences based on reading the file. Explain the local pattern, what would change, and why this is a bounded contribution. For tests, name the branch/case to cover. For docs, name the stale claim and the current code truth. For cleanup, state whether it is pure deletion, contained refactor, or bug investigation.

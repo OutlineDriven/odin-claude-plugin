@@ -68,7 +68,7 @@ Validate on blur, not on every keystroke. Exception: password strength meters.
 
 ## Modals: the inert approach
 
-Focus trapping in modals used to require complex JavaScript. Now use the `inert` attribute and the native `<dialog>` element.
+Use the `inert` attribute and the native `<dialog>` element for focus trapping in modals.
 
 ```html
 <main inert>

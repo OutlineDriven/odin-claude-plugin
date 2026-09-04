@@ -26,7 +26,7 @@ Optional:
 
 ## Procedure
 
-1. Iron Law gate: do not edit any Swift source until a `GET /state/snapshot` that reproduces the bug is captured. A fix without a reproducing snapshot is rejected.
+1. Do not edit any Swift source until a `GET /state/snapshot` that reproduces the bug is captured. A fix without a reproducing snapshot is rejected.
 2. Read the bug finding (description, screenshot, suspected accessibility-tree node).
 3. Drive the device into the bug state through the debug bridge: `POST /tap`, `POST /swipe`, `POST /type`, or `POST /state/<key>` (snapshot-eligible fields only).
 4. Capture `GET /state/snapshot` and write it to `test/fixtures/ios-fix/<bug-slug>-pre.json`.

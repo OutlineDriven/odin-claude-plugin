@@ -1,24 +1,30 @@
 # Per-ecosystem hook contents
 
-**Grounded: 2026-08-31**
+**Grounded: 2026-09-04**
 
-Node ecosystems: write `.husky/pre-commit`:
+These recipes match the SKILL.md manager selection: Lefthook for JavaScript/TypeScript and Go; prek for Python, Rust, and OCaml. Do not install ESLint, Prettier, Black, isort, or mypy; the SKILL.md forbids them.
 
+## JavaScript / TypeScript (Lefthook + Biome)
+
+`lefthook.yml`:
+
+```yaml
+pre-commit:
+  parallel: true
+  commands:
+    biome:
+      run: pnpm exec biome check --write --no-errors-on-unmatched .
+    typecheck:
+      run: pnpm run typecheck
+    test:
+      run: pnpm run test
 ```
-npx lint-staged
-<pm> run typecheck
-<pm> run test
-```
 
-Drop missing scripts and tell the user. Write `.lintstagedrc`:
+Drop the `typecheck` or `test` command when the repo declares no such script, and tell the user. Biome is the formatter and linter; do not add Prettier or ESLint.
 
-```json
-{ "*": "prettier --ignore-unknown --write" }
-```
+## Python (prek)
 
-Formatter policy is **out of scope** for this skill. Do not auto-create `.prettierrc`. If no Prettier config exists, surface that fact and ask the user.
-
-Python: write `.pre-commit-config.yaml`:
+`.pre-commit-config.yaml`:
 
 ```yaml
 repos:
@@ -31,36 +37,68 @@ repos:
     hooks:
       - id: pyright
         name: pyright
-        entry: pyright
+        entry: uv run pyright
         language: system
         pass_filenames: false
       - id: pytest
         name: pytest
-        entry: pytest -q
+        entry: uv run pytest -q
         language: system
         pass_filenames: false
         stages: [pre-commit]
 ```
 
-Go: write `lefthook.yml`:
+Run via `prek run --all-files`. Do not add Black, isort, or mypy; ruff and pyright cover formatting, linting, and typing.
+
+## Go (Lefthook)
+
+`lefthook.yml`:
 
 ```yaml
 pre-commit:
   parallel: true
   commands:
-    fmt:    { run: gofmt -l -w {staged_files} }
-    vet:    { run: go vet ./... }
-    test:   { run: go test -race ./... }
+    fmt:
+      run: gofmt -l -w {staged_files}
+    vet:
+      run: go vet ./...
+    test:
+      run: go test -race ./...
 ```
 
-Rust: `Cargo.toml`:
+## Rust (prek)
 
-```toml
-[dev-dependencies]
-cargo-husky = { version = "1", default-features = false, features = ["precommit-hook", "run-cargo-test", "run-cargo-clippy", "run-cargo-fmt"] }
+`.pre-commit-config.yaml`:
+
+```yaml
+repos:
+  - repo: local
+    hooks:
+      - id: cargo-fmt
+        name: cargo fmt
+        entry: cargo fmt --check
+        language: system
+        pass_filenames: false
+        types: [rust]
+      - id: cargo-clippy
+        name: cargo clippy
+        entry: cargo clippy --all-targets -- -D warnings
+        language: system
+        pass_filenames: false
+        types: [rust]
+      - id: cargo-test
+        name: cargo test
+        entry: cargo test
+        language: system
+        pass_filenames: false
+        types: [rust]
 ```
 
-OCaml: `.pre-commit-config.yaml`:
+Replace the `cargo-test` entry with `cargo nextest run` when nextest is installed; `entry` runs without a shell, so `||` fallbacks do not work there.
+
+## OCaml (prek)
+
+`.pre-commit-config.yaml`:
 
 ```yaml
 repos:
@@ -78,7 +116,9 @@ repos:
         pass_filenames: false
       - id: dune-test
         name: dune runtest
-        entry: dune runtest
+        entry: dune build @runtest
         language: system
         pass_filenames: false
 ```
+
+Use any stricter repository alias already declared when one exists.

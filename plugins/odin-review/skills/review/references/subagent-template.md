@@ -38,7 +38,7 @@ You produce a compact return to the parent with findings matching the schema:
 
 A finding with no nameable reachable impact is P3. "Looks wrong" is not P0.
 
-**False-positive suppression.** Do NOT emit a finding when any of these apply:
+**False-positive suppression.** Do not emit a finding when any of these apply:
 
 - Pre-existing issues unrelated to this diff (mark `pre_existing: true` only for unchanged code the diff does not interact with).
 - Pedantic style nitpicks a linter or formatter would catch.

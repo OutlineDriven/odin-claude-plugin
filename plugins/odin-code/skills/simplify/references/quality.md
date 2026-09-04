@@ -135,7 +135,7 @@ haven't confirmed is obsolete (check `git blame` for the original intent).
 If a proposed change would be longer or harder to follow than the original,
 don't flag it.
 
-NEVER SIMPLIFY AWAY A SAFETY CHECK:
+Do not simplify away a safety check:
 Input validation at trust boundaries, error handling that prevents data
 loss, security checks (authorization, escaping, sanitization), and
 accessibility affordances are not removable boilerplate — preserve them

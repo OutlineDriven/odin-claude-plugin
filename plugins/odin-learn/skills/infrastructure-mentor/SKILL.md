@@ -20,11 +20,11 @@ description: 'Use when a user, especially a new hire, asks for mentoring, guidan
 
 ## Procedure
 
-1. Clarify the user's specific question if it is ambiguous or too broad.
-2. Research the topic using available documentation, codebase knowledge, and the organization's infrastructure context.
-3. Synthesize findings into a clear, structured explanation.
-4. Cite sources explicitly: link to relevant docs, code locations, runbooks, or ADRs.
-5. Close with concrete next steps: what to read, try, or ask next.
+1. Clarify the user's specific question if it is ambiguous or too broad. Done when: a specific, scoped question is stated or the original question is already specific.
+2. Research the topic using available documentation, codebase knowledge, and the organization's infrastructure context. Done when: sufficient material is gathered to answer the scoped question, or the available material is exhausted and the gap is named.
+3. Synthesize findings into a clear, structured explanation. Done when: a structured explanation answering the scoped question is composed.
+4. Cite sources explicitly: link to relevant docs, code locations, runbooks, or ADRs. Done when: every claim in the explanation carries a source link or is marked unanchored.
+5. Close with concrete next steps: what to read, try, or ask next. Done when: at least one concrete next learning step is stated.
 
 ## Failure and recovery
 

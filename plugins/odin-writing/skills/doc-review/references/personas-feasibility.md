@@ -12,7 +12,7 @@ Read `Document type:` from your prompt; trust it, don't re-classify.
 - Stated performance/scale targets that conflict with the approach, only when the requirement names the target.
 - "What already exists?" When the doc proposes building something the codebase already covers.
 
-Do NOT, on requirements: trace shadow paths, check "could an engineer code tomorrow?", flag missing migration/rollback mechanics, missing dependency identification, or performance feasibility when no target is stated. Those are intentionally deferred; flagging them is noise.
+Do not, on requirements: trace shadow paths, check "could an engineer code tomorrow?", flag missing migration/rollback mechanics, missing dependency identification, or performance feasibility when no target is stated. Those are intentionally deferred; flagging them is noise.
 
 **plan / interface-heavy spec**: run the full check below.
 

@@ -86,8 +86,8 @@ Confidence rubric — pick the single anchor whose behavioral criterion can be h
 Anchor and severity are independent axes. Anchor gates where the finding surfaces (drop/FYI/actionable); severity orders it within the actionable surface.
 
 autofix_class — set by whether there is one clear correct fix, not by severity:
-- safe_auto: one clear correct fix, applied silently. Eligible: typo, wrong count, missing list entry derivable elsewhere, stale internal cross-reference, terminology drift, summary/detail mismatch (body authoritative), prose-vs-prose contradiction where one passage is more detailed, missing step mechanically implied, unstated threshold implied by context. Always include suggested_fix. Factually incorrect behavior is gated_auto, not safe_auto.
-- gated_auto: a concrete fix exists but touches document meaning/scope/author intent and warrants one-click confirmation. Use for substantive additions implied by the document's own decisions, codebase-pattern-resolved fixes, framework-native-API substitutions, missing standard security/reliability controls, factually incorrect behavior where the correct behavior is derivable. Always include suggested_fix.
+- safe_auto: one clear correct fix, applied silently. Eligible: typo, wrong count, missing list entry derivable elsewhere, stale internal cross-reference, terminology drift, summary/detail mismatch (body authoritative), prose-vs-prose contradiction where one passage is more detailed, missing step mechanically implied, unstated threshold implied by context. always include suggested_fix. Factually incorrect behavior is gated_auto, not safe_auto.
+- gated_auto: a concrete fix exists but touches document meaning/scope/author intent and warrants one-click confirmation. Use for substantive additions implied by the document's own decisions, codebase-pattern-resolved fixes, framework-native-API substitutions, missing standard security/reliability controls, factually incorrect behavior where the correct behavior is derivable. always include suggested_fix.
 - manual: requires user judgment — genuinely multiple valid approaches. Include suggested_fix only when the fix is obvious despite the judgment call.
 
 Strawman-aware classification: when listing alternatives to the primary fix, count only alternatives a competent implementer would genuinely weigh. A "do nothing / accept the defect" option is the failure state, not an alternative. If the only alternatives are strawmen, the finding is safe_auto or gated_auto, not manual. If safe_auto is classified via strawman-dismissal, name the dismissed alternatives in why_it_matters; when any non-strawman alternative exists, downgrade to gated_auto.
@@ -115,7 +115,7 @@ Advisory observations route to FYI (anchor 50), do not force a decision — but 
 Rules:
 - Act as a leaf reviewer inside an already-running doc-review workflow. Do not invoke doc-review skills or agents. Perform the analysis directly and return findings JSON only.
 - Suppress any finding that cannot be honestly anchored at 50 or higher. If the persona sets a stricter floor, honor it.
-- Every finding MUST include at least one evidence item — a direct quote from the document.
+- Every finding must include at least one evidence item — a direct quote from the document.
 - Operationally read-only. Do not edit the document, create files, or make changes.
 - Exclude prior-round deferred entries from review scope; do not emit findings to note prior-round resolutions (use residual_risks for "verified landed" observations; synthesis checks fix-landed status automatically).
 - When no issues are found, return an empty findings array; still populate residual_risks and deferred_questions if applicable.
@@ -281,7 +281,7 @@ Default: report findings inline; write nothing. The reviewed document and the re
 ```
 git add docs/reviews/<doc-slug>-review.md
 ```
-Never `git add -A` / `git add .`. Never stage the reviewed document. Commit by the repo's normal flow.
+Never `git add -A` / `git add .` because staging everything risks committing the reviewed document or unrelated files. Never stage the reviewed document; only the review-record file is staged. Commit by the repo's normal flow.
 ## Failure and recovery
 - Document not resolvable: empty/missing candidate set → say so in one line and exit; launch no agents. Headless with no path → `Review failed: headless mode requires a document path.` and exit.
 - Subagent failure or timeout: proceed with findings from subagents that completed; note the failed reviewer in Coverage. Never block the entire review on a single reviewer failure.

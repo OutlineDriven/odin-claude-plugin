@@ -23,7 +23,7 @@ Required:
 Optional:
 - Mode (optional): optimize (default) or audit. Audit when the request names auditing, dated instructions, cruft, or a model migration; optimize otherwise. When a request asks for both, run audit first and report each result separately.
 - Known failure cases or error patterns from prior runs
-- Model family or adapter context (e.g., Claude, GPT-4, Gemini); audit mode reads this as the target model
+- Model family or adapter context (e.g., Claude, GPT-5.6, Gemini); audit mode reads this as the target model
 - Evaluation criteria the user already accepts
 
 ## Procedure

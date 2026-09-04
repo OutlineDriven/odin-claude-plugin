@@ -1,6 +1,6 @@
 ---
 name: ruzzy
-description: 'Use when asked to set up and run coverage-guided fuzzing of Ruby code or C extensions with Ruzzy, producing crash reports or clean campaign summaries. Not for C/C++ fuzzing: use fuzzing.'
+description: 'Use when asked to set up and run coverage-guided fuzzing of Ruby code or C extensions with Ruzzy, producing crash reports or clean campaign summaries. Not for C/C++ fuzzing: use libfuzzer or aflpp.'
 ---
 
 # Ruzzy fuzzing campaign
@@ -22,15 +22,15 @@ Optional: corpus directory path, libFuzzer arguments (e.g., `-max_len=1024`), cr
 
 ## Procedure
 
-1. Confirm target: pure Ruby (requires tracer) or C extension (single harness).
-2. Confirm sanitizer: ASan (`Ruzzy::ASAN_PATH`) or UBSan (`Ruzzy::UBSAN_PATH`).
-3. For pure Ruby targets, write a tracer script calling `Ruzzy.trace('harness.rb')` and a separate harness script calling `Ruzzy.fuzz(test_one_input)`. For C extensions, write one harness script calling `Ruzzy.fuzz(test_one_input)`; no tracer required.
-4. Write the harness as a lambda named `test_one_input` that accepts data and returns `0`. Catch Ruby exceptions in C extension harnesses; let them propagate in pure Ruby harnesses.
-5. Set `ASAN_OPTIONS=allocator_may_return_null=1:detect_leaks=0:use_sigaltstack=0`. Do not export `LD_PRELOAD`; use it inline with the ruby command.
-6. Install the gem with clang and sanitizer flags: `CC`, `CXX`, `LDSHARED`, `LDSHAREDXX` pointing to clang; `CFLAGS` and `CXXFLAGS` containing `-fsanitize=address,fuzzer-no-link -fno-omit-frame-pointer -fno-common -fPIC -g`.
-7. Run: `LD_PRELOAD=$(ruby -e 'require "ruzzy"; print Ruzzy::<SAN>_PATH') ruby <harness-or-tracer>.rb [corpus] [libfuzzer-options]`.
-8. On `ERROR: AddressSanitizer:` or `ERROR: UndefinedBehaviorSanitizer:`, capture the crash file path, Base64 content, and reproducer command. Write `crash-*` files to the working directory.
-9. To reproduce a saved failure, run the same command passing the crash file path as the final argument.
+1. Confirm target: pure Ruby (requires tracer) or C extension (single harness). Done when: the target kind is confirmed as pure Ruby or C extension.
+2. Confirm sanitizer: ASan (`Ruzzy::ASAN_PATH`) or UBSan (`Ruzzy::UBSAN_PATH`). Done when: the sanitizer is selected and its `Ruzzy::<SAN>_PATH` is confirmed.
+3. For pure Ruby targets, write a tracer script calling `Ruzzy.trace('harness.rb')` and a separate harness script calling `Ruzzy.fuzz(test_one_input)`. For C extensions, write one harness script calling `Ruzzy.fuzz(test_one_input)`; no tracer required. Done when: the harness and, for pure Ruby, the tracer script are written.
+4. Write the harness as a lambda named `test_one_input` that accepts data and returns `0`. Catch Ruby exceptions in C extension harnesses; let them propagate in pure Ruby harnesses. Done when: the harness lambda is written with the correct exception handling for the target kind.
+5. Set `ASAN_OPTIONS=allocator_may_return_null=1:detect_leaks=0:use_sigaltstack=0`. Do not export `LD_PRELOAD`; use it inline with the ruby command. Done when: `ASAN_OPTIONS` is set and `LD_PRELOAD` is prepared for inline use.
+6. Install the gem with clang and sanitizer flags: `CC`, `CXX`, `LDSHARED`, `LDSHAREDXX` pointing to clang; `CFLAGS` and `CXXFLAGS` containing `-fsanitize=address,fuzzer-no-link -fno-omit-frame-pointer -fno-common -fPIC -g`. Done when: the gem is installed with clang and sanitizer flags.
+7. Run: `LD_PRELOAD=$(ruby -e 'require "ruzzy"; print Ruzzy::<SAN>_PATH') ruby <harness-or-tracer>.rb [corpus] [libfuzzer-options]`. Done when: the fuzzer runs with the correct `LD_PRELOAD` and harness.
+8. On `ERROR: AddressSanitizer:` or `ERROR: UndefinedBehaviorSanitizer:`, capture the crash file path, Base64 content, and reproducer command. Write `crash-*` files to the working directory. Done when: any sanitizer error is captured with crash file path, content, and reproducer command, or the campaign completes without error.
+9. To reproduce a saved failure, run the same command passing the crash file path as the final argument. Done when: the saved failure is reproduced or confirmed non-reproducible.
 
 ## Failure and recovery
 | Failure class | Meaning | Recovery |

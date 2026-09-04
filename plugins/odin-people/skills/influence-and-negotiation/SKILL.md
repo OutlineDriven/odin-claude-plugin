@@ -24,7 +24,7 @@ description: 'Use when an agreement-seeking interaction arises, including mid-co
 
 ## Procedure
 
-1. **Classify mode.** If the user supplies a transcript or describes an active exchange, set mode to `live`. If the user describes a concluded interaction, set mode to `debrief`. Otherwise set mode to `prepare`.
+1. **Classify mode.** If the user supplies a transcript or describes an active exchange, set mode to `live`. If the user describes a concluded interaction, set mode to `debrief`. Otherwise set mode to `prepare`. Done when: mode is set to `prepare`, `live`, or `debrief` based on the interaction state.
 
 2. **Map the Mandascan five points.** For every party, identify and record:
    - Interests: underlying needs, not stated positions.
@@ -32,11 +32,11 @@ description: 'Use when an agreement-seeking interaction arises, including mid-co
    - Legitimacy: objective criteria, precedent, or norms each side can cite.
    - Commitment: what each party can credibly promise and enforce.
    - Communication: channel, tone, and relationship quality between parties.
-   If evidence is missing for a point, mark it as unknown rather than inventing it.
+   If evidence is missing for a point, mark it as unknown rather than inventing it. Done when: all five Mandascan points are recorded for every party, with missing evidence marked unknown.
 
-3. **Identify the axis of agreement.** Determine the single dimension along which the parties' interests most overlap or where the largest joint gain exists. State it explicitly.
+3. **Identify the axis of agreement.** Determine the single dimension along which the parties' interests most overlap or where the largest joint gain exists. State it explicitly. Done when: the dimension of greatest overlap or joint gain is stated explicitly.
 
-4. **Draw the influence-not-manipulation line.** Every tactic proposed must pass this test: would the tactic remain effective if the counterparty understood it was being used? If yes, include it. If no, discard it. Persuasion through shared value, legitimate framing, and transparent reasoning is in scope. Deception, coercion, exploitation of cognitive biases for asymmetric gain, and information asymmetry maintained by concealment are out of scope.
+4. **Draw the influence-not-manipulation line.** Every tactic proposed must pass this test: would the tactic remain effective if the counterparty understood it was being used? If yes, include it. If no, discard it. Persuasion through shared value, legitimate framing, and transparent reasoning is in scope. Deception, coercion, exploitation of cognitive biases for asymmetric gain, and information asymmetry maintained by concealment are out of scope. Done when: every proposed tactic has passed or failed the transparency test, with out-of-scope tactics discarded.
 
 5. **Execute mode-specific procedure:**
 
@@ -59,11 +59,11 @@ description: 'Use when an agreement-seeking interaction arises, including mid-co
    b. Score each Mandascan point: was it accurately assessed beforehand? Where was the assessment wrong?
    c. Identify pathologies: anchoring bias, reactive devaluation, escalating commitment, mythical fixed pie, premature closure, or loss of face.
    d. For each pathology found, name the moment it occurred, what it cost, and what an alternative response would have been.
-   e. Extract transferable lessons: what to prepare differently, what tactic worked, and what to avoid.
+   e. Extract transferable lessons: what to prepare differently, what tactic worked, and what to avoid. Done when: the mode-specific artifact (mandate and MAP, response scripts, or retrospective debrief) is produced following the sub-steps for the selected mode.
 
-6. **Back-brief.** Before delivering the output, verify that every recommendation traces to a Mandascan point or an observed move. Remove any recommendation that cannot be grounded in evidence from the inputs.
+6. **Back-brief.** Before delivering the output, verify that every recommendation traces to a Mandascan point or an observed move. Remove any recommendation that cannot be grounded in evidence from the inputs. Done when: every recommendation traces to a Mandascan point or observed move, and ungrounded recommendations are removed.
 
-7. **Dispatch research if needed.** If a counterparty profile, organizational context, or domain fact is material but missing, dispatch a read-only web research sub-agent to gather it. Integrate findings into the Mandascan map. If research returns nothing useful, proceed with what is available and note the gap.
+7. **Dispatch research if needed.** If a counterparty profile, organizational context, or domain fact is material but missing, dispatch a read-only web research sub-agent to gather it. Integrate findings into the Mandascan map. If research returns nothing useful, proceed with what is available and note the gap. Done when: research is either dispatched and integrated or the gap is noted and the skill proceeds with available information.
 
 ## Failure and recovery
 - Insufficient information: if the situation description is too vague to map even one Mandascan point, ask the user for clarification on the specific missing points rather than proceeding with an empty map.

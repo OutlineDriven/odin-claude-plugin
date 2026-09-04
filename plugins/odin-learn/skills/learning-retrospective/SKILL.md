@@ -22,14 +22,14 @@ description: 'Use when asked to review learning progress after a milestone. Prod
 
 ## Procedure
 
-1. Confirm read-only authority. Do not modify any file, repository, credential, or remote resource.
-2. Collect the milestone definition and all supplied evidence of progress. If evidence is absent or insufficient, stop and report the gap; do not invent evidence.
-3. Review the evidence against the milestone criteria. Classify each criterion as met, partially met, or unmet, citing the specific artifact or record that supports the classification.
-4. Identify gaps between the milestone definition and the observed evidence. For each gap, state what was expected and what was actually produced.
-5. Analyze which learning strategies, resources, or approaches were effective and which were not, grounded only in the supplied evidence.
-6. Propose adjustments to the learning plan: what to continue, what to change, what to drop, and what to add. Each adjustment must cite the evidence that motivates it.
-7. Define the next milestone. It must be specific, measurable, and achievable based on the current trajectory. State the success criteria explicitly.
-8. Assemble the learning-retrospective report per the Output section.
+1. Confirm read-only authority. Done when: read-only authority is confirmed and no mutation has been performed.
+2. Collect the milestone definition and all supplied evidence of progress. If evidence is absent or insufficient, stop and report the gap; do not invent evidence. Done when: the milestone definition and all supplied evidence are collected, or the gap is reported and the run stops.
+3. Review the evidence against the milestone criteria. Classify each criterion as met, partially met, or unmet, citing the specific artifact or record that supports the classification. Done when: every milestone criterion is classified with a cited supporting artifact or record.
+4. Identify gaps between the milestone definition and the observed evidence. For each gap, state what was expected and what was actually produced. Done when: every gap is stated with its expected and observed values.
+5. Analyze which learning strategies, resources, or approaches were effective and which were not, grounded only in the supplied evidence. Done when: each strategy is assessed as effective or not with its evidentiary basis.
+6. Propose adjustments to the learning plan: what to continue, what to change, what to drop, and what to add. Each adjustment must cite the evidence that motivates it. Done when: every adjustment is stated with its motivating evidence cited.
+7. Define the next milestone. It must be specific, measurable, and achievable based on the current trajectory. State the success criteria explicitly. Done when: the next milestone is stated with explicit, measurable success criteria.
+8. Assemble the learning-retrospective report per the Output section. Done when: the report is assembled with all five Output sections present.
 
 ## Failure and recovery
 - Insufficient evidence: report which criteria cannot be evaluated and why. Do not fill gaps with assumptions. Ask the learner to supply missing artifacts before proceeding.

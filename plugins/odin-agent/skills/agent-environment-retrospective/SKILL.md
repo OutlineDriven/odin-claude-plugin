@@ -21,12 +21,12 @@ description: 'Use when a completed session needs an agent-environment retrospect
 
 ## Procedure
 
-1. **Gather inputs.** Receive the session artifact and any supplied environment context.
-2. **Identify friction.** Scan the session artifact for patterns where the agent's environment created friction: tool failures, slow retries, missing context, state loss, repeated navigation, or unclear feedback.
-3. **Classify candidates.** Assign each friction point a type: `tool-failure`, `slow-retry`, `missing-context`, `state-loss`, `navigation-overhead`, or `unclear-feedback`.
-4. **Rank by severity.** Order candidates: high (blocks progress) → medium (degrades efficiency) → low (minor friction). When severity ties, prefer candidates with stronger evidence.
-5. **Validate evidence.** For each candidate, confirm the named evidence appears in the session artifact. Candidates without traceable evidence are omitted.
-6. **Return report.** Output the severity-ranked candidate report.
+1. **Gather inputs.** Receive the session artifact and any supplied environment context. Done when: the session artifact is received and any supplied environment context is noted.
+2. **Identify friction.** Scan the session artifact for patterns where the agent's environment created friction: tool failures, slow retries, missing context, state loss, repeated navigation, or unclear feedback. Done when: every friction pattern in the artifact is identified or the artifact is confirmed friction-free.
+3. **Classify candidates.** Assign each friction point a type: `tool-failure`, `slow-retry`, `missing-context`, `state-loss`, `navigation-overhead`, or `unclear-feedback`. Done when: every identified friction point has an assigned type.
+4. **Rank by severity.** Order candidates: high (blocks progress) → medium (degrades efficiency) → low (minor friction). When severity ties, prefer candidates with stronger evidence. Done when: candidates are ordered by severity with ties broken by evidence strength.
+5. **Validate evidence.** For each candidate, confirm the named evidence appears in the session artifact. Candidates without traceable evidence are omitted. Done when: every candidate is either confirmed against traceable evidence or omitted.
+6. **Return report.** Output the severity-ranked candidate report. Done when: the report is emitted with every surviving candidate carrying type, evidence, severity, and friction_removed.
 
 ## Failure and recovery
 - No session artifact: return an empty report stating "No session artifact supplied."

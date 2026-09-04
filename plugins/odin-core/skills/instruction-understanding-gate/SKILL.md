@@ -22,18 +22,18 @@ The user's instruction and all readable context: the current message, session hi
 
 ## Procedure
 
-1. **Check the read signal.** Recognize when the instruction is long, multi-part, ambiguous in scope or referents, deliberately flexible, or high-stakes enough that a wrong read costs real work. If none of these signals are present, stop.
+1. **Check the read signal.** Recognize when the instruction is long, multi-part, ambiguous in scope or referents, deliberately flexible, or high-stakes enough that a wrong read costs real work. If none of these signals are present, stop. Done when: the instruction is classified as gate-worthy or not; if not, stopped.
 
-2. **Restate the instruction.** Paraphrase the instruction in the agent's own words. Do not copy the user's wording and treat that as understanding.
+2. **Restate the instruction.** Paraphrase the instruction in the agent's own words. Do not copy the user's wording and treat that as understanding. Done when: the instruction is paraphrased in the agent's own words, not copied from the user.
 
-3. **Cross-check against context.** Compare the restatement against all available context: the current message, session history, project memory, files on disk, and established conventions. Look for contradictions, missing antecedents, or two plausible readings that context cannot choose between.
+3. **Cross-check against context.** Compare the restatement against all available context: the current message, session history, project memory, files on disk, and established conventions. Look for contradictions, missing antecedents, or two plausible readings that context cannot choose between. Done when: the restatement is cross-checked against all available context and any contradictions, missing antecedents, or unresolvable forks are identified.
 
 4. **Gate decision.**
 
    - If context resolves every fork: proceed silently. Do not surface a question for a resolved or unambiguous request.
-   - If a genuine fork survives: surface one specific clarifying question anchored to the restated understanding. Name the choice; do not ask a vague "does this look right?" question.
+   - If a genuine fork survives: surface one specific clarifying question anchored to the restated understanding. Name the choice; do not ask a vague "does this look right?" question. Done when: the gate decision is made: proceed silently if context resolves every fork, or one specific clarifying question is surfaced if a genuine fork survives.
 
-5. **Log substantial work.** Before beginning substantial work, write one durable "understood as: ..." log line so a later reader can audit whether the work matched the confirmed read. Substantial work includes plans, multi-file changes, irreversible actions, or work a fresh reviewer may need to audit. A routine single-turn response does not need a log.
+5. **Log substantial work.** Before beginning substantial work, write one durable "understood as: ..." log line so a later reader can audit whether the work matched the confirmed read. Substantial work includes plans, multi-file changes, irreversible actions, or work a fresh reviewer may need to audit. A routine single-turn response does not need a log. Done when: the understood-as log line is written for substantial work, or the work is confirmed as routine and needs no log.
 
 ## Failure and recovery
 | Failure class | Result |

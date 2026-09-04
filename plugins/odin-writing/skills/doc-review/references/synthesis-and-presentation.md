@@ -80,14 +80,14 @@ Document reviews often produce fanout: a single premise challenge ("is this work
 
 Run this step after 3.5b (recommended_action normalized) and before 3.9 (auto-promotion), operating on the merged finding set.
 
-**Step 1: Identify roots.** A finding is a candidate root when ALL of the following hold:
+**Step 1: Identify roots.** A finding is a candidate root when all of the following hold:
 
 - Severity is `P0` or `P1` (premise-level issues carry high priority by nature)
 - `autofix_class` is `manual` (the root itself requires judgment; a safe/gated root is acted on, not cascaded)
 - `why_it_matters` or `title` challenges a foundational premise, not a detail. Signal phrases (shape, not vocabulary): "premise unsupported", "justification missing", "do-nothing baseline not evaluated", "is X justified", "unsupported by evidence", "is the proposed solution the right approach"
 - The finding's `section` is framing-level (Problem Frame, Summary, Overview, Why, Motivation, Goals) OR the finding explicitly questions whether a named component should exist
 
-If multiple candidates match the criteria, elevate ALL of them. The criteria above are restrictive enough that this list will be short for any well-formed document; rely on the criteria alone to bound the list size. Picking only one root when two valid roots exist leaves the second root's natural dependents stranded as independent manual findings.
+If multiple candidates match the criteria, elevate all of them. The criteria above are restrictive enough that this list will be short for any well-formed document; rely on the criteria alone to bound the list size. Picking only one root when two valid roots exist leaves the second root's natural dependents stranded as independent manual findings.
 
 **Peer vs nested test.** Two candidate roots are peers when accepting root A's proposed fix would not resolve root B's concern (and vice versa). They are nested when one root's fix would moot the other; in which case the subsumed candidate becomes a dependent of the surviving root, not a peer root.
 
@@ -119,7 +119,7 @@ Preserve each finding's class, route, and confidence anchor in this step. Linkin
 
 **Step 5: Report in Coverage.** Add a line to the coverage summary: `Chains: N root(s) with M total dependents`. When N = 0, omit the line.
 
-**Count invariant.** `M` in the coverage line is the number of findings with `depends_on` set after Step 4 completes. If a finding appears in a root's `dependents` array, it MUST appear nested under that root in the presentation, and that nested position MUST be its only appearance in the output.
+**Count invariant.** `M` in the coverage line is the number of findings with `depends_on` set after Step 4 completes. If a finding appears in a root's `dependents` array, it must appear nested under that root in the presentation, and that nested position must be its only appearance in the output because each finding counts exactly once in the coverage total.
 
 ### 3.9 Promote auto-eligible findings
 
@@ -156,7 +156,7 @@ Findings reaching 3.10 have already been gated to anchors `50`, `75`, or `100` b
 
 ## Phase 4: Present findings
 
-**User-facing vocabulary rule (applies to ALL user-visible output in Phase 4).** Internal enum values, `safe_auto`, `gated_auto`, `manual`, `FYI`; stay inside the schema and synthesis prose. Every word the user sees in Phase 4 output MUST use user-facing vocabulary: "accepted recommendations" (for `safe_auto`), "proposed fixes" (for `gated_auto`), "decisions" (for `manual` findings at anchor `75` or `100`), "FYI observations" (for any finding at anchor `50`). The only exception is the `Tier` column in rendered tables, which names the internal enum for transparency.
+**User-facing vocabulary rule (applies to all user-visible output in Phase 4).** Internal enum values, `safe_auto`, `gated_auto`, `manual`, `FYI`; stay inside the schema and synthesis prose. Every word the user sees in Phase 4 output must use user-facing vocabulary: "accepted recommendations" (for `safe_auto`), "proposed fixes" (for `gated_auto`), "decisions" (for `manual` findings at anchor `75` or `100`), "FYI observations" (for any finding at anchor `50`). The only exception is the `Tier` column in rendered tables, which names the internal enum for transparency.
 
 ### Record safe_auto findings as accepted recommendations
 
@@ -232,7 +232,7 @@ Brief summary at the top: "Accepted N recommendations. K items need attention (X
 
 Include the Coverage table, accepted recommendations, FYI observations (as a distinct subsection), residual concerns, and deferred questions.
 
-**All tables MUST be pipe-delimited markdown (`| col | col |`). Do NOT use ASCII box-drawing characters under any circumstances.**
+All tables are pipe-delimited markdown (`| col | col |`) because the downstream parser splits on unescaped pipes. Do not use ASCII box-drawing characters; they break the table parser.
 
 ## Phase 5: Next action: terminal question
 
