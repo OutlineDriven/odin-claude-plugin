@@ -10,7 +10,7 @@ description: 'Use when a merge, rebase, cherry-pick, or stash pop stops on confl
 | Field | Bound contract |
 |---|---|
 | Trigger | A merge, rebase, cherry-pick, or stash pop stops on conflicts: `git` exits with unmerged paths. |
-| Authority | Reversible local: writes only conflicted-file edits, staged resolutions, regenerated lockfiles, and integration continuation (committing a merge, `git rebase --continue`, `git cherry-pick --continue`, `git stash drop`); runs scoped checks; rollback is `git merge --abort`, `git rebase --abort`, `git cherry-pick --abort`, or `git checkout -- <file>`. No remote mutation. No push, no tag, no force-push. |
+| Authority | Reversible local: writes only conflicted-file edits, staged resolutions, regenerated lockfiles, and integration continuation (committing a merge, `git rebase --continue`, `git cherry-pick --continue`, and `git stash drop` only after the resolution is committed); runs scoped checks; rollback is `git merge --abort`, `git rebase --abort`, `git cherry-pick --abort`, or `git checkout -- <file>`. No remote mutation. No push, no tag, no force-push. |
 | Side effect | Edits conflicted files, stages resolutions, regenerates lockfiles with package manager tooling, runs scoped checks, completes the in-progress integration. |
 | Done | No unmerged paths, no conflict markers in any tracked file, scoped checks pass, integration is committed and complete. |
 
@@ -53,7 +53,7 @@ Optional context:
    - Merge: commit the merge with a message that names both sides' intents and the resolution rationale, including any discarded intent recorded in Step 4.
    - Rebase: `git rebase --continue` until every commit is replayed and no conflict remains.
    - Cherry-pick: `git cherry-pick --continue` (or commit, then continue if multiple commits remain).
-   - Stash pop: the stash is applied after resolution; `git stash drop` if the stash entry was not auto-dropped.
+   - Stash pop: the stash is applied after resolution; run `git stash drop` only after the resolved changes are committed, so the stash stays recoverable until the resolution is in history.
    *Done when: `git status` shows no conflicts and the integration is complete.*
 
 ## Failure and recovery
