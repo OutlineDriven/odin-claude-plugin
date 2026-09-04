@@ -24,7 +24,7 @@ ABANDON: G2 <reason, only if a gate had to be surrendered>
 
 - A gate starts at a line matching `- [ ]` or `- [x]` (case-insensitive x).
 - Indented `CHECK:`, `EXPECT:`, `EVIDENCE:` lines up to the next gate belong to the gate above them.
-- `EXPECT:` is a plain substring match against the command's combined stdout+stderr, unless wrapped in slashes with an empty or valid flag tail, then it is a Python regex (e.g. `/8\/8 passed/`). Accepted flags are `i`, `s`, `m` (mapped to Python) plus neutral `g`; any other trailing letters, such as a path segment, make the whole value a literal substring again (so `/api/v1/health` never degrades into the fragment `api/v1`).
+- `EXPECT:` is a plain substring match against the command's combined stdout+stderr, unless wrapped in slashes with an empty or valid flag tail, then it is a Python regex (e.g. `/8\/8 passed/`). Accepted flags are `i`, `s`, `m` (mapped to Python) plus neutral `g`; any other trailing letters, such as a path segment, make the whole value a literal substring again (so `/api/v1/health` never degrades into the fragment `api/v1`). Edge: a literal whose final segment is exactly `i`, `s`, `m`, `g`, or empty (trailing slash) still reads as a regex; write such literals without the surrounding slashes.
 - `ABANDON: G<n> <reason>` anywhere in the file marks that gate as honestly surrendered. Tools treat it as resolved, but reports must list it.
 
 ## What counts as unmet
