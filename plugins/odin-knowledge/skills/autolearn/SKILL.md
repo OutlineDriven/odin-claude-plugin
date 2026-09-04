@@ -160,16 +160,18 @@ One validated learning doc at `docs/solutions/<category>/<slug>.md` (or updated 
 
 ## Solution schema
 
+Owner of the field contract is references/schema.md. Do not recopy.
+
 Canonical frontmatter contract for `docs/solutions/` learning docs. The validator (`scripts/validate-frontmatter.py`) only catches silent YAML corruption; the field and enum rules below remain binding.
 
 ### Two tracks
 
-`problem_type` picks the track. The track decides which extra fields are required.
+`problem_type` picks the track. The track decides which extra fields are required. Pick the narrowest value; `best_practice` is the Knowledge fallback.
 
-| Track | problem_types | What it is |
-|-------|---------------|------------|
-| Bug | `build_error`, `test_failure`, `runtime_error`, `performance_issue`, `database_issue`, `security_issue`, `ui_bug`, `integration_issue`, `logic_error` | Defects and failures that were diagnosed and fixed |
-| Knowledge | `best_practice`, `documentation_gap`, `workflow_issue`, `developer_experience`, `architecture_pattern`, `design_pattern`, `tooling_decision`, `convention` | Practices, patterns, conventions, decisions, workflow improvements. Prefer the narrowest value; `best_practice` is the fallback. |
+| Track | problem_types |
+|-------|---------------|
+| Bug | `build_error`, `test_failure`, `runtime_error`, `performance_issue`, `database_issue`, `security_issue`, `ui_bug`, `integration_issue`, `logic_error` |
+| Knowledge | `best_practice`, `documentation_gap`, `workflow_issue`, `developer_experience`, `architecture_pattern`, `design_pattern`, `tooling_decision`, `convention` |
 
 ### Required fields (both tracks)
 
@@ -178,7 +180,7 @@ Canonical frontmatter contract for `docs/solutions/` learning docs. The validato
 - `category`: the `docs/solutions/` subdirectory (see Category map).
 - `module`: module or area affected (string).
 - `problem_type`: one enum value from the tracks table; determines the track.
-- `component`: component or subsystem involved (free-form string). Keep it consistent within a repo so frontmatter search works.
+- `component`: component or subsystem involved (free-form string; keep consistent within a repo so frontmatter search works).
 - `severity`: one of `critical`, `high`, `medium`, `low`.
 
 ### Bug-track required fields
@@ -227,13 +229,7 @@ Filename: `[sanitized-problem-slug].md`, no date suffix (the `date` field carrie
 
 ### Validation rules
 
-1. Determine the track from `problem_type`.
-2. All shared required fields present.
-3. Bug-track docs also carry `symptoms`, `root_cause`, `resolution_type`.
-4. Knowledge-track docs need no extra required fields.
-5. Enum fields match allowed values exactly.
-6. Array fields respect min/max item counts.
-7. `date` matches `YYYY-MM-DD`.
+Track from `problem_type`; shared required fields always present; bug track also requires `symptoms`, `root_cause`, `resolution_type`; knowledge track adds none. Enums match allowed values exactly, arrays respect item counts, `date` matches `YYYY-MM-DD`.
 
 ### YAML safety (array items)
 
