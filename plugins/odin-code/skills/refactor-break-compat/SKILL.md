@@ -30,16 +30,17 @@ disable-model-invocation: true
 ## Procedure
 
 1. Map the blast radius. Enumerate every file, module, and caller of the old shape using `ast-grep` or `rg`. This is the demolition manifest. **Done when**: the demolition manifest is complete.
-2. Delete the old path. Remove compat layers, adapters, legacy branches, and every flag that fed them. No commenting out. Delete. **Done when**: the old path is deleted from every file in the manifest.
-3. Rewrite every caller to the new contract. Migrate all references from step 1. After each batch, run the strongest static enumerator the project has (compiler or typechecker, including opt-in: `mypy`, `pyright`, `tsc --checkJs`, Sorbet). Never sufficient alone: no static pass sees reflective, dynamically dispatched, string-constructed, or generated references, nor code excluded from the build. Enumerate those by hand and name them in the report. **Done when**: every caller in the manifest is on the new contract and the static enumerator passes.
-4. Rewrite tests to the new truth. Update assertions to the new behavior. Delete tests whose entire purpose was the old behavior. Add tests for the new contract where coverage is now thin. **Done when**: tests assert the new behavior and the old-behavior tests are deleted.
-5. Exterminate ghosts. Grep for string references, config keys, env vars, doc links, error messages, and import paths naming the old API. Zero survivors. **Done when**: the grep returns nothing.
-6. Strip dead weight. Remove imports, packages, dependencies, types, and dead files that only the old path needed. **Done when**: no dead weight from the old path remains.
-7. Verify zero residue. A search for every old symbol, flag, and format name returns nothing. If it returns anything, return to step 3. **Done when**: the zero-residue search returns nothing.
+2. Preview and confirm the demolition. Present the demolition manifest and the consequences to the user: every file and caller that will be deleted or rewritten, which tests will change, and which flags or config will be removed. Wait for explicit human confirmation. Do not proceed without it. **Done when**: the user confirms the demolition.
+3. Delete the old path. Remove compat layers, adapters, legacy branches, and flags used only by the old path. Do not delete a flag that also controls the replacement or another live path. No commenting out. Delete. **Done when**: the old path is deleted from every file in the manifest.
+4. Rewrite every caller to the new contract. Migrate all references from step 1. After each batch, run the strongest static enumerator the project has (compiler or typechecker, including opt-in: `mypy`, `pyright`, `tsc --checkJs`, Sorbet). Never sufficient alone: no static pass sees reflective, dynamically dispatched, string-constructed, or generated references, nor code excluded from the build. Enumerate those by hand and name them in the report. **Done when**: every caller in the manifest is on the new contract and the static enumerator passes.
+5. Rewrite tests to the new truth. Update assertions to the new behavior. Delete tests whose entire purpose was the old behavior. Add tests for the new contract where coverage is now thin. **Done when**: tests assert the new behavior and the old-behavior tests are deleted.
+6. Exterminate ghosts. Grep for string references, config keys, env vars, doc links, error messages, and import paths naming the old API. Zero survivors. **Done when**: the grep returns nothing.
+7. Strip dead weight. Remove imports, packages, dependencies, types, and dead files that only the old path needed. **Done when**: no dead weight from the old path remains.
+8. Verify zero residue. A search for every old symbol, flag, and format name returns nothing. If it returns anything, return to step 4. **Done when**: the zero-residue search returns nothing.
 
 ## Failure and recovery
 
-- Residue remains: old references survive in code, tests, docs, or config after step 7. Return to step 3; do not widen scope beyond the demolition manifest.
+- Residue remains: old references survive in code, tests, docs, or config after step 8. Return to step 4; do not widen scope beyond the demolition manifest.
 - Build or tests broken: migration incomplete, callers or assertions not yet on the new shape. Fix forward if within scope; if scope is exhausted, report the exact blockers and stop.
 - Migration stalled: codebase is half old, half new. Finish or revert to version-control baseline; never ship the intermediate state.
 

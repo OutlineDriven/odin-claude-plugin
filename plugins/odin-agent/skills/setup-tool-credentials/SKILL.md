@@ -29,11 +29,11 @@ disable-model-invocation: true
 
 1. Confirm which tools the user wants to set up and whether they are working in an existing repository or starting fresh. Done when: the tool set and repository state are confirmed.
 
-2. Identify the target environment. If the user is in a repository, scan for an existing `.env` file. If none exists, create an empty `.env` from scratch. If one exists, do not modify it; report its current keys and ask the user whether to add to it. Done when: `.env` exists or its current state is reported.
+2. Identify the target environment. Before creating or appending, verify `.env` is untracked and gitignored. Check that `.gitignore` excludes `.env` and that `git status` shows an existing `.env` as untracked. If `.env` is tracked, not ignored, or `.gitignore` does not exclude it, stop and report that the path is not safe for credentials. If no `.env` exists and it is safe to create, create an empty `.env`. If `.env` exists, do not modify it; report the existing key names (not values) and ask the user whether to add to it. Done when: a safe `.env` exists and the user has confirmed additions, or an unsafe state is reported and the skill stops.
 
 3. Present the set of credentials this skill will collect, as named by the user or the tool's documented requirements. For each credential the user supplies, validate basic format: non-empty string, plus any known format rule the tool's convention defines. For example, a Slack bot token starts with `xoxb-` and a Sentry DSN contains `://`. These examples demonstrate the general format-validation mechanism; the skill applies whichever rule the named tool requires. Discard any value that fails format validation and prompt again. Done when: every credential is validated or the user declines.
 
-4. Append each validated credential as a `KEY=VALUE` line to `.env`, one per line. Do not write any other content to `.env`. Do not overwrite existing keys; if a key already exists in `.env`, report the existing value to the user and skip writing that line. Done when: every validated credential is appended or skipped with reason.
+4. Append each validated credential as a `KEY=VALUE` line to `.env`, one per line. Do not write any other content to `.env`. Do not overwrite existing keys; if a key already exists in `.env`, report only the key name and that it was skipped. Do not echo the existing value. Done when: every validated credential is appended or skipped with reason.
 
 5. Verify repository and tool access, then run prerequisite checks. If a repository was supplied or detected: confirm the remote URL is reachable via an authenticated HEAD request or `git ls-remote`; confirm the token in `.env` grants at least read access; report pass or fail without exposing token values. Run prerequisite checks for each selected tool. Stop on the first failure. Report each check's pass or fail result. Done when: repository access is verified or the failure is reported, and every prerequisite passes or the first failure is reported.
 
@@ -46,7 +46,7 @@ disable-model-invocation: true
 - Credential-format failure: the specific credential is rejected; the prompt repeats. `.env` is not touched for that credential.
 - Repository access failure: report which token or URL failed and stop. `.env` is not rolled back; credentials already written remain.
 - Prerequisite failure: name the tool and the failing check. Stop. Do not claim the workflow is ready. Do not suggest the failure is minor or temporary.
-- Existing `.env` conflict: if a key already exists, report it and skip writing that line. Do not overwrite.
+- Existing `.env` conflict: if a key already exists, report the key name and that it was skipped; do not echo the value. Do not overwrite.
 - No rollback rule: once a credential is written to `.env` it is not automatically removed. The user must explicitly request deletion.
 - Partial result: if steps 1 through 4 complete but step 5 fails, report exactly what passed and what did not. Do not claim full success.
 
