@@ -22,7 +22,7 @@ description: 'Use when asked to start feature work that needs isolation, or befo
 
 ## Procedure
 
-1. **Detect environment.** Run `git rev-parse --git-common-dir` and `git rev-parse --git-dir`. If `GIT_COMMON_DIR` differs from `GIT_DIR`, the session is already inside a worktree. If the current directory is a submodule (`.git` is a file, or `git rev-parse --show-superproject-working-tree` prints a superproject), stop and report that isolation must run from the superproject.
+1. **Detect environment.** Run `git rev-parse --git-common-dir` and `git rev-parse --git-dir`. If `GIT_COMMON_DIR` differs from `GIT_DIR`, the session is already inside a worktree. If `git rev-parse --show-superproject-working-tree` prints a superproject, the current directory is a submodule: stop and report that isolation must run from the superproject.
 
 2. **Determine isolation mode.** If already inside a worktree and the user has not requested a new one, report the existing worktree path and branch, then skip to step 6. Otherwise proceed to create a new worktree.
 
