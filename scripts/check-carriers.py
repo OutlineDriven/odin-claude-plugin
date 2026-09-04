@@ -52,8 +52,8 @@ def read_exact(path):
     return path.read_bytes().decode("utf-8")
 
 
-def sections(text):
-    """Return ordered (tag, body) for whole-line <tag> ... </tag> blocks.
+def blocks(text):
+    """Return ordered (tag, body, body_start, body_end) for whole-line tag blocks.
 
     The match is anchored to a full line on purpose. An unanchored pattern starts on a
     tag name mentioned in prose and swallows the neighbouring section, which reports
@@ -70,8 +70,13 @@ def sections(text):
             stack.append((tag, end))
         elif stack and stack[-1][0] == tag:
             open_tag, body_start = stack.pop()
-            out.append((open_tag, text[body_start:start]))
+            out.append((open_tag, text[body_start:start], body_start, start))
     return out
+
+
+def sections(text):
+    """Return ordered (tag, body) for whole-line <tag> ... </tag> blocks."""
+    return [(tag, body) for tag, body, _, _ in blocks(text)]
 
 
 def audit(baseline_text, carrier_text, label="carrier"):

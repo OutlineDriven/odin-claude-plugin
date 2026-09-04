@@ -29,14 +29,13 @@ _mod = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(_mod)
 
 sections = _mod.sections
+blocks = _mod.blocks
 TOOL_LAYER = _mod.TOOL_LAYER
 OVERLAY_TAGS = _mod.OVERLAY_TAGS
 read_exact = _mod.read_exact
 
 ROOT = Path(__file__).resolve().parent.parent
 BASELINE = ROOT / "system-prompt-baseline.md"
-
-_TAG_RE = re.compile(r"^</?(\w[\w-]*)>$", re.M)
 
 _USAGE = """\
 Usage: sync-carriers.py [options]
@@ -55,28 +54,6 @@ With no arguments, rewrites every carrier that exists. A missing carrier
 prints a notice and is skipped. The four tool-layer sections (git, directives,
 code_tools, thinking) are never modified.
 """
-
-
-def _blocks(text):
-    """Return ordered (tag, body, body_start, body_end) for whole-line tag blocks.
-
-    Mirrors sections() in check-carriers.py but keeps the byte offsets needed
-    to replace a body in place.
-    """
-    marks = [
-        (m.group(1), m.group(0).startswith("</"), m.start(), m.end())
-        for m in _TAG_RE.finditer(text)
-    ]
-    stack = []
-    out = []
-    for tag, closing, start, end in marks:
-        if not closing:
-            stack.append((tag, end))
-        elif stack and stack[-1][0] == tag:
-            open_tag, body_start = stack.pop()
-            out.append((open_tag, text[body_start:start], body_start, start))
-    return out
-
 
 def _code_tools_pos(text):
     """Return the byte offset of the <code_tools> opening tag line, or None."""
@@ -103,7 +80,7 @@ def _plan(baseline_text, carrier_text):
     canonical = dict(sections(baseline_text))
     shared = [t for t, _ in sections(baseline_text) if t not in TOOL_LAYER]
 
-    blocks = _blocks(carrier_text)
+    carrier_blocks = blocks(carrier_text)
     code_tools_pos = _code_tools_pos(carrier_text)
 
     edits = []       # (start, end, replacement) for body replacements
@@ -111,7 +88,7 @@ def _plan(baseline_text, carrier_text):
     changes = []     # ("rewrite", tag) or ("insert", tag)
 
     for tag in shared:
-        found = [(b[2], b[3], b[1]) for b in blocks if b[0] == tag]
+        found = [(b[2], b[3], b[1]) for b in carrier_blocks if b[0] == tag]
         if found:
             if tag in OVERLAY_TAGS:
                 # Replace only the last block; earlier overlays stay.
