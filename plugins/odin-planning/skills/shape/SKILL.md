@@ -44,6 +44,8 @@ Explicit override always wins over auto-detection.
 
    **Breadboard notation** (three elements only):
 
+   Owner of the breadboard notation is references/breadboarding.md. Do not recopy.
+
    - Places: screens, dialogs, states a user can navigate to. Written as underlined names.
    - Affordances: buttons, links, fields, controls. Written as bracketed names.
    - Connections: arrows showing flow between places.
@@ -57,12 +59,6 @@ Explicit override always wins over auto-detection.
      [turn on autopay] ───────►  [use card on file] ─────►  [back to invoice]
                                  [enter new card] ──► New card form ──► Confirmation
    ```
-
-   **Fat-marker altitude tests**
-
-   Raise altitude (over-shaped signals): pixel positions, spacing values, exact copy, field lists, column enumerations, task tickets, work breakdown.
-
-   Walk a concrete path (under-shaped signals): no nouns a builder could start from, a goal statement with no places or affordances, an appetite missing or phrased as "as long as it takes".
 
    Right altitude: a builder could start tomorrow and still owns every design decision inside the lines.
 
