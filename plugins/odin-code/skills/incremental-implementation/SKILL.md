@@ -1,6 +1,6 @@
 ---
 name: incremental-implementation
-description: 'Use when implementing a multi-file change, building a feature from a breakdown, or writing a large amount of code. Each slice is individually tested and committed; the full suite passes and the feature works end-to-end. Not for a single settled ticket: use implement-spec or tdd.'
+description: 'Use when implementing a multi-file change, building a feature from a breakdown, or writing a large amount of code. Each slice is individually tested and committed; the full suite passes and the feature works end-to-end. Not for a single settled ticket: use work.'
 ---
 
 # Incremental implementation

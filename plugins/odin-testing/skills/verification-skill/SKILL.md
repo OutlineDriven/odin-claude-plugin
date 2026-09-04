@@ -17,7 +17,7 @@ with the repository, the harness is wrong.
 | Field | Bound contract |
 |---|---|
 | Trigger | Create a project-local executable verification skill, or repair drift in an existing one |
-| Authority | Reversible local: writes only inside the named verification-skill directory; one pull request is allowed only after explicit user approval; rollback is version control. No remote mutation without approval. Never mutates the source under test, CI config, or credentials. |
+| Authority | Reversible local, one human-gated remote exception: writes only inside the named verification-skill directory, and the single user-approved pull request is the only remote write ever permitted; rollback is version control. No other remote, VCS-history, credential, paid, published, or deployed mutation. Never mutates the source under test, CI config, or credentials. |
 | Side effect | Writes and runs a verification harness inside the project. Opens at most one pull request, and only on explicit approval |
 | Done | Create: the harness runs and passes against the live repository. Repair: one honest classification of clean, changed, or blocked |
 

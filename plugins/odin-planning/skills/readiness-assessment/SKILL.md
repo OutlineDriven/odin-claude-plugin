@@ -12,7 +12,7 @@ Assess whether enough is known to proceed on a decision or action.
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks for a gut-check on a decision or action, or asks whether enough is known to proceed. |
-| Authority | Reversible local on explicit request; otherwise read-only. A named local file is written only if the user explicitly requests one; rollback is deleting that file. No VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Reversible local on explicit request; otherwise read-only. A named local file is written only if the user explicitly requests one and the path does not already exist; an existing path is refused, not overwritten, and the user is asked for a different path. Rollback is deleting that file. No VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Normally none. If the user explicitly requests an output file, write only a named local artifact; otherwise produce no persistent state. |
 | Done | A prose-only assessment names concrete knowns and unknowns, classifies each gap as Executable or Blocked, and returns one terminal recommendation: Proceed, Proceed with caveat, Pause, or Blocked. |
 

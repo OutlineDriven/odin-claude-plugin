@@ -64,33 +64,43 @@ If `INTERNAL_REPO` or `NOTIFICATION_TOKEN` is unset, stop and ask before running
 
    Done when: the branch is confirmed to exist on origin.
 
-5. Dispatch the workflow by name on the branch ref:
+5. Dispatch the workflow by name on the branch ref. Record the UTC dispatch timestamp immediately before dispatching; step 6 uses it to tell this dispatch's run from the previous one:
 
    ```bash
+   DISPATCH_TS=$(date -u +%Y-%m-%dT%H:%M:%SZ)
    gh workflow run "$RC_WORKFLOW_NAME" --repo "$INTERNAL_REPO" --ref "$BRANCH_NAME"
    ```
 
-   Done when: the workflow dispatch exits zero.
+   Done when: the workflow dispatch exits zero and the dispatch timestamp is recorded.
 
-6. Fetch the newest run for this workflow on this branch and share its `url`; do not watch or wait for completion:
+6. Fetch this dispatch's run and share its `url`, `status`, and `conclusion`; do not watch or wait for completion. A run list taken right after dispatch can still show the previous run, so poll until the newest run's `createdAt` is at or after the dispatch timestamp (ISO-8601 UTC strings compare lexicographically), up to ten tries ten seconds apart:
 
    ```bash
-   RUN_URL=$(gh run list \
-     --repo "$INTERNAL_REPO" \
-     --workflow "$RC_WORKFLOW_NAME" \
-     --branch "$BRANCH_NAME" \
-     --limit 1 \
-     --json url,status,conclusion,createdAt \
-     --jq '.[0].url')
-   echo "$RUN_URL"
+   RUN_JSON=""
+   for i in $(seq 1 10); do
+     RUN_JSON=$(gh run list \
+       --repo "$INTERNAL_REPO" \
+       --workflow "$RC_WORKFLOW_NAME" \
+       --branch "$BRANCH_NAME" \
+       --limit 1 \
+       --json url,status,conclusion,createdAt \
+       --jq '.[0]')
+     if [ -n "$RUN_JSON" ] && [ "$(jq -r .createdAt <<<"$RUN_JSON")" \> "$DISPATCH_TS" ]; then
+       break
+     fi
+     RUN_JSON=""
+     sleep 10
+   done
+   RUN_URL=$(jq -r .url <<<"$RUN_JSON")
+   echo "$RUN_JSON"
    ```
 
-   Done when: the newest run URL is fetched and shared.
+   A run whose `createdAt` predates the dispatch timestamp is the previous run, not this one; a run that never appears is handled in Failure and recovery. Done when: the URL, `status`, and `conclusion` for this dispatch's run are fetched and shared.
 
 7. Post the status notification carrying the branch name and run URL. Use the destination the user named. If the user gave no destination, stop and ask for one. Send the notification through the configured endpoint:
 
    ```bash
-   JSON=$(jq -n --arg destination "$DESTINATION" --arg text "Triggered $RC_WORKFLOW_NAME for $BRANCH_NAME.\nRun: $RUN_URL" '{destination: $destination, text: $text}')
+   JSON=$(jq -n --arg destination "$DESTINATION" --arg wf "$RC_WORKFLOW_NAME" --arg br "$BRANCH_NAME" --arg url "$RUN_URL" '{destination: $destination, text: ("Triggered " + $wf + " for " + $br + ".\nRun: " + $url)}')
    curl -s -X POST "$NOTIFICATION_ENDPOINT" \
      -H "Authorization: Bearer $NOTIFICATION_TOKEN" \
      -H "Content-type: application/json; charset=utf-8" \

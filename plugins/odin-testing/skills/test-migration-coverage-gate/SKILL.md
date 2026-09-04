@@ -10,7 +10,7 @@ description: 'Use when about to delete a test on the claim that a new harness, s
 | Field | Bound contract |
 |---|---|
 | Trigger | About to delete a test on the claim that a new harness, suite, or scenario already covers it. |
-| Authority | Reversible local: deletes only VCS-tracked test files and edits files necessary for the migration (the replacement test to cover assertions, live references to deleted paths, and historical annotations); rollback is version control recovery. No remote mutation. Shows the exact set before deletion. |
+| Authority | Reversible local: deletes only VCS-tracked test files and edits only the migration's named VCS-tracked files (the replacement test to cover assertions, live references to deleted paths, and historical annotations); rollback is version control recovery. No remote, VCS-history, credential, paid, published, or deployed mutation. Shows the exact set before deletion. |
 | Side effect | Deletes only those test files whose every assertion was matched, extends the replacement test when needed, updates live references to deleted paths and annotates historical documents, and leaves the rest in place; each deletion carries its coverage receipt in the commit message. |
 | Done | For every deleted test, a per-assertion table validated by an independent reviewer maps each original assertion to a specific check in the replacement; unmatched assertions resulted in either an extended replacement or a kept test; and a tree-wide scrub shows no dangling references to deleted paths, with historical documents annotated rather than rewritten. |
 

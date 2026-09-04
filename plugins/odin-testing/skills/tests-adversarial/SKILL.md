@@ -12,7 +12,7 @@ description: 'Use when hardening error handling, validating boundary behavior, o
 | Trigger | The work is hardening error handling, validating boundary behavior, or hunting silent failures. |
 | Authority | Reversible local: writes only test files, local artifacts, and minimal production code changes to fix silent failures discovered by the tests; rollback is reverting the commit or deleting added files. No remote mutation. |
 | Side effect | Writes assumption-violation tests over inputs, ordering, timing, state, resources, and impossible cases; fixes silent failures in production code so every failure path signals; runs sanitized race-detector gates. |
-| Done | Every documented assumption has a violation test, every failure path produces a descriptive error, and the selected sanitizers pass with zero warnings, or unsupported sanitizer gaps are recorded. |
+| Done | Every documented assumption has a violation test, every failure path produces a descriptive error, and every selected sanitizer available on the toolchain passes with zero warnings; a sanitizer unavailable on the toolchain is recorded as a gap and never excuses a failure in one that ran. |
 
 ## Inputs
 

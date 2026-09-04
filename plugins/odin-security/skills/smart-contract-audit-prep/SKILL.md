@@ -16,7 +16,7 @@ description: 'Use when a smart-contract project must become review-ready before 
 | Field | Bound contract |
 |---|---|
 | Trigger | A smart-contract project needs to become review-ready before an external or internal security audit, typically 1-2 weeks before the audit begins |
-| Authority | Reversible local: writes only the named artifacts under `audit/` in the target project plus one local freeze branch and tag; rollback is deleting the `audit/` directory, the branch, and the tag. No remote mutation. |
+| Authority | Reversible local: writes only the named artifacts under `audit/` in the target project plus one local freeze branch and tag; rollback is deleting the `audit/` directory, the branch, and the tag; the freeze branch and tag are the only VCS objects created and no history is rewritten. No remote, credential, paid, published, or deployed mutation. |
 | Side effect | Audit goals, scoped commit, build and test instructions, known-issue notes, architecture material, readiness checklist, plus one local freeze branch and tag; never edits project source, never installs tools, never touches remotes or history rewrites. |
 | Done | Auditors can build, scope, navigate, and begin reviewing the frozen project without avoidable setup ambiguity, confirmed by a fully passing readiness checklist |
 

@@ -159,6 +159,8 @@ def _carrier_path_error(path):
 
     Missing paths are skipped by the caller, not reported here.
     """
+    if path.is_symlink():
+        return "symlink"
     if path.exists() and not path.is_file():
         return "not a file"
     return None
@@ -225,6 +227,9 @@ def self_test():
         file_path = directory / "carrier.md"
         file_path.write_text(baseline_text, encoding="utf-8")
         checks.append(("a regular file has no path error", _carrier_path_error(file_path) is None))
+        linked = directory / "linked.md"
+        linked.symlink_to(file_path)
+        checks.append(("a symlink carrier is rejected", _carrier_path_error(linked) == "symlink"))
 
     passed = 0
     for label, ok in checks:

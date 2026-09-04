@@ -10,7 +10,7 @@ description: 'Use when one named review viewpoint must run fix cycles until a fr
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants review and fix cycles for one viewpoint until that viewpoint is quiet. |
-| Authority | Reversible local: writes only the reviewed artifact, its fix patches, the baseline snapshot, and the review report for this one viewpoint; rollback is restoring the recorded baseline. No remote mutation. |
+| Authority | Reversible local: writes only the reviewed artifact, its fix patches, the baseline snapshot, and the review report for this one viewpoint; rollback is restoring the recorded baseline. No remote, VCS-history, credential, paid, published, or deployed mutation. |
 | Side effect | Reviewed artifact mutated only by applied in-scope fixes, the baseline snapshot (a file copy when no VCS baseline is supplied), and one review report holding the fix patches and verdict. No file outside the declared review scope is written, and no out-of-scope file is edited to make a fix fit. |
 | Done | The chosen viewpoint has no further findings: a complete fresh-reviewer cycle returned zero findings for that viewpoint. Machines own logic, races, panics, and vulnerability checks; humans own taste, architecture, and problem choice. |
 

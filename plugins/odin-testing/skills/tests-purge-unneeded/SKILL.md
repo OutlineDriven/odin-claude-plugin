@@ -10,7 +10,7 @@ description: 'Use when a legacy, slow, or duplicate test suite is being cleaned 
 | Field | Bound contract |
 |---|---|
 | Trigger | A legacy, slow, or duplicate test suite is being cleaned up, a post-refactor sweep is due, or the type system already covers an asserted contract. |
-| Authority | Reversible local: deletes only VCS-tracked test files and makes temporary production-code mutations for mutation proof, all reverted before the next step or before reporting; rollback is version control recovery. No remote mutation. Shows the exact set before deletion. |
+| Authority | Reversible local: deletes only VCS-tracked test files and makes temporary mutations for mutation proof only in enumerated VCS-tracked production files, all reverted before the next step or before reporting; rollback is version control recovery. No remote, VCS-history, credential, paid, published, or deployed mutation. Shows the exact set before deletion. |
 | Side effect | Deletes proved-useless tracked tests in batches, keeps anything whose mutation fails, and runs the full suite after each batch. |
 | Done | Each deleted test has one recorded mutation that survived before deletion, the full suite passes, and no protected boundary test was removed. |
 
