@@ -1,5 +1,7 @@
 # `graph.yaml` schema
 
+Owner. graph-backbone and minimap each keep a copy. Do not recopy.
+
 `graph.yaml` uses schema version `odin.graph/v1`.
 
 ```yaml
