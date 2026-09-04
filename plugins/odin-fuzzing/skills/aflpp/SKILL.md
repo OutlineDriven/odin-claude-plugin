@@ -37,7 +37,7 @@ docker pull aflplusplus/aflplusplus:stable
 For host installation, request approval before running:
 
 ```bash
-apt install afl++ lld-<clang-version>
+apt install afl++ lld
 ```
 
 Verify the binary: `afl-fuzz --version` (host) or `docker run --rm aflplusplus/aflplusplus:stable afl-fuzz --version` (Docker).

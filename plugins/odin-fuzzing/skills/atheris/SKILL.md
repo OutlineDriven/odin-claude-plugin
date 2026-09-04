@@ -46,7 +46,7 @@ description: 'Use when a user needs coverage-guided fuzzing for Python code or a
    LDSHARED="clang -shared"
    LDSHAREDXX="clang++ -shared"
    ```
-   Install the extension from source so it compiles locally with these flags, not as a prebuilt wheel. For uv-managed projects use `--no-binary-package <pkg>` and persist `no-binary-package = ["<pkg>"]` under `[tool.uv]` in `pyproject.toml`; a later `uv sync` can otherwise silently swap in an uninstrumented wheel. Add `undefined` to the sanitizer list (`-fsanitize=address,undefined,fuzzer-no-link`) when UBSan is requested. Done when: the native extension is built from source with sanitizer and fuzzer instrumentation flags.
+   Install the extension from source so it compiles locally with these flags, not as a prebuilt wheel. For uv-managed projects, set `no-binary-package = ["<pkg>"]` under `[tool.uv]` in `pyproject.toml` and run `uv sync` so the package is built from source; a later `uv sync` can otherwise silently swap in an uninstrumented wheel. Add `undefined` to the sanitizer list (`-fsanitize=address,undefined,fuzzer-no-link`) when UBSan is requested. Done when: the native extension is built from source with sanitizer and fuzzer instrumentation flags.
 
 6. **Configure the native-extension runtime.** Set `LD_PRELOAD` to the Atheris sanitizer shared library:
    ```

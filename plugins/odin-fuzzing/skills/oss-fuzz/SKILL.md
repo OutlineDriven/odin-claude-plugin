@@ -12,7 +12,7 @@ description: 'Use when asked to enroll a project in OSS-Fuzz or run its helper w
 | Trigger | User needs to enroll an open-source project in OSS-Fuzz, run its helper workflow locally, or reproduce an OSS-Fuzz report. |
 | Authority | Reversible local: writes only named local artifacts (oss-fuzz clone, Docker images, project enrollment files); rollback is `docker rmi` for images and filesystem deletion for the clone. No remote mutation. |
 | Side effect | OSS-Fuzz project integration files, Docker image builds, and local fuzzing campaign artifacts written to the oss-fuzz working directory. |
-| Done | The project Docker image builds, fuzzers compile with AddressSanitizer, the named harness executes, and `projects/<name>/project.yaml`, `Dockerfile`, and `build.sh` are present and structurally valid. |
+| Done | Task A: the project Docker image builds, fuzzers compile with AddressSanitizer, and the named harness executes. Task B: `projects/<project_name>/project.yaml`, `Dockerfile`, and `build.sh` are present and structurally valid. |
 
 ## Inputs
 
@@ -34,26 +34,34 @@ description: 'Use when asked to enroll a project in OSS-Fuzz or run its helper w
 1. Verify `docker` is available and the user has permission to run containers (`docker info` exits 0). Done when: `docker info` exits 0.
 2. Clone oss-fuzz if `oss_fuzz_dir` does not exist or is not a git repository:
    ```bash
+   oss_fuzz_dir="${oss_fuzz_dir:-./oss-fuzz}"
    git clone https://github.com/google/oss-fuzz "$oss_fuzz_dir"
    ```
    Done when: the oss-fuzz repository is cloned and present at `oss_fuzz_dir`.
 3. Change to the oss-fuzz directory:
    ```bash
+   oss_fuzz_dir="${oss_fuzz_dir:-./oss-fuzz}"
    cd "$oss_fuzz_dir"
    ```
    Done when: the working directory is the oss-fuzz directory.
 4. Build the project Docker image:
    ```bash
+   project_name="${project_name:?project_name is required}"
    uv run --no-project python infra/helper.py build_image --pull "$project_name"
    ```
    If `build_image` reports the project directory does not exist under `projects/`, stop and return `enrollment-missing`. Done when: the project Docker image builds successfully or `enrollment-missing` is returned.
 5. Build the fuzzers with AddressSanitizer:
    ```bash
-   uv run --no-project python infra/helper.py build_fuzzers --sanitizer="${sanitizer:-address}" "$project_name"
+   project_name="${project_name:?project_name is required}"
+   sanitizer="${sanitizer:-address}"
+   uv run --no-project python infra/helper.py build_fuzzers --sanitizer="$sanitizer" "$project_name"
    ```
    Capture stdout/stderr. If the build exits non-zero, return `build-failed` with the captured output. Done when: fuzzers compile with the configured sanitizer and stdout/stderr are captured.
 6. Run the named harness:
    ```bash
+   project_name="${project_name:?project_name is required}"
+   harness_name="${harness_name:?harness_name is required}"
+   fuzzer_args="${fuzzer_args:-}"
    uv run --no-project python infra/helper.py run_fuzzer "$project_name" "$harness_name" ${fuzzer_args:+"$fuzzer_args"}
    ```
    Observe for at least 10 seconds. If the harness exits with a sanitizer report, return `crash-detected` with the report path. Otherwise return `harness-ran`. Done when: the harness runs for at least 10 seconds and returns `harness-ran` or `crash-detected`.
@@ -91,7 +99,7 @@ description: 'Use when asked to enroll a project in OSS-Fuzz or run its helper w
 | `enrollment-missing` | `projects/<project_name>` absent and task is local run | Return `blocked: enrollment-missing`. Enrollment is out of scope for local-run unless explicitly requested. |
 | `build-failed` | `build_fuzzers` exits non-zero | Return `failed: build-failed` with captured stderr. Do not proceed to run step. |
 | `crash-detected` | Harness exits with ASan/UBSan report | Return `crash-detected` with the report file path. Do not suppress or dismiss the report. |
-| `rollback` | Any step fails; Docker images written by this session | Rollback: `docker rmi $(docker images -q "gcr.io/oss-fuzz/$(basename "$project_name")*") 2>/dev/null`; delete the `oss_fuzz_dir` clone if this session created it. |
+| `rollback` | Any step fails; Docker images written by this session | Rollback: `docker rmi $(docker images --filter=reference="gcr.io/oss-fuzz/$(basename "$project_name")*" -q) 2>/dev/null`; delete the `oss_fuzz_dir` clone if this session created it. |
 
 ## Output
 

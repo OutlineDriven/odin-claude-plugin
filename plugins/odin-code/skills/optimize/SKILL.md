@@ -12,7 +12,7 @@ Two modes share one authority: reversible local writes to the resolved target, n
 | Field | Bound contract |
 |---|---|
 | Trigger | The user asks to optimize code, make a path faster, reduce allocations, fix a performance regression, profile and optimize a path, symbol, or diff, or a performance requirement, slowness report, Core Web Vitals miss, or profiling evidence identifies a bottleneck. |
-| Authority | Reversible local: writes only the resolved local target and `.outline/optimize/<target>/` (full mode) or the named target (quick mode), committing one winning optimization in full mode; rollback is version control. Never tags. No remote mutation. |
+| Authority | Reversible local: writes only the resolved local target and `.outline/optimize/<target>/` (full mode) or the named target and a CI performance-budget or field-monitor guard (quick mode), committing one winning optimization in full mode; rollback is version control. Never tags. No remote mutation. |
 | Side effect | Full mode: append measurements and decisions to `.outline/optimize/<target>/log.jsonl`, benchmark isolated candidates, apply the winner, create one atomic commit. Quick mode: apply one targeted fix; may add a CI performance budget or field monitor. |
 | Done | Full mode: exit 0 only after the committed change preserves authorized behavior, passes the adversarial and repository gates, and measures at least 1.05x faster in the integrated benchmark. Quick mode: the identified bottleneck is measurably improved past noise, tests remain green, no new regressions, and a CI budget or field monitor guards the metric. |
 

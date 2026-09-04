@@ -16,7 +16,7 @@ description: 'Use when non-trivial code needs designing before implementation, o
 
 ## Refusal
 
-Not for visual architecture diagrams or HTML artifacts; use architecture-diagram, which renders a self-contained visual from a frozen specification; architect designs code structure (modules, interfaces, seams, depth) and produces a design package, not a rendered diagram. Not for deploy, remote, credential, publish, or irreversible changes; use deploy or shipping skills. Not for people-process or organizational architecture.
+Not for visual architecture diagrams or HTML artifacts; use architecture-diagram, which renders a self-contained visual from a frozen specification; architect designs code structure (modules, interfaces, seams, depth) and produces a design package, not a rendered diagram. Not for deploy, remote, credential, publish, or irreversible changes; use shipping skills. Not for people-process or organizational architecture.
 
 ## Vocabulary
 

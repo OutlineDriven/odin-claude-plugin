@@ -18,7 +18,7 @@ Show this to the user, then immediately proceed to Step 2. The user reads and th
 
 ### 2. Spawn sub-agents
 
-Spawn two or more sub-agents in parallel. Two is the floor, because the technique is design it twice; `SKILL.md` step 3 asks for at least two competing sketches and sets no ceiling.
+Spawn two or more sub-agents in parallel. Two is the floor, because the technique is design it twice; `../SKILL.md` step 3 asks for at least two competing sketches and sets no ceiling.
 Each must produce a **radically different** interface for the deepened module.
 
 Prompt each sub-agent with a separate technical brief (file paths, coupling details, dependency category from [deepening.md](deepening.md), what sits behind the seam). The brief is independent of the user-facing problem-space explanation in Step 1. Give each agent a different design constraint:

@@ -23,7 +23,9 @@ llvm-cov show ... -format=html -output-dir <target>/html/
 
 Differential (when a baseline profile was supplied):
 ```
-llvm-cov show ... -instr-profile=<baseline>.profdata -instr-profile=<target>/fuzz.profdata
+llvm-cov show ./fuzz_exec -instr-profile=<baseline>.profdata -format=html -output-dir <target>/html_baseline/
+llvm-cov show ./fuzz_exec -instr-profile=<target>/fuzz.profdata -format=html -output-dir <target>/html_target/
+diff -r <target>/html_baseline/ <target>/html_target/ > <target>/coverage_diff.txt
 ```
 
 ## GCC (C/C++)

@@ -10,8 +10,8 @@ description: 'Use when asked to set up and run coverage-guided fuzzing of Ruby c
 | Field | Bound contract |
 |---|---|
 | Trigger | User needs Ruzzy to run coverage-guided fuzzing on Ruby code or a Ruby native extension. |
-| Authority | Reversible local: writes only harness, tracer, sanitizer preload, and corpus files to the working directory; rollback is file deletion. No remote mutation. |
-| Side effect | Write Ruzzy harness scripts, tracer scripts, sanitizer LD_PRELOAD paths, and corpus files, local working directory only. |
+| Authority | Reversible local: writes harness, tracer, sanitizer preload, corpus, and installed gem files to the working directory or the local Ruby gem path; rollback is file deletion. No remote mutation. |
+| Side effect | Write Ruzzy harness scripts, tracer scripts, sanitizer LD_PRELOAD paths, corpus files, and install the target gem with clang and sanitizer flags. |
 | Done | Ruzzy executes the intended Ruby target with the correct tracer or extension setup and reproduces saved failures. |
 
 ## Inputs
@@ -28,7 +28,7 @@ Optional: corpus directory path, libFuzzer arguments (e.g., `-max_len=1024`), cr
 4. Write the harness as a lambda named `test_one_input` that accepts data and returns `0`. Catch Ruby exceptions in C extension harnesses; let them propagate in pure Ruby harnesses. Done when: the harness lambda is written with the correct exception handling for the target kind.
 5. Set `ASAN_OPTIONS=allocator_may_return_null=1:detect_leaks=0:use_sigaltstack=0`. Do not export `LD_PRELOAD`; use it inline with the ruby command. Done when: `ASAN_OPTIONS` is set and `LD_PRELOAD` is prepared for inline use.
 6. Install the gem with clang and sanitizer flags: set `CC=clang`, `CXX=clang++`, `LDSHARED="clang -shared"`, and `LDSHAREDXX="clang++ -shared"`; set `CFLAGS` and `CXXFLAGS` to `-fsanitize=address,fuzzer-no-link -fno-omit-frame-pointer -fno-common -fPIC -g`. The `-shared` flag is required for `LDSHARED` and `LDSHAREDXX`; without it the native extension link fails. Done when: the gem is installed with clang and sanitizer flags.
-7. Run: `LD_PRELOAD=$(ruby -e 'require "ruzzy"; print Ruzzy::<SAN>_PATH') ruby <harness-or-tracer>.rb [corpus] [libfuzzer-options]`. Done when: the fuzzer runs with the correct `LD_PRELOAD` and harness.
+7. Run: `LD_PRELOAD=$(ruby -e 'require "ruzzy"; print Ruzzy::ASAN_PATH') ruby "<harness-or-tracer>.rb" [corpus] [libfuzzer-options]` for ASan, or set `SAN_PATH=$(ruby -e 'require "ruzzy"; print Ruzzy::UBSAN_PATH')` and run `LD_PRELOAD="$SAN_PATH" ruby "<harness-or-tracer>.rb" [corpus] [libfuzzer-options]` for UBSan. Done when: the fuzzer runs with the correct `LD_PRELOAD` and harness.
 8. On `ERROR: AddressSanitizer:` or `ERROR: UndefinedBehaviorSanitizer:`, capture the crash file path, Base64 content, and reproducer command. Write `crash-*` files to the working directory. Done when: any sanitizer error is captured with crash file path, content, and reproducer command, or the campaign completes without error.
 9. To reproduce a saved failure, run the same command passing the crash file path as the final argument. Done when: the saved failure is reproduced or confirmed non-reproducible.
 
