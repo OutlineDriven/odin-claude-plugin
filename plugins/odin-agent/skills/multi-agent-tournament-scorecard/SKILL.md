@@ -37,4 +37,4 @@ description: 'Use when agent strategies need a reproducible finite tournament un
 
 ## Output
 
-A tournament scorecard: terminal class (success, capped, stalled, blocked, exhausted, pending), completed matchups, move records, scores, identity validation, and the receipt path, ordered by the procedure steps that produced them.
+A tournament scorecard: terminal class (success, stalled, blocked, exhausted), completed matchups, move records, scores, identity validation, and the receipt path, ordered by the procedure steps that produced them.
