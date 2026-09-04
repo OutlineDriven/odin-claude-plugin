@@ -17,6 +17,7 @@ pre-commit:
       run: pnpm run typecheck
     test:
       run: pnpm run test
+```
 
 Drop the `typecheck` or `test` command when the repo declares no such script, and tell the user. Biome is the formatter and linter; do not add Prettier or ESLint.
 
@@ -49,6 +50,7 @@ repos:
         language: system
         pass_filenames: false
         stages: [pre-commit]
+```
 
 Run via `prek run --all-files`. Do not add Black, isort, or mypy; ruff and pyright cover formatting, linting, and typing.
 
@@ -66,6 +68,7 @@ pre-commit:
       run: go vet ./...
     test:
       run: go test -race ./...
+```
 
 ## Rust (prek)
 
