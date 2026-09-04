@@ -85,6 +85,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   it canonicalizes a relative override against the caller's directory
   rather than the repository root, and it treats a leading hyphen as a
   pathname.
+- A `MEMORY_DIR` override pointing at a directory that does not exist
+  now fails the same existence check the derived default always paid;
+  the resolver no longer prints a nonexistent path and exits 0.
 - `memory-clean` and `memory-sanitize` now call `memory-update`'s
   `resolve-paths.sh`; the extra copies are gone, so a tracked `MEMORY_DIR`
   is refused for sanitize too.
