@@ -239,7 +239,7 @@ def _is_safe_dir(p: Path, require_owner: bool) -> bool:
 
 
 def _ensure_dir(p: Path) -> bool:
-    """Create p as a safe directory if it does not exist; validate if it does."""
+    """Create p as a safe directory if missing; validate p and owned ancestors if it exists."""
     try:
         os.lstat(p)
     except FileNotFoundError:
@@ -255,7 +255,14 @@ def _ensure_dir(p: Path) -> bool:
         return _is_safe_dir(p, _in_cache_namespace(p))
     except OSError:
         return False
-    return _is_safe_dir(p, _in_cache_namespace(p))
+    # lstat on an existing leaf follows intermediate symlinks, so a linked
+    # CACHE_PREFIX would otherwise pass. Walk owned ancestors; stop at the
+    # prefix so a symlinked /tmp (macOS) stays out of scope.
+    if not _is_safe_dir(p, _in_cache_namespace(p)):
+        return False
+    if p == CACHE_PREFIX or not _in_cache_namespace(p):
+        return True
+    return _ensure_dir(p.parent)
 
 
 def resolve_keys() -> "tuple[str, str] | None":
