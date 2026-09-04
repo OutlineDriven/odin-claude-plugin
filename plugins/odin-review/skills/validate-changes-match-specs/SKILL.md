@@ -10,13 +10,13 @@ description: 'Use when asked to compare implementation against repository specs,
 | Field | Bound contract |
 |---|---|
 | Trigger | Resolving mismatches between specs and implementation. |
-| Authority | Reversible local: writes only named files; rollback is undo. No remote mutation except the explicit user-approved push in step 14. Roll back any edit that diverges from a user-approved decision. |
-| Side effect | Walks through mismatches and edits code or specs per user decisions. |
+| Authority | Human-gated: previews the remote and ref and waits for an explicit commit-and-push choice before the step-14 push; that push uses existing git remote credentials only, is not rolled back by undo, and is never a force-push. Otherwise reversible local: writes only named files; rollback is undo. No remote mutation except that push. Roll back any edit that diverges from a user-approved decision. |
+| Side effect | Walks through mismatches and edits code or specs per user decisions. Commits and pushes only after the step-14 prompt. |
 | Done | Summary states specs checked, mismatches resolved, files changed, validation run. |
 
 ## Inputs
 
-The skill reads the current branch diff and any specs present in the repository. No external services are required. Credentials, paid actions, publishing, deployment, and remote bulk mutation are not authorized. The user must supply a base branch or confirm the detected base when prompted.
+The skill reads the current branch diff and any specs present in the repository. No external services are required. Paid actions, deployment, and remote bulk mutation are not authorized. Credentials and publishing are authorized only for the user-approved step-14 push to a named existing remote and ref, using existing git remote credentials. The user must supply a base branch or confirm the detected base when prompted.
 
 ## Procedure
 
@@ -112,8 +112,8 @@ The skill reads the current branch diff and any specs present in the repository.
     - Stage only the intended files.
     - Commit non-interactively with `git commit --no-edit` or with a user-approved message.
     - If the repository requires a co-author line, add `Co-Authored-By: ODIN Agent <agent@odin.dev>` in the commit message footer.
-    - Push to origin after commit succeeds if the user requested it.
-    - If commit or push fails, report the failure. Do not retry destructively.
+    - If the user requested push, preview the remote and ref (the existing `origin` remote and the current branch, unless the user names another existing remote and ref) and push only after that preview is approved. Use existing git remote credentials. Do not force-push. Do not create remotes or change credential stores.
+    - If commit or push fails, report the failure. Do not retry destructively. Do not force-push.
 
    **Done when:** the user's commit/push choice is executed or recorded as no commit.
 ## Failure and recovery
