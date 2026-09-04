@@ -71,6 +71,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   outcome classifier; `retaxonomize-plugins` leaves the generated README
   plugin table to `just render`; tournament failure terminals map onto
   the cascade set (`stalled`, `blocked`).
+- Tournament Output listed `capped` and `pending`, terminals no procedure
+  step produces. Output now matches the four defined terminals.
+- `memory-update` claimed `$MEMORY_DIR` is outside version control; that
+  is true for the default path and false for an override inside a git
+  work tree. An in-repo override is refused.
 
 ### Added
 
