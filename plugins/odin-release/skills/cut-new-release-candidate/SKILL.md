@@ -84,18 +84,18 @@ If `INTERNAL_REPO` or `NOTIFICATION_TOKEN` is unset, stop and ask before running
        --branch "$BRANCH_NAME" \
        --limit 1 \
        --json url,status,conclusion,createdAt \
-       --jq '.[0]')
-     if [ -n "$RUN_JSON" ] && [ "$(jq -r .createdAt <<<"$RUN_JSON")" \> "$DISPATCH_TS" ]; then
+       --jq '.[0] // empty')
+     CREATED=$(jq -r '.createdAt // empty' <<<"$RUN_JSON")
+     if [ -n "$CREATED" ] && [ ! "$CREATED" \< "$DISPATCH_TS" ]; then
        break
      fi
      RUN_JSON=""
      sleep 10
    done
-   RUN_URL=$(jq -r .url <<<"$RUN_JSON")
-   echo "$RUN_JSON"
+   RUN_URL=$(jq -r '.url // empty' <<<"$RUN_JSON")
    ```
 
-   A run whose `createdAt` predates the dispatch timestamp is the previous run, not this one; a run that never appears is handled in Failure and recovery. Done when: the URL, `status`, and `conclusion` for this dispatch's run are fetched and shared.
+   Guards: `// empty` keeps an empty run list from printing the literal `null`, which would otherwise pass `-n` and compare greater than any timestamp; the `! ... \<` comparison accepts a run created in the same second as the dispatch. A run whose `createdAt` predates the dispatch timestamp is the previous run, not this one. After the loop, verify `RUN_URL` is non-empty and not `null` before posting anything: an empty or `null` URL means this dispatch's run never appeared, which is the "Dispatched but no run URL" failure below, never a notification. Done when: the URL, `status`, and `conclusion` for this dispatch's run are fetched and shared.
 
 7. Post the status notification carrying the branch name and run URL. Use the destination the user named. If the user gave no destination, stop and ask for one. Send the notification through the configured endpoint:
 
