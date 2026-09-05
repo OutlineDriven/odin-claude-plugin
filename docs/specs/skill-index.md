@@ -353,7 +353,6 @@
 | perspective-complete-review | odin-review | Coding |
 | plan | odin-planning | Productivity |
 | plan-review | odin-planning | Productivity |
-| plan-review-tune | odin-agent | Productivity |
 | planning | odin-planning | Productivity |
 | planning-and-task-breakdown | odin-planning | Productivity |
 | polished-web-prototype | odin-design | Design |
