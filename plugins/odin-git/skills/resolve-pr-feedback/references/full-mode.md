@@ -1,6 +1,6 @@
 # Full mode
 
-Read this reference when Mode Detection in `SKILL.md` routes to **Full Mode**: no argument given, or a PR number provided. Full mode processes every unresolved thread on the PR.
+Read this reference for mode `autonomous` at full scope: no argument given, or a PR number provided. Full scope processes every unresolved thread on the PR.
 
 **Fetch once, judge centrally, and fan out only fixes.** The orchestrator holds every thread from a single fetch, so legitimacy judgments happen in the context that can deduplicate reads, identify a systematically wrong reviewer across threads, and weigh the author's design intent. Dispatch subagents only to implement fixes you have approved. Do not fan out the judgment: a subagent per thread repeats overhead and file reads, loses the cross-thread view, and incurs that cost even for threads that are skipped.
 
@@ -160,7 +160,7 @@ For `needs-human` verdicts, post the natural-sounding reply but do NOT resolve t
 
 ### Review threads
 
-0. **Verify the thread ID** before replying. GitHub Enterprise can return inconsistent node IDs for the same thread depending on the query path. Always confirm the ID from `get-pr-comments` resolves to the correct thread using [scripts/get-thread-for-comment](../scripts/get-thread-for-comment) with the comment's numeric URL ID:
+0. **Verify the thread ID** before replying. GitHub Enterprise can return inconsistent node IDs for the same thread depending on the query path. Always confirm the ID from `resolve-pr-feedback` resolves to the correct thread using [scripts/get-thread-for-comment](../scripts/get-thread-for-comment) with the comment's numeric URL ID:
 ```bash
 SKILL_DIR="<absolute path of the directory containing the resolve-pr-feedback SKILL.md>"
 SCRIPT_DIR="$SKILL_DIR/scripts"
@@ -173,7 +173,7 @@ fi
 GH_REPO=OWNER/REPO gh api repos/{owner}/{repo}/pulls/comments/COMMENT_ID --jq .node_id
 bash "$SCRIPT_DIR/get-thread-for-comment" PR_NUMBER COMMENT_NODE_ID OWNER/REPO
 ```
-The returned `id` is the authoritative thread ID to use for reply and resolve. If it differs from what `get-pr-comments` returned, use the one from this script.
+The returned `id` is the authoritative thread ID to use for reply and resolve. If it differs from what `resolve-pr-feedback` returned, use the one from this script.
 
 1. **Reply** using [scripts/reply-to-pr-thread](../scripts/reply-to-pr-thread):
 ```bash

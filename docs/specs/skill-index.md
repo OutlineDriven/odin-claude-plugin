@@ -221,7 +221,6 @@
 | genealogical-proof | odin-research | Research |
 | generalize | odin-planning | Productivity |
 | generate-my-taste | odin-skills | Productivity |
-| get-pr-comments | odin-git | Coding |
 | gh-review-requests | odin-git | Coding |
 | gha-security-review | odin-security | Security |
 | git-branchless | odin-git | Coding |
@@ -409,7 +408,6 @@
 | resolve | odin-git | Coding |
 | resolve-merge-conflicts | odin-git | Coding |
 | resolve-pr-feedback | odin-git | Coding |
-| respond-to-pr-comments-in-blocklist | odin-git | Coding |
 | respond-to-slack-thread | odin-run | Coding |
 | restart-keeping-lessons | odin-code | Coding |
 | retaxonomize-plugins | odin-skills | Productivity |

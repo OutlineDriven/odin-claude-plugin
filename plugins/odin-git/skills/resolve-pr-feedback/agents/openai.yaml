@@ -1,3 +1,3 @@
 interface:
   display_name: "Resolve PR Feedback"
-  short_description: "Use when addressing GitHub PR review comments or resolving review threads."
+  short_description: "Use when handling GitHub PR review feedback: autonomous fix-and-resolve, interactive per-comment walkthrough, or read-only severity summary."

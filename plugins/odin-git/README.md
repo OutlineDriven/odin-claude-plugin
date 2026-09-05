@@ -2,7 +2,7 @@
 
 ODIN workflows for commits, branches, pull requests, review feedback, and issue tracking.
 
-46 skills, category Coding.
+44 skills, category Coding.
 
 ## Install
 
@@ -30,7 +30,6 @@ codex plugin add odin-git@odin-marketplace
 - finish-branch-menu
 - fix-p0-issues
 - gate-and-merge
-- get-pr-comments
 - gh-review-requests
 - git-branchless
 - git-cleanup
@@ -55,7 +54,6 @@ codex plugin add odin-git@odin-marketplace
 - resolve
 - resolve-merge-conflicts
 - resolve-pr-feedback
-- respond-to-pr-comments-in-blocklist
 - review-and-ship
 - review-reception-protocol
 - setup-gitignore
