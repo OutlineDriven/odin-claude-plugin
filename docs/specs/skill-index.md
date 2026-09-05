@@ -128,7 +128,6 @@
 | deprecate-and-migrate | odin-code | Coding |
 | deps-upgrade | odin-code | Coding |
 | design | odin-design | Design |
-| design-consultation | odin-design | Design |
 | design-gate-brainstorming | odin-design | Design |
 | design-it-twice | odin-code | Coding |
 | design-variants | odin-design | Design |
