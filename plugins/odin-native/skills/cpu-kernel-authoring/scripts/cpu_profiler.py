@@ -17,6 +17,7 @@ import re
 import subprocess
 import sys
 import tempfile
+from functools import cache
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -25,6 +26,7 @@ from config import load_config as _load_config
 _CFG = _load_config()
 
 
+@cache
 def _find_perf_binary():
     """Find a working perf binary, handling kernel version mismatches."""
     import glob
@@ -61,14 +63,17 @@ def _check_perf_available():
     return _find_perf_binary() is not None
 
 
-def generate_runner_script(kernel_package: str, op_path: str, warmup: int, iters: int, baseline_file: str | None = None) -> str:
-    """Generate a Python script that runs the kernel for profiling."""
-    baseline_path = baseline_file or "baseline.py"
-    return f"""\
+_RUNNER_SOURCE = """\
 import importlib
+import importlib.util
+import sys
+
 import torch
 
-parts = "{op_path}".split(".")
+op_path, baseline_path = sys.argv[1], sys.argv[2]
+warmup, iters = int(sys.argv[3]), int(sys.argv[4])
+
+parts = op_path.split(".")
 mod = importlib.import_module(parts[0])
 func = mod
 for attr in parts[1:]:
@@ -78,8 +83,7 @@ torch.set_num_threads(torch.get_num_threads())
 
 # Real baseline inputs keep the counters representative of the shapes the kernel will serve.
 try:
-    import importlib.util
-    spec = importlib.util.spec_from_file_location("baseline", "{baseline_path}")
+    spec = importlib.util.spec_from_file_location("baseline", baseline_path)
     baseline = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(baseline)
     inputs = baseline.get_inputs()
@@ -87,22 +91,26 @@ except Exception:
     print("Warning: Could not load baseline for inputs. Using dummy inputs.")
     inputs = [torch.randn(1024, 4096, dtype=torch.bfloat16)]
 
-# Warmup so page faults and first-touch allocation do not land in the measured counters.
-for _ in range({warmup}):
-    func(*inputs)
-
-for _ in range({iters}):
-    func(*inputs)
+# Warmup keeps page faults and first-touch allocation out of the measured
+# counters; no_grad keeps autograd graph construction out of every iteration.
+with torch.no_grad():
+    for _ in range(warmup):
+        func(*inputs)
+    for _ in range(iters):
+        func(*inputs)
 """
 
 
-def run_perf_stat(kernel_package: str, op_path: str, warmup: int, iters: int, baseline_file: str | None = None) -> dict[str, float]:
+def run_perf_stat(op_path: str, warmup: int, iters: int, baseline_file: str | None = None) -> dict[str, float]:
     """Run perf stat and parse results."""
-    script = generate_runner_script(kernel_package, op_path, warmup, iters, baseline_file)
+    if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*(\.[A-Za-z_][A-Za-z0-9_]*)*", op_path):
+        print(f"  --op must be a dotted Python path like my_kernel.forward, got '{op_path}'")
+        return {}
 
     with tempfile.NamedTemporaryFile(mode="w", suffix=".py", delete=False) as f:
-        f.write(script)
+        f.write(_RUNNER_SOURCE)
         script_path = f.name
+
 
     try:
         counters = [
@@ -129,6 +137,7 @@ def run_perf_stat(kernel_package: str, op_path: str, warmup: int, iters: int, ba
             perf_bin, "stat",
             "-e", ",".join(counters),
             "--", sys.executable, script_path,
+            op_path, baseline_file or "baseline.py", str(warmup), str(iters),
         ]
 
         print(f"  Running: {' '.join(cmd[:6])} ...")
@@ -305,13 +314,17 @@ def main():
         print("\n  'perf' not found. Install linux-tools-common or run with perf_stat_enabled=false.")
         sys.exit(1)
 
-    stats = run_perf_stat(args.kernel_package, args.op, args.warmup, args.iters, args.baseline)
+    stats = run_perf_stat(args.op, args.warmup, args.iters, args.baseline)
 
-    if stats:
+    if stats and "instructions" in stats and "cycles" in stats:
         print_analysis(stats)
     else:
-        print("\n  No stats collected. Check perf permissions (try: echo -1 > /proc/sys/kernel/perf_event_paranoid)")
-
+        print(
+            "\n  No usable hardware counters collected."
+            " Check perf permissions (try: echo -1 > /proc/sys/kernel/perf_event_paranoid)"
+            " and that the CPU supports the requested events (a VM without a PMU reports"
+            " every counter as <not supported>)."
+)
 
 if __name__ == "__main__":
     main()
