@@ -104,8 +104,8 @@ with torch.no_grad():
 def run_perf_stat(op_path: str, warmup: int, iters: int, baseline_file: str | None = None) -> dict[str, float]:
     """Run perf stat and parse results."""
     if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*(\.[A-Za-z_][A-Za-z0-9_]*)*", op_path):
-        print(f"  --op must be a dotted Python path like my_kernel.forward, got '{op_path}'")
-        return {}
+        print(f"  --op must be a dotted Python path like my_kernel.forward, got '{op_path}'", file=sys.stderr)
+        sys.exit(2)
 
     with tempfile.NamedTemporaryFile(mode="w", suffix=".py", delete=False) as f:
         f.write(_RUNNER_SOURCE)
@@ -180,7 +180,7 @@ def _parse_perf_output(output: str) -> dict:
         match = re.match(r"([\d,\.]+)\s+(\S+)", line)
         if match:
             value_str = match.group(1).replace(",", "")
-            name = match.group(2).rstrip(":u").rstrip(":k")
+            name = match.group(2).removesuffix(":u").removesuffix(":k")
             try:
                 value = float(value_str)
                 stats[name] = value

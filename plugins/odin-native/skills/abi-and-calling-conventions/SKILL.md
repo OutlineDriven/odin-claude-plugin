@@ -33,6 +33,8 @@ description: 'Use when explaining System V AMD64, ARM AAPCS, RISC-V psABI, stack
 
 System V AMD64 on Linux also grants a 128-byte red zone below `rsp` that leaf functions use without adjusting the stack pointer. Arguments past the register set go on the stack, so a seven-integer C function on System V passes the seventh in memory.
 
+The link register is call-clobbered on all three ABIs: System V AMD64 pushes the return address before the call lands, and AAPCS64 and RISC-V save `x30`/`ra` in the prologue when the callee itself calls, which is why the callee-saved rows above exclude them.
+
 3. Draw the stack frame: return address at the top, then the saved frame pointer, locals, spill slots and alignment padding, and outgoing arguments at the lowest addresses next to the stack pointer. Done when: the user can place each item relative to the frame pointer.
 4. Cover the variadic rule when the context has `...`. On System V AMD64 the caller sets `al` to the count of vector registers used, and `va_start` needs the register save area the prologue writes. Recommend typed wrappers over raw `va_arg` at FFI boundaries, and cast every `va_arg` type to its promoted form. Done when: the variadic rule is stated or the context has no variadic call.
 5. Confirm the rule against the compiler. Done when: the compiler output shows the argument moves and the `.cfi_*` directives that match the stated rule.
