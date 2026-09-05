@@ -1,3 +1,0 @@
-interface:
-  display_name: "Write PR Description"
-  short_description: "Use when drafting or revising a PR description that gives reviewers context the diff cannot."

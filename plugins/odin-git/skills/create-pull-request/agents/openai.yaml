@@ -1,3 +1,3 @@
 interface:
   display_name: "Create Pull Request"
-  short_description: "Use when the user asks to create a PR, open or update a draft PR, write a PR description, or summarize changes for review."
+  short_description: "Use when asked to create or update a PR, revise its description, or link issue references to its body."

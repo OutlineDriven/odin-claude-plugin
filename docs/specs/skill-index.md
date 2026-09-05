@@ -366,7 +366,6 @@
 | post-to-slack | odin-run | Coding |
 | pov | odin-planning | Productivity |
 | pr-impact-quiz | odin-review | Coding |
-| pr-link-issue | odin-git | Coding |
 | pr-review-canvas | odin-visual | Design |
 | pr-review-canvas-html | odin-visual | Design |
 | pr-walkthrough | odin-visual | Design |
@@ -582,7 +581,6 @@
 | workflows-driven | odin-run | Coding |
 | workspace-unfreeze | odin-agent | Productivity |
 | worktree | odin-git | Coding |
-| write-pr-description | odin-git | Coding |
 | write-product-spec | odin-product | Productivity |
 | writing-beats | odin-writing | Writing |
 | writing-for-agents | odin-skills | Productivity |
