@@ -444,7 +444,6 @@
 | setup-ts-deep-modules | odin-typescript | Coding |
 | shape | odin-planning | Productivity |
 | sharp-edges | odin-security | Security |
-| sharp-edges-analyzer | odin-security | Security |
 | shipping | odin-release | Coding |
 | show-me | odin-visual | Design |
 | show-me-your-work | odin-run | Coding |

@@ -2,7 +2,7 @@
 
 ODIN workflows for security review, vulnerability triage, and defensive implementation.
 
-41 skills, category Security.
+40 skills, category Security.
 
 ## Install
 
@@ -44,7 +44,6 @@ codex plugin add odin-security@odin-marketplace
 - semgrep-rule-authoring
 - semgrep-security-scan
 - sharp-edges
-- sharp-edges-analyzer
 - smart-contract-audit-prep
 - smart-contract-guidelines-advisor
 - smart-contract-secure-workflow
