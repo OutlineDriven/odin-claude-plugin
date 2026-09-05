@@ -1,6 +1,7 @@
 ---
 name: dedup-skills
-description: 'Use when asked to deduplicate skills or prompt directories, find repeated rules, or check a skill tree for contradictions.'
+description: 'Use when asked to deduplicate a skill tree, fold overlapping skills, or cut the skill count: analyze, gate per family, then fold. Not for prompt-doctrine cascades: use cascade-dedup.'
+disable-model-invocation: true
 ---
 
 # Dedup skills
@@ -9,37 +10,54 @@ description: 'Use when asked to deduplicate skills or prompt directories, find r
 
 | Field | Bound contract |
 |---|---|
-| Trigger | User asks to deduplicate skills/prompts, find repeated rules, or check a skill tree for contradictions. |
-| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Scans a markdown skill/prompt tree and emits a chat ledger. |
-| Side effect | Produces a repetition/conflict ledger in chat; leaves the scanned tree untouched. |
-| Done | Every repetition cluster and conflict candidate is classified repeat/conflict/intentional-keep/not-a-finding, with totals, evidence, and zero unclassified cells. |
+| Trigger | User asks to deduplicate a skill tree, fold overlapping skills, or cut the skill count. |
+| Authority | Human-gated: requires explicit human invocation; the analyze phase writes only the fold ledger; the dedup phase runs only on an explicit user command naming approved families and then writes skill directories, descriptions, the attribution file, the changelog, and generated surfaces, one commit per family; rollback is `git revert` of that commit. No remote mutation. |
+| Side effect | A fold ledger, then per approved family: the survivor absorbs the members' unique steps, the members are deleted, pointers are rewritten, attribution and changelog are updated, and generated surfaces are re-rendered. |
+| Done | Every family in the ledger carries a decision; every approved family is folded in its own commit; the checker reports no dangling pointer; the removed count and the remaining count are measured, not projected. |
 
 ## Inputs
 
-- Target tree path (default `skills/`). A prompt-directory tree may be supplied instead.
-- The tree's LICENSES/NOTICE/attribution file, if present, is read in full before scanning.
+- Target tree path (default `plugins/`). Every `<plugin>/skills/<slug>/SKILL.md` under it is a skill.
+- The tree's attribution file (`licenses/NOTICE` or equivalent), read in full before scanning. A license-covered skill is a fold candidate like any other; the attribution follows the text.
+- Reduction floor (optional): a count or percent the fold must clear. The floor never loosens the fold criteria; a shortfall is reported at the gate.
+
+## Fold criteria
+
+Two skills belong to one family when a user asking for one would accept the other's procedure with a parameter changed. Three evidence sets, in priority order:
+
+1. Pointer neighbors: descriptions that route to each other through `Not for <x>: use <y>`. Adjacency is evidence, not proof; a component that chains distinct jobs (implement, test, ticket) is several families or none.
+2. Parameter siblings: slugs that differ by one axis (`from-<seat>-perspective`, `watch-<mode>`, `culture-<situation>`), whose procedures share every step except the parameterized one.
+3. Mode siblings: skills whose descriptions differ only by a mode word (`exhaustive`, `batch`, `interview`) over one procedure.
+
+The survivor is the member with the most general name. A member's unique steps enter the survivor as an input or a named mode, never as a second procedure. No alias directory, stub `SKILL.md`, or redirect survives a fold.
 
 ## Procedure
 
-1. **Vendored set.** Read the tree's LICENSES/NOTICE/attribution file in full before any scan. Enumerate every vendored or license-covered path. Report findings inside vendored paths with a vendored annotation and never propose them for deletion. Exclude the attribution file itself from the scan because it is a registry, not prompt content. Done when: every vendored or license-covered path is enumerated and the attribution file is excluded from the scan.
-2. **Cluster pass.** Run a mechanical script over all markdown in the tree. Strip YAML frontmatter first. Frontmatter is load-bearing routing data, never a dedup target, and must not enter the scan. Segment the text into paragraphs (skip fenced code), normalize tokens, and cluster near-identical spans. Verify every cluster member against its cluster center; chained transitive grouping pollutes clusters with sub-threshold members. A cluster is a span appearing in ≥2 locations cross-file or ≥2 times in one file. Threshold is verbatim/near-verbatim only (≈0.85 token-shingle Jaccard as guidance, not a rule). Each cluster carries file:line locations and a snippet. Done when: every near-identical span cluster is identified with file:line locations and a snippet, with frontmatter stripped and no transitive pollution.
-3. **Conflict pass.** Index directive-modal sentences (must / always / required vs never / do not / forbidden) with sentence-level line attribution, not the enclosing paragraph's first line. Pair sentences that use opposing modals and overlapping content words. Each conflict candidate carries both sentences, both file:line locations, and the overlap score. Before trusting the live result, verify that the detector can fail end to end: point the scanner's root at a fixture tree containing one markdown file with a known opposing pair, run the full discovery → frontmatter-strip → pairing path, and confirm that the pair is flagged. Only then is a zero-candidate live result a real outcome rather than a dead detector. Done when: every opposing-modal pair is identified with both sentences and file:line locations, and the detector is falsifiability-verified against a fixture.
-4. **Judgment pass.** Classify every finding from the two separate, complete sets exactly once so the finding set is MECE. The sets are repetition clusters and conflict candidates:
-   - `repeat`, real repetition, all copies live, no sync-lineage note. Remedy: shorten in place, every copy stays where it is, compressed to its load-bearing core; no pointer consolidation, no copy deleted. Recommending a sync-lineage annotation is allowed; consolidation is not.
-   - `conflict`, genuine opposing directives on one subject. Quote both sides verbatim from source (read each cited line in context before confirming). No default winner: the ledger proposes no resolution; the user resolves each conflict at apply time.
-   - `intentional-keep`, documented replication (sync-lineage note, byte-duplicated-by-design header), vendored self-contained relocation, template mirroring its exemplar, or a short self-contained rule. State the reason.
-   - `not-a-finding`, false positive (opposing modals on different subjects, scoped exceptions such as rules governing different states or routes, coincidental overlap, template scaffolding). Discharge with a one-line reason.
-   Two forms of duplication are legitimate and never findings: a short self-contained rule repeated where needed (duplication of one short rule beats a pointer chain), and replication carrying a sync-lineage note that names its counterpart.
+### Analyze
 
-   Done when: every finding from both sets is classified exactly once with the finding set MECE.
-5. **Ledger.** Write the ledger: totals per classification, repeat findings grouped into families with per-copy locations and shorten-in-place proposals, conflicts with both sides quoted, discharge reasons for everything else, and the verification performed (spot-checked cluster count, conflict-pass falsifiability). Deliver it without editing the tree. Apply is a separate, later pass gated on per-row or per-family user approval. Done when: the ledger is delivered with totals, families, conflicts, discharge reasons, and verification, and the tree is untouched.
+1. Enumerate the tree: every skill directory, its plugin, its frontmatter description, and whether the attribution file names it. Done when: the count is measured and each skill carries its plugin, description, and attribution source.
+2. Build the pointer graph from every description's `use <slug>` targets and list its connected components. Done when: every component is listed with its members.
+3. Propose families from the three evidence sets. For each family record the survivor, every member path, the `Vendored: <source>` annotation for each license-covered member, the unique steps the survivor absorbs, the steps dropped and why, and every description whose pointer must be rewritten. Reject a candidate whose members do different jobs, and record the rejection in one line. Done when: every family and every rejected candidate is recorded.
+4. Write the fold ledger with a `Projected remaining: <n>` header and one `## Family <name>` section per family. If a floor was supplied and the projection misses it, state the shortfall in the header. Done when: the ledger is written and the projection is stated against the floor.
+
+### Gate
+
+5. Present the ledger and stop. Ask one question per family: approve or strike. Record each answer as a `Decision: approved|struck` line in that family's section. Nothing in the tree changes in this phase. Done when: every family carries a decision, or the user ends the gate with families undecided and the run reports them as open.
+
+### Dedup
+
+6. For each approved family, in ledger order: rewrite the survivor so its description names the absorbed seats or modes inside the description cap and its procedure carries the absorbed steps as inputs or modes; delete every member directory; rewrite every pointer the ledger listed; drop retired names from the attribution lists and add the source of any absorbed licensed text to the survivor's entry; add the retired slug and survivor to the changelog's retired-skill table; re-render generated surfaces; run the tree's checks; commit as `Fold <members> into <survivor>`. Done when: the commit exists and the checks passed on it.
+7. Measure: count skill directories, compute the percent removed against the count from step 1, and confirm the checker reports no dangling pointer. Done when: the measured count, percent, and check result are recorded in the report.
 
 ## Failure and recovery
-- Empty or missing target tree: stop before scanning; report that no files were scanned. Do not emit an empty ledger as a clean result.
-- Dead conflict detector: if the fixture opposing pair is not flagged, the conflict pass is unreliable. Report detector-failure and do not emit a zero-candidate live result as real.
-- Unclassified finding remains: the done predicate is not met. Report blocked with the unclassified cell and its evidence; do not deliver a ledger claiming completeness.
-- Partial results: never deliver a partial ledger. If any step fails, report the failure class and which set is incomplete.
-- Non-mutation rule: the tree is untouched throughout; no rollback is needed because no edit ever lands. Edits happen only in a separate, later, user-approved pass.
+
+- Empty or missing target tree: stop before scanning; report that no skill was found. No ledger is written.
+- Candidate whose members do different jobs: reject it in the ledger with the reason; never fold to reach a floor.
+- Floor not reachable from defensible families: state the shortfall in the ledger header and at the gate; the user lowers the floor or accepts the shortfall. The fold criteria do not change.
+- Gate ended with undecided families: report them as open; fold only the approved ones.
+- A fold commit fails the tree's checks: fix inside that commit before the next family; if the family cannot pass, revert its commit and mark the family `Decision: struck` with the failing check named.
+- Rollback: `git revert` of one fold commit restores one family; the ledger is a local artifact and is discarded to restore the pre-run state.
 
 ## Output
-A ledger in chat: totals per classification; repeat findings grouped into families with per-copy file:line locations and shorten-in-place proposals; conflicts with both sides quoted verbatim; one-line discharge reasons for every intentional-keep and not-a-finding; and the verification performed (spot-checked cluster count, conflict-pass falsifiability). The scanned tree is untouched. Apply is a separate, later pass gated on per-row or per-family user approval.
+
+Analyze: the fold ledger with the projected count against the floor. Gate: one decision per family recorded in the ledger. Dedup: one commit per approved family, the measured remaining count and percent removed, the checker result, and the list of struck or open families.
