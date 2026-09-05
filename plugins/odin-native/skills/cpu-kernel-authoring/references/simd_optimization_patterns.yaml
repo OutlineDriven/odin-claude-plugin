@@ -106,14 +106,14 @@ common_patterns:
   - name: "BF16 Dot Product Accumulation"
     description: "Use _mm512_dpbf16_ps for fused bf16 multiply-add into fp32"
     code: |
-      // Accumulate bf16 dot products into fp32
+      // Accumulate bf16 dot products into fp32: 16 pairs per call, 32 bf16 per vector
       __m512 acc = _mm512_setzero_ps();
-      for (int k = 0; k < K; k += 2) {
-          __m512bh a = ...;  // load bf16 pair
-          __m512bh b = ...;  // load bf16 pair
-          acc = _mm512_dpbf16_ps(acc, a, b);  // acc += a[0]*b[0] + a[1]*b[1] (in fp32)
+      for (int k = 0; k + 32 <= K; k += 32) {
+          __m512bh a = ...;  // load 32 bf16 from a + k
+          __m512bh b = ...;  // load 32 bf16 from b + k
+          acc = _mm512_dpbf16_ps(acc, a, b);  // acc[i] += a[2i]*b[2i] + a[2i+1]*b[2i+1]
       }
-    note: "_mm512_dpbf16_ps processes TWO bf16 pairs per call: K must be even"
+    note: "_mm512_dpbf16_ps processes 16 bf16 pairs (32 elements) per call; K must be even"
 
   - name: "Compile-Time Loop Unrolling"
     description: "Template-based unrolling for register-tiled micro-kernels"
