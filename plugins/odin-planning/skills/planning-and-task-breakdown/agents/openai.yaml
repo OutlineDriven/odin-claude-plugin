@@ -1,3 +1,0 @@
-interface:
-  display_name: "Planning And Task Breakdown"
-  short_description: "Use when multi-step work must be broken into dependency-ordered tasks before implementation begins."

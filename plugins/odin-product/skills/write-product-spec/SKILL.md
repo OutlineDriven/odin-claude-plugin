@@ -1,6 +1,6 @@
 ---
 name: write-product-spec
-description: 'Use when a user asks for a product spec with invariants, a tech spec, or a PRD. Modes: product (default), technical, requirements. Not for task breakdown: use planning-and-task-breakdown.'
+description: 'Use when a user asks for a product spec with invariants, a tech spec, or a PRD. Modes: product (default), technical, requirements. Not for task breakdown: use plan.'
 disable-model-invocation: true
 ---
 

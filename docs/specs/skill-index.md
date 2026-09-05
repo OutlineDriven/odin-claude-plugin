@@ -347,8 +347,6 @@
 | perspective-complete-review | odin-review | Coding |
 | plan | odin-planning | Productivity |
 | plan-review | odin-planning | Productivity |
-| planning | odin-planning | Productivity |
-| planning-and-task-breakdown | odin-planning | Productivity |
 | polished-web-prototype | odin-design | Design |
 | possible-worlds | odin-planning | Productivity |
 | possible-worlds-qa | odin-testing | Coding |
@@ -441,7 +439,6 @@
 | setup-pre-commit | odin-git | Coding |
 | setup-repo-skills | odin-git | Coding |
 | setup-ts-deep-modules | odin-typescript | Coding |
-| shape | odin-planning | Productivity |
 | sharp-edges | odin-security | Security |
 | shipping | odin-release | Coding |
 | show-me | odin-visual | Design |
@@ -533,7 +530,6 @@
 | visual-diagram | odin-visual | Design |
 | visual-diff-review | odin-review | Coding |
 | visual-fact-check | odin-research | Research |
-| visual-plan | odin-planning | Productivity |
 | visual-project-recap | odin-knowledge | Productivity |
 | visual-slides | odin-visual | Design |
 | visualise-chart | odin-visual | Design |

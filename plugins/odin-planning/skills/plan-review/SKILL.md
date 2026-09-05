@@ -1,6 +1,6 @@
 ---
 name: plan-review
-description: 'Use when a plan path or text is supplied for audit against the current codebase, or when tuning which plan-review questions fire. Not for scoring: use planning.'
+description: 'Use when a plan path or text is supplied for audit against the current codebase, or when tuning which plan-review questions fire. Not for scoring: use plan.'
 ---
 
 # Plan review

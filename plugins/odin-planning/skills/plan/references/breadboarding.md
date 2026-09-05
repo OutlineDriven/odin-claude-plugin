@@ -8,7 +8,7 @@ Three elements, nothing else:
 - Affordances: things a user can act on: buttons, fields, links, and copy the user reads before deciding. Listed under their place.
 - Connection lines: an affordance wired to the place it leads to.
 
-Owner. shape/SKILL.md inlines the compact notation. Do not recopy.
+Owner. plan/SKILL.md inlines the compact notation. Do not recopy.
 
 Worked example, "invoice autopay" bet:
 
