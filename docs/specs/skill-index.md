@@ -495,7 +495,6 @@
 | token-integration-analyzer | odin-security | Security |
 | toolchain-health | odin-infra | Infrastructure |
 | trailmark-structural | odin-security | Security |
-| trailmark-summary | odin-code | Coding |
 | training-report | odin-writing | Writing |
 | triage-security-finding | odin-security | Security |
 | type-driven | odin-code | Coding |

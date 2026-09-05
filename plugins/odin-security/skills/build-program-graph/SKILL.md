@@ -1,6 +1,6 @@
 ---
 name: build-program-graph
-description: 'Use when a multi-language program graph is needed for call paths, entrypoints, blast radius, or taint reachability. Not for overview (trailmark-summary) or snapshot (trailmark-structural).'
+description: 'Use when a multi-language program graph is needed for call paths, entrypoints, blast radius, or taint reachability. Not for overview (trailmark-structural) or snapshot (trailmark-structural).'
 ---
 
 # Build a program graph

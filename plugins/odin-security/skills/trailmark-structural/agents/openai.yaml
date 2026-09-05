@@ -1,3 +1,3 @@
 interface:
   display_name: "Trailmark Structural"
-  short_description: "Use when a target needs a single-snapshot structural analysis: hotspots, entrypoints, taint, blast radius, privilege boundaries, proxies, subgraphs."
+  short_description: "Use when a target needs a Trailmark summary of languages, entrypoints, dependencies, or a snapshot of hotspots, taint, blast radius, subgraphs."
