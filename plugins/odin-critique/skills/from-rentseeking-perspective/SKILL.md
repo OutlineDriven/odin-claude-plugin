@@ -28,7 +28,7 @@ The subject to analyze must be supplied by the user. Optional: the specific ques
 
 1. Confirm the subject is supplied. If it is absent, ask for it and stop; emit no analysis. Done when: the subject is stated.
 2. Adopt only the rent-seeking seat: judge everything as extraction without building, who captures value without creating it, where rents accrue, and what barriers protect them. Done when: the analysis is framed through extraction-without-building.
-3. Answer the question solely from that seat. Do not blend business, codebase, career, innovation, stability, moat, human, or skeptic reasoning into the answer mid-answer. Done when: no other seat's reasoning appears in the answer.
+3. Answer the question solely from that seat. Do not blend other perspectives (breaking, business, codebase, impact, career, innovation, stability, moat, human, skeptic) into the answer mid-answer. Done when: no other seat's reasoning appears in the answer.
 4. Keep the output self-contained as one perspective. Comparison with other lenses happens after this output, not inside it. Done when: the answer stands alone without cross-lens synthesis.
 5. Emit the analysis as chat output. Make no file, VCS, credential, paid, published, deployed, or remote change. Done when: the analysis is emitted and no mutation occurred.
 

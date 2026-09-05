@@ -1,6 +1,6 @@
 ---
 name: explore
-description: 'Use when asked to explore the codebase to map structure, symbols, and dependencies. Not for questions answerable from one known file.'
+description: 'Use when asked to explore the codebase to map structure, symbols, and dependencies. Not for a single file under 50 LOC: read it directly.'
 ---
 
 # Explore

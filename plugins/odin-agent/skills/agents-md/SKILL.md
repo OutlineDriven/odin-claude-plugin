@@ -1,6 +1,6 @@
 ---
 name: agents-md
-description: 'Use when setting up an agent repo, adding AGENTS.md, auditing CLAUDE.md, pruning stale files, or writing a lean AGENTS.md. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a repo needs agent setup, AGENTS.md added or made lean, CLAUDE.md audited, or agent instructions scored or pruned. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Agents MD

@@ -13,16 +13,17 @@ description: 'Use when a rendering path needs stable frame-time, CPU, GPU, and m
 | Authority | Reversible local: writes only named local artifacts; rollback is version control. No remote mutation. State and follow the rollback path before mutating. |
 | Side effect | Multi-metric frame-rate stabilization: local writes to the rendering path and its configuration. |
 | Done | Every fixed target holds for two consecutive comparable runs. |
-| Stop | Stalled; blocked; capped. Bound: fixed hardware, build, scene, settings, budget, and target values. |
+| Stop | Stalled; blocked; capped. Bound: fixed hardware, build, scene, budget, and target values. The rendering-path settings are the mutation; they freeze only across the two consecutive comparable runs. |
 
 ## Inputs
 
-- Fixed hardware, build, scene, settings, and budget (required): all parameters that affect rendering performance, named and frozen before any mutation.
+- Fixed hardware, build, scene, and budget (required): parameters that affect rendering performance and stay frozen for the whole run, named before any mutation.
 - Target values (required): fixed numeric thresholds for each metric: frame-time (ms or FPS), CPU (ms or %), GPU (ms or %), and memory (MB or GB). Every target must be a concrete number, not a directional goal like "lower" or "faster".
+- Rendering-path settings under test (required): the quality levels, resolution scaling, draw-call batching, shader complexity, and asset-streaming values the stabilization step tunes. They are the mutation. They freeze only across the two consecutive comparable runs.
 
 ## Procedure
 
-1. Bind the fixed hardware, build, scene, settings, budget, and target values. Freeze all before any mutation. Done when: every bound element is named and frozen, including a concrete numeric target for each metric.
+1. Bind the hardware, build, scene, budget, target values, and starting rendering-path settings. Freeze the hardware, build, scene, budget, and targets for the whole run; only the settings are open to tuning. Done when: every bound element is named and frozen, and each metric has a concrete numeric target.
 2. Stabilize the configuration against the fixed targets. Adjust rendering-path settings (quality levels, resolution scaling, draw-call batching, shader complexity, asset streaming) to meet every target. Collect frame-time, CPU, GPU, and memory evidence per change. Done when: every target is addressed with evidence showing the current configuration meets or misses it.
 3. Define the sampling window and run-comparability rules. The sampling window is the fixed duration or frame count over which metrics are measured (for example, 10 seconds or 600 frames at a fixed scene position). Run-comparability requires: same hardware, same build, same scene, same settings, same sampling window, same measurement tool. Declare the window and rules before running. Done when: the sampling window and comparability rules are declared in writing.
 4. Execute two consecutive comparable runs. Both runs use the frozen inputs, the declared sampling window, and the same measurement tool. Record per-target results for each run. A target holds only if both runs meet its threshold. If a target fails in either run, revisit step 2. Done when: both runs complete with per-target results recorded, or a target fails and is revisited.

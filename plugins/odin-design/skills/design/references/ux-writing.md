@@ -76,11 +76,9 @@ Never use humor for errors. The user is already frustrated; help, do not joke.
 
 ## Writing for accessibility
 
-Link text must have standalone meaning: "View pricing plans", not "Click here".
-
-**Alt text** describes information, not the image: "Revenue increased 40% in Q4", not "Chart". Use `alt=""` for decorative images.
-
-**Icon buttons** need `aria-label` for screen-reader context.
+- Link text has standalone meaning: "View pricing plans", not "Click here".
+- Alt text describes information, not the image: "Revenue increased 40% in Q4", not "Chart". Use `alt=""` for decorative images.
+- Icon buttons need `aria-label` for screen-reader context.
 
 ---
 

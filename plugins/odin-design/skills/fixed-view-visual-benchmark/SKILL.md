@@ -40,4 +40,4 @@ description: 'Use when a visual needs repeatable fixed-view rendering and indepe
 
 ## Output
 
-A terminal classification (`success`, `capped`, `stalled`, `blocked`, `exhausted`, or `pending`) plus the saved render, its per-dimension rubric scores, aggregate score, threshold, and the run receipt.
+A terminal classification (`success`, `capped`, `stalled`, or `blocked`) plus the saved render, its per-dimension rubric scores, aggregate score, threshold, and the run receipt.

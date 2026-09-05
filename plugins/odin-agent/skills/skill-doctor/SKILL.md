@@ -12,7 +12,7 @@ description: 'Use when a user wants agent setup graded from conversation history
 | Trigger | User wants agent setup graded from conversation history. |
 | Authority | Reversible local: writes only to a scratch report directory under the current working tree; rollback is deleting that directory. No remote mutation. |
 | Side effect | Creates one scratch report directory containing report.html and supporting assets. Never modifies real skill files, configuration, or conversation history. |
-| Done | report.html exists in the scratch directory and renders normalized 0-10 scores for efficiency and code quality, per-turn findings with evidence citations (or no findings when all sub-scores are maximum), and ranked improvement suggestions (or none when all sub-scores are maximum). |
+| Done | report.html exists in the scratch directory and renders a normalized 0-10 efficiency score, a normalized 0-10 code quality score (or N/A when the session has no code changes), per-turn findings with evidence citations (or no findings when every scored sub-score is at maximum), and ranked improvement suggestions (or none when every scored sub-score is at maximum). |
 
 ## Inputs
 
@@ -53,7 +53,7 @@ description: 'Use when a user wants agent setup graded from conversation history
    - Pattern adherence (0-2): Did changes follow existing codebase conventions? 2 = fully consistent, 1 = minor style deviations, 0 = ignores existing patterns.
    - Regression avoidance (0-2): Did changes avoid introducing bugs, dead code, or broken imports? 2 = clean, 1 = minor issues, 0 = introduced regressions.
    - Sum sub-scores for the raw code quality score (0-10).
-   - If the session contains no code changes, set code quality to N/A and note this in findings.
+   - If the session contains no code changes, set code quality to N/A and state the reason in the score summary; do not emit this as a finding.
    Done when: the code quality score (0-10 or N/A) is computed.
 
 5. **Normalize scores.**
@@ -75,7 +75,7 @@ description: 'Use when a user wants agent setup graded from conversation history
    - Write report.html as a self-contained HTML file with embedded CSS (no external dependencies, no network requests).
    - Structure:
      - Header: "Skill Doctor Report" with session identifier and timestamp.
-     - Score summary: two horizontal bar charts (efficiency, code quality) showing normalized scores out of 10. If code quality is N/A, show "N/A" instead of a bar.
+     - Score summary: two horizontal bar charts (efficiency, code quality) showing normalized scores out of 10. If code quality is N/A, show "N/A" instead of a bar and state the reason beside it.
      - Findings section: each finding as a card with category, score, evidence block (cited turn excerpts in a styled blockquote), and suggestion.
      - Suggestions summary: ranked list of all improvement suggestions.
    - Use clean, readable styling: white background, dark text, clear section headings, adequate spacing. No external fonts, no JavaScript, no network dependencies.
@@ -83,7 +83,7 @@ description: 'Use when a user wants agent setup graded from conversation history
 
 8. **Verify report.**
    - Confirm report.html exists in the output directory.
-   - Confirm it contains the score summary, at least one finding, and at least one suggestion (unless the session was too short or had no history, or all sub-scores are at maximum, in which case the minimal report satisfies the done predicate).
+   - Confirm it contains the score summary, at least one finding, and at least one suggestion (unless the session was too short or had no history, or every scored sub-score is at maximum, in which case the minimal report satisfies the done predicate).
    Done when: report.html exists and contains the required sections.
 
 ## Failure and recovery

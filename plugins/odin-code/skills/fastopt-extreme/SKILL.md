@@ -11,8 +11,8 @@ description: 'Use when optimizing estimated hot and complexity-neutral cold path
 |---|---|
 | Trigger | User wants to optimize estimated hot paths and complexity-neutral cold paths while refusing complexity theater. |
 | Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
-| Side effect | Chat output only: hypotheses and benchmark designs for estimated hot paths and complexity-neutral cold paths. |
-| Done | Hot and cold path hypotheses and benchmark designs are emitted; complexity theater is refused. |
+| Side effect | Chat output only: hypotheses and benchmark designs for estimated hot paths; simplification proposals for complexity-neutral cold paths. |
+| Done | Hot-path hypotheses with benchmark designs and cold-path simplification proposals are emitted; complexity theater is refused. |
 
 ## Inputs
 

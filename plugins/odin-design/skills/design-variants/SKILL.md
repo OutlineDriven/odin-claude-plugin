@@ -10,7 +10,7 @@ description: 'Use when /design-variants generates distinct design directions and
 | Field | Bound contract |
 |---|---|
 | Trigger | the user runs /design-variants |
-| Authority | Reversible local: writes only design variant pages and files under a per-project design directory; rollback is undo. No remote mutation. |
+| Authority | Reversible local: writes only design variant pages and files under a per-project design directory; rollback is deleting that directory. No remote mutation. |
 | Side effect | local-write to a design directory; no project source, VCS, credential, or remote mutation |
 | Done | A variant gallery is ready, an approved record is saved to the design directory, and the taste record is updated |
 

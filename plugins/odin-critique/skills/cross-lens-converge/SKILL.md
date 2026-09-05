@@ -25,12 +25,12 @@ The claim or artifact under pressure must be supplied. Candidate failure modes m
 3. Give each lens exactly one load-bearing reason it would reject or weaken the claim. A lens with no load-bearing reason is dropped before running, not coerced into agreement. Done when: every retained lens has one load-bearing reason; reasonless lenses are dropped.
 4. Run every lens independently against the artifact. Record, per lens, its verdict as one of agrees, disagrees, or cannot-decide, and the single reason that drives that verdict. Done when: every retained lens has a verdict and its driving reason recorded.
 5. Do not average, merge, or majority-count the verdicts. Disagreement is the product; preserve which lenses agreed and which disagreed. Done when: verdicts are preserved per-lens without averaging or majority-counting.
-6. From the disagreed and cannot-decide lenses, identify the one question whose answer would resolve the most lens disagreements. If no single question resolves more than one, name the question that resolves the highest-stakes disagreement. If every lens agrees, the resolving question is none. Done when: the single resolving question is identified, or none is set when every lens agrees.
+6. From the disagreed and cannot-decide lenses, identify the one question whose answer would resolve the most lens disagreements. If no single question resolves more than one, name the question that resolves the highest-stakes disagreement. If no lens disagrees and at least one lens cannot-decide, name the one question whose answer would let the undecided lenses reach a verdict. If every lens agrees, the resolving question is none. Done when: the single resolving question is identified, or none is set when every lens agrees.
 7. Return the convergence picture: per-lens verdict and load-bearing reason, the agreed set, the disagreed set, and the single resolving question. Done when: the convergence picture is returned with per-lens verdicts, agreed set, disagreed set, and resolving question.
 
 ## Failure and recovery
 - Duplicate failure modes: merge the lenses before running. Never run two lenses over the same failure mode and present their agreement as independent confirmation.
-- No disagreement: return the picture with the resolving question set to none; do not manufacture disagreement to look thorough.
+- No disagreement: do not manufacture disagreement to look thorough. If every lens agrees, set the resolving question to none; if only cannot-decide lenses remain, set it to the question from step 6 that lets them decide.
 - A lens cannot decide: record cannot-decide with its reason. Do not coerce it into agrees or disagrees.
 - A lens does not complete: return the partial picture, name the lens that did not complete, and mark its verdict cannot-decide. This skill reads only; on any error, it returns the partial picture and never edits the artifact or any file.
 

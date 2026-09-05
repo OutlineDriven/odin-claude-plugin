@@ -1,6 +1,6 @@
 ---
 name: docs-and-adrs
-description: 'Use when making an architectural decision, changing a public API, shipping a feature, or a codebase term resolves. Not for domain language: use domain-modeling. Not for docs: use docs-writing.'
+description: 'Use when making an architectural decision, changing a public API, shipping a feature, or recording a codebase term. Not for domain language: use domain-modeling. Not for docs: use docs-writing.'
 ---
 
 # Docs and ADRs
@@ -11,8 +11,8 @@ description: 'Use when making an architectural decision, changing a public API, 
 |---|---|
 | Trigger | Making an architectural decision, changing a public API, shipping a user-facing feature, capturing context for future engineers and agents, or a codebase term resolving |
 | Authority | Reversible local: writes only the documentation artifacts listed under Side effect, inside the current project working tree; rollback is version control. No remote mutation. Nothing is committed, staged, published, or pushed. |
-| Side effect | ADR, glossary entries in `CONTEXT.md`, README, API/JSDoc/OpenAPI docs, inline comments, changelog and agent-rules files; deletions are limited to commented-out code |
-| Done | ADR exists for each significant decision, README/API/inline gotchas accurate, no commented-out code, agent rules current |
+| Side effect | ADR, README, API/JSDoc/OpenAPI docs, inline comments, changelog and agent-rules files; deletions are limited to commented-out code |
+| Done | ADR exists for each significant decision, README/API/inline gotchas accurate, no commented-out code, agent rules current, each resolved codebase term routed to domain-modeling |
 
 ## Inputs
 
@@ -25,7 +25,7 @@ description: 'Use when making an architectural decision, changing a public API, 
 
 1. Bound scope before any write: enumerate only the decisions, APIs, and features named by the trigger. Do not document code whose meaning is obvious from reading it, write comments restating what code already says, or document throwaway prototypes. Done when: the scope list names only items from the trigger and nothing invented.
 2. Inspect the repository for an established documentation convention: existing ADRs, project instructions, ADR tooling config. Match the existing location, extension, markup, numbering, and heading set; when evidence conflicts, surface the conflict instead of introducing a second scheme. Apply the defaults below only when no convention exists. Done when: the convention is matched, or the default layout is selected with any conflict surfaced.
-3. For each resolved codebase term, write one glossary entry to `CONTEXT.md` following `references/context-format.md`: the canonical term, its project definition, and the near-synonyms to avoid. One entry per term; never silently rewrite a recorded definition. Done when: a CONTEXT.md entry exists for each resolved term.
+3. Route resolved codebase terms to domain-modeling. When a codebase term resolves during this pass, hand the term, its project definition, and its near-synonyms to domain-modeling, which owns `CONTEXT.md` and its entry schema. Do not write to `CONTEXT.md` here. Done when: each resolved term is routed to domain-modeling, or no term resolved.
 4. For each significant decision, write one ADR. Follow `references/adrs.md` for the qualifying conditions that gate whether a decision warrants an ADR, the `docs/decisions/` storage location with sequential numbering, and the template with its optional fields. Read the existing ADR directory to confirm the next number before writing. Done when: an ADR file exists at the location and format the reference specifies (or the detected convention's path) for each qualifying decision, with sequential numbering continuing the existing sequence.
 5. Manage the ADR lifecycle in place. Mark an ADR recording a decision taken in this session as `accepted`. When a later ADR reverses an earlier one, set the old ADR's status to `superseded by NNNN`. Never delete an ADR file. Done when: each ADR's status field reflects its lifecycle position.
 6. Inline comments: write only why-comments that explain the constraint, trade-off, or trap the code cannot show. Replace what-comments (`i++; // increment i`) with why-comments (`i++; // retry budget: the upstream limiter drops the first burst per connection`). Done when: every comment in the changed surface is a why-comment; no what-comments remain.
@@ -43,7 +43,7 @@ description: 'Use when making an architectural decision, changing a public API, 
 - Interrupted pass: each written artifact is self-contained, so partial results stay valid; list exactly which files were created or edited and touch nothing further.
 - Rollback: every change is a plain working-tree edit; restore the touched tracked files with version control or delete created ADR files to revert completely.
 - Blocked: when the decision or its rationale cannot be obtained, stop before writing and report which decision is blocked and which input is missing; the done predicate never reports true while a checklist item fails.
-- Unavailable ADR directory: record the glossary entry if a term resolved, skip the ADR, and report the pass as partial with the skipped artifact named; never halt the whole pass over one missing directory.
+- Unavailable ADR directory: route any resolved term to domain-modeling, skip the ADR, and report the pass as partial with the skipped artifact named; never halt the whole pass over one missing directory.
 
 ## Output
-A report listing every file created or edited with a one-line change description, the ADR numbers and titles created, and surfaced gaps (decisions with unknown rationale, stale TODOs reported), ordered by artifact type then file path.
+A report listing every file created or edited with a one-line change description, the ADR numbers and titles created, resolved codebase terms routed to domain-modeling, and surfaced gaps (decisions with unknown rationale, stale TODOs reported), ordered by artifact type then file path.

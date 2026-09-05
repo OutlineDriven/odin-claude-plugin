@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User runs /clean-clean-cut to cut accumulated records and residue under an explicit destructive gate. |
-| Authority | Reversible local: deletes only VCS-tracked targets inside an enumerated set (show the exact set before cutting); rollback is version control. No remote mutation. |
+| Authority | Reversible local: deletes only VCS-tracked targets inside an enumerated set (show the exact set before cutting); rollback is version control. No remote mutation. No history rewrite, data migration, credential change, or deletion of untracked or critical data. |
 | Side effect | Remove accumulated records, residue, and dependent code elements within the enumerated target set. |
 | Done | Purge checklist is confirmed and the enumerated targets are removed; the cut is recoverable through VCS. |
 
@@ -23,11 +23,11 @@ disable-model-invocation: true
 
 ## Procedure
 
-1. Enumerate the target set. List every record, residue file, and dependent code element to cut. Reject any member that is not VCS-tracked; an untracked target is out of scope. Done when: every member of the target set is listed, and each is confirmed VCS-tracked by git ls-files or equivalent; untracked members are rejected and named.
+1. Enumerate the target set. List every record, residue file, and dependent code element to cut, and state a removal order for the set (leaf-to-root by dependency, or reverse-enumeration order). Reject any member that is not VCS-tracked; an untracked target is out of scope. Done when: every member of the target set is listed, the removal order is stated, and each member is confirmed VCS-tracked by git ls-files or equivalent; untracked members are rejected and named.
 2. Confirm the PRE conditions: the target set is complete, each member is VCS-tracked, and no member outside the enumerated set is touched. Done when: the target set is confirmed complete, every member is VCS-tracked, and no member outside the enumerated set is identified for touching.
 3. Publish the purge checklist to the human: the enumerated set, the INVARIANT (only enumerated members change, nothing else), and the POST conditions (each enumerated member is absent and the stated check set passes). Done when: the purge checklist is displayed to the human showing the enumerated set, the INVARIANT, and the POST conditions, and the human confirms receipt before proceeding.
 4. Wait for human approval that names the exact enumerated set. Do not cut on approval of a different set, on silence, or on model self-authorization. Done when: the human approves cutting the exact enumerated set by naming it, and no approval is accepted for a different set, silence, or model self-authorization.
-5. Cut the enumerated set only. Remove each member in the stated order. Do not widen the set, follow dependent chains beyond the enumeration, or preserve history by reflex. Done when: every enumerated member is removed in the stated order, and no file outside the enumerated set was touched (confirmed by git status or equivalent).
+5. Cut the enumerated set only. Remove each member in the order stated in step 1. Do not widen the set, follow dependent chains beyond the enumeration, or preserve history by reflex. Done when: every enumerated member is removed in the stated order, and no file outside the enumerated set was touched (confirmed by git status or equivalent).
 6. Verify the POST conditions: every enumerated member is absent and the stated check set passes. Done when: every enumerated member is absent from the working tree, and the stated check set passes with its expected results.
 7. Confirm the cut is recoverable through VCS: the removed members exist in version control history. Done when: each removed member is confirmed present in VCS history by git log or equivalent, proving the cut is recoverable.
 

@@ -1,6 +1,6 @@
 ---
 name: design
-description: 'Use when starting UI work, defining palettes, tokens, or fixing AI-generic, vibe-coded, or default-framework UI. Not for design systems or live URLs: use design-consultation or web-design-review.'
+description: 'Use when starting UI work, defining palettes or tokens, or fixing AI-generic, vibe-coded, or default-framework UI. Not for design systems or live URLs: use design-consultation or web-design-review.'
 ---
 
 # Design

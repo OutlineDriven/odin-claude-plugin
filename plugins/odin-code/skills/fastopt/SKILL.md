@@ -1,6 +1,6 @@
 ---
 name: fastopt
-description: 'Use when optimizing suspected hot paths without waiting for benchmarks. Not for measured-floor rebuild campaigns: use extremely-optimize.'
+description: 'Use when optimizing suspected hot paths without waiting for benchmarks. Not for estimated-floor optimization: use fastopt-extreme. Not for measured-floor rebuild campaigns: use extremely-optimize.'
 ---
 
 # Fastopt

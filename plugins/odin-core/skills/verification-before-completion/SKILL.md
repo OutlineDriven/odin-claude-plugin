@@ -1,6 +1,6 @@
 ---
 name: verification-before-completion
-description: 'Use when about to report work as done, working, or ready, or before a commit, PR, or next-task move. Not for fact-checking, use verify-both-ways. Not for measuring a claim, use verify-this.'
+description: 'Use when a task, feature, or fix is called done, complete, finished, or fixed, or before a commit, PR, or next task. Not for fact-checking: use verify-both-ways. Not for measuring: use verify-this.'
 ---
 
 # Verification before completion

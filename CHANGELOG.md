@@ -13,9 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Folded `setup-tool-credentials` into `setup`: the credentials mechanism now makes `.env` safe
   before writing, validates credential formats, never overwrites existing keys, and verifies
   repository, tool access, and prerequisites.
-- Folded `record-design-decisions` into `docs-and-adrs`: resolved codebase terms are recorded to
-  `CONTEXT.md` via the new `references/context-format.md`, and an unavailable ADR directory no
-  longer halts the pass.
+- Folded `record-design-decisions` into `docs-and-adrs`: resolved codebase terms are routed to
+  `domain-modeling`, which owns `CONTEXT.md` and its entry schema, and an unavailable ADR
+  directory no longer halts the pass.
 - Folded `single-file-html-deck` into `presentation-creator`: the web-deck format now builds one
   self-contained, keyboard-navigable HTML file from caller-supplied brand tokens with a frozen
   pnpm lockfile and browser verification.

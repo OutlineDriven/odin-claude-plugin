@@ -12,7 +12,7 @@ description: 'Use when agent strategies need a reproducible finite tournament un
 | Trigger | Agent strategies need a reproducible finite tournament under a frozen evaluation protocol. |
 | Authority | Reversible local writes only. Run records and receipts under `.outline/loops/`; rollback is deletion. No VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | A reproducible tournament scorecard persisted as a run record. |
-| Done | The fixed matrix completes with saved move records, scores, and hidden-identity validation. |
+| Done | The run ends at exactly one declared terminal class with a persisted run record and `receipt.json`: on `success`, the complete matrix with move records, scores, and hidden-identity validation; on `stalled`, the named matchup and stopping reason; on `blocked`, the named violation or mismatch and no published scorecard; on `exhausted`, the completed matchups and the remainder, with no success claim. |
 
 ## Inputs
 
@@ -24,7 +24,7 @@ description: 'Use when agent strategies need a reproducible finite tournament un
 
 1. Bind the declared matchup matrix and freeze it before any run. Done when: the matrix is recorded in writing and no matchup has been executed yet.
 2. Execute the tournament inside the bound: run each matchup in the frozen matrix, record every move, and compute scores per the evaluation protocol. Done when: every matchup in the matrix has a recorded outcome or a non-success terminal applies.
-3. Stop at the first of: matrix complete (`success`), a non-success terminal (`stalled` for an incomplete matchup, `blocked` for an invalid run or hidden-identity mismatch, `exhausted` for budget exhaustion), or budget exhausted. Budget exhaustion is never success unless it was the predeclared success predicate. Done when: exactly one terminal class is selected and recorded.
+3. Stop at the first of: matrix complete (`success`), a non-success terminal (`stalled` for an incomplete matchup, `blocked` for an invalid run or hidden-identity mismatch, `exhausted` for budget exhaustion). Budget exhaustion is never success unless it was the predeclared success predicate. Done when: exactly one terminal class is selected and recorded.
 4. Validate hidden-identity assignments: confirm each assignment is consistent across the matrix and no identity leaked before disclosure. Done when: every identity assignment is verified or the mismatch is named.
 5. Persist the result: write the run record to `.outline/loops/<slug>/<run_id>/` when durable, and emit `receipt.json` before returning. Done when: the receipt file exists and contains every required field.
 

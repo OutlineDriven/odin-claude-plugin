@@ -42,11 +42,11 @@ One concern: configure the agent environment. Four mechanisms reach it: credenti
 
 1. **Confirm scope.** If the user named no integration, list every known integration placeholder found in skill scripts and .env templates. Ask the user to select which to configure. **Done when:** the user selects integrations or declines.
 
-2. **Identify targets.** For each selected integration, locate the corresponding placeholder in skill scripts (search for `{{VARIABLE_NAME}}` patterns or comments naming the integration) and locate or create the corresponding entry in `.env` or `token.json`. **Done when:** every selected integration has a placeholder and credential entry located.
+2. **Identify targets.** For each selected integration, locate the corresponding placeholder in skill scripts (search for `{{VARIABLE_NAME}}` patterns or comments naming the integration) and identify which credential file it reads (`.env` or `token.json`). Do not write in this step. **Done when:** every selected integration has a placeholder located and its credential file identified.
 
 3. **Detect current state.** Check whether a real value already exists in `.env` or `token.json` for each selected integration. Never overwrite an existing non-empty value: report the key name and that it was skipped, never the value. **Done when:** the current state of every selected integration is recorded.
 
-4. **Make `.env` safe before creating or appending.** A path is safe when it is not tracked and it is ignored; do not use `git status` for either check, because an ignored `.env` is omitted from that output. In a git work tree: stop when `git ls-files --error-unmatch -- .env` succeeds (the file is tracked); when `git check-ignore -q -- .env` fails, obtain confirmation and add `.env` to `.gitignore`, creating it when missing; create an empty `.env` only when the path is safe. In a fresh directory with no git work tree: create a `.gitignore` excluding `.env`, then create an empty `.env` when missing. **Done when:** a safe `.env` exists, or the unsafe state is reported and the mechanism stops.
+4. **Make each credential file safe before creating or appending.** Check `.env` and every `token.json` that a selected integration uses. A path is safe when it is not tracked and it is ignored; do not use `git status` for either check, because an ignored path is omitted from that output. In a git work tree: stop when `git ls-files --error-unmatch -- <path>` succeeds (the file is tracked); when `git check-ignore -q -- <path>` fails, obtain confirmation and add the path to `.gitignore`, creating it when missing; create an empty file only when the path is safe. In a fresh directory with no git work tree: create a `.gitignore` excluding `.env` and `token.json`, then create each empty file when missing. **Done when:** every credential file is safe, or the unsafe state is reported and the mechanism stops.
 
 5. **Ask for each missing value, with format validation.** Prompt the user to supply the credential; accept it only via direct user input in the conversation. Validate basic format: a non-empty string plus the named tool's convention (for example, a Slack bot token starts with `xoxb-`; a Postgres URL contains `://`). Discard a failing value and prompt again. **Done when:** every missing value is supplied and validated, or the user declines.
 
@@ -107,7 +107,7 @@ One concern: configure the agent environment. Four mechanisms reach it: credenti
 | Placeholder not found in any skill script | Skip replacement; mark the integration in the checklist. Report the integration and the fact that no placeholder was found. |
 | Write fails (permission or disk) | Do not continue writing remaining files. Report the failing path and the reason. |
 | No integrations selected | Return an empty checklist and stop. |
-| Unsafe `.env` path (tracked, or ignore coverage declined) | Stop the credentials mechanism. Do not create or append `.env`. |
+| Unsafe credential file path (`.env` or `token.json` tracked, or ignore coverage declined) | Stop the credentials mechanism. Do not create or append the file. |
 | Repository or tool access fails | Name the failing token or URL and stop the verification step. Credentials already written remain. |
 
 Rollback: if a write fails mid-way, already-written credential files are retained as-is; do not attempt to erase or revert partial writes.

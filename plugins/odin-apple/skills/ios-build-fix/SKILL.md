@@ -66,7 +66,7 @@ A minimal Swift source fix committed with its reproducing snapshot (`<bug-slug>-
 | Trigger | the user asks to regenerate an Xcode project from `project.yml` via XcodeGen, or the skill detects that the generated xcodeproj is stale after `project.yml` changed |
 | Authority | Reversible local: write only the regenerated xcodeproj built from `project.yml`; roll back via `git restore` of the xcodeproj. Never edit handwritten Swift or hand-patch generated files. |
 | Side effect | Regenerates the xcodeproj from `project.yml` without modifying handwritten Swift files. |
-| Done | The regenerated project builds: `swift build` and `xcodebuild -scheme <SchemeName>` both succeed, or the freshness check reports "already up to date" with the freshness result reported; the early exit is DONE in Output. |
+| Done | The regenerated project builds: `xcodebuild -scheme <SchemeName>` succeeds, and `swift build` also succeeds when the app root has a `Package.swift`; or the freshness check reports "already up to date" with the freshness result reported; the early exit is DONE in Output. |
 
 ### Inputs
 
@@ -81,8 +81,8 @@ A minimal Swift source fix committed with its reproducing snapshot (`<bug-slug>-
 3. Check freshness: hash the current `project.yml` content and compare the hash to the value recorded inside the generated xcodeproj bundle. Look for a recorded hash in a known comment or sidecar file within the bundle; if no recorded hash is found, proceed with regeneration. If the hashes match, exit with "already up to date".
 4. Save the uncommitted handwritten Swift diff (`mkdir -p .outline && git diff -- "*.swift" > .outline/ios-regen-pre.patch`). Run the resolved generator command against the app root or `project.yml` path. The generator removes obsolete generated files and emits the current xcodeproj. If the generator reports an invalid `project.yml` entry, return BLOCKED with "invalid manifest entry" and the generator's error message.
 5. Review the generated diff under the xcodeproj. Confirm the generator did not modify the app's handwritten Swift files. Canonical template files are regenerated from upstream and should not be hand-edited; keep app-specific wiring in the app target. If handwritten Swift files appear in the generated diff, revert via `git restore` of the xcodeproj, then restore those files by applying the saved patch first (`git apply .outline/ios-regen-pre.patch`) when the patch is non-empty; fall back to `git checkout -- <file>` only for files that were clean before the run. Return BLOCKED with "handwritten Swift modified by regenerator".
-6. Run `swift build` against the app's package. Run `xcodebuild -scheme <SchemeName>` against the regenerated project. If either fails, revert via `git restore` of the xcodeproj, surface the compile error, and return BLOCKED with "build failure after regeneration" and the failing command's output.
-7. If both builds succeed and the generated diff contains only expected xcodeproj files, classify DONE. The regenerated xcodeproj is left uncommitted; the build verification covers it.
+6. Build. If the app root has a `Package.swift`, run `swift build` against the app's package; without one, the project has no SwiftPM package to build. Run `xcodebuild -scheme <SchemeName>` against the regenerated project. If a required build fails, revert via `git restore` of the xcodeproj, surface the compile error, and return BLOCKED with "build failure after regeneration" and the failing command's output.
+7. If the required builds succeed and the generated diff contains only expected xcodeproj files, classify DONE. The regenerated xcodeproj is left uncommitted; the build verification covers it.
 
 ### Failure and recovery
 

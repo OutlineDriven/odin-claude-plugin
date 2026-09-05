@@ -40,7 +40,7 @@ disable-model-invocation: true
 
 ## Failure and recovery
 
-- Residue remains: old references survive in code, tests, docs, or config after step 8. Return to step 4; do not widen scope beyond the demolition manifest.
+- Residue remains: old references survive in code, tests, docs, or config after step 8. Report the survivors and stop with exit 1 (residue). Do not widen scope beyond the demolition manifest.
 - Build or tests broken: migration incomplete, callers or assertions not yet on the new shape. Fix forward if within scope; if scope is exhausted, report the exact blockers and stop.
 - Migration stalled: codebase is half old, half new. Finish or revert to version-control baseline; never ship the intermediate state.
 

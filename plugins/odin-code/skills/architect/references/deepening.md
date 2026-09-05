@@ -14,7 +14,7 @@ _Examples_: a Rust parser combinator chain consolidated into one `parse(input) -
 
 ### 2. Local-substitutable
 
-Dependencies that have local test stand-ins (PGLite for Postgres, in-memory filesystems, Testcontainers, OCaml `Eio.Mock`). Deepenable when the stand-in exists. The deepened module is tested with the stand-in running in the test suite. The seam is internal; no port at the module's external interface.
+Dependencies that have local test stand-ins (PGLite for Postgres, in-memory filesystems, Testcontainers, OCaml `Eio_mock`). Deepenable when the stand-in exists. The deepened module is tested with the stand-in running in the test suite. The seam is internal; no port at the module's external interface.
 
 _Examples_: a Go data-access module fronting Postgres tested with `pgx` against a Testcontainers Postgres; a Java repository tested with H2 in-memory; an OCaml store tested through `Eio_mock` filesystem.
 
@@ -28,7 +28,7 @@ _Examples_: a Kotlin service calling an internal pricing microservice via a `Pri
 
 Third-party services (Stripe, Twilio, GitHub, Auth0) the team does not control. The deepened module takes the external dependency as an injected port; tests provide a mock adapter.
 
-_Examples_: a Python billing module that takes a `PaymentGateway` protocol, `StripePaymentGateway` in production, a `pytest`/`hypothesis` mock in tests; a Go SMS dispatcher with a `Notifier` interface, Twilio adapter in production, recording fake in tests.
+_Examples_: a Python billing module that takes a `PaymentGateway` protocol, `StripePaymentGateway` in production, a `pytest` mock in tests; a Go SMS dispatcher with a `Notifier` interface, Twilio adapter in production, recording fake in tests.
 
 ## Seam discipline
 
