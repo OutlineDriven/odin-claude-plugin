@@ -15,6 +15,7 @@ does not touch a live carrier.
 """
 
 import importlib.util
+import io
 import os
 import re
 import sys
@@ -55,12 +56,14 @@ Options:
   --carrier NAME=PATH
                      Override the carrier path for NAME (codex or omp).
                      Repeatable; a missing path is skipped with a notice.
-                     An existing non-file path is an error, not a skip.
+                     An existing non-file path is an error, not a skip, and
+                     a symlink is an error even when its target is missing.
   -h, --help         Show this help and exit.
 
 With no arguments, rewrites every carrier that exists. A missing carrier
-prints a notice and is skipped. The four tool-layer sections (git, directives,
-code_tools, thinking) are never modified.
+prints a notice and is skipped; a symlink carrier is an error, even a
+dangling one. The four tool-layer sections (git, directives, code_tools,
+thinking) are never modified.
 """
 
 def _code_tools_pos(text):
@@ -154,6 +157,15 @@ def _plan(baseline_text, carrier_text):
     return changes, new_text, None
 
 
+def _carrier_missing(path):
+    """Return True when the carrier is absent, not merely unusable.
+
+    A dangling symlink is not absent: it reaches the symlink rejection in
+    _carrier_path_error instead of the not-found skip.
+    """
+    return not path.is_symlink() and not path.exists()
+
+
 def _carrier_path_error(path):
     """Return an error string for an unusable existing path, else None.
 
@@ -230,6 +242,28 @@ def self_test():
         linked = directory / "linked.md"
         linked.symlink_to(file_path)
         checks.append(("a symlink carrier is rejected", _carrier_path_error(linked) == "symlink"))
+        dangling = directory / "dangling.md"
+        dangling.symlink_to(directory / "no-such-target.md")
+        checks.append((
+            "a dangling symlink reaches the symlink rejection, not the skip",
+            _carrier_path_error(dangling) == "symlink",
+        ))
+        saved_argv, saved_stdout, saved_stderr = sys.argv, sys.stdout, sys.stderr
+        sys.argv = [
+            "sync-carriers.py",
+            "--carrier", f"codex={dangling}",
+            "--carrier", f"omp={file_path}",
+        ]
+        captured = io.StringIO()
+        sys.stdout = sys.stderr = captured
+        try:
+            ret = main()
+        finally:
+            sys.argv, sys.stdout, sys.stderr = saved_argv, saved_stdout, saved_stderr
+        checks.append((
+            "main rejects a dangling-symlink carrier override",
+            ret == 1 and "symlink" in captured.getvalue(),
+        ))
 
     passed = 0
     for label, ok in checks:
@@ -301,7 +335,7 @@ def main():
     in_sync = 0
 
     for _name, path in carriers:
-        if not path.exists():
+        if _carrier_missing(path):
             print(f"sync-carriers: {path}: not found, skipped")
             continue
         path_error = _carrier_path_error(path)

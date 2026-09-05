@@ -9,11 +9,15 @@ default:
     @just --list
 
 # Regenerate every generated file: skill manifests, plugin manifests, registries, skill index, and the doctrine cascade.
+#
+# sync-baseline.py exits 1 when it rewrote a drifted cascade: that is its
+# pre-commit re-stage convention, not a render failure. Exit 2 (missing
+# canonical baseline or broken style layout) still fails the recipe.
 render:
     node scripts/render-skill-manifests.mjs
     node scripts/render-plugin-surfaces.mjs
     node scripts/render-skill-index.mjs
-    python3 scripts/sync-baseline.py
+    python3 scripts/sync-baseline.py || [ $? -eq 1 ]
 
 # Mirror every skill into the outline repository as a flat Devin skill tree.
 #
