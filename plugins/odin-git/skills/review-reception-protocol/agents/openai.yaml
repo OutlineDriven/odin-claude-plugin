@@ -1,3 +1,0 @@
-interface:
-  display_name: "Review Reception Protocol"
-  short_description: "Use when asked to receive code review feedback before acting on any of it."

@@ -414,7 +414,6 @@
 | review | odin-review | Coding |
 | review-and-ship | odin-git | Coding |
 | review-plugin-submission | odin-skills | Productivity |
-| review-reception-protocol | odin-git | Coding |
 | review-speedread | odin-review | Coding |
 | rewrite-clean-v0 | odin-writing | Writing |
 | rewrite-denoise-v0 | odin-writing | Writing |
