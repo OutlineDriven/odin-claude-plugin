@@ -10,15 +10,20 @@ _DEFAULTS = {
     "early_stop_speedup": 3.0,
     "perf_stat_enabled": True,
     "vtune_enabled": False,
+    "vtune_bin": "/opt/intel/oneapi/vtune/latest/bin64/vtune",
     "build_command": "kernel-builder build --release",
+    "install_command": "pip install dist/*.whl --force-reinstall --no-deps",
 }
 
 
-def load_config() -> dict:
-    """Load config.yaml, falling back to defaults for missing keys."""
+def load_config() -> dict[str, object]:
+    """Load config.yaml; missing keys fall back to defaults, a missing file is an error."""
     config_path = _CONFIG_DIR / "config.yaml"
-    cfg = {}
-    if config_path.exists():
-        with open(config_path) as f:
-            cfg = yaml.safe_load(f) or {}
+    if not config_path.exists():
+        raise FileNotFoundError(
+            f"config file not found: {config_path}. The skill stops and reports "
+            "rather than assuming trial and profiling settings."
+        )
+    with open(config_path) as f:
+        cfg = yaml.safe_load(f) or {}
     return {**_DEFAULTS, **cfg}

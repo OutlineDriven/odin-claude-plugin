@@ -344,13 +344,18 @@ def cmd_finalize(args):
         output_path = os.path.join(OUTPUT_DIR, output_path)
 
     # Stage beside the destination, then swap, so an existing output never
-    # keeps files the chosen trial no longer has.
+    # keeps files the chosen trial no longer has. Resolve a symlinked
+    # destination first so the swap replaces the target, not the link.
     dest = Path(output_path)
-    dest.parent.mkdir(parents=True, exist_ok=True)
-    staging = Path(tempfile.mkdtemp(prefix=".finalize-", dir=dest.parent))
-    staged = staging / dest.name
-    backup = Path(f"{staged}.old")
+    staging = None
+    backup = None
     try:
+        if dest.is_symlink():
+            dest = dest.resolve()
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        staging = Path(tempfile.mkdtemp(prefix=".finalize-", dir=dest.parent))
+        staged = staging / dest.name
+        backup = Path(f"{staged}.old")
         if Path(src).is_dir():
             shutil.copytree(src, staged)
         else:
@@ -359,16 +364,20 @@ def cmd_finalize(args):
             os.rename(dest, backup)
         os.rename(staged, dest)
     except OSError as e:
-        if (backup.exists() or backup.is_symlink()) and not (dest.exists() or dest.is_symlink()):
+        if backup is not None and (backup.exists() or backup.is_symlink()) and not (dest.exists() or dest.is_symlink()):
             os.rename(backup, dest)
-        shutil.rmtree(staging, ignore_errors=True)
+        if staging is not None:
+            shutil.rmtree(staging, ignore_errors=True)
         print(f"Error: Failed to finalize into '{output_path}': {e}", file=sys.stderr)
         sys.exit(1)
-    if backup.exists() or backup.is_symlink():
-        if backup.is_symlink() or not backup.is_dir():
-            backup.unlink()
-        else:
-            shutil.rmtree(backup, ignore_errors=True)
+    try:
+        if backup is not None and (backup.exists() or backup.is_symlink()):
+            if backup.is_symlink() or not backup.is_dir():
+                backup.unlink()
+            else:
+                shutil.rmtree(backup, ignore_errors=True)
+    except OSError as e:
+        print(f"Warning: finalized into '{output_path}' but could not remove the displaced output '{backup}': {e}", file=sys.stderr)
     shutil.rmtree(staging, ignore_errors=True)
 
     runtime_str = ""
