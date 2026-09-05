@@ -2,7 +2,7 @@
 
 ODIN workflows for security review, vulnerability triage, and defensive implementation.
 
-40 skills, category Security.
+39 skills, category Security.
 
 ## Install
 
@@ -52,7 +52,6 @@ codex plugin add odin-security@odin-marketplace
 - trailmark-structural
 - triage-security-finding
 - variant-hunt
-- variant-neighborhood-seeding
 - vector-forge
 - vulnerability-triage-brocards
 - wycheproof

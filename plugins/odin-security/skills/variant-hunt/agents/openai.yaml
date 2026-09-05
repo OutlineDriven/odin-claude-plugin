@@ -1,3 +1,3 @@
 interface:
   display_name: "Variant Hunt"
-  short_description: "Use when a confirmed root cause must be searched across a codebase or turned into a search rule."
+  short_description: "Use when a confirmed root cause must be searched across a codebase, turned into a search rule, or seeded from graph neighbors."
