@@ -26,7 +26,7 @@ description: 'Use when a user commits to a direction and asks to plan, brief, or
 
 ## Procedure
 
-1. **Select mode.** Route by the ask: score or stress-test a plan against the quality bar → Mode score; break a goal into dependency-ordered tasks → Mode breakdown; plan, pitch, gut-check, or match a result to a bet → Mode shape; build and visualize a plan page → Mode visual. Otherwise continue at step 2. An explicit mode input always wins. Done when: the mode is selected.
+1. **Select mode.** Route by the ask: score or stress-test a plan against the quality bar → Mode score; break a goal into dependency-ordered tasks → Mode breakdown; shape, pitch, gut-check, or match a result to a bet → Mode shape; build and visualize a plan page → Mode visual. Otherwise continue at step 2. An explicit mode input always wins. Done when: the mode is selected.
 2. **Classify type.** Map the user's ask to one of: Product Plan, Technical Plan, Research Brief, Operational Plan. Map the tier to one of: Exploration, Proposal, Execution, Audit. Done when: type and tier are classified.
 3. **Research prior work.** Read every file under plans/ relevant to the direction. Record what already exists and what gaps remain. Done when: existing plans under plans/ are read and gaps recorded.
 4. **Research knowledge base.** Query available context (memories, session notes, codebase knowledge) for relevant facts, constraints, and prior decisions. Done when: relevant facts, constraints, and prior decisions are queried.
@@ -65,7 +65,7 @@ Run instead of steps 2-12. Chat output only; no file is written. A shaped pitch 
 
 Route by phrasing; an explicit sub-mode always wins:
 
-- Raw idea, "plan this", "pitch this", "what's the appetite" → build-shape.
+- Raw idea, "shape this", "pitch this", "what's the appetite" → build-shape.
 - "gut check", "vibe check", "does this feel right" → shape-check.
 - Existing pitch plus "fix", "reshape", "is this well shaped" → to-good-shape.
 - Finished work plus "did we ship the bet", "match the plan", results review → feel-shape.

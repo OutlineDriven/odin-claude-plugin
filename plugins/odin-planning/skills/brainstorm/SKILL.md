@@ -57,7 +57,7 @@ description: 'Use when the user begins knowledge work with notes, a transcript, 
 - External search declined or unavailable: mark it not performed and continue on local findings only.
 - Interrupted searches: carry the findings gathered so far into the output and mark what was not searched; never present an unsearched area as empty.
 - More than three genuinely load-bearing questions: keep the three whose answers most change the plan's shape; record the rest as open questions in the origin file instead of widening the interrogation.
-- Write failure: if the mode's artifact cannot be written, stop before plan or presenting; report the error and the intended path. The done state does not hold.
+- Write failure: if the mode's artifact cannot be written, stop before planning or presenting; report the error and the intended path. The done state does not hold.
 - User declines save (mode `dump`): end without writing; the in-conversation brainstorm is the result. Planning never precedes the write.
 - `blocked: subject-unidentified` (mode `ideate`): the repository evidence does not identify the divergent subject; request clarification with nothing written.
 - `blocked: target-exists` (mode `ideate`): an output path already exists; do not overwrite; report the conflicting path.
