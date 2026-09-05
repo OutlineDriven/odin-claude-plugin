@@ -1,6 +1,6 @@
 ---
 name: generate-my-taste
-description: 'Use when asked to generate a personal taste skill from local evidence. Not for applying an existing taste register: use spine. Local writes only.'
+description: 'Use when asked to generate a personal taste skill from local evidence. Not for applying an existing taste register: use the user-private spine skill.'
 ---
 
 # Generate my taste
@@ -16,7 +16,7 @@ description: 'Use when asked to generate a personal taste skill from local evide
 
 ## Not for
 
-- Applying an existing taste register: use spine.
+- Applying an existing taste register: use the user-private spine skill.
 - Generating a skill that is not a taste skill: this generator produces `<name>-taste` skills only.
 - Remote, credential, publish, deploy, or irreversible changes.
 

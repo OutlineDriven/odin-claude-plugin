@@ -91,6 +91,13 @@ repos:
         pass_filenames: false
         always_run: true
 
+      - id: check-skill-routes-self-test
+        name: check the pointer-target gate catches a planted dangling pointer
+        entry: node scripts/check-skill-routes.mjs --self-test
+        language: system
+        pass_filenames: false
+        always_run: true
+
       - id: render-skill-manifests
         name: check skill manifests match SKILL.md frontmatter
         entry: node scripts/render-skill-manifests.mjs --check
