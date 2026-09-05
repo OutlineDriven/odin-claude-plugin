@@ -357,7 +357,6 @@
 | planning | odin-planning | Productivity |
 | planning-and-task-breakdown | odin-planning | Productivity |
 | polished-web-prototype | odin-design | Design |
-| port-static-analysis-rule | odin-security | Security |
 | possible-worlds | odin-planning | Productivity |
 | possible-worlds-qa | odin-testing | Coding |
 | post-change-check-gate | odin-core | Coding |

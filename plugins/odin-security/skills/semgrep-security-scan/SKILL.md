@@ -1,6 +1,6 @@
 ---
 name: semgrep-security-scan
-description: 'Use when a user asks for a Semgrep security scan or fast pattern-based scan of a codebase. Not for authoring or porting rules: use port-static-analysis-rule.'
+description: 'Use when a user asks for a Semgrep security scan or fast pattern-based scan of a codebase. Not for authoring or porting rules: use semgrep-rule-authoring.'
 ---
 
 # Semgrep security scan
@@ -16,7 +16,7 @@ description: 'Use when a user asks for a Semgrep security scan or fast pattern-b
 
 ## Not for
 
-- Authoring or porting Semgrep rules. Use port-static-analysis-rule.
+- Authoring or porting Semgrep rules. Use semgrep-rule-authoring.
 
 ## Inputs
 

@@ -2,7 +2,7 @@
 
 ODIN workflows for security review, vulnerability triage, and defensive implementation.
 
-44 skills, category Security.
+43 skills, category Security.
 
 ## Install
 
@@ -37,7 +37,6 @@ codex plugin add odin-security@odin-marketplace
 - insecure-default-discovery
 - mermaid-to-proverif
 - oauth2-flow-implementation
-- port-static-analysis-rule
 - project-findings-onto-graph
 - rust-security-review
 - security-finding-verification
