@@ -136,10 +136,28 @@ query Reviews($owner: String!, $repo: String!, $pr: Int!, $endCursor: String) {
 # was addressed. Resolution state is the only authoritative signal; outdated
 # threads are still surfaced (with their isOutdated flag intact) so the
 # resolver can factor in that the referenced line may have moved.
+#
+# Feed jq from files, never argv: on a PR with enough threads the paginated
+# JSON exceeds the kernel's ARG_MAX and `--argjson "$var"` dies with
+# "Argument list too long" (exit 126) before any filtering runs. `gh api
+# graphql --paginate --slurp` always wraps the pages in an array, and
+# `--slurpfile` adds one more nesting level, so normalize both shapes
+# before filtering.
+threads_file=$(mktemp "${TMPDIR:-/tmp}/odin-get-pr-comments.XXXXXX")
+comments_file=$(mktemp "${TMPDIR:-/tmp}/odin-get-pr-comments.XXXXXX")
+reviews_file=$(mktemp "${TMPDIR:-/tmp}/odin-get-pr-comments.XXXXXX")
+trap 'rm -f "$threads_file" "$comments_file" "$reviews_file"' EXIT
+printf '%s' "$threads_pages" > "$threads_file"
+printf '%s' "$comments_pages" > "$comments_file"
+printf '%s' "$reviews_pages" > "$reviews_file"
+
 jq -n \
-  --argjson threads "$threads_pages" \
-  --argjson comments "$comments_pages" \
-  --argjson reviews "$reviews_pages" '
+  --slurpfile tp "$threads_file" \
+  --slurpfile cp "$comments_file" \
+  --slurpfile rp "$reviews_file" '
+  (if ($tp[0]|type) == "array" then $tp[0] else $tp end) as $threads |
+  (if ($cp[0]|type) == "array" then $cp[0] else $cp end) as $comments |
+  (if ($rp[0]|type) == "array" then $rp[0] else $rp end) as $reviews |
   ($threads[0].data.repository.pullRequest.author) as $author |
   [$threads[].data.repository.pullRequest.reviewThreads.nodes[]] as $all_threads |
   [$comments[].data.repository.pullRequest.comments.nodes[]] as $all_comments |
