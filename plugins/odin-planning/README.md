@@ -2,7 +2,7 @@
 
 ODIN workflows for shaping intent into approved plans, specs, and task lists.
 
-50 skills, category Productivity.
+48 skills, category Productivity.
 
 ## Install
 
@@ -66,5 +66,3 @@ codex plugin add odin-planning@odin-marketplace
 - visual-plan
 - waterfall-guide
 - wayfinder
-- write-prd
-- write-tech-spec

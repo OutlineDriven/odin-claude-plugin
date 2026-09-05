@@ -593,9 +593,7 @@
 | workspace-unfreeze | odin-agent | Productivity |
 | worktree | odin-git | Coding |
 | write-pr-description | odin-git | Coding |
-| write-prd | odin-planning | Productivity |
 | write-product-spec | odin-product | Productivity |
-| write-tech-spec | odin-planning | Productivity |
 | writing-beats | odin-writing | Writing |
 | writing-for-agents | odin-skills | Productivity |
 | writing-fragments | odin-writing | Writing |
