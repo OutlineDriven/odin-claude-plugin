@@ -24,8 +24,8 @@ description: 'Use when agent strategies need a reproducible finite tournament un
 
 1. Bind the declared matchup matrix and freeze it before any run. Done when: the matrix is recorded in writing and no matchup has been executed yet.
 2. Execute the tournament inside the bound: run each matchup in the frozen matrix, record every move, and compute scores per the evaluation protocol. Done when: every matchup in the matrix has a recorded outcome or a non-success terminal applies.
-3. Stop at the first of: matrix complete (`success`), a non-success terminal (`stalled` for an incomplete matchup, `blocked` for an invalid run or hidden-identity mismatch, `exhausted` for budget exhaustion). Budget exhaustion is never success unless it was the predeclared success predicate. Done when: exactly one terminal class is selected and recorded.
-4. Validate hidden-identity assignments: confirm each assignment is consistent across the matrix and no identity leaked before disclosure. Done when: every identity assignment is verified or the mismatch is named.
+3. Validate hidden-identity assignments: confirm each assignment is consistent across the matrix and no identity leaked before disclosure. Done when: every identity assignment is verified or the mismatch is named.
+4. Select the terminal class, exactly one: `success` only when the matrix is complete and step 3 verified every identity; otherwise `stalled` for an incomplete matchup, `blocked` for an invalid run or a hidden-identity mismatch, `exhausted` for budget exhaustion before the matrix completes. Budget exhaustion is never success. Done when: exactly one terminal class is selected and recorded.
 5. Persist the result: write the run record to `.outline/loops/<slug>/<run_id>/` when durable, and emit `receipt.json` before returning. Done when: the receipt file exists and contains every required field.
 
 ## Failure and recovery
