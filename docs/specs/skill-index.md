@@ -403,7 +403,6 @@
 | release-gate | odin-release | Coding |
 | release-landing-report | odin-release | Coding |
 | release-promotion | odin-product | Productivity |
-| render-excalidraw-diagram | odin-visual | Design |
 | reorder | odin-writing | Writing |
 | reorder-respect-deliberate | odin-writing | Writing |
 | replace-unsafe-typescript-assertions | odin-typescript | Coding |
