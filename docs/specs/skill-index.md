@@ -471,7 +471,6 @@
 | site-launch-checklist | odin-web | Coding |
 | size-the-run | odin-run | Coding |
 | skill-benchmark | odin-skills | Productivity |
-| skill-benchmark-gate | odin-skills | Productivity |
 | skill-doctor | odin-agent | Productivity |
 | skill-gap-finder | odin-core | Coding |
 | skill-improver | odin-skills | Productivity |
