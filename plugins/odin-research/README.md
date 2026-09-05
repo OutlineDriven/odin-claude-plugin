@@ -2,7 +2,7 @@
 
 ODIN workflows for source-backed investigation, verification, and design rationale.
 
-14 skills, category Research.
+13 skills, category Research.
 
 ## Install
 
@@ -30,5 +30,4 @@ codex plugin add odin-research@odin-marketplace
 - scrape
 - summarize-document-set
 - verify-both-ways
-- visual-fact-check
 - why

@@ -514,7 +514,6 @@
 | visual-argument-diagram | odin-visual | Design |
 | visual-diagram | odin-visual | Design |
 | visual-diff-review | odin-review | Coding |
-| visual-fact-check | odin-research | Research |
 | visualise-widget | odin-visual | Design |
 | vulnerability-triage-brocards | odin-security | Security |
 | wait-what | odin-learn | Productivity |
