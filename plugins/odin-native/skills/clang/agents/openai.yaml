@@ -1,0 +1,3 @@
+interface:
+  display_name: "Clang"
+  short_description: "Use when a C or C++ build uses clang and needs diagnostics, optimization remarks, clang-tidy, ThinLTO with lld, LLVM PGO, or a GCC-to-Clang migration."

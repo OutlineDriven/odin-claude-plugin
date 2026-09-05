@@ -1,0 +1,3 @@
+interface:
+  display_name: "Concurrency Debugging"
+  short_description: "Use when reading TSan race reports, debugging deadlocks with GDB thread inspection, analyzing Helgrind lock-order violations, or reviewing std::atomic and happens-before usage."

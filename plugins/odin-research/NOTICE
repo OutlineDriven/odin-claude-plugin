@@ -248,6 +248,52 @@ Local adaptations: analysis-artifacts, create-pull-request, dbt-model-index, doc
   seo-aeo-audit, terraform-style-check, web-accessibility-audit, web-performance-audit,
   webapp-testing
 
+mohitmishra786/low-level-dev-skills
+Source: https://github.com/mohitmishra786/low-level-dev-skills/tree/bdc58472fa9f309ed1b3f7d985a0d8e9bd8f4608
+License: MIT (https://opensource.org/licenses/MIT)
+Copyright: Copyright (c) 2026 chessMan
+Local adaptations: abi-and-calling-conventions, adc-dac-baremetal, af-xdp, apple-silicon,
+  arm-sve, assembly-arm, assembly-riscv, assembly-x86, baremetal-startup, bazel,
+  binary-hardening, binutils, bootloaders-embedded, branch-prediction-and-speculation,
+  build-acceleration, bus-drivers-i2c-spi, carbon-lang, cargo-workflows, clang, cmake,
+  code-generation-and-backends, compiler-frontend, compiler-optimizations-deep, conan-vcpkg,
+  concurrency-debugging, containers-internals, core-dumps, cpp-coroutines, cpp-modules,
+  cpp-templates, cpu-cache-opt, cpu-pipelines-and-hazards, cross-gcc, cuda, cuda-debugging,
+  cuda-profiling, custom-allocators, datasheet-and-refmanual-reading, debug-optimized-builds,
+  device-drivers, device-tree, dma-baremetal, dpdk, dwarf-debug-format, dynamic-linking, ebpf,
+  ebpf-rust, elf-inspection, embedded-rust, flamegraphs, freertos, fuzzing, gcc, gdb,
+  gpio-baremetal, gpu-memory-model, hardware-counters, hare-lang, heaptrack, hip-rocm,
+  hypervisor-internals, include-what-you-use, intel-vtune-amd-uprof, interpreters,
+  interrupts-and-exceptions-baremetal, io-uring, jit-compilation, kernel-concurrency,
+  kernel-debugging, kernel-debugging-advanced, kernel-internals, kernel-memory-management,
+  kernel-security, kernel-testing, linker-scripts, linkers-lto, linux-kernel-architecture,
+  linux-kernel-modules, linux-perf, lldb, llvm, llvm-ir-and-passes, llvm-passes,
+  low-power-embedded, make, memory-hierarchy-and-caches, memory-model, meson, mlir,
+  mmio-and-bit-manipulation, mpi, msvc-cl, ninja, numa-programming, openmp, openocd-jtag,
+  os-dev-scratch, peripherals-from-datasheet, pgo, platform-device-model, protocol-analysis,
+  qemu-embedded-simulation, qemu-for-kernel-development, qemu-kvm, rdma-verbs,
+  resource-optimization-lowend, reverse-engineering, riscv-privileged, rust-async-internals,
+  rust-build-times, rust-cross, rust-debugging, rust-ffi, rust-no-std, rust-profiling,
+  rust-sanitizers-miri, rust-security, rust-unsafe, rustc-basics, sanitizers, simd-intrinsics,
+  spi-i2c-baremetal, static-analysis, stm32-baremetal, strace-ltrace, timers-pwm-baremetal,
+  triton-lang, uart-serial-baremetal, valgrind, verilog-basics-for-lowlevel,
+  virtual-memory-paging-and-tlb, wasm-emscripten, wasm-wasmtime, writing-char-drivers, zephyr,
+  zig-build-system, zig-cinterop, zig-compiler, zig-comptime, zig-cross, zig-debugging,
+  zig-testing
+
+mythicalhacker/go-mastery
+Source: https://github.com/mythicalhacker/go-mastery/tree/52c744fc7b8153f358768e05949b11f153e7175b
+License: MIT (https://opensource.org/licenses/MIT)
+Copyright: Copyright (c) 2026 Mythical Hacker
+Local adaptations: production-go
+
+apollographql/skills
+Source: https://github.com/apollographql/skills/tree/c288eb80629dd2309eed81f23d693f66a452d043/skills/rust-best-practices
+License: MIT (https://opensource.org/licenses/MIT)
+Copyright: Copyright (c) 2024 Apollo Graph, Inc.
+Local adaptations: idiomatic-rust (skill wrapper; the handbook chapters are listed under
+  apollographql/rust-best-practices below)
+
 The MIT permission text below applies to every work in the preceding section. Each work retains the
 copyright notice shown with its source. bentossell/visualise declares MIT in its README but supplies
 no copyright notice at the pinned revision; this file does not invent one.
@@ -283,7 +329,22 @@ Local adaptations: agents-md, blog-writing-guide, brand-guidelines, claude-setti
   prompt-optimizer, publish-pr, skill-scanner, skill-writer, typing-exclusion-worker,
   work-records-summary
 
-The Apache License, Version 2.0 applies to the preceding work. The full license is included in this
+apollographql/rust-best-practices
+Source: https://github.com/apollographql/rust-best-practices/tree/b26fa6f15253cd0da6a41b99f09c33caf1708f6c
+License: Apache-2.0 (https://www.apache.org/licenses/LICENSE-2.0)
+Copyright: The repository's LICENSE carries the Apache-2.0 text without a named copyright line;
+  the handbook is published by Apollo Graph, Inc.
+Local adaptations: idiomatic-rust (references/chapter_01.md through chapter_09.md)
+
+huggingface/kernels
+Source: https://github.com/huggingface/kernels/tree/a7f0afdb29a6a3372b1d47180cc0c182454c5e3b/kernel-builder/skills/cpu-kernels
+License: Apache-2.0 (https://www.apache.org/licenses/LICENSE-2.0)
+Copyright: The repository's LICENSE carries the Apache-2.0 text without a named copyright line;
+  the skill is published by Hugging Face.
+Local adaptations: cpu-kernel-authoring (the bundled correctness comparator is replaced by a
+  dtype-aware structured comparator)
+
+The Apache License, Version 2.0 applies to the preceding works. The full license is included in this
 distribution as LICENSE and is also available at https://www.apache.org/licenses/LICENSE-2.0.
 
 CC-BY-SA-4.0-licensed works
@@ -319,6 +380,18 @@ Local adaptations: address-sanitizer, agentic-actions-injection-audit, atheris,
 The preceding material is attributed to Trail of Bits and was modified for ODIN 2.0. It is
 distributed under the Creative Commons Attribution-ShareAlike 4.0 International License. Legal code:
 https://creativecommons.org/licenses/by-sa/4.0/legalcode.
+
+CC-BY-4.0-licensed works
+
+martinholovsky/SOTA-skills
+Source: https://github.com/martinholovsky/SOTA-skills/tree/ca30d1becaca87ced9ea5cf3c28fec6f2516863b/skills/sota-c-cpp
+License: CC-BY-4.0 (https://creativecommons.org/licenses/by/4.0/legalcode)
+Copyright: The repository's LICENSE carries the Creative Commons Attribution 4.0 International text
+  without a named copyright line; the skill is published by Martin Holovsky.
+Local adaptations: c-hardening-baseline (the C rules only; the C++ prescriptions are not adopted)
+
+The Creative Commons Attribution 4.0 International license applies to the preceding work. The full
+license text is available at https://creativecommons.org/licenses/by/4.0/legalcode.
 
 Sources without an explicit license
 

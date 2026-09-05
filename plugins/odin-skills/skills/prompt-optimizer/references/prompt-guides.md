@@ -33,7 +33,7 @@ The rows carry URLs and a one-line scope only. Vendor prose is not copied into t
 | Model or line | Role | Guide URL | Governs | Evidence |
 |---|---|---|---|---|
 | Cross-model | current | `https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview` | Prompt engineering overview across the current generation | (Tier 2, vendor documentation, Verified 2026-09-03) |
-| Cross-model | current | `https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices` | Best practices across the current generation | (Tier 2, vendor documentation, Verified 2026-09-03) |
+| Cross-model | current | `https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices` | Best practices across the current generation | (Tier 2, vendor documentation, Verified 2026-09-05) |
 | Claude Fable 5.1 | heavy | `https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1` | Heavy-tier prompting guidance | (Tier 2, vendor documentation, Verified 2026-09-03) |
 | Claude Fable 5 | heavy | `https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5` | Heavy-tier prompting guidance | (Tier 2, vendor documentation, Verified 2026-09-03) |
 | Claude Opus 5 | middle | `https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5` | Middle-tier prompting guidance | (Tier 2, vendor documentation, Verified 2026-09-03) |

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Rust Sanitizers Miri"
+  short_description: "Use when running AddressSanitizer, ThreadSanitizer, MemorySanitizer, UndefinedBehaviorSanitizer, or Miri on Rust code, interpreting sanitizer output, or validating unsafe code for undefined behaviour."

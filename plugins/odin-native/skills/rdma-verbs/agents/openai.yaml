@@ -1,0 +1,3 @@
+interface:
+  display_name: "Rdma Verbs"
+  short_description: "Use when programming InfiniBand or RoCE with libibverbs: device setup, memory registration, queue pairs, send/recv or RDMA write, completion polling, or perftest benchmarks."

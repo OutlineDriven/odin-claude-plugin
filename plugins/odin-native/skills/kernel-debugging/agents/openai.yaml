@@ -1,0 +1,3 @@
+interface:
+  display_name: "Kernel Debugging"
+  short_description: "Use when debugging the Linux kernel: kgdb and kdb, ftrace and kprobes, dynamic debug, kdump and crash analysis, or printk levels on a live or crashed target."

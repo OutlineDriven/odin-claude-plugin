@@ -1,0 +1,3 @@
+interface:
+  display_name: "Cross Gcc"
+  short_description: "Use when compiling for ARM, AArch64, RISC-V, or MIPS from x86-64 with a GCC cross toolchain: triplets, sysroots, pkg-config, CMake toolchain files, QEMU."

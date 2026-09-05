@@ -1,0 +1,3 @@
+interface:
+  display_name: "Riscv Privileged"
+  short_description: "Use when writing RISC-V M-mode or S-mode code: CSRs, trap handlers, PLIC and CLINT interrupts, OpenSBI payloads, Sv39 or Sv48 page tables, or QEMU virt boot."

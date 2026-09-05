@@ -1,0 +1,3 @@
+interface:
+  display_name: "Assembly Arm"
+  short_description: "Use when reading or writing AArch64 or AArch32 Thumb assembly, inline asm in C, AAPCS64 register roles, or NEON and SVE vector code."

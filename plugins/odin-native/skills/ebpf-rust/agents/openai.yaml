@@ -1,0 +1,3 @@
+interface:
+  display_name: "Ebpf Rust"
+  short_description: "Use when writing eBPF programs in Rust with aya-ebpf and aya-log, declaring maps, sharing them with a tokio user-space loader, or debugging an Aya load failure."

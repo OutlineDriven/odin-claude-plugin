@@ -1,0 +1,3 @@
+interface:
+  display_name: "Io Uring"
+  short_description: "Use when building Linux servers with liburing, batching SQEs, multi-shot operations, provided buffer rings, registered files and buffers, or zero-copy send."

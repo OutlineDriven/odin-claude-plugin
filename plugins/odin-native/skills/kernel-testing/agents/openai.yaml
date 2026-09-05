@@ -1,0 +1,3 @@
+interface:
+  display_name: "Kernel Testing"
+  short_description: "Use when writing KUnit tests, adding kselftest cases, fuzzing syscalls with syzkaller and kcov, running LTP, or wiring CI for a kernel patch."

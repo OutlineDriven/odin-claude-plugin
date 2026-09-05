@@ -1,0 +1,3 @@
+interface:
+  display_name: "Adc Dac Baremetal"
+  short_description: "Use when configuring ADC sampling time, DMA-driven ADC, calibration, or DAC channel setup on bare-metal MCUs."

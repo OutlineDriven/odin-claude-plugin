@@ -1,0 +1,3 @@
+interface:
+  display_name: "Freertos"
+  short_description: "Use when creating FreeRTOS tasks, queues, semaphores, or mutexes, catching stack overflow, writing FreeRTOSConfig.h, or debugging tasks over OpenOCD and GDB."

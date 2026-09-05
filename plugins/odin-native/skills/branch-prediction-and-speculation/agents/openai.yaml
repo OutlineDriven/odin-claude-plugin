@@ -1,0 +1,3 @@
+interface:
+  display_name: "Branch Prediction And Speculation"
+  short_description: "Use when explaining branch predictors, mispredict penalties, speculative execution, Spectre or Meltdown mitigations, or branchless code."

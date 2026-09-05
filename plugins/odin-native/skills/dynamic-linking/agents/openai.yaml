@@ -1,0 +1,3 @@
+interface:
+  display_name: "Dynamic Linking"
+  short_description: "Use when debugging shared library load failures, setting RPATH or RUNPATH, applying soname versioning, writing dlopen plugins, or intercepting with LD_PRELOAD."

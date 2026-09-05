@@ -1,0 +1,3 @@
+interface:
+  display_name: "Cpu Pipelines And Hazards"
+  short_description: "Use when explaining pipeline stages, data or control hazards, forwarding, stalls, or superscalar basics behind a counter reading."

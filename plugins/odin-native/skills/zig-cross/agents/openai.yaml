@@ -1,0 +1,3 @@
+interface:
+  display_name: "Zig Cross"
+  short_description: "Use when building Zig or C for another platform with Zig: target triples, -mcpu features, zig cc cross-compiles, multi-target build.zig, bare-metal Cortex-M, or WebAssembly."

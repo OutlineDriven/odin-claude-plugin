@@ -1,0 +1,3 @@
+interface:
+  display_name: "Stm32 Baremetal"
+  short_description: "Use when scaffolding STM32 firmware without HAL, CMSIS-only clock/RCC config, STM32F4/H7 bring-up, or building with arm-none-eabi-gcc for Cortex-M."

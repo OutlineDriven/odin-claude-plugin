@@ -1,0 +1,3 @@
+interface:
+  display_name: "Embedded Rust"
+  short_description: "Use when writing no_std Cortex-M or RISC-V firmware in Rust with cortex-m-rt, probe-rs, defmt, RTIC, or a panic handler."

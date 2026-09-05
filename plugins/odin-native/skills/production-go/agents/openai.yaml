@@ -1,0 +1,3 @@
+interface:
+  display_name: "Production Go"
+  short_description: "Use when writing, reviewing, debugging, or architecting Go code."

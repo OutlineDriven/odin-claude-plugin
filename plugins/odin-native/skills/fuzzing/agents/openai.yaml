@@ -1,0 +1,3 @@
+interface:
+  display_name: "Fuzzing"
+  short_description: "Use when setting up libFuzzer or AFL++ fuzz targets, writing fuzz harnesses, managing corpora, or wiring fuzzing into CI."

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Datasheet And Refmanual Reading"
+  short_description: "Use when extracting pinouts, electrical limits, register maps, clock trees, timing, or errata from MCU datasheets and reference manuals."

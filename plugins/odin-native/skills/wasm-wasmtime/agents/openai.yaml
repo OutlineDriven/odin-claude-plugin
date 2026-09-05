@@ -1,0 +1,3 @@
+interface:
+  display_name: "Wasm Wasmtime"
+  short_description: "Use when running WASM with the wasmtime CLI, embedding wasmtime in Rust, limiting execution with fuel, or building WASI preview2 components."

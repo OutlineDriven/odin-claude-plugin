@@ -1,0 +1,3 @@
+interface:
+  display_name: "Qemu Kvm"
+  short_description: "Use when running qemu-system-x86_64 with KVM, wiring virtio devices, passing a PCI device through with VFIO, driving QMP, using virsh or virt-install, or booting a kernel with -kernel and -append."

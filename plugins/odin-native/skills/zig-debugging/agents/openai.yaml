@@ -1,0 +1,3 @@
+interface:
+  display_name: "Zig Debugging"
+  short_description: "Use when a Zig program panics, returns an error trace, or needs stepping in GDB or LLDB, print or std.log tracing, or a comptime value printed."

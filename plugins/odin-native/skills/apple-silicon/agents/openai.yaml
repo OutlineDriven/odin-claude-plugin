@@ -1,0 +1,3 @@
+interface:
+  display_name: "Apple Silicon"
+  short_description: "Use when tuning or profiling native code on Apple M-series Macs: unified memory, 16 KiB pages, Accelerate and Metal for matrix work, xctrace and leaks, Rosetta 2, or sysctl hardware queries."

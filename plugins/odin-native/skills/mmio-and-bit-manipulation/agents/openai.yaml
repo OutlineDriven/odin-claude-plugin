@@ -1,0 +1,3 @@
+interface:
+  display_name: "Mmio And Bit Manipulation"
+  short_description: "Use when accessing memory-mapped peripherals with volatile, bit masks, read-modify-write, register alignment, or endianness in bare-metal firmware."

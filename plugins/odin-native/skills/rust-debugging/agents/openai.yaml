@@ -1,0 +1,3 @@
+interface:
+  display_name: "Rust Debugging"
+  short_description: "Use when debugging Rust binaries with GDB or LLDB, enabling pretty-printers, interpreting panics and backtraces, debugging async with tokio-console, or stepping through no_std code"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Rust Profiling"
+  short_description: "Use when profiling Rust binaries with flamegraphs, cargo-bloat, cargo-llvm-lines, Criterion, perf, heaptrack, or DHAT"

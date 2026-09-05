@@ -1,0 +1,3 @@
+interface:
+  display_name: "Gcc"
+  short_description: "Use when a C or C++ build uses GCC and needs build-mode flags, warning triage, debug info, LTO, PGO, or a compilation error explained."

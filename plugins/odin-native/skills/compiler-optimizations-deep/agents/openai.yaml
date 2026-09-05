@@ -1,0 +1,3 @@
+interface:
+  display_name: "Compiler Optimizations Deep"
+  short_description: "Use when -O3 leaves a hot loop scalar, spills appear in assembly, or a PGO or BOLT deployment is planned or stalls."

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Timers Pwm Baremetal"
+  short_description: "Use when configuring general-purpose timers for PWM, input capture, periodic ticks, timer prescaler, PWM duty cycle, or SysTick without an RTOS."

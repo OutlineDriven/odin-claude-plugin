@@ -1,0 +1,3 @@
+interface:
+  display_name: "Rust Async Internals"
+  short_description: "Use when understanding the Rust Future poll model, Pin and Unpin, tokio scheduling, async stack traces, waker leaks, or select!/join! behavior."

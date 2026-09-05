@@ -1,0 +1,3 @@
+interface:
+  display_name: "Virtual Memory Paging And Tlb"
+  short_description: "Use when explaining page faults, multi-level page tables, TLB misses, huge pages, or mmap and brk behavior."

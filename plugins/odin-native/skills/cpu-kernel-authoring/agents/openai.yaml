@@ -1,0 +1,3 @@
+interface:
+  display_name: "Cpu Kernel Authoring"
+  short_description: "Use when writing, optimizing, or benchmarking a C++ CPU kernel with AVX2 or AVX512 intrinsics for the Hugging Face kernels ecosystem."

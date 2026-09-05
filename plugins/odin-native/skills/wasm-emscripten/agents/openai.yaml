@@ -1,0 +1,3 @@
+interface:
+  display_name: "Wasm Emscripten"
+  short_description: "Use when compiling C or C++ to WebAssembly with emcc, exporting functions to JavaScript, sizing WASM memory, using Asyncify, or debugging .wasm."

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Linker Scripts"
+  short_description: "Use when writing a GNU ld script for a bare-metal target, placing code in a flash or RAM region, wiring .data and .bss startup, or fixing a region overflowed error."

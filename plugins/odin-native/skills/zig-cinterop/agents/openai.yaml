@@ -1,0 +1,3 @@
+interface:
+  display_name: "Zig Cinterop"
+  short_description: "Use when Zig code calls C or C code calls Zig: @cImport, translate-c, C type mapping, extern and packed structs, export fn, opaque handles, or a mixed C and Zig build."

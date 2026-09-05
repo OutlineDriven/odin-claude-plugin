@@ -1,0 +1,3 @@
+interface:
+  display_name: "Assembly X86"
+  short_description: "Use when reading GCC or Clang x86-64 assembly, writing inline asm, decoding AT&T syntax, or applying System V AMD64 register rules."

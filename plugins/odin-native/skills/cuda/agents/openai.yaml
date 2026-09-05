@@ -1,0 +1,3 @@
+interface:
+  display_name: "Cuda"
+  short_description: "Use when writing CUDA kernels, managing the thread, block, and grid hierarchy, tiling shared memory, using streams, setting nvcc flags, or using Thrust."

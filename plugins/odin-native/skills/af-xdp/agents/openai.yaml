@@ -1,0 +1,3 @@
+interface:
+  display_name: "Af Xdp"
+  short_description: "Use when creating AF_XDP sockets, configuring UMEM and XSK rings, writing an XDP redirect program, or choosing copy versus zero-copy mode."

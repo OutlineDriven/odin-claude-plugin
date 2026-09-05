@@ -1,0 +1,3 @@
+interface:
+  display_name: "Simd Intrinsics"
+  short_description: "Use when reading auto-vectorization reports, writing SSE2, AVX2, or NEON intrinsics, or fixing vectorization failures."

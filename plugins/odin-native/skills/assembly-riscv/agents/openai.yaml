@@ -1,0 +1,3 @@
+interface:
+  display_name: "Assembly Riscv"
+  short_description: "Use when reading or writing RV32/RV64 assembly, inline asm in C, the RISC-V psABI, IMAFD extension naming, compressed instructions, or QEMU RISC-V debugging."

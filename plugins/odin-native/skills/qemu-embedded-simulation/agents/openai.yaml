@@ -1,0 +1,3 @@
+interface:
+  display_name: "Qemu Embedded Simulation"
+  short_description: "Use when running ARM or RISC-V bare-metal firmware in QEMU: machine selection, -kernel ELF loading, semihosting, or GDB debugging without hardware."

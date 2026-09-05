@@ -1,0 +1,3 @@
+interface:
+  display_name: "Elf Inspection"
+  short_description: "Use when examining ELF binaries with readelf, objdump, nm, or ldd: dependencies, symbols, sections, relocations, build IDs, or hardening."

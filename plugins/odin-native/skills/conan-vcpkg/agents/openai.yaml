@@ -1,0 +1,3 @@
+interface:
+  display_name: "Conan Vcpkg"
+  short_description: "Use when adding C/C++ dependencies with Conan or vcpkg, managing binary compatibility, integrating with CMake via conanfile.txt or vcpkg.json, or choosing between Conan and vcpkg."

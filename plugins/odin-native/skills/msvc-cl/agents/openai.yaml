@@ -1,0 +1,3 @@
+interface:
+  display_name: "Msvc Cl"
+  short_description: "Use when building C or C++ on Windows with cl.exe or clang-cl: GCC-to-MSVC flag translation, /MT versus /MD, PDB output, or an LNK error."

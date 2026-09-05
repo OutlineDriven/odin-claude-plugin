@@ -1,0 +1,3 @@
+interface:
+  display_name: "Ebpf"
+  short_description: "Use when writing eBPF programs with libbpf or bpftrace, attaching kprobes, tracepoints, or XDP hooks, triaging verifier errors, choosing maps, or porting with CO-RE."

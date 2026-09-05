@@ -1,0 +1,3 @@
+interface:
+  display_name: "Zig Testing"
+  short_description: "Use when writing or running Zig tests: test blocks, zig test, filters, std.testing assertions, the leak-detecting allocator, comptime tests, or the fuzzer."

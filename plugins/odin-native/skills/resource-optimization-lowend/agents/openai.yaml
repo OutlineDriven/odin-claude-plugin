@@ -1,0 +1,3 @@
+interface:
+  display_name: "Resource Optimization Lowend"
+  short_description: "Use when reducing flash or RAM usage on constrained MCUs, analyzing stack depth, reading linker map files, or tuning -Os size-versus-speed tradeoffs on bare-metal and small RTOS images."

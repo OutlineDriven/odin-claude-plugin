@@ -1,0 +1,3 @@
+interface:
+  display_name: "Cpp Templates"
+  short_description: "Use when a C++ template error needs decoding, a template needs a concept or requires-clause instead of SFINAE, or template instantiation is slowing compilation."
