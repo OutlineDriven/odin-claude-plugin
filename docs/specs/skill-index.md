@@ -94,7 +94,6 @@
 | copywriting | odin-writing | Writing |
 | copywriting-cta | odin-writing | Writing |
 | copywriting-hooks | odin-writing | Writing |
-| copywriting-prose-creator | odin-writing | Writing |
 | copywriting-tone-of-voice-creator | odin-writing | Writing |
 | corroborate-by-independent-reruns | odin-run | Coding |
 | cost-reduction | odin-infra | Infrastructure |
