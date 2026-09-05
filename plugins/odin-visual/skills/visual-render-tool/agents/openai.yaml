@@ -1,3 +1,0 @@
-interface:
-  display_name: "Visual Render Tool"
-  short_description: "Use when a tool renders plans, architectures, diffs, or implementations as HTML, or --quick on a diagram or review outcome."

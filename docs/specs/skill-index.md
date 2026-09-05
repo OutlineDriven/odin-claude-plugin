@@ -540,7 +540,6 @@
 | visual-fact-check | odin-research | Research |
 | visual-plan | odin-planning | Productivity |
 | visual-project-recap | odin-knowledge | Productivity |
-| visual-render-tool | odin-visual | Design |
 | visual-slides | odin-visual | Design |
 | visualise-chart | odin-visual | Design |
 | visualise-explainer | odin-visual | Design |
