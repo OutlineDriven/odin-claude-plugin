@@ -1,3 +1,0 @@
-interface:
-  display_name: "Clarify"
-  short_description: "Use when the user says \"clarify\", \"what is ambiguous here\", or when a prompt or spec reads as under-specified before planning."

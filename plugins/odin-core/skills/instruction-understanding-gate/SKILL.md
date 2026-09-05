@@ -1,6 +1,6 @@
 ---
 name: instruction-understanding-gate
-description: 'Use when a request is long, bundled, high-stakes, or has ambiguous referents. Not for tiered scans: use clarify. Not for interviews: use interview-me.'
+description: 'Use when a request is long, bundled, high-stakes, or has ambiguous referents. Not for tiered scans: use askme. Not for interviews: use askme.'
 ---
 
 # Instruction understanding gate

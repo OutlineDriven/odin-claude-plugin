@@ -33,7 +33,6 @@
 | ax-audit | odin-review | Coding |
 | axiom-mode | odin-core | Coding |
 | backlog | odin-planning | Productivity |
-| batch-ask-me | odin-planning | Productivity |
 | behavior-validator | odin-testing | Coding |
 | blast-radius | odin-review | Coding |
 | book-to-skill | odin-skills | Productivity |
@@ -62,7 +61,6 @@
 | chrome-extension | odin-web | Coding |
 | ci-cd | odin-infra | Infrastructure |
 | ci-fix | odin-infra | Infrastructure |
-| clarify | odin-planning | Productivity |
 | claude-settings-audit | odin-agent | Productivity |
 | clean-and-true | odin-writing | Writing |
 | clean-clean-cut | odin-code | Coding |
@@ -255,10 +253,8 @@
 | insecure-default-discovery | odin-security | Security |
 | instruction-phrasing-microtest | odin-skills | Productivity |
 | instruction-understanding-gate | odin-core | Coding |
-| intent-proposal | odin-planning | Productivity |
 | interactive-drop-selector | odin-git | Coding |
 | interrogate | odin-review | Coding |
-| interview-me | odin-planning | Productivity |
 | ios-build-cleanup | odin-apple | Coding |
 | ios-build-fix | odin-apple | Coding |
 | ios-visual-review | odin-design | Design |

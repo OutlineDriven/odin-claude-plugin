@@ -2,7 +2,7 @@
 
 ODIN workflows for shaping intent into approved plans, specs, and task lists.
 
-43 skills, category Productivity.
+39 skills, category Productivity.
 
 ## Install
 
@@ -23,9 +23,7 @@ codex plugin add odin-planning@odin-marketplace
 - askme
 - autoplan
 - backlog
-- batch-ask-me
 - brainstorm
-- clarify
 - converge
 - decide
 - define-goalstate
@@ -37,8 +35,6 @@ codex plugin add odin-planning@odin-marketplace
 - goal-init
 - graph-backbone
 - idea-sparkbox
-- intent-proposal
-- interview-me
 - leave-only-first-principle
 - loop-me
 - minimap

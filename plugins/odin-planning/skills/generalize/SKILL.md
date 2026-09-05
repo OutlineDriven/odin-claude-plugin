@@ -1,6 +1,6 @@
 ---
 name: generalize
-description: 'Use when asked to derive the general rule a request carries as examples instead of a stated rule, then bound it. Not for ambiguity in a stated request: use clarify. Read-only.'
+description: 'Use when asked to derive the general rule a request carries as examples instead of a stated rule, then bound it. Not for ambiguity in a stated request: use askme. Read-only.'
 ---
 
 # Generalize from cases
@@ -16,7 +16,7 @@ description: 'Use when asked to derive the general rule a request carries as exa
 
 ## Not for
 
-- Ambiguity resolution inside a stated request: use clarify.
+- Ambiguity resolution inside a stated request: use askme.
 - Intent exploration with no examples on the table: use askme, which explores ambiguous intent through verbalized sampling and clarifying questions; generalize derives a rule from supplied cases. The split is: examples present → generalize; no examples, just ambiguity → askme.
 - Applying the rule: the deliverable is the stated rule; acting on it belongs downstream.
 
