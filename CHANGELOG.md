@@ -94,7 +94,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `memory-update` and `memory-clean` claimed `$MEMORY_DIR` is outside
   version control; that is true for the default (gitignored) path and
   false for an override git would track. The resolver refuses a path
-  git would track, including a missing directory inside a work tree;
+  git would track, whether already tracked or merely unignored;
   it canonicalizes a relative override against the caller's directory
   rather than the repository root, and it treats a leading hyphen as a
   pathname.
