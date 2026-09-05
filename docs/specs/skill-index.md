@@ -83,7 +83,6 @@
 | compound | odin-knowledge | Productivity |
 | confirmed-security-review | odin-security | Security |
 | constant-time-analysis | odin-security | Security |
-| constant-time-testing | odin-security | Security |
 | constraint-driven-development | odin-code | Coding |
 | consult-deployment | odin-infra | Infrastructure |
 | context-engineering | odin-knowledge | Productivity |
