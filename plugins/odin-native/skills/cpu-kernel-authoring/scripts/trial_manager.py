@@ -20,16 +20,37 @@ import json
 import os
 import shutil
 import sys
+import tempfile
+from pathlib import Path
 
 TRIALS_DIR = os.path.join(os.getcwd(), "trials")
 OUTPUT_DIR = os.path.join(os.getcwd(), "output")
 
 
+def _checked_name(kernel_name):
+    """A kernel name is one directory component inside trials/."""
+    trials_real = Path(TRIALS_DIR).resolve()
+    candidate = (Path(TRIALS_DIR) / kernel_name).resolve()
+    if (
+        kernel_name in ("", ".", "..")
+        or os.sep in kernel_name
+        or (os.altsep and os.altsep in kernel_name)
+        or not candidate.is_relative_to(trials_real)
+    ):
+        print(
+            f"Error: Kernel name '{kernel_name}' must be a single directory name under trials/.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+
 def _state_path(kernel_name):
+    _checked_name(kernel_name)
     return os.path.join(TRIALS_DIR, kernel_name, "state.json")
 
 
 def _trial_dir(kernel_name):
+    _checked_name(kernel_name)
     return os.path.join(TRIALS_DIR, kernel_name)
 
 
@@ -322,10 +343,33 @@ def cmd_finalize(args):
         os.makedirs(OUTPUT_DIR, exist_ok=True)
         output_path = os.path.join(OUTPUT_DIR, output_path)
 
-    if os.path.isdir(src):
-        shutil.copytree(src, output_path, dirs_exist_ok=True)
-    else:
-        shutil.copy2(src, output_path)
+    # Stage beside the destination, then swap, so an existing output never
+    # keeps files the chosen trial no longer has.
+    dest = Path(output_path)
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    staging = Path(tempfile.mkdtemp(prefix=".finalize-", dir=dest.parent))
+    staged = staging / dest.name
+    backup = Path(f"{staged}.old")
+    try:
+        if Path(src).is_dir():
+            shutil.copytree(src, staged)
+        else:
+            shutil.copy2(src, staged)
+        if dest.exists() or dest.is_symlink():
+            os.rename(dest, backup)
+        os.rename(staged, dest)
+    except OSError as e:
+        if (backup.exists() or backup.is_symlink()) and not (dest.exists() or dest.is_symlink()):
+            os.rename(backup, dest)
+        shutil.rmtree(staging, ignore_errors=True)
+        print(f"Error: Failed to finalize into '{output_path}': {e}", file=sys.stderr)
+        sys.exit(1)
+    if backup.exists() or backup.is_symlink():
+        if backup.is_symlink() or not backup.is_dir():
+            backup.unlink()
+        else:
+            shutil.rmtree(backup, ignore_errors=True)
+    shutil.rmtree(staging, ignore_errors=True)
 
     runtime_str = ""
     if best.get("baseline_us") is not None and best.get("kernel_us") is not None:

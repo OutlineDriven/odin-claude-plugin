@@ -132,13 +132,17 @@ def run_perf_stat(kernel_package: str, op_path: str, warmup: int, iters: int, ba
         ]
 
         print(f"  Running: {' '.join(cmd[:6])} ...")
-        result = subprocess.run(
-            cmd,
-            capture_output=True,
-            text=True,
-            timeout=300,
-            check=False,
-        )
+        try:
+            result = subprocess.run(
+                cmd,
+                capture_output=True,
+                text=True,
+                timeout=300,
+                check=False,
+            )
+        except subprocess.TimeoutExpired:
+            print("  perf stat timed out after 300s; no stats collected")
+            return {}
 
         if result.returncode != 0:
             print(f"  perf stat failed (exit code {result.returncode})")

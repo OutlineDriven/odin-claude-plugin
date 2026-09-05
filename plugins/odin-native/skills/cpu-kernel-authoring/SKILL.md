@@ -16,7 +16,7 @@ description: 'Use when writing, optimizing, or benchmarking a C++ CPU kernel wit
 
 ## Inputs
 
-- Kernel name (required): the trial-tree label, for example `my_rmsnorm`. Used only by `trial_manager.py`.
+- Kernel name (required): the trial-tree label, for example `my_rmsnorm`. Used only by `trial_manager.py`, which accepts it as a single directory name under `trials/`, never a path.
 - Baseline file (required): a `baseline.py` that defines `get_inputs()` and either `get_reference_output()` or a `Model` class (with optional `get_init_inputs()`). It is the ground truth for correctness and the speed reference.
 - Operation name (required): the plain name `analyze_op.py --op` looks up, for example `rms_norm`.
 - Input shapes (required): comma-separated shape strings for `analyze_op.py --shapes`, for example `"1024x4096,2048x8192"`.
