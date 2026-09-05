@@ -66,6 +66,7 @@ fp8_on_cpu:
         __m512i r = _mm512_or_si512(_mm512_slli_epi16(_mm512_add_epi16(e, _mm512_set1_epi16(120)), 7), m);  // bias delta 127-7, exponent at bits 14-7
         r = _mm512_mask_mov_epi16(r, _mm512_cmpeq_epi16_mask(e, _mm512_setzero_si512()), _mm512_setzero_si512());  // e==0: flush subnormals to zero
         return (__m512bh)_mm512_or_si512(r, vsign);
+        // E4M3 NaN encodings (e=15, m=7) are not preserved: they map to finite values.
     }
 
 dtype_selection_guide:
