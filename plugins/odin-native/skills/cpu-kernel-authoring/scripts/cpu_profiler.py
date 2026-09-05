@@ -107,6 +107,13 @@ def run_perf_stat(op_path: str, warmup: int, iters: int, baseline_file: str | No
         print(f"  --op must be a dotted Python path like my_kernel.forward, got '{op_path}'", file=sys.stderr)
         sys.exit(2)
 
+    if iters <= 0 or warmup < 0:
+        print(
+            f"  --iters must be positive and --warmup nonnegative, got iters={iters} warmup={warmup}",
+            file=sys.stderr,
+        )
+        sys.exit(2)
+
     with tempfile.NamedTemporaryFile(mode="w", suffix=".py", delete=False) as f:
         f.write(_RUNNER_SOURCE)
         script_path = f.name

@@ -14,7 +14,7 @@ import re
 import sys
 from pathlib import Path
 
-CPU_BACKEND_RE = re.compile(r'backend\s*=\s*["\']cpu["\']')
+import tomllib
 
 
 class ValidationError:
@@ -36,7 +36,7 @@ class ValidationError:
 
 
 def validate_build_toml(kernel_dir: Path) -> list[ValidationError]:
-    """Validate build.toml configuration."""
+    """Validate build.toml configuration against the parsed kernel sections."""
     errors = []
     build_toml = kernel_dir / "build.toml"
 
@@ -44,30 +44,45 @@ def validate_build_toml(kernel_dir: Path) -> list[ValidationError]:
         errors.append(ValidationError("ERROR", "build.toml not found"))
         return errors
 
-    with open(build_toml) as f:
-        content = f.read()
+    try:
+        with open(build_toml, "rb") as f:
+            data = tomllib.load(f)
+    except tomllib.TOMLDecodeError as e:
+        errors.append(ValidationError("ERROR", f"build.toml is not valid TOML: {e}", "build.toml"))
+        return errors
 
-    if not CPU_BACKEND_RE.search(content):
+    sections = {
+        f"kernel.{name}": body
+        for name, body in data.get("kernel", {}).items()
+        if isinstance(body, dict)
+    }
+    cpu_sections = {name: body for name, body in sections.items() if body.get("backend") == "cpu"}
+
+    if not cpu_sections:
         errors.append(ValidationError("ERROR", "No CPU backend sections found in build.toml", "build.toml"))
 
-    # kernel-builder does not add the kernel directory to the include path; without `include` headers fail to resolve.
-    sections = re.findall(r'\[kernel\.\w+\]', content)
-    for section in sections:
-        start = content.index(section)
-        next_section = content.find("[kernel.", start + 1)
-        section_content = content[start:next_section] if next_section != -1 else content[start:]
-
-        if CPU_BACKEND_RE.search(section_content) and "include" not in section_content:
+    for name, body in cpu_sections.items():
+        # kernel-builder does not add the kernel directory to the include path;
+        # without `include` headers fail to resolve.
+        include = body.get("include", [])
+        if isinstance(include, str):
+            include = [include]
+        if not include:
             errors.append(ValidationError(
                 "WARNING",
-                f"Section {section} missing 'include' directive for header resolution",
+                f"Section [{name}] missing 'include' directive for header resolution",
                 "build.toml",
             ))
 
-    if "-mavx512f" in content:
+    flags_text = " ".join(
+        " ".join(body.get("flags", [])) if isinstance(body.get("flags"), list) else str(body.get("flags", ""))
+        for body in sections.values()
+    )
+
+    if "-mavx512f" in flags_text:
         core_flags = ["-mavx512bf16", "-mavx512vl"]
         for flag in core_flags:
-            if flag not in content:
+            if flag not in flags_text:
                 errors.append(ValidationError(
                     "WARNING",
                     f"AVX512 section missing core flag: {flag}",
@@ -75,25 +90,22 @@ def validate_build_toml(kernel_dir: Path) -> list[ValidationError]:
                 ))
         # dq/bw/vbmi are needed only by GEMM byte-shuffle paths; requiring them elsewhere is noise.
         gemm_indicators = ["gemm", "gptq", "quantiz", "bnb", "bitsandbytes", "megablocks", "moe"]
-        is_gemm_kernel = any(ind in content.lower() for ind in gemm_indicators)
+        is_gemm_kernel = any(ind in flags_text.lower() or ind in " ".join(sections).lower() for ind in gemm_indicators)
         if is_gemm_kernel:
             gemm_flags = ["-mavx512dq", "-mavx512bw", "-mavx512vbmi"]
             for flag in gemm_flags:
-                if flag not in content:
+                if flag not in flags_text:
                     errors.append(ValidationError(
                         "INFO",
                         f"GEMM kernel may benefit from flag: {flag}",
                         "build.toml",
                     ))
-        else:
-            pass
-
-    if "-mavx512f" in content and "-fopenmp" not in content:
-        errors.append(ValidationError(
-            "WARNING",
-            "AVX512 section missing -fopenmp flag",
-            "build.toml",
-        ))
+        if "-fopenmp" not in flags_text:
+            errors.append(ValidationError(
+                "WARNING",
+                "AVX512 section missing -fopenmp flag",
+                "build.toml",
+            ))
 
     return errors
 

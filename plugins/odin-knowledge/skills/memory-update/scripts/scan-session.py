@@ -6,15 +6,14 @@ Outputs a JSON array of candidate proposals to stdout.
 Diagnostics go to stderr.
 Exit 1 if glob matches no files.
 """
-import sys
+import glob as glob_module
 import json
 import re
-import glob as glob_module
-from pathlib import Path
+import sys
 
 GLOB = sys.argv[1] if len(sys.argv) > 1 else ""
 if not GLOB:
-    print("Usage: scan-session.sh <session-history-glob>", file=sys.stderr)
+    print("Usage: scan-session.py <session-history-glob>", file=sys.stderr)
     sys.exit(1)
 
 files = sorted(glob_module.glob(GLOB))

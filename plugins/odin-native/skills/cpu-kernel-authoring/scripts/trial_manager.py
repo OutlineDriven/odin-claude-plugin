@@ -18,6 +18,7 @@ Usage:
 import argparse
 import json
 import os
+import re
 import shutil
 import sys
 import tempfile
@@ -62,8 +63,15 @@ def _overlaps_trial_store(source):
 
 
 def _validate_state(state, kernel_name):
-    """A trial's dir is always its own id; nothing else is a valid state."""
+    """Trial ids are t<number> and a trial's dir is its own id; nothing else is valid state."""
     for tid, trial in state.get("trials", {}).items():
+        if not re.fullmatch(r"t\d+", tid):
+            print(
+                f"Error: Corrupt trial state for '{kernel_name}':"
+                f" trial id '{tid}' is not a t<number> id.",
+                file=sys.stderr,
+            )
+            sys.exit(1)
         if trial.get("dir") != tid:
             print(
                 f"Error: Corrupt trial state for '{kernel_name}':"
@@ -88,6 +96,13 @@ def _validate_state(state, kernel_name):
         print(
             f"Error: Corrupt trial state for '{kernel_name}':"
             " 'baseline_us' is not a list of numbers.",
+            file=sys.stderr,
+        )
+    best = state.get("best_trial")
+    if best is not None and best not in state.get("trials", {}):
+        print(
+            f"Error: Corrupt trial state for '{kernel_name}':"
+            f" best_trial '{best}' is not a known trial.",
             file=sys.stderr,
         )
         sys.exit(1)
@@ -182,11 +197,14 @@ def cmd_save(args):
     dest = os.path.join(_trial_dir(kernel_name), trial_id)
     try:
         if os.path.isdir(trial_source):
-            shutil.copytree(trial_source, dest, dirs_exist_ok=True)
+            # symlinks=True copies links as links, so a nested symlink back into
+            # the trial store can never make the copy recurse into itself.
+            shutil.copytree(trial_source, dest, dirs_exist_ok=True, symlinks=True)
         else:
             os.makedirs(dest, exist_ok=True)
             shutil.copy2(trial_source, dest)
     except (OSError, RecursionError) as e:
+        shutil.rmtree(dest, ignore_errors=True)
         print(f"Error: Failed to copy trial source into '{dest}': {e}", file=sys.stderr)
         sys.exit(1)
 

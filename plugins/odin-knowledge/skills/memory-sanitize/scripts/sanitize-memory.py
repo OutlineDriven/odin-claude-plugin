@@ -26,7 +26,9 @@ Report shape:
 Exit 2 when --scan-only finds any Tier-1 credential in a source file.
 Exit 1 on usage or path errors.
 """
-import sys, json, re, os
+import json
+import re
+import sys
 from pathlib import Path
 
 # ---------------------------------------------------------------------------
@@ -52,6 +54,7 @@ TIER2 = [
 RE_DATE = re.compile(r'\b(\d{4}-\d{2}-\d{2})\b')
 
 import datetime
+
 CUTOFF = datetime.date.today() - datetime.timedelta(days=30)
 
 
@@ -110,11 +113,11 @@ def main():
 
     if scan_only:
         if len(args) < 1:
-            print("Usage: sanitize-memory.sh --scan-only <memory_dir>", file=sys.stderr)
+            print("Usage: sanitize-memory.py --scan-only <memory_dir>", file=sys.stderr)
             sys.exit(1)
     else:
         if len(args) < 2:
-            print("Usage: sanitize-memory.sh <memory_dir> <dst_dir>", file=sys.stderr)
+            print("Usage: sanitize-memory.py <memory_dir> <dst_dir>", file=sys.stderr)
             sys.exit(1)
 
     src_dir = Path(args[0])

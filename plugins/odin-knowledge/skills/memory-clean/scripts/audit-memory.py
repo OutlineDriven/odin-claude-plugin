@@ -13,7 +13,12 @@ Report shape:
   "staleness":       [{"file": "...", "evidence": [...], "severity": "warn|critical"}]
 }
 """
-import sys, json, re, os, glob as glob_module, datetime
+import datetime
+import glob as glob_module
+import json
+import os
+import re
+import sys
 from pathlib import Path
 
 # --- Module-level compiled regexes (fail at import if broken) ---
@@ -311,7 +316,7 @@ def _feedback_session_check(mf: Path, body: str, session_glob: str):
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: audit-memory.sh <memory_dir> [session_history_glob]", file=sys.stderr)
+        print("Usage: audit-memory.py <memory_dir> [session_history_glob]", file=sys.stderr)
         sys.exit(1)
 
     memory_dir   = Path(sys.argv[1])
