@@ -326,7 +326,7 @@ def main():
         sys.exit(1)
 
     kernel_dir = Path(sys.argv[1]).resolve()
-    if not kernel_dir.exists():
+    if not kernel_dir.exists() or not kernel_dir.is_dir():
         print(f"Error: Directory not found: {kernel_dir}")
         sys.exit(1)
 
