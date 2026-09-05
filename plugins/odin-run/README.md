@@ -2,7 +2,7 @@
 
 ODIN workflows for executing plans, orchestrating subagents, and bounded autonomous loops.
 
-45 skills, category Coding.
+44 skills, category Coding.
 
 ## Install
 
@@ -59,7 +59,6 @@ codex plugin add odin-run@odin-marketplace
 - watch-for
 - watch-for-harness-mode
 - watch-for-structured
-- watch-until
 - wizard
 - work
 - workflows-driven

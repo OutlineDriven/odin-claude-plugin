@@ -571,7 +571,6 @@
 | watch-for | odin-run | Coding |
 | watch-for-harness-mode | odin-run | Coding |
 | watch-for-structured | odin-run | Coding |
-| watch-until | odin-run | Coding |
 | waterfall-guide | odin-planning | Productivity |
 | wayfinder | odin-planning | Productivity |
 | web-accessibility-audit | odin-design | Design |
