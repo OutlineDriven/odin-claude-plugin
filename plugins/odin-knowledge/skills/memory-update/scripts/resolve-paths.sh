@@ -69,8 +69,8 @@ _reject_tracked() {
   # Climb to the nearest existing ancestor before asking git, so the guard can
   # refuse a path that does not exist yet on its own. The memory_dir case below
   # checks existence before it calls here, so today the loop never iterates;
-  # that is not a reason to delete it. Without the walk, the rev-parse on the
-  # next line fails for a missing path, its return 0 fires, and a directory git
+  # that is not a reason to delete it. Without the walk, the rev-parse after
+  # the loop fails for a missing path, its return 0 fires, and a directory git
   # would track once created is allowed silently. Measured on a missing in-repo
   # path: exit 1 with the walk, allowed without it.
   while [[ ! -e "$probe" && "$probe" != "/" ]]; do
