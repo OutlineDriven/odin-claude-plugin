@@ -1,9 +1,9 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
-  "name": "odin-lean",
-  "displayName": "ODIN Lean",
+  "name": "odin-formal",
+  "displayName": "ODIN Formal",
   "version": "2.1.0",
-  "description": "ODIN workflows for Lean proofs and formal verification.",
+  "description": "ODIN workflows for formal methods: model checking, SMT solving, deductive verification, and proof assistants.",
   "author": {
     "name": "OutlineDriven",
     "url": "https://github.com/OutlineDriven"
@@ -15,6 +15,6 @@
     "odin",
     "outlinedriven",
     "agent-skills",
-    "lean"
+    "formal-methods"
   ]
 }

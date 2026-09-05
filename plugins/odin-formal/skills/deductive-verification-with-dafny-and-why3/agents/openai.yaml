@@ -1,0 +1,3 @@
+interface:
+  display_name: "Deductive Verification With Dafny And Why3"
+  short_description: "Use when an imperative program needs pre-conditions, post-conditions, and loop invariants proved automatically by SMT in Dafny or Why3, short of a tactic prover."

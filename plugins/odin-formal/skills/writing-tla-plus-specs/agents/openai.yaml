@@ -1,0 +1,3 @@
+interface:
+  display_name: "Writing Tla Plus Specs"
+  short_description: "Use when a protocol, concurrent algorithm, or design needs a model-checked TLA+ or Alloy spec, or a TLC or Apalache trace needs reading."

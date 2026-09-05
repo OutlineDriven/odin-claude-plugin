@@ -36,6 +36,7 @@
 | behavior-validator | odin-testing | Coding |
 | blast-radius | odin-review | Coding |
 | book-to-skill | odin-skills | Productivity |
+| bounded-model-checking-c | odin-formal | Coding |
 | brainstorm | odin-planning | Productivity |
 | brand-authority | odin-writing | Writing |
 | breaking-driven | odin-code | Coding |
@@ -117,6 +118,7 @@
 | decide | odin-planning | Productivity |
 | decision-diary | odin-knowledge | Productivity |
 | decision-rationale-gaps | odin-critique | Productivity |
+| deductive-verification-with-dafny-and-why3 | odin-formal | Coding |
 | dedup-skills | odin-skills | Productivity |
 | deep-research | odin-research | Research |
 | define-goalstate | odin-planning | Productivity |
@@ -165,6 +167,7 @@
 | explainer-artifact | odin-learn | Productivity |
 | explore | odin-code | Coding |
 | extremely-optimize | odin-code | Coding |
+| f-star-effectful-verification | odin-formal | Coding |
 | fail-design | odin-planning | Productivity |
 | fail-recover | odin-infra | Infrastructure |
 | fastify-inject-testing | odin-typescript | Coding |
@@ -400,6 +403,7 @@
 | rewrite-denoise-v0 | odin-writing | Writing |
 | rhythmic-taste | odin-writing | Writing |
 | run-smoke-tests | odin-testing | Coding |
+| rust-formal-verification | odin-formal | Coding |
 | rust-security-review | odin-security | Security |
 | ruzzy | odin-fuzzing | Security |
 | saga | odin-run | Coding |
@@ -444,6 +448,7 @@
 | smart-contract-audit-prep | odin-security | Security |
 | smart-contract-guidelines-advisor | odin-security | Security |
 | smart-contract-secure-workflow | odin-security | Security |
+| smt-solving-with-z3-cvc5 | odin-formal | Coding |
 | snippet-image-rendering | odin-visual | Design |
 | social-sentiment | odin-product | Productivity |
 | solidate | odin-planning | Productivity |
@@ -542,8 +547,11 @@
 | writing-beats | odin-writing | Writing |
 | writing-for-agents | odin-skills | Productivity |
 | writing-fragments | odin-writing | Writing |
-| writing-lean-proofs | odin-lean | Coding |
+| writing-isabelle-proofs | odin-formal | Coding |
+| writing-lean-proofs | odin-formal | Coding |
+| writing-rocq-proofs | odin-formal | Coding |
 | writing-shape | odin-writing | Writing |
+| writing-tla-plus-specs | odin-formal | Coding |
 | wycheproof | odin-security | Security |
 | xcode-simulator-testing | odin-apple | Coding |
 | yara-rule-authoring | odin-security | Security |

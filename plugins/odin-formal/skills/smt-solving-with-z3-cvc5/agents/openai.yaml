@@ -1,0 +1,3 @@
+interface:
+  display_name: "Smt Solving With Z3 Cvc5"
+  short_description: "Use when a query needs direct SMT solving, an unsat core needs debugging, or another tool reports a solver timeout or unknown."

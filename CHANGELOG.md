@@ -7,10 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.1.0] - 2026-09-04
 ### Changed
+- Renamed `odin-lean` to `odin-formal`, retained `writing-lean-proofs`, and added
+  eight formal-methods skills. The plugin now contains nine skills.
 - Restored `commit-push`, `commit-push-pr`, `commit-push-current`, and
   `commit-push-main`. The current-branch and default-branch variants require
   explicit human invocation; every push requires approval of its mutation set.
-  After the approved folds and these additions, the tree holds 547 skills in
+  After the approved folds and these additions, the tree holds 555 skills in
   28 plugins.
 - Shortened every skill description to at most 200 characters (median 174, down from 269).
   Each keeps its trigger phrases and `Not for` pointer and drops mechanism narration;
@@ -242,6 +244,7 @@ went to the named successor.
 | `odin-security-advanced` | `odin-security` | 27 of 39; the rest to `odin-fuzzing` (12) |
 | `odin-terraform` | `odin-infra` | 1 of 1 |
 | `odin-writing-advanced` | `odin-writing` | 6 of 6 |
+| `odin-lean` | `odin-formal` | 1 of 1; the plugin now covers formal methods beyond Lean |
 
 To find a moved skill's new plugin, look up its slug in `docs/specs/skill-index.md`.
 Reinstall a single skill from its new path:

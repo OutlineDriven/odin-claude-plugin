@@ -1,0 +1,20 @@
+{
+  "name": "odin-formal",
+  "version": "2.1.0",
+  "description": "ODIN workflows for formal methods: model checking, SMT solving, deductive verification, and proof assistants.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "formal-methods"
+  ],
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "interface": {
+    "displayName": "ODIN Formal",
+    "shortDescription": "ODIN workflows for formal methods: model checking, SMT solving, deductive verification, and proof assistants.",
+    "category": "Coding"
+  }
+}

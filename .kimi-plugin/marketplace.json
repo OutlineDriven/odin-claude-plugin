@@ -218,12 +218,12 @@
       "source": "../plugins/odin-apple"
     },
     {
-      "id": "odin-lean",
-      "displayName": "ODIN Lean",
-      "description": "ODIN workflows for Lean proofs and formal verification.",
+      "id": "odin-formal",
+      "displayName": "ODIN Formal",
+      "description": "ODIN workflows for formal methods: model checking, SMT solving, deductive verification, and proof assistants.",
       "version": "2.1.0",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "source": "../plugins/odin-lean"
+      "source": "../plugins/odin-formal"
     }
   ]
 }

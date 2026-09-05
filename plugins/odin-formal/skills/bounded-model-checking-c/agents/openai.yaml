@@ -1,0 +1,3 @@
+interface:
+  display_name: "Bounded Model Checking C"
+  short_description: "Use when C or C++ code needs memory-safety or undefined-behavior guarantees proved with CBMC, or ACSL contracts checked with Frama-C Eva or WP."

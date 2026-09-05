@@ -329,10 +329,10 @@
       "category": "Coding"
     },
     {
-      "name": "odin-lean",
+      "name": "odin-formal",
       "source": {
         "source": "local",
-        "path": "./plugins/odin-lean"
+        "path": "./plugins/odin-formal"
       },
       "policy": {
         "installation": "AVAILABLE",

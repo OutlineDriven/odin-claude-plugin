@@ -1,0 +1,3 @@
+interface:
+  display_name: "Writing Rocq Proofs"
+  short_description: "Use when a proof needs Rocq (formerly Coq), including legacy Coq codebase maintenance and migration through the Coq to Rocq rename."

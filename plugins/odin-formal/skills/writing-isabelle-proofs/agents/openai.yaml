@@ -1,0 +1,3 @@
+interface:
+  display_name: "Writing Isabelle Proofs"
+  short_description: "Use when a proof needs Isabelle/HOL, its Sledgehammer automation, or an AFP session."
