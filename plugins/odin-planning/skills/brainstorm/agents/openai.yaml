@@ -1,3 +1,3 @@
 interface:
   display_name: "Brainstorm"
-  short_description: "Use when the user begins knowledge work with notes, a transcript, a brain dump, or a problem."
+  short_description: "Use when the user begins knowledge work with notes, a transcript, or a brain dump, asks for divergent ideas (mode: ideate), or wants options shown in a local browser (mode: visual)."

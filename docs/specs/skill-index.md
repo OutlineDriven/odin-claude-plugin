@@ -256,7 +256,6 @@
 | humanizer-en-asd-ste100 | odin-writing | Writing |
 | humansense2system | odin-skills | Productivity |
 | idea-sparkbox | odin-planning | Productivity |
-| ideate | odin-planning | Productivity |
 | implement-spec | odin-run | Coding |
 | incremental-implementation | odin-code | Coding |
 | influence-and-negotiation | odin-people | Productivity |
@@ -534,7 +533,6 @@
 | verify-this | odin-testing | Coding |
 | viral-opportunity-scout | odin-product | Productivity |
 | visual-argument-diagram | odin-visual | Design |
-| visual-brainstorm-companion | odin-design | Design |
 | visual-diagram | odin-visual | Design |
 | visual-diff-review | odin-review | Coding |
 | visual-fact-check | odin-research | Research |

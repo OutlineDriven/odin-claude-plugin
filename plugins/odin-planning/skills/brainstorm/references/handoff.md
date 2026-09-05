@@ -86,7 +86,7 @@ Use the closing summary only when this run is ending or handing off, not when re
 
 In both templates below, substitute `<absolute path to plan>` with the actual file path written this run, `.md` for `OUTPUT_FORMAT=md`, `.html` for `OUTPUT_FORMAT=html`. Do not emit a hardcoded `.md` path when the artifact is HTML.
 
-When complete and ready for planning, display:
+When complete and ready for plan, display:
 
 ```text
 Brainstorm complete!
@@ -111,5 +111,5 @@ Planning is blocked by:
 - [Blocking question 1]
 - [Blocking question 2]
 
-Resume with `/brainstorm` when ready to resolve these before planning.
+Resume with `/brainstorm` when ready to resolve these before plan.
 ```
