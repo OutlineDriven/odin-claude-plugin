@@ -2,7 +2,7 @@
 
 ODIN workflows for product strategy, market signals, and developer adoption.
 
-15 skills, category Productivity.
+14 skills, category Productivity.
 
 ## Install
 
@@ -21,7 +21,6 @@ codex plugin add odin-product@odin-marketplace
 - buyer-objection-research
 - buzzword-analysis
 - buzzword-hijack
-- competitor-changelog
 - competitor-feature-research
 - customer-feedback-report
 - developer-experience-review

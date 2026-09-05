@@ -1,3 +1,3 @@
 interface:
   display_name: "Competitor Feature Research"
-  short_description: "Use when the user asks to research a specific feature across competitor products and publish a cited report."
+  short_description: "Use when asked to research a feature across competitor products or to analyze competitor release changelogs (mode: changelog), and publish a cited report."
