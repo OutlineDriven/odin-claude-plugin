@@ -54,6 +54,45 @@ def _trial_dir(kernel_name):
     return os.path.join(TRIALS_DIR, kernel_name)
 
 
+def _overlaps_trial_store(source):
+    """True when copying source would copy the trial store into itself."""
+    src = Path(source).resolve()
+    store = Path(TRIALS_DIR).resolve()
+    return src == store or src in store.parents or store in src.parents
+
+
+def _validate_state(state, kernel_name):
+    """A trial's dir is always its own id; nothing else is a valid state."""
+    for tid, trial in state.get("trials", {}).items():
+        if trial.get("dir") != tid:
+            print(
+                f"Error: Corrupt trial state for '{kernel_name}':"
+                f" trial '{tid}' dir '{trial.get('dir')}' does not match its id.",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+        for field in ("speedup", "baseline_us", "kernel_us"):
+            v = trial.get(field)
+            if v is not None and not isinstance(v, (int, float)):
+                print(
+                    f"Error: Corrupt trial state for '{kernel_name}':"
+                    f" trial '{tid}' field '{field}' is not a number.",
+                    file=sys.stderr,
+                )
+                sys.exit(1)
+    baseline_us = state.get("baseline_us")
+    if baseline_us is not None and (
+        not isinstance(baseline_us, list)
+        or not all(isinstance(v, (int, float)) for v in baseline_us)
+    ):
+        print(
+            f"Error: Corrupt trial state for '{kernel_name}':"
+            " 'baseline_us' is not a list of numbers.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+
 def _load_state(kernel_name):
     path = _state_path(kernel_name)
     if not os.path.exists(path):
@@ -61,6 +100,7 @@ def _load_state(kernel_name):
         sys.exit(1)
     with open(path) as f:
         state = json.load(f)
+    _validate_state(state, kernel_name)
     return state
 
 
@@ -112,6 +152,13 @@ def cmd_save(args):
     if not os.path.exists(trial_source):
         print(f"Error: Trial source '{trial_source}' not found.", file=sys.stderr)
         sys.exit(1)
+    if _overlaps_trial_store(trial_source):
+        print(
+            f"Error: Trial source '{trial_source}' overlaps 'trials/'."
+            " Save a source outside the trial store.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
 
     state = _load_state(kernel_name)
 
@@ -139,7 +186,7 @@ def cmd_save(args):
         else:
             os.makedirs(dest, exist_ok=True)
             shutil.copy2(trial_source, dest)
-    except OSError as e:
+    except (OSError, RecursionError) as e:
         print(f"Error: Failed to copy trial source into '{dest}': {e}", file=sys.stderr)
         sys.exit(1)
 
